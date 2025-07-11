@@ -9,17 +9,14 @@ function Global:dk_call(){
 	#dk_debugFunc 1 9
 	
 	${func} = $($args[0]);
-	${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
+	#${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
 	
 	#${func} = ${func} -replace "::", "/"
-	#if("$comand" -match "dk_[a-zA-Z0-9]+"){
-		
-	#}
+	#if("$comand" -match "dk_[a-zA-Z0-9]+"){}
 	
 	if(!(Get-Command ${func} -errorAction SilentlyContinue)) {
 		dk_source ${func};
 	}
-	
 	
 	if(Test-Path ${func}){
 		if("${func}" -Match ".ps1"){
@@ -28,12 +25,36 @@ function Global:dk_call(){
 		}
 	}
 	
-	#Write-Host "AllButFirstArgs = '${AllButFirstArgs}'"
 	if(!${func}){ return; }
-	if(${AllButFirstArgs}){
-		& ${func} ${AllButFirstArgs};
-	} else {
-		& ${func}
+	if($args[9]){
+		& $func $args[1] $args[2] $args[3] $args[4] $args[5] $args[6] $args[7] $args[8] $args[9];
+	}
+	elseif($args[8]){
+		& $func $args[1] $args[2] $args[3] $args[4] $args[5] $args[6] $args[7] $args[8];
+	}
+	elseif($args[7]){
+		& $func $args[1] $args[2] $args[3] $args[4] $args[5] $args[6] $args[7];
+	}
+	elseif($args[6]){
+		& $func $args[1] $args[2] $args[3] $args[4] $args[5] $args[6];
+	}
+	elseif($args[5]){
+		& $func $args[1] $args[2] $args[3] $args[4] $args[5];
+	}
+	elseif($args[4]){
+		& $func $args[1] $args[2] $args[3] $args[4];
+	}
+	elseif($args[3]){
+		& $func $args[1] $args[2] $args[3];
+	}
+	elseif($args[2]){
+		& $func $args[1] $args[2];
+	}
+	elseif($args[1]){
+		& $func $args[1];
+	} 
+	else {
+		& $func;
 	}
 	#Start-Process ${func} -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList ${AllButFirstArgs};
 } 
