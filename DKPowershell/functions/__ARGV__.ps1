@@ -32,7 +32,7 @@ function GLOBAL:__ARGV__($_FRAME_=1) {
 			${_ARGV_} = $unboundArguments;
 		} else {
 			foreach($keyValue in $unboundArguments.GetEnumerator()) {
-				$_ARGV_.Add($($keyValue.Value))
+				$_ARGV_.Add($($keyValue.Key), $($keyValue.Value))
 			}
 		}
 	}

@@ -12,12 +12,10 @@ function Global:DKINSTALL() {
 	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt;
 
 	dk_call dk_validate "Host_Tuple" "dk_call dk_Host_Tuple";
-	${git_Import} = ${git_$(Host_Tuple)_Import};
+	#${git_Import} = ${git_$($Host_Tuple)_Import};
 	
-    #if(${Host_Arch} -eq "Arm32") { ${git_Import} = ${git_Windows_Arm32_Import}; 	}
-    #if(${Host_Arch} -eq "Arm64") { ${git_Import} = ${git_Windows_Arm64_Import}; 	}	
-    #if(${Host_Arch} -eq "X86")   { ${git_Import} = ${git_Windows_X86_Import}; 		}
-    #if(${Host_Arch} -eq "X86_64"){ ${git_Import} = ${git_Windows_X86_64_Import}; 	}
+    if(${Host_Tuple} -eq "Windows_X86"){ ${git_Import} = ${git_Windows_X86_Import}; 		}
+    if(${Host_Tuple} -eq "Windows_X86_64"){ ${git_Import} = ${git_Windows_X86_64_Import}; 	}
     if(!${git_Import}){ dk_call dk_error "git_Import is invalid"; return ${false}; 	}
 	  
     ${GIT_IMPORT_FILE} = dk_call dk_basename ${git_Import};
