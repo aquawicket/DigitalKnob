@@ -50,6 +50,8 @@ function Global:dk_Target_Arch() {
 		}
 	}
 	
+	${$(Target_Arch)} = 1;
+	
 	${global:Target_Arch} = ${Target_Arch};
 	${global:$(Target_Arch)} = 1;
 	

@@ -14,7 +14,7 @@ function Global:dk_Target_Tuple() {
 
 	###### SET ######
 	if($($args[0])){
-		${global:Target_Tuple} = $($args[0]);
+		${Target_Tuple} = $($args[0]);
 	
 	###### GET ######	
 	} 
@@ -22,10 +22,16 @@ function Global:dk_Target_Tuple() {
 		dk_call dk_validate Target_Os	"dk_call dk_Target_Os";
 		dk_call dk_validate Target_Arch	"dk_call dk_Target_Arch";
 		dk_call dk_validate Target_Env	"dk_call dk_Target_Env";
-		${global:Target_Tuple} = "${Target_Os}_${Target_Arch}_${Target_Env}";
+		${Target_Tuple} = "${Target_Os}_${Target_Arch}_${Target_Env}";
 	}
 	
-	${!Target_Tuple} = 1;
+	${$(Target_Tuple)} = 1;
+	
+	${global:Target_Tuple} = ${Target_Tuple};
+	${global:$(Target_Tuple)} = 1;
+	
+	${env:Target_Tuple} = ${Target_Tuple};
+	${env:$(Target_Tuple)} = 1;
 }
 
 

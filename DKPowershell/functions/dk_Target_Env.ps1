@@ -44,6 +44,8 @@ function Global:dk_Target_Env() {
 			return;
 		}
 		
+		${$(Target_Env)} = 1;
+		
 		${global:Target_Env} = ${Target_Env};
 		${global:$(Target_Env)} = 1;
 		

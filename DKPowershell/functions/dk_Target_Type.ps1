@@ -32,6 +32,8 @@ function Global:dk_Target_Type() {
 		return;
 	}
 	
+	${$(Target_Type)} = 1;
+	
 	${global:Target_Type} = ${Target_Type};
 	${global:$(Target_Type)} = 1;
 	

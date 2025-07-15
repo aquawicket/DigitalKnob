@@ -59,6 +59,8 @@ function Global:dk_Target_Os() {
 		}
 	}
 	
+	${$(Target_Os)} = 1;
+	
 	${global:Target_Os} = ${Target_Os};
 	${global:$(Target_Os)} = 1;
 	
