@@ -12,11 +12,6 @@ function Global:dk_pickUpdate() {
 	dk_call dk_gitCheckRemote;
 	dk_call dk_echo "\n";
 
-#	dk_call dk_readCache;
-#	dk_call dk_printVar _APP_;
-#	dk_call dk_printVar _tuple_;
-#	dk_call dk_printVar _TYPE_;
-
 	### Load DKBuilder.cache ###
 	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 	if(Test-Path "${DKCACHE_DIR}/DKBuilder.cache") {
@@ -24,8 +19,8 @@ function Global:dk_pickUpdate() {
 	}
 	
 	if($behind -lt 1){
-		if(${_APP_} -and ${_tuple_} -and ${_TYPE_}){
-			dk_call dk_echo " 0) Repeat DKBuilder.cache [$_APP_ - $_tuple_ - $_TYPE_]";
+		if(${Target_App_Cache} -and ${Target_Os_Cache} -and ${Target_Arch_Cache} -and ${Target_Env_Cache} -and ${Target_Type_Cache}){
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [${Target_App_Cache} - ${Target_Os_Cache} - ${Target_Arch_Cache} - ${Target_Env_Cache} - ${Target_Type_Cache}]";
 		}
 		dk_call dk_echo " 1) Git Update"   ;
 		dk_call dk_echo " 2) Git Commit";
@@ -44,8 +39,8 @@ function Global:dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update";
 		dk_call dk_echo "\n";
 		dk_call dk_echo "${red}";
-		if(${_APP_} -and ${_tuple_} -and ${_TYPE_}){
-			dk_call dk_echo " 0) Repeat DKBuilder.cache [${_APP_} - ${_tuple_} - ${_TYPE_}]";
+		if(${Target_App_Cache} -and ${Target_Os_Cache} -and ${Target_Arch_Cache} -and ${Target_Env_Cache} -and ${Target_Type_Cache}){
+			dk_call dk_echo " 0) Repeat DKBuilder.cache [${Target_App_Cache} - ${Target_Os_Cache} - ${Target_Arch_Cache} - ${Target_Env_Cache} - ${Target_Type_Cache}]";
 		}
 		dk_call dk_echo "${green}";
 		dk_call dk_echo " 1) Git Update";
@@ -68,9 +63,11 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host;
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection";
-		$global:Target_App = ${_APP_};
-		$global:Target_Tuple = ${_tuple_};
-		$global:Target_Type = ${_TYPE_};
+		$global:Target_App = ${Target_App_Cache};
+		$global:Target_Os = ${Target_Os_Cache};
+		$global:Target_Arch = ${Target_Arch_Cache};
+		$global:Target_Env = ${Target_Env_Cache};
+		$global:Target_Type = ${Target_Type_Cache};
 		$global:UPDATE = 1;
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development; }
