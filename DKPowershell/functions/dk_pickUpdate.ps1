@@ -9,9 +9,9 @@ function Global:dk_pickUpdate() {
 	dk_debugFunc 0;
 
 	dk_call dk_readCache; #_APP_ _tuple_ _TYPE_
-	dk_printVar $_APP_;
-	dk_printVar $_tuple_;
-	dk_printVar $_TYPE_;
+	dk_call dk_printVar $_APP_;
+	dk_call dk_printVar $_tuple_;
+	dk_call dk_printVar $_TYPE_;
 	
 	dk_call dk_echo "\n";
 	dk_call dk_gitCheckRemote;

@@ -5,12 +5,13 @@ if(!$dk_removeExtension_ps1){ $dk_removeExtension_ps1 = 1; } else{ return; } #in
 # dk_removeExtension(filepath) -> rtn_var
 #
 #
-function Global:dk_removeExtension($filepath) {
+function Global:dk_removeExtension() {
 	dk_debugFunc 1;
 	
-	$removeExtension = $filepath.Substring(0, $filepath.lastIndexOf('.'))
-	dk_call dk_printVar removeExtension
-	return $removeExtension
+	$filepath = $args[0];
+	
+	${global:dk_removeExtension} = $filepath.Substring(0, $filepath.lastIndexOf('.'));
+	return $dk_removeExtension;
 }
 
 
@@ -27,7 +28,9 @@ function Global:dk_removeExtension($filepath) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	$filepath="C:/test/test2/xfile.version.1.2.ext"
-	$name = dk_call dk_removeExtension $filepath
-	dk_call dk_info "name = ${name}"
+	$name = dk_call dk_removeExtension "C:/test/test1/xfile.version.1.1.ext";
+	dk_call dk_info "name = ${name}";
+	
+	dk_call dk_removeExtension "C:/test/test2/xfile.version.2.2.ext";
+	dk_call dk_info "dk_removeExtension = ${dk_removeExtension}";
 }
