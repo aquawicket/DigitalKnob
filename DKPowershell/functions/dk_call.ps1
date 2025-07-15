@@ -6,7 +6,7 @@ if(!$dk_call_ps1){ $dk_call_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_call(){
-	#dk_debugFunc 1 9
+	#dk_debugFunc 1 9;
 	
 	${func} = $($args[0]);
 	#${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
@@ -64,5 +64,5 @@ function Global:dk_call(){
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_info "test message using dk_call"
+	dk_call dk_info "test message using dk_call";
 }

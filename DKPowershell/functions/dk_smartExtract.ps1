@@ -11,43 +11,49 @@ function Global:dk_smartExtract() {
 	 $src = $($args[0]);
 	$dest = $($args[1]);
 	
-	$src_fullpath = dk_call dk_realpath $src
-	$src_dirname = dk_call dk_dirname $src_fullpath
-	$src_basename = dk_call dk_basename $src_fullpath
-	$src_folder = "${src_basename%.*}"
-	$src_extractPath = "${src_dirname}/${src_basename}_EXTRACTED"
+	$src_fullpath = dk_call dk_realpath $src;
+	$src_dirname = dk_call dk_dirname $src_fullpath;
+	$src_basename = dk_call dk_basename $src_fullpath;
+	$src_folder = "${src_basename%.*}";
+	$src_extractPath = "${src_dirname}/${src_basename}_EXTRACTED";
 	
-	#$dest_fullpath = dk_call dk_realpath $dest
-	$dest_fullpath = "${dest}"
-	$dest_dirname = dk_call dk_dirname $dest_fullpath
-	$dest_basename = dk_call dk_basename $dest_fullpath
+	#$dest_fullpath = dk_call dk_realpath $dest;
+	$dest_fullpath = "${dest}";
+	$dest_dirname = dk_call dk_dirname $dest_fullpath;
+	$dest_basename = dk_call dk_basename $dest_fullpath;
 	
 #	if(!(dk_call dk_pathExists $dest_fullpath)){
-#		dk_call dk_mkdir $dest_fullpath
+#		dk_call dk_mkdir $dest_fullpath;
 #	}
 	
-	if(dk_call dk_pathExists "$src_extractPath"){ dk_call dk_delete "$src_extractPath" }
+	if(dk_call dk_pathExists "$src_extractPath"){ 
+		dk_call dk_delete "$src_extractPath";
+	}
 	
-	dk_call dk_extract "$src_fullpath" "$src_extractPath"
+	dk_call dk_extract "$src_fullpath" "$src_extractPath";
 	
-	$directories = dk_call dk_getDirectories $src_extractPath
+	$directories = dk_call dk_getDirectories $src_extractPath;
 	
-	$dir_count = dk_call Array/dk_length directories
+	$dir_count = dk_call Array/dk_length directories;
 	
-	$files = dk_call dk_getFiles $src_extractPath
+	$files = dk_call dk_getFiles $src_extractPath;
 	
-	$file_count = dk_call Array/dk_length files
+	$file_count = dk_call Array/dk_length files;
 	
 	if($dir_count -eq 1){
 		if($file_count -eq 0){
-			dk_call dk_move $src_extractPath/$directories $dest_fullpath OVERWRITE    				#rename/move UNZIPPED/root folder to dest path"
-			if(dk_call dk_pathExists "$src_extractPath"){ dk_call dk_delete "$src_extractPath" }
-			return
+			dk_call dk_move $src_extractPath/$directories $dest_fullpath OVERWRITE;   				#rename/move UNZIPPED/root folder to dest path"
+			if(dk_call dk_pathExists "$src_extractPath"){ 
+				dk_call dk_delete "$src_extractPath";
+			}
+			return;
 		}
 	}
 
-	dk_call dk_move $src_extractPath $dest_fullpath OVERWRITE    	   # rename/move UNZIPPED folder to dest path
-	if(dk_call dk_pathExists "$src_extractPath"){ dk_call dk_delete "$src_extractPath" }
+	dk_call dk_move $src_extractPath $dest_fullpath OVERWRITE;    	   # rename/move UNZIPPED folder to dest path
+	if(dk_call dk_pathExists "$src_extractPath"){ 
+		dk_call dk_delete "$src_extractPath"; 
+	}
 }
 
 

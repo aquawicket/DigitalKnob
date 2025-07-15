@@ -13,9 +13,8 @@ function Global:dk_basename($path) {
 	#$basename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Basename    #Calls Resolve-Path but works for files that don't exist.
 	#if(-not($rtn_var)){ $basename = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
 
-	$basename = Split-Path $path -leaf
-	dk_call dk_printVar basename
-	return $basename
+	$basename = Split-Path $path -leaf;
+	return $basename;
 }
 
 

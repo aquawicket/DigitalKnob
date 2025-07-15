@@ -6,28 +6,28 @@ if(!$dk_readCache_ps1){ $dk_readCache_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_readCache() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR";
 	dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache";
 	
 
-#	if(!(dk_call dk_pathExists "${DKCACHE_DIR}/DKBuilder.cache")){ return }
+#	if(!(dk_call dk_pathExists "${DKCACHE_DIR}/DKBuilder.cache")){ return; }
 	
-#	dk_call dk_echo "reading $DKCACHE_DIR/DKBuilder.cache . . ."
-#	$count = 0
+#	dk_call dk_echo "reading $DKCACHE_DIR/DKBuilder.cache . . .";
+#	$count = 0;
 	
 #	foreach($line in Get-Content "${DKCACHE_DIR}/DKBuilder.cache") {
 #		if("${count}" -eq "0"){
-#			Set-Variable -scope global -Name "${Target_App}" -Value ${line}
+#			Set-Variable -scope global -Name "${Target_App}" -Value ${line};
 #		}
 #		if("${count}" -eq "1"){
-#			Set-Variable -scope global -Name "${Target_Tuple}" -Value ${line}
+#			Set-Variable -scope global -Name "${Target_Tuple}" -Value ${line};
 #		}
 #		if("${count}" -eq "2"){
-#			Set-Variable -scope global -Name "${Target_Type}" -Value ${line}
+#			Set-Variable -scope global -Name "${Target_Type}" -Value ${line};
 #		}
-#		$count++
+#		$count++;
 #	}
 }
 
@@ -37,9 +37,9 @@ function Global:dk_readCache() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-    dk_readCache
+    dk_readCache;
 	
-	dk_printVar $_APP_
-	dk_printVar $_tuple_
-	dk_printVar $_TYPE_
+	dk_printVar $_APP_;
+	dk_printVar $_tuple_;
+	dk_printVar $_TYPE_;
 }
