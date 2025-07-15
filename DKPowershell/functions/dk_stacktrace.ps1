@@ -9,18 +9,19 @@ function Global:dk_stacktrace() {
     dk_debugFunc 0;
 
 	### VERSION 1 ###
-	$i = 0
-    $Global:Var = (Get-PSCallStack).Command
+	$i = 0;
+    $Global:_STACK_ = (Get-PSCallStack).Command;
 	
-    $Var | ForEach-Object {
+#	Write-Host "_STACK_ = ${_STACK_}"
+    $_STACK_ | ForEach-Object {
 		#$(dk_call __FRAME__ $i)
 		$fileline = "[${i}] $(__FILE__ $i):$(__LINE__ $i):";
 		$args = "$(__ARGV__ $i)";
 		$args = $args.Trim();
 		$funcargs = "$(__FUNCTION__ $i)($(__ARGC__ $i): $args)";
 		$fileline = $fileline.PadRight(30,' ');
-        dk_call dk_echo "$($fileline)$($funcargs)"
-        $i++
+        dk_call dk_echo "$($fileline)$($funcargs)";
+        $i++;
     }
 
 #	while [ "${i}" -lt "${stack_size}" ]; do

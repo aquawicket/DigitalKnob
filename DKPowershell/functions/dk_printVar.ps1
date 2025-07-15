@@ -108,4 +108,9 @@ function Global:DKTEST() {
 	dk_call dk_printVar $NonExistent
 	dk_call dk_printVar "NonExistent"
 	dk_call dk_printVar "$NonExistent"
+	
+	dk_call dk_printVar
+	dk_call dk_printVar
+	dk_call dk_printVar
+	dk_call dk_printVar
 }

@@ -8,14 +8,20 @@ if(!$dk_pickUpdate_ps1){ $dk_pickUpdate_ps1 = 1; } else{ return; } #include guar
 function Global:dk_pickUpdate() {
 	dk_debugFunc 0;
 
-	dk_call dk_readCache; #_APP_ _tuple_ _TYPE_
-	dk_call dk_printVar $_APP_;
-	dk_call dk_printVar $_tuple_;
-	dk_call dk_printVar $_TYPE_;
-	
 	dk_call dk_echo "\n";
 	dk_call dk_gitCheckRemote;
 	dk_call dk_echo "\n";
+
+#	dk_call dk_readCache;
+#	dk_call dk_printVar _APP_;
+#	dk_call dk_printVar _tuple_;
+#	dk_call dk_printVar _TYPE_;
+
+	### Load DKBuilder.cache ###
+	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
+	if(Test-Path "${DKCACHE_DIR}/DKBuilder.cache") {
+		dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache";
+	}
 	
 	if($behind -lt 1){
 		if(${_APP_} -and ${_tuple_} -and ${_TYPE_}){

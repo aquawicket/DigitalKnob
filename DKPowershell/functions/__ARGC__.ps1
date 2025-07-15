@@ -7,16 +7,20 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 #
 function GLOBAL:__ARGC__($_FRAME_=1) {
 	$BoundParameterCount = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
-	if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters[0].Value -eq ""){
-		$BoundParameterCount = 0;
-	}
+	#if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters[0].Value -eq ""){
+	#	$BoundParameterCount = 0;
+	#}
 	
 	$UnboundArgumentCount = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments.count;
-	if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments[0].Value -eq ""){
-		$UnboundArgumentCount = 0;
-	}
+	#if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments[0].Value -eq ""){
+	#	$UnboundArgumentCount = 0;
+	#}
 	
+#	Write-Host " ";
+#	Write-Host "BoundParameterCount = $BoundParameterCount";
+#	Write-Host "UnboundArgumentCount = $UnboundArgumentCount";
 	${__ARGC__} = ($BoundParameterCount + $UnboundArgumentCount);
+#	Write-Host "__ARGC__ = $__ARGC__";
 	return ${__ARGC__};
 }
 
