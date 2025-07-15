@@ -39,17 +39,17 @@ function Global:dk_Target_Os() {
 		dk_call dk_echo;
 
 		dk_call dk_keyboardInput;
-		    if(${dk_keyboardInput} -eq "0")	{ ${global:Target_Os} = "${Target_Os_Cache}"; }
-		elseif(${dk_keyboardInput} -eq "1")	{ ${global:Target_Os} = "${Host_Os}"; }
-		elseif(${dk_keyboardInput} -eq "2") { ${global:Target_Os} = "Android"; }
-		elseif(${dk_keyboardInput} -eq "3") { ${global:Target_Os} = "Cosmopolitan"; }
-		elseif(${dk_keyboardInput} -eq "4") { ${global:Target_Os} = "Emscripten"; }
-		elseif(${dk_keyboardInput} -eq "5") { ${global:Target_Os} = "Ios"; }
-		elseif(${dk_keyboardInput} -eq "6") { ${global:Target_Os} = "Iossim"; }
-		elseif(${dk_keyboardInput} -eq "7") { ${global:Target_Os} = "Linux"; }
-		elseif(${dk_keyboardInput} -eq "8") { ${global:Target_Os} = "Mac"; }
-		elseif(${dk_keyboardInput} -eq "9") { ${global:Target_Os} = "Raspberry"; }
-		elseif(${dk_keyboardInput} -eq "10"){ ${global:Target_Os} = "Windows"; }
+		    if(${dk_keyboardInput} -eq "0")	{ ${Target_Os} = "${Target_Os_Cache}"; }
+		elseif(${dk_keyboardInput} -eq "1")	{ ${Target_Os} = "${Host_Os}"; }
+		elseif(${dk_keyboardInput} -eq "2") { ${Target_Os} = "Android"; }
+		elseif(${dk_keyboardInput} -eq "3") { ${Target_Os} = "Cosmopolitan"; }
+		elseif(${dk_keyboardInput} -eq "4") { ${Target_Os} = "Emscripten"; }
+		elseif(${dk_keyboardInput} -eq "5") { ${Target_Os} = "Ios"; }
+		elseif(${dk_keyboardInput} -eq "6") { ${Target_Os} = "Iossim"; }
+		elseif(${dk_keyboardInput} -eq "7") { ${Target_Os} = "Linux"; }
+		elseif(${dk_keyboardInput} -eq "8") { ${Target_Os} = "Mac"; }
+		elseif(${dk_keyboardInput} -eq "9") { ${Target_Os} = "Raspberry"; }
+		elseif(${dk_keyboardInput} -eq "10"){ ${Target_Os} = "Windows"; }
 		elseif(${dk_keyboardInput} -eq "11"){ dk_call dk_unset Target_App; return; }
 		elseif(${dk_keyboardInput} -eq "12"){ dk_call dk_exit 0; }
 		else {
@@ -59,6 +59,7 @@ function Global:dk_Target_Os() {
 		}
 	}
 	
+	${global:Target_Os} = ${Target_Os};
 	${global:$(Target_Os)} = 1;
 	
 	${env:Target_Os} = ${Target_Os};

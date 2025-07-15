@@ -31,11 +31,11 @@ function Global:dk_Target_Env() {
 		dk_call dk_echo;
 
 		dk_call dk_keyboardInput;
-		    if( ${dk_keyboardInput} -eq "0" )	{ ${global:Target_Env} = ${Target_Env_Cache}; }
-		elseif( ${dk_keyboardInput} -eq "1" )	{ ${global:Target_Env} = ${Target_Env_DEFAULT}; }
-		elseif( ${dk_keyboardInput} -eq "2" ) 	{ ${global:Target_Env} = "Gcc";	}
-		elseif( ${dk_keyboardInput} -eq "3" ) 	{ ${global:Target_Env} = "Msvc"; }
-		elseif( ${dk_keyboardInput} -eq "4" ) 	{ ${global:Target_Env} = "Ucrt"; }
+		    if( ${dk_keyboardInput} -eq "0" )	{ ${Target_Env} = ${Target_Env_Cache}; }
+		elseif( ${dk_keyboardInput} -eq "1" )	{ ${Target_Env} = ${Target_Env_DEFAULT}; }
+		elseif( ${dk_keyboardInput} -eq "2" ) 	{ ${Target_Env} = "Gcc";	}
+		elseif( ${dk_keyboardInput} -eq "3" ) 	{ ${Target_Env} = "Msvc"; }
+		elseif( ${dk_keyboardInput} -eq "4" ) 	{ ${Target_Env} = "Ucrt"; }
 		elseif( ${dk_keyboardInput} -eq "5" )	{ dk_call dk_unset Target_Arch;	}
 		elseif( ${dk_keyboardInput} -eq "6" )	{ dk_call dk_exit 0; }
 		else {
@@ -44,6 +44,7 @@ function Global:dk_Target_Env() {
 			return;
 		}
 		
+		${global:Target_Env} = ${Target_Env};
 		${global:$(Target_Env)} = 1;
 		
 		${env:Target_Env} = ${Target_Env};

@@ -20,9 +20,9 @@ function Global:dk_Target_Type() {
 	dk_call dk_echo "\n";
 	
 	dk_call dk_keyboardInput;
-	    if(${dk_keyboardInput} -eq "1"){ ${global:Target_Type} = "Release" }
-	elseif(${dk_keyboardInput} -eq "2"){ ${global:Target_Type} = "Debug" }
-	elseif(${dk_keyboardInput} -eq "3"){ ${global:Target_Type} = "All" }
+	    if(${dk_keyboardInput} -eq "1"){ ${Target_Type} = "Release" }
+	elseif(${dk_keyboardInput} -eq "2"){ ${Target_Type} = "Debug" }
+	elseif(${dk_keyboardInput} -eq "3"){ ${Target_Type} = "All" }
 	elseif(${dk_keyboardInput} -eq "4"){ dk_call dk_clearScreen }
 	elseif(${dk_keyboardInput} -eq "5"){ dk_call dk_unset Target_Type }
 	elseif(${dk_keyboardInput} -eq "6"){ dk_call dk_exit 0 }
@@ -32,6 +32,7 @@ function Global:dk_Target_Type() {
 		return;
 	}
 	
+	${global:Target_Type} = ${Target_Type};
 	${global:$(Target_Type)} = 1;
 	
 	${env:Target_Type} = ${Target_Type};

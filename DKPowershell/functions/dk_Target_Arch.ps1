@@ -35,12 +35,12 @@ function Global:dk_Target_Arch() {
 		dk_call dk_echo;
 
 		dk_call dk_keyboardInput;
-		    if(${dk_keyboardInput} -eq "0") { ${global:Target_Arch} = "${Target_Arch_Cache}"; }
-		elseif(${dk_keyboardInput} -eq "1") { ${global:Target_Arch} = "${Host_Arch}"; }
-		elseif(${dk_keyboardInput} -eq "2") { ${global:Target_Arch} = "Arm32"; }
-		elseif(${dk_keyboardInput} -eq "3") { ${global:Target_Arch} = "Arm64"; }
-		elseif(${dk_keyboardInput} -eq "4") { ${global:Target_Arch} = "X86"; }
-		elseif(${dk_keyboardInput} -eq "5") { ${global:Target_Arch} = "X86_64"; }
+		    if(${dk_keyboardInput} -eq "0") { ${Target_Arch} = "${Target_Arch_Cache}"; }
+		elseif(${dk_keyboardInput} -eq "1") { ${Target_Arch} = "${Host_Arch}"; }
+		elseif(${dk_keyboardInput} -eq "2") { ${Target_Arch} = "Arm32"; }
+		elseif(${dk_keyboardInput} -eq "3") { ${Target_Arch} = "Arm64"; }
+		elseif(${dk_keyboardInput} -eq "4") { ${Target_Arch} = "X86"; }
+		elseif(${dk_keyboardInput} -eq "5") { ${Target_Arch} = "X86_64"; }
 		elseif(${dk_keyboardInput} -eq "6") { dk_call dk_unset Target_Os; return; }
 		elseif(${dk_keyboardInput} -eq "7")	{ dk_call dk_exit 0; }
 		else {
@@ -50,6 +50,7 @@ function Global:dk_Target_Arch() {
 		}
 	}
 	
+	${global:Target_Arch} = ${Target_Arch};
 	${global:$(Target_Arch)} = 1;
 	
 	${env:Target_Arch} = ${Target_Arch};
