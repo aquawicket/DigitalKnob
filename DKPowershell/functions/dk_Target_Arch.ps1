@@ -13,7 +13,7 @@ function Global:dk_Target_Arch() {
 	dk_debugFunc 0 1;
 
 	###### SET ######
-	if($($args[0])) {
+	if( $($args[0]) ) {
 		${Target_Arch} = $($args[0]);
 	
 	###### GET ######	

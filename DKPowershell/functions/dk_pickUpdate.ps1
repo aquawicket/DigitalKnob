@@ -64,18 +64,18 @@ function Global:dk_pickUpdate() {
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection";
 		${global:Target_App} = ${Target_App_Cache};
-		${global:Target_Env} = ${Target_Env_Cache};
-		${global:Target_Type} = ${Target_Type_Cache};
+		#${global:Target_Env} = ${Target_Env_Cache};
+		#${global:Target_Type} = ${Target_Type_Cache};
 		${global:UPDATE} = 1;
 		
 		${env:Target_App} = ${Target_App};
-		${env:Target_Env} = ${Target_Env};
-		${env:Target_Type} = ${Target_Type};
+		#${env:Target_Env} = ${Target_Env};
+		#${env:Target_Type} = ${Target_Type};
 		
 		dk_call dk_Target_Os ${Target_Os_Cache};
 		dk_call dk_Target_Arch ${Target_Arch_Cache};
-		#dk_call dk_Target_Env ${Target_Env_Cache};
-		#dk_call dk_Target_Type ${Target_Type_Cache};
+		dk_call dk_Target_Env ${Target_Env_Cache};
+		dk_call dk_Target_Type ${Target_Type_Cache};
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development; }
 	elseif($input -eq  "2"){ dk_call dk_gitCommit; }

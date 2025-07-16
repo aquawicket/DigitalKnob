@@ -43,15 +43,15 @@ function Global:dk_Target_Env() {
 			dk_call dk_echo "${dk_keyboardInput}: invalid selection, please try again";
 			return;
 		}
-		
-		${$(Target_Env)} = 1;
-		
-		${global:Target_Env} = ${Target_Env};
-		${global:$(Target_Env)} = 1;
-		
-		${env:Target_Env} = ${Target_Env};
-		${env:$(Target_Env)} = 1;
 	}
+	
+	${$(Target_Env)} = 1;
+		
+	${global:Target_Env} = ${Target_Env};
+	${global:$(Target_Env)} = 1;
+		
+	${env:Target_Env} = ${Target_Env};
+	${env:$(Target_Env)} = 1;
 }
 
 
