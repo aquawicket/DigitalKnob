@@ -63,12 +63,18 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host;
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection";
-		$global:Target_App = ${Target_App_Cache};
-		$global:Target_Os = ${Target_Os_Cache};
-		$global:Target_Arch = ${Target_Arch_Cache};
-		$global:Target_Env = ${Target_Env_Cache};
-		$global:Target_Type = ${Target_Type_Cache};
-		$global:UPDATE = 1;
+		${global:Target_App} = ${Target_App_Cache};
+		${global:Target_Os} = ${Target_Os_Cache};
+		${global:Target_Arch} = ${Target_Arch_Cache};
+		${global:Target_Env} = ${Target_Env_Cache};
+		${global:Target_Type} = ${Target_Type_Cache};
+		${global:UPDATE} = 1;
+		
+		${env:Target_App} = ${Target_App};
+		${env:Target_Os} = ${Target_Os};
+		${env:Target_Arch} = ${Target_Arch};
+		${env:Target_Env} = ${Target_Env};
+		${env:Target_Type} = ${Target_Type};
 	}
 	elseif($input -eq  "1"){ dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development; }
 	elseif($input -eq  "2"){ dk_call dk_gitCommit; }
@@ -81,7 +87,7 @@ function Global:dk_pickUpdate() {
 	elseif($input -eq  "9"){ dk_call dk_clearCmakeCache; dk_call dk_deleteTempFiles; }
 	elseif($input -eq "10"){ dk_call dk_reload; }
 	elseif($input -eq "11"){ dk_call dk_exit 0; }	
-	elseif($input -eq ""){ $global:UPDATE = 1; }
+	elseif($input -eq ""){ ${global:UPDATE} = 1; }
 	else{ dk_call dk_warning "invalid selection"; }
 }
 
