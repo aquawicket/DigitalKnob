@@ -6,7 +6,7 @@ if(!$dk_Target_Type_ps1){ $dk_Target_Type_ps1 = 1; } else{ return; } #include gu
 #
 #
 function Global:dk_Target_Type() {
-	dk_debugFunc 0;
+	dk_debugFunc 0 1;
 
 	dk_call dk_echo "\n";
 	dk_call dk_echo "${Target_App} ${Target_Tuple} ${Target_Type}"
