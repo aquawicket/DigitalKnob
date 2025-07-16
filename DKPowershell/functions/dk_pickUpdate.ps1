@@ -63,8 +63,6 @@ function Global:dk_pickUpdate() {
 	$input = Read-Host;
 	if($input -eq "0"){
 		dk_call dk_echo "repeating last selection";
-		#${global:Target_App} = ${Target_App_Cache};
-		#${env:Target_App} = ${Target_App};
 		
 		dk_call dk_Target_App ${Target_App_Cache};
 		dk_call dk_Target_Os ${Target_Os_Cache};
