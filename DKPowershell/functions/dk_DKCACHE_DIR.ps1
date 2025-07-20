@@ -6,29 +6,30 @@ if(!$dk_DKCACHE_DIR_ps1){ $dk_DKCACHE_DIR_ps1 = 1; } else{ return; } #include gu
 #
 #
 function Global:dk_DKCACHE_DIR() {
-    dk_debugFunc 0 1
+    dk_debugFunc 0 1;
 
 	############ SET ############
 	if($($args[0])){
-		${env:DKCACHE_DIR} = $($args[0])
+		${env:DKCACHE_DIR} = $($args[0]);
 	
 	############ GET ############
 	} else {
 		if(!(${env:DKCACHE})){
-			${env:DKCACHE}=".dk"
+			${env:DKCACHE}=".dk";
 		}
 		if(!(${env:DKCACHE_DIR})){
-			${env:DKCACHE_DIR} = "$(dk_call dk_DKHOME_DIR)/${env:DKCACHE}" 
+			${env:DKCACHE_DIR} = "$(dk_call dk_DKHOME_DIR)/${env:DKCACHE}";
 		}
 	}
 	
 	############ FINALIZE ############
 	${env:DKCACHE_DIR} = ${env:DKCACHE_DIR} -replace '\\', '/';
 	
-	#if(!(Test-Path ${env:DKCACHE_DIR})){ 
-	#	dk_call dk_mkdir ${env:DKCACHE_DIR}
-	#}
-	return ${env:DKCACHE_DIR}
+	if(!(Test-Path ${env:DKCACHE_DIR})){ 
+		dk_call dk_mkdir ${env:DKCACHE_DIR};
+	}
+	
+	return ${env:DKCACHE_DIR};
 }
 
 
@@ -38,7 +39,7 @@ function Global:dk_DKCACHE_DIR() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST() {
-    dk_debugFunc 0 
+    dk_debugFunc 0;
    
 	###### GET ######
 	dk_call dk_echo "\n";
