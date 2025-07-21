@@ -13,7 +13,7 @@ function Global:dk_pickUpdate() {
 	dk_call dk_echo "\n";
 
 	### Load DKBuilder.cache ###
-	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
+	dk_call dk_validate env:DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 	if(Test-Path "${DKCACHE_DIR}/DKBuilder.cache") {
 		dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache";
 	}

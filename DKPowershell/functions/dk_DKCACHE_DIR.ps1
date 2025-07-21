@@ -29,6 +29,7 @@ function Global:dk_DKCACHE_DIR() {
 		dk_call dk_mkdir ${env:DKCACHE_DIR};
 	}
 	
+	${global:DKCACHE_DIR} = ${env:DKCACHE_DIR};
 	return ${env:DKCACHE_DIR};
 }
 

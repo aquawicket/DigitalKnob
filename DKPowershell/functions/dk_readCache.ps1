@@ -8,7 +8,7 @@ if(!$dk_readCache_ps1){ $dk_readCache_ps1 = 1; } else{ return; } #include guard
 function Global:dk_readCache() {
 	dk_debugFunc 0;
 	
-	dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR";
+	dk_call dk_validate env:DKCACHE_DIR "dk_call dk_DKCACHE_DIR";
 	dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache";
 	
 
