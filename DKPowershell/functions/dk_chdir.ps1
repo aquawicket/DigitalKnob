@@ -5,16 +5,16 @@ if(!$dk_chdir_ps1){ $dk_chdir_ps1 = 1; } else{ return; } #include guard
 ################################################################################
 # dk_chdir(directory)
 #
-#    Change the working directory
+#    Change the current working directory
 #
 #    @directory	- The directory path to change to
 #
 function Global:dk_chdir() {
 	dk_debugFunc 0 1;
 
-	${directory} = ($args[0]);
-	set-location ${directory};
-	${DKCD} = get-location;
+	${dk_pwd} = $($args[0]) -replace "\\", "/";
+	set-location ${dk_pwd};
+	${dk_pwd} = dk_call dk_pwd;
 }
 
 
@@ -28,12 +28,12 @@ function Global:dk_chdir() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 
-	${DKCD} = get-location;
-	dk_call dk_echo "Current Directory = ${DKCD}\n";
+	${dk_pwd} = $(dk_call dk_pwd);
+	dk_call dk_echo "Current Directory = ${dk_pwd}\n";
 	
 	dk_call dk_validate env:DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR";
-	dk_call dk_chdir "${DKBRANCH_DIR}";
+	dk_call dk_chdir "${env:DKBRANCH_DIR}";
 	
-	${DKCD} = get-location;
-	dk_call dk_echo "Current Directory = ${DKCD}\n";
+	${dk_pwd} = $(dk_call dk_pwd);
+	dk_call dk_echo "Current Directory = ${dk_pwd}\n";
 }
