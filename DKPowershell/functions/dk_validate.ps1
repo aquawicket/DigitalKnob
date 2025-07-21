@@ -14,34 +14,33 @@ function Global:dk_validate() {
 	${code} = $($args[1]);
 	
 	### Check if the variable is already set ###
-	if(dk_call dk_contains "${variable}" "env:"){
+	if(dk_call dk_contains "${variable}" "env:"){ # Check environment variable
 		${env_variable} = ${variable} -replace "env:", "";
 		if(${env_variable} -and (Test-Path env:${env_variable})) {
 			${value} = [Environment]::GetEnvironmentVariable(${env_variable}, 'Process');
-			Write-Host "env:${env_variable} is already SET to '${value}'";
+			#Write-Host "env:${env_variable} is already SET to '${value}'";
 			return;
 		}
 	}
-	elseif(${variable} -and (Test-Path variable:${variable})) {
-		Write-Host "${variable} is already SET to '$(gv -ValueOnly $variable)'";
+	elseif(${variable} -and (Test-Path variable:${variable})) { # Check normal variable
+		#Write-Host "${variable} is already SET to '$(Get-Variable -ValueOnly $variable)'";
 		return;
 	}
 
 
 	### Run the code to set the variable ###
-	Write-Host "Setting ${variable}. . .";
+	#Write-Host "Setting ${variable}. . .";
 	if(${code} -and (Test-Path ${code} -PathType Leaf)){ dk_call dk_load ${code}; }
-	#eval "${code}"
-	if(${code}){ Invoke-Expression ${code} }
+	if(${code}){ Invoke-Expression ${code}; }
 	
 	
 	### Double check that the variable was set ###
-	if(dk_call dk_contains "${variable}" "env:"){
+	if(dk_call dk_contains "${variable}" "env:"){ # Check environment variable
 		if( !(Test-Path env:${env_variable}) ) {
 			dk_call dk_error "dk_validate was unable to set the variable '${variable}' with the code provided"
 		}
 	}
-	elseif( !(Test-Path variable:${variable}) ){ 
+	elseif( !(Test-Path variable:${variable}) ){ # Check normal variable
 		dk_call dk_error "dk_validate was unable to set the variable '${variable}' with the code provided"
 	}
 }
