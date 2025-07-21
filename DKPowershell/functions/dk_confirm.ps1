@@ -6,7 +6,7 @@ if(!$dk_confirm_ps1){ $dk_confirm_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_confirm() {
-	dk_debugFunc 0;
+	dk_debugFunc 0 99;
 
     $confirmation = Read-Host "${yellow} Are you sure ? [Y/N] ${clr}"
 	if($confirmation -eq 'y' -or $confirmation -eq 'Y') { $confirm = $true }
