@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "POWERSHELL_EXE=!dk_exec!"
 	)
 	
-	::if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir:\=/%/System32")
+	::if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%/System32")
 	::%dk_call% dk_assertPath "%POWERSHELL_EXE%"
 	(call )
 	endlocal & (

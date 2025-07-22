@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_findProgram WSL_EXE wsl.exe "%windir:\=/%/System32"
+	%dk_call% dk_findProgram WSL_EXE wsl.exe "%windir%/System32"
 	if exist "%WSL_EXE%" (
 		%dk_call% dk_info "WSL already installed"
 		goto:step4
