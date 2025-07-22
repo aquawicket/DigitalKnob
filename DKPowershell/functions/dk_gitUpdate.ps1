@@ -6,7 +6,7 @@ if(!$dk_gitUpdate_ps1){ $dk_gitUpdate_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_gitUpdate() {
-	dk_debugFunc 0;
+	dk_debugFunc 0 3;
 	
 	${dk_gitUpdate_BACKUP} = 1;
 	if($($args[0])){ ${_url_} = $($args[0]); }    		else { ${_url_} = "https://github.com/aquawicket/DigitalKnob.git"; }
