@@ -4,5 +4,5 @@
 # https://windows.php.net/downloads/releases
 # https://www.php.net/downloads.php
 
-php_src_Windows_X86_Import=https://windows.php.net/downloads/releases/php-8.4.8-Win32-vs17-x86.zip
-php_src_Windows_X86_64_Import=https://windows.php.net/downloads/releases/php-8.4.8-Win32-vs17-x64.zip
+php_src_Windows_X86_Import=https://windows.php.net/downloads/releases/php-8.4.10-Win32-vs17-x86.zip
+php_src_Windows_X86_64_Import=https://windows.php.net/downloads/releases/php-8.4.10-Win32-vs17-x64.zip

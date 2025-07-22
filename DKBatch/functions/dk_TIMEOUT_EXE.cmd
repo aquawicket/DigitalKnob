@@ -15,6 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if defined TIMEOUT_EXE (%return%)
    
     if not exist "%TIMEOUT_EXE%" (%dk_call% dk_findProgram TIMEOUT_EXE "timeout.exe" "%windir:\=/%/System32")
+	set "TIMEOUT_EXE=%TIMEOUT_EXE:\=/%"
 	%dk_call% dk_assertPath "%TIMEOUT_EXE%"
 	
 	endlocal & (

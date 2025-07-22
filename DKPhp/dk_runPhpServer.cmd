@@ -25,22 +25,25 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 	set "WEB_IP=%dk_IpAddressLocal%"
 	
 	%dk_call% dk_validate DKPHP_DIR "%dk_call% dk_DKPHP_DIR"
+	%dk_call% dk_assertPath "%PHP_SRC%/php.exe"
+	%dk_call% dk_assertPath "%PHP_SRC%/php8ts.dll"
+	
 	if not exist "%DKPHP_DIR%/php_local.exe" (
-		%dk_call% dk_copy %PHP_SRC%/php.exe "%DKPHP_DIR%/php_local.exe" OVERWRITE
+		%dk_call% dk_copy "%PHP_SRC%/php.exe" "%DKPHP_DIR%/php_local.exe" OVERWRITE
 	)
-	if not exist "%DKPHP_DIR%/php_local.exe" (
-		%dk_call% dk_copy %PHP_SRC%/php.exe %DKPHP_DIR%/php_local.exe OVERWRITE
+	if not exist "%DKPHP_DIR%/php_web.exe" (
+		%dk_call% dk_copy "%PHP_SRC%/php.exe" "%DKPHP_DIR%/php_web.exe" OVERWRITE
 	)
 	if not exist "%DKPHP_DIR%/php8ts.dll" (
-		%dk_call% dk_copy %PHP_SRC%/php8ts.dll %DKPHP_DIR%/php8ts.dll OVERWRITE
+		%dk_call% dk_copy "%PHP_SRC%/php8ts.dll" "%DKPHP_DIR%/php8ts.dll" OVERWRITE
 	)
 	
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_chdir %DKBRANCH_DIR%
-	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%\php_local.exe" -S %LOCAL_IP%:%port% -t "%path%"
+	TASKLIST | FINDSTR php_local.exe || start /min "" "%DKPHP_DIR%/php_local.exe" -S %LOCAL_IP%:%port% -t "%path%"
 	
 	%dk_call% dk_todo "dk_runPhpServer.cmd: get local ip address"
-	TASKLIST | FINDSTR php_web.exe   || start /min "" "%DKPHP_DIR%\php_web.exe" -S %WEB_IP%:%port% -t "%path%"
+	TASKLIST | FINDSTR php_web.exe   || start /min "" "%DKPHP_DIR%/php_web.exe" -S %WEB_IP%:%port% -t "%path%"
 %endfunction%
 
 
