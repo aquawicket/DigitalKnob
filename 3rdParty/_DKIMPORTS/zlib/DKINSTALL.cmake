@@ -18,7 +18,7 @@ include_guard()
 # https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
 
 ### IMPORT ###
-##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_import(${zlib_Import})
