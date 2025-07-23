@@ -1,14 +1,14 @@
-@echo off
+@echo off&::###### DK.cmd #########################################################################################################################
 if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../functions/")
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::#################################################################################################################################################
+
 
 ::####################################################################
 ::# test_comman_substitution.cmd
 ::#
 ::#
-
-
 setlocal enabledelayedexpansion
 
 :main()
@@ -18,7 +18,6 @@ setlocal enabledelayedexpansion
 	call dk_pause
 %endfunction%
 
-
 :funcA
 	::for /f "usebackq tokens=*" %%a in (`echo Test`) do my_command %%a
 	%* > bla.txt
@@ -26,7 +25,6 @@ setlocal enabledelayedexpansion
 	set funcA=%VV%
 	::FOR /F "usebackq" %%x IN (`%*`) DO set "funcA=%%x"
 %endfunction%
-
 
 :funcB
 	echo 1 = %1

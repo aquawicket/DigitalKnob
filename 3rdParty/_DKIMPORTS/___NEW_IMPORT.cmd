@@ -86,7 +86,7 @@ echo:dk_importVariables	(${%dk_toUpper%_IMPORT} NAME %name%)>>						"%DKIMPORTS_
 echo:dk_delete			("${%dk_toUpper%}")>>										"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake"
 
 ::###### DKINSTALL.cmake.cmd ######
-echo:@echo off^&::########################################## DigitalKnob DKBatch ########################################################################> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
+echo:@echo off^&::###### DK.cmd #########################################################################################################################> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo:if not exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo:if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo:::#################################################################################################################################################>> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
@@ -114,7 +114,7 @@ echo:	call :DKINSTALL>>																																			"%DKIMPORTS_DIR%/%name
 echo:%%endfunction%%>>																																				"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 
 ::###### DKUNINSTALL.cmake.cmd ######
-echo:@echo off^&::########################################## DigitalKnob DKBatch ########################################################################> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo:@echo off^&::###### DK.cmd #########################################################################################################################> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo:if not exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo:if not defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo:::#################################################################################################################################################>> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
