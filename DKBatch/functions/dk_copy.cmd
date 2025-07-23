@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	:: the base directory of the %to% path must exist.   
 	%dk_call% dk_dirname "%_to_%"
-	%dk_call% dk_mkdir "%dk_dirname%"
+	if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
 
 	::copy "%_from_%" "%_to_%"
 	if exist "%_from_%\*" (
