@@ -15,6 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_echo
 ::setlocal disableDelayedExpansion
 	::%dk_call% dk_debugFunc 0 1
+
     if "%~1" equ "" (echo( & exit /b 0)  
 	
 	set message=%*
@@ -69,18 +70,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 				for /f "tokens=1* delims==" %%a in ('set var') do echo %%b
 				endlocal
 
-					  echo(###### TEST_A - dk_call w/ Valid Characters ######
-					  %dk_call% dk_echo "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+					  echo(###### TEST_A - call w/ Valid Characters ######
+					  call dk_echo "     #$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo(
 
-					  echo(###### TEST_B - dk_call w/ " ######
-					  %dk_call% dk_echo "    ""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
+					  echo(###### TEST_B - call w/ " ######
+					  call dk_echo "   ""#$ &'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo(
 
-					  echo(###### TEST_C - dk_call /w %% ######
-					  %dk_call% dk_echo "     #$%%%%%%%%&'()*+,-./:;<=>?@[\]^_`{|}~"
+					  echo(###### TEST_C - call /w %% ######
+					  call dk_echo "     #$%%%%%%%%&'()*+,-./:;<=>?@[\]^_`{|}~"
 					  echo(
-						   
+%endfunction%						   
 						   setlocal disableDelayedExpansion
 						   echo(###### TEST_D - call w/ ! (disableDelayedExpansion) ######
 					       call dk_echo "   !"
