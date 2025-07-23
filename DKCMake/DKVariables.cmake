@@ -36,7 +36,6 @@ include_guard()
 # SOFTWARE.
 dk_info("****** LOADING: ${CMAKE_CURRENT_LIST_FILE} ******")
 
-
 if(CMAKE_SCRIPT_MODE_FILE)
 	dk_info("")
 	dk_info("##################################################")
@@ -141,8 +140,10 @@ if(INSTALL_DKLIBS)
 endif()
 dk_echo("CMAKE_INSTALL_PREFIX:     '${CMAKE_INSTALL_PREFIX}'")
 
+
 dk_haveLongPaths()
 dk_echo("dk_haveLongPaths: '${dk_haveLongPaths}'")
+
 
 #########################################################################
 ## Set the IDE variable
@@ -339,3 +340,5 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 		dk_fatal("The binary directory must contain a valid os folder. \n Valid folders are Cosmo,Android_Arm32,Android_Arm64,Android_X86,Android_X86_64,Emscripten,Ios_Arm32,Ios_Arm64,Iossim_X86,Iossim_X86_64,Linux_X86,Linux_X86_64,Mac_X86,Mac_X86_64,Raspberry_Arm32,Raspberry_Arm64,Windows_X86,Windows_X86_64 \n 	EXAMPLE: DigitalKnob/Development/DKCpp/apps/MyApp/Windows_X86")
 	endif()
 endif()
+
+

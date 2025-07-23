@@ -9,7 +9,7 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	if not defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/DK.cmd")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
-	set "DK=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+	set "DK_CMD=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::###### TEMPORARY for WinPE #######
 	if "%SystemDrive%" equ "X:" (
@@ -31,15 +31,15 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	call :dk_firewallAllow powershell "%POWERSHELL_EXE%"
 	call :dk_firewallAllow git-remote-https "%GIT_REMOTE_HTTPS_EXE%"
 
-	if not exist "%DK%" (
-		"%CURL_EXE%" -L "!HDK!" -o "!DK!" >nul 2>&1 || ^
-		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK!" >nul 2>&1 || ^
-		"%BITSADMIN_EXE%" /transfer /Download /priority Foreground "!HDK!" "!DK:/=\!" >nul 2>&1 || ^
-		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK!')" >nul 2>&1 || ^
+	if not exist "%DK_CMD%" (
+		"%CURL_EXE%" -L "!HDK!" -o "!DK_CMD!" >nul 2>&1 || ^
+		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK_CMD!" >nul 2>&1 || ^
+		"%BITSADMIN_EXE%" /transfer /Download /priority Foreground "!HDK!" "!DK_CMD:/=\!" >nul 2>&1 || ^
+		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK_CMD!')" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
 
-	call "%DK%" "%~0" %*
+	call "%DK_CMD%" "%~0" %*
 
 	::takeown /F %DKF% /R /D "Y"
 	%dk_call% DKBuilder/main.cmd

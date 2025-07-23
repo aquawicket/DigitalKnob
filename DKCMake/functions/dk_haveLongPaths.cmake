@@ -22,7 +22,6 @@ include_guard()
 function(dk_haveLongPaths)
 	dk_debugFunc(0 1)
 	
-	#if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     if(WIN32_LONG_PATHS)
         #message("Long paths are enabled")
 		set(dk_haveLongPaths 1)
@@ -32,10 +31,9 @@ function(dk_haveLongPaths)
     endif()
 	
 	set(dk_haveLongPaths ${dk_haveLongPaths} PARENT_SCOPE)
-	if(ARGV0)
+	if(ARGV)
 		set(${ARGV0} ${dk_haveLongPaths} PARENT_SCOPE)
 	endif()
-	#endif()
 endfunction()
 
 

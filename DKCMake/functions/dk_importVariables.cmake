@@ -462,15 +462,16 @@ function(dk_importVariables)
 	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
 	
 	# <PLUGIN>															ZLIB: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
-	dk_unset(${CURRENT_PLUGIN})
-	dk_set(${CURRENT_PLUGIN} "${PLUGIN_INSTALL_PATH}")
-	dk_assertVar(CURRENT_PLUGIN)
+	#dk_unset(${CURRENT_PLUGIN})
+	dk_printVar(${CURRENT_PLUGIN})
+	dk_set(${CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
+	#dk_assertVar(CURRENT_PLUGIN)
 	if(${dk_importVariables_DEBUG})
-		dk_printVar(CURRENT_PLUGIN)
+		dk_printVar(${CURRENT_PLUGIN})
 	endif()
 	
 	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###						ZLIB_DIR: C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
-	dk_unset(${CURRENT_PLUGIN}_DIR)
+	#dk_unset(${CURRENT_PLUGIN}_DIR)
 	if(NOT "${CURRENT_PLUGIN}" STREQUAL "GIT")
 		dk_set(${CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
 	endif()
@@ -479,14 +480,14 @@ function(dk_importVariables)
 	endif()
 	
 	# <PLUGIN>_URL														# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	dk_unset(${CURRENT_PLUGIN}_URL)
+	#dk_unset(${CURRENT_PLUGIN}_URL)
 	dk_set(${CURRENT_PLUGIN}_URL ${PLUGIN_URL})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_URL)								
 	endif()
 	
 	# <PLUGIN>_IMPORT_FILE												# ZLIB_IMPORT_FILE: master.zip
-	dk_unset(${CURRENT_PLUGIN}_IMPORT_FILE)
+	#dk_unset(${CURRENT_PLUGIN}_IMPORT_FILE)
 	dk_set(${CURRENT_PLUGIN}_IMPORT_FILE ${PLUGIN_URL_FILENAME})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_IMPORT_FILE)
@@ -494,7 +495,7 @@ function(dk_importVariables)
 	
 	# <PLUGIN>_VERSION													# ZLIB_VERSION: master
 	if(PLUGIN_INSTALL_VERSION)
-	dk_unset(${CURRENT_PLUGIN}_VERSION)
+	#dk_unset(${CURRENT_PLUGIN}_VERSION)
 	dk_set(${CURRENT_PLUGIN}_VERSION ${PLUGIN_INSTALL_VERSION})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_VERSION)							
@@ -502,21 +503,21 @@ function(dk_importVariables)
 	endif()
 	
 	# <PLUGIN>_FOLDER													# ZLIB_FOLDER: zlib-master	
-	dk_unset(${CURRENT_PLUGIN}_FOLDER)
+	#dk_unset(${CURRENT_PLUGIN}_FOLDER)
 	dk_set(${CURRENT_PLUGIN}_FOLDER ${PLUGIN_INSTALL_FOLDER})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_FOLDER)							
 	endif()
 	
 	# <PLUGIN>_IMPORT_NAME												# ZLIB_IMPORT_NAME: zlib
-	dk_unset(${CURRENT_PLUGIN}_IMPORT_NAME)
+	#dk_unset(${CURRENT_PLUGIN}_IMPORT_NAME)
 	dk_set(${CURRENT_PLUGIN}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)						
 	endif()
 	
 	# <PLUGIN>_BRANCH													# ZLIB_BRANCH: master
-	dk_unset(${CURRENT_PLUGIN}_BRANCH)
+	#dk_unset(${CURRENT_PLUGIN}_BRANCH)
 	if(PLUGIN_GIT_BRANCH)
 		dk_set(${CURRENT_PLUGIN}_BRANCH ${PLUGIN_GIT_BRANCH})
 	endif()
@@ -525,7 +526,7 @@ function(dk_importVariables)
 	endif()
 	
 	# <PLUGIN>_TAG														# ZLIB_TAG:
-	dk_unset(${CURRENT_PLUGIN}_TAG)
+	#dk_unset(${CURRENT_PLUGIN}_TAG)
 	if(PLUGIN_GIT_TAG)
 		dk_set(${CURRENT_PLUGIN}_TAG ${PLUGIN_GIT_TAG})
 	endif()

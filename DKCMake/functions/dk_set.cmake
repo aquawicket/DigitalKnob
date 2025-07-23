@@ -48,8 +48,10 @@ function(dk_set variable) #, value)
 #	set(ENV{${VAR}} "${_ARGN_}")
 	
 	###### CamelCase ######
+	
 	set(${Var} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{Var} syntax can be used to do direct cache entry lookups
 	set(ENV{${Var}} "${ARGN}")
+	set(${Var} "${ARGN}")
 	
 	###### dk_set_DEBUG ######
 #	if("${dk_set_DEBUG}" STREQUAL 1)
