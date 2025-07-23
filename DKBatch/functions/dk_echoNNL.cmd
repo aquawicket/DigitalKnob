@@ -35,7 +35,7 @@ exit /b 0
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo:This is a normal echo commmand
+	echo(This is a normal echo commmand
 	%dk_call% dk_echoNNL "No "
 	%dk_call% dk_echoNNL "new "
 	%dk_call% dk_echoNNL "line "

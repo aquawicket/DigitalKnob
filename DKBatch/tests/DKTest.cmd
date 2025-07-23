@@ -22,7 +22,7 @@ set "TEST_VAR=this is a test variable"
 :main
 	call dk_debug "main(%*)"
 	
-	echo: && echo ######################## TEST FIELD ######################## && echo:
+	echo( && echo ######################## TEST FIELD ######################## && echo(
 
 ::	#printenv
 ::	

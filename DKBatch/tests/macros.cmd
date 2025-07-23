@@ -117,14 +117,14 @@ set result
 
 ::==== Show timings =============================
 echo -------------------------
-echo:num2Hex macro time x 255 = %timeMacroNum2Hex%
-echo:         call time x 255 = %timeNum2Hex%
-echo:
-echo:toLower macro time x 255 = %timeMacroToLower%
-echo:         call time x 255 = %timeToLower%
-echo:
-echo:strLen  macro time x 255 = %timeMacroStrLen%
-echo:         call time x 255 = %timeStrLen%
+echo(num2Hex macro time x 255 = %timeMacroNum2Hex%
+echo(         call time x 255 = %timeNum2Hex%
+echo(
+echo(toLower macro time x 255 = %timeMacroToLower%
+echo(         call time x 255 = %timeToLower%
+echo(
+echo(strLen  macro time x 255 = %timeMacroStrLen%
+echo(         call time x 255 = %timeStrLen%
 pause
 exit /b
 
@@ -140,7 +140,7 @@ exit /b
       set /a "d=dec&15,dec>>=4"
       for %%d in (!d!) do set "hex=!map:~%%d,1!!hex!"
   )
-  endlocal&if "%~2" neq "" (set %~2=%hex%) else echo:%hex%
+  endlocal&if "%~2" neq "" (set %~2=%hex%) else echo(%hex%
 exit /b
 
 :strLen string len -- returns the length of a string
@@ -151,7 +151,7 @@ exit /b
     set /a "len|=1<<%%A"
     for %%B in (!len!) do if "!str:~%%B,1!"=="" set /a "len&=~1<<%%A"
   )
-  endlocal&if "%~2" neq "" (set /a %~2=%len%) else echo:%len%
+  endlocal&if "%~2" neq "" (set /a %~2=%len%) else echo(%len%
 exit /b
 
 :toLower strVar

@@ -11,14 +11,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	echo:
+	echo(
 	echo ############ CALLSTACK ############
 	for /l %%x in (200, -1, 0) do (
 		if defined __STACK__%%x (
 			call echo %%x: !__STACK__%%x!
 		)
 	)
-	echo:
+	echo(
 %endfunction%
 
 

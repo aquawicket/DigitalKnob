@@ -92,7 +92,7 @@ if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target
 	%COMPILE_COMMAND%
 
 	if not exist "%_exe_%" (
-		echo:
+		echo(
 		%dk_call% dk_error "failed to compile %_cpp_file_%"
 		%return%
 	)

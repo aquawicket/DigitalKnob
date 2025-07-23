@@ -37,13 +37,13 @@ endlocal & (set \n=^
 
 	%dk_call% dk_newline
 
-::	echo:
+::	echo(
 ::	echo This should display %\n%a new line
-::	echo:
+::	echo(
 ::	echo "This should display %\n%a new line"
-	echo:
+	echo(
 	echo This is a sting with !\n!a new line
-	echo:
+	echo(
 	echo "This is a quoted string with !\n!a new line"
 	
 %endfunction%

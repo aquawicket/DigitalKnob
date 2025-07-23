@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 setlocal
 	%dk_call% dk_debugFunc 0
 	
-	echo:
+	echo(
 	echo ############ Uninstalling DKPhp #############
 	set "ftype=DKPhp"
 	set "assoc=php"

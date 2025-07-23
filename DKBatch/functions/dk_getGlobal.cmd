@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "initial value of myGlobalVar"
 	%dk_call% dk_echo "myGlobalVar = %myGlobalVar%"
 
-	echo:
+	echo(
 	%dk_call% dk_echo "calling dk_getGlobal"
 	%dk_call% dk_getGlobal myGlobalVar
 	%dk_call% dk_echo "myGlobalVar = %myGlobalVar%"

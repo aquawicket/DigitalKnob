@@ -56,13 +56,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0 99
 	
-	echo:
-	echo: before
+	echo(
+	echo( before
 	call :DKTEST_printArgs %*
 	
 	call :dk_allButFirstArgs %*
 	
-	echo: after
+	echo( after
 	call :DKTEST_printArgs %dk_allButFirstArgs%
 %endfunction%
 	

@@ -2,30 +2,30 @@
 if "%~1" equ "" (goto :DKINSTALL)
 
 :runDKtcc
-	echo:
+	echo(
 	echo runDKtcc(%*)
 	
-	echo:
+	echo(
 	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
 	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR%"
 	
-	echo:
+	echo(
 	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1/")
 	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR_%"
 	
-	echo:
+	echo(
 	if not exist "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
 	echo TCC_RT_EXE = %TCC_RT_EXE%
 	::%dk_call% dk_assertPath "%TCC_RT_EXE%"
 	
-	echo:
+	echo(
 	if not exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
 	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	::%dk_call% dk_assertPath "%DKSCRIPT_PATH%"
 	
-	echo:
+	echo(
 	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 	echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
 	
@@ -33,7 +33,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	:: "%TCC_RT_EXE%"	path to tcc.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the TCC prompt.
-	echo:
+	echo(
 	echo "%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%"
 	"%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%"
 	::"%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%

@@ -43,20 +43,20 @@ set "dk_pathExists_CASE_SENSITIVE=1"
 	%dk_call% dk_debugFunc 0
 
 	 ::###### Using if return value
-    echo:
+    echo(
     set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%"
 	echo errorlevel = %errorlevel%
     if /i "%dk_pathExists%" equ "TRUE" (echo %_path_% exists) else (echo %_path_% does NOT exist)
 	
     ::###### Using if return value
-    echo:
+    echo(
     set "_path_=C:/windows"
     %dk_call% dk_pathExists "%_path_%"
 	echo errorlevel = %errorlevel%
     if /i "%dk_pathExists%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
    
-    echo:
+    echo(
     set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%"
 	echo errorlevel = %errorlevel%
@@ -65,13 +65,13 @@ set "dk_pathExists_CASE_SENSITIVE=1"
    
    
     ::###### Using if ERRORLEVEL
-    echo:
+    echo(
     set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%"
 	echo errorlevel = %errorlevel%
     if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exist)
    
-    echo:
+    echo(
     set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%"
 	echo errorlevel = %errorlevel%
@@ -80,11 +80,11 @@ set "dk_pathExists_CASE_SENSITIVE=1"
    
    
     ::###### Using && and || conditionals
-    echo:
+    echo(
     set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exist)
    
-    echo:
+    echo(
     set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exist)
     ::FIXME: ERRORLEVEL is still 1

@@ -19,7 +19,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
 	::###### run script ######
-	echo CD = %CD%
 	set cmnd="%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
 	%cmnd% & echo success || echo failed

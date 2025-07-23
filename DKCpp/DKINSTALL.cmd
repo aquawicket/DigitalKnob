@@ -35,7 +35,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%COMPILE_COMMAND%
 	
 	if not exist "%APP_FILE%" (
-		echo:
+		echo(
 		echo %red%ERROR: compilation of %DKCPP_FILE% failed.%clr%
 		pause
 		exit /b 13
@@ -43,13 +43,13 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	::###### run executable ######
 	title %DKCPP_FILE%
-	echo:
+	echo(
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.cpp ###### DKTEST MODE ######%clr%
-	echo:
+	echo(
     %ComSpec% /v:on /c "%APP_FILE%"
-	echo:
+	echo(
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.cpp ######## END TEST #######%clr%
-	echo:
+	echo(
 	
 	set "exit_code=%ERRORLEVEL%"
 	echo exit_code = %exit_code%

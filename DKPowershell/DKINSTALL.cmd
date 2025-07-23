@@ -15,10 +15,10 @@ if "%~1" equ "" (goto DKINSTALL)
 	::%ComSpec% /V:ON /c call %POWERSHELL_EXE% -Command "%DKSCRIPT_PATH%"
 	%POWERSHELL_EXE% -Command "%DKSCRIPT_PATH%"
 
-	echo:
+	echo(
 	echo ###### DKPowershell Exit ######
 	echo errorlevel:%errorlevel%
-	echo:
+	echo(
 	if %errorlevel% neq 0 (pause)
 %endfunction%
 

@@ -19,7 +19,7 @@ if exist %APP%.exe (del %APP%.exe)
 %COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
 if not exist "%APP%.exe" (
-	echo:
+	echo(
 	echo ERROR: compilation of %DKCSharp_FILE% failed.
 	pause
 	goto:eof

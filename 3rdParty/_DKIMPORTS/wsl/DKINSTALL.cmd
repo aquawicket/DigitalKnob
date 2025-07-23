@@ -26,12 +26,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	:: Step 1 - Enable the Windows Subsystem for Linux
 	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Windows-Subsystem-Linux | find "Disabled" && (
-		echo:
+		echo(
 		echo enabling Microsoft-Windows-Subsystem-Linux . . .
 		call dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 	)
 	call dism.exe /online /Get-FeatureInfo /featurename:Microsoft-Hyper-V | find "Disabled" && (
-		echo:
+		echo(
 		echo enabling Microsoft-Hyper-V . . .
 		call dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V /all /norestart
 	)
@@ -42,7 +42,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	:: Step 3 - Enable Virtual Machine feature
 	call dism.exe /online /Get-FeatureInfo /featurename:VirtualMachinePlatform | find "Disabled" && (
-		echo:
+		echo(
 		echo enabling VirtualMachinePlatform . . .
 		call dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 		shutdown /r /t 3

@@ -48,7 +48,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 
 	if not exist "%APP_FILE%" (
-		echo:
+		echo(
 		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
 		pause
 		exit /b 13
@@ -56,13 +56,13 @@ if "%~1" equ "" (goto:DKINSTALL)
 
 	::###### run executable ######
 	title %DKC_FILE%
-	echo:
+	echo(
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.c ###### DKTEST MODE ######%clr%
-	echo:
+	echo(
 	"%ComSpec%" /v:on /c "%APP_FILE%"
-	echo:
+	echo(
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
-	echo:
+	echo(
 
 	set "exit_code=%ERRORLEVEL%"
 	echo exit_code = %exit_code%

@@ -87,7 +87,7 @@ if exist "%~1" (goto:eof)
                 call dk_load %temp%
             )
             endlocal
-        ) || echo:
+        ) || echo(
     )
 %endfunction%
 

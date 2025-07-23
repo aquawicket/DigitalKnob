@@ -3,7 +3,7 @@
 ::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-::echo:
+::echo(
 ::if "%~1" neq "" (echo 1 = %~1)
 ::if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
 ::if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)

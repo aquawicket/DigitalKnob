@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_test(args)
 ::#
 :dk_test
-::echo: & echo %bg_blue%-^> dk_test(%*)%clr%
+::echo( & echo %bg_blue%-^> dk_test(%*)%clr%
 %setlocal%
 	::%dk_call% dk_debugFunc 0 99
 
@@ -32,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 					(echo                   DATE = %DATE%)
 					(echo                   TIME = %TIME: =%)
 					(echo                ComSpec = %ComSpec%)
-					(echo:)
+					(echo()
 					(echo             ###### DK variables ######)
 					(echo                 DK.cmd = %DK.cmd%)
 					(echo           DKSHELL_NAME = %DKSHELL_NAME%)
@@ -75,7 +75,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 					(echo            DKBATCH_DIR = %DKBATCH_DIR%)
 					(echo  DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%)
 					(echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%)
-					(echo:)
+					(echo()
 					
 	%dk_call% Test/dk_test "dk_test" "Test/dk_test"
 	echo Test/dk_test = '%Test/dk_test%'
@@ -83,7 +83,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 endlocal & (
 	set "dk_test=%dk_test%"
 )
-::echo %bg_blue%^<- dk_test(%*)%clr% & echo:
+::echo %bg_blue%^<- dk_test(%*)%clr% & echo(
 %endfunction%
 
 

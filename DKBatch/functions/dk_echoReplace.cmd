@@ -45,14 +45,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    echo:This is a normal echo commmand
+    echo(This is a normal echo commmand
     %dk_call% dk_echoReplace
     %dk_call% dk_echoReplace ""
     %dk_call% dk_echoReplace "This is a dk_echoReplace line"
 	%dk_call% dk_sleep 1
 	%dk_call% dk_echoReplace "Another dk_echoReplace line"
 	%dk_call% dk_sleep 1
-	echo:This is a normal echo commmand
+	echo(This is a normal echo commmand
 	%dk_call% dk_sleep 1
 	%dk_call% dk_echoReplace "and another dk_echoReplace line"
 	%dk_call% dk_sleep 1

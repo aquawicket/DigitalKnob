@@ -163,12 +163,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	
 	::###### Using && and || conditionals
-	echo:
+	echo(
 	set "url=https://aka.ms/vs/16/release/VC_redist.x86.exe"
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%
 	
-	echo:
+	echo(
 	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
 	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
 	echo dk_urlExists = %dk_urlExists%

@@ -263,6 +263,7 @@ exit /b !errorlevel!
 	::set return=(exit /b ^^!errorlevel^^!)
 	set endfunction=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
 	     set return=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	 set checkerror=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
 	
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")
@@ -275,7 +276,7 @@ exit /b !errorlevel!
 	
 	::###### Clear the stack log file ######
 	if "%dk_call_STACK_TO_FILE%" equ "1" (
-		echo: %DKSCRIPT_PATH% %DKSCRIPT_ARGS% - %date% %time%> "%DKSCRIPT_NAME%.log"
+		echo( %DKSCRIPT_PATH% %DKSCRIPT_ARGS% - %date% %time%> "%DKSCRIPT_NAME%.log"
 		for /l %%x in (1, 1, %ENTRY%) do (
 			echo %%x: !__STACK__%%x! >> "%DKSCRIPT_NAME%.log"
 		)	

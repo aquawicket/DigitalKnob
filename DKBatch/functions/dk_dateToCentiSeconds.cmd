@@ -51,7 +51,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_getTime CentiSecond Second Minute Hour
     echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
    
-    echo:
+    echo(
     echo ###### dk_dateToCentiSeconds ######
     %dk_call% dk_dateToCentiSeconds seconds centiseconds %CentiSecond% %Second% %Minute% %Hour% %Day% %Month% %Year%
     echo %Year%/%Month%/%Day% %Hour%:%Minute%:%Second%.%CentiSecond% = %seconds%.%centiseconds% seconds

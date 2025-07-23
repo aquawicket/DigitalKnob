@@ -53,42 +53,42 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "/test/test2/xfile.exten"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.zip"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.tar.gz"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.tar.xz.tar.gz.tar.xz"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.tar.x.gz"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.tar.xz"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.7z.exe.b"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension
 
-	echo:
+	echo(
 	%dk_call% dk_set myPath "test.7z.exe"
 	%dk_call% dk_getExtension "%myPath%"
 	%dk_call% dk_printVar dk_getExtension

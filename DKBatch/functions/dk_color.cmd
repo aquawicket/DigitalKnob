@@ -320,7 +320,7 @@ exit /b !errorlevel!
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	echo:
+	echo(
 	echo %black% %bg_lblack%                 CSI codes              %clr%
 	echo CSI0m       %CSI%0m    CSI0m    %clr%
 	echo CSI1m       %CSI%1m    CSI1m    %clr%
@@ -454,7 +454,7 @@ exit /b !errorlevel!
 	echo CSI?12h     %CSI%?12h    CSI?12h
 	echo CSI?12l     %CSI%?12l    CSI?12l
 
-	echo:
+	echo(
 	echo %black% %bg_lblack%                  Styles                %clr%
 	echo   clr                %clr%  default  %clr%
 	echo   bright             %bright%  bright  %clr%
@@ -476,15 +476,15 @@ exit /b !errorlevel!
 	echo   strike             %strike%  strike  %clr%
 	echo   nostrike           %nostrike%  nostrike  %clr%
 	echo %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%           Style Combinations           %clr%
 	echo   bright,italic      %bright%  %italic% bright,italic    %clr%
 	echo   bright,underline   %bright%  %underline% bright,underline    %clr%
 	echo   bright,negative    %bright%  %negative% bright,negative    %clr%
 	echo   bright,strike      %bright%  %strike% bright,strike    %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%           Color Combinations           %clr%
 	echo   dim black          %dim%%black% dim black %clr%
 	echo   black              %black% black %clr%
@@ -510,8 +510,8 @@ exit /b !errorlevel!
 	echo   dim white          %dim%%white% dim white %clr%
 	echo   white              %white% white %clr%
 	echo   bright white       %bright%%white% bright white %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%            Foreground Colors           %clr%
 	echo   black              %black% black %fg_clr%
 	echo   red                %red% red %fg_clr%
@@ -521,8 +521,8 @@ exit /b !errorlevel!
 	echo   magenta            %magenta% magenta %fg_clr%
 	echo   cyan               %cyan% cyan %fg_clr%
 	echo   white              %white% white %fg_clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%            Background Colors           %clr%
 	echo   bg_black    %bg_black% bg_black   %bg_clr%
 	echo   bg_red      %bg_red% bg_red   %bg_clr%
@@ -532,8 +532,8 @@ exit /b !errorlevel!
 	echo   bg_magenta  %bg_magenta% bg_magenta   %bg_clr%
 	echo   bg_cyan     %bg_cyan% bg_cyan   %bg_clr%
 	echo   bg_white    %bg_white% bg_white   %bg_clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%       Foreground Colors    bright      %clr%
 	echo   lblack      %lblack% lblack %clr%
 	echo   lred        %lred% lred %clr%
@@ -543,8 +543,8 @@ exit /b !errorlevel!
 	echo   lmagenta    %lmagenta% lmagenta %clr%
 	echo   lcyan       %lcyan% lcyan %clr%
 	echo   lwhite      %lwhite% lwhite %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%       Background Colors - bright       %clr%
 	echo   bg_lblack      %bg_lblack%%black%   bg_lblack    %clr%
 	echo   bg_lred        %bg_lred%%black%     bg_lred    %clr%
@@ -554,8 +554,8 @@ exit /b !errorlevel!
 	echo   bg_lmagenta    %bg_lmagenta%%black% bg_lmagenta    %clr%
 	echo   bg_lcyan       %bg_lcyan%%black%    bg_lcyan    %clr%
 	echo   bg_lwhite      %bg_lwhite%%black%   bg_lwhite    %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%         RGB Foreground Colors          %clr%
 	echo   %RGB%255;10;10m      RGB255;0;10m     %clr%
 	echo   %RGB%10;255;10m      RGB 0;255;10    %clr%
@@ -611,8 +611,8 @@ exit /b !errorlevel!
 	echo   %RGB%0;0;10m      RGB 0;0;10     %clr%
 	echo   %RGB%0;0;5m      RGB 0;0;5      %clr%
 	echo   %RGB%0;0;0m      RGB 0;0;0      %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%          RGB Background Colors         %clr%
 	echo   %bg_RGB%255;10;10m      bg_RGB 255;0;10    %clr%
 	echo   %bg_RGB%10;255;10m      bg_RGB 0;255;10    %clr%
@@ -668,17 +668,17 @@ exit /b !errorlevel!
 	echo   %bg_RGB%0;0;10m      bg_RGB 0;0;10      %clr%
 	echo   %bg_RGB%0;0;5m      bg_RGB 0;0;5       %clr%
 	echo   %bg_RGB%0;0;0m      bg_RGB 0;0;0       %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%              Combinations              %clr%
 	echo  negative                  %negative%       inverse foreground / background        %clr%
 	echo  bg_yellow,red             %bg_yellow%%red%      yellow backgroud / red foreground       %clr%
 	echo  bg_yellow,red,negative    %bg_yellow%%red%%negative%             yellow / red inversed            %clr%
 	echo  bg_red,bg_green,bg_blue   %bg_red%     nested     %bg_green%     colors     %bg_blue%     text     %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%             ASCII Color Art            %clr%
-	echo:
+	echo(
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
@@ -692,17 +692,17 @@ exit /b !errorlevel!
 	echo   %bg_red%                                                   %clr%
 	echo   %bg_white%                                                   %clr%
 	echo   %bg_red%                                                   %clr%
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%               ASCII Mode               %clr%
 	echo %ASCII% a b c d e f g h i j k l m n o p q r s t u v w x y z
-	echo:
-	echo:
+	echo(
+	echo(
 	echo %black% %bg_lblack%                DEC Mode                %clr%
 	echo %DEC% a b c d e f g h i j k l m n o p q r s t u v w x y z
 	echo %ASCII%
-	echo:
-	echo:
+	echo(
+	echo(
 %endfunction%
 
 

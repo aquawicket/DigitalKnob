@@ -10,7 +10,7 @@ set "_DE_=%if_DE% (echo delayed expansion ON) else (echo delayed expansion OFF)"
 :: TestA
 :: The simplest form of command substitution.
 :: The macroA variable is set to invoke the command and then set itself to the result
-echo:
+echo(
 %_DE_%
 set macroA=&for /f "usebackq tokens=*" %%a in (`ver`) do echo %%a > 0
 echo macroA = %macroA%
@@ -18,7 +18,7 @@ echo macroA = %macroA%
 
 :: TestB
 :: The same test as above, but with delayed expansion enabled
-echo:
+echo(
 setlocal enabledelayedexpansion
 %_DE_%
 set macroB=&for /f "usebackq tokens=*" %%a in (`ver`) do set "macroB=%%a"
@@ -28,7 +28,7 @@ endlocal
 
 :: TestC
 :: Same test with a different command
-echo:
+echo(
 %_DE_%
 set macroC=&for /f "usebackq tokens=*" %%a in (`time /t`) do set "macroC=%%a"
 echo macroC = %macroC% w/trailing text
@@ -36,7 +36,7 @@ echo macroC = %macroC% w/trailing text
 
 :: TestD
 :: Same test calling another batch file
-echo:
+echo(
 %_DE_%
 set macroD=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd`) do set "macroD=%%a"
 echo macroD = %macroD%
@@ -44,13 +44,13 @@ echo macroD = %macroD%
 
 :: TestE
 :: Chain multiple subs together
-::echo:
+::echo(
 ::%_DE_%
 ::set hour=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd hour`) do set "hour=%%a"
 ::set minute=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd minute`) do set "minute=%%a"
 ::set second=&for /f "usebackq tokens=*" %%a in (`bat_echo.cmd second`) do set "second=%%a"
 ::echo time = %hour%:%minute%:%second%
-echo:
+echo(
 set macroGetTime=&(%\n%
   setlocal enableDelayedExpansion%\n%
   set "t=0"%\n%

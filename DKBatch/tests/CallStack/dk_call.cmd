@@ -112,12 +112,12 @@
 %endfunction%
 
 :printCallStack
-	echo:
+	echo(
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
 		if defined CMND_!num! (call echo !num!: %%CMND_!num!%%)
 	)
 	echo ###################################
-	echo:
+	echo(
 %endfunction%

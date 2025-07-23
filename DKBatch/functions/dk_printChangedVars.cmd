@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set > %DKCACHE_DIR%\vars.tmp
 	)
 	
-	echo:
+	echo(
 	echo ################## Variable Changes ##################
 
 	rem We need two flag variables. Prepare two names that "should" not collide

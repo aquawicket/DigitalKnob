@@ -37,18 +37,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo The MYVAR variable should be empty
 	echo MYVAR = %MYVAR%
 	
-	echo:
+	echo(
 	echo setting MYVAR variable with setx
 	setx MYVAR "TEST VALUE oF MYVAR" 1>nul 2>nul
 	
 	echo The MYVAR variable will still be empty
 	echo MYVAR = %MYVAR%
 	
-	echo:
+	echo(
 	echo Lets refresh the environment
     %dk_call% dk_refreshEnv
 	
-	echo:
+	echo(
 	echo Now the variable should have value
 	echo MYVAR = %MYVAR%
 %endfunction%

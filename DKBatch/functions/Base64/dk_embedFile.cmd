@@ -26,38 +26,38 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(
 	echo @echo off
 	echo setlocal enabledelayedexpansion
-	echo:
+	echo(
 	echo set FN=%%TEMP%%\%~nx1
 	echo call :extract-embedded-bin "%%FN%%"
 	echo start %%FN%%
 	echo goto :eof
-	echo:
+	echo(
 	echo :extract-embedded-bin ::1=OutFileName
 	echo setlocal
-	echo:
+	echo(
 	echo set MBEGIN=-1
 	echo for /f "useback tokens=1 delims=: " %%%%a in (`findstr /B /N /C:"-----BEGIN CERTIFICATE-----" "%%~f0"`^) DO (
 	echo	set /a MBEGIN=%%%%a-1
 	echo ^)
-	echo:
+	echo(
 	echo if "%%MBEGIN%%" equ "-1" (
 	echo	endlocal
 	echo	exit /b -1
 	echo ^)
-	echo:
+	echo(
 	echo ::Delete previous output files
 	echo if exist "%%~1.tmp" del "%%~1.tmp"
 	echo if exist "%%~1" del "%%~1"
-	echo:
+	echo(
 	echo for /f "useback skip=%%MBEGIN%% tokens=* delims=" %%%%a in ("%%~f0"^) DO (
 	echo 	echo %%%%a ^>^>"%%~1.tmp"
 	echo ^)
 	echo %CERTUTIL_EXE% -decode "%%~1.tmp" "%%~1" ^>nul 2^>^&1
 	echo del "%%~1.tmp"
-	echo:
+	echo(
 	echo endlocal
 	echo exit /b 0
-	echo:
+	echo(
 	) >"%outputFile%"
 
 	%CERTUTIL_EXE% -encode -f "%inputFile%" "encoded.tmp"

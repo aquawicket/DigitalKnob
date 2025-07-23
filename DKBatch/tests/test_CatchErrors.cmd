@@ -22,7 +22,7 @@ if "%~1" neq "" (call %~1)
 ::############ set /a error codes ############
 ::1073750988 = Unbalanced parentheses
 :testA
-	echo:
+	echo(
 	echo Running testA . . .
 	set /a "total=(2+1"
 	
@@ -31,7 +31,7 @@ if "%~1" neq "" (call %~1)
 
 ::1073750989 = Missing operand
 :testB
-	echo:
+	echo(
 	echo Running testB . . .
 	set /a "total=5*"
 	
@@ -40,7 +40,7 @@ if "%~1" neq "" (call %~1)
 
 ::1073750990 = Syntax error
 :testC
-	echo:
+	echo(
 	echo Running testC . . .
 	set /a "total=7$3"
 	
@@ -49,7 +49,7 @@ if "%~1" neq "" (call %~1)
 
 ::1073750991 = Invalid number
 :testD
-	echo:
+	echo(
 	echo Running testD . . .
 	set /a "total=0xdeadbeeg"
 	
@@ -59,7 +59,7 @@ if "%~1" neq "" (call %~1)
 ::1073750992 = Number larger than 32-bits
 :: largest number allowed is 2,147,483,647
 :testE
-	echo:
+	echo(
 	echo Running testE . . .
 	set /a "num=2147483648"
 	
@@ -68,7 +68,7 @@ if "%~1" neq "" (call %~1)
 
 ::1073750993 = Division by zero.
 :testF
-	echo:
+	echo(
 	echo Running testF . . .
 	set /a 1/0
 	

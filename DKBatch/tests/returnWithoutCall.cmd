@@ -8,7 +8,7 @@ goto eof
 	::call returnWithoutCallB
 	::echo after call returnWithoutCallB
 	
-::	echo:
+::	echo(
 ::	echo before returnWithoutCallB
 ::	returnWithoutCallB &(
 ::		echo after returnWithoutCallB

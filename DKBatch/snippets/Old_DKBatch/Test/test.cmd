@@ -48,7 +48,7 @@ if not defined TEST_DKVARIABLES goto :end
 	echo appending Test_variableA
 	set Test_variableA=%Test_variableA% added some data to the end
 	echo Test_variableA: %Test_variableA%
-	echo:
+	echo(
 :end
 
 
@@ -58,7 +58,7 @@ if not defined TEST_DKNESTING goto :end
 	echo ##      TESTING Nesting        ##
 	echo #################################
 	call NestedNodes1
-	echo:
+	echo(
 :end
 
 
@@ -68,7 +68,7 @@ if not defined TEST_DKPRINT goto :end
 	echo ##      TESTING dkprint        ##
 	echo #################################
 	call dkprint this is a test of dkprint
-	echo:
+	echo(
 :end
 
 
@@ -79,7 +79,7 @@ if not defined TEST_DKTEMPLATE goto :end
 	echo ##################################
 	call TEMPLATE 369 string result1 result2
 	echo TemplateFunc returned: %result1% %result2%
-	echo:
+	echo(
 :end
 
 
@@ -89,7 +89,7 @@ if not defined TEST_DKSENDDATA goto :end
 	echo ##      TESTING SendData        ##
 	echo ##################################
 	call SendData apple
-	echo:
+	echo(
 :end
 
 
@@ -100,7 +100,7 @@ if not defined TEST_DKGETDATA goto :end
 	echo #################################
 	call GetData result
 	echo GetData returned: %result%
-	echo:
+	echo(
 :end
 
 
@@ -111,7 +111,7 @@ if not defined TEST_DKSENDANDGETDATA goto :end
 	echo ######################################
 	call SendAndGetData orange result
 	echo SendAndGetData returned: %result%
-	echo:
+	echo(
 :end
 
 
@@ -121,7 +121,7 @@ if not defined TEST_DKCOLOR goto :end
 	echo ##      TESTING Color       ##
 	echo ##############################
 	call Color
-	echo:
+	echo(
 :end
 
 :::::::::::::::::::::::::::::::::::::::
@@ -130,7 +130,7 @@ if not defined TEST_DKSLEEP goto :end
 	echo ##      TESTING Sleep       ##
 	echo ##############################
 	call Sleep 2
-	echo:
+	echo(
 :end
 
 
@@ -141,25 +141,25 @@ if not defined TEST_DKERRORS goto :end
 	echo ################################
 	set ERRORLEVEL=0
 	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
-	echo:
+	echo(
 	
 	set ERRORLEVEL=1
 	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
-	echo:
+	echo(
 
 	%ERROR% "ERROR: This throws an error, and continues"
-	echo:
+	echo(
 
 	set ERRORLEVEL=0
 	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
-	echo:
+	echo(
 	
 	set ERRORLEVEL=1
 	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
-	echo:
+	echo(
 
 	%FATAL% "FATAL: This throws an error, and exits the program"
-	echo:
+	echo(
 :end
 
 

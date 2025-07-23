@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
  cls
- echo:
+ echo(
  echo =============================
  echo Running Admin shell
  echo =============================
@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :getPrivileges
   if '%1'=='ELEV' (echo ELEV & shift /1 & goto gotPrivileges)
-  echo:
+  echo(
   echo **************************************
   echo Invoking UAC for Privilege Escalation
   echo **************************************

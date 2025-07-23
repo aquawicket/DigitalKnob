@@ -57,7 +57,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	:: https://www.robvanderwoude.com/escapechars.php
-	echo:
+	echo(
 	set "ASCII[0]= "
 	set "ASCII[1]= "
 	set "ASCII[2]= "
@@ -187,7 +187,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "ASCII[125]=}"
 	set "ASCII[126]=~"
 	%dk_call% dk_printVar ASCII
-	echo:
+	echo(
 	%dk_call% Array/dk_includes ASCII		&& echo  = true		|| echo  = false
 	%dk_call% Array/dk_includes ASCII		&& echo  = true		|| echo  = false
 	%dk_call% Array/dk_includes ASCII		&& echo  = true		|| echo  = false
@@ -316,7 +316,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% Array/dk_includes ASCII }	&& echo } = true 		|| echo } = false
 	%dk_call% Array/dk_includes ASCII ~	&& echo ~ = true 		|| echo ~ = false
 	
-	echo:
+	echo(
 	set "WORDS[0]=lower"
 	set "WORDS[1]=UPPER"
 	set "WORDS[2]=CaseSensitive"
@@ -324,7 +324,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "WORDS[4]=__INNER__"
 	set "WORDS[5]="withQuotes""
 	%dk_call% dk_printVar WORDS
-	echo:
+	echo(
 	%dk_call% Array/dk_includes WORDS lower			&& echo lower = true				|| echo lower = false
 	%dk_call% Array/dk_includes WORDS UPPER			&& echo UPPER = true				|| echo UPPER = false
 	%dk_call% Array/dk_includes WORDS CASESENSITIVE	&& echo CASESENSITIVE = true		|| echo CASESENSITIVE = false

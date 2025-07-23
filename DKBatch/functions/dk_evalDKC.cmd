@@ -101,7 +101,7 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 	%COMPILE_COMMAND%
 
 	if not exist "%_exe_%" (
-		echo:
+		echo(
 		%dk_call% dk_error "failed to compile %_c_file_%"
 		%return%
 	)

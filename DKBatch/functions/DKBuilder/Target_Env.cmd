@@ -25,16 +25,16 @@ if not defined Target_Env_DEFAULT (set "Target_Env_DEFAULT=Clang")
 	
 	rem ###### GET ######	
 	) else (
-		echo:
+		echo(
 		echo  0^) !Target_Env_Cache!
-		echo:
+		echo(
 		echo  1^) %Target_Env_DEFAULT%
 		echo  2^) Gcc
 		echo  3^) Msvc
 		echo  4^) Gcc-Ucrt
 		echo  5^) Go Back
 		echo  6^) Exit
-		echo:
+		echo(
 
 		%dk_call% dk_keyboardInput
 		if "!dk_keyboardInput!" equ "0"	endlocal & (%dk_call% dk_set 	Target_Env 	%Target_Env_Cache% 		& set "!Target_Env!=1"	&	%return%)

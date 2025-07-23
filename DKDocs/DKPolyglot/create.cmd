@@ -12,17 +12,17 @@ goto main
 :main
 
 
-echo: & echo ########################### BATCH .bat ##########################
+echo( & echo ########################### BATCH .bat ##########################
 call :copyTo .bat && call dk_polyglot && del dk_polyglot.bat
 
 
-echo: & echo ########################### BATCH .cmd ##########################
+echo( & echo ########################### BATCH .cmd ##########################
 call :copyTo .cmd && call dk_polyglot && del dk_polyglot.cmd
 
 
-echo: & echo ######################## POWERSHELL ########################
+echo( & echo ######################## POWERSHELL ########################
 call :copyTo .ps1 && powershell "./dk_polyglot" && del dk_polyglot.ps1
 
 
-echo: & echo ########################### BASH ###########################
+echo( & echo ########################### BASH ###########################
 %USERPROFILE:\=/%/DigitalKnob/DKTools/portablegit_2_44_0_64_bit_7z/bin/bash.exe dk_polyglot

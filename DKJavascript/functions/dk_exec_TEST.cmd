@@ -10,11 +10,11 @@ set /a "count=0"
 
 	set /a "count+=1"
 	if %printErr% equ 1 (
-		echo: stdout %count% %time%
-		echo:     stderr %count% %time% 1>&2
+		echo( stdout %count% %time%
+		echo(     stderr %count% %time% 1>&2
 		set /a "printErr = 0"
 	) else (
-		echo: stdout %count% %time%
+		echo( stdout %count% %time%
 		set /a "printErr = 1"
 	)
 	if %count% equ 10 (exit /b 0)

@@ -40,15 +40,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% Array/dk_push myArrayA "a b c"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_push
-	echo:
+	echo(
 
 	%dk_call% Array/dk_push myArrayA "1 2 3" "d e f"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_push
-	echo:
+	echo(
 
 	%dk_call% Array/dk_push myArrayA "4 5 6" "h i j"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_printVar dk_push
-	echo:
+	echo(
 %endfunction%

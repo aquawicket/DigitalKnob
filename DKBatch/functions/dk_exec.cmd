@@ -47,13 +47,13 @@ if not defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 	
 	::###### dk_exec_PRINT_CALL ######
 	if "%dk_exec_PRINT_CALL%" equ "1" (
-		echo:
+		echo(
 		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_call%clr%  > !dk_exec_call!"`) do (echo %%~G)
 	)
 	
 	::###### dk_exec_PRINT_COMMAND ######
 	if "%dk_exec_PRINT_COMMAND%" equ "1" (
-		echo:
+		echo(
 		for /f "usebackq delims=" %%G in (`echo "%lblue%dk_exec_command%clr%  > !dk_exec_command!"`) do (echo %%~G)
 	)
 
@@ -142,7 +142,8 @@ if not defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 		%dk_call% dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
 	) else (
 		echo dk_exec_stderr = "!dk_exec_stderr!"
-		%dk_call% dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
+		rem %dk_call% dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
+		%dk_call% dk_error "ERROR:!dk_exec_exitcode! @ dk_exec.cmd" & exit /b !dk_exec_exitcode!
 	)
 %endfunction%
 

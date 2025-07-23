@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     for /l %%i in (1,1,!count!) do (
         echo      Wi-Fi Name            : !list_%%i!
         netsh wlan show profile name="!list_%%i!" key=clear | findstr Content
-        echo:
+        echo(
     )
 %endfunction%
 

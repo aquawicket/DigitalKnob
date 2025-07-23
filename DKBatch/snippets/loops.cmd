@@ -4,7 +4,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-echo:
+echo(
 echo loop
 ::###### loop ######
 set /a "count=0"
@@ -25,7 +25,7 @@ set "endwhile=set /a "n+=1" & goto while"
 
 
 
-echo:
+echo(
 echo while loop
 ::###### While loop ######
 :while
@@ -50,7 +50,7 @@ if %n% lss 10 (
 :: ###### infinate count loop ######
 :: Note:   the speed of this is dependant on the size of your screen buffer in cmd or windows terminal.
 :: if you have a screen buffer of 1000 in cmd, you will see the speed of console writes increase x10 once the buffer is full.
-echo:
+echo(
 echo infinate count loop
 for /L %%L in (0,1,2147483648) do @(
 	echo.%%L
@@ -59,7 +59,7 @@ for /L %%L in (0,1,2147483648) do @(
 
 
 :: ###### until 10 ######
-echo:
+echo(
 echo loop until 10
 for /F %%A IN ('
   CMD /C "for /L %%L IN (0,1,2147483648) do @( echo.%%L & IF /I %%L EQU 10 ( exit /b  ) )"
@@ -69,7 +69,7 @@ for /F %%A IN ('
 
 
 ::###### better until 10 ######
-echo:
+echo(
 echo loop until 10 best
 for /F %%A IN ('CMD /C "for /L %%L IN (0,1,10000000) do @( echo.%%L & IF /I %%L EQU 10 ( exit /b  ) )" ') do @(echo %%~A)
 

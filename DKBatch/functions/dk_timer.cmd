@@ -61,32 +61,32 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     %dk_call% dk_timer t1
 
-    echo:
+    echo(
     echo waiting about 1 millisecond
     %dk_call% dk_sleep 1
     %dk_call% dk_timer t1
     echo Seconds since last call: = %t1%
 
-    echo:
+    echo(
     echo waiting about 10 milliseconds
     %dk_call% dk_sleep 10
     %dk_call% dk_timer t1
     echo Seconds since last call: = %t1%
    
-    echo:
+    echo(
     echo waiting about 100 milliseconds
     %dk_call% dk_sleep 100
     %dk_call% dk_timer t1
     echo Seconds since last call: = %t1%
    
-    echo:
+    echo(
     echo waiting about 1000 milliseconds
     %dk_call% dk_sleep 1000
     %dk_call% dk_timer t1
     echo Seconds since last call: = %t1%
    
     :timerLoop
-        echo:
+        echo(
         echo waiting about 1000 milliseconds
         %dk_call% dk_sleep 1000
         %dk_call% dk_timer t1

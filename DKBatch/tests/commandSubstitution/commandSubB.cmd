@@ -32,7 +32,7 @@ echo FIRST LOOP
 	echo var = %var%
 	set "second="
 	
-	echo:
+	echo(
 
 goto main
 

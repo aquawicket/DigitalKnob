@@ -24,11 +24,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "_recursive_=/R"
 	)
 
-	if defined _recursive_ (
+	if defined _pattern_ (
 		%dk_call% dk_exec where %_recursive_% "%_pattern_%" %_filename_% 2>nul
 	) else (
 		%dk_call% dk_exec where %_filename_% 2>nul
 	)
+	%checkerror%
 	set "dk_findProgram=%dk_exec:\=/%"
 
 	if not exist "%dk_exec%" (

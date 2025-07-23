@@ -60,11 +60,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	set "dk_exec_PRINT_STDOUT=1"
 ::	set "dk_exec_PRINT_OUTPUT=1"
 
-	echo:
+	echo(
 	%dk_call% dk_callDKBatch dk_test "arg1" "arg2" "arg3"
 	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
 
-	echo:
+	echo(
 	%dk_call% dk_callDKBatch dk_basename "C:/Users/Administrator/DigitalKnob/Development"
 	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
 %endfunction%		

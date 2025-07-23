@@ -42,35 +42,35 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
  
 	::###### Variable set with quotes ######
-	echo:
+	echo(
 	set "myValue=   a  b  c   "   
 	echo myValue = '%myValue%'
 	%dk_call% dk_trim %myValue%
 	echo dk_trim =    '%dk_trim%'
 	
 	::###### Variable set with without quotes ######
-	echo:
+	echo(
 	set myValue=   1  2  3      
 	echo myValue = '%myValue%'
 	%dk_call% dk_trim %myValue%
 	echo dk_trim =    '%dk_trim%'
 	
 	::###### Variable set with without quotes ######
-	echo:
+	echo(
 	set "myValue=   d  e  f    "
 	echo myValue = '%myValue%'
 	%dk_call% dk_trim "%myValue%"
 	echo dk_trim =   '%dk_trim%'
 	
 	::###### Variable set with without quotes ######
-	echo:
+	echo(
 	set myValue=   4  5  6    
 	echo myValue = '%myValue%'
 	%dk_call% dk_trim "%myValue%"
 	echo dk_trim =   '%dk_trim%'
 	
 	::###### Variable with unspecial characters and quotes ######
-	echo:
+	echo(
           ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
         ::VALID:        #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
       ::INVALID:    ! "       % &     )                 <   >           ^       |
@@ -80,7 +80,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo dk_trim =        '%dk_trim%'
 	
 	::###### Variable with unspecial characters and quotes ######
-	echo:
+	echo(
         ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
         ::VALID:      #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
       ::INVALID:  ! "       % &     )                 <   >           ^       |
@@ -90,7 +90,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo dk_trim =        '%dk_trim%'
 	
 	::###### Variable with unspecial characters and quotes ######
-	echo:
+	echo(
           ::ALL:    ! " #  $  % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
         ::VALID:        #  $    & ' (   * + , - . / : ;   =   ? @ [ \ ] ^ _ ` {   } ~
       ::INVALID:    ! "       % &     )                 <   >           ^       |
@@ -100,13 +100,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo "dk_trim =        '%dk_trim%'"
 	
 	
-::	echo:						   
+::	echo(						   
 ::	set myValue=     #$ &'()*+,-./:;<=>?@[\]^_`{|}~
 ::	echo "myValue = '%myValue%'"
-::	::for /f "delims=" %%G in ("myValue = '%myValue%'") do (echo:%%~G)
+::	::for /f "delims=" %%G in ("myValue = '%myValue%'") do (echo(%%~G)
 	
 ::	call :dk_trim %myValue%
 ::	echo dk_trim = '%dk_trim%'
-::	::for /f "delims=" %%G in ("dk_trim = '%dk_trim%'") do (echo:%%~G)
+::	::for /f "delims=" %%G in ("dk_trim = '%dk_trim%'") do (echo(%%~G)
 %endfunction%
 

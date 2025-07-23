@@ -67,17 +67,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "myArray1[2]=g h i"
 	%dk_call% dk_printVar myArray1
 
-	echo:
+	echo(
 	set "myArray2[0]=1 2 3"
 	set "myArray2[1]=4 5 6"
 	set "myArray2[2]=7 8 9"
 	%dk_call% dk_printVar myArray2
 
-	echo:
+	echo(
 	%dk_call% Array/dk_concat myArray1 myArray2
 	%dk_call% dk_printVar dk_concat
 
-	echo:
+	echo(
 	if ^
 	"%dk_concat[0]%" equ "a b c" if ^
 	"%dk_concat[1]%" equ "d e f" if ^

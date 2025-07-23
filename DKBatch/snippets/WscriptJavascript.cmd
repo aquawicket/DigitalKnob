@@ -4,7 +4,7 @@
 :: ###### BATCH SCRIPT ######
 @echo off
 	echo This is Batch script (cmd)
-	echo:
+	echo(
 	cscript //nologo //E:jscript %0 %*
 %endfunction%
 */

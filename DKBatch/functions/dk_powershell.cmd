@@ -69,15 +69,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	echo ######################## TEST_A ########################
 	%dk_call% dk_powershell "Write-Output 'dk_powershell TEST A';"
-	echo:
+	echo(
 	
 	echo ######################## TEST_B ########################
 	%dk_call% dk_powershell "Write-Output 'dk_powershell TEST B';"
-	echo:
+	echo(
 	
 	echo ######################## TEST_C ########################
 	set "PSVAR=this is a powershell variable"
     %dk_call% dk_powershell "Write-Output 'PSVAR = '${env:PSVAR};"
-	echo:
+	echo(
 	
 %endfunction%

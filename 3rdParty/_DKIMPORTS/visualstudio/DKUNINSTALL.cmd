@@ -11,11 +11,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	echo:
+	echo(
 	echo ### Uninstalling visualstudio ###
 	"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" uninstall --installPath "%ProgramFiles(x86)%\Microsoft Visual Studio\2022\BuildTools"
 	
-	echo:
+	echo(
 	echo ### Uninstalling visualstudio_installer ###
 	"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\setup.exe" /uninstall
 %endfunction%

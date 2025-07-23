@@ -104,14 +104,14 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" (%endfunction%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 1
-	echo:
-	echo:%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
-	echo:
+	echo(
+	echo(%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
+	echo(
 	
 	call:DKTEST
-	echo:
-	echo:%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
-	echo:
+	echo(
+	echo(%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
+	echo(
 	%dk_call% dk_exit %errorlevel%
 %endfunction%
 
@@ -252,10 +252,10 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	::############ EXIT POINT ############
 	::####################################
 	set "exit_code=%errorlevel%"
-	echo:
+	echo(
 	echo exit_code = %exit_code%
 	if "%exit_code%" neq "0" (
-		echo:
+		echo(
 		echo Press any key to exit . . .
 		pause >nul
 	)

@@ -27,8 +27,8 @@ set "CMAKE_BINARY_DIR=%DKSCRIPT_DIR:\=/%/build"
 
 
 ::###### Execute helloWorld ######
-echo:
-echo:
+echo(
+echo(
 %DKSCRIPT_DIR%\build\helloWorld.com
 
 pause
