@@ -139,10 +139,10 @@ if not defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 		set "%%G"
 	)
 	if "!dk_exec_exitcode!" equ "0" (
-		if defined dk_return (%dk_return% !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!)
+		%dk_call% dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
 	) else (
 		echo dk_exec_stderr = "!dk_exec_stderr!"
-		if defined dk_return (%dk_return% !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!)
+		%dk_call% dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
 	)
 %endfunction%
 
