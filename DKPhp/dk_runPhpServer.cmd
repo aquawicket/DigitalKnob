@@ -56,5 +56,6 @@ if not defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_runPhpServer "%DKPHP_FUNCTIONS_DIR%" 5000
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_runPhpServer "%DKBRANCH_DIR%" 80
 %endfunction%
