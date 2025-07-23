@@ -69,9 +69,9 @@ if not defined dk_return (set "dk_return=%dk_call% dk_return")
 	set "LAST_FILE=!__FILENAME__!"
 	set "LAST_FUNC=!__FUNC__!"
 	set "LAST_ARGS=!__ARGV__!"
-		
+	
 	if "%dk_return_PRINT_SUCCESS%" equ "1" (
-		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!) %green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
+		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	) 
 	if "%dk_return_PRINT_ERRORS%" equ "1" (
 		if "!LAST_STATUS!" neq "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
