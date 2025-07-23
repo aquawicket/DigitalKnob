@@ -11,7 +11,7 @@
 
 ::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
 if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
-if not defined dk_return (set "dk_return=%dk_call% dk_return")
+::if not defined dk_return (set "dk_return=%dk_call% dk_return")
 
 ::################################################################################
 ::dk_return(exit_code, message)
@@ -74,7 +74,10 @@ if not defined dk_return (set "dk_return=%dk_call% dk_return")
 		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
 	) 
 	if "%dk_return_PRINT_ERRORS%" equ "1" (
-		if "!LAST_STATUS!" neq "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
+		if "!LAST_STATUS!" neq "0"	(
+			echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+			%dk_call% dk_stacktrace
+		)
 	)
 	
 ::exit /b !LAST_STATUS! & set "LAST_STATUS="

@@ -15,17 +15,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_echo
 ::setlocal disableDelayedExpansion
 	::%dk_call% dk_debugFunc 0 1
-
     if "%~1" equ "" (echo: & exit /b 0)  
 	
 	set message=%*
-	
 	:DeEscape
 	echo %message% | findstr /c:"^^" >nul && (
 		set message=%message:^^=^%
 		goto :DeEscape
-	)
-
+	) || cmd /c "exit /b 0"
+	
 ::	set "message=%message:""="%" && echo:%message%
 ::	for /f %%G in (%message%) do (echo:%%~G)
 ::	for /f "tokens=*" %%G in (%message%) do (echo:%%~G)

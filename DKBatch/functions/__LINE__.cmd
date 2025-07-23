@@ -9,12 +9,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :__LINE__
 %setlocal%
-    %dk_call% dk_debugFunc
+    %dk_call% dk_debugFunc 0 1
 
-
-    if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
+    if "%~1" equ "" (set "_FRAME_=0") else (set "_FRAME_=%~1")
     ::set /a _FRAME_+=1
-	::%dk_return% "%BATCH_LINENO[%_FRAME_%]%"
+	::%dk_call% dk_return "%BATCH_LINENO[%_FRAME_%]%"
 %endfunction%
 
 
@@ -32,11 +31,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
       fc /b "%~f0" "%~f0.new" && del "%~f0.new" || move /y "%~f0.new" "%~f0"
     )
 
-    echo line %#=%32%=#%
+    echo line %#=%34%=#%
     echo line %#=%35%=#%
 
     for %%G in ( 1 2 3) DO (
+       echo Within loop iteration %%G: line %#=%38%=#%
        echo Within loop iteration %%G: line %#=%39%=#%
-       echo Within loop iteration %%G: line %#=%40%=#%
     )
 %endfunction%

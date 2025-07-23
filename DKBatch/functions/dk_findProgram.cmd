@@ -33,11 +33,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if not exist "%dk_exec%" (
 		if "%~4" equ "NO_ERROR" (
-			%dk_return% 0
+			%dk_call% dk_return 0
 		) else if "%~4" equ "NO_HALT" (
-			%dk_return% 0 "%_filename_% not found"
+			%dk_call% dk_return 0 "%_filename_% not found"
 		) else (
-			%dk_return% -1 "%_filename_% not found"
+			%dk_call% dk_return -1 "%_filename_% not found"
 		)
 	)
 
