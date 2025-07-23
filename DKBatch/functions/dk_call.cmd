@@ -260,10 +260,10 @@ exit /b !errorlevel!
 	::set dk_time=(call echo %%time%%)
 	::set checkError=(if "^^!errorlevel^^!" neq "0" %dk_call% dk_error "!errorlevel! ERROR: in !__FILE__! !___FUNC___![!__ARGV__!]")
 
-	set endfunction=(exit /b ^^!errorlevel^^!)
-	set return=(exit /b ^^!errorlevel^^!)
-	set endfunction=(if 0 neq ^^!errorlevel^^! echo ERROR ^^!errorlevel^^!) ^& (exit /b ^^!errorlevel^^!)
+	::set endfunction=(exit /b ^^!errorlevel^^!)
+	::set return=(exit /b ^^!errorlevel^^!)
 	set endfunction=(if 0 neq ^^!errorlevel^^! echo ERROR ^^!errorlevel^^! ^& call dk_call dk_stacktrace) ^& (exit /b ^^!errorlevel^^!)
+	set return=(if 0 neq ^^!errorlevel^^! echo ERROR ^^!errorlevel^^! ^& call dk_call dk_stacktrace) ^& (exit /b ^^!errorlevel^^!)
 	
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")
