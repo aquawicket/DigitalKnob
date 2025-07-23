@@ -47,7 +47,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 
 	::###### Install DKCMake ######
-	%dk_call% dk_validate DKIMPORTS_DIR     		"%dk_call% dk_DKIMPORTS_DIR"
+	::%dk_call% dk_validate DKIMPORTS_DIR     		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate CMAKE_EXE     			"%dk_call% dk_depend cmake"
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ 	"%dk_call% dk_DKBRANCH_DIR"
 

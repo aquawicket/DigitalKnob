@@ -16,7 +16,6 @@ include_guard()
 # https://github.com/mmore500/emscripten-targz/archive/da05a1a87a8327747bf812533e9040a0a2593967.zip
 
 ### INSTALL ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParams	("$ENV{DKIMPORTS_DIR}/emscripten-targz/dkconfig.txt")
-dk_import			(${EMSCRIPTEN-TARGZ_IMPORT} NAME emscripten-targz)
-dk_copy				("$ENV{DKIMPORTS_DIR}/emscripten-targz/RUN.cmd" "${EMSCRIPTEN-TARGZ}/RUN.cmd" OVERWRITE)
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import			(${EMSCRIPTEN-TARGZ_IMPORT})
+dk_copy				("${CMAKE_CURRENT_LIST_DIR}/RUN.cmd" "${EMSCRIPTEN-TARGZ}/RUN.cmd" OVERWRITE)
