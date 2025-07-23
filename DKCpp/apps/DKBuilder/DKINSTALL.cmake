@@ -12,9 +12,10 @@ include_guard()
 #########################################################################
 
 
-dk_DKBRANCH_DIR()
-dk_Target_Tuple()
-dk_set(Target_App_Dir 	"${CMAKE_CURRENT_LIST_DIR}")
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_call.cmake")
+dk_call(dk_DKBRANCH_DIR)
+dk_call(dk_Target_Tuple)
+dk_call(dk_set Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
 
 if(EXISTS "${Target_App_Dir}/depends.cmake")
 	include("${Target_App_Dir}/depends.cmake")
