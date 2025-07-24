@@ -16,10 +16,12 @@ include_guard()
 # https://download.httrack.com/httrack_x64-noinst-3.49.2.zip
  
 ### INSTALL ### 
-dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR")
+dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate			(Host_Tuple "dk_Host_Tuple()")
 if(Windows_X86_Host)
 	dk_import		(${httrack_Windows_X86_Import} ROOT ${DKTOOLS_DIR})
-elseif(Windows_X86_64_Host)
+endif()
+if(Windows_X86_64_Host)
 	dk_import		(${httrack_Windows_X86_64_Import} ROOT ${DKTOOLS_DIR})
-endif
+endif()
