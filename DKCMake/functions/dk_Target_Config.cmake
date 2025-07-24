@@ -26,7 +26,6 @@ include_guard()
 function(dk_Target_Config)
 	dk_debugFunc(0)
 	
-	#dk_validate(Host_Tuple   	"dk_Host_Tuple()")
 	dk_validate(Target_Type  	"dk_Target_Type()")
 	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
