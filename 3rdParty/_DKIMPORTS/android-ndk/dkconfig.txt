@@ -8,50 +8,50 @@
 
 
 # r17c
-#ANDROID_NDK_VERSION=r17c
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r17c-aarch64.zip
+#android_ndk_Version=r17c
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r17c-aarch64.zip
 
 # r18b
-#ANDROID_NDK_VERSION=r18b
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r18b-aarch64.zip
+#android_ndk_Version=r18b
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r18b-aarch64.zip
 
 # r19c
-#ANDROID_NDK_VERSION=r19c
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r19c-aarch64.zip
+#android_ndk_Version=r19c
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r19c-aarch64.zip
 
 # r20b
-#ANDROID_NDK_VERSION=r20b
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r20b-aarch64.zip
+#android_ndk_Version=r20b
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r20b-aarch64.zip
 
 # r21e
-#ANDROID_NDK_VERSION=r21e
-#ANDROID_NDK_BUILD=21.4.7075529
-#ANDROID_NDK_WIN_IMPORT=https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
-#ANDROID_NDK_MAC_IMPORT=https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
-#ANDROID_NDK_LINUX_IMPORT=https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r21e-aarch64.zip
+#android_ndk_Version=r21e
+#android_ndk_Build=21.4.7075529
+#android_ndk_Windows_Import=https://dl.google.com/android/repository/android-ndk-r21e-windows-x86_64.zip
+#android_ndk_Mac_Import=https://dl.google.com/android/repository/android-ndk-r21e-darwin-x86_64.dmg
+#android_ndk_Linux_Import=https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r21e-aarch64.zip
 
 # r22b
-#ANDROID_NDK_VERSION=r22b
-#ANDROID_NDK_BUILD=22.1.7171670
-#ANDROID_NDK_WIN_IMPORT=https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip
-#ANDROID_NDK_MAC_IMPORT=http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip
-#ANDROID_NDK_LINUX_IMPORT=http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r22b-aarch64.zip
+#android_ndk_Version=r22b
+#android_ndk_Build=22.1.7171670
+#android_ndk_Windows_Import=https://dl.google.com/android/repository/android-ndk-r22b-windows-x86_64.zip
+#android_ndk_Mac_Import=http://mirrors.cloud.tencent.com/AndroidSDK/android-ndk-r22b-darwin-x86_64.zip
+#android_ndk_Linux_Import=http://dl.google.com/android/repository/android-ndk-r22b-linux-x86_64.zip
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r22b-aarch64.zip
 
 # r23b
-#ANDROID_NDK_VERSION=r23b
-#ANDROID_NDK_BUILD=23.1.7779620
-#ANDROID_NDK_WIN_IMPORT=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip
-#ANDROID_NDK_MAC_IMPORT=http://dl.google.com/android/repository/android-ndk-r23b-darwin.zip
-#ANDROID_NDK_LINUX_IMPORT=http://dl.google.com/android/repository/android-ndk-r23b-linux.zip
-#ANDROID_NDK_ANDROID_IMPORT=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip
+#android_ndk_Version=r23b
+#android_ndk_Build=23.1.7779620
+#android_ndk_Windows_Import=https://dl.google.com/android/repository/android-ndk-r23b-windows.zip
+#android_ndk_Mac_Import=http://dl.google.com/android/repository/android-ndk-r23b-darwin.zip
+#android_ndk_Linux_Import=http://dl.google.com/android/repository/android-ndk-r23b-linux.zip
+#android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip
 
 # r23c
-ANDROID_NDK_VERSION=r23c
-ANDROID_NDK_BUILD=23.2.8568313
-ANDROID_NDK_WIN_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-windows.zip
-ANDROID_NDK_MAC_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip
-ANDROID_NDK_LINUX_IMPORT=https://dl.google.com/android/repository/android-ndk-r23c-linux.zip
-#ANDROID_NDK_ANDROID_IMPORT=https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
-ANDROID_NDK_ANDROID_IMPORT=https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip
+android_ndk_Version=r23c
+android_ndk_Build=23.2.8568313
+android_ndk_Windows_Import=https://dl.google.com/android/repository/android-ndk-r23c-windows.zip
+android_ndk_Mac_Import=https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip
+android_ndk_Linux_Import=https://dl.google.com/android/repository/android-ndk-r23c-linux.zip
+#android_ndk_Android_Import=https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
+android_ndk_Android_Import=https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip

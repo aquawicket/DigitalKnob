@@ -17,9 +17,10 @@ include_guard()
 # https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${AUBIO_IMPORT})
+dk_validate			(Target_Config  "dk_Target_Config()")
+dk_import			(${aubio_Import})
 
-dk_include			(${AUBIO_DIR}/src)
+dk_include			(${AUBIO}/src)
 if(Windows AND MSVC)
 	dk_libDebug		(${AUBIO_DEBUG_DIR}/aubio.lib)
 	dk_libRelease	(${AUBIO_RELEASE_DIR}/aubio.lib)
@@ -28,5 +29,5 @@ else()
 	dk_libRelease	(${AUBIO_RELEASE_DIR}/libaubio.a)
 endif()
 
-#dk_configure		(${AUBIO_DIR})
-dk_build			(${AUBIO_DIR})
+#dk_configure		(${AUBIO})
+dk_build			(${AUBIO})
