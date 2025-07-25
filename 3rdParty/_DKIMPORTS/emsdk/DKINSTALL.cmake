@@ -27,6 +27,7 @@ if(Windows_Host)
 endif()
 
 dk_import(https://github.com/emscripten-core/emsdk/archive/861ce44b.zip)
+dk_assertPath(${EMSDK})
 
 # https://storage.googleapis.com
 # https://storage.googleapis.com/webassembly
@@ -68,7 +69,7 @@ endif()
 #endif()
 
 if(NOT EXISTS "${EMSDK}/upstream")
-
+	# TODO
 endif()
 
 if(EXISTS "${EMSDK}/upstream/emscripten/src/settings.js")
@@ -91,14 +92,20 @@ dk_set				(EMSDK_TOOLCHAIN_FILE 		"${EMSDK}/upstream/emscripten/cmake/Modules/Pl
 dk_set				(EMSDK_GENERATOR 			"Unix Makefiles")
 dk_set				(EMSDK_AR 					"${EMSDK}/upstream/emscripten/emar${bat}")				# Name of archiving tool for static libraries.
 dk_assertPath		(EMSDK_AR)
-if(Windows_Host)
-	dk_validate		(MSYS2 						"dk_depend(msys2)")
-	dk_installPackage(make)
-	dk_findProgram	(EMSDK_MAKE_PROGRAM make 	"${MSYS2}/usr/bin")
-else()
-	dk_set			(EMSDK_MAKE_PROGRAM			"${EMSDK}/upstream/emscripten/emmake${bat}")
-endif()
-dk_assertPath		(EMSDK_MAKE_PROGRAM)
+
+#if(Windows_Host)
+#	dk_validate			(MSYS2 "dk_depend(msys2)")
+#	dk_installPackage	(make)
+#	dk_findProgram		(EMSDK_MAKE_PROGRAM mingw32-make.exe "${MSYS2}/usr/bin")
+#	#dk_set				(EMSDK_MAKE_PROGRAM	"${EMSDK}/upstream/emscripten/emmake${bat}")
+#	dk_assertPath		(EMSDK_MAKE_PROGRAM)
+#elseif(Linux_Host)
+#	dk_set				(EMSDK_MAKE_PROGRAM	make)
+#else()
+#	dk_set				(EMSDK_MAKE_PROGRAM	"${EMSDK}/upstream/emscripten/emmake${bat}")
+#	dk_assertPath		(EMSDK_MAKE_PROGRAM)
+#endif()
+
 #dk_set				(EMSDK_C_COMPILER		    "${EMSDK}/upstream/bin/clang.exe")
 #dk_set				(EMSDK_CXX_COMPILER	    	"${EMSDK}/upstream/bin/clang++.exe")
 dk_set				(EMSDK_C_COMPILER		    "${EMSDK}/upstream/emscripten/emcc${bat}")
