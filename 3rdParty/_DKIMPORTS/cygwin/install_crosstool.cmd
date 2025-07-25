@@ -7,7 +7,7 @@ echo ###### install_crosstool.cmd ######
 %dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 set "CYGWIN=%DK3RDPARTY_DIR%\cygwin-setup-x86_64"
 
-%dk_call% dk_validate DKIMPORT_DIR "%dk_call% dk_DKIMPORT_DIR"
+%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
 ::/cygdrive/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh
 set "CROSSTOOL_NG_BUILD_SH=%DKIMPORT_DIR%/cygwin/crosstool-ng-build.sh")
