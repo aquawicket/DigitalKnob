@@ -4,14 +4,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
+set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 ::####################################################################
 ::# DKINSTALL()
 ::#
 :DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 1
-	
-	if "%~1" equ "" (%dk_call% dk_error "DKBash/DKINSTALL requires an argument" & pause & %return%)
 	
 	if exist "%BASH_EXE%" (
 		if "%bash_ENV%" equ "%~1" (
@@ -20,9 +19,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	set "bash_ENV=%~1"
-	echo DKBash/DKINSTALL %bash_ENV%
+	if "%bash_ENV%" equ "" (set "bash_ENV=%bash_DEFAULT%")
 	
-	rem ###### GIT bash.exe ######
+	rem ###### GIT ######
 	if "%bash_ENV%" equ "GIT" (
 		%dk_call% dk_validate GIT "%dk_call% dk_depend git"
 		set "GIT_BASH_EXE=!GIT!/bin/bash.exe"
@@ -31,14 +30,23 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "BASH_ICON=!GIT_BASH_ICON!"
 	)
 		
-	rem ###### MSYS2 bash.exe ######
+	rem ###### MSYS2 ######
 	if "%bash_ENV%" equ "MSYS2" (
-		echo %dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
 		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
 		set "MSYS2_BASH_EXE=!MSYS2!/usr/bin/bash.exe"
 		set "MSYS2_BASH_ICON=!MSYS2!/msys2.exe"
 		set "BASH_EXE=!MSYS2_BASH_EXE!"
 		set "BASH_ICON=!MSYS2_BASH_ICON!"
+	)
+	
+	rem ###### WSL ######
+	if "%bash_ENV%" equ "WSL" (
+		%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
+		%dk_call% dk_assertPath WSL_EXE
+		set "WSL_BASH_EXE=C:/Windows/System32/bash.exe"
+		set "WSL_BASH_ICON=!WSL_EXE!"
+		set "BASH_EXE=!WSL_BASH_EXE!"
+		set "BASH_ICON=!WSL_BASH_ICON!"
 	)
 
 	
@@ -52,6 +60,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "GIT_BASH_ICON=%GIT_BASH_ICON%"
 		set "MSYS2_BASH_EXE=%MSYS2_BASH_EXE%"
 		set "MSYS2_BASH_ICON=%MSYS2_BASH_ICON%"
+		set "WSL_BASH_EXE=%WSL_BASH_EXE%"
+		set "WSL_BASH_ICON=%WSL_BASH_ICON%"
 		set "BASH_EXE=%BASH_EXE%"
 		set "BASH_ICON=%BASH_ICON%"
 	)
