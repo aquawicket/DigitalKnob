@@ -53,19 +53,20 @@ setlocal enableDelayedExpansion
 		set "str=%%G"
 		if "x!str:%~2=!x" neq "x!str!x" (exit /b 0)
 	)
-    exit /b 1
-%endfunction%
+exit /b 1
+
 
 :dk_firewallAllow name file
 setlocal enableDelayedExpansion
 	set "_name_=%~1"
 	set "_file_=%~2"
-	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_:/=\%" && (exit /b 0)
+	set "_file_=%_file_:/=\%
+	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_%" && (exit /b 0)
 	::###### netsh ######
-	netsh advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
-	netsh advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any 1>nul 2>nul
+	netsh advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
+	netsh advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
 	::###### Windows Firewall Control ######
 	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe")
 	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe")
-	if exist "%WFC_APP%" ("%ComSpec%" /c "%WFC_APP%" -allow "%_file_:/=\%")
-%endfunction%
+	if exist "%WFC_APP%" ("%ComSpec%" /c "%WFC_APP%" -allow %_file_%)
+exit /b 0
