@@ -3,7 +3,6 @@ echo "########## DK.sh($*) ##########"
 echo "\$DK_LOADED = ${DK_LOADED}"
 [ -z "${DK_LOADED-}" ] && export DK_LOADED=1 || return
 echo "\$DK_LOADED = ${DK_LOADED}"
-echo "\$DKBASH_RELOADED = ${DKBASH_RELOADED}"
 echo "\$SHLVL = ${SHLVL}"
 echo "\$_ = $_";
 echo "\$\$ = $$";
@@ -67,7 +66,7 @@ DK(){
 	}
     
 	###### Reload Main Script with bash ######
-	[ -z "${DKBASH_RELOADED-}" ] && dkreloadWithBash
+	dkreloadWithBash
 	#[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
 
 	############ Set Options ############
@@ -160,14 +159,12 @@ DK(){
 # dkreloadWithBash()
 #
 dkreloadWithBash() {
-	[ -n "${DKBASH_RELOADED-}" ] && return 0;
 	[ -e "${BASH_EXE}" ] && return 0;
 	
 	(command -v bash) &>/dev/null || dk_installPackage bash || (echo "ERROR: dk_installPackage bash failed"; exit ${BASH_LINENO[0]};)
 	(command -v bash) &>/dev/null && export BASH_EXE=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
 	echo "Reloading ${DKSCRIPT_PATH} with ${BASH_EXE} . . .";
 	unset DK_LOADED;
-	export DKBASH_RELOADED=1;
 	[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}" || (echo "ERROR: 'dkreloadWithBash' failed"; exit ${BASH_LINENO[0]};)
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}';
 }
