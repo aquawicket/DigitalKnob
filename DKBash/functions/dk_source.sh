@@ -4,9 +4,10 @@ if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)      || export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null) && HOME=$(cygpath -u $USERPROFILE)                                 && echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null) && CMD_EXE=$(command -v 'cmd.exe')                                 && echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null) && HOME=$(wslpath -u ${USERPROFILE})                               && echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)    && export BASH_EXE=$(command -v bash)                              && echo "BASH_EXE = ${BASH_EXE}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $0)/DK.sh"                              && echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]                  || export DK_SH=$(find "${HOME}" -name "DK.sh")                    && echo "DK_SH = ${DK_SH}"
 	[ -e "${BASH_EXE}" ]               && exec "${BASH_EXE}" "${DK_SH}" "$0" $* || exec "${DK_SH}" "$0" $*
 fi
@@ -19,13 +20,13 @@ fi
 #    @function_name	- the function name of the file to source and download if needed
 #
 dk_source(){
-	#echo "dk_source($*)"
+	#echo "dk_source($*)";
 	
 	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
 	#echo "1 = ${1}"
 	[ -z "${1}" ] && (builtin echo "ERROR: dk_source($*) argument is empty"; return;)
 	
-	_fnc_=$1
+	_fnc_=$1;
 	#DKHOME_DIR="/c/Users/Administrator"
 	[ -z "${DKHOME_DIR-}" ] && export DKHOME_DIR=$(DKHOME_DIR)
 	[ -z "${DKHTTP_DIR-}" ] && export DKHTTP_DIR="https://raw.githubusercontent.com/aquawicket"
@@ -95,6 +96,7 @@ dk_source(){
 
 	
 	if [ -e "${_fnc_}" ]; then
+		#echo "sourcing ${_fnc_}";
 		[ ! "${1#*"${_fnc_}"}" = ".sh" ] && . "${_fnc_}";
 		return;
 	fi

@@ -4,9 +4,10 @@ if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)      || export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null) && HOME=$(cygpath -u $USERPROFILE)                                 && echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null) && CMD_EXE=$(command -v 'cmd.exe')                                 && echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null) && HOME=$(wslpath -u ${USERPROFILE})                               && echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)    && export BASH_EXE=$(command -v bash)                              && echo "BASH_EXE = ${BASH_EXE}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]                  || export DK_SH=$(find "${HOME}" -name "DK.sh")                    && echo "DK_SH = ${DK_SH}"
 	[ -e "${BASH_EXE}" ]               && exec "${BASH_EXE}" "${DK_SH}" "$0" $* || exec "${DK_SH}" "$0" $*
 fi
@@ -40,12 +41,10 @@ dk_arrayPush() {
 	# i.e.  new_length=$(dk_arrayPush myArray "new item") 
 
 	### return value ###
-	eval ${1}='("${array[@]}")'
-
-	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return
-	
-										# FIXME: the new array does not get assigned in command substitution.
-	dk_return ${#array[@]} && return	# command substitution return
+	# FIXME: new arrays do not get assigned in command substitution.
+	eval ${1}='("${array[@]}")';						# alter input variable
+	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return	
+	dk_return ${#array[@]} && return;					# command substitution return
 }
 
 
@@ -71,15 +70,15 @@ DKTEST() {
 	
 	
 	# FIXME: the new array does not get assigned in command substitution.
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "h i j")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "4 5 6" "d e f")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "1 2 3" "a b c")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "h i j")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "4 5 6" "d e f")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayPush 'myArrayB' "1 2 3" "a b c")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
 }

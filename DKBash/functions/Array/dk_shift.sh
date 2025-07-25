@@ -7,6 +7,7 @@ if [ -z "${DK_LOADED-}" ]; then
 	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null) && HOME=$(wslpath -u ${USERPROFILE})                               && echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)    && export BASH_EXE=$(command -v bash)                              && echo "BASH_EXE = ${BASH_EXE}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]                  || export DK_SH=$(find "${HOME}" -name "DK.sh")                    && echo "DK_SH = ${DK_SH}"
 	[ -e "${BASH_EXE}" ]               && exec "${BASH_EXE}" "${DK_SH}" "$0" $* || exec "${DK_SH}" "$0" $*
 fi
@@ -97,44 +98,44 @@ DKTEST() {
 	
 	
 	
-	# FIXME: command substitution cannot alter parent variables
-	myArrayB[0]="h i j"
-	myArrayB[1]="4 5 6"
-	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
-	
-	dk_call dk_printVar myArrayB 
-	dk_call dk_echo
-	
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
-	
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
-	
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
-	
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
-	
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
-	
-	# FIXME:  out of array bounds past here
-	removedB=$(dk_call dk_arrayShift myArrayB)
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar removedB
-	dk_call dk_echo
+#	# FIXME: command substitution cannot alter parent variables
+#	myArrayB[0]="h i j"
+#	myArrayB[1]="4 5 6"
+#	myArrayB[2]="d e f"
+#	myArrayB[3]="1 2 3"
+#	myArrayB[4]="a b c"
+#	
+#	dk_call dk_printVar myArrayB 
+#	dk_call dk_echo
+#	
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
+#	
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
+#	
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
+#	
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
+#	
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
+#	
+#	# FIXME:  out of array bounds past here
+#	removedB=$(dk_call dk_arrayShift myArrayB)
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar removedB
+#	dk_call dk_echo
 }

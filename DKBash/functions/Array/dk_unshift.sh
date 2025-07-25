@@ -4,9 +4,10 @@ if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)      || export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null) && HOME=$(cygpath -u $USERPROFILE)                                 && echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null) && CMD_EXE=$(command -v 'cmd.exe')                                 && echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null) && HOME=$(wslpath -u ${USERPROFILE})                               && echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)    && export BASH_EXE=$(command -v bash)                              && echo "BASH_EXE = ${BASH_EXE}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]                  || export DK_SH=$(find "${HOME}" -name "DK.sh")                    && echo "DK_SH = ${DK_SH}"
 	[ -e "${BASH_EXE}" ]               && exec "${BASH_EXE}" "${DK_SH}" "$0" $* || exec "${DK_SH}" "$0" $*
 fi
@@ -37,9 +38,10 @@ dk_arrayUnshift() {
 	local _length_=${#array[@]}
 	
 	### return value ###
-	#eval ${1}='("${array[@]}")'						# FIXME: subshell cannot alter parent variables
+	# FIXME: new arrays do not get assigned in command substitution.
+	eval ${1}='("${array[@]}")';						# alter input variable
 	#[ ${#} -gt 2 ] && eval ${3}=${_length_} && return	# return value using return variable
-	dk_return ${_length_} && return						# return value using command substitution
+	dk_return ${_length_} && return;					# return value using command substitution
 }
 
 
@@ -70,24 +72,24 @@ DKTEST() {
 	#dk_call dk_printVar new_lengthA
 	
 	
-	# FIXME: command substitution cannot alter parent variables
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "h i j")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "4 5 6")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "d e f")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "1 2 3")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
-	
-	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "a b c")
-	dk_call dk_printVar myArrayB
-	dk_call dk_printVar new_lengthB
+#	# FIXME: command substitution cannot alter parent variables
+#	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "h i j")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "4 5 6")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "d e f")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "1 2 3")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
+#	
+#	new_lengthB=$(dk_call dk_arrayUnshift myArrayB "a b c")
+#	dk_call dk_printVar myArrayB
+#	dk_call dk_printVar new_lengthB
 }

@@ -4,9 +4,10 @@ if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)      || export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null) && HOME=$(cygpath -u $USERPROFILE)                                 && echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null) && CMD_EXE=$(command -v 'cmd.exe')                                 && echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	[ -z "${USERPROFILE}" ]            && USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')      && echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null) && HOME=$(wslpath -u ${USERPROFILE})                               && echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)    && export BASH_EXE=$(command -v bash)                              && echo "BASH_EXE = ${BASH_EXE}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]                  || export DK_SH=$(find "${HOME}" -name "DK.sh")                    && echo "DK_SH = ${DK_SH}"
 	[ -e "${BASH_EXE}" ]               && exec "${BASH_EXE}" "${DK_SH}" "$0" $* || exec "${DK_SH}" "$0" $*
 fi
@@ -31,20 +32,42 @@ fi
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
 #
 dk_arrayJoin() {
+	dk_call dk_echo "### dk_arrayJoin($*) ###";
 	dk_debugFunc 2 3
-	#dk_call dk_validateArgs array string optional:rtn_var
 
-	eval local _array_='("${'$1'[@]}")'			#typeset -n _array_=${1}
-	for ((i=0; i < ${#_array_[@]}; i++ )); do
-		if [ -z "${arrayJoin-}" ]; then
-			local arrayJoin="${_array_[${i}]}"
-		else
-		    local arrayJoin="${arrayJoin}${2}${_array_[${i}]}"
-		fi
-	done
+	#_array_="";
+	#unset _array_;
+	#eval unset _array_;
+	#unset arrayJoin;
+	arrayJoin="";
+	#eval unset arrayJoin;
+	#export -n arrayJoin;
+	#eval export -n arrayJoin;
 	
-	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' && return
-	dk_return "${arrayJoin}" && return	
+	#dk_call dk_printVar _array_;
+	#dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
+	#[ -n "${3-}" ] && dk_call dk_debug "${3-} = '${!3-}'";
+	
+	#typeset -n _array_=${1};
+	eval local _array_='("${'${1}'[@]}")';		#typeset -n _array_=${1}
+	#local arrayJoin="";
+	
+	for ((i=0; i < ${#_array_[@]}; i++ )); do
+		[ ${i-} -gt 0 ] && arrayJoin+="${2-}";
+		arrayJoin+="${_array_[${i-}]}";
+	done
+	export arrayJoin;
+	
+	###### return ######
+	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"';
+	[ ${#} -lt 3 ] && builtin echo "${arrayJoin}";
+	dk_return "${arrayJoin}";
+	
+	
+	#dk_call dk_printVar _array_;
+	#dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
+	#[ -n "${3-}" ] && dk_call dk_debug "${3-} = '${!3-}'";
+	return 0;	
 }
 
 
@@ -52,24 +75,42 @@ dk_arrayJoin() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	myArrayA[0]="a b c"
-	myArrayA[1]="1 2 3"
-	myArrayA[2]="d e f"
-	myArrayA[3]="4 5 6"
-	myArrayA[4]="h i j"
+	myArrayA[0]="a b c";
+	myArrayA[1]="1 2 3";
+	myArrayA[2]="d e f";
+	myArrayA[3]="4 5 6";
+	myArrayA[4]="h i j";
+	myArrayA[5]="7 8 9";
+	dk_call dk_arrayJoin myArrayA "," myStringA;	
+	dk_call dk_printVar myArrayA;
+	dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
+	dk_call dk_debug "myStringA = '${myStringA-}'";
 	
-	dk_call dk_arrayJoin myArrayA "," myStringA
-	dk_call dk_printVar myStringA
 	
 	
-	myArrayB[0]="h i j"
-	myArrayB[1]="4 5 6"
-	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
+	dk_call dk_echo;
+	dk_call dk_echo;
+	dk_call dk_echo;
+	myArrayB[0]="r s t";
+	myArrayB[1]="4 5 6";
+	myArrayB[2]="u v w";
+	myArrayB[3]="x y z";
+	dk_call dk_arrayJoin myArrayB ";" myStringB;
+	dk_call dk_printVar myArrayB;
+	dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
+	dk_call dk_debug "myStringB = '${myStringB-}'";
 	
-	myStringB=$(dk_call dk_arrayJoin myArrayB ",")
-	dk_call dk_printVar myStringB
+	
+	
+	dk_call dk_echo;
+	dk_call dk_echo;
+	dk_call dk_echo;
+	myArrayC[0]="1 1 1";
+	myArrayC[1]="z z z";
+	myStringC=$(dk_call dk_arrayJoin myArrayC "_");
+	dk_call dk_printVar myArrayC;
+	#dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
+	dk_call dk_debug "myStringC = '${myStringC-}'";
 }
