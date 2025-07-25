@@ -98,7 +98,7 @@ dk_source(){
 	if [ -e "${_fnc_}" ]; then
 		#echo "sourcing ${_fnc_}";
 		[ ! "${1#*"${_fnc_}"}" = ".sh" ] && . "${_fnc_}";
-		return;
+		return $?;
 	fi
 }
 

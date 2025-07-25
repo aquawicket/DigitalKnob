@@ -59,15 +59,9 @@ dk_arrayJoin() {
 	export arrayJoin;
 	
 	###### return ######
-	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"';
-	[ ${#} -lt 3 ] && builtin echo "${arrayJoin}";
-	dk_return "${arrayJoin}";
-	
-	
-	#dk_call dk_printVar _array_;
-	#dk_call dk_debug "arrayJoin = '${arrayJoin-}'";
-	#[ -n "${3-}" ] && dk_call dk_debug "${3-} = '${!3-}'";
-	return 0;	
+	[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' || builtin echo "${arrayJoin}";
+	#[ ${#} -gt 2 ] && eval ${3}='"${arrayJoin}"' || dk_return "${arrayJoin}";
+	return $?;	
 }
 
 

@@ -40,11 +40,11 @@ dk_arrayShift() {
 	array=("${array[@]:1}")
 	
 	### return value ###
-	eval ${1}='("${array[@]}")'
-	[ ${#} -gt 1 ] && eval ${2}='"${removedElement}"' && return	# return value using return variable
-	
 	# FIXME: command substitution cannot alter parent variables
-	dk_return "${removedElement}" && return						# return value using command substitution
+	eval ${1}='("${array[@]}")'																	# alter the original variable
+	[ ${#} -gt 1 ] && eval ${2}='"${removedElement}"' || builtin echo "${removedElement}";
+	#[ ${#} -gt 1 ] && eval ${2}='"${removedElement}"' || dk_return "${removedElement}";		# return value using command substitution
+	return $?;				
 }
 
 

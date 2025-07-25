@@ -31,8 +31,9 @@ dk_arrayLength() {
 	
 	eval export dk_arrayLength=${#array[@]};
 	
-	[ ${#} -gt 1 ] && eval ${2}=${dk_arrayLength} && return;
-	dk_return ${dk_arrayLength} && return;
+	[ ${#} -gt 1 ] && eval ${2}=${dk_arrayLength} || builtin echo "${dk_arrayLength}";
+	#[ ${#} -gt 1 ] && eval ${2}=${dk_arrayLength} || dk_return ${dk_arrayLength};
+	return $?;
 }
 
 

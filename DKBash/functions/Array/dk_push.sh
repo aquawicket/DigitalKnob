@@ -42,9 +42,12 @@ dk_arrayPush() {
 
 	### return value ###
 	# FIXME: new arrays do not get assigned in command substitution.
-	eval ${1}='("${array[@]}")';						# alter input variable
-	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return	
-	dk_return ${#array[@]} && return;					# command substitution return
+	arrayPush=${#array[@]};
+	export arrayPush;
+	eval ${1}='("${array[@]}")';													# alter input variable
+	#[ ${#} -gt 2 ] && eval '${3}=${arrayPush}';# || builtin echo "${arrayPush}";	# variable parameter return	
+	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} || dk_return ${#array[@]};			# command substitution return
+	return $?;
 }
 
 
@@ -55,17 +58,21 @@ dk_arrayPush() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_arrayPush myArrayA "a b c" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call dk_printVar myArrayA;
+	dk_call dk_arrayPush myArrayA "a b c" #lengthA
+	dk_call dk_printVar myArrayA;
+	dk_call dk_debug "arrayPush = ${arrayPush}";
+	#dk_call dk_debug "lengthA = ${lengthA}";
 	
-	dk_call dk_arrayPush myArrayA "1 2 3" "d e f" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call dk_arrayPush myArrayA "1 2 3" "d e f" #lengthA
+	dk_call dk_printVar myArrayA;
+	dk_call dk_debug "arrayPush = ${arrayPush}";
+	#dk_call dk_debug "lengthA = ${lengthA}";
 	
-	dk_call dk_arrayPush myArrayA "4 5 6" "h i j" # new_lengthA
-	dk_call dk_printVar myArrayA
-	# dk_call dk_printVar new_lengthA
+	dk_call dk_arrayPush myArrayA "4 5 6" "h i j" #lengthA
+	dk_call dk_printVar myArrayA;
+	dk_call dk_debug "arrayPush = ${arrayPush}";
+	#dk_call dk_debug "lengthA = ${lengthA}";
 	
 	
 	

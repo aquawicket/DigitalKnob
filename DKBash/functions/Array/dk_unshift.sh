@@ -35,13 +35,14 @@ dk_arrayUnshift() {
 	
 	eval local array='("${'$1'[@]}")'					# typeset -n array=${1}
 	array=("${@:2}" "${array[@]}");
-	local _length_=${#array[@]}
+	arrayUnshift="${#array[@]}";
 	
 	### return value ###
-	# FIXME: new arrays do not get assigned in command substitution.
-	eval ${1}='("${array[@]}")';						# alter input variable
-	#[ ${#} -gt 2 ] && eval ${3}=${_length_} && return	# return value using return variable
-	dk_return ${_length_} && return;					# return value using command substitution
+	export arrayUnshift;
+	eval ${1}='("${array[@]}")';													# alter input variable
+	#[ ${#} -gt 2 ] && eval ${3}=${_length_} || builtin echo "${arrayUnshift}";		# return value using return variable
+	#[ ${#} -gt 2 ] && eval ${3}=${_length_} || dk_return "${arrayUnshift}";		# return value using command substitution
+	return $?;					
 }
 
 
@@ -51,25 +52,25 @@ dk_arrayUnshift() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	dk_call dk_arrayUnshift myArrayA "a b c" #new_lengthA
+	dk_call dk_arrayUnshift myArrayA "a b c" #lengthA
 	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_debug "arrayUnshift = ${arrayUnshift-}"; 
 	
-	dk_call dk_arrayUnshift myArrayA "1 2 3" #new_lengthA
+	dk_call dk_arrayUnshift myArrayA "1 2 3" #lengthA
 	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_debug "arrayUnshift = ${arrayUnshift}"; 
 	
-	dk_call dk_arrayUnshift myArrayA "d e f" #new_lengthA
+	dk_call dk_arrayUnshift myArrayA "d e f" #lengthA
 	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_debug "arrayUnshift = ${arrayUnshift}"; 
 	
-	dk_call dk_arrayUnshift myArrayA "4 5 6" #new_lengthA
+	dk_call dk_arrayUnshift myArrayA "4 5 6" #lengthA
 	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_debug "arrayUnshift = ${arrayUnshift}"; 
 	
-	dk_call dk_arrayUnshift myArrayA "h i j" #new_lengthA
+	dk_call dk_arrayUnshift myArrayA "h i j" #lengthA
 	dk_call dk_printVar myArrayA
-	#dk_call dk_printVar new_lengthA
+	dk_call dk_debug "arrayUnshift = ${arrayUnshift}"; 
 	
 	
 #	# FIXME: command substitution cannot alter parent variables

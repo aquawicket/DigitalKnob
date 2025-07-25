@@ -40,9 +40,10 @@ dk_arrayPop() {
 	
 	### return value ###
 	# FIXME: command substitution cannot alter parent variables
-	eval ${1}='("${array[@]}")'  
-	[ ${#} -gt 1 ] && eval ${2}='"${dk_arrayPop}"' && return	# return value using return variable
-	dk_return "${dk_arrayPop}" && return						# return value using command substitution
+	eval ${1}='("${array[@]}")'																# alter the original   
+	[ ${#} -gt 1 ] && eval ${2}='"${dk_arrayPop}"' || builtin echo "${dk_arrayPop}";		# return value using return variable
+	#[ ${#} -gt 1 ] && eval ${2}='"${dk_arrayPop}"' || dk_return "${dk_arrayPop}"; 			# return value using command substitution
+	return $?;
 }
 
 
