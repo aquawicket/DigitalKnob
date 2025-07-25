@@ -3,7 +3,6 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-TODO: Complete me
 
 ::#########################################################################
 ::# dk_getParameter(name) REMOVE
@@ -12,23 +11,23 @@ TODO: Complete me
 ::#	If the named parameter was defined, set it's value to it's name.
 ::#	This allows it to be optionally sent by value to functions
 ::#
-::#	@name - the name of the variable to check foreach
-::#	@${ARGV} - The parameter list of the function
+::#	@name - the name of the variable to check
+::#	@${ARGV} - The full parameter list of the function
 ::#	@REMOVE (optional) - Remove the parameter from ARGV after setting the state   
 ::#
 ::#	EXAMPLE: dk_getParameter(MY_ARG %ARGV})
 ::#
 :dk_getParameter
-::%setlocal%
+%setlocal%
 	%dk_call% dk_debugFunc 1 2
 	
 	::###### ARGV - dk_getParameter args ######
-	::#echo "dk_getParameter ARGC = %ARGC%" 
-	::#echo "dk_getParameter ARGV = %ARGV%" 
+	::#echo dk_getParameter ARGC = %ARGC%
+	::#echo dk_getParameter ARGV = %ARGV% 
 	
 	::###### ARGN - dk_getParameter extra args ######
-	::#echo("dk_getParameterbARGN = %ARGN%"
-	::#echo("dk_getParameterbARGN = %ARGN%"
+	::#echo dk_getParameterbARGN = %ARGN%
+	::#echo dk_getParameterbARGN = %ARGN%
 	
 	::###### PARGV - Parent Function args ######
 	set "PARGC=0"

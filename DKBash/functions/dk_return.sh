@@ -14,7 +14,7 @@ ret_val() {
 	#echo "dk_return($*)"
 	if [ "${1-}" = "" ]; then
 		[ -z "${2-}" ] && return $(false)
-		[ -v "${2-}" ] && if [ ${2-} -gt 9 ]; then  # [ ${2-} -gt 9 ] = don't test names that match 0-9, positional parameters
+		[ -v "${2-}" ] && if ! dk_call dk_isNumber ${2-}; then  # [ ${2-} -gt 9 ] = don't test names that match 0-9, positional parameters
 			#echo "is variable"
 			if [[ "$(declare -p ${2-})" =~ "declare -a" ]]; then
 				#echo "is array"

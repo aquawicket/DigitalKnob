@@ -31,28 +31,33 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_info "Extracting '%dk_extract_file%' to '%dk_extract_dest%' . . ."
 
+	::###### Try tar ######
+    if not exist "%dk_extract_dest%" (
+		%dk_call% dk_mkdir "%dk_extract_dest%" 
+		tar --help %NO_OUTPUT% && tar -xf "%dk_extract_file%" -C "%dk_extract_dest%"
+		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
+	)
+	
 	::###### Try dk_callDKPowershell ######
 	if not exist "%dk_extract_dest%" (
 		%dk_call% dk_callDKPowershell dk_extract "%dk_extract_file%" "%dk_extract_dest%"
+		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 
-	echo "%dk_extract_dest%"
-	
 	::###### Try powershell.exe [System.IO.Compression.ZipFile]::ExtractToDirectory ######
 	if not exist "%dk_extract_dest%" (
 		%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 		%POWERSHELL_EXE% Add-Type -Assembly 'System.IO.Compression.Filesystem'; [System.IO.Compression.ZipFile]::ExtractToDirectory^('%dk_extract_file%', '%dk_extract_dest%'^)
+		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 
-	::###### Try tar ######
-    if not exist "%dk_extract_dest%" (
-		%dk_call% dk_mkdir "%dk_extract_dest%" && tar --help && tar -xf "%dk_extract_file%" -C "%dk_extract_dest%"
-	)
-	
 	::###### Try dk_powershell Expand-Archive *** VERY SLOW *** ######
 	if not exist "%dk_extract_dest%" (
 		%dk_call% dk_powershell Expand-Archive '"%dk_extract_file%"' -DestinationPath '"%dk_extract_dest%"'
+		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
+	
+	%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 %endfunction%
 
 
@@ -63,6 +68,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 0
 
+	%dk_call% dk_extract "C:/Users/Administrator/DigitalKnob/download/msys2-base-x86_64-20241208.tar.xz" "C:/Users/Administrator/DigitalKnob/download/msys2-base-x86_64-20241208.tar.xz_EXTRACTED"
+	%endfunction%
+	
     %dk_call% dk_selectFile
     %dk_call% dk_extract "%dk_selectFile%"
 %endfunction%

@@ -23,54 +23,66 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 	
-	%dk_call% dk_getParameter NO_HALT REMOVE
+	
+	set "url=%~1"
+	%dk_call% dk_allButFirstArgs %*
+	set ARGN=%dk_allButFirstArgs%
+	::%dk_call% dk_getParameter NO_HALT REMOVE
 	
 	%dk_call% dk_importVariables %url% %ARGN%
 	%dk_call% dk_assertVar CURRENT_PLUGIN
 
-	if "%DKOFFLINE%" neq "1" (
-		rem ###### Import from Git Repository ######
-		%dk_call% dk_getExtension %url% extension
-		if "!extension!" equ ".git" (
+::	if "%DKOFFLINE%" neq "1" (
+::		rem ###### Import from Git Repository ######
+::		%dk_call% dk_getExtension %url% extension
+::		if "!extension!" equ ".git" (
+::			
+::			%dk_call% dk_depend git
+::			
+::			if not exist "!%CURRENT_PLUGIN%_DIR!/.git" (
+::				%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+::				%dk_call% dk_chdir "%DK3RDPARTY_DIR%"
+::				if exist !%CURRENT_PLUGIN%_DIR! (
+::					%dk_call% dk_delete(!%CURRENT_PLUGIN%_DIR!)
+::				) else (
+::					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)
+::				)
+::				%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
+::				%dk_call% dk_command %GIT_EXE% clone !%CURRENT_PLUGIN%_URL! !%CURRENT_PLUGIN%_DIR!
+::			)
+::			%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
+::			%dk_call% dk_exec %GIT_EXE% checkout -- .
+::			%dk_call% dk_exec %GIT_EXE% checkout !%CURRENT_PLUGIN%_BRANCH!)
+::			%dk_call% dk_exec %GIT_EXE% pull
+::			if defined %CURRENT_PLUGIN%_TAG (
+::				%dk_call% dk_exec %GIT_EXE% checkout !{%CURRENT_PLUGIN%_TAG!
+::			)
+::			
+::		rem ###### Import from Download File ######
+::		) else (
+			%dk_call% dk_debug "CURRENT_PLUGIN = %CURRENT_PLUGIN%"
+			%dk_call% dk_debug "%CURRENT_PLUGIN%_IMPORT_NAME = !%CURRENT_PLUGIN%_IMPORT_NAME!"
+			%dk_call% dk_verbose "%dk_call% dk_install !%CURRENT_PLUGIN%_IMPORT_NAME! %ARGN%"
 			
-			%dk_call% dk_depend git
-			
-			if not exist "!%CURRENT_PLUGIN%_DIR!/.git" (
-				%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-				%dk_call% dk_chdir "%DK3RDPARTY_DIR%"
-				if exist !%CURRENT_PLUGIN%_DIR! (
-					%dk_call% dk_delete(!%CURRENT_PLUGIN%_DIR!)
-				) else (
-					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)
-				)
-				%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-				%dk_call% dk_command %GIT_EXE% clone !%CURRENT_PLUGIN%_URL! !%CURRENT_PLUGIN%_DIR!
-			)
-			%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-			%dk_call% dk_exec %GIT_EXE% checkout -- .
-			%dk_call% dk_exec %GIT_EXE% checkout !%CURRENT_PLUGIN%_BRANCH!)
-			%dk_call% dk_exec %GIT_EXE% pull
-			if defined %CURRENT_PLUGIN%_TAG (
-				%dk_call% dk_exec %GIT_EXE% checkout !{%CURRENT_PLUGIN%_TAG!
-			)
-			
-		rem ###### Import from Download File ######
-		) else (
-			%dk_call% dk_printVar CURRENT_PLUGIN
-			%dk_call% dk_printVar %CURRENT_PLUGIN%_IMPORT_NAME
-			%dk_call% dk_verbose "dk_install(!%CURRENT_PLUGIN%_IMPORT_NAME! ${ARGN})")
-			
-			%dk_call% dk_install %CURRENT_PLUGIN% %ARGN% %NO_HALT%
-		)
-	)
+			::%dk_call% dk_install %CURRENT_PLUGIN% %ARGN% %NO_HALT%
+::		)
+::	)
 	
-	#%dk_call%  dk_getParameter PATCH %ARGV%
-	%dk_call% dk_getParameter PATCH
+	::%dk_call% dk_getParameter PATCH %ARGV%
+	::%dk_call% dk_getParameter PATCH
 	if defined PATCH (
-		%dk_call% dk_patch(!%CURRENT_PLUGIN%_IMPORT_NAME! !%CURRENT_PLUGIN%_DIR}!)
+		%dk_call% dk_patch !%CURRENT_PLUGIN%_IMPORT_NAME! !%CURRENT_PLUGIN%_DIR!
 	)
 	
 %endfunction%
+
+
+
+
+
+
+
+
 
 
 
@@ -82,5 +94,5 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	::%dk_call% #dk_import "https://github.com/madler/zlib/archive/d4768283.zip"
-	%dk_call% dk_import "https://www.dependencywalker.com/depends22_x64.zip"
+	%dk_call% dk_import https://www.dependencywalker.com/depends22_x64.zip
 %endfunction%

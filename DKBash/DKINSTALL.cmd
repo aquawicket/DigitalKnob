@@ -1,70 +1,59 @@
-@echo off
-::echo DKBash
+@echo off&::###### DK.cmd #########################################################################################################################
+if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::#################################################################################################################################################
 
-if "%~1" equ "" (goto DKINSTALL)
-
-:runDKBash
-	echo :runDKCMake %*
-	
-	set "DKBASH_FUNCTIONS_DIR=%~1"
-	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
-	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:/=/c/%"
-	set "DKBASH_FUNCTIONS_DIR_=%~1/"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	set "BASH_EXE=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
-	echo BASH_EXE = %BASH_EXE%
-
-	::###### run script ######
-	cmd /V:ON /k "%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
-
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 (
-		echo ERROR:%ERRORLEVEL%
-		pause
-	)
-	
-	:: FIXME:  bash only returns 0
-%endfunction%
-
-
-
-
-
-
-
-
+::set "DKBash_ENV=CMD"
+set "DKBash_ENV=WSL"
+::set "DKBash_ENV=WSL2"
 
 
 :DKINSTALL
-	if "%~1" neq "" (goto:eof)
-
-	echo Installing DKBash . . .
-
-	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+%setlocal%
+	if "%~1" neq "" (
+		%dk_call% dk_fatal "DKBash/DKINSTALL.cmd does not take arguments"
+		exit /b -1
+	)
 
 	::###### Install DKBash ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
-	%dk_call% dk_validate BASH_EXE "%dk_call% %DKIMPORTS_DIR%/bash/DKINSTALL.cmd"
-	::%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	::%~1
-	::ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
+	echo Installing DKBash . . .
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" "^!f^!"
-	::ftype DKBash=%ComSpec% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
-	assoc .sh=DKBash
-	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
+	
+	::########### (CMD) #############
+	if "%DKBash_ENV%" equ "CMD" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash")
+	if "%DKBash_ENV%" equ "CMD" (%dk_call% dk_assertPath BASH_EXE)
+	if "%DKBash_ENV%" equ "CMD" (set BASH_EXE="%BASH_EXE%")
+	if "%DKBash_ENV%" equ "CMD" (set "BASH_C_DIVE=/c")
+	
+	::############ (WSL) ############
+	if "%DKBash_ENV%" equ "WSL" (%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl")
+	if "%DKBash_ENV%" equ "CMD" (%dk_call% dk_assertPath WSL_EXE)
+	if "%DKBash_ENV%" equ "WSL" (set "BASH_EXE=C:/Windows/System32/bash.exe")
+	if "%DKBash_ENV%" equ "WSL" (%dk_call% dk_assertPath BASH_EXE)
+	if "%DKBash_ENV%" equ "WSL" (set BASH_EXE="%BASH_EXE%")
+	if "%DKBash_ENV%" equ "WSL" (set "BASH_C_DIVE=/mnt/c")
+	
+::	::############ (WSL2) ############
+::	if "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_validate dk_WSL_EXE "%dk_call% dk_WSL_EXE")
+::	if "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_assertPath WSL_EXE)
+::	if "%DKBash_ENV%" equ "WSL2" (set BASH_EXE="%WSL_EXE%" bash)
+::	if "%DKBash_ENV%" equ "WSL2" (set "BASH_C_DIVE=/mnt/c")
+	
+	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=%BASH_C_DIVE%^!" ^&^& %BASH_EXE% -c "^!f^!"
 
+	
+	
+	assoc .sh=DKBash
+	
+	::########### ICON #############
+	if "%DKBash_ENV%" equ "CMD" (%dk_call% dk_validate BASH_ICON "%dk_call% dk_depend bash")
+	if "%DKBash_ENV%" equ "WSL" (%dk_call% dk_validate BASH_ICON "set BASH_ICON=%WSL_EXE%")
+::	if "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_validate BASH_ICON "set BASH_ICON=%WSL_EXE%")
+	
+	%dk_call% dk_assertPath BASH_ICON
+	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_ICON%"
+	
+	
 	%dk_call% dk_success "DKBash install complete"
 %endfunction%

@@ -288,7 +288,7 @@ dk_importVariables() {
 #			fi  
 		fi  
 	fi  
-	echo "PLUGIN_INSTALL_VERSION = ${PLUGIN_INSTALL_VERSION}" 									# PLUGIN_INSTALL_VERSION	: master
+	echo "PLUGIN_INSTALL_VERSION = ${PLUGIN_INSTALL_VERSION-}" 									# PLUGIN_INSTALL_VERSION	: master
 
 	# PLUGIN_INSTALL_FOLDER
 	if ! [ -n "${PLUGIN_INSTALL_FOLDER-}" ]; then 
@@ -361,7 +361,7 @@ dk_importVariables() {
 	# echo "${PLUGIN_PREFIX}_IMPORT_FILE = ${}" 								# ZLIB_IMPORT_FILE 				: master.zip
 	
 	# <PLUGIN>_VERSION
-	dk_call dk_set ${PLUGIN_PREFIX}_VERSION "${PLUGIN_INSTALL_VERSION}" 
+	dk_call dk_set ${PLUGIN_PREFIX}_VERSION "${PLUGIN_INSTALL_VERSION-}" 
 	# echo "${PLUGIN_PREFIX}_VERSION = ${}" 								# ZLIB_VERSION  			: master
 
 	# <PLUGIN>_FOLDER

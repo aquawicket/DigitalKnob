@@ -16,7 +16,7 @@ dk_isNumber() {
 	dk_debugFunc 1
 	
 	re='^[0-9]+$'
-	dk_isVariable ${1} && local var=${!1} || local var=${1}
+	dk_call dk_isVariable ${1} && local var=${!1} || local var=${1}
 
 	[[ ${var} =~ ${re} ]] && return $(true) || return $(false)
 }

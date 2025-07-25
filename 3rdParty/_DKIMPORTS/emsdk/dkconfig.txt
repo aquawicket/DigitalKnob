@@ -6,11 +6,10 @@
 
 # https://storage.googleapis.com
 # https://storage.googleapis.com/webassembly
-# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/node-v18.20.3-win-x64.zip 									-> ${EMSDK}/node/18.20.3_64bit
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/node-v20.18.0-win-x64.zip 									-> ${EMSDK}/node/20.18.0_64bit
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/python-3.9.2-4-amd64+pywin32.zip 							-> ${EMSDK}/python/3.9.2-nuget_64bit
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/portable_jre_8_update_152_64bit.zip						-> ${EMSDK}/java/8.152_64bit
-# https://storage.googleapis.com/webassembly/emscripten-releases-builds/win/fdcf56c75a1d27fdff6525a7e03423595485ca19/wasm-binaries.zip	-> ${EMSDK}/upstream
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/win/8fe01288bc35668c13316324336ea00195dfb814/wasm-binaries.zip	-> ${EMSDK}/upstream
 # https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/mingw_4.6.2_32bit.zip										-> ${EMSDK}/mingw/4.6.2_32bit
-
 
 emsdk_Import=https://github.com/emscripten-core/emsdk/archive/861ce44b.zip

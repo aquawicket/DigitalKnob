@@ -11,16 +11,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
 ::#
 :dk_depend
-::%setlocal%
+%setlocal%
+	%dk_call% dk_debugFunc 1 99
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if exist "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" (
-		rem %dk_call% dk_source "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
-		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
-		%return%
+	%dk_call% dk_allButFirstArgs %*
+	
+	endlocal & (
+		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" %dk_allButFirstArgs%
 	)
-
-	%dk_call% dk_fatal "%DKIMPORTS_DIR%/%_plugin_%/DKINSTALL.cmd not found"
 %endfunction%
 
 
@@ -37,7 +36,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 
-	%dk_call% dk_depend "git"
+	%dk_call% dk_depend bash GIT
+	echo BASH_EXE = %BASH_EXE%
 	
+	%dk_call% dk_depend bash MSYS2
+	echo BASH_EXE = %BASH_EXE%
 %endfunction%
 
