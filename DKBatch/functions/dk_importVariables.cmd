@@ -4,6 +4,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
+
+
+
+
+
+
+
+
+
 ::#################################################################################
 ::### dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME PATH ROOT TAG VERSION
 ::#
@@ -266,7 +275,7 @@ rem ### PLUGIN_INSTALL_NAME
 	) else if defined PLUGIN_URL_NAME (
 		set "PLUGIN_INSTALL_NAME=!PLUGIN_URL_NAME!"						
 	)  																				&rem PLUGIN_INSTALL_NAME		: zlib
-	::dk_convertToCIdentifier "!PLUGIN_INSTALL_NAME!" PLUGIN_INSTALL_NAME
+	::%dk_call% dk_convertToCIdentifier "!PLUGIN_INSTALL_NAME!" PLUGIN_INSTALL_NAME
 	:: %dk_call% dk_printVar PLUGIN_INSTALL_NAME 								
 
 rem ### PLUGIN_INSTALL_VERSION
@@ -287,15 +296,16 @@ rem ### PLUGIN_INSTALL_VERSION
 				set "PLUGIN_INSTALL_VERSION=master"
 			) 
 		) 
+		
 		if "!PLUGIN_INSTALL_VERSION:~0,1!" equ "-" (
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		) 
+		
 		if "!PLUGIN_INSTALL_VERSION:~0,1!" equ "_" (
 			set "PLUGIN_INSTALL_VERSION=!PLUGIN_INSTALL_VERSION:~1!"
 		) 
 	)    																			&rem PLUGIN_INSTALL_VERSION		: master
 	rem %dk_call% dk_printVar PLUGIN_INSTALL_VERSION 							
-
 
 rem ### PLUGIN_INSTALL_FOLDER
 	set "PLUGIN_INSTALL_FOLDER="
@@ -368,7 +378,7 @@ rem ### <PLUGIN>_URL
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_URL 								&rem ZLIB_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	
 rem ### <PLUGIN>_IMPORT_FILE
-	set "!CURRENT_PLUGIN!_DK_FILE="
+	set "!CURRENT_PLUGIN!_IMPORT_FILE="
 	set "!CURRENT_PLUGIN!_IMPORT_FILE=!PLUGIN_URL_FILENAME!"
 	rem %dk_call% dk_printVar !CURRENT_PLUGIN!_IMPORT_FILE 							&rem ZLIB_IMPORT_FILE 			: master.zip
 	

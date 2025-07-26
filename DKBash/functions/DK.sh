@@ -118,7 +118,7 @@ DK(){
     dk_source __CALLER__
     dk_source dk_debugFunc
     dk_source dk_onExit        # EXIT handler
-	dk_source dk_onError       # ERR handler
+	#dk_source dk_onError       # ERR handler
 	dk_source dk_realpath
 	dk_source dk_call
 	dk_source dk_download
@@ -134,14 +134,14 @@ DK(){
 	
 	############ Get DKSCRIPT variables ############
     DKSCRIPT_VARS
-
+	
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	[ -e "${DKSCRIPT_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
 	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
 
     ###### DKTEST MODE ######
-    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && echo "${DKSCRIPT_EXT} != .sh"  && return
+    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && return $(true);
 	if dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()"; then
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
@@ -161,11 +161,15 @@ DK(){
 dkreloadWithBash() {
 	[ -e "${BASH_EXE}" ] && return 0;
 	
+	echo "dkreloadWithBash"
 	(command -v bash) &>/dev/null || dk_installPackage bash || (echo "ERROR: dk_installPackage bash failed"; exit ${BASH_LINENO[0]};)
 	(command -v bash) &>/dev/null && export BASH_EXE=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
 	echo "Reloading ${DKSCRIPT_PATH} with ${BASH_EXE} . . .";
 	unset DK_LOADED;
-	[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}" || (echo "ERROR: 'dkreloadWithBash' failed"; exit ${BASH_LINENO[0]};)
+	dk_call dk_pause;
+	
+	[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}"
+	#(echo "ERROR: 'dkreloadWithBash' failed"; exit ${BASH_LINENO[0]};)
 	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}';
 }
 
@@ -299,7 +303,9 @@ dk_installPackage() {
 
 ##################################################################################
 # run DK()
-DK
+echo "DK $*"
+DK $* 
+
 
 
 
