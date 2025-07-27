@@ -13,7 +13,7 @@ include_guard()
 
 
 #if(NOT DEFINED dk_importVariables_DEBUG)
-	set(dk_importVariables_DEBUG 1)
+#	set(dk_importVariables_DEBUG 1)
 #endif()
 #########################################################################
 # dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME _PATH_ ROOT TAG VERSION
@@ -58,19 +58,21 @@ include_guard()
 function(dk_importVariables)
 	dk_debugFunc()
 	
-	###### Args ######
-	message("dk_importVariables(${ARGV})")
+	### ARGS									"https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT ${DKTOOLS_DIR}						
+	set(ARGS ${ARGV})
+	set(ARGS ${ARGS} PARENT_SCOPE)
 	
-	# PLUGIN_URL								https://github.com/madler/zlib/archive/refs/heads/master.zip
+	### PLUGIN_URL								https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
 	dk_unset(PLUGIN_URL)
-	set(PLUGIN_URL ${ARGV0})	
+	set(PLUGIN_URL ${ARGV0})
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(PLUGIN_URL)
 	endif()
+	set(PLUGIN_URL ${PLUGIN_URL} PARENT_SCOPE)
 	
-	# PLUGIN_IMPORT_PATH
+	### PLUGIN_IMPORT_PATH						C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_unset(IMPORT_PATH)
-	dk_getParameterValue(IMPORT_PATH) 			# C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_getParameterValue(IMPORT_PATH)			
 	set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")
 	if(NOT PLUGIN_IMPORT_PATH)
 		set(PLUGIN_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}")
@@ -78,51 +80,63 @@ function(dk_importVariables)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(PLUGIN_IMPORT_PATH)
 	endif()
+	set(PLUGIN_IMPORT_PATH ${PLUGIN_IMPORT_PATH} PARENT_SCOPE)
 	
+	### BRANCH									master
 	dk_unset(BRANCH)
-	dk_getParameterValue(BRANCH) 				# master
+	dk_getParameterValue(BRANCH)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(BRANCH)
 	endif()
+	set(BRANCH ${BRANCH} PARENT_SCOPE)
 	
+	### FOLDER									zlib-master
 	dk_unset(FOLDER)
-	dk_getParameterValue(FOLDER)				# zlib-master
+	dk_getParameterValue(FOLDER)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(FOLDER)
 	endif()
+	set(FOLDER ${FOLDER} PARENT_SCOPE)
 	
+	### NAME									zlib
 	dk_unset(NAME)
-	dk_getParameterValue(NAME REMOVE)					# zlib
+	dk_getParameterValue(NAME REMOVE)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(NAME)
 	endif()
+	set(NAME ${NAME} PARENT_SCOPE)
 	
+	### _PATH_									C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
 	dk_unset(_PATH_)
-	dk_getParameterValue(_PATH_)				# C:/Users/name/DigitalKnob/Development/3rdParty/zlib-master
+	dk_getParameterValue(_PATH_)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(_PATH_)
 	endif()
+	set(_PATH_ ${_PATH_} PARENT_SCOPE)
 	
+	### ROOT									C:/Users/name/DigitalKnob/Development/3rdParty
 	dk_unset(ROOT)
-	dk_getParameterValue(ROOT REMOVE)					# C:/Users/name/DigitalKnob/Development/3rdParty
+	dk_getParameterValue(ROOT REMOVE)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(ROOT)
 	endif()
+	set(ROOT ${ROOT} PARENT_SCOPE)
 	
+	### TAG										v1.3.1
 	dk_unset(TAG)
-	dk_getParameterValue(TAG)					# v1.3.1
+	dk_getParameterValue(TAG)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(TAG)
 	endif()
+	set(TAG ${TAG} PARENT_SCOPE)
 	
+	### VERSION									master
 	dk_unset(VERSION)
-	dk_getParameterValue(VERSION)				# master
+	dk_getParameterValue(VERSION)
 	if(${dk_importVariables_DEBUG})
 		dk_printVar(VERSION)
 	endif()
-	
-	message("dk_importVariables(${ARGV})")
-	###### Args ######
+	set(VERSION ${VERSION} PARENT_SCOPE)
 	
 ### POPULATE VARIABLES ###
 # PLUGIN_URL				- from ARGV0													  	: https://github.com/madler/zlib/archive/refs/heads/master.zip
@@ -609,5 +623,58 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	dk_chdir("${DKIMPORTS_DIR}/git")
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT ${DKTOOLS_DIR})
+	
+	dk_echo()
+	dk_printVar(ARGS)
+	dk_printVar(URL)
+	dk_printVar(IMPORT_PATH)
+	dk_printVar(BRANCH)
+	dk_printVar(FOLDER)
+	dk_printVar(NAME)
+	dk_printVar(DIR)
+	dk_printVar(ROOT)
+	dk_printVar(TAG)
+	dk_printVar(VERSION)
+	dk_printVar(PLUGIN_URL)
+	dk_printVar(PLUGIN_URL_FILENAME)
+	dk_printVar(PLUGIN_URL_LIST)
+	dk_printVar(PLUGIN_GIT)
+	dk_printVar(PLUGIN_URL_EXTENSION)
+	dk_printVar(PLUGIN_URL_FILE)
+	dk_printVar(PLUGIN_URL_ARRAY)
+	dk_printVar(PLUGIN_URL_LENGTH)
+	dk_printVar(IMPORT_PATH)
+	dk_printVar(PLUGIN_IMPORT)
+	dk_printVar(PLUGIN_IMPORT_PATH)
+	dk_printVar(PLUGIN_IMPORT_NAME)
+	dk_printVar(PLUGIN_IMPORT_NAME_LOWER)
+	dk_printVar(PLUGIN_IMPORT_NAME_UPPER)
+	dk_printVar(PLUGIN_GIT_FILENAME)
+	dk_printVar(PLUGIN_GIT_NAME)
+	dk_printVar(PLUGIN_GIT_NAME_LOWER)
+	dk_printVar(PLUGIN_GIT_BRANCH)
+	dk_printVar(PLUGIN_GIT_TAG)
+	dk_printVar(PLUGIN_INSTALL_NAME)
+	dk_printVar(PLUGIN_INSTALL_VERSION)
+	dk_printVar(PLUGIN_INSTALL_FOLDER)
+	dk_printVar(PLUGIN_INSTALL_ROOT)
+	dk_printVar(PLUGIN_INSTALL_PATH)
+	dk_printVar(CURRENT_PLUGIN)
+	dk_printVar(${CURRENT_PLUGIN}_DIR)
+	dk_printVar(${CURRENT_PLUGIN}_URL)
+	dk_printVar(${CURRENT_PLUGIN}_IMPORT_FILE)
+	dk_printVar(${CURRENT_PLUGIN}_VERSION)
+	dk_printVar(${CURRENT_PLUGIN}_FOLDER)
+	dk_printVar(${CURRENT_PLUGIN}_IMPORT_NAME)
+	dk_printVar(${CURRENT_PLUGIN}_BRANCH)
+	dk_printVar(${CURRENT_PLUGIN}_TAG)
+	dk_printVar(${CURRENT_PLUGIN}_TUPLE_DIR)
+	dk_printVar(${CURRENT_PLUGIN}_CONFIG_DIR)
+	dk_printVar(${CURRENT_PLUGIN}_BUILD_DIR)
+	dk_printVar(${CURRENT_PLUGIN}_DEBUG_DIR)
+	dk_printVar(${CURRENT_PLUGIN}_RELEASE_DIR)
 endfunction()
