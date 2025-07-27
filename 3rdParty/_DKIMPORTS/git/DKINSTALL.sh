@@ -35,7 +35,7 @@ DKINSTALL() {
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
 
 	git_Import_Var="git_${Host_Tuple}_Import"
-	export git_Import="${git_Import_Var}"
+	git_Import="${!git_Import_Var}"
     dk_call dk_assertVar git_Import
   
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"

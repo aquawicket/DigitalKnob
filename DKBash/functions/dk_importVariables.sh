@@ -384,8 +384,8 @@ dk_importVariables() {
 	dk_call dk_printVar CURRENT_PLUGIN;												
 	
 	### <PLUGIN>
-	${CURRENT_PLUGIN}="${PLUGIN_INSTALL_PATH}";						 		# ZLIB						: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	dk_call dk_printVar '${CURRENT_PLUGIN}';	
+	[ -n "${CURRENT_PLUGIN}" ] && ${CURRENT_PLUGIN}="${PLUGIN_INSTALL_PATH}";		# ZLIB						: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+	dk_call dk_printVar CURRENT_PLUGIN;	
 
 	### <PLUGIN>_DIR
 	if [ ! "${CURRENT_PLUGIN}" = "GIT" ]; then	### DO NOT USE GIT_DIR ###

@@ -2,8 +2,8 @@
 ###### DK.sh #####################################################################
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
-	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)						&& echo "cygpath: HOME = ${HOME}"
-	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')						&& echo "CMD_EXE = ${CMD_EXE}"
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')								&& echo "CMD_EXE = ${CMD_EXE}"
 	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')	&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})								&& echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)		&& export BASH_EXE=$(command -v bash)									&& echo "BASH_EXE = ${BASH_EXE}"
@@ -25,29 +25,10 @@ dk_pickUpdate() {
 	dk_call dk_pathExists "${DKCACHE_DIR-}/DKBuilder.cache" && dk_call dk_getFileParams "${DKCACHE_DIR-}/DKBuilder.cache"
 	
 	dk_call dk_echo
-	dk_call dk_gitCheckRemote
+	#dk_call dk_gitCheckRemote
 	dk_call dk_echo
 
-	if [ $behind -lt 1 ]; then
-		if [ -n "${Target_App_Cache-}" ] && [ -n "${Target_Os_Cache-}" ] && [ -n "${Target_Arch_Cache-}" ] && [ -n "${Target_Env_Cache-}" ] && [ -n "${Target_Type_Cache-}" ]; then
-			dk_call dk_echo " 0) Repeat Cache '${Target_App_Cache}_${Target_Os_Cache}_${Target_Arch_Cache}_${Target_Env_Cache}_${Target_Type_Cache}'"
-		fi
-		dk_call dk_echo " 1) Git Update"   
-				dk_echo " 2) Git Commit"
-				dk_echo " 3) Download DigitalKnob"
-				dk_echo " 4) Push assets"
-				dk_echo " 5) Pull assets"
-				dk_echo " 6) Reset All"
-				dk_echo " 7) Remove All"
-				dk_echo " 8) Clear Screen"
-				dk_echo " 9) Reload"
-				dk_echo "10) Exit"
-				dk_call dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
-				[ -e "${DKBRANCH_DIR}/build_list.txt" ] && dk_echo "11) Run 'build_list.txt'"
-	
-				dk_echo
-				dk_echo " Press Enter To Skip"
-	else
+	if [ -n "${behind-}" ] && [ ${behind-} -gt 0 ]; then
 		dk_call dk_warning "Your local repository is behind, please git update"
 		dk_call dk_echo
 		dk_echo "${red}" 
@@ -69,6 +50,25 @@ dk_pickUpdate() {
 		dk_echo
 		dk_echo "Press Enter To Skip"
 		dk_echo "${clr}"
+	else
+		if [ -n "${Target_App_Cache-}" ] && [ -n "${Target_Os_Cache-}" ] && [ -n "${Target_Arch_Cache-}" ] && [ -n "${Target_Env_Cache-}" ] && [ -n "${Target_Type_Cache-}" ]; then
+			dk_call dk_echo " 0) Repeat Cache '${Target_App_Cache}_${Target_Os_Cache}_${Target_Arch_Cache}_${Target_Env_Cache}_${Target_Type_Cache}'"
+		fi
+		dk_call dk_echo " 1) Git Update"   
+				dk_echo " 2) Git Commit"
+				dk_echo " 3) Download DigitalKnob"
+				dk_echo " 4) Push assets"
+				dk_echo " 5) Pull assets"
+				dk_echo " 6) Reset All"
+				dk_echo " 7) Remove All"
+				dk_echo " 8) Clear Screen"
+				dk_echo " 9) Reload"
+				dk_echo "10) Exit"
+				dk_call dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
+				[ -e "${DKBRANCH_DIR}/build_list.txt" ] && dk_echo "11) Run 'build_list.txt'"
+	
+				dk_echo
+				dk_echo " Press Enter To Skip"
 	fi
 	
 	dk_call dk_keyboardInput choice
