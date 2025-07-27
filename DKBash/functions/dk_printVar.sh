@@ -41,7 +41,7 @@ dk_printVar() {
 		#echo "declaration = $declaration"
 		
 		# IS VARIABLE
-		if [[ $declaration == "declare -- "* ]]; then
+		if [[ $declaration == "declare -- "* ]] && [ ! "$_reference_" = "" ]; then
 			[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 			dk_call dk_echo "${cyan-}VARIABLE:${!_reference_} =${blue-} '$_reference_'${clr-}"
 			return 0
@@ -129,7 +129,7 @@ dk_printVar() {
 	fi
 	
 	# IS VARIABLE
-	if [ -n "${!varname+x}" ]; then
+	if [ -n "${!varname+x}" ] && [ ! "${!varname}" = "" ]; then	
 		[ -z ${echo_fileline-} ] && export echo_fileline="$(__FILE__ 1):$(__LINE__ 1)   "
 		dk_echo "${cyan-}VARIABLE:$varname =${blue-} '${!varname}'${clr-}"
 		return 0

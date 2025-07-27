@@ -22,7 +22,7 @@ dk_listToArray() {
     
 	OLDIFS=${IFS}
 	IFS=";"
-	arr=($1)
+	arr=(${1/;;/;}) #NOTE: ${1/;;/;} fixes the issue of empty array items from strings containng ";;"
 	IFS=${OLDIFS}
 	#for i in ${arr[@]}; do echo $i; done
 	

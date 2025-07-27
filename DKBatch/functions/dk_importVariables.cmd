@@ -58,6 +58,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 rem %setlocal%
 	%dk_call% dk_debugFunc 1 9
 	
+	set "ARGS=%*"
+	
 	set "URL=%~1"
 	rem %dk_call% dk_printVar URL
 	
@@ -76,7 +78,7 @@ rem %setlocal%
 	
 	set "NAME="
 	%dk_call% dk_getParameterValue  NAME        %*     &rem zlib
-	rem %dk_call% dk_printVar NAME
+	%dk_call% dk_printVar NAME
 	
 	set "DIR="
 	%dk_call% dk_getParameterValue  DIR         %*     &rem C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
@@ -319,7 +321,6 @@ rem ### PLUGIN_INSTALL_ROOT
 	set "PLUGIN_INSTALL_ROOT="
 	if defined ROOT (
 		set "PLUGIN_INSTALL_ROOT=!ROOT!"
-		set "ROOT="
 	) else (
 		%dk_call% dk_assertPath DK3RDPARTY_DIR
 		set "PLUGIN_INSTALL_ROOT=!DK3RDPARTY_DIR!"
@@ -463,8 +464,10 @@ rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_chdir "%DKIMPORTS_DIR%/git"
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"    NAME git    ROOT %DKTOOLS_DIR%
+	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" NAME git ROOT "%DKTOOLS_DIR%"
 
+	%dk_call% dk_echo
+	%dk_call% dk_printVar ARGS
 	%dk_call% dk_printVar URL
 	%dk_call% dk_printVar IMPORT_PATH
 	%dk_call% dk_printVar BRANCH

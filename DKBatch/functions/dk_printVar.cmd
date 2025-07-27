@@ -40,13 +40,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         if "!DE!" neq "" %dk_call% dk_isVariableName "%%%~1%%" || goto variable
         if "!DE!" neq "" call set "_ptrB_=%%%~1%%"
 		if "!DE!" neq "" %dk_call% dk_defined "%%%~1%%" || goto variable
-		if "!DE!" neq "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %_ptrB_% =%blue% %%%_ptrB_%%% %clr%"
+		if "!DE!" neq "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %blue%%_ptrB_% = %%%_ptrB_%%% %clr%"
 
 		:: delayed expansion ON
         if "!DE!" equ "" %dk_call% dk_isVariableName "!%~1!" || goto variable
         if "!DE!" equ "" set "_ptrB_=!%~1!"
 		if "!DE!" equ "" if not defined !%~1! goto variable
-		if "!DE!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %_ptrB_% =%blue% !%_ptrB_%! %clr%"
+		if "!DE!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %blue%%_ptrB_% = !%_ptrB_%! %clr%"
     %return%
 
     :variable	

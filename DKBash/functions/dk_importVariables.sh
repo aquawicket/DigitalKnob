@@ -57,9 +57,9 @@ fi
 dk_importVariables() {
 
 	#dk_debugFunc 1 9
-
+	ARGS="${*}";
+	
 	URL="${1}";
-	dk_call dk_assertVar URL;
 	# dk_call dk_printVar URL;
 	
 	unset IMPORT_PATH;
@@ -176,8 +176,8 @@ dk_importVariables() {
 	
 	### PLUGIN_URL_LENGTH
 	unset PLUGIN_URL_LENGTH;
-	dk_call dk_arrayLength PLUGIN_URL_ARRAY dk_length;
-	PLUGIN_URL_LENGTH="${arrayLength-}";												# PLUGIN_URL_LENGTH			: 8
+	dk_call dk_arrayLength PLUGIN_URL_ARRAY arrayLength;
+	PLUGIN_URL_LENGTH="${arrayLength-}";											# PLUGIN_URL_LENGTH			: 8
 	# dk_call dk_printVar PLUGIN_URL_LENGTH;
 
 
@@ -472,8 +472,10 @@ DKTEST() {
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	dk_call dk_chdir "${DKIMPORTS_DIR}/git"
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
-	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"	NAME git	ROOT "${DKTOOLS_DIR}";
+	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" NAME git ROOT "${DKTOOLS_DIR}";
 
+	dk_call dk_echo
+	dk_call dk_printVar ARGS
 	dk_call dk_printVar URL
 	dk_call dk_printVar IMPORT_PATH
 	dk_call dk_printVar BRANCH

@@ -37,7 +37,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	call :TEST_getParameter ARG1 "arg1 data" ARG3 ARG4 "arg4 data" ARG5 "arg5 data" ARG6
+	call :TEST_getParameter ARG1 "arg1 data" ARG3 ARG4 "arg4 data" ARG5 "arg5 data" ARG6 "arg6"
+
 %endfunction%
 
 
@@ -51,6 +52,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_getParameterValue ARG4 %*
 	%dk_call% dk_getParameterValue ARG5 %*
 	%dk_call% dk_getParameterValue ARG6 %*
+
 	%dk_call% dk_echo "ARG1 = %ARG1%"
 	%dk_call% dk_echo "ARG2 = %ARG2%"
 	%dk_call% dk_echo "ARG3 = %ARG3%"
