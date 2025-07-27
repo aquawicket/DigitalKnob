@@ -53,8 +53,8 @@ rem %setlocal%
 	%dk_call% dk_debugFunc 1 9
 	
 	::														###### EXAMPLES ######
-	::### ARGS												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	set "ARGS=%*"
+	::### PLUGIN_ARGS										"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+	set "PLUGIN_ARGS=%*"
 	
 	::### URL												https://github.com/madler/zlib/archive/refs/heads/master.zip
 	set "PLUGIN_URL=%~1"
@@ -64,7 +64,8 @@ rem %setlocal%
 	::### IMPORT_PATH										C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	set "IMPORT_PATH="
 	%dk_call% dk_getParameterValue	IMPORT_PATH	%*
-	if defined IMPORT_PATH (set "IMPORT_PATH=%IMPORT_PATH:\=/%")
+	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD:\=/%"
+	if "%IMPORT_PATH:~-1%" equ "/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
 	rem %dk_call% dk_printVar IMPORT_PATH
 	
 	::###  BRANCH											master
@@ -188,11 +189,8 @@ rem ##############################################					#########################
 rem #######################################################
 rem ############### PLUGIN_IMPORT VARIABLES ###############
 rem #######################################################
-	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD:\=/%"
-	if "%IMPORT_PATH:~-1%" equ "/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
-	rem %dk_call% dk_printVar IMPORT_PATH
 
-	::### PLUGIN_IMPORT
+	::### PLUGIN_IMPORT										1
 	set "PLUGIN_IMPORT="
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_includes %IMPORT_PATH% !DKIMPORTS_DIR! && set "PLUGIN_IMPORT=1"
@@ -468,7 +466,7 @@ rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	%dk_call% dk_importVariables "https://github.com/madler/zlib/archive/refs/heads/master.zip"
 
 	%dk_call% dk_echo
-	%dk_call% dk_printVar ARGS
+	%dk_call% dk_printVar PLUGIN_ARGS
 	%dk_call% dk_printVar PLUGIN_URL
 	%dk_call% dk_printVar IMPORT_PATH
 	%dk_call% dk_printVar BRANCH
