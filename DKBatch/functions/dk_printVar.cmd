@@ -5,8 +5,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################## dk_printVar SETTINGS ####################
-if not defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
-if "%dk_printVar_ENABLE%" neq "1" (%return%)
+::if not defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
+::if "%dk_printVar_ENABLE%" neq "1" (%return%)
 ::################################################################################
 ::# dk_printVar(variable)
 ::#
@@ -15,7 +15,7 @@ if "%dk_printVar_ENABLE%" neq "1" (%return%)
 %setlocal%
     ::%dk_call% dk_debugFunc 1
    
-    %dk_call% dk_isVariableName "%~1" || %return%
+    ::%dk_call% dk_isVariableName "%~1" || %return%
    
     :array
 		if not defined %~1[0] goto pointer

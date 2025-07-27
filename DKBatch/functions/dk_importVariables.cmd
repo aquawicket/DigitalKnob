@@ -13,18 +13,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
+
 ::#################################################################################
 ::### dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME PATH ROOT TAG VERSION
 ::#
 ::#	PLUGIN_URL (arg0)										###### EXAMPLES ######
-::#		This url of the plugin to import.					https://github.com/madler/zlib.git     							* github repository link
+::#		The url of the plugin to import.					https://github.com/madler/zlib.git     							* github repository link
 ::#															https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
 ::#															https://github.com/madler/zlib        							* github page
 ::#															https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
 ::#															https://website.com/executable.exe              				* executable file
 ::#
-::#	IMPORT_PATH  optional
-::#															C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+::#	IMPORT_PATH  optional									C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+::#
 ::#
 ::#	BRANCH  optional
 ::#															develop
@@ -54,11 +55,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#															master
 ::#
 :dk_importVariables
-::%setlocal%
+rem %setlocal%
 	%dk_call% dk_debugFunc 1 9
 	
 	set "URL=%~1"
-	%dk_call% dk_assertVar URL
 	rem %dk_call% dk_printVar URL
 	
 	set "IMPORT_PATH="
@@ -141,8 +141,6 @@ rem ############ PLUGIN_URL VARIABLES ############
 rem ##############################################					################################# EXAMPLE ##########################
 	
 rem ### PLUGIN_URL
-	rem set "PLUGIN_URL="
-	rem set "PLUGIN_URL=%URL:\=/%"
 	set "PLUGIN_URL=%URL:\=/%"														&rem PLUGIN_URL				: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	rem %dk_call% dk_printVar PLUGIN_URL 										
 
@@ -182,8 +180,7 @@ rem ### PLUGIN_URL_LENGTH
 	rem %dk_call% dk_printVar PLUGIN_URL_LENGTH 									
 	
 		
-		
-		
+	
 rem #######################################################
 rem ############### PLUGIN_IMPORT VARIABLES ###############
 rem #######################################################
@@ -246,7 +243,7 @@ rem 	### PLUGIN_GIT_BRANCH
 		if defined BRANCH (
 			set "PLUGIN_GIT_BRANCH=!BRANCH!"
 		)
-		rem %dk_call% dk_getGitBranchName !PLUGIN_URL! PLUGIN_GIT_BRANCH 					
+::		%dk_call% dk_getGitBranchName !PLUGIN_URL! PLUGIN_GIT_BRANCH 					
 		if NOT defined PLUGIN_GIT_BRANCH (
 			set "PLUGIN_GIT_BRANCH=master"
 		)																			&rem PLUGIN_GIT_BRANCH			: master
@@ -275,8 +272,8 @@ rem ### PLUGIN_INSTALL_NAME
 	) else if defined PLUGIN_URL_NAME (
 		set "PLUGIN_INSTALL_NAME=!PLUGIN_URL_NAME!"						
 	)  																				&rem PLUGIN_INSTALL_NAME		: zlib
-	::%dk_call% dk_convertToCIdentifier "!PLUGIN_INSTALL_NAME!" PLUGIN_INSTALL_NAME
-	:: %dk_call% dk_printVar PLUGIN_INSTALL_NAME 								
+	rem %dk_call% dk_convertToCIdentifier "!PLUGIN_INSTALL_NAME!" PLUGIN_INSTALL_NAME
+	rem %dk_call% dk_printVar PLUGIN_INSTALL_NAME 								
 
 rem ### PLUGIN_INSTALL_VERSION
 	set "PLUGIN_INSTALL_VERSION="
@@ -334,8 +331,8 @@ rem ### PLUGIN_INSTALL_PATH
 	if defined DIR (
 		set "PLUGIN_INSTALL_PATH=!DIR!"
 	) else (
-		%dk_call% dk_assertVar PLUGIN_INSTALL_ROOT
-		%dk_call% dk_assertVar PLUGIN_INSTALL_FOLDER
+		rem %dk_call% dk_assertVar PLUGIN_INSTALL_ROOT
+		rem %dk_call% dk_assertVar PLUGIN_INSTALL_FOLDER
 		set "PLUGIN_INSTALL_PATH=!PLUGIN_INSTALL_ROOT!/!PLUGIN_INSTALL_FOLDER!"	
 	)																				&rem PLUGIN_INSTALL_PATH		: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	rem %dk_call% dk_printVar PLUGIN_INSTALL_PATH 								
@@ -450,8 +447,6 @@ rem ### <PLUGIN>_RELEASE_DIR
 		set "!CURRENT_PLUGIN!_RELEASE_DIR=!PLUGIN_INSTALL_PATH!/!Target_Tuple!/!Release_Dir!"
 		rem %dk_call% dk_printVar !CURRENT_PLUGIN!_RELEASE_DIR 					&rem ZLIB_RELEASE_DIR	: C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	) 
-
-	rem %dk_call% dk_printVar !CURRENT_PLUGIN!
 %endfunction%
 
 
@@ -465,18 +460,59 @@ rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_chdir "%DKIMPORTS_DIR%/git"
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"    NAME git    ROOT %DKTOOLS_DIR%
-	%dk_call% dk_echo "CURRENT_PLUGIN  = %CURRENT_PLUGIN%"
-	%dk_call% dk_echo "GIT             = %GIT%"
-	%dk_call% dk_echo "GIT_DIR         = %GIT_DIR%"
-	%dk_call% dk_echo "GIT_URL         = %GIT_URL%"
-	%dk_call% dk_echo "GIT_IMPORT_FILE = %GIT_IMPORT_FILE%"
-	%dk_call% dk_echo "GIT_VERSION     = %GIT_VERSION%"
-	%dk_call% dk_echo "GIT_FOLDER      = %GIT_FOLDER%"
-	%dk_call% dk_echo "GIT_IMPORT_NAME = %GIT_IMPORT_NAME%"
-	%dk_call% dk_echo "GIT_BRANCH      = %GIT_BRANCH%"
-	%dk_call% dk_echo "GIT_TAG         = %GIT_TAG%"
+
+	%dk_call% dk_printVar URL
+	%dk_call% dk_printVar IMPORT_PATH
+	%dk_call% dk_printVar BRANCH
+	%dk_call% dk_printVar FOLDER
+	%dk_call% dk_printVar NAME
+	%dk_call% dk_printVar DIR
+	%dk_call% dk_printVar ROOT
+	%dk_call% dk_printVar TAG
+	%dk_call% dk_printVar VERSION
+	%dk_call% dk_printVar PLUGIN_URL
+	%dk_call% dk_printVar PLUGIN_URL_FILENAME
+	%dk_call% dk_printVar PLUGIN_URL_LIST
+	%dk_call% dk_printVar PLUGIN_GIT
+	%dk_call% dk_printVar PLUGIN_URL_EXTENSION
+	%dk_call% dk_printVar PLUGIN_URL_FILE
+	%dk_call% dk_printVar PLUGIN_URL_ARRAY
+	%dk_call% dk_printVar PLUGIN_URL_LENGTH
+	%dk_call% dk_printVar IMPORT_PATH
+	%dk_call% dk_printVar PLUGIN_IMPORT
+	%dk_call% dk_printVar PLUGIN_IMPORT_PATH
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME_LOWER
+	%dk_call% dk_printVar PLUGIN_IMPORT_NAME_UPPER
+	%dk_call% dk_printVar PLUGIN_GIT_FILENAME
+	%dk_call% dk_printVar PLUGIN_GIT_NAME
+	%dk_call% dk_printVar PLUGIN_GIT_NAME_LOWER
+	%dk_call% dk_printVar PLUGIN_GIT_BRANCH
+	%dk_call% dk_printVar PLUGIN_GIT_TAG
+	%dk_call% dk_printVar PLUGIN_INSTALL_NAME
+	%dk_call% dk_printVar PLUGIN_INSTALL_VERSION
+	%dk_call% dk_printVar PLUGIN_INSTALL_FOLDER
+	%dk_call% dk_printVar PLUGIN_INSTALL_ROOT
+	%dk_call% dk_printVar PLUGIN_INSTALL_PATH
+	%dk_call% dk_printVar CURRENT_PLUGIN
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_DIR
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_URL
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_IMPORT_FILE
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_VERSION
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_FOLDER
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_IMPORT_NAME
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_BRANCH
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_TAG
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_TUPLE_DIR
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_CONFIG_DIR
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_BUILD_DIR
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_DEBUG_DIR
+	%dk_call% dk_printVar %CURRENT_PLUGIN%_RELEASE_DIR
+
 %endfunction%
 
 ::																									FILENAME			
