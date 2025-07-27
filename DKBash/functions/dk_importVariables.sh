@@ -155,22 +155,22 @@ dk_importVariables() {
 	# dk_call dk_printVar PLUGIN_URL_FILENAME;
 	
 	### PLUGIN_URL_LIST																https:;github.com;madler;zlib;archive;refs;heads;master.zip
-	unset PLUGIN_URL_LIST;
+	#unset PLUGIN_URL_LIST;
 	dk_call dk_replaceAll "${PLUGIN_URL}" "/" ";" PLUGIN_URL_LIST; 					
 	# dk_call dk_printVar PLUGIN_URL_LIST;
 	
 	### PLUGIN_GIT																	1
-	unset PLUGIN_GIT;
+	#unset PLUGIN_GIT;
 	$(dk_call dk_includes "${PLUGIN_URL}" "https://github.com") && PLUGIN_GIT=1 || PLUGIN_GIT=0			
 	# dk_call dk_printVar PLUGIN_GIT;
 	
 	### PLUGIN_URL_EXTENSION														.zip
-	unset PLUGIN_URL_EXTENSION;
-	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION;			
+	#unset PLUGIN_URL_EXTENSION;
+	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION;		
 	# dk_call dk_printVar PLUGIN_URL_EXTENSION;
 
 	### PLUGIN_URL_FILE																master
-	unset PLUGIN_URL_FILE;
+	#unset PLUGIN_URL_FILE;
 	dk_call dk_removeExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_FILE			
 	# dk_call dk_printVar PLUGIN_URL_FILE;
 
@@ -179,7 +179,7 @@ dk_importVariables() {
 	# dk_call dk_printVar PLUGIN_URL_ARRAY;
 	
 	### PLUGIN_URL_LENGTH															8
-	unset PLUGIN_URL_LENGTH;
+	#unset PLUGIN_URL_LENGTH;
 	dk_call dk_arrayLength PLUGIN_URL_ARRAY arrayLength;
 	PLUGIN_URL_LENGTH="${arrayLength-}";
 	# dk_call dk_printVar PLUGIN_URL_LENGTH;
@@ -366,7 +366,7 @@ dk_importVariables() {
 
 	### <PLUGIN>_DIR															C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	if [ ! "${CURRENT_PLUGIN}" = "GIT" ]; then	### DO NOT USE GIT_DIR ###
-		${CURRENT_PLUGIN}_DIR="${PLUGIN_INSTALL_PATH-}"; 
+		export ${CURRENT_PLUGIN}_DIR="${PLUGIN_INSTALL_PATH-}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_DIR;
 	fi
 	
@@ -461,10 +461,61 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	dk_call dk_chdir "${DKIMPORTS_DIR}/git"
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
+	dk_call dk_chdir "${DKIMPORTS_DIR}/git"
 	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" NAME git ROOT "${DKTOOLS_DIR}";
-
+	dk_call dk_echo
+	dk_call dk_printVar PLUGIN_ARGS
+	dk_call dk_printVar PLUGIN_URL
+	dk_call dk_printVar IMPORT_PATH
+	dk_call dk_printVar BRANCH
+	dk_call dk_printVar FOLDER
+	dk_call dk_printVar NAME
+	dk_call dk_printVar DIR
+	dk_call dk_printVar ROOT
+	dk_call dk_printVar TAG
+	dk_call dk_printVar VERSION
+	dk_call dk_printVar PLUGIN_URL_FILENAME
+	dk_call dk_printVar PLUGIN_URL_LIST
+	dk_call dk_printVar PLUGIN_GIT
+	dk_call dk_printVar PLUGIN_URL_EXTENSION
+	dk_call dk_printVar PLUGIN_URL_FILE
+	dk_call dk_printVar PLUGIN_URL_ARRAY
+	dk_call dk_printVar PLUGIN_URL_LENGTH
+	dk_call dk_printVar IMPORT_PATH
+	dk_call dk_printVar PLUGIN_IMPORT
+	dk_call dk_printVar PLUGIN_IMPORT_PATH
+	dk_call dk_printVar PLUGIN_IMPORT_NAME
+	dk_call dk_printVar PLUGIN_IMPORT_NAME_LOWER
+	dk_call dk_printVar PLUGIN_IMPORT_NAME_UPPER
+	dk_call dk_printVar PLUGIN_GIT_FILENAME
+	dk_call dk_printVar PLUGIN_GIT_NAME
+	dk_call dk_printVar PLUGIN_GIT_NAME_LOWER
+	dk_call dk_printVar PLUGIN_GIT_BRANCH
+	dk_call dk_printVar PLUGIN_GIT_TAG
+	dk_call dk_printVar PLUGIN_INSTALL_NAME
+	dk_call dk_printVar PLUGIN_INSTALL_VERSION
+	dk_call dk_printVar PLUGIN_INSTALL_FOLDER
+	dk_call dk_printVar PLUGIN_INSTALL_ROOT
+	dk_call dk_printVar PLUGIN_INSTALL_PATH
+	dk_call dk_printVar CURRENT_PLUGIN
+	dk_call dk_printVar ${CURRENT_PLUGIN}_DIR
+	dk_call dk_printVar ${CURRENT_PLUGIN}_URL
+	dk_call dk_printVar ${CURRENT_PLUGIN}_IMPORT_FILE
+	dk_call dk_printVar ${CURRENT_PLUGIN}_VERSION
+	dk_call dk_printVar ${CURRENT_PLUGIN}_FOLDER
+	dk_call dk_printVar ${CURRENT_PLUGIN}_IMPORT_NAME
+	dk_call dk_printVar ${CURRENT_PLUGIN}_BRANCH
+	dk_call dk_printVar ${CURRENT_PLUGIN}_TAG
+	dk_call dk_printVar ${CURRENT_PLUGIN}_TUPLE_DIR
+	dk_call dk_printVar ${CURRENT_PLUGIN}_CONFIG_DIR
+	dk_call dk_printVar ${CURRENT_PLUGIN}_BUILD_DIR
+	dk_call dk_printVar ${CURRENT_PLUGIN}_DEBUG_DIR
+	dk_call dk_printVar ${CURRENT_PLUGIN}_RELEASE_DIR
+	
+	
+	dk_call dk_chdir "${DKIMPORTS_DIR}/zlib"
+	dk_call dk_importVariables "https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	dk_call dk_echo
 	dk_call dk_printVar PLUGIN_ARGS
 	dk_call dk_printVar PLUGIN_URL
