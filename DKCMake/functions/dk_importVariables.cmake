@@ -69,16 +69,15 @@ function(dk_importVariables)
 	#dk_printVar(PLUGIN_URL)
 	set(PLUGIN_URL ${PLUGIN_URL} PARENT_SCOPE)
 	
-	### PLUGIN_IMPORT_PATH						C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+	### IMPORT_PATH								C:/Users/name/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_unset(IMPORT_PATH)
 	dk_getParameterValue(IMPORT_PATH)			
-	set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")
-	if(NOT PLUGIN_IMPORT_PATH)
-		set(PLUGIN_IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}")
+	if(NOT IMPORT_PATH)
+		#set(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}")
+		set(IMPORT_PATH "${PWD}")
 	endif()
-	#dk_printVar(PLUGIN_IMPORT_PATH)
-	set(PLUGIN_IMPORT_PATH ${PLUGIN_IMPORT_PATH} PARENT_SCOPE)
-	
+	set(IMPORT_PATH ${IMPORT_PATH} PARENT_SCOPE)
+		
 	### BRANCH									master
 	dk_unset(BRANCH)
 	dk_getParameterValue(BRANCH)
@@ -229,12 +228,12 @@ function(dk_importVariables)
 	#dk_printVar(PLUGIN_IMPORT)
 	set(PLUGIN_IMPORT ${PLUGIN_IMPORT} PARENT_SCOPE)
 	
-#	# PLUGIN_IMPORT_PATH												C:\Users\name\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
-#	dk_unset(PLUGIN_IMPORT_PATH)
-#	if(IMPORT_PATH)
-#		set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")		
-#	endif()
-#	#dk_printVar(PLUGIN_IMPORT_PATH)
+	# PLUGIN_IMPORT_PATH												C:\Users\name\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
+	dk_unset(PLUGIN_IMPORT_PATH)
+	#if(IMPORT_PATH)
+		set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")		
+	#endif()
+	#dk_printVar(PLUGIN_IMPORT_PATH)
 	set(PLUGIN_IMPORT_PATH ${PLUGIN_IMPORT_PATH} PARENT_SCOPE)
 
 	# PLUGIN_IMPORT_DIR													C:\Users\name\DigitalKnob\Development\3rdParty\_DKIMPORTS

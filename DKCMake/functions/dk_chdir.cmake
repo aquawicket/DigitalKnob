@@ -13,25 +13,31 @@ include_guard()
 
 
 #########################################################################
-# dk_chdir(directory)
+if(NOT PWD)
+	dk_set(PWD "${CMAKE_CURRENT_LIST_DIR}")
+endif()
+#########################################################################
+# dk_chdir(path)
 #
+#	change working directory
 #
-function(dk_chdir directory)
-	dk_debugFunc()
+function(dk_chdir)
+	dk_debugFunc(1)
   
-	#dk_assertPath(directory)
-	if(NOT EXISTS ${directory})
-		dk_warning("dk_chdir(${ARGV}): directory:${directory} does not exist")
+	set(_path_ ${ARGV0})
+  
+	if(NOT EXISTS ${_path_})
+		dk_warning("dk_chdir(${ARGV}): path:${_path_} does not exist")
 		return()
 	endif()
 	
-	if("${PWD}" EQUAL "${directory}")
-		dk_error("dk_chdir(${directory}): PWD is already set to ${directory}")
+	if("${PWD}" EQUAL "${_path_}")
+		dk_error("dk_chdir(${ARGV}): PWD is already set to ${_path_}")
+		return()
 	endif()
 	
 	dk_set(OLDPWD "${PWD}")
-	dk_set(PWD "${directory}")
-	dk_info("dk_chdir(${directory}): working directory set to ${directory}")
+	dk_set(PWD "${_path_}")
 endfunction()
 
 
@@ -44,6 +50,19 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-	dk_chdir(DKDOWNLOAD_DIR)
+	dk_echo()
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
+	
+	dk_echo()
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+	dk_chdir("${DKBRANCH_DIR}")
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
+	
+	dk_echo()
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+	dk_chdir("${DKTOOLS_DIR}")
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
 endfunction()

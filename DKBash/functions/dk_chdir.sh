@@ -14,20 +14,47 @@ fi
 
 
 ##################################################################################
-# dk_chdir(directory)
+# dk_chdir(path)
 #
+#	change working directory
 #
 dk_chdir() {
-	dk_debugFunc 0 1
+	dk_debugFunc 1;
 	
-	cd "$1"
+	_path_=$1;
+	
+	if ! [ -e "${_path_}" ];then
+		dk_call dk_warning "dk_chdir(${*}): path:${_path_} does not exist";
+		return;
+	fi
+	
+	if [ "${PWD}" = "${_path_}" ];then
+		dk_call dk_error "dk_chdir(${*}): PWD is already set to ${_path_}";
+		return;
+	fi
+	
+	cd "${_path_}";
 }
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_chdir 
+	dk_call dk_echo
+	dk_call dk_echo "OLD Current Directory = ${OLDPWD-}"
+	dk_call dk_echo "Current Directory = ${PWD}"
+	
+	dk_call dk_echo
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
+	dk_call dk_chdir "${DKBRANCH_DIR}"
+	dk_call dk_echo "OLD Current Directory = ${OLDPWD-}"
+	dk_call dk_echo "Current Directory = ${PWD}"
+	
+	dk_call dk_echo
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
+	dk_call dk_chdir "${DKTOOLS_DIR}"
+	dk_call dk_echo "OLD Current Directory = ${OLDPWD-}"
+	dk_call dk_echo "Current Directory = ${PWD}"
 }
