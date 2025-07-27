@@ -18,9 +18,9 @@ fi
 #
 #
 dk_getcwd() {
-	dk_debugFunc 0 1;
+	dk_debugFunc 0;
 	
-
+	export dk_getcwd=${PWD};
 }
 
 
@@ -30,4 +30,5 @@ DKTEST() {
 	dk_debugFunc 0;
 	
 	dk_call dk_getcwd;
+	dk_call dk_echo "dk_getcwd = '${dk_getcwd}'";
 }
