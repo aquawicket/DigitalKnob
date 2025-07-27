@@ -478,3 +478,12 @@ rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	%dk_call% dk_echo "GIT_BRANCH      = %GIT_BRANCH%"
 	%dk_call% dk_echo "GIT_TAG         = %GIT_TAG%"
 %endfunction%
+
+::																									FILENAME			
+:: C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake			DKINSTALL.cmake
+:: https://github.com/madler/zlib/archive/refs/heads/master.zip										master.zip
+:: https://github.com/madler/zlib.git																zlib.git
+:: https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz	zlib.tar.gz
+:: https://zlib.net/zlib-1.3.1.tar.gz																zlib-1.3.1.tar.gz
+:: https://zlib.net/zlib131.zip																		zlib131.zip
+:: https://toolchains.bootlin.com/downloads/releases/sources/zlib-1.2.11/zlib-1.2.11.tar.xz			zlib-1.2.11.tar.xz
