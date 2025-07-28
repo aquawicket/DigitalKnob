@@ -15,35 +15,53 @@ include_guard()
 #########################################################################
 # dk_clearScreen()
 #
-#	Clear the console
+#	Clear the terminal
 #
 function(dk_clearScreen)
 	dk_debugFunc()
 	
-##### !! FIXME !!
-#	### Cmd ###	
-#	dk_depend(cmd)
-#	if(CMD_EXE)
-#		execute_process(COMMAND ${CMD_EXE} /c cls)  # FIXME: only clears 1 line
+#	### pwsh ###
+#	dk_depend(pwsh)
+#	if(PWSH_EXE)
+#		#dk_exec(${PWSH_EXE} clear)
+#		execute_process(COMMAND ${PWSH_EXE} clear) # faster
 #		return()
 #	endif()
 	
-	### Powershell ###
+	### powershell ###
 	find_program(POWERSHELL_EXE powershell.exe)
+	#dk_depend(powershell)
 	if(POWERSHELL_EXE)
-		execute_process(COMMAND ${POWERSHELL_EXE} clear)
+		#dk_exec(${POWERSHELL_EXE} clear)
+		execute_process(COMMAND ${POWERSHELL_EXE} clear) # faster
 		return()
 	endif()
 	
-#### !! FIXME !!
-#	### Bash ###
-#	dk_depend(bash)
-#	if(BASH_EXE)
-#		execute_process(COMMAND clear)
+#	### cmd ###	
+#	dk_depend(cmd)
+#	if(CMD_EXE)
+#		dk_exec(cls)  					# FIXME: only clears 1 line
+#		execute_process(COMMAND cls)  	# FIXME: only clears 1 line
+#		return()
+#	endif()
+
+#	### sh ###
+#	dk_depend(sh)
+#	if(SH_EXE)
+#		#dk_exec(clear)
+#		execute_process(COMMAND clear) # faster
 #		return()
 #	endif()
 	
-	dk_fatal("Could not command for cmd, powershell, bash or sh)
+	### bash ###
+	dk_depend(bash)
+	if(BASH_EXE)
+		#dk_exec(clear)
+		execute_process(COMMAND clear) # faster
+		return()
+	endif()
+	
+	dk_fatal("Could not find pwsh, powershell, cmd, sh or bash")
 endfunction()
 
 
