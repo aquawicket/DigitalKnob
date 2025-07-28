@@ -39,6 +39,7 @@ function GLOBAL:dk_test($argA, $argB, $argC) {
 	if(${NONEXISTENT})					{ dk_call dk_echo "                NONEXISTENT = '${NONEXISTENT}'"                                       }
 	if(${NONEXISTENT[0]})   			{ dk_call dk_echo "             NONEXISTENT[0] = '$(NONEXISTENT[0])'"                                    }
                                           dk_call dk_echo ""
+	if($($args[0]))   					{ dk_call dk_echo "           args[0]          = '$($args[0])'";                                         }
 	if(${bound}.Count)   				{ dk_call dk_echo "           bound.Count      = '$(${bound}.Count)'"                                    }
 	if(${bound}.Keys)       			{ dk_call dk_echo "           bound.Keys       = '$(${bound}.Keys)'"                                     }
 	if(${bound}.Values)       			{ dk_call dk_echo "           bound.Values     = '$(${bound}.Values)'"                                   }
