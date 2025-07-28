@@ -52,7 +52,7 @@ function Global:dk_importVariables() {
 	dk_call dk_getParameterValue IMPORT_PATH @args;
 	if( !(${IMPORT_PATH}) ){
 		dk_call dk_getcwd;
-		$global:IMPORT_PATH = $(DKPWD); 
+		$global:IMPORT_PATH = ${DKPWD}; 
 	}
 	# dk_call dk_printVar IMPORT_PATH;
 	
@@ -90,7 +90,7 @@ function Global:dk_importVariables() {
 	dk_call dk_unset VERSION;						
 	dk_call dk_getParameterValue VERSION @args;
 	# dk_call dk_printVar VERSION;
-} <#
+
 	###### POPULATE VARIABLES ######
 	# PLUGIN_URL				- from arg:url														: https://github.com/madler/zlib/archive/refs/heads/master.zip
 	# PLUGIN_URL_LIST			- from PLUGIN_URL													: https:;github.com;madler;zlib;archive;refs;heads;master.zip
@@ -146,12 +146,16 @@ function Global:dk_importVariables() {
 	#unset PLUGIN_URL_LIST;
 	dk_call dk_replaceAll "${PLUGIN_URL}" "/" ";" PLUGIN_URL_LIST; 					
 	# dk_call dk_printVar PLUGIN_URL_LIST;
-	
+
 	### PLUGIN_GIT																	1
 	#unset PLUGIN_GIT;
-	$(dk_call dk_includes "${PLUGIN_URL}" "https://github.com") && PLUGIN_GIT=1 || PLUGIN_GIT=0			
+	if(dk_call dk_includes "${PLUGIN_URL}" "https://github.com"){
+		$PLUGIN_GIT=1;
+	} else {
+		$PLUGIN_GIT=0;
+	}
 	# dk_call dk_printVar PLUGIN_GIT;
-	
+} <#		
 	### PLUGIN_URL_EXTENSION														.zip
 	#unset PLUGIN_URL_EXTENSION;
 	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION;		

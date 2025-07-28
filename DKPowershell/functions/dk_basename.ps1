@@ -6,15 +6,20 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 #
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
-function Global:dk_basename($path) {
-	dk_debugFunc 1;
+function Global:dk_basename() {
+	dk_debugFunc 1 2;
 
 	#$basename = (Get-Item $path).Basename 
 	#$basename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Basename    #Calls Resolve-Path but works for files that don't exist.
 	#if(-not($rtn_var)){ $basename = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
 
-	$basename = Split-Path $path -leaf;
-	return $basename;
+	${basename} = Split-Path $($args[0]) -leaf;
+	
+	if($($args[1])) {
+		Set-Variable -Name $($args[1]) -Value ${basename} -Scope Global
+		#Write-Host "dk_basename() $($args[1])  = ${basename}";
+	}
+	return ${basename};
 }
 
 
