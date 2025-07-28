@@ -17,12 +17,11 @@ include_guard()
 #
 #
 function(dk_gitCheckout)
-	message("dk_gitCheckout(${ARGV+})")
 	dk_debugFunc(1)
 	
 	dk_depend(git)
 	
-	execute_process(COMMAND "${GIT_EXE}" checkout ${ARGV0})
+	dk_exec("${GIT_EXE}" checkout ${ARGV0})
 endfunction()
 
 

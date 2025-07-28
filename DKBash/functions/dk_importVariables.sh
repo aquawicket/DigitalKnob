@@ -62,7 +62,7 @@ dk_importVariables() {
 	### IMPORT_PATH											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	unset IMPORT_PATH;
 	dk_call dk_getParameterValue IMPORT_PATH "$@";
-	[ -z "${IMPORT_PATH}" ] && IMPORT_PATH="${PWD}"
+	[ -z "${IMPORT_PATH}" ] && IMPORT_PATH="${PWD}";
 	#[ -z "${IMPORT_PATH}" ] && IMPORT_PATH="$(dk_call dk_dirname ${BASH_SOURCE[2]})"
 	#[ -n "${IMPORT_PATH}" ] && (set "IMPORT_PATH=${IMPORT_PATH/\\//");
 	#[ "${IMPORT_PATH:~-1}" = "/"] && IMPORT_PATH="${IMPORT_PATH:~0,-1}"

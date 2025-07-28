@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "src=%~1"
 	if defined %1 (set "src=!%~1!")
 	set "bas=%~2"
-	if not defined bas (set "bas=%cd%")
+	if not defined bas (set "bas=%CD%")
 	
 	for /f "tokens=*" %%a in ("%src%") do (set "src=%%~fa")
 	for /f "tokens=*" %%a in ("%bas%") do (set "bas=%%~fa")

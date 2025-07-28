@@ -51,7 +51,7 @@ if(Windows_X86)
 	dk_copy			(${BZIP2_WIN_BUILD}/build-VS2022 ${BZIP2_WIN_BUILD_TUPLE_DIR})
 	dk_fileReplace	(${BZIP2_WIN_BUILD_TUPLE_DIR}/bzip2-static/bzip2-static.vcxproj "v142" "v143")
 	dk_fileReplace	(${BZIP2_WIN_BUILD_TUPLE_DIR}/libbz2-static/libbz2-static.vcxproj "v142" "v143")
-	dk_chdir			(${BZIP2_WIN_BUILD_TUPLE_DIR})
+	dk_chdir		(${BZIP2_WIN_BUILD_TUPLE_DIR})
 	dk_build		(${BZIP2_WIN_BUILD} libbz2-static)
 endif()
 

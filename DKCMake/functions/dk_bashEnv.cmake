@@ -11,7 +11,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-
+dk_notice("#########################################################################")
+dk_notice("dk_bashEnv SHOULD NOT BE USED!  take a look at how /_DKIMPORTS/openssl/DKINSTALL.cmake runs configure for Windows_X86_64_Clang from cmd.")
+dk_notice("#########################################################################")
+dk_pause()
+return()
+	
 #########################################################################
 # dk_bashEnv(<args>)
 #

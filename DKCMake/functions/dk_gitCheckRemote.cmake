@@ -21,24 +21,23 @@ function(dk_gitCheckRemote)
 	
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	if(EXISTS "$ENV{DKBRANCH_DIR}/.git")
-		#set(ahead -1)
-		#set(behind -1)
 		
-		dk_chdir("$ENV{DKBRANCH_DIR}")
-		
-		dk_depend(git)
+		dk_validate(GIT_EXE "dk_depend(git)")
 
-#		${GIT_EXE} remote update
-		execute_process(COMMAND ${GIT_EXE} remote update)
+		### git remote update
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} remote update)
 		
-#		branch = git rev-parse --abbrev-ref HEAD
-		execute_process(COMMAND ${GIT_EXE} rev-parse --abbrev-ref HEAD 						OUTPUT_VARIABLE branch 	OUTPUT_STRIP_TRAILING_WHITESPACE)
+		### branch = git rev-parse --abbrev-ref HEAD
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
+		set(branch ${dk_exec})
 		
-#		ahead = git rev-list --count origin/${branch}..${branch}
-		execute_process(COMMAND ${GIT_EXE} rev-list --count origin/${branch}..${branch} 	OUTPUT_VARIABLE ahead 	OUTPUT_STRIP_TRAILING_WHITESPACE)
+		### ahead = git rev-list --count origin/${branch}..${branch}
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} rev-list --count origin/${branch}..${branch})
+		set(ahead ${dk_exec})
 
-#		behind = git rev-list --count ${branch}..origin/${branch}
-		execute_process(COMMAND ${GIT_EXE} rev-list --count ${branch}..origin/${branch} 	OUTPUT_VARIABLE behind 	OUTPUT_STRIP_TRAILING_WHITESPACE)
+		### behind = git rev-list --count ${branch}..origin/${branch}
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} rev-list --count ${branch}..origin/${branch})
+		set(behind ${dk_exec})
 		
 		dk_info("${branch} is ${ahead} commits ahead, ${behind} commits behind")
 		dk_set(behind ${behind})

@@ -19,33 +19,31 @@ include_guard()
 function(dk_gitUpdate)
 	dk_debugFunc(2 3)
 
-	if(ARGV0)
-		set(url ${ARGV0}) 
-	else()
-		set(url "https://github.com/aquawicket/DigitalKnob.git")
+	set(url ${ARGV0}) 
+	if(NOT url)
+		set(url "https://github.com/aquawicket/DigitalKnob.git") 	#DEFAULT
 	endif()
 	
-	if(ARGV1)
-		set(branch ${ARGV1})
-	else()
-		set(branch "Development")
+	set(branch ${ARGV1})
+	if(NOT branch)
+		set(branch "Development")									#DEFAULT
 	endif()
 	
+	dk_validate(GIT_EXE "dk_depend(git)")
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-	dk_validate(GIT_EXE "dk_installGit()")
 	
 	if(NOT EXISTS "$ENV{DKBRANCH_DIR}/.git")
-		execute_process(COMMAND "${GIT_EXE}" clone ${url} "$ENV{DKBRANCH_DIR}")
+		dk_exec("${GIT_EXE}" clone ${url} "$ENV{DKBRANCH_DIR}")
 	endif()
 	
-	execute_process(COMMAND "${GIT_EXE}" -C $ENV{DKBRANCH_DIR} pull --all)
-    execute_process(COMMAND "${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -- .)
+	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} pull --all)
+    dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -- .)
 	
-	execute_process(COMMAND "${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout ${branch} RESULT_VARIABLE ERRORLEVEL)	
-	if(NOT ${ERRORLEVEL} EQUAL 0)
+	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout ${branch})	
+	if(NOT ${dk_exec_exitcode} EQUAL 0)
 		dk_echo("Remote has no ${branch} branch. Creating...")
-		execute_process(COMMAND "${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
-		execute_process(COMMAND "${GIT_EXE}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
+		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
 	endif()
 endfunction()
 

@@ -64,9 +64,11 @@ rem %setlocal%
 	::### IMPORT_PATH										C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	set "IMPORT_PATH="
 	%dk_call% dk_getParameterValue	IMPORT_PATH	%*
-	if not defined IMPORT_PATH  set "IMPORT_PATH=%CD:\=/%"
-	if "%IMPORT_PATH:~-1%" equ "/" set "IMPORT_PATH=%IMPORT_PATH:~0,-1%"
-	rem %dk_call% dk_printVar IMPORT_PATH
+	if not defined IMPORT_PATH (
+		if not defined PWD (%dk_call% dk_getcwd)
+		set "IMPORT_PATH=!PWD!"
+	)
+	:: %dk_call% dk_printVar IMPORT_PATH
 	
 	::###  BRANCH											master
 	set "BRANCH="

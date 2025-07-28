@@ -70,9 +70,7 @@ if(${DKOFFLINE})
 endif()
 
 ###### Get WORKING_DIRECTORY ######
-#if(NOT PWD)
-#	dk_getFullPath(${CMAKE_CURRENT_SOURCE_DIR} PWD)
-#endif()
+#d_k_getcwd()
 	
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
@@ -129,7 +127,7 @@ dk_echo("Target_Config:                  '${Target_Config}'")
 dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 dk_echo("DIGITALKNOB_DIR:              '$ENV{DIGITALKNOB_DIR}'")
 
-dk_chdir("$ENV{DIGITALKNOB_DIR}")
+#d_k_chdir("$ENV{DIGITALKNOB_DIR}")
 
 dk_set(CMAKE_SUPPRESS_REGENERATION 1)
 dk_echo("CMAKE_SUPPRESS_REGENERATION:  '${CMAKE_SUPPRESS_REGENERATION}'")
