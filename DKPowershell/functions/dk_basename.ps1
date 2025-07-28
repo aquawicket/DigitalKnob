@@ -9,17 +9,13 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 function Global:dk_basename() {
 	dk_debugFunc 1 2;
 
-	#$basename = (Get-Item $path).Basename 
-	#$basename = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Basename    #Calls Resolve-Path but works for files that don't exist.
-	#if(-not($rtn_var)){ $basename = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-
-	${basename} = Split-Path $($args[0]) -leaf;
+	${global:dk_basename} = Split-Path $args[0] -leaf;
 	
-	if($($args[1])) {
-		Set-Variable -Name $($args[1]) -Value ${basename} -Scope Global
-		#Write-Host "dk_basename() $($args[1])  = ${basename}";
+	if($args[1]) {
+		Set-Variable -Name $args[1] -Value ${dk_basename} -Scope Global;
+	} else {
+		return ${dk_basename};
 	}
-	return ${basename};
 }
 
 
@@ -33,9 +29,20 @@ function Global:dk_basename() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	$basename = dk_call dk_basename "C:/Windows/System32/test.v123.zip";
-	dk_call dk_echo "basename = $basename\n";
+	### Result as global variable
+	dk_call dk_echo
+	dk_call dk_basename "C:/test/test2/file.version.3.3.ext";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
-	$basename = dk_call dk_basename "TEST";
-	dk_call dk_echo "basename = $basename\n";
+	### Result as return value
+	dk_call dk_echo
+	$resultA = dk_call dk_basename "C:/test/test1/file.version.1.1.ext";
+	dk_call dk_echo "resultA = ${resultA}";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
+	
+	### Result as parameter
+	dk_call dk_echo
+	dk_call dk_basename "C:/test/test2/file.version.2.2.ext" resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
 }

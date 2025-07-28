@@ -155,7 +155,7 @@ function Global:dk_importVariables() {
 		$PLUGIN_GIT=0;
 	}
 	# dk_call dk_printVar PLUGIN_GIT;
-} <#		
+		
 	### PLUGIN_URL_EXTENSION														.zip
 	#unset PLUGIN_URL_EXTENSION;
 	dk_call dk_getExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_EXTENSION;		
@@ -165,7 +165,7 @@ function Global:dk_importVariables() {
 	#unset PLUGIN_URL_FILE;
 	dk_call dk_removeExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_FILE			
 	# dk_call dk_printVar PLUGIN_URL_FILE;
-
+} <#
 	### PLUGIN_URL_ARRAY															[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 	dk_call dk_listToArray "${PLUGIN_URL_LIST}" PLUGIN_URL_ARRAY
 	# dk_call dk_printVar PLUGIN_URL_ARRAY;

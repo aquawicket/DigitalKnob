@@ -7,19 +7,16 @@ if(!$dk_getExtension_ps1){ $dk_getExtension_ps1 = 1; } else{ return; } #include 
 #   Reference: https://stackoverflow.com/a/9788998/688352
 #   		   https://learn.microsoft.com/en-us/dotnet/api/system.io.path?view=netstandard-2.1
 #
-function Global:dk_getExtension ($path) {
-	dk_debugFunc 1;
+function Global:dk_getExtension() {
+	dk_debugFunc 1 2;
 
-	#$extension = Split-Path $path -Extension # PS6.0+
+	${global:dk_getExtension} = [System.IO.Path]::GetExtension($args[0]);
 	
-	#$extension = (Get-Item $path ).Extension
-	#$extension = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).Extension   #Calls Resolve-Path but works for files that don't exist.
-	#if(-not($extension)){ $extension = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-	
-	$extension = [System.IO.Path]::GetExtension("$path")
-	
-	#dk_call dk_printVar extension
-	return $extension
+	if($args[1]) {
+		Set-Variable -Name $args[1] -Value ${dk_getExtension} -Scope Global;
+	} else {
+		return ${dk_getExtension};
+	}
 }
 
 
@@ -38,8 +35,20 @@ function Global:dk_getExtension ($path) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	$extension = dk_call dk_getExtension "/path/to/a/filename.txt"
+	### Result as global variable
+	dk_call dk_echo;
+	dk_call dk_getExtension "C:/test/test2/xfile.version.3.3.extC";
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
+	### Result as return value
+	dk_call dk_echo;
+	$resultA = dk_call dk_getExtension "C:/test/test1/xfile.version.1.1.extA";
+	dk_call dk_echo "resultA = ${resultA}";
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
-	dk_call dk_echo "extension = ${extension}\n";
+	### Result as parameter
+	dk_call dk_echo;
+	dk_call dk_getExtension "C:/test/test2/xfile.version.2.2.extB" resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 }
