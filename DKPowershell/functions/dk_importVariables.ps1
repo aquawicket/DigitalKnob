@@ -50,7 +50,7 @@ function Global:dk_importVariables() {
 	### IMPORT_PATH											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_call dk_unset IMPORT_PATH;
 	dk_call dk_getParameterValue IMPORT_PATH @args;
-	#[ -z "${IMPORT_PATH}" ] && IMPORT_PATH="${PWD}";
+	if( !(${IMPORT_PATH}) ){ $global:IMPORT_PATH = $(Get-Location); }
 	# dk_call dk_printVar IMPORT_PATH;
 	
 	### BRANCH												master
