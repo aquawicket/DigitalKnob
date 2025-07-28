@@ -2,7 +2,9 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_chdir_ps1){ $dk_chdir_ps1 = 1; } else{ return; } #include guard
 
 
-################################################################################
+#########################################################################
+if( !(${DKPWD}) ){ ${global:DKPWD} = $(get-location) -replace "\\", "/"; }
+#########################################################################
 # dk_chdir(directory)
 #
 #    Change the current working directory
@@ -12,9 +14,21 @@ if(!$dk_chdir_ps1){ $dk_chdir_ps1 = 1; } else{ return; } #include guard
 function Global:dk_chdir() {
 	dk_debugFunc 0 1;
 
-	${PWD} = $($args[0]) -replace "\\", "/";
-	set-location ${PWD};
-	${PWD} = dk_call dk_pwd;
+	${_path_} = "$($args[0])";
+		
+	if(!(Test-Path "${_path_}")) {
+		dk_call dk_warning "dk_chdir(${args}): path:${_path_} does not exist";
+		return;
+	}
+	
+	if("${DKPWD}" -eq "${_path_}") {
+		dk_call dk_error "dk_chdir(${args}): DKPWD is already set to ${_path_}";
+		return;
+	}
+	
+	${global:DKOLDPWD} = "${DKPWD}";
+	${global:DKPWD} = "${_path_}";
+	set-location "${DKPWD}";
 }
 
 
@@ -28,12 +42,19 @@ function Global:dk_chdir() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 
-	${PWD} = $(dk_call dk_pwd);
-	dk_call dk_echo "Current Directory = ${PWD}\n";
+	dk_call dk_echo;
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD}";
+	dk_call dk_echo "DKPWD = ${DKPWD}";
 	
+	dk_call dk_echo;
 	dk_call dk_validate env:DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR";
 	dk_call dk_chdir "${env:DKBRANCH_DIR}";
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD}";
+	dk_call dk_echo "DKPWD = ${DKPWD}";
 	
-	${PWD} = $(dk_call dk_pwd);
-	dk_call dk_echo "Current Directory = ${PWD}\n";
+	dk_call dk_echo;
+	dk_call dk_validate env:DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
+	dk_call dk_chdir "${env:DKTOOLS_DIR}";
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD}";
+	dk_call dk_echo "DKPWD = ${DKPWD}";
 }

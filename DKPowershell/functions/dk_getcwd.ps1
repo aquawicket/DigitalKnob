@@ -2,7 +2,9 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_getcwd_ps1){ $dk_getcwd_ps1 = 1; } else{ return; } #include guard
 
 
-################################################################################
+#########################################################################
+if( !(${DKPWD}) ){ ${global:DKPWD} = $(get-location) -replace "\\", "/"; }
+#########################################################################
 # dk_getcwd()
 #
 #    Get the working directory
@@ -11,8 +13,7 @@ if(!$dk_getcwd_ps1){ $dk_getcwd_ps1 = 1; } else{ return; } #include guard
 function Global:dk_getcwd() {
 	dk_debugFunc 0;
 
-	${PWD} = $(get-location) -replace "\\", "/";
-	return ${PWD}; 
+	${global:DKPWD} = $(get-location) -replace "\\", "/";
 }
 
 
@@ -26,6 +27,7 @@ function Global:dk_getcwd() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	${PWD} = dk_call dk_getcwd;
-	dk_call dk_echo "Current Directory = ${PWD}\n";
+	dk_call dk_getcwd;
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD}";
+	dk_call dk_echo "DKPWD = ${DKPWD}\n";
 }
