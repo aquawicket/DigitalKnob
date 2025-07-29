@@ -165,11 +165,11 @@ function Global:dk_importVariables() {
 	#unset PLUGIN_URL_FILE;
 	dk_call dk_removeExtension "${PLUGIN_URL_FILENAME}" PLUGIN_URL_FILE			
 	# dk_call dk_printVar PLUGIN_URL_FILE;
-} <#
+
 	### PLUGIN_URL_ARRAY															[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 	dk_call dk_listToArray "${PLUGIN_URL_LIST}" PLUGIN_URL_ARRAY
 	# dk_call dk_printVar PLUGIN_URL_ARRAY;
-	
+} <#	
 	### PLUGIN_URL_LENGTH															8
 	#unset PLUGIN_URL_LENGTH;
 	dk_call dk_arrayLength PLUGIN_URL_ARRAY arrayLength;
