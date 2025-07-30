@@ -249,7 +249,7 @@ exit /b !errorlevel!
 		(set "setlocal=setlocal EnableDelayedExpansion & (set _SCOPE_=^!__FILE__^!) & (set /a _SCOPE_LVL_+=1) & echo SCOPE: ^!_SCOPE_LVL_^!:^!_SCOPE_^!")
 	)
 
-	set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%/dk_call.cmd"
+	set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
 	
 	set globalize=(for /F "delims=" %%a in ('set dk.') do ^
 		endlocal^
@@ -261,9 +261,9 @@ exit /b !errorlevel!
 
 	::set endfunction=(exit /b ^^!errorlevel^^!)
 	::set return=(exit /b ^^!errorlevel^^!)
-	set endfunction=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	     set return=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	 set checkerror=(if 0 neq ^^!errorlevel^^! call dk_call dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
+	set endfunction=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
 	
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")
