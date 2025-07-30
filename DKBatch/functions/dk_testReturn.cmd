@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_testReturn
 %setlocal%
-	::%dk_call% dk_debugFunc 1 2
+	%dk_call% dk_debugFunc 1 2
 
 	set "input=%~1"
 	set "output=%input:input=output%"
@@ -23,8 +23,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			echo %output%
 		)
 	)
-exit /b 0
+
 ::%endfunction%
+exit /b -1
 
 
 
@@ -46,6 +47,7 @@ exit /b 0
 	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
+	::NOTE: ###### WORK IN PROGRESS ######
 	::### Result as return value
 	%dk_call% dk_echo
 	::resultC=$(dk_call dk_testReturn "inputC");
@@ -57,3 +59,4 @@ exit /b 0
 	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	  &::NOTE: endlocal cannot be seen outside of command substituion			
 
 %endfunction%
+exit /b -1
