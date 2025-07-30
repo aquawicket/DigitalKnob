@@ -7,7 +7,7 @@ if(!$dk_listToArray_ps1){ $dk_listToArray_ps1 = 1; } else{ return; } #include gu
 #
 #
 function Global:dk_listToArray() {
-    #dk_call dk_debugFunc 1 2;
+    dk_call dk_debugFunc 1 3;
     
 	${global:dk_listToArray} = $args[0].Split(";");
 	

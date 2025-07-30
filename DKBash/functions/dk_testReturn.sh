@@ -14,19 +14,18 @@ fi
 
 
 ##################################################################################
-# dk_basename(path, rtn_var)
+# dk_testReturn(input, output)
 #
-#	https://en.wikipedia.org/wiki/Basename
 #
-dk_basename() {
+dk_testReturn() {
 	dk_debugFunc 1 2;
 	
-	export dk_basename=$(basename "${1}");
+	export dk_testReturn=${1/input/output};
 
 	if [ -n "${2-}" ]; then
-		export ${2}=${dk_basename};
+		export ${2}=${dk_testReturn};
 	else
-		builtin echo "${dk_basename}";
+		builtin echo "${dk_testReturn}";
 	fi
 	
 	return $?;
@@ -40,18 +39,18 @@ DKTEST() {
 	
 	### Result as global variable
 	dk_call dk_echo
-	dk_call dk_basename "A:/directoryA/filenameA.extA";
-	dk_call dk_echo "dk_basename = ${dk_basename}";
+	dk_call dk_testReturn "inputA";
+	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
 	
 	### Result as parameter
 	dk_call dk_echo
-	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB;
+	dk_call dk_testReturn "inputB" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
-	dk_call dk_echo "dk_basename = ${dk_basename}";
+	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
 	
 	### Result as return value
 	dk_call dk_echo
-	resultC=$(dk_call dk_basename "C:/directoryC/filenameC.extC");
+	resultC=$(dk_call dk_testReturn "inputC");
 	dk_call dk_echo "resultC = ${resultC}";
-	#dk_call dk_echo "dk_basename = ${dk_basename}";					#NOTE: export cannot be seen outside of command substituion
+	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";					#NOTE: export cannot be seen outside of command substituion
 }

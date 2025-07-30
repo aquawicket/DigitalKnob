@@ -31,18 +31,18 @@ function Global:DKTEST() {
 	
 	### Result as global variable
 	dk_call dk_echo
-	dk_call dk_basename "C:/test/test2/file.version.3.3.ext";
-	dk_call dk_echo "dk_basename = ${dk_basename}";
-	
-	### Result as return value
-	dk_call dk_echo
-	$resultA = dk_call dk_basename "C:/test/test1/file.version.1.1.ext";
-	dk_call dk_echo "resultA = ${resultA}";
+	dk_call dk_basename "A:/directoryA/filenameA.extA";
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
 	### Result as parameter
 	dk_call dk_echo
-	dk_call dk_basename "C:/test/test2/file.version.2.2.ext" resultB;
+	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
+	
+	### Result as return value
+	dk_call dk_echo
+	$resultC = dk_call dk_basename "C:/directoryC/filenameC.extC";
+	dk_call dk_echo "resultC = ${resultC}";
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 }
