@@ -19,7 +19,16 @@ include_guard()
 function(dk_testReturn)
 	dk_debugFunc(1 2)
 	
-	# TODO
+	string(REPLACE "input" "output" dk_testReturn "${ARGV0}")
+	set(dk_testReturn ${dk_testReturn} PARENT_SCOPE)
+
+	if(ARGV1)
+		set(${ARGV1} ${dk_testReturn} PARENT_SCOPE)
+	else()
+		message(${dk_testReturn})
+	endif()
+
+	#return()
 endfunction()
 
 
@@ -30,5 +39,21 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc(0)
 	
-	# TODO
+	### Result as global variable
+	dk_echo()
+	dk_testReturn("inputA")
+	dk_echo("dk_testReturn = ${dk_testReturn}")
+	
+	### Result as parameter
+	dk_echo()
+	dk_testReturn("inputB" resultB)
+	dk_echo("resultB = ${resultB}")
+	dk_echo("dk_testReturn = ${dk_testReturn}")
+	
+	### NOTE: Cmake has not return variable functionality
+	### Result as return value
+	#dk_echo()
+	#resultC=$(dk_testReturn "inputC");
+	#dk_echo("resultC = ${resultC}")
+	#dk_echo "dk_testReturn = ${dk_testReturn}";					#NOTE: export cannot be seen outside of command substituion
 endfunction()

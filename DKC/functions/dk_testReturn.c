@@ -9,22 +9,24 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-//	//### Result as global variable
-//	dk_call dk_echo
-//	dk_call dk_testReturn "inputA";
-//	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
+	//### Result as global variable
+	dk_echo("\n");
+	dk_testReturn("inputA", NULL);
+	dk_echo("testReturn = %s\n", testReturn);
 	
-//	//### Result as parameter
-//	dk_call dk_echo
-//	dk_call dk_testReturn "inputB" resultB;
-//	dk_call dk_echo "resultB = ${resultB}";
-//	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
+	//### Result as parameter
+	dk_echo("\n");
+	char resultB[256];
+	dk_testReturn("inputB", resultB);
+	dk_echo("resultB = %s\n", resultB);
+	dk_echo("testReturn = %s\n", testReturn);
 	
-//	//### Result as return value
-//	dk_call dk_echo
-//	resultC=$(dk_call dk_testReturn "inputC");
-//	dk_call dk_echo "resultC = ${resultC}";
-//	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";					#NOTE: export cannot be seen outside of command substituion
+	//### Result as return value
+	dk_echo("\n");
+	char* resultC;
+	resultC=dk_testReturn("inputC", NULL);
+	dk_echo("resultC = %s\n", resultC);
+	dk_echo("testReturn = %s\n", testReturn);
 	
     return 0;
 }

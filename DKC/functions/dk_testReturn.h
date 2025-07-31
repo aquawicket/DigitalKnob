@@ -3,17 +3,25 @@
 #define dk_testReturn_h
 
 #include "DK.h"
+#include "dk_replaceAll.h"
 
-
+char testReturn[256];
 //################################################################################
-//# dk_testReturn()
+//# dk_testReturn(input, output)
 //#
-int dk_testReturn(const char* input, char* output){
+char* dk_testReturn(char* input, char* output){
 	//dk_debugFunc(1, 2);
 	
+	int retA = dk_replaceAll(input, "input", "output", testReturn);
+	//strcpy(testReturn, input);
+
+	if(output){
+		strcpy(output, testReturn);
+	} else {
+		dk_echo("%s\n", testReturn);
+	}
 	
-	
-	return 0;
+	return testReturn;
 };
 
 #endif //dk_testReturn_h
