@@ -13,7 +13,6 @@ char* dk_testReturn(char* input, char* output){
 	//dk_debugFunc(1, 2);
 	
 	int retA = dk_replaceAll(input, "input", "output", testReturn);
-	//strcpy(testReturn, input);
 
 	if(output){
 		strcpy(output, testReturn);
