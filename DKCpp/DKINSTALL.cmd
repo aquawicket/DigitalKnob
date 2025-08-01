@@ -95,36 +95,36 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=win")
+	if not defined Target_Os (set "Target_Os=Windows")
 	
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=x86_64")
+	if not defined Target_Arch (set "Target_Arch=X86_64")
 	
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=clang")
+	if not defined Target_Env (set "Target_Env=Clang")
 	
 	::###### Target_Tuple ######
 	if not defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
 	set "%Target_Tuple%=1"
 	
 	::###### MSYSTEM ######
-	::if not defined MSYSTEM  if "%Target_Env%"=="clang" if "%Target_Arch%"=="x86"    set "MSYSTEM=CLANG32"
-	::if not defined MSYSTEM  if "%Target_Env%"=="clang" if "%Target_Arch%"=="x86_64" set "MSYSTEM=CLANG64"
-	::if not defined MSYSTEM  if "%Target_Env%"=="clang" if "%Target_Arch%"=="arm64"  set "MSYSTEM=CLANGARM64"
-	::if not defined MSYSTEM  if "%Target_Env%"=="gcc"   if "%Target_Arch%"=="x86"    set "MSYSTEM=MINGW32"
-	::if not defined MSYSTEM  if "%Target_Env%"=="gcc"   if "%Target_Arch%"=="x86_64" set "MSYSTEM=MINGW64"
+	::if not defined MSYSTEM  if "%Target_Env%"=="Clang" if "%Target_Arch%"=="X86"    set "MSYSTEM=CLANG32"
+	::if not defined MSYSTEM  if "%Target_Env%"=="Clang" if "%Target_Arch%"=="X86_64" set "MSYSTEM=CLANG64"
+	::if not defined MSYSTEM  if "%Target_Env%"=="Clang" if "%Target_Arch%"=="Arm64"  set "MSYSTEM=CLANGARM64"
+	::if not defined MSYSTEM  if "%Target_Env%"=="Gcc"   if "%Target_Arch%"=="X86"    set "MSYSTEM=MINGW32"
+	::if not defined MSYSTEM  if "%Target_Env%"=="Gcc"   if "%Target_Arch%"=="X86_64" set "MSYSTEM=MINGW64"
 
 	::###### DK_CXX_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%Target_Env%"=="cosmocc"	(%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
-	if "%Target_Env%"=="cosmocc"	(%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
-	if "%Target_Env%"=="clang"		(%dk_call% dk_validate CLANG_CXX_COMPILER	"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
-	if "%Target_Env%"=="gcc"		(%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
+	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd")
+	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd")
+	if "%Target_Env%"=="Clang"		(%dk_call% dk_validate CLANG_CXX_COMPILER	"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd")
+	if "%Target_Env%"=="Gcc"		(%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd")
 
-	if "%Target_Env%"=="cosmocc"	(set "DK_CXX_COMPILER=%SH_EXE% %COSMOCC_CXX_COMPILER%")
-	if "%Target_Env%"=="clang"  	(set "DK_CXX_COMPILER=%CLANG_CXX_COMPILER%")
-	if "%Target_Env%"=="gcc"	  	(set "DK_CXX_COMPILER=%GCC_CXX_COMPILER%")
+	if "%Target_Env%"=="CosmoCC"	(set "DK_CXX_COMPILER=%SH_EXE% %COSMOCC_CXX_COMPILER%")
+	if "%Target_Env%"=="Clang"  	(set "DK_CXX_COMPILER=%CLANG_CXX_COMPILER%")
+	if "%Target_Env%"=="Gcc"	  	(set "DK_CXX_COMPILER=%GCC_CXX_COMPILER%")
 	%dk_call% dk_assertVar DK_CXX_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKCpp"

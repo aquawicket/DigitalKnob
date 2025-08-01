@@ -2,30 +2,33 @@
 
 #include "dk_testReturn.hpp"
 #include "dk_echo.hpp"
-//#include "dk_replaceAll.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-//	//### Result as global variable
-//	dk_call dk_echo
-//	dk_call dk_testReturn "inputA";
-//	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
-	
-//	//### Result as parameter
-//	dk_call dk_echo
-//	dk_call dk_testReturn "inputB" resultB;
-//	dk_call dk_echo "resultB = ${resultB}";
-//	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
-	
-//	//### Result as return value
-//	dk_call dk_echo
-//	resultC=$(dk_call dk_testReturn "inputC");
-//	dk_call dk_echo "resultC = ${resultC}";
-//	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";					#NOTE: export cannot be seen outside of command substituion
-	
+	//### Result as global variable
+	dk_echo("\n");
+	std::string resultA;
+	dk_testReturn("inputA", resultA);
+	dk_echo("testReturn = %s\n", testReturn.c_str());
+
+	//### Result as parameter
+	dk_echo("\n");
+	std::string resultB;
+	dk_testReturn("inputB", resultB);
+	dk_echo("resultB = %s\n", resultB.c_str());
+	dk_echo("testReturn = %s\n", testReturn.c_str());
+
+	//### Result as return value
+	dk_echo("\n");
+	std::string resultC;
+	std::string resultNULL;
+	resultC=dk_testReturn("inputC", resultNULL);
+	dk_echo("resultC = %s\n", resultC.c_str());
+	dk_echo("testReturn = %s\n", testReturn.c_str());
+
     return 0;
 }
 #endif

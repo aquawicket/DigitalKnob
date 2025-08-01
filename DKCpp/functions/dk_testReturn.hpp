@@ -3,17 +3,26 @@
 #define dk_testReturn_hpp
 
 #include "DK.hpp"
+#include "dk_replaceAll.hpp"
 
-
+std::string testReturn;
 //################################################################################
-//# dk_testReturn()
+//# dk_testReturn(input, output)
 //#
-int dk_testReturn(const char* input, char* output){
+std::string dk_testReturn(std::string input, std::string& output){
 	//dk_debugFunc(1, 2);
 	
+	dk_replaceAll(input, "input", "output", testReturn);
+	//testReturn = input;
+
+	output = testReturn;
+	if(output.empty()){
+		output = testReturn;
+	} else {
+		dk_echo("%s\n", testReturn.c_str());
+	}
 	
-	
-	return 0;
+	return testReturn;
 };
 
 #endif //dk_testReturn_hpp
