@@ -7,21 +7,24 @@
 
 std::string testReturn;
 //################################################################################
+//# dk_testReturn(input)
+//#
+std::string dk_testReturn(std::string input){
+	//dk_debugFunc(1);
+	
+	dk_replaceAll(input, "input", "output", testReturn);
+	dk_echo("%s\n", testReturn.c_str());
+	return testReturn;
+};
+
+//################################################################################
 //# dk_testReturn(input, output)
 //#
 std::string dk_testReturn(std::string input, std::string& output){
-	//dk_debugFunc(1, 2);
+	//dk_debugFunc(2);
 	
 	dk_replaceAll(input, "input", "output", testReturn);
-	//testReturn = input;
-
 	output = testReturn;
-	if(output.empty()){
-		output = testReturn;
-	} else {
-		dk_echo("%s\n", testReturn.c_str());
-	}
-	
 	return testReturn;
 };
 

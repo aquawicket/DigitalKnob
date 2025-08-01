@@ -11,7 +11,7 @@ int main(int argc, char** argv){
 	//### Result as global variable
 	dk_echo("\n");
 	std::string resultA;
-	dk_testReturn("inputA", resultA);
+	dk_testReturn("inputA");
 	dk_echo("testReturn = %s\n", testReturn.c_str());
 
 	//### Result as parameter
@@ -24,8 +24,7 @@ int main(int argc, char** argv){
 	//### Result as return value
 	dk_echo("\n");
 	std::string resultC;
-	std::string resultNULL;
-	resultC=dk_testReturn("inputC", resultNULL);
+	resultC=dk_testReturn("inputC");
 	dk_echo("resultC = %s\n", resultC.c_str());
 	dk_echo("testReturn = %s\n", testReturn.c_str());
 
