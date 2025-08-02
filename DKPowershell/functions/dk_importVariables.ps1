@@ -169,11 +169,10 @@ function Global:dk_importVariables() {
 	### PLUGIN_URL_ARRAY															[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
 	dk_call dk_listToArray "${PLUGIN_URL_LIST}" PLUGIN_URL_ARRAY
 	# dk_call dk_printVar PLUGIN_URL_ARRAY;
-} <#	
+	
 	### PLUGIN_URL_LENGTH															8
 	#unset PLUGIN_URL_LENGTH;
-	dk_call dk_arrayLength PLUGIN_URL_ARRAY arrayLength;
-	PLUGIN_URL_LENGTH="${arrayLength-}";
+	dk_call dk_arrayLength PLUGIN_URL_ARRAY PLUGIN_URL_LENGTH;
 	# dk_call dk_printVar PLUGIN_URL_LENGTH;
 
 
@@ -182,36 +181,36 @@ function Global:dk_importVariables() {
 	############### PLUGIN_IMPORT VARIABLES ###############
 	#######################################################
 	
-	# PLUGIN_IMPORT																1
-	unset PLUGIN_IMPORT;
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
-	$(dk_call dk_includes "${IMPORT_PATH}" "${DKIMPORTS_DIR}") && PLUGIN_IMPORT="1";
+	### PLUGIN_IMPORT																1
+	#unset PLUGIN_IMPORT;
+	dk_call dk_validate env:DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
+	if(dk_call dk_includes "${IMPORT_PATH}" "${DKIMPORTS_DIR}"){ $PLUGIN_IMPORT="1"; }
 	# dk_call dk_printVar PLUGIN_IMPORT;
 	
-	# PLUGIN_IMPORT_PATH														C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
-	unset PLUGIN_IMPORT_PATH;
-	PLUGIN_IMPORT_PATH="${IMPORT_PATH}"	;					
+	### PLUGIN_IMPORT_PATH														C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\zlib
+	#unset PLUGIN_IMPORT_PATH;
+	$PLUGIN_IMPORT_PATH = "${IMPORT_PATH}";					
 	# dk_call dk_printVar PLUGIN_IMPORT_PATH;
 
-	# PLUGIN_IMPORT_NAME														zlib
-	unset PLUGIN_IMPORT_NAME;
-	if [ ! "${NAME}" = "" ]; then
-		PLUGIN_IMPORT_NAME="${NAME}";
-	else
+	### PLUGIN_IMPORT_NAME														zlib
+	#unset PLUGIN_IMPORT_NAME;
+	if(${NAME}){
+		$PLUGIN_IMPORT_NAME="${NAME}";
+	} else {
 		dk_call dk_basename "${PLUGIN_IMPORT_PATH}" PLUGIN_IMPORT_NAME;
-	fi		
+	}	
 	# dk_call dk_printVar PLUGIN_IMPORT_NAME;
 
 	### PLUGIN_IMPORT_NAME_LOWER												zlib
-	unset PLUGIN_IMPORT_NAME_LOWER;
+	#unset PLUGIN_IMPORT_NAME_LOWER;
 	dk_call dk_toLower "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_LOWER
 	# dk_call dk_printVar PLUGIN_IMPORT_NAME_LOWER;			         	
 	
 	### PLUGIN_IMPORT_NAME_UPPER ###											ZLIB
-	unset PLUGIN_IMPORT_NAME_UPPER;
+	#unset PLUGIN_IMPORT_NAME_UPPER;
 	dk_call dk_toUpper "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_UPPER
 	# dk_call dk_printVar PLUGIN_IMPORT_NAME_UPPER;
-
+} <#
 	##############################################
 	############ PLUGIN_GIT VARIABLES ############
 	##############################################
