@@ -210,82 +210,83 @@ function Global:dk_importVariables() {
 	#unset PLUGIN_IMPORT_NAME_UPPER;
 	dk_call dk_toUpper "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_UPPER
 	# dk_call dk_printVar PLUGIN_IMPORT_NAME_UPPER;
-} <#
+
 	##############################################
 	############ PLUGIN_GIT VARIABLES ############
 	##############################################
-	if [ ${PLUGIN_GIT} -eq 1 ]; then 
+	if(${PLUGIN_GIT} -eq 1) { 
 		# PLUGIN_GIT_FILENAME													zlib
-		unset PLUGIN_GIT_NAME;
+		#unset PLUGIN_GIT_NAME;
 		dk_call dk_arrayAt PLUGIN_URL_ARRAY 3;		
-		PLUGIN_GIT_FILENAME="${dk_arrayAt-}";
+		$PLUGIN_GIT_FILENAME="${dk_arrayAt}";
 		# dk_call dk_printVar PLUGIN_GIT_FILENAME;
 		
 		# PLUGIN_GIT_NAME														zlib
-		unset PLUGIN_GIT_NAME;
+		#unset PLUGIN_GIT_NAME;
 		dk_call dk_replaceAll "${PLUGIN_GIT_FILENAME}" ".git" "" PLUGIN_GIT_NAME 			
 		# dk_call dk_printVar PLUGIN_GIT_NAME;
 		
 		### PLUGIN_GIT_NAME_LOWER												zlib
-		unset PLUGIN_GIT_NAME_LOWER;
+		#unset PLUGIN_GIT_NAME_LOWER;
 		dk_call dk_toLower "${PLUGIN_GIT_NAME}" PLUGIN_GIT_NAME_LOWER;
 		# dk_call dk_printVar PLUGIN_GIT_NAME_LOWER;
 		
 		# PLUGIN_GIT_BRANCH														master
-		unset PLUGIN_GIT_BRANCH;
-		if ! [ -n "${BRANCH-}" ]; then
-			PLUGIN_GIT_BRANCH="${BRANCH}";
-		fi 
+		#unset PLUGIN_GIT_BRANCH;
+		if(!(${BRANCH})) {
+			$PLUGIN_GIT_BRANCH="${BRANCH}";
+		}
 		#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_BRANCH 					
-		if ! [ -n "${PLUGIN_GIT_BRANCH-}" ]; then
-			PLUGIN_GIT_BRANCH="master"
-		fi  
+		if(${PLUGIN_GIT_BRANCH}) {
+			$PLUGIN_GIT_BRANCH="master";
+		}  
 		# dk_call dk_printVar PLUGIN_GIT_BRANCH;
 		
 		### PLUGIN_GIT_TAG														TODO
-		unset PLUGIN_GIT_TAG;
-		if [ -n "${TAG-}" ]; then
-			PLUGIN_GIT_TAG="${TAG}";
-		fi
+		#unset PLUGIN_GIT_TAG;
+		if(${TAG}) {
+			$PLUGIN_GIT_TAG="${TAG}";
+		}
 		# dk_call dk_printVar PLUGIN_GIT_TAG;
-	fi  
+	}
 
 	##################################################
 	############ PLUGIN_INSTALL VARIABLES ############
 	##################################################
 	
 	### PLUGIN_INSTALL_NAME														zlib
-	unset PLUGIN_INSTALL_NAME;
-	if [ -n "${NAME-}" ]; then
-		PLUGIN_INSTALL_NAME="${NAME}"
-	elif [ -n "${PLUGIN_IMPORT_NAME-}" ]; then
-		PLUGIN_INSTALL_NAME="${PLUGIN_IMPORT_NAME}"
-	elif [ -n "${PLUGIN_GIT_NAME-}" ]; then
-		PLUGIN_INSTALL_NAME="${PLUGIN_GIT_NAME}"
-	elif [ -n "${PLUGIN_URL_NAME-}" ]; then 
-		PLUGIN_INSTALL_NAME="${PLUGIN_URL_NAME}"						
-	fi  
+	#unset PLUGIN_INSTALL_NAME;
+	if(${NAME}) {
+		$PLUGIN_INSTALL_NAME="${NAME}";
+	} elseif(${PLUGIN_IMPORT_NAME}) {
+		$PLUGIN_INSTALL_NAME="${PLUGIN_IMPORT_NAME}";
+	} elseif(${PLUGIN_GIT_NAME}) {
+		$PLUGIN_INSTALL_NAME="${PLUGIN_GIT_NAME}";
+	} elseif(${PLUGIN_URL_NAME}) { 
+		$PLUGIN_INSTALL_NAME="${PLUGIN_URL_NAME}";					
+	} 
 	#dk_call dk_convertToCIdentifier "${PLUGIN_INSTALL_NAME}" PLUGIN_INSTALL_NAME
 	# dk_call dk_printVar PLUGIN_INSTALL_NAME;
 
 	### PLUGIN_INSTALL_VERSION													master
-	unset PLUGIN_INSTALL_VERSION;
-	if ! [ -n "${VERSION-}" ]; then 
-		PLUGIN_INSTALL_VERSION="${VERSION-}";
-	elif [ -n "${PLUGIN_IMPORT_NAME-}" ] && [ -n "${PLUGIN_URL_FILE-}" ]; then
+	#unset PLUGIN_INSTALL_VERSION;
+	if(!(${VERSION})) { 
+		$PLUGIN_INSTALL_VERSION="${VERSION}";
+	} elseif((${PLUGIN_IMPORT_NAME}) -AND (${PLUGIN_URL_FILE})) {
 		dk_call dk_toLower "${PLUGIN_IMPORT_NAME}" PLUGIN_IMPORT_NAME_LOWER;
 		dk_call dk_toLower "${PLUGIN_URL_FILE}" PLUGIN_URL_FILE_LOWER;
 		# deduce the plugin version		
 		dk_call dk_replaceAll "${PLUGIN_URL_FILE_LOWER}" "${PLUGIN_IMPORT_NAME_LOWER}" "" PLUGIN_INSTALL_VERSION; 	
-		if [ "${PLUGIN_IMPORT_NAME_LOWER}" = "${PLUGIN_URL_FILE_LOWER}" ]; then
-			if [ -n "${PLUGIN_GIT_TAG}" ]; then 
-				PLUGIN_INSTALL_VERSION="${PLUGIN_GIT_TAG}";
-			elif [ -n "${PLUGIN_GIT_BRANCH}" ]; then 
-				PLUGIN_INSTALL_VERSION="${PLUGIN_GIT_BRANCH}";
-			else  
-				PLUGIN_INSTALL_VERSION="master";
-			fi  
-		fi  
+		if("${PLUGIN_IMPORT_NAME_LOWER}" -eq "${PLUGIN_URL_FILE_LOWER}"){
+			if(${PLUGIN_GIT_TAG}) {
+				$PLUGIN_INSTALL_VERSION="${PLUGIN_GIT_TAG}";
+			} elseif(${PLUGIN_GIT_BRANCH}){
+				$PLUGIN_INSTALL_VERSION="${PLUGIN_GIT_BRANCH}";
+			} else {
+				$PLUGIN_INSTALL_VERSION="master";
+			}
+		}  
+	} 
 #		string FIND ${PLUGIN_INSTALL_VERSION} - index 
 #		if [ ${index} -eq 0 ]; then
 #			string SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION 
@@ -294,38 +295,38 @@ function Global:dk_importVariables() {
 #		if [ ${index} -eq 0 ]; then
 #			string SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION 
 #		fi  
-	fi  
+#	} 
 	# dk_call dk_printVar PLUGIN_INSTALL_VERSION;
 
 	### PLUGIN_INSTALL_FOLDER													zlib-master
-	unset PLUGIN_INSTALL_FOLDER;
-	if [ -n "${FOLDER-}" ]; then
+	#unset PLUGIN_INSTALL_FOLDER;
+	if(${FOLDER}) {
 		PLUGIN_INSTALL_FOLDER="${FOLDER-}";
-	elif [ -n "${PLUGIN_INSTALL_VERSION-}" ]; then 
-		PLUGIN_INSTALL_FOLDER="${PLUGIN_INSTALL_NAME-}-${PLUGIN_INSTALL_VERSION-}";
-	else  
-		PLUGIN_INSTALL_FOLDER="${PLUGIN_INSTALL_NAME-}";
-	fi
+	} elseif(${PLUGIN_INSTALL_VERSION}) {
+		$PLUGIN_INSTALL_FOLDER="${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION}";
+	} else {  
+		$PLUGIN_INSTALL_FOLDER="${PLUGIN_INSTALL_NAME}";
+	}
 	# dk_call dk_printVar PLUGIN_INSTALL_FOLDER;
 
 	# PLUGIN_INSTALL_ROOT														C:/Users/Administrator/DigitalKnob/Development/3rdParty
-	unset PLUGIN_INSTALL_ROOT;
-	if ! [ "${ROOT-}" ]; then 
-		PLUGIN_INSTALL_ROOT="${ROOT-}";
-		unset ROOT;
-	elif ! [ "${PLUGIN_INSTALL_ROOT-}" ]; then 
-		dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR"; 
-		PLUGIN_INSTALL_ROOT="${DK3RDPARTY_DIR-}";
-	fi
+	#unset PLUGIN_INSTALL_ROOT;
+	if(!(${ROOT})) { 
+		$PLUGIN_INSTALL_ROOT="${ROOT-}";
+		#unset ROOT;
+	} elseif(!(${PLUGIN_INSTALL_ROOT})) {
+		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR"; 
+		$PLUGIN_INSTALL_ROOT="${DK3RDPARTY_DIR}";
+	}
 	# dk_call dk_printVar PLUGIN_INSTALL_ROOT;
 
 	# PLUGIN_INSTALL_PATH														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	unset PLUGIN_INSTALL_PATH;
-	if ! [ "${DIR-}" ]; then 
-		PLUGIN_INSTALL_PATH="${DIR-}";	
-	else
-		PLUGIN_INSTALL_PATH="${PLUGIN_INSTALL_ROOT-}/${PLUGIN_INSTALL_FOLDER-}";		
-	fi
+	#unset PLUGIN_INSTALL_PATH;
+	if(!(${DIR})) { 
+		$PLUGIN_INSTALL_PATH="${DIR}";	
+	} else {
+		$PLUGIN_INSTALL_PATH="${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER}";		
+	}
 	# dk_call dk_printVar PLUGIN_INSTALL_PATH;
 
 	
@@ -335,112 +336,111 @@ function Global:dk_importVariables() {
 	############# <PLUGIN>_VARIABLES #############
 	##############################################
 	
-	if [ -n "${PLUGIN_IMPORT_NAME_LOWER-}" ];then 
-		if [ -n "${PLUGIN_GIT_NAME_LOWER-}" ]; then   
-			if ! [ "${PLUGIN_IMPORT_NAME_LOWER}" = "${PLUGIN_GIT_NAME_LOWER}" ]; then
+	if(${PLUGIN_IMPORT_NAME_LOWER}) {
+		if(${PLUGIN_GIT_NAME_LOWER}) {
+			if(!(${PLUGIN_IMPORT_NAME_LOWER} -eq ${PLUGIN_GIT_NAME_LOWER})) {
 				dk_call dk_warning "PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match"; 
-			fi
-		fi
-	fi  
+			}
+		}
+	}
 
 	### <CURRENT_PLUGIN>														ZLIB
-	CURRENT_PLUGIN="${PLUGIN_IMPORT_NAME_UPPER}";
+	$CURRENT_PLUGIN="${PLUGIN_IMPORT_NAME_UPPER}";
 	dk_call dk_convertToCIdentifier ${CURRENT_PLUGIN} CURRENT_PLUGIN;
-	if [ "${PLUGIN_IMPORT_NAME_UPPER}" != "${CURRENT_PLUGIN}" ]; then 
-		dk_call dk_notice "'${PLUGIN_IMPORT_NAME_UPPER}' contains non-alphanumeric characters and is changed to '${CURRENT_PLUGIN}'" 
-	fi  
+	if(!("${PLUGIN_IMPORT_NAME_UPPER}" -eq "${CURRENT_PLUGIN}")) { 
+		dk_call dk_notice "'${PLUGIN_IMPORT_NAME_UPPER}' contains non-alphanumeric characters and is changed to '${CURRENT_PLUGIN}'";
+	}  
 	# dk_call dk_printVar CURRENT_PLUGIN;												
 	
 	### <PLUGIN>																ZLIB
-	[ -n "${CURRENT_PLUGIN}" ] && export ${CURRENT_PLUGIN}="${PLUGIN_INSTALL_PATH}";
+	if(${CURRENT_PLUGIN}) { ${global:CURRENT_PLUGIN}="${PLUGIN_INSTALL_PATH}"; }
 	# dk_call dk_printVar CURRENT_PLUGIN;	
 
 	### <PLUGIN>_DIR															C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	if [ ! "${CURRENT_PLUGIN}" = "GIT" ]; then	### DO NOT USE GIT_DIR ###
-		export ${CURRENT_PLUGIN}_DIR="${PLUGIN_INSTALL_PATH-}"; 
+	if(!("${CURRENT_PLUGIN}" -eq "GIT")) {	### DO NOT USE GIT_DIR ###
+#		${CURRENT_PLUGIN}_DIR="${PLUGIN_INSTALL_PATH}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_DIR;
-	fi
+	}
 	
 	### <PLUGIN>_URL															https://github.com/madler/zlib/archive/refs/heads/master.zip
-	export ${CURRENT_PLUGIN}_URL="${PLUGIN_URL-}";
+#	${CURRENT_PLUGIN}_URL="${PLUGIN_URL}";
 	# dk_call dk_printVar ${CURRENT_PLUGIN}_URL;
 	
 	### <PLUGIN>_IMPORT_FILE													master.zip
-	unset ${CURRENT_PLUGIN}_IMPORT_FILE;
-	export ${CURRENT_PLUGIN}_IMPORT_FILE="${PLUGIN_URL_FILENAME-}"; 
+	#unset ${CURRENT_PLUGIN}_IMPORT_FILE;
+#	${CURRENT_PLUGIN}_IMPORT_FILE="${PLUGIN_URL_FILENAME}"; 
 	# dk_call dk_printVar ${CURRENT_PLUGIN}_IMPORT_FILE;
-	
+
 	### <PLUGIN>_VERSION														master
-	unset ${CURRENT_PLUGIN}_VERSION;
-	export ${CURRENT_PLUGIN}_VERSION="${PLUGIN_INSTALL_VERSION-}"; 
+	#unset ${CURRENT_PLUGIN}_VERSION;
+#	${CURRENT_PLUGIN}_VERSION="${PLUGIN_INSTALL_VERSION}"; 
 	# dk_call dk_printVar ${CURRENT_PLUGIN}_VERSION;
 
 	### <PLUGIN>_FOLDER															zlib-master
-	unset ${CURRENT_PLUGIN}_FOLDER;
-	export ${CURRENT_PLUGIN}_FOLDER="${PLUGIN_INSTALL_FOLDER-}"; 
+	#unset ${CURRENT_PLUGIN}_FOLDER;
+#	${CURRENT_PLUGIN}_FOLDER="${PLUGIN_INSTALL_FOLDER}"; 
 	# dk_call dk_printVar ${CURRENT_PLUGIN}_FOLDER;
 
 	### <PLUGIN>_IMPORT_NAME													zlib
-	unset ${CURRENT_PLUGIN}_IMPORT_NAME;	
-	export ${CURRENT_PLUGIN}_IMPORT_NAME="${PLUGIN_IMPORT_NAME_LOWER-}"; 
+	#unset ${CURRENT_PLUGIN}_IMPORT_NAME;	
+#	${CURRENT_PLUGIN}_IMPORT_NAME="${PLUGIN_IMPORT_NAME_LOWER}"; 
 	# dk_call dk_printVar ${CURRENT_PLUGIN}_IMPORT_NAME;
 		
 	### <PLUGIN>_BRANCH															master
-	unset ${CURRENT_PLUGIN}_BRANCH;
-	if [ -n "${PLUGIN_GIT_BRANCH-}" ]; then
-		export ${CURRENT_PLUGIN}_BRANCH="${PLUGIN_GIT_BRANCH-}"; 
+	#unset ${CURRENT_PLUGIN}_BRANCH;
+	if(${PLUGIN_GIT_BRANCH}) {
+#		${CURRENT_PLUGIN}_BRANCH="${PLUGIN_GIT_BRANCH}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_BRANCH;
-	fi  
+	} 
 	
 	### <PLUGIN>_TAG															v1.2
-	unset ${CURRENT_PLUGIN}_TAG;
-	if [ -n "${PLUGIN_GIT_TAG-}" ]; then 
-		export ${CURRENT_PLUGIN}_TAG="${PLUGIN_GIT_TAG-}"; 
+	#unset ${CURRENT_PLUGIN}_TAG;
+	if(${PLUGIN_GIT_TAG}) {
+#		${CURRENT_PLUGIN}_TAG="${PLUGIN_GIT_TAG}";
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_TAG;
-	fi  
-	
+	} 
+		
 
 	#####################################################
 	############# TARGET <PLUGIN>_VARIABLES #############
 	#####################################################
 
 	### <PLUGIN>_TUPLE_DIR														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
-	unset ${CURRENT_PLUGIN}_TUPLE_DIR;
-	if [ -n "${Target_Tuple-}" ]; then 
-		export ${CURRENT_PLUGIN}_TUPLE_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}"; 
+	#unset ${CURRENT_PLUGIN}_TUPLE_DIR;
+	if(${Target_Tuple}) {
+#		${CURRENT_PLUGIN}_TUPLE_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_TUPLE_DIR;
-	fi  
+	}
 	
 	### <PLUGIN>_CONFIG_DIR														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	unset ${CURRENT_PLUGIN}_CONFIG_DIR;
-	if [ -n "${CONFIG_PATH-}" ]; then
-		export ${CURRENT_PLUGIN}_CONFIG_DIR="${PLUGIN_INSTALL_PATH}/${CONFIG_PATH}"; 
+	#unset ${CURRENT_PLUGIN}_CONFIG_DIR;
+	if(${CONFIG_PATH}) {
+#		${CURRENT_PLUGIN}_CONFIG_DIR="${PLUGIN_INSTALL_PATH}/${CONFIG_PATH}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_CONFIG_DIR;
-	fi  
+	} 
 	
 	### <PLUGIN>_BUILD_DIR														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	unset ${CURRENT_PLUGIN}_BUILD_DIR;
-	if [ -n "${BUILD_PATH-}" ]; then
-		export ${CURRENT_PLUGIN}_BUILD_DIR="${PLUGIN_INSTALL_PATH}/${BUILD_PATH}"; 
+	#unset ${CURRENT_PLUGIN}_BUILD_DIR;
+	if(${BUILD_PATH}) {
+#		${CURRENT_PLUGIN}_BUILD_DIR="${PLUGIN_INSTALL_PATH}/${BUILD_PATH}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_BUILD_DIR;
-	fi  
+	} 
 	
 	### <PLUGIN>_DEBUG_DIR														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	unset ${CURRENT_PLUGIN}_DEBUG_DIR;
-	if [ -n "${Debug_Dir-}" ]; then 
-		export ${CURRENT_PLUGIN}_DEBUG_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Debug_Dir}"; 
+	#unset ${CURRENT_PLUGIN}_DEBUG_DIR;
+	if(${Debug_Dir}) {
+#		${CURRENT_PLUGIN}_DEBUG_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Debug_Dir}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_DEBUG_DIR;
-	fi  
+	}
 	
 	### <PLUGIN>_RELEASE_DIR													C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
-	unset ${CURRENT_PLUGIN}_RELEASE_DIR;
-	if [ -n "${Release_Dir-}" ]; then 
-		export ${CURRENT_PLUGIN}_RELEASE_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Release_Dir}"; 
+	#unset ${CURRENT_PLUGIN}_RELEASE_DIR;
+	if(${Release_Dir}) {
+#		${CURRENT_PLUGIN}_RELEASE_DIR="${PLUGIN_INSTALL_PATH}/${Target_Tuple}/${Release_Dir}"; 
 		# dk_call dk_printVar ${CURRENT_PLUGIN}_RELEASE_DIR;
-	fi
+	}
 }
 
-#>
 
 
 
