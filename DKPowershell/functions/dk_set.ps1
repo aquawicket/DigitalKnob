@@ -6,15 +6,23 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_set() {
-	dk_debugFunc 0 2;
+	dk_debugFunc 2 99;
 	
-	$var = $($args[0]);
-	${AllButFirstArgs} = ${args} | Select-Object -Skip 1;
-	$val = ${AllButFirstArgs};
-	Write-Host "'${var}' '${val}'"
+	${_variable_} = $args[0];
+	${_variable_arry} = ${_variable_}.Split(".");
+	${_value_} = ${args} | Select-Object -Skip 1;
 	
-	Set-Variable -Name ${$(var)} -Value ${$(val)} -Scope Global
-	Set-Item env:${var} ${val};
+	if(${_variable_arry}[1]){
+		if( !($(Get-Variable -Name ${_variable_arry}[0] -ErrorAction SilentlyContinue)) ){
+			${hashtable} = @{};
+			Set-Variable -Name ${_variable_arry}[0] -Value ${hashtable} -Scope Global;
+		}
+		$(Get-Variable -Name ${_variable_arry}[0] -ValueOnly)[${_variable_arry}[1]] = ${_value_};
+	} else {
+		Set-Variable -Name ${_variable_arry}[0] -Value ${_value_} -Scope Global;
+	}
+	
+	Set-Item env:${_variable_} ${_value_};
 }
 
 
@@ -35,7 +43,15 @@ function Global:dk_set() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_set myVar "value assigned with dk_set"	
-	dk_call dk_info "myVar = ${myVar}"
-	dk_call dk_info "env:myVar = ${env:myVar}"
+	dk_call dk_set myVar "value of myVar";
+	dk_call dk_info "myVar = ${myVar}";
+	dk_call dk_info "env:myVar = ${env:myVar}";
+	
+	#$myArray = @{};
+	dk_call dk_set "myArray.data" "value of myArray.data";
+	dk_call dk_info "myArray.data = $($myArray.data)";
+	dk_call dk_info "env:myArray.data = ${env:myArray.data}";
+	dk_call dk_set "myArray.data2" "value of myArray.data2";
+	dk_call dk_info "myArray = $myArray";
+	$myArray
 }
