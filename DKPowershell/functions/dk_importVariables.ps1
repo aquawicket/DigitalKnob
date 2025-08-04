@@ -38,12 +38,9 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 function Global:dk_importVariables() {
 	#dk_debugFunc 1 9;
 	
+	${global:PLUGIN} = @{ "Key" = "Value" };
 															###### EXAMPLE ######
 	
-	### PLUGIN_URL											https://github.com/madler/zlib/archive/refs/heads/master.zip
-	dk_call dk_unset PLUGIN_URL;
-	${PLUGIN_URL} = ${args}[0];
-
 	### IMPORT_Path											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_call dk_unset IMPORT_Path;
 	dk_call dk_getParameterValue IMPORT_Path @args;
@@ -80,46 +77,37 @@ function Global:dk_importVariables() {
 		
 	############### <PLUGIN> ##################
 	
-	### PLUGIN_IMPORT_Name							zlib
-	if(${IMPORT_Name}){
-		${PLUGIN_IMPORT_Name}="${IMPORT_Name}";
-	} else {
-		if(!(${IMPORT_Path})){
-			dk_call dk_getcwd;
-			${IMPORT_Path} = ${DKPWD}; 
-		}
-		dk_call dk_basename "${IMPORT_Path}" PLUGIN_IMPORT_Name;
-	}	
+	### <PLUGIN>_IMPORT_Path
+	dk_call dk_getcwd;
+	$PLUGIN["IMPORT_Path"] = ${DKPWD};
 	
-	### PLUGIN_IMPORT_Name_Upper					ZLIB
-	dk_call dk_toUpper "${PLUGIN_IMPORT_Name}" PLUGIN_IMPORT_Name_Upper
+	### <PLUGIN>_IMPORT_Name								zlib
+	dk_call dk_basename $PLUGIN["IMPORT_Path"] IMPORT_Name;
+	$PLUGIN["IMPORT_Name"] = ${IMPORT_Name};
 	
-	### <PLUGIN>									ZLIB
-#	${global:PLUGIN}="${PLUGIN_IMPORT_Name_Upper}";
+	### <PLUGIN>_Name
+	dk_call dk_toUpper $PLUGIN["IMPORT_Name"] PLUGIN_IMPORT_Name_Upper;
+	$PLUGIN["Name"] = "${PLUGIN_IMPORT_Name_Upper}";
+	dk_call dk_convertToCIdentifier $PLUGIN["Name"] PLUGIN_IMPORT_C_Name;
 	
-#	dk_call dk_convertToCIdentifier ${PLUGIN} PLUGIN;
-#	if(!("${PLUGIN}" -eq "${PLUGIN_IMPORT_Name_Upper}")) { 
-#		dk_call dk_notice "'${PLUGIN_IMPORT_Name_Upper}' contains non-alphanumeric characters and was changed to '${PLUGIN}'";
-#	}  
+	if( !($PLUGIN["Name"] -eq ${PLUGIN_IMPORT_C_Name})) {
+		dk_call dk_notice "'$($PLUGIN["Name"])' contains non-alphanumeric characters and will be changed to '${PLUGIN_IMPORT_C_Name}'";
+		$PLUGIN["Name"] = "${PLUGIN_IMPORT_C_Name}";
+	}  
+
+
+	### <PLUGIN>
+	Set-Variable -Name $PLUGIN["Name"] -Value ${PLUGIN} -Scope Global;
+	
+
 	###########################################
-	
-	${global:PLUGIN} = @{ "Key" = "Value" }
-	${global:PLUGIN_NAME} = "${PLUGIN_IMPORT_Name_Upper}";
-	Set-Variable -Name ${PLUGIN_NAME} -Value ${PLUGIN} -Scope Global;
-	$PLUGIN["NAME"] = "${PLUGIN_NAME}";
-	
+
 	
 	### <PLUGIN>_ARGS												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	$PLUGIN["ARGS"] = ${args};
 	
 	### <PLUGIN>_URL												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	$PLUGIN["URL"] = ${args}[0];
-	
-	### <PLUGIN>_IMPORT_Path													C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
-	$PLUGIN["IMPORT_Path"] = ${IMPORT_Path};
-	
-	### <PLUGIN>_IMPORT_Name													ZLIB
-	$PLUGIN["IMPORT_Name"] = ${PLUGIN_IMPORT_Name};
 	
 	### <PLUGIN>_IMPORT												1
 	dk_call dk_validate env:DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
@@ -147,19 +135,19 @@ function Global:dk_importVariables() {
 	}
 	
 	### <PLUGIN>_URL_Extension									.zip
-	dk_call dk_getExtension $PLUGIN["URL_Filename"] PLUGIN_URL_Extension;		
+	dk_call dk_getExtension $PLUGIN["URL_Filename"] PLUGIN_URL_Extension;
 	$PLUGIN["URL_Extension"] = ${PLUGIN_URL_Extension};
 		
 	### <PLUGIN>_URL_File										master
-	dk_call dk_removeExtension $PLUGIN["URL_Filename"] PLUGIN_URL_File			
+	dk_call dk_removeExtension $PLUGIN["URL_Filename"] PLUGIN_URL_File;
 	$PLUGIN["URL_File"] = ${PLUGIN_URL_File};
 	
-	### <PLUGIN>_URL_File_LOWER									master
-	dk_call dk_toLower $PLUGIN["URL_File"] PLUGIN_URL_File_LOWER			
-	$PLUGIN["URL_File_LOWER"] = ${PLUGIN_URL_File_LOWER};
+	### <PLUGIN>_URL_File_Lower									master
+	dk_call dk_toLower $PLUGIN["URL_File"] PLUGIN_URL_File_Lower;
+	$PLUGIN["URL_File_Lower"] = ${PLUGIN_URL_File_Lower};
 	
 	### <PLUGIN>_URL_Array										[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip	
-	dk_call dk_listToArray $PLUGIN["URL_List"] PLUGIN_URL_Array
+	dk_call dk_listToArray $PLUGIN["URL_List"] PLUGIN_URL_Array;
 	$PLUGIN["URL_Array"] = ${PLUGIN_URL_Array};
 	
 	### <PLUGIN>_URL_Length										8
@@ -167,11 +155,11 @@ function Global:dk_importVariables() {
 	$PLUGIN["URL_Length"] = ${PLUGIN_URL_Length};
 	
 	### <PLUGIN>_IMPORT_Name_Lower												zlib
-	dk_call dk_toLower $PLUGIN["IMPORT_Name"] PLUGIN_IMPORT_Name_Lower
+	dk_call dk_toLower $PLUGIN["IMPORT_Name"] PLUGIN_IMPORT_Name_Lower;
 	$PLUGIN["IMPORT_Name_Lower"] = ${PLUGIN_IMPORT_Name_Lower};
 	
 	### <PLUGIN>_IMPORT_Name_Upper												ZLIB
-	dk_call dk_toUpper $PLUGIN["IMPORT_Name"] PLUGIN_IMPORT_Name_Upper	
+	dk_call dk_toUpper $PLUGIN["IMPORT_Name"] PLUGIN_IMPORT_Name_Upper;
 	$PLUGIN["IMPORT_Name_Upper"] = ${PLUGIN_IMPORT_Name_Upper};
 	
 	### PLUGIN_URL_Length														8	
@@ -184,18 +172,18 @@ function Global:dk_importVariables() {
 	if($PLUGIN["GIT"] -eq 1){
 		
 		### PLUGIN_GIT_Filename													zlib
-		dk_call dk_arrayAt ${PLUGIN}_URL_Array 3;	
-		$PLUGIN["GIT_Filename"] = ${dk_arrayAt};
+		dk_call dk_basename $PLUGIN["URL"];
+		$PLUGIN["GIT_Filename"] = "${dk_basename}";
 		
 		### PLUGIN_GIT_Name														zlib
-		dk_call dk_replaceAll $PLUGIN["GIT_Filename"] ".git" "" PLUGIN_GIT_Name;
-		$PLUGIN["GIT_Name"] = ${PLUGIN_GIT_Name};
+		dk_call dk_arrayAt $PLUGIN["URL_Array"] 3;
+		$PLUGIN["GIT_Name"] = ${dk_arrayAt};
 		
 		### PLUGIN_GIT_Name_Lower												zlib
 		dk_call dk_toLower $PLUGIN["GIT_Name"] PLUGIN_GIT_Name_Lower;
 		$PLUGIN["GIT_Name_Lower"] = ${PLUGIN_GIT_Name_Lower};
 		
-		### PLUGIN_GIT_Branch														master
+		### PLUGIN_GIT_Branch													master
 		if(${BRANCH}) {
 			$PLUGIN["GIT_Branch"] = ${BRANCH};
 		} else {
@@ -219,24 +207,24 @@ function Global:dk_importVariables() {
 	if( ${IMPORT_Name} ) {
 		$PLUGIN["INSTALL_Name"] = ${IMPORT_Name};
 	} elseif( $PLUGIN["IMPORT_Name"] ) {
-		$PLUGIN["INSTALL_Name"] = $PLUGIN["IMPORT_Name"];	
+		$PLUGIN["INSTALL_Name"] = $PLUGIN["IMPORT_Name"];
 	} elseif( $PLUGIN["GIT_Name"] ) {
-		$PLUGIN["INSTALL_Name"] = $PLUGIN["GIT_Name"];	
+		$PLUGIN["INSTALL_Name"] = $PLUGIN["GIT_Name"];
 	} elseif( $PLUGIN["URL_Name"] ) { 
-		$PLUGIN["INSTALL_Name"] = $PLUGIN["URL_Name"];		
+		$PLUGIN["INSTALL_Name"] = $PLUGIN["URL_Name"];
 	} else {
 		dk_call dk_error "ERROR: setting PLUGIN_INSTALL_Name";
 	}
-	# dk_call dk_convertToCIdentifier $PLUGIN["INSTALL_Name"] PLUGIN_INSTALL_Name
+	# dk_call dk_convertToCIdentifier $PLUGIN["INSTALL_Name"] PLUGIN_INSTALL_Name;
 
 	### PLUGIN_INSTALL_Version													master
 	if(${VERSION}) { 
 		$PLUGIN["INSTALL_Version"] = ${VERSION};
-	} elseif( $PLUGIN["URL_File_LOWER"] -AND $PLUGIN["IMPORT_Name_Lower"] ) {
+	} elseif( $PLUGIN["URL_File_Lower"] -AND $PLUGIN["IMPORT_Name_Lower"] ) {
 		# deduce the plugin version		
-		dk_call dk_replaceAll $PLUGIN["URL_File_LOWER"] $PLUGIN["IMPORT_Name_Lower"] "" PLUGIN_INSTALL_Version; 
+		dk_call dk_replaceAll $PLUGIN["URL_File_Lower"] $PLUGIN["IMPORT_Name_Lower"] "" PLUGIN_INSTALL_Version;
 		$PLUGIN["INSTALL_Version"] = ${PLUGIN_INSTALL_Version};
-		if( $PLUGIN["URL_File_LOWER"] -eq $PLUGIN["IMPORT_Name_Lower"] ){
+		if( $PLUGIN["URL_File_Lower"] -eq $PLUGIN["IMPORT_Name_Lower"] ){
 			if( $PLUGIN["GIT_Tag"] ) {
 				$PLUGIN["INSTALL_Version"] = $PLUGIN["GIT_Tag"];
 			} elseif( $PLUGIN["GIT_Branch"] ){
@@ -250,13 +238,13 @@ function Global:dk_importVariables() {
 	}
 
 #		dk_call dk_validate PLUGIN_INSTALL_Version "dk_call dk_PLUGIN_INSTALL_Version";
-#		string FIND ${PLUGIN_INSTALL_Version} - index 
+#		string FIND ${PLUGIN_INSTALL_Version} - index;
 #		if [ ${index} -eq 0 ]; then
-#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version 
+#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
 #		fi  
-#		string FIND ${PLUGIN_INSTALL_Version} _ index 
+#		string FIND ${PLUGIN_INSTALL_Version} _ index;
 #		if [ ${index} -eq 0 ]; then
-#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version 
+#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
 #		fi  
 #	} 
 
@@ -275,7 +263,7 @@ function Global:dk_importVariables() {
 	if(${ROOT}) { 
 		$PLUGIN["INSTALL_Root"] = ${ROOT};
 	} else {
-		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR"; 
+		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
 		$PLUGIN["INSTALL_Root"] = ${env:DK3RDPARTY_DIR};
 	}
 
@@ -293,12 +281,12 @@ function Global:dk_importVariables() {
 
 	if($PLUGIN["IMPORT_Name_Lower"] -AND $PLUGIN["GIT_Name_Lower"]) {
 		if(!($PLUGIN["IMPORT_Name_Lower"] -eq $PLUGIN["GIT_Name_Lower"])) {
-			dk_call dk_warning "IMPORT_Name_Lower:$PLUGIN[IMPORT_Name_Lower] and GIT_Name_Lower:$PLUGIN[GIT_Name_Lower] do not match"; 
+			dk_call dk_warning "IMPORT_Name_Lower:$($PLUGIN['IMPORT_Name_Lower']) and GIT_Name_Lower:$($PLUGIN['GIT_Name_Lower']) do not match";
 		}
 	}	
 	
 	### <PLUGIN>													C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	#Set-Variable -Name ${PLUGIN}"] = $PLUGIN["INSTALL_Path";
+	#Set-Variable -Name ${PLUGIN}"] = $PLUGIN["INSTALL_Path"];
 	
 	### <PLUGIN>_Dir												C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	if(!("${PLUGIN}" -eq "GIT")) {	### DO NOT USE GIT_DIR ###
@@ -376,7 +364,8 @@ function Global:DKTEST() {
 	Write-Host "VERSION                   = "$VERSION;
 	Write-Host "IMPORT_Name               = "$IMPORT_Name;
 	Write-Host "IMPORT_Path               = "$IMPORT_Path;
-	Write-Host "PLUGIN_NAME               = "$PLUGIN_NAME;
+	Write-Host "";
+	Write-Host "PLUGIN[NAME]              = "$PLUGIN["NAME"];
 	Write-Host "PLUGIN[ARGS]              = "$PLUGIN["ARGS"];
 	Write-Host "PLUGIN[GIT]               = "$PLUGIN["GIT"];
 	Write-Host "PLUGIN[GIT_Branch]        = "$PLUGIN["GIT_Branch"];
@@ -387,7 +376,6 @@ function Global:DKTEST() {
 	Write-Host "PLUGIN[IMPORT]            = "$PLUGIN["IMPORT"];
 	Write-Host "PLUGIN[IMPORT_Name]       = "$PLUGIN["IMPORT_Name"];
 	Write-Host "PLUGIN[IMPORT_Name_Lower] = "$PLUGIN["IMPORT_Name_Lower"];
-	Write-Host "PLUGIN[IMPORT_Name]       = "$PLUGIN["IMPORT_Name"];
 	Write-Host "PLUGIN[IMPORT_Name_Upper] = "$PLUGIN["IMPORT_Name_Upper"];
 	Write-Host "PLUGIN[IMPORT_Path]       = "$PLUGIN["IMPORT_Path"];
 	Write-Host "PLUGIN[INSTALL_Folder]    = "$PLUGIN["INSTALL_Folder"];
@@ -417,8 +405,8 @@ function Global:DKTEST() {
 	Write-Host "PLUGIN[Version]           = "$PLUGIN["Version"];
 	Write-Host "GIT[ARGS]                 = "$GIT["ARGS"];
 	
-	dk_call dk_chdir "${env:DKIMPORTS_DIR}/zlib";
-	dk_call dk_importVariables "https://github.com/madler/zlib/archive/refs/heads/master.zip";
+	dk_call dk_chdir "${env:DKIMPORTS_DIR}/php-src";
+	dk_call dk_importVariables "https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip";
 	dk_call dk_echo;
 	Write-Host "BRANCH                    = "$BRANCH;
 	Write-Host "DIR                       = "$DIR;
@@ -428,7 +416,8 @@ function Global:DKTEST() {
 	Write-Host "VERSION                   = "$VERSION;
 	Write-Host "IMPORT_Name               = "$IMPORT_Name;
 	Write-Host "IMPORT_Path               = "$IMPORT_Path;
-	Write-Host "PLUGIN_NAME               = "$PLUGIN_NAME;
+	Write-Host "";
+	Write-Host "PLUGIN[NAME]              = "$PLUGIN["NAME"];
 	Write-Host "PLUGIN[ARGS]              = "$PLUGIN["ARGS"];
 	Write-Host "PLUGIN[GIT]               = "$PLUGIN["GIT"];
 	Write-Host "PLUGIN[GIT_Branch]        = "$PLUGIN["GIT_Branch"];
@@ -439,7 +428,6 @@ function Global:DKTEST() {
 	Write-Host "PLUGIN[IMPORT]            = "$PLUGIN["IMPORT"];
 	Write-Host "PLUGIN[IMPORT_Name]       = "$PLUGIN["IMPORT_Name"];
 	Write-Host "PLUGIN[IMPORT_Name_Lower] = "$PLUGIN["IMPORT_Name_Lower"];
-	Write-Host "PLUGIN[IMPORT_Name]       = "$PLUGIN["IMPORT_Name"];
 	Write-Host "PLUGIN[IMPORT_Name_Upper] = "$PLUGIN["IMPORT_Name_Upper"];
 	Write-Host "PLUGIN[IMPORT_Path]       = "$PLUGIN["IMPORT_Path"];
 	Write-Host "PLUGIN[INSTALL_Folder]    = "$PLUGIN["INSTALL_Folder"];
@@ -467,6 +455,4 @@ function Global:DKTEST() {
 	Write-Host "PLUGIN[Tuple_Dir]         = "$PLUGIN["Tuple_Dir"];
 	Write-Host "PLUGIN[Url]               = "$PLUGIN["Url"];
 	Write-Host "PLUGIN[Version]           = "$PLUGIN["Version"];
-	Write-Host "GIT[ARGS]                 = "$GIT["ARGS"];
-	Write-Host "ZLIB[ARGS]                = "$ZLIB["ARGS"];
 }
