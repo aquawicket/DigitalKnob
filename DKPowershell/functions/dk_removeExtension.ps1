@@ -11,7 +11,7 @@ function Global:dk_removeExtension() {
 	${global:dk_removeExtension} = $args[0].Substring(0, $args[0].lastIndexOf('.'));
 	
 	if($args[1]) {
-		Set-Variable -Name $args[1] -Value ${dk_removeExtension} -Scope Global;
+		dk_call dk_set $args[1] ${dk_removeExtension};
 	} else {
 		return ${dk_removeExtension};
 	}

@@ -12,7 +12,7 @@ function Global:dk_toLower() {
 	${global:dk_toLower} = ${str}.ToLower();
 
 	if($args[1]) {
-		Set-Variable -Name $args[1] -Value ${dk_toLower} -Scope Global;
+		dk_call dk_set $args[1] ${dk_toLower};
 	} else {
 		return ${dk_toLower};
 	}

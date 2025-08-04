@@ -13,7 +13,7 @@ function Global:dk_getExtension() {
 	${global:dk_getExtension} = [System.IO.Path]::GetExtension($args[0]);
 	
 	if($args[1]) {
-		Set-Variable -Name $args[1] -Value ${dk_getExtension} -Scope Global;
+		dk_call dk_set $args[1] ${dk_getExtension};
 	} else {
 		return ${dk_getExtension};
 	}

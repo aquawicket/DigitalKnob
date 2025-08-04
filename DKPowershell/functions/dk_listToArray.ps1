@@ -12,7 +12,7 @@ function Global:dk_listToArray() {
 	${global:dk_listToArray} = $args[0].Split(";");
 	
 	if($args[1]) {
-		Set-Variable -Name $args[1] -Value ${dk_listToArray} -Scope Global;
+		dk_call dk_set $args[1] ${dk_listToArray};
 	} else {
 		return ${dk_listToArray};
 	}

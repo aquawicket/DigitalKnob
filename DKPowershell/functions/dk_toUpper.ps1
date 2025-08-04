@@ -8,7 +8,7 @@ if(!$dk_toUpper_ps1){ $dk_toUpper_ps1 = 1; } else{ return; } #include guard
 function Global:dk_toUpper() {
 	dk_debugFunc 1 2;
 
-	$_str_ = $args[0];
+	${_str_} = $args[0];
 	#if(Test-Path variable:$_str_){ $_str_ = Get-Variable -Name ($_str_) -ValueOnly; } 
 	
 	${global:dk_toUpper} = ${_str_}.ToUpper();

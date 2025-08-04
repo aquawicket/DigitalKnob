@@ -16,7 +16,7 @@ function Global:dk_arrayLength() {
 	${global:dk_arrayLength} = $array.count;
  
 	if($args[1]) {
-		Set-Variable -Name $args[1] -Value ${dk_arrayLength} -Scope Global;
+		dk_call dk_set $args[1] ${dk_arrayLength};
 	} else {
 		return ${dk_arrayLength};
 	}
