@@ -24,16 +24,21 @@ fi
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length
 #
 dk_arrayLength() {
-	dk_debugFunc 1 2
-	#dk_call dk_validateArgs array optional:rtn_var
+	dk_debugFunc 1 2;
 	
-	eval local array='("${'$1'[@]}")'		#typeset -n array=${1}	
-	[ -n "${2-}" ] && local rtn_var="${2}" || local rtn_var="dk_arrayLength"
+	eval local array='("${'$1'[@]}")';		#typeset -n array=${1}	
+	[ -n "${2-}" ] && local rtn_var="${2}" || local rtn_var="dk_arrayLength";
 	
-	local _arrayLength=${#array[@]}
+	dk_arrayLength=${#array[@]};
 	
-	eval "${rtn_var}=\"${_arrayLength}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
-	dk_return "${_arrayLength}"				# return value in COMMAND_SUBSTITUTION
+	### return value ###
+	export dk_arrayLength=${dk_arrayLength};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_arrayLength};
+	else
+		builtin echo "${dk_arrayLength}";
+	fi
+	return $?;
 }
 
 
@@ -51,18 +56,21 @@ DKTEST() {
 	myArray[4]="h i j"
 	dk_call dk_printVar myArray
 	
-	# return value in FUNCTION_NAME
-	dk_call dk_arrayLength myArray
-	dk_call dk_printVar dk_arrayLength
-	[ "${dk_arrayLength}" = "5" ] && dk_call dk_success "dk_arrayLength() suceeded" || dk_call dk_error "dk_arrayLength() failed"
 	
-	# return value in RETURN_VAR
-	dk_call dk_arrayLength myArray rv_arrayLength
-	dk_call dk_printVar rv_arrayLength
-	[ "${rv_arrayLength}" = "5" ] && dk_call dk_success "dk_arrayLength() suceeded" || dk_call dk_error "dk_arrayLength() failed"
+	### Result as global variable
+	dk_call dk_echo;
+	dk_call dk_arrayLength myArray;
+	dk_call dk_echo "dk_arrayLength = ${dk_arrayLength}";
 	
-	# return value in COMMAND_SUBSTITUTION
-	cs_arrayLength=$(dk_call dk_arrayLength myArray)
-	dk_call dk_printVar cs_arrayLength
-	[ "${cs_arrayLength}" = "5" ] && dk_call dk_success "dk_arrayLength() suceeded" || dk_call dk_error "dk_arrayLength() failed"
+	### Result as parameter
+	dk_call dk_echo;
+	dk_call dk_arrayLength myArray resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_arrayLength = ${dk_arrayLength}";
+	
+	### Result as return value
+	dk_call dk_echo;
+	resultC=$(dk_call dk_arrayLength myArray);
+	dk_call dk_echo "resultC = ${resultC}";
+	#dk_call dk_echo "dk_arrayLength = ${dk_arrayLength}";					#NOTE: export cannot be seen outside of command substituion
 }

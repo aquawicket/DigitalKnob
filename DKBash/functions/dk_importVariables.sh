@@ -151,16 +151,16 @@ dk_importVariables() {
 	dk_call dk_toLower 			${PLUGIN[URL_File]}; 		PLUGIN[URL_File_Lower]=${dk_toLower};
 	
 	### $PLUGIN[URL_Array]														[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip	
-	dk_call dk_listToArray 		${PLUGIN[URL_List]}; 		PLUGIN[URL_Array]=${dk_listToArray};
+	dk_call dk_listToArray 		${PLUGIN[URL_List]}; 		PLUGIN_URL_Array=(${dk_listToArray[@]});
 	
 	### $PLUGIN[URL_Length]														8
-#	dk_call dk_arrayLength 		${PLUGIN[URL_Array]} 		PLUGIN[URL_Length];
+	dk_call dk_arrayLength 		PLUGIN_URL_Array; 			PLUGIN[URL_Length]=${dk_arrayLength};
 	
 	### $PLUGIN[IMPORT_Name_Lower]												zlib
-#	dk_call dk_toLower 			${PLUGIN[IMPORT_Name]} 		PLUGIN[IMPORT_Name_Lower];
+	dk_call dk_toLower 			${PLUGIN[IMPORT_Name]}; 	PLUGIN[IMPORT_Name_Lower]=${dk_toLower};
 	
 	### $PLUGIN[IMPORT_Name_Upper]												ZLIB
-#	dk_call dk_toUpper			${PLUGIN[IMPORT_Name]}		PLUGIN[IMPORT_Name_Upper];
+	dk_call dk_toUpper			${PLUGIN[IMPORT_Name]};		PLUGIN[IMPORT_Name_Upper]=${dk_toUpper};
 
 
 	###############################################
@@ -169,28 +169,24 @@ dk_importVariables() {
 	if [ "${PLUGIN[GIT]-}" = "1" ]; then 
 
 		### $PLUGIN[GIT_Filename]												todo
-#		dk_call dk_basename		$PLUGIN[URL]		PLUGIN[GIT_Filename];
+		dk_call dk_basename		${PLUGIN[URL]};		PLUGIN[GIT_Filename]=${dk_basename};
 		
 		### $PLUGIN[GIT_Name]													zlib
-#		dk_call dk_arrayAt 		$PLUGIN[URL_Array] 	3 PLUGIN[GIT_Name];
+		dk_call dk_arrayAt 		PLUGIN_URL_Array 	3;  PLUGIN[GIT_Name]=${dk_arrayAt};
 		
 		### $PLUGIN[GIT_Name_Lower]												zlib
-#		dk_call dk_toLower 		$PLUGIN[GIT_Name] 	PLUGIN[GIT_Name_Lower];
+		dk_call dk_toLower 		${PLUGIN[GIT_Name]}; 	PLUGIN[GIT_Name_Lower]=${dk_toLower};
 		
 		### $PLUGIN[GIT_Branch]													master
 		if [ -n "${BRANCH}" ]; then
 			PLUGIN[GIT_Branch]=${BRANCH};
 		else
-			#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_Branch 					
+			#dk_call dk_getGitBranchName ${PLUGIN[URL]}; PLUGIN[GIT_Branch]=${dk_getGitBranchName}; 					
 			PLUGIN[GIT_Branch]="master";
 		fi  
 		
-		### $PLUGIN[GIT_Tag]														TODO
-		if [ -n "${TAG}" ]; then
-			PLUGIN[GIT_Tag]=${TAG};
-		else
-			PLUGIN[GIT_Tag]="";
-		fi
+		### $PLUGIN[GIT_Tag]													TODO
+		PLUGIN[GIT_Tag]="${TAG-}";
 	fi
 
 	##################################################
@@ -209,14 +205,14 @@ dk_importVariables() {
 	else
 		dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Name]";
 	fi
-	# dk_call dk_convertToCIdentifier	$PLUGIN[INSTALL_Name]	PLUGIN[INSTALL_Name];
+	#dk_call dk_convertToCIdentifier	${PLUGIN[INSTALL_Name]};	PLUGIN[INSTALL_Name]=${dk_convertToCIdentifier};
 
 	### $PLUGIN[INSTALL_Version]													master
 	if [ -n "${VERSION-}" ]; then 
 		PLUGIN[INSTALL_Version]=${VERSION};
 	elif [ -n "${PLUGIN[URL_File_Lower]-}" ] && [ -n "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
 		# deduce the plugin version		
-#		dk_call dk_replaceAll 	$PLUGIN[URL_File_Lower] 	$PLUGIN[IMPORT_Name_Lower] 	"" 	PLUGIN[INSTALL_Version];
+		dk_call dk_replaceAll 	${PLUGIN[URL_File_Lower]} 	${PLUGIN[IMPORT_Name_Lower]} 	""; 	PLUGIN[INSTALL_Version]=${dk_replaceAll};
 		if [ "${PLUGIN[URL_File_Lower]-}" = "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
 			if [ -n "${PLUGIN[GIT_Tag]-}" ]; then
 				PLUGIN[INSTALL_Version]=$PLUGIN[GIT_Tag];

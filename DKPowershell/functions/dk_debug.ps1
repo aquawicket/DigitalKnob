@@ -9,10 +9,10 @@ if(!$dk_debug_ps1){ $dk_debug_ps1 = 1; } else{ return; } #include guard
 #
 #    @message	- The message to print
 #
-function Global:dk_debug($message) {
-	dk_debugFunc 1;
+function Global:dk_debug() {
+	dk_debugFunc 0 1;
 	
-	dk_call dk_log DEBUG "${message}"
+	dk_call dk_log DEBUG "$($args[0])";
 }
 
 
@@ -21,5 +21,5 @@ function Global:dk_debug($message) {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	dk_call dk_debug "test dk_debug message"
+	dk_call dk_debug "test dk_debug message";
 }

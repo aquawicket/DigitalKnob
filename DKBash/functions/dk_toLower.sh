@@ -46,18 +46,18 @@ DKTEST() {
 	# INVALID:    "                                                   `        
 	
 	### Result as global variable
-	dk_call dk_echo
+	dk_call dk_echo;
 	dk_call dk_toLower "A:/directoryA/filenameA.extA";
 	dk_call dk_echo "dk_toLower = ${dk_toLower}";
 	
 	### Result as parameter
-	dk_call dk_echo
+	dk_call dk_echo;
 	dk_call dk_toLower "B:/directoryB/filenameB.extB" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
 	dk_call dk_echo "dk_toLower = ${dk_toLower}";
 	
 	### Result as return value
-	dk_call dk_echo
+	dk_call dk_echo;
 	resultC=$(dk_call dk_toLower "C:/directoryC/filenameC.extC");
 	dk_call dk_echo "resultC = ${resultC}";
 	#dk_call dk_echo "dk_toLower = ${dk_toLower}";					#NOTE: export cannot be seen outside of command substituion

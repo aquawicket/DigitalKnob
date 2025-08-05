@@ -8,17 +8,17 @@ if(!$dk_error_ps1){ $dk_error_ps1 = 1; } else{ return; } #include guard
 #
 #    @message	- The message to print
 #
-function Global:dk_error($message) {
-	#dk_debugFunc 1;
+function Global:dk_error() {
+	dk_debugFunc 0 1;
 	
-	dk_call dk_log ERROR "$message"
+	dk_call dk_log ERROR "$($args[0])";
 }
 
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
 function Global:DKTEST() { 
-	dk_debugFunc 0	
+	dk_debugFunc 0;
 	
-	dk_call dk_error "test dk_error message"
+	dk_call dk_error "test dk_error message";
 }

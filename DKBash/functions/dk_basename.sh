@@ -41,18 +41,18 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	### Result as global variable
-	dk_call dk_echo
+	dk_call dk_echo;
 	dk_call dk_basename "A:/directoryA/filenameA.extA";
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
 	### Result as parameter
-	dk_call dk_echo
+	dk_call dk_echo;
 	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
 	### Result as return value
-	dk_call dk_echo
+	dk_call dk_echo;
 	resultC=$(dk_call dk_basename "C:/directoryC/filenameC.extC");
 	dk_call dk_echo "resultC = ${resultC}";
 	#dk_call dk_echo "dk_basename = ${dk_basename}";					#NOTE: export cannot be seen outside of command substituion

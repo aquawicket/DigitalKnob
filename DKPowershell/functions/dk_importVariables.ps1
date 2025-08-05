@@ -168,22 +168,25 @@ function Global:dk_importVariables() {
 		dk_call dk_toLower 		$PLUGIN.GIT_Name 		PLUGIN.GIT_Name_Lower;
 		
 		### $PLUGIN.GIT_Branch													master
-		if(${BRANCH}) {
-			$PLUGIN.GIT_Branch = ${BRANCH};
-		} else {
-			#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_Branch 					
+		$PLUGIN.GIT_Branch = ${BRANCH};
+		if( !($PLUGIN.GIT_Branch) ){
+			#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_Branch
 			$PLUGIN.GIT_Branch = "master";
 		}  
 		
 		### $PLUGIN.GIT_Tag														TODO
-		if(${TAG}) {
-			$PLUGIN.GIT_Tag = ${TAG};
-		}
+		$PLUGIN.GIT_Tag = ${TAG};
 	}
 
 	##################################################
 	############ $PLUGIN.INSTALL_Variables ############
 	##################################################
+	
+	if( !($PLUGIN.IMPORT_Name) ) {
+		dk_call dk_error "PLUGIN.IMPORT_Name invalid";
+	} else {
+		dk_call dk_success "PLUGIN.IMPORT_Name = $($PLUGIN.IMPORT_Name)";
+	}
 	
 	### $PLUGIN.INSTALL_Name														zlib
 	if( ${IMPORT_Name} ) {
@@ -195,8 +198,26 @@ function Global:dk_importVariables() {
 	} elseif( $PLUGIN.URL_Name ) { 
 		$PLUGIN.INSTALL_Name = $PLUGIN.URL_Name;
 	} else {
-		dk_call dk_error "ERROR: setting PLUGIN.INSTALL_Name";
+		dk_call dk_error "`$PLUGIN.INSTALL_Name invalid";
 	}
+	
+	### $PLUGIN.INSTALL_Name
+	if( !($PLUGIN.IMPORT_Name) ) {
+		$PLUGIN.INSTALL_Name=${IMPORT_Name};
+	}
+	if( !($PLUGIN.IMPORT_Name) ) {
+		$PLUGIN.INSTALL_Name=$PLUGIN.IMPORT_Name;
+	} 
+	if( !($PLUGIN.IMPORT_Name) ) {
+		$PLUGIN.INSTALL_Name=$PLUGIN.GIT_Name;
+	}
+	if( !($PLUGIN.IMPORT_Name) ) {
+		$PLUGIN.INSTALL_Name=$PLUGIN.URL_Name;
+	}
+	if( !($PLUGIN.IMPORT_Name) ) {
+		dk_call dk_error "PLUGIN.INSTALL_Name invalid";
+	}
+	
 	# dk_call dk_convertToCIdentifier	$PLUGIN.INSTALL_Name	PLUGIN.INSTALL_Name;
 
 	### $PLUGIN.INSTALL_Version													master
@@ -215,7 +236,7 @@ function Global:dk_importVariables() {
 			}
 		}  
 	} else {
-		dk_call dk_error "ERROR: setting PLUGIN.INSTALL_Version";
+		dk_call dk_error "PLUGIN.INSTALL_Version invalid";
 	}
 
 #	string FIND ${PLUGIN_INSTALL_Version} - index;
@@ -235,7 +256,7 @@ function Global:dk_importVariables() {
 	} elseif( $PLUGIN.INSTALL_Name ) {	
 		$PLUGIN.INSTALL_Folder = $PLUGIN.INSTALL_Name;
 	} else {
-		dk_call dk_error "ERROR: setting PLUGIN.INSTALL_Folder";
+		dk_call dk_error "PLUGIN.INSTALL_Folder invalid";
 	}
 
 	### $PLUGIN.INSTALL_Root														C:/Users/Administrator/DigitalKnob/Development/3rdParty
