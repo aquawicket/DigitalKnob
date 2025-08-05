@@ -21,7 +21,7 @@ dk_getExtension() {
 	dk_debugFunc 1 2
 
 	_filename_=$(dk_call dk_basename "${1}")
-	eval "dk_getExtension=${_filename_##*.}"
+	dk_getExtension=${_filename_##*.}
 	
 	ext[0]="tar.gz"
 	ext[1]="tar.xz"
@@ -29,6 +29,7 @@ dk_getExtension() {
 	for i in "${ext[@]}"; do
 		[[ "$1" == *"$i" ]] && dk_getExtension="$i"
 	done
+	
 	
 	### return value ###
 	export dk_getExtension=${dk_getExtension};

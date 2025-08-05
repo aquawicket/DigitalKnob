@@ -20,10 +20,12 @@ fi
 dk_toUpper() {
 	dk_debugFunc 1 2
 
-	export dk_toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]');
-	#export dk_toUpper=${1^^};  # bash 4.0+
+	#dk_toUpper=${1^^};  # bash 4.0+
+	dk_toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]');
+	
 	
 	### return value ###
+	export dk_toUpper=${dk_toUpper};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_toUpper};
 	else

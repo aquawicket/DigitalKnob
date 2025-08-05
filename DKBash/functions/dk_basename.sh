@@ -21,9 +21,11 @@ fi
 dk_basename() {
 	dk_debugFunc 1 2;
 	
-	export dk_basename=$(basename "${1}");
+	dk_basename=$(basename "${1}");
+
 
 	### return value ###
+	export dk_basename=${dk_basename};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_basename};
 	else

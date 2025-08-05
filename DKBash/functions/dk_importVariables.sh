@@ -145,13 +145,13 @@ dk_importVariables() {
 	dk_call dk_getExtension		${PLUGIN[URL_Filename]};	PLUGIN[URL_Extension]=${dk_getExtension};
 
 	### $PLUGIN[URL_File]														master
-#	dk_call dk_removeExtension	${PLUGIN[URL_Filename]}		PLUGIN[URL_File];
+	dk_call dk_removeExtension	${PLUGIN[URL_Filename]};	PLUGIN[URL_File]=${dk_removeExtension};
 	
 	### $PLUGIN[URL_File_Lower]													master
-#	dk_call dk_toLower 			${PLUGIN[URL_File]} 		PLUGIN[URL_File_Lower];
+	dk_call dk_toLower 			${PLUGIN[URL_File]}; 		PLUGIN[URL_File_Lower]=${dk_toLower};
 	
 	### $PLUGIN[URL_Array]														[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip	
-#	dk_call dk_listToArray 		${PLUGIN[URL_List]} 		PLUGIN[URL_Array];
+	dk_call dk_listToArray 		${PLUGIN[URL_List]}; 		PLUGIN[URL_Array]=${dk_listToArray};
 	
 	### $PLUGIN[URL_Length]														8
 #	dk_call dk_arrayLength 		${PLUGIN[URL_Array]} 		PLUGIN[URL_Length];

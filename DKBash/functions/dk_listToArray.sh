@@ -18,19 +18,24 @@ fi
 #
 #
 dk_listToArray() {
-    dk_debugFunc 2
+    dk_debugFunc 1 2;
     
-	OLDIFS=${IFS}
+	OLDIFS=${IFS};
 	IFS=";"
-	arr=(${1/;;/;}) #NOTE: ${1/;;/;} fixes the issue of empty array items from strings containng ";;"
-	IFS=${OLDIFS}
+	dk_listToArray=(${1}); #NOTE: ${1/;;/;} fixes the issue of empty array items from strings containng ";;"
+	IFS=${OLDIFS};
 	#for i in ${arr[@]}; do echo $i; done
 	
-	### return value ###
-	[ ${#} -gt 1 ] && eval ${2}='("${arr[@]}")' && return
 	
-	# TODO
-	#dk_return "${arr[@]}" && return	
+	### return value ###
+	export dk_listToArray=${dk_listToArray};
+	if [ -n "${2-}" ]; then
+		#export ${2}=${dk_listToArray};
+		eval ${2}='("${dk_listToArray[@]}")';
+	else
+		builtin echo "${dk_listToArray[@]}";
+	fi
+	return $?;
 }
 
 
@@ -38,21 +43,22 @@ dk_listToArray() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
-    dk_call dk_set myList "a;b;c;d;e;f;g"
-	dk_call dk_printVar myList
-    dk_call dk_listToArray "${myList}" myArrayA
-	dk_call dk_printVar myArrayA
+	### Result as global variable
+	dk_call dk_echo;
+	dk_call dk_listToArray "a;b;c;d;e;f;g";
+	dk_call dk_printVar dk_listToArray;
 	
-	dk_call dk_set myListB "https:;;github.com;notepad-plus-plus;notepad-plus-plus;releases;download;v8.6.5;npp.8.6.5.portable.x64.zip"
-	dk_call dk_printVar myListB
-	dk_call dk_listToArray "${myListB}" myArrayB
-    dk_call dk_printVar myArrayB
-
-#	TODO	
-#	dk_call dk_set myListC "a;b;c;d;e;f;g"
-#	dk_call dk_printVar myListC
-#	myArrayC=($(dk_call dk_listToArray "${myListC}"))
-#   dk_call dk_printVar myArrayC
+	### Result as parameter
+	dk_call dk_echo;
+	dk_call dk_listToArray "1;2;3;4;5;6;7" resultB;
+	dk_call dk_printVar resultB;
+	dk_call dk_printVar dk_listToArray;
+	
+	### Result as return value
+	dk_call dk_echo;
+	resultC=($(dk_call dk_listToArray "z;y;x;w;v;t;s"));
+	dk_call dk_printVar resultC;
+	#dk_call dk_printVar dk_listToArray;					#NOTE: export cannot be seen outside of command substituion
 }

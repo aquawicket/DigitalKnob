@@ -23,7 +23,16 @@ dk_getcwd() {
 	dk_debugFunc 0;
 	
 	export DKPWD=${PWD};
-	export dk_getcwd=${DKPWD};
+	dk_getcwd=${DKPWD};
+	
+	### return value ###
+	export dk_getcwd=${dk_getcwd};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_getcwd};
+	else
+		builtin echo "${dk_getcwd}";
+	fi
+	return $?;
 	
 }
 

@@ -14,7 +14,7 @@ fi
 
 
 ##################################################################################
-# dk_replaceAll("input" "searchValue" "newValue" <output_variable>)
+# dk_replaceAll("input" "searchValue" "newValue" rtn_var)
 #
 #
 dk_replaceAll() {
@@ -23,23 +23,23 @@ dk_replaceAll() {
     input="${1}";
 	searchValue="${2}";
 	newValue="${3}";
-    _replaceAll_=;
+    dk_replaceAll=;
 		
     while [ -n "${input}" ]; do
         LEFT=${input%%"${searchValue}"*};
 
         if [ "${LEFT}" = "${input}" ]; then
-            _replaceAll_=${_replaceAll_}${input};
+            dk_replaceAll=${dk_replaceAll}${input};
 			break;
         fi
 
-        _replaceAll_=${_replaceAll_}${LEFT}${newValue};
+        dk_replaceAll=${dk_replaceAll}${LEFT}${newValue};
         input=${input#*"$searchValue"};
     done
-	export dk_replaceAll=${_replaceAll_};
 	
 	
 	### return value ###
+	export dk_replaceAll=${dk_replaceAll};
 	if [ -n "${4-}" ]; then
 		export ${4}=${dk_replaceAll};
 	else
