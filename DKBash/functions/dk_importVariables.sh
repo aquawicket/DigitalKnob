@@ -92,8 +92,11 @@ dk_importVariables() {
 		
 	############### $PLUGIN ##################
 	### $PLUGIN[IMPORT_Path]
-	dk_call dk_getcwd;
-	PLUGIN[IMPORT_Path]=${DKPWD};
+	[ -z "${PLUGIN[IMPORT_Path]-}"] && PLUGIN[IMPORT_Path]=${IMPORT-};
+	if [ -z "${PLUGIN[IMPORT_Path]-}"]; then 
+		dk_call dk_getcwd;
+		PLUGIN[IMPORT_Path]=${DKPWD};
+	fi
 	
 	### $PLUGIN[IMPORT_Name]									zlib
 	dk_call dk_basename				${PLUGIN[IMPORT_Path]};		PLUGIN[IMPORT_Name]=${dk_basename};
@@ -123,8 +126,6 @@ dk_importVariables() {
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
 	if dk_call dk_includes "${IMPORT_Path}" "${DKIMPORTS_DIR}"; then 
 		PLUGIN[IMPORT]="1";
-	else
-		PLUGIN[IMPORT]="0";
 	fi
 	
 	### $PLUGIN[URL_Filename]													master.zip
@@ -137,8 +138,6 @@ dk_importVariables() {
 	### $PLUGIN[GIT]															1
 	if dk_call dk_includes ${PLUGIN[URL]} "https://github.com"; then
 		PLUGIN[GIT]="1";
-	else
-		PLUGIN[GIT]="0";
 	fi
 	
 	### $PLUGIN[URL_Extension]													.zip
@@ -194,17 +193,11 @@ dk_importVariables() {
 	##################################################
 	
 	### $PLUGIN[INSTALL_Name]														zlib
-	if [ -n "${IMPORT_Name-}" ]; then
-		PLUGIN[INSTALL_Name]=${IMPORT_Name};
-	elif [ -n "${PLUGIN[IMPORT_Name]-}" ]; then
-		PLUGIN[INSTALL_Name]=$PLUGIN[IMPORT_Name];
-	elif [ -n "${PLUGIN[GIT_Name]-}" ]; then
-		PLUGIN[INSTALL_Name]=$PLUGIN[GIT_Name];
-	elif [ -n "${PLUGIN[URL_Name]=}" ]; then 
-		PLUGIN[INSTALL_Name]=$PLUGIN[URL_Name];
-	else
-		dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Name]";
-	fi
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${IMPORT_Name};
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[IMPORT_Name]};
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[GIT_Name]};
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[URL_Name]};
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && dk_call dk_error "PLUGIN[INSTALL_Name] invalid";
 	#dk_call dk_convertToCIdentifier	${PLUGIN[INSTALL_Name]};	PLUGIN[INSTALL_Name]=${dk_convertToCIdentifier};
 
 	### $PLUGIN[INSTALL_Version]													master

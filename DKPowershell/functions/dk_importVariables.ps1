@@ -39,7 +39,7 @@ function Global:dk_importVariables() {
 	#dk_debugFunc 1 99;
 	
 	### PLUGIN(array) 
-	${global:PLUGIN} = @{};
+	${global:PLUGIN}=@{};
 															###### EXAMPLE ######
 	
 	### IMPORT_Path											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
@@ -77,9 +77,13 @@ function Global:dk_importVariables() {
 
 		
 	############### $PLUGIN ##################
+	
 	### $PLUGIN.IMPORT_Path
-	dk_call dk_getcwd;
-	$PLUGIN.IMPORT_Path = ${DKPWD};
+	if(!($PLUGIN.IMPORT_Path)){	$PLUGIN.IMPORT_Path=${IMPORT_Path}; }
+	if(!($PLUGIN.IMPORT_Path)){	
+		dk_call dk_getcwd;
+		$PLUGIN.IMPORT_Path=${DKPWD};
+	}
 	
 	### $PLUGIN.IMPORT_Name									zlib
 	dk_call dk_basename				$PLUGIN.IMPORT_Path		PLUGIN.IMPORT_Name;
@@ -91,10 +95,10 @@ function Global:dk_importVariables() {
 	dk_call dk_convertToCIdentifier $PLUGIN.Name_Upper 		PLUGIN.IMPORT_C_Name;
 	
 	### $PLUGIN.Name
-	$PLUGIN.Name = $PLUGIN.Name_Upper;
+	$PLUGIN.Name=$PLUGIN.Name_Upper;
 	if( !($PLUGIN.Name -eq $PLUGIN.IMPORT_C_Name) ){
 		dk_call dk_notice "$($PLUGIN.Name) contains non-alphanumeric characters and will be set to $($PLUGIN.IMPORT_C_Name)";
-		$PLUGIN.Name = $PLUGIN.IMPORT_C_Name;
+		$PLUGIN.Name=$PLUGIN.IMPORT_C_Name;
 	}
 
 	### Set the <PLUGIN.Name> variable to mirror $PLUGIN
@@ -104,17 +108,15 @@ function Global:dk_importVariables() {
 
 	
 	### $PLUGIN.ARGS															"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	$PLUGIN.ARGS = ${args};
+	$PLUGIN.ARGS=${args};
 	
 	### $PLUGIN.URL																"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	$PLUGIN.URL = ${args}[0];
+	$PLUGIN.URL=${args}[0];
 	
 	### $PLUGIN.IMPORT												1
 	dk_call dk_validate env:DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
-	if(dk_call dk_includes "${IMPORT_Path}" "${env:DKIMPORTS_DIR}"){ 
-		$PLUGIN.IMPORT = "1";
-	} else {
-		$PLUGIN.IMPORT = "0";
+	if(dk_call dk_includes $PLUGIN.IMPORT_Path ${env:DKIMPORTS_DIR}){ 
+		$PLUGIN.IMPORT="1";
 	}
 	
 	### $PLUGIN.URL_Filename													master.zip
@@ -126,9 +128,7 @@ function Global:dk_importVariables() {
 	
 	### $PLUGIN.GIT																1
 	if(dk_call dk_includes 		$PLUGIN.URL 		"https://github.com") {
-		$PLUGIN.GIT = "1";
-	} else {
-		$PLUGIN.GIT = "0";
+		$PLUGIN.GIT="1";
 	}
 	
 	### $PLUGIN.URL_Extension													.zip
@@ -168,76 +168,47 @@ function Global:dk_importVariables() {
 		dk_call dk_toLower 		$PLUGIN.GIT_Name 		PLUGIN.GIT_Name_Lower;
 		
 		### $PLUGIN.GIT_Branch													master
-		$PLUGIN.GIT_Branch = ${BRANCH};
+		$PLUGIN.GIT_Branch=${BRANCH};
 		if( !($PLUGIN.GIT_Branch) ){
 			#dk_call dk_getGitBranchName ${PLUGIN_URL} PLUGIN_GIT_Branch
-			$PLUGIN.GIT_Branch = "master";
+			$PLUGIN.GIT_Branch="master";
 		}  
 		
 		### $PLUGIN.GIT_Tag														TODO
-		$PLUGIN.GIT_Tag = ${TAG};
+		$PLUGIN.GIT_Tag=${TAG};
 	}
 
 	##################################################
 	############ $PLUGIN.INSTALL_Variables ############
 	##################################################
 	
-	if( !($PLUGIN.IMPORT_Name) ) {
-		dk_call dk_error "PLUGIN.IMPORT_Name invalid";
-	} else {
-		dk_call dk_success "PLUGIN.IMPORT_Name = $($PLUGIN.IMPORT_Name)";
-	}
-	
-	### $PLUGIN.INSTALL_Name														zlib
-	if( ${IMPORT_Name} ) {
-		$PLUGIN.INSTALL_Name = ${IMPORT_Name};
-	} elseif( $PLUGIN.IMPORT_Name ) {
-		$PLUGIN.INSTALL_Name = $PLUGIN.IMPORT_Name;
-	} elseif( $PLUGIN.GIT_Name ) {
-		$PLUGIN.INSTALL_Name = $PLUGIN.GIT_Name;
-	} elseif( $PLUGIN.URL_Name ) { 
-		$PLUGIN.INSTALL_Name = $PLUGIN.URL_Name;
-	} else {
-		dk_call dk_error "`$PLUGIN.INSTALL_Name invalid";
-	}
-	
 	### $PLUGIN.INSTALL_Name
-	if( !($PLUGIN.IMPORT_Name) ) {
-		$PLUGIN.INSTALL_Name=${IMPORT_Name};
-	}
-	if( !($PLUGIN.IMPORT_Name) ) {
-		$PLUGIN.INSTALL_Name=$PLUGIN.IMPORT_Name;
-	} 
-	if( !($PLUGIN.IMPORT_Name) ) {
-		$PLUGIN.INSTALL_Name=$PLUGIN.GIT_Name;
-	}
-	if( !($PLUGIN.IMPORT_Name) ) {
-		$PLUGIN.INSTALL_Name=$PLUGIN.URL_Name;
-	}
-	if( !($PLUGIN.IMPORT_Name) ) {
-		dk_call dk_error "PLUGIN.INSTALL_Name invalid";
-	}
+	if(!($PLUGIN.INSTALL_Name)) { $PLUGIN.INSTALL_Name=${IMPORT_Name}; }
+	if(!($PLUGIN.INSTALL_Name)) { $PLUGIN.INSTALL_Name=$PLUGIN.IMPORT_Name; } 
+	if(!($PLUGIN.INSTALL_Name)) { $PLUGIN.INSTALL_Name=$PLUGIN.GIT_Name; }
+	if(!($PLUGIN.INSTALL_Name)) { $PLUGIN.INSTALL_Name=$PLUGIN.URL_Name; }
+	if(!($PLUGIN.INSTALL_Name)) { dk_call dk_error "PLUGIN.INSTALL_Name invalid"; }
 	
 	# dk_call dk_convertToCIdentifier	$PLUGIN.INSTALL_Name	PLUGIN.INSTALL_Name;
 
 	### $PLUGIN.INSTALL_Version													master
-	if(${VERSION}) { 
-		$PLUGIN.INSTALL_Version = ${VERSION};
-	} elseif( $PLUGIN.URL_File_Lower -AND $PLUGIN.IMPORT_Name_Lower ) {
-		# deduce the plugin version		
-		dk_call dk_replaceAll 	$PLUGIN.URL_File_Lower 	$PLUGIN.IMPORT_Name_Lower 	"" 	PLUGIN.INSTALL_Version;
-		if( $PLUGIN.URL_File_Lower -eq $PLUGIN.IMPORT_Name_Lower ){
-			if( $PLUGIN.GIT_Tag ) {
-				$PLUGIN.INSTALL_Version = $PLUGIN.GIT_Tag;
-			} elseif( $PLUGIN.GIT_Branch ){
-				$PLUGIN.INSTALL_Version = $PLUGIN.GIT_Branch;
-			} else {
-				$PLUGIN.INSTALL_Version = "master";
-			}
-		}  
-	} else {
-		dk_call dk_error "PLUGIN.INSTALL_Version invalid";
-	}
+	if(!($PLUGIN.INSTALL_Version)) { $PLUGIN.INSTALL_Version=${VERSION}; } 
+	if(!($PLUGIN.INSTALL_Version)) {
+		# deduce the plugin version	
+		if( $PLUGIN.URL_File_Lower -AND $PLUGIN.IMPORT_Name_Lower ) {
+			dk_call dk_replaceAll 	$PLUGIN.URL_File_Lower 	$PLUGIN.IMPORT_Name_Lower 	"" 	PLUGIN.INSTALL_Version;
+			if( $PLUGIN.URL_File_Lower -eq $PLUGIN.IMPORT_Name_Lower ){
+				if( $PLUGIN.GIT_Tag ) {
+					$PLUGIN.INSTALL_Version=$PLUGIN.GIT_Tag;
+				} elseif( $PLUGIN.GIT_Branch ){
+					$PLUGIN.INSTALL_Version=$PLUGIN.GIT_Branch;
+				} else {
+					$PLUGIN.INSTALL_Version="master";
+				}
+			}  
+		}
+	}		
+	if(!($PLUGIN.INSTALL_Version)) { dk_call dk_error "PLUGIN.INSTALL_Version invalid"; }
 
 #	string FIND ${PLUGIN_INSTALL_Version} - index;
 #	if [ ${index} -eq 0 ]; then
@@ -249,30 +220,27 @@ function Global:dk_importVariables() {
 #	fi 
 
 	### $PLUGIN.INSTALL_Folder													zlib-master
-	if(${FOLDER}) {
-		$PLUGIN.INSTALL_Folder = ${FOLDER};
-	} elseif( $PLUGIN.INSTALL_Name -AND $PLUGIN.INSTALL_Version ) {
-		$PLUGIN.INSTALL_Folder = "$($PLUGIN.INSTALL_Name)-$($PLUGIN.INSTALL_Version)";
-	} elseif( $PLUGIN.INSTALL_Name ) {	
-		$PLUGIN.INSTALL_Folder = $PLUGIN.INSTALL_Name;
-	} else {
-		dk_call dk_error "PLUGIN.INSTALL_Folder invalid";
+	if(!($PLUGIN.INSTALL_Folder)) { $PLUGIN.INSTALL_Folder=${FOLDER}; }
+	if(!($PLUGIN.INSTALL_Folder)) {
+		if( $PLUGIN.INSTALL_Name -AND $PLUGIN.INSTALL_Version ) {
+			$PLUGIN.INSTALL_Folder="$($PLUGIN.INSTALL_Name)-$($PLUGIN.INSTALL_Version)";
+		}
 	}
+	if(!($PLUGIN.INSTALL_Folder)) { $PLUGIN.INSTALL_Folder=$PLUGIN.INSTALL_Name; }
+	if(!($PLUGIN.INSTALL_Folder)) { dk_call dk_error "PLUGIN.INSTALL_Folder invalid"; }
 
 	### $PLUGIN.INSTALL_Root														C:/Users/Administrator/DigitalKnob/Development/3rdParty
-	if(${ROOT}) { 
-		$PLUGIN.INSTALL_Root = ${ROOT};
-	} else {
+	if(!($PLUGIN.INSTALL_Root)) { $PLUGIN.INSTALL_Root=${ROOT}; }
+	if(!($PLUGIN.INSTALL_Root)) {
 		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
-		$PLUGIN.INSTALL_Root = ${env:DK3RDPARTY_DIR};
+		$PLUGIN.INSTALL_Root=${env:DK3RDPARTY_DIR};
 	}
+	if(!($PLUGIN.INSTALL_Root)) { dk_call dk_error "PLUGIN.INSTALL_Root invalid"; }
 
 	### $PLUGIN.INSTALL_Path														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	if(${DIR}) { 
-		$PLUGIN.INSTALL_Path = ${DIR};
-	} else {
-		$PLUGIN.INSTALL_Path = "$($PLUGIN.INSTALL_Root)/$($PLUGIN.INSTALL_Folder)";
-	} 
+	if(!($PLUGIN.INSTALL_Path)) { $PLUGIN.INSTALL_Path=${DIR}; }
+	if(!($PLUGIN.INSTALL_Path)) { $PLUGIN.INSTALL_Path="$($PLUGIN.INSTALL_Root)/$($PLUGIN.INSTALL_Folder)"; }
+	if(!($PLUGIN.INSTALL_Path)) { dk_call dk_error "PLUGIN.INSTALL_Path invalid"; }
 
 
 	##############################################
@@ -287,26 +255,26 @@ function Global:dk_importVariables() {
 	
 	### $PLUGIN.Dir												C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	if(!("${PLUGIN}" -eq "GIT")) {	### DO NOT USE GIT_DIR ###
-		$PLUGIN.Dir = $PLUGIN.INSTALL_Path;
+		$PLUGIN.Dir=$PLUGIN.INSTALL_Path;
 	}
 	
 	### $PLUGIN.Import_File										master.zip
-	$PLUGIN.Import_File = $PLUGIN.URL_Filename;
+	$PLUGIN.Import_File=$PLUGIN.URL_Filename;
 
 	### $PLUGIN.Version											master
-	$PLUGIN.Version = $PLUGIN.INSTALL_Version;
+	$PLUGIN.Version=$PLUGIN.INSTALL_Version;
 
 	### $PLUGIN.Folder											zlib-master
-	$PLUGIN.Folder = $PLUGIN.INSTALL_Folder;
+	$PLUGIN.Folder=$PLUGIN.INSTALL_Folder;
 
 	### $PLUGIN.Import_Name										zlib
-	$PLUGIN.Import_Name = $PLUGIN.IMPORT_Name_Lower;
+	$PLUGIN.Import_Name=$PLUGIN.IMPORT_Name_Lower;
 		
 	### $PLUGIN.Branch											master
-	$PLUGIN.Branch = $PLUGIN.GIT_Branch;
+	$PLUGIN.Branch=$PLUGIN.GIT_Branch;
 	
 	### $PLUGIN.Tag												v1.2
-	$PLUGIN.Tag = $PLUGIN.GIT_Tag;
+	$PLUGIN.Tag=$PLUGIN.GIT_Tag;
 
 		
 	#####################################################
@@ -314,19 +282,19 @@ function Global:dk_importVariables() {
 	#####################################################
 
 	### $PLUGIN.Tuple_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
-	$PLUGIN.Tuple_Dir = "$($PLUGIN.INSTALL_Path)/${Target_Tuple}";
+	$PLUGIN.Tuple_Dir="$($PLUGIN.INSTALL_Path)/${Target_Tuple}";
 	
 	### $PLUGIN.Config_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	$PLUGIN.Config_Dir = "$($PLUGIN.INSTALL_Path)/${Config_Path}";
+	$PLUGIN.Config_Dir="$($PLUGIN.INSTALL_Path)/${Config_Path}";
 	
 	### $PLUGIN.Build_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	$PLUGIN.Build_Dir = "$($PLUGIN.INSTALL_Path)/${Build_Path}";
+	$PLUGIN.Build_Dir="$($PLUGIN.INSTALL_Path)/${Build_Path}";
 	
 	### $PLUGIN.Debug_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	$PLUGIN.Debug_Dir = "$($PLUGIN.Tuple_Dir)/${Debug_Dir}";
+	$PLUGIN.Debug_Dir="$($PLUGIN.Tuple_Dir)/${Debug_Dir}";
 	
 	### $PLUGIN.Release_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
-	$PLUGIN.Release_Dir = "$($PLUGIN.Tuple_Dir)/${Release_Dir}";
+	$PLUGIN.Release_Dir="$($PLUGIN.Tuple_Dir)/${Release_Dir}";
 }
 
 
