@@ -20,13 +20,16 @@ fi
 dk_toUpper() {
 	dk_debugFunc 1 2
 
-	local _toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]')
-	#local _toUpper=${1^^}  # bash 4.0+
+	export dk_toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]');
+	#export dk_toUpper=${1^^};  # bash 4.0+
 	
 	### return value ###
-	eval "dk_toUpper=\"${_toUpper}\""				# return value in FUNCTION_NAME
-	[ ${#} -gt 1 ] && eval "${2}=\"${_toUpper}\""	# return value in RETURN_VAR
-	dk_return "${_toUpper}"							# return value in COMMAND_SUBSTITUTION
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_toUpper};
+	else
+		builtin echo "${dk_toUpper}";
+	fi
+	return $?;
 }
 
 

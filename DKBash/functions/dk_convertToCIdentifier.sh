@@ -20,7 +20,7 @@ fi
 dk_convertToCIdentifier() {
 	dk_debugFunc 1 2
 
-	_convertToCIdentifier_="${1//[^[:alnum:]]/_}"		    # BASH alpha_numeric_replace
+	export dk_convertToCIdentifier="${1//[^[:alnum:]]/_}"		    # BASH alpha_numeric_replace
 #	dk_call dk_replaceAll "${input}" "-" "_" input		# POSIX replace
 #	dk_call dk_replaceAll "${input}" "." "_" output		# POSIX replace
 #	dk_call dk_replaceAll "${input}" " " "_" output		# POSIX replace
@@ -58,9 +58,12 @@ dk_convertToCIdentifier() {
 	
 	
 	### return value ###
-	dk_call dk_printVar _convertToCIdentifier_
-	[ ${#} -gt 1 ] && eval "${2}=${_convertToCIdentifier_}" && return  # return value when using rtn_var parameter 
-	dk_return ${_convertToCIdentifier_}; return						  # return value when using command substitution
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_convertToCIdentifier};
+	else
+		builtin echo "${dk_convertToCIdentifier}";
+	fi
+	return $?;
 }
 
 

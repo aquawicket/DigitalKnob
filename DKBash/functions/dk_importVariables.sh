@@ -96,15 +96,15 @@ dk_importVariables() {
 	PLUGIN[IMPORT_Path]=${DKPWD};
 	
 	### $PLUGIN[IMPORT_Name]									zlib
-#	dk_call dk_basename				$PLUGIN[IMPORT_Path]	PLUGIN[IMPORT_Name];
+	dk_call dk_basename				${PLUGIN[IMPORT_Path]};		PLUGIN[IMPORT_Name]=${dk_basename};
 	
 	### $PLUGIN[Name]
-#	dk_call dk_toUpper				$PLUGIN[IMPORT_Name]	PLUGIN[Name];
-#	dk_call dk_convertToCIdentifier $PLUGIN[Name] 			PLUGIN[IMPORT_C_Name];
+	dk_call dk_toUpper				${PLUGIN[IMPORT_Name]};		PLUGIN[Name]=${dk_toUpper};
+	dk_call dk_convertToCIdentifier ${PLUGIN[Name]}; 			PLUGIN[IMPORT_C_Name]=${dk_convertToCIdentifier};
 	
-	if [ "${PLUGIN[Name]-}" = "${PLUGIN[IMPORT_C_Name]-}" ]; then
-		dk_call dk_notice "${PLUGIN[Name]-} contains non-alphanumeric characters and will be changed to ${PLUGIN[IMPORT_C_Name]-}";
-		PLUGIN[Name]=${PLUGIN[IMPORT_C_Name]-};
+	if [ "${PLUGIN[Name]}" = "${PLUGIN[IMPORT_C_Name]}" ]; then
+		dk_call dk_notice "${PLUGIN[Name]} contains non-alphanumeric characters and will be changed to ${PLUGIN[IMPORT_C_Name]}";
+		PLUGIN[Name]=${PLUGIN[IMPORT_C_Name]};
 	fi  
 
 	### Set the <PLUGIN>[Name] variable to mirror $PLUGIN
@@ -121,46 +121,46 @@ dk_importVariables() {
 	
 	### $PLUGIN[IMPORT]															1
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
-#	if(dk_call dk_includes "${IMPORT_Path}" "${DKIMPORTS_DIR}"){ 
-#		PLUGIN[IMPORT]="1";
-#	} else {
-#		PLUGIN[IMPORT]="0";
-#	}
+	if dk_call dk_includes "${IMPORT_Path}" "${DKIMPORTS_DIR}"; then 
+		PLUGIN[IMPORT]="1";
+	else
+		PLUGIN[IMPORT]="0";
+	fi
 	
 	### $PLUGIN[URL_Filename]													master.zip
-#	dk_call dk_basename		$PLUGIN[URL]		PLUGIN[URL_Filename];				
+	dk_call dk_basename		${PLUGIN[URL]};		PLUGIN[URL_Filename]=${dk_basename};				
 	
 	### $PLUGIN[URL_List]														https:;github.com;madler;zlib;archive;refs;heads;master.zip
-#	dk_call dk_replaceAll $PLUGIN[URL] 			"/" 	";" 	PLUGIN[URL_List];
-#	dk_call dk_replaceAll $PLUGIN[URL_List] 	";;" 	";" 	PLUGIN[URL_List];
+	dk_call dk_replaceAll ${PLUGIN[URL]} 		"/" 	";"; 	PLUGIN[URL_List]=${dk_replaceAll};
+	dk_call dk_replaceAll ${PLUGIN[URL_List]} 	";;" 	";"; 	PLUGIN[URL_List]=${dk_replaceAll};
 	
 	### $PLUGIN[GIT]															1
-#	if(dk_call dk_includes $PLUGIN[URL] "https://github.com") {
-#		PLUGIN[GIT] = "1";
-#	} else {
-#		PLUGIN[GIT] = "0";
-#	}
+	if dk_call dk_includes ${PLUGIN[URL]} "https://github.com"; then
+		PLUGIN[GIT]="1";
+	else
+		PLUGIN[GIT]="0";
+	fi
 	
 	### $PLUGIN[URL_Extension]													.zip
-#	dk_call dk_getExtension		$PLUGIN[URL_Filename]	PLUGIN[URL_Extension];
-		
+	dk_call dk_getExtension		${PLUGIN[URL_Filename]};	PLUGIN[URL_Extension]=${dk_getExtension};
+
 	### $PLUGIN[URL_File]														master
-#	dk_call dk_removeExtension	$PLUGIN[URL_Filename]	PLUGIN[URL_File];
+#	dk_call dk_removeExtension	${PLUGIN[URL_Filename]}		PLUGIN[URL_File];
 	
 	### $PLUGIN[URL_File_Lower]													master
-#	dk_call dk_toLower 			$PLUGIN[URL_File] 		PLUGIN[URL_File_Lower];
+#	dk_call dk_toLower 			${PLUGIN[URL_File]} 		PLUGIN[URL_File_Lower];
 	
 	### $PLUGIN[URL_Array]														[0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip	
-#	dk_call dk_listToArray 		$PLUGIN[URL_List] 		PLUGIN[URL_Array];
+#	dk_call dk_listToArray 		${PLUGIN[URL_List]} 		PLUGIN[URL_Array];
 	
 	### $PLUGIN[URL_Length]														8
-#	dk_call dk_arrayLength 		$PLUGIN[URL_Array] 		PLUGIN[URL_Length];
+#	dk_call dk_arrayLength 		${PLUGIN[URL_Array]} 		PLUGIN[URL_Length];
 	
 	### $PLUGIN[IMPORT_Name_Lower]												zlib
-#	dk_call dk_toLower 			$PLUGIN[IMPORT_Name] 	PLUGIN[IMPORT_Name_Lower];
+#	dk_call dk_toLower 			${PLUGIN[IMPORT_Name]} 		PLUGIN[IMPORT_Name_Lower];
 	
 	### $PLUGIN[IMPORT_Name_Upper]												ZLIB
-#	dk_call dk_toUpper			$PLUGIN[IMPORT_Name]	PLUGIN[IMPORT_Name_Upper];
+#	dk_call dk_toUpper			${PLUGIN[IMPORT_Name]}		PLUGIN[IMPORT_Name_Upper];
 
 
 	###############################################

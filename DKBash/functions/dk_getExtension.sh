@@ -29,12 +29,15 @@ dk_getExtension() {
 	for i in "${ext[@]}"; do
 		[[ "$1" == *"$i" ]] && dk_getExtension="$i"
 	done
-
-	### return value ###
-	#dk_call dk_printVar dk_getExtension
 	
-	[ ${#} -gt 1 ] && eval "${2}=${dk_getExtension}" && return		# return value when using rtn_var parameter 
-	dk_return ${dk_getExtension}; return							# return value when using command substitution 
+	### return value ###
+	export dk_getExtension=${dk_getExtension};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_getExtension};
+	else
+		builtin echo "${dk_getExtension}";
+	fi
+	return $?;
 }
 
 

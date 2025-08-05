@@ -23,12 +23,12 @@ dk_basename() {
 	
 	export dk_basename=$(basename "${1}");
 
+	### return value ###
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_basename};
 	else
 		builtin echo "${dk_basename}";
 	fi
-	
 	return $?;
 }
 
