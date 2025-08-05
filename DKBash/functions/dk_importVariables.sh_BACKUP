@@ -1,7 +1,4 @@
 #!/bin/sh
-
-# https://stackoverflow.com/a/78128262/688352
-
 ###### DK.sh #####################################################################
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
