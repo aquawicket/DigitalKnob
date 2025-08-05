@@ -124,9 +124,7 @@ dk_importVariables() {
 	
 	### $PLUGIN[IMPORT]															1
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
-	if dk_call dk_includes "${IMPORT_Path}" "${DKIMPORTS_DIR}"; then 
-		PLUGIN[IMPORT]="1";
-	fi
+	dk_call dk_includes "${PLUGIN[IMPORT_Path]}" "${DKIMPORTS_DIR}" && PLUGIN[IMPORT]="1";
 	
 	### $PLUGIN[URL_Filename]													master.zip
 	dk_call dk_basename		${PLUGIN[URL]};		PLUGIN[URL_Filename]=${dk_basename};				
@@ -136,9 +134,7 @@ dk_importVariables() {
 	dk_call dk_replaceAll ${PLUGIN[URL_List]} 	";;" 	";"; 	PLUGIN[URL_List]=${dk_replaceAll};
 	
 	### $PLUGIN[GIT]															1
-	if dk_call dk_includes ${PLUGIN[URL]} "https://github.com"; then
-		PLUGIN[GIT]="1";
-	fi
+	dk_call dk_includes "${PLUGIN[URL]}" "https://github.com" && PLUGIN[GIT]="1";
 	
 	### $PLUGIN[URL_Extension]													.zip
 	dk_call dk_getExtension		${PLUGIN[URL_Filename]};	PLUGIN[URL_Extension]=${dk_getExtension};
@@ -201,23 +197,23 @@ dk_importVariables() {
 	#dk_call dk_convertToCIdentifier	${PLUGIN[INSTALL_Name]};	PLUGIN[INSTALL_Name]=${dk_convertToCIdentifier};
 
 	### $PLUGIN[INSTALL_Version]													master
-	if [ -n "${VERSION-}" ]; then 
-		PLUGIN[INSTALL_Version]=${VERSION};
-	elif [ -n "${PLUGIN[URL_File_Lower]-}" ] && [ -n "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
-		# deduce the plugin version		
-		dk_call dk_replaceAll 	${PLUGIN[URL_File_Lower]} 	${PLUGIN[IMPORT_Name_Lower]} 	""; 	PLUGIN[INSTALL_Version]=${dk_replaceAll};
-		if [ "${PLUGIN[URL_File_Lower]-}" = "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
-			if [ -n "${PLUGIN[GIT_Tag]-}" ]; then
-				PLUGIN[INSTALL_Version]=$PLUGIN[GIT_Tag];
-			elif [ -n "${PLUGIN[GIT_Branch]-}" ]; then
-				PLUGIN[INSTALL_Version]=$PLUGIN[GIT_Branch];
-			else
-				PLUGIN[INSTALL_Version]="master";
-			fi
-		fi 
-	else
-		dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Version]";
+	[ -z "${PLUGIN[INSTALL_Version]-}" ] && PLUGIN[INSTALL_Version]=${VERSION};
+	if [ -z "${PLUGIN[INSTALL_Version]-}" ]; then 
+		if [ -n "${PLUGIN[URL_File_Lower]-}" ] && [ -n "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
+			# deduce the plugin version		
+			dk_call dk_replaceAll 	${PLUGIN[URL_File_Lower]} 	${PLUGIN[IMPORT_Name_Lower]} 	""; 	PLUGIN[INSTALL_Version]=${dk_replaceAll};
+			if [ "${PLUGIN[URL_File_Lower]-}" = "${PLUGIN[IMPORT_Name_Lower]-}" ]; then
+				if [ -n "${PLUGIN[GIT_Tag]-}" ]; then
+					PLUGIN[INSTALL_Version]=$PLUGIN[GIT_Tag];
+				elif [ -n "${PLUGIN[GIT_Branch]-}" ]; then
+					PLUGIN[INSTALL_Version]=$PLUGIN[GIT_Branch];
+				else
+					PLUGIN[INSTALL_Version]="master";
+				fi
+			fi 
+		fi
 	fi
+	[ -z "${PLUGIN[INSTALL_Version]-}" ] && dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Version]";
 
 #		string FIND ${PLUGIN_INSTALL_Version} - index;
 #		if [ ${index} -eq 0 ]; then
@@ -230,30 +226,23 @@ dk_importVariables() {
 #	} 
 
 	### $PLUGIN[INSTALL_Folder]													zlib-master
-	if [ -n "${FOLDER}" ]; then
-		PLUGIN[INSTALL_Folder]=${FOLDER};
-	elif [ -n "${PLUGIN[INSTALL_Name]-}" ] && [ -n "${PLUGIN[INSTALL_Version]-}" ]; then
+	[ -z "${PLUGIN[INSTALL_Folder]-}" ] && PLUGIN[INSTALL_Folder]=${FOLDER};
+	if [ -z "${PLUGIN[INSTALL_Folder]-}" ] && [ -n "${PLUGIN[INSTALL_Name]-}" ] && [ -n "${PLUGIN[INSTALL_Version]-}" ]; then
 		PLUGIN[INSTALL_Folder]="${PLUGIN[INSTALL_Name]-}-${PLUGIN[INSTALL_Version]-}";
-	elif [ -n "${PLUGIN[INSTALL_Name]-}" ]; then
-		PLUGIN[INSTALL_Folder]=${PLUGIN[INSTALL_Name]};
-	else
-		dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Folder]";
 	fi
+	[ -z "${PLUGIN[INSTALL_Folder]-}" ] && PLUGIN[INSTALL_Folder]=${PLUGIN[INSTALL_Name]};
+	[ -z "${PLUGIN[INSTALL_Folder]-}" ] && dk_call dk_error "ERROR: setting PLUGIN[INSTALL_Folder]";
 
 	### $PLUGIN[INSTALL_Root]														C:/Users/Administrator/DigitalKnob/Development/3rdParty
-	if [ -n "${ROOT}" ]; then 
-		PLUGIN[INSTALL_Root]=${ROOT};
-	else
+	[ -z "${PLUGIN[INSTALL_Root]-}" ] && PLUGIN[INSTALL_Root]=${ROOT};
+	if [ -z "${PLUGIN[INSTALL_Root]-}" ]; then
 		dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
 		PLUGIN[INSTALL_Root]=${DK3RDPARTY_DIR};
 	fi
 
 	### $PLUGIN[INSTALL_Path]														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	if [ -n "${DIR}" ]; then
-		PLUGIN[INSTALL_Path]=${DIR};
-	else
-		PLUGIN[INSTALL_Path]="${PLUGIN[INSTALL_Root]-}/${PLUGIN[INSTALL_Folder]-}";
-	fi
+	[ -z "${PLUGIN[INSTALL_Path]-}" ] && PLUGIN[INSTALL_Path]=${DIR};
+	[ -z "${PLUGIN[INSTALL_Path]-}" ] && PLUGIN[INSTALL_Path]="${PLUGIN[INSTALL_Root]-}/${PLUGIN[INSTALL_Folder]-}";
 
 
 	##############################################
