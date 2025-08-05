@@ -35,9 +35,18 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 #
 #	VERSION (optional)										master
 #
+function Global:PLUGIN() {
+	return "PLUGIN VALUE";
+}
+
+function Global:PLUGIN.NAME() {
+	return "PLUGIN.NAME VALUE";
+}
+
 function Global:dk_importVariables() {
-	#dk_debugFunc 1 9;
+	#dk_debugFunc 1 99;
 	
+	### PLUGIN(array) 
 	${global:PLUGIN} = @{};
 															###### EXAMPLE ######
 	
@@ -83,17 +92,21 @@ function Global:dk_importVariables() {
 	### $PLUGIN.IMPORT_Name									zlib
 	dk_call dk_basename				$PLUGIN.IMPORT_Path		PLUGIN.IMPORT_Name;
 	
-	### $PLUGIN.Name
-	dk_call dk_toUpper				$PLUGIN.IMPORT_Name		PLUGIN.Name;
-	dk_call dk_convertToCIdentifier $PLUGIN.Name 			PLUGIN.IMPORT_C_Name;
+	### $PLUGIN.Name_Upper
+	dk_call dk_toUpper				$PLUGIN.IMPORT_Name		PLUGIN.Name_Upper;
 	
+	### $PLUGIN.IMPORT_C_Name
+	dk_call dk_convertToCIdentifier $PLUGIN.Name_Upper 		PLUGIN.IMPORT_C_Name;
+	
+	### $PLUGIN.Name
+	$PLUGIN.Name = $PLUGIN.Name_Upper;
 	if( !($PLUGIN.Name -eq $PLUGIN.IMPORT_C_Name) ){
-		dk_call dk_notice "'$($PLUGIN.Name)' contains non-alphanumeric characters and will be changed to '$($PLUGIN.IMPORT_C_Name)'";
+		dk_call dk_notice "'$($PLUGIN.Name)' contains non-alphanumeric characters and will be set to '$($PLUGIN.IMPORT_C_Name)'";
 		$PLUGIN.Name = $PLUGIN.IMPORT_C_Name;
-	}  
+	}
 
 	### Set the <PLUGIN.Name> variable to mirror $PLUGIN
-	### Example $ZLIB.variable will be the same as $PLUGIN.variable when importing zlib
+	### All $PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
 	Set-Variable -Name $PLUGIN.Name -Value ${PLUGIN} -Scope Global;
 	############### $PLUGIN ##################
 
@@ -113,14 +126,14 @@ function Global:dk_importVariables() {
 	}
 	
 	### $PLUGIN.URL_Filename													master.zip
-	dk_call dk_basename		$PLUGIN.URL		PLUGIN.URL_Filename;				
+	dk_call dk_basename			$PLUGIN.URL		PLUGIN.URL_Filename;				
 	
 	### $PLUGIN.URL_List														https:;github.com;madler;zlib;archive;refs;heads;master.zip
-	dk_call dk_replaceAll $PLUGIN.URL 		"/" 	";" 	PLUGIN.URL_List;
-	dk_call dk_replaceAll $PLUGIN.URL_List 	";;" 	";" 	PLUGIN.URL_List;
+	dk_call dk_replaceAll 		$PLUGIN.URL 		"/" 	";" 	PLUGIN.URL_List;
+	dk_call dk_replaceAll 		$PLUGIN.URL_List 	";;" 	";" 	PLUGIN.URL_List;
 	
 	### $PLUGIN.GIT																1
-	if(dk_call dk_includes $PLUGIN.URL "https://github.com") {
+	if(dk_call dk_includes 		$PLUGIN.URL 		"https://github.com") {
 		$PLUGIN.GIT = "1";
 	} else {
 		$PLUGIN.GIT = "0";
@@ -154,14 +167,13 @@ function Global:dk_importVariables() {
 	if($PLUGIN.GIT -eq 1){
 		
 		### $PLUGIN.GIT_Filename												todo
-		dk_call dk_basename		$PLUGIN.URL			PLUGIN.GIT_Filename;
+		dk_call dk_basename		$PLUGIN.URL				PLUGIN.GIT_Filename;
 		
 		### $PLUGIN.GIT_Name													zlib
-		dk_call dk_arrayAt 		$PLUGIN.URL_Array 	3;
-		$PLUGIN.GIT_Name = ${dk_arrayAt};
+		dk_call dk_arrayAt 		$PLUGIN.URL_Array 	3	PLUGIN.GIT_Name;
 		
 		### $PLUGIN.GIT_Name_Lower												zlib
-		dk_call dk_toLower 		$PLUGIN.GIT_Name 	PLUGIN.GIT_Name_Lower;
+		dk_call dk_toLower 		$PLUGIN.GIT_Name 		PLUGIN.GIT_Name_Lower;
 		
 		### $PLUGIN.GIT_Branch													master
 		if(${BRANCH}) {
@@ -174,8 +186,6 @@ function Global:dk_importVariables() {
 		### $PLUGIN.GIT_Tag														TODO
 		if(${TAG}) {
 			$PLUGIN.GIT_Tag = ${TAG};
-		} else {
-			$PLUGIN.GIT_Tag = "";
 		}
 	}
 
@@ -216,16 +226,14 @@ function Global:dk_importVariables() {
 		dk_call dk_error "ERROR: setting PLUGIN.INSTALL_Version";
 	}
 
-#		dk_call dk_validate PLUGIN_INSTALL_Version "dk_call dk_PLUGIN_INSTALL_Version";
-#		string FIND ${PLUGIN_INSTALL_Version} - index;
-#		if [ ${index} -eq 0 ]; then
-#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
-#		fi  
-#		string FIND ${PLUGIN_INSTALL_Version} _ index;
-#		if [ ${index} -eq 0 ]; then
-#			string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
-#		fi  
-#	} 
+#	string FIND ${PLUGIN_INSTALL_Version} - index;
+#	if [ ${index} -eq 0 ]; then
+#		string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
+#	fi  
+#	string FIND ${PLUGIN_INSTALL_Version} _ index;
+#	if [ ${index} -eq 0 ]; then
+#		string SUBSTRING ${PLUGIN_INSTALL_Version} 1 -1 PLUGIN_INSTALL_Version;
+#	fi 
 
 	### $PLUGIN.INSTALL_Folder													zlib-master
 	if(${FOLDER}) {
@@ -269,9 +277,6 @@ function Global:dk_importVariables() {
 		$PLUGIN.Dir = $PLUGIN.INSTALL_Path;
 	}
 	
-	### $PLUGIN.Url												https://github.com/madler/zlib/archive/refs/heads/master.zip
-	$PLUGIN.Url = $PLUGIN.URL;
-	
 	### $PLUGIN.Import_File										master.zip
 	$PLUGIN.Import_File = $PLUGIN.URL_Filename;
 
@@ -305,11 +310,10 @@ function Global:dk_importVariables() {
 	$PLUGIN.Build_Dir = "$($PLUGIN.INSTALL_Path)/${Build_Path}";
 	
 	### $PLUGIN.Debug_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	$PLUGIN.Debug_Dir = "$($PLUGIN.INSTALL_Path)/${Target_Tuple}/${Debug_Dir}";
+	$PLUGIN.Debug_Dir = "$($PLUGIN.Tuple_Dir)/${Debug_Dir}";
 	
 	### $PLUGIN.Release_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
-	$PLUGIN.Release_Dir = "$($PLUGIN.INSTALL_Path)/${Target_Tuple}/${Release_Dir}";
-
+	$PLUGIN.Release_Dir = "$($PLUGIN.Tuple_Dir)/${Release_Dir}";
 }
 
 
@@ -332,54 +336,56 @@ function Global:DKTEST() {
 	dk_call dk_chdir "${env:DKIMPORTS_DIR}/git";
 	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_Name git ROOT "${env:DKTOOLS_DIR}";
 	dk_call dk_echo;
-	dk_call dk_echo "BRANCH                   = '${BRANCH}'";
-	dk_call dk_echo "DIR                      = '${DIR}'";
-	dk_call dk_echo "FOLDER                   = '${FOLDER}'";
-	dk_call dk_echo "ROOT                     = '${ROOT}'";
-	dk_call dk_echo "TAG                      = '${TAG}'";
-	dk_call dk_echo "VERSION                  = '${VERSION}'";
-	dk_call dk_echo "IMPORT_Name              = '${IMPORT_Name}'";
-	dk_call dk_echo "IMPORT_Path              = '${IMPORT_Path}'";
+	dk_call dk_echo "`$BRANCH                   = '${BRANCH}'";
+	dk_call dk_echo "`$DIR                      = '${DIR}'";
+	dk_call dk_echo "`$FOLDER                   = '${FOLDER}'";
+	dk_call dk_echo "`$ROOT                     = '${ROOT}'";
+	dk_call dk_echo "`$TAG                      = '${TAG}'";
+	dk_call dk_echo "`$VERSION                  = '${VERSION}'";
+	dk_call dk_echo "`$IMPORT_Name              = '${IMPORT_Name}'";
+	dk_call dk_echo "`$IMPORT_Path              = '${IMPORT_Path}'";
 	dk_call dk_echo "";
-	dk_call dk_echo "PLUGIN.NAME              = '$($PLUGIN.NAME)'";
-	dk_call dk_echo "PLUGIN.ARGS              = '$($PLUGIN.ARGS)'";
-	dk_call dk_echo "PLUGIN.GIT               = '$($PLUGIN.GIT)'";
-	dk_call dk_echo "PLUGIN.GIT_Branch        = '$($PLUGIN.GIT_Branch)'";
-	dk_call dk_echo "PLUGIN.GIT_Filename      = '$($PLUGIN.GIT_Filename)'";
-	dk_call dk_echo "PLUGIN.GIT_Name          = '$($PLUGIN.GIT_Name)'";
-	dk_call dk_echo "PLUGIN.GIT_Lower         = '$($PLUGIN.GIT_Lower)'";
-	dk_call dk_echo "PLUGIN.GIT_Tag           = '$($PLUGIN.GIT_Tag)'";
-	dk_call dk_echo "PLUGIN.IMPORT            = '$($PLUGIN.IMPORT)'";
-	dk_call dk_echo "PLUGIN.IMPORT_Name       = '$($PLUGIN.IMPORT_Name)'";
-	dk_call dk_echo "PLUGIN.IMPORT_Name_Lower = '$($PLUGIN.IMPORT_Name_Lower)'";
-	dk_call dk_echo "PLUGIN.IMPORT_Name_Upper = '$($PLUGIN.IMPORT_Name_Upper)'";
-	dk_call dk_echo "PLUGIN.IMPORT_Path       = '$($PLUGIN.IMPORT_Path)'";
-	dk_call dk_echo "PLUGIN.INSTALL_Folder    = '$($PLUGIN.INSTALL_Folder)'";
-	dk_call dk_echo "PLUGIN.INSTALL_Name      = '$($PLUGIN.INSTALL_Name)'";
-	dk_call dk_echo "PLUGIN.INSTALL_Path      = '$($PLUGIN.INSTALL_Path)'";
-	dk_call dk_echo "PLUGIN.INSTALL_Root      = '$($PLUGIN.INSTALL_Root)'";
-	dk_call dk_echo "PLUGIN.INSTALL_Version   = '$($PLUGIN.INSTALL_Version)'";
-	dk_call dk_echo "PLUGIN.URL               = '$($PLUGIN.URL)'";
-	dk_call dk_echo "PLUGIN.URL_Array         = '$($PLUGIN.URL_Array)'";
-	dk_call dk_echo "PLUGIN.URL_Extension     = '$($PLUGIN.URL_Extension)'";
-	dk_call dk_echo "PLUGIN.URL_File          = '$($PLUGIN.URL_File)'";
-	dk_call dk_echo "PLUGIN.URL_Filename      = '$($PLUGIN.URL_Filename)'";
-	dk_call dk_echo "PLUGIN.URL_Length        = '$($PLUGIN.URL_Length)'";
-	dk_call dk_echo "PLUGIN.URL_List          = '$($PLUGIN.URL_List)'";
-	dk_call dk_echo "PLUGIN.Branch            = '$($PLUGIN.Branch)'";
-	dk_call dk_echo "PLUGIN.Build_Dir         = '$($PLUGIN.Build_Dir)'";
-	dk_call dk_echo "PLUGIN.Config_Dir        = '$($PLUGIN.Config_Dir)'";
-	dk_call dk_echo "PLUGIN.Debug_Dir         = '$($PLUGIN.Debug_Dir)'";
-	dk_call dk_echo "PLUGIN.Dir               = '$($PLUGIN.Dir)'";
-	dk_call dk_echo "PLUGIN.Folder            = '$($PLUGIN.Folder)'";
-	dk_call dk_echo "PLUGIN.Import_File       = '$($PLUGIN.Import_File)'";
-	dk_call dk_echo "PLUGIN.Import_Name       = '$($PLUGIN.Import_Name)'";
-	dk_call dk_echo "PLUGIN.Release_Dir       = '$($PLUGIN.Release_Dir)'";
-	dk_call dk_echo "PLUGIN.Tag               = '$($PLUGIN.Tag)'";
-	dk_call dk_echo "PLUGIN.Tuple_Dir         = '$($PLUGIN.Tuple_Dir)'";
-	dk_call dk_echo "PLUGIN.Url               = '$($PLUGIN.Url)'";
-	dk_call dk_echo "PLUGIN.Version           = '$($PLUGIN.Version)'";
-	dk_call dk_echo "GIT.ARGS                 = '$($GIT.ARGS)'";
+	dk_call dk_echo " PLUGIN                   = '$(PLUGIN)'";
+	dk_call dk_echo " PLUGIN.NAME              = '$(PLUGIN.NAME)'";
+	dk_call dk_echo "`$PLUGIN                   = '$($PLUGIN)'";
+	dk_call dk_echo "`$PLUGIN.NAME              = '$($PLUGIN.NAME)'";
+	dk_call dk_echo "`$PLUGIN.ARGS              = '$($PLUGIN.ARGS)'";
+	dk_call dk_echo "`$PLUGIN.GIT               = '$($PLUGIN.GIT)'";
+	dk_call dk_echo "`$PLUGIN.GIT_Branch        = '$($PLUGIN.GIT_Branch)'";
+	dk_call dk_echo "`$PLUGIN.GIT_Filename      = '$($PLUGIN.GIT_Filename)'";
+	dk_call dk_echo "`$PLUGIN.GIT_Name          = '$($PLUGIN.GIT_Name)'";
+	dk_call dk_echo "`$PLUGIN.GIT_Lower         = '$($PLUGIN.GIT_Lower)'";
+	dk_call dk_echo "`$PLUGIN.GIT_Tag           = '$($PLUGIN.GIT_Tag)'";
+	dk_call dk_echo "`$PLUGIN.IMPORT            = '$($PLUGIN.IMPORT)'";
+	dk_call dk_echo "`$PLUGIN.IMPORT_Name       = '$($PLUGIN.IMPORT_Name)'";
+	dk_call dk_echo "`$PLUGIN.IMPORT_Name_Lower = '$($PLUGIN.IMPORT_Name_Lower)'";
+	dk_call dk_echo "`$PLUGIN.IMPORT_Name_Upper = '$($PLUGIN.IMPORT_Name_Upper)'";
+	dk_call dk_echo "`$PLUGIN.IMPORT_Path       = '$($PLUGIN.IMPORT_Path)'";
+	dk_call dk_echo "`$PLUGIN.INSTALL_Folder    = '$($PLUGIN.INSTALL_Folder)'";
+	dk_call dk_echo "`$PLUGIN.INSTALL_Name      = '$($PLUGIN.INSTALL_Name)'";
+	dk_call dk_echo "`$PLUGIN.INSTALL_Path      = '$($PLUGIN.INSTALL_Path)'";
+	dk_call dk_echo "`$PLUGIN.INSTALL_Root      = '$($PLUGIN.INSTALL_Root)'";
+	dk_call dk_echo "`$PLUGIN.INSTALL_Version   = '$($PLUGIN.INSTALL_Version)'";
+	dk_call dk_echo "`$PLUGIN.URL               = '$($PLUGIN.URL)'";
+	dk_call dk_echo "`$PLUGIN.URL_Array         = '$($PLUGIN.URL_Array)'";
+	dk_call dk_echo "`$PLUGIN.URL_Extension     = '$($PLUGIN.URL_Extension)'";
+	dk_call dk_echo "`$PLUGIN.URL_File          = '$($PLUGIN.URL_File)'";
+	dk_call dk_echo "`$PLUGIN.URL_Filename      = '$($PLUGIN.URL_Filename)'";
+	dk_call dk_echo "`$PLUGIN.URL_Length        = '$($PLUGIN.URL_Length)'";
+	dk_call dk_echo "`$PLUGIN.URL_List          = '$($PLUGIN.URL_List)'";
+	dk_call dk_echo "`$PLUGIN.Branch            = '$($PLUGIN.Branch)'";
+	dk_call dk_echo "`$PLUGIN.Build_Dir         = '$($PLUGIN.Build_Dir)'";
+	dk_call dk_echo "`$PLUGIN.Config_Dir        = '$($PLUGIN.Config_Dir)'";
+	dk_call dk_echo "`$PLUGIN.Debug_Dir         = '$($PLUGIN.Debug_Dir)'";
+	dk_call dk_echo "`$PLUGIN.Dir               = '$($PLUGIN.Dir)'";
+	dk_call dk_echo "`$PLUGIN.Folder            = '$($PLUGIN.Folder)'";
+	dk_call dk_echo "`$PLUGIN.Import_File       = '$($PLUGIN.Import_File)'";
+	dk_call dk_echo "`$PLUGIN.Import_Name       = '$($PLUGIN.Import_Name)'";
+	dk_call dk_echo "`$PLUGIN.Release_Dir       = '$($PLUGIN.Release_Dir)'";
+	dk_call dk_echo "`$PLUGIN.Tag               = '$($PLUGIN.Tag)'";
+	dk_call dk_echo "`$PLUGIN.Tuple_Dir         = '$($PLUGIN.Tuple_Dir)'";
+	dk_call dk_echo "`$PLUGIN.Version           = '$($PLUGIN.Version)'";
+	dk_call dk_echo "`$GIT.ARGS                 = '$($GIT.ARGS)'";
 	
 	dk_call dk_chdir "${env:DKIMPORTS_DIR}/php-src";
 	dk_call dk_importVariables "https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip";
@@ -429,6 +435,5 @@ function Global:DKTEST() {
 	dk_call dk_echo "PLUGIN.Release_Dir       = '$($PLUGIN.Release_Dir)'";
 	dk_call dk_echo "PLUGIN.Tag               = '$($PLUGIN.Tag)'";
 	dk_call dk_echo "PLUGIN.Tuple_Dir         = '$($PLUGIN.Tuple_Dir)'";
-	dk_call dk_echo "PLUGIN.Url               = '$($PLUGIN.Url)'";
 	dk_call dk_echo "PLUGIN.Version           = '$($PLUGIN.Version)'";
 }
