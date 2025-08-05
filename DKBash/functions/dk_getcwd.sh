@@ -14,13 +14,17 @@ fi
 
 
 ##################################################################################
+[ -z "${DKPWD-}" ] && export DKPWD=${PWD};
+##################################################################################
 # dk_getcwd()
 #
 #
 dk_getcwd() {
 	dk_debugFunc 0;
 	
-	export dk_getcwd=${PWD};
+	export DKPWD=${PWD};
+	export dk_getcwd=${DKPWD};
+	
 }
 
 
@@ -30,5 +34,6 @@ DKTEST() {
 	dk_debugFunc 0;
 	
 	dk_call dk_getcwd;
-	dk_call dk_echo "dk_getcwd = '${dk_getcwd}'";
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD-}";
+	dk_call dk_echo "DKPWD = ${DKPWD}";
 }

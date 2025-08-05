@@ -1,7 +1,4 @@
 #!/bin/sh
-
-# https://stackoverflow.com/a/78128262/688352
-
 ###### DK.sh #####################################################################
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
@@ -53,12 +50,12 @@ fi
 dk_importVariables() {
 	#dk_debugFunc 1 9
 	
+	# https://stackoverflow.com/a/78128262/688352
 	### Create hashtable
 	declare -A -x PLUGIN
 	####################
 
 															###### EXAMPLE ######
-	
 	### IMPORT_Path											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_call dk_unset IMPORT_Path;
 	dk_call dk_getParameterValue IMPORT_Path "$@";
@@ -106,7 +103,7 @@ dk_importVariables() {
 	dk_call dk_convertToCIdentifier $PLUGIN[Name] 			PLUGIN[IMPORT_C_Name];
 	
 	if( !($PLUGIN[Name] -eq $PLUGIN[IMPORT_C_Name]) ){
-		dk_call dk_notice "'${PLUGIN[Name]}' contains non-alphanumeric characters and will be changed to '${PLUGIN[IMPORT_C_Name]}'";
+		dk_call dk_notice "${PLUGIN[Name]} contains non-alphanumeric characters and will be changed to ${PLUGIN[IMPORT_C_Name]}";
 		PLUGIN[Name]=$PLUGIN[IMPORT_C_Name];
 	}  
 
@@ -259,7 +256,7 @@ dk_importVariables() {
 	if(${ROOT}) { 
 		PLUGIN[INSTALL_Root]=${ROOT};
 	} else {
-		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
+		dk_call dk_validate DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
 		PLUGIN[INSTALL_Root]=${DK3RDPARTY_DIR};
 	}
 
@@ -352,106 +349,55 @@ DKTEST() {
 	#dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	dk_call dk_DKIMPORTS_DIR;
 	dk_call dk_DKTOOLS_DIR;
-	dk_call dk_chdir "${env:DKIMPORTS_DIR}/git";
-	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_Name git ROOT "${env:DKTOOLS_DIR}";
+	dk_call dk_chdir "${DKIMPORTS_DIR}/git";
+	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_Name git ROOT "${DKTOOLS_DIR}";
 	dk_call dk_echo;
-	dk_call dk_echo "BRANCH                   = '${BRANCH}'";
-	dk_call dk_echo "DIR                      = '${DIR}'";
-	dk_call dk_echo "FOLDER                   = '${FOLDER}'";
-	dk_call dk_echo "ROOT                     = '${ROOT}'";
-	dk_call dk_echo "TAG                      = '${TAG}'";
-	dk_call dk_echo "VERSION                  = '${VERSION}'";
-	dk_call dk_echo "IMPORT_Name              = '${IMPORT_Name}'";
-	dk_call dk_echo "IMPORT_Path              = '${IMPORT_Path}'";
+	dk_call dk_echo "BRANCH                   = ${BRANCH}";
+	dk_call dk_echo "DIR                      = ${DIR}";
+	dk_call dk_echo "FOLDER                   = ${FOLDER}";
+	dk_call dk_echo "ROOT                     = ${ROOT}";
+	dk_call dk_echo "TAG                      = ${TAG}";
+	dk_call dk_echo "VERSION                  = ${VERSION}";
+	dk_call dk_echo "IMPORT_Name              = ${IMPORT_Name}";
+	dk_call dk_echo "IMPORT_Path              = ${IMPORT_Path}";
 	dk_call dk_echo "";
-	dk_call dk_echo "PLUGIN[NAME              = '$($PLUGIN[NAME)'";
-	dk_call dk_echo "PLUGIN[ARGS              = '$($PLUGIN[ARGS)'";
-	dk_call dk_echo "PLUGIN[GIT               = '$($PLUGIN[GIT)'";
-	dk_call dk_echo "PLUGIN[GIT_Branch        = '$($PLUGIN[GIT_Branch)'";
-	dk_call dk_echo "PLUGIN[GIT_Filename      = '$($PLUGIN[GIT_Filename)'";
-	dk_call dk_echo "PLUGIN[GIT_Name          = '$($PLUGIN[GIT_Name)'";
-	dk_call dk_echo "PLUGIN[GIT_Lower         = '$($PLUGIN[GIT_Lower)'";
-	dk_call dk_echo "PLUGIN[GIT_Tag           = '$($PLUGIN[GIT_Tag)'";
-	dk_call dk_echo "PLUGIN[IMPORT            = '$($PLUGIN[IMPORT)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name       = '$($PLUGIN[IMPORT_Name)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name_Lower = '$($PLUGIN[IMPORT_Name_Lower)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name_Upper = '$($PLUGIN[IMPORT_Name_Upper)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Path       = '$($PLUGIN[IMPORT_Path)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Folder    = '$($PLUGIN[INSTALL_Folder)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Name      = '$($PLUGIN[INSTALL_Name)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Path      = '$($PLUGIN[INSTALL_Path)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Root      = '$($PLUGIN[INSTALL_Root)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Version   = '$($PLUGIN[INSTALL_Version)'";
-	dk_call dk_echo "PLUGIN[URL               = '$($PLUGIN[URL)'";
-	dk_call dk_echo "PLUGIN[URL_Array         = '$($PLUGIN[URL_Array)'";
-	dk_call dk_echo "PLUGIN[URL_Extension     = '$($PLUGIN[URL_Extension)'";
-	dk_call dk_echo "PLUGIN[URL_File          = '$($PLUGIN[URL_File)'";
-	dk_call dk_echo "PLUGIN[URL_Filename      = '$($PLUGIN[URL_Filename)'";
-	dk_call dk_echo "PLUGIN[URL_Length        = '$($PLUGIN[URL_Length)'";
-	dk_call dk_echo "PLUGIN[URL_List          = '$($PLUGIN[URL_List)'";
-	dk_call dk_echo "PLUGIN[Branch            = '$($PLUGIN[Branch)'";
-	dk_call dk_echo "PLUGIN[Build_Dir         = '$($PLUGIN[Build_Dir)'";
-	dk_call dk_echo "PLUGIN[Config_Dir        = '$($PLUGIN[Config_Dir)'";
-	dk_call dk_echo "PLUGIN[Debug_Dir         = '$($PLUGIN[Debug_Dir)'";
-	dk_call dk_echo "PLUGIN[Dir               = '$($PLUGIN[Dir)'";
-	dk_call dk_echo "PLUGIN[Folder            = '$($PLUGIN[Folder)'";
-	dk_call dk_echo "PLUGIN[Import_File       = '$($PLUGIN[Import_File)'";
-	dk_call dk_echo "PLUGIN[Import_Name       = '$($PLUGIN[Import_Name)'";
-	dk_call dk_echo "PLUGIN[Release_Dir       = '$($PLUGIN[Release_Dir)'";
-	dk_call dk_echo "PLUGIN[Tag               = '$($PLUGIN[Tag)'";
-	dk_call dk_echo "PLUGIN[Tuple_Dir         = '$($PLUGIN[Tuple_Dir)'";
-	dk_call dk_echo "PLUGIN[Url               = '$($PLUGIN[Url)'";
-	dk_call dk_echo "PLUGIN[Version           = '$($PLUGIN[Version)'";
-	dk_call dk_echo "GIT.ARGS                 = '$($GIT.ARGS)'";
-	
-	dk_call dk_chdir "${env:DKIMPORTS_DIR}/php-src";
-	dk_call dk_importVariables "https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip";
-	dk_call dk_echo;
-	dk_call dk_echo "BRANCH                   = '${BRANCH}'";
-	dk_call dk_echo "DIR                      = '${DIR}'";
-	dk_call dk_echo "FOLDER                   = '${FOLDER}'";
-	dk_call dk_echo "ROOT                     = '${ROOT}'";
-	dk_call dk_echo "TAG                      = '${TAG}'";
-	dk_call dk_echo "VERSION                  = '${VERSION}'";
-	dk_call dk_echo "IMPORT_Name              = '${IMPORT_Name}'";
-	dk_call dk_echo "IMPORT_Path              = '${IMPORT_Path}'";
-	dk_call dk_echo "";
-	dk_call dk_echo "PLUGIN[NAME              = '$($PLUGIN[NAME)'";
-	dk_call dk_echo "PLUGIN[ARGS              = '$($PLUGIN[ARGS)'";
-	dk_call dk_echo "PLUGIN[GIT               = '$($PLUGIN[GIT)'";
-	dk_call dk_echo "PLUGIN[GIT_Branch        = '$($PLUGIN[GIT_Branch)'";
-	dk_call dk_echo "PLUGIN[GIT_Filename      = '$($PLUGIN[GIT_Filename)'";
-	dk_call dk_echo "PLUGIN[GIT_Name          = '$($PLUGIN[GIT_Name)'";
-	dk_call dk_echo "PLUGIN[GIT_Lower         = '$($PLUGIN[GIT_Lower)'";
-	dk_call dk_echo "PLUGIN[GIT_Tag           = '$($PLUGIN[GIT_Tag)'";
-	dk_call dk_echo "PLUGIN[IMPORT            = '$($PLUGIN[IMPORT)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name       = '$($PLUGIN[IMPORT_Name)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name_Lower = '$($PLUGIN[IMPORT_Name_Lower)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Name_Upper = '$($PLUGIN[IMPORT_Name_Upper)'";
-	dk_call dk_echo "PLUGIN[IMPORT_Path       = '$($PLUGIN[IMPORT_Path)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Folder    = '$($PLUGIN[INSTALL_Folder)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Name      = '$($PLUGIN[INSTALL_Name)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Path      = '$($PLUGIN[INSTALL_Path)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Root      = '$($PLUGIN[INSTALL_Root)'";
-	dk_call dk_echo "PLUGIN[INSTALL_Version   = '$($PLUGIN[INSTALL_Version)'";
-	dk_call dk_echo "PLUGIN[URL               = '$($PLUGIN[URL)'";
-	dk_call dk_echo "PLUGIN[URL_Array         = '$($PLUGIN[URL_Array)'";
-	dk_call dk_echo "PLUGIN[URL_Extension     = '$($PLUGIN[URL_Extension)'";
-	dk_call dk_echo "PLUGIN[URL_File          = '$($PLUGIN[URL_File)'";
-	dk_call dk_echo "PLUGIN[URL_Filename      = '$($PLUGIN[URL_Filename)'";
-	dk_call dk_echo "PLUGIN[URL_Length        = '$($PLUGIN[URL_Length)'";
-	dk_call dk_echo "PLUGIN[URL_List          = '$($PLUGIN[URL_List)'";
-	dk_call dk_echo "PLUGIN[Branch            = '$($PLUGIN[Branch)'";
-	dk_call dk_echo "PLUGIN[Build_Dir         = '$($PLUGIN[Build_Dir)'";
-	dk_call dk_echo "PLUGIN[Config_Dir        = '$($PLUGIN[Config_Dir)'";
-	dk_call dk_echo "PLUGIN[Debug_Dir         = '$($PLUGIN[Debug_Dir)'";
-	dk_call dk_echo "PLUGIN[Dir               = '$($PLUGIN[Dir)'";
-	dk_call dk_echo "PLUGIN[Folder            = '$($PLUGIN[Folder)'";
-	dk_call dk_echo "PLUGIN[Import_File       = '$($PLUGIN[Import_File)'";
-	dk_call dk_echo "PLUGIN[Import_Name       = '$($PLUGIN[Import_Name)'";
-	dk_call dk_echo "PLUGIN[Release_Dir       = '$($PLUGIN[Release_Dir)'";
-	dk_call dk_echo "PLUGIN[Tag               = '$($PLUGIN[Tag)'";
-	dk_call dk_echo "PLUGIN[Tuple_Dir         = '$($PLUGIN[Tuple_Dir)'";
-	dk_call dk_echo "PLUGIN[Url               = '$($PLUGIN[Url)'";
-	dk_call dk_echo "PLUGIN[Version           = '$($PLUGIN[Version)'";
+	dk_call dk_echo "PLUGIN[NAME]              = ${PLUGIN[NAME]}";
+	dk_call dk_echo "PLUGIN[ARGS]              = ${PLUGIN[ARGS]}";
+	dk_call dk_echo "PLUGIN[GIT]               = ${PLUGIN[GIT]}";
+	dk_call dk_echo "PLUGIN[GIT_Branch]        = ${PLUGIN[GIT_Branch]}";
+	dk_call dk_echo "PLUGIN[GIT_Filename]      = ${PLUGIN[GIT_Filename]}";
+	dk_call dk_echo "PLUGIN[GIT_Name]          = ${PLUGIN[GIT_Name]}";
+	dk_call dk_echo "PLUGIN[GIT_Lower]         = ${PLUGIN[GIT_Lower]}";
+	dk_call dk_echo "PLUGIN[GIT_Tag]           = ${PLUGIN[GIT_Tag]}";
+	dk_call dk_echo "PLUGIN[IMPORT]            = ${PLUGIN[IMPORT]}";
+	dk_call dk_echo "PLUGIN[IMPORT_Name]       = ${PLUGIN[IMPORT_Name]}";
+	dk_call dk_echo "PLUGIN[IMPORT_Name_Lower] = ${PLUGIN[IMPORT_Name_Lower]}";
+	dk_call dk_echo "PLUGIN[IMPORT_Name_Upper] = ${PLUGIN[IMPORT_Name_Upper]}";
+	dk_call dk_echo "PLUGIN[IMPORT_Path]       = ${PLUGIN[IMPORT_Path]}";
+	dk_call dk_echo "PLUGIN[INSTALL_Folder]    = ${PLUGIN[INSTALL_Folder]}";
+	dk_call dk_echo "PLUGIN[INSTALL_Name]      = ${PLUGIN[INSTALL_Name]}";
+	dk_call dk_echo "PLUGIN[INSTALL_Path]      = ${PLUGIN[INSTALL_Path]}";
+	dk_call dk_echo "PLUGIN[INSTALL_Root]      = ${PLUGIN[INSTALL_Root]}";
+	dk_call dk_echo "PLUGIN[INSTALL_Version]   = ${PLUGIN[INSTALL_Version]}";
+	dk_call dk_echo "PLUGIN[URL]               = ${PLUGIN[URL]}";
+	dk_call dk_echo "PLUGIN[URL_Array]         = ${PLUGIN[URL_Array]}";
+	dk_call dk_echo "PLUGIN[URL_Extension]     = ${PLUGIN[URL_Extension]}";
+	dk_call dk_echo "PLUGIN[URL_File]          = ${PLUGIN[URL_File]}";
+	dk_call dk_echo "PLUGIN[URL_Filename]      = ${PLUGIN[URL_Filename]}";
+	dk_call dk_echo "PLUGIN[URL_Length]        = ${PLUGIN[URL_Length]}";
+	dk_call dk_echo "PLUGIN[URL_List]          = ${PLUGIN[URL_List]}";
+	dk_call dk_echo "PLUGIN[Branch]            = ${PLUGIN[Branch]}";
+	dk_call dk_echo "PLUGIN[Build_Dir]         = ${PLUGIN[Build_Dir]}";
+	dk_call dk_echo "PLUGIN[Config_Dir]        = ${PLUGIN[Config_Dir]}";
+	dk_call dk_echo "PLUGIN[Debug_Dir]         = ${PLUGIN[Debug_Dir]}";
+	dk_call dk_echo "PLUGIN[Dir]               = ${PLUGIN[Dir]}";
+	dk_call dk_echo "PLUGIN[Folder]            = ${PLUGIN[Folder]}";
+	dk_call dk_echo "PLUGIN[Import_File]       = ${PLUGIN[Import_File]}";
+	dk_call dk_echo "PLUGIN[Import_Name]       = ${PLUGIN[Import_Name]}";
+	dk_call dk_echo "PLUGIN[Release_Dir]       = ${PLUGIN[Release_Dir]}";
+	dk_call dk_echo "PLUGIN[Tag]               = ${PLUGIN[Tag]}";
+	dk_call dk_echo "PLUGIN[Tuple_Dir]         = ${PLUGIN[Tuple_Dir]}";
+	dk_call dk_echo "PLUGIN[Url]               = ${PLUGIN[Url]}";
+	dk_call dk_echo "PLUGIN[Version]           = ${PLUGIN[Version]}";
+	dk_call dk_echo "GIT[ARGS]                 = ${GIT[ARGS]}";	
 }

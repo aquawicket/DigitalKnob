@@ -14,6 +14,7 @@ function Global:dk_getcwd() {
 	dk_debugFunc 0;
 
 	${global:DKPWD} = $(get-location) -replace "\\", "/";
+	${global:dk_getcwd} = ${DKPWD};
 }
 
 
