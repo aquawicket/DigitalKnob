@@ -2,18 +2,21 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
-# dk_basename(path) -> rtn_var
+# dk_basename(path, rtn_var)
 #
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
 function Global:dk_basename() {
 	dk_debugFunc 1 2;
 
-	$_path_ = $args[0];
-	if(Test-Path variable:$_path_){ $_path_ = Get-Variable -Name ($_path_) -ValueOnly; } 
+	${_path_} = $args[0];
+	if(Test-Path variable:${_path_}){ ${_path_} = Get-Variable -Name (${_path_}) -ValueOnly; } 
 	
-	${global:dk_basename} = Split-Path $_path_ -leaf;
+	${dk_basename} = Split-Path $_path_ -leaf;
 	
+	
+	### return value ###
+	${global:dk_basename} = ${dk_basename}
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_basename};
 	} else {

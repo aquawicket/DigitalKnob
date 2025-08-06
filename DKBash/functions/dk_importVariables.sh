@@ -56,13 +56,13 @@ dk_importVariables() {
 	####################
 
 															###### EXAMPLE ######
-	### IMPORT_Path											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
-	dk_call dk_unset IMPORT_Path;
-	dk_call dk_getParameterValue IMPORT_Path "$@";
+	### IMPORT_PATH											/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_call dk_unset IMPORT_PATH;
+	dk_call dk_getParameterValue IMPORT_PATH "$@";
 	
-	### IMPORT_Name											zlib
-	dk_call dk_unset IMPORT_Name;
-	dk_call dk_getParameterValue IMPORT_Name "$@";
+	### IMPORT_NAME											zlib
+	dk_call dk_unset IMPORT_NAME;
+	dk_call dk_getParameterValue IMPORT_NAME "$@";
 	
 	### BRANCH												master
 	dk_call dk_unset BRANCH;
@@ -92,14 +92,17 @@ dk_importVariables() {
 		
 	############### $PLUGIN ##################
 	### $PLUGIN[IMPORT_Path]
-	[ -z "${PLUGIN[IMPORT_Path]-}"] && PLUGIN[IMPORT_Path]=${IMPORT-};
+	[ -z "${PLUGIN[IMPORT_Path]-}"] && PLUGIN[IMPORT_Path]=${IMPORT_PATH-};
 	if [ -z "${PLUGIN[IMPORT_Path]-}"]; then 
 		dk_call dk_getcwd;
 		PLUGIN[IMPORT_Path]=${DKPWD};
 	fi
 	
 	### $PLUGIN[IMPORT_Name]									zlib
-	dk_call dk_basename				${PLUGIN[IMPORT_Path]};		PLUGIN[IMPORT_Name]=${dk_basename};
+	[ -z "${PLUGIN[IMPORT_Name]-}"] && PLUGIN[IMPORT_Name]=${IMPORT_NAME-};
+	if [ -z "${PLUGIN[IMPORT_Name]-}"]; then 
+		dk_call dk_basename				${PLUGIN[IMPORT_Path]};		PLUGIN[IMPORT_Name]=${dk_basename};
+	fi
 	
 	### $PLUGIN[Name]
 	dk_call dk_toUpper				${PLUGIN[IMPORT_Name]};		PLUGIN[Name]=${dk_toUpper};
@@ -163,25 +166,16 @@ dk_importVariables() {
 	###############################################
 	if [ "${PLUGIN[GIT]-}" = "1" ]; then 
 
-		### $PLUGIN[GIT_Filename]												todo
-		dk_call dk_basename		${PLUGIN[URL]};		PLUGIN[GIT_Filename]=${dk_basename};
-		
 		### $PLUGIN[GIT_Name]													zlib
 		dk_call dk_arrayAt 		PLUGIN_URL_Array 	3;  PLUGIN[GIT_Name]=${dk_arrayAt};
 		
-		### $PLUGIN[GIT_Name_Lower]												zlib
-		dk_call dk_toLower 		${PLUGIN[GIT_Name]}; 	PLUGIN[GIT_Name_Lower]=${dk_toLower};
-		
-		### $PLUGIN[GIT_Branch]													master
-		if [ -n "${BRANCH}" ]; then
-			PLUGIN[GIT_Branch]=${BRANCH};
-		else
-			#dk_call dk_getGitBranchName ${PLUGIN[URL]}; PLUGIN[GIT_Branch]=${dk_getGitBranchName}; 					
-			PLUGIN[GIT_Branch]="master";
-		fi  
+		### $PLUGIN[Branch]														master
+		[ -z "${PLUGIN[Branch]-}" ] && PLUGIN[Branch]=${BRANCH};
+		[ -z "${PLUGIN[Branch]-}" ] && PLUGIN[Branch]="master";
 		
 		### $PLUGIN[GIT_Tag]													TODO
-		PLUGIN[GIT_Tag]="${TAG-}";
+		[ -z "${PLUGIN[Tag]-}" ] && PLUGIN[Tag]="${TAG-}";
+		#[ -z "${PLUGIN[Tag]-}" ] && PLUGIN[Tag]=### TODO ###;
 	fi
 
 	##################################################
@@ -189,7 +183,7 @@ dk_importVariables() {
 	##################################################
 	
 	### $PLUGIN[INSTALL_Name]														zlib
-	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${IMPORT_Name};
+	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${IMPORT_NAME};
 	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[IMPORT_Name]};
 	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[GIT_Name]};
 	[ -z "${PLUGIN[INSTALL_Name]-}" ] && PLUGIN[INSTALL_Name]=${PLUGIN[URL_Name]};
@@ -274,12 +268,6 @@ dk_importVariables() {
 
 	### $PLUGIN[Import_Name]										zlib
 	PLUGIN[Import_Name]=${PLUGIN[IMPORT_Name_Lower]-};
-		
-	### $PLUGIN[Branch]												master
-	PLUGIN[Branch]=${PLUGIN[GIT_Branch]-};
-	
-	### $PLUGIN[Tag]												v1.2
-	PLUGIN[Tag]=${PLUGIN[GIT_Tag]-};
 
 		
 	#####################################################
@@ -322,7 +310,7 @@ DKTEST() {
 	dk_call dk_DKIMPORTS_DIR;
 	dk_call dk_DKTOOLS_DIR;
 	dk_call dk_chdir "${DKIMPORTS_DIR}/git";
-	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_Name git ROOT "${DKTOOLS_DIR}";
+	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_NAME git ROOT "${DKTOOLS_DIR}";
 	### Import hashtable #################
 	source <(printf "%s" "$PLUGIN_EXPORT")
 	######################################
@@ -335,17 +323,13 @@ DKTEST() {
 	dk_call dk_echo "ROOT                     = ${ROOT-}";
 	dk_call dk_echo "TAG                      = ${TAG-}";
 	dk_call dk_echo "VERSION                  = ${VERSION-}";
-	dk_call dk_echo "IMPORT_Name              = ${IMPORT_Name-}";
-	dk_call dk_echo "IMPORT_Path              = ${IMPORT_Path-}";
+	dk_call dk_echo "IMPORT_NAME              = ${IMPORT_NAME-}";
+	dk_call dk_echo "IMPORT_PATH              = ${IMPORT_PATH-}";
 	dk_call dk_echo "";
 	dk_call dk_echo "PLUGIN[NAME]              = ${PLUGIN[NAME]-}";
 	dk_call dk_echo "PLUGIN[ARGS]              = ${PLUGIN[ARGS]-}";
 	dk_call dk_echo "PLUGIN[GIT]               = ${PLUGIN[GIT]-}";
-	dk_call dk_echo "PLUGIN[GIT_Branch]        = ${PLUGIN[GIT_Branch]-}";
-	dk_call dk_echo "PLUGIN[GIT_Filename]      = ${PLUGIN[GIT_Filename]-}";
 	dk_call dk_echo "PLUGIN[GIT_Name]          = ${PLUGIN[GIT_Name]-}";
-	dk_call dk_echo "PLUGIN[GIT_Lower]         = ${PLUGIN[GIT_Lower]-}";
-	dk_call dk_echo "PLUGIN[GIT_Tag]           = ${PLUGIN[GIT_Tag]-}";
 	dk_call dk_echo "PLUGIN[IMPORT]            = ${PLUGIN[IMPORT]-}";
 	dk_call dk_echo "PLUGIN[IMPORT_Name]       = ${PLUGIN[IMPORT_Name]-}";
 	dk_call dk_echo "PLUGIN[IMPORT_Name_Lower] = ${PLUGIN[IMPORT_Name_Lower]-}";

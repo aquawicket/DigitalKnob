@@ -6,14 +6,20 @@ if(!$dk_dirname_ps1){ $dk_dirname_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_dirname() {
-	dk_debugFunc 1;
+	dk_debugFunc 1 2;
 	
-	${path} = $($args[0]); 
-	#$dirname = (Get-Item $path).DirectoryName;
-	#$dirname = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).DirectoryName;    #Calls Resolve-Path but works for files that don't exist.
-	#if(-not($dirname)){ $dirname = $_frperror[0].TargetObject; } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-	${dk_dirname} = Split-Path ${path} -Parent;
-	return ${dk_dirname};
+	${_path_} = $args[0];
+	if(Test-Path variable:${_path_}){ ${_path_} = Get-Variable -Name (${_path_}) -ValueOnly; } 
+	
+	${dk_dirname} = Split-Path ${_path_} -Parent;
+
+	### return value ###
+	${global:dk_dirname} = ${dk_dirname}
+	if($args[1]) {
+		dk_call dk_set $args[1] ${dk_dirname};
+	} else {
+		return ${dk_dirname};
+	}
 }
 
 
