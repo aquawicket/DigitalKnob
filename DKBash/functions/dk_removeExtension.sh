@@ -21,10 +21,14 @@ dk_removeExtension() {
 	dk_debugFunc 1 2;
 
 	_filepath_="${1}";
-	dk_removeExtension="${_filepath_%.*}";									    				# remove everything past last dot
-	[ "${dk_removeExtension##*.}" = "tar" ] &&	dk_removeExtension="${dk_removeExtension%.*}";	# if .tar remove everything past last dot
-
-
+	if ! [ "${_filepath_##*.tar.}" = "${_filepath_}" ]; then
+		dk_removeExtension="${_filepath_%.tar.*}";
+	elif ! [ "${_filepath_##*.7z.}" = "${_filepath_}" ]; then
+		dk_removeExtension="${_filepath_%.7z.*}";
+	else
+		dk_removeExtension="${_filepath_%.*}";
+	fi
+	
 	### return value ###
 	export dk_removeExtension=${dk_removeExtension};
 	if [ -n "${2-}" ]; then
@@ -47,13 +51,19 @@ DKTEST() {
 	
 	### Result as parameter
 	dk_call dk_echo
-	dk_call dk_removeExtension "B:/directoryB/filenameB.extB" resultB;
+	dk_call dk_removeExtension "B:/directoryB/filenameB.tar.gz" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
 	dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";
 	
 	### Result as return value
 	dk_call dk_echo
-	resultC=$(dk_call dk_removeExtension "C:/directoryC/filenameC.extC");
+	resultC=$(dk_call dk_removeExtension "C:/directoryC/filenameC.target.gz");
 	dk_call dk_echo "resultC = ${resultC}";
 	#dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";					#NOTE: export cannot be seen outside of command substituion
+	
+	### Result as parameter
+	dk_call dk_echo
+	dk_call dk_removeExtension "D:/directoryD/filenameD" resultD;
+	dk_call dk_echo "resultD = ${resultD}";
+	dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";
 }

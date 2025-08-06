@@ -20,16 +20,16 @@ fi
 dk_getExtension() {
 	dk_debugFunc 1 2
 
-	_filename_=$(dk_call dk_basename "${1}")
-	dk_getExtension=${_filename_##*.}
-	
-	ext[0]="tar.gz"
-	ext[1]="tar.xz"
-	ext[2]="7z.exe"
-	for i in "${ext[@]}"; do
-		[[ "$1" == *"$i" ]] && dk_getExtension="$i"
-	done
-	
+	_filepath_="${1}";
+	if ! [ "${_filepath_##*.tar.}" = "${_filepath_}" ]; then
+		dk_getExtension=".tar.${_filepath_##*.tar.}";
+	elif ! [ "${_filepath_##*.7z.}" = "${_filepath_}" ]; then
+		dk_getExtension=".7z.${_filepath_##*.7z.}";
+	elif ! [ "${_filepath_##*.}" = "${_filepath_}" ]; then 
+		dk_getExtension=".${_filepath_##*.}";
+	else
+		echo "${_filepath_} has no extension";
+	fi
 	
 	### return value ###
 	export dk_getExtension=${dk_getExtension};
@@ -48,26 +48,29 @@ DKTEST() {
 	
 	dk_call dk_set myPath "/test/test2/xfile.exten"
     dk_call dk_getExtension "${myPath}"
-    dk_call dk_printVar dk_getExtension
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
 	dk_call dk_getExtension "test.zip"
-	dk_call dk_printVar dk_getExtension
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
 	dk_call dk_getExtension "test.tar.gz"
-	dk_call dk_printVar dk_getExtension
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
 	dk_call dk_getExtension "test.tar.xz.tar.gz.tar.xz"
-	dk_call dk_printVar dk_getExtension
+	dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
-	dk_call dk_getExtension "test.tar.x.gz" extension
-    dk_call dk_printVar extension
+	dk_call dk_getExtension "test.tar.x.gz"
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
-	dk_call dk_getExtension "test.tar.xz" extension
-    dk_call dk_printVar extension
+	dk_call dk_getExtension "test.tar.xz"
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
-	dk_call dk_getExtension "test.7z.exe.b" extension
-    dk_call dk_printVar extension
+	dk_call dk_getExtension "test.7z.exe.b"
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 	
-	dk_call dk_getExtension "test.7z.exe" extension
-    dk_call dk_printVar extension
+	dk_call dk_getExtension "test.7z.exe"
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
+	
+	dk_call dk_getExtension "File/Path/With/No/Extension";
+    dk_call dk_echo "dk_getExtension = ${dk_getExtension}";
 }
