@@ -19,7 +19,7 @@ function Global:dk_removeExtension() {
 		#${dk_removeExtension} = $args[0] -replace [System.IO.Path]::GetExtension($args[0]), "";
 	}
 	
-	### return value ###
+	###### output ######
 	${global:dk_removeExtension} = ${dk_removeExtension};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_removeExtension};

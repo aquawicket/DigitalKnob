@@ -38,7 +38,7 @@ dk_replaceAll() {
     done
 	
 	
-	### return value ###
+	###### output ######
 	export dk_replaceAll=${dk_replaceAll};
 	if [ -n "${4-}" ]; then
 		export ${4}=${dk_replaceAll};

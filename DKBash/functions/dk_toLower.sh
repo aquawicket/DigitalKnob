@@ -24,7 +24,7 @@ dk_toLower() {
 	dk_toLower=$(builtin echo "${1}" | tr '[:upper:]' '[:lower:]');
 	
 
-	### return value ###
+	###### output ######
 	export dk_toLower=${dk_toLower};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_toLower};

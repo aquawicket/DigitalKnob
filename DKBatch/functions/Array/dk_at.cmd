@@ -23,20 +23,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
-	::###### faster ######
+::###### faster #####################
 	endlocal & set "dk_at=!%~1[%~2]!"
 	%return%
-	::####################
+::###################################
 	
+	::###### input #######
 	set "_array_=%~1"
 	set "_index_-%~2"
-	::#### input #####
 	
 	
 	set "dk_at=!%_array_%[%_index_%]!"
 	
 	
-	::#### output ####
+	::###### output ######
 	endlocal & (
 		set "dk_at=%dk_at%"
 		if "%~2" neq "" (set "%~2=%dk_at%")

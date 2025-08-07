@@ -38,7 +38,7 @@ dk_arrayPop() {
 	eval export dk_arrayPop='"${'array'[$_length_]}"'
 	dk_call dk_unset array[$_length_]
 	
-	### return value ###
+	###### output ######
 	# FIXME: command substitution cannot alter parent variables
 	eval ${1}='("${array[@]}")'																# alter the original   
 	[ ${#} -gt 1 ] && eval ${2}='"${dk_arrayPop}"' || builtin echo "${dk_arrayPop}";		# return value using return variable

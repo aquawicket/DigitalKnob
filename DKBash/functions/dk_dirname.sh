@@ -23,7 +23,7 @@ dk_dirname() {
 	
 	dk_dirname=$(dirname "${1}");
 	
-	### return value ###
+	###### output ######
 	export dk_dirname=${dk_dirname};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_dirname};

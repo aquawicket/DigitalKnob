@@ -31,7 +31,7 @@ dk_arrayLength() {
 	
 	dk_arrayLength=${#array[@]};
 	
-	### return value ###
+	###### output ######
 	export dk_arrayLength=${dk_arrayLength};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_arrayLength};

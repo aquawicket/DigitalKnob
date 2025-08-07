@@ -31,7 +31,7 @@ dk_getExtension() {
 		echo "${_filepath_} has no extension";
 	fi
 	
-	### return value ###
+	###### output ######
 	export dk_getExtension=${dk_getExtension-};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_getExtension};

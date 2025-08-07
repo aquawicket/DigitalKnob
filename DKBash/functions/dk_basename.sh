@@ -24,7 +24,7 @@ dk_basename() {
 	dk_basename=$(basename "${1}");
 
 
-	### return value ###
+	###### output ######
 	export dk_basename=${dk_basename};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_basename};

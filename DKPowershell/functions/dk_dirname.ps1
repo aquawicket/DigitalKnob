@@ -13,7 +13,7 @@ function Global:dk_dirname() {
 	
 	${dk_dirname} = Split-Path ${_path_} -Parent;
 
-	### return value ###
+	###### output ######
 	${global:dk_dirname} = ${dk_dirname}
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_dirname};

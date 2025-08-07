@@ -40,7 +40,7 @@ dk_arrayPush() {
 	# FIXME: the new array does not get assigned in command substitution.
 	# i.e.  new_length=$(dk_arrayPush myArray "new item") 
 
-	### return value ###
+	###### output ######
 	# FIXME: new arrays do not get assigned in command substitution.
 	arrayPush=${#array[@]};
 	export arrayPush;

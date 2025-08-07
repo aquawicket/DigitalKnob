@@ -33,7 +33,7 @@ dk_realpath(){
 		_realpath_=$(cd $(dirname ${1}); pwd -P)/$(basename ${1})
 	fi
 	
-	### return value ###
+	###### output ######
 	#dk_call dk_printVar _realpath_
 	[ ${#} -gt 1 ] && eval "${2}=${_realpath_}" && return  # return value when using rtn_var parameter 
 	dk_return ${_realpath_}; return			       		   # return value when using command substitution 

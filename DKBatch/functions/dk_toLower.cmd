@@ -10,11 +10,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_toLower
 %setlocal%
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1 2
 
-        set "_lower_=%~1"
-        for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do set "_lower_=!_lower_:%%#=%%#!")
-    endlocal & set "%2=%_lower_%"
+
+	set "dk_toLower=%~1"
+	for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do set "dk_toLower=!dk_toLower:%%#=%%#!")
+
+		
+    ::###### output ######
+	endlocal & (
+		set "dk_toLower=%dk_toLower%"
+		if "%~2" neq "" (set "%~2=%dk_toLower%")
+	)
 %endfunction%
 
 
@@ -33,5 +40,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_toLower "%myVar%" lowercase
    
     %dk_call% dk_printVar myVar
+	%dk_call% dk_printVar dk_toLower
     %dk_call% dk_printVar lowercase
 %endfunction%

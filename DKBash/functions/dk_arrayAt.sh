@@ -36,7 +36,7 @@ dk_arrayAt() {
 	eval local _arrayAt='${'${1}'[${2}]}'
 	[ -n "${3-}" ] && local rtn_var="${3}" || local rtn_var="dk_arrayAt"
 	
-	### return value ###
+	###### output ######
 	eval "${rtn_var}=\"${_arrayAt}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
 	dk_return "${_arrayAt}"				# return value in COMMAND_SUBSTITUTION
 }

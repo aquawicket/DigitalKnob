@@ -40,7 +40,7 @@ dk_arrayPush() {
 	# FIXME: the new array does not get assigned in command substitution.
 	# i.e.  new_length=$(dk_arrayPush myArray "new item") 
 
-	### return value ###
+	###### output ######
 	eval ${1}='("${array[@]}")'
 	local _arrayPush=${#array[@]}
 	#[ ${#} -gt 2 ] && eval ${3}=${#array[@]} && return	# variable parameter return

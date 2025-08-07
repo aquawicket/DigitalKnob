@@ -25,7 +25,7 @@ dk_getcwd() {
 	export DKPWD=${PWD};
 	dk_getcwd=${DKPWD};
 	
-	### return value ###
+	###### output ######
 	export dk_getcwd=${dk_getcwd};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_getcwd};

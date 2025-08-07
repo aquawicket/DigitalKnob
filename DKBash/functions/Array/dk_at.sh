@@ -37,7 +37,7 @@ dk_at() {
 	#eval local arrayAt='("${'${1}'[${2}]}")'
 	eval local arrayAt='${'${1}'[${2}]}'
 	
-	### return value ###
+	###### output ######
 	#[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
 	[ ${#} -gt 2 ] && eval ${3}='${'${1}'[${2}]}' && return	# return value using return variable
 	dk_return "${arrayAt}" && return						# return value using command substitution

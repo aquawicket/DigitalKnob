@@ -38,7 +38,7 @@ dk_arrayUnshift() {
 	array=("${@:2}" "${array[@]}");
 	local _arrayUnshift=${#array[@]}
 	
-	### return value ###
+	###### output ######
 	eval ${1}='("${array[@]}")'						
 	eval ${rtn_var}='${_arrayUnshift}'		# return value in FUNCTION_NAME or RETURN_VAR
 	dk_return "${_arrayUnshift}"			# FIXME: command substitution cannot alter parent variables

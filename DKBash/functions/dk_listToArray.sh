@@ -27,7 +27,7 @@ dk_listToArray() {
 	#for i in ${arr[@]}; do echo $i; done
 	
 	
-	### return value ###
+	###### output ######
 	export dk_listToArray=${dk_listToArray};
 	if [ -n "${2-}" ]; then
 		#export ${2}=${dk_listToArray};

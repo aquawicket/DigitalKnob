@@ -15,8 +15,8 @@ function Global:dk_basename() {
 	${dk_basename} = Split-Path $_path_ -leaf;
 	
 	
-	### return value ###
-	${global:dk_basename} = ${dk_basename}
+	###### output ######
+	${global:dk_basename} = ${dk_basename};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_basename};
 	} else {

@@ -24,7 +24,7 @@ dk_toUpper() {
 	dk_toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]');
 	
 	
-	### return value ###
+	###### output ######
 	export dk_toUpper=${dk_toUpper};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_toUpper};

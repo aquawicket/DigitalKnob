@@ -40,7 +40,7 @@ dk_arrayConcat() {
 	new_array=("${arrayA[@]}" "${arrayB[@]}");
 	# eval local new_array=(("${'$1'[@]}") ("${'$2'[@]}"));
 
-	### return value ###
+	###### output ######
 	[ ${#} -gt 2 ] && eval ${3}='("${new_array[@]}")' && return  	# return using parameter rtn_var
 	dk_return "${new_array[@]}" && return							# FIXME
 }

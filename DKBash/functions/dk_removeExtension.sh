@@ -29,7 +29,7 @@ dk_removeExtension() {
 		dk_removeExtension="${_filepath_%.*}";
 	fi
 	
-	### return value ###
+	###### output ######
 	export dk_removeExtension=${dk_removeExtension};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_removeExtension};

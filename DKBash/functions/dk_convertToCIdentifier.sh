@@ -57,7 +57,7 @@ dk_convertToCIdentifier() {
 #	dk_call dk_replaceAll "${input}" "`" "_" output		# POSIX replace
 	
 	
-	### return value ###
+	###### output ######
 	export dk_convertToCIdentifier=${dk_convertToCIdentifier};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_convertToCIdentifier};

@@ -45,7 +45,7 @@ dk_readlink() {
 	local phys_dir=$(pwd -P)
 	local _readlink_=${phys_dir}/${target_file}
 		
-	### return value ###
+	###### output ######
 	dk_printVar _readlink_
 	[ ! "${1}" = "-f" ] && [ ${#} -gt 1 ] && eval "${2}=${_readlink_}" && return  # return value when using rtn_var parameter 
 	[ "${1}" = "-f" ] && [ ${#} -gt 2 ] && eval "${3}=${_readlink_}" && return  # return value when using rtn_var parameter 

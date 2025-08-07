@@ -37,7 +37,7 @@ dk_arrayUnshift() {
 	array=("${@:2}" "${array[@]}");
 	arrayUnshift="${#array[@]}";
 	
-	### return value ###
+	###### output ######
 	export arrayUnshift;
 	eval ${1}='("${array[@]}")';													# alter input variable
 	#[ ${#} -gt 2 ] && eval ${3}=${_length_} || builtin echo "${arrayUnshift}";		# return value using return variable

@@ -27,7 +27,7 @@ dk_fileToArray() {
 	IFS=$'\n' read -d '' -r -a lines < ${1} || $(true)
 	IFS=${OLDIFS}
 	
-	### return value ###
+	###### output ######
 	[ ${#} -gt 1 ] && eval ${2}='("${lines[@]}")' && return  	# return using parameter rtn_var
 	dk_return "${lines[@]}" && return							# FIXME
 }

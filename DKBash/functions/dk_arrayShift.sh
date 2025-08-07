@@ -40,7 +40,7 @@ dk_arrayShift() {
 	eval local _arrayShift='("${'array'[0]}")'
 	array=("${array[@]:1}")
 	
-	### return value ###
+	###### output ######
 	eval ${1}='("${array[@]}")'
 	eval ${rtn_var}='("${_arrayShift[@]}")'		# return value in FUNCTION_NAME or RETURN_VAR
 	

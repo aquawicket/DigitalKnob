@@ -41,7 +41,7 @@ dk_arrayConcat() {
 	
 	_arrayConcat=("${arrayA[@]}" "${arrayB[@]}");
 
-	### return value ###
+	###### output ######
 	eval ${rtn_var}='("${_arrayConcat[@]}")'	# return value in FUNCTION_NAME or RETURN_VAR
 	dk_return "${_arrayConcat[*]}"				# return value in COMMAND_SUBSTITUTION
 	

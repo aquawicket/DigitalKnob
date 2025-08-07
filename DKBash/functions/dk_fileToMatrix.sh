@@ -40,7 +40,7 @@ dk_fileToMatrix() {
 	done
 	IFS=${OLDIFS}
 	
-	### return value ###
+	###### output ######
 	#[ ${#} -gt 1 ] && eval ${2}='array' && return  	# return using parameter rtn_var
 	#dk_return "${array[@]}" && return							# FIXME
 }

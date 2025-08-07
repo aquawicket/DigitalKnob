@@ -41,7 +41,7 @@ dk_arrayPop() {
 	eval local _arrayPop='("${'array'[$_length_]}")'
 	dk_call dk_unset array[$_length_]
 	
-	### return value ###
+	###### output ######
 	eval ${1}='("${array[@]}")'				# update the parent array
 	eval ${rtn_var}='("${_arrayPop[@]}")'	# return value in FUNCTION_NAME or RETURN_VAR
 	dk_return "${_arrayPop[*]}"				# return value using command substitution

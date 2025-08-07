@@ -17,6 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1
 
+
 	set dk_arrayLength=0
 	:length_loop
 	if defined %~1[%dk_arrayLength%] (
@@ -25,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	
-	::#### output ####
+	::###### output ######
 	endlocal & (
 		set "dk_arrayLength=%dk_arrayLength%"
 		if "%~2" neq "" (set "%~2=%dk_arrayLength%")

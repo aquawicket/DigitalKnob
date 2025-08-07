@@ -47,7 +47,7 @@ dk_arrayJoin() {
 		fi
 	done
 	
-	### return value ###
+	###### output ######
 	eval "${rtn_var}=\"${_arrayJoin}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
 	dk_return "${_arrayJoin}"				# return value in COMMAND_SUBSTITUTION
 }

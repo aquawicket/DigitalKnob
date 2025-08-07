@@ -34,7 +34,7 @@ function(dk_arrayUnshift array)
 	list(PREPEND ${array} ${ARGN})
 	set(${array} ${${array}} PARENT_SCOPE)
 
-	### return value ###
+	###### output ######
 	#local _length_=${#array[@]}
 	#dk_return ${_length_} && return						# return value using command substitution
 endfunction()

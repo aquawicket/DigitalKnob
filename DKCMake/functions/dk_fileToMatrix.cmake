@@ -41,7 +41,7 @@ function(dk_fileToMatrix)
 		math(EXPR row "row + 1")
 	endforeach()
 #	
-	### return value ###
+	###### output ######
 endfunction()
 
 

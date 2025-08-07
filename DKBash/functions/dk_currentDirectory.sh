@@ -22,7 +22,7 @@ dk_currentDirectory() {
 
 	_currentDirectory_="${PWD}"
 
-	### return value ###
+	###### output ######
 	dk_call dk_printVar _currentDirectory_
 	[ ${#} -gt 1 ] && eval "${2}=${_currentDirectory_}" && return  # return value when using rtn_var parameter 
 	dk_return ${_currentDirectory_}; return						  # return value when using command substitution 

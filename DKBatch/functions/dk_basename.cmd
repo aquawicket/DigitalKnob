@@ -14,7 +14,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_basename
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
-
+	
+	::###### input ######
 	set "pathname=%~1"
 	set "pathname=%pathname:"=%"
 	
@@ -24,7 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
 	
 	
-	::### return value ###
+	::###### output ######
 	endlocal & (
 		set "dk_basename=%dk_basename%"
 		if "%~2" neq "" (set "%~2=%dk_basename%")

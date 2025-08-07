@@ -19,9 +19,12 @@ include_guard()
 function(dk_testReturn)
 	dk_debugFunc(1 2)
 	
+	
 	string(REPLACE "input" "output" dk_testReturn "${ARGV0}")
+	
+	
+	###### output ######
 	set(dk_testReturn ${dk_testReturn} PARENT_SCOPE)
-
 	if(ARGV1)
 		set(${ARGV1} ${dk_testReturn} PARENT_SCOPE)
 	else()
