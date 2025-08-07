@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not defined PWD (set "PWD=%CD:\=/%")
+if not defined DKPWD (set "DKPWD=%CD:\=/%")
 if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
@@ -14,22 +14,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1
 
-	set "_path_=%~1"
+	::###### input ######
+	set "dk_chdir=%~1"
+	set "dk_chdir=%dk_chdir:\=/%"
 	
-	if not exist %_path_% (
-		%dk_call% dk_warning "dk_chdir(%*): path:%_path_% does not exist"
+	
+	if not exist "%dk_chdir%" (
+		%dk_call% dk_error "dk_chdir(%*): path:%dk_chdir% does not exist"
 		%return%
 	)
-	
-	if "%PWD%" equ "%_path_%" (
-		%dk_call% dk_error "dk_chdir(%*): PWD is already set to %_path_%"
+	if "%DKPWD%" equ "%dk_chdir%" (
+		%dk_call% dk_warning "dk_chdir(%*): DKPWD is already set to %dk_chdir%"
 		%return%
 	)
+	cd "%dk_chdir:/=\%"
 	
+	
+	::###### output ######
 	endlocal & (
-		set "OLDPWD=%PWD%"
-		set "PWD=%_path_%"
-		cd "%PWD:/=\%"
+		set "DKOLDPWD=%DKPWD%"
+		set "DKPWD=%dk_chdir%"
+		set "dk_chdir=%dk_chdir%"
+		rem if "%~2" neq "" (set "%~2=%dk_chdir%") else (echo %dk_chdir%)
 	)
 %endfunction%
 
@@ -47,20 +53,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0
-
+	
 	%dk_call% dk_echo
-	%dk_call% dk_echo "OLD Current Directory = %OLDPWD%"
-	%dk_call% dk_echo "Current Directory = %PWD%"
+	%dk_call% dk_echo "OLD Current Directory = %DKOLDPWD%"
+	%dk_call% dk_echo "Current Directory = %DKPWD%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_chdir "%DKBRANCH_DIR%"
-	%dk_call% dk_echo "OLD Current Directory = %OLDPWD%"
-	%dk_call% dk_echo "Current Directory = %PWD%"
+	%dk_call% dk_echo "OLD Current Directory = %DKOLDPWD%"
+	%dk_call% dk_echo "Current Directory = %DKPWD%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_chdir "%DKTOOLS_DIR%"
-	%dk_call% dk_echo "OLD Current Directory = %OLDPWD%"
-	%dk_call% dk_echo "Current Directory = %PWD%"
+	%dk_call% dk_echo "OLD Current Directory = %DKOLDPWD%"
+	%dk_call% dk_echo "Current Directory = %DKPWD%"
+	
 %endfunction%

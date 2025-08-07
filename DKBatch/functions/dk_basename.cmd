@@ -28,7 +28,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### output ######
 	endlocal & (
 		set "dk_basename=%dk_basename%"
-		if "%~2" neq "" (set "%~2=%dk_basename%")
+		if "%~2" neq "" (
+			set "%~2=%dk_basename%"
+		) else (
+			echo %dk_basename%
+		)
 	)
 %endfunction%
 
@@ -41,43 +45,26 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	::### Result as global variable
 	%dk_call% dk_echo
-	%dk_call% dk_set myPath "%~dp0"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_basename "A:/directoryA/filenameA.extA"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
-
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "TEST"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
-
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
-
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "%windir:\=/%/System32/test.v123.zip"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
-
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "TEST"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
-
-	%dk_call% dk_echo
-	%dk_call% dk_set myPath "https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
+	::### Result as return value
+::	%dk_call% dk_echo
+::	for /f "usebackq delims=" %%G in (`%dk_call% dk_basename "B:/directoryB/filenameB.extB"`) do set "resultB=%%G"
+::	%dk_call% dk_echo "resultB = %resultB%"
+::	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	
+	::### Result as variable parameter
 	%dk_call% dk_echo
-	%dk_call% dk_set myPath "https://aka.ms/vs/16/release/vc_redist.x64.exe"
-	%dk_call% dk_basename "%myPath%"
-	%dk_call% dk_debug "%myPath%: basename = %dk_basename%"
+	%dk_call% dk_basename "C:/directoryC/filenameC.extC" resultC
+	%dk_call% dk_echo "resultC = %resultC%"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	
+	::### Result as hashtable parameter
+	%dk_call% dk_echo
+	%dk_call% dk_basename "D:/directoryD/filenameD.extD" resultD.data
+	%dk_call% dk_echo "resultD.data = %resultD.data%"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
 %endfunction%

@@ -159,24 +159,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "PLUGIN.IMPORT = %PLUGIN.IMPORT%"
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	::### PLUGIN.URL_Filename											master.zip
 	%dk_call% dk_basename			%PLUGIN.URL%						PLUGIN.URL_Filename				
 	%dk_call% dk_echo "PLUGIN.URL_Filename = %PLUGIN.URL_Filename%"
@@ -341,7 +323,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### Set the <PLUGIN.ID> variable to mirror %PLUGIN%
 	::### All %PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
 ::	Set-Variable -Name %PLUGIN.ID% -Value %PLUGIN% -Scope Global
-	::############### PLUGIN ##################
+	for /F "tokens=* delims=" %%G in ('set PLUGIN.') do (
+		set "line=%%G"
+		set "!line:PLUGIN.=%PLUGIN.ID%.!"
+	)
 %endfunction%
 
 
@@ -358,55 +343,54 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_chdir "%DKIMPORTS_DIR%/git"
-	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_NAME git INSTALL_ROOT "%DKTOOLS_DIR%"
+	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "%DKTOOLS_DIR%"
 	::### Import hashtable #################
 	:: 		 ####### TODO #######
 	::######################################
 	
+::	%dk_call% dk_echo
+::	%dk_call% dk_echo "IMPORT_ROOT                     		= %IMPORT_ROOT%"
+::	%dk_call% dk_echo "IMPORT_NAME                     		= %IMPORT_NAME%"
+::	%dk_call% dk_echo "IMPORT_PATH                     		= %IMPORT_PATH%"
+::	%dk_call% dk_echo "INSTALL_ROOT                    		= %INSTALL_ROOT%"
+::	%dk_call% dk_echo "INSTALL_NAME                    		= %INSTALL_NAME%"
+::	%dk_call% dk_echo "INSTALL_PATH                    		= %INSTALL_PATH%"
+::	%dk_call% dk_echo "VERSION                         		= %VERSION%"
+::	%dk_call% dk_echo "BRANCH                          		= %BRANCH%"
+::	%dk_call% dk_echo "TAG                             		= %TAG%"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "IMPORT_ROOT                     = %IMPORT_ROOT%"
-	%dk_call% dk_echo "IMPORT_NAME                     = %IMPORT_NAME%"
-	%dk_call% dk_echo "IMPORT_PATH                     = %IMPORT_PATH%"
-	%dk_call% dk_echo "INSTALL_ROOT                    = %INSTALL_ROOT%"
-	%dk_call% dk_echo "INSTALL_NAME                    = %INSTALL_NAME%"
-	%dk_call% dk_echo "INSTALL_PATH                    = %INSTALL_PATH%"
-	%dk_call% dk_echo "VERSION                         = %VERSION%"
-	%dk_call% dk_echo "BRANCH                          = %BRANCH%"
-	%dk_call% dk_echo "TAG                             = %TAG%"
+	%dk_call% dk_echo "%PLUGIN.ID%.ARGS                     = !%PLUGIN.ID%.ARGS!"
+	%dk_call% dk_echo "%PLUGIN.ID%.ID                       = !%PLUGIN.ID%.ID!"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_ROOT              = !%PLUGIN.ID%.IMPORT_ROOT!"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_NAME              = !%PLUGIN.ID%.IMPORT_NAME!"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_PATH              = !%PLUGIN.ID%.IMPORT_PATH!"
+	%dk_call% dk_echo "%PLUGIN.ID%.INSTALL_ROOT             = !%PLUGIN.ID%.INSTALL_ROOT!"
+	%dk_call% dk_echo "%PLUGIN.ID%.INSTALL_NAME             = !%PLUGIN.ID%.INSTALL_NAME!"
+	%dk_call% dk_echo "%PLUGIN.ID%.INSTALL_PATH             = !%PLUGIN.ID%.INSTALL_PATH!"
+	%dk_call% dk_echo "%PLUGIN.ID%.VERSION                  = !%PLUGIN.ID%.VERSION!"
+	%dk_call% dk_echo "%PLUGIN.ID%.BRANCH                   = !%PLUGIN.ID%.BRANCH%!"
+	%dk_call% dk_echo "%PLUGIN.ID%.TAG                      = !%PLUGIN.ID%.TAG!"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "PLUGIN.ARGS                     = %PLUGIN.ARGS%"
-	%dk_call% dk_echo "PLUGIN.ID                       = %PLUGIN.ID%"
-	%dk_call% dk_echo "PLUGIN.IMPORT_ROOT              = %PLUGIN.IMPORT_ROOT%"
-	%dk_call% dk_echo "PLUGIN.IMPORT_NAME              = %PLUGIN.IMPORT_NAME%"
-	%dk_call% dk_echo "PLUGIN.IMPORT_PATH              = %PLUGIN.IMPORT_PATH%"
-	%dk_call% dk_echo "PLUGIN.INSTALL_ROOT             = %PLUGIN.INSTALL_ROOT%"
-	%dk_call% dk_echo "PLUGIN.INSTALL_NAME             = %PLUGIN.INSTALL_NAME%"
-	%dk_call% dk_echo "PLUGIN.INSTALL_PATH             = %PLUGIN.INSTALL_PATH%"
-	%dk_call% dk_echo "PLUGIN.VERSION                  = %PLUGIN.VERSION%"
-	%dk_call% dk_echo "PLUGIN.BRANCH                   = %PLUGIN.BRANCH%"
-	%dk_call% dk_echo "PLUGIN.TAG                      = %PLUGIN.TAG%"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL                      = !%PLUGIN.ID%.URL!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_Filename             = !%PLUGIN.ID%.URL_Filename!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_File                 = !%PLUGIN.ID%.URL_File!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_Extension            = !%PLUGIN.ID%.URL_Extension!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_List                 = !%PLUGIN.ID%.URL_List!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_Array                = !%PLUGIN.ID%.URL_Array!"
+	%dk_call% dk_echo "%PLUGIN.ID%.URL_Length               = !%PLUGIN.ID%.URL_Length!"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "PLUGIN.URL                      = %PLUGIN.URL%"
-	%dk_call% dk_echo "PLUGIN.URL_Filename             = %PLUGIN.URL_Filename%"
-	%dk_call% dk_echo "PLUGIN.URL_File                 = %PLUGIN.URL_File%"
-	%dk_call% dk_echo "PLUGIN.URL_Extension            = %PLUGIN.URL_Extension%"
-	%dk_call% dk_echo "PLUGIN.URL_List                 = %PLUGIN.URL_List%"
-	%dk_call% dk_echo "PLUGIN.URL_Array                = %PLUGIN.URL_Array%"
-	%dk_call% dk_echo "PLUGIN.URL_Length               = %PLUGIN.URL_Length%"
+	%dk_call% dk_echo "%PLUGIN.ID%.GIT                      = !%PLUGIN.ID%.GIT!"
+	%dk_call% dk_echo "%PLUGIN.ID%.GIT_NAME                 = !%PLUGIN.ID%.GIT_NAME!"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "PLUGIN.GIT                      = %PLUGIN.GIT%"
-	%dk_call% dk_echo "PLUGIN.GIT_NAME                 = %PLUGIN.GIT_NAME%"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT                   = !%PLUGIN.ID%.IMPORT!"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_NAME_Lower        = !%PLUGIN.ID%.IMPORT_NAME_Lower!"
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_NAME_Upper        = !%PLUGIN.ID%.IMPORT_NAME_Upper!"	
+	%dk_call% dk_echo "%PLUGIN.ID%.IMPORT_NAME_Alphanumeric = !%PLUGIN.ID%.IMPORT_NAME_Alphanumeric!"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "PLUGIN.IMPORT                   = %PLUGIN.IMPORT%"
-	%dk_call% dk_echo "PLUGIN.IMPORT_NAME_Lower        = %PLUGIN.IMPORT_NAME_Lower%"
-	%dk_call% dk_echo "PLUGIN.IMPORT_NAME_Upper        = %PLUGIN.IMPORT_NAME_Upper%"	
-	%dk_call% dk_echo "PLUGIN.IMPORT_NAME_Alphanumeric = %PLUGIN.IMPORT_NAME_Alphanumeric%"
+	%dk_call% dk_echo "%PLUGIN.ID%.Build_Dir                = !%PLUGIN.ID%.Build_Dir!"
+	%dk_call% dk_echo "%PLUGIN.ID%.Config_Dir               = !%PLUGIN.ID%.Config_Dir!"
+	%dk_call% dk_echo "%PLUGIN.ID%.Debug_Dir                = !%PLUGIN.ID%.Debug_Dir!"
+	%dk_call% dk_echo "%PLUGIN.ID%.Release_Dir              = !%PLUGIN.ID%.Release_Dir!"
+	%dk_call% dk_echo "%PLUGIN.ID%.Tuple_Dir                = !%PLUGIN.ID%.Tuple_Dir!"
 	%dk_call% dk_echo
-	%dk_call% dk_echo "PLUGIN.Build_Dir                = %PLUGIN.Build_Dir%"
-	%dk_call% dk_echo "PLUGIN.Config_Dir               = %PLUGIN.Config_Dir%"
-	%dk_call% dk_echo "PLUGIN.Debug_Dir                = %PLUGIN.Debug_Dir%"
-	%dk_call% dk_echo "PLUGIN.Release_Dir              = %PLUGIN.Release_Dir%"
-	%dk_call% dk_echo "PLUGIN.Tuple_Dir                = %PLUGIN.Tuple_Dir%"
-	%dk_call% dk_echo
-	%dk_call% dk_echo "GIT.ARGS                        = %GIT.ARGS%"	
 %endfunction%

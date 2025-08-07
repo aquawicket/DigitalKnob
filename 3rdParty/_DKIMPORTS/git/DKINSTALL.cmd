@@ -47,7 +47,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_info "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %git_Import%
-    "%DKDOWNLOAD_DIR%/%GIT_IMPORT_FILE%" -y -o "%GIT%"
+    echo "%DKDOWNLOAD_DIR%/%PLUGIN.URL_Filename%" -y -o "%GIT%"
 	
     ::###### Install Git Context Menu ######
 	if not exist "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd" (
