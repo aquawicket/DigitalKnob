@@ -32,7 +32,7 @@ dk_getExtension() {
 	fi
 	
 	### return value ###
-	export dk_getExtension=${dk_getExtension};
+	export dk_getExtension=${dk_getExtension-};
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_getExtension};
 	else
