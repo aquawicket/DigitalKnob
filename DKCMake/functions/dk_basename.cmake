@@ -18,19 +18,24 @@ include_guard()
 #
 function(dk_basename)
 	dk_debugFunc(1 2)
-	message("dk_basename(${ARGV})")
+
+	###### input ######
 	set(path ${ARGV0})
 	set(rtn_var ${ARGV1})
 	#dk_getArg(0 path)
 	#dk_getArg(1 rtn_var)
 
+
 	get_filename_component(fullpath ${path} ABSOLUTE)
 	get_filename_component(dk_basename ${fullpath} NAME)
 	
-	### return ###
+	
+	###### output ######
 	set(dk_basename ${dk_basename} PARENT_SCOPE)
 	if(rtn_var)
 		set(${rtn_var} ${dk_basename} PARENT_SCOPE)
+	else()
+		message(${dk_basename}) 
 	endif()
 endfunction()
 
@@ -42,15 +47,26 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc(0)
 	
-	dk_echo("")
-	dk_basename("/path/to/a/filename.txt")
-	dk_info("basename of /path/to/a/filename.txt = ${dk_basename}")
+	### Result as global variable
+	dk_echo()
+	dk_basename("A:/directoryA/filenameA.extA")
+	dk_echo("dk_basename = ${dk_basename}")
 	
-	dk_echo("")
-	dk_basename("C:/Windows/System32")
-	dk_info("basename of C:/Windows/System32 = ${dk_basename}")
+	### Result as variable parameter
+	dk_echo()
+	dk_basename("B:/directoryB/filenameB.extB" resultB)
+	dk_echo("resultB = ${resultB}")
+	dk_echo("dk_basename = ${dk_basename}")
 	
-	dk_echo("")
-	dk_basename("C:/Windows/System32/" myBasename)
-	dk_info("basename of C:/Windows/System32/ = ${myBasename}")
+	### Result as hashtable parameter
+	dk_echo()
+	dk_basename("C:/directoryC/filenameC.extC" resultC.data)
+	dk_echo("resultC.data = $($resultC.data)")
+	dk_echo("dk_basename = ${dk_basename}")
+	
+	### Result as return value
+#	dk_echo()
+#	$resultD = dk_basename("D:/directoryD/filenameD.extD")
+#	dk_echo("resultD = ${resultD}")
+#	dk_echo("dk_basename = ${dk_basename}")
 endfunction()
