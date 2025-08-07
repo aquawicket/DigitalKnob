@@ -21,6 +21,7 @@ fi
 dk_basename() {
 	dk_debugFunc 1 2;
 	
+	
 	dk_basename=$(basename "${1}");
 
 
@@ -45,15 +46,21 @@ DKTEST() {
 	dk_call dk_basename "A:/directoryA/filenameA.extA";
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
-	### Result as parameter
-	dk_call dk_echo;
-	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB;
-	dk_call dk_echo "resultB = ${resultB}";
-	dk_call dk_echo "dk_basename = ${dk_basename}";
+	### Result as variable parameter
+	dk_call dk_echo
+	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB
+	dk_call dk_echo "resultB = ${resultB}"
+	dk_call dk_echo "dk_basename = ${dk_basename}"
+	
+	### Result as hashtable parameter
+	dk_call dk_echo
+	dk_call dk_basename "D:/directoryD/filenameD.extD" resultD.data
+	dk_call dk_echo "resultD.data = ${resultD.data}"
+	dk_call dk_echo "dk_basename = ${dk_basename}"
 	
 	### Result as return value
 	dk_call dk_echo;
-	resultC=$(dk_call dk_basename "C:/directoryC/filenameC.extC");
-	dk_call dk_echo "resultC = ${resultC}";
-	#dk_call dk_echo "dk_basename = ${dk_basename}";					#NOTE: export cannot be seen outside of command substituion
+	resultD=$(dk_call dk_basename "D:/directoryD/filenameD.extD");
+	dk_call dk_echo "resultD = ${resultD}";
+	# dk_call dk_echo "dk_basename = ${dk_basename}"					#NOTE: export cannot be seen outside of command substituion
 }

@@ -50,21 +50,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_basename "A:/directoryA/filenameA.extA"
 	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	
-	::### Result as return value
-::	%dk_call% dk_echo
-::	for /f "usebackq delims=" %%G in (`%dk_call% dk_basename "B:/directoryB/filenameB.extB"`) do set "resultB=%%G"
-::	%dk_call% dk_echo "resultB = %resultB%"
-::	%dk_call% dk_echo "dk_basename = %dk_basename%"
-	
 	::### Result as variable parameter
 	%dk_call% dk_echo
-	%dk_call% dk_basename "C:/directoryC/filenameC.extC" resultC
-	%dk_call% dk_echo "resultC = %resultC%"
+	%dk_call% dk_basename "B:/directoryB/filenameB.extB" resultB
+	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	
 	::### Result as hashtable parameter
-	%dk_call% dk_echo
-	%dk_call% dk_basename "D:/directoryD/filenameD.extD" resultD.data
-	%dk_call% dk_echo "resultD.data = %resultD.data%"
-	%dk_call% dk_echo "dk_basename = %dk_basename%"
+::	%dk_call% dk_echo
+::	%dk_call% dk_basename "C:/directoryC/filenameC.extC" resultC.data
+::	%dk_call% dk_echo "resultC.data = %resultC.data%"
+::	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	
+	::### Result as return value
+::	%dk_call% dk_echo
+::	for /f "usebackq delims=" %%G in (`%dk_call% dk_basename "D:/directoryD/filenameD.extD"`) do set "resultD=%%G"
+::	%dk_call% dk_echo "resultD = %resultD%"
+::	%dk_call% dk_echo "dk_basename = %dk_basename%"
 %endfunction%
