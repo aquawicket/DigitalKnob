@@ -19,14 +19,18 @@ fi
 #    https://en.wikipedia.org/wiki/Dirname
 #
 dk_dirname() {
-	dk_debugFunc 1 2
+	dk_debugFunc 1 2;
 	
-	local dk_dirname=$(dirname "${1}")
+	dk_dirname=$(dirname "${1}");
 	
 	### return value ###
-	dk_call dk_printVar dk_dirname
-	[ ${#} -gt 1 ] && eval "${2}=${dk_dirname}" && return  # return value when using rtn_var parameter 
-	dk_return ${dk_dirname}; return						  # return value when using command substitution 
+	export dk_dirname=${dk_dirname};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_dirname};
+	else
+		builtin echo "${dk_dirname}";
+	fi
+	return $?;
 }
 
 

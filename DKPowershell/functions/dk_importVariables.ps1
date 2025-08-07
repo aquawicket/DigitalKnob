@@ -43,7 +43,7 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 function Global:dk_importVariables() {
 	#dk_debugFunc 1 99;
 	
-	### PLUGIN(array) 
+	### PLUGIN(hashtable) 
 	${global:PLUGIN}=@{};
 															###### EXAMPLE ######
 	
@@ -127,12 +127,6 @@ function Global:dk_importVariables() {
 		$PLUGIN.ID=$PLUGIN.IMPORT_NAME_Alphanumeric;
 	}
 
-	### Set the <PLUGIN.ID> variable to mirror $PLUGIN
-	### All $PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
-	Set-Variable -Name $PLUGIN.ID -Value ${PLUGIN} -Scope Global;
-	############### $PLUGIN ##################
-
-	
 	### $PLUGIN.ARGS															"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	$PLUGIN.ARGS=${args};
 	
@@ -280,6 +274,12 @@ function Global:dk_importVariables() {
 	
 	### $PLUGIN.Release_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	$PLUGIN.Release_Dir="$($PLUGIN.Tuple_Dir)/${Release_Dir}";
+	
+	
+	### Set the <PLUGIN.ID> variable to mirror $PLUGIN
+	### All $PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
+	Set-Variable -Name $PLUGIN.ID -Value ${PLUGIN} -Scope Global;
+	############### $PLUGIN ##################
 }
 
 
