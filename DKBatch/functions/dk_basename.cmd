@@ -18,11 +18,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "pathname=%~1"
 	set "pathname=%pathname:"=%"
 	
+	
 	if "%pathname:~-1%" equ "/" (set "pathname=%pathname:~0,-1%")
 	if "%pathname:~-1%" equ "\" (set "pathname=%pathname:~0,-1%")
-
 	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
 	
+	
+	::### return value ###
 	endlocal & (
 		set "dk_basename=%dk_basename%"
 		if "%~2" neq "" (set "%~2=%dk_basename%")
