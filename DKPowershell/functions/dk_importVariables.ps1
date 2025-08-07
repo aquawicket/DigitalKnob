@@ -166,9 +166,9 @@ function Global:dk_importVariables() {
 	dk_call dk_toLower 			$PLUGIN.IMPORT_NAME 	PLUGIN.IMPORT_NAME_Lower;
 	
 
-	##############################################
+	###############################################
 	############ $PLUGIN.GIT_Variables ############
-	##############################################
+	###############################################
 	if($PLUGIN.GIT -eq 1){
 		
 		### $PLUGIN.GIT_NAME													zlib
@@ -189,16 +189,15 @@ function Global:dk_importVariables() {
 		}
 	}
 
-	##################################################
+	###################################################
 	############ $PLUGIN.INSTALL_Variables ############
-	##################################################
+	###################################################
 	
 	### $PLUGIN.NAME
 	if(!($PLUGIN.NAME)) { $PLUGIN.NAME=$PLUGIN.IMPORT_NAME; } 
 	if(!($PLUGIN.NAME)) { $PLUGIN.NAME=$PLUGIN.GIT_NAME; }
 	if(!($PLUGIN.NAME)) { $PLUGIN.NAME=$PLUGIN.URL_NAME; }
 	if(!($PLUGIN.NAME)) { dk_call dk_error "PLUGIN.NAME invalid"; }
-	
 	# dk_call dk_convertToCIdentifier	$PLUGIN.INSTALL_NAME	PLUGIN.INSTALL_NAME;
 
 	### $PLUGIN.VERSION													master
@@ -235,13 +234,12 @@ function Global:dk_importVariables() {
 	if(!($PLUGIN.INSTALL_ROOT)) { dk_call dk_error "PLUGIN.INSTALL_ROOT invalid"; }
 
 	### $PLUGIN.INSTALL_PATH														C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	if(!($PLUGIN.INSTALL_PATH)) { $PLUGIN.INSTALL_PATH=${DIR}; }
 	if(!($PLUGIN.INSTALL_PATH)) { $PLUGIN.INSTALL_PATH="$($PLUGIN.INSTALL_ROOT)/$($PLUGIN.INSTALL_NAME)"; }
 	if(!($PLUGIN.INSTALL_PATH)) { dk_call dk_error "PLUGIN.INSTALL_PATH invalid"; }
 
 
 	##############################################
-	############# $PLUGIN.Variables #############
+	############# $PLUGIN.Variables ##############
 	##############################################
 
 	if($PLUGIN.IMPORT_NAME_Lower -AND $PLUGIN.GIT_NAME_Lower) {
@@ -250,10 +248,10 @@ function Global:dk_importVariables() {
 		}
 	}	
 	
-	### $PLUGIN.DIR												C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	if(!("${PLUGIN}" -eq "GIT")) {	### DO NOT USE GIT_DIR ###
-		$PLUGIN.DIR=$PLUGIN.INSTALL_PATH;
-	}
+#	### $PLUGIN.DIR												C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+#	if(!("${PLUGIN}" -eq "GIT")) {	### DO NOT USE GIT_DIR ###
+#		$PLUGIN.DIR=$PLUGIN.INSTALL_PATH;
+#	}
 	
 		
 	#####################################################
