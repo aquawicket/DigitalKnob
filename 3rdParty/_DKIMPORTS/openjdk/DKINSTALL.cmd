@@ -62,10 +62,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "/Library/Java/JavaVirtualMachines/jdk-11.jdk" (%return%)
 
 	%dk_call% dk_download %OPENJDK_DL%
+	%dk_call% dk_command tar xf "%dk_download%"
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_command tar xf %DKDOWNLOAD_DIR%/%OPENJDK_IMPORT_FILE%
 	%dk_call% dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
-	%dk_call% dk_delete %DKDOWNLOAD_DIR%/%OPENJDK_IMPORT_FILE%
+	%dk_call% dk_delete "%dk_download%"
 	%dk_call% dk_command java --version
 %endfunction%
 

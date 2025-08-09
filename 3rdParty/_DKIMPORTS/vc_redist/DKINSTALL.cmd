@@ -25,8 +25,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
 		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		"!DKDOWNLOAD_DIR!/!dk_basename!" /install /quiet /norestart
+		rem %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		rem "!DKDOWNLOAD_DIR!/!dk_basename!" /install /quiet /norestart
+		"!dk_download!" /install /quiet /norestart
 	)
 	
 	::###### 64Bit ######

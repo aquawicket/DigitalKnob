@@ -23,8 +23,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo "openssl already installed"
 		%return%
 	)
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_download %OPENSSL_DL% %DKDOWNLOAD_DIR%/openssl-2f362e9.zip
+	::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	::%dk_call% dk_download %OPENSSL_DL% %DKDOWNLOAD_DIR%/openssl-2f362e9.zip
+	%dk_call% dk_download %OPENSSL_DL%
 	%dk_call% dk_info "Installing %OPENSSL_FOLDER%"
 
 %endfunction%

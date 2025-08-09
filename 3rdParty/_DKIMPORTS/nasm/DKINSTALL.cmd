@@ -26,12 +26,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo "nasm already installed"
 		%return%
 	)
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_download %NASM_DL% %DKDOWNLOAD_DIR%\nasm-2.16.01-win64.zip
+	%dk_call% dk_download %NASM_DL%
 	
 	%dk_call% dk_info "Installing %NASM_FOLDER%"
 	
 	:: TODO
-	
-	::%dk_call% dk_printVar NASM
+	:: %dk_call% dk_printVar NASM
+	:: %dk_download% = path to the downloaded file 
 %endfunction%

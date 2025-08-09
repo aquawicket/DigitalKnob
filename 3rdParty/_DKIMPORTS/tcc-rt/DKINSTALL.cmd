@@ -26,11 +26,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_info "Installing tcc . . ."
     %dk_call% dk_download %TCC_RT_IMPORT%
    
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_basename "%TCC_RT_IMPORT%" TCC_RT_IMPORT_FILE
 	
 	::%USERPROFILE%\DigitalKnob\download\tcc-rt.exe /qn APPDIR=%USERPROFILE%\DigitalKnob\DKTools\tcc-rt
-	call "%DKDOWNLOAD_DIR%/%TCC_RT_IMPORT_FILE%" /qn APPDIR="%TCC_RT:/=\%"
+	::call "%DKDOWNLOAD_DIR%/%TCC_RT_IMPORT_FILE%" /qn APPDIR="%TCC_RT:/=\%"
+	call "%dk_download%" /qn APPDIR="%TCC_RT:/=\%"
 	
 	
 	:: UNINSTALL
