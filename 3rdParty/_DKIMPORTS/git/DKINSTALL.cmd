@@ -47,15 +47,15 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_info "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %git_Import%
-    "%DKDOWNLOAD_DIR%/%PLUGIN.URL_Filename%" -y -o "%GIT%"
 	"%dk_download%" -y -o "%GIT%"
 	
     ::###### Install Git Context Menu ######
-	if not exist "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd" (
-		%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/contextMenu/DKINSTALL.cmd"  "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd"
-	)
-    %dk_call% dk_depend git/contextMenu  
-    if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
+::	if not exist "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd" (
+::		%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/contextMenu/DKINSTALL.cmd"  "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd"
+::	)
+    %dk_call% dk_depend git/contextMenu
+	%dk_call% dk_assertPath "%GIT_EXE%"
+::    if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find GIT_EXE:%GIT_EXE%")
 %endfunction%
 
 
