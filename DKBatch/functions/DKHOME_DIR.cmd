@@ -31,6 +31,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem	if exist "!WSLPATH_EXE!"		(!dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR)
 
 	%dk_call% dk_assertPath DKHOME_DIR
+	
+	rem ### DKHTTP_DKHOME_DIR ###
+	set "DKHTTP_DKHOME_DIR=https://raw.githubusercontent.com/aquawicket"
+	%dk_call% dk_assertVar DKHTTP_DKHOME_DIR
 %endfunction%
 
 

@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if not defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"				&rem get the current folder
-	rem if not defined GIT_EXE (%dk_call% dk_installGit)
+	rem if not defined GIT_EXE (%dk_call% dk_depend git)
 	rem if exist "%CD%\.git" (
 	rem 	"%GIT_EXE%" "-C %DKBRANCH_DIR% branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
 	rem 		set "DKBRANCH=%CURRENT_FOLDER%"

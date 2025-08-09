@@ -14,22 +14,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 	
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	set "_file_=%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
 	
-	
+	%dk_call% dk_assertVar DIGITALKNOB_DIR
+	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 	if not exist "%_file_%" (
-		%dk_call% dk_assertVar DIGITALKNOB_DIR
-		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 		set "dkhttp_file=!_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
-		%dk_call% dk_download "%dkhttp_file%" "%_file_%"
+		%dk_call% dk_download "!dkhttp_file!" "%_file_%"
 	)
 	
-::	if not exist "%_file_%" (
-::		%dk_call% dk_validate DKHTTP_DKIMPORTS_DIR "set DKHTTP_DKIMPORTS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS"
-::		%dk_call% dk_download "!DKHTTP_DKIMPORTS_DIR!/%~1/DKINSTALL.cmd"  "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
-::	)
-
 	%dk_call% dk_allButFirstArgs %*
 	endlocal & (
 		cd "%DKIMPORTS_DIR%/%~1"

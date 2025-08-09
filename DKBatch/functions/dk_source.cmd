@@ -38,10 +38,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem ###### Replace C:/Users/Administrator with ########
 	rem ###### https://raw.githubusercontent.com/aquawicket
 	::set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
+	
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_assertVar DIGITALKNOB_DIR
+	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 	if not exist "%_fnc_%" (
-		%dk_call% dk_assertVar DIGITALKNOB_DIR
-		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
-		set "_url_=!_fnc_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
+		set "_url_=!_fnc_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!"
 	)
 	
 	
