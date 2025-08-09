@@ -36,6 +36,8 @@ set "dk_gitUpdate_BACKUP=1"
 		
 			rem ###### Backup Branch directory and clone ######
 			if "%dk_gitUpdate_BACKUP%" equ "1" (
+				%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+				cd "%DIGITALKNOB_DIR%"
 				%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
 				set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			)
