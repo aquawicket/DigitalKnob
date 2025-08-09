@@ -276,6 +276,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not defined PLUGIN.INSTALL_PATH (set "PLUGIN.INSTALL_PATH=%PLUGIN.INSTALL_ROOT%/%PLUGIN.INSTALL_NAME%")
 	if not defined PLUGIN.INSTALL_PATH (%dk_call% dk_error "PLUGIN.INSTALL_PATH invalid")
 	%dk_call% dk_echo "PLUGIN.INSTALL_PATH = %PLUGIN.INSTALL_PATH%"
+	set "PLUGIN=%PLUGIN.INSTALL_PATH%"
+	set "%PLUGIN.ID%=%PLUGIN.INSTALL_PATH%"
 
 
 	::##############################################
