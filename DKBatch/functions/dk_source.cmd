@@ -37,7 +37,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ Download the file if missing #############
 	rem ###### Replace C:/Users/Administrator with ########
 	rem ###### https://raw.githubusercontent.com/aquawicket
-	set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
+	::set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
+	if not exist "%_fnc_%" (
+		%dk_call% dk_assertVar DIGITALKNOB_DIR
+		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
+		set "_url_=!_fnc_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
+	)
+	
 	
 	rem ###### DOWNLOAD ######
 	for %%Z in ("%_fnc_%") do set "dirn=%%~dpZ"
@@ -45,7 +51,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dirn:~-1%" equ "/" set "dirn=%dirn:~0,-1%"
 	if not exist %dirn% mkdir %dirn%	
 
-	echo curl.exe -L "%_url_%" -o "%_fnc_%"
+	::echo curl.exe -L "%_url_%" -o "%_fnc_%"
 	if not exist "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"
 	if exist "%_fnc_%" exit /b 0
 	
