@@ -13,6 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1
 
 	set "_file_=%~1"
+	set "_file_=%_file_:\=/%"
 		
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
