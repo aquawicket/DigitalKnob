@@ -21,6 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar DIGITALKNOB_DIR
 	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 	if not exist "%_file_%" (
+		rem %dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
 		call set "dkhttp_file=%%_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
 		%dk_call% dk_download "!dkhttp_file!" "%_file_%"
 	)

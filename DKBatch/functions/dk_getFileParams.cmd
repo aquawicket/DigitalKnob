@@ -14,14 +14,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "_file_=%~1"
 		
-rem	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 	if not exist "%_file_%" (
-		%dk_call% dk_assertVar DIGITALKNOB_DIR
-		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
-rem 	set "dkhttp_file=!_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
-		%dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
-		%dk_call% dk_download "%dkhttp_file%" "%_file_%"
-rem		%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" "%_file_%"
+		rem %dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
+		call set "dkhttp_file=%%_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
+		%dk_call% dk_download "!dkhttp_file!" "%_file_%"
 	)
 
 	if "%dk_getFileParams_PRINT_VARIABLES%" equ "1" (
