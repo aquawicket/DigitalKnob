@@ -18,7 +18,8 @@ rem	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if not exist "%_file_%" (
 		%dk_call% dk_assertVar DIGITALKNOB_DIR
 		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
-		set "dkhttp_file=!_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
+rem 	set "dkhttp_file=!_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!
+		%dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
 		%dk_call% dk_download "%dkhttp_file%" "%_file_%"
 rem		%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt" "%_file_%"
 	)
