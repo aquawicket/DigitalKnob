@@ -28,7 +28,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_assertVar git_Import
   
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	if not defined GIT (%dk_call% dk_importVariables %git_Import% NAME git ROOT %DKTOOLS_DIR%)
+	if not defined GIT (%dk_call% dk_importVariables %git_Import% NAME git INSTALL_ROOT %DKTOOLS_DIR%)
 	%dk_call% dk_assertVar GIT
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
@@ -47,7 +47,8 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_info "Installing git . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
     %dk_call% dk_download %git_Import%
-    echo "%DKDOWNLOAD_DIR%/%PLUGIN.URL_Filename%" -y -o "%GIT%"
+    "%DKDOWNLOAD_DIR%/%PLUGIN.URL_Filename%" -y -o "%GIT%"
+	"%dk_download%" -y -o "%GIT%"
 	
     ::###### Install Git Context Menu ######
 	if not exist "%DKIMPORTS_DIR%/git/contextMenu/DKINSTALL.cmd" (
