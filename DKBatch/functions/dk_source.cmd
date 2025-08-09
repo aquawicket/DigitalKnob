@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%_fnc_%" exit /b 0
 		
 	if not defined DKHOME_DIR 	set "DKHOME_DIR=%USERPROFILE:\=/%"
-	if not defined DKHTTP_DIR 	set "DKHTTP_DIR="https://raw.githubusercontent.com/aquawicket"
+	if not defined DKHTTP_DIR 	set "DKHTTP_DIR=https://raw.githubusercontent.com/aquawicket"
 	
 	::############ Correct the path delimiters ############
 	set "_fnc_=%_fnc_:\=/%"
@@ -35,17 +35,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if exist "%_fnc_%" exit /b 0
 
 	::############ Download the file if missing #############
-	rem ###### Replace C:/Users/Administrator with ########
-	rem ###### https://raw.githubusercontent.com/aquawicket
-	::set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
-	
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-	%dk_call% dk_assertVar DIGITALKNOB_DIR
-	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
+	rem ###### Replace 'C:/Users/Administrator' with 'https://raw.githubusercontent.com/aquawicket'
 	if not exist "%_fnc_%" (
-		set "_url_=!_fnc_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!"
+		rem call set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
+		call set "_url_=%%_fnc_:%DKHOME_DIR%=%DKHTTP_DIR%%%"
 	)
-	
 	
 	rem ###### DOWNLOAD ######
 	for %%Z in ("%_fnc_%") do set "dirn=%%~dpZ"

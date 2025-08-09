@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo "Please enter some details about this commit, then press enter."
     %dk_call% dk_keyboardInput commit_msg
        
-    %dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+    %dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 	
     %dk_call% dk_exec "%GIT_EXE%" -C %DKBRANCH_DIR% config --global credential.helper
