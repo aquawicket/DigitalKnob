@@ -29,6 +29,16 @@ dk_importVariables("${glintercept_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CUR
 # if HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\GLIntercept_is1 exists
 #dk_set(GLINTERCEPT "$ENV{SystemDrive}/Program Files (x86)/GLIntercept_1_3_4")
 if(NOT EXISTS "${GLINTERCEPT}/unins000.exe")
-	dk_download(${GLINTERCEPT.URL})
-	dk_exec(${dk_download} /SILENT /DIR=${GLINTERCEPT})
+	dk_notice("glintercept not installed")
+	dk_return()
+endif()
+
+dk_echo("uninstalling glintercept . . .")
+dk_exec(${GLINTERCEPT}/unins000.exe /SILENT)
+dk_delete("${GLINTERCEPT}")
+
+if(NOT EXISTS "${GLINTERCEPT}")
+	dk_success("glintercept uninstall complete")
+else()
+	dk_error("glintercept uninstall failed")
 endif()

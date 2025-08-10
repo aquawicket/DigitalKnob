@@ -15,18 +15,23 @@ include_guard()
 ########### ida ############
 # https://hex-rays.com/ida-free/
 # https://out7.hex-rays.com/files/idafree84_windows.exe
-
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+if(NOT Windows_Host)
+	dk_undepend(ida)
+	dk_return()
+endif()
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_basename			(${IDA_IMPORT} IDA_IMPORT_FILE)
-dk_importVariables	(${IDA_IMPORT} NAME IDA)
-dk_set				(IDA64_EXE "$ENV{DKTOOLS_DIR}/Ida/ida64.exe")
+
+dk_importVariables("${ida_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
+dk_set				(IDA64_EXE "${IDA}/ida64.exe")
 
 if(EXISTS "${IDA64_EXE}")
+	dk_notice("ida is already installed")
 	return()
 endif()
 
-dk_download(${IDA_IMPORT} $ENV{DKDOWNLOAD_DIR})
-dk_assertVar(IDA_IMPORT_FILE)
-execute_process(COMMAND "$ENV{DKDOWNLOAD_DIR}/${IDA_IMPORT_FILE}" --prefix "$ENV{DKTOOLS_DIR}/Ida" --mode unattended)
+dk_echo("installing ${IDA.INSTALL_NAME} . . .")
+dk_download(${IDA.URL})
+dk_exec("${dk_download}" --prefix "${IDA}" --mode unattended)

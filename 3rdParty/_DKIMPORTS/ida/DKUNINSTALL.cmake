@@ -15,9 +15,31 @@ include_guard()
 ########### ida ############
 # https://hex-rays.com/ida-free/
 # https://out7.hex-rays.com/files/idafree84_windows.exe
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+if(NOT Windows_Host)
+	dk_undepend(ida)
+	dk_return()
+endif()
+
+dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_importVariables("${ida_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
+
+if(NOT EXISTS "${IDA}")
+	dk_notice("ida is not installed")
+	return()
+endif()
+
+dk_echo("uninstalling ${IDA.INSTALL_NAME} . . .")
+
+if(EXISTS "${IDA}/uninstall.exe")
+	dk_exec("${IDA}/uninstall.exe" --mode unattended)
+endif()
+dk_delete(${IDA})
 
 
-if(EXISTS "$ENV{DKTOOLS_DIR}/Ida/uninstall.exe")
-	dk_validate		(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-	execute_process	(COMMAND "$ENV{DKTOOLS_DIR}/Ida/uninstall.exe" --mode unattended)
+if(NOT EXISTS "${IDA}")
+	dk_success("ida uninstall complete")
+else()
+	dk_error("ida uninstall failed")
 endif()
