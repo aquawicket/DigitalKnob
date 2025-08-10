@@ -23,32 +23,30 @@ if(NOT Windows_Host)
 endif()
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables("${cygwin_${Host_Tuple}_Import}")
+dk_importVariables("${cygwin_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(CYGWIN)
-message("CYGWIN = ${CYGWIN}")
 dk_set(CYGWIN_EXE "${CYGWIN}/Cygwin.bat")
 
 
-if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN_IMPORT_FILE}")
-	dk_echo("Installing ${CYGWIN_FOLDER}")
+if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN.URL_Filename}")
+	dk_echo("Installing ${CYGWIN.INSTALL_NAME}")
 		
 	### Download ###
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_download(${CYGWIN_URL} "$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}")
+	dk_download(${CYGWIN.URL})
 		
 	### FirewallAllow ###
-	dk_firewallAllow("Cygwin_Setup" "$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}")
+	dk_firewallAllow("Cygwin_Setup" "${dk_download}")
 		
 	### Install Cygwin ###
 	# "C:\Users\Administrator\DigitalKnob\download\setup-x86_64.exe" --quiet-mode --root C:\Users\Administrator\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64
 	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --site https://mirrors.163.com/cygwin/ --root ${CYGWIN})
-	dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --root ${CYGWIN})
+	dk_exec("${dk_download}" --root ${CYGWIN})
 		
 	### Install Packages ###
-	dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
+	dk_exec("${dk_download}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
 		
 	### Copy Setup exe to /bin ###
-	dk_copy("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" "${CYGWIN}/bin/${CYGWIN_IMPORT_FILE}")   # copy the installer to use as a package manager
+	dk_copy("${dk_download}" "${CYGWIN}/bin/${CYGWIN.URL_Filename}")   # copy the installer to use as a package manager
 endif()	
 
 #if(NOT EXISTS "???")

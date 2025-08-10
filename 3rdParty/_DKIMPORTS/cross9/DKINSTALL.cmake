@@ -30,11 +30,10 @@ dk_import(${cross9_Import})
 
 
 #if(NOT EXISTS ??)
-#	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 #	dk_echo("Installing ${CROSS9_FOLDER}")
 	
 	### Download ###
-#	dk_download(${cross9_Import} $ENV{DKDOWNLOAD_DIR})
+#	dk_download(${cross9_Import})
 
 
 #endif()

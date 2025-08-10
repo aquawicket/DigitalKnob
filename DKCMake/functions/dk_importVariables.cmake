@@ -221,12 +221,12 @@ function(dk_importVariables)
 	###############################################
 	############ PLUGIN.GIT_Variables #############
 	###############################################
-	#if(${PLUGIN.GIT} EQUAL 1)	
+	if(${PLUGIN.GIT})	
 		### PLUGIN.GIT_NAME											zlib
 		######!!!!!! FIXME: using list instead of array !!!!!!######		
 		dk_arrayAt(PLUGIN.URL_List	3	PLUGIN.GIT_NAME)
 		dk_echo("PLUGIN.GIT_NAME = ${PLUGIN.GIT_NAME}")
-	#endif()	
+	endif()	
 
 	### PLUGIN.GIT_NAME_Lower										zlib
 	dk_toLower(${PLUGIN.GIT_NAME} 		PLUGIN.GIT_NAME_Lower)
