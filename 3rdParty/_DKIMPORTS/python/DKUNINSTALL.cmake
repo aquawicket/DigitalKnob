@@ -20,32 +20,28 @@ include_guard()
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
-
-###### IMPORT ######
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
-if(Linux_Host)	
-	dk_set			(PYTHON_IMPORT ${Python_Linux_Import})
-elseif(Mac_Host)
-	dk_set			(PYTHON_IMPORT ${Python_Mac_Import})
-elseif(Windows_X86_Host)
-	dk_set			(PYTHON_IMPORT ${Python_Windows_X86_Import})
-elseif(Windows_X86_64_Host)
-	dk_set			(PYTHON_IMPORT ${Python_Windows_X86_64_Import})
-endif()
-
-if(NOT PYTHON_IMPORT)
-	dk_fatal("PYTHON_IMPORT invalid.")
-endif()
-dk_importVariables(${PYTHON_IMPORT})
+dk_importVariables(${python_${Host_Tuple}_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(PYTHON)
+dk_replaceAll(${PYTHON} "--" "-" PYTHON)
 
+if(NOT EXISTS ${PYTHON})
+	dk_notice("python is not installed")
+	dk_return()
+endif()
+
+dk_echo("uninstalling python . . .")
 if(Windows_Host)
 	dk_exec(MsiExec.exe /uninstall {A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6} /quiet)
 	dk_delete("${PYTHON}")
 endif()
 
-
+if(NOT EXISTS ${PYTHON})
+	dk_success("python uninstall complete")
+else()
+	dk_error("python uninstall failed")
+endif()
 
 
 ### Mac UNINTALL ###

@@ -20,8 +20,6 @@ include_guard()
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
-
-###### IMPORT ######
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
 dk_importVariables(${python_${Host_Tuple}_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
