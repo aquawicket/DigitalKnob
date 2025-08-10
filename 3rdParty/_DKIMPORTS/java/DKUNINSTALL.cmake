@@ -12,9 +12,6 @@ include_guard()
 #########################################################################
 
 
-#dk_undepend(java)
-#dk_return() ################ disabled for now
-
 ############ java ############
 # https://www.java.com/en/download
 # https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245479_4d5417147a92418ea8b615e228bb6935
@@ -23,26 +20,17 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${java_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-dk_set(JAVA_EXE ${JAVA}/bin/java.exe)
+if(NOT EXISTS "${JAVA}")
+	dk_notice("java is not installed")
+	dk_return()
+endif()
 
-### INSTALL ###
-dk_info("looking for java at ${JAVA_EXE}")
-if(NOT EXISTS "${JAVA_EXE}")
-	dk_download(${JAVA.URL})
-	dk_info("Installing ${JAVA.URL_Filename} . . . please wait")
-	#dk_delete(${JAVA})
-	#dk_mkdir(${JAVA})
-	dk_replaceAll(${JAVA} "/" "\\" JAVA_WIN)
-	if(Windows_Host)
-		dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-		dk_exec(${dk_download} INSTALLDIR=${JAVA_WIN} /L "${DK3RDPARTY_DIR}/java_install.log") # /s  = silent install (not working)
-	endif()
+dk_echo("uninstalling java . . .")
+dk_exec(msiexec /x {71024AE4-039E-4CA4-87B4-2F64180451F0} /quiet)
+dk_delete(${JAVA})
+
+if(NOT EXISTS "${JAVA}")
+	dk_success("java uninstall complete")
 else()
-	dk_info("Found java at ${JAVA_EXE}")
+	k_error("java uninstall failed")
 endif()
-
-if(NOT EXISTS "${JAVA_EXE}")
-	dk_fatal("JAVA IS NOT FOUND OR INVALID")
-endif()
-
-dk_setEnv("JAVA_HOME" ${JAVA})

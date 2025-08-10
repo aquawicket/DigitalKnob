@@ -1,0 +1,7 @@
+###### java ######
+# http://deb.sambaedu.org/wpkg/files/jre
+# http://deb.sambaedu.org/wpkg/files/jre/jre-8u311-windows-x64.exe
+
+JAVA_NAME=jre-8u451-windows-x64
+JAVA_VERSION=8u451
+java_Windows_X86_64_Import=http://deb.sambaedu.org/wpkg/files/jre/jre-8u451-windows-x64.exe
