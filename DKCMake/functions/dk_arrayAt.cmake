@@ -38,6 +38,9 @@ function(dk_arrayAt)
 	
 	### return ###
 	set(dk_arrayAt ${dk_arrayAt} PARENT_SCOPE)
+	if(${ARGC} GREATER 2)
+		set(${ARGV2} ${dk_arrayAt} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -60,8 +63,8 @@ function(DKTEST)
 	dk_arrayAt(myArray 0)
 	dk_info("dk_arrayAt 0 = ${dk_arrayAt}")
 
-	dk_arrayAt("myArray" 1)
-	dk_info("dk_arrayAt 1 = ${dk_arrayAt}")
+	dk_arrayAt(myArray 1 resultB)
+	dk_info("resultB 1 = ${resultB}" PARENT_SCOPE)
 
 	dk_arrayAt("${myArray}" 2)
 	dk_info("dk_arrayAt 2 = ${dk_arrayAt}")
