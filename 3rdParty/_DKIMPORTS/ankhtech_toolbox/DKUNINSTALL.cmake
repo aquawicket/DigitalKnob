@@ -17,5 +17,12 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${ANKHTECH_TOOLBOX_IMPORT} NAME ankhtech_toolbox)
+dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+set					(ANKHTECH_TOOLBOX "${DKTOOLS_DIR}/Ankhtech_Toolbox")
 dk_delete			("${ANKHTECH_TOOLBOX}")
+
+if(NOT EXISTS "${ANKHTECH_TOOLBOX}")
+	dk_success("ankhtech_toolbox uninstall complete")
+else()
+	dk_error("ankhtech_toolbox uninstall failed")
+endif()
