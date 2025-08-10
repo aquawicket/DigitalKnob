@@ -2,8 +2,8 @@
 ###### DK.sh #####################################################################
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
-	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)						&& echo "cygpath: HOME = ${HOME}"
-	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')						&& echo "CMD_EXE = ${CMD_EXE}"
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')								&& echo "CMD_EXE = ${CMD_EXE}"
 	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')	&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})								&& echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)		&& export BASH_EXE=$(command -v bash)									&& echo "BASH_EXE = ${BASH_EXE}"
@@ -18,20 +18,23 @@ fi
 #
 #
 DKINSTALL() {
-#	dk_debugFunc 0
+	dk_debugFunc 0
+	
+	######### kill cmake.exe process #########
+	# %dk_call% dk_killProcess cmake.exe
 
+	######### kill cmake-gui.exe process #########
+	# %dk_call% dk_killProcess cmake-gui.exe
+	
 	dk_call dk_getFileParams "$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
-	echo "cmake_Linux_X86_64_Import = ${cmake_Linux_X86_64_Import}"
-	
-	dk_call dk_validate Host_Tuple "dk_Host_Tuple"
-	cmake_ImportA="cmake_${Host_Tuple}_Import"
-	cmake_Import="${cmake_ImportA}"  # for unknown reasons variable indirection isn't working on WSL here.  aka. ${!variable}
-	echo "cmake_Import = ${cmake_Import}"
-	
-	echo "Target_Tuple = ${Target_Tuple}"
-	[ -n "${Linux_X86_64}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
-	
+	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
+	# for unknown reasons variable indirection isn't working on WSL here.  aka. ${!variable}
+	cmake_Import_="cmake_${Host_Tuple}_Import"
+	cmake_Import="${cmake_Import_}"  
+	#[ -n "${Linux_X86_64}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
 	dk_call dk_assertVar cmake_Import
+	
+
 
 	if dk_call dk_isUrl "${cmake_Import}"; then
 		dk_call dk_info "Installing CMake from direct download"

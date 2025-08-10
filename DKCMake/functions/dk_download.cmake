@@ -34,18 +34,12 @@ function(dk_download)
 	dk_debugFunc(1 3)
 	
 	###### Args ######
-	message("dk_download(${ARGV})")
-	
 	dk_getParameterValue(NAME REMOVE)
 	dk_echo("NAME = ${NAME}")
 	dk_getParameterValue(ROOT REMOVE)
 	dk_echo("ROOT = ${ROOT}")
 	dk_getParameter(NO_HALT REMOVE)
 	dk_echo("NO_HALT = ${NO_HALT}")
-	
-	message("dk_download(${ARGV})")
-	###### Args ######
-	
 	
 	
 	set(CMAKE_TLS_VERIFY=0)
@@ -54,7 +48,7 @@ function(dk_download)
 	if(dk_includes)
 		set(url "${ARGV0}")
 	endif()
-	dk_echo("url = ${url}")
+	#dk_echo("url = ${url}")
 	
 	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
 	# We make sure the value is located in the full ARGV to fix this for now. We still need to find the root of this issue.
@@ -97,6 +91,8 @@ function(dk_download)
 		set(dest_path "${dest_path}/${url_filename}")
 	endif()
 	dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
+	set(dk_download ${dest_path} PARENT_SCOPE)
+	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
 	dk_assertVar(dest_dir)
 	
@@ -193,4 +189,5 @@ function(DKTEST)
 	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
 	
 	dk_download("https://www.dependencywalker.com/depends22_x64.zip")
+	dk_echo("dk_download = ${dk_download}")
 endfunction()
