@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::################################################################################
 ::# GIT_BASH environment
 ::#
-%dk_call% dk_validate GIT "%dk_call% dk_installGit"
+%dk_call% dk_validate GIT "%dk_call% dk_depend git"
 
 %dk_call% dk_clearScreen
 %dk_call% dk_title "Digitalknob DK_GIT_BASH"

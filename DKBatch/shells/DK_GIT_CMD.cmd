@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::################################################################################
 ::# GIT_CMD environment
 ::#
-%dk_call% dk_validate GIT "%dk_call% dk_installGit"
+%dk_call% dk_validate GIT "%dk_call% dk_depend git"
 set "PATH=%GIT%\cmd;%PATH%"
 %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 %dk_call% dk_chdir %DKBRANCH_DIR%

@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::		%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_delete "%DKBRANCH_DIR%")
 ::	)
 	
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+	%dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
 	
 	::###### Clone if directory doesn't exist or is empty
 	if not exist "%DKBRANCH_DIR%" ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone "%_URL_%" "%DKBRANCH_DIR%" && %return%)

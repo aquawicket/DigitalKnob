@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_installGit()
+::# dk_gitMergeBranch()
 ::#
 ::#
 ::# 	 ###### Steps to manually merge (Method A) ######
@@ -63,7 +63,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo Merging To: %destination%
 
 	:: ### Validate git.exe ###
-	%dk_call% dk_validate GIT_EXE  "%dk_call% dk_installGit"
+	%dk_call% dk_validate GIT_EXE  "%dk_call% dk_depend git"
 	%dk_call% dk_chdir "%DKBRANCH_DIR%"
 
 	echo Merging %branch% into %destination%
