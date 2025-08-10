@@ -17,7 +17,6 @@ include_guard()
 # https://github.com/git-for-windows/git
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-
 ### IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(git_Import "${git_${Host_Tuple}_Import}")
@@ -26,7 +25,7 @@ dk_assertVar(git_Import)
 
 ### GIT variables ###
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_importVariables(${git_Import} ROOT $ENV{DKTOOLS_DIR})
+dk_importVariables(${git_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT $ENV{DKTOOLS_DIR})
 
 
 ### First Check ###
@@ -44,9 +43,10 @@ if(NOT GIT_EXE)
 	dk_debug(" Installing git . . . . ")
 	if(Windows_Host)
 		dk_download(${git_Import} $ENV{DKDOWNLOAD_DIR})			
-		dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" GIT_INSTALL_FILE)
-		dk_nativePath("${GIT}" GIT_INSTALL_PATH)
-		execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH} COMMAND_ECHO STDOUT)
+		#dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_URL_FILENAME}" GIT_INSTALL_FILE)
+		#dk_nativePath("${GIT}" GIT_INSTALL_PATH)
+		#execute_process(COMMAND ${GIT_INSTALL_FILE} -y -o ${GIT_INSTALL_PATH} COMMAND_ECHO STDOUT)
+		dk_exec(cmd /c $ENV{DKDOWNLOAD_DIR}/${GIT.URL_Filename} -y -o ${GIT})
 		# setx PATH
 	elseif(Android_Host)
 		dk_installPackage(git)

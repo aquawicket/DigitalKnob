@@ -114,7 +114,7 @@ function(dk_importVariables)
 	### PLUGIN.IMPORT_PATH										/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	if(NOT PLUGIN.IMPORT_PATH)
 		dk_getcwd()
-		set(PLUGIN.IMPORT_PATH ${DKPWD})
+		set(PLUGIN.IMPORT_PATH ${PWD})
 	endif()
 	dk_echo("PLUGIN.IMPORT_PATH = '${PLUGIN.IMPORT_PATH}'")
 

@@ -9,6 +9,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
+	if not exist %ComSpec% (echo ERROR: ComSpec not found)
+	if not exist %CMAKE_EXE% (echo ERROR: CMAKE_EXE not found)
+	if not exist %DKSCRIPT_PATH% (echo ERROR: DKSCRIPT_PATH not found)
 	::###### run script ######
 	set cmnd="%ComSpec%" /V:ON /K call "%CMAKE_EXE%" -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
