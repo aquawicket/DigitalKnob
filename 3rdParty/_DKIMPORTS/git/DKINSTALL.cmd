@@ -3,14 +3,12 @@ if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-
-%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-
-
 :: https://stackoverflow.com/a/67714373
 %dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSystem")
 if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal")
+
+
 
 ::####################################################################
 ::# DKINSTALL
@@ -19,6 +17,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 ::%setlocal%
 	%dk_call% dk_debugFunc 0	
 	
+	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	set "git_Import=!git_%Host_Tuple%_Import!"
     %dk_call% dk_assertVar git_Import
