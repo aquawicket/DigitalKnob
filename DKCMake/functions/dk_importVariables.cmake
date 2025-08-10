@@ -145,7 +145,7 @@ function(dk_importVariables)
 	### PLUGIN.ID
 	if(NOT PLUGIN.ID)
 		set(PLUGIN.ID ${PLUGIN.IMPORT_NAME_Upper})
-		if(${PLUGIN.ID} EQUAL ${PLUGIN.IMPORT_NAME_Alphanumeric})
+		if(NOT "${PLUGIN.ID}" STREQUAL "${PLUGIN.IMPORT_NAME_Alphanumeric}")
 			dk_notice("${PLUGIN.ID} contains non-alphanumeric characters and will be set to ${PLUGIN.IMPORT_NAME_Alphanumeric}")
 			set(PLUGIN.ID ${PLUGIN.IMPORT_NAME_Alphanumeric})
 		endif()
@@ -206,9 +206,11 @@ function(dk_importVariables)
 #	   	set /a n+=1
 #		goto :PLUGIN.URL_Array.loop
 #	endif()
+	set(PLUGIN.URL_Array ${PLUGIN.URL_List})
+	dk_echo("PLUGIN.URL_Array = '${PLUGIN.URL_Array}'")
 
 	### PLUGIN.URL_Length											8
-	dk_arrayLength(PLUGIN.URL_Array		PLUGIN.URL_Length)
+	dk_arrayLength(PLUGIN.URL_List		PLUGIN.URL_Length)
 	dk_echo("PLUGIN.URL_Length = '${PLUGIN.URL_Length}'")
 
 	### PLUGIN.IMPORT_NAME_Lower									zlib
@@ -378,13 +380,14 @@ function(dk_importVariables)
 
 	### Set the <PLUGIN.ID> variable to mirror %PLUGIN%
 	### All %PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
-#	set(currentScope=1"
-#	for /F "tokens=* delims=" %%G in ('set PLUGIN') do (
-#		if defined currentScope endlocal
-#		set "line=%%G"
-#		set "!line!"
-#		set "!line:PLUGIN=%PLUGIN.ID%!"
-#	)
+	get_cmake_property(_vars VARIABLES)
+    string(REGEX MATCHALL "(^|;)PLUGIN[A-Za-z0-9_.]*" _matchedVars "${_vars}")
+    foreach(_variable ${_matchedVars})
+		set(${_variable} ${${_variable}} PARENT_SCOPE)
+		string(REPLACE "PLUGIN" "${PLUGIN.ID}" _variable_B ${_variable})
+		set(${_variable_B} ${${_variable}} PARENT_SCOPE)
+    endforeach()
+
 endfunction()	
 	
 	
@@ -411,7 +414,7 @@ function(DKTEST)
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 	dk_chdir("${DKIMPORTS_DIR}/git")
-	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "${DKTOOLS_DIR}")
+	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" IMPORT_NAME git INSTALL_ROOT "${DKTOOLS_DIR}")
 	
 	dk_echo()
 	dk_echo()
@@ -448,7 +451,7 @@ function(DKTEST)
 	dk_echo("PLUGIN.Tuple_Dir                     = ${PLUGIN.Tuple_Dir}")
 	dk_echo()
 	dk_echo()
-	dk_echo("################## %PLUGIN.ID%.variables ##################")
+	dk_echo("################## ${PLUGIN.ID}.variables ##################")
 	dk_echo("${PLUGIN.ID}                         = ${${PLUGIN.ID}}")
 	dk_echo("${PLUGIN.ID}.ARGS                    = ${${PLUGIN.ID}.ARGS}")
 	dk_echo("${PLUGIN.ID}.ID                      = ${${PLUGIN.ID}.ID}")

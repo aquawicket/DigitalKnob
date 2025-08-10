@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_arrayLength(array)
+# dk_arrayLength(array rtn_var)
 #
 #	The length data property of an Array instance represents the number of elements in that array. 
 #	The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array.
@@ -31,8 +31,14 @@ function(dk_arrayLength)
 		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
 	endif()
 
+	###### output ######
 	list(LENGTH array dk_arrayLength)
 	set(dk_arrayLength ${dk_arrayLength} PARENT_SCOPE)
+	if(${ARGC} GREATER 1)
+		set(${ARGV1} ${dk_arrayLength} PARENT_SCOPE)
+	else()
+		message("${dk_arrayLength}")
+	endif()
 endfunction()
 
 

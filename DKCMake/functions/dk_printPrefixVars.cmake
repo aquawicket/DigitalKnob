@@ -28,7 +28,7 @@ function(dk_printPrefixVars _prefix)
     endforeach()
 
 	foreach(_var IN LISTS _resultVars)
-        dk_echo(STATUS "${_var} = ${${_var}}")
+        dk_echo("${_var} = ${${_var}}")
     endforeach()
 endfunction()
 
