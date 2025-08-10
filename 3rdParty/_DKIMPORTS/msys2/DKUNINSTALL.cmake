@@ -15,8 +15,6 @@ include_guard()
 ########### msys2 ###########
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
-
-
 dk_validate(Host_Os "dk_Host_Os()")
 if(NOT DEFINED Windows_Host)
 	dk_undepend(msys2)
@@ -26,7 +24,7 @@ endif()
 ############ MSYS2 variables ############
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(Host_Tuple "dk_Host_Tuple()")
-dk_importVariables	("${msys2_${Host_Tuple}_Import}")
+dk_importVariables	("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(MSYS2)
 
 

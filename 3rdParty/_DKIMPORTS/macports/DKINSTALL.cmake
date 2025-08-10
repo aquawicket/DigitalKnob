@@ -18,17 +18,17 @@ include_guard()
 # https://github.com/macports/macports-base/releases
 # https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg
 
+dk_validate(Host_Os  "dk_Host_Os()")
 if(NOT Mac_Host)
 	return()
 endif()
 
-dk_validate(Target_Config  "dk_Target_Config()")
 
-### VERSION ###
-dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg)
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_importVariables("${macports${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-if(NOT EXISTS $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	dk_download(${MACPORTS_DL} $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)		
-	dk_exec(chmod +x $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	#Mac_dk_exec($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
+if(NOT EXISTS ${MACPORTS.URL})
+	dk_download(${MACPORTS.URL})		
+	dk_exec(chmod +x ${dk_download})
+	#dk_exec($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
 endif()

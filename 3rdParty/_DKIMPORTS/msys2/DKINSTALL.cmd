@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_importVariables !msys2_%Host_Tuple%_Import! NAME msys2
 	%dk_call% dk_assertVar MSYS2
-	%dk_call% dk_assertVar MSYS2_URL
+	%dk_call% dk_assertVar MSYS2.URL
 
 	set "MSYS2=%MSYS2%"
 	set	"MSYS2_DBPath=%MSYS2%/var/lib/pacman"
@@ -33,12 +33,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set	"MINGW64_BIN=%MSYS2%/mingw64/bin"	
 	set	"UCRT64_BIN=%MSYS2%/ucrt64/bin"
 	set	"MSYS2_MAKE_PROGRAM=%MSYS2%/make.exe"
-	if exist "%MSYS2%/msys2.exe" (%return%)
+	if exist "%MSYS2%/msys2.exe" (
+		%dk_call% dk_notice "msys2 already installed"
+		%return%
+	)
 		
 	::############ Install ############
 	%dk_call% dk_echo
-	%dk_call% dk_info "Installing %MSYS2_FOLDER%. . ."
-	%dk_call% dk_download %MSYS2_URL%
+	%dk_call% dk_info "Installing %MSYS2.URL_Filename%. . ."
+	%dk_call% dk_download %MSYS2.URL%
 	%dk_call% dk_smartExtract "%dk_download%" "%MSYS2%"
 	::"%dk_download%" install --root "%MSYS2%" --confirm-command
 	

@@ -31,22 +31,15 @@ function(dk_import)
 	dk_debugFunc()
 	
 	###### Args ######
-	message("dk_import(ARGV=${ARGV})")
 	dk_getParameter(NO_HALT REMOVE)
 	dk_getParameter(PATCH)
-	message("dk_import(ARGV=${ARGV})")
-	set(url ${ARGV})
 	
 	dk_importVariables(${ARGV})
-	###### Args ######
-	
-	
-	
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 
 	if(NOT DKOFFLINE)
 		###### Import from Git Repository ######
-		dk_getExtension(${url} extension)
+		dk_getExtension(${PLUGIN.URL} extension)
 		if("${extension}" STREQUAL ".git")
 			
 			dk_depend(git)
@@ -92,6 +85,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	#dk_import("https://github.com/madler/zlib/archive/d4768283.zip")
 	dk_import("https://www.dependencywalker.com/depends22_x64.zip")
 endfunction()
