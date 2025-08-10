@@ -21,25 +21,29 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_arrayAt
 %setlocal%
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 2 3
 
-::###### faster ######
-	endlocal & set "dk_arrayAt=!%~1[%~2]!"
-	%return%
-::####################
+::############ faster ############
+	endlocal & (
+		set "dk_arrayAt=!%~1[%~2]!"
+		if "%~3" neq "" (set "%~3=!dk_arrayAt!")
+		%return%
+	)
+::################################
 	
 	::###### input #######
 	set "_array_=%~1"
-	set "_index_-%~2"
+	set "_index_=%~2"
 	
 	
+	::###### process ######
 	set "dk_arrayAt=!%_array_%[%_index_%]!"
 	
 	
 	::###### output ######
 	endlocal & (
 		set "dk_arrayAt=%dk_arrayAt%"
-		if "%~2" neq "" (set "%~2=%dk_arrayAt%")
+		if "%~3" neq "" (set "%~3=%dk_arrayAt%")
 	)
 %endfunction%
 
@@ -60,9 +64,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "myArrayA[4]=h i j"
 	%dk_call% dk_printVar myArrayA
 	%dk_call% dk_arrayAt MyArrayA 2
-	%dk_call% dk_echo "dk_arrayAt[MyArrayA 2] = %dk_arrayAt%"
-	if "%dk_arrayAt%" neq "d e f" (%dk_call% dk_error "dk_arrayAt[] failed")
-	if "%dk_arrayAt%" equ "d e f" (%dk_call% dk_success "dk_arrayAt[] suceeded")
+	%dk_call% dk_echo "dk_arrayAt 2 = %dk_arrayAt%"
+	if "%dk_arrayAt%" equ "d e f" (%dk_call% dk_success "dk_arrayAt[] suceeded") else (%dk_call% dk_error "dk_arrayAt[] failed")
 
 	set "myArrayB[0]=h i j"
 	set "myArrayB[1]=4 5 6"
@@ -70,8 +73,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "myArrayB[3]=1 2 3"
 	set "myArrayB[4]=a b c"
 	%dk_call% dk_printVar myArrayB
-	%dk_call% dk_arrayAt MyArrayB 3
-	%dk_call% dk_echo "dk_arrayAt[MyArrayB 3] = %dk_arrayAt%"
-	if "%dk_arrayAt%" neq "1 2 3" (%dk_call% dk_error "dk_arrayAt[] failed")
-	if "%dk_arrayAt%" equ "1 2 3" (%dk_call% dk_success "dk_arrayAt[] suceeded")
+	%dk_call% dk_arrayAt MyArrayB 3 resultB
+	%dk_call% dk_echo "dk_arrayAt 3 = %dk_arrayAt%"
+	if "%dk_arrayAt%" equ "1 2 3" 	(%dk_call% dk_success "dk_arrayAt[] suceeded") else (%dk_call% dk_error "dk_arrayAt[] failed")
+	%dk_call% dk_echo "resultB 3 = %resultB%"
+	if "%resultB%" equ "1 2 3" 		(%dk_call% dk_success "dk_arrayAt[] suceeded") else (%dk_call% dk_error "dk_arrayAt[] failed")
 %endfunction%
