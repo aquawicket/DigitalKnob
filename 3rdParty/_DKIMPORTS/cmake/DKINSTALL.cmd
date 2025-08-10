@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar				cmake_Import
 	
 	%dk_call% dk_validate				DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables		%cmake_Import% NAME cmake ROOT %DKTOOLS_DIR%
+	if not defined CMAKE (%dk_call% dk_importVariables	%cmake_Import% NAME cmake IMSTALL_ROOT %DKTOOLS_DIR%)
 	%dk_call% dk_assertVar 				CMAKE
 
 	set "CMAKE_EXE=%CMAKE%/bin/cmake.exe"

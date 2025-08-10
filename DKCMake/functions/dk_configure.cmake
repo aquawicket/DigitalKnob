@@ -77,6 +77,7 @@ function(dk_configure)
 
 	dk_mkdir("${BINARY_DIR}")
 	dk_assertPath("${BINARY_DIR}")
+	dk_source("dk_chdir")
 	dk_chdir("${BINARY_DIR}")
 	
 	
