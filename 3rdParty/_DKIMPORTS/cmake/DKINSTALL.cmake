@@ -21,6 +21,11 @@ include_guard()
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 # https://github.com/Kitware/CMake/releases
 
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+set(cmake_Import "${cmake_${Host_Tuple}_Import}")
+dk_assertVar(cmake_Import)
+
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_set(cmake_Import cmake)
@@ -31,13 +36,20 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_return()
 endif()
 
+### CMAKE variables ###
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_importVariables	(${cmake_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
+
 ###### cmake_Import ######
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
-dk_set				(cmake_Import "${CMake_${Host_Tuple}_Import}")
-dk_assertVar		(cmake_Import)
-dk_validate			(DKTOOLS_DIR 			"dk_DKTOOLS_DIR()")
-dk_importVariables	(${cmake_Import} NAME cmake ROOT ${DKTOOLS_DIR})
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate			(Host_Tuple 			"dk_Host_Tuple()")
+#dk_set				(cmake_Import "${CMake_${Host_Tuple}_Import}")
+#dk_assertVar		(cmake_Import)
+#dk_validate			(DKTOOLS_DIR 			"dk_DKTOOLS_DIR()")
+#dk_importVariables	(${cmake_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
+
+return()
+
 
 ###### INSTALL ######
 if(Android_Host)
@@ -103,8 +115,6 @@ dk_firewallAllow("CMake" "$ENV{CMAKE_EXE}")
 #execute_process(COMMAND ${CMAKE_EXE} --version OUTPUT_VARIABLE CMAKE_EXE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)
 #string(STRIP ${CMAKE_VERSION} CMAKE_VERSION)
 #dk_set(CMAKE_VERSION "${CMAKE_VERSION}")
-
-dk_return()
 
 
 

@@ -17,7 +17,6 @@ include_guard()
 # https://github.com/git-for-windows/git
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-### IMPORT ###
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 set(git_Import "${git_${Host_Tuple}_Import}")
 dk_assertVar(git_Import)
