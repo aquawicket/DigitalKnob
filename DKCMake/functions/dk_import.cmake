@@ -35,7 +35,26 @@ function(dk_import)
 	dk_getParameter(PATCH)
 	
 	dk_importVariables(${ARGV})
+	
+	
+	dk_assertVar(PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	set(${PLUGIN}_IMPORT_NAME ${plugin})
+	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))	
+		###### Push Plugin to the PLUGIN_STACK ######
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		
+		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
+		#dk_dependB(${plugin})
+	
+		###### Pop Plugin from the PLUGIN_STACK ######
+		#dk_envList(PLUGIN POP)
+	else()
+		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
+	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
+	
+
 
 	if(NOT DKOFFLINE)
 		###### Import from Git Repository ######
@@ -74,6 +93,8 @@ function(dk_import)
 		dk_patch(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${$ENV{CURRENT_PLUGIN}_DIR})
 	endif()
 	
+	
+	dk_envList(PLUGIN POP)
 endfunction()
 
 

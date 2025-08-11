@@ -25,37 +25,32 @@ include_guard()
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Android_Host)
 	dk_installPackage(openjdk-17)
-		
 	dk_exec(java --version)
 endif()
 
 if(Linux_Host)
 	dk_installPackage(openjdk-11-jdk)
-	
 	dk_exec(java --version)
 endif()
 
 if(Mac_Host)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
-		dk_download(${OPENJDK_DL_MAC_X86_64} $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
-		dk_exec(tar xf $ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
-		
+		dk_download(${openjdk_Mac_X86_64_Import})
+		dk_exec(tar xf ${dk_download})
 		dk_validate(SUDO_EXE "dk_depend(sudo)")
 		dk_exec(${SUDO_EXE} mv $ENV{DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
 		dk_delete($ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
-	
 	dk_exec(java --version)
 endif()
 
 if(Windows_Host)
-	dk_import(${OPENJDK_DL_WIN_X86_64})
+	dk_import(${openjdk_Windows_X86_64_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 	dk_assertPath(OPENJDK)
-	
 	dk_set(JAVAC_EXE "${OPENJDK}/bin/javac.exe")
 
 	###### JAVA_VERSION ######
@@ -69,7 +64,6 @@ if(Windows_Host)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v JavaHome /t REG_SZ /d "$ENV{JAVA_HOME}" /f)
 	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v RuntimeLib /t REG_SZ /d "$ENV{JAVA_HOME}\\bin\\server\\jvm.dll" /f)
-	
 	
 	
 	###### VS_JavaHome ######

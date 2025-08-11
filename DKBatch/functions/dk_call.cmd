@@ -93,7 +93,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 		set /a LVL-=1
 	)
 	
-	call :popStack
+	::call :popStack
 
 ::###### Exit #############################################################################################
 exit /b %__STATUS__%
@@ -261,9 +261,9 @@ exit /b !errorlevel!
 
 	::set endfunction=(exit /b ^^!errorlevel^^!)
 	::set return=(exit /b ^^!errorlevel^^!)
-	set endfunction=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
+	set endfunction=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "return:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "checkerror:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
 	
 	if not defined pad (set "pad=%clr%")
 	if not defined indent (set "indent=   ")

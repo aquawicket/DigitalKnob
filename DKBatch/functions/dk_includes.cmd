@@ -11,7 +11,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_includes
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
-   
+
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
@@ -20,13 +20,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		set "dk_includes=1"
 	)
-   
+
 	set "_haystack_="
 	set "_needle_="
     endlocal & (
 		set "dk_includes=%dk_includes%"
 		if "%~3" neq "" (set "%~3=%dk_includes%")
-		exit /b !dk_includes!
+		exit /b %dk_includes% 
 	)
 %endfunction%
 

@@ -58,7 +58,7 @@ function(dk_importVariables)
 	dk_unset(IMPORT_ROOT)
 	dk_getParameterValue(IMPORT_ROOT)
 	set(PLUGIN.IMPORT_ROOT ${IMPORT_ROOT})
-	dk_echo("PLUGIN.IMPORT_ROOT = ${PLUGIN.IMPORT_ROOT}'")
+	dk_echo("PLUGIN.IMPORT_ROOT = '${PLUGIN.IMPORT_ROOT}'")
 
 	### IMPORT_NAME												zlib
 	dk_unset(IMPORT_NAME)
@@ -151,7 +151,7 @@ function(dk_importVariables)
 		endif()
 	endif()
 	dk_echo("PLUGIN.ID = '${PLUGIN.ID}'")
-
+	
 	### PLUGIN.ARGS												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	set(PLUGIN.ARGS ${ARGV})
 	dk_echo("PLUGIN.ARGS = '${PLUGIN.ARGS}'")
@@ -225,25 +225,25 @@ function(dk_importVariables)
 		### PLUGIN.GIT_NAME											zlib
 		######!!!!!! FIXME: using list instead of array !!!!!!######		
 		dk_arrayAt(PLUGIN.URL_List	3	PLUGIN.GIT_NAME)
-		dk_echo("PLUGIN.GIT_NAME = ${PLUGIN.GIT_NAME}")
+		dk_echo("PLUGIN.GIT_NAME = '${PLUGIN.GIT_NAME}'")
 	endif()	
 
 	### PLUGIN.GIT_NAME_Lower										zlib
 	dk_toLower(${PLUGIN.GIT_NAME} 		PLUGIN.GIT_NAME_Lower)
-	dk_echo("PLUGIN.GIT_NAME_Lower = ${PLUGIN.GIT_NAME_Lower}")
+	dk_echo("PLUGIN.GIT_NAME_Lower = '${PLUGIN.GIT_NAME_Lower}'")
 
 	### PLUGIN.GIT_BRANCH											master
 	if(NOT PLUGIN.BRANCH)
 		# dk_getGitBRANCHName %PLUGIN_URL% PLUGIN_BRANCH
 		set(PLUGIN.BRANCH "master")
 	endif()
-	dk_echo("PLUGIN.GIT_BRANCH = ${PLUGIN.GIT_BRANCH}")
+	dk_echo("PLUGIN.GIT_BRANCH = '${PLUGIN.GIT_BRANCH}'")
 
 	### PLUGIN.GIT_TAG												TODO
 	if(NOT PLUGIN.TAG)
 		set(PLUGIN.TAG "###TODO###")
 	endif()
-	dk_echo("PLUGIN.GIT_TAG = ${PLUGIN.GIT_TAG}")
+	dk_echo("PLUGIN.GIT_TAG = '${PLUGIN.GIT_TAG}'")
 
 	###################################################
 	############ PLUGIN.INSTALL_Variables #############
@@ -263,7 +263,7 @@ function(dk_importVariables)
 		dk_error("PLUGIN.NAME invalid")
 	endif()
 	# dk_convertToCIdentifier("${PLUGIN.NAME}"	PLUGIN.NAME)
-	dk_echo("PLUGIN.NAME = ${PLUGIN.NAME}")
+	dk_echo("PLUGIN.NAME = '${PLUGIN.NAME}'")
 
 	### PLUGIN.VERSION											master
 	if(NOT PLUGIN.VERSION)
@@ -286,7 +286,7 @@ function(dk_importVariables)
 	if(NOT PLUGIN.VERSION)
 		dk_error("PLUGIN.VERSION invalid")
 	endif()
-	dk_echo("PLUGIN.VERSION = ${PLUGIN.VERSION}")
+	dk_echo("PLUGIN.VERSION = '${PLUGIN.VERSION}'")
 
 #	string(FIND ${PLUGIN.VERSION} "-" index)
 #	if [ %index% -eq 0 ] then
@@ -307,7 +307,7 @@ function(dk_importVariables)
 	if(NOT PLUGIN.INSTALL_NAME)
 		dk_error("PLUGIN.INSTALL_NAME invalid")
 	endif()
-	dk_echo("PLUGIN.INSTALL_NAME = ${PLUGIN.INSTALL_NAME}")
+	dk_echo("PLUGIN.INSTALL_NAME = '${PLUGIN.INSTALL_NAME}'")
 
 	### PLUGIN.INSTALL_ROOT										C:/Users/Administrator/DigitalKnob/Development/3rdParty
 	if(NOT PLUGIN.INSTALL_ROOT)
@@ -317,7 +317,7 @@ function(dk_importVariables)
 	if(NOT PLUGIN.INSTALL_ROOT)
 		dk_error("PLUGIN.INSTALL_ROOT invalid")
 	endif()
-	dk_echo("PLUGIN.INSTALL_ROOT = ${PLUGIN.INSTALL_ROOT}")
+	dk_echo("PLUGIN.INSTALL_ROOT = '${PLUGIN.INSTALL_ROOT}'")
 
 	### PLUGIN.INSTALL_PATH										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	if(NOT PLUGIN.INSTALL_PATH)
@@ -326,13 +326,13 @@ function(dk_importVariables)
 	if(NOT PLUGIN.INSTALL_PATH)
 		dk_error("PLUGIN.INSTALL_PATH invalid")
 	endif()
-	dk_echo("PLUGIN.INSTALL_PATH = ${PLUGIN.INSTALL_PATH}")
+	dk_echo("PLUGIN.INSTALL_PATH = '${PLUGIN.INSTALL_PATH}'")
 
-	### PLUGIN
-	set(PLUGIN ${PLUGIN.INSTALL_PATH})
-	dk_echo("PLUGIN = ${PLUGIN}")
+#	### ${PLUGIN}
+#	set(${PLUGIN} ${PLUGIN.INSTALL_PATH})
+#	dk_echo("${PLUGIN} = '${${PLUGIN}}'")
+#	set(${PLUGIN} ${${PLUGIN}} PARENT_SCOPE)
 	
-		
 	##############################################
 	############# PLUGIN.Variables ###############
 	##############################################
@@ -341,17 +341,13 @@ function(dk_importVariables)
 			dk_warning("PLUGIN.IMPORT_NAME_Lower:${PLUGIN.IMPORT_NAME_Lower} and PLUGIN.GIT_NAME_Lower:${PLUGIN.GIT_NAME_Lower} do not match")
 		endif()
 	endif()	
-
-	### <PLUGIN.ID>	
-	set(${PLUGIN.ID} ${PLUGIN.INSTALL_PATH})
-	dk_echo("${PLUGIN.ID} = ${${PLUGIN.ID}}")
 	
 	### PLUGIN.DIR												C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	### DO NOT USE GIT_DIR ###
 	if(NOT "${PLUGIN.ID}" STREQUAL "GIT")
 		set(PLUGIN.DIR ${PLUGIN.INSTALL_PATH})
 	endif()
-	dk_echo("PLUGIN.DIR = ${PLUGIN.DIR}")
+	dk_echo("PLUGIN.DIR = '${PLUGIN.DIR}'")
 	
 	
 	#####################################################
@@ -360,34 +356,43 @@ function(dk_importVariables)
 
 	### PLUGIN.Tuple_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	set(PLUGIN.Tuple_Dir "${PLUGIN.INSTALL_PATH}/${Target_Tuple}")
-	dk_echo("PLUGIN.Tuple_Dir = ${PLUGIN.Tuple_Dir}")
+	dk_echo("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
 
 	### PLUGIN.Config_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Config_Dir "${PLUGIN.INSTALL_PATH}/${Config_Path}")
-	dk_echo("PLUGIN.Config_Dir = ${PLUGIN.Config_Dir}")
+	dk_echo("PLUGIN.Config_Dir = '${PLUGIN.Config_Dir}'")
 
 	### PLUGIN.Build_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Build_Dir "${PLUGIN.INSTALL_PATH}/${Build_Path}")
-	dk_echo("PLUGIN.Build_Dir ${PLUGIN.Build_Dir}")
+	dk_echo("PLUGIN.Build_Dir ${PLUGIN.Build_Dir}'")
 
 	### PLUGIN.Debug_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Debug_Dir "${PLUGIN.Tuple_Dir}/${Debug_Dir}")
-	dk_echo("PLUGIN.Debug_Dir = ${PLUGIN.Debug_Dir}")
+	dk_echo("PLUGIN.Debug_Dir = '${PLUGIN.Debug_Dir}'")
 
 	### PLUGIN.Release_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	set(PLUGIN.Release_Dir "${PLUGIN.Tuple_Dir}/${Release_Dir}")
-	dk_echo("PLUGIN.Release_Dir = ${PLUGIN.Release_Dir}")
+	dk_echo("PLUGIN.Release_Dir = '${PLUGIN.Release_Dir}'")
 
 	### Set the <PLUGIN.ID> variable to mirror %PLUGIN%
 	### All %PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
 	get_cmake_property(_vars VARIABLES)
-    string(REGEX MATCHALL "(^|;)PLUGIN[A-Za-z0-9_.]*" _matchedVars "${_vars}")
+    string(REGEX MATCHALL "(^|;)PLUGIN.[A-Za-z0-9_.]*" _matchedVars "${_vars}")
     foreach(_variable ${_matchedVars})
 		set(${_variable} ${${_variable}} PARENT_SCOPE)
 		string(REPLACE "PLUGIN" "${PLUGIN.ID}" _variable_B ${_variable})
 		set(${_variable_B} ${${_variable}} PARENT_SCOPE)
     endforeach()
 
+	### PLUGIN
+	set(PLUGIN ${PLUGIN.ID})
+	set(PLUGIN ${PLUGIN.ID} PARENT_SCOPE)
+	dk_echo("PLUGIN      = '${PLUGIN}'")
+
+	### <PLUGIN>
+	set(${PLUGIN} ${PLUGIN.INSTALL_PATH})
+	set(${PLUGIN} ${PLUGIN.INSTALL_PATH} PARENT_SCOPE)
+	dk_echo("${PLUGIN}      = '${${PLUGIN}}'")
 endfunction()	
 	
 	
@@ -419,68 +424,70 @@ function(DKTEST)
 	dk_echo()
 	dk_echo()
 	dk_echo("################## PLUGIN.variables ##################")
-	dk_echo("PLUGIN                               = ${PLUGIN}")
-	dk_echo("PLUGIN.ARGS                          = ${PLUGIN.ARGS}")
-	dk_echo("PLUGIN.ID                            = ${PLUGIN.ID}")
-	dk_echo("PLUGIN.IMPORT_ROOT                   = ${PLUGIN.IMPORT_ROOT}")
-	dk_echo("PLUGIN.IMPORT_NAME                   = ${PLUGIN.IMPORT_NAME}")
-	dk_echo("PLUGIN.IMPORT_PATH                   = ${PLUGIN.IMPORT_PATH}")
-	dk_echo("PLUGIN.INSTALL_ROOT                  = ${PLUGIN.INSTALL_ROOT}")
-	dk_echo("PLUGIN.INSTALL_NAME                  = ${PLUGIN.INSTALL_NAME}")
-	dk_echo("PLUGIN.INSTALL_PATH                  = ${PLUGIN.INSTALL_PATH}")
-	dk_echo("PLUGIN.VERSION                       = ${PLUGIN.VERSION}")
-	dk_echo("PLUGIN.BRANCH                        = ${PLUGIN.BRANCH}")
-	dk_echo("PLUGIN.TAG                           = ${PLUGIN.TAG}")
-	dk_echo("PLUGIN.URL                           = ${PLUGIN.URL}")
-	dk_echo("PLUGIN.URL_Filename                  = ${PLUGIN.URL_Filename}")
-	dk_echo("PLUGIN.URL_File                      = ${PLUGIN.URL_File}")
-	dk_echo("PLUGIN.URL_Extension                 = ${PLUGIN.URL_Extension}")
-	dk_echo("PLUGIN.URL_List                      = ${PLUGIN.URL_List}")
-	dk_echo("PLUGIN.URL_Array                     = ${PLUGIN.URL_Array}")
-	dk_echo("PLUGIN.URL_Length                    = ${PLUGIN.URL_Length}")
-	dk_echo("PLUGIN.GIT                           = ${PLUGIN.GIT}")
-	dk_echo("PLUGIN.GIT_NAME                      = ${PLUGIN.GIT_NAME}")
-	dk_echo("PLUGIN.IMPORT                        = ${PLUGIN.IMPORT}")
-	dk_echo("PLUGIN.IMPORT_NAME_Lower             = ${PLUGIN.IMPORT_NAME_Lower}")
-	dk_echo("PLUGIN.IMPORT_NAME_Upper             = ${PLUGIN.IMPORT_NAME_Upper}")	
-	dk_echo("PLUGIN.IMPORT_NAME_Alphanumeric      = ${PLUGIN.IMPORT_NAME_Alphanumeric}")
-	dk_echo("PLUGIN.Build_Dir                     = ${PLUGIN.Build_Dir}")
-	dk_echo("PLUGIN.Config_Dir                    = ${PLUGIN.Config_Dir}")
-	dk_echo("PLUGIN.Debug_Dir                     = ${PLUGIN.Debug_Dir}")
-	dk_echo("PLUGIN.Release_Dir                   = ${PLUGIN.Release_Dir}")
-	dk_echo("PLUGIN.Tuple_Dir                     = ${PLUGIN.Tuple_Dir}")
+	dk_echo("PLUGIN                               = '${PLUGIN}'")
+	dk_echo("${PLUGIN}                                  = '${${PLUGIN}}'")
+	dk_echo("PLUGIN.ARGS                          = '${PLUGIN.ARGS}'")
+	dk_echo("PLUGIN.ID                            = '${PLUGIN.ID}'")
+	dk_echo("PLUGIN.IMPORT_ROOT                   = '${PLUGIN.IMPORT_ROOT}'")
+	dk_echo("PLUGIN.IMPORT_NAME                   = '${PLUGIN.IMPORT_NAME}'")
+	dk_echo("PLUGIN.IMPORT_PATH                   = '${PLUGIN.IMPORT_PATH}'")
+	dk_echo("PLUGIN.INSTALL_ROOT                  = '${PLUGIN.INSTALL_ROOT}'")
+	dk_echo("PLUGIN.INSTALL_NAME                  = '${PLUGIN.INSTALL_NAME}'")
+	dk_echo("PLUGIN.INSTALL_PATH                  = '${PLUGIN.INSTALL_PATH}'")
+	dk_echo("PLUGIN.VERSION                       = '${PLUGIN.VERSION}'")
+	dk_echo("PLUGIN.BRANCH                        = '${PLUGIN.BRANCH}'")
+	dk_echo("PLUGIN.TAG                           = '${PLUGIN.TAG}'")
+	dk_echo("PLUGIN.URL                           = '${PLUGIN.URL}'")
+	dk_echo("PLUGIN.URL_Filename                  = '${PLUGIN.URL_Filename}'")
+	dk_echo("PLUGIN.URL_File                      = '${PLUGIN.URL_File}'")
+	dk_echo("PLUGIN.URL_Extension                 = '${PLUGIN.URL_Extension}'")
+	dk_echo("PLUGIN.URL_List                      = '${PLUGIN.URL_List}'")
+	dk_echo("PLUGIN.URL_Array                     = '${PLUGIN.URL_Array}'")
+	dk_echo("PLUGIN.URL_Length                    = '${PLUGIN.URL_Length}'")
+	dk_echo("PLUGIN.GIT                           = '${PLUGIN.GIT}'")
+	dk_echo("PLUGIN.GIT_NAME                      = '${PLUGIN.GIT_NAME}'")
+	dk_echo("PLUGIN.IMPORT                        = '${PLUGIN.IMPORT}'")
+	dk_echo("PLUGIN.IMPORT_NAME_Lower             = '${PLUGIN.IMPORT_NAME_Lower}'")
+	dk_echo("PLUGIN.IMPORT_NAME_Upper             = '${PLUGIN.IMPORT_NAME_Upper}'")	
+	dk_echo("PLUGIN.IMPORT_NAME_Alphanumeric      = '${PLUGIN.IMPORT_NAME_Alphanumeric}'")
+	dk_echo("PLUGIN.Build_Dir                     = '${PLUGIN.Build_Dir}'")
+	dk_echo("PLUGIN.Config_Dir                    = '${PLUGIN.Config_Dir}'")
+	dk_echo("PLUGIN.Debug_Dir                     = '${PLUGIN.Debug_Dir}'")
+	dk_echo("PLUGIN.Release_Dir                   = '${PLUGIN.Release_Dir}'")
+	dk_echo("PLUGIN.Tuple_Dir                     = '${PLUGIN.Tuple_Dir}'")
 	dk_echo()
 	dk_echo()
 	dk_echo("################## ${PLUGIN.ID}.variables ##################")
-	dk_echo("${PLUGIN.ID}                         = ${${PLUGIN.ID}}")
-	dk_echo("${PLUGIN.ID}.ARGS                    = ${${PLUGIN.ID}.ARGS}")
-	dk_echo("${PLUGIN.ID}.ID                      = ${${PLUGIN.ID}.ID}")
-	dk_echo("${PLUGIN.ID}.IMPORT_ROOT             = ${${PLUGIN.ID}.IMPORT_ROOT}")
-	dk_echo("${PLUGIN.ID}.IMPORT_NAME             = ${${PLUGIN.ID}.IMPORT_NAME}")
-	dk_echo("${PLUGIN.ID}.IMPORT_PATH             = ${${PLUGIN.ID}.IMPORT_PATH}")
-	dk_echo("${PLUGIN.ID}.INSTALL_ROOT            = ${${PLUGIN.ID}.INSTALL_ROOT}")
-	dk_echo("${PLUGIN.ID}.INSTALL_NAME            = ${${PLUGIN.ID}.INSTALL_NAME}")
-	dk_echo("${PLUGIN.ID}.INSTALL_PATH            = ${${PLUGIN.ID}.INSTALL_PATH}")
-	dk_echo("${PLUGIN.ID}.VERSION                 = ${${PLUGIN.ID}.VERSION}")
-	dk_echo("${PLUGIN.ID}.BRANCH                  = ${${PLUGIN.ID}.BRANCH}")
-	dk_echo("${PLUGIN.ID}.TAG                     = ${${PLUGIN.ID}.TAG}")
-	dk_echo("${PLUGIN.ID}.URL                     = ${${PLUGIN.ID}.URL}")
-	dk_echo("${PLUGIN.ID}.URL_Filename            = ${${PLUGIN.ID}.URL_Filename}")
-	dk_echo("${PLUGIN.ID}.URL_File                = ${${PLUGIN.ID}.URL_File}")
-	dk_echo("${PLUGIN.ID}.URL_Extension           = ${${PLUGIN.ID}.URL_Extension}")
-	dk_echo("${PLUGIN.ID}.URL_List                = ${${PLUGIN.ID}.URL_List}")
-	dk_echo("${PLUGIN.ID}.URL_Array               = ${${PLUGIN.ID}.URL_Array}")
-	dk_echo("${PLUGIN.ID}.URL_Length              = ${${PLUGIN.ID}.URL_Length}")
-	dk_echo("${PLUGIN.ID}.GIT                     = ${${PLUGIN.ID}.GIT}")
-	dk_echo("${PLUGIN.ID}.GIT_NAME                = ${${PLUGIN.ID}.GIT_NAME}")
-	dk_echo("${PLUGIN.ID}.IMPORT                  = ${${PLUGIN.ID}.IMPORT}")
-	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Lower       = ${${PLUGIN.ID}.IMPORT_NAME_Lower}")
-	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Upper       = ${${PLUGIN.ID}.IMPORT_NAME_Upper}")	
-	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Alphanumeric= ${${PLUGIN.ID}.IMPORT_NAME_Alphanumeric}")
-	dk_echo("${PLUGIN.ID}.Build_Dir               = ${${PLUGIN.ID}.Build_Dir}")
-	dk_echo("${PLUGIN.ID}.Config_Dir              = ${${PLUGIN.ID}.Config_Dir}")
-	dk_echo("${PLUGIN.ID}.Debug_Dir               = ${${PLUGIN.ID}.Debug_Dir}")
-	dk_echo("${PLUGIN.ID}.Release_Dir             = ${${PLUGIN.ID}.Release_Dir}")
-	dk_echo("${PLUGIN.ID}.Tuple_Dir               = ${${PLUGIN.ID}.Tuple_Dir}")
+	dk_echo("${PLUGIN.ID}                         = '${${PLUGIN.ID}}'")
+	#dk_echo("${${PLUGIN.ID}}                        = '${${${PLUGIN.ID}}}'")
+	dk_echo("${PLUGIN.ID}.ARGS                    = '${${PLUGIN.ID}.ARGS}'")
+	dk_echo("${PLUGIN.ID}.ID                      = '${${PLUGIN.ID}.ID}'")
+	dk_echo("${PLUGIN.ID}.IMPORT_ROOT             = '${${PLUGIN.ID}.IMPORT_ROOT}'")
+	dk_echo("${PLUGIN.ID}.IMPORT_NAME             = '${${PLUGIN.ID}.IMPORT_NAME}'")
+	dk_echo("${PLUGIN.ID}.IMPORT_PATH             = '${${PLUGIN.ID}.IMPORT_PATH}'")
+	dk_echo("${PLUGIN.ID}.INSTALL_ROOT            = '${${PLUGIN.ID}.INSTALL_ROOT}'")
+	dk_echo("${PLUGIN.ID}.INSTALL_NAME            = '${${PLUGIN.ID}.INSTALL_NAME}'")
+	dk_echo("${PLUGIN.ID}.INSTALL_PATH            = '${${PLUGIN.ID}.INSTALL_PATH}'")
+	dk_echo("${PLUGIN.ID}.VERSION                 = '${${PLUGIN.ID}.VERSION}'")
+	dk_echo("${PLUGIN.ID}.BRANCH                  = '${${PLUGIN.ID}.BRANCH}'")
+	dk_echo("${PLUGIN.ID}.TAG                     = '${${PLUGIN.ID}.TAG}'")
+	dk_echo("${PLUGIN.ID}.URL                     = '${${PLUGIN.ID}.URL}'")
+	dk_echo("${PLUGIN.ID}.URL_Filename            = '${${PLUGIN.ID}.URL_Filename}'")
+	dk_echo("${PLUGIN.ID}.URL_File                = '${${PLUGIN.ID}.URL_File}'")
+	dk_echo("${PLUGIN.ID}.URL_Extension           = '${${PLUGIN.ID}.URL_Extension}'")
+	dk_echo("${PLUGIN.ID}.URL_List                = '${${PLUGIN.ID}.URL_List}'")
+	dk_echo("${PLUGIN.ID}.URL_Array               = '${${PLUGIN.ID}.URL_Array}'")
+	dk_echo("${PLUGIN.ID}.URL_Length              = '${${PLUGIN.ID}.URL_Length}'")
+	dk_echo("${PLUGIN.ID}.GIT                     = '${${PLUGIN.ID}.GIT}'")
+	dk_echo("${PLUGIN.ID}.GIT_NAME                = '${${PLUGIN.ID}.GIT_NAME}'")
+	dk_echo("${PLUGIN.ID}.IMPORT                  = '${${PLUGIN.ID}.IMPORT}'")
+	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Lower       = '${${PLUGIN.ID}.IMPORT_NAME_Lower}'")
+	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Upper       = '${${PLUGIN.ID}.IMPORT_NAME_Upper}'")	
+	dk_echo("${PLUGIN.ID}.IMPORT_NAME_Alphanumeric= '${${PLUGIN.ID}.IMPORT_NAME_Alphanumeric}'")
+	dk_echo("${PLUGIN.ID}.Build_Dir               = '${${PLUGIN.ID}.Build_Dir}'")
+	dk_echo("${PLUGIN.ID}.Config_Dir              = '${${PLUGIN.ID}.Config_Dir}'")
+	dk_echo("${PLUGIN.ID}.Debug_Dir               = '${${PLUGIN.ID}.Debug_Dir}'")
+	dk_echo("${PLUGIN.ID}.Release_Dir             = '${${PLUGIN.ID}.Release_Dir}'")
+	dk_echo("${PLUGIN.ID}.Tuple_Dir               = '${${PLUGIN.ID}.Tuple_Dir}'")
 	dk_echo()
 endfunction()

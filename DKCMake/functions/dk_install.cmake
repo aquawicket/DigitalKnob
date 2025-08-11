@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_install(PLUGIN_IMPORT_NAME)
+# dk_install(PLUGIN)
 #
 #	Install a 3rdParty library, executable or package
 #	For archive files such as libraries and assets, the arguments are:  The download PLUGIN_URL, the name of its _DKIMPORTS folder, The name given to the installed 3rdParty/folder  
@@ -24,13 +24,14 @@ include_guard()
 #	@plugin (optional)	-The name of the 3rdParty package being installed
 #	PATCH				-Patch the install directory with files from the _DKIMPORTS path
 #
-function(dk_install PLUGIN_VAR_PREFIX) #PATCH
+function(dk_install PLUGIN) #PATCH
 	dk_debugFunc()
 	dk_getParameter(NO_HALT  REMOVE)
 	
-	set(PLUGIN_IMPORT_NAME 	${${PLUGIN_VAR_PREFIX}_IMPORT_NAME})
-	set(PLUGIN_URL 			${${PLUGIN_VAR_PREFIX}_URL})
-	set(PLUGIN_DIR 			${${PLUGIN_VAR_PREFIX}_DIR})
+	
+	set(PLUGIN_IMPORT_NAME 	${${PLUGIN}.IMPORT_NAME})
+	set(PLUGIN_URL 			${${PLUGIN}.URL})
+	set(PLUGIN_DIR 			${${PLUGIN}.DIR})
 	
 	#if(NOT PLUGIN_IMPORT_NAME)
 	#	dk_basename(${CMAKE_CURRENT_LIST_DIR} PLUGIN_IMPORT_NAME)
@@ -87,8 +88,10 @@ function(dk_install PLUGIN_VAR_PREFIX) #PATCH
 		set(PLUGIN_IMPORT_FILENAME ${PLUGIN_URL_FILENAME})
 	endif()
 	
-	dk_download("${PLUGIN_URL}" "${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}" NO_HALT)
-	dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}") # "if the download file does not exist"
+	#dk_download("${PLUGIN_URL}")# "${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}" NO_HALT)
+	dk_download("${PLUGIN.URL}" NO_HALT)
+	#dk_assertPath("${PLUGIN_DL_DIR}/${PLUGIN_IMPORT_FILENAME}") # "if the download file does not exist"
+	dk_assertPath("${dk_download}") # "if the download file does not exist"
 	
 	set(FILETYPE "UNKNOWN")
 	if(NOT ${PLUGIN_URL_EXTENSION} STREQUAL "")
