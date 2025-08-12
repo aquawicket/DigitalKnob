@@ -23,7 +23,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_assertVar git_Import
   
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	if not defined GIT (%dk_call% dk_importVariables %git_Import% Install.Dirname "%DKTOOLS_DIR%")
+	if not defined GIT (%dk_call% dk_importVariables %git_Import% INSTALL_ROOT "%DKTOOLS_DIR%")
 	%dk_call% dk_assertVar GIT
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
