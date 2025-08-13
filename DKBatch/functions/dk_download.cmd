@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 if not defined dk_download_BACKUP_SERVER		(set "dk_download_BACKUP_SERVER=http://aquawicket.com/download")
 if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TEST=0")
 ::####################################################################
-::# dk_download(url, destination)
+::# dk_download(url, destination) OVERWRITE
 ::#
 ::#
 :dk_download
@@ -18,7 +18,9 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	%dk_call% dk_debugFunc 1 2
    
     set "url=%~1"
-    set "destination=%~2"
+    set "destination=%~2"	
+	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+
    
     %dk_call% dk_basename "%url%"
 	%dk_call% dk_assertVar dk_basename
@@ -32,10 +34,14 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	%dk_call% dk_assertVar destination
    
 	%dk_call% dk_isDirectory "%destination%" && set "destination=%destination%/%dk_basename%"
-    if exist "%destination%" (
-		%dk_call% dk_info "%destination% already exist"
-		endlocal & (set "dk_download=%destination%")
-		%return%
+   
+	if exist "%destination%" (
+		if "%OVERWRITE%" neq "1" (
+			%dk_call% dk_error "dk_download Cannot download file. Destiantion already exists and OVERWRITE is not set"
+			endlocal & (set "dk_download=%destination%")
+			%return%
+		)
+		%dk_call% dk_delete %destination%
 	)
 
 	if "%dk_download_BACKUP_SERVER_TEST%" equ "1" (

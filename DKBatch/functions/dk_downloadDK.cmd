@@ -12,7 +12,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip"
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+    %dk_call% dk_download "https://github.com/aquawicket/DigitalKnob/archive/refs/heads/Development.zip" "%DKDOWNLOAD_DIR%/DigitalKnob-Development.zip" OVERWRITE
 %endfunction%
 
 
