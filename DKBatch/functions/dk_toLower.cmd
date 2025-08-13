@@ -10,6 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_toLower
 %setlocal%
+	echo dk_toLower(%*)
 	%dk_call% dk_debugFunc 1 2
 
 
@@ -20,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::###### output ######
 	endlocal & (
 		set "dk_toLower=%dk_toLower%"
-		if "%~2" neq "" (set "%~2=%dk_toLower%")
+		if "%~2" neq "" (set "%~2=%dk_toLower%") else (echo %dk_toLower%)
 	)
 %endfunction%
 
