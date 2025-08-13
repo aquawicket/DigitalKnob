@@ -1,4 +1,5 @@
 @echo off
+:: https://stackoverflow.com/a/26079981/688352
 
 call :Test1
 call :Test2

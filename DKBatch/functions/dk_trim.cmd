@@ -8,6 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_trim()
 ::#
 ::#		Reference: https://stackoverflow.com/a/26079981
+::#				 : https://stackoverflow.com/a/26079981/688352
 ::#
 :dk_trim
 %setlocal%
