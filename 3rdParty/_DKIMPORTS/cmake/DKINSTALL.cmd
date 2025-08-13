@@ -16,12 +16,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::######### kill cmake-gui.exe process #########
 	::# %dk_call% dk_killProcess cmake-gui.exe
-	
+pause		
 	%dk_call% dk_getFileParams			"%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
 	set "cmake_Import=!cmake_%Host_Tuple%_Import!"
 	%dk_call% dk_assertVar				cmake_Import
-	
+
 	%dk_call% dk_validate				DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	if not defined CMAKE (%dk_call% dk_importVariables	%cmake_Import% INSTALL_ROOT %DKTOOLS_DIR%)
 	%dk_call% dk_assertVar 				CMAKE
@@ -46,16 +46,4 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%BASH_EXE% -c "ln -s ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
 	
 	if exist "%CMAKE_EXE%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
-%endfunction%
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-%setlocal%
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% DKINSTALL
 %endfunction%

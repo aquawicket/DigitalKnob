@@ -47,17 +47,6 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     %dk_call% dk_depend git/contextMenu
 	%dk_call% dk_assertPath "%GIT_EXE%"
 
-%endfunction%
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-%setlocal%
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% DKINSTALL
 	%dk_call% dk_echo "GIT = %GIT%"
 	%dk_call% dk_echo "GIT_EXE = %GIT_EXE%"
-	pause
 %endfunction%
