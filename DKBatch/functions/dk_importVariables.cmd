@@ -76,6 +76,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_unset PLUGIN.Import.Path
 	%dk_call% dk_unset PLUGIN.Install.Dirname
 	%dk_call% dk_unset PLUGIN.Install.Name
+	%dk_call% dk_unset PLUGIN.Import.Name_Upper
 	%dk_call% dk_unset PLUGIN.Install.Path
 	%dk_call% dk_unset PLUGIN.Tuple_Dir
 	%dk_call% dk_unset PLUGIN.Build_Dir
@@ -146,7 +147,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo PLUGIN.Url = '%PLUGIN.Url%'
 	
 	::### PLUGIN.Url.Protocol
-	::if not defined PLUGIN.Url.Protocol 	(%dk_call% dk_Protocol			%PLUGIN.Url%  			PLUGIN.Url.protocol)	&:: protocol, drive
+	::%dk_call% dk_Protocol			%PLUGIN.Url%  			PLUGIN.Url.protocol)	&:: protocol, drive
 	::%dk_call% dk_echo "PLUGIN.Url.Protocol = '%PLUGIN.Url.Protocol%'"
 	
 	::### PLUGIN.Url.Dirname
@@ -154,11 +155,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "PLUGIN.Url.Dirname = '%PLUGIN.Url.Dirname%'"
 	
 	::### PLUGIN.Url.Basename
-	%dk_call% dk_basename			%PLUGIN.Url%  			PLUGIN.Url.Basename	&:: basename, filename
+	%dk_call% dk_basename			%PLUGIN.Url%  			PLUGIN.Url.Basename		&:: basename, filename
 	%dk_call% dk_echo "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
 	
 	::### PLUGIN.Url.Name
-	%dk_call% dk_removeExtension	%PLUGIN.Url.Basename%	PLUGIN.Url.Name		&:: name, file  (no extension)
+	%dk_call% dk_removeExtension	%PLUGIN.Url.Basename%	PLUGIN.Url.Name			&:: name, file  (no extension)
 	%dk_call% dk_echo "PLUGIN.Url.Name = '%PLUGIN.Url.Name%'"
 	
 	::### PLUGIN.Url.Extension
@@ -168,8 +169,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	::### DEFAULT.Import.Dirname
 ::	if not defined PLUGIN.Import.Dirname (
 ::		if not defined PLUGIN.Import.Path (
-::			%dk_call% dk_validate DKImportS_DIR	"%dk_call% dk_DKImportS_DIR"
-::			set "PLUGIN.Import.Dirname=!DKImportS_DIR!"
+::			%dk_call% dk_validate DKIMPORTS_DIR	"%dk_call% dk_DKIMPORTS_DIR"
+::			set "PLUGIN.Import.Dirname=!DKIMPORTS_DIR!"
 ::			%dk_call% dk_echo "PLUGIN.Import.Dirname = '!PLUGIN.Import.Dirname!'"
 ::		)
 ::	)
@@ -282,13 +283,37 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 
+
+
+::####################################
+:PLUGIN.Import.Path
+	if defined PLUGIN.Import.Path (%return%)
+	
+	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+
+	if defined PLUGIN.Import.Name (
+		set "PLUGIN.Import.Path=!DKIMPORTS_DIR!/!PLUGIN.Import.Name!"
+		%dk_call% dk_debug 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
+		%return%
+	)
+	
+	rem	%dk_call% dk_getcwd
+	%dk_call% dk_includes "%CD:\=/%" "!DKIMPORTS_DIR!" && (
+		set "PLUGIN.Import.Path=%CD:\=/%"
+		%dk_call% dk_debug 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
+		%return%
+	) || (cmd /c exit /b 0)	
+%endfunction%
+
 ::#############################
 :PLUGIN.Import.Name
-	%dk_call% dk_debug ":PLUGIN.Import.Name()"
-	
+	if defined PLUGIN.Import.Name (%return%)
+		
+	call :PLUGIN.Import.Path
+
 	if defined PLUGIN.Import.Path (
 		%dk_call% dk_basename	!PLUGIN.Import.Path!	PLUGIN.Import.Name
-		%dk_call% dk_echo "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
+		%dk_call% dk_debug "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
 		%return%
 	)
 
@@ -296,52 +321,30 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_replaceAll 	%PLUGIN.Url% 		"/" 	";" 	PLUGIN.Url.List
 		%dk_call% dk_listToArray 	"!PLUGIN.Url.List!" PLUGIN.Url.Array
 		%dk_call% dk_arrayAt		PLUGIN.Url.Array	3				PLUGIN.Import.Name
-		%dk_call% dk_echo "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
-		call :PLUGIN.Import.Path
-	) || (cmd /c exit /b 0)
-	
-%endfunction%
-
-::####################################
-:PLUGIN.Import.Path
-	%dk_call% dk_debug ":PLUGIN.Import.Path()"
-	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	
-	if defined PLUGIN.Import.Name (
-		set "PLUGIN.Import.Path=!DKIMPORTS_DIR!/!PLUGIN.Import.Name!"
-		%dk_call% dk_echo 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
+		%dk_call% dk_debug "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
 		%return%
-	)
-	
-	rem	%dk_call% dk_getcwd
-	%dk_call% dk_includes "%CD:\=/%" "!DKIMPORTS_DIR!" && (
-		set "PLUGIN.Import=1"
-		%dk_call% dk_echo 	"PLUGIN.Import = '!PLUGIN.Import!'"
-		set "PLUGIN.Import.Path=%CD:\=/%"
-		%dk_call% dk_echo 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
-		call :PLUGIN.Import.Name
-	) || (cmd /c exit /b 0)	
+	) || (cmd /c exit /b 0)
 %endfunction%
 
-::#############################
-:PLUGIN.Id
-	%dk_call% dk_debug ":PLUGIN.Import.Id()"
-
-	if not defined PLUGIN.Import.Path (call :PLUGIN.Import.Path)
-	if not defined PLUGIN.Import.Name (call :PLUGIN.Import.Name)
-	%dk_call% dk_assertVar PLUGIN.Import.Path
-	%dk_call% dk_assertVar PLUGIN.Import.Name
-	%dk_call% dk_echo "PLUGIN.Import.Path = '%PLUGIN.Import.Path%'"
-	%dk_call% dk_echo "PLUGIN.Import.Name = '%PLUGIN.Import.Name%'"
+::#######################
+:PLUGIN.Import.Name_Upper
+	if defined PLUGIN.Import.Name_Upper (%return%)
 	
-	%dk_call% dk_toUpper	%PLUGIN.Import.Name%	PLUGIN.Import.Name_Upper
+	call :PLUGIN.Import.Name
+	%dk_call% dk_assertVar PLUGIN.Import.Name
+	
+	%dk_call% dk_toUpper	!PLUGIN.Import.Name!	PLUGIN.Import.Name_Upper
+	%dk_call% dk_debug "PLUGIN.Import.Name_Upper = '%PLUGIN.Import.Name_Upper%'"
+%endfunction%
+
+::########
+:PLUGIN.Id
+	call :PLUGIN.Import.Name_Upper
 	%dk_call% dk_assertVar PLUGIN.Import.Name_Upper
-	%dk_call% dk_echo "PLUGIN.Import.Name_Upper = '%PLUGIN.Import.Name_Upper%'"
 	
 	%dk_call% dk_convertToCIdentifier	%PLUGIN.Import.Name_Upper% 	PLUGIN.Id
+	%dk_call% dk_debug "PLUGIN.Id = '%PLUGIN.Id%'"
 	%dk_call% dk_assertVar PLUGIN.Id
-	%dk_call% dk_echo "PLUGIN.Id = '%PLUGIN.Id%'"
 %endfunction%
 
 
