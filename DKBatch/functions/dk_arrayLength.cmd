@@ -21,6 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_error "dk_arrayLength(%*): arg1 must be the name of an array variable without surrounding percent signs or exclamation marks"
 	)
 	
+	
 	set dk_arrayLength=0
 	:dk_arrayLength.loop
 	if defined %~1[%dk_arrayLength%] (
@@ -28,10 +29,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :dk_arrayLength.loop
 	)
 	
+	
 	::###### output ######
 	endlocal & (
 		set "dk_arrayLength=%dk_arrayLength%"
-		if "%~2" neq "" (set "%~2=%dk_arrayLength%")
+		if "%~2" neq "" (set "%~2=%dk_arrayLength%") else (echo %dk_arrayLength%)
 	)
 %endfunction%
 

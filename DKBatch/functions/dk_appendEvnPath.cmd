@@ -17,13 +17,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1
 
+	::###### input ######
 	set "_path_=%~1"
+
 
 	%dk_call% dk_contains "%PATH%" "%_path_:/=\%;" && (
 		%dk_call% dk_info "environment PATH already contains _path_:%_path_%"
 		%return%
 	)
 
+	::###### output ######
 	endlocal & (
 		set "PATH=%PATH%;%_path_:/=\%"
 	)

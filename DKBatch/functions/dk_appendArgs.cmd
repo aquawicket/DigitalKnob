@@ -12,13 +12,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2 99
 
+	::###### input ######
 	%dk_call% dk_allButFirstArgs %*
 
+
+	if defined %~1 (
+		set "dk_appendArgs=!%~1! %dk_allButFirstArgs%"
+	) else (
+		set "dk_appendArgs=%dk_allButFirstArgs%"
+	)
+	
+	
+	::###### output ######
 	endlocal & (
-		if defined %~1 (
-			set "%~1=!%~1! %dk_allButFirstArgs%"
+		set "dk_appendArgs=%dk_appendArgs%"
+		if "%~1" neq "" (
+			set "%~1=%dk_appendArgs%"
 		) else (
-			set "%~1=%dk_allButFirstArgs%"
+			echo %dk_appendArgs%
 		)
 	)
 %endfunction%

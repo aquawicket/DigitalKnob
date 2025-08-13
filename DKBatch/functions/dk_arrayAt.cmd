@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::############ faster ############
 	endlocal & (
 		set "dk_arrayAt=!%~1[%~2]!"
-		if "%~3" neq "" (set "%~3=!dk_arrayAt!")
+		if "%~3" neq "" (set "%~3=!dk_arrayAt!") else (echo !dk_arrayAt!)
 		%return%
 	)
 ::################################
@@ -43,7 +43,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### output ######
 	endlocal & (
 		set "dk_arrayAt=%dk_arrayAt%"
-		if "%~3" neq "" (set "%~3=%dk_arrayAt%")
+		if "%~3" neq "" (
+			set "%~3=%dk_arrayAt%"
+		) else (
+			echo %dk_arrayAt%
+		)
 	)
 %endfunction%
 
