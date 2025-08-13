@@ -291,11 +291,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_echo "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
 		%return%
 	)
-	::if not defined PLUGIN.Import.Name (call :PLUGIN.Import.Name_git)
+
 	%dk_call% dk_includes "%PLUGIN.Url%" "https://github.com" && (
-		%dk_call% dk_replaceAll 	%PLUGIN.Url% 		"/" 	"				;" 			PLUGIN.Url.List
+		%dk_call% dk_replaceAll 	%PLUGIN.Url% 		"/" 	";" 	PLUGIN.Url.List
 		%dk_call% dk_listToArray 	"!PLUGIN.Url.List!" PLUGIN.Url.Array
-		%dk_call% dk_arrayAt		PLUGIN.Url.Array	3						PLUGIN.Import.Name
+		%dk_call% dk_arrayAt		PLUGIN.Url.Array	3				PLUGIN.Import.Name
 		%dk_call% dk_echo "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
 		call :PLUGIN.Import.Path
 	) || (cmd /c exit /b 0)
@@ -327,17 +327,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#############################
 :PLUGIN.Id
 	%dk_call% dk_debug ":PLUGIN.Import.Id()"
-	
+
 	if not defined PLUGIN.Import.Path (call :PLUGIN.Import.Path)
 	if not defined PLUGIN.Import.Name (call :PLUGIN.Import.Name)
 	%dk_call% dk_assertVar PLUGIN.Import.Path
 	%dk_call% dk_assertVar PLUGIN.Import.Name
-	
+	%dk_call% dk_echo "PLUGIN.Import.Path = '%PLUGIN.Import.Path%'"
+	%dk_call% dk_echo "PLUGIN.Import.Name = '%PLUGIN.Import.Name%'"
 	
 	%dk_call% dk_toUpper	%PLUGIN.Import.Name%	PLUGIN.Import.Name_Upper
-	%dk_call% dk_convertToCIdentifier	%PLUGIN.Import.Name_Upper% 	PLUGIN.Id
+	%dk_call% dk_assertVar PLUGIN.Import.Name_Upper
+	%dk_call% dk_echo "PLUGIN.Import.Name_Upper = '%PLUGIN.Import.Name_Upper%'"
 	
-	if not defined PLUGIN.Id (%dk_call% dk_error "PLUGIN.Id invalid")
+	%dk_call% dk_convertToCIdentifier	%PLUGIN.Import.Name_Upper% 	PLUGIN.Id
+	%dk_call% dk_assertVar PLUGIN.Id
 	%dk_call% dk_echo "PLUGIN.Id = '%PLUGIN.Id%'"
 %endfunction%
 
@@ -399,10 +402,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-:DKTEST
-:DKTEST
-:DKTEST
 :DKTEST
 %setlocal%
 	%dk_call% dk_debugFunc 0

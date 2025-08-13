@@ -12,19 +12,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2 99
 
-	set "_var_=%~1"
+	set "_VARIABLE_=%~1"
 	
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (
-		set dk_allButFirstArgs=%%~b
+		set _VALUE_=%%b
 	)
 	
 	endlocal & (
-		set "%_var_%=%dk_allButFirstArgs%"
+		set %_VARIABLE_%=%_VALUE_%
 	)
 
 	if "%dk_set_PRINT_VARIABLE%" equ "1" (
-		%dk_call% dk_printVar %_var_%
+		%dk_call% dk_printVar %_VARIABLE_%
 	)
 %endfunction%
 
@@ -37,9 +37,39 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-::	%dk_call% dk_set myVar word
-::	echo myVar = %myVar%
-::	%dk_call% dk_echo "myVar = %myVar%"
+	             set TestA=12345
+	%dk_call% dk_set TestB 12345
+	if "%TestA%" equ "%TestB%" (%dk_call% dk_success "%TestA% == %TestB% passed") else (%dk_call% dk_error "%TestA% == %TestB% failed")
+	
+	            set "TestA=12345"
+	%dk_call% dk_set TestB 12345
+	if "%TestA%" equ "%TestB%" (%dk_call% dk_success "%TestA% == %TestB% passed") else (%dk_call% dk_error "%TestA% == %TestB% failed")
+	
+	             set TestA="12345"
+	%dk_call% dk_set TestB "12345"
+	if "%TestA%" equ "%TestB%" (%dk_call% dk_success "%TestA% == %TestB% passed") else (%dk_call% dk_error "%TestA% == %TestB% failed")
+	
+		         set TestA=1 2 3 4 5
+	%dk_call% dk_set TestB 1 2 3 4 5
+	if "%TestA%" equ "%TestB%" (%dk_call% dk_success "%TestA% == %TestB% passed") else (%dk_call% dk_error "%TestA% == %TestB% failed")
+
+			    set "TestA=1 2 3 4 5"
+	%dk_call% dk_set TestB 1 2 3 4 5
+	if "%TestA%" equ "%TestB%" (%dk_call% dk_success "%TestA% == %TestB% passed") else (%dk_call% dk_error "%TestA% == %TestB% failed")
+	
+				 set TestA="1 2 3 4 5"
+	%dk_call% dk_set TestB "1 2 3 4 5"
+	if [%TestA%] equ [%TestB%] (%dk_call% dk_success %TestA%==%TestB% passed) else (%dk_call% dk_echo %TestA%==%TestB% failed)
+	
+			     set TestA="1 2 3" a b c
+	%dk_call% dk_set TestB "1 2 3" a b c
+				 set "unset=!TestA:%TestB%=!"
+				 if "%unset%" equ "" (echo SUCCESS: [%TestA%] == [%TestB%] passed) else (echo ERROR: [%TestA%] == [%TestB%] failed)
+   
+                 set TestA=word
+	%dk_call% dk_set TestB word
+                 set "unset=!TestA:%TestB%=!"
+				 if "%unset%" equ "" (echo SUCCESS: [%TestA%] == [%TestB%] passed) else (echo ERROR: [%TestA%] == [%TestB%] failed)
 	
 ::  %dk_call% dk_set myVar "words in quotes"
 ::	echo myVar = %myVar%

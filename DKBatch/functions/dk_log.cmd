@@ -184,11 +184,16 @@ if not defined dk_log_FATAL_PAUSE			(set "dk_log_FATAL_PAUSE=1")
 	if "%~2" equ "" (
 		set "_level_=DEFAULT"
 		set "_message_=%~1"
+		rem set _message_=%*
 	)
 	
 	if "%~2" neq "" (
 		set "_level_=%~1"
 		set "_message_=%~2"
+		rem set _message_=%*
+		rem for /f "tokens=1*" %%a in ("!_message_!") do (
+		rem 	set _message_=%%b
+		rem )
 	)
 	
 	if "!dk_log_%_level_%_ENABLE!" neq "1" (
@@ -201,6 +206,7 @@ if not defined dk_log_FATAL_PAUSE			(set "dk_log_FATAL_PAUSE=1")
 	::)
 
 	::###### ECHO MESSAGE ######
+	
 	%dk_call% dk_echo "!dk_log_%_level_%_COLOR!!dk_log_%_level_%_TAG!%_message_%%clr%"
 
 	::###### TRACE ######
@@ -273,6 +279,7 @@ if not defined dk_log_FATAL_PAUSE			(set "dk_log_FATAL_PAUSE=1")
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_log DEFAULT	 test dk_log DEFAULT message without quotes
 	%dk_call% dk_log VERBOSE	"test dk_log VERBOSE message"
 	%dk_call% dk_log DEBUG		"test dk_log DEBUG message"
 	%dk_call% dk_log			"test dk_log message"
