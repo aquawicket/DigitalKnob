@@ -16,7 +16,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar PLUGIN
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	%dk_call% dk_assertVar Host_Tuple
 	echo Host_Tuple = %Host_Tuple%
 	echo %PLUGIN%_%Host_Tuple%_Import = !%PLUGIN%_%Host_Tuple%_Import!
 		

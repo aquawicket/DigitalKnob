@@ -12,37 +12,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :DKINSTALL
 ::%setlocal%
-    %dk_call% dk_debugFunc 0
-
-    %dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-    if defined Windows_X86_Host     (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20240903.exe")
-    if defined Windows_X86_64_Host  (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe")
-    if not defined QEMU_DL 		(%dk_call% dk_error "QEMU_DL is invalid")
+	%dk_call% dk_debugFunc 0
 	
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+	%dk_call% dk_importVariables !qemu_%Host_Tuple%_Import! Install.Dirname %DKTOOLS_DIR%
+    %dk_call% dk_assertVar QEMU
 	
-	%dk_call% dk_importVariables %QEMU_DL% IMPORT_PATH %~0 ROOT %DKTOOLS_DIR%
-	
-    ::%dk_call% dk_basename %QEMU_DL% QEMU_IMPORT_FILE
-    ::%dk_call% dk_removeExtension %QEMU_IMPORT_FILE% QEMU_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
-    ::%dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	::%dk_call% dk_importVariables %QEMU_DL%
-	
-	
-	::%dk_call% dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
-	%dk_call% dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
-	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU_DIR%\qemu-system-x86_64.exe
+	%dk_call% dk_set QEMU_IMG_EXE %QEMU%/qemu-img.exe
+	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU%/qemu-system-x86_64.exe
 	
 	if exist "%QEMU_IMG_EXE%" (%return%)
+	%dk_call% dk_download %QEMU.Url%
+	%dk_call% dk_nativePath %QEMU% QEMU_NATIVE
+	%dk_call% dk_echo "Installing %QEMU.Url.Bsename% . . ."
+	%dk_call% dk_exec cmd /c "%dk_download%" /S /D=%QEMU:/=\%
 	
-	%dk_call% dk_download %QEMU_DL%
-	%dk_call% dk_nativePath %QEMU_DIR% QEMU_INSTALL_PATH
-	%dk_call% dk_echo "Installing %QEMU_IMPORT_FILE% . . ."
-	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_IMPORT_FILE%" /S /D=%QEMU_INSTALL_PATH%"
-	%dk_call% %command_string%
-	
-	if NOT exist "%QEMU_IMG_EXE%" (%dk_call% dk_error "cannot find qemu")
+	%dk_call% dk_assertPath "%QEMU_IMG_EXE%"
 %endfunction%
 
 

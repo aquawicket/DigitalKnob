@@ -37,7 +37,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
    
 	if exist "%destination%" (
 		if "%OVERWRITE%" neq "1" (
-			%dk_call% dk_error "dk_download Cannot download file. Destiantion already exists and OVERWRITE is not set"
+			%dk_call% dk_notice "dk_download Cannot download file. Destiantion already exists and OVERWRITE is not set"
 			endlocal & (set "dk_download=%destination%")
 			%return%
 		)
