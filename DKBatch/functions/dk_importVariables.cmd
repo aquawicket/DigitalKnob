@@ -292,6 +292,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
+::##################
+:PLUGIN.Url.Basename
+	if defined PLUGIN.Url.Basename (%return%)
+	%dk_call% dk_assertVar PLUGIN.Url
+	%dk_call% dk_basename	%PLUGIN.Url%  PLUGIN.Url.Basename		&:: basename, filename
+	%dk_call% dk_debug "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
+%endfunction%
 
 ::#################
 :PLUGIN.Import.Name
@@ -325,15 +332,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	set "PLUGIN.Install.Dirname=%DK3RDPARTY_DIR%"
 	%dk_call% dk_debug "PLUGIN.Install.Dirname= '%PLUGIN.Install.Dirname%'"
-%endfunction%
-
-
-::##################
-:PLUGIN.Url.Basename
-	if defined PLUGIN.Url.Basename (%return%)
-	%dk_call% dk_assertVar PLUGIN.Url
-	%dk_call% dk_basename	%PLUGIN.Url%  PLUGIN.Url.Basename		&:: basename, filename
-	%dk_call% dk_debug "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
 %endfunction%
 
 ::####################
