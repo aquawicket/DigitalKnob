@@ -5,28 +5,28 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::############################################################################
-::# dk_depend(plugin)
+::# dk_uninstall(plugin)
 ::#
 ::#   this will search for a "plugin" to run in the following search path
-::#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
+::#  '3rdParty/_IMPORTS/'plugin'/DKUNINSTALL.cmd'
 ::#
-:dk_depend
+:dk_uninstall
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	
-	set "dkInstall=%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"	
-	if not exist "%dkInstall%" (
-		call set "dkhttpInstall=%%dkInstall:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
-		%dk_call% dk_download "!dkhttpInstall!" "%dkInstall%"
+	set "dkUninstall=%DKIMPORTS_DIR%/%~1/DKUNINSTALL.cmd"	
+	if not exist "%dkUninstall%" (
+		call set "dkhttpUninstall=%%dkUninstall:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
+		%dk_call% dk_download "!dkhttpUninstall!" "%dkUninstall%"
 	)
 	
 	%dk_call% dk_allButFirstArgs %*
 	endlocal & (
 		cd "%DKIMPORTS_DIR%/%~1"
-		%dk_call% "%dkInstall%" %dk_allButFirstArgs%
+		%dk_call% "%dkUninstall%" %dk_allButFirstArgs%
 	)
 %endfunction%
 
