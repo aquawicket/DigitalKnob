@@ -14,12 +14,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 	
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	set "_file_=%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"
+	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	
-	%dk_call% dk_assertVar DIGITALKNOB_DIR
-	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
+	set "_file_=%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"	
 	if not exist "%_file_%" (
 		rem %dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
 		call set "dkhttp_file=%%_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
@@ -28,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_allButFirstArgs %*
 	endlocal & (
-		cd "%DKIMPORTS_DIR%/%~1"
+		rem cd "%DKIMPORTS_DIR%/%~1"
 		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" %dk_allButFirstArgs%
 	)
 %endfunction%

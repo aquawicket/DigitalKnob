@@ -5,14 +5,18 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# DKINSTALL
+::# DKINSTALL()
 ::#
 :DKINSTALL
 ::%setlocal%
-    %dk_call% dk_debugFunc 0
+	%dk_call% dk_debugFunc 0
+
+	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
+	set "ANDROID_SDK=%DK3RDPARTY_DIR%/android-sdk"
 	
-	%dk_call% dk_import
+	if not exist "%ANDROID_SDK%" (
+		%dk_call% dk_mkdir "%ANDROID_SDK%"
+	)
+	::%dk_call% dk_patch android-sdk "%ANDROID_SDK%"
 	
-	set "_7ZA_EXE=%PLUGIN.Install.Path%/7za.exe"
-	%dk_call% dk_assertPath "%_7ZA_EXE%"
 %endfunction%

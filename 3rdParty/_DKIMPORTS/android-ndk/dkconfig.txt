@@ -48,10 +48,10 @@
 #android_ndk_Android_Import=https://github.com/jzinferno2/termux-ndk/releases/download/v1/android-ndk-r23b-aarch64.zip
 
 # r23c
-android_ndk_Version=r23c
-android_ndk_Build=23.2.8568313
-android_ndk_Windows_Import=https://dl.google.com/android/repository/android-ndk-r23c-windows.zip
-android_ndk_Mac_Import=https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip
-android_ndk_Linux_Import=https://dl.google.com/android/repository/android-ndk-r23c-linux.zip
-#android_ndk_Android_Import=https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
-android_ndk_Android_Import=https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip
+android-ndk_Version=r23c
+android-ndk_Build=23.2.8568313
+android-ndk_Windows_X86_64_Import=https://dl.google.com/android/repository/android-ndk-r23c-windows.zip
+android-ndk_Mac_Import=https://dl.google.com/android/repository/android-ndk-r23c-darwin.zip
+android-ndk_Linux_Import=https://dl.google.com/android/repository/android-ndk-r23c-linux.zip
+#android-ndk_Android_Import=https://web.archive.org/web/20230512191806/https://github.com/lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
+android-ndk_Android_Import=https://www.aquawicket.com/downloads/android-ndk-r23c-aarch64.zip

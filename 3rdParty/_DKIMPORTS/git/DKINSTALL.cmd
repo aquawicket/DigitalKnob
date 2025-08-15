@@ -9,7 +9,6 @@ if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSyste
 if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal")
 
 
-
 ::####################################################################
 ::# DKINSTALL
 ::#
@@ -17,6 +16,7 @@ if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 ::%setlocal%
 	%dk_call% dk_debugFunc 0	
 	
+	cd %~dp0
 	%dk_call% dk_import APP
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly

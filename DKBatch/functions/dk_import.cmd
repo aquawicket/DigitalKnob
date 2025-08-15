@@ -34,11 +34,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
 	)
+	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
 	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
 	
 	%dk_call% dk_download %PLUGIN.Url%
-	echo dk_download = %dk_download%
 	
+	%dk_call% dk_getExtension %PLUGIN.Url% PLUGIN.Url.Extension
+	if "%PLUGIN.Url.Extension%" equ ".7z"		(set "FileType=Archive")
 	if "%PLUGIN.Url.Extension%" equ ".bz"		(set "FileType=Archive")
 	if "%PLUGIN.Url.Extension%" equ ".bz2" 		(set "FileType=Archive")
 	if "%PLUGIN.Url.Extension%" equ ".gz" 		(set "FileType=Archive")
@@ -54,7 +56,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN.Install.Path%"
 	)
 
-%endfunction%	
+%endfunction%
 	
 	set "url=%~1"
 	%dk_call% dk_allButFirstArgs %*
