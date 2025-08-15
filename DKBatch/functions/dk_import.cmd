@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#########################################################################
-::# dk_import(url) #args
+::# dk_import() LIBRARY APP
 ::#
 ::#	This is a flexable super function for importing just about anything into DigitalKnob
 ::#	The idea is to provide a url or path and dk_import will do the rest. 
@@ -20,9 +20,27 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 ::#
 :dk_import
-%setlocal%
-	%dk_call% dk_debugFunc 1 99
+::%setlocal%
+	%dk_call% dk_debugFunc 0 99
 	
+	set "Import.Path=%CD:\=/%"
+	%dk_call% dk_assertPath "%Import.Path%/dkconfig.txt"
+	%dk_call% dk_getFileParams "%Import.Path%/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	%dk_call% dk_basename %Import.Path% Import.Name
+	
+	%dk_call% dk_getParameterValue APP %*
+	if defined APP (
+		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
+	)
+	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
+	
+	%dk_call% dk_download %PLUGIN.Url%
+	echo dk_download = %dk_download%
+	%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN.Install.Path%"
+
+%endfunction%	
 	
 	set "url=%~1"
 	%dk_call% dk_allButFirstArgs %*
@@ -93,6 +111,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 	%dk_call% dk_debugFunc 0
 	
+	%dk_call% dk_depend vscode
+	
 	::%dk_call% #dk_import "https://github.com/madler/zlib/archive/d4768283.zip"
-	%dk_call% dk_import https://www.dependencywalker.com/depends22_x64.zip
+	::%dk_call% dk_import https://www.dependencywalker.com/depends22_x64.zip
 %endfunction%
