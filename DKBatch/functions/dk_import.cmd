@@ -38,7 +38,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_download %PLUGIN.Url%
 	echo dk_download = %dk_download%
-	%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN.Install.Path%"
+	
+	if "%PLUGIN.Url.Extension%" equ ".bz"		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".bz2" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".gz" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".rar" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".sfx.exe" 	(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".tar" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".tar.gz" 	(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".tgz" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".xz" 		(set "FileType=Archive")
+	if "%PLUGIN.Url.Extension%" equ ".zip" 		(set "FileType=Archive")
+	
+	if "%FileType%" equ "Archive" (
+		%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN.Install.Path%"
+	)
 
 %endfunction%	
 	

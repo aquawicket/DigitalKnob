@@ -26,11 +26,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)	
 	%dk_call% dk_assertPath "%CMAKE_EXE%"
 	%dk_call% dk_firewallAllow 			"CMake" "%CMAKE_EXE%"
+
+	if exist "%CMAKE_EXE%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
 	
 	:: Add cmake to git_bash (symlink)
 	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend git"
 	::%BASH_EXE% -c "ln ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
 	::%BASH_EXE% -c "ln -s ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
-	
-	if exist "%CMAKE_EXE%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
 %endfunction%
