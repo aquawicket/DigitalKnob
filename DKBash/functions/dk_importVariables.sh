@@ -355,7 +355,7 @@ PLUGIN_Install_Name() {
 	#export PLUGIN_EXPORT=$(declare -p PLUGIN);
 	PLUGIN_Version;
 	source <(printf "%s" "${PLUGIN_EXPORT}");
-	[ -z "${PLUGIN[Version]-}" ] && dk_call dk_error "PLUGIN[Version] is invalid";
+	#[ -z "${PLUGIN[Version]-}" ] && dk_call dk_error "PLUGIN[Version] is invalid";
 	dk_call dk_debug "PLUGIN[Version] = '${PLUGIN[Version]}'";
 	
 	if [ -n "${PLUGIN[Import.Name]}" ] && [ -n "${PLUGIN[Version]}" ]; then
@@ -421,17 +421,19 @@ PLUGIN_Version() {
 	[ -z "${PLUGIN[Url.Name_Lower]-}" ] && dk_call dk_error "PLUGIN[Url.Name_Lower] is invalid";
 	dk_call dk_debug "PLUGIN[Url.Name_Lower] = '${PLUGIN[Url.Name_Lower]}'";
 	
+	export PLUGIN_EXPORT=$(declare -p PLUGIN);
 	PLUGIN_Import_Name_Lower;
 	source <(printf "%s" "${PLUGIN_EXPORT}");
 	[ -z "${PLUGIN[Import.Name_Lower]-}" ] && dk_call dk_error "PLUGIN[Import.Name_Lower] is invalid";
 	dk_call dk_debug "PLUGIN[Import.Name_Lower] = '${PLUGIN[Import.Name_Lower]}'";
 	
+	echo "dk_replaceAll  ${PLUGIN[Url.Name_Lower]} 	${PLUGIN[Import.Name_Lower]}";
 	if [ -n "${PLUGIN[Url.Name_Lower]}" ] && [ -n "${PLUGIN[Import.Name_Lower]}" ]; then
 		dk_call dk_replaceAll "${PLUGIN[Url.Name_Lower]}" 	"${PLUGIN[Import.Name_Lower]}" 	""; 	PLUGIN[Version]="${dk_replaceAll}";
 		# [ -z "${PLUGIN.Version]}" ] && PLUGIN[Version]=${PLUGIN[TAG]};
 		# [ -z "${PLUGIN.Version]}" ] && PLUGIN[Version]=${PLUGIN[Branch]}; 
 	fi
-	[ -z "${PLUGIN[Version]-}" ] && dk_call dk_error "PLUGIN[Version] is invalid";
+	#[ -z "${PLUGIN[Version]-}" ] && dk_call dk_error "PLUGIN[Version] is invalid";
 	dk_call dk_debug "PLUGIN[Version] = '${PLUGIN[Version]}'";
 
 	export PLUGIN_EXPORT=$(declare -p PLUGIN);

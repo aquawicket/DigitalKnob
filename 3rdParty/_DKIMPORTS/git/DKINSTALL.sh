@@ -29,19 +29,17 @@ dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 # DKINSTALL
 #
 DKINSTALL() {
-	#dk_call dk_debugFunc 0	
-	#echo "DKINSTALL($*)"
-	
-	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
+	dk_debugFunc 0;
 
-	git_Import_Var="git_${Host_Tuple}_Import"
-	git_Import="${!git_Import_Var}"
-    dk_call dk_assertVar git_Import
-  
-	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-	[ -z "${GIT-}" ] && dk_call dk_importVariables ${git_Import} NAME git ROOT ${DKTOOLS_DIR}
-	#[ -z "${GIT-}" ] && dk_call dk_importVariables ${git_Import} ROOT ${DKTOOLS_DIR}
-	dk_call dk_assertVar GIT
+	dk_call dk_getFileParams "${PWD}/dkconfig.txt";
+	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
+	git_Import_Var="git_${Host_Tuple}_Import";
+	git_Import="${!git_Import_Var}";
+	dk_call dk_assertVar git_Import;
+	
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
+	[ -z "${GIT-}" ] && dk_call dk_importVariables ${git_Import} INSTALL_ROOT ${DKTOOLS_DIR};
+	dk_call dk_assertVar GIT;
 	
 	# https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	############ DO NOT USE GIT_DIR ############
@@ -56,12 +54,13 @@ DKINSTALL() {
 	
 	###### INSTALL ######
     dk_call dk_echo 
-    dk_call dk_info "Installing git . . ."
 	if dk_call dk_isUrl "${git_Import}"; then
+		dk_call dk_info "Installing ${git_Import} . . ."
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 		dk_call dk_download ${git_Import}
 		"${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o "${GIT}"
 	else
+		dk_call dk_info "Installing ${git_Import} package . . ."
 		dk_call dk_installPackage git
 		(command -v git) && export GIT_EXE=$(command -v git)
 	fi
@@ -69,7 +68,7 @@ DKINSTALL() {
     ###### Install Git Context Menu ######
     #dk_call dk_depend git/contextMenu  
 	 
-    [ ! -e "${GIT_EXE}" ] && dk_call dk_error "cannot find git"
+#   [ ! -e "${GIT_EXE}" ] && dk_call dk_error "cannot find git"
 }
 
 
