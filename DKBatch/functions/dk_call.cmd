@@ -262,7 +262,7 @@ exit /b !errorlevel!
 	::set endfunction=(exit /b ^^!errorlevel^^!)
 	::set return=(exit /b ^^!errorlevel^^!)
 	::set endfunction=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	set endfunction=(if "^!DE^!" neq "" setlocal enableDelayedExpansion) ^& (if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	set endfunction=(if "^!DE^!" neq "" %setlocal%) ^& (if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
 	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "return:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
 	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "checkerror:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
 	

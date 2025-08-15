@@ -18,7 +18,7 @@ fi
 #
 #
 DKINSTALL() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	######### kill cmake.exe process #########
 	# %dk_call% dk_killProcess cmake.exe
@@ -26,16 +26,14 @@ DKINSTALL() {
 	######### kill cmake-gui.exe process #########
 	# %dk_call% dk_killProcess cmake-gui.exe
 	
-	dk_call dk_getFileParams "$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
-	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple"
+	dk_call dk_getFileParams 		"$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
+	dk_call dk_validate Host_Tuple 	"dk_call dk_Host_Tuple"
 	# for unknown reasons variable indirection isn't working on WSL here.  aka. ${!variable}
 	cmake_Import_="cmake_${Host_Tuple}_Import"
 	cmake_Import="${cmake_Import_}"  
 	#[ -n "${Linux_X86_64}" ] && cmake_Import="${cmake_Linux_X86_64_Import}"
 	dk_call dk_assertVar cmake_Import
 	
-
-
 	if dk_call dk_isUrl "${cmake_Import}"; then
 		dk_call dk_info "Installing CMake from direct download"
 		
