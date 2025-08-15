@@ -433,6 +433,9 @@ PLUGIN_Version() {
 		# [ -z "${PLUGIN.Version]}" ] && PLUGIN[Version]=${PLUGIN[TAG]};
 		# [ -z "${PLUGIN.Version]}" ] && PLUGIN[Version]=${PLUGIN[Branch]}; 
 	fi
+	
+	dk_call dk_trimNonAlphaNumeric "${PLUGIN[Version]}";  PLUGIN[Version]="${dk_trimNonAlphaNumeric}";
+	
 	#[ -z "${PLUGIN[Version]-}" ] && dk_call dk_error "PLUGIN[Version] is invalid";
 	dk_call dk_debug "PLUGIN[Version] = '${PLUGIN[Version]}'";
 

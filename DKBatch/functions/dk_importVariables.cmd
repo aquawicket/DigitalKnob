@@ -407,6 +407,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		rem if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.TAG%")
 		rem if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.Branch%") 
 	)
+	%dk_call% dk_trimNonAlphaNumeric %PLUGIN.Version% PLUGIN.Version
 
 	%dk_call% dk_debug "PLUGIN.Version = '%PLUGIN.Version%'"
 %endfunction%
