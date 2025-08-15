@@ -1,0 +1,1919 @@
+###### Archive and compressed ######
+?Q? 		– files that are compressed, often by the SQ program.
+7z 			– 7-zip compressed file
+ACE 		– ace: ACE compressed file
+ALZ 		– ALZip compressed file
+ARC 		– pre-Zip data compression
+ARJ 		– ARJ compressed file
+BZ2 		– bzip2
+CAB 		– A cabinet file is a library of compressed files stored as one file. Cabinet files are used to organize installation files that are copied to the user's system.[2]
+CPT 		– Compact Pro (Macintosh)
+SEA 		– Compact Pro (Macintosh)
+EGG 		– Alzip Egg Edition compressed file
+EGT 		– EGT Universal Document also used to create compressed cabinet files, replaces .ecab
+ECAB 		– EGT Compressed Folder used in advanced systems to compress entire system folders, replaced by EGT Universal Document
+EZIP 		– EGT Compressed Folder used in advanced systems to compress entire system folders, replaced by EGT Universal Document
+ESS 		– EGT SmartSense File, detects files compressed using the EGT compression system.
+FLIPCHART 	– Used in Promethean Flipchart Software.
+FUN 		– A FUN file is a file that has been encrypted by Jigsaw ransomware, which is malware distributed by cybercriminals. It contains a file, such as a .JPG, .DOCX, .XLSX, .MP4, or .CSV file, that has been renamed and encrypted by the virus.
+GZ 			– gzip Compressed file
+G3FC 		– Zstd based file container with support for encryption and FEC
+JAR 		– jar ZIP file with manifest for use with Java applications.
+LAWRENCE 	– LBR Lawrence Compiler Type file
+LBR 		– LBR Library file
+LZH 		– LHA Lempel, Ziv, Huffman
+LZ 			– lzip Compressed file
+LZO 		– lzo
+LZMA 		– lzma Lempel–Ziv–Markov chain algorithm compressed file
+LZX 		– LZX
+MBW 		– MBRWizard archive
+MCADDON 	- Plugin for Minecraft Bedrock
+BIN 		– BIN MacBinary
+OAR 		– OAR: OAR archive
+PAK 		– Enhanced type of .ARC archive
+PAR			– PAR Parchive
+PAR2 		– PAR Parchive
+PAF 		– PAF Portable Application File
+PEA 		– PEA PeaZip archive file
+PYK 		– PYK compressed file
+RAR 		– RAR Rar Archive, for multiple file archive (rar to .r01-.r99 to s01 and so on)
+RaX 		– Archive file created by RaX
+SITX 		– SIT StuffIt (Macintosh)
+TAR 		– TAR: group of files, packaged as one file
+WAX 		– Wavexpress – A ZIP alternative optimized for packages containing video, allowing multiple packaged files to be all-or-none delivered with near-instantaneous unpacking via NTFS file system manipulation.
+XZ 			– xz compressed files, based on LZMA/LZMA2 algorithm
+Z 			– Unix compress file
+ZOO 		– zoo: based on LZW
+ZIP 		– zip: popular compression format
+
+###### Application packages ######
+ABB 		– Android App Bundle – is the Android (and Android TV) application publishing file format (required by Google Play) taking over from APK
+APK 		– Android package: Applications installable on Android (also installable in derivatives and e.g. Windows 11); also a package format of the Alpine Linux distribution.
+APPX 		– Microsoft Application Package (.appx)
+APP 		– HarmonyOS APP Packs file format for HarmonyOS apps installable from AppGallery and third party OpenHarmony based app distribution stores.
+DMG 		- A format that Macintosh devices use for all applications third-party applications and some direct Apple Inc. applications.
+DEB 		– Debian install package
+HPKG 		– Haiku application package format
+IPG 		– Format in which Apple Inc. packages their iPod games. Can be extracted through Winrar
+RPM 		– Red Hat package/installer for Fedora, RHEL, and similar systems.
+SIS			– Symbian Application Package
+SISX 		– Symbian Application Package
+XAP 		– Windows Phone Application Package
+
+###### Physical recordable media archiving ######
+ADF – for archiving Amiga floppy disks
+ADZ – The GZip-compressed version of ADF.
+B5T – BlindWrite 5 image file
+B6T – BlindWrite 6 image file
+BWT – BlindWrite 4 image file
+BIN – Raw binary format, often paired with CUE
+CDI – DiscJuggler image file
+CUE – CDRWrite CUE image file
+CIF – Easy CD Creator .cif format
+C2D – Roxio-WinOnCD .c2d format
+DAA – PowerISO .daa format
+D64 – An archive of a Commodore 64 floppy disk.
+DAA – DAA: Closed-format, Windows-only compressed disk image
+DMG – Macintosh disk image files
+DMS – a disk-archiving system native to the Amiga.
+DSK – For archiving floppy disks from a number of other platforms, including the ZX Spectrum and Amstrad CPC.
+ESD – ESD: Electronic Software Distribution, a compressed and encrypted WIM File
+FFPPKG – FreeFire Profile Export Package
+GHO, GHS – GHO Norton Ghost
+IMG – Raw disk image, for archiving DOS formatted floppy disks, hard drives, and larger optical media.
+ISO – Generic format for most optical media, including CD-ROM, DVD-ROM, Blu-ray, HD DVD and UMD.
+MDS – Daemon Tools native disc image format used for making images from optical CD-ROM, DVD-ROM, HD DVD or Blu-ray. It comes together with MDF file and can be mounted with DAEMON Tools.
+MDX – Daemon Tools format that allows getting one MDX disc image file instead of two (MDF and MDS).
+NRG – Proprietary optical media archive format used by Nero applications.
+SDI – used for archiving and providing "virtual disk" functionality.
+SWM – Splitted WIM File, usually found on OEM Recovery Partition to store preinstalled Windows image, and to make Recovery backup (to USB Drive) easier (due to FAT32 limitations)
+TIB – TIB Acronis True Image backup
+WIM – WIM A compressed disk image for installing Windows Vista or higher, Windows Fundamentals for Legacy PC, or restoring a system image made from Backup and Restore (Windows Vista/7)
+Other extensions
+MSI – Windows installation file
+VDHX – Virtual disk created by Hyper-V (Hyper-V runs on Microsoft Windows)
+PLIST - Short for Property List, stores data in XML-like format on Apple Inc devices
+Computer-aided design
+Computer-aided is a prefix for several categories of tools (e.g., design, manufacture, engineering) which assist professionals in their respective fields (e.g., machining, architecture, schematics).
+
+Computer-aided design (CAD)
+Computer-aided design (CAD) software assists engineers, architects and other design professionals in project design.
+
+3DXML – Dassault Systemes graphic representation
+3MF – Microsoft 3D Manufacturing Format[3]
+ACP – VA Software VA – Virtual Architecture CAD file
+AMF – Additive Manufacturing File Format
+AEC – DataCAD drawing format[4]
+AEDT – Ansys Electronic Desktop – Project file
+AR – Ashlar-Vellum Argon – 3D Modeling
+ART – ArtCAM model
+ASC – BRL-CAD Geometry File (old ASCII format)
+ASM – Solidedge Assembly, Pro/ENGINEER Assembly
+BIN, BIM – Data Design System DDS-CAD
+BREP – Open CASCADE 3D model (shape)
+C3D – C3D Toolkit File Format
+C3P – Construct3 Files
+CCC – CopyCAD Curves
+CCM – CopyCAD Model
+CCS – CopyCAD Session
+CAD – CadStd
+CATDrawing – CATIA V5 Drawing document
+CATPart – CATIA V5 Part document
+CATProduct – CATIA V5 Assembly document
+CATProcess – CATIA V5 Manufacturing document
+CGR – CATIA V5 graphic representation file
+CKD – KeyCreator CAD parts, assemblies, and drawings
+CKT – KeyCreator template file
+CO – Ashlar-Vellum Cobalt – parametric drafting and 3D modeling
+DAB – AppliCad 3D model CAD file
+DRW – Caddie Early version of Caddie drawing – Prior to Caddie changing to DWG
+DFT – Solidedge Draft
+DGN – MicroStation design file
+DGK – Delcam Geometry
+DMT – Delcam Machining Triangles
+DXF – ASCII Drawing Interchange file format, AutoCAD
+DWB – VariCAD drawing file
+DWF – Autodesk's Web Design Format; AutoCAD & Revit can publish to this format; similar in concept to PDF files; Autodesk Design Review is the reader
+DWG – Popular file format for Computer Aided Drafting applications, notably AutoCAD, Open Design Alliance applications, and Autodesk Inventor Drawing files
+EASM – SolidWorks eDrawings assembly file
+EDRW – eDrawings drawing file
+EMB – Wilcom ES Designer Embroidery CAD file
+EPRT – eDrawings part file
+EscPcb – "esCAD pcb" data file by Electro-System (Japan)
+EscSch – "esCAD sch" data file by Electro-System (Japan)
+ESW – AGTEK format
+EXCELLON – Excellon file
+EXP – Drawing Express format
+F3D – Autodesk Fusion 360 archive file[5]
+FCStd – Native file format of FreeCAD CAD/CAM package
+FM – FeatureCAM Part File
+FMZ – FormZ Project file
+G – BRL-CAD Geometry File
+GBR – Gerber file
+GCODE - G-code Geometric code. Instructions for 3D printers.
+GLM – KernelCAD model
+GRB – T-FLEX CAD File
+GRI – AppliCad GRIM-In file in readable text form for importing roof and wall cladding job data generated by business management and accounting systems into the modelling/estimating program
+GRO – AppliCad GRIM-Out file in readable text form for exporting roof and wall cladding data job material and labour costing data, material lists generated by the modelling/estimating program to business management and accounting systems
+IAM – Autodesk Inventor Assembly file
+ICD – IronCAD 2D CAD file
+IDW – Autodesk Inventor Drawing file
+IFC – buildingSMART for sharing AEC and FM data
+IGES – Initial Graphics Exchange Specification
+DGN, CEL – Intergraph Standard File Formats Intergraph
+IO – Stud.io 3D model
+IPN – Autodesk Inventor Presentation file
+IPT – Autodesk Inventor Part file
+JT – Jupiter Tesselation
+MCD – Monu-CAD (Monument/Headstone Drawing file)
+MDG – Model of Digital Geometric Kernel
+model – CATIA V4 part document
+OCD – Orienteering Computer Aided Design (OCAD) file
+PAR – Solidedge Part
+PART – A file used with Stud.Io
+PIPE – PIPE-FLO Professional Piping system design file
+PLN – ArchiCad project
+PIXIL - Pixilart.com file
+PRT – NX (recently known as Unigraphics), Pro/ENGINEER Part, CADKEY Part
+PSM – Solidedge Sheet
+PSMODEL – PowerSHAPE Model
+PWI – PowerINSPECT File
+PYT – Pythagoras File
+RLF – ArtCAM Relief
+RVM – AVEVA PDMS 3D Review model
+RVT – Autodesk Revit project files
+RFA – Autodesk Revit family files
+RFT - Autodesk Revit Revit Family Template
+RXF – AppliCad annotated 3D roof and wall geometry data in readable text form used to exchange 3D model geometry with other systems such as truss design software
+S12 – Spirit file, by Softtech
+SCAD – OpenSCAD 3D part model
+SCDOC – SpaceClaim 3D Part/Assembly
+SKB – Google SketchUp backup File
+SKP – Sketchup
+SLDASM – SolidWorks Assembly drawing
+SLDDRW – SolidWorks 2D drawing
+SLDPRT – SolidWorks 3D part model
+dotXSI – For Softimage
+STATE – A file used by the IaC tool to record information about what has been deployed by the tool.
+STEP – Standard for the Exchange of Product model data
+STL – Stereo Lithographic data format used by various CAD systems and stereo lithographic printing machines.
+STD – Power Vision Plus – Electricity Meter Data (Circuitor)
+TCT – TurboCAD drawing template
+TCW – TurboCAD for Windows 2D and 3D drawing
+UNV – I-DEAS I-DEAS (Integrated Design and Engineering Analysis Software)
+VC6 – Ashlar-Vellum Graphite – 2D and 3D drafting
+VLM – Ashlar-Vellum Vellum, Vellum 2D, Vellum Draft, Vellum 3D, DrawingBoard
+VS – Ashlar-Vellum Vellum Solids
+WRL – Similar to STL, but includes color. Used by various CAD systems and 3D printing rapid prototyping machines. Also used for VRML models on the web.
+X_B – Parasolids binary format
+X_T – Parasolids
+XE – Ashlar-Vellum Xenon – for associative 3D modeling
+ZOFZPROJ – ZofzPCB 3D PCB model, containing mesh, netlist and BOM
+Electronic design automation (EDA)
+Electronic design automation (EDA), or electronic computer-aided design (ECAD), is specific to the field of electrical engineering.
+
+BRD – Board file for EAGLE Layout Editor, a commercial PCB design tool
+BSDL – Description language for testing through JTAG
+CDL – Transistor-level netlist format for IC design
+CPF – Power-domain specification in system-on-a-chip (SoC) implementation (see also UPF)
+DEF – Gate-level layout
+Detailed Standard Parasitic Format – Detailed Standard Parasitic Format, Analog-level Parastic component of interconnections in IC design
+EDIF – Vendor neutral gate-level netlist format
+FSDB – Analog waveform format (see also Waveform viewer)
+GDSII – Format for PCB and layout of integrated circuits
+HEX – ASCII-coded binary format for memory dumps
+LEF – Library Exchange Format, physical abstract of cells for IC design
+Liberty (EDA) – Library modeling (function, timing) format
+MS12 – NI Multisim file
+OASIS – Open Artwork System Interchange Standard
+OpenAccess – Design database format with APIs
+PSF – Cadence proprietary format to store simulation results/waveforms (2GB limit)
+PSFXL – Cadence proprietary format to store simulation results/waveforms
+SDC – Synopsys Design Constraints, format for synthesis constraints
+SDF – Standard for gate-level timings
+SPEF – Standard format for Parasitic component of interconnections in IC design
+SPI, CIR – SPICE Netlist, device-level netlist and commands for simulation
+SREC, S19 – S-record, ASCII-coded format for memory dumps
+SST2 – Cadence proprietary format to store mixed-signal simulation results/waveforms
+STIL – Standard Test Interface Language, IEEE1450-1999 standard for Test Patterns for IC
+SV – SystemVerilog source file
+S*P – Touchstone/EEsof Scattering parameter data file – multi-port blackbox performance, measurement or simulated
+TLF – Contains timing and logical information about a collection of cells (circuit elements)
+UPF – Standard for Power-domain specification in SoC implementation
+V – Verilog source file
+VCD – Standard format for digital simulation waveform
+VHD, VHDL – VHDL source file
+WGL – Waveform Generation Language, format for Test Patterns for IC
+Test technology
+Files output from Automatic Test Equipment or post-processed from such.
+
+Standard Test Data Format
+Database
+4DB – 4D database Structure file
+4DC – 4D database Structure file (compiled in legacy mode)
+4DD – 4D database Data file
+4DIndy – 4D database Structure Index file
+4DIndx – 4D database Data Index file
+4DR – 4D database Data resource file (in old 4D versions)
+4DZ – 4D database Structure file (compiled in 4D Project mode)
+ACCDB – Microsoft Database (Microsoft Office Access 2007 and later)
+ACCDE – Compiled Microsoft Database (Microsoft Office Access 2007 and later)
+ADT – Sybase Advantage Database Server (ADS)
+APR – Lotus Approach data entry & reports
+BOX – Lotus Notes Post Office mail routing database
+CHML – Krasbit Technologies Encrypted database file for 1 click integration between contact management software and the Chameleon Software
+DAF – Digital Anchor data file
+DAT – DOS Basic
+DAT – Intersystems Caché database file
+DB – Paradox
+DB – SQLite
+DBF – db/dbase II,III,IV and V, Clipper, Harbour/xHarbour, Fox/FoxPro, Oracle
+DTA – Sage Sterling database file
+EGT – EGT Universal Document, used to compress sql databases to smaller files, may contain original EGT database style.
+ESS – EGT SmartSense is a database of files and its compression style. Specific to EGT SmartSense
+EAP – Enterprise Architect Project
+FDB – Firebird Databases
+FDB – Navision database file
+FP, FP3, FP5, FP7 – FileMaker Pro
+FRM – MySQL table definition
+GDB – Borland InterBase Databases
+GTABLE – Google Drive Fusion Table
+KEXI – Kexi database file (SQLite-based)
+KEXIC – shortcut to a database connection for a Kexi databases on a server
+KEXIS – shortcut to a Kexi database
+LDB – Temporary database file, only existing when database is open
+LIRS – Layered Intager Storage. Stores intageres with characters such as semicolons to create lists of data.
+MDA – Add-in file for Microsoft Access
+MDB – Microsoft Access database
+ADP – Microsoft Access project (used for accessing databases on a server)
+MDE – Compiled Microsoft Database (Access)
+MDF – Microsoft SQL Server Database
+MYD – MySQL MyISAM table data
+MYI – MySQL MyISAM table index
+NCF – Lotus Notes configuration file
+NSF – Lotus Notes database
+NTF – Lotus Notes database design template
+NV2 – QW Page NewViews object oriented accounting database
+ODB – LibreOffice Base or OpenOffice Base database
+ORA – Oracle tablespace files sometimes get this extension (also used for configuration files)
+PCONTACT – WinIM Contact file
+PDB – Palm OS Database
+PDI – Portable Database Image
+PDX – Corel Paradox database management
+PRC – Palm OS resource database
+SQL – bundled SQL queries
+REC – GNU recutils database
+REL – Sage Retrieve 4GL data file
+RIN – Sage Retrieve 4GL index file
+SDB – StarOffice's StarBase
+SDF – SQL Compact Database file
+SQLITE – SQLite
+UDL – Universal Data Link
+waData – Wakanda (software) database Data file
+waIndx – Wakanda (software) database Index file
+waModel – Wakanda (software) database Model file
+waJournal – Wakanda (software) database Journal file
+WDB – Microsoft Works Database
+WMDB – Windows Media Database file – The CurrentDatabase_360.wmdb file can contain file name, file properties, music, video, photo and playlist information.
+Big Data (Distributed)
+Avro – Data format appropriate for ingestion of record based attributes. Distinguishing characteristic is schema is stored on each row enabling schema evolution.
+Parquet – Columnar data storage. It is typically used within the Hadoop ecosystem.
+ORC – Similar to Parquet, but has better data compression and schema evolution handling.
+Desktop publishing
+AI – Adobe Illustrator
+AVE, ZAVE – Aquafadas
+CDR – CorelDRAW
+CHP, pub, STY, CAP, CIF, VGR, FRM – Ventura Publisher – Xerox (DOS / GEM)
+CPT – Corel Photo-Paint
+DPE – Package of AVE documents made with Aquafadas digital publishing tools.
+DTP – Greenstreet Publisher, GST PressWorks
+FM – Adobe FrameMaker
+GDRAW – Google Drive Drawing
+ILDOC – Broadvision Quicksilver document
+INDD – Adobe InDesign
+MCF – FotoInsight Designer
+PDF – Adobe Acrobat or Adobe Reader
+PMD – Adobe PageMaker
+PPP – Serif PagePlus
+PSD – Adobe Photoshop
+PUB – Microsoft Publisher
+QXD – QuarkXPress
+SLA, SCD – Scribus
+XCF – XCF: File format used by the GIMP, as well as other programs
+TWP – Talon Word Processor document
+Document
+These files store formatted text and plain text.
+
+0 – Plain Text Document, normally used for licensing
+1ST – Plain Text Document, normally preceded by the words "README" (README.1ST)
+600 – Plain Text Document, used in UNZIP history log
+602 – Text602 (T602) document
+ABW – AbiWord document
+ACL – MS Word AutoCorrect List
+AFP – Advanced Function Presentation
+AMI – Lotus Ami Pro
+ANS – American National Standards Institute (ANSI) text
+ASC – ASCII text
+AWW – Ability Write
+BBeB – Broad Band EBook
+CCF – Color Chat 1.0
+CSV – ASCII text as comma-separated values, used in spreadsheets and database management systems
+CWK – ClarisWorks-AppleWorks document
+DBK – DocBook XML sub-format
+DITA – Darwin Information Typing Architecture document
+DOC – Microsoft Word document
+DOCM – Microsoft Word macro-enabled document
+DOCX – document, Office Open XML, there are at least 4 quite different versions of Microsoft's DOCX: 1) ECMA-376, 2)ISO/IEC 29500 Transitional, 3) ISO/IEC 29500 Strict, 4) Microsoft-specific Compatibility Mode variants.
+DOT – Microsoft Word document template
+DOTX – Office Open XML text document template
+DWD – DavkaWriter Heb/Eng word processor file
+EGT – EGT Universal Document
+EPUB – EPUB open standard for e-books
+EVTX – Windows XML EventLog files are system log files used by the Windows operating system[6]
+EZW – Reagency Systems easyOFFER document[7]
+FDX – Final Draft
+FTM – Fielded Text Meta
+FTX – Fielded Text (Declared)
+GDOC – Google Drive Document
+GUIDE – AmigaGuide
+HTML, HTM – HyperText Markup Language
+HWP – Haansoft (Hancom) Hangul Word Processor document
+HWPML – Haansoft (Hancom) Hangul Word Processor Markup Language document
+KPUB – Kobo ebook format
+LOG – Text log file
+LWP – Lotus Word Pro
+MBP – metadata for Mobipocket documents
+MD – Markdown text document
+ME – Plain text document normally preceded by the word "READ" (READ.ME)
+MCW – Microsoft Word for Macintosh (versions 4.0–5.1)
+Mobi – Mobipocket documents
+NB – Mathematica Notebook
+NB – Nota Bene Document (Academic Writing Software)
+NBP – Mathematica Player Notebook
+NEIS – 학교생활기록부 작성 프로그램 (Student Record Writing Program) Document
+NT – N-Triples RDF container (.nt)
+NQ – N-Quads RDF container (.nq)
+ODM – OpenDocument master document
+ODOC – Synology Drive Office Document
+ODT – OpenDocument text document
+OSHEET – Synology Drive Office Spreadsheet
+OTT – OpenDocument text document template
+OMM – OmmWriter text document
+PAGES – Apple Pages document
+PAP – Papyrus word processor document
+PER – Canadian Forces Personnel Appraisal System (CFPAS) Personnel Evaluation Report (PER)
+PDR – Canadian Forces Personnel Appraisal System (CFPAS) Personnel Development Report (PDR)
+PDAX – Portable Document Archive (PDA) document index file
+PDF – Portable Document Format
+PROTONDOC – Proton Docs file shortcut
+QUOX – Question Object File Format for Quobject Designer or Quobject Explorer
+RTF – Rich Text document
+RPT – Crystal Reports
+SDW – StarWriter text document, used in earlier versions of StarOffice
+SE – Shuttle Document
+STW – OpenOffice.org XML (obsolete) text document template
+Sxw – OpenOffice.org XML (obsolete) text document
+TeX – TeX
+TMDX – SoftMaker TextMaker
+INFO – Texinfo
+Troff – Unix OS document processing system
+TXT – ASCII or Unicode plain text file
+UOF – Uniform Office Format
+UOML – Unique Object Markup Language
+VIA – Revoware VIA Document Project File
+WPD – WordPerfect document
+WPS – Microsoft Works document
+WPT – Microsoft Works document template
+WRD – WordIt! document
+WRF – ThinkFree Write
+WRI – Microsoft Write document
+XHTML, XHT – XHTML eXtensible HyperText Markup Language
+XML – eXtensible Markup Language
+XPS – XPS: Open XML Paper Specification
+Financial records
+MYO – MYOB Limited (Windows) File
+MYOB – MYOB Limited (Mac) File
+TAX – TurboTax File
+YNAB – You Need a Budget (YNAB) File
+Tax2010 – Tax filling software
+Financial data transfer formats
+IFX – Interactive Financial Exchange XML-based specification for various forms of financial transactions
+OFX – Open Financial Exchange， open standard supported by CheckFree and Microsoft and partly by Intuit; SGML and later XML based
+QFX – proprietary pay-only format used only by Intuit
+QIF – Quicken Interchange Format open standard formerly supported by Intuit
+Font file
+ABF – Adobe Binary Screen Font
+AFM – Adobe Font Metrics
+BDF – Bitmap Distribution Format
+BMF – ByteMap Font Format
+BRFNT – Binary Revolution Font Format
+FNT – Bitmapped Font – Graphics Environment Manager (GEM)
+FON – Bitmapped Font – Microsoft Windows
+MGF – MicroGrafx Font
+OTF – OpenType Font
+PCF – Portable Compiled Format
+PFA – Printer Font ASCII
+PFB – Printer Font Binary – Adobe
+PFM – Printer Font Metrics – Adobe
+FOND – Font Description resource – Mac OS
+SFD – FontForge spline font database Font
+SNF – Server Normal Format
+TDF – TheDraw Font
+TFM – TeX font metric
+TTF, TTC – TrueType Font
+UFO – Unified Font Object is a cross-platform, cross-application, human readable, future proof format for storing font data.
+WOFF – Web Open Font Format
+General purpose
+These file formats allow for the rapid creation of new binary file formats.
+
+IFDS – Incredibly Flexible Data Storage file format. File extension and the magic number does not have to be IFDS.[8]
+Geographic information system
+Main article: GIS file formats
+ASC – ASCII point of interest (POI) text file
+APR – ESRI ArcView 3.3 and earlier project file
+DEM – USGS DEM file format
+E00 – ARC/INFO interchange file format
+GeoJSON – Geographically located data in object notation
+TopoJSON – Extension of GeoJSON with topology encoded in arcs for web development
+GeoTIFF – Geographically located raster data
+GML – Geography Markup Language file[9]
+GPX – XML-based interchange format
+ITN – TomTom Itinerary format
+MXD – ESRI ArcGIS project file, 8.0 and higher
+NTF – National Transfer Format file
+OV2 – TomTom POI overlay file
+SHP – ESRI shapefile
+TAB – MapInfo TAB format
+GeoTIFF – Geographically located raster data: text file giving corner coordinate, raster cells per unit, and rotation
+DTED – Digital Terrain Elevation Data
+KML – Keyhole Markup Language, XML-based
+Graphical information organizers
+3DT – 3D Topicscape, the database in which the meta-data of a 3D Topicscape is held, it is a form of 3D concept map (like a 3D mind-map) used to organize ideas, information, and computer files
+ATY – 3D Topicscape file, produced when an association type is exported; used to permit round-trip (export Topicscape, change files and folders as desired, re-import to 3D Topicscape)
+CAG (file format) – Linear Reference System
+FES (file format) – 3D Topicscape file, produced when a fileless occurrence in 3D Topicscape is exported to Windows. Used to permit round-trip (export Topicscape, change files and folders as desired, re-import them to 3D Topicscape)
+MGMF – MindGenius Mind Mapping Software file format
+MM – FreeMind mind map file (XML)
+MMP (file format) – Mind Manager mind map file
+MUP – File type used by MindMup to export editable Mind Maps
+TPC (file format) – 3D Topicscape file, produced when an inter-Topicscape topic link file is exported to Windows; used to permit round-trip (export Topicscape, change files and folders as desired, re-import to 3D Topicscape)
+Graphics
+Main articles: Image file formats and Comparison of graphics file formats
+Color palettes
+ACT – Adobe Color Table. Contains a raw color palette and consists of 256 24-bit RGB colour values.
+ASE – Adobe Swatch Exchange. Used by Adobe Substance, Photoshop, Illustrator, and InDesign.[10]
+GPL – GIMP palette file. Uses a text representation of color names and RGB values. Various open source graphical editors can read this format,[11] including GIMP, Inkscape, Krita,[12] KolourPaint, Scribus, CinePaint, and MyPaint.[13]
+PAL – Microsoft RIFF palette file
+Color management
+ICC, ICM – Color profile conforming the specification of the ICC.
+Raster graphics
+Raster or bitmap files store images as a group of pixels.
+
+ART – America Online proprietary format
+BLP – Blizzard Entertainment proprietary texture format
+BMP – Microsoft Windows bitmap formatted image
+BTI – Nintendo proprietary texture format
+C4 – JEDMICS image files, a DOD system
+CALS – JEDMICS image files, a DOD system
+CD5 – Chasys Draw IES image
+CIT – Intergraph monochrome bitmap format
+CPT – Corel PHOTO-PAINT image
+CLIP – CLIP STUDIO PAINT format
+CPL – Microsoft Windows control panel file
+DDS – DirectX texture file
+DIB – Device-Independent Bitmap graphic
+DjVu – designed for scanned documents
+EGT – EGT Universal Document, used in EGT SmartSense to compress PNG files to yet a smaller file
+Exif – Exchangeable image file format is a specification for the image format used by digital cameras
+GIF – CompuServe's Graphics Interchange Format
+GIFV – Graphics Interchange Format Video, a format used for short, looping videos that combines the advantages of GIFs and videos, with better playback quality and lower file sizes[14]
+GRF – Zebra Technologies proprietary format
+ICNS – format for icons in macOS. Contains bitmap images at multiple resolutions and bitdepths with alpha channel.
+HEIF, HEIC – High Efficiency Image File Format
+ICO – a format used for icons in Microsoft Windows. Contains small bitmap images at multiple resolutions and bitdepths with 1-bit transparency or alpha channel.
+IFF, ILBM, LBM – IFF ILBM
+JNG – a single-frame MNG using JPEG compression and possibly an alpha channel
+JPEG, JPG, JFIF – Joint Photographic Experts Group; a lossy image format widely used to display photographic images
+JP2 – JPEG2000
+JPS – JPEG Stereo
+JXL – JPEG XL, an image format designed for professional photography and web images; supports wide color gamut, high dynamic range, animations, and a max resolution of 1,073,741,823 x 1,073,741,824
+KRA – Krita image file
+LBM – Deluxe Paint image file
+MAX – ScanSoft PaperPort document
+MIFF – ImageMagick's native file format
+MNG – Multiple-image Network Graphics, the animated version of PNG
+MSP – a format used by old versions of Microsoft Paint; replaced by BMP in Microsoft Windows 3.0
+NEF – Nikon camera raw format; photos have this on some Nikon cameras if the quality RAW is selected in camera settings
+NITF – A U.S. Government standard commonly used in Intelligence systems
+OTB – Over The Air bitmap, a specification designed by Nokia for black and white images for mobile phones
+PBM – portable bitmap
+compressed Degas picture files:
+PC1 – low resolution
+PC2 – medium resolution
+PC3 – high resolution
+PCF – Pixel Coordination Format
+PCX – a lossless format used by ZSoft's PC Paint, popular for a time on DOS systems.
+PDD – Adobe PhotoDeluxe image
+PDN – Paint.NET image file
+PGF – Progressive Graphics File
+PGM – Portable graymap
+uncompressed Degas picture files:
+PI1 – low resolution
+PI2 – medium resolution
+PI3 – high resolution
+PI2 – Portrait Innovations encrypted image format
+PICT, PCT – Apple Macintosh PICT image
+PNG – Portable Network Graphics (lossless, recommended for display and edition of graphic images)
+PNJ – a sub-format of the MNG file format, used for encapsulating JPEG files[15]
+PNM – Portable anymap graphic bitmap image
+PNS – PNG Stereo
+PPM – Portable Pixmap (Pixel Map) image
+procreate – Procreate's drawing file
+Adobe Photoshop files:
+PSB – large document
+PSD – document
+PSP – Paint Shop Pro image
+PX – Pixel image editor image file
+PXM – Pixelmator image file
+PXR – Pixar Image Computer image file
+PXZ – a compressed layered image file used for the image editing website, pixlr.com
+QFX – QuickLink Fax image
+QOI - Quite OK Image, a compressed lossless image format
+RLE – a run-length encoding image
+SCT – Scitex Continuous Tone image file
+SGI, RGB, INT, BW – Silicon Graphics Image
+TGA, TARGA, ICB, VDA, VST, PIX – Truevision TGA (Targa) image
+TIFF, TIF – Tag(ged) Image File Format; usually lossless, but many variants exist, including lossy ones.
+TIFF/EP, TIF, TIFF – Tag Image File Format / Electronic Photography, ISO 12234-2; tends to be used as a basis for other formats rather than in its own right.
+VTF – Valve Texture Format
+WEBP – WebP, an image format designed for the web that can provide both lossless and lossy compression.
+XBM – X Window System Bitmap
+XCF – GIMP image (from Gimp's origin at the eXperimental Computing Facility of the University of California)
+XPM – X Window System Pixmap
+ZIF – Zoomable/Zoomify Image Format (a web-friendly, TIFF-based, zoomable image format)
+Photographs
+CR2 – Canon camera raw format; photos have this on some Canon cameras if the quality RAW is selected in camera settings
+DNG – "Digital Negative" a type of raw image file format used in digital photography.
+RAW – General term for minimally processed image data (acquired by a digital camera)
+Vector graphics
+Vector graphics use geometric primitives such as points, lines, curves, and polygons to represent images.
+
+3DV file – 3-D wireframe graphics by Oscar Garcia
+AMF – Additive Manufacturing File Format
+AWG – Ability Draw
+AI – Adobe Illustrator Document
+CGM – Computer Graphics Metafile, an ISO Standard
+CDR – CorelDRAW Document
+CMX – CorelDRAW vector image
+DP – Drawing Program file for PERQ[16]
+DRAWIO – Diagrams.net offline diagram
+DXF – ASCII Drawing Interchange file Format, used in AutoCAD and other CAD-programs
+E2D – 2-dimensional vector graphics used by the editor which is included in JFire
+EGT – EGT Universal Document, EGT Vector Draw images are used to draw vector to a website
+EPS – Encapsulated Postscript
+FS – FlexiPro file.x
+GBR – Gerber file
+ODG – OpenDocument Drawing
+MOVIE.BYU – 3D Vector file for polygons, coordinates and more complex shapes
+RenderMan – Displays Shading in both 2D and 3D scapes
+SVG – Scalable Vector Graphics, employs XML
+3DMLW – Scene description languages (3D vector image formats)
+STL – Stereo Lithographic data format (see STL (file format)) used by various CAD systems and stereo lithographic printing machines. See above.
+WRL – Virtual Reality Modeling Language, VRML Uses this extension for the creation of 3D viewable web images.
+X3D – XML-based file for communicating 3D graphics
+SXD – OpenOffice.org XML (obsolete) Drawing
+TGAX – Texture format used by Zwift
+V2D – voucher design used by the voucher management included in JFire
+VDOC – Vector format used in AnyCut, CutStorm, DrawCut, DragonCut, FutureDRAW, MasterCut, SignMaster, VinylMaster software by Future Corporation
+VSD – Vector format used by Microsoft Visio
+VSDX – Vector format used by MS Visio and opened by VSDX Annotator
+VND – Vision numeric Drawing file used in TypeEdit, Gravostyle.
+WMF – Windows Meta File
+EMF – Enhanced (Windows) MetaFile, an extension to WMF
+ART – Xara–Drawing (superseded by XAR)
+XAR – Xara–Drawing
+3D graphics
+See also: 3D file format at EduTech Wiki
+3D graphics are 3D models that allow building models in real-time or non-real-time 3D rendering.
+
+3DMF – QuickDraw 3D Metafile (.3dmf)
+3DM – OpenNURBS Initiative 3D Model (used by Rhinoceros 3D) (.3dm)
+3MF – Microsoft 3D Manufacturing Format (.3mf)[3]
+3DS – legacy 3D Studio Model (.3ds)
+ABC – Alembic (computer graphics)
+AC – AC3D Model
+AMF – Additive Manufacturing File Format
+AN8 – Anim8or Model
+AOI – Art of Illusion Model
+ASM – PTC Creo assembly
+B3D – Blitz3D Model
+BBMODEL Blockbench Model
+BLEND – Blender
+BLOCK – Blender encrypted blend files
+BMD3 – Nintendo GameCube first-party J3D proprietary model format (.bmd)
+BDL4 – Nintendo GameCube and Wii first-party J3D proprietary model format (2002, 2006–2010) (.bdl)
+BRRES – Nintendo Wii first-party proprietary model format 2010+ (.brres)
+BFRES – Nintendo Wii U and later Switch first-party proprietary model format
+C4D – Cinema 4D (.c4d)
+Cal3D – Cal3D (.cal3d)
+CCP4 – X-ray crystallography voxels (electron density)
+CFL – Compressed File Library
+COB – Caligari Object
+CORE3D – Coreona 3D Coreona 3D Virtual File(.core3d)
+CTM – OpenCTM
+DAE – COLLADA
+DFF – RenderWare binary stream, commonly used by Grand Theft Auto III-era games as well as other RenderWare titles
+DN – Adobe Dimension CC file format
+DPM – DeepMesh
+DTS – Torque Game Engine (DTS (file format))
+EGG – Panda3D Engine
+FACT – Electric Image (.fac)
+FBX – Autodesk FBX
+G – BRL-CAD geometry
+GLB – a binary form of glTF required to be loaded in Facebook 3D Posts
+GLM – Ghoul Mesh
+glTF – the JSON-based standard developed by Khronos Group
+HEC – Hector Game Engine – Flatspace model format
+IO – Bricklink Stud.io 2.0 Model File
+IOB – Imagine (3D modeling software)
+JAS – Cheetah 3D file
+JMESH – Universal mesh data exchange file based on JMesh specification (.jmsh for text/JSON based, .bmsh for binary/UBJSON based)
+LDR – LDraw Model File
+LWO – Lightwave Object
+LWS – Lightwave Scene
+LXF – LEGO Digital Designer Model file
+LXO – Luxology Modo (software) file
+M3D – Model3D, universal, engine-neutral format
+MA – Autodesk Maya ASCII File
+MAX – Autodesk 3D Studio Max file
+MB – Autodesk Maya Binary File
+MPD – LDraw Multi-Part Document Model File
+MD2 – MD2: Quake 2 model format
+MD3 – MD3: Quake 3 model format
+MD5 – MD5: Doom 3 model format
+MDX – Blizzard Entertainment's own model format
+MESH – New York University(.m)
+MESH – Meshwork Model (.mesh)
+MIOBJECT – Mine-Imator object file
+MIPARTICLE – Mine-Imator particle file
+MIMODEL – Mine-Imator model file
+MM3D – Misfit Model 3d
+MPO – Multi-Picture Object – This JPEG standard is used for 3d images, as with the Nintendo 3DS
+MRC – MRC: voxels in cryo-electron microscopy
+NIF – Gamebryo NetImmerse File
+NWC – Navisworks - cached version of the converted model geometry
+NWD – Navisworks - publish format
+NWF – Navisworks - working format for projects
+OBJ – Wavefront .obj file
+OFF – OFF Object file format
+OGEX – Open Game Engine Exchange (OpenGEX) format
+PLY – PLY: Polygon File Format / Stanford Triangle Format
+PRC – Adobe PRC (embedded in PDF files)
+PRT – PTC Creo part
+POV – POV-Ray document
+R3D – Realsoft 3D (Real-3D)
+RWX – RenderWare Object
+SIA – Nevercenter Silo Object
+SIB – Nevercenter Silo Object
+SKP – SketchUp file
+SLDASM – SolidWorks Assembly Document
+SLDPRT – SolidWorks Part Document
+SMD – Valve Studiomdl Data format
+TRES - Godot (game engine) resource file
+U3D – Universal 3D format
+USD – Universal Scene Description
+USDA – Universal Scene Description, human-readable text format
+USDC – Universal Scene Description, binary format
+USDZ – Universal Scene Description, a zip-compressed container
+VIM – Revizto visual information model format (.vimproj)
+VRML97 – VRML Virtual reality modeling language (.wrl)
+VUE – Vue scene file
+VWX – Vectorworks
+WINGS – Wings3D
+W3D – Westwood 3D Model
+X – DirectX 3D Model
+X3D – Extensible 3D
+Z3D – Zmodeler
+ZBMX – Mecabricks Blender Add-On
+Links and shortcuts
+Alias – Alias (Mac OS)
+JNLP – Java Network Launching Protocol, an XML file used by Java Web Start for starting Java applets over the Internet
+LNK – binary-format file shortcut in Microsoft Windows 95 and later
+APPREF-MS – File shortcut format used by ClickOnce
+NAL – ZENworks Instant shortcut (opens a .EXE not on the C:\ drive)
+URL – INI file pointing to a URL bookmarks/Internet shortcut in Microsoft Windows
+WEBLOC – Property list file pointing to a URL bookmarks/Internet shortcut in macOS
+SYM – Symbolic link
+DESKTOP – Desktop entry on Linux Desktop environments
+LNK - Desktop entry on Microsoft Windows
+Mathematical
+Harwell-Boeing – a file format designed to store sparse matrices
+MML – MathML – Mathematical Markup Language
+ODF – OpenDocument Math Formula
+SXM – OpenOffice.org XML (obsolete) Math Formula
+G3K – an obscure, uncommon format used by the CASIO graphing calculators to store keylogs
+Native executable
+Native executable formats include: executable file, object file, and shared library, but exclude executable files that are not executed via a processor-native mechanism.
+
+8BF – files plugins for some photo editing programs including Adobe Photoshop, Paint Shop Pro, GIMP and Helicon Filter.
+A – a static library on Unix-like systems
+A – Objective C native static library
+a.out – (no suffix for executable image, .o for object files, .so for shared object files) classic Unix object format, now often superseded by ELF
+APK – Android Package
+APP – A folder found on macOS systems containing program code and resources, appearing as one file.
+APP – file extension are executable application packages for running apps on HarmonyOS, OpenHarmony and Oniro devices.
+BAC – an executable image for the RSTS/E system, created using the BASIC-PLUS COMPILE command[17]
+BPL – a Win32 PE file created with Delphi or C++Builder containing a package.
+Bundle – a Macintosh plugin created with Xcode or make which holds executable code, data files, and folders for that code.
+CLASS – Compiled Java bytecode
+COFF – (no suffix for executable image, .o for object files) Unix Common Object File Format, now often superseded by ELF
+COM – Simple executable format used by CP/M and DOS.
+DCU – Delphi compiled unit
+DLL – Dynamic library used in Windows and OS/2 to store data, resources and code.
+DOL – the format used by the GameCube and Wii, short for Dolphin, which was the codename of the GameCube.
+EAR – archives of Java enterprise applications
+ELF – (no suffix for executable image, .o for object files, .so for shared object files) used in many modern Unix and Unix-like systems, including Solaris, other System V Release 4 derivatives, Linux, and BSD)
+EXE – DOS executable (.exe: used in DOS)
+EXE – New Executable (used in multitasking ("European") MS-DOS 4.0, 16-bit Microsoft Windows, and OS/2)
+EXE – Portable Executable used in Microsoft Windows and some other systems
+IPA – file extension for Apple iOS application executable file. Another form of zip file.
+JAR – archives of Java class files
+JEFF – a file format allowing execution directly from static memory[18]
+KO – Loadable kernel module
+LIB – a static library on Microsoft platforms
+LIST – variable list
+Mach-O – (no suffix for executable image, .o for object files, .dylib and .bundle for shared object files) Mach-based systems, notably native format of macOS, iOS, iPadOS, watchOS, tvOS and visionOS
+NLM – NetWare Loadable Module the native 32-bit binaries compiled for Novell's NetWare Operating System (versions 3 and newer)
+O – un-linked object files directly from the compiler
+OBJ – object file on Windows
+RLL – used in Microsoft operating systems together with a DLL file to store program resources
+S1ES – Executable used for S1ES learning system.
+SO – shared library, typically ELF
+VAP – Value Added Process the native 16-bit binaries compiled for Novell's NetWare Operating System (version 2, NetWare 286, Advanced NetWare, etc.)
+WAR – an archive of a Java Web application
+XAP – Windows Phone package
+XBE – XBE is Xbox executable
+XCOFF – (no suffix for executable image, .o for object files, .a for shared object files) extended COFF, used in AIX
+XEX – XEX is Xbox 360 executable
+XPI – PKZIP archive that can be run by Mozilla web browsers to install software.
+XSD – XML Schema Definition, used for planning and organizing XML documents.
+Object extensions:
+
+OCX – Object Control extension
+TLB – Windows Type Library
+VBX – Visual Basic extension
+Page description language
+For a more comprehensive list, see List of page description languages.
+DVI – DVI are Device independent format
+EGT – Universal Document can be used to store CSS type styles
+PLD – PLD are PhotoLine Document files
+PCL – PCL Manages printer language
+PDF – PDF are Portable Document Format
+PS, GZ – PostScript [clarification needed]
+SNP – SNP are Microsoft Access Report Snapshot
+XPS – XPS
+XSL-FO – XSL-FO (Formatting Objects)
+Configurations, Metadata
+CSS – CSS are Cascading Style Sheets
+XSLT, XSL – XML Style Sheet
+TPL – Web template
+Personal information manager
+Main article: Personal information manager
+MNB – MyInfo notebook
+MSG – Microsoft Outlook task manager
+ORG – Lotus Organizer PIM package
+ORG – Emacs Org-Mode Mindmanager, contacts, calendar, email-integration
+PST, OST – Microsoft Outlook email communication
+SC2 – Microsoft Schedule+ calendar
+Presentation
+GSLIDES – Google Drive Presentation
+KEY, KEYNOTE – Apple Keynote Presentation
+NB – Mathematica Slideshow
+NBP – Mathematica Player slideshow
+ODP – OpenDocument Presentation
+OTP – OpenDocument Presentation template
+PEZ – Prezi Desktop Presentation
+POT – Microsoft PowerPoint template
+PRDX – SoftMaker Presentations
+PPS – Microsoft PowerPoint Show
+PPT – Microsoft PowerPoint Presentation
+PPTX – Office Open XML Presentation, there are at least 4 quite different versions of Microsoft's PPTX: 1) ECMA-376, 2)ISO/IEC 29500 Transitional, 3) ISO/IEC 29500 Strict, 4) Microsoft-specific Compatibility Modes.
+PRZ – Lotus Freelance Graphics
+SDD – StarOffice's StarImpress
+SHF – ThinkFree Show
+SHOW – Haansoft(Hancom) Presentation software document
+SHW – Corel Presentations slide show creation
+SLP – Logix-4D Manager Show Control Project
+SSPSS – SongShow Plus Slide Show
+STI – OpenOffice.org XML (obsolete) Presentation template
+SXI – OpenOffice.org XML (obsolete) Presentation
+THMX – Microsoft Office theme template
+WATCH – Dataton Watchout Presentation
+Project management software
+Main article: Project management software
+MPP – Microsoft Project
+Reference management software
+Main article: Reference management software
+Formats of files used for bibliographic information (citation) management.
+
+BIB – BibTeX
+ENL – EndNote
+RIS – Research Information Systems RIS (file format)
+Scientific data (data exchange)
+FITS – Flexible Image Transport System, a standard data format for astronomy
+Silo – a storage format for visualization developed at Lawrence Livermore National Laboratory
+SPC – SPC, spectroscopic data
+EAS3 – binary format for structured data
+EOSSA – Electro-Optic Space Situational Awareness format
+OST – (Open Spatio-Temporal) extensible, mainly images with related data, or just pure data; meant as an open alternative for microscope images
+CCP4 – CCP4, X-ray crystallography voxels (electron density)
+MRC – MRC, voxels in cryo-electron microscopy
+HITRAN – spectroscopic data with one optical/infrared transition per line in the ASCII file (.hit)
+ROOT – hierarchical platform-independent compressed binary format used by ROOT
+SDF – Simple Data Format (SDF), a platform-independent, precision-preserving binary data I/O format capable of handling large, multi-dimensional arrays.
+MYD – Everfine LEDSpec software file for LED measurements
+CSDM – (Core Scientific Dataset Model) model for multi-dimensional and correlated datasets from various spectroscopies, diffraction, microscopy, and imaging techniques (.csdf, .csdfe).[19]
+Multi-domain
+NetCDF – Network common data format
+HDR, HDF, h4, h5 – Hierarchical Data Format
+SDXF – SDXF, (Structured Data Exchange Format)
+CDF – Common Data Format
+CGNS – CGNS, CFD General Notation System
+FMF – Full-Metadata Format
+Meteorology
+GRIB – Grid in Binary, WMO format for weather model data
+BUFR – WMO format for weather observation data
+PP – UK Met Office format for weather model data
+NASA-Ames – Simple text format for observation data. First used in aircraft studies of the atmosphere.
+Chemistry
+Main article: chemical file format
+CML – Chemical Markup Language (CML) (.cml)
+MOL, SD, SDF – Chemical table file (CTab)
+DX, JDX – Joint Committee on Atomic and Molecular Physical Data (JCAMP)
+SMI – Simplified molecular input line entry specification (SMILES)
+Mathematics
+G6, S6 – graph6, sparse6, ASCII encoding of Adjacency matrices
+Biology
+Molecular biology and bioinformatics:
+
+AB1 – In DNA sequencing, chromatogram files used by instruments from Applied Biosystems
+ACE – A sequence assembly format
+ASN.1 – Abstract Syntax Notation One, is an International Standards Organization (ISO) data representation format used to achieve interoperability between platforms. NCBI uses ASN.1 for the storage and retrieval of data such as nucleotide and protein sequences, structures, genomes, and PubMed records.
+BAM – Binary Alignment/Map format (compressed SAM format)
+BCF – Binary compressed VCF format
+BED – The browser extensible display format is used for describing genes and other features of DNA sequences
+CAF – Common Assembly Format for sequence assembly
+CRAM – compressed file format for storing biological sequences aligned to a reference sequence
+DDBJ – The flatfile format used by the DDBJ to represent database records for nucleotide and peptide sequences from DDBJ databases.
+EMBL – The flatfile format used by the EMBL to represent database records for nucleotide and peptide sequences from EMBL databases.
+FASTA – The FASTA format, for sequence data. Sometimes also given as FNA or FAA (Fasta Nucleic Acid or Fasta Amino Acid).
+FASTQ – The FASTQ format, for sequence data with quality. Sometimes also given as QUAL.
+GCPROJ – The Genome Compiler project. Advanced format for genetic data to be designed, shared and visualized.
+GenBank – The flatfile format used by the NCBI to represent database records for nucleotide and peptide sequences from the GenBank and RefSeq databases
+GFF – The General feature format is used to describe genes and other features of DNA, RNA, and protein sequences
+GTF – The Gene transfer format is used to hold information about gene structure
+MAF – The Multiple Alignment Format stores multiple alignments for whole-genome to whole-genome comparisons [1]
+NCBI – Structured ASN.1 format used at National Center for Biotechnology Information for DNA and protein data
+NEXUS – The Nexus file encodes mixed information about genetic sequence data in a block structured format
+NeXML – XML format for phylogenetic trees
+NWK – The Newick tree format is a way of representing graph-theoretical trees with edge lengths using parentheses and commas and useful to hold phylogenetic trees.
+PDB – structures of biomolecules deposited in Protein Data Bank, also used to exchange protein and nucleic acid structures
+PHD – Phred output, from the base-calling software Phred
+PLN – Protein Line Notation used in proteax software specification
+SAM – SAM, Sequence Alignment Map format, in which the results of the 1000 Genomes Project will be released
+SBML – The Systems Biology Markup Language is used to store biochemical network computational models
+SCF – Staden chromatogram files used to store data from DNA sequencing
+SFF – Standard Flowgram Format
+SRA – format used by the National Center for Biotechnology Information Short Read Archive to store high-throughput DNA sequence data
+Stockholm – The Stockholm format for representing multiple sequence alignments
+Swiss-Prot – The flatfile format used to represent database records for protein sequences from the Swiss-Prot database
+VCF – Variant Call Format, a standard created by the 1000 Genomes Project that lists and annotates the entire collection of human variants (with the exception of approximately 1.6 million variants).
+Biomedical imaging
+DCM – Digital Imaging and Communications in Medicine (DICOM)
+NIfTI – Neuroimaging Informatics Technology Initiative
+NII – single-file (combined data and meta-data) style
+NII.GZ – gzip-compressed, used transparently by some software, notably the FMRIB Software Library (FSL)
+GII – single-file (combined data and meta-data) style; NIfTI offspring for brain surface data
+IMG, HDR – dual-file (separate data and meta-data, respectively) style
+IMG, HDR – Analyze data, meta-data
+BRIK, HEAD – AFNI data, meta-data
+MGH – uncompressed, Massachusetts General Hospital imaging format, used by the FreeSurfer brain analysis package
+MGZ – zip-compressed, Massachusetts General Hospital imaging format, used by the FreeSurfer brain analysis package
+MINC – Medical Imaging NetCDF format
+MNC – previously based on NetCDF; since version 2.0, based on HDF5
+Biomedical signals (time series)
+ACQ – AcqKnowledge format for Windows/PC from Biopac Systems Inc., Goleta, CA, USA
+ADICHT – LabChart format from ADInstruments Pty Ltd, Bella Vista NSW, Australia
+BCI2000 – The BCI2000 project, Albany, NY, USA
+BDF – BioSemi data format from BioSemi B.V. Amsterdam, Netherlands
+BKR – The EEG data format developed at the University of Technology Graz, Austria
+CFWB – Chart Data Format from ADInstruments Pty Ltd, Bella Vista NSW, Australia
+DICOM – Waveform An extension of Dicom for storing waveform data
+ecgML – A markup language for electrocardiogram data acquisition and analysis
+EDF, EDF+ – European Data Format
+FEF – File Exchange Format for Vital signs, CEN TS 14271
+GDF – The General Data Format for biomedical signals
+HL7aECG – Health Level 7 v3 annotated ECG
+MFER – Medical waveform Format Encoding Rules
+OpenXDF – Open Exchange Data Format from Neurotronics, Inc., Gainesville, FL, USA
+SCP-ECG – Standard Communication Protocol for Computer assisted electrocardiography EN1064:2007
+SIGIF – A digital SIGnal Interchange Format with application in neurophysiology
+WFDB – Format of Physiobank
+XDF – eXtensible Data Format
+Other biomedical formats
+HL7 – Health Level 7, a framework for exchange, integration, sharing, and retrieval of health information electronically
+xDT – a family of data exchange formats for medical records
+Biometric formats
+CBF – Common Biometric Format, based on CBEFF 2.0 (Common Biometric ExFramework).
+EBF – Extended Biometric Format, based on CBF but with S/MIME encryption support and semantic extensions
+CBFX – XML Common Biometric Format, based upon XCBF 1.1 (OASIS XML Common Biometric Format)
+EBFX – XML Extended Biometric Format, based on CBFX but with W3C XML Encryption support and semantic extensions
+Source code
+This section covers source code files for all programming languages regardless of whether used with a compiler or an interpreter or used for scripting.
+
+A – an external file extension for C/C++
+ADB – Ada body
+ADS – Ada specification
+AHK – AutoHotkey script file
+APPLESCRIPT – applescript: see SCPT
+AS – Adobe Flash ActionScript File
+AU3 – AutoIt version 3
+AWK – AWK
+B – (B file) Similar to .a, but less compressed.
+BAS – QBasic & QuickBASIC
+BAT – Batch file
+BTM – Batch file
+C – C
+CIA – Nintendo 3DS Software Installation File, short for "CTR Importable Archive"
+CJS – JavaScript CommonJS module
+CLASS – Compiled Java binary
+CLJS – ClojureScript
+CLS – ooRexx class file
+CMD – Batch file
+command – A shell script, specifically associated with the Terminal on macOS
+Coffee – CoffeeScript
+CPP – C++
+CS – C#
+DART – Dart (programming language)
+EBUILD – Gentoo Linux's portage package.
+EGG – Chicken
+EGT – EGT Asterisk Application Source File, EGT Universal Document
+ERB – Embedded Ruby, Ruby on Rails Script File
+FS – F#
+GO – Go
+GD – GDscript (Godot)
+HC – HolyC source code file
+HTA – HTML Application
+HX – Haxe source code file
+HXML – Haxe project configuration file
+IBI – Icarus script
+ICI – ICI
+IJS – J script
+INO – Arduino sketch (program)
+IPYNB – IPython Notebook
+ITCL – Itcl
+JS – JavaScript and JScript
+JSFL – Adobe JavaScript language
+JSX – JSX (JavaScript)
+KT – Kotlin
+LUA – Lua
+M – Mathematica package file
+MJS – JavaScript ECMAScript Module
+MRC – mIRC Script
+NCF – NetWare Command File[20][21] (scripting for Novell's NetWare OS)
+NQP – Raku language Not Quite Perl, or Raku bootstrapping language[22]
+NUC – compiled script
+NUD – C++ External module written in C++
+NUT – Squirrel
+O – Compiled and optimized C/C++ binary
+PDE – Processing (programming language), Processing script
+PHP – PHP
+PHP? – PHP (? = version number)
+PL – Perl
+PM – Perl module
+PS1 – Windows PowerShell shell script
+PS1XML – Windows PowerShell format and type definitions
+PSC1 – Windows PowerShell console file
+PSD1 – Windows PowerShell data file
+PSM1 – Windows PowerShell module file
+PY – Python
+PYC – Python byte code files
+PYO – Python
+R – R scripts
+R – REBOL scripts
+RAKU – Raku language Raku script (compiled into memory)[22]
+RAKUDOC – Raku language Raku documentation file (a slang or sublanguage of Raku)
+RAKUMOD – Raku language Raku module (precompiled)
+RAKUTEST – Raku language Unit test files in Raku
+RB – Ruby
+RDP – RDP connection
+RED – Red scripts
+REX, REXX – Rexx and ooRexx script file
+RS – Rust (programming language)
+RXS, REXG, REXP – ooRexx script file
+SB, SB2, SB3 – Scratch Project file
+SCPT – Applescript
+SCPTD – See SCPT.
+SDL – State Description Language
+SH – Shell script
+SPRITE3 – Scratch 3.0 exported sprite file
+SPWN – SPWN source file
+SVELTE – Svelte component
+SYJS – SyMAT JavaScript
+SYPY – SyMAT Python
+TCL – Tcl
+TNS – Ti-Nspire Code/File
+TS – TypeScript
+TSCN – Used to store Godot scenes
+TSX – TypeScript JSX equivalent
+UP − Pocket Up project
+VBS – Visual Basic Script
+VUE – Vue.js component
+WASM – WebAssembly compiled binary
+WAT – WebAssembly source code file
+XAML – Used in programs like Visual Studio to create exe files.
+XPL – XProc script/pipeline
+Security
+Authentication and general encryption formats are listed here.
+
+OMF – OpenPGP Message Format used by Pretty Good Privacy, GNU Privacy Guard, and other OpenPGP software; can contain keys, signed data, or encrypted data; can be binary or text ("ASCII armored")
+Certificates and keys
+GXK – Galaxkey, an encryption platform for authorized, private and confidential email communication[citation needed]
+SSH – OpenSSH private key, Secure Shell private key; format generated by ssh-keygen or converted from PPK with PuTTYgen[23][24][25]
+PUB – OpenSSH public key, Secure Shell public key; format generated by ssh-keygen or PuTTYgen[23][24][25]
+PPK – PuTTY private key, Secure Shell private key, in the format generated by PuTTYgen instead of the format used by OpenSSH[23][24][25]
+nSign – nSign public key nSign public key in a custom format[26]
+X.509
+CER, CRT, DER – Distinguished Encoding Rules stores certificates
+P7B, P7C – PKCS#7 SignedData commonly appears without main data, just certificates or certificate revocation lists (CRLs)
+P12, PFX – PKCS#12 can store public certificates and private keys
+PEM – Privacy-enhanced Electronic Mail: full format not widely used, but often used to store Distinguished Encoding Rules in Base64 format
+PFX – Microsoft predecessor of PKCS#12
+Encrypted files
+This section shows file formats for encrypted general data, rather than a specific program's data.
+
+AXX – Encrypted file, created with AxCrypt
+EEA – An encrypted CAB, ostensibly for protecting email attachments
+TC – Virtual encrypted disk container, created by TrueCrypt
+KODE – Encrypted file, created with KodeFile
+nSignE – An encrypted private key, created by nSign[26]
+Password files
+Password files (sometimes called keychain files) contain lists of other passwords, usually encrypted.
+
+BPW – Encrypted password file created by Bitser password manager
+KDB – KeePass 1 database
+KDBX – KeePass 2 database
+Signal data (non-audio)
+ACQ – AcqKnowledge format for Windows/PC from Biopac
+ADICHT – LabChart format from ADInstruments
+BKR – The EEG data format developed at the University of Technology Graz
+BDF, CFG – Configuration file for Comtrade data
+CFWB – Chart Data format from ADInstruments
+DAT – Raw data file for Comtrade data
+EDF – European data format
+FEF – File Exchange Format for Vital signs
+GDF – General data formats for biomedical signals
+GMS – Gesture And Motion Signal format
+IROCK – intelliRock Sensor Data File Format
+MFER – Medical waveform Format Encoding Rules
+SAC – Seismic Analysis Code, earthquake seismology data format[27]
+SCP-ECG – Standard Communication Protocol for Computer assisted electrocardiography
+SEED, MSEED – Standard for the Exchange of Earthquake Data, seismological data and sensor metadata[28]
+SEGY – Reflection seismology data format
+SIGIF – SIGnal Interchange Format
+WIN, WIN32 – NIED/ERI seismic data format (.cnt)[29]
+Sound and music
+See also: List of audio file formats
+Lossless audio
+Uncompressed
+8SVX – Commodore-Amiga 8-bit sound (usually in an IFF container)
+16SVX – Commodore-Amiga 16-bit sound (usually in an IFF container)
+AIFF, AIF, AIFC – Audio Interchange File Format
+AU – Simple audio file format introduced by Sun Microsystems
+AUP3 – Audacity's file for when you save a song
+BWF – Broadcast Wave Format, an extension of WAVE
+CDDA – Compact Disc Digital Audio
+DSF, DFF – Direct Stream Digital audio file, also used in Super Audio CD
+RAW – Raw samples without any header or sync
+WAV – Microsoft Wave
+CWAV – file read by the Nintendo 3DS for Home-screen sound effects
+QAU, QUEYEAUDIO - Queye Audio file, adapted from WAVE with specific metadata, generally for artists to submit music to their labels.
+QAU0 - Proprietary version of the Queye Audio file, without metadata.
+Compressed
+RA, RM – RealAudio format
+FLAC – Free lossless codec of the Ogg project
+LA – Lossless audio
+PAC – LPAC
+APE – Monkey's Audio
+OFR, OFS, OFF – OptimFROG
+RKA – RKAU
+SHN – Shorten
+TAK – Tom's Lossless Audio Kompressor[30]
+THD – Dolby TrueHD
+TTA – Free lossless audio codec (True Audio)
+WV – WavPack
+WMA – Windows Media Audio 9 Lossless
+BCWAV – Nintendo 3DS Home-screen BGM file
+BRSTM – Binary Revolution Stream[31]
+DTS, DTSHD, DTSMA – DTS (sound system)
+AST – Nintendo Audio Stream
+AW – Nintendo Audio Sample used in first-party games
+PSF – Portable Sound Format, PlayStation variant (originally PlayStation Sound Format)
+Lossy audio
+AC3 – Usually used for Dolby Digital tracks
+AMR – For GSM and UMTS based mobile phones
+MP1 – MPEG Layer 1
+MP2 – MPEG Layer 2
+MP3 – MPEG Layer 3
+SPX – Speex (Ogg project, specialized for voice, low bitrates)
+GSM – GSM Full Rate, originally developed for use in mobile phones
+WMA – Windows Media Audio
+AAC – Advanced Audio Coding (usually in an MPEG-4 container)
+MPC – Musepack
+VQF – Yamaha TwinVQ
+OTS – Audio File (similar to MP3, with more data stored in the file and slightly better compression; designed for use with OtsLabs' OtsAV)
+SWA – Adobe Shockwave Audio (Same compression as MP3 with additional header information specific to Adobe Director)
+VOX – Dialogic ADPCM Low Sample Rate Digitized Voice
+VOC – Creative Labs Soundblaster Creative Voice 8-bit & 16-bit Also output format of RCA Audio Recorders
+DWD – DiamondWare Digitized
+SMP – Turtlebeach SampleVision
+OGG – Ogg Vorbis
+Tracker modules and related
+MOD – Soundtracker and Protracker sample and melody modules
+MT2 – MadTracker 2 module
+S3M – Scream Tracker 3 module
+XM – Fast Tracker module
+IT – Impulse Tracker module
+SNG – Goat Tracker module
+NSF – NES Sound Format
+MID, MIDI – Standard MIDI file; most often just notes and controls but occasionally also sample dumps (.mid, .rmi)
+FTM – FamiTracker Project file
+BTM – BambooTracker Project file
+FUR – Furnace Tracker Project file
+Sheet music files
+ABC – ABC Notation sheet music file
+DARMS – DARMS File Format also known as the Ford-Columbia Format
+ETF – Enigma Transportation Format abandoned sheet music exchange format
+GP – Guitar Pro sheet music and tablature file
+KERN – Kern File Format sheet music file
+LY – LilyPond sheet music file
+MEI – Music Encoding Initiative file format that attempts to encode all musical notations
+MIDI – MIDI file format that is a music sheet for instruments
+MUS, MUSX – Finale sheet music file
+MXL, XML – MusicXML standard sheet music exchange format
+MSCX, MSCZ – MuseScore sheet music file
+SMDL – Standard Music Description Language sheet music file
+SIB – Sibelius sheet music file
+Other file formats pertaining to audio
+ASF – Advanced Systems Format
+CUST – DeliPlayer custom sound format
+GYM – Genesis YM2612 log
+JAM – Jam music format
+MNG – Background music for the Creatures game series, starting from Creatures 2
+NIFF – Notation Interchange File Format
+PTB – Power Tab Editor tab
+PVD – Portable Voice Document used for Oaisys & Mitel call recordings
+RMJ – RealJukebox Media used for RealPlayer
+SF2 – Polyphone Soundfont 2
+SF3 – Polyphone Soundfont 3
+SF4 – Polyphone Soundfont 4
+SID – Sound Interface Device – Commodore 64 instructions to play SID music and sound effects
+SPC – Super NES sound format
+TXM – Track ax media
+VGM – Stands for "Video Game Music", log for several different chips
+YM – Atari ST/Amstrad CPC YM2149 sound chip format
+Playlist formats
+AIMPPL – AIMP Playlist format
+ASX – Advanced Stream Redirector
+RAM – Real Audio Metafile For RealAudio files only.
+XPL – HDi playlist
+XSPF – XML Shareable Playlist Format
+ZPL – Groove Music Playlist format from Microsoft
+M3U – Multimedia playlist file
+PLS – Multimedia playlist, originally developed for use with the museArc
+QAUA – "Queye Audio Album", set of Queye Audio files with album metadata.
+Audio editing and music production
+ALS – Ableton Live set
+ALC – Ableton Live clip
+ALP – Ableton Live pack
+ATMOS, AUDIO, METADATA – Dolby Atmos Rendering and Mastering related file
+AUP – Audacity project file
+AUP3 – Audacity 3.0 project file
+BAND – GarageBand project file
+CEL – Adobe Audition loop file (Cool Edit Loop)
+CAU – Caustic project file
+CPR – Steinberg Cubase project file
+CWP – Cakewalk by BandLab project file
+DRM – Steinberg Cubase drum file
+DWP – DirectWave Sampler Instrument file (mainly used for FL Studio Mobile)
+DMKIT – Image-Line's Drumaxx drum kit file
+ENS – Native Instruments Reaktor Ensemble
+FLM – Image Line FL Studio Mobile project file
+FLP – Image Line FL Studio project file
+GRIR – Native Instruments Komplete Guitar Rig Impulse Response
+LOGIC – Logic Pro X project file
+MMP – LMMS project file (alternatively MMPZ for compressed formats)
+MMR – MAGIX Music Maker project file
+MX6HS – Mixcraft 6 Home Studio project file
+NPR – Steinberg Nuendo project file
+OMF, OMFI – Open Media Framework Interchange OMFI succeeds OMF (Open Media Framework)
+PTX – Pro Tools 10 or later project file
+PTF – Pro Tools 7 up to Pro Tools 9 project file
+PTS – Legacy Pro Tools project file
+RIN – Soundways RIN-M file containing sound recording participant credits and song information
+RPP, RPP-BAK – REAPER project file
+REAPEAKS – REAPER peak (waveform cache) file
+SES – Adobe Audition multitrack session file
+SFK – Sound Forge waveform cache file
+SFL – Sound Forge sound file
+SNG – MIDI sequence file (MidiSoft, Korg, etc.) or n-Track Studio project file
+STF – StudioFactory project file. It contains all necessary patches, samples, tracks and settings to play the file
+SND – Akai MPC sound file
+SYN – SynFactory project file. It contains all necessary patches, samples, tracks and settings to play the file
+UST – Utau Editor sequence excluding wave-file
+USTX – OpenUtau project file
+VCLS – VocaListener project file
+VPR – Vocaloid 5 Editor sequence excluding wave-file
+VSQ – Vocaloid 2 Editor sequence excluding wave-file
+VSQX – Vocaloid 3 & 4 Editor sequence excluding wave-file
+Recorded television formats
+DVR-MS – Windows XP Media Center Edition's Windows Media Center recorded television format
+WTV – Windows Vista's and up Windows Media Center recorded television format
+Source code for computer programs
+ADA, ADB, 2.ADA – Ada (body) source
+ADS, 1.ADA – Ada (specification) source
+ASM, S – Assembly language source
+BAS – BASIC, FreeBASIC, Visual Basic, BASIC-PLUS source,[17] PICAXE basic
+BB – Blitz Basic Blitz3D
+BMX – Blitz Basic BlitzMax
+C – C source
+CLJ – Clojure source code
+CLS – Visual Basic class
+COB, CBL – COBOL source
+CPP, CC, CXX, C, CBP – C++ source
+CS – C# source
+CSPROJ – C# project (Visual Studio .NET)
+D – D source
+DBA – DarkBASIC source
+DBPro123 – DarkBASIC Professional project
+E – Eiffel source
+EFS – EGT Forever Source File
+EGT – EGT Asterisk Source File, could be J, C#, VB.net, EF 2.0 (EGT Forever)
+EL – Emacs Lisp source
+FOR, FTN, F, F77, F90 – Fortran source
+FRM – Visual Basic form
+FRX – Visual Basic form stash file (binary form file)
+FTH – Forth source
+GED – Game Maker Extension Editable file as of version 7.0
+GM6 – Game Maker Editable file as of version 6.x
+GMD – Game Maker Editable file up to version 5.x
+GMK – Game Maker Editable file as of version 7.0
+GML – Game Maker Language script file
+GO – Go source
+H – C/C++ header file
+HPP, HXX – C++ header file
+HS – Haskell source
+I – SWIG interface file
+INC – Turbo Pascal included source
+JAVA – Java source
+JS – JavaScript source
+L – lex source
+LGT – Logtalk source
+LISP – Common Lisp source
+M – Objective-C source
+M – MATLAB
+M – Mathematica
+MAP – CodeWarrior linker file
+M4 – m4 source
+ML – Standard ML and OCaml source
+MSQR – M² source file, created by Mattia Marziali
+N – Nemerle source
+NB – Nuclear Basic source
+P – Parser source
+PAS, PP, P – Pascal source (DPR for projects)
+PHP, PHP3, PHP4, PHP5, PHPS, Phtml – PHP source
+PIV – Pivot stickfigure animator
+PL, PM – Perl
+PLI, PL1 – PL/I
+PRG – Ashton-Tate; dbII, dbIII and dbIV, db, db7, clipper, Microsoft Fox and FoxPro, harbour, xharbour, and Xbase
+PRO – IDL
+POL – Apcera Policy Language doclet
+PY – Python source
+R – R source
+raku, rakumod, rakudoc, rakutest, nqp – Raku Language
+RED – Red source
+REDS – Red/System source
+RB – Ruby source
+RESX – Resource file for .NET applications
+RC, RC2 – Resource script files to generate resources for .NET applications
+RKT, RKTL – Racket source
+RS – Rust source
+Resources – Visual Studio Code
+S – CodeWarrior / PowerPC ASM
+SCALA – Scala source
+SCI, SCE – Scilab
+SCM – Scheme source
+SD7 – Seed7 source
+SKB, SKC – Sage Retrieve 4GL Common Area (Main and Amended backup)
+SKD – Sage Retrieve 4GL Database
+SKF, SKG – Sage Retrieve 4GL File Layouts (Main and Amended backup)
+SKI – Sage Retrieve 4GL Instructions
+SKK – Sage Retrieve 4GL Report Generator
+SKM – Sage Retrieve 4GL Menu
+SKO – Sage Retrieve 4GL Program
+SKP, SKQ – Sage Retrieve 4GL Print Layouts (Main and Amended backup)
+SKS, SKT – Sage Retrieve 4GL Screen Layouts (Main and Amended backup)
+SKZ – Sage Retrieve 4GL Security File
+SLN – Visual Studio solution
+SPIN – Spin source (for Parallax Propeller microcontrollers)
+STK – Stickfigure file for Pivot stickfigure animator
+SWG – SWIG source code
+TCL – Tcl source code
+VAP – Visual Studio Analyzer project
+VB – Visual Basic.NET source
+VBG – Visual Studio compatible project group
+VBP, VIP – Visual Basic project
+VBPROJ – Visual Basic .NET project
+VCPROJ – Visual C++ project
+VDPROJ – Visual Studio deployment project
+XPL – XProc script/pipeline
+XQ – XQuery file
+XSL – XSLT stylesheet
+Y – yacc source
+Spreadsheet
+123 – Lotus 1-2-3
+AB2 – Abykus worksheet
+AB3 – Abykus workbook
+AWS – Ability Spreadsheet
+BCSV – Nintendo proprietary table format
+CLF – ThinkFree Calc
+CELL – Haansoft(Hancom) SpreadSheet software document
+CSV – Comma-Separated Values
+GSHEET – Google Drive Spreadsheet
+numbers – Apple Numbers Spreadsheet
+gnumeric – Gnumeric spreadsheet, a gziped XML file
+LCW – Lucid 3-D
+ODS – OpenDocument spreadsheet
+OTS – OpenDocument spreadsheet template
+QPW – Quattro Pro spreadsheet
+PMDX – SoftMaker PlanMaker
+SDC – StarOffice StarCalc Spreadsheet
+SLK – SYLK (SYmbolic LinK)
+STC – OpenOffice.org XML (obsolete) Spreadsheet template
+SXC – OpenOffice.org XML (obsolete) Spreadsheet
+TAB – tab delimited columns; also TSV (Tab-Separated Values)
+TXT – text file
+VC – Visicalc
+WK1 – Lotus 1-2-3 up to version 2.01
+WK3 – Lotus 1-2-3 version 3.0
+WK4 – Lotus 1-2-3 version 4.0
+WKS – Lotus 1-2-3
+WKS – Microsoft Works
+WQ1 – Quattro Pro DOS version
+XLK – Microsoft Excel worksheet backup
+XLS – Microsoft Excel worksheet sheet (97–2003)
+XLSB – Microsoft Excel binary workbook
+XLSM – Microsoft Excel Macro-enabled workbook
+XLSX – Office Open XML worksheet sheet, there are at least 4 quite different versions of Microsoft's XLSX: 1) ECMA-376, 2)ISO/IEC 29500 Transitional, 3) ISO/IEC 29500 Strict, 4) Microsoft-specific Compatibility Modes.
+XLR – Microsoft Works version 6.0
+XLT – Microsoft Excel worksheet template
+XLTM – Microsoft Excel Macro-enabled worksheet template
+XLW – Microsoft Excel worksheet workspace (version 4.0)
+Tabulated data
+TSV – Tab-separated values
+CSV – Comma-separated values
+DB – databank format; accessible by many econometric applications
+DIF – accessible by many spreadsheet applications
+Video
+Main article: video file format
+3GP – the most common video format for cell phones
+AAF – mostly intended to hold edit decisions and rendering information, but can also contain compressed media essence
+AT3 – Sony's UMD data compression
+GIF – Animated GIF (simple animation; until recently often avoided because of patent problems)
+ASF – container (enables any form of compression to be used; MPEG-4 is common; video in ASF-containers is also called Windows Media Video (WMV))
+AVCHD – Advanced Video Codec High Definition
+AVI – container (a shell, which enables any form of compression to be used)
+BIK – Bink Video file. A video compression system developed by RAD Game Tools
+BRAW – a high bitrate video format used by Blackmagic Design cameras.
+CAM – aMSN webcam log file
+COLLAB – Blackboard Collaborate session recording
+DAT – video standard data file (automatically created when we attempted to burn as video file on the CD)
+DVR-MS – Windows XP Media Center Edition's Windows Media Center recorded television format
+FLV – Flash video (encoded to run in a flash animation)
+GMV - Video format used on the iBall DAViD (seen in this DankPods YouTube video)
+MPEG-1 – M1V Video
+MPEG-2 – M2V Video
+NOA – rare movie format use in some Japanese eroges around 2002
+FLA – Adobe Flash (for producing)
+FLR – (text file which contains scripts extracted from SWF by a free ActionScript decompiler named FLARE)
+SOL – Adobe Flash shared object ("Flash cookie")
+STR – Sony PlayStation video stream
+M4V – video container file format developed by Apple
+MKV – Matroska Matroska is a container format, which enables any video format such as MPEG-4 ASP or AVC to be used along with other content such as subtitles and detailed meta information
+WRAP – MediaForge (*.wrap)
+MNG – mainly simple animation containing PNG and JPEG objects, often somewhat more complex than animated GIF
+MOV – QuickTime container which enables any form of compression to be used; Sorenson codec is the most common; QTCH is the filetype for cached video and audio streams
+MPEG, MPG, MPE – MPEG
+THP – Nintendo proprietary movie/video format
+MPEG-4 – MPEG-4 Part 14, shortened "MP4" multimedia container (most often used for Sony's PlayStation Portable and Apple's iPod)
+MXF – Material Exchange Format (standardized wrapper format for audio/visual material developed by SMPTE)
+ROQ – used by Quake III Arena
+NSV – NSV Nullsoft Streaming Video (media container designed for streaming video content over the Internet)
+OGG – container, multimedia
+QMG - Samsung device boot animation
+RM – RealMedia
+SVI – SVI Samsung video format for portable players
+SMK – Smacker video file. A video compression system developed by RAD Game Tools
+SWF – Adobe Flash (for viewing)
+TORRENT – A file that holds information about where data is (used in Bittorrent, uTorrent, qBittorrent, etc)
+WMV – Windows Media Video (See ASF)
+WTV – Windows Vista's and up Windows Media Center recorded television format
+YUV – raw video format; resolution (horizontal x vertical) and sample structure 4:2:2 or 4:2:0 must be known explicitly
+WebM – video file format for web video using HTML5
+Subtitles
+ASS, SSA – ASS (also SSA): a subtitles file created by Aegisub, a video typesetting application (also a Halo game engine file)
+SMI – SMI SAMI Caption file (HTML like subtitle for movie files)
+SRT – SubRip Subtitle – file format for closed captioning or subtitles
+Video editing, production
+BRAW – Blackmagic Design RAW video file name
+DRP – Davinci Resolve 17 project file
+FCP – Final Cut Pro project file
+MSWMM – Windows Movie Maker project file
+PDS – Cyberlink PowerDirector project
+PPJ, PRPROJ – Adobe Premiere Pro video editing file
+AEP – Adobe After Effects video editing file
+IMOVIEPROJ – iMovie project file
+VEG, VEG-BAK – Sony Vegas project file
+SUF – Sony camera configuration file (setup.suf) produced by XDCAM-EX camcorders
+WLMP – Windows Live Movie Maker project file
+KDENLIVE – Kdenlive project file
+VPJ – VideoPad project file
+MOTN – Apple Motion project file
+IMOVIEMOBILE – iMovie project file for iOS users
+WFP, WVE – Wondershare Filmora Project
+VPROJ – VSDC Free Video Editor project file
+Video game data
+List of common file formats of data for video games on systems that support filesystems, most commonly PC games.
+
+osu!
+These formats are used by the video game osu!.
+
+OSB – storyboard data
+OSC – osu!stream combined stream data
+OSF2 – free osu!stream song file
+OSG – compressed live gameplay archive (optimized for spectating)
+OSK – compressed skin archive
+OSR – compressed replay archive
+OSU – beatmap data
+OSZ – compressed beatmap archive
+OSZ2 – paid osu!stream song file
+Minecraft
+These formats are used by the video game Minecraft.
+
+MCADDON – Bedrock Edition add-ons and resource packs
+MCFUNCTION – functions/scripts
+MCMETA – customizable texture packs
+MCPACK – Bedrock Edition in-game texture packs and full add-ons
+MCR – data for in-game worlds before version 1.2
+MCTEMPLATE – Bedrock Edition world templates
+MCWORLD – Bedrock Edition in-game worlds
+MCA – format used by Java Edition for storing data for in-game worlds[32]
+NBT – format used by Java Edition for storing program variables along with their (Java) type identifiers
+NBS – used by Note Block Studio, a tool that can be used to make songs with note blocks in-game
+EPK – used by Eaglercraft, an AOT compiled port of Minecraft which has been modified to run under TeaVM, a Java emulator for HTML5 & JavaScript, for saving world data, resource packs, profiles and more.
+TrackMania/Maniaplanet Engine
+Formats used by games based on the TrackMania engine.
+
+GBX – All user-created content is stored in this file type.
+REPLAY.GBX – Stores the replay of a race.
+CHALLENGE.GBX, MAP.GBX – Stores tracks/maps.
+SYSTEMCONFIG.GBX – Launcher info.
+TRACKMANIAVEHICLE.GBX – Info about a certain car type.
+VEHICLETUNINGS.GBX – Vehicle physics.
+SOLID.GBX – A block's model.
+ITEM.GBX – Custom Maniaplanet item.
+BLOCK.GBX – Custom Maniaplanet block.
+TEXTURE.GBX – Info about a texture that are used in materials.
+MATERIAL.GBX – Info about a material such as surface type that are used in Solids.
+TMEDCLASSIC.GBX – Block info.
+GHOST.GBX – Player ghosts in Trackmania and TrackMania Turbo.
+CONTROLSTYLE.GBX – Menu files.
+SCORES.GBX – Stores info about the player's best times.
+PROFILE.GBX – Stores a player's info such as their login.
+DDS – Almost every texture in the game uses this format.
+PAK – Stores environment data such as valid blocks.
+LOC – A locator. Locators allow the game to download content such as car skins from an external server.
+SCRIPT.TXT – Scripts for Maniaplanet such as menus and game modes.
+XML – ManiaLinks.
+Doom engine
+Formats used by games based on the Doom engine.
+
+WAD – Data storage (contains music, maps, and textures)
+DEH – DeHackEd files to mutate the game executable (not officially part of the Doom engine)
+DSG – Saved game
+LMP – A "lump", an entry in a WAD file
+LMP – Saved demo recording
+MUS – Music file (usually contained within a WAD file)
+Quake engine
+Formats used by games based on the Quake engine.
+
+BSP – BSP: (For binary space partitioning) compiled map format
+MAP – MAP: Raw map format used by editors like GtkRadiant or QuArK
+MDL, MD2, MD3, MD5 – MDL/MD2/MD3/MD5: Model for an item used in the game
+PAK, PK2 – PAK/PK2: Data storage
+PK3, PK4 – PK3/PK4: used by the Quake II, Quake III Arena and Quake 4 game engines, respectively, to store game data, textures etc. They are actually .zip files.
+DAT – not specific file type, often generic extension for "data" files for a variety of applications, sometimes used for general data contained within the PK3/PK4 files
+FONTDAT – a DAT file used for formatting game fonts
+ROQ – Video format
+SAV – Savegame/Savefile format
+Unreal Engine
+Formats used by games based on the Unreal engine.
+
+FUK – Map File for Postal 2
+U – Unreal script format
+UASSET – An asset format since Unreal Engine 4/5.
+UAX – Animations format for Unreal Engine 2.
+UMAP – Map file type for Unreal Engine and levels.
+UMX – Map format for Unreal Tournament
+UMX – Music format for Unreal Engine 1
+UNR – Map format for Unreal
+UPK – Package format for cooked content in Unreal Engine 3
+USX – Sound format for Unreal Engine 1 and Unreal Engine 2
+UT2 – Map format for Unreal Tournament 2003 and Unreal Tournament 2004
+UT3 – Map format for Unreal Tournament 3
+UTX – Texture format for Unreal Engine 1 and Unreal Engine 2
+UXX – Cache format; these are files a client downloaded from server (which can be converted to regular formats)
+Duke Nukem 3D Engine
+Formats used by games based on this engine.
+
+DMO – Save game
+GRP – Data storage
+MAP – Map (usually constructed with BUILD.EXE)
+Diablo Engine
+Formats used by Diablo by Blizzard Entertainment.
+
+SV – Save Game
+ITM – Item File
+Real Virtuality Engine
+Formats used by Bohemia Interactive. Operation:Flashpoint, ARMA 2, VBS2
+
+LIP – Format that is created from WAV files to create in-game accurate lip-sync for character animations.
+PBO – Binarized file used for compiled models
+SQF – Format used for general editing
+SQM – Format used for mission files
+Roblox Studio engine
+RBXL – Roblox Studio place file (XML, binary)
+RBXM – Roblox Studio model file (XML, binary)
+RBXLX – Roblox
+Studio place file (exclusively XML)
+RBXMX – Roblox Studio model file (exclusively XML)
+Source engine
+Formats used by Valve. Half-Life 2, Counter-Strike: Source, Day of Defeat: Source, Half-Life 2: Episode One, Team Fortress 2, Half-Life 2: Episode Two, Portal, Left 4 Dead, Left 4 Dead 2, Alien Swarm, Portal 2, Counter-Strike: Global Offensive, Titanfall, Insurgency, Titanfall 2, Day of Infamy
+
+BSP – Source Engine compiled map file
+DEM – Source Engine demo format
+HL2 – Half-Life 2 save format
+MDL – Source Engine model format
+PCF – Source Engine particle effect file
+SAV – Source Engine save format
+SMD – Source Engine uncompiled model format
+VMF – Valve Hammer Map editor raw map file
+VMT – Source Engine material format.
+VMX – Valve Hammer Map editor backup map file
+VPK – Source Engine pack format
+VTF – Source Engine texture format
+Platinum Games engine
+Formats used in Metal Gear Rising: Revengeance, Bayonetta, Vanquish, Nier: Automata
+
+DAT, DTT, EVN, EFF, EFT – Data containers, acts similarly to a folder, but can only have one layer of depth
+WMB – Mesh data
+SCR – Collection of WMBs to makeup levels and scenes.
+WTA – Texture definitions and flags
+WTP – Raw texture data
+WTB – Combination of both WTA and WTP, with WTA first, then WTP after
+TRG – Controls the flow of in-game events and calls functions in code
+BXM – Binary-encoded and compressed XML data
+EST – Effect data for the ESP effects system (used in Metal Gear Rising: Revengeance and Nier: Automata)
+EF2 – Effect data for the EF2 effects system (used in Bayonetta 1)
+MOT – Motion capture animation data
+Pokémon generation V
+CGB – Pokémon Black and White/Black 2 and White 2 C-Gear skins
+Other formats
+ARC – used to store New Super Mario Bros. Wii level data
+B – used for Grand Theft Auto saved game files
+BBSETTINGS – Blockbench settings
+BBTHEME – Blockbench theme
+BBKEYMAP – Blockbench keybindings
+BOL – used for levels on Poing!PC
+DBPF – The Sims 2, DBPF, Package
+DDZ – a file which can only be used by the "daydreamer engine" created by "fever-dreamer", a program similar to RAGS, it's mainly used to make somewhat short games.
+DIVA – Project DIVA timings, element coordinates, MP3 references, notes, animation poses and scores.
+ESM, ESP – Master and Plugin data archives for the Creation Engine
+HAMBU – format used by the Aidan's Funhouse game RGTW for storing map data[33]
+HE0, HE2, HE4 – HE games File
+GCF – format used by the Steam content management system for file archives
+IMG – format used by Renderware-based Grand Theft Auto games for data storage
+JBEAM – format used in BeamNG.Drive to define the physical structure of a vehicle
+LLSP3 – Lego Spike program file
+LOVE – format used by the LOVE2D Engine[34]
+MAP – format used by Halo: Combat Evolved for archive compression, Doom 3, and various other games
+MLOG – A file format intended to be used for Mindustry logic
+MSAV – A file format used to store Mindustry's map and save data.
+MSCH – A file format used to store Mindustry's schematic data.
+MPQ – MPQ Archives used by Blizzard Entertainment
+NL2PKG – NoLimits 2 Package
+OEC – format used by OE-Cake! for scene data storage
+P3D – format for panda3d by Disney
+PLAGUEINC – format used by Plague Inc. for storing custom scenario information[35]
+POD – format used by Terminal Reality
+RAG, RAGS – Game file, a game playable in the RAGS game-engine, a free program which both allows people to create games, and play games, games created have the format "RAG game file"
+RCT – Used for templates and save files in RollerCoaster Tycoon games
+REP – used by Blizzard Entertainment for scenario replays in StarCraft
+RIQ – Used in Heaven Studio to store custom maps
+Simcity, DBPF, DAT, SC4Lot, SC4Model – All game plugins use this format, commonly with different file extensions (Sim City 4)
+SMZIP – ZIP-based package for StepMania songs, themes and announcer packs.
+SOLITAIRETHEME8 – A solitaire theme for Windows solitaire
+UNI, UNIS – Super Mario UniMaker level data
+USLD – format used by Unison Shift to store level layouts.
+VIV – Archive format used to compress data for several video games, including Need for Speed: High Stakes.
+VOL – video game data package
+VVVVVV – format used by VVVVVV
+CPS – format used by The Powder Toy, Powder Toy save
+STM – format used by The Powder Toy, Powder Toy stamp
+PKG – format used by Bungie for the PC Beta of Destiny 2, for nearly all the game's assets.
+CHR – format used by Team Salvato, for the character files of Doki Doki Literature Club!
+Z5 – format used by Z-machine for story files in interactive fiction.
+SCWORLD – format used by Survivalcraft to store sandbox worlds.
+SCSKIN – format used by Survivalcraft to store player skins.
+SCBTEX – format used by Survivalcraft to store block textures.
+PRISON – format used by Prison Architect to save prisons
+ESCAPE – format used by Prison Architect to save escape attempts
+WBFS – (Wii Backup File System)
+GBA – Game Boy Advance ROM File
+JKR – format used by Balatro for data storage
+PSS – Sony PlayStation 2 Game Video file and is used to store audio and video data by games for the PlayStation 2 console.
+FNFC – Friday Night Funkin' Chart File
+ARC – Nintendo U8 Archive (mostly Yaz0 compressed)
+SZS – Nintendo Yaz0 Compressed Archive
+Video game storage media
+List of the most common filename extensions used when a game's ROM image or storage medium is copied from an original read-only memory (ROM) device to an external memory such as hard disk for back up purposes or for making the game playable with an emulator. In the case of cartridge-based software, if the platform specific extension is not used then filename extensions ".rom" or ".bin" are usually used to clarify that the file contains a copy of a content of a ROM. ROM, disk or tape images usually do not consist of one file or ROM, rather an entire file or ROM structure contained within one file on the backup medium.[36]
+
+32X – Sega 32X
+3DS – Nintendo 3DS
+A26 – Atari 2600
+A52 – Atari 5200
+A78 – Atari 7800
+ADF – Amiga (.adf) (for 880K diskette images)
+ADZ – GZip-compressed version of the above.
+BIN – Magnavox Odyssey 2
+CIA – Nintendo 3DS Installation File (for installing games with the use of the FBI homebrew application)
+CRT – (for cartridge images)
+D64 – (for disk images)
+DMS – Disk Masher System, previously used as a disk-archiving system native to the Amiga, also supported by emulators.
+DSI – DSiWare
+DSK – (for disk images)
+FC# – FCEUX Save States (.fc#, where # is any character, usually a number)
+FDS – Famicom Disk System
+FIG – Super Famicom (Japanese releases are rarely .fig, above extensions are more common)
+FRZ, 000-008 – Snes9x Save States
+GB – Game Boy (this applies to the original Game Boy and the Game Boy Color)
+GBA – a Game Boy Advance game from a ROM cartridge
+GBC – Game Boy Color
+GCM, ISO – a GameCube disk/game
+GG – Game Gear
+GMV - Movie format that stores controller input for Sega Genesis emulator Gens
+INT – Intellivision
+ISO, WBFS, WAD, WDF – a Wii and WiiU disk/game
+JAG, J64 – an Atari Jaguar game from a ROM cartridge
+JST – Jnes Save States
+LNX – Atari Lynx
+MIN – Pokémon Mini
+N64, V64, Z64, U64, USA, JAP, PAL, EUR – Nintendo 64
+NDS – a Nintendo DS game from a ROM cartridge
+NES – Nintendo Entertainment System[37]
+NGC – Neo Geo Pocket Color
+NPC, NGP – Neo Geo Pocket
+NSP – Nintendo eShop Video Game file that stores audio data, video data, game data, and program code for the Nintendo Switch; also supported by emulators.
+PCE – TurboGrafx-16/PC Engine
+PJ – Project64 Save States
+PSS – a Sony PlayStation 2 Game Video file used to store audio and video data by games for the PlayStation 2 console.
+SAV – Game Boy Advance Saved Data Files
+SG – SG-1000
+SGM – VisualBoyAdvance Save States
+SMC, 078, SFC – Super Nintendo Entertainment System (.078 is for split ROMs, which are rare)
+SMD, BIN – Mega Drive/Genesis
+SMS – Master System
+SRM – Super Nintendo Entertainment System Saved Data Files
+T64 – (for tape images without copy protection, considerably smaller than .tap files)
+TAP – Commodore 64 (.tap) (for tape images including copy protection)
+TAP – for tape images without copy protection
+TZX – ZX Spectrum (for exact copies of ZX Spectrum games)
+VB – Virtual Boy
+VEC – Vectrex
+WS – WonderSwan
+WSC – WonderSwan Color
+XCI – Nintendo Switch Video Game cartridge dump file that stores audio data, video data, game data, and program code for the Nintendo Switch; also supported by emulators.
+Z80, SNA – (for snapshots of the emulator RAM)
+ZST, ZS1-ZS9, Z10-Z99 – ZSNES Save States
+Virtual machines
+Microsoft Virtual PC, Virtual Server
+VFD – Virtual Floppy Disk
+VHD – Virtual Hard Disk
+VUD – Virtual Undo Disk
+VMC – Virtual Machine Configuration
+VSV – Virtual Machine Saved State
+VMware ESX, GSX, Workstation, Player
+LOG – Virtual Machine Logfile
+VMDK, DSK – Virtual Machine Disk
+NVRAM – Virtual Machine BIOS
+VMEM – Virtual Machine paging file
+VMSD – Virtual Machine snapshot metadata
+VMSN – Virtual Machine snapshot
+VMSS, STD – Virtual Machine suspended state
+VMTM – Virtual Machine team data
+VMX, CFG – Virtual Machine configuration
+VMXF – Virtual Machine team configuration
+VirtualBox
+VBOX – VirtualBox machine
+VDI – VirtualBox virtual disk image
+VBOX-EXTPACK – VirtualBox extension pack
+Parallels Workstation
+HDD – Virtual Machine hard disk
+PVS – Virtual Machine preferences/configuration
+SAV – Virtual Machine saved state
+QEMU
+COW – Copy-on-write
+QCOW – QEMU copy-on-write
+QCOW2 – QEMU copy-on-write – version 2
+QED – QEMU enhanced disk format
+Web page
+Static
+
+CHM - Microsoft Compiled HTML Help page
+DTD – Document Type Definition (standard), MUST be public and free
+HTML, HTM – HyperText Markup Language
+XHTML, XHT – XHTML eXtensible HyperText Markup Language
+MHT, MHTML – MHTML Archived HTML, store all data on one web page (text, images, etc.) in one big file
+MAFF – MAF web archive based on ZIP
+Dynamically generated
+
+ASP – ASP Microsoft Active Server Page
+ASPX – ASPX Microsoft Active Server Page. NET
+ADP – ADP AOLserver Dynamic Page
+BML – BML Better Markup Language (templating)
+CFM – CFM ColdFusion
+CGI – CGI
+IHTML – iHTML Inline HTML
+JSP – JSP JavaServer Pages
+LAS, LASSO, LASSOAPP – Lasso, A file created or served with the Lasso Programming Language
+PL – Perl
+PHP, PHP?, PHTML – PHP ? is version number (previously abbreviated Personal Home Page, later changed to PHP: Hypertext Preprocessor)
+SHTML – SSI HTML with Server Side Includes (Apache)
+STM – SSI HTML with Server Side Includes (Apache)
+Markup languages and other web standards-based formats
+ATOM, XML – Atom Another syndication format.
+EML – EML Format used by several desktop email clients.
+JSONLD – JSON-LD A JSON-based serialization for linked data.
+KPRX – KPRX A XML-based serialization for workflow definition generated by K2.
+MARKDOWN, MD – Markdown Plain text formatting syntax, which is popularly used to format "readme" files.
+METALINK, MET – Metalink A format to list metadata about downloads, such as mirrors, checksums, and other information.
+MHTML – Mime HTML (Hyper-Text Markup Language) code file
+PS – PS A XML-based serialization for test automation scripts called PowerScripts for K2 based applications.
+RSS, XML – RSS Syndication format.
+SE – Shuttle Another lightweight markup language.
+Other web-related formats
+ZIM – ZIM: an open file format that stores wiki content for offline usage
+Other
+AXD – cookie extensions found in temporary internet folder
+BDF – Binary Data Format – raw data from recovered blocks of unallocated space on a hard drive
+CBP – CD Box Labeler Pro, CentraBuilder, Code::Blocks Project File, Conlab Project
+CEX – SolidWorks Enterprise PDM Vault File
+COL – Nintendo GameCube proprietary collision file (.col)
+CREDX – CredX Dat File
+DDB – Generating code for Vocaloid singers voice (see .DDI)
+DDI – Vocaloid phoneme library (Japanese, English, Korean, Spanish, Chinese, Catalan)
+DUPX – DuupeCheck database management tool project file
+FTM – Family Tree Maker data file
+FTMB – Family Tree Maker backup file
+GA3 – Graphical Analysis 3
+GED – GEDCOM (GEnealogical Data COMmunication) format to exchange genealogy data between different genealogy software
+HLP – Windows or CP/M help file
+IGC – flight tracks downloaded from GPS devices in the FAI's prescribed format
+INF – similar format to INI file; used to install device drivers under Windows, inter alia.
+JAM – JAM Message Base Format for BBSes
+KMC – tests made with KatzReview's MegaCrammer
+KCL – Nintendo GameCube/Wii proprietary collision file (.kcl)
+KTR – Hitachi Vantara Pentaho Data Integration/Kettle Transformation Project file
+LNK – Microsoft Windows format for Hyperlinks to Executables
+LSM – LSMaker script file (program using layered .jpg to create special effects; specifically designed to render lightsabers from the Star Wars universe) (.lsm)
+MCR – a macro recording file for Super Macro software
+MELSAVE – Melon Playground build save file
+MELMOD – Melon Playground mod file
+MELMAP - Melon Playground Map file
+NARC – archive format used in Nintendo DS games
+NTH – NTH: Nokia Theme Used by Nokia Series 40 cellphones
+OER – AU OER Tool, Open Educational Resource editor
+PA – Used to assign sound effects to materials in KCL files
+PIF – Used to run MS-DOS programs under Windows
+POR – So called "portable" SPSS files, readable by PSPP
+PXZ – Compressed file to exchange media elements with PSALMO
+RISE – File containing RISE generated information model evolution
+SCR – Windows Screen Saver file
+TOPC – TopicCrunch SEO Project file holding keywords, domain, and search engine settings (ASCII)
+XLF – Utah State University Extensible LADAR Format
+XMC – Assisted contact lists format, based on XML and used in kindergartens and schools
+ZED – My Heritage Family Tree
+ZONE – Zone file a text file containing a DNS zone
+FX – Microsoft DirectX plain text effects and properties for the associated file and are used to specify the textures, shading, rendering, lighting and other 3D effects
+MIFRAMES – Mine-imator keyframes file (.miframes)
+MILANGUAGE – Mine-Imator language data file
+MIDATA – Mine-Imator data file
+BCA – Short for Burst Cutting Area Holds the information of the circular area near the center of a DVD, HD DVD or Blu-ray Disc, it is usually 64 bytes in size. (.bca)
+Cursors
+ANI – Animated cursor
+CUR – Cursor file
+Smes – Hawk's Dock configuration file
+Generalized files
+General data formats
+These file formats are fairly well defined by long-term use or a general standard, but the content of each file is often highly specific to particular software or has been extended by further standards for specific uses.
+
+Text-based
+CSV – comma-separated values
+HTML – hyper text markup language
+CSS – cascading style sheets
+INI – a configuration text file whose format is substantially similar between applications
+JSON – JavaScript Object Notation is an openly used data format now used by many languages, not just JavaScript
+TINI – used to configure and backup Crostini, the Linux container for Chromebook
+TSV – tab-separated values
+XML – an open data format
+YAML – an open data format
+ReStructuredText – an open text format for technical documents used mainly in the Python programming language
+MD – Markdown an open lightweight markup language to create simple but rich text, often used to format README files
+AsciiDoc – an open human-readable markup document format semantically equivalent to DocBook
+YNI – a configuration file similar to YAML
+Generic file extensions
+These are filename extensions and broad types reused frequently with differing formats or no specific format by different programs.
+
+Binary files
+BAK, BK – Bak file various backup formats: some just copies of data files, some in application-specific data backup formats, some formats for general file backup programs
+BIN – binary data, often memory dumps of executable code or data to be re-used by the same software that originated it
+DAT – data file, usually binary data proprietary to the program that created it, or an MPEG-1 stream of Video CD
+DSK – file representations of various disk storage images
+RAW – raw (unprocessed) data
+SZH – files that are associated with zero unique file types (the most prevalent being the Binary Data format)
+Text files
+CNF, CONF, CFG – configuration file substantially software-specific
+LOG – logfiles usually text, but sometimes binary
+TEXT, TXT, ASC – human-readable plain text, usually no more specific
+Partial files
+Differences and patches
+DIFF – text file differences created by the program diff and applied as updates by patch
+Incomplete transfers
+!UT – Partially complete uTorrent download
+CRDOWNLOAD – Partially complete or incomplete Google Chrome or Microsoft Edge download
+OPDOWNLOAD – Partially complete or incomplete Opera download
+PART – PART partly complete Mozilla Firefox or Transmission download
+PARTIAL – PARTIAL partly complete Internet Explorer or Edge Legacy download
+Temporary files
+TEMP, TMP – Temporary file sometimes in a specific format, but often just raw data in the middle of processing
+Pseudo-pipelines, Pseudo-pipeline – Pseudo-pipeline file used to simulate a software pipe

@@ -1,0 +1,5 @@
+::###################### qemu ######################
+::#
+						
+qemu_Windows_X86_Import=https://qemu.weilnetz.de/w32/2022/qemu-w32-setup-20221230.exe
+qemu_Windows_X86_64_Import=https://qemu.weilnetz.de/w64/2025/qemu-w64-setup-20250806.exe
