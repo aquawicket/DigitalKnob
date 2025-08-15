@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_allButFirstArgs %*
 	endlocal & (
-		rem cd "%DKIMPORTS_DIR%/%~1"
+		cd "%DKIMPORTS_DIR%/%~1"
 		%dk_call% "%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd" %dk_allButFirstArgs%
 	)
 %endfunction%
