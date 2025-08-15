@@ -12,6 +12,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
+
+
 ::###########################################################################################################################
 ::# dk_importVariables(Url Rtn_Var) IMPORT_ROOT IMPORT_NAME IMPORT_PATH INSTALL_ROOT INSTALL_NAME INSTALL_PATH VERSION BRANCH 
 ::#
@@ -48,19 +50,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#																	master
 ::#################################################################################
 ::#	
-::#	PRINTVARS - specifying PRINTVARS will dump the current variable listing of PLUGIN and THE VARIABLES 
+::#	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 ::#
 :dk_importVariables
 %setlocal%
 ::%dk_call% dk_debugFunc 1 9
-	echo(
-	echo(
-	echo dk_importVariables(%*)
 	
 	%dk_call% dk_getParameterValue PRINTVARS %*
 	if defined PRINTVARS (
 		%dk_call% dk_unset PRINTVARS
-		echo PRINTVARS = !PRINTVARS!
 		call :PRINTVARS
 		%return%
 	)
@@ -88,7 +86,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_unset PLUGIN.Url.Name_Lower
 	%dk_call% dk_unset PLUGIN.Version
 
-	::###### EXAMPLE ######
+
+
+
+
+																	::###### EXAMPLE ######
 	::### IMPORT_ROOT (PLUGIN.Import.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS
 	%dk_call% dk_unset IMPORT_ROOT
 	%dk_call% dk_getParameterValue IMPORT_ROOT %*
@@ -148,7 +150,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### PLUGIN.Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	%dk_call% dk_unset PLUGIN.Url
 	set "PLUGIN.Url=%~1"
-	echo PLUGIN.Url = '%PLUGIN.Url%'
+	%dk_call% dk_echo PLUGIN.Url = '%PLUGIN.Url%'
 	
 ::	::### PLUGIN.Url.Protocol
 ::	::%dk_call% dk_Protocol			%PLUGIN.Url%  			PLUGIN.Url.protocol)	&:: protocol, drive
@@ -294,15 +296,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################
 :PLUGIN.Import.Name
 	if defined PLUGIN.Import.Name (%return%)
-		
 	call :PLUGIN.Import.Path
-
 	if defined PLUGIN.Import.Path (
 		%dk_call% dk_basename	!PLUGIN.Import.Path!	PLUGIN.Import.Name
 		%dk_call% dk_debug "PLUGIN.Import.Name = '!PLUGIN.Import.Name!'"
 		%return%
 	)
-
 	%dk_call% dk_includes "%PLUGIN.Url%" "https://github.com" && (
 		%dk_call% dk_replaceAll 	%PLUGIN.Url% 		"/" 	";" 	PLUGIN.Url.List
 		%dk_call% dk_listToArray 	"!PLUGIN.Url.List!" PLUGIN.Url.Array
@@ -315,7 +314,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#######################
 :PLUGIN.Import.Name_Lower
 	if defined PLUGIN.Import.Name_Lower (%return%)
-	
 	call :PLUGIN.Import.Name
 	%dk_call% dk_toLower 	%PLUGIN.Import.Name% 	PLUGIN.Import.Name_Lower
 	%dk_call% dk_debug "PLUGIN.Import.Name_Lower = '!PLUGIN.Import.Name_Lower!'"
@@ -324,7 +322,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#####################
 :PLUGIN.Install.Dirname
 	if defined PLUGIN.Install.Dirname (%return%)
-	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	set "PLUGIN.Install.Dirname=%DK3RDPARTY_DIR%"
 	%dk_call% dk_debug "PLUGIN.Install.Dirname= '%PLUGIN.Install.Dirname%'"
@@ -333,17 +330,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::##################
 :PLUGIN.Url.Basename
 	if defined PLUGIN.Url.Basename (%return%)
-
 	%dk_call% dk_assertVar PLUGIN.Url
 	%dk_call% dk_basename	%PLUGIN.Url%  PLUGIN.Url.Basename		&:: basename, filename
-
 	%dk_call% dk_debug "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
 %endfunction%
 
 ::####################
 :PLUGIN.Url.Name
 	if defined PLUGIN.Url.Name (%return%)
-
 	call :PLUGIN.Url.Basename
 	%dk_call% dk_removeExtension	%PLUGIN.Url.Basename%	PLUGIN.Url.Name			&:: name, file  (no extension)
 	%dk_call% dk_debug "PLUGIN.Url.Name = '%PLUGIN.Url.Name%'"
@@ -352,21 +346,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::####################
 :PLUGIN.Url.Name_Lower
 	if defined PLUGIN.Url.Name_Lower (%return%)
-
 	call :PLUGIN.Url.Name
 	%dk_call% dk_toLower 	%PLUGIN.Url.Name% 	PLUGIN.Url.Name_Lower
 	%dk_call% dk_debug "PLUGIN.Url.Name_Lower = '%PLUGIN.Url.Name_Lower%'"
 %endfunction%
 
-
-
 ::##################
 :PLUGIN.Install.Name
 	if defined PLUGIN.Install.Name (%return%)
-
 	call :PLUGIN.Import.Name
 	call :PLUGIN.Version
-	
 	if defined PLUGIN.Import.Name if defined PLUGIN.Version (
 		set "PLUGIN.Install.Name=%PLUGIN.Import.Name%-%PLUGIN.Version%"
 	)
@@ -375,11 +364,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	%dk_call% dk_debug "PLUGIN.Install.Name = '%PLUGIN.Install.Name%'"
 %endfunction%
-
-
-
-
-
 
 ::##################
 :PLUGIN.Install.Path
@@ -428,8 +412,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debug "PLUGIN.Version = '%PLUGIN.Version%'"
 %endfunction%
 	
-
-
 ::#######################
 :PLUGIN.Import.Name_Upper
 	if defined PLUGIN.Import.Name_Upper (%return%)
