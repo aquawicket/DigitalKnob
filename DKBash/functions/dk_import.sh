@@ -32,7 +32,7 @@ fi
 dk_import() {
 	dk_call dk_debugFunc 0 99
 	
-	Import_Path=${PWD};
+	Import_Path="${dk_depend}";
 	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
 	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";

@@ -401,8 +401,8 @@ PLUGIN_Import_Path() {
 	if [ -n "${PLUGIN[Import.Name]}" ]; then
 		dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
 		PLUGIN[Import.Path]="${DKIMPORTS_DIR}/${PLUGIN[Import.Name]}";
-	elif dk_call dk_includes "${PWD}" "${DKIMPORTS_DIR}"; then
-		PLUGIN[Import.Path]="${PWD}";
+	elif dk_call dk_includes "${dk_depend}" "${DKIMPORTS_DIR}"; then
+		PLUGIN[Import.Path]="${dk_depend}";
 	fi
 	
 	#[ -z "${PLUGIN[Import.Path]-}" ] && dk_call dk_error "PLUGIN[Import.Path] is invalid";

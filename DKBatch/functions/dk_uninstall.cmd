@@ -25,7 +25,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_allButFirstArgs %*
 	endlocal & (
-		cd "%DKIMPORTS_DIR%/%~1"
+		::cd "%DKIMPORTS_DIR%/%~1"
+		set "dk_uninstall=%DKIMPORTS_DIR%/%~1"
 		%dk_call% "%dkUninstall%" %dk_allButFirstArgs%
 	)
 %endfunction%

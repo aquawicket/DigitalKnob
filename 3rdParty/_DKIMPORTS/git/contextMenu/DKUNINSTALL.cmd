@@ -12,16 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
     %dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_uninstallContextMenu "GIT ADD"
+	%dk_call% dk_uninstallContextMenu "Git Add"
+	%dk_call% dk_uninstallContextMenu "Git Clean"
 %endfunction%
 
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-%setlocal%
-	%dk_call% dk_debugFunc 0
-	
-    %dk_call% DKUNINSTALL
-%endfunction%

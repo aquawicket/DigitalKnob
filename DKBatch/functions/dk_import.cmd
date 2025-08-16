@@ -24,6 +24,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0 99
 	
 	::set "Import.Path=%CD:\=/%"
+	if not defined dk_depend (set "dk_depend=%CD:\=/%")
 	set "Import.Path=%dk_depend%"
 	%dk_call% dk_assertPath "%Import.Path%/dkconfig.txt"
 	%dk_call% dk_getFileParams "%Import.Path%/dkconfig.txt"
@@ -128,7 +129,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_depend vscode
+	%dk_call% dk_depend git
 	
 	::%dk_call% #dk_import "https://github.com/madler/zlib/archive/d4768283.zip"
 	::%dk_call% dk_import https://www.dependencywalker.com/depends22_x64.zip
