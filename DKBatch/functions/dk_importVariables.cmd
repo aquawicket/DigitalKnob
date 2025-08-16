@@ -388,8 +388,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	rem	%dk_call% dk_getcwd
-	%dk_call% dk_includes "%CD:\=/%" "!DKIMPORTS_DIR!" && (
-		set "PLUGIN.Import.Path=%CD:\=/%"
+	%dk_call% dk_includes "%dk_depend%" "!DKIMPORTS_DIR!" && (
+		set "PLUGIN.Import.Path=%dk_depend%"
 		%dk_call% dk_debug 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
 		%return%
 	) || (cmd /c exit /b 0)	

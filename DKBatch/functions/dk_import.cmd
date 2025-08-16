@@ -23,7 +23,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 99
 	
-	set "Import.Path=%CD:\=/%"
+	::set "Import.Path=%CD:\=/%"
+	set "Import.Path=%dk_depend%"
 	%dk_call% dk_assertPath "%Import.Path%/dkconfig.txt"
 	%dk_call% dk_getFileParams "%Import.Path%/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"

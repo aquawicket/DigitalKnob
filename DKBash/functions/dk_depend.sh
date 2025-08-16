@@ -24,6 +24,7 @@ dk_depend() {
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	if [ -e "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh" ]; then
+		export dk_depend="${DKIMPORTS_DIR}/${1}";
 		dk_call dk_source "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh"
 		dk_call DKINSTALL
 		return
