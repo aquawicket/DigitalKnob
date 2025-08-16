@@ -7,6 +7,7 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
 function Global:dk_basename() {
+	Write-Host "dk_basename()";
 	dk_debugFunc 1 2;
 
 	${_path_} = $args[0];
@@ -16,6 +17,7 @@ function Global:dk_basename() {
 	
 	
 	###### output ######
+	Write-Host "dk_basename = ${dk_basename}";
 	${global:dk_basename} = ${dk_basename};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_basename};

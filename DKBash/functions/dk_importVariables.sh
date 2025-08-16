@@ -148,44 +148,6 @@ dk_importVariables() {
 	PLUGIN[Url]="$1";
 	dk_call dk_echo "PLUGIN[Url] = '${PLUGIN[Url]}'";
 		
-	### PLUGIN.Url.Protocol
-	#dk_call dk_Protocol			${PLUGIN[Url]}  			PLUGIN[Url.protocol]	# protocol, drive
-	#dk_call dk_echo "PLUGIN[Url.Protocol] = '${PLUGIN[Url.Protocol]}'";
-
-#	### PLUGIN.Url.Dirname
-#	%dk_call% dk_dirname			%PLUGIN.Url%  			PLUGIN.Url.Dirname		&:: dirname, directory, parent
-#	%dk_call% dk_echo "PLUGIN.Url.Dirname = '%PLUGIN.Url.Dirname%'"
-	
-#	### PLUGIN.Url.Basename
-#	%dk_call% dk_basename			%PLUGIN.Url%  			PLUGIN.Url.Basename		&:: basename, filename
-#	dk_call dk_echo "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
-	
-#	### PLUGIN.Url.Name
-#	%dk_call% dk_removeExtension	%PLUGIN.Url.Basename%	PLUGIN.Url.Name			&:: name, file  (no extension)
-#	%dk_call% dk_echo "PLUGIN.Url.Name = '%PLUGIN.Url.Name%'"
-	
-#	### PLUGIN.Url.Extension
-#	%dk_call% dk_getExtension		%PLUGIN.Url.Basename%	PLUGIN.Url.Extension	&:: extention
-#	%dk_call% dk_echo "PLUGIN.Url.Extension = '%PLUGIN.Url.Extension%'"
-	
-#	::### DEFAULT.Import.Dirname
-#	if not defined PLUGIN.Import.Dirname (
-#		if not defined PLUGIN.Import.Path (
-#			%dk_call% dk_validate DKIMPORTS_DIR	"%dk_call% dk_DKIMPORTS_DIR"
-#			set "PLUGIN.Import.Dirname=!DKIMPORTS_DIR!"
-#			%dk_call% dk_echo "PLUGIN.Import.Dirname = '!PLUGIN.Import.Dirname!'"
-#		)
-#	)
-#
-#	::### DEFAULT.Install.Dirname
-#	if not defined PLUGIN.Install.Dirname (
-#		if not defined PLUGIN.Install.Path (
-#			%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-#			set "PLUGIN.Install.Dirname=!DK3RDPARTY_DIR!"
-#			%dk_call% dk_echo "PLUGIN.Install.Dirname = '!PLUGIN.Install.Dirname!'"
-#		)
-#	)
-	
 	export PLUGIN_EXPORT=$(declare -p PLUGIN);
 	#"${PLUGIN[@]@A}" && declare -A -x ${PLUGIN[ID]}="${_#*=}";
 	
@@ -549,8 +511,7 @@ DKTEST() {
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
 	
-	#dk_call dk_chdir "${DKIMPORTS_DIR}/msys2";
-	cd "${DKIMPORTS_DIR}/msys2";
+	export CURRENT_IMPORT="${DKIMPORTS_DIR}/msys2";
 	dk_call dk_importVariables "https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz";
 	### Import PLUGIN and <PLUGIN_NAME> hashtables #################
 	#eval "${PLUGIN_EXPORT}";										# Import the PLUGIN hashtable, Using 'eval'
@@ -563,16 +524,14 @@ DKTEST() {
 	dk_call dk_importVariables PRINTVARS;
 	
 	#dk_call dk_chdir "${DKIMPORTS_DIR}/git";
-	cd "${DIGITALKNOB_DIR}";
+	export CURRENT_IMPORT="${DIGITALKNOB_DIR}";
 	dk_call dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "${DKTOOLS_DIR}";
 	source <(printf "%s" "${PLUGIN_EXPORT}");						# Import the PLUGIN hashtable, Using 'source'
 	"${PLUGIN[@]@A}" && declare -A ${PLUGIN[Id]}="${_#*=}";			# Import the PLUGIN[ID] hashtable, Using 'copy routine' #https://stackoverflow.com/a/78068508/688352
 	dk_call dk_importVariables PRINTVARS;
 	
-	
-	
 	#dk_call dk_chdir "${DKIMPORTS_DIR}/php-src";
-	cd "${DKIMPORTS_DIR}/php-src";
+	export CURRENT_IMPORT="${DKIMPORTS_DIR}/php-src";
 	dk_call dk_importVariables "https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip";
 	source <(printf "%s" "${PLUGIN_EXPORT}");						# Import the PLUGIN hashtable, Using 'source'
 	"${PLUGIN[@]@A}" && declare -A ${PLUGIN[Id]}="${_#*=}";			# Import the PLUGIN[ID] hashtable, Using 'copy routine' #https://stackoverflow.com/a/78068508/688352

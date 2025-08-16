@@ -6,22 +6,27 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_set() {
+	Write-Host "dk_set($args)";
 	dk_debugFunc 2 99;
 	
 	${_variable_} = $args[0];
-	${_variable_arry} = ${_variable_}.Split(".");
+	#${_variable_arry} = ${_variable_}.Split(".");
 	${_value_} = ${args} | Select-Object -Skip 1;
 	
-	if(${_variable_arry}[1]){
-		if( !($(Get-Variable -Name ${_variable_arry}[0] -ErrorAction SilentlyContinue)) ){
-			${hashtable} = @{};
-			Set-Variable -Name ${_variable_arry}[0] -Value ${hashtable} -Scope Global;
-		}
-		$(Get-Variable -Name ${_variable_arry}[0] -ValueOnly)[${_variable_arry}[1]] = ${_value_};
-	} else {
-		Set-Variable -Name ${_variable_arry}[0] -Value ${_value_} -Scope Global;
-	}
-	
+#	if(${_variable_arry}[1]){
+#		if( !($(Get-Variable -Name ${_variable_arry}[0] -ErrorAction SilentlyContinue)) ){
+#			${hashtable} = @{};
+#			Write-Host "Set-Variable Name ${_variable_arry}[0] Value ${hashtable} -Scope Global";
+#			Set-Variable -Name ${_variable_arry}[0] -Value ${hashtable} -Scope Global;
+#		}
+#		Write-Host "Get-Variable Name ${_variable_arry}[0] ValueOnly)[${_variable_arry}[1]] = ${_value_}";
+#		$(Get-Variable -Name ${_variable_arry}[0] -ValueOnly)[${_variable_arry}[1]] = ${_value_};
+#	} else {
+#		Write-Host "Set-Variable Name ${_variable_arry}[0] Value ${_value_} -Scope Global";
+#		Set-Variable -Name ${_variable_arry}[0] -Value ${_value_} -Scope Global;
+#	}
+
+	Set-Variable -Name ${_variable_} -Value ${_value_} -Scope Global;
 	Set-Item env:${_variable_} ${_value_};
 }
 
