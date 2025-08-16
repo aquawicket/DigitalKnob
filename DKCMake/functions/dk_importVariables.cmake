@@ -498,8 +498,7 @@ function(PLUGIN_Version)
 		endif()
 	endif()
 	
-#	d k_trimNonAlphaNumeric("${PLUGIN.Version}")
-#	set(PLUGIN.Version "${d k_trimNonAlphaNumeric}")
+	dk_trimNonAlphaNumeric("${PLUGIN.Version}" PLUGIN.Version)
 	
 	if(NOT PLUGIN.Version)
 		dk_error("PLUGIN.Version is invalid")
