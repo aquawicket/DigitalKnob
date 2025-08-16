@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ Try local notepad++.exe in DKTools first #############
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	if not exist "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%")
+	if not exist "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%" NO_ERROR)
 	
 	if not exist "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%")
 

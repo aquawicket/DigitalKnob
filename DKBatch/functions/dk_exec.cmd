@@ -30,6 +30,9 @@ if not defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 %setlocal%
 	::%dk_call% dk_debugFunc 1 99
 	
+	%dk_call% dk_getParameterValue NO_ERROR %*
+	if defined NO_ERROR (set "dk_exec_NO_ERROR=1")
+	
 	::set dk_func=cmake
 	::set !dk_func!=test
 	set dk_exec_call=%*
@@ -138,12 +141,18 @@ if not defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 		if defined dk_exec_SCOPE endlocal
 		set "%%G"
 	)
-	if "!dk_exec_exitcode!" equ "0" (
-		%dk_call% dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
+	
+	if defined dk_exec_NO_ERROR (
+		set "dk_exec_NO_ERROR="
+		exit /b 0
 	) else (
-		echo dk_exec_stderr = "!dk_exec_stderr!"
-		rem %dk_call% dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
-		%dk_call% dk_error "ERROR:!dk_exec_exitcode! @ dk_exec.cmd" & exit /b !dk_exec_exitcode!
+		if "!dk_exec_exitcode!" equ "0" (
+			%dk_call% dk_return !dk_exec_exitcode! !dk_exec! & exit /b !dk_exec_exitcode!
+		) else (
+			echo dk_exec_stderr = "!dk_exec_stderr!"
+			rem %dk_call% dk_return !dk_exec_exitcode! !dk_exec_stderr! & exit /b !dk_exec_exitcode!
+			%dk_call% dk_error "ERROR:!dk_exec_exitcode! @ dk_exec.cmd" & exit /b !dk_exec_exitcode!
+		)
 	)
 %endfunction%
 

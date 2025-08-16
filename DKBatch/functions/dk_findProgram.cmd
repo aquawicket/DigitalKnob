@@ -11,6 +11,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2 9
 	
+	%dk_call% dk_getParameterValue NO_ERROR %*
+	if defined NO_ERROR (set "dk_exec_NO_ERROR=1")
+	
 	for /f "tokens=*" %%G in ("%~1") do (set _var_=%%~G)
 
 	if defined %~1 for /f "tokens=*" %%G in ("!%~1!") do (set _val_=%%~G)
@@ -29,7 +32,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		%dk_call% dk_exec where %_filename_% 2>nul
 	)
-	%checkerror%
+	::%checkerror%
 	set "dk_findProgram=%dk_exec:\=/%"
 
 	if not exist "%dk_exec%" (
