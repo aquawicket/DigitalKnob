@@ -53,7 +53,7 @@ fi
 #	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 #
 dk_importVariables() {
-# dk_call dk_debugFunc 1 9
+# dk_debugFunc 1 9
 	
 	dk_call dk_getParameterValue PRINTVARS "$@";
 	if [ -n "${PRINTVARS}" ]; then
@@ -401,8 +401,8 @@ PLUGIN_Import_Path() {
 	if [ -n "${PLUGIN[Import.Name]}" ]; then
 		dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
 		PLUGIN[Import.Path]="${DKIMPORTS_DIR}/${PLUGIN[Import.Name]}";
-	elif dk_call dk_includes "${dk_depend}" "${DKIMPORTS_DIR}"; then
-		PLUGIN[Import.Path]="${dk_depend}";
+	elif dk_call dk_includes "${CURRENT_IMPORT-}" "${DKIMPORTS_DIR}"; then
+		PLUGIN[Import.Path]="${CURRENT_IMPORT}";
 	fi
 	
 	#[ -z "${PLUGIN[Import.Path]-}" ] && dk_call dk_error "PLUGIN[Import.Path] is invalid";
@@ -544,7 +544,7 @@ PRINTVARS() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_call dk_debugFunc 0;
+	dk_debugFunc 0;
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";

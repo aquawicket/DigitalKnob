@@ -411,7 +411,7 @@ function(PLUGIN_Install_Name)
 	set(PLUGIN.Install.Name ${PLUGIN.Install.Name} CACHE INTERNAL "")
 endfunction()
 
-#######################
+#############################
 function(PLUGIN_Install_Path)
 	if(PLUGIN.Install.Path)
 		return()
@@ -441,7 +441,7 @@ function(PLUGIN_Install_Path)
 	set(PLUGIN.Install.Path ${PLUGIN.Install.Path} CACHE INTERNAL "")
 endfunction()
 
-######################
+############################
 function(PLUGIN_Import_Path)
 	if(PLUGIN.Import.Path)
 		return()
@@ -451,9 +451,9 @@ function(PLUGIN_Import_Path)
 		dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 		set(PLUGIN.Import.Path "${DKIMPORTS_DIR}/${PLUGIN.Import.Name}")
 	else()
-		dk_includes("${dk_depend}" "${DKIMPORTS_DIR}" dk_includes)
+		dk_includes("${CURRENT_IMPORT}" "${DKIMPORTS_DIR}" dk_includes)
 		if(dk_includes)
-			set(PLUGIN.Import.Path "${dk_depend}")
+			set(PLUGIN.Import.Path "${CURRENT_IMPORT}")
 		endif()
 	endif()
 	
@@ -509,7 +509,7 @@ function(PLUGIN_Version)
 	set(PLUGIN.Version ${PLUGIN.Version} CACHE INTERNAL "")
 endfunction()
 
-############################
+##################################
 function(PLUGIN_Import_Name_Upper)
 	if(PLUGIN.Import.Name_Upper)
 		return()
@@ -533,7 +533,7 @@ function(PLUGIN_Import_Name_Upper)
 	set(PLUGIN.Import.Name_Upper ${PLUGIN.Import.Name_Upper} CACHE INTERNAL "")
 endfunction()
 
-#############
+###################
 function(PLUGIN_Id)
 	if(PLUGIN.Id)
 		return()
@@ -559,7 +559,7 @@ endfunction()
 	
 	
 	
-
+########################
 function(Copy_Variables)
 	### Set the <PLUGIN.ID> variable to mirror %PLUGIN%
 	### All %PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
@@ -645,15 +645,15 @@ function(DKTEST)
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 	
-	set(dk_depend "${DKIMPORTS_DIR}/msys2")
+	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/msys2")
 	dk_importVariables("https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz")
 	dk_importVariables(PRINTVARS)
 	
-	set(dk_depend "${DKIMPORTS_DIR}/git")
+	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/git")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "${DKTOOLS_DIR}")
 	dk_importVariables(PRINTVARS)
 	
-	set(dk_depend "${DKIMPORTS_DIR}/php-src")
+	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/php-src")
 	dk_importVariables("https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip")
 	dk_importVariables(PRINTVARS)
 endfunction()

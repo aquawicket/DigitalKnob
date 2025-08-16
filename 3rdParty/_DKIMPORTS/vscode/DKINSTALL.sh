@@ -17,7 +17,7 @@ fi
 # DKINSTALL()
 #
 DKINSTALL() {
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 
 	dk_call dk_import APP
 	#dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"

@@ -75,7 +75,7 @@ DKINSTALL() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_call dk_debugFunc 0
+	dk_debugFunc 0
 
 	dk_call DKINSTALL
 	dk_call dk_echo "GIT = ${GIT}"

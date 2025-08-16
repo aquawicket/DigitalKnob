@@ -36,7 +36,7 @@ dk_getParameterValue() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 TEST_getParameter() {
 
-#	dk_call dk_debugFunc 0 99
+#	dk_debugFunc 0 99
 
 	dk_call dk_getParameterValue ARG1 "$@"
 	dk_call dk_getParameterValue ARG2 "$@"
@@ -55,7 +55,7 @@ TEST_getParameter() {
 
 DKTEST() {
 
-#	dk_call dk_debugFunc 0
+#	dk_debugFunc 0
 
 	TEST_getParameter ARG1 "arg1 data" ARG3 ARG4 "arg4 data" ARG5 "arg5 data" ARG6
 }

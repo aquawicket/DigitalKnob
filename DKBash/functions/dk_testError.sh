@@ -29,7 +29,7 @@ dk_testError() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 
 	dk_call dk_testError
 }

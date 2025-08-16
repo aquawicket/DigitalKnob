@@ -118,7 +118,7 @@ dk_test() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() { 
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 
 	dk_call dk_test "from DKTEST()" "to dk_test()"
 	echo ""

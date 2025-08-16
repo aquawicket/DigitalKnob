@@ -18,7 +18,7 @@ fi
 #
 #
 dk_CURL_EXE() {
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 
 	[ -e "${CURL_EXE-}" ] && return
 
@@ -35,7 +35,7 @@ dk_CURL_EXE() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 
 	dk_call dk_CURL_EXE
 	dk_call dk_echo "CURL_EXE = ${CURL_EXE-}"

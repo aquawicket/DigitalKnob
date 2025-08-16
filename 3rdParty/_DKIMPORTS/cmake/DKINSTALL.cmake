@@ -22,7 +22,7 @@ include_guard()
 # https://github.com/Kitware/CMake/releases
 
 
-set(dk_depend "${CMAKE_CURRENT_LIST_DIR}")
+set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
 dk_import(APP)
 
 

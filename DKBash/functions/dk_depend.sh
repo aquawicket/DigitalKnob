@@ -24,13 +24,13 @@ dk_depend() {
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
 	if [ -e "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh" ]; then
-		export dk_depend="${DKIMPORTS_DIR}/${1}";
-		dk_call dk_source "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh"
+		export CURRENT_IMPORT="${DKIMPORTS_DIR}/${1}";
+		dk_call dk_source "${CURRENT_IMPORT}/DKINSTALL.sh"
 		dk_call DKINSTALL
 		return
 	fi
 
-	dk_call dk_fatal "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh not found"
+	dk_call dk_fatal "${CURRENT_IMPORT}/DKINSTALL.sh not found"
 }
 
 

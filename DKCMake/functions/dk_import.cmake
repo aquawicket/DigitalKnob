@@ -30,7 +30,7 @@ include_guard()
 function(dk_import)
 	dk_debugFunc(0 99)
 	
-	set(Import_Path "${dk_depend}")
+	set(Import_Path "${CURRENT_IMPORT}")
 	dk_assertPath("${Import_Path}/dkconfig.txt")
 	dk_getFileParams("${Import_Path}/dkconfig.txt")
 	dk_validate(Host_Tuple "dk_Host_Tuple()")
@@ -48,7 +48,7 @@ function(dk_import)
 	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))	
 		dk_envList(PLUGIN PUSH "${PLUGIN}")			###### Push Plugin to the PLUGIN_STACK ######
 	else()
-		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
+		dk_notice("dk_import(): ${PLUGIN} is already loaded")
 	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 	

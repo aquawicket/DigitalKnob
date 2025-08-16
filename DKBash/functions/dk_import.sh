@@ -30,9 +30,9 @@ fi
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
 dk_import() {
-	dk_call dk_debugFunc 0 99
+	dk_debugFunc 0 99
 	
-	Import_Path="${dk_depend}";
+	Import_Path="${CURRENT_IMPORT}";
 	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
 	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
@@ -82,7 +82,7 @@ dk_import() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	#dk_call dk_debugFunc 0
+	#dk_debugFunc 0
 	
 	dk_call dk_depend "git"
 	

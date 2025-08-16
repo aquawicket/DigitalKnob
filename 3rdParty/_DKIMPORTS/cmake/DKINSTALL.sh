@@ -26,7 +26,7 @@ DKINSTALL() {
 	######### kill cmake-gui.exe process #########
 	# %dk_call% dk_killProcess cmake-gui.exe
 	
-	dk_call dk_getFileParams 		"$(dk_call dk_dirname ${BASH_SOURCE[0]})/dkconfig.txt"
+	dk_call dk_getFileParams 		"${CURRENT_IMPORT}/dkconfig.txt"
 	dk_call dk_validate Host_Tuple 	"dk_call dk_Host_Tuple"
 	# for unknown reasons variable indirection isn't working on WSL here.  aka. ${!variable}
 	cmake_Import_="cmake_${Host_Tuple}_Import"
