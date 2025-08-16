@@ -7,17 +7,18 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 #    reference: https://stackoverflow.com/a/59739663/688352
 #
 function Global:dk_basename() {
-	Write-Host "dk_basename()";
 	dk_debugFunc 1 2;
 
 	${_path_} = $args[0];
+	if(!(${_path_})){ dk_call dk_error "_path_ is invalid"; }
 	if(Test-Path variable:${_path_}){ ${_path_} = Get-Variable -Name (${_path_}) -ValueOnly; } 
 	
-	${dk_basename} = Split-Path $_path_ -leaf;
+	if(${_path_}){
+		${dk_basename} = Split-Path ${_path_} -leaf;
+	}
 	
 	
 	###### output ######
-	Write-Host "dk_basename = ${dk_basename}";
 	${global:dk_basename} = ${dk_basename};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_basename};

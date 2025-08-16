@@ -14,7 +14,7 @@ function Global:dk_replaceAll() {
 	
 	${global:dk_replaceAll} = $args[0] -replace $args[1], $args[2];
 	
-	if($args[3]) {
+	if($args[3] -AND ${dk_replaceAll}) {
 		dk_call dk_set $args[3] ${dk_replaceAll};
 	} else {
 		return ${dk_replaceAll};

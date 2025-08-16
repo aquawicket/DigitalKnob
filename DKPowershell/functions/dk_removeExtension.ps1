@@ -14,9 +14,11 @@ function Global:dk_removeExtension() {
 	elseif($args[0].lastIndexOf(".7z.") -gt -1){
 		${dk_removeExtension} = $args[0].Substring(0, $args[0].lastIndexOf(".7z."));
 	}
-	else{
+	elseif($args[0].lastIndexOf(".") -gt -1){
 		${dk_removeExtension} = $args[0].Substring(0, $args[0].lastIndexOf("."));
-		#${dk_removeExtension} = $args[0] -replace [System.IO.Path]::GetExtension($args[0]), "";
+	}
+	else{
+		${dk_removeExtension} = $args[0];
 	}
 	
 	###### output ######

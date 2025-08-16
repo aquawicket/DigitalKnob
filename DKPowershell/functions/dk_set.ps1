@@ -6,7 +6,6 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 #
 #
 function Global:dk_set() {
-	Write-Host "dk_set($args)";
 	dk_debugFunc 2 99;
 	
 	${_variable_} = $args[0];
