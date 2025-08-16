@@ -31,7 +31,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	IMPORT_NAME (optional)											zlib
 ::#
 ::#
-::#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS/zlib
+::#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 ::#
 ::#
 ::#	INSTALL_ROOT (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools
@@ -91,7 +91,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 																	::###### EXAMPLE ######
-	::### IMPORT_ROOT (PLUGIN.Import.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS
+	::### IMPORT_ROOT (PLUGIN.Import.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
 	%dk_call% dk_unset IMPORT_ROOT
 	%dk_call% dk_getParameterValue IMPORT_ROOT %*
 	%dk_call% dk_echo "IMPORT_ROOT = '%IMPORT_ROOT%'"
@@ -103,7 +103,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "IMPORT_NAME = '%IMPORT_NAME%'"
 	set "PLUGIN.Import.Name=%IMPORT_NAME%"
 
-	::### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS/zlib
+	::### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	%dk_call% dk_unset IMPORT_PATH
 	%dk_call% dk_getParameterValue IMPORT_PATH %*
 	%dk_call% dk_echo "IMPORT_PATH = '%IMPORT_PATH%'"
@@ -139,112 +139,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "BRANCH = '%BRANCH%'"
 	set "PLUGIN.Branch=%BRANCH%"
 	
-	
-	
-::	%dk_call% dk_echo
-::	::### PLUGIN.Args												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-::	%dk_call% dk_unset PLUGIN.Args
-::	set "PLUGIN.Args=%*"
-::	%dk_call% dk_echo "PLUGIN.Args = '%PLUGIN.Args%'"
+	::### PLUGIN.Args												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+	%dk_call% dk_unset PLUGIN.Args
+	set "PLUGIN.Args=%*"
+	%dk_call% dk_echo "PLUGIN.Args = '%PLUGIN.Args%'"
 
 	::### PLUGIN.Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	%dk_call% dk_unset PLUGIN.Url
 	set "PLUGIN.Url=%~1"
-	%dk_call% dk_echo PLUGIN.Url = '%PLUGIN.Url%'
+	%dk_call% dk_echo "PLUGIN.Url = '%PLUGIN.Url%'"
 	
-::	::### PLUGIN.Url.Protocol
-::	::%dk_call% dk_Protocol			%PLUGIN.Url%  			PLUGIN.Url.protocol)	&:: protocol, drive
-::	::%dk_call% dk_echo "PLUGIN.Url.Protocol = '%PLUGIN.Url.Protocol%'"
-	
-::	::### PLUGIN.Url.Dirname
-::	%dk_call% dk_dirname			%PLUGIN.Url%  			PLUGIN.Url.Dirname		&:: dirname, directory, parent
-::	%dk_call% dk_echo "PLUGIN.Url.Dirname = '%PLUGIN.Url.Dirname%'"
-	
-	::### PLUGIN.Url.Basename
-::	%dk_call% dk_basename			%PLUGIN.Url%  			PLUGIN.Url.Basename		&:: basename, filename
-::	%dk_call% dk_echo "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
-	
-	::### PLUGIN.Url.Name
-::	%dk_call% dk_removeExtension	%PLUGIN.Url.Basename%	PLUGIN.Url.Name			&:: name, file  (no extension)
-::	%dk_call% dk_echo "PLUGIN.Url.Name = '%PLUGIN.Url.Name%'"
-	
-::	::### PLUGIN.Url.Extension
-::	%dk_call% dk_getExtension		%PLUGIN.Url.Basename%	PLUGIN.Url.Extension	&:: extention
-::	%dk_call% dk_echo "PLUGIN.Url.Extension = '%PLUGIN.Url.Extension%'"
-	
-::	::### DEFAULT.Import.Dirname
-::	if not defined PLUGIN.Import.Dirname (
-::		if not defined PLUGIN.Import.Path (
-::			%dk_call% dk_validate DKIMPORTS_DIR	"%dk_call% dk_DKIMPORTS_DIR"
-::			set "PLUGIN.Import.Dirname=!DKIMPORTS_DIR!"
-::			%dk_call% dk_echo "PLUGIN.Import.Dirname = '!PLUGIN.Import.Dirname!'"
-::		)
-::	)
-
-::	::### DEFAULT.Install.Dirname
-::	if not defined PLUGIN.Install.Dirname (
-::		if not defined PLUGIN.Install.Path (
-::			%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-::			set "PLUGIN.Install.Dirname=!DK3RDPARTY_DIR!"
-::			%dk_call% dk_echo "PLUGIN.Install.Dirname = '!PLUGIN.Install.Dirname!'"
-::		)
-::	)
-	
+	::### PLUGIN.Id													ZLIB
 	call :PLUGIN.Id
 
-	::### PLUGIN.Branch
-::	if not defined PLUGIN.Branch (
-::		rem %dk_call% dk_getGitBranchName %PLUGIN_URL% PLUGIN_Branch
-::		set "PLUGIN.Branch=master"
-::	)
-	
-	::### PLUGIN.Version / TAG
-::	%dk_call% dk_toLower 			%PLUGIN.Url.Name% 		PLUGIN.Url.Name_Lower
-::	%dk_call% dk_toLower 			%PLUGIN.Import.Name% 	PLUGIN.Import.Name_Lower
-::	::if not defined PLUGIN.Version (set "PLUGIN.Version=%Version%") 
-::	if not defined PLUGIN.Version if defined PLUGIN.Url.Name_Lower if defined PLUGIN.Import.Name_Lower (
-::		%dk_call% dk_replaceAll "%PLUGIN.Url.Name_Lower%" 	"%PLUGIN.Import.Name_Lower%" 	"" 	PLUGIN.Version
-::		if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.TAG%")
-::		if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.Branch%") 
-::	)
-::	if not defined PLUGIN.Version (set "PLUGIN.Version=master")
-::	if not defined PLUGIN.Version (%dk_call% dk_error "PLUGIN.Version invalid")
-::	%dk_call% dk_echo "PLUGIN.Version = '%PLUGIN.Version%'"
-
-	::### PLUGIN.Install.Name											zlib-master
-::	if not defined PLUGIN.Install.Name if defined PLUGIN.Import.Name if defined PLUGIN.Version (
-::		set "PLUGIN.Install.Name=%PLUGIN.Import.Name%-%PLUGIN.Version%"
-::	)
-::	if not defined PLUGIN.Install.Name (set "PLUGIN.Install.Name=%PLUGIN.Import.Name%")
-::	if not defined PLUGIN.Install.Name (%dk_call% dk_error "PLUGIN.Install.Name invalid")
-::	%dk_call% dk_echo "PLUGIN.Install.Name = '%PLUGIN.Install.Name%'"
-
-	::### PLUGIN.Install.Dirname										C:/Users/Administrator/DigitalKnob/Development/3rdParty
-::	if not defined PLUGIN.Install.Dirname (
-::		%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-::		set "PLUGIN.Install.Dirname=%DK3RDPARTY_DIR%"
-::	)
-::	if not defined PLUGIN.Install.Dirname (%dk_call% dk_error "PLUGIN.Install.Dirnameinvalid")
-::	%dk_call% dk_echo "PLUGIN.Install.Dirname= '%PLUGIN.Install.Dirname%'"
-
-	::### PLUGIN.Install.Path											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+	::### PLUGIN.Install.Path										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	call :PLUGIN.Install.Path
-::	if not defined PLUGIN.Install.Path (set "PLUGIN.Install.Path=%PLUGIN.Install.Dirname%/%PLUGIN.Install.Name%")
-::	if not defined PLUGIN.Install.Path (%dk_call% dk_error "PLUGIN.Install.Path invalid")
-::	%dk_call% dk_echo "PLUGIN.Install.Path = '%PLUGIN.Install.Path%'"
-
-	
-	::####### Compair check ######
-::	%dk_call% dk_toLower 	%PLUGIN.Import.Name% 	PLUGIN.Import.Name_Lower
-::	%dk_call% dk_toLower 	%PLUGIN.GIT_NAME% 		PLUGIN.GIT_NAME_Lower
-::	if defined PLUGIN.Import.Name_Lower if defined PLUGIN.GIT_NAME_Lower (
-::		if "%PLUGIN.Import.Name_Lower%" neq "%PLUGIN.GIT_NAME_Lower%" (
-::			%dk_call% dk_warning "PLUGIN.Import.Name_Lower:%PLUGIN.Import.Name_Lower% and PLUGIN.GIT_NAME_Lower:%PLUGIN.GIT_NAME_Lower% do not match"
-::		)
-::	)	
-
-	
-
 	
 
 	::#####################################################
@@ -298,6 +207,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar PLUGIN.Url
 	%dk_call% dk_basename	%PLUGIN.Url%  PLUGIN.Url.Basename		&:: basename, filename
 	%dk_call% dk_debug "PLUGIN.Url.Basename = '%PLUGIN.Url.Basename%'"
+%endfunction%
+
+::###################
+:PLUGIN.Url.Extension
+	if defined PLUGIN.Url.Extension (%return%)
+	%dk_call% dk_assertVar PLUGIN.Url
+	%dk_call% dk_dirname	%PLUGIN.Url%  PLUGIN.Url.Dirname		&:: dirname, directory
+	%dk_call% dk_debug "PLUGIN.Url.Dirname = '%PLUGIN.Url.Dirname%'"
 %endfunction%
 
 ::#################
@@ -425,6 +342,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::########
 :PLUGIN.Id
+	if defined PLUGIN.Id (%return%)
+	
 	call :PLUGIN.Import.Name_Upper
 	%dk_call% dk_assertVar PLUGIN.Import.Name_Upper
 	
@@ -521,7 +440,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::%dk_call% dk_chdir "%DKIMPORTS_DIR%/git"
 	cd "%DIGITALKNOB_DIR%"
-	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" Install.Dirname "%DKTOOLS_DIR%"
+	%dk_call% dk_importVariables "https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "%DKTOOLS_DIR%"
 	%dk_call% dk_importVariables PRINTVARS
 	
 	::%dk_call% dk_chdir "%DKIMPORTS_DIR%/php-src"

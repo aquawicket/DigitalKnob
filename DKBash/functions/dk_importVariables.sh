@@ -18,7 +18,7 @@ fi
 # dk_importVariables(Url Rtn_Var) IMPORT_ROOT Import.Name IMPORT_PATH INSTALL_ROOT INSTALL_NAME INSTALL_PATH VERSION BRANCH 
 #
 #																	###### EXAMPLES ######
-#	Url.																https://github.com/madler/zlib.git     							* github repository link
+#	Url																https://github.com/madler/zlib.git     							* github repository link
 #																	https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
 #																	https://github.com/madler/zlib        							* github page
 #																	https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
@@ -31,7 +31,7 @@ fi
 #	Import.Name (optional)											zlib
 #
 #
-#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS/zlib
+#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 #
 #
 #	INSTALL_ROOT (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools
@@ -90,7 +90,7 @@ dk_importVariables() {
 	declare -A -x PLUGIN;
 	####################
 																	###### EXAMPLE ######
-	### IMPORT_ROOT (PLUGIN.Import.Dirname)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS
+	### IMPORT_ROOT (PLUGIN.Import.Dirname)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
 	dk_call dk_unset IMPORT_ROOT;
 	dk_call dk_getParameterValue IMPORT_ROOT "$@";
 	dk_call dk_echo "IMPORT_ROOT = '${IMPORT_ROOT}'";	
@@ -102,7 +102,7 @@ dk_importVariables() {
 	dk_call dk_echo "IMPORT_NAME = '${IMPORT_NAME}'";
 	PLUGIN[Import.Name]="${IMPORT_NAME-}";
 	
-	### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKImportS/zlib
+	### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_call dk_unset IMPORT_PATH
 	dk_call dk_getParameterValue IMPORT_PATH "$@";
 	dk_call dk_echo "IMPORT_PATH = '${IMPORT_PATH-}'"

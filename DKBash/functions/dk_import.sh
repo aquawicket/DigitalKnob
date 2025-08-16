@@ -84,7 +84,7 @@ dk_import() {
 DKTEST() {
 	#dk_call dk_debugFunc 0
 	
-	dk_call dk_depend "vscode"
+	dk_call dk_depend "git"
 	
 	#dk_call dk_import "https://github.com/madler/zlib/archive/d4768283.zip"
 	#dk_call dk_import https://www.dependencywalker.com/depends22_x64.zip

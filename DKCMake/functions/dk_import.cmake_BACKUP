@@ -28,69 +28,74 @@ include_guard()
 #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
 #
 function(dk_import)
-	dk_debugFunc(0 99)
+	dk_debugFunc()
 	
-	set(Import_Path "${dk_depend}")
-	dk_assertPath("${Import_Path}/dkconfig.txt")
-	dk_getFileParams("${Import_Path}/dkconfig.txt")
-	dk_validate(Host_Tuple "dk_Host_Tuple()")
-	dk_basename(${Import_Path} Import_Name)
+	###### Args ######
+	dk_getParameter(NO_HALT REMOVE)
+	dk_getParameter(PATCH)
 	
-	dk_getParameterValue(APP)
-	if(APP)
-		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-		set(INSTALL_ROOT "INSTALL_ROOT ${DKTOOLS_DIR}")
-	endif()
-	dk_assertVar(${Import_Name}_${Host_Tuple}_Import)
-	set(PLUGIN_IMPORT "${Import_Name}_${Host_Tuple}_Import")
-	dk_importVariables("${${PLUGIN_IMPORT}}" ${INSTALL_ROOT})
+	dk_importVariables(${ARGV})
 	
+	
+	dk_assertVar(PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	set(${PLUGIN}_IMPORT_NAME ${plugin})
 	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))	
-		dk_envList(PLUGIN PUSH "${PLUGIN}")			###### Push Plugin to the PLUGIN_STACK ######
+		###### Push Plugin to the PLUGIN_STACK ######
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		
+		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
+		#dk_dependB(${plugin})
+	
+		###### Pop Plugin from the PLUGIN_STACK ######
+		#dk_envList(PLUGIN POP)
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
 	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 	
-	dk_download("${PLUGIN.Url}")
-	
-	if("${PLUGIN.Url.Extension}" STREQUAL ".7z")
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".bz")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".bz2")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".gz")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".rar")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".sfx.exe")	
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".tar")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".tar.gz")	
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".tgz")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".xz")		
-		set(FileType "Archive")
-	elseif("${PLUGIN.Url.Extension}" STREQUAL ".zip")		
-		set(FileType "Archive")
-	endif()
-	
-	if("${FileType}" STREQUAL "Archive")
-		dk_smartExtract("${dk_download}" "${PLUGIN.Install.Path}")
-	endif()
 
-	dk_getParameter(PATCH)
+
+	if(NOT DKOFFLINE)
+		###### Import from Git Repository ######
+		dk_getExtension(${PLUGIN.URL} extension)
+		if("${extension}" STREQUAL ".git")
+			
+			dk_depend(git)
+			
+			if(NOT EXISTS ${$ENV{CURRENT_PLUGIN}_DIR}/.git)
+				dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+				dk_chdir($ENV{DK3RDPARTY_DIR})
+				if(EXISTS ${$ENV{CURRENT_PLUGIN}_DIR})
+					dk_delete(${$ENV{CURRENT_PLUGIN}_DIR})
+				endif()
+				if(NOT EXISTS ${$ENV{CURRENT_PLUGIN}_DIR})
+					dk_mkdir(${$ENV{CURRENT_PLUGIN}_DIR})
+				endif()
+				dk_chdir(${$ENV{CURRENT_PLUGIN}_DIR})
+				dk_exec(${GIT_EXE} clone ${$ENV{CURRENT_PLUGIN}_URL} ${$ENV{CURRENT_PLUGIN}_DIR})
+			endif()
+			dk_chdir(${$ENV{CURRENT_PLUGIN}_DIR})
+			dk_exec(${GIT_EXE} checkout -- .)
+			dk_exec(${GIT_EXE} checkout ${$ENV{CURRENT_PLUGIN}_BRANCH})
+			dk_exec(${GIT_EXE} pull)
+			if(${CURRENT_PLUGIN}_TAG)
+				dk_exec(${GIT_EXE} checkout ${$ENV{CURRENT_PLUGIN}_TAG})
+			endif()
+			
+		###### Import from Download File ######
+		else()
+			dk_install($ENV{CURRENT_PLUGIN} ${ARGV} ${NO_HALT})
+		endif()
+	endif()
+	
 	if(PATCH)
 		dk_patch(${$ENV{CURRENT_PLUGIN}_IMPORT_NAME} ${$ENV{CURRENT_PLUGIN}_DIR})
 	endif()
 	
+	
 	dk_envList(PLUGIN POP)
 endfunction()
-
-
 
 
 
@@ -101,6 +106,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_depend(cmake)
-	#dk_import("https://www.dependencywalker.com/depends22_x64.zip")
+	dk_import("https://www.dependencywalker.com/depends22_x64.zip")
 endfunction()
