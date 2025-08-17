@@ -1,5 +1,5 @@
 if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '${PSScriptRoot}/DK.ps1' }
-if(!$RUNTEST_ps1){ $RUNTEST_ps1 = 1; } else{ return; } #include guard
+if(!$DKRUNTEST_ps1){ $DKRUNTEST_ps1 = 1; } else{ return; } #include guard
 
 
 #####################################
@@ -43,7 +43,7 @@ function Global:DKRunTests() {
 #	
 #	### Clear log.txt
 #	echo "" > $(dirname $0)/log.txt
-#	
+#
 #	#set "dk_log_ERROR_CALLBACK=call %~f0 :CALLBACK"
 #	#set "dk_log_FATAL_CALLBACK=call %~f0 :CALLBACK"
 #	
@@ -68,9 +68,5 @@ function Global:CALLBACK() {
 #	echo "CALLBACK()"
 }
 
-#####################################
-#function Global:DK TEST() {
-#	echo "DK TEST()"
-#	read -p '';
-#}
+
 

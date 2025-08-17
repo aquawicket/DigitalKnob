@@ -80,18 +80,22 @@ function DK() {
 	
 	###### DKTEST MODE ######
 	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
-	if(!(dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()")){ return; }
-
-	dk_call dk_echo "\n";
-	dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}\n";
-	dk_call dk_echo  "\n";
-	. ${DKSCRIPT_PATH};
-	DKTEST;
-	dk_call dk_echo "\n";
-	dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}\n";
-	dk_call dk_echo "\n";
-	dk_call dk_pause "Press Enter to exit";
-	dk_call dk_exit
+	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:DKTEST()"){
+		Write-Host "DKTEST TRUE";
+		dk_call dk_echo "\n";
+		dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}\n";
+		dk_call dk_echo  "\n";
+		. ${DKSCRIPT_PATH};
+		DKTEST;
+		dk_call dk_echo "\n";
+		dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}\n";
+		dk_call dk_echo "\n";
+		dk_call dk_pause "Press Enter to exit";
+		dk_call dk_exit
+	}
+	else {
+		Write-Host "DKTEST FALSE";
+	}
 }
 
 
