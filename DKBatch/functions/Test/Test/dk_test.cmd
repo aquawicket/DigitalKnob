@@ -77,14 +77,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 						(echo()
 						
 
-	::endlocal & (
-	::	set "dk_test=this C"
-	::	%dk_call% setReturn RETURN_VAR "return C"
-	::	%dk_call% setGlobal GLOBAL_VAR "global C"
-	::)
-
+	::###### output ######
 	endlocal & (
 		set "Test/Test/dk_test=%Test/Test/dk_test%"
+		if "%~1" equ "RTN_VAR" (
+			set "%~1=%Test/Test/dk_test%"
+		) else (
+			echo %Test/Test/dk_test%
+		)
 	)
 ::echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo(
 %endfunction%

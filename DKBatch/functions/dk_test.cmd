@@ -80,9 +80,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% Test/dk_test "dk_test" "Test/dk_test"
 	echo Test/dk_test = '%Test/dk_test%'
 	
-endlocal & (
-	set "dk_test=%dk_test%"
-)
+	::###### output ######
+	endlocal & (
+		set "dk_test=%dk_test%"
+		if "%~1" equ "RTN_VAR" (
+			set "%~1=%dk_test%"
+		) else (
+			echo %dk_test%
+		)
+	)
+	
+	exit /b 2
 ::echo %bg_blue%^<- dk_test(%*)%clr% & echo(
 %endfunction%
 
@@ -98,6 +106,23 @@ endlocal & (
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_test ":DKTEST" "dk_test" ":DKTEST" "1 2 3"
-	echo      dk_test = '%dk_test%'
+::	%dk_call% dk_test ":DKTEST" "dk_test" ":DKTEST" "1 2 3"
+::	echo      dk_test = '%dk_test%'
+	
+	set command=dk_test
+	for /f "usebackq delims=" %%G in (`call %command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
+		set "line=%%G"
+		if "!line:ExItCoDe=!" neq "!line!" (
+			set ExItCoDe=!line:ExItCoDe=!
+		) else (
+			echo !line!
+			set ReTuRnVaL=!line!
+		)
+	)
+	
+	echo(
+	echo(
+	echo ReTuRnVaL = %ReTuRnVaL%
+	echo ExItCoDe = %ExItCoDe%
+	exit /b %ExItCoDe%
 %endfunction%

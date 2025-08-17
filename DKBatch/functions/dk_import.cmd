@@ -38,7 +38,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
 	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
-	
+	if exist "%PLUGIN.Install.Path%" (
+		echo %PLUGIN.Install.Name% already installed
+		%return%
+	)
 	%dk_call% dk_download %PLUGIN.Url%
 	
 	%dk_call% dk_getExtension %PLUGIN.Url% PLUGIN.Url.Extension
