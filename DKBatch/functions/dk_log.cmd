@@ -148,8 +148,8 @@ if not defined dk_log_ERROR_TAG				(set "dk_log_ERROR_TAG=ERROR: ")
 if not defined dk_log_ERROR_TRACE			(set "dk_log_ERROR_TRACE=1")
 ::if not defined dk_log_ERROR_LINE			(set "dk_log_ERROR_LINE=0")
 ::if not defined dk_log_ERROR_SOUND			(set "dk_log_ERROR_SOUND=0")
-::if not defined dk_log_ERROR_TIMEOUT			(set "dk_log_ERROR_TIMEOUT=3")
-if not defined dk_log_ERROR_PAUSE			(set "dk_log_ERROR_PAUSE=1")
+::if not defined dk_log_ERROR_TIMEOUT		(set "dk_log_ERROR_TIMEOUT=3")
+::if not defined dk_log_ERROR_PAUSE			(set "dk_log_ERROR_PAUSE=1")
 ::if not defined dk_log_ERROR_HALT			(set "dk_log_ERROR_HALT=0")
 
 ::### FATAL ###

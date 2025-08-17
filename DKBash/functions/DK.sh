@@ -147,7 +147,7 @@ DK(){
 		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
 		dk_call dk_echo
 		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed"
-		(command -v DKTEST) && DKTEST || echo "'DKTEST' failed"
+		(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed"
 		dk_call dk_echo
 		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
 		dk_call dk_echo

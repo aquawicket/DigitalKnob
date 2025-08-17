@@ -93,7 +93,8 @@ set "dk_call_IGNORE=dk_debugFunc"
 		set /a LVL-=1
 	)
 	
-	::call :popStack
+	::### NOTE: We can keep the whole stack if we comment this out.
+	call :popStack
 
 ::###### Exit #############################################################################################
 exit /b %__STATUS__%
@@ -191,6 +192,16 @@ exit /b !errorlevel!
 exit /b !errorlevel!
 
 ::####################################################################
+::# :setGlobal(name value)
+::#
+:setGlobal
+setlocal enableDelayedExpansion
+	set dk_allButFirstArgs=%*
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %~1=%%b)
+	::(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
+exit /b !errorlevel!
+
+::####################################################################
 ::# :setReturn
 ::#
 :setReturn name value
@@ -222,16 +233,6 @@ exit /b !errorlevel!
 	if "%dk_call_STACK_TO_FILE%" equ "1" (
 		echo %ENTRY%: !__STACK__%ENTRY%! >> "%DKSCRIPT_NAME%.log"
 	)
-exit /b !errorlevel!
-
-::####################################################################
-::# :setGlobal(name value)
-::#
-:setGlobal
-setlocal enableDelayedExpansion
-	set dk_allButFirstArgs=%*
-	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %~1=%%b)
-	::(set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
 ::####################################################################
