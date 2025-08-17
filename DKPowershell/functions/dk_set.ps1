@@ -25,6 +25,7 @@ function Global:dk_set() {
 #		Set-Variable -Name ${_variable_arry}[0] -Value ${_value_} -Scope Global;
 #	}
 
+	#Write-Host "dk_set(${_variable_}, ${_value_})"
 	Set-Variable -Name ${_variable_} -Value ${_value_} -Scope Global;
 	Set-Item env:${_variable_} ${_value_};
 }
