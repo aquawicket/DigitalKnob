@@ -48,7 +48,7 @@ set "DKBash_ENV=WSL"
 	
 	::### Add the DKBash command to the registry ###
 	set "PATH=%PATH%"
-	ftype DKBash="%CMD_EXE:/=\%" /V:ON /c set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=%BASH_C_DIVE%^!" ^&^& %BASH_EXE% "^!f^!"
+	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=%BASH_C_DIVE%^!" ^&^& %BASH_EXE% "^!f^!"
 	:: "C:\Users\Administrator\DigitalKnob\Development\3rdParty\msys2-base-x86_64-20241208\usr\bin\bash.exe" -c "/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_debug.sh"
 	:: "C:\Users\Administrator\DigitalKnob\Development\3rdParty\msys2-base-x86_64-20241208\usr\bin\env.exe" MSYSTEM=MSYS /usr/bin/bash "/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_debug.sh"
 	::### associate .sh with DKBash ###	

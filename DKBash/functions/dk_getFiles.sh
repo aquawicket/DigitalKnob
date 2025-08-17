@@ -17,13 +17,41 @@ fi
 ################################################################################
 # dk_getFiles(<path> <output>)
 #
-#   reference: https://stackoverflow.com/a/138581
+#   reference: https://stackoverflow.com/a/21668536/688352
 #
 dk_getFiles() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2;
 	
-	eval "${2}=(${1}/*)" 
-	#dk_call dk_printVar "${2}"
+	contents=($1/*);
+
+	# Fill dk_getFiles with FILES from contents
+	dk_getFiles=();
+	for ((i=0; i<${#contents[@]}; i++)); do
+		if [[ -f ${contents[$i]} ]]; then
+			dk_getFiles+=(${contents[$i]})
+		fi
+	done
+	
+	dk_getFiles=("${dk_getFiles[@]##*/}")   # This removes the path prefix, leaving just the file names
+
+	### Loop counter through the array
+	#for ((i=0; i<${#dk_getFiles[@]}; i++)); do
+	#	echo "dk_getFiles[$i] = ${dk_getFiles[$i]}"
+	#done
+	
+	### Iterate through the array
+	#for f in "${dk_getFiles[@]}"; do
+	#	echo "$f";
+	#done
+	
+	###### output ######
+	eval dk_getFiles='("${dk_getFiles[@]}")';
+	if [ -n "${2-}" ]; then
+		eval ${2-}='("${dk_getFiles[@]}")';
+	else
+		builtin echo "${dk_getFiles[@]}";
+	fi
+	return $?;
 }
 
 
@@ -33,7 +61,27 @@ dk_getFiles() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_getFiles /c/Windows/System32 output
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR";
+	echo "";
+	echo "### Result as global variable"
+	dk_call dk_getFiles "${DKBRANCH_DIR}";
+	for ((i=0; i<${#dk_getFiles[@]}; i++)); do
+		echo "dk_getFiles[$i] = ${dk_getFiles[$i]}"
+	done
+
+	echo "";
+	echo "### Result as variable parameter"
+	dk_call dk_getFiles "${DKBRANCH_DIR}" resultB;
+	for ((i=0; i<${#resultB[@]}; i++)); do
+		echo "resultB[$i] = ${resultB[$i]}"
+	done
+	
+	echo "";
+	echo "### Result as return value"
+	resultC=($(dk_call dk_getFiles "${DKBRANCH_DIR}"));
+	for ((i=0; i<${#resultC[@]}; i++)); do
+		echo "resultC[$i] = ${resultC[$i]}"
+	done
 }

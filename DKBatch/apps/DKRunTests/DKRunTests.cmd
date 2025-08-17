@@ -24,6 +24,7 @@ if "%~1" neq "" (
 	call :DISABLE dk_evalDKC
 	call :DISABLE dk_enterManually
 	call :DISABLE dk_evalDKCpp
+	call :DISABLE dk_exit
 	
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_getFiles %DKBATCH_FUNCTIONS_DIR_%

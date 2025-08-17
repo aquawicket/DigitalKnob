@@ -20,13 +20,30 @@ fi
 #   reference: https://stackoverflow.com/a/138581
 #
 dk_getDirectories() {
-	dk_debugFunc 2
+	dk_debugFunc 1 2
 
-	#directories=(${1}/*/)    # This creates an array of the full paths to all subdirs
-	#arr=("${arr[@]%/}")            # This removes the trailing slash on each item
-	#arr=("${arr[@]##*/}")          # This removes the path prefix, leaving just the dir names
-	eval "${2}=(${1}/*/)" 
-	#dk_call dk_printVar "${2}"
+	dk_getDirectories=($1/*/);							# This creates an array of the full paths to all subdirs
+	dk_getDirectories=("${dk_getDirectories[@]%/}")     # This removes the trailing slash on each item
+	dk_getDirectories=("${dk_getDirectories[@]##*/}")   # This removes the path prefix, leaving just the dir names
+	
+	### Loop counter through the array
+	#for ((i=0; i<${#dk_getDirectories[@]}; i++)); do
+	#	echo "dk_getDirectories[$i] = ${dk_getDirectories[$i]}"
+	#done
+	
+	### Iterate through the array
+	#for f in "${dk_getDirectories[@]}"; do
+	#	echo "$f";
+	#done
+	
+	###### output ######
+	eval dk_getDirectories='("${dk_getDirectories[@]}")';
+	if [ -n "${2-}" ]; then
+		eval ${2-}='("${dk_getDirectories[@]}")';
+	else
+		builtin echo "${dk_getDirectories[@]}";
+	fi
+	return $?;
 }
 
 
@@ -36,7 +53,25 @@ dk_getDirectories() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_set myPath "/c/Windows"
-	dk_call dk_getDirectories "${myPath}" directories
-	dk_call dk_printVar directories
+	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR";
+	echo "";
+	echo "### Result as global variable"
+	dk_call dk_getDirectories "${DKBRANCH_DIR}";
+	for ((i=0; i<${#dk_getDirectories[@]}; i++)); do
+		echo "dk_getDirectories[$i] = ${dk_getDirectories[$i]}"
+	done
+
+	echo "";
+	echo "### Result as variable parameter"
+	dk_call dk_getDirectories "${DKBRANCH_DIR}" resultB;
+	for ((i=0; i<${#resultB[@]}; i++)); do
+		echo "resultB[$i] = ${resultB[$i]}"
+	done
+	
+	echo "";
+	echo "### Result as return value"
+	resultC=($(dk_call dk_getDirectories "${DKBRANCH_DIR}"));
+	for ((i=0; i<${#resultC[@]}; i++)); do
+		echo "resultC[$i] = ${resultC[$i]}"
+	done
 }
