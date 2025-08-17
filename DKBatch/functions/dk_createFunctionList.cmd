@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_delete "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
     for %%a in (%DKBATCH_FUNCTIONS_DIR_%dk_*.cmd) do (
         echo %%~na
-        %dk_call% dkFileAppend "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %%~na
+        %dk_call% dk_fileAppend "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %%~na
     )
    
     if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_error "_functionList_ is missing")
