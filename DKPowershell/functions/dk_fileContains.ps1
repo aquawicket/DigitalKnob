@@ -9,21 +9,21 @@ if(!$dk_fileContains_ps1){ $dk_fileContains_ps1 = 1; } else{ return; } #include 
 function Global:dk_fileContains() {
 	dk_debugFunc 2 3;
 
-	${_file_} = $args[0];
-	${_string_} = $args[1];
-	#[bool]${dk_fileContains}=$false;
+	${_file_}=$args[0];
+	${_string_}=$args[1];
 	
-	if(Select-String -Path ${_file_} -Pattern ${_string_} -Quiet -CaseSensitive -SimpleMatch){ 
-		${dk_fileContains}="$true"; 
+	if(Select-String -Path $args[0] -Pattern $args[1] -Quiet -CaseSensitive -SimpleMatch){ 
+		${dk_fileContains}=$true; 
 	}
 	else{ 
-		${dk_fileContains}="$false"; 
+		${dk_fileContains}=$false; 
 	}
 
 	###### output ######
+	
 	${global:dk_fileContains} = ${dk_fileContains};
 	if($args[2]){
-		dk_call dk_set $args[2] ${dk_fileContains};
+		dk_call dk_set $args[2] "${dk_fileContains}";
 	} else {
 		return ${dk_fileContains};
 	}
