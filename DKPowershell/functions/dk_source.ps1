@@ -2,11 +2,11 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_source_ps1){ $dk_source_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
-# dk_source(func)
+# dk_source(milliseconds)
 #
-function Global:dk_source() {
-	if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_call dk_debugFunc 1; }
-	${func}=$args[0];
+function Global:dk_source($func) {
+	#if(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_debugFunc.ps1"){ dk_debugFunc 1 }
+
 	if(!${func}){
 		Write-Host "ERROR: func:${func} is invalid";
 		return;
@@ -26,7 +26,7 @@ if(!(Test-Path "${func}")){
 	if("${func}" -eq "${func_noext}"){  ${func} = "${func}.ps1"; } 
 #                                                                                                                dk_color.ps1
 #	                                      C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
-	if(!("${func}" -Match "C:/Users/Administrator/DigitalKnob")){ ${func} = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/${func}"; }
+	if(! ("${func}" -Match "C:/Users/Administrator/DigitalKnob")){ ${func} = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/${func}"; }
 
 #	TO THIS ->		                       C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
 #	TO THIS ->                            C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
@@ -69,5 +69,5 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 	
 	dk_source dk_info;
-	dk_info "dk_info test message. dk_source will download it and source it first";
+	dk_info "test message using dk_source to download it first";
 }
