@@ -6,21 +6,30 @@ if(!$dk_depend_ps1){ $dk_depend_ps1 = 1; } else{ return; } #include guard
 # dk_depend(plugin)
 #
 #   this will search for a "plugin" to run in the following search path
-#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
+#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.ps1'
 #
 function Global:dk_depend() {
-	dk_debugFunc 0 99;
+	#dk_debugFunc 1 99;
 
 	${_plugin_} = $($args[0]);
 	
-	dk_call dk_source "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1";
-	if(Test-Path "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1"){ 
-		dk_call "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1";
-		dk_call dk_success "found ${_plugin_}";
-		return;
+	dk_call dk_validate env:DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
+	${global:CURRENT_IMPORT}="${env:DKIMPORTS_DIR}/${_plugin_}";
+	${dkInstall}="${CURRENT_IMPORT}/DKINSTALL.ps1";	
+	if(!(Test-Path ${dkInstall})){
+		dk_call dk_validate env:DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR";
+		${dkhttpInstall} = ${dkInstall} -replace ${env:DIGITALKNOB_DIR}, ${env:DKHTTP_DIGITALKNOB_DIR};
+		dk_call dk_download "${dkhttpInstall}" "${dkInstall}";
 	}
-
-	dk_call dk_fatal "$(dk_call dk_DKIMPORTS_DIR)/${_plugin_}/DKINSTALL.ps1 not found";
+	if(!(Test-Path ${dkInstall})){
+		dk_call dk_fatal "dkInstall:${dkInstall} not found";
+		return -1;
+	}
+	
+	${dk_allButFirstArgs} = ${args} | Select-Object -Skip 1;
+	dk_call dk_source "${dkInstall}";
+	dk_call DKINSTALL ${dk_allButFirstArgs};
+	return;
 }
 
 

@@ -43,14 +43,7 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 function Global:dk_importVariables() {
 	#dk_debugFunc 1 9;
 
-	Write-Host "args = $args";
 	if("$args" -eq "PRINTVARS"){
-		PRINTVARS;
-		return;
-	}
-	dk_call dk_getParameterValue PRINTVARS @args;
-	if(${PRINTVARS}){
-		#dk_call dk_unset PRINTVARS;
 		PRINTVARS;
 		return;
 	}

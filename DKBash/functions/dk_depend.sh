@@ -17,7 +17,7 @@ fi
 # dk_depend(plugin)
 #
 #   this will search for a "plugin" to run in the following search path
-#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
+#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.sh'
 #
 dk_depend() {
 	dk_debugFunc 1 99;
@@ -31,7 +31,7 @@ dk_depend() {
 		dk_call dk_download "${dkhttpInstall}" "${dkInstall}"
 	fi
 	if ! [ -e "${dkInstall}" ]; then
-		dk_call dk_fatal "${{dkInstall} not found";
+		dk_call dk_fatal "dkInstall:${dkInstall} not found";
 		return -1;
 	fi
 	
