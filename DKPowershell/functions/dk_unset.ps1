@@ -8,8 +8,8 @@ if(!$dk_unset_ps1){ $dk_unset_ps1 = 1; } else{ return; } #include guard
 function Global:dk_unset($variable) {
 	dk_debugFunc 1;
 
-	if(!(Test-Path variable:$variable)){ return }
-	Remove-Variable $variable -Scope Global
+	if(!(Test-Path variable:$variable)){ return; }
+	Remove-Variable $variable -Scope Global;
 	
 	#if(!(Test-Path variable:$variable)){ return }
 	#Remove-Variable $variable -Scope Local

@@ -15,14 +15,13 @@ function Global:dk_download($url, $destination) {
 	
 	if($args[0]){ $destination = dk_call dk_realpath $args[0]; }
 	if(!(${destination})){    
-		dk_DKDOWNLOAD_DIR;
+		dk_call dk_validate env:DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR";
 		$destination = "${env:DKDOWNLOAD_DIR}/${url_filename}";
 	}
 	if(!(${destination})){ dk_call dk_error "destination is invalid"; }
 	
 	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}"; }
 	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist\n"; return; }
-	
 	
 	dk_call dk_echo "Downloading ${url_filename} . . .\n";
 	
