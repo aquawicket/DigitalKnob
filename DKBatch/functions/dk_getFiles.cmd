@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set /a "n=0"
 	for %%a in ("%_path_:/=\%\*") do (
-		echo %%a
+		rem echo %%a
 		set "temp=%%a"
 		set "dk_getFiles[!n!]=!temp:\=/!"
 		set /a "n+=1"
