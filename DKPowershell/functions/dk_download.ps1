@@ -6,29 +6,32 @@ if(!$dk_download_ps1){ $dk_download_ps1 = 1; } else{ return; } #include guard
 #
 #   https://www.itprotoday.com/powershell/3-ways-download-file-powershell
 #
-function Global:dk_download($url, $destination) {
+function Global:dk_download() {
 	dk_debugFunc 1 2;
-	dk_call dk_echo "dk_download($url, $destination)";
+	dk_call dk_echo "dk_download($args)";
+	
+	${url}=$args[0];
+	${destination}=$args[1];
 	
 	${url_filename} = Split-Path ${url} -leaf;
-	if(!(${url_filename})){ dk_call dk_error "url_filename invalid"; }                                                                            
-	
-	if($args[0]){ $destination = dk_call dk_realpath $args[0]; }
+	dk_call dk_assertVar "url_filename";
+
+	#if($args[0]){ $destination = dk_call dk_realpath $args[0]; }
 	if(!(${destination})){    
 		dk_call dk_validate env:DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR";
 		$destination = "${env:DKDOWNLOAD_DIR}/${url_filename}";
 	}
-	if(!(${destination})){ dk_call dk_error "destination is invalid"; }
+	dk_call dk_assertVar "destination";
 	
 	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}"; }
 	${global:dk_download}="${destination}";
-	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist\n"; return; }
+	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist. Specify OVERWRITE to redownload.\n"; return; }
 	
 	dk_call dk_echo "Downloading ${url_filename} . . .\n";
 	
 	# make sure the destination parent directory exists
 	$destination_dir = dk_call dk_dirname "${destination}";
-	if(!(${destination_dir})){ dk_call dk_error "destination_dir is invalid"; }
+	dk_call dk_assertVar "destination_dir";
 	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}"; }
 	
 	# method 1

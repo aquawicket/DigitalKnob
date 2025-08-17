@@ -5,11 +5,15 @@ if(!$dk_unset_ps1){ $dk_unset_ps1 = 1; } else{ return; } #include guard
 # dk_unset(variable)
 #
 #
-function Global:dk_unset($variable) {
+function Global:dk_unset() {
 	dk_debugFunc 1;
 
-	if(!(Test-Path variable:$variable)){ return; }
-	Remove-Variable $variable -Scope Global;
+	${var}=$args[0];
+	
+	if(Test-Path "variable:${var}"){ 
+		Remove-Variable -Name "${var}" -Scope Global -ErrorAction SilentlyContinue;
+		return; 
+	}
 	
 	#if(!(Test-Path variable:$variable)){ return }
 	#Remove-Variable $variable -Scope Local
@@ -25,7 +29,7 @@ function Global:dk_unset($variable) {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	$global:myVar = "initial value assigned with dk_unset"
+	$global:myVar = "initial value assigned before dk_unset"
 	dk_call dk_echo "myVar = ${myVar}"
 	dk_call dk_unset myVar
 	dk_call dk_echo "myVar = ${myVar}"
