@@ -20,17 +20,25 @@ fi
 #  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
 #
 dk_depend() {
-	#echo "dk_depend($*)"
+	dk_debugFunc 1 99;
 	
-	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	if [ -e "${DKIMPORTS_DIR}/${1}/DKINSTALL.sh" ]; then
-		export CURRENT_IMPORT="${DKIMPORTS_DIR}/${1}";
-		dk_call dk_source "${CURRENT_IMPORT}/DKINSTALL.sh"
-		dk_call DKINSTALL
-		return
+	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
+	export CURRENT_IMPORT="${DKIMPORTS_DIR}/${1}";
+	dkInstall="${CURRENT_IMPORT}/DKINSTALL.sh";	
+	if ! [ -e "${dkInstall}" ]; then
+		dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR";
+		dkhttpInstall="${dkInstall/${DIGITALKNOB_DIR}/${DKHTTP_DIGITALKNOB_DIR}}";
+		dk_call dk_download "${dkhttpInstall}" "${dkInstall}"
 	fi
-
-	dk_call dk_fatal "${CURRENT_IMPORT}/DKINSTALL.sh not found"
+	if ! [ -e "${dkInstall}" ]; then
+		dk_call dk_fatal "${{dkInstall} not found";
+		return -1;
+	fi
+	
+	dk_allButFirstArgs="${@:2}";
+	dk_call dk_source "${dkInstall}";
+	dk_call DKINSTALL ${dk_allButFirstArgs};
+	return;
 }
 
 

@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::############################################################################
 ::# dk_depend(plugin)
 ::#
-::#   this will search for a "plugin" to run in the following search path
+::#   Run the DKINSTALL.cmd file for the given 'plugin'
 ::#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
 ::#
 :dk_depend

@@ -26,8 +26,11 @@ dk_DIGITALKNOB_DIR() {
 
 	############ GET ############
 	else
-		[ -n "${DIGITALKNOB-}" ] || export DIGITALKNOB="DigitalKnob"
-		[ -n "${DIGITALKNOB_DIR-}" ] || export DIGITALKNOB_DIR="$(dk_call dk_DKHOME_DIR)/${DIGITALKNOB}"  
+		[ -n "${DIGITALKNOB-}" ]			|| export DIGITALKNOB="DigitalKnob"
+		[ -n "${DIGITALKNOB_DIR-}" ]		|| export DIGITALKNOB_DIR="$(dk_call dk_DKHOME_DIR)/${DIGITALKNOB}"
+		[ -n "${DKHTTP_DIGITALKNOB-}" ] 	|| export DKHTTP_DIGITALKNOB="DigitalKnob"
+		export DKHTTP_DKHOME_DIR="https://raw.githubusercontent.com/aquawicket";
+		[ -n "${DKHTTP_DIGITALKNOB_DIR-}" ]	|| export DKHTTP_DIGITALKNOB_DIR="${DKHTTP_DKHOME_DIR}/${DKHTTP_DIGITALKNOB}"
 	fi 
 	
 	########## FINALIZE ############

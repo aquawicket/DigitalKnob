@@ -2,12 +2,11 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 if(!$dk_depend_ps1){ $dk_depend_ps1 = 1; } else{ return; } #include guard
 
 
-################################################################################
-# dk_depend()
+############################################################################
+# dk_depend(plugin)
 #
-#    Function description
-#
-#    @arg1	- arg1 description
+#   this will search for a "plugin" to run in the following search path
+#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
 #
 function Global:dk_depend() {
 	dk_debugFunc 0 99;
@@ -35,5 +34,5 @@ function Global:dk_depend() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 
-	dk_call dk_depend;
+	dk_call dk_depend git;
 }
