@@ -4,10 +4,11 @@ if(${env:DK_PS1}){return;} else{ ${env:DK_PS1}=1; }	# include_guard
 Write-Host "";
 ${env:DKSHELL} = (Get-Process -Id $pid).Name;
 ${env:DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
-${env:DKSHELL_PATH} = (get-command ${env:DKSHELL}).Path;
+${env:DKSHELL_PATH} = (get-command ${env:DKSHELL}).Path -replace "\\", "/";
 if(!${global:ESC}){ ${global:ESC} = "$([char]27)"; }				# escape character
 Write-Host "${ESC}[44m ${ESC}[30m ${env:DKSHELL} Version ${env:DKSHELL_VERSION} ${ESC}[0m";
 Write-Host "DKSHELL_PATH = ${env:DKSHELL_PATH}";
+${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace "\\", "/";
 Write-Host "DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 
 

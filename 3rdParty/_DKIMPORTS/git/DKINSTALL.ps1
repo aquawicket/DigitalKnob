@@ -8,44 +8,50 @@ if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps
 function Global:DKINSTALL() {
 	dk_debugFunc 0;
 	
-	${Import_Path}="${PSScriptRoot}";
-	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
-	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
-	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
-	dk_call dk_basename "${Import_Path}" Import_Name;
-	Write-Host "Import_Name = ${Import_Name}";
-	Write-Host "dk_basename = ${dk_basename}";
+	dk_call dk_import APP;
 	
-	dk_call dk_getParameterValue APP @args;
-	if(${APP}) {
-		dk_call dk_validate env:DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
-		${INSTALL_ROOT}="INSTALL_ROOT ${env:DKTOOLS_DIR}";
-	}
-	
-	Write-host "${Import_Name}_${Host_Tuple}_Import";
-	#dk_call dk_assertVar "${Import_Name}_${Host_Tuple}_Import";
-	${PLUGIN_IMPORT}=$(gv -Name ${Import_Name}_${Host_Tuple}_Import -ValueOnly);
-	dk_call dk_importVariables "$($PLUGIN_IMPORT)" ${INSTALL_ROOT};
+	#dk_call ${env:COMSPEC} /c "$(dk_call dk_DKDOWNLOAD_DIR)/${PLUGIN.Url.Basename}" -y -o ${GIT};
+	#dk_call ${env:COMSPEC} /c "$(dk_download}" -y -o ${GIT};
+}
 
-	dk_call dk_download "${PLUGIN.Url}";
+#	${Import_Path}="${PSScriptRoot}";
+#	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
+#	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
+#	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
+#	dk_call dk_basename "${Import_Path}" Import_Name;
+#	Write-Host "Import_Name = ${Import_Name}";
+#	Write-Host "dk_basename = ${dk_basename}";
+#	
+#	dk_call dk_getParameterValue APP @args;
+#	if(${APP}) {
+#		dk_call dk_validate env:DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
+#		${INSTALL_ROOT}="INSTALL_ROOT ${env:DKTOOLS_DIR}";
+#	}
+#	
+#	Write-host "${Import_Name}_${Host_Tuple}_Import";
+#	#dk_call dk_assertVar "${Import_Name}_${Host_Tuple}_Import";
+#	${PLUGIN_IMPORT}=$(gv -Name ${Import_Name}_${Host_Tuple}_Import -ValueOnly);
+#	dk_call dk_importVariables "$($PLUGIN_IMPORT)" ${INSTALL_ROOT};
+#
+#	dk_call dk_download "${PLUGIN.Url}";
+#	
+#	dk_call dk_getExtension "${PLUGIN.Url}" "${PLUGIN.Url.Extension]}"
+#	if("${PLUGIN.Url.Extension}" -eq ".7z"){ 		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".bz"){		$FileType = "Archive"; }	
+#	if("${PLUGIN.Url.Extension}" -eq ".bz2"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".gz"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".rar"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".sfx.exe"){	$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".tar"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".tar.gz"){	$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".tgz"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".xz"){		$FileType = "Archive"; }
+#	if("${PLUGIN.Url.Extension}" -eq ".zip"){		$FileType = "Archive"; }
+#	
+#	if("${FileType}" -eq "Archive"){
+#		dk_call dk_smartExtract "${dk_download}" "${PLUGIN.Install.Path}";
+#	}
 	
-	dk_call dk_getExtension "${PLUGIN.Url}" "${PLUGIN.Url.Extension]}"
-	if("${PLUGIN.Url.Extension}" -eq ".7z"){ 		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".bz"){		$FileType = "Archive"; }	
-	if("${PLUGIN.Url.Extension}" -eq ".bz2"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".gz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".rar"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".sfx.exe"){	$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tar"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tar.gz"){	$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tgz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".xz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".zip"){		$FileType = "Archive"; }
-	
-	if("${FileType}" -eq "Archive"){
-		dk_call dk_smartExtract "${dk_download}" "${PLUGIN.Install.Path}";
-	}
-}	
 	
 	
 	
