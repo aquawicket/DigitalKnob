@@ -22,6 +22,7 @@ function Global:dk_download($url, $destination) {
 	
 	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}"; }
 	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist\n"; return; }
+	${global:dk_download}="${destination}";
 	
 	dk_call dk_echo "Downloading ${url_filename} . . .\n";
 	

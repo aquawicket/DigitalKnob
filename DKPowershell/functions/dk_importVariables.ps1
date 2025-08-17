@@ -243,7 +243,7 @@ function Global:PLUGIN_Install_Name() {
 	#if(!(${PLUGIN.Version})){ dk_call dk_error "PLUGIN.Version is invalid"; }
 	dk_call dk_debug "PLUGIN.Version = '${PLUGIN.Version}'";
 
-	if(!(${PLUGIN.Import.Name}) -AND !(${PLUGIN.Version})){
+	if(${PLUGIN.Import.Name} -AND ${PLUGIN.Version}){
 		${global:PLUGIN.Install.Name}="${PLUGIN.Import.Name}-${PLUGIN.Version}";
 	}
 	elseif(!(${PLUGIN.Install.Name})){
