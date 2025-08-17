@@ -77,7 +77,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%dk_call% dk_assertPath "%DKTOOLS_DIR%"
 	%dk_call% dk_validate DKIMPORTS_DIR 		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_assertPath "%DKIMPORTS_DIR%"
-	%dk_call% dk_validate TCC_RT_EXE 			"%dk_call% %DKIMPORTS_DIR%/tcc-rt/DKINSTALL.cmd"
+	%dk_call% dk_validate TCC_RT_EXE 			"%dk_call% dk_depend tcc-rt"
 	%dk_call% dk_assertPath "%TCC_RT_EXE%"
 	
 	::%dk_call% dk_registryDeleteKey 	"HKCR/DKtcc"

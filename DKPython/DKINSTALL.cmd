@@ -53,7 +53,7 @@ exit /b %ERRORLEVEL%
 	::###### Install DKPython ######
 	%dk_call% dk_validate DKPYTHON_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PYTHON3_EXE				"%dk_call% %DKIMPORTS_DIR%/python3/DKINSTALL.cmd"
+	%dk_call% dk_validate PYTHON3_EXE				"%dk_call% dk_depend python3"
 
 	ftype DKPython="%ComSpec%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%PYTHON3_EXE%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKPython/DefaultIcon" "" "REG_SZ" "%PYTHON3_EXE%"	

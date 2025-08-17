@@ -52,8 +52,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/dark_config.xml" "%NOTEPADPP%/config.xml" OVERWRITE
 ::	
 ::	::### Add Context Menu ###
-::	%dk_call% "%DKIMPORTS_DIR%/notepadpp/contextMenu/DKINSTALL.cmd"
+::	%dk_call% dk_depend notepadpp/contextMenu"
 ::	
 ::	::### Add File Associations ###
-::	::%dk_call% %DKIMPORTS_DIR%/notepadpp/fileAssoc/DKINSTALL.cmd
+::	::%dk_call% dk_depend notepadpp/fileAssoc
 ::%endfunction%

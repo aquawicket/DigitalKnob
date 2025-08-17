@@ -151,6 +151,7 @@ if not defined dk_log_ERROR_TRACE			(set "dk_log_ERROR_TRACE=1")
 ::if not defined dk_log_ERROR_TIMEOUT		(set "dk_log_ERROR_TIMEOUT=3")
 ::if not defined dk_log_ERROR_PAUSE			(set "dk_log_ERROR_PAUSE=1")
 ::if not defined dk_log_ERROR_HALT			(set "dk_log_ERROR_HALT=0")
+::if not defined dk_log_ERROR_CALLBACK		(set "dk_log_ERROR_CALLBACK=0")
 
 ::### FATAL ###
 if not defined dk_log_FATAL_ENABLE			(set "dk_log_FATAL_ENABLE=1")
@@ -247,7 +248,14 @@ if not defined dk_log_FATAL_PAUSE			(set "dk_log_FATAL_PAUSE=1")
 		%dk_call% dk_beeps errorBeeps
 		%dk_call% dk_echo "%clr%"
 	)
-		
+	
+	::###### CALLBACK ######
+	if "!dk_log_%_level_%_CALLBACK!" neq "" (
+		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** CALLBACK_ON_%_level_% ***"
+		%dk_call% dk_echo "%clr%"
+		!dk_log_%_level_%_CALLBACK! "%_level_%" "%_message_%"
+	)
+	
 	::###### TIMEOUT ######
 	if "!dk_log_%_level_%_TIMEOUT!" gtr "0" (
 		%dk_call% dk_echo "!dk_log_%_level_%_COLOR!*** TIMEOUT_ON_%_level_% ***"

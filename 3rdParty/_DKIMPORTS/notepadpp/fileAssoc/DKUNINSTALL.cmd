@@ -12,7 +12,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% %DKIMPORTS_DIR%\notepadpp\DKINSTALL.cmd"
+	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_depend notepadpp"
 
 	%dk_call% dk_uninstallFileAssoc .1
 	%dk_call% dk_uninstallFileAssoc .2

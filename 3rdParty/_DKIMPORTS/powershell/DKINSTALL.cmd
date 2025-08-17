@@ -39,7 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::### Add File Associations ###
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% "%DKIMPORTS_DIR%/powershell/fileAssoc/DKINSTALL.cmd"
+	::%dk_call% dk_depend powershell/fileAssoc
 	
 :: install via CMake
 ::	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

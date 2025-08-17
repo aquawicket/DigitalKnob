@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"
 	%dk_call% dk_set WINPE_QCOW "%WINPE_DIR%\winpe.qcow"
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\DKINSTALL.cmd"
+	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% dk_depend qemu"
 
 ::	if not exist "%WINPE_QCOW%" (%QEMU_IMG_EXE% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" "%WINPE_QCOW%")
 ::	%QEMU_SYSTEM_X86_64_EXE% -drive file=%WINPE_QCOW% -m 1G -cpu max -smp 2 -vga virtio -display sdl

@@ -74,19 +74,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if /i "%Target_Env%" equ "Cosmo" (
-		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
-		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% %DKIMPORTS_DIR%/Cosmo/DKINSTALL.cmd"
+		%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh"
+		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend Cosmo"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
 	)
 
 	if /i "%Target_Env%" equ "Clang" (
-		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/Clang/DKINSTALL.cmd"
+		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend Clang"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
 	if /i "%Target_Env%" equ "Gcc" (
-		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% %DKIMPORTS_DIR%/Gcc/DKINSTALL.cmd"
+		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend Gcc"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"
 	)

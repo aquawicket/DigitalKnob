@@ -6,8 +6,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 %dk_call% dk_validate DK3RDPARTY_DIR     "%dk_call% dk_DK3RDPARTY_DIR"
 %dk_call% dk_validate DKTOOLS_DIR        "%dk_call% dk_DKTOOLS_DIR"
-%dk_call% dk_validate COSMO_C_COMPILER   "call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\DKINSTALL.cmd"
-%dk_call% dk_validate COSMO_CXX_COMPILER "call %DK3RDPARTY_DIR%\_DKIMPORTS\cosmocc\DKINSTALL.cmd"
+%dk_call% dk_validate COSMO_C_COMPILER   "%dk_call% dk_depend cosmocc"
+%dk_call% dk_validate COSMO_CXX_COMPILER "%dk_call% dk_depend cosmocc"
 
 @RD /S /Q "build"
 

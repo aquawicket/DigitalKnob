@@ -61,19 +61,19 @@ if not defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if "%Target_Env%" equ "cosmocc" (
-		%dk_call% dk_validate SH_EXE				"%dk_call% %DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
-		%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% %DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
+		%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh"
+		%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% dk_depend cosmocc"
 		%dk_call% dk_assertPath COSMOCC_CXX_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_CXX_COMPILER!"
 	)
 
 	if "%Target_Env%" equ "clang" (
-		%dk_call% dk_validate CLANG_CXX_COMPILER		"%dk_call% %DKIMPORTS_DIR%/clang/DKINSTALL.cmd"
+		%dk_call% dk_validate CLANG_CXX_COMPILER		"%dk_call% dk_depend clang"
 		%dk_call% dk_assertPath CLANG_CXX_COMPILER
 		set "COMPILER_EXE=!CLANG_CXX_COMPILER!"
 	)
 	if "%Target_Env%" equ "gcc" (
-		%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% %DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
+		%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% dk_depend gcc"
 		%dk_call% dk_assertPath GCC_CXX_COMPILER
 		set "COMPILER_EXE=!GCC_CXX_COMPILER!"
 	)

@@ -6,7 +6,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::https://www.msys2.org/wiki/Launchers
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 %dk_call% dk_validate GIT "%dk_call% dk_depend git"
-%dk_call% dk_validate MSYS2 "%dk_call% %DKIMPORTS_DIR%\msys2\DKINSTALL.cmd"
+%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
 
 goto main
 :: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"

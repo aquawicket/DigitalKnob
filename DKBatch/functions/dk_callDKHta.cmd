@@ -18,9 +18,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### Get DKHTTP_DKHTA_FUNCTIONS_DIR
 	if not defined DKHTTP_DKHTA_DIR				(set "DKHTTP_DKHTA_DIR=%DKHTTP_DKBRANCH_DIR%/DKHTA")
 	if not defined DKHTTP_DKHTA_FUNCTIONS_DIR	(set "DKHTTP_DKHTA_FUNCTIONS_DIR=%DKHTTP_DKHTA_DIR%/functions")
+	
 	::### Download files if missing
-	if not exist %DKHTA_FUNCTIONS_DIR%/DK.hta		(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/DK.hta" "%DKHTA_FUNCTIONS_DIR%/DK.hta")
-	if not exist %DKHTA_FUNCTIONS_DIR%/%~1.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/%~1.hta" "%DKHTA_FUNCTIONS_DIR%/%~1.hta")
+	::if not exist %DKHTA_FUNCTIONS_DIR%/DK.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/DK.hta" "%DKHTA_FUNCTIONS_DIR%/DK.hta")
+	::if not exist %DKHTA_FUNCTIONS_DIR%/%~1.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/%~1.hta" "%DKHTA_FUNCTIONS_DIR%/%~1.hta")
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

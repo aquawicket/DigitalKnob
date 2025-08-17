@@ -41,7 +41,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	::###### Install DKJavascript ######
 	%dk_call% dk_echo "Installing DKJavascript . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NODEJS_EXE "%dk_call% %DKIMPORTS_DIR%\nodejs\DKINSTALL.cmd"
+	%dk_call% dk_validate NODEJS_EXE "%dk_call% dk_depend nodejs"
 	%dk_call% dk_registryDeleteKey "HKCR\DKBatch"
 	
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"

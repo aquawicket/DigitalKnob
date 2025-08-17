@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::############ Install Notepad++ ############
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% %DKIMPORTS_DIR%/notepadpp/DKINSTALL.cmd"
+	::%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_depend notepadpp"
 	
 ::	if not exist "%NOTEPADPP_EXE%" (
 ::		%dk_call% dk_error "could not find notepad++.exe.  is it installed?"

@@ -15,7 +15,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%\wsl\DKINSTALL.cmd"
+	%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
 
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if not exist "%DKBASH_FUNCTIONS_DIR%"       set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"

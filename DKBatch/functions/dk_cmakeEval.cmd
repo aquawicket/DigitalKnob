@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKCMAKE_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_assertPath DKCMAKE_DIR
 
-	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
+	%dk_call% dk_validate CMAKE_EXE			"%dk_call% dk_depend cmake"
 	%dk_call% dk_assertPath CMAKE_EXE
 
 	set DKCOMMAND=%~1

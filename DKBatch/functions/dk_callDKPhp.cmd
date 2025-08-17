@@ -25,8 +25,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if not exist "%DKPHP_FUNCTIONS_DIR%/DK.php"		(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/DK.php" "%DKPHP_FUNCTIONS_DIR%/DK.php")
 	if not exist "%DKPHP_FUNCTIONS_DIR%/%~1.php"	(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/%~1.php" "%DKPHP_FUNCTIONS_DIR%/%~1.php")
 
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PHP_EXE "call %DKIMPORTS_DIR%/php-src/DKINSTALL.cmd"
+	%dk_call% dk_validate PHP_EXE "%dk_call% dk_depend php-src"
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

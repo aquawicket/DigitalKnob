@@ -50,7 +50,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### Install DKPhp ######
 	%dk_call% dk_echo "Installing DKPhp . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PHP_EXE "%dk_call% %DKIMPORTS_DIR%/php-src/DKINSTALL.cmd"
+	%dk_call% dk_validate PHP_EXE "%dk_call% dk_depend php-src"
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_PHP_EXE"
 	%dk_call% dk_assertPath PHP_EXE
 

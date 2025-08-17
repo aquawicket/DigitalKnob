@@ -7,7 +7,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DK_MSYS_BASH environment
 ::#
 %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_validate MSYS2 "%dk_call% %DKIMPORTS_DIR%\msys2\DKINSTALL.cmd"
+%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
 set "PATH=%MSYS2%\usr\bin;%PATH%"
 %dk_call% dk_chdir %MSYS2%
 

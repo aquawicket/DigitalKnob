@@ -30,7 +30,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::### CMAKE ###
 ::	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
-::	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
+::	%dk_call% dk_validate CMAKE_EXE			"%dk_call% dk_depend cmake"
 ::	"%CMAKE_EXE%" -E create_symlink 		"%src_path%" "%hardlink_path%"
 %endfunction%
 
