@@ -30,41 +30,6 @@ dk_trimNonAlphaNumeric() {
 	
 	f="${1#"${1%%[[:alnum:]]*}"}";
 	dk_trimNonAlphaNumeric="${f%"${f##*[[:alnum:]]}"}";
-
-#	dk_call dk_replaceAll "${input}" "-" "_" input		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "." "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" " " "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "=" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" ";" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "," "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "!" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "@" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "#" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "$" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "%" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "^" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "^" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "&" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "*" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "(" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" ")" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "+" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "|" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" ":" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "[" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "]" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "\" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "'" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "." "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "/" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "~" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" """ "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "?" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "<" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" ">" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "{" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "}" "_" output		# POSIX replace
-#	dk_call dk_replaceAll "${input}" "`" "_" output		# POSIX replace
 	
 	
 	###### output ######
