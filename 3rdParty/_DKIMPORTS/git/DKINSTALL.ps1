@@ -22,7 +22,7 @@ function Global:DKINSTALL() {
 	dk_call dk_echo "GIT_EXE = ${GIT_EXE}";
 	
 	if(dk_call dk_pathExists "${GIT_EXE}"){ return; }
-	if(Test-Path ${GIT_EXE}){ 
+	if(Test-Path "${GIT_EXE}"){ 
 		dk_call dk_echo "Git already installed at:${GIT_EXE}";
 		return; 
 	}
@@ -43,5 +43,5 @@ function Global:DKINSTALL() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-    dk_call DKINSTALL
+    dk_call DKINSTALL;
 }

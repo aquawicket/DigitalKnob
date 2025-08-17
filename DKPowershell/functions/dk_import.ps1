@@ -11,7 +11,7 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 #	@url	- The online path of the .git or file to import
 #
 #	github GIT:	https://github.com/orginization/library.git		dkimportGit(url) #branch/tag #PATCH
-#	github DL:	https://github.com/orginization/library			dkimportGit(url) #branch/tag #PATCH
+#	 github DL:	https://github.com/orginization/library			dkimportGit(url) #branch/tag #PATCH
 #	lib url DL:	https://website.com/library.zip					dkimportDownload(url) #PATCH
 #	exe url DL:	https://website.com/executable.exe 				dkimportDownload(url) #PATCH
 #
@@ -20,29 +20,40 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 function Global:dk_import() {
 	dk_debugFunc 0 99
 	
+	dk_call dk_assertVar "CURRENT_IMPORT";
 	${Import_Path}="${CURRENT_IMPORT}" -replace "\\", "/";
+	
 	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
 	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
 	dk_call dk_basename "${Import_Path}" Import_Name;
-	Write-Host "Import_Name = ${Import_Name}";
-	Write-Host "dk_basename = ${dk_basename}";
+	dk_call dk_assertVar "Import_Name";
 	
 	#dk_call dk_getParameterValue APP @args;
 	#if(${APP}) {
 	if("$args" -eq "APP"){
 		dk_call dk_validate env:DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
 		${INSTALL_ROOT}="${env:DKTOOLS_DIR}";
+	} 
+	else {
+		dk_call dk_validate env:DK3RDPARTY_DIR "dk_call dk_DK3RDPARTY_DIR";
+		${INSTALL_ROOT}="${env:DK3RDPARTY_DIR}";
 	}
+	dk_call dk_assertVar "INSTALL_ROOT";
 
-	Write-host "${Import_Name}_${Host_Tuple}_Import";
-	#dk_call dk_assertVar "${Import_Name}_${Host_Tuple}_Import";
+	dk_call dk_assertVar "${Import_Name}_${Host_Tuple}_Import";
 	${PLUGIN_IMPORT}=$(gv -Name ${Import_Name}_${Host_Tuple}_Import -ValueOnly);
-	dk_call dk_importVariables "$($PLUGIN_IMPORT)" INSTALL_ROOT ${INSTALL_ROOT};
-
-	dk_call dk_download "${PLUGIN.Url}";
+	dk_call dk_assertVar "PLUGIN_IMPORT";
 	
-	dk_call dk_getExtension "${PLUGIN.Url}" "${PLUGIN.Url.Extension]}"
+	dk_call dk_importVariables "${PLUGIN_IMPORT}" INSTALL_ROOT ${INSTALL_ROOT};
+	dk_call dk_assertVar "PLUGIN.Url";
+	dk_call dk_assertVar "PLUGIN.Install.Path";
+	
+	dk_call dk_download "${PLUGIN.Url}";
+	dk_call dk_assertVar "dk_download";
+	
+	dk_call dk_getExtension "${PLUGIN.Url}" PLUGIN.Url.Extension;
+	dk_call dk_assertVar "PLUGIN.Url.Extension";
 	if("${PLUGIN.Url.Extension}" -eq ".7z"){ 		$FileType = "Archive"; }
 	if("${PLUGIN.Url.Extension}" -eq ".bz"){		$FileType = "Archive"; }	
 	if("${PLUGIN.Url.Extension}" -eq ".bz2"){		$FileType = "Archive"; }

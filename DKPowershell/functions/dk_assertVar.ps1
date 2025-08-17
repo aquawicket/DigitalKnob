@@ -5,13 +5,14 @@ if(!$dk_assertVar_ps1){ $dk_assertVar_ps1 = 1; } else{ return; } #include guard
 # dk_assertVar(expression)
 #
 #
-function Global:dk_assertVar($var) {
-	dk_debugFunc 1;
+function Global:dk_assertVar() {
+	#dk_debugFunc 1;
 
-	Write-Host "var = (${!var})"
-	if((${!var})){
-		return; #${true}
-	}
+	${var}=$args[0];
+	
+	if(Test-Path variable:${var}){ return; }
+	
+	#Write-Host "var = ${var} = $(gv -Name ${var} -ValueOnly)"
 	
 	dk_call dk_error "Assertion failed: $(__FILE__ 1):$(__LINE__ 1)  $(__FUNCTION__ 1)($(__ARGV__ 1))";
 	return ${false};
@@ -25,24 +26,24 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 	
 	$myVar = "string";
-	dk_call dk_info "dk_assertVar myVar" -and dk_call dk_assertVar myVar;
-	#dk_call dk_info "dk_assertVar $myVar" -and dk_call dk_assertVar $myVar;
-	#dk_call dk_info "dk_assertVar ${myVar}" -and dk_call dk_assertVar ${myVar};
+	dk_call dk_info "dk_assertVar myVar = ${myVar}"; dk_call dk_assertVar myVar;
+	#dk_call dk_info "dk_assertVar $myVar"; dk_call dk_assertVar $myVar;
+	#dk_call dk_info "dk_assertVar ${myVar}"; dk_call dk_assertVar ${myVar};
 
 	$myVarB = 15;
-	dk_call dk_info "dk_assertVar myVarB" -and dk_call dk_assertVar myVarB;
-	#dk_call dk_info "dk_assertVar $myVarB" -and dk_call dk_assertVar $myVarB;
-	#dk_call dk_info "dk_assertVar ${myVarB}" -and dk_call dk_assertVar ${myVarB};
+	dk_call dk_info "dk_assertVar myVarB = ${myVarB}"; dk_call dk_assertVar myVarB;
+	#dk_call dk_info "dk_assertVar $myVarB"; dk_call dk_assertVar $myVarB;
+	#dk_call dk_info "dk_assertVar ${myVarB}"; dk_call dk_assertVar ${myVarB};
 
 	$myVarC = " ";
-	dk_call dk_info "dk_assertVar myVarC" -and dk_call dk_assertVar myVarC;
-	#dk_call dk_info "dk_assertVar $myVarC" -and dk_call dk_assertVar $myVarC;
-	#dk_call dk_info "dk_assertVar ${myVarC}" -and dk_call dk_assertVar ${myVarC};
+	dk_call dk_info "dk_assertVar myVarC = ${myVarC}"; dk_call dk_assertVar myVarC;
+	#dk_call dk_info "dk_assertVar $myVarC"; dk_call dk_assertVar $myVarC;
+	#dk_call dk_info "dk_assertVar ${myVarC}"; dk_call dk_assertVar ${myVarC};
 
-	$myVarD = "";
-	dk_call dk_info "dk_assertVar myVarD" -and dk_call dk_assertVar myVarD;
-	#dk_call dk_info "dk_assertVar $myVarD" -and dk_call dk_assertVar $myVarD;
-	#dk_call dk_info "dk_assertVar ${myVarD}" -and dk_call dk_assertVar ${myVarD};
+	#$myVarD = "";
+	dk_call dk_info "dk_assertVar myVarD = ${myVarD}"; dk_call dk_assertVar myVarD;
+	#dk_call dk_info "dk_assertVar $myVarD"; dk_call dk_assertVar $myVarD;
+	#dk_call dk_info "dk_assertVar ${myVarD}"; dk_call dk_assertVar ${myVarD};
 
 #	$myVarE =;
 #	dk_call dk_assertVar myVarE;
