@@ -5,7 +5,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::#########################################################################
-::# dk_getGitBranchName(url rtn_var)
+::# dk_gitBranchName(url rtn_var)
 ::#
 ::#	Return the name of the head branch from a git repository
 ::#
@@ -14,15 +14,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#	https://stackoverflow.com/a/31919435
 ::#
-:dk_getGitBranchName
+:dk_gitBranchName
 	%dk_call% dk_debugFunc 1 2
 	
+	set "url=%~1"
 	%dk_call% dk_depend git
 			
 	%dk_call% dk_exec %GIT_EXE% ls-remote %url% heads/*
 	
 	endlocal & (
-		set "dk_getGitBranchName=%dk_exec%"
+		set "dk_gitBranchName=%dk_exec%"
 	)
 
 %endfunction%
@@ -34,6 +35,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKTEST
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_getGitBranchName
-	%dk_call% dk_printVar dk_getGitBranchName
+	%dk_call% dk_gitBranchName "https://github.com/aquawicket/DigitalKnob.git"
+	%dk_call% dk_printVar dk_gitBranchName 
 %endfunction%

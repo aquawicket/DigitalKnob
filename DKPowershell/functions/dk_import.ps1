@@ -20,18 +20,35 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 function Global:dk_import() {
 	dk_debugFunc 0 99
 	
-	dk_call dk_assertVar "CURRENT_IMPORT";
-	${Import_Path}="${CURRENT_IMPORT}" -replace "\\", "/";
+	if(dk_call dk_isUrl $args[0]){
+		dk_call dk_echo "args[0]:$($args[0]) is a url";
+	}
 	
-	dk_call dk_assertPath "${Import_Path}/dkconfig.txt";
-	dk_call dk_getFileParams "${Import_Path}/dkconfig.txt";
+	if(!(${CURRENT_IMPORT})){
+		dk_call dk_validate env:DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR";
+		$CallStack = Get-PSCallStack;
+		$frame=0;
+		while($CallStack.Count -gt $frame) {	
+			$callingScript = $CallStack[$frame].ScriptName -replace "\\", "/";
+			if(dk_call dk_includes "${callingScript}" "${env:DKIMPORTS_DIR}"){
+				dk_call dk_dirname "${callingScript}" CURRENT_IMPORT;
+				${global:CURRENT_IMPORT}="${CURRENT_IMPORT}" -replace "\\", "/";
+				break;
+			}
+			$frame++;
+		}
+	}	
+	
+	dk_call dk_assertPath "${CURRENT_IMPORT}/dkconfig.txt";
+	dk_call dk_getFileParams "${CURRENT_IMPORT}/dkconfig.txt";
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
-	dk_call dk_basename "${Import_Path}" Import_Name;
+	dk_call dk_basename "${CURRENT_IMPORT}" Import_Name;
 	dk_call dk_assertVar "Import_Name";
+	Write-Host "Import_Name = ${Import_Name}";
 	
-	#dk_call dk_getParameterValue APP @args;
-	#if(${APP}) {
-	if("$args" -eq "APP"){
+	dk_call dk_getParameterValue APP @args;
+	Write-Host "APP = ${APP}";
+	if(${APP}) {
 		dk_call dk_validate env:DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
 		${INSTALL_ROOT}="${env:DKTOOLS_DIR}";
 	} 
@@ -89,8 +106,7 @@ function Global:dk_import() {
 function Global:DKTEST() {
 	#dk_debugFunc 0;
 	
-	dk_call dk_depend "git";
-	
+	dk_call dk_import git;
 	#dk_call dk_import "https://github.com/madler/zlib/archive/d4768283.zip";
 	#dk_call dk_import https://www.dependencywalker.com/depends22_x64.zip;
 }

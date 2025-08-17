@@ -6,7 +6,10 @@ if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
 #
 function Global:DKINSTALL() {
 	dk_debugFunc 0;
-
+	
+	dk_call dk_import APP;
+	return;
+	
 	dk_call dk_source "${PSScriptRoot}/dkconfig.txt";
 	dk_call dk_getFileParams ${PSScriptRoot}/dkconfig.txt;
 	
