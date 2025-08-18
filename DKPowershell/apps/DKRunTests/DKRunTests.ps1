@@ -47,6 +47,7 @@ function Global:DKRunTests() {
 	DISABLE dk_import.ps1;
 	DISABLE dk_imgToIco.ps1;
 	DISABLE dk_gitUpdate.ps1;
+	DISABLE dk_installCmake.ps1;
 	
 	dk_call dk_validate DKPOWERSHELL_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
 	$_files_ = dk_call dk_getFiles ${DKPOWERSHELL_FUNCTIONS_DIR_};
