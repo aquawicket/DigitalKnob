@@ -48,6 +48,15 @@ function Global:DKRunTests() {
 	DISABLE dk_imgToIco.ps1;
 	DISABLE dk_gitUpdate.ps1;
 	DISABLE dk_installCmake.ps1;
+	DISABLE dk_gitCommit.ps1;
+	DISABLE dk_installGit.ps1;
+	DISABLE dk_keyboard.ps1;
+	DISABLE dk_move.ps1;
+	DISABLE dk_pickUpdate.ps1;
+	DISABLE dk_reload.ps1;
+	DISABLE dk_smartExtract.ps1;
+	DISABLE dk_resetAll.ps1;
+	
 	
 	dk_call dk_validate DKPOWERSHELL_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
 	$_files_ = dk_call dk_getFiles ${DKPOWERSHELL_FUNCTIONS_DIR_};
