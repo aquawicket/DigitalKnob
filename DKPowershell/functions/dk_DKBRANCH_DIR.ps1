@@ -184,7 +184,7 @@ function Global:DKTEST() {
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .\n";
-	dk_call dk_DKBRANCH_DIR "C:/Digital Knob/Development"
+	dk_call dk_DKBRANCH_DIR "C:/Users/Administrator/DigitalKnob/Development"
 	dk_call dk_echo "env:DKBRANCH_DIR = ${env:DKBRANCH_DIR}"
-	dk_call dk_echo "dk_DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Digital Knob/Development')'\n";
+	dk_call dk_echo "dk_DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Users/Administrator/DigitalKnob/Development')'\n";
 }

@@ -25,14 +25,17 @@ function Global:dk_download() {
 	
 	if(Test-Path -Path "${destination}" -PathType Container){ $destination = "${destination}/${url_filename}"; }
 	${global:dk_download}="${destination}";
-	if(Test-Path "${destination}"){ dk_call dk_echo "${destination} already exist. Specify OVERWRITE to redownload.\n"; return; }
+	if(Test-Path "${destination}"){ 
+		dk_call dk_echo "${destination} already exist. Specify OVERWRITE to re-download.\n"; 
+		return 0; 
+	}
 	
 	dk_call dk_echo "Downloading ${url_filename} . . .\n";
 	
 	# make sure the destination parent directory exists
-	$destination_dir = dk_call dk_dirname "${destination}";
+	${global:destination_dir} = dk_call dk_dirname "${destination}";
 	dk_call dk_assertVar "destination_dir";
-	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}"; }
+	if(!Test-Path "${destination_dir}"){ dk_call dk_mkdir "${destination_dir}"; }
 	
 	# method 1
 	Invoke-WebRequest -URI ${url} -OutFile ${destination} -ErrorAction SilentlyContinue; #-SkipHttpErrorCheck;
@@ -56,7 +59,7 @@ function Global:dk_download() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1";
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "DKBuilder.ps1";
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "DKBuilder.ps1";
+	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
 }

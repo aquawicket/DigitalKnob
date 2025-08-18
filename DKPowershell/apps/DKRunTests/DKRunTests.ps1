@@ -35,9 +35,17 @@ function Global:RUNTEST() {
 function Global:DKRunTests() {
 	Write-Host "DKRunTests()";
 
-	DISABLE collect-wsl-logs.ps1
+	DISABLE collect-wsl-logs.ps1;
+	DISABLE dk_copy.ps1;
+	DISABLE dk_confirm.ps1;
+	DISABLE dk_download.ps1;
+	DISABLE dk_dumpLogProfile.ps1;
+	DISABLE dk_exit.ps1;
+	DISABLE dk_extract.ps1;
+	DISABLE dk_enterManually.ps1;
+	DISABLE dk_generate.ps1;
 	
-
+	
 	dk_call dk_validate DKPOWERSHELL_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
 	$_files_ = dk_call dk_getFiles ${DKPOWERSHELL_FUNCTIONS_DIR_};
 	

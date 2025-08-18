@@ -50,7 +50,7 @@ function Global:DKTEST() {
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DKIMPORTS_DIR . . .\n";
-	dk_call dk_DKIMPORTS_DIR "C:/Digital Knob/3rdParty/_DKIMPORTS"
+	dk_call dk_DKIMPORTS_DIR "C:/Users/Administrator/DigitalKnob/3rdParty/_DKIMPORTS"
 	dk_call dk_echo "env:DKIMPORTS_DIR = ${env:DKIMPORTS_DIR}"
-	dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR 'C:/Digital Knob/3rdParty/_DKIMPORTS')'\n";
+	dk_call dk_echo "dk_DKIMPORTS_DIR = '$(dk_call dk_DKIMPORTS_DIR 'C:/Users/Administrator/DigitalKnob/3rdParty/_DKIMPORTS')'\n";
 }
