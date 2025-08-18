@@ -4,60 +4,61 @@ if(!$DKRUNTEST_ps1){ $DKRUNTEST_ps1 = 1; } else{ return; } #include guard
 
 #####################################
 function Global:RUNTEST() {
-	Write-Host "RUNTEST()";
-#	if ! [ "#${disabled/;${1};//}#" = "#${disabled}#" ]; then
-#		echo "${yellow} ######### ${1} is disabled ######### ${clr}";
-#		return;
-#	fi
-#	echo "######## ${DKBASH_FUNCTIONS_DIR_}${1} #######";
-#	[ ! -e "${DKBASH_FUNCTIONS_DIR_}${1}" ] && return -1
-#	dk_call dk_fileContains "${DKBASH_FUNCTIONS_DIR_}${1}" "DKTEST(" || return -1
-#	
-#	CURRENT_TEST_FILE="${1}";
-#	echo "">> 								$(dirname $0)/log.txt
-#	echo "######### ${1} #########">> 		$(dirname $0)/log.txt
-#	#title TESTING "### %~nx1 ###"
-#	echo "";
-#	echo "${bg_magenta}${white}###### DKTEST MODE ###### ${1} ###### DKTEST MODE ######${clr}";
-#	echo "";
-#	. "${DKBASH_FUNCTIONS_DIR_}${1}";
-#	DKTEST && (
-#		echo "        ### passed status:$?">> 		$(dirname $0)/log.txt
-#	) || (
-#		echo "        ### FAILED status:$?">> 		$(dirname $0)/log.txt
-#	)
-#	echo "";
-#	echo "${bg_magenta}${white}######## END TEST ####### ${1} ######## END TEST #######${clr}";
-#	echo "";
+	if(${disabled} -Match $args[0]){
+		echo "${yellow} ######### $($args[0]) is disabled ######### ${clr}";
+		return;
+	}
+	#echo "######## ${DKPOWERSHELL_FUNCTIONS_DIR_}$($args[0]) #######";
+	if((Test-Path ${DKPOWERSHELL_FUNCTIONS_DIR_}$($args[0]))){ 
+		if(!(dk_call dk_fileContains "${DKPOWERSHELL_FUNCTIONS_DIR_}$($args[0])" "function GLOBAL:DKTEST()")){
+			${global:CURRENT_TEST_FILE}="$($args[0])";
+			echo "">> 										${PSScriptRoot}/log.txt
+			echo "######### $($args[0]) #########">> 		${PSScriptRoot}/log.txt
+		#	#title TESTING "### %~nx1 ###"
+			echo "";
+			echo "${bg_magenta}${white}###### DKTEST MODE ###### $($args[0]) ###### DKTEST MODE ######${clr}";
+			echo "";
+			. "${DKPOWERSHELL_FUNCTIONS_DIR_}$($args[0])";
+			DKTEST; #&& (
+		#		echo "        ### passed status:$?">> 		${PSScriptRoot}/log.txt
+		#	) || (
+		#		echo "        ### FAILED status:$?">> 		${PSScriptRoot}/log.txt
+		#	)
+			echo "";
+			echo "${bg_magenta}${white}######## END TEST ####### $($args[0]) ######## END TEST #######${clr}";
+			echo "";
+		}
+	}
 }
 
 #####################################
 function Global:DKRunTests() {
 	Write-Host "DKRunTests()";
-#	DISABLE __ARGC__.sh;
-#	DISABLE __ARG__.sh;
-#	DISABLE __ARGV__.sh;
-#	
-#	dk_call dk_validate DKBASH_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
-#	dk_call dk_getFiles ${DKBASH_FUNCTIONS_DIR_} _files_;
-#	
-#	### Clear log.txt
-#	echo "" > $(dirname $0)/log.txt
-#
-#	#set "dk_log_ERROR_CALLBACK=call %~f0 :CALLBACK"
-#	#set "dk_log_FATAL_CALLBACK=call %~f0 :CALLBACK"
-#	
-#	#set "READY=1"
-#	for ((i=0; i<${#_files_[@]}; i++)); do
-#		echo "RUNTEST ${_files_[$i]}";
-#		RUNTEST "${_files_[$i]}";
-#	done
+
+	DISABLE collect-wsl-logs.ps1
+	
+
+	dk_call dk_validate DKPOWERSHELL_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
+	$_files_ = dk_call dk_getFiles ${DKPOWERSHELL_FUNCTIONS_DIR_};
+	
+	### Clear log.txt
+	echo "" > ${PSScriptRoot}/log.txt
+
+	#set "dk_log_ERROR_CALLBACK=call %~f0 :CALLBACK"
+	#set "dk_log_FATAL_CALLBACK=call %~f0 :CALLBACK"
+	
+	#set "READY=1"
+	for($i=0; $i -lt $_files_.count; $i++) {
+		#dk_call dk_echo "${cyan}_files_[$i] = ${blue}'$($_files_[$i])'${clr}";
+		RUNTEST "$($_files_[$i])";
+	}
 }
 
 #####################################
 function Global:DISABLE() {
-	Write-Host "DISABLE()";
-#	export disabled="${disabled-};${1};"
+	Write-Host "DISABLE($($args[0]))";
+
+	${global:disabled}="${disabled};$($args[0]);"
 }
 
 

@@ -81,7 +81,6 @@ function DK() {
 	###### DKTEST MODE ######
 	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
 	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:DKTEST()"){
-		Write-Host "DKTEST TRUE";
 		dk_call dk_echo "\n";
 		dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}\n";
 		dk_call dk_echo  "\n";
@@ -94,7 +93,8 @@ function DK() {
 		dk_call dk_exit
 	}
 	else {
-		Write-Host "DKTEST FALSE";
+		. ${DKSCRIPT_PATH};
+		dk_call ${DKSCRIPT_PATH};
 	}
 }
 

@@ -100,7 +100,7 @@ if(!(${dk_log_TODO_TAG}))			{ $global:dk_log_TODO_TAG = "TODO: "; }
 #if(!(${dk_log_TODO_LINE}))			{ $global:dk_log_TODO_LINE = 0; }
 #if(!(${dk_log_TODO_SOUND}))		{ $global:dk_log_TODO_SOUND = 0; }
 #if(!(${dk_log_TODO_TIMEOUT}))		{ $global:dk_log_TODO_TIMEOUT = 0; }
-if(!(${dk_log_TODO_PAUSE}))			{ $global:dk_log_TODO_PAUSE = 1; }
+#if(!(${dk_log_TODO_PAUSE}))		{ $global:dk_log_TODO_PAUSE = 1; }
 #if(!(${dk_log_TODO_HALT}))			{ $global:dk_log_TODO_HALT = 0; }
 
 ### NOTICE ###
@@ -122,7 +122,7 @@ if(!(${dk_log_FIXME_TAG}))      	{ $global:dk_log_FIXME_TAG = "FIXME: "; }
 #if(!(${dk_log_FIXME_LINE}))     	{ $global:dk_log_FIXME_LINE = 0; }
 #if(!(${dk_log_FIXME_SOUND}))     	{ $global:dk_log_FIXME_SOUND = 0; }
 #if(!(${dk_log_FIXME_TIMEOUT}))     { $global:dk_log_FIXME_TIMEOUT = 0; }
-if(!(${dk_log_FIXME_PAUSE}))    	{ $global:dk_log_FIXME_PAUSE = 1; }
+#if(!(${dk_log_FIXME_PAUSE}))    	{ $global:dk_log_FIXME_PAUSE = 1; }
 #if(!(${dk_log_FIXME_HALT}))     	{ $global:dk_log_FIXME_HALT = 0; }
 
 ### WARNING ###
@@ -144,7 +144,7 @@ if(!(${dk_log_DEPRECATED_TAG}))     { $global:dk_log_DEPRECATED_TAG = "DEPRECATE
 #if(!(${dk_log_DEPRECATED_LINE}))   { $global:dk_log_DEPRECATED_LINE = 0; }
 #if(!(${dk_log_DEPRECATED_SOUND}))  { $global:dk_log_DEPRECATED_SOUND = 0; }
 #if(!(${dk_log_DEPRECATED_TIMEOUT})){ $global:dk_log_DEPRECATED_TIMEOUT = 0; }
-if(!(${dk_log_DEPRECATED_PAUSE}))   { $global:dk_log_DEPRECATED_PAUSE = 1; }
+#if(!(${dk_log_DEPRECATED_PAUSE}))   { $global:dk_log_DEPRECATED_PAUSE = 1; }
 #if(!(${dk_log_DEPRECATED_HALT}))   { $global:dk_log_DEPRECATED_HALT = 0; }
 
 ### ERROR ###
@@ -155,7 +155,7 @@ if(!(${dk_log_ERROR_TAG}))      	{ $global:dk_log_ERROR_TAG = "ERROR: "; }
 #if(!(${dk_log_ERROR_LINE}))     	{ $global:dk_log_ERROR_LINE = 0; }
 #if(!(${dk_log_ERROR_SOUND}))     	{ $global:dk_log_ERROR_SOUND = 0; }
 #if(!(${dk_log_ERROR_TIMEOUT}))     { $global:dk_log_ERROR_TIMEOUT = 0; }
-if(!(${dk_log_ERROR_PAUSE}))    	{ $global:dk_log_ERROR_PAUSE = 1; }
+#if(!(${dk_log_ERROR_PAUSE}))    	{ $global:dk_log_ERROR_PAUSE = 1; }
 #if(!(${dk_log_ERROR_HALT}))     	{ $global:dk_log_ERROR_HALT = 0; }
 
 ### FATAL ###
@@ -166,7 +166,7 @@ if(!(${dk_log_FATAL_TAG}))      	{ $global:dk_log_FATAL_TAG = "FATAL: "; }
 #if(!(${dk_log_FATAL_LINE}))     	{ $global:dk_log_FATAL_LINE = 0; }
 #if(!(${dk_log_FATAL_SOUND}))     	{ $global:dk_log_FATAL_SOUND = 0; }
 #if(!(${dk_log_FATAL_TIMEOUT}))     { $global:dk_log_FATAL_TIMEOUT = 0; }
-if(!(${dk_log_FATAL_PAUSE}))    	{ $global:dk_log_FATAL_PAUSE = 1; }
+#if(!(${dk_log_FATAL_PAUSE}))    	{ $global:dk_log_FATAL_PAUSE = 1; }
 #if(!(${dk_log_FATAL_HALT}))     	{ $global:dk_log_FATAL_HALT = 0; }
 
 
