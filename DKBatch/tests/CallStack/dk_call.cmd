@@ -19,7 +19,7 @@
 	if "%~1" equ "printCallStack" 	(call :%* && %endfunction%)
 	
 	::### Constant Variables ###
-	if not defined dk_call 		(set "dk_call=call dk_call")
+	if not defined dk_call 		(set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd")
 	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=%SystemDrive%/GLOBAL.txt")
 	if not defined LVL			(set /a "LVL=-1")
 	

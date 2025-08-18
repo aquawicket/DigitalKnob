@@ -52,8 +52,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	
 ::#	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 ::#
-	set "DEBUG=rem "
-	::set "DEBUG=call dk_call dk_debug"
+	::set "DEBUG=rem "
+	set "DEBUG=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd dk_debug"
 	
 
 :dk_importVariables
@@ -268,6 +268,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::#################
 :PLUGIN.Import.Name
+	%DEBUG% "PLUGIN.Import.Name(%*)"
+	
 	if defined PLUGIN.Import.Name (%return%)
 	call :PLUGIN.Import.Path
 	if defined PLUGIN.Import.Path (
@@ -313,6 +315,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::#################
 :PLUGIN.Import.Path
+	%DEBUG% "PLUGIN.Import.Path(%*)"
 	if defined PLUGIN.Import.Path (%return%)
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -324,8 +327,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	rem	%dk_call% dk_getcwd
-	%dk_call% dk_includes "%CURRENT_IMPORT%" "!DKIMPORTS_DIR!" && (
-		set "PLUGIN.Import.Path=%CURRENT_IMPORT%"
+	%dk_call% dk_includes "%CURRENT_IMPORT:\=/%" "!DKIMPORTS_DIR:\=/!" && (
+		set "PLUGIN.Import.Path=%CURRENT_IMPORT:\=/%"
 		%DEBUG% 	"PLUGIN.Import.Path = '!PLUGIN.Import.Path!'"
 		%return%
 	) || (cmd /c exit /b 0)	
