@@ -457,9 +457,9 @@ function(PLUGIN_Import_Path)
 		endif()
 	endif()
 	
-	if(NOT PLUGIN.Import.Path)
-		dk_error("PLUGIN.Import.Path is invalid")
-	endif()
+	#if(NOT PLUGIN.Import.Path)
+	#	dk_error("PLUGIN.Import.Path is invalid")
+	#endif()
 	dk_debug("PLUGIN.Import.Path = '${PLUGIN.Import.Path}'")
 	
 	set(PLUGIN.Import.Path ${PLUGIN.Import.Path} PARENT_SCOPE)

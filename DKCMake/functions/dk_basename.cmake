@@ -35,7 +35,7 @@ function(dk_basename)
 	if(rtn_var)
 		set(${rtn_var} ${dk_basename} PARENT_SCOPE)
 	else()
-		message(${dk_basename}) 
+		message("${dk_basename}") 
 	endif()
 endfunction()
 
