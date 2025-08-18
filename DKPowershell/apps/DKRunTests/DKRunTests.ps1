@@ -44,7 +44,7 @@ function Global:DKRunTests() {
 	DISABLE dk_extract.ps1;
 	DISABLE dk_enterManually.ps1;
 	DISABLE dk_generate.ps1;
-	
+	DISABLE dk_import.ps1;
 	
 	dk_call dk_validate DKPOWERSHELL_FUNCTIONS_DIR_ "dk_call dk_DKBRANCH_DIR";
 	$_files_ = dk_call dk_getFiles ${DKPOWERSHELL_FUNCTIONS_DIR_};
