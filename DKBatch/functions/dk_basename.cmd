@@ -5,24 +5,26 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::################################################################################
-::# dk_basename(<pathname>, <rtn_var>:optional)
+::# dk_basename(_path, _rtn_var)
 ::#
-::#	Strip directory and suffix from filenames
+::#		Strip directory and suffix from filenames
 ::#
-::#	Reference: https://en.wikipedia.org/wiki/Basename
+::#		Reference: https://en.wikipedia.org/wiki/Basename
 ::#
 :dk_basename
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
 	
 	::###### input ######
-	set "pathname=%~1"
-	set "pathname=%pathname:"=%"
+	::# %~1 = _path
+	::# %~2 = _rtn_var (optional)
 	
 	
-	if "%pathname:~-1%" equ "/" (set "pathname=%pathname:~0,-1%")
-	if "%pathname:~-1%" equ "\" (set "pathname=%pathname:~0,-1%")
-	for %%A in ("%pathname%") do (set "dk_basename=%%~nxA")
+	set "_path=%~1"
+	set "_path=%_path:"=%"								 
+	if "%_path:~-1%" equ "/" (set "_path=%_path:~0,-1%")
+	if "%_path:~-1%" equ "\" (set "_path=%_path:~0,-1%")
+	for %%G in ("%_path%") do (set "dk_basename=%%~nxG")
 	
 	
 	::###### output ######
@@ -56,15 +58,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	
-	::### Result as hashtable parameter
-::	%dk_call% dk_echo
-::	%dk_call% dk_basename "C:/directoryC/filenameC.extC" resultC.data
-::	%dk_call% dk_echo "resultC.data = %resultC.data%"
-::	%dk_call% dk_echo "dk_basename = %dk_basename%"
-	
 	::### Result as return value
-::	%dk_call% dk_echo
-::	for /f "usebackq delims=" %%G in (`%dk_call% dk_basename "D:/directoryD/filenameD.extD"`) do set "resultD=%%G"
-::	%dk_call% dk_echo "resultD = %resultD%"
-::	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	%dk_call% dk_echo
+	for /f "usebackq delims=" %%G in (`call dk_basename "C:/directoryC/filenameC.extC"`) do set "resultC=%%G"
+	%dk_call% dk_echo "resultC = %resultC%"
+	::%dk_call% dk_echo "dk_basename = %dk_basename%"			&:: NOTE: export cannot be seen outside of command substituion
+
+	::### Result as hashtable parameter
+	%dk_call% dk_echo
+	%dk_call% dk_basename "D:/directoryD/filenameD.extD" resultD.value
+	%dk_call% dk_echo "resultD.value = %resultD.value%"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	
 %endfunction%

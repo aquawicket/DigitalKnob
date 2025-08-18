@@ -8,14 +8,16 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 function Global:dk_set() {
 	dk_debugFunc 2;
 	
-	Write-Host "args = $($args)";
+	#Write-Host "args = $($args)";
 	#Write-Host "args[0] = $($args[0])";
 	#Write-Host "args[1] = $($args[1])";
-	${_variable_}=$args[0];
+	${_variable_}=$($args[0]);
+	#$(_value_)=$($args[1]);
 	${_value_}=$($args) | Select-Object -Skip 1;
 	
 	#Write-Host "_variable_ = ${_variable_}";
 	#Write-Host "_value_ = ${_value_}";
+	#Write-Host "dk_set(${_variable_}, ${_value_})";
 	
 	#if(!${_value_}){ ${_value_}=$($args[1]); }
 	#${_variable_arry} = ${_variable_}.Split(".");

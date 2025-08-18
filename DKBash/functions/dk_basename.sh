@@ -15,26 +15,34 @@ fi
 
 
 ##################################################################################
-# dk_basename(path, rtn_var)
+# dk_basename(_path, _rtn_var)
 #
-#	https://en.wikipedia.org/wiki/Basename
+#	Strip directory and suffix from filenames
+#
+#	Reference: https://en.wikipedia.org/wiki/Basename
 #
 dk_basename() {
 	dk_debugFunc 1 2;
 	
+	###### input ######
+	# ${1} = _path
+	# ${2} = _rtn_var (optional)
 	
-	dk_basename=$(basename "${1}");
+	
+	dk_basename="$(basename ${1})";
 
 
 	###### output ######
 	export dk_basename=${dk_basename};
 	if [ -n "${2-}" ]; then
-		export ${2}=${dk_basename};
+		eval ${2}=${dk_basename};
 	else
 		builtin echo "${dk_basename}";
 	fi
 	return $?;
 }
+
+
 
 
 
@@ -48,20 +56,22 @@ DKTEST() {
 	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
 	### Result as variable parameter
-	dk_call dk_echo
-	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB
-	dk_call dk_echo "resultB = ${resultB}"
-	dk_call dk_echo "dk_basename = ${dk_basename}"
-	
-	### Result as hashtable parameter
-	dk_call dk_echo
-	dk_call dk_basename "D:/directoryD/filenameD.extD" resultD.data
-	dk_call dk_echo "resultD.data = ${resultD.data}"
-	dk_call dk_echo "dk_basename = ${dk_basename}"
+	dk_call dk_echo;
+	dk_call dk_basename "B:/directoryB/filenameB.extB" resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
 	
 	### Result as return value
 	dk_call dk_echo;
-	resultD=$(dk_call dk_basename "D:/directoryD/filenameD.extD");
-	dk_call dk_echo "resultD = ${resultD}";
-	# dk_call dk_echo "dk_basename = ${dk_basename}"					#NOTE: export cannot be seen outside of command substituion
+	resultC=$(dk_call dk_basename "C:/directoryC/filenameC.extC");
+	dk_call dk_echo "resultC = ${resultC}";
+	#dk_call dk_echo "dk_basename = ${dk_basename}"					#NOTE: export cannot be seen outside of command substituion
+	
+	### Result as hashtable parameter
+	declare -A -x resultD;
+	dk_call dk_echo;
+	dk_call dk_echo;
+	dk_call dk_basename "D:/directoryD/filenameD.extD" resultD[value];
+	dk_call dk_echo "resultD[value] = ${resultD[value]}";
+	dk_call dk_echo "dk_basename = ${dk_basename}";
 }

@@ -38,6 +38,7 @@ function(dk_DKBRANCH_DIR)
 		# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
 		if(EXISTS "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}/.git")
 			dk_dirname(${CMAKE_CURRENT_LIST_DIR})
+			dk_source(dk_basename)
 			dk_basename("${dk_dirname}")
 			if("${BRANCH}" STREQUAL "${dk_basename}")
 				dk_set(DKBRANCH "${dk_basename}")

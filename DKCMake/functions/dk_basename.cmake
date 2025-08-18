@@ -13,27 +13,28 @@ include_guard()
 
 
 #########################################################################
-# dk_basename(<path>, <rtn_var:optional>)
+# dk_basename(_path, _rtn_var)
 #
+#	Strip directory and suffix from filenames
+#
+#	Reference: 
 #
 function(dk_basename)
 	dk_debugFunc(1 2)
 
 	###### input ######
-	set(path ${ARGV0})
-	set(rtn_var ${ARGV1})
-	#dk_getArg(0 path)
-	#dk_getArg(1 rtn_var)
+	# ARGV0 = _path						#set(_path ${ARGV0})	#dk_getArg(0 _path)
+	# ARGV1 = _rtn_var (optional)		#set(_rtn_var ${ARGV1})	#dk_getArg(1 _rtn_var)
 
-
-	get_filename_component(fullpath ${path} ABSOLUTE)
-	get_filename_component(dk_basename ${fullpath} NAME)
+	
+	get_filename_component(absolute ${ARGV0} ABSOLUTE)
+	get_filename_component(dk_basename ${absolute} NAME)
 	
 	
 	###### output ######
 	set(dk_basename ${dk_basename} PARENT_SCOPE)
-	if(rtn_var)
-		set(${rtn_var} ${dk_basename} PARENT_SCOPE)
+	if(ARGV1)
+		set(${ARGV1} ${dk_basename} PARENT_SCOPE)
 	else()
 		message("${dk_basename}") 
 	endif()
@@ -58,15 +59,15 @@ function(DKTEST)
 	dk_echo("resultB = ${resultB}")
 	dk_echo("dk_basename = ${dk_basename}")
 	
+	### Result as return value			### CMAKE FUNCTIONS DO NOT HAVE RETURN VALUES ###
+#	dk_echo()
+#	$resultC = dk_basename("C:/directoryC/filenameC.extC")
+#	dk_echo("resultC = ${resultC}")
+#	dk_echo("dk_basename = ${dk_basename}")
+
 	### Result as hashtable parameter
 	dk_echo()
-	dk_basename("C:/directoryC/filenameC.extC" resultC.data)
-	dk_echo("resultC.data = $($resultC.data)")
+	dk_basename("D:/directoryD/filenameD.extD" resultD.value)
+	dk_echo("resultD.value = ${resultD.value}")
 	dk_echo("dk_basename = ${dk_basename}")
-	
-	### Result as return value
-#	dk_echo()
-#	$resultD = dk_basename("D:/directoryD/filenameD.extD")
-#	dk_echo("resultD = ${resultD}")
-#	dk_echo("dk_basename = ${dk_basename}")
 endfunction()
