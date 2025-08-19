@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_import APP
 	
-	if "%Host_Os%" equ "Windows" ( 
+	if /i "%Host_Os%" equ "Windows" ( 
 		%dk_call% dk_set VSCODE_EXE "%PLUGIN.Install.Path%/Code.exe"
 	) else ( 
 		%dk_call% dk_set VSCODE_EXE "%PLUGIN.Install.Path%/code"

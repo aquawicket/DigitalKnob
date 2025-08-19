@@ -14,9 +14,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate Host_Tuple	"%dk_call% dk_Host_Tuple"
 	%dk_call% dk_validate Target_Tuple	"%dk_call% Target_Tuple"
 
-	if "%Host_Os%" equ "Windows" (
+	::if /i "%Host_Os%" equ "Windows" (
 		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
-	)
+	::)
 	%dk_call% dk_installPackage clang
 
 %endfunction%

@@ -22,7 +22,7 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 	if "%bash_ENV%" equ "" (set "bash_ENV=%bash_DEFAULT%")
 	
 	rem ###### GIT ######
-	if "%bash_ENV%" equ "GIT" (
+	if /i "%bash_ENV%" equ "GIT" (
 		%dk_call% dk_validate GIT "%dk_call% dk_depend git"
 		set "GIT_BASH_EXE=!GIT!/bin/bash.exe"
 		set "GIT_BASH_ICON=!GIT!/git-bash.exe"

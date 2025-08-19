@@ -39,7 +39,7 @@ if(ALL_LIBS)
 endif(ALL_LIBS)
 
 
-dk_include					(${BULLET3_DIR}/src																BULLET_INCLUDE_DIR)
+dk_include					(${BULLET3}/src																BULLET_INCLUDE_DIR)
 
 if(Bullet3Collision)
 	if(MULTI_CONFIG)
@@ -219,7 +219,7 @@ dk_set(BULLET3_CMAKE
 	-DBULLET_SOFTBODY_LIBRARY=${BULLET_SOFTBODY_LIBRARY})
 
 ### GENERATE ###
-dk_configure(${BULLET3_DIR}
+dk_configure(${BULLET3}
 			-DBUILD_BULLET2_DEMOS=OFF
 			-DBUILD_CLSOCKET=ON
 			-DBUILD_CPU_DEMOS=OFF
@@ -271,37 +271,37 @@ dk_configure(${BULLET3_DIR}
 ### COMPILE ###
 #dk_build()
 if(Bullet3Collision)
-	dk_build(${BULLET3_DIR} Bullet3Collision)
+	dk_build(${BULLET3} Bullet3Collision)
 endif()
 if(Bullet3Common)
-	dk_build(${BULLET3_DIR} Bullet3Common)
+	dk_build(${BULLET3} Bullet3Common)
 endif()
 if(Bullet3Dynamics)
-	dk_build(${BULLET3_DIR} Bullet3Dynamics)
+	dk_build(${BULLET3} Bullet3Dynamics)
 endif()
 if(Bullet3Geometry)
-	dk_build(${BULLET3_DIR} Bullet3Geometry)
+	dk_build(${BULLET3} Bullet3Geometry)
 endif()
 if(Bullet3OpenCL)
-	dk_build(${BULLET3_DIR} Bullet3OpenCL)
+	dk_build(${BULLET3} Bullet3OpenCL)
 endif()
 if(Bullet3Serialize)
-	dk_build(${BULLET3_DIR} Bullet3Serialize)
+	dk_build(${BULLET3} Bullet3Serialize)
 endif()
 if(BulletCollision)
-	dk_build(${BULLET3_DIR} BulletCollision)
+	dk_build(${BULLET3} BulletCollision)
 endif()
 if(BulletDynamics)
-	dk_build(${BULLET3_DIR} BulletDynamics)
+	dk_build(${BULLET3} BulletDynamics)
 endif()
 if(BulletInverseDynamics)
-	dk_build(${BULLET3_DIR} BulletInverseDynamics)
+	dk_build(${BULLET3} BulletInverseDynamics)
 endif()
 if(BulletSoftBody)
-	dk_build(${BULLET3_DIR} BulletSoftBody)
+	dk_build(${BULLET3} BulletSoftBody)
 endif()
 if(LinearMath)
-	dk_build(${BULLET3_DIR} LinearMath)
+	dk_build(${BULLET3} LinearMath)
 endif()
 
 	

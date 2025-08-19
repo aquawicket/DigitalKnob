@@ -241,6 +241,8 @@ exit /b !errorlevel!
 :init
 	call :pushStack %~n0%~0 %*
 	set "setlocal=setlocal EnableDelayedExpansion"
+	if not defined true 	(set "true=0")
+	if not defined false 	(set "false=1")
 	
 	::###### _SCOPE ######
 	if "%dk_call_PRINT_SCOPE%" equ "1" (

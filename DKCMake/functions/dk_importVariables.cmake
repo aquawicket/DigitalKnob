@@ -54,10 +54,11 @@ include_guard()
 #
 function(dk_importVariables)
 	#dk_debugFunc(1 9)
+	dk_debug("dk_importVariables(${ARGV})")
+	dk_pause()
 	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
-		dk_unset(PRINTVARS)
 		PRINTVARS()
 		return()
 	endif()
@@ -94,60 +95,61 @@ function(dk_importVariables)
 	### IMPORT_ROOT (PLUGIN;Import.Dirname)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
 	dk_unset(IMPORT_ROOT)
 	dk_getParameterValue(IMPORT_ROOT)
-	dk_echo("IMPORT_ROOT = '${IMPORT_ROOT}'")
+	dk_debug("IMPORT_ROOT = '${IMPORT_ROOT}'")
 	set(PLUGIN.Import.Dirname "${IMPORT_ROOT}" CACHE INTERNAL "")
 
 	### IMPORT_NAME (PLUGIN.Import.Name)							zlib
 	dk_unset(IMPORT_NAME)
 	dk_getParameterValue(IMPORT_NAME)
-	dk_echo("IMPORT_NAME = '${IMPORT_NAME}'")
+	dk_debug("IMPORT_NAME = '${IMPORT_NAME}'")
 	set(PLUGIN.Import.Name "${IMPORT_NAME}")
 
 	### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	dk_unset(IMPORT_PATH)
 	dk_getParameterValue(IMPORT_PATH)
-	dk_echo("IMPORT_PATH = '${IMPORT_PATH}'")
+	dk_debug("IMPORT_PATH = '${IMPORT_PATH}'")
 	set(PLUGIN.Import.Path "${IMPORT_PATH}")
 
 	### INSTALL_ROOT (PLUGIN.Install.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty
 	dk_unset(INSTALL_ROOT)
 	dk_getParameterValue(INSTALL_ROOT)
-	dk_echo("INSTALL_ROOT = '${INSTALL_ROOT}'")
-	set(PLUGIN.Install.Dirname "${INSTALL_ROOT}")
+	dk_debug("INSTALL_ROOT = '${INSTALL_ROOT}'")
+	dk_pause()
+	set(PLUGIN.Install.Dirname "${INSTALL_ROOT}" CACHE INTERNAL "")
 
 	### INSTALL_NAME (PLUGIN.Install.Name)							zlib-master
 	dk_unset(INSTALL_NAME)
 	dk_getParameterValue(INSTALL_NAME)
-	dk_echo("INSTALL_NAME = '${INSTALL_NAME}'")
+	dk_debug("INSTALL_NAME = '${INSTALL_NAME}'")
 	set(PLUGIN.Install.Name "${INSTALL_NAME}")
 
 	### INSTALL_PATH (PLUGIN.Install.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	dk_unset(INSTALL_PATH)
 	dk_getParameterValue(INSTALL_PATH)
-	dk_echo("INSTALL_PATH = '${INSTALL_PATH}'")
+	dk_debug("INSTALL_PATH = '${INSTALL_PATH}'")
 	set(PLUGIN.Install.Path "${INSTALL_PATH}")
 
 	### VERSION (PLUGIN.Version)									v1.3.1
 	dk_unset(VERSION)
 	dk_getParameterValue(VERSION)
-	dk_echo("VERSION = '${VERSION}'")
+	dk_debug("VERSION = '${VERSION}'")
 	set(PLUGIN.Version "${VERSION}")
 
 	### BRANCH (PLUGIN.Branch)										master
 	dk_unset(BRANCH)
 	dk_getParameterValue(BRANCH)
-	dk_echo("BRANCH = '${BRANCH}'")
+	dk_debug("BRANCH = '${BRANCH}'")
 	set(PLUGIN.Branch "${BRANCH}")
 	
 	### PLUGIN.Args													"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	dk_unset(PLUGIN.Args)
 	set(PLUGIN.Args ${ARGV} CACHE INTERNAL "")
-	dk_echo("PLUGIN.Args = '${PLUGIN.Args}'")
+	dk_debug("PLUGIN.Args = '${PLUGIN.Args}'")
 		
 	### PLUGIN.Url													"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	dk_unset(PLUGIN.Url)
 	set(PLUGIN.Url "${ARGV0}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Url = '${PLUGIN.Url}'")
+	dk_debug("PLUGIN.Url = '${PLUGIN.Url}'")
 
 
 	### PLUGIN.Id													ZLIB
@@ -164,31 +166,31 @@ function(dk_importVariables)
 
 	### PLUGIN.Tuple_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	set(PLUGIN.Tuple_Dir "${PLUGIN.Install.Path}/${Target_Tuple}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
+	dk_debug("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
 	
 	### PLUGIN.Config_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Config_Dir "${PLUGIN.Install.Path}/${Config_Path}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Config_Dir = '${PLUGIN.Config_Dir}'")
+	dk_debug("PLUGIN.Config_Dir = '${PLUGIN.Config_Dir}'")
 
 	### PLUGIN.Build_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Build_Dir "${PLUGIN.Install.Path}/${Build_Path}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Build_Dir = '${PLUGIN.Build_Dir}'")
+	dk_debug("PLUGIN.Build_Dir = '${PLUGIN.Build_Dir}'")
 
 	### PLUGIN.Debug_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Debug_Dir "${PLUGIN.Tuple_Dir}/${Debug_Dir}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Debug_Dir = '${PLUGIN.Debug_Dir}'")
+	dk_debug("PLUGIN.Debug_Dir = '${PLUGIN.Debug_Dir}'")
 
 	### PLUGIN.Release_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	set(PLUGIN.Release_Dir "${PLUGIN.Tuple_Dir}/${Release_Dir}" CACHE INTERNAL "")
-	dk_echo("PLUGIN.Release_Dir = '${PLUGIN.Release_Dir}'")
+	dk_debug("PLUGIN.Release_Dir = '${PLUGIN.Release_Dir}'")
 
 	### PLUGIN
 	set(PLUGIN "${PLUGIN.Id}" CACHE INTERNAL "")
-	dk_echo("PLUGIN = '${PLUGIN}'")
+	dk_debug("PLUGIN = '${PLUGIN}'")
 	
 	### ${PLUGIN}
 	set(${PLUGIN} "${PLUGIN.Install.Path}" CACHE INTERNAL "")
-	dk_echo("${PLUGIN} = '${${PLUGIN}}'")
+	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
 	
 endfunction()
 
@@ -588,8 +590,8 @@ endfunction()
 	
 ###################
 function(PRINTVARS)
-	dk_echo(" ")
-	dk_echo(" ")
+	dk_echo()
+	dk_echo()
 	dk_echo("################## PLUGIN.variables ##################")
 	dk_echo("PLUGIN                               = '${PLUGIN}'")
 	dk_echo("${PLUGIN}                            = '${${PLUGIN}}'")
@@ -611,8 +613,8 @@ function(PRINTVARS)
 	dk_echo("PLUGIN.Config_Dir                    = '${PLUGIN.Config_Dir}'")
 	dk_echo("PLUGIN.Debug_Dir                     = '${PLUGIN.Debug_Dir}'")
 	dk_echo("PLUGIN.Release_Dir                   = '${PLUGIN.Release_Dir}'")
-	dk_echo("")
-	dk_echo("")
+	dk_echo()
+	dk_echo()
 	dk_echo("################## ${PLUGIN.Id}.variables ##################")
 	dk_echo("${PLUGIN.Id}                          = '${${PLUGIN.Id}}'")
 	dk_echo("${PLUGIN.Id}.Args                     = '${${PLUGIN.Id}.Args}'")
@@ -633,7 +635,7 @@ function(PRINTVARS)
 	dk_echo("${PLUGIN.Id}.Config_Dir               = '${${PLUGIN.Id}.Config_Dir}'")
 	dk_echo("${PLUGIN.Id}.Debug_Dir                = '${${PLUGIN.Id}.Debug_Dir}'")
 	dk_echo("${PLUGIN.Id}.Release_Dir              = '${${PLUGIN.Id}.Release_Dir}'")
-	dk_echo("")
+	dk_echo()
 endfunction()	
 
 

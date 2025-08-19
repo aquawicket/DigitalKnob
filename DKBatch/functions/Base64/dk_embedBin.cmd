@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "inputFilename=%~nx1"
 	if "%~2" equ "" (set "outputFile=%~nx1.cmd") else (set "outputFile=%~2")
 	
-	::if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	::if /i "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 	:: Find OVERWRITE in any of the arguments
 	set "args=%*"
 	if "X%args:OVERWRITE=%X" neq "X%args%X" (set "OVERWRITE=1")

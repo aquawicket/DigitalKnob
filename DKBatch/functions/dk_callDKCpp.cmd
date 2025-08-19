@@ -50,19 +50,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if "%Target_Env%" equ "cosmocc" (
+	if /i "%Target_Env%" equ "cosmocc" (
 		%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh"
 		%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% dk_depend cosmocc"
 		%dk_call% dk_assertPath COSMOCC_CXX_COMPILER
 		set "COMPILER_EXE=!SH_EXE! !COSMOCC_CXX_COMPILER!"
 	)
 
-	if "%Target_Env%" equ "clang" (
+	if /i "%Target_Env%" equ "clang" (
 		%dk_call% dk_validate CLANG_CXX_COMPILER		"%dk_call% dk_depend clang"
 		%dk_call% dk_assertPath CLANG_CXX_COMPILER
 		set "COMPILER_EXE=!CLANG_CXX_COMPILER!"
 	)
-	if "%Target_Env%" equ "gcc" (
+	if /i "%Target_Env%" equ "gcc" (
 		%dk_call% dk_validate GCC_CXX_COMPILER			"%dk_call% dk_depend gcc"
 		%dk_call% dk_assertPath GCC_CXX_COMPILER
 		set "COMPILER_EXE=!GCC_CXX_COMPILER!"

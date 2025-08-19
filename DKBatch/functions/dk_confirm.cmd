@@ -11,10 +11,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    set /P REPLY="%yellow% Are you sure ? [Y/N] %clr%"
+    set /p REPLY="%yellow% Are you sure ? [Y/N] %clr%"
     echo(
 	echo(
-    if /I "%REPLY%" equ "Y" (
+    if /i "%REPLY%" equ "Y" (
         rem if "%~1" neq "" ( endlocal & %dk_call% dk_set %1 "true" )
         exit /b 0
     )

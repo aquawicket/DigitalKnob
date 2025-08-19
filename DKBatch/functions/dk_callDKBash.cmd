@@ -60,7 +60,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::	endlocal & (
 ::		set "dk_callDKBash=%dk_callDKBash%""
-::		if "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
+::		if /i "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
 ::	)
 
 	set "test=DKBash"

@@ -41,7 +41,7 @@ pause
 
 :: https://stackoverflow.com/a/5642300
 ::###### newline (without delayed expansion) ######
-(SET LF=^
+(set LF=^
 %=this line is empty=%
 )
 echo This text^%LF%%LF%uses two lines

@@ -31,7 +31,7 @@ dk_depend			(libgtk-3-dev)
 dk_import			(${Boxer_Import})
 
 ### LINK ###
-dk_include			(${BOXER_DIR}/include)
+dk_include			(${BOXER}/include)
 dk_include			(${BOXER_CONFIG_DIR})
 
 if(MSVC)
@@ -43,7 +43,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure		(${BOXER_DIR})
+dk_configure		(${BOXER})
 
 ### COMPILE ###
-dk_build			(${BOXER_DIR} Boxer)
+dk_build			(${BOXER} Boxer)

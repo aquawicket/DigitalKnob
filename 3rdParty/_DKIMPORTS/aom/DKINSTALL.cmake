@@ -25,7 +25,7 @@ dk_import			(${AOM_IMPORT} NAME aom)
 
 ### LINK ###
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
-dk_include			(${AOM_DIR})
+dk_include			(${AOM)
 if(MSVC)
 	dk_libDebug		(${AOM_DEBUG_DIR}/aom.lib)
 	dk_libRelease	(${AOM_RELEASE_DIR}/aom.lib)
@@ -35,7 +35,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure		(${AOM_DIR}) # -DAOM_TARGET_CPU=generic)
+dk_configure		(${AOM}) # -DAOM_TARGET_CPU=generic)
 
 ### COMPILE ###
-dk_build			(${AOM_DIR})
+dk_build			(${AOM})

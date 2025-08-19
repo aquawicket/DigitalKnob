@@ -18,7 +18,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::# %~1 = package
 	
 	::### Msys2 ###
-	%dk_call% dk_validate PACMAN "%dk_call% dk_depend pacman"
+	%dk_call% dk_validate PACMAN_EXE "%dk_call% dk_depend pacman"
 	if defined PACMAN_EXE (
 		%dk_call% dk_assertPath PACMAN_EXE 
 		if EXIST "%MSYS2_CacheDir%/db.lck (

@@ -22,29 +22,29 @@ set "DKBash_ENV=WSL"
 	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
 	
 	::########### (GIT) #############
-	if "%DKBash_ENV%" equ "GIT" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash GIT")
-	if "%DKBash_ENV%" equ "GIT" (%dk_call% dk_assertPath BASH_EXE)
-	if "%DKBash_ENV%" equ "GIT" (set BASH_EXE="%BASH_EXE%")
-	if "%DKBash_ENV%" equ "GIT" (set "BASH_C_DIVE=/c")
+	if /i "%DKBash_ENV%" equ "GIT" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash GIT")
+	if /i "%DKBash_ENV%" equ "GIT" (%dk_call% dk_assertPath BASH_EXE)
+	if /i "%DKBash_ENV%" equ "GIT" (set BASH_EXE="%BASH_EXE%")
+	if /i "%DKBash_ENV%" equ "GIT" (set "BASH_C_DIVE=/c")
 	
 	::########### (MSYS2) #############
-	if "%DKBash_ENV%" equ "MSYS2" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash MSYS2")
-	if "%DKBash_ENV%" equ "MSYS2" (%dk_call% dk_assertPath BASH_EXE)
-	if "%DKBash_ENV%" equ "MSYS2" (set BASH_EXE="%BASH_EXE%")
-	if "%DKBash_ENV%" equ "MSYS2" (set "BASH_C_DIVE=/c")
+	if /i "%DKBash_ENV%" equ "MSYS2" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash MSYS2")
+	if /i "%DKBash_ENV%" equ "MSYS2" (%dk_call% dk_assertPath BASH_EXE)
+	if /i "%DKBash_ENV%" equ "MSYS2" (set BASH_EXE="%BASH_EXE%")
+	if /i "%DKBash_ENV%" equ "MSYS2" (set "BASH_C_DIVE=/c")
 	
 	::############ (WSL) ############
-	if "%DKBash_ENV%" equ "WSL" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash WSL")
-	if "%DKBash_ENV%" equ "WSL" (%dk_call% dk_assertPath BASH_EXE)
-	if "%DKBash_ENV%" equ "WSL" (set BASH_EXE="%BASH_EXE%")
-	if "%DKBash_ENV%" equ "WSL" (set "BASH_C_DIVE=/mnt/c")
+	if /i "%DKBash_ENV%" equ "WSL" (%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash WSL")
+	if /i "%DKBash_ENV%" equ "WSL" (%dk_call% dk_assertPath BASH_EXE)
+	if /i "%DKBash_ENV%" equ "WSL" (set BASH_EXE="%BASH_EXE%")
+	if /i "%DKBash_ENV%" equ "WSL" (set "BASH_C_DIVE=/mnt/c")
 	
 	::############ (WSL2) ############
-	if "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl")
-	if "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_assertPath WSL_EXE)
-	if "%DKBash_ENV%" equ "WSL2" (set "BASH_ICON=%WSL_EXE%")
-	if "%DKBash_ENV%" equ "WSL2" (set BASH_EXE="%WSL_EXE%" bash)
-	if "%DKBash_ENV%" equ "WSL2" (set "BASH_C_DIVE=/mnt/c")
+	if /i "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl")
+	if /i "%DKBash_ENV%" equ "WSL2" (%dk_call% dk_assertPath WSL_EXE)
+	if /i "%DKBash_ENV%" equ "WSL2" (set "BASH_ICON=%WSL_EXE%")
+	if /i "%DKBash_ENV%" equ "WSL2" (set BASH_EXE="%WSL_EXE%" bash)
+	if /i "%DKBash_ENV%" equ "WSL2" (set "BASH_C_DIVE=/mnt/c")
 	
 	::### Add the DKBash command to the registry ###
 	set "PATH=%PATH%"

@@ -50,6 +50,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	set "exit_code=^!errorlevel^!"
 	set "endfunction=exit /b ^!errorlevel^!"
 	set "return=exit /b ^!errorlevel^!"
+	if not defined true 	(set "true=0")
+	if not defined false 	(set "false=1")
 	
 	call :dk_DKSCRIPT_PATH "%~1"
 	call :dk_DKSCRIPT_ARGS "%~1"
@@ -89,7 +91,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)
 		net session >nul 2>&1
 		if %errorlevel% equ 0 (goto skip_elevate)
-		if "%2" equ "elevated" (set "elevated=1")
+		if /i "%2" equ "elevated" (set "elevated=1")
 		if NOT defined elevated (
 			set "elevated=1"
 			%dk_call% "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%

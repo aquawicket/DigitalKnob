@@ -33,7 +33,7 @@ macro(dk_getParameterValue)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND PARGV ${arg})
 	endforeach()
-	#message("PARGV = ${PARGV}")
+	dk_debug("PARGV = ${PARGV}")
 
 	#########################################
 	
