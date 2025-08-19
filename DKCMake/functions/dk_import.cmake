@@ -38,16 +38,14 @@ function(dk_import)
 	dk_basename(${Import_Path} Import_Name)
 	
 	dk_getParameter(APP)
-	message("APP = ${APP}")
 	if(APP)
-		dk_pause()
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-		set(INSTALL_ROOT "INSTALL_ROOT ${DKTOOLS_DIR}")
+		set(INSTALL_ROOT INSTALL_ROOT ${DKTOOLS_DIR})
 	endif()
 	dk_assertVar(${Import_Name}_${Host_Tuple}_Import)
 	set(PLUGIN_IMPORT "${Import_Name}_${Host_Tuple}_Import")
-	message("dk_importVariables(${${PLUGIN_IMPORT}} ${INSTALL_ROOT})")
-	dk_importVariables("${${PLUGIN_IMPORT}}" ${INSTALL_ROOT})
+
+	dk_importVariables(${${PLUGIN_IMPORT}} ${INSTALL_ROOT})
 	
 	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))	
 		dk_envList(PLUGIN PUSH "${PLUGIN}")			###### Push Plugin to the PLUGIN_STACK ######
@@ -55,6 +53,11 @@ function(dk_import)
 		dk_notice("dk_import(): ${PLUGIN} is already loaded")
 	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
+	
+	if(EXISTS "${PLUGIN.Install.Path}")
+		dk_echo("${PLUGIN.Install.Name} already installed")
+		return()
+	endif()
 	
 	dk_download("${PLUGIN.Url}")
 	

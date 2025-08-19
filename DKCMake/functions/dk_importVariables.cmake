@@ -55,7 +55,6 @@ include_guard()
 function(dk_importVariables)
 	#dk_debugFunc(1 9)
 	dk_debug("dk_importVariables(${ARGV})")
-	dk_pause()
 	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
@@ -114,7 +113,6 @@ function(dk_importVariables)
 	dk_unset(INSTALL_ROOT)
 	dk_getParameterValue(INSTALL_ROOT)
 	dk_debug("INSTALL_ROOT = '${INSTALL_ROOT}'")
-	dk_pause()
 	set(PLUGIN.Install.Dirname "${INSTALL_ROOT}" CACHE INTERNAL "")
 
 	### INSTALL_NAME (PLUGIN.Install.Name)							zlib-master

@@ -22,19 +22,18 @@ include_guard()
 macro(dk_getParameterValue)
 	dk_debugFunc()
 	
-	###### ARGV - dk_getParameter args ######
-	#message("ARGV  = ${ARGV}")
+	#dk_debug("###### ARGV - dk_getParameter args ######")
+	#dk_debug("ARGV  = ${ARGV}")
 	
-	###### ARGN - dk_getParameter extra args ######
-	#message("ARGN  = ${ARGN}")
+	#dk_debug("###### ARGN - dk_getParameter extra args ######")
+	#dk_debug("ARGN  = ${ARGN}")
 	
 	###### PARGV - Parent Function args ######
 	unset(PARGV)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND PARGV ${arg})
 	endforeach()
-	dk_debug("PARGV = ${PARGV}")
-
+	#dk_debug("PARGV = ${PARGV}")
 	#########################################
 	
 	set(dk_getParameterValue_NAME ${ARGV0})
