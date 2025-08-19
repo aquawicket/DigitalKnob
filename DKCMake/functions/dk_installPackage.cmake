@@ -9,18 +9,21 @@ if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
-#########################################################################
-# https://en.wikipedia.org/wiki/List_of_software_package_management_systems
-# https://en.wikipedia.org/wiki/Package_manager
-# https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 
-#########################################################################
+
+####################################################################
 # dk_installPackage(package)
+#
+#		Reference: https://en.wikipedia.org/wiki/List_of_software_package_management_systems
+#		Reference: https://en.wikipedia.org/wiki/Package_manager
+#		Reference: https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 function(dk_installPackage)
 	dk_debugFunc(1)
+	
+	# ${ARGV0} = package
+	
 	set(package ${ARGV0})
-
 	dk_toUpper(${package} PACKAGE)
 	execute_process(COMMAND command -v ${package} OUTPUT_VARIABLE ${PACKAGE}_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(EXISTS ${${PACKAGE}_EXE})

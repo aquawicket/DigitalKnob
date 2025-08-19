@@ -52,8 +52,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	
 ::#	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 ::#
-	::set "DEBUG=rem "
-	set "DEBUG=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd dk_debug"
+	set "DEBUG=rem "
+	::set "DEBUG=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd dk_debug"
 	
 
 :dk_importVariables
