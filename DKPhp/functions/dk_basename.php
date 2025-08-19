@@ -1,7 +1,7 @@
 <?php
 
-################################################################################
-# dk_basename(<pathname>, <rtn_var>:optional)
+##################################################################################
+# dk_basename(_path, _rtn_var)
 #
 #	Strip directory and suffix from filenames
 #
@@ -9,12 +9,13 @@
 #
 function dk_basename() {
 	#dk_debugFunc(1 2);
+	if(!isset($argv)){ $argv = func_get_args(); }
 	
-	if(!isset($argv)){
-		$argv = func_get_args();
-	}
+	# $argv[0] = _path;
+	# $argv[1] = _rtn_var;
 	
-	return basename($argv[0], "");
+	$GLOBALS["dk_basename"] = basename($argv[0], "");
+	return $GLOBALS["dk_basename"];
 }
 
 
@@ -26,34 +27,30 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc 0
 	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_echo.php");
 	
-	$myPath="C:/Windows/System32/test.v123.zip";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
-
+	### Result as global variable
 	dk_echo("\n");
-	$myPath="TEST";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
-
+	dk_basename("A:/directoryA/filenameA.extA");
+	dk_echo("dk_basename = ".$GLOBALS["dk_basename"]."\n");
+	
+	### Result as variable parameter
+#	dk_echo("\n");
+#	dk_basename("B:/directoryB/filenameB.extB", resultB);
+#	dk_echo("resultB = ${resultB}");
+#	dk_echo("dk_basename = ".$GLOBALS["dk_basename"]."\n");
+	
+	### Result as return value
 	dk_echo("\n");
-	$myPath="https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
-
-	dk_echo("\n");
-	$myPath="C:/Windows/System32/test.v123.zip";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
-
-	dk_echo("\n");
-	$myPath="TEST";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
-
-	dk_echo("\n");
-	$myPath="https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso";
-	$dk_basename = dk_basename("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_basename:'$dk_basename'\n");
+	$resultC = dk_basename("C:/directoryC/filenameC.extC");
+	dk_echo("resultC = ${resultC}\n");
+	dk_echo("dk_basename = ".$GLOBALS["dk_basename"]."\n");
+	
+	### Result as hashtable parameter
+#	dk_echo("\n");
+#	dk_echo("\n");
+#	dk_basename("D:/directoryD/filenameD.extD", resultD[value]);
+#	dk_echo("resultD[value] = ${resultD[value]}");
+#	dk_echo("dk_basename = ".$GLOBALS["dk_basename"]."\n");
+	
 }}
 
 
