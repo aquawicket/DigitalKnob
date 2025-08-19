@@ -126,14 +126,14 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### DK_C_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh")
-	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc")
-	if /i "%Target_Env%" equ "Clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend clang")
-	if /i "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend gcc")
-
-	if /i "%Target_Env%" equ "Cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
-	if /i "%Target_Env%" equ "Clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
-	if /i "%Target_Env%" equ "Gcc"		(set "DK_C_COMPILER=%GCC_C_COMPILER%")
+	if "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh")
+	if "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc")
+	if "%Target_Env%" equ "Clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend clang")
+	if "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend gcc")
+	
+	if "%Target_Env%" equ "Cosmocc"	(set "DK_C_COMPILER=%SH_EXE% %COSMOCC_C_COMPILER%")
+	if "%Target_Env%" equ "Clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
+	if "%Target_Env%" equ "Gcc"		(set "DK_C_COMPILER=%GCC_C_COMPILER%")
 	%dk_call% dk_assertPath DK_C_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKC"
