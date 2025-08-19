@@ -4,27 +4,50 @@
 
 #include "DK.hpp"
 
+//################################################################################
+char* _dk_basename;   //# Global Return variable
 
 //################################################################################
-//# dk_basename()
+//# dk_basename(_path, _rtn_var)
+//#
+//#		Strip directory and suffix from filenames
+//#
+//#		Reference: https://en.wikipedia.org/wiki/Basename
 //#
 #include <string.h>
 #include <stdio.h>
-#include <libgen.h>
-int dk_basename(char* path, char** _basename_){
+int dk_basename(char* _path, char** _rtn_var){
 	//dk_debugFunc(1);
 	
-	// Method 1
-//	*_basename_ = basename(path);
-	
-	// Method 2
-	char *base = strrchr(path, '/');
+	char *base = strrchr(_path, '/');
     if (base != NULL){
         base++; // Move pointer past the last '/'
     } else {
-        base = path; // If no '/', the entire string is the basename
+        base = _path; // If no '/', the entire string is the basename
     }
-	*_basename_ = base;
+	*_rtn_var = base;
+	_dk_basename = base;
+	
+	return 0;
+};
+
+//################################################################################
+//# dk_basename(_path)
+//#
+//#		Strip directory and suffix from filenames
+//#
+//#		Reference: https://en.wikipedia.org/wiki/Basename
+//#
+int dk_basename(char* _path){
+	//dk_debugFunc(1);
+	
+	char *base = strrchr(_path, '/');
+    if (base != NULL){
+        base++; // Move pointer past the last '/'
+    } else {
+        base = _path; // If no '/', the entire string is the basename
+    }
+	_dk_basename = base;
 	
 	return 0;
 };
