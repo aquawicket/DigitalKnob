@@ -9,7 +9,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	if NOT defined white (set "white=%ESC%[37m")
 
 	::###### DK_C_COMPILER ######
-	if NOT defined DK_C_COMPILER (set "DK_C_COMPILER=%~1")
+	if NOT defined DK_C_COMPILER (set DK_C_COMPILER=%~1)
 	if NOT defined DK_C_COMPILER (echo %red%ERROR: DK_C_COMPILER is invalid%clr%)
 
 	::###### DKC_FILE ######
@@ -44,7 +44,8 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/"
 
 	echo %COMPILE_COMMAND%
-	call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %COMPILE_COMMAND%
+	call %Comspec% /V:ON /c call %COMPILE_COMMAND%
+	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %COMPILE_COMMAND%
 	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 
 	if NOT EXIST "%APP_FILE%" (
