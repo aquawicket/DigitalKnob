@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -34,7 +34,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set	"MINGW64_BIN=%MSYS2%/mingw64/bin"	
 	set	"UCRT64_BIN=%MSYS2%/ucrt64/bin"
 	set	"MSYS2_MAKE_PROGRAM=%MSYS2%/make.exe"
-	if exist "%MSYS2%/msys2.exe" (
+	if EXIST "%MSYS2%/msys2.exe" (
 		%dk_call% dk_notice "msys2 already installed"
 		%return%
 	)

@@ -1,5 +1,5 @@
 ::@echo off&::###### DK.cmd #########################################################################################################################
-::if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+::if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 ::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -73,7 +73,7 @@
 	(set /a "LVL-=1")
 	
 	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
-	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
+	if EXIST "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
     )

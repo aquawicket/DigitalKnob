@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -20,8 +20,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKHTTP_DKHTA_FUNCTIONS_DIR	(set "DKHTTP_DKHTA_FUNCTIONS_DIR=%DKHTTP_DKHTA_DIR%/functions")
 	
 	::### Download files if missing
-	::if NOT exist %DKHTA_FUNCTIONS_DIR%/DK.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/DK.hta" "%DKHTA_FUNCTIONS_DIR%/DK.hta")
-	::if NOT exist %DKHTA_FUNCTIONS_DIR%/%~1.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/%~1.hta" "%DKHTA_FUNCTIONS_DIR%/%~1.hta")
+	::if NOT EXIST %DKHTA_FUNCTIONS_DIR%/DK.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/DK.hta" "%DKHTA_FUNCTIONS_DIR%/DK.hta")
+	::if NOT EXIST %DKHTA_FUNCTIONS_DIR%/%~1.hta	(%dk_call% dk_download "%DKHTTP_DKHTA_FUNCTIONS_DIR%/%~1.hta" "%DKHTA_FUNCTIONS_DIR%/%~1.hta")
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

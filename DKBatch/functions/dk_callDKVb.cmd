@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -19,8 +19,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKHTTP_DKVB_DIR				(set "DKHTTP_DKVB_DIR=%DKHTTP_DKBRANCH_DIR%/DKVb")
 	if NOT defined DKHTTP_DKVB_FUNCTIONS_DIR	(set "DKHTTP_DKVB_FUNCTIONS_DIR=%DKHTTP_DKVB_DIR%/functions")
 	::### Download files if missing
-	if NOT exist %DKVB_FUNCTIONS_DIR%/DK.vbs	(%dk_call% dk_download "%DKHTTP_DKVB_FUNCTIONS_DIR%/DK.vbs" "%DKVB_FUNCTIONS_DIR%/DK.vbs")
-	if NOT exist %DKVB_FUNCTIONS_DIR%/%~1.vbs	(%dk_call% dk_download "%DKHTTP_DKVB_FUNCTIONS_DIR%/%~1.vbs" "%DKVB_FUNCTIONS_DIR%/%~1.vbs")
+	if NOT EXIST %DKVB_FUNCTIONS_DIR%/DK.vbs	(%dk_call% dk_download "%DKHTTP_DKVB_FUNCTIONS_DIR%/DK.vbs" "%DKVB_FUNCTIONS_DIR%/DK.vbs")
+	if NOT EXIST %DKVB_FUNCTIONS_DIR%/%~1.vbs	(%dk_call% dk_download "%DKHTTP_DKVB_FUNCTIONS_DIR%/%~1.vbs" "%DKVB_FUNCTIONS_DIR%/%~1.vbs")
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

@@ -1,6 +1,6 @@
 @if (@X)==(@Y) @end /* javascript comment
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -13,12 +13,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_PPID
 %setlocal%
 	%dk_call% dk_debugFunc 1
-    if exist "dk_PPID.exe .exe" goto exe_exists
+    if EXIST "dk_PPID.exe .exe" goto exe_exists
     for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsoft.NET\Framework\*jsc.exe"') do (
         set "jsc=%%v"
     )
 
-    ::if NOT exist "%~n0.exe" (
+    ::if NOT EXIST "%~n0.exe" (
         "%jsc%" /nologo /out:"dk_PPID.exe" "%~dpsfnx0"
     ::)
 

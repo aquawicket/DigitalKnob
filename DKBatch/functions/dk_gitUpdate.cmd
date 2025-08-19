@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -24,7 +24,7 @@ set "dk_gitUpdate_BACKUP=1"
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
     %dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
    
-    if NOT exist "%DKBRANCH_DIR%/.git" (
+    if NOT EXIST "%DKBRANCH_DIR%/.git" (
 		
 		rem NOTE: 	This must clone and update within the parentheses. rd /s /q "%DKBRANCH_DIR%" removes the current DigitalKnob
 		rem			folder, leaving the current running batch process abandoned until it's cloned again. It seems like when we are
@@ -32,7 +32,7 @@ set "dk_gitUpdate_BACKUP=1"
 		rem         This includes variables, functions, etc. So to fix this, after we delete the very files our context is running
 		rem			from, we must stay in parentheses until those files are restored and updated, or we will lose the context.
 		rem ####################################################################		
-		if exist "%DKBRANCH_DIR%" (
+		if EXIST "%DKBRANCH_DIR%" (
 		
 			rem ###### Backup Branch directory and clone ######
 			if "%dk_gitUpdate_BACKUP%" equ "1" (

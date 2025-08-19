@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -23,7 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"				&rem get the current folder
 	rem if NOT defined GIT_EXE (%dk_call% dk_depend git)
-	rem if exist "%CD%\.git" (
+	rem if EXIST "%CD%\.git" (
 	rem 	"%GIT_EXE%" "-C %DKBRANCH_DIR% branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
 	rem 		set "DKBRANCH=%CURRENT_FOLDER%"
 	rem 	)

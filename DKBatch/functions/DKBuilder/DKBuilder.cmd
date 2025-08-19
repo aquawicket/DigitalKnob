@@ -7,14 +7,14 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	if NOT defined DIGITALKNOB (set "DIGITALKNOB=DigitalKnob")
 	if NOT defined DKBRANCH (set "DKBRANCH=Development")
 	if NOT defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/DK.cmd")
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
 	set "DK_CMD=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
 	
 	::###### TEMPORARY for WinPE #######
 	if "%SystemDrive%" equ "X:" (
-		if NOT exist "%windir%\System32\curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
-		if NOT exist "%windir%\System32\certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
+		if NOT EXIST "%windir%\System32\curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
+		if NOT EXIST "%windir%\System32\certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
 	)
 	
 	::########################
@@ -31,7 +31,7 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	call :dk_firewallAllow powershell "%POWERSHELL_EXE%"
 	call :dk_firewallAllow git-remote-https "%GIT_REMOTE_HTTPS_EXE%"
 
-	if NOT exist "%DK_CMD%" (
+	if NOT EXIST "%DK_CMD%" (
 		"%CURL_EXE%" -L "!HDK!" -o "!DK_CMD!" >nul 2>&1 || ^
 		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK_CMD!" >nul 2>&1 || ^
 		"%BITSADMIN_EXE%" /transfer /Download /priority Foreground "!HDK!" "!DK_CMD:/=\!" >nul 2>&1 || ^
@@ -66,7 +66,7 @@ setlocal enableDelayedExpansion
 	netsh advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
 	netsh advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_%" enable=yes profile=any 1>nul 2>nul
 	::###### Windows Firewall Control ######
-	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe")
-	if exist "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe")
-	if exist "%WFC_APP%" ("%ComSpec%" /c "%WFC_APP%" -allow %_file_%)
+	if EXIST "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe")
+	if EXIST "%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe" (set "WFC_APP=%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe")
+	if EXIST "%WFC_APP%" ("%ComSpec%" /c "%WFC_APP%" -allow %_file_%)
 exit /b 0

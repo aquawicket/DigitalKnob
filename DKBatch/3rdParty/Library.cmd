@@ -857,7 +857,7 @@ goto :Debug.End
 
 :Debug.Init
 :# Preliminary checks to catch common problems
-if exist echo >&2 echo WARNING: The file "echo" in the current directory will cause problems. Please delete it and retry.
+if EXIST echo >&2 echo WARNING: The file "echo" in the current directory will cause problems. Please delete it and retry.
 :# Inherited variables from the caller: DEBUG, VERBOSE, INDENT, >DEBUGOUT
 :# Initialize other debug variables
 set "ECHO=%LCALL% :Echo"
@@ -3372,8 +3372,8 @@ exit /b
 :#                                                                            #
 :#  Description     Check if FILE %1 is newer than FILE %2                    #
 :#                                                                            #
-:#  Arguments       %1	    pathname of file #1. Must exist.                  #
-:#                  %2	    pathname of file #2. May NOT exist.               #
+:#  Arguments       %1	    pathname of file #1. Must EXIST.                  #
+:#                  %2	    pathname of file #2. May NOT EXIST.               #
 :#                                                                            #
 :#  Notes 	    Returns errorlevel 0 FILE1 is newer, 1 if same or older   #
 :#                                                                            #
@@ -3387,7 +3387,7 @@ exit /b
 :# If the copy is done, the file name is output.
 :# If that name does NOT contain "\", then the drive name "C:" is prepended!
 :# So search either for a : or a \
-if NOT exist %2 exit /b 0 &:# ERRORLEVEL 0 if target is missing
+if NOT EXIST %2 exit /b 0 &:# ERRORLEVEL 0 if target is missing
 xcopy /d /l /y %1 %2 | findstr ": \\" >nul &:# ERRORLEVEL 0 if newer, 1 if older
 if errorlevel 1 %ECHO.D% %2 is already up-to-date
 exit /b
@@ -3510,11 +3510,11 @@ set "FULL_SHORT=%~fs1"           &:# Make sure it really is short all the way th
 set "FULL_SHORT=%FULL_SHORT:~3%" &:# Remove the drive and initial \
 set "FULL_LONG=%~d1"             &:# Begin with just the drive
 if defined FULL_SHORT for %%x in ("!FULL_SHORT:\=" "!") do ( :# Loop on all short components
-  set "ATTRIB_OUTPUT=" &:# If the file does NOT exist, filter-out attrib.exe error message on stdout, with its - before the drive.
+  set "ATTRIB_OUTPUT=" &:# If the file does NOT EXIST, filter-out attrib.exe error message on stdout, with its - before the drive.
   for /f "delims=" %%l in ('attrib "!FULL_LONG!\%%~x" 2^>NUL ^| findstr /v /c:" - %~d1"') do set "ATTRIB_OUTPUT=%%l"
   if defined ATTRIB_OUTPUT ( :# Extract the long name from the attrib.exe output
     for %%f in ("!ATTRIB_OUTPUT:*\=\!") do set "LONG_NAME=%%~nxf"
-  ) else (                   :# Use the short name (which does NOT exist)
+  ) else (                   :# Use the short name (which does NOT EXIST)
     set "LONG_NAME=%%~x"
   )
   set "FULL_LONG=!FULL_LONG!\!LONG_NAME!"
@@ -3532,7 +3532,7 @@ exit /b
 :#                                                                            #
 :#  Notes 	    Based on sample in http://superuser.com/a/764725          #
 :#                                                                            #
-:#                  Creates file if it does NOT exist.                        #
+:#                  Creates file if it does NOT EXIST.                        #
 :#                  Just uses cmd built-ins.                                  #
 :#                  Works even on read-only files, like touch does.           #
 :#                                                                            #
@@ -3545,7 +3545,7 @@ exit /b
 
 :touch
 %FUNCTION%
-if NOT exist "%~1" type NUL >>"%~1"& %RETURN%
+if NOT EXIST "%~1" type NUL >>"%~1"& %RETURN%
 set _ATTRIBUTES=%~a1
 if "%~a1" equ "%_ATTRIBUTES:r=%" (copy "%~1"+,,) else attrib -r "%~1" & copy "%~1"+,, & attrib +r "%~1"
 %RETURN%

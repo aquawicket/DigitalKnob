@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -27,8 +27,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "VCRUNTIME140_X86_DLL=%windir:\=/%/SysWOW64/vcruntime140.dll"
 	set "VCRUNTIME140_X86_DEBUG_DLL=%windir:\=/%/SysWOW64/vcruntime140d.dll"
 	
-	rem OR if exist "%VCRUNTIME140_X86_DEBUG_DLL%" (
-	if exist "%VCRUNTIME140_X86_DLL%" (
+	rem OR if EXIST "%VCRUNTIME140_X86_DEBUG_DLL%" (
+	if EXIST "%VCRUNTIME140_X86_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
@@ -45,8 +45,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "VCRUNTIME140_X86_64_DLL=%windir:\=/%/System32/vcruntime140.dll"
 	set "VCRUNTIME140_X86_64_DEBUG_DLL=%windir:\=/%/System32/vcruntime140d.dll"
 	
-	rem OR if exist "%VCRUNTIME140_X86_64_DEBUG_DLL%" (
-	if exist "%VCRUNTIME140_X86_64_DLL%" (
+	rem OR if EXIST "%VCRUNTIME140_X86_64_DEBUG_DLL%" (
+	if EXIST "%VCRUNTIME140_X86_64_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_64_IMPORT%
 		%dk_call% dk_info "Uninstalling Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_64_IMPORT!"

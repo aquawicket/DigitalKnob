@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -38,10 +38,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	
 	::###### Windows Firewall Control ######
-	if NOT exist "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
-	if NOT exist "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
-	if exist "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
-	if exist "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
+	if NOT EXIST "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
+	if NOT EXIST "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
+	if EXIST "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
+	if EXIST "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
 	"%WFC_APP:/=\%" -allow "%_file_:/=\%"
 	::######################################
 %endfunction%

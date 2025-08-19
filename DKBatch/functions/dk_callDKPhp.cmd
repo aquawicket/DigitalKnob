@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::### Get DKC_FUNCTIONS_DIR
 	%dk_call% dk_validate DKPHP_FUNCTIONS_DIR		"%dk_call% dk_DKBRANCH_DIR"
-	if NOT exist "%DKPHP_FUNCTIONS_DIR%"			(mkdir "%DKPHP_FUNCTIONS_DIR:/=\%")
+	if NOT EXIST "%DKPHP_FUNCTIONS_DIR%"			(mkdir "%DKPHP_FUNCTIONS_DIR:/=\%")
 	%dk_call% dk_assertPath DKPHP_FUNCTIONS_DIR
 
 	::### Get DKHTTP_DKPHP_DIR
@@ -22,8 +22,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKHTTP_DKPHP_FUNCTIONS_DIR		(set "DKHTTP_DKPHP_FUNCTIONS_DIR=%DKHTTP_DKPHP_DIR%/functions")
 
 	::### Download files if missing
-	if NOT exist "%DKPHP_FUNCTIONS_DIR%/DK.php"		(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/DK.php" "%DKPHP_FUNCTIONS_DIR%/DK.php")
-	if NOT exist "%DKPHP_FUNCTIONS_DIR%/%~1.php"	(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/%~1.php" "%DKPHP_FUNCTIONS_DIR%/%~1.php")
+	if NOT EXIST "%DKPHP_FUNCTIONS_DIR%/DK.php"		(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/DK.php" "%DKPHP_FUNCTIONS_DIR%/DK.php")
+	if NOT EXIST "%DKPHP_FUNCTIONS_DIR%/%~1.php"	(%dk_call% dk_download "%DKHTTP_DKPHP_FUNCTIONS_DIR%/%~1.php" "%DKPHP_FUNCTIONS_DIR%/%~1.php")
 
 	%dk_call% dk_validate PHP_EXE "%dk_call% dk_depend php-src"
 

@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,11 +18,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		(set cmnd=%MSYS2%/usr/bin/env MSYSTEM=%MSYSTEM% /usr/bin/bash -lc "'%CMAKE_EXE%' --build %CMAKE_Target_Path%/%Target_Tuple%/%Target_Type% --config %Target_Type% --verbose")
 	)
 
-	if exist "%Target_App_Dir%/%Target_Tuple%/%Target_Type%/CMakeCache.txt" (
+	if EXIST "%Target_App_Dir%/%Target_Tuple%/%Target_Type%/CMakeCache.txt" (
 		(set cmnd="%CMAKE_EXE%" --build %Target_App_Dir%/%Target_Tuple%/%Target_Type% --config %Target_Type% --verbose)
 	)
 
-	if exist "%Target_App_Dir%/%Target_Tuple%/CMakeCache.txt" (
+	if EXIST "%Target_App_Dir%/%Target_Tuple%/CMakeCache.txt" (
 		(set cmnd="%CMAKE_EXE%" --build %Target_App_Dir%/%Target_Tuple% --config %Target_Type% --verbose)
 	)
 

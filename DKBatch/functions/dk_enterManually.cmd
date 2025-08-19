@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -24,9 +24,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate DKCPP_PLUGINS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate DKCPP_APPS_DIR	"%dk_call% dk_DKBRANCH_DIR"
-	if exist "%DKIMPORTS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" 	(set "Target_App_Dir=%DKIMPORTS_DIR%\%dk_keyboardInput%")
-	if exist "%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" (set "Target_App_Dir=%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%")
-	if exist "%DKCPP_APPS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake"	(set "Target_App_Dir=%DKCPP_APPS_DIR%\%dk_keyboardInput%")
+	if EXIST "%DKIMPORTS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" 	(set "Target_App_Dir=%DKIMPORTS_DIR%\%dk_keyboardInput%")
+	if EXIST "%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" (set "Target_App_Dir=%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%")
+	if EXIST "%DKCPP_APPS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake"	(set "Target_App_Dir=%DKCPP_APPS_DIR%\%dk_keyboardInput%")
 	%dk_call% dk_printVar Target_App_Dir
 
 	%dk_call% dk_folderName "%Target_App_Dir%" parent

@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -20,8 +20,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKHTTP_DKPYTHON_FUNCTIONS_DIR	(set "DKHTTP_DKPYTHON_FUNCTIONS_DIR=%DKHTTP_DKPYTHON_DIR%/functions")
 
 	::### Download files if missing
-	if NOT exist %DKPYTHON_FUNCTIONS_DIR%/DK.py		(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/DK.py" "%DKPYTHON_FUNCTIONS_DIR%/DK.py")
-	if NOT exist %DKPYTHON_FUNCTIONS_DIR%/%~1.py	(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/%~1.py" "%DKPYTHON_FUNCTIONS_DIR%/%~1.py")
+	if NOT EXIST %DKPYTHON_FUNCTIONS_DIR%/DK.py		(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/DK.py" "%DKPYTHON_FUNCTIONS_DIR%/DK.py")
+	if NOT EXIST %DKPYTHON_FUNCTIONS_DIR%/%~1.py	(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/%~1.py" "%DKPYTHON_FUNCTIONS_DIR%/%~1.py")
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

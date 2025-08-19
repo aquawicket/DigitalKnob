@@ -58,7 +58,7 @@ if "%cnt%" gtr "1" (
 :end
 
 ::: add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if NOT exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
+if NOT EXIST "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
 ::echo [91m Testins for DKEND in "%~1" [0m
 >nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
 :end

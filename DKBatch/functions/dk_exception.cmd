@@ -93,7 +93,7 @@ exit /b
 
 :Kill - Cease all processing, ignoring any remaining cached commands
 setlocal disableDelayedExpansion
-if NOT exist "%temp%\Kill.Yes" call :buildYes
+if NOT EXIST "%temp%\Kill.Yes" call :buildYes
 call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
 :CtrlC
 @%ComSpec% /c exit -1073741510

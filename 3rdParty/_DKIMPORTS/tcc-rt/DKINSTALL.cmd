@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,7 +18,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %TCC_RT_IMPORT% NAME tcc-rt ROOT %DKTOOLS_DIR%
 	set "TCC_RT_EXE=%TCC_RT%/tcc.exe"
 	
-	if exist "%TCC_RT_EXE%" (
+	if EXIST "%TCC_RT_EXE%" (
 		%dk_call% dk_notice "TCC_RT_EXE:%TCC_RT_EXE% already found"
 		%return%
 	)
@@ -38,7 +38,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::MsiExec.exe /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
 	
 	
-	::if NOT exist "%TCC_RT_EXE%" %dk_call% dk_error "cannot find TCC_RT_EXE:%TCC_RT_EXE%"
+	::if NOT EXIST "%TCC_RT_EXE%" %dk_call% dk_error "cannot find TCC_RT_EXE:%TCC_RT_EXE%"
 %endfunction%
 
 

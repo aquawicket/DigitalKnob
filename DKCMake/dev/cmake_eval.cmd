@@ -44,12 +44,12 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%\DKCMake"
 	
-	if exist "%ProgramFiles%\CMake\bin\cmake.exe" 		set "CMAKE_EXE=%ProgramFiles%\CMake\bin\cmake.exe"
-	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
-	if NOT exist "%CMAKE_EXE%" 							echo "ERROR: Could NOT locate CMAKE_EXE" & goto:eof
+	if EXIST "%ProgramFiles%\CMake\bin\cmake.exe" 		set "CMAKE_EXE=%ProgramFiles%\CMake\bin\cmake.exe"
+	if EXIST "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+	if NOT EXIST "%CMAKE_EXE%" 							echo "ERROR: Could NOT locate CMAKE_EXE" & goto:eof
 	
-	if NOT exist "%CMAKE_EXE%"		echo "ERROR: Could NOT locate CMAKE_EXE" 	& goto:eof
-	if NOT exist "%DKCMAKE_DIR%" 	echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
+	if NOT EXIST "%CMAKE_EXE%"		echo "ERROR: Could NOT locate CMAKE_EXE" 	& goto:eof
+	if NOT EXIST "%DKCMAKE_DIR%" 	echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	:: cmake_eval begin
 	set commands=%1
@@ -71,7 +71,7 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 		
 	:with_return_values
 		"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
-		if NOT exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
+		if NOT EXIST %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
 		call %DKCMAKE_DIR%\cmake_vars.cmd
 		del %DKCMAKE_DIR%\cmake_vars.cmd
 		
@@ -80,7 +80,7 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	::###### work with cmake return code files ######
 	:: std::out
 	set out=
-	if exist "cmake_eval.out" (
+	if EXIST "cmake_eval.out" (
 		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
 			set out=!out!%%x
 			echo %%x
@@ -92,7 +92,7 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 			
 	:: std::err
 	set err=
-	if exist "cmake_eval.err" (
+	if EXIST "cmake_eval.err" (
 		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
 			set err=!err!%%x
 			echo [91m %%x [0m

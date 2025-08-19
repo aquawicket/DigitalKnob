@@ -14,7 +14,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	call :pushStack %~n0 %*
 	(set pushStack=call :pushStack %%~n0%%~0 %%*)
 
-	::if NOT exist "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
+	::if NOT EXIST "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 	
 	::### DKSHELL_PATH ###
 	if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
@@ -78,9 +78,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	
 	::############ load dkconfig.txt ############
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if exist "%DKSCRIPT_DIR%/dkconfig.txt" (
+	if EXIST "%DKSCRIPT_DIR%/dkconfig.txt" (
 		%dk_call% dk_getFileParams "%DKSCRIPT_DIR%/dkconfig.txt"
-	) else if exist "%DKBRANCH_DIR%/dkconfig.txt" (
+	) else if EXIST "%DKBRANCH_DIR%/dkconfig.txt" (
 		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
@@ -135,9 +135,9 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_DKCACHE_DIR
 	%pushStack%
-	if NOT exist "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
-	if NOT exist "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
-	if exist "%DKCACHE_DIR%" (
+	if NOT EXIST "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
+	if NOT EXIST "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
+	if EXIST "%DKCACHE_DIR%" (
 		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
 			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
 		)
@@ -149,7 +149,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_DKSCRIPT_EXT
 	%pushStack%
-	if NOT exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
 	if NOT defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
 	if NOT defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% NOT defined & pause & exit -1)
 %endfunction%
@@ -159,7 +159,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_DKSCRIPT_NAME
 	%pushStack%
-	if NOT exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
 	if NOT defined DKSCRIPT_NAME	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ")
 	if NOT defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% NOT defined & pause & exit -1)
 %endfunction%
@@ -169,11 +169,11 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_DKSCRIPT_DIR
 	%pushStack%
-	if NOT exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT exist "%DKSCRIPT_DIR%"	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ")
-	if exist 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_DIR%"	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ")
+	if EXIST 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
-	if NOT exist "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% NOT found & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
@@ -189,7 +189,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_DKSCRIPT_FILE
 	%push%
-	if NOT exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
 	if NOT defined DKSCRIPT_FILE	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ")
 	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & exit -1)
 %endfunction%
@@ -211,7 +211,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 ::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
-	if NOT exist "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT exist & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT EXIST & pause & exit -1)
 %endfunction%
 
 ::##################################################################################
@@ -219,11 +219,11 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_initFiles
 	%pushStack%
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd" 	-o "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd" 	-o "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"
 %endfunction%
 
 ::##################################################################################
@@ -272,7 +272,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 	%dk_call% dk_debugFunc 1 2
    
     set dk_readlink=%1
-	::if NOT exist "%dk_readlink%" (%return%)
+	::if NOT EXIST "%dk_readlink%" (%return%)
 	
     set dk_readlink=%dk_readlink:"=%
 	set dk_readlink=%dk_readlink:/=\%

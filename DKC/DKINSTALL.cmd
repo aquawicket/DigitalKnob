@@ -20,14 +20,14 @@ if "%~1" equ "" (goto:DKINSTALL)
 	for %%Z in ("%DKC_FILE%") do (set "APP_NAME=%%~nZ")
 
 	::###### Setup build directory
-	if NOT exist "%CD:\=/%/build" (mkdir "%CD%\build")
+	if NOT EXIST "%CD:\=/%/build" (mkdir "%CD%\build")
 
 	::###### APP_FILE ######
 	set "APP_FILE=%CD:\=/%/build/%APP_NAME%.exe"
 
 	::###### Compile Code ######
 	echo compiling ...
-	if exist "%APP_FILE%" (del "%APP_FILE:/=\%")
+	if EXIST "%APP_FILE%" (del "%APP_FILE:/=\%")
 
 	::set "COMPILE_COMMAND=%DK_CXX_COMPILER% -mclang -mcosmo -DDKTEST=1 -o %APP_FILE% -static %DKCPP_FILE%"
 
@@ -47,7 +47,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %COMPILE_COMMAND%
 	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 
-	if NOT exist "%APP_FILE%" (
+	if NOT EXIST "%APP_FILE%" (
 		echo(
 		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
 		pause
@@ -95,8 +95,8 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::if NOT defined Target_Env		(set "Target_Env=Gcc")
 
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 

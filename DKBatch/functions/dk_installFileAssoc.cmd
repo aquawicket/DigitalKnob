@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -19,7 +19,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     :: <_exe_>  i.e. "%windir\=/%/System32/calc.exe"
     set "_exe_=%~2"
-    if NOT exist %_exe_% %dk_call% dk_error "%_exe_% does NOT exist"
+    if NOT EXIST %_exe_% %dk_call% dk_error "%_exe_% does NOT EXIST"
     %dk_call% dk_basename "%~2" _exeName_
     %dk_call% dk_basename "%~2" _exeFilename_
     set "_dkname_=dk_%_exeName_%"

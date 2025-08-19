@@ -423,7 +423,7 @@ echo %c%Please enter a valid number!%u% & goto Backup
 :: Credits to tarekifla
 :restorepoint1
 echo %c%Backing up the registry...%u%
-if NOT exist "C:\registryBackup\" mkdir C:\registryBackup
+if NOT EXIST "C:\registryBackup\" mkdir C:\registryBackup
 cd /d C:\registryBackup
 REG SAVE HKLM\SOFTWARE SOFTWARE
 REG SAVE HKLM\SYSTEM SYSTEM
@@ -4146,7 +4146,7 @@ if '%choice%'=='1' goto continue1
 
 :continue1
 cls
-if exist "C:\ProgramData\chocolatey" (
+if EXIST "C:\ProgramData\chocolatey" (
     echo Chocolatey is already installed.
     goto ChocoNice
 ) else (
@@ -4181,7 +4181,7 @@ goto 89
 
 :show_msgbox
 set tmpmsgbox=%temp%\~tmpmsgbox.vbs
-if exist "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
+if EXIST "%tmpmsgbox%" DEL /F /Q "%tmpmsgbox%"
 echo msgbox "%~2",0,"%~1" >"%tmpmsgbox%"
 WSCRIPT "%tmpmsgbox%"
 exit /b

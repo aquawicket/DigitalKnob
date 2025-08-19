@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -17,7 +17,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::### Load DKBuilder.cache ###
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	if exist "%DKCACHE_DIR%/DKBuilder.cache" (
+	if EXIST "%DKCACHE_DIR%/DKBuilder.cache" (
 		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
 	)
 	
@@ -36,7 +36,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo  9) Reload
     echo 10) Exit
 	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if exist "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
+	if EXIST "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
    
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput

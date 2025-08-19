@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -17,7 +17,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for /f "tokens=*" %%G in ("%~1") do (set _var_=%%~G)
 
 	if defined %~1 for /f "tokens=*" %%G in ("!%~1!") do (set _val_=%%~G)
-	if exist "%_val_%" (%return%)
+	if EXIST "%_val_%" (%return%)
 	
 	for /f "tokens=*" %%G in ("%~2") do set "_filename_=%%~G"
 	for /f "tokens=*" %%G in ("%~3") do set "_pattern_=%%~G"
@@ -35,7 +35,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%checkerror%
 	set "dk_findProgram=%dk_exec:\=/%"
 
-	if NOT exist "%dk_exec%" (
+	if NOT EXIST "%dk_exec%" (
 		if "%~4" equ "NO_ERROR" (
 			%dk_call% dk_return 0
 		) else if "%~4" equ "NO_HALT" (

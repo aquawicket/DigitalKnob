@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -28,8 +28,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "X%args:OVERWRITE=%X" neq "X%args%X" (set "OVERWRITE=1")
 	
 
-	if NOT exist "%inputFile%" (%dk_call% dk_error "%inputFile% NOT found")
-	if exist "%outputFile%" (
+	if NOT EXIST "%inputFile%" (%dk_call% dk_error "%inputFile% NOT found")
+	if EXIST "%outputFile%" (
 		if "%OVERWRITE%" neq "1" (
 			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is NOT set"
 		)
@@ -40,7 +40,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set DELETE_CMD_ON_EXTRACT=echo ;;;===,,,del "%outputFile:/=\%"
 	)
 	if "%dk_embedBin_OVERWRITE_OUTPUT%" neq "1" (
-		set OVERWRITE_OUTPUT=echo ;;;===,,,if exist "%inputFilename%" echo ERROR: outputfile already exists ^& pause ^& exit /b %%errorlevel%%
+		set OVERWRITE_OUTPUT=echo ;;;===,,,if EXIST "%inputFilename%" echo ERROR: outputfile already exists ^& pause ^& exit /b %%errorlevel%%
 	)
 	set "tempCmd=%inputFile%.tmp"
 	(

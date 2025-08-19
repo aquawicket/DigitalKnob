@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -12,10 +12,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if exist "%WSL_EXE%" (%return%)
+	if EXIST "%WSL_EXE%" (%return%)
 
 	set "WSL_EXE=%windir:\=/%/System32/wsl.exe"
-	if NOT exist "%WSL_EXE%" (%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir%/System32")
+	if NOT EXIST "%WSL_EXE%" (%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir%/System32")
 	
 	%dk_call% dk_assertPath "%WSL_EXE%"
 	endlocal & (

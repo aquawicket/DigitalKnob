@@ -118,7 +118,7 @@ set "CMDIZE_MAYBE=>"
 		goto :cmdize_loop_begin
 	)
 
-	if NOT exist "%~f1" (
+	if NOT EXIST "%~f1" (
 		set "CMDIZE_ERROR=1"
 		call :warn File NOT found: "%~1"
 		shift /1

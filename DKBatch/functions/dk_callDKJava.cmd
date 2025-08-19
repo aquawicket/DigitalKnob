@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -20,8 +20,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKHTTP_DKJAVA_FUNCTIONS_DIR	(set "DKHTTP_DKJAVA_FUNCTIONS_DIR=%DKHTTP_DKJAVA_DIR%/functions")
 	
 	::### Download files if missing
-	if NOT exist %DKJAVA_FUNCTIONS_DIR%/DK.js	(%dk_call% dk_download "%DKHTTP_DKJAVA_FUNCTIONS_DIR%/DK.js"  "%DKJAVA_FUNCTIONS_DIR%/DK.js")
-	if NOT exist %DKJAVA_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVA_FUNCTIONS_DIR%/%~1.js" "%DKJAVA_FUNCTIONS_DIR%/%~1.js")
+	if NOT EXIST %DKJAVA_FUNCTIONS_DIR%/DK.js	(%dk_call% dk_download "%DKHTTP_DKJAVA_FUNCTIONS_DIR%/DK.js"  "%DKJAVA_FUNCTIONS_DIR%/DK.js")
+	if NOT EXIST %DKJAVA_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVA_FUNCTIONS_DIR%/%~1.js" "%DKJAVA_FUNCTIONS_DIR%/%~1.js")
 
 	::### ALL_BUT_FIRST ###
 	set "ALL_BUT_FIRST=%*"

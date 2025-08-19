@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### DKBATCH_TOOLCHAIN ######
 	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
- 	if NOT exist "%DKBATCH_TOOLCHAIN%" (
+ 	if NOT EXIST "%DKBATCH_TOOLCHAIN%" (
 		%dk_call% dk_notice "%DKBATCH_TOOLCHAIN% NOT found. skipping..."
 		%dk_call% dk_unset CMAKE_GENERATOR
 		exit /b 0
@@ -39,10 +39,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ Target_Tuple_Dir ############
 	set "Target_Tuple_Dir=%Target_App_Dir%/%Target_Tuple%"
-	if NOT exist "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
+	if NOT EXIST "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
 	
 	::############ Get CMakeLists.txt file #############
-	if NOT exist "%Target_App_Dir%/CMakeLists.txt" (
+	if NOT EXIST "%Target_App_Dir%/CMakeLists.txt" (
 		%dk_call% dk_copy "%DKCPP_PLUGINS_DIR%/_DKIMPORT/_CMakeLists.txt_" "%Target_App_Dir%/CMakeLists.txt" OVERWRITE
 	)
 	

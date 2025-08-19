@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -38,11 +38,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%" result
-    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exist)
+    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
    
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%" result
-    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT exist)
+    if "%result%" equ "true" (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
     ::FIXME: ERRORLEVEL is still 1
    
    
@@ -51,11 +51,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%"
-    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exist)
+    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
    
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%"
-    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT exist)
+    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
     ::FIXME: ERRORLEVEL is still 1
    
    
@@ -63,10 +63,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo
    
     %dk_call% dk_set _command_ echo
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exist)
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT EXIST)
    
     %dk_call% dk_set _command_ NonExistentCommand  
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT exist)
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT EXIST)
     ::FIXME: ERRORLEVEL is still 1
 %endfunction%  
     

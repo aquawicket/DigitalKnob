@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -11,8 +11,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"
 set "MAVEN_CERT=%JAVA_HOME%\maven.cer"
 set "KEYTOOL_EXE=%JAVA_HOME%\bin\keytool.exe"
-if exist "%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe")
-if exist "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe")
+if EXIST "%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe")
+if EXIST "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" (set "OPENSSL_EXE=%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe")
 
 ::keytool -import -noprompt -file PathToCertificate -alias SomeCertificateAlias -keystore PathToKeyStore -storepass KeyStorePassword
 :: %dk_call% dk_echo -n | %OPENSSL_EXE% ca -config %JDK%\ssl\openssl.cnf

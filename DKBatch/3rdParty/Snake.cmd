@@ -229,7 +229,7 @@ set "sendCmd=>&%cmdStream% echo"
 
 ::---------------------------
 :: Load user preferences
-if exist "%userPref%" for /f "usebackq delims=" %%V in ("%userPref%") do set "%%V"
+if EXIST "%userPref%" for /f "usebackq delims=" %%V in ("%userPref%") do set "%%V"
 call :resize
 
 ::---------------------------
@@ -302,7 +302,7 @@ if %vt% equ 1 (
     set "HideCursor=<nul set /p "=%%E[?25l""
     set "exitCode=0"
   )
-) else if exist "%~dp0CursorPos.exe" (
+) else if EXIST "%~dp0CursorPos.exe" (
   set "cls=CursorPos 0 0"
   set "ClearLine=echo(                                   &CursorPos 0 -1"
   set "ClearPrev=CursorPos 0 -0&echo(                                   "
@@ -381,10 +381,10 @@ for %%# in (1 2) do if %%#==2 (for /f "tokens=1-3" %%1 in ("!args!") do (%\n%
 ::--------------------------------------
 :: start the game
 setlocal enableDelayedExpansion
-if NOT exist "%saveLoc%\" md "%saveLoc%"
+if NOT EXIST "%saveLoc%\" md "%saveLoc%"
 set "replay= Aborting... "
 set "replayAvailable="
-if exist "!gameLog!" set "replayAvailable=R"
+if EXIST "!gameLog!" set "replayAvailable=R"
 call :loadHighScores
 call :mainMenu
 
@@ -394,7 +394,7 @@ call :mainMenu
 for /l %%. in () do (
 
   %=== check for and process abort signal if in replay mode ===%
-  if defined replay if exist "%signal%" (
+  if defined replay if EXIST "%signal%" (
     del "%signal%"
     set "replayFinished=1"
     %draw%
@@ -646,7 +646,7 @@ echo   G - Graphic options
 
 if defined replayAvailable echo   R - Replay previous game
 if defined saveAvailable   echo   S - Save a game
-if exist *.snake.txt       echo   L - Load and watch a saved game&set "loadAvailable=L"
+if EXIST *.snake.txt       echo   L - Load and watch a saved game&set "loadAvailable=L"
 
 echo   Q - Quit
 echo(
@@ -685,7 +685,7 @@ if /i !key! equ Q (
   call :ask "Press a key to continue..."
 ) else if /i !key! equ L (
   call :getString "Load file name:" file 20
-  if exist "!file!.snake.txt" (
+  if EXIST "!file!.snake.txt" (
     set "replay=!file!.snake.txt"
     goto :initialize
   )
@@ -939,7 +939,7 @@ exit /b
 
 ::-------------------------------------
 :waitForSignal
-if NOT exist "%signal%" goto :waitForSignal
+if NOT EXIST "%signal%" goto :waitForSignal
 del "%signal%"
 exit /b
 

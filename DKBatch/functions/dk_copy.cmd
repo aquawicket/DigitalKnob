@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -23,27 +23,27 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_info "Copying %_from_% to %_to_%"
 
-	if NOT exist "%_from_%" (%dk_call% dk_error "dk_copy:'%_from_%' NOT found")
+	if NOT EXIST "%_from_%" (%dk_call% dk_error "dk_copy:'%_from_%' NOT found")
 
-	if exist "%_to_%" (
+	if EXIST "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
 			%dk_call% dk_error "dk_copy Cannot copy file. Destiantion already exists and OVERWRITE is NOT set"
 		)
 		%dk_call% dk_delete %_to_%
 	)
 
-	:: the base directory of the %to% path must exist.   
+	:: the base directory of the %to% path must EXIST.   
 	%dk_call% dk_dirname "%_to_%"
-	if NOT exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
+	if NOT EXIST "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
 
 	::copy "%_from_%" "%_to_%"
-	if exist "%_from_%\*" (
+	if EXIST "%_from_%\*" (
 		echo D|xcopy "%_from_:/=\%" "%_to_:/=\%" /S /E /H /Y
 	) else (
 		echo F|xcopy "%_from_:/=\%" "%_to_:/=\%" /H /Y
 	)
 
-	if NOT exist "%_to_%" (%dk_call% dk_fatal "dk_copy failed: %_to_% does NOT exist")
+	if NOT EXIST "%_to_%" (%dk_call% dk_fatal "dk_copy failed: %_to_% does NOT EXIST")
 %endfunction%
 
 

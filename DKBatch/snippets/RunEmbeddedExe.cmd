@@ -22,8 +22,8 @@ if "%MBEGIN%" equ "-1" (
 )
 
 :: Delete previous output files
-if exist "%~1.tmp" del "%~1.tmp"
-if exist "%~1" del "%~1" 
+if EXIST "%~1.tmp" del "%~1.tmp"
+if EXIST "%~1" del "%~1" 
 
 for /f "useback skip=%MBEGIN% tokens=* delims=" %%a in ("%~f0") DO (
 	echo %%a >>"%~1.tmp"

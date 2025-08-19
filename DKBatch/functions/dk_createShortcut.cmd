@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,9 +18,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "OVERWRITE=%~3"
 	
     if NOT defined OVERWRITE (
-		if exist "%shortcut_path%" (%dk_call% dk_notice "%shortcut_path% already exists" && %return%)
+		if EXIST "%shortcut_path%" (%dk_call% dk_notice "%shortcut_path% already exists" && %return%)
 	)
-	if exist "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
+	if EXIST "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
 
 	:: Method 1: direct powershell
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
@@ -42,7 +42,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_callDKPowershell dk_createShortcut %*
 
-	if NOT exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
+	if NOT EXIST %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
 %endfunction%
 
 

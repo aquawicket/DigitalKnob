@@ -83,14 +83,14 @@ goto skip_hello
 @echo off
 cd "%GHOST_DATA%" >nul 2>nul
 ::TEMPFILES
-if exist "aria2_download.log" DEL /s /q "aria2_download.log" >nul 2>nul
-if exist "cookies.txt" DEL /s /q "cookies.txt" >nul 2>nul
-if exist "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
-if exist "7z1900-extra.zip" DEL /s /q "7z1900-extra.zip" >nul 2>nul
-if exist "aria2-1.36.0-win-64bit-build1" rd /s /q "aria2-1.36.0-win-64bit-build1" >nul 2>nul
-if exist "aria2-1.36.0-win-32bit-build1" rd /s /q "aria2-1.36.0-win-32bit-build1" >nul 2>nul
-if exist ".wget-hsts" DEL /s /q ".wget-hsts" >nul 2>nul
-if exist "3Q80WQX" DEL /s /q "3Q80WQX" >nul 2>nul
+if EXIST "aria2_download.log" DEL /s /q "aria2_download.log" >nul 2>nul
+if EXIST "cookies.txt" DEL /s /q "cookies.txt" >nul 2>nul
+if EXIST "yesno.vbs" DEL /s /q "yesno.vbs" >nul 2>nul
+if EXIST "7z1900-extra.zip" DEL /s /q "7z1900-extra.zip" >nul 2>nul
+if EXIST "aria2-1.36.0-win-64bit-build1" rd /s /q "aria2-1.36.0-win-64bit-build1" >nul 2>nul
+if EXIST "aria2-1.36.0-win-32bit-build1" rd /s /q "aria2-1.36.0-win-32bit-build1" >nul 2>nul
+if EXIST ".wget-hsts" DEL /s /q ".wget-hsts" >nul 2>nul
+if EXIST "3Q80WQX" DEL /s /q "3Q80WQX" >nul 2>nul
 @echo off
 ForFiles /p "%GHOST_TEMP%" /s /m *.bat /d -1 /c "cmd /c del /a @path" >nul 2>nul
 cls
@@ -288,7 +288,7 @@ goto chcp
 FOR /F "tokens=2*" %%A in ('
     REG QUERY "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v Youtube_DL 2^>nul
 ') do set "YT_DL=%%B"
-:: YTDL/ADB FUNC if exist (
+:: YTDL/ADB FUNC if EXIST (
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeAudio" /f >nul 2>nul
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeURL" /f >nul 2>nul
 REG DELETE "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "YoutubeVideo" /f >nul 2>nul
@@ -954,7 +954,7 @@ del /q /f /s "memory.bin" >nul 2>nul
 :SKIPMEMORY1
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set MeMsilent="%yellow%Enabled" >nul 2>nul
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Default"') do set MeMsilent="%yellow%Disabled" >nul 2>nul
-if NOT exist "%Windir%\System32\ReduceMemory_x64.exe" goto startagainMEM
+if NOT EXIST "%Windir%\System32\ReduceMemory_x64.exe" goto startagainMEM
 schtasks /Change /TN "Reduce Memory 1min" /Disable >nul 2>nul
 schtasks /Delete /TN "Reduce Memory 1min" /F >nul 2>nul
 cls
@@ -1705,16 +1705,16 @@ timeout /t 3 >nul
 winget install -e -s msstore --accept-source-agreements >nul
 :skipWinget
 for /f "tokens=1" %%a in ('winget.exe -v') do set "var=%%a"
-if NOT exist "%GHOST_DIR%\list.txt" (
+if NOT EXIST "%GHOST_DIR%\list.txt" (
 type > "%GHOST_DIR%\list.txt" 2>nul
 )
-if exist "%GHOST_DATA%\Microsoft.Windows.Package.Manager_v1.7.10861" (
+if EXIST "%GHOST_DATA%\Microsoft.Windows.Package.Manager_v1.7.10861" (
 del /s /q "%GHOST_DATA%\Microsoft.Windows.Package.Manager_v1.7.10861" >nul
 )
-if exist "%GHOST_DATA%\*VCLibs*" (
+if EXIST "%GHOST_DATA%\*VCLibs*" (
 del /s /q "%GHOST_DATA%\*VCLibs*" >nul 2>nul
 )
-if exist "%GHOST_DATA%\*UI.Xaml*" (
+if EXIST "%GHOST_DATA%\*UI.Xaml*" (
 del /s /q "%GHOST_DATA%\*UI.Xaml*" >nul 2>nul
 )
 winget install -e -s msstore --accept-source-agreements >nul 2>nul
@@ -1893,7 +1893,7 @@ goto WTHx643
 :win11widgetsinstall
 cls
 timeout /t 1 >nul
-::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%PROGRAMFILES%\WindowsApps\" %%d in (*MicrosoftWindows.Client.Widgets*) do @if exist "%%d" rd /q /s "%%d" >nul
+::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%PROGRAMFILES%\WindowsApps\" %%d in (*MicrosoftWindows.Client.Widgets*) do @if EXIST "%%d" rd /q /s "%%d" >nul
 ::::%_7ZA_EXE% x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%GHOST_TEMP%\Widgets"
 timeout /t 2 >nul
 cls
@@ -1985,7 +1985,7 @@ cls
 
 :XADMINXX1W10C2
 ::cls
-::if exist "%SYSTEMDRIVE%\Users\Administrator" (
+::if EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 ::goto XADMINXX1W10C
 ::)
 
@@ -2050,7 +2050,7 @@ timeout /t 5 >nul
 goto XADMINXX1W10
 
 :win1116
-::if exist "%SYSTEMDRIVE%\Users\Administrator" (
+::if EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 goto XADMINXX1
 ::)
 cls
@@ -2067,7 +2067,7 @@ goto XADMINXX1W11C2
 
 :XADMINXX1W11C2
 cls
-if exist "%SYSTEMDRIVE%\Users\Administrator" (
+if EXIST "%SYSTEMDRIVE%\Users\Administrator" (
 goto XADMINXX1
 )
 
@@ -2863,7 +2863,7 @@ cls
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Powershell.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" >nul 2>nul
-if NOT exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" (
+if NOT EXIST "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -2885,7 +2885,7 @@ cls
 COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Command.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" >nul 2>nul
-if NOT exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" (
+if NOT EXIST "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -3152,7 +3152,7 @@ timeout /t 2 >nul
 TileIconifier.dll -method 3 a "%GHOST_DIR%\TileIconifier\TileIconify.backup" "%PROGRAMDATA%\TileIconify\*" "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\TileIconify\*" >nul
 echo Backup Tiles Export
 timeout /t 2 >nul
-if exist "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" DEL /s /q "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" >nul 2>nul
+if EXIST "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" DEL /s /q "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" >nul 2>nul
 goto begin
 
 :BBX02
@@ -3171,7 +3171,7 @@ timeout /t 2 >nul
 ::reg imxport
 regedit.exe /S "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" >nul
 timeout /t 1 >nul
-if exist "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" DEL /s /q "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" >nul 2>nul
+if EXIST "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" DEL /s /q "%PROGRAMDATA%\TileIconify\TileIconify_backup.reg" >nul 2>nul
 :findagainexTILE
 timeout /t 1 >nul
 tasklist | find /i "explorer.exe" >nul 2>&1
@@ -3381,7 +3381,7 @@ goto forwindows11
 cls
 taskkill /F /IM SystemSettings.exe >nul 2>nul
 echo %lblack%Please wait..
-if exist "%Windir%\dxgi.dll" (
+if EXIST "%Windir%\dxgi.dll" (
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 1 >nul
 del /q /f /s "%Windir%\dxgi.dll" 2>nul >nul
@@ -3837,7 +3837,7 @@ if "%var%" equ "1607" goto :winreforltsb1607
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
 ::)
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -4102,7 +4102,7 @@ del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable.lnk" >nul
 del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable" >nul
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -4149,7 +4149,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %_7Z_DIR_%\x64\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
 )
 ::mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe"
-if exist "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe" (mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe" (mklink "%USERPROFILE%\Desktop\DriverEasy Portable" "%PROGRAMFILES%\DriverEasy\DriverEasyPortable.exe") >nul 2>nul
 cls
 echo Driver Easy Portable complete installed.
 cd..
@@ -4276,7 +4276,7 @@ goto nilesoft
 
 :nile02
 cls
-if exist "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
+if EXIST "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
 cd "%PROGRAMFILES%\Nilesoft Shell\imports\"
 timeout /t 1 >nul
 del /s /q "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
@@ -4307,7 +4307,7 @@ goto nilesoft
 
 :nile03
 cls
-if exist "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
+if EXIST "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" (
 cd "%PROGRAMFILES%\Nilesoft Shell\imports\"
 timeout /t 1 >nul
 del /s /q "%PROGRAMFILES%\Nilesoft Shell\imports\theme.nss" 2>nul >nul
@@ -4337,7 +4337,7 @@ goto nilesoft
 
 :ghosthemes
 cls
-if exist "C:\UXThemePatcher" attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
+if EXIST "C:\UXThemePatcher" attrib +h /s /d "%SYSTEMDRIVE%\UXThemePatcher"
 cd "%GHOST_DATA%"
 del /q /f /s
 del /q /f /s UltraUXThemePatcher_3.7.2.exe >nul 2>nul
@@ -4405,7 +4405,7 @@ cls
 goto ghst
 :theme99
 cls
-if NOT exist "%PROGRAMFILES%\7-Zip\7zG.exe" (
+if NOT EXIST "%PROGRAMFILES%\7-Zip\7zG.exe" (
 cd "%GHOST_DATA%"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2103-x64.exe" -o"7z2103-x64.exe"
 7z2103-x64.exe /S
@@ -4572,7 +4572,7 @@ cls
 cd "%GHOST_DATA%"
 del /s /q "GhostSpectre_Wallpaper.zip" >nul
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -4599,7 +4599,7 @@ color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Ly4D6t" -o"GhostSpectre_Wallpaper.zip"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://tinyurl.com/3f3hbp3n" -O "GhostSpectre_Wallpaper.zip" -t 1
 timeout /t 2 >nul
-if NOT exist "GhostSpectre_Wallpaper.zip" (
+if NOT EXIST "GhostSpectre_Wallpaper.zip" (
 cls
 echo file NOT found
 timeout /t 4 >nul
@@ -5399,7 +5399,7 @@ goto :installdp12
 goto :dp2342
 )
 :dp2342
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -5498,7 +5498,7 @@ goto :tk121212
 cls
 :tk121212
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -6956,7 +6956,7 @@ goto :xbox1strun
 )
 :xbox1strun
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -7300,7 +7300,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto revisionx86
 cls
 :revisionx64
 cd "%GHOST_DATA%"
-if exist "wget2\bin\wget2.exe" goto wget2comp
+if EXIST "wget2\bin\wget2.exe" goto wget2comp
 RD /S /Q "wget2-1.99.2" 2>nul >nul
 cls
 cls && color 08
@@ -7361,7 +7361,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
@@ -7599,7 +7599,7 @@ cls
 goto beginx
 :revisionx86
 cd "%GHOST_DATA%"
-if exist "wget2\bin\wget2.exe" goto wget2comp
+if EXIST "wget2\bin\wget2.exe" goto wget2comp
 RD /S /Q "wget2-1.99.2" 2>nul >nul
 cls
 cls && color 08
@@ -7661,7 +7661,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
@@ -7923,7 +7923,7 @@ timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -8000,7 +8000,7 @@ timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -8329,7 +8329,7 @@ taskkill /f /im "AppInstaller.exe" /t >nul 2>nul
 
 
 :skipWinget
-if exist "%GHOST_TEMP%" (
+if EXIST "%GHOST_TEMP%" (
 rd /s /q "%GHOST_TEMP%" >nul 2>nul
 rmdir /s /q "%GHOST_TEMP%" >nul 2>nul
 )
@@ -8627,7 +8627,7 @@ for /f "tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windo
 if "%var%" equ "2.9.20" (
 goto noupdate
 )
-if exist "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" goto killstartmenu
+if EXIST "%Windir%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" goto killstartmenu
 goto skipkillstartmenu
 :killstartmenu
 cls
@@ -8665,7 +8665,7 @@ cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://api.onedrive.com/v1.0/shares/s!AiOAYMWSismjk26v5l_4CELBvWuN/root/content" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 ::CATBOX
 ::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/2pu5pp.bat" -t 1 -O "%Systemroot%\System32\hashsum.bat"
-if exist "%Systemroot%\System32\hashsum.bat" goto skip
+if EXIST "%Systemroot%\System32\hashsum.bat" goto skip
 :skip
 cd "%GHOST_DATA%"
 ::wget2\bin\wget2 -q -c --no-check-certificate --robots "https://bit.ly/3sp7BK9" >nul 2>nul
@@ -8946,12 +8946,12 @@ for /f "tokens=3" %%i in ('wmic os get caption') do set VERSION2=%%i
 for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
 ::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%bg_lblue%%lblack% %%i "
 for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
-if NOT exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
-if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%green%ENABLE"
+if NOT EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%green%ENABLE"
 
-if exist "%_7ZA_DLL%" (
-	if exist "%_7ZA_EXE%" (
-		if exist "%_7ZXA_DLL%" (goto :wgetchecking)
+if EXIST "%_7ZA_DLL%" (
+	if EXIST "%_7ZA_EXE%" (
+		if EXIST "%_7ZXA_DLL%" (goto :wgetchecking)
 	)
 )
 
@@ -9255,7 +9255,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9356,7 +9356,7 @@ goto begin
 :dxoffline
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9472,7 +9472,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9543,7 +9543,7 @@ goto usersrequest
 :usr009
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9652,7 +9652,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9726,8 +9726,8 @@ cd..
 rd /s /q "Soft.Organizer.9.01.repack" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
-::if exist "%PROGRAMFILES(X86)%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES(X86)%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
-::if exist "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES(X86)%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES(X86)%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe" (mklink "%USERPROFILE%\Desktop\Soft Organizer" "%PROGRAMFILES%\Soft Organizer\SoftOrganizer.exe") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -9746,7 +9746,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9870,7 +9870,7 @@ goto ErrorMD5msstore
 )
 :downloadasc
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9935,7 +9935,7 @@ taskkill /f /im Monitor.exe >nul 2>nul
 taskkill /f /im Suo12_StartupManager.exe >nul 2>nul
 echo Installing cracked... please wait...
 ping -n 10 127.0.0.1 >nul
-if exist %Windir%\SYSWoW64 goto 64bit
+if EXIST %Windir%\SYSWoW64 goto 64bit
 if NOT EXIST %Windir%\SYSWoW64 goto 32bit
 :64bit
 set XCOPY="xcopy.exe"
@@ -10216,7 +10216,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10251,7 +10251,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10351,7 +10351,7 @@ goto :install3dpaint
 del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10451,7 +10451,7 @@ goto ScreenSketchdl
 cls
 :ScreenSketchdl
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10558,7 +10558,7 @@ goto op10
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10612,7 +10612,7 @@ goto usersrequest
 :usr032
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10661,7 +10661,7 @@ goto iobitDBinstall
 del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10734,8 +10734,8 @@ FOR %%i in ("Driver.Booster.*.exe") do Set FileName="%%i"
 cd..
 rd /s /q "IOBit.Driver.Booster.v9.3.0.209.repack" >nul 2>nul
 timeout /t 2 >nul
-::if exist "%PROGRAMFILES(X86)%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%PROGRAMFILES(X86)%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
-::if exist "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES(X86)%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%PROGRAMFILES(X86)%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe" (mklink "%USERPROFILE%\Desktop\IOBit Driver Booster" "%PROGRAMFILES%\IObit\Driver Booster\DriverBooster.exe") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -10745,7 +10745,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10782,8 +10782,8 @@ cd..
 rd /s /q "IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
-if exist "%PROGRAMFILES(X86)%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES(X86)%\IObit\Smart Defrag\SmartDefrag.exe") >nul 2>nul
-if exist "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag") >nul 2>nul
+if EXIST "%PROGRAMFILES(X86)%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES(X86)%\IObit\Smart Defrag\SmartDefrag.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag.exe" (mklink "%USERPROFILE%\Desktop\IObit Smart Defrag" "%PROGRAMFILES%\IObit\Smart Defrag\SmartDefrag") >nul 2>nul
 cd..
 cls
 timeout /t 1 >nul
@@ -10792,7 +10792,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10863,7 +10863,7 @@ cls
 :LuDaShi1
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10914,8 +10914,8 @@ cls
 echo. The program is being installed... Wait for the operation to complete.
 %_7ZA_EXE% x "LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -aoa -o"%PROGRAMFILES%\LuDaShi.5.1020.1295.1215" >nul 2>nul
 timeout /t 5 >nul
-if exist "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
-if exist "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
 cls
 timeout /t 1 >nul
 goto usersrequest
@@ -10979,7 +10979,7 @@ del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11302,7 +11302,7 @@ if "%var%" equ "22621" goto icons001windows1122H2
 if "%var%" equ "22631" goto icons001windows1122H2
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11465,7 +11465,7 @@ goto ghst
 :icons002
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11534,7 +11534,7 @@ goto ghst
 :icons003
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11611,7 +11611,7 @@ goto ghst
 :icons004
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11682,7 +11682,7 @@ goto ghst
 :icons005
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11773,7 +11773,7 @@ cls
 goto usersrequest
 )
 :usr037
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11829,7 +11829,7 @@ del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >n
 echo %white%=======================================================================
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11914,7 +11914,7 @@ goto usersrequest
 :usr041
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11950,7 +11950,7 @@ goto usersrequest
 :usr042
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11987,7 +11987,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12057,7 +12057,7 @@ cd "%GHOST_DATA%"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/37krRHX" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *37krRHX* >nul 2>nul
 
-if exist "Youtube-DLP\yt-dlp.exe" (
+if EXIST "Youtube-DLP\yt-dlp.exe" (
 goto YTCONS
 )
 
@@ -12085,7 +12085,7 @@ timeout /t 2 >nul
 cls
 goto youwhotemate
 :YTYES
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12210,7 +12210,7 @@ goto :download
 :download
 timeout /t 3 >nul
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12298,7 +12298,7 @@ goto :download
 :download
 timeout /t 3 >nul
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12405,7 +12405,7 @@ goto :download
 cls
 :download
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12515,7 +12515,7 @@ goto :download
 cls
 :download
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12609,7 +12609,7 @@ goto :msnoteinstallx64
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12696,7 +12696,7 @@ goto :installnotex86
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12790,43 +12790,43 @@ cls
 goto usersrequest
 :hello
 powershell Remove-Item * -Filter update >nul 2>nul
-if exist "update" DEL /s /q "update" >nul 2>nul
-if exist "%GHOST_DATA%\update" DEL /s /q "update" >nul 2>nul
-if exist "%GHOST_DATA%\analytic" DEL /s /q "analytic" >nul 2>nul
-if exist "%SYSTEMDRIVE%\complete.cmd" DEL /s /q "%SYSTEMDRIVE%\complete.cmd" >nul 2>nul
-if exist "%SYSTEMDRIVE%\complete.bat" DEL /s /q "%SYSTEMDRIVE%\complete.bat" >nul 2>nul
-if exist "%SYSTEMDRIVE%\security.cmd" DEL /s /q "%SYSTEMDRIVE%\security.cmd" >nul 2>nul
-if exist "%SYSTEMDRIVE%\security.bat" DEL /s /q "%SYSTEMDRIVE%\security.bat" >nul 2>nul
-if exist "%GHOST_TEMP%\*.cmd" DEL /s /q "%GHOST_TEMP%\*.cmd" >nul 2>nul
-if exist "%GHOST_TEMP%\*.bat" DEL /s /q "%GHOST_TEMP%\*.bat" >nul 2>nul
-if exist "%GHOST_TEMP%\*.vbs" DEL /s /q "%GHOST_TEMP%\*.vbs" >nul 2>nul
-if exist "%GHOST_TEMP%\Autorun" rmdir /s /q "%GHOST_TEMP%\Autorun" >nul 2>nul
-if exist "%GHOST_DIR%\*.cmd" DEL /s /q "%GHOST_DIR%\*.cmd" >nul 2>nul
-if exist "%GHOST_DIR%\*.bat" DEL /s /q "%GHOST_DIR%\*.bat" >nul 2>nul
-if exist "%WinDir%\System32\config.arg" DEL /s /q "%WinDir%\System32\config.arg" >nul 2>nul
-if exist "%WinDir%\System32\runapp.exe" DEL /s /q "%WinDir%\System32\runapp.exe" >nul 2>nul
-if exist "%WinDir%\System32\startup.cmd" DEL /s /q "%WinDir%\System32\startup.cmd" >nul 2>nul
-if exist "%WinDir%\System32\oobe.cmd" DEL /s /q "%WinDir%\System32\oobe.cmd" >nul 2>nul
-if exist "%WinDir%\System32\update.dll" DEL /s /q "%WinDir%\System32\update.dll" >nul 2>nul
-if exist "%PROGRAMDATA%\ssh\updateau.dll" DEL /s /q "%PROGRAMDATA%\ssh\updateau.dll" >nul 2>nul
-if exist "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
-if exist "%PROGRAMDATA%\Microsoft\DRM" rmdir /s /q "%PROGRAMDATA%\Microsoft\DRM" >nul 2>nul
-if exist "%SYSTEMDRIVE%\EdgeBlocker" rmdir /s /q "%SYSTEMDRIVE%\EdgeBlocker" >nul 2>nul
-if exist "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
+if EXIST "update" DEL /s /q "update" >nul 2>nul
+if EXIST "%GHOST_DATA%\update" DEL /s /q "update" >nul 2>nul
+if EXIST "%GHOST_DATA%\analytic" DEL /s /q "analytic" >nul 2>nul
+if EXIST "%SYSTEMDRIVE%\complete.cmd" DEL /s /q "%SYSTEMDRIVE%\complete.cmd" >nul 2>nul
+if EXIST "%SYSTEMDRIVE%\complete.bat" DEL /s /q "%SYSTEMDRIVE%\complete.bat" >nul 2>nul
+if EXIST "%SYSTEMDRIVE%\security.cmd" DEL /s /q "%SYSTEMDRIVE%\security.cmd" >nul 2>nul
+if EXIST "%SYSTEMDRIVE%\security.bat" DEL /s /q "%SYSTEMDRIVE%\security.bat" >nul 2>nul
+if EXIST "%GHOST_TEMP%\*.cmd" DEL /s /q "%GHOST_TEMP%\*.cmd" >nul 2>nul
+if EXIST "%GHOST_TEMP%\*.bat" DEL /s /q "%GHOST_TEMP%\*.bat" >nul 2>nul
+if EXIST "%GHOST_TEMP%\*.vbs" DEL /s /q "%GHOST_TEMP%\*.vbs" >nul 2>nul
+if EXIST "%GHOST_TEMP%\Autorun" rmdir /s /q "%GHOST_TEMP%\Autorun" >nul 2>nul
+if EXIST "%GHOST_DIR%\*.cmd" DEL /s /q "%GHOST_DIR%\*.cmd" >nul 2>nul
+if EXIST "%GHOST_DIR%\*.bat" DEL /s /q "%GHOST_DIR%\*.bat" >nul 2>nul
+if EXIST "%WinDir%\System32\config.arg" DEL /s /q "%WinDir%\System32\config.arg" >nul 2>nul
+if EXIST "%WinDir%\System32\runapp.exe" DEL /s /q "%WinDir%\System32\runapp.exe" >nul 2>nul
+if EXIST "%WinDir%\System32\startup.cmd" DEL /s /q "%WinDir%\System32\startup.cmd" >nul 2>nul
+if EXIST "%WinDir%\System32\oobe.cmd" DEL /s /q "%WinDir%\System32\oobe.cmd" >nul 2>nul
+if EXIST "%WinDir%\System32\update.dll" DEL /s /q "%WinDir%\System32\update.dll" >nul 2>nul
+if EXIST "%PROGRAMDATA%\ssh\updateau.dll" DEL /s /q "%PROGRAMDATA%\ssh\updateau.dll" >nul 2>nul
+if EXIST "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
+if EXIST "%PROGRAMDATA%\Microsoft\DRM" rmdir /s /q "%PROGRAMDATA%\Microsoft\DRM" >nul 2>nul
+if EXIST "%SYSTEMDRIVE%\EdgeBlocker" rmdir /s /q "%SYSTEMDRIVE%\EdgeBlocker" >nul 2>nul
+if EXIST "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
 :skip_hello
 ::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://youtu.be/kHZUYiyaH8k" -t 5 -O"analytic" >nul 2>nul
 :: Start GhostToolbox
 cd "%GHOST_DIR%" >nul 2>nul
 set INSTALL_PATH1="ghost.toolbox.7z";
-if exist %INSTALL_PATH1% (
+if EXIST %INSTALL_PATH1% (
 del /Q "ghost.toolbox.7z" >nul 2>nul
 )
 set INSTALL_PATH2="ghost.toolbox.7z.1";
-if exist %INSTALL_PATH2% (
+if EXIST %INSTALL_PATH2% (
 del /Q "ghost.toolbox.7z.1" >nul 2>nul
 )
 set INSTALL_PATH3="ghost.toolbox.exe.1";
-if exist %INSTALL_PATH3% (
+if EXIST %INSTALL_PATH3% (
 del /Q ghost.toolbox.exe.1 >nul 2>nul
 )
 mode con cols=120 lines=40 > nul
@@ -13119,8 +13119,8 @@ FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windo
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "EditionID"') do set "EditionID=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_USERS\.DEFAULT\Control Panel\International\User Profile" /v "Languages"') do set "DFMT8=%%B"
-if NOT exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
-if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%yellow%ENABLE"
+if NOT EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%yellow%ENABLE"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition"') do set "spectremod=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" /v "Edition"') do set "spectremod=%%B"
 reg Query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" | find /i "0x0" > NUL && set "FNETFX4=DISABLE" || set "FNETFX4=ENABLE"
@@ -13854,7 +13854,7 @@ cls
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -13956,7 +13956,7 @@ goto :store1strun
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -14040,7 +14040,7 @@ cls
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -14142,7 +14142,7 @@ goto :store1strunx86
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -14243,7 +14243,7 @@ color 03
 ::attrib +S +H +R %ExtractPath%
 set "nhcolor=%GHOST_DATA%\nhcolor.exe"
 echo "%nhcolor%"
-if exist "%nhcolor%" (
+if EXIST "%nhcolor%" (
         goto ghostlocation
 )
 goto :error_leq_build
@@ -14254,7 +14254,7 @@ cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
 set "wget="%GHOST_DATA%\wget.exe""
-if exist "%GHOST_DATA%\wget.exe" (
+if EXIST "%GHOST_DATA%\wget.exe" (
         goto notifyupdate3
 )
 goto :error_wget
@@ -14264,7 +14264,7 @@ cd /d %HomePath%
 color 03
 ::attrib +S +H +R %ExtractPath%
 set "ghost.toolbox="%GHOST_DIR%\""
-if exist "%GHOST_DIR%" (
+if EXIST "%GHOST_DIR%" (
 ::
         goto ghost7zp
 )
@@ -15381,12 +15381,12 @@ cd "%GHOST_DIR%"
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -15677,7 +15677,7 @@ goto 03ANDROIDX
 :ADB05X
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
@@ -15686,7 +15686,7 @@ explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk"
 goto 03ANDROIDX
 
 :ADB06X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15705,7 +15705,7 @@ echo %red%----------------------------
 goto ADB06X
 
 :ADB07X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15720,7 +15720,7 @@ goto 03ANDROIDX
 
 
 :ADB08X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15735,7 +15735,7 @@ goto 03ANDROIDX
 
 
 :ADB09X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15756,7 +15756,7 @@ timeout /t 1 >nul
 goto 03ANDROIDX
 
 :ADB011X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15768,7 +15768,7 @@ cls
 goto 03ANDROIDX
 
 :ADB012X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -15794,25 +15794,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X
 
 :ADB013X
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
 )
@@ -15820,7 +15820,7 @@ goto 03ANDROIDX
 
 :ADB014X
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -15838,7 +15838,7 @@ goto 03ANDROIDX
 
 :ADB015X
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -16741,7 +16741,7 @@ goto sound
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16802,7 +16802,7 @@ mkdir "Dolby Atmos 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16885,7 +16885,7 @@ mkdir "Dolby Atmos 3 for Gaming" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16965,7 +16965,7 @@ mkdir "Nahimic 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17095,7 +17095,7 @@ cls
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
 cls
 %_7ZA_EXE% x "Magpie_v0.10.1.zip" -aoa -o"%PROGRAMFILES%\Magpie"
-if exist "%PROGRAMFILES%\Magpie\Magpie.exe" (mklink "%USERPROFILE%\Desktop\Magpie" "%PROGRAMFILES%\Magpie\Magpie.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\Magpie\Magpie.exe" (mklink "%USERPROFILE%\Desktop\Magpie" "%PROGRAMFILES%\Magpie\Magpie.exe") >nul 2>nul
 cls
 echo for Non Administrator account please right click and run as Administrator to run Magpie.
 timeout /t 6 >nul
@@ -17117,7 +17117,7 @@ del /q /f /s "Lossless.Scaling.2.6.0.6" >nul
 goto :WTHx643
 )
 %_7ZA_EXE% x "Lossless.Scaling.2.6.0.6" -aoa -o"%PROGRAMFILES%"
-if exist "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe" (mklink "%USERPROFILE%\Desktop\Lossless Scaling" "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe" (mklink "%USERPROFILE%\Desktop\Lossless Scaling" "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe") >nul 2>nul
 cls
 goto upS01
 :upS02
@@ -17619,7 +17619,7 @@ del /q /s Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001 >nu
 del /q /s Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002 >nul 2>nul
 del /q /s Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003 >nul 2>nul
 timeout /t 2 >nul
-if exist del /q /s "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msixbundle" >nul 2>nul
+if EXIST del /q /s "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msixbundle" >nul 2>nul
 del /q /s /f "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msixbundle"
 del /q /s /f "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.Msixbundle"
 del /q /s /f "Microsoft.549981C3F5F10_2.2005.5739.0_neutral_~_8wekyb3d8bbwe.Msixbundle"
@@ -17697,7 +17697,7 @@ cls
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17777,7 +17777,7 @@ cls
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17879,7 +17879,7 @@ goto op10
 
 :msphotosx64
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17987,7 +17987,7 @@ goto :download
 )
 cls
 :download
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18090,7 +18090,7 @@ goto :zunecheckxinstall
 del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18203,7 +18203,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18298,7 +18298,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTDARK.theme" echo %green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\GHOSTDARK.theme" echo %green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18308,7 +18308,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18380,7 +18380,7 @@ del /q /f /s "themes.ghostdark.2004.7z" >nul 2>nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
@@ -18390,7 +18390,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTDARK theme
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.ghostdark.2004.7z -aoa -pdark -o%windir%\ >nul 2>nul
@@ -18439,7 +18439,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18449,7 +18449,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18518,7 +18518,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18528,7 +18528,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher1\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX1.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18574,7 +18574,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18584,7 +18584,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18653,7 +18653,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x themes.GHOSTNOIDX2.7z -aoa -pnoid -o%windir%\Resources\Themes >nul 2>nul
@@ -18699,7 +18699,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18709,7 +18709,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18778,7 +18778,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 1
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18824,7 +18824,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18834,7 +18834,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18903,7 +18903,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 2
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -18949,7 +18949,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -18959,7 +18959,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19028,7 +19028,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19074,7 +19074,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19084,7 +19084,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19153,7 +19153,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - BIB DarkMode 3
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.BIBDarkMode.7z -aoa -pmac -o%windir%\Resources\Themes >nul 2>nul
@@ -19199,7 +19199,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19209,7 +19209,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19278,7 +19278,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19324,7 +19324,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Fluent.Day.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\Fluent.Day.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19334,7 +19334,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19403,7 +19403,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - Fluent Day
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Fluent.7z -aoa -pflu -o%windir%\Resources\Themes >nul 2>nul
@@ -19449,7 +19449,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\Penumbra10ws.theme" echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\Penumbra10ws.theme" echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19459,7 +19459,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19528,7 +19528,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.Penumbra10.7z -aoa -ppen -o%windir%\Resources\Themes >nul 2>nul
@@ -19573,7 +19573,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\HNY.Dark.theme" echo %green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\HNY.Dark.theme" echo %green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19583,7 +19583,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19652,7 +19652,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - HNY Dark
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19697,7 +19697,7 @@ cls
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
-if exist "%windir%\Resources\Themes\HNY.Light.theme" echo %green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
+if EXIST "%windir%\Resources\Themes\HNY.Light.theme" echo %green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2009" goto :themedownloads
@@ -19707,7 +19707,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19776,7 +19776,7 @@ timeout /t 2 >nul
 start explorer
 goto ghst
 )
-if exist "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
+if EXIST "%PROGRAMFILES(X86)%\UltraUXThemePatcher\Uninstall.exe" (
 echo %green%Set Themes GHOST SPECTRE - HNY Light
 timeout /t 4 >nul
 %_7Z_DIR_%\x64\7za x theme.HNY.7z -aoa -phny -o%windir%\Resources\Themes >nul 2>nul
@@ -19808,7 +19808,7 @@ goto begin
 
 :DLPV1
 cls
-if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/p21bfpi9vt505gt/DARK.LIGHT.PURPLE.V1.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"
 cls
@@ -19831,7 +19831,7 @@ cls
 goto ghst
 :DLPV2
 cls
-if exist "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/oy83dnjoinhxkkk/DARK.LIGHT.PURPLE.V2.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"
 cls
@@ -19854,7 +19854,7 @@ cls
 goto ghst
 :DLPV3
 cls
-if exist "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
+if EXIST "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3GvoHg5" -t 5 -O "%Windir%\Resources\Themes\GHOSTV3.deskthemepack"
 cls
@@ -19893,7 +19893,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19932,8 +19932,8 @@ cd..
 rd /s /q "IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002-x64.exe" >nul 2>nul
 del /s /q /f "%GHOST_TEMP%\7z2002.exe" >nul 2>nul
-if exist "%PROGRAMFILES(X86)%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES(X86)%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
-if exist "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES(X86)%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES(X86)%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
+if EXIST "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe" (mklink "%USERPROFILE%\Desktop\IObit Uninstaller" "%PROGRAMFILES%\IObit\IObit Uninstaller\IObitUninstaler.exe") >nul 2>nul
 cd..
 cls
 timeout /t 2 >nul
@@ -19961,7 +19961,7 @@ echo %white%NVIDIA GEFORCE GAME READY 470.05 WHQL (DCH) x64 - %yellow%GeForce De
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -20053,7 +20053,7 @@ timeout /t 1 >nul
 taskkill /f /im "AppInstaller.exe" /t >nul 2>nul
 )
 :skipWinget
-if exist "%GHOST_TEMP%" (
+if EXIST "%GHOST_TEMP%" (
 rd /s /q "%GHOST_TEMP%" >nul 2>nul
 rmdir /s /q "%GHOST_TEMP%" >nul 2>nul
 )
@@ -20501,7 +20501,7 @@ Reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /f >nul 2>nu
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
@@ -20576,7 +20576,7 @@ echo Android Debug Bridge Completely remove.
 timeout /t 3 >nul
 goto 03ANDROID
 :ADB04
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20598,7 +20598,7 @@ goto ADB04
 explorer.exe "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\WSA.lnk"
 goto 03ANDROID
 :ADB05
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20611,7 +20611,7 @@ timeout /t 2 >nul
 pause
 goto 03ANDROID
 :ADB06
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20624,7 +20624,7 @@ timeout /t 2 >nul
 pause
 goto 03ANDROID
 :ADB07
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20643,7 +20643,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 1 >nul
 goto 03ANDROID
 :ADB09
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20654,7 +20654,7 @@ adb reboot
 cls
 goto 03ANDROID
 :ADB10
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -20679,37 +20679,37 @@ timeout /t 2 >nul
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 goto ADB10
 :ADB11
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2Y3VA3c" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3pWakg7" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
 )
 goto 03ANDROID
 :ADB12
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -20769,13 +20769,13 @@ echo Your devices is root now.
 timeout /t 3 >nul
 goto 03ANDROID
 :ADB13
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -20827,7 +20827,7 @@ goto 03ANDROID
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -20927,7 +20927,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21019,7 +21019,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21052,7 +21052,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21085,7 +21085,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21118,7 +21118,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21159,7 +21159,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21201,7 +21201,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21251,7 +21251,7 @@ goto vmdownload
 )
 :vmdownload
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21302,7 +21302,7 @@ goto vmdownload
 )
 :vmdownload
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21344,7 +21344,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21413,7 +21413,7 @@ echo %white%====================================================================
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
 echo %white%=======================================================================
 )
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21475,11 +21475,11 @@ echo Installing... please wait..
 timeout /t 5 >nul
 %_7ZA_EXE% x "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
 cls
-if exist "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%USERPROFILE%\Desktop\") >nul 2>nul
-if exist "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%Appdata%\Microsoft\Windows\Start Menu\Programs\") >nul 2>nul
-::if exist "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%USERPROFILE%\Desktop\Nvidia Control Panel" "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
-::if exist "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%Appdata%\Microsoft\Windows\Start Menu\Programs\Nvidia Control Panel.lnk" "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
-::if exist "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe"
+if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%USERPROFILE%\Desktop\") >nul 2>nul
+if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%Appdata%\Microsoft\Windows\Start Menu\Programs\") >nul 2>nul
+::if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%USERPROFILE%\Desktop\Nvidia Control Panel" "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (mklink "%Appdata%\Microsoft\Windows\Start Menu\Programs\Nvidia Control Panel.lnk" "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe") >nul 2>nul
+::if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe"
 ::echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 ::echo sLinkFile = "%USERPROFILE%\Desktop\Nvidia Control Panel.lnk" >> CreateShortcut.vbs
 ::echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
@@ -21498,7 +21498,7 @@ cd "%GHOST_DATA%"
 cls
 timeout /t 3 >nul
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21794,12 +21794,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -22094,7 +22094,7 @@ goto ANDROIDX2008
 :ADB05X2008
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
@@ -22103,7 +22103,7 @@ explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk"
 goto ANDROIDX2008
 
 :ADB06X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22122,7 +22122,7 @@ echo %red%----------------------------
 goto ADB06X2008
 
 :ADB07X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22137,7 +22137,7 @@ goto ANDROIDX2008
 
 
 :ADB08X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22152,7 +22152,7 @@ goto ANDROIDX2008
 
 
 :ADB09X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22173,7 +22173,7 @@ timeout /t 1 >nul
 goto ANDROIDX2008
 
 :ADB011X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22185,7 +22185,7 @@ cls
 goto ANDROIDX2008
 
 :ADB012X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22211,25 +22211,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2008
 
 :ADB013X2008
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
 )
@@ -22237,7 +22237,7 @@ goto ANDROIDX2008
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22255,7 +22255,7 @@ goto ANDROIDX2008
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22296,12 +22296,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -22610,7 +22610,7 @@ goto ANDROIDX2211
 :ADB05X2211
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
@@ -22623,7 +22623,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2211
 
 :ADB06X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22642,7 +22642,7 @@ echo %red%----------------------------
 goto ADB06X2211
 
 :ADB07X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22657,7 +22657,7 @@ goto ANDROIDX2211
 
 
 :ADB08X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22672,7 +22672,7 @@ goto ANDROIDX2211
 
 
 :ADB09X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22693,7 +22693,7 @@ timeout /t 1 >nul
 goto ANDROIDX2211
 
 :ADB011X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22705,7 +22705,7 @@ cls
 goto ANDROIDX2211
 
 :ADB012X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -22731,25 +22731,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2211
 
 :ADB013X2211
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
 )
@@ -22757,7 +22757,7 @@ goto ANDROIDX2211
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22775,7 +22775,7 @@ goto ANDROIDX2211
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22812,11 +22812,11 @@ goto :ANDROIDX2211
 :AndroidWSA2301
 cls
 
-if exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
-if exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -22845,12 +22845,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -23159,7 +23159,7 @@ goto ANDROIDX2301NON
 :ADB05X2301N
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
@@ -23174,7 +23174,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2301NON
 
 :ADB06X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23193,7 +23193,7 @@ echo %red%----------------------------
 goto ADB06X2301N
 
 :ADB07X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23208,7 +23208,7 @@ goto ANDROIDX2301NON
 
 
 :ADB08X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23223,7 +23223,7 @@ goto ANDROIDX2301NON
 
 
 :ADB09X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23244,7 +23244,7 @@ timeout /t 1 >nul
 goto ANDROIDX2301NON
 
 :ADB011X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23256,7 +23256,7 @@ cls
 goto ANDROIDX2301NON
 
 :ADB012X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23282,25 +23282,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2301N
 
 :ADB013X2301N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
 )
@@ -23308,7 +23308,7 @@ goto ANDROIDX2301NON
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23326,7 +23326,7 @@ goto ANDROIDX2301NON
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23366,12 +23366,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -23680,7 +23680,7 @@ goto ANDROIDX2301ROOT
 :ADB05X2301R
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
@@ -23693,7 +23693,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2301ROOT
 
 :ADB06X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23712,7 +23712,7 @@ echo %red%----------------------------
 goto ADB06X2301R
 
 :ADB07X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23727,7 +23727,7 @@ goto ANDROIDX2301ROOT
 
 
 :ADB08X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23742,7 +23742,7 @@ goto ANDROIDX2301ROOT
 
 
 :ADB09X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23763,7 +23763,7 @@ timeout /t 1 >nul
 goto ANDROIDX2301ROOT
 
 :ADB011X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23775,7 +23775,7 @@ cls
 goto ANDROIDX2301ROOT
 
 :ADB012X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -23801,25 +23801,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2301R
 
 :ADB013X2301R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
 )
@@ -23827,7 +23827,7 @@ goto ANDROIDX2301ROOT
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23845,7 +23845,7 @@ goto ANDROIDX2301ROOT
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23880,11 +23880,11 @@ goto :ANDROIDX2301ROOT
 
 :AndroidWSA2304
 cls
-if exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
-if exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -23923,12 +23923,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -24240,7 +24240,7 @@ goto ANDROIDX2304NON
 :ADB05X2304N
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
@@ -24252,7 +24252,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304NON
 
 :ADB06X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24271,7 +24271,7 @@ echo %red%----------------------------
 goto ADB06X2304N
 
 :ADB07X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24286,7 +24286,7 @@ goto ANDROIDX2304NON
 
 
 :ADB08X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24301,7 +24301,7 @@ goto ANDROIDX2304NON
 
 
 :ADB09X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24322,7 +24322,7 @@ timeout /t 1 >nul
 goto ANDROIDX2304NON
 
 :ADB011X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24334,7 +24334,7 @@ cls
 goto ANDROIDX2304NON
 
 :ADB012X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24360,25 +24360,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2304N
 
 :ADB013X2304N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
 )
@@ -24386,7 +24386,7 @@ goto ANDROIDX2304NON
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24404,7 +24404,7 @@ goto ANDROIDX2304NON
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24444,12 +24444,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -24761,7 +24761,7 @@ goto ANDROIDX2304ROOT
 :ADB05X2304R
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
@@ -24772,7 +24772,7 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304ROOT
 
 :ADB06X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24791,7 +24791,7 @@ echo %red%----------------------------
 goto ADB06X2304R
 
 :ADB07X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24806,7 +24806,7 @@ goto ANDROIDX2304ROOT
 
 
 :ADB08X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24821,7 +24821,7 @@ goto ANDROIDX2304ROOT
 
 
 :ADB09X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24842,7 +24842,7 @@ timeout /t 1 >nul
 goto ANDROIDX2304ROOT
 
 :ADB011X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24854,7 +24854,7 @@ cls
 goto ANDROIDX2304ROOT
 
 :ADB012X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -24880,25 +24880,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2304R
 
 :ADB013X2304R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
 )
@@ -24906,7 +24906,7 @@ goto ANDROIDX2304ROOT
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24924,7 +24924,7 @@ goto ANDROIDX2304ROOT
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24959,11 +24959,11 @@ goto :ANDROIDX2304ROOT
 
 :AndroidWSA2305
 cls
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25002,12 +25002,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -25283,7 +25283,7 @@ cls
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305NON
@@ -25330,14 +25330,14 @@ goto ANDROIDX2305NON
 :ADB05X2305N
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305NON
@@ -25347,7 +25347,7 @@ goto ANDROIDX2305NON
 goto ANDROIDX2305NON
 
 :ADB06X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25366,7 +25366,7 @@ echo %red%----------------------------
 goto ADB06X2305N
 
 :ADB07X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25381,7 +25381,7 @@ goto ANDROIDX2305NON
 
 
 :ADB08X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25396,7 +25396,7 @@ goto ANDROIDX2305NON
 
 
 :ADB09X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25417,7 +25417,7 @@ timeout /t 1 >nul
 goto ANDROIDX2305NON
 
 :ADB011X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25429,7 +25429,7 @@ cls
 goto ANDROIDX2305NON
 
 :ADB012X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25455,25 +25455,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2305N
 
 :ADB013X2305N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
 )
@@ -25481,7 +25481,7 @@ goto ANDROIDX2305NON
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25499,7 +25499,7 @@ goto ANDROIDX2305NON
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25539,12 +25539,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -25819,7 +25819,7 @@ cls
 ::START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
@@ -25866,14 +25866,14 @@ goto ANDROIDX2305ROOT
 :ADB05X2305R
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
@@ -25883,7 +25883,7 @@ goto ANDROIDX2305ROOT
 goto ANDROIDX2305ROOT
 
 :ADB06X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25902,7 +25902,7 @@ echo %red%----------------------------
 goto ADB06X2305R
 
 :ADB07X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25917,7 +25917,7 @@ goto ANDROIDX2305ROOT
 
 
 :ADB08X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25932,7 +25932,7 @@ goto ANDROIDX2305ROOT
 
 
 :ADB09X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25953,7 +25953,7 @@ timeout /t 1 >nul
 goto ANDROIDX2305ROOT
 
 :ADB011X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25965,7 +25965,7 @@ cls
 goto ANDROIDX2305ROOT
 
 :ADB012X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -25991,25 +25991,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2305R
 
 :ADB013X2305R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
 )
@@ -26017,7 +26017,7 @@ goto ANDROIDX2305ROOT
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26035,7 +26035,7 @@ goto ANDROIDX2305ROOT
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26074,11 +26074,11 @@ goto :ANDROIDX2305ROOT
 
 :AndroidWSA2309
 cls
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26117,12 +26117,12 @@ cd "%GHOST_DIR%"
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -26229,7 +26229,7 @@ cls
 timeout /t 4 >nul
 cls
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.UI.Xaml.2.8_x64.appx" >nul
@@ -26278,14 +26278,14 @@ goto ANDROIDX2309NON
 :ADB05X2309N
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
@@ -26295,7 +26295,7 @@ goto ANDROIDX2309NON
 "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309NON
 :ADB06X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26314,7 +26314,7 @@ echo %red%----------------------------
 goto ADB06X2309N
 
 :ADB07X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26329,7 +26329,7 @@ goto ANDROIDX2309NON
 
 
 :ADB08X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26344,7 +26344,7 @@ goto ANDROIDX2309NON
 
 
 :ADB09X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26365,7 +26365,7 @@ timeout /t 1 >nul
 goto ANDROIDX2309NON
 
 :ADB011X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26377,7 +26377,7 @@ cls
 goto ANDROIDX2309NON
 
 :ADB012X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26403,25 +26403,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2309N
 
 :ADB013X2309N
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
 )
@@ -26429,7 +26429,7 @@ goto ANDROIDX2309NON
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26447,7 +26447,7 @@ goto ANDROIDX2309NON
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26487,12 +26487,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -26601,7 +26601,7 @@ cls
 ::echo %red% NOTE: Please Turn Off Block installation of malicious apps in WSA before start.
 timeout /t 4 >nul
 cls
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe"
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /v "AllowDevelopmentWithoutDevLicense" /t REG_DWORD /d "1" /f
 Powershell Add-AppxPackage -Path "$env:ProgramFiles\Microsoft\WSA_2309.40000.2.0_x64\uwp\Microsoft.UI.Xaml.2.8_x64.appx" >nul
@@ -26654,14 +26654,14 @@ goto ANDROIDX2309ROOT
 :ADB05X2309R
 ::%PROGRAMDATA%\
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
 echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-if exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
+if EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" (
 ::"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
@@ -26672,7 +26672,7 @@ goto ANDROIDX2309ROOT
 goto ANDROIDX2309ROOT
 
 :ADB06X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26691,7 +26691,7 @@ echo %red%----------------------------
 goto ADB06X2309R
 
 :ADB07X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26706,7 +26706,7 @@ goto ANDROIDX2309ROOT
 
 
 :ADB08X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26721,7 +26721,7 @@ goto ANDROIDX2309ROOT
 
 
 :ADB09X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26742,7 +26742,7 @@ timeout /t 1 >nul
 goto ANDROIDX2309ROOT
 
 :ADB011X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26754,7 +26754,7 @@ cls
 goto ANDROIDX2309ROOT
 
 :ADB012X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
@@ -26780,25 +26780,25 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2309R
 
 :ADB013X2309R
-if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT EXIST "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
 echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
 )
 cd "%GHOST_DATA%"
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
 )
 cls
 %WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
-if exist "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
+if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
 )
@@ -26806,7 +26806,7 @@ goto ANDROIDX2309ROOT
 
 :ADB014X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26824,7 +26824,7 @@ goto ANDROIDX2309ROOT
 
 :ADB015X2008
 cls
-if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if NOT EXIST "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -27434,7 +27434,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27467,7 +27467,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27500,7 +27500,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27532,7 +27532,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27564,7 +27564,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27596,7 +27596,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27632,7 +27632,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27668,7 +27668,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27703,7 +27703,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27738,7 +27738,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27773,7 +27773,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27808,7 +27808,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27862,7 +27862,7 @@ del /q /f /s "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ct
 echo %white%=======================================================================
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27969,7 +27969,7 @@ del /q /f /s "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >
 echo %white%=======================================================================
 )
 cls
-if exist "%ARIA2C_EXE%" if exist "%_7ZA_DLL%" if exist "%_7ZA_EXE%" if exist "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -28267,7 +28267,7 @@ echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build 
 :skipV
 cls
 cd "%GHOST_DATA%"
-if NOT exist "%PROGRAMFILES(X86)%\Microsoft\Edge\Application\msedge.exe" (
+if NOT EXIST "%PROGRAMFILES(X86)%\Microsoft\Edge\Application\msedge.exe" (
 cls
 echo Microsoft Edge NOT found... Please install Microsoft Edge to use Copilot.
 timeout /t 5 >nul
@@ -28654,7 +28654,7 @@ goto opwin11
 cls
 setlocal EnableExtensions
 setlocal EnableDelayedExpansion
-if exist "%PROGRAMFILES(X86)%\Copilot\copilot_prev.xml" >nul 2>nul (
+if EXIST "%PROGRAMFILES(X86)%\Copilot\copilot_prev.xml" >nul 2>nul (
 goto Costart
 )
 cls

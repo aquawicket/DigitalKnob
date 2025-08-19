@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate PACMAN "%dk_call% dk_depend pacman"
 	if defined PACMAN_EXE (
 		%dk_call% dk_assertPath PACMAN_EXE 
-		if exist "%MSYS2_CacheDir%/db.lck (
+		if EXIST "%MSYS2_CacheDir%/db.lck (
 			%dk_call% dk_delete "%MSYS2_CacheDir%/db.lck"
 		)
 		::# %dk_call% dk_mkdir "%MSYS2_CacheDir%"

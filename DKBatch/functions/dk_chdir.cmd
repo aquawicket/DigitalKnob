@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
 if NOT defined DKPWD (set "DKPWD=%CD:\=/%")
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -19,8 +19,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "dk_chdir=%dk_chdir:\=/%"
 	
 	
-	if NOT exist "%dk_chdir%" (
-		%dk_call% dk_error "dk_chdir(%*): path:%dk_chdir% does NOT exist"
+	if NOT EXIST "%dk_chdir%" (
+		%dk_call% dk_error "dk_chdir(%*): path:%dk_chdir% does NOT EXIST"
 		%return%
 	)
 	if "%DKPWD%" equ "%dk_chdir%" (

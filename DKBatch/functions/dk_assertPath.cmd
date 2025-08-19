@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -37,7 +37,7 @@ set "dk_assertPath_CASE_SENSITIVE=1"
 	)
 
 	::### Test path exists ###
-	if NOT exist "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' NOT found" & %return%
+	if NOT EXIST "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' NOT found" & %return%
 
 	if "%dk_DEBUG%" equ "1" %dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
 %endfunction%

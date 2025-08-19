@@ -9,9 +9,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	set "DKSCRIPT_PATH=%~3"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
-	if NOT exist %ComSpec% (echo ERROR: ComSpec NOT found)
-	if NOT exist %CMAKE_EXE% (echo ERROR: CMAKE_EXE NOT found)
-	if NOT exist %DKSCRIPT_PATH% (echo ERROR: DKSCRIPT_PATH NOT found)
+	if NOT EXIST %ComSpec% (echo ERROR: ComSpec NOT found)
+	if NOT EXIST %CMAKE_EXE% (echo ERROR: CMAKE_EXE NOT found)
+	if NOT EXIST %DKSCRIPT_PATH% (echo ERROR: DKSCRIPT_PATH NOT found)
 	::###### run script ######
 	set cmnd="%ComSpec%" /V:ON /K call %CMAKE_EXE% -P "%DKSCRIPT_PATH%"
 	echo %cmnd%
@@ -43,8 +43,8 @@ if "%~1" equ "" (goto DKINSTALL)
 	echo Installing DKCmake . . .
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 

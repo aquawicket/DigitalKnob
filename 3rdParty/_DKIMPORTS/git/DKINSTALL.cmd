@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -27,7 +27,7 @@ if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 	set "GIT_BASH_EXE=%GIT%/bin/bash.exe"
     ::set "GIT-BASH_EXE=%GIT%/git-bash.exe"
 	::set "GIT_PATCH_EXE=%GIT%/usr/bin/patch.exe"
-	 if exist "%GIT_EXE%" (%return%)
+	 if EXIST "%GIT_EXE%" (%return%)
 	
 	::###### INSTALL ######
 	"%dk_download%" -y -o "%GIT%"

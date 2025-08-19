@@ -2,8 +2,8 @@
 
 ::###### install DK.cmd ######
 set "DKHTTP_DKBATCH_FUNCTIONS_DIR=https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions"
-if NOT exist "DKBatch/functions" mkdir DKBatch\functions
-if NOT exist "DKBatch/functions/DK.cmd" %POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', 'DKBatch\functions\DK.cmd')"
+if NOT EXIST "DKBatch/functions" mkdir DKBatch\functions
+if NOT EXIST "DKBatch/functions/DK.cmd" %POWERSHELL_EXE% -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/DK.cmd', 'DKBatch\functions\DK.cmd')"
 
 
 
@@ -29,7 +29,7 @@ call dk_load dk_exit
 ::###### Run Program ######
 %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
 %dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
-if NOT exist "%DKBRANCH_DIR%\.git" (
+if NOT EXIST "%DKBRANCH_DIR%\.git" (
 	"%GIT_EXE%" clone https://github.com/aquawicket/DigitalKnob.git "%DKBRANCH_DIR%"
 	%dk_call% dk_chdir "%DKBRANCH_DIR%"
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout "%DKBRANCH%"

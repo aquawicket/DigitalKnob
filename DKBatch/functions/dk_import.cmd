@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -38,7 +38,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
 	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
-	if exist "%PLUGIN.Install.Path%" (
+	if EXIST "%PLUGIN.Install.Path%" (
 		echo %PLUGIN.Install.Name% already installed
 		%return%
 	)
@@ -78,10 +78,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::			
 ::			%dk_call% dk_depend git
 ::			
-::			if NOT exist "!%CURRENT_PLUGIN%_DIR!/.git" (
+::			if NOT EXIST "!%CURRENT_PLUGIN%_DIR!/.git" (
 ::				%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 ::				%dk_call% dk_chdir "%DK3RDPARTY_DIR%"
-::				if exist !%CURRENT_PLUGIN%_DIR! (
+::				if EXIST !%CURRENT_PLUGIN%_DIR! (
 ::					%dk_call% dk_delete(!%CURRENT_PLUGIN%_DIR!)
 ::				) else (
 ::					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)

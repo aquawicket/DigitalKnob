@@ -13,13 +13,13 @@ if "%~1" equ "" (goto DKINSTALL)
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist %APP%.exe (del %APP%.exe)
+	if EXIST %APP%.exe (del %APP%.exe)
 
 	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
 	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
 	%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
-	if NOT exist "%APP%.exe" (
+	if NOT EXIST "%APP%.exe" (
 		echo(
 		echo ERROR: compilation of %DKCSharp_FILE% failed.
 		pause
@@ -68,8 +68,8 @@ if "%~1" equ "" (goto DKINSTALL)
 	echo Installing DKCSharp . . .
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 	

@@ -2,8 +2,8 @@
 call :create_quit.exe
 :loop
 quit
-::if exist quit.tmp del quit.tmp & goto :exit
-if exist quit.tmp goto :exit
+::if EXIST quit.tmp del quit.tmp & goto :exit
+if EXIST quit.tmp goto :exit
 goto :loop
 :exit
 echo reached the end

@@ -1,11 +1,11 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-if exist "%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd" (goto:eof)
-if exist "%~1" (goto:eof)
+if EXIST "%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd" (goto:eof)
+if EXIST "%~1" (goto:eof)
 ::if defined include_guard_dk_load ( goto:eof ) else set include_guard_dk_load=1
 
 ::####################################################################
@@ -29,7 +29,7 @@ if exist "%~1" (goto:eof)
     %dk_call% dk_source dk_debugFunc
     %dk_call% dk_debugFunc 1
    
-    if exist "%~1" (
+    if EXIST "%~1" (
         set "funcPath=%~1"
         for %%Z in ("%funcPath%") do set "funcName=%%~nZ"
     ) else (
@@ -37,12 +37,12 @@ if exist "%~1" (goto:eof)
         set "funcPath=%DKBATCH_FUNCTIONS_DIR_%%~n1.cmd"
     )
 
-    if NOT exist "%funcPath%" echo Downloading %funcName%
+    if NOT EXIST "%funcPath%" echo Downloading %funcName%
     call dk_source dk_set
     call dk_source dk_realpath
     call dk_source dk_download
-    if NOT exist "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName:.cmd=%.cmd" "%funcPath%"
-    if NOT exist "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file NOT found"
+    if NOT EXIST "%funcPath%" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%funcName:.cmd=%.cmd" "%funcPath%"
+    if NOT EXIST "%funcPath%" %dk_call% dk_error "ERROR: %funcPath%: file NOT found"
    
     goto:eof
     :: TODO
@@ -50,7 +50,7 @@ if exist "%~1" (goto:eof)
     :: Convert to windows line endings if only CR found
    
     :: TODO
-    if exist "%funcPath%" (set "%funcName%=%funcPath%") else call dk_error "%funcPath%: file NOT found")
+    if EXIST "%funcPath%" (set "%funcName%=%funcPath%") else call dk_error "%funcPath%: file NOT found")
    
     echo %DKFUNCTIONS_LIST% | findstr ";%funcName%;" && goto:eof
     set "DKFUNCTIONS_LIST=%DKFUNCTIONS_LIST%;%funcName%;"           &:: Add to list

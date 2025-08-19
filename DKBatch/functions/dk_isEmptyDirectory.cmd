@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -13,7 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1 2
 	
 	set "dk_isEmptyDirectory=0"
-	if NOT exist %~1\* (
+	if NOT EXIST %~1\* (
 		%dk_call% dk_error "%~1 is NOT a directory"
 		set "dk_isEmptyDirectory=1"
 	)
@@ -45,8 +45,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "NotEmptyDir=C:/NotEmptyDir"
 	set "NotDir=C:/NotEmptyDir/file.txt"
 	set "NonExistentDir=C:/NonExistentDir"
-	if NOT exist "%EmptyDir%" (%dk_call% dk_mkdir "%EmptyDir%")
-	if NOT exist "%NotDir%" (echo( > %NotDir%)
+	if NOT EXIST "%EmptyDir%" (%dk_call% dk_mkdir "%EmptyDir%")
+	if NOT EXIST "%NotDir%" (echo( > %NotDir%)
 
     ::###### Using if return value
 	%dk_call% dk_echo

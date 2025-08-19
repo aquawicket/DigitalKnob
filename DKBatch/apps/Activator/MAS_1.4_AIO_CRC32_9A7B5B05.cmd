@@ -223,7 +223,7 @@ cls
 title  Microsoft Activation Scripts AIO 1.4
 mode con cols=98 lines=30
 set "MAS_Temp=%SystemRoot%\Temp\_MAS"
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 
 echo:
 echo:
@@ -436,7 +436,7 @@ if errorlevel 1 goto:$OEM$HWID
 
 cls
 set "_ReadMe=%SystemRoot%\Temp\ReadMe.txt"
-if exist "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
+if EXIST "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
 call :_export %1 "%_ReadMe%" ASCII
 start notepad "%_ReadMe%"
 timeout /t 2 %_null%
@@ -1070,7 +1070,7 @@ cscript /nologo %windir%\system32\slmgr.vbs /rearm-sku %app%
    Troubleshoot activation issues:
 ====================================================================================================
 
- - Make sure to completely remove any previously-installed KMS activators if any exist, before
+ - Make sure to completely remove any previously-installed KMS activators if any EXIST, before
    installing KMS38 activation.
 
  - Reboot the system.
@@ -2116,8 +2116,8 @@ for /f "delims=" %%a in ('%_psc% "& {write-host $([Environment]::GetFolderPath('
 cd /d "%desktop%"
 set "Dir=%desktop%\$OEM$\$$\Setup\Scripts"
 
-if exist $OEM$ goto Exist
-if NOT exist $OEM$ goto NotExist
+if EXIST $OEM$ goto Exist
+if NOT EXIST $OEM$ goto NotExist
 
 :Exist
 echo _____________________________________________________
@@ -2283,7 +2283,7 @@ exit /b
 call "%~dp0HWID_Activation_AIO.cmd" /u
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWIDsetup:
 
@@ -2301,7 +2301,7 @@ exit /b
 call "%~dp0KMS38_Activation_AIO.cmd" /u
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMS38setup:
 
@@ -2330,7 +2330,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMSsetup:
 
@@ -2362,7 +2362,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat %SkipW
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm %SkipWinAct%
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWIDKMSsetup:
 
@@ -2393,7 +2393,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMS38KMSsetup:
 
@@ -2434,7 +2434,7 @@ call "%~dp0HWID_Activation_AIO.cmd" /u
 )
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWID_FB_KMS38setup:
 
@@ -2489,7 +2489,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat %SkipW
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm %SkipWinAct%
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWID_FB_KMS38-KMSsetup:
 
@@ -2504,7 +2504,7 @@ goto MainMenu
 
 cls
 set "_ReadMe=%SystemRoot%\Temp\ReadMe.txt"
-if exist "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
+if EXIST "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
 call :_export 9 "%_ReadMe%" ASCII
 start notepad "%_ReadMe%"
 timeout /t 2 %_null%
@@ -2521,7 +2521,7 @@ goto MainMenu
 
 :Exit
 
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 exit /b
 
 :+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2537,7 +2537,7 @@ exit /b
 
 :_Start
 cls
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 md "%MAS_Temp%\" >nul 2>&1
 echo:&echo Extracting Files to %MAS_Temp%\
 pushd "%MAS_Temp%\"
@@ -2545,7 +2545,7 @@ exit /b
 
 :_End
 pushd "%SystemRoot%\Temp\"
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 echo:&echo Cleaning Extracted Files...
 timeout /t 1 > nul
 exit /b
@@ -2557,8 +2557,8 @@ exit /b
 %_null% %_psc% "$f=[io.file]::ReadAllText('!batp_!') -split ':cleanospp\:.*';iex ($f[1]);X 1;"
 
 set ext_f=
-if NOT exist "%MAS_Temp%\BIN\cleanosppx64.exe" set ext_f=1
-if NOT exist "%MAS_Temp%\BIN\cleanosppx86.exe" set ext_f=1
+if NOT EXIST "%MAS_Temp%\BIN\cleanosppx64.exe" set ext_f=1
+if NOT EXIST "%MAS_Temp%\BIN\cleanosppx86.exe" set ext_f=1
 
 if defined ext_f (
 echo:
@@ -2981,7 +2981,7 @@ wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 
 echo:
 set "temp_=%SystemRoot%\Temp\_Ticket_Work"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 md "%temp_%\" %nul%
 
 pushd "%temp_%\"
@@ -3002,8 +3002,8 @@ set _slc_hash=ca3a51fdfc8749b8be85f7904b1c238a6dfba135
 )
 
 set cfailed=
-if NOT exist "%temp_%\gatherosstate.exe" set cfailed=1
-if NOT exist "%temp_%\slc.dll" set cfailed=1
+if NOT EXIST "%temp_%\gatherosstate.exe" set cfailed=1
+if NOT EXIST "%temp_%\slc.dll" set cfailed=1
 
 set "copyfiles=Extracting Required Files to Temp      "
 if defined cfailed (
@@ -3036,7 +3036,7 @@ set "GatherMod=Creating modified gatherosstate        "
 
 if "%arch%" neq "ARM64" (
 rundll32 "%temp_%\slc.dll",PatchGatherosstate %nul%
-if NOT exist "%temp_%\gatherosstatemodified.exe" (
+if NOT EXIST "%temp_%\gatherosstatemodified.exe" (
 call :DL_color "%GatherMod% [Unsuccessful] Aborting" %Red%
 call :DL_color "Most likely Antivirus program blocked the process, disable it and-or create proper exclsuions." %Magenta%
 goto :DL_Act_Cont
@@ -3056,7 +3056,7 @@ set _gather=gatherosstatemodified.exe
 
 :: Multiple attempts to generate the ticket because in some cases, one attempt is NOT enough.
 
-set "_noxml=if NOT exist "%temp_%\GenuineTicket.xml""
+set "_noxml=if NOT EXIST "%temp_%\GenuineTicket.xml""
 
 start /wait "" "%temp_%/%_gather%" %nul%
 %_noxml% timeout /t 3 %nul%
@@ -3077,15 +3077,15 @@ echo %GenTicket% [Successful]
 
 set "InsTicket=Installing GenuineTicket.xml           "
 set "TDir=%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket"
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 copy /y /b "%temp_%\GenuineTicket.xml" "%TDir%\GenuineTicket.xml" %nul%
 
-if NOT exist "%TDir%\GenuineTicket.xml" (
+if NOT EXIST "%TDir%\GenuineTicket.xml" (
 call :DL_color "Failed to copy Ticket to [%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket\] Aborting..." %Red%
 goto :DL_Act_Cont
 )
 
-set "_xmlexist=if exist "%TDir%\GenuineTicket.xml""
+set "_xmlexist=if EXIST "%TDir%\GenuineTicket.xml""
 
 %_psc% Restart-Service ClipSVC %nul%
 %_xmlexist% timeout /t 2 %nul%
@@ -3107,7 +3107,7 @@ set fallback_=1
 
 %_xmlexist% (
 call :DL_color "%InsTicket% [Unsuccessful] Aborting..." %Red%
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 goto :DL_Act_Cont
 ) else (
 if NOT defined fallback_ echo %InsTicket% [Successful]
@@ -3151,10 +3151,10 @@ call :DL_color "%changing_wust_back% [Unsuccessful]" %Red%
 )
 
 popd
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 
 set "delFiles=Cleaning Temp Files                    "
-if exist "%temp_%\" (
+if EXIST "%temp_%\" (
 call :DL_color "%delFiles% [Unsuccessful]" %Red%
 ) else (
 echo %delFiles% [Successful]
@@ -11184,10 +11184,10 @@ echo [%winos% ^| %winbuild% ^| %app%] KMS38 Activation is Not Supported.
 goto K38_Done
 )
 
-:: clipup.exe does NOT exist in server cor and acor editions.
+:: clipup.exe does NOT EXIST in server cor and acor editions.
 
 set A_Cor=
-echo %osedition%| findstr /I /B Server >nul && if NOT exist "%systemroot%\System32\clipup.exe" set A_Cor=1
+echo %osedition%| findstr /I /B Server >nul && if NOT EXIST "%systemroot%\System32\clipup.exe" set A_Cor=1
 
 ::========================================================================================================================================
 
@@ -11284,7 +11284,7 @@ call :K38_color "%setkms_% [LocalHost 127.0.0.2] [Unsuccessful]" %Red%
 
 echo:
 set "temp_=%SystemRoot%\Temp\_Ticket_Work"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 md "%temp_%\" %nul%
 
 pushd "%temp_%\"
@@ -11312,8 +11312,8 @@ popd
 )
 
 set cfailed=
-if NOT exist "%temp_%\gatherosstate.exe" set cfailed=1
-if NOT exist "%temp_%\slc.dll" set cfailed=1
+if NOT EXIST "%temp_%\gatherosstate.exe" set cfailed=1
+if NOT EXIST "%temp_%\slc.dll" set cfailed=1
 
 set "copyfiles=Extracting Required Files to Temp      "
 set "copyclipup=Extracting clipup.exe File to          "
@@ -11326,7 +11326,7 @@ goto K38_Act_Cont
 )
 
 if defined A_Cor (
-if NOT exist "%A_Cor_cl%" (
+if NOT EXIST "%A_Cor_cl%" (
 call :K38_color "%copyclipup% [%systemroot%\System32\] [Unsuccessful] Aborting..." %Red%
 call :K38_color "Most likely Antivirus program is interfering with the process." %Magenta%
 call :K38_color "Either make proper exclusions in the AV or use MAS separate files version." %Magenta%
@@ -11361,7 +11361,7 @@ if defined A_Cor echo %copyclipup% [%systemroot%\System32\] [Successful]
 
 :: Multiple attempts to generate the ticket because in some cases, one attempt is NOT enough.
 
-set "_noxml=if NOT exist "%temp_%\GenuineTicket.xml""
+set "_noxml=if NOT EXIST "%temp_%\GenuineTicket.xml""
 
 start /wait "" "%temp_%/gatherosstate.exe" %nul%
 %_noxml% timeout /t 3 %nul%
@@ -11382,15 +11382,15 @@ echo %GenTicket% [Successful]
 
 set "InsTicket=Installing GenuineTicket.xml           "
 set "TDir=%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket"
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 copy /y /b "%temp_%\GenuineTicket.xml" "%TDir%\GenuineTicket.xml" %nul%
 
-if NOT exist "%TDir%\GenuineTicket.xml" (
+if NOT EXIST "%TDir%\GenuineTicket.xml" (
 call :K38_color "Failed to copy Ticket to [%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket\] Aborting..." %Red%
 goto K38_Act_Cont
 )
 
-set "_xmlexist=if exist "%TDir%\GenuineTicket.xml""
+set "_xmlexist=if EXIST "%TDir%\GenuineTicket.xml""
 
 %_psc% Restart-Service ClipSVC %nul%
 %_xmlexist% timeout /t 2 %nul%
@@ -11412,7 +11412,7 @@ set fallback_=1
 
 %_xmlexist% (
 call :K38_color "%InsTicket% [Unsuccessful] Aborting..." %Red%
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 goto K38_Act_Cont
 ) else (
 if NOT defined fallback_ echo %InsTicket% [Successful]
@@ -11469,25 +11469,25 @@ call :K38_color "Try the Troubleshoot Guide listed in the ReadMe." %Magenta%
 
 :K38_Act_Cont
 
-::  clipup.exe does NOT exist in server cor and acor editions by default, it was copied there with this script.
+::  clipup.exe does NOT EXIST in server cor and acor editions by default, it was copied there with this script.
 
 echo:
 cd /d "!_work!\"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
-if defined A_Cor (if exist "%A_Cor_cl%" del /f /q "%A_Cor_cl%" %nul%)
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if defined A_Cor (if EXIST "%A_Cor_cl%" del /f /q "%A_Cor_cl%" %nul%)
 
 set "delFiles=Cleaning Temp Files                    "
 set "delclipup=Deleting extracted clipup.exe file     "
 
-if exist "%temp_%\" (
+if EXIST "%temp_%\" (
 call :K38_color "%delFiles% [Unsuccessful]" %Red%
 ) else (
 echo %delFiles% [Successful]
 )
 
 if defined A_Cor (
-if exist "%A_Cor_cl%" call :K38_color "%delclipup% [Unsuccessful]" %Red%
-if NOT exist "%A_Cor_cl%" echo %delclipup% [Successful]
+if EXIST "%A_Cor_cl%" call :K38_color "%delclipup% [Unsuccessful]" %Red%
+if NOT EXIST "%A_Cor_cl%" echo %delclipup% [Successful]
 )
 
 goto K38_Done
@@ -20393,7 +20393,7 @@ exit /b
 
 :Clear-KMS-Cache
 
-if exist "%ProgramData%\Online_KMS_Activation\Activate.cmd" exit /b
+if EXIST "%ProgramData%\Online_KMS_Activation\Activate.cmd" exit /b
 if %Clear-KMS-Cache% NEQ 1 exit /b
 
 ::  Clear-KMS-Cache.cmd 
@@ -20401,7 +20401,7 @@ if %Clear-KMS-Cache% NEQ 1 exit /b
 ::  Written by @abbodi1406 (MDL)
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "OSPP=SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
@@ -20476,7 +20476,7 @@ set "_run=nul"
 if %Logger% EQU 1 set _run="%~dpn0_Silent.log"
 
 set "SysPath=%SystemRoot%\System32"
-if exist "%SystemRoot%\Sysnative\reg.exe" (set "SysPath=%SystemRoot%\Sysnative")
+if EXIST "%SystemRoot%\Sysnative\reg.exe" (set "SysPath=%SystemRoot%\Sysnative")
 set "Path=%SysPath%;%SystemRoot%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "_err===== ERROR ===="
 set "xOS=x64"
@@ -20492,7 +20492,7 @@ set "_log=%~dpn0"
 set "_work=%~dp0"
 if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop') do call set "_dsk=%%b"
-if exist "%SystemDrive%\Users\Public\Desktop\desktop.ini" set "_dsk=%SystemDrive%\Users\Public\Desktop"
+if EXIST "%SystemDrive%\Users\Public\Desktop\desktop.ini" set "_dsk=%SystemDrive%\Users\Public\Desktop"
 setlocal EnableDelayedExpansion
 
 if %_Debug% EQU 0 (
@@ -20509,7 +20509,7 @@ if %_Debug% EQU 0 (
   set "_Nul6="
   set "_Nul3="
   set "_Pause="
-  copy /y nul "!_work!\#.rw" 1>nul 2>nul && (if exist "!_work!\#.rw" del /f /q "!_work!\#.rw") || (set "_log=!_dsk!\%~n0")
+  copy /y nul "!_work!\#.rw" 1>nul 2>nul && (if EXIST "!_work!\#.rw" del /f /q "!_work!\#.rw") || (set "_log=!_dsk!\%~n0")
   if %Silent% EQU 0 (
   echo:
   echo Running in Debug Mode...
@@ -20668,9 +20668,9 @@ set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatfor
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set SSppHook=0
 for /f %%A in ('dir /b /ad %SysPath%\spp\tokens\skus') do (
-  if %winbuild% GEQ 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*GVLK*.xrm-ms" set SSppHook=1
-  if %winbuild% LSS 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*VLKMS*.xrm-ms" set SSppHook=1
-  if %winbuild% LSS 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*VL-BYPASS*.xrm-ms" set SSppHook=1
+  if %winbuild% GEQ 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*GVLK*.xrm-ms" set SSppHook=1
+  if %winbuild% LSS 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*VLKMS*.xrm-ms" set SSppHook=1
+  if %winbuild% LSS 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*VL-BYPASS*.xrm-ms" set SSppHook=1
 )
 set OsppHook=1
 sc query osppsvc %_Nul3%
@@ -20757,9 +20757,9 @@ call :RunSPP
 if %ActOffice% NEQ 0 call :RunOSPP
 if %ActOffice% EQU 0 (echo:&echo Office activation is OFF...)
 
-if exist "!_temp!\crv*.txt" del /f /q "!_temp!\crv*.txt"
-if exist "!_temp!\*chk.txt" del /f /q "!_temp!\*chk.txt"
-if exist "!_temp!\slmgr.vbs" del /f /q "!_temp!\slmgr.vbs"
+if EXIST "!_temp!\crv*.txt" del /f /q "!_temp!\crv*.txt"
+if EXIST "!_temp!\*chk.txt" del /f /q "!_temp!\*chk.txt"
+if EXIST "!_temp!\slmgr.vbs" del /f /q "!_temp!\slmgr.vbs"
 call :StopService sppsvc
 if %OsppHook% NEQ 0 call :StopService osppsvc
 
@@ -21198,12 +21198,12 @@ if defined _C16R reg query %_C16R% /v ProductReleaseIds %_Nul2% | findstr 2019 %
 exit /b
 )
 
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" (
 set loc_off%1=1
 if %1 EQU 16 set _O16MSI=1
 if %1 EQU 15 set _O15MSI=1
 )
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" (
 set loc_off%1=1
 if %1 EQU 16 set _O16MSI=1
 if %1 EQU 15 set _O15MSI=1
@@ -21225,9 +21225,9 @@ set loc_off%1=1
 exit /b
 )
 
-if exist "%ProgramFiles%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
-if %xOS%==x64 if exist "%ProgramW6432%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
-if %xOS%==x64 if exist "%ProgramFiles(x86)%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if EXIST "%ProgramFiles%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if %xOS%==x64 if EXIST "%ProgramW6432%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if %xOS%==x64 if EXIST "%ProgramFiles(x86)%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
 exit /b
 
 :insKey
@@ -21321,11 +21321,11 @@ if %error1% EQU 1060 if %error2% EQU 1060 (
 goto :%_fC2R%
 )
 set _Office16=0
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if EXIST "%%b\root\Licenses16\ProPlus*.xrm-ms" (
   set _Office16=1
 )
 set _Office15=0
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if EXIST "%%b\root\Licenses\ProPlus*.xrm-ms" (
   set _Office15=1
 )
 if %_Office16% EQU 0 if %_Office15% EQU 0 (
@@ -21354,13 +21354,13 @@ for /f "skip=2 tokens=2*" %%a in ('"reg query %_PRIDs% /v ActiveConfiguration" %
 if "%_ProductIds%" equ "" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if NOT exist "%_LicensesPath%\ProPlus*.xrm-ms" (
+if NOT EXIST "%_LicensesPath%\ProPlus*.xrm-ms" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if NOT exist "%_Integrator%" (
+if NOT EXIST "%_Integrator%" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if exist "%_LicensesPath%\Word2019VL_KMS_Client_AE*.xrm-ms" (set "_tag=2019"&set "_ons= 2019") else (set "_tag="&set "_ons= 2016")
+if EXIST "%_LicensesPath%\Word2019VL_KMS_Client_AE*.xrm-ms" (set "_tag=2019"&set "_ons= 2019") else (set "_tag="&set "_ons= 2016")
 if %_Office15% EQU 0 goto :CheckC2R
 
 :Reg15istry
@@ -21385,32 +21385,32 @@ if "%_Product15Ids%" equ "" (
   set "_OSPP15ReadT=REG_DWORD"
 )
 set "_Licenses15Path=%_Install15Root%\Licenses"
-if exist "%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS" (
+if EXIST "%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS"
-) else if exist "%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS" (
+) else if EXIST "%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS"
-) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS" (
+) else if EXIST "%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS"
 )
 if "%_Product15Ids%" equ "" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
-if NOT exist "%_Licenses15Path%\ProPlus*.xrm-ms" (
+if NOT EXIST "%_Licenses15Path%\ProPlus*.xrm-ms" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
-if %winbuild% LSS 9200 if NOT exist "%_OSPP15VBS%" (
+if %winbuild% LSS 9200 if NOT EXIST "%_OSPP15VBS%" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
 
 :CheckC2R
 set _OMSI=0
 if %_Office16% EQU 0 (
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
 )
 if %_Office15% EQU 0 (
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
 )
 if %winbuild% GEQ 9200 (
 set _spp=SoftwareLicensingProduct
@@ -21432,23 +21432,23 @@ find /i "RETAIL channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 find /i "RETAIL(MAK) channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 find /i "TIMEBASED_SUB channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 set "_copp="
-if exist "%SysPath%\msvcr100.dll" (
+if EXIST "%SysPath%\msvcr100.dll" (
 set _copp=1
-) else if exist "!_InstallRoot!\vfs\System\msvcr100.dll" (
+) else if EXIST "!_InstallRoot!\vfs\System\msvcr100.dll" (
 set _copp="!_InstallRoot!\vfs\System"
-) else if exist "!_Install15Root!\vfs\System\msvcr100.dll" (
+) else if EXIST "!_Install15Root!\vfs\System\msvcr100.dll" (
 set _copp="!_Install15Root!\vfs\System"
-) else if exist "%SystemRoot%\SysWOW64\msvcr100.dll" (
+) else if EXIST "%SystemRoot%\SysWOW64\msvcr100.dll" (
 set _copp=1
 set xBit=x86
-) else if exist "!_InstallRoot!\vfs\SystemX86\msvcr100.dll" (
+) else if EXIST "!_InstallRoot!\vfs\SystemX86\msvcr100.dll" (
 set _copp="!_InstallRoot!\vfs\SystemX86"
 set xBit=x86
-) else if exist "!_Install15Root!\vfs\SystemX86\msvcr100.dll" (
+) else if EXIST "!_Install15Root!\vfs\SystemX86\msvcr100.dll" (
 set _copp="!_Install15Root!\vfs\SystemX86"
 set xBit=x86
 )
-if NOT exist "!_work!\bin\cleanospp%xBit%.exe" (
+if NOT EXIST "!_work!\bin\cleanospp%xBit%.exe" (
 set "_copp="
 )
 if %_Retail% EQU 0 if %_OMSI% EQU 0 if defined _copp (
@@ -21842,7 +21842,7 @@ if %_Office15% EQU 1 (
 for %%a in (%_R15Ids%,ProPlus) do set "_%%a="
 )
 if %winbuild% GEQ 9200 wmic path %_sps% where version='%_wmi%' call RefreshLicenseStatus %_Nul3%
-if exist "%SysPath%\spp\store_test\2.0\tokens.dat" if defined _copp (
+if EXIST "%SysPath%\spp\store_test\2.0\tokens.dat" if defined _copp (
 %_cscript% %_SLMGR% /rilc
 )
 goto :%_sC2R%
@@ -22894,9 +22894,9 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 
-if NOT exist "!_work!\Activate.cmd" (
+if NOT EXIST "!_work!\Activate.cmd" (
 %ELine%
-echo File [Activate.cmd] does NOT exist in current folder..
+echo File [Activate.cmd] does NOT EXIST in current folder..
 echo It's required for the Task Creation.
 set _end=1
 goto Done
@@ -22969,13 +22969,13 @@ schtasks /delete /tn Online_KMS_Activation_Script-Renewal /f %nul%
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul && (
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
-If exist "%windir%\Online_KMS_Activation_Script\" (
+If EXIST "%windir%\Online_KMS_Activation_Script\" (
 @RD /s /q "%windir%\Online_KMS_Activation_Script\" %nul%
 )
-If exist "%ProgramData%\Online_KMS_Activation.cmd" (
+If EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 Reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 set DelDeskCont=1
@@ -22984,7 +22984,7 @@ set DelDeskCont=1
 md "%_dest%\BIN\" %nul%
 
 set "_temp=%SystemRoot%\Temp\_KMS_Task_Work"
-if exist "%_temp%\" @RD /S /Q "%_temp%\" %nul%
+if EXIST "%_temp%\" @RD /S /Q "%_temp%\" %nul%
 md "%_temp%\" %nul%
 
 call :Export renewal "%_temp%\Renewal.xml" Unicode
@@ -23005,17 +23005,17 @@ copy /y /b "!_work!\Activate.cmd" "%_dest%\Activate.cmd" %nul%
 schtasks /create /tn "Online_KMS_Activation_Script-Renewal" /ru "SYSTEM" /xml "%_temp%\Renewal.xml" %nul%
 if defined ActTask (schtasks /create /tn "Online_KMS_Activation_Script-Run_Once" /ru "SYSTEM" /xml "%_temp%\Run_Once.xml" %nul%)
 
-if exist "%_temp%\" @RD /S /Q "%_temp%\" %nul%
+if EXIST "%_temp%\" @RD /S /Q "%_temp%\" %nul%
 
 ::========================================================================================================================================
 
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul || (set error_=1)
 if defined ActTask reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul || (set error_=1)
 
-If NOT exist "%_dest%\Activate.cmd" (set error_=1)
-If NOT exist "%_dest%\Info.txt" (set error_=1)
-If NOT exist "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
-If NOT exist "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
+If NOT EXIST "%_dest%\Activate.cmd" (set error_=1)
+If NOT EXIST "%_dest%\Info.txt" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
 
 if defined error_ (
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul && (
@@ -23025,7 +23025,7 @@ reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" 
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
 echo _________________________________________________________________
@@ -23079,14 +23079,14 @@ goto Done
 cls
 title Add Desktop Context Menu
 
-If exist "%ProgramData%\Online_KMS_Activation.cmd" (
+If EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 set DelDeskCont=1
 )
 
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
 
-if exist "%_dest%\BIN\" (
+if EXIST "%_dest%\BIN\" (
 @RD /s /q "%_dest%\BIN\" %nul%
 )
 
@@ -23094,7 +23094,7 @@ md "%_dest%\BIN\" %nul%
 copy /y /b "!_work!\BIN\cleanosppx64.exe" "%_dest%\BIN\cleanosppx64.exe" %nul%
 copy /y /b "!_work!\BIN\cleanosppx86.exe" "%_dest%\BIN\cleanosppx86.exe" %nul%
 
-if exist "%_dest%\Activate.cmd" (
+if EXIST "%_dest%\Activate.cmd" (
 del /f /q "%_dest%\Activate.cmd" %nul%
 )
 
@@ -23106,7 +23106,7 @@ if defined _SkipWinAct (
 copy /y /b "!_work!\Activate.cmd" "%_dest%\Activate.cmd" %nul%
 )
 
-if exist "%_dest%\Info.txt" (
+if EXIST "%_dest%\Info.txt" (
 del /f /q "%_dest%\Info.txt" %nul%
 )
 
@@ -23115,10 +23115,10 @@ call :Export info "%_dest%\Info.txt" ASCII
 reg add "HKCR\DesktopBackground\shell\Activate Windows - Office" /v "Icon" /t REG_SZ /d "%SystemRoot%%\System32\shell32.dll,71" /f >nul 2>&1 || (set error_1=1)
 reg add "HKCR\DesktopBackground\shell\Activate Windows - Office\command" /ve /d "%_dest%\Activate.cmd" /f %nul% || (set error_1=1)
 
-If NOT exist "%_dest%\Activate.cmd" (set error_=1)
-If NOT exist "%_dest%\Info.txt" (set error_=1)
-If NOT exist "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
-If NOT exist "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
+If NOT EXIST "%_dest%\Activate.cmd" (set error_=1)
+If NOT EXIST "%_dest%\Info.txt" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
 
 reg query "HKCR\DesktopBackground\shell\Activate Windows - Office" %nul% || (set error_1=1)
 
@@ -23130,7 +23130,7 @@ reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" 
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
 echo _________________________________________________________________
@@ -23376,7 +23376,7 @@ goto ActivationRenewal
 
 :check
 
-for %%# in (%1 %2) do (if NOT exist "!_work!\BIN\%%#" (if defined _miss (set "_miss=!_miss! %%#") else (set "_miss=%%#")))
+for %%# in (%1 %2) do (if NOT EXIST "!_work!\BIN\%%#" (if defined _miss (set "_miss=!_miss! %%#") else (set "_miss=%%#")))
 if defined _miss (
 %ELine%
 echo Following required file^(s^) is missing in 'BIN' folder. Aborting...
@@ -23442,17 +23442,17 @@ echo Deleting [Task] Online_KMS_Activation_Script-Run_Once
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 
-If exist "%windir%\Online_KMS_Activation_Script\" (
+If EXIST "%windir%\Online_KMS_Activation_Script\" (
 echo Deleting [Folder] %windir%\Online_KMS_Activation_Script\
 @RD /s /q "%windir%\Online_KMS_Activation_Script\" %nul%
 )
 
-If exist "%ProgramData%\Online_KMS_Activation\" (
+If EXIST "%ProgramData%\Online_KMS_Activation\" (
 echo Deleting [Folder] %ProgramData%\Online_KMS_Activation\
 @RD /s /q "%ProgramData%\Online_KMS_Activation\" %nul%
 )
 
-if exist "%ProgramData%\Online_KMS_Activation.cmd" (
+if EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 echo Deleting [File] %ProgramData%\Online_KMS_Activation.cmd
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 )
@@ -23471,7 +23471,7 @@ echo:
 ::  Written by @abbodi1406 (MDL)
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "OSPP=SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
@@ -23525,11 +23525,11 @@ goto :eof
 set error_=
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul && (set error_=1)
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul && (set error_=1)
-If exist "%windir%\Online_KMS_Activation_Script\" (set error_=1)
-if exist "%ProgramData%\Online_KMS_Activation\" (set error_=1)
+If EXIST "%windir%\Online_KMS_Activation_Script\" (set error_=1)
+if EXIST "%ProgramData%\Online_KMS_Activation\" (set error_=1)
 
 reg query "HKCR\DesktopBackground\shell\Activate Windows - Office" >nul 2>&1 && (set error_=1)
-if exist "%ProgramData%\Online_KMS_Activation.cmd" (set error_=1)
+if EXIST "%ProgramData%\Online_KMS_Activation.cmd" (set error_=1)
 
 if defined error_ (
 echo ______________________________________
@@ -23810,7 +23810,7 @@ set "ospp_get=%spp_get%"
 if %winbuild% geq 9200 set "spp_get=%spp_get%, DiscoveredKeyManagementServiceMachineIpAddress, KeyManagementServiceLookupDomain, ProductKeyChannel, VLActivationTypeEnabled"
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "line2=************************************************************"
 set "line3=____________________________________________________________"

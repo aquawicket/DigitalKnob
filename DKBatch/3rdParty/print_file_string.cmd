@@ -9,7 +9,7 @@ rem           By default, the line number prefix does NOT print.
 rem      -f1 - filter by line numbers for strings after %4..%N filter pattern.
 rem           By default, filters by line numbers from the file.
 rem      -pe - treats input file as a Portable Executable file
-rem           (the strings.exe must exist).
+rem           (the strings.exe must EXIST).
 rem           By default, the file treated as a text file.
 rem %1 - Path to a directory with a file to extract.
 rem %2 - Relative path to a text/binary file with strings.
@@ -82,8 +82,8 @@ set "FILE_PATH_PREFIX="
 if "%DIR_PATH%" neq "" set "FILE_PATH_PREFIX=%DIR_PATH%\"
 
 if "%FILE_PATH_PREFIX%" neq "" ^
-if NOT exist "%FILE_PATH_PREFIX%" (
-  echo.%?~nx0%: error: Directory path does NOT exist: "%FILE_PATH_PREFIX%"
+if NOT EXIST "%FILE_PATH_PREFIX%" (
+  echo.%?~nx0%: error: Directory path does NOT EXIST: "%FILE_PATH_PREFIX%"
   exit /b 1
 ) >&2
 
@@ -92,8 +92,8 @@ if "%FILE_PATH%" equ "" (
   exit /b 2
 ) >&2
 
-if NOT exist "%FILE_PATH_PREFIX%%FILE_PATH%" (
-  echo.%?~nx0%: error: File path does NOT exist: "%FILE_PATH_PREFIX%%FILE_PATH%"
+if NOT EXIST "%FILE_PATH_PREFIX%%FILE_PATH%" (
+  echo.%?~nx0%: error: File path does NOT EXIST: "%FILE_PATH_PREFIX%%FILE_PATH%"
   exit /b 3
 ) >&2
 

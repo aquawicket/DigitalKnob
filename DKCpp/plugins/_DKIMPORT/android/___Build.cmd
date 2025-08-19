@@ -61,7 +61,7 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if NOT exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does NOT exist" )
+if NOT EXIST %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does NOT EXIST" )
 
 :: JDK
 if %GRADLE% equ 0 (
@@ -73,8 +73,8 @@ call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-if exist "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -220,7 +220,7 @@ echo 11. Zipalign the APK package
 
 
 ::echo 12. Create a key store and key for signing with the Java keytool
-if NOT exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
+if NOT EXIST "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
 %IF_ERROR% "failed to Create a key store and key for signing with the Java keytool"
 
 

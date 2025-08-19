@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -27,32 +27,32 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "dk_extract_dest=!dk_dirname!/!dk_removeExtension!"	&rem extract contents to folder within same directory
 	)
 
-	if exist "%dk_extract_dest%" (%dk_call% dk_error "%dk_extract_dest% already exists")
+	if EXIST "%dk_extract_dest%" (%dk_call% dk_error "%dk_extract_dest% already exists")
 	
 	%dk_call% dk_info "Extracting '%dk_extract_file%' to '%dk_extract_dest%' . . ."
 
 	::###### Try tar ######
-    if NOT exist "%dk_extract_dest%" (
+    if NOT EXIST "%dk_extract_dest%" (
 		%dk_call% dk_mkdir "%dk_extract_dest%" 
 		tar --help %NO_OUTPUT% && tar -xf "%dk_extract_file%" -C "%dk_extract_dest%"
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 	
 	::###### Try dk_callDKPowershell ######
-	if NOT exist "%dk_extract_dest%" (
+	if NOT EXIST "%dk_extract_dest%" (
 		%dk_call% dk_callDKPowershell dk_extract "%dk_extract_file%" "%dk_extract_dest%"
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 
 	::###### Try powershell.exe [System.IO.Compression.ZipFile]::ExtractToDirectory ######
-	if NOT exist "%dk_extract_dest%" (
+	if NOT EXIST "%dk_extract_dest%" (
 		%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
 		%POWERSHELL_EXE% Add-Type -Assembly 'System.IO.Compression.Filesystem'; [System.IO.Compression.ZipFile]::ExtractToDirectory^('%dk_extract_file%', '%dk_extract_dest%'^)
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 
 	::###### Try dk_powershell Expand-Archive *** VERY SLOW *** ######
-	if NOT exist "%dk_extract_dest%" (
+	if NOT EXIST "%dk_extract_dest%" (
 		%dk_call% dk_powershell Expand-Archive '"%dk_extract_file%"' -DestinationPath '"%dk_extract_dest%"'
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)

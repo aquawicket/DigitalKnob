@@ -6,22 +6,22 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo runDKtcc(%*)
 	
 	echo(
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
 	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR%"
 	
 	echo(
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1/")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1/")
 	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR_%"
 	
 	echo(
-	if NOT exist "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
+	if NOT EXIST "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
 	echo TCC_RT_EXE = %TCC_RT_EXE%
 	::%dk_call% dk_assertPath "%TCC_RT_EXE%"
 	
 	echo(
-	if NOT exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
+	if NOT EXIST "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
 	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	::%dk_call% dk_assertPath "%DKSCRIPT_PATH%"
 	
@@ -64,8 +64,8 @@ if "%~1" equ "" (goto :DKINSTALL)
 	if "%~1" neq "" (goto:eof)
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 	

@@ -1,6 +1,6 @@
 <!-- :
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -25,7 +25,7 @@ setlocal
 	%dk_call% dk_echo "name = %name%"
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if exist "%DKIMPORTS_DIR%/%name%" (
+	if EXIST "%DKIMPORTS_DIR%/%name%" (
 		%dk_call% dk_notice "%DKIMPORTS_DIR%/%name% already exists"
 		%return%
 	)
@@ -87,7 +87,7 @@ echo(dk_delete			("${%dk_toUpper%}")>>										"%DKIMPORTS_DIR%/%name%/DKUNINST
 
 ::###### DKINSTALL.cmake.cmd ######
 echo(@echo off^&::###### DK.cmd #########################################################################################################################> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
-echo(if NOT exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
+echo(if NOT EXIST "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo(if NOT defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo(::#################################################################################################################################################>> 			"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
 echo(>>																																								"%DKIMPORTS_DIR%/%name%/DKINSTALL.cmake.cmd"
@@ -115,7 +115,7 @@ echo(%%endfunction%%>>																																				"%DKIMPORTS_DIR%/%name
 
 ::###### DKUNINSTALL.cmake.cmd ######
 echo(@echo off^&::###### DK.cmd #########################################################################################################################> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
-echo(if NOT exist "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
+echo(if NOT EXIST "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" for /F "tokens=*" %%%%G IN ('where /r "%%USERPROFILE%%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%%%~dpG")>>	"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo(if NOT defined DK.cmd (call "%%DKBATCH_FUNCTIONS_DIR_%%DK.cmd" "%%~0" %%*)>>																					"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo(::#################################################################################################################################################>> 			"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"
 echo(>>																																								"%DKIMPORTS_DIR%/%name%/DKUNINSTALL.cmake.cmd"

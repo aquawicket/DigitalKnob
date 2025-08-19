@@ -1,6 +1,6 @@
 <!-- : BATCH SCRIPT
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,7 +18,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	cscript.exe //nologo "%~f0?.wsf"
-	if NOT exist "%TEMP%\refreshEnv.bat" %dk_call% dk_error "%TEMP%\refreshEnv.bat does NOT exist"
+	if NOT EXIST "%TEMP%\refreshEnv.bat" %dk_call% dk_error "%TEMP%\refreshEnv.bat does NOT EXIST"
 	%dk_call% "%TEMP%\refreshEnv.bat"
 		
 	exit /b %errorlevel%

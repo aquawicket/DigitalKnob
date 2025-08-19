@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -16,13 +16,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT defined DKBRANCH          set "DKBRANCH=Development"
 	if NOT defined DKBRANCH_DIR      set "DKBRANCH_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%"
 	
-	if exist "%DKBRANCH_DIR%\.git" (if "%DKSCRIPT_NAME%" neq "DKBuilder" %return%)
-	if exist "%DKBRANCH_DIR%\.git" (if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%)
+	if EXIST "%DKBRANCH_DIR%\.git" (if "%DKSCRIPT_NAME%" neq "DKBuilder" %return%)
+	if EXIST "%DKBRANCH_DIR%\.git" (if "%DKSCRIPT_DIR%" equ "%DKBRANCH_DIR%" %return%)
 
-    if NOT exist "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git %DKBRANCH%)
+    if NOT EXIST "%DKBRANCH_DIR%\.git" (%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git %DKBRANCH%)
 	
 	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_PATH=%DKBRANCH_DIR%\%DKSCRIPT_NAME%%DKSCRIPT_EXT%"
-	if NOT exist "%DKSCRIPT_PATH%"  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT exist"
+	if NOT EXIST "%DKSCRIPT_PATH%"  %dk_call% dk_fatal "DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT EXIST"
 	
 	if "%DKSCRIPT_NAME%" equ "DKBuilder" set "DKSCRIPT_ARGS=%DKSCRIPT_PATH%"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ"

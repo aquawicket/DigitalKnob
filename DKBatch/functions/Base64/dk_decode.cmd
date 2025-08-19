@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -19,8 +19,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_removeExtension %inputFile% outputFile
 	if "%~2" neq "" set "outputFile=%~2"
 
-	if NOT exist "%inputFile%" %dk_call% dk_error "%inputFile% NOT found"
-	if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
+	if NOT EXIST "%inputFile%" %dk_call% dk_error "%inputFile% NOT found"
+	if EXIST "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
 
 	%CERTUTIL_EXE% -decode "%inputFile:/=\%" "%outputFile:/=\%"
 %endfunction%

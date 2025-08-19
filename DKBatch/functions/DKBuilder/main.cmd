@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,17 +18,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
-	if NOT exist "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
+	if NOT EXIST "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
 		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
 	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
-	if NOT exist "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
+	if NOT EXIST "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
 		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	)
 	
-	if NOT exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
+	if NOT EXIST "%DKDESKTOP_DIR%/DKBuilder.cmd" (
 		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
@@ -42,7 +42,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_unset Target_Type
 
 	:while_loop
-		if exist "%BUILD_LIST_FILE%" (
+		if EXIST "%BUILD_LIST_FILE%" (
 			if NOT defined BUILD_MATRIX[0][0] (
 				%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_MATRIX
 			)

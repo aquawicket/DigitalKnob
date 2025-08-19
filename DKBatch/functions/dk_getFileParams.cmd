@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -17,7 +17,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
-	if NOT exist "%_file_%" (
+	if NOT EXIST "%_file_%" (
 		rem %dk_call% dk_replaceAll "%_file_%" "%DIGITALKNOB_DIR%" "%DKHTTP_DIGITALKNOB_DIR%" dkhttp_file
 		call set "dkhttp_file=%%_file_:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
 		%dk_call% dk_download "!dkhttp_file!" "%_file_%"

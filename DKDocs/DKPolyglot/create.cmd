@@ -4,7 +4,7 @@ goto main
 
 :copyTo .ext
 	set "output=%input%%~1"
-	if exist "%output%" del "%output%"
+	if EXIST "%output%" del "%output%"
 	echo F|xcopy "%input%" "%output%" /H /Y 1>nul 2>nul
 %endfunction%
 

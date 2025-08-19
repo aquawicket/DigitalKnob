@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -19,9 +19,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "outputFile=%~nx1.cmd"
 	if "%~2" neq "" (set "outputFile=%~2")
 
-	if NOT exist "%inputFile%" (%dk_call% dk_error "%inputFile% NOT found")
-	if exist "%outputFile%" (del %outputFile%)
-	:: if exist "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
+	if NOT EXIST "%inputFile%" (%dk_call% dk_error "%inputFile% NOT found")
+	if EXIST "%outputFile%" (del %outputFile%)
+	:: if EXIST "%outputFile%" %dk_call% dk_error "%outputFile% already exists and cannot be overwritten"
 
 	(
 	echo @echo off
@@ -46,8 +46,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo ^)
 	echo(
 	echo ::Delete previous output files
-	echo if exist "%%~1.tmp" del "%%~1.tmp"
-	echo if exist "%%~1" del "%%~1"
+	echo if EXIST "%%~1.tmp" del "%%~1.tmp"
+	echo if EXIST "%%~1" del "%%~1"
 	echo(
 	echo for /f "useback skip=%%MBEGIN%% tokens=* delims=" %%%%a in ("%%~f0"^) DO (
 	echo 	echo %%%%a ^>^>"%%~1.tmp"

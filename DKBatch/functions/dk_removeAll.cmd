@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -65,7 +65,7 @@ setlocal
     :: wait for the folders to get deleted
     %dk_call% dk_sleep 3
        
-    if exist %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
+    if EXIST %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
        
     ::%dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development NO_CONFIRM
        

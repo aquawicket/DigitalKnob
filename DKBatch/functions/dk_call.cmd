@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -56,14 +56,14 @@ set "dk_call_IGNORE=dk_debugFunc"
 	if %LVL% lss 1 (exit /b !errorlevel!)
 
 	::##### Prepair ###########################################################################################
-	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
-	if NOT exist "%__CMND__%" (
+	if EXIST "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
+	if EXIST "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
+	if NOT EXIST "%__CMND__%" (
 		call %DKBATCH_FUNCTIONS_DIR_%dk_source.cmd "%__CMND__%"
 	)
 	
-	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
+	if EXIST "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
+	if EXIST "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
 	
 	rem dk_call% dk_isCRLF "%__CMND__%" || %dk_call% dk_fileToCRLF "%__CMND__%"
 	::###### Entry ############################################################################################

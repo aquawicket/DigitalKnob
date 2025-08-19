@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -37,12 +37,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 		ping -n 2 localhost %NO_OUTPUT%
 		if !timeout! GTR 0 (
-			if NOT exist %cache_file% goto keyboard_input_timeout_loop
+			if NOT EXIST %cache_file% goto keyboard_input_timeout_loop
 		)
    
     :keyboard_input_timeout_result
     del %thread_file% %NO_OUTPUT%
-    if exist %cache_file% (
+    if EXIST %cache_file% (
         set /p dk_keyboardInputTimeout=<%cache_file%
         %dk_call% dk_delete %cache_file% %NO_OUTPUT%
     ) else (

@@ -15,15 +15,15 @@
 	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_EXE% %C_FILE%"
 	
 	::###### Setup build directory
-	if NOT exist "%CD%\build" mkdir "%CD%\build"
+	if NOT EXIST "%CD%\build" mkdir "%CD%\build"
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist %APP_EXE%  del %APP_EXE%
+	if EXIST %APP_EXE%  del %APP_EXE%
 
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
-	if NOT exist %APP_EXE% (
+	if NOT EXIST %APP_EXE% (
 		echo Compilation failed!
 		exit /b %ERRORLEVEL%
 	)

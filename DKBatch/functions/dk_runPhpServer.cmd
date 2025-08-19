@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -25,13 +25,13 @@ if NOT defined dk_runPhpServer_DEFAULT_IP 	(set dk_runPhpServer_DEFAULT_IP=127.0
 	set "WEB_IP=%dk_IpAddressLocal%"
 	
 	%dk_call% dk_validate DKPHP_DIR "%dk_call% dk_DKPHP_DIR"
-	if NOT exist "%DKPHP_DIR%/php_local.exe" (
+	if NOT EXIST "%DKPHP_DIR%/php_local.exe" (
 		%dk_call% dk_copy %PHP_SRC%/php.exe "%DKPHP_DIR%/php_local.exe" OVERWRITE
 	)
-	if NOT exist "%DKPHP_DIR%/php_web.exe" (
+	if NOT EXIST "%DKPHP_DIR%/php_web.exe" (
 		%dk_call% dk_copy %PHP_SRC%/php.exe "%DKPHP_DIR%/php_web.exe" OVERWRITE
 	)
-	if NOT exist "%DKPHP_DIR%/php8ts.dll" (
+	if NOT EXIST "%DKPHP_DIR%/php8ts.dll" (
 		%dk_call% dk_copy "%PHP_SRC%/php8ts.dll" "%DKPHP_DIR%/php8ts.dll" OVERWRITE
 	)
 	

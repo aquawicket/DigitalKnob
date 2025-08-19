@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -16,15 +16,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_realpath "%_path_%"
 	
-    if NOT exist "%dk_realpath%" (
-        %dk_call% dk_warning "dk_delete dk_realpath:%dk_realpath% does NOT exist"
+    if NOT EXIST "%dk_realpath%" (
+        %dk_call% dk_warning "dk_delete dk_realpath:%dk_realpath% does NOT EXIST"
         %return%
     )
 
     del /F /Q "%_path_:/=\%" %NO_OUTPUT%
     rd /s /q "%_path_:/=\%" %NO_OUTPUT%
 
-    if exist "%_path_%" (
+    if EXIST "%_path_%" (
         %dk_call% dk_error "dk_delete failed to remove _path_:%_path_%"
     )
 %endfunction%

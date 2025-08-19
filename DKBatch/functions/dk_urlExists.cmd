@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -122,13 +122,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
 	%dk_call% dk_urlExists "%url%"
-	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"
 	%dk_call% dk_urlExists "%url%"
-	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT exist)
+	if %dk_urlExists% equ 0 (echo %url% exists) else (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	::FIXME: ERRORLEVEL is still 1
 	
@@ -137,13 +137,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
 	%dk_call% dk_urlExists "%url%"
-	if NOT ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
+	if NOT ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no"
 	%dk_call% dk_urlExists "%url%"
-	if NOT ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT exist)
+	if NOT ERRORLEVEL 1 (echo %url% exists) else (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	::FIXME: ERRORLEVEL is still 1
 	
@@ -151,12 +151,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### Using && and || conditionals
 	%dk_call% dk_echo
 	set "url=http://www.google.com/index.html"
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	
 	%dk_call% dk_echo
 	set "url=http://www.nonexisting.com/nofile.no" 
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	(call )		&::FIXME: ERRORLEVEL is still 1
 	
@@ -165,12 +165,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### Using && and || conditionals
 	echo(
 	set "url=https://aka.ms/vs/16/release/VC_redist.x86.exe"
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	
 	echo(
 	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
-	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT exist)
+	%dk_call% dk_urlExists "%url%" && (echo %url% exists) || (echo %url% does NOT EXIST)
 	echo dk_urlExists = %dk_urlExists%
 	(call )		&::FIXME: ERRORLEVEL is still 1
 	
@@ -178,11 +178,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::  %dk_call% dk_echo
 	::  set "url=http://www.google.com/index.html"
 	::  %dk_call% dk_urlExists "%url%"
-	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT exist)
+	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT EXIST)
 	::
 	::  %dk_call% dk_echo
 	::  set "url=http://www.nonexisting.com/nofile.no"
 	::  %dk_call% dk_urlExists "%url%"
-	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT exist)
+	::  if %dk_urlExists% (echo %url% exists) else (echo %url% does NOT EXIST)
 	::  if NOT ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)
 %endfunction%

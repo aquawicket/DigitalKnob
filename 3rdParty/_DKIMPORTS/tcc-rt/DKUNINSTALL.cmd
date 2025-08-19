@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,14 +18,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %TCC_RT_IMPORT% ROOT %DKTOOLS_DIR%
 	
 	%dk_call% dk_set TCC_RT_EXE "%TCC_RT%/tcc.exe"
-	if NOT exist "%TCC_RT_EXE%" (%return%)
+	if NOT EXIST "%TCC_RT_EXE%" (%return%)
 	
 	:: UNINSTALL
 	%dk_call% dk_echo  
     %dk_call% dk_info "UnInstalling tcc-rt . . ."
 	"MsiExec.exe" /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
 	
-	if exist "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk" (
+	if EXIST "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk" (
 		%dk_call% dk_delete "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk"
 	)
 %endfunction%

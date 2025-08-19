@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -12,7 +12,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if exist "%CMD_EXE%" (%return%)
+	if EXIST "%CMD_EXE%" (%return%)
 
 	::###### FIX ComSpec system environment varioble case ######
 	for %%A in ("%ComSpec%") do (
@@ -23,7 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	set "CMD_EXE=%ComSpec:\=/%"
-	if NOT exist "%CMD_EXE%" (%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%")
+	if NOT EXIST "%CMD_EXE%" (%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%")
 	
 	%dk_call% dk_assertPath "%CMD_EXE:\=/%"
 

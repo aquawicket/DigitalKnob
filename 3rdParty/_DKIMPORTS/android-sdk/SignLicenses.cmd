@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -39,9 +39,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 set "SDKMANAGER=%DK3RDPARTY_DIR%\android-sdk\cmdline-tools\latest\bin\sdkmanager.bat"
 
 ::%dk_call% dk_assertPath SDKMANAGER
-if NOT exist "%SDKMANAGER%" (%return%)
+if NOT EXIST "%SDKMANAGER%" (%return%)
 
 "%SDKMANAGER%" --licenses < "%DKCACHE_DIR%\file-y.txt"
 ::"%SDKMANAGER%" --licenses
 
-::if exist "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd" (%dk_call% "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd")
+::if EXIST "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd" (%dk_call% "%DKIMPORTS_DIR%\openjdk\registerJDK.cmd")

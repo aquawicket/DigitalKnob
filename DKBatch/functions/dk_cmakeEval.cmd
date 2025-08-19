@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -56,7 +56,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::  ## these lines are deprecated ###
 ::  if NOT defined DKRETURN %return%
-::  if NOT exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
+::  if NOT EXIST %DKCMAKE_DIR%\cmake_vars.cmd %return%
 ::  
 ::  endlocal
 ::  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd
@@ -67,7 +67,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### work with cmake return code files ######
 	:: std::out
 ::	set "out="
-::	if exist "cmake_eval.out" (
+::	if EXIST "cmake_eval.out" (
 ::		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
 ::			set "out=!out!%%x"
 ::			echo %%x
@@ -79,7 +79,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	:: std::err
 ::	set "err="
-::	if exist "cmake_eval.err" (
+::	if EXIST "cmake_eval.err" (
 ::		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
 ::			set "err=!err!%%x"
 ::			echo [91m %%x [0m

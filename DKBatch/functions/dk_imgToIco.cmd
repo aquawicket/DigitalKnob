@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -18,12 +18,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "icoFile=%icoFile:/=\%"
     set "OVERWRITE=%~3"
    
-    if NOT defined OVERWRITE if exist "%icoFile%" (%dk_call% dk_warning "%icoFile% already exists" && %return%)
-	if exist "%icoFile%" (%dk_call% dk_delete "%icoFile%")
+    if NOT defined OVERWRITE if EXIST "%icoFile%" (%dk_call% dk_warning "%icoFile% already exists" && %return%)
+	if EXIST "%icoFile%" (%dk_call% dk_delete "%icoFile%")
 
 	%dk_call% dk_callDKPowershell dk_imgToIco "%imgFile% %icoFile%"
    
-    if NOT exist %icoFile% (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
+    if NOT EXIST %icoFile% (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
 %endfunction%
 
 
