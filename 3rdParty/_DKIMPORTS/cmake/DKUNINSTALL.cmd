@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -26,15 +26,15 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %cmake_Import% INSTALL_ROOT %DKTOOLS_DIR%
 	%dk_call% dk_assertVar CMAKE
 	
-	if not exist "%CMAKE%" (
-		%dk_call% dk_notice "cmake is not installed"
+	if NOT exist "%CMAKE%" (
+		%dk_call% dk_notice "cmake is NOT installed"
 		%return%
 	)
 	
 	%dk_call% dk_notice "UnInstalling CMake . . ."
 	%dk_call% dk_delete "%CMAKE%"
 
-	if not exist "%CMAKE%" (%dk_call% dk_success "cmake uninstall complete") else (%dk_call% dk_error "cmake uninstall failed")
+	if NOT exist "%CMAKE%" (%dk_call% dk_success "cmake uninstall complete") else (%dk_call% dk_error "cmake uninstall failed")
 %endfunction%
 
 

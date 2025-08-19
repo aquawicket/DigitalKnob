@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if exist "%CSCRIPT_EXE%" (%return%)
 
-	if not exist "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%windir%/System32")
+	if NOT exist "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%windir%/System32")
 	%dk_call% dk_assertPath "%CSCRIPT_EXE%"
 
 	endlocal & (

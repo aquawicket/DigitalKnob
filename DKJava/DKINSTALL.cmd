@@ -3,10 +3,10 @@ if "%~1" equ "" (goto :DKINSTALL)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
+	if NOT defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
 	
 	set "DKJava_FILE=%~2"
-	if not defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
+	if NOT defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
 	
 	:: get the app name
 	for %%Z in ("%DKJava_FILE%") do (set "APP=%%~nZ")
@@ -19,7 +19,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKJava_FILE%
 	%COMPILER_EXE% /nologo /out:%APP%.exe *.java
 	
-	if not exist "%APP%.exe" (
+	if NOT exist "%APP%.exe" (
 		echo(
 		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
@@ -68,9 +68,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo Installing DKJava . . .
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 	
 	::###### Install DKCSharp ######

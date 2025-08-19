@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,8 +18,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		if not defined Host_Os		(%dk_call% dk_Host_Os)
-		if not defined Host_Arch	(%dk_call% dk_Host_Arch)
+		if NOT defined Host_Os		(%dk_call% dk_Host_Os)
+		if NOT defined Host_Arch	(%dk_call% dk_Host_Arch)
 		set "Host_Tuple=!Host_Os!_!Host_Arch!"
 	)
 	

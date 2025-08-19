@@ -1,5 +1,5 @@
 rem # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
-if not defined Linux_Host (
+if NOT defined Linux_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"

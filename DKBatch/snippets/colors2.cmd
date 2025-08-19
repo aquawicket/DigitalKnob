@@ -39,7 +39,7 @@ echo  ^| %bg`red-%Hello World!%`r% ^| %%bg`red-%%        %`u%%fg`white%Compatibi
 echo  ^| %bg`green-%Hello World!%`r% ^| %%bg`green-%%
 echo  ^| %bg`yellow-%Hello World!%`r% ^| %%bg`yellow-%%     If you are running Windows older than 10,
 echo  ^| %bg`blue-%Hello World!%`r% ^| %%bg`blue-%%       %`b%cl%`r% will automatically set it to legacy
-echo  ^| %bg`magenta-%Hello World!%`r% ^| %%bg`magenta-%%    mode. If not: '%fg`black%call cl.bat --legacy%`r%'.
+echo  ^| %bg`magenta-%Hello World!%`r% ^| %%bg`magenta-%%    mode. If NOT: '%fg`black%call cl.bat --legacy%`r%'.
 echo  ^| %bg`cyan-%Hello World!%`r% ^| %%bg`cyan-%%
 echo  ^| %bg`white-%Hello World!%`r% ^| %%bg`white-%%
 echo(

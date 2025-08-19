@@ -443,7 +443,7 @@ if "%firstindex%" equ "winget" goto wingetoption
 
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto begin
@@ -716,7 +716,7 @@ if "%firstindex%" equ "a" goto ghostm0da
 if "%firstindex%" equ "0" goto begin
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto GhostMode
@@ -890,7 +890,7 @@ if "%firstindex%" equ "4" Reg add "HKLM\SYSTEM\CurrentControlSet\Control" /v "Sv
 if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto GhostModeProc
@@ -954,7 +954,7 @@ del /q /f /s "memory.bin" >nul 2>nul
 :SKIPMEMORY1
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Silent"') do set MeMsilent="%yellow%Enabled" >nul 2>nul
 FOR /F "tokens=1*" %%A in ('reg query "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" ^| find /i "Default"') do set MeMsilent="%yellow%Disabled" >nul 2>nul
-if not exist "%Windir%\System32\ReduceMemory_x64.exe" goto startagainMEM
+if NOT exist "%Windir%\System32\ReduceMemory_x64.exe" goto startagainMEM
 schtasks /Change /TN "Reduce Memory 1min" /Disable >nul 2>nul
 schtasks /Delete /TN "Reduce Memory 1min" /F >nul 2>nul
 cls
@@ -999,7 +999,7 @@ if "%firstindex%" equ "7" goto MeM07
 ::if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto GhostModeMemory
@@ -1148,7 +1148,7 @@ if "%op%" equ "20" goto win1120
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :opwin11
@@ -1170,7 +1170,7 @@ if "%op%" equ "1" goto Hilights1
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1120
@@ -1206,7 +1206,7 @@ if "%op%" equ "1" goto win11mediaplayer
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1117
@@ -1258,9 +1258,9 @@ cd "%GHOST_DATA%"
 %nhcolor% 03 "  [2]  | %green%Disable > Tab Explorer"
 %nhcolor% 03 "  [3]  | %green%Resume Windows updates"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 " NOTE: If still not working please resume windows updates and try enable again.
+%nhcolor% 07 " NOTE: If still NOT working please resume windows updates and try enable again.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 "  [4]  | If still not working? Try this method %yellow% https://bit.ly/3Ik5fFJ %white%
+%nhcolor% 03 "  [4]  | If still NOT working? Try this method %yellow% https://bit.ly/3Ik5fFJ %white%
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [0]  | %green%Back
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -1274,7 +1274,7 @@ if "%op%" equ "4" start https://bit.ly/3Ik5fFJ
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1115X
@@ -1344,7 +1344,7 @@ if "%op%" equ "2" goto win11ribbon02
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1107
@@ -1390,7 +1390,7 @@ if "%op%" equ "4" goto win11xbox2bar
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1108xbr
@@ -1705,7 +1705,7 @@ timeout /t 3 >nul
 winget install -e -s msstore --accept-source-agreements >nul
 :skipWinget
 for /f "tokens=1" %%a in ('winget.exe -v') do set "var=%%a"
-if not exist "%GHOST_DIR%\list.txt" (
+if NOT exist "%GHOST_DIR%\list.txt" (
 type > "%GHOST_DIR%\list.txt" 2>nul
 )
 if exist "%GHOST_DATA%\Microsoft.Windows.Package.Manager_v1.7.10861" (
@@ -1852,7 +1852,7 @@ if "%op%" equ "3" goto widgetswin1103
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1114w
@@ -1991,7 +1991,7 @@ cls
 
 ::XADMINXX1W10C3
 ::cls
-::echo Your are not using Administrator Account.
+::echo Your are NOT using Administrator Account.
 ::timeout /t 3 >nul
 ::goto begin
 
@@ -2016,7 +2016,7 @@ cls
 ::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
 ::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
 %nhcolor% 03 "  %red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %yellow%     *If still not working i suggest please use on non Administrator account (local account).*
+%nhcolor% 03 "  %yellow%     *If still NOT working i suggest please use on non Administrator account (local account).*
 %nhcolor% 03 "  %yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E ""
@@ -2027,7 +2027,7 @@ if "%op%" equ "2" goto adminfil02W10
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :XADMINXX1W10
@@ -2057,7 +2057,7 @@ cls
 ::FOR /F "tokens=1*" %%A in ('whoami ^| find /i "Administrator"') do goto XADMINXX1 && goto XADMINXXX
 ::XADMINXXX
 ::cls
-::echo Your are not using Administrator Account.
+::echo Your are NOT using Administrator Account.
 ::timeout /t 3 >nul
 ::goto forwindows11
 
@@ -2073,7 +2073,7 @@ goto XADMINXX1
 
 :XADMINXX1W11C3
 cls
-echo Your are not using Administrator Account.
+echo Your are NOT using Administrator Account.
 timeout /t 3 >nul
 goto begin
 
@@ -2097,7 +2097,7 @@ cls
 ::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Hello (Biometric) in Administrator Account please Enable Admin Filter.
 ::%nhcolor% 03 "  %red%NOTE: If you need to use Windows Spotlight in Administrator Account please Enable Admin Filter.
 %nhcolor% 03 "  %red%NOTE: If you need to Login windows with Email Account in Administrator Account please Enable Admin Filter.
-%nhcolor% 03 "  %yellow%     *If still not working i suggest please use on non Administrator account (local account).*
+%nhcolor% 03 "  %yellow%     *If still NOT working i suggest please use on non Administrator account (local account).*
 %nhcolor% 03 "  %yellow%     *For Windows Hello (Biometric) please use on non-Administrator account.*
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 0E ""
@@ -2108,7 +2108,7 @@ if "%op%" equ "2" goto adminfil02
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1116
@@ -2147,7 +2147,7 @@ if "%op%" equ "2" goto win11yrphone2
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1107
@@ -2360,7 +2360,7 @@ if "%op%" equ "2" goto win11paintC2
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1106
@@ -2491,7 +2491,7 @@ if "%op%" equ "1" goto win11snipp01
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1105
@@ -2570,7 +2570,7 @@ if "%op%" equ "4" start https://bit.ly/3BJBLw1 && goto forwindows11
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1104
@@ -2622,7 +2622,7 @@ if "%op%" equ "2" goto win11team2
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1103
@@ -2670,7 +2670,7 @@ if "%op%" equ "4" goto win11clip4
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1102
@@ -2731,7 +2731,7 @@ if "%op%" equ "2" goto taskma82
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1118
@@ -2772,7 +2772,7 @@ if "%op%" equ "2" goto win11context02
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1101
@@ -2823,7 +2823,7 @@ if "%op%" equ "6" goto win11o6
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1108
@@ -2863,7 +2863,7 @@ cls
 ::COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Powershell.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" >nul 2>nul
-if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" (
+if NOT exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -2885,7 +2885,7 @@ cls
 COPY /Y "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" "%LocalAppData%\Microsoft\Windows\WinX\Command.lnk" >nul 2>nul
 timeout /t 1 >nul
 del /Q "%LocalAppData%\Microsoft\Windows\WinX\Group4\Command.lnk" >nul 2>nul
-if not exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" (
+if NOT exist "%LocalAppData%\Microsoft\Windows\WinX\Group4\Powershell.lnk" (
 rd /s /q "%LocalAppData%\Microsoft\Windows\WinX\Group4\" >nul 2>nul
 )
 taskkill /F /IM explorer.exe >nul 2>nul
@@ -2910,7 +2910,7 @@ if "%op%" equ "2" goto win11notepad2
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1110
@@ -3037,7 +3037,7 @@ if "%op%" equ "1" goto win11hevc1
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1111
@@ -3122,7 +3122,7 @@ cls
 %nhcolor% 03 "  [3]  | %green%Download WebView2 (required to use Weather on Taskbar)"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "         %red%NOTE: To use Explorer Patcher > Right Click on Taskbar >  Properties > for Options.
-%nhcolor% 03 "         %red%NOTE: Please re-install again if explorer not showing.
+%nhcolor% 03 "         %red%NOTE: Please re-install again if explorer NOT showing.
 %nhcolor% 03 "         %red%NOTE: Weather on taskbar is now support on latest version. (WebView2 is required)
 %nhcolor% 03 "         %red%NOTE: Only for Superlite/Compact, If using %yellow%"Superlite SE" %red%you dont need this patcher.
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -3136,7 +3136,7 @@ if "%op%" equ "3" goto widgetswin1103
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1112
@@ -3160,7 +3160,7 @@ cd %GHOST_DIR%\TileIconifier"
 cls
 if NOT EXIST "TileIconify.backup" (
 cls
-echo Tiles backup not found.
+echo Tiles backup NOT found.
 timeout /t 5 >nul
 goto begin
 )
@@ -3472,7 +3472,7 @@ if "%op%" equ "2" goto biomet2
 if "%op%" equ "0" goto forwindows11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1113
@@ -3549,7 +3549,7 @@ if "%op%" equ "10" goto editionreset
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto edition
@@ -3747,7 +3747,7 @@ if "%op%" equ "1" goto winre1
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto winre
@@ -3921,7 +3921,7 @@ if "%op%" equ "7" goto netframework7
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto netframework
@@ -4051,7 +4051,7 @@ if "%op%" equ "2" goto onedrive2
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto onedrive0
@@ -4088,7 +4088,7 @@ if "%op%" equ "1" goto drivereasy1
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto drivereasy
@@ -4183,7 +4183,7 @@ cls
 %nhcolor% 07 "  Explorer UI Ribbon 
 %nhcolor% 07 "  %green%[10] Enable  : Explorer UI Ribbon                       
 %nhcolor% 07 "  %green%[11] Disable : Explorer UI Ribbon        
-%nhcolor% 07 "  %red%NOTE: Do not disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)        
+%nhcolor% 07 "  %red%NOTE: Do NOT disable Ribbon if your software Use Ribbon ex. (Office/Paint/etc etc)        
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Transparency Taskbar 
 %nhcolor% 07 "  %green%[12] Enable  : Transparency Taskbar                     
@@ -4224,7 +4224,7 @@ if "%op%" equ "18" goto nilesoft
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto ghst
@@ -4255,7 +4255,7 @@ if "%op%" equ "3" goto nile03
 if "%op%" equ "0" goto ghst
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto ghst
@@ -4300,7 +4300,7 @@ start explorer.exe >nul
 cls
 goto nilesoft
 )
-echo  Nilesoft Shell not installed.
+echo  Nilesoft Shell NOT installed.
 timeout /t 3 >nul
 cls
 goto nilesoft
@@ -4330,7 +4330,7 @@ start explorer.exe >nul
 cls
 goto nilesoft
 )
-echo  Nilesoft Shell not installed.
+echo  Nilesoft Shell NOT installed.
 timeout /t 3 >nul
 cls
 goto nilesoft
@@ -4370,10 +4370,10 @@ cls
 %nhcolor% 07 "  %yellow%[98] %cyan%> %green%Re-install Themes Patch"
 %nhcolor% 07 "  %yellow%[99] %cyan%> %green%install Themes Patch for Windows 11"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red% NOTE: If Themes is not working after Windows update please Re-install Themes Patch > Option 98.
+%nhcolor% 07 "  %red% NOTE: If Themes is NOT working after Windows update please Re-install Themes Patch > Option 98.
 %nhcolor% 07 "  %red% NOTE: For Windows 11 Please Install Themes Patch before use any Themes > Option 99.
-%nhcolor% 07 "  %red% NOTE: Some themes may not perfect in Windows 11.
-%nhcolor% 07 "  %red% NOTE: Do not Delete backup folder "UXThemePatcher"
+%nhcolor% 07 "  %red% NOTE: Some themes may NOT perfect in Windows 11.
+%nhcolor% 07 "  %red% NOTE: Do NOT Delete backup folder "UXThemePatcher"
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %yellow%[0] Back to menu
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
@@ -4399,13 +4399,13 @@ if "%op%" equ "99" goto theme99
 if "%op%" equ "0" goto ghst
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto ghst
 :theme99
 cls
-if not exist "%PROGRAMFILES%\7-Zip\7zG.exe" (
+if NOT exist "%PROGRAMFILES%\7-Zip\7zG.exe" (
 cd "%GHOST_DATA%"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://www.7-zip.org/a/7z2103-x64.exe" -o"7z2103-x64.exe"
 7z2103-x64.exe /S
@@ -4446,7 +4446,7 @@ goto ghst
 cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2004" goto :checkbuildstartmenu
-echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
+echo %green%Nope...NOT for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 cd "%GHOST_DATA%"
@@ -4464,7 +4464,7 @@ cls
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
 if "%var%" equ "2004" goto :yesiwantnewicons
 ::if "%var%" equ "2004" goto :checkbuildstartmenu
-echo %green%Nope...not for this version. && timeout /t 4 >nul && goto ghst
+echo %green%Nope...NOT for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 FOR /f "tokens=2*" %%a in ('Reg Query "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v UBR') do set "UBRHEX=%%~b"
@@ -4599,9 +4599,9 @@ color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Ly4D6t" -o"GhostSpectre_Wallpaper.zip"
 %WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://tinyurl.com/3f3hbp3n" -O "GhostSpectre_Wallpaper.zip" -t 1
 timeout /t 2 >nul
-if not exist "GhostSpectre_Wallpaper.zip" (
+if NOT exist "GhostSpectre_Wallpaper.zip" (
 cls
-echo file not found
+echo file NOT found
 timeout /t 4 >nul
 goto ghst
 )
@@ -4864,7 +4864,7 @@ if "%op%" equ "z" goto diskz
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto opdisk
@@ -5142,7 +5142,7 @@ if "%op%" equ "3" goto edg3
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto edgeop
@@ -5265,7 +5265,7 @@ if "%op%" equ "1" goto mira1
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op19
@@ -5279,11 +5279,11 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 	if "%var%" equ "2004" cls && echo %red%Miracast Apps no longer available on Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 	if "%var%" equ "1909" goto :miracastyes
 	if "%var%" equ "1903" goto :miracastyes
-	if "%var%" equ "1809" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%" equ "1803" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%" equ "1709" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%" equ "1703" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
-	if "%var%" equ "1607" cls && echo %red%Miracast not supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1809" cls && echo %red%Miracast NOT supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1803" cls && echo %red%Miracast NOT supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1709" cls && echo %red%Miracast NOT supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1703" cls && echo %red%Miracast NOT supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
+	if "%var%" equ "1607" cls && echo %red%Miracast NOT supported Windows 10 Version %DFMT7% && timeout /t 5 >nul && cls && goto Begin
 :miracastyes
 cls
 cd "%GHOST_DATA%"
@@ -5379,7 +5379,7 @@ if "%op%" equ "3" goto Touchkey1
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op20
@@ -5601,7 +5601,7 @@ if "%op%" equ "2" goto co2
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op9
@@ -5679,7 +5679,7 @@ if "%op%" equ "3" goto pauseupdate2
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op8
@@ -5728,21 +5728,21 @@ goto op8
 :up1
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 3 >nul
 cls
 goto begin
 :up2
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 3 >nul
 cls
 goto begin
 :up3
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 3 >nul
 cls
 goto begin
@@ -5763,7 +5763,7 @@ if "%op%" equ "2" goto op78
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op7
@@ -5817,7 +5817,7 @@ if "%op%" equ "12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputSe
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto windows10op
@@ -6131,7 +6131,7 @@ if "%op%" equ "12" REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\TabletInputSe
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto actionandnoti
@@ -6278,7 +6278,7 @@ if "%op%" equ "1" goto op33
 if "%op%" equ "0" goto op_menu
 cls
 color 0D
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op3
@@ -6360,7 +6360,7 @@ if "%op%" equ "2" goto logs2
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op2
@@ -6451,7 +6451,7 @@ if "%op%" equ "4" goto ac4
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op4
@@ -6638,7 +6638,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]
 echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
@@ -6655,14 +6655,14 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
@@ -6687,7 +6687,7 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]
 echo  %white%=====================================================================================================================
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform" /v "KeyManagementServiceName" /t REG_SZ /d "" /f >nul
 timeout /t 1 >nul
@@ -6704,14 +6704,14 @@ cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 1 >nul
 cls
 echo  %white%=====================================================================================================================
 echo   %red%Auto Reset for Windows 10%white% : %yellow%%EditionID%
 echo  %white%=====================================================================================================================
-echo   [LOADING]   %green%[ xxxxxx Windows is not Activated xxxxxx ]  
+echo   [LOADING]   %green%[ xxxxxx Windows is NOT Activated xxxxxx ]  
 echo  %white%=====================================================================================================================
 timeout /t 5 >nul
 cls
@@ -6754,7 +6754,7 @@ if "%op%" equ "7" goto m7
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op6
@@ -6825,7 +6825,7 @@ cls
 %nhcolor% 07 "  %green%[1] | Disable : hiberfil.sys                              
 %nhcolor% 07 "  %green%[2] | Enable  : hiberfil.sys (Full Hibernate will uses 13gb space on your drive)      
 %nhcolor% 07 "  %green%[5] | Enable  : Enable fastboot without hibernation
-::%nhcolor% 07 "  %green%[5] | %yellow%Go here if still not enabled        
+::%nhcolor% 07 "  %green%[5] | %yellow%Go here if still NOT enabled        
 %nhcolor% 07 "        %red%NOTE: Windows 10/11 Superlite/SE Hibernation/Fastboot disable by default.                     
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  Sysmain / Superfetch                                   
@@ -6849,7 +6849,7 @@ if "%op%" equ "5" goto opxdx5
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op5
@@ -6921,7 +6921,7 @@ cls
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 07 "  %red%NOTE: Close or Minimize GHOST TOOLBOX after finished Installed.                                                
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 07 "  %red%NOTE: FPS Counter is not supported when running as an administrator account, pls use on non-Administrator account.
+%nhcolor% 07 "  %red%NOTE: FPS Counter is NOT supported when running as an administrator account, pls use on non-Administrator account.
 %nhcolor% 07 "  %red%NOTE: If Xbox Game Bar cannot running on Windows 11 Superlite Please use on Non-Administrator Account.
 %nhcolor% 07 " ====================================================================================================================="
 timeout /t 2 >nul
@@ -6932,7 +6932,7 @@ if "%op%" equ "3" goto gamebar3
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op11
@@ -7180,7 +7180,7 @@ if "%op%" equ "3" goto xpass3
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto xpass
@@ -7227,7 +7227,7 @@ if "%op%" equ "1" goto zunemusic2020
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto zunemusic
@@ -7906,7 +7906,7 @@ if "%op%" equ "2" goto yourphone2
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto yourphone
@@ -8724,7 +8724,7 @@ if "%op%" equ "2" goto pot2
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op15
@@ -8784,7 +8784,7 @@ if "%op%" equ "5" goto edgecb5
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op12
@@ -8856,7 +8856,7 @@ if "%op%" equ "1" goto moz1
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op13
@@ -8946,7 +8946,7 @@ for /f "tokens=3" %%i in ('wmic os get caption') do set VERSION2=%%i
 for /f "tokens=4" %%i in ('wmic os get caption') do set VERSION3=%%i
 ::for /f "tokens=2" %%i in ('wmic os get caption') do set OS="%bg_lblue%%lblack% %%i "
 for /f "tokens=2" %%i in ('wmic os get caption') do set OSX="%%i "
-if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if NOT exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
 if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%green%ENABLE"
 
 if exist "%_7ZA_DLL%" (
@@ -8981,7 +8981,7 @@ if "%op%" equ "1" goto gog1X
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op14
@@ -9052,7 +9052,7 @@ if "%op%" equ "2" goto 7zipx86
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto 7zip
@@ -9107,7 +9107,7 @@ if "%op%" equ "2" goto brave2
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op18
@@ -9162,7 +9162,7 @@ if "%op%" equ "2" goto vi2
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op16
@@ -9339,7 +9339,7 @@ if "%op%" equ "2" goto dxoffline
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto op17
@@ -9911,7 +9911,7 @@ goto :ascserver2
 )
 :installasc
 cls
-echo Installing in progress... please wait... do not clicks or moving your mouse.
+echo Installing in progress... please wait... do NOT clicks or moving your mouse.
 taskkill /F /IM explorer.exe >nul 2>nul
 %_7ZA_EXE% x Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip -aoa -pASC -o"%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul
 cd "%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE"
@@ -11258,7 +11258,7 @@ goto usersrequest
 :iconspacks
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto iconspack1st
-if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this. && timeout /t 5 >nul && goto ghst
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is NOT supported for this. && timeout /t 5 >nul && goto ghst
 cls
 :iconspack1st
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ReleaseId') do set "var=%%b"
@@ -11266,7 +11266,7 @@ if "%var%" equ "1909" goto :iconsmenu
 if "%var%" equ "2004" goto :iconsmenu
 if "%var%" equ "2009" goto :iconsmenu
 cls
-echo %green%Nope...not for this version. Available Only For Version 1909/2004/2009/21H1 or Higher && timeout /t 4 >nul && goto ghst
+echo %green%Nope...NOT for this version. Available Only For Version 1909/2004/2009/21H1 or Higher && timeout /t 4 >nul && goto ghst
 :iconsmenu
 cls
 %nhcolor% 07 " ====================================================================================================================="
@@ -11290,7 +11290,7 @@ if "%op%" equ "5" goto icons005
 if "%op%" equ "0" goto ghst
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto ghst
@@ -11342,7 +11342,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11388,7 +11388,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11434,7 +11434,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11505,7 +11505,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11574,7 +11574,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11651,7 +11651,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -11722,7 +11722,7 @@ goto :ErrorMD5Icons
 )
 timeout /t 3 >nul
 cls
-echo %white% Installing Icons Packs...please wait... do not clicks or moving your mouse.
+echo %white% Installing Icons Packs...please wait... do NOT clicks or moving your mouse.
 timeout /t 6 >nul
 taskkill /F /IM explorer.exe >nul 2>nul
 timeout /t 3 >nul
@@ -13119,7 +13119,7 @@ FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windo
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "DisplayVersion"') do set "CODENAME=%%B"
 FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v "EditionID"') do set "EditionID=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_USERS\.DEFAULT\Control Panel\International\User Profile" /v "Languages"') do set "DFMT8=%%B"
-if not exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
+if NOT exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
 if exist "%Windir%\System32\hashsum.bat" set "HASHMD5=%yellow%ENABLE"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\GhostSpectre" /v "Edition"') do set "spectremod=%%B"
 ::FOR /F "skip=2 tokens=2,*" %%A in ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\.NETFramework" /v "Edition"') do set "spectremod=%%B"
@@ -14963,7 +14963,7 @@ if "%op%" equ "2" goto YTDLPvideoWO
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto YoutubeCONS
@@ -15381,12 +15381,12 @@ cd "%GHOST_DIR%"
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -15453,7 +15453,7 @@ if "%op%" equ "18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto 03A
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :03ANDROIDX
@@ -15677,8 +15677,8 @@ goto 03ANDROIDX
 :ADB05X
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15686,9 +15686,9 @@ explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\WSA.lnk"
 goto 03ANDROIDX
 
 :ADB06X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15705,9 +15705,9 @@ echo %red%----------------------------
 goto ADB06X
 
 :ADB07X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15720,9 +15720,9 @@ goto 03ANDROIDX
 
 
 :ADB08X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15735,9 +15735,9 @@ goto 03ANDROIDX
 
 
 :ADB09X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15756,9 +15756,9 @@ timeout /t 1 >nul
 goto 03ANDROIDX
 
 :ADB011X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15768,9 +15768,9 @@ cls
 goto 03ANDROIDX
 
 :ADB012X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15794,9 +15794,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X
 
 :ADB013X
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROIDX
 )
@@ -15820,7 +15820,7 @@ goto 03ANDROIDX
 
 :ADB014X
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -15838,7 +15838,7 @@ goto 03ANDROIDX
 
 :ADB015X
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -16171,7 +16171,7 @@ exit
 :error_wget
 set "header=GHOST ERROR MSG"
 ::set "message1=Your installed build: %buildOS%"
-::set "message2=wget.exe not found... by default they will be installed in %GHOST_DATA%"
+::set "message2=wget.exe NOT found... by default they will be installed in %GHOST_DATA%"
 ::echo wscript.echo msgbox(WScript.Arguments(0) ^& vbCr ^& WScript.Arguments(1),0 + vbinformation,WScript.Arguments(2))>"%GHOST_TEMP%\input.vbs"
 ::cscript //nologo "%GHOST_TEMP%\input.vbs" "%message1%" "%message2%" "%header%"
 echo Dim shl > %GHOST_TEMP%\test.vbs
@@ -16180,7 +16180,7 @@ echo Set Shell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
 echo Dim strMsg,inp01,strTitle,strFlag >> %GHOST_TEMP%\test.vbs
 echo Dim WshShell, i >> %GHOST_TEMP%\test.vbs
 echo Set WshShell = CreateObject("WScript.Shell") >> %GHOST_TEMP%\test.vbs
-echo        MsgBox "wget.exe not found... by default will be installed in %GHOST_DATA%.",64,strTitle >> %GHOST_TEMP%\test.vbs
+echo        MsgBox "wget.exe NOT found... by default will be installed in %GHOST_DATA%.",64,strTitle >> %GHOST_TEMP%\test.vbs
 start %GHOST_TEMP%\test.vbs
 goto EOF
 :EOF
@@ -16568,7 +16568,7 @@ if "%op%" equ "1" goto latestupdate
 if "%op%" equ "0" goto op_menu
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto standaloneupdate
@@ -16618,7 +16618,7 @@ if "%firstindex%" equ "4" goto sound
 if "%firstindex%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto soundFX
@@ -16711,7 +16711,7 @@ cls
 %nhcolor% 08 " [5] | Tutorial How to Install Drivers (Dolby Atmos 3 / Nahimic 3)                                                      "
 %nhcolor% 08 " [0] | Back to menu                                                                                                     "
 %nhcolor% 41 "                  %white%NOTE: To install Driver mod make sure your device also supports HD Audio Device.                      "
-%nhcolor% 41 "                  %white%NOTE: Do not update the Apps UWP if you want to keep using this sound modded.                         "
+%nhcolor% 41 "                  %white%NOTE: Do NOT update the Apps UWP if you want to keep using this sound modded.                         "
 %nhcolor% 41 "                  %white%NOTE: Only for Windows 10.                                                                            "
 %nhcolor% 41 "             %white%(If you want to keep using This modded please Disable > Windows Update > In Services)                      "
 set /p firstindex=" %red%Type option : "
@@ -16723,7 +16723,7 @@ if "%firstindex%" equ "5" goto sound5
 if "%firstindex%" equ "0" goto soundFX
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto sound
@@ -16734,7 +16734,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto sb720
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto sb720error
 cls
 :sb720error
-%nhcolor% 08 " Sorry your x86 device is not supported"
+%nhcolor% 08 " Sorry your x86 device is NOT supported"
 cls
 goto sound
 :sb720
@@ -17057,7 +17057,7 @@ if "%firstindex%" equ "3" goto upS03
 if "%firstindex%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto gamingmode
@@ -17084,7 +17084,7 @@ if "%firstindex%" equ "3" start https://www.youtube.com/watch?v=cWSi6W3Jt3g && g
 if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto upS01
@@ -17137,7 +17137,7 @@ if "%firstindex%" equ "3" goto osd003
 if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto upS02
@@ -17216,7 +17216,7 @@ if "%firstindex%" equ "14" goto gamingmode14
 if "%firstindex%" equ "0" goto gamingmode
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto upS03
@@ -17226,12 +17226,12 @@ cd "%GHOST_DATA%"                                                               
 %nhcolor% 03 " %white%HPET (High Precision Event Timer)                                        "
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " [1]  | %white%HPET Disable                                                  
-%nhcolor% 03 " [2]  | %white%HPET Enable %red%(not recommended for AMD Cards)
+%nhcolor% 03 " [2]  | %white%HPET Enable %red%(NOT recommended for AMD Cards)
 %nhcolor% 03 " [3]  | %white%Set to Default %yellow%(Windows 10)
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 " %white%HPET (High Precision Event Timer) / DynamicTick / Tscsync - (V2)
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
-%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %red%(not recommended for AMD Cards)        
+%nhcolor% 03 " [4]  | %white%HPET: Enable  / Dynamictick: Yes / Tscsync: Enhanced %red%(NOT recommended for AMD Cards)        
 %nhcolor% 03 " [5]  | %white%HPET: Disable / Dynamictick: Yes / Tscsync: Enhanced                
 %nhcolor% 03 " [6]  | %white%Set to Default %yellow%(Windows 10)       
 %nhcolor% 03 " %white%----------------------------------------------------------------------------------------------------------------------"
@@ -17247,7 +17247,7 @@ if "%firstindex%" equ "6" goto gamingmode6
 if "%firstindex%" equ "0" goto upS03
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto gamingmodehpet                                                        
@@ -19944,11 +19944,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto nvx64
-if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is not supported for this Drivers. && timeout /t 5 >nul && goto usersrequest
+if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo Nope Your Windows 32bit is NOT supported for this Drivers. && timeout /t 5 >nul && goto usersrequest
 :nvx64
 REG QUERY "HKEY_CURRENT_USER\SOFTWARE\NVIDIA Corporation" >nul 2>&1
 if %ERRORLEVEL% EQU 0 goto nvdown
-if %ERRORLEVEL% EQU 1 echo %white%Sorry.. you are not using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest
+if %ERRORLEVEL% EQU 1 echo %white%Sorry.. you are NOT using Nvidia Video Card. && timeout /t 8 >nul && goto usersrequest
 :nvdown
 cls
 ::echo %white%If you cant download the files please using GOOGLE DNS or CLOUDFLARE DNS, or using any VPN/Proxy.%white%
@@ -20092,7 +20092,7 @@ if "%op%" equ "99" goto WSAToolBack
 if "%op%" equ "0" goto opwin11
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROID
@@ -20184,7 +20184,7 @@ if "%op%" equ "2" goto VMP02
 if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :01ANDROID
@@ -20224,7 +20224,7 @@ if "%op%" equ "2" goto SUB002
 if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :02ANDROID
@@ -20501,7 +20501,7 @@ Reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidADB" /f >nul 2>nu
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
@@ -20552,7 +20552,7 @@ if "%op%" equ "13" goto ADB13
 if "%op%" equ "0" goto ANDROID0001
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :03ANDROID
@@ -20576,9 +20576,9 @@ echo Android Debug Bridge Completely remove.
 timeout /t 3 >nul
 goto 03ANDROID
 :ADB04
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20598,9 +20598,9 @@ goto ADB04
 explorer.exe "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\WSA.lnk"
 goto 03ANDROID
 :ADB05
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20611,9 +20611,9 @@ timeout /t 2 >nul
 pause
 goto 03ANDROID
 :ADB06
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20624,9 +20624,9 @@ timeout /t 2 >nul
 pause
 goto 03ANDROID
 :ADB07
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20643,9 +20643,9 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 1 >nul
 goto 03ANDROID
 :ADB09
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20654,9 +20654,9 @@ adb reboot
 cls
 goto 03ANDROID
 :ADB10
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20679,9 +20679,9 @@ timeout /t 2 >nul
 reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nul
 goto ADB10
 :ADB11
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
@@ -20703,13 +20703,13 @@ goto 03ANDROID
 )
 goto 03ANDROID
 :ADB12
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if not exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if NOT exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -20754,7 +20754,7 @@ timeout /t 2 >nul
 cd "%GHOST_DATA%"
 %_7ZA_EXE% x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
 cls
-echo Please wait..connecting to Subsystem for Android... do not close Play Store.
+echo Please wait..connecting to Subsystem for Android... do NOT close Play Store.
 START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
 timeout /t 6 >nul
 cd "%GHOST_DIR%\Android\platform-tools" >nul 2>nul
@@ -20769,13 +20769,13 @@ echo Your devices is root now.
 timeout /t 3 >nul
 goto 03ANDROID
 :ADB13
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto 03ANDROID
 )
-if not exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
+if NOT exist "%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools\kernel" (
 cls
 echo Seems Android Kernel is missing, please re installs Subsystem for Android.
 timeout /t 3 >nul
@@ -21394,7 +21394,7 @@ if "%op%" equ "2" goto nvcpp
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto nvidiotcp
@@ -21700,7 +21700,7 @@ echo "%bg_lblue%%lblack% 04/16/2023 %bg_red%%lblack% 1.9.0.71 %bg_black%%lblack%
 echo "%bg_lblue%%lblack% 04/19/2023 %bg_red%%lblack% 1.9.0.72 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V70                                         "
 echo "%bg_lblue%%lblack% 05/08/2023 %bg_red%%lblack% 1.9.0.73 %bg_black%%lblack% Microsoft Store Windows 11 + Xbox Apps + License (UWP)                                     "
 echo "%bg_lblue%%lblack% 05/08/2023 %bg_red%%lblack% 1.9.0.73 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V72                                         "
-echo "%bg_lblue%%lblack% 05/09/2023 %bg_red%%lblack% 1.9.0.74 %bg_black%%lblack% Fixed YoutubeDLP not saved in location Video/Audio                                         "
+echo "%bg_lblue%%lblack% 05/09/2023 %bg_red%%lblack% 1.9.0.74 %bg_black%%lblack% Fixed YoutubeDLP NOT saved in location Video/Audio                                         "
 echo "%bg_lblue%%lblack% 05/14/2023 %bg_red%%lblack% 1.9.0.75 %bg_black%%lblack% Add AFF Optimus Realtek/Generic (Sound Mod)                                                "
 echo "%bg_lblue%%lblack% 05/14/2023 %bg_red%%lblack% 1.9.0.75 %bg_black%%lblack% Add FX Sound (Sound Mod)                                                                   "
 echo "%bg_lblue%%lblack% 05/17/2023 %bg_red%%lblack% 1.9.0.76 %bg_black%%lblack% Update Visual C++ Redistributables AIO x86 x64 V73                                         "
@@ -21794,12 +21794,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -21861,7 +21861,7 @@ if "%op%" equ "18" start https://www.youtube.com/watch?v=6m0nxQcTnzk && goto AND
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2008
@@ -22094,8 +22094,8 @@ goto ANDROIDX2008
 :ADB05X2008
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22103,9 +22103,9 @@ explorer.exe "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\WSA.lnk"
 goto ANDROIDX2008
 
 :ADB06X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22122,9 +22122,9 @@ echo %red%----------------------------
 goto ADB06X2008
 
 :ADB07X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22137,9 +22137,9 @@ goto ANDROIDX2008
 
 
 :ADB08X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22152,9 +22152,9 @@ goto ANDROIDX2008
 
 
 :ADB09X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22173,9 +22173,9 @@ timeout /t 1 >nul
 goto ANDROIDX2008
 
 :ADB011X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22185,9 +22185,9 @@ cls
 goto ANDROIDX2008
 
 :ADB012X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22211,9 +22211,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2008
 
 :ADB013X2008
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2008
 )
@@ -22237,7 +22237,7 @@ goto ANDROIDX2008
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22255,7 +22255,7 @@ goto ANDROIDX2008
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22296,12 +22296,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -22365,7 +22365,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2211
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2211
@@ -22610,8 +22610,8 @@ goto ANDROIDX2211
 :ADB05X2211
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\WSA.lnk" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22623,9 +22623,9 @@ explorer.exe wsa.cmd
 goto ANDROIDX2211
 
 :ADB06X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22642,9 +22642,9 @@ echo %red%----------------------------
 goto ADB06X2211
 
 :ADB07X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22657,9 +22657,9 @@ goto ANDROIDX2211
 
 
 :ADB08X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22672,9 +22672,9 @@ goto ANDROIDX2211
 
 
 :ADB09X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22693,9 +22693,9 @@ timeout /t 1 >nul
 goto ANDROIDX2211
 
 :ADB011X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22705,9 +22705,9 @@ cls
 goto ANDROIDX2211
 
 :ADB012X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22731,9 +22731,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2211
 
 :ADB013X2211
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2211
 )
@@ -22757,7 +22757,7 @@ goto ANDROIDX2211
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22775,7 +22775,7 @@ goto ANDROIDX2211
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -22833,7 +22833,7 @@ if "%op%" equ "2" goto ANDROIDX2301ROOT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :AndroidWSA2301
@@ -22845,12 +22845,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -22912,7 +22912,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301NON
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2301NON
@@ -23159,8 +23159,8 @@ goto ANDROIDX2301NON
 :ADB05X2301N
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\nonroot" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23174,9 +23174,9 @@ explorer.exe wsa.cmd
 goto ANDROIDX2301NON
 
 :ADB06X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23193,9 +23193,9 @@ echo %red%----------------------------
 goto ADB06X2301N
 
 :ADB07X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23208,9 +23208,9 @@ goto ANDROIDX2301NON
 
 
 :ADB08X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23223,9 +23223,9 @@ goto ANDROIDX2301NON
 
 
 :ADB09X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23244,9 +23244,9 @@ timeout /t 1 >nul
 goto ANDROIDX2301NON
 
 :ADB011X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23256,9 +23256,9 @@ cls
 goto ANDROIDX2301NON
 
 :ADB012X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23282,9 +23282,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2301N
 
 :ADB013X2301N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301NON
 )
@@ -23308,7 +23308,7 @@ goto ANDROIDX2301NON
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23326,7 +23326,7 @@ goto ANDROIDX2301NON
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23366,12 +23366,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -23433,7 +23433,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2301ROOT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2301ROOT
@@ -23680,8 +23680,8 @@ goto ANDROIDX2301ROOT
 :ADB05X2301R
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\root" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23693,9 +23693,9 @@ explorer.exe wsa.cmd
 goto ANDROIDX2301ROOT
 
 :ADB06X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23712,9 +23712,9 @@ echo %red%----------------------------
 goto ADB06X2301R
 
 :ADB07X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23727,9 +23727,9 @@ goto ANDROIDX2301ROOT
 
 
 :ADB08X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23742,9 +23742,9 @@ goto ANDROIDX2301ROOT
 
 
 :ADB09X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23763,9 +23763,9 @@ timeout /t 1 >nul
 goto ANDROIDX2301ROOT
 
 :ADB011X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23775,9 +23775,9 @@ cls
 goto ANDROIDX2301ROOT
 
 :ADB012X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23801,9 +23801,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2301R
 
 :ADB013X2301R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2301ROOT
 )
@@ -23827,7 +23827,7 @@ goto ANDROIDX2301ROOT
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23845,7 +23845,7 @@ goto ANDROIDX2301ROOT
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -23891,7 +23891,7 @@ goto ANDROIDX2304ROOT
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [1]  | %green%Non-Root Version "
 %nhcolor% 03 "  [2]  | %green%Root Version "
-%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if NOT apps cannot be installed."
 %nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [3]  | %green%Get WSA Password here "
@@ -23906,7 +23906,7 @@ if "%op%" equ "3" goto startAndroidWSA2304YT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :AndroidWSA2304
@@ -23923,12 +23923,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -23991,7 +23991,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304NON
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2304NON
@@ -24240,8 +24240,8 @@ goto ANDROIDX2304NON
 :ADB05X2304N
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\nonroot" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24252,9 +24252,9 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304NON
 
 :ADB06X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24271,9 +24271,9 @@ echo %red%----------------------------
 goto ADB06X2304N
 
 :ADB07X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24286,9 +24286,9 @@ goto ANDROIDX2304NON
 
 
 :ADB08X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24301,9 +24301,9 @@ goto ANDROIDX2304NON
 
 
 :ADB09X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24322,9 +24322,9 @@ timeout /t 1 >nul
 goto ANDROIDX2304NON
 
 :ADB011X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24334,9 +24334,9 @@ cls
 goto ANDROIDX2304NON
 
 :ADB012X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24360,9 +24360,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2304N
 
 :ADB013X2304N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304NON
 )
@@ -24386,7 +24386,7 @@ goto ANDROIDX2304NON
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24404,7 +24404,7 @@ goto ANDROIDX2304NON
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24444,12 +24444,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -24512,7 +24512,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2304ROOT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2304ROOT
@@ -24761,8 +24761,8 @@ goto ANDROIDX2304ROOT
 :ADB05X2304R
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\root" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24772,9 +24772,9 @@ explorer.exe wsa.cmd
 goto ANDROIDX2304ROOT
 
 :ADB06X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24791,9 +24791,9 @@ echo %red%----------------------------
 goto ADB06X2304R
 
 :ADB07X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24806,9 +24806,9 @@ goto ANDROIDX2304ROOT
 
 
 :ADB08X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24821,9 +24821,9 @@ goto ANDROIDX2304ROOT
 
 
 :ADB09X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24842,9 +24842,9 @@ timeout /t 1 >nul
 goto ANDROIDX2304ROOT
 
 :ADB011X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24854,9 +24854,9 @@ cls
 goto ANDROIDX2304ROOT
 
 :ADB012X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24880,9 +24880,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2304R
 
 :ADB013X2304R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2304ROOT
 )
@@ -24906,7 +24906,7 @@ goto ANDROIDX2304ROOT
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24924,7 +24924,7 @@ goto ANDROIDX2304ROOT
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -24970,7 +24970,7 @@ goto ANDROIDX2305ROOT
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [1]  | %green%Non-Root Version "
 %nhcolor% 03 "  [2]  | %green%Root Version "
-::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if NOT apps cannot be installed."
 ::%nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [3]  | %green%Get WSA Password here "
@@ -24985,7 +24985,7 @@ if "%op%" equ "3" goto startAndroidWSA2305YT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :AndroidWSA2305
@@ -25002,12 +25002,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -25071,7 +25071,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305NON
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2305NON
@@ -25330,8 +25330,8 @@ goto ANDROIDX2305NON
 :ADB05X2305N
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\nonroot" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25347,9 +25347,9 @@ goto ANDROIDX2305NON
 goto ANDROIDX2305NON
 
 :ADB06X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25366,9 +25366,9 @@ echo %red%----------------------------
 goto ADB06X2305N
 
 :ADB07X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25381,9 +25381,9 @@ goto ANDROIDX2305NON
 
 
 :ADB08X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25396,9 +25396,9 @@ goto ANDROIDX2305NON
 
 
 :ADB09X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25417,9 +25417,9 @@ timeout /t 1 >nul
 goto ANDROIDX2305NON
 
 :ADB011X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25429,9 +25429,9 @@ cls
 goto ANDROIDX2305NON
 
 :ADB012X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25455,9 +25455,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2305N
 
 :ADB013X2305N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
@@ -25481,7 +25481,7 @@ goto ANDROIDX2305NON
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25499,7 +25499,7 @@ goto ANDROIDX2305NON
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -25539,12 +25539,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -25607,7 +25607,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2305ROOT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2305ROOT
@@ -25866,8 +25866,8 @@ goto ANDROIDX2305ROOT
 :ADB05X2305R
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\root" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25883,9 +25883,9 @@ goto ANDROIDX2305ROOT
 goto ANDROIDX2305ROOT
 
 :ADB06X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25902,9 +25902,9 @@ echo %red%----------------------------
 goto ADB06X2305R
 
 :ADB07X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25917,9 +25917,9 @@ goto ANDROIDX2305ROOT
 
 
 :ADB08X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25932,9 +25932,9 @@ goto ANDROIDX2305ROOT
 
 
 :ADB09X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25953,9 +25953,9 @@ timeout /t 1 >nul
 goto ANDROIDX2305ROOT
 
 :ADB011X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25965,9 +25965,9 @@ cls
 goto ANDROIDX2305ROOT
 
 :ADB012X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -25991,9 +25991,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2305R
 
 :ADB013X2305R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
@@ -26017,7 +26017,7 @@ goto ANDROIDX2305ROOT
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26035,7 +26035,7 @@ goto ANDROIDX2305ROOT
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26085,7 +26085,7 @@ goto ANDROIDX2309ROOT
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [1]  | %green%Non-Root Version "
 %nhcolor% 03 "  [2]  | %green%Root Version "
-::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if not apps cannot be installed."
+::%nhcolor% 03 " %red%NOTE: Please Turn Off Block installation of malicious apps in WSA before start, if NOT apps cannot be installed."
 ::%nhcolor% 03 " %red%      and also just ignore annoying flagged notification on latest version WSA."
 %nhcolor% 07 " ---------------------------------------------------------------------------------------------------------------------"
 %nhcolor% 03 "  [3]  | %green%Get WSA Password here "
@@ -26100,7 +26100,7 @@ if "%op%" equ "3" goto startAndroidWSA2309YT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :AndroidWSA2309
@@ -26117,12 +26117,12 @@ cd "%GHOST_DIR%"
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -26186,7 +26186,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309NON
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2309NON
@@ -26278,8 +26278,8 @@ goto ANDROIDX2309NON
 :ADB05X2309N
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26295,9 +26295,9 @@ goto ANDROIDX2309NON
 "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309NON
 :ADB06X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26314,9 +26314,9 @@ echo %red%----------------------------
 goto ADB06X2309N
 
 :ADB07X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26329,9 +26329,9 @@ goto ANDROIDX2309NON
 
 
 :ADB08X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26344,9 +26344,9 @@ goto ANDROIDX2309NON
 
 
 :ADB09X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26365,9 +26365,9 @@ timeout /t 1 >nul
 goto ANDROIDX2309NON
 
 :ADB011X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26377,9 +26377,9 @@ cls
 goto ANDROIDX2309NON
 
 :ADB012X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26403,9 +26403,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2309N
 
 :ADB013X2309N
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
@@ -26429,7 +26429,7 @@ goto ANDROIDX2309NON
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26447,7 +26447,7 @@ goto ANDROIDX2309NON
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26487,12 +26487,12 @@ del /q /f /s "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Run.bat" >nul
 color 0b
 cls
 %nhcolor% 07 " ====================================================================================================================="
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 set "ADBCX=Not Installed"
 ) else (
 set "ADBCX=Installed"
 )
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WsaSettings.exe" (
 set "WSACX=Not Installed"
 ) else (
 set "WSACX=Installed"
@@ -26555,7 +26555,7 @@ if "%op%" equ "18" start https://youtu.be/8X32xaEBhAA && goto ANDROIDX2309ROOT
 if "%op%" equ "0" goto ANDROID
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto :ANDROIDX2309ROOT
@@ -26654,8 +26654,8 @@ goto ANDROIDX2309ROOT
 :ADB05X2309R
 ::%PROGRAMDATA%\
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
-echo WSA is not installed, please install WSA to using this.
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root" (
+echo WSA is NOT installed, please install WSA to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26672,9 +26672,9 @@ goto ANDROIDX2309ROOT
 goto ANDROIDX2309ROOT
 
 :ADB06X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26691,9 +26691,9 @@ echo %red%----------------------------
 goto ADB06X2309R
 
 :ADB07X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26706,9 +26706,9 @@ goto ANDROIDX2309ROOT
 
 
 :ADB08X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26721,9 +26721,9 @@ goto ANDROIDX2309ROOT
 
 
 :ADB09X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26742,9 +26742,9 @@ timeout /t 1 >nul
 goto ANDROIDX2309ROOT
 
 :ADB011X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26754,9 +26754,9 @@ cls
 goto ANDROIDX2309ROOT
 
 :ADB012X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26780,9 +26780,9 @@ reg delete "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "AndroidAPK" /f >nul 2>nu
 goto ADB012X2309R
 
 :ADB013X2309R
-if not exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
+if NOT exist "%GHOST_DIR%\Android\platform-tools\adb.exe" (
 cls
-echo ADB is not installed, please install ADB to using this.
+echo ADB is NOT installed, please install ADB to using this.
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
@@ -26806,7 +26806,7 @@ goto ANDROIDX2309ROOT
 
 :ADB014X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26824,7 +26824,7 @@ goto ANDROIDX2309ROOT
 
 :ADB015X2008
 cls
-if not exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
+if NOT exist "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" (
 cls
 echo WSA kernel is missing.. please reinstall WSA again.
 timeout /t 2 >nul
@@ -26886,7 +26886,7 @@ if "%op%" equ "2" goto mstermi12
 if "%op%" equ "0" goto op10
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :usr079
@@ -27006,7 +27006,7 @@ if "%op%" equ "2" goto rmvoed2
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :rmovedge
@@ -28267,9 +28267,9 @@ echo  %white%Your Current OS Build %yellow%%buildOS% %white%/ Required OS Build 
 :skipV
 cls
 cd "%GHOST_DATA%"
-if not exist "%PROGRAMFILES(X86)%\Microsoft\Edge\Application\msedge.exe" (
+if NOT exist "%PROGRAMFILES(X86)%\Microsoft\Edge\Application\msedge.exe" (
 cls
-echo Microsoft Edge not found... Please install Microsoft Edge to use Copilot.
+echo Microsoft Edge NOT found... Please install Microsoft Edge to use Copilot.
 timeout /t 5 >nul
 goto begin
 )
@@ -28288,7 +28288,7 @@ if "%firstindex%" equ "2" goto COPILOT02
 if "%firstindex%" equ "0" goto begin
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto copilotprev1
@@ -28350,7 +28350,7 @@ timeout /t 2 >nul
 :Costart
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f >nul 2>nul
 Reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "1" /f >nul 2>nul
-:: if not found
+:: if NOT found
 reg query "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" 2>nul >nul /v "IsUserEligible" || (
 NSudoLG.exe -U:C -P:E -ShowWindowMode:Hide reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "1" /f >nul 2>nul
 )
@@ -28429,7 +28429,7 @@ if "%op%" equ "1" goto win10paintC1
 if "%op%" equ "0" goto op10
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :op10
@@ -28503,7 +28503,7 @@ if "%op%" equ "1" goto win10Calcu
 if "%op%" equ "0" goto op10
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :op10
@@ -28589,7 +28589,7 @@ if "%op%" equ "2" goto MSCAM2
 if "%op%" equ "0" goto begin
 cls
 color 0b
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 2 >nul
 cls
 goto :win1119
@@ -28690,7 +28690,7 @@ if "%firstindex%" equ "1" goto CoPilot01
 if "%firstindex%" equ "0" goto GhostMode
 cls
 color 07
-echo This function not available yet
+echo This function NOT available yet
 timeout /t 1 >nul
 cls
 goto GhostModeProc

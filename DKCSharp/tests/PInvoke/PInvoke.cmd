@@ -11,11 +11,11 @@ rem del /q /f "%~n0.exe" >nul 2>nul
 :: find csc.exe
 set "csc="
 for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "csc=%%#"
-if not exist "%csc%" (
+if NOT exist "%csc%" (
    echo no .net framework installed
    exit /b 10
 )
-if not exist "%~n0.exe" (
+if NOT exist "%~n0.exe" (
    call %csc% /nologo /warn:0 /out:"%~n0.exe" "%~dpsfnx0" || (
       exit /b %errorlevel%
    )

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# Replace = characters
 ::# Advantage: No dependency on the :strlen routine
 ::# Drawback: Max 256 = characters
-::# Drawback: Does not work on strings with LF or '!' characters
+::# Drawback: Does NOT work on strings with LF or '!' characters
 ::#
 :dk_replaceEqual
 %setlocal%
@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "$_=!%~1!." & set "$f=1" & set "$v=" & set "$r=%~2"
 ::	if /i "!$_:%$_%=%$_%!" equ "!$_!" exit /b 0										&::# No = sign in $_. Return now to save time
 	if defined $r if "!$r:~0,1!" neq "=" (set "$r=!%~2!") else set "$r=!$r:~1!" 	&::# $r=replacement value
-	set "$o=%~3" & if not defined $o set "$o=%~1"
+	set "$o=%~3" & if NOT defined $o set "$o=%~1"
 	for /L %%i in (0,1,256) do if defined $f (
 		for /F "delims==" %%a in ('set $_') do (
 			set "$a=%%a" & set "$b=!%%a!" 											&::# $a=$_variable name  $b=its value=all that followed the first =

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,7 +14,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
     :: create a list of all dk_functions and store them in _functionList_
     %dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    if not exist "%DKBRANCH_DIR%\.git" (goto:eof)    &:: only create functions list when we have a local repository
+    if NOT exist "%DKBRANCH_DIR%\.git" (goto:eof)    &:: only create functions list when we have a local repository
    
     %dk_call% dk_delete "%DKBATCH_FUNCTIONS_DIR_%_functionList_"
     for %%a in (%DKBATCH_FUNCTIONS_DIR_%dk_*.cmd) do (
@@ -22,7 +22,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         %dk_call% dk_fileAppend "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %%~na
     )
    
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_error "_functionList_ is missing")
+    if NOT exist "%DKBATCH_FUNCTIONS_DIR_%_functionList_" %dk_call% dk_error "_functionList_ is missing")
 %endfunction%
 
 

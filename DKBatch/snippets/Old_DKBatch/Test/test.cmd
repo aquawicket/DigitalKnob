@@ -38,7 +38,7 @@ set TEST_DKSLEEP=1
 
 
 ::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKVARIABLES goto :end
+if NOT defined TEST_DKVARIABLES goto :end
 	echo #################################
 	echo ##      TESTING Variables      ##
 	echo #################################
@@ -53,7 +53,7 @@ if not defined TEST_DKVARIABLES goto :end
 
 
 ::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKNESTING goto :end
+if NOT defined TEST_DKNESTING goto :end
 	echo #################################
 	echo ##      TESTING Nesting        ##
 	echo #################################
@@ -63,7 +63,7 @@ if not defined TEST_DKNESTING goto :end
 
 
 ::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKPRINT goto :end
+if NOT defined TEST_DKPRINT goto :end
 	echo #################################
 	echo ##      TESTING dkprint        ##
 	echo #################################
@@ -73,7 +73,7 @@ if not defined TEST_DKPRINT goto :end
 
 
 :::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKTEMPLATE goto :end
+if NOT defined TEST_DKTEMPLATE goto :end
 	echo ##################################
 	echo ##      TESTING TEMPLATE        ##
 	echo ##################################
@@ -84,7 +84,7 @@ if not defined TEST_DKTEMPLATE goto :end
 
 
 :::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKSENDDATA goto :end
+if NOT defined TEST_DKSENDDATA goto :end
 	echo ##################################
 	echo ##      TESTING SendData        ##
 	echo ##################################
@@ -94,7 +94,7 @@ if not defined TEST_DKSENDDATA goto :end
 
 
 ::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKGETDATA goto :end
+if NOT defined TEST_DKGETDATA goto :end
 	echo #################################
 	echo ##      TESTING GetData        ##
 	echo #################################
@@ -105,7 +105,7 @@ if not defined TEST_DKGETDATA goto :end
 
 
 :::::::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKSENDANDGETDATA goto :end
+if NOT defined TEST_DKSENDANDGETDATA goto :end
 	echo ######################################
 	echo ##      TESTING SendAndGetData      ##
 	echo ######################################
@@ -116,7 +116,7 @@ if not defined TEST_DKSENDANDGETDATA goto :end
 
 
 :::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKCOLOR goto :end
+if NOT defined TEST_DKCOLOR goto :end
 	echo ##############################
 	echo ##      TESTING Color       ##
 	echo ##############################
@@ -125,7 +125,7 @@ if not defined TEST_DKCOLOR goto :end
 :end
 
 :::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKSLEEP goto :end
+if NOT defined TEST_DKSLEEP goto :end
 	echo ##############################
 	echo ##      TESTING Sleep       ##
 	echo ##############################
@@ -135,27 +135,27 @@ if not defined TEST_DKSLEEP goto :end
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if not defined TEST_DKERRORS goto :end
+if NOT defined TEST_DKERRORS goto :end
 	echo ################################
 	echo ##      TESTING Errors        ##
 	echo ################################
 	set ERRORLEVEL=0
-	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
 	echo(
 	
 	set ERRORLEVEL=1
-	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is not 0, and continues"
+	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
 	echo(
 
 	%ERROR% "ERROR: This throws an error, and continues"
 	echo(
 
 	set ERRORLEVEL=0
-	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is NOT 0, and exits the program"
 	echo(
 	
 	set ERRORLEVEL=1
-	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is not 0, and exits the program"
+	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is NOT 0, and exits the program"
 	echo(
 
 	%FATAL% "FATAL: This throws an error, and exits the program"

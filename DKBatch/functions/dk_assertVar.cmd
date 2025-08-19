@@ -1,22 +1,22 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################################################################################
 ::# dk_assertVar(var)
 ::#
-::#		Check if a variable is defined and throw an Assertion if it is not.
+::#		Check if a variable is defined and throw an Assertion if it is NOT.
 ::#
-::# Throw assertion if argument is not a valid variable
+::# Throw assertion if argument is NOT a valid variable
 ::#
 :dk_assertVar
 %setlocal%
 	%dk_call% dk_debugFunc 1
 
 	if defined %~1 (%return%)
-	%dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 not defined"
+	%dk_call% dk_fatal "ASSERTION: dk_assertVar(%*): %~1 NOT defined"
 %endfunction%
 
 

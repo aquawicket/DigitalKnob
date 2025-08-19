@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -43,11 +43,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  ::###### Using if ERRORLEVEL
 ::	set "myPath=C:/Windows"
 ::	%dk_call% dk_isSymlink "%myPath%"
-::  if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
+::  if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
 	
 ::  set "myPath=C:/NotADir"
 ::	%dk_call% dk_isSymlink "%myPath%"
-::  if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
+::  if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a symlink") else (%dk_call% dk_info "'%myPath%' is NOT a symlink")
    
 	::###### Using && and || conditionals
 	set "myPath=%USERPROFILE:\=/%/Desktop/DKBuilder.cmd"

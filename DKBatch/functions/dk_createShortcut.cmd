@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -17,7 +17,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "shortcut_path=%shortcut_path:.lnk=%.lnk"     &:: Add .lnk extension if missing
     set "OVERWRITE=%~3"
 	
-    if not defined OVERWRITE (
+    if NOT defined OVERWRITE (
 		if exist "%shortcut_path%" (%dk_call% dk_notice "%shortcut_path% already exists" && %return%)
 	)
 	if exist "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
@@ -42,7 +42,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_callDKPowershell dk_createShortcut %*
 
-	if not exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
+	if NOT exist %shortcut_path% (%dk_call% dk_fatal "Failed to create shortcut:%shortcut_path%")
 %endfunction%
 
 

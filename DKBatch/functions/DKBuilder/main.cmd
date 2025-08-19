@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,17 +18,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DIGITALKNOB_DIR	"%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
-	if not exist "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
+	if NOT exist "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
 		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
 	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
-	if not exist "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
+	if NOT exist "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
 		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	)
 	
-	if not exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
+	if NOT exist "%DKDESKTOP_DIR%/DKBuilder.cmd" (
 		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
@@ -43,11 +43,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	:while_loop
 		if exist "%BUILD_LIST_FILE%" (
-			if not defined BUILD_MATRIX[0][0] (
+			if NOT defined BUILD_MATRIX[0][0] (
 				%dk_call% dk_fileToMatrix "%BUILD_LIST_FILE%" BUILD_MATRIX
 			)
 			
-			if not defined _line_ (set /a _line_=0)
+			if NOT defined _line_ (set /a _line_=0)
 			:skipLine
 			call set "comment_check=%%BUILD_MATRIX[!_line_!][0]%%"
 			if "!comment_check:~0,1!" equ "#" (
@@ -68,13 +68,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			)
 		)
 		
-		if not defined pickUpdate		%dk_call% DKBuilder/pickUpdate		& goto :while_loop
-		if not defined Target_App		%dk_call% DKBuilder/Target_App		& goto :while_loop
-		if not defined Target_Os		%dk_call% DKBuilder/Target_Os		& goto :while_loop
-		if not defined Target_Arch		%dk_call% DKBuilder/Target_Arch		& goto :while_loop
-		if not defined Target_Env		%dk_call% DKBuilder/Target_Env		& goto :while_loop
-		if not defined Target_Type		%dk_call% DKBuilder/Target_Type		& goto :while_loop
-		if not defined Target_Tuple		%dk_call% DKBuilder/Target_Tuple
+		if NOT defined pickUpdate		%dk_call% DKBuilder/pickUpdate		& goto :while_loop
+		if NOT defined Target_App		%dk_call% DKBuilder/Target_App		& goto :while_loop
+		if NOT defined Target_Os		%dk_call% DKBuilder/Target_Os		& goto :while_loop
+		if NOT defined Target_Arch		%dk_call% DKBuilder/Target_Arch		& goto :while_loop
+		if NOT defined Target_Env		%dk_call% DKBuilder/Target_Env		& goto :while_loop
+		if NOT defined Target_Type		%dk_call% DKBuilder/Target_Type		& goto :while_loop
+		if NOT defined Target_Tuple		%dk_call% DKBuilder/Target_Tuple
 		
 		::###### save selections to DKBuilder.cache file ######
 		::%dk_call% dk_echo "creating DKBuilder.cache..."

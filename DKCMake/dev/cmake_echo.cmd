@@ -22,7 +22,7 @@
 :: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 :: SOFTWARE.
 @echo off
-if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_echo <command> <file.ext>
 ::
@@ -44,8 +44,8 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%/DKCMake"
 	if exist "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
 	if exist "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)"\=/%/CMake/bin/cmake.exe"
-	if not exist "%CMAKE_EXE%" 								echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
-	if not exist "%DKCMAKE_DIR%" 							echo "ERROR: Could not locate DKCMAKE_DIR" 	& goto:eof
+	if NOT exist "%CMAKE_EXE%" 								echo "ERROR: Could NOT locate CMAKE_EXE" & goto:eof
+	if NOT exist "%DKCMAKE_DIR%" 							echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	call set DKCMAKE_DIR_DIR=%%DKCMAKE_DIR:^\=^/%%
 	

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -25,21 +25,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\AGSService" 								"Start" "REG_DWORD" "4"
 ::AppVClient								Microsoft App-V Client
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\AppVClient" 								"Start" "REG_DWORD" "4"
-::BcmBtRSupport								Bluetooth Driver Management Service				Third-party service for Broadcom Bluetooth adapters, not required for BT connections.
+::BcmBtRSupport								Bluetooth Driver Management Service				Third-party service for Broadcom Bluetooth adapters, NOT required for BT connections.
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\BcmBtRSupport" 								"Start" "REG_DWORD" "4"
 ::brave										Brave Update Service	
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\brave" 										"Start" "REG_DWORD" "4"
 ::bravem									Brave Update Service	
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\bravem" 									"Start" "REG_DWORD" "4"
-::BthAvctpSvc								AVCTP service									Might be needed for Bluetooth audio devices, but not other BT devices like game controllers.
+::BthAvctpSvc								AVCTP service									Might be needed for Bluetooth audio devices, but NOT other BT devices like game controllers.
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\BthAvctpSvc" 								"Start" "REG_DWORD" "4"
-::BTAGService								Bluetooth Audio Gateway Service					Needed for Your Phone "Calls" feature, but not other BT devices like game controllers.
+::BTAGService								Bluetooth Audio Gateway Service					Needed for Your Phone "Calls" feature, but NOT other BT devices like game controllers.
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\BTAGService" 								"Start" "REG_DWORD" "4"
 ::CertPropSvc								Certificate Propagation		
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\CertPropSvc" 								"Start" "REG_DWORD" "4"
 ::CCleanerPerformanceOptimizerService		CCleaner Performance Optimizer Service
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\CCleanerPerformanceOptimizerService" 		"Start" "REG_DWORD" "4"
-::CDPSvc									Connected Devices Platform Service				Needed for Night Light on Windows 10, but not 11.
+::CDPSvc									Connected Devices Platform Service				Needed for Night Light on Windows 10, but NOT 11.
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\CDPSvc" 									"Start" "REG_DWORD" "4"
 ::CDPUserSvc								Connected Devices Platform User Service_*		May only be disabled in registry by setting HKLM\SYSTEM\CurrentControlSet\Services\CDPUserSvc_*\Start = 0x4.
 	%dk_call% dk_registrySetKey "HKLM\SYSTEM\CurrentControlSet\Services\CDPUserSvc" 								"Start" "REG_DWORD" "4"

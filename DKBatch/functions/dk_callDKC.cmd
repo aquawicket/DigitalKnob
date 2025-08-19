@@ -1,13 +1,13 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################## dk_callDKC settings #############################
-::if not defined dk_callDKC_Target_Os 	(set "dk_callDKC_Target_Os=%Host_Os%")		&::  Android, Cosmo, Emscripten, Ios, Iossim, Linux, Mac, Win
-::if not defined dk_callDKC_Target_Arch (set "dk_callDKC_Target_Arch=%Host_Arch%")	&::  Arm32, Arm64, Cosmo, X86, X86_64
-::if not defined dk_callDKC_Target_Env 	(set "dk_callDKC_Target_Env=Clang")			&::  Clang, Cosmo, Gcc, Msvc
+::if NOT defined dk_callDKC_Target_Os 	(set "dk_callDKC_Target_Os=%Host_Os%")		&::  Android, Cosmo, Emscripten, Ios, Iossim, Linux, Mac, Win
+::if NOT defined dk_callDKC_Target_Arch (set "dk_callDKC_Target_Arch=%Host_Arch%")	&::  Arm32, Arm64, Cosmo, X86, X86_64
+::if NOT defined dk_callDKC_Target_Env 	(set "dk_callDKC_Target_Env=Clang")			&::  Clang, Cosmo, Gcc, Msvc
 ::####################################################################
 ::# dk_callDKC(function, arguments...)
 ::# dk_callDKC(function, arguments..., rtn_var)
@@ -29,16 +29,16 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### DKHTTP_DKC_FUNCTIONS_DIR ######
 	%dk_call% dk_assertVar DKHTTP_DKBRANCH_DIR
-	if not defined DKHTTP_DKC_DIR		 		(set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
-	if not defined DKHTTP_DKC_FUNCTIONS_DIR		(set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
+	if NOT defined DKHTTP_DKC_DIR		 		(set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
+	if NOT defined DKHTTP_DKC_FUNCTIONS_DIR		(set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
 
 	::###### Download files if missing ######
-	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
-	if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
+	if NOT exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
+	if NOT exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 	::###### Target_Os ######
-	if not defined Target_Os (
-		if not defined dk_callDKC_Target_Os (
+	if NOT defined Target_Os (
+		if NOT defined dk_callDKC_Target_Os (
 			%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
 			set "dk_callDKC_Target_Os=!Host_Os!"
 		)
@@ -47,8 +47,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (
-		if not defined dk_callDKC_Target_Arch (
+	if NOT defined Target_Arch (
+		if NOT defined dk_callDKC_Target_Arch (
 			%dk_call% dk_validate Host_Arch "%dk_call% dk_Host_Arch"
 			set "dk_callDKC_Target_Arch=!Host_Arch!"
 		)
@@ -57,8 +57,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (
-		if not defined dk_callDKC_Target_Env (
+	if NOT defined Target_Env (
+		if NOT defined dk_callDKC_Target_Env (
 			set "dk_callDKC_Target_Env=Clang"
 		)
 		set "Target_Env=!dk_callDKC_Target_Env!"
@@ -66,7 +66,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
 	::###### Target_Tuple ######
-	if not defined Target_Tuple (
+	if NOT defined Target_Tuple (
 		set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%"
 	)
 	%dk_call% dk_debug "Target_Tuple = %Target_Tuple%"
@@ -98,7 +98,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### DKC_BUILD_DIR ######
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	set "DKC_BUILD_DIR=%DKCACHE_DIR%/DKC_BUILD_DIR"
-	if not exist "%DKC_BUILD_DIR%" (%dk_call% dk_mkdir "%DKC_BUILD_DIR%")
+	if NOT exist "%DKC_BUILD_DIR%" (%dk_call% dk_mkdir "%DKC_BUILD_DIR%")
 
 	::###### _app_exe_ ######
 	set "_app_exe_=%DKC_BUILD_DIR%/%_func_%.exe"
@@ -112,7 +112,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 
-	if not exist "%_app_exe_%" (
+	if NOT exist "%_app_exe_%" (
 		%dk_call% dk_echo
 		%dk_call% dk_error "failed to compile %_c_file_%"
 		%return%

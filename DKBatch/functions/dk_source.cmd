@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -17,8 +17,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_fnc_=%~1"
 	if exist "%_fnc_%" exit /b 0
 		
-	if not defined DKHOME_DIR 	set "DKHOME_DIR=%USERPROFILE:\=/%"
-	if not defined DKHTTP_DIR 	set "DKHTTP_DIR=https://raw.githubusercontent.com/aquawicket"
+	if NOT defined DKHOME_DIR 	set "DKHOME_DIR=%USERPROFILE:\=/%"
+	if NOT defined DKHTTP_DIR 	set "DKHTTP_DIR=https://raw.githubusercontent.com/aquawicket"
 	
 	::############ Correct the path delimiters ############
 	set "_fnc_=%_fnc_:\=/%"
@@ -36,7 +36,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::############ Download the file if missing #############
 	rem ###### Replace 'C:/Users/Administrator' with 'https://raw.githubusercontent.com/aquawicket'
-	if not exist "%_fnc_%" (
+	if NOT exist "%_fnc_%" (
 		rem call set "_url_=%_fnc_:C:/Users/Administrator=https://raw.githubusercontent.com/aquawicket%"
 		call set "_url_=%%_fnc_:%DKHOME_DIR%=%DKHTTP_DIR%%%"
 	)
@@ -45,20 +45,20 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for %%Z in ("%_fnc_%") do set "dirn=%%~dpZ"
 	if "%dirn:~-1%" equ "\" set "dirn=%dirn:~0,-1%"
 	if "%dirn:~-1%" equ "/" set "dirn=%dirn:~0,-1%"
-	if not exist %dirn% mkdir %dirn%	
+	if NOT exist %dirn% mkdir %dirn%	
 
 	::echo curl.exe -L "%_url_%" -o "%_fnc_%"
-	if not exist "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"
+	if NOT exist "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"
 	if exist "%_fnc_%" exit /b 0
 	
-	::if not exist "%_fnc_%"  certutil.exe 1>nul 2>nul 	&& certutil.exe -urlcache -split -f "%_url_%" "%_fnc_%"
+	::if NOT exist "%_fnc_%"  certutil.exe 1>nul 2>nul 	&& certutil.exe -urlcache -split -f "%_url_%" "%_fnc_%"
 	::if exist "%_fnc_%" exit /b 0
 	
-	::if not exist "%_fnc_%"	bitsadmin.exe /transfer /Download /priority Foreground "%_url_%" "%_fnc_%"
+	::if NOT exist "%_fnc_%"	bitsadmin.exe /transfer /Download /priority Foreground "%_url_%" "%_fnc_%"
 	::if exist "%_fnc_%" exit /b 0
 	
 	::############ Final Check ############
-	if not exist "%_fnc_%"   echo ERROR   Failed to download %_fnc_%  &&  exit /b 13	
+	if NOT exist "%_fnc_%"   echo ERROR   Failed to download %_fnc_%  &&  exit /b 13	
 %endfunction%	
 	
 

@@ -21,7 +21,7 @@
 :: 2 - CursorPos.exe cheat from Aacini:
 :: You can eliminate screen flicker on any Windows version by placing Aacini's
 :: CursorPos.exe in the same folder that contains SNAKE.BAT. This method of
-:: eliminating flicker is "cheating" in that it is not pure native batch since
+:: eliminating flicker is "cheating" in that it is NOT pure native batch since
 :: it relies on a 3rd party tool. A script to create CursorPos.exe is available
 :: at http://goo.gl/hr6Kkn.
 ::
@@ -71,7 +71,7 @@
 ::
 :: 3.2  2013-12-08
 ::   - Fixed a replay bug. Note that attempting to delete a non-existent file
-::     does not raise an error!
+::     does NOT raise an error!
 ::   - Added ability to save a previous game or a High score game to a user
 ::     named file in the current directory.
 ::   - Added ability to load and replay a user saved game from the current
@@ -107,7 +107,7 @@
 ::     pure native batch on all Windows versions from XP onward.
 ::
 :: 1.0  2013-07-13  to  1.x
-::   - Game required CHOICE command, so did not work on XP without download of
+::   - Game required CHOICE command, so did NOT work on XP without download of
 ::     a non-standard exe or com file.
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -274,7 +274,7 @@ set "spinnerDelay=3"
 :: define LF as a Line Feed (newline) character
 set ^"LF=^
 
-^" Above empty line is required - do not remove
+^" Above empty line is required - do NOT remove
 
 :: define CR as a Carriage Return character
 for /f %%A in ('copy /Z "%~dpf0" nul') do set "CR=%%A"
@@ -346,7 +346,7 @@ for %%# in (1 2) do if %%#==2 (%\n%
     set inKey=!inKey:~0,-1!%\n%
     for %%C in (!args!) do set /a keyTest=1^&if /i !inKey! equ %%~C set key=!inKey!%\n%
   )%\n%
-  if not defined keyTest set key=!inKey!%\n%
+  if NOT defined keyTest set key=!inKey!%\n%
 ) else set args=
 
 
@@ -356,7 +356,7 @@ set draw=%\n%
 set screen=%\n%
 for /l %%Y in (0,1,!height!) do set screen=!screen!!line%%Y!!LF!%\n%
 set screen=!screen!Speed = !Difficulty! !replay!!LF!Growth Rate = !growth!   HighScore = !hi!!LF!Score = !score!   Time = !m!:!s!%\n%
-if defined replay if not defined replayFinished (%\n%
+if defined replay if NOT defined replayFinished (%\n%
   set screen=!screen!!LF!!LF!Press a key to abort the replay%\n%
 )%\n%
 %cls%^&echo(!screen!
@@ -381,7 +381,7 @@ for %%# in (1 2) do if %%#==2 (for /f "tokens=1-3" %%1 in ("!args!") do (%\n%
 ::--------------------------------------
 :: start the game
 setlocal enableDelayedExpansion
-if not exist "%saveLoc%\" md "%saveLoc%"
+if NOT exist "%saveLoc%\" md "%saveLoc%"
 set "replay= Aborting... "
 set "replayAvailable="
 if exist "!gameLog!" set "replayAvailable=R"
@@ -416,7 +416,7 @@ for /l %%. in () do (
     set /a t1=t2
 
     %=== compute game time ===%
-    if not defined gameStart set "gameStart=!t2!"
+    if NOT defined gameStart set "gameStart=!t2!"
     set /a "gameTime=(t2-gameStart)"
     if !gameTime! lss 0 set /a "gameTime+=24*60*60*100"
     set /a "gameTime=(gameTime-pauseTime)/100, m=gameTime/60, s=gameTime%%60"
@@ -441,7 +441,7 @@ for /l %%. in () do (
     ) else (
 
       %=== establish direction ===%
-      if not defined replay (echo(!key!.) >>"!gameLog!"
+      if NOT defined replay (echo(!key!.) >>"!gameLog!"
       for %%K in (!key!) do if !moveKeys! equ 2 (
         set /a "xDiff=xTurn%%K*!yDiff!, yDiff=yTurn%%K*!xDiff!"
       ) else if "!%%KAxis!" neq "!axis!" (
@@ -493,7 +493,7 @@ for /l %%. in () do (
 
           %=== manage score ===%
           set /a "score+=1, grow-=1"
-          if not defined replay if !score! gtr !hi! set /a "hi+=1, newHi=1"
+          if NOT defined replay if !score! gtr !hi! set /a "hi+=1, newHi=1"
 
         ) else (
           %=== add the former tail position to the empty list ===%
@@ -584,7 +584,7 @@ goto :getStringLoop
 call :purge
 :getResponse
 (%getKey% !validKeys!)
-if not defined key (
+if NOT defined key (
   if defined inKey %sendCmd% one
   goto :getResponse
 )
@@ -652,7 +652,7 @@ echo   Q - Quit
 echo(
 set "hiAvailable="
 for /l %%N in (1 1 6) do if defined hi%%N (
-  if not defined hiAvailable (
+  if NOT defined hiAvailable (
     echo Replay High Score:
     echo(
   )
@@ -689,7 +689,7 @@ if /i !key! equ Q (
     set "replay=!file!.snake.txt"
     goto :initialize
   )
-  echo Error: File "!file!.snake.txt" not found
+  echo Error: File "!file!.snake.txt" NOT found
   call :ask "Press a key to continue..."
 ) else if /i !key! equ R (
   set "replay=!gameLog!"
@@ -867,7 +867,7 @@ for /l %%Y in (0 1 %height%) do (
     if %%X equ 0        set "cell=%bound%"
     if %%X equ %width%  set "cell=%bound%"
     if %%X equ %PX% if %%Y equ %PY% set "cell=%head%"
-    if not defined cell (
+    if NOT defined cell (
       set "cell=%space%"
       set "eX= %%X"
       set "eY= %%Y"
@@ -930,7 +930,7 @@ set ^"keys="!left!" "!right!" "!pause!"^"
 set "newHi="
 set "grow=0"
 if !moveKeys! equ 4 set ^"keys=!keys! "!up!" "!down!"^"
-if defined Up4 if not defined replay (
+if defined Up4 if NOT defined replay (
   %Up4%
   for /l %%N in (1 1 5) do (echo(                                             )
 )
@@ -939,7 +939,7 @@ exit /b
 
 ::-------------------------------------
 :waitForSignal
-if not exist "%signal%" goto :waitForSignal
+if NOT exist "%signal%" goto :waitForSignal
 del "%signal%"
 exit /b
 
@@ -1045,7 +1045,7 @@ set "key="
 for /l %%. in () do (
   if "!cmd!" neq "hold" (
     for /f "delims=" %%A in ('xcopy /w "%~f0" "%~f0" 2^>nul') do (
-      if not defined key set "key=%%A"
+      if NOT defined key set "key=%%A"
     )
     set "key=!key:~-1!"
     if !key! equ !CR! set "key={Enter}"

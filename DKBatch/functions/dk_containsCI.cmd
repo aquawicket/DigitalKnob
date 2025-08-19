@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	if /I not "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
+	if /I NOT "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
         if "%~3" neq "" (endlocal & set "%3=true")
 		set "_haystack_="
 		set "_needle_="
@@ -58,13 +58,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
     %dk_call% dk_containsCI "%string%" "%substring%"
-    if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
    
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_containsCI "%string%" "%substring%"
-    if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1
    
    

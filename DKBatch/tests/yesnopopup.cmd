@@ -15,7 +15,7 @@ var message="";
 
 function printHelp() {
 	WScript.Echo(title + "[-title Title] [-timeout m] [-message \"pop-up message\"]");
-	WScript.Echo(title + "if time out not defined will wait only for button pressing");
+	WScript.Echo(title + "if time out NOT defined will wait only for button pressing");
 }
 
 if (WScript.Arguments.Length==1){

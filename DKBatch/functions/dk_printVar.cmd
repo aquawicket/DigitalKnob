@@ -1,11 +1,11 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################## dk_printVar SETTINGS ####################
-::if not defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
+::if NOT defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
 ::if "%dk_printVar_ENABLE%" neq "1" (%return%)
 ::################################################################################
 ::# dk_printVar(variable)
@@ -18,10 +18,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_isVariableName "%~1" || %return%
    
     :array
-		if not defined %~1[0] goto pointer
+		if NOT defined %~1[0] goto pointer
         set /a "n=0"
         :loop1
-            if not defined %~1[%n%] %return%
+            if NOT defined %~1[%n%] %return%
 			
 			:: delayed expansion OFF
             if "!DE!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% %%%~1[%n%]%% %clr%"
@@ -34,7 +34,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%return%
 
     :pointer
-        if not defined %~1 goto undefined
+        if NOT defined %~1 goto undefined
 
         :: delayed expansion OFF
         if "!DE!" neq "" %dk_call% dk_isVariableName "%%%~1%%" || goto variable
@@ -45,7 +45,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		:: delayed expansion ON
         if "!DE!" equ "" %dk_call% dk_isVariableName "!%~1!" || goto variable
         if "!DE!" equ "" set "_ptrB_=!%~1!"
-		if "!DE!" equ "" if not defined !%~1! goto variable
+		if "!DE!" equ "" if NOT defined !%~1! goto variable
 		if "!DE!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %blue%%_ptrB_% = !%_ptrB_%! %clr%"
     %return%
 

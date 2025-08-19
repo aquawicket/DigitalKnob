@@ -1,4 +1,4 @@
-if not defined Windows_Host (
+if NOT defined Windows_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"

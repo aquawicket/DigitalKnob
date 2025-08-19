@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -19,14 +19,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_findProgram POWERSHELL_EXE pwsh.exe "%DKTOOLS_DIR%" NO_ERROR
 
     ::###### try powershell.exe ######
-	if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe")
+	if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe")
 	
-	if not exist "%POWERSHELL_EXE%" (
+	if NOT exist "%POWERSHELL_EXE%" (
 		%dk_call% dk_exec cmd /c where powershell.exe
 		set "POWERSHELL_EXE=!dk_exec!"
 	)
 	
-	::if not exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%/System32")
+	::if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%/System32")
 	::%dk_call% dk_assertPath "%POWERSHELL_EXE%"
 	(call )
 	endlocal & (
@@ -46,6 +46,6 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE" %NOERROR%
-	if not exist "%POWERSHELL_EXE%" (%dk_call% dk_POWERSHELL_EXE)
+	if NOT exist "%POWERSHELL_EXE%" (%dk_call% dk_POWERSHELL_EXE)
     %dk_call% dk_echo "POWERSHELL_EXE = %POWERSHELL_EXE%"
 %endfunction%

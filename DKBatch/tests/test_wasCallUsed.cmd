@@ -27,7 +27,7 @@ call :getCurrentFile _f0
 
     rem We try to read a non existing variable and see if we could.
     rem   - In command line context, the reading of a non existing variable returns the name of the variable, setting our test var
-    rem   - In batch context, reading a non existing variable does not return anything, and the test variable is undefined
+    rem   - In batch context, reading a non existing variable does NOT return anything, and the test variable is undefined
     call set "__callTest__=%%{[%random%""%random%]}%%"
     if defined __callTest__ (
         set "__callTest__=direct"

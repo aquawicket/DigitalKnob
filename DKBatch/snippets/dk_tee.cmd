@@ -25,7 +25,7 @@ if "%2" equ ":TeeProcess" goto TeeProcess
 rem Get the output of CLS command
 for /F %%a in ('cls') do set "cls=%%a"
 
-rem If /A switch is not provided, delete the file that receives Tee output
+rem If /A switch is NOT provided, delete the file that receives Tee output
 if /I "%~2" neq "/A" if exist %1 (del %1)
 
 rem Create the semaphore-signal file and start the asynchronous Tee process
@@ -37,7 +37,7 @@ goto :EOF
 
 :TeeProcess
    rem Wait for "Data Available" signal
-   if not exist Flag.in (goto TeeProcess)
+   if NOT exist Flag.in (goto TeeProcess)
    rem Read the input line sent by javascript code
    set line=
    set /P line=

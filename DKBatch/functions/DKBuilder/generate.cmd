@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,8 +16,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### DKBATCH_TOOLCHAIN ######
 	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
- 	if not exist "%DKBATCH_TOOLCHAIN%" (
-		%dk_call% dk_notice "%DKBATCH_TOOLCHAIN% not found. skipping..."
+ 	if NOT exist "%DKBATCH_TOOLCHAIN%" (
+		%dk_call% dk_notice "%DKBATCH_TOOLCHAIN% NOT found. skipping..."
 		%dk_call% dk_unset CMAKE_GENERATOR
 		exit /b 0
 	)
@@ -39,10 +39,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ Target_Tuple_Dir ############
 	set "Target_Tuple_Dir=%Target_App_Dir%/%Target_Tuple%"
-	if not exist "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
+	if NOT exist "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
 	
 	::############ Get CMakeLists.txt file #############
-	if not exist "%Target_App_Dir%/CMakeLists.txt" (
+	if NOT exist "%Target_App_Dir%/CMakeLists.txt" (
 		%dk_call% dk_copy "%DKCPP_PLUGINS_DIR%/_DKIMPORT/_CMakeLists.txt_" "%Target_App_Dir%/CMakeLists.txt" OVERWRITE
 	)
 	
@@ -100,7 +100,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
 
 	::############ CMAKE_BINARY_DIR ############
-	if not defined MULTI_CONFIG	(set "SINGLE_CONFIG=1")
+	if NOT defined MULTI_CONFIG	(set "SINGLE_CONFIG=1")
 	if defined MULTI_CONFIG		(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%")
 	if defined SINGLE_CONFIG	(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
@@ -126,7 +126,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR  "%dk_call% dk_DKIMPORTS_DIR"
-	if not defined CMAKE_EXE (%dk_call% dk_depend cmake")
+	if NOT defined CMAKE_EXE (%dk_call% dk_depend cmake")
 
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"	

@@ -2,25 +2,25 @@
 if "%~1" equ "" (goto:DKINSTALL)
 
 :runDKC
-	if not defined ESC (set "ESC=")
-	if not defined clr (set "clr=%ESC%[0m")
-	if not defined red (set "red=%ESC%[31m")
-	if not defined bg_magenta (set "bg_magenta=%ESC%[45m")
-	if not defined white (set "white=%ESC%[37m")
+	if NOT defined ESC (set "ESC=")
+	if NOT defined clr (set "clr=%ESC%[0m")
+	if NOT defined red (set "red=%ESC%[31m")
+	if NOT defined bg_magenta (set "bg_magenta=%ESC%[45m")
+	if NOT defined white (set "white=%ESC%[37m")
 
 	::###### DK_C_COMPILER ######
-	if not defined DK_C_COMPILER (set "DK_C_COMPILER=%~1")
-	if not defined DK_C_COMPILER (echo %red%ERROR: DK_C_COMPILER is invalid%clr%)
+	if NOT defined DK_C_COMPILER (set "DK_C_COMPILER=%~1")
+	if NOT defined DK_C_COMPILER (echo %red%ERROR: DK_C_COMPILER is invalid%clr%)
 
 	::###### DKC_FILE ######
-	if not defined DKC_FILE (set "DKC_FILE=%~2")
-	if not defined DKC_FILE	(echo %red%ERROR: DKC_FILE is invalid%clr%)
+	if NOT defined DKC_FILE (set "DKC_FILE=%~2")
+	if NOT defined DKC_FILE	(echo %red%ERROR: DKC_FILE is invalid%clr%)
 
 	::###### APP_NAME ######
 	for %%Z in ("%DKC_FILE%") do (set "APP_NAME=%%~nZ")
 
 	::###### Setup build directory
-	if not exist "%CD:\=/%/build" (mkdir "%CD%\build")
+	if NOT exist "%CD:\=/%/build" (mkdir "%CD%\build")
 
 	::###### APP_FILE ######
 	set "APP_FILE=%CD:\=/%/build/%APP_NAME%.exe"
@@ -47,7 +47,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %COMPILE_COMMAND%
 	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 
-	if not exist "%APP_FILE%" (
+	if NOT exist "%APP_FILE%" (
 		echo(
 		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
 		pause
@@ -90,38 +90,38 @@ if "%~1" equ "" (goto:DKINSTALL)
 	:: clang, cosmocc, gcc, msvc
 	:: NOTE: gcc is now working yet.  Need the appropriate command to line libwinpthread and others statically
 
-	::if not defined Target_Os		(set "Target_Os=Windows")
-	::if not defined Target_Arch	(set "Target_Arch=X86_64")
-	::if not defined Target_Env		(set "Target_Env=Gcc")
+	::if NOT defined Target_Os		(set "Target_Os=Windows")
+	::if NOT defined Target_Arch	(set "Target_Arch=X86_64")
+	::if NOT defined Target_Env		(set "Target_Env=Gcc")
 
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 
 	::###### Install DKC ######
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=Windows")
+	if NOT defined Target_Os (set "Target_Os=Windows")
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=X86_64")
+	if NOT defined Target_Arch (set "Target_Arch=X86_64")
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=Clang")
+	if NOT defined Target_Env (set "Target_Env=Clang")
 
 	::###### Target_Tuple ######
-	if not defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
+	if NOT defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
 	set "%Target_Tuple%=1"
 
 	::###### MSYSTEM ######
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86"    set "MSYSTEM=CLANG32"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86_64" set "MSYSTEM=CLANG64"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "Arm64"  set "MSYSTEM=CLANGARM64"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86"    set "MSYSTEM=MINGW32"
-	::if not defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86_64" set "MSYSTEM=MINGW64"
+	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86"    set "MSYSTEM=CLANG32"
+	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "X86_64" set "MSYSTEM=CLANG64"
+	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Clang" if "%Target_Arch%" equ "Arm64"  set "MSYSTEM=CLANGARM64"
+	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86"    set "MSYSTEM=MINGW32"
+	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86_64" set "MSYSTEM=MINGW64"
 
 	::###### DK_C_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,12 +14,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#	PARAMETERS
 ::#  separator
 ::# 	The pattern describing where each split should occur. Can be undefined, a string, or an object with a Symbol.split method — the typical example being a regular expression.
-::# 	Omitting separator or passing undefined causes split() to return an array with the calling string as a single element. All values that are not undefined or objects with a
+::# 	Omitting separator or passing undefined causes split() to return an array with the calling string as a single element. All values that are NOT undefined or objects with a
 ::# 	[Symbol.split]() method are coerced to strings.
 ::#  
 ::#  limit Optional
 ::#		A non-negative integer specifying a limit on the number of substrings to be included in the array. If provided, splits the string at each occurrence of the specified
-::#		separator, but stops when limit entries have been placed in the array. Any leftover text is not included in the array at all.
+::#		separator, but stops when limit entries have been placed in the array. Any leftover text is NOT included in the array at all.
 ::#
 ::#  Return value
 ::# 	If separator is a string, an Array of strings is returned, split at each point where the separator occurs in the given string.

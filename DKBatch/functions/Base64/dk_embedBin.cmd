@@ -1,12 +1,12 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::###################### dk_embedBin settings ######################################
-::if not defined dk_embedBin_DELETE_CMD_ON_EXTRACT 	(set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0")
-::if not defined dk_embedBin_OVERWRITE_OUTPUT		(set "dk_embedBin_OVERWRITE_OUTPUT=0")
+::if NOT defined dk_embedBin_DELETE_CMD_ON_EXTRACT 	(set "dk_embedBin_DELETE_CMD_ON_EXTRACT=0")
+::if NOT defined dk_embedBin_OVERWRITE_OUTPUT		(set "dk_embedBin_OVERWRITE_OUTPUT=0")
 ::##################################################################################
 ::# Base64::dk_embedBin(inputFile)
 ::# Base64::dk_embedBin(inputFile, outputFile)
@@ -28,10 +28,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "X%args:OVERWRITE=%X" neq "X%args%X" (set "OVERWRITE=1")
 	
 
-	if not exist "%inputFile%" (%dk_call% dk_error "%inputFile% not found")
+	if NOT exist "%inputFile%" (%dk_call% dk_error "%inputFile% NOT found")
 	if exist "%outputFile%" (
 		if "%OVERWRITE%" neq "1" (
-			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is not set"
+			%dk_call% dk_error "dk_embedBin Cannot embed file. Destiantion already exists and OVERWRITE is NOT set"
 		)
 		del "%outputFile:/=\%"
 	)

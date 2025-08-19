@@ -1,4 +1,4 @@
-if not defined Raspberry_Host (
+if NOT defined Raspberry_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"

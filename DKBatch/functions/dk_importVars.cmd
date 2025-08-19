@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,8 +13,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	%dk_call% dk_echo "IMPORTING VARIABLES ......"
 	%dk_call% dk_assertPath DKCACHE_DIR
-	if not exist "%DKCACHE_DIR%/DKEXPORT_VARS" (
-		%dk_call% dk_notice "DKEXPORT_VARS not found.  Nothing imported"
+	if NOT exist "%DKCACHE_DIR%/DKEXPORT_VARS" (
+		%dk_call% dk_notice "DKEXPORT_VARS NOT found.  Nothing imported"
 		%return%
 	)
 	

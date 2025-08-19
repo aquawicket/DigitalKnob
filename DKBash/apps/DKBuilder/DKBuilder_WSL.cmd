@@ -45,14 +45,14 @@ Arguments for managing Windows Subsystem for Linux:
                 Downloads and installs a distribution by name.
 
                 Arguments:
-                    A valid distribution name (not case sensitive).
+                    A valid distribution name (NOT case sensitive).
 
                 Examples:
                     wsl --install -d Ubuntu
                     wsl --install --distribution Debian
 
             --no-launch, -n
-                Do not launch the distribution after install.
+                Do NOT launch the distribution after install.
 
     --mount <Disk>
         Attaches and mounts a physical disk in all WSL2 distributions.
@@ -62,13 +62,13 @@ Arguments for managing Windows Subsystem for Linux:
                 Attach the disk to WSL2, but don't mount it.
 
             --type <Type>
-                Filesystem to use when mounting a disk, if not specified defaults to ext4.
+                Filesystem to use when mounting a disk, if NOT specified defaults to ext4.
 
             --options <Options>
                 Additional mount options.
 
             --partition <Index>
-                Index of the partition to mount, if not specified defaults to the whole disk.
+                Index of the partition to mount, if NOT specified defaults to the whole disk.
 
     --set-default-version <Version>
         Changes the default install version for new distributions.
@@ -92,7 +92,7 @@ Arguments for managing Windows Subsystem for Linux:
                 Revert to the previous version of the WSL 2 kernel.
 
             --inbox
-                Only update the inbox WSL 2 kernel. Do not install WSL from the Microsoft Store.
+                Only update the inbox WSL 2 kernel. Do NOT install WSL from the Microsoft Store.
 
             --web-download
                 Download the most recent version of WSL from the internet instead of the Microsoft Store.

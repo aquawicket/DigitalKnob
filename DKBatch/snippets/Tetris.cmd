@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -79,7 +79,7 @@ set "com[T]=Dy=1"
 
 for /L %%# in () do (
    set "key="
-   for /F "delims=" %%k in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defined key set "key=%%k"
+   for /F "delims=" %%k in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if NOT defined key set "key=%%k"
    for /F %%k in ("!key:~-1!") do (
       echo(!com[%%k]!
       if /I "%%k" equ "N" exit
@@ -193,8 +193,8 @@ for /L %%# in () do (
 %F16x8%  if %%i geq 1 if %%i leq %lines% echo(!F%%i!
       )
 
-      rem ... if that was not possible:
-      if not defined b call :endGame & endlocal
+      rem ... if that was NOT possible:
+      if NOT defined b call :endGame & endlocal
 
       set "p1=!p0!"
       set /a "pI=0, del=delay, b=1!time:~-2!"
@@ -272,7 +272,7 @@ for /L %%# in () do (
          set /a y+=Dy, x+=Dx
          if defined R set "p0=!p1!" & set "pI=!p!" & set "R="
 
-      ) else (   rem The piece can not be moved
+      ) else (   rem The piece can NOT be moved
 
          rem Recover the piece at its current position
          for /L %%i in (1,1,!i!) do (
@@ -342,7 +342,7 @@ for /L %%# in () do (
 set /P "=Play again? " < NUL
 :choice
    set /P "com="
-if not defined com goto choice
+if NOT defined com goto choice
 if /I "%com%" equ "Y" exit /B
 if /I "%com:~0,1%" neq "N" set "com=" & goto choice
 echo N
@@ -359,7 +359,7 @@ cls & for /L %%i in (%top%,-1,-3) do (
       )
 :wait
    set /P "com="
-if not defined com goto wait
+if NOT defined com goto wait
 set "com="
 set "F%lines%=%pause%"
 cls & for /L %%i in (%top%,-1,-3) do (

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -98,7 +98,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::  set "org=%var%"
    
 ::  %dk_call% dk_echo ""%var%"|find "*">nul
-::  if not errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
+::  if NOT errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
 ::  set "org=%var%"
    
 ::  set "var=%var:^&=_%"
@@ -115,10 +115,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     :: Simple method to detect character in a string
     ::%dk_call% dk_echo ""%var%"|find "=">nul
-    ::if not errorlevel 1 %dk_call% dk_echo "equal sign detected
+    ::if NOT errorlevel 1 %dk_call% dk_echo "equal sign detected
    
     :rtn
-    if not defined %* %dk_call% dk_echo "var = %var%
+    if NOT defined %* %dk_call% dk_echo "var = %var%
    
     %dk_call% dk_unset org
     %dk_call% dk_unset replaceWith
@@ -135,7 +135,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         set "_r="
         :_replaceEqualSign
             for /F "tokens=1* delims=%equal%" %%A in ("%_s%") do (
-                if not defined _r ( set "_r=%%A" ) else ( set "_r=%_r%%~4%with%%%A" )
+                if NOT defined _r ( set "_r=%%A" ) else ( set "_r=%_r%%~4%with%%%A" )
                 set "_s=%%B"
             )
         if defined _s (goto _replaceEqualSign)

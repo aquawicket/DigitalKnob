@@ -1,4 +1,4 @@
-if not defined Mac_Host (
+if NOT defined Mac_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"

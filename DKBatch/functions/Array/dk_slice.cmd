@@ -1,14 +1,14 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::################################################################################
 ::# Array/dk_slice(array, start, end)
 ::#
-::#	The slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end not included)
-::#	where start and end represent the index of items in that array. The original array will not be modified.
+::#	The slice() method of Array instances returns a shallow copy of a portion of an array into a new array object selected from start to end (end NOT included)
+::#	where start and end represent the index of items in that array. The original array will NOT be modified.
 ::#
 ::#	PARAMETERS
 ::#	start :optional
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#		If start >= Array/length, an empty array is returned.
 ::#  
 ::#	end :optional
-::#		Zero-based index at which to end extraction, converted to an integer. slice() extracts up to but not including end.
+::#		Zero-based index at which to end extraction, converted to an integer. slice() extracts up to but NOT including end.
 ::#		Negative index counts back from the end of the array — if -Array/length <= end < 0, end + Array/length is used.
 ::#		If end < -Array/length, 0 is used.
 ::#		If end >= Array/length or end is omitted, Array/length is used, causing all elements until the end to be extracted.

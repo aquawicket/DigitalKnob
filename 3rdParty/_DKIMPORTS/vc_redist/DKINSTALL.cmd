@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -21,7 +21,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "VCCOMP140_X86_DEBUG_DLL=%windir:\=/%/SysWOW64/vcomp140d.dll"
 	set "VCRUNTIME140_X86_DLL=%windir:\=/%/SysWOW64/vcruntime140.dll"
 	set "VCRUNTIME140_X86_DEBUG_DLL=%windir:\=/%/SysWOW64/vcruntime140d.dll"
-	if not exist "%VCCOMP140_X86_DLL%" if not exist "%VCCOMP140_X86_DEBUG_DLL%" (
+	if NOT exist "%VCCOMP140_X86_DLL%" if NOT exist "%VCCOMP140_X86_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_IMPORT%
 		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_IMPORT!"
@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "VCCOMP140_X86_64_DEBUG_DLL=%windir:\=/%/System32/vcomp140d.dll"
 	set "VCRUNTIME140_X86_64_DLL=%windir:\=/%/System32/vcruntime140.dll"
 	set "VCRUNTIME140_X86_64_DEBUG_DLL=%windir:\=/%/System32/vcruntime140d.dll"
-	if not exist "%VCCOMP140_X86_64_DLL%" if not exist "%VCCOMP140_X86_64_DEBUG_DLL%" (
+	if NOT exist "%VCCOMP140_X86_64_DLL%" if NOT exist "%VCCOMP140_X86_64_DEBUG_DLL%" (
 		%dk_call% dk_basename %VC_REDIST_X86_64_IMPORT%
 		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!VC_REDIST_X86_64_IMPORT!"

@@ -6,7 +6,7 @@
 :::  ENDLOCAL barrier.
 :::    ValueVar  = The name of the local variable containing the return value.
 :::    ReturnVar = The name of the variable to receive the return value.
-:::    ErrorCode = The returned ERRORLEVEL, defaults to 0 if not specified.
+:::    ErrorCode = The returned ERRORLEVEL, defaults to 0 if NOT specified.
 :::
 :::call RETURN "ValueVar1 ValueVar2 ..." "ReturnVar1 ReturnVar2 ..." [ErrorCode]
 :::  Same as before, except the first and second arugments are quoted and
@@ -14,7 +14,7 @@
 :::
 :::  Note that the total length of all assignments (variable names and values)
 :::  must be less then 3.8k bytes. No checks are performed to verify that all
-:::  assignments fit within the limit. Variable names must not contain space,
+:::  assignments fit within the limit. Variable names must NOT contain space,
 :::  tab, comma, semicolon, caret, asterisk, question mark, or exclamation point.
 :::
 :::call RETURN  init
@@ -44,8 +44,8 @@
 :return  ValueVar  ReturnVar  [ErrorCode]
 :: Safely returns any value(s) across the ENDLOCAL barrier. Default ErrorCode is 0
 setlocal enableDelayedExpansion
-if not defined return.LF call :return.init
-if not defined return.CR call :return.init
+if NOT defined return.LF call :return.init
+if NOT defined return.CR call :return.init
 set "return.normalCmd="
 set "return.delayedCmd="
 set "return.vars=%~2"
@@ -64,7 +64,7 @@ for %%a in (%~1) do for /f "tokens=1*" %%b in ("!return.vars!") do (
   set "return.vars=%%c"
 )
 set "err=%~3"
-if not defined err set "err=0"
+if NOT defined err set "err=0"
 for %%1 in ("!return.LF!") do for /f "tokens=1-3" %%2 in (^"!return.CR! %% "") do (
   (goto) 2>nul
   (goto) 2>nul

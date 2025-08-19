@@ -57,7 +57,7 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
+if NOT exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does NOT exist" )
 
 :: JDK
 if %GRADLE% equ 0 (
@@ -106,7 +106,7 @@ if "%ABI%"=="armeabi-v7a" (
 
 
 ::echo 12. Create a key store and key for signing with the Java keytool
-::if not exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
+::if NOT exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
 ::%IF_ERROR% "failed to Create a key store and key for signing with the Java keytool"
 
 

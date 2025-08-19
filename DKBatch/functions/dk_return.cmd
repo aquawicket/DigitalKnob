@@ -1,6 +1,6 @@
 ::@echo off&::###### DK.cmd #########################################################################################################################
-::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 ::echo(
@@ -9,9 +9,9 @@
 ::if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
 
 
-::if not defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
-if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
-::if not defined dk_return (set "dk_return=%dk_call% dk_return")
+::if NOT defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+if NOT defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
+::if NOT defined dk_return (set "dk_return=%dk_call% dk_return")
 
 ::################################################################################
 ::dk_return(exit_code, message)
@@ -32,21 +32,21 @@ if not defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 	set "arg2=%~2"
 	if defined %~1 (set "arg1=!%~1!")
 	
-	if not defined arg1 (goto :endNumCheck)
+	if NOT defined arg1 (goto :endNumCheck)
 	set "arg1=%arg1:.=%"
 	set "arg1=%arg1:+=%"
 	if %arg1:-=% equ +%arg1:-=% (set "arg1IsNumber=1")
 	:endNumCheck
 
 	::##### No Parameters ######
-	if not defined arg1 (
+	if NOT defined arg1 (
 
 		rem echo ##### No Parameters ######
 		set "LAST_STATUS=!errorlevel!"
 		set "LAST_MESSAGE="
 	
 	rem ##### 1 Parameter ######
-	) else if not defined arg2 (
+	) else if NOT defined arg2 (
 
 		rem echo ##### 1 Parameter ######
 		if defined arg1IsNumber (

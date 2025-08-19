@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::##### DO NOT ALTER #############
 
-	if not defined flag (set "flag=0")
+	if NOT defined flag (set "flag=0")
 	for /F "usebackq delims=" %%A in ("%~1") do (
 		set "var=%%A"
 		if !flag! equ 1 if "!var:endMultiLine=!" neq "!var!" (
@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			
 			rem /* Use a `for` meta-variable rather than a normal environment variable to
 			rem    pass the variable value beyond the `endlocal` barrier;
-			rem    a standard `for` loop can be used here, because there are not going to be
+			rem    a standard `for` loop can be used here, because there are NOT going to be
 			rem    wildcards `?` and `*` in the variable value since they have already been
 			rem    resolved by `dir`; `for /F` cannot be used here due to the new-lines: */
 			for %%G in ("!MyVar!") do endlocal & set MyVar=%%~G

@@ -3,7 +3,7 @@ setlocal ENABLEDELAYEDEXPANSION
 @echo off
 
 @NET FILE 1>NUL 2>NUL
-if not '%errorlevel%' == '0' (
+if NOT '%errorlevel%' == '0' (
   @rem if access denied error, run self as wsh-jscript to elevate.
   goto :UAC_ELEVATE
 ) else (

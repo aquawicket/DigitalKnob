@@ -1,7 +1,7 @@
 @echo off
 :: https://stackoverflow.com/a/7308798
 
-if not defined STAY_OPEN (
+if NOT defined STAY_OPEN (
 	set "STAY_OPEN=1"
 	cmd /V:ON /k call "%~f0"
 )

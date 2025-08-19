@@ -31,13 +31,13 @@ set out
 ::######### Actual variable content #########
 rem /* Use a `for` meta-variable rather than a normal environment variable to
 rem    pass the variable value beyond the `endlocal` barrier;
-rem    a standard `for` loop can be used here, because there are not going to be
+rem    a standard `for` loop can be used here, because there are NOT going to be
 rem    wildcards `?` and `*` in the variable value since they have already been
 rem    resolved by `dir`; `for /F` cannot be used here due to the new-lines: */
 for %%j in ("!out!") do endlocal & set "data=%%~j"
 echo(
 echo(
-echo ###### Actual variable content ###### &:: Do not use `echo` to show true content of variable:
+echo ###### Actual variable content ###### &:: Do NOT use `echo` to show true content of variable:
 set data
 ::###########################################
 

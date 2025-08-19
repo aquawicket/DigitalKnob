@@ -1,11 +1,11 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
 ::######################## dk_evalDKC settings ########################
-if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env=clang")
+if NOT defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env=clang")
 ::#####################################################################
 ::# dk_evalDKC(<code>)
 ::#
@@ -20,7 +20,7 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 	::###### DKC_BUILD_DIR ######
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	set "DKC_BUILD_DIR=%DKCACHE_DIR%/DKC_BUILD_DIR"
-	if not exist "%DKC_BUILD_DIR%" (%dk_call% dk_mkdir "%DKC_BUILD_DIR%")
+	if NOT exist "%DKC_BUILD_DIR%" (%dk_call% dk_mkdir "%DKC_BUILD_DIR%")
 	
 	::###### _exe_ ######
 	set "_exe_=%DKC_BUILD_DIR%/dk_evalDKC_TEMP.exe"
@@ -37,27 +37,27 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 ::
 ::	::###### DKHTTP_DKC_FUNCTIONS_DIR ######
 ::	%dk_call% dk_assertVar DKHTTP_DKBRANCH_DIR
-::	if not defined DKHTTP_DKC_DIR		 		(set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
-::	if not defined DKHTTP_DKC_FUNCTIONS_DIR		(set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
+::	if NOT defined DKHTTP_DKC_DIR		 		(set "DKHTTP_DKC_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
+::	if NOT defined DKHTTP_DKC_FUNCTIONS_DIR		(set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
 ::
 ::	::###### Download files if missing ######
-::	if not exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
-::	::if not exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
+::	if NOT exist %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
+::	::if NOT exist %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
-	if not defined Host_Tuple						(%dk_call% dk_Host_Tuple)
-	if not defined dk_evalDKC_Default_Target_Os		(set "dk_evalDKC_Default_Target_Os=%Host_Os%")
-	if not defined dk_evalDKC_Default_Target_Arch	(set "dk_evalDKC_Default_Target_Arch=%Host_Arch%")
+	if NOT defined Host_Tuple						(%dk_call% dk_Host_Tuple)
+	if NOT defined dk_evalDKC_Default_Target_Os		(set "dk_evalDKC_Default_Target_Os=%Host_Os%")
+	if NOT defined dk_evalDKC_Default_Target_Arch	(set "dk_evalDKC_Default_Target_Arch=%Host_Arch%")
 	
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=%dk_evalDKC_DEFAULT_TARGET_OS%")
+	if NOT defined Target_Os (set "Target_Os=%dk_evalDKC_DEFAULT_TARGET_OS%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=%dk_evalDKC_Default_Target_Arch%")
+	if NOT defined Target_Arch (set "Target_Arch=%dk_evalDKC_Default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=%dk_evalDKC_Default_Target_Env%")
+	if NOT defined Target_Env (set "Target_Env=%dk_evalDKC_Default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 	
 	if "%Target_Env%" equ "cosmocc" (
@@ -65,7 +65,7 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 		set "Target_Arch=cosmocc"
 	)
 	
-	if not defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
+	if NOT defined Target_Tuple (set "Target_Tuple=%Target_Os%_%Target_Arch%_%Target_Env%")
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
@@ -100,7 +100,7 @@ if not defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 
-	if not exist "%_exe_%" (
+	if NOT exist "%_exe_%" (
 		echo(
 		%dk_call% dk_error "failed to compile %_c_file_%"
 		%return%

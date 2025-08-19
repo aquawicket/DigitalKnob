@@ -6,27 +6,27 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo runDKtcc(%*)
 	
 	echo(
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
 	echo DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR%"
 	
 	echo(
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1/")
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1/")
 	echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR_%"
 	
 	echo(
-	if not exist "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
+	if NOT exist "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
 	echo TCC_RT_EXE = %TCC_RT_EXE%
 	::%dk_call% dk_assertPath "%TCC_RT_EXE%"
 	
 	echo(
-	if not exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
+	if NOT exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
 	echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
 	::%dk_call% dk_assertPath "%DKSCRIPT_PATH%"
 	
 	echo(
-	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
+	if NOT defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 	echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
 	
 	::###### run script ######
@@ -64,9 +64,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	if "%~1" neq "" (goto:eof)
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 	
 	::###### Install DKtcc ######

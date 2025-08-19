@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,7 +13,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	if defined win_host		(set "NUGET_DL=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe")
-	if not defined NUGET_DL	(%dk_call% dk_error "NUGET_DL is invalid")
+	if NOT defined NUGET_DL	(%dk_call% dk_error "NUGET_DL is invalid")
 
 	%dk_call% dk_importVariables %NUGET_DL% IMPORT_PATH "%DKIMPORTS_DIR%/nuget" ROOT "%DK3RDPARTY_DIR%"
 	%dk_call% dk_set NUGET_EXE "%NUGET%/nuget.exe"

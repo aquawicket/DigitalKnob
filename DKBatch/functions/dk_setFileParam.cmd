@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,7 +16,7 @@ setlocal DisableDelayedExpansion
 	set "newValue=%~3"
 	set "newValue=%newValue:^^=^%
 	
-	if not exist "%file%" (copy NUL "%file%" >nul)
+	if NOT exist "%file%" (copy NUL "%file%" >nul)
 
 	<"%file%" >"%file%.tmp~" (
 		for /f "delims=" %%i in ('type "%file%"^|findstr "^"') do (
@@ -31,7 +31,7 @@ setlocal DisableDelayedExpansion
 			)
 			endlocal
 		)
-		if not defined found echo(%varName%=%newValue%
+		if NOT defined found echo(%varName%=%newValue%
 	)
 	move /y "%file%.tmp~" "%file%" >nul
 

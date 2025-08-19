@@ -22,7 +22,7 @@ exit /b
 
 	set /a "len=100"
 	for /l %%x in (0,1,%len%) do (
-		if not "!args:~%%x,1!"=="" (
+		if NOT "!args:~%%x,1!"=="" (
 			rem ### Exclaimation (!) breaks :Arg_Count_Loop.  Replace it with [exclaimation]
 			if "!args:~%%x,1!"=="^!" (
 				set /a plusone=%%x+1

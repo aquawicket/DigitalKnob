@@ -1,7 +1,7 @@
 @echo off
     setlocal enableextensions disabledelayedexpansion
 
-    rem Part that reads from console, not piped input
+    rem Part that reads from console, NOT piped input
     < con (
         set "data="
         set /p "data=Type something: "

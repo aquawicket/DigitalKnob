@@ -9,7 +9,7 @@ setlocal enableDelayedExpansion
 
 rem TODO: get strLen here
 set /a "strLen=100"
-for /l %%x in (0,1,%strLen%) do if not "!str:~%%x,1!"=="" (
+for /l %%x in (0,1,%strLen%) do if NOT "!str:~%%x,1!"=="" (
 
 	rem replace ! with [exclaimation]
 	if "!str:~%%x,1!"=="^!" (

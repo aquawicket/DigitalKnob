@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -21,10 +21,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	) else (
 		echo(
 		
-		::if not defined Target_Os_Cache (%dk_call% Target_Os_Cache)
+		::if NOT defined Target_Os_Cache (%dk_call% Target_Os_Cache)
 		echo  0^) !Target_Os_Cache!
 		echo(
-		if not defined Host_Os (%dk_call% dk_Host_Os)
+		if NOT defined Host_Os (%dk_call% dk_Host_Os)
 		echo  1^) !Host_Os!
 		echo  2^) Android
 		echo  3^) Cosmopolitan

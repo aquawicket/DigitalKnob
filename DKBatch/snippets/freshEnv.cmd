@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -15,7 +15,7 @@ goto :EOF
 
 :GetRegEnv
 FOR /F %%A IN ('REG query "%~1" /s^|find /I "REG_"') DO (
-    if /I not "%%~A" equ "Path" call :SetFromReg "%~1" "%%~A" "%%~A"
+    if /I NOT "%%~A" equ "Path" call :SetFromReg "%~1" "%%~A" "%%~A"
 )
 goto :EOF
 
@@ -27,7 +27,7 @@ goto :EOF
 :main
 REM Save temp
 set save_TEMP=%temp%
-if not defined save_TEMP set save_TEMP=%tmp%
+if NOT defined save_TEMP set save_TEMP=%tmp%
 
 for /F "delims==" %%A in ('set') do call :InheritOrDelete "%%~A"
 call :GetRegEnv "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"

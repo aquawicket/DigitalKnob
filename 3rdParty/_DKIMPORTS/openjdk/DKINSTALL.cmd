@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -18,7 +18,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined Linux_X86_64_Host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
 	if defined Mac_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
 	if defined Windows_X86_64_Host	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
-	if not defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
+	if NOT defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
 	
 	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_IMPORT_FILE
 	::%dk_call% dk_removeExtension %OPENJDK_IMPORT_FILE% OPENJDK_FOLDER
@@ -26,7 +26,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	if not defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL% NAME openjdk ROOT %DK3RDPARTY_DIR%)
+	if NOT defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL% NAME openjdk ROOT %DK3RDPARTY_DIR%)
 	
 	::%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd

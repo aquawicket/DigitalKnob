@@ -48,12 +48,12 @@ if "%~1" equ "" (goto DKINSTALL)
 
 :runDKcmd
 	echo :runDKcmd
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
-	if not exist "%CMD_EXE%"				(set "CMD_EXE=%~2")
-	if not exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
-	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
-	::if not exist "%TCC_EXE%"				(set "TCC_EXE=%USERPROFILE:\=/%/DigitalKnob/DKTools/tcc-rt-master/tcc.exe")
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
+	if NOT exist "%CMD_EXE%"				(set "CMD_EXE=%~2")
+	if NOT exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
+	if NOT defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
+	::if NOT exist "%TCC_EXE%"				(set "TCC_EXE=%USERPROFILE:\=/%/DigitalKnob/DKTools/tcc-rt-master/tcc.exe")
 	
 	::###### run script ######
 	:: "%ComSpec%"	path to cmd.exe
@@ -89,9 +89,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	echo Installing DKBatch . . .
 	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 
 
@@ -102,7 +102,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	::###### Set the registry entry for the extension ######
 	ftype DKcmd="%CMD_EXE:/=\%" /c if exist "%~f0" ^
 	(echo DKcmd installed ^& "%CMD_EXE:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%CMD_EXE%" "%%1" %%*) else ^
-	(echo DKcmd not installed ^& "%%1" %%*)
+	(echo DKcmd NOT installed ^& "%%1" %%*)
 
 	::###### Set icons and file association ######
 	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%CMD_EXE%"

@@ -29,7 +29,7 @@ set "exception.Stack="
 
 :rethrow  errCode  errMsg  errLoc
 setlocal disableDelayedExpansion
-if not defined exception.Restart set "exception.Stack=[%~1:%~2] %exception.Stack%"
+if NOT defined exception.Restart set "exception.Stack=[%~1:%~2] %exception.Stack%"
 for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "delims=" %%3 in ("%~3") do (
   setlocal enableDelayedExpansion
   for /l %%# in (1 1 10) do for /f "delims=" %%S in (" !exception.Stack!") do (
@@ -93,7 +93,7 @@ exit /b
 
 :Kill - Cease all processing, ignoring any remaining cached commands
 setlocal disableDelayedExpansion
-if not exist "%temp%\Kill.Yes" call :buildYes
+if NOT exist "%temp%\Kill.Yes" call :buildYes
 call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
 :CtrlC
 @%ComSpec% /c exit -1073741510
@@ -104,7 +104,7 @@ set "yes="
 copy nul Kill.Yes >nul
 for /f "delims=(/ tokens=2" %%Y in (
   '"copy /-y nul Kill.Yes <nul"'
-) do if not defined yes set "yes=%%Y"
+) do if NOT defined yes set "yes=%%Y"
 echo %yes%>Kill.Yes
 popd
 exit /b
@@ -210,7 +210,7 @@ A TRY/CATCH block is structured as follows:
 - Any script or :labeled routine that uses TRY/CATCH must have at least one
   SETLOCAL prior to the appearance of the first TRY.
 
-- TRY/CATCH blocks use labels, so they should not be placed within parentheses.
+- TRY/CATCH blocks use labels, so they should NOT be placed within parentheses.
   It can be done, but the parentheses block is broken when control is passed to
   the :@Catch or :@EndCatch label, and the code becomes difficult to interpret
   and maintain.
@@ -223,14 +223,14 @@ A TRY/CATCH block is structured as follows:
 - GOTO must never transfer control from outside TRY/CATCH to within a TRY or
   CATCH block.
 
-- CALL should not be used to call a label within a TRY or CATCH block.
+- CALL should NOT be used to call a label within a TRY or CATCH block.
 
 - CALLed routines containing TRY/CATCH must have labels that are unique within
   the script. This is generally good batch programming practice anyway.
   It is OK for different scripts to share :label names.
 
 - If a script or routine recursively CALLs itself and contains TRY/CATCH, then
-  it must not throw an exception until after execution of the first %@Try%
+  it must NOT throw an exception until after execution of the first %@Try%
 
 Exceptions are thrown by using
 
@@ -249,8 +249,8 @@ where
                within square brackets.
 
 The Message and Location values must be quoted if they contain spaces or poison
-characters like & | < >. The values must not contain additional internal quotes,
-and they must not contain a caret ^.
+characters like & | < >. The values must NOT contain additional internal quotes,
+and they must NOT contain a caret ^.
 
 The following variables will be defined for use by the CATCH block:
 
@@ -258,10 +258,10 @@ The following variables will be defined for use by the CATCH block:
   exception.Msg   = the Message value
   exception.Loc   = the Location value
   exception.Stack = traces the call stack from the CATCH block (or command line
-                    if not caught), all the way to the exception.
+                    if NOT caught), all the way to the exception.
 
-If the exception is not caught, then all four values are printed as part of the
-"unhandled exception" message, and the exception variables are not defined.
+If the exception is NOT caught, then all four values are printed as part of the
+"unhandled exception" message, and the exception variables are NOT defined.
 
 A CATCH block should always do ONE of the following at the end:
 
@@ -272,7 +272,7 @@ A CATCH block should always do ONE of the following at the end:
 
   Clear should never be used within a Try block.
 
-- If the exception has not been fully handled, then a new exception should be
+- If the exception has NOT been fully handled, then a new exception should be
   thrown which can be caught by a higher level CATCH. You can throw a new
   exception using the normal THROW, which will clear exception.Stack and any
   higher CATCH will have no awareness of the original exception.
@@ -289,7 +289,7 @@ A CATCH block should always do ONE of the following at the end:
   Rethrow should only be used within a CATCH block.
 
 
-One last restriction - the full path to EXCEPTION.BAT must not include ! or ^.
+One last restriction - the full path to EXCEPTION.BAT must NOT include ! or ^.
 
 
 This documentation can be accessed via the following commands

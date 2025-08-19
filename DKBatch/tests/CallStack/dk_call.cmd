@@ -1,6 +1,6 @@
 ::@echo off&::###### DK.cmd #########################################################################################################################
-::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+::if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,7 +10,7 @@
 :dk_call
 	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
+	if NOT defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	
 	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
 	::(set "temp=%*")
@@ -19,9 +19,9 @@
 	if "%~1" equ "printCallStack" 	(call :%* && %endfunction%)
 	
 	::### Constant Variables ###
-	if not defined dk_call 		(set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd")
-	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=%SystemDrive%/GLOBAL.txt")
-	if not defined LVL			(set /a "LVL=-1")
+	if NOT defined dk_call 		(set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd")
+	if NOT defined GLOBAL_FILE 	(set "GLOBAL_FILE=%SystemDrive%/GLOBAL.txt")
+	if NOT defined LVL			(set /a "LVL=-1")
 	
 	(set "pad=")
 	(set "padB=      ")

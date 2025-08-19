@@ -3,7 +3,7 @@ setlocal enableDelayedExpansion
 set "var=Parent Value"
 (
   call :test
-  echo This and the following line are not executed
+  echo This and the following line are NOT executed
   goto:eof
 )
 :break
@@ -14,8 +14,8 @@ pause
 setlocal disableDelayedExpansion
 set "var=Child Value"
 (goto) 2>nul & echo var=!var! & goto :break
-echo This line is not executed
+echo This line is NOT executed
 
 :break
-echo This line is not executed
+echo This line is NOT executed
 

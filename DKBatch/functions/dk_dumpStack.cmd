@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 ::https://stackoverflow.com/a/11576816
@@ -9,7 +9,7 @@ set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" equ "%func:~0,1%" ( goto %func% )
 
-if not defined frame (set /a frame=0)
+if NOT defined frame (set /a frame=0)
 if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack

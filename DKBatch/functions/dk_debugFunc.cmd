@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -8,7 +8,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# dk_debugFunc()
 ::#
 ::#   This function is placed at the entry point of every function in the library. It provides debugging information for the parent function at execution time when enabled.
-::#   This function also implements a managed callstack for languages that do not have a implemented debugging callstack. Various other debugging tasks can be preformed
+::#   This function also implements a managed callstack for languages that do NOT have a implemented debugging callstack. Various other debugging tasks can be preformed
 ::#   such as argument count and type checking, parameter variable value watching, function execution timing and trigger breakpoints before and after function calls.
 ::#   Any functions named in the breakpoint list will pause execution when execution encounters the function call. Breakpoints may pause execution at the function entry point,
 ::#   before the function is entered into the callstack, after entry and the trace is printed, or at the start of the next call, before the next calls callstack is entered.
@@ -29,7 +29,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#   4: ###### DEBUG FUNCTION TRACE PRINTING ######
 ::#      If debug tracing is enabled, each function and parameter values will printed as the functions are called. Timestamp and Elapsed time since last callstack entry
-::#      will also be printed to the debugging console. Any functions named in the exclusion list will not be printed. Any functions named in the inclusion list will always be printed.
+::#      will also be printed to the debugging console. Any functions named in the exclusion list will NOT be printed. Any functions named in the inclusion list will always be printed.
 ::#      unless debug tracing is explicitly turned off.
 ::#
 ::#   5: ###### ENTRY BREAKPOINT ######
@@ -40,11 +40,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	
 	if "%__FUNC__%" equ "dk_debugFunc" %endfunction%
-	if not defined __FUNC__ (%endfunction%)
+	if NOT defined __FUNC__ (%endfunction%)
 	
     :: ###### VALIDATE ARGUMENTS ######
-    if "%~1" equ ""												(%dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is not set.")
-    if "%~1" neq ""	if defined __ARGC__ if %__ARGC__% lss %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): not enough arguments. Minimum is %~1, got %__ARGC__%")
+    if "%~1" equ ""												(%dk_call% dk_fatal "%FUNC%(%ARGV%): dk_debugFunc ArgsMin ArgsMax is NOT set.")
+    if "%~1" neq ""	if defined __ARGC__ if %__ARGC__% lss %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): NOT enough arguments. Minimum is %~1, got %__ARGC__%")
     if "%~2" equ ""	if defined __ARGC__ if %__ARGC__% gtr %~1	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~1, got %__ARGC__%")
     if "%~2" neq ""	if defined __ARGC__ if %__ARGC__% gtr %~2	(%dk_call% dk_fatal "%FUNC%(%ARGV%): too many arguments. Maximum is %~2, got %__ARGC__%")
 

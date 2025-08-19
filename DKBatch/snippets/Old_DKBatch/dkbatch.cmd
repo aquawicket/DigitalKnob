@@ -30,10 +30,10 @@
 ::set "STAY_OPEN=1"
 
 ::##################  %DKBATCH_PATH%  ##################
-if not defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
+if NOT defined DKBATCH_PATH ( set "DKBATCH_PATH=%~dp0" )
 
 ::##################  Settinge() ##################
-if not defined DKSETTNGS ( call %DKBATCH_PATH%settings )
+if NOT defined DKSETTNGS ( call %DKBATCH_PATH%settings )
 
 ::################## %ALL_BUT_FIRST$ ##################
 set ALL_BUT_FIRST=%*
@@ -58,7 +58,7 @@ if "%cnt%" gtr "1" (
 :end
 
 ::: add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if not exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
+if NOT exist "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
 ::echo [91m Testins for DKEND in "%~1" [0m
 >nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
 :end
@@ -109,10 +109,10 @@ if "%1" neq "" set "caller=%~1"
 ::if "%1" equ "" ( set "caller=%0" ) else ( set "caller=%1" )
 
 if "%STAY_OPEN%" neq "" (
-	if not defined in_subprocess (cmd /k set in_subprocess=y ^& "%caller%" %ALL_BUT_FIRST%) & exit )
+	if NOT defined in_subprocess (cmd /k set in_subprocess=y ^& "%caller%" %ALL_BUT_FIRST%) & exit )
 )
 
-::if not defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
+::if NOT defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
 ::#########################################################################
 ::     DKBATCH first subprocess creation entry point (NO SUBPROCESS YET)

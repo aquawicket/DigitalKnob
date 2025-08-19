@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -65,7 +65,7 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
     set /P "=" 
    
     if defined callback call %callback% %keyCode% || echo callback returned error && %return%
-    ::if not defined callback call :dk_keyboard.onKeyDown %keyCode% || %dk_call% dk_error "call :onKeyDown %keyCode% failed!"
+    ::if NOT defined callback call :dk_keyboard.onKeyDown %keyCode% || %dk_call% dk_error "call :onKeyDown %keyCode% failed!"
     ::if defined stopPollKeys %return%
     goto dk_keyboard.pollKeys
 %endfunction%

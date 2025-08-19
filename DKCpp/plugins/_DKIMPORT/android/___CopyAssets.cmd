@@ -7,8 +7,8 @@ set "PACKAGE_NAME=com.DigitalKnob.dk"
 
 set APP_ROOT=%~dp0
 
-if not exist %ANDROID_HOME% (
-	%ERROR% "ANDROID_HOME environment variable not set"
+if NOT exist %ANDROID_HOME% (
+	%ERROR% "ANDROID_HOME environment variable NOT set"
 )
 
 set ASSETS=%APP_ROOT%/app/src/main/assets

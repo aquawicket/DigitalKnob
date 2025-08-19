@@ -1,14 +1,14 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 ::set "dk_download_DISABLE_curl=1"
 ::set "dk_download_DISABLE_certutil=1"
 ::set "dk_download_DISABLE_bitsadmin=1"
 ::set "dk_download_DISABLE_powershell=1"
-if not defined dk_download_BACKUP_SERVER		(set "dk_download_BACKUP_SERVER=http://aquawicket.com/download")
-if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TEST=0")
+if NOT defined dk_download_BACKUP_SERVER		(set "dk_download_BACKUP_SERVER=http://aquawicket.com/download")
+if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TEST=0")
 ::####################################################################
 ::# dk_download(url, destination) OVERWRITE
 ::#
@@ -28,7 +28,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if defined destination (%dk_call% dk_realpath "%destination%" destination)
   
     %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	if not defined destination (
+	if NOT defined destination (
 		set "destination=%DKDOWNLOAD_DIR%/%dk_basename%"
 	)
 	%dk_call% dk_assertVar destination
@@ -48,22 +48,22 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 		set "url=%dk_download_BACKUP_SERVER%/%dk_basename%"
 	)
 	
-	::### Test that url exists, if not try dk_download_BACKUP_SERVER ###
+	::### Test that url exists, if NOT try dk_download_BACKUP_SERVER ###
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_warning "url:%url% NOT FOUND" && set "url=%dk_download_BACKUP_SERVER%/%dk_basename%" && %dk_call% dk_info "Trying Backup Server url:%url% . . ."
     %dk_call% dk_urlExists "%url%" || %dk_call% dk_error "url:%url% NOT FOUND"
     %dk_call% dk_echo "Downloading %url%"
    
     ::### make sure the destination parent directory exists ###
     %dk_call% dk_dirname "%destination%"
-    if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
+    if NOT exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
    
     ::####################################################################################  
 	:: curl
     :curl_dl
     ::if defined dk_download_DISABLE_curl (goto end_curl_dl)
-	if not defined dk_download_DISABLE_curl (
+	if NOT defined dk_download_DISABLE_curl (
 		%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-		if not exist "%destination%_DOWNLOADING" (!CURL_EXE! --help %NO_OUTPUT% && !CURL_EXE! -L "%url%" -o "%destination%_DOWNLOADING")
+		if NOT exist "%destination%_DOWNLOADING" (!CURL_EXE! --help %NO_OUTPUT% && !CURL_EXE! -L "%url%" -o "%destination%_DOWNLOADING")
 		%dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
 		if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
 	)
@@ -74,7 +74,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     :certitil_dl
     if defined dk_download_DISABLE_certutil (goto end_certutil_dl)
 ::	%dk_call% dk_validate CERTUTIL_EXE "dk_CERTUTIL_EXE"
-    if not exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
+    if NOT exist "%destination%_DOWNLOADING" (%CERTUTIL_EXE% %NO_OUTPUT% && %CERTUTIL_EXE%  -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)
@@ -85,7 +85,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if defined dk_download_DISABLE_bitsadmin (goto end_bitsadmin_dl)
 	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
 ::	%dk_call% dk_validate BITSADMIN_EXE "dk_BITSADMIN_EXE"
-    if not exist "%destination%_DOWNLOADING" ("%BITSADMIN_EXE%" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING")
+    if NOT exist "%destination%_DOWNLOADING" ("%BITSADMIN_EXE%" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING")
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
     if "%fileSize%" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
     if exist "%destination%_DOWNLOADING" (goto download_done)
@@ -96,7 +96,7 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if defined dk_download_DISABLE_powershell (goto end_powershell_dl)
 	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-    if not exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^
+    if NOT exist "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^
         "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
         "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
     %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
@@ -107,10 +107,10 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	:: dk_powershell
     :dk_powershell_dl
 ::    if defined DISABLE_dk_powershell goto end_dk_powershell_dl
-::    if not defined POWERSHELL_EXE goto end_dk_powershell_dl
+::    if NOT defined POWERSHELL_EXE goto end_dk_powershell_dl
 ::    %dk_call% dk_echo "Downloading via dk_powershell"
 ::    set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-::    if not exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
+::    if NOT exist "%destination%_DOWNLOADING" %dk_call% dk_powershell "$cli = New-Object System.Net.WebClient; "^
 ::        "$cli.Headers['User-Agent'] = '%User-Agent%'; "^
 ::        "$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
 ::    %dk_call% dk_fileSize "%destination%_DOWNLOADING" fileSize
@@ -120,12 +120,12 @@ if not defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 
     :download_done
     :: If Dowload Failed
-    if not exist "%destination%_DOWNLOADING" (%dk_call% dk_error "url:%url% DOWNLOAD FAILED")
+    if NOT exist "%destination%_DOWNLOADING" (%dk_call% dk_error "url:%url% DOWNLOAD FAILED")
    
     :: downloaded as temporary name like myFile.txt_DOWNLOADING
     :: then rename it to it's original upon completion
     %dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
-    if not exist "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
+    if NOT exist "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
    
     ::%dk_call% dk_log SUCCESS "Download complete"
 	endlocal & (

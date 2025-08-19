@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -23,7 +23,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined %1 if %1 equ 0 (set dk_color_ENABLE=)
 
 	:USE_COLOR_if
-	if not defined dk_color_ENABLE goto dk_color_DISABLE
+	if NOT defined dk_color_ENABLE goto dk_color_DISABLE
 
 		::(set ESC="																&:: escape character	BAD: Uncopyable character
 		::for /f %%A in ('echo prompt $E^| cmd') do (set ESC=%%A)					&:: escape character	BAD: cryptic
@@ -124,21 +124,21 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		::(set CCU=%CSI%<n>C)				&:: Cursor Forward
 		(set CUB=%CSI%D)					&:: Cursor Back 1
 		::(set CCU=%CSI%<n>D)				&:: Cursor Back
-		(set CNL=%CSI%E)					&:: Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>E)				&:: Cursor Next Line - Moves cursor to beginning of the line n (default 1) lines down. (not ANSI.SYS)
-		(set CPL=%CSI%F)					&:: Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>F)				&:: Cursor Previous Line - Moves cursor to beginning of the line n (default 1) lines up. (not ANSI.SYS)
-		(set CHA=%CSI%G)					&:: Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>G)				&:: Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (not ANSI.SYS)
+		(set CNL=%CSI%E)					&:: Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (NOT ANSI.SYS)
+		::(set CCU=%CSI%<n>E)				&:: Cursor Next Line - Moves cursor to beginning of the line n (default 1) lines down. (NOT ANSI.SYS)
+		(set CPL=%CSI%F)					&:: Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (NOT ANSI.SYS)
+		::(set CCU=%CSI%<n>F)				&:: Cursor Previous Line - Moves cursor to beginning of the line n (default 1) lines up. (NOT ANSI.SYS)
+		(set CHA=%CSI%G)					&:: Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (NOT ANSI.SYS)
+		::(set CCU=%CSI%<n>G)				&:: Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (NOT ANSI.SYS)
 		::(set CUP=%CSI%<n>;<m>H)			&:: Cursor Position	- Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
 		::(set HVP=%CSI%<y>;<x>f)			&:: Horizontal Vertical Position - Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
 		(set ANSISYSSC=%CSI%s)				&:: Save Cursor – **With no parameters, performs a save cursor operation like DECSC
 		(set ANSISYSRC=%CSI%u)				&:: Restore Cursor - **With no parameters, performs a restore cursor operation like DECRC
 
 		::CSI n J	ED						&:: Erase in Display - Clears part of the screen. If n is 0 (or missing), clear from cursor to end of screen. If n is 1, clear from cursor to beginning of the screen. If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen and delete all lines saved in the scrollback buffer.
-		::CSI n K	EL						&:: Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does not change.
-		::CSI n S	SU						&:: Scroll Up - Scroll whole page up by n (default 1) lines. New lines are added at the bottom. (not ANSI.SYS)
-		::CSI n T	SD						&:: Scroll Down	- Scroll whole page down by n (default 1) lines. New lines are added at the top. (not ANSI.SYS)
+		::CSI n K	EL						&:: Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does NOT change.
+		::CSI n S	SU						&:: Scroll Up - Scroll whole page up by n (default 1) lines. New lines are added at the bottom. (NOT ANSI.SYS)
+		::CSI n T	SD						&:: Scroll Down	- Scroll whole page down by n (default 1) lines. New lines are added at the top. (NOT ANSI.SYS)
 		::CSI n ; m f	HVP					&:: Horizontal Vertical Position - Same as CUP, but counts as a format effector function (like CR or LF) rather than an editor function (like CUD or CNL).
 		::CSI n m	SGR						&:: Select Graphic Rendition - Sets colors and style of the characters following this code
 		::CSI 5i							&:: AUX Port On	- Enable aux serial port usually for local serial printer

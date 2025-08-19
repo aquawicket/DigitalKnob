@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -27,7 +27,7 @@ goto:eof
 		rem Retrieve the original environment to the temporary file
 		start /i /wait /min "" "%ComSpec%" /c">""%%~ff"" set "
 
-		rem We need two flag variables. Prepare two names that "should" not collide
+		rem We need two flag variables. Prepare two names that "should" NOT collide
 		for /f "tokens=1,2" %%d in ("_&d&%random%%random%_ _&m&%random%%random%_") do (
 
 			rem %%d will be used to determine if we will check for variable deletion
@@ -38,7 +38,7 @@ goto:eof
 			rem Retrieve the current environment contents
 			for /f "delims= eol==" %%a in ('set') do (
 
-				rem We have not found matching variables
+				rem We have NOT found matching variables
 				set "%%e="
 
 				rem Search a match in original set of variables
@@ -46,16 +46,16 @@ goto:eof
 
 					rem If variables match, flag it, else check for variable
 					rem deletion is this is the first loop over the original file
-					if %%a==%%o ( set "%%e=1" ) else if not defined %%d (
-						for /f "delims==" %%V in ("%%~o") do if not defined %%V (echo(%%V=)
+					if %%a==%%o ( set "%%e=1" ) else if NOT defined %%d (
+						for /f "delims==" %%V in ("%%~o") do if NOT defined %%V (echo(%%V=)
 					)
 				)
 
 				rem If no match found, output changed value
-				if not defined %%e (echo(%%a)
+				if NOT defined %%e (echo(%%a)
 
 			rem Now all the variable deletion has been checked.
-			) & if not defined %%d set "%%d=1"
+			) & if NOT defined %%d set "%%d=1"
 
 		rem Cleanup flag variables
 		) & set "%%d=" & set "%%e="

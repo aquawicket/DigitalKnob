@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -24,14 +24,14 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_info "Renameing %_from_% to %_to_%"
 	
-	if not exist "%_from_%" (
-		%dk_call% dk_error "dk_rename: %_from_% not found"
+	if NOT exist "%_from_%" (
+		%dk_call% dk_error "dk_rename: %_from_% NOT found"
 		%return%
 	)
 	
 	if exist "%_to_%" (
 		if "%OVERWRITE%" neq "1" (
-			%dk_call% dk_error "dk_rename Cannot rename file. Destiantion already exists and OVERWRITE is not set"
+			%dk_call% dk_error "dk_rename Cannot rename file. Destiantion already exists and OVERWRITE is NOT set"
 			%return%
 		)
 		%dk_call% dk_delete %_to_%
@@ -39,7 +39,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	:: the base directory of the %_to_% path must exist.	
 	%dk_call% dk_dirname "%_to_%"
-	if not exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
+	if NOT exist "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
 	
 	move /Y "%_from_:/=\%" "%_to_:/=\%" %NO_STDOUT%
 	

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -35,23 +35,23 @@ dk_callDKCSharp
 
 	::###### DKHTTP_DKC_FUNCTIONS_DIR ######
 	%dk_call% dk_assertVar DKHTTP_DKBRANCH_DIR
-	if not defined DKHTTP_DKCSHARP_DIR		 	 (set "DKHTTP_DKCSHARP_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
-	if not defined DKHTTP_DKCSHARP_FUNCTIONS_DIR  (set "DKHTTP_DKCSHARP_FUNCTIONS_DIR=%DKHTTP_DKCSHARP_DIR%/functions")
+	if NOT defined DKHTTP_DKCSHARP_DIR		 	 (set "DKHTTP_DKCSHARP_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
+	if NOT defined DKHTTP_DKCSHARP_FUNCTIONS_DIR  (set "DKHTTP_DKCSHARP_FUNCTIONS_DIR=%DKHTTP_DKCSHARP_DIR%/functions")
 
 	::###### Download files if missing ######
-	if not exist %DKCSHARP_FUNCTIONS_DIR%/DK.cs	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
-	if not exist %DKCSHARP_FUNCTIONS_DIR%/%~1.cs   (%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
+	if NOT exist %DKCSHARP_FUNCTIONS_DIR%/DK.cs	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
+	if NOT exist %DKCSHARP_FUNCTIONS_DIR%/%~1.cs   (%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
 
 	::###### Target_Os ######
-	if not defined Target_Os (set "Target_Os=%default_Target_Os%")
+	if NOT defined Target_Os (set "Target_Os=%default_Target_Os%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
 	::###### Target_Arch ######
-	if not defined Target_Arch (set "Target_Arch=%default_Target_Arch%")
+	if NOT defined Target_Arch (set "Target_Arch=%default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
 	::###### Target_Env ######
-	if not defined Target_Env (set "Target_Env=%default_Target_Env%")
+	if NOT defined Target_Env (set "Target_Env=%default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
 	::###### CSC_EXE ######
@@ -64,7 +64,7 @@ dk_callDKCSharp
 	::###### DKC_BUILD_DIR ######
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	set "DKCSHARP_BUILD_DIR=%DKCACHE_DIR%/DKCSHARP_BUILD_DIR"
-	if not exist "%DKCSHARP_BUILD_DIR%" (%dk_call% dk_mkdir "%DKCSHARP_BUILD_DIR%")
+	if NOT exist "%DKCSHARP_BUILD_DIR%" (%dk_call% dk_mkdir "%DKCSHARP_BUILD_DIR%")
 
 	::###### _app_exe_ ######
 	set "_app_exe_=%DKCSHARP_BUILD_DIR%/%_func_%.exe"
@@ -78,7 +78,7 @@ dk_callDKCSharp
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
 
-	if not exist "%_app_exe_%" (
+	if NOT exist "%_app_exe_%" (
 		%dk_call% dk_echo
 		%dk_call% dk_error "failed to compile %_csharp_file_%"
 		%return%

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -24,7 +24,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#			if start < -Array/length, 0 is used.
 ::#			if start >= Array/length, nothing is copied.
 ::#	end :optional
-::#		Zero-based index at which to end copying elements from, converted to an integer. copyWithin() copies up to but not including end.
+::#		Zero-based index at which to end copying elements from, converted to an integer. copyWithin() copies up to but NOT including end.
 ::#			Negative index counts back from the end of the array — if -Array/length <= end < 0, end + Array/length is used.
 ::#			if end < -Array/length, 0 is used.
 ::#			if end >= Array/length or end is omitted, Array/length is used, causing all elements until the end to be copied.

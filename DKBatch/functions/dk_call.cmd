@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -58,7 +58,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 	::##### Prepair ###########################################################################################
 	if exist "%__CMND__:.cmd=%.cmd" (set __CMND__=%__CMND__:.cmd=%.cmd)
 	if exist "%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd" (set __CMND__=%DKBATCH_FUNCTIONS_DIR_%%__CMND__:.cmd=%.cmd)
-	if not exist "%__CMND__%" (
+	if NOT exist "%__CMND__%" (
 		call %DKBATCH_FUNCTIONS_DIR_%dk_source.cmd "%__CMND__%"
 	)
 	
@@ -223,8 +223,8 @@ exit /b !errorlevel!
 ::# :pushStack(file args)
 ::#
 :pushStack
-	if not defined LVL (set /a "LVL=0")
-	if not defined LVL (set /a "ENTRY=0")
+	if NOT defined LVL (set /a "LVL=0")
+	if NOT defined LVL (set /a "ENTRY=0")
 	(set /a LVL+=1)
 	(set /a ENTRY+=1)
 	call :setGlobal __STACK__%ENTRY% %*
@@ -267,8 +267,8 @@ exit /b !errorlevel!
 	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "return:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
 	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "checkerror:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
 	
-	if not defined pad (set "pad=%clr%")
-	if not defined indent (set "indent=   ")
+	if NOT defined pad (set "pad=%clr%")
+	if NOT defined indent (set "indent=   ")
 	
 	if "%dk_call_PRINT_ENTRY%" equ "1" (
 		for /l %%x in (1, 1, %ENTRY%) do (

@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,7 +10,7 @@ set "dk_assertPath_CASE_SENSITIVE=1"
 ::################################################################################
 ::# dk_assertPath(path)
 ::#
-::# Throw assertion if argument is not a valid, existing file or directory
+::# Throw assertion if argument is NOT a valid, existing file or directory
 ::#
 :dk_assertPath
 %setlocal%
@@ -32,12 +32,12 @@ set "dk_assertPath_CASE_SENSITIVE=1"
 	if defined dk_assertPath_FORWARD_SLASHES set "_real_=%_real_:\=/%"
 
 	::### Test case sensitive ###
-	if defined dk_assertPath_CASE_SENSITIVE if not [%_val_%]==[%_real_%] (
+	if defined dk_assertPath_CASE_SENSITIVE if NOT [%_val_%]==[%_real_%] (
 		%dk_call% dk_error %red% %_var_%:'%_val_%' _real_:'%_real_%' mismatch %clr% & %return%
 	)
 
 	::### Test path exists ###
-	if not exist "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' not found" & %return%
+	if NOT exist "%_val_:"=%" %dk_call% dk_error "ASSERTION: dk_assertPath %_var_%:'%_val_:"=%' NOT found" & %return%
 
 	if "%dk_DEBUG%" equ "1" %dk_call% dk_debug "dk_assertPath %_var_% = %_val_%"
 %endfunction%

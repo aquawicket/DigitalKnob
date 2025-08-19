@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -10,7 +10,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# Array/dk_indexOf(array, searchElement, fromIndex)
 ::# Array/dk_indexOf(array, searchElement, fromIndex, rtn_val)
 ::#
-::#	The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is not present.
+::#	The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is NOT present.
 ::#
 ::#	PARAMETERS
 ::#	searchElement
@@ -21,10 +21,10 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used.
 ::#			Note, the array is still searched from front to back in this case.
 ::#			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
-::#			If fromIndex >= Array/length, the array is not searched and -1 is returned.
+::#			If fromIndex >= Array/length, the array is NOT searched and -1 is returned.
 ::#
 ::#	RETURN VALUE
-::#	The first index of searchElement in the array; -1 if not found.
+::#	The first index of searchElement in the array; -1 if NOT found.
 ::#
 ::#	REFERENCE
 ::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
@@ -35,7 +35,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	set /a "_count_=0"
 	:indexOf_loop
-		if not defined %~1[%_count_%] (
+		if NOT defined %~1[%_count_%] (
 			endlocal & %dk_call% dk_set dk_indexOf -1
 			%endfunction%
 		)

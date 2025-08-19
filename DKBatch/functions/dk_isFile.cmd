@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -14,12 +14,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_assertPath "%~1"
 
-	if not exist "%~1" (
+	if NOT exist "%~1" (
 		set "dk_isFile=-1"
 		exit /b %dk_isFile%
 	)
 	
-	if not exist "%~1/*" (
+	if NOT exist "%~1/*" (
 		set "dk_isFile=0"
 	) else (
 		set "dk_isFile=1"
@@ -50,7 +50,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%dk_isFile%" equ "0" (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
     ::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 	
@@ -61,7 +61,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 	
@@ -72,7 +72,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 	
@@ -83,7 +83,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
     ::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 	
@@ -94,7 +94,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file"
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file"
     ::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 	
@@ -105,7 +105,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_isFile% equ 0 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
 	::###### Using if ERRORLEVEL
 	%dk_call% dk_isFile "%myPath%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'%myPath%' is a file") else (%dk_call% dk_info "'%myPath%' is NOT a file")
     ::###### Using && and || conditionals
     %dk_call% dk_isFile "%myPath%" && %dk_call% dk_info "'%myPath%' is a file" || %dk_call% dk_info "'%myPath%' is NOT a file"
 %endfunction%

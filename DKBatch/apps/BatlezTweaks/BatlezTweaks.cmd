@@ -239,7 +239,7 @@ echo.
 echo.
 echo.
 echo.
-echo                              %r%This feature has not been finished yet but will be coming out soon. 
+echo                              %r%This feature has NOT been finished yet but will be coming out soon. 
 echo.
 echo.
 echo.
@@ -334,7 +334,7 @@ echo implementing the suggested optimizations. Each system and%u%
 echo %c%configuration may have varying results.%u%
 echo.
 echo %c%It is important to note that everything presented here will be used at your%u%
-echo %r%own risk.%u% %c%I will not be held liable for any damages caused due to failure to%u%
+echo %r%own risk.%u% %c%I will NOT be held liable for any damages caused due to failure to%u%
 echo %c%follow the instructions carefully.%u%
 echo.
 echo %c%If you need clarification on a tweak, please refrain from using it and %u%
@@ -423,7 +423,7 @@ echo %c%Please enter a valid number!%u% & goto Backup
 :: Credits to tarekifla
 :restorepoint1
 echo %c%Backing up the registry...%u%
-if not exist "C:\registryBackup\" mkdir C:\registryBackup
+if NOT exist "C:\registryBackup\" mkdir C:\registryBackup
 cd /d C:\registryBackup
 REG SAVE HKLM\SOFTWARE SOFTWARE
 REG SAVE HKLM\SYSTEM SYSTEM
@@ -467,7 +467,7 @@ if /i "%deleteOld%" equ "Yes" (
         echo Failed to remove old restore points. Please ensure you have sufficient privileges.
     )
 ) else if /i "%deleteOld%" equ "No" (
-    echo Old restore points will not be removed.
+    echo Old restore points will NOT be removed.
 ) else (
     echo Invalid input. Skipping old restore point deletion.
 )
@@ -1892,7 +1892,7 @@ echo 5. Firefox Debloat
 echo ---------------------------------------------------------------------------------------------------------------------
 set choice=
 set /p choice=Type A Number:
-if not '%choice%'=='' set choice=%choice:~0,4%
+if NOT '%choice%'=='' set choice=%choice:~0,4%
 if '%choice%'=='0' goto AdvancedMenu
 if '%choice%'=='1' goto debloatwindows
 if '%choice%'=='2' goto debloatdiscord
@@ -3894,7 +3894,7 @@ echo 5. Warzone
 echo --------------------------------------------------------------------------------------------------------------------
 set choice=
 set /p choice=Type A Number:
-if not '%choice%'=='' set choice=%choice:~0,100%
+if NOT '%choice%'=='' set choice=%choice:~0,100%
 if '%choice%'=='0' goto AdvancedMenu
 if '%choice%'=='1' goto Valorant
 if '%choice%'=='2' goto CS2
@@ -4140,7 +4140,7 @@ echo.
 echo.
 set choice=
 set /p choice=Type A Number:
-if not '%choice%'=='' set choice=%choice:~0,100%
+if NOT '%choice%'=='' set choice=%choice:~0,100%
 if '%choice%'=='0' goto AdvancedMenu
 if '%choice%'=='1' goto continue1
 
@@ -4150,7 +4150,7 @@ if exist "C:\ProgramData\chocolatey" (
     echo Chocolatey is already installed.
     goto ChocoNice
 ) else (
-    echo Chocolatey not found. Starting installation...
+    echo Chocolatey NOT found. Starting installation...
     goto InstallChoco
 )
 
@@ -4224,7 +4224,7 @@ echo ___________________________________________________________________________
 echo 0. Back to menu
 set choice=
 set /p choice=Type A Number:
-if not '%choice%'=='' set choice=%choice:~0,100%
+if NOT '%choice%'=='' set choice=%choice:~0,100%
 if '%choice%'=='1' choco install avastfreeantivirus -y
 if '%choice%'=='2' choco install anydesk anydesk.install anydesk.portable -y
 if '%choice%'=='3' choco install audacity -y

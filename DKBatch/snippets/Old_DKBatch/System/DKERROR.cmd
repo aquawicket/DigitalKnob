@@ -31,9 +31,9 @@
 ::
 ::
 ::    %ERROR%: Throw an error message, then continue script
-:: %IF_ERROR%: Throw an error message if %ERRORLEVEL% is not 0, then continue script
+:: %IF_ERROR%: Throw an error message if %ERRORLEVEL% is NOT 0, then continue script
 ::    %FATAL%: Throw an error message, then exit script
-:: %IF_FATAL%: Throw an error messate if %ERRORLEVEL% is not 0, then exit script
+:: %IF_FATAL%: Throw an error messate if %ERRORLEVEL% is NOT 0, then exit script
 ::
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

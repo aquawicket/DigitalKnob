@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -13,8 +13,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1 2
 	
 	set "dk_isNonEmptyDirectory=1"
-	if not exist %~1\* (
-		%dk_call% dk_error "%~1 is not a directory"
+	if NOT exist %~1\* (
+		%dk_call% dk_error "%~1 is NOT a directory"
 		set "dk_isNonEmptyDirectory=1"
 	)
 	
@@ -45,8 +45,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "NotEmptyDir=C:/NotEmptyDir"
 	set "NotDir=C:/NotEmptyDir/file.txt"
 	set "NonExistentDir=C:/NonExistentDir"
-	if not exist "%EmptyDir%" (%dk_call% dk_mkdir "%EmptyDir%")
-	if not exist "%NotDir%" (echo( > %NotDir%)
+	if NOT exist "%EmptyDir%" (%dk_call% dk_mkdir "%EmptyDir%")
+	if NOT exist "%NotDir%" (echo( > %NotDir%)
 
     ::###### Using if return value
 	%dk_call% dk_echo
@@ -62,13 +62,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::###### Using if ERRORLEVEL
 	%dk_call% dk_echo
     %dk_call% dk_isNonEmptyDirectory "%EmptyDir%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'EmptyDir' is a non-empty directory")       else (%dk_call% dk_info "'EmptyDir' is NOT a non-empty directory")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'EmptyDir' is a non-empty directory")       else (%dk_call% dk_info "'EmptyDir' is NOT a non-empty directory")
     %dk_call% dk_isNonEmptyDirectory "%NotEmptyDir%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'NotEmptyDir' is a non-empty directory")    else (%dk_call% dk_info "'NotEmptyDir' is NOT a non-empty directory")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'NotEmptyDir' is a non-empty directory")    else (%dk_call% dk_info "'NotEmptyDir' is NOT a non-empty directory")
 	%dk_call% dk_isNonEmptyDirectory "%NotDir%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'NotDir' is a empty non-directory")         else (%dk_call% dk_info "'NotDir' is NOT a non-empty directory")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'NotDir' is a empty non-directory")         else (%dk_call% dk_info "'NotDir' is NOT a non-empty directory")
 	%dk_call% dk_isNonEmptyDirectory "%NonExistentDir%"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'NonExistentDir' is a non-empty directory") else (%dk_call% dk_info "'NonExistentDir' is NOT a non-empty directory")
+    if NOT ERRORLEVEL 1 (%dk_call% dk_info "'NonExistentDir' is a non-empty directory") else (%dk_call% dk_info "'NonExistentDir' is NOT a non-empty directory")
    
     ::###### Using && and || conditionals
 	%dk_call% dk_echo

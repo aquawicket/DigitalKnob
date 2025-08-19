@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -28,7 +28,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::### rename the list elements to the folder basename and add a matching command ###
     set /a "n=0"
     :loop1
-        if not defined dk_getDirectories[%n%] goto endloop1
+        if NOT defined dk_getDirectories[%n%] goto endloop1
         for %%Z in ("!dk_getDirectories[%n%]!") do set "dk_getDirectories[%n%]=%%~nxZ"
         set "commands[%n%]=%dk_call% dk_set Target_App !dk_getDirectories[%n%]!"
         set /a n+=1
@@ -70,7 +70,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::### Print the dk_getDirectories list ###
     set /a "n=0"
     :loop2
-        if not defined dk_getDirectories[%n%] goto endloop2
+        if NOT defined dk_getDirectories[%n%] goto endloop2
         echo %n%: !dk_getDirectories[%n%]!
         set /a n+=1
         goto loop2
@@ -84,7 +84,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     %dk_call% dk_echo "!dk_getDirectories[%dk_keyboardInput%]!"
    
-    if not defined commands[%dk_keyboardInput%] (
+    if NOT defined commands[%dk_keyboardInput%] (
         %dk_call% dk_echo "%dk_keyboardInput%: invalid selection, please try again"
         %dk_call% dk_unset Target_App
         %return%

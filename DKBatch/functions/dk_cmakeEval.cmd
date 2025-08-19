@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -51,12 +51,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	"%CMAKE_EXE%" %CMAKE_ARGS%
 
 	::###### IMPORT VARIABLES ######
-	if not defined DKRETURN (%return%)
+	if NOT defined DKRETURN (%return%)
 	%dk_call% dk_importVars
 
 ::  ## these lines are deprecated ###
-::  if not defined DKRETURN %return%
-::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
+::  if NOT defined DKRETURN %return%
+::  if NOT exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
 ::  
 ::  endlocal
 ::  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd

@@ -1,4 +1,4 @@
-if not defined Mac_Host (
+if NOT defined Mac_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"
@@ -15,8 +15,8 @@ if not defined Mac_Host (
 ::%dk_call% dk_depend make
 rem  %dk_call% dk_append CMAKE_C_FLAGS				-DMAC -DMAC_X86_64 -std=c17 -x objective-c
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DMAC -DMAC_X86_64 -std=c++17 -x objective-c++
-rem  %dk_call% dk_append DKCONFIGURE_CFLAGS		-DMAC -DMAC_X86_64 -std=c17 #-x objective-c rem # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
-rem  %dk_call% dk_append DKCONFIGURE_CXXFLAGS		-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++ #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-not-valid-utf-8
+rem  %dk_call% dk_append DKCONFIGURE_CFLAGS		-DMAC -DMAC_X86_64 -std=c17 #-x objective-c rem # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-NOT-valid-utf-8
+rem  %dk_call% dk_append DKCONFIGURE_CXXFLAGS		-DMAC -DMAC_X86_64 -std=c++17) #-x objective-c++ #https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-NOT-valid-utf-8
 rem  %dk_call% dk_append DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86_64
 rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	-static  &rem  -s)
 	

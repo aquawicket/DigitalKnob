@@ -23,7 +23,7 @@
 :: SOFTWARE.
 @echo off
 setlocal EnableDelayedExpansion
-if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
 ::
@@ -46,10 +46,10 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	
 	if exist "%ProgramFiles%\CMake\bin\cmake.exe" 		set "CMAKE_EXE=%ProgramFiles%\CMake\bin\cmake.exe"
 	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
-	if not exist "%CMAKE_EXE%" 							echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
+	if NOT exist "%CMAKE_EXE%" 							echo "ERROR: Could NOT locate CMAKE_EXE" & goto:eof
 	
-	if not exist "%CMAKE_EXE%"		echo "ERROR: Could not locate CMAKE_EXE" 	& goto:eof
-	if not exist "%DKCMAKE_DIR%" 	echo "ERROR: Could not locate DKCMAKE_DIR" 	& goto:eof
+	if NOT exist "%CMAKE_EXE%"		echo "ERROR: Could NOT locate CMAKE_EXE" 	& goto:eof
+	if NOT exist "%DKCMAKE_DIR%" 	echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	:: cmake_eval begin
 	set commands=%1
@@ -71,7 +71,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 		
 	:with_return_values
 		"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
-		if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
+		if NOT exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
 		call %DKCMAKE_DIR%\cmake_vars.cmd
 		del %DKCMAKE_DIR%\cmake_vars.cmd
 		

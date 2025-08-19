@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -23,8 +23,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem %dk_call% dk_set WSLPATH_EXE   "%WSL_EXE% wslpath"
 	rem %dk_call% dk_printVar WSLPATH_EXE
 
-	rem if not defined HOMEDRIVE		(!dk_call! dk_warning "HOMEDRIVE is invalid")
-	rem if not defined HOMEPATH			(!dk_call! dk_warning "HOMEPATH is invalid")
+	rem if NOT defined HOMEDRIVE		(!dk_call! dk_warning "HOMEDRIVE is invalid")
+	rem if NOT defined HOMEPATH			(!dk_call! dk_warning "HOMEPATH is invalid")
 	
 	set "DKHOME_DIR=%USERPROFILE:\=/%"
 	

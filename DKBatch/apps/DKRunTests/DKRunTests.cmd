@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 if "%~1" neq "" (
@@ -57,7 +57,7 @@ exit /b 0
 		echo %yellow% ######### %~nx1 is disabled ######### %clr%
 		exit /b 0
 	)
-	if not exist %~1 (exit /b -1)
+	if NOT exist %~1 (exit /b -1)
 	%dk_call% dk_fileContains "%~1" ":DKTEST" || exit /b -1
 	
 	set "CURRENT_TEST_FILE=%~nx1"
@@ -80,7 +80,7 @@ exit /b 0
 ::#####################################
 :DKTEST
 ::%setlocal%
-	if not defined READY (goto:MAIN)
+	if NOT defined READY (goto:MAIN)
 	%~1
 exit /b !errorlevel!	
 

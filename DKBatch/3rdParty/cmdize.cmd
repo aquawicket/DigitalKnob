@@ -27,11 +27,11 @@
 ::H>
 ::H>The *engine* term stands for the executable running the script. Not for all languages it's applicable. Depending the language, the engine can be set to any, none or one of predefined values. `/E DEFAULT` is the special engine that resets any previously set engines to the default value. The same result can be received with `/E ""`.
 ::H>
-::H>For WSF-scripts the engine is one of `CSCRIPT` and `WSCRIPT`. If XML declaration is presented (in the form like `<?xml...?>`), it must be in the most beginning of the file. Otherwise error is reported and the script is not cmdized.
+::H>For WSF-scripts the engine is one of `CSCRIPT` and `WSCRIPT`. If XML declaration is presented (in the form like `<?xml...?>`), it must be in the most beginning of the file. Otherwise error is reported and the script is NOT cmdized.
 ::H>
 ::H>For JavaScript/JScript it can be one of `CSCRIPT`, `WSCRIPT` (for JScript5+), `CCHAKRA`, `WCHAKRA` (for JScript9 or Chakra) or any valid command with options to enable running NodeJS, ChakraCore, Rhino and so on (for example, `node`, `ch`, `java -jar rhino.jar`, respectively).
 ::H>
-::H>For VBScript there is choice from either `CSCRIPT` or `WSCRIPT`. If the script implements the statement `Option Explicit`, then it is commented to avoid the compilation error. The `/W` option creates the alternative runner embedding the script into a WSF-file. In this case that statement is not commented and left as is.
+::H>For VBScript there is choice from either `CSCRIPT` or `WSCRIPT`. If the script implements the statement `Option Explicit`, then it is commented to avoid the compilation error. The `/W` option creates the alternative runner embedding the script into a WSF-file. In this case that statement is NOT commented and left as is.
 ::H>
 ::H>For Perl `/E CMDONLY` is the only applicable value. It's fake engine that is used for creating the pure batch file for putting it with the original script in PATH.
 ::H>
@@ -118,9 +118,9 @@ if /i "%~1" equ "/P" (
 	goto :cmdize_loop_begin
 )
 
-if not exist "%~f1" (
+if NOT exist "%~f1" (
 	set "CMDIZE_ERROR=1"
-	call :warn File not found: "%~1"
+	call :warn File NOT found: "%~1"
 	shift /1
 	goto :cmdize_loop_begin
 )
@@ -163,7 +163,7 @@ goto :cmdize_loop_begin
 ::D>* https://with-love-from-siberia.blogspot.com/2009/07/js2bat-converter-2.html
 ::D>
 :cmdize.js	[/e cscript|wscript|cchakra|wchakra|ch|node|...]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+if NOT defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
 for %%e in ( "%CMDIZE_ENGINE%" ) do for %%s in (
 	"cscript cscript javascript"
@@ -195,7 +195,7 @@ goto:eof
 ::D>* http://www.dostips.com/forum/viewtopic.php?p=32485#p32485
 ::D>
 :cmdize.vbs	[/w] [/e cscript|wscript]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+if NOT defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
 if defined CMDIZE_WRAP (
 	call :print-script-wsf-bat "%~f1" vbscript
@@ -227,9 +227,9 @@ for /f "tokens=1,* delims=:" %%r in ( 'findstr /n /r "^" "%~f1"' ) do (
 
 	if "%%s" equ "" (
 		echo:%%s
-	) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i not "%%a" equ "Option" (
+	) else for /f "tokens=1,*" %%a in ( "%%s" ) do if /i NOT "%%a" equ "Option" (
 		echo:%%s
-	) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i not "%%i" equ "Explicit" (
+	) else for /f "tokens=1,* delims=':	 " %%i in ( "%%b" ) do if /i NOT "%%i" equ "Explicit" (
 		echo:%%s
 	) else (
 		call :warn Commenting "Option Explicit" in "%~1"
@@ -374,7 +374,7 @@ goto:eof
 ::D>* http://www.dostips.com/forum/viewtopic.php?p=33963#p33963
 ::D>
 :cmdize.wsf	[/e cscript|wscript]
-if not defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
+if NOT defined CMDIZE_ENGINE set "CMDIZE_ENGINE=cscript"
 
 for /f "tokens=1,* delims=:" %%n in ( 'findstr /i /n /r "<?xml.*?>" "%~f1"' ) do for /f "tokens=1,2,* delims=?" %%a in ( "%%~o" ) do for /f "tokens=1,*" %%d in ( "%%b" ) do (
 	set "CMDIZE_ERROR_WSF="

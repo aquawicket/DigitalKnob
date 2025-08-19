@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -19,7 +19,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used. However,
 ::#			the array is still searched from front to back in this case.
 ::#			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
-::#			If fromIndex >= Array/length, the array is not searched and false is returned.
+::#			If fromIndex >= Array/length, the array is NOT searched and false is returned.
 ::#
 ::#	RETURN VALUE
 ::#	A boolean value which is true if the value searchElement is found within the array (or the part of the array indicated by the index fromIndex, if specified).

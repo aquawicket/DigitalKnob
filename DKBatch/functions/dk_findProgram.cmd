@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -35,13 +35,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%checkerror%
 	set "dk_findProgram=%dk_exec:\=/%"
 
-	if not exist "%dk_exec%" (
+	if NOT exist "%dk_exec%" (
 		if "%~4" equ "NO_ERROR" (
 			%dk_call% dk_return 0
 		) else if "%~4" equ "NO_HALT" (
-			%dk_call% dk_return 0 "%_filename_% not found"
+			%dk_call% dk_return 0 "%_filename_% NOT found"
 		) else (
-			%dk_call% dk_return -1 "%_filename_% not found"
+			%dk_call% dk_return -1 "%_filename_% NOT found"
 		)
 	)
 

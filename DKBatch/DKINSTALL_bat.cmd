@@ -2,12 +2,12 @@
 if "%~1" equ "" (goto DKINSTALL)
 
 :runDKbat
-	if not exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
-	if not exist "%ComSpec%"				(set "ComSpec=%~2")
-	if not exist "%DKCACHE_DIR%"			(set "DKCACHE_DIR=%~3")
-	if not exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~4")
-	if not defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
+	if NOT exist "%ComSpec%"				(set "ComSpec=%~2")
+	if NOT exist "%DKCACHE_DIR%"			(set "DKCACHE_DIR=%~3")
+	if NOT exist "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~4")
+	if NOT defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 
 	::###### run script ######
 	:: "%ComSpec%"	path to cmd.exe
@@ -39,9 +39,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	if "%~1" neq "" (goto:eof)
 
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 
 	echo Installing DKbat . . .
@@ -53,7 +53,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	:: Set the registry entry for the exxtension
 	ftype DKbat="%ComSpec%" /c if exist "%~f0" ^
 	(echo DKbat installed ^& "%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%ComSpec%" "%DKCACHE_DIR%" "%%1" %%*) else ^
-	(echo DKbat not installed ^& "%%1" %%*)
+	(echo DKbat NOT installed ^& "%%1" %%*)
 
 	%dk_call% dk_registrySetKey "HKCR/DKbat/DefaultIcon" "" "REG_SZ" "%ComSpec%"
 	assoc .cmd=DKbat

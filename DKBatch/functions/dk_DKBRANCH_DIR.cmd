@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -20,22 +20,22 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 
-	if not defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
+	if NOT defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"				&rem get the current folder
-	rem if not defined GIT_EXE (%dk_call% dk_depend git)
+	rem if NOT defined GIT_EXE (%dk_call% dk_depend git)
 	rem if exist "%CD%\.git" (
 	rem 	"%GIT_EXE%" "-C %DKBRANCH_DIR% branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
 	rem 		set "DKBRANCH=%CURRENT_FOLDER%"
 	rem 	)
 	rem )
 	rem %dk_call% dk_printVar DKBRANCH
-	if not defined DKBRANCH_DIR (set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
+	if NOT defined DKBRANCH_DIR (set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
 
 	set "DKBASH_DIR=%DKBRANCH_DIR%/DKBash"
 		set "DKBASH_FUNCTIONS_DIR=%DKBASH_DIR%/functions"
 		set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
 
-	if not defined DKBATCH_DIR (set "DKBATCH_DIR=%DKBRANCH_DIR%/DKBatch")
+	if NOT defined DKBATCH_DIR (set "DKBATCH_DIR=%DKBRANCH_DIR%/DKBatch")
 		set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%/functions"
 		set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%/"
 

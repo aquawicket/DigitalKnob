@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -16,12 +16,12 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKPYTHON_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
 
 	::### Get DKHTTP_DKPYTHON_FUNCTIONS_DIR
-	if not defined DKHTTP_DKPYTHON_DIR				(set "DKHTTP_DKPYTHON_DIR=%DKHTTP_DKBRANCH_DIR%/DKJavascript")
-	if not defined DKHTTP_DKPYTHON_FUNCTIONS_DIR	(set "DKHTTP_DKPYTHON_FUNCTIONS_DIR=%DKHTTP_DKPYTHON_DIR%/functions")
+	if NOT defined DKHTTP_DKPYTHON_DIR				(set "DKHTTP_DKPYTHON_DIR=%DKHTTP_DKBRANCH_DIR%/DKJavascript")
+	if NOT defined DKHTTP_DKPYTHON_FUNCTIONS_DIR	(set "DKHTTP_DKPYTHON_FUNCTIONS_DIR=%DKHTTP_DKPYTHON_DIR%/functions")
 
 	::### Download files if missing
-	if not exist %DKPYTHON_FUNCTIONS_DIR%/DK.py		(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/DK.py" "%DKPYTHON_FUNCTIONS_DIR%/DK.py")
-	if not exist %DKPYTHON_FUNCTIONS_DIR%/%~1.py	(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/%~1.py" "%DKPYTHON_FUNCTIONS_DIR%/%~1.py")
+	if NOT exist %DKPYTHON_FUNCTIONS_DIR%/DK.py		(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/DK.py" "%DKPYTHON_FUNCTIONS_DIR%/DK.py")
+	if NOT exist %DKPYTHON_FUNCTIONS_DIR%/%~1.py	(%dk_call% dk_download "%DKHTTP_DKPYTHON_FUNCTIONS_DIR%/%~1.py" "%DKPYTHON_FUNCTIONS_DIR%/%~1.py")
 
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*

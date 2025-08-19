@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+if NOT exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
@@ -228,8 +228,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if defined PLUGIN.Url.Name_Lower if defined PLUGIN.Import.Name_Lower (
 		%dk_call% dk_replaceAll "%PLUGIN.Url.Name_Lower%" 	"%PLUGIN.Import.Name_Lower%" 	"" 	PLUGIN.Version
-		rem if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.TAG%")
-		rem if not defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.Branch%") 
+		rem if NOT defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.TAG%")
+		rem if NOT defined PLUGIN.Version (set "PLUGIN.Version=%PLUGIN.Branch%") 
 	)
 	%dk_call% dk_trimNonAlphaNumeric %PLUGIN.Version% PLUGIN.Version
 
@@ -244,7 +244,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if defined PLUGIN.Import.Name if defined PLUGIN.Version (
 		set "PLUGIN.Install.Name=%PLUGIN.Import.Name%-%PLUGIN.Version%"
 	)
-	if not defined PLUGIN.Install.Name (	
+	if NOT defined PLUGIN.Install.Name (	
 		set "PLUGIN.Install.Name=%PLUGIN.Import.Name%"
 	)
 	%DEBUG% "PLUGIN.Install.Name = '%PLUGIN.Install.Name%'"
