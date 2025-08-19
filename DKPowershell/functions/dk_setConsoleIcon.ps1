@@ -36,7 +36,7 @@ function Global:dk_setConsoleIcon() {
 		}
 	}
   else {
-    Write-Host 'Icon file not found' -ForegroundColor 'Red'
+    Write-Host 'Icon file NOT found' -ForegroundColor 'Red'
   }
 }
 

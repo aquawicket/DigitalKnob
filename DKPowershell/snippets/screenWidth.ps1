@@ -17,4 +17,4 @@ Add-Type -AssemblyName System.Windows.Forms
 
 # or:
 
-( Get-CimInstance -ClassName Win32_VideoController ).CurrentHorizontalResolution # current value for single video card and monitor
+( Get-CimInstance -ClassName Win32_VideoController ).CurrentHorizontalResolution # current value for single video card AND monitor

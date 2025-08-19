@@ -64,7 +64,7 @@ function Global:DKTEST() {
 	
 	### Result as hashtable parameter (FALSE)
 	dk_call dk_echo;
-	dk_call dk_call dk_fileContains "fileContains_TEST.txt" "not" resultC.myValue;
+	dk_call dk_call dk_fileContains "fileContains_TEST.txt" "NOT" resultC.myValue;
 	dk_call dk_echo "resultC.myValue = ${resultC.myValue}";
 	dk_call dk_echo "dk_fileContains = ${dk_fileContains}";
 	

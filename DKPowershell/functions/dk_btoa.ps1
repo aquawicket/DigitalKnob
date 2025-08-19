@@ -13,8 +13,8 @@ function Global:dk_btoa() {
 	${file_in} = $($args[0]);
 	${file_out} = $($args[1]);
 
-	if(!(dk_call dk_pathExists "${file_in}")){ dk_call dk_error "file_in:${file_in} not found" }
-	if(dk_call dk_pathExists ${file_out}){ dk_call dk_error "file_out:${file_out} already exists and cannot be overwritten" }
+	if(!(dk_call dk_pathExists "${file_in}")){ dk_call dk_error "file_in:${file_in} NOT found" }
+	if(dk_call dk_pathExists ${file_out}){ dk_call dk_error "file_out:${file_out} already exists AND cannot be overwritten" }
 	
 	if(dk_call dk_pathExists $file_in){ 
 		[IO.File]::WriteAllBytes($file_out,[char[]][Convert]::ToBase64String([IO.File]::ReadAllBytes($file_in)))

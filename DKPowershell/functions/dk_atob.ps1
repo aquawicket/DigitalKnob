@@ -10,8 +10,8 @@ if(!$dk_atob_ps1){ $dk_atob_ps1 = 1; } else{ return; } #include guard
 function Global:dk_atob ($file_in, $file_out){
 	dk_debugFunc 2;
 
-	if(!(dk_call dk_pathExists $file_in)){ dk_call dk_error "$file_in not found"; }
-	if(dk_call dk_pathExists $file_out){ dk_call dk_error "$file_out already exists and cannot be overwritten"; }
+	if(!(dk_call dk_pathExists $file_in)){ dk_call dk_error "$file_in NOT found"; }
+	if(dk_call dk_pathExists $file_out){ dk_call dk_error "$file_out already exists AND cannot be overwritten"; }
 	
 	if(dk_call dk_pathExists $file_in){ 
 		[IO.File]::WriteAllBytes($file_out, [Convert]::FromBase64String([char[]][IO.File]::ReadAllBytes($file_in)));

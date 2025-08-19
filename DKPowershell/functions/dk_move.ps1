@@ -18,12 +18,12 @@ function Global:dk_move($_from_, $_to_) {
 	dk_call dk_info "Moving $_from_ to $_to_"
 	
 	if(!(dk_call dk_pathExists "$_from_")){
-		dk_call dk_error "dk_move: $_from_ not found"
+		dk_call dk_error "dk_move: $_from_ NOT found"
 	}
 	
 	if(dk_call dk_pathExists "$_to_"){
 		if($OVERWRITE -ne 1){
-			dk_call dk_error "Cannot move file. Destiantion exists and OVERWRITE is not set"
+			dk_call dk_error "Cannot move file. Destiantion exists AND OVERWRITE is NOT set"
 		}
 		#dk_call dk_delete $_to_
 	}

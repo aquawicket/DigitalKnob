@@ -16,13 +16,13 @@ function Global:dk_validate() {
 	### Check if the variable is already set ###
 	if(dk_call dk_contains "${variable}" "env:"){ # Check environment variable
 		${env_variable} = ${variable} -replace "env:", "";
-		if(${env_variable} -and (Test-Path env:${env_variable})) {
+		if(${env_variable} -AND (Test-Path env:${env_variable})) {
 			${value} = [Environment]::GetEnvironmentVariable(${env_variable}, 'Process');
 			#Write-Host "env:${env_variable} is already SET to '${value}'";
 			return;
 		}
 	}
-	elseif(${variable} -and (Test-Path variable:${variable})) { # Check normal variable
+	elseif(${variable} -AND (Test-Path variable:${variable})) { # Check normal variable
 		#Write-Host "${variable} is already SET to '$(Get-Variable -ValueOnly $variable)'";
 		return;
 	}
@@ -30,7 +30,7 @@ function Global:dk_validate() {
 
 	### Run the code to set the variable ###
 	#Write-Host "Setting ${variable}. . .";
-	if(${code} -and (Test-Path ${code} -PathType Leaf)){ dk_call dk_load ${code}; }
+	if(${code} -AND (Test-Path ${code} -PathType Leaf)){ dk_call dk_load ${code}; }
 	if(${code}){ Invoke-Expression ${code}; }
 	
 	
@@ -84,9 +84,9 @@ function Global:DKTEST() {
 	dk_call dk_validate env:myVarF "Set-Item -Path env:myVarF -Value 'value of env:myVarF set by dk_validate()'";
 	dk_call dk_echo "env:myVarF = '${env:myVarF}'";
 	
-	# myVarG - Test dk_validate 'variable not set' Error
+	# myVarG - Test dk_validate 'variable NOT set' Error
 	Write-Host "";
-	dk_call dk_validate myVarG "dk_call dk_echo 'Testing dk_validate() variable not set Error. . .'";
+	dk_call dk_validate myVarG "dk_call dk_echo 'Testing dk_validate() variable NOT set Error. . .'";
 	dk_call dk_echo "myVarF = '${myVarF}'";
 	
 

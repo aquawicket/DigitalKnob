@@ -9,7 +9,7 @@ function Global:dk_delete($path) {
 	dk_debugFunc 1;
 
 	if(!(dk_call dk_pathExists $path)){
-		dk_call dk_warning "dk_delete $path does not exist"
+		dk_call dk_warning "dk_delete $path does NOT exist"
 		return
 	}
 	

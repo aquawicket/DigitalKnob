@@ -4,12 +4,12 @@ if(!$dk_load_ps1){ $dk_load_ps1 = 1; } else{ return; } #include guard
 #####################################################################
 # dk_load(funcName OR funcPath)
 #
-#	Source a dkpowershell function. Download it if needed then parse it and source all of it's content dkpowershell functions recursivley.
+#	Source a dkpowershell function. Download it if needed then parse it AND source all of it's content dkpowershell functions recursivley.
 #
 #	@funcName OR funcPath  - The name of an existing "functions/funcname.ps1" file, or a full filepath to a .ps1 file.
 #
 function Global:dk_load ($var) {
-	dk_call dk_notice "dk_load is temporarily disabled. Use dk_call and dk_source to download, load and run functions.";
+	dk_call dk_notice "dk_load is temporarily disabled. Use dk_call AND dk_source to download, load AND run functions.";
 	return;
 	
 	dk_debugFunc 1	;
@@ -19,7 +19,7 @@ function Global:dk_load ($var) {
 	${funcName} = "";
 	if(Test-Path "${var}"){
 		${funcPath} = Resolve-Path -Path "${var}" -ErrorAction SilentlyContinue -ErrorVariable _frperror; 	# works for files that don't exist.
-		if(-not(${funcPath})) { ${funcPath} = $_frperror[0].TargetObject; } 								# http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
+		if(-NOT(${funcPath})) { ${funcPath} = $_frperror[0].TargetObject; } 								# http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
 		${funcName} = Split-Path ${funcPath} -leaf;															# get basename
 		${funcName} = ${funcName}.Substring(0, ${funcName}.lastIndexOf('.'));								# remove extension
 	}
@@ -45,7 +45,7 @@ function Global:dk_load ($var) {
 		dk_download "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/${funcName}.ps1" "${DKPOWERSHELL_FUNCTIONS_DIR}/${funcName}.ps1";
 		
 		if(!(Test-Path ${funcPath})){
-			Write-Host "${funcPath}: file not found";
+			Write-Host "${funcPath}: file NOT found";
 			return;
 		}
 	}
@@ -56,7 +56,7 @@ function Global:dk_load ($var) {
 #		sed -i -e 's/\r$//' ${funcPath};
 #	}
 	
-	if(!("${DKFUNCTIONS_LIST}" -match ";${funcName};")) {			#IF NOT REGEX MATCH
+	if(!("${DKFUNCTIONS_LIST}" -match ";${funcName};")) {			#if NOT REGEX MATCH
 	
 		$global:DKFUNCTIONS_LIST = "${DKFUNCTIONS_LIST};${funcName};"; 			# Add to list
 		# Write-Host "added ${funcName} to DKFUNCTIONS_LIST";

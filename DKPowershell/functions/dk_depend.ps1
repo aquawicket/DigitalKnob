@@ -22,7 +22,7 @@ function Global:dk_depend() {
 		dk_call dk_download "${dkhttpInstall}" "${dkInstall}";
 	}
 	if(!(Test-Path ${dkInstall})){
-		dk_call dk_fatal "dkInstall:${dkInstall} not found";
+		dk_call dk_fatal "dkInstall:${dkInstall} NOT found";
 		return -1;
 	}
 	

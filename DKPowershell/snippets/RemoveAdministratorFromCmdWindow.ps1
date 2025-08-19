@@ -48,7 +48,7 @@ Public NotInheritable Class MainClass
             End Using
 
         Else
-            Console.WriteLine(String.Format("String not found in file: '{0}'", filepath))
+            Console.WriteLine(String.Format("String NOT found in file: '{0}'", filepath))
 
         End If
     End Sub

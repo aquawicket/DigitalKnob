@@ -30,7 +30,7 @@ function Global:DKINSTALL() {
 	&${env:COMSPEC} /c "${dk_download}" -y -o ${GIT};
 	#dk_call ${env:COMSPEC} /c "$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE}" -y -o ${GIT};
 	
-	if(!(dk_call dk_pathExists ${GIT_EXE})){ dk_call dk_error "GIT_EXE:${GIT_EXE} not found"; }
+	if(!(dk_call dk_pathExists ${GIT_EXE})){ dk_call dk_error "GIT_EXE:${GIT_EXE} NOT found"; }
 }
 
 

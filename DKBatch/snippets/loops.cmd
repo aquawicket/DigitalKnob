@@ -62,7 +62,7 @@ for /L %%L in (0,1,2147483648) do @(
 echo(
 echo loop until 10
 for /F %%A IN ('
-  CMD /C "for /L %%L IN (0,1,2147483648) do @( echo.%%L & IF /I %%L EQU 10 ( exit /b  ) )"
+  CMD /C "for /L %%L IN (0,1,2147483648) do @( echo.%%L & if /I %%L EQU 10 ( exit /b  ) )"
 ') do @(
   echo %%~A
 )
@@ -71,7 +71,7 @@ for /F %%A IN ('
 ::###### better until 10 ######
 echo(
 echo loop until 10 best
-for /F %%A IN ('CMD /C "for /L %%L IN (0,1,10000000) do @( echo.%%L & IF /I %%L EQU 10 ( exit /b  ) )" ') do @(echo %%~A)
+for /F %%A IN ('CMD /C "for /L %%L IN (0,1,10000000) do @( echo.%%L & if /I %%L EQU 10 ( exit /b  ) )" ') do @(echo %%~A)
 
 
 

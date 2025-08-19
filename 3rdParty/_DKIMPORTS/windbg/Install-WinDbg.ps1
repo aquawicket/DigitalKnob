@@ -40,7 +40,7 @@ function Install-WinDbg {
             Write-Host "Launching WinDbg..."
             Start-Process "shell:AppsFolder\$WinDbgAppID"
         } else {
-            Write-Warning "WinDbg not found or could not be started."
+            Write-Warning "WinDbg NOT found or could NOT be started."
         }
     }
 }

@@ -2189,7 +2189,7 @@ for /f "tokens=1,2 delims=[" %%a in ('"echo..%fmt:]=&echo..%"') do (
     set /a i+=1
     call call set "subst=%%%%~%%i%%%spac%%%%%~%%i%%"
     if %%b0 GEQ 0 (call set "subst=%%subst:~0,%%b%%"
-    ) ELSE        (call set "subst=%%subst:~%%b%%")
+    ) else        (call set "subst=%%subst:~%%b%%")
     call set "const=%%a"
     call set "line=%%line%%%%const:~1%%%%subst%%"
 )

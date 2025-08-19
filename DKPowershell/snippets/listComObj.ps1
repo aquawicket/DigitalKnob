@@ -1,7 +1,7 @@
-$objects=Get-ChildItem HKLM:\Software\Classes -ErrorAction SilentlyContinue | Where-Object {$_.PSChildName -ne '' -and (Test-Path -Path "$($_.PSPath)\CLSID")} | Select-Object -ExpandProperty PSChildName
+$objects=Get-ChildItem HKLM:\Software\Classes -ErrorAction SilentlyContinue | Where-Object {$_.PSChildName -ne '' -AND (Test-Path -Path "$($_.PSPath)\CLSID")} | Select-Object -ExpandProperty PSChildName
 
 #As I know that Wordpad.Document.1 is a generic com object with no exposed additional 
-# method and properties I'll use it to compare the rest available objexts to it
+# method AND properties I'll use it to compare the rest available objexts to it
 $wordpad=new-object -comobject "Wordpad.Document.1"
 $generic=$wordpad|get-member   |out-string
 $generic

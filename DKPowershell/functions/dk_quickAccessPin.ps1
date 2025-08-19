@@ -12,7 +12,7 @@ function Global:dk_quickAccessPin() {
 	$path = ${path} -replace '/', '\';
 	
 	$quickAccess = New-object -com shell.application;
-	if(-not ($quickAccess.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | ? {$_.Path -eq $path})){
+	if(-NOT ($quickAccess.Namespace('shell:::{679f85cb-0220-4080-b29b-5540cc05aab6}').Items() | ? {$_.Path -eq $path})){
 		$quickAccess.Namespace($path).Self.InvokeVerb('pintohome');
 	}
 }

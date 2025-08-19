@@ -20,7 +20,7 @@ function Global:dk_gitUpdate() {
 	dk_call dk_validate GIT_EXE "dk_call dk_installGit";
 	if( !(dk_call dk_pathExists "${env:DKBRANCH_DIR}/.git") ){
 		if(dk_call dk_pathExists "${env:DKBRANCH_DIR}"){
-			###### Backup Branch directory and clone ######
+			###### Backup Branch directory AND clone ######
 			if("${dk_gitUpdate_BACKUP}" -eq "1"){
 				dk_call dk_copy "${env:DKBRANCH_DIR}" "${env:DKBRANCH_DIR}_BACKUP" OVERWRITE;
 			}

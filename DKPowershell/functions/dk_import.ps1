@@ -6,7 +6,7 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 # dk_import() LIBRARY APP
 #
 #	This is a flexable super function for importing just about anything into DigitalKnob
-#	The idea is to provide a url or path and dk_import will do the rest. 
+#	The idea is to provide a url or path AND dk_import will do the rest. 
 #
 #	@url	- The online path of the .git or file to import
 #

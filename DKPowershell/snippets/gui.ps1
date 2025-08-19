@@ -1,4 +1,4 @@
-# Use System.Windows.Forms and System.Drawing to create GUIs
+# Use System.Windows.Forms AND System.Drawing to create GUIs
 # https://www.robvanderwoude.com/powershellsnippets.php#WinFormsDemo
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -23,7 +23,7 @@ $form.Controls.Add( $label2 )
 
 $buttonOK              = New-Object System.Windows.Forms.Button
 $buttonOK.Text         = 'OK'
-$buttonOK.DialogResult = 'OK' # This should usually not be required
+$buttonOK.DialogResult = 'OK' # This should usually NOT be required
 $buttonOK.Location     = '10, 150'
 $form.Controls.Add( $buttonOK )
 

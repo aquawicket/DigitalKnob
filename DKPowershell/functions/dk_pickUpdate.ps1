@@ -19,7 +19,7 @@ function Global:dk_pickUpdate() {
 	}
 	
 	if($behind -lt 1){
-		if(${Target_App_Cache} -and ${Target_Os_Cache} -and ${Target_Arch_Cache} -and ${Target_Env_Cache} -and ${Target_Type_Cache}){
+		if(${Target_App_Cache} -AND ${Target_Os_Cache} -AND ${Target_Arch_Cache} -AND ${Target_Env_Cache} -AND ${Target_Type_Cache}){
 			dk_call dk_echo " 0) Repeat DKBuilder.cache [${Target_App_Cache} - ${Target_Os_Cache} - ${Target_Arch_Cache} - ${Target_Env_Cache} - ${Target_Type_Cache}]";
 		}
 		dk_call dk_echo " 1) Git Update"   ;
@@ -30,7 +30,7 @@ function Global:dk_pickUpdate() {
 		dk_call dk_echo " 6) Reset All";
 		dk_call dk_echo " 7) Remove All";
 		dk_call dk_echo " 8) Clear Screen";
-		dk_call dk_echo " 9) Clear cmake cache and .tmp files";
+		dk_call dk_echo " 9) Clear cmake cache AND .tmp files";
 		dk_call dk_echo "10) Reload";
 		dk_call dk_echo "11) Exit";
 		dk_call dk_echo "\n";
@@ -39,7 +39,7 @@ function Global:dk_pickUpdate() {
 		dk_call dk_warning "Your local repository is behind, please git update";
 		dk_call dk_echo "\n";
 		dk_call dk_echo "${red}";
-		if(${Target_App_Cache} -and ${Target_Os_Cache} -and ${Target_Arch_Cache} -and ${Target_Env_Cache} -and ${Target_Type_Cache}){
+		if(${Target_App_Cache} -AND ${Target_Os_Cache} -AND ${Target_Arch_Cache} -AND ${Target_Env_Cache} -AND ${Target_Type_Cache}){
 			dk_call dk_echo " 0) Repeat DKBuilder.cache [${Target_App_Cache} - ${Target_Os_Cache} - ${Target_Arch_Cache} - ${Target_Env_Cache} - ${Target_Type_Cache}]";
 		}
 		dk_call dk_echo "${green}";
@@ -52,7 +52,7 @@ function Global:dk_pickUpdate() {
 		dk_call dk_echo " 6) Reset All";
 		dk_call dk_echo " 7) Remove All";
 		dk_call dk_echo " 8) Clear Screen";
-		dk_call dk_echo " 9) Clear cmake cache and .tmp files";
+		dk_call dk_echo " 9) Clear cmake cache AND .tmp files";
 		dk_call dk_echo "10) Reload";
 		dk_call dk_echo "11) Exit";
 		dk_call dk_echo "\n";

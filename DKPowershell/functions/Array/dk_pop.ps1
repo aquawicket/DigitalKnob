@@ -13,7 +13,7 @@ function Global:Array:dk_Pop($array) {
 	#if($array -isnot [System.Object]){ dk_call dk_error "Not a System.Object"; return ${false} }
 	if($array.count -eq 0){ $arrayPop = "undefined"; dk_call dk_printVar arrayPop; return $arrayPop }
 	if(Test-Path variable:$array){ $array = Get-Variable -Name ($array) -ValueOnly }
-	if($array -isnot [System.Collections.ArrayList]){ dk_call dk_error "array is not an ArrayList"; return ${false} }	
+	if($array -isnot [System.Collections.ArrayList]){ dk_call dk_error "array is NOT an ArrayList"; return ${false} }	
 	if($array.count -eq 0){ $arrayPop = "undefined"; dk_call dk_printVar arrayPop; return $arrayPop }
 	
 	$arrayPop = $array[$array.count-1]

@@ -27,7 +27,7 @@ function Global:dk_buildMain() {
 	#dk_call dk_printVar DKSCRIPT_DIR
 	#dk_call dk_printVar DKSCRIPT_NAME
 	
-	### Get the Host_Tuple and other HOST variables
+	### Get the Host_Tuple AND other HOST variables
 	dk_call dk_Host_Tuple
 	dk_call dk_DIGITALKNOB_DIR
 	dk_call dk_installGit
@@ -44,7 +44,7 @@ function Global:dk_buildMain() {
 	}
 	
 #	if("${DKSCRIPT_DIR}" -ne "${dk_call dk_DKBRANCH_DIR}"){
-#		dk_call dk_warning "${DKSCRIPT_NAME} is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+#		dk_call dk_warning "${DKSCRIPT_NAME} is NOT running from the DKBRANCH_DIR directory. Any changes will NOT be saved by git!"
 #		dk_call dk_warning "${DKSCRIPT_NAME} path = ${DKSCRIPT_DIR}"
 #		dk_call dk_warning "DKBRANCH_DIR path = ${env:DKBRANCH_DIR}"
 #	}

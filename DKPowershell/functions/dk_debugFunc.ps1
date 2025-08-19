@@ -24,7 +24,7 @@ function Global:dk_debugFunc() {
 	$_ARGV_     = "$(__ARGV__     $FRAME)";
 	if($_MIN_){ 
 		if(${_ARGC_} -lt ${_MIN_}){ 
-			Write-Host "${_FUNCTION_}(${_ARGV_}): not enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}"; 
+			Write-Host "${_FUNCTION_}(${_ARGV_}): NOT enough arguments. Minimum is ${_MIN_}, got ${_ARGC_}"; 
 			dk_call dk_stacktrace;
 		}
 	}

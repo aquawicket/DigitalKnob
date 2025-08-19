@@ -22,7 +22,7 @@ FOR /L %%# in () DO (
     FOR /L %%J in (1,40,1000000) DO REM
     SET "par[disp]="
     SET /A "life+=1","d[new]=life%%par[rate]"
-    IF !d[new]! EQU 0 (
+    if !d[new]! EQU 0 (
         SET /A "par[num]+=1","d[life]=life+par[life]"
         SET "par[list]=!par[list]! !par[num]!"
         SET "par[!par[num]!]=!d[life]! !orgin[x]! !orgin[y]! %par[orgcol]%"
@@ -30,7 +30,7 @@ FOR /L %%# in () DO (
     FOR %%Q in (!par[list]!) DO (
         FOR /F "tokens=1-4" %%A in ("!par[%%Q]!") DO (
             SET /A "d[x]=%%B","d[y]=%%C","d[rand]=!RANDOM! * (par[rmax] - par[rmin] + 1) / 32768 + par[rmin]","d[col]=%%D %par[fade]%"
-            IF !life! EQU %%A (
+            if !life! EQU %%A (
                 SET "par[disp]=!par[disp]!%par[end]%"
                 SET "par[list]=!par[list]:%%Q=!"
             ) else (

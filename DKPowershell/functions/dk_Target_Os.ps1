@@ -20,7 +20,7 @@ function Global:dk_Target_Os() {
 	} else {
 		dk_call dk_echo;
 		
-		#if(not defined Target_Os_Cache) {dk_call Target_Os_Cache)
+		#if(NOT defined Target_Os_Cache) {dk_call Target_Os_Cache)
 		dk_call dk_echo " 0) ${Target_Os_Cache}";
 		dk_call dk_echo;
 		if(!(${Host_Os})){ dk_call dk_Host_Os; }

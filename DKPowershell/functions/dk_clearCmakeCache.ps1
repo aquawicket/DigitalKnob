@@ -8,7 +8,7 @@ if(!$dk_clearCmakeCache_ps1){ $dk_clearCmakeCache_ps1 = 1; } else{ return; } #in
 function Global:dk_clearCmakeCache() {
 	dk_debugFunc 0;
 
-	# TODO: replace ${DIGITALKNOB_DIR} with $1 and call this functions while suplying the directory 
+	# TODO: replace ${DIGITALKNOB_DIR} with $1 AND call this functions while suplying the directory 
 	dk_call dk_info "Clearing CMake cache . . ."
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}"

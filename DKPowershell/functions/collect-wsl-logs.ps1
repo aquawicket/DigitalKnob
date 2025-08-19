@@ -76,7 +76,7 @@ try
 {
     Write-Host -NoNewLine "Log collection is running. Please ";
     Write-Host -NoNewLine -ForegroundColor Red "reproduce the problem ";
-    Write-Host -NoNewLine "and once done press any key to save the logs.";
+    Write-Host -NoNewLine "AND once done press any key to save the logs.";
 
     $KeysToIgnore =
           16,  # Shift (left or right)
@@ -145,7 +145,7 @@ if ($Dump)
                                               [IntPtr]::Zero))
 
         $OutputFile.Close()
-        if (-not $Result)
+        if (-NOT $Result)
         {
             Write-Host "Failed to write dump for: $($dumpFile)";
         }

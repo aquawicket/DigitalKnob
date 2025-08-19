@@ -41,7 +41,7 @@ if "!!" equ "" (
 %=empty=%
 )
 
-set $set=FOR /L %%N in (1 1 2) dO IF %%N==2 ( %\n%
+set $set=FOR /L %%N in (1 1 2) dO if %%N==2 ( %\n%
     setlocal EnableDelayedExpansion                                 %\n%
     for /f "tokens=1,* delims== " %%1 in ("!argv!") do (            %\n%
         endlocal                                                    %\n%
@@ -72,14 +72,14 @@ set $set=FOR /L %%N in (1 1 2) dO IF %%N==2 ( %\n%
                         set "%%~1[%%C]=%%~L" !                      %\n%
                         if %%C == 0 (                               %\n%
                             set "%%~1=%%~L" !                       %\n%
-                        ) ELSE (                                    %\n%
+                        ) else (                                    %\n%
                             set "%%~1=!%%~1!!LF!%%~L" !             %\n%
                         )                                           %\n%
                     )                                               %\n%
                     set /a %%~1.Len+=1                              %\n%
                 )                                                   %\n%
             )                                                       %\n%
-        ) ELSE (                                                    %\n%
+        ) else (                                                    %\n%
             %= Used if delayed expansion is disabled =%             %\n%
             for /F "delims=" %%O in ('"%%~2 | findstr /N ^^"') do ( %\n%
                 setlocal DisableDelayedExpansion                    %\n%

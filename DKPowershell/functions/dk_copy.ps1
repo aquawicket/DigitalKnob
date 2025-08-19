@@ -26,13 +26,13 @@ function Global:dk_copy() {
 	dk_call dk_info "Copying ${from} to ${to}"
 	
 	if(!(dk_call dk_pathExists "${from}")){
-		dk_call dk_error "dk_copy: ${from} not found"
+		dk_call dk_error "dk_copy: ${from} NOT found"
 		return $false
 	}
 	
 	if(dk_call dk_pathExists "${to}"){
 		if("${OVERWRITE}" -ne "1"){
-			dk_call dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
+			dk_call dk_error "dk_copy Cannot copy file. Destiantion exists AND OVERWRITE is NOT set"
 			return $false
 		}
 		dk_call dk_delete ${to}

@@ -8,7 +8,7 @@ if(!$dk_pullAssets_ps1){ $dk_pullAssets_ps1 = 1; } else{ return; } #include guar
 function Global:dk_pullAssets() {
 	dk_debugFunc 0;
 	
-    dk_call dk_fixme "dk_pullAssets() not implemented"
+    dk_call dk_fixme "dk_pullAssets() NOT implemented"
 }
 
 

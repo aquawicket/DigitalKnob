@@ -4,7 +4,7 @@ if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
 ################################################################################
 # dk_basename(_path, _rtn_var)
 #
-#	Strip directory and suffix from filenames
+#	Strip directory AND suffix from filenames
 #
 #	Reference: https://stackoverflow.com/a/59739663/688352
 #

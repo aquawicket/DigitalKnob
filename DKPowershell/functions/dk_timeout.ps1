@@ -4,7 +4,7 @@ if(!$dk_timeout_ps1){ $dk_timeout_ps1 = 1; } else{ return; } #include guard
 ##################################################################################
 # dk_timeout(seconds)
 #
-#	Pause execution and wait for <enter> keypress to continue or amount of seconds to pass
+#	Pause execution AND wait for <enter> keypress to continue or amount of seconds to pass
 #
 function Global:dk_timeout() {
 	dk_debugFunc 0 1
@@ -18,10 +18,10 @@ function Global:dk_timeout() {
 	
 #	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."
 #	$counter = 0
-#	while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt $seconds)){
+#	while(!$Host.UI.RawUI.KeyAvailable -AND ($counter++ -lt $seconds)){
 #		[Threading.Thread]::Sleep(1000)
 #	}
-	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }
+	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -AND ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }
 }
 
 

@@ -38,7 +38,7 @@ function DK() {
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS;
 
-	############ get dk_source and dk_call ######
+	############ get dk_source AND dk_call ######
 	dk_initFiles;
 	
 	############ Setup dk_callStack ############
@@ -179,7 +179,7 @@ function dk_DKSCRIPT_VARS(){
 	### DKSCRIPT_PATH ###
 	if(!${env:DKSCRIPT_PATH}){ ${env:DKSCRIPT_PATH} = Get-EntryPointAbsFilePath; }
 	${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace '\\', '/';
-	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' not found!\n"; exit -1; } 
+	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' NOT found!\n"; exit -1; } 
 	
 	### DKSCRIPT_ARGS ###
 	if(!${env:DKSCRIPT_ARGS}){ ${env:DKSCRIPT_ARGS} = ${args}; }
@@ -187,7 +187,7 @@ function dk_DKSCRIPT_VARS(){
 	### DKSCRIPT_DIR ###
 	if(!${env:DKSCRIPT_DIR}){ ${env:DKSCRIPT_DIR} = Split-Path -Parent "${env:DKSCRIPT_PATH}"; }
 	${env:DKSCRIPT_DIR} = ${env:DKSCRIPT_DIR} -replace '\\', '/';
-	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' not found!\n"; exit -1; } 
+	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' NOT found!\n"; exit -1; } 
 	
 	### DKSCRIPT_NAME ###
 	if(!${env:DKSCRIPT_NAME}){ ${env:DKSCRIPT_NAME} = Split-Path -Leaf "${env:DKSCRIPT_PATH}"; }
@@ -206,9 +206,9 @@ function dk_DKSCRIPT_VARS(){
 # Get-EntryPointAbsFilePath()
 #
 function Get-EntryPointAbsFilePath() {
-    # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
-    # NOTE 2: '$global:PSScriptRoot' is not the same as '$PSScriptRoot' and seems to correspond to the entry point script directory,
-    # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but not
+    # NOTE 1: Do NOT use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (NOT entry point script).
+    # NOTE 2: '$global:PSScriptRoot' is NOT the same as '$PSScriptRoot' AND seems to correspond to the entry point script directory,
+    # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but NOT
     # when "MainScript.ps1" is invoked from a PowerShell session (prompt) like [PS C:/Temp>. MainScript.ps1].
     $CallStack = Get-PSCallStack
     # We take the last stack element (correponding to the first call).
@@ -217,11 +217,11 @@ function Get-EntryPointAbsFilePath() {
     $FirstCall = $CallStack[$CallStack.Count - 1];
     if($null -ne $FirstCall.ScriptName){ return $FirstCall.ScriptName; }
     # We take the second call (assuming that we are run under a PowerShell session).
-    # To make sure this call is coming from the execution of a script file (and not from the execution a cmdlet in the interpreter, like a function in a module),
+    # To make sure this call is coming from the execution of a script file (AND NOT from the execution a cmdlet in the interpreter, like a function in a module),
     # we check the 'FunctionName' property which equals "<ScriptBlock>" when a call is performed from a script block, like a ps1 file.
-    # This test is not required for the first call, as a PowerShell module can't be run.
+    # This test is NOT required for the first call, as a PowerShell module can't be run.
     $SecondCall = $CallStack[$CallStack.Count - 2];
-    if($null -ne $SecondCall.ScriptName -and $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
+    if($null -ne $SecondCall.ScriptName -AND $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
     throw "No PowerShell entry point script could be found. This cmdlet ""$($MyInvocation.MyCommand.Name)"" is intended to be called only via the execution of a script file.";
 }
 

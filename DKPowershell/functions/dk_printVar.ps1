@@ -8,14 +8,14 @@ if(!$dk_printVar_ps1){ $dk_printVar_ps1 = 1; } else{ return; } #include guard
 function Global:dk_printVar($var) {
 	dk_debugFunc 1;
 	
-	if($var -and (Test-Path variable:$var)){
+	if($var -AND (Test-Path variable:$var)){
 		$name = (Get-Item variable:$var).Name
 		$variable = Get-Variable -Name ($name) -ValueOnly
 	}
 	else{
 		$name = $(Get-PSCallStack)[0].InvocationInfo.Line.Split(' ')[1] -replace "`n|`r"
 		if($name[0] -eq "$"){ $variable = $var }
-		if(($name[1] -eq "$") -and ($name[1] -eq "$")){ $variable = $var }
+		if(($name[1] -eq "$") -AND ($name[1] -eq "$")){ $variable = $var }
 	}
 	
 	if(($variable -is [array]) -or ($variable -is [System.Collections.ArrayList])){ 

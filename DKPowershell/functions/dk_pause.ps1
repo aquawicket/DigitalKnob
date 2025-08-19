@@ -4,13 +4,13 @@ if(!$dk_pause_ps1){ $dk_pause_ps1 = 1; } else{ return; } #include guard
 ##################################################################################
 # dk_pause(pause_msg)
 #
-#    Pause execution and wait for <enter> keypress to continue
+#    Pause execution AND wait for <enter> keypress to continue
 #
 function GLOBAL:dk_pause() {
 	dk_debugFunc 0 1
 
 	if(!($args[0])){
-		$pause_msg = "Press and any to continue...";
+		$pause_msg = "Press AND any to continue...";
 	} else {
 		$pause_msg = "$args";
 	}

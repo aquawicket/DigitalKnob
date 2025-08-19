@@ -17,7 +17,7 @@ function Global:dk_chdir() {
 	${_path_} = "$($args[0])";
 		
 	if(!(Test-Path "${_path_}")) {
-		dk_call dk_warning "dk_chdir(${args}): path:${_path_} does not exist";
+		dk_call dk_warning "dk_chdir(${args}): path:${_path_} does NOT exist";
 		return;
 	}
 	

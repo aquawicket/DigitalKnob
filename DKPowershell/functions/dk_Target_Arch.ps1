@@ -19,7 +19,7 @@ function Global:dk_Target_Arch() {
 	###### GET ######	
 	} else {
 		dk_call dk_echo;
-		#if not defined Target_Arch_Cache (dk_call Target_Arch_Cache)
+		#if NOT defined Target_Arch_Cache (dk_call Target_Arch_Cache)
 		if(${Target_Arch_Cache}){
 			dk_call dk_echo " 0) ${Target_Arch_Cache}";
 			dk_call dk_echo;

@@ -26,13 +26,13 @@ function Global:DKTEST() {
 		dk_call dk_echo "1one1 contains one\n"; 
 	}
 	else { 
-		dk_call dk_echo "1one1 does not contain one\n"; 
+		dk_call dk_echo "1one1 does NOT contain one\n"; 
 	}
 
 	if(dk_call dk_contains "2two2" "tow"){ 
 		dk_call dk_echo "2two2 contains tow\n"; 
 	}
 	else { 
-		dk_call dk_echo "2two2 does not contain tow\n"; 
+		dk_call dk_echo "2two2 does NOT contain tow\n"; 
 	}
 }

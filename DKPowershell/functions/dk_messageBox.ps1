@@ -26,12 +26,12 @@ function Global:DKTEST() {
 
 ###### MessageBoxButtons ######	
 #	OK					0		The message box contains an OK button.
-#	OKCancel			1		The message box contains OK and Cancel buttons.
-#	AbortRetryIgnore	2		The message box contains Abort, Retry, and Ignore buttons.
-#	YesNoCancel			3		The message box contains Yes, No, and Cancel buttons.
-#	YesNo				4		The message box contains Yes and No buttons.
-#	RetryCancel			5		The message box contains Retry and Cancel buttons.
-#	CancelTryContinue	6		Specifies that the message box contains Cancel, Try Again, and Continue buttons.
+#	OKCancel			1		The message box contains OK AND Cancel buttons.
+#	AbortRetryIgnore	2		The message box contains Abort, Retry, AND Ignore buttons.
+#	YesNoCancel			3		The message box contains Yes, No, AND Cancel buttons.
+#	YesNo				4		The message box contains Yes AND No buttons.
+#	RetryCancel			5		The message box contains Retry AND Cancel buttons.
+#	CancelTryContinue	6		Specifies that the message box contains Cancel, Try Again, AND Continue buttons.
 ###### MessageBoxIcon ######	
 #	None				0		The message box contains no symbols.
 #	Error				16		The message box contains a symbol consisting of white X in a circle with a red background.

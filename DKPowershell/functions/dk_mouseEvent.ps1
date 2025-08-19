@@ -9,10 +9,10 @@ if(!$dk_mouseEvent_ps1){ $dk_mouseEvent_ps1 = 1; } else{ return; } #include guar
 #	https://stackoverflow.com/a/44838831/688352
 #	https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
 #
-#	dwFlags - Controls various aspects of mouse motion and button clicking. This parameter can be certain combinations of the following values.
+#	dwFlags - Controls various aspects of mouse motion AND button clicking. This parameter can be certain combinations of the following values.
 #
-#	MOUSEEVENTF_ABSOLUTE	0x8000		The dx and dy parameters contain normalized absolute coordinates. If not set, those parameters contain relative data: 
-#										the change in position since the last reported position. This flag can be set, or not set.
+#	MOUSEEVENTF_ABSOLUTE	0x8000		The dx AND dy parameters contain normalized absolute coordinates. If NOT set, those parameters contain relative data: 
+#										the change in position since the last reported position. This flag can be set, or NOT set.
 #	MOUSEEVENTF_LEFTDOWN	0x0002		The left button is down.
 #	MOUSEEVENTF_LEFTUP		0x0004		The left button is up.
 #	MOUSEEVENTF_MIDDLEDOWN	0x0020		The middle button is down.

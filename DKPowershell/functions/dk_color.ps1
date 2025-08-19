@@ -4,7 +4,7 @@ if(!$dk_color_ps1){ $dk_color_ps1 = 1; } else{ return; } #include guard
 ##################################################################################
 # dk_color()
 #
-#	Enable / Disable console text and background coloring
+#	Enable / Disable console text AND background coloring
 #
 #   https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
@@ -29,7 +29,7 @@ function Global:dk_color() {
 		$global:underline = "${ESC}[4m"				# Underline       			- Adds underline
 		$global:blink = "${ESC}[5m"					# Blink
 		$global:fblink = "${ESC}[6m"				# Rapid Blink
-		$global:negative = "${ESC}[7m"   			# Negative	    			- Swaps foreground and background colors
+		$global:negative = "${ESC}[7m"   			# Negative	    			- Swaps foreground AND background colors
 		$global:invisible = "${ESC}[8m"				# Invisible
 		$global:strike = "${ESC}[9m"				# Strike Through
 		

@@ -25,7 +25,7 @@ function Global:dk_generate() {
 	$CMAKE_SOURCE_DIR = $CMAKE_SOURCE_DIR -replace '\\', '/';
 	dk_call dk_printVar CMAKE_SOURCE_DIR;
 	if(!(dk_call dk_pathExists "$CMAKE_SOURCE_DIR")){
-		dk_call dk_error "CMAKE_SOURCE_DIR does not exist";
+		dk_call dk_error "CMAKE_SOURCE_DIR does NOT exist";
 	}
 	$Target_App_Dir = $Target_App_Dir -replace '\\', '/';
 	

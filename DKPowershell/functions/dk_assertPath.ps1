@@ -17,7 +17,7 @@ function Global:dk_assertPath($path) {
 		return #${true}
 	} 
 	
-	dk_call dk_error "Assertion failed: $_path_ is not found!";
+	dk_call dk_error "Assertion failed: $_path_ is NOT found!";
 	return ${false}
 }
 

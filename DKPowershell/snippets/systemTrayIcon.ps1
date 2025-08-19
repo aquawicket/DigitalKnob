@@ -18,8 +18,8 @@ $icon = [System.Drawing.Icon]( New-Object System.Drawing.Icon( ( New-Object Syst
 $notify = new-object system.windows.forms.notifyicon
 $notify.icon = $icon
 $notify.visible = $true
-# show the balloon for 10 seconds (will not show in Windows 10)
+# show the balloon for 10 seconds (will NOT show in Windows 10)
 $notify.showballoontip( 10, "Reminder", "It's scripting time", [system.windows.forms.tooltipicon]::Info )
 # Uncomment the next command line to remove the icon, or type it manually, or
-# close the balloon and hover the mouse pointer over the system tray icon.
+# close the balloon AND hover the mouse pointer over the system tray icon.
 # $notify.Visible = $false

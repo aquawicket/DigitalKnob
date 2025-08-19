@@ -30,6 +30,6 @@ rem        endlocal%\n%
 rem        echo(%%~a%\n%
 rem        endlocal%\n%
 rem   )%\n%
-) ELSE setlocal DisableDelayedExpansion ^& set argv=""
+) else setlocal DisableDelayedExpansion ^& set argv=""
 
 exit /b

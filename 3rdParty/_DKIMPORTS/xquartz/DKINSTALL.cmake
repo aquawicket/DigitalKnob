@@ -49,7 +49,7 @@ dk_depend(homebrew)
 #dk_set(XQUARTZ FIXME)
 
 ### INSTALL ###
-#IF(NOT EXISTS ${XQUARTZ})
+#if(NOT EXISTS ${XQUARTZ})
 #	dk_download(${XQUARTZ_DL} $ENV{DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
 #	Mac_dk_exec($ENV{DKDOWNLOAD_DIR}/${XQUARTZ_NAME}.dmg)
 #ENDIF()
