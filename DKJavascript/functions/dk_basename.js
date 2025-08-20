@@ -27,6 +27,26 @@ dk_basename = function dk_basename_f(path, basename){
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	var myPath = "C:/Windows/System32";
-	console.log("dk_basename('"+myPath+"') = "+dk_basename(myPath));
+	//### Result as global variable
+	dk_echo;
+	dk_basename("A:/directoryA/filenameA.extA");
+	dk_echo "dk_basename = ${dk_basename}";
+	
+	//### Result as variable parameter
+	dk_echo;
+	dk_basename("B:/directoryB/filenameB.extB" resultB);
+	dk_echo "resultB = ${resultB}";
+	dk_echo "dk_basename = ${dk_basename}";
+	
+	//### Result as return value
+	dk_echo;
+	resultC=dk_basename("C:/directoryC/filenameC.extC");
+	dk_echo "resultC = ${resultC}";
+	#dk_echo "dk_basename = ${dk_basename}"					#NOTE: export cannot be seen outside of command substituion
+	
+	//### Result as hashtable parameter
+	dk_echo;
+	dk_basename("D:/directoryD/filenameD.extD" resultD.value);
+	dk_echo "resultD.value = ${resultD.value}";
+	dk_echo "dk_basename = ${dk_basename}";
 }
