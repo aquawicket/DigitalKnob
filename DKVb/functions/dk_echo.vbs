@@ -7,6 +7,7 @@ end if
 '##################################################################################
 '# dk_echo(<message>)
 '#
+'#
 public function dk_echo(message)
 	WScript.Echo message
 end function

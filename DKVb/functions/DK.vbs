@@ -30,7 +30,7 @@ else
 	
 	executeGlobal FileSystemObject.openTextFile("dk_source.vbs").readAll()
 	dk_source("dk_echo")
-	dk_echo("Test dk_echo")
+'	dk_echo("Test dk_echo")
 	
 '	if(isEmpty(ENV("DKSCRIPT_PATH"))) Then
 		ENV("DKSCRIPT_PATH") = WScript.ScriptFullName
