@@ -13,19 +13,20 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1 2
 
 	set "input=%~1"
-	set "output=%input:input=output%"
+	set "dk_testReturn=%input:input=output%"
 
 	endlocal & (
-		set "dk_testReturn=%output%"
+		set "dk_testReturn=%dk_testReturn%"
 		if "%~2" neq "" (
-			set "%~2=%output%"
+			set "%~2=%dk_testReturn%"
 		) else (
-			echo %output%
+			echo %dk_testReturn%
 		)
 	)
 
-::%endfunction%
-exit /b -1
+::exit /b -1
+%endfunction%
+
 
 
 
@@ -41,22 +42,16 @@ exit /b -1
 	%dk_call% dk_testReturn "inputA"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as parameter
+	::### Result as parameter variable
 	%dk_call% dk_echo
 	%dk_call% dk_testReturn "inputB" resultB
 	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::NOTE: ###### WORK IN PROGRESS ######
 	::### Result as return value
 	%dk_call% dk_echo
-	::resultC=$(dk_call dk_testReturn "inputC");
-	for /f "usebackq tokens=*" %%G in (`call dk_testReturn "inputC"`) do (
-		echo %%G
-		set "resultC=%%G"
-	)
+	for /f "usebackq tokens=*" %%G in (`call dk_testReturn "inputC"`) do (set "resultC=%%G")
 	%dk_call% dk_echo "resultC = %resultC%"
 	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	  &::NOTE: endlocal cannot be seen outside of command substituion			
 
 %endfunction%
-exit /b -1

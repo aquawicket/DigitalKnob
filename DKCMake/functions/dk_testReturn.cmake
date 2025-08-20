@@ -53,7 +53,7 @@ function(DKTEST)
 	dk_echo("resultB = ${resultB}")
 	dk_echo("dk_testReturn = ${dk_testReturn}")
 	
-	### NOTE: Cmake has not return variable functionality
+	### NOTE: Cmake has no return value
 	### Result as return value
 	#dk_echo()
 	#resultC=$(dk_testReturn "inputC");

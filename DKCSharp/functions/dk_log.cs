@@ -1,4 +1,4 @@
-public class APP{
+public class CS_dk_log{
         	
 	//############################################################################
 	//# dk_log(level, message)
@@ -9,10 +9,6 @@ public class APP{
 		//dk_echo("DKTEST() dk_echo()");
 		return 0;
 	}
-    
-	
-	
-	
 	
 	//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 	public static void DKTEST(){

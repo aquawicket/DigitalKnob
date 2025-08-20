@@ -3,7 +3,7 @@
 #define DK_h
 
 int DK_C = 0;
-int exit_status;
+int exit_status = 0;
 char* DKSCRIPT_PATH;
 char* DKSCRIPT_DIR;
 char* DKSCRIPT_FILE;

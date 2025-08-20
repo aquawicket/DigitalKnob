@@ -5,7 +5,7 @@ using Microsoft.CSharp;
 using System.Reflection;
 
 namespace dynamiccompilation{
-    class Program{
+    class runCSharpCode{
         static CompilerParameters CompilerParams = new CompilerParameters{
             GenerateInMemory = true,
             TreatWarningsAsErrors = false,

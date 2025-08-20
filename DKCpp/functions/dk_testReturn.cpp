@@ -12,21 +12,21 @@ int main(int argc, char** argv){
 	dk_echo("\n");
 	std::string resultA;
 	dk_testReturn("inputA");
-	dk_echo("testReturn = %s\n", testReturn.c_str());
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn.c_str());
 
 	//### Result as parameter
 	dk_echo("\n");
 	std::string resultB;
 	dk_testReturn("inputB", resultB);
 	dk_echo("resultB = %s\n", resultB.c_str());
-	dk_echo("testReturn = %s\n", testReturn.c_str());
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn.c_str());
 
 	//### Result as return value
 	dk_echo("\n");
 	std::string resultC;
 	resultC=dk_testReturn("inputC");
 	dk_echo("resultC = %s\n", resultC.c_str());
-	dk_echo("testReturn = %s\n", testReturn.c_str());
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn.c_str());
 
     return 0;
 }

@@ -43,7 +43,7 @@ DKTEST() {
 	dk_call dk_testReturn "inputA";
 	dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
 	
-	### Result as parameter
+	### Result as parameter variable
 	dk_call dk_echo
 	dk_call dk_testReturn "inputB" resultB;
 	dk_call dk_echo "resultB = ${resultB}";
@@ -53,5 +53,5 @@ DKTEST() {
 	dk_call dk_echo
 	resultC=$(dk_call dk_testReturn "inputC");
 	dk_call dk_echo "resultC = ${resultC}";
-	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";					#NOTE: export cannot be seen outside of command substituion
+	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";			#NOTE: export cannot be seen outside of command substituion
 }

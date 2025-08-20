@@ -5,22 +5,22 @@
 #include "DK.h"
 #include "dk_replaceAll.h"
 
-char testReturn[256];
+char _dk_testReturn[256];
 //################################################################################
 //# dk_testReturn(input, output)
 //#
 char* dk_testReturn(char* input, char* output){
 	//dk_debugFunc(1, 2);
 	
-	int retA = dk_replaceAll(input, "input", "output", testReturn);
+	exit_status = dk_replaceAll(input, "input", "output", _dk_testReturn);
 
 	if(output){
-		strcpy(output, testReturn);
+		strcpy(output, _dk_testReturn);
 	} else {
-		dk_echo("%s\n", testReturn);
+		dk_echo("%s\n", _dk_testReturn);
 	}
 	
-	return testReturn;
+	return _dk_testReturn;
 };
 
 #endif //dk_testReturn_h

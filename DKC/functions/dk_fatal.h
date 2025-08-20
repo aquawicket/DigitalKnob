@@ -12,7 +12,7 @@
 int dk_fatal(const char* format, ...) {
 	va_list args;
     va_start(args, format);
-	int exit_status = v_dk_log(FATAL, format, args);
+	exit_status = v_dk_log(FATAL, format, args);
     va_end(args);
     return exit_status;
 };

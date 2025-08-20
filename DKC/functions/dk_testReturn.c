@@ -2,7 +2,6 @@
 
 #include "dk_testReturn.h"
 #include "dk_echo.h"
-//#include "dk_replaceAll.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
@@ -12,22 +11,21 @@ int main(int argc, char** argv){
 	//### Result as global variable
 	dk_echo("\n");
 	dk_testReturn("inputA", NULL);
-	dk_echo("testReturn = %s\n", testReturn);
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn);
 	
 	//### Result as parameter
 	dk_echo("\n");
 	char resultB[256];
 	dk_testReturn("inputB", resultB);
 	dk_echo("resultB = %s\n", resultB);
-	dk_echo("testReturn = %s\n", testReturn);
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn);
 	
 	//### Result as return value
 	dk_echo("\n");
-	char* resultC;
-	resultC=dk_testReturn("inputC", NULL);
+	char* resultC = dk_testReturn("inputC", NULL);
 	dk_echo("resultC = %s\n", resultC);
-	dk_echo("testReturn = %s\n", testReturn);
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn);
 	
-    return 0;
+    return exit_status;
 }
 #endif
