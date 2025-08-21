@@ -204,6 +204,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 
+
+
 ::#####################
 :PLUGIN.Install.Dirname
 	if defined PLUGIN.Install.Dirname (%return%)
