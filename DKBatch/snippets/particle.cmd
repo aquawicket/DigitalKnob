@@ -1,10 +1,11 @@
 @echo off&::###### DK.cmd #########################################################################################################################
+if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
 if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-SETLOCAL ENABLEDELAYEDEXPANSION
+setlocal enableDelaydExpansion
 FOR /F %%A in ('ECHO prompt $E^| cmd') DO SET "ESC=%%A"
 ::d = dummy variable, par = particle
 SET /A "par[life]=11","par[rate]=2","par[orgcol]=0","par[rmax]=3","par[rmin]=1","orgin[x]=15","orgin[y]=10"

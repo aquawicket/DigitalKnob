@@ -1,15 +1,18 @@
 0</* :
+::########################################## Batch ##################################################
 @echo off
 @cscript /nologo /E:jscript "%~f0" "%~nx0" %*
 set exit_code=%ERRORLEVEL%
 
-//###### exit_code ######
+::###### exit_code ######
 echo exit_code = %exit_code%
 pause
 exit /b %exit_code%
 */0;
 
-//########################################## Jscript ##################################################
+
+
+//########################################## Jscript #################################################
 var argc = WScript.Arguments.length;
 var argv = [];
 for (var i = 0; i < argc; i++){ argv.push(WScript.Arguments.Item(i)) }
