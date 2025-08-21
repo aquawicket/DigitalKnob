@@ -5,7 +5,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::############################################################################
-::# dk_evalDKBash()
+::# dk_evalDKBash(code)
 ::#
 ::#
 :dk_evalDKBash
@@ -21,7 +21,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	endlocal & (
 		set "dk_evalDKBash=%dk_exec%"
 	)
-
 %endfunction%
 
 
@@ -41,19 +40,18 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_evalDKBash "echo 'testing dk_evalDKBash'"
 	
-	::### Print Shell Path ad Version ###
-	%dk_call% dk_evalDKBash
-	(
-		"export ESC="";  # escape character
-		[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
-		export DKSHELL=$(basename ${DKSHELL_PATH})
-		export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
-		echo ""
-		echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
-		echo "DKSHELL_PATH  ${DKSHELL_PATH}"
-		echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
-		echo ""
-	)
-
+	::### Print Shell Path and Version ###
+::	%dk_call% dk_evalDKBash
+::	(
+::		"export ESC="";  # escape character
+::		[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-}; || export DKSHELL_PATH=${SHELL-};
+::		export DKSHELL=$(basename ${DKSHELL_PATH});
+::		export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)";
+::		echo "";
+::		echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m";
+::		echo "DKSHELL_PATH  ${DKSHELL_PATH}";
+::		echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}";
+::		echo "";
+::	)
 %endfunction%
 

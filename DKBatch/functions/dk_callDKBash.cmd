@@ -59,7 +59,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
 	::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 		
-		
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKBash=%dk_exec%"
