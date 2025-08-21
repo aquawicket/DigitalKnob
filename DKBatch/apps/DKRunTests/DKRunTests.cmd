@@ -57,7 +57,7 @@ exit /b 0
 		echo %yellow% ######### %~nx1 is disabled ######### %clr%
 		exit /b 0
 	)
-	if NOT EXIST %~1 (exit /b -1)
+	if NOT EXIST "%~1" (exit /b -1)
 	%dk_call% dk_fileContains "%~1" ":DKTEST" || exit /b -1
 	
 	set "CURRENT_TEST_FILE=%~nx1"

@@ -45,7 +45,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for %%Z in ("%_fnc_%") do set "dirn=%%~dpZ"
 	if "%dirn:~-1%" equ "\" set "dirn=%dirn:~0,-1%"
 	if "%dirn:~-1%" equ "/" set "dirn=%dirn:~0,-1%"
-	if NOT EXIST %dirn% mkdir %dirn%	
+	if NOT EXIST "%dirn%" mkdir "%dirn%"	
 
 	::echo curl.exe -L "%_url_%" -o "%_fnc_%"
 	if NOT EXIST "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"

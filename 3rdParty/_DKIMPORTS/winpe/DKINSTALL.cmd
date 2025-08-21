@@ -38,7 +38,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_download "%WINPE_DL%"
 
 		::###### create and cd into install directory ######
-		if NOT EXIST %WINPE_DIR% (%dk_call% dk_mkdir "%WINPE_DIR%")
+		if NOT EXIST "%WINPE_DIR%" (%dk_call% dk_mkdir "%WINPE_DIR%")
 		%dk_call% dk_chdir "%WINPE_DIR%"
 
 		::###### Install the OS to the .img file ######

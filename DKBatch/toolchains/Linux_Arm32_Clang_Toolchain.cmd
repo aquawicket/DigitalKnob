@@ -22,13 +22,13 @@ rem %dk_call% dk_depend 	build-essential
 rem %dk_call% dk_set 		USR_BIN						"/usr/bin"
 rem %dk_call% dk_set 		USR_LOCAL_BIN				"/usr/local/bin"
 rem ###### CMAKE_C_COMPILER ######
-::if EXIST "/usr/bin/clang"
+::if EXIST /usr/bin/clang
 ::	%dk_call% dk_set 		CMAKE_C_COMPILER			"/usr/bin/clang"
-::) else if EXIST "/usr/local/bin/clang" (
+::) else if EXIST /usr/local/bin/clang (
 ::	%dk_call% dk_set 		CMAKE_C_COMPILER			"/usr/local/bin/clang"
 ::)
 rem ###### CMAKE_CXX_COMPILER ######
-::if EXIST "/usr/bin/clang++" (
+::if EXIST /usr/bin/clang++ (
 ::	%dk_call% dk_set 		CMAKE_CXX_COMPILER			"/usr/bin/clang++"
 ::) else if EXIST "/usr/local/bin/clang++" (
 ::	%dk_call% dk_set 		CMAKE_CXX_COMPILER			"/usr/local/bin/clang++"

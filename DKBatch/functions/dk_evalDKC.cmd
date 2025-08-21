@@ -41,8 +41,8 @@ if NOT defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 ::	if NOT defined DKHTTP_DKC_FUNCTIONS_DIR		(set "DKHTTP_DKC_FUNCTIONS_DIR=%DKHTTP_DKC_DIR%/functions")
 ::
 ::	::###### Download files if missing ######
-::	if NOT EXIST %DKC_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
-::	::if NOT EXIST %DKC_FUNCTIONS_DIR%/%~1.c	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
+::	if NOT EXIST "%DKC_FUNCTIONS_DIR%/DK.h"	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/DK.h" "%DKC_FUNCTIONS_DIR%/DK.h")
+::	::if NOT EXIST "%DKC_FUNCTIONS_DIR%/%~1.c"	(%dk_call% dk_download "%DKHTTP_DKC_FUNCTIONS_DIR%/%~1.c" "%DKC_FUNCTIONS_DIR%/%~1.c")
 
 	if NOT defined Host_Tuple						(%dk_call% dk_Host_Tuple)
 	if NOT defined dk_evalDKC_Default_Target_Os		(set "dk_evalDKC_Default_Target_Os=%Host_Os%")

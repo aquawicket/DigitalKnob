@@ -3,7 +3,7 @@
 	set "outfile=%~dpn0.exe"
 	call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat" > nul
 	"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.42.34433\bin\Hostx64\x64\cl.exe" %~dpf0 /TP /EHsc /link /out:%outfile% /nologo > nul
-	if NOT EXIST %outfile% (
+	if NOT EXIST "%outfile%" (
 		echo Compilation failed!
 		exit /b %ERRORLEVEL%
 	)

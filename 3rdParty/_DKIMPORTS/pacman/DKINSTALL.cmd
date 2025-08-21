@@ -12,7 +12,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %dk_call% dk_findProgram PACMAN_EXE pacman.exe "%MSYS2%/usr/bin"
 
 ::#	if NOT defined DKUPDATE (
-::#		if EXIST %PACMAN_EXE% (
+::#		if EXIST "%PACMAN_EXE%" (
 ::#			%dk_call% dk_notice "PACMAN_EXE is already installed, returning"
 ::#			%return%
 ::#		)

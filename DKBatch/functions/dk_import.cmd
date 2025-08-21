@@ -81,7 +81,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::			if NOT EXIST "!%CURRENT_PLUGIN%_DIR!/.git" (
 ::				%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 ::				%dk_call% dk_chdir "%DK3RDPARTY_DIR%"
-::				if EXIST !%CURRENT_PLUGIN%_DIR! (
+::				if EXIST "!%CURRENT_PLUGIN%_DIR!" (
 ::					%dk_call% dk_delete(!%CURRENT_PLUGIN%_DIR!)
 ::				) else (
 ::					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)

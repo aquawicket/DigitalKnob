@@ -19,7 +19,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	%dk_call% dk_removeExtension %OPENSSL_IMPORT_FILE% OPENSSL_FOLDER
 ::	set "OPENSSL=%DK3RDPARTY_DIR%/openssl-%OPENSSL_FOLDER%"
 
-	if EXIST %OPENSSL%/Configure" (
+	if EXIST "%OPENSSL%/Configure" (
 		echo "openssl already installed"
 		%return%
 	)

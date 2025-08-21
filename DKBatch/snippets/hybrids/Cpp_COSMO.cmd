@@ -19,11 +19,11 @@
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if EXIST %APP_EXE%  del %APP_EXE%
+	if EXIST "%APP_EXE%"	(del "%APP_EXE%")
 
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%
-	if NOT EXIST %APP_EXE% (
+	if NOT EXIST "%APP_EXE%" (
 		echo Compilation failed!
 		exit /b %ERRORLEVEL%
 	)

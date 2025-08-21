@@ -57,7 +57,7 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if NOT EXIST %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does NOT EXIST" )
+if NOT EXIST "%ANDROID_HOME%" ( %ERROR% "Environment Variable ANDROID_HOME does NOT EXIST" )
 
 :: JDK
 if %GRADLE% equ 0 (

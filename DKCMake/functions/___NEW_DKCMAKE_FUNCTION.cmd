@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_inputBox
 	%dk_call% dk_printVar dk_inputBox
 	
-	if EXIST %dk_inputBox%.cmake (
+	if EXIST "%dk_inputBox%.cmake" (
 		%dk_call% dk_notice "function %dk_inputBox% already exists"
 		goto :edit_textfile
 	)

@@ -10,9 +10,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_callDKCmake
 %setlocal%
-	%dk_call% dk_debugFunc 1 4
+	%dk_call% dk_debugFunc 1 99
 
-	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	set "_func_=%~1"
+	set "_path_=%DKCMAKE_FUNCTIONS_DIR:\=/%/%_func_%.cmake"
+
+	::%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
 
 	::### Get DKHTTP_DKCMAKE_FUNCTIONS_DIR
 	if NOT defined DKHTTP_DKCMAKE_DIR					(set "DKHTTP_DKCMAKE_DIR=%DKHTTP_DKBRANCH_DIR%/DKCMake")
@@ -20,7 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::### Download files if missing
 	if NOT EXIST "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake"		(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/DK.cmake" "%DKCMAKE_FUNCTIONS_DIR%/DK.cmake")
-	::if NOT EXIST "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake"	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
+	if NOT EXIST "%_path_%"								(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%_func_%.cmake" "%_path_%")
 
 	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate CMAKE_EXE					"%dk_call% dk_depend cmake"

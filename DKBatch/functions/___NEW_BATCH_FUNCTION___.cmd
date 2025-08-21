@@ -17,7 +17,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "FUNCTION=%dk_inputBox%"
 	set "FUNCTION_FILE=%FUNCTION%.cmd"
 	
-	if EXIST %FUNCTION_FILE% (
+	if EXIST "%FUNCTION_FILE%" (
 		%dk_call% dk_notice "%FUNCTION_FILE% already exists"
 		goto :edit_textfile
 	)

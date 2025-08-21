@@ -71,7 +71,7 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 		
 	:with_return_values
 		"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
-		if NOT EXIST %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
+		if NOT EXIST "%DKCMAKE_DIR%/cmake_vars.cmd" goto:eof
 		call %DKCMAKE_DIR%\cmake_vars.cmd
 		del %DKCMAKE_DIR%\cmake_vars.cmd
 		

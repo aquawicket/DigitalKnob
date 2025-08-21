@@ -43,8 +43,8 @@ if NOT defined dk_evalDKCpp_Default_Target_Env	(set "dk_evalDKCpp_Default_Target
 ::	if NOT defined DKHTTP_DKCPP_FUNCTIONS_DIR		(set "DKHTTP_DKCPP_FUNCTIONS_DIR=%DKHTTP_DKCPP_DIR%/functions")
 ::
 ::	::###### Download files if missing ######
-::	if NOT EXIST %DKCPP_FUNCTIONS_DIR%/DK.h	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/DK.h" "%DKCPP_FUNCTIONS_DIR%/DK.h")
-::	::if NOT EXIST %DKCPP_FUNCTIONS_DIR%/%~1.cpp	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/%~1.cpp" "%DKCPP_FUNCTIONS_DIR%/%~1.cpp")
+::	if NOT EXIST "%DKCPP_FUNCTIONS_DIR%/DK.h"		(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/DK.h" "%DKCPP_FUNCTIONS_DIR%/DK.h")
+::	::if NOT EXIST "%DKCPP_FUNCTIONS_DIR%/%~1.cpp"	(%dk_call% dk_download "%DKHTTP_DKCPP_FUNCTIONS_DIR%/%~1.cpp" "%DKCPP_FUNCTIONS_DIR%/%~1.cpp")
 
 	::###### Target_Os ######
 	if NOT defined Target_Os (set "Target_Os=%dk_evalDKCpp_Default_Target_Os%")

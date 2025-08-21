@@ -26,7 +26,7 @@ rem Get the output of CLS command
 for /F %%a in ('cls') do set "cls=%%a"
 
 rem If /A switch is NOT provided, delete the file that receives Tee output
-if /I "%~2" neq "/A" if EXIST %1 (del %1)
+if /I "%~2" neq "/A" if EXIST "%~1" (del "%~1")
 
 rem Create the semaphore-signal file and start the asynchronous Tee process
 echo X > Flag.out

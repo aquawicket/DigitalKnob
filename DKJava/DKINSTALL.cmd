@@ -13,7 +13,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if EXIST %APP%.exe (del %APP%.exe)
+	if EXIST "%APP%.exe" (del %APP%.exe)
 
 	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKJava_FILE%
 	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKJava_FILE%

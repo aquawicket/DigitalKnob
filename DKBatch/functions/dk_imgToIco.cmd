@@ -23,7 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_callDKPowershell dk_imgToIco "%imgFile% %icoFile%"
    
-    if NOT EXIST %icoFile% (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
+    if NOT EXIST "%icoFile%" (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
 %endfunction%
 
 

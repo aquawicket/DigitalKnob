@@ -63,7 +63,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :: wait for the folders to get deleted
     %dk_call% dk_sleep 3
        
-    if EXIST %DKBRANCH_DIR% echo "Oh no, the BRANCH folder is still there! :( "
+    if EXIST "%DKBRANCH_DIR%" echo "Oh no, the BRANCH folder is still there! :( "
        
     %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development NO_CONFIRM
        

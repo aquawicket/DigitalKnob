@@ -12,7 +12,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
     set "tempfile=%DKCACHE_DIR%\temp.txt"
-    if EXIST !tempfile! %dk_call% dk_delete !tempfile!
+    if EXIST "!tempfile!" %dk_call% dk_delete !tempfile!
     netsh wlan show profile | findstr All>> "!tempfile!"
 
     for /f "tokens=2 delims=:" %%i in (!tempfile!) do (

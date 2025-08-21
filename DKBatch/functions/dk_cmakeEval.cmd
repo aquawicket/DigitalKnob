@@ -56,7 +56,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::  ## these lines are deprecated ###
 ::  if NOT defined DKRETURN %return%
-::  if NOT EXIST %DKCMAKE_DIR%\cmake_vars.cmd %return%
+::  if NOT EXIST "%DKCMAKE_DIR%\cmake_vars.cmd" (%return%)
 ::  
 ::  endlocal
 ::  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd

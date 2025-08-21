@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	
-	if NOT EXIST %DKCACHE_DIR%/vars.tmp (
+	if NOT EXIST "%DKCACHE_DIR%/vars.tmp" (
 		set > %DKCACHE_DIR%\vars.tmp
 	)
 	

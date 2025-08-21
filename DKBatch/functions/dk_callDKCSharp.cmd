@@ -39,8 +39,8 @@ dk_callDKCSharp
 	if NOT defined DKHTTP_DKCSHARP_FUNCTIONS_DIR  (set "DKHTTP_DKCSHARP_FUNCTIONS_DIR=%DKHTTP_DKCSHARP_DIR%/functions")
 
 	::###### Download files if missing ######
-	if NOT EXIST %DKCSHARP_FUNCTIONS_DIR%/DK.cs	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
-	if NOT EXIST %DKCSHARP_FUNCTIONS_DIR%/%~1.cs   (%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
+	if NOT EXIST "%DKCSHARP_FUNCTIONS_DIR%/DK.cs"	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
+	if NOT EXIST "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs"	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
 
 	::###### Target_Os ######
 	if NOT defined Target_Os (set "Target_Os=%default_Target_Os%")

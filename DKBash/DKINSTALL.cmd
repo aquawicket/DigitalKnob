@@ -6,7 +6,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::set "DKBash_ENV=GIT"
 ::set "DKBash_ENV=MSYS2"
-set "DKBash_ENV=WSL"
+::set "DKBash_ENV=WSL"
 ::set "DKBash_ENV=WSL2"
 
 
