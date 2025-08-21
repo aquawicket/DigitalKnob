@@ -37,9 +37,9 @@ def DKTEST():
 	
     ### Result as parameter variable
     dk_echo("")
-    resultB = ['']                      # to pass by reference, we must use a list
+    resultB = ['']                      # we must use a list to pass by reference
     dk_testReturn("inputB", resultB)
-    resultB = resultB[0]                # then convert the list item[0] back to a string
+    resultB = resultB[0]                # now we can convert the list item back to a string
     dk_echo("resultB = "+resultB)
     dk_echo("testReturn = "+testReturn)
 	

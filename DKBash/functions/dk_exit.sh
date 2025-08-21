@@ -21,16 +21,16 @@ fi
 #
 #
 dk_exit() {
-	dk_debugFunc 0 1
+	dk_debugFunc 0 1;
 	
-	trap '' EXIT
-	[ -z "${exit_code-}" ] && export exit_code=0
-	[ $? -gt ${exit_code} ] && export exit_code=$?
-	[ ${1-} -gt ${exit_code} ] && export exit_code=$1
+	trap '' EXIT;
+	[ -n "${1-}" ] && export exit_code=${1};
+	[ -z "${exit_code-}" ] && export exit_code=${?};
+	[ -z "${exit_code-}" ] && export exit_code=0;
 	
-	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code} ***" && dk_call dk_pause || $(true)
+	[ ${PAUSE_ON_EXIT} = 1 ] && dk_call dk_echo "*** PAUSE_ON_EXIT: exit_code:${exit_code-} ***" && dk_call dk_pause || $(true)
 	
-	exit ${exit_code}
+	exit ${exit_code};
 }
 
 

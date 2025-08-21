@@ -139,27 +139,39 @@ DK(){
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	[ -e "${DKSCRIPT_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
 	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	
 
-	dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
-	dk_call dk_removeExtension "${DKSCRIPT_NAME}" DKSCRIPT_FUNCTION;
-
-    ###### DKTEST MODE ######
-    [ ! "${DKSCRIPT_EXT}" = ".sh" ] && return $(true);
-	if dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()"; then
-		dk_call dk_echo;
-		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}";
-		dk_call dk_echo;
-		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
-		(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
-		dk_call dk_echo;
-		dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}";
-		dk_call dk_echo;
-		dk_call dk_exit 0;
+    
+    if [ "${DKSCRIPT_EXT}" = ".sh" ]; then
+		###### DKTEST MODE ######
+		if dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()"; then
+			dk_call dk_echo;
+			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}";
+			dk_call dk_echo;
+			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
+			(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
+			dk_call dk_echo;
+			dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_NAME} ####### END DKTEST ######${clr-}";
+			dk_call dk_echo;
+			dk_call dk_exit $?;
+			
+		###### RUN MODE ######
+		else	
+			dk_call dk_removeExtension "${DKSCRIPT_NAME}" DKSCRIPT_FUNCTION;
+			dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_FUNCTION}(${DKSCRIPT}) ########################${clr-}";
+			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
+			(command -v ${DKSCRIPT_FUNCTION} 1>/dev/null) && ${DKSCRIPT_FUNCTION} || echo "'${DKSCRIPT_FUNCTION}()' failed";
+			dk_call dk_exit $?;
+		fi
 	else
-		dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_FUNCTION}() ########################${clr-}";
-		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
-		(command -v ${DKSCRIPT_FUNCTION} 1>/dev/null) && ${DKSCRIPT_FUNCTION} || echo "'${DKSCRIPT_FUNCTION}()' failed";
+		echo "DKSCRIPT_PATH is not DKBash";
+		echo "* = $*";
+		. $1;
+		echo "dk_call $(basename ${1%.*}) $2;";
+		dk_call $(basename ${1%.*}) $2;
+		dk_call dk_exit $?;
 	fi
+	dk_call dk_exit $?;
 }
 
 ##################################################################################

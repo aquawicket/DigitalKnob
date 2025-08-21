@@ -3,7 +3,7 @@ if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-
+set "dk_callDKBash_WSL=1"
 ::####################################################################
 ::# dk_callDKBash(function, arguments..., rtn_var)
 ::#
@@ -13,10 +13,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 
-	::set "USE_WSL=1"
-	if defined USE_WSL (
-		%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	
+	if defined dk_callDKBash_WSL (
 		%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
+		set BASH_EXE=!WSL_EXE! bash
+	) else (
+		%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
 	)
 
 	::### Get DKBASH_FUNCTIONS_DIR
@@ -30,55 +32,42 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT EXIST %DKBASH_FUNCTIONS_DIR%/DK.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh")
 	if NOT EXIST %DKBASH_FUNCTIONS_DIR%/%~1.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh")
 
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
-
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 
-	::set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%"
-	if defined USE_WSL (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
+	if defined dk_callDKBash_WSL (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
 
 	::set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
 	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:=/c%"
-	if defined USE_WSL (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
+	if defined dk_callDKBash_WSL (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
 
-::	set "RELOAD_WITH_BASH=0"
-	if defined USE_WSL (set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u)
-
-	:: Call DKBash function
-::  if NOT defined USE_WSL set DKBASH_COMMAND=%BASH_EXE% -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %dk_allButFirstArgs%'
-::	if defined USE_WSL (set DKBASH_COMMAND="%WSL_EXE% bash -c '. %DKBASH_FUNCTIONS_DIR%/%~1.sh ^&^& %~1 %dk_allButFirstArgs%'")
-
-::	::echo %DKBASH_COMMAND%
-::	for /f "delims=" %%Z in ('%DKBASH_COMMAND%') do (
-::		echo %%Z				&rem  Display the other shell's stdout
-::		set "rtn_value=%%Z"	 &rem  Set the return value to the last line of output
-::	)
-::	::echo rtn_value = !rtn_value!
-
-::	endlocal & (
-::		set "dk_callDKBash=%dk_callDKBash%""
-::		if /i "%LAST_ARG%" equ "rtn_var" (set "%LAST_ARG%=%dk_callDKBash%")
-::	)
+	set "PAUSE_ON_EXIT=0"
+	if defined dk_callDKBash_WSL (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
 
 	set "test=DKBash"
 	::###### run command ######
 	set "bash_file=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
-	if defined USE_WSL (
-		rem set DKCOMMAND=%WSL_EXE% bash -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %dk_allButFirstArgs%'
-		set DKCOMMAND=%WSL_EXE% bash -c '. %bash_file%; %*'
-	) else (
-		rem set DKCOMMAND=%BASH_EXE% -c 'export RELOAD_WITH_BASH=; . %bash_file%; %1 %dk_allButFirstArgs%'
-		set DKCOMMAND=%BASH_EXE% -c '. %bash_file%; %*'
-	)
+	
+	set DKCOMMAND=%BASH_EXE% -c '%bash_file% %dk_allButFirstArgs%'
 	
 	::############ DKBash function call ############
-	echo DKCOMMAND = %DKCOMMAND%
+	::set "dk_exec_ECHO_OUTPUT=1"
+	::set "dk_exec_ECHO_ERROR=1"
+	::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
+	::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
+	::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
+	::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
+	::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
+	::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
+	::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
+		
+		
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKBash=%dk_exec%"
+		set "%~1=%dk_exec%"
 	)
 %endfunction%
 
@@ -90,7 +79,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_callDKBash dk_test "arg 1" "arg 2" "arg 3"
+	%dk_call% dk_callDKBash dk_testReturn inputA
 	%dk_call% dk_echo
 	%dk_call% dk_echo "dk_callDKBash = %dk_callDKBash%"
+	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 %endfunction%

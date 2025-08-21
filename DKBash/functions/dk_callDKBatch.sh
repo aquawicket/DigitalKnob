@@ -54,7 +54,6 @@ dk_callDKBatch() {
 	echo "CMD_EXE = '${CMD_EXE}'"
 	echo "DKBATCH_APP_WIN = '${DKBATCH_APP_WIN}'"
 	echo "cmnd = ${CMD_EXE} //V:ON //c ${DKBATCH_FUNCTIONS_DIR}/${1}.cmd ${@:2}"
-	#export DKINIT=""
 	${CMD_EXE} //V:ON //c call ${DKBATCH_APP_WIN} ${@:2}
 	#echo "output = ${output}"
 
