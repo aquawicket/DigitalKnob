@@ -42,7 +42,7 @@ if(ENV("DKSCRIPT_PATH") = WScript.ScriptFullName) then
 		dk_echo(" ")
 		resultC = dk_testReturn("inputC", "")
 		dk_echo("resultC = "+resultC)
-		dk_echo("testReturn = "+testReturn)			'#NOTE: export cannot be seen outside of command substituion
+		dk_echo("testReturn = "+testReturn)
 		
 	end function	
 end if
