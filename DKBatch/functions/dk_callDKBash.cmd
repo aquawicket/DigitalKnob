@@ -3,7 +3,11 @@ if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-set "dk_callDKBash_WSL=1"
+
+::####################################################################
+::set "dk_callDKBash_ENV=GIT"
+::set "dk_callDKBash_ENV=MSYS2"
+::set "dk_callDKBash_ENV=WSL"
 ::####################################################################
 ::# dk_callDKBash(function, arguments..., rtn_var)
 ::#
@@ -13,14 +17,8 @@ set "dk_callDKBash_WSL=1"
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 
+	%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash %dk_callDKBash_ENV%"
 	
-	if defined dk_callDKBash_WSL (
-		%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
-		set BASH_EXE=!WSL_EXE! bash
-	) else (
-		%dk_call% dk_validate BASH_EXE "%dk_call% dk_BASH_EXE"
-	)
-
 	::### Get DKBASH_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
@@ -36,20 +34,18 @@ set "dk_callDKBash_WSL=1"
 	%dk_call% dk_allButFirstArgs %*
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%"
-	if defined dk_callDKBash_WSL (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
+	if "%dk_callDKBash_ENV%" equ "WSL" (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
 
-	::set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
 	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:=/c%"
-	if defined dk_callDKBash_WSL (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
+	if "%dk_callDKBash_ENV%" equ "WSL" (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
 	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
 
 	set "PAUSE_ON_EXIT=0"
-	if defined dk_callDKBash_WSL (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
+	if "%dk_callDKBash_ENV%" equ "WSL" (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
 
-	set "test=DKBash"
-	::###### run command ######
 	set "bash_file=%DKBASH_FUNCTIONS_DIR:\=/%/%~1.sh"
 	
+	::###### run command ######
 	set DKCOMMAND=%BASH_EXE% -c '%bash_file% %dk_allButFirstArgs%'
 	
 	::############ DKBash function call ############
