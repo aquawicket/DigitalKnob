@@ -73,11 +73,16 @@ function DK(){
 		###### DKTEST MODE ######
 		dk_source("dk_fileContains");
 		if(dk_fileContains("{$DKSCRIPT_PATH}", "function DKTEST()")){
-	    //if( strpos(file_get_contents("{$DKSCRIPT_PATH}"), "function DKTEST()")) {
-			echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### {$DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
-				#include_once("{$DKSCRIPT_PATH}");
-				DKTEST();
-			echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n\n");
+			if(empty($DKSCRIPT_ARGS)){
+			//if( strpos(file_get_contents("{$DKSCRIPT_PATH}"), "function DKTEST()")) {
+				echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."###### DKTEST MODE ###### {$DKSCRIPT_FILE} ###### DKTEST MODE ######".$GLOBALS['clr']."\n\n");
+					#include_once("{$DKSCRIPT_PATH}");
+					DKTEST();
+				echo("\n".$GLOBALS['bg_magenta'].$GLOBALS['white']."########################## END TEST ################################".$GLOBALS['clr']."\n\n");
+			} else {
+				echo("\n".$GLOBALS['bg_blue'].$GLOBALS['white']."######################### {$DKSCRIPT_FILE} #########################".$GLOBALS['clr']."\n\n");
+				$DKSCRIPT_NAME($DKSCRIPT_ARGS);
+			}
 		}
 		######## RUN MODE #######
 		else {

@@ -1,5 +1,5 @@
 <?php
-
+var_dump($argv);
 ##################################################################################
 # dk_testReturn(input, output)
 #
@@ -60,9 +60,10 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	$PHP_EXE = "C:\Users\Administrator\DigitalKnob\DKTools\php-src-php-8.4.11-win32-vs17-x64\php.exe";
 	$resultF = "";
 	$exit_code = 0;
-	exec("cmd /c $PHP_EXE dk_basename.php $PHP_EXE", $resultF, $exit_code);
-	dk_echo("resultF = $resultF[0]\n");
+	exec("$PHP_EXE dk_testReturn.php inputF", $resultF, $exit_code);
+	dk_echo("resultF = ".end($resultF)."\n");
 	dk_echo("exit_code = $exit_code\n");
+	var_dump($resultF);
 
 }}
 
