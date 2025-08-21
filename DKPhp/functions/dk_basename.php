@@ -41,7 +41,7 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	### Result as return value
 	dk_echo("\n");
 	$resultC = dk_basename("C:/directoryC/filenameC.extC");
-	dk_echo("resultC = ${resultC}\n");
+	dk_echo("resultC = {$resultC}\n");
 	dk_echo("dk_basename = ".$GLOBALS["dk_basename"]."\n");
 	
 	### Result as hashtable parameter

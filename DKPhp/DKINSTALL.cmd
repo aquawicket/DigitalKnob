@@ -9,7 +9,6 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
 	::###### run script ######'
-	echo "%ComSpec%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
 	"%ComSpec%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
 	::"%ComSpec%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
 	::###### exit_code ######

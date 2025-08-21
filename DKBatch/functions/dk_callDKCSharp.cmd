@@ -13,9 +13,6 @@ dk_callDKCSharp
 %setlocal%
 	%dk_call% dk_debugFunc 1 99
 
-	::###### TODO ######
-	dk_todo("dk_callDKCSharp")
-
 
 	::###### DEFAULT ENVIRONMENT ######
 	:: clang, cosmocc, gcc, msvc
