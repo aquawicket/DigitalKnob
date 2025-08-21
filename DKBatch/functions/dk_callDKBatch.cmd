@@ -11,34 +11,34 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_callDKBatch
 %setlocal%
-	::%dk_call% dk_debugFunc 1 99
+	%dk_call% dk_debugFunc 1 99
 
-::	echo dk_callDKBatch %*
-	::%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
-	
 	set "_func_=%~1"
-	
-	::### All but first Args ###
+	set "_path_=%DKBATCH_FUNCTIONS_DIR:\=/%/%_func_%.cmd"
 	%dk_call% dk_allButFirstArgs %*
-	::for /f %%G in ("!dk_allButFirstArgs!") do (set dk_allButFirstArgs=%%~G)
 
 ::	:DeEscape
 ::	echo %_ARGS_% | findstr /c:"^^" >nul && (
 ::		set _ARGS_=%_ARGS_:^^=^%
 ::		goto :DeEscape
 ::	)
+		
+	set DKCOMMAND=%_path_% %dk_allButFirstArgs%
 	
-	::############ DKBatch function call ############
-	::set DKCOMMAND=%CMD_EXE% /c (set "DK.cmd=") & (set "DKSCRIPT_PATH=%DKSCRIPT_PATH%") & (set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_FUNCTIONS_DIR%") &
+	set "dk_exec_ECHO_OUTPUT=0"
+	set "dk_exec_ECHO_ERROR=0"
+	::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
+	::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
+	::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes
+	::set "dk_exec_PRINT_EXITCODE=1"	&:: dk_exec_exitcode
+	::set "dk_exec_PRINT_STDERR=1"		&:: dk_exec_stderr[]
+	::set "dk_exec_PRINT_STDOUT=1"		&:: dk_exec_stdout[]
+	::set "dk_exec_PRINT_OUTPUT=1"		&:: dk_exec
 	
-::	echo %dk_call% dk_exec %_ARGS_%
-::	%dk_call% dk_exec %_ARGS_%
-
-
-::	%dk_call% dk_exec %ComSpec% /c call "%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd" %dk_allButFirstArgs%
-	%dk_call% dk_exec %_func_%.cmd %dk_allButFirstArgs%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKBatch=%dk_exec%"
+		set "%_func_%=%dk_exec%"
 	)
 %endfunction%
 
@@ -50,41 +50,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-::	set "dk_exec_ECHO_OUTPUT=1"
-::	set "dk_exec_ECHO_ERROR=1"
-::	set "dk_exec_PRINT_CALL=1"
-::	set "dk_exec_PRINT_COMMAND=1"
-::	set "dk_exec_PRINT_EXITCODES=1"
-::	set "dk_exec_PRINT_EXITCODE=1"
-::	set "dk_exec_PRINT_STDERR=1"
-::	set "dk_exec_PRINT_STDOUT=1"
-::	set "dk_exec_PRINT_OUTPUT=1"
-
-	echo(
-	%dk_call% dk_callDKBatch dk_test "arg1" "arg2" "arg3"
+	%dk_call% dk_echo
+	%dk_call% dk_callDKBatch dk_testReturn inputA
 	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
-
-	echo(
+	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	%dk_call% dk_echo
+	
+	%dk_call% dk_echo
 	%dk_call% dk_callDKBatch dk_basename "C:/Users/Administrator/DigitalKnob/Development"
 	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	%dk_call% dk_echo
 %endfunction%		
-
-
-	::###### dk_setEx ######
-	::	                  ALL: " ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
-	::                  VALID: "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
-	%dk_call% dk_setEx myVar   "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
-	::	              INVALID: " ! "     %                                                       "
-	echo "%%myVar%%" = "%myVar%"
-	echo  ^^!myVar^^!  =  !myVar!
-
-	::###### dk_test ######
-::	%dk_call% dk_callDKBatch dk_test "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
-::	%dk_call% dk_callDKBatch dk_test " " "!" "#" "$" "%" "&" "'" "(" ")" "*" "+" "," "-" "." "/" ":" ";" "<" "=" ">" "?" "@" "[" "\" "]" "^" "_" "`" "{" "|" "}" "~"
-	%dk_call% dk_callDKBatch dk_test "     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~ "
-::	%dk_call% dk_callDKBatch dk_test "!myVar!"
-::	%dk_call% dk_callDKBatch dk_test myVar
-::	%dk_call% dk_callDKBatch dk_test !myVar!
-
-::	echo dk_callDKBatch = %dk_callDKBatch%
-%endfunction%
