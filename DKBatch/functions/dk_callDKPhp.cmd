@@ -35,8 +35,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	set DKCOMMAND="%PHP_EXE%" "%_path_%" %dk_allButFirstArgs%
 	
-	set "dk_exec_ECHO_OUTPUT=1"
-	set "dk_exec_ECHO_ERROR=1"
+	set "dk_exec_ECHO_OUTPUT=0"
+	set "dk_exec_ECHO_ERROR=0"
 	::set "dk_exec_PRINT_CALL=1" 		&:: dk_exec_call
 	::set "dk_exec_PRINT_COMMAND=1" 	&:: dk_exec_command
 	::set "dk_exec_PRINT_EXITCODES=1"	&:: dk_exec_exitcodes

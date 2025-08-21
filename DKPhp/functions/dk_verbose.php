@@ -9,7 +9,7 @@
 #
 function dk_verbose() {
 	#dk_debugFunc(1);
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_log.php");
+	dk_source("dk_log");
 	
 	if(!isset($argv)){
 		$argv = func_get_args();

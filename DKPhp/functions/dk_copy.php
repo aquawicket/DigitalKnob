@@ -11,11 +11,11 @@
 #
 function dk_copy() {
 	#dk_debugFunc(2, 3);
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_info.php");
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_warning.php");
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_error.php");
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_dirname.php");
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_mkdir.php");
+	dk_source("dk_info");
+	dk_source("dk_warning");
+	dk_source("dk_error");
+	dk_source("dk_dirname");
+	dk_source("dk_mkdir");
 	
 	if(!isset($argv)){
 		$argv = func_get_args();
@@ -51,7 +51,7 @@ function dk_copy() {
 	copy($argv[0], $argv[1]);
 	
 	if(!file_exists("$argv[1]")){
-		include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_fatal.php");
+		dk_source("dk_fatal.php");
 		dk_fatal("dk_copy failed: %_to_% does not exist\n");
 	}
 }

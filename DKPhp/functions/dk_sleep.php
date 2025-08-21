@@ -22,7 +22,7 @@ function dk_sleep() {
 if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc(0);
 
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_echo.php");
+	dk_source("dk_echo");
     dk_echo("sleeping for 5 seconds . . .");
     dk_sleep(5);
 }}

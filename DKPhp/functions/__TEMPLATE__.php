@@ -1,20 +1,24 @@
 <?php
 
 ##################################################################################
-# __TEMPLATE__()
+# __TEMPLATE__(input, rtn_var)
 #
-function __TEMPLATE__(){
-	#dk_debugFunc
-	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
+function __TEMPLATE__($input, &...$rtn_var){
+	#dk_debugFunc 1 2
+	global $__TEMPLATE__;						### Result as global variable
 
-	if(!isset($argv)){
-		$argv = func_get_args();
+
+	$__TEMPLATE__ = $input;  # Replace all occurences of __TEMPLATE__ with the "FunctionName" and Replace this line with your code.
+	
+	
+	### output ####
+	if(isset($rtn_var[0])){
+		$rtn_var[0] = $__TEMPLATE__;			### Result as parameter variable
+	} elseif(isset($__TEMPLATE__)){
+		echo("$__TEMPLATE__\n");				### Result as stdout
 	}
-
-	//TODO
-	return 0;
+	return $__TEMPLATE__;						### Result as return value
 }
-
 
 
 
@@ -30,10 +34,40 @@ function __TEMPLATE__(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 if(!function_exists('DKTEST')){ function DKTEST() {
-	#dk_debugFunc 0
-
-	__TEMPLATE__(123, "abc");
+	#dk_debugFunc(0);
+	dk_source("dk_echo");
+	
+	### Result as global variable
+	dk_echo("\n");
+	__TEMPLATE__("inputA");
+	dk_echo("__TEMPLATE__ = ".$GLOBALS['__TEMPLATE__']."\n");
+	
+	### Result as parameter variable
+	dk_echo("\n");
+	$resultB = "";
+	__TEMPLATE__("inputB", $resultB);
+	dk_echo("resultB = $resultB\n");
+	dk_echo("__TEMPLATE__ = ".$GLOBALS['__TEMPLATE__']."\n");
+	
+	### Result as return value
+	dk_echo("\n");
+	$resultC=__TEMPLATE__("inputC");
+	dk_echo("resultC = $resultC\n");
+	dk_echo("__TEMPLATE__ = ".$GLOBALS['__TEMPLATE__']."\n");
+	
+	### Result as return value and parameter variable
+	dk_echo("\n");
+	$resultD = "";
+	$resultE=__TEMPLATE__("inputDE", $resultD);
+	dk_echo("resultD = $resultD\n");
+	dk_echo("resultE = $resultE\n");
+	dk_echo("__TEMPLATE__ = ".$GLOBALS['__TEMPLATE__']."\n");
+	
+	### Result as stdout
+	# TODO
 }}
+
+
 
 
 include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");

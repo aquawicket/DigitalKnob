@@ -6,7 +6,7 @@
 function dk_log(){
 	#dk_debugFunc(1 2)
 	#echo("###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n");
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_color.php");
+	dk_source("dk_color");
 
 	if(!isset($dk_log_ENABLE)){ $dk_log_ENABLE = 1; }
 	if($dk_log_ENABLE != 1){ return 0; }

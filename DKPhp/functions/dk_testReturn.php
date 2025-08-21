@@ -3,23 +3,21 @@
 ##################################################################################
 # dk_testReturn(input, output)
 #
-function dk_testReturn(){
+function dk_testReturn($input, &...$rtn_var){
 	#dk_debugFunc 1 2
+	global $dk_testReturn;						### Result as global variable
 
-	if(!isset($argv)){
-		$argv = func_get_args();
-	}
-	if(isset($argv[0])){
-		global $dk_testReturn; $dk_testReturn = str_replace("input", "output", "$argv[0]");
-	}
+
+	$dk_testReturn = str_replace("input", "output", "$input");
 	
-	if(isset($argv[1])){
-		global ${$argv[1]}; ${$argv[1]} = $dk_testReturn;
-	} else {
-		dk_echo("$dk_testReturn\n");
-	}
 	
-	return 0;
+	### output ####
+	if(isset($rtn_var[0])){
+		$rtn_var[0] = $dk_testReturn;			### Result as parameter variable
+	} elseif(isset($dk_testReturn)){
+		echo("$dk_testReturn\n");				### Result as stdout
+	}
+	return $dk_testReturn;						### Result as return value
 }
 
 
@@ -28,26 +26,44 @@ function dk_testReturn(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 if(!function_exists('DKTEST')){ function DKTEST() {
-	#dk_call dk_debugFunc 0
-
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/dk_echo.php");
+	#dk_debugFunc(0);
+	dk_source("dk_echo");
 	
 	### Result as global variable
 	dk_echo("\n");
 	dk_testReturn("inputA");
 	dk_echo("dk_testReturn = ".$GLOBALS['dk_testReturn']."\n");
 	
-	### Result as parameter
+	### Result as parameter variable
 	dk_echo("\n");
-	dk_testReturn("inputB", "resultB");
-	dk_echo("resultB = ".$GLOBALS['resultB']."\n");
+	$resultB = "";
+	dk_testReturn("inputB", $resultB);
+	dk_echo("resultB = $resultB\n");
 	dk_echo("dk_testReturn = ".$GLOBALS['dk_testReturn']."\n");
 	
 	### Result as return value
-#	dk_echo("\n");
-#	$resultC=`dk_testReturn("inputC")`;
-#	dk_echo "resultC = ${resultC}";
-#	dk_echo("dk_testReturn = ".$GLOBALS['dk_testReturn']."\n");
+	dk_echo("\n");
+	$resultC=dk_testReturn("inputC");
+	dk_echo("resultC = $resultC\n");
+	dk_echo("dk_testReturn = ".$GLOBALS['dk_testReturn']."\n");
+	
+	### Result as return value and parameter variable
+	dk_echo("\n");
+	$resultD = "";
+	$resultE=dk_testReturn("inputDE", $resultD);
+	dk_echo("resultD = $resultD\n");
+	dk_echo("resultE = $resultE\n");
+	dk_echo("dk_testReturn = ".$GLOBALS['dk_testReturn']."\n");
+	
+	### Result as stdout
+	dk_echo("\n");
+	$PHP_EXE = "C:\Users\Administrator\DigitalKnob\DKTools\php-src-php-8.4.11-win32-vs17-x64\php.exe";
+	$resultF = "";
+	$exit_code = 0;
+	exec("cmd /c $PHP_EXE dk_basename.php $PHP_EXE", $resultF, $exit_code);
+	dk_echo("resultF = $resultF[0]\n");
+	dk_echo("exit_code = $exit_code\n");
+
 }}
 
 
