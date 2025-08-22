@@ -20,9 +20,34 @@ include_guard()
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple "dk_Host_Tuple()")
-dk_importVariables(${python_${Host_Tuple}_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
+if(NOT CURRENT_IMPORT)
+	set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
+endif()
+dk_assertPath("${CURRENT_IMPORT}")
+set(Import_Path "${CURRENT_IMPORT}")
+dk_assertPath("${Import_Path}/dkconfig.txt")
+dk_getFileParams("${Import_Path}/dkconfig.txt")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+dk_basename(${Import_Path} Import_Name)
+	
+#dk_assertVar(${Import_Name}_${Host_Tuple}_Import)
+if(${Import_Name}_${Host_Tuple}_Import)
+	set(PLUGIN_IMPORT "${Import_Name}_${Host_Tuple}_Import")
+elseif(${Import_Name}_Import)
+	set(PLUGIN_IMPORT "${Import_Name}_Import")
+else()
+	dk_assertVar(${Import_Name}_Import)
+endif()
+dk_importVariables(${${PLUGIN_IMPORT}})
+	
+	
+	
+	
+	
+	
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate			(Host_Tuple "dk_Host_Tuple()")
+#dk_importVariables(${python_${Host_Tuple}_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(PYTHON)
 
 ###### PYTHON_EXE (first check) ######
@@ -45,12 +70,12 @@ endif()
 if(NOT EXISTS "${PYTHON_EXE}")
 	dk_info(" Installing python . . . . ")
 	if(Mac_Host)
-		dk_download(${python_Import})
+		dk_download(${PYTHON.Url})
 		dk_validate(SUDO_EXE "dk_depend(sudo)")
 		dk_exec(${SUDO_EXE} installer -pkg ${dk_download} -target /)
 		#dk_exec(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
 	elseif(Windows_Host)
-		dk_download(${PYTHON.URL})
+		dk_download(${PYTHON.Url})
 		#dk_nativePath($ENV{DKDOWNLOAD_DIR} DKDOWNLOAD_DIR_WINPATH)
 		#dk_nativePath(${PYTHON} PYTHON_WIN)
 		dk_replaceAll(${dk_download} "/" "\\" dk_download_win)
@@ -59,7 +84,7 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		dk_mkdir(${PYTHON})
 		dk_exec($ENV{ComSpec} /c ${dk_download_win} /passive PrependPath=1 TargetDir=${PYTHON_WIN})
 	elseif(Linux_Host)
-		dk_import(${python_Import})
+		dk_import(${PYTHON.Url})
 		####   Code below used To run the command in a fresh environment    ####
 		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####
 		# './configure --enable-optimizations'

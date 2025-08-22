@@ -7,7 +7,7 @@
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
 	
-python_Linux_Import=https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
-python_Mac_Import=https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
+python_Linux_X86_64_Import=https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
+python_Mac_X86_64_Import=https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg
 python_Windows_X86_Import=https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi
 python_Windows_X86_64_Import=https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi
