@@ -85,28 +85,28 @@ function(dk_importVariables)
 	dk_unset(PLUGIN.Url.Name_Lower)
 	dk_unset(PLUGIN.Version)
 	
-	dk_debug("PLUGIN = ${PLUGIN}")
-	dk_debug("PLUGIN.Args = ${PLUGIN.Args}")
-	dk_debug("PLUGIN.Build_Dir = ${PLUGIN.Build_Dir}")
-	dk_debug("PLUGIN.Config_Dir = ${PLUGIN.Config_Dir}")
-	dk_debug("PLUGIN.Debug_Dir = ${PLUGIN.Debug_Dir}")
-	dk_debug("PLUGIN.Id = ${PLUGIN.Id}")
-	dk_debug("PLUGIN.Import.Dirname = ${PLUGIN.Import.Dirname}")
-	dk_debug("PLUGIN.Import.Name = ${PLUGIN.Import.Name}")
-	dk_debug("PLUGIN.Import.Name_Lower = ${PLUGIN.Import.Name_Lower}")
-	dk_debug("PLUGIN.Import.Name_Upper = ${PLUGIN.Import.Name_Upper}")
-	dk_debug("PLUGIN.Import.Path = ${PLUGIN.Import.Path}")
-	dk_debug("PLUGIN.Install.Dirname = ${PLUGIN.Install.Dirname}")
-	dk_debug("PLUGIN.Install.Name = ${PLUGIN.Install.Name}")
-	dk_debug("PLUGIN.Install.Path = ${PLUGIN.Install.Path}")
-	dk_debug("PLUGIN.Release_Dir = ${PLUGIN.Release_Dir}")
-	dk_debug("PLUGIN.Tuple_Dir = ${PLUGIN.Tuple_Dir}")
-	dk_debug("PLUGIN.Url = ${PLUGIN.Url}")
-	dk_debug("PLUGIN.Url.Basename = ${PLUGIN.Url.Basename}")
-	dk_debug("PLUGIN.Url.Extension = ${PLUGIN.Url.Extension}")
-	dk_debug("PLUGIN.Url.Name = ${PLUGIN.Url.Name}")
-	dk_debug("PLUGIN.Url.Name_Lower = ${PLUGIN.Url.Name_Lower}")
-	dk_debug("PLUGIN.Version = ${PLUGIN.Version}")
+	#dk_debug("PLUGIN = ${PLUGIN}")
+	#dk_debug("PLUGIN.Args = ${PLUGIN.Args}")
+	#dk_debug("PLUGIN.Build_Dir = ${PLUGIN.Build_Dir}")
+	#dk_debug("PLUGIN.Config_Dir = ${PLUGIN.Config_Dir}")
+	#dk_debug("PLUGIN.Debug_Dir = ${PLUGIN.Debug_Dir}")
+	#dk_debug("PLUGIN.Id = ${PLUGIN.Id}")
+	#dk_debug("PLUGIN.Import.Dirname = ${PLUGIN.Import.Dirname}")
+	#dk_debug("PLUGIN.Import.Name = ${PLUGIN.Import.Name}")
+	#dk_debug("PLUGIN.Import.Name_Lower = ${PLUGIN.Import.Name_Lower}")
+	#dk_debug("PLUGIN.Import.Name_Upper = ${PLUGIN.Import.Name_Upper}")
+	#dk_debug("PLUGIN.Import.Path = ${PLUGIN.Import.Path}")
+	#dk_debug("PLUGIN.Install.Dirname = ${PLUGIN.Install.Dirname}")
+	#dk_debug("PLUGIN.Install.Name = ${PLUGIN.Install.Name}")
+	#dk_debug("PLUGIN.Install.Path = ${PLUGIN.Install.Path}")
+	#dk_debug("PLUGIN.Release_Dir = ${PLUGIN.Release_Dir}")
+	#dk_debug("PLUGIN.Tuple_Dir = ${PLUGIN.Tuple_Dir}")
+	#dk_debug("PLUGIN.Url = ${PLUGIN.Url}")
+	#dk_debug("PLUGIN.Url.Basename = ${PLUGIN.Url.Basename}")
+	#dk_debug("PLUGIN.Url.Extension = ${PLUGIN.Url.Extension}")
+	#dk_debug("PLUGIN.Url.Name = ${PLUGIN.Url.Name}")
+	#dk_debug("PLUGIN.Url.Name_Lower = ${PLUGIN.Url.Name_Lower}")
+	#dk_debug("PLUGIN.Version = ${PLUGIN.Version}")
 
 	### PLUGIN(hashtable) 
 	##  TODO
@@ -172,19 +172,21 @@ function(dk_importVariables)
 	set(PLUGIN.Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Url = '${PLUGIN.Url}'")
 
-dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+
 	### PLUGIN.Id												ZLIB
 	PLUGIN_Id()
-dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+
 	### PLUGIN.Install.Path										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	PLUGIN_Install_Path()
-dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+
 	### PLUGIN.Url.Extension									.zip
 	PLUGIN_Url_Extension()
+	
+	### PLUGIN.Install.Dirname									C:/Users/Administrator/DigitalKnob/Development/3rdParty
+	PLUGIN_Import_Dirname()
 	#####################################################
 	############# PLUGIN.Target_Directries ##############
 	#####################################################
-dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
 	### PLUGIN.Tuple_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	set(PLUGIN.Tuple_Dir "${PLUGIN.Install.Path}/${Target_Tuple}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
@@ -286,6 +288,28 @@ function(PLUGIN_Import_Name_Lower)
 	dk_debug("PLUGIN.Import.Name_Lower = '${PLUGIN.Import.Name_Lower}'")
 	
 	set(PLUGIN.Import.Name_Lower ${PLUGIN.Import.Name_Lower}  CACHE INTERNAL "")
+endfunction()
+
+##################################
+function(PLUGIN_Import_Dirname)
+	if(PLUGIN.Import.Dirname)
+		return()
+	endif()
+	
+	PLUGIN_Import_Path()
+
+	if(NOT PLUGIN.Import.Path)
+		dk_notice("PLUGIN.Import.Path is invalid")
+	endif()
+	dk_debug("PLUGIN.Import.Path = '${PLUGIN.Import.Path}'")
+	
+	dk_dirname("${PLUGIN.Import.Path}" 	PLUGIN.Import.Dirname)
+	if(NOT PLUGIN.Import.Dirname)
+		dk_notice("PLUGIN.Import.Dirname is invalid")
+	endif()
+	dk_debug("PLUGIN.Import.Dirname = '${PLUGIN.Import.Dirname}'")
+	
+	set(PLUGIN.Import.Dirname ${PLUGIN.Import.Dirname}  CACHE INTERNAL "")
 endfunction()
 
 ################################

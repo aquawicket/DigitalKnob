@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_dirname(path, rtn_var)
+# dk_dirname(_path, _rtn_var)
 #
 #	Get the directory portion of a path
 #
@@ -24,19 +24,26 @@ include_guard()
 #
 function(dk_dirname)
 	dk_debugFunc(1 2)
-	dk_getArg(0 path)
-	dk_getArg(1 rtn_var)
 	
+	###### input ######
+	# ARGV0 = _path	
+	# ARGV1 = _rtn_var (optional)
+	
+	set(_path "${ARGV0}")
 	if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.4")
-		get_filename_component(path "${path}" ABSOLUTE)
+		get_filename_component(_path "${_path}" ABSOLUTE)
 	endif()
-	get_filename_component(dk_dirname "${path}" DIRECTORY)
+	get_filename_component(dk_dirname "${_path}" DIRECTORY)
 	
-	### return ###
-	set(dk_dirname "${dk_dirname}" PARENT_SCOPE)
-	if(rtn_var)
-		set(${rtn_var} "${dk_dirname}" PARENT_SCOPE)
+	
+	###### output ######
+	set(dk_dirname ${dk_dirname} PARENT_SCOPE)
+	if(ARGV1)
+		set(${ARGV1} ${dk_dirname} PARENT_SCOPE)
+	else()
+		message("${dk_dirname}") 
 	endif()
+
 endfunction()
 
 
@@ -48,12 +55,26 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc(0)
 	
-	dk_echo("")
-	dk_dirname("C:/Windows/System32")
+	### Result as global variable
+	dk_echo()
+	dk_dirname("A:/directoryA/filenameA.extA")
 	dk_echo("dk_dirname = ${dk_dirname}")
 	
-	dk_echo("")
-	dk_dirname("C:/Windows/System32/drivers" myRtnVal)
+	### Result as variable parameter
+	dk_echo()
+	dk_dirname("B:/directoryB/filenameB.extB" resultB)
+	dk_echo("resultB = ${resultB}")
 	dk_echo("dk_dirname = ${dk_dirname}")
-	dk_echo("myRtnVal = ${myRtnVal}")
+	
+	### Result as return value			### CMAKE FUNCTIONS DO NOT HAVE RETURN VALUES ###
+#	dk_echo()
+#	$resultC = dk_dirname("C:/directoryC/filenameC.extC")
+#	dk_echo("resultC = ${resultC}")
+#	dk_echo("dk_dirname = ${dk_dirname}")
+
+	### Result as hashtable parameter
+	dk_echo()
+	dk_dirname("D:/directoryD/filenameD.extD" resultD.value)
+	dk_echo("resultD.value = ${resultD.value}")
+	dk_echo("dk_dirname = ${dk_dirname}")
 endfunction()
