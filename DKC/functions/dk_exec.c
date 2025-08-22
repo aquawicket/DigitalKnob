@@ -8,9 +8,9 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-	
-	exit_status = dk_exec("notepad.exe");
-
+	char result[1035];
+	exit_status = dk_exec("cmd /V:ON /c C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/dk_testReturn.cmd inputA", result);
+	dk_echo("result = %s\n", result);
 
     return exit_status;
 }

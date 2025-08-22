@@ -152,7 +152,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 :dk_DKSCRIPT_EXT
 	%pushStack%
 	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT defined DKSCRIPT_EXT		(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_EXT=%%~xZ")
+	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
 	if NOT defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% NOT defined & pause & exit -1)
 %endfunction%
 
@@ -162,7 +162,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 :dk_DKSCRIPT_NAME
 	%pushStack%
 	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT defined DKSCRIPT_NAME	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_NAME=%%~nZ")
+	if NOT defined DKSCRIPT_NAME	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_NAME=%%~nZ")
 	if NOT defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% NOT defined & pause & exit -1)
 %endfunction%
 
@@ -172,7 +172,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 :dk_DKSCRIPT_DIR
 	%pushStack%
 	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT EXIST "%DKSCRIPT_DIR%"	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_DIR=%%~dpZ")
+	if NOT EXIST "%DKSCRIPT_DIR%"	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_DIR=%%~dpZ")
 	if EXIST 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
 	if NOT EXIST "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% NOT found & pause & exit -1)
@@ -192,7 +192,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 :dk_DKSCRIPT_FILE
 	%push%
 	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT defined DKSCRIPT_FILE	(for %%Z in ("%DKSCRIPT_PATH%") do set "DKSCRIPT_FILE=%%~nxZ")
+	if NOT defined DKSCRIPT_FILE	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_FILE=%%~nxZ")
 	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & exit -1)
 %endfunction%
 

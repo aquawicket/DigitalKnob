@@ -2,6 +2,7 @@
 
 #include "dk_testReturn.h"
 #include "dk_echo.h"
+#include "dk_exec.h"
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 #ifndef DKMAIN
@@ -25,6 +26,23 @@ int main(int argc, char** argv){
 	char* resultC = dk_testReturn("inputC", NULL);
 	dk_echo("resultC = %s\n", resultC);
 	dk_echo("_dk_testReturn = %s\n", _dk_testReturn);
+	
+	//### Result as return value and parameter variable 	[GLOBAL][PARAM][RETURN]
+	dk_echo("\n");
+	char resultD[256];
+	char* resultE=dk_testReturn("inputDE", resultD);
+	dk_echo("resultD = %s\n", resultD);
+	dk_echo("resultE = %s\n", resultE);
+	dk_echo("_dk_testReturn = %s\n", _dk_testReturn);
+	
+	//### Result from stdout								[STDOUT]
+	dk_echo("\n");
+	//$resultF = "";
+	//$exit_code = -1;
+	//putenv("DKTEST=OFF");
+	dk_exec("C:/Users/Administrator/DigitalKnob/Development/DKC/functions/build/dk_basename.exe C:/Windows/System32");//, resultF, exit_code);
+	//dk_echo("resultF = %s\n", resultF);
+	//dk_echo("exit_code = $exit_code\n");
 	
     return exit_status;
 }

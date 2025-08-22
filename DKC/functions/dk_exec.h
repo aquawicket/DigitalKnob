@@ -12,11 +12,11 @@
 //#		Reference: https://stackoverflow.com/a/646254/688352
 //#		Reference: https://pubs.opengroup.org/onlinepubs/009696799/functions/popen.html
 //#
-int dk_exec(const char *command){
+int dk_exec(const char *command, char* output){
 	//dk_debugFunc(1);
 	
 	FILE *fp;
-	char path[1035];
+	char out[1035];
 
 	/* Open the command for reading. */
 	fp = popen(command, "r");
@@ -26,10 +26,12 @@ int dk_exec(const char *command){
 	}
 
 	/* Read the output a line at a time - output it. */
-	while (fgets(path, sizeof(path), fp) != NULL) {
-		printf("%s", path);
+	while (fgets(out, sizeof(out), fp) != NULL) {
+		//printf("%s", out);
 	}
 
+	strcpy(output, out);
+	
 	/* close */
 	pclose(fp);
 

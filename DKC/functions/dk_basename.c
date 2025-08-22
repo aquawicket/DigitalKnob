@@ -9,6 +9,16 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
+	//for(int n=0; n<argc; ++n){
+	//	dk_echo("main(%d, %s)\n", n, argv[n]);
+	//}
+	
+	if(argv[1]){
+		char* result;
+		dk_echo("dk_basename(%s)\n", argv[1]);
+		dk_basename(argv[1], result);
+		dk_echo("result = %s\n", result);
+	}
 /*
 	//### Result as global variable
 	dk_echo("\n");
