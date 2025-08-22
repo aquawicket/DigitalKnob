@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "################## DK.sh($*) ##################";
+#echo "################## DK.sh($*) ##################";
 echo "\$DK_LOADED = ${DK_LOADED}"
 [ -z "${DK_LOADED-}" ] && export DK_LOADED=1 || return
 echo "\$DK_LOADED = ${DK_LOADED}"
@@ -40,7 +40,7 @@ echo "ps \$\$ = $(command ps -o comm -p $$)";
 # DK()
 #
 DK(){
-	echo "################## DK($*) ##################";
+	#echo "################## DK($*) ##################";
 	
 	DKSCRIPT_PATH=$(realpath ${DKSCRIPT_PATH});
 	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
@@ -139,7 +139,6 @@ DK(){
 	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
 	
 
-    
     if [ -n "${DKSCRIPT_EXT}" ] && [ "${DKSCRIPT_EXT}" = ".sh" ]; then
 		###### DKTEST MODE ######
 		if (dk_call dk_fileContains "${DKSCRIPT_PATH-}" "DKTEST()") && [ -z "${DKTEST-}" ]; then
@@ -152,13 +151,14 @@ DK(){
 			dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_FILE} ####### END DKTEST ######${clr-}";
 			dk_call dk_echo;
 			dk_call dk_exit $?;
-			
+			#exit $?;
 		###### RUN MODE ######
 		else	
 			dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_NAME}(${DKSCRIPT_ARGS}) ########################${clr-}";
 			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
-			(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} || echo "'${DKSCRIPT_NAME}()' failed";
+			(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} ${DKSCRIPT_ARGS} || echo "'${DKSCRIPT_NAME}()' failed";
 			dk_call dk_exit $?;
+			#exit $?; #dk_call dk_exit $?;
 		fi
 	else
 		echo "DKSCRIPT_PATH is not DKBash";
@@ -167,8 +167,9 @@ DK(){
 		echo "dk_call $(basename ${1%.*}) $2;";
 		dk_call $(basename ${1%.*}) $2;
 		dk_call dk_exit $?;
+		#exit $?;
 	fi
-	dk_call dk_exit $?;
+	#dk_call dk_exit $?;
 }
 
 ##################################################################################

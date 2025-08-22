@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "################## dk_testRestun.sh($*) ##################";
+#echo "################## dk_testRestun.sh($*) ##################";
 
 ###### DK.sh #####################################################################
 if [ -z "${DK_LOADED-}" ]; then
@@ -21,7 +21,7 @@ fi
 #
 #
 dk_testReturn() {
-	echo "################## dk_testRestun($*) ##################";
+	#echo "################## dk_testRestun($*) ##################";
 	dk_debugFunc 1 2;
 	
 	export dk_testReturn=${1/input/output};
@@ -29,7 +29,7 @@ dk_testReturn() {
 	if [ -n "${2-}" ]; then
 		export ${2}=${dk_testReturn};
 	else
-		echo "${dk_testReturn}";
+		builtin echo "${dk_testReturn}";
 	fi
 	return $?;
 }
@@ -66,14 +66,15 @@ DKTEST() {
 	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
 	
 	### Result from stdout									[STDOUT]
-	dk_call dk_echo
-	BASH_EXE="/bin/bash";
-	unset DK_LOADED;
-	export DK_LOADED;
+	dk_call dk_echo;
+	unset DK_LOADED; export DK_LOADED;
 	export DKTEST="OFF";
-	#resultF="$(bash -c '/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_testReturn.sh "inputF"')";
-	resultF="$(bash -c '/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_testReturn.sh inputF')";
-	#resultF="$(bash -c 'dk_testReturn inputF')";
+	export PAUSE_ON_EXIT=0;
+		# Method 1
+		#resultF="$(bash -c '/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_testReturn.sh inputF' | tail -1)";
+		# Method 2
+		resultF="$(bash -c '/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_testReturn.sh inputF' 2>/dev/null)";
+		resultF="${resultF##*$'\n'}";  # Get the last line of the variable
 	dk_call dk_echo "resultF = '${resultF}'";
 	#dk_call dk_echo "dk_testReturn = ${dk_testReturn}";
 	#dk_call dk_echo "exit_code = ${exit_code}";
