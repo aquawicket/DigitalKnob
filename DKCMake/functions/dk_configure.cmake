@@ -23,6 +23,8 @@ function(dk_configure)
 	dk_debugFunc(0 99)
 	
 	###### CURRENT_PLUGIN ######
+	message("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	message("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
 	dk_assertPath(${CURRENT_PLUGIN})
 	dk_basename("${${CURRENT_PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")

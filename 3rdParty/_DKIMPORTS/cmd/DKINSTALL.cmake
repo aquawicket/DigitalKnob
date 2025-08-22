@@ -11,13 +11,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+dk_stacktrace()
 
 ############ cmd ############
 #dk_validate(Target_Config  "dk_Target_Config()")
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
 
 if(EXISTS "${CMD_EXE}")
-	dk_return()
+	return()
 endif()
 
 ### Windows Host Only ###

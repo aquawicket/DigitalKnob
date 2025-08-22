@@ -17,4 +17,4 @@ include_guard()
 
 dk_validate(PYTHON3 "dk_depend(python3)")
 
-execute_process(COMMAND python3 -m ensurepip --upgrade)
+execute_process(COMMAND ${PYTHON3}/python.exe -m ensurepip --upgrade)

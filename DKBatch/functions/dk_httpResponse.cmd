@@ -99,7 +99,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_exec %command%
 	set "dk_httpResponse=%dk_exec%"
 	
-	
 ::	for /f "usebackq tokens=*" %%A in (`%command%`) do (
 ::		set "dk_httpResponse=%%A"
 ::	)

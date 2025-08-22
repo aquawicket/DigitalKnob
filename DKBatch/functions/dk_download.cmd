@@ -17,6 +17,8 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 :dk_download
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
+	
+	pause
    
     set "url=%~1"
     set "destination=%~2"	

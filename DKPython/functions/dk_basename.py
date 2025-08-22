@@ -1,4 +1,5 @@
-import sys 
+import sys
+import subprocess
 sys.path.append(".")
 from DK import *
 
@@ -13,14 +14,14 @@ from dk_echo import *
 #
 def dk_basename(*args):
     #dk_debugFunc 0
+
+    global basename; 
+    basename = os.path.basename(args[0]);
     
-    #path = {args[0]};
-    #dk_echo("args0 = "+{args[0]})
-    #print(f"     args0 = {args[0]}")
-    path = "C:/Users/Administrator"
-    dk_basename = os.path.basename(path)
-    #dk_echo("basename = "+basename)
-    ###### TODO ######
+    if len(args) == 2:
+        args[1][0] = basename
+
+    return basename
     
 ############################################################################
 
@@ -33,31 +34,41 @@ def dk_basename(*args):
 def DKTEST():
     #dk_debugFunc 0
 
-    dk_basename("C:/Users/Administrator")
-    
-    ### Result as global variable
-    dk_echo()
+   	### Result as global variable                   [GLOBAL]
+    dk_echo("")
     dk_basename("A:/directoryA/filenameA.extA")
-    #dk_echo("dk_basename = ${dk_basename}")
-    print(f"   dk_basename = {dk_basename}")
+    dk_echo("basename = "+basename)
 	
-    ### Result as variable parameter
-#    dk_echo();
-#    dk_basename("B:/directoryB/filenameB.extB" resultB);
-#    dk_echo("resultB = ${resultB}");
-#    dk_echo("dk_basename = ${dk_basename}");
+    
+    ### Result as parameter variable                [GLOBAL][PARAM]
+    dk_echo("")
+    resultB = ['']                                  # we must use a list to pass by reference
+    dk_basename("B:/directoryB/filenameB.extB", resultB)
+    resultB = resultB[0]                            # now we can convert the list item back to a string
+    dk_echo("resultB = "+resultB)
+    dk_echo("basename = "+basename)
 	
-    ### Result as return value
-#    dk_echo();
-#    resultC=dk_basename)"C:/directoryC/filenameC.extC");
-#    dk_echo("resultC = ${resultC}");
-#    #dk_echo("dk_basename = ${dk_basename}");					#NOTE: export cannot be seen outside of command substituion
-	
-    ### Result as hashtable parameter
-#    dk_echo();
-#    dk_basename("D:/directoryD/filenameD.extD" resultD[value]);
-#    dk_echo("resultD[value] = ${resultD[value]}");
-#    dk_echo("dk_basename = ${dk_basename}");
+    
+    ### Result as return value                     [GLOBAL][RETURN]
+    dk_echo("")
+    resultC = dk_basename("C:/directoryC/filenameC.extC")
+    dk_echo("resultC = "+resultC)
+    dk_echo("basename = "+basename)
+    
+    
+    ### Result as parameter variable               [GLOBAL][PARAM][RETURN]
+    dk_echo("")
+    resultD = ['']                    # we must use a list to pass by reference
+    resultE = dk_basename("DE:/directoryDE/filenameDE.extDE", resultD)
+    resultD = resultD[0]              # now we can convert the list item back to a string
+    dk_echo("resultD = "+resultD)
+    dk_echo("resultE = "+resultE)
+    dk_echo("basename = "+basename)
+    
+    
+    ### Result from stdout                          [STDOUT]
+	# https://docs.python.org/3.5/library/subprocess.html#subprocess.run
+    resultF = subprocess.run(["cmd.exe", "/V:ON", "/c", "call", "%PYTHON3_EXE:\=/%", "dk_basename.py", "F:/directoryF/filenameF.extF"], shell=True, capture_output=True, text=True)
+    dk_echo("resultF = "+resultF.stdout)
+    dk_echo("basename = "+basename)
 
-############################################################################
-#DKTEST()
