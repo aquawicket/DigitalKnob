@@ -34,5 +34,5 @@ dk_builtins() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_debug "DKTEST(${DKSCRIPT_NAME})"
+	dk_call dk_debug "DKTEST(${DKSCRIPT_FILE})"
 }

@@ -33,8 +33,10 @@ echo "DKSCRIPT_PATH = $DKSCRIPT_PATH"
 [ -n "$(command -v "cygpath")" ] && DKSCRIPT_PATH=$(cygpath -u "$DKSCRIPT_PATH")
 DKSCRIPT_DIR=$(dirname $DKSCRIPT_PATH)
 echo "DKSCRIPT_DIR = $DKSCRIPT_DIR"
-DKSCRIPT_NAME=$(basename $DKSCRIPT_PATH)
-echo "DKSCRIPT_NAME = $DKSCRIPT_NAME"
+DKSCRIPT_FILE=$(basename $DKSCRIPT_PATH)
+echo "DKSCRIPT_FILE = $DKSCRIPT_FILE"
+DKSCRIPT_NAME="${DKSCRIPT_FILE%.*}";
+echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}";
 
 
 ###### Set and check posix mode ######
@@ -108,7 +110,9 @@ dk_buildMain() {
 	dk_printVar MSYSTEM
 	dk_printVar DKSCRIPT_PATH
 	dk_printVar DKSCRIPT_DIR
+	dk_printVar DKSCRIPT_FILE
 	dk_printVar DKSCRIPT_NAME
+	dk_printVar DKSCRIPT_EXT
 	
 	### Get the Host_Tuple and other Host variables
 	dk_Host_Tuple
@@ -126,8 +130,8 @@ dk_buildMain() {
 	dk_printVar DKCPP_PLUGINS_DIR
 
 	if [ "$DKSCRIPT_DIR" != "${DKBRANCH_DIR}" ]; then
-		dk_warning "$DKSCRIPT_NAME is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
-		dk_warning "$DKSCRIPT_NAME path = $DKSCRIPT_DIR"
+		dk_warning "$DKSCRIPT_FILE is not running from the DKBRANCH_DIR directory. Any changes will not be saved by git!"
+		dk_warning "$DKSCRIPT_FILE path = $DKSCRIPT_DIR"
 		dk_warning "DKBRANCH_DIR path = ${DKBRANCH_DIR}"
 	fi
 	
@@ -1100,9 +1104,9 @@ dk_reload() {
 	dk_verbose "dk_reload(${*})"
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
-	dk_debug "reloading $DKSCRIPT_DIR/$DKSCRIPT_NAME"
+	dk_debug "reloading $DKSCRIPT_DIR/$DKSCRIPT_FILE"
 	clear
-	exec "$DKSCRIPT_DIR/$DKSCRIPT_NAME"
+	exec "$DKSCRIPT_DIR/$DKSCRIPT_FILE"
 }
 
 
@@ -1538,18 +1542,18 @@ dk_DKBRANCH_DIR() {
 
 	# make sure script is running from DKBRANCH_DIR
 	#if ! [ "$DKSCRIPT_DIR" = "${DKBRANCH_DIR}" ]; then
-	#	if ! dk_pathExists ${DKBRANCH_DIR}/$DKSCRIPT_NAME; then
-	#		dk_debug "${DKBRANCH_DIR}/$DKSCRIPT_NAME"
-	#		cp $DKSCRIPT_DIR/$DKSCRIPT_NAME ${DKBRANCH_DIR}/$DKSCRIPT_NAME
+	#	if ! dk_pathExists ${DKBRANCH_DIR}/$DKSCRIPT_FILE; then
+	#		dk_debug "${DKBRANCH_DIR}/$DKSCRIPT_FILE"
+	#		cp $DKSCRIPT_DIR/$DKSCRIPT_FILE ${DKBRANCH_DIR}/$DKSCRIPT_FILE
 	#	fi
 	#	dk_echo
-	#	dk_info "RELOADING SCRIPT TO -> ${DKBRANCH_DIR}/$DKSCRIPT_NAME"
+	#	dk_info "RELOADING SCRIPT TO -> ${DKBRANCH_DIR}/$DKSCRIPT_FILE"
 	#	read -p "Press enter to continue"
 	#	clear
-	#	if dk_pathExists ${DKBRANCH_DIR}/$DKSCRIPT_NAME; then
-	#		rm $DKSCRIPT_DIR/$DKSCRIPT_NAME
+	#	if dk_pathExists ${DKBRANCH_DIR}/$DKSCRIPT_FILE; then
+	#		rm $DKSCRIPT_DIR/$DKSCRIPT_FILE
 	#	fi
-	#	${DKBRANCH_DIR}/$DKSCRIPT_NAME
+	#	${DKBRANCH_DIR}/$DKSCRIPT_FILE
 	#	exit
 	#fi
 }
@@ -1782,9 +1786,9 @@ dk_resetAll() {
 			return $(false);
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_NAME"
-		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "${DIGITALKNOB_DIR}"/"$DKSCRIPT_NAME"
-		exec "${DIGITALKNOB_DIR}/$DKSCRIPT_NAME" dk_resetAll wipe
+		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_FILE"
+		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_FILE" "${DIGITALKNOB_DIR}"/"$DKSCRIPT_FILE"
+		exec "${DIGITALKNOB_DIR}/$DKSCRIPT_FILE" dk_resetAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1813,9 +1817,9 @@ dk_resetAll() {
 		# wait for build.sh to show up
 		sleep 2
 		
-		if dk_pathExists "${DKBRANCH_DIR}"/"$DKSCRIPT_NAME"; then
+		if dk_pathExists "${DKBRANCH_DIR}"/"$DKSCRIPT_FILE"; then
 			clear
-			. "${DKBRANCH_DIR}"/"$DKSCRIPT_NAME" rm -r "${DIGITALKNOB_DIR}"/"$DKSCRIPT_NAME"
+			. "${DKBRANCH_DIR}"/"$DKSCRIPT_FILE" rm -r "${DIGITALKNOB_DIR}"/"$DKSCRIPT_FILE"
 			exit
 		else
 			dk_error "Oh no, the git cloned build.sh still isn't here! :( "
@@ -1855,9 +1859,9 @@ dk_removeAll() {
 			return 1;
 		fi
 		
-		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_NAME"
-		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_NAME" "${DIGITALKNOB_DIR}"/"$DKSCRIPT_NAME"
-		. "${DIGITALKNOB_DIR}/$DKSCRIPT_NAME" dk_removeAll wipe
+		dk_info "RELOCATING SCRIPT TO -> ${DIGITALKNOB_DIR}/$DKSCRIPT_FILE"
+		cp "$DKSCRIPT_DIR"/"$DKSCRIPT_FILE" "${DIGITALKNOB_DIR}"/"$DKSCRIPT_FILE"
+		. "${DIGITALKNOB_DIR}/$DKSCRIPT_FILE" dk_removeAll wipe
 		exit
 	else	
 		#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

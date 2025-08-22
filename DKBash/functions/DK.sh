@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "########## DK.sh($*) ##########"
+echo "################## DK.sh($*) ##################";
 echo "\$DK_LOADED = ${DK_LOADED}"
 [ -z "${DK_LOADED-}" ] && export DK_LOADED=1 || return
 echo "\$DK_LOADED = ${DK_LOADED}"
@@ -33,16 +33,14 @@ echo "\$BASH_XTRACEFD = ${BASH_XTRACEFD-}"
 echo "ps \$\$ = $(command ps -o comm -p $$)";
 
 
-if [ -z "${DKSCRIPT_PATH-}" ]; then
-	[ -e "${1-}" ] && export DKSCRIPT_PATH="${1-}" #|| export DKSCRIPT_PATH="${0}"
-fi
+[ -z "${DKSCRIPT_PATH-}" ] && [ -e "${1-}" ] && export DKSCRIPT_PATH="${1-}";
 
 
 ##################################################################################
 # DK()
 #
 DK(){
-	echo "DK($*)"
+	echo "################## DK($*) ##################";
 	
 	DKSCRIPT_PATH=$(realpath ${DKSCRIPT_PATH});
 	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
@@ -133,7 +131,7 @@ DK(){
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
 	
 	############ Get DKSCRIPT variables ############
-    DKSCRIPT_VARS
+    DKSCRIPT_VARS $*
 	
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
@@ -142,25 +140,24 @@ DK(){
 	
 
     
-    if [ "${DKSCRIPT_EXT}" = ".sh" ]; then
+    if [ -n "${DKSCRIPT_EXT}" ] && [ "${DKSCRIPT_EXT}" = ".sh" ]; then
 		###### DKTEST MODE ######
-		if dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()"; then
+		if (dk_call dk_fileContains "${DKSCRIPT_PATH-}" "DKTEST()") && [ -z "${DKTEST-}" ]; then
 			dk_call dk_echo;
-			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}";
+			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######${clr-}";
 			dk_call dk_echo;
-			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
+			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
 			(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
 			dk_call dk_echo;
-			dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_NAME} ####### END DKTEST ######${clr-}";
+			dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_FILE} ####### END DKTEST ######${clr-}";
 			dk_call dk_echo;
 			dk_call dk_exit $?;
 			
 		###### RUN MODE ######
 		else	
-			dk_call dk_removeExtension "${DKSCRIPT_NAME}" DKSCRIPT_FUNCTION;
-			dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_FUNCTION}(${DKSCRIPT}) ########################${clr-}";
-			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_NAME}' failed";
-			(command -v ${DKSCRIPT_FUNCTION} 1>/dev/null) && ${DKSCRIPT_FUNCTION} || echo "'${DKSCRIPT_FUNCTION}()' failed";
+			dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_NAME}(${DKSCRIPT_ARGS}) ########################${clr-}";
+			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
+			(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} || echo "'${DKSCRIPT_NAME}()' failed";
 			dk_call dk_exit $?;
 		fi
 	else
@@ -238,16 +235,18 @@ CYGPATH_EXE(){
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	#echo "DKSCRIPT_VARS()"
+	#echo "DKSCRIPT_VARS()";
 	
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}))	 	# Windows subsystem for Linux
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))		# Git for Windows	
-	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})														# Default
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0}));	 	# Windows subsystem for Linux
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}));		# Git for Windows	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0});														# Default
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || (echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"; exit ${BASH_LINENO[0]};)    
-    export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"				
-    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"	
-    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"	
-    export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"				&& echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+    #export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
+	export DKSCRIPT_ARGS=${@:2}								&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
+    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}";
+    export DKSCRIPT_FILE=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_FILE = ${DKSCRIPT_FILE}";
+	export DKSCRIPT_NAME="${DKSCRIPT_FILE%.*}"				&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}";
+    export DKSCRIPT_EXT=".${DKSCRIPT_FILE##*.}"				&& echo "DKSCRIPT_EXT  = ${DKSCRIPT_EXT}";
 } 
 
 ##################################################################################
@@ -322,7 +321,6 @@ dk_installPackage() {
 
 ##################################################################################
 # run DK()
-echo "DK $*"
 DK $* 
 
 

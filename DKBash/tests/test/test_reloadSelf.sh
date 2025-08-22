@@ -9,8 +9,8 @@ echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
 DKSCRIPT_DIR="$(dirname "${DKSCRIPT_PATH}")"
 echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
 
-DKSCRIPT_NAME="$(basename "${DKSCRIPT_PATH}")"
-echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
+DKSCRIPT_FILE="$(basename "${DKSCRIPT_PATH}")"
+echo "DKSCRIPT_FILE = ${DKSCRIPT_FILE}"
 
 DKPARENT_DIR="$(dirname "${DKSCRIPT_DIR}")"
 echo "DKPARENT_DIR = ${DKPARENT_DIR}"
@@ -26,12 +26,12 @@ if [ "${1}" == "finished" ];then
 else
 	echo "MAIN"
 	
-	echo "cp -r ${DKSCRIPT_PATH} ${DKPARENT_DIR}/${DKSCRIPT_NAME}"
-	cp -rp "${DKSCRIPT_PATH}" "${DKPARENT_DIR}/${DKSCRIPT_NAME}"
+	echo "cp -r ${DKSCRIPT_PATH} ${DKPARENT_DIR}/${DKSCRIPT_FILE}"
+	cp -rp "${DKSCRIPT_PATH}" "${DKPARENT_DIR}/${DKSCRIPT_FILE}"
 	rm -r -f "${DKSCRIPT_DIR}" 2>/dev/null
 	echo done
-	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/renamed.sh"
-	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_NAME}" "${DKSCRIPT_DIR}/${DKSCRIPT_NAME}"
+	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_FILE}" "${DKSCRIPT_DIR}/renamed.sh"
+	cp -rp "${DKPARENT_DIR}/${DKSCRIPT_FILE}" "${DKSCRIPT_DIR}/${DKSCRIPT_FILE}"
 	exec "${DKSCRIPT_DIR}/renamed.sh" finished
 	exec ${SHELL}
 fi

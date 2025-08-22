@@ -36,21 +36,34 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	::### Result as global variable
+	::### Result as global variable							[GLOBAL]
 	%dk_call% dk_echo
 	%dk_call% dk_testReturn "inputA"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as parameter variable
+	::### Result as parameter variable						[GLOBAL][PARAM]
 	%dk_call% dk_echo
 	%dk_call% dk_testReturn "inputB" resultB
 	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as return value
+	::### Result as return value							[GLOBAL][-R̶E̶T̶U̶R̶N̶ ]
+	::%dk_call% dk_echo
+	::%dk_call% resultC=dk_testReturn "inputC"				&::NOTE: batch doesn't support return values
+	::%dk_call% dk_echo "resultC = %resultC%"
+	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	
+	::### Result as return value and parameter variable 	[GLOBAL][PARAM][-R̶E̶T̶U̶R̶N̶ ]
+	::%dk_call% dk_echo
+	::%dk_call% resultD=dk_testReturn "inputDE"				&::NOTE: batch doesn't support return values
+	::%dk_call% dk_echo "resultD = %resultD%"
+	::%dk_call% dk_echo "resultE = %resultE%"
+	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	
+	::### Result from stdout								[STDOUT]
 	%dk_call% dk_echo
-	for /f "usebackq tokens=*" %%G in (`call dk_testReturn "inputC"`) do (set "resultC=%%G")
+	for /f "usebackq tokens=*" %%G in (`call dk_testReturn.cmd "inputC"`) do (set "resultC=%%G")
 	%dk_call% dk_echo "resultC = %resultC%"
-	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	  &::NOTE: endlocal cannot be seen outside of command substituion			
+	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	&::NOTE: endlocal cannot be seen outside of command substituion			
 
 %endfunction%

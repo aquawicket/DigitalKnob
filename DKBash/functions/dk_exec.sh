@@ -15,8 +15,8 @@ fi
 
 
 ############################# dk_exec SETTINGS ###################################
-[ -z "${dk_exec_ECHO_OUTPUT}" ] && dk_exec_ECHO_OUTPUT="0"
-[ -z "${dk_exec_ECHO_ERROR}" ]	&& dk_exec_ECHO_ERROR="0"
+[ -z "${dk_exec_ECHO_OUTPUT-}" ]	&& dk_exec_ECHO_OUTPUT="0"
+[ -z "${dk_exec_ECHO_ERROR-}" ]		&& dk_exec_ECHO_ERROR="0"
 
 #dk_exec_PRINT_CALL=1 		# dk_exec_call
 #dk_exec_PRINT_COMMAND=1 	# dk_exec_command

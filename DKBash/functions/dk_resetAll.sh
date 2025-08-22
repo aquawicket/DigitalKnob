@@ -45,23 +45,23 @@ dk_resetAll() {
 #	fi
 		
 	# Backup main script file to ${DKCACHE_DIR}
-	#dk_call dk_delete "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
-	dk_call dk_copy "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+	#dk_call dk_delete "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
+	dk_call dk_copy "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
 	dk_call dk_chdir "${DKCACHE_DIR}"
 	dk_call dk_echo "DELETING ${DKBRANCH_DIR} . . . ."
 	dk_call dk_delete "${DKBRANCH_DIR}"
 	
-	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
 	
 #	dk_call dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development #NO_CONFIRM
 	
-#	#dk_call dk_info "Restarting ${DKSCRIPT_NAME}. . ."
+#	#dk_call dk_info "Restarting ${DKSCRIPT_FILE}. . ."
 #	#dk_call dk_sleep 3
 	
 #	unset DKHOME_DIR
 #	unset DK
 #	unset DKF
-#	exec /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
+#	exec /bin/bash "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
 }
 
 

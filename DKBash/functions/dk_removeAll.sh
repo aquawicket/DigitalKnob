@@ -44,9 +44,9 @@ dk_removeAll() {
 	#fi
 		
 	# Backup main script file to DKCACHE_DIR/
-	rm -r -f "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
-	cp "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_NAME}"
-	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_NAME}" & dk_echo "DELETING ${DKBRANCH_DIR} . . . ." & rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
+	rm -r -f "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
+	cp "${DKSCRIPT_PATH}" "${DKCACHE_DIR}/${DKSCRIPT_FILE}"
+	dk_call dk_freshRun "${DKCACHE_DIR}/${DKSCRIPT_FILE}" & dk_echo "DELETING ${DKBRANCH_DIR} . . . ." & rm -r -f "${DKBRANCH_DIR}" 2>/dev/null
 }
 
 
