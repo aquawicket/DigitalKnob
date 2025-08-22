@@ -24,11 +24,12 @@ if(NOT DEFINED Windows_Host)
 endif()
 
 ############ MSYS2 variables ############
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple "dk_Host_Tuple()")
-dk_importVariables	("${msys2_${Host_Tuple}_Import}")
-dk_assertVar(MSYS2)
-
+dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate			(Host_Tuple "dk_Host_Tuple()")
+#dk_importVariables	("${msys2_${Host_Tuple}_Import}")
+#dk_assertVar(MSYS2)
+dk_import()
 
 dk_set				(MSYS2_DBPath		"${MSYS2}/var/lib/pacman")
 dk_set				(MSYS2_CacheDir		"${MSYS2}/var/cache/pacman/pkg")
@@ -44,7 +45,7 @@ dk_set				(UCRT64_BIN			"${MSYS2}/ucrt64/bin")
 dk_set				(MSYS2_MAKE_PROGRAM "${MSYS2}/usr/bin/make.exe")
 
 ############ INSTALL ############
-dk_import("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
+#dk_import("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_firewallAllow("dirmngr" "${MSYS2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###

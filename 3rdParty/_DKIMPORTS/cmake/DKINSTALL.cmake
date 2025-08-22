@@ -22,7 +22,8 @@ include_guard()
 # https://github.com/Kitware/CMake/releases
 
 
-set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
+dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
+dk_success("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 dk_import(APP)
 
 
@@ -65,8 +66,8 @@ dk_import(APP)
 #elseif(Windows_Host)
 #	if(Android)
 #		dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-#		dk_set(CMAKE_DIR "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
-#		dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR})
+#		dk_set(CMAKE "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
+#		dk_findProgram(CMAKE_EXE cmake ${CMAKE})
 #	#elseif(CLANG OR MINGW OR UCRT)
 #	elseif(MSYSTEM)
 #		dk_validate(MSYS2 "dk_depend(msys2)")
@@ -88,21 +89,21 @@ dk_import(APP)
 #		endif()
 #	else()
 #		dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-#		dk_set(CMAKE_DIR "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
-#		dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR})
+#		dk_set(CMAKE "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
+#		dk_findProgram(CMAKE_EXE cmake ${CMAKE})
 #	endif()
 #else()
 #	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 #	if(Mac_Host)
-#		dk_info("searching for cmake in ${CMAKE_DIR}/CMake.app/Contents/bin")
+#		dk_info("searching for cmake in ${CMAKE}/CMake.app/Contents/bin")
 #		dk_import(${cmake_Import} _PATH_ $ENV{DKTOOLS_DIR}/${CMAKE_FOLDER})
-#		dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR}/CMake.app/Contents/bin)
+#		dk_findProgram(CMAKE_EXE cmake ${CMAKE}/CMake.app/Contents/bin)
 #	else()
-#		dk_set(CMAKE_DIR "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
+#		dk_set(CMAKE "$ENV{DKTOOLS_DIR}/${CMAKE_FOLDER}")
 #		
 #		if(NOT EXISTS ${CMAKE_EXE})
-#			dk_import(${cmake_Import} _PATH_ ${CMAKE_DIR})
-#			dk_findProgram(CMAKE_EXE cmake ${CMAKE_DIR})
+#			dk_import(${cmake_Import} _PATH_ ${CMAKE})
+#			dk_findProgram(CMAKE_EXE cmake ${CMAKE})
 #		endif()
 #	endif()
 #endif()
@@ -174,7 +175,7 @@ if(COMPILE_CMAKE)
 		# Remove some flags for some builds
 		string(REPLACE "--DDEBUG" 	""	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 		string(REPLACE "  "			" " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
-		dk_configure(${CMAKE_DIR} 
+		dk_configure(${CMAKE} 
 			-DCMake_INSTALL_COMPONENTS=OFF 			# "Using components when installing" OFF
 			-DCMake_INSTALL_DEPENDENCIES=OFF		# "Whether to install 3rd-party runtime dependencies" OFF
 			-DCMake_BUILD_DEVELOPER_REFERENCE=OFF	# "Build CMake Developer Reference" OFF
@@ -210,7 +211,7 @@ endif()
 ### INSTALL PREBUILT CMAKE ###
 if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_assertPath(MSYS2_DIR)
+	dk_assertPath(MSYS2)
 	
 	dk_depend(bash)
 	dk_exec(${BASH_EXE} -c "command -v cmake" OUTPUT_VARIABLE CMAKE_EXE)

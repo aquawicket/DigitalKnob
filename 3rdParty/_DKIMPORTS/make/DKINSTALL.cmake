@@ -11,6 +11,8 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
+dk_success("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 
 ############ make #############
 # https://packages.msys2.org/base/make
@@ -32,8 +34,8 @@ elseif(Cosmopolitan)
 	if(Windows_Host)
 		dk_depend(msys2)
 		dk_installPackage(make)
-		dk_exportVars(PATH "${MSYS2_DIR}/usr/bin;$ENV{PATH}")
-		dk_set(CMAKE_MAKE_PROGRAM "${MSYS2_DIR}/usr/bin/make.exe")
+		dk_exportVars(PATH "${MSYS2}/usr/bin;$ENV{PATH}")
+		dk_set(CMAKE_MAKE_PROGRAM "${MSYS2}/usr/bin/make.exe")
 	endif()
 	
 elseif(Emscripten)
@@ -51,32 +53,32 @@ elseif(Emscripten)
 elseif(Windows_Arm64_Clang)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/clangarm64/bin/mingw32-make.exe")
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/clangarm64/bin/mingw32-make.exe")
 	
 elseif(Windows_X86_Clang)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/clang32/bin/mingw32-make.exe")
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/clang32/bin/mingw32-make.exe")
 	
 elseif(Windows_X86_64_Clang)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/clang64/bin/mingw32-make.exe")	
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/clang64/bin/mingw32-make.exe")	
 
 elseif(Windows_X86_Gcc)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/mingw32/bin/mingw32-make.exe")
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/mingw32/bin/mingw32-make.exe")
 	
 elseif(Windows_X86_64_Gcc)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/mingw64/bin/mingw32-make.exe")
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/mingw64/bin/mingw32-make.exe")
 	
 elseif(Windows_X86_64_Ucrt)
 	dk_depend(msys2)
 	dk_installPackage("make")
-	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2_DIR}/ucrt64/bin/mingw32-make.exe")
+	dk_set(CMAKE_MAKE_PROGRAM	"${MSYS2}/ucrt64/bin/mingw32-make.exe")
 
 elseif(Windows_X86_Msvc)
 	dk_depend(visualstudio)

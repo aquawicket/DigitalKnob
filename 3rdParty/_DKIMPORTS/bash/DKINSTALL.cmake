@@ -62,7 +62,7 @@ include_guard()
 ### Msys2 bash ###
 #if(MSYSTEM)
 #	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_findProgram(MSYS2_BASH_EXE bash.exe "${MSYS2_DIR}/usr/bin")
+#	dk_findProgram(MSYS2_BASH_EXE bash.exe "${MSYS2}/usr/bin")
 #	if(EXISTS "${MSYS2_BASH_EXE}")
 #		dk_printVar(MSYS2_BASH_EXE)
 #		if(NOT BASH_EXE)

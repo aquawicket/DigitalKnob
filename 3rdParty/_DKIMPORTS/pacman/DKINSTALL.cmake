@@ -17,7 +17,8 @@ include_guard()
 # https://walterteng.com/using-zsh-on-windows
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-dk_findProgram(PACMAN_EXE pacman "${MSYS2_DIR}/usr/bin")
+dk_assertPath(${MSYS2})
+dk_findProgram(PACMAN_EXE pacman "${MSYS2}/usr/bin")
 
 
 #if((NOT DKUPDATE) AND (EXISTS ${PACMAN_EXE}))

@@ -79,8 +79,8 @@ dk_return()
 
 #if(MSYSTEM)
 #	dk_validate(MSYS2 "dk_depend(msys2)")
-#	if(NOT EXISTS ${MSYS2_DIR})
-#		dk_fatal("MSYS2:${MSYS2_DIR} does not exist")
+#	if(NOT EXISTS ${MSYS2})
+#		dk_fatal("MSYS2:${MSYS2} does not exist")
 #	endif()
 #	
 #	dk_exec(command -v git.exe OUTPUT_VARIABLE GIT_EXE NO_HALT) # BASH_ENV)

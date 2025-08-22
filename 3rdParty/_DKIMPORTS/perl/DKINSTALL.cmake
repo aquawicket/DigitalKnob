@@ -27,27 +27,27 @@ dk_validate(MSYS2 "dk_depend(msys2)")
 dk_installPackage(perl)
 
 if(Windows_Arm64_Clang)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clangarm64/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/clangarm64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_Clang)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang32/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/clang32/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_64_Clang)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/clang64/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/clang64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_Gcc)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/mingw32/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/mingw32/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_64_Gcc)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/mingw64/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/mingw64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_64_Ucrt)
-	#dk_findProgram(PERL_EXE perl "${MSYS2_DIR}/ucrt64/bin")
+	#dk_findProgram(PERL_EXE perl "${MSYS2}/ucrt64/bin")
 	dk_findProgram(PERL_EXE perl "${MSYS2}/usr/bin")
 	
 elseif(Windows_X86_Msvc)

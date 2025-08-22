@@ -28,7 +28,7 @@ endif()
 
 
 if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
-	dk_prependEnvPath("${MSYS2_DIR}/usr/bin")
+	dk_prependEnvPath("${MSYS2}/usr/bin")
 	
 	### Install toolchain ###
 	if(MSYSTEM)
@@ -36,16 +36,16 @@ if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		dk_setEnv("MSYSTEM"  	"${MSYSTEM}")
 		dk_setEnv("${MSYSTEM}"	ON)
 		dk_toLower(${MSYSTEM} msystem)
-		dk_prependEnvPath("${MSYS2_DIR}/${msystem}/bin")
+		dk_prependEnvPath("${MSYS2}/${msystem}/bin")
 		
 		dk_installPackage(toolchain)
 	else()
-		dk_set(MSYS2_BIN		"export PATH=${MSYS2_DIR}/usr/bin:$PATH")
+		dk_set(MSYS2_BIN		"export PATH=${MSYS2}/usr/bin:$PATH")
 	endif()
 	
 	### Create Bash Exports ###
 	dk_depend(cygpath)
-	dk_exec(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
+	dk_exec(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
 	dk_set(CLANG32_BIN		"export PATH=${MSYS2_CYGPATH}/clang32/bin:$PATH")
 	dk_set(CLANG64_BIN		"export PATH=${MSYS2_CYGPATH}/clang64/bin:$PATH")
@@ -55,11 +55,11 @@ if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 	dk_set(UCRT64_BIN		"export PATH=${MSYS2_CYGPATH}/ucrt64/bin:$PATH")
 	dk_set(MSYS2_BIN		"export PATH=${MSYS2_CYGPATH}/usr/bin:$PATH")
 	
-	dk_set(CLANG32_EXE 		"${MSYS2_DIR}/clang32.exe")
-	dk_set(CLANG64_EXE 		"${MSYS2_DIR}/clang64.exe")
-	dk_set(CLANGARM64_EXE 	"${MSYS2_DIR}/clangarm64.exe")
-	dk_set(MINGW32_EXE 		"${MSYS2_DIR}/mingw32.exe")
-	dk_set(MINGW64_EXE 		"${MSYS2_DIR}/mingw64.exe")
-	dk_set(UCRT64_EXE 		"${MSYS2_DIR}/ucrt64.exe")
-	dk_set(MSYS2_EXE 		"${MSYS2_DIR}/msys2.exe")
+	dk_set(CLANG32_EXE 		"${MSYS2}/clang32.exe")
+	dk_set(CLANG64_EXE 		"${MSYS2}/clang64.exe")
+	dk_set(CLANGARM64_EXE 	"${MSYS2}/clangarm64.exe")
+	dk_set(MINGW32_EXE 		"${MSYS2}/mingw32.exe")
+	dk_set(MINGW64_EXE 		"${MSYS2}/mingw64.exe")
+	dk_set(UCRT64_EXE 		"${MSYS2}/ucrt64.exe")
+	dk_set(MSYS2_EXE 		"${MSYS2}/msys2.exe")
 endif()

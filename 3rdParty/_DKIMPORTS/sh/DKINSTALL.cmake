@@ -44,7 +44,7 @@ endif()
 ### Msys2 sh ###
 #if(MSYSTEM)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_findProgram(MSYS2_SH_EXE sh "${MSYS2_DIR}/usr/bin")
+	dk_findProgram(MSYS2_SH_EXE sh "${MSYS2}/usr/bin")
 	if(EXISTS "${MSYS2_SH_EXE}")
 		dk_printVar(MSYS2_SH_EXE)
 		if(NOT SH_EXE)

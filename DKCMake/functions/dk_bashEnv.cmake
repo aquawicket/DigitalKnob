@@ -56,7 +56,7 @@ function(dk_bashEnv)
 	
 	dk_validate(MSYS2 "dk_depend(msys2)")
 	dk_depend(cygpath)
-	dk_exec(${CYGPATH_EXE} -m "${MSYS2_DIR}" OUTPUT_VARIABLE MSYS2_CYGPATH)
+	dk_exec(${CYGPATH_EXE} -m "${MSYS2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
 	if(Android)
 		dk_assertVar(ANDROID_BASH)
