@@ -481,6 +481,7 @@ var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
 var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
 var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
+
 //############ queryString ############
 var queryString = "undefined"
 if(typeof location === "object"){
@@ -492,6 +493,7 @@ if(typeof location === "object"){
 	}
 }
 dk_assert('queryString');
+console.log("queryString = "+typeof queryString);
 
 //###### DKSCRIPT variables ######
 //if(dk_valid("ARGV") && ARGV.length > 0){
@@ -508,6 +510,7 @@ dk_assert('queryString');
 //############ alert() ############
 if(!dk_valid("alert")){ dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){ /*alert("test");*/ }); }
 dk_assert('alert');
+//alert('test');
 
 /*
 //############ console ############
@@ -537,10 +540,12 @@ if(!dk_valid("onDOMContentLoaded")){
 dk_assert('onDOMContentLoaded');
 
 //############ document.addEventListener ############
-dk_assert('document.addEventListener');
-if(dk_valid("document.addEventListener")){
-	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
+if(dk_valid("document.addEventListener")){ 
+	if(dk_valid("document.addEventListener")){
+		document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
+	}
 }
+
 
 //############ body_onload ############
 function body_onload(){
@@ -572,10 +577,10 @@ dk_assert('body_onload');
 //if(!dk_valid("WshShell"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js"); 		}
 //if(!dk_valid("replaceAll"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js"); 		}
 if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js"); 		}
-if(!dk_valid("DKPlugin"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DKPlugin.js"); 		}
-if(!dk_valid("DKFile"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKFile.js"); 		}
-if(!dk_valid("DKGui"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKGui.js"); 		}
-if(!dk_valid("DKErrorHandler"))	    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKErrorHandler.js"); 		}
+//if(!dk_valid("DKPlugin"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DKPlugin.js"); 		}
+//if(!dk_valid("DKFile"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKFile.js"); 		}
+//if(!dk_valid("DKGui"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKGui.js"); 		}
+//if(!dk_valid("DKErrorHandler"))	    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKErrorHandler.js"); 		}
 //if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(){}); }
 //dk_assert('dk_color');
 

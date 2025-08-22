@@ -9,8 +9,8 @@ if "%~1" equ "" (goto:DKINSTALL)
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~3
 	set "DKSCRIPT_PATH=%~4"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	set "ENGINE=javascript"
-	::set "ENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}"
+	::set "ENGINE=javascript"
+	set "ENGINE={16d51579-a30b-4c8b-a276-0ff4dc41e755}"
 	
 	"%ComSpec%" /c %CSCRIPT_EXE% //D //E:%ENGINE% //X //NoLogo "%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/DK.js" "%DKSCRIPT_PATH:\=/%" && goto:exittrue || goto:exitfalse
 	echo ###### DKJavascript/DKINSTALL.cmd:14 - SHOULD NOT GET HERE ######
