@@ -24,7 +24,6 @@ if(NOT DEFINED Windows_Host)
 endif()
 
 ############ MSYS2 variables ############
-dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
 #dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_validate			(Host_Tuple "dk_Host_Tuple()")
 #dk_importVariables	("${msys2_${Host_Tuple}_Import}")

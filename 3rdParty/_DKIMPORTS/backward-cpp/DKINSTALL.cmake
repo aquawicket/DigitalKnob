@@ -20,7 +20,7 @@ include_guard()
 dk_import			("${backward_cpp_Import}")
 
 ### LINK ###
-dk_include			("${BACKWARD_CPP_DIR}")
+dk_include			("${BACKWARD_CPP}")
 #if(Unix)
 #	dk_libDebug		("${BACKWARD_CPP_DEBUG_DIR}/libbackward.a")
 #	dk_libRelease	("${BACKWARD_CPP_RELEASE_DIR}/libbackward.a")
@@ -37,7 +37,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 elseif(Android)
 	dk_delete("${DKCPP_PLUGINS_DIR}/DK/backward.cpp" NO_HALT)
 else()
-	dk_copy("${BACKWARD_CPP_DIR}/backward.cpp" "${DKCPP_PLUGINS_DIR}/DK/backward.cpp" OVERWRITE)
+	dk_copy("${BACKWARD_CPP}/backward.cpp" "${DKCPP_PLUGINS_DIR}/DK/backward.cpp" OVERWRITE)
 endif()
 
 ### GENERATE ###

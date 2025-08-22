@@ -39,6 +39,7 @@ function(dk_dependB plugin)
 	endif()
 	
 	###### Load the DKINSTALL.cmake file ######
+	dk_set(CURRENT_IMPORT "${Plugin_Path}")
 	dk_load(${Plugin_Path}/DKINSTALL.cmake)
 	
 #	if(${ARGC} GREATER 1)

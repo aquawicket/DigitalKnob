@@ -40,5 +40,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_printPrefixVars("CMAKE_")
 endfunction()

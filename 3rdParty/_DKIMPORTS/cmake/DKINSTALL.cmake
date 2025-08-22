@@ -22,8 +22,6 @@ include_guard()
 # https://github.com/Kitware/CMake/releases
 
 
-dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
-dk_success("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 dk_import(APP)
 
 

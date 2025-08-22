@@ -113,91 +113,91 @@ function(dk_importVariables)
 	####################
 	
 	
-																	###### EXAMPLE ######
-	### IMPORT_ROOT (PLUGIN;Import.Dirname)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
-	dk_unset(IMPORT_ROOT)
+																###### EXAMPLE ######
+	### IMPORT_ROOT (PLUGIN;Import.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
+	#dk_unset(IMPORT_ROOT)
 	dk_getParameterValue(IMPORT_ROOT)
 	dk_debug("IMPORT_ROOT = '${IMPORT_ROOT}'")
 	set(PLUGIN.Import.Dirname "${IMPORT_ROOT}" CACHE INTERNAL "")
 
-	### IMPORT_NAME (PLUGIN.Import.Name)							zlib
-	dk_unset(IMPORT_NAME)
+	### IMPORT_NAME (PLUGIN.Import.Name)						zlib
+	#dk_unset(IMPORT_NAME)
 	dk_getParameterValue(IMPORT_NAME)
 	dk_debug("IMPORT_NAME = '${IMPORT_NAME}'")
-	set(PLUGIN.Import.Name "${IMPORT_NAME}")
+	set(PLUGIN.Import.Name "${IMPORT_NAME}" CACHE INTERNAL "")
 
-	### IMPORT_PATH (PLUGIN.Import.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
-	dk_unset(IMPORT_PATH)
+	### IMPORT_PATH (PLUGIN.Import.Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+	#dk_unset(IMPORT_PATH)
 	dk_getParameterValue(IMPORT_PATH)
 	dk_debug("IMPORT_PATH = '${IMPORT_PATH}'")
-	set(PLUGIN.Import.Path "${IMPORT_PATH}")
+	set(PLUGIN.Import.Path "${IMPORT_PATH}" CACHE INTERNAL "")
 
-	### INSTALL_ROOT (PLUGIN.Install.Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty
-	dk_unset(INSTALL_ROOT)
+	### INSTALL_ROOT (PLUGIN.Install.Dirname)					/c/Users/Administrator/DigitalKnob/Development/3rdParty
+	#dk_unset(INSTALL_ROOT)
 	dk_getParameterValue(INSTALL_ROOT)
 	dk_debug("INSTALL_ROOT = '${INSTALL_ROOT}'")
 	set(PLUGIN.Install.Dirname "${INSTALL_ROOT}" CACHE INTERNAL "")
 
-	### INSTALL_NAME (PLUGIN.Install.Name)							zlib-master
-	dk_unset(INSTALL_NAME)
+	### INSTALL_NAME (PLUGIN.Install.Name)						zlib-master
+	#dk_unset(INSTALL_NAME)
 	dk_getParameterValue(INSTALL_NAME)
 	dk_debug("INSTALL_NAME = '${INSTALL_NAME}'")
-	set(PLUGIN.Install.Name "${INSTALL_NAME}")
+	set(PLUGIN.Install.Name "${INSTALL_NAME}" CACHE INTERNAL "")
 
-	### INSTALL_PATH (PLUGIN.Install.Path)							/c/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	dk_unset(INSTALL_PATH)
+	### INSTALL_PATH (PLUGIN.Install.Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+	#dk_unset(INSTALL_PATH)
 	dk_getParameterValue(INSTALL_PATH)
 	dk_debug("INSTALL_PATH = '${INSTALL_PATH}'")
-	set(PLUGIN.Install.Path "${INSTALL_PATH}")
+	set(PLUGIN.Install.Path "${INSTALL_PATH}" CACHE INTERNAL "")
 
-	### VERSION (PLUGIN.Version)									v1.3.1
-	dk_unset(VERSION)
+	### VERSION (PLUGIN.Version)								v1.3.1
+	#dk_unset(VERSION)
 	dk_getParameterValue(VERSION)
 	dk_debug("VERSION = '${VERSION}'")
-	set(PLUGIN.Version "${VERSION}")
+	set(PLUGIN.Version "${VERSION}" CACHE INTERNAL "")
 
-	### BRANCH (PLUGIN.Branch)										master
-	dk_unset(BRANCH)
+	### BRANCH (PLUGIN.Branch)									master
+	#dk_unset(BRANCH)
 	dk_getParameterValue(BRANCH)
 	dk_debug("BRANCH = '${BRANCH}'")
-	set(PLUGIN.Branch "${BRANCH}")
+	set(PLUGIN.Branch "${BRANCH}" CACHE INTERNAL "")
 	
-	### PLUGIN.Args													"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	dk_unset(PLUGIN.Args)
+	### PLUGIN.Args												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+	#dk_unset(PLUGIN.Args)
 	set(PLUGIN.Args ${ARGV} CACHE INTERNAL "")
 	dk_debug("PLUGIN.Args = '${PLUGIN.Args}'")
 		
-	### PLUGIN.Url													"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	dk_unset(PLUGIN.Url)
+	### PLUGIN.Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+	#dk_unset(PLUGIN.Url)
 	set(PLUGIN.Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Url = '${PLUGIN.Url}'")
 
-
-	### PLUGIN.Id													ZLIB
+dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+	### PLUGIN.Id												ZLIB
 	PLUGIN_Id()
-
-	### PLUGIN.Install.Path											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+	### PLUGIN.Install.Path										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	PLUGIN_Install_Path()
-	
-	### PLUGIN.Url.Extension										.zip
+dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+	### PLUGIN.Url.Extension									.zip
 	PLUGIN_Url_Extension()
 	#####################################################
 	############# PLUGIN.Target_Directries ##############
 	#####################################################
-
-	### PLUGIN.Tuple_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
+	### PLUGIN.Tuple_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	set(PLUGIN.Tuple_Dir "${PLUGIN.Install.Path}/${Target_Tuple}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
 	
-	### PLUGIN.Config_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN.Config_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Config_Dir "${PLUGIN.Install.Path}/${Config_Path}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Config_Dir = '${PLUGIN.Config_Dir}'")
 
-	### PLUGIN.Build_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN.Build_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Build_Dir "${PLUGIN.Install.Path}/${Build_Path}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Build_Dir = '${PLUGIN.Build_Dir}'")
 
-	### PLUGIN.Debug_Dir											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN.Debug_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	set(PLUGIN.Debug_Dir "${PLUGIN.Tuple_Dir}/${Debug_Dir}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Debug_Dir = '${PLUGIN.Debug_Dir}'")
 
@@ -212,7 +212,9 @@ function(dk_importVariables)
 	### ${PLUGIN}
 	set(${PLUGIN} "${PLUGIN.Install.Path}" CACHE INTERNAL "")
 	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
-	
+
+	Copy_Variables()
+	PRINTVARS()
 endfunction()
 
 
@@ -261,7 +263,6 @@ function(PLUGIN_Import_Name)
 		dk_debug("PLUGIN.Import.Name = '${PLUGIN.Import.Name}'")
 	endif()
 	
-	set(PLUGIN.Import.Name ${PLUGIN.Import.Name} PARENT_SCOPE)
 	set(PLUGIN.Import.Name ${PLUGIN.Import.Name} CACHE INTERNAL "")
 endfunction()
 
@@ -284,7 +285,6 @@ function(PLUGIN_Import_Name_Lower)
 	endif()
 	dk_debug("PLUGIN.Import.Name_Lower = '${PLUGIN.Import.Name_Lower}'")
 	
-	set(PLUGIN.Import.Name_Lower ${PLUGIN.Import.Name_Lower}  PARENT_SCOPE)
 	set(PLUGIN.Import.Name_Lower ${PLUGIN.Import.Name_Lower}  CACHE INTERNAL "")
 endfunction()
 
@@ -295,13 +295,12 @@ function(PLUGIN_Install_Dirname)
 	endif()
 	
 	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
-	set(PLUGIN.Install.Dirname "${DK3RDPARTY_DIR}")
+	set(PLUGIN.Install.Dirname "${DK3RDPARTY_DIR}" CACHE INTERNAL "")
 	if(NOT PLUGIN.Install.Dirname)
 		dk_error("PLUGIN.Install.Dirname is invalid")
 	endif()
 	dk_debug("PLUGIN.Install.Dirname = '${PLUGIN.Install.Dirname}'")
 	
-	set(PLUGIN.Install.Dirname ${PLUGIN.Install.Dirname}  PARENT_SCOPE)
 	set(PLUGIN.Install.Dirname ${PLUGIN.Install.Dirname}  CACHE INTERNAL "")
 endfunction()
 
@@ -312,13 +311,12 @@ function(PLUGIN_Url_Basename)
 	endif()
 
 	dk_basename("${PLUGIN.Url}")
-	set(PLUGIN.Url.Basename "${dk_basename}")				# basename, filename
+	set(PLUGIN.Url.Basename "${dk_basename}" CACHE INTERNAL "")				# basename, filename
 	if(NOT PLUGIN.Url.Basename)
-		dk_error("PLUGIN.Url.Basename is invalid")
+		dk_notice("PLUGIN.Url.Basename is invalid")
 	endif()
 	dk_debug("PLUGIN.Url.Basename = '${PLUGIN.Url.Basename}'")
 	
-	set(PLUGIN.Url.Basename ${PLUGIN.Url.Basename} PARENT_SCOPE)
 	set(PLUGIN.Url.Basename ${PLUGIN.Url.Basename} CACHE INTERNAL "")
 endfunction()
 
@@ -330,11 +328,10 @@ function(PLUGIN_Url_Dirname)
 
 	dk_dirname("${PLUGIN.Url}" PLUGIN.Url.Dirname)
 	if(NOT PLUGIN.Url.Dirname)
-		dk_error("PLUGIN.Url.Dirname is invalid")
+		dk_notice("PLUGIN.Url.Dirname is invalid")
 	endif()
 	dk_debug("PLUGIN.Url.Dirname = '${PLUGIN.Url.Dirname}'")
 	
-	set(PLUGIN.Url.Dirname ${PLUGIN.Url.Dirname} PARENT_SCOPE)
 	set(PLUGIN.Url.Dirname ${PLUGIN.Url.Dirname} CACHE INTERNAL "")
 endfunction()
 
@@ -346,11 +343,10 @@ function(PLUGIN_Url_Extension)
 
 	dk_getExtension("${PLUGIN.Url}" PLUGIN.Url.Extension)
 	if(NOT PLUGIN.Url.Extension)
-		dk_error("PLUGIN.Url.Extension is invalid")
+		dk_notice("PLUGIN.Url.Extension is invalid")
 	endif()
 	dk_debug("PLUGIN.Url.Extension = '${PLUGIN.Url.Extension}'")
 	
-	set(PLUGIN.Url.Extension ${PLUGIN.Url.Extension} PARENT_SCOPE)
 	set(PLUGIN.Url.Extension ${PLUGIN.Url.Extension} CACHE INTERNAL "")
 endfunction()
 
@@ -363,17 +359,17 @@ function(PLUGIN_Url_Name)
 	PLUGIN_Url_Basename()
 
 	if(NOT PLUGIN.Url.Basename)
-		dk_error("PLUGIN.Url.Basename is invalid")
+		dk_notice("PLUGIN.Url.Basename is invalid")
 	endif()
 	dk_debug("PLUGIN.Url.Basename = '${PLUGIN.Url.Basename}'")
 	
 	dk_removeExtension("${PLUGIN.Url.Basename}" PLUGIN.Url.Name) # name, file  (no extension)
 	if(NOT PLUGIN.Url.Name)
-		dk_error("PLUGIN.Url.Name is invalid")
+		dk_notice("PLUGIN.Url.Name is invalid")
+		#return()
 	endif()
 	dk_debug("PLUGIN.Url.Name = '${PLUGIN.Url.Name}'")
 	
-	set(PLUGIN.Url.Name ${PLUGIN.Url.Name} PARENT_SCOPE)
 	set(PLUGIN.Url.Name ${PLUGIN.Url.Name} CACHE INTERNAL "")
 endfunction()
 
@@ -386,18 +382,19 @@ function(PLUGIN_Url_Name_Lower)
 	PLUGIN_Url_Name()
 
 	if(NOT PLUGIN.Url.Name)
-		dk_error("PLUGIN.Url.Name is invalid")
+		dk_notice("PLUGIN.Url.Name is invalid")
+		return()
 	endif()
 	dk_debug("PLUGIN.Url.Name = '${PLUGIN.Url.Name}'")
 	
 	dk_toLower(${PLUGIN.Url.Name})
- 	set(PLUGIN.Url.Name_Lower "${dk_toLower}")
+ 	set(PLUGIN.Url.Name_Lower "${dk_toLower}" CACHE INTERNAL "")
 	if(NOT PLUGIN.Url.Name_Lower)
-		dk_error("PLUGIN.Url.Name_Lower is invalid")
+		dk_notice("PLUGIN.Url.Name_Lower is invalid")
+		#return()
 	endif()
 	dk_debug("PLUGIN.Url.Name_Lower = '${PLUGIN.Url.Name_Lower}'")
 	
-	set(PLUGIN.Url.Name_Lower ${PLUGIN.Url.Name_Lower} PARENT_SCOPE)
 	set(PLUGIN.Url.Name_Lower ${PLUGIN.Url.Name_Lower} CACHE INTERNAL "")
 endfunction()
 
@@ -416,12 +413,12 @@ function(PLUGIN_Install_Name)
 	
 	PLUGIN_Version()
 	if(NOT PLUGIN.Version)
-		dk_error("PLUGIN.Version is invalid")
+		dk_notice("PLUGIN.Version is invalid")
 	endif()
 	dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
 	
 	if((PLUGIN.Import.Name) AND (PLUGIN.Version))
-		set(PLUGIN.Install.Name "${PLUGIN.Import.Name}-${PLUGIN.Version}")
+		set(PLUGIN.Install.Name "${PLUGIN.Import.Name}-${PLUGIN.Version}"  CACHE INTERNAL "")
 	elseif(NOT PLUGIN.Install.Name)	
 		set(PLUGIN.Install.Name "${PLUGIN.Import.Name}")
 	endif()
@@ -430,7 +427,6 @@ function(PLUGIN_Install_Name)
 	endif()
 	dk_debug("PLUGIN.Install.Name = '${PLUGIN.Install.Name}'")
 	
-	set(PLUGIN.Install.Name ${PLUGIN.Install.Name} PARENT_SCOPE)
 	set(PLUGIN.Install.Name ${PLUGIN.Install.Name} CACHE INTERNAL "")
 endfunction()
 
@@ -454,13 +450,12 @@ function(PLUGIN_Install_Path)
 	endif()
 	dk_debug("PLUGIN.Install.Name = '${PLUGIN.Install.Name}'")
 	
-	set(PLUGIN.Install.Path "${PLUGIN.Install.Dirname}/${PLUGIN.Install.Name}")
+	set(PLUGIN.Install.Path "${PLUGIN.Install.Dirname}/${PLUGIN.Install.Name}"  CACHE INTERNAL "")
 	if(NOT PLUGIN.Install.Path)
 		dk_error("PLUGIN.Install.Path is invalid")
 	endif()
 	dk_debug("PLUGIN.Install.Path = '${PLUGIN.Install.Path}'")
 	
-	set(PLUGIN.Install.Path ${PLUGIN.Install.Path} PARENT_SCOPE)
 	set(PLUGIN.Install.Path ${PLUGIN.Install.Path} CACHE INTERNAL "")
 endfunction()
 
@@ -472,33 +467,41 @@ function(PLUGIN_Import_Path)
 	
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	if(PLUGIN.Import.Name)
-		set(PLUGIN.Import.Path "${DKIMPORTS_DIR}/${PLUGIN.Import.Name}")
+		set(PLUGIN.Import.Path "${DKIMPORTS_DIR}/${PLUGIN.Import.Name}" CACHE INTERNAL "")
 	else()
+		### /_DKIMPORTS/
 		dk_includes("${CURRENT_IMPORT}" "${DKIMPORTS_DIR}" dk_includes)
 		if(dk_includes)
-			set(PLUGIN.Import.Path "${CURRENT_IMPORT}")
+			set(PLUGIN.Import.Path "${CURRENT_IMPORT}" CACHE INTERNAL "")
+		endif()
+		
+		### DKCpp/plugins/
+		dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
+		dk_includes("${CURRENT_IMPORT}" "${DKCPP_PLUGINS_DIR}" dk_includes)
+		if(dk_includes)
+			set(PLUGIN.Import.Path "${CURRENT_IMPORT}" CACHE INTERNAL "")
 		endif()
 	endif()
 	
-	#if(NOT PLUGIN.Import.Path)
-	#	dk_error("PLUGIN.Import.Path is invalid")
-	#endif()
+	if(NOT PLUGIN.Import.Path)
+		dk_notice("PLUGIN.Import.Path is invalid")
+	endif()
 	dk_debug("PLUGIN.Import.Path = '${PLUGIN.Import.Path}'")
 	
-	set(PLUGIN.Import.Path ${PLUGIN.Import.Path} PARENT_SCOPE)
 	set(PLUGIN.Import.Path ${PLUGIN.Import.Path} CACHE INTERNAL "")
 endfunction()
 
 ########################
 function(PLUGIN_Version)
 	if(PLUGIN.Version)
-		return()
+		#return()
 	endif()
 		
 	PLUGIN_Url_Name_Lower()
 
 	if(NOT PLUGIN.Url.Name_Lower)
-		dk_error("PLUGIN.Url.Name_Lower is invalid")
+		dk_notice("PLUGIN.Url.Name_Lower is invalid")
+		return()
 	endif()
 	dk_debug("PLUGIN.Url.Name_Lower = '${PLUGIN.Url.Name_Lower}'")
 	
@@ -514,22 +517,21 @@ function(PLUGIN_Version)
 			dk_replaceAll("${PLUGIN.Url.Name_Lower}" 	"${PLUGIN.Import.Name_Lower}" 	""  PLUGIN.Version)
 		endif()
 		if(NOT PLUGIN.Version)
-			set(PLUGIN.Version ${PLUGIN.TAG})
+			set(PLUGIN.Version ${PLUGIN.TAG} CACHE INTERNAL "")
 		endif()
 		if(NOT PLUGIN.Version)
-			set(PLUGIN.Version ${PLUGIN.Branch})
+			set(PLUGIN.Version ${PLUGIN.Branch} CACHE INTERNAL "")
 		endif()
 	endif()
 	
 	dk_trimNonAlphaNumeric("${PLUGIN.Version}" PLUGIN.Version)
 	
 	if(NOT PLUGIN.Version)
-		dk_error("PLUGIN.Version is invalid")
+		dk_notice("PLUGIN.Version is invalid")
 	endif()
 	dk_debug("PLUGIN.Version = '${PLUGIN.Version}'")
 	
-	set(PLUGIN.Version ${PLUGIN.Version} PARENT_SCOPE)
-	set(PLUGIN.Version ${PLUGIN.Version} CACHE INTERNAL "")
+	set(PLUGIN.Version "${PLUGIN.Version}" CACHE INTERNAL "")
 endfunction()
 
 ##################################
@@ -546,13 +548,12 @@ function(PLUGIN_Import_Name_Upper)
 	dk_debug("PLUGIN.Import.Name = '${PLUGIN.Import.Name}'")
 	
 	dk_toUpper("${PLUGIN.Import.Name}")
-	set(PLUGIN.Import.Name_Upper "${dk_toUpper}")
+	set(PLUGIN.Import.Name_Upper "${dk_toUpper}" CACHE INTERNAL "")
 	if(NOT PLUGIN.Import.Name_Upper)
 		dk_error("PLUGIN.Import.Name_Upper is invalid")
 	endif()
 	dk_debug("PLUGIN.Import.Name_Upper = '${PLUGIN.Import.Name_Upper}'")
 	
-	set(PLUGIN.Import.Name_Upper ${PLUGIN.Import.Name_Upper} PARENT_SCOPE)
 	set(PLUGIN.Import.Name_Upper ${PLUGIN.Import.Name_Upper} CACHE INTERNAL "")
 endfunction()
 
@@ -570,16 +571,13 @@ function(PLUGIN_Id)
 	dk_debug("PLUGIN.Import.Name_Upper = '${PLUGIN.Import.Name_Upper}'")
 	
 	dk_convertToCIdentifier("${PLUGIN.Import.Name_Upper}")
- 	set(PLUGIN.Id "${dk_convertToCIdentifier}")
+ 	set(PLUGIN.Id "${dk_convertToCIdentifier}" CACHE INTERNAL "")
 	if(NOT PLUGIN.Id)
 		dk_error("PLUGIN.Id is invalid")
 	endif()
 	dk_debug("PLUGIN.Id = '${PLUGIN.Id}'")
 	
-	set(PLUGIN.Id ${PLUGIN.Id} PARENT_SCOPE)
 	set(PLUGIN.Id ${PLUGIN.Id} CACHE INTERNAL "")
-	
-	set(PLUGIN ${PLUGIN.Id} PARENT_SCOPE)
 	set(PLUGIN ${PLUGIN.Id} CACHE INTERNAL "")
 endfunction()
 	
@@ -589,13 +587,18 @@ endfunction()
 function(Copy_Variables)
 	### Set the <PLUGIN.ID> variable to mirror %PLUGIN%
 	### All %PLUGIN.variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
+	
+	set(_prefix "PLUGIN.")
+	set(_newprefix "${PLUGIN}.")
 	get_cmake_property(_vars VARIABLES)
-	string(REGEX MATCHALL "(^|;)PLUGIN.[A-Za-z0-9_.*" _matchedVars "${_vars}")
-	foreach(_variable ${_matchedVars})
-		set(${_variable} ${${_variable}} PARENT_SCOPE)
-		string(REPLACE "PLUGIN" "${PLUGIN.ID}" _variable_B ${_variable})
-		set(${_variable_B} ${${_variable}} PARENT_SCOPE)
-	endforeach()
+    string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_.]*" _matchedVars "${_vars}")
+    foreach(_variable ${_matchedVars})
+		if(${_variable})
+			string(REPLACE "${_prefix}" "${_newprefix}" newVar "${_variable}")
+			dk_set(${newVar} "${${_variable}}")
+			#message("${newVar} = ${${newVar}}")
+		endif()
+    endforeach()
 endfunction()
 
 	
