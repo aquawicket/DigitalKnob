@@ -47,11 +47,11 @@ function(dk_import)
 
 	dk_importVariables(${${PLUGIN_IMPORT}} ${INSTALL_ROOT})
 	
-	if((NOT EXISTS "${PLUGIN}") OR (NOT EXISTS "${${PLUGIN}_DIR}"))	
-		dk_envList(PLUGIN PUSH "${PLUGIN}")			###### Push Plugin to the PLUGIN_STACK ######
-	else()
-		dk_notice("dk_import(): ${PLUGIN} is already loaded")
-	endif()
+#	if(NOT EXISTS "${PLUGIN}")
+#		dk_envList(PLUGIN PUSH "${PLUGIN}")			###### Push Plugin to the PLUGIN_STACK ######
+#	else()
+#		dk_notice("dk_import(): ${PLUGIN} is already loaded")
+#	endif()
 	dk_assertVar(ENV{CURRENT_PLUGIN})
 	
 	if(EXISTS "${PLUGIN.Install.Path}")

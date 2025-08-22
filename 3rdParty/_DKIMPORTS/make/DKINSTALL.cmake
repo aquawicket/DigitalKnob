@@ -11,8 +11,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
-dk_success("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 
 ############ make #############
 # https://packages.msys2.org/base/make
