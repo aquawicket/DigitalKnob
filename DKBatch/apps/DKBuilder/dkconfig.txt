@@ -1,3 +1,4 @@
+#DKOFFLINE=C:/Users/Administrator/DigitalKnob/download
 #dk_DEBUG=1
 #dk_call_PRINT_CALLS=1 
 #dk_call_PRINT_ENTRY=1

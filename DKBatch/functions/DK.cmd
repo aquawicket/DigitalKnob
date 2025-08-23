@@ -86,6 +86,11 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
+	if "%DKOFFLINE%" neq "" (
+		%dk_call% dk_assertPath "%DKOFFLINE%"
+		%dk_call% dk_echo "%bg_yellow%%black%###### OFFLINE MODE ###### OFFLINE MODE ###### OFFLINE MODE ######%clr%"
+	)
+	
 	::############ Elevate Permissions ############
 	::set "ENABLE_dk_elevate=1"
 	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)

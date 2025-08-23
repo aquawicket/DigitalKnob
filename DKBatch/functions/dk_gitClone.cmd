@@ -58,5 +58,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_gitClone "https://github.com/aquawicket/DigitalKnob.git" "%USERPROFILE:\=/%/DigitalKnob/Development" "Development"
 	
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_gitClone "%DKDOWNLOAD_DIR%/DigitalKnob.bundle" "%USERPROFILE:\=/%/DigitalKnob/Development"
+	%dk_call% dk_gitClone "%DKDOWNLOAD_DIR%/DigitalKnob.git" "%USERPROFILE:\=/%/DigitalKnob/Development_TEST"
 %endfunction%
