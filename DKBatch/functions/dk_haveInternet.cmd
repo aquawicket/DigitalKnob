@@ -13,8 +13,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
     %dk_call% dk_debugFunc 0 1
 
-
-    %ComSpec% /c ping -n 1 8.8.8.8 > nul 2> nul"
+	set "PING_EXE=C:/Windows/System32/PING.EXE"
+    %ComSpec% /c %PING_EXE% -n 1 8.8.8.8 > nul 2> nul"
     if "%errorlevel%" equ "0" (
         if "%~2" neq "" (endlocal & set "%2=true")
         exit /b 0
