@@ -1,5 +1,4 @@
-//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
-if(!dk_valid("dk_error")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_error.js", function(){}); }
+dk_depend("dk_error");
 
 
 //################################################################################
@@ -12,7 +11,7 @@ dk_assertVar = function dk_assertVar_f(variable){
 		return;
 	}
 
-	dk_error("ASSERTION: dk_assertVar(%*): "+variable+" not defined");
+	dk_error("ASSERTION: dk_assertVar("+arguments[0]+"): "+variable+" not defined");
 	return 1;
 }
 

@@ -3,7 +3,17 @@ var assets = "file:///C:/Users/Administrator/DigitalKnob/Development";
 var USE_FILESYSTEM = 0;
 var USE_NODEJS=0;
 
-
+/*
+function stringify(obj) {
+    var str = '';
+    for (var p in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
+}
+*/
 
 //###### console.log ######
 (function(con){
@@ -12,23 +22,37 @@ var USE_NODEJS=0;
 	var empty = {};
 	if(typeof ActiveXObject === "function"){
 		if(typeof WScript === "object"){
-			if(typeof WScript.StdOut !== "undefined")
-			var print = function(msg){ WScript.StdOut.Write(msg+"\n"); };
+			if(typeof WScript.StdOut !== "undefined"){
+				var print = function(msg){ 
+					WScript.StdOut.Write(msg+"\n"); 
+				};
+				var error = function(msg){
+					WScript.StdOut.Write("\x1b[31m"+msg+"\x1b[0m\n"); 
+				}
+			}
 		} else {
-			var print = function(msg){
-				// https://stackoverflow.com/a/52793021/688352
-				//var WScript_Shell = new ActiveXObject('WScript.Shell');
-				//var WShellExec = WScript_Shell.Exec("cmd /c echo "+msg);
-				if(typeof dkconsole === "object"){
+			// https://stackoverflow.com/a/52793021/688352
+			//var WScript_Shell = new ActiveXObject('WScript.Shell');
+			//var WShellExec = WScript_Shell.Exec("cmd /c echo "+msg);
+			if(typeof dkconsole === "object"){
+				var print = function(msg){
 					dkconsole.log(msg);
+				}
+				var error = function(msg){
+					dkconsole.error(msg);
 				}
 			}
 		}
 	}
 	var properties = 'memory'.split(',');
 	var methods = ('assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn').split(',');
-	while (prop = properties.pop()) con[prop] = con[prop] || empty;
-	while (method = methods.pop()) con[method] = con[method] || print;
+	while (prop = properties.pop()){
+		con[prop] = con[prop] || empty;
+	};
+	while (method = methods.pop()){
+		if(method === "error"){ con[method] = con[method] || error; }
+		else { con[method] = con[method] || print; }
+	}
 })(this.console = this.console || {});
 
 //############ NodeJS ############
@@ -492,8 +516,7 @@ if(typeof location === "object"){
 		queryString = location.href.split('?')[1];
 	}
 }
-dk_assert('queryString');
-console.log("queryString = "+typeof queryString);
+//dk_assert('queryString');
 
 //###### DKSCRIPT variables ######
 //if(dk_valid("ARGV") && ARGV.length > 0){
@@ -576,13 +599,13 @@ dk_assert('body_onload');
 //if(!dk_valid("FileSystem"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js"); 		}
 //if(!dk_valid("WshShell"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js"); 		}
 //if(!dk_valid("replaceAll"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js"); 		}
-if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js"); 		}
-//if(!dk_valid("DKPlugin"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DKPlugin.js"); 		}
-//if(!dk_valid("DKFile"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKFile.js"); 		}
-//if(!dk_valid("DKGui"))			    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKGui.js"); 		}
-//if(!dk_valid("DKErrorHandler"))	    { dk_source(DKJAVASCRIPT_DIR+"/functions/DKErrorHandler.js"); 		}
-//if(!dk_valid("dk_color"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(){}); }
-//dk_assert('dk_color');
+if(!dk_valid("dk_depend"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_depend.js"); 		}
+dk_depend("dk_color");
+//dk_depend("DKPlugin");
+//dk_depend("DKFile");
+//dk_depend("DKGui");
+//dk_depend("DKErrorHandler");
+//dk_depend("dk_color", function dk_color_callback(){}); }
 
 
 //############ DKTEST ############

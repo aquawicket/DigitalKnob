@@ -1,5 +1,3 @@
-if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); 		}
-if(!dk_valid("dk_assertPath"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); 	}
 
 
 //####################################################################

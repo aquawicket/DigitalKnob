@@ -1,4 +1,3 @@
-//if(!dk_valid("DK")){ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); }
 
 function runApp(){
 	dk_run("C:/Windows/System32/notepad.exe");

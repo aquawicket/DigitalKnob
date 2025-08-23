@@ -1,7 +1,7 @@
-//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js"); }
-if(!dk_valid("dk_debugFunc"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js"); }
-if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js"); }
-if(!dk_valid("dk_echo"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js"); }
+dk_depend("dk_debugFunc");
+//dk_depend("dk_env");
+//dk_depend("dk_echo");
+
 
 //################## dk_exec options #############################################
 if(!dk_valid("dk_exec_ECHO_STDOUT")){ var dk_exec_ECHO_STDOUT = 0; }
@@ -11,7 +11,7 @@ if(!dk_valid("dk_exec_ECHO_STDERR")){ var dk_exec_ECHO_STDERR = 0; }
 //#
 //#
 dk_exec = function dk_exec_f(){
-	//dk_debugFunc(0);
+	dk_debugFunc(0);
 	
 	var _ARGV_ = "";
 	for(var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
@@ -83,6 +83,9 @@ dk_exec = function dk_exec_f(){
 DKTEST = function DKTEST_f(){
 	dk_debugFunc(0);
 	
+	dk_exec_ECHO_STDOUT = 1;
+	dk_exec_ECHO_STDERR = 1;
+
 	//dk_exec("cmd /c dir");
 	dk_exec("dk_exec_TEST.cmd");
 	
