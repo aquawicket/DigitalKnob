@@ -190,7 +190,7 @@ DKTEST = function DKTEST_f(){
 	console.log("");
 	
 	console.log(black+bg_lblack+"           Styles             "+clr);
-	console.log("clr       "+clr+" default "+clr);
+	console.log("clr        "+clr+" default "+clr);
 	console.log("bold       "+bold+" bold "+clr);
 	console.log("dim        "+dim+" dim "+clr);
 	console.log("italic     "+italic+" italic "+clr);

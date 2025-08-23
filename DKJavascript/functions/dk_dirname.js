@@ -1,4 +1,4 @@
-//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); 		}
+
 
 //################################################################################
 //# dk_dirname(path)
@@ -8,13 +8,15 @@
 dk_dirname = function dk_dirname_f(){
 	//dk_debugFunc(1);
 	
-	dk_fileSystem = function dk_fileSystem_f(){
-		if(dk_valid("ActiveXObject")){
-			return new ActiveXObject("Scripting.FileSystemObject");
-		}
+	dk_depend("dk_fileSystem");
+	dk_dirname.value = dk_fileSystem.GetParentFolderName(arguments[0]);
+	
+	//###### output ######
+	if(typeof arguments[1] !== "undefined"){
+		arguments[1].value = dk_dirname.value;
+	} else {
+		console.log(dk_dirname.value);
 	}
-
-	dk_dirname.value = dk_fileSystem().GetParentFolderName(arguments[0]);
 	return dk_dirname.value;
 }
 
@@ -28,4 +30,5 @@ DKTEST = function DKTEST_f(){
 	
 	var myPath = "C:/Windows/System32";
 	console.log("dk_dirname('"+myPath+"') = "+dk_dirname(myPath));
+	console.log("dk_dirname.value = "+dk_dirname.value);
 }

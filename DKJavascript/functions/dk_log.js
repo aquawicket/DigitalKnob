@@ -1,5 +1,4 @@
-//if(!dk_valid("DK"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
-if(!dk_valid("dk_color"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function(){}); 	}
+dk_depend("dk_color");
 
 
 //############ dk_log SETTINGS ############
@@ -176,7 +175,19 @@ dk_log = function dk_log_f(){
 	if(eval('dk_log_'+_level_+'_ENABLE') !== 1){ return; }
 
 	//###### ECHO MESSAGE ######
-	console.log(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);
+	if(_level_ === "DEBUG") {
+		console.debug(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);
+	}
+	else if(_level_ === "ERROR"){
+		console.error(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);	
+	}
+	else if(_level_ === "WARNING"){
+		console.warn(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);	
+	} 
+	else {
+		console.log(eval('dk_log_'+_level_+'_COLOR')+eval('dk_log_'+_level_+'_TAG')+_message_+clr);
+	}
+	
 	
 	//###### TRACE ######
 	if(eval('dk_log_'+_level_+'_TRACE') === 1){ 
@@ -211,7 +222,7 @@ dk_log = function dk_log_f(){
 	//###### HALT ######
 	if(eval('dk_log_'+_level_+'_HALT') === 1){ 
 		console.log(eval('dk_log_'+_level_+'_COLOR')+"*** HALT_ON_"+_level_+" ***"+clr);
-		dk_exit(13);
+		dk_depend("dk_exit"); dk_exit(13);
 		dk_echo(clr);
 	}
 }

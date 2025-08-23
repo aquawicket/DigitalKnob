@@ -20,38 +20,68 @@ function stringify(obj) {
 	'use strict';
 	var prop, method;
 	var empty = {};
+	
+	//### print
 	if(typeof ActiveXObject === "function"){
 		if(typeof WScript === "object"){
 			if(typeof WScript.StdOut !== "undefined"){
-				var print = function(msg){ 
-					WScript.StdOut.Write(msg+"\n"); 
-				};
-				var error = function(msg){
-					WScript.StdOut.Write("\x1b[31m"+msg+"\x1b[0m\n"); 
-				}
+				var print = function(msg){ WScript.StdOut.Write(msg+"\n"); }
 			}
-		} else {
-			// https://stackoverflow.com/a/52793021/688352
-			//var WScript_Shell = new ActiveXObject('WScript.Shell');
-			//var WShellExec = WScript_Shell.Exec("cmd /c echo "+msg);
-			if(typeof dkconsole === "object"){
-				var print = function(msg){
-					dkconsole.log(msg);
-				}
-				var error = function(msg){
-					dkconsole.error(msg);
-				}
-			}
-		}
+		}		
+	} else if(typeof dkconsole === "object"){
+		var print = function(msg){ dkconsole.log(msg); }
+	} else {
+		alert("ERROR in console");
 	}
+
+  //var assert         = function(msg){ print(msg); }
+  //var count          = function(msg){ print(msg); }
+	var debug          = function(msg){ print("\x1b[94m"+msg+"\x1b[0m"); }
+  //var dir            = function(msg){ print(msg); }
+  //var dirxml         = function(msg){ print(msg); }
+	var info           = function(msg){ print("\x1b[37m"+msg+"\x1b[0m"); }
+	var error          = function(msg){ print("\x1b[91m"+msg+"\x1b[0m"); }
+  //var exception      = function(msg){ print(msg); }
+  //var group          = function(msg){ print(msg); }
+  //var groupCollapsed = function(msg){ print(msg); }
+  //var groupEnd       = function(msg){ print(msg); }
+  //var log            = function(msg){ print(msg); }
+  //var markTimeline   = function(msg){ print(msg); }
+  //var profile        = function(msg){ print(msg); }
+  //var profileEnd     = function(msg){ print(msg); }
+  //var time           = function(msg){ print(msg); }
+  //var timeEnd        = function(msg){ print(msg); }
+  //var trace          = function(msg){ print(msg); }
+	var warn           = function(msg){ print("\x1b[33m"+msg+"\x1b[0m"); }
+	
+		
 	var properties = 'memory'.split(',');
 	var methods = ('assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn').split(',');
 	while (prop = properties.pop()){
 		con[prop] = con[prop] || empty;
-	};
+	}
 	while (method = methods.pop()){
-		if(method === "error"){ con[method] = con[method] || error; }
-		else { con[method] = con[method] || print; }
+		     if(method === "")              { con[method] = con[method] || print;          }
+	  //else if(method === "assert")        { con[method] = con[method] || assert;         }
+	  //else if(method === "count")         { con[method] = con[method] || count;          }
+		else if(method === "debug")         { con[method] = con[method] || debug;          }
+	  //else if(method === "dir")	        { con[method] = con[method] || dir;            }
+	  //else if(method === "dirxml")        { con[method] = con[method] || dirxml;         }
+		else if(method === "info")          { con[method] = con[method] || info;           }
+		else if(method === "error")         { con[method] = con[method] || error;          }
+	  //else if(method === "exception")     { con[method] = con[method] || exception;      }
+	  //else if(method === "group")         { con[method] = con[method] || group;          }
+	  //else if(method === "groupCollapsed"){ con[method] = con[method] || groupCollapsed; }
+	  //else if(method === "groupEnd")      { con[method] = con[method] || groupEnd;       }
+	  //else if(method === "log")           { con[method] = con[method] || log;            }
+	  //else if(method === "markTimeline")  { con[method] = con[method] || markTimeline;   }
+	  //else if(method === "profile")       { con[method] = con[method] || profile;        }
+	  //else if(method === "profileEnd")    { con[method] = con[method] || profileEnd;     }
+	  //else if(method === "time")          { con[method] = con[method] || time;           }
+	  //else if(method === "timeEnd")       { con[method] = con[method] || timeEnd;        }
+	  //else if(method === "trace")         { con[method] = con[method] || trace;          }	
+		else if(method === "warn")          { con[method] = con[method] || warn;           }
+		else                                { con[method] = con[method] || print;          }
 	}
 })(this.console = this.console || {});
 
@@ -81,7 +111,6 @@ dk_valid = function(){
 		console.error("dk_valid(): requires a valid 'this' object.");
 		return -1;
 	}
-	
 	var arry = arguments[0].split(".");
 	if(typeof this[arry[0]] === "undefined"){
 		//console.error("dk_valid(): "+arry[0]+" is invalid.");
@@ -117,13 +146,6 @@ dk_valid = function(){
 dk_assert = function(object){
 	if(!dk_valid(object)){ console.error(object+" is invalid\n"); }
 }
-
-
-
-
-
-
-
 
 
 
@@ -246,7 +268,7 @@ console.log("DKBrowser() = "+DKBrowser());
 
 
 //############ ARGV, ARGC ############
-if(dk_valid("WScript")){
+if(dk_valid("WScript.Arguments")){
 	ARGC = WScript.Arguments.Count();
 	var ARGV = new Array(ARGC);
     for(var i = 0; i < ARGV.length; ++i){
@@ -256,6 +278,8 @@ if(dk_valid("WScript")){
 	//console.log("ARGV = "+ARGV+"\n");
 	//console.log("ARGC = "+ARGC+"\n");
 }
+dk_assert("ARGV");
+dk_assert("ARGC");
 
 
 

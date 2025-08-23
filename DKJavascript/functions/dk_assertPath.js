@@ -9,7 +9,7 @@ dk_assertPath = function dk_assertPath_f(){
 	
 	var argv = "";
 	for (var i = 0; i < arguments.length; i++){ argv += arguments[i]; }
-	console.log('dk_assertPath('+argv+')');
+	//console.log('dk_assertPath('+argv+')');
 	
 	dk_depend("dk_fileSystem");
 	dk_assert("dk_fileSystem.FolderExists");

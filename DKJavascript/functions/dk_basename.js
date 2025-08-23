@@ -18,7 +18,7 @@ dk_basename = function dk_basename_f(){
 	} else {
 		console.log(dk_basename.value);
 	}
-	return(dk_basename.value);
+	return dk_basename.value;
 }
 
 
