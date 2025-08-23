@@ -4,18 +4,18 @@ if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js"); 
 if(!dk_valid("dk_echo"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js"); }
 
 //################## dk_exec options #############################################
-if(!dk_valid("dk_exec_ECHO_STDOUT")){ var dk_exec_ECHO_STDOUT = 1; }
-if(!dk_valid("dk_exec_ECHO_STDERR")){ var dk_exec_ECHO_STDERR = 1; }
+if(!dk_valid("dk_exec_ECHO_STDOUT")){ var dk_exec_ECHO_STDOUT = 0; }
+if(!dk_valid("dk_exec_ECHO_STDERR")){ var dk_exec_ECHO_STDERR = 0; }
 //################################################################################
 //# dk_exec()
 //#
 //#
 dk_exec = function dk_exec_f(){
-	dk_debugFunc(0);
+	//dk_debugFunc(0);
 	
 	var _ARGV_ = "";
 	for(var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
-	console.log("dk_exec("+_ARGV_+")");
+	//console.log("dk_exec("+_ARGV_+")");
 
 	//ComSpec = dk_env("ComSpec")
 	WScript_Shell = new ActiveXObject("WScript.Shell");
@@ -43,7 +43,7 @@ dk_exec = function dk_exec_f(){
 		var stdout = "";
 		var stderr = "";
 
-		dk_echo("\n######################## STDOUT ########################");
+		//dk_echo("\n######################## STDOUT ########################");
 		dk_exec.stdout = [];
 		//while(!oExec.Status){
 		while(!oExec.StdOut.AtEndOfStream){
@@ -57,7 +57,7 @@ dk_exec = function dk_exec_f(){
 			WScript.StdOut.Write(stdout);
 		}
 		
-		dk_echo("\n######################## STDERR ########################");
+		//dk_echo("\n######################## STDERR ########################");
 		dk_exec.stderr = [];
 		while(!oExec.StdErr.AtEndOfStream){
 			dk_exec.stderr.push(oExec.StdErr.ReadLine());

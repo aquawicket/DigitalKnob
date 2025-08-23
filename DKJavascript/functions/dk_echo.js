@@ -25,7 +25,10 @@ function loadScript(url, callback){
 //#     @msg    - The message to print
 //#
 dk_echo = function dk_echo_f(){
-	console.log(arguments[0]);
+	
+	if(arguments[0]){
+		console.log(arguments[0]);
+	}	
 }
 
 
