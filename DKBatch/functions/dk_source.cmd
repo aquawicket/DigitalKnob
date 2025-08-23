@@ -78,5 +78,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	del "dk_info.cmd"
 	pause
     %dk_call% dk_source2 dk_info
-    call dk_info "test message using dk_source2 to download it first"
+    call dk_info "test dk_info using dk_source2 to download it first"
 %endfunction%

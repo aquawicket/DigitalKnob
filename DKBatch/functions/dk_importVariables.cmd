@@ -452,6 +452,4 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "CURRENT_IMPORT=%DKIMPORTS_DIR%/php-src"
 	%dk_call% dk_importVariables "https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip"
 	%dk_call% dk_importVariables PRINTVARS
-	
-	pause
 %endfunction%

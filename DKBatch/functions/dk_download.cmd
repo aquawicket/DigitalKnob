@@ -18,8 +18,6 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
 	
-	pause
-   
     set "url=%~1"
     set "destination=%~2"	
 	if /i "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
