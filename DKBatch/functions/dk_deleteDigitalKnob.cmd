@@ -24,9 +24,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	echo ((goto) 2^>nul ^& del "%TEMP%\delete_DK.cmd" ^& cmd /c exit /b 0) >> "%TEMP%\delete_DK.cmd"
 ::	start "" /MIN "%TEMP%\delete_DK.cmd" & exit
 	
-	call :deleteParentFolder&exit /b
-	:deleteParentFolder
-	start /b "" cmd /c rd /s /q "%DIGITALKNOB_DIR:/=\%"&exit /b 11
+	(
+		cd %USERPROFILE% 
+		start /b "" cmd /c rd /s /q "%DIGITALKNOB_DIR:/=\%"
+		%return%
+	)
 
 %endfunction%
 
