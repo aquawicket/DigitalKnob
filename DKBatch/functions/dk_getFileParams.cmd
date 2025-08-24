@@ -16,6 +16,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_file_=%~1"
 	set "_file_=%_file_:\=/%"
 		
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"	
+	set "DKARCHIVE=C:/DKOffline/DigitalKnob.tar.gz"
+	if NOT EXIST "%_file_%" (
+		if EXIST "%DKARCHIVE%" (
+			call set "tar_file=%%_file_:%DIGITALKNOB_DIR%/=%%"
+			tar -zxf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" %tar_file%
+		)
+	)
+	
+	::### Download the file if missing
 	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 	%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
 	if NOT EXIST "%_file_%" (
