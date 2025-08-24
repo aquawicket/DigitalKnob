@@ -86,7 +86,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
-	if EXIST "%DKOFFLINE%" (
+	if defined DKOFFLINE (
 		%dk_call% dk_echo "%bg_yellow%%black%###### OFFLINE MODE ###### OFFLINE MODE ###### OFFLINE MODE ######%clr%"
 	)
 	
@@ -225,8 +225,8 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_initFiles
 	%pushStack%
-	::if NOT defined DKOFFLINE 				(set "DKOFFLINE=%SystemDrive%/DKOffline")
-	if NOT defined DKARCHIVE 				(set "DKARCHIVE=%DKOFFLINE%/%DIGITALKNOB%.tar.gz")
+	if NOT defined DKSTORAGE_DIR			(set "DKSTORAGE_DIR=%SystemDrive%/DKStorage")
+	if NOT defined DKARCHIVE 				(set "DKARCHIVE=%DKSTORAGE_DIR%/%DIGITALKNOB%.tar.gz")
 	if NOT defined DKBRANCH_DIR				(set "DKBRANCH_DIR=%USERPROFILE:\=/%/DigitalKnob/Development")
 	if EXIST "%DKARCHIVE%" (
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd" 			(tar -zxf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_download.cmd)

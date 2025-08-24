@@ -50,13 +50,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_set Target_Env		%Target_Env_Cache%
 		%dk_call% dk_set Target_Type	%Target_Type_Cache%
 	)
-    if "%dk_keyboardInput%" equ "1" (
-		if EXIST "%DKOFFLINE%/DigitalKnob.git" (
-			%dk_call% dk_gitUpdate "%DKOFFLINE%/DigitalKnob.git" Development
-		) else (
-			%dk_call% dk_gitUpdate "https://github.com/aquawicket/DigitalKnob.git" Development
-		)
-	)
+    if "%dk_keyboardInput%" equ "1"  %dk_call% dk_gitUpdate
     if "%dk_keyboardInput%" equ "2"  %dk_call% dk_gitCommit
     if "%dk_keyboardInput%" equ "3"  %dk_call% dk_downloadDK
     if "%dk_keyboardInput%" equ "4"  %dk_call% dk_pushAssets

@@ -72,7 +72,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_importVariables %url% %ARGN%
 	%dk_call% dk_assertVar CURRENT_PLUGIN
 
-::	if "%DKOFFLINE%" neq "1" (
+::	if NOT defined DKOFFLINE (
 ::		rem ###### Import from Git Repository ######
 ::		%dk_call% dk_getExtension %url% extension
 ::		if "!extension!" equ ".git" (

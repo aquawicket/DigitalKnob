@@ -77,13 +77,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     "%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "%commit_msg%"
 	
 	
-	
-	if NOT defined DKOFFLINE (set "DKOFFLINE=%SystemDrive%/DKOffline")
-	::### Backup the local repository to a tar.gz file
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" archive --format=tar.gz Development -0 -o "%DKOFFLINE%/DigitalKnob.tar.gz"
-	
-	::### Backup the local repository to a bundle file
-	%dk_call% dk_gitBackup "%DKBRANCH_DIR%" "%DKOFFLINE%/DigitalKnob.git" OVERWRITE
+	if EXIST "%DKSTORAGE_DIR%" (
+		::### Backup the local repository to a tar.gz file
+		"%GIT_EXE%" -C "%DKBRANCH_DIR%" archive --format=tar.gz Development -0 -o "%DKSTORAGE_DIR%/DigitalKnob.tar.gz"
+		
+		::### Backup the local repository to a bundle file
+		%dk_call% dk_gitBackup "%DKBRANCH_DIR%" "%DKSTORAGE_DIR%/DigitalKnob.git" OVERWRITE
+	)
 	
 	
 	

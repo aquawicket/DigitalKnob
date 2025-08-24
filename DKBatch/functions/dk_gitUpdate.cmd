@@ -17,11 +17,10 @@ set "dk_gitUpdate_BACKUP=1"
     if "%~1" neq "" (
 		set "_git_url_=%~1"
 	) else (
-		if EXIST "%DKOFFLINE%/DigitalKnob.git" (
-			set "_git_url_=https://github.com/aquawicket/DigitalKnob.git"
-		) else (
-			set "_git_url_=%DKOFFLINE%/DigitalKnob.git"
-		)
+		if defined DKOFFLINE (
+			if EXIST "%DKSTORAGE_DIR%/DigitalKnob.git" (set "_git_url_=%DKSTORAGE_DIR%/DigitalKnob.git")
+		) 
+		if NOT defined _git_url_ (set "_git_url_=https://github.com/aquawicket/DigitalKnob.git")
 	)
 	%dk_call% dk_echo "Remote git url = %_git_url_%"
     if "%~2" neq "" (set "DKBRANCH=%~2") else (set "DKBRANCH=Development")

@@ -2,7 +2,7 @@
 setlocal enableDelayedExpansion
 
 set "ONLINE=1"
-set "DKOFFLINE=C:/DKOFFLINE"
+set "DKSTORAGE_DIR=%SystemDrive%/DKStorage"
 set "RELOAD_REPO=1"
 set "RELOAD_BUNDLE=1"
 set "GIT_COMMIT=1"
@@ -11,10 +11,10 @@ set "EMAIL=aquawicket@hotmail.com"
 set "BRANCH=Development"
 set "REPO_URL=https://github.com/aquawicket/DigitalKnob.git"
 set "REPO_PATH=%USERPROFILE:\=/%/DigitalKnob/%BRANCH%"
-set "REPO_BUNDLE=%DKOFFLINE%/DigitalKnob.git"
+set "REPO_BUNDLE=%DKSTORAGE_DIR%/DigitalKnob.git"
 set "GIT_URL=https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
-set "GIT_INSTALL=%DKOFFLINE%/PortableGit-2.46.2-64-bit.7z.exe"
-set "GIT_EXE=%DKOFFLINE%/PortableGit/bin/git.exe"
+set "GIT_INSTALL=%DKSTORAGE_DIR%/PortableGit-2.46.2-64-bit.7z.exe"
+set "GIT_EXE=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
 
 
 	rem # Download: https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe
