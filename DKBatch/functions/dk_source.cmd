@@ -18,8 +18,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_fnc_=%~1"
 	if EXIST "%_fnc_%" exit /b 0
 		
-	if NOT defined DKHOME_DIR 	set "DKHOME_DIR=%USERPROFILE:\=/%"
-	if NOT defined DKHTTP_DIR 	set "DKHTTP_DIR=https://raw.githubusercontent.com/aquawicket"
+	if NOT defined DKHOME_DIR 	(set "DKHOME_DIR=%USERPROFILE:\=/%")
+	if NOT defined DKHTTP_DIR 	(set "DKHTTP_DIR=https://raw.githubusercontent.com/aquawicket")
+	if NOT defined DKBRANCH_DIR	(%dk_call% dk_DKBRANCH_DIR)
 	
 	::############ Correct the path delimiters ############
 	set "_fnc_=%_fnc_:\=/%"
@@ -30,9 +31,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "_fnc__noext=%_fnc_:.*=%
 	if "%_fnc_%" equ "%_fnc__noext%" (set "_fnc_=%_fnc_%.cmd")
 	if EXIST "%_fnc_%" exit /b 0
-
+	
+	::### Atempt to extract the file from DigitalKnob.tar.gz
+	set "DKARCHIVE=C:/DKOffline/DigitalKnob.tar.gz"
+	if EXIST "%DKARCHIVE%" (
+		echo Extracting "%DKARCHIVE%" %_fnc_%
+		tar -tf "%DKARCHIVE%" DKBatch/functions/%_fnc_% 1>nul 2>nul && (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" DKBatch/functions/%_fnc_%)
+		if EXIST "%DKBATCH_FUNCTIONS_DIR_%%_fnc_%" exit /b 0
+	)
+	
 	::###### If func doesn't contain C:/  ...prepend C:/Users/Administrator/DigitalKnob/Development/DKBash/functions/ ######
-	if "%_fnc_:C:/=%" equ "%_fnc_%" (set "_fnc_=%DKHOME_DIR%/DigitalKnob/Development/DKBatch/functions/%_fnc_%")
+	if "%_fnc_:C:/=%" equ "%_fnc_%" (set "_fnc_=%DKBATCH_FUNCTIONS_DIR_%%_fnc_%")
 	if EXIST "%_fnc_%" exit /b 0
 
 	::############ Download the file if missing #############
@@ -47,17 +56,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dirn:~-1%" equ "\" set "dirn=%dirn:~0,-1%"
 	if "%dirn:~-1%" equ "/" set "dirn=%dirn:~0,-1%"
 	if NOT EXIST "%dirn%" mkdir "%dirn%"	
-
-	::### Atempt to extract the file from DigitalKnob.tar.gz
-	set "DKARCHIVE=C:/DKOffline/DigitalKnob.tar.gz"
-	set "DKHTTPRAW=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development"
-	call set "RELATIVE=%%_url_:%DKHTTPRAW%/=%%"
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if EXIST "%DKARCHIVE%" (
-		rem echo Extracting %DKARCHIVE% %RELATIVE% to %_fnc_%
-		tar -tf "%DKARCHIVE%" %RELATIVE% 1>nul 2>nul && (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" %RELATIVE%)
-		if EXIST "%_fnc_%" exit /b 0
-	)
 	
 	::echo curl.exe -L "%_url_%" -o "%_fnc_%"
 	if NOT EXIST "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"
