@@ -4,12 +4,17 @@
 setlocal enableDelayedExpansion
 if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 
-	if NOT defined DIGITALKNOB (set "DIGITALKNOB=DigitalKnob")
-	if NOT defined DKBRANCH (set "DKBRANCH=Development")
-	if NOT defined HDK (set "HDK=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/DK.cmd")
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/%DIGITALKNOB%/%DKBRANCH%/DKBatch/functions/")
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_%" >nul 2>&1)
-	set "DK_CMD=%DKBATCH_FUNCTIONS_DIR_%DK.cmd"
+	if NOT defined DIGITALKNOB				(set "DIGITALKNOB=DigitalKnob")
+	if NOT defined DKBRANCH 				(set "DKBRANCH=Development")
+	if NOT defined DIGITALKNOB_DIR 			(set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/%DIGITALKNOB%")
+	if NOT defined DKBRANCH_DIR 			(set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
+	if NOT defined DKHTTP 					(set "DKHTTP=https://raw.githubusercontent.com/aquawicket/%DIGITALKNOB%/%DKBRANCH%")
+	if NOT defined DKSTORAGE_DIR			(set "DKSTORAGE_DIR=%SystemDrive%/DKStorage")
+	if NOT defined DKARCHIVE 				(set "DKARCHIVE=%DKSTORAGE_DIR%/%DIGITALKNOB%.tar.gz")
+	if NOT defined DKBATCH_FUNCTIONS_DIR_ 	(set "DKBATCH_FUNCTIONS_DIR_=%DKBRANCH_DIR%/DKBatch/functions/")
+	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (mkdir "%DKBATCH_FUNCTIONS_DIR_:/=\%" >nul 2>&1)
+	set "DK_CMD=%DKBRANCH_DIR%/DKBatch/functions/DK.cmd")
+	set "HDK_CMD=%DKHTTP%/DKBatch/functions/DK.cmd")
 	
 	::###### TEMPORARY for WinPE #######
 	if "%SystemDrive%" equ "X:" (
@@ -22,15 +27,16 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
 	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
 	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
-	set "GIT_REMOTE_HTTPS_EXE=%USERPROFILE:\=/%/%DIGITALKNOB%/DKTools/git-portable-2.46.2-64-bit/mingw64/libexec/git-core/git-remote-https.exe"
 
 	::###### firewall allow ######
 	call :dk_firewallAllow curl "%CURL_EXE%"
 	call :dk_firewallAllow certutil "%CERTUTIL_EXE%"
 	call :dk_firewallAllow bitsadmin "%BITSADMIN_EXE%"
 	call :dk_firewallAllow powershell "%POWERSHELL_EXE%"
-	call :dk_firewallAllow git-remote-https "%GIT_REMOTE_HTTPS_EXE%"
-
+	
+	if NOT EXIST "%DK_CMD%" (
+		tar -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/DK.cmd
+	)
 	if NOT EXIST "%DK_CMD%" (
 		"%CURL_EXE%" -L "!HDK!" -o "!DK_CMD!" >nul 2>&1 || ^
 		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK_CMD!" >nul 2>&1 || ^
@@ -38,6 +44,7 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 		"%POWERSHELL_EXE%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK_CMD!')" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
+	
 
 	call "%DK_CMD%" "%~0" %*
 
