@@ -76,9 +76,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### Commit the local repository
     "%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "%commit_msg%"
 	
-	::### Backup the local repository to a bundle file
+	
+	
 	if NOT defined DKOFFLINE (set "DKOFFLINE=%SystemDrive%/DKOffline")
+	::### Backup the local repository to a tar.gz file
+	"%GIT_EXE%" -C "%DKBRANCH_DIR%" archive --format=tar.gz Development > "%DKOFFLINE%/DigitalKnob.tar.gz"
+	
+	::### Backup the local repository to a bundle file
 	%dk_call% dk_gitBackup "%DKBRANCH_DIR%" "%DKOFFLINE%/DigitalKnob.git" OVERWRITE
+	
+	
 	
 	::### Push to the remote repository
 	set "REPO_URL=https://github.com/aquawicket/DigitalKnob.git"
