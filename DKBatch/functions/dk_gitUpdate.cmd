@@ -51,14 +51,14 @@ set "dk_gitUpdate_BACKUP=1"
 			%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
 			set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			cd "!DIGITALKNOB_DIR!"
-			rd /s /q "%DKBRANCH_DIR%"
+			set "delete_repo=1"
 		)
 		rem ####################################################################
-		
-		rem ###### Clone into empty branch directory ######
-		"%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
+		set "clone_repo=1"	
 	)
 	
+	if defined delete_repo rd /s /q "%DKBRANCH_DIR%"
+	if defined clone_repo "%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
 	::###### Update ######
 	"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
 	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
