@@ -277,9 +277,10 @@ if(dk_valid("WScript.Arguments")){
     }
 	//console.log("ARGV = "+ARGV+"\n");
 	//console.log("ARGC = "+ARGC+"\n");
+	dk_assert("ARGV");
+	dk_assert("ARGC");
 }
-dk_assert("ARGV");
-dk_assert("ARGC");
+
 
 
 

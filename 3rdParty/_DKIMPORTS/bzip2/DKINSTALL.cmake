@@ -25,7 +25,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 ### DEPEND ###
 #dk_depend(libgcc)
 dk_depend(python3)
-dk_depend(pytest)
+#dk_depend(pytest)
 dk_depend(msys2)
 
 ### IMPORT ###
@@ -34,11 +34,11 @@ dk_assertVar(BZIP2)
 
 dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${BZIP2_DEBUG_DIR}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2_RELEASE_DIR}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${BZIP2.Debug_Dir}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2.Release_Dir}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${BZIP2_DEBUG_DIR}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2_RELEASE_DIR}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${BZIP2.Debug_Dir}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${BZIP2.Release_Dir}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###

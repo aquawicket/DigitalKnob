@@ -149,6 +149,20 @@ function(dk_Target_Tuple)
 		endif()
 	endif()
 	
+	
+	# GENERATOR			Target_Config		  		  	Target_Build
+	# -----------------------------------------------------------------------
+	# Visual Studio  	${Target_Tuple}					${Target_Tuple}/${Target_Type}		
+	# XCODE			    ${Target_Tuple}					${Target_Tuple}/${Target_Type} 
+	# MinGW Makefiles   ${Target_Tuple}/${Target_Type}	${Target_Tuple}/${Target_Type} 
+	# Unix Makefiles    ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}  
+	# ./configure       ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}
+
+	# https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
+	# https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
+	# https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
+
+
 	###### FINALIZE ######	
 	dk_assertVar(Target_Tuple)
 	dk_assertVar(${Target_Tuple})

@@ -19,10 +19,10 @@ dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH
 dk_assertPath("${WEBVIEW2_IN_MINGW}")
 dk_include("${WEBVIEW2_IN_MINGW}/WebView/include")
 
-set(WEBVIEW2_IN_MINGW_DEBUG_DIR "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Debug")
-set(WEBVIEW2_IN_MINGW_RELEASE_DIR "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Release")
-dk_libDebug("${WEBVIEW2_IN_MINGW_DEBUG_DIR}/webview2.exe")
-dk_libRelease("${WEBVIEW2_IN_MINGW_RELEASE_DIR}/webview2.exe")
+set(WEBVIEW2_IN_MINGW.Debug_Dir "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Debug")
+set(WEBVIEW2_IN_MINGW.Release_Dir "${WEBVIEW2_IN_MINGW}/${Target_Tuple}/Release")
+dk_libDebug("${WEBVIEW2_IN_MINGW.Debug_Dir}/webview2.exe")
+dk_libRelease("${WEBVIEW2_IN_MINGW.Release_Dir}/webview2.exe")
 
 if(Windows_X86)
 	set(ARCH "Win32")
@@ -39,7 +39,7 @@ dk_configure(${WEBVIEW2_IN_MINGW} -DARCH=${ARCH})
 
 dk_build()
 
-dk_copy(${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll ${WEBVIEW2_IN_MINGW_DEBUG_DIR}/WebView2Loader.dll)
+dk_copy(${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll ${WEBVIEW2_IN_MINGW.Debug_Dir}/WebView2Loader.dll)
 
 
 

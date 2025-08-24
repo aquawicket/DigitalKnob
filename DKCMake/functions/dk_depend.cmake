@@ -41,6 +41,7 @@ function(dk_depend plugin) #target
 	if(NOT EXISTS "${PLUGIN}")
 		
 		###### Push Plugin to the PLUGIN_STACK ######
+		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
 		
 		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
@@ -48,6 +49,7 @@ function(dk_depend plugin) #target
 	
 		###### Pop Plugin from the PLUGIN_STACK ######
 		dk_envList(PLUGIN POP)
+		dk_debug("############################## ${PLUGIN} EXIT ##############################\n\n")
 
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")

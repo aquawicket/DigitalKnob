@@ -194,23 +194,24 @@ function(dk_importVariables)
 	############# PLUGIN.Target_Directries ##############
 	#####################################################
 	### PLUGIN.Tuple_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
-	set(PLUGIN.Tuple_Dir "${PLUGIN.Install.Path}/${Target_Tuple}" CACHE INTERNAL "")
+	set(PLUGIN.Tuple_Dir "${PLUGIN.Install.Path}/${Target_Tuple}" 	CACHE INTERNAL "")
 	dk_debug("PLUGIN.Tuple_Dir = '${PLUGIN.Tuple_Dir}'")
 	
 	### PLUGIN.Config_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	set(PLUGIN.Config_Dir "${PLUGIN.Install.Path}/${Config_Path}" CACHE INTERNAL "")
+	dk_validate(Target_Config "dk_Target_Config()")
+	set(PLUGIN.Config_Dir "${PLUGIN.Install.Path}/${Target_Config}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Config_Dir = '${PLUGIN.Config_Dir}'")
 
 	### PLUGIN.Build_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	set(PLUGIN.Build_Dir "${PLUGIN.Install.Path}/${Build_Path}" CACHE INTERNAL "")
+	set(PLUGIN.Build_Dir "${PLUGIN.Install.Path}/${Target_Build}" 	CACHE INTERNAL "")
 	dk_debug("PLUGIN.Build_Dir = '${PLUGIN.Build_Dir}'")
 
 	### PLUGIN.Debug_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	set(PLUGIN.Debug_Dir "${PLUGIN.Tuple_Dir}/${Debug_Dir}" CACHE INTERNAL "")
+	set(PLUGIN.Debug_Dir "${PLUGIN.Tuple_Dir}/${Debug_Dir}" 		CACHE INTERNAL "")
 	dk_debug("PLUGIN.Debug_Dir = '${PLUGIN.Debug_Dir}'")
 
 	### PLUGIN.Release_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
-	set(PLUGIN.Release_Dir "${PLUGIN.Tuple_Dir}/${Release_Dir}" CACHE INTERNAL "")
+	set(PLUGIN.Release_Dir "${PLUGIN.Tuple_Dir}/${Release_Dir}" 	CACHE INTERNAL "")
 	dk_debug("PLUGIN.Release_Dir = '${PLUGIN.Release_Dir}'")
 
 	### PLUGIN

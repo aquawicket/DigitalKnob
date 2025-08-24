@@ -32,16 +32,16 @@ dk_import("${SDL_TTF_DL}" PATCH)
 
 
 ### LINK ###
-dk_include			(${SDL_TTF_DIR})
+dk_include			(${SDL_TTF})
 if(MSVC)
-	dk_libDebug		(${SDL_TTF_CONFIG_DIR}/lib/${Debug_Dir}/SDL_ttf.lib)
-	dk_libRelease	(${SDL_TTF_CONFIG_DIR}/lib/${Release_Dir}/SDL_ttf.lib)
+	dk_libDebug		(${SDL_TTF.Config_Dir}/lib/${Debug_Dir}/SDL_ttf.lib)
+	dk_libRelease	(${SDL_TTF.Config_Dir}/lib/${Release_Dir}/SDL_ttf.lib)
 elseif(XCODE)
-	dk_libDebug		(${SDL_TTF_CONFIG_DIR}/lib/${Debug_Dir}/SDL_ttf.a)
-	dk_libRelease	(${SDL_TTF_CONFIG_DIR}/lib/${Release_Dir}/SDL_ttf.a)
+	dk_libDebug		(${SDL_TTF.Config_Dir}/lib/${Debug_Dir}/SDL_ttf.a)
+	dk_libRelease	(${SDL_TTF.Config_Dir}/lib/${Release_Dir}/SDL_ttf.a)
 else()
-	dk_libDebug		(${SDL_TTF_CONFIG_DIR}/lib/SDL_ttf.a)
-	dk_libRelease	(${SDL_TTF_CONFIG_DIR}/lib/SDL_ttf.a)
+	dk_libDebug		(${SDL_TTF.Config_Dir}/lib/SDL_ttf.a)
+	dk_libRelease	(${SDL_TTF.Config_Dir}/lib/SDL_ttf.a)
 endif()
 
 

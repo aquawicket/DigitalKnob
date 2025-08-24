@@ -21,22 +21,22 @@ dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)
 
 ### PATCH ###
 if(MSVC)
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE)" 	"set(CMAKE_CXX_FLAGS_RELEASE)")
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG)" 		"set(CMAKE_CXX_FLAGS_DEBUG)")
+	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE)" 	"set(CMAKE_CXX_FLAGS_RELEASE)")
+	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG)" 		"set(CMAKE_CXX_FLAGS_DEBUG)")
 else()
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE" 	"#set(CMAKE_CXX_FLAGS_RELEASE")
-	dk_fileReplace(${RLOTTIE_DIR}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG" 	"#set(CMAKE_CXX_FLAGS_DEBUG")
+	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE" 	"#set(CMAKE_CXX_FLAGS_RELEASE")
+	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG" 	"#set(CMAKE_CXX_FLAGS_DEBUG")
 endif()
 
 ### LINK ###
-dk_include			(${RLOTTIE_DIR}/inc						rlottie_DIR)
-dk_include			(${RLOTTIE_CONFIG_DIR}					rlottie_INCLUDE_DIR)
+dk_include			(${RLOTTIE}/inc							rlottie_DIR)
+dk_include			(${RLOTTIE.Config_Dir}					rlottie_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${RLOTTIE_DEBUG_DIR}/rlottie.lib)
-	dk_libRelease	(${RLOTTIE_RELEASE_DIR}/rlottie.lib)
+	dk_libDebug		(${RLOTTIE.Debug_Dir}/rlottie.lib)
+	dk_libRelease	(${RLOTTIE.Release_Dir}/rlottie.lib)
 else()
-	dk_libDebug		(${RLOTTIE_DEBUG_DIR}/librlottie.a)
-	dk_libRelease	(${RLOTTIE_RELEASE_DIR}/librlottie.a)
+	dk_libDebug		(${RLOTTIE.Debug_Dir}/librlottie.a)
+	dk_libRelease	(${RLOTTIE.Release_Dir}/librlottie.a)
 endif()
 
 ### 3RDPARTY LINK ###

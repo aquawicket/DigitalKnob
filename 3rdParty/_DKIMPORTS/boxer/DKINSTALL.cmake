@@ -32,14 +32,14 @@ dk_import			(${Boxer_Import})
 
 ### LINK ###
 dk_include			(${BOXER}/include)
-dk_include			(${BOXER_CONFIG_DIR})
+dk_include			(${BOXER.Config_Dir})
 
 if(MSVC)
-	dk_libDebug		(${BOXER_DEBUG_DIR}/Boxer.lib)
-	dk_libRelease	(${BOXER_RELEASE_DIR}/Boxer.lib)
+	dk_libDebug		(${BOXER.Debug_Dir}/Boxer.lib)
+	dk_libRelease	(${BOXER.Release_Dir}/Boxer.lib)
 else()
-	dk_libDebug		(${BOXER_DEBUG_DIR}/libBoxer.a)
-	dk_libRelease	(${BOXER_RELEASE_DIR}/libBoxer.a)
+	dk_libDebug		(${BOXER.Debug_Dir}/libBoxer.a)
+	dk_libRelease	(${BOXER.Release_Dir}/libBoxer.a)
 endif()
 
 ### GENERATE ###

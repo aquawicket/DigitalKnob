@@ -21,17 +21,17 @@ dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import			(${FFTW3_DL})
 
 ### LINK ###
-dk_include			(${FFTW3_DIR}/include)
+dk_include			(${FFTW3}/include)
 if(MSVC)
-	dk_libDebug		(${FFTW3_DEBUG_DIR}/fftw3.lib)
-	dk_libRelease	(${FFTW3_RELEASE_DIR}/fftw3.lib)
+	dk_libDebug		(${FFTW3.Debug_Dir}/fftw3.lib)
+	dk_libRelease	(${FFTW3.Release_Dir}/fftw3.lib)
 else()
-	dk_libDebug		(${FFTW3_DEBUG_DIR}/libfftw3.a)
-	dk_libRelease	(${FFTW3_RELEASE_DIR}/libfftw3.a)
+	dk_libDebug		(${FFTW3.Debug_Dir}/libfftw3.a)
+	dk_libRelease	(${FFTW3.Release_Dir}/libfftw3.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${FFTW3_DIR}
+dk_configure(${FFTW3}
 	-DBUILD_TESTS=OFF				# "Build tests" ON
 	-DENABLE_OPENMP=OFF				# "Use OpenMP for multithreading" OFF
 	-DENABLE_THREADS=OFF 			# "Use pthread for multithreading" OFF

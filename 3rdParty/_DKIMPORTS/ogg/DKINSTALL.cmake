@@ -30,20 +30,20 @@ dk_import(https://github.com/xiph/ogg/releases/download/v1.3.5/libogg-1.3.5.zip)
 
 
 ### LINK ###
-dk_include			(${OGG_DIR}/include				OGG_INCLUDE_DIR)
-dk_include			(${OGG_CONFIG_DIR}/include		OGG_INCLUDE_DIR2)
+dk_include			(${OGG}/include				OGG_INCLUDE_DIR)
+dk_include			(${OGG.Config_Dir}/include		OGG_INCLUDE_DIR2)
 if(MSVC)
-	dk_libDebug		(${OGG_DEBUG_DIR}/ogg.lib		OGG_LIBRARY_DEBUG)
-	dk_libRelease	(${OGG_RELEASE_DIR}/ogg.lib		OGG_LIBRARY_RELEASE)
+	dk_libDebug		(${OGG.Debug_Dir}/ogg.lib		OGG_LIBRARY_DEBUG)
+	dk_libRelease	(${OGG.Release_Dir}/ogg.lib		OGG_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${OGG_DEBUG_DIR}/libogg.a		OGG_LIBRARY_DEBUG)
-	dk_libRelease	(${OGG_RELEASE_DIR}/libogg.a	OGG_LIBRARY_RELEASE)
+	dk_libDebug		(${OGG.Debug_Dir}/libogg.a		OGG_LIBRARY_DEBUG)
+	dk_libRelease	(${OGG.Release_Dir}/libogg.a	OGG_LIBRARY_RELEASE)
 endif()
 
 
 ### 3RDPARTY AUTOCONF LINK ###
-#Debug_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_DEBUG_DIR}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
-#Release_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG_RELEASE_DIR}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#Debug_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG.Debug_Dir}/src/.libs		"CFLAGS=-I${OGG_INCLUDE_DIR2}")
+#Release_dk_set		(OGG_CONFIGURE --with-ogg-includes=${OGG_INCLUDE_DIR} --with-ogg-libraries=${OGG.Release_Dir}/src/.libs	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
 
 ### 3RDPARTY CMAKE LINK ###
 if(Debug)
@@ -55,20 +55,20 @@ endif()
 
 ### GENERATE ###
 #if(Android)
-dk_configure(${OGG_DIR} 
+dk_configure(${OGG} 
 	-DBUILD_FRAMEWORK=OFF				# "Build Framework bundle for OSX" OFF
 	-DINSTALL_CMAKE_PACKAGE_MODULE=ON	# "Install CMake package configuration module" ON
 	-DINSTALL_DOCS=OFF					# "Install documentation" ON
 	-DINSTALL_PKG_CONFIG_MODULE=ON)		# "Install ogg.pc file" ON
 
 #else()
-#	DEBUG_dk_chdir			(${OGG_DEBUG_DIR})
+#	DEBUG_dk_chdir			(${OGG.Debug_Dir})
 #	DEBUG_dk_exec			(${DKCONFIGURE_BUILD})
-#	RELEASE_dk_chdir		(${OGG_RELEASE_DIR})
+#	RELEASE_dk_chdir		(${OGG.Release_Dir})
 #	RELEASE_dk_exec			(${DKCONFIGURE_BUILD})
 #endif()
 
 
 ### BUILD ###
-dk_build			(${OGG_DIR})
+dk_build			(${OGG})
 

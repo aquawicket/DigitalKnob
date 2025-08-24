@@ -27,17 +27,17 @@ dk_import(https://github.com/mirror/libX11/archive/refs/tags/libX11-1.8.1.zip)
 
 ### LINK ###
 dk_include				(${LIBX11}/include)
-Unix_dk_libDebug		(${LIBX11_DEBUG_DIR}/liblibx11d.a)
-Unix_dk_libRelease		(${LIBX11_RELEASE_DIR}/liblibx11.a)
-Windows_dk_libDebug		(${LIBX11_DEBUG_DIR}/libx11d.lib)
-Windows_dk_libRelease	(${LIBX11_RELEASE_DIR}/libx11.lib)
+Unix_dk_libDebug		(${LIBX11.Debug_Dir}/liblibx11d.a)
+Unix_dk_libRelease		(${LIBX11.Release_Dir}/liblibx11.a)
+Windows_dk_libDebug		(${LIBX11.Debug_Dir}/libx11d.lib)
+Windows_dk_libRelease	(${LIBX11.Release_Dir}/libx11.lib)
 
 
 ### GENERATE / COMPILE ###
-DEBUG_dk_chdir			(${LIBX11_DEBUG_DIR})
+DEBUG_dk_chdir			(${LIBX11.Debug_Dir})
 DEBUG_dk_exec			(${DKCONFIGURE_BUILD})
 
-RELEASE_dk_chdir		(${LIBX11_RELEASE_DIR})
+RELEASE_dk_chdir		(${LIBX11.Release_Dir})
 RELEASE_dk_exec			(${DKCONFIGURE_BUILD})
 
 dk_build				(${LIBX11})

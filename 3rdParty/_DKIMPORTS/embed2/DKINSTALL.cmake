@@ -27,11 +27,11 @@ dk_import			("https://github.com/batterycenter/embed/archive/465081903d97ff1ed05
 ### LINK ###
 dk_include			(${EMBED}/include)
 if(Unix)
-	dk_libDebug		(${EMBED_DEBUG_DIR}/libembed.a)
-	dk_libRelease	(${EMBED_RELEASE_DIR}/libembed.a)
+	dk_libDebug		(${EMBED.Debug_Dir}/libembed.a)
+	dk_libRelease	(${EMBED.Release_Dir}/libembed.a)
 else()
-	dk_libDebug		(${EMBED_DEBUG_DIR}/libembed.lib)
-	dk_libRelease	(${EMBED_RELEASE_DIR}/libembed.lib)
+	dk_libDebug		(${EMBED.Debug_Dir}/libembed.lib)
+	dk_libRelease	(${EMBED.Release_Dir}/libembed.lib)
 endif()
 
 ### GENERATE ###

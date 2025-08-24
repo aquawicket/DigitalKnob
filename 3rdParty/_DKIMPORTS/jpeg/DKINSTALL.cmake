@@ -27,12 +27,12 @@ dk_import(https://www.ijg.org/files/jpegsr9d.zip)
 ### LINK ###
 dk_include			(${JPEG}										JPEG_INCLUDE_DIR)
 dk_include			(${JPEG}/${Target_Tuple}									JPEG_INCLUDE_DIR2)
-dk_include			(${JPEG_RELEASE_DIR})
+dk_include			(${JPEG.Release_Dir})
 Android_dk_include	(${JPEG}/${Target_Tuple}/${Target_Type}/jni)
-Unix_dk_libDebug	(${JPEG_DEBUG_DIR}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
-Unix_dk_libRelease	(${JPEG_RELEASE_DIR}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
-Windows_dk_libDebug		(${JPEG_DEBUG_DIR}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
-Windows_dk_libRelease	(${JPEG_RELEASE_DIR}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
+Unix_dk_libDebug	(${JPEG.Debug_Dir}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
+Unix_dk_libRelease	(${JPEG.Release_Dir}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
+Windows_dk_libDebug		(${JPEG.Debug_Dir}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
+Windows_dk_libRelease	(${JPEG.Release_Dir}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
 
 
 ### 3RDPARTY LINK ###
@@ -45,8 +45,8 @@ Windows_dk_set			(JPEG_CMAKE -DJPEG_INCLUDE_DIR=${JPEG_INCLUDE_DIR} -DJPEG_INCLU
 
 
 ### GENERATE ###
-dk_configure		(${JPEG_DIR})
+dk_configure		(${JPEG})
 
 
 ### COMPILE ###
-dk_build			(${JPEG_DIR} jpeg-static)
+dk_build			(${JPEG} jpeg-static)

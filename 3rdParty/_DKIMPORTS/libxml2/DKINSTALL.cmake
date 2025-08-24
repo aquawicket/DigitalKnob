@@ -19,16 +19,19 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
-dk_depend(libiconv)
+#if(NOT DEFINED LIBICONV)
+	dk_depend(libiconv)
+#endif()
 dk_depend(python3)
 dk_depend(xz)
 dk_depend(zlib)
 
 
 ### IMPORT ###
+dk_importVariables(${libxml2_Import})
 dk_import(${libxml2_Import})
 
 if(NOT EXISTS ${LIBXML2}/configure)
@@ -39,28 +42,28 @@ endif()
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${LIBXML2_DIR})
-dk_include				(${LIBXML2_DIR}/include 				LIBXML2_INCLUDE_DIR)
+dk_include				(${LIBXML2})
+dk_include				(${LIBXML2}/include 					LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2_CONFIG_DIR}					LIBXML2_INCLUDE_DIR2)
+	dk_include			(${LIBXML2.Config_Dir}					LIBXML2_INCLUDE_DIR2)
 else()
 	if(Debug)
-		dk_include    	(${LIBXML2_DEBUG_DIR}					LIBXML2_INCLUDE_DIR2)
+		dk_include    	(${LIBXML2.Debug_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
 	if(Release)
-		dk_include 		(${LIBXML2_RELEASE_DIR}					LIBXML2_INCLUDE_DIR2)
+		dk_include 		(${LIBXML2.Release_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
 endif()
 
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${LIBXML2_DEBUG_DIR}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBXML2_RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+		dk_libDebug		(${LIBXML2.Debug_Dir}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
+		dk_libRelease	(${LIBXML2.Release_Dir}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${LIBXML2_DEBUG_DIR}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBXML2_RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
+	dk_libDebug			(${LIBXML2.Debug_Dir}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
+	dk_libRelease		(${LIBXML2.Release_Dir}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
 endif()
 
 if(Debug)

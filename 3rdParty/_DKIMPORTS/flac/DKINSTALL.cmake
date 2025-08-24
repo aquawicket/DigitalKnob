@@ -31,15 +31,15 @@ dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz
 dk_include				(${FLAC}/include											FLAC_INCLUDE_DIR)
 
 if(MSVC)
-	#dk_libDebug	(${FLAC_CONFIG_DIR}/src/libFLAC/${Debug_Dir}/FLAC.lib			FLAC_LIBRARY_DEBUG)
-	#dk_libRelease	(${FLAC_CONFIG_DIR}/src/libFLAC/${Release_Dir}/FLAC.lib			FLAC_LIBRARY_RELEASE)
-	dk_libDebug		(${FLAC_CONFIG_DIR}/src/libFLAC++/${Debug_Dir}/FLAC++.lib		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC_CONFIG_DIR}/src/libFLAC++/${Release_Dir}/FLAC++.lib		FLAC_LIBRARY_RELEASE)
+	#dk_libDebug	(${FLAC.Config_Dir}/src/libFLAC/${Debug_Dir}/FLAC.lib			FLAC_LIBRARY_DEBUG)
+	#dk_libRelease	(${FLAC.Config_Dir}/src/libFLAC/${Release_Dir}/FLAC.lib			FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC.Config_Dir}/src/libFLAC++/${Debug_Dir}/FLAC++.lib		FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC.Config_Dir}/src/libFLAC++/${Release_Dir}/FLAC++.lib		FLAC_LIBRARY_RELEASE)
 else()
-	#dk_libDebug	(${FLAC_DEBUG_DIR}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_DEBUG)
-	#dk_libRelease	(${FLAC_RELEASE_DIR}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_RELEASE)
-	dk_libDebug		(${FLAC_DEBUG_DIR}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC_RELEASE_DIR}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_RELEASE)
+	#dk_libDebug	(${FLAC.Debug_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_DEBUG)
+	#dk_libRelease	(${FLAC.Release_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_RELEASE)
+	dk_libDebug		(${FLAC.Debug_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_DEBUG)
+	dk_libRelease	(${FLAC.Release_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_RELEASE)
 endif()
 set(FLAC_INCLUDE_PATH	${FLAC_INCLUDE_DIR})
 if(Debug)
@@ -63,7 +63,7 @@ dk_set(FLAC_CMAKE
 
 
 ### GENERATE ###
-dk_configure(${FLAC_DIR}
+dk_configure(${FLAC}
 	-DBUILD_CXXLIBS=ON 					# "Build libFLAC++" ON
 	-DBUILD_PROGRAMS=ON					# "Build and install programs" ON
 	-DBUILD_EXAMPLES=ON					# "Build and install examples" ON

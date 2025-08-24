@@ -45,32 +45,32 @@ dk_import(${libarchive_Import})
 
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
-dk_include					(${LIBARCHIVE_DIR}/libarchive)
-dk_include					(${LIBARCHIVE_TUPLE_DIR})
+dk_include					(${LIBARCHIVE}/libarchive)
+dk_include					(${LIBARCHIVE.Tuple_Dir})
 if(Android)
-	dk_include				(${LIBARCHIVE_DIR}/contrib/android/include)
+	dk_include				(${LIBARCHIVE}/contrib/android/include)
 endif()
 
 if(MULTI_CONFIG)
 	if(MSVC)
 		if(Windows)
-			dk_libDebug		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Debug_Dir}/archive.lib)
-			dk_libRelease	(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Release_Dir}/archive.lib)
+			dk_libDebug		(${LIBARCHIVE.Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
+			dk_libRelease	(${LIBARCHIVE.Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
 		endif()
 	else()
-		dk_libDebug			(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Debug_Dir}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Release_Dir}/libarchive.a)
+		dk_libDebug			(${LIBARCHIVE.Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
+		dk_libRelease		(${LIBARCHIVE.Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE_TUPLE_DIR}/${Debug_Dir}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE_TUPLE_DIR}/${Release_Dir}/libarchive/libarchive.a)
+	dk_libDebug				(${LIBARCHIVE.Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
+	dk_libRelease			(${LIBARCHIVE.Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
 if(Android)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TUPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
+	dk_configure(${LIBARCHIVE}
+		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE.Tuple_Dir} -I${LIBARCHIVE}/contrib/android/include"
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -129,7 +129,7 @@ if(Android)
 endif()
 
 if(Emscripten)
-	dk_configure(${LIBARCHIVE_DIR}
+	dk_configure(${LIBARCHIVE}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -188,8 +188,8 @@ if(Emscripten)
 endif()
 
 if(Ios)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive" 
+	dk_configure(${LIBARCHIVE}
+		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive" 
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -246,17 +246,17 @@ if(Ios)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Iossim)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive"
+	dk_configure(${LIBARCHIVE}
+		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE}/libarchive"
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -313,16 +313,16 @@ if(Iossim)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Linux)
-	dk_configure(${LIBARCHIVE_DIR}
+	dk_configure(${LIBARCHIVE}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -381,7 +381,7 @@ if(Linux)
 endif()
 
 if(Mac)
-	dk_configure(${LIBARCHIVE_DIR}
+	dk_configure(${LIBARCHIVE}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -440,7 +440,7 @@ if(Mac)
 endif()
 
 if(Raspberry)
-	dk_configure(${LIBARCHIVE_DIR}
+	dk_configure(${LIBARCHIVE}
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -500,7 +500,7 @@ endif()
 
 if(MSVC)
 	if(Windows)
-		dk_configure(${LIBARCHIVE_DIR}
+		dk_configure(${LIBARCHIVE}
 			-DENABLE_ACL=ON
 			-DENABLE_BZip2=${BZIP2}
 			-DENABLE_CAT=ON
@@ -559,7 +559,7 @@ if(MSVC)
 	endif()
 else()
 	if(Windows)
-		dk_configure(${LIBARCHIVE_DIR}
+		dk_configure(${LIBARCHIVE}
 			"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 			-DCMAKE_FIND_USE_CMAKE_PATH=FALSE
 			-DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE
@@ -632,4 +632,4 @@ endif()
 
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE_DIR} archive_static)
+dk_build(${LIBARCHIVE} archive_static)

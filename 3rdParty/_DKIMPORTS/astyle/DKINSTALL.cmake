@@ -27,11 +27,11 @@ dk_validate			(Target_Tuple "dk_Target_Tuple()")
 dk_include			(${ASTYLE}/src)
 
 if(Windows)
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
+	dk_libDebug		(${ASTYLE.Debug_Dir}/AStyleLib.a)
+	dk_libRelease	(${ASTYLE.Release_Dir}/AStyleLib.a)
 else()
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/libastyle.a)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/libastyle.a)
+	dk_libDebug		(${ASTYLE.Debug_Dir}/libastyle.a)
+	dk_libRelease	(${ASTYLE.Release_Dir}/libastyle.a)
 endif()
 
 

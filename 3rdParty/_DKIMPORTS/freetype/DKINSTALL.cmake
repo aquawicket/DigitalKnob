@@ -26,23 +26,23 @@ dk_import(${freetype_Import} PATCH)
 
 
 ### LINK ###
-dk_include				(${FREETYPE_DIR}/include					FREETYPE_INCLUDE_DIR)
-dk_include				(${FREETYPE_CONFIG_DIR}/include/freetype2	FREETYPE_INCLUDE_DIR2)
+dk_include				(${FREETYPE}/include					FREETYPE_INCLUDE_DIR)
+dk_include				(${FREETYPE.Config_Dir}/include/freetype2	FREETYPE_INCLUDE_DIR2)
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${FREETYPE_DEBUG_DIR}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
-		dk_libRelease	(${FREETYPE_RELEASE_DIR}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
+		dk_libDebug		(${FREETYPE.Debug_Dir}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
+		dk_libRelease	(${FREETYPE.Release_Dir}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${FREETYPE_DEBUG_DIR}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
-	dk_libRelease		(${FREETYPE_RELEASE_DIR}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
+	dk_libDebug			(${FREETYPE.Debug_Dir}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
+	dk_libRelease		(${FREETYPE.Release_Dir}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
 endif()
 
 
 
 ### 3RDPARTY LINK ###
 dk_append(FREETYPE_CMAKE
-	-DFREETYPE_DIR=${FREETYPE_DIR}
+	-DFREETYPE_DIR=${FREETYPE}
 	-DFREETYPE_INCLUDE_DIR=${FREETYPE_INCLUDE_DIR}
 	-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
 	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE_INCLUDE_DIR2}
@@ -71,9 +71,9 @@ dk_build(${FREETYPE} freetype)
 
 # rmlui expects to find ftconfig.h here, so we just copy it for now.
 dk_debug("Look at freetype/DKINSTALL.cmake:62")
-if(EXISTS ${FREETYPE_DEBUG_DIR}/include AND NOT EXISTS ${FREETYPE_DIR}/${Target_Tuple}/include)
-	dk_copy(${FREETYPE_DEBUG_DIR}/include ${FREETYPE_DIR}/${Target_Tuple}/include)
+if(EXISTS ${FREETYPE.Debug_Dir}/include AND NOT EXISTS ${FREETYPE}/${Target_Tuple}/include)
+	dk_copy(${FREETYPE.Debug_Dir}/include ${FREETYPE}/${Target_Tuple}/include)
 endif()
-if(EXISTS ${FREETYPE_RELEASE_DIR}/include AND NOT EXISTS ${FREETYPE_DIR}/${Target_Tuple}/include)
-	dk_copy(${FREETYPE_RELEASE_DIR}/include ${FREETYPE_DIR}/${Target_Tuple}/include)
+if(EXISTS ${FREETYPE.Release_Dir}/include AND NOT EXISTS ${FREETYPE}/${Target_Tuple}/include)
+	dk_copy(${FREETYPE.Release_Dir}/include ${FREETYPE}/${Target_Tuple}/include)
 endif()

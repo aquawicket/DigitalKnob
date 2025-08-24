@@ -36,7 +36,7 @@ dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 ### LINK ###
 dk_include					(${LEPTONICA})
 dk_include					(${LEPTONICA}/${Target_Tuple}/src)
-dk_include					(${LEPTONICA_RELEASE_DIR}/src)
+dk_include					(${LEPTONICA.Release_Dir}/src)
 if(MULTI_CONFIG)
  if(MSVC)
 	Windows_dk_libDebug			(${LEPTONICA}/${Target_Tuple}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
@@ -48,15 +48,15 @@ if(MULTI_CONFIG)
 	dk_libRelease			(${LEPTONICA}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
  endif()
 else()
-	dk_libDebug				(${LEPTONICA_DEBUG_DIR}/src/libleptonica.a)
-	dk_libRelease			(${LEPTONICA_RELEASE_DIR}/src/libleptonica.a)
+	dk_libDebug				(${LEPTONICA.Debug_Dir}/src/libleptonica.a)
+	dk_libRelease			(${LEPTONICA.Release_Dir}/src/libleptonica.a)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA.Config_Dir})
 
 ### GENERATE ###
-#dk_configure(${LEPTONICA_DIR} 
+#dk_configure(${LEPTONICA} 
 #	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Tuple} /I${LIBPNG} /I${LIBPNG}/${Target_Tuple} /I${TIFF}/${Target_Tuple}/libtiff" 
 #	-DSTATIC=ON 
 #	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
@@ -67,7 +67,7 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_CONFIG_DIR})
 #	${TIFF_CMAKE} 
 #	${ZLIB_CMAKE})
 	
-dk_configure(${LEPTONICA_DIR} 
+dk_configure(${LEPTONICA} 
 	-DSTATIC=ON 
 	-DCMAKE_INSTALL_PREFIX=${LEPTONICA}
 	-DSW_BUILD=OFF
@@ -79,4 +79,4 @@ dk_configure(${LEPTONICA_DIR}
 	${ZLIB_CMAKE})
 
 ### COMPILE ###
-dk_build(${LEPTONICA_DIR} leptonica)
+dk_build(${LEPTONICA} leptonica)

@@ -41,7 +41,7 @@ function(dk_Target_Config)
 		dk_unset(SINGLE_CONFIG)
 		
 		dk_validate(Target_Tuple	"dk_Target_Tuple()")
-		dk_set(Target_Config ${Target_Tuple})
+		dk_set(Target_Config 	${Target_Tuple})
 		
 		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
 		dk_debug("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")

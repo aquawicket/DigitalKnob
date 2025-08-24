@@ -31,8 +31,8 @@ dk_import		(${FONTCONFIG_DL}										FONTCONFIG_INCLUDE_DIR)
 
 ### LINK ###
 dk_include		(${FONTCONFIG}/fontconfig)
-dk_libDebug		(${FONTCONFIG_DEBUG_DIR}/lib/.libs/libfontconfig.a		FONTCONFIG_DEBUG_LIBRARY)
-dk_libRelease	(${FONTCONFIG_RELEASE_DIR}/lib/.libs/libfontconfig.a	FONTCONFIG_RELEASE_LIBRARY)
+dk_libDebug		(${FONTCONFIG.Debug_Dir}/lib/.libs/libfontconfig.a		FONTCONFIG_DEBUG_LIBRARY)
+dk_libRelease	(${FONTCONFIG.Release_Dir}/lib/.libs/libfontconfig.a	FONTCONFIG_RELEASE_LIBRARY)
 if(Debug)
 	set(FONTCONFIG_LIBRARY ${FONTCONFIG_DEBUG_LIBRARY})
 endif()
@@ -44,8 +44,8 @@ endif()
 dk_set			(FONTCONFIG_CMAKE -DFONTCONFIG_INCLUDE_DIR=${FONTCONFIG_INCLUDE_DIR} -DFONTCONFIG_LIBRARY=${FONTCONFIG_LIBRARY})
 
 ### GENERATE / COMPILE ###
-dk_chdir		(${FONTCONFIG_DIR})
+dk_chdir		(${FONTCONFIG})
 #dk_exec		(autoupdate)
 #dk_exec		(autoconf)
-dk_configure	(${FONTCONFIG_DIR})
-dk_build		(${FONTCONFIG_DIR})
+dk_configure	(${FONTCONFIG})
+dk_build		(${FONTCONFIG})

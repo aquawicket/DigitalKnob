@@ -55,22 +55,22 @@ dk_import("${SDL_IMAGE_DL}" PATCH)
 
 
 ### LINK ###
-dk_include				(${SDL_IMAGE_DIR}											SDL2_IMAGE_INCLUDE_DIR)
+dk_include				(${SDL_IMAGE}											SDL2_IMAGE_INCLUDE_DIR)
 if(MSVC)
 	if(Android)
-		dk_libDebug		(${SDL_IMAGE_CONFIG_DIR}/lib/${Debug_Dir}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL_IMAGE_CONFIG_DIR}/lib/${Release_Dir}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
+		dk_libDebug		(${SDL_IMAGE.Config_Dir}/lib/${Debug_Dir}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)
+		dk_libRelease	(${SDL_IMAGE.Config_Dir}/lib/${Release_Dir}/SDL_image.a		SDL2_IMAGE_LIBRARY_RELEASE)
 	endif()
 	if(Windows)
-		dk_libDebug		(${SDL_IMAGE_CONFIG_DIR}/lib/${Debug_Dir}/SDL_image.lib		SDL2_IMAGE_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL_IMAGE_CONFIG_DIR}/lib/${Release_Dir}/SDL_image.lib	SDL2_IMAGE_LIBRARY_RELEASE)
+		dk_libDebug		(${SDL_IMAGE.Config_Dir}/lib/${Debug_Dir}/SDL_image.lib		SDL2_IMAGE_LIBRARY_DEBUG)
+		dk_libRelease	(${SDL_IMAGE.Config_Dir}/lib/${Release_Dir}/SDL_image.lib	SDL2_IMAGE_LIBRARY_RELEASE)
 	endif()
 elseif(Apple)
-	dk_libDebug			(${SDL_IMAGE_CONFIG_DIR}/lib/Debug/SDL_image.a				SDL2_IMAGE_LIBRARY_DEBUG)
-	dk_libRelease		(${SDL_IMAGE_CONFIG_DIR}/lib/Release/SDL_image.a			SDL2_IMAGE_LIBRARY_RELEASE)
+	dk_libDebug			(${SDL_IMAGE.Config_Dir}/lib/Debug/SDL_image.a				SDL2_IMAGE_LIBRARY_DEBUG)
+	dk_libRelease		(${SDL_IMAGE.Config_Dir}/lib/Release/SDL_image.a			SDL2_IMAGE_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${SDL_IMAGE_CONFIG_DIR}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_DEBUG)
-	dk_libRelease		(${SDL_IMAGE_CONFIG_DIR}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_RELEASE)
+	dk_libDebug			(${SDL_IMAGE.Config_Dir}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_DEBUG)
+	dk_libRelease		(${SDL_IMAGE.Config_Dir}/lib/SDL_image.a					SDL2_IMAGE_LIBRARY_RELEASE)
 endif()
 
 
@@ -103,7 +103,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_IMAGE_DIR}
+dk_configure(${SDL_IMAGE}
 	-DSDLIMAGE_SUPPORT_GIF=${GIFLIB}
 	-DSDLIMAGE_SUPPORT_JPEG=${LIBJPEG_TURBO}
 	-DSDLIMAGE_SUPPORT_PNG=${LIBPNG}
@@ -117,4 +117,4 @@ dk_configure(${SDL_IMAGE_DIR}
 
 
 ### COMPILE ###
-dk_build(${SDL_IMAGE_DIR} SDLIMAGE)
+dk_build(${SDL_IMAGE} SDLIMAGE)

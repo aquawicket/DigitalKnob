@@ -21,18 +21,18 @@ include_guard()
 dk_import		(${BGFX_IMPORT})
 
 ### LINK ###
-dk_include			("${BGFX_DIR}/include")
+dk_include			("${BGFX}/include")
 if(Unix)
-	dk_libDebug		("${BGFX_DEBUG_DIR}/libbgfx.a")
-	dk_libRelease	("${BGFX_RELEASE_DIR}/libbgfx.a")
+	dk_libDebug		("${BGFX.Debug_Dir}/libbgfx.a")
+	dk_libRelease	("${BGFX.Release_Dir}/libbgfx.a")
 elseif()
-	dk_libDebug		("${BGFX_DEBUG_DIR}/bgfx.lib")
-	dk_libRelease	("${BGFX_RELEASE_DIR}/bgfx.lib")
+	dk_libDebug		("${BGFX.Debug_Dir}/bgfx.lib")
+	dk_libRelease	("${BGFX.Release_Dir}/bgfx.lib")
 endif()
 
 ### GENERATE ###
-dk_configure("${BGFX_DIR}")
+dk_configure("${BGFX}")
 
 
 ### COMPILE ###
-dk_build("${BGFX_DIR}")
+dk_build("${BGFX}")

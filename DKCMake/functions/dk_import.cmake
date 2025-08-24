@@ -30,6 +30,13 @@ include_guard()
 function(dk_import)
 	dk_debugFunc(0 99)
 	
+
+#	if(NOT CURRENT_IMPORT)
+#		get_filename_component(plugin "${CMAKE_CURRENT_LIST_DIR}" NAME_WE)
+#		dk_debug("plugin = ${plugin}")
+#		dk_pause()
+#		dk_depend(${plugin})
+#	endif()
 	dk_assertPath("${CURRENT_IMPORT}")
 	set(Import_Path "${CURRENT_IMPORT}")
 	dk_validate(Host_Tuple "dk_Host_Tuple()")

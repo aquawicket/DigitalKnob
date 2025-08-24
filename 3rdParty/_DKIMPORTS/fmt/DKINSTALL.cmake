@@ -26,7 +26,7 @@ dk_import(${fmt_Import})
 
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
-dk_include(${FMT_DIR}/include)
+dk_include(${FMT}/include)
 ###### Debug for FMT LIBRARY ######
 
 # moved to DKBuildFlags.cmake
@@ -36,13 +36,13 @@ dk_include(${FMT_DIR}/include)
 #	dk_append(CMAKE_CXX_FLAGS /utf-8)
 #endif()
 
-#Unix_dk_libDebug	(${FMT_DEBUG_DIR}/libfmtd.a)
-#Unix_dk_libRelease	(${FMT_RELEASE_DIR}/libfmt.a)
-#Windows_dk_libDebug	(${FMT_DEBUG_DIR}/fmtd.lib)
-#Windows_dk_libRelease	(${FMT_RELEASE_DIR}/fmt.lib)
+#Unix_dk_libDebug	(${FMT.Debug_Dir}/libfmtd.a)
+#Unix_dk_libRelease	(${FMT.Release_Dir}/libfmt.a)
+#Windows_dk_libDebug	(${FMT.Debug_Dir}/fmtd.lib)
+#Windows_dk_libRelease	(${FMT.Release_Dir}/fmt.lib)
 
 ### GENERATE ###
-#dk_configure(${FMT_DIR} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
+#dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
 
 ### COMPILE ###
 #dk_build()

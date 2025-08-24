@@ -26,11 +26,11 @@ dk_import			(${METACALL_DL})
 ### LINK ###
 dk_include			(${METACALL}/include)
 if(MSVC)
-	dk_libDebug		(${METACALL_DEBUG_DIR}/metacall.lib)
-	dk_libRelease	(${METACALL_RELEASE_DIR}/metacall.lib)
+	dk_libDebug		(${METACALL.Debug_Dir}/metacall.lib)
+	dk_libRelease	(${METACALL.Release_Dir}/metacall.lib)
 else()
-	dk_libDebug		(${METACALL_DEBUG_DIR}/libmetacall.a)
-	dk_libRelease	(${METACALL_RELEASE_DIR}/libmetacall.a)
+	dk_libDebug		(${METACALL.Debug_Dir}/libmetacall.a)
+	dk_libRelease	(${METACALL.Release_Dir}/libmetacall.a)
 endif()
 
 ### GENERATE ###

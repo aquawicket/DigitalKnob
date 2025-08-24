@@ -28,16 +28,16 @@ dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz P
 
 
 ### LINK ###
-dk_include			(${WAAVE_DIR}/src)
-Unix_dk_libDebug	(${WAAVE_DEBUG_DIR}/libwaave.a)
-Unix_dk_libRelease	(${WAAVE_RELEASE_DIR}/libwaave.a)
-Windows_dk_libDebug		(${WAAVE_DEBUG_DIR}/waave.lib)
-Windows_dk_libRelease	(${WAAVE_RELEASE_DIR}/waave.lib)
+dk_include			(${WAAVE}/src)
+Unix_dk_libDebug	(${WAAVE.Debug_Dir}/libwaave.a)
+Unix_dk_libRelease	(${WAAVE.Release_Dir}/libwaave.a)
+Windows_dk_libDebug		(${WAAVE.Debug_Dir}/waave.lib)
+Windows_dk_libRelease	(${WAAVE.Release_Dir}/waave.lib)
 
 
 ### GENERATE ###
-dk_configure(${WAAVE_DIR} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
+dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
 
 
 ### COMPILE ###
-dk_build(${WAAVE_DIR} waave)
+dk_build(${WAAVE} waave)

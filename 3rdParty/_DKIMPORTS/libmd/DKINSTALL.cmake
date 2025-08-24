@@ -28,14 +28,14 @@ dk_import(https://github.com/guillemj/libmd/archive/refs/heads/main.zip)
 
 ### LINK ###
 dk_include				(${LIBMD}/include)
-Unix_dk_libDebug		(${LIBMD_DEBUG_DIR}/liblibmdd.a)
-Unix_dk_libRelease		(${LIBMD_RELEASE_DIR}/liblibmd.a)
-Windows_dk_libDebug		(${LIBMD_DEBUG_DIR}/libmdd.lib)
-Windows_dk_libRelease	(${LIBMD_RELEASE_DIR}/libmd.lib)
+Unix_dk_libDebug		(${LIBMD.Debug_Dir}/liblibmdd.a)
+Unix_dk_libRelease		(${LIBMD.Release_Dir}/liblibmd.a)
+Windows_dk_libDebug		(${LIBMD.Debug_Dir}/libmdd.lib)
+Windows_dk_libRelease	(${LIBMD.Release_Dir}/libmd.lib)
 
 
 ### 3RDPARTY LINK ###
-dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD_DEBUG_DIR}/libmd.a)
+dk_set(LIBMD_CMAKE -DLIBMD_LIBRARY=${LIBMD.Debug_Dir}/libmd.a)
 
 
 ### COMPILE ###
@@ -45,12 +45,12 @@ else()
 	DEBUG_dk_chdir		(${LIBMD})
 	DEBUG_dk_exec		(aclocal)
 	
-	#DEBUG_dk_chdir		(${LIBMD_DEBUG_DIR})
+	#DEBUG_dk_chdir		(${LIBMD.Debug_Dir})
 	#DEBUG_dk_exec		(${DKCONFIGURE_BUILD})
-	#RELEASE_dk_chdir	(${LIBMD_RELEASE_DIR})
+	#RELEASE_dk_chdir	(${LIBMD.Release_Dir})
 	#RELEASE_dk_exec	(${DKCONFIGURE_BUILD})
-	dk_configure		(${LIBMD_DIR})
+	dk_configure		(${LIBMD})
 	
 	
-	dk_build			(${LIBMD_DIR})
+	dk_build			(${LIBMD})
 endif()

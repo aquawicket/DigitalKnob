@@ -31,8 +31,8 @@ if(MSVC)
 	dk_libDebug		(${LIBWEBSOCKETS}/${Target_Tuple}/lib/${Debug_Dir}/websockets_static.lib)
 	dk_libRelease	(${LIBWEBSOCKETS}/${Target_Tuple}/lib/${Release_Dir}/websockets_static.lib)
 else()
-	dk_libDebug		(${LIBWEBSOCKETS_DEBUG_DIR}/lib/libwebsockets_static.a)
-	dk_libRelease	(${LIBWEBSOCKETS_RELEASE_DIR}/lib/libwebsockets_static.a)
+	dk_libDebug		(${LIBWEBSOCKETS.Debug_Dir}/lib/libwebsockets_static.a)
+	dk_libRelease	(${LIBWEBSOCKETS.Release_Dir}/lib/libwebsockets_static.a)
 endif()
 
 ### GENERATE ###

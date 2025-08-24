@@ -43,40 +43,40 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 
 ### LINK ###
-dk_include			(${FFMPEG_DIR})
-Debug_dk_include	(${FFMPEG_CONFIG_DIR})
+dk_include			(${FFMPEG})
+Debug_dk_include	(${FFMPEG.Config_Dir})
 
 # libavdevice
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavdevice/libavdevice.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavdevice/libavdevice.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libavdevice/libavdevice.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libavdevice/libavdevice.a)
 
 # libswresample
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libswresample/libswresample.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libswresample/libswresample.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libswresample/libswresample.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libswresample/libswresample.a)
 
 # libavfilter
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavfilter/libavfilter.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavfilter/libavfilter.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libavfilter/libavfilter.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libavfilter/libavfilter.a)
 
 # libavutil
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavutil/libavutil.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavutil/libavutil.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libavutil/libavutil.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libavutil/libavutil.a)
 
 # libswscale
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libswscale/libswscale.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libswscale/libswscale.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libswscale/libswscale.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libswscale/libswscale.a)
 
 # libavcodec
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavcodec/libavcodec.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavcodec/libavcodec.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libavcodec/libavcodec.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libavcodec/libavcodec.a)
 
 # libavformat
-dk_libDebug			(${FFMPEG_DEBUG_DIR}/libavformat/libavformat.a)
-dk_libRelease		(${FFMPEG_RELEASE_DIR}/libavformat/libavformat.a)
+dk_libDebug			(${FFMPEG.Debug_Dir}/libavformat/libavformat.a)
+dk_libRelease		(${FFMPEG.Release_Dir}/libavformat/libavformat.a)
 
 
 ### GENERATE / COMPILE ###
-Emscripten_Debug_dk_configure(${FFMPEG_DIR}
+Emscripten_Debug_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -99,9 +99,9 @@ Emscripten_Debug_dk_configure(${FFMPEG_DIR}
 	--cxx=${EMPP}
 	--objcc=${EMCC}
 	--dep-cc=${EMCC})
-Ios_ARM32_Debug_dk_configure(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
+Ios_ARM32_Debug_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=armv7 --disable-x86asm --disable-iconv)
 
-Ios_ARM64_Debug_dk_configure(${FFMPEG_DIR}
+Ios_ARM64_Debug_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -117,9 +117,9 @@ Ios_ARM64_Debug_dk_configure(${FFMPEG_DIR}
 	--cxx=${XCODE_CLANGXX}
 	--extra-cflags="-arch arm64 -DIOS -DIOS_ARM64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOS_SYSROOT}")
 
-Iossim_X86_Debug_dk_configure(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+Iossim_X86_Debug_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
 
-Iossim_X86_64_Debug_dk_exec(${FFMPEG_DIR}
+Iossim_X86_64_Debug_dk_exec(${FFMPEG}
 	--pkg-config-flags=--static
 	--disable-shared
 	--enable-static
@@ -135,15 +135,15 @@ Iossim_X86_64_Debug_dk_exec(${FFMPEG_DIR}
 	--extra-cflags="-arch x86_64 -DIOS -DIOS_ARM64 -DIOSSIM -DIOSSIM_X86_64 -mios-version-min=${IOS_MIN_SDK} -isysroot ${IOSSIM_SYSROOT}")
 
 
-Linux_X86_Debug_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-Linux_X86_64_Debug_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-Mac_X86_Debug_dk_configure			(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-Mac_X86_64_Debug_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-Raspberry_Arm32_Debug_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
-Raspberry_Arm64_Debug_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
-Windows_X86_Debug_dk_configure			(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
-#Windows_X86_Debug_dk_configure			(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
-Windows_X86_64_Debug_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64) # --cc=${CLANG_C_COMPILER} --cxx=${CLANG_CXX_COMPILER})
+Linux_X86_Debug_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+Linux_X86_64_Debug_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+Mac_X86_Debug_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+Mac_X86_64_Debug_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+Raspberry_Arm32_Debug_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=i686 --disable-x86asm --disable-iconv)
+Raspberry_Arm64_Debug_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --arch=x86_64 --disable-x86asm --disable-iconv)
+Windows_X86_Debug_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-sdl2 --target-os=mingw32)
+#Windows_X86_Debug_dk_configure			(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --toolchain=msvc) # --cc=\${MSVC_CL}
+Windows_X86_64_Debug_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --target-os=mingw64) # --cc=${CLANG_C_COMPILER} --cxx=${CLANG_CXX_COMPILER})
 
 
 if(Debug)
@@ -154,7 +154,7 @@ endif()
 
 
 
-Emscripten_Release_dk_configure(${FFMPEG_DIR}
+Emscripten_Release_dk_configure(${FFMPEG}
 	--pkg-config-flags=--static 
 	--disable-shared 
 	--enable-static
@@ -180,19 +180,19 @@ Emscripten_Release_dk_configure(${FFMPEG_DIR}
 	--dep-cc=${EMCC})
 
 
-Ios_Arm32_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
-Ios_Arm64_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
-Iossim_X86_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-Iossim_X86_64_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-Linux_X86_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-Linux_X86_64_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-Mac_X86_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-Mac_X86_64_Release_dk_configure		(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-Raspberry_Arm32_Release_dk_configure(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
-Raspberry_Arm64_Release_dk_configure(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
-Windows_X86_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
-#Windows_X86_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
-Windows_X86_64_Release_dk_configure	(${FFMPEG_DIR} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
+Ios_Arm32_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm --disable-x86asm --disable-iconv)
+Ios_Arm64_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=arm64 --disable-x86asm --disable-iconv)
+Iossim_X86_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+Iossim_X86_64_Release_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+Linux_X86_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+Linux_X86_64_Release_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+Mac_X86_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+Mac_X86_64_Release_dk_configure		(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+Raspberry_Arm32_Release_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=i686 --disable-x86asm --disable-iconv)
+Raspberry_Arm64_Release_dk_configure(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --arch=x86_64 --disable-x86asm --disable-iconv)
+Windows_X86_Release_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --disable-sdl2 --target-os=mingw32)
+#Windows_X86_Release_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --toolchain=msvc)
+Windows_X86_64_Release_dk_configure	(${FFMPEG} --pkg-config-flags=--static --disable-shared --enable-static --disable-debug --target-os=mingw64)
 
 
 

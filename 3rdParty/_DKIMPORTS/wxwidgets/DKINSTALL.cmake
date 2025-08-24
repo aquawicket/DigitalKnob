@@ -22,15 +22,15 @@ dk_import(https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-dk_include			(${WXWIDGETS_DIR}/include)
-Unix_dk_libDebug	(${WXWIDGETS_DEBUG_DIR}/libwxwidgets.a)
-Unix_dk_libRelease	(${WXWIDGETS_RELEASE_DIR}/libwxwidgets.a)
-Windows_dk_libDebug		(${WXWIDGETS_DEBUG_DIR}/wxwidgets.lib)
-Windows_dk_libRelease	(${WXWIDGETS_RELEASE_DIR}/wxwidgets.lib)
+dk_include			(${WXWIDGETS}/include)
+Unix_dk_libDebug	(${WXWIDGETS.Debug_Dir}/libwxwidgets.a)
+Unix_dk_libRelease	(${WXWIDGETS.Release_Dir}/libwxwidgets.a)
+Windows_dk_libDebug		(${WXWIDGETS.Debug_Dir}/wxwidgets.lib)
+Windows_dk_libRelease	(${WXWIDGETS.Release_Dir}/wxwidgets.lib)
 
 
 ### GENERATE ###
-dk_configure(${WXWIDGETS_DIR})
+dk_configure(${WXWIDGETS})
 
 
 ### COMPILE ###

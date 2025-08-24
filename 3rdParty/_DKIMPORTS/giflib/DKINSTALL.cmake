@@ -35,15 +35,15 @@ set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)
 
 	### LINK ###
-	dk_include			(${GIFLIB_DIR}							GIF_INCLUDE_DIR)
-	#dk_include			(${GIFLIB_DIR}/lib						GIF_INCLUDE_DIR)
-	dk_include			(${GIFLIB_CONFIG_DIR}					GIF_INCLUDE_DIR2)
+	dk_include			(${GIFLIB}							GIF_INCLUDE_DIR)
+	#dk_include			(${GIFLIB}/lib						GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB.Config_Dir}					GIF_INCLUDE_DIR2)
 	if(Windows AND MSVC)
-		dk_libDebug		(${GIFLIB_DEBUG_DIR}/giflibd.lib		GIF_LIBRARY_DEBUG)
-		dk_libRelease	(${GIFLIB_RELEASE_DIR}/giflib.lib		GIF_LIBRARY_RELEASE)
+		dk_libDebug		(${GIFLIB.Debug_Dir}/giflibd.lib		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB.Release_Dir}/giflib.lib		GIF_LIBRARY_RELEASE)
 	else()
-		dk_libDebug		(${GIFLIB_DEBUG_DIR}/libgiflib.a		GIF_LIBRARY_DEBUG)
-		dk_libRelease	(${GIFLIB_RELEASE_DIR}/libgiflib.a		GIF_LIBRARY_RELEASE)
+		dk_libDebug		(${GIFLIB.Debug_Dir}/libgiflib.a		GIF_LIBRARY_DEBUG)
+		dk_libRelease	(${GIFLIB.Release_Dir}/libgiflib.a		GIF_LIBRARY_RELEASE)
 	endif()
 	
 	### 3RDPARTY LINK ###
@@ -54,17 +54,17 @@ if(GIFLIB_USE_CMAKE)
 	if(Release)
 		dk_append		(GIFLIB_CMAKE -DGIF_LIBRARY=${GIF_LIBRARY_RELEASE})
 	endif()
-	dk_configure		(${GIFLIB_DIR})
-	dk_build			(${GIFLIB_DIR} giflib)	
+	dk_configure		(${GIFLIB})
+	dk_build			(${GIFLIB} giflib)	
 	
 	
 else()
 	### LINK ###
-	dk_include			(${GIFLIB_DIR}/lib							GIF_INCLUDE_DIR)
+	dk_include			(${GIFLIB}/lib							GIF_INCLUDE_DIR)
 	#dk_include			(${GIFLIB}/${Target_Tuple}					GIF_INCLUDE_DIR2)
-	dk_include			(${GIFLIB_CONFIG_DIR}						GIF_INCLUDE_DIR2)
-	dk_libDebug			(${GIFLIB_DEBUG_DIR}/lib/.libs/libgif.a		GIF_LIBRARY_DEBUG)
-	dk_libRelease		(${GIFLIB_RELEASE_DIR}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
+	dk_include			(${GIFLIB.Config_Dir}						GIF_INCLUDE_DIR2)
+	dk_libDebug			(${GIFLIB.Debug_Dir}/lib/.libs/libgif.a		GIF_LIBRARY_DEBUG)
+	dk_libRelease		(${GIFLIB.Release_Dir}/lib/.libs/libgif.a	GIF_LIBRARY_RELEASE)
 
 	### 3RDPARTY LINK ###
 	if(Debug)
@@ -75,7 +75,7 @@ else()
 	endif()
 	
 	### GENERATE / CONFIGURE ###
-	dk_chdir	(${GIFLIB_DIR})
+	dk_chdir	(${GIFLIB})
 	dk_depend	(bash)
 	dk_exec		(${BASH_EXE} -c "autoreconf -f -i")
 
@@ -100,4 +100,4 @@ else()
 endif()
 
 # FIX for other searchers
-#dk_copy(${GIFLIB_DIR}/gif_lib.h ${GIFLIB_DIR}/lib/gif_lib.h)
+#dk_copy(${GIFLIB}/gif_lib.h ${GIFLIB}/lib/gif_lib.h)

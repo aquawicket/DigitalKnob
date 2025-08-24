@@ -23,11 +23,11 @@ dk_import		(${GME_DL})
 ### LINK ###
 dk_include			(${GME}/include)
 if(Unix)
-	dk_libDebug		(${GME_DEBUG_DIR}/gme/libgme.a)
-	dk_libRelease	(${GME_RELEASE_DIR}/gme/libgme.a)
+	dk_libDebug		(${GME.Debug_Dir}/gme/libgme.a)
+	dk_libRelease	(${GME.Release_Dir}/gme/libgme.a)
 else()
-	dk_libDebug		(${GME_DEBUG_DIR}/gme/gme.lib)
-	dk_libRelease	(${GME_RELEASE_DIR}/gme/gme.lib)
+	dk_libDebug		(${GME.Debug_Dir}/gme/gme.lib)
+	dk_libRelease	(${GME.Release_Dir}/gme/gme.lib)
 endif()
 
 ### GENERATE ###

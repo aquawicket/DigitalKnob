@@ -23,19 +23,19 @@ dk_import(${libexpat_Import})
 dk_include			(${LIBEXPAT}/include				    	LIBEXPAT_INCLUDE_DIR)
 dk_include			(${LIBEXPAT}/${Target_Tuple})
 if(MSVC)
-	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
+	dk_libDebug		(${LIBEXPAT.Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
+	dk_libRelease	(${LIBEXPAT.Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
 else()
 	if(Windows)
-		dk_libDebug	(${LIBEXPAT_DEBUG_DIR}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${LIBEXPAT.Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
 	else()
-		dk_libDebug	(${LIBEXPAT_DEBUG_DIR}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${LIBEXPAT.Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
 	endif()
-	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
+	dk_libRelease	(${LIBEXPAT.Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
 endif()
 
 ### GENERATE ###
-dk_configure(${LIBEXPAT_DIR}/expat
+dk_configure(${LIBEXPAT}/expat
 	-DEXPAT_BUILD_TOOLS=ON				# "Build the xmlwf tool for expat library"  ${_EXPAT_BUILD_TOOLS_DEFAULT} 
 	-DEXPAT_BUILD_EXAMPLES=ON       	# "Build the examples for expat library" ON
 	-DEXPAT_BUILD_TESTS=ON          	# "Build the tests for expat library" ON

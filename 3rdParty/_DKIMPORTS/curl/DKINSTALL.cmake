@@ -42,23 +42,23 @@ endif()
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${CURL_DIR}/include 					CURL_INCLUDE_DIR)
-dk_include					(${CURL_CONFIG_DIR}/lib					CURL_INCLUDE_DIR2)
+dk_include					(${CURL}/include 					CURL_INCLUDE_DIR)
+dk_include					(${CURL.Config_Dir}/lib					CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
-	set(CURL_DEBUG_DIR 		${CURL_TUPLE_DIR}/lib/${Debug_Dir})
-	set(CURL_RELEASE_DIR 	${CURL_TUPLE_DIR}/lib/${Release_Dir})
+	set(CURL.Debug_Dir 		${CURL.Tuple_Dir}/lib/${Debug_Dir})
+	set(CURL.Release_Dir 	${CURL.Tuple_Dir}/lib/${Release_Dir})
 else()
-	set(CURL_DEBUG_DIR 		${CURL_DEBUG_DIR}/lib)
-	set(CURL_RELEASE_DIR 	${CURL_RELEASE_DIR}/lib)
+	set(CURL.Debug_Dir 		${CURL.Debug_Dir}/lib)
+	set(CURL.Release_Dir 	${CURL.Release_Dir}/lib)
 endif()
 
 if(MSVC AND Windows)
-	dk_libDebug			(${CURL_CONFIG_DIR}/lib/${Debug_Dir}		CURL_DEBUG_LIBRARY)
-	dk_libRelease		(${CURL_CONFIG_DIR}/lib/${Release_Dir}		CURL_RELEASE_LIBRARY)
+	dk_libDebug			(${CURL.Config_Dir}/lib/${Debug_Dir}		CURL_DEBUG_LIBRARY)
+	dk_libRelease		(${CURL.Config_Dir}/lib/${Release_Dir}		CURL_RELEASE_LIBRARY)
 else()	
-	dk_libDebug			(${CURL_DEBUG_DIR}/libcurl-d.a				CURL_DEBUG_LIBRARY)
-	dk_libRelease		(${CURL_RELEASE_DIR}/libcurl.a				CURL_RELEASE_LIBRARY)
+	dk_libDebug			(${CURL.Debug_Dir}/libcurl-d.a				CURL_DEBUG_LIBRARY)
+	dk_libRelease		(${CURL.Release_Dir}/libcurl.a				CURL_RELEASE_LIBRARY)
 endif()
 if(Debug)
 	dk_set				(CURL_LIBRARY								${CURL_DEBUG_LIBRARY})
@@ -72,14 +72,14 @@ dk_set(CURL_CMAKE
 	-DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} 
 	-DCURL_LIBRARY=${CURL_LIBRARY})
 if(MSVC)
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL_TUPLE_DIR}/include/curl")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL.Tuple_Dir}/include/curl")
 elseif()
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_TUPLE_DIR}/include")
+	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL.Tuple_Dir}/include")
 endif()
 
 ### GENERATE ###
 if(MSVC AND Windows)
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -157,7 +157,7 @@ if(MSVC AND Windows)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Android)
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -173,7 +173,7 @@ elseif(Android)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Ios OR Iossim)
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
@@ -193,7 +193,7 @@ elseif(Ios OR Iossim)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Mac)
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -267,7 +267,7 @@ elseif(Mac)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Linux)
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -341,7 +341,7 @@ elseif(Linux)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 else()
-	dk_configure(${CURL_DIR}
+	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF

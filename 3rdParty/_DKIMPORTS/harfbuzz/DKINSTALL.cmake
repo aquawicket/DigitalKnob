@@ -24,13 +24,13 @@ dk_depend(python3)
 dk_import(${harfbuzz_Import})
 
 ### LINK ###
-dk_include			(${HARFBUZZ_DIR}/src						HARFBUZZ_INCLUDE_DIR)
+dk_include			(${HARFBUZZ}/src						HARFBUZZ_INCLUDE_DIR)
 if(MSVC AND Windows)
-	dk_libDebug		(${HARFBUZZ_DEBUG_DIR}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
-	dk_libRelease	(${HARFBUZZ_RELEASE_DIR}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
+	dk_libDebug		(${HARFBUZZ.Debug_Dir}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
+	dk_libRelease	(${HARFBUZZ.Release_Dir}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
 else()
-	dk_libDebug		(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
-	dk_libRelease	(${HARFBUZZ_CONFIG_DIR}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
+	dk_libDebug		(${HARFBUZZ.Config_Dir}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
+	dk_libRelease	(${HARFBUZZ.Config_Dir}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
 endif()
 if(Debug)
 	dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_DEBUG_LIBRARY})
@@ -40,7 +40,7 @@ if(Release)
 endif()
 
 ### GENERATE ###
-dk_configure(${HARFBUZZ_DIR} 
+dk_configure(${HARFBUZZ} 
 	-DHB_BUILD_SUBSET=ON			# "Build harfbuzz-subset" ON
 	-DHB_BUILD_UTILS=OFF			# "Build harfbuzz utils, needs cairo, freetype, and glib properly be installed" OFF
 	-DHB_HAVE_CAIRO=OFF 			# "Enable cairo interop helpers" OFF

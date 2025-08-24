@@ -27,16 +27,16 @@ dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_importVariables(${QEMU_DL} ROOT $ENV{DKTOOLS_DIR})
 
 
-#dk_set(QEMU_DIR $ENV{DKTOOLS_DIR}/${QEMU_FOLDER})
-dk_set(QEMU_IMG_EXE ${QEMU_DIR}/qemu-img.exe)
-dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU_DIR}/qemu-system-x86_64.exe)
+#dk_set(QEMU $ENV{DKTOOLS_DIR}/${QEMU_FOLDER})
+dk_set(QEMU_IMG_EXE ${QEMU}/qemu-img.exe)
+dk_set(QEMU_SYSTEM_X86_64_EXE ${QEMU}/qemu-system-x86_64.exe)
 
 ### INSTALL ###
 if(NOT EXISTS ${QEMU_IMG_EXE})
 	dk_download(${QEMU_DL} $ENV{DKDOWNLOAD_DIR})
-	dk_nativePath(${QEMU_DIR} QEMU_DIR_NATIVE)
+	dk_nativePath(${QEMU} QEMU_NATIVE)
 	dk_echo("Installing ${QEMU_FOLDER} . . .")
-	dk_set(command_string "$ENV{DKDOWNLOAD_DIR}/${QEMU_IMPORT_FILE}" /S /D=${QEMU_DIR_NATIVE})
+	dk_set(command_string "$ENV{DKDOWNLOAD_DIR}/${QEMU_IMPORT_FILE}" /S /D=${QEMU_NATIVE})
 	dk_exec(echo ${command_string})
 	dk_exec(${command_string})
 endif()

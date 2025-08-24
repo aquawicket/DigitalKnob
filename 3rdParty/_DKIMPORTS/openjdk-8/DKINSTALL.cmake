@@ -39,7 +39,7 @@ if(Windows_Host)
 	set(ENV{JAVA_VERSION} 1.8.0_41)
 	
 	###### JAVA_HOME ######
-	dk_nativePath("${OPENJDK_8_DIR}" ENV{JAVA_HOME})
+	dk_nativePath("${OPENJDK_8}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
 	dk_validate(CMD_EXE "dk_CMD_EXE()")

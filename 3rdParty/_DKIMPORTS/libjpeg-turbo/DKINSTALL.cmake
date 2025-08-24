@@ -23,21 +23,21 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_import(${libjpeg_turbo_Import})
 
 ### LINK ###
-dk_include			(${LIBJPEG_TURBO_DIR}									LIBJPEG_TURBO_INCLUDE_DIR)
-dk_include			(${LIBJPEG_TURBO_CONFIG_DIR}							LIBJPEG_TURBO_INCLUDE_DIR2)
-dk_include			(${LIBJPEG_TURBO_DIR}/src								LIBJPEG_TURBO_INCLUDE_DIR3)
+dk_include			(${LIBJPEG_TURBO}									LIBJPEG_TURBO_INCLUDE_DIR)
+dk_include			(${LIBJPEG_TURBO.Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
+dk_include			(${LIBJPEG_TURBO}/src								LIBJPEG_TURBO_INCLUDE_DIR3)
 
 if(Windows AND MSVC)
-	dk_libDebug		(${LIBJPEG_TURBO_DEBUG_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO_RELEASE_DIR}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${LIBJPEG_TURBO.Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${LIBJPEG_TURBO.Release_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${LIBJPEG_TURBO_DEBUG_DIR}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO_RELEASE_DIR}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${LIBJPEG_TURBO.Debug_Dir}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${LIBJPEG_TURBO.Release_Dir}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###
 dk_append(LIBJPEG_TURBO_CMAKE
-	#-DLIBJPEG_INCLUDE_DIR=${LIBJPEG_TURBO_DIR}
+	#-DLIBJPEG_INCLUDE_DIR=${LIBJPEG_TURBO}
 	-DJPEG_INCLUDE_DIR=${LIBJPEG_TURBO_INCLUDE_DIR} 
 	-DJPEG_INCLUDE_DIR2=${LIBJPEG_TURBO_INCLUDE_DIR2}
 	-DJPEG_LIBRARY_DEBUG=${LIBJPEG_TURBO_LIBRARY_DEBUG}
@@ -66,11 +66,11 @@ else()
 endif()
 
 ### GENERATE ##
-dk_configure(${LIBJPEG_TURBO_DIR} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
+dk_configure(${LIBJPEG_TURBO} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
 
 #if(EXISTS "${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h")
-#	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO_DIR}/jconfig.h" OVERWRITE)
+#	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO}/jconfig.h" OVERWRITE)
 #endif()
 
 ### COMPILE ###
-dk_build(${LIBJPEG_TURBO_DIR} turbojpeg-static)
+dk_build(${LIBJPEG_TURBO} turbojpeg-static)

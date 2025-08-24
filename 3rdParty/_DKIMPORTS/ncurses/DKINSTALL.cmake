@@ -30,15 +30,15 @@ dk_import(https://invisible-island.net/datafiles/release/ncurses.tar.gz)
 ### LINK ###
 dk_include			(${NCURSES}/include)
 dk_include			(${NCURSES}/${Target_Tuple})
-Debug_dk_include	(${NCURSES_DEBUG_DIR}/include)
-Release_dk_include	(${NCURSES_RELEASE_DIR}/include)
-dk_libDebug			(${NCURSES_DEBUG_DIR}/lib/libncurses.a)
-dk_libRelease		(${NCURSES_RELEASE_DIR}/lib/libncurses.a)
+Debug_dk_include	(${NCURSES.Debug_Dir}/include)
+Release_dk_include	(${NCURSES.Release_Dir}/include)
+dk_libDebug			(${NCURSES.Debug_Dir}/lib/libncurses.a)
+dk_libRelease		(${NCURSES.Release_Dir}/lib/libncurses.a)
 
 
-#DEBUG_dk_chdir		(${NCURSES_DEBUG_DIR})
+#DEBUG_dk_chdir		(${NCURSES.Debug_Dir})
 #DEBUG_dk_exec		(${DKCONFIGURE_BUILD})
-#RELEASE_dk_chdir	(${NCURSES_RELEASE_DIR})
+#RELEASE_dk_chdir	(${NCURSES.Release_Dir})
 #RELEASE_dk_exec	(${DKCONFIGURE_BUILD})
 dk_configure		(${NCURSES})
 

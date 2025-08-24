@@ -20,21 +20,21 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_import(${ZSTD_DL})
 
 ### LINK ###
-dk_include				(${ZSTD_DIR}/lib										ZSTD_INCLUDE_DIR)
+dk_include				(${ZSTD}/lib											ZSTD_INCLUDE_DIR)
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${ZSTD_CONFIG_DIR}/lib/${Debug_Dir}/zstd_static.lib	Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_CONFIG_DIR}/lib/${Release_Dir}/zstd_static.lib	Zstd_LIBRARY_RELEASE)
+		dk_libDebug		(${ZSTD.Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	Zstd_LIBRARY_DEBUG)
+		dk_libRelease	(${ZSTD.Config_Dir}/lib/${Release_Dir}/zstd_static.lib	Zstd_LIBRARY_RELEASE)
 	else()
-		dk_libDebug		(${ZSTD_CONFIG_DIR}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_CONFIG_DIR}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
+		dk_libDebug		(${ZSTD.Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
+		dk_libRelease	(${ZSTD.Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
 	endif()
 elseif(Apple)
-	dk_libDebug			(${ZSTD_CONFIG_DIR}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_CONFIG_DIR}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
+	dk_libDebug			(${ZSTD.Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
+	dk_libRelease		(${ZSTD.Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
 else()
-	dk_libDebug			(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_RELEASE)
+	dk_libDebug			(${ZSTD.Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_DEBUG)
+	dk_libRelease		(${ZSTD.Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_RELEASE)
 endif()
 if(Debug)
 	dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_DEBUG})
@@ -58,7 +58,7 @@ dk_set(ZSTD_CMAKE
 	"-DCMAKE_EXE_LINKER_FLAGS=${Zstd_LIBRARIES}")
 		
 ### GENERATE ###
-dk_configure(${ZSTD_DIR}/build/cmake
+dk_configure(${ZSTD}/build/cmake
 	-DZSTD_BUILD_CONTRIB=OFF		# "BUILD CONTRIB" OFF
 	-DZSTD_BUILD_PROGRAMS=OFF		# "BUILD PROGRAMS" ON
 	-DZSTD_BUILD_SHARED=OFF			# "BUILD SHARED LIBRARIES" ON

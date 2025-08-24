@@ -25,15 +25,15 @@ dk_import(https://github.com/lua/lua/archive/fd0e1f53.zip PATCH)
 ### LINK ###
 dk_include			(${LUA}/include							LUA_INCLUDE_DIR)
 dk_include			(${LUA}/${Target_Tuple}							LUA_INCLUDE_DIR2)
-Debug_dk_include	(${LUA_DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
-Release_dk_include	(${LUA_RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
+Debug_dk_include	(${LUA.Debug_Dir}/include		LUA_INCLUDE_DIR2)
+Release_dk_include	(${LUA.Release_Dir}/include	LUA_INCLUDE_DIR2)
 
 if(MSVC)
-	Windows_dk_libDebug		(${LUA_DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
-	Windows_dk_libRelease	(${LUA_RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
+	Windows_dk_libDebug		(${LUA.Debug_Dir}/lua.lib		LUA_DEBUG_LIBRARY)
+	Windows_dk_libRelease	(${LUA.Release_Dir}/lua.lib	LUA_RELEASE_LIBRARY)
 else()
-	dk_libDebug			(${LUA_DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
-	dk_libRelease		(${LUA_RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
+	dk_libDebug			(${LUA.Debug_Dir}/liblua.a		LUA_DEBUG_LIBRARY)
+	dk_libRelease		(${LUA.Release_Dir}/liblua.a	LUA_RELEASE_LIBRARY)
 endif()
 
 ### 3RDPARTY LINK ###

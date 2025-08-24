@@ -35,21 +35,21 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/heads/SDL2.zip PA
 #dk_import(https://github.com/libsdl-org/SDL_mixer/archive/497f149.zip PATCH) 		# SDL3
 
 ### LINK ###
-dk_include			(${SDL_MIXER_DIR}/include							SDL_MIXER_INCLUDE_DIR)
+dk_include			(${SDL_MIXER}/include							SDL_MIXER_INCLUDE_DIR)
 if(Windows AND MSVC)
-	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER.Debug_Dir}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER.Release_Dir}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
 elseif(Android)
-	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER.Debug_Dir}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER.Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${SDL_MIXER_DEBUG_DIR}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER_RELEASE_DIR}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER.Debug_Dir}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER.Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_MIXER_DIR} 
+dk_configure(${SDL_MIXER} 
 	-DCMAKE_POSITION_INDEPENDENT_CODE=OFF		# "Build static libraries with -fPIC" ON
 	#-DBUILD_SHARED_LIBS=OFF					# "Build the library as a shared library" ON
 	-DSDL2MIXER_INSTALL=OFF						# "Enable SDL2mixer install target"
@@ -96,4 +96,4 @@ dk_configure(${SDL_MIXER_DIR}
 
 
 ### COMPILE ###
-dk_build(${SDL_MIXER_DIR} SDL2_mixer)
+dk_build(${SDL_MIXER} SDL2_mixer)

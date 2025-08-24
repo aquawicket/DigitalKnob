@@ -22,11 +22,11 @@ dk_import			("${backward_cpp_Import}")
 ### LINK ###
 dk_include			("${BACKWARD_CPP}")
 #if(Unix)
-#	dk_libDebug		("${BACKWARD_CPP_DEBUG_DIR}/libbackward.a")
-#	dk_libRelease	("${BACKWARD_CPP_RELEASE_DIR}/libbackward.a")
+#	dk_libDebug		("${BACKWARD_CPP.Debug_Dir}/libbackward.a")
+#	dk_libRelease	("${BACKWARD_CPP.Release_Dir}/libbackward.a")
 #elseif(Windows)
-#	dk_libDebug		("${BACKWARD_CPP_DEBUG_DIR}/backward.lib")
-#	dk_libRelease	("${BACKWARD_CPP_RELEASE_DIR}/backward.lib")
+#	dk_libDebug		("${BACKWARD_CPP.Debug_Dir}/backward.lib")
+#	dk_libRelease	("${BACKWARD_CPP.Release_Dir}/backward.lib")
 #endif()
 
 

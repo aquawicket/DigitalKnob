@@ -36,24 +36,24 @@ endif()
 
 ### LINK ###
 dk_define					(PNG_STATIC)
-dk_include					(${LIBPNG_DIR}  														PNG_INCLUDE_DIR)
-dk_include					(${LIBPNG_CONFIG_DIR}													PNG_INCLUDE_DIR2)
+dk_include					(${LIBPNG}  														PNG_INCLUDE_DIR)
+dk_include					(${LIBPNG.Config_Dir}													PNG_INCLUDE_DIR2)
 
 if(MSVC)
 	if(Android)
-		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+		dk_libDebug			(${LIBPNG.Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${LIBPNG.Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
 	endif()
 	if(Windows)
-		dk_libDebug			(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
+		dk_libDebug			(${LIBPNG.Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${LIBPNG.Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
 	endif()
 elseif(Apple)
-	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng16d.a										PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBPNG.Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG.Release_Dir}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${LIBPNG_DEBUG_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG_RELEASE_DIR}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBPNG.Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG.Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
 endif()
 
 
@@ -132,7 +132,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBPNG_DIR}
+dk_configure(${LIBPNG}
 	-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
 	-DPNG_STATIC=ON					# "Build shared lib" ON
 	-DPNG_SHARED=OFF				# "Build static lib" ON
@@ -151,5 +151,5 @@ dk_configure(${LIBPNG_DIR}
 
 
 ### COMPILE ###
-dk_build(${LIBPNG_DIR} png_static)
+dk_build(${LIBPNG} png_static)
 

@@ -25,10 +25,10 @@ dk_import(https://github.com/google/diff-match-patch/archive/62f2e689f498f9c92db
 
 ### LINK ###
 #dk_include			(${DIFF_MATCH_PATCH}/include)
-#Unix_dk_libDebug	(${DIFF_MATCH_PATCH_DEBUG_DIR}/libdiff-match-patchd.a)
-#Unix_dk_libRelease	(${DIFF_MATCH_PATCH_RELEASE_DIR}/libdiff-match-patch.a)
-#Windows_dk_libDebug	(${DIFF_MATCH_PATCH_DEBUG_DIR}/diff-match-patchd.lib)
-#Windows_dk_libRelease	(${DIFF_MATCH_PATCH_RELEASE_DIR}/diff-match-patch.lib)
+#Unix_dk_libDebug	(${DIFF_MATCH_PATCH.Debug_Dir}/libdiff-match-patchd.a)
+#Unix_dk_libRelease	(${DIFF_MATCH_PATCH.Release_Dir}/libdiff-match-patch.a)
+#Windows_dk_libDebug	(${DIFF_MATCH_PATCH.Debug_Dir}/diff-match-patchd.lib)
+#Windows_dk_libRelease	(${DIFF_MATCH_PATCH.Release_Dir}/diff-match-patch.lib)
 
 
 ### GENERATE ###

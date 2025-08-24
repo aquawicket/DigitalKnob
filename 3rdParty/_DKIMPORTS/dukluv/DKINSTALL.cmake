@@ -30,15 +30,15 @@ dk_import				(${DUKLUV_DL})
 dk_include				(${DUKLUV}/include)
 dk_include				(${DUKLUV}/${Target_Tuple})
 if(MSVC)
-	Windows_dk_libDebug		(${DUKLUV_DEBUG_DIR}/dukluv.lib)
-	Windows_dk_libRelease	(${DUKLUV_RELEASE_DIR}/dukluv.lib)
+	Windows_dk_libDebug		(${DUKLUV.Debug_Dir}/dukluv.lib)
+	Windows_dk_libRelease	(${DUKLUV.Release_Dir}/dukluv.lib)
 else()
-	dk_libDebug			(${DUKLUV_DEBUG_DIR}/libdukluv.a)
-	dk_libRelease		(${DUKLUV_RELEASE_DIR}/libdukluv.a)
+	dk_libDebug			(${DUKLUV.Debug_Dir}/libdukluv.a)
+	dk_libRelease		(${DUKLUV.Release_Dir}/libdukluv.a)
 endif()
 
 ### GENERATE ###
-dk_configure			(${DUKLUV_DIR} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
+dk_configure			(${DUKLUV} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
 
 ### COMPILE ###
 dk_build				(${DUKLUV})

@@ -34,11 +34,11 @@ dk_import		(${_LIB_NAME_})
 ### LINK ###
 dk_include			(${_LIB_NAME_}/include)
 if(MSVC)
-	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/package.lib)
-	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/package.lib)
+	dk_libDebug		(${_LIB_NAME_..Debug_Dir}/package.lib)
+	dk_libRelease	(${_LIB_NAME_..Release_Dir}/package.lib)
 else()
-	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/libpackage.a)
-	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/libpackage.a)
+	dk_libDebug		(${_LIB_NAME_..Debug_Dir}/libpackage.a)
+	dk_libRelease	(${_LIB_NAME_..Release_Dir}/libpackage.a)
 endif()
 
 ### GENERATE ###

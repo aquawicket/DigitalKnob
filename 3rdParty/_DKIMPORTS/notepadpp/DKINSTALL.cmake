@@ -26,14 +26,14 @@ dk_importVariables(${NOTEPADPP_IMPORT})
 
 ### IMPORT ###
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_set(NOTEPADPP_DIR $ENV{DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
-dk_import(${NOTEPADPP_IMPORT} _PATH_ ${NOTEPADPP_DIR})
-dk_set(NOTEPADPP_EXE "${NOTEPADPP_DIR}/notepad++.exe")
+dk_set(NOTEPADPP $ENV{DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
+dk_import(${NOTEPADPP_IMPORT} _PATH_ ${NOTEPADPP})
+dk_set(NOTEPADPP_EXE "${NOTEPADPP}/notepad++.exe")
 #dk_nativePath(${NOTEPADPP_EXE} NOTEPADPP_EXE_WINPATH)
 
 
 ### dark mode ###
-dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP_DIR}/config.xml OVERWRITE)
+dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP}/config.xml OVERWRITE)
 
 
 ### dk_installNotepadppContextMenu.cmd ###

@@ -25,26 +25,26 @@ dk_import(${zlib_Import})
 ### DKBIN ###
 #set(ZLIB			 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/DigitalKnob/DKBIN/include/zlib
 #set(ZLIB_INC		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/include/zlib")  	# C:/Users/Administrator/DigitalKnob/DKBIN/include/zlib
-#set(ZLIB_CONFIG_DIR  	"${ZLIB_INC}/${Target_Config}")					# //DKBIN/include/zlib/Windows_X86_64_Clang (MULTI_CONFIG), //DKBIN/include/zlib/Windows_X86_64_Clang/Debug (SINGLE_CONFIG)
+#set(ZLIB.Config_Dir  	"${ZLIB_INC}/${Target_Config}")					# //DKBIN/include/zlib/Windows_X86_64_Clang (MULTI_CONFIG), //DKBIN/include/zlib/Windows_X86_64_Clang/Debug (SINGLE_CONFIG)
 #set(ZLIB_LIB		 	"$ENV{DIGITALKNOB_DIR}/DKBIN/lib/zlib")	   		# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib
-#set(ZLIB_DEBUG_DIR		"${ZLIB_LIB}/${Target_Tuple}/${Debug_Dir}")		# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Debug
-#set(ZLIB_RELEASE_DIR 	"${ZLIB_LIB}/${Target_Tuple}/${Release_Dir}")	# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Release
+#set(ZLIB.Debug_Dir		"${ZLIB_LIB}/${Target_Tuple}/${Debug_Dir}")		# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Debug
+#set(ZLIB.Release_Dir 	"${ZLIB_LIB}/${Target_Tuple}/${Release_Dir}")	# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Release
 
 ### LINK ###
 dk_include				(${ZLIB}								ZLIB_INCLUDE_DIR)
-dk_include				(${ZLIB_CONFIG_DIR}						ZLIB_INCLUDE_DIR2)
+dk_include				(${ZLIB.Config_Dir}						ZLIB_INCLUDE_DIR2)
 if(MSVC)
 	if(Windows)	
-		dk_libDebug		(${ZLIB_DEBUG_DIR}/zd.lib				ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${ZLIB_RELEASE_DIR}/z.lib 				ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${ZLIB.Debug_Dir}/zd.lib				ZLIB_LIBRARY_DEBUG)
+		dk_libRelease	(${ZLIB.Release_Dir}/z.lib 				ZLIB_LIBRARY_RELEASE)
 	endif()
 else()
 	if(Windows)
-		dk_libDebug		(${ZLIB_DEBUG_DIR}/libzlibstatic.a		ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${ZLIB_RELEASE_DIR}/libzlibstatic.a	ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${ZLIB.Debug_Dir}/libzlibstatic.a		ZLIB_LIBRARY_DEBUG)
+		dk_libRelease	(${ZLIB.Release_Dir}/libzlibstatic.a	ZLIB_LIBRARY_RELEASE)
 	else()
-		dk_libDebug		(${ZLIB_DEBUG_DIR}/libz.a				ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${ZLIB_RELEASE_DIR}/libz.a				ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${ZLIB.Debug_Dir}/libz.a				ZLIB_LIBRARY_DEBUG)
+		dk_libRelease	(${ZLIB.Release_Dir}/libz.a				ZLIB_LIBRARY_RELEASE)
 	endif()
 endif()
 if(Debug)
