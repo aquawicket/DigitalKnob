@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT EXIST "%_file_%" (
 		if EXIST "%DKARCHIVE%" (
 			call set "tar_file=%%_file_:%DIGITALKNOB_DIR%/=%%"
-			tar -zxf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" %tar_file%
+			tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" %tar_file%
 		)
 	)
 	

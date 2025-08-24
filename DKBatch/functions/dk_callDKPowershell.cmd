@@ -19,6 +19,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT EXIST "%DKPOWERSHELL_FUNCTIONS_DIR%"			(%dk_call% dk_mkdir "%DKPOWERSHELL_FUNCTIONS_DIR%")
 	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
 
+	::### Atempt to extract the file from DigitalKnob.tar.gz
+	if defined DKOFFLINE (
+		if EXIST "%DKARCHIVE%" (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" DKPowershell/functions/%~1.ps1)
+	)
+	
 	::### Get DKHTTP_DKPOWERSHELL_DIR
 	if NOT defined DKHTTP_DKPOWERSHELL_DIR				(set "DKHTTP_DKPOWERSHELL_DIR=%DKHTTP_DKBRANCH_DIR%/DKPowershell")
 	if NOT defined DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR	(set "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR=%DKHTTP_DKPOWERSHELL_DIR%/functions")
