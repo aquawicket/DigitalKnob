@@ -51,7 +51,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_set Target_Type	%Target_Type_Cache%
 	)
     if "%dk_keyboardInput%" equ "1" (
-		if "%DKOFFLINE%" neq "" (
+		if EXIST "%DKOFFLINE%/DigitalKnob.git" (
 			%dk_call% dk_gitUpdate "%DKOFFLINE%/DigitalKnob.git" Development
 		) else (
 			%dk_call% dk_gitUpdate "https://github.com/aquawicket/DigitalKnob.git" Development

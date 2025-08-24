@@ -86,8 +86,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
-	if "%DKOFFLINE%" neq "" (
-		%dk_call% dk_assertPath "%DKOFFLINE%"
+	if EXIST "%DKOFFLINE%" (
 		%dk_call% dk_echo "%bg_yellow%%black%###### OFFLINE MODE ###### OFFLINE MODE ###### OFFLINE MODE ######%clr%"
 	)
 	
@@ -162,6 +161,16 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 %endfunction%
 
 ::##################################################################################
+::# dk_DKSCRIPT_FILE
+::#
+:dk_DKSCRIPT_FILE
+	%push%
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT defined DKSCRIPT_FILE	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_FILE=%%~nxZ")
+	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & exit -1)
+%endfunction%
+
+::##################################################################################
 ::# dk_DKSCRIPT_NAME
 ::#
 :dk_DKSCRIPT_NAME
@@ -192,16 +201,6 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 %endfunction%
 
 ::##################################################################################
-::# dk_DKSCRIPT_FILE
-::#
-:dk_DKSCRIPT_FILE
-	%push%
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
-	if NOT defined DKSCRIPT_FILE	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_FILE=%%~nxZ")
-	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & exit -1)
-%endfunction%
-
-::##################################################################################
 ::# dk_DKSCRIPT_ARGS
 ::#
 :dk_DKSCRIPT_ARGS
@@ -226,7 +225,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 ::#
 :dk_initFiles
 	%pushStack%
-	if NOT defined DKOFFLINE 				(set "DKOFFLINE=%SystemDrive%/DKOffline")
+	::if NOT defined DKOFFLINE 				(set "DKOFFLINE=%SystemDrive%/DKOffline")
 	if NOT defined DKARCHIVE 				(set "DKARCHIVE=%DKOFFLINE%/%DIGITALKNOB%.tar.gz")
 	if NOT defined DKBRANCH_DIR				(set "DKBRANCH_DIR=%USERPROFILE:\=/%/DigitalKnob/Development")
 	if EXIST "%DKARCHIVE%" (
