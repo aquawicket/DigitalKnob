@@ -37,7 +37,7 @@ if NOT defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 	::set dk_func=cmake
 	::set !dk_func!=test
 	set dk_exec_call=%*
-	set dk_exec_command=%dk_exec_call%
+	set dk_exec_command=%dk_exec_call:NO_ERROR=%
 	set dk_exec_exitcodes=
 	set dk_exec_exitcode=
 	set dk_exec_stderr=
