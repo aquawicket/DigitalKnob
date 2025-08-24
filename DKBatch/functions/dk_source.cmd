@@ -48,6 +48,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%dirn:~-1%" equ "/" set "dirn=%dirn:~0,-1%"
 	if NOT EXIST "%dirn%" mkdir "%dirn%"	
 
+	::### Atempt to extract the file from DigitalKnob.tar.gz
+	set "DKARCHIVE=C:/DKOffline/DigitalKnob.tar.gz"
+	set "DKHTTPRAW=https://raw.githubusercontent.com/aquawicket/Digitalknob/Development"
+	call set "RELATIVE=%%_url_:%DKHTTPRAW%/=%%"
+	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	if EXIST "%DKARCHIVE%" (
+		rem echo Extracting %DKARCHIVE% %RELATIVE% to %_fnc_%
+		tar -tf "%DKARCHIVE%" %RELATIVE% 1>nul 2>nul && (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" %RELATIVE%)
+		if EXIST "%_fnc_%" exit /b 0
+	)
+	
 	::echo curl.exe -L "%_url_%" -o "%_fnc_%"
 	if NOT EXIST "%_fnc_%"  curl.exe --help 1>nul 2>nul && curl.exe -L "%_url_%" -o "%_fnc_%"
 	if EXIST "%_fnc_%" exit /b 0
