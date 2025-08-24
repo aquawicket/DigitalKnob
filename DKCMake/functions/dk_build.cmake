@@ -23,14 +23,8 @@ include_guard()
 function(dk_build)
 	dk_debugFunc(0 99)
 	
-#	if(NOT DEFINED ENV{CURRENT_PLUGIN})
-#		dk_basename("${Source_Dir}")
-#		dk_envList(PLUGIN PUSH "${dk_basename}")
-#	endif()
-
 	dk_assertPath(${CURRENT_PLUGIN})
 	#dk_basename("${${CURRENT_PLUGIN}}")
-	#set(Plugin_Name "${dk_basename}")
 	
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")

@@ -20,25 +20,35 @@ include_guard()
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
 #dk_validate(Target_Config  "dk_Target_Config()")
+if(NOT CURRENT_PLUGIN)
+	dk_call(dk_set Import_Path "${CMAKE_CURRENT_LIST_DIR}")
+	dk_basename("${Import_Path}")
+	dk_toUpper("${dk_basename}" PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	dk_set(${PLUGIN}.Import_Path "${Import_Path}")
+	dk_envList(PLUGIN PUSH "${PLUGIN}")
+endif()
+dk_printPrefixVars("PLUGIN.")
+dk_printPrefixVars("LIBXML2.")
+
 
 ### DEPEND ###
-#if(NOT DEFINED LIBICONV)
-	dk_depend(libiconv)
-#endif()
+dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
 dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_importVariables(${libxml2_Import})
-dk_import(${libxml2_Import})
+dk_importVariables("" IMPORT_PATH "${${PLUGIN}.Import_Path}")
+dk_import("${libxml2_Import}" PATCH)
+dk_assertVar(LIBXML2)
 
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_depend(autoconf)
-	dk_depend(automake)
-	dk_depend(libtool)
-endif()
+#if(NOT EXISTS ${LIBXML2}/configure)
+#	dk_depend(autoconf)
+#	dk_depend(automake)
+#	dk_depend(libtool)
+#endif()
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)

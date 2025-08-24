@@ -56,5 +56,6 @@ endmacro()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	set(myVar "a b c")
+	dk_dump(myVar)
 endfunction()

@@ -23,6 +23,13 @@ include_guard()
 #
 function(dk_depend plugin) #target
 	dk_debugFunc(1 2)
+	set(this "${plugin}")
+	
+	if(plugin IN_LIST done_list)
+		dk_debug("${plugin} is allready completed")
+		return()  #plugin is already completed
+	endif()
+	
 	message("############ dk_depend(${plugin}) ############")
 	if(plugin IN_LIST dk_disabled_list)
 		if(DISABLED_LIBS MATCHES "${plugin}")
@@ -34,22 +41,31 @@ function(dk_depend plugin) #target
 	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	set(${PLUGIN}_IMPORT_NAME ${plugin})
+	set(CURRENT_PLUGIN "${PLUGIN}")
 	
-	#dk_debug("PLUGIN = ${PLUGIN}")
-	#dk_pause()
-	if(NOT EXISTS "${PLUGIN}")
+	dk_set(${PLUGIN}.Import_Name "${plugin}")						#<PLUGIN>.Import_Name
+	dk_getPathToPlugin(${plugin} ${PLUGIN}.Import_Path)
+	dk_set(${PLUGIN}.Import_Path "${${PLUGIN}.Import_Path}") 		#<PLUGIN>.Import_Path
+	dk_dirname("${${PLUGIN}.Import_Path}" ${PLUGIN}.Import_Dirname)
+	dk_set(${PLUGIN}.Import_Dirname "${${PLUGIN}.Import_Dirname}") 	#<PLUGIN>.Import_Dirname
+	
+	if(NOT EXISTS "${${PLUGIN}.Install_Path}")
 		
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "${this}:${PLUGIN} >>>>\n")
 		
 		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
 	
 		###### Pop Plugin from the PLUGIN_STACK ######
+		list(APPEND done_list "${plugin}")
+		dk_set(done_list "${done_list}")
+		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "<<<< ${this}:${PLUGIN}\n")
+		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "${done_list}\n")
 		dk_envList(PLUGIN POP)
-		dk_debug("############################## ${PLUGIN} EXIT ##############################\n\n")
+		dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
 
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
