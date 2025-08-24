@@ -76,6 +76,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### Commit the local repository
     "%GIT_EXE%" -C %DKBRANCH_DIR% commit -a -m "%commit_msg%"
 	
+	::### Backup the local repository to a bundle file
+	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_gitBackup "%DKBRANCH_DIR%" "%DKDOWNLOAD_DIR%/DigitalKnob.git" OVERWRITE
+	
 	::### Push to the remote repository
 	set "REPO_URL=https://github.com/aquawicket/DigitalKnob.git"
 	"%GIT_EXE%" -C "%DKBRANCH_DIR%" remote set-url origin %REPO_URL%
