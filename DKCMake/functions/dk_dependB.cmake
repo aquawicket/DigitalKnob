@@ -23,7 +23,7 @@ function(dk_dependB plugin)
 	dk_debugFunc()
 	
 	if(plugin IN_LIST init_list)
-		#dk_debug("${plugin} is allready in init_list")
+		dk_debug("${plugin} is allready in init_list")
 		return()  #plugin is already in the init_list
 	endif()
 	dk_append(init_list "${plugin}")
@@ -40,6 +40,8 @@ function(dk_dependB plugin)
 	
 	###### Load the DKINSTALL.cmake file ######
 	dk_set(CURRENT_IMPORT "${Plugin_Path}")
+	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
+	dk_debug("dk_load(${Plugin_Path}/DKINSTALL.cmake)")
 	dk_load(${Plugin_Path}/DKINSTALL.cmake)
 	
 #	if(${ARGC} GREATER 1)

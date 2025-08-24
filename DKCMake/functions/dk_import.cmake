@@ -105,10 +105,9 @@ function(dk_import)
 
 	dk_getParameter(PATCH)
 	if(PATCH)
-		dk_patch(${${CURRENT_PLUGIN}.IMPORT_NAME} ${{CURRENT_PLUGIN}})
+		dk_patch(${${CURRENT_PLUGIN}.IMPORT_NAME} ${${CURRENT_PLUGIN}})
 	endif()
-	
-	#dk_envList(PLUGIN POP)
+
 endfunction()
 
 

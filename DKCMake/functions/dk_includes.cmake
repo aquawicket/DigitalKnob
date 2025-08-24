@@ -23,9 +23,12 @@ include_guard()
 #
 function(dk_includes)
 	dk_debugFunc(2 99)
+	dk_debug("dk_includes(${ARGV})")
+	#dk_getArg(0 variable)
+	#dk_getArg(1 find)
 	
-	dk_getArg(0 variable)
-	dk_getArg(1 find)
+	set(variable "${ARGV0}")
+	set(find "${ARGV1}")
 	
 	string(FIND "${variable}" "${find}" dk_includes)
 	math(EXPR dk_includes "${dk_includes}+1")

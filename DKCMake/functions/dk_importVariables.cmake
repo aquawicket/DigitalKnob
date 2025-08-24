@@ -56,6 +56,8 @@ function(dk_importVariables)
 	#dk_debugFunc(1 9)
 	dk_debug("dk_importVariables(${ARGV})")
 	
+	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
+	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
 		PRINTVARS()
@@ -169,6 +171,10 @@ function(dk_importVariables)
 		
 	### PLUGIN.Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	#dk_unset(PLUGIN.Url)
+	dk_isUrl("${ARGV0}")
+	if(dk_isUrl)
+		message("${ARGV0} is a valid URL")
+	endif()
 	set(PLUGIN.Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN.Url = '${PLUGIN.Url}'")
 
@@ -501,8 +507,13 @@ function(PLUGIN_Import_Path)
 		
 		### DKCpp/plugins/
 		dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
+		dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
+		dk_debug("DKCPP_PLUGINS_DIR = ${DKCPP_PLUGINS_DIR}")
 		dk_includes("${CURRENT_IMPORT}" "${DKCPP_PLUGINS_DIR}" dk_includes)
+		
+		dk_debug("dk_includes = ${dk_includes}")
 		if(dk_includes)
+			dk_success("dk_includes is true")
 			set(PLUGIN.Import.Path "${CURRENT_IMPORT}" CACHE INTERNAL "")
 		endif()
 	endif()

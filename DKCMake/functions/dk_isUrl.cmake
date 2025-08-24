@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_isUrl(arg)
+# dk_isUrl(arg, rtn_var)
 # 
 #	Test if a string is a url
 #
@@ -26,10 +26,19 @@ function(dk_isUrl)
 	dk_getArg(0 _arg0_)
 	
 	if("${_arg0_}" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://")
-		set(dk_isUrl 1 PARENT_SCOPE)
+		set(dk_isUrl 1)
 	else()
-		set(dk_isUrl 0 PARENT_SCOPE)
+		set(dk_isUrl 0)
 	endif()	
+	
+
+	###### output ######
+	set(dk_isUrl ${dk_isUrl} PARENT_SCOPE)
+	if(ARGV1)
+		set(${ARGV1} ${dk_isUrl} PARENT_SCOPE)
+	else()
+		message("${dk_isUrl}") 
+	endif()
 endfunction()
 
 
