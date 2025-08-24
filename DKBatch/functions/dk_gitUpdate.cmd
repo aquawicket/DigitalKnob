@@ -48,24 +48,27 @@ set "dk_gitUpdate_BACKUP=1"
 			if "%dk_gitUpdate_BACKUP%" equ "1" (
 				%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
 			)
-			%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-			set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
-			cd "!DIGITALKNOB_DIR!"
 			set "delete_repo=1"
 		)
 		rem ####################################################################
 		set "clone_repo=1"	
 	)
 	
-	if defined delete_repo rd /s /q "%DKBRANCH_DIR%"
-	if defined clone_repo "%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
-	::###### Update ######
-	"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
-	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
-		echo Remote has no '%DKBRANCH%' branch. Creating...
-		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %DKBRANCH% main
-		"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %DKBRANCH%
+	(
+		if defined delete_repo %dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+		if defined delete_repo set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
+		if defined delete_repo cd "!DIGITALKNOB_DIR!"
+		if defined delete_repo rd /s /q "%DKBRANCH_DIR%"
+		if defined clone_repo "%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
+		::###### Update ######
+		"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
+		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
+		"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
+			echo Remote has no '%DKBRANCH%' branch. Creating...
+			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %DKBRANCH% main
+			"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %DKBRANCH%
+		)
+		%return%
 	)
 %endfunction%
 
