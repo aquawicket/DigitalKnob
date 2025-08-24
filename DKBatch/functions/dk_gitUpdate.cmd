@@ -14,7 +14,9 @@ set "dk_gitUpdate_BACKUP=1"
 %setlocal%
 	%dk_call% dk_debugFunc 2 3
 
-    if "%~1" neq "" (set "_git_url_=%~1") else (
+    if "%~1" neq "" (
+		set "_git_url_=%~1"
+	) else (
 		if "%DKOFFLINE%" equ "" (
 			set "_git_url_=https://github.com/aquawicket/DigitalKnob.git"
 		) else (
@@ -22,6 +24,7 @@ set "dk_gitUpdate_BACKUP=1"
 			%dk_call% dk_assertPath "%_git_url_%"
 		)
 	)
+	%dk_call% dk_echo %_git_url_%
     if "%~2" neq "" (set "DKBRANCH=%~2") else (set "DKBRANCH=Development")
    
     ::if "%3" neq "NO_CONFIRM" (
@@ -44,21 +47,12 @@ set "dk_gitUpdate_BACKUP=1"
 		
 			rem ###### Backup Branch directory and clone ######
 			if "%dk_gitUpdate_BACKUP%" equ "1" (
-				%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
-				cd "%DIGITALKNOB_DIR%"
 				%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE
-				set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
 			)
+			%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+			set "PATH=%DKBRANCH_DIR%_BACKUP/DKBatch/functions;%PATH%"
+			cd "!DIGITALKNOB_DIR!"
 			rd /s /q "%DKBRANCH_DIR%"
-			"%GIT_EXE%" clone %_git_url_% "%DKBRANCH_DIR%"
-			"%GIT_EXE%" -C %DKBRANCH_DIR% pull --all
-			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -- .
-			"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %DKBRANCH% || (
-				echo "Remote has no %DKBRANCH%' branch. Creating...
-				"%GIT_EXE%" -C %DKBRANCH_DIR% checkout -b %DKBRANCH% main
-				"%GIT_EXE%" -C %DKBRANCH_DIR% push --set-upstream origin %DKBRANCH%
-			)
-			%return%
 		)
 		rem ####################################################################
 		
