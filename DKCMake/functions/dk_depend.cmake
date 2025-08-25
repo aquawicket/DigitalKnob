@@ -23,10 +23,9 @@ include_guard()
 #
 function(dk_depend plugin) #target
 	dk_debugFunc(1 2)
-	set(this "${plugin}")
 	
 	if(plugin IN_LIST done_list)
-		dk_debug("${plugin} is allready completed")
+		dk_debug("${plugin} is already completed")
 		return()  #plugin is already completed
 	endif()
 	
@@ -54,7 +53,6 @@ function(dk_depend plugin) #target
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
-		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "${this}:${PLUGIN} >>>>\n")
 		
 		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
 		dk_dependB(${plugin})
@@ -62,8 +60,6 @@ function(dk_depend plugin) #target
 		###### Pop Plugin from the PLUGIN_STACK ######
 		list(APPEND done_list "${plugin}")
 		dk_set(done_list "${done_list}")
-		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "<<<< ${this}:${PLUGIN}\n")
-		dk_fileAppend("C:/Users/Administrator/Desktop/DEPEND_LOG.txt" "${done_list}\n")
 		dk_envList(PLUGIN POP)
 		dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
 

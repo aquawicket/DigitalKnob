@@ -21,7 +21,7 @@ include_guard()
 # https://wiki.duktape.org/projectsusingduktape
 
 dk_validate(Target_Config  "dk_Target_Config()")
-dk_import(PATCH)
+
 ### DEPEND ###
 dk_depend(python3)
 dk_depend(pyyaml)
@@ -29,7 +29,7 @@ dk_depend(pyyaml)
 #dk_validate(MSYS2 "dk_depend(msys2)")
 
 ### IMPORT ###
-#dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt
+dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt
 
 
 ### LINK ###

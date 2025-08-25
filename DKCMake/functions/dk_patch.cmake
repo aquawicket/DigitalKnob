@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_patch(import_name dest_path)
+# dk_patch(import_name, dest_path)
 #
 #	Copy files from a DK/3rdParty/_DKIMPORTS/library to the DK/3rdParty/library install location
 #
