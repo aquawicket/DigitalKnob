@@ -17,7 +17,7 @@ set "dk_gitUpdate_BACKUP=1"
     if "%~1" neq "" (
 		set "_git_url_=%~1"
 	) else (
-		if defined DKOFFLINE (
+		if "%DKOFFLINE%" equ "1" (
 			if EXIST "%DKSTORAGE_DIR%/DigitalKnob.git" (set "_git_url_=%DKSTORAGE_DIR%/DigitalKnob.git")
 		) 
 		if NOT defined _git_url_ (set "_git_url_=https://github.com/aquawicket/DigitalKnob.git")

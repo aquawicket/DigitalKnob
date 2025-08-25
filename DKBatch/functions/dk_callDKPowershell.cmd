@@ -20,7 +20,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertPath DKPOWERSHELL_FUNCTIONS_DIR
 
 	::### Atempt to extract the file from DigitalKnob.tar.gz
-	if defined DKOFFLINE (
+	if "%DKOFFLINE%" equ "1" (
 		if EXIST "%DKARCHIVE%" (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" DKPowershell/functions/%~1.ps1)
 	)
 	

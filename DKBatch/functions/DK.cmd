@@ -86,7 +86,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		%dk_call% dk_getFileParams "%DKBRANCH_DIR%/dkconfig.txt"
 	)
 	
-	if defined DKOFFLINE (
+	if "%DKOFFLINE%" equ "1" (
 		%dk_call% dk_echo "%bg_yellow%%black%###### OFFLINE MODE ###### OFFLINE MODE ###### OFFLINE MODE ######%clr%"
 	)
 	

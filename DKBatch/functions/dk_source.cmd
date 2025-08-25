@@ -33,7 +33,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if EXIST "%_fnc_%" exit /b 0
 	
 	::### Atempt to extract the file from DigitalKnob.tar.gz
-	if defined DKOFFLINE (
+	if "%DKOFFLINE%" equ "1" (
 		if EXIST "%DKARCHIVE%" (tar -zxvf "%DKARCHIVE%" -C "%DKBRANCH_DIR%" DKBatch/functions/%_fnc_%)
 		if EXIST "%DKBATCH_FUNCTIONS_DIR_%%_fnc_%" exit /b 0
 	)
