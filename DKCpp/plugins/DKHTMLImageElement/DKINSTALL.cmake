@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_importVariables(_PATH_ "${CMAKE_CURRENT_LIST_DIR}")
+dk_importVariables(INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 ############ DKHTMLImageElement ############
 # [IDL] https://html.spec.whatwg.org/multipage/sections.html#htmlbodyelement
