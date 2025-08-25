@@ -25,7 +25,7 @@ find_library(ICONV_LIBRARIES NAMES iconv libiconv libiconv-2 c
 # Use some standard module to handle the QUIETLY and REQUIRED arguments, and
 # set ICONV_FOUND to TRUE if these two variables are set.
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Iconv REQUIRED_VARS ICONV_LIBRARIES ICONV_INCLUDE_DIRS)
+find_package_handle_standard_args(ICONV REQUIRED_VARS ICONV_LIBRARIES ICONV_INCLUDE_DIRS)
 
 # Check if the prototype is
 # size_t iconv(iconv_t cd, char** inbuf, size_t* inbytesleft,

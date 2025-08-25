@@ -98,13 +98,13 @@ function(dk_import)
 		endif()
 		
 		if("${FileType}" STREQUAL "Archive")
-			dk_smartExtract("${dk_download}" "${PLUGIN.Install.Path}")
+			dk_smartExtract("${dk_download}" "${PLUGIN.Install_Path}")
 		endif()
 	endif()
 
 	dk_getParameter(PATCH)
 	if(PATCH)
-		dk_patch(${${CURRENT_PLUGIN}.IMPORT_NAME} ${${CURRENT_PLUGIN}})
+		dk_patch("${${CURRENT_PLUGIN}.Import_Name}" "${${CURRENT_PLUGIN}}")
 	endif()
 
 endfunction()

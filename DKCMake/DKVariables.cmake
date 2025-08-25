@@ -340,3 +340,23 @@ if(NOT CMAKE_SCRIPT_MODE_FILE)
 endif()
 
 
+######################################################################################################
+# If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
+# dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
+# itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
+if(NOT CURRENT_PLUGIN)
+	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")												### EXAMPLE ###
+		dk_call(dk_set PLUGIN.Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN.Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_basename("${PLUGIN.Import_Path}")
+		dk_set(PLUGIN.Import_Name "${dk_basename}")					# PLUGIN.Import_Name		zlib
+		dk_toUpper("${dk_basename}" PLUGIN)
+		dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+		dk_set(PLUGIN "${PLUGIN}")									# PLUGIN					ZLIB
+		dk_set(PLUGIN.Id "${PLUGIN}")								# PLUGIN.Id					ZLIB
+		
+		dk_set(${PLUGIN}.Id          "${PLUGIN.Id}")				# <PLUGIN>.Id				ZLIB
+		dk_set(${PLUGIN}.Import_Path "${PLUGIN.Import_Path}")		# <PLUGIN>.Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_set(${PLUGIN}.Import_Name "${PLUGIN.Import_Name}")		# <PLUGIN>.Import_Name		zlib	
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+	endif()
+endif()

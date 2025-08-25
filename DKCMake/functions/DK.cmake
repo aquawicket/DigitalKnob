@@ -229,8 +229,12 @@ function(dk_DKSCRIPT_VARS)
 		dk_fatal("ENV{DKSCRIPT_DIR}:'$ENV{DKSCRIPT_DIR}' not found!")
 	endif()
 	
+	###### DKSCRIPT_FILE ######
+	get_filename_component(DKSCRIPT_FILE "$ENV{DKSCRIPT_PATH}" NAME)
+	set(ENV{DKSCRIPT_FILE} "${DKSCRIPT_FILE}")
+	
 	###### DKSCRIPT_NAME ######
-	get_filename_component(DKSCRIPT_NAME "$ENV{DKSCRIPT_PATH}" NAME)
+	get_filename_component(DKSCRIPT_NAME "$ENV{DKSCRIPT_PATH}" NAME_WE)
 	set(ENV{DKSCRIPT_NAME} "${DKSCRIPT_NAME}")
 	
 	###### DKSCRIPT_EXT ######

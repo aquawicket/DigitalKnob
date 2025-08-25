@@ -20,16 +20,14 @@ include_guard()
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
 #dk_validate(Target_Config  "dk_Target_Config()")
-if(NOT CURRENT_PLUGIN)
-	dk_call(dk_set Import_Path "${CMAKE_CURRENT_LIST_DIR}")
-	dk_basename("${Import_Path}")
-	dk_toUpper("${dk_basename}" PLUGIN)
-	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	dk_set(${PLUGIN}.Import_Path "${Import_Path}")
-	dk_envList(PLUGIN PUSH "${PLUGIN}")
-endif()
-dk_printPrefixVars("PLUGIN.")
-dk_printPrefixVars("LIBXML2.")
+#if(NOT CURRENT_PLUGIN)
+#	dk_call(dk_set Import_Path "${CMAKE_CURRENT_LIST_DIR}")
+#	dk_basename("${Import_Path}")
+#	dk_toUpper("${dk_basename}" PLUGIN)
+#	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+#	dk_set(${PLUGIN}.Import_Path "${Import_Path}")
+#	dk_envList(PLUGIN PUSH "${PLUGIN}")
+#endif()
 
 
 ### DEPEND ###
@@ -44,11 +42,11 @@ dk_importVariables("" IMPORT_PATH "${${PLUGIN}.Import_Path}")
 dk_import("${libxml2_Import}" PATCH)
 dk_assertVar(LIBXML2)
 
-#if(NOT EXISTS ${LIBXML2}/configure)
-#	dk_depend(autoconf)
-#	dk_depend(automake)
-#	dk_depend(libtool)
-#endif()
+if(NOT EXISTS ${LIBXML2}/configure)
+	dk_depend(autoconf)
+	dk_depend(automake)
+	dk_depend(libtool)
+endif()
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
@@ -169,6 +167,9 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 #Windows_dk_exec(${DKCONFIGURE_BUILD})
+if(NOT EXISTS ${LIBXML2}/configure)
+	dk_exec(${LIBXML2}/autogen.sh)
+endif()
 dk_configure(${LIBXML2} 
 	-DLIBXML2_WITH_C14N=ON					# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON				# Add the Catalog support ON
@@ -210,4 +211,4 @@ dk_configure(${LIBXML2}
 	${ZLIB_CMAKE})
 
 ### COMPILE ###
-dk_build(${LIBXML2} LibXml2)
+dk_build(${LIBXML2})# LibXml2)
