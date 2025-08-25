@@ -23,9 +23,9 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_import(${libjpeg_turbo_Import})
 
 ### LINK ###
-dk_include			(${LIBJPEG_TURBO}									LIBJPEG_TURBO_INCLUDE_DIR)
+dk_include			(${LIBJPEG_TURBO}										LIBJPEG_TURBO_INCLUDE_DIR)
 dk_include			(${LIBJPEG_TURBO.Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
-dk_include			(${LIBJPEG_TURBO}/src								LIBJPEG_TURBO_INCLUDE_DIR3)
+dk_include			(${LIBJPEG_TURBO}/src									LIBJPEG_TURBO_INCLUDE_DIR3)
 
 if(Windows AND MSVC)
 	dk_libDebug		(${LIBJPEG_TURBO.Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
