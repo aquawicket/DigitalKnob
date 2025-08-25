@@ -28,11 +28,11 @@ dk_assertVar(CYGWIN)
 dk_set(CYGWIN_EXE "${CYGWIN}/Cygwin.bat")
 
 
-if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN.URL_Filename}")
-	dk_echo("Installing ${CYGWIN.INSTALL_NAME}")
+if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN.Url_Filename}")
+	dk_echo("Installing ${CYGWIN.Install_Name}")
 		
 	### Download ###
-	dk_download(${CYGWIN.URL})
+	dk_download(${CYGWIN.Url})
 		
 	### FirewallAllow ###
 	dk_firewallAllow("Cygwin_Setup" "${dk_download}")
@@ -46,7 +46,7 @@ if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN.URL_Filename}")
 	dk_exec("${dk_download}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
 		
 	### Copy Setup exe to /bin ###
-	dk_copy("${dk_download}" "${CYGWIN}/bin/${CYGWIN.URL_Filename}")   # copy the installer to use as a package manager
+	dk_copy("${dk_download}" "${CYGWIN}/bin/${CYGWIN.Url_Filename}")   # copy the installer to use as a package manager
 endif()	
 
 #if(NOT EXISTS "???")

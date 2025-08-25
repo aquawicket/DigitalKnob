@@ -25,17 +25,17 @@ endif()
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 ### DOWNLOAD ###
-set(VSCODE_IMPORT "${VSCode_${Host_Tuple}_Import}")
+set(VSCODE.Import "${VSCode_${Host_Tuple}_Import}")
 
 
-dk_assertVar(VSCODE_IMPORT)
+dk_assertVar(VSCODE.Import)
 
-dk_basename(${VSCODE_IMPORT} VSCODE_IMPORT_FILE)
-dk_removeExtension(${VSCODE_IMPORT_FILE} VSCODE_FOLDER)
-dk_convertToCIdentifier(${VSCODE_FOLDER} VSCODE_FOLDER)
-dk_toLower(${VSCODE_FOLDER} VSCODE_FOLDER)
+dk_basename(${VSCODE.Import} VSCODE.Import_FILE)
+dk_removeExtension(${VSCODE.Import_FILE} VSCODE.Install_Name)
+dk_convertToCIdentifier(${VSCODE.Install_Name} VSCODE.Install_Name)
+dk_toLower(${VSCODE.Install_Name} VSCODE.Install_Name)
 
-dk_set(VSCODE $ENV{DKTOOLS_DIR}/${VSCODE_FOLDER})
+dk_set(VSCODE $ENV{DKTOOLS_DIR}/${VSCODE.Install_Name})
 if(Windows_Host)
 	dk_set(VSCODE_EXE ${VSCODE}/Code.exe)
 else()
@@ -47,7 +47,7 @@ endif()
 ### IMPORT ###
 if(NOT EXISTS ${VSCODE_EXE})
 	dk_mkdir	($ENV{DKTOOLS_DIR})
-	dk_import			(${VSCODE_IMPORT} _PATH_ ${VSCODE})
+	dk_import	(${VSCODE.Import} _PATH_ ${VSCODE})
 	dk_mkdir	(${VSCODE}/data)
 endif()
 

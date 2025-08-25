@@ -16,5 +16,4 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 
-#Android_Host_dk_exec(pkg install libtool)
 dk_installPackage(libtool)

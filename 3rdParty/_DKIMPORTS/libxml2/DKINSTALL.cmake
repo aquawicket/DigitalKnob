@@ -46,6 +46,7 @@ if(NOT EXISTS ${LIBXML2}/configure)
 	dk_depend(autoconf)
 	dk_depend(automake)
 	dk_depend(libtool)
+	dk_depend(pkgconf)
 endif()
 
 ### LINK ###

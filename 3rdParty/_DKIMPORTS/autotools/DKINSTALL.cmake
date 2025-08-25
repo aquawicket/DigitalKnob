@@ -19,12 +19,12 @@ include_guard()
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
 # https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
-dk_validate(Host_Os "dk_Host_Os()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Mac_Host)
 	dk_depend			(autogen)
 	dk_depend			(autoconf)
 	dk_depend			(automake)
-elseif(CLANG OR MINGW OR UCRT)
+elseif(NOT Msvc)
 	dk_installPackage	(autotools)
 	dk_validate			(MSYS2 "dk_depend(msys2)")
 	set					(ENV{ACLOCAL_PATH} "${MSYS2}/usr/share/aclocal")
