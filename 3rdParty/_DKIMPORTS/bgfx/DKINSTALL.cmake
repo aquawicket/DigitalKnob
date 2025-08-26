@@ -23,11 +23,11 @@ dk_import		(${BGFX_IMPORT})
 ### LINK ###
 dk_include			("${BGFX}/include")
 if(Unix)
-	dk_libDebug		("${BGFX.Debug_Dir}/libbgfx.a")
-	dk_libRelease	("${BGFX.Release_Dir}/libbgfx.a")
+	dk_libDebug		("${BGFX_Debug_Dir}/libbgfx.a")
+	dk_libRelease	("${BGFX_Release_Dir}/libbgfx.a")
 elseif()
-	dk_libDebug		("${BGFX.Debug_Dir}/bgfx.lib")
-	dk_libRelease	("${BGFX.Release_Dir}/bgfx.lib")
+	dk_libDebug		("${BGFX_Debug_Dir}/bgfx.lib")
+	dk_libRelease	("${BGFX_Release_Dir}/bgfx.lib")
 endif()
 
 ### GENERATE ###

@@ -178,9 +178,9 @@ function(dk_configure)
 #	
 #	  ${PLUGIN}		  	  ${CURRENT_PLUGIN}					:LIBEXPAT
 #	${${PLUGIN}}		${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
-#						${${CURRENT_PLUGIN}.Install_Name}	:LIBEXPAT.Install_Name	= libexpat-b70c8f5
-#     ${plugin}   		${${CURRENT_PLUGIN}.Import_Name}  	:LIBEXPAT.Import_Name 	= libexpat
-#     ${Plugin_Path}	${${CURRENT_PLUGIN}.Import_Path}    :LIBEXPAT.Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
+#						${${CURRENT_PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
+#     ${plugin}   		${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
+#     ${Plugin_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
 #						CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
 
 	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
@@ -193,10 +193,10 @@ function(dk_configure)
 	
 	dk_debug("Plugin_Path = ${Plugin_Path}")
 	#dk_getPathToPlugin(${plugin} Plugin_Path)
-	dk_set(${CURRENT_PLUGIN}.Import_Path "${Plugin_Path}")
-	dk_debug("${CURRENT_PLUGIN}.Import_Path = ${${CURRENT_PLUGIN}.Import_Path}")
+	dk_set(${CURRENT_PLUGIN}_Import_Path "${Plugin_Path}")
+	dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
 	
-	dk_debug("${CURRENT_PLUGIN}.Import_Name = ${${CURRENT_PLUGIN}.Import_Name}")
+	dk_debug("${CURRENT_PLUGIN}_Import_Name = ${${CURRENT_PLUGIN}_Import_Name}")
 	dk_debug("CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}")
 	
 	

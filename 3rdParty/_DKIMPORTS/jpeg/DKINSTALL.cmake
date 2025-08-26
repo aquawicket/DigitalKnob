@@ -27,12 +27,12 @@ dk_import(https://www.ijg.org/files/jpegsr9d.zip)
 ### LINK ###
 dk_include			(${JPEG}										JPEG_INCLUDE_DIR)
 dk_include			(${JPEG}/${Target_Tuple}									JPEG_INCLUDE_DIR2)
-dk_include			(${JPEG.Release_Dir})
+dk_include			(${JPEG_Release_Dir})
 Android_dk_include	(${JPEG}/${Target_Tuple}/${Target_Type}/jni)
-Unix_dk_libDebug	(${JPEG.Debug_Dir}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
-Unix_dk_libRelease	(${JPEG.Release_Dir}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
-Windows_dk_libDebug		(${JPEG.Debug_Dir}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
-Windows_dk_libRelease	(${JPEG.Release_Dir}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
+Unix_dk_libDebug	(${JPEG_Debug_Dir}/libjpeg-static.a	JPEG_LIBRARY_DEBUG)
+Unix_dk_libRelease	(${JPEG_Release_Dir}/libjpeg-static.a	JPEG_LIBRARY_RELEASE)
+Windows_dk_libDebug		(${JPEG_Debug_Dir}/jpeg-static.lib		JPEG_LIBRARY_DEBUG)
+Windows_dk_libRelease	(${JPEG_Release_Dir}/jpeg-static.lib	JPEG_LIBRARY_RELEASE)
 
 
 ### 3RDPARTY LINK ###

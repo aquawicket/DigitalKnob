@@ -24,15 +24,15 @@ dk_import(${libjpeg_turbo_Import})
 
 ### LINK ###
 dk_include			(${LIBJPEG_TURBO}										LIBJPEG_TURBO_INCLUDE_DIR)
-dk_include			(${LIBJPEG_TURBO.Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
+dk_include			(${LIBJPEG_TURBO_Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
 dk_include			(${LIBJPEG_TURBO}/src									LIBJPEG_TURBO_INCLUDE_DIR3)
 
 if(Windows AND MSVC)
-	dk_libDebug		(${LIBJPEG_TURBO.Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO.Release_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${LIBJPEG_TURBO_Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${LIBJPEG_TURBO_Release_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${LIBJPEG_TURBO.Debug_Dir}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO.Release_Dir}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${LIBJPEG_TURBO_Debug_Dir}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${LIBJPEG_TURBO_Release_Dir}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###

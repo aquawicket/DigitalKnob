@@ -29,10 +29,10 @@ dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz P
 
 ### LINK ###
 dk_include			(${WAAVE}/src)
-Unix_dk_libDebug	(${WAAVE.Debug_Dir}/libwaave.a)
-Unix_dk_libRelease	(${WAAVE.Release_Dir}/libwaave.a)
-Windows_dk_libDebug		(${WAAVE.Debug_Dir}/waave.lib)
-Windows_dk_libRelease	(${WAAVE.Release_Dir}/waave.lib)
+Unix_dk_libDebug	(${WAAVE_Debug_Dir}/libwaave.a)
+Unix_dk_libRelease	(${WAAVE_Release_Dir}/libwaave.a)
+Windows_dk_libDebug		(${WAAVE_Debug_Dir}/waave.lib)
+Windows_dk_libRelease	(${WAAVE_Release_Dir}/waave.lib)
 
 
 ### GENERATE ###

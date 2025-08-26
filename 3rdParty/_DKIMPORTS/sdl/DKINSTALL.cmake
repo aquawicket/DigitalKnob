@@ -96,10 +96,10 @@ if(Android)
 	dk_include	(${SDL}/src)
 endif()
 if(Debug)
-	dk_include	(${SDL.Debug_Dir}/include)
+	dk_include	(${SDL_Debug_Dir}/include)
 endif()
 if(Release)
-	dk_include	(${SDL.Release_Dir}/include)
+	dk_include	(${SDL_Release_Dir}/include)
 endif()
 if(Raspberry)
 	dk_include	(/opt/vc/lib)
@@ -109,15 +109,15 @@ endif()
 
 #if(sdl_SDL2static)
 if(MSVC)
-		dk_libDebug		(${SDL.Debug_Dir}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL.Release_Dir}/SDL2-static.lib		SDL2_LIBRARY_RELEASE)
+		dk_libDebug		(${SDL_Debug_Dir}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG)
+		dk_libRelease	(${SDL_Release_Dir}/SDL2-static.lib		SDL2_LIBRARY_RELEASE)
 else()
 	if(Android)
-		dk_libDebug		(${SDL.Debug_Dir}/libSDL2.a				SDL2_LIBRARY_DEBUG)
+		dk_libDebug		(${SDL_Debug_Dir}/libSDL2.a				SDL2_LIBRARY_DEBUG)
 	else()
-		dk_libDebug		(${SDL.Debug_Dir}/libSDL2d.a			SDL2_LIBRARY_DEBUG)
+		dk_libDebug		(${SDL_Debug_Dir}/libSDL2d.a			SDL2_LIBRARY_DEBUG)
 	endif()
-	dk_libRelease		(${SDL.Release_Dir}/libSDL2.a			SDL2_LIBRARY_RELEASE)
+	dk_libRelease		(${SDL_Release_Dir}/libSDL2.a			SDL2_LIBRARY_RELEASE)
 endif()
 
 if(Debug)
@@ -128,23 +128,23 @@ if(Release)
 endif()
 #endif()
 
-#Android_dk_libDebug(${SDL.Debug_Dir}/libhidapi.a)
-#Android_dk_libRelease(${SDL.Release_Dir}/libhidapi.a)
+#Android_dk_libDebug(${SDL_Debug_Dir}/libhidapi.a)
+#Android_dk_libRelease(${SDL_Release_Dir}/libhidapi.a)
 
 #if(SDL_SDL2main)
-	#Android_dk_libDebug	(${SDL.Debug_Dir}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
-	#Android_dk_libRelease	(${SDL.Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#Linux_dk_libDebug		(${SDL.Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#Linux_dk_libRelease	(${SDL.Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#Mac_dk_libDebug		(${SDL.Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#Mac_dk_libRelease		(${SDL.Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#Raspberry_dk_libDebug	(${SDL.Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#Raspberry_dk_libRelease(${SDL.Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#Windows_dk_libDebug	(${SDL.Debug_Dir}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG)
-	#Windows_dk_libRelease	(${SDL.Release_Dir}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE)
+	#Android_dk_libDebug	(${SDL_Debug_Dir}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
+	#Android_dk_libRelease	(${SDL_Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Linux_dk_libDebug		(${SDL_Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Linux_dk_libRelease	(${SDL_Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Mac_dk_libDebug		(${SDL_Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Mac_dk_libRelease		(${SDL_Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Raspberry_dk_libDebug	(${SDL_Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
+	#Raspberry_dk_libRelease(${SDL_Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
+	#Windows_dk_libDebug	(${SDL_Debug_Dir}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG)
+	#Windows_dk_libRelease	(${SDL_Release_Dir}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE)
 	if(IOS OR Iossim)
-		dk_libDebug		(${SDL.Debug_Dir}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL.Release_Dir}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+		dk_libDebug		(${SDL_Debug_Dir}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
+		dk_libRelease	(${SDL_Release_Dir}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
 	endif()
 #endif()
 
@@ -166,7 +166,7 @@ if(MULTI_CONFIG)
 		dk_set(SDL_CMAKE
 		"-DCMAKE_C_FLAGS=/I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=/I${SDL2_INCLUDE_DIR}" 
-		-DSDL2_DIR=${SDL.Config_Dir}
+		-DSDL2_DIR=${SDL_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY}
@@ -178,7 +178,7 @@ if(MULTI_CONFIG)
 		dk_set(SDL_CMAKE
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-${SDL2_INCLUDE_DIR}" 
-		-DSDL2_DIR=${SDL.Config_Dir}
+		-DSDL2_DIR=${SDL_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
@@ -196,7 +196,7 @@ else()
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_LIBRARY_DEBUG}"
-		-DSDL2_DIR=${SDL.Config_Dir}
+		-DSDL2_DIR=${SDL_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_DEBUG}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}

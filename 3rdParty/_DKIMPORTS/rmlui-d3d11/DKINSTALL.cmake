@@ -24,10 +24,10 @@ dk_import(https://github.com/martonp96/RmlUi-D3D11/archive/refs/heads/master.zip
 ### LINK ###
 dk_include			(${RMLUI_D3D11}/include)
 dk_include			(${RMLUI_D3D11}/${Target_Tuple})
-Windows_dk_libDebug		(${RMLUI_D3D11.Debug_Dir}/rmlui-d3d11.lib)
-Windows_dk_libRelease	(${RMLUI_D3D11.Release_Dir}/rmlui-d3d11.lib)
-Unix_dk_libDebug	(${RMLUI_D3D11.Debug_Dir}/librmlui-d3d11.a)
-Unix_dk_libRelease	(${RMLUI_D3D11.Release_Dir}/librmlui-d3d11.a)
+Windows_dk_libDebug		(${RMLUI_D3D11_Debug_Dir}/rmlui-d3d11.lib)
+Windows_dk_libRelease	(${RMLUI_D3D11_Release_Dir}/rmlui-d3d11.lib)
+Unix_dk_libDebug	(${RMLUI_D3D11_Debug_Dir}/librmlui-d3d11.a)
+Unix_dk_libRelease	(${RMLUI_D3D11_Release_Dir}/librmlui-d3d11.a)
 
 
 ### GENERATE ###

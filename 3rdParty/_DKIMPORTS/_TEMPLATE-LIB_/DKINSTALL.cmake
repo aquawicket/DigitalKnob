@@ -1,5 +1,5 @@
 ########################################################################################
-# Remove these lines and rename all instaces of [_LIB_NAME_] to the name of your library
+# Remove these lines and rename all instaces of [LIBNAME] to the name of your library
 dk_undepend(_TEMPLATE-LIB_)
 dk_return()
 ########################################################################################
@@ -29,21 +29,21 @@ dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${_LIB_NAME_})
+dk_import			(${LIBNAME})
 
 ### LINK ###
-dk_include			(${_LIB_NAME_}/include)
+dk_include			(${LIBNAME}/include)
 if(MSVC)
-	dk_libDebug		(${_LIB_NAME_..Debug_Dir}/package.lib)
-	dk_libRelease	(${_LIB_NAME_..Release_Dir}/package.lib)
+	dk_libDebug		(${LIBNAME_Debug_Dir}/package.lib)
+	dk_libRelease	(${LIBNAME_Release_Dir}/package.lib)
 else()
-	dk_libDebug		(${_LIB_NAME_..Debug_Dir}/libpackage.a)
-	dk_libRelease	(${_LIB_NAME_..Release_Dir}/libpackage.a)
+	dk_libDebug		(${LIBNAME_Debug_Dir}/libpackage.a)
+	dk_libRelease	(${LIBNAME_Release_Dir}/libpackage.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${_LIB_NAME_})
+dk_configure(${LIBNAME})
 
 
 ### COMPILE ###
-dk_build(${_LIB_NAME_} package)
+dk_build(${LIBNAME} package)

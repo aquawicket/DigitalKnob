@@ -24,11 +24,11 @@ dk_import		(Demo_Import)
 ### LINK ###
 dk_include			(${DENO}/include)
 if(MSVC)
-	dk_libDebug		(${DENO.Debug_Dir}/deno.lib)
-	dk_libRelease	(${DENO.Release_Dir}/deno.lib)
+	dk_libDebug		(${DENO_Debug_Dir}/deno.lib)
+	dk_libRelease	(${DENO_Release_Dir}/deno.lib)
 else()
-	dk_libDebug		(${DENO.Debug_Dir}/libdeno.a)
-	dk_libRelease	(${DENO.Release_Dir}/libdeno.a)
+	dk_libDebug		(${DENO_Debug_Dir}/libdeno.a)
+	dk_libRelease	(${DENO_Release_Dir}/libdeno.a)
 endif()
 
 ### GENERATE ###

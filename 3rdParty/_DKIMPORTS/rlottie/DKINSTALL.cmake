@@ -30,13 +30,13 @@ endif()
 
 ### LINK ###
 dk_include			(${RLOTTIE}/inc							rlottie_DIR)
-dk_include			(${RLOTTIE.Config_Dir}					rlottie_INCLUDE_DIR)
+dk_include			(${RLOTTIE_Config_Dir}					rlottie_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${RLOTTIE.Debug_Dir}/rlottie.lib)
-	dk_libRelease	(${RLOTTIE.Release_Dir}/rlottie.lib)
+	dk_libDebug		(${RLOTTIE_Debug_Dir}/rlottie.lib)
+	dk_libRelease	(${RLOTTIE_Release_Dir}/rlottie.lib)
 else()
-	dk_libDebug		(${RLOTTIE.Debug_Dir}/librlottie.a)
-	dk_libRelease	(${RLOTTIE.Release_Dir}/librlottie.a)
+	dk_libDebug		(${RLOTTIE_Debug_Dir}/librlottie.a)
+	dk_libRelease	(${RLOTTIE_Release_Dir}/librlottie.a)
 endif()
 
 ### 3RDPARTY LINK ###

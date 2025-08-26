@@ -42,13 +42,13 @@ function(dk_depend plugin) #target
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	set(CURRENT_PLUGIN "${PLUGIN}")
 	
-	dk_set(${PLUGIN}.Import_Name "${plugin}")						#<PLUGIN>.Import_Name
-	dk_getPathToPlugin(${plugin} ${PLUGIN}.Import_Path)
-	dk_set(${PLUGIN}.Import_Path "${${PLUGIN}.Import_Path}") 		#<PLUGIN>.Import_Path
-	dk_dirname("${${PLUGIN}.Import_Path}" ${PLUGIN}.Import_Dirname)
-	dk_set(${PLUGIN}.Import_Dirname "${${PLUGIN}.Import_Dirname}") 	#<PLUGIN>.Import_Dirname
+	dk_set(${PLUGIN}_Import_Name "${plugin}")						#<PLUGIN>_Import_Name
+	dk_getPathToPlugin(${plugin} ${PLUGIN}_Import_Path)
+	dk_set(${PLUGIN}_Import_Path "${${PLUGIN}_Import_Path}") 		#<PLUGIN>_Import_Path
+	dk_dirname("${${PLUGIN}_Import_Path}" ${PLUGIN}_Import_Dirname)
+	dk_set(${PLUGIN}_Import_Dirname "${${PLUGIN}_Import_Dirname}") 	#<PLUGIN>_Import_Dirname
 	
-	if(NOT EXISTS "${${PLUGIN}.Install_Path}")
+	if(NOT EXISTS "${${PLUGIN}_Install_Path}")
 		
 		###### Push Plugin to the PLUGIN_STACK ######
 		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")

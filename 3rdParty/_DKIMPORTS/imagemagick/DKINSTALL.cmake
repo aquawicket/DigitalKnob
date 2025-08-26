@@ -81,14 +81,14 @@ if(DKAPP)
 if(NOT Android)
 if(NOT Windows)
 	### LINK ###
-	dk_include			(${IMAGEMAGICK.Tuple_Dir})
+	dk_include			(${IMAGEMAGICK_Tuple_Dir})
 
 	if(Unix)
-		dk_libDebug		(${IMAGEMAGICK.Debug_Dir}/libimagemagick.a)
-		dk_libRelease	(${IMAGEMAGICK.Release_Dir}/libimagemagick.a)
+		dk_libDebug		(${IMAGEMAGICK_Debug_Dir}/libimagemagick.a)
+		dk_libRelease	(${IMAGEMAGICK_Release_Dir}/libimagemagick.a)
 	endif()
-	#Windows_dk_libDebug	(${IMAGEMAGICK.Debug_Dir}/imagemagickd.lib)
-	#Windows_dk_libRelease	(${IMAGEMAGICK.Release_Dir}/imagemagick.lib)
+	#Windows_dk_libDebug	(${IMAGEMAGICK_Debug_Dir}/imagemagickd.lib)
+	#Windows_dk_libRelease	(${IMAGEMAGICK_Release_Dir}/imagemagick.lib)
 
 
 	### GENERATE / COMPILE ###

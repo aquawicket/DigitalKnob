@@ -41,8 +41,8 @@ dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1
 dk_define(BOOST_ALL_NO_LIB=1)
 dk_define(BOOST_REGEX_DYN_LINK=1)
 dk_include("${BOOST}")
-dk_linkDir("${BOOST.Debug_Dir}/lib")
-dk_linkDir("${BOOST.Release_Dir}/lib")
+dk_linkDir("${BOOST_Debug_Dir}/lib")
+dk_linkDir("${BOOST_Release_Dir}/lib")
 
 dk_addTarget(boost atomic)
 dk_addTarget(boost chrono)
@@ -120,18 +120,18 @@ endforeach()
 foreach(lib ${boost_targets})
 	if(boost_${lib} AND NOT boost_${lib}_nolib)
 		if(MSVC AND Windows)
-			dk_libDebug("${BOOST.Debug_Dir}/lib/libboost_${lib}.lib")
-			dk_libRelease("${BOOST.Release_Dir}/lib/libboost_${lib}.lib")
+			dk_libDebug("${BOOST_Debug_Dir}/lib/libboost_${lib}.lib")
+			dk_libRelease("${BOOST_Release_Dir}/lib/libboost_${lib}.lib")
 		else()
-			dk_libDebug("${BOOST.Debug_Dir}/lib/libboost_${lib}.a")
-			dk_libRelease("${BOOST.Release_Dir}/lib/libboost_${lib}.a")
+			dk_libDebug("${BOOST_Debug_Dir}/lib/libboost_${lib}.a")
+			dk_libRelease("${BOOST_Release_Dir}/lib/libboost_${lib}.a")
 		endif()
 	endif()
 endforeach()
 
 
 ### 3RDPARTY LINK ###
-dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST.Tuple_Dir}/lib) #-DBoost_INCLUDE_DIR=${BOOST})
+dk_set(BOOST_CMAKE -DBOOST_ROOT=${BOOST} -DBOOST_LIBRARYDIR=${BOOST_Tuple_Dir}/lib) #-DBoost_INCLUDE_DIR=${BOOST})
 
 
 ### GENERATE ###
@@ -167,8 +167,8 @@ if(Android_Arm32_Debug)
 		--ignore-site-config
 		--layout=system
 		--user-config=${BOOST}/android-config.jam
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir}
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir}
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
 		abi=aapcs
@@ -187,8 +187,8 @@ elseif(Android_Arm32_Release)
 		--ignore-site-config
 		--layout=system
 		--user-config=${BOOST}/android-config.jam
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir}
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir}
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
 		abi=aapcs
@@ -208,8 +208,8 @@ elseif(Android_Arm64_Debug)
 		--ignore-site-config
 		--layout=system
 		--user-config=${BOOST}/android-config.jam
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir}
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir}
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
 		abi=aapcs
@@ -229,8 +229,8 @@ elseif(Android_Arm64_Release)
 		--ignore-site-config
 		--layout=system
 		--user-config=${BOOST}/android-config.jam
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir}
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir}
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
 		abi=aapcs
@@ -245,7 +245,7 @@ elseif(Iossim_X86_64_Debug)
 		runtime-link=static
 		--layout=system
 		${BOOST_WITH}
-		${BOOST_WITHOUT}) #--build-dir=${BOOST.Debug_Dir} --stagedir=${BOOST.Debug_Dir}
+		${BOOST_WITHOUT}) #--build-dir=${BOOST_Debug_Dir} --stagedir=${BOOST_Debug_Dir}
 elseif(Iossim_X86_64_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=darwin
@@ -257,7 +257,7 @@ elseif(Iossim_X86_64_Release)
 		runtime-link=static
 		--layout=system
 		${BOOST_WITH}
-		${BOOST_WITHOUT}) #--build-dir=${BOOST.Release_Dir} --stagedir=${BOOST.Release_Dir}
+		${BOOST_WITHOUT}) #--build-dir=${BOOST_Release_Dir} --stagedir=${BOOST_Release_Dir}
 elseif(Linux_X86_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -270,8 +270,8 @@ elseif(Linux_X86_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Linux_X86_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc 
@@ -284,8 +284,8 @@ elseif(Linux_X86_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Linux_X86_64_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -298,8 +298,8 @@ elseif(Linux_X86_64_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Linux_X86_64_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -312,8 +312,8 @@ elseif(Linux_X86_64_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Mac_X86_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=darwin
@@ -326,8 +326,8 @@ elseif(Mac_X86_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Mac_X86_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=darwin
@@ -340,8 +340,8 @@ elseif(Mac_X86_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Mac_X86_64_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=darwin
@@ -354,8 +354,8 @@ elseif(Mac_X86_64_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Mac_X86_64_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=darwin
@@ -368,8 +368,8 @@ elseif(Mac_X86_64_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Raspberry_Arm32_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -382,8 +382,8 @@ elseif(Raspberry_Arm32_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Raspberry_Arm32_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -396,8 +396,8 @@ elseif(Raspberry_Arm32_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Raspberry_Arm64_Debug)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -410,8 +410,8 @@ elseif(Raspberry_Arm64_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Raspberry_Arm64_Release)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -424,8 +424,8 @@ elseif(Raspberry_Arm64_Release)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Windows_X86_Debug AND MSVC)
 	dk_exec("${BOOST}/b2.exe"
 		toolset=msvc-14.3
@@ -439,8 +439,8 @@ elseif(Windows_X86_Debug AND MSVC)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Windows_X86_Debug AND MINGW)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -455,8 +455,8 @@ elseif(Windows_X86_Debug AND MINGW)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Windows_X86_Release AND MSVC)
 	dk_exec("${BOOST}/b2.exe"
 		toolset=msvc-14.3
@@ -470,8 +470,8 @@ elseif(Windows_X86_Release AND MSVC)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Windows_X86_64_Debug)
 	dk_exec("${BOOST}/b2.exe"
 		toolset=msvc-14.3
@@ -485,8 +485,8 @@ elseif(Windows_X86_64_Debug)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Debug_Dir}
-		--stagedir=${BOOST.Debug_Dir})
+		--build-dir=${BOOST_Debug_Dir}
+		--stagedir=${BOOST_Debug_Dir})
 elseif(Windows_X86_64_Release AND MSVC)
 	dk_exec("${BOOST}/b2"
 		toolset=msvc-14.3
@@ -500,8 +500,8 @@ elseif(Windows_X86_64_Release AND MSVC)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 elseif(Windows_X86_64_Release AND MINGW)
 	dk_exec("${BOOST}/b2"
 		toolset=gcc
@@ -516,8 +516,8 @@ elseif(Windows_X86_64_Release AND MINGW)
 		--layout=system
 		${BOOST_WITH}
 		${BOOST_WITHOUT}
-		--build-dir=${BOOST.Release_Dir}
-		--stagedir=${BOOST.Release_Dir})
+		--build-dir=${BOOST_Release_Dir}
+		--stagedir=${BOOST_Release_Dir})
 endif()
 endif(STATIC)
 
@@ -538,8 +538,8 @@ if(SHARED)
 #if(Windows)
 #	dk_chdir(${BOOST})
 #	dk_exec(${BOOST}/bootstrap.bat)
-#	dk_exec(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST.Debug_Dir} --stagedir=${BOOST.Debug_Dir})
-#	dk_exec(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST.Release_Dir} --stagedir=${BOOST.Release_Dir})
+#	dk_exec(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=debug runtime-debugging=on runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST_Debug_Dir} --stagedir=${BOOST_Debug_Dir})
+#	dk_exec(${BOOST}/b2 toolset=msvc-14.0 link=shared variant=release runtime-debugging=off runtime-link=shared --threading=multi --layout=system --build-dir=${BOOST_Release_Dir} --stagedir=${BOOST_Release_Dir})
 #endif()
 
 endif(SHARED)

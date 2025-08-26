@@ -24,10 +24,10 @@ dk_import(https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip)
 ### LINK ###
 dk_include			(${LIBCACA}/include)
 dk_include			(${LIBCACA}/${Target_Tuple})
-Unix_dk_libDebug	(${LIBCACA.Debug_Dir}/libcacad.a)
-Unix_dk_libRelease	(${LIBCACA.Release_Dir}/libcaca.a)
-Windows_dk_libDebug		(${LIBCACA.Debug_Dir}/libcacad.lib)
-Windows_dk_libRelease	(${LIBCACA.Release_Dir}/libcaca.lib)
+Unix_dk_libDebug	(${LIBCACA_Debug_Dir}/libcacad.a)
+Unix_dk_libRelease	(${LIBCACA_Release_Dir}/libcaca.a)
+Windows_dk_libDebug		(${LIBCACA_Debug_Dir}/libcacad.lib)
+Windows_dk_libRelease	(${LIBCACA_Release_Dir}/libcaca.lib)
 
 ### GENERATE ####
 dk_configure()

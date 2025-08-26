@@ -45,11 +45,11 @@ dk_include			(${DUKTAPE}/src)
 
 ## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
-	dk_libDebug		(${DUKTAPE.Debug_Dir}/duktape.lib)
-	dk_libRelease	(${DUKTAPE.Release_Dir}/duktape.lib)
+	dk_libDebug		(${DUKTAPE_Debug_Dir}/duktape.lib)
+	dk_libRelease	(${DUKTAPE_Release_Dir}/duktape.lib)
 else()
-	dk_libDebug		(${DUKTAPE.Debug_Dir}/libduktape.a)
-	dk_libRelease	(${DUKTAPE.Release_Dir}/libduktape.a)
+	dk_libDebug		(${DUKTAPE_Debug_Dir}/libduktape.a)
+	dk_libRelease	(${DUKTAPE_Release_Dir}/libduktape.a)
 endif()
 
 ### GENERATE ###

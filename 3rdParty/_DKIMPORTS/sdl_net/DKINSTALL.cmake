@@ -30,14 +30,14 @@ dk_import(https://github.com/libsdl-org/SDL_net/archive/refs/tags/release-2.2.0.
 ### LINK ###
 dk_include				(${SDL_NET})
 if(MSVC)
-	Windows_dk_libDebug		(${SDL_NET.Debug_Dir}/SDL2_net-staticd.lib)
-	Windows_dk_libRelease	(${SDL_NET.Release_Dir}/SDL2_net-static.lib)
+	Windows_dk_libDebug		(${SDL_NET_Debug_Dir}/SDL2_net-staticd.lib)
+	Windows_dk_libRelease	(${SDL_NET_Release_Dir}/SDL2_net-static.lib)
 elseif(Android)
-	dk_libDebug			(${SDL_NET.Debug_Dir}/libSDL2_net.a)
-	dk_libRelease		(${SDL_NET.Release_Dir}/libSDL2_net.a)
+	dk_libDebug			(${SDL_NET_Debug_Dir}/libSDL2_net.a)
+	dk_libRelease		(${SDL_NET_Release_Dir}/libSDL2_net.a)
 else()
-	dk_libDebug			(${SDL_NET.Debug_Dir}/libSDL2_netd.a)
-	dk_libRelease		(${SDL_NET.Release_Dir}/libSDL2_net.a)
+	dk_libDebug			(${SDL_NET_Debug_Dir}/libSDL2_netd.a)
+	dk_libRelease		(${SDL_NET_Release_Dir}/libSDL2_net.a)
 endif()
 
 

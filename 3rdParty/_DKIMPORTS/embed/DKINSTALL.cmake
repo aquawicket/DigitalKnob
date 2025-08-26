@@ -26,11 +26,11 @@ dk_depend(tbb)
 ### LINK ###
 dk_include			(${EMBED}/include)
 if(MSVC)
-	dk_libDebug		(${EMBED.Debug_Dir}/embed.lib)
-	dk_libRelease	(${EMBED.Release_Dir}/embed.lib)
+	dk_libDebug		(${EMBED_Debug_Dir}/embed.lib)
+	dk_libRelease	(${EMBED_Release_Dir}/embed.lib)
 else()
-	dk_libDebug		(${EMBED.Debug_Dir}/libembed.a)
-	dk_libRelease	(${EMBED.Release_Dir}/libembed.a)
+	dk_libDebug		(${EMBED_Debug_Dir}/libembed.a)
+	dk_libRelease	(${EMBED_Release_Dir}/libembed.a)
 endif()
 
 ### GENERATE ###

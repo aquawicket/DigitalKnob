@@ -28,8 +28,8 @@ dk_import			(${TEMPLATE_Import})
 #----------------------------------------------------------------------------------------------------------------------------
 #	   Target_Config  =			                  Windows_X86_64/Debug								  Windows_X86_64
 #       Target_Build  =			                  Windows_X86_64/Debug								  Windows_X86_64/Debug
-#   MYLIB.Config_Dir  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64
-#    MYLIB.Build_Dir  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64/Debug
-#    MYLIB.Debug_Dir  = 	....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64/Debug
-#  MYLIB.Release_Dir  = 	....3rdParty/myLib-13/Windows_X86_64/Release		....3rdParty/myLib-13/Windows_X86_64/Release
-#   MYLIB.Tuple_Dir  = 		....3rdParty/myLib-13/Windows_X86_64				....3rdParty/myLib-13/Windows_X86_64
+#   MYLIB_Config_Dir  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64
+#    MYLIB_Build_Dir  =		....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64/Debug
+#    MYLIB_Debug_Dir  = 	....3rdParty/myLib-13/Windows_X86_64/Debug			....3rdParty/myLib-13/Windows_X86_64/Debug
+#  MYLIB_Release_Dir  = 	....3rdParty/myLib-13/Windows_X86_64/Release		....3rdParty/myLib-13/Windows_X86_64/Release
+#   MYLIB_Tuple_Dir  = 		....3rdParty/myLib-13/Windows_X86_64				....3rdParty/myLib-13/Windows_X86_64

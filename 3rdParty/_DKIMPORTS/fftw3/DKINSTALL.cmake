@@ -23,11 +23,11 @@ dk_import			(${FFTW3_DL})
 ### LINK ###
 dk_include			(${FFTW3}/include)
 if(MSVC)
-	dk_libDebug		(${FFTW3.Debug_Dir}/fftw3.lib)
-	dk_libRelease	(${FFTW3.Release_Dir}/fftw3.lib)
+	dk_libDebug		(${FFTW3_Debug_Dir}/fftw3.lib)
+	dk_libRelease	(${FFTW3_Release_Dir}/fftw3.lib)
 else()
-	dk_libDebug		(${FFTW3.Debug_Dir}/libfftw3.a)
-	dk_libRelease	(${FFTW3.Release_Dir}/libfftw3.a)
+	dk_libDebug		(${FFTW3_Debug_Dir}/libfftw3.a)
+	dk_libRelease	(${FFTW3_Release_Dir}/libfftw3.a)
 endif()
 
 ### GENERATE ###

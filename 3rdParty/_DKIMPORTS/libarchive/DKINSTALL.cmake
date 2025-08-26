@@ -46,7 +46,7 @@ dk_import(${libarchive_Import})
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
 dk_include					(${LIBARCHIVE}/libarchive)
-dk_include					(${LIBARCHIVE.Tuple_Dir})
+dk_include					(${LIBARCHIVE_Tuple_Dir})
 if(Android)
 	dk_include				(${LIBARCHIVE}/contrib/android/include)
 endif()
@@ -54,23 +54,23 @@ endif()
 if(MULTI_CONFIG)
 	if(MSVC)
 		if(Windows)
-			dk_libDebug		(${LIBARCHIVE.Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
-			dk_libRelease	(${LIBARCHIVE.Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
+			dk_libDebug		(${LIBARCHIVE_Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
+			dk_libRelease	(${LIBARCHIVE_Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
 		endif()
 	else()
-		dk_libDebug			(${LIBARCHIVE.Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE.Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
+		dk_libDebug			(${LIBARCHIVE_Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
+		dk_libRelease		(${LIBARCHIVE_Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE.Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE.Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
+	dk_libDebug				(${LIBARCHIVE_Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
+	dk_libRelease			(${LIBARCHIVE_Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
 if(Android)
 	dk_configure(${LIBARCHIVE}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE.Tuple_Dir} -I${LIBARCHIVE}/contrib/android/include"
+		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_Tuple_Dir} -I${LIBARCHIVE}/contrib/android/include"
 		-DENABLE_ACL=ON
 		-DENABLE_BZip2=${BZIP2}
 		-DENABLE_CAT=ON
@@ -246,12 +246,12 @@ if(Ios)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Iossim)
@@ -313,12 +313,12 @@ if(Iossim)
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE.Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${LIBARCHIVE_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Linux)

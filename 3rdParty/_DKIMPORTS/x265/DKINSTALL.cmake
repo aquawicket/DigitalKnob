@@ -22,8 +22,8 @@ dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip)
 ### LINK ###
 dk_include		(${X265}/include)
 dk_include		(${X265}/${Target_Tuple})
-dk_libDebug		(${X265.Debug_Dir}/libx265.a)
-dk_libRelease	(${X265.Release_Dir}/libx265.a)
+dk_libDebug		(${X265_Debug_Dir}/libx265.a)
+dk_libRelease	(${X265_Release_Dir}/libx265.a)
 
 ### GENERATE ###
 dk_configure(${X265})

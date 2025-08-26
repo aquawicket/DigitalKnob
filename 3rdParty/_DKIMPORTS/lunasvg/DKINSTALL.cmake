@@ -24,11 +24,11 @@ dk_import(${lunasvg_Import})
 dk_include			(${LUNASVG}/include					LUNASVG_INCLUDE_DIR)
 
 if(MSVC)
-	dk_libDebug		(${LUNASVG.Debug_Dir}/lunasvg.lib		LUNASVG_LIBRARY_DEBUG)
-	dk_libRelease	(${LUNASVG.Release_Dir}/liblunasvg.lib	LUNASVG_LIBRARY_RELEASE)
+	dk_libDebug		(${LUNASVG_Debug_Dir}/lunasvg.lib		LUNASVG_LIBRARY_DEBUG)
+	dk_libRelease	(${LUNASVG_Release_Dir}/liblunasvg.lib	LUNASVG_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${LUNASVG.Debug_Dir}/liblunasvg.a		LUNASVG_LIBRARY_DEBUG)
-	dk_libRelease	(${LUNASVG.Release_Dir}/liblunasvg.a	LUNASVG_LIBRARY_RELEASE)
+	dk_libDebug		(${LUNASVG_Debug_Dir}/liblunasvg.a		LUNASVG_LIBRARY_DEBUG)
+	dk_libRelease	(${LUNASVG_Release_Dir}/liblunasvg.a	LUNASVG_LIBRARY_RELEASE)
 endif()
 
 

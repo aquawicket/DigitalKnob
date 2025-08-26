@@ -346,17 +346,17 @@ endif()
 # itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
 if(NOT CURRENT_PLUGIN)
 	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")												### EXAMPLE ###
-		dk_call(dk_set PLUGIN.Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN.Import_Path		${DKIMPORTS_DIR}/zlib
-		dk_basename("${PLUGIN.Import_Path}")
-		dk_set(PLUGIN.Import_Name "${dk_basename}")					# PLUGIN.Import_Name		zlib
+		dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN_Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_basename("${PLUGIN_Import_Path}")
+		dk_set(PLUGIN_Import_Name "${dk_basename}")					# PLUGIN_Import_Name		zlib
 		dk_toUpper("${dk_basename}" PLUGIN)
 		dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 		dk_set(PLUGIN "${PLUGIN}")									# PLUGIN					ZLIB
-		dk_set(PLUGIN.Id "${PLUGIN}")								# PLUGIN.Id					ZLIB
+		dk_set(PLUGIN_Id "${PLUGIN}")								# PLUGIN_Id					ZLIB
 		
-		dk_set(${PLUGIN}.Id          "${PLUGIN.Id}")				# <PLUGIN>.Id				ZLIB
-		dk_set(${PLUGIN}.Import_Path "${PLUGIN.Import_Path}")		# <PLUGIN>.Import_Path		${DKIMPORTS_DIR}/zlib
-		dk_set(${PLUGIN}.Import_Name "${PLUGIN.Import_Name}")		# <PLUGIN>.Import_Name		zlib	
+		dk_set(${PLUGIN}_Id          "${PLUGIN_Id}")				# <PLUGIN>_Id				ZLIB
+		dk_set(${PLUGIN}_Import_Path "${PLUGIN_Import_Path}")		# <PLUGIN>_Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_set(${PLUGIN}_Import_Name "${PLUGIN_Import_Name}")		# <PLUGIN>_Import_Name		zlib	
 		dk_envList(PLUGIN PUSH "${PLUGIN}")
 	endif()
 endif()

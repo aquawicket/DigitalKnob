@@ -37,14 +37,14 @@ dk_import(https://github.com/libsdl-org/SDL_mixer/archive/refs/heads/SDL2.zip PA
 ### LINK ###
 dk_include			(${SDL_MIXER}/include							SDL_MIXER_INCLUDE_DIR)
 if(Windows AND MSVC)
-	dk_libDebug		(${SDL_MIXER.Debug_Dir}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER.Release_Dir}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER_Debug_Dir}/SDL2_mixer-staticd.lib		SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_Release_Dir}/SDL2_mixer-static.lib		SDL_MIXER_LIBRARY_RELEASE)
 elseif(Android)
-	dk_libDebug		(${SDL_MIXER.Debug_Dir}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER.Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER_Debug_Dir}/libSDL2_mixer.a				SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${SDL_MIXER.Debug_Dir}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
-	dk_libRelease	(${SDL_MIXER.Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
+	dk_libDebug		(${SDL_MIXER_Debug_Dir}/libSDL2_mixerd.a			SDL_MIXER_LIBRARY_DEBUG)
+	dk_libRelease	(${SDL_MIXER_Release_Dir}/libSDL2_mixer.a			SDL_MIXER_LIBRARY_RELEASE)
 endif()
 
 

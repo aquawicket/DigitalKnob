@@ -17,7 +17,7 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${7Z.Url.Windows_X86_64})
+dk_import			(${7Z_Url_Windows_X86_64})
 dk_assertVar		(7Z)
 dk_set				(7ZA_EXE	"${7Z}/7za.exe")
 dk_assertPath		(7ZA_EXE)

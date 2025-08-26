@@ -31,8 +31,8 @@ dk_import		(${FONTCONFIG_DL}										FONTCONFIG_INCLUDE_DIR)
 
 ### LINK ###
 dk_include		(${FONTCONFIG}/fontconfig)
-dk_libDebug		(${FONTCONFIG.Debug_Dir}/lib/.libs/libfontconfig.a		FONTCONFIG_DEBUG_LIBRARY)
-dk_libRelease	(${FONTCONFIG.Release_Dir}/lib/.libs/libfontconfig.a	FONTCONFIG_RELEASE_LIBRARY)
+dk_libDebug		(${FONTCONFIG_Debug_Dir}/lib/.libs/libfontconfig.a		FONTCONFIG_DEBUG_LIBRARY)
+dk_libRelease	(${FONTCONFIG_Release_Dir}/lib/.libs/libfontconfig.a	FONTCONFIG_RELEASE_LIBRARY)
 if(Debug)
 	set(FONTCONFIG_LIBRARY ${FONTCONFIG_DEBUG_LIBRARY})
 endif()

@@ -32,11 +32,11 @@ dk_import(https://github.com/theMealena/SDL2_giflib_sa/archive/refs/heads/master
 #dk_define				(USE_SDL2_gif)
 dk_include				(${SDL2_GIFLIB_SA})
 if(MSVC)
-	Windows_dk_libDebug		(${SDL2_GIFLIB_SA.Debug_Dir}/SDL2_gif.lib)
-	Windows_dk_libRelease	(${SDL2_GIFLIB_SA.Release_Dir}/SDL2_gif.lib)
+	Windows_dk_libDebug		(${SDL2_GIFLIB_SA_Debug_Dir}/SDL2_gif.lib)
+	Windows_dk_libRelease	(${SDL2_GIFLIB_SA_Release_Dir}/SDL2_gif.lib)
 else()
-	dk_libDebug			(${SDL2_GIFLIB_SA.Debug_Dir}/libSDL2_gif.a)
-	dk_libRelease		(${SDL2_GIFLIB_SA.Release_Dir}/libSDL2_gif.a)
+	dk_libDebug			(${SDL2_GIFLIB_SA_Debug_Dir}/libSDL2_gif.a)
+	dk_libRelease		(${SDL2_GIFLIB_SA_Release_Dir}/libSDL2_gif.a)
 endif()
 
 

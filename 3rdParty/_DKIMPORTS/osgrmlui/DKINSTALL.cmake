@@ -25,10 +25,10 @@ dk_import(https://github.com/triblatron/osgRmlUi/archive/refs/heads/master.zip)
 ### LINK ###
 dk_include			(${OSGRMLUI}/include)
 dk_include			(${OSGRMLUI}/${Target_Tuple})
-Unix_dk_libDebug	(${OSGRMLUI.Debug_Dir}/libosgrmlui.a)
-Unix_dk_libRelease	(${OSGRMLUI.Release_Dir}/libosgrmlui.a)
-Windows_dk_libDebug		(${OSGRMLUI.Debug_Dir}/osgrmlui.lib)
-Windows_dk_libRelease	(${OSGRMLUI.Release_Dir}/osgrmlui.lib)
+Unix_dk_libDebug	(${OSGRMLUI_Debug_Dir}/libosgrmlui.a)
+Unix_dk_libRelease	(${OSGRMLUI_Release_Dir}/libosgrmlui.a)
+Windows_dk_libDebug		(${OSGRMLUI_Debug_Dir}/osgrmlui.lib)
+Windows_dk_libRelease	(${OSGRMLUI_Release_Dir}/osgrmlui.lib)
 
 
 ### GENERATE ###

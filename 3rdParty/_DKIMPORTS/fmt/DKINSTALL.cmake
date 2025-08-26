@@ -36,10 +36,10 @@ dk_include(${FMT}/include)
 #	dk_append(CMAKE_CXX_FLAGS /utf-8)
 #endif()
 
-#Unix_dk_libDebug	(${FMT.Debug_Dir}/libfmtd.a)
-#Unix_dk_libRelease	(${FMT.Release_Dir}/libfmt.a)
-#Windows_dk_libDebug	(${FMT.Debug_Dir}/fmtd.lib)
-#Windows_dk_libRelease	(${FMT.Release_Dir}/fmt.lib)
+#Unix_dk_libDebug	(${FMT_Debug_Dir}/libfmtd.a)
+#Unix_dk_libRelease	(${FMT_Release_Dir}/libfmt.a)
+#Windows_dk_libDebug	(${FMT_Debug_Dir}/fmtd.lib)
+#Windows_dk_libRelease	(${FMT_Release_Dir}/fmt.lib)
 
 ### GENERATE ###
 #dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)

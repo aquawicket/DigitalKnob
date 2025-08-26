@@ -27,17 +27,17 @@ endif()
 
 ### LINK ###
 if(Debug)
-	dk_include		(${CMAKERC.Debug_Dir}/_cmrc/include)
+	dk_include		(${CMAKERC_Debug_Dir}/_cmrc/include)
 endif()
 if(Release)
-	dk_include		(${CMAKERC.Release_Dir}/_cmrc/include)
+	dk_include		(${CMAKERC_Release_Dir}/_cmrc/include)
 endif()
 if(MSVC)
-	dk_libDebug		(${CMAKERC.Debug_Dir}/cmakerc.lib)
-	dk_libRelease	(${CMAKERC.Release_Dir}/cmakerc.lib)
+	dk_libDebug		(${CMAKERC_Debug_Dir}/cmakerc.lib)
+	dk_libRelease	(${CMAKERC_Release_Dir}/cmakerc.lib)
 else()
-	dk_libDebug		(${CMAKERC.Debug_Dir}/libcmakerc.a)
-	dk_libRelease	(${CMAKERC.Release_Dir}/libcmakerc.a)
+	dk_libDebug		(${CMAKERC_Debug_Dir}/libcmakerc.a)
+	dk_libRelease	(${CMAKERC_Release_Dir}/libcmakerc.a)
 endif()
 
 ### GENERATE ###

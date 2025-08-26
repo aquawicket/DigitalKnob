@@ -36,7 +36,7 @@ dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
 ### LINK ###
 dk_include					(${LEPTONICA})
 dk_include					(${LEPTONICA}/${Target_Tuple}/src)
-dk_include					(${LEPTONICA.Release_Dir}/src)
+dk_include					(${LEPTONICA_Release_Dir}/src)
 if(MULTI_CONFIG)
  if(MSVC)
 	Windows_dk_libDebug			(${LEPTONICA}/${Target_Tuple}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
@@ -48,12 +48,12 @@ if(MULTI_CONFIG)
 	dk_libRelease			(${LEPTONICA}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
  endif()
 else()
-	dk_libDebug				(${LEPTONICA.Debug_Dir}/src/libleptonica.a)
-	dk_libRelease			(${LEPTONICA.Release_Dir}/src/libleptonica.a)
+	dk_libDebug				(${LEPTONICA_Debug_Dir}/src/libleptonica.a)
+	dk_libRelease			(${LEPTONICA_Release_Dir}/src/libleptonica.a)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA.Config_Dir})
+dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_Config_Dir})
 
 ### GENERATE ###
 #dk_configure(${LEPTONICA} 

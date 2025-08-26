@@ -24,11 +24,11 @@ dk_depend(git)
 
 ### IMPORT ###
 dk_import(https://www.libsdl.org/projects/smpeg/release/smpeg2-2.0.0.tar.gz PATCH)
-dk_chdir(${SMPEG2.Debug_Dir})
+dk_chdir(${SMPEG2_Debug_Dir})
 
 ### PATCH ###
 dk_gitApplyPatch(${SMPEG2} $ENV{DKIMPORTS_DIR}/smpeg2/gcc6.patch)
-dk_chdir(${SMPEG2.Debug_Dir})
+dk_chdir(${SMPEG2_Debug_Dir})
 
 ### LINK ###
 dk_include				(${SMPEG2})
@@ -39,8 +39,8 @@ elseif(Apple)
 	dk_libDebug			(${SMPEG2}/${Target_Tuple}/lib/${Debug_Dir}/libsmpeg2.a)
 	dk_libRelease		(${SMPEG2}/${Target_Tuple}/lib/${Release_Dir}/libsmpeg2.a)
 else()
-	dk_libDebug			(${SMPEG2.Debug_Dir}/lib/libsmpeg2.a)
-	dk_libRelease		(${SMPEG2.Release_Dir}/lib/libsmpeg2.a)
+	dk_libDebug			(${SMPEG2_Debug_Dir}/lib/libsmpeg2.a)
+	dk_libRelease		(${SMPEG2_Release_Dir}/lib/libsmpeg2.a)
 endif()
 
 

@@ -44,35 +44,35 @@ dk_import(https://git.ffmpeg.org/ffmpeg.git)
 
 ### LINK ###
 dk_include			(${FFMPEG})
-Debug_dk_include	(${FFMPEG.Config_Dir})
+Debug_dk_include	(${FFMPEG_Config_Dir})
 
 # libavdevice
-dk_libDebug			(${FFMPEG.Debug_Dir}/libavdevice/libavdevice.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libavdevice/libavdevice.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libavdevice/libavdevice.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libavdevice/libavdevice.a)
 
 # libswresample
-dk_libDebug			(${FFMPEG.Debug_Dir}/libswresample/libswresample.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libswresample/libswresample.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libswresample/libswresample.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libswresample/libswresample.a)
 
 # libavfilter
-dk_libDebug			(${FFMPEG.Debug_Dir}/libavfilter/libavfilter.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libavfilter/libavfilter.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libavfilter/libavfilter.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libavfilter/libavfilter.a)
 
 # libavutil
-dk_libDebug			(${FFMPEG.Debug_Dir}/libavutil/libavutil.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libavutil/libavutil.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libavutil/libavutil.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libavutil/libavutil.a)
 
 # libswscale
-dk_libDebug			(${FFMPEG.Debug_Dir}/libswscale/libswscale.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libswscale/libswscale.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libswscale/libswscale.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libswscale/libswscale.a)
 
 # libavcodec
-dk_libDebug			(${FFMPEG.Debug_Dir}/libavcodec/libavcodec.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libavcodec/libavcodec.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libavcodec/libavcodec.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libavcodec/libavcodec.a)
 
 # libavformat
-dk_libDebug			(${FFMPEG.Debug_Dir}/libavformat/libavformat.a)
-dk_libRelease		(${FFMPEG.Release_Dir}/libavformat/libavformat.a)
+dk_libDebug			(${FFMPEG_Debug_Dir}/libavformat/libavformat.a)
+dk_libRelease		(${FFMPEG_Release_Dir}/libavformat/libavformat.a)
 
 
 ### GENERATE / COMPILE ###
