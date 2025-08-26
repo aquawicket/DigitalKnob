@@ -63,28 +63,28 @@ function Global:dk_import() {
 	dk_call dk_assertVar "PLUGIN_IMPORT";
 	
 	dk_call dk_importVariables "${PLUGIN_IMPORT}" INSTALL_ROOT ${INSTALL_ROOT};
-	dk_call dk_assertVar "PLUGIN.Url";
-	dk_call dk_assertVar "PLUGIN.Install.Path";
+	dk_call dk_assertVar "PLUGIN_Url";
+	dk_call dk_assertVar "PLUGIN_Install_Path";
 	
-	dk_call dk_download "${PLUGIN.Url}";
+	dk_call dk_download "${PLUGIN_Url}";
 	dk_call dk_assertVar "dk_download";
 	
-	dk_call dk_getExtension "${PLUGIN.Url}" PLUGIN.Url.Extension;
-	dk_call dk_assertVar "PLUGIN.Url.Extension";
-	if("${PLUGIN.Url.Extension}" -eq ".7z"){ 		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".bz"){		$FileType = "Archive"; }	
-	if("${PLUGIN.Url.Extension}" -eq ".bz2"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".gz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".rar"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".sfx.exe"){	$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tar"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tar.gz"){	$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".tgz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".xz"){		$FileType = "Archive"; }
-	if("${PLUGIN.Url.Extension}" -eq ".zip"){		$FileType = "Archive"; }
+	dk_call dk_getExtension "${PLUGIN_Url}" PLUGIN_Url_Extension;
+	dk_call dk_assertVar "PLUGIN_Url_Extension";
+	if("${PLUGIN_Url_Extension}" -eq ".7z"){ 		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".bz"){		$FileType = "Archive"; }	
+	if("${PLUGIN_Url_Extension}" -eq ".bz2"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".gz"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".rar"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".sfx.exe"){	$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".tar"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".tar.gz"){	$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".tgz"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".xz"){		$FileType = "Archive"; }
+	if("${PLUGIN_Url_Extension}" -eq ".zip"){		$FileType = "Archive"; }
 	
 	if("${FileType}" -eq "Archive"){
-		dk_call dk_smartExtract "${dk_download}" "${PLUGIN.Install.Path}";
+		dk_call dk_smartExtract "${dk_download}" "${PLUGIN_Install_Path}";
 	}
 }
 
