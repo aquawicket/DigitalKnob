@@ -1,1 +1,2 @@
 FileZilla_Import=https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip
+FileZilla_Type=APP

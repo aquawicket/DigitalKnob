@@ -22,5 +22,5 @@ if(NOT Windows_Host)
 endif()
 
 
-dk_import(${dependencywalker_${Host_Tuple}_Import})
-
+#dk_import(${dependencywalker_${Host_Tuple}_Import})
+dk_import(APP)

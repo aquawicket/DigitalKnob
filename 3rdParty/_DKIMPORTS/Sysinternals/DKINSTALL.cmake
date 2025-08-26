@@ -15,8 +15,5 @@ include_guard()
 ###### Sysinternals ######
 # https://live.sysinternals.com/files/SysinternalsSuite.zip
 
-### INSTALL ###
-#dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/Sysinternals/dkconfig.txt")
-#dk_import			(${Sysinternals_Import})
+
 dk_import()

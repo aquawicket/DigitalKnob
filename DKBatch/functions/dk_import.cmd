@@ -30,19 +30,20 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_assertPath "%Import_Path%/dkconfig.txt"
 	%dk_call% dk_getFileParams "%Import_Path%/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	%dk_call% dk_basename %Import_Path% Import.Name
+	%dk_call% dk_basename %Import_Path% Import_Name
 	
 	%dk_call% dk_getParameterValue APP %*
+	if "!%Import_Name%_Type!" equ "APP" (set "APP=1")
 	if defined APP (
 		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
 	)
 	
-	if defined %Import.Name%_%Host_Tuple%_Import (
-		%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
+	if defined %Import_Name%_%Host_Tuple%_Import (
+		%dk_call% dk_importVariables !%Import_Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
 	) else (
-		%dk_call% dk_assertVar %Import.Name%_Import
-		%dk_call% dk_importVariables !%Import.Name%_Import! %INSTALL_ROOT%
+		%dk_call% dk_assertVar %Import_Name%_Import
+		%dk_call% dk_importVariables !%Import_Name%_Import! %INSTALL_ROOT%
 	)
 	if EXIST "%PLUGIN_Install_Path%" (
 		echo %PLUGIN_Install_Name% already installed

@@ -6,13 +6,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# DKINSTALL
+::# DKUNINSTALL
 ::#
-:DKINSTALL
+:DKUNINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0 
 
-	%dk_call% dk_import APP
+	::%dk_call% dk_uninstall ##### TODO #####
 
 %endfunction%
 
