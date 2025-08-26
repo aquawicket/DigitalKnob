@@ -55,7 +55,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	assoc .sh=DKBash
 	
 	::########### ICON #############
-	%dk_call% dk_assertPath BASH_ICON
+	::%dk_call% dk_assertPath BASH_ICON
 	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_ICON%"
 	
 	%dk_call% dk_success "DKBash install complete"

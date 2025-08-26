@@ -1,4 +1,4 @@
-import DKJAVA_FUNCTIONS_DIR.DK;
+//import DKJAVA_FUNCTIONS_DIR.DK;
 //#include_guard()
 
 //##################################################################################

@@ -15,11 +15,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo compiling ...
 	if EXIST "%APP%.exe" (del %APP%.exe)
 
-	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKJava_FILE%
-	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKJava_FILE%
-	%COMPILER_EXE% /nologo /out:%APP%.exe *.java
+	%COMPILER_EXE% %DKJava_FILE%
 	
-	if NOT EXIST "%APP%.exe" (
+	if NOT EXIST "%APP%.java" (
 		echo(
 		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
@@ -29,7 +27,10 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::###### run executable ######
 	cls
 	title %DKJava_FILE%
-    %ComSpec% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+	set "JAVA_EXE=%COMPILER_EXE:javac=java%"
+	
+    %JAVA_EXE:/=\% %APP% &:: && (echo returned TRUE) || (echo returned FALSE)
+	::echo C:\Users\Administrator\DigitalKnob\Development\3rdParty\openjdk-11_windows-x64_bin\bin\java.exe %APP%
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -73,12 +74,13 @@ if "%~1" equ "" (goto :DKINSTALL)
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 	
-	::###### Install DKCSharp ######
+	::###### Install Java ######
+	%dk_call% dk_depend openjdk
+	%dk_call% dk_assertPath "%JAVAC_EXE%"
+	
 	::###### COMPILER_EXE ######
-	:: find csc.exe
-	for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
-	set "COMPILER_EXE=%CSC_EXE%"
-	%dk_call% dk_assertVar COMPILER_EXE
+	set "COMPILER_EXE=%JAVAC_EXE%"
+	%dk_call% dk_assertPath "%COMPILER_EXE%"
 	ftype DKJava=%ComSpec% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .java=DKJava
 	
