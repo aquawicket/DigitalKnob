@@ -11,7 +11,8 @@ function Global:dk_dirname() {
 	${_path_} = $args[0];
 	if(Test-Path variable:${_path_}){ ${_path_} = Get-Variable -Name (${_path_}) -ValueOnly; } 
 	
-	${dk_dirname} = Split-Path ${_path_} -Parent;
+	${dk_dirname} = Split-Path ${_path_} -Parent; 
+	${dk_dirname} = ${dk_dirname} -replace "\\", "/";
 
 	###### output ######
 	${global:dk_dirname} = ${dk_dirname}

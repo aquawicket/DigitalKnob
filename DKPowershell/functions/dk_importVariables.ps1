@@ -135,7 +135,8 @@ function Global:dk_importVariables() {
 
 
 	PLUGIN_Id;
-
+	PLUGIN_Url_Extension;
+	PLUGIN_Import_Dirname;
 	PLUGIN_Install_Path;
 
 	### PLUGIN_Tuple_Dir]											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
@@ -161,9 +162,13 @@ function Global:dk_importVariables() {
 	${global:PLUGIN}="${PLUGIN_Id}";
 	#$(${PLUGIN})="${PLUGIN_Install_Path}";
 
-	### Set the <PLUGIN_ID> variable to mirror $PLUGIN
+	### Set the <PLUGIN> variable to mirror $PLUGIN
+	Get-Variable -Name "PLUGIN*" | ForEach-Object {
+		Set-Variable -Name $($_.Name -replace "PLUGIN", "${PLUGIN}") -Value $($_.Value) -Scope Global;
+    }
+	
 	Set-Variable -Name ${PLUGIN} -Value ${PLUGIN_Install_Path} -Scope Global;
-	#${global:PHP_SRC}=$PLUGIN;
+
 }
 
 ############################################
@@ -227,6 +232,20 @@ function Global:PLUGIN_Url_Name_Lower() {
 	dk_call dk_toLower ${PLUGIN_Url_Name} PLUGIN_Url_Name_Lower;
 	if(!(${PLUGIN_Url_Name_Lower})){ dk_call dk_error "PLUGIN_Url_Name_Lower is invalid"; }
 	dk_call dk_debug "PLUGIN_Url_Name_Lower = '${PLUGIN_Url_Name_Lower}'";
+}
+
+########################################
+function Global:PLUGIN_Url_Extension() {
+	if(${PLUGIN_Url_Extension}){ return; }
+
+	PLUGIN_Url_Basename;
+
+	if(!(${PLUGIN_Url_Basename})){ dk_call dk_error "PLUGIN_Url_Basename is invalid"; }
+	dk_call dk_debug "PLUGIN_Url_Basename = '${PLUGIN_Url_Basename}'";
+
+	dk_call dk_getExtension	"${PLUGIN_Url_Basename}" PLUGIN_Url_Extension;
+	if(!(${PLUGIN_Url_Extension})){ dk_call dk_error "PLUGIN_Url_Extension is invalid"; }
+	dk_call dk_debug "PLUGIN_Url_Extension = '${PLUGIN_Url_Extension}'";
 }
 
 #######################################
@@ -313,6 +332,18 @@ function Global:PLUGIN_Import_Path() {
 	dk_call dk_debug "PLUGIN_Import_Path = '${PLUGIN_Import_Path}'";
 }
 
+#########################################
+function Global:PLUGIN_Import_Dirname() {
+	if(${PLUGIN_Import_Dirname}){ return; }
+
+	#if(!(${PLUGIN_Import_Path}){ dk_call dk_error "PLUGIN_Import_Path is invalid"};
+	dk_call dk_debug "PLUGIN_Import_Path = '${PLUGIN_Import_Path}'";
+	
+	dk_call dk_dirname	"${PLUGIN_Import_Path}" PLUGIN_Import_Dirname;
+	if(!(${PLUGIN_Import_Dirname})){ dk_call dk_error "PLUGIN_Import_Dirname is invalid"; }
+	dk_call dk_debug "PLUGIN_Import_Dirname = '${PLUGIN_Import_Dirname}'";
+}
+
 ######################################
 function Global:PLUGIN_Import_Name() {
 	if(${PLUGIN_Import_Name}){ return; }
@@ -377,8 +408,7 @@ function Global:PRINTVARS() {
 	dk_call dk_echo;
 	dk_call dk_echo "#################### PLUGIN_variables #####################";
 	dk_call dk_echo "PLUGIN                            = '${PLUGIN}'";
-	dk_call dk_echo "${PLUGIN}                         = '$(gv -Name ${PLUGIN} -ValueOnly)'";
-	dk_call dk_echo "PLUGIN_ARGS                       = '${PLUGIN_ARGS}";
+	dk_call dk_echo "PLUGIN_Args                       = '${PLUGIN_Args}";
 	dk_call dk_echo "PLUGIN_Id                         = '${PLUGIN_Id}'";
 	dk_call dk_echo "PLUGIN_Version                    = '${PLUGIN_Version}'";
 	dk_call dk_echo "PLUGIN_Url                        = '${PLUGIN_Url}'";
@@ -399,27 +429,26 @@ function Global:PRINTVARS() {
 	dk_call dk_echo;
 	dk_call dk_echo;
 	dk_call dk_echo "################## ${PLUGIN}_variables ######################"
-	dk_call dk_echo "PHP_SRC                           = '${PHP_SRC}'";
-	dk_call dk_echo "${PLUGIN}_Id                      = '${PHP_SRC_Id}'";
-	dk_call dk_echo "${PLUGIN}_Args                    = '${PHP_SRC_Args}'";
-#	dk_call dk_echo "${PLUGIN}_Id                      = '${${PLUGIN}_Id}'";
-#	dk_call dk_echo "${PLUGIN}_Version                 = '${${PLUGIN}_Version}'";
-#	dk_call dk_echo "${PLUGIN}_Url                     = '${${PLUGIN}_Url}'";
-#	dk_call dk_echo "${PLUGIN}_Url_Basename            = '${${PLUGIN}_Url_Basename}'";
-#	dk_call dk_echo "${PLUGIN}_Url_Name                = '${${PLUGIN}_Url_Name}'";
-#	dk_call dk_echo "${PLUGIN}_Url_Extension           = '${${PLUGIN}_Url_Extension}'";
-#	dk_call dk_echo "${PLUGIN}_Import_Dirname          = '${${PLUGIN}_Import_Dirname}'";
-#	dk_call dk_echo "${PLUGIN}_Import_Name             = '${${PLUGIN}_Import_Name}'";
-#	dk_call dk_echo "${PLUGIN}_Import_Path             = '${${PLUGIN}_Import_Path}'";
-#	dk_call dk_echo "${PLUGIN}_Install_Dirname         = '${${PLUGIN}_Install_Dirname}'";
-#	dk_call dk_echo "${PLUGIN}_Install_Name            = '${${PLUGIN}_Install_Name}'";
-#	dk_call dk_echo "${PLUGIN}_Install_Path            = '${${PLUGIN}_Install_Path}'";
-#	dk_call dk_echo "${PLUGIN}_Tuple_Dir               = '${${PLUGIN}_Tuple_Dir}'";
-#	dk_call dk_echo "${PLUGIN}_Build_Dir               = '${${PLUGIN}_Build_Dir}'";
-#	dk_call dk_echo "${PLUGIN}_Config_Dir              = '${${PLUGIN}_Config_Dir}'";
-#	dk_call dk_echo "${PLUGIN}_Debug_Dir               = '${${PLUGIN}_Debug_Dir}'";
-#	dk_call dk_echo "${PLUGIN}_Release_Dir             = '${${PLUGIN}_Release_Dir}'";
-#	dk_call dk_echo;
+	dk_call dk_echo "${PLUGIN}                         = $(gv -Name ${PLUGIN} -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Args                    = $(gv -Name ${PLUGIN}_Args -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Id                      = $(gv -Name ${PLUGIN}_Id -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Version                 = $(gv -Name ${PLUGIN}_Version -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Url                     = $(gv -Name ${PLUGIN}_Url -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Url_Basename            = $(gv -Name ${PLUGIN}_Url_Basename -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Url_Name                = $(gv -Name ${PLUGIN}_Url_Name -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Url_Extension           = $(gv -Name ${PLUGIN}_Url_Extension -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Import_Dirname          = $(gv -Name ${PLUGIN}_Import_Dirname -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Import_Name             = $(gv -Name ${PLUGIN}_Import_Name -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Import_Path             = $(gv -Name ${PLUGIN}_Import_Path -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Install_Dirname         = $(gv -Name ${PLUGIN}_Install_Dirname -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Install_Name            = $(gv -Name ${PLUGIN}_Install_Name -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Install_Path            = $(gv -Name ${PLUGIN}_Install_Path -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Tuple_Dir               = $(gv -Name ${PLUGIN}_Tuple_Dir -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Build_Dir               = $(gv -Name ${PLUGIN}_Build_Dir -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Config_Dir              = $(gv -Name ${PLUGIN}_Config_Dir -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Debug_Dir               = $(gv -Name ${PLUGIN}_Debug_Dir -ValueOnly)";
+	dk_call dk_echo "${PLUGIN}_Release_Dir             = $(gv -Name ${PLUGIN}_Release_Dir -ValueOnly)";
+	dk_call dk_echo;
 }
 
 
