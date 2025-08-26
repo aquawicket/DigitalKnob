@@ -26,11 +26,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	del chr.tmp zero.tmp
 	set "dk_asciiToHex=0x%dk_asciiToHex:~-2%"
 
+	
+	::###### output ######
 	endlocal & (
 		set "dk_asciiToHex=%dk_asciiToHex%"
-		if "%~2" neq "" (set "%~2=%dk_asciiToHex%")
+		if "%~2" neq "" (
+			set "%~2=%dk_asciiToHex%"
+		) else (
+			echo %dk_asciiToHex%
+		)
 	)
-	
 %endfunction%
 
 

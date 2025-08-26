@@ -29,9 +29,14 @@ setlocal enabledelayedexpansion
 	:c_identifier_endLoop
 	
 	
+	::###### output ######
 	endlocal & (
 		set "dk_convertToCIdentifier=%dk_convertToCIdentifier%"
-		if "%~2" neq "" (set "%~2=%dk_convertToCIdentifier%")
+		if "%~2" neq "" (
+			set "%~2=%dk_convertToCIdentifier%"
+		) else (
+			echo %dk_convertToCIdentifier%
+		)
 	)
 %endfunction%
 

@@ -17,9 +17,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_asciiToHex %~1
 	%dk_call% dk_hexToDecimal %dk_asciiToHex%
 
+
+	::###### output ######
 	endlocal & (
-		set "dk_asciiToDecimal=%dk_hexToDecimal%"
-		if "%~2" neq "" (set "%~2=%dk_hexToDecimal%")
+		set "dk_hexToDecimal=%dk_hexToDecimal%"
+		if "%~2" neq "" (
+			set "%~2=%dk_hexToDecimal%"
+		) else (
+			echo %dk_hexToDecimal%
+		)
 	)
 %endfunction%
 

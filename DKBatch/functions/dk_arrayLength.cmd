@@ -34,7 +34,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### output ######
 	endlocal & (
 		set "dk_arrayLength=%dk_arrayLength%"
-		if "%~2" neq "" (set "%~2=%dk_arrayLength%") else (echo %dk_arrayLength%)
+		if "%~2" neq "" (
+			set "%~2=%dk_arrayLength%"
+		) else (
+			echo %dk_arrayLength%
+		)
 	)
 %endfunction%
 

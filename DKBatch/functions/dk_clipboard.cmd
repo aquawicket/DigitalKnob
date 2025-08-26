@@ -18,10 +18,18 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%~1" neq "" (echo|set/p=%~1|clip)
 
 	:: ###### GET ######
-	%dk_call% dk_exec %POWERSHELL_EXE% -command Get-Clipboard
+	%dk_call% dk_exec powershell.exe -command Get-Clipboard
+	set "dk_clipboard=%dk_exec%"
 
+	
+	::###### output ######
 	endlocal & (
-		set "dk_clipboard=%dk_exec%"
+		set "dk_clipboard=%dk_clipboard%"
+		if "%~2" neq "" (
+			set "%~2=%dk_clipboard%"
+		) else (
+			echo %dk_clipboard%
+		)
 	)
 %endfunction%
 

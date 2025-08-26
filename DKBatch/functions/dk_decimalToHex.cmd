@@ -25,7 +25,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "_hex_=!_LOOKUP_:~%B%,1!%_hex_%"
 		if %A% gtr 0 goto loop
 	:endlookup
-	endlocal & set "dk_decimalToHex=0x%_prefix_%%_hex_%"
+	set "dk_decimalToHex=0x%_prefix_%%_hex_%"
+	
+	::###### output ######
+	endlocal & (
+		set "dk_decimalToHex=%dk_decimalToHex%"
+		if "%~2" neq "" (
+			set "%~2=%dk_decimalToHex%"
+		) else (
+			echo %dk_decimalToHex%
+		)
+	)
 %endfunction%
 
 
