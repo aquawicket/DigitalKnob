@@ -14,6 +14,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_import
 	
-	set "PYTHON3_EXE=%PLUGIN.Install.Path%/python.exe"
+	set "PYTHON3_EXE=%PLUGIN_Install_Path%/python.exe"
 	%dk_call% dk_assertPath "%PYTHON3_EXE%"
 %endfunction%

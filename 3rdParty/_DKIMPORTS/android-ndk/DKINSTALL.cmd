@@ -23,11 +23,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
 	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! INSTALL_ROOT "%ANDROID_SDK%/ndk" INSTALL_NAME %android-ndk_Build%
 	
-	if EXIST "%PLUGIN.Install.Path%" (%return%)
+	if EXIST "%PLUGIN_Install_Path%" (%return%)
 	
-	%dk_call% dk_echo "Installing %Plugin.Url.Basename% . . ."
-	%dk_call% dk_download %PLUGIN.Url%
-	%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN.Install.Path%" 
+	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."
+	%dk_call% dk_download %PLUGIN_Url%
+	%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN_Install_Path%" 
 
 %endfunction%	
 	

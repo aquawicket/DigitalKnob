@@ -29,7 +29,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	if NOT defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL% NAME openjdk ROOT %DK3RDPARTY_DIR%)
+	if NOT defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL%)
 	
 	set "JAVA_EXE=%OPENJDK%/bin/java.exe"
 	set "JAVAC_EXE=%OPENJDK%/bin/javac.exe"

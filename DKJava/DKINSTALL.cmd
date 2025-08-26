@@ -76,7 +76,10 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	::###### Install Java ######
 	%dk_call% dk_depend openjdk
+	%dk_call% dk_assertPath "%JAVA_EXE%"
 	%dk_call% dk_assertPath "%JAVAC_EXE%"
+	
+	::"%JAVA_EXE%" -classpath %USERPROFILE%\DigitalKnob\Development\DKJava\functions com.DigitalKnob.DKJava
 	
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%JAVAC_EXE%"

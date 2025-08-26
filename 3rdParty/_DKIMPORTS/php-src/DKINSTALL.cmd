@@ -19,6 +19,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_import APP
 	
-	set "PHP_EXE=%PLUGIN.Install.Path%/php.exe"
+	set "PHP_EXE=%PLUGIN_Install_Path%/php.exe"
 	%dk_call% dk_assertFile PHP_EXE
 %endfunction%

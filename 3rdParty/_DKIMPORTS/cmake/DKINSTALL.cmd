@@ -21,9 +21,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_import APP
 
 	if /i "%Host_Os%" equ "Windows" ( 
-		%dk_call% dk_set CMAKE_EXE "%PLUGIN.Install.Path%/bin/cmake.exe"
+		%dk_call% dk_set CMAKE_EXE "%PLUGIN_Install_Path%/bin/cmake.exe"
 	) else ( 
-		%dk_call% dk_set CMAKE_EXE "%PLUGIN.Install.Path%/bin/cmake"
+		%dk_call% dk_set CMAKE_EXE "%PLUGIN_Install_Path%/bin/cmake"
 	)	
 	%dk_call% dk_assertPath "%CMAKE_EXE%"
 	%dk_call% dk_firewallAllow 			"CMake" "%CMAKE_EXE%"

@@ -40,7 +40,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
 	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
 	
-	%dk_call% dk_delete "%PLUGIN.Install.Path%"
+	%dk_call% dk_delete "%PLUGIN_Install_Path%"
 %endfunction%
 	
 

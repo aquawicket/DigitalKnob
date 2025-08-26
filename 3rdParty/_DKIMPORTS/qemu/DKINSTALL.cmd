@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU%/qemu-system-x86_64.exe
 	
 	if EXIST "%QEMU_IMG_EXE%" (%return%)
-	%dk_call% dk_echo "Installing %PLUGIN.Url.Basename% . . ."
+	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."
 	
 	::C:\Users\Administrator\DigitalKnob\download\qemu-w64-setup-20250806.exe /D=C:\Users\Administrator\DigitalKnob\DKTools\qemu-w64-setup-20250806
 	set "dk_exec_PRINT_COMMAND=1"
