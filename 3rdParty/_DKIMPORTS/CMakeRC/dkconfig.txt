@@ -1,1 +1,1 @@
-CMAKERC_IMPORT=https://github.com/vector-of-bool/cmrc/archive/refs/heads/master.zip
+CMAKERC_Import=https://github.com/vector-of-bool/cmrc/archive/refs/heads/master.zip

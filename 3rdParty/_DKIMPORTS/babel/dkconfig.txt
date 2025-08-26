@@ -2,4 +2,4 @@
 # https://github.com/babel/babel.git
 # https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
 
-BABEL_IMPORT=https://unpkg.com/@babel/standalone@7.14.4/babel.min.js
+BABEL_Import=https://unpkg.com/@babel/standalone@7.14.4/babel.min.js

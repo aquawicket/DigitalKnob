@@ -14,7 +14,7 @@ cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29
 cmake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
 cmake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
 cmake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
-
+cmake_Type=APP
 
 
 #[ "${Host_Os}"       = "Android" ]					&& cmake_Import=cmake

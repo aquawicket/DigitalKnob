@@ -1,1 +1,1 @@
-PING_IMPORT=https://github.com/sryze/ping/archive/refs/heads/master.zip
+PING_Import=https://github.com/sryze/ping/archive/refs/heads/master.zip

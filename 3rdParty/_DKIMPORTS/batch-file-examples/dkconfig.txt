@@ -1,4 +1,4 @@
 ###### batch-file-examples ######
 # https://github.com/Archive-projects/Batch-File-examples
 
-batch-file-examples_IMPORT=https://github.com/Archive-projects/Batch-File-examples/archive/refs/heads/master.zip
+batch-file-examples_Import=https://github.com/Archive-projects/Batch-File-examples/archive/refs/heads/master.zip

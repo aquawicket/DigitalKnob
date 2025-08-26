@@ -13,23 +13,30 @@ include_guard()
 
 
 #########################################################################
-# dk_patch(import_name, dest_path)
+# dk_patch(Import_Name, Install_Path)
 #
 #	Copy files from a DK/3rdParty/_DKIMPORTS/library to the DK/3rdParty/library install location
 #
-#	@import_name	- The name of the 3rdParty DKIMPORT library
-#	@dest_path		- The location of the installed library under /3rdParty
+#	@Import_Name	- The name of the 3rdParty DKIMPORT library
+#	@Install_Path	- The location of the installed library under /3rdParty
 #
-function(dk_patch import_name dest_path)
+function(dk_patch Import_Name Install_Path)
 	dk_debugFunc()
 
-	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${import_name} TO ${dest_path}")
-	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
-	dk_notice("located in $ENV{DKIMPORTS_DIR}/${import_name}/DKINSTALL.cmake")
+	if("${Import_Name}" STREQUAL "${PLUGIN_Import_Name}")
+		dk_error("Install_Path:${Import_Name} does NOT EQUAL PLUGIN_Import_Name:${PLUGIN_Import_Name}")
+	endif()
+	if("${Install_Path}" STREQUAL "${PLUGIN_Install_Path}")
+		dk_error("Install_Path:${Install_Path} does NOT EQUAL PLUGIN_Install_Path:${PLUGIN_Install_Path}")
+	endif()
 	
-	dk_assertPath($ENV{DKIMPORTS_DIR}/${import_name})
-	dk_assertPath(${dest_path})
-	dk_copy("$ENV{DKIMPORTS_DIR}/${import_name}/" "${dest_path}/" OVERWRITE)
+	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${Import_Name} TO ${Install_Path}")
+	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
+	dk_notice("located in $ENV{DKIMPORTS_DIR}/${Import_Name}/DKINSTALL.cmake")
+	
+	dk_assertPath($ENV{DKIMPORTS_DIR}/${Import_Name})
+	dk_assertPath(${Install_Path})
+	dk_copy("$ENV{DKIMPORTS_DIR}/${Import_Name}/" "${Install_Path}/" OVERWRITE)
 endfunction()
 
 
@@ -40,5 +47,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_patch(todo "todo")
+	dk_patch("libxml2" "C:/Users/Administrator/DigitalKnob/Development/3rdParty/libxml2-e397651a")
 endfunction()

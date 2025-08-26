@@ -1,1 +1,1 @@
-IR-RESCUE_IMPORT=https://github.com/diogo-fernan/ir-rescue/archive/refs/heads/master.zip
+IR-RESCUE_Import=https://github.com/diogo-fernan/ir-rescue/archive/refs/heads/master.zip

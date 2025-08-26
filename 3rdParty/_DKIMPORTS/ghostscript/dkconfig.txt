@@ -1,3 +1,4 @@
 ###### ghostscript ######
 
 ghostscript_Windows_X86_64_Import=https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs922/gs922w64.exe
+ghostscript_Type=

@@ -1,1 +1,1 @@
-TCC_RT_IMPORT=https://jpsoft.com/downloads/v34/tcc-rt.exe
+TCC_RT_Import=https://jpsoft.com/downloads/v34/tcc-rt.exe

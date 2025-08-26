@@ -2,4 +2,4 @@
 # Alliance for Open Media
 # https://aomedia.googlesource.com/aom.git
 
-AOM_IMPORT=https://aomedia.googlesource.com/aom.git/+archive/c2fe6bf.tar.gz
+AOM_Import=https://aomedia.googlesource.com/aom.git/+archive/c2fe6bf.tar.gz
