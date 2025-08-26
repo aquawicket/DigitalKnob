@@ -21,8 +21,10 @@ function GLOBAL:dk_pipeServer() {
 				$pipeWriter = New-Object System.IO.StreamWriter($pipeServer)
 				$pipeWriter.AutoFlush = $true
 				
-				$userName = $pipeReader.ReadLine()
 				"Connected to $pipeName $userName"
+				$pipeWriter.WriteLine("Connected");
+				#$userName = $pipeReader.ReadLine()
+				
 				
 				while ($pipeServer.isConnected) {
 					$msg = $pipeReader.ReadLine()
@@ -32,9 +34,9 @@ function GLOBAL:dk_pipeServer() {
 					}
 					
 					"Client: $msg"
-					if($pipeServer.isConnected){
+					#if($pipeServer.isConnected){
 						$pipeWriter.WriteLine("Server: $msg");
-					}
+					#}
 				}	
 				
 				$pipeServer.Disconnect()

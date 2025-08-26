@@ -24,21 +24,26 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0 99
 	
-	::set "Import.Path=%CD:\=/%"
+	::set "Import_Path=%CD:\=/%"
 	if NOT defined CURRENT_IMPORT (set "CURRENT_IMPORT=%CD:\=/%")
-	set "Import.Path=%CURRENT_IMPORT%"
-	::%dk_call% dk_assertPath "%Import.Path%/dkconfig.txt"
-	%dk_call% dk_getFileParams "%Import.Path%/dkconfig.txt"
+	set "Import_Path=%CURRENT_IMPORT%"
+	::%dk_call% dk_assertPath "%Import_Path%/dkconfig.txt"
+	%dk_call% dk_getFileParams "%Import_Path%/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	%dk_call% dk_basename %Import.Path% Import.Name
+	%dk_call% dk_basename %Import_Path% Import.Name
 	
 	%dk_call% dk_getParameterValue APP %*
 	if defined APP (
 		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
 	)
-	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
-	%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
+	
+	if defined %Import.Name%_%Host_Tuple%_Import (
+		%dk_call% dk_importVariables !%Import.Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
+	) else (
+		%dk_call% dk_assertVar %Import.Name%_Import
+		%dk_call% dk_importVariables !%Import.Name%_Import! %INSTALL_ROOT%
+	)
 	if EXIST "%PLUGIN_Install_Path%" (
 		echo %PLUGIN_Install_Name% already installed
 		%return%

@@ -12,11 +12,11 @@ include_guard()
 #########################################################################
 
 
-###### FileZilla ######
-# https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip
+###### Sysinternals ######
+# https://live.sysinternals.com/files/SysinternalsSuite.zip
 
 ### INSTALL ###
 #dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/FileZilla/dkconfig.txt")
-#dk_import			(${FileZilla_Import})
+#dk_getFileParams	("$ENV{DKIMPORTS_DIR}/Sysinternals/dkconfig.txt")
+#dk_import			(${Sysinternals_Import})
 dk_import()
