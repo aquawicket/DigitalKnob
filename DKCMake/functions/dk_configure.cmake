@@ -14,36 +14,53 @@ include_guard()
 dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variables
 
 #########################################################################
-# dk_configure(Source_Dir, args...)
+# dk_configure(Install_Path, args...)
 #
-#	@Source_Dir - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
-#				  If no Source_Dir is specified, ${${CURRENT_PLUGIN}} will be used
+#	@Install_Path - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
+#				  If no Install_Path is specified, ${${CURRENT_PLUGIN}} will be used
 #
 function(dk_configure)
 	dk_debugFunc(0 99)
 	
-	###### CURRENT_PLUGIN ######
-	message("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	message("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
-	set(Plugin_Name "${dk_basename}")
+	###### PLUGIN ######
+	dk_debug("PLUGIN = ${PLUGIN}")
+	dk_debug("${PLUGIN} = ${${PLUGIN}}")
+	dk_assertVar("${PLUGIN}")
 	
-	###### Source_Dir ######
-	if(ARGV)
-		set(Source_Dir "${ARGV0}")
-	else()
-		set(Source_Dir "${${CURRENT_PLUGIN}}")
+	###### CURRENT_PLUGIN ######
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
+	dk_assertVar(${CURRENT_PLUGIN})
+	if(NOT "${PLUGIN}" STREQUAL "${CURRENT_PLUGIN}")
+		dk_fatal("PLUGIN:${PLUGIN} does NOT EQUAL CURRENT_PLUGIN:${CURRENT_PLUGIN}")
 	endif()
-	dk_assertPath(Source_Dir)
+	
+	###### PLUGIN_Install_Path ######
+#	dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
+#	dk_assertVar(PLUGIN_Install_Path)
+#	if(NOT "${${PLUGIN}}" STREQUAL "${PLUGIN_Install_Path}")
+#		dk_fatal("${PLUGIN}:${${PLUGIN}} does NOT EQUAL PLUGIN_Install_Path:${PLUGIN_Install_Path}")
+#	endif()
+	
+	###### Install_Path ######
+	if(ARGV)
+		set(Install_Path "${ARGV0}")
+	elseif(${PLUGIN})
+		set(Install_Path "${${PLUGIN}}")
+	elseif(PLUGIN_Install_Path)
+		set(Install_Path "${PLUGIN_Install_Path}")
+	elseif(${CURRENT_PLUGIN})
+		set(Install_Path "${${CURRENT_PLUGIN}}")
+	endif()
+	dk_assertVar(Install_Path)
 	
 	###### dk_allButFirstArgs ######
 	if(ARGV)
 		dk_call(dk_allButFirstArgs ${ARGV})
 	endif()
 	
-	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	if(NOT "${Install_Path}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_configure(): Install_Path:${Install_Path} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
 	#if(NOT REBUILDALL)
@@ -84,11 +101,11 @@ function(dk_configure)
 	
 	
 	
-	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Source_Dir}/configure) will return true.
+	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	dk_call(dk_pathExists "${Source_Dir}/CMakeLists.txt" CMakeLists.txt)
-	dk_pathExists("${Source_Dir}/configure"      configure)
-	dk_pathExists("${Source_Dir}/configure.ac"   configure.ac)
+	dk_call(dk_pathExists "${Install_Path}/CMakeLists.txt" CMakeLists.txt)
+	dk_pathExists("${Install_Path}/configure"      configure)
+	dk_pathExists("${Install_Path}/configure.ac"   configure.ac)
 	
 	
 	############ Configure with CMAKE ############
@@ -102,7 +119,7 @@ function(dk_configure)
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
-		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Source_Dir}" "-B" "${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Install_Path}" "-B" "${BINARY_DIR}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
@@ -122,7 +139,7 @@ function(dk_configure)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
-		if(EXISTS "${Source_Dir}/configure")
+		if(EXISTS "${Install_Path}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")

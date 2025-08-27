@@ -88,7 +88,7 @@ function(dk_import)
 		elseif(${PLUGIN}_${Host_Tuple}_Import)										# ZLIB_Windows_X86_64_Import
 			dk_set(PLUGIN_Import "${PLUGIN}_${Host_Tuple}_Import")
 		elseif(${PLUGIN_Import_Name}_Import)										# zlib_Import
-			dk_set(PLUGIN_Import "${{PLUGIN_Import_Name}_Import")
+			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_Import")
 		elseif(${PLUGIN}_Import)													# ZLIB_Import
 			dk_set(PLUGIN_Import "${PLUGIN}_Import")
 		else()
@@ -137,11 +137,10 @@ function(dk_import)
 		endif()
 	endif()
 
-	dk_getParameter(PATCH)
-	if(PATCH)
-		#dk_patch("${${CURRENT_PLUGIN}_Import_Name}" "${${CURRENT_PLUGIN}}")
+	#dk_getParameter(PATCH)
+	#if(PATCH)
 		dk_patch("${PLUGIN_Import_Name}" "${PLUGIN_Install_Path}")
-	endif()
+	#endif()
 
 endfunction()
 

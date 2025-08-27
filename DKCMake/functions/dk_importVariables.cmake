@@ -222,7 +222,7 @@ function(dk_importVariables)
 	dk_debug("PLUGIN = '${PLUGIN}'")
 	
 	### ${PLUGIN}
-	set(${PLUGIN} "${PLUGIN_Install_Path}" CACHE INTERNAL "")
+	dk_set(${PLUGIN} "${PLUGIN_Install_Path}")
 	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
 
 	Copy_Variables()

@@ -208,7 +208,7 @@ if(Release)
 	endif()
 endif()
 
-dk_exec(${PERL_EXE} configdata.pm --dump WORKING_DIRECTORY ${OPENSSL_Config_Dir})
+dk_exec("${PERL_EXE}" configdata.pm --dump WORKING_DIRECTORY "${OPENSSL_Config_Dir}")
 
 ### COMPILE ###
 dk_build()

@@ -13,16 +13,16 @@ function GLOBAL:dk_pipeServer() {
 		$pipeServer = New-Object System.IO.Pipes.NamedPipeServerStream($pipeName)
 		try {
 			while ($true) {
-				"Waiting for connection on '$pipeName'"
+				#"Waiting for connection on '$pipeName'"
 				$pipeServer.WaitForConnection()
-				"Connection established"
+				#"Connection established"
 				
 				$pipeReader = New-Object System.IO.StreamReader($pipeServer)
 				$pipeWriter = New-Object System.IO.StreamWriter($pipeServer)
 				$pipeWriter.AutoFlush = $true
 				
-				"Connected to $pipeName $userName"
-				$pipeWriter.WriteLine("Connected");
+				#"Connected to $pipeName $userName"
+				#$pipeWriter.WriteLine("Connected");
 				#$userName = $pipeReader.ReadLine()
 				
 				
@@ -33,14 +33,14 @@ function GLOBAL:dk_pipeServer() {
 						break; 
 					}
 					
-					"Client: $msg"
+					"$msg"
 					#if($pipeServer.isConnected){
-						$pipeWriter.WriteLine("Server: $msg");
+					#	$pipeWriter.WriteLine("Server: $msg");
 					#}
 				}	
 				
 				$pipeServer.Disconnect()
-				"Disconnected"
+				#"Disconnected"
 			}
 		}
 		catch{

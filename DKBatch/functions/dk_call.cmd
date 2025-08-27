@@ -129,7 +129,7 @@ exit /b !errorlevel!
 		set "_lvl_=%LVL%"
 	)
 	call :updateIndent %_lvl_%
-	echo %pad%%_lvl_%х!__STACK__%_ent_%!
+	echo %pad%%_lvl_%х!__STACK__%_ent_%! > \\.\pipe\TestPipe
 exit /b !errorlevel!
 
 ::####################################################################
@@ -150,7 +150,7 @@ exit /b !errorlevel!
 	
 	call :updateIndent %_lvl_%
 	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!:!__BOOL__!%clr%) else (set STATUS=%red%!__STATUS__!:!__BOOL__!%clr%)
-	echo %pad%  им!__STACK__%_ent_%!
+	echo %pad%  им!__STACK__%_ent_%! > \\.\pipe\TestPipe
 exit /b !errorlevel!
 
 ::####################################################################
