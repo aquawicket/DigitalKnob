@@ -22,40 +22,19 @@ include_guard()
 function(dk_dependB plugin)
 	dk_debugFunc()
 	
-#	if(plugin IN_LIST init_list)
-#		dk_debug("${plugin} is allready in init_list")
-#		return()  #plugin is already in the init_list
-#	endif()
-#	dk_append(init_list "${plugin}")
-	
-	dk_getPathToPlugin(${plugin} Plugin_Path)
+
+#	dk_getPathToPlugin(${plugin} PLUGIN_Import_Path)
 	
 	###### Load the dkconfig.txt file ######
-	if(EXISTS "${Plugin_Path}/dkconfig.txt")
-		dk_getFileParams("${Plugin_Path}/dkconfig.txt")
-		dk_success("Loaded ${Plugin_Path}/dkconfig.txt")
-	else()
-		dk_warning("${Plugin_Path}/dkconfig.txt NOT FOUND.")
-	endif()
-	
-	###### Load the DKINSTALL.cmake file ######
-	dk_set(CURRENT_IMPORT "${Plugin_Path}")
-	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
-	dk_debug("dk_load(${Plugin_Path}/DKINSTALL.cmake)")
-	dk_load(${Plugin_Path}/DKINSTALL.cmake)
-	
-#	if(${ARGC} GREATER 1)
-#		dk_info(ARGV)
-#		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable plugin ARGV, no value
+#	if(EXISTS "${PLUGIN_Import_Path}/dkconfig.txt")
+#		dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
+#		dk_success("Loaded ${PLUGIN_Import_Path}/dkconfig.txt")
+#	else()
+#		dk_warning("${PLUGIN_Import_Path}/dkconfig.txt NOT FOUND.")
 #	endif()
-
-	if(plugin IN_LIST dk_disabled_list)
-		if(DISABLED_LIBS MATCHES "${plugin}")
-			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
-		endif()
-		dk_notice("${plugin} IS DISABLED")
-		return()
-	endif()
+	
+#	###### Load the DKINSTALL.cmake file ######
+#	dk_load(${PLUGIN_Import_Path}/DKINSTALL.cmake)
 	
 #	If dk_depend had second variable (a sub library), set that variable to ON
 #	if(${ARGC} GREATER 1)
@@ -68,13 +47,13 @@ function(dk_dependB plugin)
 #		endif()
 #	endif()
 		
-	if(plugin IN_LIST dkdepend_list)
-		#dk_verbose("${plugin} already in dkdepend_list")
-		return()  #library is already in the list
-	endif()
+#	if(plugin IN_LIST dkdepend_list)
+#		#dk_verbose("${plugin} already in dkdepend_list")
+#		return()  #library is already in the list
+#	endif()
 	
-	dk_enable(${plugin})
-	dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
+#	dk_enable(${plugin})
+#	dk_runDepends(${plugin}) # strip everything from the file except if() else() elseif() endif() and dk_depend() before sorting.
 #	else()
 #		if(dkdepend_list MATCHES "${plugin}")
 #			return() #library is already in the list

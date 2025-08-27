@@ -105,7 +105,7 @@ function(dk_assets)
 		PATTERN temp.txt EXCLUDE
 	)
 	
-	file(COPY ${Plugin_Path} DESTINATION ${Target_App_Dir}/assets ${ASSETS})
+	file(COPY ${PLUGIN_Import_Path} DESTINATION ${Target_App_Dir}/assets ${ASSETS})
 endfunction()
 
 

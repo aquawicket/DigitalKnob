@@ -10,7 +10,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
-
+message("${bg_blue}############ ${CMAKE_CURRENT_LIST_FILE}() ############${clr}")
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -345,7 +345,7 @@ endif()
 # dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
 # itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
 
-if(NOT CURRENT_PLUGIN)
+#if(NOT CURRENT_PLUGIN)
 	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")												### EXAMPLE ###
 		dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN_Import_Path		${DKIMPORTS_DIR}/zlib
 		dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
@@ -368,4 +368,6 @@ if(NOT CURRENT_PLUGIN)
 		#dk_envList(PLUGIN PUSH "${PLUGIN}")
 		dk_depend("${PLUGIN_Import_Name}")
 	endif()
-endif()
+#endif()
+
+dk_load(dk_build)

@@ -43,5 +43,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_printPrefixVars("CMAKE_")
+	#dk_printPrefixVars("CMAKE_")
+	dk_call(dk_printPrefixVars "CMAKE_")
 endfunction()

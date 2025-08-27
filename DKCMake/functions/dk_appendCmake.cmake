@@ -21,8 +21,8 @@ function(dk_appendCmake)
 	dk_debugFunc(1)
 	set(str ${ARGV})
 	
-	dk_assertPath(Plugin_Path)
-	dk_fileAppend(${Plugin_Path}/CMakeLists.txt "${str}")
+	dk_assertPath(PLUGIN_Install_Path)
+	dk_fileAppend(${PLUGIN_Install_Path}/CMakeLists.txt "${str}")
 endfunction()
 
 

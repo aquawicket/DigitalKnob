@@ -48,10 +48,25 @@ function(dk_depend PLUGIN_Import_Name) #target
 	
 	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
 	dk_envList(PLUGIN PUSH "${PLUGIN}")
+
 		
-
-
-	dk_dependB(${PLUGIN_Import_Name})
+		###### Load the dkconfig.txt file ######
+		if(EXISTS "${PLUGIN_Import_Path}/dkconfig.txt")
+		dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
+			dk_success("Loaded ${PLUGIN_Import_Path}/dkconfig.txt")
+		else()
+			dk_warning("${PLUGIN_Import_Path}/dkconfig.txt NOT FOUND.")
+		endif()
+		
+		###### Load the DKINSTALL.cmake file #########
+		dk_load(${PLUGIN_Import_Path}/DKINSTALL.cmake)
+		##############################################
+		
+		if(PLUGIN_Import_Name IN_LIST dkdepend_list)
+			dk_verbose("${PLUGIN_Import_Name} already in dkdepend_list")
+			return()
+		endif()
+		dk_enable(${PLUGIN_Import_Name})
 	
 	
 	###### Pop Plugin from the PLUGIN_STACK ######

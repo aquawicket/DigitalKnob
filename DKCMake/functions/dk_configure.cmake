@@ -21,48 +21,25 @@ dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variabl
 #
 function(dk_configure)
 	dk_debugFunc(0 99)
-	
-	###### PLUGIN ######
-	dk_debug("PLUGIN = ${PLUGIN}")
-	dk_debug("${PLUGIN} = ${${PLUGIN}}")
-	dk_assertVar("${PLUGIN}")
-	
-	###### CURRENT_PLUGIN ######
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
-	dk_assertVar(${CURRENT_PLUGIN})
-	if(NOT "${PLUGIN}" STREQUAL "${CURRENT_PLUGIN}")
-		dk_error("PLUGIN:${PLUGIN} does NOT EQUAL CURRENT_PLUGIN:${CURRENT_PLUGIN}")
-	endif()
-	
-	###### PLUGIN_Install_Path ######
-#	dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
-#	dk_assertVar(PLUGIN_Install_Path)
-#	if(NOT "${${PLUGIN}}" STREQUAL "${PLUGIN_Install_Path}")
-#		dk_fatal("${PLUGIN}:${${PLUGIN}} does NOT EQUAL PLUGIN_Install_Path:${PLUGIN_Install_Path}")
-#	endif()
+	dk_debug("dk_configure(${ARGV})")
+	dk_call(dk_importVariables PRINTVARS)
 	
 	###### Install_Path ######
 	if(ARGV)
-		set(Install_Path "${ARGV0}")
+		dk_set(PLUGIN_Install_Path "${ARGV0}")
 	elseif(${PLUGIN})
-		set(Install_Path "${${PLUGIN}}")
+		dk_set(PLUGIN_Install_Path "${${PLUGIN}}")
 	elseif(${CURRENT_PLUGIN})
-		set(Install_Path "${${CURRENT_PLUGIN}}")
-	elseif(PLUGIN_Install_Path)
-		set(Install_Path "${PLUGIN_Install_Path}")
+		dk_set(PLUGIN_Install_Path "${${CURRENT_PLUGIN}}")
 	endif()
-	dk_assertVar(Install_Path)
+	dk_assertVar(PLUGIN_Install_Path)
 	
+
 	###### dk_allButFirstArgs ######
 	if(ARGV)
 		dk_call(dk_allButFirstArgs ${ARGV})
 	endif()
 	
-	if(NOT "${Install_Path}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_error("dk_configure(): Install_Path:${Install_Path} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
-	endif()
-
 	#if(NOT REBUILDALL)
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
@@ -191,15 +168,15 @@ function(dk_configure)
 	
 ######### TODO - revamp the variable system ##################################	
 #	
-#	 Old Variable            New Variable                    Value
+#	 Old Variable            		New Variable                    Value
 #	
-#	  ${PLUGIN}		  	  ${CURRENT_PLUGIN}					:LIBEXPAT
-#	${${PLUGIN}}		${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
-#						${${CURRENT_PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
-#     ${plugin}   		${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
-#     ${Plugin_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
-#						CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
-
+#	  ${PLUGIN}		  	  		${CURRENT_PLUGIN}					:LIBEXPAT
+#	${${PLUGIN}}				${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
+#	${${PLUGIN}}_Install_Name}	${${CURRENT_PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
+#   ${${PLUGIN}}_Import_Name} 	${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
+#	${${PLUGIN}}_Import_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
+#								CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
+	
 	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	dk_debug("plugin = ${plugin}")
 	#dk_debug("${plugin} = ${${plugin}}")
@@ -208,9 +185,9 @@ function(dk_configure)
 	
 	dk_debug("${CURRENT_PLUGIN}_FOLDER = ${${CURRENT_PLUGIN}_FOLDER}")
 	
-	dk_debug("Plugin_Path = ${Plugin_Path}")
-	#dk_getPathToPlugin(${plugin} Plugin_Path)
-	dk_set(${CURRENT_PLUGIN}_Import_Path "${Plugin_Path}")
+	dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
+	#dk_getPathToPlugin(${plugin} PLUGIN_Import_Path)
+	dk_set(${CURRENT_PLUGIN}_Import_Path "${PLUGIN_Import_Path}")
 	dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
 	
 	dk_debug("${CURRENT_PLUGIN}_Import_Name = ${${CURRENT_PLUGIN}_Import_Name}")
@@ -230,8 +207,8 @@ function(dk_configure)
 	# Install 3rd Party Libs
 	if(INSTALL_DKLIBS)
 		#if(${isDKPlugin} EQUAL -1)
-			if(EXISTS ${Plugin_Path}/${Target_Config}/cmake_install.cmake)
-				dk_exec(${CMAKE_COMMAND} --install ${Plugin_Path}/${Target_Config})
+			if(EXISTS ${PLUGIN_Install_Path}/${Target_Config}/cmake_install.cmake)
+				dk_exec(${CMAKE_COMMAND} --install ${PLUGIN_Install_Path}/${Target_Config})
 			endif()
 		#endif()
 	endif(INSTALL_DKLIBS)
@@ -241,23 +218,23 @@ function(dk_configure)
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
 			dk_info("Installing ${plugin} header files")
-			file(INSTALL DIRECTORY ${Plugin_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
+			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
 			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
 		endif()
 		
 		#Add the DKPlugin to the app project
 		if(PROJECT_INCLUDE_DKPLUGINS)
 			if(NOT CMAKE_SCRIPT_MODE_FILE)
-				if(EXISTS "${Plugin_Path}/CMakeLists.txt")
-					add_subdirectory("${Plugin_Path}" "${Plugin_Path}/${Target_Config}")
+				if(EXISTS "${PLUGIN_Install_Path}/CMakeLists.txt")
+					add_subdirectory("${PLUGIN_Install_Path}" "${PLUGIN_Install_Path}/${Target_Config}")
 				endif()
 			endif()
 		endif()
 		
 		# Install DKPlugin Libs
 		if(INSTALL_DKLIBS)
-			if(EXISTS ${Plugin_Path}/${Target_Config}/cmake_install.cmake)
-				dk_exec(${CMAKE_COMMAND} --install ${Plugin_Path}/${Target_Config})
+			if(EXISTS ${PLUGIN_Install_Path}/${Target_Config}/cmake_install.cmake)
+				dk_exec(${CMAKE_COMMAND} --install ${PLUGIN_Install_Path}/${Target_Config})
 			endif()
 		endif()
 	endif()

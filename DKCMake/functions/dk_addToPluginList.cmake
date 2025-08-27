@@ -13,19 +13,19 @@ include_guard()
 
 
 #########################################################################
-# dk_addToPluginList(<plugin_name>)
+# dk_addToPluginList(<PLUGIN_Import_Name>)
 #
-#	<plugin_name>	- TODO
+#	<PLUGIN_Import_Name>	- TODO
 #
-function(dk_addToPluginList plugin_name)
+function(dk_addToPluginList PLUGIN_Import_Name)
 	dk_debugFunc(1)
 	
-	dk_getPathToPlugin(${plugin_name} Plugin_Path)
+	dk_getPathToPlugin(${PLUGIN_Import_Name} Plugin_Path)
 	if(NOT EXISTS "${Plugin_Path}")
-		dk_fatal("${plugin_name} plugin not found")
+		dk_fatal("${PLUGIN_Import_Name} plugin not found")
 	endif()
 	dk_include(${Plugin_Path})
-	dk_append(DKPLUGIN_LIST "${plugin_name}")
+	dk_append(DKPLUGIN_LIST "${PLUGIN_Import_Name}")
 endfunction()
 
 
