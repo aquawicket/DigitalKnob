@@ -110,8 +110,20 @@ function(dk_color)
 		# Background RGB Colors
 		set(bg_RGB 		"${ESC}[48;2;"	CACHE INTERNAL "")		# ${bg_RGB}150;100;50m      = ${ESC}[38;2;150;100;50m
 		
+		#ESC[J	erase in display (same as ESC[0J)
+		#ESC[0J	erase from cursor until end of screen
+		#ESC[1J	erase from cursor to beginning of screen
+		#ESC[2J	erase entire screen
+		#ESC[3J	erase saved lines
+		#ESC[K	erase in line (same as ESC[0K)
+		#ESC[0K	erase from cursor to end of line
+		#ESC[1K	erase start of line to the cursor
+		#ESC[2K	erase the entire line
+		
 		
 		dk_echo("${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}")
+		
+		
 	else()
 		#dk_unset(ESC CACHE)
 		#dk_unset(clr CACHE)

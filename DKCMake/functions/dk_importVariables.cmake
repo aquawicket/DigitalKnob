@@ -225,7 +225,7 @@ function(dk_importVariables)
 	dk_set(${PLUGIN} "${PLUGIN_Install_Path}")
 	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
 
-	Copy_Variables()
+	dk_copyVariables("PLUGIN_" "${PLUGIN}_")
 	PRINTVARS()
 endfunction()
 
@@ -638,13 +638,25 @@ endfunction()
 	
 	
 	
-########################
-function(Copy_Variables)
+########################################
+# Copy_Variables(prefixA, prefixB)
+#
+#	Copy all variables starting with prefixA to prefixB
+#
+#	Example Copy_Variables(Monday_, Wednesday_)
+#  All variables whos name start with Monday_ will be copied to new variables
+#	that star with Wednesday_.
+#
+#	Monday_todo_list  ->   Wednesday_todo_list
+#	Monday_reminders  ->   Wednesday_reminders
+#
+#
+function(Copy_Variables prefixA prefixB)
 	### Set the <PLUGIN_Id> variable to mirror %PLUGIN%
 	### All %PLUGIN_variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
 	
-	set(_prefix "PLUGIN_")
-	set(_newprefix "${PLUGIN}_")
+	set(prefixA "PLUGIN_")
+	set(prefixB "${PLUGIN}_")
 	get_cmake_property(_vars VARIABLES)
     string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
     foreach(_variable ${_matchedVars})
