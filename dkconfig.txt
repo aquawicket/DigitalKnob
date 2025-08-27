@@ -1,8 +1,9 @@
+
 #DKOFFLINE=C:/DKOFFLINE
 #dk_DEBUG=1
 #dk_call_PRINT_CALLS=1
-dk_call_PRINT_ENTRY=1
-dk_call_PRINT_EXIT=1
+#dk_call_PRINT_ENTRY=1
+#dk_call_PRINT_EXIT=1
 #dk_call_PRINT_SCOPE=1
 #dk_call_IGNORE=dk_debugFunc;dk_echo;
 #dk_embedBin_DELETE_CMD_ON_EXTRACT=1

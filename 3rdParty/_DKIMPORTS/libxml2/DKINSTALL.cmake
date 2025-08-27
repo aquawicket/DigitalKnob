@@ -19,16 +19,6 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-#dk_validate(Target_Config  "dk_Target_Config()")
-#if(NOT CURRENT_PLUGIN)
-#	dk_call(dk_set Import_Path "${CMAKE_CURRENT_LIST_DIR}")
-#	dk_basename("${Import_Path}")
-#	dk_toUpper("${dk_basename}" PLUGIN)
-#	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-#	dk_set(${PLUGIN}_Import_Path "${Import_Path}")
-#	dk_envList(PLUGIN PUSH "${PLUGIN}")
-#endif()
-
 
 ### DEPEND ###
 dk_depend(libiconv)

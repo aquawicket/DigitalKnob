@@ -26,7 +26,7 @@ function(dk_printPrefixVars _prefix)
     
 	message("###### ${_prefix}variables ######")
 	foreach(_variable ${_matchedVars})
-		dk_echo("${_var} = ${${_var}}")
+		dk_echo("${_variable} = ${${_variable}}")
 		#list(APPEND _resultVars "${_variable}")
     endforeach()
 	message("")

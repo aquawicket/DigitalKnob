@@ -365,6 +365,7 @@ if(NOT CURRENT_PLUGIN)
 		dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
 		dk_set(${PLUGIN}_Import_Name "${PLUGIN_Import_Name}")		# <PLUGIN>_Import_Name		zlib	
 		dk_debug("${PLUGIN}_Import_Name = ${${PLUGIN}_Import_Name}")
-		dk_envList(PLUGIN PUSH "${PLUGIN}")
+		#dk_envList(PLUGIN PUSH "${PLUGIN}")
+		dk_depend("${PLUGIN_Import_Name}")
 	endif()
 endif()

@@ -13,59 +13,52 @@ include_guard()
 
 
 #########################################################################
-# dk_depend(plugin) target
+# dk_depend(PLUGIN_Import_Name) target
 #
-#	Each plugin invoked will fill a a varaible or it's name to the path where it
+#	Each PLUGIN_Import_Name invoked will fill a a varaible or it's name to the path where it
 #   is installed..   
 #   I.E.  dk_depend(zlib) =  dk_validate(ZLIB "dk_dependB(zlib)") 
 #   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake
 #   to fill fill ZLIB with the path zlib is installed to.
 #
-function(dk_depend plugin) #target
+function(dk_depend PLUGIN_Import_Name) #target
 	dk_debugFunc(1 2)
 	
-	if(plugin IN_LIST done_list)
-		dk_debug("${plugin} is already completed")
-		return()  #plugin is already completed
-	endif()
+	message("############ dk_depend(${PLUGIN_Import_Name}) ############")
 	
-	message("############ dk_depend(${plugin}) ############")
-	if(plugin IN_LIST dk_disabled_list)
-		if(DISABLED_LIBS MATCHES "${plugin}")
-			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
+	if(PLUGIN_Import_Name IN_LIST done_list)
+		dk_debug("${PLUGIN_Import_Name} is already completed")
+		return()
+	endif()
+	if(PLUGIN_Import_Name IN_LIST dk_disabled_list)
+		if(DISABLED_LIBS MATCHES "${PLUGIN_Import_Name}")
+			dk_append(DISABLED_LIBS "${PLUGIN_Import_Name}") # this list is for the build.log
 		endif()
-		dk_notice("${plugin} IS DISABLED")
+		dk_notice("${PLUGIN_Import_Name} IS DISABLED")
 		return()
 	endif()
 	
-	dk_toUpper("${plugin}" PLUGIN)
+	dk_toUpper("${PLUGIN_Import_Name}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	set(CURRENT_PLUGIN "${PLUGIN}")
+	dk_set(PLUGIN "${PLUGIN}") 										# PLUGIN
+	dk_getPathToPlugin(${PLUGIN_Import_Name} PLUGIN_Import_Path)
+	dk_set(PLUGIN_Import_Path "${PLUGIN_Import_Path}") 				# PLUGIN_Import_Path
+	dk_dirname("${PLUGIN_Import_Path}" PLUGIN_Import_Dirname)
+	dk_set(PLUGIN_Import_Dirname "${PLUGIN_Import_Dirname}") 		# PLUGIN_Import_Dirname
 	
-	dk_set(${PLUGIN}_Import_Name "${plugin}")						#<PLUGIN>_Import_Name
-	dk_getPathToPlugin(${plugin} ${PLUGIN}_Import_Path)
-	dk_set(${PLUGIN}_Import_Path "${${PLUGIN}_Import_Path}") 		#<PLUGIN>_Import_Path
-	dk_dirname("${${PLUGIN}_Import_Path}" ${PLUGIN}_Import_Dirname)
-	dk_set(${PLUGIN}_Import_Dirname "${${PLUGIN}_Import_Dirname}") 	#<PLUGIN>_Import_Dirname
-	
-	if(NOT EXISTS "${${PLUGIN}_Install_Path}")
+	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
+	dk_envList(PLUGIN PUSH "${PLUGIN}")
 		
-		###### Push Plugin to the PLUGIN_STACK ######
-		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
-		dk_envList(PLUGIN PUSH "${PLUGIN}")
-		
-		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
-		dk_dependB(${plugin})
-	
-		###### Pop Plugin from the PLUGIN_STACK ######
-		list(APPEND done_list "${plugin}")
-		dk_set(done_list "${done_list}")
-		dk_envList(PLUGIN POP)
-		dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
 
-	else()
-		dk_notice("dk_depend(): ${PLUGIN} is already loaded")
-	endif()
+
+	dk_dependB(${PLUGIN_Import_Name})
+	
+	
+	###### Pop Plugin from the PLUGIN_STACK ######
+	list(APPEND done_list "${PLUGIN_Import_Name}")
+	dk_set(done_list "${done_list}")
+	dk_envList(PLUGIN POP)
+	dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
 endfunction()
 
 

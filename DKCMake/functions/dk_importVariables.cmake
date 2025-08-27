@@ -56,9 +56,6 @@ function(dk_importVariables)
 	#dk_debugFunc(1 9)
 	dk_debug("dk_importVariables(${ARGV})")
 	
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
-	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
 		PRINTVARS()
@@ -87,34 +84,6 @@ function(dk_importVariables)
 	dk_unset(PLUGIN_Url_Name)
 	dk_unset(PLUGIN_Url_Name_Lower)
 	dk_unset(PLUGIN_Version)
-	
-	#dk_debug("PLUGIN = ${PLUGIN}")
-	#dk_debug("PLUGIN_Args = ${PLUGIN_Args}")
-	#dk_debug("PLUGIN_Build_Dir = ${PLUGIN_Build_Dir}")
-	#dk_debug("PLUGIN_Config_Dir = ${PLUGIN_Config_Dir}")
-	#dk_debug("PLUGIN_Debug_Dir = ${PLUGIN_Debug_Dir}")
-	#dk_debug("PLUGIN_Id = ${PLUGIN_Id}")
-	#dk_debug("PLUGIN_Import_Dirname = ${PLUGIN_Import_Dirname}")
-	#dk_debug("PLUGIN_Import_Name = ${PLUGIN_Import_Name}")
-	#dk_debug("PLUGIN_Import_Name_Lower = ${PLUGIN_Import_Name_Lower}")
-	#dk_debug("PLUGIN_Import_Name_Upper = ${PLUGIN_Import_Name_Upper}")
-	#dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
-	#dk_debug("PLUGIN_Install_Dirname = ${PLUGIN_Install_Dirname}")
-	#dk_debug("PLUGIN_Install_Name = ${PLUGIN_Install_Name}")
-	#dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
-	#dk_debug("PLUGIN_Release_Dir = ${PLUGIN_Release_Dir}")
-	#dk_debug("PLUGIN_Tuple_Dir = ${PLUGIN_Tuple_Dir}")
-	#dk_debug("PLUGIN_Url = ${PLUGIN_Url}")
-	#dk_debug("PLUGIN_Url_Basename = ${PLUGIN_Url_Basename}")
-	#dk_debug("PLUGIN_Url_Extension = ${PLUGIN_Url_Extension}")
-	#dk_debug("PLUGIN_Url_Name = ${PLUGIN_Url_Name}")
-	#dk_debug("PLUGIN_Url_Name_Lower = ${PLUGIN_Url_Name_Lower}")
-	#dk_debug("PLUGIN_Version = ${PLUGIN_Version}")
-
-	### PLUGIN(hashtable) 
-	##  TODO
-	####################
-	
 	
 																###### EXAMPLE ######
 	### IMPORT_ROOT (PLUGIN;Import_Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
@@ -638,35 +607,7 @@ endfunction()
 	
 	
 	
-########################################
-# Copy_Variables(prefixA, prefixB)
-#
-#	Copy all variables starting with prefixA to prefixB
-#
-#	Example Copy_Variables(Monday_, Wednesday_)
-#  All variables whos name start with Monday_ will be copied to new variables
-#	that star with Wednesday_.
-#
-#	Monday_todo_list  ->   Wednesday_todo_list
-#	Monday_reminders  ->   Wednesday_reminders
-#
-#
-function(Copy_Variables prefixA prefixB)
-	### Set the <PLUGIN_Id> variable to mirror %PLUGIN%
-	### All %PLUGIN_variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
-	
-	set(prefixA "PLUGIN_")
-	set(prefixB "${PLUGIN}_")
-	get_cmake_property(_vars VARIABLES)
-    string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
-    foreach(_variable ${_matchedVars})
-		if(${_variable})
-			string(REPLACE "${_prefix}" "${_newprefix}" newVar "${_variable}")
-			dk_set(${newVar} "${${_variable}}")
-			#message("${newVar} = ${${newVar}}")
-		endif()
-    endforeach()
-endfunction()
+
 
 	
 	
@@ -687,47 +628,11 @@ function(PRINTVARS)
 	dk_echo()
 	dk_echo()
 	dk_echo("################## PLUGIN_variables ##################")
-	dk_echo("PLUGIN                             = '${PLUGIN}'")
-	dk_echo("PLUGIN_Args                        = '${PLUGIN_Args}'")
-	dk_echo("PLUGIN_Id                          = '${PLUGIN_Id}'")
-	dk_echo("PLUGIN_Version                     = '${PLUGIN_Version}'")
-	dk_echo("PLUGIN_Url                         = '${PLUGIN_Url}'")
-	dk_echo("PLUGIN_Url_Basename                = '${PLUGIN_Url_Basename}'")
-	dk_echo("PLUGIN_Url_Name                    = '${PLUGIN_Url_Name}'")
-	dk_echo("PLUGIN_Url_Extension               = '${PLUGIN_Url_Extension}'")
-	dk_echo("PLUGIN_Import_Dirname              = '${PLUGIN_Import_Dirname}'")
-	dk_echo("PLUGIN_Import_Name                 = '${PLUGIN_Import_Name}'")
-	dk_echo("PLUGIN_Import_Path                 = '${PLUGIN_Import_Path}'")
-	dk_echo("PLUGIN_Install_Dirname             = '${PLUGIN_Install_Dirname}'")
-	dk_echo("PLUGIN_Install_Name                = '${PLUGIN_Install_Name}'")
-	dk_echo("PLUGIN_Install_Path                = '${PLUGIN_Install_Path}'")
-	dk_echo("PLUGIN_Tuple_Dir                   = '${PLUGIN_Tuple_Dir}'")
-	dk_echo("PLUGIN_Build_Dir                   = '${PLUGIN_Build_Dir}'")
-	dk_echo("PLUGIN_Config_Dir                  = '${PLUGIN_Config_Dir}'")
-	dk_echo("PLUGIN_Debug_Dir                   = '${PLUGIN_Debug_Dir}'")
-	dk_echo("PLUGIN_Release_Dir                 = '${PLUGIN_Release_Dir}'")
+	dk_printPrefixVars("PLUGIN_")
 	dk_echo()
 	dk_echo()
 	dk_echo("################## ${PLUGIN}_variables ##################")
-	dk_echo("${PLUGIN}                          = '${${PLUGIN}}'")
-	dk_echo("${PLUGIN}_Args                     = '${${PLUGIN}_Args}'")
-	dk_echo("${PLUGIN}_Id                       = '${${PLUGIN}_Id}'")
-	dk_echo("${PLUGIN}_Version                  = '${${PLUGIN}_Version}'")
-	dk_echo("${PLUGIN}_Url                      = '${${PLUGIN}_Url}'")
-	dk_echo("${PLUGIN}_Url_Basename             = '${${PLUGIN}_Url_Basename}'")
-	dk_echo("${PLUGIN}_Url_Name                 = '${${PLUGIN}_Url_Name}'")
-	dk_echo("${PLUGIN}_Url_Extension            = '${${PLUGIN}_Url_Extension}'")
-	dk_echo("${PLUGIN}_Import_Dirname           = '${${PLUGIN}_Import_Dirname}'")
-	dk_echo("${PLUGIN}_Import_Name              = '${${PLUGIN}_Import_Name}'")
-	dk_echo("${PLUGIN}_Import_Path              = '${${PLUGIN}_Import_Path}'")
-	dk_echo("${PLUGIN}_Install_Dirname          = '${${PLUGIN}_Install_Dirname}'")
-	dk_echo("${PLUGIN}_Install_Name             = '${${PLUGIN}_Install_Name}'")
-	dk_echo("${PLUGIN}_Install_Path             = '${${PLUGIN}_Install_Path}'")
-	dk_echo("${PLUGIN}_Tuple_Dir                = '${${PLUGIN}_Tuple_Dir}'")
-	dk_echo("${PLUGIN}_Build_Dir                = '${${PLUGIN}_Build_Dir}'")
-	dk_echo("${PLUGIN}_Config_Dir               = '${${PLUGIN}_Config_Dir}'")
-	dk_echo("${PLUGIN}_Debug_Dir                = '${${PLUGIN}_Debug_Dir}'")
-	dk_echo("${PLUGIN}_Release_Dir              = '${${PLUGIN}_Release_Dir}'")
+	dk_printPrefixVars("${PLUGIN}_")
 	dk_echo()
 endfunction()	
 
