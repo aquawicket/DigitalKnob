@@ -72,7 +72,7 @@ function(dk_import)
 	set(INSTALL_ROOT INSTALL_ROOT ${PLUGIN_Install_Dirname})
 	
 	#### POPULATE PLUGIN_ and ${PLUGIN}_ variables
-	dk_importVariables(${${PLUGIN_Import}} ${INSTALL_ROOT})
+	#dk_importVariables(${${PLUGIN_Import}} ${INSTALL_ROOT})
 
 	if(PLUGIN_Url)
 			dk_download("${PLUGIN_Url}")

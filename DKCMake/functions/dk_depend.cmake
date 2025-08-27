@@ -24,8 +24,6 @@ include_guard()
 function(dk_depend PLUGIN_Import_Name) #target
 	dk_debugFunc(1 2)
 	
-	message("############ dk_depend(${PLUGIN_Import_Name}) ############")
-	
 	if(PLUGIN_Import_Name IN_LIST done_list)
 		dk_debug("${PLUGIN_Import_Name} is already completed")
 		return()
@@ -38,6 +36,8 @@ function(dk_depend PLUGIN_Import_Name) #target
 		return()
 	endif()
 	
+	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
+	
 	dk_toUpper("${PLUGIN_Import_Name}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	dk_set(PLUGIN "${PLUGIN}") 										# PLUGIN
@@ -46,10 +46,13 @@ function(dk_depend PLUGIN_Import_Name) #target
 	dk_dirname("${PLUGIN_Import_Path}" PLUGIN_Import_Dirname)
 	dk_set(PLUGIN_Import_Dirname "${PLUGIN_Import_Dirname}") 		# PLUGIN_Import_Dirname
 	
-	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
+	dk_success("############################# dk_envList PUSH ${PLUGIN} ##################################")
 	dk_envList(PLUGIN PUSH "${PLUGIN}")
+	
+	#dk_importVariables(IMPORT_NAME "${PLUGIN_Import_Name}")
+	
+	
 
-		
 		###### Load the dkconfig.txt file ######
 		if(EXISTS "${PLUGIN_Import_Path}/dkconfig.txt")
 		dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
@@ -73,7 +76,7 @@ function(dk_depend PLUGIN_Import_Name) #target
 	list(APPEND done_list "${PLUGIN_Import_Name}")
 	dk_set(done_list "${done_list}")
 	dk_envList(PLUGIN POP)
-	dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
+	dk_success("############################# dk_envList POP ${PLUGIN} ##################################")
 endfunction()
 
 

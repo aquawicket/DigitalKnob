@@ -12,7 +12,6 @@ include_guard()
 #########################################################################
 
 
-dk_load(dk_getDirectories)
 dk_getDirectories("$ENV{DIGITALKNOB_DIR}" DIR_LIST)
 message("DIR_LIST = ${DIR_LIST}")
 

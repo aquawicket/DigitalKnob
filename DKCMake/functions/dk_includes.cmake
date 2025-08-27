@@ -22,7 +22,7 @@ include_guard()
 #	${dk_includes}	- Returns index: Returns the index of the string if located
 #
 function(dk_includes)
-	dk_debugFunc(2 99)
+	dk_call(dk_debugFunc 2 99)
 	#dk_debug("dk_includes(${ARGV})")
 	
 	set(variable "${ARGV0}") 	#dk_getArg(0 variable)

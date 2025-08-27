@@ -56,4 +56,6 @@ dk_envList(PLUGIN PUSH "${dk_basename}")
 
 dk_define(DKAPP)
 dk_call(dk_configure "${Target_App_Dir}")
-dk_build("${Target_App_Dir}")
+
+
+dk_call(dk_build "${Target_App_Dir}")

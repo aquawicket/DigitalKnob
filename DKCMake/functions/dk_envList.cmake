@@ -20,7 +20,7 @@ include_guard()
 #   use $ENV{CURRENT_<name>} to get the topmost item.
 #
 function(dk_envList)
-	dk_debugFunc()
+	dk_debugFunc(2 3)
 
 	set(NAME "${ARGV0}")
 	set(CMND "${ARGV1}")

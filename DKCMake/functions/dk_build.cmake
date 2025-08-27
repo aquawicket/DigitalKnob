@@ -23,7 +23,7 @@ include_guard()
 function(dk_build)
 	dk_debugFunc(0 99)
 	
-	dk_assertPath(${PLUGIN})
+	#dk_assertPath(${PLUGIN})
 	#dk_basename("${${PLUGIN}}")
 	
 	if(ARGV)

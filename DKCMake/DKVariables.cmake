@@ -10,7 +10,8 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
-message("${bg_blue}############ ${CMAKE_CURRENT_LIST_FILE}() ############${clr}")
+
+
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -342,14 +343,16 @@ endif()
 
 ######################################################################################################
 # If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
-if(NOT PLUGIN)
-	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
-		dk_importVariables(IMPORT_PATH "$ENV{DKSCRIPT_DIR}")
-	elseif(Target_App_Dir)	
+#if(NOT PLUGIN)
+#	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
+#		dk_importVariables(IMPORT_PATH "$ENV{DKSCRIPT_DIR}")
+#	elseif(Target_App_Dir)	
+#		dk_importVariables(IMPORT_PATH "${Target_App_Dir}")
+#	endif()
+	
+	if(Target_App_Dir)	
 		dk_importVariables(IMPORT_PATH "${Target_App_Dir}")
 	endif()
 
 	dk_depend("${${PLUGIN}_Import_Name}")	
-endif()
-
-dk_load(dk_build)
+#endif()

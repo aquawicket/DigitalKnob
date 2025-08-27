@@ -23,7 +23,7 @@ include_guard()
 #   https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 #
 function(dk_color)
-	dk_debugFunc()
+	dk_debugFunc(0 1)
 	
 	set(dk_color_ENABLE 1)
 	if(DEFINED ARGV0)

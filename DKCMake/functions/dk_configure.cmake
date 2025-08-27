@@ -11,7 +11,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variables
 
 #########################################################################
 # dk_configure(Install_Path, args...)
@@ -24,7 +23,9 @@ message("${bg_blue}############ ${CMAKE_CURRENT_LIST_FILE}(${ARGV}) ############
 	dk_debugFunc(0 99)
 	dk_assertVar(PLUGIN)
 	
-	dk_call(dk_importVariables)
+	#dk_importVariables(IMPORT_PATH "${ARGV0}")
+	
+	#dk_call(dk_importVariables)
 	
 	###### Install_Path ######
 	if(ARGV)
