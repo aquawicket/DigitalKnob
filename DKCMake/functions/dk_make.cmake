@@ -23,16 +23,16 @@ include_guard()
 function(dk_make)
 	dk_debugFunc(0 2)
 	
-	###### CURRENT_PLUGIN ######
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
+	###### PLUGIN ######
+	dk_assertPath(${PLUGIN})
+	dk_basename("${${PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")
 	
 	###### Source_Dir ######
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
-		set(Source_Dir "${${CURRENT_PLUGIN}}")
+		set(Source_Dir "${${PLUGIN}}")
 	endif()
 	dk_assertPath(${Source_Dir})
 	

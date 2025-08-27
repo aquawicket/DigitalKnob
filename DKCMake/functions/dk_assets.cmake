@@ -26,9 +26,9 @@ function(dk_assets)
 	#		return()
 	#endif()
 	
-	###### CURRENT_PLUGIN ######
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
+	###### PLUGIN ######
+	dk_assertPath(${PLUGIN})
+	dk_basename("${${PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")
 	
 	###### Source_Dir ######
@@ -38,12 +38,12 @@ function(dk_assets)
 #		dk_getPathToPlugin("${ARGV0}")
 #		set(Source_Dir "${dk_getPathToPlugin}")
 	else()
-		set(Source_Dir "${${CURRENT_PLUGIN}}")
+		set(Source_Dir "${${PLUGIN}}")
 	endif()	
 	dk_assertPath(Source_Dir)
 
-	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
+	if(NOT "${Source_Dir}" STREQUAL "${${PLUGIN}}")
+		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != PLUGIN:${${PLUGIN}}")
 	endif()
 	
 	dk_info("Importing ${Source_Dir} assets...")

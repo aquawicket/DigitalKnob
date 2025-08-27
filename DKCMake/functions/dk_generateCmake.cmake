@@ -22,19 +22,19 @@ include_guard()
 function(dk_generateCmake)
 	dk_debugFunc(0 1)
 
-	dk_assertPath(${CURRENT_PLUGIN})
-	dk_basename("${${CURRENT_PLUGIN}}")
+	dk_assertPath(${PLUGIN})
+	dk_basename("${${PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")
 	
 	if(ARGV)
 		set(Source_Dir "${ARGV0}")
 	else()
-		set(Source_Dir "${${CURRENT_PLUGIN}}")
+		set(Source_Dir "${${PLUGIN}}")
 	endif()
 	dk_assertPath(Source_Dir)
 
-	if(NOT "${SOURCE_DIR}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_generateCmake(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
+	if(NOT "${SOURCE_DIR}" STREQUAL "${${PLUGIN}}")
+		dk_notice("dk_generateCmake(): Source_Dir:${Source_Dir} != PLUGIN:${${PLUGIN}}")
 	endif()
 	
 	###### Create CmakeLists.txt file ######

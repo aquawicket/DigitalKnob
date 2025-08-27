@@ -17,20 +17,22 @@ dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variabl
 # dk_configure(Install_Path, args...)
 #
 #	@Install_Path - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
-#				  If no Install_Path is specified, ${${CURRENT_PLUGIN}} will be used
+#				  	If no Install_Path is specified, ${${PLUGIN}} will be used
 #
 function(dk_configure)
+message("${bg_blue}############ ${CMAKE_CURRENT_LIST_FILE}(${ARGV}) ############${clr}")
 	dk_debugFunc(0 99)
-	dk_debug("dk_configure(${ARGV})")
-	dk_call(dk_importVariables PRINTVARS)
+	dk_assertVar(PLUGIN)
+	
+	dk_call(dk_importVariables)
 	
 	###### Install_Path ######
 	if(ARGV)
 		dk_set(PLUGIN_Install_Path "${ARGV0}")
 	elseif(${PLUGIN})
 		dk_set(PLUGIN_Install_Path "${${PLUGIN}}")
-	elseif(${CURRENT_PLUGIN})
-		dk_set(PLUGIN_Install_Path "${${CURRENT_PLUGIN}}")
+	elseif(${PLUGIN})
+		dk_set(PLUGIN_Install_Path "${${PLUGIN}}")
 	endif()
 	dk_assertVar(PLUGIN_Install_Path)
 	
@@ -41,7 +43,7 @@ function(dk_configure)
 	endif()
 	
 	#if(NOT REBUILDALL)
-		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
+		foreach(lib ${${PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
 				set(missing_libs 0)
 			endif()
@@ -50,7 +52,7 @@ function(dk_configure)
 			endif()
 		endforeach()
 		if("${missing_libs}" EQUAL "0")
-			dk_notice("${CURRENT_PLUGIN} libs already built. skipping...")
+			dk_notice("${PLUGIN} libs already built. skipping...")
 			return()
 		endif()
 	#endif()
@@ -58,13 +60,13 @@ function(dk_configure)
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
 	
-	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
-		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	if(NOT EXISTS "${${PLUGIN}_CONFIG_DIR}")
+		set(${PLUGIN}_CONFIG_DIR "${${PLUGIN}}/${Target_Config}")
+		dk_mkdir("${${PLUGIN}_CONFIG_DIR}")
 	endif()
-	dk_assertPath("${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	dk_assertPath("${${PLUGIN}_CONFIG_DIR}")
 	
-	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	dk_set(BINARY_DIR "${${PLUGIN}_CONFIG_DIR}")
 	dk_assertVar(BINARY_DIR)
 	
 	#	if(REBUILDALL)
@@ -89,7 +91,7 @@ function(dk_configure)
 	# Configure with CMake		(multi_config / single_config)
 	#
 	if(CMakeLists.txt)
-		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")
+		dk_info("###### Configuring ${PLUGIN} with CMake ######")
 		
 		dk_assertPath(${DKCMAKE_DIR})		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
@@ -113,7 +115,7 @@ function(dk_configure)
 	#
 	elseif(configure OR configure.ac)
 		# Configure with Autotools	(single_config)
-		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
+		dk_echo("###### Configuring ${PLUGIN} with ../../configure ######")
 			
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
 		if(EXISTS "${Install_Path}/configure")
@@ -141,7 +143,7 @@ function(dk_configure)
 	# No Specific configure type. Just pass the arguments to dk_exec to run	
 	#
 	else()
-		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
+		dk_notice("###### configure type not detected for ${PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_allButFirstArgs}\n")
 			
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
@@ -170,36 +172,36 @@ function(dk_configure)
 #	
 #	 Old Variable            		New Variable                    Value
 #	
-#	  ${PLUGIN}		  	  		${CURRENT_PLUGIN}					:LIBEXPAT
-#	${${PLUGIN}}				${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
-#	${${PLUGIN}}_Install_Name}	${${CURRENT_PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
-#   ${${PLUGIN}}_Import_Name} 	${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
-#	${${PLUGIN}}_Import_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
+#	  ${PLUGIN}		  	  		${PLUGIN}					:LIBEXPAT
+#	${${PLUGIN}}				${${PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
+#	${${PLUGIN}}_Install_Name}	${${PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
+#   ${${PLUGIN}}_Import_Name} 	${${PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
+#	${${PLUGIN}}_Import_Path}	${${PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
 #								CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
 	
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("PLUGIN = ${PLUGIN}")
 	dk_debug("plugin = ${plugin}")
 	#dk_debug("${plugin} = ${${plugin}}")
 	dk_debug("${PLUGIN} = ${${PLUGIN}}")
-	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
+	dk_debug("${PLUGIN} = ${${PLUGIN}}")
 	
-	dk_debug("${CURRENT_PLUGIN}_FOLDER = ${${CURRENT_PLUGIN}_FOLDER}")
+	dk_debug("${PLUGIN}_FOLDER = ${${PLUGIN}_FOLDER}")
 	
 	dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
 	#dk_getPathToPlugin(${plugin} PLUGIN_Import_Path)
-	dk_set(${CURRENT_PLUGIN}_Import_Path "${PLUGIN_Import_Path}")
-	dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
+	dk_set(${PLUGIN}_Import_Path "${PLUGIN_Import_Path}")
+	dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
 	
-	dk_debug("${CURRENT_PLUGIN}_Import_Name = ${${CURRENT_PLUGIN}_Import_Name}")
+	dk_debug("${PLUGIN}_Import_Name = ${${PLUGIN}_Import_Name}")
 	dk_debug("CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}")
 	
 	
 	# ADD THE 3rdParty library TO THE APP SOLUTION
 	if(PROJECT_INCLUDE_3RDPARTY)
 		if(NOT CMAKE_SCRIPT_MODE_FILE)
-			if(EXISTS "${${CURRENT_PLUGIN}}/CMakeLists.txt")
+			if(EXISTS "${${PLUGIN}}/CMakeLists.txt")
 				dk_debug("adding ${${plugin}} to the project solution")
-				add_subdirectory(${${CURRENT_PLUGIN}} ${${CURRENT_PLUGIN}}/${Target_Config})
+				add_subdirectory(${${PLUGIN}} ${${PLUGIN}}/${Target_Config})
 			endif()
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
@@ -214,7 +216,7 @@ function(dk_configure)
 	endif(INSTALL_DKLIBS)
 	
 	
-	if(${${CURRENT_PLUGIN}} MATCHES ${DKCPP_PLUGINS_DIR}) ##### TEST ME:
+	if(${${PLUGIN}} MATCHES ${DKCPP_PLUGINS_DIR}) ##### TEST ME:
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
 			dk_info("Installing ${plugin} header files")

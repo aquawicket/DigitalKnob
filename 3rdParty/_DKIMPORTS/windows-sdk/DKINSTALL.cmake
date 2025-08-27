@@ -20,8 +20,6 @@ include_guard()
 #	Windows SDK for Windows 11 (10.0.22000.194)		Released in Windows 11. w/ servicing update 10.0.22000.832 on July 29, 2022: Critical updates for developers building Arm64EC applications
 #	Windows 10 SDK version 2104 (10.0.20348.0)		intended for Windows Server development. For desktop development, see the release notes for changes you may benefit from by updating.	
 
-dk_set(CURRENT_PLUGIN "WINDOWS_SDK")
-dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
 #dk_import(https://go.microsoft.com/fwlink/?linkid=2272523)   # iso
 dk_import(https://go.microsoft.com/fwlink/?linkid=2272610)  # installer
 

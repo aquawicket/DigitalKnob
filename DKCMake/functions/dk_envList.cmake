@@ -79,7 +79,8 @@ function(dk_envList)
 #	dk_set(Current_${NAME} 	"${_Current_}")		# Original
 #	dk_set(current_${NAME} 	"${_current_}")		# lowercase
 	dk_set(CURRENT_${NAME} 	"${_CURRENT_}")		# UPPERCASE
-
+	dk_set(${NAME} 	        "${_CURRENT_}")
+	
 	### copy local variable back to the environment variable ###
 #	dk_set(${NAME}_Stack 	"${_Stack_}")  		# Original
 #	dk_set(${NAME}_stack 	"${_stack_}")  		# lowercase
@@ -119,36 +120,36 @@ function(DKTEST)
 	dk_echo("\nPushing Stack . . .")
 	dk_echo("dk_envList(PLUGIN PUSH \"abc\")")
 	dk_envList(PLUGIN PUSH "abc")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN PUSH \"123\")")
 	dk_envList(PLUGIN PUSH "123")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN PUSH \"def\")")
 	dk_envList(PLUGIN PUSH "def")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN PUSH \"456\")")
 	dk_envList(PLUGIN PUSH "456")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("\nPoping Stack . . .")
 	dk_echo("dk_envList(PLUGIN POP)")
 	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN POP)")
 	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN POP)")
 	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 	dk_echo("dk_envList(PLUGIN POP)")
 	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("PLUGIN = ${PLUGIN}")
 	
 endfunction()
 

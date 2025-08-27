@@ -23,9 +23,7 @@ include_guard()
 function(dk_isUrl)
 	dk_debugFunc(1)
 	
-	dk_getArg(0 _arg0_)
-	
-	if("${_arg0_}" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://")
+	if("${ARGV0}" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://")
 		set(dk_isUrl 1)
 	else()
 		set(dk_isUrl 0)

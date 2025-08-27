@@ -57,9 +57,9 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt 		"target_link_libraries(
 
 #dk_clearCmakeCache()
 
-dk_set(CURRENT_PLUGIN 				${Target_App})
-dk_set(${CURRENT_PLUGIN} 			${CMAKE_SOURCE_DIR})
-dk_set(${CURRENT_PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Target_Config})
+dk_set(PLUGIN 				${Target_App})
+dk_set(${PLUGIN} 			${CMAKE_SOURCE_DIR})
+dk_set(${PLUGIN}_CONFIG_DIR ${CMAKE_CURRENT_LIST_DIR}/${Target_Config})
 
 dk_configure(${CMAKE_CURRENT_LIST_DIR} -DDKCMAKE_FUNCTIONS_DIR=${DKCMAKE_FUNCTIONS_DIR} -DTUPLE=${TUPLE})
 dk_build(${CMAKE_CURRENT_LIST_DIR})
