@@ -28,10 +28,6 @@ endif()
 
 dk_if(NOT DEFINED dk_log_ENABLE}			[[ dk_set(dk_log_ENABLE 			1) ]])
 #dk_if(NOT DEFINED ENV{dk_log_NOHALT}		[[ dk_set(dk_log_NOHALT 			1) ]])
-#dk_if(NOT DEFINED dk_log_BG_COLOR}			[[ dk_set(dk_log_BG_COLOR 			"${bg_lblue}") ]])
-#dk_if(NOT DEFINED dk_log_FG_COLOR}			[[ dk_set(dk_log_FG_COLOR 			"${black}") ]])
-#set(clr			"${ESC}[0J;${default}${black}"	CACHE INTERNAL "")
-
 
 # DEFAULT
 dk_if(NOT DEFINED dk_log_DEFAULT_ENABLE		[[ dk_set(dk_log_DEFAULT_ENABLE		1) ]])
@@ -193,7 +189,7 @@ function(dk_log)
 		dk_return()
 	endif()
 
-	dk_echo("${dk_log_BG_COLOR}${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
+	dk_echo("${dk_log_${_level_}_COLOR}${dk_log_${_level_}_TAG}${_message_}${clr}")
 
 	### TRACE ###
 	if((dk_log_${_level_}_TRACE) AND (NOT NO_TRACE))# OR (TRACE))

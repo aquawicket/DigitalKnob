@@ -190,7 +190,7 @@ function(dk_importVariables)
 	dk_set(${PLUGIN} "${PLUGIN_Install_Path}")
 	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
 
-	dk_copyVariables("PLUGIN_" "${PLUGIN}_")
+	Copy_Variables()
 	PRINTVARS()
 endfunction()
 
@@ -623,6 +623,42 @@ endfunction()
 	
 	
 	
+
+	if(NOT PLUGIN_Import_Name_Upper)
+		dk_error("PLUGIN_Import_Name_Upper is invalid")
+	endif()
+	dk_debug("PLUGIN_Import_Name_Upper = '${PLUGIN_Import_Name_Upper}'")
+	
+	dk_convertToCIdentifier("${PLUGIN_Import_Name_Upper}")
+ 	set(PLUGIN_Id "${dk_convertToCIdentifier}" CACHE INTERNAL "")
+	if(NOT PLUGIN_Id)
+		dk_error("PLUGIN_Id is invalid")
+	endif()
+	dk_debug("PLUGIN_Id = '${PLUGIN_Id}'")
+	
+	set(PLUGIN_Id ${PLUGIN_Id} CACHE INTERNAL "")
+	set(PLUGIN ${PLUGIN_Id} CACHE INTERNAL "")
+endfunction()
+	
+	
+	
+
+function(Copy_Variables)
+	### Set the <PLUGIN_Id> variable to mirror %PLUGIN%
+	### All %PLUGIN_variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
+	
+	set(_prefix "PLUGIN_")
+	set(_newprefix "${PLUGIN}_")
+	get_cmake_property(_vars VARIABLES)
+    string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
+    foreach(_variable ${_matchedVars})
+		if(${_variable})
+			string(REPLACE "${_prefix}" "${_newprefix}" newVar "${_variable}")
+			dk_set(${newVar} "${${_variable}}")
+			#message("${newVar} = ${${newVar}}")
+		endif()
+    endforeach()
+endfunction()
 
 
 	

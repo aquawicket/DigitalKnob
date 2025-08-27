@@ -1,1 +1,0 @@
-ClaireCJS_Import=https://github.com/ClaireCJS/clairecjs_bat/archive/refs/heads/main.zip
