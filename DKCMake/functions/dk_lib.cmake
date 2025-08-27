@@ -31,8 +31,8 @@ function(dk_lib lib_path)
 
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
-				#dk_assertVar($ENV{PLUGIN}_Import_Name)
-				#set(LIB_NAME ${$ENV{PLUGIN}_Import_Name}) # get the import folder name of the plugin
+				#dk_assertVar($ENV{CURRENT_PLUGIN}_Import_Name)
+				#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_Import_Name}) # get the import folder name of the plugin
 				#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${Target_Tuple})
 				file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib//${Target_Tuple})
 			else()

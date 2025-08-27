@@ -69,7 +69,7 @@ function(DKINIT)
 	dk_DKCMAKE_VARS()
 	
 	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
-	dk_load(dk_fatal)
+	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
 	dk_DKHTTP_VARS()
@@ -199,17 +199,9 @@ function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
 	dk_load("dk_onVariableWatch")
-	
-	#variable_watch(CMAKE_CURRENT_BINARY_DIR			dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_FUNCTION				dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_DIR		dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_FILE	dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE	dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_LIST_DIR				dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_LIST_FILE				dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_LIST_LINE				dk_onVariableWatch)
-	#variable_watch(CMAKE_CURRENT_SOURCE_DIR			dk_onVariableWatch)
-
+	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LINE dk_onVariableWatch)
+	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
 endfunction()
 
 

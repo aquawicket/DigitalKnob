@@ -27,7 +27,7 @@ include_guard()
 #
 #
 function(dk_copyVariables)
-    dk_debugFunc(2)
+    dk_debugFunc(0 1)
 
     set(prefixA "${ARGV0}")			
 	set(prefixB "${ARGV1}")										

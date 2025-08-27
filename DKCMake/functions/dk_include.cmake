@@ -21,7 +21,7 @@ include_guard()
 #   @variable (optional)	- Create a variable to store the path in.
 #
 function(dk_include path)
-	dk_call(dk_debugFunc 1 2)
+	dk_debugFunc(1 2)
 	
 	if(NOT EXISTS "${path}")
 		dk_warning("dk_include(): path:${path} does not exist")

@@ -22,37 +22,16 @@ dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variabl
 function(dk_configure)
 	dk_debugFunc(0 99)
 	
-	
-	
 	###### CURRENT_PLUGIN ######
 	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
 	dk_assertVar(${CURRENT_PLUGIN})
-#	if(NOT "${PLUGIN}" STREQUAL "${CURRENT_PLUGIN}")
-#		dk_error("PLUGIN:${PLUGIN} does NOT EQUAL CURRENT_PLUGIN:${CURRENT_PLUGIN}")
-#	endif()
-	
-	###### PLUGIN ######
-#	dk_debug("PLUGIN = ${PLUGIN}")
-#	dk_debug("${PLUGIN} = ${${PLUGIN}}")
-#	dk_assertVar(PLUGIN)
-	
-	###### PLUGIN_Install_Path ######
-#	dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
-#	dk_assertVar(PLUGIN_Install_Path)
-#	if(NOT "${${PLUGIN}}" STREQUAL "${PLUGIN_Install_Path}")
-#		dk_fatal("${PLUGIN}:${${PLUGIN}} does NOT EQUAL PLUGIN_Install_Path:${PLUGIN_Install_Path}")
-#	endif()
 	
 	###### Install_Path ######
 	if(ARGV)
 		set(Install_Path "${ARGV0}")
-#	elseif(${PLUGIN})
-#		set(Install_Path "${${PLUGIN}}")
 	elseif(${CURRENT_PLUGIN})
 		set(Install_Path "${${CURRENT_PLUGIN}}")
-#	elseif(PLUGIN_Install_Path)
-#		set(Install_Path "${PLUGIN_Install_Path}")
 	endif()
 	dk_assertVar(Install_Path)
 	

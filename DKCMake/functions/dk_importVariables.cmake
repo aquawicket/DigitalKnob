@@ -12,6 +12,8 @@ include_guard()
 ##################################################################################
 
 
+
+
 ###########################################################################################################################
 # dk_importVariables(Url Rtn_Var) IMPORT_ROOT Import_Name IMPORT_PATH INSTALL_ROOT INSTALL_NAME INSTALL_PATH VERSION BRANCH 
 #
@@ -51,13 +53,11 @@ include_guard()
 #	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 #
 function(dk_importVariables)
-	dk_debugFunc(0 99)
-	dk_notice("############################ dk_importVariables.cmake ${ARGV} ${ARGV0} ${CMAKE_ARGV} ###########################################")
-	
 	#dk_debugFunc(1 9)
 	dk_debug("dk_importVariables(${ARGV})")
-	dk_debug("PLUGIN = ${PLUGIN}")
-	dk_debug("IMPORT_PATH = ${PLUGIN_Import_Path}")
+	
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
@@ -65,12 +65,12 @@ function(dk_importVariables)
 		return()
 	endif()
 	
-	
 	dk_unset(PLUGIN)
 	dk_unset(PLUGIN_Args)
 	dk_unset(PLUGIN_Build_Dir)
 	dk_unset(PLUGIN_Config_Dir)
 	dk_unset(PLUGIN_Debug_Dir)
+	dk_unset(PLUGIN_Id)
 	dk_unset(PLUGIN_Import_Dirname)
 	dk_unset(PLUGIN_Import_Name)
 	dk_unset(PLUGIN_Import_Name_Lower)
@@ -87,6 +87,34 @@ function(dk_importVariables)
 	dk_unset(PLUGIN_Url_Name)
 	dk_unset(PLUGIN_Url_Name_Lower)
 	dk_unset(PLUGIN_Version)
+	
+	#dk_debug("PLUGIN = ${PLUGIN}")
+	#dk_debug("PLUGIN_Args = ${PLUGIN_Args}")
+	#dk_debug("PLUGIN_Build_Dir = ${PLUGIN_Build_Dir}")
+	#dk_debug("PLUGIN_Config_Dir = ${PLUGIN_Config_Dir}")
+	#dk_debug("PLUGIN_Debug_Dir = ${PLUGIN_Debug_Dir}")
+	#dk_debug("PLUGIN_Id = ${PLUGIN_Id}")
+	#dk_debug("PLUGIN_Import_Dirname = ${PLUGIN_Import_Dirname}")
+	#dk_debug("PLUGIN_Import_Name = ${PLUGIN_Import_Name}")
+	#dk_debug("PLUGIN_Import_Name_Lower = ${PLUGIN_Import_Name_Lower}")
+	#dk_debug("PLUGIN_Import_Name_Upper = ${PLUGIN_Import_Name_Upper}")
+	#dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
+	#dk_debug("PLUGIN_Install_Dirname = ${PLUGIN_Install_Dirname}")
+	#dk_debug("PLUGIN_Install_Name = ${PLUGIN_Install_Name}")
+	#dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
+	#dk_debug("PLUGIN_Release_Dir = ${PLUGIN_Release_Dir}")
+	#dk_debug("PLUGIN_Tuple_Dir = ${PLUGIN_Tuple_Dir}")
+	#dk_debug("PLUGIN_Url = ${PLUGIN_Url}")
+	#dk_debug("PLUGIN_Url_Basename = ${PLUGIN_Url_Basename}")
+	#dk_debug("PLUGIN_Url_Extension = ${PLUGIN_Url_Extension}")
+	#dk_debug("PLUGIN_Url_Name = ${PLUGIN_Url_Name}")
+	#dk_debug("PLUGIN_Url_Name_Lower = ${PLUGIN_Url_Name_Lower}")
+	#dk_debug("PLUGIN_Version = ${PLUGIN_Version}")
+
+	### PLUGIN(hashtable) 
+	##  TODO
+	####################
+	
 	
 																###### EXAMPLE ######
 	### IMPORT_ROOT (PLUGIN;Import_Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
@@ -144,15 +172,18 @@ function(dk_importVariables)
 		
 	### PLUGIN_Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
 	#dk_unset(PLUGIN_Url)
-	dk_isUrl("${ARGV0}")
-	if(${dk_isUrl})
-		set(PLUGIN_Url "${ARGV0}" CACHE INTERNAL "")
+	if(ARGV0)
+		dk_isUrl("${ARGV0}")
+		if(dk_isUrl)
+			message("${ARGV0} is a valid URL")
+		endif()
 	endif()
+	set(PLUGIN_Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN_Url = '${PLUGIN_Url}'")
 
 
-	### PLUGIN													ZLIB
-	PLUGIN()
+	### PLUGIN_Id												ZLIB
+	PLUGIN_Id()
 
 	### PLUGIN_Install_Path										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	PLUGIN_Install_Path()
@@ -186,11 +217,15 @@ function(dk_importVariables)
 	set(PLUGIN_Release_Dir "${PLUGIN_Tuple_Dir}/${Release_Dir}" 	CACHE INTERNAL "")
 	dk_debug("PLUGIN_Release_Dir = '${PLUGIN_Release_Dir}'")
 
+	### PLUGIN
+	set(PLUGIN "${PLUGIN_Id}" CACHE INTERNAL "")
+	dk_debug("PLUGIN = '${PLUGIN}'")
+	
 	### ${PLUGIN}
 	dk_set(${PLUGIN} "${PLUGIN_Install_Path}")
 	dk_debug("${PLUGIN} = '${${PLUGIN}}'")
 
-	Copy_Variables()
+	dk_copyVariables("PLUGIN_" "${PLUGIN}_")
 	PRINTVARS()
 endfunction()
 
@@ -200,21 +235,42 @@ function(PLUGIN_Import_Name)
 	if(PLUGIN_Import_Name)
 		return()
 	endif()
-	if(${PLUGIN}_Import_Name)
-		set(PLUGIN_Import_Name ${${PLUGIN}_Import_Name} CACHE INTERNAL "")
-		return()
-	endif()
 		
 	PLUGIN_Import_Path()
+
+	if(NOT PLUGIN_Import_Path)
+		dk_error("PLUGIN_Import_Path is invalid")
+	endif()
+	dk_debug("PLUGIN_Import_Path = '${PLUGIN_Import_Path}'")
+
 	if(PLUGIN_Import_Path)
 		dk_basename("${PLUGIN_Import_Path}"	PLUGIN_Import_Name)
+		if(NOT PLUGIN_Import_Name)
+			dk_error("PLUGIN_Import_Name is invalid")
+		endif()
+		dk_debug("PLUGIN_Import_Name = '${PLUGIN_Import_Name}'")
 		
-	elseif(PLUGIN_Url)
+	else()
 		dk_includes("${PLUGIN_Url}" "https://github.com" dk_includes)
 		if(dk_includes)
-			string(REPLACE "//" "/" PLUGIN_Url_List "${PLUGIN_Url}")
-			string(REPLACE "/" ";" PLUGIN_Url_List "${PLUGIN_Url_List}")
-			list(GET PLUGIN_Url_List 3 PLUGIN_Import_Name)
+			dk_replaceAll(${PLUGIN_Url}			"/" 	"" 	PLUGIN_Url_List)
+			dk_replaceAll(${PLUGIN_Url_List} 	";;" 	";" PLUGIN_Url_List)
+			if(NOT PLUGIN_Url_List)
+				dk_error("PLUGIN_Url_List is invalid")
+			endif()
+			dk_debug("PLUGIN_Url_List = '${PLUGIN_Url_List}'")
+			
+			#d_k_listToArray("${PLUGIN_Url_List}"  PLUGIN_Url_Array)
+			#dk_printVar(PLUGIN_Url_Array)
+			#if(NOT PLUGIN_Url_Array)
+			#	dk_error("PLUGIN_Url_Array is invalid")
+			#endif()
+			#dk_debug("PLUGIN_Url_Array = '${PLUGIN_Url_Array}'")
+			
+			#dk_arrayAt(PLUGIN_Url_Array	3	PLUGIN_Import_Name)
+			#if(NOT PLUGIN_Import_Name)
+			#	dk_error("PLUGIN_Import_Name is invalid")
+			#endif()
 		endif()
 		dk_debug("PLUGIN_Import_Name = '${PLUGIN_Import_Name}'")
 	endif()
@@ -225,10 +281,6 @@ endfunction()
 ##################################
 function(PLUGIN_Import_Name_Lower)
 	if(PLUGIN_Import_Name_Lower)
-		return()
-	endif()
-	if(${PLUGIN}_Import_Name_Lower)
-		set(PLUGIN_Import_Name_Lower "${${PLUGIN}_Import_Name_Lower}"  CACHE INTERNAL "")
 		return()
 	endif()
 	
@@ -253,10 +305,6 @@ function(PLUGIN_Import_Dirname)
 	if(PLUGIN_Import_Dirname)
 		return()
 	endif()
-	if(${PLUGIN}_Import_Dirname)
-		set(PLUGIN_Import_Dirname ${${PLUGIN}_Import_Dirname}  CACHE INTERNAL "")
-		return()
-	endif()
 	
 	PLUGIN_Import_Path()
 
@@ -279,10 +327,6 @@ function(PLUGIN_Install_Dirname)
 	if(PLUGIN_Install_Dirname)
 		return()
 	endif()
-	if(${PLUGIN}_Install_Dirname)
-		set(PLUGIN_Install_Dirname "${${PLUGIN}_Install_Dirname}"  CACHE INTERNAL "")
-		return()
-	endif()
 	
 	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 	set(PLUGIN_Install_Dirname "${DK3RDPARTY_DIR}" CACHE INTERNAL "")
@@ -299,14 +343,9 @@ function(PLUGIN_Url_Basename)
 	if(PLUGIN_Url_Basename)
 		return()
 	endif()
-	if(${PLUGIN}_Url_Basename)
-		set(PLUGIN_Url_Basename "${${PLUGIN}_Url_Basename}" CACHE INTERNAL "")
-		return()
-	endif()
 	if(NOT PLUGIN_Url)
 		return()
 	endif()
-	
 	dk_basename("${PLUGIN_Url}")
 	set(PLUGIN_Url_Basename "${dk_basename}" CACHE INTERNAL "")				# basename, filename
 	if(NOT PLUGIN_Url_Basename)
@@ -322,14 +361,9 @@ function(PLUGIN_Url_Dirname)
 	if(PLUGIN_Url_Dirname)
 		return()
 	endif()
-	if(${PLUGIN}_Url_Dirname)
-		set(PLUGIN_Url_Dirname "${${PLUGIN}_Url_Dirname}" CACHE INTERNAL "")
-		return()
-	endif()
 	if(NOT PLUGIN_Url)
 		return()
 	endif()
-	
 	dk_dirname("${PLUGIN_Url}" PLUGIN_Url_Dirname)
 	if(NOT PLUGIN_Url_Dirname)
 		dk_notice("PLUGIN_Url_Dirname is invalid")
@@ -344,14 +378,9 @@ function(PLUGIN_Url_Extension)
 	if(PLUGIN_Url_Extension)
 		return()
 	endif()
-	if(${PLUGIN}_Url_Extension)
-		set(PLUGIN_Url_Extension "${${PLUGIN}_Url_Extension}" CACHE INTERNAL "")
-		return()
-	endif()
 	if(NOT PLUGIN_Url)
 		return()
 	endif()
-	
 	dk_getExtension("${PLUGIN_Url}" PLUGIN_Url_Extension)
 	if(NOT PLUGIN_Url_Extension)
 		dk_notice("PLUGIN_Url_Extension is invalid")
@@ -366,14 +395,9 @@ function(PLUGIN_Url_Name)
 	if(PLUGIN_Url_Name)
 		return()
 	endif()
-	if(${PLUGIN}_Url_Name)
-		set(PLUGIN_Url_Name "${${PLUGIN}_Url_Name}" CACHE INTERNAL "")
-		return()
-	endif()
 	if(NOT PLUGIN_Url)
 		return()
 	endif()
-	
 	PLUGIN_Url_Basename()
 
 	if(NOT PLUGIN_Url_Basename)
@@ -396,14 +420,9 @@ function(PLUGIN_Url_Name_Lower)
 	if(PLUGIN_Url_Name_Lower)
 		return()
 	endif()
-	if(${PLUGIN}_Url_Name_Lower)
-		set(PLUGIN_Url_Name_Lower "${${PLUGIN}_Url_Name_Lower}" CACHE INTERNAL "")
-		return()
-	endif()
 	if(NOT PLUGIN_Url)
 		return()
 	endif()
-	
 	PLUGIN_Url_Name()
 
 	if(NOT PLUGIN_Url_Name)
@@ -426,10 +445,6 @@ endfunction()
 #############################
 function(PLUGIN_Install_Name)
 	if(PLUGIN_Install_Name)
-		return()
-	endif()
-	if(${PLUGIN}_Install_Name)
-		set(PLUGIN_Install_Name "${${PLUGIN}_Install_Name}"  CACHE INTERNAL "")
 		return()
 	endif()
 	
@@ -464,10 +479,6 @@ function(PLUGIN_Install_Path)
 	if(PLUGIN_Install_Path)
 		return()
 	endif()
-	if(${PLUGIN}_Install_Path)
-		set(PLUGIN_Install_Path "${${PLUGIN}_Install_Path}" CACHE INTERNAL "")
-		return()
-	endif()
 	
 	PLUGIN_Install_Dirname()
 
@@ -497,17 +508,13 @@ function(PLUGIN_Import_Path)
 	if(PLUGIN_Import_Path)
 		return()
 	endif()
-	if(${PLUGIN}_Import_Path)
-		set(PLUGIN_Import_Path "${${PLUGIN}_Import_Path}" CACHE INTERNAL "")
-		return()
-	endif()
 	
 	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 	if(PLUGIN_Import_Name)
 		set(PLUGIN_Import_Path "${DKIMPORTS_DIR}/${PLUGIN_Import_Name}" CACHE INTERNAL "")
-	elseif(${PLUGIN}_Import_Path)
-		dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
-		set(PLUGIN_Import_Path "${${PLUGIN}_Import_Path}" CACHE INTERNAL "")
+	elseif(${CURRENT_PLUGIN}_Import_Path)
+		dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
+		set(PLUGIN_Import_Path "${${CURRENT_PLUGIN}_Import_Path}" CACHE INTERNAL "")
 	elseif(CURRENT_IMPORT)
 		dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
 		### /_DKIMPORTS/
@@ -544,11 +551,6 @@ function(PLUGIN_Version)
 	if(PLUGIN_Version)
 		#return()
 	endif()
-	if(${PLUGIN}_Version)
-		set(PLUGIN_Version "${${PLUGIN}_Version}" CACHE INTERNAL "")
-		return()
-	endif()
-	
 		
 	PLUGIN_Url_Name_Lower()
 
@@ -592,37 +594,31 @@ function(PLUGIN_Import_Name_Upper)
 	if(PLUGIN_Import_Name_Upper)
 		return()
 	endif()
-	if(${PLUGIN}_Import_Name_Upper)
-		set(PLUGIN_Import_Name_Upper "${${PLUGIN}_Import_Name_Upper}" CACHE INTERNAL "")
-		return()
-	endif()
 	
 	PLUGIN_Import_Name()
-	if(PLUGIN_Import_Name)
-		dk_toUpper("${PLUGIN_Import_Name}")
-		set(PLUGIN_Import_Name_Upper "${dk_toUpper}" CACHE INTERNAL "")
+
+	if(NOT PLUGIN_Import_Name)
+		dk_error("PLUGIN_Import_Name is invalid")
 	endif()
+	dk_debug("PLUGIN_Import_Name = '${PLUGIN_Import_Name}'")
+	
+	dk_toUpper("${PLUGIN_Import_Name}")
+	set(PLUGIN_Import_Name_Upper "${dk_toUpper}" CACHE INTERNAL "")
+	if(NOT PLUGIN_Import_Name_Upper)
+		dk_error("PLUGIN_Import_Name_Upper is invalid")
+	endif()
+	dk_debug("PLUGIN_Import_Name_Upper = '${PLUGIN_Import_Name_Upper}'")
+	
+	set(PLUGIN_Import_Name_Upper ${PLUGIN_Import_Name_Upper} CACHE INTERNAL "")
 endfunction()
 
 ###################
-function(PLUGIN)
-	if(PLUGIN)
-		return()
-	endif()
-	if(${PLUGIN})
-		set(PLUGIN "${PLUGIN}" CACHE INTERNAL "")
+function(PLUGIN_Id)
+	if(${PLUGIN_Id})
 		return()
 	endif()
 	
 	PLUGIN_Import_Name_Upper()
-	if(PLUGIN_Import_Name_Upper)
-		dk_convertToCIdentifier("${PLUGIN_Import_Name_Upper}")
-		set(PLUGIN "${dk_convertToCIdentifier}" CACHE INTERNAL "")
-	endif()
-endfunction()
-	
-	
-	
 
 	if(NOT PLUGIN_Import_Name_Upper)
 		dk_error("PLUGIN_Import_Name_Upper is invalid")
@@ -642,13 +638,25 @@ endfunction()
 	
 	
 	
-
-function(Copy_Variables)
+########################################
+# Copy_Variables(prefixA, prefixB)
+#
+#	Copy all variables starting with prefixA to prefixB
+#
+#	Example Copy_Variables(Monday_, Wednesday_)
+#  All variables whos name start with Monday_ will be copied to new variables
+#	that star with Wednesday_.
+#
+#	Monday_todo_list  ->   Wednesday_todo_list
+#	Monday_reminders  ->   Wednesday_reminders
+#
+#
+function(Copy_Variables prefixA prefixB)
 	### Set the <PLUGIN_Id> variable to mirror %PLUGIN%
 	### All %PLUGIN_variables will be mirrored to the Plugin Import Name.  I.E.   $ZLIB.variables
 	
-	set(_prefix "PLUGIN_")
-	set(_newprefix "${PLUGIN}_")
+	set(prefixA "PLUGIN_")
+	set(prefixB "${PLUGIN}_")
 	get_cmake_property(_vars VARIABLES)
     string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
     foreach(_variable ${_matchedVars})
@@ -659,7 +667,6 @@ function(Copy_Variables)
 		endif()
     endforeach()
 endfunction()
-
 
 	
 	
@@ -677,16 +684,51 @@ endfunction()
 	
 ###################
 function(PRINTVARS)
-	dk_echo("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
+	dk_echo()
 	dk_echo()
 	dk_echo("################## PLUGIN_variables ##################")
-	dk_call(dk_printPrefixVars "PLUGIN_")
+	dk_echo("PLUGIN                             = '${PLUGIN}'")
+	dk_echo("PLUGIN_Args                        = '${PLUGIN_Args}'")
+	dk_echo("PLUGIN_Id                          = '${PLUGIN_Id}'")
+	dk_echo("PLUGIN_Version                     = '${PLUGIN_Version}'")
+	dk_echo("PLUGIN_Url                         = '${PLUGIN_Url}'")
+	dk_echo("PLUGIN_Url_Basename                = '${PLUGIN_Url_Basename}'")
+	dk_echo("PLUGIN_Url_Name                    = '${PLUGIN_Url_Name}'")
+	dk_echo("PLUGIN_Url_Extension               = '${PLUGIN_Url_Extension}'")
+	dk_echo("PLUGIN_Import_Dirname              = '${PLUGIN_Import_Dirname}'")
+	dk_echo("PLUGIN_Import_Name                 = '${PLUGIN_Import_Name}'")
+	dk_echo("PLUGIN_Import_Path                 = '${PLUGIN_Import_Path}'")
+	dk_echo("PLUGIN_Install_Dirname             = '${PLUGIN_Install_Dirname}'")
+	dk_echo("PLUGIN_Install_Name                = '${PLUGIN_Install_Name}'")
+	dk_echo("PLUGIN_Install_Path                = '${PLUGIN_Install_Path}'")
+	dk_echo("PLUGIN_Tuple_Dir                   = '${PLUGIN_Tuple_Dir}'")
+	dk_echo("PLUGIN_Build_Dir                   = '${PLUGIN_Build_Dir}'")
+	dk_echo("PLUGIN_Config_Dir                  = '${PLUGIN_Config_Dir}'")
+	dk_echo("PLUGIN_Debug_Dir                   = '${PLUGIN_Debug_Dir}'")
+	dk_echo("PLUGIN_Release_Dir                 = '${PLUGIN_Release_Dir}'")
 	dk_echo()
 	dk_echo()
 	dk_echo("################## ${PLUGIN}_variables ##################")
-	dk_call(dk_printPrefixVars "${PLUGIN}_")
+	dk_echo("${PLUGIN}                          = '${${PLUGIN}}'")
+	dk_echo("${PLUGIN}_Args                     = '${${PLUGIN}_Args}'")
+	dk_echo("${PLUGIN}_Id                       = '${${PLUGIN}_Id}'")
+	dk_echo("${PLUGIN}_Version                  = '${${PLUGIN}_Version}'")
+	dk_echo("${PLUGIN}_Url                      = '${${PLUGIN}_Url}'")
+	dk_echo("${PLUGIN}_Url_Basename             = '${${PLUGIN}_Url_Basename}'")
+	dk_echo("${PLUGIN}_Url_Name                 = '${${PLUGIN}_Url_Name}'")
+	dk_echo("${PLUGIN}_Url_Extension            = '${${PLUGIN}_Url_Extension}'")
+	dk_echo("${PLUGIN}_Import_Dirname           = '${${PLUGIN}_Import_Dirname}'")
+	dk_echo("${PLUGIN}_Import_Name              = '${${PLUGIN}_Import_Name}'")
+	dk_echo("${PLUGIN}_Import_Path              = '${${PLUGIN}_Import_Path}'")
+	dk_echo("${PLUGIN}_Install_Dirname          = '${${PLUGIN}_Install_Dirname}'")
+	dk_echo("${PLUGIN}_Install_Name             = '${${PLUGIN}_Install_Name}'")
+	dk_echo("${PLUGIN}_Install_Path             = '${${PLUGIN}_Install_Path}'")
+	dk_echo("${PLUGIN}_Tuple_Dir                = '${${PLUGIN}_Tuple_Dir}'")
+	dk_echo("${PLUGIN}_Build_Dir                = '${${PLUGIN}_Build_Dir}'")
+	dk_echo("${PLUGIN}_Config_Dir               = '${${PLUGIN}_Config_Dir}'")
+	dk_echo("${PLUGIN}_Debug_Dir                = '${${PLUGIN}_Debug_Dir}'")
+	dk_echo("${PLUGIN}_Release_Dir              = '${${PLUGIN}_Release_Dir}'")
 	dk_echo()
-	dk_assertVar(PLUGIN)
 endfunction()	
 
 
@@ -700,13 +742,13 @@ function(DKTEST)
 	
 	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/msys2")
 	dk_importVariables("https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz")
-	dk_call(dk_importVariables PRINTVARS)
+	dk_importVariables(PRINTVARS)
 	
 	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/git")
 	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe" INSTALL_ROOT "${DKTOOLS_DIR}")
-	dk_call(dk_importVariables PRINTVARS)
+	dk_importVariables(PRINTVARS)
 	
 	set(CURRENT_IMPORT "${DKIMPORTS_DIR}/php-src")
 	dk_importVariables("https://windows.php.net/downloads/releases/php-8.4.11-Win32-vs17-x64.zip")
-	dk_call(dk_importVariables PRINTVARS)
+	dk_importVariables(PRINTVARS)
 endfunction()

@@ -32,9 +32,9 @@ function(dk_bashEnv)
 	return()
 	
 	###### set WORKING DIRECTORY ######
-	if(${PLUGIN})
-		dk_verbose("dk_bashEnv() PLUGIN = ${PLUGIN}")
-		set(BASH_WORKING_DIR "${${PLUGIN}_CONFIG_DIR}")
+	if($ENV{CURRENT_PLUGIN})
+		dk_verbose("dk_bashEnv() CURRENT_PLUGIN = $ENV{CURRENT_PLUGIN}")
+		set(BASH_WORKING_DIR "${$ENV{CURRENT_PLUGIN}_CONFIG_DIR}")
 		list(APPEND BASH_COMMANDS "cd ${BASH_WORKING_DIR}")
 		dk_chdir(${BASH_WORKING_DIR})
 	else()

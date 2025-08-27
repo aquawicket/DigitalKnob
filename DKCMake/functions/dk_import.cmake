@@ -31,22 +31,56 @@ function(dk_import)
 	dk_debugFunc(0 99)
 	dk_debug("dk_import(${ARGV})")
 	
-	
-	dk_assertVar(PLUGIN)
-	if(NOT PLUGIN)
+	if(NOT CURRENT_PLUGIN)
 		if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")				########### PLUGIN_variables ###########	##### EXAMPLE #####
 			dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")	# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
 		endif()
 	else()
-		if(${PLUGIN}_Import_Path)
-			dk_call(dk_set PLUGIN_Import_Path "${${PLUGIN}_Import_Path}")
+		if(${CURRENT_PLUGIN}_Import_Path)
+			dk_call(dk_set PLUGIN_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
 		endif()
 	endif()
+	dk_assertPath("${PLUGIN_Import_Path}")
+	dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")	
+			
+	dk_basename("${PLUGIN_Import_Path}")
+	dk_set(PLUGIN_Import_Name "${dk_basename}")						# PLUGIN_Import_Name						zlib
+	dk_debug("PLUGIN_Import_Name = ${PLUGIN_Import_Name}")
+	dk_toUpper("${dk_basename}" PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	dk_set(PLUGIN "${PLUGIN}")										# PLUGIN									ZLIB
+	dk_debug("PLUGIN = ${PLUGIN}")
+	dk_set(PLUGIN_Id "${PLUGIN}")									# PLUGIN_Id									ZLIB
+	dk_debug("PLUGIN_Id = ${PLUGIN_Id}")
+																	########## ${PLUGIN}_variables ##########
+	dk_set(${PLUGIN}_Id "${PLUGIN_Id}")								# <PLUGIN>_Id								ZLIB
+	dk_debug("${PLUGIN}_Id = ${${PLUGIN}_Id}")
+	dk_set(${PLUGIN}_Import_Path "${PLUGIN_Import_Path}")			# <PLUGIN>_Import_Path						${DKIMPORTS_DIR}/zlib
+	dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
+	dk_set(${PLUGIN}_Import_Name "${PLUGIN_Import_Name}")			# <PLUGIN>_Import_Name						zlib	
+	dk_debug("${PLUGIN}_Import_Name = ${${PLUGIN}_Import_Name}")
+	dk_envList(PLUGIN PUSH "${PLUGIN}")
 
 
+	dk_assertVar(ENV{CURRENT_PLUGIN})
+	
+	
+	#dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
+	#dk_assertPath("${CURRENT_IMPORT}")
+	#set(PLUGIN_Import_Path "${CURRENT_IMPORT}")
+	#dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
 	
 	if(EXISTS "${PLUGIN_Import_Path}/dkconfig.txt")
 		dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
+		
+		dk_getParameter(APP)
+		if("${${PLUGIN_Import_Name}_Type}" STREQUAL "APP")
+			set(APP 1)
+		endif()
+		if(APP)
+			dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+			set(PLUGIN_Install_Root INSTALL_ROOT ${DKTOOLS_DIR})
+		endif()
 		
 		dk_validate(Host_Tuple "dk_Host_Tuple()")									#      Windows_X86_64
 		if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)								# zlib_Windows_X86_64_Import
@@ -57,23 +91,19 @@ function(dk_import)
 			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_Import")
 		elseif(${PLUGIN}_Import)													# ZLIB_Import
 			dk_set(PLUGIN_Import "${PLUGIN}_Import")
+		else()
+			dk_assertVar(${PLUGIN}_Import)
 		endif()
-	endif()
-	
-	dk_getParameter(APP)
-	if(("${APP}") OR ("${${PLUGIN_Import_Name}_Type}" STREQUAL "APP"))
-		dk_set(PLUGIN_Type "APP")
-		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-		dk_set(PLUGIN_Install_Dirname "${DKTOOLS_DIR}")
+		dk_importVariables(${${PLUGIN_Import}} ${PLUGIN_Install_Root})
 	else()
-		dk_validate(DK3RDPARTY "dk_DK3RDPARTY_DIR()")
-		dk_set(PLUGIN_Install_Dirname "${DK3RDPARTY_DIR}")
+		dk_importVariables(IMPORT_PATH "${PLUGIN_Import_Path}")
 	endif()
-	set(INSTALL_ROOT INSTALL_ROOT ${PLUGIN_Install_Dirname})
 	
-	#### POPULATE PLUGIN_ and ${PLUGIN}_ variables
-	#dk_importVariables(${${PLUGIN_Import}} ${INSTALL_ROOT})
-
+	if(EXISTS "${PLUGIN_Install_Path}")
+		dk_notice("${PLUGIN_Install_Name} already installed")
+		return()
+	endif()
+	
 	if(PLUGIN_Url)
 			dk_download("${PLUGIN_Url}")
 			if("${PLUGIN_Url_Extension}" STREQUAL ".7z")

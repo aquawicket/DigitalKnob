@@ -26,9 +26,9 @@ function(dk_assets)
 	#		return()
 	#endif()
 	
-	###### PLUGIN ######
-	dk_assertPath(${PLUGIN})
-	dk_basename("${${PLUGIN}}")
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
 	set(Plugin_Name "${dk_basename}")
 	
 	###### Source_Dir ######
@@ -38,12 +38,12 @@ function(dk_assets)
 #		dk_getPathToPlugin("${ARGV0}")
 #		set(Source_Dir "${dk_getPathToPlugin}")
 	else()
-		set(Source_Dir "${${PLUGIN}}")
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()	
 	dk_assertPath(Source_Dir)
 
-	if(NOT "${Source_Dir}" STREQUAL "${${PLUGIN}}")
-		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != PLUGIN:${${PLUGIN}}")
+	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
 	endif()
 	
 	dk_info("Importing ${Source_Dir} assets...")
@@ -105,7 +105,7 @@ function(dk_assets)
 		PATTERN temp.txt EXCLUDE
 	)
 	
-	file(COPY ${PLUGIN_Import_Path} DESTINATION ${Target_App_Dir}/assets ${ASSETS})
+	file(COPY ${Plugin_Path} DESTINATION ${Target_App_Dir}/assets ${ASSETS})
 endfunction()
 
 

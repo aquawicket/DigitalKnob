@@ -10,7 +10,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	@code	    - The code to run if the condition is true."
 #
 macro(dk_if)
-	#dk_debugFunc(2 99)
+	dk_debugFunc()
 	
 	set(n 0)
 	unset(argv)

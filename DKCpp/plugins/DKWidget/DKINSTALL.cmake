@@ -28,8 +28,8 @@ endif()
 
 
 ############ DKWidget ############
-#dk_generateCmake("${${PLUGIN}}")
+#dk_generateCmake("${${CURRENT_PLUGIN}}")
 #dk_assets("${CMAKE_CURRENT_LIST_DIR}")
-#dk_set(${PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
-#dk_configure(${${PLUGIN}})
-#dk_build(${${PLUGIN}})
+#dk_set(${CURRENT_PLUGIN} "${CMAKE_CURRENT_LIST_DIR}")
+#dk_configure(${${CURRENT_PLUGIN}})
+#dk_build(${${CURRENT_PLUGIN}})

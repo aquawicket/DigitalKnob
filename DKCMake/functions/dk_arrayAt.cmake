@@ -13,7 +13,7 @@ include_guard()
 
 
 #########################################################################
-# dk_arrayAt(array, index, rtn_var)
+# dk_arrayAt(array, index)
 #
 #	Takes an array instance with an integer value and returns the item at that index, 
 #	allowing for positive and negative integers. Negative integers count back from the last item in the array.  <-- TODO
@@ -31,18 +31,16 @@ include_guard()
 function(dk_arrayAt)
 	dk_debugFunc(2 99)
 
-	list(APPEND array "${ARGV}")
-	set(index ${ARGV1})
+	dk_getArg(0 array)
+	dk_getArg(1 index)
 	
 	list(GET array ${index} dk_arrayAt)
 	
-	###### output ######
+	### return ###
 	set(dk_arrayAt ${dk_arrayAt} PARENT_SCOPE)
-	#if(ARGV2)
-	#	set(${ARGV2} ${dk_arrayAt} PARENT_SCOPE)
-	#else()
-		message("${dk_arrayAt}") 
-	#endif()
+	if(${ARGC} GREATER 2)
+		set(${ARGV2} ${dk_arrayAt} PARENT_SCOPE)
+	endif()
 endfunction()
 
 

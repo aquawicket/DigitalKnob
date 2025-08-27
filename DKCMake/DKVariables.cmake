@@ -11,7 +11,6 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
@@ -343,16 +342,29 @@ endif()
 
 ######################################################################################################
 # If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
-#if(NOT PLUGIN)
-#	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
-#		dk_importVariables(IMPORT_PATH "$ENV{DKSCRIPT_DIR}")
-#	elseif(Target_App_Dir)	
-#		dk_importVariables(IMPORT_PATH "${Target_App_Dir}")
-#	endif()
-	
-	if(Target_App_Dir)	
-		dk_importVariables(IMPORT_PATH "${Target_App_Dir}")
-	endif()
+# dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
+# itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
 
-	dk_depend("${${PLUGIN}_Import_Name}")	
-#endif()
+if(NOT CURRENT_PLUGIN)
+	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")												### EXAMPLE ###
+		dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN_Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
+		dk_basename("${PLUGIN_Import_Path}")
+		dk_set(PLUGIN_Import_Name "${dk_basename}")					# PLUGIN_Import_Name		zlib
+		dk_debug("PLUGIN_Import_Name = ${PLUGIN_Import_Name}")
+		dk_toUpper("${dk_basename}" PLUGIN)
+		dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+		dk_set(PLUGIN "${PLUGIN}")									# PLUGIN					ZLIB
+		dk_debug("PLUGIN = ${PLUGIN}")
+		dk_set(PLUGIN_Id "${PLUGIN}")								# PLUGIN_Id					ZLIB
+		dk_debug("PLUGIN_Id = ${PLUGIN_Id}")
+		
+		dk_set(${PLUGIN}_Id          "${PLUGIN_Id}")				# <PLUGIN>_Id				ZLIB
+		dk_debug("${PLUGIN}_Id = ${${PLUGIN}_Id}")
+		dk_set(${PLUGIN}_Import_Path "${PLUGIN_Import_Path}")		# <PLUGIN>_Import_Path		${DKIMPORTS_DIR}/zlib
+		dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
+		dk_set(${PLUGIN}_Import_Name "${PLUGIN_Import_Name}")		# <PLUGIN>_Import_Name		zlib	
+		dk_debug("${PLUGIN}_Import_Name = ${${PLUGIN}_Import_Name}")
+		dk_envList(PLUGIN PUSH "${PLUGIN}")
+	endif()
+endif()
