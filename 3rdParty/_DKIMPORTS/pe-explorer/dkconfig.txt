@@ -2,4 +2,4 @@
 # https://www.pe-explorer.com/
 
 pe_explorer_Import=https://www.heaventools.com/download/pexsetup.exe
-
+pe_explorer_Type=APP
