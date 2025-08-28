@@ -38,9 +38,9 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_importVariables("" IMPORT_PATH "${${PLUGIN}_Import_Path}")
-dk_import("${libxml2_Import}" PATCH)
-dk_assertVar(LIBXML2)
+#dk_importVariables("" IMPORT_PATH "${${PLUGIN}_Import_Path}")
+#dk_import("${libxml2_Import}" PATCH)
+dk_import()
 
 if(NOT EXISTS ${LIBXML2}/configure)
 	dk_depend(autoconf)

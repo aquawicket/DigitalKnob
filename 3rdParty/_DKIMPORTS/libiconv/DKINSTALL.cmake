@@ -22,8 +22,8 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-dk_import(${libiconv_Import} PATCH)
-
+#dk_import(${libiconv_Import} PATCH)
+dk_import()
 
 ### LINK ###
 dk_include				(${LIBICONV})
