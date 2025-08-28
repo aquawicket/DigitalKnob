@@ -29,8 +29,8 @@ dk_depend(pyyaml)
 #dk_validate(MSYS2 "dk_depend(msys2)")
 
 ### IMPORT ###
-dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt
-
+#dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt
+dk_import(PATCH)
 
 ### LINK ###
 if(MSVC)

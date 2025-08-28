@@ -40,7 +40,8 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-dk_import(${libarchive_Import})
+#dk_import(${libarchive_Import})
+dk_import()
 
 
 ### LINK ###

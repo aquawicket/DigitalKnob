@@ -29,7 +29,8 @@ dk_depend(python3)
 dk_depend(msys2)
 
 ### IMPORT ###
-dk_import(${bzip2_Import})
+#dk_import(${bzip2_Import})
+dk_import()
 dk_assertVar(BZIP2)
 
 dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)

@@ -22,7 +22,8 @@ dk_validate(Target_Config  "dk_Target_Config()")
 #dk_depend(python3)
 
 ### IMPORT ###
-dk_import(${fmt_Import})
+#dk_import(${fmt_Import})
+dk_import()
 
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
