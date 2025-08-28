@@ -41,7 +41,7 @@ function(dk_configure)
 	endif()
 	
 	if(NOT "${Install_Path}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_error("dk_configure(): Install_Path:${Install_Path} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+		dk_notice("dk_configure(): Install_Path:${Install_Path} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
 	#if(NOT REBUILDALL)
