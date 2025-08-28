@@ -97,7 +97,7 @@ function(dk_httpResponse)
 	#dk_validate(CURL_EXE "d_k_CURL_EXE()")
 	set(CURL_EXE "C:\\Windows\\System32\\curl.exe")
 	
-	# "%windir:\=/%/System32/curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
+	# "%windir:\=/%/System32/curl.exe" http://www.google.com/index.html -sI -o nul -w "%{http_code}"
 	set(command "${CURL_EXE} ${ARGV0} -sI -o nul -w %{http_code}")
 	dk_exec(${command})
 	
