@@ -19,22 +19,22 @@ include_guard()
 #   (will also be printed on screen)
 #
 #
-function(dk_buildLog entry)
-	dk_debugFunc()
-	
+function(dk_buildLog)
+	dk_debugFunc(1 2)
+	dk_debug("dk_buildLog(${ARGV})")
 	dk_getParameterValue(PATH)
 	
-	if(DEFINED "${entry}")
-		set(msg "${entry} = ${${entry}}")
-	else()
-		set(msg "${entry}")
+	set(msg "${ARGV0}")
+	dk_echo("${msg}")
+		
+	if(NOT PATH)
+		dk_validate(Target_App_Dir "dk_Target_Tuple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
+		dk_validate(Target_Config "dk_Target_Config()")
+		set(PATH "${Target_App_Dir}/${Target_Config}")
 	endif()
-	dk_info("${msg}")
-	
-	dk_validate(Target_App_Dir "dk_Target_Tuple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
-	dk_validate(Target_Config "dk_Target_Config()")
-	dk_assertPath("${Target_App_Dir}/${Target_Config}")
-	dk_fileAppend("${Target_App_Dir}/${Target_Config}/DKBUILD.log" "${msg}\n")
+		
+	dk_assertPath("${PATH}")
+	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}\n")
 endfunction()
 
 

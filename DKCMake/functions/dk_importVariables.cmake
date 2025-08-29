@@ -56,9 +56,6 @@ function(dk_importVariables)
 	#dk_debugFunc(1 9)
 	dk_debug("dk_importVariables(${ARGV})")
 	
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("CURRENT_IMPORT = ${CURRENT_IMPORT}")
-	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
 		PRINTVARS()
@@ -87,34 +84,6 @@ function(dk_importVariables)
 	dk_unset(PLUGIN_Url_Name)
 	dk_unset(PLUGIN_Url_Name_Lower)
 	dk_unset(PLUGIN_Version)
-	
-	#dk_debug("PLUGIN = ${PLUGIN}")
-	#dk_debug("PLUGIN_Args = ${PLUGIN_Args}")
-	#dk_debug("PLUGIN_Build_Dir = ${PLUGIN_Build_Dir}")
-	#dk_debug("PLUGIN_Config_Dir = ${PLUGIN_Config_Dir}")
-	#dk_debug("PLUGIN_Debug_Dir = ${PLUGIN_Debug_Dir}")
-	#dk_debug("PLUGIN_Id = ${PLUGIN_Id}")
-	#dk_debug("PLUGIN_Import_Dirname = ${PLUGIN_Import_Dirname}")
-	#dk_debug("PLUGIN_Import_Name = ${PLUGIN_Import_Name}")
-	#dk_debug("PLUGIN_Import_Name_Lower = ${PLUGIN_Import_Name_Lower}")
-	#dk_debug("PLUGIN_Import_Name_Upper = ${PLUGIN_Import_Name_Upper}")
-	#dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
-	#dk_debug("PLUGIN_Install_Dirname = ${PLUGIN_Install_Dirname}")
-	#dk_debug("PLUGIN_Install_Name = ${PLUGIN_Install_Name}")
-	#dk_debug("PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
-	#dk_debug("PLUGIN_Release_Dir = ${PLUGIN_Release_Dir}")
-	#dk_debug("PLUGIN_Tuple_Dir = ${PLUGIN_Tuple_Dir}")
-	#dk_debug("PLUGIN_Url = ${PLUGIN_Url}")
-	#dk_debug("PLUGIN_Url_Basename = ${PLUGIN_Url_Basename}")
-	#dk_debug("PLUGIN_Url_Extension = ${PLUGIN_Url_Extension}")
-	#dk_debug("PLUGIN_Url_Name = ${PLUGIN_Url_Name}")
-	#dk_debug("PLUGIN_Url_Name_Lower = ${PLUGIN_Url_Name_Lower}")
-	#dk_debug("PLUGIN_Version = ${PLUGIN_Version}")
-
-	### PLUGIN(hashtable) 
-	##  TODO
-	####################
-	
 	
 																###### EXAMPLE ######
 	### IMPORT_ROOT (PLUGIN;Import_Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
@@ -181,44 +150,75 @@ function(dk_importVariables)
 	set(PLUGIN_Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN_Url = '${PLUGIN_Url}'")
 
-
-	### PLUGIN_Id												ZLIB
-	PLUGIN_Id()
-
-	### PLUGIN_Install_Path										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-	PLUGIN_Install_Path()
-
-	### PLUGIN_Url_Extension									.zip
-	PLUGIN_Url_Extension()
+#	dk_validate(PLUGIN                             "PLUGIN_Id()")					# ZLIB
+#	#dk_validate(PLUGIN_Args                       "PLUGIN_Args()")
+#	dk_validate(PLUGIN_Id                          "PLUGIN_Id()")					# ZLIB
+#	dk_validate(PLUGIN_Version                     "PLUGIN_Version()")
+#	#dk_validate(PLUGIN_Url                        "PLUGIN_Url()")
+#	dk_validate(PLUGIN_Url_Basename                "PLUGIN_Url_Basename()")
+#	dk_validate(PLUGIN_Url_Name                    "PLUGIN_Url_Name()")
+#	dk_validate(PLUGIN_Url_Extension               "PLUGIN_Url_Extension()")		# .zip
+#	dk_validate(PLUGIN_Import_Dirname              "PLUGIN_Import_Dirname()")
+#	dk_validate(PLUGIN_Import_Name                 "PLUGIN_Import_Name()")
+#	dk_validate(PLUGIN_Import_Path                 "PLUGIN_Import_Path()")
+#	dk_validate(PLUGIN_Install_Dirname             "PLUGIN_Install_Dirname()")		# C:/Users/Administrator/DigitalKnob/Development/3rdParty
+#	dk_validate(PLUGIN_Install_Name                "PLUGIN_Install_Name()")
+#	dk_validate(PLUGIN_Install_Path                "PLUGIN_Install_Path()")			# C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+#	#dk_validate(PLUGIN_Tuple_Dir                   "PLUGIN_Tuple_Dir()")
+#	#dk_validate(PLUGIN_Build_Dir                   "PLUGIN_Build_Dir()")
+#	#dk_validate(PLUGIN_Config_Dir                  "PLUGIN_Config_Dir()")
+#	#dk_validate(PLUGIN_Debug_Dir                   "PLUGIN_Debug_Dir()")
+#	#dk_validate(PLUGIN_Release_Dir                 "PLUGIN_Release_Dir()")
 	
-	### PLUGIN_Install_Dirname									C:/Users/Administrator/DigitalKnob/Development/3rdParty
+	
+	PLUGIN_Id()					# ZLIB
+	#PLUGIN_Args()
+	PLUGIN_Id()					# ZLIB
+	PLUGIN_Version()
+	#PLUGIN_Url()
+	PLUGIN_Url_Basename()
+	PLUGIN_Url_Name()
+	PLUGIN_Url_Extension()		# .zip
 	PLUGIN_Import_Dirname()
+	PLUGIN_Import_Name()
+	PLUGIN_Import_Path()
+	PLUGIN_Install_Dirname()	# C:/Users/Administrator/DigitalKnob/Development/3rdParty
+	PLUGIN_Install_Name()
+	PLUGIN_Install_Path()		# C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+	#PLUGIN_Tuple_Dir()
+	#PLUGIN_Build_Dir()
+	#PLUGIN_Config_Dir()
+	#PLUGIN_Debug_Dir()
+	#PLUGIN_Release_Dir()
+	
+	
+	
 	#####################################################
 	############# PLUGIN_Target_Directries ##############
 	#####################################################
 	### PLUGIN_Tuple_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
-	set(PLUGIN_Tuple_Dir "${PLUGIN_Install_Path}/${Target_Tuple}" 	CACHE INTERNAL "")
+	dk_set(PLUGIN_Tuple_Dir "${PLUGIN_Install_Path}/${Target_Tuple}")
 	dk_debug("PLUGIN_Tuple_Dir = '${PLUGIN_Tuple_Dir}'")
 	
 	### PLUGIN_Config_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	dk_validate(Target_Config "dk_Target_Config()")
-	set(PLUGIN_Config_Dir "${PLUGIN_Install_Path}/${Target_Config}" CACHE INTERNAL "")
+	dk_set(PLUGIN_Config_Dir "${PLUGIN_Install_Path}/${Target_Config}")
 	dk_debug("PLUGIN_Config_Dir = '${PLUGIN_Config_Dir}'")
 
 	### PLUGIN_Build_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	set(PLUGIN_Build_Dir "${PLUGIN_Install_Path}/${Target_Build}" 	CACHE INTERNAL "")
+	dk_set(PLUGIN_Build_Dir "${PLUGIN_Install_Path}/${Target_Build}")
 	dk_debug("PLUGIN_Build_Dir = '${PLUGIN_Build_Dir}'")
 
 	### PLUGIN_Debug_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
-	set(PLUGIN_Debug_Dir "${PLUGIN_Tuple_Dir}/${Debug_Dir}" 		CACHE INTERNAL "")
+	dk_set(PLUGIN_Debug_Dir "${PLUGIN_Tuple_Dir}/${Debug_Dir}")
 	dk_debug("PLUGIN_Debug_Dir = '${PLUGIN_Debug_Dir}'")
 
 	### PLUGIN_Release_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
-	set(PLUGIN_Release_Dir "${PLUGIN_Tuple_Dir}/${Release_Dir}" 	CACHE INTERNAL "")
+	dk_set(PLUGIN_Release_Dir "${PLUGIN_Tuple_Dir}/${Release_Dir}")
 	dk_debug("PLUGIN_Release_Dir = '${PLUGIN_Release_Dir}'")
 
 	### PLUGIN
-	set(PLUGIN "${PLUGIN_Id}" CACHE INTERNAL "")
+	dk_set(PLUGIN "${PLUGIN_Id}")
 	dk_debug("PLUGIN = '${PLUGIN}'")
 	
 	### ${PLUGIN}
