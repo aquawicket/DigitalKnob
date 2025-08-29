@@ -14,7 +14,7 @@ include_guard()
 #dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variables
 
 #########################################################################
-# dk_configure(Install_Path, args...)
+# dk_configure(Config_Dir, args...)
 #
 #	@Install_Path - The path to the configure file to use, CMakeLists.txt for cmake, configure for Unix, Etc.
 #				  If no Install_Path is specified, ${${CURRENT_PLUGIN}} will be used
@@ -62,23 +62,23 @@ function(dk_configure)
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
 	
-	if(NOT EXISTS "${${CURRENT_PLUGIN}_Install_Path}")
-		set(${CURRENT_PLUGIN}_Install_Path "${${CURRENT_PLUGIN}}/${Build_Dir}")
-		dk_mkdir("${${CURRENT_PLUGIN}_Install_Path}")
+	if(NOT EXISTS "${${CURRENT_PLUGIN}_Build_Dir}")
+		set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Target_Type}")
+		dk_mkdir("${${CURRENT_PLUGIN}_Build_Dir}")
 	endif()
-	dk_assertPath("${${CURRENT_PLUGIN}_Install_Path}")
+	dk_assertPath("${${CURRENT_PLUGIN}_Build_Dir}")
 	
-	dk_set(Install_Path "${${CURRENT_PLUGIN}_Install_Path}")
-	dk_assertVar(Install_Path)
+	dk_set(Build_Dir "${${CURRENT_PLUGIN}_Build_Dir}")
+	dk_assertVar(Build_Dir)
 	
 	#	if(REBUILDALL)
-		dk_call(dk_clearCmakeCache ${Install_Path})
+		dk_call(dk_clearCmakeCache ${Build_Dir})
 	#	endif()
 
-	dk_mkdir("${Install_Path}")
-	dk_assertPath("${Install_Path}")
+	dk_mkdir("${Build_Dir}")
+	dk_assertPath("${Build_Dir}")
 	dk_source("dk_chdir")
-	dk_chdir("${Install_Path}")
+	dk_chdir("${Build_Dir}")
 	
 	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
@@ -97,14 +97,14 @@ function(dk_configure)
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
-		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Config_Dir}" "-B" "${Install_Path}")			
+		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Config_Dir}" "-B" "${Build_Dir}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
 		dk_exec(${command_list})
 		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		dk_fileWrite(${Install_Path}/DKBUILD.log "\"${command_string}\"\n\n")
+		dk_fileWrite(${_Build_Dir}/DKBUILD.log "\"${command_string}\"\n\n")
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
@@ -116,15 +116,15 @@ function(dk_configure)
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
-		dk_fileAppend(${Install_Path}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
-		if(EXISTS "${Install_Path}/configure")
+		dk_fileAppend(${_Build_Dir}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
+		if(EXISTS "${_Build_Dir}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
-				dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
 			else()
 				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
-				dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
 			endif()
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
@@ -143,15 +143,15 @@ function(dk_configure)
 	#
 	else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
-		dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_allButFirstArgs}\n")
+		dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_allButFirstArgs}\n")
 			
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		#	dk_exec(${dk_allButFirstArgs} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-		#	dk_fileAppend(${Install_Path}/DKBUILD.log "${echo_output}\n\n\n")
+		#	dk_fileAppend(${_Build_Dir}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
 		if(dk_allButFirstArgs)
 			dk_exec(${dk_allButFirstArgs}) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
+			dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
 			dk_unset(dk_allButFirstArgs)
 		endif()
 	endif()
