@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/glennrp/libpng
 # http://www.libpng.org/pub/png/libpng.html
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(Emscripten)
@@ -26,17 +26,18 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-if(Mac)
-	#dk_import(https://github.com/glennrp/libpng.git)
-	dk_import(${libpng_Mac_Import})
-else()
-	dk_import(${libpng_Import} PATCH)
-endif()
+#if(Mac)
+#	#dk_import(https://github.com/glennrp/libpng.git)
+#	dk_import(${libpng_Mac_Import})
+#else()
+#	dk_import(${libpng_Import} PATCH)
+#endif()
+dk_import()
 
 
 ### LINK ###
 dk_define					(PNG_STATIC)
-dk_include					(${LIBPNG}  														PNG_INCLUDE_DIR)
+dk_include					(${LIBPNG}  															PNG_INCLUDE_DIR)
 dk_include					(${LIBPNG_Config_Dir}													PNG_INCLUDE_DIR2)
 
 if(MSVC)

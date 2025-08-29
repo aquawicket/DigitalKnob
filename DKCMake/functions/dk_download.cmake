@@ -35,29 +35,33 @@ function(dk_download)
 	
 	###### Args ######
 	dk_getParameterValue(NAME REMOVE)
-	dk_echo("NAME = ${NAME}")
+	#dk_debug("NAME = ${NAME}")
 	dk_getParameterValue(ROOT REMOVE)
-	dk_echo("ROOT = ${ROOT}")
+	#dk_debug("ROOT = ${ROOT}")
 	dk_getParameter(NO_HALT REMOVE)
-	dk_echo("NO_HALT = ${NO_HALT}")
-	
+	#dk_debug("NO_HALT = ${NO_HALT}")
 	
 	set(CMAKE_TLS_VERIFY=0)
 
+	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
+	# We make sure the value is located in the full ARGV to fix this for now. We still need to find the root of this issue.
+	# If this issue still exists, I believe dk_debugfunc() to more than likely be the cause.
 	dk_includes("${ARGV}" "${ARGV0}")
 	if(dk_includes)
 		set(url "${ARGV0}")
+	else()
+		dk_warning("ARGV0:${ARGV0} was not found in ARGV:${ARGV}")
 	endif()
 	#dk_echo("url = ${url}")
 	
-	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
-	# We make sure the value is located in the full ARGV to fix this for now. We still need to find the root of this issue.
+	
 	dk_includes("${ARGV}" "${ARGV1}")
 	if(dk_includes)
 		set(dest_path "${ARGV1}")
+	else()
+		dk_warning("ARGV1:${ARGV1} was not found in ARGV:${ARGV}")
 	endif()
 	dk_echo("dest_path = ${dest_path}")
-	
 	
 	
 	# Setup all url variables
@@ -75,10 +79,10 @@ function(dk_download)
 	dk_assertVar(url_filename)
 	#dk_printVar(url_filename)					# myFile.txt
 	
-	
 	dk_getExtension(${url} url_ext)	
 	#dk_assertVar(url_ext)
 	#dk_printVar(url_ext)						# .txt    
+	
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)

@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/libsdl-org/SDL_image
 #
 # https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
@@ -50,12 +50,12 @@ dk_depend(zlib)
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH) # SDL3
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import("${SDL_IMAGE_DL}" PATCH)
-
+#dk_import("${SDL_IMAGE_DL}" PATCH)
+dk_import(PATCH)
 
 
 ### LINK ###
-dk_include				(${SDL_IMAGE}											SDL2_IMAGE_INCLUDE_DIR)
+dk_include				(${SDL_IMAGE}												SDL2_IMAGE_INCLUDE_DIR)
 if(MSVC)
 	if(Android)
 		dk_libDebug		(${SDL_IMAGE_Config_Dir}/lib/${Debug_Dir}/SDL_image.a		SDL2_IMAGE_LIBRARY_DEBUG)

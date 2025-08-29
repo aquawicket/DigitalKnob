@@ -15,7 +15,7 @@ include_guard()
 ############ rmlui ############
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 #################### NOTE ###########################################################################################
 #  To get the samples to compile with a SDL Renderer backend, I needed to add a few things to 
@@ -93,8 +93,8 @@ endif()
 
 
 ### IMPORT ###
-dk_import(${rmlui_Import})
-
+#dk_import(${rmlui_Import})
+dk_import()
 
 ### PATCH ###
 dk_gitApplyPatch("${RMLUI}" "$ENV{DKIMPORTS_DIR}/rmlui/rmlui.patch")

@@ -5,5 +5,5 @@
 LIBPNG_MAJOR=1
 LIBPNG_MINOR=6
 LIBPNG_BUILD=35
-libpng_Import=https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip
 libpng_Mac_Import=https://github.com/pnggroup/libpng/archive/refs/heads/libpng16.zip
+libpng_Import=https://github.com/glennrp/libpng/archive/refs/tags/v1.6.35.zip

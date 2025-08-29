@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/facebook/zstd.git
 # https://github.com/facebook/folly/blob/main/CMake/FindZstd.cmake
 

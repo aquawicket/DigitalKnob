@@ -19,18 +19,12 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-#dk_validate(Target_Config  "dk_Target_Config()")
-#if(NOT CURRENT_PLUGIN)
-#	dk_call(dk_set Import_Path "${CMAKE_CURRENT_LIST_DIR}")
-#	dk_basename("${Import_Path}")
-#	dk_toUpper("${dk_basename}" PLUGIN)
-#	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-#	dk_set(${PLUGIN}_Import_Path "${Import_Path}")
-#	dk_envList(PLUGIN PUSH "${PLUGIN}")
-#endif()
-
 
 ### DEPEND ###
+dk_depend(autoconf)
+dk_depend(automake)
+dk_depend(libtool)
+dk_depend(pkgconf)
 dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
@@ -38,14 +32,20 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(PATCH)
+#dk_import(PATCH)
+dk_import()
+dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+dk_debug("LIBXML2 = ${LIBXML2}")
 
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_depend(autoconf)
-	dk_depend(automake)
-	dk_depend(libtool)
-	dk_depend(pkgconf)
-endif()
+#if(NOT EXISTS ${LIBXML2}/configure)
+#	dk_depend(autoconf)
+#	dk_depend(automake)
+#	dk_depend(libtool)
+#	dk_depend(pkgconf)
+#endif()
+
+dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+dk_debug("LIBXML2 = ${LIBXML2}")
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
@@ -164,6 +164,14 @@ dk_set(LIBXML2_CMAKE
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
+
+### TODO ### we still need to add flags to the configure.js call
+#cscript.exe C:/Users/Administrator/DigitalKnob/Development/3rdParty/libxml2-e397651a/win32/configure.js compiler=mingw prefix=C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-e397651a\Windows_X86_64_Clang\Release
+if(Windows)
+	if(NOT EXISTS ${LIBXML2}/config.h)
+		dk_exec(cscript.exe configure.js compiler=mingw prefix=${LIBXML2_Build_Dir} WORKING_DIRECTORY "${LIBXML2}/win32")
+	endif()
+endif()
 
 #Windows_dk_exec(${DKCONFIGURE_BUILD})
 if(NOT EXISTS ${LIBXML2}/configure)

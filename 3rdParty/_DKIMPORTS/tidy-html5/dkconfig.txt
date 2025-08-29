@@ -1,4 +1,4 @@
 ############ tidy-html5 ############
 # https://github.com/htacg/tidy-html5.git
 
-tidy_html5_Import=https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip
+tidy-html5_Import=https://github.com/htacg/tidy-html5/archive/refs/tags/5.8.0.zip

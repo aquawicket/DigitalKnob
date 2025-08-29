@@ -15,7 +15,7 @@ include_guard()
 ############ tidy-html5 ############
 # https://github.com/htacg/tidy-html5.git
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 
 ### DEPEND ###
@@ -23,7 +23,8 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(${tidy_html5_Import})
+#dk_import(${tidy_html5_Import})
+dk_import()
 
 
 ### PATCH FILES ###
