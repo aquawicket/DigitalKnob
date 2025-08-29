@@ -26,21 +26,21 @@ function(dk_configure)
 	dk_assertVar(${CURRENT_PLUGIN})
 	dk_printPrefixVars(${CURRENT_PLUGIN})
 	
-	###### Install_Path ######
-	if(${ARGV0})
-		set(Install_Path "${ARGV0}")
+	###### Config_Dir ######
+	if(ARGV)
+		set(Config_Dir "${ARGV0}")
 	elseif(${CURRENT_PLUGIN})
-		set(Install_Path "${${CURRENT_PLUGIN}}")
+		set(Config_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	dk_assertVar(Install_Path)
+	dk_assertVar(Config_Dir)
 	
 	###### dk_allButFirstArgs ######
 	if(ARGV)
 		dk_call(dk_allButFirstArgs ${ARGV})
 	endif()
 	
-	if(NOT "${Install_Path}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_configure(): Install_Path:${Install_Path} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	if(NOT "${Config_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_configure(): Config_Dir:${Config_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
 	endif()
 
 	#if(NOT REBUILDALL)
@@ -62,31 +62,30 @@ function(dk_configure)
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
 	
-	if(NOT EXISTS "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-		set(${CURRENT_PLUGIN}_CONFIG_DIR "${${CURRENT_PLUGIN}}/${Target_Config}")
-		dk_mkdir("${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	if(NOT EXISTS "${${CURRENT_PLUGIN}_Install_Path}")
+		set(${CURRENT_PLUGIN}_Install_Path "${${CURRENT_PLUGIN}}/${Build_Dir}")
+		dk_mkdir("${${CURRENT_PLUGIN}_Install_Path}")
 	endif()
-	dk_assertPath("${${CURRENT_PLUGIN}_CONFIG_DIR}")
+	dk_assertPath("${${CURRENT_PLUGIN}_Install_Path}")
 	
-	dk_set(BINARY_DIR "${${CURRENT_PLUGIN}_CONFIG_DIR}")
-	dk_assertVar(BINARY_DIR)
+	dk_set(Install_Path "${${CURRENT_PLUGIN}_Install_Path}")
+	dk_assertVar(Install_Path)
 	
 	#	if(REBUILDALL)
-		dk_call(dk_clearCmakeCache ${BINARY_DIR})
+		dk_call(dk_clearCmakeCache ${Install_Path})
 	#	endif()
 
-	dk_mkdir("${BINARY_DIR}")
-	dk_assertPath("${BINARY_DIR}")
+	dk_mkdir("${Install_Path}")
+	dk_assertPath("${Install_Path}")
 	dk_source("dk_chdir")
-	dk_chdir("${BINARY_DIR}")
+	dk_chdir("${Install_Path}")
 	
 	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-	dk_call(dk_pathExists "${Install_Path}/CMakeLists.txt" CMakeLists.txt)
-	dk_pathExists("${Install_Path}/configure"      configure)
-	dk_pathExists("${Install_Path}/configure.ac"   configure.ac)
-	
-	
+	dk_call(dk_pathExists "${Config_Dir}/CMakeLists.txt" 	CMakeLists.txt)
+	dk_pathExists("${Config_Dir}/configure"      			configure)
+	dk_pathExists("${Config_Dir}/configure.ac"   			configure.ac)
+
 	############ Configure with CMAKE ############
 	# Configure with CMake		(multi_config / single_config)
 	#
@@ -98,14 +97,14 @@ function(dk_configure)
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		
 		#### create thr Cmake configure command ###
-		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Install_Path}" "-B" "${BINARY_DIR}")			
+		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Config_Dir}" "-B" "${Install_Path}")			
 		dk_mergeFlags("${command_list}" command_list)		
 		
 		#### Execute the Cmake configure command ####
 		dk_exec(${command_list})
 		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		dk_fileWrite(${BINARY_DIR}/DKBUILD.log "\"${command_string}\"\n\n")
+		dk_fileWrite(${Install_Path}/DKBUILD.log "\"${command_string}\"\n\n")
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
@@ -117,15 +116,15 @@ function(dk_configure)
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
-		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
+		dk_fileAppend(${Install_Path}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
 		if(EXISTS "${Install_Path}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
-				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
 			else()
 				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
-				dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
 			endif()
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
@@ -144,15 +143,15 @@ function(dk_configure)
 	#
 	else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
-		dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_allButFirstArgs}\n")
+		dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_allButFirstArgs}\n")
 			
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		#	dk_exec(${dk_allButFirstArgs} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-		#	dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${echo_output}\n\n\n")
+		#	dk_fileAppend(${Install_Path}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
 		if(dk_allButFirstArgs)
 			dk_exec(${dk_allButFirstArgs}) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${BINARY_DIR}/DKBUILD.log "${dk_exec}\n\n\n")
+			dk_fileAppend(${Install_Path}/DKBUILD.log "${dk_exec}\n\n\n")
 			dk_unset(dk_allButFirstArgs)
 		endif()
 	endif()
