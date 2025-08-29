@@ -37,6 +37,7 @@ dk_import()
 dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 dk_debug("LIBXML2 = ${LIBXML2}")
 
+dk_fileReplace("${LIBXML2}/VERSION" "2.15.0" "//2.15.0")
 #if(NOT EXISTS ${LIBXML2}/configure)
 #	dk_depend(autoconf)
 #	dk_depend(automake)
