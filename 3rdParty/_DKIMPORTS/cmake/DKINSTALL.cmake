@@ -51,10 +51,6 @@ dk_import(APP)
 #	dk_return()
 #endif()
 
-### CMAKE variables ###
-#dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-#dk_importVariables	("${cmake_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
-
 
 
 ###### INSTALL ######

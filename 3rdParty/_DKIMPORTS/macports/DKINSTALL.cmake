@@ -27,8 +27,8 @@ endif()
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${macports${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-if(NOT EXISTS ${MACPORTS.URL})
-	dk_download(${MACPORTS.URL})		
+if(NOT EXISTS ${MACPORTS_Url})
+	dk_download(${MACPORTS_Url})		
 	dk_exec(chmod +x ${dk_download})
 	#dk_exec($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
 endif()

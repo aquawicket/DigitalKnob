@@ -30,6 +30,6 @@ dk_assertVar(GLINTERCEPT)
 # if HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\GLIntercept_is1 exists
 #dk_set(GLINTERCEPT "$ENV{SystemDrive}/Program Files (x86)/GLIntercept_1_3_4")
 if(NOT EXISTS "${GLINTERCEPT}/unins000.exe")
-	dk_download(${GLINTERCEPT.URL})
+	dk_download(${GLINTERCEPT_Url})
 	dk_exec(${dk_download} /SILENT /DIR=${GLINTERCEPT})
 endif()

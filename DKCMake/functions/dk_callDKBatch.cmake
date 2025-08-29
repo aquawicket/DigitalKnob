@@ -104,12 +104,12 @@ function(DKTEST)
 #	endif()
 	
 #	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
-#	if(dk_callDKBatch)
+#	if(${dk_callDKBatch})
 #		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 #	endif()
 	
 #	dk_callDKBatch(dk_urlExists "http://www.nonExistentURL/fjafjkasfjas;d")
-#	if(dk_callDKBatch)
+#	if(${dk_callDKBatch})
 #		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 #	endif()
 	

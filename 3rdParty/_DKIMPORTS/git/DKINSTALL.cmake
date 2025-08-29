@@ -23,9 +23,9 @@ dk_assertVar(git_Import)
 
 
 ### GIT variables ###
-dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_importVariables(${git_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT $ENV{DKTOOLS_DIR})
-
+#dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+#dk_importVariables(${git_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT $ENV{DKTOOLS_DIR})
+dk_import(APP)
 
 ### First Check ###
 if(Windows_Host)

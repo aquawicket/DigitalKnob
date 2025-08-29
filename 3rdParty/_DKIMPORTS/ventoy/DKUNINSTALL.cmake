@@ -18,5 +18,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${VENTOY_IMPORT} NAME ventoy)
+dk_importVariables	(${ventoy_Windows_X86_64_Import})
 dk_delete			("${VENTOY}")

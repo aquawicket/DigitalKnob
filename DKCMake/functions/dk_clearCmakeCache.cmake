@@ -20,9 +20,9 @@ include_guard()
 function(dk_clearCmakeCache)
 	dk_debugFunc(1)
 	
-    dk_info("Deleting CMake cache files in ${ARGV0}")
+    dk_info("Deleting CMake cache files in ${ARGV0}. . .")
 
-	dk_delete("${ARGV0}/CMakeFiles")
+	dk_delete("${ARGV0}${CMAKE_FILES_DIRECTORY}")  # dk_delete("${ARGV0}/CMakeFiles")
 	dk_delete("${ARGV0}/CMakeCache.txt")
 	dk_delete("${ARGV0}/cmake_install.cmake")
 endfunction()

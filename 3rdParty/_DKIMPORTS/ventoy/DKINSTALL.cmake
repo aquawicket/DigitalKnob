@@ -16,7 +16,8 @@ include_guard()
 # https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
 
 ### INSTALL ###
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple "dk_Host_Tuple()")
-dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_import			(${Ventoy_${Host_Tuple}_Import} ROOT "${DKTOOLS_DIR}")
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate			(Host_Tuple "dk_Host_Tuple()")
+#dk_validate			(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+#dk_import			(${ventoy_${Host_Tuple}_Import} ROOT "${DKTOOLS_DIR}")
+dk_import(APP)

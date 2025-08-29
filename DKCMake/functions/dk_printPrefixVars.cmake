@@ -17,16 +17,17 @@ include_guard()
 #
 #	Example: dk_printPrefixVars("CMAKE_")
 #
-function(dk_printPrefixVars _prefix)
-	dk_debugFunc()
+function(dk_printPrefixVars)
+	dk_debugFunc(1)
 
+	set(_prefix ${ARGV0})
     get_cmake_property(_vars VARIABLES)
     string(REGEX MATCHALL "(^|;)${_prefix}[A-Za-z0-9_]*" _matchedVars "${_vars}")
     set(_resultVars "")
     
 	message("###### ${_prefix}variables ######")
 	foreach(_variable ${_matchedVars})
-		dk_echo("${_var} = ${${_var}}")
+		dk_echo("${_variable} = ${${_variable}}")
 		#list(APPEND _resultVars "${_variable}")
     endforeach()
 	message("")

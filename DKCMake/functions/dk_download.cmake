@@ -129,7 +129,7 @@ function(dk_download)
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
 		dk_urlExists(${url})
-		if(dk_urlExists)
+		if(${dk_urlExists})
 			dk_warning("url:${url} NOT FOUND")
 			set(url "${BACKUP_DL_SERVER}/${url_filename}")
 			dk_info("Trying Backup Server url:${url} . . .")

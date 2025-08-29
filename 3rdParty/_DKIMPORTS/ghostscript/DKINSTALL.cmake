@@ -30,7 +30,7 @@ dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
 dk_importVariables("${ghostscript_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_PATH "$ENV{DK3RDPARTY_DIR}/ghostscript-9.22")
 
 if(NOT EXISTS ${GHOSTSCRIPT}/bin)
-	dk_download(${GHOSTSCRIPT.URL})
+	dk_download(${GHOSTSCRIPT_Url})
 	dk_replaceAll(${GHOSTSCRIPT} "/" "\\" GHOSTSCRIPT_WIN)
 	dk_exec(${dk_download} /S /D=${GHOSTSCRIPT_WIN})
 endif()

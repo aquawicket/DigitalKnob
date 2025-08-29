@@ -33,5 +33,5 @@ if(EXISTS "${IDA64_EXE}")
 endif()
 
 dk_echo("installing ${IDA.INSTALL_NAME} . . .")
-dk_download(${IDA.URL})
+dk_download(${IDA_Url})
 dk_exec("${dk_download}" --prefix "${IDA}" --mode unattended)
