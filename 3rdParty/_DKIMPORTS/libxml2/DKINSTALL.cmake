@@ -167,6 +167,7 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 ### TODO ### we still need to add flags to the configure.js call
+### We also need to make sure .js windows file association is set up.  look at DKJavascript/DKJavascript.reg
 #cscript.exe C:/Users/Administrator/DigitalKnob/Development/3rdParty/libxml2-e397651a/win32/configure.js compiler=mingw prefix=C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-e397651a\Windows_X86_64_Clang\Release
 if(Windows)
 	if(NOT EXISTS ${LIBXML2}/config.h)
