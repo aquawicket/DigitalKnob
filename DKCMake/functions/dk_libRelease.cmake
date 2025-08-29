@@ -27,21 +27,26 @@ function(dk_libRelease lib_path)
 		return()
 	endif()
 	
-	dk_append(LIBLIST ${lib_path}) # used for double checking
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
 	endif()
 	
-	if(lib_path IN_LIST RELEASE_LIBS)
+	if(lib_path IN_LIST LIBLIST)
 		return() # The library is already in the list
 	endif()	
 	
 	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW)
+		dk_prepend(LIBLIST ${lib_path}) # used for double checking
 		dk_prepend(RELEASE_LIBS optimized ${lib_path})  # Add to beginning of list
+		dk_prepend(${CURRENT_PLUGIN}_LIBS ${lib_path})
 	else()
-		dk_append(RELEASE_LIBS optimized ${lib_path})  # Add to end of list
+		dk_append(LIBLIST ${lib_path}) # used for double checking
+		dk_append(RELEASE_LIBS optimized ${lib_path})  # Add to beginning of list
+		dk_append(${CURRENT_PLUGIN}_LIBS ${lib_path})
 	endif()
+	dk_set(LIBLIST "${LIBLIST}")
 	dk_set(RELEASE_LIBS "${RELEASE_LIBS}")
+	dk_set(${CURRENT_PLUGIN}_LIBS "${${CURRENT_PLUGIN}_LIBS}")
 	
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})

@@ -129,7 +129,7 @@ function(dk_download)
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
 		dk_urlExists(${url})
-		if(${dk_urlExists})
+		if(NOT ${dk_urlExists})
 			dk_warning("url:${url} NOT FOUND")
 			set(url "${BACKUP_DL_SERVER}/${url_filename}")
 			dk_info("Trying Backup Server url:${url} . . .")
@@ -188,6 +188,6 @@ function(DKTEST)
 	
 	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
 	
-	dk_download("https://www.dependencywalker.com/depends22_x64.zip")
+	dk_download("https://github.com/aquawicket/DigitalKnob/archive/2bba2848909f18f0903faab902193afd3a7dacf4.zip")
 	dk_echo("dk_download = ${dk_download}")
 endfunction()

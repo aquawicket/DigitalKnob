@@ -25,23 +25,28 @@ function(dk_libDebug lib_path)
 	
 	if(NOT Debug)
 		return()
-	endif()	
-	dk_append(${CURRENT_PLUGIN}_LIBS ${lib_path})
-	dk_append(LIBLIST ${lib_path}) # used for double checking
+	endif()
+
 	if(NOT EXISTS ${lib_path})
 		dk_echo("${lyellow}MISSING:${yellow} ${lib_path}${clr}")
 	endif()
-	
-	if(lib_path IN_LIST DEBUG_LIBS)
+		
+	if(lib_path IN_LIST LIBLIST)
 		return() # The library is already in the list
 	endif()
 	
 	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
-		dk_prepend(DEBUG_LIBS debug ${lib_path}) # Add to beginning of list
+		dk_prepend(LIBLIST ${lib_path})
+		dk_prepend(DEBUG_LIBS debug ${lib_path})
+		dk_prepend(${CURRENT_PLUGIN}_LIBS ${lib_path})
 	else()
-		dk_append(DEBUG_LIBS debug ${lib_path}) # Add to end of list
+		dk_append(LIBLIST ${lib_path})
+		dk_append(DEBUG_LIBS debug ${lib_path})
+		dk_append(${CURRENT_PLUGIN}_LIBS ${lib_path})
 	endif()
+	dk_set(LIBLIST "${LIBLIST}")
 	dk_set(DEBUG_LIBS "${DEBUG_LIBS}")
+	dk_set(${CURRENT_PLUGIN}_LIBS "${${CURRENT_PLUGIN}_LIBS}")
 
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})

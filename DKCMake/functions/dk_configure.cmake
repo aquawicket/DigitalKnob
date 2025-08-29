@@ -45,6 +45,7 @@ function(dk_configure)
 	endif()
 
 	#if(NOT REBUILDALL)
+		dk_debug("${CURRENT_PLUGIN}_LIBS = ${${CURRENT_PLUGIN}_LIBS}")
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
 			if(NOT DEFINED missing_libs)
 				set(missing_libs 0)

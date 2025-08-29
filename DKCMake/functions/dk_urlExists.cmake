@@ -96,7 +96,15 @@ function(dk_urlExists)
 
 
 	dk_httpResponse("${ARGV0}" dk_urlExists)
-
+	if("${dk_urlExists}" EQUAL "200")
+		set(dk_urlExists true)
+	elseif("${dk_urlExists}" EQUAL "301")
+		set(dk_urlExists true)
+	elseif("${dk_urlExists}" EQUAL "302")
+		set(dk_urlExists true)
+	else()
+		set(dk_urlExists false)
+	endif()
 	
 	###### output ######
 	set(dk_urlExists ${dk_urlExists} PARENT_SCOPE)

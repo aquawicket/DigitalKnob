@@ -81,7 +81,7 @@ function(dk_import)
 			dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 			set(PLUGIN_Install_Root INSTALL_ROOT ${DKTOOLS_DIR})
 		endif()
-		
+																					###### EXAMPLE ######
 		dk_validate(Host_Tuple "dk_Host_Tuple()")									#      Windows_X86_64
 		if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)								# zlib_Windows_X86_64_Import
 			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_${Host_Tuple}_Import")
@@ -91,6 +91,14 @@ function(dk_import)
 			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_${Host_Os}_Import")
 		elseif(${PLUGIN}_${Host_Os}_Import)											# ZLIB_Windows_Import
 			dk_set(PLUGIN_Import "${PLUGIN}_${Host_Os}_Import")
+		elseif(Unix_Host AND ${PLUGIN_Import_Name}_Unix_Import)						# zlib_Unix_Import
+			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_Unix_Import")
+		elseif(Unix_Host AND ${PLUGIN}_Unix_Import)									# ZLIB_Unix_Import
+			dk_set(PLUGIN_Import "${PLUGIN}_Unix_Import")
+		elseif(Apple_Host AND ${PLUGIN_Import_Name}_Apple_Import)					# zlib_Apple_Import
+			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_Apple_Import")
+		elseif(Apple_Host AND ${PLUGIN}_Apple_Import)								# ZLIB_Apple_Import
+			dk_set(PLUGIN_Import "${PLUGIN}_Apple_Import")
 		elseif(${PLUGIN_Import_Name}_Import)										# zlib_Import
 			dk_set(PLUGIN_Import "${PLUGIN_Import_Name}_Import")
 		elseif(${PLUGIN}_Import)													# ZLIB_Import

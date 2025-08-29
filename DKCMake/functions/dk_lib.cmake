@@ -20,15 +20,31 @@ include_guard()
 #	@lib_path	- TODO
 #
 function(dk_lib lib_path)
-	dk_debugFunc()
+	dk_debugFunc(1 2)
 	
-	foreach(item ${ARGV})
-		dk_includes(LIBS "${item}")
-		if(dk_includes)
-			continue() # item is already in the list
+	if(lib_path IN_LIST LIBLIST)
+		return() # The library is already in the list
+	endif()	
+	
+	#foreach(lib_path ${ARGV})
+	#	dk_includes(LIBS "${lib_path}")
+	#	if(dk_includes)
+	#		continue() # lib_path is already in the list
+	#	endif()
+		
+		if(Linux OR Raspberry OR Android OR Emscripten OR MINGW)
+			dk_prepend(LIBLIST ${lib_path})
+			dk_prepend(LIBS ${lib_path})
+			dk_prepend(${CURRENT_PLUGIN}_LIBS ${lib_path})
+		else()
+			dk_append(LIBLIST ${lib_path})
+			dk_append(LIBS ${lib_path})
+			dk_append(${CURRENT_PLUGIN}_LIBS ${lib_path})
 		endif()
-		dk_append(LIBS "${item}")
-
+		dk_set(LIBLIST "${LIBLIST}")
+		dk_set(LIBS "${LIBS}")
+		dk_set(${CURRENT_PLUGIN}_LIBS "${${CURRENT_PLUGIN}_LIBS}")
+		
 		if(INSTALL_DKLIBS)
 			if(EXISTS ${lib_path})
 				#dk_assertVar($ENV{CURRENT_PLUGIN}_Import_Name)
@@ -39,7 +55,11 @@ function(dk_lib lib_path)
 				dk_warning("DKINSTALL: Could not locate ${lib_path}")
 			endif()
 		endif()	
-	endforeach()
+		
+		if(ARGV1)
+			dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
+		endif()
+	#endforeach()
 endfunction()
 
 
@@ -51,5 +71,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_lib(zlib ${ZLIB_Debug_Dir}/zd.lib)
 endfunction()

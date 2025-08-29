@@ -48,10 +48,9 @@ function(dk_set variable) #, value)
 #	set(ENV{${VAR}} "${_ARGN_}")
 	
 	###### CamelCase ######
-	
+	set(${Var} "${ARGN}" PARENT_SCOPE)
 	set(${Var} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{Var} syntax can be used to do direct cache entry lookups
 	set(ENV{${Var}} "${ARGN}")
-	set(${Var} "${ARGN}")
 	
 	###### dk_set_DEBUG ######
 #	if("${dk_set_DEBUG}" STREQUAL 1)
@@ -71,7 +70,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	dk_set(myVariableA "String Value of myVariableA")
-#	dk_echo("myVariableA = ${myVariableA}")
+	dk_echo("myVariableA = ${myVariableA}")
 
 #	dk_set(myVariableB "String Value of myVariableB")
 #	dk_echo("ENV{myVariableB} = $ENV{myVariableB}")
