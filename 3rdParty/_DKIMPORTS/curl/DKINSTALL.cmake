@@ -42,7 +42,7 @@ endif()
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${CURL}/include 					CURL_INCLUDE_DIR)
+dk_include					(${CURL}/include 						CURL_INCLUDE_DIR)
 dk_include					(${CURL_Config_Dir}/lib					CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)

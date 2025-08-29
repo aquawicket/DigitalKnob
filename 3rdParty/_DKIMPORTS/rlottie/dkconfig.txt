@@ -1,0 +1,1 @@
+rlottie_Import=https://github.com/Samsung/rlottie/archive/e3026b1e.zip

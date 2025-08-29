@@ -13,47 +13,44 @@ include_guard()
 
 
 #####################################################################
-# dk_Host_Env()
+# dk_Host_Type()
 #
-#	  Host_Env = 
+#	  Host_Type = Windows, Unix
 #
-function(dk_Host_Env)
+function(dk_Host_Type)
 	dk_debugFunc(0 1)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(Host_Env "${ARGV0}")	#  Host_Env = MyEnv	
+		dk_set(Host_Type "${ARGV0}")
 
-	###### GET ######	
-	elseif(NOT DEFINED ENV{Host_Env})
+	###### GET ######
+	elseif(NOT DEFINED ENV{Host_Type})
 		if("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MSYS")
-			dk_set(Host_Env 	"Msys")
+			dk_set(Host_Type				Windows)
 		elseif("${CMAKE_HOST_SYSTEM_NAME}" STREQUAL "MINGW")
-			dk_set(Host_Env 	"MinGW")
-		elseif(MSVC)
-			dk_set(Host_Env 	"Msvc")
+			dk_set(Host_Type				Windows)
+		elseif(CMAKE_HOST_WIN32)
+			dk_set(Host_Type				Windows)
+		elseif(CMAKE_HOST_UNIX)
+			dk_set(Host_Type				Unix)
 		else()
-			dk_set(Host_Env 	"${CMAKE_HOST_SYSTEM_NAME}")
+			dk_fatal("CMAKE_HOST_???: Unknown host")
 		endif()
-		dk_assertVar(Host_Env)		
 	else()
-		dk_set(Host_Env "$ENV{Host_Env}")	# Host_Env = Msys
+		dk_set(Host_Type "$ENV{Host_Type}")
 	endif()
-	dk_set(${Host_Env}_Host 1)				# Msys_Host = 1
+
+	dk_assertVar(Host_Type)
+	dk_set(${Host_Type}_Host 1)
 
 
 	###### VALIDATE RESULT ######
-		if(Android_Host)
-	elseif(Linux_Host)
-	elseif(Mac_Host)
-	elseif(MinGW_Host)
-	elseif(Msvc_Host)
-	elseif(Msys_Host)
-	elseif(Raspberry_Host)
+		if(Unix_Host)
 	elseif(Windows_Host)
 	else()
-		dk_fatal("Host_Env:'${Host_Env}' is INVALID!")
-	endif()	
+		dk_fatal("Host_Type:'${Host_OS}' is INVALID!")
+	endif()
 endfunction()
 
 
@@ -66,12 +63,12 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	###### GET ######
-    dk_Host_Env()
-	dk_printVar(Host_Env)
-	dk_printVar(${Host_Env}_Host)
+    dk_Host_Type()
+	dk_printVar(Host_Type)
+	dk_printVar(${Host_Type}_Host)
 	
 	###### SET ######
-	dk_Host_Env("MyEnv")
-	dk_printVar(Host_Env)
-	dk_printVar(${Host_Env}_Host)
+	dk_Host_Type("Unix")
+	dk_printVar(Host_Type)
+	dk_printVar(${Host_Type}_Host)
 endfunction()
