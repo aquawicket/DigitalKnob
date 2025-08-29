@@ -21,7 +21,9 @@ dk_depend		(msys2)
 dk_depend		(nasm)
 
 ### IMPORT ###
-dk_import		(https://code.videolan.org/videolan/x264/-/archive/80c1c47c/x264-80c1c47c.zip)
+#dk_import		(https://code.videolan.org/videolan/x264/-/archive/80c1c47c/x264-80c1c47c.zip)
+dk_import()
+
 
 ### LINK ###
 dk_include		(${X264}/include)

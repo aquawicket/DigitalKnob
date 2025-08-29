@@ -17,8 +17,8 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 
 
-dk_import(https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip)
-
+#dk_import(https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip)
+dk_import()
 
 
 ### LINK ###

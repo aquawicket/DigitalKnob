@@ -6,3 +6,5 @@
 
 curl_Windows_Import=https://github.com/curl/curl/archive/f6cb707b.zip
 curl_Unix_Import=https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip
+
+curl_Import=https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip

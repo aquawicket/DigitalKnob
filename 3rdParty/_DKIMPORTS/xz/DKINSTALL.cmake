@@ -17,13 +17,14 @@ include_guard()
 # https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
 # https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
 
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
 
 #dk_import(https://github.com/tukaani-project/xz.git)
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import("${xz_Import}")
+#dk_import("${xz_Import}")
+dk_import()
 
 #dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
 #dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")

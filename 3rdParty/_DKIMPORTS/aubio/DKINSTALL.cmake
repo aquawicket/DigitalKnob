@@ -16,9 +16,10 @@ include_guard()
 # https://github.com/aubio/aubio.git
 # https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip
 
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Target_Config  "dk_Target_Config()")
-dk_import			(${aubio_Import})
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate		(Target_Config  "dk_Target_Config()")
+#dk_import			(${aubio_Import})
+dk_import()
 
 dk_include			(${AUBIO}/src)
 if(Windows AND MSVC)

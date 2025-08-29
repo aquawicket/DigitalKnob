@@ -17,7 +17,7 @@ include_guard()
 # https://www.glfw.org/docs/latest/compile.html
 
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 #dk_depend(wayland)
@@ -25,8 +25,8 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 
 ### IMPORT ###
-dk_import(${glfw_Import})
-
+#dk_import(${glfw_Import})
+dk_import()
 
 ### LINK ###
 dk_include					(${GLFW}/include								GLFW_INCLUDE_DIR)

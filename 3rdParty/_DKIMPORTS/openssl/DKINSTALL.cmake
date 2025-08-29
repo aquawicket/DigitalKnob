@@ -20,7 +20,7 @@ include_guard()
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 
 
-dk_validate(Target_Tuple "dk_Target_Tuple()")
+#dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Windows_X86_Msvc)
 	dk_disable(openssl)
 	dk_return()
@@ -43,8 +43,8 @@ endif()
 dk_depend(nasm)
 
 ### IMPORT ###
-dk_import(https://github.com/openssl/openssl/archive/2f362e9.zip)
-
+#dk_import(https://github.com/openssl/openssl/archive/2f362e9.zip)
+dk_import()
 #if(Emscripten)
 #	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
 #endif()

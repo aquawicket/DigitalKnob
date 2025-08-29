@@ -19,9 +19,11 @@ if(Android_Host)
 	return()
 endif()
 
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables("${nasm_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_assertVar(NASM)
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_importVariables("${nasm_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
+#dk_assertVar(NASM)
+dk_assertVar()
+
 
 if(Linux_X86_Host)
 	#dk_import(https://www.nasm.us/pub/nasm/releasebuilds/2.16.01/linux/nasm-2.16.01-0.fc36.i686.rpm)

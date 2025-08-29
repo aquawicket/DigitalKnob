@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 
-dk_import(${libssh2_Import})
-
+#dk_import(${libssh2_Import})
+dk_import()
 
 # TODO
