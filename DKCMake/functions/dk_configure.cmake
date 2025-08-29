@@ -27,7 +27,7 @@ function(dk_configure)
 	dk_printPrefixVars(${CURRENT_PLUGIN})
 	
 	###### Install_Path ######
-	if(ARGV)
+	if(${ARGV0})
 		set(Install_Path "${ARGV0}")
 	elseif(${CURRENT_PLUGIN})
 		set(Install_Path "${${CURRENT_PLUGIN}}")
@@ -82,12 +82,9 @@ function(dk_configure)
 	
 	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
-#	dk_call(dk_pathExists "${Install_Path}/CMakeLists.txt" CMakeLists.txt)
-#	dk_pathExists("${Install_Path}/configure"      configure)
-#	dk_pathExists("${Install_Path}/configure.ac"   configure.ac)
-	dk_pathExists("${${CURRENT_PLUGIN}_Install_Path}/CMakeLists.txt" 	CMakeLists.txt)
-	dk_pathExists("${${CURRENT_PLUGIN}_Install_Path}/configure"     	configure)
-	dk_pathExists("${${CURRENT_PLUGIN}_Install_Path}/configure.ac"   	configure.ac)
+	dk_call(dk_pathExists "${Install_Path}/CMakeLists.txt" CMakeLists.txt)
+	dk_pathExists("${Install_Path}/configure"      configure)
+	dk_pathExists("${Install_Path}/configure.ac"   configure.ac)
 	
 	
 	############ Configure with CMAKE ############
