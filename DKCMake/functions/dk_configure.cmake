@@ -21,7 +21,6 @@ include_guard()
 #
 function(dk_configure)
 	dk_debugFunc(0 99)
-	dk_debug("#### dk_configure(${ARGV})")
 
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
@@ -70,18 +69,14 @@ function(dk_configure)
 		endif()
 	#endif()
 	
-	
-	
-	
-	
-	#	if(REBUILDALL)
+	#if(REBUILDALL)
 		dk_call(dk_clearCmakeCache ${Build_Dir})
-	#	endif()
+	#endif()
 
-	dk_mkdir("${Build_Dir}")
-	dk_assertPath("${Build_Dir}")
-	dk_source("dk_chdir")
-	dk_chdir("${Build_Dir}")
+	#dk_mkdir("${Build_Dir}")
+	#dk_assertPath("${Build_Dir}")
+	#dk_source("dk_chdir")
+	#dk_chdir("${Build_Dir}")
 	
 	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
@@ -107,7 +102,7 @@ function(dk_configure)
 		dk_exec(${command_list})
 		
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		dk_fileWrite(${_Build_Dir}/DKBUILD.log "\"${command_string}\"\n\n")
+		dk_fileWrite(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "\"${command_string}\"\n\n")
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
@@ -119,15 +114,15 @@ function(dk_configure)
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
-		dk_fileAppend(${_Build_Dir}/DKBUILD.log "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
-		if(EXISTS "${_Build_Dir}/configure")
+		dk_fileAppend("${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log" "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
+		if(EXISTS "${${CURRRENT_PLUGIN}_Build_Dir}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_depend(bash)
 				dk_exec(${BASH_EXE} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
-				dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend("${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log" "${dk_exec}\n\n\n")
 			else()
 				dk_exec(../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs})
-				dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
+				dk_fileAppend("${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log" "${dk_exec}\n\n\n")
 			endif()
 		else()
 			dk_warning("No configure file found. It may need to be generated with autotools")
@@ -146,15 +141,15 @@ function(dk_configure)
 	#
 	else()
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
-		dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_allButFirstArgs}\n")
+		dk_fileAppend(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "${dk_allButFirstArgs}\n")
 			
 		#f(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 		#	dk_exec(${dk_allButFirstArgs} BASH_ENV OUTPUT_VARIABLE echo_output) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-		#	dk_fileAppend(${_Build_Dir}/DKBUILD.log "${echo_output}\n\n\n")
+		#	dk_fileAppend(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "${echo_output}\n\n\n")
 		#else()
 		if(dk_allButFirstArgs)
 			dk_exec(${dk_allButFirstArgs}) # ERROR_VARIABLE echo_output ECHO_OUTPUT_VARIABLE)
-			dk_fileAppend(${_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
+			dk_fileAppend(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "${dk_exec}\n\n\n")
 			dk_unset(dk_allButFirstArgs)
 		endif()
 	endif()
@@ -181,16 +176,6 @@ function(dk_configure)
 #     ${Plugin_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
 #						CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
 
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-	dk_debug("plugin = ${plugin}")
-	#dk_debug("${plugin} = ${${plugin}}")
-	dk_debug("${PLUGIN} = ${${PLUGIN}}")
-	dk_debug("${CURRENT_PLUGIN} = ${${CURRENT_PLUGIN}}")
-	
-	dk_debug("${CURRENT_PLUGIN}_FOLDER = ${${CURRENT_PLUGIN}_FOLDER}")
-	
-	dk_debug("Plugin_Path = ${Plugin_Path}")
-	#dk_getPathToPlugin(${plugin} Plugin_Path)
 	dk_set(${CURRENT_PLUGIN}_Import_Path "${Plugin_Path}")
 	dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
 	
