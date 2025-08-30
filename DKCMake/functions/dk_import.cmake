@@ -31,14 +31,12 @@ function(dk_import)
 	dk_debugFunc(0 99)
 	dk_debug("dk_import(${ARGV})")
 	
-	if(NOT CURRENT_PLUGIN)
-		if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")				########### PLUGIN_variables ###########	##### EXAMPLE #####
-			dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")	# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
-		endif()
-	else()
-		if(${CURRENT_PLUGIN}_Import_Path)
-			dk_call(dk_set PLUGIN_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
-		endif()
+	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")					########### PLUGIN_variables ###########	##### EXAMPLE #####
+		dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
+	elseif($ENV{CURRENT_PLUGIN}_Import_Path)
+		dk_call(dk_set PLUGIN_Import_Path "${$ENV{CURRENT_PLUGIN}_Import_Path}")
+	elseif(${CURRENT_PLUGIN}_Import_Path)
+		dk_call(dk_set PLUGIN_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
 	endif()
 	dk_assertPath("${PLUGIN_Import_Path}")
 	dk_debug("PLUGIN_Import_Path = ${PLUGIN_Import_Path}")	
@@ -64,7 +62,8 @@ function(dk_import)
 	#dk_envList(PLUGIN PUSH "${PLUGIN}")
 
 
-	dk_assertVar(ENV{CURRENT_PLUGIN})
+	#dk_assertVar(CURRENT_PLUGIN)
+	#dk_assertVar(ENV{CURRENT_PLUGIN})
 	
 	
 	#dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")

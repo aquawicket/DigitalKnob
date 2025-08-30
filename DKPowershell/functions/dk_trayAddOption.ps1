@@ -5,18 +5,25 @@ if(!$dk_trayAddOption_ps1){ $dk_trayAddOption_ps1 = 1; } else{ return; } #includ
 # dk_tray()
 #
 #
-function Global:dk_trayAddOption($trayContextMenu, $func, $text){
-	dk_debugFunc 3
+function Global:dk_trayAddOption($func, $text){
+	dk_debugFunc 2;
 	
-	$Tray_Option = New-Object System.Windows.Forms.MenuItem
-	$Tray_Option.Text = "$text"
+	if(!($trayContextMenu)){
+		$global:trayContextMenu = dk_call dk_tray;
+	}
+#	dk_call dk_trayAddOption $trayContextMenu $func $text
+	
+	$Tray_Option = New-Object System.Windows.Forms.MenuItem;
+	$Tray_Option.Text = "$text";
 	
 	#$global:func = $func;  # $func loses scope inside Add_Click()
 	$Tray_Option.Add_Click({
-		&$func
+		&$func;
 	}.GetNewClosure())
 	
-	$trayContextMenu.MenuItems.Add($Tray_Option)
+	$trayContextMenu.MenuItems.Add($Tray_Option);
+	
+	#return $text;
 } 
 
 
@@ -28,22 +35,22 @@ function Global:dk_trayAddOption($trayContextMenu, $func, $text){
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	$trayContextMenu = dk_call dk_tray
-	dk_call dk_trayAddOption $trayContextMenu onOption1 "Option 1"
-	dk_call dk_trayAddOption $trayContextMenu onExit "Exit"
-	
-	$appContext = New-Object System.Windows.Forms.ApplicationContext
-	[void][System.Windows.Forms.Application]::Run($appContext)
+	dk_call dk_trayAddOption onOption1 "Option 1";
+	dk_call dk_trayAddOption onExit "Exit";
+	dk_call dk_trayRun;
 }
 
 function Global:onOption1() {
-	Write-Host "Global:onOption1"
-	Add-Type -AssemblyName PresentationCore,PresentationFramework
-	[System.Windows.MessageBox]::Show("Option 1")
+	dk_debugFunc 0;
+	
+	#Write-Host "Global:onOption1";
+	Add-Type -AssemblyName PresentationCore,PresentationFramework;
+	[System.Windows.MessageBox]::Show("Option 1");
 }
 
 function Global:onExit() {
-	Write-Host "Global:onExit"
-	$Tray.Visible = $false
-	Stop-Process $pid
+	dk_debugFunc 0;
+	
+	#Write-Host "Global:onExit";
+	Stop-Process $pid;
 }

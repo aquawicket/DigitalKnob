@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 1 99
 
 	set "_func_=%~1"
-	set "_path_=%DKBATCH_FUNCTIONS_DIR:\=/%/%_func_%.cmd"
+	set "_path_=%DKBATCH_FUNCTIONS_DIR_%%_func_%.cmd"
 	%dk_call% dk_allButFirstArgs %*
 
 ::	:DeEscape
@@ -38,7 +38,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
-		set "dk_callDKBatch=%dk_exec%"
+		set dk_callDKBatch=%dk_exec%
 		set "%_func_%=%dk_exec%"
 	)
 %endfunction%
@@ -51,11 +51,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_echo
-	%dk_call% dk_callDKBatch dk_testReturn inputA
-	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
-	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
-	%dk_call% dk_echo
+::	%dk_call% dk_echo
+::	%dk_call% dk_callDKBatch dk_testReturn inputA
+::	%dk_call% dk_echo "dk_callDKBatch = %dk_callDKBatch%"
+::	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+::	%dk_call% dk_echo
 	
 	%dk_call% dk_echo
 	%dk_call% dk_callDKBatch dk_basename "C:/Users/Administrator/DigitalKnob/Development"
