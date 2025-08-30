@@ -48,6 +48,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::############ DKPowershell function call ############
 	::%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
 	::set "dk_exec_ECHO_OUTPUT=0"
+	set dk_allButFirstArgs=%dk_allButFirstArgs:"='%
 	set DKCOMMAND=%POWERSHELL_EXE% -Command "$global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %_path_%; %_func_% %dk_allButFirstArgs%;"
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
@@ -64,13 +65,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_callDKPowershell dk_trayAddOption Option1 "Option 1"
+
 	%dk_call% dk_echo
 	%dk_call% dk_callDKPowershell dk_basename "C:/Users/Administrator/DigitalKnob/Development"
 	%dk_call% dk_echo "dk_callDKPowershell = %dk_callDKPowershell%"
 	%dk_call% dk_echo "dk_basename = %dk_basename%"
 	%dk_call% dk_echo
 	
-::	%dk_call% dk_callDKPowershell dk_trayAddOption Option1 "Option 1"
+
 	
 	%dk_call% dk_callDKPowershell dk_testReturn "inputA"
 	%dk_call% dk_echo
