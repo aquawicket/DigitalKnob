@@ -26,10 +26,13 @@ function(dk_depend plugin) #target
 	
 	if(plugin IN_LIST done_list)
 		dk_debug("${plugin} is already completed")
-		return()  #plugin is already completed
+		return()
 	endif()
 	
-	message("############ dk_depend(${plugin}) ############")
+	if(plugin IN_LIST dkdepend_list)
+		return()
+	endif()
+		
 	if(plugin IN_LIST dk_disabled_list)
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
@@ -37,6 +40,8 @@ function(dk_depend plugin) #target
 		dk_notice("${plugin} IS DISABLED")
 		return()
 	endif()
+	
+	message("############ dk_depend(${plugin}) ############")
 	
 	dk_toUpper("${plugin}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
@@ -50,18 +55,30 @@ function(dk_depend plugin) #target
 	
 	if(NOT EXISTS "${${PLUGIN}_Install_Path}")
 		
-		###### Push Plugin to the PLUGIN_STACK ######
-		dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
-		dk_envList(PLUGIN PUSH "${PLUGIN}")
+	###### Push Plugin to the PLUGIN_STACK ######
+	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
+	dk_envList(PLUGIN PUSH "${PLUGIN}")
+			
+		dk_set(CURRENT_IMPORT "${${PLUGIN}_Import_Path}")
 		
-		#dk_notice("dk_depend(): loading ${PLUGIN} . . .")
-		dk_dependB(${plugin})
-	
-		###### Pop Plugin from the PLUGIN_STACK ######
-		list(APPEND done_list "${plugin}")
-		dk_set(done_list "${done_list}")
-		dk_envList(PLUGIN POP)
-		dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
+	#	###### Load the dkconfig.txt file ######
+	#	if(EXISTS "${${PLUGIN}_Import_Path}/dkconfig.txt")
+	#		dk_getFileParams("${${PLUGIN}_Import_Path}/dkconfig.txt")
+	#		dk_success("Loaded ${${PLUGIN}_Import_Path}/dkconfig.txt")
+	#	else()
+	#		dk_warning("${${PLUGIN}_Import_Path}/dkconfig.txt NOT FOUND.")
+	#	endif()
+	#	###### Load the DKINSTALL.cmake file ######
+
+		dk_load(${${PLUGIN}_Import_Path}/DKINSTALL.cmake)
+			
+		dk_enable(${plugin})
+	 
+	###### Pop Plugin from the PLUGIN_STACK ######
+	list(APPEND done_list "${plugin}")
+	dk_set(done_list "${done_list}")
+	dk_envList(PLUGIN POP)
+	dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
 
 	else()
 		dk_notice("dk_depend(): ${PLUGIN} is already loaded")

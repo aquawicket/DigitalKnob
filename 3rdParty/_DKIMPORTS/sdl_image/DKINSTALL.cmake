@@ -36,16 +36,15 @@ include_guard()
 
 
 ### DEPEND ###
+dk_depend(mobile_core_services)
 dk_depend(giflib)
 dk_depend(imageio)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
 dk_depend(libwebp)
-dk_depend(mobile_core_services)
-dk_depend(sdl)
 dk_depend(tiff)
 dk_depend(zlib)
-
+dk_depend(sdl)
 
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH) # SDL3
@@ -111,9 +110,9 @@ dk_configure(${SDL_IMAGE}
 	${GIFLIB_CMAKE}
 	${LIBJPEG_TURBO_CMAKE}
 	${LIBPNG_CMAKE}
-	${SDL_CMAKE}
 	${TIFF_CMAKE}
-	${ZLIB_CMAKE})
+	${ZLIB_CMAKE}
+	${SDL_CMAKE})
 
 
 ### COMPILE ###

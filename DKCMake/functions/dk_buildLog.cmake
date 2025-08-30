@@ -28,13 +28,13 @@ function(dk_buildLog)
 	dk_echo("${msg}")
 		
 	if(NOT PATH)
-		dk_validate(Target_App_Dir "dk_Target_Tuple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
+		dk_validate(Target_App_Dir "dk_Target_Tuple()")
 		dk_validate(Target_Config "dk_Target_Config()")
 		set(PATH "${Target_App_Dir}/${Target_Config}")
 	endif()
 		
 	dk_assertPath("${PATH}")
-	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}\n")
+	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}")
 endfunction()
 
 
