@@ -17,7 +17,7 @@ include_guard()
 #
 #	Each plugin invoked will fill a a varaible or it's name to the path where it
 #   is installed..   
-#   I.E.  dk_depend(zlib) =  dk_validate(ZLIB "dk_dependB(zlib)") 
+#   I.E.  dk_validate(ZLIB "dk_depend(zlib)") 
 #   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake
 #   to fill fill ZLIB with the path zlib is installed to.
 #
