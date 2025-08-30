@@ -1,4 +1,5 @@
 #!/usr/bin/cmake -P
+return()
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -19,7 +20,7 @@ include_guard()
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-dk_validate(Target_Config  "dk_Target_Config()")
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
@@ -33,8 +34,11 @@ dk_depend(zstd)
 #-- Could NOT find LERC (missing: LERC_LIBRARY LERC_INCLUDE_DIR)
 #-- Could NOT find GLUT (missing: GLUT_glut_LIBRARY)
 
+
 ### IMPORT ###
-dk_import(${tiff_Import})
+#dk_import(${tiff_Import})
+dk_import()
+
 
 ### LINK ###
 dk_include					(${TIFF}/libtiff										TIFF_INCLUDE_DIR)
@@ -89,4 +93,4 @@ dk_configure(${TIFF}
 	${ZSTD_CMAKE})
 
 ### COMPILE ###
-dk_build(${TIFF} tiff)
+dk_build(${TIFF})# tiff)
