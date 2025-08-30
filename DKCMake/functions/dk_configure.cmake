@@ -23,7 +23,18 @@ function(dk_configure)
 	dk_debugFunc(0 99)
 	dk_debug("#### dk_configure(${ARGV})")
 
+	dk_validate(Target_Type "dk_Target_Type()")
+	dk_validate(Target_Config "dk_Target_Config()")
+	
 	dk_assertVar(${CURRENT_PLUGIN})
+	if(NOT EXISTS "${${CURRENT_PLUGIN}_Build_Dir}")
+		set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Target_Type}")
+		dk_mkdir("${${CURRENT_PLUGIN}_Build_Dir}")
+	endif()
+	dk_assertPath("${${CURRENT_PLUGIN}_Build_Dir}")
+	dk_set(Build_Dir "${${CURRENT_PLUGIN}_Build_Dir}")
+	dk_assertVar(Build_Dir)
+	
 	dk_printPrefixVars(${CURRENT_PLUGIN})
 	
 	###### Config_Dir ######
@@ -59,17 +70,9 @@ function(dk_configure)
 		endif()
 	#endif()
 	
-	dk_validate(Target_Type "dk_Target_Type()")
-	dk_validate(Target_Config "dk_Target_Config()")
 	
-	if(NOT EXISTS "${${CURRENT_PLUGIN}_Build_Dir}")
-		set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Target_Type}")
-		dk_mkdir("${${CURRENT_PLUGIN}_Build_Dir}")
-	endif()
-	dk_assertPath("${${CURRENT_PLUGIN}_Build_Dir}")
 	
-	dk_set(Build_Dir "${${CURRENT_PLUGIN}_Build_Dir}")
-	dk_assertVar(Build_Dir)
+	
 	
 	#	if(REBUILDALL)
 		dk_call(dk_clearCmakeCache ${Build_Dir})

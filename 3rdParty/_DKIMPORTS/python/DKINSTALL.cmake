@@ -20,38 +20,19 @@ include_guard()
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
-if(NOT CURRENT_IMPORT)
-	set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
-endif()
-dk_assertPath("${CURRENT_IMPORT}")
-set(Import_Path "${CURRENT_IMPORT}")
-dk_assertPath("${Import_Path}/dkconfig.txt")
-dk_getFileParams("${Import_Path}/dkconfig.txt")
+set(PLUGIN_Import_Path "${CMAKE_CURRENT_LIST_DIR}")
+dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-dk_basename(${Import_Path} Import_Name)
-	
-#dk_assertVar(${Import_Name}_${Host_Tuple}_Import)
-if(${Import_Name}_${Host_Tuple}_Import)
-	set(PLUGIN_IMPORT "${Import_Name}_${Host_Tuple}_Import")
-elseif(${Import_Name}_Import)
-	set(PLUGIN_IMPORT "${Import_Name}_Import")
-else()
-	dk_assertVar(${Import_Name}_Import)
+dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
+if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)
+	set(python_Import "${PLUGIN_Import_Name}_${Host_Tuple}_Import")
+elseif(${PLUGIN_Import_Name}_Import)
+	set(python_Import "${PLUGIN_Import_Name}_Import")
 endif()
-dk_importVariables(${${PLUGIN_IMPORT}})
-	
-	
-	
-	
-	
-	
-#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#dk_validate			(Host_Tuple "dk_Host_Tuple()")
-#dk_importVariables(${python_${Host_Tuple}_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_assertVar(PYTHON)
+dk_importVariables(${${python_Import}})
+#dk_import()	
 
 ###### PYTHON_EXE (first check) ######
-#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 if(EXISTS "${PYTHON}")
 	dk_findProgram(PYTHON_EXE python "${PYTHON}")
 elseif(EXISTS "/usr/local/bin")
@@ -76,8 +57,6 @@ if(NOT EXISTS "${PYTHON_EXE}")
 		#dk_exec(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
 	elseif(Windows_Host)
 		dk_download(${PYTHON_Url})
-		#dk_nativePath($ENV{DKDOWNLOAD_DIR} DKDOWNLOAD_DIR_WINPATH)
-		#dk_nativePath(${PYTHON} PYTHON_WIN)
 		dk_replaceAll(${dk_download} "/" "\\" dk_download_win)
 		dk_replaceAll(${PYTHON} "--" "-" PYTHON)
 		dk_replaceAll(${PYTHON} "/" "\\" PYTHON_WIN)

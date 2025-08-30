@@ -59,17 +59,6 @@ function(dk_import)
 	dk_debug("${PLUGIN}_Import_Path = ${${PLUGIN}_Import_Path}")
 	dk_set(${PLUGIN}_Import_Name "${PLUGIN_Import_Name}")			# <PLUGIN>_Import_Name						zlib	
 	dk_debug("${PLUGIN}_Import_Name = ${${PLUGIN}_Import_Name}")
-	#dk_envList(PLUGIN PUSH "${PLUGIN}")
-
-
-	#dk_assertVar(CURRENT_PLUGIN)
-	#dk_assertVar(ENV{CURRENT_PLUGIN})
-	
-	
-	#dk_debug("${CURRENT_PLUGIN}_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")
-	#dk_assertPath("${CURRENT_IMPORT}")
-	#set(PLUGIN_Import_Path "${CURRENT_IMPORT}")
-	#dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
 	
 	if(EXISTS "${PLUGIN_Import_Path}/dkconfig.txt")
 		dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")

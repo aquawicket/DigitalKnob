@@ -14,16 +14,15 @@ include_guard()
 
 ############ windows-sdk ############
 # https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
-#	Windows SDK for Windows 11 (10.0.22621.2428)	Released October 2023.
-#	Windows SDK for Windows 11 (10.0.22621.1778)	Released in May 2023.
-#	Windows SDK for Windows 11 (10.0.22621.755)		Released as part of Windows 11, version 22H2. Includes servicing update 10.0.22000.755 on October 25, 2022: ARM64 support 
-#	Windows SDK for Windows 11 (10.0.22000.194)		Released in Windows 11. w/ servicing update 10.0.22000.832 on July 29, 2022: Critical updates for developers building Arm64EC applications
-#	Windows 10 SDK version 2104 (10.0.20348.0)		intended for Windows Server development. For desktop development, see the release notes for changes you may benefit from by updating.	
+# Windows SDK for Windows 11 (10.0.22621.2428)		Released October 2023.
+# Windows SDK for Windows 11 (10.0.22621.1778)		Released in May 2023.
+# Windows SDK for Windows 11 (10.0.22621.755)		Released as part of Windows 11, version 22H2. Servicing update 10.0.22000.755 on 10/25/22: ARM64 support 
+# Windows SDK for Windows 11 (10.0.22000.194)		Released in Windows 11. w/ servicing update 10.0.22000.832 on 7/29/22: Critical updates for building Arm64EC
+# Windows 10 SDK version 2104 (10.0.20348.0)		Windows Server development. Desktop development, see release notes for changes than benefit by updating.	
+# https://go.microsoft.com/fwlink/?linkid=2272523)	# iso
+# https://go.microsoft.com/fwlink/?linkid=2272610)	# installer
 
-dk_set(CURRENT_PLUGIN "WINDOWS_SDK")
-dk_set(CURRENT_IMPORT "${CMAKE_CURRENT_LIST_DIR}")
-#dk_import(https://go.microsoft.com/fwlink/?linkid=2272523)   # iso
-dk_import(https://go.microsoft.com/fwlink/?linkid=2272610)  # installer
 
+dk_import()
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 dk_exec(${DKDOWNLOAD_DIR}/winsdksetup.exe)
