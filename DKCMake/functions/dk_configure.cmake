@@ -28,14 +28,14 @@ function(dk_configure)
 	
 	dk_assertVar(${CURRENT_PLUGIN})
 	if(NOT EXISTS "${${CURRENT_PLUGIN}_Build_Dir}")
-		set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Target_Type}")
+		dk_set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Target_Type}")
 		dk_mkdir("${${CURRENT_PLUGIN}_Build_Dir}")
 	endif()
 	dk_assertPath("${${CURRENT_PLUGIN}_Build_Dir}")
 	dk_set(Build_Dir "${${CURRENT_PLUGIN}_Build_Dir}")
 	dk_assertVar(Build_Dir)
 	
-	dk_printPrefixVars(${CURRENT_PLUGIN})
+	#dk_printPrefixVars(${CURRENT_PLUGIN})
 	
 	###### Config_Dir ######
 	if(ARGV)
@@ -100,10 +100,10 @@ function(dk_configure)
 	
 		#### Execute the Cmake configure command ####
 
-		dk_set(dk_exec_PRINT_COMMAND	1)
+		dk_set(dk_exec_PRINT_COMMAND 1)
 		dk_exec(${command_list})	
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
-		dk_fileWrite(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "\"${command_string}\"\n\n")
+		dk_fileWrite("${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log" "\"${command_string}\"\n\n")
 		
 		#### restore any altered flags ####
 		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
@@ -189,7 +189,7 @@ function(dk_configure)
 		if(NOT CMAKE_SCRIPT_MODE_FILE)
 			if(EXISTS "${${CURRENT_PLUGIN}}/CMakeLists.txt")
 				dk_debug("adding ${${plugin}} to the project solution")
-				add_subdirectory(${${CURRENT_PLUGIN}} ${${CURRENT_PLUGIN}}/${Target_Config})
+				add_subdirectory("${${CURRENT_PLUGIN}}" "${${CURRENT_PLUGIN}}/${Target_Config}")
 			endif()
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
@@ -197,14 +197,14 @@ function(dk_configure)
 	# Install 3rd Party Libs
 	if(INSTALL_DKLIBS)
 		#if(${isDKPlugin} EQUAL -1)
-			if(EXISTS ${Plugin_Path}/${Target_Config}/cmake_install.cmake)
+			if(EXISTS "${Plugin_Path}/${Target_Config}/cmake_install.cmake")
 				dk_exec(${CMAKE_COMMAND} --install ${Plugin_Path}/${Target_Config})
 			endif()
 		#endif()
 	endif(INSTALL_DKLIBS)
 	
 	
-	if(${${CURRENT_PLUGIN}} MATCHES ${DKCPP_PLUGINS_DIR}) ##### TEST ME:
+	if("${${CURRENT_PLUGIN}}" MATCHES "${DKCPP_PLUGINS_DIR}") ##### TEST ME:
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
 			dk_info("Installing ${plugin} header files")

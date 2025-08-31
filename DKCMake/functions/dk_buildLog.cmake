@@ -21,7 +21,7 @@ include_guard()
 #
 function(dk_buildLog)
 	dk_debugFunc(1 2)
-	dk_debug("dk_buildLog(${ARGV})")
+	
 	dk_getParameterValue(PATH)
 	
 	set(msg "${ARGV0}")
@@ -33,7 +33,11 @@ function(dk_buildLog)
 		set(PATH "${Target_App_Dir}/${Target_Config}")
 	endif()
 		
-	dk_assertPath("${PATH}")
+	
+	if(NOT EXISTS "${PATH}")
+		dk_warning("Cannot write DKBUILD.log. Directory does not exist")
+		return()
+	endif()
 	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}")
 endfunction()
 

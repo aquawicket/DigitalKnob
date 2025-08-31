@@ -39,29 +39,30 @@ function(dk_depend plugin) #target
 	message("############ dk_depend(${plugin}) ############")
 	
 	dk_toUpper("${plugin}" PLUGIN)
-	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
-	set(CURRENT_PLUGIN "${PLUGIN}")
+	dk_convertToCIdentifier(${PLUGIN} CURRENT_PLUGIN)
+	dk_set(CURRENT_PLUGIN "${CURRENT_PLUGIN}")
 	
-	dk_set(${PLUGIN}_Import_Name "${plugin}")						#<PLUGIN>_Import_Name
-	dk_getPathToPlugin(${plugin} ${PLUGIN}_Import_Path)
-	dk_set(${PLUGIN}_Import_Path "${${PLUGIN}_Import_Path}") 		#<PLUGIN>_Import_Path
-	dk_dirname("${${PLUGIN}_Import_Path}" ${PLUGIN}_Import_Dirname)
-	dk_set(${PLUGIN}_Import_Dirname "${${PLUGIN}_Import_Dirname}") 	#<PLUGIN>_Import_Dirname
+	dk_set(${CURRENT_PLUGIN}_Import_Name "${plugin}")							#<PLUGIN>_Import_Name
+	dk_getPathToPlugin(${plugin} ${CURRENT_PLUGIN}_Import_Path)
+	dk_importVariables(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+	#dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}") 			#<PLUGIN>_Import_Path
+	#dk_dirname("${${CURRENT_PLUGIN}_Import_Path}" ${CURRENT_PLUGIN}_Import_Dirname)
+	#dk_set(${CURRENT_PLUGIN}_Import_Dirname "${${CURRENT_PLUGIN}_Import_Dirname}") 	#<PLUGIN>_Import_Dirname
 	
 	###### Push Plugin to the PLUGIN_STACK ######
-	dk_debug("\n\n############################## ${PLUGIN} ENTER ##############################")
-	dk_envList(PLUGIN PUSH "${PLUGIN}")
+	dk_debug("\n\n############################## ${CURRENT_PLUGIN} ENTER ##############################")
+	dk_envList(PLUGIN PUSH "${CURRENT_PLUGIN}")
 			
 		list(APPEND dkdepend_list "${plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 
-		dk_load(${${PLUGIN}_Import_Path}/DKINSTALL.cmake)
+		dk_load(${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake)
 			
 		dk_enable(${plugin})
 	 
 	###### Pop Plugin from the PLUGIN_STACK ######
 	dk_envList(PLUGIN POP)
-	dk_debug("\n############################## ${PLUGIN} EXIT ##############################\n\n")
+	dk_debug("\n############################## ${CURRENT_PLUGIN} EXIT ##############################\n\n")
 
 endfunction()
 

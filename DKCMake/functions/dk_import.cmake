@@ -106,8 +106,21 @@ function(dk_import)
 		return()
 	endif()
 	
+#	if(PLUGIN_Url)
+#		dk_install(${PLUGIN})
+#		return()
+#	endif()
+	
 	if(PLUGIN_Url)
-			dk_download("${PLUGIN_Url}")
+	
+			# NOTE: Let's not forget that we rename some download files to better identify them. These are also the renamed files that 
+			# will be on a backup server. So when we look for the download using the original url, we will check the alternate server
+			# for the file. BUT. That file is renamed, so we need to check for the new name (${${PLUGIN}_Download_Basename}).
+			dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+			dk_download("${PLUGIN_Url}" "${DKDOWNLOAD_DIR}/${PLUGIN_Download_Basename}")
+			
+			
+			
 			if("${PLUGIN_Url_Extension}" STREQUAL ".7z")
 			set(FileType "Archive")
 		elseif("${PLUGIN_Url_Extension}" STREQUAL ".bz")		
