@@ -119,6 +119,7 @@ endif()
 
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
+dk_chdir(${OPENSSL_Build_Dir})
 #Emscripten_Debug_dk_configure(${OPENSSL} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${GIT_EXE} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
 if(Debug)
 	if(Android_Arm32_Clang)

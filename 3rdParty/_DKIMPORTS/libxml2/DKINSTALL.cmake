@@ -19,12 +19,16 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
+dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+dk_debug("LIBXML2 = ${LIBXML2}")
 
 ### DEPEND ###
+#if(NOT EXISTS ${LIBXML2}/configure)
 dk_depend(autoconf)
 dk_depend(automake)
 dk_depend(libtool)
 dk_depend(pkgconf)
+#endif()
 dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
@@ -34,19 +38,7 @@ dk_depend(zlib)
 ### IMPORT ###
 #dk_import(PATCH)
 dk_import()
-dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-dk_debug("LIBXML2 = ${LIBXML2}")
 
-dk_fileReplace("${LIBXML2}/VERSION" "2.15.0" "//2.15.0")
-#if(NOT EXISTS ${LIBXML2}/configure)
-#	dk_depend(autoconf)
-#	dk_depend(automake)
-#	dk_depend(libtool)
-#	dk_depend(pkgconf)
-#endif()
-
-dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-dk_debug("LIBXML2 = ${LIBXML2}")
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
@@ -221,3 +213,5 @@ dk_configure(${LIBXML2}
 
 ### COMPILE ###
 dk_build(${LIBXML2})# LibXml2)
+
+dk_delete("${LIBXML2}/VERSION")

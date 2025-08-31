@@ -36,7 +36,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 #>
-### POWERSHELL ###
 function main {
 
 $code = @'
@@ -56,7 +55,7 @@ public class ConsoleWindow{
 }
 '@
 
-### POWERSHELL ###
+
 Add-Type -TypeDefinition $code -ReferencedAssemblies @('System.Drawing') -Language CSharp
 [ConsoleWindow]::Main($args[0])
 }

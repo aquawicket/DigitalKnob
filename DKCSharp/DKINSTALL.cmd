@@ -15,9 +15,9 @@ if "%~1" equ "" (goto DKINSTALL)
 	echo compiling ...
 	if EXIST "%APP%.exe" (del %APP%.exe)
 
-	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
+	%COMPILER_EXE% /nologo /out:%APP%.exe  %DKCSharp_FILE%
 	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKCSharp_FILE%
-	%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
+	::%COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
 	if NOT EXIST "%APP%.exe" (
 		echo(

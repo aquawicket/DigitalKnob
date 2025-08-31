@@ -53,8 +53,10 @@ elseif(Apple)
 	dk_libDebug				(${LIBPNG_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
 	dk_libRelease			(${LIBPNG_Release_Dir}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
-	dk_libDebug				(${LIBPNG_Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG_Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	#dk_libDebug			(${LIBPNG_Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
+	#dk_libRelease			(${LIBPNG_Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${LIBPNG_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${LIBPNG_Release_Dir}/libpng16.a										PNG_LIBRARY_RELEASE)
 endif()
 
 
