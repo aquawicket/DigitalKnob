@@ -28,6 +28,7 @@ macro(dk_onVariableWatch variable access value current_list_file stack)
 		current_list_file = ${current_list_file}\n \
 		stack = ${stack}\n \
 		")
+		dk_pause()
 		
 	endif()
 endmacro()

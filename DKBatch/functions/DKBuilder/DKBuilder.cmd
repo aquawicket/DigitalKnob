@@ -26,7 +26,7 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
 	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
 	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
-	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe"
+	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowerShell/v1.0/powershell.exe"
 
 	::###### firewall allow ######
 	call :dk_firewallAllow curl "%CURL_EXE%"

@@ -18,10 +18,10 @@ include_guard()
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
-#dk_validate(Target_Config  "dk_Target_Config()")
+dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
-dk_depend(dl)
+#dk_depend(dl)
 dk_depend(libbcrypt)
 dk_depend(libpsl)
 dk_depend(libssh2)
@@ -40,6 +40,7 @@ dk_depend(zstd)
 #	dk_import	(${curl_Unix_Import})
 #endif()
 dk_import()
+
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
@@ -341,7 +342,8 @@ elseif(Linux)
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-else()
+endif()
+#else()
 	dk_configure(${CURL}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -414,7 +416,7 @@ else()
 		${OPENSSL_CMAKE}
 		${ZLIB_CMAKE}
 		${ZSTD_CMAKE})
-endif()
+#endif()
 
 
 ### COMPILE ###

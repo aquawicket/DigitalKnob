@@ -21,6 +21,7 @@ include_guard()
 #
 function(dk_configure)
 	dk_debugFunc(0 99)
+	dk_debug("dk_configure(${ARGV})")
 
 	dk_validate(Target_Type "dk_Target_Type()")
 	dk_validate(Target_Config "dk_Target_Config()")
@@ -88,19 +89,19 @@ function(dk_configure)
 	# Configure with CMake		(multi_config / single_config)
 	#
 	if(CMakeLists.txt)
-		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")
-		
+		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")	
 		dk_assertPath(${DKCMAKE_DIR})		
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
-		
 		#### create thr Cmake configure command ###
+		dk_assertVar(CMAKE_EXE)
 		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Config_Dir}" "-B" "${Build_Dir}")			
 		dk_mergeFlags("${command_list}" command_list)		
-		
+	
 		#### Execute the Cmake configure command ####
-		dk_exec(${command_list})
-		
+
+		dk_set(dk_exec_PRINT_COMMAND	1)
+		dk_exec(${command_list})	
 		dk_replaceAll("${command_list}" ";" "\" \n\"" command_string)
 		dk_fileWrite(${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log "\"${command_string}\"\n\n")
 		

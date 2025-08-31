@@ -213,6 +213,7 @@ function(dk_setupCallstack)
 	dk_echo("dk_setupCallstack()")
 	
 	dk_load("dk_onVariableWatch")
+	#variable_watch("CMAKE_EXE" dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LINE dk_onVariableWatch)
 	#variable_watch(CMAKE_CURRENT_FUNCTION_LIST_LINE dk_onVariableWatch)
