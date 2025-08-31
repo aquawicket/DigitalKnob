@@ -3,6 +3,7 @@
 *.exe.aarch64.elf
 *.exe.com.dbg
 *.lib
+DKBUILD.log
 Android_Arm32_Clang
 Android_Arm64_Clang
 Android_X86_Clang

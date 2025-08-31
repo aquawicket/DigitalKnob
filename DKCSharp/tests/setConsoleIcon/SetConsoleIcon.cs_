@@ -1,0 +1,88 @@
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+
+
+class ConsoleWindow{
+	[DllImport("kernel32.dll", SetLastError = true)]
+	static extern bool AllocConsole();
+
+	[DllImport("kernel32.dll")]
+	static extern bool AttachConsole(int dwProcessId);
+	private const int ATTACH_PARENT_PROCESS = -1;
+
+	[DllImport("kernel32.dll")]
+	static extern IntPtr GetConsoleWindow();
+
+	[DllImport("user32.dll")]
+	static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+	[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+	static extern bool SetWindowText(IntPtr hwnd, String lpString);
+
+	[DllImport("user32.dll")]
+	static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+
+	[DllImport("user32.dll")]
+	static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+
+	[DllImport("kernel32.dll", SetLastError = true)]
+	static extern bool SetConsoleIcon(IntPtr hIcon);
+
+	const int WM_SETICON  = 0x0080;
+	const int ICON_SMALL  = 0;
+	const int ICON_BIG    = 1;
+	const int ICON_SMALL2 = 2;
+	
+	const int SW_HIDE     = 0;
+	const int SW_SHOW     = 5;
+
+	const int SC_CLOSE    = 0xF060;
+	const int MF_GRAYED   = 1;
+	
+	
+
+	public static void AttachConsoleWindow() {
+		// redirect console output to parent process;
+		// must be before any calls to Console.WriteLine()
+		AttachConsole(ATTACH_PARENT_PROCESS);
+	}
+
+	public static void ShowWindow(IntPtr handle) {
+		ShowWindow(handle, SW_SHOW);
+	}
+
+	public static void HideWindow(IntPtr handle) {
+		ShowWindow(handle, SW_HIDE);
+	}
+
+//	public static void SetWindowText(IntPtr handle, string text)
+
+	public static void DisableCloseButton(IntPtr handle) {
+		var hmenu = GetSystemMenu(handle, false);
+		EnableMenuItem(hmenu, SC_CLOSE, MF_GRAYED);
+	}
+
+	[System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+    private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
+	
+	public static void SetIcon(IntPtr handle, System.Drawing.Icon icon) {
+		 IntPtr result01 = SendMessage(handle, WM_SETICON, ICON_SMALL, icon.Handle);
+		 IntPtr result02 = SendMessage(handle, WM_SETICON, ICON_BIG, icon.Handle);
+		 IntPtr result03 = SendMessage(handle, WM_SETICON, ICON_SMALL2, icon.Handle);
+	}
+	
+	[System.STAThread]
+	public static void Main() {
+		IntPtr handle = GetConsoleWindow();
+		if (handle == IntPtr.Zero) {
+			AllocConsole();
+		}
+		System.Drawing.Icon icon = new System.Drawing.Icon("icon.ico");
+		
+		//DisableCloseButton(handle);
+		SetWindowText(handle, "123");
+		SetIcon(handle, icon);
+	}
+}
+	
