@@ -1,13 +1,14 @@
+/* 2>nul || @echo off && goto :main */
+
 0</* ::###################### BATCH #######################
 @echo off
 :main
 	echo(     BATCH: main(%*)
 	cscript /nologo /E:jscript "%~f0" "%~nx0" main A
-	call :func2 main B
+	powershell -c "iex ((Get-Content '%~f0') -join [Environment]::Newline); iex 'main A'"
 exit /b %errorlevel%
 ::####################### END BATCH ###################### */0;
-
-
+*/
 
 //###################### Jscript #########################
 var argc = WScript.Arguments.length;
@@ -17,26 +18,18 @@ main(argc, argv);
 
 function main(argc, argv) {
 	WScript.Echo("Javascript: main("+argc+", "+argv+")");
-	func2("main B")
 	WScript.Quit(13);
 }
 //###################### END JSCRIPT #####################
+/*
 
-
-
-0</* ::###################### BATCH #######################
-@echo off
-:func2
-	echo(     BATCH: func2(%*)
-	::cscript /nologo /E:jscript "%~f0" "%~nx0" main A
-exit /b %errorlevel%
-::####################### END BATCH ###################### */0;
-
-
-
-//###################### Jscript #########################
-function func2() {
-	WScript.Echo("Javascript: func2("+arguments+")");
-	WScript.Quit(13);
+###################### POWRSHELL ########################
+function main {
+	echo "PowerShell: main($args)"
+	func2 "B";
+	exit 13
 }
-//###################### END JSCRIPT #####################
+#################### END POWRSHELL ###################### 
+*/
+
+

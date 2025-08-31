@@ -25,43 +25,43 @@ function(dk_envList)
 	set(NAME "${ARGV0}")
 	set(CMND "${ARGV1}")
 
-#	set(_Current_ "${ARGV2}")					# Original	
+	set(_Current_ "${ARGV2}")					# Original	
 #	dk_toLower(${ARGV2} _current_)				# lowercase
-	dk_toUpper(${ARGV2} _CURRENT_)				# UPPERCASE
+#	dk_toUpper(${ARGV2} _CURRENT_)				# UPPERCASE
 
 	### copy the env variable to local variable ###
-#	set(_Stack_ "$ENV{${NAME}_Stack}")			# Original
+	set(_Stack_ "$ENV{${NAME}_Stack}")			# Original
 #	set(_stack_ "$ENV{${NAME}_stack}")			# lowercase
-	set(_STACK_ "$ENV{${NAME}_STACK}")			# UPPERCASE 
+#	set(_STACK_ "$ENV{${NAME}_STACK}")			# UPPERCASE 
 
 	
 	### set the _CURRENT_ item and push it to the local _STACK_ list ###
 	if("${CMND}" STREQUAL "PUSH")
-#		set(_Stack_ "${_Current_};${_Stack_}")	# Original
+		set(_Stack_ "${_Current_};${_Stack_}")	# Original
 #		set(_stack_ "${_current_};${_stack_}")	# lowercase
-		set(_STACK_ "${_CURRENT_};${_STACK_}")	# UPPERCASE
+#		set(_STACK_ "${_CURRENT_};${_STACK_}")	# UPPERCASE
 
-#		list(LENGTH _Stack_ _Length_)			# Original
+		list(LENGTH _Stack_ _Length_)			# Original
 #		list(LENGTH _stack_ _length_)			# lowercase
-		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
+#		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
 	endif()
 
 	# Pop the CURRENT_<THING> and drop it fom the list. Update CURRENT_<THING>
 	if("${CMND}" STREQUAL "POP")
 	
-#		list(POP_FRONT _Stack_)					# Original
+		list(POP_FRONT _Stack_)					# Original
 #		list(POP_FRONT _stack_)					# lowercase
-		list(POP_FRONT _STACK_)					# UPPERCASE
+#		list(POP_FRONT _STACK_)					# UPPERCASE
 
-#		list(LENGTH _Stack_ _Length_)			# Original		
+		list(LENGTH _Stack_ _Length_)			# Original		
 #		list(LENGTH _stack_ _length_)			# lowercase
-		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
+#		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
 	
-#		if(${_Length_} GREATER 0)				# Original
-#			list(GET _Stack_ 0 _Current_)
-#		else()
-#			set(_Current_ "")
-#		endif()
+		if(${_Length_} GREATER 0)				# Original
+			list(GET _Stack_ 0 _Current_)
+		else()
+			set(_Current_ "")
+		endif()
 		
 #		if(${_length_} GREATER 0)				# lowercase
 #			list(GET _stack_ 0 _current_)
@@ -69,21 +69,21 @@ function(dk_envList)
 #			set(_current_ "")
 #		endif()
 		
-		if(${_LENGTH_} GREATER 0)				# UPPERCASE
-			list(GET _STACK_ 0 _CURRENT_)
-		else()
-			set(_CURRENT_ "")
-		endif()
+#		if(${_LENGTH_} GREATER 0)				# UPPERCASE
+#			list(GET _STACK_ 0 _CURRENT_)
+#		else()
+#			set(_CURRENT_ "")
+#		endif()
 	endif()
 
-#	dk_set(Current_${NAME} 	"${_Current_}")		# Original
+	dk_set(CURRENT_${NAME} 	"${_Current_}")		# Original
 #	dk_set(current_${NAME} 	"${_current_}")		# lowercase
-	dk_set(CURRENT_${NAME} 	"${_CURRENT_}")		# UPPERCASE
+#	dk_set(CURRENT_${NAME} 	"${_CURRENT_}")		# UPPERCASE
 
 	### copy local variable back to the environment variable ###
-#	dk_set(${NAME}_Stack 	"${_Stack_}")  		# Original
+	dk_set(${NAME}_Stack 	"${_Stack_}")  		# Original
 #	dk_set(${NAME}_stack 	"${_stack_}")  		# lowercase
-	dk_set(${NAME}_STACK 	"${_STACK_}")  		# UPPERCASE
+#	dk_set(${NAME}_STACK 	"${_STACK_}")  		# UPPERCASE
 
 		
 #	dk_debug("              NAME = ${NAME}")

@@ -1,14 +1,31 @@
-<# ::
+<# ::###################### BATCH #######################
 @echo off
-powershell -c "iex ((Get-Content '%~f0') -join [Environment]::Newline); iex 'main'"
-set exit_code=%ERRORLEVEL%
-echo exit_code = %exit_code%
-pause
-exit /b %exit_code%
-#>
-########################### Powershell #######################################
-function main {
+:main
+	echo(     BATCH: main(%*)
+	powershell -c "iex ((Get-Content '%~f0') -join [Environment]::Newline); iex 'main A'"
+	call :func2 C
+exit /b %errorlevel%
+::####################### END BATCH #####################>
 
-	Write-Host 'PowerShell:  main()'
+###################### POWRSHELL ########################
+function main {
+	echo "PowerShell: main($args)"
+	func2 "B";
 	exit 13
 }
+#################### END POWRSHELL ######################
+
+<# ::###################### BATCH #######################
+@echo off
+:func2
+	echo(     BATCH: func2(%*)
+	powershell -c "iex ((Get-Content '%~f0') -join [Environment]::Newline); iex 'func2 D'"
+exit /b %errorlevel%
+::####################### END BATCH #####################>
+
+###################### POWRSHELL ########################
+function func2 {
+	echo "PowerShell: func2($args)"
+	exit 13
+}
+#################### END POWRSHELL ######################

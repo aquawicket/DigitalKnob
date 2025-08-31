@@ -11,7 +11,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-
+	
 ########### msys2 ###########
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide

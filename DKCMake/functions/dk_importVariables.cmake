@@ -135,42 +135,17 @@ function(dk_importVariables)
 	set(PLUGIN_Branch "${BRANCH}" CACHE INTERNAL "")
 	
 	### PLUGIN_Args												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	#dk_unset(PLUGIN_Args)
 	set(PLUGIN_Args ${ARGV} CACHE INTERNAL "")
 	dk_debug("PLUGIN_Args = '${PLUGIN_Args}'")
 		
 	### PLUGIN_Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
-	#dk_unset(PLUGIN_Url)
-	if(ARGV0)
-		dk_isUrl("${ARGV0}")
-		if(dk_isUrl)
-			message("${ARGV0} is a valid Url")
-		endif()
+	dk_isUrl("${ARGV0}")
+	if(dk_isUrl)
+		set(PLUGIN_Url "${ARGV0}" CACHE INTERNAL "")
 	endif()
-	set(PLUGIN_Url "${ARGV0}" CACHE INTERNAL "")
 	dk_debug("PLUGIN_Url = '${PLUGIN_Url}'")
 
-#	dk_validate(PLUGIN                             "PLUGIN_Id()")					# ZLIB
-#	#dk_validate(PLUGIN_Args                       "PLUGIN_Args()")
-#	dk_validate(PLUGIN_Id                          "PLUGIN_Id()")					# ZLIB
-#	dk_validate(PLUGIN_Version                     "PLUGIN_Version()")
-#	#dk_validate(PLUGIN_Url                        "PLUGIN_Url()")
-#	dk_validate(PLUGIN_Url_Basename                "PLUGIN_Url_Basename()")
-#	dk_validate(PLUGIN_Url_Name                    "PLUGIN_Url_Name()")
-#	dk_validate(PLUGIN_Url_Extension               "PLUGIN_Url_Extension()")		# .zip
-#	dk_validate(PLUGIN_Import_Dirname              "PLUGIN_Import_Dirname()")
-#	dk_validate(PLUGIN_Import_Name                 "PLUGIN_Import_Name()")
-#	dk_validate(PLUGIN_Import_Path                 "PLUGIN_Import_Path()")
-#	dk_validate(PLUGIN_Install_Dirname             "PLUGIN_Install_Dirname()")		# C:/Users/Administrator/DigitalKnob/Development/3rdParty
-#	dk_validate(PLUGIN_Install_Name                "PLUGIN_Install_Name()")
-#	dk_validate(PLUGIN_Install_Path                "PLUGIN_Install_Path()")			# C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
-#	#dk_validate(PLUGIN_Tuple_Dir                   "PLUGIN_Tuple_Dir()")
-#	#dk_validate(PLUGIN_Build_Dir                   "PLUGIN_Build_Dir()")
-#	#dk_validate(PLUGIN_Config_Dir                  "PLUGIN_Config_Dir()")
-#	#dk_validate(PLUGIN_Debug_Dir                   "PLUGIN_Debug_Dir()")
-#	#dk_validate(PLUGIN_Release_Dir                 "PLUGIN_Release_Dir()")
-	
-	
+
 	PLUGIN_Id()					# ZLIB
 	#PLUGIN_Args()
 	PLUGIN_Id()					# ZLIB

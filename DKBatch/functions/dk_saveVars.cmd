@@ -28,7 +28,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	)
 
 	:: save the current environment variables
-	set > %DKCACHE_DIR%\current_vars.tmp
+	set > %DKCACHE_DIR%/current_vars.tmp
 %endfunction%
 
 
@@ -43,4 +43,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_saveVars
+	%dk_call% dk_echo "variables saved to %DKCACHE_DIR%/current_vars.tmp"
 %endfunction%

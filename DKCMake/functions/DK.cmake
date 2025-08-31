@@ -69,6 +69,7 @@ function(DKINIT)
 	dk_DKCMAKE_VARS()
 	
 	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_load.cmake")
+	dk_load("dk_call")
 	dk_load("dk_fatal")
 	
 	############ Get DKHTTP variables ############
@@ -121,6 +122,19 @@ function(DKINIT)
 			dk_getFileParams("$ENV{DKBRANCH_DIR}/dkconfig.txt")
 		endif()
 	endif()
+	
+	###### Initialize Import Variables ######
+	######################################################################################################
+	# If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
+	# dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
+	# itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
+	if(NOT CURRENT_PLUGIN)
+		if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
+			dk_importVariables(IMPORT_PATH "$ENV{DKSCRIPT_DIR}")
+			dk_envList(PLUGIN PUSH "${PLUGIN}")
+		endif()
+	endif()
+	
 	###### DKTEST MODE ######
 #	if(ENABLE_DKTEST)
 #		message("ENV{DKSCRIPT_PATH} = $ENV{DKSCRIPT_PATH}")
