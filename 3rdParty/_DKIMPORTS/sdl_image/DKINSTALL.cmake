@@ -50,7 +50,7 @@ dk_depend(sdl)
 #dk_import(https://github.com/libsdl-org/SDL_image.git BRANCH main PATCH) # SDL3
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_import("${SDL_IMAGE_DL}" PATCH)
-dk_import(PATCH)
+dk_import()
 
 
 ### LINK ###

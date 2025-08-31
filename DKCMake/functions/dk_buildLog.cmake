@@ -38,7 +38,7 @@ function(dk_buildLog)
 		dk_warning("Cannot write DKBUILD.log. Directory does not exist")
 		return()
 	endif()
-	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}")
+	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}\n")
 endfunction()
 
 

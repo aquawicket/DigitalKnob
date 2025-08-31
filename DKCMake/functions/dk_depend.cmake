@@ -37,32 +37,29 @@ function(dk_depend plugin) #target
 	endif()
 	
 	message("############ dk_depend(${plugin}) ############")
+	dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
+	dk_getPathToPlugin(${plugin} IMPORT_PATH)
+	dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
 	
-	dk_toUpper("${plugin}" PLUGIN)
-	dk_convertToCIdentifier(${PLUGIN} CURRENT_PLUGIN)
-	dk_set(CURRENT_PLUGIN "${CURRENT_PLUGIN}")
-	
-	dk_set(${CURRENT_PLUGIN}_Import_Name "${plugin}")							#<PLUGIN>_Import_Name
-	dk_getPathToPlugin(${plugin} ${CURRENT_PLUGIN}_Import_Path)
-	dk_importVariables(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
-	#dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}") 			#<PLUGIN>_Import_Path
-	#dk_dirname("${${CURRENT_PLUGIN}_Import_Path}" ${CURRENT_PLUGIN}_Import_Dirname)
-	#dk_set(${CURRENT_PLUGIN}_Import_Dirname "${${CURRENT_PLUGIN}_Import_Dirname}") 	#<PLUGIN>_Import_Dirname
+
 	
 	###### Push Plugin to the PLUGIN_STACK ######
-	dk_debug("\n\n############################## ${CURRENT_PLUGIN} ENTER ##############################")
-	dk_envList(PLUGIN PUSH "${CURRENT_PLUGIN}")
+	dk_echo("\n")
+	dk_debug(">>>>>########################### ${plugin} ENTER ##########################>>>>>")
+	dk_envList(PLUGIN PUSH "${PLUGIN}")
 			
-		list(APPEND dkdepend_list "${plugin}")
+		list(APPEND dkdepend_list "${${CURRENT_PLUGIN}_Import_Name}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 
-		dk_load(${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake)
+		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
 			
-		dk_enable(${plugin})
+		dk_enable("${${CURRENT_PLUGIN}_Import_Name}")
 	 
 	###### Pop Plugin from the PLUGIN_STACK ######
+	
+	dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")
 	dk_envList(PLUGIN POP)
-	dk_debug("\n############################## ${CURRENT_PLUGIN} EXIT ##############################\n\n")
+	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} CONTINUE #######################>>>>>")
 
 endfunction()
 

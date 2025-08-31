@@ -20,16 +20,16 @@ include_guard()
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
 #
-set(PLUGIN_Import_Path "${CMAKE_CURRENT_LIST_DIR}")
-dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
+#set(PLUGIN_Import_Path "${CMAKE_CURRENT_LIST_DIR}")
+#dk_getFileParams("${PLUGIN_Import_Path}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
-if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)
-	set(python_Import "${PLUGIN_Import_Name}_${Host_Tuple}_Import")
-elseif(${PLUGIN_Import_Name}_Import)
-	set(python_Import "${PLUGIN_Import_Name}_Import")
-endif()
-dk_importVariables(${${python_Import}})
+#dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
+#if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)
+#	set(python_Import "${PLUGIN_Import_Name}_${Host_Tuple}_Import")
+#elseif(${PLUGIN_Import_Name}_Import)
+#	set(python_Import "${PLUGIN_Import_Name}_Import")
+#endif()
+#dk_importVariables(${${python_Import}})
 #dk_import()	
 
 ###### PYTHON_EXE (first check) ######

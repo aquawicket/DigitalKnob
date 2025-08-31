@@ -22,7 +22,7 @@ include_guard()
 ### IMPORT ###
 #dk_import(https://github.com/zeux/pugixml.git)
 #dk_import(${pugixml_Import} PATCH)
-dk_import(PATCH)
+dk_import()
 
 if(Android)
 	dk_define(PUGIXML_NO_EXCEPTIONS)

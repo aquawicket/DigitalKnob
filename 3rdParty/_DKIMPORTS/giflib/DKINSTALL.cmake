@@ -30,7 +30,7 @@ dk_depend(autotools)
 
 ### IMPORT ###
 #dk_import(${giflib_Import} PATCH)
-dk_import(PATCH)
+dk_import()
 
 set(GIFLIB_USE_CMAKE ON)
 if(GIFLIB_USE_CMAKE)

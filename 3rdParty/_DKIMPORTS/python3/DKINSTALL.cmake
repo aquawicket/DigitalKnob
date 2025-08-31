@@ -18,8 +18,8 @@ include_guard()
 # https://wiki.termux.com/wiki/Python
 
 ##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate(Host_Tuple "dk_Host_Tuple()")
-set(python3_Import "${python3_${Host_Tuple}_Import}")
+#dk_validate(Host_Tuple "dk_Host_Tuple()")
+#set(python3_Import "${python3_${Host_Tuple}_Import}")
 if(NOT python3_Import)
 	set(python3_Import python)
 endif()

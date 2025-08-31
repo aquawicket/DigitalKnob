@@ -22,21 +22,22 @@ include_guard()
 #
 function(dk_patch Import_Name Install_Path)
 	dk_debugFunc()
-
-	if(NOT "${Import_Name}" STREQUAL "${PLUGIN_Import_Name}")
-		dk_fatal("Install_Path:${Import_Name} does NOT EQUAL PLUGIN_Import_Name:${PLUGIN_Import_Name}")
+	
+	dk_assertVar(CURRENT_PLUGIN)
+	if(NOT "${Import_Name}" STREQUAL "${${CURRENT_PLUGIN}_Import_Name}")
+		dk_fatal("Install_Path:${Import_Name} does NOT EQUAL PLUGIN_Import_Name:${${CURRENT_PLUGIN}_Import_Name}")
 	endif()
-	if(NOT "${Install_Path}" STREQUAL "${PLUGIN_Install_Path}")
-		dk_fatal("Install_Path:${Install_Path} does NOT EQUAL PLUGIN_Install_Path:${PLUGIN_Install_Path}")
+	if(NOT "${Install_Path}" STREQUAL "${${CURRENT_PLUGIN}_Install_Path}")
+		dk_fatal("Install_Path:${Install_Path} does NOT EQUAL PLUGIN_Install_Path:${${CURRENT_PLUGIN}_Install_Path}")
 	endif()
 	
-	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${PLUGIN_Import_Name} TO ${PLUGIN_Install_Path}")
+	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${${CURRENT_PLUGIN}_Import_Name} TO ${${CURRENT_PLUGIN}_Install_Path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
-	dk_notice("located in $ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name}/DKINSTALL.cmake")
+	dk_notice("located in $ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/DKINSTALL.cmake")
 	
-	dk_assertPath($ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name})
-	dk_assertPath(${PLUGIN_Install_Path})
-	dk_copy("$ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name}/" "${PLUGIN_Install_Path}/" OVERWRITE)
+	dk_assertPath("$ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}")
+	dk_assertPath("${CURRENT_PLUGIN}_Install_Path")
+	dk_copy("$ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/" "${${CURRENT_PLUGIN}_Install_Path}/" OVERWRITE)
 endfunction()
 
 

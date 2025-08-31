@@ -23,7 +23,7 @@ dk_depend(zlib)
 
 ### IMPORT ###
 #dk_import(${freetype_Import} PATCH)
-dk_import(PATCH)
+dk_import()
 
 ### LINK ###
 dk_include				(${FREETYPE}/include					FREETYPE_INCLUDE_DIR)
