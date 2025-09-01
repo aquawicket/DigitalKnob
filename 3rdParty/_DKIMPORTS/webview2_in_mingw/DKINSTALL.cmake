@@ -14,7 +14,8 @@ include_guard()
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 ############ webview2_in_mingw ############
-dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH)
+#dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH)
+dk_import()
 
 dk_assertPath("${WEBVIEW2_IN_MINGW}")
 dk_include("${WEBVIEW2_IN_MINGW}/WebView/include")
