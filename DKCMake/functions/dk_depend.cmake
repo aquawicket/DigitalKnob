@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+message("### dk_depend.cmake ###")
+
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -37,23 +39,24 @@ function(dk_depend plugin) #target
 	endif()
 	
 	message("############ dk_depend(${plugin}) ############")
-	dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
+	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	dk_getPathToPlugin(${plugin} IMPORT_PATH)
-	dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
-	
-
+	dk_basename("${IMPORT_PATH}" folder)
+	dk_toUpper("${folder}" PLUGIN)
+	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
+	#dk_set(CURRENT_PLUGIN "${PLUGIN}")
 	
 	###### Push Plugin to the PLUGIN_STACK ######
 	dk_echo("\n")
 	dk_debug(">>>>>########################### ${plugin} ENTER ##########################>>>>>")
 	dk_envList(PLUGIN PUSH "${PLUGIN}")
 			
-		list(APPEND dkdepend_list "${${CURRENT_PLUGIN}_Import_Name}")
+		list(APPEND dkdepend_list "${plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 
-		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
+		dk_load("${IMPORT_PATH}/DKINSTALL.cmake")
 			
-		dk_enable("${${CURRENT_PLUGIN}_Import_Name}")
+		dk_enable("${plugin}")
 	 
 	###### Pop Plugin from the PLUGIN_STACK ######
 	

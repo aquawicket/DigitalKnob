@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+message("### dk_import.cmake ###")
+
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -32,15 +34,17 @@ function(dk_import)
 	dk_debug("dk_import(${ARGV})")
 
 	dk_assertVar(CURRENT_PLUGIN)
-#	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")					########### PLUGIN_variables ###########	##### EXAMPLE #####
-#		dk_call(dk_set PLUGIN_Import_Path "$ENV{DKSCRIPT_DIR}")		# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
-#	elseif($ENV{CURRENT_PLUGIN}_Import_Path)
-#		dk_call(dk_set PLUGIN_Import_Path "${$ENV{CURRENT_PLUGIN}_Import_Path}")
-#	elseif(${CURRENT_PLUGIN}_Import_Path)
-#		dk_call(dk_set PLUGIN_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
-#	endif()
-#	dk_assertPath("${${CURRENT_PLUGIN}_Import_Path}")
-#	dk_debug("PLUGIN_Import_Path = ${${CURRENT_PLUGIN}_Import_Path}")	
+	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")					########### PLUGIN_variables ###########	##### EXAMPLE #####
+		dk_call(dk_set IMPORT_PATH "$ENV{DKSCRIPT_DIR}")			# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
+	elseif($ENV{CURRENT_PLUGIN}_Import_Path)
+		dk_call(dk_set IMPORT_PATH "${$ENV{CURRENT_PLUGIN}_Import_Path}")
+	elseif(${CURRENT_PLUGIN}_Import_Path)
+		dk_call(dk_set IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+	endif()
+	dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
+	dk_assertPath("${${CURRENT_PLUGIN}_Import_Path}")
+
+	
 			
 #	dk_basename("${${CURRENT_PLUGIN}_Import_Path}")
 #	dk_set(PLUGIN_Import_Name "${dk_basename}")						# PLUGIN_Import_Name						zlib

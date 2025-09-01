@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+message("### dk_importVariables.cmake ###")
+
 ### DK.cmake ####################################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -111,7 +113,7 @@ function(dk_importVariables)
 	### IMPORT_PATH (PLUGIN_Import_Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 	#dk_unset(IMPORT_PATH)
 	dk_getParameterValue(IMPORT_PATH)
-	#dk_debug("IMPORT_PATH = '${IMPORT_PATH}'")
+	dk_debug("IMPORT_PATH = '${IMPORT_PATH}'")
 	set(PLUGIN_Import_Path "${IMPORT_PATH}" CACHE INTERNAL "")
 
 	### INSTALL_ROOT (PLUGIN_Install_Dirname)					/c/Users/Administrator/DigitalKnob/Development/3rdParty
@@ -261,7 +263,8 @@ function(PLUGIN_DKConfig)
 		elseif(${PLUGIN}_Import)													# ZLIB_Import
 			dk_set(PLUGIN_Import "${PLUGIN}_Import")
 		else()
-			dk_error("No Import found for ${PLUGIN_Import_Name}:${PLUGIN_Import_Path}")
+			#
+	dk_error("No Import found for ${PLUGIN_Import_Name}:${PLUGIN_Import_Path}")
 		endif()
 		set(PLUGIN_Url "${${PLUGIN_Import}}" CACHE INTERNAL "")
 	else()
