@@ -37,7 +37,7 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 
 ::###### cmake_echo ######
 :cmake_echo
-	if [%1] == []  goto:eof
+	if "%1" equ "" (echo "ERROR: cmake_echo() parameter1 is invalid" & goto:eof)
 	
 	set "DKBRANCH=Development"
 	set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/DigitalKnob"
