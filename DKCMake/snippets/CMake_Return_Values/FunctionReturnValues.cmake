@@ -54,17 +54,30 @@ endfunction()
 
 
 ############### Main ###############
+message("\n")
+message("> fun_expr(NAME get_first_name())")
 fun_expr(NAME get_first_name())
 message(${NAME})
 
+message("\n")
+message("> fun_expr(NAME get_last_name())")
 fun_expr(NAME get_last_name())
 message(${NAME})
 
+message("\n")
+message("> fun_expr(NAME get_first_and_last())")
 fun_expr(NAME get_first_and_last())
 message(${NAME})
 
+message("\n")
+message("> fun_expr(NAME format_name(get_first_and_last()))")
 fun_expr(NAME format_name(get_first_and_last()))
 message(${NAME})
 
+message("\n")
+message("> fun_expr(NAME format_name(get_first_name() get_last_name()))")
 fun_expr(NAME format_name(get_first_name() get_last_name()))
 message(${NAME})
+
+message("\n")
+message("\n")
