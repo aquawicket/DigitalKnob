@@ -30,7 +30,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 #	set(python_Import "${PLUGIN_Import_Name}_Import")
 #endif()
 #dk_importVariables(${${python_Import}})
-#dk_import()	
+dk_import()	
 
 ###### PYTHON_EXE (first check) ######
 if(EXISTS "${PYTHON}")

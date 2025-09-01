@@ -54,6 +54,7 @@ function(dk_depend plugin) #target
 		list(APPEND dkdepend_list "${plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 
+		#dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
 		dk_load("${IMPORT_PATH}/DKINSTALL.cmake")
 			
 		dk_enable("${plugin}")

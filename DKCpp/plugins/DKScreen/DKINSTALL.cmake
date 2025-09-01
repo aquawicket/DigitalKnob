@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_importVariables(INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
+dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 ############ DKScreen ############
 #dk_depend(libx11-dev)	# XOpenDisplay()
