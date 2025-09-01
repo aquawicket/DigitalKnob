@@ -1,5 +1,5 @@
 #!/usr/bin/cmake -P
-message("### DK.cmake ###")
+# message("### DK.cmake ###")
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
