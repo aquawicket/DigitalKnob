@@ -41,11 +41,13 @@ function(dk_depend plugin) #target
 	message("############ dk_depend(${plugin}) ############")
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	dk_getPathToPlugin(${plugin} IMPORT_PATH)
+	
 	dk_basename("${IMPORT_PATH}" folder)
 	dk_toUpper("${folder}" PLUGIN)
 	dk_convertToCIdentifier(${PLUGIN} PLUGIN)
 	#dk_set(CURRENT_PLUGIN "${PLUGIN}")
 	
+	dk_set(IMPORT_PATH "${IMPORT_PATH}")
 	###### Push Plugin to the PLUGIN_STACK ######
 	dk_echo("\n")
 	dk_debug(">>>>>########################### ${plugin} ENTER ##########################>>>>>")
@@ -54,7 +56,7 @@ function(dk_depend plugin) #target
 		list(APPEND dkdepend_list "${plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 
-		#dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
+		dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
 		dk_load("${IMPORT_PATH}/DKINSTALL.cmake")
 			
 		dk_enable("${plugin}")

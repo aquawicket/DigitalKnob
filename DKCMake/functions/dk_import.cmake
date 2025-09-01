@@ -35,17 +35,28 @@ function(dk_import)
 
 	#dk_assertVar(CURRENT_PLUGIN)
 	if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")					########### PLUGIN_variables ###########	##### EXAMPLE #####
-		dk_call(dk_set IMPORT_PATH "$ENV{DKSCRIPT_DIR}")			# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
+		#dk_call(dk_set IMPORT_PATH "$ENV{DKSCRIPT_DIR}")			# PLUGIN_Import_Path						${DKIMPORTS_DIR}/zlib
+		dk_set(IMPORT_PATH "$ENV{DKSCRIPT_DIR}")
 	elseif($ENV{CURRENT_PLUGIN}_Import_Path)
-		dk_call(dk_set IMPORT_PATH "${$ENV{CURRENT_PLUGIN}_Import_Path}")
+		#dk_call(dk_set IMPORT_PATH "${$ENV{CURRENT_PLUGIN}_Import_Path}")
+		dk_set(IMPORT_PATH "${$ENV{CURRENT_PLUGIN}_Import_Path}")
 	elseif(${CURRENT_PLUGIN}_Import_Path)
-		dk_call(dk_set IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+		#dk_call(dk_set IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+		dk_set(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
 	endif()
 	dk_importVariables(IMPORT_PATH "${IMPORT_PATH}")
 	dk_assertPath("${${CURRENT_PLUGIN}_Import_Path}")
 
 	
-		
+	
+	dk_getParameter(APP)
+	if("${${PLUGIN_Import_Name}_Type}" STREQUAL "APP")
+		set(APP 1 CACHE INTERNAL "")
+	endif()
+	if(APP)
+		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+		dk_set(PLUGIN_Install_Root INSTALL_ROOT ${DKTOOLS_DIR})
+	endif()	
 	
 	if(EXISTS "${${CURRENT_PLUGIN}_Install_Path}")
 		dk_notice("${${CURRENT_PLUGIN}_Install_Name} already installed")
