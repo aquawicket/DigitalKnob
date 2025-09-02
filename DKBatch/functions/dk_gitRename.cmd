@@ -16,8 +16,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
-    %dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
-    "%GIT_EXE%" mv --force "%~1" "%~2"
+    %dk_call% dk_validate git_exe "%dk_call% dk_depend git"
+    "%git_exe%" mv --force "%~1" "%~2"
 %endfunction%
 
 

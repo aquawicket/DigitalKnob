@@ -21,10 +21,10 @@ function(dk_gitCreateBranch)
 	
 	set(branch ${ARGV0})
 	
-	dk_validate(GIT_EXE "dk_depend(git)")
+	dk_validate(git_exe "dk_depend(git)")
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
-	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
+	dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
+	dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
 endfunction()
 
 

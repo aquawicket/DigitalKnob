@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "url=%~1"
 	%dk_call% dk_depend git
 			
-	%dk_call% dk_exec %GIT_EXE% ls-remote %url% heads/*
+	%dk_call% dk_exec %git_exe% ls-remote %url% heads/*
 	
 	endlocal & (
 		set "dk_gitBranchName=%dk_exec%"

@@ -28,17 +28,17 @@ dk_findProgram(PACMAN_EXE pacman "${msys2}/usr/bin")
 
 
 ###### init the pacman keyring ######
-#dk_delete("${MSYS2_GPGDir}")
-if(NOT EXISTS "${MSYS2_GPGDir}")
-	set(ENV{PATH} "${MSYS2}/usr/bin:$ENV{PATH}")
-	set(ENV{MAKEPKG_LIBRARY} "${MSYS2}/usr/share/makepkg")
-	dk_findProgram(BASH_EXE bash "${MSYS2}/usr/bin")
+#dk_delete("${msys2_GPGDir}")
+if(NOT EXISTS "${msys2_GPGDir}")
+	set(ENV{PATH} "${msys2}/usr/bin:$ENV{PATH}")
+	set(ENV{MAKEPKG_LIBRARY} "${msys2}/usr/share/makepkg")
+	dk_findProgram(BASH_EXE bash "${msys2}/usr/bin")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
 	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
 	dk_killProcess(gpg-agent.exe NO_HALT)
 endif()
 
-if(NOT EXISTS "${MSYS2_DBPath}/sync")
+if(NOT EXISTS "${msys2_DBPath}/sync")
 	execute_process(COMMAND "${PACMAN_EXE}" -Syu --noconfirm)
 endif()
 ####################################

@@ -26,11 +26,11 @@ dk_gitCheckRemote() {
 	behind=0
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
-		dk_call dk_validate GIT_EXE "dk_call dk_depend git"
-		${GIT_EXE} -C ${DKBRANCH_DIR} remote update
-		branch=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
-		ahead=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count origin/${branch}..${branch})
-		behind=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count ${branch}..origin/${branch})
+		dk_call dk_validate git_exe "dk_call dk_depend git"
+		${git_exe} -C ${DKBRANCH_DIR} remote update
+		branch=$(${git_exe} -C ${DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
+		ahead=$(${git_exe} -C ${DKBRANCH_DIR} rev-list --count origin/${branch}..${branch})
+		behind=$(${git_exe} -C ${DKBRANCH_DIR} rev-list --count ${branch}..origin/${branch})
 		dk_call dk_info "${ahead} commits ahead, ${behind} commits behind"
 	fi
 }

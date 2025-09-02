@@ -1072,10 +1072,10 @@ dk_gitCheckRemote() {
 	behind=0
 	if [ -d "${DKBRANCH_DIR}/.git" ]; then
 		cd "${DKBRANCH_DIR}"
-		${GIT_EXE} -C ${DKBRANCH_DIR} remote update
-		branch=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
-		ahead=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count origin/$branch..$branch)
-		behind=$(${GIT_EXE} -C ${DKBRANCH_DIR} rev-list --count $branch..origin/$branch)
+		${git_exe} -C ${DKBRANCH_DIR} remote update
+		branch=$(${git_exe} -C ${DKBRANCH_DIR} rev-parse --abbrev-ref HEAD)
+		ahead=$(${git_exe} -C ${DKBRANCH_DIR} rev-list --count origin/$branch..$branch)
+		behind=$(${git_exe} -C ${DKBRANCH_DIR} rev-list --count $branch..origin/$branch)
 		dk_info "$ahead commits ahead, $behind commits behind"
 	fi
 }
@@ -1353,10 +1353,10 @@ dk_installGit() {
 		dk_installPackage git
 	fi
 	
-	GIT_EXE=$(command -v git)
-	[ -e ${GIT_EXE} ] || dk_error "GIT_EXE is invalid"
+	git_exe=$(command -v git)
+	[ -e ${git_exe} ] || dk_error "git_exe is invalid"
 	
-	dk_printVar GIT_EXE
+	dk_printVar git_exe
 }
 
 
@@ -1515,7 +1515,7 @@ dk_DKBRANCH_DIR() {
 	DKBRANCH="Development"
 	
 	if dk_pathExists "${DIGITALKNOB_DIR}"/"$FOLDER"/.git; then
-		BRANCH="$($GIT_EXE rev-parse --abbrev-ref HEAD)"
+		BRANCH="$($git_exe rev-parse --abbrev-ref HEAD)"
 		if [ "$BRANCH" = "$FOLDER" ]; then
 			DKBRANCH="$FOLDER"
 		fi
@@ -1902,18 +1902,18 @@ dk_gitUpdate() {
 	fi
 
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
-		dk_call "$GIT_EXE" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
+		dk_call "$git_exe" clone https://github.com/aquawicket/DigitalKnob.git "${DKBRANCH_DIR}"
 	fi
 	dk_call cd "${DKBRANCH_DIR}" #|| dk_error "cd $${DKBRANCH_DIR} failed!"
-	"$GIT_EXE" pull --all
-	dk_call "$GIT_EXE" checkout -- .
-	"$GIT_EXE" checkout "$DKBRANCH"
+	"$git_exe" pull --all
+	dk_call "$git_exe" checkout -- .
+	"$git_exe" checkout "$DKBRANCH"
 	if [ "${?}" = "0" ]; then
 		dk_info "$DKBRANCH branch selected"
 	else
 		dk_info "Remote has no $DKBRANCH branch. Creating..."
-		dk_call "$GIT_EXE" checkout -b "$DKBRANCH" main
-		dk_call "$GIT_EXE" push --set-upstream origin "$DKBRANCH"
+		dk_call "$git_exe" checkout -b "$DKBRANCH" main
+		dk_call "$git_exe" push --set-upstream origin "$DKBRANCH"
 	fi
 	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build.sh
 }
@@ -1932,32 +1932,32 @@ dk_gitCommit() {
 	
 	cd "${DKBRANCH_DIR}" #|| dk_error "cd \${DKBRANCH_DIR} failed!"
 	
-	STORE=$($GIT_EXE config credential.helper)
+	STORE=$($git_exe config credential.helper)
 	dk_printVar STORE
 	if [ -z "$STORE" ]; then
-		$GIT_EXE config --global credential.helper store
+		$git_exe config --global credential.helper store
 		dk_echo
 		dk_info "git credential.helper is now set to store"
 		dk_echo
 	fi
 	
-	USER_EMAIL=$($GIT_EXE config --global user.email)
+	USER_EMAIL=$($git_exe config --global user.email)
 	if [ -z "$USER_EMAIL" ]; then
 		dk_echo
 		dk_info "please enter an email address"
 		read input
-		$GIT_EXE config --global user.email "${input}"
+		$git_exe config --global user.email "${input}"
 		dk_echo
 		dk_info "git user.email '${input}' saved"
 		dk_echo
 	fi
 
-	USER_NAME=$($GIT_EXE config --global user.name)
+	USER_NAME=$($git_exe config --global user.name)
 	if [ -z "USER_NAME" ]; then
 		dk_echo
 		dk_info "please enter a username"
 		read input
-		$GIT_EXE config --global user.name "${input}"
+		$git_exe config --global user.name "${input}"
 		dk_echo
 		dk_info "git user.name '${input}' saved"
 		dk_echo
@@ -1971,9 +1971,9 @@ dk_gitCommit() {
 	dk_info "git commit \"${message}\""
 	dk_confirm || return 0
 	
-	#dk_call "$GIT_EXE" commit -a -m "${message}"
-	"$GIT_EXE" commit -a -m "${message}"
-    dk_call "$GIT_EXE" push
+	#dk_call "$git_exe" commit -a -m "${message}"
+	"$git_exe" commit -a -m "${message}"
+    dk_call "$git_exe" push
 }
 
 

@@ -31,7 +31,7 @@ dk_gitUpdate() {
 	#fi
 	
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
+	dk_call dk_validate git_exe "dk_call dk_installGit"
 	
 	if [ ! -d "${DKBRANCH_DIR}/.git" ]; then
 		
@@ -46,33 +46,33 @@ dk_gitUpdate() {
 			dk_call dk_copy "${DKBRANCH_DIR}" "${DKBRANCH_DIR}_BACKUP" OVERWRITE
 			set "PATH=${DKBRANCH_DIR}_BACKUP\DKBatch\functions;${PATH}"
 			rm -r -f "${DKBRANCH_DIR}"
-			"${GIT_EXE}" clone ${_url_} "${DKBRANCH_DIR}"
-			"${GIT_EXE}" -C ${DKBRANCH_DIR} pull --all
-			"${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -- .
-			"${GIT_EXE}" -C ${DKBRANCH_DIR} checkout ${_branch_}
+			"${git_exe}" clone ${_url_} "${DKBRANCH_DIR}"
+			"${git_exe}" -C ${DKBRANCH_DIR} pull --all
+			"${git_exe}" -C ${DKBRANCH_DIR} checkout -- .
+			"${git_exe}" -C ${DKBRANCH_DIR} checkout ${_branch_}
 			
 			if [ ! "${?}" = "0" ]; then
 				dk_call dk_echo "Remote has no '${_branch_}' branch. Creating..."
-				"${GIT_EXE}" -C ${DKBRANCH_DIR} checkout -b ${_branch_} main
-				"${GIT_EXE}" -C ${DKBRANCH_DIR} push --set-upstream origin ${_branch_}
+				"${git_exe}" -C ${DKBRANCH_DIR} checkout -b ${_branch_} main
+				"${git_exe}" -C ${DKBRANCH_DIR} push --set-upstream origin ${_branch_}
 			fi
 			return $?
 		fi
 		#####################################################################
 		
 		####### Clone into empty branch directory ######
-		"${GIT_EXE}" clone ${_url_} "${DKBRANCH_DIR}"
+		"${git_exe}" clone ${_url_} "${DKBRANCH_DIR}"
 	fi
 	
 	####### Update ######
-	"${GIT_EXE}" -C "${DKBRANCH_DIR}" pull --all
-	"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -- .
-	"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout "${DKBRANCH}"
+	"${git_exe}" -C "${DKBRANCH_DIR}" pull --all
+	"${git_exe}" -C "${DKBRANCH_DIR}" checkout -- .
+	"${git_exe}" -C "${DKBRANCH_DIR}" checkout "${DKBRANCH}"
 
 	if [ ! "${?}" = "0" ]; then
 		dk_call dk_info "Remote has no branch named ${DKBRANCH}. Creating..."
-		"${GIT_EXE}" -C "${DKBRANCH_DIR}" checkout -b "${DKBRANCH}" main
-		"${GIT_EXE}" -C "${DKBRANCH_DIR}" push --set-upstream origin "${DKBRANCH}"
+		"${git_exe}" -C "${DKBRANCH_DIR}" checkout -b "${DKBRANCH}" main
+		"${git_exe}" -C "${DKBRANCH_DIR}" push --set-upstream origin "${DKBRANCH}"
 	fi
 	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build
 }

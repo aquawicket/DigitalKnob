@@ -54,5 +54,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_depend git
-    %dk_call% dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
+    %dk_call% dk_installContextMenu "GITADD" "GIT ADD" "git_exe" "\"%git_exe%\" add \"%%1\""
 %endfunction%

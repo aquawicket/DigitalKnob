@@ -25,7 +25,7 @@ dk_addContextMenu() {
 	dk_call dk_set _exe_ "${2}"
 	dk_call dk_set _command_ "${3}"
 	
-	dk_call dk_info "Adding '${_menuTitle_}' context menu to Windows using ${GIT_EXE}"
+	dk_call dk_info "Adding '${_menuTitle_}' context menu to Windows using ${git_exe}"
 	
 	### delete existing key ###
 	dk_call dk_registryDeleteKey "HKEY_CLASSES_ROOT\AllFilesystemObjects\shell\${_menuTitle_}"
@@ -58,6 +58,6 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-	dk_call dk_addContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"${GIT_EXE}\" add \"%%1\""
+	dk_call dk_validate git_exe "dk_call dk_installGit"
+	dk_call dk_addContextMenu "GITADD" "GIT ADD" "git_exe" "\"${git_exe}\" add \"%%1\""
 }

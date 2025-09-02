@@ -47,11 +47,11 @@ DKINSTALL() {
 	[ -n "${GIT_DIR-}" ] && dk_call dk_fatal "ERROR: GIT_DIR should not be set."   # https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	############ DO NOT USE GIT_DIR ############
 	
-    export GIT_EXE="${GIT}/bin/git.exe"
+    export git_exe="${GIT}/bin/git.exe"
 	export GIT_BASH_EXE="${GIT}/bin/bash.exe"
     # export GIT-BASH_EXE="${GIT}/git-bash.exe"
 	# export GIT_PATCH_EXE="${GIT}/usr/bin/patch.exe"
-    [ -e "${GIT_EXE}" ] && return
+    [ -e "${git_exe}" ] && return
 	
 	###### INSTALL ######
     dk_call dk_echo 
@@ -63,13 +63,13 @@ DKINSTALL() {
 	else
 		dk_call dk_info "Installing ${git_Import} package . . ."
 		dk_call dk_installPackage git
-		(command -v git) && export GIT_EXE=$(command -v git)
+		(command -v git) && export git_exe=$(command -v git)
 	fi
 	
     ###### Install Git Context Menu ######
     #dk_call dk_depend git/contextMenu  
 	 
-#   [ ! -e "${GIT_EXE}" ] && dk_call dk_error "cannot find git"
+#   [ ! -e "${git_exe}" ] && dk_call dk_error "cannot find git"
 }
 
 
@@ -80,5 +80,5 @@ DKTEST() {
 
 	dk_call DKINSTALL
 	dk_call dk_echo "GIT = ${GIT}"
-	dk_call dk_echo "GIT_EXE = ${GIT_EXE}"
+	dk_call dk_echo "git_exe = ${git_exe}"
 }

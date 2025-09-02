@@ -16,38 +16,38 @@ function Global:dk_gitCommit() {
 	dk_call dk_validate env:DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}" #-or dk_call dk_error "cd \${DKBRANCH_DIR} failed!"
 	
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit";
+	dk_call dk_validate git_exe "dk_call dk_installGit";
 	
-	if(!($STORE = $(dk_call ${GIT_EXE} config credential.helper))){
+	if(!($STORE = $(dk_call ${git_exe} config credential.helper))){
 		dk_call dk_errorStatus;
 	}
 	if(!${STORE}){
-		dk_call ${GIT_EXE} config --global credential.helper store
+		dk_call ${git_exe} config --global credential.helper store
 		dk_call dk_echo "\n";
 		dk_call dk_info "git credential.helper is now set to store\n";
 		dk_call dk_echo "\n";
 	}
 	
-	if(!($USER_EMAIL = $(dk_call ${GIT_EXE} config --global user.email))){
+	if(!($USER_EMAIL = $(dk_call ${git_exe} config --global user.email))){
 		dk_call dk_errorStatus;
 	}
 	if(!${USER_EMAIL}){
 		dk_call dk_echo "\n";
 		dk_call dk_info "please enter an email address\n";
 		$input = Read-Host;
-		dk_call ${GIT_EXE} config --global user.email "${input}";
+		dk_call ${git_exe} config --global user.email "${input}";
 		dk_call dk_echo "\n";
 		dk_call dk_info "git user.email '${input}' saved\n";
 		dk_call dk_echo "\n";
 	}
-	if(!($USER_NAME = $(dk_call ${GIT_EXE} config --global user.name))){
+	if(!($USER_NAME = $(dk_call ${git_exe} config --global user.name))){
 		dk_call dk_errorStatus
 	}
 	if(!${USER_NAME}){
 		dk_call dk_echo "\n";
 		dk_call dk_info "please enter a username\n";
 		$input = Read-Host
-		dk_call ${GIT_EXE} config --global user.name "${input}"
+		dk_call ${git_exe} config --global user.name "${input}"
 		dk_call dk_echo "\n";
 		dk_call dk_info "git user.name '${input}' saved\n";
 		dk_call dk_echo "\n";
@@ -61,8 +61,8 @@ function Global:dk_gitCommit() {
 	dk_call dk_info "git commit `"${message}`"\n";
 	dk_call dk_confirm -or return 0;
 	
-	dk_call ${GIT_EXE} commit -a -m "${message}";
-    dk_call ${GIT_EXE} push;
+	dk_call ${git_exe} commit -a -m "${message}";
+    dk_call ${git_exe} push;
 }
 
 

@@ -18,10 +18,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for %%# in (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) do set "dk_toUpper=!dk_toUpper:%%#=%%#!")
    
    
-    ::###### output ######
+	::###### output ######
 	endlocal & (
 		set "dk_toUpper=%dk_toUpper%"
-		if "%~2" neq "" (set "%~2=%dk_toUpper%")
+		if "%~2" neq "" (
+			set "%~2=%dk_toUpper%"
+		) else (
+			echo %dk_toUpper%
+		)
 	)
 %endfunction%
 

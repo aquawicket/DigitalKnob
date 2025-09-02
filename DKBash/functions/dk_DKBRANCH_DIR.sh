@@ -35,8 +35,8 @@ dk_DKBRANCH_DIR() {
 		
 		dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 		if dk_call dk_pathExists "${DIGITALKNOB_DIR}"/"${FOLDER}"/.git; then
-			dk_call dk_validate GIT_EXE "dk_call dk_installGit"
-			branch="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
+			dk_call dk_validate git_exe "dk_call dk_installGit"
+			branch="$(${git_exe} rev-parse --abbrev-ref HEAD)"
 			if [ "${branch}" = "${FOLDER}" ]; then
 				[ -z "${DKBRANCH-}" ] && export DKBRANCH="${FOLDER}"
 			fi

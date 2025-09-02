@@ -18,7 +18,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_confirm || %return%
    
     %dk_call% dk_chdir %DKCPP_PLUGINS_DIR%
-    "%GIT_EXE%" -C %DKBRANCH_DIR% clean -f -d
+    "%git_exe%" -C %DKBRANCH_DIR% clean -f -d
 %endfunction%
 
 

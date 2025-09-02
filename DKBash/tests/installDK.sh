@@ -36,12 +36,12 @@ dk_source dk_pause
 dk_source dk_exit
 
 ###### Run Program ######
-dk_validate GIT_EXE "dk_installGit"
+dk_validate git_exe "dk_installGit"
 dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
 if [ ! -e "$DKBRANCH_DIR/.git" ]; then
-	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
+	$git_exe clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
-	$GIT_EXE checkout $DKBRANCH
+	$git_exe checkout $DKBRANCH
 	echo "Digitalknob installation complete"
 else
 	echo "DigitalKnob is already installed at $DKBRANCH_DIR"

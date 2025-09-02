@@ -27,7 +27,7 @@ endif()
 ###### GET CYGPATH_EXE ######
 if(NOT EXISTS "${CYGPATH_EXE}")
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_findProgram(CYGPATH_EXE cygpath.exe "${MSYS2}/usr/bin")
+	dk_findProgram(CYGPATH_EXE cygpath.exe "${msys2}/usr/bin")
 endif()
 
 if(NOT EXISTS "${CYGPATH_EXE}")

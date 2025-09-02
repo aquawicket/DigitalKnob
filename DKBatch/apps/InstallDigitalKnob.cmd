@@ -14,7 +14,7 @@ set "REPO_PATH=%USERPROFILE:\=/%/DigitalKnob/%BRANCH%"
 set "REPO_BUNDLE=%DKSTORAGE_DIR%/DigitalKnob.git"
 set "GIT_URL=https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
 set "GIT_INSTALL=%DKSTORAGE_DIR%/PortableGit-2.46.2-64-bit.7z.exe"
-set "GIT_EXE=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
+set "git_exe=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
 
 
 	rem # Download: https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe
@@ -29,16 +29,16 @@ set "GIT_EXE=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
 	
 	
 rem ######### OFFLINE #########
-if NOT EXIST "%GIT_EXE%" (
+if NOT EXIST "%git_exe%" (
 	echo ### Installing git
 	"!GIT_INSTALL!"
 )
 
 echo ### Configuring git
-"%GIT_EXE%" config --global init.defaultBranch main
-"%GIT_EXE%" config --global credential.helper store
-"%GIT_EXE%" config --global user.email %EMAIL%
-"%GIT_EXE%" config --global user.name %USERNAME%
+"%git_exe%" config --global init.defaultBranch main
+"%git_exe%" config --global credential.helper store
+"%git_exe%" config --global user.email %EMAIL%
+"%git_exe%" config --global user.name %USERNAME%
 
 if "%RELOAD_REPO%" equ "1" (
 	echo ### Reloading the local repository 
@@ -49,19 +49,19 @@ if NOT EXIST "%REPO_PATH%/.git" (
 	if "%ONLINE%" equ "1" (
 		echo ######### ONLINE #########
 		echo ### Clone DigitalKnob repository from Github
-		"%GIT_EXE%" clone %REPO_URL% "%REPO_PATH%"
+		"%git_exe%" clone %REPO_URL% "%REPO_PATH%"
 		
 	rem ######### OFFLINE #########
 	) else (
 		echo ### Cloning DigitalKnob repository from local file
-		"%GIT_EXE%" clone "%REPO_BUNDLE%" "%REPO_PATH%"
+		"%git_exe%" clone "%REPO_BUNDLE%" "%REPO_PATH%"
 	)
 )
 
 echo ### Git updating local repository
-"%GIT_EXE%" -C "%REPO_PATH%" pull --all
-"%GIT_EXE%" -C "%REPO_PATH%" checkout -- .
-"%GIT_EXE%" -C "%REPO_PATH%" checkout %BRANCH%
+"%git_exe%" -C "%REPO_PATH%" pull --all
+"%git_exe%" -C "%REPO_PATH%" checkout -- .
+"%git_exe%" -C "%REPO_PATH%" checkout %BRANCH%
 
 
 if "%RELOAD_BUNDLE%" equ "1" (
@@ -69,7 +69,7 @@ if "%RELOAD_BUNDLE%" equ "1" (
 )
 if NOT EXIST "%REPO_BUNDLE%" (
 	echo ### Backing up repository to bundle file
-	"%GIT_EXE%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all
+	"%git_exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all
 )
 
 
@@ -89,17 +89,17 @@ if "%GIT_COMMIT%" equ "1" (
 	rem ######### OFFLINE #########
 	echo ### Save changes to local repository
 	if "%commit_msg%" equ "" (set "commit_msg=git commit %date%")
-	"%GIT_EXE%" -C "%REPO_PATH%" commit -a -m "%commit_msg%"
+	"%git_exe%" -C "%REPO_PATH%" commit -a -m "%commit_msg%"
  
 	echo ### Backing up repository to bundle file
-	"%GIT_EXE%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all 
+	"%git_exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all 
 
 	rem ######### ONLINE #########	
 	if "%ONLINE%" equ "1" (
 		echo ######### ONLINE #########
 		echo ### Pushing changes to Github
-		"%GIT_EXE%" -C "%REPO_PATH%" remote set-url origin %REPO_URL%
-		"%GIT_EXE%" -C "%REPO_PATH%" push
+		"%git_exe%" -C "%REPO_PATH%" remote set-url origin %REPO_URL%
+		"%git_exe%" -C "%REPO_PATH%" push
 	)
 )
 

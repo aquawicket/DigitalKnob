@@ -36,8 +36,8 @@ function(dk_SH_EXE)
 	### from Msys2 bash ###
 	if(NOT EXISTS "${SH_EXE}")
 		dk_validate(MSYS2 "dk_depend(msys2)")
-		dk_findProgram(MSYS2_SH_EXE sh "${MSYS2}/usr/bin")
-		dk_set(SH_EXE ${MSYS2_SH_EXE})
+		dk_findProgram(MSYS2_SH_EXE sh "${msys2}/usr/bin")
+		dk_set(SH_EXE ${msys2_SH_EXE})
 	endif()
 	
 	if(NOT EXISTS "${SH_EXE}")

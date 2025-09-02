@@ -31,17 +31,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::		%dk_call% dk_isEmptyDirectory "%_DIR_%" || (%dk_call% dk_delete "%_DIR_%")
 ::	)
 	
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
+	%dk_call% dk_validate git_exe "%dk_call% dk_depend git"
 	
 	::###### Clone if directory doesn't EXIST or is empty
 	if NOT EXIST "%_DIR_%" (%dk_call% dk_mkdir "%_DIR_:/=\%")
-	%dk_call% dk_isEmptyDirectory "%_DIR_%" && ("%GIT_EXE%" -C "%_DIR_%" clone %_URL_% "%_DIR_%" && %return%)
+	%dk_call% dk_isEmptyDirectory "%_DIR_%" && ("%git_exe%" -C "%_DIR_%" clone %_URL_% "%_DIR_%" && %return%)
 	
 	::###### Fetch and checkout if directory already exists and is NOT empty
-::	"%GIT_EXE%" -C "%_DIR_%" init -b %_BRANCH_%
-::	"%GIT_EXE%" -C "%_DIR_%" remote add origin %_URL_%
-::	"%GIT_EXE%" -C "%_DIR_%" fetch
-::	"%GIT_EXE%" -C "%_DIR_%" checkout -t origin/%_BRANCH_% -f
+::	"%git_exe%" -C "%_DIR_%" init -b %_BRANCH_%
+::	"%git_exe%" -C "%_DIR_%" remote add origin %_URL_%
+::	"%git_exe%" -C "%_DIR_%" fetch
+::	"%git_exe%" -C "%_DIR_%" checkout -t origin/%_BRANCH_% -f
 	
 %endfunction%
 

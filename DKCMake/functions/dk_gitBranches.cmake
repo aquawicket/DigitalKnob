@@ -22,8 +22,8 @@ function(dk_gitBranches)
 	set(branch ${ARGV0})
 	
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
-	dk_validate(GIT_EXE "dk_installGit()")              
-	execute_process(COMMAND "${GIT_EXE}" branch WORKING_DIRECTORY $ENV{DKBRANCH_DIR} OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
+	dk_validate(git_exe "dk_installGit()")              
+	execute_process(COMMAND "${git_exe}" branch WORKING_DIRECTORY $ENV{DKBRANCH_DIR} OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
 	string(REPLACE "\n" ";" branch_list ${output})
 	
 	# Iterate over the list and trim each element

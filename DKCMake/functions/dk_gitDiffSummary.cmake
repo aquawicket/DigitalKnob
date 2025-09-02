@@ -25,8 +25,8 @@ function(dk_gitDiffSummary)
 	dk_chdir($ENV{DKBRANCH_DIR})
 	
 	# git --no-pager diff --compact-summary
-	dk_exec("${GIT_EXE}" --no-pager diff --compact-summary)
-    #execute_process(COMMAND "${GIT_EXE}" --no-pager diff --compact-summary WORKING_DIRECTORY ${PWD})
+	dk_exec("${git_exe}" --no-pager diff --compact-summary)
+    #execute_process(COMMAND "${git_exe}" --no-pager diff --compact-summary WORKING_DIRECTORY ${PWD})
 endfunction()
 
 

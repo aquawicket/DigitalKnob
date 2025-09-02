@@ -30,11 +30,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_delete %git_file%
 	)
 	
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
+	%dk_call% dk_validate git_exe "%dk_call% dk_depend git"
 	
 	::###### Back up the repositiory to a git_file
 	::git -C <repo_path> bundle create <git_file> --all
-	"%GIT_EXE%" -C "%repo_path%" bundle create "%git_file%" --all
+	"%git_exe%" -C "%repo_path%" bundle create "%git_file%" --all
 	
 %endfunction%
 

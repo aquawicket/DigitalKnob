@@ -46,7 +46,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 
 	%dk_call% dk_depend git
-	echo GIT_EXE = %GIT_EXE%
+	echo git_exe = %git_exe%
 
 ::	%dk_call% dk_depend bash GIT
 ::	echo BASH_EXE = %BASH_EXE%

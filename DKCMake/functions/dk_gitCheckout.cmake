@@ -21,7 +21,7 @@ function(dk_gitCheckout)
 	
 	dk_depend(git)
 	
-	dk_exec("${GIT_EXE}" checkout ${ARGV0})
+	dk_exec("${git_exe}" checkout ${ARGV0})
 endfunction()
 
 

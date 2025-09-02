@@ -20,7 +20,7 @@ function Global:dk_DKBRANCH_DIR() {
 			${env:DKBRANCH}="Development";
 			
 			if(dk_call dk_pathExists "$(dk_call dk_DIGITALKNOB_DIR)/${folder}/.git"){
-				${branch} = $("${GIT_EXE} rev-parse --abbrev-ref HEAD");
+				${branch} = $("${git_exe} rev-parse --abbrev-ref HEAD");
 				if("${branch}" -eq "${folder}") {
 					${env:DKBRANCH}="${branch}";
 				}

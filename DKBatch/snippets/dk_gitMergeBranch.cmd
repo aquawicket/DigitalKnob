@@ -29,20 +29,20 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	echo Merging To: %destination%
 
 	:: ### Validate git.exe ###
-	%dk_call% dk_validate GIT_EXE  "%dk_call% dk_depend git"
+	%dk_call% dk_validate git_exe  "%dk_call% dk_depend git"
 	%dk_call% dk_chdir "%DKBRANCH_DIR%"
 
 	pause
 	echo Merging %branch% into %destination% and pushing to remote
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %branch%
+	"%git_exe%" -C "%DKBRANCH_DIR%" checkout %branch%
 	pause
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" pull
+	"%git_exe%" -C "%DKBRANCH_DIR%" pull
 	pause
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout %destination%
+	"%git_exe%" -C "%DKBRANCH_DIR%" checkout %destination%
 	pause
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" pull origin %destination%
+	"%git_exe%" -C "%DKBRANCH_DIR%" pull origin %destination%
 	pause
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" merge --no-ff --no-commit %branch%
+	"%git_exe%" -C "%DKBRANCH_DIR%" merge --no-ff --no-commit %branch%
 	pause
 
 	if "%ERRORLEVEL%" neq "0" (
@@ -50,7 +50,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		echo THERE WAS AN ERROR MERGING.
 		echo You will need to fix any existing conflicts to complete the merge.
 		pause
-		"%GIT_EXE%" -C "%DKBRANCH_DIR%" git status
+		"%git_exe%" -C "%DKBRANCH_DIR%" git status
 		echo AFTER ALL CONFLICTS ARE RESOLVED, CONTINUE.
 		pause
 	) else (
@@ -61,19 +61,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:resolved
 	:: push merge to %destination%
 	echo Pushing merge to %destination%
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" commit -a -m "Merge %branch% Branch in to %destination%"
+	"%git_exe%" -C "%DKBRANCH_DIR%" commit -a -m "Merge %branch% Branch in to %destination%"
 	if "%ERRORLEVEL%" neq "0" (
 		echo THERE WAN AN ERROR COMMITING.
 		goto :conflicts
 	)
 
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" push origin %destination%
+	"%git_exe%" -C "%DKBRANCH_DIR%" push origin %destination%
 
 	:: Bring branch up to date with %destination%
 	echo Bringing %branch% up to date with %destination%
-	"%GIT_EXE%" -C %DKBRANCH_DIR% checkout %branch%
-	"%GIT_EXE%" -C %DKBRANCH_DIR% merge %destination%
-	"%GIT_EXE%" -C %DKBRANCH_DIR% push
+	"%git_exe%" -C %DKBRANCH_DIR% checkout %branch%
+	"%git_exe%" -C %DKBRANCH_DIR% merge %destination%
+	"%git_exe%" -C %DKBRANCH_DIR% push
 	
 	%dk_call% dk_success "THE MERGE IS COMPLETE."
 %endfunction%

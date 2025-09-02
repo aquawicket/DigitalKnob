@@ -35,7 +35,7 @@ function(dk_DKBRANCH_DIR)
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 		
 		# TODO: If the current folder matches the current branch set DKBRANCH, otherwise default to Development
-		# BRANCH="$(${GIT_EXE} rev-parse --abbrev-ref HEAD)"
+		# BRANCH="$(${git_exe} rev-parse --abbrev-ref HEAD)"
 		if(EXISTS "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}/.git")
 			dk_dirname(${CMAKE_CURRENT_LIST_DIR})
 			dk_source(dk_basename)

@@ -18,10 +18,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	for %%# in (a b c d e f g h i j k l m n o p q r s t u v w x y z) do set "dk_toLower=!dk_toLower:%%#=%%#!")
 
 		
-    ::###### output ######
+   ::###### output ######
 	endlocal & (
 		set "dk_toLower=%dk_toLower%"
-		if "%~2" neq "" (set "%~2=%dk_toLower%") else (echo %dk_toLower%)
+		if "%~2" neq "" (
+			set "%~2=%dk_toLower%"
+		) else (
+			echo %dk_toLower%
+		)
 	)
 %endfunction%
 

@@ -94,14 +94,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)
 ::				)
 ::				%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-::				%dk_call% dk_command %GIT_EXE% clone !%CURRENT_PLUGIN%_URL! !%CURRENT_PLUGIN%_DIR!
+::				%dk_call% dk_command %git_exe% clone !%CURRENT_PLUGIN%_URL! !%CURRENT_PLUGIN%_DIR!
 ::			)
 ::			%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-::			%dk_call% dk_exec %GIT_EXE% checkout -- .
-::			%dk_call% dk_exec %GIT_EXE% checkout !%CURRENT_PLUGIN%_BRANCH!)
-::			%dk_call% dk_exec %GIT_EXE% pull
+::			%dk_call% dk_exec %git_exe% checkout -- .
+::			%dk_call% dk_exec %git_exe% checkout !%CURRENT_PLUGIN%_BRANCH!)
+::			%dk_call% dk_exec %git_exe% pull
 ::			if defined %CURRENT_PLUGIN%_TAG (
-::				%dk_call% dk_exec %GIT_EXE% checkout !{%CURRENT_PLUGIN%_TAG!
+::				%dk_call% dk_exec %git_exe% checkout !{%CURRENT_PLUGIN%_TAG!
 ::			)
 ::			
 ::		rem ###### Import from Download File ######

@@ -17,7 +17,7 @@ function Global:dk_gitUpdate() {
 #		if(!(dk_call dk_confirm)){ return 0; }
 #	}
 
-	dk_call dk_validate GIT_EXE "dk_call dk_installGit";
+	dk_call dk_validate git_exe "dk_call dk_installGit";
 	if( !(dk_call dk_pathExists "${env:DKBRANCH_DIR}/.git") ){
 		if(dk_call dk_pathExists "${env:DKBRANCH_DIR}"){
 			###### Backup Branch directory AND clone ######
@@ -25,31 +25,31 @@ function Global:dk_gitUpdate() {
 				dk_call dk_copy "${env:DKBRANCH_DIR}" "${env:DKBRANCH_DIR}_BACKUP" OVERWRITE;
 			}
 			Remove-Item -Recurse -Force "${env:DKBRANCH_DIR}";
-			dk_call "${GIT_EXE}" clone ${_url_} "${env:DKBRANCH_DIR}";
-			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} pull --all;
-			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -- .;
-			dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH}; # || {
+			dk_call "${git_exe}" clone ${_url_} "${env:DKBRANCH_DIR}";
+			dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} pull --all;
+			dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout -- .;
+			dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH}; # || {
 #				dk_call dk_echo "Remote has no '${env:DKBRANCH}' branch. Creating...";
-#				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
-#				dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
+#				dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
+#				dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
 #			}
 			return;
 		}
 
-		dk_call "${GIT_EXE}" clone "${url}" "${env:DKBRANCH_DIR}";
+		dk_call "${git_exe}" clone "${url}" "${env:DKBRANCH_DIR}";
 	}
 	
 	###### Update ######
 	#dk_call cd "${env:DKBRANCH_DIR}" #-or dk_call dk_error "cd $${DKBRANCH_DIR} failed!"
-	dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} pull --all;
-	dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -- .;
-	dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH};
+	dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} pull --all;
+	dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout -- .;
+	dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout ${env:DKBRANCH};
 	if( $? -eq "0" ){
 		dk_call dk_info "${env:DKBRANCH} branch selected";
 	} else {
 		dk_call dk_info "Remote has no ${env:DKBRANCH} branch. Creating...";
-		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
-		dk_call "${GIT_EXE}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
+		dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} checkout -b ${env:DKBRANCH} main;
+		dk_call "${git_exe}" -C ${env:DKBRANCH_DIR} push --set-upstream origin ${env:DKBRANCH};
 	}
 	#dk_call chmod +x "${env:DKBRANCH_DIR}"/build;
 }

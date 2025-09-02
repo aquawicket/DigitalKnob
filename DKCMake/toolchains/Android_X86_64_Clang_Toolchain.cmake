@@ -16,7 +16,7 @@ dk_set(CMAKE_TOOLCHAIN_FILE				"${ANDROID_NDK}/buil/cmake/android.toolchain.cmak
 dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 if(Windows_Host)
 	#dk_validate(MSYS2_MAKE_PROGRAM		"dk_depend(msys2)")
-	#dk_set(CMAKE_MAKE_PROGRAM			"${MSYS2_BIN}/make.exe")
+	#dk_set(CMAKE_MAKE_PROGRAM			"${msys2_BIN}/make.exe")
 	dk_set(CMAKE_MAKE_PROGRAM			"${ANDROID_NDK}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
 else()
 	dk_set(CMAKE_MAKE_PROGRAM			"make")

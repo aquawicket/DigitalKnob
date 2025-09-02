@@ -60,8 +60,8 @@ function(dk_BASH_EXE)
 		### from dk_findProgram in Msys2 ###
 		if(NOT EXISTS "${BASH_EXE}")
 			dk_validate(MSYS2 "dk_depend(msys2)")
-			dk_findProgram(MSYS2_BASH_EXE bash "${MSYS2}/usr/bin")
-			set(BASH_EXE ${MSYS2_BASH_EXE})
+			dk_findProgram(MSYS2_BASH_EXE bash "${msys2}/usr/bin")
+			set(BASH_EXE ${msys2_BASH_EXE})
 		endif()
 	endif()
 	

@@ -11,7 +11,7 @@ dk_set(CMAKE_SKIP_RPATH 					ON)
 dk_set(CMAKE_CROSSCOMPILING 				OFF)
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-dk_prependEnvPath("${MSYS2}/usr/bin")
+dk_prependEnvPath("${msys2}/usr/bin")
 
 dk_validate(COSMOCC "dk_depend(cosmocc)")
 dk_prependEnvPath("${COSMOCC}/bin")

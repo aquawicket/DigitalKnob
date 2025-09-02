@@ -29,21 +29,21 @@ function(dk_gitUpdate)
 		set(branch "Development")									#DEFAULT
 	endif()
 	
-	dk_validate(GIT_EXE "dk_depend(git)")
+	dk_validate(git_exe "dk_depend(git)")
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	
 	if(NOT EXISTS "$ENV{DKBRANCH_DIR}/.git")
-		dk_exec("${GIT_EXE}" clone ${url} "$ENV{DKBRANCH_DIR}")
+		dk_exec("${git_exe}" clone ${url} "$ENV{DKBRANCH_DIR}")
 	endif()
 	
-	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} pull --all)
-    dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -- .)
+	dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} pull --all)
+    dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} checkout -- .)
 	
-	dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout ${branch})	
+	dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} checkout ${branch})	
 	if(NOT ${dk_exec_exitcode} EQUAL 0)
 		dk_echo("Remote has no ${branch} branch. Creating...")
-		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
-		dk_exec("${GIT_EXE}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
+		dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} checkout -b ${branch} main)
+		dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} push --set-upstream origin ${branch})
 	endif()
 endfunction()
 

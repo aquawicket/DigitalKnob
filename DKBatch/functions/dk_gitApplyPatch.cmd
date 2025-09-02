@@ -25,8 +25,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	%dk_call% dk_validate GIT_PATCH_EXE "%dk_call% dk_depend git"
 ::	"%GIT_PATCH_EXE%" --directory=%directory% < %patchFile% --verbose --dry-run
 	
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_depend git"
-	"%GIT_EXE%" "-C %DKBRANCH_DIR% apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
+	%dk_call% dk_validate git_exe "%dk_call% dk_depend git"
+	"%git_exe%" "-C %DKBRANCH_DIR% apply --verbose --no-index --unsafe-paths --directory=%directory% %patchFile%
 	
 %endfunction%
 

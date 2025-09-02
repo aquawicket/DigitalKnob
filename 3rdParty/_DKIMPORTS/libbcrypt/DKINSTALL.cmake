@@ -24,21 +24,21 @@ endif()
 # Clang
 if(Windows_Arm64_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/clangarm64/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${msys2}/clangarm64/lib/libbcrypt.a")
 elseif(Windows_X86_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/clang32/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${msys2}/clang32/lib/libbcrypt.a")
 elseif(Windows_X86_64_Clang)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/clang64/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${msys2}/clang64/lib/libbcrypt.a")
 
 # Gcc
 elseif(Windows_X86_Gcc)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/mingw32/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${msys2}/mingw32/lib/libbcrypt.a")
 elseif(Windows_X86_64_Gcc)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/mingw64/lib/libbcrypt.a")
+	dk_set(LIBBCRYPT_LIB "${msys2}/mingw64/lib/libbcrypt.a")
 
 # Msvc
 elseif(Windows_Arm32_Msvc)
@@ -53,7 +53,7 @@ elseif(Windows_X86_64_Msvc)
 # Ucrt
 elseif(Windows_X86_64_Ucrt)
 	dk_validate(MSYS2 "dk_depend(msys2)")
-	dk_set(LIBBCRYPT_LIB "${MSYS2}/ucrt64/lib/libbcrypt.a")	
+	dk_set(LIBBCRYPT_LIB "${msys2}/ucrt64/lib/libbcrypt.a")	
 endif()
 
 

@@ -11,7 +11,7 @@ dk_set(CMAKE_SKIP_RPATH 					ON)
 dk_set(CMAKE_CROSSCOMPILING 				OFF)
 
 dk_validate(MSYS2 "dk_depend(msys2)")
-dk_prependEnvPath("${MSYS2}/usr/bin")
+dk_prependEnvPath("${msys2}/usr/bin")
 
 dk_validate(COSMOCC "dk_depend(cosmocc)")
 dk_prependEnvPath("${COSMOCC}/bin")
@@ -26,7 +26,7 @@ else()
 endif()
 set(CMAKE_FORCE_UNIX_PATHS 1)
 dk_validate(MSYS2_MAKE_PROGRAM				"dk_depend(msys2)")
-dk_set(CMAKE_MAKE_PROGRAM					"${MSYS2_MAKE_PROGRAM}")
+dk_set(CMAKE_MAKE_PROGRAM					"${msys2_MAKE_PROGRAM}")
 dk_append(CMAKE_C_FLAGS						-DCOSMOPOLITAN)# -std=gnu17)   # -D_CRT_SECURE_NO_WARNINGS 
 dk_append(CMAKE_CXX_FLAGS					-DCOSMOPOLITAN)# -std=gnu++17) # -D_CRT_SECURE_NO_WARNINGS
 dk_append(CMAKE_EXE_LINKER_FLAGS			-static) # -s)

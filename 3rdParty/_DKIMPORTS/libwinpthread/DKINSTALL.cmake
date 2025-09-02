@@ -18,13 +18,13 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_validate(MSYS2 "dk_depend(msys2)")
 
 if(Windows_X86_Clang)
-	dk_set(LIBWINPTHREAD ${MSYS2}/clang32/lib)
+	dk_set(LIBWINPTHREAD ${msys2}/clang32/lib)
 elseif(Windows_X86_64_Clang)
-	dk_set(LIBWINPTHREAD ${MSYS2}/clang64/lib)
+	dk_set(LIBWINPTHREAD ${msys2}/clang64/lib)
 elseif(Windows_X86_Gcc)
-	dk_set(LIBWINPTHREAD ${MSYS2}/mingw32/lib)
+	dk_set(LIBWINPTHREAD ${msys2}/mingw32/lib)
 elseif(Windows_X86_64_Gcc)
-	dk_set(LIBWINPTHREAD ${MSYS2}/mingw64/lib)
+	dk_set(LIBWINPTHREAD ${msys2}/mingw64/lib)
 endif()
 
 

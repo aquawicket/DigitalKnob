@@ -27,7 +27,7 @@ function(dk_getGitBranchName url rtn_var)
 	
 	dk_depend(git)
 			
-	execute_process(COMMAND ${GIT_EXE} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE gitBranchName)
+	execute_process(COMMAND ${git_exe} ls-remote ${url} heads/* RESULT_VARIABLE result OUTPUT_VARIABLE gitBranchName)
 	set(${rtn_var} ${gitBranchName} PARENT_SCOPE)
 endfunction()
 

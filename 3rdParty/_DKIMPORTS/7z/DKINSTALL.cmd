@@ -14,6 +14,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_import
 	
-	set "_7ZA_EXE=%PLUGIN_Install_Path%/7za.exe"
-	%dk_call% dk_assertPath "%_7ZA_EXE%"
+	set "7za_exe=%PLUGIN_Install_Path%/7za.exe"
+	%dk_call% dk_assertPath "%7za_exe%"
 %endfunction%
