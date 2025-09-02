@@ -17,4 +17,4 @@ include_guard()
 # Alien converts an RPM package file into a Debian package file or Alien can install an RPM file directly. 
 
 dk_installPackage(alien)
-dk_findProgram(ALIEN_EXE alien)
+dk_findProgram(alien_exe alien)
