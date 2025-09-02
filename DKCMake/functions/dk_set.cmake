@@ -35,29 +35,11 @@ function(dk_set variable) #, value)
 	string(REPLACE "CACHE{" "" Var "${Var}")
 	string(REPLACE "}" "" Var "${Var}")
 
-#	###### lowercase ######
-#	dk_toLower("${Var}" var)
-#	dk_toLower("${ARGN}" _argn_)
-#	set(${var} "${_argn_}" CACHE INTERNAL "" FORCE) # The $CACHE{var} syntax can be used to do direct cache entry lookups
-#	set(ENV{${var}} "${_argn_}")
-	
-#	###### UPPERCASE ######
-#	dk_toUpper("${Var}" VAR)
-#	dk_toUpper("${ARGN}" _ARGN_)
-#	set(${VAR} "${_ARGN_}" CACHE INTERNAL "" FORCE) # The $CACHE{var} syntax can be used to do direct cache entry lookups
-#	set(ENV{${VAR}} "${_ARGN_}")
-	
-	###### CamelCase ######
 	set(${Var} "${ARGN}" PARENT_SCOPE)
 	set(${Var} "${ARGN}" CACHE INTERNAL "" FORCE) # The $CACHE{Var} syntax can be used to do direct cache entry lookups
 	set(ENV{${Var}} "${ARGN}")
 	
-	###### dk_set_DEBUG ######
-#	if("${dk_set_DEBUG}" STREQUAL 1)
-#		if(COMMAND dk_debug)
-#			dk_debug("${Var} = ${${Var}}")
-#		endif()
-#	endif()
+	#dk_debug("${Var} = ${${Var}}")
 endfunction()
 
 

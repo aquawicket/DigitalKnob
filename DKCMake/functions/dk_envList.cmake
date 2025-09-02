@@ -17,7 +17,7 @@ include_guard()
 # dk_envList(<name> POP)
 #
 #	Create a Global 'stack like" list variable. You can push to, and pop from the stack.
-#   use $ENV{CURRENT_<name>} to get the topmost item.
+#   use ${CURRENT_<name>} to get the topmost item.
 #
 function(dk_envList)
 	dk_debugFunc()
@@ -25,65 +25,28 @@ function(dk_envList)
 	set(NAME "${ARGV0}")
 	set(CMND "${ARGV1}")
 
-	set(_Current_ "${ARGV2}")					# Original	
-#	dk_toLower(${ARGV2} _current_)				# lowercase
-#	dk_toUpper(${ARGV2} _CURRENT_)				# UPPERCASE
-
-	### copy the env variable to local variable ###
-	set(_Stack_ "$ENV{${NAME}_Stack}")			# Original
-#	set(_stack_ "$ENV{${NAME}_stack}")			# lowercase
-#	set(_STACK_ "$ENV{${NAME}_STACK}")			# UPPERCASE 
-
+	set(_Current_ "${ARGV2}")				### push the value
+	set(_Stack_ "$ENV{${NAME}_Stack}")		### copy the env variable to local variable
 	
 	### set the _CURRENT_ item and push it to the local _STACK_ list ###
 	if("${CMND}" STREQUAL "PUSH")
-		set(_Stack_ "${_Current_};${_Stack_}")	# Original
-#		set(_stack_ "${_current_};${_stack_}")	# lowercase
-#		set(_STACK_ "${_CURRENT_};${_STACK_}")	# UPPERCASE
-
-		list(LENGTH _Stack_ _Length_)			# Original
-#		list(LENGTH _stack_ _length_)			# lowercase
-#		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
+		set(_Stack_ "${_Current_};${_Stack_}")
+		list(LENGTH _Stack_ _Length_)
 	endif()
 
 	# Pop the CURRENT_<THING> and drop it fom the list. Update CURRENT_<THING>
 	if("${CMND}" STREQUAL "POP")
-	
-		list(POP_FRONT _Stack_)					# Original
-#		list(POP_FRONT _stack_)					# lowercase
-#		list(POP_FRONT _STACK_)					# UPPERCASE
-
-		list(LENGTH _Stack_ _Length_)			# Original		
-#		list(LENGTH _stack_ _length_)			# lowercase
-#		list(LENGTH _STACK_ _LENGTH_)			# UPPERCASE
-	
-		if(${_Length_} GREATER 0)				# Original
+		list(POP_FRONT _Stack_)
+		list(LENGTH _Stack_ _Length_)
+		if(${_Length_} GREATER 0)
 			list(GET _Stack_ 0 _Current_)
 		else()
 			set(_Current_ "")
 		endif()
-		
-#		if(${_length_} GREATER 0)				# lowercase
-#			list(GET _stack_ 0 _current_)
-#		else()
-#			set(_current_ "")
-#		endif()
-		
-#		if(${_LENGTH_} GREATER 0)				# UPPERCASE
-#			list(GET _STACK_ 0 _CURRENT_)
-#		else()
-#			set(_CURRENT_ "")
-#		endif()
 	endif()
 
-	dk_set(CURRENT_${NAME} 	"${_Current_}")		# Original
-#	dk_set(current_${NAME} 	"${_current_}")		# lowercase
-#	dk_set(CURRENT_${NAME} 	"${_CURRENT_}")		# UPPERCASE
-
-	### copy local variable back to the environment variable ###
-	dk_set(${NAME}_Stack 	"${_Stack_}")  		# Original
-#	dk_set(${NAME}_stack 	"${_stack_}")  		# lowercase
-#	dk_set(${NAME}_STACK 	"${_STACK_}")  		# UPPERCASE
+	dk_set(CURRENT_${NAME} 	"${_Current_}")	### set the global variable
+	dk_set(${NAME}_Stack 	"${_Stack_}")	### copy local variable back to the environment variable
 
 		
 #	dk_debug("              NAME = ${NAME}")
@@ -116,39 +79,59 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_echo("\nPushing Stack . . .")
-	dk_echo("dk_envList(PLUGIN PUSH \"abc\")")
+	dk_echo()
+	dk_echo("###### Pushing to stack #######")
+	
+	dk_echo()
+	dk_echo("    CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN PUSH \"abc\")")
 	dk_envList(PLUGIN PUSH "abc")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("dk_envList(PLUGIN PUSH \"123\")")
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN PUSH \"123\")")
 	dk_envList(PLUGIN PUSH "123")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("dk_envList(PLUGIN PUSH \"def\")")
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN PUSH \"def\")")
 	dk_envList(PLUGIN PUSH "def")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("dk_envList(PLUGIN PUSH \"456\")")
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN PUSH \"456\")")
 	dk_envList(PLUGIN PUSH "456")
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("\nPoping Stack . . .")
-	dk_echo("dk_envList(PLUGIN POP)")
-	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("dk_envList(PLUGIN POP)")
-	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo()
+	dk_echo()
+	dk_echo("####### Poping Stack ######")
 	
-	dk_echo("dk_envList(PLUGIN POP)")
-	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo()
+	dk_echo("    CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
-	dk_echo("dk_envList(PLUGIN POP)")
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN POP)")
 	dk_envList(PLUGIN POP)
-	dk_echo("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+	
+	dk_echo()
+	dk_echo("    dk_envList(PLUGIN POP)")
+	dk_envList(PLUGIN POP)
+	dk_echo("        CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 	
 endfunction()
 

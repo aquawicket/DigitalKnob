@@ -42,8 +42,8 @@ function(dk_depend plugin) #target
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	dk_getPathToPlugin(${plugin} Import_Path)
 	dk_basename("${Import_Path}" Import_Name)
-	dk_toUpper("${Import_Name}" Import_Name_Upper)
-	dk_convertToCIdentifier(${Import_Name_Upper} PLUGIN)
+	dk_toUpper("${Import_Name}" Import_Name)
+	dk_convertToCIdentifier(${Import_Name} PLUGIN)
 	
 	###### Push Plugin to the PLUGIN_STACK ######
 	dk_echo("\n")

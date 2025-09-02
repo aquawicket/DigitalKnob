@@ -25,13 +25,16 @@ include_guard()
 function(dk_toUpper)
 	dk_debugFunc(1 2)
 	
-	set(str "${ARGV0}")
-	string(TOUPPER "${str}" dk_toUpper)
-	set(dk_toUpper ${dk_toUpper} PARENT_SCOPE)
 	
-	# return_var: OPTIONAL
+	string(TOUPPER "${ARGV0}" dk_toUpper)
+
+	
+	###### output ######
+	set(dk_toUpper ${dk_toUpper} PARENT_SCOPE)
 	if(ARGV1)
 		set(${ARGV1} ${dk_toUpper} PARENT_SCOPE)
+	else()
+		message("${dk_toUpper}") 
 	endif()
 endfunction()
 

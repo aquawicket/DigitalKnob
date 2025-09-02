@@ -1,4 +1,7 @@
 #!/usr/bin/cmake -P
+
+message(FATAL_ERROR "dk_setTargetTriple.cmake is discontinued")
+
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)

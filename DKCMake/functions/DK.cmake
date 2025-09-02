@@ -130,7 +130,6 @@ function(DKINIT)
 	# If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
 	# dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
 	# itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
-	message("IMPORT_PATH = $ENV{DKSCRIPT_DIR}")
 	if(NOT CURRENT_PLUGIN)
 		if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
 			dk_load("dk_importVariables")
