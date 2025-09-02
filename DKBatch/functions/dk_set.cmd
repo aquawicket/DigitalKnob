@@ -84,8 +84,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	echo myVar = %myVar%
 ::	%dk_call% dk_echo "myVarB = %myVarB%"
 	
-	%dk_call% dk_set CMAKE "%USERPROFILE:\=/%/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64"
-	echo CMAKE = %CMAKE%
+	%dk_call% dk_set cmake "%USERPROFILE:\=/%/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64"
+	echo cmake = %cmake%
 	
 	%dk_call% dk_set TEST_VAR "abc" "123" "d e f" "4 5 6"
 	echo TEST_VAR = %TEST_VAR%

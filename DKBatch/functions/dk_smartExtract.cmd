@@ -64,7 +64,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "MSYS2_URL=https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz"
 	set "MSYS2=C:/Users/Administrator/DigitalKnob/Development/3rdParty/msys2-base-x86_64-20241208"
 	%dk_call% dk_download %MSYS2_URL%
-	%dk_call% dk_smartExtract "%dk_download%" "%MSYS2%"
+	%dk_call% dk_smartExtract "%dk_download%" "%msys2%"
 	
 	::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	::%dk_call% dk_download "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip" "%DKDOWNLOAD_DIR%/cmake-3.29.5-windows-x86_64.zip"

@@ -13,7 +13,7 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 %setlocal%
 	%dk_call% dk_debugFunc 1
 	
-	if EXIST "%BASH_EXE%" (
+	if EXIST "%bash_exe%" (
 		if "%bash_ENV%" equ "%~1" (
 			%return%
 		)
@@ -27,16 +27,16 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 		%dk_call% dk_validate GIT "%dk_call% dk_depend git"
 		set "GIT_BASH_EXE=!GIT!/bin/bash.exe"
 		set "GIT_BASH_ICON=!GIT!/git-bash.exe"
-		set "BASH_EXE=!GIT_BASH_EXE!"
+		set "bash_exe=!GIT_BASH_EXE!"
 		set "BASH_ICON=!GIT_BASH_ICON!"
 	)
 		
 	rem ###### MSYS2 ######
 	if "%bash_ENV%" equ "MSYS2" (
 		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
-		set "MSYS2_BASH_EXE=!MSYS2!/usr/bin/bash.exe"
-		set "MSYS2_BASH_ICON=!MSYS2!/msys2.exe"
-		set "BASH_EXE=!MSYS2_BASH_EXE!"
+		set "MSYS2_BASH_EXE=!msys2!/usr/bin/bash.exe"
+		set "MSYS2_BASH_ICON=!msys2!/msys2.exe"
+		set "bash_exe=!MSYS2_BASH_EXE!"
 		set "BASH_ICON=!MSYS2_BASH_ICON!"
 	)
 	
@@ -46,12 +46,12 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 		%dk_call% dk_assertPath WSL_EXE
 		set "WSL_BASH_EXE=C:/Windows/System32/bash.exe"
 		set "WSL_BASH_ICON=!WSL_EXE!"
-		set "BASH_EXE=!WSL_BASH_EXE!"
+		set "bash_exe=!WSL_BASH_EXE!"
 		set "BASH_ICON=!WSL_BASH_ICON!"
 	)
 
 	
-	%dk_call% dk_assertPath BASH_EXE
+	%dk_call% dk_assertPath bash_exe
 	%dk_call% dk_assertPath BASH_ICON
 	
 	::### return ###
@@ -63,7 +63,7 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 		set "MSYS2_BASH_ICON=%MSYS2_BASH_ICON%"
 		set "WSL_BASH_EXE=%WSL_BASH_EXE%"
 		set "WSL_BASH_ICON=%WSL_BASH_ICON%"
-		set "BASH_EXE=%BASH_EXE%"
+		set "bash_exe=%bash_exe%"
 		set "BASH_ICON=%BASH_ICON%"
 	)
 %endfunction%
@@ -78,5 +78,5 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL
-	%dk_call% dk_echo "BASH_EXE = %BASH_EXE%"
+	%dk_call% dk_echo "bash_exe = %bash_exe%"
 %endfunction%

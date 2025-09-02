@@ -16,8 +16,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
 	echo %~1 > "%DKCACHE_DIR%/dk_evalDKBash_TEMP.sh"
 	
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash"
-	set DKCOMMAND=%BASH_EXE% -c "%DKCACHE_DIR%/dk_evalDKBash_TEMP.sh";
+	%dk_call% dk_validate bash_exe "%dk_call% dk_depend bash"
+	set DKCOMMAND=%bash_exe% -c "%DKCACHE_DIR%/dk_evalDKBash_TEMP.sh";
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_evalDKBash=%dk_exec%"

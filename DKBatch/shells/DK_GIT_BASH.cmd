@@ -14,4 +14,4 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %dk_call% dk_title "Digitalknob DK_GIT_BASH"
 %dk_call% dk_info "############ DK_GIT_BASH environment ############"
 %dk_call% dk_info ""
-%GIT%/bin/bash
+%git%/bin/bash

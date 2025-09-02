@@ -14,8 +14,8 @@ set "ABI=arm64-v8a"
 ::set "ABI=x86_64"
 
 :: Choose a C++ Compilers setting
-:: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
-set compiler=CMAKE
+:: 		options: cmake, NDK, CLANG    or GRADLE: must be enabled in build.gradle
+set compiler=cmake
 
 :: Use gradle to compile Java and Generate apk pagkage?
 :: Otherwide the normal android tools will be used
@@ -50,7 +50,7 @@ set "State=CA"
 set "Country=US"
 ::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::: CMAKE / CLANG :::::::::::::::::::
+::::::::::::: cmake / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
 set "ANDROID_API=31"
 set "ANDROID_MIN_API=19"
@@ -73,8 +73,8 @@ call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -152,17 +152,17 @@ if "%compiler%"=="GRADLE" goto :gradle
 
 
 
-:::::: COMPILE WITH CMAKE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %compiler% neq CMAKE goto :end
-echo Compiling with CMAKE
+:::::: COMPILE WITH cmake ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if %compiler% neq cmake goto :end
+echo Compiling with cmake
 ::Prep Visual Studio Project
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
-"%CMAKE_EXE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
-%IF_ERROR% "CMAKE failed to generate the project files."
-"%CMAKE_EXE%" --build %CMAKE_BINARY_DIR% --target main
+"%cmake_exe%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
+%IF_ERROR% "cmake failed to generate the project files."
+"%cmake_exe%" --build %CMAKE_BINARY_DIR% --target main
 ::call CopyPath %CMAKE_BINARY_DIR%/%Target_Type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

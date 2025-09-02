@@ -21,17 +21,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_import APP
 
 	if /i "%Host_Os%" equ "Windows" ( 
-		%dk_call% dk_set CMAKE_EXE "%PLUGIN_Install_Path%/bin/cmake.exe"
+		%dk_call% dk_set cmake_exe "%PLUGIN_Install_Path%/bin/cmake.exe"
 	) else ( 
-		%dk_call% dk_set CMAKE_EXE "%PLUGIN_Install_Path%/bin/cmake"
+		%dk_call% dk_set cmake_exe "%PLUGIN_Install_Path%/bin/cmake"
 	)	
-	%dk_call% dk_assertPath "%CMAKE_EXE%"
-	%dk_call% dk_firewallAllow 			"CMake" "%CMAKE_EXE%"
+	%dk_call% dk_assertPath "%cmake_exe%"
+	%dk_call% dk_firewallAllow 			"CMake" "%cmake_exe%"
 
-	if EXIST "%CMAKE_EXE%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
+	if EXIST "%cmake_exe%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
 	
 	:: Add cmake to git_bash (symlink)
-	::%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend git"
-	::%BASH_EXE% -c "ln ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
-	::%BASH_EXE% -c "ln -s ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
+	::%dk_call% dk_validate bash_exe "%dk_call% dk_depend git"
+	::%bash_exe% -c "ln ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
+	::%bash_exe% -c "ln -s ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
 %endfunction%

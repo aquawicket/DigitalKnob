@@ -20,4 +20,4 @@ rem  %dk_call% dk_append DKCONFIGURE_FLAGS		--host arm-apple-%IOS_DARWIN%
 rem  %dk_call% dk_append DKCONFIGURE_CFLAGS		-arch arm -DIOS -DIOS_ARM32 -mios-version-min=%IOS_MIN_SDK% -isysroot %IOS_SYSROOT%
 rem  %dk_call% dk_append DKCONFIGURE_CXXFLAGS	-arch arm -DIOS -DIOS_ARM32 -mios-version-min=%IOS_MIN_SDK% -isysroot %IOS_SYSROOT%
 rem  %dk_call% dk_append DKCMAKE_FLAGS			-DSDK_VERSION=%IOS_SDK% -DDEPLOYMENT_TARGET=%IOS_MIN_SDK% -DPLATFORM=OS -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_SYSROOT=iphoneos -DCMAKE_OSX_ARCHITECTURES=arm)
-rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	-static  &rem  -s)
+rem  %dk_call% dk_append cmake_exe_LINKER_FLAGS	-static  &rem  -s)

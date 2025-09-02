@@ -47,7 +47,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_copy "%DKCPP_PLUGINS_DIR%/_DKIMPORT/_CMakeLists.txt_" "%Target_App_Dir%/CMakeLists.txt" OVERWRITE
 	)
 	
-	::############ set CMAKE Variables ###########
+	::############ set cmake Variables ###########
 	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
 	::set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
 	set "CMAKE_SOURCE_DIR=%Target_App_Dir%"
@@ -127,14 +127,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR  "%dk_call% dk_DKIMPORTS_DIR"
-	if NOT defined CMAKE_EXE (%dk_call% dk_depend cmake")
+	if NOT defined cmake_exe (%dk_call% dk_depend cmake")
 
 	::###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"	
 	
-	::########### CMAKE Command ###################
-	echo "%CMAKE_EXE%" %CMAKE_ARGS%
-	%dk_call% "%CMAKE_EXE%" %CMAKE_ARGS% && (
+	::########### cmake Command ###################
+	echo "%cmake_exe%" %CMAKE_ARGS%
+	%dk_call% "%cmake_exe%" %CMAKE_ARGS% && (
 		%dk_call% dk_success "CMake Generation Successful"
 	) || (
 		%dk_call% dk_error "CMake Generation Failed"

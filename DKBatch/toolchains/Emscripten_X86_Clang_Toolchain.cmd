@@ -22,7 +22,7 @@ set CMAKE_GENERATOR="Unix Makefiles"
 ::if defined Windows_Host (
 ::	%dk_call% dk_validate MSYS2 					"%dk_call% dk_depend msys2"
 ::	%dk_call% dk_installPackage 					make
-::	dk_findProgram(CMAKE_MAKE_PROGRAM make 			"%MSYS2%/usr/bin"
+::	dk_findProgram(CMAKE_MAKE_PROGRAM make 			"%msys2%/usr/bin"
 ::) else if defined Linux_Host (
 ::	%dk_call% dk_set CMAKE_MAKE_PROGRAM				make
 ::) else (
@@ -36,4 +36,4 @@ rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DEMSDK -std=gnu++17)
 ::%dk_call% dk_set CMAKE_C_COMPILER_WORKS			1
 ::%dk_call% dk_set CMAKE_CXX_COMPILER_WORKS			1
 rem  %dk_call% dk_append DKCMAKE_FLAGS				-DEMSDK=1
-rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS		-static  &rem  -s)
+rem  %dk_call% dk_append cmake_exe_LINKER_FLAGS		-static  &rem  -s)

@@ -18,16 +18,16 @@ goto main
 ::   -c <command> 	= "run a command"
 
 :: Opening a new interactive shell
-::%MSYS2%/usr/bin/env MSYSTEM=MSYS       /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW32    /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW64    /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANG32    /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANG64    /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=UCRT64     /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MSYS       /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MINGW32    /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MINGW64    /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANG32    /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANG64    /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=UCRT64     /usr/bin/bash -li
 
 :: Run a script in a new launched shell
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
+::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
 
 ::###### CMD ######
 :CMD
@@ -42,7 +42,7 @@ goto main
 ::###### GIT_CMD ######
 :GIT_CMD
 	%dk_call% dk_title "Digitalknob GIT_CMD"
-	set "PATH=%GIT%\bin;%PATH%"
+	set "PATH=%git%\bin;%PATH%"
 	%dk_call% dk_clearScreen
 	echo You are in a GIT_CMD environment
 	echo(
@@ -53,56 +53,56 @@ goto main
 ::###### GIT_BASH ######
 :GIT_BASH
 	%dk_call% dk_title "Digitalknob GIT_BASH"
-	%GIT%/usr/bin/env /usr/bin/bash -lc ^
+	%git%/usr/bin/env /usr/bin/bash -lc ^
 	"clear && echo You are in a GIT_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### MSYS_BASH ######
 :MSYS_BASH
 	%dk_call% dk_title "Digitalknob MSYS_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -lc ^
 	"clear && echo You are in a MSYS_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### CLANGARM64 ######
 :CLANGARM64_BASH
 	%dk_call% dk_title "Digitalknob CLANGARM64_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -lc ^
 	"clear && echo You are in a CLANGARM64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### CLANG32 ######
 :CLANG32_BASH
 	%dk_call% dk_title "Digitalknob CLANG32_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -lc ^
 	"clear && echo You are in a CLANG32_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### CLANG64 ######
 :CLANG64_BASH
 	%dk_call% dk_title "Digitalknob CLANG64_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -lc ^
 	"clear && echo You are in a CLANG64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### MINGW32 ######
 :MINGW32_BASH
 	%dk_call% dk_title "Digitalknob MINGW32_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -lc ^
 	"clear && echo You are in a MINGW32_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### MINGW64 ######
 :MINGW64_BASH
 	%dk_call% dk_title "Digitalknob MINGW64_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc ^
 	"clear && echo You are in a MINGW64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### UCRT64 ######
 :UCRT64_BASH
 	%dk_call% dk_title "Digitalknob UCRT64_BASH"
-	%MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc ^
+	%msys2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -lc ^
 	"clear && echo You are in a UCRT64_BASH environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 

@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_func_=%~1"
 	set "_path_=%DKBASH_FUNCTIONS_DIR:\=/%/%_func_%.sh"
 	
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_depend bash %dk_callDKBash_ENV%"
+	%dk_call% dk_validate bash_exe "%dk_call% dk_depend bash %dk_callDKBash_ENV%"
 	
 	::### Get DKBASH_FUNCTIONS_DIR
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
@@ -43,7 +43,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "PAUSE_ON_EXIT=0"
 	if "%dk_callDKBash_ENV%" equ "WSL" (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
 
-	set DKCOMMAND=%BASH_EXE% -c '%_path_% %dk_allButFirstArgs%'
+	set DKCOMMAND=%bash_exe% -c '%_path_% %dk_allButFirstArgs%'
 	
 	set "dk_exec_ECHO_OUTPUT=0"
 	set "dk_exec_ECHO_ERROR=0"

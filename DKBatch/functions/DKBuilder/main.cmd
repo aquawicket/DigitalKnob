@@ -96,11 +96,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 		
 		::### Pass the Target variables to CMake to take over
-		::########### CMAKE Command ###################
+		::########### cmake Command ###################
 		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
 		%dk_call% dk_chdir %DKCPP_APPS_DIR%/%Target_App%
-		%dk_call% dk_validate CMAKE_EXE "%dk_call% dk_depend cmake"
-		%CMAKE_EXE% -P "%DKCPP_APPS_DIR%/%Target_App%/DKINSTALL.cmake"
+		%dk_call% dk_validate cmake_exe "%dk_call% dk_depend cmake"
+		%cmake_exe% -P "%DKCPP_APPS_DIR%/%Target_App%/DKINSTALL.cmake"
 		
 		::%dk_call% DKBuilder/generate
 		::%dk_call% DKBuilder/buildApp

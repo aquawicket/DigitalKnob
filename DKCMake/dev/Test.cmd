@@ -15,14 +15,14 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	echo DKCMAKE_DIR = %DKCMAKE_DIR%
 		
 	:: find cmake directory
-	set CMAKE_EXE=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
-	echo CMAKE_EXE = %CMAKE_EXE%
-	"%CMAKE_EXE%" --version
+	set cmake_exe=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
+	echo cmake_exe = %cmake_exe%
+	"%cmake_exe%" --version
 	:: we should actullly find the first folder that starts with cmake in the DKTools directory.	
 	
 	call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
-	echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
-	"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+	echo "%cmake_exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+	"%cmake_exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
 %endfunction%
 
 :: find_dkbranch_dir

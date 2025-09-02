@@ -18,5 +18,5 @@ rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DMAC i686 -DMAC_X86 -std=c++17 -x ob
 rem  %dk_call% dk_append DKCONFIGURE_CFLAGS		-arch i686 -DMAC -DMAC_X86 -std=c17 #-x objective-c rem # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-NOT-valid-utf-8
 rem  %dk_call% dk_append DKCONFIGURE_CXXFLAGS		-arch i686 -DMAC -DMAC_X86 -std=c++17) #-x objective-c++ rem # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-NOT-valid-utf-8
 rem  %dk_call% dk_append DKCMAKE_FLAGS				-DCMAKE_OSX_ARCHITECTURES=x86)
-rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	-static  &rem  -s)
+rem  %dk_call% dk_append cmake_exe_LINKER_FLAGS	-static  &rem  -s)
 	

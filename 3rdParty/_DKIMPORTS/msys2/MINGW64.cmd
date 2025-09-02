@@ -18,16 +18,16 @@ goto main
 ::   -c <command> 	= "run a command"
 
 :: Opening a new interactive shell
-::%MSYS2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
-::%MSYS2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
+::%msys2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -li
 
 :: Run a script in a new launched shell
-::%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
+::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
 
 ::###### MINGW64 ######
 :console
@@ -40,7 +40,7 @@ goto main
 
 ::###### MINGW64 ######
 :mingw64
-	%MSYS2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
+	%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
 ::###### Main ######

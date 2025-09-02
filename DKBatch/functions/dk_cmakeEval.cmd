@@ -18,8 +18,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKCMAKE_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_assertPath DKCMAKE_DIR
 
-	%dk_call% dk_validate CMAKE_EXE			"%dk_call% dk_depend cmake"
-	%dk_call% dk_assertPath CMAKE_EXE
+	%dk_call% dk_validate cmake_exe			"%dk_call% dk_depend cmake"
+	%dk_call% dk_assertPath cmake_exe
 
 	set DKCOMMAND=%~1
 	if "%~2" neq "" (%dk_call% dk_set DKRETURN "%~2")
@@ -48,8 +48,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
 
 	::### call the cmake command ###
-	echo "%CMAKE_EXE%" %CMAKE_ARGS%
-	"%CMAKE_EXE%" %CMAKE_ARGS%
+	echo "%cmake_exe%" %CMAKE_ARGS%
+	"%cmake_exe%" %CMAKE_ARGS%
 
 	::###### IMPORT VARIABLES ######
 	if NOT defined DKRETURN (%return%)

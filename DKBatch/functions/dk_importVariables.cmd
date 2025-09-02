@@ -88,7 +88,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_unset PLUGIN_Url_Basename
 	%dk_call% dk_unset PLUGIN_Url_Extension
 	%dk_call% dk_unset PLUGIN_Url_Name
-	%dk_call% dk_unset PLUGIN.Url_Name_Lower
+	%dk_call% dk_unset PLUGIN_Url_Name_Lower
 	%dk_call% dk_unset PLUGIN_Version
 
 
@@ -226,11 +226,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :PLUGIN_Version
 	if defined PLUGIN_Version (%return%)
 		
-	call :PLUGIN.Url_Name_Lower
+	call :PLUGIN_Url_Name_Lower
 	call :PLUGIN_Import_Name_Lower
 
-	if defined PLUGIN.Url_Name_Lower if defined PLUGIN_Import_Name_Lower (
-		%dk_call% dk_replaceAll "%PLUGIN.Url_Name_Lower%" 	"%PLUGIN_Import_Name_Lower%" 	"" 	PLUGIN_Version
+	if defined PLUGIN_Url_Name_Lower if defined PLUGIN_Import_Name_Lower (
+		%dk_call% dk_replaceAll "%PLUGIN_Url_Name_Lower%" 	"%PLUGIN_Import_Name_Lower%" 	"" 	PLUGIN_Version
 		rem if NOT defined PLUGIN_Version (set "PLUGIN_Version=%PLUGIN.TAG%")
 		rem if NOT defined PLUGIN_Version (set "PLUGIN_Version=%PLUGIN.Branch%") 
 	)
@@ -298,11 +298,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 ::####################
-:PLUGIN.Url_Name_Lower
-	if defined PLUGIN.Url_Name_Lower (%return%)
+:PLUGIN_Url_Name_Lower
+	if defined PLUGIN_Url_Name_Lower (%return%)
 	call :PLUGIN_Url_Name
-	%dk_call% dk_toLower 	%PLUGIN_Url_Name% 	PLUGIN.Url_Name_Lower
-	%DEBUG% "PLUGIN.Url_Name_Lower = '%PLUGIN.Url_Name_Lower%'"
+	%dk_call% dk_toLower 	%PLUGIN_Url_Name% 	PLUGIN_Url_Name_Lower
+	%DEBUG% "PLUGIN_Url_Name_Lower = '%PLUGIN_Url_Name_Lower%'"
 %endfunction%
 
 ::##################

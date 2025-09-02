@@ -29,14 +29,14 @@ set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
 set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
-if NOT EXIST "%CMAKE_EXE%" ( ERROR "Could NOT locate CMAKE_EXE" )
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if NOT EXIST "%cmake_exe%" ( ERROR "Could NOT locate cmake_exe" )
 
 :begin
 cls
 
 set "file=%DKCMAKE_DIR%/other/Test.cmake"
-"%CMAKE_EXE%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
+"%cmake_exe%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
 
 pause

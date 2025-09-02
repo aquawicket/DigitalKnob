@@ -19,37 +19,37 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar msys2_%Host_Tuple%_Import
 	
 	%dk_call% dk_importVariables !msys2_%Host_Tuple%_Import!
-	%dk_call% dk_assertVar MSYS2
-	%dk_call% dk_assertVar MSYS2.URL
+	%dk_call% dk_assertVar msys2
+	%dk_call% dk_assertVar msys2_Url
 
-	set "MSYS2=%MSYS2%"
-	set	"MSYS2_DBPath=%MSYS2%/var/lib/pacman"
-	set	"MSYS2_CacheDir=%MSYS2%/var/cache/pacman/pkg"
-	set	"MSYS2_LogFile=%MSYS2%/var/log/pacman.log"
-	set	"MSYS2_GPGDir=%MSYS2%/etc/pacman.d/gnupg"
-	set	"MSYS2_BIN=%MSYS2%/usr/bin"
-	set	"CLANGARM64_BIN=%MSYS2%/clangarm64/bin"
-	set	"CLANG32_BIN=%MSYS2%/clang32/bin"
-	set	"CLANG64_BIN=%MSYS2%/clang64/bin"
-	set	"MINGW32_BIN=%MSYS2%/mingw32/bin"
-	set	"MINGW64_BIN=%MSYS2%/mingw64/bin"	
-	set	"UCRT64_BIN=%MSYS2%/ucrt64/bin"
-	set	"MSYS2_MAKE_PROGRAM=%MSYS2%/make.exe"
-	if EXIST "%MSYS2%/msys2.exe" (
+	set "msys2=%msys2%"
+	set	"msys2_DBPath=%msys2%/var/lib/pacman"
+	set	"msys2_CacheDir=%msys2%/var/cache/pacman/pkg"
+	set	"msys2_LogFile=%msys2%/var/log/pacman.log"
+	set	"msys2_GPGDir=%msys2%/etc/pacman.d/gnupg"
+	set	"msys2_BIN=%msys2%/usr/bin"
+	set	"CLANGARM64_BIN=%msys2%/clangarm64/bin"
+	set	"CLANG32_BIN=%msys2%/clang32/bin"
+	set	"CLANG64_BIN=%msys2%/clang64/bin"
+	set	"MINGW32_BIN=%msys2%/mingw32/bin"
+	set	"MINGW64_BIN=%msys2%/mingw64/bin"	
+	set	"UCRT64_BIN=%msys2%/ucrt64/bin"
+	set	"msys2_MAKE_PROGRAM=%msys2%/make.exe"
+	if EXIST "%msys2%/msys2.exe" (
 		%dk_call% dk_notice "msys2 already installed"
 		%return%
 	)
 		
 	::############ Install ############
 	%dk_call% dk_echo
-	%dk_call% dk_info "Installing %MSYS2.URL_Filename%. . ."
-	%dk_call% dk_download %MSYS2.URL%
-	%dk_call% dk_smartExtract "%dk_download%" "%MSYS2%"
-	::"%dk_download%" install --root "%MSYS2%" --confirm-command
+	%dk_call% dk_info "Installing %msys2_Url_Filename%. . ."
+	%dk_call% dk_download %msys2_Url%
+	%dk_call% dk_smartExtract "%dk_download%" "%msys2%"
+	::"%dk_download%" install --root "%msys2%" --confirm-command
 	
-	::%dk_call% dk_import %MSYS2_URL%
+	::%dk_call% dk_import %msys2_Url%
 	
-	%dk_call% dk_assertPath MSYS2
+	%dk_call% dk_assertPath msys2
 
 %endfunction%
 

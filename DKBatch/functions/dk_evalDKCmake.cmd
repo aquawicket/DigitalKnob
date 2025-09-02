@@ -25,7 +25,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::if NOT EXIST "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake"	(%dk_call% dk_download "%DKHTTP_DKCMAKE_FUNCTIONS_DIR%/%~1.cmake" "%DKCMAKE_FUNCTIONS_DIR%/%~1.cmake")
 
 	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate CMAKE_EXE					"%dk_call% dk_depend cmake"
+	%dk_call% dk_validate cmake_exe					"%dk_call% dk_depend cmake"
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 
@@ -36,7 +36,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::set "DKCOMMAND=%DKCOMMAND:"='%"
 
 	::############ DKCMake function call ############
-	set DKCOMMAND=%CMAKE_EXE% "-DDKCOMMAND=%CMAKE_COMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
+	set DKCOMMAND=%cmake_exe% "-DDKCOMMAND=%CMAKE_COMMAND%" "-DDKSCRIPT_PATH=%DKSCRIPT_PATH%" "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%" "-P" "%DKCMAKE_DIR%/DKEval.cmake"
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_evalDKCmake=%dk_exec%"

@@ -37,4 +37,4 @@ rem %dk_call% dk_set USR_LOCAL_BIN				"/usr/local/bin"
 rem %dk_call% dk_set CMAKE_RC_COMPILER			%CLANG_RC_COMPILER%
 rem  %dk_call% dk_append CMAKE_C_FLAGS				-march=i686 -DLINUX -DLINUX_X86 -std=gnu11
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-march=i686 -DLINUX -DLINUX_X86 -std=gnu++17 -lstdc++fs)
-rem  %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	-static  &rem  -s)
+rem  %dk_call% dk_append cmake_exe_LINKER_FLAGS	-static  &rem  -s)

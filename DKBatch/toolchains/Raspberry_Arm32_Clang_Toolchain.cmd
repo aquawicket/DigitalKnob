@@ -18,4 +18,4 @@ rem %dk_call% dk_append CMAKE_C_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -
 rem %dk_call% dk_append CMAKE_CXX_FLAGS				-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs 	&rem -march=armv7l
 rem %dk_call% dk_append DKCONFIGURE_CFLAGS			-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu11 				&rem -march=armv7l
 rem %dk_call% dk_append DKCONFIGURE_CXXFLAGS		-DLINUX -DRASPBERRY -DRASPBERRY_ARM32 -std=gnu++17 -lstdc++fs 	&rem -march=armv7l
-rem %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS		"-static"  &rem  -s
+rem %dk_call% dk_append cmake_exe_LINKER_FLAGS		"-static"  &rem  -s

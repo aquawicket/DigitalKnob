@@ -25,17 +25,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %cmake_Import% INSTALL_ROOT %DKTOOLS_DIR%
-	%dk_call% dk_assertVar CMAKE
+	%dk_call% dk_assertVar cmake
 	
-	if NOT EXIST "%CMAKE%" (
+	if NOT EXIST "%cmake%" (
 		%dk_call% dk_notice "cmake is NOT installed"
 		%return%
 	)
 	
 	%dk_call% dk_notice "UnInstalling CMake . . ."
-	%dk_call% dk_delete "%CMAKE%"
+	%dk_call% dk_delete "%cmake%"
 
-	if NOT EXIST "%CMAKE%" (%dk_call% dk_success "cmake uninstall complete") else (%dk_call% dk_error "cmake uninstall failed")
+	if NOT EXIST "%cmake%" (%dk_call% dk_success "cmake uninstall complete") else (%dk_call% dk_error "cmake uninstall failed")
 %endfunction%
 
 

@@ -11,8 +11,8 @@ set "Target_Type=Debug"
 set "ABI=arm64-v8a"
 
 :: Choose a C++ Compilers setting
-:: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
-set compiler=CMAKE
+:: 		options: cmake, NDK, CLANG    or GRADLE: must be enabled in build.gradle
+set compiler=cmake
 
 :: Use gradle to compile Java and Generate apk pagkage?
 :: Otherwide the normal android tools will be used
@@ -47,7 +47,7 @@ set "State=CA"
 set "Country=US"
 ::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::: CMAKE / CLANG :::::::::::::::::::
+::::::::::::: cmake / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
 set "ANDROID_API=31"
 set "NDK=23.1.7779620"
@@ -69,8 +69,8 @@ call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles:\=/%//CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "CMAKE_EXE=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%//CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"

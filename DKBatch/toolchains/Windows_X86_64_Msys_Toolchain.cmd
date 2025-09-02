@@ -24,5 +24,5 @@ set CMAKE_GENERATOR="MinGW Makefiles"
 ::%dk_call% dk_set 		CMAKE_RC_COMPILER  		"%%MSYSTEM%_BIN%/windres.exe"
 rem %dk_call% dk_append CMAKE_C_FLAGS			-march=x86-64 -DMSYSTEM=%MSYSTEM% -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu17
 rem %dk_call% dk_append CMAKE_CXX_FLAGS			-march=x86-64 -DMSYSTEM=%MSYSTEM% -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17
-rem %dk_call% dk_append CMAKE_EXE_LINKER_FLAGS	"-static"  &rem -s
+rem %dk_call% dk_append cmake_exe_LINKER_FLAGS	"-static"  &rem -s
 rem %dk_call% dk_append DKCONFIGURE_FLAGS		--build=x86_64-w64-mingw32

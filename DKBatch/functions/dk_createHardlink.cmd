@@ -29,10 +29,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::FIXME:  mklink is a internal command only in Windows Vista and up
 	mklink %/D% /H "%hardlink_path:/=\%" "%src_path:/=\%"
 	
-	::### CMAKE ###
+	::### cmake ###
 ::	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
-::	%dk_call% dk_validate CMAKE_EXE			"%dk_call% dk_depend cmake"
-::	"%CMAKE_EXE%" -E create_symlink 		"%src_path%" "%hardlink_path%"
+::	%dk_call% dk_validate cmake_exe			"%dk_call% dk_depend cmake"
+::	"%cmake_exe%" -E create_symlink 		"%src_path%" "%hardlink_path%"
 %endfunction%
 
 

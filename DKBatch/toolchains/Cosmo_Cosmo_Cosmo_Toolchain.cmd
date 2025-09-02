@@ -19,7 +19,7 @@ set CMAKE_GENERATOR="MSYS Makefiles"
 ::%dk_call% dk_set 				CMAKE_SKIP_RPATH 				ON
 ::%dk_call% dk_set 				CMAKE_CROSSCOMPILING 			OFF
 ::%dk_call% dk_validate 		MSYS2 							"%dk_call% dk_depend msys2"
-::%dk_call% dk_prependEnvPath 	"%MSYS2%/usr/bin"
+::%dk_call% dk_prependEnvPath 	"%msys2%/usr/bin"
 ::%dk_call% dk_validate 		COSMOCC 						"%dk_call% dk_depend cosmocc"
 ::%dk_call% dk_prependEnvPath 	"%COSMOCC%/bin"
 ::%dk_call% dk_prependEnvPath 	"%Cosmopolitan%/tool/cosmocc/bin"
@@ -34,7 +34,7 @@ set CMAKE_GENERATOR="MSYS Makefiles"
 ::%dk_call% dk_set 				CMAKE_MAKE_PROGRAM				"%MSYS2_MAKE_PROGRAM%"
 ::%dk_call% dk_append 			CMAKE_C_FLAGS					-DCOSMOPOLITAN)# -std=gnu17   &:: -D_CRT_SECURE_NO_WARNINGS
 ::%dk_call% dk_append 			CMAKE_CXX_FLAGS					-DCOSMOPOLITAN)# -std=gnu++17 &:: -D_CRT_SECURE_NO_WARNINGS
-::%dk_call% dk_append 			CMAKE_EXE_LINKER_FLAGS			-static  &::  -s
+::%dk_call% dk_append 			cmake_exe_LINKER_FLAGS			-static  &::  -s
 ::%dk_call% dk_validate 		%DKIMPORTS_DIR%					"dk_DKIMPORTS_DIR"
 ::  %dk_call% dk_append 		DKCMAKE_FLAGS
 	::	-DCMAKE_USER_MAKE_RULES_OVERRIDE=$%DKIMPORTS_DIR%/Cosmopolitan/cosmopolitan_user_make_rules_override.cmd

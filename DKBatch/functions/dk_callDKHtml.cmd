@@ -30,7 +30,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%"
 	set "PAUSE_ON_EXIT=0"
 
-	set DKCOMMAND=%BASH_EXE% -c '%_path_% %dk_allButFirstArgs%'
+	set DKCOMMAND=%bash_exe% -c '%_path_% %dk_allButFirstArgs%'
 	
 	set "dk_exec_ECHO_OUTPUT=0"
 	set "dk_exec_ECHO_ERROR=0"
