@@ -82,11 +82,10 @@ function(dk_DKSHELL)
 	
 	###### FINALIZE ######
 	dk_assertPath("${DKSHELL_PATH}")
-	dk_basename("${DKSHELL_PATH}")
-	dk_removeExtension("${dk_basename}")
-	dk_toUpper("${dk_removeExtension}")
-	set(DKSHELL "${dk_toUpper}")
-
+	dk_basename("${DKSHELL_PATH}" DKShell_Basename)
+	dk_removeExtension("${DKShell_Basename}" DKShell_Name)
+	
+	set(DKSHELL "${DKShell_Name}")
 	set(DKSHELL "${DKSHELL}" PARENT_SCOPE)
 	set(${DKSHELL}_SHELL 1 PARENT_SCOPE)
 endfunction()

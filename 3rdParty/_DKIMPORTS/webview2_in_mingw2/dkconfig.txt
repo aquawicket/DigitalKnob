@@ -1,1 +1,0 @@
-webview2_in_mingw2_Import=https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip
