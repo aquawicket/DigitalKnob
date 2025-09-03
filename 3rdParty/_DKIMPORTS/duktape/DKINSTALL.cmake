@@ -29,34 +29,31 @@ dk_depend(pyyaml)
 #dk_validate(msys2 "dk_depend(msys2)")
 
 ### IMPORT ###
-#dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt
-dk_import()
+dk_import() #PATCH
 
 ### LINK ###
-if(MSVC)
-	if(Windows)
-		dk_define	(DUK_F_VBCC)
-	endif()
+if(MSVC AND Windows)
+	dk_define		(DUK_F_VBCC)
 endif()
 if(Android)
 	dk_define		(DUK_F_32BIT_PTRS)
 endif()
-dk_include			(${DUKTAPE}/src)
+dk_include			(${duktape}/src)
 
 ## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
 if(MSVC)
-	dk_libDebug		(${DUKTAPE_Debug_Dir}/duktape.lib)
-	dk_libRelease	(${DUKTAPE_Release_Dir}/duktape.lib)
+	dk_libDebug		(${duktape_Debug_Dir}/duktape.lib)
+	dk_libRelease	(${duktape_Release_Dir}/duktape.lib)
 else()
-	dk_libDebug		(${DUKTAPE_Debug_Dir}/libduktape.a)
-	dk_libRelease	(${DUKTAPE_Release_Dir}/libduktape.a)
+	dk_libDebug		(${duktape_Debug_Dir}/libduktape.a)
+	dk_libRelease	(${duktape_Release_Dir}/libduktape.a)
 endif()
 
 ### GENERATE ###
-if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
-	#dk_exec(${PYTHON_EXE} ${DUKTAPE}/util/dist.py)  # default generator	
-	dk_exec(${PYTHON_EXE} ${DUKTAPE}/tools/configure.py
-		--output-directory ${DUKTAPE}/src
+if(NOT EXISTS ${duktape}/src/duktape.c)
+	#dk_exec(${python_exe} ${duktape}/util/dist.py)  # default generator	
+	dk_exec(${python_exe} ${duktape}/tools/configure.py
+		--output-directory ${duktape}/src
 		-DDUK_CMDLINE_DEBUGGER_SUPPORT
 		-DDUK_USE_DEBUGGER_DUMPHEAP
 		-DDUK_USE_DEBUGGER_INSPECT
@@ -64,7 +61,7 @@ if(NOT EXISTS ${DUKTAPE}/src/duktape.c)
 		-DDUK_USE_FATAL_HANDLER
 		-DDUK_USE_GLOBAL_BINDING
 		-DDUK_USE_INTERRUPT_COUNTER)
-	#dk_exec(${NODE_EXE} ${DUKTAPE}/src-tools/index.js configure --output-directory ${DUKTAPE}/src --source-directory ${DUKTAPE}/src-input --config-directory ${DUKTAPE}/config)
+	#dk_exec(${NODE_EXE} ${duktape}/src-tools/index.js configure --output-directory ${duktape}/src --source-directory ${duktape}/src-input --config-directory ${duktape}/config)
 endif()
 
 dk_configure()

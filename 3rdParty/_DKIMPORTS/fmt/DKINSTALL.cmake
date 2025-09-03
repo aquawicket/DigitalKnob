@@ -22,28 +22,27 @@ dk_validate(Target_Config  "dk_Target_Config()")
 #dk_depend(python3)
 
 ### IMPORT ###
-#dk_import(${fmt_Import})
 dk_import()
 
 ### INCLUDE/LINK ###
 dk_define(FMT_HEADER_ONLY)
-dk_include(${FMT}/include)
+dk_include(${fmt}/include)
 ###### Debug for FMT LIBRARY ######
 
 # moved to DKBuildFlags.cmake
-# needed by FMT library
+# needed by fmt library
 #if(MSVC)
 #	dk_append(CMAKE_C_FLAGS /utf-8)
 #	dk_append(CMAKE_CXX_FLAGS /utf-8)
 #endif()
 
-#Unix_dk_libDebug	(${FMT_Debug_Dir}/libfmtd.a)
-#Unix_dk_libRelease	(${FMT_Release_Dir}/libfmt.a)
-#Windows_dk_libDebug	(${FMT_Debug_Dir}/fmtd.lib)
-#Windows_dk_libRelease	(${FMT_Release_Dir}/fmt.lib)
+#Unix_dk_libDebug		(${fmt_Debug_Dir}/libfmtd.a)
+#Unix_dk_libRelease		(${fmt_Release_Dir}/libfmt.a)
+#Windows_dk_libDebug	(${fmt_Debug_Dir}/fmtd.lib)
+#Windows_dk_libRelease	(${fmt_Release_Dir}/fmt.lib)
 
 ### GENERATE ###
-#dk_configure(${FMT} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
+#dk_configure(${fmt} -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE)
 
 ### COMPILE ###
 #dk_build()
