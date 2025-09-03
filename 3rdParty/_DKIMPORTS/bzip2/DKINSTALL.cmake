@@ -31,29 +31,29 @@ dk_depend(msys2)
 ### IMPORT ###
 #dk_import(${bzip2_Import})
 dk_import()
-dk_assertVar(BZIP2)
+dk_assertVar(bzip2)
 
-dk_include			(${BZIP2}/								BZIP2_INCLUDE_DIR)
+dk_include			(${bzip2}/								BZIP2_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${BZIP2_Debug_Dir}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2_Release_Dir}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${bzip2_Debug_Dir}/bz2_static.lib		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${bzip2_Release_Dir}/bz2_static.lib	BZIP2_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${BZIP2_Debug_Dir}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
-	dk_libRelease	(${BZIP2_Release_Dir}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
+	dk_libDebug		(${bzip2_Debug_Dir}/libbz2_static.a		BZIP2_LIBRARY_DEBUG)
+	dk_libRelease	(${bzip2_Release_Dir}/libbz2_static.a	BZIP2_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(BZIP2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
+dk_set(bzip2_CMAKE -DBZIP2_INCLUDE_DIR=${BZIP2_INCLUDE_DIR} -DBZIP2_LIBRARY_DEBUG=${BZIP2_LIBRARY_DEBUG} -DBZIP2_LIBRARY_RELEASE=${BZIP2_LIBRARY_RELEASE})
 	
 ### CONFIGURE ###
 if(Linux_Host)
-	dk_configure(${BZIP2} 
+	dk_configure(${bzip2} 
 		-DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} 
 		-DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} 
 		-DENABLE_TESTS=0 
 		-DENABLE_STATIC_LIB=1)
 else()
-	dk_configure(${BZIP2} 
+	dk_configure(${bzip2} 
 		-DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} 
 		-DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} 
 		${PYTHON3_CMAKE} 

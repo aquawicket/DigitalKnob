@@ -16,39 +16,32 @@ include_guard()
 # https://github.com/facebook/folly/blob/main/CMake/FindZstd.cmake
 
 ### IMPORT ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#dk_import(${ZSTD_DL})
 dk_import()
 
 ### LINK ###
-dk_include				(${ZSTD}/lib											ZSTD_INCLUDE_DIR)
+dk_include				(${zstd}/lib											Zstd_INCLUDE_DIR)
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${ZSTD_Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_Config_Dir}/lib/${Release_Dir}/zstd_static.lib	Zstd_LIBRARY_RELEASE)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/zstd_static.lib	Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
 	else()
-		dk_libDebug		(${ZSTD_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
 	endif()
 elseif(Apple)
-	dk_libDebug			(${ZSTD_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE)
+	dk_libDebug			(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
 else()
-	dk_libDebug			(${ZSTD_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_RELEASE)
+	dk_libDebug			(${zstd_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
 endif()
-if(Debug)
-	dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_DEBUG})
-endif()
-if(Release)
-	dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_RELEASE})
-endif()
-dk_set					(Zstd_LIBRARY		${ZSTD_LIBRARY})
+#dk_set					(Zstd_INCLUDE_DIR	${ZSTD_INCLUDE_DIR})
+#dk_set					(Zstd_LIBRARY		${ZSTD_LIBRARY})
 dk_set					(Zstd_LIBRARIES		${Zstd_LIBRARY_DEBUG} ${Zstd_LIBRARY_RELEASE})
-dk_set					(Zstd_INCLUDE_DIR	${ZSTD_INCLUDE_DIR})
+
 
 ### 3RDPARTY LINK ###
-dk_set(ZSTD_CMAKE
+dk_set(zstd_CMAKE
 	-DZSTD_INCLUDE_DIR=${ZSTD_INCLUDE_DIR}
 	-DZSTD_LIBRARY=${ZSTD_LIBRARY}
 	-DZstd_LIBRARY=${Zstd_LIBRARY}
@@ -59,7 +52,7 @@ dk_set(ZSTD_CMAKE
 	"-DCMAKE_EXE_LINKER_FLAGS=${Zstd_LIBRARIES}")
 		
 ### GENERATE ###
-dk_configure(${ZSTD}/build/cmake
+dk_configure(${zstd}/build/cmake
 	-DZSTD_BUILD_CONTRIB=OFF		# "BUILD CONTRIB" OFF
 	-DZSTD_BUILD_PROGRAMS=OFF		# "BUILD PROGRAMS" ON
 	-DZSTD_BUILD_SHARED=OFF			# "BUILD SHARED LIBRARIES" ON

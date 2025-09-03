@@ -27,17 +27,17 @@ endif()
 dk_isUrl(${python3_Import})
 if(dk_isUrl)
 	dk_importVariables("${python3_Import}")
-	dk_assertVar(PYTHON3)
+	dk_assertVar(python3)
 endif()
 
 if(Windows_Host)
-	dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3}")
+	dk_findProgram(python3_exe python.exe "${python3}")
 else()
-	dk_findProgram(PYTHON3_EXE python3)
+	dk_findProgram(python3_exe python3)
 endif()
 
 
-if(NOT EXISTS "${PYTHON3_EXE}")
+if(NOT EXISTS "${python3_exe}")
 	if(Mac_Host OR Windows_Host)
 		dk_import("${python3_Import}")
 	else()
@@ -45,26 +45,26 @@ if(NOT EXISTS "${PYTHON3_EXE}")
 	endif()
 	
 	if(Windows_Host)
-		dk_findProgram(PYTHON3_EXE python.exe "${PYTHON3}")
+		dk_findProgram(python3_exe python.exe "${python3}")
 	else()
-		dk_findProgram(PYTHON3_EXE python3)
+		dk_findProgram(python3_exe python3)
 	endif()
 endif()
 
-if(NOT EXISTS "${PYTHON3}")
-	dk_dirname("${PYTHON3_EXE}" PYTHON3)
+if(NOT EXISTS "${python3}")
+	dk_dirname("${python3_exe}" python3)
 endif()
 
 
-dk_prependEnvPath("${PYTHON3}")
+dk_prependEnvPath("${python3}")
 dk_exportVars(PATH "$ENV{PATH}")
 
 
 ### 3RDPARTY LINK ###
-dk_set(PYTHON3_CMAKE -DPython3_EXECUTABLE=${PYTHON3_EXE}) # -DPython3_Interpreter=${PYTHON3_EXE})
+dk_set(python3_CMAKE -DPython3_EXECUTABLE=${python3_exe}) # -DPython3_Interpreter=${python3_exe})
 
-dk_assertPath("${PYTHON3}")
-dk_assertPath("${PYTHON3_EXE}")
-dk_firewallAllow("PYTHON3_EXE" "${PYTHON3_EXE}")
+dk_assertPath("${python3}")
+dk_assertPath("${python3_exe}")
+dk_firewallAllow("python3_exe" "${python3_exe}")
 
 

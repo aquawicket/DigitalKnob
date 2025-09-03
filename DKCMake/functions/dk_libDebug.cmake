@@ -13,15 +13,16 @@ include_guard()
 
 
 #########################################################################
-# dk_libDebug(<lib_path>, <alias>:optional)
+# dk_libDebug(<lib_path>, <alias>:optional, <aliasB>:optional)
 #
 #	TODO
 #
-#	@lib_path	- TODO
+#	@lib_path			- Path to the library to include
 #	@alias (optional)	- Create a variable to store the lib_path in.
+#	@aliasB (optional)	- Create a variable to store the lib_path in.
 #
 function(dk_libDebug lib_path)
-	dk_debugFunc()
+	dk_debugFunc(1 3)
 	
 	if(NOT Debug)
 		return()
@@ -35,7 +36,7 @@ function(dk_libDebug lib_path)
 		return() # The library is already in the list
 	endif()
 	
-	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW) # FIXME: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
+	if(Linux OR Raspberry OR Android OR Emscripten OR MINGW) # TODO: can this be covered with MULTI_CONFIG and SINGLE_CONFIG ?
 		dk_prepend(LIBLIST ${lib_path})
 		dk_prepend(DEBUG_LIBS debug ${lib_path})
 		dk_prepend(${CURRENT_PLUGIN}_LIBS ${lib_path})
@@ -50,15 +51,18 @@ function(dk_libDebug lib_path)
 
 	if(INSTALL_DKLIBS)
 		if(EXISTS ${lib_path})
-			#dk_assertVar($ENV{CURRENT_PLUGIN}_Import_Name)
-			#set(LIB_NAME ${$ENV{CURRENT_PLUGIN}_Import_Name}) # get the import folder name of the plugin
-			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${LIB_NAME}/${Target_Tuple}/Debug)
+			#file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${${CURRENT_PLUGIN}_Import_Name}/${Target_Tuple}/Debug)
 			file(INSTALL ${lib_path} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/${Target_Tuple}/Debug)
+		else()
+			dk_warning("DKINSTALL: Could not locate ${lib_path}")
 		endif()
 	endif()
 	
 	if(ARGV1)
 		dk_set(${ARGV1} ${lib_path}) # add the lib_path to the supplied variable
+	endif()
+	if(ARGV2)
+		dk_set(${ARGV2} ${lib_path}) # add the lib_path to the supplied variable
 	endif()
 	
 endfunction()

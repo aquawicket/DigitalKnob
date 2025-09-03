@@ -22,22 +22,22 @@ dk_import()
 
 
 ### LINK ###
-dk_include			(${LIBEXPAT}/include				    	LIBEXPAT_INCLUDE_DIR)
-dk_include			(${LIBEXPAT}/${Target_Tuple})
+dk_include			(${libexpat}/include				    	LIBEXPAT_INCLUDE_DIR)
+dk_include			(${libexpat}/${Target_Tuple})
 if(MSVC)
-	dk_libDebug		(${LIBEXPAT_Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBEXPAT_Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
+	dk_libDebug		(${libexpat_Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
 else()
 	if(Windows)
-		dk_libDebug	(${LIBEXPAT_Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
 	else()
-		dk_libDebug	(${LIBEXPAT_Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
 	endif()
-	dk_libRelease	(${LIBEXPAT_Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
 endif()
 
 ### GENERATE ###
-dk_configure(${LIBEXPAT}/expat
+dk_configure(${libexpat}/expat
 	-DEXPAT_BUILD_TOOLS=ON				# "Build the xmlwf tool for expat library"  ${_EXPAT_BUILD_TOOLS_DEFAULT} 
 	-DEXPAT_BUILD_EXAMPLES=ON       	# "Build the examples for expat library" ON
 	-DEXPAT_BUILD_TESTS=ON          	# "Build the tests for expat library" ON
@@ -56,7 +56,7 @@ dk_configure(${LIBEXPAT}/expat
 	-DEXPAT_DEV_URANDOM=ON           	# "Define to include code reading entropy from `/dev/urandom'." ON
 	-DEXPAT_WITH_GETRANDOM="AUTO"       # "Make use of getrandom function (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
 	-DEXPAT_WITH_SYS_GETRANDOM="AUTO"	# "Make use of syscall SYS_getrandom (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
-	-DEXPAT_CHAR_TYPE=char            # "Character type to use (char|ushort|wchar_t) [default=char]" "char"
+	-DEXPAT_CHAR_TYPE=char            	# "Character type to use (char|ushort|wchar_t) [default=char]" "char"
 	-DEXPAT_ATTR_INFO=OFF             	# "Define to allow retrieving the byte offsets for attribute names and values" OFF
 	-DEXPAT_LARGE_SIZE=OFF            	# "Make XML_GetCurrent* functions return <(unsigned) long long> rather than <(unsigned) long>" OFF
 	-DEXPAT_MIN_SIZE=OFF            	# "Get a smaller (but slower) parser (in particular avoid multiple copies of the tokenizer)" OFF

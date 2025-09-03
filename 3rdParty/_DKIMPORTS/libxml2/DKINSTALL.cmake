@@ -19,8 +19,6 @@ include_guard()
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
-dk_debug("LIBXML2 = ${LIBXML2}")
 
 ### DEPEND ###
 #if(NOT EXISTS ${LIBXML2}/configure)
@@ -36,34 +34,33 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-#dk_import(PATCH)
-dk_import()
+dk_import() #PATCH
 
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${LIBXML2})
-dk_include				(${LIBXML2}/include 					LIBXML2_INCLUDE_DIR)
+dk_include				(${libxml2})
+dk_include				(${libxml2}/include 					LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2_Config_Dir}					LIBXML2_INCLUDE_DIR2)
+	dk_include			(${libxml2_Config_Dir}					LIBXML2_INCLUDE_DIR2)
 else()
 	if(Debug)
-		dk_include    	(${LIBXML2_Debug_Dir}					LIBXML2_INCLUDE_DIR2)
+		dk_include    	(${libxml2_Debug_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
 	if(Release)
-		dk_include 		(${LIBXML2_Release_Dir}					LIBXML2_INCLUDE_DIR2)
+		dk_include 		(${libxml2_Release_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
 endif()
 
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${LIBXML2_Debug_Dir}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBXML2_Release_Dir}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+		dk_libDebug		(${libxml2_Debug_Dir}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
+		dk_libRelease	(${libxml2_Release_Dir}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${LIBXML2_Debug_Dir}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBXML2_Release_Dir}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
+	dk_libDebug			(${libxml2_Debug_Dir}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
+	dk_libRelease		(${libxml2_Release_Dir}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
 endif()
 
 if(Debug)
@@ -74,7 +71,7 @@ if(Release)
 endif()
 
 ### CMAKE 3RDPARTY LINK ###
-dk_set(LIBXML2_CMAKE 
+dk_set(libxml2_CMAKE 
 	-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR}
 	-DLIBXML2_LIBRARY=${LIBXML2_LIBRARY} 
 	"-DLIBXML2_INCLUDE_DIRS=${LIBXML2_INCLUDE_DIR} ${LIBXML2_INCLUDE_DIR2}" 
@@ -83,7 +80,7 @@ dk_set(LIBXML2_CMAKE
 	"-DCMAKE_CXX_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}")
 
 ### GENERATE ###
-#if(NOT EXISTS ${LIBXML2}/configure)
+#if(NOT EXISTS ${libxml2}/configure)
 #	dk_exec(../../autogen.sh)
 	#--with-c14n             Canonical XML 1.0 support (on)
 	#--with-catalog          XML Catalogs support (on)
@@ -121,7 +118,7 @@ dk_set(LIBXML2_CMAKE
 	#--with-legacy           maximum ABI compatibility (off)
 #endif()
 
-#Android_dk_configure(${LIBXML2} 
+#Android_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
@@ -129,7 +126,7 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 ##Apple_dk_exec(${DKCONFIGURE_BUILD})
-#Apple_dk_configure(${LIBXML2} 
+#Apple_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
@@ -137,14 +134,14 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 ##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
-#E#MSCRIPTEN_dk_configure(${LIBXML2} 
+#E#MSCRIPTEN_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
 #	${ZLIB_CMAKE})
 
 ##Linux_dk_exec(${DKCONFIGURE_BUILD} --with-python=no)
-#Linux_dk_configure(${LIBXML2} 
+#Linux_dk_configure(${libxml2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
@@ -152,7 +149,7 @@ dk_set(LIBXML2_CMAKE
 #	${ZLIB_CMAKE})
 
 ##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
-#Raspberry_dk_configure(${LIBXML2}
+#Raspberry_dk_configure(${libxml2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
@@ -162,16 +159,16 @@ dk_set(LIBXML2_CMAKE
 ### We also need to make sure .js windows file association is set up.  look at DKJavascript/DKJavascript.reg
 #cscript.exe C:/Users/Administrator/DigitalKnob/Development/3rdParty/libxml2-e397651a/win32/configure.js compiler=mingw prefix=C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-e397651a\Windows_X86_64_Clang\Release
 if(Windows)
-	if(NOT EXISTS ${LIBXML2}/config.h)
-		dk_exec(cscript.exe configure.js compiler=mingw prefix=${LIBXML2_Build_Dir} WORKING_DIRECTORY "${LIBXML2}/win32")
+	if(NOT EXISTS ${libxml2}/config.h)
+		dk_exec(cscript.exe configure.js compiler=mingw prefix=${libxml2_Build_Dir} WORKING_DIRECTORY "${libxml2}/win32")
 	endif()
 endif()
 
 #Windows_dk_exec(${DKCONFIGURE_BUILD})
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_exec(${LIBXML2}/autogen.sh)
+if(NOT EXISTS ${libxml2}/configure)
+	dk_exec(${libxml2}/autogen.sh)
 endif()
-dk_configure(${LIBXML2} 
+dk_configure(${libxml2} 
 	-DLIBXML2_WITH_C14N=ON					# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON				# Add the Catalog support ON
 	-DLIBXML2_WITH_DEBUG=ON					# Add the debugging module ON
@@ -212,6 +209,6 @@ dk_configure(${LIBXML2}
 	${ZLIB_CMAKE})
 
 ### COMPILE ###
-dk_build(${LIBXML2})# LibXml2)
+dk_build(${libxml2})# LibXml2)
 
-dk_delete("${LIBXML2}/VERSION")
+dk_delete("${libxml2}/VERSION")

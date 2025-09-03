@@ -26,36 +26,36 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_import()
 
 ### LINK ###
-dk_include				(${LIBICONV})
-dk_include				(${LIBICONV}/include 				LIBICONV_INCLUDE_DIR)
-dk_include				(${LIBICONV_Config_Dir})
+dk_include				(${libiconv})
+dk_include				(${libiconv}/include 					LIBICONV_INCLUDE_DIR)
+dk_include				(${libiconv_Config_Dir})
 if(Debug)
-	dk_include			(${LIBICONV_Debug_Dir})
+	dk_include			(${libiconv_Debug_Dir})
 endif()
 if(Release)
-	dk_include			(${LIBICONV_Release_Dir})
+	dk_include			(${libiconv_Release_Dir})
 endif()
 
 # libcharset
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${LIBICONV_Debug_Dir}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBICONV_Release_Dir}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
+		dk_libDebug		(${libiconv_Debug_Dir}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
+		dk_libRelease	(${libiconv_Release_Dir}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${LIBICONV_Debug_Dir}/libcharset.a		LIBICONV_CHARSET_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV_Release_Dir}/libcharset.a	LIBICONV_CHARSET_LIBRARY_RELEASE)
+	dk_libDebug			(${libiconv_Debug_Dir}/libcharset.a		LIBICONV_CHARSET_LIBRARY_DEBUG)
+	dk_libRelease		(${libiconv_Release_Dir}/libcharset.a	LIBICONV_CHARSET_LIBRARY_RELEASE)
 endif()
 
 #libiconv
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${LIBICONV_Debug_Dir}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBICONV_Release_Dir}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
+		dk_libDebug		(${libiconv_Debug_Dir}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
+		dk_libRelease	(${libiconv_Release_Dir}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${LIBICONV_Debug_Dir}/libiconv.a		LIBICONV_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV_Release_Dir}/libiconv.a		LIBICONV_LIBRARY_RELEASE)
+	dk_libDebug			(${libiconv_Debug_Dir}/libiconv.a		LIBICONV_LIBRARY_DEBUG)
+	dk_libRelease		(${libiconv_Release_Dir}/libiconv.a		LIBICONV_LIBRARY_RELEASE)
 endif()
 
 if(Debug)
@@ -67,9 +67,9 @@ endif()
 
 ### 3RDPARTY LINK ###
 if(MULTI_CONFIG)
-	dk_set(LIBICONV_CMAKE
-		#-DLIBICONV_PATH=${LIBICONV}
-		#-DICONV_DIR=${LIBICONV}
+	dk_set(libiconv_CMAKE
+		#-DLIBICONV_PATH=${libiconv}
+		#-DICONV_DIR=${libiconv}
 		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 		#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_DEBUG};${LIBICONV_LIBRARY_DEBUG}"
 		-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
@@ -78,9 +78,9 @@ if(MULTI_CONFIG)
 		-DIconv_LIBRARY=${Iconv_LIBRARY})
 else()
 	if(Debug)
-		dk_set(LIBICONV_CMAKE
-			#-DLIBICONV_PATH=${LIBICONV}
-			#-DICONV_DIR=${LIBICONV}
+		dk_set(libiconv_CMAKE
+			#-DLIBICONV_PATH=${libiconv}
+			#-DICONV_DIR=${libiconv}
 			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 			#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_DEBUG};${LIBICONV_LIBRARY_DEBUG};${LIBICONV_CHARSET_LIBRARY_RELEASE};${LIBICONV_LIBRARY_RELEASE}"
 			-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
@@ -89,9 +89,9 @@ else()
 			-DIconv_LIBRARY=${Iconv_LIBRARY})
 	endif()
 	if(Release)
-		dk_set(LIBICONV_CMAKE 
-			#-DLIBICONV_PATH=${LIBICONV}
-			#-DICONV_DIR=${LIBICONV}
+		dk_set(libiconv_CMAKE 
+			#-DLIBICONV_PATH=${libiconv}
+			#-DICONV_DIR=${libiconv}
 			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 			#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_RELEASE};${LIBICONV_LIBRARY_RELEASE}"
 			-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
@@ -108,4 +108,4 @@ dk_configure()
 
 
 ### COMPILE ###
-dk_build(${LIBICONV} iconv)
+dk_build(${libiconv} iconv)
