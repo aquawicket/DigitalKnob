@@ -16,7 +16,7 @@ include_guard()
 # https://wiki.archlinux.org/title/Pacman
 # https://walterteng.com/using-zsh-on-windows
 
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_validate(msys2 "dk_depend(msys2)")
 dk_assertPath(msys2)
 dk_findProgram(PACMAN_EXE pacman "${msys2}/usr/bin")
 
@@ -33,8 +33,8 @@ if(NOT EXISTS "${msys2_GPGDir}")
 	set(ENV{PATH} "${msys2}/usr/bin:$ENV{PATH}")
 	set(ENV{MAKEPKG_LIBRARY} "${msys2}/usr/share/makepkg")
 	dk_findProgram(BASH_EXE bash "${msys2}/usr/bin")
-	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --init")
-	execute_process(COMMAND ${BASH_EXE} -c "pacman-key --populate msys2")
+	execute_process(COMMAND ${bash_exe} -c "pacman-key --init")
+	execute_process(COMMAND ${bash_exe} -c "pacman-key --populate msys2")
 	dk_killProcess(gpg-agent.exe NO_HALT)
 endif()
 

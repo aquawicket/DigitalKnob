@@ -26,7 +26,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 dk_depend(python3)
 dk_depend(pyyaml)
 #dk_depend(nodejs)
-#dk_validate(MSYS2 "dk_depend(msys2)")
+#dk_validate(msys2 "dk_depend(msys2)")
 
 ### IMPORT ###
 #dk_import(${duktape_Import} PATCH) #NOTE: PATCH is for CMakeLists.txt

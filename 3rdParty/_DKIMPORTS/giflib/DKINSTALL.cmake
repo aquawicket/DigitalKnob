@@ -23,7 +23,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(Windows)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_validate(msys2 "dk_depend(msys2)")
 endif()
 dk_depend(autotools)
 #dk_depend(gcc)
@@ -78,7 +78,7 @@ else()
 	### GENERATE / CONFIGURE ###
 	dk_chdir	(${GIFLIB})
 	dk_depend	(bash)
-	dk_exec		(${BASH_EXE} -c "autoreconf -f -i")
+	dk_exec		(${bash_exe} -c "autoreconf -f -i")
 
 	string(REPLACE "-std=c17" "" GIFLIB_CONFIGURE "${DKCONFIGURE_BUILD}")
 	string(REPLACE "-std=c++1z" "" GIFLIB_CONFIGURE "${GIFLIB_CONFIGURE}")

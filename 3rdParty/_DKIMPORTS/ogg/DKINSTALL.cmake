@@ -21,7 +21,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(Windows)
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_validate(msys2 "dk_depend(msys2)")
 endif()
 
 ### IMPORT ###

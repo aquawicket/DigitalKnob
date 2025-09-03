@@ -28,49 +28,49 @@ function(dk_BASH_EXE)
 	
 	else()
 		### Already found ###
-		if(EXISTS "${BASH_EXE}")
-			dk_debug("BASH_EXE:${BASH_EXE} already set")
+		if(EXISTS "${bash_exe}")
+			dk_debug("BASH_EXE:${bash_exe} already set")
 			return()
 		endif()
 
 		### from BASH_EXE environment variable ###
-		if(NOT EXISTS "${BASH_EXE}")
+		if(NOT EXISTS "${bash_exe}")
 			dk_set(CMD_EXE "$ENV{BASH_EXE}")
 		endif()
 		
 		### from BASH environment variable ###
-		if(NOT EXISTS "${BASH_EXE}")
+		if(NOT EXISTS "${bash_exe}")
 			if("$ENV{BASH}" MATCHES "/bash")
 				set(BASH_EXE "$ENV{BASH}")
 			endif()
 		endif()
 		
 		### from SHELL environment variable ###
-		if(NOT EXISTS "${BASH_EXE}")
+		if(NOT EXISTS "${bash_exe}")
 			if("$ENV{SHELL}" MATCHES "/bash")
 				set(BASH_EXE "$ENV{SHELL}")
 			endif()
 		endif()
 		
 		### From command -v ###
-		if(NOT EXISTS "${BASH_EXE}")
+		if(NOT EXISTS "${bash_exe}")
 			execute_process(COMMAND command -v bash OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 		endif()
 
 		### from dk_findProgram in Msys2 ###
-		if(NOT EXISTS "${BASH_EXE}")
-			dk_validate(MSYS2 "dk_depend(msys2)")
+		if(NOT EXISTS "${bash_exe}")
+			dk_validate(msys2 "dk_depend(msys2)")
 			dk_findProgram(MSYS2_BASH_EXE bash "${msys2}/usr/bin")
 			set(BASH_EXE ${msys2_BASH_EXE})
 		endif()
 	endif()
 	
 	### FINALIZE ###
-	#file(TO_CMAKE_PATH "${BASH_EXE}" BASH_EXE)
-	if(NOT EXISTS "${BASH_EXE}")
-		dk_warning("BASH_EXE:${BASH_EXE} not found")
+	#file(TO_CMAKE_PATH "${bash_exe}" BASH_EXE)
+	if(NOT EXISTS "${bash_exe}")
+		dk_warning("BASH_EXE:${bash_exe} not found")
 	else()
-		dk_set(BASH_EXE "${BASH_EXE}") # Globalize the variable
+		dk_set(BASH_EXE "${bash_exe}") # Globalize the variable
 	endif()
 endfunction()
 
@@ -86,18 +86,18 @@ function(DKTEST)
 	dk_echo()
 	dk_echo("Test Getting BASH_EXE . . .")
 	dk_BASH_EXE()
-	if(EXISTS "${BASH_EXE}")
-		dk_success("BASH_EXE = ${BASH_EXE}")
+	if(EXISTS "${bash_exe}")
+		dk_success("BASH_EXE = ${bash_exe}")
 	else()
-		dk_error("BASH_EXE = ${BASH_EXE}")
+		dk_error("BASH_EXE = ${bash_exe}")
 	endif()
 	
 	dk_echo()
 	dk_echo("Test Setting BASH_EXE . . .")
 	dk_BASH_EXE("C:/bash.exe")
-	if(EXISTS "${BASH_EXE}")
-		dk_success("BASH_EXE = ${BASH_EXE}")
+	if(EXISTS "${bash_exe}")
+		dk_success("BASH_EXE = ${bash_exe}")
 	else()
-		dk_error("BASH_EXE = ${BASH_EXE}")
+		dk_error("BASH_EXE = ${bash_exe}")
 	endif()
 endfunction()

@@ -37,12 +37,12 @@ function(dk_resizeImage)
 
 		###### BASH ######
 		dk_exec(bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE)
-		if(EXISTS "${BASH_EXE}")
+		if(EXISTS "${bash_exe}")
 			dk_exec(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE)
-			dk_exec(COMMAND ${BASH_EXE} -c "command -v 'convert'" OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
+			dk_exec(COMMAND ${bash_exe} -c "command -v 'convert'" OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
 			dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 			#message("${cmnd}")
-			set(cmnd ${BASH_EXE} -c "${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath}")
+			set(cmnd ${bash_exe} -c "${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath}")
 		endif()
 
 	elseif(Mac_Host)

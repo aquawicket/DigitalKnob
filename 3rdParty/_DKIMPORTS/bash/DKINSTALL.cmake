@@ -33,7 +33,7 @@ include_guard()
 #	Windows 	wsl_debian	bash	Linux
 #	Windows 	wsl_ubuntu	bash	Linux
 
-#if(EXISTS "${BASH_EXE}")
+#if(EXISTS "${bash_exe}")
 #	dk_undepend(bash)
 #	dk_return()
 #endif()
@@ -61,7 +61,7 @@ include_guard()
 
 ### Msys2 bash ###
 #if(MSYSTEM)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
+#	dk_validate(msys2 "dk_depend(msys2)")
 #	dk_findProgram(MSYS2_BASH_EXE bash.exe "${msys2}/usr/bin")
 #	if(EXISTS "${msys2_BASH_EXE}")
 #		dk_printVar(MSYS2_BASH_EXE)
@@ -87,11 +87,11 @@ include_guard()
 
 
 ### Git bash ###
-dk_printVar(GIT)
+dk_printVar(git)
 dk_depend(git)
-dk_printVar(GIT)
-dk_assertVar(GIT)
-dk_findProgram(GIT_BASH_EXE bash.exe "${GIT}/bin")
+dk_printVar(git)
+dk_assertVar(git)
+dk_findProgram(GIT_BASH_EXE bash.exe "${git}/bin")
 if(EXISTS "${GIT_BASH_EXE}")
 	dk_printVar(GIT_BASH_EXE)
 	if(NOT BASH_EXE)

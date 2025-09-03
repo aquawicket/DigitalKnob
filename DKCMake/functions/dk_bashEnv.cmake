@@ -54,7 +54,7 @@ function(dk_bashEnv)
 		dk_info("\n${clr}${magenta} bash> ${ARGV}\n")
 	endif()
 	
-	dk_validate(MSYS2 "dk_depend(msys2)")
+	dk_validate(msys2 "dk_depend(msys2)")
 	dk_depend(cygpath)
 	dk_exec(${CYGPATH_EXE} -m "${msys2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
@@ -108,7 +108,7 @@ function(dk_bashEnv)
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
 	
 	dk_depend(bash)
-	dk_exec(${BASH_EXE} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
+	dk_exec(${bash_exe} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)

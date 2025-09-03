@@ -20,5 +20,5 @@ if(NOT Android_Host)
 	return()
 endif()
 
-# apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && ${BASH_EXE} InstallTools.sh
+# apt update && apt install wget && wget https://github.com/MasterDevX/Termux-ADB/raw/master/InstallTools.sh && ${bash_exe} InstallTools.sh
 

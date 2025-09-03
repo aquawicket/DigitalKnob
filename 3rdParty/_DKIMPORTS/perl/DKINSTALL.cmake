@@ -23,7 +23,7 @@ endif()
 
 dk_validate(MSYSTEM "dk_MSYSTEM()")
 
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_validate(msys2 "dk_depend(msys2)")
 dk_installPackage(perl)
 
 if(Windows_Arm64_Clang)

@@ -40,7 +40,7 @@ function(dk_pause)
 	###### BASH ######
 	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(BASH_EXE)
-		set(cmnd ${BASH_EXE} -c "read -p ''")
+		set(cmnd ${bash_exe} -c "read -p ''")
 		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()

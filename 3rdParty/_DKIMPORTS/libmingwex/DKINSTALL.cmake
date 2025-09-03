@@ -14,7 +14,7 @@ include_guard()
 
 ############ libmingwex ############
 dk_validate(Target_Config  "dk_Target_Config()")
-dk_validate(MSYS2 "dk_depend(msys2)")
+dk_validate(msys2 "dk_depend(msys2)")
 
 if(Windows_X86_Clang)
 	dk_set(LIBMINGWEX ${msys2}/clang32/lib)

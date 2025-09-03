@@ -46,7 +46,7 @@ function(dk_timeout)
 	elseif(BASH_SHELL)
 		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
 		message("BASH> ${command}")
-		execute_process(COMMAND "${BASH_EXE}" -c ${command})
+		execute_process(COMMAND "${bash_exe}" -c ${command})
 	
 	###### SH ######
 	elseif(SH_SHELL)

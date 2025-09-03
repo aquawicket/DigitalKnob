@@ -34,7 +34,7 @@ else()
 	dk_libRelease	(${MPG123_Release_Dir}/libmpg123.a)
 endif()
 
-dk_exec(${BASH_EXE} -c "${AUTORECONF} -f -i")
+dk_exec(${bash_exe} -c "${AUTORECONF} -f -i")
 
 
 ### GENERATE ###

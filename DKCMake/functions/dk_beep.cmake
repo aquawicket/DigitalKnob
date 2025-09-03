@@ -24,8 +24,8 @@ function(dk_beep)
 	
 #	###### BASH ######
 #	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-#	if(EXISTS "${BASH_EXE}")
-#		set(cmnd ${BASH_EXE} -c "read -p '' stdin&& echo $stdin")
+#	if(EXISTS "${bash_exe}")
+#		set(cmnd ${bash_exe} -c "read -p '' stdin&& echo $stdin")
 #		#message("${cmnd}")
 #		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
 #		if("${stdin}" STREQUAL "$stdin")

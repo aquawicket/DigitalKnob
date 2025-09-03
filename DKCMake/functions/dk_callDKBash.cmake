@@ -33,7 +33,7 @@ function(dk_callDKBash)
 	#list(GET ARGN -1 LAST_ARG)
 
 #	### Call DKBash function
-#	dk_set(DKBASH_COMMAND "${BASH_EXE} -c ${DKBASH_FUNCTIONS_DIR_}${func}.sh ${ARGN}")
+#	dk_set(DKBASH_COMMAND "${bash_exe} -c ${DKBASH_FUNCTIONS_DIR_}${func}.sh ${ARGN}")
 #	dk_echo("${DKBASH_COMMAND}")
 #	execute_process(COMMAND ${DKBASH_COMMAND} WORKING_DIRECTORY "${DKBASH_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
 

@@ -46,7 +46,7 @@ function(dk_installGit)
 
 	### First Check ###
 	if(Windows_Host)
-		dk_findProgram(git_exe git.exe ${GIT}/bin)
+		dk_findProgram(git_exe git.exe ${git}/bin)
 	elseif(Android_Host)
 		dk_findProgram(git_exe git $ENV{PREFIX}/bin)
 	else()
@@ -60,7 +60,7 @@ function(dk_installGit)
 			#dk_download(${GIT_Import} $ENV{DKDOWNLOAD_DIR})
 			dk_download(${GIT_Import})			
 			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_Import_FILE}" GIT_Import_FILE_NATIVE)
-			dk_nativePath("${GIT}" GIT_NATIVE)
+			dk_nativePath("${git}" GIT_NATIVE)
 			execute_process(COMMAND ${GIT_Import_FILE_NATIVE} -y -o ${GIT_NATIVE} COMMAND_ECHO STDOUT)
 			# setx PATH
 		else()
@@ -70,7 +70,7 @@ function(dk_installGit)
 
 	## Second Check ###
 	if(Windows_Host)
-		dk_findProgram(git_exe git ${GIT}/bin)
+		dk_findProgram(git_exe git ${git}/bin)
 	elseif(Android_Host)
 		dk_findProgram(git_exe git $ENV{PREFIX}/bin)
 	else()
@@ -79,9 +79,9 @@ function(dk_installGit)
 	dk_assertPath(git_exe)
 	dk_printVar(git_exe)
 
-	dk_exec(${git_exe} --version OUTPUT_VARIABLE GIT_VERSION)
-	dk_set(GIT_VERSION ${GIT_VERSION})
-	dk_info(GIT_VERSION)
+	dk_exec(${git_exe} --version OUTPUT_VARIABLE git_Version)
+	dk_set(git_Version ${git_Version})
+	dk_info(git_Version)
 endfunction()
 
 

@@ -22,7 +22,7 @@ function(dk_commandExists shell commandName rtn_var)
 	## Test for command in BASH	
 	if("${shell}" STREQUAL "BASH")
 		dk_depend(bash)
-		execute_process(COMMAND ${BASH_EXE} -c "command -v ${commandName}" OUTPUT_VARIABLE output)
+		execute_process(COMMAND ${bash_exe} -c "command -v ${commandName}" OUTPUT_VARIABLE output)
 		set(${rtn_var} ${output} PARENT_SCOPE)
 		#dk_printVar(output)
 		return()
