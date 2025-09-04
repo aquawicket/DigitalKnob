@@ -43,7 +43,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_NET} ${SDL_CMAKE})
+dk_configure(${SDL_NET} ${sdl_CMAKE})
 
 
 ### COMPILE ###

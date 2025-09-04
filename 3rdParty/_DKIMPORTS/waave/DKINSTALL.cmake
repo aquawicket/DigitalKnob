@@ -36,7 +36,7 @@ Windows_dk_libRelease	(${WAAVE_Release_Dir}/waave.lib)
 
 
 ### GENERATE ###
-dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${SDL_CMAKE})
+dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${sdl_CMAKE})
 
 
 ### COMPILE ###

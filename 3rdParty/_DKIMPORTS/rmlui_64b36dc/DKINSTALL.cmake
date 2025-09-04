@@ -108,7 +108,7 @@ if(MSVC)
 		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
-		${SDL_CMAKE} 
+		${sdl_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 	
@@ -138,7 +138,7 @@ if(MSVC)
 		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
-		${SDL_CMAKE} 
+		${sdl_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE}) 
 else()
@@ -168,7 +168,7 @@ else()
 		${LUA_CMAKE}
 		${LUNASVG_CMAKE}
 		${RLOTTIE_CMAKE}
-		${SDL_CMAKE} 
+		${sdl_CMAKE} 
 		${SDL_IMAGE_CMAKE} 
 		${SFML_CMAKE})
 endif()

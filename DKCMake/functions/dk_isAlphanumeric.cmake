@@ -22,13 +22,21 @@ include_guard()
 function(dk_isAlphanumeric)
     dk_debugFunc()
  
-	dk_getArg(0 _arg0_)
+	#dk_getArg(0 _arg0_)
 	
-	dk_convertToCIdentifier("${_arg0_}" str_alphaNumeric)
-	if(("${_arg0_}" STREQUAL "${str_alphaNumeric}") OR ("_${_arg0_}" STREQUAL "${str_alphaNumeric}"))
-		set(dk_isAlphanumeric 1 PARENT_SCOPE)
+	dk_convertToCIdentifier("${ARGV0}" str_alphaNumeric)
+	if(("${ARGV0}" STREQUAL "${str_alphaNumeric}") OR ("_${ARGV0}" STREQUAL "${str_alphaNumeric}"))
+		set(dk_isAlphanumeric 1)
 	else()
-		set(dk_isAlphanumeric 0 PARENT_SCOPE)
+		set(dk_isAlphanumeric 0)
+	endif()
+	
+	###### output ######
+	set(dk_isAlphanumeric ${dk_isAlphanumeric} PARENT_SCOPE)
+	if(${ARGC} GREATER 1)
+		set(${output} ${dk_isAlphanumeric} PARENT_SCOPE)
+	else()
+		message("${dk_isAlphanumeric}")
 	endif()
 endfunction()
 

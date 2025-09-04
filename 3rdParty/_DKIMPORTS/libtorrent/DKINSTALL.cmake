@@ -46,7 +46,7 @@ Windows_dk_libRelease		(${LIBTORRENT_Release_Dir}/torrent-rasterbar.lib)
 
 
 ### GENERATE ###
-dk_configure(${LIBTORRENT} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${OPENSSL_CMAKE})
+dk_configure(${LIBTORRENT} -Dshared=OFF -Dunicode=OFF -Dstatic_runtime=ON ${BOOST_CMAKE} ${openssl_CMAKE})
 
 
 ### COMPILE ###

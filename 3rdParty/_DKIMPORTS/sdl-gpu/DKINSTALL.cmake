@@ -53,7 +53,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_GPU} ${SDL_CMAKE})
+dk_configure(${SDL_GPU} ${sdl_CMAKE})
 
 
 ### COMPILE ###

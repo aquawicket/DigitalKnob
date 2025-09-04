@@ -42,7 +42,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL2_GIFLIB_SA} ${GIFLIB_CMAKE} ${SDL_CMAKE})
+dk_configure(${SDL2_GIFLIB_SA} ${giflib_CMAKE} ${sdl_CMAKE})
 
 
 ### COMPILE ###

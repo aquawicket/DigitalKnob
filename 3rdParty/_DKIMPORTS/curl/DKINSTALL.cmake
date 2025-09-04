@@ -153,10 +153,10 @@ if(MSVC AND Windows)
 		${LIBBCRYPT_CMAKE}
 		${LIBPSL_CMAKE}
 		${LIBSSH2_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PTHREAD_CMAKE}
 		${WS2_32_LIB_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Android)
 	dk_configure(${CURL}
@@ -171,8 +171,8 @@ elseif(Android)
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0	#Android_Host
 		${LIBBCRYPT_CMAKE}
-		${OPENSSL_CMAKE}
-		${ZLIB_CMAKE}
+		${openssl_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Ios OR Iossim)
 	dk_configure(${CURL}
@@ -191,8 +191,8 @@ elseif(Ios OR Iossim)
 		-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0
 		${LIBBCRYPT_CMAKE}
-		${OPENSSL_CMAKE}
-		${ZLIB_CMAKE}
+		${openssl_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Mac)
 	dk_configure(${CURL}
@@ -265,8 +265,8 @@ elseif(Mac)
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${LIBBCRYPT_CMAKE}
-		${OPENSSL_CMAKE}
-		${ZLIB_CMAKE}
+		${openssl_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 elseif(Linux)
 	dk_configure(${CURL}
@@ -339,8 +339,8 @@ elseif(Linux)
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${LIBBCRYPT_CMAKE}
-		${OPENSSL_CMAKE}
-		${ZLIB_CMAKE}
+		${openssl_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 #else()
@@ -413,8 +413,8 @@ endif()
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
 		${LIBBCRYPT_CMAKE}
-		${OPENSSL_CMAKE}
-		${ZLIB_CMAKE}
+		${openssl_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 #endif()
 

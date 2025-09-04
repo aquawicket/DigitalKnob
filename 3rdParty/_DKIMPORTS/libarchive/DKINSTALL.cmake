@@ -121,10 +121,10 @@ if(Android)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		#${OPENSSL_CMAKE}
+		#${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 
@@ -180,10 +180,10 @@ if(Emscripten)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 
@@ -240,10 +240,10 @@ if(Ios)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 
 	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
@@ -307,10 +307,10 @@ if(Iossim)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 
 	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
@@ -373,10 +373,10 @@ if(Linux)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 
@@ -432,10 +432,10 @@ if(Mac)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 
@@ -491,10 +491,10 @@ if(Raspberry)
 		${LIBXML2_CMAKE}
 		${LZ4_CMAKE}
 		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
+		${openssl_CMAKE}
 		${PCRE2_CMAKE}
 		${XZ_CMAKE}
-		${ZLIB_CMAKE}
+		${zlib_CMAKE}
 		${ZSTD_CMAKE})
 endif()
 
@@ -551,10 +551,10 @@ if(MSVC)
 			${LIBXML2_CMAKE}
 			${LZ4_CMAKE}
 			${LZO_CMAKE}
-			${OPENSSL_CMAKE}
+			${openssl_CMAKE}
 			${PCRE2_CMAKE}
 			${XZ_CMAKE}
-			${ZLIB_CMAKE}
+			${zlib_CMAKE}
 			${ZSTD_CMAKE})
 	endif()
 else()
@@ -622,10 +622,10 @@ else()
 			${LIBXML2_CMAKE}
 			${LZ4_CMAKE}
 			${LZO_CMAKE}
-			${OPENSSL_CMAKE}
+			${openssl_CMAKE}
 			${PCRE2_CMAKE}
 			${XZ_CMAKE}
-			${ZLIB_CMAKE}
+			${zlib_CMAKE}
 			${ZSTD_CMAKE})
 	endif()
 endif()

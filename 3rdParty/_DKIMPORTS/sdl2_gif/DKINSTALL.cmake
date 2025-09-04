@@ -48,7 +48,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL2_GIF} ${SDL_CMAKE})
+dk_configure(${SDL2_GIF} ${sdl_CMAKE})
 
 
 ### COMPILE ###

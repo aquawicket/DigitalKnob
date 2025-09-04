@@ -50,7 +50,7 @@ dk_configure(${SDL_TTF}
 	-DSDLTTF_SUPPORT_WEBP=${LIBWEBP}
 	${FREETYPE_CMAKE}
 	${LIBWEBP_CMAKE}
-	${SDL_CMAKE}) 
+	${sdl_CMAKE}) 
 
 
 ### COMPILE ###

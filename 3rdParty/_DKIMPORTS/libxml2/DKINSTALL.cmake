@@ -123,7 +123,7 @@ dk_set(libxml2_CMAKE
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${zlib_CMAKE})
 
 ##Apple_dk_exec(${DKCONFIGURE_BUILD})
 #Apple_dk_configure(${libxml2} 
@@ -131,14 +131,14 @@ dk_set(libxml2_CMAKE
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${zlib_CMAKE})
 
 ##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${zlib_CMAKE})
 
 ##Linux_dk_exec(${DKCONFIGURE_BUILD} --with-python=no)
 #Linux_dk_configure(${libxml2} 
@@ -146,14 +146,14 @@ dk_set(libxml2_CMAKE
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${zlib_CMAKE})
 
 ##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
 #Raspberry_dk_configure(${libxml2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${zlib_CMAKE})
 
 ### TODO ### we still need to add flags to the configure.js call
 ### We also need to make sure .js windows file association is set up.  look at DKJavascript/DKJavascript.reg
@@ -206,7 +206,7 @@ dk_configure(${libxml2}
 	${LIBICONV_CMAKE} 
 	${PYTHON3_CMAKE}
 	${XZ_CMAKE} 
-	${ZLIB_CMAKE})
+	${zlib_CMAKE})
 
 ### COMPILE ###
 dk_build(${libxml2})# LibXml2)

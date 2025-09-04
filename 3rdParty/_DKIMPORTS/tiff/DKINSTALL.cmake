@@ -61,7 +61,7 @@ dk_set						(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELE
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-dk_set(TIFF_CMAKE
+dk_set(tiff_CMAKE
 	-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
 	-DTIFF_INCLUDE_DIRS=${TIFF_INCLUDE_DIRS}
 	-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
@@ -69,11 +69,11 @@ dk_set(TIFF_CMAKE
 	-DTIFF_LIBRARIES=${TIFF_LIBRARIES}
 	"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARIES}")	
 if(MSVC)
-	dk_append(TIFF_CMAKE
+	dk_append(tiff_CMAKE
 		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}"
 		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}")
 else()	
-	dk_append(TIFF_CMAKE
+	dk_append(tiff_CMAKE
 		"-DCMAKE_C_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}"
 		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}")
 endif()
@@ -87,9 +87,9 @@ dk_configure(${TIFF}
 	-Dtiff-docs=OFF					# "build TIFF documentation" ON
 	-Dtiff-deprecated=OFF			# "build TIFF deprecated features" OFF
 	-Dtiff-install=OFF				# "install TIFF targets" ${TIFF_INSTALL_DEFAULT}
-	${LIBJPEG_TURBO_CMAKE} 
+	${libjpeg-turbo_CMAKE} 
 	${XZ_CMAKE}
-	${ZLIB_CMAKE}
+	${zlib_CMAKE}
 	${ZSTD_CMAKE})
 
 ### COMPILE ###

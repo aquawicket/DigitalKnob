@@ -21,31 +21,30 @@ dk_depend(openssl)
 dk_depend(zlib)
 
 ### IMPORT ###
-dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.zip PATCH)
-#dk_import(https://github.com/uNetworking/uWebSockets/archive/refs/tags/v20.36.0.zip)
+dk_import() #PATCH
 
 ### LINK ###
-dk_include				(${UWEBSOCKETS})
-dk_include				(${UWEBSOCKETS}/${Target_Tuple})
-if(MSVC)
-	Windows_dk_libDebug		(${UWEBSOCKETS_Debug_Dir}/uWS.lib)
-	Windows_dk_libRelease	(${UWEBSOCKETS_Release_Dir}/uWS.lib)
+dk_include				(${uwebsockets})
+dk_include				(${uwebsockets}/${Target_Tuple})
+if(Windows AND MSVC)
+	dk_libDebug			(${uwebsockets_Debug_Dir}/uWS.lib)
+	dk_libRelease		(${uwebsockets_Release_Dir}/uWS.lib)
 else()
-	dk_libDebug			(${UWEBSOCKETS_Debug_Dir}/libuWS.a)
-	dk_libRelease		(${UWEBSOCKETS_Release_Dir}/libuWS.a)
+	dk_libDebug			(${uwebsockets_Debug_Dir}/libuWS.a)
+	dk_libRelease		(${uwebsockets_Release_Dir}/libuWS.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${UWEBSOCKETS}
-	${LIBUV_CMAKE}
-	${OPENSSL_CMAKE}
-	${ZLIB_CMAKE})
+dk_configure(${uwebsockets}
+	${libuv_CMAKE}
+	${openssl_CMAKE}
+	${zlib_CMAKE})
 
 ### COMPILE ###
-dk_build(${UWEBSOCKETS} uWS)
+dk_build(${uwebsockets} uWS)
 
 ###### WITHOUT CMAKE #########
-#DEBUG_dk_configure			(${UWEBSOCKETS})
-#DEBUG_dk_build				(${UWEBSOCKETS})
+#DEBUG_dk_configure			(${uwebsockets})
+#DEBUG_dk_build				(${uwebsockets})
 ##############################
 

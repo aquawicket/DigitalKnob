@@ -25,40 +25,40 @@ dk_depend(tiff)
 dk_depend(zlib)
 
 ### IMPORT ###
-dk_import(${libwebp_Import})
+dk_import()
 
 ### LINK ###
-dk_include					(${LIBWEBP}							LIBWEBP_INCLUDE_DIR)
+dk_include					(${libwebp}								LIBWEBP_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug				(${LIBWEBP_Debug_Dir}/libwebp.lib		LIBWEBP_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBWEBP_Release_Dir}/libwebp.lib		LIBWEBP_LIBRARY_RELEASE)
+	dk_libDebug				(${libwebp_Debug_Dir}/libwebp.lib		LIBWEBP_LIBRARY_DEBUG)
+	dk_libRelease			(${libwebp_Release_Dir}/libwebp.lib		LIBWEBP_LIBRARY_RELEASE)
 #elseif(Apple)
-#	Apple_dk_libDebug		(${LIBWEBP_Tuple_Dir}/WebP.build/${Debug_Dir}/webpdecode.build/libwebpdecode.a)
-#	Apple_dk_libDebug		(${LIBWEBP_Tuple_Dir}/WebP.build/${Debug_Dir}/webpdsp.build/libwebpdsp.a)
-#	Apple_dk_libDebug		(${LIBWEBP_Tuple_Dir}/WebP.build/${Debug_Dir}/webpencode.build/libwebpencode.a)
-#	Apple_dk_libDebug		(${LIBWEBP_Tuple_Dir}/WebP.build/${Debug_Dir}/webputils.build/libwebputils.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Tuple_Dir}/WebP.build/${Release_Dir}/webpdecode.build/libwebpdecode.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Tuple_Dir}/WebP.build/${Release_Dir}/webpdsp.build/libwebpdsp.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Tuple_Dir}/WebP.build/${Release_Dir}/webpencode.build/libwebpencode.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Tuple_Dir}/WebP.build/${Release_Dir}/webputils.build/libwebputils.a)
+#	Apple_dk_libDebug		(${libwebp_Tuple_Dir}/WebP.build/${Debug_Dir}/webpdecode.build/libwebpdecode.a)
+#	Apple_dk_libDebug		(${libwebp_Tuple_Dir}/WebP.build/${Debug_Dir}/webpdsp.build/libwebpdsp.a)
+#	Apple_dk_libDebug		(${libwebp_Tuple_Dir}/WebP.build/${Debug_Dir}/webpencode.build/libwebpencode.a)
+#	Apple_dk_libDebug		(${libwebp_Tuple_Dir}/WebP.build/${Debug_Dir}/webputils.build/libwebputils.a)
+#	Apple_dk_libRelease		(${libwebp_Tuple_Dir}/WebP.build/${Release_Dir}/webpdecode.build/libwebpdecode.a)
+#	Apple_dk_libRelease		(${libwebp_Tuple_Dir}/WebP.build/${Release_Dir}/webpdsp.build/libwebpdsp.a)
+#	Apple_dk_libRelease		(${libwebp_Tuple_Dir}/WebP.build/${Release_Dir}/webpencode.build/libwebpencode.a)
+#	Apple_dk_libRelease		(${libwebp_Tuple_Dir}/WebP.build/${Release_Dir}/webputils.build/libwebputils.a)
 #	
-#	Apple_dk_libDebug		(${LIBWEBP_Debug_Dir}/libwebp.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Release_Dir}/libwebp.a)
-#	Apple_dk_libDebug		(${LIBWEBP_Debug_Dir}/libsharpyuv.a)
-#	Apple_dk_libRelease		(${LIBWEBP_Release_Dir}/libsharpyuv.a)
+#	Apple_dk_libDebug		(${libwebp_Debug_Dir}/libwebp.a)
+#	Apple_dk_libRelease		(${libwebp_Release_Dir}/libwebp.a)
+#	Apple_dk_libDebug		(${libwebp_Debug_Dir}/libsharpyuv.a)
+#	Apple_dk_libRelease		(${libwebp_Release_Dir}/libsharpyuv.a)
 else()
-	dk_libDebug				(${LIBWEBP_Debug_Dir}/libwebp.a)
-	dk_libRelease			(${LIBWEBP_Release_Dir}/libwebp.a)
+	dk_libDebug				(${libwebp_Debug_Dir}/libwebp.a)
+	dk_libRelease			(${libwebp_Release_Dir}/libwebp.a)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(LIBWEBP_CMAKE 
+dk_set(libwebp_CMAKE 
 	-DWEBP_INCLUDE_DIR=${LIBWEBP_INCLUDE_DIR}
 	-DWEBP_LIBRARY_DEBUG=${LIBWEBP_LIBRARY_DEBUG}
 	-DWEBP_LIBRARY_RELEASE=${LIBWEBP_LIBRARY_RELEASE})
 
 ### GENERATE ###
-dk_configure				(${LIBWEBP} ${GIFLIB_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${SDL_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE})
+dk_configure				(${libwebp} ${giflib_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${sdl_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE})
 
 ### COMPILE ###
-dk_build					(${LIBWEBP} webp)
+dk_build					(${libwebp} webp)

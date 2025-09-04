@@ -15,50 +15,48 @@ include_guard()
 
 
 #########################################################################
-# dk_depend(plugin) target
+# dk_depend(Plugin) target
 #
-#	Each plugin invoked will fill a a varaible or it's name to the path where it
+#	Each Plugin invoked will fill a a varaible or it's name to the path where it
 #   is installed..   
 #   I.E.  dk_validate(ZLIB "dk_depend(zlib)") 
 #   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake
 #   to fill fill ZLIB with the path zlib is installed to.
 #
-function(dk_depend plugin) #target
+function(dk_depend Plugin) #target
 	dk_debugFunc(1 2)
 	
-	if(plugin IN_LIST dkdepend_list)
+	message("############ dk_depend(${Plugin}) ############")
+	
+	if(Plugin IN_LIST dkdepend_list)
 		return()
 	endif()
 		
-	if(plugin IN_LIST dk_disabled_list)
-		if(DISABLED_LIBS MATCHES "${plugin}")
-			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
+	if(Plugin IN_LIST dk_disabled_list)
+		if(DISABLED_LIBS MATCHES "${Plugin}")
+			dk_append(DISABLED_LIBS "${Plugin}") # this list is for the build.log
 		endif()
-		dk_notice("${plugin} IS DISABLED")
+		dk_notice("${Plugin} IS DISABLED")
 		return()
 	endif()
 	
-	message("############ dk_depend(${plugin}) ############")
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
-	dk_getPathToPlugin(${plugin} Import_Path)
-	dk_basename("${Import_Path}" Import_Name)
-	#dk_toUpper("${Import_Name}" Import_Name)
-	dk_convertToCIdentifier(${Import_Name} PLUGIN)
 	
 	###### Push Plugin to the PLUGIN_STACK ######
 	dk_echo("\n")
-	dk_envList(PLUGIN PUSH "${PLUGIN}")
+	dk_envList(PLUGIN PUSH "${Plugin}")
 	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} ENTER ##########################>>>>>")
 	
-		list(APPEND dkdepend_list "${plugin}")
+		list(APPEND dkdepend_list "${Plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 		
-		dk_set(${CURRENT_PLUGIN}_Import_Path "${Import_Path}")
+		dk_getPathToPlugin(${CURRENT_PLUGIN} ${CURRENT_PLUGIN}_Import_Path)
+		dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
 
 		#dk_importVariables(Import_Path "${Import_Path}")
 		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
 			
-		dk_enable("${plugin}")
+		dk_enable("${Plugin}")
 	 
 	###### Pop Plugin from the PLUGIN_STACK ######
 	dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")

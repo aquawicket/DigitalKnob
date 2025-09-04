@@ -61,22 +61,22 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_Config_Dir})
 #	-DSTATIC=ON 
 #	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
 #	-DSW_BUILD=OFF 
-#	${GIFLIB_CMAKE} 
-#	${LIBJPEG_TURBO_CMAKE} 
-#	${LIBPNG_CMAKE} 
-#	${TIFF_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${giflib_CMAKE} 
+#	${libjpeg-turbo_CMAKE} 
+#	${libpng_CMAKE} 
+#	${tiff_CMAKE} 
+#	${zlib_CMAKE})
 	
 dk_configure(${LEPTONICA} 
 	-DSTATIC=ON 
 	-DCMAKE_INSTALL_PREFIX=${LEPTONICA}
 	-DSW_BUILD=OFF
-	${GIFLIB_CMAKE}
-	${LIBJPEG_TURBO_CMAKE}
-	${LIBPNG_CMAKE}
+	${giflib_CMAKE}
+	${libjpeg-turbo_CMAKE}
+	${libpng_CMAKE}
 	${LIBWEBP_CMAKE}
-	${TIFF_CMAKE}
-	${ZLIB_CMAKE})
+	${tiff_CMAKE}
+	${zlib_CMAKE})
 
 ### COMPILE ###
 dk_build(${LEPTONICA} leptonica)

@@ -26,44 +26,38 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-#if(Mac)
-#	#dk_import(https://github.com/glennrp/libpng.git)
-#	dk_import(${libpng_Mac_Import})
-#else()
-#	dk_import(${libpng_Import} PATCH)
-#endif()
 dk_import()
 
 
 ### LINK ###
 dk_define					(PNG_STATIC)
-dk_include					(${LIBPNG}  															PNG_INCLUDE_DIR)
-dk_include					(${LIBPNG_Config_Dir}													PNG_INCLUDE_DIR2)
+dk_include					(${libpng}  															PNG_INCLUDE_DIR)
+dk_include					(${libpng_Config_Dir}													PNG_INCLUDE_DIR2)
 
 if(MSVC)
 	if(Android)
-		dk_libDebug			(${LIBPNG_Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${LIBPNG_Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
+		dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}d.a			PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}.a			PNG_LIBRARY_RELEASE)
 	endif()
 	if(Windows)
-		dk_libDebug			(${LIBPNG_Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_staticd.lib	PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${LIBPNG_Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}_static.lib	PNG_LIBRARY_RELEASE)
+		dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}_staticd.lib	PNG_LIBRARY_DEBUG)
+		dk_libRelease		(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}_static.lib	PNG_LIBRARY_RELEASE)
 	endif()
 elseif(Apple)
-	dk_libDebug				(${LIBPNG_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG_Release_Dir}/libpng16d.a										PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${libpng_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${libpng_Release_Dir}/libpng16d.a										PNG_LIBRARY_RELEASE)
 else()
-	#dk_libDebug			(${LIBPNG_Debug_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}d.a			PNG_LIBRARY_DEBUG)
-	#dk_libRelease			(${LIBPNG_Release_Dir}/libpng${LIBPNG_MAJOR}${LIBPNG_MINOR}.a			PNG_LIBRARY_RELEASE)
-	dk_libDebug				(${LIBPNG_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${LIBPNG_Release_Dir}/libpng16.a										PNG_LIBRARY_RELEASE)
+	#dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}d.a			PNG_LIBRARY_DEBUG)
+	#dk_libRelease			(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}.a			PNG_LIBRARY_RELEASE)
+	dk_libDebug				(${libpng_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
+	dk_libRelease			(${libpng_Release_Dir}/libpng16.a										PNG_LIBRARY_RELEASE)
 endif()
 
 
 ### 3RDPARTY LINK ###
 if(MSVC)
 	if(Windows)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_C_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_CXX_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
 		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
@@ -73,7 +67,7 @@ if(MSVC)
 		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
 	
 	elseif(Android)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
@@ -83,7 +77,7 @@ if(MSVC)
 		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2})
 	endif()
 elseif(Apple)
-	dk_set(LIBPNG_CMAKE 
+	dk_set(libpng_CMAKE 
 	"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 	"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 	-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR} 
@@ -92,7 +86,7 @@ elseif(Apple)
 	-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})	
 elseif(Raspberry)
 	if(Debug)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"  
 		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
@@ -101,7 +95,7 @@ elseif(Raspberry)
 		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
 	endif()
 	if(Release)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
@@ -111,7 +105,7 @@ elseif(Raspberry)
 	endif()
 else()
 	if(Debug)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
 		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_DEBUG}"
@@ -121,7 +115,7 @@ else()
 		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
 	endif()
 	if(Release)
-		dk_set(LIBPNG_CMAKE 
+		dk_set(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
 		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_RELEASE}"
@@ -135,7 +129,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${LIBPNG}
+dk_configure(${libpng}
 	-DPNG_BUILD_ZLIB=OFF 			# "Custom zlib Location, otherwise find_package is used" OFF
 	-DPNG_STATIC=ON					# "Build shared lib" ON
 	-DPNG_SHARED=OFF				# "Build static lib" ON
@@ -149,10 +143,10 @@ dk_configure(${LIBPNG}
 	-Dld-version-script=ON			# "Enable linker version script" ON
 	-DSKIP_INSTALL_LIBRARIES=ON 
 	-DSKIP_INSTALL_ALL=ON
-	${ZLIB_CMAKE})  
+	${zlib_CMAKE})  
 
 
 
 ### COMPILE ###
-dk_build(${LIBPNG} png_static)
+dk_build(${libpng} png_static)
 

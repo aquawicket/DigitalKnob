@@ -47,7 +47,7 @@ endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_RTF} ${SDL_CMAKE})
+dk_configure(${SDL_RTF} ${sdl_CMAKE})
 
 
 ### COMPILE ###

@@ -13,8 +13,8 @@ include_guard()
 
 
 #########################################################################
-# dk_envList(<name> PUSH value)
-# dk_envList(<name> POP)
+# dk_envList(<LIST_NAME> PUSH <Import_Name>)
+# dk_envList(<LIST_NAME> POP)
 #
 #	Create a Global 'stack like" list variable. You can push to, and pop from the stack.
 #   use ${CURRENT_<name>} to get the topmost item.
@@ -22,15 +22,15 @@ include_guard()
 function(dk_envList)
 	dk_debugFunc()
 
-	set(NAME "${ARGV0}")
-	set(CMND "${ARGV1}")
-
-	set(_Current_ "${ARGV2}")				### push the value
-	set(_Stack_ "$ENV{${NAME}_Stack}")		### copy the env variable to local variable
+	set(LIST_NAME   "${ARGV0}")
+	set(CMND 		"${ARGV1}")
+	set(Import_Name 	"${ARGV2}")	### push the value
 	
-	### set the _CURRENT_ item and push it to the local _STACK_ list ###
+	set(_Stack_ "$ENV{${LIST_NAME}_Stack}")		### copy the env variable to local variable
+	
+	### set the Import_Name item and push it to the local _Stack_ list ###
 	if("${CMND}" STREQUAL "PUSH")
-		set(_Stack_ "${_Current_};${_Stack_}")
+		set(_Stack_ "${Import_Name};${_Stack_}")
 		list(LENGTH _Stack_ _Length_)
 	endif()
 
@@ -39,28 +39,28 @@ function(dk_envList)
 		list(POP_FRONT _Stack_)
 		list(LENGTH _Stack_ _Length_)
 		if(${_Length_} GREATER 0)
-			list(GET _Stack_ 0 _Current_)
+			list(GET _Stack_ 0 Import_Name)
 		else()
-			set(_Current_ "")
+			set(Import_Name "")
 		endif()
 	endif()
 
-	dk_set(CURRENT_${NAME} 	"${_Current_}")	### set the global variable
-	dk_set(${NAME}_Stack 	"${_Stack_}")	### copy local variable back to the environment variable
+	dk_set(CURRENT_${LIST_NAME} "${Import_Name}")	### set the global variable
+	dk_set(${LIST_NAME}_Stack 	"${_Stack_}")	### copy local variable back to the environment variable
 
 		
-#	dk_debug("              NAME = ${NAME}")
-#	dk_debug("              CMND = ${CMND}")
-#	dk_debug("         _CURRENT_ = ${_CURRENT_}")
-#	dk_debug("           _STACK_ = ${_STACK_}")
-#	dk_debug("          _LENGTH_ = ${_LENGTH_}")
-#	dk_debug("   CURRENT_${NAME} = ${CURRENT_${NAME}}")
-#	dk_debug("     ${NAME}_STACK = ${${NAME}_STACK}")
-#	dk_debug("      ${_CURRENT_} = ${${_CURRENT_}}")
-#	dk_debug("  ${_CURRENT_}_DIR = ${${_CURRENT_}_DIR}")
+#	dk_debug("              LIST_NAME = ${LIST_NAME}")
+#	dk_debug("                   CMND = ${CMND}")
+#	dk_debug("            Import_Name = ${Import_Name}")
+#	dk_debug("                _Stack_ = ${_Stack_}")
+#	dk_debug("               _Length_ = ${_Length_}")
+#	dk_debug("   CURRENT_${LIST_NAME} = ${CURRENT_${LIST_NAME}}")
+#	dk_debug("     ${LIST_NAME}_Stack = ${${LIST_NAME}_Stack}")
+#	dk_debug("         ${Import_Name} = ${${Import_Name}}")
 
-	dk_title("${${NAME}_Stack}")
-	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+
+	dk_title("${${LIST_NAME}_Stack}")
+	#dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 endfunction()
 
 

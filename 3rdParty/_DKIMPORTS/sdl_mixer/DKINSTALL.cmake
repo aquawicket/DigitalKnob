@@ -89,7 +89,7 @@ dk_configure(${SDL_MIXER}
 	${FLAC_CMAKE}
 	${OGG_CMAKE} 
 	${OPUS_CMAKE}
-	${SDL_CMAKE} 
+	${sdl_CMAKE} 
 	${SMPEG2_CMAKE}
 	${VORBIS_CMAKE}
 	${WAVPACK_CMAKE})

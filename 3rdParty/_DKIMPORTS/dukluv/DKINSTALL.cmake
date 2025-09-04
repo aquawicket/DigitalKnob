@@ -38,7 +38,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure			(${DUKLUV} ${DUKTAPE_CMAKE} ${LIBUV_CMAKE})
+dk_configure			(${DUKLUV} ${DUKTAPE_CMAKE} ${libuv_CMAKE})
 
 ### COMPILE ###
 dk_build				(${DUKLUV})

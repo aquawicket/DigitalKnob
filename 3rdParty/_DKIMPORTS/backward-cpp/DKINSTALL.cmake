@@ -16,18 +16,16 @@ include_guard()
 # https://github.com/bombela/backward-cpp.git
 
 ### IMPORT ###
-##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#dk_import			("${backward_cpp_Import}")
 dk_import()
 
 ### LINK ###
-dk_include			("${backward_cpp}")
+dk_include			("${backward-cpp}")
 #if(Unix)
-#	dk_libDebug		("${backward_cpp_Debug_Dir}/libbackward.a")
-#	dk_libRelease	("${backward_cpp_Release_Dir}/libbackward.a")
+#	dk_libDebug		("${backward-cpp_Debug_Dir}/libbackward.a")
+#	dk_libRelease	("${backward-cpp_Release_Dir}/libbackward.a")
 #elseif(Windows)
-#	dk_libDebug		("${backward_cpp_Debug_Dir}/backward.lib")
-#	dk_libRelease	("${backward_cpp_Release_Dir}/backward.lib")
+#	dk_libDebug		("${backward-cpp_Debug_Dir}/backward.lib")
+#	dk_libRelease	("${backward-cpp_Release_Dir}/backward.lib")
 #endif()
 
 
@@ -38,7 +36,7 @@ if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 elseif(Android)
 	dk_delete("${DKCPP_PLUGINS_DIR}/DK/backward.cpp" NO_HALT)
 else()
-	dk_copy("${backward_cpp}/backward.cpp" "${DKCPP_PLUGINS_DIR}/DK/backward.cpp" OVERWRITE)
+	dk_copy("${backward-cpp}/backward.cpp" "${DKCPP_PLUGINS_DIR}/DK/backward.cpp" OVERWRITE)
 endif()
 
 ### GENERATE ###

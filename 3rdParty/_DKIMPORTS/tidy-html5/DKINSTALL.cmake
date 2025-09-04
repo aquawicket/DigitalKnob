@@ -53,9 +53,9 @@ endif()
 
 ### GENERATE ###
 if(Emscripten) 
-	dk_configure		(${TIDY_HTML5} ${ZLIB_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
+	dk_configure		(${TIDY_HTML5} ${zlib_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
 else()
-	dk_configure		(${TIDY_HTML5} ${ZLIB_CMAKE})
+	dk_configure		(${TIDY_HTML5} ${zlib_CMAKE})
 endif()
 
 

@@ -46,7 +46,7 @@ dk_depend(nasm)
 #dk_import(https://github.com/openssl/openssl/archive/2f362e9.zip)
 dk_import()
 #if(Emscripten)
-#	dk_copy(${OPENSSL_CMAKE} ${OPENSSL})
+#	dk_copy(${openssl_CMAKE} ${OPENSSL})
 #endif()
 
 
@@ -94,7 +94,7 @@ endif()
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindOpenSSL.html
-dk_set(OPENSSL_CMAKE
+dk_set(openssl_CMAKE
 	-DOPENSSL_USE_STATIC_LIBS=ON
 	-DOPENSSL_ROOT_DIR=${OPENSSL_ROOT_DIR}
 	-DOPENSSL_INCLUDE_DIR=${OPENSSL_INCLUDE_DIR}
@@ -102,7 +102,7 @@ dk_set(OPENSSL_CMAKE
 	-DOPENSSL_CRYPTO_LIBRARY=${OPENSSL_CRYPTO_LIBRARY}
 	-DOPENSSL_SSL_LIBRARY=${OPENSSL_SSL_LIBRARY})
 if(MSVC)
-	dk_append(OPENSSL_CMAKE
+	dk_append(openssl_CMAKE
 		-DOPENSSL_MSVC_STATIC_RT=ON
 		-DLIB_EAY_DEBUG=${LIB_EAY_DEBUG}
 		-DLIB_EAY_RELEASE=${LIB_EAY_RELEASE}
@@ -111,7 +111,7 @@ if(MSVC)
 		"-DCMAKE_C_FLAGS=/I${OPENSSL_INCLUDE_DIR} /I${OPENSSL_INCLUDE_DIR2}"
 		"-DCMAKE_CXX_FLAGS=/I${OPENSSL_INCLUDE_DIR} /I${OPENSSL_INCLUDE_DIR2}")
 else()
-	dk_append(OPENSSL_CMAKE 
+	dk_append(openssl_CMAKE 
 		"-DCMAKE_C_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}"
 		"-DCMAKE_CXX_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}")
 endif()
