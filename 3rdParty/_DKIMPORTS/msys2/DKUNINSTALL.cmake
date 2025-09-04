@@ -28,18 +28,18 @@ dk_importVariables	("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_
 dk_assertVar(MSYS2)
 
 
-dk_set				(MSYS2_DBPath		"${msys2}/var/lib/pacman")
-dk_set				(MSYS2_CacheDir		"${msys2}/var/cache/pacman/pkg")
-dk_set				(MSYS2_LogFile		"${msys2}/var/log/pacman.log")
-dk_set				(MSYS2_GPGDir		"${msys2}/etc/pacman.d/gnupg")
-dk_set				(MSYS2_BIN 			"${msys2}/usr/bin")
-dk_set				(CLANGARM64_BIN		"${msys2}/clangarm64/bin")
-dk_set				(CLANG32_BIN		"${msys2}/clang32/bin")
-dk_set				(CLANG64_BIN		"${msys2}/clang64/bin")
-dk_set				(MINGW32_BIN		"${msys2}/mingw32/bin")
-dk_set				(MINGW64_BIN		"${msys2}/mingw64/bin")
-dk_set				(UCRT64_BIN			"${msys2}/ucrt64/bin")
-dk_set				(MSYS2_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
+dk_set				(msys2_DBPath		"${msys2}/var/lib/pacman")
+dk_set				(msys2_CacheDir		"${msys2}/var/cache/pacman/pkg")
+dk_set				(msys2_LogFile		"${msys2}/var/log/pacman.log")
+dk_set				(msys2_GPGDir		"${msys2}/etc/pacman.d/gnupg")
+dk_set				(msys2_bin 			"${msys2}/usr/bin")
+dk_set				(clangarm64_bin		"${msys2}/clangarm64/bin")
+dk_set				(clang32_bin		"${msys2}/clang32/bin")
+dk_set				(clang64_bin		"${msys2}/clang64/bin")
+dk_set				(mingw32_bin		"${msys2}/mingw32/bin")
+dk_set				(mingw64_bin		"${msys2}/mingw64/bin")
+dk_set				(ucrt64_bin			"${msys2}/ucrt64/bin")
+dk_set				(msys2_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
 
 ############ INSTALL ############
 dk_import("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
@@ -48,12 +48,12 @@ dk_firewallAllow("dirmngr" "${msys2}/usr/bin/dirmngr.exe")
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
 #dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
 #dk_copy("$ENV{DKIMPORTS_DIR}/msys2/pacman.conf" "${msys2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
-#dk_set				(MSYS2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
-#dk_set				(MSYS2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
-#dk_set				(MSYS2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
+#dk_set				(msys2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
+#dk_set				(msys2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
+#dk_set				(msys2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
 #dk_mkdir("${msys2_DBPath}")
 dk_validate			(DKDOWNLOAD_DIR 	"dk_DKDOWNLOAD_DIR()")
-dk_set				(MSYS2_CacheDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
+dk_set				(msys2_CacheDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
 dk_mkdir("${msys2_CacheDir}")
 
 

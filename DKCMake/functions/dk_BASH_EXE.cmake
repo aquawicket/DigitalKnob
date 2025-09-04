@@ -11,66 +11,68 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
-####################################################################
-# dk_BASH_EXE()
+
+#########################################################################
+# dk_bash_exe()
 #
 #
-function(dk_BASH_EXE)
+function(dk_bash_exe)
 	dk_debugFunc()
 
 	###### SET ######
 	if(ARGV)
-		dk_set(BASH_EXE "${ARGV0}")
+		dk_set(bash_exe "${ARGV0}")
 		
 	###### GET ######
-	elseif(DEFINED ENV{BASH_EXE})	
-		dk_set(BASH_EXE "$ENV{BASH_EXE}")
+	elseif(DEFINED ENV{bash_exe})	
+		dk_set(bash_exe "$ENV{bash_exe}")
 	
 	else()
 		### Already found ###
 		if(EXISTS "${bash_exe}")
-			dk_debug("BASH_EXE:${bash_exe} already set")
+			dk_debug("bash_exe:${bash_exe} already set")
 			return()
 		endif()
 
-		### from BASH_EXE environment variable ###
+		### from bash_exe environment variable ###
 		if(NOT EXISTS "${bash_exe}")
-			dk_set(CMD_EXE "$ENV{BASH_EXE}")
+			dk_set(CMD_EXE "$ENV{bash_exe}")
+			dk_error("dk_BASH_EXE():39  CMD_EXE should be bash_exe")
 		endif()
 		
 		### from BASH environment variable ###
 		if(NOT EXISTS "${bash_exe}")
 			if("$ENV{BASH}" MATCHES "/bash")
-				set(BASH_EXE "$ENV{BASH}")
+				set(bash_exe "$ENV{BASH}")
 			endif()
 		endif()
 		
 		### from SHELL environment variable ###
 		if(NOT EXISTS "${bash_exe}")
 			if("$ENV{SHELL}" MATCHES "/bash")
-				set(BASH_EXE "$ENV{SHELL}")
+				set(bash_exe "$ENV{SHELL}")
 			endif()
 		endif()
 		
 		### From command -v ###
 		if(NOT EXISTS "${bash_exe}")
-			execute_process(COMMAND command -v bash OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+			execute_process(COMMAND command -v bash OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 		endif()
 
 		### from dk_findProgram in Msys2 ###
 		if(NOT EXISTS "${bash_exe}")
 			dk_validate(msys2 "dk_depend(msys2)")
-			dk_findProgram(MSYS2_BASH_EXE bash "${msys2}/usr/bin")
-			set(BASH_EXE ${msys2_BASH_EXE})
+			dk_findProgram(MSYS2_bash_exe bash "${msys2}/usr/bin")
+			set(bash_exe ${msys2_bash_exe})
 		endif()
 	endif()
 	
 	### FINALIZE ###
-	#file(TO_CMAKE_PATH "${bash_exe}" BASH_EXE)
+	#file(TO_CMAKE_PATH "${bash_exe}" bash_exe)
 	if(NOT EXISTS "${bash_exe}")
-		dk_warning("BASH_EXE:${bash_exe} not found")
+		dk_warning("bash_exe:${bash_exe} not found")
 	else()
-		dk_set(BASH_EXE "${bash_exe}") # Globalize the variable
+		dk_set(bash_exe "${bash_exe}") # Globalize the variable
 	endif()
 endfunction()
 
@@ -84,20 +86,20 @@ function(DKTEST)
 	dk_debugFunc(0)
 
 	dk_echo()
-	dk_echo("Test Getting BASH_EXE . . .")
-	dk_BASH_EXE()
+	dk_echo("Test Getting bash_exe . . .")
+	dk_bash_exe()
 	if(EXISTS "${bash_exe}")
-		dk_success("BASH_EXE = ${bash_exe}")
+		dk_success("bash_exe = ${bash_exe}")
 	else()
-		dk_error("BASH_EXE = ${bash_exe}")
+		dk_error("bash_exe = ${bash_exe}")
 	endif()
 	
 	dk_echo()
-	dk_echo("Test Setting BASH_EXE . . .")
-	dk_BASH_EXE("C:/bash.exe")
+	dk_echo("Test Setting bash_exe . . .")
+	dk_bash_exe("C:/bash.exe")
 	if(EXISTS "${bash_exe}")
-		dk_success("BASH_EXE = ${bash_exe}")
+		dk_success("bash_exe = ${bash_exe}")
 	else()
-		dk_error("BASH_EXE = ${bash_exe}")
+		dk_error("bash_exe = ${bash_exe}")
 	endif()
 endfunction()

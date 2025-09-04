@@ -36,9 +36,9 @@ function(dk_resizeImage)
 		dk_installPackage(imagemagick)
 
 		###### BASH ######
-		dk_exec(bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE)
+		dk_exec(bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe)
 		if(EXISTS "${bash_exe}")
-			dk_exec(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE)
+			dk_exec(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe)
 			dk_exec(COMMAND ${bash_exe} -c "command -v 'convert'" OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
 			dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
 			#message("${cmnd}")

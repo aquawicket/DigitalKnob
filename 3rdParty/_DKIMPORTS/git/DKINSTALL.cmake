@@ -89,7 +89,7 @@ dk_return()
 #	endif()
 #	
 #	if(NOT EXISTS ${git_exe})
-#		dk_exec(${PACMAN_EXE} -S git --needed --noconfirm --cachedir ${msys2_CacheDir})
+#		dk_exec(${pacman_exe} -S git --needed --noconfirm --cachedir ${msys2_CacheDir})
 #	endif()
 #	
 #	dk_exec(command -v git.exe OUTPUT_VARIABLE git_exe) # BASH_ENV)

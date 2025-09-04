@@ -55,7 +55,7 @@ function(dk_clearScreen)
 	
 	### bash ###
 	dk_depend(bash)
-	if(BASH_EXE)
+	if(bash_exe)
 		#dk_exec(clear)
 		execute_process(COMMAND clear) # faster
 		return()

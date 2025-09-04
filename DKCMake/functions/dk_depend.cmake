@@ -47,13 +47,12 @@ function(dk_depend plugin) #target
 	
 	###### Push Plugin to the PLUGIN_STACK ######
 	dk_echo("\n")
-	dk_debug(">>>>>########################### ${PLUGIN} ENTER ##########################>>>>>")
 	dk_envList(PLUGIN PUSH "${PLUGIN}")
-			
+	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} ENTER ##########################>>>>>")
+	
 		list(APPEND dkdepend_list "${plugin}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 		
-		dk_set(CURRENT_PLUGIN ${PLUGIN})
 		dk_set(${CURRENT_PLUGIN}_Import_Path "${Import_Path}")
 
 		#dk_importVariables(Import_Path "${Import_Path}")

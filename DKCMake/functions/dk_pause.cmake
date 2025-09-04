@@ -38,8 +38,8 @@ function(dk_pause)
 	endif()
 	
 	###### BASH ######
-	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(BASH_EXE)
+	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(bash_exe)
 		set(cmnd ${bash_exe} -c "read -p ''")
 		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
@@ -64,7 +64,7 @@ function(dk_pause)
 		dk_return()
 	endif()
 	
-	dk_fatal("dk_pause() failed:  cant find CMD_EXE, BASH_EXE or SH_EXE!")
+	dk_fatal("dk_pause() failed:  cant find CMD_EXE, bash_exe or SH_EXE!")
 endfunction()
 
 

@@ -36,7 +36,7 @@ function(dk_beeps)
 	set(ps_command "${song}")
 
 #	###### BASH ######
-#	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 #	if(EXISTS "${bash_exe}")
 #		set(cmnd ${bash_exe} -c "read -p '' stdin&& echo $stdin")
 #		#message("${cmnd}")

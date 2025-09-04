@@ -26,34 +26,34 @@ dk_depend(zlib)
 dk_import()
 
 ### LINK ###
-dk_include				(${FREETYPE}/include					FREETYPE_INCLUDE_DIR)
-dk_include				(${FREETYPE_Config_Dir}/include/freetype2	FREETYPE_INCLUDE_DIR2)
+dk_include				(${freetype}/include						FREETYPE_INCLUDE_DIR)
+dk_include				(${freetype_Config_Dir}/include/freetype2	FREETYPE_INCLUDE_DIR2)
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${FREETYPE_Debug_Dir}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
-		dk_libRelease	(${FREETYPE_Release_Dir}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
+		dk_libDebug		(${freetype_Debug_Dir}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
+		dk_libRelease	(${freetype_Release_Dir}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
 	endif()
 else()
-	dk_libDebug			(${FREETYPE_Debug_Dir}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
-	dk_libRelease		(${FREETYPE_Release_Dir}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
+	dk_libDebug			(${freetype_Debug_Dir}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
+	dk_libRelease		(${freetype_Release_Dir}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
 endif()
 
 
 
 ### 3RDPARTY LINK ###
-dk_append(FREETYPE_CMAKE
-	-DFREETYPE_DIR=${FREETYPE}
-	-DFREETYPE_INCLUDE_DIR=${FREETYPE_INCLUDE_DIR}
-	-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
-	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE_INCLUDE_DIR2}
-	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE_INCLUDE_DIR}
-	-DFREETYPE_LIBRARY_DEBUG=${FREETYPE_LIBRARY_DEBUG}
-	-DFREETYPE_LIBRARY_RELEASE=${FREETYPE_LIBRARY_RELEASE})
+dk_append(freetype_CMAKE
+	-Dfreetype_DIR=${freetype}
+	-Dfreetype_INCLUDE_DIR=${freetype_INCLUDE_DIR}
+	-Dfreetype_INCLUDE_DIRS=${freetype_INCLUDE_DIR}
+	-Dfreetype_INCLUDE_DIR_freetype2=${freetype_INCLUDE_DIR2}
+	-Dfreetype_INCLUDE_DIR_ft2build=${freetype_INCLUDE_DIR}
+	-Dfreetype_LIBRARY_DEBUG=${freetype_LIBRARY_DEBUG}
+	-Dfreetype_LIBRARY_RELEASE=${freetype_LIBRARY_RELEASE})
 if(Debug)
-	dk_append(FREETYPE_CMAKE
-		-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY_DEBUG})
+	dk_append(freetype_CMAKE
+		-Dfreetype_LIBRARY=${FREETYPE_LIBRARY_DEBUG})
 elseif(Release)
-	dk_append(FREETYPE_CMAKE
+	dk_append(freetype_CMAKE
 		-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY_RELEASE})
 endif()	
 	
@@ -65,15 +65,15 @@ dk_configure()
 
 
 ### COMPILE ###
-dk_build(${FREETYPE} freetype)
+dk_build(${freetype} freetype)
 
 
 
 # rmlui expects to find ftconfig.h here, so we just copy it for now.
 dk_debug("Look at freetype/DKINSTALL.cmake:62")
-if(EXISTS ${FREETYPE_Debug_Dir}/include AND NOT EXISTS ${FREETYPE}/${Target_Tuple}/include)
-	dk_copy(${FREETYPE_Debug_Dir}/include ${FREETYPE}/${Target_Tuple}/include)
+if(EXISTS ${freetype_Debug_Dir}/include AND NOT EXISTS ${freetype}/${Target_Tuple}/include)
+	dk_copy(${freetype_Debug_Dir}/include ${freetype}/${Target_Tuple}/include)
 endif()
-if(EXISTS ${FREETYPE_Release_Dir}/include AND NOT EXISTS ${FREETYPE}/${Target_Tuple}/include)
-	dk_copy(${FREETYPE_Release_Dir}/include ${FREETYPE}/${Target_Tuple}/include)
+if(EXISTS ${freetype_Release_Dir}/include AND NOT EXISTS ${freetype}/${Target_Tuple}/include)
+	dk_copy(${freetype_Release_Dir}/include ${freetype}/${Target_Tuple}/include)
 endif()

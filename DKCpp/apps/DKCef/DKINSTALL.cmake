@@ -16,6 +16,10 @@ dk_DKBRANCH_DIR()
 dk_Target_Tuple()
 dk_set(Target_App_Dir 	"${CMAKE_CURRENT_LIST_DIR}")
 
+dk_basename("${Target_App_Dir}")
+dk_envList(PLUGIN PUSH 		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${Target_App_Dir}")
+
 if(EXISTS "${Target_App_Dir}/depends.cmake")
 	include("${Target_App_Dir}/depends.cmake")
 endif()
@@ -39,10 +43,6 @@ endforeach()
 ############################
 
 dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_ ${Target_App_Dir}/CMakeLists.txt)
-
-dk_basename("${Target_App_Dir}")
-dk_envList(PLUGIN PUSH "${dk_basename}")
-dk_set(${CURRENT_PLUGIN}	"${Target_App_Dir}")
 
 dk_define(DKAPP)
 dk_configure(${Target_App_Dir})

@@ -15,51 +15,50 @@ include_guard()
 ############ libjpeg-turbo ############
 # https://github.com/libjpeg-turbo/libjpeg-turbo
 # https://libjpeg-turbo.org/
-# For Android - https://github.com/DeviceFarmer/android-libjpeg-turbo
+# https://github.com/DeviceFarmer/android-libjpeg-turbo - For Android
 # https://sourceforge.net/projects/libjpeg-turbo/files/2.1.1/libjpeg-turbo-2.1.1.tar.gz/download
 #dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-#dk_import(${libjpeg_turbo_Import})
 dk_import()
 
 ### LINK ###
-dk_include			(${LIBJPEG_TURBO}										LIBJPEG_TURBO_INCLUDE_DIR)
-dk_include			(${LIBJPEG_TURBO_Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
-dk_include			(${LIBJPEG_TURBO}/src									LIBJPEG_TURBO_INCLUDE_DIR3)
+dk_include			(${libjpeg-turbo}										LIBJPEG_TURBO_INCLUDE_DIR)
+dk_include			(${libjpeg-turbo_Config_Dir}							LIBJPEG_TURBO_INCLUDE_DIR2)
+dk_include			(${libjpeg-turbo}/src									LIBJPEG_TURBO_INCLUDE_DIR3)
 
 if(Windows AND MSVC)
-	dk_libDebug		(${LIBJPEG_TURBO_Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO_Release_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${libjpeg-turbo_Debug_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${libjpeg-turbo_Release_Dir}/turbojpeg-static.lib		LIBJPEG_TURBO_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${LIBJPEG_TURBO_Debug_Dir}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBJPEG_TURBO_Release_Dir}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
+	dk_libDebug		(${libjpeg-turbo_Debug_Dir}/libturbojpeg.a				LIBJPEG_TURBO_LIBRARY_DEBUG)
+	dk_libRelease	(${libjpeg-turbo_Release_Dir}/libturbojpeg.a			LIBJPEG_TURBO_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_append(LIBJPEG_TURBO_CMAKE
-	#-DLIBJPEG_INCLUDE_DIR=${LIBJPEG_TURBO}
+dk_append(libjpeg-turbo_CMAKE
+	#-DLIBJPEG_INCLUDE_DIR=${libjpeg-turbo}
 	-DJPEG_INCLUDE_DIR=${LIBJPEG_TURBO_INCLUDE_DIR} 
 	-DJPEG_INCLUDE_DIR2=${LIBJPEG_TURBO_INCLUDE_DIR2}
 	-DJPEG_LIBRARY_DEBUG=${LIBJPEG_TURBO_LIBRARY_DEBUG}
 	-DJPEG_LIBRARY_RELEASE=${LIBJPEG_TURBO_LIBRARY_RELEASE})
 if(Windows AND MSVC)
-	dk_append(LIBJPEG_TURBO_CMAKE 
+	dk_append(libjpeg-turbo_CMAKE 
 		"-DCMAKE_C_FLAGS=/I${LIBJPEG_TURBO_INCLUDE_DIR} /I${LIBJPEG_TURBO_INCLUDE_DIR2} /I${LIBJPEG_TURBO_INCLUDE_DIR3}"
 		"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO_INCLUDE_DIR} /I${LIBJPEG_TURBO_INCLUDE_DIR2} /I${LIBJPEG_TURBO_INCLUDE_DIR3}")
 else()
-	dk_append(LIBJPEG_TURBO_CMAKE
+	dk_append(libjpeg-turbo_CMAKE
 		-DENABLE_SHARED=0
 		"-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR} -I${LIBJPEG_TURBO_INCLUDE_DIR2} -I${LIBJPEG_TURBO_INCLUDE_DIR3}"
 		"-DCMAKE_CXX_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR} -I${LIBJPEG_TURBO_INCLUDE_DIR2} -I${LIBJPEG_TURBO_INCLUDE_DIR3}")
 	if(Debug)
-		dk_append(LIBJPEG_TURBO_CMAKE
+		dk_append(libjpeg-turbo_CMAKE
 			#-DLIBJPEG_LIBRARY=${LIBJPEG_TURBO_LIBRARY_DEBUG} 
 			-DJPEG_LIBRARY=${LIBJPEG_TURBO_LIBRARY_DEBUG}
 			"-DCMAKE_EXE_LINKER_FLAGS=${LIBJPEG_TURBO_LIBRARY_DEBUG}")
 	endif()
 	if(Release)
-		dk_append(LIBJPEG_TURBO_CMAKE
+		dk_append(libjpeg-turbo_CMAKE
 			#-DLIBJPEG_LIBRARY=${LIBJPEG_TURBO_LIBRARY_RELEASE} 
 			-DJPEG_LIBRARY=${LIBJPEG_TURBO_LIBRARY_RELEASE}
 			"-DCMAKE_EXE_LINKER_FLAGS=${LIBJPEG_TURBO_LIBRARY_RELEASE}")
@@ -67,11 +66,11 @@ else()
 endif()
 
 ### GENERATE ##
-dk_configure(${LIBJPEG_TURBO} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
+dk_configure(${libjpeg-turbo} -DWITH_SIMD=OFF "-DCMAKE_C_FLAGS=-I${LIBJPEG_TURBO_INCLUDE_DIR2}")
 
 #if(EXISTS "${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h")
 #	dk_copy("${LIBJPEG_TURBO_INCLUDE_DIR2}/jconfig.h" "${LIBJPEG_TURBO}/jconfig.h" OVERWRITE)
 #endif()
 
 ### COMPILE ###
-dk_build(${LIBJPEG_TURBO} turbojpeg-static)
+dk_build(${libjpeg-turbo} turbojpeg-static)

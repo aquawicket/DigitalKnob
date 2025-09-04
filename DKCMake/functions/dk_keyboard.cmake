@@ -30,14 +30,14 @@ function(dk_keyboard)
 	endif()
 	
 	dk_depend(bash)
-	if(BASH_EXE)
+	if(bash_exe)
 		dk_validate(DKBASH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 		dk_exec(${DKBASH_FUNCTIONS_DIR}/dk_pause.sh & dk_pause)
 		#execute_process(COMMAND ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh & dk_pause)
 		return()
 	endif()
 		
-	dk_fatal("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_getKey() failed:   both CMD_EXE and bash_exe are invalid!")
 endfunction()
 
 

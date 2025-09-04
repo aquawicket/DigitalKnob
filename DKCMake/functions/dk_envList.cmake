@@ -59,7 +59,8 @@ function(dk_envList)
 #	dk_debug("      ${_CURRENT_} = ${${_CURRENT_}}")
 #	dk_debug("  ${_CURRENT_}_DIR = ${${_CURRENT_}_DIR}")
 
-	dk_title("${${NAME}_STACK}")
+	dk_title("${${NAME}_Stack}")
+	dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 endfunction()
 
 

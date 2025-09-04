@@ -27,13 +27,13 @@ function(dk_getKey rtn_var)
 	endif()
 	
 	dk_depend(bash)
-	if(BASH_EXE)
+	if(bash_exe)
 		dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 		execute_process(COMMAND ${DKBASH_FUNCTIONS_DIR}/dk_pause.sh & dk_pause)
 		return()
 	endif()
 		
-	dk_fatal("dk_getKey() failed:   both CMD_EXE and BASH_EXE are invalid!")
+	dk_fatal("dk_getKey() failed:   both CMD_EXE and bash_exe are invalid!")
 endfunction()
 
 
