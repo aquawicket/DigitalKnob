@@ -2155,7 +2155,7 @@ Android_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2207,7 +2207,7 @@ Emscripten_Debug_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2254,7 +2254,7 @@ Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2309,7 +2309,7 @@ Ios_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2369,7 +2369,7 @@ Iossim_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2415,7 +2415,7 @@ Linux_Debug_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2457,7 +2457,7 @@ Linux_Release_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2505,7 +2505,7 @@ Mac_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2551,7 +2551,7 @@ Raspberry_Debug_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2593,7 +2593,7 @@ Raspberry_Release_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}
@@ -2642,7 +2642,7 @@ Windows_dk_configure(${OPENSCENEGRAPH}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
 	${FONTCONFIG_CMAKE}
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
 	${GSTREAMER_CMAKE}

@@ -27,31 +27,31 @@ dk_depend(sdl)
 ### IMPORT ###
 #dk_import(https://github.com/libsdl-org/SDL_ttf.git BRANCH main PATCH) # SDL3
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import("${SDL_TTF_DL}" PATCH)
+dk_import() #PATCH
 
 
 
 ### LINK ###
-dk_include			(${SDL_TTF})
+dk_include			(${sdl_ttf})
 if(MSVC)
-	dk_libDebug		(${SDL_TTF_Config_Dir}/lib/${Debug_Dir}/SDL_ttf.lib)
-	dk_libRelease	(${SDL_TTF_Config_Dir}/lib/${Release_Dir}/SDL_ttf.lib)
+	dk_libDebug		(${sdl_ttf_Config_Dir}/lib/${Debug_Dir}/SDL_ttf.lib)
+	dk_libRelease	(${sdl_ttf_Config_Dir}/lib/${Release_Dir}/SDL_ttf.lib)
 elseif(XCODE)
-	dk_libDebug		(${SDL_TTF_Config_Dir}/lib/${Debug_Dir}/SDL_ttf.a)
-	dk_libRelease	(${SDL_TTF_Config_Dir}/lib/${Release_Dir}/SDL_ttf.a)
+	dk_libDebug		(${sdl_ttf_Config_Dir}/lib/${Debug_Dir}/SDL_ttf.a)
+	dk_libRelease	(${sdl_ttf_Config_Dir}/lib/${Release_Dir}/SDL_ttf.a)
 else()
-	dk_libDebug		(${SDL_TTF_Config_Dir}/lib/SDL_ttf.a)
-	dk_libRelease	(${SDL_TTF_Config_Dir}/lib/SDL_ttf.a)
+	dk_libDebug		(${sdl_ttf_Config_Dir}/lib/SDL_ttf.a)
+	dk_libRelease	(${sdl_ttf_Config_Dir}/lib/SDL_ttf.a)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_TTF}
-	-DSDLTTF_SUPPORT_WEBP=${LIBWEBP}
-	${FREETYPE_CMAKE}
-	${LIBWEBP_CMAKE}
+dk_configure(${sdl_ttf}
+	-DSDLTTF_SUPPORT_WEBP=${libwebp}
+	${freetype_CMAKE}
+	${libwebp_CMAKE}
 	${sdl_CMAKE}) 
 
 
 ### COMPILE ###
-dk_build(${SDL_TTF} SDLTTF)
+dk_build(${sdl_ttf} SDLTTF)

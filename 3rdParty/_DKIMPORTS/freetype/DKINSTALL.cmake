@@ -12,51 +12,41 @@ include_guard()
 #########################################################################
 
 
+############ freetype ############
 # https://www.freetype.org/
 # https://sourceforge.net/projects/freetype/files/freetype2/2.5.5/freetype-2.5.5.tar.gz
 # https://github.com/freetype/freetype.git
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 
 ### DEPEND ###
 dk_depend(zlib)
 
-
 ### IMPORT ###
-#dk_import(${freetype_Import} PATCH)
-dk_import()
+dk_import() #PATCH
 
 ### LINK ###
-dk_include				(${freetype}/include						FREETYPE_INCLUDE_DIR)
-dk_include				(${freetype_Config_Dir}/include/freetype2	FREETYPE_INCLUDE_DIR2)
-if(MSVC)
-	if(Windows)
-		dk_libDebug		(${freetype_Debug_Dir}/freetype.lib			FREETYPE_LIBRARY_DEBUG)
-		dk_libRelease	(${freetype_Release_Dir}/freetype.lib		FREETYPE_LIBRARY_RELEASE)
-	endif()
+dk_include			(${freetype}/include						FREETYPE_INCLUDE_DIR)
+dk_include			(${freetype_Tuple_Dir}/include/freetype2	FREETYPE_INCLUDE_DIR2)
+if(Windows AND MSVC)
+	dk_libDebug		(${freetype_Debug_Dir}/freetype.lib			FREETYPE_LIBRARY_DEBUG		FREETYPE_LIBRARY)
+	dk_libRelease	(${freetype_Release_Dir}/freetype.lib		FREETYPE_LIBRARY_RELEASE	FREETYPE_LIBRARY)
 else()
-	dk_libDebug			(${freetype_Debug_Dir}/libfreetype.a		FREETYPE_LIBRARY_DEBUG)
-	dk_libRelease		(${freetype_Release_Dir}/libfreetype.a		FREETYPE_LIBRARY_RELEASE)
+	dk_libDebug		(${freetype_Debug_Dir}/libfreetype.a		FREETYPE_LIBRARY_DEBUG		FREETYPE_LIBRARY)
+	dk_libRelease	(${freetype_Release_Dir}/libfreetype.a		FREETYPE_LIBRARY_RELEASE	FREETYPE_LIBRARY)
 endif()
 
 
 
 ### 3RDPARTY LINK ###
 dk_append(freetype_CMAKE
-	-Dfreetype_DIR=${freetype}
-	-Dfreetype_INCLUDE_DIR=${freetype_INCLUDE_DIR}
-	-Dfreetype_INCLUDE_DIRS=${freetype_INCLUDE_DIR}
-	-Dfreetype_INCLUDE_DIR_freetype2=${freetype_INCLUDE_DIR2}
-	-Dfreetype_INCLUDE_DIR_ft2build=${freetype_INCLUDE_DIR}
-	-Dfreetype_LIBRARY_DEBUG=${freetype_LIBRARY_DEBUG}
-	-Dfreetype_LIBRARY_RELEASE=${freetype_LIBRARY_RELEASE})
-if(Debug)
-	dk_append(freetype_CMAKE
-		-Dfreetype_LIBRARY=${FREETYPE_LIBRARY_DEBUG})
-elseif(Release)
-	dk_append(freetype_CMAKE
-		-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY_RELEASE})
-endif()	
-	
+	-DFREETYPE_DIR=${freetype}
+	-DFREETYPE_INCLUDE_DIR=${FREETYPE_INCLUDE_DIR}
+	-DFREETYPE_INCLUDE_DIRS=${FREETYPE_INCLUDE_DIR}
+	-DFREETYPE_INCLUDE_DIR_ft2build=${FREETYPE_INCLUDE_DIR}
+	-DFREETYPE_INCLUDE_DIR_freetype2=${FREETYPE_INCLUDE_DIR2}
+	-DFREETYPE_LIBRARY_DEBUG=${FREETYPE_LIBRARY_DEBUG}
+	-DFREETYPE_LIBRARY_RELEASE=${FREETYPE_LIBRARY_RELEASE}
+	-DFREETYPE_LIBRARY=${FREETYPE_LIBRARY})
 	
 
 	

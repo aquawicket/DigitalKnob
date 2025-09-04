@@ -103,7 +103,7 @@ if(MSVC)
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
+		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
@@ -133,7 +133,7 @@ if(MSVC)
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
+		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}
@@ -162,7 +162,7 @@ else()
 		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${FREETYPE_CMAKE} 
+		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${HARFBUZZ_CMAKE}
 		${LUA_CMAKE}

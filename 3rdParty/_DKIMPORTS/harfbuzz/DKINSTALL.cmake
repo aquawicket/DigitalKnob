@@ -55,7 +55,7 @@ dk_configure(${HARFBUZZ}
 	-DHB_HAVE_ICU=OFF				# "Enable icu unicode functions" OFF
 	-DHB_HAVE_INTROSPECTION=OFF		# "Enable building introspection (.gir/.typelib) files" OFF
 	-DHB_HAVE_UNISCRIBE=OFF 		# "Enable Uniscribe shaper backend on Windows" OFF
-	${FREETYPE_CMAKE}
+	${freetype_CMAKE}
 	${PYTHON3_CMAKE})
 
 ### 3RDPARTY LINK ###

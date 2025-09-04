@@ -19,37 +19,37 @@ include_guard()
 ###########################################################################################################################
 # dk_importVariables(Url Rtn_Var) IMPORT_ROOT Import_Name IMPORT_PATH INSTALL_ROOT INSTALL_NAME INSTALL_PATH VERSION BRANCH 
 #
-#																	###### EXAMPLES ######
-#	Url																https://github.com/madler/zlib.git     							* github repository link
-#																	https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
-#																	https://github.com/madler/zlib        							* github page
-#																	https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
-#																	https://website.com/executable.exe              				* executable file
+#											###### EXAMPLES ######
+#	Url										https://github.com/madler/zlib.git     							* github repository link
+#											https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
+#											https://github.com/madler/zlib        							* github page
+#											https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
+#											https://website.com/executable.exe              				* executable file
 #
 #
-#	IMPORT_ROOT	(optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
+#	IMPORT_ROOT	(optional)					C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
 #
 #
-#	Import_Name (optional)											zlib
+#	Import_Name (optional)					zlib
 #
 #
-#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+#	IMPORT_PATH (optional)					C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
 #
 #
-#	INSTALL_ROOT (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools
+#	INSTALL_ROOT (optional)					C:/Users/Administrator/DigitalKnob/Development/DKTools
 #
 #
-#	INSTALL_NAME (optional)											zlib-8-5-2025
-#																	myZLIB
+#	INSTALL_NAME (optional)					zlib-8-5-2025
+#											myZLIB
 #
-#	INSTALL_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools/zlib-8-5-2025
-#																	C:/Users/Administrator/DigitalKnob/Development/DKTools/myZLIB
+#	INSTALL_PATH (optional)					C:/Users/Administrator/DigitalKnob/Development/DKTools/zlib-8-5-2025
+#											C:/Users/Administrator/DigitalKnob/Development/DKTools/myZLIB
 #
-#	VERSION (optional)												master
+#	VERSION (optional)						master
 #
 #
-#	BRANCH (optional)												develop
-#																	master
+#	BRANCH (optional)						develop
+#											master
 #################################################################################
 #	
 #	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN

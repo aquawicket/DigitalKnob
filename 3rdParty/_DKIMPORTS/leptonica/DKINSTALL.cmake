@@ -74,7 +74,7 @@ dk_configure(${LEPTONICA}
 	${giflib_CMAKE}
 	${libjpeg-turbo_CMAKE}
 	${libpng_CMAKE}
-	${LIBWEBP_CMAKE}
+	${libwebp_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE})
 

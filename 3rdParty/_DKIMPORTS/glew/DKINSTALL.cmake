@@ -28,66 +28,59 @@ endif()
 dk_depend(libglu1-mesa-dev)
 
 ### IMPORT ###
-#dk_import(${glew_Import})
 dk_import()
 
-dk_copy(${GLEW}/build/cmake ${GLEW_Tuple_Dir}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
+dk_copy(${glew}/build/cmake ${glew_Tuple_Dir}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
 ### LINK ###
 dk_define			(GLEW_STATIC)
-dk_include			(${GLEW}/include										GLEW_INCLUDE_DIR)
+dk_include			(${glew}/include										GLEW_INCLUDE_DIR)
 if(Apple)
-	dk_libDebug		(${GLEW_Config_Dir}/lib/${Debug_Dir}/libGLEWd.a			GLEW_DEBUG_LIBRARY)
-	dk_libRelease	(${GLEW_Config_Dir}/lib/${Release_Dir}/libGLEW.a		GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${glew_Config_Dir}/lib/${Debug_Dir}/libGLEWd.a			GLEW_DEBUG_LIBRARY		GLEW_LIBRARY)
+	dk_libRelease	(${glew_Config_Dir}/lib/${Release_Dir}/libGLEW.a		GLEW_RELEASE_LIBRARY	GLEW_LIBRARY)
 elseif(MSVC)
-	dk_libDebug		(${GLEW_Config_Dir}/lib/${Debug_Dir}/libglew32d.lib		GLEW_DEBUG_LIBRARY)
-	dk_libRelease	(${GLEW_Config_Dir}/lib/${Release_Dir}/libglew32.lib	GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${glew_Config_Dir}/lib/${Debug_Dir}/libglew32d.lib		GLEW_DEBUG_LIBRARY		GLEW_LIBRARY)
+	dk_libRelease	(${glew_Config_Dir}/lib/${Release_Dir}/libglew32.lib	GLEW_RELEASE_LIBRARY	GLEW_LIBRARY)
 elseif(Windows)
-	dk_libDebug		(${GLEW_Debug_Dir}/lib/libglew32d.a						GLEW_DEBUG_LIBRARY)
-	dk_libRelease	(${GLEW_Release_Dir}/lib/libglew32.a					GLEW_RELEASE_LIBRARY)
+	dk_libDebug		(${glew_Debug_Dir}/lib/libglew32d.a						GLEW_DEBUG_LIBRARY		GLEW_LIBRARY)
+	dk_libRelease	(${glew_Release_Dir}/lib/libglew32.a					GLEW_RELEASE_LIBRARY	GLEW_LIBRARY)
 else()
-	dk_libDebug		(${GLEW_Debug_Dir}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY)
-	dk_libRelease	(${GLEW_Release_Dir}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY)
-endif()
-if(Debug)
-	dk_set			(GLEW_LIBRARY											${GLEW_DEBUG_LIBRARY})
-endif()
-if(Release)
-	dk_set			(GLEW_LIBRARY											${GLEW_RELEASE_LIBRARY})
+	dk_libDebug		(${glew_Debug_Dir}/lib/libGLEWd.a						GLEW_DEBUG_LIBRARY		GLEW_LIBRARY)
+	dk_libRelease	(${glew_Release_Dir}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY	GLEW_LIBRARY)
 endif()
 
 ### 3RDPARTY LINK ###
-# dk_set(GLEW_CMAKE
+# dk_set(glew_CMAKE
 #	-DGLEW_USE_STATIC_LIB=ON
-#	-DGLEW=${GLEW}/${Target_Tuple}/CMakeFiles/Export/lib/cmake/glew
+#	-DGLEW=${glew}/${Target_Tuple}/CMakeFiles/Export/lib/cmake/glew
 #	-DGLEW_LIBRARY=${GLEW_LIBRARY_DEBUG}
 #	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
-#	-DGLEW_SHARED_LIBRARY_DEBUG=${GLEW}/${Target_Tuple}/lib/${Debug_Dir}/libglew32d.lib
-#	-DGLEW_SHARED_LIBRARY_RELEASE=${GLEW}/${Target_Tuple}/lib/${Release_Dir}/libglew32.lib
-#	-DGLEW_STATIC_LIBRARY_DEBUG=${GLEW}/${Target_Tuple}/lib/${Debug_Dir}/glew32d.lib
-#	-DGLEW_STATIC_LIBRARY_RELEASE=${GLEW}/${Target_Tuple}/lib/${Release_Dir}/glew32.lib
+#	-DGLEW_SHARED_LIBRARY_DEBUG=${glew}/${Target_Tuple}/lib/${Debug_Dir}/libglew32d.lib
+#	-DGLEW_SHARED_LIBRARY_RELEASE=${glew}/${Target_Tuple}/lib/${Release_Dir}/libglew32.lib
+#	-DGLEW_STATIC_LIBRARY_DEBUG=${glew}/${Target_Tuple}/lib/${Debug_Dir}/glew32d.lib
+#	-DGLEW_STATIC_LIBRARY_RELEASE=${glew}/${Target_Tuple}/lib/${Release_Dir}/glew32.lib
 #	-DGLEW_LIBRARIES=${GLEW_LIBRARY_DEBUG} ${GLEW_LIBRARY_RELEASE})
-dk_set(GLEW_CMAKE 
+dk_set(glew_CMAKE 
 	-DGLEW_INCLUDE_DIR=${GLEW_INCLUDE_DIR}
 	-DGLEW_LIBRARY=${GLEW_LIBRARY})
 if(MSVC)
-	dk_append(GLEW_CMAKE 
-		"-DCMAKE_C_FLAGS=/I${GLEW}/include /DGLEW_STATIC" 
+	dk_append(glew_CMAKE 
+		"-DCMAKE_C_FLAGS=/I${glew}/include /DGLEW_STATIC" 
 		"-DCMAKE_CXX_FLAGS=/I${GLEW_INCLUDE_DIR} /DGLEW_STATIC")
 else()
-	dk_append(GLEW_CMAKE 
-		"-DCMAKE_C_FLAGS=-I${GLEW}/include -DGLEW_STATIC" 
+	dk_append(glew_CMAKE 
+		"-DCMAKE_C_FLAGS=-I${glew}/include -DGLEW_STATIC" 
 		"-DCMAKE_CXX_FLAGS=-I${GLEW_INCLUDE_DIR} -DGLEW_STATIC")
 endif()
 
 
 ### GENERATE ###
-dk_configure(${GLEW}/build/cmake)
-#dk_copy(${GLEW}/${Target_Tuple}/lib/${Debug_Dir} ${GLEW}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
-#dk_copy(${GLEW}/${Target_Tuple}/lib/${Release_Dir} ${GLEW}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
-#dk_copy(${GLEW}/${Target_Tuple}/bin/${Debug_Dir} ${GLEW}/${Target_Tuple}/CMakeFiles/Export/bin/ OVERWRITE)
-#dk_copy(${GLEW}/${Target_Tuple}/bin/${Release_Dir} ${GLEW}/${Target_Tuple}/CMakeFiles/Export/bin/ OVERWRITE)
+dk_configure(${glew}/build/cmake)
+#dk_copy(${glew}/${Target_Tuple}/lib/${Debug_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${glew}/${Target_Tuple}/lib/${Release_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
+#dk_copy(${glew}/${Target_Tuple}/bin/${Debug_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/bin/ OVERWRITE)
+#dk_copy(${glew}/${Target_Tuple}/bin/${Release_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
 ### COMPILE ###
-dk_build(${GLEW} glew_s)
+dk_build(${glew} glew_s)

@@ -26,9 +26,11 @@ include_guard()
 function(dk_depend Plugin) #target
 	dk_debugFunc(1 2)
 	
-	message("############ dk_depend(${Plugin}) ############")
+	#message("############ dk_depend(${Plugin}) ############")
 	
+	set(dkdepend_list $CACHE{dkdepend_list})
 	if(Plugin IN_LIST dkdepend_list)
+		dk_notice("${Plugin} already added to dependency list")
 		return()
 	endif()
 		
@@ -43,11 +45,14 @@ function(dk_depend Plugin) #target
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	
 	###### Push Plugin to the PLUGIN_STACK ######
-	dk_echo("\n")
 	dk_envList(PLUGIN PUSH "${Plugin}")
+	dk_echo("\n")
+	dk_echo("\n")
+	dk_debug(">>>>>##############################################################################>>>>>")
 	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} ENTER ##########################>>>>>")
+	dk_debug(">>>>>##############################################################################>>>>>")
 	
-		list(APPEND dkdepend_list "${Plugin}")
+		list(APPEND dkdepend_list "${CURRENT_PLUGIN}")
 		dk_set(dkdepend_list "${dkdepend_list}")
 		
 		dk_getPathToPlugin(${CURRENT_PLUGIN} ${CURRENT_PLUGIN}_Import_Path)
@@ -56,11 +61,12 @@ function(dk_depend Plugin) #target
 		#dk_importVariables(Import_Path "${Import_Path}")
 		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
 			
-		dk_enable("${Plugin}")
+		dk_enable("${CURRENT_PLUGIN}")
 	 
 	###### Pop Plugin from the PLUGIN_STACK ######
-	dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")
+	#dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")
 	dk_envList(PLUGIN POP)
+	dk_echo("\n")
 	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} CONTINUE #######################>>>>>")
 
 endfunction()
