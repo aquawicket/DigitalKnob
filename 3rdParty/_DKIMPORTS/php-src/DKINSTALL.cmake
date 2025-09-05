@@ -32,26 +32,26 @@ endif()
 dk_depend(vc_redist) #for VCRUNTIME140.dll
 
 ### IMPORT ###
-dk_import(${php_src_${Host_Tuple}_Import})
+dk_import()
 
 
 
-### Copy VCRUNTIME library to PHP_SRC folder
+### Copy VCRUNTIME library to php-src folder
 if(Windows_Host)
-	if(NOT EXISTS "${PHP_SRC}/vcruntime140.dll")
+	if(NOT EXISTS "${php-src}/vcruntime140.dll")
 		if(Windows_X86_Host)
 			if(EXISTS "${VCRUNTIME140_X86_DEBUG_DLL}")
-				dk_copy("${VCRUNTIME140_X86_DEBUG_DLL}" "${PHP_SRC}/vcruntime140.dll") #rename
+				dk_copy("${VCRUNTIME140_X86_DEBUG_DLL}" "${php-src}/vcruntime140.dll") #rename
 			elseif(EXISTS "${VCRUNTIME140_X86_DLL}")
-				dk_copy("${VCRUNTIME140_X86_DLL}" "${PHP_SRC}/vcruntime140.dll")
+				dk_copy("${VCRUNTIME140_X86_DLL}" "${php-src}/vcruntime140.dll")
 			endif()
 		elseif(Windows_X86_64_Host)
 			if(EXISTS "${VCRUNTIME140_X86_64_DEBUG_DLL}")
-				dk_copy("${VCRUNTIME140_X86_64_DEBUG_DLL}" "${PHP_SRC}/vcruntime140.dll") # rename
+				dk_copy("${VCRUNTIME140_X86_64_DEBUG_DLL}" "${php-src}/vcruntime140.dll") # rename
 			elseif(EXISTS "${VCRUNTIME140_X86_64_DLL}")
-				dk_copy("${VCRUNTIME140_X86_64_DLL}" "${PHP_SRC}/vcruntime140.dll")
+				dk_copy("${VCRUNTIME140_X86_64_DLL}" "${php-src}/vcruntime140.dll")
 			endif()
 		endif()
-		dk_assertPath("${PHP_SRC}/vcruntime140.dll")
+		dk_assertPath("${php-src}/vcruntime140.dll")
 	endif()
 endif()

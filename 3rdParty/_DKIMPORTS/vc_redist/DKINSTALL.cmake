@@ -35,8 +35,7 @@ if((NOT EXISTS "${VCCOMP140_X86_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_DEBUG_DL
 	dk_basename(${vc_redist_Windows_X86_Import} vc_redist_Windows_X86_Import_FILE)
 	dk_info("Installing Visual C Redistributable - ${vc_redist_Windows_X86_Import_FILE}")
 	dk_download(${vc_redist_Windows_X86_Import})
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_exec($ENV{DKDOWNLOAD_DIR}/${vc_redist_Windows_X86_Import_FILE} /install /quiet /norestart)
+	dk_exec(${dk_download} /install /quiet /norestart)
 endif()
 
 
@@ -51,7 +50,6 @@ if((NOT EXISTS "${VCCOMP140_X86_64_DLL}") AND (NOT EXISTS "${VCCOMP140_X86_64_DE
 	dk_basename(${vc_redist_Windows_X86_64_Import} vc_redist_Windows_X86_64_Import_FILE)
 	dk_info("Installing Visual C Redistributable - ${vc_redist_Windows_X86_64_Import_FILE}")
 	dk_download(${vc_redist_Windows_X86_64_Import})
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_exec($ENV{DKDOWNLOAD_DIR}/${vc_redist_Windows_X86_64_Import_FILE} /install /quiet /norestart)
+	dk_exec(${dk_download} /install /quiet /norestart)
 endif()
 
