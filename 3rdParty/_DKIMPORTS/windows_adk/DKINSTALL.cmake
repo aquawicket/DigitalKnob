@@ -14,44 +14,41 @@ include_guard()
 
 ############ windows_adk ############
 # https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install
-
-
-
-
+# https://go.microsoft.com/fwlink/?linkid=2289980
+# https://go.microsoft.com/fwlink/?linkid=2289981
 
 
 ###### Download the Windows ADK 10.1.26100.2454 (December 2024) ######
 # https://download.microsoft.com/download/2/d/9/2d9c8902-3fcd-48a6-a22a-432b08bed61e/ADK/adksetup.exe
 #if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit")
-if(NOT EXISTS "${windows_adk_Install_Path}")
+dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
+dk_set(windows_adk_Install_Path "$ENV{DKTOOLS_DIR}/ADK")
+#if(NOT EXISTS "${windows_adk_Install_Path}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADK")
-		dk_download(https://go.microsoft.com/fwlink/?linkid=2289980 "$ENV{DKDOWNLOAD_DIR}/${windows_adk_Download_Basename}")
-		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADK" /q)
-	endif()
+	#if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADK")
+		dk_download("https://go.microsoft.com/fwlink/?linkid=2289980")
+		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADK") # /q
+	#endif()
 
 	dk_echo("Installing Windows ADK . . .  please wait")
-	execute_process(COMMAND cmd /c "${dk_download}" /installpath "${windows_adk_Install_Path}" /q)
-endif()
-
+	execute_process(COMMAND cmd /c "${dk_download}" /installpath "${windows_adk_Install_Path}") # /q
+#endif()
 
 
 ###### Download the Windows PE add-on for the Windows ADK 10.1.26100.2454 (December 2024) ######
 # https://download.microsoft.com/download/5/5/6/556e01ec-9d78-417d-b1e1-d83a2eff20bc/ADKWinPEAddons/adkwinpesetup.exe
 #if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit/Windows Preinstallation Environment")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-if(NOT EXISTS "$ENV{DKTOOLS_DIR}/ADKWinPEAddons")
+#if(NOT EXISTS "${windows_adk_Install_Path}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons")
-		dk_debug("windows_adk_Download_Basename = ${windows_adk_Download_Basename}")
-		dk_download("https://go.microsoft.com/fwlink/?linkid=2289981" "$ENV{DKDOWNLOAD_DIR}/${windows_adk_PE_Download_Basename}")
-		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons" /q)
-	endif()
+	#if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons")
+		dk_download("https://go.microsoft.com/fwlink/?linkid=2289981")
+		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons") # /q)
+	#endif()
 	
 	dk_echo("Installing Windows PE add-on for the Windows ADK . . .  please wait")
-	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-	execute_process(COMMAND cmd /c "${dk_download}" /installpath "$ENV{DKTOOLS_DIR}/ADK" /q)
-endif()
+	execute_process(COMMAND cmd /c "${dk_download}" /installpath "${windows_adk_Install_Path}") # /q)
+#endif()
 
 set(DandISetEnv_bat "$ENV{DKTOOLS_DIR}/ADK/Assessment and Deployment Kit/Deployment Tools/DandISetEnv.bat")
 dk_nativePath(${DandISetEnv_bat} DandISetEnv_bat)
