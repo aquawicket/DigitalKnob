@@ -15,49 +15,43 @@ include_guard()
 ############ tidy-html5 ############
 # https://github.com/htacg/tidy-html5.git
 
-#dk_validate(Target_Config  "dk_Target_Config()")
-
-
 ### DEPEND ###
 dk_depend(zlib)
 
-
 ### IMPORT ###
-#dk_import(${tidy_html5_Import})
 dk_import()
 
-
 ### PATCH FILES ###
-dk_fileReplace			("${TIDY_HTML5}/CMakeLists.txt" "add_definitions ( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
-dk_fileReplace			("${TIDY_HTML5}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
+dk_fileReplace			("${tidy-html5}/CMakeLists.txt" "add_definitions ( -DLIBTIDY_VERSION" 	"#add_definitions ( -DLIBTIDY_VERSION")
+dk_fileReplace			("${tidy-html5}/CMakeLists.txt" "add_definitions ( -DRELEASE_DATE"    	"#add_definitions ( -DRELEASE_DATE")
 
 ### LINK ###
 if(Emscripten)
 	dk_define			(HAS_FUTIME=0)
 endif()
-dk_include				(${TIDY_HTML5})
-dk_include				(${TIDY_HTML5}/include)
-dk_include				(${TIDY_HTML5_Config_Dir})
+dk_include				(${tidy-html5})
+dk_include				(${tidy-html5}/include)
+dk_include				(${tidy-html5_Config_Dir})
 
-if(MSVC AND Windows)
-	dk_libDebug			(${TIDY_HTML5_Debug_Dir}/tidy_staticd.lib)
-	dk_libRelease		(${TIDY_HTML5_Release_Dir}/tidy_static.lib)
+if(Windows AND MSVC)
+	dk_libDebug			(${tidy-html5_Debug_Dir}/tidy_staticd.lib)
+	dk_libRelease		(${tidy-html5_Release_Dir}/tidy_static.lib)
 elseif(Windows) # AND MINGW
-	dk_libDebug			(${TIDY_HTML5_Debug_Dir}/libtidy_static.a)
-	dk_libRelease		(${TIDY_HTML5_Release_Dir}/libtidy_static.a)
+	dk_libDebug			(${tidy-html5_Debug_Dir}/libtidy_static.a)
+	dk_libRelease		(${tidy-html5_Release_Dir}/libtidy_static.a)
 else()
-	dk_libDebug			(${TIDY_HTML5_Debug_Dir}/libtidy.a)
-	dk_libRelease		(${TIDY_HTML5_Release_Dir}/libtidy.a)
+	dk_libDebug			(${tidy-html5_Debug_Dir}/libtidy.a)
+	dk_libRelease		(${tidy-html5_Release_Dir}/libtidy.a)
 endif()
 
 
 ### GENERATE ###
 if(Emscripten) 
-	dk_configure		(${TIDY_HTML5} ${zlib_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
+	dk_configure		(${tidy-html5} ${zlib_CMAKE} "-DCMAKE_C_FLAGS=-DHAS_FUTIME=0")
 else()
-	dk_configure		(${TIDY_HTML5} ${zlib_CMAKE})
+	dk_configure		(${tidy-html5} ${zlib_CMAKE})
 endif()
 
 
 ### COMPILE ###
-dk_build				(${TIDY_HTML5} tidy-static)
+dk_build				(${tidy-html5} tidy-static)

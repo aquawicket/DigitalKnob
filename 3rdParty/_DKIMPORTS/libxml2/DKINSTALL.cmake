@@ -21,7 +21,7 @@ include_guard()
 
 
 ### DEPEND ###
-#if(NOT EXISTS ${LIBXML2}/configure)
+#if(NOT EXISTS ${libxml2}/configure)
 dk_depend(autoconf)
 dk_depend(automake)
 dk_depend(libtool)

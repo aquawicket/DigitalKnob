@@ -75,6 +75,7 @@ endif()
 if(NOT CMAKE_SCRIPT_MODE_FILE)
 	###### Get CMAKE_SOURCE_DIR ######
 	dk_assertVar(CMAKE_SOURCE_DIR)
+	dk_load(dk_getFullPath)
 	dk_getFullPath(${CMAKE_SOURCE_DIR} CMAKE_SOURCE_DIR)
 	dk_assertPath(CMAKE_SOURCE_DIR)
 	dk_echo("CMAKE_SOURCE_DIR:             '${CMAKE_SOURCE_DIR}'")

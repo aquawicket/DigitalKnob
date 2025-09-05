@@ -15,13 +15,6 @@ include_guard()
 ############ pugixml ############
 # https://github.com/zeux/pugixml
 
-#dk_validate(Target_Config  "dk_Target_Config()")
-
-
-
-### IMPORT ###
-#dk_import(https://github.com/zeux/pugixml.git)
-#dk_import(${pugixml_Import} PATCH)
 dk_import()
 
 if(Android)
