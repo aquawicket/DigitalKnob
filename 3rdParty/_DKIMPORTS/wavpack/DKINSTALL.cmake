@@ -41,7 +41,7 @@ endif()
 
 
 ### 3rd Party Link ###
-dk_set(WAVPACK_CMAKE
+dk_set(wavpack_CMAKE
 	-Dwavpack_INCLUDE_PATH=${wavpack_INCLUDE_PATH}
 	-Dwavpack_LIBRARY=${wavpack_LIBRARY}
 )

@@ -18,6 +18,6 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 #Linux_Host_dk_chdir(/usr)
 dk_depend(sudo)
-#Linux_Host_dk_exec(${SUDO_EXE} apt -y install terminator) #FIXME sudo needed
+#Linux_Host_dk_exec(${sudo_exe} apt -y install terminator) #FIXME sudo needed
 #Mac_Host_dk_exec(brew install terminator)
 dk_installPackage(terminator)

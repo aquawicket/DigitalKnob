@@ -50,7 +50,7 @@ endif()
 
 
 ### 3rd Party Link ###
-dk_set(FLAC_CMAKE
+dk_set(flac_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC_INCLUDE_DIR}
 	-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_PATH}
 	-DFLAC_LIBRARY=${FLAC_LIBRARY}
@@ -76,7 +76,7 @@ dk_configure(${FLAC}
 	-DINSTALL_CMAKE_CONFIG_MODULE=ON	# "Install CMake package-config module" ON
 	-DWITH_OGG=ON						# "ogg support (default: test for libogg)" ON
 	#-DBUILD_SHARED_LIBS=OFF			# "Build shared instead of static libraries" OFF
-	${OGG_CMAKE})
+	${ogg_CMAKE})
 
 
 

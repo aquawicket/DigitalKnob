@@ -23,5 +23,5 @@ endif()
 
 # MSYS2 (-lpthread)
 if(MSYSTEM)
-	dk_set(PTHREAD_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpthread")
+	dk_set(pthread_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lpthread")
 endif()

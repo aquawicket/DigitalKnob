@@ -24,5 +24,5 @@ dk_findLibrary(imm32.lib)
 
 # MSYS2 (-limm32)
 if(MSYSTEM)
-	dk_set(IMM32_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-limm32")
+	dk_set(imm32_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-limm32")
 endif()

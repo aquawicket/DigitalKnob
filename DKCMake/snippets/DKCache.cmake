@@ -42,7 +42,7 @@ if(EXISTS ${ZLIB}/${Target_Tuple}/Release/zlibstatic.lib)
 	set(ZLIB_LIBRARY_RELEASE ${ZLIB}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
 endif()
 
-#execute_process(COMMAND ${CMD_EXE} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
+#execute_process(COMMAND ${cmd_exe} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
 set(BZIP2 $ENV{DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
 if(EXISTS ${BZIP2}/${Target_Tuple}/libbz2.lib)
@@ -151,13 +151,13 @@ endif()
 
 
 set(OPENSSL $ENV{DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
-if(EXISTS ${OPENSSL}/lib/ssleay32MT.lib)
+if(EXISTS ${openssl}/lib/ssleay32MT.lib)
 	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
-	set(OPENSSL_INCLUDE_DIR ${OPENSSL}/include CACHE PATH "" FORCE)
-	set(LIB_EAY_DEBUG ${OPENSSL}/lib/libeay32MTd.lib CACHE FILEPATH "" FORCE)
-	set(LIB_EAY_RELEASE ${OPENSSL}/lib/libeay32MT.lib CACHE FILEPATH "" FORCE)
-	set(SSL_EAY_DEBUG ${OPENSSL}/lib/ssleay32MTd.lib CACHE FILEPATH "" FORCE)
-	set(SSL_EAY_RELEAS ${OPENSSL}/lib/ssleay32MT.lib CACHE FILEPATH "" FORCE)
+	set(OPENSSL_INCLUDE_DIR ${openssl}/include CACHE PATH "" FORCE)
+	set(LIB_EAY_DEBUG ${openssl}/lib/libeay32MTd.lib CACHE FILEPATH "" FORCE)
+	set(LIB_EAY_RELEASE ${openssl}/lib/libeay32MT.lib CACHE FILEPATH "" FORCE)
+	set(SSL_EAY_DEBUG ${openssl}/lib/ssleay32MTd.lib CACHE FILEPATH "" FORCE)
+	set(SSL_EAY_RELEAS ${openssl}/lib/ssleay32MT.lib CACHE FILEPATH "" FORCE)
 endif()
 
 

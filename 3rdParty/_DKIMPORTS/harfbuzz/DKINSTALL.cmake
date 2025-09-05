@@ -15,33 +15,25 @@ include_guard()
 ############ harfbuzz ############
 # https://github.com/harfbuzz/harfbuzz.git
 
-dk_validate(Target_Config  "dk_Target_Config()")
-
 dk_depend(freetype)
 dk_depend(python3)
 
 ### IMPORT ###
-#dk_import(${harfbuzz_Import})
 dk_import()
 
 ### LINK ###
-dk_include			(${HARFBUZZ}/src						HARFBUZZ_INCLUDE_DIR)
+dk_include			(${harfbuzz}/src							HARFBUZZ_INCLUDE_DIR)
 if(MSVC AND Windows)
-	dk_libDebug		(${HARFBUZZ_Debug_Dir}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY)
-	dk_libRelease	(${HARFBUZZ_Release_Dir}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY)
+	dk_libDebug		(${harfbuzz_Debug_Dir}/harfbuzz.lib			HARFBUZZ_DEBUG_LIBRARY		HARFBUZZ_LIBRARY)
+	dk_libRelease	(${harfbuzz_Release_Dir}/harfbuzz.lib		HARFBUZZ_RELEASE_LIBRARY	HARFBUZZ_LIBRARY)
 else()
-	dk_libDebug		(${HARFBUZZ_Config_Dir}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY)
-	dk_libRelease	(${HARFBUZZ_Config_Dir}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY)
-endif()
-if(Debug)
-	dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_DEBUG_LIBRARY})
-endif()
-if(Release)
-	dk_set			(HARFBUZZ_LIBRARY							${HARFBUZZ_RELEASE_LIBRARY})
+	dk_libDebug		(${harfbuzz_Config_Dir}/libharfbuzz.a		HARFBUZZ_DEBUG_LIBRARY		HARFBUZZ_LIBRARY)
+	dk_libRelease	(${harfbuzz_Config_Dir}/libharfbuzz.a		HARFBUZZ_RELEASE_LIBRARY	HARFBUZZ_LIBRARY)
 endif()
 
+
 ### GENERATE ###
-dk_configure(${HARFBUZZ} 
+dk_configure(${harfbuzz} 
 	-DHB_BUILD_SUBSET=ON			# "Build harfbuzz-subset" ON
 	-DHB_BUILD_UTILS=OFF			# "Build harfbuzz utils, needs cairo, freetype, and glib properly be installed" OFF
 	-DHB_HAVE_CAIRO=OFF 			# "Enable cairo interop helpers" OFF
@@ -56,10 +48,10 @@ dk_configure(${HARFBUZZ}
 	-DHB_HAVE_INTROSPECTION=OFF		# "Enable building introspection (.gir/.typelib) files" OFF
 	-DHB_HAVE_UNISCRIBE=OFF 		# "Enable Uniscribe shaper backend on Windows" OFF
 	${freetype_CMAKE}
-	${PYTHON3_CMAKE})
+	${python3_CMAKE})
 
 ### 3RDPARTY LINK ###
-dk_set(HARFBUZZ_CMAKE -DHARFBUZZ_INCLUDE_DIR=${HARFBUZZ_INCLUDE_DIR} -DHARFBUZZ_LIBRARY=${HARFBUZZ_LIBRARY})
+dk_set(harfbuzz_CMAKE -DHARFBUZZ_INCLUDE_DIR=${HARFBUZZ_INCLUDE_DIR} -DHARFBUZZ_LIBRARY=${HARFBUZZ_LIBRARY})
 
 ### COMPILE ###
 dk_build()

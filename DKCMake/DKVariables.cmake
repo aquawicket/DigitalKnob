@@ -119,7 +119,7 @@ dk_echo("Host_Tuple:                   '${Host_Tuple}'")
 
 ############ Get Target Variables ############
 dk_validate(Target_Config   "dk_Target_Config()")
-dk_echo("Target_Config:                  '${Target_Config}'")
+dk_echo("Target_Config:                '${Target_Config}'")
 
 ###############################################################
 ## Set variables for paths
@@ -326,6 +326,7 @@ dk_echo("CMAKE_SKIP_RPATH:             '${CMAKE_SKIP_RPATH}'")
 if(Windows_Host)
 	dk_set(exe .exe)
 	dk_set(bat .bat)
+	dk_set(cmd .cmd)
 endif()
 
 

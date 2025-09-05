@@ -20,9 +20,9 @@ function(dk_getKey rtn_var)
 	dk_debugFunc(1)
 
 	dk_depend(cmd)
-	if(CMD_EXE)
+	if(cmd_exe)
 		dk_fixme("${CMAKE_CURRENT_FUNCTION}")
-		execute_process(COMMAND ${CMD_EXE} /c pause)
+		execute_process(COMMAND ${cmd_exe} /c pause)
 		return()
 	endif()
 	
@@ -33,7 +33,7 @@ function(dk_getKey rtn_var)
 		return()
 	endif()
 		
-	dk_fatal("dk_getKey() failed:   both CMD_EXE and bash_exe are invalid!")
+	dk_fatal("dk_getKey() failed:   both cmd_exe and bash_exe are invalid!")
 endfunction()
 
 

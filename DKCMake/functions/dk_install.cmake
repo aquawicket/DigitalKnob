@@ -185,7 +185,7 @@ function(dk_install PLUGIN) #PATCH
 			if(Mac_Host)
 				dk_exec(chmod 777 ${PLUGIN_DL_Dirname}/${PLUGIN_Import_Basename})
 				dk_depend(sudo)
-				dk_exec(${SUDO_EXE} -s installer -pkg ${PLUGIN_DL_Dirname}/${PLUGIN_Import_Basename} -target /)
+				dk_exec(${sudo_exe} -s installer -pkg ${PLUGIN_DL_Dirname}/${PLUGIN_Import_Basename} -target /)
 			endif()
 		else()
 			dk_exec(${PLUGIN_DL_Dirname}/${PLUGIN_Import_Basename})

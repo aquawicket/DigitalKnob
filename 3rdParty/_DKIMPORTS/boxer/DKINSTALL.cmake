@@ -21,29 +21,27 @@ if(Android OR Raspberry)
 	dk_return()
 endif()
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-
 ### DEPEND ###
-dk_depend			(cocoa)
-dk_depend			(libgtk-3-dev)
+dk_depend(cocoa)
+dk_depend(libgtk-3-dev)
 
 ### IMPORT ###
-dk_import			(${Boxer_Import})
+dk_import()
 
 ### LINK ###
-dk_include			(${BOXER}/include)
-dk_include			(${BOXER_Config_Dir})
+dk_include			(${boxer}/include)
+dk_include			(${boxer_Config_Dir})
 
 if(MSVC)
-	dk_libDebug		(${BOXER_Debug_Dir}/Boxer.lib)
-	dk_libRelease	(${BOXER_Release_Dir}/Boxer.lib)
+	dk_libDebug		(${boxer_Debug_Dir}/Boxer.lib)
+	dk_libRelease	(${boxer_Release_Dir}/Boxer.lib)
 else()
-	dk_libDebug		(${BOXER_Debug_Dir}/libBoxer.a)
-	dk_libRelease	(${BOXER_Release_Dir}/libBoxer.a)
+	dk_libDebug		(${boxer_Debug_Dir}/libBoxer.a)
+	dk_libRelease	(${boxer_Release_Dir}/libBoxer.a)
 endif()
 
 ### GENERATE ###
-dk_configure		(${BOXER})
+dk_configure		(${boxer})
 
 ### COMPILE ###
-dk_build			(${BOXER} Boxer)
+dk_build			(${boxer} Boxer)

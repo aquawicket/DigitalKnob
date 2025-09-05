@@ -32,6 +32,7 @@ endif()
 #
 function(dk_download)
 	dk_debugFunc(1 3)
+	dk_debug("dk_download(${ARGV})")
 	
 	###### Args ######
 	dk_getParameterValue(NAME REMOVE)
@@ -71,17 +72,18 @@ function(dk_download)
     #dk_assertVar(url)
 	#dk_printVar(url)							# https://aquawicket.com/download/myFile.txt
 	
+	dk_getUrl(${url} url)						# get the true url if redirect
 	dk_dirname(${url} url_dir)
 	dk_assertVar(url_dir)
-	#dk_printVar(url_dir)						# https://aquawicket.com/download
+	dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
 	
 	dk_basename(${url} url_filename)
 	dk_assertVar(url_filename)
-	#dk_printVar(url_filename)					# myFile.txt
+	dk_debug("url_filename = ${url_filename}")	# myFile.txt
 	
 	dk_getExtension(${url} url_ext)	
 	#dk_assertVar(url_ext)
-	#dk_printVar(url_ext)						# .txt    
+	dk_debug("url_ext = ${url_ext}")			# .txt    
 	
 	
 	# Setup all dest_path variables
@@ -106,15 +108,15 @@ function(dk_download)
 	endif()
 	dk_assertPath(dest_dir)
 	dk_chdir("${dest_dir}")
-	#dk_printVar(dest_dir)
+	#dk_debug("dest_dir = ${dest_dir}")
 	
 	dk_basename("${dest_path}" dest_filename)	# myFile.txt
 	dk_assertVar(dest_filename)
-	#dk_printVar(dest_filename)
+	#dk_debug("dest_filename = ${dest_filename}")
 	
 	dk_getExtension(${dest_path} dest_ext)		# .txt
 	#dk_assertVar(dest_ext)
-	#dk_printVar(dest_ext)
+	#dk_debug("dest_ext = ${dest_ext}")
 	
 	if(EXISTS "${dest_path}")
 		if(NOT NO_HALT)
@@ -139,14 +141,14 @@ function(dk_download)
 			dk_info("Trying Backup Server url:${url} . . .")
 		endif()
 	endif()
-
+	
 	dk_debug("Downloading ${url}")
 	dk_debug("      To -> ${dest_path}")
 	
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path "${dest_dir}/${temp_filename}")
-	#dk_printVar(temp_path)
+	#dk_debug("temp_path = ${temp_path}")
 	if(EXISTS "${temp_path}")
 		dk_delete("${temp_path}")
 	endif()

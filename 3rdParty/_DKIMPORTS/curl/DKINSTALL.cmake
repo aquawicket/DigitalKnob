@@ -18,8 +18,6 @@ include_guard()
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
-dk_validate(Target_Config  "dk_Target_Config()")
-
 ### DEPEND ###
 #dk_depend(dl)
 dk_depend(libbcrypt)
@@ -33,55 +31,44 @@ dk_depend(zlib)
 dk_depend(zstd)
 
 ### IMPORT ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#if(Windows)
-#	dk_import	(${curl_Windows_Import})
-#else()
-#	dk_import	(${curl_Unix_Import})
-#endif()
 dk_import()
 
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${CURL}/include 						CURL_INCLUDE_DIR)
-dk_include					(${CURL_Config_Dir}/lib					CURL_INCLUDE_DIR2)
+dk_include					(${curl}/include 						CURL_INCLUDE_DIR)
+dk_include					(${curl_Config_Dir}/lib					CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
-	set(CURL_Debug_Dir 		${CURL_Tuple_Dir}/lib/${Debug_Dir})
-	set(CURL_Release_Dir 	${CURL_Tuple_Dir}/lib/${Release_Dir})
+	set(curl_Debug_Dir 		${curl_Tuple_Dir}/lib/${Debug_Dir})
+	set(curl_Release_Dir 	${curl_Tuple_Dir}/lib/${Release_Dir})
 else()
-	set(CURL_Debug_Dir 		${CURL_Debug_Dir}/lib)
-	set(CURL_Release_Dir 	${CURL_Release_Dir}/lib)
+	set(curl_Debug_Dir 		${curl_Debug_Dir}/lib)
+	set(curl_Release_Dir 	${curl_Release_Dir}/lib)
 endif()
 
 if(MSVC AND Windows)
-	dk_libDebug			(${CURL_Config_Dir}/lib/${Debug_Dir}		CURL_DEBUG_LIBRARY)
-	dk_libRelease		(${CURL_Config_Dir}/lib/${Release_Dir}		CURL_RELEASE_LIBRARY)
+	dk_libDebug			(${curl_Config_Dir}/lib/${Debug_Dir}		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease		(${curl_Config_Dir}/lib/${Release_Dir}		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
 else()	
-	dk_libDebug			(${CURL_Debug_Dir}/libcurl-d.a				CURL_DEBUG_LIBRARY)
-	dk_libRelease		(${CURL_Release_Dir}/libcurl.a				CURL_RELEASE_LIBRARY)
-endif()
-if(Debug)
-	dk_set				(CURL_LIBRARY								${CURL_DEBUG_LIBRARY})
-endif()
-if(Release)
-	dk_set				(CURL_LIBRARY								${CURL_RELEASE_LIBRARY})
+	dk_libDebug			(${curl_Debug_Dir}/libcurl-d.a				CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease		(${curl_Release_Dir}/libcurl.a				CURL_RELEASE_LIBRARY	CURL_LIBRARY)
 endif()
 
+
 ### 3RDPARTY LINK ###
-dk_set(CURL_CMAKE 
+dk_set(curl_CMAKE 
 	-DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} 
 	-DCURL_LIBRARY=${CURL_LIBRARY})
 if(MSVC)
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=/I${CURL_Tuple_Dir}/include/curl")
+	dk_append(curl_CMAKE "-DCMAKE_C_FLAGS=/I${curl_Tuple_Dir}/include/curl")
 elseif()
-	dk_append(CURL_CMAKE "-DCMAKE_C_FLAGS=-I${CURL_Tuple_Dir}/include")
+	dk_append(curl_CMAKE "-DCMAKE_C_FLAGS=-I${curl_Tuple_Dir}/include")
 endif()
 
 ### GENERATE ###
 if(MSVC AND Windows)
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -126,13 +113,13 @@ if(MSVC AND Windows)
 		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
 		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
 		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
-		-DCURL_USE_OPENSSL=${OPENSSL}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
+		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_WOLFSSL=OFF							# "Enable wolfSSL for SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_WERROR=OFF								# "Turn compiler warnings into errors" OFF
 		-DCURL_WINDOWS_SSPI=ON							# "Use windows libraries to allow NTLM authentication without OpenSSL" ON
-		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
+		-DCURL_ZSTD=${zstd}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=${DEBUG}						# "Set to ON to build with TrackMemory feature enabled" OFF
 		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
@@ -150,32 +137,32 @@ if(MSVC AND Windows)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${LIBBCRYPT_CMAKE}
-		${LIBPSL_CMAKE}
-		${LIBSSH2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libpsl_CMAKE}
+		${libssh2_CMAKE}
 		${openssl_CMAKE}
-		${PTHREAD_CMAKE}
-		${WS2_32_LIB_CMAKE}
+		${pthread_CMAKE}
+		${ws2_32_lib_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 elseif(Android)
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		-DBUILD_CURL_EXE=OFF
 		-DBUILD_CURL_TESTS=OFF
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
 		-DCURL_USE_OPENSSL=OFF
-		-DCURL_ZSTD=${ZSTD}
+		-DCURL_ZSTD=${zstd}
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0	#Android_Host
-		${LIBBCRYPT_CMAKE}
+		${libbcrypt_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 elseif(Ios OR Iossim)
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		#-DHAVE_POSIX_STRERROR_R=advanced
 		#-DHAVE_POSIX_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DBUILD_CURL_EXE=OFF
@@ -184,18 +171,18 @@ elseif(Ios OR Iossim)
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
 		-DCURL_USE_OPENSSL=OFF
-		-DCURL_ZSTD=${ZSTD}
+		-DCURL_ZSTD=${zstd}
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
 		-DHAVE_POLL_FINE_EXITCODE=advanced
 		-DHAVE_POLL_FINE_EXITCODE__TRYRUN_OUTPUT=advanced
 		-DHAVE_POSIX_STRERROR_R=0
-		${LIBBCRYPT_CMAKE}
+		${libbcrypt_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 elseif(Mac)
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -240,13 +227,13 @@ elseif(Mac)
 		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
 		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
 		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
-		-DCURL_USE_OPENSSL=${OPENSSL}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
+		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_WOLFSSL=OFF							# "Enable wolfSSL for SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_WERROR=OFF								# "Turn compiler warnings into errors" OFF
 		-DCURL_WINDOWS_SSPI=OFF							# "Use windows libraries to allow NTLM authentication without OpenSSL" ON
-		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
+		-DCURL_ZSTD=${zstd}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
 		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
@@ -264,12 +251,12 @@ elseif(Mac)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${LIBBCRYPT_CMAKE}
+		${libbcrypt_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 elseif(Linux)
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -314,13 +301,13 @@ elseif(Linux)
 		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
 		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
 		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
-		-DCURL_USE_OPENSSL=${OPENSSL}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
+		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_WOLFSSL=OFF							# "Enable wolfSSL for SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_WERROR=OFF								# "Turn compiler warnings into errors" OFF
 		-DCURL_WINDOWS_SSPI=OFF							# "Use windows libraries to allow NTLM authentication without OpenSSL" ON
-		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
+		-DCURL_ZSTD=${zstd}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
 		-DENABLE_CURL_MANUAL=OFF						# "to build the man page for curl and enable its -M/--manual option" OFF
@@ -338,13 +325,13 @@ elseif(Linux)
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${LIBBCRYPT_CMAKE}
+		${libbcrypt_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 endif()
 #else()
-	dk_configure(${CURL}
+	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
@@ -389,13 +376,13 @@ endif()
 		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
 		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
 		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
-		-DCURL_USE_OPENSSL=${OPENSSL}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
+		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_WOLFSSL=OFF							# "Enable wolfSSL for SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_WERROR=OFF								# "Turn compiler warnings into errors" OFF
 		-DCURL_WINDOWS_SSPI=ON							# "Use windows libraries to allow NTLM authentication without OpenSSL" ON
-		-DCURL_ZSTD=${ZSTD}								# "Set to ON to enable building curl with zstd support." OFF
+		-DCURL_ZSTD=${zstd}								# "Set to ON to enable building curl with zstd support." OFF
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
 		-DENABLE_DEBUG=OFF								# "Set to ON to enable curl debug features" OFF
@@ -412,10 +399,10 @@ endif()
 		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
 		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
 		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
-		${LIBBCRYPT_CMAKE}
+		${libbcrypt_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
-		${ZSTD_CMAKE})
+		${zstd_CMAKE})
 #endif()
 
 

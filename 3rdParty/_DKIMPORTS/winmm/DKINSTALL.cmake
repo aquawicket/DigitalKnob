@@ -26,5 +26,5 @@ dk_findLibrary(winmm.lib)
 
 # MSYS2 (-lWinmm)
 if(MSYSTEM)
-	dk_set(WINMM_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lWinmm")
+	dk_set(winmm_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lWinmm")
 endif()

@@ -14,11 +14,9 @@ include_guard()
 
 ############ libb2 ############
 # https://github.com/BLAKE2/libb2.git
-
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/BLAKE2/libb2/archive/refs/heads/master.zip
 
 ### IMPORT ###
-#dk_import(https://github.com/BLAKE2/libb2.git)
-dk_import(https://github.com/BLAKE2/libb2/archive/refs/heads/master.zip)
+dk_import()
 
 # TODO

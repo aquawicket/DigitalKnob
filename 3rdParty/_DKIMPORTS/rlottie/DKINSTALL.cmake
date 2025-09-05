@@ -14,37 +14,35 @@ include_guard()
 
 ############ rlottie ############
 # https://github.com/Samsung/rlottie.git
-#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### IMPORT ###
-#dk_import(https://github.com/Samsung/rlottie/archive/e3026b1e.zip)
 dk_import()
 
 ### PATCH ###
 if(MSVC)
-	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE)" 	"set(CMAKE_CXX_FLAGS_RELEASE)")
-	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG)" 		"set(CMAKE_CXX_FLAGS_DEBUG)")
+	dk_fileReplace(${rlottie}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_RELEASE)" 	"set(CMAKE_CXX_FLAGS_RELEASE)")
+	dk_fileReplace(${rlottie}/CMakeLists.txt "#set(CMAKE_CXX_FLAGS_DEBUG)" 		"set(CMAKE_CXX_FLAGS_DEBUG)")
 else()
-	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE" 	"#set(CMAKE_CXX_FLAGS_RELEASE")
-	dk_fileReplace(${RLOTTIE}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG" 	"#set(CMAKE_CXX_FLAGS_DEBUG")
+	dk_fileReplace(${rlottie}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_RELEASE" 		"#set(CMAKE_CXX_FLAGS_RELEASE")
+	dk_fileReplace(${rlottie}/CMakeLists.txt "set(CMAKE_CXX_FLAGS_DEBUG" 		"#set(CMAKE_CXX_FLAGS_DEBUG")
 endif()
 
 ### LINK ###
-dk_include			(${RLOTTIE}/inc							rlottie_DIR)
-dk_include			(${RLOTTIE_Config_Dir}					rlottie_INCLUDE_DIR)
+dk_include			(${rlottie}/inc							rlottie_DIR)
+dk_include			(${rlottie_Config_Dir}					rlottie_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${RLOTTIE_Debug_Dir}/rlottie.lib)
-	dk_libRelease	(${RLOTTIE_Release_Dir}/rlottie.lib)
+	dk_libDebug		(${rlottie_Debug_Dir}/rlottie.lib)
+	dk_libRelease	(${rlottie_Release_Dir}/rlottie.lib)
 else()
-	dk_libDebug		(${RLOTTIE_Debug_Dir}/librlottie.a)
-	dk_libRelease	(${RLOTTIE_Release_Dir}/librlottie.a)
+	dk_libDebug		(${rlottie_Debug_Dir}/librlottie.a)
+	dk_libRelease	(${rlottie_Release_Dir}/librlottie.a)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(RLOTTIE_CMAKE -Drlottie_DIR=${rlottie_DIR} -Drlottie_INCLUDE_DIR=${rlottie_INCLUDE_DIR})
+dk_set(rlottie_CMAKE -Drlottie_DIR=${rlottie_DIR} -Drlottie_INCLUDE_DIR=${rlottie_INCLUDE_DIR})
 
 ### GENERATE ###
-dk_configure(${RLOTTIE}
+dk_configure(${rlottie}
 	-DLOTTIE_MODULE=ON		# "Enable LOTTIE MODULE SUPPORT" ON
 	-DLOTTIE_THREAD=ON 		# "Enable LOTTIE THREAD SUPPORT" ON
 	-DLOTTIE_CACHE=ON  		# "Enable LOTTIE CACHE SUPPORT" ON
@@ -53,4 +51,4 @@ dk_configure(${RLOTTIE}
 	-DLOTTIE_ASAN=OFF) 		# "Compile with asan" OFF
 
 ### COMPILE ###
-dk_build(${RLOTTIE} rlottie)
+dk_build(${rlottie} rlottie)

@@ -2171,7 +2171,7 @@ Android_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 
 if(Emscripten)
@@ -2223,7 +2223,7 @@ Emscripten_Debug_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 	
 Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	"-DCMAKE_CXX_FLAGS=-std=gnu++14"
@@ -2270,7 +2270,7 @@ Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Ios)
 	string(REPLACE "-std=c++17" "" DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2325,7 +2325,7 @@ Ios_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Iossim)
 	string(REPLACE "-std=c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2385,7 +2385,7 @@ Iossim_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Linux)
 	string(REPLACE "-std=c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2431,7 +2431,7 @@ Linux_Debug_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 	
 Linux_Release_dk_configure(${OPENSCENEGRAPH}
 	-DBUILD_OSG_APPLICATIONS=OFF
@@ -2473,7 +2473,7 @@ Linux_Release_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Mac)
 	string(REPLACE "-std=c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2521,7 +2521,7 @@ Mac_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Raspberry)	
 	string(REPLACE "-std=c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2567,7 +2567,7 @@ Raspberry_Debug_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 	
 Raspberry_Release_dk_configure(${OPENSCENEGRAPH}
 	-DBUILD_OSG_APPLICATIONS=OFF
@@ -2609,7 +2609,7 @@ Raspberry_Release_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 if(Windows)
 	string(REPLACE "/std:c++17" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
@@ -2658,7 +2658,7 @@ Windows_dk_configure(${OPENSCENEGRAPH}
 	${sdl_CMAKE}
 	${tiff_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 
 ### COMPILE ###

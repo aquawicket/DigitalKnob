@@ -190,7 +190,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-Windows_dk_set(SFML_CMAKE
+Windows_dk_set(sfml_CMAKE
 	-DSFML_INCLUDE_DIR=${SFML}/include
 	-DSFML_AUDIO_LIBRARY_DEBUG=${SFML}/${Target_Tuple}/lib/${Debug_Dir}/sfml-audio-s-d.lib
 	-DSFML_AUDIO_LIBRARY_RELEASE=${SFML}/${Target_Tuple}/lib/${Release_Dir}/sfml-audio-s.lib
@@ -205,14 +205,14 @@ Windows_dk_set(SFML_CMAKE
 
 
 ### GENERATE ###
-Android_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Emscripten_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Iossim_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Ios_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Linux_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Mac_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_MACOSX=1)
-Raspberry_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE})
-Windows_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${OGG_CMAKE} ${VORBIS_CMAKE} ${FLAC_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE)
+Android_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Emscripten_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Iossim_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Ios_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Linux_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Mac_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE} -DSFML_OS_MACOSX=1)
+Raspberry_dk_configure	(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE})
+Windows_dk_configure		(${SFML} ${libjpeg-turbo_CMAKE} ${OPENAL_CMAKE} ${ogg_CMAKE} ${vorbis_CMAKE} ${flac_CMAKE} -DSFML_OS_WINDOWS=1 -DSFML_USE_STATIC_STD_LIBS=TRUE)
 
 
 ### COMPILE ###

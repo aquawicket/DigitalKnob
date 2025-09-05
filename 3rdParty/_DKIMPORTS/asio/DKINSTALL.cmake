@@ -15,23 +15,22 @@ include_guard()
 ################## asio ##################
 # https://github.com/chriskohlhoff/asio
 
-dk_depend			(clang)
-dk_depend			(make)
-dk_basename			("${CMAKE_CURRENT_LIST_DIR}" current_plugin)
-dk_getFileParams	(${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt)
-dk_import			(${${current_plugin}_import} NAME ${current_plugin})
+dk_depend(clang)
+dk_depend(make)
+
+
+dk_import()
 
 ### LINK ###
-dk_toUpper("${current_plugin}" CURRENT_PLUGIN)
 dk_include			(${${CURRENT_PLUGIN}}/asio/include)
 if(MSVC)
-	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/${current_plugin}.lib)
-	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/${current_plugin}.lib)
+	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/${CURRENT_PLUGIN}.lib)
+	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/${CURRENT_PLUGIN}.lib)
 else()
-	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/lib${current_plugin}.a)
-	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/lib${current_plugin}.a)
+	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/lib${CURRENT_PLUGIN}.a)
+	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/lib${CURRENT_PLUGIN}.a)
 endif()
 
 dk_configure("${${CURRENT_PLUGIN}}" ${CMAKE_MAKE_PROGRAM} -f "${${CURRENT_PLUGIN}}/asio/src/Makefile.mgw")
 
-dk_build("${${CURRENT_PLUGIN}}")
+dk_build()

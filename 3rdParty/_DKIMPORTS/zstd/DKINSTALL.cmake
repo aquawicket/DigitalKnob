@@ -19,37 +19,41 @@ include_guard()
 dk_import()
 
 ### LINK ###
-dk_include				(${zstd}/lib											Zstd_INCLUDE_DIR)
+dk_include				(${zstd}/lib											ZSTD_INCLUDE_DIR)
 if(MSVC)
 	if(Windows)
-		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
-		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/zstd_static.lib	Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/zstd_static.lib	ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 	else()
-		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
-		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 	endif()
 elseif(Apple)
-	dk_libDebug			(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
-	dk_libRelease		(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
+	dk_libDebug			(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 else()
-	dk_libDebug			(${zstd_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_DEBUG		Zstd_LIBRARY)
-	dk_libRelease		(${zstd_Config_Dir}/lib/libzstd.a						Zstd_LIBRARY_RELEASE	Zstd_LIBRARY)
+	dk_libDebug			(${zstd_Config_Dir}/lib/libzstd.a						ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/libzstd.a						ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 endif()
-#dk_set					(Zstd_INCLUDE_DIR	${ZSTD_INCLUDE_DIR})
-#dk_set					(Zstd_LIBRARY		${ZSTD_LIBRARY})
-dk_set					(Zstd_LIBRARIES		${Zstd_LIBRARY_DEBUG} ${Zstd_LIBRARY_RELEASE})
+dk_set					(ZSTD_LIBRARIES		${ZSTD_LIBRARY_DEBUG} ${ZSTD_LIBRARY_RELEASE})
 
 
 ### 3RDPARTY LINK ###
 dk_set(zstd_CMAKE
 	-DZSTD_INCLUDE_DIR=${ZSTD_INCLUDE_DIR}
 	-DZSTD_LIBRARY=${ZSTD_LIBRARY}
-	-DZstd_LIBRARY=${Zstd_LIBRARY}
-	-DZstd_INCLUDE_DIR=${Zstd_INCLUDE_DIR} 
-	-DZstd_LIBRARY_DEBUG=${Zstd_LIBRARY_DEBUG} 
-	-DZstd_LIBRARY_RELEASE=${Zstd_LIBRARY_RELEASE} 
-	-DZstd_LIBRARIES=${Zstd_LIBRARIES}
-	"-DCMAKE_EXE_LINKER_FLAGS=${Zstd_LIBRARIES}")
+	-DZSTD_LIBRARY_DEBUG=${ZSTD_LIBRARY_DEBUG} 
+	-DZSTD_LIBRARY_RELEASE=${ZSTD_LIBRARY_RELEASE} 
+	-DZSTD_LIBRARIES=${ZSTD_LIBRARIES}
+	"-DCMAKE_EXE_LINKER_FLAGS=${ZSTD_LIBRARIES}")
+
+#dk_set(zstd_CMAKE	
+#	-DZstd_INCLUDE_DIR=${ZSTD_INCLUDE_DIR}
+#	-DZstd_LIBRARY=${ZSTD_LIBRARY}
+#	-DZstd_LIBRARY_DEBUG=${ZSTD_LIBRARY_DEBUG}
+#	-DZstd_LIBRARY_RELEASE=${ZSTD_LIBRARY_RELEASE} 
+#	-DZstd_LIBRARIES=${ZSTD_LIBRARIES}
+#	"-DCMAKE_EXE_LINKER_FLAGS=${ZSTD_LIBRARIES}")
 		
 ### GENERATE ###
 dk_configure(${zstd}/build/cmake

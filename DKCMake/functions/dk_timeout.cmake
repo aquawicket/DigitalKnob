@@ -34,7 +34,7 @@ function(dk_timeout)
 		dk_validate(TIMEOUT_EXE "dk_TIMEOUT_EXE()")
 		set(command "(${TIMEOUT_EXE} /t ${seconds})")
 		message("CMD> ${command}")
-		execute_process(COMMAND "${CMD_EXE}" /c "${command}")
+		execute_process(COMMAND "${cmd_exe}" /c "${command}")
 		
 	###### POWERSHELL ######
 	elseif(POWERSHELL_SHELL)

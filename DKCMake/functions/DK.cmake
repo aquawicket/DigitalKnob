@@ -1,5 +1,4 @@
 #!/usr/bin/cmake -P
-# message("### DK.cmake ###")
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 include_guard()
@@ -125,11 +124,13 @@ function(DKINIT)
 		endif()
 	endif()
 	
+	include("$ENV{DKCMAKE_DIR}/DKVariables.cmake")
+	
 	###### Initialize Import Variables ######
 	######################################################################################################
 	# If we run a DKINSTALL.cmake file, it needs be pushed to the CURRENT_PLUGIN environment variable list.
 	# dk_depend normaly does this, but since it's the first file run, we can't really call dk_depend on 
-	# itself. dk_envList(PLUGIN PUSH "${PLUGIN}") should take care of it.
+	# itself. dk_envList(PLUGIN PUSH "${Plugin}") should take care of it.
 	if(NOT CURRENT_PLUGIN)
 		if("$ENV{DKSCRIPT_NAME}" STREQUAL "DKINSTALL")
 			dk_load("dk_importVariables")
@@ -161,7 +162,7 @@ function(DKINIT)
 			dk_echo("\n${bg_magenta}${white}###### DKTEST MODE ###### $ENV{DKSCRIPT_NAME} ###### DKTEST MODE ######${clr}\n")
 			include($ENV{DKSCRIPT_PATH}) # make sure the correct DKTEST function is loaded
 			DKTEST()
-			dk_echo("\n${bg_magenta}${white}########################## END TEST ################################${clr}\n")
+			dk_echo("\n${bg_magenta}${white}###### DKTEST END ####### $ENV{DKSCRIPT_NAME} ###### DKTEST END #######${clr}\n")
 			dk_exit(0)
 		endif()
 	endif()
@@ -271,7 +272,7 @@ function(dk_setVariables)
 		set(WSL 1 CACHE INTERNAL "")
 		dk_echo("CMake using WSL")
 	endif()
-	if(DEFINED "ENV{HOMEDRIVE}")
+	if(DEFINED ENV{HOMEDRIVE})
 		# TODO
 	endif()
 	if(DEFINED "ENV{ProgramW6432}")

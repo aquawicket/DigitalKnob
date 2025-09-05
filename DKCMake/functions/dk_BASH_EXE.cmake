@@ -36,8 +36,8 @@ function(dk_bash_exe)
 
 		### from bash_exe environment variable ###
 		if(NOT EXISTS "${bash_exe}")
-			dk_set(CMD_EXE "$ENV{bash_exe}")
-			dk_error("dk_BASH_EXE():39  CMD_EXE should be bash_exe")
+			dk_set(cmd_exe "$ENV{bash_exe}")
+			dk_error("dk_BASH_EXE():39  cmd_exe should be bash_exe")
 		endif()
 		
 		### from BASH environment variable ###

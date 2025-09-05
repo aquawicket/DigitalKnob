@@ -25,7 +25,7 @@ if(TINYCORE)
 	dk_installPackage(libsndfile-dev.tcz)
 else()
 	#dk_depend(sudo)
-	#dk_exec(${SUDO_EXE} apt -y install libsndfile1-dev)
+	#dk_exec(${sudo_exe} apt -y install libsndfile1-dev)
 	dk_installPackage(libsndfile1-dev)
 endif()
 

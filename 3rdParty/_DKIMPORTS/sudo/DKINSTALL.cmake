@@ -19,18 +19,18 @@ if(WIN32)
 	return()
 endif()
 
-if(EXISTS ${SUDO_EXE})
+if(EXISTS ${sudo_exe})
 	return()
 endif()
 
 
-dk_findProgram(SUDO_EXE sudo)
-if(NOT EXISTS ${SUDO_EXE})
-	dk_set(SUDO_EXE "")
-	dk_unset(SUDO_EXE)
+dk_findProgram(sudo_exe sudo)
+if(NOT EXISTS ${sudo_exe})
+	dk_set(sudo_exe "")
+	dk_unset(sudo_exe)
 endif()
 
 
 
-dk_set(SUDO_EXE ${SUDO_EXE})   # set it globally
-message("SUDO_EXE = ${SUDO_EXE}")
+dk_set(sudo_exe ${sudo_exe})   # set it globally
+message("sudo_exe = ${sudo_exe}")

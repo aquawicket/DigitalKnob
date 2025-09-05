@@ -88,9 +88,9 @@ dk_configure(${TIFF}
 	-Dtiff-deprecated=OFF			# "build TIFF deprecated features" OFF
 	-Dtiff-install=OFF				# "install TIFF targets" ${TIFF_INSTALL_DEFAULT}
 	${libjpeg-turbo_CMAKE} 
-	${XZ_CMAKE}
+	${xz_CMAKE}
 	${zlib_CMAKE}
-	${ZSTD_CMAKE})
+	${zstd_CMAKE})
 
 ### COMPILE ###
 dk_build(${TIFF})# tiff)

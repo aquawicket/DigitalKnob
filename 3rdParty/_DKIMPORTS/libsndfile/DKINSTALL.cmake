@@ -41,7 +41,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${LIBSNDFILE} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE})
+dk_configure(${LIBSNDFILE} ${flac_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${ogg_CMAKE} ${opus_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${vorbis_CMAKE})
 
 ### COMPILE ###
 dk_build()

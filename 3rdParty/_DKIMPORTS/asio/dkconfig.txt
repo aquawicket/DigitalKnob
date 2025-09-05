@@ -1,4 +1,4 @@
 ################## asio ##################
 # https://github.com/chriskohlhoff/asio
 
-asio_import=https://github.com/chriskohlhoff/asio/archive/f88ec156.zip
+asio_Import=https://github.com/chriskohlhoff/asio/archive/f88ec156.zip

@@ -16,7 +16,7 @@ include_guard()
 ############ pearl ############
 # https://packages.msys2.org/package/mingw-w64-x86_64-perl
 
-if(EXISTS "${PERL_EXE}")
+if(EXISTS "${perl_exe}")
 	dk_return()
 endif()
 
@@ -27,28 +27,28 @@ dk_validate(msys2 "dk_depend(msys2)")
 dk_installPackage(perl)
 
 if(Windows_Arm64_Clang)
-	#dk_findProgram(PERL_EXE perl "${msys2}/clangarm64/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/clangarm64/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_Clang)
-	#dk_findProgram(PERL_EXE perl "${msys2}/clang32/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/clang32/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_64_Clang)
-	#dk_findProgram(PERL_EXE perl "${msys2}/clang64/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/clang64/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_Gcc)
-	#dk_findProgram(PERL_EXE perl "${msys2}/mingw32/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/mingw32/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_64_Gcc)
-	#dk_findProgram(PERL_EXE perl "${msys2}/mingw64/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/mingw64/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_64_Ucrt)
-	#dk_findProgram(PERL_EXE perl "${msys2}/ucrt64/bin")
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl "${msys2}/ucrt64/bin")
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 	
 elseif(Windows_X86_Msvc)
 	dk_depend(strawberry-perl)
@@ -57,9 +57,9 @@ elseif(Windows_X86_64_Msvc)
 	dk_depend(strawberry-perl)
 	
 else()
-	#dk_findProgram(PERL_EXE perl)
-	dk_findProgram(PERL_EXE perl "${msys2}/usr/bin")
+	#dk_findProgram(perl_exe perl)
+	dk_findProgram(perl_exe perl "${msys2}/usr/bin")
 endif()
 
 
-dk_assertPath(PERL_EXE)
+dk_assertPath(perl_exe)

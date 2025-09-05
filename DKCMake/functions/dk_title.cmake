@@ -24,8 +24,8 @@ function(dk_title)
 	
 	###### cmd direct #######
 	dk_CMD_EXE()
-	if(CMD_EXE)
-		execute_process(COMMAND ${CMD_EXE} /c "title ${ARGV}")
+	if(cmd_exe)
+		execute_process(COMMAND ${cmd_exe} /c "title ${ARGV}")
 	endif()
 endfunction()
 

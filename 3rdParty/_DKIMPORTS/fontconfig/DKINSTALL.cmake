@@ -20,7 +20,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 if(Apple)
 	#dk_depend(sudo)
-	#dk_exec(${SUDO_EXE} port install fontconfig)
+	#dk_exec(${sudo_exe} port install fontconfig)
 	dk_installPackage(fontconfig)
 	dk_return()
 endif()

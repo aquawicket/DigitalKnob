@@ -11,13 +11,12 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
 ############ cmd ############
-#dk_validate(Target_Config  "dk_Target_Config()")
 # https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
 
-if(EXISTS "${CMD_EXE}")
-	dk_stacktrace()
-	dk_debug("CMD_EXE:${CMD_EXE} already located")
+if(EXISTS "${cmd_exe}")
+	dk_debug("cmd_exe:${cmd_exe} already located")
 	return()
 endif()
 
@@ -30,21 +29,21 @@ if(NOT Windows_Host)
 endif()
 
 
-if(NOT EXISTS "${CMD_EXE}")
-	set(CMD_EXE "$ENV{ComSpec}")
-	string(REPLACE "\\" "/" CMD_EXE "${CMD_EXE}")
-	dk_debug("ComSpec: CMD_EXE = ${CMD_EXE}")
+if(NOT EXISTS "${cmd_exe}")
+	set(cmd_exe "$ENV{ComSpec}")
+	string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
+	dk_debug("ComSpec: cmd_exe = ${cmd_exe}")
 endif()
 
-if(NOT EXISTS "${CMD_EXE}")
-	dk_findProgram(CMD_EXE cmd.exe)
-	string(REPLACE "\\" "/" CMD_EXE "${CMD_EXE}")
-	dk_debug("dk_findProgram: CMD_EXE = ${CMD_EXE}")
+if(NOT EXISTS "${cmd_exe}")
+	dk_findProgram(cmd_exe cmd.exe)
+	string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
+	dk_debug("dk_findProgram: cmd_exe = ${cmd_exe}")
 endif()
 
-if(NOT EXISTS "${CMD_EXE}")
-	dk_fatal("Could not file CMD_EXE:${CMD_EXE}")
+if(NOT EXISTS "${cmd_exe}")
+	dk_fatal("Could not file cmd_exe:${cmd_exe}")
 endif()
 
-string(REPLACE "\\" "/" CMD_EXE "${CMD_EXE}")
-dk_set(CMD_EXE "${CMD_EXE}")  # make variable global
+string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
+dk_set(cmd_exe "${cmd_exe}")  # make variable global

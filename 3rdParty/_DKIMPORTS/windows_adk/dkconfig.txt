@@ -1,0 +1,9 @@
+# curl https://go.microsoft.com/fwlink/?linkid=2289980 -sI -o nul -w %{redirect_url} 
+
+windows_adk_Import=https://go.microsoft.com/fwlink/?linkid=2289980
+windows_adk_Download_Basename=adksetup.exe
+windows_adk_Type=APP
+
+windows_adk_PE_Import=https://go.microsoft.com/fwlink/?linkid=2289981
+windows_adk_PE_Download_Basename=adkwinpesetup.exe
+windows_adk_PE_Type=APP

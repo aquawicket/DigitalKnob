@@ -28,5 +28,5 @@ dk_findLibrary(Setupapi.lib)
 
 # MSYS2 (-lsetupapi)
 if(MSYSTEM)
-	dk_set(SETUPAPI_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lsetupapi")
+	dk_set(setupapi_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lsetupapi")
 endif()

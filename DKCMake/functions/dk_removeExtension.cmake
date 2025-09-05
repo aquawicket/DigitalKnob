@@ -24,26 +24,25 @@ include_guard()
 function(dk_removeExtension)
 	dk_debugFunc()
 	
-	set(dk_removeExtension ${ARGV0} PARENT_SCOPE) # Allow the input variable to pass through in case of failure
+	set(dk_removeExtension ${ARGV0}) # Allow the input variable to pass through in case of failure
 	set(path "${ARGV0}")
 	dk_getParameter(NO_HALT)
 	
 	string(FIND ${path} "." includes REVERSE)
 	if(${includes} EQUAL -1)
 		dk_warning("dk_removeExtension(${path}): no extension found")
-		dk_return()
+	else()
+		dk_getExtension("${path}")
+		dk_replaceAll("${path}" "${dk_getExtension}" "" dk_removeExtension)
+		#string(SUBSTRING ${path} 0 ${includes} dk_removeExtension)
 	endif()
 	
-	dk_getExtension("${path}")
-	dk_replaceAll("${path}" "${dk_getExtension}" "" dk_removeExtension)
-	#string(SUBSTRING ${path} 0 ${includes} dk_removeExtension)
-	
-	### return ###
-    set(dk_removeExtension ${dk_removeExtension} PARENT_SCOPE)
-	
-	### rtn_var: OPTIONAL ###
+	###### output ######
+	set(dk_removeExtension ${dk_removeExtension} PARENT_SCOPE)
 	if(ARGV1)
 		set(${ARGV1} ${dk_removeExtension} PARENT_SCOPE)
+	else()
+		message("${dk_removeExtension}") 
 	endif()
 endfunction()
 
@@ -56,8 +55,13 @@ function(DKTEST)
 	
 	set(myPath "C:/Users/yourname/awsomeFile.txt")
 	dk_removeExtension("${myPath}")
-	dk_info("${dk_removeExtension}")
+	dk_echo("dk_removeExtension = ${dk_removeExtension}")
 	
 	dk_removeExtension("${myPath}" result)
-	dk_info("${result}")
+	dk_echo("result = ${result}")
+	dk_echo("dk_removeExtension = ${dk_removeExtension}")
+	
+	set(myPath "?linkid=2289980")
+	dk_removeExtension("${myPath}")
+	dk_echo("dk_removeExtension = ${dk_removeExtension}")
 endfunction()

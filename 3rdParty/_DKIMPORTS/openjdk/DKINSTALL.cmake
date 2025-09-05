@@ -41,8 +41,8 @@ if(Mac_Host)
 	if(NOT EXISTS /Library/Java/JavaVirtualMachines/jdk-11.jdk)
 		dk_download(${openjdk_Mac_X86_64_Import})
 		dk_exec(tar xf ${dk_download})
-		dk_validate(SUDO_EXE "dk_depend(sudo)")
-		dk_exec(${SUDO_EXE} mv $ENV{DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
+		dk_validate(sudo_exe "dk_depend(sudo)")
+		dk_exec(${sudo_exe} mv $ENV{DKDOWNLOAD_DIR}/jdk-11.jdk /Library/Java/JavaVirtualMachines/)
 		dk_delete($ENV{DKDOWNLOAD_DIR}/openjdk-11_osx-x64_bin.tar.gz)
 	endif()
 	dk_exec(java --version)
@@ -60,21 +60,21 @@ if(Windows_Host)
 	dk_nativePath("${OPENJDK}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)
-	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v JavaHome /t REG_SZ /d "$ENV{JAVA_HOME}" /f)
-	execute_process(COMMAND ${CMD_EXE} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v RuntimeLib /t REG_SZ /d "$ENV{JAVA_HOME}\\bin\\server\\jvm.dll" /f)
+	dk_validate(cmd_exe "dk_CMD_EXE()")
+	execute_process(COMMAND ${cmd_exe} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" /v CurrentVersion /t REG_SZ /d "$ENV{JAVA_VERSION}" /f)
+	execute_process(COMMAND ${cmd_exe} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v JavaHome /t REG_SZ /d "$ENV{JAVA_HOME}" /f)
+	execute_process(COMMAND ${cmd_exe} /c reg add "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\$ENV{JAVA_VERSION}" /v RuntimeLib /t REG_SZ /d "$ENV{JAVA_HOME}\\bin\\server\\jvm.dll" /f)
 	
 	
 	###### VS_JavaHome ######
 #	set(ENV{VS_JavaHome} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx VS_JavaHome "$ENV{VS_JavaHome}")
+#	execute_process(COMMAND ${cmd_exe} /c setx VS_JavaHome "$ENV{VS_JavaHome}")
 	
 	###### STUDIO_JDK ######
 #	set(ENV{STUDIO_JDK} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
+#	execute_process(COMMAND ${cmd_exe} /c setx STUDIO_JDK "$ENV{STUDIO_JDK}")
 	
 	###### STUDIO_GRADLE_JDK ######
 #	set(ENV{STUDIO_GRADLE_JDK} "$ENV{JAVA_HOME}")
-#	execute_process(COMMAND ${CMD_EXE} /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
+#	execute_process(COMMAND ${cmd_exe} /c setx STUDIO_GRADLE_JDK "$ENV{STUDIO_GRADLE_JDK}")
 endif()

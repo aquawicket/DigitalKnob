@@ -30,8 +30,8 @@ function(dk_pause)
 	
 	###### Cmd ######
 	if(DEFINED ENV{COMSPEC})
-		dk_replaceAll($ENV{COMSPEC} "/" "\\" CMD_EXE)   # convert to windows path delimiters
-		set(cmnd ${CMD_EXE} /c pause >nul)
+		dk_replaceAll($ENV{COMSPEC} "/" "\\" cmd_exe)   # convert to windows path delimiters
+		set(cmnd ${cmd_exe} /c pause >nul)
 		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
@@ -64,7 +64,7 @@ function(dk_pause)
 		dk_return()
 	endif()
 	
-	dk_fatal("dk_pause() failed:  cant find CMD_EXE, bash_exe or SH_EXE!")
+	dk_fatal("dk_pause() failed:  cant find cmd_exe, bash_exe or SH_EXE!")
 endfunction()
 
 

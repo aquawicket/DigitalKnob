@@ -606,21 +606,21 @@ if(Android)
 	if(NOT Android_Host AND INSTALL_APK)
 		dk_depend(cmd)	
 		if(Debug)
-			dk_validate(CMD_EXE "dk_CMD_EXE()")
+			dk_validate(cmd_exe "dk_CMD_EXE()")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${cmd_exe} ${ANDROID_SDK}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(Release)
 		endif()
-			dk_validate(CMD_EXE "dk_CMD_EXE()")
+			dk_validate(cmd_exe "dk_CMD_EXE()")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${CMD_EXE} ${ANDROID_SDK}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${cmd_exe} ${ANDROID_SDK}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()

@@ -52,10 +52,10 @@ endif()
 #if(NOT EXISTS "???")
 dk_info("running install_crosstool.cmd")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_validate(CMD_EXE "dk_CMD_EXE()")
-dk_nativePath("${CMD_EXE}" CMD_EXE)
+dk_validate(cmd_exe "dk_CMD_EXE()")
+dk_nativePath("${cmd_exe}" cmd_exe)
 set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
-dk_exec(${CMD_EXE} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
+dk_exec(${cmd_exe} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
 	
 #execute_process(COMMAND ${CYGWIN_EXE} & crosstool-ng-build.sh)
 #endif	

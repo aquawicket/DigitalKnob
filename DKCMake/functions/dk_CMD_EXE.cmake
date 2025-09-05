@@ -20,46 +20,46 @@ function(dk_CMD_EXE)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(CMD_EXE "${ARGV0}")
+		dk_set(cmd_exe "${ARGV0}")
 		
 	###### GET ######
-	elseif(CMD_EXE)	
-		#dk_set(CMD_EXE "$ENV{CMD_EXE}")
+	elseif(cmd_exe)	
+		#dk_set(cmd_exe "$ENV{cmd_exe}")
 	
 	else()
-		if(EXISTS "${CMD_EXE}")
-			dk_debug("CMD_EXE:${CMD_EXE} already set")
+		if(EXISTS "${cmd_exe}")
+			dk_debug("cmd_exe:${cmd_exe} already set")
 			return()
 		endif()
 		
-		### from CMD_EXE environment variable ###
-		if(NOT EXISTS "${CMD_EXE}")
-			dk_set(CMD_EXE "$ENV{CMD_EXE}")
+		### from cmd_exe environment variable ###
+		if(NOT EXISTS "${cmd_exe}")
+			dk_set(cmd_exe "$ENV{cmd_exe}")
 		endif()
 		
 		### from COMSPEC environment variable ###
-		if(NOT EXISTS "${CMD_EXE}")
-			dk_set(CMD_EXE "$ENV{ComSpec}")
+		if(NOT EXISTS "${cmd_exe}")
+			dk_set(cmd_exe "$ENV{ComSpec}")
 		endif()
 		
 		### from dk_findProgram ###
-		if(NOT EXISTS "${CMD_EXE}")
-			dk_findProgram(CMD_EXE "cmd.exe")
+		if(NOT EXISTS "${cmd_exe}")
+			dk_findProgram(cmd_exe "cmd.exe")
 		endif()
 		
 		### from raw Unix path
-		if(NOT EXISTS "${CMD_EXE}")
-			dk_set(CMD_EXE "/c/Windows/System32/cmd.exe")
+		if(NOT EXISTS "${cmd_exe}")
+			dk_set(cmd_exe "/c/Windows/System32/cmd.exe")
 		endif()
 		
 		### from raw Wsl path
-		if(NOT EXISTS "${CMD_EXE}")
-			dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
+		if(NOT EXISTS "${cmd_exe}")
+			dk_set(cmd_exe "/mnt/c/Windows/System32/cmd.exe")
 		endif()
 	endif()
 	
 	###### FINALIZE ######
-	dk_assertPath(CMD_EXE)
+	dk_assertPath(cmd_exe)
 endfunction()
 
 
@@ -72,9 +72,9 @@ function(DKTEST)
     dk_debugFunc(0)
  
 	dk_CMD_EXE()
-	if(EXISTS ${CMD_EXE})
-		dk_success("CMD_EXE = ${CMD_EXE}")
+	if(EXISTS ${cmd_exe})
+		dk_success("cmd_exe = ${cmd_exe}")
 	else()
-		dk_error("CMD_EXE = ${CMD_EXE}")
+		dk_error("cmd_exe = ${cmd_exe}")
 	endif()
 endfunction()

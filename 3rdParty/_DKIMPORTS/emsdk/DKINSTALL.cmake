@@ -39,33 +39,33 @@ dk_assertPath(${EMSDK})
 
 # Download and install the latest SDK tools.
 if(Windows_Host)
-	dk_validate(CMD_EXE "dk_depend(cmd)")
+	dk_validate(cmd_exe "dk_depend(cmd)")
 	dk_validate(CMAKE_EXE "dk_depend(cmake)")
-	dk_nativePath(${CMD_EXE} CMD_EXE)
+	dk_nativePath(${cmd_exe} cmd_exe)
 	dk_nativePath(${CMAKE_EXE} CMAKE_EXE)
-	execute_process(COMMAND ${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)
+	execute_process(COMMAND ${cmd_exe} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk"      install latest 				COMMAND_ECHO STDOUT)
 endif()
 
 # Make the "latest" SDK "active" for the current user. (writes .emscripten file)
 if(Windows_Host)
-	execute_process(COMMAND ${CMD_EXE} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
+	execute_process(COMMAND ${cmd_exe} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
 else()
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk"     activate latest 				COMMAND_ECHO STDOUT)
 endif()
 
 # Activate PATH and other environment variables in the current terminal
 if(Windows_Host)
-	execute_process(COMMAND ${CMD_EXE} /c call											"${EMSDK}/emsdk_env.bat" 							COMMAND_ECHO STDOUT)
+	execute_process(COMMAND ${cmd_exe} /c call											"${EMSDK}/emsdk_env.bat" 							COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND chmod 777 													"${EMSDK}/emsdk_env.sh"  							COMMAND_ECHO STDOUT)
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk_env"     							COMMAND_ECHO STDOUT)
 endif()
 
 #if(Windows_Host)
-#	execute_process(COMMAND ${CMD_EXE} /c call 											"${EMSDK}/emsdk.bat" install mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
-#	execute_process(COMMAND ${CMD_EXE} /c call 											"${EMSDK}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
+#	execute_process(COMMAND ${cmd_exe} /c call 											"${EMSDK}/emsdk.bat" install mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
+#	execute_process(COMMAND ${cmd_exe} /c call 											"${EMSDK}/emsdk.bat" activate mingw_4.6.2_32bit		COMMAND_ECHO STDOUT)
 #endif()
 
 if(NOT EXISTS "${EMSDK}/upstream")

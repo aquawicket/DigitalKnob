@@ -46,7 +46,7 @@ endif()
 
 
 ### 3RDPARTY LINK ###
-dk_set(SMPEG2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
+dk_set(smpeg2_CMAKE -DSMPEG_INCLUDE_DIR=${SMPEG2})
 	
 	
 ### GENERATE ###

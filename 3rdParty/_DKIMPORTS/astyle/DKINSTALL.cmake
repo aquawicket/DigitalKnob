@@ -19,24 +19,22 @@ include_guard()
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 ### IMPORT ###
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${astyle_IMPORT})
+dk_import()
 
 ### LINK ###
-dk_validate			(Target_Tuple "dk_Target_Tuple()")
-dk_include			(${ASTYLE}/src)
+dk_include			(${astyle}/src)
 
 if(Windows)
-	dk_libDebug		(${ASTYLE_Debug_Dir}/AStyleLib.a)
-	dk_libRelease	(${ASTYLE_Release_Dir}/AStyleLib.a)
+	dk_libDebug		(${astyle_Debug_Dir}/AStyleLib.a)
+	dk_libRelease	(${astyle_Release_Dir}/AStyleLib.a)
 else()
-	dk_libDebug		(${ASTYLE_Debug_Dir}/libastyle.a)
-	dk_libRelease	(${ASTYLE_Release_Dir}/libastyle.a)
+	dk_libDebug		(${astyle_Debug_Dir}/libastyle.a)
+	dk_libRelease	(${astyle_Release_Dir}/libastyle.a)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${ASTYLE}
+dk_configure(${astyle}
 	-DBUILD_JAVA_LIBS=OFF 		# "Build java library"   OFF
 	#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
 	#-DBUILD_STATIC_LIBS=ON		# "Build static library" OFF

@@ -33,5 +33,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_firewallAllow("CURL_EXE" "C:/Windows/System32/curl.exe")
+	dk_firewallAllow("curl_exe" "C:/Windows/System32/curl.exe")
 endfunction()

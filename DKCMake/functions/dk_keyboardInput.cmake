@@ -21,8 +21,8 @@ function(dk_keyboardInput)
 	
 	###### CMD ######
 	if(EXISTS "$ENV{COMSPEC}")
-		string(REPLACE "/" "\\" CMD_EXE "$ENV{COMSPEC}")  # convert to windows path delimiters
-		set(cmnd "${CMD_EXE}" /V:ON /c "set /p stdin=& echo !stdin!")
+		string(REPLACE "/" "\\" cmd_exe "$ENV{COMSPEC}")  # convert to windows path delimiters
+		set(cmnd "${cmd_exe}" /V:ON /c "set /p stdin=& echo !stdin!")
 		#message("${cmnd}")
 		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)		
 		if("${stdin}" STREQUAL "!stdin!")

@@ -122,7 +122,7 @@ dk_set(libxml2_CMAKE
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
-#	${XZ_CMAKE} 
+#	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ##Apple_dk_exec(${DKCONFIGURE_BUILD})
@@ -130,14 +130,14 @@ dk_set(libxml2_CMAKE
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
 #	${PYTHON_CMAKE} 
-#	${XZ_CMAKE} 
+#	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
+#	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ##Linux_dk_exec(${DKCONFIGURE_BUILD} --with-python=no)
@@ -145,14 +145,14 @@ dk_set(libxml2_CMAKE
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
+#	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
 #Raspberry_dk_configure(${libxml2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
 #	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
+#	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ### TODO ### we still need to add flags to the configure.js call
@@ -204,8 +204,8 @@ dk_configure(${libxml2}
 	-DLIBXML2_WITH_XPTR_LOCS=OFF			# Add support for XPointer locations OFF
 	-DLIBXML2_WITH_ZLIB=${ZLIB}				# Use libz ON
 	${LIBICONV_CMAKE} 
-	${PYTHON3_CMAKE}
-	${XZ_CMAKE} 
+	${python3_CMAKE}
+	${xz_CMAKE} 
 	${zlib_CMAKE})
 
 ### COMPILE ###

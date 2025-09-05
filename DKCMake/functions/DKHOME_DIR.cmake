@@ -100,17 +100,17 @@ endfunction()
 
 
 
-#	###### CMD_EXE ######
-#	dk_validate(CMD_EXE "dk_CMD_EXE()")
-#	if(NOT EXISTS "${CMD_EXE}")
-#		dk_set(CMD_EXE "/mnt/c/Windows/System32/cmd.exe")
+#	###### cmd_exe ######
+#	dk_validate(cmd_exe "dk_CMD_EXE()")
+#	if(NOT EXISTS "${cmd_exe}")
+#		dk_set(cmd_exe "/mnt/c/Windows/System32/cmd.exe")
 #	endif()
 	
-#	if(NOT EXISTS "${CMD_EXE}")
-#		dk_warning("CMD_EXE:${CMD_EXE} not found")
+#	if(NOT EXISTS "${cmd_exe}")
+#		dk_warning("cmd_exe:${cmd_exe} not found")
 #	else()
-#		dk_set(CMD_EXE "${CMD_EXE}")
-#		dk_printVar(CMD_EXE)
+#		dk_set(cmd_exe "${cmd_exe}")
+#		dk_printVar(cmd_exe)
 #	endif()
 
 #	###### CYGPATH_EXE ######
@@ -119,7 +119,7 @@ endfunction()
 #			dk_set(CYGPATH_EXE "/usr/bin/cygpath.exe")
 #		endif()
 #	endif()
-#	if(CMD_EXE)
+#	if(cmd_exe)
 #			execute_process(COMMAND where /R C:\\Users\\Administrator cygpath.exe OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
 #			dk_printVar(CYGPATH_EXE)
 #		endif()

@@ -37,7 +37,7 @@ if(Release)
 	dk_set(OpusFile_LIBRARY ${OpusFile_LIBRARY_RELEASE})
 endif()
 
-dk_set(OPUS_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_LIBRARY=${OpusFile_LIBRARY}) 
+dk_set(opus_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_LIBRARY=${OpusFile_LIBRARY}) 
 
 
 ### GENERATE ###

@@ -94,7 +94,7 @@ if(MSVC)
 		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
@@ -105,12 +105,12 @@ if(MSVC)
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ_CMAKE}
+		${harfbuzz_CMAKE}
 		${LUA_CMAKE}
-		${LUNASVG_CMAKE}
+		${lunasvg_CMAKE}
 		${sdl_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE})
+		${sdl_image_CMAKE} 
+		${sfml_CMAKE})
 	
 	Android_dk_configure(${RMLUI}
 		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
@@ -124,7 +124,7 @@ if(MSVC)
 		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
 		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
@@ -135,12 +135,12 @@ if(MSVC)
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ_CMAKE}
+		${harfbuzz_CMAKE}
 		${LUA_CMAKE}
-		${LUNASVG_CMAKE}
+		${lunasvg_CMAKE}
 		${sdl_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE}) 
+		${sdl_image_CMAKE} 
+		${sfml_CMAKE}) 
 else()
 	dk_configure(${RMLUI}
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
@@ -164,13 +164,13 @@ else()
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
-		${HARFBUZZ_CMAKE}
+		${harfbuzz_CMAKE}
 		${LUA_CMAKE}
-		${LUNASVG_CMAKE}
-		${RLOTTIE_CMAKE}
+		${lunasvg_CMAKE}
+		${rlottie_CMAKE}
 		${sdl_CMAKE} 
-		${SDL_IMAGE_CMAKE} 
-		${SFML_CMAKE})
+		${sdl_image_CMAKE} 
+		${sfml_CMAKE})
 endif()
 
 

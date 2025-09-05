@@ -39,7 +39,7 @@ function(dk_clearScreen)
 	
 #	### cmd ###	
 #	dk_depend(cmd)
-#	if(CMD_EXE)
+#	if(cmd_exe)
 #		dk_exec(cls)  					# FIXME: only clears 1 line
 #		execute_process(COMMAND cls)  	# FIXME: only clears 1 line
 #		return()

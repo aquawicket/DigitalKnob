@@ -29,9 +29,7 @@ dk_depend(python3)
 dk_depend(msys2)
 
 ### IMPORT ###
-#dk_import(${bzip2_Import})
 dk_import()
-dk_assertVar(bzip2)
 
 dk_include			(${bzip2}/								BZIP2_INCLUDE_DIR)
 if(MSVC)
@@ -56,7 +54,7 @@ else()
 	dk_configure(${bzip2} 
 		-DENABLE_SHARED_LIB=${BUILD_SHARED_LIBS} 
 		-DENABLE_STATIC_LIB=${BUILD_STATIC_LIBS} 
-		${PYTHON3_CMAKE} 
+		${python3_CMAKE} 
 		-DENABLE_TESTS=0 
 		-DENABLE_STATIC_LIB=1)
 endif()

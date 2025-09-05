@@ -94,12 +94,12 @@ include_guard()
 function(dk_httpResponse)
 	dk_debugFunc(1 2)
 
-	#dk_validate(CURL_EXE "d_k_CURL_EXE()")
-	set(CURL_EXE "C:/Windows/System32/curl.exe")
+	#dk_validate(curl_exe "d_k_CURL_EXE()")
+	set(curl_exe "C:/Windows/System32/curl.exe")
 	
 	
 	#dk_set(dk_exec_ECHO_OUTPUT 0)
-	set(command ${CURL_EXE} ${ARGV0} -sI -o nul -w %{http_code})
+	set(command ${curl_exe} ${ARGV0} -sI -o nul -w %{http_code})
 	dk_exec(${command})
 	dk_assertVar(dk_exec)
 	set(dk_httpResponse "${dk_exec}")
