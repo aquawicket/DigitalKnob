@@ -1,0 +1,1 @@
+dotnetfx35_Windows_X86_64_Import=https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net35-sp1-offline-installer

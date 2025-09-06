@@ -106,9 +106,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::		set "dk_httpResponse=%%A"
 ::	)
 ::
+	
+	::###### output ######
 	endlocal & (
 		set "dk_httpResponse=%dk_httpResponse%"
-		rem if "%~2" neq "" (set "%~2=%dk_httpResponse%")
+		if "%~2" neq "" (
+			set "%~2=%dk_httpResponse%"
+		) else (
+			echo %dk_httpResponse%
+		)
 	)
 %endfunction%
 
