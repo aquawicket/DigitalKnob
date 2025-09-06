@@ -23,6 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
+	::NOTE: Version v4.0.30319 of the .NET Framework is not installed and it is required to run version 3 of Windows PowerShell.
 	::%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
 	if NOT EXIST "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
