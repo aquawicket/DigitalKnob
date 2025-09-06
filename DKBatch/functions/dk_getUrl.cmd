@@ -56,7 +56,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_getUrl "%url%"
 	echo url:'%url%' dk_getUrl = %dk_getUrl%
 	
-	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
+	set "url=https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net35-sp1-offline-installer"
 	%dk_call% dk_getUrl "%url%"
 	echo url:'%url%' dk_getUrl = %dk_getUrl%
 

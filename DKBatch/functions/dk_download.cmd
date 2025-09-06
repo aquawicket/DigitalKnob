@@ -19,7 +19,7 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	%dk_call% dk_debugFunc 1 2
 	
     set "url=%~1"
-	::%dk_call% dk_getUrl %url%
+	%dk_call% dk_getUrl %url% url
 	::%dk_call% dk_debug "dk_getUrl = %dk_getUrl%"
 	
     set "destination=%~2"	

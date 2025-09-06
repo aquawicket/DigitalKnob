@@ -140,7 +140,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_httpResponse "%url%"
 	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 	
-	set "url=https://aka.ms/vs/16/release/VC_redist.x64.exe"
+	set "url=https://download.visualstudio.microsoft.com/download/pr/b635098a-2d1d-4142-bef6-d237545123cb/2651b87007440a15209cac29634a4e45/dotnetfx35.exe"
 	%dk_call% dk_httpResponse "%url%"
 	echo url:'%url%' dk_httpResponse = %dk_httpResponse%
 
