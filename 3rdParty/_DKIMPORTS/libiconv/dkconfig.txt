@@ -5,4 +5,5 @@
 # https://cmake.org/cmake/help/latest/module/FindIconv.html
 
 #libiconv_Import=http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz
-libiconv_Import=https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
+#libiconv_Import=https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
+libiconv_Import=https://mirror.freedif.org/GNU/libiconv/libiconv-1.14.tar.gz
