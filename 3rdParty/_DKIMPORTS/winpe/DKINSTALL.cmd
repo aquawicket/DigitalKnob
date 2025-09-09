@@ -11,13 +11,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKINSTALL
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
-	::###### WINPE_DL ######
-	::set "WINPE_DL=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
-	::set "WINPE_DL=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuperLite50MB.iso"
-	::set "WINPE_DL=https://ia801808.us.archive.org/21/items/wpe-64/WPE64.iso"
-	set "WINPE_DL=https://a-34.1fichier.com/c898117937"
-	set "WINPE_DL=https://UseTheAddressAbove/Win10TinyPEx64.iso"
-			
+	%dk_call% dk_getUrl %winpe_Import%
+	set "WINPE_DL=%dk_getUrl%"
+	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_set WINPE_DIR "%DKTOOLS_DIR%\WindowsPE"
 	%dk_call% dk_set WINPE_IMG "%WINPE_DIR%\winpe.img"

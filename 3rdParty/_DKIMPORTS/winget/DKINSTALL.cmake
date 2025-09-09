@@ -15,7 +15,10 @@ include_guard()
 ############ winget ############
 # https://learn.microsoft.com/en-us/windows/package-manager/winget
 
-dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-dk_download(https://aka.ms/getwingetpreview $ENV{DKDOWNLOAD_DIR}/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle)
+#dk_download(https://aka.ms/getwingetpreview)
+dk_getUrl(${winget_Import})
+dk_debug("${dk_getUrl}")
+dk_download(${dk_getUrl})
+#TODO
 
 
