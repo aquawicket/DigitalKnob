@@ -27,7 +27,6 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 		%dk_call% dk_removeExtension !_file_! _name_
 	)
 	
-	
 	if "%dk_firewallAllow_DEBUG%" equ "1" (
 		%dk_call% dk_echo "%bg_blue% %white% dk_firewallAllow %_name_% %_file_% %clr%"
 	)
@@ -66,6 +65,5 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	::%dk_call% dk_firewallAllow "Notepad" "C:/Windows/notepad.exe"
-	%dk_call% dk_firewallAllow "Notepad" "C:/Windows/System32/cmd.exe"
+	%dk_call% dk_firewallAllow "C:\Users\Administrator\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
 %endfunction%
