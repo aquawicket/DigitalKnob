@@ -68,10 +68,10 @@ DKINSTALL() {
 		dk_call dk_info "Installing CMake from package managers"
 		
 		$(command -v cmake) && CMAKE_EXE=$(command -v cmake)
-		dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
+		dk_call dk_realpath ${CMAKE_EXE-} CMAKE_EXE
 		dk_call dk_printVar CMAKE_EXE
 		if ! dk_call dk_commandExists cmake; then
-			dk_call dk_installPackage ${cmake_Import}
+			dk_call dk_installPackage cmake
 		fi	
 		CMAKE_EXE=$(command -v cmake)
 		dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
