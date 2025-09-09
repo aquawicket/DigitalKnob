@@ -21,10 +21,10 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 		set "_file_=%~2"
 	) else (
 		set "_file_=%~1"
-		set "_file_=!_file_:#40=(!"
-		set "_file_=!_file_:#41=)!"
-		%dk_call% dk_basename !_file_! _file_
-		%dk_call% dk_removeExtension !_file_! _name_
+		rem set "_file_=!_file_:#40=(!"
+		rem set "_file_=!_file_:#41=)!"
+		%dk_call% dk_basename !_file_! _name_
+		%dk_call% dk_removeExtension !_name_! _name_
 	)
 	
 	if "%dk_firewallAllow_DEBUG%" equ "1" (
@@ -38,7 +38,7 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 		%return%
 	)
 
-	%dk_call% dk_notice "Adding firewall allow rule for %_file_% . . ."
+	%dk_call% dk_notice "Adding firewall allow rule for %_name_% %_file_% . . ."
 	
 	%dk_call% dk_findProgram NETSH_EXE netsh.exe "%windir%/System32" NO_ERROR
 	if EXIST "%NETSH_EXE%" (
