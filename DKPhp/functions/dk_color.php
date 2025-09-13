@@ -36,14 +36,14 @@ function dk_color(){
 	global $EQN; $EQN="\005";						// Enquiry - Trigger a response at the receiving end, to see if it is still present.
 	global $ACK; $ACK="\006";						// Acknowledge - Indication of successful receipt of a message.
 	global $BEL; $BEL="\007";						// Bell, Alert	- Call for attention from an operator.
-	global  $BS;  $BS="\010";						// Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
-	global  $HT;  $HT="\011";						// Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
-	global  $LF;  $LF="\012";						// Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
-	global  $VT;  $VT="\013";						// Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
-	global  $FF;  $FF="\014";						// Form Feed - Move down to the top of the next page.
-	global  $CR;  $CR="\015";						// Carriage Return - Move to column zero while staying on the same line.
-	global  $SO;  $SO="\016";						// Shift Out - Switch to an alternative character set.
-	global  $SI;  $SI="\017";						// Shift In - Return to regular character set after SO.
+	global $BS;  $BS="\010";						// Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+	global $HT;  $HT="\011";						// Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+	global $LF;  $LF="\012";						// Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+	global $VT;  $VT="\013";						// Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+	global $FF;  $FF="\014";						// Form Feed - Move down to the top of the next page.
+	global $CR;  $CR="\015";						// Carriage Return - Move to column zero while staying on the same line.
+	global $SO;  $SO="\016";						// Shift Out - Switch to an alternative character set.
+	global $SI;  $SI="\017";						// Shift In - Return to regular character set after SO.
 	global $DLE; $DLE="\020";						// Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
 	global $DC1; $DC1="\021";						// Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
 	global $DC2; $DC2="\022";						// Device Control Two
@@ -53,14 +53,14 @@ function dk_color(){
 	global $SYN; $SYN="\026";						// Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
 	global $ETB; $ETB="\027";						// End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
 	global $CAN; $CAN="\030";						// Cancel - Indicates that the data preceding it are in error or are to be disregarded.
-	global  $EM;  $EM="\031";						// End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+	global $EM;  $EM="\031";						// End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
 	global $SUB; $SUB="\032";						// Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
 	global $ESC; $ESC="\033";						// Escape - Alters the meaning of a limited number of following bytes.
-	global $FS;   $FS="\034";						// File Separator - Can be used as delimiters to mark fields of data structures. 
-	global $GS;   $GS="\035";						// Group Separator
-	global $RS;   $RS="\036";						// Record Separator
-	global $US;   $US="\037";						// Unit Separator - US is the lowest level
-	global $SP;   $SP="\040";						// Space - Move right one character position.
+	global $FS;  $FS="\034";						// File Separator - Can be used as delimiters to mark fields of data structures. 
+	global $GS;  $GS="\035";						// Group Separator
+	global $RS;  $RS="\036";						// Record Separator
+	global $US;  $US="\037";						// Unit Separator - US is the lowest level
+	global $SP;  $SP="\040";						// Space - Move right one character position.
 	global $DEL; $DEL="\177";						// Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
 	
 	//############ C1 control codes #############
@@ -77,7 +77,7 @@ function dk_color(){
 	global $VTS; $VTS="{$ESC}J";					// Vertical Tabulation Set
 	global $PLD; $PLD="{$ESC}K";					// Partial Line Down
 	global $PLU; $PLU="{$ESC}L";					// Partial Line Up
-	global $RI;   $RI="{$ESC}M";					// Reverse Index
+	global $RI;  $RI= "{$ESC}M";			   			// Reverse Index
 	global $SS2; $SS2="{$ESC}N";					// Single Shift Two
 	global $SS3; $SS3="{$ESC}O";					// Single Shift Three
 	global $DCS; $DCS="{$ESC}P";					// Device Control String
@@ -85,16 +85,16 @@ function dk_color(){
 	global $PU2; $PU2="{$ESC}R";					// Private Use 2
 	global $STS; $STS="{$ESC}S";					// Set Transmit State
 	global $CCH; $CCH="{$ESC}T";					// Cancel character
-	global  $MW;  $MW="{$ESC}U";					// Message Waiting
+	global $MW;  $MW= "{$ESC}U";						// Message Waiting
 	global $SPA; $SPA="{$ESC}V";					// Start of Protected Area
 	global $EPA; $EPA="{$ESC}W";					// End of Protected Area
 	global $SOS; $SOS="{$ESC}X";					// Start of String
 	global $SGC; $SGC="{$ESC}Y";					// Single Graphic Character Introducer
 	global $SCI; $SCI="{$ESC}Z";					// Single Character Introducer
 	global $CSI; $CSI="{$ESC}[";					// Control Sequence Introducer
-	global $ST; $ST="{$ESC}\\";						// String Terminator
+	global $ST;  $ST= "{$ESC}\\";					// String Terminator
 	global $OSC; $OSC="{$ESC}]";					// Operating System Command
-	global $PM; $PM="{$ESC}^^";						// Privacy Message
+	global $PM;  $PM= "{$ESC}^^";					// Privacy Message
 	global $APC; $APC="{$ESC}_";					// Application Program Command
 
 	global $DECSC; $DECSC="{$ESC}7";				// Save Cursor Position in Memory**

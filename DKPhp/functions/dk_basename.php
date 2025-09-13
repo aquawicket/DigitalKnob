@@ -35,11 +35,13 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	
 	### Result as global variable
 	dk_echo("\n");
+	dk_echo($GLOBALS['lblack']."dk_basename(\"A:/directoryA/filenameA.extA\");".$GLOBALS['clr']."\n");
 	dk_basename("A:/directoryA/filenameA.extA");
 	dk_echo("dk_basename = ".$GLOBALS['dk_basename']."\n");
 	
 	### Result as parameter variable
 	dk_echo("\n");
+	dk_echo($GLOBALS['lblack']."dk_basename(\"B:/directoryB/filenameB.extB\", \$resultB);".$GLOBALS['clr']."\n");
 	$resultB = "";
 	dk_basename("B:/directoryB/filenameB.extB", $resultB);
 	dk_echo("resultB = $resultB\n");
@@ -47,12 +49,14 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	
 	### Result as return value
 	dk_echo("\n");
+	dk_echo($GLOBALS['lblack']."\$resultC=dk_basename(\"C:/directoryC/filenameC.extC\");".$GLOBALS['clr']."\n");
 	$resultC=dk_basename("C:/directoryC/filenameC.extC");
 	dk_echo("resultC = $resultC\n");
 	dk_echo("dk_basename = ".$GLOBALS['dk_basename']."\n");
 	
 	### Result as return value and parameter variable
 	dk_echo("\n");
+	dk_echo($GLOBALS['lblack']."\$resultD2=dk_basename(\"D:/directoryD/filenameD.extD\", \$resultD1);".$GLOBALS['clr']."\n");
 	$resultD1 = "";
 	$resultD2=dk_basename("D:/directoryD/filenameD.extD", $resultD1);
 	dk_echo("resultD1 = $resultD1\n");
