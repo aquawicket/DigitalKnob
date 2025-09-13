@@ -81,8 +81,8 @@ function(dk_Target_App)
 		endif()
 	endif()
 	
-	###### FINALIZE ######
-	#dk_assertVar(Target_App)
+	dk_debug("Target_App = ${Target_App}")
+	dk_debug("${Target_App} = ${${Target_App}}")
 endfunction()
 
 
@@ -94,11 +94,11 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_App()
-	dk_printVar(Target_App)
-	#dk_printVar(${Target_App})
+	dk_echo("Target_App = ${Target_App}")
+	dk_echo("${Target_App} = ${${Target_App}}")
 	
 	###### SET ######
 	dk_Target_App("DKSDLRml")
-	dk_printVar(Target_App)
-	#dk_printVar(${Target_App})
+	dk_echo("Target_App = ${Target_App}")
+	dk_echo("${Target_App} = ${${Target_App}}")
 endfunction()

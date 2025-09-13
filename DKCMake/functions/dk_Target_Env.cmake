@@ -88,6 +88,9 @@ function(dk_Target_Env)
 	else()
 		dk_fatal("Target_Env:'${Target_Env}' is INVALID!")
 	endif()
+	
+	dk_debug("Target_Env = ${Target_Env}")
+	dk_debug("${Target_Env} = ${${Target_Env}}")
 endfunction()
 
 
@@ -99,11 +102,11 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Env()
-	dk_printVar(Target_Env)
-	dk_printVar(${Target_Env})
+	dk_echo("Target_Env = ${Target_Env}")
+	dk_echo("${Target_Env} = ${${Target_Env}}")
 	
 	###### SET ######
 	dk_Target_Env("Ucrt")
-	dk_printVar(Target_Env)
-	dk_printVar(${Target_Env})
+	dk_echo("Target_Env = ${Target_Env}")
+	dk_echo("${Target_Env} = ${${Target_Env}}")
 endfunction()

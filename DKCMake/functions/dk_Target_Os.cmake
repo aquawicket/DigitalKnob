@@ -139,6 +139,8 @@ function(dk_Target_Os)
 	dk_assertVar(Debug_Dir)
 	dk_assertVar(Release_Dir)
 	
+	dk_debug("Target_Os = ${Target_Os}")
+	dk_debug("${Target_Os} = ${${Target_Os}}")
 endfunction()
 
 
@@ -150,11 +152,11 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Os()
-	dk_printVar(Target_Os)
-	dk_printVar(${Target_Os})
+	dk_echo("Target_Os = ${Target_Os}")
+	dk_echo("${Target_Os} = ${${Target_Os}}")
 	
 	###### SET ######
 	dk_Target_Os("Linux")
-	dk_printVar(Target_Os)
-	dk_printVar(${Target_Os})
+	dk_echo("Target_Os = ${Target_Os}")
+	dk_echo("${Target_Os} = ${${Target_Os}}")
 endfunction()

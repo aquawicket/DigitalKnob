@@ -87,6 +87,9 @@ function(dk_Target_Arch)
 	else()
 		dk_fatal("Target_Arch:'${Target_Arch}' is INVALID!")
 	endif()
+	
+	dk_debug("Target_Arch = ${Target_Arch}")
+	dk_debug("${Target_Arch} = ${${Target_Arch}}")
 endfunction()
 
 
@@ -98,11 +101,11 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Arch()
-	dk_printVar(Target_Arch)
-	dk_printVar(${Target_Arch})
+	dk_echo("Target_Arch = ${Target_Arch}")
+	dk_echo("${Target_Arch} = ${${Target_Arch}}")
 	
 	###### SET ######
 	dk_Target_Arch("I686")
-	dk_printVar(Target_Arch)
-	dk_printVar(${Target_Arch})
+	dk_echo("Target_Arch = ${Target_Arch}")
+	dk_echo("${Target_Arch} = ${${Target_Arch}}")
 endfunction()

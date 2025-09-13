@@ -44,7 +44,7 @@ function(dk_Target_Type)
 		dk_keyboardInput(input)
 		if("${input}" EQUAL "0")
 			dk_set(Target_Type ${Target_Type_Cache})
-		elseif("${input}" EQUAL "1")
+		elseif("${input}" STREQUAL "1")
 			dk_set(Target_Type "Release")
 		elseif("${input}" EQUAL "2")
 			dk_set(Target_Type "Debug")
@@ -65,6 +65,9 @@ function(dk_Target_Type)
 	else()
 		dk_fatal("Target_Type:'${Target_Type}' is INVALID!")
 	endif()
+	
+	dk_debug("Target_Type = ${Target_Type}")
+	dk_debug("${Target_Type} = ${${Target_Type}}")
 endfunction()
 
 
@@ -76,11 +79,11 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Type()
-	dk_printVar(Target_Type)
-	dk_printVar(${Target_Type})
+	dk_echo("Target_Type = ${Target_Type}")
+	dk_echo("${Target_Type} = ${${Target_Type}}")
 	
 	###### SET ######
 	dk_Target_Type("All")
-	dk_printVar(Target_Type)
-	dk_printVar(${Target_Type})
+	dk_echo("Target_Type = ${Target_Type}")
+	dk_echo("${Target_Type} = ${${Target_Type}}")
 endfunction()

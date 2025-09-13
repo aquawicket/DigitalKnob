@@ -162,11 +162,12 @@ function(dk_Target_Tuple)
 	# https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
 	# https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
 
-
 	###### FINALIZE ######	
 	dk_assertVar(Target_Tuple)
 	dk_assertVar(${Target_Tuple})
 	
+	dk_debug("Target_Tuple = ${Target_Tuple}")
+	dk_debug("${Target_Tuple} = ${${Target_Tuple}}")
 endfunction()
 
 
@@ -178,12 +179,12 @@ function(DKTEST)
 	
 	###### GET ######
     dk_Target_Tuple()
-	dk_printVar(Target_Tuple)
-	dk_printVar(${Target_Tuple})
+	dk_echo("Target_Tuple = ${Target_Tuple}")
+	dk_echo("${Target_Tuple} = ${${Target_Tuple}}")
 	
 	###### SET ######
 	dk_Target_Tuple("Windows_X86_Gcc")
-	dk_printVar(Target_Tuple)
-	dk_printVar(${Target_Tuple})
+	dk_echo("Target_Tuple = ${Target_Tuple}")
+	dk_echo("${Target_Tuple} = ${${Target_Tuple}}")
 	
 endfunction()
