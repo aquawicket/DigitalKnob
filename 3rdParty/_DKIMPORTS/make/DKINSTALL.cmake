@@ -25,7 +25,7 @@ dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Android)
 	if(Windows_Host)
 		dk_depend(android-ndk)
-		dk_set(CMAKE_MAKE_PROGRAM	"${ANDROID_NDK}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
+		dk_set(CMAKE_MAKE_PROGRAM	"${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
 	endif()
 	
 elseif(Cosmopolitan)

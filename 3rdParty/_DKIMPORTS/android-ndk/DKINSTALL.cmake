@@ -96,6 +96,8 @@ elseif(Windows_X86_64_Host)
 else()
 	dk_fatal("could not set Android_Host_Tag!")
 endif()
+
+dk_assertVar(Android_Host_Tag)
 dk_debug("Android_Host_Tag = ${Android_Host_Tag}")
 
 
@@ -113,7 +115,8 @@ dk_set(ANDROID_TOOLCHAIN_FILE "${android-ndk}/build/cmake/android.toolchain.cmak
 dk_assertPath("${ANDROID_TOOLCHAIN_FILE}")
 dk_debug("ANDROID_TOOLCHAIN_FILE = ${ANDROID_TOOLCHAIN_FILE}")
 
-dk_set(ANDROID_MAKE_PROGRAM "${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
+#dk_set(ANDROID_MAKE_PROGRAM "${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
+dk_set(ANDROID_MAKE_PROGRAM	"${android-ndk}/prebuilt/windows-x86_64/bin/make${exe}")
 dk_assertPath("${ANDROID_MAKE_PROGRAM}")
 dk_debug("ANDROID_MAKE_PROGRAM = ${ANDROID_MAKE_PROGRAM}")
 
