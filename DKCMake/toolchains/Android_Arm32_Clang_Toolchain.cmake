@@ -3,7 +3,9 @@ message(STATUS "################ Android_Arm32_Clang_Toolchain.cmake ###########
 message(STATUS "#####################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
+
 dk_validate(ANDROID_NDK					"dk_depend(android-ndk)")
+dk_validate(Android_Host_Tag			"dk_depend(android-ndk)")
 dk_set(ANDROID_ABI						armeabi-v7a)
 dk_set(ANDROID_CPP_FEATURES				"rtti exceptions")
 dk_set(ANDROID_STL						c++_static)
@@ -12,6 +14,7 @@ dk_set(ANDROID_TOOLCHAIN				clang)
 
 dk_set(CMAKE_TOOLCHAIN_FILE				"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
 dk_set(CMAKE_GENERATOR					"Unix Makefiles")
+dk_assertVar(Android_Host_Tag)
 if(Windows_Host)
 	#dk_validate(msys2_MAKE_PROGRAM		"dk_depend(msys2)")
 	#dk_set(CMAKE_MAKE_PROGRAM			"${msys2_bin}/make.exe")

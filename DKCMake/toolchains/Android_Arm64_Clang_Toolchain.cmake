@@ -3,6 +3,7 @@ message(STATUS "################ Android_Arm64_Clang_Toolchain.cmake ###########
 message(STATUS "####################################################################")
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
+
 dk_validate(android-ndk					"dk_depend(android-ndk)")
 dk_validate(Android_Host_Tag			"dk_depend(android-ndk)")
 dk_set(ANDROID_ABI						arm64-v8a)
