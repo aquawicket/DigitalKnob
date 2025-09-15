@@ -5,33 +5,33 @@
 
 
 # 31.0.3
-# ANDROID_PLATFORM_TOOLS_WIN_DL(https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
-# ANDROID_PLATFORM_TOOLS_MAC_DL(https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
-# ANDROID_PLATFORM_TOOLS_LINUX_DL(https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
+# android-platform-tools_Windows_Import=https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip
+# android-platform-tools_Mac_Import=https://dl.google.com/android/repository/platform-tools_r31.0.3-darwin.zip
+# android-platform-tools_Linux_Impot(https://dl.google.com/android/repository/platform-tools_r31.0.3-linux.zip
 
 # 33.0.2
-# ANDROID_PLATFORM_TOOLS_WIN_DL(https://dl.google.com/android/repository/platform-tools_r33.0.2-windows.zip PATH ${ANDROID_SDK}/platform-tools)
-# ANDROID_PLATFORM_TOOLS_MAC_DL(https://dl.google.com/android/repository/platform-tools_r33.0.2-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
-# ANDROID_PLATFORM_TOOLS_LINUX_DL(https://dl.google.com/android/repository/platform-tools_r33.0.2-linux.zip PATH ${ANDROID_SDK}/platform-tools)
+# android-platform-tools_Windows_Import=https://dl.google.com/android/repository/platform-tools_r33.0.2-windows.zip
+# android-platform-tools_Mac_Import=https://dl.google.com/android/repository/platform-tools_r33.0.2-darwin.zip
+# android-platform-tools_Linux_Impot(https://dl.google.com/android/repository/platform-tools_r33.0.2-linux.zip
 
 
 
 # 33.0.3
-ANDROID_PLATFORM_TOOLS_WIN_DL=https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip
-ANDROID_PLATFORM_TOOLS_MAC_DL=https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r33.0.3-darwin.zip
-ANDROID_PLATFORM_TOOLS_ANDROID_DL=https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip
-ANDROID_PLATFORM_TOOLS_LINUX_DL=https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip
+android-platform-tools_Windows_Import=https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip
+android-platform-tools_Mac_Import=https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r33.0.3-darwin.zip
+android-platform-tools_Android_Import=https://github.com/lzhiyong/android-sdk-tools/releases/download/33.0.3/android-sdk-tools-static-aarch64.zip
+android-platform-tools_Linux_Impot=https://dl.google.com/android/repository/platform-tools_r33.0.3-linux.zip
 
 
 
 # 34.0.3
-# ANDROID_PLATFORM_TOOLS_WIN_DL(https://dl.google.com/android/repository/platform-tools_r34.0.3-windows.zip PATH ${ANDROID_SDK}/platform-tools)
-# ANDROID_PLATFORM_TOOLS_MAC_DL(https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r34.0.3-darwin.zip PATH ${ANDROID_SDK}/platform-tools)
+# android-platform-tools_Windows_Import=https://dl.google.com/android/repository/platform-tools_r34.0.3-windows.zip
+# android-platform-tools_Mac_Import=https://mirrors.cloud.tencent.com/AndroidSDK/platform-tools_r34.0.3-darwin.zip
 # if(NOT Android_Host)
-	ANDROID_PLATFORM_TOOLS_LINUX_DL(https://dl.google.com/android/repository/platform-tools_r34.0.3-linux.zip PATH ${ANDROID_SDK}/platform-tools)
+#	android-platform-tools_Linux_Impot(https://dl.google.com/android/repository/platform-tools_r34.0.3-linux.zip
 # else()
-	#ANDROID_PLATFORM_TOOLS_ANDROID_DL(https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip PATH ${ANDROID_SDK}/termux)
-	#dk_copy(${ANDROID_SDK}/termux/build-tools ${ANDROID_SDK}/build-tools/30.0.3)			# move termux/build-tools to android-sdk
-	#dk_copy(${ANDROID_SDK}/termux/platform-tools ${ANDROID_SDK}/platform-tools)			# move termux/platform-tools to android-sdk
+#	android-platform-tools_Android_Import=https://github.com/lzhiyong/android-sdk-tools/releases/download/34.0.3/android-sdk-tools-static-aarch64.zip PATH ${android-sdk}/termux)
+#	dk_copy(${android-sdk}/termux/build-tools ${android-sdk}/build-tools/30.0.3)	# move termux/build-tools to android-sdk
+#	dk_copy(${android-sdk}/termux/platform-tools ${android-sdk}/platform-tools)		# move termux/platform-tools to android-sdk
 # endif()
 
