@@ -31,10 +31,16 @@ include_guard()
 #
 function(dk_import)
 	dk_debugFunc(0 99)
-	dk_debug("dk_import(${ARGV})")
 
 	dk_assertVar(${CURRENT_PLUGIN}_Import_Path)
-	dk_importVariables(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+	
+	dk_getParameterValue(INSTALL_PATH)
+	dk_echo("INSTALL_PATH = ${INSTALL_PATH}")
+	if(INSTALL_PATH)
+		dk_importVariables(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}" INSTALL_PATH "${INSTALL_PATH}")
+	else()
+		dk_importVariables(IMPORT_PATH "${${CURRENT_PLUGIN}_Import_Path}")
+	endif()
 	
 	dk_getParameter(APP)
 	if("${${PLUGIN_Import_Name}_Type}" STREQUAL "APP")

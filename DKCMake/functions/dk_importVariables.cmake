@@ -56,7 +56,6 @@ include_guard()
 #
 function(dk_importVariables)
 	#dk_debugFunc(1 9)
-	#dk_debug("dk_importVariables(${ARGV})")
 	
 	dk_getParameter(PRINTVARS)
 	if(PRINTVARS)
@@ -131,7 +130,7 @@ function(dk_importVariables)
 	### INSTALL_PATH (PLUGIN_Install_Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
 	#dk_unset(INSTALL_PATH)
 	dk_getParameterValue(INSTALL_PATH)
-	#dk_debug("INSTALL_PATH = '${INSTALL_PATH}'")
+	dk_debug("INSTALL_PATH = '${INSTALL_PATH}'")
 	set(PLUGIN_Install_Path "${INSTALL_PATH}" CACHE INTERNAL "")
 
 	### VERSION (PLUGIN_Version)								v1.3.1

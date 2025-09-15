@@ -12,24 +12,23 @@ include_guard()
 #########################################################################
 
 
-###### android-ndk ######
-#
-
 dk_depend(android-sdk)
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_set(ANDROID_NDK "${ANDROID_SDK}/ndk/${ANDROID_NDK_BUILD}")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_set			(android-ndk "${android-sdk}/ndk/${android-ndk_Build}")
+dk_set			(ANDROID_NDK "${android-sdk}/ndk/${android-ndk_Build}")
+#dk_mkdir		("${android-sdk}/ndk")
 
-dk_mkdir		("${ANDROID_SDK}/ndk")
 if(Windows_Host)
-	dk_import	(${android_ndk_Windows_Import} 	_PATH_ "${ANDROID_NDK}" VERSION "${android_ndk_Build}" PATCH)
+	dk_import	(${android-ndk_Windows_Import} 	INSTALL_PATH "${android-ndk}") # PATCH)
+	set(exe ".exe")
 elseif(Mac_Host)
-	dk_import	(${android_ndk_Mac_Import} _PATH_ "${ANDROID_NDK}" PATCH)
+	dk_import	(${android-ndk_Mac_Import} 		INSTALL_PATH "${android-ndk}") # PATCH)
 elseif(Android_Host OR Linux_Arm64_Host)
-	dk_import	(${android_ndk_Android_Import} _PATH_ "${ANDROID_NDK}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
+	dk_import	(${android-ndk_Android_Import} 	INSTALL_PATH "${android-ndk}" NO_HALT) # NO_HALT because file fails to extact under sdcard storage
 elseif(Linux_Host)
-	dk_import	(${android_ndk_Linux_Import} _PATH_ "${ANDROID_NDK}" PATCH)
+	dk_import	(${android-ndk_Linux_Import} 	INSTALL_PATH "${android-ndk}") # PATCH)
 endif()
 
 
@@ -97,22 +96,49 @@ elseif(Windows_X86_64_Host)
 else()
 	dk_fatal("could not set Android_Host_Tag!")
 endif()
+dk_debug("Android_Host_Tag = ${Android_Host_Tag}")
 
 
 ###### ANDROID_ CMAKE_ VARIABLES ######
 dk_set(ANDROID_GENERATOR 			"Unix Makefiles")
-#dk_set(ANDROID_GENERATOR_PLATRORM 	"ARM;ARM64;X86;X64") 	# MSVC
-dk_set(ANDROID_NDK_ROOT				"${ANDROID_NDK}")
-dk_set(ANDROID_TOOLCHAIN_FILE 		"${ANDROID_NDK}/build/cmake/android.toolchain.cmake")
-dk_set(ANDROID_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
-dk_set(ANDROID_BIN					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin")
-dk_set(ANDROID_AR					"${ANDROID_NDK}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/llvm-ar${exe}")
-dk_set(ANDROID_C_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang${exe}")
-dk_set(ANDROID_CXX_COMPILER			"${ANDROID_NDK}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang++${exe}")
-dk_set(ANDROID_INCLUDE				"${ANDROID_NDK}/toolchains/llvm/prebuilt/${Android_Host_Tag}/sysroot/usr/include")
+dk_debug("ANDROID_GENERATOR = ${ANDROID_GENERATOR}")
 
-dk_set(VS_NdkRoot					"${ANDROID_NDK}")
-dk_set(NDK_ROOT						"${ANDROID_NDK}")
+#dk_set(ANDROID_GENERATOR_PLATRORM 	"ARM;ARM64;X86;X64") 	# MSVC
+
+dk_set(ANDROID_NDK_ROOT	"${android-ndk}")
+dk_assertPath("${ANDROID_NDK_ROOT}")
+dk_debug("ANDROID_NDK_ROOT = ${ANDROID_NDK_ROOT}")
+
+dk_set(ANDROID_TOOLCHAIN_FILE "${android-ndk}/build/cmake/android.toolchain.cmake")
+dk_assertPath("${ANDROID_TOOLCHAIN_FILE}")
+dk_debug("ANDROID_TOOLCHAIN_FILE = ${ANDROID_TOOLCHAIN_FILE}")
+
+dk_set(ANDROID_MAKE_PROGRAM "${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
+dk_assertPath("${ANDROID_MAKE_PROGRAM}")
+dk_debug("ANDROID_MAKE_PROGRAM = ${ANDROID_MAKE_PROGRAM}")
+
+dk_set(ANDROID_BIN "${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin")
+dk_assertPath("${ANDROID_BIN}")
+dk_debug("ANDROID_BIN = ${ANDROID_BIN}")
+
+dk_set(ANDROID_AR "${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/llvm-ar${exe}")
+dk_assertPath("${ANDROID_AR}")
+dk_debug("ANDROID_AR = ${ANDROID_AR}")
+
+dk_set(ANDROID_C_COMPILER "${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang${exe}")
+dk_assertPath("${ANDROID_C_COMPILER}")
+dk_debug("ANDROID_C_COMPILER = ${ANDROID_C_COMPILER}")
+
+dk_set(ANDROID_CXX_COMPILER "${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang++${exe}")
+dk_assertPath("${ANDROID_CXX_COMPILER}")
+dk_debug("ANDROID_CXX_COMPILER = ${ANDROID_CXX_COMPILER}")
+
+dk_set(ANDROID_INCLUDE "${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/sysroot/usr/include")
+dk_assertPath("${ANDROID_INCLUDE}")
+dk_debug("ANDROID_INCLUDE = ${ANDROID_INCLUDE}")
+
+dk_set(VS_NdkRoot	"${android-ndk}")
+dk_set(NDK_ROOT		"${android-ndk}")
 
 
 ###### ANDROID_ABI ######			# https://developer.android.com/ndk/guides/abis
@@ -143,7 +169,7 @@ dk_set(ANDROID_BASH					"export ANDROID_NDK_ROOT=${ANDROID_NDK_ROOT};"
 	dk_setEnv						("CXX"				"${ANDROID_CXX_COMPILER}")
 	dk_setEnv						("NDK_ROOT" 		"${NDK_ROOT}")
 	dk_setEnv						("VS_NdkRoot" 		"${VS_NdkRoot}")
-	dk_setEnv						("ANDROID_NDK" 		"${ANDROID_NDK}")
+	dk_setEnv						("ANDROID_NDK" 		"${android-ndk}")
 	dk_setEnv						("ANDROID_NDK_ROOT" "${ANDROID_NDK_ROOT}")
 	dk_prependEnvPath				("${ANDROID_BIN}")
 	dk_prependEnvPath				("${ANDROID_INCLUDE}")

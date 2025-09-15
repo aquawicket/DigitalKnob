@@ -308,7 +308,7 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 
-
+dk_validate(DKCMAKE_DIR "dk_DKBRANCH_DIR()")
 
 #################### TOOLCHAINS ##########################
 if(NOT EXISTS "${DKCMAKE_DIR}/toolchains/${Target_Tuple}_toolchain.cmake")

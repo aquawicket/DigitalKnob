@@ -262,13 +262,12 @@ exit /b !errorlevel!
 		^& call set %%_line_:dk.gbl.=%%) 2^>nul
 
 	::set dk_time=(call echo %%time%%)
-
-	::set endfunction=(exit /b ^^!errorlevel^^!)
-	::set return=(exit /b ^^!errorlevel^^!)
-	::set endfunction=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	
 	set endfunction=(if "^!DE^!" neq "" %setlocal%) ^& (if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	     set return=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "return:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
-	 set checkerror=(if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "checkerror:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd")
+	set return=(if "^!DE^!" neq "" %setlocal%) ^& (if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd") ^& (exit /b ^^!errorlevel^^!)
+	set checkerror=(if "^!DE^!" neq "" %setlocal%) ^& (if 0 neq ^^!errorlevel^^! ^^!dk_call^^! dk_error "endfunction:ERROR:^!errorlevel^! @ ^!__FILENAME__^!.cmd" ^& exit /b ^^!errorlevel^^!)
+	set clearerror=(cmd /c exit /b 0)
+
 	
 	if NOT defined pad (set "pad=%clr%")
 	if NOT defined indent (set "indent=   ")

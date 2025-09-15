@@ -20,20 +20,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		echo(
-		::if NOT defined Target_Arch_Cache (%dk_call% Target_Arch_Cache)
-		if defined Target_Arch_Cache (
-			echo  0^) !Target_Arch_Cache!
+		if "!Target_Arch_Cache!" neq ""	(
 			echo(
-		)	
+			echo( 0^) !Target_Arch_Cache!
+		)
+		echo(		
 		if NOT defined Host_Arch (%dk_call% dk_Host_Arch)
-		echo  1^) !Host_Arch!
-		echo  2^) Arm32
-		echo  3^) Arm64
-		echo  4^) X86
-		echo  5^) X86_64
-		echo  6^) Go Back
-		echo  7^) Exit
+		echo( 1^) !Host_Arch!
+		echo( 2^) Arm32
+		echo( 3^) Arm64
+		echo( 4^) X86
+		echo( 5^) X86_64
+		echo( 6^) Go Back
+		echo( 7^) Exit
 		echo(
 
 		%dk_call% dk_keyboardInput

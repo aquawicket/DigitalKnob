@@ -20,24 +20,24 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	rem ###### GET ######	
 	) else (
-		echo(
-		
-		::if NOT defined Target_Os_Cache (%dk_call% Target_Os_Cache)
-		echo  0^) !Target_Os_Cache!
+		if "!Target_Os_Cache!" neq "" (
+			echo(
+			echo( 0^) !Target_Os_Cache!
+		)
 		echo(
 		if NOT defined Host_Os (%dk_call% dk_Host_Os)
-		echo  1^) !Host_Os!
-		echo  2^) Android
-		echo  3^) Cosmopolitan
-		echo  4^) Emscripten
-		echo  5^) Ios
-		echo  6^) Iossim
-		echo  7^) Linux
-		echo  8^) Mac
-		echo  9^) Raspberry
-		echo 10^) Windows
-		echo 11^) Go Back
-		echo 12^) Exit
+		echo( 1^) !Host_Os!
+		echo( 2^) Android
+		echo( 3^) Cosmopolitan
+		echo( 4^) Emscripten
+		echo( 5^) Ios
+		echo( 6^) Iossim
+		echo( 7^) Linux
+		echo( 8^) Mac
+		echo( 9^) Raspberry
+		echo(10^) Windows
+		echo(11^) Go Back
+		echo(12^) Exit
 		echo(
 
 		%dk_call% dk_keyboardInput

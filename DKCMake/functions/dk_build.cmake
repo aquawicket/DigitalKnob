@@ -199,6 +199,7 @@ function(dk_build)
 		
 	#endforeach()
 	
+	dk_assertPath("${Source_Dir}/${Target_Config}")
 	dk_fatal("dk_build(): ${Source_Dir}/${Target_Config} has no buildable files")
 endfunction()
 

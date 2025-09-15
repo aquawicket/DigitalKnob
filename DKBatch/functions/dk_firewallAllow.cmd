@@ -41,19 +41,23 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 	%dk_call% dk_notice "Adding firewall allow rule for %_name_% %_file_% . . ."
 	
 	%dk_call% dk_findProgram NETSH_EXE netsh.exe "%windir%/System32" NO_ERROR
-	set "NETSH_EXE=
+
 	if EXIST "%NETSH_EXE%" (
 		%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 		%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	)
-	
+
 	::###### Windows Firewall Control ######
 	if NOT EXIST "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
 	if NOT EXIST "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 	if EXIST "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
 	if EXIST "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
-	"%WFC_APP:/=\%" -allow "%_file_:/=\%"
+
+	::echo "%WFC_APP:/=\%" -allow "%_file_:/=\%"
+	"%WFC_APP:/=\%" -allow "%_file_:/=\%" || (echo errorlevel = !errorlevel! & %clearerror%)
+	::%dk_call% "%WFC_APP:/=\%" -allow "%_file_:/=\%"
 	::######################################
+
 %endfunction%
 
 

@@ -22,13 +22,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 	rem ###### GET ######	
 	) else (
-			
-		%dk_call% dk_echo
-		echo 1^) Release
-		echo 2^) Debug
-		echo 3^) All
-		echo 4^) Go Back
-		echo 5^) Exit
+		if "!Target_Type_Cache!" neq "" (
+			echo(
+			echo( 0^) !Target_Type_Cache!
+		)
+		echo(
+		echo( 1^) Release
+		echo( 2^) Debug
+		echo( 3^) All
+		echo( 4^) Go Back
+		echo( 5^) Exit
    
 		%dk_call% dk_echo
 		%dk_call% dk_echo "Please select a build type."
@@ -36,11 +39,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_keyboardInput
 		rem %dk_call% dk_keyboardInputTimeout 1 60
 
-		if "!dk_keyboardInput!" equ "1" endlocal & (set "Target_Type=Release"		& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "2" endlocal & (set "Target_Type=Debug"			& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "3" endlocal & (set "Target_Type=All"			& set "!Target_Type!=1"	& %return%)
-		if "!dk_keyboardInput!" equ "4" endlocal & (%dk_call% dk_unset Target_Env	& %return%)
-		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit 0						& %return%)
+		if "!dk_keyboardInput!" equ "0" endlocal & (set "Target_Type=!Target_Type_Cache!"	& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "1" endlocal & (set "Target_Type=Release"				& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "2" endlocal & (set "Target_Type=Debug"					& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "3" endlocal & (set "Target_Type=All"					& set "!Target_Type!=1"	& %return%)
+		if "!dk_keyboardInput!" equ "4" endlocal & (%dk_call% dk_unset Target_Env			& %return%)
+		if "!dk_keyboardInput!" equ "5" (%dk_call% dk_exit 0								& %return%)
 
 		%dk_call% dk_echo !dk_keyboardInput!: invalid selection, please try again
 		endlocal & (%dk_call% dk_unset Target_Type)

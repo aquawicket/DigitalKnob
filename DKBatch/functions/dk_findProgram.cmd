@@ -48,9 +48,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 	)
 
+	::###### output ######
 	endlocal & (
 		set "%~1=%dk_findProgram%"
-	)	
+		set "dk_findProgram=%dk_findProgram%"
+		echo %dk_findProgram%
+	)
 %endfunction%
 
 
