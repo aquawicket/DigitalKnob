@@ -34,7 +34,7 @@ function(dk_depend Plugin) #target
 		return()
 	endif()
 		
-	if(Plugin IN_LIST dk_disabled_list)
+	if(Plugin IN_LIST dkdisabled_list)
 		if(DISABLED_LIBS MATCHES "${Plugin}")
 			dk_append(DISABLED_LIBS "${Plugin}") # this list is for the build.log
 		endif()
@@ -53,16 +53,17 @@ function(dk_depend Plugin) #target
 	dk_debug(">>>>>##############################################################################>>>>>")
 	
 		list(APPEND dkdepend_list "${CURRENT_PLUGIN}")
-		dk_set(dkdepend_list "${dkdepend_list}")
+		dk_set(dkdepend_list "${dkdepend_list}") 									# Globalize the variable
+		dk_debug("dkdepend_list = ${dkdepend_list}") 
 		
 		dk_getPathToPlugin(${CURRENT_PLUGIN} ${CURRENT_PLUGIN}_Import_Path)
-		dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
+		dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")	# Globalize the variable
 
+		dk_enable("${CURRENT_PLUGIN}")
+		
 		#dk_importVariables(Import_Path "${Import_Path}")
 		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
 			
-		dk_enable("${CURRENT_PLUGIN}")
-	 
 	###### Pop Plugin from the PLUGIN_STACK ######
 	#dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")
 	dk_envList(PLUGIN POP)

@@ -47,7 +47,7 @@ function(dk_dependB plugin)
 #		dk_dump(ARGV) # FIXME: DUMP not working here, show 2 for the ARGC count, but only shows variable plugin ARGV, no value
 #	endif()
 
-	if(plugin IN_LIST dk_disabled_list)
+	if(plugin IN_LIST dkdisabled_list)
 		if(DISABLED_LIBS MATCHES "${plugin}")
 			dk_append(DISABLED_LIBS "${plugin}") # this list is for the build.log
 		endif()

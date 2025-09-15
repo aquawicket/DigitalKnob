@@ -31,7 +31,7 @@ dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  	"include_directories(${
 foreach(each_include ${DKINCLUDES_LIST})
 	dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt  "include_directories(${each_include})\n")
 endforeach()
-foreach(each_define ${DKDEFINES_LIST})
+foreach(each_define ${dkdefines_list})
 	dk_fileAppend(${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt	"add_definitions(-D${each_define})\n")
 endforeach()
 foreach(each_linkdir ${DKLINKDIRS_LIST})

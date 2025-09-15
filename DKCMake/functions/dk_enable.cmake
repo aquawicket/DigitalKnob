@@ -24,7 +24,7 @@ function(dk_enable plugin)
 	
 	if(NOT ${plugin})
 		if(${ARGC} GREATER 1)
-			dk_set(${${ARGV1}} ON)
+			#dk_set(${${ARGV1}} ON)
 			dk_set(HAVE_${${ARGV1}} ON)
 			dk_convertToCIdentifier(${ARGV1} argv1_macro)   # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 			dk_define(HAVE_${argv1_macro})

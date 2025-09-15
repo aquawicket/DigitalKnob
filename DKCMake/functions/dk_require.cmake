@@ -24,7 +24,7 @@ include_guard()
 macro(dk_require plugin)
 	dk_debugFunc()
 	
-	if(plugin IN_LIST dk_disabled_list)
+	if(plugin IN_LIST dkdisabled_list)
 		dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
 		dk_notice("${Lib} requires ${plugin} which is DISABLED")
 		dk_notice("DISABLING ${Lib}")

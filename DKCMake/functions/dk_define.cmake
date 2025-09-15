@@ -22,12 +22,12 @@ include_guard()
 function(dk_define str)
 	dk_debugFunc()
 	
-	if(DKDEFINES_LIST MATCHES "${str}")
+	if(dkdefines_list MATCHES "${str}")
 		return() # already in the list
 	endif()
 
-	dk_append(DKDEFINES_LIST ${str})
-	dk_set(DKDEFINES_LIST "${DKDEFINES_LIST}")
+	dk_append(dkdefines_list ${str})
+	dk_set(dkdefines_list "${dkdefines_list}")
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
 		dk_warning("add_definitions() not available in script mode")

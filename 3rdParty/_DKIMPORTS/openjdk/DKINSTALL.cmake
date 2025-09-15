@@ -24,8 +24,9 @@ include_guard()
 # https://cfdownload.adobe.com/pub/adobe/coldfusion/java/java11/java110151/jdk-11.0.15.1_windows-x64_bin.zip
 # https://gist.github.com/douglarek/bbda8cc23a562cb5d5798717d57bc9e9
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
+
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(Host_Tuple "dk_Host_Tuple()")
 
 if(Android_Host)
 	dk_installPackage(openjdk-17)
@@ -50,14 +51,14 @@ endif()
 
 if(Windows_Host)
 	dk_import(${openjdk_Windows_X86_64_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-	dk_assertPath(OPENJDK)
-	dk_set(JAVAC_EXE "${OPENJDK}/bin/javac.exe")
+	dk_assertPath(openjdk)
+	dk_set(JAVAC_EXE "${openjdk}/bin/javac.exe")
 
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 11)
 	
 	###### JAVA_HOME ######
-	dk_nativePath("${OPENJDK}" ENV{JAVA_HOME})
+	dk_nativePath("${openjdk}" ENV{JAVA_HOME})
 	
 	###### JAVA Registry ######
 	dk_validate(cmd_exe "dk_CMD_EXE()")

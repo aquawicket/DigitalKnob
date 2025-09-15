@@ -28,10 +28,12 @@ function(dk_undefine str)
 		remove_definitions(${str})
 	endif()
 	
-	if(DKDEFINES_LIST)
-		list(REMOVE_ITEM DKDEFINES_LIST ${str})
-		dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})	# Globalize the variable
+	if(dkdefines_list)
+		list(REMOVE_ITEM dkdefines_list ${str})
+		dk_set(dkdefines_list ${dkdefines_list})	# Globalize the variable
 	endif()
+	
+	dk_debug("dkdefines_list = ${dkdefines_list}")
 endfunction()
 
 

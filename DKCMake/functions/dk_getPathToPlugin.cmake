@@ -21,7 +21,7 @@ include_guard()
 function(dk_getPathToPlugin plugin rtn_var)
 	dk_debugFunc()
 	
-	list(FIND dk_disabled_list "${ARGV}" index)
+	list(FIND dkdisabled_list "${ARGV}" index)
 	if(${index} GREATER -1)
 		dk_info("${ARGV} IS DISABLED")
 		return()

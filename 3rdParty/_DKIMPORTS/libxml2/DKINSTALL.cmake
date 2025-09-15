@@ -39,7 +39,7 @@ dk_import() #PATCH
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${libxml2})
+#dk_include				(${libxml2})
 dk_include				(${libxml2}/include 					LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
@@ -75,9 +75,9 @@ dk_set(libxml2_CMAKE
 	-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR}
 	-DLIBXML2_LIBRARY=${LIBXML2_LIBRARY} 
 	"-DLIBXML2_INCLUDE_DIRS=${LIBXML2_INCLUDE_DIR} ${LIBXML2_INCLUDE_DIR2}" 
-	-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARY} 
-	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}" 
-	"-DCMAKE_CXX_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}")
+	-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARY}) 
+	#"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}" 
+	#"-DCMAKE_CXX_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}")
 
 ### GENERATE ###
 #if(NOT EXISTS ${libxml2}/configure)
@@ -209,6 +209,6 @@ dk_configure(${libxml2}
 	${zlib_CMAKE})
 
 ### COMPILE ###
-dk_build(${libxml2})# LibXml2)
-
-dk_delete("${libxml2}/VERSION")
+#dk_rename("${libxml2}/libxml2_VERSION" "${libxml2}/VERSION")
+dk_build(${libxml2}) # LibXml2)
+#dk_rename("${libxml2}/VERSION" "${libxml2}/libxml2_VERSION")

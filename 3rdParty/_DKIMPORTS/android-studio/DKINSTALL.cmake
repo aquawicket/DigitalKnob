@@ -43,5 +43,5 @@ elseif(Linux_Host)
 endif()
 
 ### SET ENVIRONMENT VARIABLES ###
-dk_setEnv("STUDIO_JDK" ${OPENJDK_8})
-dk_setEnv("STUDIO_GRADLE_JDK" ${OPENJDK_8})
+dk_setEnv("STUDIO_JDK" ${openjdk-8})
+dk_setEnv("STUDIO_GRADLE_JDK" ${openjdk-8})

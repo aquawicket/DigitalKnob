@@ -20,12 +20,14 @@ include_guard()
 
 #dk_validate(Target_Config  "dk_Target_Config()")
 if(IOS OR Iossim OR Android)
-	dk_disable(glew)
+	dk_undepend(glew)
 	dk_return()
 endif()
 
 ### DEPEND ###
-dk_depend(libglu1-mesa-dev)
+if(Linux OR Raspberry)
+	dk_depend(libglu1-mesa-dev)
+endif()
 
 ### IMPORT ###
 dk_import()
@@ -65,11 +67,11 @@ dk_set(glew_CMAKE
 	-DGLEW_LIBRARY=${GLEW_LIBRARY})
 if(MSVC)
 	dk_append(glew_CMAKE 
-		"-DCMAKE_C_FLAGS=/I${glew}/include /DGLEW_STATIC" 
+		"-DCMAKE_C_FLAGS=/I${GLEW_INCLUDE_DIR} /DGLEW_STATIC" 
 		"-DCMAKE_CXX_FLAGS=/I${GLEW_INCLUDE_DIR} /DGLEW_STATIC")
 else()
 	dk_append(glew_CMAKE 
-		"-DCMAKE_C_FLAGS=-I${glew}/include -DGLEW_STATIC" 
+		"-DCMAKE_C_FLAGS=-I${GLEW_INCLUDE_DIR} -DGLEW_STATIC" 
 		"-DCMAKE_CXX_FLAGS=-I${GLEW_INCLUDE_DIR} -DGLEW_STATIC")
 endif()
 

@@ -40,15 +40,15 @@ function(dk_undepend plugin)
 	
 	# remove from ${dkdepend_list}
 	if(plugin IN_LIST dkdepend_list)
-		list(REMOVE_ITEM dkdepend_list ${plugin}) # it was found, now remove
-		dk_set(dkdepend_list ${dkdepend_list})
-#		dk_printVar(dkdepend_list)
+		list(REMOVE_ITEM dkdepend_list ${plugin}) 	# it was found, now remove
+		dk_set(dkdepend_list ${dkdepend_list}) 		# Globalize the variable
+		dk_debug("dkdepend_list = ${dkdepend_list}")
 	endif()
 	
 	dk_notice("DISABLING ${ARGV}")
-	dk_append(dk_disabled_list "${ARGV}")
-	dk_set(dk_disabled_list ${dk_disabled_list})
-#	dk_printVar(dk_disabled_list)
+	dk_append(dkdisabled_list "${ARGV}")
+	dk_set(dkdisabled_list ${dkdisabled_list}) 		# Globalize the variable
+	dk_debug("dkdisabled_list = ${dkdisabled_list}")
 	
 	if(${ARGC} GREATER 1)
 		dk_removeTarget(${plugin} ${ARGV1})
