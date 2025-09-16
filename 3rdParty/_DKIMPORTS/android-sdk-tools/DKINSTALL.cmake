@@ -13,16 +13,16 @@ include_guard()
 
 
 ###### android-sdk-tools ######
-
 dk_depend(android-sdk)
+
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_Host)
-	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} _PATH_ ${ANDROID_SDK}/tools PATCH)
+	dk_import(${android-sdk-tools_Windows_Import} 	INSTALL_PATH "${android-sdk}/tools") # PATCH)
 elseif(Mac_Host)
-	dk_import		(${ANDROID_SDK_TOOLS_MAC_DL} _PATH_ ${ANDROID_SDK}/tools PATCH)
+	dk_import(${android-sdk-tools_Mac_Import} 		INSTALL_PATH "${android-sdk}/tools") # PATCH)
 elseif(Linux_Host)
-	dk_import		(${ANDROID_SDK_TOOLS_LINUX_DL} _PATH_ ${ANDROID_SDK}/tools PATCH)
+	dk_import(${android-sdk-tools_Linux_Import} 	INSTALL_PATH "${android-sdk}/tools") # PATCH)
 endif()
 
 # TODO
