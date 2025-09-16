@@ -2,5 +2,5 @@
 # https://dl.google.com/android/repository/platform-26_r02.zip
 
 # 26 r02
-ANDROID_PLATFORMS_DL=https://dl.google.com/android/repository/platform-26_r02.zip
-ANDROID_PLATFORMS_FOLDER=android-26
+android_platforms_Version=android-26
+android-platforms_Import=https://dl.google.com/android/repository/platform-26_r02.zip

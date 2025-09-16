@@ -3,33 +3,153 @@
 # https://androidsdkoffline.blogspot.com/p/android-sysimg-arm-v8a-direct-download.html
 
 
-# 24
-ANDROID_SYSTEM_IMAGES_VERSION=24
-ANDROID_SYSTEM_IMAGES_DL=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip 
-#https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r07.zip
-#https://dl.google.com/android/repository/sys-img/android/x86-24_r08.zip
-#https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip
+# 21.4
+# android-system-images_Version=21
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-21_r04.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-21_r04.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-21_r04.zip
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-21_r04.zip
 
-# 25
-ANDROID_SYSTEM_IMAGES_VERSION=25
-#https://dl.google.com/android/repository/sys-img/android/arm64-v8a-25_r02.zip
-#https://dl.google.com/android/repository/sys-img/android/x86-25_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86_64-25_r01.zip
+# 22.2
+# android-system-images_Version=22
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-22_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-22_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-22_r02.zip
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-22_r02.zip
 
-# 26
-ANDROID_SYSTEM_IMAGES_VERSION=26
-#https://dl.google.com/android/repository/sys-img/android/arm64-v8a-26_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86-26_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86_64-26_r01.zip
+# 23.7
+# android-system-images_Version=23
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-23_r07.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-23_r07.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-23_r07.zip
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-23_r07.zip
 
-# 27
-ANDROID_SYSTEM_IMAGES_VERSION=27
-#https://dl.google.com/android/repository/sys-img/android/arm64-v8a-27_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86-27_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86_64-27_r01.zip
+# 24.7
+# android-system-images_Version=24
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r07.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r07.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-24_r07.zip
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r07.zip
 
-# 28
-ANDROID_SYSTEM_IMAGES_VERSION=28
-#https://dl.google.com/android/repository/sys-img/android/arm64-v8a-28_r01.zip
-#https://dl.google.com/android/repository/sys-img/android/x86-28_r04.zip
-#https://dl.google.com/android/repository/sys-img/android/x86_64-28_r04.zip
+# 24.8
+# android-system-images_Version=24
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r08.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r08.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-24_r08.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip
+
+# 24.9
+# android-system-images_Version=24
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-24_r09.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-24_r09.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-24_r09.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-24_r09.zip
+
+# 25.1
+# android-system-images_Version=25
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-25_r01.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-25_r01.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-25_r01.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-25_r01.zip
+
+# 25.2
+# android-system-images_Version=25
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-25_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-25_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-25_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-25_r02.zip
+
+# 26.1
+# android-system-images_Version=26
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-26_r01.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-26_r01.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-26_r01.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-26_r01.zip
+
+# 26.2
+# android-system-images_Version=26
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-26_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-26_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-26_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-26_r02.zip
+
+# 27.1
+# android-system-images_Version=27
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-27_r01.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-27_r01.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-27_r01.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-27_r01.zip
+
+# 27.2
+# android-system-images_Version=27
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-27_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-27_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-27_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-27_r02.zip
+
+# 28.1
+# android-system-images_Version=28
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-28_r01.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-28_r01.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-28_r01.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-28_r01.zip
+
+# 28.2
+# android-system-images_Version=28
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-28_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-28_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-28_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-28_r02.zip
+
+# 28.4
+# android-system-images_Version=28
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-28_r04.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-28_r04.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-28_r04.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-28_r04.zip
+
+# 29.8
+# android-system-images_Version=29
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-29_r08.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-29_r08.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-29_r08.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-29_r08.zip
+
+# 30.2
+# android-system-images_Version=30
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-30_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-30_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-30_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-30_r02.zip
+
+# 31.4
+# android-system-images_Version=31
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-31_r04.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-31_r04.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-31_r04.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-31_r04.zip
+
+# 32.1
+# android-system-images_Version=32
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-32_r01.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-32_r01.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-32_r01.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-32_r01.zip
+
+# 33.2
+# android-system-images_Version=33
+# android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-33_r02.zip 
+# android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-33_r02.zip
+# android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-33_r02.zip
+# android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-33_r02.zip
+
+# 34.4
+android-system-images_Version=34
+android-system-images_Arm32_Import=https://dl.google.com/android/repository/sys-img/android/armeabi-v7a-34_r04.zip 
+android-system-images_Arm64_Import=https://dl.google.com/android/repository/sys-img/android/arm64-v8a-34_r04.zip
+android-system-images_X86_Import=https://dl.google.com/android/repository/sys-img/android/x86-34_r04.zip
+android-system-images_X86_64_Import=https://dl.google.com/android/repository/sys-img/android/x86_64-34_r04.zip
+
+
+
+

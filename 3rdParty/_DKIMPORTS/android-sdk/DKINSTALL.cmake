@@ -13,76 +13,91 @@ include_guard()
 
 
 ##### android-sdk ######
-# https://androidsdkoffline.blogspot.com
-
 #NOTE: it's actually building android gui apps that depend on java. So we can push these further up the dependencies list. 
 #dk_depend(openjdk)
 #dk_depend(openjdk-8)
 #dk_depend(android-cmdline-tools)
 
-dk_validate(Host_Os "dk_Host_Os()")
-#if(Android_Host)
-#	dk_set(ANDROID_SDK "$ENV{HOME}/DigitalKnob/3rdParty/android-sdk")
-#	dk_set(ANDROID_SDK "$ENV{HOME}/DigitalKnob/3rdParty/android-sdk")
-#else()
-	dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-	dk_set(android-sdk "$ENV{DK3RDPARTY_DIR}/android-sdk")
-	dk_set(ANDROID_SDK "$ENV{DK3RDPARTY_DIR}/android-sdk")
-	#dk_set(ANDROID_SDK_DIR "$ENV{DK3RDPARTY_DIR}/android-sdk")
-#endif()
+dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+dk_set(android-sdk "$ENV{DK3RDPARTY_DIR}/android-sdk")
+
+dk_set(android-sdk_Import_Name "android-sdk")
+dk_set(android-sdk_Install_Path "${android-sdk}")
 
 ### INSTALL ###
-if(NOT EXISTS ${ANDROID_SDK})
+if(NOT EXISTS ${android-sdk})
 	dk_info("Installing android-sdk")
-	dk_mkdir("${ANDROID_SDK}")
-	dk_patch(android-sdk "${ANDROID_SDK}")
+	dk_mkdir("${android-sdk}")
+	dk_patch(android-sdk "${android-sdk}")
 endif()
 
 # https://developer.android.com/tools/variables
+###### ANDROID_SDK ######
+if(NOT DEFINED ENV{ANDROID_SDK})
+	#set(ENV{ANDROID_SDK} "${android-sdk}")
+	dk_set(ANDROID_SDK "${android-sdk}")
+	if(Windows_Host)
+		dk_replaceAll("$ENV{ANDROID_SDK}" "/" "\\" ENV{ANDROID_SDK})
+		#dk_validate(cmd_exe "dk_depend(cmd)")
+		#dk_exec(${cmd_exe} /c setx ANDROID_SDK "$ENV{ANDROID_SDK}")
+	endif()
+	dk_debug("ANDROID_SDK = ${ANDROID_SDK}")
+endif()
+
 ###### ANDROID_HOME ######
 if(NOT DEFINED ENV{ANDROID_HOME})
-	set(ENV{ANDROID_HOME} "${ANDROID_SDK}")
+	#set(ENV{ANDROID_HOME} "${android-sdk}")
+	dk_set(ANDROID_HOME "${android-sdk}")
 	if(Windows_Host)
 		dk_replaceAll("$ENV{ANDROID_HOME}" "/" "\\" ENV{ANDROID_HOME})
-		dk_validate(cmd_exe "dk_CMD_EXE()")
-		#execute_process(COMMAND ${cmd_exe} /c setx ANDROID_HOME "$ENV{ANDROID_HOME}")
+		#dk_validate(cmd_exe "dk_depend(cmd)")
+		#dk_exec(${cmd_exe} /c setx ANDROID_HOME "$ENV{ANDROID_HOME}")
 	endif()
-	dk_printVar(ENV{ANDROID_HOME})
+	dk_debug("ANDROID_HOME = ${ANDROID_HOME}")
 endif()	
 	
 ###### ANDROID_USER_HOME ######
 if(NOT DEFINED ENV{ANDROID_USER_HOME})
 	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
-	set(ENV{ANDROID_USER_HOME} "$ENV{DKCACHE_DIR}/.android")
+	#set(ENV{ANDROID_USER_HOME} "$ENV{DKCACHE_DIR}/.android")
+	dk_set(ANDROID_USER_HOME "$ENV{DKCACHE_DIR}/.android")
 	if(Windows_Host)
 		dk_replaceAll("$ENV{ANDROID_USER_HOME}" "/" "\\" ENV{ANDROID_USER_HOME})
-		dk_validate(cmd_exe "dk_CMD_EXE()")
-		#execute_process(COMMAND ${cmd_exe} /c setx ANDROID_USER_HOME "$ENV{ANDROID_USER_HOME}")
+		#dk_validate(cmd_exe "dk_depend(cmd)")
+		#dk_exec(${cmd_exe} /c setx ANDROID_USER_HOME "$ENV{ANDROID_USER_HOME}")
 	endif()
-	dk_printVar(ENV{ANDROID_USER_HOME})
+	dk_debug("ANDROID_USER_HOME = ${ANDROID_USER_HOME}")
 endif()
 	
-###### ANDROID_SDK_HOME ######
-#if(NOT DEFINED ENV{ANDROID_SDK_HOME})
-#	set(ENV{ANDROID_SDK_HOME} "$ENV{DKCACHE_DIR}")
-#	if(Windows_Host)
-#		dk_replaceAll("$ENV{ANDROID_SDK_HOME}" "/" "\\" ENV{ANDROID_SDK_HOME})
-#		dk_validate(cmd_exe "dk_CMD_EXE()")
-#		execute_process(COMMAND ${cmd_exe} /c setx ANDROID_SDK_HOME "$ENV{ANDROID_SDK_HOME}")
-#	endif()
-#	dk_printVar(ENV{ANDROID_SDK_HOME})
-#endif()
-
 ###### VS_AndroidHome ######
 if(NOT DEFINED ENV{VS_AndroidHome})
-	set(ENV{VS_AndroidHome} "${ANDROID_SDK}")
+	#set(ENV{VS_AndroidHome} "${android-sdk}")
+	dk_set(VS_AndroidHome "${android-sdk}")
 	if(Windows_Host)
 		dk_replaceAll("$ENV{VS_AndroidHome}" "/" "\\" ENV{VS_AndroidHome})
-		dk_validate(cmd_exe "dk_CMD_EXE()")
-		#execute_process(COMMAND ${cmd_exe} /c setx VS_AndroidHome "$ENV{VS_AndroidHome}")
+		#dk_validate(cmd_exe "dk_depend(cmd)")
+		#dk_exec(${cmd_exe} /c setx VS_AndroidHome "$ENV{VS_AndroidHome}")
 	endif()
-	dk_printVar(ENV{VS_AndroidHome})
+	dk_debug("VS_AndroidHome = ${VS_AndroidHome}")
 endif()
+
+###### ANDROID_SDK_HOME ######
+#if(NOT DEFINED ENV{ANDROID_SDK_HOME})
+#	#set(ENV{ANDROID_SDK_HOME} "$ENV{DKCACHE_DIR}")
+#	dk_set(ANDROID_SDK_HOME "$ENV{DKCACHE_DIR}")
+#	if(Windows_Host)
+#		dk_replaceAll("$ENV{ANDROID_SDK_HOME}" "/" "\\" ENV{ANDROID_SDK_HOME})
+#		#dk_validate(cmd_exe "dk_depend(cmd)")
+#		#execute_process(COMMAND ${cmd_exe} /c setx ANDROID_SDK_HOME "$ENV{ANDROID_SDK_HOME}")
+#	endif()
+#	dk_debug("ANDROID_SDK_HOME = ${ANDROID_SDK_HOME}")
+#endif()
+
+
+
+
+
+
 
 ### FIXME - temporarily disabled
 ###### SignLicenses ######

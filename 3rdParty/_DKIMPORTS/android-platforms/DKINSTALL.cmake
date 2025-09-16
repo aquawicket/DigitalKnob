@@ -13,10 +13,8 @@ include_guard()
 
 
 ###### android-platforms ######
-# https://dl.google.com/android/repository/platform-26_r02.zip
-
 dk_depend(android-sdk)
-dk_mkdir(${ANDROID_SDK}/platforms)
+dk_mkdir(${android-sdk}/platforms)
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import(${ANDROID_PLATFORMS_DL} _PATH_ ${ANDROID_SDK}/platforms/${ANDROID_PLATFORMS_FOLDER})
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import(${android-platforms_Import} INSTALL_PATH "${android-sdk}/platforms/${android_platforms_Version}")

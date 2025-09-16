@@ -8,9 +8,9 @@
 
 
 # 2024.2.1.10
-ANDROID_STUDIO_CHROME_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-cros.deb
-ANDROID_STUDIO_LINUX_DL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-linux.tar.gz
-ANDROID_STUDIO_MAC_ARM_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac_arm.dmg
-ANDROID_STUDIO_MAC_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac.dmg
-ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-windows.exe
-#ANDROID_STUDIO_WIN_DL=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-windows.zip
+android-studio_Chrome_Import=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-cros.deb
+android-studio_Linux_Import=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-linux.tar.gz
+android-studio_Mac_Arm64_Import=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac_arm.dmg
+android-studio_Mac_X86_64_Import=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-mac.dmg
+android-studio_Windows_Import=https://redirector.gvt1.com/edgedl/android/studio/install/2024.2.1.10/android-studio-2024.2.1.10-windows.exe
+#android-studio_Windows_Import=https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-windows.zip

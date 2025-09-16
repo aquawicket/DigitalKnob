@@ -13,42 +13,18 @@ include_guard()
 
 
 ###### android-build-tools ######
-# https://developer.android.com/tools/releases/build-tools
-# https://androidsdkoffline.blogspot.com/p/android-sdk-build-tools.html
-# https://mirrors.cloud.tencent.com/AndroidSDK/
-# Installed Build Tools revision NN.N.N is corrupted" https://stackoverflow.com/a/68430992/688352
+dk_depend(android-sdk)
 
-dk_depend		(android-sdk)
-dk_mkdir		(${ANDROID_SDK}/build-tools)
+#dk_validate(Host_Os "dk_Host_Os()")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_mkdir(${android-sdk}/build-tools)
 
-# 30.0.3
-##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-
-dk_validate		(Host_Os "dk_Host_Os()")
 if(Windows_Host)
-	dk_import	(${Android_Build_Tools_Windows_Import} _PATH_ "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
+	dk_import(${android-build-tools_Windows_Import} INSTALL_PATH "${android-sdk}/build-tools/${android-build-tools_Version}")
 elseif(Mac_Host)
-	dk_import	(${Android_Build_Tools_Mac_Import} _PATH_ "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
-elseif(Linux_Host OR Android_Host)
-    dk_import	(${Android_Build_Tools_Linux_Import} _PATH_ "${ANDROID_SDK}/build-tools/${Android_Build_Tools_Version}")
+	dk_import(${android-build-tools_Mac_Import} 	INSTALL_PATH "${android-sdk}/build-tools/${android-build-tools_Version}")
+else()
+    dk_import(${android-build-tools_Linux_Import} 	INSTALL_PATH "${android-sdk}/build-tools/${android-build-tools_Version}")
 endif()
 
-# 31.0.0
-#Windows_Host_dk_import(https://dl.google.com/android/repository/09489e417c0a266f2862ddd82b4ac29a1b7af55e.build-tools_r31-windows.zip _PATH_ ${ANDROID_SDK}/build-tools/31.0.0)
-#Mac_Host_dk_import(https://dl.google.com/android/repository/d32e21a8aa8492ef8b86a489f601da425842b5da.build-tools_r31-macosx.zip _PATH_ ${ANDROID_SDK}/build-tools/31.0.0)
-#Linux_Host_dk_import(https://dl.google.com/android/repository/build-tools_r31-linux.zip _PATH_ ${ANDROID_SDK}/build-tools/31.0.0)
 
-# 32.0.0
-#Windows_Host_dk_import(https://dl.google.com/android/repository/210b77e4bc623bd4cdda4dae790048f227972bd2.build-tools_r32-windows.zip _PATH_ ${ANDROID_SDK}/build-tools/32.0.0)
-#Mac_Host_dk_import(https://dl.google.com/android/repository/5219cc671e844de73762e969ace287c29d2e14cd.build-tools_r32-macosx.zip _PATH_ ${ANDROID_SDK}/build-tools/32.0.0)
-#Linux_Host_dk_import(https://dl.google.com/android/repository/build-tools_r32-linux.zip _PATH_ ${ANDROID_SDK}/build-tools/32.0.0)
-
-# 32.1.0
-#Windows_Host_dk_import(https://dl.google.com/android/repository/21014bc1a76d38d0dcb79b3b3f49f40ea5a53c10.build-tools_r32.1-rc1-windows.zip _PATH_ ${ANDROID_SDK}/build-tools/32.1.0)
-#Mac_Host_dk_import(https://dl.google.com/android/repository/c165e9b235479731f416c7aea22d065819c7ce23.build-tools_r32.1-rc1-macosx.zip _PATH_ ${ANDROID_SDK}/build-tools/32.1.0)
-#Linux_Host_dk_import(https://dl.google.com/android/repository/build-tools_r32.1-rc1-linux.zip _PATH_ ${ANDROID_SDK}/build-tools/32.1.0)
-
-# 33.0.0
-#Windows_Host_dk_import(https://dl.google.com/android/repository/build-tools_r33-windows.zip _PATH_ ${ANDROID_SDK}/build-tools/33.0.0)
-#Mac_Host_dk_import(https://dl.google.com/android/repository/build-tools_r33-macosx.zip _PATH_ ${ANDROID_SDK}/build-tools/33.0.0)
-#Linux_Host_dk_import(https://dl.google.com/android/repository/build-tools_r33-linux.zip _PATH_ ${ANDROID_SDK}/build-tools/33.0.0)

@@ -15,14 +15,15 @@ include_guard()
 ###### android-cmake ######
 dk_depend(android-sdk)
 
-dk_validate		(Host_Tuple "dk_Host_Tuple()")
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_validate		(Host_Tuple "dk_Host_Tuple()")
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+
 if(Windows_Host)
-	dk_import	(${Android_CMake_Windows_Import} _PATH_ ${ANDROID_SDK}/cmake)
+	dk_import	(${android-cmake_Windows_Import} 	INSTALL_PATH ${android-sdk}/cmake)
 elseif(Mac_Host)
-	dk_import	(${Android_CMake_Mac_Import} _PATH_ ${ANDROID_SDK}/cmake)
-elseif(LINUX_DL)
-	dk_import	(${Android_CMake_Linux_Import} _PATH_ ${ANDROID_SDK}/cmake)
+	dk_import	(${android-cmake_Mac_Import} 		INSTALL_PATH ${android-sdk}/cmake)
+else()
+	dk_import	(${android-cmake_Linux_Import} 		INSTALL_PATH ${android-sdk}/cmake)
 endif()
 
 

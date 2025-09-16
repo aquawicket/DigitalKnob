@@ -18,8 +18,8 @@ include_guard()
 
 
 dk_depend		(android-sdk)
-dk_mkdir		(${ANDROID_SDK}/sources)
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${ANDROID_SOURCES_DL} _PATH_ ${ANDROID_SDK}/sources/android-${ANDROID_SOURCES_VERSION})
+#dk_mkdir		(${ANDROID_SDK}/sources)
+dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import		(${android-sources_Import} INSTALL_PATH ${android-sdk}/sources/android-${android-sources_Version})
 
 
