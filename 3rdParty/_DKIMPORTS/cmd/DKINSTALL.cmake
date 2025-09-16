@@ -30,24 +30,20 @@ endif()
 
 if(NOT EXISTS "${cmd_exe}")
 	set(cmd_exe "$ENV{ComSpec}")
-	string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
-	set(cmd_exe "${cmd_exe}" CACHE INTERNAL "")  # make variable global
-	dk_debug("ComSpec: cmd_exe = ${cmd_exe}")
 endif()
 
 if(NOT EXISTS "${cmd_exe}")
 	dk_findProgram(cmd_exe cmd.exe)
-	string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
-	set(cmd_exe "${cmd_exe}" CACHE INTERNAL "")  # make variable global
-	dk_debug("dk_findProgram: cmd_exe = ${cmd_exe}")
 endif()
 
 if(NOT EXISTS "${cmd_exe}")
-	set(cmd_exe "cmd.exe" CACHE INTERNAL "")
-	set(cmd_exe "${cmd_exe}" CACHE INTERNAL "")  # make variable global
-	dk_debug("cmd_exe = ${cmd_exe}")
+	set(cmd_exe "cmd.exe")
 endif()
 
 if(NOT EXISTS "${cmd_exe}")
 	dk_error("cmd_exe:${cmd_exe} is invalid")
 endif()
+
+#string(REPLACE "\\" "/" cmd_exe "${cmd_exe}")
+set(cmd_exe "${cmd_exe}" CACHE INTERNAL "")  # make variable global
+dk_debug("cmd_exe = ${cmd_exe}")

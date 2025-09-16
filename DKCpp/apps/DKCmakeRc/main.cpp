@@ -23,15 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-/*
-#if HAVE_DKSDLWindow
-	#if !IOS && !ANDROID
-		#define SDL_MAIN_HANDLED
-	#else
-		#include "SDL_main.h"
-	#endif
-#endif
-*/
+
 #include "DK/DKApp.h"
 #include "assets.h"
 #include <cmrc/cmrc.hpp>
@@ -40,16 +32,7 @@
 const char* BUILD_DATE = __DATE__;
 const char* BUILD_TIME = __TIME__;
 
-
 int main(int argc, char** argv){
-	/*
-	#if HAVE_DKSDLWindow
-		#if !IOS && !EMSCRIPTEN
-			SDL_SetMainReady();
-		#endif
-	#endif
-	*/
-
 
 	CMRC_INIT(hello);
 	auto data = cmrc::open("hello.txt");

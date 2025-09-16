@@ -95,15 +95,15 @@ if(Raspberry)
 endif()
 
 
-#dk_addTarget(sdl SDL2static)	# TODO
+#dk_addTarget(sdl SDL2-static)	# TODO
 #dk_addTarget(sdl SDL2main)		# TODO
-set(SDL2static 1)
-if(Ios OR Iossim)
-	set(SDL2main   1)
+set(sdl_SDL2-static 1)
+if(Ios OR Iossim OR Android)
+	set(sdl_SDL2main   1)
 endif()
 
 ########### sdl_SDL2static ##########
-if(sdl_SDL2static)
+if(sdl_SDL2-static)
 	if(MSVC)
 			dk_libDebug		(${sdl_Debug_Dir}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG		SDL2_LIBRARY)
 			dk_libRelease	(${sdl_Release_Dir}/SDL2-static.lib		SDL2_LIBRARY_RELEASE	SDL2_LIBRARY)
@@ -157,7 +157,7 @@ if(MSVC)
 else()		
 	dk_set(sdl_CMAKE
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_CXX_FLAGS=-${SDL2_INCLUDE_DIR}" 
+		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}" 
 		-DSDL2_DIR=${sdl_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY}
@@ -165,11 +165,13 @@ else()
 		-DSDL2_LIBRARY_DEBUG=${SDL2_LIBRARY_DEBUG}
 		-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE})
 endif()
-	
-dk_set(sdlmain_CMAKE
-	-DSDL2MAIN_LIBRARY=${SDL2MAIN_LIBRARY}
-	-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
-	-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
+
+if(sdl_SDL2main)	
+	dk_set(sdlmain_CMAKE
+		-DSDL2MAIN_LIBRARY=${SDL2MAIN_LIBRARY}
+		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
+		-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
+endif()
 
 
 
@@ -182,7 +184,7 @@ if(Android OR Emscripten OR Mac)	# Remove some flags for some builds
 endif()
 
 if(Android_Arm32)
-	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC )
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC)
 elseif(Android_Arm64)
 	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" ${ICONV_CMAKE})
 elseif(Emscripten)
@@ -201,9 +203,9 @@ endif()
 
 
 ### COMPILE ###
-if(SDL_SDL2static)
+if(sdl_SDL2-static)
 	dk_build(${sdl} SDL2-static)
 endif()
-if(SDL_SDL2main)
+if(sdl_SDL2main)
 	dk_build(${sdl} SDL2main)
 endif()

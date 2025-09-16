@@ -30,7 +30,7 @@
 
 # if defined(__has_include) && __has_include("DKPlugins.h") // Is as DKAPP
 #	if __has_include("SDL_main.h")
-#		if !IOS && !ANDROID
+#		if !IOS// && !ANDROID
 #			define SDL_MAIN_HANDLED
 #		else
 #			include "SDL_main.h"

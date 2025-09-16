@@ -40,17 +40,17 @@ function(dk_depend Plugin) #target
 		dk_notice("${Plugin} IS DISABLED")
 		return()
 	endif()
-	
-	set(PLUGIN_Stack "$ENV{PLUGIN_Stack}")		### copy the env variable to local variable
-	if(Plugin IN_LIST PLUGIN_Stack)
-		message("${Plugin} already in PLUGIN_Stack")
-		return()
-	endif()
-	
+
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	
 	###### Push Plugin to the PLUGIN_STACK ######
+	set(PLUGIN_Stack "$ENV{PLUGIN_Stack}")		### copy the env variable to local variable
+	if(Plugin IN_LIST PLUGIN_Stack)
+		dk_notice("${Plugin} already in PLUGIN_Stack")
+		return()
+	endif()
 	dk_envList(PLUGIN PUSH "${Plugin}")
+	
 	dk_echo("\n")
 	dk_echo("\n")
 	dk_debug(">>>>>##############################################################################>>>>>")
