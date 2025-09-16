@@ -81,14 +81,14 @@ function(DKINSTALL)
 		
 		### from dk_findProgram in Msys2 ###
 		if(NOT EXISTS "${bash_exe}")
-			dk_validate(msys2 "dk_depend(msys2)")
+			dk_depend(msys2)
 			dk_findProgram(MSYS2_bash_exe bash "${msys2}/usr/bin")
 			set(bash_exe ${msys2_bash_exe})
 		endif()
 		
 		### from dk_findProgram in git ###
 		if(NOT EXISTS "${bash_exe}")
-			dk_validate(git "dk_depend(git)")
+			dk_depend(git)
 			dk_findProgram(git_bash_exe bash "${git}/bin")
 			set(bash_exe ${git_bash_exe})
 		endif()

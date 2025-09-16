@@ -21,13 +21,11 @@ dk_validate(Target_Tuple	"dk_Target_Tuple()")
 
 
 if(MSYSTEM)
-#	dk_validate(msys2 "dk_depend(msys2)")
 	dk_depend(msys2)
 endif()
 dk_installPackage(clang)
 
 if(Android)
-	#dk_validate(android-ndk 	"dk_depend(android-ndk)")
 	dk_depend(android-ndk)
 	dk_set(CLANG_C_COMPILER   	"${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang${exe}")
 	dk_set(CLANG_CXX_COMPILER  	"${android-ndk}/toolchains/llvm/prebuilt/${Android_Host_Tag}/bin/clang++${exe}")

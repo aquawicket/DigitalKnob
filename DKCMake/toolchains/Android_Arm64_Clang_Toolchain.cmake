@@ -4,8 +4,7 @@ message(STATUS "################################################################
 # https://android.googlesource.com/platform/ndk/+/master/docs/BuildSystemMaintainers.md
 
 
-dk_validate(android-ndk					"dk_depend(android-ndk)")
-dk_validate(Android_Host_Tag			"dk_depend(android-ndk)")
+dk_depend(android-ndk)
 dk_set(ANDROID_ABI						arm64-v8a)
 dk_set(ANDROID_CPP_FEATURES				"rtti exceptions")
 dk_set(ANDROID_STL						c++_static)
@@ -16,7 +15,7 @@ dk_set(CMAKE_TOOLCHAIN_FILE				"${android-ndk}/build/cmake/android.toolchain.cma
 dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 dk_assertVar(Android_Host_Tag)
 if(Windows_Host)
-	#dk_validate(msys2_MAKE_PROGRAM		"dk_depend(msys2)")
+	dk_depend(msys2)
 	#dk_set(CMAKE_MAKE_PROGRAM			"${msys2_bin}/make.exe")
 	dk_set(CMAKE_MAKE_PROGRAM			"${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
 else()

@@ -22,7 +22,7 @@ function(dk_gitCheckRemote)
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	if(EXISTS "$ENV{DKBRANCH_DIR}/.git")
 		
-		dk_validate(git_exe "dk_depend(git)")
+		dk_depend(git)
 
 		### git remote update
 		dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} remote update)

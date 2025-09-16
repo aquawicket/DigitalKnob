@@ -26,7 +26,7 @@ include_guard()
 
 if(Android)
 	dk_depend(android-ndk)	#version 21e or newer required
-	dk_validate(msys2 "dk_depend(msys2)")
+	dk_depend(msys2)
 endif()
 
 #dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")

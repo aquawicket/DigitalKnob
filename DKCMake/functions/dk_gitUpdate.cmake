@@ -29,7 +29,7 @@ function(dk_gitUpdate)
 		set(branch "Development")									#DEFAULT
 	endif()
 	
-	dk_validate(git_exe "dk_depend(git)")
+	dk_depend(git)
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	
 	if(NOT EXISTS "$ENV{DKBRANCH_DIR}/.git")

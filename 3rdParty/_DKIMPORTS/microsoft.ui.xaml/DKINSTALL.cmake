@@ -15,5 +15,5 @@ include_guard()
 ############ microsoft.ui.xaml ############
 # https://www.nuget.org/packages/Microsoft.UI.Xaml
 
-dk_validate(NUGET_EXE "dk_depend(nuget)")
+dk_depend(nuget)
 execute_process(COMMAND ${NUGET_EXE} install Microsoft.UI.Xaml)

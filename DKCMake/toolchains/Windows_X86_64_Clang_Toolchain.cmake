@@ -6,7 +6,7 @@ if(NOT Windows_Host)
 	return()
 endif()
 
-dk_validate(msys2 "dk_depend(msys2)")
+dk_depend(msys2)
 dk_depend(clang)
 
 dk_set(MSYSTEM 						CLANG64)

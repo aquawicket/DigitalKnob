@@ -36,7 +36,7 @@ function(dk_installPackage)
 #	endif()
 #	
 	dk_info("dk_installPackage(): installing ${package}. . .")
-	dk_if(Windows_Host "dk_depend(msys2)")
+	dk_depend(msys2)
 	set(ENV{DKSHELL} sh) # HACK
 
 	### Termux ###
@@ -130,7 +130,7 @@ function(dk_installPackage)
 	endif()
 
 	### Msys2 ###
-	dk_validate(PACMAN "dk_depend(pacman)")
+	dk_depend(pacman)
 	if(pacman_exe)
 		dk_assertPath(pacman_exe)
 		if(EXISTS "${msys2_CacheDir}/db.lck")

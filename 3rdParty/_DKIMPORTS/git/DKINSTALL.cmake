@@ -78,7 +78,7 @@ dk_return()
 
 
 #if(MSYSTEM)
-#	dk_validate(msys2 "dk_depend(msys2)")
+#	dk_depend(msys2)
 #	if(NOT EXISTS ${msys2})
 #		dk_fatal("MSYS2:${msys2} does not exist")
 #	endif()

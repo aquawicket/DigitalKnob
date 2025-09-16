@@ -23,7 +23,7 @@ include_guard()
 function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(2)
 	
-	dk_validate(git_exe "dk_depend(git)") # dk_import will push to the PLUGIN stack
+	dk_depend(git) # git will be pushed to the PLUGIN stack
 	
 	dk_unset(COMMAND_ARGS)
 	dk_append(COMMAND_ARGS ${git_exe})

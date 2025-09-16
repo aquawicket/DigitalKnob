@@ -19,7 +19,7 @@ include_guard()
 function(dk_gitClean)
 	dk_debugFunc(0)
 	
-	dk_validate(git_exe "dk_depend(git)")
+	dk_depend(git)
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	dk_exec("${git_exe}" -C $ENV{DKBRANCH_DIR} clean -fdx)
 endfunction()

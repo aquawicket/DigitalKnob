@@ -24,7 +24,7 @@ function(dk_gitCommit)
 	dk_info("Please enter some details about this commit, Then press ENTER.")
 	dk_keyboardInput(commit_msg)
 	
-	dk_validate(git_exe "dk_depend(git)")
+	dk_depend(git)
 	dk_validate(ENV{DKBRANCH_DIR} "dk_DKBRANCH_DIR()")
 	#dk_chdir("$ENV{DKBRANCH_DIR}")
 	

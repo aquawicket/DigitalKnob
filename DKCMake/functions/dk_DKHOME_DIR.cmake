@@ -101,7 +101,7 @@ endfunction()
 
 
 #	###### cmd_exe ######
-#	dk_validate(cmd_exe "dk_depend(cmd)")
+#	dk_depend(cmd)
 #	if(NOT EXISTS "${cmd_exe}")
 #		dk_set(cmd_exe "/mnt/c/Windows/System32/cmd.exe")
 #	endif()

@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 #if(MSYSTEM)
-	dk_validate(msys2 "dk_depend(msys2)")
+	dk_depend(msys2)
 #	set(libgcc_Version "14.2.0")
 	
 	if(Windows_X86_Clang)
