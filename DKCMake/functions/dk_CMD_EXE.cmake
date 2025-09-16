@@ -17,13 +17,13 @@ include_guard()
 #
 #
 function(dk_CMD_EXE)
-	dk_warning("dk_CMD_EXE is deprecated.  Use dk_depend(cmd)")
+	dk_fatal("dk_CMD_EXE is deprecated.  Use dk_depend(cmd)")
 	if(NOT EXISTS "${cmd_exe}")
 		dk_depend(cmd)
 	endif()
 	return()
 	
-	#########################################
+#########################################
 	dk_debugFunc()
 	###### SET ######
 	if(ARGV)

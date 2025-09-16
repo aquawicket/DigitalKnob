@@ -176,18 +176,18 @@ DK(){
 # dkreloadWithBash()
 #
 dkreloadWithBash() {
-	[ -e "${BASH_EXE}" ] && return 0;
+	[ -e "${bash_exe}" ] && return 0;
 	
 	echo "dkreloadWithBash"
 	(command -v bash) &>/dev/null || dk_installPackage bash || (echo "ERROR: dk_installPackage bash failed"; exit ${BASH_LINENO[0]};)
-	(command -v bash) &>/dev/null && export BASH_EXE=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
-	echo "Reloading ${DKSCRIPT_PATH} with ${BASH_EXE} . . .";
+	(command -v bash) &>/dev/null && export bash_exe=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
+	echo "Reloading ${DKSCRIPT_PATH} with ${bash_exe} . . .";
 	unset DK_LOADED;
 	dk_call dk_pause;
 	
-	[ -e "${DKSCRIPT_PATH}" ] && exec "${BASH_EXE}" "${DKSCRIPT_PATH}"
+	[ -e "${DKSCRIPT_PATH}" ] && exec "${bash_exe}" "${DKSCRIPT_PATH}"
 	#(echo "ERROR: 'dkreloadWithBash' failed"; exit ${BASH_LINENO[0]};)
-	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}';
+	#exec env -i HOME="$HOME" PATH="$PATH" bash_exe="${bash_exe}" ${bash_exe} -l -c '${0}';
 }
 
 

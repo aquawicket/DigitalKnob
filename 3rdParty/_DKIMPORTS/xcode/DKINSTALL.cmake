@@ -20,7 +20,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Mac_Host)
-	dk_undepend(xcode)
+	dk_disable(xcode)
 	dk_return()
 endif()
 

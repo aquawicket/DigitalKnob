@@ -15,7 +15,7 @@ include_guard()
 ###### visualstudio ######
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 #if(NOT Windows_Host)
-#	dk_undepend(visualstudio)
+#	dk_disable(visualstudio)
 #	dk_return()
 #endif()
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")

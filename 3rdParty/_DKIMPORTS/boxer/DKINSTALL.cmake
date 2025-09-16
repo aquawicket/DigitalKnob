@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Android OR Raspberry)
-	dk_undepend(boxer)
+	dk_disable(boxer)
 	dk_return()
 endif()
 

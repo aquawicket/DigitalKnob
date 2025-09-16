@@ -34,7 +34,7 @@ include_guard()
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 #if(Android OR IOS OR Iossim OR Mac)
-#	dk_undepend(upx)
+#	dk_disable(upx)
 #	dk_return()
 #endif()
 

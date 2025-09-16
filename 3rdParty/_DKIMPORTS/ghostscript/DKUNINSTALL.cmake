@@ -18,7 +18,7 @@ include_guard()
 # https://silentinstallhq.com/ghostscript-silent-install-how-to-guide
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Windows_Host)
-	dk_undepend(ghostscript)
+	dk_disable(ghostscript)
 	dk_return()
 endif()
 

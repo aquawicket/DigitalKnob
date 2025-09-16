@@ -19,7 +19,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows_Host)
-	dk_undepend(doxygen)
+	dk_disable(doxygen)
 	dk_return()
 endif()
 

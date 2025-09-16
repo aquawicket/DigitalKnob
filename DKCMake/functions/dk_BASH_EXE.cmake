@@ -17,6 +17,13 @@ include_guard()
 #
 #
 function(dk_bash_exe)
+	dk_warning("dk_BASH_EXE is deprecated.  Use dk_depend(bash)")
+	if(NOT EXISTS "${bash_exe}")
+		dk_depend(bash)
+	endif()
+	return()
+########################################	
+
 	dk_debugFunc()
 
 	###### SET ######
@@ -36,8 +43,8 @@ function(dk_bash_exe)
 
 		### from bash_exe environment variable ###
 		if(NOT EXISTS "${bash_exe}")
-			dk_set(cmd_exe "$ENV{bash_exe}")
-			dk_error("dk_BASH_EXE():39  cmd_exe should be bash_exe")
+			dk_set(bash_exe "$ENV{bash_exe}")
+			#dk_error("dk_BASH_EXE():39  cmd_exe should be bash_exe")
 		endif()
 		
 		### from BASH environment variable ###
@@ -64,6 +71,13 @@ function(dk_bash_exe)
 			dk_validate(msys2 "dk_depend(msys2)")
 			dk_findProgram(MSYS2_bash_exe bash "${msys2}/usr/bin")
 			set(bash_exe ${msys2_bash_exe})
+		endif()
+		
+		### from dk_findProgram in git ###
+		if(NOT EXISTS "${bash_exe}")
+			dk_validate(git "dk_depend(git)")
+			dk_findProgram(git_bash_exe bash "${git}/bin")
+			set(bash_exe ${git_bash_exe})
 		endif()
 	endif()
 	

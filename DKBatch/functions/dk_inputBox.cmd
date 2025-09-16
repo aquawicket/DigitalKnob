@@ -13,7 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 
-	set "CMD_EXE=cmd.exe"
+	set "cmd_exe=cmd.exe"
 	set "MSHTA_EXE=mshta.exe"
 
 	for /f "tokens=* delims=" %%A in ('echo %%input%%^|%MSHTA_EXE% "%~f0"') do (

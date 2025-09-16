@@ -10,10 +10,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 ::#
 :dk_CMD_EXE
+	%dk_call% dk_warning "dk_CMD_EXE is deprecated.  use %%dk_call%% dk_depend cmake"
+	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
+	%return%
+	
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if EXIST "%CMD_EXE%" (%return%)
+	if EXIST "%cmd_exe%" (%return%)
 
 	::###### FIX ComSpec system environment varioble case ######
 	for %%A in ("%ComSpec%") do (
@@ -23,13 +27,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 	)
 	
-	set "CMD_EXE=%ComSpec:\=/%"
-	if NOT EXIST "%CMD_EXE%" (%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%")
+	set "cmd_exe=%ComSpec:\=/%"
+	if NOT EXIST "%cmd_exe%" (%dk_call% dk_findProgram cmd_exe "cmd.exe" "%windir%")
 	
-	%dk_call% dk_assertPath "%CMD_EXE:\=/%"
+	%dk_call% dk_assertPath "%cmd_exe:\=/%"
 
 	endlocal & (
-		set "CMD_EXE=%CMD_EXE:\=/%"
+		set "cmd_exe=%cmd_exe:\=/%"
 	)
 %endfunction%
 
@@ -45,5 +49,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_CMD_EXE
-	%dk_call% dk_printVar CMD_EXE
+	%dk_call% dk_printVar cmd_exe
 %endfunction%

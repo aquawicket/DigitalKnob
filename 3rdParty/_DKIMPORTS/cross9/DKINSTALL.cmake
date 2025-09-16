@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if((NOT Windows_Host) OR (NOT Cosmopolitan))
-	dk_undepend(cross9)
+	dk_disable(cross9)
 	dk_return()
 endif()
 

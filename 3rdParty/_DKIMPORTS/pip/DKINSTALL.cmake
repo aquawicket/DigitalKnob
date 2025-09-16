@@ -15,6 +15,6 @@ include_guard()
 ############ pip ############
 # https://docs.python.org/3/library/ensurepip.html#module-ensurepip
 
-dk_validate(python3 "dk_depend(python3)")
+dk_depend(python3)
 
 execute_process(COMMAND ${python3}/python.exe -m ensurepip --upgrade)

@@ -15,7 +15,7 @@ include_guard()
 ############ libgtk-3-dev ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libgtk-3-dev)
+	dk_disable(libgtk-3-dev)
 	dk_return()
 endif()
 

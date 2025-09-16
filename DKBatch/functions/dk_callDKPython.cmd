@@ -29,12 +29,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_validate PYTHON3_EXE 	"%dk_call% dk_depend python3"
-	%dk_call% dk_validate CMD_EXE 		"%dk_call% dk_CMD_EXE.cmd"
+	%dk_call% dk_validate cmd_exe 		"%dk_call% dk_CMD_EXE.cmd"
 	
 	::set DKPYTHON_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKPYTHON_FUNCTIONS_DIR%/DK.py; %DKPYTHON_FUNCTIONS_DIR%/%1.py; %ALL_BUT_FIRST%
 
 	::############ DKPython function call ############
-	set DKPYTHON_COMMAND=%CMD_EXE% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %dk_allButFirstArgs%
+	set DKPYTHON_COMMAND=%cmd_exe% /V:ON /c call "%PYTHON3_EXE:\=/%" "%DKPYTHON_FUNCTIONS_DIR:\=/%/%1.py" %dk_allButFirstArgs%
 	%dk_call% dk_exec %DKPYTHON_COMMAND%
 	endlocal & (
 		set "dk_callDKPython=%dk_exec%"

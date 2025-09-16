@@ -21,7 +21,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libgcc)
-dk_validate(msys2 "dk_depend(msys2)")
+dk_depend(msys2)
 dk_depend(ogg)
 
 ### IMPORT ###

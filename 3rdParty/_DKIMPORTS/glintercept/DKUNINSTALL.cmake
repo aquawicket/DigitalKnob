@@ -19,7 +19,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 # https://github.com/dtrebilco/glintercept/releases/download/1.3.4/GLIntercept_1_3_4.exe
 
 if(NOT Windows_Host)
-	dk_undepend(glintercept)
+	dk_disable(glintercept)
 	dk_return()
 endif()
 

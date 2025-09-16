@@ -15,7 +15,7 @@ message("cygpath/DKINSTALL.cmake")
 dk_validate(Host_Os "dk_Host_Os()")
 ############ cygpath ############
 if(NOT Windows_Host)
-	dk_undepend(cygpath)
+	dk_disable(cygpath)
 	dk_return()
 endif()
 
@@ -26,7 +26,7 @@ endif()
 
 ###### GET CYGPATH_EXE ######
 if(NOT EXISTS "${CYGPATH_EXE}")
-	dk_validate(msys2 "dk_depend(msys2)")
+	dk_depend(msys2)
 	dk_findProgram(CYGPATH_EXE cygpath.exe "${msys2}/usr/bin")
 endif()
 

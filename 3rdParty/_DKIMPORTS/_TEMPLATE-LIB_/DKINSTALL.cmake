@@ -1,6 +1,6 @@
 ########################################################################################
 # Remove these lines and rename all instaces of [LIBNAME] to the name of your library
-dk_undepend(_TEMPLATE-LIB_)
+dk_disable(_TEMPLATE-LIB_)
 dk_return()
 ########################################################################################
 

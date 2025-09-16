@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 if(NOT Windows)
-	dk_undepend(setupapi)
+	dk_disable(setupapi)
 	dk_return()
 endif()
 

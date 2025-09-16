@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/nowres/conio-for-linux.git
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT UNIX_HOST)
-	dk_undepend(conio-for-linux)
+	dk_disable(conio-for-linux)
 	dk_return()
 endif()
 

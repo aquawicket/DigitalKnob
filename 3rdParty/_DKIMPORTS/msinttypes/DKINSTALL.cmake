@@ -14,7 +14,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Windows_Host)
-	dk_undepend(msinttypes)
+	dk_disable(msinttypes)
 	dk_return()
 endif()
 ## https://raw.githubusercontent.com/SummersEpsilon/msinttypes/master/msinttypes-r26.zip

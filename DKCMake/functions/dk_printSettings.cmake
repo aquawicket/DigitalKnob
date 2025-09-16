@@ -37,7 +37,7 @@ function(dk_printSettings)
 	#dk_getCmakeCommandLine(CMAKE_COMMAND_LINE)
 	dk_buildLog(CMAKE_COMMAND_LINE)
 	dk_buildLog(CMAKE_COMMAND)
-	dk_buildLog(CMAKE_EXE)
+	dk_buildLog(cmake_exe)
 	dk_buildLog(CMAKE_VERSION)
 	
 	dk_buildLog("#################  HOST VARIABLES  ################")

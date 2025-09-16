@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-#dk_undepend(java)
+#dk_disable(java)
 #dk_return() ################ disabled for now
 
 ############ java ############

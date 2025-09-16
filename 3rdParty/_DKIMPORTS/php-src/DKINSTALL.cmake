@@ -20,7 +20,7 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(NOT Windows_Host)
-	dk_undepend(php-src)
+	dk_disable(php-src)
 	dk_return()
 endif()
 

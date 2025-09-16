@@ -14,7 +14,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libxtst-dev)
+	dk_disable(libxtst-dev)
 	dk_return()
 endif()
 

@@ -16,7 +16,7 @@ include_guard()
 # https://www.mesa3d.org
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(mesa)
+	dk_disable(mesa)
 	dk_return()
 endif()
 

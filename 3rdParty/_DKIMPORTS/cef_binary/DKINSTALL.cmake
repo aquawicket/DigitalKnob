@@ -34,10 +34,10 @@ if(Windows)
 endif()
 
 ###### IMPORT ######
-dk_depend			(visualstudio)
-dk_depend			(appkit)
-dk_depend			(build-essential)
-dk_depend			(libgtk2.0-dev)
+dk_depend(visualstudio)
+dk_depend(appkit)
+dk_depend(build-essential)
+dk_depend(libgtk2.0-dev)
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_set(CEF_BINARY_VERSION	3.2704.1414.g185cd6c)							# Oldest			

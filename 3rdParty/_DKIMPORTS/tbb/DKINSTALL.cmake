@@ -20,9 +20,7 @@ dk_set(${Target_Tuple} 		1)
 
 ##dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(MSYSTEM)
-	if(NOT DEFINED MSYS2)
-		dk_depend(msys2)
-	endif()
+	dk_depend(msys2)
 endif()
 dk_installPackage(tbb)
 

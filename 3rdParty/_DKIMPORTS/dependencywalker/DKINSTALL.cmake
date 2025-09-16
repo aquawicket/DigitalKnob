@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Windows_Host)
-	dk_undepend(dependencywalker)
+	dk_disable(dependencywalker)
 	dk_return()
 endif()
 

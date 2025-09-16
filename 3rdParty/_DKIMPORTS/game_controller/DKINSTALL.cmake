@@ -16,7 +16,7 @@ include_guard()
 # https://developer.apple.com/documentation/gamecontroller?language=objc
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
-	dk_undepend(game_controller)
+	dk_disable(game_controller)
 	dk_return()
 endif()
 

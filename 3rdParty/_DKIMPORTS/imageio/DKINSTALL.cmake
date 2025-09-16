@@ -16,7 +16,7 @@ include_guard()
 # https://developer.apple.com/documentation/imageio
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Mac_Host)
-	dk_undepend(imageio)
+	dk_disable(imageio)
 	dk_return()
 endif()
 

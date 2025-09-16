@@ -3,13 +3,13 @@
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
-	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')								&& echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')								&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
-	(command -v 'bash' 1>/dev/null)		&& export BASH_EXE=$(command -v bash)										&& echo "BASH_EXE = ${BASH_EXE}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
 	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/DigitalKnob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
 	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
-	[ -e "${BASH_EXE}" ]				&& exec "${BASH_EXE}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
 fi
 ##################################################################################
 
@@ -44,14 +44,14 @@ DKINSTALL() {
 		dk_call dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-		[ "${Host_Os}" = "Windows" ]   && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${Host_Os}" = "Mac" ]       && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${Host_Os}" = "Linux" ]     && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${Host_Os}" = "Raspberry" ] && export CMAKE_EXE=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake for this OS"
-		dk_call dk_printVar CMAKE_EXE
+		[ "${Host_Os}" = "Windows" ]   && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ -z ${cmake_exe} ]            && dk_call dk_error "no cmake for this OS"
+		dk_call dk_printVar cmake_exe
 		
-		dk_call dk_pathExists "${CMAKE_EXE}" && return $(true)
+		dk_call dk_pathExists "${cmake_exe}" && return $(true)
 
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
@@ -62,20 +62,20 @@ DKINSTALL() {
 		#dk_call dk_rename "${DKTOOLS_DIR}/${cmake_Import_NAME}" "${CMAKE_FOLDER}"
 		#echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
 		dk_call dk_smartExtract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
-		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake.exe"; return -1
+		dk_call dk_pathExists "${cmake_exe}" || dk_call dk_error "cannot find cmake.exe"; return -1
 
 	else	# Linux package
 		dk_call dk_info "Installing CMake from package managers"
 		
-		$(command -v cmake) && CMAKE_EXE=$(command -v cmake)
-		dk_call dk_realpath ${CMAKE_EXE-} CMAKE_EXE
-		dk_call dk_printVar CMAKE_EXE
+		$(command -v cmake) && cmake_exe=$(command -v cmake)
+		dk_call dk_realpath ${cmake_exe-} cmake_exe
+		dk_call dk_printVar cmake_exe
 		if ! dk_call dk_commandExists cmake; then
 			dk_call dk_installPackage cmake
 		fi	
-		CMAKE_EXE=$(command -v cmake)
-		dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
-		dk_call dk_printVar CMAKE_EXE
+		cmake_exe=$(command -v cmake)
+		dk_call dk_realpath ${cmake_exe} cmake_exe
+		dk_call dk_printVar cmake_exe
 	fi
 }
 

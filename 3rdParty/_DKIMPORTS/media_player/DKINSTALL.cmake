@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
-	dk_undepend(media_player)
+	dk_disable(media_player)
 	dk_return()
 endif()
 

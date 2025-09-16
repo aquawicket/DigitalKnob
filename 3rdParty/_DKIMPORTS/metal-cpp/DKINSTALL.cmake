@@ -14,7 +14,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Mac_Host)
-	dk_undepend(metal-cpp)
+	dk_disable(metal-cpp)
 	dk_return()
 endif()
 

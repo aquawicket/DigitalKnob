@@ -17,7 +17,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # EXAMPLE Usage:   $ locate libx11.a
 
 if(NOT UNIX_HOST OR Android)
-	dk_undepend(mlocate)
+	dk_disable(mlocate)
 	dk_return()
 endif()
 

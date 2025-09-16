@@ -33,78 +33,86 @@ include_guard()
 #	Windows 	wsl_debian	bash	Linux
 #	Windows 	wsl_ubuntu	bash	Linux
 
-#if(EXISTS "${bash_exe}")
-#	dk_return()
-#endif()
 
-#dk_validate(Target_Tuple "dk_Target_Tuple()")
+set(bash_DEFAULT "GIT") #GIT, MSYS2, WSL
+####################################################################
+# DKINSTALL()
+#
+function(DKINSTALL)
+	###### SET ######
+	if(ARGV)
+		dk_set(bash_exe "${ARGV0}")
+			
+	###### GET ######
+	elseif(DEFINED ENV{bash_exe})	
+		dk_set(bash_exe "$ENV{bash_exe}")
 
-### shell command bash ###
-#execute_process(COMMAND command -v bash OUTPUT_VARIABLE SHELL_BASH)
-#if(EXISTS ${SHELL_BASH})
-#	dk_printVar(SHELL_BASH)
-#	dk_set(bash_exe "${SHELL_BASH}")
-#	dk_printVar(bash_exe)
-#endif()
+	else()
+		### Already found ###
+		if(EXISTS "${bash_exe}")
+			dk_debug("bash_exe:${bash_exe} already set")
+			return()
+		endif()
 
-### environment variable bash ###
-#if(DEFINED ENV{BASH})
-#	if(EXISTS "$ENV{BASH}")
-#		dk_printVar(ENV{BASH})
-#		if(NOT bash_exe)
-#			dk_set(bash_exe "$ENV{BASH}")
-#			dk_printVar(bash_exe)
-#		endif()
-#	endif()
-#endif()
+		### from bash_exe environment variable ###
+		if(NOT EXISTS "${bash_exe}")
+			dk_set(bash_exe "$ENV{bash_exe}")
+			#dk_error("dk_BASH_EXE():39  cmd_exe should be bash_exe")
+		endif()
 
-### Msys2 bash ###
-#if(MSYSTEM)
-#	dk_validate(msys2 "dk_depend(msys2)")
-#	dk_findProgram(MSYS2_bash_exe bash.exe "${msys2}/usr/bin")
-#	if(EXISTS "${msys2_bash_exe}")
-#		dk_printVar(MSYS2_bash_exe)
-#		if(NOT bash_exe)
-#			dk_set(bash_exe ${msys2_bash_exe})
-#			dk_printVar(bash_exe)
-#		endif()
-#	endif()
-#endif()
+		### from BASH environment variable ###
+		if(NOT EXISTS "${bash_exe}")
+			if("$ENV{BASH}" MATCHES "/bash")
+				set(bash_exe "$ENV{BASH}")
+			endif()
+		endif()
 
+		### from SHELL environment variable ###
+		if(NOT EXISTS "${bash_exe}")
+			if("$ENV{SHELL}" MATCHES "/bash")
+				set(bash_exe "$ENV{SHELL}")
+			endif()
+		endif()
 
-## We should be able to find bash while inside a WSL instance
-## Using bash outside of WSL will cause problems
-### WSL bash ###
-#dk_findProgram(WSL_bash_exe bash.exe "$ENV{SystemDrive}/Windows/System32")
-#if(EXISTS "${WSL_bash_exe}")
-#	dk_printVar(WSL_bash_exe)
-#	if(NOT bash_exe)
-#		dk_set(bash_exe ${WSL_bash_exe})
-#		dk_printVar(bash_exe)
-#	endif()
-#endif()
-
-
-### Git bash ###
-dk_validate(git "dk_depend(git)")
-dk_findProgram(git_bash_exe bash.exe "${git}/bin")
-if(EXISTS "${git_bash_exe}")
-	dk_debug("git_bash_exe = ${git_bash_exe}")
-	if(NOT bash_exe)
-		dk_set(bash_exe ${git_bash_exe})
-		dk_debug("bash_exe = ${bash_exe}")
+		### From command -v ###
+		if(NOT EXISTS "${bash_exe}")
+			execute_process(COMMAND command -v bash OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+		endif()
+		
+		### from dk_findProgram in Msys2 ###
+		if(NOT EXISTS "${bash_exe}")
+			dk_validate(msys2 "dk_depend(msys2)")
+			dk_findProgram(MSYS2_bash_exe bash "${msys2}/usr/bin")
+			set(bash_exe ${msys2_bash_exe})
+		endif()
+		
+		### from dk_findProgram in git ###
+		if(NOT EXISTS "${bash_exe}")
+			dk_validate(git "dk_depend(git)")
+			dk_findProgram(git_bash_exe bash "${git}/bin")
+			set(bash_exe ${git_bash_exe})
+		endif()
 	endif()
-endif()
+		
+	### FINALIZE ###
+	#file(TO_CMAKE_PATH "${bash_exe}" bash_exe)
+	if(NOT EXISTS "${bash_exe}")
+		dk_warning("bash_exe:${bash_exe} not found")
+	else()
+		dk_set(bash_exe "${bash_exe}") # Globalize the variable
+	endif()
+
+	dk_debug("bash_exe = ${bash_exe}")
+endfunction()
 
 
-#if(NOT bash_exe)
-#	dk_installPackage(bash)
-#endif()
-
-#if(NOT bash_exe)
-#	dk_warning("bash_exe is not found. setting bash_exe to 'bash'")
-#	dk_set(bash_exe bash)
-#endif()
 
 
-#execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc(0)
+	
+	DKINSTALL()
+	dk_debug("bash_exe = ${bash_exe}")
+endfunction()

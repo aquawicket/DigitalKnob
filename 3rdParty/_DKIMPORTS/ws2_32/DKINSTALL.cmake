@@ -17,7 +17,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows)
-	dk_undepend(ws2_32)
+	dk_disable(ws2_32)
 	dk_return()
 endif()
 

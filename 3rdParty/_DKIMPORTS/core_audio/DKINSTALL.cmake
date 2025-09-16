@@ -15,7 +15,7 @@ include_guard()
 ############ core_audio ############
 # https://developer.apple.com/library/archive/documentation/MusicAudio/Conceptual/CoreAudioOverview/WhatisCoreAudio/WhatisCoreAudio.html
 if(NOT Apple)
-	dk_undepend(core_audio)
+	dk_disable(core_audio)
 	dk_return()
 endif()
 

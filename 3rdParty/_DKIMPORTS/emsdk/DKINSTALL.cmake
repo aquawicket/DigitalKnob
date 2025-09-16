@@ -39,18 +39,17 @@ dk_assertPath(${EMSDK})
 
 # Download and install the latest SDK tools.
 if(Windows_Host)
-	dk_validate(cmd_exe "dk_depend(cmd)")
-	dk_validate(CMAKE_EXE "dk_depend(cmake)")
-	dk_nativePath(${cmd_exe} cmd_exe)
-	dk_nativePath(${CMAKE_EXE} CMAKE_EXE)
-	execute_process(COMMAND ${cmd_exe} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)
+	dk_depend(cmd)
+	dk_depend(cmake)
+	dk_nativePath(${cmake_exe} cmake_exe)
+	execute_process(COMMAND ${cmd_exe} /c ${cmake_exe} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)
 else()
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk"      install latest 				COMMAND_ECHO STDOUT)
 endif()
 
 # Make the "latest" SDK "active" for the current user. (writes .emscripten file)
 if(Windows_Host)
-	execute_process(COMMAND ${cmd_exe} /c ${CMAKE_EXE} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
+	execute_process(COMMAND ${cmd_exe} /c ${cmake_exe} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat" activate latest 				COMMAND_ECHO STDOUT)  # --permanent
 else()
 	execute_process(COMMAND                                         					"${EMSDK}/emsdk"     activate latest 				COMMAND_ECHO STDOUT)
 endif()
@@ -94,7 +93,7 @@ dk_set				(EMSDK_AR 					"${EMSDK}/upstream/emscripten/emar${bat}")				# Name of
 dk_assertPath		(EMSDK_AR)
 
 #if(Windows_Host)
-#	dk_validate			(MSYS2 "dk_depend(msys2)")
+#	dk_depend(msys2)
 #	dk_installPackage	(make)
 #	dk_findProgram		(EMSDK_MAKE_PROGRAM mingw32-make.exe "${msys2}/usr/bin")
 #	#dk_set				(EMSDK_MAKE_PROGRAM	"${EMSDK}/upstream/emscripten/emmake${bat}")

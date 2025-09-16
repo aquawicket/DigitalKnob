@@ -17,7 +17,7 @@ include_guard()
 # https://out7.hex-rays.com/files/idafree84_windows.exe
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Windows_Host)
-	dk_undepend(ida)
+	dk_disable(ida)
 	dk_return()
 endif()
 

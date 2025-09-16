@@ -23,9 +23,12 @@ include_guard()
 #   Which says, "if ZLIB variable is not set,  call  3rdParty/_DKIMPORTS/zlib/DKINSTALL.cmake
 #   to fill fill ZLIB with the path zlib is installed to.
 #
-function(dk_depend Plugin) #target
+function(dk_depend Plugin)
 	dk_debugFunc(1 2)
-	message("############ dk_depend(${Plugin}) ############")
+	
+	#set(Plugin "${ARGV0}")
+	dk_allButFirstArgs(${ARGV})
+	message("############ dk_depend(${Plugin} ${dk_allButFirstArgs}) ############")
 	
 	set(dkdepend_list $CACHE{dkdepend_list})
 	if(Plugin IN_LIST dkdepend_list)
@@ -69,6 +72,12 @@ function(dk_depend Plugin) #target
 		
 		#dk_importVariables(Import_Path "${Import_Path}")
 		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
+		dk_fileIncludes("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake" "function(DKINSTALL")
+		if(dk_fileIncludes)
+			dk_debug("${CURRENT_PLUGIN}: DKINSTALL(${dk_allButFirstArgs})")
+			DKINSTALL(${dk_allButFirstArgs})
+		endif()
+		
 			
 	###### Pop Plugin from the PLUGIN_STACK ######
 	#dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")

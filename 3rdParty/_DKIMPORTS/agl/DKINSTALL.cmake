@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Host_Os "dk_Host_Os()")
 if(NOT Mac_Host)
-	dk_undepend(agl)
+	dk_disable(agl)
 	dk_return()
 endif()
 

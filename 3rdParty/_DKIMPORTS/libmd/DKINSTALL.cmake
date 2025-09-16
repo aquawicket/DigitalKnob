@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/guillemj/libmd.git
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Iossim)
-	dk_undepend(libmd)
+	dk_disable(libmd)
 	dk_return()
 endif()
 

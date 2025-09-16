@@ -13,14 +13,14 @@ include_guard()
 
 
 #########################################################################
-# dk_undepend(plugin)
+# dk_undepend(Plugin)
 #
-#	Remove a library or plugin from the dependency list
+#	Remove a library or Plugin from the dependency list
 #
-#	@plugin				- TODO
+#	@Plugin				- TODO
 #	@target (optional)	- TODO
 #
-function(dk_undepend plugin)
+function(dk_undepend Plugin)
 	dk_debugFunc()
 	
 	set(target ${ARGV1})
@@ -29,9 +29,9 @@ function(dk_undepend plugin)
 #	if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKCMAKE_DIR})
 #		if(Target_App_Dir)
 #			if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${Target_App_Dir})
-#				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKIMPORTS_DIR}/${plugin})
-#					if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCPP_PLUGINS_DIR}/${plugin})
-#						dk_fatal("dk_undepend() Can only be used from a plugin directory. This is to avoid having disabled libraries hideing everywhere")
+#				if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL $ENV{DKIMPORTS_DIR}/${Plugin})
+#					if(NOT ${CMAKE_CURRENT_LIST_DIR} STREQUAL ${DKCPP_PLUGINS_DIR}/${Plugin})
+#						dk_fatal("dk_undepend() Can only be used from a Plugin directory. This is to avoid having disabled libraries hideing everywhere")
 #					endif()
 #				endif()
 #			endif()
@@ -39,8 +39,8 @@ function(dk_undepend plugin)
 #	endif()
 	
 	# remove from ${dkdepend_list}
-	if(plugin IN_LIST dkdepend_list)
-		list(REMOVE_ITEM dkdepend_list ${plugin}) 	# it was found, now remove
+	if(Plugin IN_LIST dkdepend_list)
+		list(REMOVE_ITEM dkdepend_list ${Plugin}) 	# it was found, now remove
 		dk_set(dkdepend_list ${dkdepend_list}) 		# Globalize the variable
 		dk_debug("dkdepend_list = ${dkdepend_list}")
 	endif()
@@ -51,7 +51,7 @@ function(dk_undepend plugin)
 	dk_debug("dkdisabled_list = ${dkdisabled_list}")
 	
 	if(${ARGC} GREATER 1)
-		dk_removeTarget(${plugin} ${ARGV1})
+		dk_removeTarget(${Plugin} ${ARGV1})
 	endif()	   
 endfunction()
 

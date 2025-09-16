@@ -15,7 +15,7 @@ include_guard()
 ############ libudev-dev ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libudev-dev)
+	dk_disable(libudev-dev)
 	dk_return()
 endif()
 

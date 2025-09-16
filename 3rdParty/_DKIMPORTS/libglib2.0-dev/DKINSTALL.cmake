@@ -15,7 +15,7 @@ include_guard()
 ############ libglib2.0-dev ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libglib2.0-dev)
+	dk_disable(libglib2.0-dev)
 	dk_return()
 endif()
 

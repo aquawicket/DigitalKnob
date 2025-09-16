@@ -20,7 +20,7 @@ include_guard()
 
 #dk_validate(Target_Config  "dk_Target_Config()")
 if(IOS OR Iossim OR Android)
-	dk_undepend(glew)
+	dk_disable(glew)
 	dk_return()
 endif()
 

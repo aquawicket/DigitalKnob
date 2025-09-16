@@ -688,7 +688,7 @@ dk_generate() {
 	dk_echo
 	dk_echo "****** CMAKE COMMAND ******"
 	dk_echo "CMAKE_ARGS = ${@}"	
-	dk_call "${CMAKE_EXE}" "${@}"
+	dk_call "${cmake_exe}" "${@}"
 	dk_echo
 }
 	
@@ -709,18 +709,18 @@ dk_buildApp() {
 	
 	if [ "${Target_Type}" = "Debug" ] || [ "${Target_Type}" = "All" ]; then
 		if dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug" "--config Debug" "--verbose"
+			dk_call "${cmake_exe}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug" "--config Debug" "--verbose"
 		elif dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" "--config Debug" "--verbose"
+			dk_call "${cmake_exe}" "--build" "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" "--config Debug" "--verbose"
 		else
 			dk_error "Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Debug or ${Target_App}/${Target_Tuple}"
 		fi
 	fi
 	if [ "${Target_Type}" = "Release" ] || [ "${Target_Type}" = "All" ]; then
 		if dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release" --config Release --verbose
+			dk_call "${cmake_exe}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release" --config Release --verbose
 		elif dk_pathExists "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt"; then
-			dk_call "${CMAKE_EXE}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --config Release --verbose
+			dk_call "${cmake_exe}" --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --config Release --verbose
 		else
 			dk_error "Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Release or ${Target_App}/${Target_Tuple}"
 		fi
@@ -821,19 +821,19 @@ dk_installCmake() {
 		dk_printVar CMAKE_FOLDER
 		
 		if [ "${Host_Os}" = "Windows" ]; then
-			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
+			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
 		elif [ "${Host_Os}" = "Mac" ]; then
-			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
 		elif [ "${Host_Os}" = "Linux" ]; then
-			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
 		elif [ "${Host_Os}" = "Raspberry" ]; then
-			CMAKE_EXE=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
 		else
 			dk_error "no cmake for this OS"
 		fi
-		dk_printVar CMAKE_EXE
+		dk_printVar cmake_exe
 		
-		if dk_pathExists "${CMAKE_EXE}"; then 
+		if dk_pathExists "${cmake_exe}"; then 
 			return $(true);
 		fi
 
@@ -842,18 +842,18 @@ dk_installCmake() {
 		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
 		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
 		
-		#if ! dk_pathExists ${CMAKE_EXE}; then error "cannot find cmake"; fi
+		#if ! dk_pathExists ${cmake_exe}; then error "cannot find cmake"; fi
 
 	else	# Linux package
 		dk_info "Installing CMake from package managers"
 		
-		CMAKE_EXE=$(command -v cmake)
-		dk_printVar CMAKE_EXE
+		cmake_exe=$(command -v cmake)
+		dk_printVar cmake_exe
 		if ! dk_commandExists cmake; then
 			dk_installPackage ${CMAKE_IMPORT}
 		fi	
-		CMAKE_EXE=$(command -v cmake)
-		dk_printVar CMAKE_EXE
+		cmake_exe=$(command -v cmake)
+		dk_printVar cmake_exe
 	fi
 }
 
@@ -1712,14 +1712,14 @@ dk_cmakeEval() {
 	dk_printVar DKCOMMAND
 	
 	if [ -n "$variables" ]; then
-		dk_call "${CMAKE_EXE}" "-DDKCMAKE_DIR=${DKCMAKE_DIR}" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=${2}" "${3}" -P "${DKCMAKE_DIR}"/dev/dk_cmakeEval.cmake
+		dk_call "${cmake_exe}" "-DDKCMAKE_DIR=${DKCMAKE_DIR}" "-DDKCOMMAND=$DKCOMMAND" "-DDKRETURN=${2}" "${3}" -P "${DKCMAKE_DIR}"/dev/dk_cmakeEval.cmake
 		if dk_pathExists "${DKCMAKE_DIR}"/cmake_vars; then
 	    	dk_info "executing cmake_vars"
 			. "${DKCMAKE_DIR}"/cmake_vars
 			#rm ${DKCMAKE_DIR}/cmake_vars
 		fi
 	else
-		dk_call "${CMAKE_EXE}" "-DDKCMAKE_DIR=${DKCMAKE_DIR}" "-DDKCOMMAND=$DKCOMMAND" -P "${DKCMAKE_DIR}"/dev/dk_cmakeEval.cmake
+		dk_call "${cmake_exe}" "-DDKCMAKE_DIR=${DKCMAKE_DIR}" "-DDKCOMMAND=$DKCOMMAND" -P "${DKCMAKE_DIR}"/dev/dk_cmakeEval.cmake
 	fi
 	#dk_debug return code: ${?}
 }

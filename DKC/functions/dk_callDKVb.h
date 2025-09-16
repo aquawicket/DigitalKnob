@@ -18,7 +18,7 @@ int dk_callDKVb(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
+	char* cmd_exe = "cmd.exe";
 	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKVb.h";
 	char* DKVB_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKVb/functions/";
 
@@ -33,8 +33,8 @@ int dk_callDKVb(char* func, char* args, char* rtn_var){
 	
 	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKVb/functions/";
 	char DKVB_COMMAND[512];
-	//int err = sprintf(DKVB_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKVB_FUNCTIONS_DIR_=%s) & (set PATH=!DKVB_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKVB_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKVB_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKVB_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKVB_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKVB_FUNCTIONS_DIR_=%s) & (set PATH=!DKVB_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKVB_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKVB_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKVB_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKVB_COMMAND);
 	
 	FILE *fp;

@@ -16,7 +16,7 @@ include_guard()
 # https://wiki.archlinux.org/title/Pacman
 # https://walterteng.com/using-zsh-on-windows
 
-dk_validate(msys2 "dk_depend(msys2)")
+dk_depend(msys2)
 dk_findProgram(pacman_exe pacman "${msys2}/usr/bin")
 
 

@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
-	dk_undepend(core_haptics)
+	dk_disable(core_haptics)
 	dk_return()
 endif()
 

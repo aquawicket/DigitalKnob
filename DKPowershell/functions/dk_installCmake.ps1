@@ -24,16 +24,16 @@ function Global:dk_installCmake() {
     #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER};
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
 	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER";
-    $global:CMAKE_EXE = "$CMAKE_DIR/bin/cmake.exe";
+    $global:cmake_exe = "$CMAKE_DIR/bin/cmake.exe";
         
-    if(dk_call dk_pathExists ${CMAKE_EXE}){ return; }
+    if(dk_call dk_pathExists ${cmake_exe}){ return; }
        
     dk_call dk_echo "\n";
     dk_call dk_info "Installing CMake . . .\n";
     dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}";
 	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}";
     
-    if(!(dk_call dk_pathExists "${CMAKE_EXE}")){ dk_call dk_error "cannot find cmake\n"; }
+    if(!(dk_call dk_pathExists "${cmake_exe}")){ dk_call dk_error "cannot find cmake\n"; }
 }
 
 

@@ -16,7 +16,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # https://www.mesa3d.org
 
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(mesa)
+	dk_disable(mesa)
 	dk_return()
 endif()
 

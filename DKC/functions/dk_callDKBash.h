@@ -33,7 +33,7 @@ int dk_callDKBash(char* func, char* args, char* rtn_var) {
 //	if not exist %DKBASH_FUNCTIONS_DIR%/DK.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh")
 //	if not exist %DKBASH_FUNCTIONS_DIR%/%~1.sh	(%dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/%~1.sh" "%DKBASH_FUNCTIONS_DIR%/%~1.sh")
 	
-//	dk_validate BASH_EXE "dk_BASH_EXE"
+//	dk_validate bash_exe "dk_BASH_EXE"
 	
 //	set ALL_BUT_FIRST=%*
 //	if defined ALL_BUT_FIRST (set ALL_BUT_FIRST=!ALL_BUT_FIRST:*%1=!)
@@ -53,7 +53,7 @@ int dk_callDKBash(char* func, char* args, char* rtn_var) {
 //  set "RELOAD_WITH_BASH=0"
 //  if defined USE_WSL (set WSLENV=DKSCRIPT_PATH/u:DKINIT/u:RELOAD_WITH_BASH/u:DKBASH_FUNCTIONS_DIR_/u)
 
-	char* BASH_EXE = "C:/Users/Administrator/DigitalKnob/DKTools/git-portable-2.46.2-64-bit/bin/bash.exe";
+	char* bash_exe = "C:/Users/Administrator/DigitalKnob/DKTools/git-portable-2.46.2-64-bit/bin/bash.exe";
 	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKBash.h";
 	char* DKBASH_FUNCTIONS_DIR_ = "/C/Users/Administrator/DigitalKnob/Development/DKBash/functions/";
 
@@ -68,7 +68,7 @@ int dk_callDKBash(char* func, char* args, char* rtn_var) {
     }
 	
 	char DKBASH_COMMAND[1028];
-	int err = sprintf(DKBASH_COMMAND, "%s -c '. %s%s.sh; %s %s'", BASH_EXE, DKBASH_FUNCTIONS_DIR_, func, func, args);
+	int err = sprintf(DKBASH_COMMAND, "%s -c '. %s%s.sh; %s %s'", bash_exe, DKBASH_FUNCTIONS_DIR_, func, func, args);
 	dk_echo("DKBASJH_COMMAND = %s", DKBASH_COMMAND);
 	
 	FILE *fp;

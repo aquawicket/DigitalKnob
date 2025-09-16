@@ -16,11 +16,11 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libasound2-dev)
+	dk_disable(libasound2-dev)
 	dk_return()
 endif()
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
-	dk_undepend(libasound2-dev)
+	dk_disable(libasound2-dev)
 	dk_return()
 endif()
 

@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Android)
-	dk_undepend(log)
+	dk_disable(log)
 	dk_return()
 endif()
 

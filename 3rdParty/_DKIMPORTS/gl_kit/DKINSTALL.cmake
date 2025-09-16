@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Apple)
-	dk_undepend(gl_kit)
+	dk_disable(gl_kit)
 	dk_return()
 endif()
 

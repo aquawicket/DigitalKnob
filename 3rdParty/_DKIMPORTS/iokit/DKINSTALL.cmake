@@ -16,7 +16,7 @@ include_guard()
 # https://developer.apple.com/documentation/IOKit
 
 if(NOT Apple)
-	dk_undepend(iokit)
+	dk_disable(iokit)
 	dk_return()
 endif()
 

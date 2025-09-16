@@ -70,7 +70,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 				set "BUILD_LIST_FILE="
 			)
 		)
-		
+
 		if NOT defined pickUpdate		%dk_call% DKBuilder/pickUpdate		& goto :while_loop
 		if NOT defined Target_App		%dk_call% DKBuilder/Target_App		& goto :while_loop
 		if NOT defined Target_Os		%dk_call% DKBuilder/Target_Os		& goto :while_loop

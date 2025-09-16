@@ -17,7 +17,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows_Host)
-	dk_undepend(msys2)
+	dk_disable(msys2)
 	dk_return()
 endif()
 

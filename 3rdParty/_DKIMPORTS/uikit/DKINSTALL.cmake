@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT IOS)
-	dk_undepend(uikit)
+	dk_disable(uikit)
 	dk_return()
 endif()
 

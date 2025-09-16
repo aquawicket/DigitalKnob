@@ -15,7 +15,7 @@ include_guard()
 ############ libsystemd-dev ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libsystemd-dev)
+	dk_disable(libsystemd-dev)
 	dk_return()
 endif()
 

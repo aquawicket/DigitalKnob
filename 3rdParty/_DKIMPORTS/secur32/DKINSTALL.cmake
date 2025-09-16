@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 if(NOT Windows)
-	dk_undepend(secur32)
+	dk_disable(secur32)
 	dk_return()
 endif()
 

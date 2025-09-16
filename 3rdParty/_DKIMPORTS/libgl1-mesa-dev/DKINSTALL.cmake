@@ -16,7 +16,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libgl1-mesa-dev)
+	dk_disable(libgl1-mesa-dev)
 	dk_return()
 endif()
 

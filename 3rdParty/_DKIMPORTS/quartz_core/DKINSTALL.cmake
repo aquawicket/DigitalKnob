@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
-	dk_undepend(quartz_core)
+	dk_disable(quartz_core)
 	dk_return()
 endif()
 

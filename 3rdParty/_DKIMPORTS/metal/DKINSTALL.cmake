@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
-	dk_undepend(metal)
+	dk_disable(metal)
 	dk_return()
 endif()
 

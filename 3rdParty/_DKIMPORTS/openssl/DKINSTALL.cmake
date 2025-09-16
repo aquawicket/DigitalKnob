@@ -22,10 +22,11 @@ include_guard()
 
 
 #dk_validate(Target_Tuple "dk_Target_Tuple()")
-if(Windows_X86_Msvc)
+if(Android OR Windows_X86_Msvc)
 	dk_disable(openssl)
 	dk_return()
 endif()
+
 
 
 ### DEPEND ###
@@ -38,9 +39,9 @@ dk_depend(pthread)
 dk_depend(ws2_32)
 dk_depend(crypt32)
 dk_depend(perl)
-if(Windows_Host)
+#if(Windows_Host)
 	dk_depend(msys2)
-endif()
+#endif()
 dk_depend(nasm)
 
 ### IMPORT ###
@@ -141,7 +142,7 @@ if(Debug)
 		dk_prependEnvPath	(${msys2}/usr/bin)
 		dk_configure		(${openssl} ${perl_exe} ../../Configure no-shared --debug mingw CC=gcc)
 	elseif(Windows_X86_Msvc)
-		dk_validate(VS_MAKE_VCVARSALL "dk_depend(visualstudio)")
+		dk_depend(visualstudio)
 		execute_process		(COMMAND cmd /c call ${VS_MAKE_VCVARSALL} "x64_x86")
 		dk_configure		(${openssl} ${perl_exe} ../../Configure no-shared --debug VC-WIN32)
 	elseif(Windows_X86_64_Clang)

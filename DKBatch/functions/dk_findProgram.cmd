@@ -80,12 +80,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "POWERSHELL_EXE = %POWERSHELL_EXE%"
 
 	%dk_call% dk_echo
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe" "%windir%/System32"
-	%dk_call% dk_echo "CMD_EXE = %CMD_EXE%"
+	%dk_call% dk_findProgram cmd_exe "cmd.exe" "%windir%/System32"
+	%dk_call% dk_echo "cmd_exe = %cmd_exe%"
 
 	%dk_call% dk_echo
-	%dk_call% dk_findProgram CMD_EXE "cmd.exe"
-	%dk_call% dk_echo "CMD_EXE = %CMD_EXE%"
+	%dk_call% dk_findProgram cmd_exe "cmd.exe"
+	%dk_call% dk_echo "cmd_exe = %cmd_exe%"
 	
 	%dk_call% dk_echo
 	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%"

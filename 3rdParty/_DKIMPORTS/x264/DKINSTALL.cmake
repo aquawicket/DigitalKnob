@@ -17,8 +17,8 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPENDS ###
-dk_depend		(msys2)
-dk_depend		(nasm)
+dk_depend(msys2)
+dk_depend(nasm)
 
 ### IMPORT ###
 #dk_import		(https://code.videolan.org/videolan/x264/-/archive/80c1c47c/x264-80c1c47c.zip)

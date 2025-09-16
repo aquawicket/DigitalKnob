@@ -94,7 +94,7 @@ function(dk_configure)
 		dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		dk_validate(CMAKE_GENERATOR "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 		#### create thr Cmake configure command ###
-		dk_assertVar(CMAKE_EXE)
+		dk_assertVar(cmake_exe)
 		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Config_Dir}" "-B" "${Build_Dir}")			
 		dk_mergeFlags("${command_list}" command_list)		
 	
@@ -106,7 +106,7 @@ function(dk_configure)
 		dk_fileWrite("${${CURRRENT_PLUGIN}_Build_Dir}/DKBUILD.log" "\"${command_string}\"\n\n")
 		
 		#### restore any altered flags ####
-		dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+		dk_set(DKCMAKE_BUILD ${cmake_exe} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 		
 
 	############ Configure with ../../configure ############
@@ -159,7 +159,7 @@ function(dk_configure)
 	
 	
 	#### restore any altered flags ####
-	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
+	dk_set(DKCMAKE_BUILD ${cmake_exe} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})  
 	if(Emscripten)
 		dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 	else()

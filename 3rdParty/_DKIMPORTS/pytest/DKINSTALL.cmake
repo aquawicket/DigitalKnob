@@ -13,6 +13,6 @@ include_guard()
 
 
 ############ pytest ############
-dk_validate(cmd_exe "dk_depend(cmd)")
-dk_validate(PYTHON3 "dk_depend(python3)")
+dk_depend(cmd)
+dk_depend(python3)
 execute_process(COMMAND ${cmd_exe} /c C:/Users/Administrator/DigitalKnob/Development/3rdParty/python-2.7.18.amd64/Scripts/pip.exe install pytest)

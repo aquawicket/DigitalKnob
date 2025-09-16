@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Host_Tuple ${Host_Tuple})
 if(NOT Android)
-	dk_undepend(android)
+	dk_disable(android)
 	dk_return()
 endif()
 

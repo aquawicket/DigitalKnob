@@ -24,6 +24,7 @@ dk_depend(libbcrypt)
 dk_depend(libpsl)
 dk_depend(libssh2)
 dk_depend(openssl)
+dk_depend(perl)
 dk_depend(pthread)
 dk_depend(system_configuration)
 dk_depend(ws2_32)
@@ -36,23 +37,24 @@ dk_import()
 
 ### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${curl}/include 						CURL_INCLUDE_DIR)
-dk_include					(${curl_Config_Dir}/lib					CURL_INCLUDE_DIR2)
+dk_include					(${curl}/include 					CURL_INCLUDE_DIR)
+dk_include					(${curl_Config_Dir}/lib				CURL_INCLUDE_DIR2)
 
 if(MULTI_CONFIG)
 	set(curl_Debug_Dir 		${curl_Tuple_Dir}/lib/${Debug_Dir})
 	set(curl_Release_Dir 	${curl_Tuple_Dir}/lib/${Release_Dir})
+	set(curl_Build_Dir		${curl_Tuple_Dir}/lib/${Target_Type})
 else()
 	set(curl_Debug_Dir 		${curl_Debug_Dir}/lib)
 	set(curl_Release_Dir 	${curl_Release_Dir}/lib)
 endif()
 
-if(MSVC AND Windows)
-	dk_libDebug			(${curl_Config_Dir}/lib/${Debug_Dir}		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
-	dk_libRelease		(${curl_Config_Dir}/lib/${Release_Dir}		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
-else()	
-	dk_libDebug			(${curl_Debug_Dir}/libcurl-d.a				CURL_DEBUG_LIBRARY		CURL_LIBRARY)
-	dk_libRelease		(${curl_Release_Dir}/libcurl.a				CURL_RELEASE_LIBRARY	CURL_LIBRARY)
+if(Windows AND MSVC)
+	dk_libDebug				(${curl_Debug_Dir}/curl-d.lib		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease			(${curl_Release_Dir}/curl.lib		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
+else()		
+	dk_libDebug				(${curl_Debug_Dir}/libcurl-d.a		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease			(${curl_Release_Dir}/libcurl.a		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
 endif()
 
 
@@ -152,7 +154,7 @@ elseif(Android)
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
-		-DCURL_USE_OPENSSL=OFF
+		-DCURL_USE_OPENSSL=${openssl}
 		-DCURL_ZSTD=${zstd}
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
@@ -170,7 +172,7 @@ elseif(Ios OR Iossim)
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
 		-DCURL_DISABLE_LDAP=ON
 		-DCURL_STATICLIB=ON
-		-DCURL_USE_OPENSSL=OFF
+		-DCURL_USE_OPENSSL=${openssl}
 		-DCURL_ZSTD=${zstd}
 		-DHAVE_GLIBC_STRERROR_R=advanced
 		-DHAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT=advanced
@@ -329,8 +331,7 @@ elseif(Linux)
 		${openssl_CMAKE}
 		${zlib_CMAKE}
 		${zstd_CMAKE})
-endif()
-#else()
+else()
 	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
@@ -403,11 +404,11 @@ endif()
 		${openssl_CMAKE}
 		${zlib_CMAKE}
 		${zstd_CMAKE})
-#endif()
+endif()
 
 
 ### COMPILE ###
-dk_build()
+dk_build(${curl})
 
 
 # arm64

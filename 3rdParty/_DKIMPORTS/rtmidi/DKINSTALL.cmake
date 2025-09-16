@@ -18,9 +18,9 @@ include_guard()
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
 ### DEPEND ###
-if(Windows)
+#if(Windows)
 	dk_depend(winmm)
-endif()
+#endif()
 
 ### IMPORT ###
 dk_import(https://github.com/thestk/rtmidi/archive/24b3a3bf.zip)

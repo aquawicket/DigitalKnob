@@ -21,7 +21,7 @@ include_guard()
 # https://sourceforge.net/projects/findandreplace/files/findandreplace/2.0.3/FAR-2.0.3-sources.tar.gz/download
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Windows_Host)
-	dk_undepend(far)
+	dk_disable(far)
 	dk_return()
 endif()
 

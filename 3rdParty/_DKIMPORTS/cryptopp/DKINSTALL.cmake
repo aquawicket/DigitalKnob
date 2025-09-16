@@ -19,10 +19,10 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
-if(IOS OR Iossim)
+#if(IOS OR Iossim)
 	#dk_depend(libmd)
 	#dk_depend(macports)
-endif()
+#endif()
 
 
 ### IMPORT ###

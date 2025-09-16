@@ -15,7 +15,7 @@ include_guard()
 ############ libatomic ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libatomic)
+	dk_disable(libatomic)
 	dk_return()
 endif()
 

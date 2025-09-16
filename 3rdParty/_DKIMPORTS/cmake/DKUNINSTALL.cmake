@@ -24,9 +24,9 @@ include_guard()
 ### BINARY DISTRIBUTIONS (PORTABLE) ###
 if("$ENV{WSL_DISTRO_NAME}" STREQUAL "Alpine")
 	dk_set(cmake_Import cmake)
-	if(NOT EXIST ${CMAKE_EXE})
+	if(NOT EXIST ${cmake_exe})
 		dk_installPackage(${cmake_Import})
-		dk_findProgram(CMAKE_EXE cmake)
+		dk_findProgram(cmake_exe cmake)
 	endif()
 
 endif()

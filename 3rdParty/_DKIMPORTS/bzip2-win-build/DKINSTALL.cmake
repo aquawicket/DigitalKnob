@@ -17,7 +17,7 @@ include_guard()
 # https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
 dk_validate(Target_Config  "dk_Target_Config()")
 if(Unix)
-	dk_undepend(bzip2-win-build)
+	dk_disable(bzip2-win-build)
 	dk_return()
 endif()
 

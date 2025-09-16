@@ -15,7 +15,7 @@ include_guard()
 ############ libsndfile1-dev ############
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libsndfile1-dev)
+	dk_disable(libsndfile1-dev)
 	dk_return()
 endif()
 

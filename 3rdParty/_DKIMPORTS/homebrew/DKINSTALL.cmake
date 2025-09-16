@@ -17,7 +17,7 @@ include_guard()
 # https://brew.sh
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Mac_Host)
-	dk_undepend(homebrew)
+	dk_disable(homebrew)
 	dk_return()
 endif()
 

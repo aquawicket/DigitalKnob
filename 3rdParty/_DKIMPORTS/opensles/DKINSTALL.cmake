@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(NOT Android AND NOT IOS AND NOT Iossim)
-	dk_undepend(opensles)
+	dk_disable(opensles)
 	dk_return()
 endif()
 

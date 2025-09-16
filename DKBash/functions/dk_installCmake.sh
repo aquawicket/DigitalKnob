@@ -3,13 +3,13 @@
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
-	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')									&& echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
-	(command -v 'bash' 1>/dev/null)		&& export BASH_EXE=$(command -v bash)										&& echo "BASH_EXE = ${BASH_EXE}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
 	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/DigitalKnob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
 	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
-	[ -e "${BASH_EXE}" ]				&& exec "${BASH_EXE}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
 fi
 ##################################################################################
 
@@ -62,14 +62,14 @@ dk_installCmake() {
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
 		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
 		
-		[ "${Host_Os}" = "Windows" ]   && CMAKE_EXE=${CMAKE_DIR}/bin/cmake.exe
-		[ "${Host_Os}" = "Mac" ]       && CMAKE_EXE=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
-		[ "${Host_Os}" = "Linux" ]     && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
-		[ "${Host_Os}" = "Raspberry" ] && CMAKE_EXE=${CMAKE_DIR}/bin/cmake
-		[ -z ${CMAKE_EXE} ]            && dk_call dk_error "no cmake found for this OS"
-		dk_call dk_assertVar CMAKE_EXE
+		[ "${Host_Os}" = "Windows" ]   && cmake_exe=${CMAKE_DIR}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && cmake_exe=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && cmake_exe=${CMAKE_DIR}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && cmake_exe=${CMAKE_DIR}/bin/cmake
+		[ -z ${cmake_exe} ]            && dk_call dk_error "no cmake found for this OS"
+		dk_call dk_assertVar cmake_exe
 		
-		dk_call dk_pathExists "${CMAKE_EXE}" && return $(true);
+		dk_call dk_pathExists "${cmake_exe}" && return $(true);
 		
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
@@ -81,19 +81,19 @@ dk_installCmake() {
 		#dk_call dk_removeExtension ${CMAKE_IMPORT_FILE} CMAKE_DL_NAME
 		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_DIR}"
         
-		dk_call dk_pathExists "${CMAKE_EXE}" || dk_call dk_error "cannot find cmake"
+		dk_call dk_pathExists "${cmake_exe}" || dk_call dk_error "cannot find cmake"
 
 	else	# Linux package
 		dk_call dk_info "Installing CMake from package managers"
 		
-		export CMAKE_EXE="$(command -v cmake)" || $(true)
-		#dk_call dk_pathExists ${CMAKE_EXE} && CMAKE_EXE=$(realpath ${CMAKE_EXE})
-		#dk_call dk_realpath ${CMAKE_EXE} CMAKE_EXE
-		#dk_call dk_printVar CMAKE_EXE
+		export cmake_exe="$(command -v cmake)" || $(true)
+		#dk_call dk_pathExists ${cmake_exe} && cmake_exe=$(realpath ${cmake_exe})
+		#dk_call dk_realpath ${cmake_exe} cmake_exe
+		#dk_call dk_printVar cmake_exe
 		dk_call dk_commandExists cmake || dk_call dk_installPackage ${CMAKE_IMPORT}
-		export CMAKE_EXE="$(command -v cmake)"
-		#CMAKE_EXE=$(dk_call dk_realpath "${CMAKE_EXE}")
-		dk_call dk_assertVar CMAKE_EXE
+		export cmake_exe="$(command -v cmake)"
+		#cmake_exe=$(dk_call dk_realpath "${cmake_exe}")
+		dk_call dk_assertVar cmake_exe
 	fi
 }
 

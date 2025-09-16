@@ -15,7 +15,10 @@ include_guard()
 ###### glfw ######
 # https://github.com/glfw/glfw.git
 # https://www.glfw.org/docs/latest/compile.html
-
+if(Android)
+	dk_disable(glfw)
+	dk_return()
+endif()
 
 ### DEPEND ###
 #dk_depend(wayland)
@@ -25,17 +28,17 @@ include_guard()
 dk_import()
 
 ### LINK ###
-dk_include					(${glfw}/include									GLFW_INCLUDE_DIR)
-dk_include					(${glfw_Config_Dir}/include/freetype2				GLFW_INCLUDE_DIR2)
+dk_include			(${glfw}/include									GLFW_INCLUDE_DIR)
+dk_include			(${glfw_Config_Dir}/include/freetype2				GLFW_INCLUDE_DIR2)
 if(MSVC)
-	Windows_dk_libDebug		(${glfw_Config_Dir}/src/Debug/glfw3.lib				GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
-	Windows_dk_libRelease	(${glfw_Config_Dir}/src/Release/glfw3.lib			GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
+	dk_libDebug		(${glfw_Config_Dir}/src/Debug/glfw3.lib				GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
+	dk_libRelease	(${glfw_Config_Dir}/src/Release/glfw3.lib			GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
 elseif(Mac)
-	dk_libDebug				(${glfw_Config_Dir}/src/${Debug_Dir}/libglfw3.a		GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
-	dk_libRelease			(${glfw_Config_Dir}/src/${Release_Dir}/libglfw3.a	GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
+	dk_libDebug		(${glfw_Config_Dir}/src/${Debug_Dir}/libglfw3.a		GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
+	dk_libRelease	(${glfw_Config_Dir}/src/${Release_Dir}/libglfw3.a	GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
 else()
-	dk_libDebug				(${glfw_Config_Dir}/src/libglfw3.a					GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
-	dk_libRelease			(${glfw_Config_Dir}/src/libglfw3.a					GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
+	dk_libDebug		(${glfw_Config_Dir}/src/libglfw3.a					GLFW_LIBRARY_DEBUG		GLFW_LIBRARY)
+	dk_libRelease	(${glfw_Config_Dir}/src/libglfw3.a					GLFW_LIBRARY_RELEASE	GLFW_LIBRARY)
 endif()
 
 ## https://www.glfw.org/docs/latest/compile.html
@@ -43,7 +46,12 @@ endif()
 dk_set(glfw_CMAKE -Dglfw3_DIR=${glfw}) #-DGLFW_INCLUDE_DIR=${GLFW_INCLUDE_DIR}
 
 ### GENERATE ###
-dk_configure()
+dk_configure(${glfw}
+	#-DGLFW_BUILD_EXAMPLES=OFF 	# "Build the GLFW example programs" ${GLFW_STANDALONE}
+	#-DGLFW_BUILD_TESTS=OFF 	# "Build the GLFW test programs" ${GLFW_STANDALONE}
+	#-DGLFW_BUILD_DOCS=OFF 		# "Build the GLFW documentation" ON
+	#-DGLFW_INSTALL=OFF			# "Generate installation target" ON
+) 			
 
 ### COMPILE ###
-dk_build(${glfw} glfw)
+dk_build(${glfw})# glfw)

@@ -27,7 +27,7 @@ if(EXISTS "${WSL_EXE}")
 endif()
 
 #if(NOT Windows_Host)
-#	dk_undepend(wsl)
+#	dk_disable(wsl)
 #	dk_return()
 #endif()
 

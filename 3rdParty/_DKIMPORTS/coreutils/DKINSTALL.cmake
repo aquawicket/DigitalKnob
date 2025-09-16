@@ -16,7 +16,7 @@ include_guard()
 # https://formulae.brew.sh/formula/coreutils
 
 if(NOT Mac_Host)
-	dk_undepend(coreutils)
+	dk_disable(coreutils)
 	dk_return()
 endif()
 

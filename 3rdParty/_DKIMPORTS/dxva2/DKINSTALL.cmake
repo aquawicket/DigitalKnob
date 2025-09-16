@@ -17,7 +17,7 @@ include_guard()
 # https://dll.website/dxva2-dll
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Windows)
-	dk_undepend(dxva2)
+	dk_disable(dxva2)
 	dk_return()
 endif()
 

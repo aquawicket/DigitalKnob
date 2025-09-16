@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Host_Os ${Host_Os})
 if(NOT Mac_Host)
-	dk_undepend(appkit)
+	dk_disable(appkit)
 	dk_return()
 endif()
 

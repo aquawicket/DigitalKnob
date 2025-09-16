@@ -3,13 +3,13 @@
 if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
-	(command -v 'cmd.exe' 1>/dev/null)	&& export CMD_EXE=$(command -v 'cmd.exe')								&& echo "CMD_EXE = ${CMD_EXE}"
-	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($CMD_EXE /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')								&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
-	(command -v 'bash' 1>/dev/null)		&& export BASH_EXE=$(command -v bash)									&& echo "BASH_EXE = ${BASH_EXE}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)									&& echo "bash_exe = ${bash_exe}"
 	[ -e "${DK_SH}" ]					|| export DK_SH="$(dirname $0)/DK.sh"									&& echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]					|| export DK_SH=$(find "${HOME}" -name "DK.sh")							&& echo "DK_SH = ${DK_SH}"
-	[ -e "${BASH_EXE}" ]				&& exec "${BASH_EXE}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
 fi
 ##################################################################################
 
@@ -116,9 +116,9 @@ dk_buildMain() {
 		dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 		dk_call dk_chdir ${DKCPP_APPS_DIR}/${Target_App}
 		export DKSCRIPT_PATH
-		dk_call dk_validate CMAKE_EXE "dk_call dk_depend cmake"
-		echo "${CMAKE_EXE-} -P ${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
-		${CMAKE_EXE} -P "${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
+		dk_call dk_validate cmake_exe "dk_call dk_depend cmake"
+		echo "${cmake_exe-} -P ${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
+		${cmake_exe} -P "${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake"
 		
 		#dk_call dk_generate	
 		#dk_call dk_buildApp

@@ -21,7 +21,7 @@ include_guard()
 # https://www.boost.org/doc/libs/1_75_0/doc/html/stacktrace.html
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT MSVC)
-	dk_undepend	(stackwalker)
+	dk_disable	(stackwalker)
 	dk_disable	(stackwalker)
 	dk_return	()
 endif()

@@ -18,7 +18,7 @@ int dk_callDKPython(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
+	char* cmd_exe = "cmd.exe";
 	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKPython.h";
 	char* DKPYTHON_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKPython/functions/";
 
@@ -33,8 +33,8 @@ int dk_callDKPython(char* func, char* args, char* rtn_var){
 	
 	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKPython/functions/";
 	char DKPYTHON_COMMAND[512];
-	//int err = sprintf(DKPYTHON_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKPYTHON_FUNCTIONS_DIR_=%s) & (set PATH=!DKPYTHON_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKPYTHON_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKPYTHON_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKPYTHON_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKPYTHON_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKPYTHON_FUNCTIONS_DIR_=%s) & (set PATH=!DKPYTHON_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKPYTHON_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKPYTHON_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKPYTHON_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKPYTHON_COMMAND);
 	
 	FILE *fp;

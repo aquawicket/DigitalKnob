@@ -13,9 +13,7 @@ include_guard()
 
 
 ############ libbcrypt ############
-dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Windows)
-	dk_undepend(libbcrypt)
 	dk_disable(libbcrypt)
 	dk_return()
 endif()
@@ -24,6 +22,7 @@ endif()
 # Clang
 if(Windows_Arm64_Clang)
 	dk_validate(msys2 "dk_depend(msys2)")
+	dk_validate(clang "dk_depend(clang)")
 	dk_set(LIBBCRYPT_LIB "${msys2}/clangarm64/lib/libbcrypt.a")
 elseif(Windows_X86_Clang)
 	dk_validate(msys2 "dk_depend(msys2)")

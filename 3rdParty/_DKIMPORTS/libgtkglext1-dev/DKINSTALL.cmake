@@ -16,7 +16,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux_Host)
-	dk_undepend(libgtkglext1-dev)
+	dk_disable(libgtkglext1-dev)
 	dk_return()
 endif()
 

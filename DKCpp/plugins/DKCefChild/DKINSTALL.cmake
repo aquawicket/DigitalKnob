@@ -17,11 +17,10 @@ dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 
 if(Android OR IOS OR Iossim)
-	dk_undepend(DKCef)
+	dk_disable(DKCef)
 	dk_return()
 endif()
 if(NOT HAVE_DKCef)
-	dk_undepend(DKCefChild)
 	dk_disable(DKCefChild)
 	dk_return()
 endif()

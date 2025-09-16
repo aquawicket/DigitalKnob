@@ -50,7 +50,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	echo :runDKcmd
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
-	if NOT EXIST "%CMD_EXE%"				(set "CMD_EXE=%~2")
+	if NOT EXIST "%cmd_exe%"				(set "cmd_exe=%~2")
 	if NOT EXIST "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
 	if NOT defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
 	::if NOT EXIST "%TCC_EXE%"				(set "TCC_EXE=%USERPROFILE:\=/%/DigitalKnob/DKTools/tcc-rt-master/tcc.exe")
@@ -59,7 +59,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	:: "%ComSpec%"	path to cmd.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the CMD prompt.
-	start "" "%CMD_EXE:/=\%" /V:ON /K "%DKSCRIPT_PATH%"
+	start "" "%cmd_exe:/=\%" /V:ON /K "%DKSCRIPT_PATH%"
 	::(start "" /b "%TCC_EXE:/=\%" /V:ON /K %DKSCRIPT_PATH% & pause)
 
 	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
@@ -96,16 +96,16 @@ if "%~1" equ "" (goto DKINSTALL)
 
 
 	::###### Install DKBatch ######
-	%dk_call% dk_validate CMD_EXE 				"%dk_call% dk_CMD_EXE"
+	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_CMD_EXE"
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
 	::###### Set the registry entry for the extension ######
-	ftype DKcmd="%CMD_EXE:/=\%" /c if EXIST "%~f0" ^
-	(echo DKcmd installed ^& "%CMD_EXE:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%CMD_EXE%" "%%1" %%*) else ^
+	ftype DKcmd="%cmd_exe:/=\%" /c if EXIST "%~f0" ^
+	(echo DKcmd installed ^& "%cmd_exe:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%cmd_exe%" "%%1" %%*) else ^
 	(echo DKcmd NOT installed ^& "%%1" %%*)
 
 	::###### Set icons and file association ######
-	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%CMD_EXE%"
+	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%cmd_exe%"
 	assoc .cmd=DKcmd
 
 	%dk_call% dk_success "DKcmd install complete"

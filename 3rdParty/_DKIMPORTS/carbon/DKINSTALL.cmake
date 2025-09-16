@@ -17,7 +17,7 @@ include_guard()
 
 
 if(NOT Mac)
-	dk_undepend(carbon)
+	dk_disable(carbon)
 	dk_return()
 endif()
 

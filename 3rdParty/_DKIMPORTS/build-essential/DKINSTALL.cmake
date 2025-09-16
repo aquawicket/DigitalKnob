@@ -16,7 +16,7 @@ include_guard()
 # https://packages.ubuntu.com/focal/build-essential
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_Host)
-	dk_undepend(build-essential)
+	dk_disable(build-essential)
 	dk_return()
 endif()
 

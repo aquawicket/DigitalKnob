@@ -1,9 +1,9 @@
-CMAKE_EXE=$(which cmake)
-#echo CMAKE_EXE = $CMAKE_EXE
+cmake_exe=$(which cmake)
+#echo cmake_exe = $cmake_exe
 DKCMAKE_DIR=/c/Users/aquawicket/DigitalKnob/Development/DKCMake
 #echo DKCMAKE_DIR = $DKCMAKE_DIR
 
 
-$CMAKE_EXE -P $DKCMAKE_DIR/dev/Test.cmake
+$cmake_exe -P $DKCMAKE_DIR/dev/Test.cmake
 
 #exec $SHELL #keep terminal open

@@ -16,13 +16,13 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Unix)
-	dk_undepend(dl)
+	dk_disable(dl)
 	dk_return()
 endif()
 
-if(Android)
+#if(Android)
 	dk_depend(android-ndk)
-endif()
+#endif()
 
 dk_findLibrary(dl NO_HALT)
 if(Linux)

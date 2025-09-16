@@ -17,7 +17,7 @@ include_guard()
 # https://www.kdevelop.org/
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux_Host)
-	dk_undepend(kdevelop)
+	dk_disable(kdevelop)
 	dk_return()
 endif()
 

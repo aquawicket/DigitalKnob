@@ -19,7 +19,7 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT UNIX_HOST)
-	dk_undepend(simple-getch)
+	dk_disable(simple-getch)
 	dk_return()
 endif()
 

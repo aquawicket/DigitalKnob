@@ -16,12 +16,12 @@
 int dk_callDKBatch(char* func, char* args, char* rtn_var){
 	printf("%s(%s)\n", func, args);
 
-	char* CMD_EXE = "cmd.exe";
+	char* cmd_exe = "cmd.exe";
 	char* DKSCRIPT_PATH = "C:\\Users\\Administrator\\DigitalKnob\\Development\\DKC\\functions\\dk_callDKBatch.h";
 	char* DKBATCH_FUNCTIONS_DIR_ = "C:\\Users\\Administrator\\DigitalKnob\\Development\\DKBatch\\functions\\";
 
 	char DKBATCH_COMMAND[512];
-	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKBATCH_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKBATCH_FUNCTIONS_DIR_=%s) & (set PATH=!DKBATCH_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKBATCH_FUNCTIONS_DIR_, func, args);
     printf("%s\n", DKBATCH_COMMAND);
 	
 	FILE *fp;

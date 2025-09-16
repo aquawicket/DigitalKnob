@@ -6,30 +6,31 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# RUN
+::# DKINSTALL()
 ::#
-:RUN
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
+
+	if EXIST "%cmd_exe%" (%return%)
+
+	::###### FIX ComSpec system environment varioble case ######
+	for %%A in ("%ComSpec%") do (
+		if "%ComSpec%" neq "%%~fA" (
+			set "ComSpec=%%~fA"
+			setx /M ComSpec "%%~fA"
+		)
+	)
 	
-	%dk_call% dk_validate WEBSOCKETD_EXE "%dk_call% dk_depend websocketd"
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_CMD_EXE"
+	set "cmd_exe=%ComSpec:\=/%"
+	if NOT EXIST "%cmd_exe%" (%dk_call% dk_findProgram cmd_exe "cmd.exe" "%windir%")
 	
-	::%WEBSOCKETD_EXE% --devconsole --port=8080 count.cmd
-	::%WEBSOCKETD_EXE% --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd
-	start C:/Users/Administrator/DigitalKnob/Development/DKBatch/apps/websocketd/console.html
-	::"%WEBSOCKETD_EXE%" --port=8080 --staticdir=%DIGITALKNOB_DIR:/=\% stdparser.cmd
-	::"%WEBSOCKETD_EXE%" --port=8080 --staticdir=. stdparser.cmd
-	"%WEBSOCKETD_EXE%" --port=8080 cmd /V:ON
+	%dk_call% dk_assertPath "%cmd_exe:\=/%"
+
+	endlocal & (
+		set "cmd_exe=%cmd_exe:\=/%"
+	)
 %endfunction%
-
-
-
-
-
-
-
-
 
 
 
@@ -38,5 +39,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% RUN
+	%dk_call% DKINSTALL
+	%dk_call% dk_debug "cmd_exe = %cmd_exe%"
 %endfunction%

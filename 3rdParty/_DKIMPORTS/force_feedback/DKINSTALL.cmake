@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Mac)
-	dk_undepend(force_feedback)
+	dk_disable(force_feedback)
 	dk_return()
 endif()
 

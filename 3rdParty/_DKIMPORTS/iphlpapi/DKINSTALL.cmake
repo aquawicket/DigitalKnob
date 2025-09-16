@@ -16,7 +16,7 @@ include_guard()
 # https://learn.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(NOT Windows)
-	dk_undepend(iphlpapi)
+	dk_disable(iphlpapi)
 	dk_return()
 endif()
 

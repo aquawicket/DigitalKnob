@@ -193,10 +193,10 @@ function(dk_generate)
 	
 	dk_echo("")
 	dk_echo("****** CMAKE COMMAND ******")
-	#dk_nativePath("${CMAKE_EXE}" NATIVE_CMAKE_EXE)
+	#dk_nativePath("${cmake_exe}" NATIVE_cmake_exe)
 	dk_printVar(CMAKE_ARGS)
-	#TODO: ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error("CMake Generation Failed"
-	execute_process(COMMAND ${CMAKE_EXE} ${CMAKE_ARGS})
+	#TODO: ${cmake_exe} "${CMAKE_ARGS[@]}" && dk_echo "CMake Generation Successful" || dk_error("CMake Generation Failed"
+	execute_process(COMMAND ${cmake_exe} ${CMAKE_ARGS})
 	dk_echo("")
 	
 endfunction()

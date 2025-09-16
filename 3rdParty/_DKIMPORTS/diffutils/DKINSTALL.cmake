@@ -16,5 +16,5 @@ include_guard()
 # https://packages.msys2.org/base/diffutils
 
 
-dk_validate(msys2 "dk_depend(msys2)")
+dk_depend(msys2)
 dk_installPackage(diffutils)

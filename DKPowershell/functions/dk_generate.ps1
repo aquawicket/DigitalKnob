@@ -178,8 +178,8 @@ function Global:dk_generate() {
 	
 	dk_call dk_echo "\n";
 	dk_call dk_echo "****** CMAKE COMMAND ******\n";
-	dk_call dk_echo "$CMAKE_EXE $CMAKE_ARGS ${clr}\n"
-	dk_call dk_call "$CMAKE_EXE" @CMAKE_ARGS;
+	dk_call dk_echo "$cmake_exe $CMAKE_ARGS ${clr}\n"
+	dk_call dk_call "$cmake_exe" @CMAKE_ARGS;
 	dk_call dk_echo "\n";
 }
 

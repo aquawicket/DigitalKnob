@@ -16,7 +16,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # https://www.thegeekdiary.com/rpm-command-not-found
 
 if(NOT Linux_Host OR Android_Host)
-	dk_undepend(rpm)
+	dk_disable(rpm)
 	dk_return()
 endif()
 

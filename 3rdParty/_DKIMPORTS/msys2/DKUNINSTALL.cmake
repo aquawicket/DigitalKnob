@@ -17,7 +17,7 @@ include_guard()
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
 dk_validate(Host_Os "dk_Host_Os()")
 if(NOT DEFINED Windows_Host)
-	dk_undepend(msys2)
+	dk_disable(msys2)
 	return()
 endif()
 

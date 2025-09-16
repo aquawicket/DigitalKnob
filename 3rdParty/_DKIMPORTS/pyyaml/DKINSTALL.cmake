@@ -14,7 +14,7 @@ include_guard()
 
 ############ pyyaml ############
 # https://github.com/yaml/pyyaml
-dk_validate(PYTHON "dk_depend(python)")
+dk_depend(python)
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 
 ### INSTALL ###

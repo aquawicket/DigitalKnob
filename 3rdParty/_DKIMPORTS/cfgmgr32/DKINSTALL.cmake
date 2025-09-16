@@ -16,7 +16,7 @@ include_guard()
 # https://learn.microsoft.com/en-us/windows/win32/api/setupapi
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Windows)
-	dk_undepend(cfgmgr32.lib)
+	dk_disable(cfgmgr32.lib)
 	dk_return()
 endif()
 

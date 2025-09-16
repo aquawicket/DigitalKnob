@@ -14,7 +14,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(NOT Linux AND NOT Raspberry)
-	dk_undepend(libxrandr-dev)
+	dk_disable(libxrandr-dev)
 	dk_return()
 endif()
 

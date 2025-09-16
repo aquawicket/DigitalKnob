@@ -18,7 +18,7 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Windows_Host)
-	dk_undepend(cygwin)
+	dk_disable(cygwin)
 	return()
 endif()
 
@@ -52,8 +52,7 @@ endif()
 #if(NOT EXISTS "???")
 dk_info("running install_crosstool.cmd")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_validate(cmd_exe "dk_depend(cmd)")
-dk_nativePath("${cmd_exe}" cmd_exe)
+dk_depend(cmd)
 set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
 dk_exec(${cmd_exe} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
 	

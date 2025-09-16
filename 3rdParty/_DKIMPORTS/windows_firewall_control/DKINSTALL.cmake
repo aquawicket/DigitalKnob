@@ -18,7 +18,7 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(NOT Windows_Host)
-	dk_undepend(windows_firewall_control)
+	dk_disable(windows_firewall_control)
 	dk_return()
 endif()
 

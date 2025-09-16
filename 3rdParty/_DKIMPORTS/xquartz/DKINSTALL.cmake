@@ -20,7 +20,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Mac)
-	dk_undepend(xquartz)
+	dk_disable(xquartz)
 	dk_return()
 endif()
 

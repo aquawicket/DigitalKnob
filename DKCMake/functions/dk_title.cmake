@@ -24,7 +24,7 @@ function(dk_title)
 	dk_validate(cmd_exe "dk_depend(cmd)")
 
 	if(EXISTS "${cmd_exe}")
-		execute_process(COMMAND ${cmd_exe} /c "title ${ARGV}")
+		execute_process(COMMAND ${cmd_exe} /c title ${ARGV})
 	endif()
 	
 	###### method_2: dk_callDKBatch ######

@@ -18,7 +18,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Apple)
-	dk_undepend(video_toolbox)
+	dk_disable(video_toolbox)
 	dk_return()
 endif()
 

@@ -18,7 +18,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # https://invisible-island.net/datafiles/release/ncurses.tar.gz
 
 if(Windows)
-	dk_undepend(ncurses)
+	dk_disable(ncurses)
 	dk_return()
 endif()
 

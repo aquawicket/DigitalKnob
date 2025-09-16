@@ -78,5 +78,5 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL
-	%dk_call% dk_echo "bash_exe = %bash_exe%"
+	%dk_call% dk_debug "bash_exe = %bash_exe%"
 %endfunction%

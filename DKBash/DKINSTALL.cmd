@@ -19,7 +19,7 @@ set "DKBash_ENV=WSL"
 
 	::###### Install DKBash ######
 	echo Installing DKBash . . .
-	%dk_call% dk_validate CMD_EXE "%dk_call% dk_CMD_EXE"
+	%dk_call% dk_validate cmd_exe "%dk_call% dk_CMD_EXE"
 	
 	::########### (GIT) #############
 	if /i "%DKBash_ENV%" equ "GIT" (%dk_call% dk_validate bash_exe "%dk_call% dk_depend bash GIT")
@@ -48,7 +48,7 @@ set "DKBash_ENV=WSL"
 	
 	::### Add the DKBash command to the registry ###
 	set "PATH=%PATH%"
-	ftype DKBash="%CMD_EXE:/=\%" /V:ON /k set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=%BASH_C_DIVE%^!" ^&^& %bash_exe% "^!f^!"
+	ftype DKBash="%cmd_exe:/=\%" /V:ON /k set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=%BASH_C_DIVE%^!" ^&^& %bash_exe% "^!f^!"
 	:: "C:\Users\Administrator\DigitalKnob\Development\3rdParty\msys2-base-x86_64-20241208\usr\bin\bash.exe" -c "/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_debug.sh"
 	:: "C:\Users\Administrator\DigitalKnob\Development\3rdParty\msys2-base-x86_64-20241208\usr\bin\env.exe" MSYSTEM=MSYS /usr/bin/bash "/c/Users/Administrator/DigitalKnob/Development/DKBash/functions/dk_debug.sh"
 	::### associate .sh with DKBash ###	

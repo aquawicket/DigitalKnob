@@ -17,7 +17,7 @@ dk_validate(Target_Config  "dk_Target_Config()")
 # https://learn.microsoft.com/en-us/windows/win32/psapi/psapi-functions
 
 if(NOT Windows)
-	dk_undepend(psapi)
+	dk_disable(psapi)
 	dk_return()
 endif()
 
