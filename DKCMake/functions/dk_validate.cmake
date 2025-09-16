@@ -34,8 +34,7 @@ function(dk_validate)# variable code)
 		dk_eval("${ARGV1}")
 	endif()
 	
-	#dk_echo("${variable} = ${${variable}}")
-	#dk_printVar(${variable})
+	#dk_debug("${variable} = ${${variable}}")
 endfunction()
 
 

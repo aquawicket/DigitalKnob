@@ -15,18 +15,22 @@ include_guard()
 #########################################################################
 # dk_title(string)
 #
+#	Set the title of the console window
 #
 function(dk_title)
     dk_debugFunc(0 99)
  
-	###### dk_callDKBatch ######
-#	dk_callDKBatch(dk_title ${ARGV})
-	
-	###### cmd direct #######
-	dk_CMD_EXE()
-	if(cmd_exe)
+	###### method_1: cmd direct #######
+	#dk_validate(cmd_exe "dk_depend(cmd)")
+	if(NOT EXISTS "${cmd_exe}")
+		dk_depend(cmd)
+	endif()
+	if(EXISTS "${cmd_exe}")
 		execute_process(COMMAND ${cmd_exe} /c "title ${ARGV}")
 	endif()
+	
+	###### method_2: dk_callDKBatch ######
+	# dk_callDKBatch(dk_title ${ARGV})
 endfunction()
 
 

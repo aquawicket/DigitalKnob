@@ -100,19 +100,6 @@ endfunction()
 
 
 
-#	###### cmd_exe ######
-#	dk_validate(cmd_exe "dk_CMD_EXE()")
-#	if(NOT EXISTS "${cmd_exe}")
-#		dk_set(cmd_exe "/mnt/c/Windows/System32/cmd.exe")
-#	endif()
-	
-#	if(NOT EXISTS "${cmd_exe}")
-#		dk_warning("cmd_exe:${cmd_exe} not found")
-#	else()
-#		dk_set(cmd_exe "${cmd_exe}")
-#		dk_printVar(cmd_exe)
-#	endif()
-
 #	###### CYGPATH_EXE ######
 #	if(NOT EXISTS "${CYGPATH_EXE}")
 #		if(EXISTS "/usr/bin/cygpath.exe")

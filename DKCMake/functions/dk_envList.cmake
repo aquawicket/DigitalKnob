@@ -20,13 +20,17 @@ include_guard()
 #   use ${CURRENT_<name>} to get the topmost item.
 #
 function(dk_envList)
-	dk_debugFunc()
+	dk_debugFunc(2 3)
 
 	set(LIST_NAME   "${ARGV0}")
 	set(CMND 		"${ARGV1}")
-	set(Import_Name 	"${ARGV2}")	### push the value
-	
+	set(Import_Name "${ARGV2}")	### push the value
 	set(_Stack_ "$ENV{${LIST_NAME}_Stack}")		### copy the env variable to local variable
+	
+#	if(Import_Name IN_LIST _Stack_)
+#		message("${Import_Name} already in ${LIST_NAME}_Stack}")
+#		return()
+#	endif()
 	
 	### set the Import_Name item and push it to the local _Stack_ list ###
 	if("${CMND}" STREQUAL "PUSH")
@@ -46,20 +50,8 @@ function(dk_envList)
 	endif()
 
 	dk_set(CURRENT_${LIST_NAME} "${Import_Name}")	### set the global variable
-	dk_set(${LIST_NAME}_Stack 	"${_Stack_}")	### copy local variable back to the environment variable
+	dk_set(${LIST_NAME}_Stack 	"${_Stack_}")		### copy local variable back to the environment variable
 
-		
-#	dk_debug("              LIST_NAME = ${LIST_NAME}")
-#	dk_debug("                   CMND = ${CMND}")
-#	dk_debug("            Import_Name = ${Import_Name}")
-#	dk_debug("                _Stack_ = ${_Stack_}")
-#	dk_debug("               _Length_ = ${_Length_}")
-#	dk_debug("   CURRENT_${LIST_NAME} = ${CURRENT_${LIST_NAME}}")
-#	dk_debug("     ${LIST_NAME}_Stack = ${${LIST_NAME}_Stack}")
-#	dk_debug("         ${Import_Name} = ${${Import_Name}}")
-
-
-	dk_title("${${LIST_NAME}_Stack}")
 	#dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 endfunction()
 

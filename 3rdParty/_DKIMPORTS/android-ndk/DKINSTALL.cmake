@@ -17,7 +17,7 @@ dk_depend(android-sdk)
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_set			(android-ndk "${android-sdk}/ndk/${android-ndk_Build}")
-dk_set			(ANDROID_NDK "${android-sdk}/ndk/${android-ndk_Build}")
+dk_set			(ANDROID_NDK "${android-ndk}")
 #dk_mkdir		("${android-sdk}/ndk")
 
 if(Windows_Host)

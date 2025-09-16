@@ -155,7 +155,7 @@ endif()
 if(Android_Arm32_Debug)
 	dk_exec("${BOOST}/SetupAndroid.sh")
 	dk_exec(
-		#setx NDK_ROOT ${ANDROID_NDK} &&
+		#setx NDK_ROOT ${android-ndk} &&
 		"${BOOST}/b2.exe"
 		toolset=clang-armeabiv7a
 		architecture=arm
@@ -175,7 +175,7 @@ if(Android_Arm32_Debug)
 		binary-format=elf)
 elseif(Android_Arm32_Release)
 	dk_exec(
-		#setx NDK_ROOT ${ANDROID_NDK} &&
+		#setx NDK_ROOT ${android-ndk} &&
 		"${BOOST}/b2.exe"
 		toolset=clang-armeabiv7a
 		architecture=arm
@@ -195,7 +195,7 @@ elseif(Android_Arm32_Release)
 		binary-format=elf)
 elseif(Android_Arm64_Debug)
 	dk_exec(
-		#setx NDK_ROOT ${ANDROID_NDK} &&
+		#setx NDK_ROOT ${android-ndk} &&
 		"${BOOST}/b2.exe"
 		toolset=clang-arm64v8a
 		architecture=arm
@@ -216,7 +216,7 @@ elseif(Android_Arm64_Debug)
 		binary-format=elf)
 elseif(Android_Arm64_Release)
 	dk_exec(
-		#setx NDK_ROOT ${ANDROID_NDK} &&
+		#setx NDK_ROOT ${android-ndk} &&
 		"${BOOST}/b2.exe"
 		toolset=clang-arm64v8a
 		architecture=arm

@@ -101,7 +101,7 @@ endif()
 
 ### FIXME - temporarily disabled
 ###### SignLicenses ######
-#if(NOT EXISTS "${ANDROID_SDK}/licenses")
+#if(NOT EXISTS "${android-sdk}/licenses")
 if(0)
 	# FIXME:  more work to be done on killing tasks
 	#if(Windows_Host)

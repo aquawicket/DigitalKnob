@@ -11,13 +11,20 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
 
+
 ####################################################################
 # dk_CMD_EXE()
 #
 #
 function(dk_CMD_EXE)
-    dk_debugFunc()
-
+	dk_warning("dk_CMD_EXE is deprecated.  Use dk_depend(cmd)")
+	if(NOT EXISTS "${cmd_exe}")
+		dk_depend(cmd)
+	endif()
+	return()
+	
+	#########################################
+	dk_debugFunc()
 	###### SET ######
 	if(ARGV)
 		dk_set(cmd_exe "${ARGV0}")

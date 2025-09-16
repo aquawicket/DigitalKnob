@@ -70,7 +70,7 @@ if(Android OR Mac)
 endif()
 
 if(Android)
-	dk_configure		(${CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${ANDROID_NDK}/sources/android/cpufeatures" -DBUILD_STATIC=${BUILD_STATIC_LIBS} -DBUILD_SHARED=${BUILD_SHARED_LIBS})
+	dk_configure		(${CRYPTOPP} "-DCMAKE_CXX_FLAGS=/I${android-ndk}/sources/android/cpufeatures" -DBUILD_STATIC=${BUILD_STATIC_LIBS} -DBUILD_SHARED=${BUILD_SHARED_LIBS})
 elseif(Emscripten)
 	dk_configure		(${CRYPTOPP} -DBUILD_STATIC=${BUILD_STATIC_LIBS} -DBUILD_SHARED=${BUILD_SHARED_LIBS})
 elseif(Ios)

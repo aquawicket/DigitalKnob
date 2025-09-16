@@ -35,7 +35,7 @@ function(dk_callDKBatch func)
 #		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
 #	endif()
 
-	dk_validate(cmd_exe 					"dk_CMD_EXE()")
+	dk_validate(cmd_exe "dk_depend(cmd)")
 	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
 	set(dk_callDKBatch_call "${func}(${args})")
 	set(dk_callDKBatch_command ${cmd_exe} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & if defined ${func} echo !${func}!)

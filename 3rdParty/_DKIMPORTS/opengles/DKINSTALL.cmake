@@ -14,7 +14,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 if(Android)
-	#dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
+	#dk_findLibrary(OpenGLES ${android-ndk}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
 	dk_define(GL_GLEXT_PROTOTYPES)
 	dk_lib(GLESv1_CM)
 	dk_lib(GLESv2)

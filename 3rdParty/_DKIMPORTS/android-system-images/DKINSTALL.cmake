@@ -18,8 +18,8 @@ include_guard()
 
 
 dk_depend(android-sdk)
-dk_mkdir(${ANDROID_SDK}/system-images)
+dk_mkdir(${android-sdk}/system-images)
 
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${ANDROID_SYSTEM_IMAGES_DL} _PATH_ ${ANDROID_SDK}/system-images/${ANDROID_SYSTEM_IMAGES_VERSION})
+dk_import			(${ANDROID_SYSTEM_IMAGES_DL} _PATH_ ${android-sdk}/system-images/${ANDROID_SYSTEM_IMAGES_VERSION})

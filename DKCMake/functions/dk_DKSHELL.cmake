@@ -57,7 +57,7 @@ function(dk_DKSHELL)
 	###### GET ######
 	else()
 		if("$ENV{PROMPT}" STREQUAL "\$P\$G")
-			dk_validate(cmd_exe "dk_CMD_EXE()")
+			dk_validate(cmd_exe "dk_depend(cmd)")
 			set(DKSHELL_PATH "${cmd_exe}")
 		elseif("$ENV{PATHEXT}" MATCHES ";.CPL")
 			dk_validate(POWERSHELL_EXE "dk_POWERSHELL_EXE()")

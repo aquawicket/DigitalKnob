@@ -25,8 +25,7 @@ include_guard()
 #
 function(dk_depend Plugin) #target
 	dk_debugFunc(1 2)
-	
-	#message("############ dk_depend(${Plugin}) ############")
+	message("############ dk_depend(${Plugin}) ############")
 	
 	set(dkdepend_list $CACHE{dkdepend_list})
 	if(Plugin IN_LIST dkdepend_list)
@@ -42,6 +41,12 @@ function(dk_depend Plugin) #target
 		return()
 	endif()
 	
+	set(PLUGIN_Stack "$ENV{PLUGIN_Stack}")		### copy the env variable to local variable
+	if(Plugin IN_LIST PLUGIN_Stack)
+		message("${Plugin} already in PLUGIN_Stack")
+		return()
+	endif()
+	
 	#dk_delete("${${CURRENT_PLUGIN}_Build_Dir}/DKBUILD.log")
 	
 	###### Push Plugin to the PLUGIN_STACK ######
@@ -51,6 +56,7 @@ function(dk_depend Plugin) #target
 	dk_debug(">>>>>##############################################################################>>>>>")
 	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} ENTER ##########################>>>>>")
 	dk_debug(">>>>>##############################################################################>>>>>")
+		dk_title("${PLUGIN_Stack}")
 	
 		list(APPEND dkdepend_list "${CURRENT_PLUGIN}")
 		dk_set(dkdepend_list "${dkdepend_list}") 									# Globalize the variable
