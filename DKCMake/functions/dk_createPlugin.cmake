@@ -15,7 +15,7 @@ include_guard()
 #########################################################################
 # dk_createPlugin(url)
 #
-#	Generate a folder/DKINSTALL.cmake for a new plugin
+#	Generate a folder/DKINSTALL.cmake for a new Plugin
 #
 #	@url	- TODO
 #

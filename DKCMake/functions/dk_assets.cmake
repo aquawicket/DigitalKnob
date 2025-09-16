@@ -17,7 +17,7 @@ include_guard()
 #
 #	Add a library's files to the App's assets
 #
-#	@Source_Dir - The path to the library or plugin who's assets we wish to include
+#	@Source_Dir - The path to the library or Plugin who's assets we wish to include
 #
 function(dk_assets)
 	dk_debugFunc(0 1)

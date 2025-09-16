@@ -13,12 +13,12 @@ include_guard()
 
 
 #########################################################################
-# dk_getPathToPlugin(plugin rtn_var)
+# dk_getPathToPlugin(Plugin rtn_var)
 #
-#	@plugin		- TODO
+#	@Plugin		- TODO
 #	@rtn_var		- TODO
 #
-function(dk_getPathToPlugin plugin rtn_var)
+function(dk_getPathToPlugin Plugin rtn_var)
 	dk_debugFunc()
 	
 	list(FIND dkdisabled_list "${ARGV}" index)
@@ -30,29 +30,29 @@ function(dk_getPathToPlugin plugin rtn_var)
 	#file(GLOB children RELATIVE $ENV{DIGITALKNOB_DIR} $ENV{DIGITALKNOB_DIR}/*)
  	#foreach(child ${children})
 		#dk_printVar(child)
-		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}/DKINSTALL.cmake)
-		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${plugin}" PARENT_SCOPE)
+		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${Plugin}/DKINSTALL.cmake)
+		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/3rdParty/_DKIMPORTS/${Plugin}" PARENT_SCOPE)
 		#	return()
     	#endif()
-		#dk_debug($ENV{DKIMPORTS_DIR}/${plugin}/DKINSTALL.cmake)
+		#dk_debug($ENV{DKIMPORTS_DIR}/${Plugin}/DKINSTALL.cmake)
 		dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-		if(EXISTS $ENV{DKIMPORTS_DIR}/${plugin}/DKINSTALL.cmake)
-			set(${rtn_var} "$ENV{DKIMPORTS_DIR}/${plugin}" PARENT_SCOPE)
+		if(EXISTS $ENV{DKIMPORTS_DIR}/${Plugin}/DKINSTALL.cmake)
+			set(${rtn_var} "$ENV{DKIMPORTS_DIR}/${Plugin}" PARENT_SCOPE)
 			return()
     	endif()
-		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/plugins/${plugin}/DKINSTALL.cmake)
-		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/plugins/${plugin}" PARENT_SCOPE)
+		#if(EXISTS $ENV{DIGITALKNOB_DIR}/${child}/plugins/${Plugin}/DKINSTALL.cmake)
+		#	set(${rtn_var} "$ENV{DIGITALKNOB_DIR}/${child}/plugins/${Plugin}" PARENT_SCOPE)
 		#	return()
     	#endif()
 		dk_validate(DKCPP_PLUGINS_DIR "dk_DKBRANCH_DIR()")
-		if(EXISTS ${DKCPP_PLUGINS_DIR}/${plugin}/DKINSTALL.cmake)
-			set(${rtn_var} "${DKCPP_PLUGINS_DIR}/${plugin}" PARENT_SCOPE)
+		if(EXISTS ${DKCPP_PLUGINS_DIR}/${Plugin}/DKINSTALL.cmake)
+			set(${rtn_var} "${DKCPP_PLUGINS_DIR}/${Plugin}" PARENT_SCOPE)
 			return()
     	endif()
   	#endforeach()
 	
 	set(${rtn_var} "")
-	dk_fatal("Could not find ${plugin} Plugin.")
+	dk_fatal("Could not find ${Plugin} Plugin.")
 endfunction()
 
 

@@ -173,7 +173,7 @@ function(dk_configure)
 #	  ${PLUGIN}		  	  ${CURRENT_PLUGIN}					:LIBEXPAT
 #	${${PLUGIN}}		${${CURRENT_PLUGIN}}				:LIBEXPAT 				= C:/Users/Administrator/DigitalKnob/Development/3rdParty/libexpat-b70c8f5
 #						${${CURRENT_PLUGIN}_Install_Name}	:LIBEXPAT_Install_Name	= libexpat-b70c8f5
-#     ${plugin}   		${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
+#     ${Plugin}   		${${CURRENT_PLUGIN}_Import_Name}  	:LIBEXPAT_Import_Name 	= libexpat
 #     ${Plugin_Path}	${${CURRENT_PLUGIN}_Import_Path}    :LIBEXPAT_Import_Path 	= C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/libexpat
 #						CMAKE_INSTALL_PREFIX 										= C:/Users/Administrator/DigitalKnob/DKBIN
 
@@ -188,7 +188,7 @@ function(dk_configure)
 	if(PROJECT_INCLUDE_3RDPARTY)
 		if(NOT CMAKE_SCRIPT_MODE_FILE)
 			if(EXISTS "${${CURRENT_PLUGIN}}/CMakeLists.txt")
-				dk_debug("adding ${${plugin}} to the project solution")
+				dk_debug("adding ${${Plugin}} to the project solution")
 				add_subdirectory("${${CURRENT_PLUGIN}}" "${${CURRENT_PLUGIN}}/${Target_Config}")
 			endif()
 		endif()
@@ -207,9 +207,9 @@ function(dk_configure)
 	if("${${CURRENT_PLUGIN}}" MATCHES "${DKCPP_PLUGINS_DIR}") ##### TEST ME:
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
-			dk_info("Installing ${plugin} header files")
-			file(INSTALL DIRECTORY ${Plugin_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
-			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
+			dk_info("Installing ${Plugin} header files")
+			file(INSTALL DIRECTORY ${Plugin_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.h")
+			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${Plugin})
 		endif()
 		
 		#Add the DKPlugin to the app project

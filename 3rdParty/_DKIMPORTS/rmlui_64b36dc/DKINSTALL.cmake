@@ -92,9 +92,9 @@ if(MSVC)
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
 		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
+		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
@@ -122,9 +122,9 @@ if(MSVC)
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
 		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
+		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
@@ -151,9 +151,9 @@ else()
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
 		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable plugin for Lottie animations. Requires the rlottie library." OFF
+		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF

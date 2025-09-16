@@ -138,16 +138,16 @@ dk_buildLog("######  Enabled Dependencies (sorted)  #######")
 dk_buildLog("##############################################")
 #dk_printVar(dkdepend_list)
 #list(REMOVE_DUPLICATES dkdepend_list)
-foreach(plugin ${dkdepend_list})
-	if(NOT plugin IN_LIST dkdisabled_list)
-		dk_buildLog("${plugin}")
+foreach(Plugin ${dkdepend_list})
+	if(NOT Plugin IN_LIST dkdisabled_list)
+		dk_buildLog("${Plugin}")
 	endif()
 endforeach()
 dk_buildLog("\n")
 
-foreach(plugin ${dkdepend_list})
-	if(plugin IN_LIST dkdisabled_list)
-		dk_notice("plugin:${plugin} disabled, skipping...")
+foreach(Plugin ${dkdepend_list})
+	if(Plugin IN_LIST dkdisabled_list)
+		dk_notice("Plugin:${Plugin} disabled, skipping...")
 		continue()
 	endif()
 		
@@ -155,36 +155,36 @@ foreach(plugin ${dkdepend_list})
 	dk_set(LIBLIST "") # used for double checking
 	
 	dk_info("############################################################")
-	dk_info("######  Processing   ${plugin} . . .                        ")
+	dk_info("######  Processing   ${Plugin} . . .                        ")
 	dk_info("############################################################")
-	dk_debug("plugin = ${plugin} = ${${plugin}}")
+	dk_debug("Plugin = ${Plugin} = ${${Plugin}}")
 	
-	## Strip any sub-library named in the plugin, and enable it
-	string(FIND "${plugin}" " " index)
+	## Strip any sub-library named in the Plugin, and enable it
+	string(FIND "${Plugin}" " " index)
 	if(${index} GREATER -1)
 		math(EXPR index "${index}+1")
-		string(SUBSTRING ${plugin} ${index} -1 arg2)
+		string(SUBSTRING ${Plugin} ${index} -1 arg2)
 		math(EXPR index "${index}-1")
-		string(SUBSTRING ${plugin} 0 ${index} plugin)
+		string(SUBSTRING ${Plugin} 0 ${index} Plugin)
 		dk_enable(${arg2})
 	endif()
 	
 	#################### PLUGIN_Install_Path #####################
-	dk_getPathToPlugin(${plugin} PLUGIN_Install_Path)
+	dk_getPathToPlugin(${Plugin} PLUGIN_Install_Path)
 	dk_assertPath("${PLUGIN_Install_Path}")
-	dk_debug("${plugin}:PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
+	dk_debug("${Plugin}:PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
 	
 	###############################################################################################
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKCpp/plugins
 	###############################################################################################
-	dk_depend(${plugin})
-	#if(NOT "${plugin}")
-	#	dk_error("${plugin} is invalid")
+	dk_depend(${Plugin})
+	#if(NOT "${Plugin}")
+	#	dk_error("${Plugin} is invalid")
 	#endif()
 	
 	
-	#check that each library is using the proper variables. Should be UPPERCASE plugin name.   I.E. boost = ${BOOST}
-	dk_toUpper(${plugin} PLUGIN)
+	#check that each library is using the proper variables. Should be UPPERCASE Plugin name.   I.E. boost = ${BOOST}
+	dk_toUpper(${Plugin} PLUGIN)
 	dk_debug("PLUGIN = ${PLUGIN} = ${${PLUGIN}}")
 	if(NOT DEFINED ${PLUGIN})
 		dk_warning("${PLUGIN}:'${${PLUGIN}}' is invalid")
@@ -213,7 +213,7 @@ foreach(plugin ${dkdepend_list})
 			#		add_subdirectory(${PLUGIN_Install_Path} ${PLUGIN_Install_Path}/${Target_Tuple}/Release)
 			#	endif()
 			#endif()
-			dk_debug("adding ${${plugin}}")
+			dk_debug("adding ${${Plugin}}")
 			add_subdirectory(${${PLUGIN}} ${${PLUGIN}}/${Target_Config})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
@@ -225,7 +225,7 @@ foreach(plugin ${dkdepend_list})
 	# Libraries in the /DKCpp/plugins folder
 	dk_toLower("${DKPLUGIN_LIST}" dkplugin_list)
 	#dk_toLower("${PLUGIN}" plugin)
-	string(FIND "${dkplugin_list}" "${plugin}" isDKPlugin)
+	string(FIND "${dkplugin_list}" "${Plugin}" isDKPlugin)
 	
 	# Install 3rd Party Libs
 	if(INSTALL_DKLIBS)
@@ -239,9 +239,9 @@ foreach(plugin ${dkdepend_list})
 	if(${isDKPlugin} GREATER -1)
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
-			dk_info("Installing ${plugin} header files")
-			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${plugin} FILES_MATCHING PATTERN "*.h")
-			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${plugin})
+			dk_info("Installing ${Plugin} header files")
+			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.h")
+			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${Plugin})
 		endif()
 		
 		#Add the DKPlugin to the app project
@@ -275,7 +275,7 @@ foreach(plugin ${dkdepend_list})
 #		
 #			if(PREBUILD)
 #				dk_fatal("This is still being used")
-#				dk_info("************* Building ${plugin} *************")
+#				dk_info("************* Building ${Plugin} *************")
 #				dk_chdir(${PLUGIN_Install_Path}/${Target_Config})
 #				
 #				if(MULTI_CONFIG)
@@ -523,9 +523,9 @@ if(Android)
 	endif()
 		
 	### Add Dependencies ###
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(main ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(main ${Plugin})
 		endif()	
 	endforeach()
 	
@@ -640,9 +640,9 @@ elseif(Cosmopolitan)
 	endif()
 
 	### Add Dependencies ###
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(${Target_App} ${Plugin})
 		endif()	
 	endforeach()
 
@@ -675,9 +675,9 @@ elseif(Emscripten)
 	set(CMAKE_EXECUTABLE_SUFFIX ".html")
 	
 	### Add Dependencies ###
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(${Target_App} ${Plugin})
 		endif()	
 	endforeach()
 
@@ -786,9 +786,9 @@ elseif((Ios) OR (Iossim))
 	add_executable(${Target_App} MACOSX_BUNDLE ${app_ICONS} ${App_SRC} ${RES_FILES})
 		
 	### Add Dependencies ###
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(${Target_App} ${Plugin})
 		endif()	
 	endforeach()
 		
@@ -891,9 +891,9 @@ elseif((Linux) AND (NOT Raspberry))
 	endif()
 	
 	###################### Add Build Dependencies ######################
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(${Target_App} ${Plugin})
 		endif()	
 	endforeach()
 	
@@ -979,10 +979,10 @@ elseif(Mac)
 	add_executable(${Target_App} MACOSX_BUNDLE ${app_ICONS} ${App_SRC})
 		
 	########################## Add Dependencies ########################
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			if(NOT ${plugin} MATCHES "DKCefChild")
-				add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			if(NOT ${Plugin} MATCHES "DKCefChild")
+				add_dependencies(${Target_App} ${Plugin})
 			endif()
 		endif()
 	endforeach()
@@ -1128,9 +1128,9 @@ elseif(Raspberry)
 	endif()
 
 	########################## Add Dependencies ########################
-	foreach(plugin ${dkdepend_list})
-		if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-			add_dependencies(${Target_App} ${plugin})
+	foreach(Plugin ${dkdepend_list})
+		if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+			add_dependencies(${Target_App} ${Plugin})
 		endif()	
 	endforeach()
 		
@@ -1224,9 +1224,9 @@ elseif(Windows_X86)
 	
 	########################## Add Dependencies ########################
 	if(PROJECT_INCLUDE_DKPLUGINS)
-		foreach(plugin ${dkdepend_list})
-			if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-				add_dependencies(${Target_App} ${plugin})
+		foreach(Plugin ${dkdepend_list})
+			if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+				add_dependencies(${Target_App} ${Plugin})
 			endif()	
 		endforeach()
 	endif()
@@ -1344,9 +1344,9 @@ elseif(Windows_X86_64)
 
 	########################## Add Dependencies ########################
 	if(PROJECT_INCLUDE_DKPLUGINS)
-		foreach(plugin ${dkdepend_list})
-			if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-				add_dependencies(${Target_App} ${plugin})
+		foreach(Plugin ${dkdepend_list})
+			if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+				add_dependencies(${Target_App} ${Plugin})
 			endif()	
 		endforeach()
 	endif()

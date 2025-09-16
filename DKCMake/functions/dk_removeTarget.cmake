@@ -13,27 +13,27 @@ include_guard()
 
 
 #########################################################################
-# dk_removeTarget(plugin target)
+# dk_removeTarget(Plugin target)
 #
 #	TODO
 #
-#	@plugin		- TODO
+#	@Plugin		- TODO
 #	@target		- TODO
 #
-function(dk_removeTarget plugin target)
+function(dk_removeTarget Plugin target)
 	dk_debugFunc()
 
-	if(${plugin}_targets)
-		list(REMOVE_ITEM ${plugin}_targets ${target})
+	if(${Plugin}_targets)
+		list(REMOVE_ITEM ${Plugin}_targets ${target})
 	endif()
-	if(${plugin}_targets_OFF)
-		dk_set(${plugin}_targets_OFF ${${plugin}_targets_OFF} ${target})
+	if(${Plugin}_targets_OFF)
+		dk_set(${Plugin}_targets_OFF ${${Plugin}_targets_OFF} ${target})
 	else()
-		dk_set(${plugin}_targets_OFF ${target})
+		dk_set(${Plugin}_targets_OFF ${target})
 	endif()
-	dk_set(${plugin}_${target} 0)
-	dk_unset(${plugin}_${target})
-	#dk_unset(${plugin}::${target}) # TESTME
+	dk_set(${Plugin}_${target} 0)
+	dk_unset(${Plugin}_${target})
+	#dk_unset(${Plugin}::${target}) # TESTME
 endfunction()
 
 

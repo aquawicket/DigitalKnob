@@ -13,30 +13,30 @@ include_guard()
 
 
 #########################################################################
-# dk_executable(plugin_name)
+# dk_executable(Plugin_name)
 #
 #	TODO
 #
-#	@plugin_name	- TODO
+#	@Plugin_name	- TODO
 #
-function(dk_executable plugin_name)
+function(dk_executable Plugin_name)
 	dk_debugFunc()
 	
-	dk_getPathToPlugin(${plugin_name} Plugin_Path)
+	dk_getPathToPlugin(${Plugin_name} Plugin_Path)
 	if(NOT EXISTS "${Plugin_Path}")
-		dk_fatal("${plugin_name} plugin not found")
+		dk_fatal("${Plugin_name} Plugin not found")
 	endif()
 	#dk_include(${Plugin_Path})
-	dk_include(${plugin_name})
+	dk_include(${Plugin_name})
 	dk_delete(${Plugin_Path}/CMakeLists.txt)
 	if(NOT EXISTS "${Plugin_Path}/CMakeLists.txt")
-	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "### ${plugin_name} ###\n")
+	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "### ${Plugin_name} ###\n")
 	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "cmake_minimum_required(VERSION 3.10)\n")
 	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "include($ENV{DKCMAKE_DIR}/DKFunctions.cmake)\n")
 	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "include($ENV{DKCMAKE_DIR}/DKVariables.cmake)\n")
-	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "project(${plugin_name})\n")
+	#dk_fileAppend(${Plugin_Path}/CMakeLists.txt "project(${Plugin_name})\n")
 	endif()
-	dk_addToPluginList(${plugin_name})
+	dk_addToPluginList(${Plugin_name})
 endfunction()
 
 

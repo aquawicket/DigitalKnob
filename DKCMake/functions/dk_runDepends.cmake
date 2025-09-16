@@ -13,22 +13,22 @@ include_guard()
 
 
 #########################################################################
-# dk_runDepends(plugin)
+# dk_runDepends(Plugin)
 #
 #	Strip everything from the library's DKINSTALL.cmake file except dk_depend() commands AND conditionals.
 #	Conditionals and flow control statements such as if(), else(), elseif(), endif(), return() will remain included during the sorting process. 
 #	WARNING: BE CAREFULL WRITING NEW VARIABLES TO USE WITH CONDITIONALS, AS THEY MIGHT BE IGNORED 
 #
-#	@plugin		- TODO
+#	@Plugin		- TODO
 #
-function(dk_runDepends plugin)
+function(dk_runDepends Plugin)
 	dk_debugFunc()
 	
-	dk_getPathToPlugin(${plugin} Plugin_Path)
+	dk_getPathToPlugin(${Plugin} Plugin_Path)
 	if(NOT Plugin_Path)
-		dk_fatal("${plugin} plugin not found")
+		dk_fatal("${Plugin} Plugin not found")
 	endif()
-	dk_verbose("FOUND ${plugin} DKINSTALL.cmake at ${Plugin_Path}")
+	dk_verbose("FOUND ${Plugin} DKINSTALL.cmake at ${Plugin_Path}")
 	
 	file(STRINGS ${Plugin_Path}/DKINSTALL.cmake lines)
 	dk_unset(disable_script)
@@ -94,5 +94,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_runDepends(plugin) #TODO
+	dk_runDepends(Plugin) #TODO
 endfunction()

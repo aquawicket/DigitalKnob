@@ -13,25 +13,25 @@ include_guard()
 
 
 #########################################################################
-# dk_require(plugin)
+# dk_require(Plugin)
 #
-#	Require a plugin, return if plugin unavailable
+#	Require a Plugin, return if Plugin unavailable
 #
-#	@plugin				- TODO
+#	@Plugin				- TODO
 #	@target (optional)	- TODO
 #
 # FIXME
-macro(dk_require plugin)
+macro(dk_require Plugin)
 	dk_debugFunc()
 	
-	if(plugin IN_LIST dkdisabled_list)
+	if(Plugin IN_LIST dkdisabled_list)
 		dk_basename(${CMAKE_CURRENT_LIST_DIR} Lib)
-		dk_notice("${Lib} requires ${plugin} which is DISABLED")
+		dk_notice("${Lib} requires ${Plugin} which is DISABLED")
 		dk_notice("DISABLING ${Lib}")
 		dk_disable(${Lib})
 		dk_return()
 	endif()
-	dk_depend(${plugin})
+	dk_depend(${Plugin})
 endmacro()
 
 

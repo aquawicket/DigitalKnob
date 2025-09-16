@@ -127,9 +127,9 @@ function(dk_configureApp)
 		
 		########################## Add Dependencies ########################
 		if(PROJECT_INCLUDE_DKPLUGINS)
-			foreach(plugin ${dkdepend_list})
-				if(EXISTS "${DKCPP_PLUGINS_DIR}/${plugin}/CMakeLists.txt")
-					add_dependencies(${Target_App} ${plugin})
+			foreach(Plugin ${dkdepend_list})
+				if(EXISTS "${DKCPP_PLUGINS_DIR}/${Plugin}/CMakeLists.txt")
+					add_dependencies(${Target_App} ${Plugin})
 				endif()	
 			endforeach()
 		endif()

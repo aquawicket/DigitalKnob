@@ -13,25 +13,25 @@ include_guard()
 
 
 #########################################################################
-# dk_enable(plugin)
+# dk_enable(Plugin)
 #
 #	TODO
 #
-#	@plugin		- TODO
+#	@Plugin		- TODO
 #
-function(dk_enable plugin)
+function(dk_enable Plugin)
 	dk_debugFunc()
 	
-	if(NOT ${plugin})
+	if(NOT ${Plugin})
 		if(${ARGC} GREATER 1)
 			#dk_set(${${ARGV1}} ON)
 			dk_set(HAVE_${${ARGV1}} ON)
 			dk_convertToCIdentifier(${ARGV1} argv1_macro)   # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 			dk_define(HAVE_${argv1_macro})
 		else()
-			#dk_set(${plugin} ON)
-			dk_set(HAVE_${plugin} ON)
-			dk_convertToCIdentifier(${plugin} plugin_macro) # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
+			#dk_set(${Plugin} ON)
+			dk_set(HAVE_${Plugin} ON)
+			dk_convertToCIdentifier(${Plugin} plugin_macro) # In c/c++ we can't use certian symbals in the preprocess or for macros. I.E. - must be turned to _
 			dk_define(HAVE_${plugin_macro})
 		endif()
 	endif()

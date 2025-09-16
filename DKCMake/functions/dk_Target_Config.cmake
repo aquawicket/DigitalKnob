@@ -15,7 +15,7 @@ include_guard()
 #########################################################################
 # dk_Target_Config()
 #
-#	This is where the CMakeLists.txt or configure file is located in a plugin
+#	This is where the CMakeLists.txt or configure file is located in a Plugin
 #
 #	SINGLE_CONFIG:	zlib-master/Windows_X86_64_Clang/Debug/CMakeLists.txt	Target_Config = Windows_X86_64_Clang/Debug
 #   MULTI_CONFIG:	zlib-master/Windows_X86_64_Msvc/CMakeLists.txt			Target_Config = Windows_X86_64_Msvc

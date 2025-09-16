@@ -16,7 +16,7 @@ include_guard()
 # dk_createSmartObject(object)
 #
 #	TODO
-#	We can scan each plugin and attempt to create it's variable and infomation manually here
+#	We can scan each Plugin and attempt to create it's variable and infomation manually here
 #
 #	@object		- TODO
 #

@@ -63,7 +63,7 @@ dk_depend(fmt)
 
 
 
-# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake only uses a folder name of the plugin.
+# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake only uses a folder name of the Plugin.
 # To make things more conformed and less restrictive, Lets change dk_generateCmake to also use a path as a parameter.
 # All 4 of those functions below should be able to take ("${CMAKE_CURRENT_LIST_DIR}") as the input parameter.
 
