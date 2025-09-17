@@ -1,0 +1,29 @@
+############ NoMachine #######
+# https://download.nomachine.com/everybody/
+#
+       NoMachine_Windows_X86_64_Import=https://web9001.nomachine.com/download/9.1/Windows/nomachine_9.1.24_6_x64.exe
+          NoMachine_Windows_X86_Import=https://web9001.nomachine.com/download/9.1/Windows/nomachine_9.1.24_6_x86.exe
+           NoMachine_Mac_X86_64_Import=https://web9001.nomachine.com/download/9.1/MacOSX/nomachine_9.1.24_6.dmg
+     NoMachine_Linux_x86_64_Rpm_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_x86_64.rpm
+      NoMachine_Linux_amd64_Deb_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_amd64.deb
+     NoMachine_Linux_x86_64_Tgz_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_x86_64.tar.gz
+       NoMachine_Linux_i686_Rpm_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_i686.rpm
+       NoMachine_Linux_i386_Deb_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_i386.deb
+       NoMachine_Linux_i686_Tgz_Import=https://web9001.nomachine.com/download/9.1/Linux/nomachine_9.1.24_6_i686.tar.gz
+NoMachine_Raspberry_aarch64_Rpm_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_aarch64.rpm
+  NoMachine_Raspberry_arm64_Deb_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_arm64.deb
+NoMachine_Raspberry_aarch64_Tgz_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_aarch64.tar.gz
+NoMachine_Raspberry_armv7hl_Rpm_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_armv7hl.rpm
+  NoMachine_Raspberry_armhf_Deb_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_armhf.deb
+NoMachine_Raspberry_armv7hl_Tgz_Import=https://web9001.nomachine.com/download/9.1/Raspberry/nomachine_9.1.24_6_armv7hl.tar.gz
+      NoMachine_Arm_aarch64_Rpm_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_aarch64.rpm
+        NoMachine_Arm_arm64_Deb_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_arm64.deb
+      NoMachine_Arm_aarch64_Tgz_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_aarch64.tar.gz
+      NoMachine_Arm_armv7hl_Rpm_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_armv7hl.rpm
+        NoMachine_Arm_armhf_Deb_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_armhf.deb
+      NoMachine_Arm_armv7hl_Tgz_Import=https://web9001.nomachine.com/download/9.1/Arm/nomachine_9.1.24_6_armv7hl.tar.gz
+	  
+#### Ios - Android - ChromeOs - Play Store - Downloads	  
+#	              NoMachine_Ios_Import=https://apps.apple.com/us/app/nomachine/id874286563
+#             NoMachine_Android_Import=https://play.google.com/store/apps/details?id=com.nomachine.nxplayer
+#            NoMachine_ChromeOs_Import=https://play.google.com/store/apps/details?id=com.nomachine.nxplayer

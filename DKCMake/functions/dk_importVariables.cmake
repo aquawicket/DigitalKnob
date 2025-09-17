@@ -176,6 +176,7 @@ function(dk_importVariables)
 	#PLUGIN_Release_Dir()
 	
 	PLUGIN_Version()
+	PLUGIN_Download_Path()
 	PLUGIN_Download_Basename()
 	PLUGIN_Install_Dirname()	# C:/Users/Administrator/DigitalKnob/Development/3rdParty
 	PLUGIN_Install_Name()
@@ -279,6 +280,48 @@ function(PLUGIN_DKConfig)
 	#set(PLUGIN_DKConfig ${PLUGIN_DKConfig} CACHE INTERNAL "")
 endfunction()
 
+
+##################################
+function(PLUGIN_Download_Path)
+	if(PLUGIN_Download_Path)
+		return()
+	endif()
+	
+	PLUGIN_DKConfig()
+	if(NOT PLUGIN_Url)
+		dk_notice("PLUGIN_Url is invalid")
+		return()
+	endif()
+	
+	PLUGIN_Url_Name()
+	if(NOT PLUGIN_Url_Name)
+		dk_notice("PLUGIN_Url_Name is invalid")
+	endif()
+	
+	PLUGIN_Url_Basename()
+	if(NOT PLUGIN_Url_Basename)
+		dk_notice("PLUGIN_Url_Basename is invalid")
+	endif()
+	
+	PLUGIN_Import_Name()
+	if(NOT PLUGIN_Import_Name)
+		dk_notice("PLUGIN_Import_Name is invalid")
+	endif()
+	
+	PLUGIN_Install_Name()
+	if(NOT PLUGIN_Install_Name)
+		dk_notice("PLUGIN_Install_Name is invalid")
+	endif()
+
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	if(NOT "${PLUGIN_Import_Name}" MATCHES "${PLUGIN_Url_Name}")
+		set(PLUGIN_Download_Path ${DKDOWNLOAD_DIR}/${PLUGIN_Install_Name}${PLUGIN_Url_Extension} CACHE INTERNAL "")
+	else()
+		set(PLUGIN_Download_Path ${DKDOWNLOAD_DIR}/${PLUGIN_Url_Basename} CACHE INTERNAL "")
+	endif()
+	
+	set(PLUGIN_Download_Path ${PLUGIN_Download_Path} CACHE INTERNAL "")
+endfunction()
 
 ##################################
 function(PLUGIN_Download_Basename)
