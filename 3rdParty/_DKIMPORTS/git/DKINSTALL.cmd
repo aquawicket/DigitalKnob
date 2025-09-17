@@ -37,4 +37,5 @@ if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     ::###### Install Git Context Menu ######
     %dk_call% dk_depend git/contextMenu
 	
+	%dk_call% dk_firewallAllow "%git%/mingw64/libexec/git-core/git-remote-https.exe"
 %endfunction%
