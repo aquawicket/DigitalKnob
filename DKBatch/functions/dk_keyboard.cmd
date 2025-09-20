@@ -33,7 +33,7 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
     ::echo dk_keyboard.Keyboard_Loop %*
    
     :: Read keys via PowerShell
-    dk_powershell ^
+    dk_evalPowershell ^
        Write-Host 0; ^
        while ($key -ne 27) { ^
           $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown').VirtualKeyCode; ^

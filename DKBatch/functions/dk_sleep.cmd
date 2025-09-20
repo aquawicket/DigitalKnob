@@ -12,21 +12,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_sleep
 %setlocal%
 	%dk_call% dk_debugFunc 1 
-    :: Method 1 - javascript (fastest)
-    set /a "seconds=(%~1*1000)"
-    cscript /nologo /e:javascript "%~f0" "%seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
    
-    :: Method 2 - dk_powershell
-    set /a "seconds=%~1"
-    %dk_call% dk_powershell "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
+	::### Method 1 - javascript (fastest)
+    cscript /nologo /e:javascript "%~f0" "%~1"
    
-::  :: Method 3 - powershell directly
-::  set /a "seconds=%~1"
-::  %dk_call% %POWERSHELL_EXE% -Command "Start-Sleep -Seconds %seconds%" %NO_STDERR% && %return% || (call ) %NO_OUTPUT%
+    ::### Method 2 - dk_evalPowershell
+	::%dk_call% dk_evalPowershell "Start-Sleep -Seconds %~1"
    
-    :: Method 4 - using ping
-    set /a "seconds=(%~1+1)"
-    ping 127.0.0.1 -n %seconds% >nul
+	::### Method 3 - powershell directly
+	:: powershell.exe -Command "Start-Sleep -Seconds %~1"
+   
+    ::### Method 4 - using ping
+	::set /a "seconds=(%~1+1)"
+	::ping 127.0.0.1 -n %seconds% >nul
 %endfunction%
 
 
@@ -36,12 +34,25 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_echo "sleeping for 3 seconds . . ."
+	echo(
+    echo( sleeping for 3 seconds . . .
     %dk_call% dk_sleep 3
+	echo( done
+	
+	echo(
+	echo( sleeping for 2 seconds . . .
+    %dk_call% dk_sleep 2
+	echo( done
+	
+	echo(
+	echo( sleeping for 1 second . . .
+    %dk_call% dk_sleep 1
+	echo( done
 %endfunction%
-*/
 
-WSH.Sleep(WSH.Arguments(0));
+
+*/
+WSH.Sleep(WSH.Arguments(0)*1000);
 
 
 

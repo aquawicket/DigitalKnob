@@ -52,9 +52,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 
-	::###### Try dk_powershell Expand-Archive *** VERY SLOW *** ######
+	::###### Try dk_evalPowershell Expand-Archive *** VERY SLOW *** ######
 	if NOT EXIST "%dk_extract_dest%" (
-		%dk_call% dk_powershell Expand-Archive '"%dk_extract_file%"' -DestinationPath '"%dk_extract_dest%"'
+		%dk_call% dk_evalPowershell Expand-Archive '"%dk_extract_file%"' -DestinationPath '"%dk_extract_dest%"'
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)
 	

@@ -11,7 +11,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :dk_fileSize
 %setlocal%
-	%dk_call% dk_debugFunc 2
+	%dk_call% dk_debugFunc 1 2
 
 	set _input=%1
 	set _input=%_input:"=%
@@ -19,10 +19,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%_input:~-1%" equ "/" set _input=%_input:~0,-1%
 	for %%Z in ("%_input%") do set "dk_fileSize=%%~zZ"
 	
-	::### return ###
+	::###### output ######
 	endlocal & (
 		set "dk_fileSize=%dk_fileSize%"
-		if "%~2" neq "" (set "%~2=%dk_fileSize%")
+		if "%~2" neq "" (
+			set "%~2=%dk_fileSize%"
+		) else (
+			echo %dk_fileSize%
+		)
 	)
 %endfunction%
 

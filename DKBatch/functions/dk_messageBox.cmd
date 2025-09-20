@@ -75,10 +75,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "options=%option_5%"
    
 		::%dk_call% dk_exec powershell.exe -Command "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
-		%dk_call% dk_powershell "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
+		%dk_call% dk_evalPowershell "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
 		
 		endlocal & (
-			set dk_messageBox=%dk_powershell%
+			set dk_messageBox=%dk_evalPowershell%
 		)
 
 %endfunction%

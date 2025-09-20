@@ -27,11 +27,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
 	::%POWERSHELL_EXE% -Command "$shortcut_path = '%shortcut_path%'; $src_path = '%src_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${src_path}; $Shortcut.Save();"
 	
-	:: Method 2: direct dk_powershell
-	::%dk_call% dk_powershell "$shortcut_path = '%shortcut_path%'; $src_path = '%src_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${src_path}; $Shortcut.Save();"
+	:: Method 2: direct dk_evalPowershell
+	::%dk_call% dk_evalPowershell "$shortcut_path = '%shortcut_path%'; $src_path = '%src_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${src_path}; $Shortcut.Save();"
 	
-	:: Method 3: direct dk_powershell (multi-line)
-	::	%dk_call% dk_powershell ^
+	:: Method 3: direct dk_evalPowershell (multi-line)
+	::	%dk_call% dk_evalPowershell ^
 	::	$shortcut_path = '%shortcut_path%'; ^
 	::	$src_path = '%src_path%'; ^
 	::	$WshShell = New-Object -comObject WScript.Shell; ^
