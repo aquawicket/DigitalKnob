@@ -27,7 +27,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_set cmake_exe "%PLUGIN_Install_Path%/bin/cmake"
 	)	
 	%dk_call% dk_assertPath "%cmake_exe%"
-	%dk_call% dk_firewallAllow "CMake" "%cmake_exe%"
+	%dk_call% dk_firewallAllow "%cmake_exe%"
 
 	if EXIST "%cmake_exe%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
 	

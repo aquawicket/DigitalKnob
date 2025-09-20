@@ -29,12 +29,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_mkdir "%WSL_ALPINE%"
 	%dk_call% dk_basename "%WSL_ALPINE_IMPORT%"
 	%dk_call% dk_copy "%dk_download%" "%WSL_ALPINE%/%dk_basename%" OVERWRITE
-	%dk_call% dk_firewallAllow AlpineLinux "%WSL_ALPINE%/%dk_basename%"
+	%dk_call% dk_firewallAllow "%WSL_ALPINE%/%dk_basename%"
 
 	%dk_call% dk_assertPath "%WSL_ALPINE%/%dk_basename%"
-	::echo %WSL_ALPINE:/=\%\%dk_basename% config --default-user root
+	
+	::%dk_call% dk_debug "%WSL_ALPINE:/=\%\%dk_basename% config --default-user root"
 	%WSL_ALPINE:/=\%\%dk_basename% config --default-user root
-	::echo %WSL_ALPINE:/=\%\%dk_basename%
+	::%dk_call% dk_echo "%WSL_ALPINE:/=\%\%dk_basename%"
 	%WSL_ALPINE:/=\%\%dk_basename%
 
 %endfunction%

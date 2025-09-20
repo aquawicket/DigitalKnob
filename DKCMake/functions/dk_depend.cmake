@@ -28,11 +28,11 @@ function(dk_depend Plugin)
 	
 	#set(Plugin "${ARGV0}")
 	dk_allButFirstArgs(${ARGV})
-	message("############ dk_depend(${Plugin} ${dk_allButFirstArgs}) ############")
+	#dk_debug("############ dk_depend(${Plugin} ${dk_allButFirstArgs}) ############")
 	
 	set(dkdepend_list $CACHE{dkdepend_list})
 	if(Plugin IN_LIST dkdepend_list)
-		dk_notice("${Plugin} already added to dependency list")
+		#dk_debug("${Plugin} already added to dependency list")
 		return()
 	endif()
 		
@@ -49,7 +49,7 @@ function(dk_depend Plugin)
 	###### Push Plugin to the PLUGIN_STACK ######
 	set(PLUGIN_Stack "$ENV{PLUGIN_Stack}")		### copy the env variable to local variable
 	if(Plugin IN_LIST PLUGIN_Stack)
-		dk_notice("${Plugin} already in PLUGIN_Stack")
+		#dk_debug("${Plugin} already in PLUGIN_Stack")
 		return()
 	endif()
 	dk_envList(PLUGIN PUSH "${Plugin}")
@@ -63,7 +63,7 @@ function(dk_depend Plugin)
 	
 		list(APPEND dkdepend_list "${CURRENT_PLUGIN}")
 		dk_set(dkdepend_list "${dkdepend_list}") 									# Globalize the variable
-		dk_debug("dkdepend_list = ${dkdepend_list}") 
+		#dk_debug("dkdepend_list = ${dkdepend_list}") 
 		
 		dk_getPathToPlugin(${CURRENT_PLUGIN} ${CURRENT_PLUGIN}_Import_Path)
 		dk_set(${CURRENT_PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")	# Globalize the variable
@@ -74,7 +74,7 @@ function(dk_depend Plugin)
 		dk_load("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake")
 		dk_fileIncludes("${${CURRENT_PLUGIN}_Import_Path}/DKINSTALL.cmake" "function(DKINSTALL")
 		if(dk_fileIncludes)
-			dk_debug("${CURRENT_PLUGIN}: DKINSTALL(${dk_allButFirstArgs})")
+			#dk_debug("${CURRENT_PLUGIN}: DKINSTALL(${dk_allButFirstArgs})")
 			DKINSTALL(${dk_allButFirstArgs})
 		endif()
 		
@@ -83,7 +83,7 @@ function(dk_depend Plugin)
 	#dk_debug("<<<<<########################### ${CURRENT_PLUGIN} EXIT ###########################<<<<<\n")
 	dk_envList(PLUGIN POP)
 	dk_echo("\n")
-	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} CONTINUE #######################>>>>>")
+	dk_debug("################################ ${CURRENT_PLUGIN} CONTINUE ############################")
 
 endfunction()
 

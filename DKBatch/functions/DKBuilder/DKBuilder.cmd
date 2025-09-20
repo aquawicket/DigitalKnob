@@ -35,10 +35,10 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	set "POWERSHELL_EXE=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe
 
 	::###### firewall allow ######
-	call :dk_firewallAllow curl "%CURL_EXE%"
-	call :dk_firewallAllow certutil "%CERTUTIL_EXE%"
-	call :dk_firewallAllow bitsadmin "%BITSADMIN_EXE%"
-	call :dk_firewallAllow powershell "%POWERSHELL_EXE%"
+	call :dk_firewallAllow "%CURL_EXE%"
+	call :dk_firewallAllow "%CERTUTIL_EXE%"
+	call :dk_firewallAllow "%BITSADMIN_EXE%"
+	call :dk_firewallAllow "%POWERSHELL_EXE%"
 
 	if NOT EXIST "%DK_CMD%" (
 		"%CURL_EXE%" -L "!HDK_CMD!" -o "!DK_CMD!" >nul 2>&1 || ^
@@ -65,10 +65,10 @@ setlocal enableDelayedExpansion
 exit /b 1
 
 
-:dk_firewallAllow name file
+:dk_firewallAllow file
 setlocal enableDelayedExpansion
-	set "_name_=%~1"
-	set "_file_=%~2"
+	set "_name_=%~n1"
+	set "_file_=%~1"
 	set "_file_=%_file_:/=\%
 	call :dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_%" && (exit /b 0)
 	::###### netsh ######
