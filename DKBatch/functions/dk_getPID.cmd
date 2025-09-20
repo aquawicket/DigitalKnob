@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::for /F "tokens=* USEBACKQ" %%F IN (`tasklist /fo csv | findstr /i "mycmd"`) do set "LINE=%%F"
     ::echo LINE = %LINE%
    
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
 	
     for /f "tokens=1* delims=   : " %%a in ('%POWERSHELL_EXE% -c "Get-WmiObject Win32_Process | Where-Object ProcessId -EQ "$PID""') do (
             echo %%a, %%b

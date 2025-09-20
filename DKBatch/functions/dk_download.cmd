@@ -98,7 +98,7 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     :: powershell
     :powershell_dl
     if defined dk_download_DISABLE_powershell (goto end_powershell_dl)
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
     set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
     if NOT EXIST "%destination%_DOWNLOADING" %POWERSHELL_EXE% -Command "$cli = New-Object System.Net.WebClient; "^
         "$cli.Headers['User-Agent'] = '%User-Agent%'; "^

@@ -24,7 +24,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if EXIST "%shortcut_path%" (%dk_call% dk_delete "%shortcut_path%")
 
 	:: Method 1: direct powershell
-	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
 	::%POWERSHELL_EXE% -Command "$shortcut_path = '%shortcut_path%'; $src_path = '%src_path%'; $WshShell = New-Object -comObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut(${shortcut_path}); $Shortcut.TargetPath = ${src_path}; $Shortcut.Save();"
 	
 	:: Method 2: direct dk_powershell

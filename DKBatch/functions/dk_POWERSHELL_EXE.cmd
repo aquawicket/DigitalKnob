@@ -15,6 +15,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
   
     if EXIST "%powershell_exe%" (%return%)
 
+	%dk_call% dk_notice "dk_powershell_exe is obsolete.  use %dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+	(call )
+	endlocal & (
+		set "powershell_exe=%powershell_exe%"
+	)
+	%return%
+
 	::###### try pwsh.exe ######
 ::	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 ::	%dk_call% dk_findProgram powershell_exe pwsh.exe "%DKTOOLS_DIR%"

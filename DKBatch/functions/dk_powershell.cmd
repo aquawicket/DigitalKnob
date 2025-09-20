@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :DeEscape
 	)
 	
-::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
+::	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
 	set "POWERSHELL_EXE=powershell.exe"
   
 ::    :: try pwsh.exe
