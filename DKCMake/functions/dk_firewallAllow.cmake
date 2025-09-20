@@ -13,15 +13,17 @@ include_guard()
 
 
 #########################################################################
+# dk_firewallAllow(executable)
 # dk_firewallAllow(name executable)
 #
-#	@name		 	- The name of the firewall rule
+#	@name:optional 	- The name of the firewall rule
 #   @executable		- The path to the executable to allow
 #
 function(dk_firewallAllow)
-	dk_debugFunc(2)
+	dk_debugFunc(1 2)
 	
-	dk_callDKBatch(dk_firewallAllow "${ARGV0}" "${ARGV1}")
+	#dk_callDKBatch(dk_firewallAllow "${ARGV0}" "${ARGV1}")
+	dk_callDKBatch(dk_firewallAllow ${ARGV})
 endfunction()
 
 
@@ -33,5 +35,6 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_firewallAllow("curl_exe" "C:/Windows/System32/curl.exe")
+	#dk_firewallAllow("curl_exe" "C:/Windows/System32/curl.exe")
+	dk_firewallAllow("C:/Windows/System32/curl.exe")
 endfunction()

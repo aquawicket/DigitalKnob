@@ -65,6 +65,6 @@ dk_set(python3_CMAKE -DPython3_EXECUTABLE=${python3_exe}) # -DPython3_Interprete
 
 dk_assertPath("${python3}")
 dk_assertPath("${python3_exe}")
-dk_firewallAllow("python3_exe" "${python3_exe}")
+dk_firewallAllow("${python3_exe}")
 
 

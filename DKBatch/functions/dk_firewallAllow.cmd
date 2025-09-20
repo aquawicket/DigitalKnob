@@ -7,7 +7,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::if NOT defined dk_firewallAllow_DEBUG 	(set "dk_firewallAllow_DEBUG=1")
 if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 ::###############################################################################
-::# dk_firewallAllow(<name:optional> executable)
+::# dk_firewallAllow(executable)
+::# dk_firewallAllow(name executable)
 ::#
 ::#	  @name:optinal	- The name of the firewall rule
 ::#   @executable	- The path to the executable to allow

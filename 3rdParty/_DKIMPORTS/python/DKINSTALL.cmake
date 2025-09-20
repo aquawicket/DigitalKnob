@@ -97,7 +97,7 @@ if((NOT Linux_Host) AND (NOT Android_Host))
 endif()
 
 if(Windows_Host)
-	dk_firewallAllow("Python" "${python_exe}")
+	dk_firewallAllow("${python_exe}")
 endif()
 
 ### FIXME: we can't have both python2 and python3 in the environment path 

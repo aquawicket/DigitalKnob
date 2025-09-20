@@ -23,7 +23,7 @@ dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 
 
 #if(EXISTS "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
-	dk_firewallAllow("VS_SETUP" "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe")
+	dk_firewallAllow("$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer/setup.exe") #visualstudio setup.exe
 #endif()
 
 #############################################################################################################
@@ -142,13 +142,13 @@ if(NOT EXISTS "${VS}")
 		dk_findProgram(VS_SETUP_BOOTSTRAPPER_EXE vs_setup_bootstrapper.exe "$ENV{SystemDrive}/Windows/Temp")
 	endwhile()
 	dk_printVar(VS_SETUP_BOOTSTRAPPER_EXE)
-	dk_firewallAllow("VS_SETUP_BOOTSTRAPPER" "${VS_SETUP_BOOTSTRAPPER_EXE}")
+	dk_firewallAllow("${VS_SETUP_BOOTSTRAPPER_EXE}")
 	
 	while(NOT EXISTS "${VS_SETUP_EXE}")
 		dk_findProgram(VS_SETUP_EXE setup.exe "$ENV{SystemDrive}/Program Files (x86)/Microsoft Visual Studio/Installer")
 	endwhile()
 	dk_printVar(VS_SETUP_EXE)
-	dk_firewallAllow("VS_SETUP_EXE" "${VS_SETUP_EXE}")
+	dk_firewallAllow("${VS_SETUP_EXE}")
 
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	while(NOT EXISTS "${VS_CACHE_PATH}")

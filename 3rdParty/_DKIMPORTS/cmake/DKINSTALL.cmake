@@ -110,7 +110,7 @@ dk_import(APP)
 #	dk_set(cmake_exe ${CMAKE_COMMAND})
 #endif()
 
-#dk_firewallAllow("CMake" "$ENV{cmake_exe}")
+#dk_firewallAllow("$ENV{cmake_exe}")
 
 
 #execute_process(COMMAND ${cmake_exe} --version OUTPUT_VARIABLE cmake_exe_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE)

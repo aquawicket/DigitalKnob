@@ -43,7 +43,7 @@ dk_set				(msys2_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
 
 ############ INSTALL ############
 dk_import("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_firewallAllow("dirmngr" "${msys2}/usr/bin/dirmngr.exe")
+dk_firewallAllow("${msys2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
 #dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")

@@ -35,7 +35,7 @@ if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN_Url_Filename}")
 	dk_download(${CYGWIN_Url})
 		
 	### FirewallAllow ###
-	dk_firewallAllow("Cygwin_Setup" "${dk_download}")
+	dk_firewallAllow("${dk_download}") # cygwin setup-x86_64.exe
 		
 	### Install Cygwin ###
 	# "C:\Users\Administrator\DigitalKnob\download\setup-x86_64.exe" --quiet-mode --root C:\Users\Administrator\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64
