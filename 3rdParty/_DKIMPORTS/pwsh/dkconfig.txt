@@ -1,0 +1,13 @@
+###### pwsh ######
+# https://github.com/PowerShell/PowerShell/releases
+#
+
+pwsh_Linux_Arm32_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-arm32.tar.gz
+pwsh_Linux_Arm64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-arm64.tar.gz
+pwsh_Linux_X86_64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-x64.tar.gz
+pwsh_Mac_Arm64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-osx-arm64.tar.gz
+pwsh_Mac_X86_64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-osx-x64.tar.gz
+pwsh_Windows_Arm32_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-arm32.zip
+pwsh_Windows_Arm64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-arm64.zip
+pwsh_Windows_X86_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-x86.zip
+pwsh_Windows_X86_64_Import=https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-x64.zip

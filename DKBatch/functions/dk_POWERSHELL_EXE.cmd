@@ -6,32 +6,87 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_POWERSHELL_EXE()
+::# dk_powershell_exe()
 ::#
 ::#
-:dk_POWERSHELL_EXE
+:dk_powershell_exe
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
-    if EXIST "%POWERSHELL_EXE%" (%return%)
+    if EXIST "%powershell_exe%" (%return%)
 
 	::###### try pwsh.exe ######
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram POWERSHELL_EXE pwsh.exe "%DKTOOLS_DIR%" NO_ERROR
+::	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
+::	%dk_call% dk_findProgram powershell_exe pwsh.exe "%DKTOOLS_DIR%"
 
-    ::###### try powershell.exe ######
-	if NOT EXIST "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe")
+	::###### Try C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe ######
+	if NOT EXIST "%powershell_exe%" (set "powershell_exe=C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
 	
-	if NOT EXIST "%POWERSHELL_EXE%" (
+    ::###### try powershell.exe ######
+	if NOT EXIST "%powershell_exe%" (%dk_call% dk_findProgram powershell_exe "powershell.exe")
+	
+	if NOT EXIST "%powershell_exe%" (
 		%dk_call% dk_exec cmd /c where powershell.exe
-		set "POWERSHELL_EXE=!dk_exec!"
+		set "powershell_exe=!dk_exec!"
 	)
 	
-	::if NOT EXIST "%POWERSHELL_EXE%" (%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%/System32")
-	::%dk_call% dk_assertPath "%POWERSHELL_EXE%"
+	::### Test powershell_exe version 1 ###
+	"%powershell_exe%" -v 1 -Command exit && (
+		%dk_call% dk_success "powershell version 1 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 1 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
+	::### Test powershell_exe version 2 ###
+	"%powershell_exe%" -v 2 -Command exit && (
+		%dk_call% dk_success "powershell version 2 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 2 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
+	::### Test powershell_exe version 3 ###
+	"%powershell_exe%" -v 3 -Command exit && (
+		%dk_call% dk_success "powershell version 3 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 3 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
+	::### Test powershell_exe version 4 ###
+	"%powershell_exe%" -v 4 -Command exit && (
+		%dk_call% dk_success "powershell version 4 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 4 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
+	::### Test powershell_exe version 5 ###
+	"%powershell_exe%" -v 5 -Command exit && (
+		%dk_call% dk_success "powershell version 5 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 5 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
+	::### Test powershell_exe version 6 ###
+	"%powershell_exe%" -v 6 -Command exit && (
+		%dk_call% dk_success "powershell version 6 ran successfully"
+	) || (
+		%dk_call% dk_error "powershell_exe:%powershell_exe% version 6 did not run successfully"
+		%dk_call% dk_unset powershell_exe
+		%return%
+	)
+	
 	(call )
 	endlocal & (
-		set "POWERSHELL_EXE=%POWERSHELL_EXE%"
+		set "powershell_exe=%powershell_exe%"
 	)
 %endfunction%
 
@@ -46,7 +101,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	::%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE" %NOERROR%
-	if NOT EXIST "%POWERSHELL_EXE%" (%dk_call% dk_POWERSHELL_EXE)
-    %dk_call% dk_echo "POWERSHELL_EXE = %POWERSHELL_EXE%"
+	::%dk_call% dk_validate powershell_exe "%dk_call% dk_powershell_exe" %NOERROR%
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_powershell_exe"
+    %dk_call% dk_echo "powershell_exe = %powershell_exe%"
 %endfunction%
