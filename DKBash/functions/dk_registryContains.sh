@@ -21,13 +21,20 @@ fi
 dk_registryContains() {
 	dk_debugFunc 2
  
-	export cmd_exe="/c/Windows/System32/cmd.exe"
-	export REG_EXE="C:\Windows\System32\reg.exe"
+#	export cmd_exe="/c/Windows/System32/cmd.exe"
+#	(command -v 'cygpath' 1>/dev/null)	&& cmd_exe=$(cygpath -u ${cmd_exe})
+#	(command -v 'wslpath' 1>/dev/null)	&& cmd_exe=$(wslpath -u ${cmd_exe})
+	
+	export reg_exe="C:\Windows\System32\reg.exe"
+	(command -v 'cygpath' 1>/dev/null)	&& reg_exe=$(cygpath -u ${reg_exe})
+	(command -v 'wslpath' 1>/dev/null)	&& reg_exe=$(wslpath -u ${reg_exe})
+	dk_call dk_debug "reg_exe = ${reg_exe-}"
+	[ -e "${reg_exe-}" ] || { dk_call dk_error "reg_exe:${reg_exe} not found."; return $?; }
 	
 	while IFS= read -r line; do
 		#echo "line = ${line}"
 		[ "${line#*"${2}"}" != "${line}" ] && return 0
-	done < <(${REG_EXE} query $1)
+	done < <(${reg_exe} query ${1})
 
     return 1
 }
@@ -40,7 +47,7 @@ DKTEST() {
 	dk_debugFunc 0
    
 	local key="HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules"
-	local exe="C:\Windows\system32\curl.exe"
+	local exe="C:\Windows\System32\curl.exe"
    
     dk_call dk_registryContains "${key}" "${exe}" && (
 		dk_call dk_echo "FirewallRules contains ${exe}"
