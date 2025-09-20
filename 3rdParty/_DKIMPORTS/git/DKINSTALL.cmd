@@ -21,14 +21,18 @@ if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
 	
 	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	::############ DO NOT USE GIT_DIR ############
-	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should NOT be set.")   &:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
+	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should NOT be set")
 	::############ DO NOT USE GIT_DIR ############
 	
-	set "git_exe=%git%/bin/git.exe"
-	set "GIT_BASH_EXE=%git%/bin/bash.exe"
-    ::set "git-bash_exe=%git%/git-bash.exe"
-	::set "patch_exe=%git%/usr/bin/patch.exe"
-	 if EXIST "%git_exe%" (%return%)
+	if NOT defined git.exe 				(set "git_exe=%git%/bin/git.exe")
+	::if NOT defined bash_exe 			(set "bash_exe=%git%/bin/bash.exe")
+	if NOT defined git_remote_https_exe (set "git_remote_https_exe=%git%/mingw64/libexec/git-core/git-remote-https.exe")
+	%dk_call% dk_firewallAllow "%git_remote_https_exe%"
+	::if NOT defined git_bash_exe		(set "git_bash_exe=%git%/git-bash.exe")
+	::if NOT defined patch_exe			(set "patch_exe=%git%/usr/bin/patch.exe")
+	
+
+	if EXIST "%git_exe%" (%return%)
 	
 	::###### INSTALL ######
 	"%dk_download%" -y -o "%git%"
@@ -37,5 +41,5 @@ if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGloba
     ::###### Install Git Context Menu ######
     %dk_call% dk_depend git/contextMenu
 	
-	%dk_call% dk_firewallAllow "%git%/mingw64/libexec/git-core/git-remote-https.exe"
+	
 %endfunction%
