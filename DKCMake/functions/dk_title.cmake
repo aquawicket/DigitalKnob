@@ -20,11 +20,14 @@ include_guard()
 function(dk_title)
     dk_debugFunc(0 99)
  
-	###### method_1: cmd direct #######
-	dk_validate(cmd_exe "dk_depend(cmd)")
+	#dk_validate(cmd_exe "dk_depend(cmd)")
 
 	if(EXISTS "${cmd_exe}")
 		execute_process(COMMAND ${cmd_exe} /c title ${ARGV})
+	elseif(EXISTS "$ENV{ComSpec}")
+		execute_process(COMMAND $ENV{ComSpec} /c title ${ARGV})
+	else()
+		execute_process(COMMAND cmd.exe /c title ${ARGV})
 	endif()
 	
 	###### method_2: dk_callDKBatch ######

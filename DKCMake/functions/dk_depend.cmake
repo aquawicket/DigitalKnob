@@ -59,7 +59,7 @@ function(dk_depend Plugin)
 	dk_debug(">>>>>##############################################################################>>>>>")
 	dk_debug(">>>>>########################### ${CURRENT_PLUGIN} ENTER ##########################>>>>>")
 	dk_debug(">>>>>##############################################################################>>>>>")
-		#dk_title("${PLUGIN_Stack}")
+		dk_title("${PLUGIN_Stack}")
 	
 		list(APPEND dkdepend_list "${CURRENT_PLUGIN}")
 		dk_set(dkdepend_list "${dkdepend_list}") 									# Globalize the variable
