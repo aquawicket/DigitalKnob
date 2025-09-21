@@ -13,22 +13,22 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::### Test if already valid
-	if EXIST "%curl_exe%" ("%curl_exe%" --version 1>nul 2>nul && %return%)
+	if EXIST "%wsl_exe%" ("%wsl_exe%" --status 1>nul 2>nul && %return%)
 
 
-	if NOT EXIST "%curl_exe%" (set "curl_exe=%windir:\=/%/System32/curl.exe")
-	if NOT EXIST "%curl_exe%" (%dk_call% dk_findProgram curl_exe "curl.exe")
-	if NOT EXIST "%curl_exe%" (set "curl_exe=curl.exe")
+	if NOT EXIST "%wsl_exe%" (set "wsl_exe=%windir:\=/%/System32/wsl.exe")
+	if NOT EXIST "%wsl_exe%" (%dk_call% dk_findProgram wsl_exe "wsl.exe")
+	if NOT EXIST "%wsl_exe%" (set "wsl_exe=wsl.exe")
 
 	
 	::### Test exists
-	if NOT EXIST "%curl_exe%" (%dk_call% dk_error "curl_exe:%curl_exe% not found" && %return%)
+	if NOT EXIST "%wsl_exe%" (%dk_call% dk_error "wsl_exe:%wsl_exe% not found" && %return%)
 	
 	::### Test command
-	%curl_exe% --version 1>nul 2>nul || (%dk_call% dk_error "curl_exe:%curl_exe% failed to run" && %return%)
+	%wsl_exe% --status 1>nul 2>nul || (%dk_call% dk_error "wsl_exe:%wsl_exe% failed to run" && %return%)
 
 	endlocal & (
-		set "curl_exe=%curl_exe:\=/%"
+		set "wsl_exe=%wsl_exe:\=/%"
 	)
 %endfunction%
 
@@ -39,9 +39,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
-	%dk_call% dk_echo "curl_exe = %curl_exe%"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
+	%dk_call% dk_echo "wsl_exe = %wsl_exe%"
 	
-	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
-	%dk_call% dk_echo "curl_exe = %curl_exe%"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
+	%dk_call% dk_echo "wsl_exe = %wsl_exe%"
 %endfunction%

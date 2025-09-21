@@ -20,42 +20,42 @@ include_guard()
 function(DKINSTALL)
 	dk_debugFunc(0 1)
 
-	if(EXISTS "${curl_exe}")
-		execute_process(COMMAND "${curl_exe}" --version RESULT_VARIABLE exit_code OUTPUT_QUIET)
+	if(EXISTS "${wsl_exe}")
+		execute_process(COMMAND "${wsl_exe}" --status RESULT_VARIABLE exit_code OUTPUT_QUIET)
 		if(NOT ${exit_code})
 			return()
 		endif()
 	endif()
 	
 	
-	if(NOT EXISTS "${curl_exe}")
+	if(NOT EXISTS "${wsl_exe}")
 		string(REPLACE "\\" "/" windir "$ENV{windir}")
-		set(curl_exe "${windir}/System32/curl.exe")
+		set(wsl_exe "${windir}/System32/wsl.exe")
 	endif()
 	
-	if(NOT EXISTS "${curl_exe}")
-		dk_findProgram(curl_exe "curl.exe")
+	if(NOT EXISTS "${wsl_exe}")
+		dk_findProgram(wsl_exe "wsl.exe")
 	endif()
 
-	if(NOT EXISTS "${curl_exe}")
-		set(curl_exe "curl.exe")
-		dk_debug("curl_exe = ${curl_exe}")
+	if(NOT EXISTS "${wsl_exe}")
+		set(wsl_exe "wsl.exe")
+		dk_debug("wsl_exe = ${wsl_exe}")
 	endif()
 
 	### Test exists
-	if(NOT EXISTS "${curl_exe}") 
-		dk_error("curl_exe:${curl_exe} not found")
+	if(NOT EXISTS "${wsl_exe}") 
+		dk_error("wsl_exe:${wsl_exe} not found")
 		return()
 	endif()
 	
 	### Test command
-	execute_process(COMMAND "${curl_exe}" --version RESULT_VARIABLE exit_code OUTPUT_QUIET)
+	execute_process(COMMAND "${wsl_exe}" --status RESULT_VARIABLE exit_code OUTPUT_QUIET)
 	if(${exit_code})
-		dk_error("curl_exe:${curl_exe} failed to run")
+		dk_error("wsl_exe:${wsl_exe} failed to run")
 		return()
 	endif()
 
-	dk_set(curl_exe "${curl_exe}")
+	dk_set(wsl_exe "${wsl_exe}")
 endfunction()
 
 
@@ -70,11 +70,11 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_unset(curl_exe)
+	dk_unset(wsl_exe)
 	
-	dk_validate(curl_exe "dk_depend(curl_exe)")
-	dk_echo("curl_exe = ${curl_exe}")
+	dk_validate(wsl_exe "dk_depend(wsl_exe)")
+	dk_echo("wsl_exe = ${wsl_exe}")
 	
-	dk_validate(curl_exe "dk_depend(curl_exe)")
-	dk_echo("curl_exe = ${curl_exe}")
+	dk_validate(wsl_exe "dk_depend(wsl_exe)")
+	dk_echo("wsl_exe = ${wsl_exe}")
 endfunction()	

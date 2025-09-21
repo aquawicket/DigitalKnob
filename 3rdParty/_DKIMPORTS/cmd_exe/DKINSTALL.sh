@@ -19,21 +19,21 @@ fi
 DKINSTALL() {
 	dk_debugFunc 0
 
-	(command -v "${reg_exe-}" 1>/dev/null) && return $?;
+	(command -v "${cmd_exe-}" /c ver 1>/dev/null) && return $?;
 	
-	[ ! -e "${reg_exe-}" ] && reg_exe=$(command -v reg)
-	[ ! -e "${reg_exe-}" ] && reg_exe="C:/Windows/System32/reg.exe"
-	[ ! -e "${reg_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && reg_exe=$(cygpath -u "${reg_exe}")
-	[ ! -e "${reg_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && reg_exe=$(wslpath -u "${reg_exe}")
-	[ ! -e "${reg_exe-}" ] && dk_call dk_installPackage reg
-	(command -v ${reg_exe} 1>/dev/null) || { dk_call dk_error "reg_exe:${reg_exe} failed to run"; return $?; }
+	[ ! -e "${cmd_exe-}" ] && cmd_exe=$(command -v cmd)
+	[ ! -e "${cmd_exe-}" ] && cmd_exe="C:/Windows/System32/cmd.exe"
+	[ ! -e "${cmd_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && cmd_exe=$(cygpath -u "${cmd_exe}")
+	[ ! -e "${cmd_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && cmd_exe=$(wslpath -u "${cmd_exe}")
+	[ ! -e "${cmd_exe-}" ] && dk_call dk_installPackage cmd
+	(command -v ${cmd_exe} /c ver 1>/dev/null) || { dk_call dk_error "cmd_exe:${cmd_exe} failed to run"; return $?; }
 	
 	###### output ######
-	export reg_exe=${reg_exe};
+	export cmd_exe=${cmd_exe};
 	if [ -n "${1-}" ]; then
-		eval ${1}=${reg_exe};
+		eval ${1}=${cmd_exe};
 	else
-		builtin echo "${reg_exe}";
+		builtin echo "${cmd_exe}";
 	fi
 	return $?;
 }
@@ -46,9 +46,9 @@ DKINSTALL() {
 DKTEST() {
 	dk_debugFunc 0
 
-	dk_call dk_validate reg_exe "dk_call dk_depend reg_exe"
-	dk_call dk_echo "reg_exe = ${reg_exe-}"
+	dk_call dk_validate cmd_exe "dk_call dk_depend cmd_exe"
+	dk_call dk_echo "cmd_exe = ${cmd_exe-}"
 	
-	dk_call dk_validate reg_exe "dk_call dk_depend reg_exe"
-	dk_call dk_echo "reg_exe = ${reg_exe-}"
+	dk_call dk_validate cmd_exe "dk_call dk_depend cmd_exe"
+	dk_call dk_echo "cmd_exe = ${cmd_exe-}"
 }

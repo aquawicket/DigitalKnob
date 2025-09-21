@@ -16,10 +16,8 @@ set "DKCmake_ENV=WSL"
 		exit /b -1
 	)
 	
-	
 	::###### Install DKCMake ######
 	echo Installing DKCmake . . .
-	
 
 	::############ (CMD) ############
 	if /i "%DKCmake_ENV%" equ "CMD" (

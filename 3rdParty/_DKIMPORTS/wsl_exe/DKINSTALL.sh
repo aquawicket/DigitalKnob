@@ -13,36 +13,40 @@ if [ -z "${DK_LOADED-}" ]; then
 fi
 ##################################################################################
 
+
 ##################################################################################
 # DKINSTALL
 #
 DKINSTALL() {
 	dk_debugFunc 0
 
-	(command -v "${curl_exe-}" 1>/dev/null) && return $?;
+	(command -v "${wsl_exe-}" 1>/dev/null) && return $?;
 	
-	[ ! -e "${curl_exe-}" ] && curl_exe="/usr/bin/curl"
-	[ ! -e "${curl_exe-}" ] && curl_exe="C:/Windows/System32/curl.exe"
-	[ ! -e "${curl_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && curl_exe=$(cygpath -u "${curl_exe}")
-	[ ! -e "${curl_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && curl_exe=$(wslpath -u "${curl_exe}")
-	[ ! -e "${curl_exe-}" ] && dk_call dk_installPackage curl
-	[ ! -e "${curl_exe-}" ] && curl_exe=$(command -v curl)
+	[ ! -e "${wsl_exe-}" ] && wsl_exe="/usr/bin/wsl"
+	[ ! -e "${wsl_exe-}" ] && wsl_exe="C:/Windows/System32/wsl.exe"
+	[ ! -e "${wsl_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && wsl_exe=$(cygpath -u "${wsl_exe}")
+	[ ! -e "${wsl_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && wsl_exe=$(wslpath -u "${wsl_exe}")
+	[ ! -e "${wsl_exe-}" ] && dk_call dk_installPackage wsl
+	[ ! -e "${wsl_exe-}" ] && wsl_exe=$(command -v wsl)
 	
 	### Test exists
-	[ -e "${curl_exe-}" ] || { dk_call dk_error "curl_exe:${curl_exe} not found"; return $?; }
+	[ -e "${wsl_exe-}" ] || { dk_call dk_error "wsl_exe:${wsl_exe} not found"; return $?; }
 	
 	### Test command
-	(command -v "${curl_exe-}" 1>/dev/null) || { dk_call dk_error "curl_exe:${curl_exe-} failed to run"; return $?; }
+	(command -v "${wsl_exe-}" 1>/dev/null) || { dk_call dk_error "wsl_exe:${wsl_exe-} failed to run"; return $?; }
 	
 	###### output ######
-	export curl_exe=${curl_exe};
+	export wsl_exe=${wsl_exe};
 #	if [ -n "${1-}" ]; then
-#		eval ${1}=${curl_exe};
+#		eval ${1}=${wsl_exe};
 #	else
-		builtin echo "${curl_exe}";
+		builtin echo "${wsl_exe}";
 #	fi
 	return $?;
 }
+
+
+
 
 
 
@@ -52,9 +56,9 @@ DKINSTALL() {
 DKTEST() {
 	dk_debugFunc 0
 
-	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate wsl_exe "dk_call dk_depend wsl_exe"
+	dk_call dk_echo "wsl_exe = ${wsl_exe-}"
 	
-	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate wsl_exe "dk_call dk_depend wsl_exe"
+	dk_call dk_echo "wsl_exe = ${wsl_exe-}"
 }
