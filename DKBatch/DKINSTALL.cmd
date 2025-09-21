@@ -96,7 +96,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 
 	::###### Install DKBatch ######
-	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_CMD_EXE"
+	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_depend cmd"
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
 	::###### Set the registry entry for the extension ######

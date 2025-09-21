@@ -6,23 +6,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_TIMEOUT_EXE()
+::# DKINSTALL()
 ::#
-::#
-:dk_TIMEOUT_EXE
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
-  
-    if EXIST "%TIMEOUT_EXE%" (%return%)
-   
-    %dk_call% dk_findProgram TIMEOUT_EXE "timeout.exe" "%windir%/System32"
-	%dk_call% dk_assertPath "%TIMEOUT_EXE%"
+
+	if EXIST "%wscript_exe%" (%return%)
+
+	if NOT EXIST "%wscript_exe%" (set "wscript_exe=C:/Windows/System32/cscript.exe")
+	if NOT EXIST "%wscript_exe%" (%dk_call% dk_findProgram wscript_exe "cscript.exe" "%windir:\=/%/System32")
 	
+	%dk_call% dk_assertPath "%wscript_exe:\=/%"
+
 	endlocal & (
-		set "TIMEOUT_EXE=%TIMEOUT_EXE%"
+		set "wscript_exe=%wscript_exe:\=/%"
 	)
 %endfunction%
-
 
 
 
@@ -34,6 +34,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_TIMEOUT_EXE
-    %dk_call% dk_echo "TIMEOUT_EXE = %TIMEOUT_EXE%"
+	%dk_call% DKINSTALL
+	%dk_call% dk_debug "wscript_exe = %wscript_exe%"
 %endfunction%

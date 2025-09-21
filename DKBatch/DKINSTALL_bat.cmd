@@ -48,7 +48,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	
 	::###### Install DKbat ######
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_CMD_EXE"
+	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_depend cmd"
 
 	:: Set the registry entry for the exxtension
 	ftype DKbat="%ComSpec%" /c if EXIST "%~f0" ^

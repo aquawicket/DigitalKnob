@@ -6,37 +6,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_CMD_EXE()
+::# DKINSTALL()
 ::#
-::#
-:dk_CMD_EXE
-	%dk_call% dk_warning "dk_CMD_EXE is deprecated.  use %%dk_call%% dk_depend cmake"
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
-	%return%
-	
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if EXIST "%cmd_exe%" (%return%)
+	if EXIST "%timeout_exe%" (%return%)
 
-	::###### FIX ComSpec system environment varioble case ######
-	for %%A in ("%ComSpec%") do (
-		if "%ComSpec%" neq "%%~fA" (
-			set "ComSpec=%%~fA"
-			setx /M ComSpec "%%~fA"
-		)
-	)
+	if NOT EXIST "%timeout_exe%" (set "timeout_exe=C:/Windows/System32/timeout.exe")
+	if NOT EXIST "%timeout_exe%" (%dk_call% dk_findProgram timeout_exe "timeout.exe")
 	
-	set "cmd_exe=%ComSpec:\=/%"
-	if NOT EXIST "%cmd_exe%" (%dk_call% dk_findProgram cmd_exe "cmd.exe" "%windir%")
-	
-	%dk_call% dk_assertPath "%cmd_exe:\=/%"
+	%dk_call% dk_assertPath "%timeout_exe:\=/%"
 
 	endlocal & (
-		set "cmd_exe=%cmd_exe:\=/%"
+		set "timeout_exe=%timeout_exe:\=/%"
 	)
 %endfunction%
-
 
 
 
@@ -48,6 +34,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_CMD_EXE
-	%dk_call% dk_printVar cmd_exe
+	%dk_call% DKINSTALL
+	%dk_call% dk_debug "timeout_exe = %timeout_exe%"
 %endfunction%

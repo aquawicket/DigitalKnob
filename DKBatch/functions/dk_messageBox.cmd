@@ -51,8 +51,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "command=WScript.Quit (WshShell.Popup("%text%", %timeout%, "%caption%", %flags%))"
 		echo %command% >> %DKCACHE_DIR%/dk_messageBox.vbs
 		
-		%dk_call% dk_validate CSCRIPT_EXE "%dk_call% dk_CSCRIPT_EXE"
-		"%CSCRIPT_EXE%" //nologo %DKCACHE_DIR%/dk_messageBox.vbs
+		%dk_call% dk_validate cscript_exe "%dk_call% dk_depend cscript"
+		"%cscript_exe%" //nologo %DKCACHE_DIR%/dk_messageBox.vbs
         endlocal & set dk_messageBox=!errorlevel!
 		::%dk_call% dk_delete "%DKCACHE_DIR%/dk_messageBox.vbs"
     %return%

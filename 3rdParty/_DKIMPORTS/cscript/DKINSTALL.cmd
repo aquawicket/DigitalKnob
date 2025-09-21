@@ -6,23 +6,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_CSCRIPT_EXE()
+::# DKINSTALL()
 ::#
-::#
-:dk_CSCRIPT_EXE
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if EXIST "%CSCRIPT_EXE%" (%return%)
+	if EXIST "%cscript_exe%" (%return%)
 
-	if NOT EXIST "%CSCRIPT_EXE%" (%dk_call% dk_findProgram CSCRIPT_EXE "cscript.exe" "%windir%/System32")
-	%dk_call% dk_assertPath "%CSCRIPT_EXE%"
+	if NOT EXIST "%cscript_exe%" (set "cscript_exe=C:/Windows/System32/cscript.exe")
+	if NOT EXIST "%cscript_exe%" (%dk_call% dk_findProgram cscript_exe "cscript.exe" "%windir:\=/%/System32")
+	
+	%dk_call% dk_assertPath "%cscript_exe:\=/%"
 
 	endlocal & (
-		set "CSCRIPT_EXE=%CSCRIPT_EXE%"
+		set "cscript_exe=%cscript_exe:\=/%"
 	)
 %endfunction%
-
 
 
 
@@ -34,6 +34,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_CSCRIPT_EXE
-	%dk_call% dk_echo "CSCRIPT_EXE = %CSCRIPT_EXE%"
+	%dk_call% DKINSTALL
+	%dk_call% dk_debug "cscript_exe = %cscript_exe%"
 %endfunction%

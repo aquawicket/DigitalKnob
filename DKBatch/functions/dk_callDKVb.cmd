@@ -26,10 +26,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 
-	set "CSCRIPT_EXE=%windir:\=/%/System32/cscript.exe"
+	set "cscript_exe=%windir:\=/%/System32/cscript.exe"
 	
 	::############ DKVb function call ############
-	set DKCOMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:VBScript //H:CScript //I //NoLogo //X %DKVB_FUNCTIONS_DIR%/DK.vbs; %DKVB_FUNCTIONS_DIR%/%1.vbs; %dk_allButFirstArgs%
+	set DKCOMMAND=%ComSpec% /c %cscript_exe% //D //E:VBScript //H:CScript //I //NoLogo //X %DKVB_FUNCTIONS_DIR%/DK.vbs; %DKVB_FUNCTIONS_DIR%/%1.vbs; %dk_allButFirstArgs%
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKVb=%dk_exec%"

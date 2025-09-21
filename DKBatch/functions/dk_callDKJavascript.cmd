@@ -26,9 +26,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_allButFirstArgs %*
 
-	set "CSCRIPT_EXE=%windir:\=/%/System32/cscript.exe"
+	%dk_call% dk_validate cscript_exe "%dk_call% dk_depend csript"
 	
-	set DKCOMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %dk_allButFirstArgs%
+	set DKCOMMAND=%ComSpec% /c %cscript_exe% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %dk_allButFirstArgs%
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKJavascript=%dk_exec%"

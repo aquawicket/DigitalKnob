@@ -17,11 +17,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if "%~1" equ "" (set "seconds=10") else (set "seconds=%~1")
 	%dk_call% dk_assertVar seconds
 	
-	%dk_call% dk_validate TIMEOUT_EXE "%dk_call% dk_TIMEOUT_EXE"
-	%TIMEOUT_EXE% %seconds%
+	%dk_call% dk_validate timeout_exe "%dk_call% dk_depend timeout"
+	%timeout_exe% %seconds%
 	
-	
-	endlocal & set "TIMEOUT_EXE=%TIMEOUT_EXE%"
+	endlocal & set "timeout_exe=%timeout_exe%"
 	(call )
 %endfunction%
 
