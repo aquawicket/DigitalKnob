@@ -1,5 +1,7 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
-if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
+Read-Host;
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/DK.ps1; }
+#if(!$DKINSTALL){ $DKINSTALL = 1 } else{ return }
+
 
 ####################################################################
 # DKINSTALL()

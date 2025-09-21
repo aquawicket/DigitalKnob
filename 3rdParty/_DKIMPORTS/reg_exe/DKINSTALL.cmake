@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-set(cmd_DEFAULT "Find") # Find, ComSpec, Unix, Wsl, Env, Find, Path
+set(reg_DEFAULT "Find") # Find, Unix, Wsl, Env, Find, Path
 ####################################################################
 # DKINSTALL()
 #
@@ -20,56 +20,49 @@ set(cmd_DEFAULT "Find") # Find, ComSpec, Unix, Wsl, Env, Find, Path
 function(DKINSTALL)
 	dk_debugFunc(0 1)
 
-	
-	
 	######### CHECK #########
 	if(NOT ARGV)
-		if(DEFINED cmd_exe)
-			dk_notice("cmd_exe:${cmd_exe} already set")
+		if(DEFINED reg_exe)
+			dk_notice("reg_exe:${reg_exe} already set")
 			return()
 		endif()
-		set(ARGV0 "${cmd_DEFAULT}")
+		set(ARGV0 "${reg_DEFAULT}")
 	endif()
 	
-	dk_echo()
-	dk_debug("${ARGV0}")	
 	######### GET #########
-	### Comspec
-	if("${ARGV0}" STREQUAL "ComSpec")
-		set(cmd_exe "$ENV{ComSpec}")
 	### Env
-	elseif("${ARGV0}" STREQUAL "Env")
-		set(cmd_exe "$ENV{cmd_exe}")
+	if("${ARGV0}" STREQUAL "Env")
+		set(reg_exe "$ENV{reg_exe}")
 	### Path
 	elseif("${ARGV0}" STREQUAL "Path")
-		set(cmd_exe "cmd.exe")
+		set(reg_exe "reg.exe")
 	### Unix
 	elseif("${ARGV0}" STREQUAL "Unix")
-		set(cmd_exe "/c/Windows/System32/cmd.exe")
+		set(reg_exe "/c/Windows/System32/reg.exe")
 	### Wsl
 	elseif("${ARGV0}" STREQUAL "Wsl")
-		set(cmd_exe "/mnt/c/Windows/System32/cmd.exe")
+		set(reg_exe "/mnt/c/Windows/System32/reg.exe")
 	### Find
 	elseif("${ARGV0}" STREQUAL "Find")
-		dk_findProgram(cmd_exe "cmd.exe")
+		dk_findProgram(reg_exe "reg.exe")
 	
 	######### SET #########
 	elseif(ARGV)
-		set(cmd_exe "${ARGV0}")
+		set(reg_exe "${ARGV0}")
 	endif()
 		
 		
 	###### OUTPUT ######
-	file(TO_NATIVE_PATH "${cmd_exe}" cmd_exe)
-	dk_set(cmd_exe "${cmd_exe}")
-	dk_debug("\${cmd_exe} = ${cmd_exe}")
-	dk_debug("\$CACHE{cmd_exe} = $CACHE{cmd_exe}")
-	dk_debug("\$ENV{cmd_exe} = $ENV{cmd_exe}")
-	dk_assertVar(cmd_exe)
-	message("${cmd_exe}") 
+	file(TO_NATIVE_PATH "${reg_exe}" reg_exe)
+	dk_set(reg_exe "${reg_exe}")
+	#dk_debug("\${reg_exe} = ${reg_exe}")
+	#dk_debug("\$CACHE{reg_exe} = $CACHE{reg_exe}")
+	#dk_debug("\$ENV{reg_exe} = $ENV{reg_exe}")
+	dk_assertVar(reg_exe)
+	dk_debug("reg_exe = ${reg_exe}") 
 	
-	if(NOT EXISTS ${cmd_exe})
-		dk_error("cmd_exe:${cmd_exe} not found")
+	if(NOT EXISTS ${reg_exe})
+		dk_error("reg_exe:${reg_exe} not found")
 	endif()
 
 endfunction()
@@ -86,7 +79,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_validate(cmd_exe "dk_depend(cmd ComSpec)")
+	dk_validate(reg_exe "dk_depend(reg ComSpec)")
 	return()
 	
 	### GET (default / Find) ###
@@ -129,7 +122,7 @@ function(DKTEST)
 	DKINSTALL()
 	
 	### SET ###
-	DKINSTALL("C:\\Users\\Administrator\\DigitalKnob\\DKTools\\cmd\\cmd.exe")
+	DKINSTALL("C:\\Users\\Administrator\\DigitalKnob\\DKTools\\reg\\reg.exe")
 	
 	### GET (default / Find) ###
 	DKINSTALL()
