@@ -16,8 +16,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if NOT EXIST "%reg_exe%" (set "reg_exe=%windir:\=/%/System32/reg.exe")
 	if NOT EXIST "%reg_exe%" (%dk_call% dk_findProgram reg_exe "reg.exe")
+	if NOT EXIST "%reg_exe%" (set "reg_exe=reg.exe")
 	
-	%reg_exe% /? || (
+	::### Test reg_exe
+	%reg_exe% /? 1>nul 2>nul || (
 		%dk_call% dk_error "reg_exe:%reg_exe% failed to run"
 		%return%
 	)
