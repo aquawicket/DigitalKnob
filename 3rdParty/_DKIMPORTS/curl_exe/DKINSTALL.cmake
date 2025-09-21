@@ -12,7 +12,7 @@ include_guard()
 #########################################################################
 
 
-set(curl_DEFAULT "Find") # Find, ComSpec, Unix, Wsl, Env, Find, Path
+
 ####################################################################
 # DKINSTALL()
 #
@@ -20,53 +20,42 @@ set(curl_DEFAULT "Find") # Find, ComSpec, Unix, Wsl, Env, Find, Path
 function(DKINSTALL)
 	dk_debugFunc(0 1)
 
-	######### CHECK #########
-	if(NOT ARGV)
-		if(DEFINED curl_exe)
-			dk_notice("curl_exe:${curl_exe} already set")
+	if(EXISTS "${curl_exe}")
+		execute_process(COMMAND "${curl_exe}" --version RESULT_VARIABLE exit_code OUTPUT_QUIET)
+		if(NOT ${exit_code})
 			return()
 		endif()
-		set(ARGV0 "${curl_DEFAULT}")
 	endif()
-
-	######### GET #########
-	### Env
-	if("${ARGV0}" STREQUAL "Env")
-		set(curl_exe "$ENV{curl_exe}")
-	### Path
-	elseif("${ARGV0}" STREQUAL "Path")
-		set(curl_exe "C:/Windows/System32/curl.exe")
-	### Unix
-	elseif("${ARGV0}" STREQUAL "Unix")
-		set(curl_exe "/c/Windows/System32/curl.exe")
-	### Wsl
-	elseif("${ARGV0}" STREQUAL "Wsl")
-		set(curl_exe "/mnt/c/Windows/System32/curl.exe")
-	### Find
-	elseif("${ARGV0}" STREQUAL "Find")
+	
+	
+	if(NOT EXISTS "${curl_exe}")
+		string(REPLACE "\\" "/" windir "$ENV{windir}")
+		set(curl_exe "${windir}/System32/curl.exe")
+	endif()
+	
+	if(NOT EXISTS "${curl_exe}")
 		dk_findProgram(curl_exe "curl.exe")
-	
-	######### SET #########
-	elseif(ARGV)
-		set(curl_exe "${ARGV0}")
-	endif()
-		
-		
-	###### OUTPUT ######
-	file(TO_NATIVE_PATH "${curl_exe}" curl_exe)
-	dk_set(curl_exe "${curl_exe}")
-	#dk_debug("\${curl_exe} = ${curl_exe}")
-	#dk_debug("\$CACHE{curl_exe} = $CACHE{curl_exe}")
-	#dk_debug("\$ENV{curl_exe} = $ENV{curl_exe}")
-	dk_assertVar(curl_exe)
-	
-	if(NOT EXISTS ${curl_exe})
-		dk_error("curl_exe:${curl_exe} not found")
 	endif()
 
-	#dk_exec(${curl_exe})
+	if(NOT EXISTS "${curl_exe}")
+		set(curl_exe "curl.exe")
+		dk_debug("curl_exe = ${curl_exe}")
+	endif()
+
+	### Test exists
+	if(NOT EXISTS "${curl_exe}") 
+		dk_error("curl_exe:${curl_exe} not found")
+		return()
+	endif()
 	
-	#dk_debug("${curl_exe}") 
+	### Test command
+	execute_process(COMMAND "${curl_exe}" --version RESULT_VARIABLE exit_code OUTPUT_QUIET)
+	if(${exit_code})
+		dk_error("curl_exe:${curl_exe} failed to run")
+		return()
+	endif()
+
+	dk_set(curl_exe "${curl_exe}")
 endfunction()
 
 
@@ -81,6 +70,11 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
+	dk_unset(curl_exe)
+	
 	dk_validate(curl_exe "dk_depend(curl_exe)")
-	dk_notice("curl_exe = ${curl_exe}")
+	dk_echo("curl_exe = ${curl_exe}")
+	
+	dk_validate(curl_exe "dk_depend(curl_exe)")
+	dk_echo("curl_exe = ${curl_exe}")
 endfunction()	

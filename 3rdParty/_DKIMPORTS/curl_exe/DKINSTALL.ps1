@@ -10,18 +10,20 @@ function Global:DKINSTALL() {
 
 	if(!${curl_exe}){ ${curl_exe} = "undefined"; }
 
-	if(Test-Path "${curl_exe}"){ return; }
+	if(Test-Path "${curl_exe}"){ 
+		if(dk_call ${curl_exe} --version){ return; }
+	}
 
 	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "C:/Windows/System32/curl.exe"; }
 	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = $(dk_call dk_findProgram curl_exe "curl.exe"); }
+	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "curl_exe"; }
 	
-	if(!(Test-Path "${curl_exe}")){ 
-		dk_call dk_error "curl_exe:${curl_exe} not found"; 
-		return;
-	}
+	### Test exists
+	if(!(Test-Path "${curl_exe}")){ dk_call dk_error "curl_exe:${curl_exe} not found"; return;}
 
-	### TODO: test me
-	if(!(dk_call ${curl_exe} --version)){ dk_call dk_error "curl_exe:${curl_exe} failed to run"; }
+	### Test command
+	if(!(dk_call ${curl_exe} --version)){ dk_call dk_error "curl_exe:${curl_exe} failed to run"; return;}
+	
 	
 #	###### output ######
 	${global:curl_exe} = ${curl_exe};
@@ -44,5 +46,8 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 	
     dk_call dk_validate curl_exe "dk_call dk_depend curl_exe";
+	dk_call dk_echo "curl_exe = ${curl_exe}";
+	
+	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe";
 	dk_call dk_echo "curl_exe = ${curl_exe}";
 }

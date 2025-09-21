@@ -26,7 +26,12 @@ DKINSTALL() {
 	[ ! -e "${curl_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && curl_exe=$(cygpath -u "${curl_exe}")
 	[ ! -e "${curl_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && curl_exe=$(wslpath -u "${curl_exe}")
 	[ ! -e "${curl_exe-}" ] && dk_call dk_installPackage curl
-	(command -v "${curl_exe}" 1>/dev/null) || { dk_call dk_error "curl_exe:${curl_exe} failed to run"; return $?; }
+	
+	### Test exists
+	[ -e "${curl_exe-}" ] || { dk_call dk_error "curl_exe:${curl_exe} not found"; return $?; }
+	
+	### Test command
+	(command -v "${curl_exe-}" 1>/dev/null) || { dk_call dk_error "curl_exe:${curl_exe-} failed to run"; return $?; }
 	
 	###### output ######
 	export curl_exe=${curl_exe};
