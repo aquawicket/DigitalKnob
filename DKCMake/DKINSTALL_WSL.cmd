@@ -1,5 +1,5 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
 if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
@@ -52,8 +52,8 @@ set "DKCmake_ENV=WSL"
 
 		set COMMAND="%ComSpec%" /V:ON /k set "DKSCRIPT_PATH=%%1" ^& set "DKSCRIPT_PATH=^!DKSCRIPT_PATH:\=/^!" ^& for /f %%%%p in ('!wsl_exe! wslpath -u ^!DKSCRIPT_PATH^!'^) do set "DKSCRIPT_PATH=%%%%p" ^& set "DKCMAKE_FUNCTIONS_DIR_=^!DKCMAKE_FUNCTIONS_DIR_^!" ^& "!wsl_exe!" "^!DKSCRIPT_PATH^!^"
 		
-		echo !COMMAND!
-		ftype DKCmake=!COMMAND!
+		echo ^!COMMAND^!
+		ftype DKCmake=^!COMMAND^!
 
 		%dk_call% dk_registrySetKey "HKCR/DKCmake/DefaultIcon" "" "REG_SZ" "!wsl_exe!"
 		assoc .cmake=DKCmake
@@ -63,3 +63,4 @@ set "DKCmake_ENV=WSL"
 
 %endfunction%
 
+:: "C:\Windows\System32\cmd.exe" /V:ON /k set "DKSCRIPT_PATH=%1" & set "DKSCRIPT_PATH=!DKSCRIPT_PATH:\=/!" & for /f %%p in ('C:\Windows\System32\wsl.exe wslpath -u C:/Users/Administrator/DigitalKnob/Development/DKCMake/DKINSTALL_WSL.cmd') do set "DKSCRIPT_PATH=%%p" & set "DKCMAKE_FUNCTIONS_DIR_=!DKCMAKE_FUNCTIONS_DIR_!" & "C:\Windows\System32\wsl.exe" "!DKSCRIPT_PATH!"
