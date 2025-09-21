@@ -21,39 +21,43 @@ function(DKINSTALL)
 	dk_debugFunc(0 1)
 
 	### Test if already valid
-	if(EXISTS "${reg_exe}")
-		execute_process(COMMAND "${reg_exe}" /? RESULT_VARIABLE exit_code OUTPUT_QUIET)
+	if(EXISTS "${cmd_exe}")
+		execute_process(COMMAND ${cmd_exe} /c ver RESULT_VARIABLE exit_code OUTPUT_QUIET)
 		if(NOT ${exit_code})
 			return()
 		endif()
 	endif()
 	
 	
-	if(NOT EXISTS "${reg_exe}")
-		string(REPLACE "\\" "/" windir "$ENV{windir}")
-		file(TO_NATIVE_PATH "${windir}/System32/reg.exe" reg_exe)
+	if(NOT EXISTS "${cmd_exe}")
+		file(TO_NATIVE_PATH "$ENV{ComSpec}" cmd_exe)
 	endif()
 	
-	if(NOT EXISTS "${reg_exe}")
-		dk_findProgram(reg_exe "reg.exe")
-		file(TO_NATIVE_PATH "${reg_exe}" reg_exe)
+	if(NOT EXISTS "${cmd_exe}")
+		string(REPLACE "\\" "/" windir "$ENV{windir}")
+		file(TO_NATIVE_PATH "${windir}/System32/cmd.exe" cmd_exe)
+	endif()
+	
+	if(NOT EXISTS "${cmd_exe}")
+		dk_findProgram(cmd_exe "cmd.exe")
+		file(TO_NATIVE_PATH "${cmd_exe}" cmd_exe)
 	endif()
 
 
 	### Test exists
-	if(NOT EXISTS "${reg_exe}") 
-		dk_error("reg_exe:${reg_exe} not found")
+	if(NOT EXISTS "${cmd_exe}") 
+		dk_error("cmd_exe:${cmd_exe} not found")
 		return()
 	endif()
 	
 	### Test command
-	execute_process(COMMAND "${reg_exe}" /? RESULT_VARIABLE exit_code OUTPUT_QUIET)
+	execute_process(COMMAND ${cmd_exe} /c ver RESULT_VARIABLE exit_code OUTPUT_QUIET)
 	if(${exit_code})
-		dk_error("reg_exe:${reg_exe} failed to run")
+		dk_error("cmd_exe:${cmd_exe} failed to run")
 		return()
 	endif()
 
-	dk_set(reg_exe "${reg_exe}")
+	dk_set(cmd_exe "${cmd_exe}")
 endfunction()
 
 
@@ -68,11 +72,11 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_unset(reg_exe)
+	dk_unset(cmd_exe)
 	
-	dk_validate(reg_exe "dk_depend(reg_exe)")
-	dk_echo("reg_exe = ${reg_exe}")
+	dk_validate(cmd_exe "dk_depend(cmd_exe)")
+	dk_echo("cmd_exe = ${cmd_exe}")
 	
-	dk_validate(reg_exe "dk_depend(reg_exe)")
-	dk_echo("reg_exe = ${reg_exe}")
+	dk_validate(cmd_exe "dk_depend(cmd_exe)")
+	dk_echo("cmd_exe = ${cmd_exe}")
 endfunction()	

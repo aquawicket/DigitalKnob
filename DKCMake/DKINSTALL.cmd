@@ -51,10 +51,12 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	::###### Install DKCMake ######
 	::%dk_call% dk_validate DKIMPORTS_DIR     		"%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate cmd_exe     				"%dk_call% dk_depend cmd_exe"
 	%dk_call% dk_validate cmake_exe     			"%dk_call% dk_depend cmake"
 	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ 	"%dk_call% dk_DKBRANCH_DIR"
 
-	ftype DKCmake=%ComSpec% /V:ON /K call "%~f0" "%cmake_exe%" "%DKCMAKE_FUNCTIONS_DIR_%" "%%1" %*
+::	ftype DKCmake=%ComSpec% /V:ON /K call "%~f0" "%cmake_exe%" "%DKCMAKE_FUNCTIONS_DIR_%" "%%1" %*
+	ftype DKCmake="%cmd_exe%" /V:ON /K call %cmake_exe% -P "%%1"
 	%dk_call% dk_registrySetKey "HKCR/DKCmake/DefaultIcon" "" "REG_SZ" "%cmake%/bin/cmake-gui.exe"
 	assoc .cmake=DKCmake
 

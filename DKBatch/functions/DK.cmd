@@ -1,16 +1,28 @@
 @echo off
 if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
-::TODO - switch to UNICODE code page
-::chcp 65001 >NUL
+call :DK %*
+exit /b !errorlevel!
 
 
+::####################################################################
+::# :pushStack()
+::#
+:pushStack
+	if NOT defined LVL (set /a "LVL=0")
+	if NOT defined LVL (set /a "ENTRY=0")
+	(set /a LVL+=1)
+	(set /a ENTRY+=1)
+	call :setGlobal __STACK__%ENTRY% %*
+exit /b !errorlevel!
 
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
 ::#
+::#	  TODO - switch to UNICODE code page
+::#   chcp 65001 >NUL
+::#
 :DK
-::%setlocal%
 	call :pushStack %~n0 %*
 	(set pushStack=call :pushStack %%~n0%%~0 %%*)
 
@@ -235,7 +247,7 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd" 			(tar -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_return.cmd)
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd" 	(tar -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_printLastError.cmd)
 	) else (
-		%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
+		set "curl_exe=%windir%\System32\curl.exe"
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
@@ -316,16 +328,7 @@ setlocal enableDelayedExpansion
 	:: (set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 exit /b !errorlevel!
 
-::####################################################################
-::# :pushStack()
-::#
-:pushStack
-	if NOT defined LVL (set /a "LVL=0")
-	if NOT defined LVL (set /a "ENTRY=0")
-	(set /a LVL+=1)
-	(set /a ENTRY+=1)
-	call :setGlobal __STACK__%ENTRY% %*
-exit /b !errorlevel!
+
 
 
 ::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######

@@ -8,26 +8,27 @@ if(!$curl_DKINSTALL_ps1){ $curl_DKINSTALL_ps1 = 1; } else{ return; } #include gu
 function Global:DKINSTALL() {
 	dk_debugFunc 0 1;
 
-	if(!${curl_exe}){ ${curl_exe} = "undefined"; }
+	if(!${curl_exe}){ ${curl_exe} = "curl.exe"; }
 
+	### Test if already valid
 	if(Test-Path "${curl_exe}"){ 
-		if(dk_call ${curl_exe} --version){ return; }
+		if(dk_call "${curl_exe}" --version){ return; }
 	}
+
 
 	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "C:/Windows/System32/curl.exe"; }
 	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = $(dk_call dk_findProgram curl_exe "curl.exe"); }
-	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "curl_exe"; }
+	
 	
 	### Test exists
 	if(!(Test-Path "${curl_exe}")){ dk_call dk_error "curl_exe:${curl_exe} not found"; return;}
 
 	### Test command
-	if(!(dk_call ${curl_exe} --version)){ dk_call dk_error "curl_exe:${curl_exe} failed to run"; return;}
+	if(!(dk_call "${curl_exe}" --version)){ dk_call dk_error "curl_exe:${curl_exe} failed to run"; return;}
 	
 	
-#	###### output ######
+	###### output ######
 	${global:curl_exe} = ${curl_exe};
-
 #	#if($args[1]) {
 #	#	dk_call dk_set $args[1] ${curl_exe};
 #	#} else {

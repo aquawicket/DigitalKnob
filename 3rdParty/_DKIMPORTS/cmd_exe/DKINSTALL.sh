@@ -19,28 +19,22 @@ fi
 DKINSTALL() {
 	dk_debugFunc 0
 
-	(command -v "${curl_exe-}" 1>/dev/null) && return $?;
+	(command -v "${reg_exe-}" 1>/dev/null) && return $?;
 	
-	[ ! -e "${curl_exe-}" ] && curl_exe="/usr/bin/curl"
-	[ ! -e "${curl_exe-}" ] && curl_exe="C:/Windows/System32/curl.exe"
-	[ ! -e "${curl_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && curl_exe=$(cygpath -u "${curl_exe}")
-	[ ! -e "${curl_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && curl_exe=$(wslpath -u "${curl_exe}")
-	[ ! -e "${curl_exe-}" ] && dk_call dk_installPackage curl
-	[ ! -e "${curl_exe-}" ] && curl_exe=$(command -v curl)
-	
-	### Test exists
-	[ -e "${curl_exe-}" ] || { dk_call dk_error "curl_exe:${curl_exe} not found"; return $?; }
-	
-	### Test command
-	(command -v "${curl_exe-}" 1>/dev/null) || { dk_call dk_error "curl_exe:${curl_exe-} failed to run"; return $?; }
+	[ ! -e "${reg_exe-}" ] && reg_exe=$(command -v reg)
+	[ ! -e "${reg_exe-}" ] && reg_exe="C:/Windows/System32/reg.exe"
+	[ ! -e "${reg_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && reg_exe=$(cygpath -u "${reg_exe}")
+	[ ! -e "${reg_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && reg_exe=$(wslpath -u "${reg_exe}")
+	[ ! -e "${reg_exe-}" ] && dk_call dk_installPackage reg
+	(command -v ${reg_exe} 1>/dev/null) || { dk_call dk_error "reg_exe:${reg_exe} failed to run"; return $?; }
 	
 	###### output ######
-	export curl_exe=${curl_exe};
-#	if [ -n "${1-}" ]; then
-#		eval ${1}=${curl_exe};
-#	else
-		builtin echo "${curl_exe}";
-#	fi
+	export reg_exe=${reg_exe};
+	if [ -n "${1-}" ]; then
+		eval ${1}=${reg_exe};
+	else
+		builtin echo "${reg_exe}";
+	fi
 	return $?;
 }
 
@@ -52,9 +46,9 @@ DKINSTALL() {
 DKTEST() {
 	dk_debugFunc 0
 
-	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate reg_exe "dk_call dk_depend reg_exe"
+	dk_call dk_echo "reg_exe = ${reg_exe-}"
 	
-	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate reg_exe "dk_call dk_depend reg_exe"
+	dk_call dk_echo "reg_exe = ${reg_exe-}"
 }
