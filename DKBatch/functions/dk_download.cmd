@@ -6,8 +6,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 ::set "dk_download_DISABLE_curl=1"
 ::set "dk_download_DISABLE_certutil=1"
-::set "dk_download_DISABLE_bitsadmin=1"
 ::set "dk_download_DISABLE_powershell=1"
+set "dk_download_DISABLE_bitsadmin=1"
 if NOT defined dk_download_BACKUP_SERVER		(set "dk_download_BACKUP_SERVER=http://aquawicket.com/download")
 if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TEST=0")
 ::####################################################################
@@ -61,70 +61,67 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
     if NOT EXIST "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
    
     ::####################################################################################  
-	:: curl
-	if NOT defined dk_download_DISABLE_curl (
-		%dk_call% dk_debug "Dowloading using curl"
-		set "curl_exe=C:\Windows\System32\curl.exe"
-		rem %dk_call% dk_validate curl_exe "%dk_call% dk_CURL_EXE"
-		rem %dk_call% dk_validate curl_exe "%dk_call% dk_depend curl"
-		if NOT EXIST "%destination%_DOWNLOADING" (!curl_exe! --help %NO_OUTPUT% && !curl_exe! -L "%url%" -o "%destination%_DOWNLOADING")
-		%dk_call% dk_fileSize "%destination%_DOWNLOADING"
-		if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+	::### curl
+	if NOT EXIST "%destination%_DOWNLOADING" (
+		if NOT defined dk_download_DISABLE_curl (
+			%dk_call% dk_debug "Dowloading using curl"
+			set "curl_exe=C:\Windows\System32\curl.exe"
+			rem %dk_call% dk_validate curl_exe "%dk_call% dk_depend curl"
+			!curl_exe! --help %NO_OUTPUT% && !curl_exe! -L "%url%" -o "%destination%_DOWNLOADING"
+			
+			%dk_call% dk_fileSize "%destination%_DOWNLOADING"
+			if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+		)
 	)
-	if EXIST "%destination%_DOWNLOADING" (goto download_done)
 	
-	:: certutil
-    if NOT defined dk_download_DISABLE_certutil (
-		%dk_call% dk_debug "Dowloading using certutil"
-		set "certutil_exe=C:\Windows\System32\certutil.exe"
-		rem %dk_call% dk_validate certutil_exe "%dk_call% dk_depend certutil"
-		if NOT EXIST "%destination%_DOWNLOADING" (!certutil_exe! %NO_OUTPUT% && !certutil_exe! -urlcache -split -f "%url%" "%destination%_DOWNLOADING")
-		%dk_call% dk_fileSize "%destination%_DOWNLOADING"
-		if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
-    )
-	if EXIST "%destination%_DOWNLOADING" (goto download_done)
-	
-	:: bitsadmin
-    if NOT defined dk_download_DISABLE_bitsadmin (
-		%dk_call% dk_debug "Dowloading using bitsadmin"
-		set "bitsadmin_exe=%windir%\System32\bitsadmin.exe"
-		%dk_call% dk_firewallAllow "!bitsadmin_exe!"
-pause		
-		rem %dk_call% dk_validate bitsadmin_exe "%dk_call% dk_depend bitsadmin"
-		
-		echo "!bitsadmin_exe!" /transfer myDownloadJob "%url%" "%destination:/=\%_DOWNLOADING"
-pause
-		if NOT EXIST "%destination%_DOWNLOADING" ("!bitsadmin_exe!" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING")
-pause
-		%dk_call% dk_fileSize "%destination%_DOWNLOADING"
-		if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
-    )
-	if EXIST "%destination%_DOWNLOADING" (goto download_done)
-
-	
-    :: powershell
-    if NOT defined dk_download_DISABLE_powershell (
-		%dk_call% dk_debug "Dowloading using powershell"
-		%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
-		set "User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-		if NOT EXIST "%destination%_DOWNLOADING" %powershell_exe% -Command "$cli = New-Object System.Net.WebClient; "^
-			"$cli.Headers['User-Agent'] = '!User-Agent!'; "^
+	::### powershell
+	if NOT EXIST "%destination%_DOWNLOADING" (
+		if NOT defined dk_download_DISABLE_powershell (
+			%dk_call% dk_debug "Dowloading using powershell"
+			rem %dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+			powershell.exe -Command "$cli = New-Object System.Net.WebClient; "^
+			"$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'; "^
 			"$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"
-		%dk_call% dk_fileSize "%destination%_DOWNLOADING"
-		if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+			
+			%dk_call% dk_fileSize "%destination%_DOWNLOADING"
+			if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+		)
     )
-	if EXIST "%destination%_DOWNLOADING" (goto download_done)
 	
-
-    :download_done
+	::### certutil
+	if NOT EXIST "%destination%_DOWNLOADING" (
+		if NOT defined dk_download_DISABLE_certutil (
+			%dk_call% dk_debug "Dowloading using certutil"
+			set "certutil_exe=C:\Windows\System32\certutil.exe"
+			rem %dk_call% dk_validate certutil_exe "%dk_call% dk_depend certutil"
+			!certutil_exe! %NO_OUTPUT% && !certutil_exe! -urlcache -split -f "%url%" "%destination%_DOWNLOADING"
+			
+			%dk_call% dk_fileSize "%destination%_DOWNLOADING"
+			if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+		)
+	)
+	
+	::### bitsadmin
+::	if NOT EXIST "%destination%_DOWNLOADING" (
+::		if NOT defined dk_download_DISABLE_bitsadmin (
+::			%dk_call% dk_debug "Dowloading using bitsadmin"
+::			set "bitsadmin_exe=%windir%\System32\bitsadmin.exe"
+::			rem %dk_call% dk_validate bitsadmin_exe "%dk_call% dk_depend bitsadmin"
+::			%dk_call% dk_firewallAllow "!bitsadmin_exe!"
+::			"!bitsadmin_exe!" /transfer /Download /priority Foreground "%url%" "%destination:/=\%_DOWNLOADING"
+::
+::			%dk_call% dk_fileSize "%destination%_DOWNLOADING"
+::			if "!dk_fileSize!" equ "0" (%dk_call% dk_delete "%destination%_DOWNLOADING")
+::		)
+::	)
+	
     :: If Dowload Failed
     if NOT EXIST "%destination%_DOWNLOADING" (
 		%dk_call% dk_error "url:%url% DOWNLOAD FAILED"
 		%return%	
 	)
    
-    :: downloaded as temporary name i.e. 'myFile.txt_DOWNLOADING'
-    :: then rename it to it's original upon completion
+    :: rename temporary download filename to it's original filename
     %dk_call% dk_rename "%destination%_DOWNLOADING" "%destination%"
     if NOT EXIST "%destination%" (%dk_call% dk_error "failed to rename %destination%_DOWNLOADING")
    
@@ -142,36 +139,36 @@ pause
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
+	echo(
+	echo( ### Test Initial download
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	
-::	echo(
-::	echo( ### Test Initial download
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
+	echo(
+	echo( ### Test NO OVERWRITE
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	
-::	echo(
-::	echo( ### Test NO OVERWRITE
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
-	
-::	echo(
-::	echo( ### Test OVERWRITE
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+	echo(
+	echo( ### Test OVERWRITE
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
 	echo(
 	echo( ### Test dk_download_DISABLE_curl
 	set "dk_download_DISABLE_curl=1"
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
+	echo(
+	echo( ### Test dk_download_DISABLE_powershell
+	set "dk_download_DISABLE_powershell=1"
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+
 	echo(
 	echo( ### Test dk_download_DISABLE_certutil
 	set "dk_download_DISABLE_certutil=1"
 	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
-::	echo(
-::	echo( ### Test dk_download_DISABLE_bitsadmin
-::	set "dk_download_DISABLE_bitsadmin=1"
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
-	
-::	echo(
-::	echo( ### Test dk_download_DISABLE_powershell
-::	set "dk_download_DISABLE_powershell=1"
-::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+	::NOTE: this will roduce and error as all download methods are now turned off
+	echo(
+	echo( ### Test dk_download_DISABLE_bitsadmin
+	set "dk_download_DISABLE_bitsadmin=1"
+	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 %endfunction%
