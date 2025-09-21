@@ -86,7 +86,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_depend(cmd ComSpec)
+	dk_validate(cmd_exe "dk_depend(cmd ComSpec)")
 	return()
 	
 	### GET (default / Find) ###

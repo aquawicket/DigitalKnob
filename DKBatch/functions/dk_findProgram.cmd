@@ -76,8 +76,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "PWSH_EXE = %PWSH_EXE%"
 
 	%dk_call% dk_echo
-	%dk_call% dk_findProgram POWERSHELL_EXE "powershell.exe" "%windir%/System32"
-	%dk_call% dk_echo "POWERSHELL_EXE = %POWERSHELL_EXE%"
+	%dk_call% dk_findProgram powershell_exe "powershell.exe" "%windir%/System32"
+	%dk_call% dk_echo "powershell_exe = %powershell_exe%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_findProgram cmd_exe "cmd.exe" "%windir%/System32"

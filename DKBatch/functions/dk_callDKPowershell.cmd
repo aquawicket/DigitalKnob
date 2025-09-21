@@ -37,19 +37,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT EXIST "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/DK.ps1")
 	if NOT EXIST "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1"	(%dk_call% dk_download "%DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1" "%DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1")
 
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
 
 	:: https://stackoverflow.com/a/4732316/688352
-	%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' 1>nul
+	%dk_call% %ComSpec% /c %powershell_exe% -Command 'Set-ExecutionPolicy RemoteSigned -Scope CurrentUser' 1>nul
 
 	::### ALL_BUT_FIRST ###	
 	%dk_call% dk_allButFirstArgs %*
 
 	::############ DKPowershell function call ############
-	::%dk_call% %ComSpec% /c %POWERSHELL_EXE% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
+	::%dk_call% %ComSpec% /c %powershell_exe% -Command $global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %DKPOWERSHELL_FUNCTIONS_DIR%/%~1.ps1; %1 %dk_allButFirstArgs%
 	::set "dk_exec_ECHO_OUTPUT=0"
 	set dk_allButFirstArgs=%dk_allButFirstArgs:"='%
-	set DKCOMMAND=%POWERSHELL_EXE% -Command "$global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %_path_%; %_func_% %dk_allButFirstArgs%;"
+	set DKCOMMAND=%powershell_exe% -Command "$global:DKSCRIPT_PATH = '%DKSCRIPT_PATH%'; . %_path_%; %_func_% %dk_allButFirstArgs%;"
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKPowershell=%dk_exec%"

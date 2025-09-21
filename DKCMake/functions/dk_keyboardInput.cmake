@@ -33,9 +33,9 @@ function(dk_keyboardInput)
 	endif()
 	
 	###### POWERSHELL ######
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(EXISTS "${POWERSHELL_EXE}")
-		set(cmnd ${POWERSHELL_EXE} Read-Host)
+	find_program(powershell_exe powershell.exe)
+	if(EXISTS "${powershell_exe}")
+		set(cmnd ${powershell_exe} Read-Host)
 		#message("${cmnd}")
 		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
 		if("${stdin}" STREQUAL "$stdin")

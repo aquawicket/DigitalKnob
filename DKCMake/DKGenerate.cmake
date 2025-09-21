@@ -604,9 +604,9 @@ if(Android)
 	### Install apk to device ###
 	#dk_set(INSTALL_APK ON)
 	if(NOT Android_Host AND INSTALL_APK)
-		dk_depend(cmd)	
+		dk_validate(cmd_exe "dk_depend(cmd)")
 		if(Debug)
-			dk_depend(cmd)
+			dk_validate(cmd_exe "dk_depend(cmd)")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
@@ -615,7 +615,7 @@ if(Android)
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(Release)
 		endif()
-			dk_depend(cmd)
+			dk_validate(cmd_exe "dk_depend(cmd)")
 			add_custom_command(
 				POST_BUILD
 				TARGET main

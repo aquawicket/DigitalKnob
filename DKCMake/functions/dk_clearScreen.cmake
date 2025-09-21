@@ -29,16 +29,16 @@ function(dk_clearScreen)
 #	endif()
 	
 	### powershell ###
-	find_program(POWERSHELL_EXE powershell.exe)
+	find_program(powershell_exe powershell.exe)
 	#dk_depend(powershell)
-	if(POWERSHELL_EXE)
-		#dk_exec(${POWERSHELL_EXE} clear)
-		execute_process(COMMAND ${POWERSHELL_EXE} clear) # faster
+	if(powershell_exe)
+		#dk_exec(${powershell_exe} clear)
+		execute_process(COMMAND ${powershell_exe} clear) # faster
 		return()
 	endif()
 	
 #	### cmd ###	
-#	dk_depend(cmd)
+#	dk_validate(cmd_exe "dk_depend(cmd)")
 #	if(cmd_exe)
 #		dk_exec(cls)  					# FIXME: only clears 1 line
 #		execute_process(COMMAND cls)  	# FIXME: only clears 1 line

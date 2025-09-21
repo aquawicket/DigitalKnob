@@ -109,7 +109,7 @@ function(dk_exec)
 	endif()
 	
 #	if(WIN32)
-#		dk_depend(cmd)
+#		dk_validate(cmd_exe "dk_depend(cmd)")
 #		if(cmd_exe)
 #			if(NOT dk_exec_command MATCHES "cmd;/c")		
 #				list(INSERT dk_exec_command 1 "cmd;/c") # add cmd /c if missing

@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
 ::  Example
 ::      %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
-::      ftype DKPowershell=%POWERSHELL_EXE% "%%1"
+::      ftype DKPowershell=%powershell_exe% "%%1"
 ::      assoc .ps1=DKPowershell
     %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%"
    

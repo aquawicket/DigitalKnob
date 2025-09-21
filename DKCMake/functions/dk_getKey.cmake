@@ -19,7 +19,7 @@ include_guard()
 function(dk_getKey rtn_var)
 	dk_debugFunc(1)
 
-	dk_depend(cmd)
+	dk_validate(cmd_exe "dk_depend(cmd)")
 	if(cmd_exe)
 		dk_fixme("${CMAKE_CURRENT_FUNCTION}")
 		execute_process(COMMAND ${cmd_exe} /c pause)

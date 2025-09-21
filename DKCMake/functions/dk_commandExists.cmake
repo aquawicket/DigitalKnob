@@ -29,7 +29,7 @@ function(dk_commandExists shell commandName rtn_var)
 	
 	## Test for command in CMD
 	elseif("${shell}" STREQUAL "CMD")
-		dk_depend(cmd)
+		dk_validate(cmd_exe "dk_depend(cmd)")
 		dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 		execute_process(COMMAND ${cmd_exe} /c call "$ENV{DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
 		set(${rtn_var} ${output} PARENT_SCOPE)

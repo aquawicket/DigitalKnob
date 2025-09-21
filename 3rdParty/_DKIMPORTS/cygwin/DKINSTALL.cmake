@@ -52,7 +52,7 @@ endif()
 #if(NOT EXISTS "???")
 dk_info("running install_crosstool.cmd")
 dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_depend(cmd)
+dk_validate(cmd_exe "dk_depend(cmd)")
 set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
 dk_exec(${cmd_exe} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
 	

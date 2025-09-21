@@ -25,8 +25,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	::### Method 1 - powershell beep ###
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_depend powershell"
-	"%POWERSHELL_EXE%" "%song%"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+	"%powershell_exe%" "%song%"
 
 	::### Method 3 - echo BELL character ###
 ::	set "BELL="	&::contains a BELL 0x07 character

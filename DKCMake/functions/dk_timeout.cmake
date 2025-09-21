@@ -40,7 +40,7 @@ function(dk_timeout)
 	elseif(POWERSHELL_SHELL)
 		set(command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
 		message("POWERSHELL> ${command}")
-		execute_process(COMMAND "${POWERSHELL_EXE}" -Command "${command}")
+		execute_process(COMMAND "${powershell_exe}" -Command "${command}")
 	
 	###### BASH ######
 	elseif(BASH_SHELL)

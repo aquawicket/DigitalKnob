@@ -12,62 +12,51 @@ include_guard()
 #########################################################################
 
 
-set(powershell_DEFAULT "Find") # Find, Unix, Wsl, Env, Find, Path
+#set(powershell_DEFAULT "Find") # Find, Unix, Wsl, Env, Find, Path
 ####################################################################
 # DKINSTALL()
 #
 #
 function(DKINSTALL)
-	dk_debugFunc(0 1)
-	
-	
-	######### CHECK #########
-	if(NOT ARGV)
-		if(DEFINED powershell_exe)
-			dk_notice("powershell_exe:${powershell_exe} already set")
-			return()
-		endif()
-		set(ARGV0 "${powershell_DEFAULT}")
-	endif()
-	
-	dk_echo()
-	dk_debug("${ARGV0}")	
-	######### GET #########
-	### Env
-	if("${ARGV0}" STREQUAL "Env")
-		set(powershell_exe "$ENV{powershell_exe}")
-	### Path
-	elseif("${ARGV0}" STREQUAL "Path")
-		set(powershell_exe "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
-	### Unix
-	elseif("${ARGV0}" STREQUAL "Unix")
-		set(powershell_exe "/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
-	### Wsl
-	elseif("${ARGV0}" STREQUAL "Wsl")
-		set(powershell_exe "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
-	### Find
-	elseif("${ARGV0}" STREQUAL "Find")
-		dk_findProgram(powershell_exe "powershell.exe")
-	
-	######### SET #########
-	elseif(ARGV)
-		set(powershell_exe "${ARGV0}")
-	endif()
-		
-		
-	###### OUTPUT ######
-	file(TO_NATIVE_PATH "${powershell_exe}" powershell_exe)
-	dk_set(powershell_exe "${powershell_exe}")
-	dk_debug("\${powershell_exe} = ${powershell_exe}")
-	dk_debug("\$CACHE{powershell_exe} = $CACHE{powershell_exe}")
-	dk_debug("\$ENV{powershell_exe} = $ENV{powershell_exe}")
-	dk_assertVar(powershell_exe)
-	message("${powershell_exe}") 
-	
-	if(NOT EXISTS ${powershell_exe})
-		dk_error("powershell_exe:${powershell_exe} not found")
-	endif()
+    dk_debugFunc()
 
+	if(EXISTS "${powershell_exe}")
+		dk_debug("powershell_exe:${powershell_exe} already set")
+		return()
+	endif()
+	
+	
+	### from powershell_exe environment variable ###
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "$ENV{powershell_exe}")
+	endif()
+	
+	### from powershell (Get-Process -Id $pid).Path ###
+	if(NOT EXISTS "${powershell_exe}")
+		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE powershell_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+		file(TO_CMAKE_PATH "${powershell_exe}" powershell_exe)
+	endif()
+	
+	### from dk_findProgram ###
+	if(NOT EXISTS "${powershell_exe}")
+		dk_findProgram(powershell_exe "powershell.exe")
+	endif()
+	
+	### from raw unix path ###
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
+	endif()
+	
+	### from raw wsl path ###
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
+	endif()
+	
+	if(NOT EXISTS "${powershell_exe}")
+		dk_warning("powershell_exe:${powershell_exe} not found")
+	else()
+		dk_set(powershell_exe "${powershell_exe}")	# Globalize the variable
+	endif()
 endfunction()
 
 
@@ -82,52 +71,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_depend(powershell Unix)
-return()
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### GET (default / Find) ###
-	DKINSTALL(Find)
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### GET (Unix) ###
-	DKINSTALL(Unix)
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### GET (Wsl) ###
-	DKINSTALL(Wsl)
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### GET (Env) ###
-	DKINSTALL(Env)
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### GET (Path) ###
-	DKINSTALL(Path)
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### SET ###
-	DKINSTALL("C:\\Users\\Administrator\\DigitalKnob\\DKTools\\powershell\\powershell.exe")
-	
-	### GET (default / Find) ###
-	DKINSTALL()
-	
-	### SET ###
-	DKINSTALL("BOGUS")
-	
-	### GET (default / Find) ###
-	DKINSTALL()
+	dk_validate(powershell_exe "dk_depend(powershell)")
+	dk_debug("powershell_exe = ${powershell_exe}")
 
 endfunction()	

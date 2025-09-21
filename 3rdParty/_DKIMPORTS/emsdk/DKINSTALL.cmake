@@ -39,7 +39,7 @@ dk_assertPath(${EMSDK})
 
 # Download and install the latest SDK tools.
 if(Windows_Host)
-	dk_depend(cmd)
+	dk_validate(cmd_exe "dk_depend(cmd)")
 	dk_depend(cmake)
 	dk_nativePath(${cmake_exe} cmake_exe)
 	execute_process(COMMAND ${cmd_exe} /c ${cmake_exe} -E env PATH=${PYTHON3_WIN}	"${EMSDK}/emsdk.bat"  install latest 				COMMAND_ECHO STDOUT)

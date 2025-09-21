@@ -19,42 +19,42 @@ include_guard()
 function(dk_POWERSHELL_EXE)
     dk_debugFunc()
 
-	if(EXISTS "${POWERSHELL_EXE}")
-		dk_debug("POWERSHELL_EXE:${POWERSHELL_EXE} already set")
+	if(EXISTS "${powershell_exe}")
+		dk_debug("powershell_exe:${powershell_exe} already set")
 		return()
 	endif()
 	
 	
-	### from POWERSHELL_EXE environment variable ###
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		dk_set(POWERSHELL_EXE "$ENV{POWERSHELL_EXE}")
+	### from powershell_exe environment variable ###
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "$ENV{powershell_exe}")
 	endif()
 	
 	### from powershell (Get-Process -Id $pid).Path ###
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE POWERSHELL_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-		file(TO_CMAKE_PATH "${POWERSHELL_EXE}" POWERSHELL_EXE)
+	if(NOT EXISTS "${powershell_exe}")
+		execute_process(COMMAND powershell -c Write-Host "(Get-Process -Id $pid).Path" OUTPUT_VARIABLE powershell_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+		file(TO_CMAKE_PATH "${powershell_exe}" powershell_exe)
 	endif()
 	
 	### from dk_findProgram ###
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		dk_findProgram(POWERSHELL_EXE "powershell.exe")
+	if(NOT EXISTS "${powershell_exe}")
+		dk_findProgram(powershell_exe "powershell.exe")
 	endif()
 	
 	### from raw unix path ###
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		dk_set(POWERSHELL_EXE "/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
 	endif()
 	
 	### from raw wsl path ###
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		dk_set(POWERSHELL_EXE "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
+	if(NOT EXISTS "${powershell_exe}")
+		dk_set(powershell_exe "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe")
 	endif()
 	
-	if(NOT EXISTS "${POWERSHELL_EXE}")
-		dk_warning("POWERSHELL_EXE:${POWERSHELL_EXE} not found")
+	if(NOT EXISTS "${powershell_exe}")
+		dk_warning("powershell_exe:${powershell_exe} not found")
 	else()
-		dk_set(POWERSHELL_EXE "${POWERSHELL_EXE}")	# Globalize the variable
+		dk_set(powershell_exe "${powershell_exe}")	# Globalize the variable
 	endif()
 endfunction()
 
@@ -67,10 +67,10 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_POWERSHELL_EXE()
-	if(EXISTS "${POWERSHELL_EXE}")
-		dk_success("POWERSHELL_EXE = ${POWERSHELL_EXE}")
+    dk_powershell_exe()
+	if(EXISTS "${powershell_exe}")
+		dk_success("powershell_exe = ${powershell_exe}")
 	else()
-		dk_error("POWERSHELL_EXE = ${POWERSHELL_EXE}")
+		dk_error("powershell_exe = ${powershell_exe}")
 	endif()
 endfunction()

@@ -62,9 +62,9 @@ function(dk_beeps)
 #	endif()
 
 	###### POWERSHELL ######
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(EXISTS "${POWERSHELL_EXE}")
-		set(cmnd ${POWERSHELL_EXE} "${ps_command}")
+	find_program(powershell_exe powershell.exe)
+	if(EXISTS "${powershell_exe}")
+		set(cmnd ${powershell_exe} "${ps_command}")
 		#dk_debug("cmnd = ${cmnd}")
 		execute_process(COMMAND ${cmnd})	
 		dk_return()

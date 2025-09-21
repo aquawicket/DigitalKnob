@@ -18,9 +18,7 @@ include_guard()
 #
 function(dk_CMD_EXE)
 	dk_fatal("dk_CMD_EXE is deprecated.  Use dk_depend(cmd)")
-	if(NOT EXISTS "${cmd_exe}")
-		dk_depend(cmd)
-	endif()
+	dk_validate(cmd_exe "dk_depend(cmd)")
 	return()
 	
 #########################################
