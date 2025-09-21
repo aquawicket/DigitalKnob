@@ -22,8 +22,8 @@ set "git_exe=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
 		echo ######### ONLINE #########
 		if NOT EXIST "!GIT_INSTALL!" (
 			echo ### Downloading PortableGit-2.46.2-64-bit.7z.exe
-			set "CURL_EXE=%windir:\=/%/System32/curl.exe"
-			"!CURL_EXE!" -L "!GIT_URL!" -o "!GIT_INSTALL!"
+			%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
+			"!curl_exe!" -L "!GIT_URL!" -o "!GIT_INSTALL!"
 		)
 	)
 	

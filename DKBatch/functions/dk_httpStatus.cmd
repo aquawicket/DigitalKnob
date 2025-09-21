@@ -13,8 +13,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 2
 
-	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-    for /f "tokens=*" %%a in ('%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"') do (
+	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
+    for /f "tokens=*" %%a in ('%curl_exe% -sI -o nul -w "%%{http_code}" "%~1"') do (
  	    Set "dk_httpStatus=%%a"
  	    rem If [!dk_httpStatus!] EQU [503] (set "Status_URL=Service Unavailable")
  	    rem If [!dk_httpStatus!] EQU [500] (set "Status_URL=Internal Server Error")

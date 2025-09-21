@@ -88,14 +88,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1 2
 
-	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
+	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 	
 	::"%windir:\=/%/System32/curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
 	
-	::%dk_call% dk_setEx command "%CURL_EXE% -sI -o nul -w %%{http_code} %~1"
-	::set command=%CURL_EXE% -sI -o nul -w "%%{http_code}" "%~1"
+	::%dk_call% dk_setEx command "%curl_exe% -sI -o nul -w %%{http_code} %~1"
+	::set command=%curl_exe% -sI -o nul -w "%%{http_code}" "%~1"
 
-	set command=%CURL_EXE% "%~1" -sI -o nul -w "%%%%%%%%{http_code}\n"
+	set command=%curl_exe% "%~1" -sI -o nul -w "%%%%%%%%{http_code}\n"
 	%dk_call% dk_exec %command%
 	set "dk_httpResponse=%dk_exec%"
 	

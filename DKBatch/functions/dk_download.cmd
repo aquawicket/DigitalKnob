@@ -65,8 +65,7 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	if NOT EXIST "%destination%_DOWNLOADING" (
 		if NOT defined dk_download_DISABLE_curl (
 			%dk_call% dk_debug "Dowloading using curl"
-			set "curl_exe=C:\Windows\System32\curl.exe"
-			rem %dk_call% dk_validate curl_exe "%dk_call% dk_depend curl"
+			%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 			!curl_exe! --help %NO_OUTPUT% && !curl_exe! -L "%url%" -o "%destination%_DOWNLOADING"
 			
 			%dk_call% dk_fileSize "%destination%_DOWNLOADING"

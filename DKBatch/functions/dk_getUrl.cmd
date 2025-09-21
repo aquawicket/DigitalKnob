@@ -11,7 +11,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_getUrl
 	%dk_call% dk_debugFunc 1 2
 
-	set "curl_exe=C:/Windows/System32/curl.exe"
+	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 	
 	set command=%curl_exe% %~1 -sI -o nul -w %%{redirect_url}
 	

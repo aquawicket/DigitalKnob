@@ -6,21 +6,30 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_CURL_EXE()
+::# dk_curl_exe()
 ::#
 ::#
-:dk_CURL_EXE
+:dk_curl_exe
 %setlocal%
 	%dk_call% dk_debugFunc 0
-
-	if defined CURL_EXE (%return%)
-
-	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
-	if NOT EXIST "%CURL_EXE%" (%dk_call% dk_findProgram CURL_EXE "curl.exe" "%windir%/System32")
-	%dk_call% dk_assertPath "%CURL_EXE%"
+	
+	%dk_call% dk_notice "dk_CURL_EXE is obsolete.  use dk_depend curl_exe"
+		
+	if defined curl_exe (%return%)
+	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 	
 	endlocal & (
-		set "CURL_EXE=%CURL_EXE%"
+		set "curl_exe=%curl_exe%"
+	)
+	
+	%return%
+
+	set "curl_exe=%windir:\=/%/System32/curl.exe"
+	if NOT EXIST "%curl_exe%" (%dk_call% dk_findProgram curl_exe "curl.exe" "%windir%/System32")
+	%dk_call% dk_assertPath "%curl_exe%"
+	
+	endlocal & (
+		set "curl_exe=%curl_exe%"
 	)
 %endfunction%
 
@@ -35,6 +44,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_CURL_EXE
-	%dk_call% dk_echo "CURL_EXE = %CURL_EXE%"
+	%dk_call% dk_curl_exe
+	%dk_call% dk_echo "curl_exe = %curl_exe%"
 %endfunction%

@@ -193,8 +193,8 @@ if NOT defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 ::	%dk_call% dk_exec badCommand
 ::	pause
 	
-::	%dk_call% dk_validate CURL_EXE "%dk_call% dk_CURL_EXE"
-::	%dk_call% dk_exec %CURL_EXE% "http://www.google.com/index.html" -sI -o nul -w "%%%%%%%%{http_code}\n"
+::	%dk_call% dk_validate curl_exe "%dk_call% depend curl_exe"
+::	%dk_call% dk_exec %curl_exe% "http://www.google.com/index.html" -sI -o nul -w "%%%%%%%%{http_code}\n"
 ::	pause
 	
 ::	%dk_call% dk_exec notepad.exe

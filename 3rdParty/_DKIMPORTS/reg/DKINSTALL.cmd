@@ -12,20 +12,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if EXIST "%wscript_exe%" (%return%)
+	if EXIST "%reg_exe%" (%return%)
 
-	if NOT EXIST "%wscript_exe%" (set "wscript_exe=%windir:\=/%/System32/cscript.exe")
-	if NOT EXIST "%wscript_exe%" (%dk_call% dk_findProgram wscript_exe "cscript.exe" "%windir:\=/%/System32")
+	if NOT EXIST "%reg_exe%" (set "reg_exe=%windir:\=/%/System32/reg.exe")
+	if NOT EXIST "%reg_exe%" (%dk_call% dk_findProgram reg_exe "reg.exe")
 	
-	%dk_call% dk_assertPath "%wscript_exe:\=/%"
+	%dk_call% dk_assertPath "%reg_exe:\=/%"
 
 	endlocal & (
-		set "wscript_exe=%wscript_exe:\=/%"
+		set "reg_exe=%reg_exe:\=/%"
 	)
 %endfunction%
-
-
-
 
 
 
@@ -35,5 +32,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% DKINSTALL
-	%dk_call% dk_debug "wscript_exe = %wscript_exe%"
+	%dk_call% dk_debug "reg_exe = %reg_exe%"
 %endfunction%

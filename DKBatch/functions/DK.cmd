@@ -235,11 +235,12 @@ if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd" 			(tar -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_return.cmd)
 		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd" 	(tar -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_printLastError.cmd)
 	) else (
-		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
-		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
-		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
-		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"
-		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%CURL_EXE%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd" 	-o "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"
+		%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd" 				-o "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd" 			-o "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%curl_exe%" -LSs "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd" 	-o "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"
 	)
 %endfunction%
 

@@ -44,7 +44,7 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 	if "%bash_ENV%" equ "WSL" (
 		%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
 		%dk_call% dk_assertPath WSL_EXE
-		set "WSL_BASH_EXE=C:/Windows/System32/bash.exe"
+		set "WSL_BASH_EXE=%windir:\=/%/System32/bash.exe"
 		set "WSL_BASH_ICON=!WSL_EXE!"
 		set "bash_exe=!WSL_BASH_EXE!"
 		set "BASH_ICON=!WSL_BASH_ICON!"

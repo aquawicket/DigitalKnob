@@ -6,4 +6,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 :: https://www.avatarapi.com
-%CURL_EXE% --location --request POST https://avatarapi.com/v2/api.aspx --data-raw "{'username':'aquawicket','password':'Triad2393!!','email':'lusiverain@gmail.com'}"
+%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
+%curl_exe% --location --request POST https://avatarapi.com/v2/api.aspx --data-raw "{'username':'aquawicket','password':'Triad2393!!','email':'lusiverain@gmail.com'}"

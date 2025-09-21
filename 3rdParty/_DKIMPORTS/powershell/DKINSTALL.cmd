@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	if EXIST "%powershell_exe%" (%return%)
 
-	set "powershell_exe=C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+	set "powershell_exe=%windir:\=/%/System32/WindowsPowerShell/v1.0/powershell.exe"
 	if NOT EXIST "%powershell_exe%" (%dk_call% dk_findProgram powershell_exe "powershell.exe" "%windir%")
 	
 	%dk_call% dk_assertPath "%powershell_exe:\=/%"

@@ -97,9 +97,9 @@ fi
 dk_httpResponse() {
 	#dk_debugFunc 1 2
 
-	dk_call dk_validate CURL_EXE "dk_call dk_CURL_EXE"
+	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
 	
-	dk_httpResponse=$(${CURL_EXE} -sI -o nul -w "%{http_code}" ${1})
+	dk_httpResponse=$(${curl_exe} -sI -o nul -w "%{http_code}" ${1})
 
 	export dk_httpResponse="${dk_httpResponse}"
 #	[ -n "${2-}" ] && ${2}=${dk_httpResponse}

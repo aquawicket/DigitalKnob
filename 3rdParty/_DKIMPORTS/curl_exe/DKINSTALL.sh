@@ -13,22 +13,27 @@ if [ -z "${DK_LOADED-}" ]; then
 fi
 ##################################################################################
 
-
-####################################################################
-# dk_curl_exe()
+##################################################################################
+# DKINSTALL
 #
-#
-dk_curl_exe() {
-	#dk_debugFunc 0
+DKINSTALL() {
+	dk_debugFunc 0
 
 	[ -e "${curl_exe-}" ] && return
-
-	curl_exe=$(command -v curl)
-	dk_call dk_assertPath "${curl_exe}"
-	export curl_exe="${curl_exe}"
+	
+	[ ! -e "${curl_exe-}" ] && export curl_exe=$(command -v curl)
+	[ ! -e "${curl_exe-}" ] && dk_call dk_installPackage curl
+	(${curl_exe} --version) || { dk_call dk_error "curl_exe:${curl_exe} failed to run"; return $?; }
+	
+	###### output ######
+	export curl_exe=${curl_exe};
+	if [ -n "${1-}" ]; then
+		eval ${1}=${curl_exe};
+	else
+		builtin echo "${curl_exe}";
+	fi
+	return $?;
 }
-
-
 
 
 
@@ -36,11 +41,11 @@ dk_curl_exe() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	#dk_debugFunc 0
+	dk_debugFunc 0
 
-	dk_call dk_curl_exe
+	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
 	dk_call dk_echo "curl_exe = ${curl_exe-}"
 	
-	dk_call dk_curl_exe
+	dk_call dk_validate curl_exe "dk_call dk_depend curl_exe"
 	dk_call dk_echo "curl_exe = ${curl_exe-}"
 }

@@ -12,7 +12,7 @@ if [ -z "${DK_LOADED-}" ]; then
 	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/DigitalKnob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}";
 	[ ! -e "${DK_SH}" ]					&& [ -z "${HDK_SH}" ] && export HDK_SH="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh";
 	[ ! -e "${DK_SH}" ]					&& mkdir -p "$(dirname ${DK_SH})";
-	#[ ! -e "${DK_SH}" ]			 	&& [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" "$(CURL_EXE)" 	&& $(CURL_EXE) -Lo "${DK_SH}" "${HDK_SH}";
+	#[ ! -e "${DK_SH}" ]			 	&& [ -e "$(curl_exe)" ] && dk_call dk_firewallAllow "CURL" "$(curl_exe)" 	&& $(curl_exe) -Lo "${DK_SH}" "${HDK_SH}";
 	[ ! -e "${DK_SH}" ]  				&& (command -v curl) 														&& curl -Lo "${DK_SH}" "${HDK_SH}";
 	[ ! -e "${DK_SH}" ]  				&& (command -v wget) 														&& wget -P "${DK_SH}" "${HDK_SH}";
 	#[ ! -e "${DK_SH}" ]  				&& (echo "DK_SH:${DK_SH} does not exist"; exit ${BASH_LINENO[0]};) 

@@ -29,21 +29,21 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	)
 
 	::########################
-	set "CURL_EXE=%windir:\=/%/System32/curl.exe"
-	set "CERTUTIL_EXE=%windir:\=/%/System32/certutil.exe"
-	set "BITSADMIN_EXE=%windir:\=/%/System32/bitsadmin.exe"
+	set "curl_exe=%windir:\=/%/System32/curl.exe"
+	set "certutil_exe=%windir:\=/%/System32/certutil.exe"
+	set "bitsadmin_exe=%windir:\=/%/System32/bitsadmin.exe"
 	set "powershell_exe=%windir:\=/%/System32/WindowsPowershell/v1.0/powershell.exe
 
 	::###### firewall allow ######
-	call :dk_firewallAllow "%CURL_EXE%"
-	call :dk_firewallAllow "%CERTUTIL_EXE%"
-	call :dk_firewallAllow "%BITSADMIN_EXE%"
+	call :dk_firewallAllow "%curl_exe%"
+	call :dk_firewallAllow "%certutil_exe%"
+	call :dk_firewallAllow "%bitsadmin_exe%"
 	call :dk_firewallAllow "%powershell_exe%"
 
 	if NOT EXIST "%DK_CMD%" (
-		"%CURL_EXE%" -L "!HDK_CMD!" -o "!DK_CMD!" >nul 2>&1 || ^
-		"%CERTUTIL_EXE%" -urlcache -split -f "!HDK!" "!DK_CMD!" >nul 2>&1 || ^
-		"%BITSADMIN_EXE%" /transfer /Download /priority Foreground "!HDK!" "!DK_CMD:/=\!" >nul 2>&1 || ^
+		"%curl_exe%" -L "!HDK_CMD!" -o "!DK_CMD!" >nul 2>&1 || ^
+		"%certutil_exe%" -urlcache -split -f "!HDK!" "!DK_CMD!" >nul 2>&1 || ^
+		"%bitsadmin_exe%" /transfer /Download /priority Foreground "!HDK!" "!DK_CMD:/=\!" >nul 2>&1 || ^
 		"%powershell_exe%" -c "(New-Object Net.WebClient).DownloadFile('!HDK!','!DK_CMD!')" >nul 2>&1 || ^
 		echo ERROR: DK.cmd download Failed
 	)
