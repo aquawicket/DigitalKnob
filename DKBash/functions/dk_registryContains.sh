@@ -21,15 +21,8 @@ fi
 dk_registryContains() {
 	dk_debugFunc 2
  
-#	export cmd_exe="/c/Windows/System32/cmd.exe"
-#	(command -v 'cygpath' 1>/dev/null)	&& cmd_exe=$(cygpath -u ${cmd_exe})
-#	(command -v 'wslpath' 1>/dev/null)	&& cmd_exe=$(wslpath -u ${cmd_exe})
-	
-	export reg_exe="C:\Windows\System32\reg.exe"
-	(command -v 'cygpath' 1>/dev/null)	&& reg_exe=$(cygpath -u ${reg_exe})
-	(command -v 'wslpath' 1>/dev/null)	&& reg_exe=$(wslpath -u ${reg_exe})
-	dk_call dk_debug "reg_exe = ${reg_exe-}"
-	[ -e "${reg_exe-}" ] || { dk_call dk_error "reg_exe:${reg_exe} not found."; return $?; }
+	dk_call dk_validate reg_exe "dk_call dk_depend reg_exe"
+	(command -v "${reg_exe}" 1>/dev/null) || { dk_call dk_error "reg_exe:${reg_exe} failed to run"; return $?; }
 	
 	while IFS= read -r line; do
 		#echo "line = ${line}"

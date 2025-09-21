@@ -17,9 +17,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%~3" neq "" (set "_type_=/t %~3")	else 	(set "_type_=")
     if "%~4" neq "" (set "_value_=%~4")		else	(set "_value_=")
 
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	
-    set command="%REG_EXE%" ADD "%_reg_path_:/=\%" %_key_% %_type_% /d "%_value_%" /f
+    set command="%reg_exe%" ADD "%_reg_path_:/=\%" %_key_% %_type_% /d "%_value_%" /f
 	echo command = %command%
 	%command%
 %endfunction%

@@ -31,13 +31,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "REG_BACKUP_DIR = %REG_BACKUP_DIR%"
 	%dk_call% dk_mkdir "%REG_BACKUP_DIR%"
 	
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	
-    "%REG_EXE%" export HKLM %REG_BACKUP_DIR:/=\%\HKLM.reg
-	"%REG_EXE%" export HKCU %REG_BACKUP_DIR:/=\%\HKCU.reg
-	"%REG_EXE%" export HKCR %REG_BACKUP_DIR:/=\%\HKCR.reg
-	"%REG_EXE%" export HKU  %REG_BACKUP_DIR:/=\%\HKU.reg
-	"%REG_EXE%" export HKCC %REG_BACKUP_DIR:/=\%\HKCC.reg
+    "%reg_exe%" export HKLM %REG_BACKUP_DIR:/=\%\HKLM.reg
+	"%reg_exe%" export HKCU %REG_BACKUP_DIR:/=\%\HKCU.reg
+	"%reg_exe%" export HKCR %REG_BACKUP_DIR:/=\%\HKCR.reg
+	"%reg_exe%" export HKU  %REG_BACKUP_DIR:/=\%\HKU.reg
+	"%reg_exe%" export HKCC %REG_BACKUP_DIR:/=\%\HKCC.reg
 	
 	%dk_call% dk_success "Registry Backup Complete"
 %endfunction%

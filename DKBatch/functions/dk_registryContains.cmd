@@ -16,9 +16,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_reg_path_=%~1"
 	set "_find_=%~2"
 
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	
-	for /f "usebackq delims=" %%a in (`%REG_EXE% query "%_reg_path_:/=\%"`) do (
+	for /f "usebackq delims=" %%a in (`%reg_exe% query "%_reg_path_:/=\%"`) do (
 		set "line=%%a"
 		if "x!line:%_find_:/=\%=!x" neq "x!line:/=\!x" (
 			exit /b 0

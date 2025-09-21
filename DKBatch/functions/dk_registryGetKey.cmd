@@ -16,10 +16,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_reg_path_=%~1"
 	set "_key_=%~2"
 	
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	
 	set "currentScope=1"
-    for /F "tokens=2* skip=2" %%a in ('%REG_EXE% query "%_reg_path_:/=\%" /v "%_key_:/=\%"') do (
+    for /F "tokens=2* skip=2" %%a in ('%reg_exe% query "%_reg_path_:/=\%" /v "%_key_:/=\%"') do (
         if defined currentScope endlocal
 		set "dk_registryGetKey=%%b"
 		if "%~2" neq "" (set "%~2=%%b")

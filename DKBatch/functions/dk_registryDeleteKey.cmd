@@ -52,9 +52,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%return%
 	)
    
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	
-    "%REG_EXE%" delete "%_reg_path_:/=\%" /f
+    "%reg_exe%" delete "%_reg_path_:/=\%" /f
 
 %endfunction%
 

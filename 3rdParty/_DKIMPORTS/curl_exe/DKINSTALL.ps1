@@ -12,7 +12,7 @@ function Global:DKINSTALL() {
 
 	if(Test-Path "${curl_exe}"){ return; }
 
-	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "C:/Windows/System32/curl2.exe"; }
+	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = "C:/Windows/System32/curl.exe"; }
 	if(!(Test-Path "${curl_exe}")){ ${curl_exe} = $(dk_call dk_findProgram curl_exe "curl.exe"); }
 	
 	if(!(Test-Path "${curl_exe}")){ 

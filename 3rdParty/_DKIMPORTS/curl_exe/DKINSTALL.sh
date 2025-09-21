@@ -19,11 +19,14 @@ fi
 DKINSTALL() {
 	dk_debugFunc 0
 
-	[ -e "${curl_exe-}" ] && return
+	(command -v "${curl_exe-}" 1>/dev/null) && return $?;
 	
-	[ ! -e "${curl_exe-}" ] && export curl_exe=$(command -v curl)
+	[ ! -e "${curl_exe-}" ] && curl_exe=$(command -v curl)
+	[ ! -e "${curl_exe-}" ] && curl_exe="C:/Windows/System32/curl.exe"
+	[ ! -e "${curl_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && curl_exe=$(cygpath -u "${curl_exe}")
+	[ ! -e "${curl_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && curl_exe=$(wslpath -u "${curl_exe}")
 	[ ! -e "${curl_exe-}" ] && dk_call dk_installPackage curl
-	(${curl_exe} --version) || { dk_call dk_error "curl_exe:${curl_exe} failed to run"; return $?; }
+	(command -v "${curl_exe}" 1>/dev/null) || { dk_call dk_error "curl_exe:${curl_exe} failed to run"; return $?; }
 	
 	###### output ######
 	export curl_exe=${curl_exe};

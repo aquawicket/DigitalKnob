@@ -30,9 +30,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "_needle_=%~2"
 	if NOT defined _needle_ (%dk_call% dk_warning "search is empty" & %return%)
 	
-	%dk_call% dk_validate REG_EXE "%dk_call% dk_REG_EXE"
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 	set /a i=0
-	for /f "tokens=1,2,3" %%a in ('!REG_EXE! query !_haystack_! /s /f "!_needle_!" /k /v /d') do (
+	for /f "tokens=1,2,3" %%a in ('!reg_exe! query !_haystack_! /s /f "!_needle_!" /k /v /d') do (
 		set "LINE=%%a"
 		set "LINE=!LINE:~,4!"
 		rem echo LINE = !LINE!

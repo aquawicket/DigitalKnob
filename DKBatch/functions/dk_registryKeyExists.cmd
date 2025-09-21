@@ -15,10 +15,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	set "_reg_path_=%~1"
 
-	set "REG_EXE=%SYSTEMROOT:\=/%/System32/reg.exe"
-	%dk_call% dk_assertPath REG_EXE
+	%dk_call% dk_validate reg_exe "%dk_call% dk_depend reg_exe"
 
-	"%REG_EXE%" query "%_reg_path_:/=\%" >nul 2>&1
+	"%reg_exe%" query "%_reg_path_:/=\%" >nul 2>&1
 
 	if %ERRORLEVEL% equ 0 (
 		set "dk_registryKeyExists=0"
