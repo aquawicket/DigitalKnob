@@ -1,108 +1,76 @@
 @echo off
-echo line:2 %~0(%*)
+
+::###### SETTINGS ######
+set "CALLBACK=%~f0"
 
 
-goto:after
-set "DE=1"
-setlocal enableDelayedExpansion
-set PRINT_DE_VAR_A=if ^!DE^! equ 1 (echo ^!DE^! equ 1) else (echo ^!DE^! neq 1)
-set PRINT_DE_VAR_B=if "^!DE^!" equ "1" (echo "^!DE^!" equ "1") else (echo "^!DE^!" neq "1")
-set PRINT_DE_VAR_C=if "!!DE!!" equ "1" (echo "3" equ "1") else (echo "3" neq "1")
-set PRINT_DE_VAR_D=if !!DE!! equ 1 (echo 4 equ 1) else (echo 4 neq 1)
-set PRINT_DE_STATUS=if ^!DE^! neq 1 (echo disabled_1) else if "^!DE^!" equ "1" (echo enabled_1) else if "!!DE!!" neq "1" (echo enabled_2) else (echo disabled_2)
-
-echo(
-setlocal enableDelayedExpansion
-echo ENABLED
-%PRINT_DE_VAR_A%
-%PRINT_DE_VAR_B%
-%PRINT_DE_VAR_C%
-%PRINT_DE_VAR_D%
-%PRINT_DE_STATUS%
-echo DE = %DE% = !DE!
-
-echo(
-setlocal disableDelayedExpansion
-echo DISABLED
-%PRINT_DE_VAR_A%
-%PRINT_DE_VAR_B%
-%PRINT_DE_VAR_C%
-%PRINT_DE_VAR_D%
-%PRINT_DE_STATUS%
-echo DE = %DE% = !DE!
-
-echo(
-setlocal enableDelayedExpansion
-echo ENABLED
-%PRINT_DE_VAR_A%
-%PRINT_DE_VAR_B%
-%PRINT_DE_VAR_C%
-%PRINT_DE_VAR_D%
-%PRINT_DE_STATUS%
-echo DE = %DE% = !DE!
-:after
-
-
-
+::###### CALLBACK ######
 if "%~1" equ "" (goto DKINSTALL)
-
-:runDKcmd
-	echo :runDKcmd
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR%"	(set "DKBATCH_FUNCTIONS_DIR=%~1")
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%"	(set "DKBATCH_FUNCTIONS_DIR_=%~1\")
-	if NOT EXIST "%cmd_exe%"				(set "cmd_exe=%~2")
-	if NOT EXIST "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
-	if NOT defined DKSCRIPT_ARGS			(for /F "usebackq tokens=4*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
-	::if NOT EXIST "%TCC_EXE%"				(set "TCC_EXE=%USERPROFILE:\=/%/DigitalKnob/DKTools/tcc-rt-master/tcc.exe")
+:CALLBACK
+	title CALLBACK(%~0)
 	
-	::###### run script ######
-	:: "%ComSpec%"	path to cmd.exe
-	:: /V:ON		enable delayed expansion
-	:: /K			keep the window open at the CMD prompt.
-	start "" "%cmd_exe:/=\%" /V:ON /K "%DKSCRIPT_PATH%"
-	::(start "" /b "%TCC_EXE:/=\%" /V:ON /K %DKSCRIPT_PATH% & pause)
-
-	::"%ComSpec%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	::### Method_1: Call the arguments unaltered
+::	set COMMAND=%*
+	
+	::### Method_2: Call get the arguments and call them
+	if NOT EXIST "%DKSCRIPT_PATH%"	(set "DKSCRIPT_PATH=%~1")
+	if NOT defined DKSCRIPT_ARGS	(for /F "usebackq tokens=1*" %%a in ('%*') do set DKSCRIPT_ARGS=%%b)
+	set COMMAND="%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	
+	echo COMMAND = %COMMAND%
+	call %COMMAND%
+	echo CALLBACK
+	pause
 
 	::###### exit_code ######
-	if %errorlevel% neq 0 (
-		echo exit_code:%errorlevel%
-	)
-
+	set "exit_code=%errorlevel%"
+	echo %~nx0:CALLBACK exit_code = %exit_code%
+	pause
+	exit /b %exit_code%
 %endfunction%
 
 
-
-
-
-
-
-
-
-
-
-
-
+::###### INSTALL ######
 :DKINSTALL
+	::echo %~0(%*)
 	if "%~1" neq "" (goto:eof)
 	
-	echo Installing DKBatch . . .
-	
 	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
+	if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::#################################################################################################################################################
 
-
 	::###### Install DKBatch ######
-	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_depend cmd"
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_echo "Installing DKBatch . . ."
+	
+	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd"
+	::%dk_call% dk_validate tcc_exe					"%dk_call% dk_depend tcc-rt"
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_	"%dk_call% dk_DKBRANCH_DIR"
 
 	::###### Set the registry entry for the extension ######
-	ftype DKcmd="%cmd_exe:/=\%" /c if EXIST "%~f0" ^
-	(echo DKcmd installed ^& "%cmd_exe:/=\%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%cmd_exe%" "%%1" %%*) else ^
-	(echo DKcmd NOT installed ^& "%%1" %%*)
+	::###### cmd.exe ######
+	::## /A      		Causes the output of internal commands to a pipe or file to be ANSI
+	::## /U      		Causes the output of internal commands to a pipe or file to be Unicode
+	::## /Q      		Turns echo off
+	::## /D      		Disable execution of AutoRun commands from registry (see below)
+	::## /E:ON or /X 	Enable command extensions (see below)
+	::## /E:OFF or /Y 	Disable command extensions (see below)
+	::## /F:ON   		Enable file and directory name completion characters (see below)
+	::## /F:OFF  		Disable file and directory name completion characters (see below)
+	::## /V:ON   		Enable delayed environment variable expansion 
+	::## /V:OFF  		Disable delayed environment expansion.
+	::## /T:fg   		Sets the foreground/background colors (see COLOR /? for more info)
+	::##
+	::## /S      		Modifies the treatment of string after /C or /K (see below)	
+	::## /C or /R		Carries out the command specified by string and then terminates
+	::## /K      		Carries out the command specified by string but remains
+	
+	rem ###### Method 1: use callback
+	ftype DKcmd="%cmd_exe:/=\%" /A /Q /D /E:ON /V:ON /C ^
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_%" ^& ^
+	call %CALLBACK% "%%1" %%*
+
 
 	::###### Set icons and file association ######
 	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%cmd_exe%"
