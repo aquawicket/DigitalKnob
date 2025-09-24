@@ -1,5 +1,5 @@
 @echo off
-set "DelayedExpansion=1"
+set "DelayedExpansion=0"
 
 ::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 if NOT defined argv (set argv=%*)
@@ -26,8 +26,8 @@ if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
 
 rem ###### delayed expansion OFF ######
 if "!DE!" neq "" (
+	title delayedExpansion OFF
 	if NOT defined exit (
-		echo setting 'exit' with delayed expansion OFF
 		set exit=^
 		call set err_level=%%errorlevel%% ^& ^
 		call set prev_error=%%error_code%% ^& ^
@@ -44,11 +44,12 @@ if "!DE!" neq "" (
 		call exit /b %%error_code%%)
 	if not defined endfunction 	(call set "endfunction=%%exit%%")
 	if not defined return 		(call set "return=%%exit%%")
+	if not defined setlocal		(set setlocal=setlocal)
 	
 rem ###### delayed expansion ON ######
 ) else (
+	title delayedExpansion ON
 	if NOT defined exit (
-		echo setting 'exit' wirh delayed expansion ON
 		set exit=^
 		set err_level=^^!errorlevel^^! ^&^
 		set prev_error=^^!error_code^^! ^&^
@@ -63,17 +64,16 @@ rem ###### delayed expansion ON ######
 		echo last_error = ^^!last_error^^! ^&^
 		echo. ^&^
 		exit /b ^^!error_code^^!)
-	if not defined endfunction 	(set "endfunction=!exit!")
-	if not defined return 		(set "return=!exit!")
+	if not defined endfunction 	(set endfunction=!exit!)
+	if not defined return 		(set return=!exit!)
+	if not defined setlocal		(set setlocal=setlocal EnableDelayedExpansion)
 )
-
 if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
-if not defined setlocal		(set "setlocal=setlocal EnableDelayedExpansion")
-if NOT defined NO_STDOUT 	(set "NO_STDOUT=1>nul")
-if NOT defined NO_STDERR 	(set "NO_STDERR=2>nul")
-if NOT defined NO_OUTPUT 	(set "NO_OUTPUT=1>nul 2>nul")
-if not defined true 		(set "true=0")
-if not defined false 		(set "false=1")
+if NOT defined NO_STDOUT 	(set NO_STDOUT=1>nul)
+if NOT defined NO_STDERR 	(set NO_STDERR=2>nul)
+if NOT defined NO_OUTPUT 	(set NO_OUTPUT=1>nul 2>nul)
+if not defined true 		(set true=0)
+if not defined false 		(set false=1)
 
 
 call :main
@@ -92,7 +92,6 @@ pause
 :testA
 	echo ######### testA(%*) #########
 	%log%
-	
 %endfunction%
 
 
