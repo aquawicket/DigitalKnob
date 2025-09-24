@@ -1,8 +1,48 @@
 @echo off
+
 if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
 
+
+
+
+
+if not defined exit (set exit=^
+	call set buffer=%%errorlevel%% ^& ^
+	call set prev_error=%%error_code%% ^& ^
+	call set error_code=%%buffer%% ^& ^
+	call set last_error=%%buffer%% ^& ^
+	call set file=%%~nx0 ^& ^
+	call set function=%%~0 ^& ^
+	call set args=%%* ^& ^
+	call echo EXIT %%file%% %%function%%^(%%args%%^) ^& ^
+	call echo error_code = %%error_code%% ^& ^
+	call echo prev_error = %%prev_error%% ^& ^
+	call echo last_error = %%last_error%% ^& ^
+	echo. ^& ^
+	call exit /b %%error_code%%
+)
+
+if not defined endfunction 	(set "endfunction=%exit%")
+if "%RELOADED%" neq "1" (
+	call :dk_reload %*
+	exit /b %errorlevel%
+)
+
+
+if not defined return 		(set "return=%exit%")
+if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
+
+
+
+if "!DE!" neq "" (
+	echo ERROR: DKBatch requires delayed expansion
+	pause
+	rem exit 13
+	%exit%
+)
+
 call :DK %*
-exit /b !errorlevel!
+%exit%
 
 
 ::####################################################################
@@ -14,7 +54,7 @@ exit /b !errorlevel!
 	(set /a LVL+=1)
 	(set /a ENTRY+=1)
 	call :setGlobal __STACK__%ENTRY% %*
-exit /b !errorlevel!
+%endfunction%
 
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
@@ -23,8 +63,7 @@ exit /b !errorlevel!
 ::#   chcp 65001 >NUL
 ::#
 :DK
-	call :pushStack %~n0 %*
-	(set pushStack=call :pushStack %%~n0%%~0 %%*)
+	%pushStack%
 
 	::if NOT EXIST "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 	
@@ -60,8 +99,6 @@ exit /b !errorlevel!
 	set "NO_STDERR=2>nul"
 	set "NO_OUTPUT=1>nul 2>nul"
 	set "exit_code=^!errorlevel^!"
-	set "endfunction=exit /b ^!errorlevel^!"
-	set "return=exit /b ^!errorlevel^!"
 	if not defined true 	(set "true=0")
 	if not defined false 	(set "false=1")
 	
@@ -72,14 +109,6 @@ exit /b !errorlevel!
 	call :dk_DKSCRIPT_NAME
 	call :dk_DKSCRIPT_EXT
 	call :dk_DKCACHE_DIR
-
-	::###### Reload Main Script with cmd ######
-	call :dk_reload
-	if "!DE!" neq "" (
-		echo ERROR: DKBatch requires delayed expansion
-		pause
-		exit 13
-	)
 
 	call :dk_DKHTTP_VARS
 
@@ -130,7 +159,8 @@ exit /b !errorlevel!
 	echo(
 	echo(%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
 	echo(
-	%dk_call% dk_exit %errorlevel%
+	::%dk_call% dk_exit %errorlevel%
+	%exit%
 %endfunction%
 
 
@@ -260,38 +290,30 @@ exit /b !errorlevel!
 ::# dk_reload
 ::#
 :dk_reload
-	%pushStack%
-	if "%DKSCRIPT_EXT%" neq ".cmd" (exit /b -1)
+	call :pushStack %~n0 %*
+	
+	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
+	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
+	
+	if "%DKSCRIPT_EXT%" neq ".cmd" 	(exit /b -1)
 	if defined RELOADED (exit /b -1)
 
-	echo "reloading with /v:on 'delayed expansion',  /k 'keep terminal open' . . . ."
-	set "LVL="
-	set "ENTRY="
+	echo "reloading with delayed expansion"
 	set "RELOADED=1"
 	set "DK.cmd="
+	set "LVL="
+	set "ENTRY="
 
-	cls
-	"%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" 	&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log	
+	::cls
+	"%ComSpec%" /A /Q /D /E:ON /V:ON /C "%DKSCRIPT_PATH%"		&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
+	exit /b %errorlevel%
 
 	:: Change console settings
 	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
 	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	:: exit
-
-	::####################################
-	::############ EXIT POINT ############
-	::####################################
-	set "exit_code=%errorlevel%"
-	echo(
-	echo exit_code = %exit_code%
-	if "%exit_code%" neq "0" (
-		echo(
-		echo Press any key to exit . . .
-		pause >nul
-	)
-	exit %exit_code%
 	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
-%endfunction%
+exit /b %errorlevel%
 
 ::##################################################################################
 ::# dk_readlink
@@ -326,7 +348,7 @@ setlocal enableDelayedExpansion
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %1=%%b)
 	:: (set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
-exit /b !errorlevel!
+%endfunction%
 
 
 
