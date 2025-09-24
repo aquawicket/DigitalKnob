@@ -1,11 +1,24 @@
 @echo off
+::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
+if NOT defined argv (set argv=%*)
+if NOT defined argv (set argv=%~f0)
 
-if defined DK.cmd (exit /b %errorlevel%) else (set "DK.cmd=1")
+if "%RELOADED%" neq "1" (
+	echo "reloading with delayed expansion"
+	set "RELOADED=1"
+	cls
+	"%ComSpec%" /A /Q /D /E:ON /V:ON /C %argv%		&rem | %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
+	exit /b %errorlevel%
+	echo ### ERROR: SHOULD NOT GET HERE ### & pause
+)
 
+if "!DE!" neq "" (
+	echo ### ERROR: DKBatch requires delayed expansion ### & pause
+	exit /b %errorlevel%
+	echo ### ERROR: SHOULD NOT GET HERE ### & pause
+)
 
-
-
-
+if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
 if not defined exit (set exit=^
 	call set buffer=%%errorlevel%% ^& ^
 	call set prev_error=%%error_code%% ^& ^
@@ -19,31 +32,45 @@ if not defined exit (set exit=^
 	call echo prev_error = %%prev_error%% ^& ^
 	call echo last_error = %%last_error%% ^& ^
 	echo. ^& ^
-	call exit /b %%error_code%%
+	call exit /b %%error_code%% ^& ^
+	echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 )
-
 if not defined endfunction 	(set "endfunction=%exit%")
-if "%RELOADED%" neq "1" (
-	call :dk_reload %*
-	exit /b %errorlevel%
-)
-
-
 if not defined return 		(set "return=%exit%")
 if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
 
-
-
-if "!DE!" neq "" (
-	echo ERROR: DKBatch requires delayed expansion
-	pause
-	rem exit 13
-	%exit%
-)
-
-call :DK %*
+call :DK %argv%
 %exit%
+echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 
+::##################################################################################
+::# dk_reload
+::#
+:dk_reload
+	call :pushStack %~n0 %*
+	
+	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
+	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
+	
+	if "%DKSCRIPT_EXT%" neq ".cmd" 	(exit /b -1)
+	if defined RELOADED (exit /b -1)
+
+	echo "reloading with delayed expansion"
+	set "RELOADED=1"
+	set "DK.cmd="
+	set "LVL="
+	set "ENTRY="
+
+	cls
+	"%ComSpec%" /A /Q /D /E:ON /V:ON /C "%DKSCRIPT_PATH%"		&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
+	exit /b %errorlevel%
+
+	:: Change console settings
+	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
+	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	:: exit
+	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
+exit /b %errorlevel%
 
 ::####################################################################
 ::# :pushStack()
@@ -54,7 +81,7 @@ call :DK %*
 	(set /a LVL+=1)
 	(set /a ENTRY+=1)
 	call :setGlobal __STACK__%ENTRY% %*
-%endfunction%
+exit /b %errorlevel%
 
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
@@ -65,8 +92,6 @@ call :DK %*
 :DK
 	%pushStack%
 
-	::if NOT EXIST "%~f1" echo DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
-	
 	::### DKSHELL_PATH ###
 	if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
 
@@ -286,34 +311,7 @@ call :DK %*
 	)
 %endfunction%
 
-::##################################################################################
-::# dk_reload
-::#
-:dk_reload
-	call :pushStack %~n0 %*
-	
-	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
-	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
-	
-	if "%DKSCRIPT_EXT%" neq ".cmd" 	(exit /b -1)
-	if defined RELOADED (exit /b -1)
 
-	echo "reloading with delayed expansion"
-	set "RELOADED=1"
-	set "DK.cmd="
-	set "LVL="
-	set "ENTRY="
-
-	::cls
-	"%ComSpec%" /A /Q /D /E:ON /V:ON /C "%DKSCRIPT_PATH%"		&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
-	exit /b %errorlevel%
-
-	:: Change console settings
-	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
-	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-	:: exit
-	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
-exit /b %errorlevel%
 
 ::##################################################################################
 ::# dk_readlink
