@@ -1,6 +1,6 @@
 @echo off
 
-::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
+::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit /b 1
 if NOT defined argv (set argv=%*)
 if NOT defined argv (set argv=%~f0)
 
@@ -19,7 +19,7 @@ if "!DE!" neq "" (
 	echo ### ERROR: SHOULD NOT GET HERE ### & pause
 )
 
-if not defined DK.cmd (set "DK.cmd=1") else (call exit /b %%errorlevel%%)
+if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
 
 rem ###### delayed expansion OFF ######
 if "!DE!" neq "" (
@@ -40,7 +40,6 @@ if "!DE!" neq "" (
 		echo. ^& ^
 		call exit /b %%error_code%%)
 	if not defined endfunction 	(call set "endfunction=%%exit%%")
-	if not defined return 		(call set "return=%%exit%%")
 	if not defined setlocal		(set setlocal=setlocal)
 	
 rem ###### delayed expansion ON ######
@@ -62,9 +61,10 @@ rem ###### delayed expansion ON ######
 		echo. ^&^
 		exit /b ^^!error_code^^!)
 	if not defined endfunction 	(set endfunction=!exit!)
-	if not defined return 		(set return=!exit!)
 	if not defined setlocal		(set setlocal=setlocal EnableDelayedExpansion)
 )
+if not defined return		(set return=call :return)
+if not defined clearerror	(set clearerror=cmd /c exit /b 0)
 if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
 if NOT defined NO_STDOUT 	(set NO_STDOUT=1>nul)
 if NOT defined NO_STDERR 	(set NO_STDERR=2>nul)
@@ -73,8 +73,17 @@ if not defined true 		(set true=0)
 if not defined false 		(set false=1)
 
 call :DK %argv%
-%exit%
+%return%
 echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
+
+::################
+:return exit_code
+	if "%~1" neq "" (set return_code=%~1) else (set return_code=%errorlevel%)
+	%ComSpec% /c exit /b %return_code%
+	echo :return(%return_code%)
+	pause
+	exit /b %return_code%
+%endfunction%
 
 ::##################################################################################
 ::# dk_reload
@@ -82,11 +91,11 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 :dk_reload
 	%pushStack%
 	
+	if defined RELOADED (%return% 92)
 	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
 	
-	if "%DKSCRIPT_EXT%" neq ".cmd" 	(exit /b -1)
-	if defined RELOADED (exit /b -1)
+	if "%DKSCRIPT_EXT%" neq ".cmd" 	(%return% 96)
 
 	echo "reloading with delayed expansion"
 	set "RELOADED=1"
@@ -96,12 +105,12 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 
 	cls
 	"%ComSpec%" /A /Q /D /E:ON /V:ON /C "%DKSCRIPT_PATH%"		&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
-	%exit%
+	%return% 106
 
 	:: Change console settings
 	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
 	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
-	:: exit
+	:: %return% 111
 	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
 %endfunction%
 
@@ -202,7 +211,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" (%endfunction%)
-	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || exit /b 1
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || (call ) & %return%
 	echo(
 	echo(%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
 	echo(
@@ -214,7 +223,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	::%dk_call% dk_exit %errorlevel%
 	
 	if "%DKSCRIPT_FILE%" equ "DK.cmd" (pause)
-	%exit%
+	%return% 224
 %endfunction%
 
 
@@ -251,9 +260,9 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 ::#
 :dk_DKSCRIPT_EXT
 	%pushStack%
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & %return% 261)
 	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
-	if NOT defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% NOT defined & pause & exit -1)
+	if NOT defined DKSCRIPT_EXT		(echo DKSCRIPT_EXT:%DKSCRIPT_EXT% NOT defined & pause & %return% 263)
 %endfunction%
 
 ::##################################################################################
@@ -261,9 +270,9 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 ::#
 :dk_DKSCRIPT_FILE
 	%push%
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & %return% 271)
 	if NOT defined DKSCRIPT_FILE	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_FILE=%%~nxZ")
-	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & exit -1)
+	if NOT defined DKSCRIPT_FILE	(echo DKSCRIPT_FILE:%DKSCRIPT_FILE% NOT defined & pause & %return% 273)
 %endfunction%
 
 ::##################################################################################
@@ -271,9 +280,9 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 ::#
 :dk_DKSCRIPT_NAME
 	%pushStack%
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & %return% 281)
 	if NOT defined DKSCRIPT_NAME	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_NAME=%%~nZ")
-	if NOT defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% NOT defined & pause & exit -1)
+	if NOT defined DKSCRIPT_NAME	(echo DKSCRIPT_NAME:%DKSCRIPT_NAME% NOT defined & pause & %return% 283)
 %endfunction%
 
 ::##################################################################################
@@ -281,11 +290,11 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 ::#
 :dk_DKSCRIPT_DIR
 	%pushStack%
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% NOT found & pause & %return% 291)
 	if NOT EXIST "%DKSCRIPT_DIR%"	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_DIR=%%~dpZ")
 	if EXIST 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
 	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
-	if NOT EXIST "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% NOT found & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_DIR%"	(echo DKSCRIPT_DIR:%DKSCRIPT_DIR% NOT found & pause & %return% 295)
 %endfunction%
 
 ::##################################################################################
@@ -313,7 +322,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if defined DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
 ::	if defined DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
-	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT EXIST & pause & exit -1)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT EXIST & pause & %return% 323)
 %endfunction%
 
 ::##################################################################################
@@ -351,7 +360,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	%dk_call% dk_debugFunc 1 2
    
     set dk_readlink=%1
-	::if NOT EXIST "%dk_readlink%" (%return%)
+	::if NOT EXIST "%dk_readlink%" (%return% 361)
 	
     set dk_readlink=%dk_readlink:"=%
 	set dk_readlink=%dk_readlink:/=\%
@@ -387,7 +396,7 @@ setlocal enableDelayedExpansion
 
 	if "%~n0" equ "DK" (
 		echo cannot call DK.cmd from itself
-		%return%
+		%return% 397
 	)
 	
 	%DKSCRIPT_PATH:/=\%

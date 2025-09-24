@@ -1,5 +1,5 @@
 @echo off
-set "DelayedExpansion=0"
+set "DelayedExpansion=1"
 
 ::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 if NOT defined argv (set argv=%*)
@@ -43,7 +43,6 @@ if "!DE!" neq "" (
 		echo. ^& ^
 		call exit /b %%error_code%%)
 	if not defined endfunction 	(call set "endfunction=%%exit%%")
-	if not defined return 		(call set "return=%%exit%%")
 	if not defined setlocal		(set setlocal=setlocal)
 	
 rem ###### delayed expansion ON ######
@@ -65,9 +64,9 @@ rem ###### delayed expansion ON ######
 		echo. ^&^
 		exit /b ^^!error_code^^!)
 	if not defined endfunction 	(set endfunction=!exit!)
-	if not defined return 		(set return=!exit!)
 	if not defined setlocal		(set setlocal=setlocal EnableDelayedExpansion)
 )
+if not defined return		(set return=call :return)
 if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
 if NOT defined NO_STDOUT 	(set NO_STDOUT=1>nul)
 if NOT defined NO_STDERR 	(set NO_STDERR=2>nul)
@@ -76,22 +75,41 @@ if not defined true 		(set true=0)
 if not defined false 		(set false=1)
 
 
+
 call :main
+echo last_error = %last_error%
 pause
 %exit%
 
 ::################
-:main
-	call :testA abc
-	call :testB 123
-	call :testC def
-	call :testD 456
+:return exit_code
+	if "%~1" neq "" (set return_code=%~1) else (set return_code=%errorlevel%)
+	%ComSpec% /c exit /b %return_code%
+	echo :return(%return_code%)
+	exit /b %return_code%
 %endfunction%
+
+::################
+:main
+	call :testA
+	call :testB 123
+	call :testA
+	call :testC def
+	call :testA
+	call :testD 456
+	call :testA
+	call :testE
+	call :testA
+	call :testF
+	call :testA
+%endfunction%
+
+
 
 ::################
 :testA
 	echo ######### testA(%*) #########
-	%log%
+
 %endfunction%
 
 
@@ -116,5 +134,19 @@ pause
 	echo ######### testD(%*) #########
 	echo SET /A test=1/0
 	set /A test=1/0
+%endfunction%
+
+::################
+:testE
+	echo ######### %~0(%*) #########
+
+	%return% 13
+%endfunction%
+
+::################
+:testF
+	echo ######### %~0(%*) #########
+
+	%return% 0
 %endfunction%
 
