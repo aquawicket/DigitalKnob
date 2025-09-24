@@ -1,9 +1,10 @@
 @echo off
+
 ::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit 1
 if NOT defined argv (set argv=%*)
 if NOT defined argv (set argv=%~f0)
 
-if "%RELOADED%" neq "1" (
+if NOT defined RELOADED (
 	echo "reloading with delayed expansion"
 	set "RELOADED=1"
 	cls
@@ -18,26 +19,57 @@ if "!DE!" neq "" (
 	echo ### ERROR: SHOULD NOT GET HERE ### & pause
 )
 
-if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
-if not defined exit (set exit=^
-	call set buffer=%%errorlevel%% ^& ^
-	call set prev_error=%%error_code%% ^& ^
-	call set error_code=%%buffer%% ^& ^
-	call set last_error=%%buffer%% ^& ^
-	call set file=%%~nx0 ^& ^
-	call set function=%%~0 ^& ^
-	call set args=%%* ^& ^
-	call echo EXIT %%file%% %%function%%^(%%args%%^) ^& ^
-	call echo error_code = %%error_code%% ^& ^
-	call echo prev_error = %%prev_error%% ^& ^
-	call echo last_error = %%last_error%% ^& ^
-	echo. ^& ^
-	call exit /b %%error_code%% ^& ^
-	echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
+if not defined DK.cmd (set "DK.cmd=1") else (call exit /b %%errorlevel%%)
+
+rem ###### delayed expansion OFF ######
+if "!DE!" neq "" (
+	if NOT defined exit (
+		echo setting 'exit' with delayed expansion OFF
+		set exit=^
+		call set err_level=%%errorlevel%% ^& ^
+		call set prev_error=%%error_code%% ^& ^
+		call set error_code=%%err_level%% ^& ^
+		call set last_error=%%err_level%% ^& ^
+		call set file=%%~nx0 ^& ^
+		call set function=%%~0 ^& ^
+		call set args=%%* ^& ^
+		call echo EXIT %%file%% %%function%%^(%%args%%^) ^& ^
+		call echo error_code = %%error_code%% ^& ^
+		call echo prev_error = %%prev_error%% ^& ^
+		call echo last_error = %%last_error%% ^& ^
+		echo. ^& ^
+		call exit /b %%error_code%%)
+	if not defined endfunction 	(call set "endfunction=%%exit%%")
+	if not defined return 		(call set "return=%%exit%%")
+	
+rem ###### delayed expansion ON ######
+) else (
+	if NOT defined exit (
+		echo setting 'exit' wirh delayed expansion ON
+		set exit=^
+		set err_level=^^!errorlevel^^! ^&^
+		set prev_error=^^!error_code^^! ^&^
+		set error_code=^^!err_level^^! ^&^
+		^(if "^!err_level^!" neq "0 " set last_error=^^!err_level^^!^) ^&^
+		call set file=%%~nx0 ^&^
+		call set function=%%~0 ^&^
+		call set args=%%* ^&^
+		echo EXIT ^^!file^^! ^^!function^^!^(^^!args^^!^) ^&^
+		echo error_code = ^^!error_code^^! ^&^
+		echo prev_error = ^^!prev_error^^! ^&^
+		echo last_error = ^^!last_error^^! ^&^
+		echo. ^&^
+		exit /b ^^!error_code^^!)
+	if not defined endfunction 	(set "endfunction=!exit!")
+	if not defined return 		(set "return=!exit!")
 )
-if not defined endfunction 	(set "endfunction=%exit%")
-if not defined return 		(set "return=%exit%")
 if not defined pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
+if not defined setlocal		(set setlocal=setlocal EnableDelayedExpansion)
+if NOT defined NO_STDOUT 	(set NO_STDOUT=1>nul)
+if NOT defined NO_STDERR 	(set NO_STDERR=2>nul)
+if NOT defined NO_OUTPUT 	(set NO_OUTPUT=1>nul 2>nul)
+if not defined true 		(set true=0)
+if not defined false 		(set false=1)
 
 call :DK %argv%
 %exit%
@@ -47,7 +79,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 ::# dk_reload
 ::#
 :dk_reload
-	call :pushStack %~n0 %*
+	%pushStack%
 	
 	if NOT defined DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
 	if NOT defined DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
@@ -63,25 +95,25 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 
 	cls
 	"%ComSpec%" /A /Q /D /E:ON /V:ON /C "%DKSCRIPT_PATH%"		&::| %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
-	exit /b %errorlevel%
+	%exit%
 
 	:: Change console settings
 	:: >nul REG ADD HKCU/Console/DigitalKnob FontSize /t reg_sz /d "Consolas" /f
 	:: start "DigitalKnob" "%ComSpec%" /V:ON /K "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 	:: exit
 	::( >NUL reg delete HKCU/Console/DigitalKnob /f )
-exit /b %errorlevel%
+%endfunction%
 
 ::####################################################################
 ::# :pushStack()
 ::#
 :pushStack
 	if NOT defined LVL (set /a "LVL=0")
-	if NOT defined LVL (set /a "ENTRY=0")
+	if NOT defined ENTRY (set /a "ENTRY=0")
 	(set /a LVL+=1)
 	(set /a ENTRY+=1)
 	call :setGlobal __STACK__%ENTRY% %*
-exit /b %errorlevel%
+%endfunction%
 
 ::####################################################################
 ::# DK(<DKSCRIPT_PATH>, <DKSCRIPT_ARGS>)
@@ -119,13 +151,7 @@ exit /b %errorlevel%
 	::set "PATH=%DKBATCH_FUNCTIONS_DIR_%;%PATH%"
 	
 	::###### _SCOPE ######
-	set "setlocal=setlocal EnableDelayedExpansion
-	set "NO_STDOUT=1>nul"
-	set "NO_STDERR=2>nul"
-	set "NO_OUTPUT=1>nul 2>nul"
-	set "exit_code=^!errorlevel^!"
-	if not defined true 	(set "true=0")
-	if not defined false 	(set "false=1")
+	
 	
 	call :dk_DKSCRIPT_PATH "%~1"
 	call :dk_DKSCRIPT_ARGS "%~1"
@@ -185,6 +211,8 @@ exit /b %errorlevel%
 	echo(%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
 	echo(
 	::%dk_call% dk_exit %errorlevel%
+	
+	if "%DKSCRIPT_FILE%" equ "DK.cmd" (pause)
 	%exit%
 %endfunction%
 
@@ -345,7 +373,6 @@ exit /b %errorlevel%
 setlocal enableDelayedExpansion
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %1=%%b)
-	:: (set dk.gbl.%~1=%argv%)		&:: prefix the variable name with dk.gbl. and assign a value
 %endfunction%
 
 
@@ -357,5 +384,10 @@ setlocal enableDelayedExpansion
 	%pushStack%
 	%dk_call% dk_debugFunc 0
 
+	if "%~n0" equ "DK" (
+		echo cannot call DK.cmd from itself
+		%return%
+	)
+	
 	%DKSCRIPT_PATH:/=\%
 %endfunction%
