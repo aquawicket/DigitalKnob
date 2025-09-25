@@ -1,17 +1,23 @@
 @echo off
 
+
+
 ::if NOT EXIST "%~f1" echo ERROR: DK.cmd must be called with %%~0 %%*. I.E.  "DK.cmd" %%~0 %%* & pause & exit /b 1
 if NOT defined argv (set argv=%*)
 if NOT defined argv (set argv=%~f0)
 
-if NOT defined RELOADED (
+::if NOT defined RELOADED (
+if "!DE!" neq "" (
 	echo "reloading with delayed expansion"
 	set "RELOADED=1"
+	set "DK.cmd="
 	cls
 	"%ComSpec%" /A /Q /D /E:ON /V:ON /C %argv%		&rem | %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
 	exit /b %errorlevel%
 	echo ### ERROR: SHOULD NOT GET HERE ### & pause
 )
+
+if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
 
 if "!DE!" neq "" (
 	echo ### ERROR: DKBatch requires delayed expansion ### & pause
@@ -19,7 +25,7 @@ if "!DE!" neq "" (
 	echo ### ERROR: SHOULD NOT GET HERE ### & pause
 )
 
-if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
+
 
 rem ###### delayed expansion OFF ######
 if "!DE!" neq "" (
@@ -210,7 +216,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	::%DK% dk_load %DKSCRIPT_PATH%
 
 	::###### DKTEST MODE ######
-	if "%DKSCRIPT_EXT%" neq ".cmd" (%endfunction%)
+	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
 	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || (call ) & %return%
 	echo(
 	echo(%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
@@ -222,8 +228,9 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	echo(
 	::%dk_call% dk_exit %errorlevel%
 	
+	pause
 	if "%DKSCRIPT_FILE%" equ "DK.cmd" (pause)
-	%return% 224
+
 %endfunction%
 
 
@@ -394,9 +401,9 @@ setlocal enableDelayedExpansion
 	%pushStack%
 	%dk_call% dk_debugFunc 0
 
-	if "%~n0" equ "DK" (
+	if "%DKSCRIPT_NAME%" equ "DK" (
 		echo cannot call DK.cmd from itself
-		%return% 397
+		%return%
 	)
 	
 	%DKSCRIPT_PATH:/=\%

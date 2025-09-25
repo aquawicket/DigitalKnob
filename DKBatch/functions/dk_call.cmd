@@ -36,7 +36,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
-	(set __CMND__=!__CMND__:::=/!)		&:: Replace :: with /
+	(call set __CMND__=%%__CMND__:::=/%%)		&:: Replace :: with /
 	(set __FILE__=%~dpnx1)
 	(set __FILE__=%__FILE__:\=/%)
 	(set __FILENAME__=%~nx1)

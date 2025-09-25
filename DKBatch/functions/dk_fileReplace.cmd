@@ -25,8 +25,8 @@ setlocal enableextensions disabledelayedexpansion
 	
 	::%dk_call% dk_callDKCMake dk_fileReplace %filePath% %find% %replace%
 	
-	>"%filePath%.new" (
-	  for /f "delims=" %%i in ('findstr /n "^" "%filePath%"') do (
+	>"%filePath:/=\%.new" (
+	  for /f "delims=" %%i in ('findstr /n "^" "%filePath:/=\%"') do (
 		  set "line=%%i"
 		  setlocal enabledelayedexpansion
 		  set "line=!line:*:=!"
@@ -35,7 +35,7 @@ setlocal enableextensions disabledelayedexpansion
 		  endlocal
 	  )
 	)
-	move /y "%filePath%.new" "%filePath%" >nul		
+	move /y "%filePath:/=\%.new" "%filePath:/=\%" >nul		
 %endfunction%
 
 
@@ -49,5 +49,6 @@ setlocal enableextensions disabledelayedexpansion
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_fileReplace %USERPROFILE:\=/%/DigitalKnob/Development/README.md DigitalKnob digitalknob
+	echo %dk_call% dk_fileReplace "%USERPROFILE:\=/%/DigitalKnob/Development/README.md" DigitalKnob digitalknob
+	%dk_call% dk_fileReplace "%USERPROFILE:\=/%/DigitalKnob/Development/README.md" DigitalKnob digitalknob
 %endfunction%
