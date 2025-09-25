@@ -1,29 +1,32 @@
 @echo off
 
+::Use %LINE:N=0%
+
+set "LINE=N"
 call :SetLineNumbers
 
-set lineNumber=0
-echo %lineNumber%
 
-set lineNumber=0
-echo %lineNumber%
+echo %LINE%
+
+echo %LINE:N=0%
+
+echo %LINE:N=0%
+
+
 
 for %%G in ( 1 2 3) DO (
-   set lineNumber=0
+   echo %LINE:N=0%
 )
-echo %lineNumber%
+echo %LINE:N=0%
 
 
 
 
 
 
-
-set lineNumber=0
-echo %lineNumber%
+echo %LINE:N=0%
 
 pause
-
 exit /b
 
 
@@ -32,9 +35,11 @@ setlocal EnableDelayedExpansion
 
 set "anyChange="
 set "equal=="
+set "percent=%%"
+set "colon=:"
 set lastLine=0
 < "%~F0" (
-   for /F "delims=:" %%a in ('findstr /N /I /C:"set lineNumber%equal%" "%~F0"') do (
+   for /F "delims=:" %%a in ('findstr /N /I /C:"%percent%LINE%colon%N%equal%" "%~F0"') do (
       set /A lines=%%a-lastLine-1, lastLine=%%a
       for /L %%i in (1,1,!lines!) do (
          set "line="
@@ -44,7 +49,7 @@ set lastLine=0
       set /P "line="
       for /F "tokens=2 delims==" %%b in ("!line!") do (
          if "%%b" neq "%%a" (
-            set "line=!line:%%b=%%a!"
+            set "line=!line:%%b=%%a!%percent%"
             set "anyChange=true"
          )
       )
@@ -53,7 +58,7 @@ set lastLine=0
    findstr "^"
 ) > temp.tmp
 if defined anyChange (
-   move /Y temp.tmp "%~F0" > NUL
+   move /Y temp.tmp "%~dpn0_2.cmd" > NUL
    exit /B
 ) else (
    del temp.tmp

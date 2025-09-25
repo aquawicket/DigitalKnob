@@ -1,9 +1,9 @@
-![](http://DigitalKnob.com/Digitalknob/Digitalknob/logo.png)
-# Digitalknob
+![](http://digitalknob.com/digitalknob/digitalknob/logo.png)
+# digitalknob
 
-<!-- [![Gitter](https://badges.gitter.im/Digitalknob/community.svg)](https://gitter.im/Digitalknob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
+<!-- [![Gitter](https://badges.gitter.im/digitalknob/community.svg)](https://gitter.im/digitalknob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
-### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
+### digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
 ### Supported Platforms
@@ -305,17 +305,17 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
+Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
    or
-Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
+Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
 
 ### Unix Host
-Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
+Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/digitalknob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
 From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
 Run '/path/to/DKBuilder.sh'
 
 ### DKCMake
-Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
+digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
 Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKCpp/apps/MyApp/'OS'> will use a universal /DKCMake/CMakeLists.txt script. <br>
 The build system will differenciate the appropriate scripts to use when the output directory is pointed to a valid <OS> folder
 EXAMPLE: "<DKCpp/apps/MyApp/Ios_Arm64>" <br>
@@ -337,7 +337,7 @@ Raspberry_Arm64 <br>
 Windows_X86 <br>
 Windows_X86_64 <br>
 
-EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Development/DKCMake -BC:/Users/<username>/DigitalKnob/Development/DKCpp/apps/DKCore/Windows_X86
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Development/DKCMake -BC:/Users/<username>/digitalknob/Development/DKCpp/apps/DKCore/Windows_X86
 	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
 "NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
 
@@ -347,16 +347,16 @@ EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Devel
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-[.](http://aquawicket.github.io/Digitalknob/DKPlugins/index.html)
+[.](http://aquawicket.github.io/digitalknob/DKPlugins/index.html)
 
 
 # License
-Digitalknob is published under the MIT license. 
-This repository references the use of third-party source code and assets with their own licenses. Upon any use of Digitalknob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
+digitalknob is published under the MIT license. 
+This repository references the use of third-party source code and assets with their own licenses. Upon any use of digitalknob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
 MIT License
 
-Copyright (c) 2010-2025 Digitalknob, and contributors
+Copyright (c) 2010-2025 digitalknob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
