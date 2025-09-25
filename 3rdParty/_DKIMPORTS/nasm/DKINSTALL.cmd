@@ -13,25 +13,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	
-	%dk_call% dk_set NASM_DL "https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip"
+	%dk_call% dk_set nasm_Import "https://github.com/microsoft/vcpkg/files/12073957/nasm-2.16.01-win64.zip"
 	
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	%dk_call% dk_importVariables %NASM_DL% IMPORT_PATH %DKIMPORTS_DIR%\nasm ROOT %DK3RDPARTY_DIR%
+	%dk_call% dk_importVariables %nasm_Import% IMPORT_PATH %DKIMPORTS_DIR%\nasm ROOT %DK3RDPARTY_DIR%
 
-::	%dk_call% dk_basename %NASM_DL% NASM_IMPORT_FILE
-::	%dk_call% dk_removeExtension %NASM_IMPORT_FILE% NASM_FOLDER
+::	%dk_call% dk_basename %nasm_Import% nasm_Import_File
+::	%dk_call% dk_removeExtension %nasm_Import_File% nasm_Import_Folder
 	
-::	set "NASM=%DK3RDPARTY_DIR%\nasm-%NASM_FOLDER%"
+::	set "nasm=%DK3RDPARTY_DIR%\nasm-%nasm_Import_Folder%"
 	
-	if EXIST %NASM%\Configure" (
+	if EXIST %nasm%\Configure" (
 		echo "nasm already installed"
 		%return%
 	)
-	%dk_call% dk_download %NASM_DL%
+	%dk_call% dk_download %nasm_Import%
 	
-	%dk_call% dk_info "Installing %NASM_FOLDER%"
+	%dk_call% dk_info "Installing %nasm_Install_Name%"
 	
-	:: TODO
-	:: %dk_call% dk_printVar NASM
-	:: %dk_download% = path to the downloaded file 
+	:: %dk_call% dk_debug "nasm = %nasm%"
 %endfunction%

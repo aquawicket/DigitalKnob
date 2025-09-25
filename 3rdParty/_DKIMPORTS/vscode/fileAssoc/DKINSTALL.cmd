@@ -14,9 +14,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate VSCODE_EXE "%dk_call% dk_depend vscode"
-	%dk_call% dk_installFileAssoc .vscode %VSCODE_EXE%
-	%dk_call% dk_installFileAssoc .code-workspace %VSCODE_EXE%
+	%dk_call% dk_validate vscode_exe "%dk_call% dk_depend vscode"
+	%dk_call% dk_installFileAssoc .vscode %vscode_exe%
+	%dk_call% dk_installFileAssoc .code-workspace %vscode_exe%
 %endfunction%
 
 
