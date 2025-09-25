@@ -36,13 +36,13 @@ else()
 	dk_libRelease	(${ogg_Release_Dir}/libogg.a	OGG_LIBRARY_RELEASE		OGG_LIBRARY)
 endif()
 
-### 3RDPARTY AUTOCONF LINK ###
+### 3RDPARTY autoconf LINK ###
 #dk_set(ogg_CONFIGURE 
 #	--with-ogg-includes=${OGG_INCLUDE_DIR} 
 #	--with-ogg-libraries=${ogg_Build_Dir}/src/.libs 
 #	"CFLAGS=-I${OGG_INCLUDE_DIR2}")
 
-### 3RDPARTY CMAKE LINK ###
+### 3RDPARTY cmake LINK ###
 dk_set(ogg_CMAKE 
 	-DOGG_INCLUDE_DIR=${OGG_INCLUDE_DIR} 
 	-DOGG_LIBRARY=${OGG_LIBRARY} 

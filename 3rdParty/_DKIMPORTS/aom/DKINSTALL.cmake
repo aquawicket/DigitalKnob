@@ -21,21 +21,21 @@ dk_depend			(nasm)
 
 ### IMPORT ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${AOM_IMPORT} NAME aom)
+dk_import			(${aom_Import} NAME aom)
 
 ### LINK ###
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
-dk_include			(${AOM)
+dk_include			(${aom)
 if(MSVC)
-	dk_libDebug		(${AOM_Debug_Dir}/aom.lib)
-	dk_libRelease	(${AOM_Release_Dir}/aom.lib)
+	dk_libDebug		(${aom_Debug_Dir}/aom.lib)
+	dk_libRelease	(${aom_Release_Dir}/aom.lib)
 else()
-	dk_libDebug		(${AOM_Debug_Dir}/libaom.a)
-	dk_libRelease	(${AOM_Release_Dir}/libaom.a)
+	dk_libDebug		(${aom_Debug_Dir}/libaom.a)
+	dk_libRelease	(${aom_Release_Dir}/libaom.a)
 endif()
 
 ### GENERATE ###
-dk_configure		(${AOM}) # -DAOM_TARGET_CPU=generic)
+dk_configure		(${aom}) # -DAOM_TARGET_CPU=generic)
 
 ### COMPILE ###
-dk_build			(${AOM})
+dk_build			(${aom})

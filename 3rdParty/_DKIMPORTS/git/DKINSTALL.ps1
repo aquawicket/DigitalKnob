@@ -12,12 +12,12 @@ function Global:DKINSTALL() {
 	dk_call dk_import APP;
 	
 	### DO NOT USE GIT_DIR ###
-	# ${global:GIT} = "$(dk_call dk_DKTOOLS_DIR)/${GIT_FOLDER}";
+	# ${global:git} = "$(dk_call dk_DKTOOLS_DIR)/${git_Folder}";
 
-	${global:git_exe} = "${GIT}/bin/git.exe";
-	${global:GIT_BASH_EXE} = "${GIT}/bin/bash.exe";
-	#${global:GITBASH_EXE} = "${GIT}/git-bash.exe";
-	#${global:PATCH_EXE} = "${GIT}/usr/bin/patch.exe";
+	${global:git_exe} = "${git}/bin/git.exe";
+	${global:git_bash_exe} = "${git}/bin/bash.exe";
+	#${global:gitbash_exe} = "${git}/git-bash.exe";
+	#${global:patch_exe} = "${git}/usr/bin/patch.exe";
 	
 	dk_call dk_echo "git_exe = ${git_exe}";
 	
@@ -27,8 +27,8 @@ function Global:DKINSTALL() {
 		return; 
 	}
 	
-	&${env:COMSPEC} /c "${dk_download}" -y -o ${GIT};
-	#dk_call ${env:COMSPEC} /c "$(dk_call dk_DKDOWNLOAD_DIR)/${GIT_IMPORT_FILE}" -y -o ${GIT};
+	&${env:ComSpec} /c "${dk_download}" -y -o ${git};
+	#dk_call ${env:COMSPEC} /c "$(dk_call dk_DKDOWNLOAD_DIR)/${git_Import_File}" -y -o ${git};
 	
 	if(!(dk_call dk_pathExists ${git_exe})){ dk_call dk_error "git_exe:${git_exe} NOT found"; }
 }

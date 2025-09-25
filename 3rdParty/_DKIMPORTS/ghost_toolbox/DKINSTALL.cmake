@@ -17,7 +17,7 @@ include_guard()
 
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		("${GHOST_TOOLBOX_IMPORT}")
+dk_import		("${ghost_toolbox_Import}")
 
 dk_copy	("${DK3RDPARTY_DIR}/ghost_toolbox-b43ed1d2b3661eb1f76083330ba40e18bc9e36e8" "$ENV{SystemDrive}/Ghost Toolbox")
 execute_process(COMMAND "$ENV{SystemDrive}\\Ghost Toolbox\\ghost-commandline\\Ghost Toolbox 1.9.0.56.bat")

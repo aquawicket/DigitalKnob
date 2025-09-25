@@ -18,21 +18,21 @@ include_guard()
 # https://github.com/bkaradzic/bgfx/archive/refs/heads/master.zip
 #
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${BGFX_IMPORT})
+dk_import		(${bgfx_Import})
 
 ### LINK ###
-dk_include			("${BGFX}/include")
+dk_include			("${bgfx}/include")
 if(Unix)
-	dk_libDebug		("${BGFX_Debug_Dir}/libbgfx.a")
-	dk_libRelease	("${BGFX_Release_Dir}/libbgfx.a")
+	dk_libDebug		("${bgfx_Debug_Dir}/libbgfx.a")
+	dk_libRelease	("${bgfx_Release_Dir}/libbgfx.a")
 elseif()
-	dk_libDebug		("${BGFX_Debug_Dir}/bgfx.lib")
-	dk_libRelease	("${BGFX_Release_Dir}/bgfx.lib")
+	dk_libDebug		("${bgfx_Debug_Dir}/bgfx.lib")
+	dk_libRelease	("${bgfx_Release_Dir}/bgfx.lib")
 endif()
 
 ### GENERATE ###
-dk_configure("${BGFX}")
+dk_configure("${bgfx}")
 
 
 ### COMPILE ###
-dk_build("${BGFX}")
+dk_build("${bgfx}")

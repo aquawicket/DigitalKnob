@@ -47,10 +47,10 @@ DKINSTALL() {
 	[ -n "${GIT_DIR-}" ] && dk_call dk_fatal "ERROR: GIT_DIR should not be set."   # https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
 	############ DO NOT USE GIT_DIR ############
 	
-    export git_exe="${GIT}/bin/git.exe"
-	export GIT_BASH_EXE="${GIT}/bin/bash.exe"
-    # export GIT-bash_exe="${GIT}/git-bash.exe"
-	# export GIT_PATCH_EXE="${GIT}/usr/bin/patch.exe"
+    export git_exe="${git}/bin/git.exe"
+	export git_bash_exe="${git}/bin/bash.exe"
+    # export git-bash_exe="${git}/git-bash.exe"
+	# export git_patch_exe="${git}/usr/bin/patch.exe"
     [ -e "${git_exe}" ] && return
 	
 	###### INSTALL ######
@@ -59,7 +59,7 @@ DKINSTALL() {
 		dk_call dk_info "Installing ${git_Import} . . ."
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
 		dk_call dk_download ${git_Import}
-		"${DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" -y -o "${GIT}"
+		"${DKDOWNLOAD_DIR}/${git_import_file}" -y -o "${git}"
 	else
 		dk_call dk_info "Installing ${git_Import} package . . ."
 		dk_call dk_installPackage git
@@ -79,6 +79,6 @@ DKTEST() {
 	dk_debugFunc 0
 
 	dk_call DKINSTALL
-	dk_call dk_echo "GIT = ${GIT}"
+	dk_call dk_echo "git = ${git}"
 	dk_call dk_echo "git_exe = ${git_exe}"
 }

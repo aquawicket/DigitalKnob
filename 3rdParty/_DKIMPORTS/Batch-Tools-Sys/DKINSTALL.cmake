@@ -17,4 +17,4 @@ include_guard()
 
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${BATCH-TOOLS-SYS_IMPORT} NAME Batch-Tools-Sys)
+dk_import(${Batch-Tools-Sys_Import})

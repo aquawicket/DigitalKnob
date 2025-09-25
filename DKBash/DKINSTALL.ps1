@@ -22,27 +22,27 @@ if(!$installDKBash){ $installDKBash = 1 } else{ return }
 	. $DKPOWERSHELL_FUNCTION_DIR/DK.ps1
 
 	dk_call dk_validate DKIMPORTS_DIR "dk_call dk_DKIMPORTS_DIR"
-	dk_call dk_validate GITBASH_EXE "dk_call dk_installGit"
+	dk_call dk_validate gitbash_exe "dk_call dk_installGit"
 
 	Write-Host "PSCommandPath = $PSCommandPath"
 	$global:DKBASH_FUNCTIONS_DIR = "$DKBRANCH_DIR/DKBash/functions"
 	Write-Host "DKBASH_FUNCTIONS_DIR = $DKBASH_FUNCTIONS_DIR"
-	Write-Host "GITBASH_EXE = $GITBASH_EXE"
+	Write-Host "gitbash_exe = $gitbash_exe"
 	
 	###### Git Bash ######
-#	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%GITBASH_EXE%" "%%1" %*
-	cmd /c ftype dkbash=powershell $PSCommandPath $DKBASH_FUNCTIONS_DIR $GITBASH_EXE "%%1" %*
+#	ftype dkbash=cmd /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%gitbash_exe%" "%%1" %*
+	cmd /c ftype dkbash=powershell $PSCommandPath $DKBASH_FUNCTIONS_DIR $gitbash_exe "%%1" %*
 	cmd /c assoc .sh=dkbash
-#	dkregistrySetKey "HKEY_CLASSES_ROOT/dkbash/DefaultIcon" "" "REG_SZ" "%GITBASH_EXE%"	
+#	dkregistrySetKey "HKEY_CLASSES_ROOT/dkbash/DefaultIcon" "" "REG_SZ" "%gitbash_exe%"	
 #}
 pause
 
 function Global:runDKBash() {
 	pause
 	$DKBASH_FUNCTIONS_DIR = $1
-	$GITBASH_EXE = $2
+	$gitbash_exe = $2
 	$DKSCRIPT_PATH = $3
 
 	Write-Host "############### Digitalknob ##################"
-	start $GITBASH_EXE $DKSCRIPT_PATH
+	start $gitbash_exe $DKSCRIPT_PATH
 }

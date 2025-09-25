@@ -59,7 +59,7 @@ function(DKINSTALL)
 			dk_set(bash_exe "$ENV{bash_exe}")
 		endif()
 
-		### from BASH environment variable ###
+		### from bash environment variable ###
 		if(NOT EXISTS "${bash_exe}")
 			if("$ENV{BASH}" MATCHES "/bash")
 				set(bash_exe "$ENV{BASH}")

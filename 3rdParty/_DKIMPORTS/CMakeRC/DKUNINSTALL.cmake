@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${CMAKERC_IMPORT} NAME CMakeRC)
-dk_delete			("${CMAKERC}")
+dk_importVariables	(${CMakeRC_IMPORT} NAME CMakeRC)
+dk_delete			("${CMakeRC}")

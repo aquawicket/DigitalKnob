@@ -24,18 +24,18 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_X86_Host)
-	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Windows_X86_Import})
+	dk_set	(core-temp_Import   ${core_temp_Windows_X86_Import})
 elseif(Windows_X86_64_Host)
-	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Windows_X86_64_Import})
+	dk_set	(core-temp_Import   ${core_temp_Windows_X86_64_Import})
 else()
-	dk_set	(CORE_TEMP_IMPORT   ${core_temp_Setup_Import})
+	dk_set	(core-temp_Import   ${core_temp_Setup_Import})
 endif()
 
-set(CORE_TEMP_EXE "${CORE_TEMP}/Core Temp.exe")
+set(core-temp_EXE "${core-temp}/Core Temp.exe")
 dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
-dk_import(${CORE_TEMP_IMPORT} ROOT "${DKTOOLS_DIR}" PATCH)
+dk_import(${core-temp_Import} ROOT "${DKTOOLS_DIR}" PATCH)
 
-set(CORE_TEMP_EXE "${CORE_TEMP}/Core Temp.exe")
+set(core-temp_EXE "${core-temp}/Core Temp.exe")
 
 
 

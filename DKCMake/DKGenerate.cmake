@@ -465,7 +465,7 @@ endif()
 	
 	
 	
-############ ANDROID ############
+############ Android ############
 if(Android)
 	################################ CMAKE_ANDROID_GUI ########################################
 	if(CMAKE_ANDROID_GUI) # CMAKE_ANDROID_GUI is set to 1 by DKSDLWindow/DKCMake.cmake

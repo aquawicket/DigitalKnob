@@ -5,7 +5,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
+set "bash_Default=git" &:: git, msys2, wsl
 ::####################################################################
 ::# DKINSTALL()
 ::#
@@ -13,58 +13,58 @@ set "bash_DEFAULT=GIT" &:: GIT, MSYS2, WSL
 %setlocal%
 	%dk_call% dk_debugFunc 1
 	
-	if EXIST "%bash_exe%" (
-		if "%bash_ENV%" equ "%~1" (
+	if exist "%bash_exe%" (
+		if "%bash_env%" equ "%~1" (
 			%return%
 		)
 	)
 	
-	set "bash_ENV=%~1"
-	if "%bash_ENV%" equ "" (set "bash_ENV=%bash_DEFAULT%")
+	set "bash_env=%~1"
+	if "%bash_env%" equ "" (set "bash_env=%bash_Default%")
 	
-	rem ###### GIT ######
-	if /i "%bash_ENV%" equ "GIT" (
-		%dk_call% dk_validate GIT "%dk_call% dk_depend git"
-		set "GIT_BASH_EXE=!GIT!/bin/bash.exe"
-		set "GIT_BASH_ICON=!GIT!/git-bash.exe"
-		set "bash_exe=!GIT_BASH_EXE!"
-		set "BASH_ICON=!GIT_BASH_ICON!"
+	rem ###### git ######
+	if /i "%bash_env%" equ "git" (
+		%dk_call% dk_validate git "%dk_call% dk_depend git"
+		set "git_bash_exe=!git!/bin/bash.exe"
+		set "git_bash_icon=!git!/git-bash.exe"
+		set "bash_exe=!git_bash_exe!"
+		set "bash_icon=!git_bash_icon!"
 	)
 		
-	rem ###### MSYS2 ######
-	if "%bash_ENV%" equ "MSYS2" (
-		%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
-		set "MSYS2_BASH_EXE=!msys2!/usr/bin/bash.exe"
-		set "MSYS2_BASH_ICON=!msys2!/msys2.exe"
-		set "bash_exe=!MSYS2_BASH_EXE!"
-		set "BASH_ICON=!MSYS2_BASH_ICON!"
+	rem ###### msys2 ######
+	if "%bash_env%" equ "msys2" (
+		%dk_call% dk_validate msys2 "%dk_call% dk_depend msys2"
+		set "msys2_bash_exe=!msys2!/usr/bin/bash.exe"
+		set "msys2_bash_icon=!msys2!/msys2.exe"
+		set "bash_exe=!msys2_bash_exe!"
+		set "bash_icon=!msys2_bash_icon!"
 	)
 	
 	rem ###### WSL ######
-	if "%bash_ENV%" equ "WSL" (
-		%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
-		%dk_call% dk_assertPath WSL_EXE
+	if "%bash_env%" equ "wsl" (
+		%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+		%dk_call% dk_assertPath wsl_exe
 		set "WSL_BASH_EXE=%windir:\=/%/System32/bash.exe"
-		set "WSL_BASH_ICON=!WSL_EXE!"
-		set "bash_exe=!WSL_BASH_EXE!"
-		set "BASH_ICON=!WSL_BASH_ICON!"
+		set "wsl_bash_icon=!wsl_exe!"
+		set "bash_exe=!wsl_bash_exe!"
+		set "bash_icon=!wsl_bash_icon!"
 	)
 
 	
 	%dk_call% dk_assertPath bash_exe
-	%dk_call% dk_assertPath BASH_ICON
+	%dk_call% dk_assertPath bash_icon
 	
 	::### return ###
 	endlocal & (
-		set "bash_ENV=%bash_ENV%"
-		set "GIT_BASH_EXE=%GIT_BASH_EXE%"
-		set "GIT_BASH_ICON=%GIT_BASH_ICON%"
-		set "MSYS2_BASH_EXE=%MSYS2_BASH_EXE%"
-		set "MSYS2_BASH_ICON=%MSYS2_BASH_ICON%"
-		set "WSL_BASH_EXE=%WSL_BASH_EXE%"
-		set "WSL_BASH_ICON=%WSL_BASH_ICON%"
+		set "bash_env=%bash_env%"
+		set "git_bash_exe=%git_bash_exe%"
+		set "git_bash_icon=%git_bash_icon%"
+		set "msys2_bash_exe=%msys2_bash_exe%"
+		set "msys2_bash_icon=%msys2_bash_icon%"
+		set "wsl_bash_exe=%wsl_bash_exe%"
+		set "wsl_bash_icon=%wsl_bash_icon%"
 		set "bash_exe=%bash_exe%"
-		set "BASH_ICON=%BASH_ICON%"
+		set "bash_icon=%bash_icon%"
 	)
 %endfunction%
 

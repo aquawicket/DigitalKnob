@@ -17,7 +17,7 @@
 # For any variables defined in:
 #         https://developer.android.com/ndk/guides/android_mk.html
 #         https://developer.android.com/ndk/guides/application_mk.html
-# if it makes sense for CMake, then replace LOCAL, APP, or NDK with ANDROID, and
+# if it makes sense for CMake, then replace LOCAL, APP, or NDK with Android, and
 # we have that variable below.
 #
 # ANDROID_TOOLCHAIN

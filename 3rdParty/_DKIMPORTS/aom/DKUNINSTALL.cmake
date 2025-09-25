@@ -17,5 +17,5 @@ include_guard()
 # https://aomedia.googlesource.com/aom.git
 
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${AOM_IMPORT} NAME aom)
-dk_delete			("${AOM}")
+dk_importVariables	(${aom_Import} NAME aom)
+dk_delete			("${aom}")

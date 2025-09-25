@@ -107,8 +107,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::		rem ###### Import from Download File ######
 ::		) else (
 			%dk_call% dk_debug "CURRENT_PLUGIN = %CURRENT_PLUGIN%"
-			%dk_call% dk_debug "%CURRENT_PLUGIN%_IMPORT_NAME = !%CURRENT_PLUGIN%_IMPORT_NAME!"
-			%dk_call% dk_verbose "%dk_call% dk_install !%CURRENT_PLUGIN%_IMPORT_NAME! %ARGN%"
+			%dk_call% dk_debug "%CURRENT_PLUGIN%_Import_Name = !%CURRENT_PLUGIN%_Import_Name!"
+			%dk_call% dk_verbose "%dk_call% dk_install !%CURRENT_PLUGIN%_Import_Name! %ARGN%"
 			
 			::%dk_call% dk_install %CURRENT_PLUGIN% %ARGN% %NO_HALT%
 ::		)
@@ -117,7 +117,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_getParameter PATCH %ARGV%
 	::%dk_call% dk_getParameter PATCH
 	if defined PATCH (
-		%dk_call% dk_patch !%CURRENT_PLUGIN%_IMPORT_NAME! !%CURRENT_PLUGIN%_DIR!
+		%dk_call% dk_patch !%CURRENT_PLUGIN%_Import_Name! !%CURRENT_PLUGIN%_DIR!
 	)
 	
 %endfunction%

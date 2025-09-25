@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${batch-file-examples_IMPORT})
-dk_delete		("${BATCH-FILE-EXAMPLES}")
+dk_import		(${batch-file-examples_Import})
+dk_delete		("${batch-file-examples}")

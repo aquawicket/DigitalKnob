@@ -200,7 +200,7 @@ if NOT defined dk_exec_ECHO_ERROR  (set "dk_exec_ECHO_ERROR=1")
 ::	%dk_call% dk_exec notepad.exe
 ::	pause
 	
-::	%dk_call% dk_validate ADB_EXE "%dk_call% ANDROID::dk_ADB_EXE"
+::	%dk_call% dk_validate ADB_EXE "%dk_call% Android::dk_ADB_EXE"
 ::	%dk_call% dk_exec "%ADB_EXE%" shell pm list packages" &::-f string
 
 ::	%dk_call% dk_exec "%USERPROFILE:\=/%/.dk/DKC_BUILD_DIR/dk_test.exe" "var one" "var two" "var three"

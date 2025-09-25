@@ -106,7 +106,7 @@ dk_return()
 #			### INSTALL ###
 #			dk_info("Installing Git . . .")
 #			dk_download(${git_Import} $ENV{DKDOWNLOAD_DIR})			
-#			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_IMPORT_FILE}" GIT_INSTALL_FILE)
+#			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${git_Import_File}" GIT_INSTALL_FILE)
 #			dk_nativePath("${git}" GIT_INSTALL_PATH)
 #			#dk_exec(${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})
 #			#execute_process(COMMAND ${GIT_INSTALL_FILE} /DIR=${GIT_INSTALL_PATH})

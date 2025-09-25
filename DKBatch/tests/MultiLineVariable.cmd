@@ -97,7 +97,7 @@ exit /b 0
 #if HAVE_boxer
 	#include <boxer/boxer.h>
 #endif
-#if ANDROID && HAVE_sdl
+#if Android && HAVE_sdl
 	#include <SDL.h>
 #endif
 //WARNING_ENABLE
@@ -143,7 +143,7 @@ DKApp::DKApp(int _argc, char** _argv){
 
 	if (argc)
 		DKFile::exe_path = argv[0];
-	#if ANDROID
+	#if Android
 		#if HAVE_sdl
 			if (!SDL_AndroidGetExternalStorageState())
 				DKERROR("SDL_AndroidGetExternalStorageState() : failed");

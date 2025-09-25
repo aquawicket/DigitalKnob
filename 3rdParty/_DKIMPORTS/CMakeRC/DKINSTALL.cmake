@@ -19,25 +19,25 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${CMAKERC_IMPORT} NAME CMakeRC)
+dk_import			(${CMakeRC_Import} NAME CMakeRC)
 
 if(NOT CMAKE_SCRIPT_MODE_FILE)
-	include			(${CMAKERC}/CMakeRC.cmake)
+	include			(${CMakeRC}/CMakeRC.cmake)
 endif()
 
 ### LINK ###
 if(Debug)
-	dk_include		(${CMAKERC_Debug_Dir}/_cmrc/include)
+	dk_include		(${CMakeRC_Debug_Dir}/_cmrc/include)
 endif()
 if(Release)
-	dk_include		(${CMAKERC_Release_Dir}/_cmrc/include)
+	dk_include		(${CMakeRC_Release_Dir}/_cmrc/include)
 endif()
 if(MSVC)
-	dk_libDebug		(${CMAKERC_Debug_Dir}/cmakerc.lib)
-	dk_libRelease	(${CMAKERC_Release_Dir}/cmakerc.lib)
+	dk_libDebug		(${CMakeRC_Debug_Dir}/cmakerc.lib)
+	dk_libRelease	(${CMakeRC_Release_Dir}/cmakerc.lib)
 else()
-	dk_libDebug		(${CMAKERC_Debug_Dir}/libcmakerc.a)
-	dk_libRelease	(${CMAKERC_Release_Dir}/libcmakerc.a)
+	dk_libDebug		(${CMakeRC_Debug_Dir}/libcmakerc.a)
+	dk_libRelease	(${CMakeRC_Release_Dir}/libcmakerc.a)
 endif()
 
 ### GENERATE ###
