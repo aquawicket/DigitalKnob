@@ -217,20 +217,17 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 
 	::###### DKTEST MODE ######
 	if "%DKSCRIPT_EXT%" neq ".cmd" (%return%)
-	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || (call ) & %return%
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" || (cmd /c exit /b 0 & %return%)
 	echo(
 	echo(%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
 	echo(
-	
 	call:DKTEST
 	echo(
 	echo(%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
 	echo(
-	::%dk_call% dk_exit %errorlevel%
 	
 	pause
-	if "%DKSCRIPT_FILE%" equ "DK.cmd" (pause)
-
+	%dk_call% dk_exit %errorlevel%
 %endfunction%
 
 
