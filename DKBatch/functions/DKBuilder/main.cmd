@@ -91,9 +91,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		::### If we are on windows, we can build linux through WSL (Windows Subsystem fo Linux)
 		:: wslpath -u 
 		if /i "%Target_Os%" equ "Linux" (
-			set "WSL_EXE=%windir:\=/%/System32/wsl.exe"
+			set "wsl_exe=%windir:\=/%/System32/wsl.exe"
 			set "DKBASH_APPS_DIR=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps"
-			%WSL_EXE% %DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh
+			%wsl_exe% %DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh
 			goto while_loop
 		)
 		

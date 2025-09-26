@@ -6,7 +6,7 @@ if NOT defined Linux_Host (
 %dk_call% dk_echo "############################################################################"
 
 %dk_call% DKIMPORTS_DIR			"%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_validate WSL_EXE 	"%dk_call% dk_depend wsl"
+%dk_call% dk_validate wsl_exe 	"%dk_call% dk_depend wsl"
 
 
 set CMAKE_GENERATOR="Unix Makefiles"

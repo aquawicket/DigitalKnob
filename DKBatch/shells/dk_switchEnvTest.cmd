@@ -109,8 +109,8 @@ goto main
 ::###### WSL_DEBIAN ######
 :WSL_DEBIAN
 	%dk_call% dk_title "Digitalknob WSL_DEBIAN"
-	%dk_call% dk_validate WSL_EXE "%dk_call% dk_WSL_EXE"
-	"%WSL_EXE%" -d Debian --exec ^ 
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+	"%wsl_exe%" -d Debian --exec ^ 
 	"clear && echo You are in a WSL_DEBIAN environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 

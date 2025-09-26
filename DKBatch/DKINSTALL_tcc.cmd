@@ -16,9 +16,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::%dk_call% dk_assertPath "%DKBATCH_FUNCTIONS_DIR_%"
 	
 	echo(
-	if NOT EXIST "%TCC_RT_EXE%"				(set "TCC_RT_EXE=%~2")
-	echo TCC_RT_EXE = %TCC_RT_EXE%
-	::%dk_call% dk_assertPath "%TCC_RT_EXE%"
+	if NOT EXIST "%tcc-rt_exe%"				(set "tcc-rt_exe=%~2")
+	echo tcc-rt_exe = %tcc-rt_exe%
+	::%dk_call% dk_assertPath "%tcc-rt_exe%"
 	
 	echo(
 	if NOT EXIST "%DKSCRIPT_PATH%"			(set "DKSCRIPT_PATH=%~3")
@@ -30,13 +30,13 @@ if "%~1" equ "" (goto :DKINSTALL)
 	echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
 	
 	::###### run script ######
-	:: "%TCC_RT_EXE%"	path to tcc.exe
+	:: "%tcc-rt_exe%"	path to tcc.exe
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the TCC prompt.
 	echo(
-	echo "%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%"
-	"%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%"
-	::"%TCC_RT_EXE%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
+	echo "%tcc-rt_exe%" /V:ON /K call "%DKSCRIPT_PATH%"
+	"%tcc-rt_exe%" /V:ON /K call "%DKSCRIPT_PATH%"
+	::"%tcc-rt_exe%" /V:ON /K call "%DKSCRIPT_PATH%" %DKSCRIPT_ARGS%
 
 	::###### exit_code ######
 	if %errorlevel% neq 0 (
@@ -77,12 +77,12 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%dk_call% dk_assertPath "%DKTOOLS_DIR%"
 	%dk_call% dk_validate DKIMPORTS_DIR 		"%dk_call% dk_DKIMPORTS_DIR"
 	%dk_call% dk_assertPath "%DKIMPORTS_DIR%"
-	%dk_call% dk_validate TCC_RT_EXE 			"%dk_call% dk_depend tcc-rt"
-	%dk_call% dk_assertPath "%TCC_RT_EXE%"
+	%dk_call% dk_validate tcc-rt_exe 			"%dk_call% dk_depend tcc-rt"
+	%dk_call% dk_assertPath "%tcc-rt_exe%"
 	
 	::%dk_call% dk_registryDeleteKey 	"HKCR/DKtcc"
-	ftype DKtcc="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%TCC_RT_EXE%" "%%1" %%*
-	%dk_call% dk_registrySetKey 	"HKCR/DKtcc/DefaultIcon" "" "REG_SZ" "%TCC_RT_EXE%"
+	ftype DKtcc="%ComSpec%" /c call "%~f0" "%DKBATCH_FUNCTIONS_DIR%" "%tcc-rt_exe%" "%%1" %%*
+	%dk_call% dk_registrySetKey 	"HKCR/DKtcc/DefaultIcon" "" "REG_SZ" "%tcc-rt_exe%"
 	::%dk_call% dk_registryDeleteKey 	"HKCR/.cmd"
 	::%dk_call% dk_registryDeleteKey 	"HKCU/SOFTWARE/Microsoft/Windows/CurrentVersion/Explorer/FileExts/.cmd"
 	assoc .cmd=DKtcc

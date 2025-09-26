@@ -14,15 +14,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate WSL_EXE "%dk_call% dk_WSL_EXE"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
 	
-	if EXIST "%WSL_EXE%" (
+	if EXIST "%wsl_exe%" (
 		%dk_call% dk_info "WSL already installed"
 		goto:step4
 	) else (
 		%dk_call% dk_notice "WSL NOT found"
 	)
-	::%WSL_EXE% --status
+	::%wsl_exe% --status
 
 	:: https://learn.microsoft.com/en-us/windows/wsl/install-manual
 	

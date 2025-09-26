@@ -9,11 +9,11 @@ if NOT defined Linux_Host if NOT defined Windows_Host (
 
 ::###### dk_depend wsl ######
 %dk_call% dk_validate DKIMPORTS_DIR	"%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_validate WSL_EXE 		"%dk_call% dk_depend wsl"
+%dk_call% dk_validate wsl_exe 		"%dk_call% dk_depend wsl"
 
 ::###### convert to wsl paths ######
 %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR
-%WSL_EXE% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)
+%wsl_exe% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)
 
 
 set CMAKE_GENERATOR="Unix Makefiles"

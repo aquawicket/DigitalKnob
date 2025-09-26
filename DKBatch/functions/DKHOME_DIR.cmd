@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	rem ############ GET ############
 	rem ###### WSLPATH_EXE ######
-	rem %dk_call% dk_set WSLPATH_EXE   "%WSL_EXE% wslpath"
+	rem %dk_call% dk_set WSLPATH_EXE   "%wsl_exe% wslpath"
 	rem %dk_call% dk_printVar WSLPATH_EXE
 
 	rem if NOT defined HOMEDRIVE		(!dk_call! dk_warning "HOMEDRIVE is invalid")

@@ -839,8 +839,8 @@ dk_installCmake() {
 
 		dk_echo
 		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}"
-		dk_extract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
+		dk_download "$cmake_Import"
+		dk_extract "${dk_download}" "${DKTOOLS_DIR}"
 		
 		#if ! dk_pathExists ${cmake_exe}; then error "cannot find cmake"; fi
 

@@ -112,18 +112,18 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 
 	::############ Linux_x86_64 (WSL) ############
-	if /i "%Target_Os%" equ "Linux"	(set "WSL_EXE=wsl")
+	if /i "%Target_Os%" equ "Linux"	(set "wsl_exe=wsl")
 ::  ###### WSL CMake Fix ######
 ::  if defined WSLENV; then
 ::		%dk_call% dk_chdir "$DKCMAKE_DIR"
 ::		set -- "$@" "."
 ::	fi
-	::if defined WSL_EXE (
+	::if defined wsl_exe (
 	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
 	::)
-	if defined WSL_EXE (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
-	if defined WSL_EXE (%WSL_EXE% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
-	if defined WSL_EXE (%return%)
+	if defined wsl_exe (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
+	if defined wsl_exe (%wsl_exe% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
+	if defined wsl_exe (%return%)
 
 	::###### CMake Configure ######
 	%dk_call% dk_validate DKIMPORTS_DIR  "%dk_call% dk_DKIMPORTS_DIR"

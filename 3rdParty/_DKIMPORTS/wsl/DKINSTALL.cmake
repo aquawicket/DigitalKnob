@@ -22,7 +22,7 @@ include_guard()
 #	dk_exec(wsl --install)
 #endif()
 
-if(EXISTS "${WSL_EXE}")
+if(EXISTS "${wsl_exe}")
 	dk_return()
 endif()
 
@@ -35,13 +35,13 @@ if(DEFINED ENV{WSL_DISTRO_NAME})
 	dk_set(WSL 1)
 endif()
 
-#dk_findProgram(WSL_EXE wsl "$ENV{SystemDrive}/Windows/System32")
-if(NOT WSL_EXE)
+#dk_findProgram(wsl_exe wsl "$ENV{SystemDrive}/Windows/System32")
+if(NOT wsl_exe)
 	if(EXISTS "$ENV{SystemDrive}/Windows/System32/wsl.exe")
-		dk_set(WSL_EXE "$ENV{SystemDrive}/Windows/System32/wsl.exe")
+		dk_set(wsl_exe "$ENV{SystemDrive}/Windows/System32/wsl.exe")
 	endif()
 endif()
-dk_assertVar(WSL_EXE)
+dk_assertVar(wsl_exe)
 
 
 dk_findProgram(WSLPATH_EXE wslpath)

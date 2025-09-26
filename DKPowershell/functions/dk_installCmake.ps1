@@ -9,29 +9,29 @@ function Global:dk_installCmake() {
 
 	dk_call dk_validate Host_Os "dk_call dk_Host_Os";
 	
-#   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm32"    { ${CMAKE_DL} = "https://todo"; }
-    if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm64")   { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"; }
-    if("${Host_Os}_${Host_Arch}" -eq "Windows_X86")     { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"; }
-    if("${Host_Os}_${Host_Arch}" -eq "Windows_X86_64")  { ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"; }
-    if("$Host_Os" -eq "Mac")                        	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"; }
-#	if("$Host_Os" -eq "Mac")                        	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"; }
-    if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"; }
-    if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${CMAKE_DL} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"; }
+#   if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm32"    { ${cmake_Import} = "https://todo"; }
+    if("${Host_Os}_${Host_Arch}" -eq "Windows_Arm64")   { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip"; }
+    if("${Host_Os}_${Host_Arch}" -eq "Windows_X86")     { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip"; }
+    if("${Host_Os}_${Host_Arch}" -eq "Windows_X86_64")  { ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip"; }
+    if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz"; }
+#	if("$Host_Os" -eq "Mac")                        	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz"; }
+    if("${Host_Os}_${Host_Arch}" -eq "Linux_X86_64")	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz"; }
+    if("${Host_Os}_${Host_Arch}" -eq "Linux_Arm64") 	{ ${cmake_Import} = "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz"; }
     
-    ${CMAKE_IMPORT_FILE} = dk_call dk_basename ${CMAKE_DL};
-	${cmake_Install_Folder} = dk_call dk_removeExtension ${CMAKE_IMPORT_FILE};
-    #${cmake_Install_Folder} = dk_call dk_convertToCIdentifier ${cmake_Install_Folder}; 
-    #${cmake_Install_Folder} = dk_call dk_toLower ${cmake_Install_Folder};
+    ${cmake_Import_File} = dk_call dk_basename ${cmake_Import};
+	${cmake_Install_Name} = dk_call dk_removeExtension ${cmake_Import_File};
+    #${cmake_Install_Name} = dk_call dk_convertToCIdentifier ${cmake_Install_Name}; 
+    #${cmake_Install_Name} = dk_call dk_toLower ${cmake_Install_Name};
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
-	$global:CMAKE_DIR = "$DKTOOLS_DIR/$cmake_Install_Folder";
-    $global:cmake_exe = "$CMAKE_DIR/bin/cmake.exe";
+	$global:cmake = "$DKTOOLS_DIR/$cmake_Install_Name";
+    $global:cmake_exe = "$cmake/bin/cmake.exe";
         
     if(dk_call dk_pathExists ${cmake_exe}){ return; }
        
     dk_call dk_echo "\n";
     dk_call dk_info "Installing CMake . . .\n";
-    dk_call dk_download "${CMAKE_DL}" "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}";
-	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}";
+    dk_call dk_download "${cmake_Import}" "${DKDOWNLOAD_DIR}/${cmake_Import_File}";
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/${cmake_Import_File}" "${cmake}";
     
     if(!(dk_call dk_pathExists "${cmake_exe}")){ dk_call dk_error "cannot find cmake\n"; }
 }

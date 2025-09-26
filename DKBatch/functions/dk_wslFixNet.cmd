@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate WSL_EXE "%dk_call% dk_depend wsl"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
 
 	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 	if NOT EXIST "%DKBASH_FUNCTIONS_DIR%" 		set "DKBASH_FUNCTIONS_DIR=%CD%\DKBash\functions"
@@ -27,7 +27,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if NOT EXIST "%DKBASH_FUNCTIONS_DIR%\DK.sh" %dk_call% dk_download "%DKHTTP_DKBASH_FUNCTIONS_DIR%/DK.sh" "%DKBASH_FUNCTIONS_DIR%/DK.sh"
 	
 	::%dk_call% dk_callDKBash dk_wslFixNet
-	set DKBASH_COMMAND="%WSL_EXE% sh -c '. %DKBASH_FUNCTIONS_DIR%/dk_wslFixNet.sh ^&^& dk_wslFixNet'"
+	set DKBASH_COMMAND="%wsl_exe% sh -c '. %DKBASH_FUNCTIONS_DIR%/dk_wslFixNet.sh ^&^& dk_wslFixNet'"
 	%DKBASH_COMMAND%
 
 %endfunction%

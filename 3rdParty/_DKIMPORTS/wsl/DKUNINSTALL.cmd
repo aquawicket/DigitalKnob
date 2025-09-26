@@ -14,8 +14,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	echo(
 	echo ### Uninstalling wsl ###
-	%dk_call% dk_findProgram WSL_EXE wsl.exe
-	::%WSL_EXE% --uninstall
+	%dk_call% dk_findProgram wsl_exe wsl.exe
+	::%wsl_exe% --uninstall
 	
 	:: Uninstall Windows-Subsystem-Linux-Update
 	reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" | findstr /I /C:"{36EF257E-21D5-44F7-8451-07923A8C465E}" 1>nul && (

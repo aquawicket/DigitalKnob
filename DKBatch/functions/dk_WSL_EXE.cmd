@@ -13,14 +13,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	if EXIST "%WSL_EXE%" (%return%)
+	if EXIST "%wsl_exe%" (%return%)
 
-	set "WSL_EXE=%windir:\=/%/System32/wsl.exe"
-	if NOT EXIST "%WSL_EXE%" (%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir%/System32")
+	set "wsl_exe=%windir:\=/%/System32/wsl.exe"
+	if NOT EXIST "%wsl_exe%" (%dk_call% dk_findProgram wsl_exe "wsl.exe" "%windir%/System32")
 	
-	%dk_call% dk_assertPath "%WSL_EXE%"
+	%dk_call% dk_assertPath "%wsl_exe%"
 	endlocal & (
-		set "WSL_EXE=%WSL_EXE%"
+		set "wsl_exe=%wsl_exe%"
 	)
 %endfunction%
 
@@ -35,6 +35,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_WSL_EXE
-	%dk_call% dk_echo "WSL_EXE = %WSL_EXE%"
+	%dk_call% dk_depend wsl
+	%dk_call% dk_echo "wsl_exe = %wsl_exe%"
 %endfunction%

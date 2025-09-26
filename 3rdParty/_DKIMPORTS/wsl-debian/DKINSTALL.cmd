@@ -13,13 +13,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_depend wsl
 	
-	%dk_call% dk_validate WSL_EXE "%dk_call% dk_WSL_EXE"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
 
-	::"%WSL_EXE%" --list
-	::"%WSL_EXE%" --list | findstr Debian > nul 2>&1 && echo Debian Found || echo Debian NOT Found
-	"%WSL_EXE%" --list | find "Debian" /v /c > nul 2>&1 && %return%
+	::"%wsl_exe%" --list
+	::"%wsl_exe%" --list | findstr Debian > nul 2>&1 && echo Debian Found || echo Debian NOT Found
+	"%wsl_exe%" --list | find "Debian" /v /c > nul 2>&1 && %return%
 	
-	%dk_call% dk_set DEBIAN_IMPORT "https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
+	%dk_call% dk_set wsl-debian_Import"https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %DEBIAN_IMPORT% IMPORT_PATH %DKIMPORTS_DIR%/wsl-debian ROOT %DKTOOLS_DIR%	
@@ -36,8 +36,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: start shell:AppsFolder\TheDebianProject.DebianGNULinux_76v4gfsz19hv4!debian
 	:: %dk_call% dk_startPackage "Debian"
 	
-	::%dk_call% dk_validate WSL_EXE "%dk_call% dk_WSL_EXE"
-	::"%WSL_EXE%" -d Debian
+	::%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+	::"%wsl_exe%" -d Debian
 %endfunction%
 
 
@@ -50,5 +50,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% DKINSTALL
 	%dk_call% dk_wslFixNet
 	%dk_call% dk_wslFixFileAccess
-	%WSL_EXE% --shutdown
+	%wsl_exe% --shutdown
 %endfunction%

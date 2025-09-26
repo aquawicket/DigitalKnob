@@ -92,6 +92,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "NOTEPADPP_EXE = %NOTEPADPP_EXE%"
 
 	%dk_call% dk_echo
-	%dk_call% dk_findProgram WSL_EXE "wsl.exe" "%windir%/System32" 
-	%dk_call% dk_echo "WSL_EXE = %WSL_EXE%"
+	%dk_call% dk_findProgram wsl_exe "wsl.exe" "%windir%/System32" 
+	%dk_call% dk_echo "wsl_exe = %wsl_exe%"
 %endfunction%
