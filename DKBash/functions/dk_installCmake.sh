@@ -31,41 +31,41 @@ dk_installCmake() {
 	
 	dk_call dk_validate Host_Os "dk_call dk_Host_Os"	
 	######################################################################################################
-	#[ "${Host_Os}" = "Android" ]                		&& CMAKE_IMPORT=cmake
-	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
-	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& CMAKE_IMPORT=${CMake_Linux_Arm64_Import}
-	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& CMAKE_IMPORT=${CMake_Linux_X86_64_Import}
-	[ "${Host_Os}" = "Mac" ]                     		&& CMAKE_IMPORT=${CMake_Mac_X86_64_Import}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm32_Import}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& CMAKE_IMPORT=${CMake_Windows_Arm64_Import}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& CMAKE_IMPORT=${CMake_Windows_X86_Import}
-	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ] 	&& CMAKE_IMPORT=${CMake_Windows_X86_64_Import}
+	#[ "${Host_Os}" = "Android" ]                		&& cmake_Import=cmake
+	[ "${Host_Tuple}" = "Linux_Arm64" ]         		&& cmake_Import=${CMake_Linux_Arm64_Import}
+	[ "${Host_Tuple}" = "Raspberry_Arm64" ]     		&& cmake_Import=${CMake_Linux_Arm64_Import}
+	[ "${Host_Tuple}" = "Linux_X86_64" ]        		&& cmake_Import=${CMake_Linux_X86_64_Import}
+	[ "${Host_Os}" = "Mac" ]                     		&& cmake_Import=${CMake_Mac_X86_64_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm32" ]  	&& cmake_Import=${CMake_Windows_Arm32_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_Arm64" ]  	&& cmake_Import=${CMake_Windows_Arm64_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86" ]    	&& cmake_Import=${CMake_Windows_X86_Import}
+	[ "${Host_Os}_${Host_Arch}" = "Windows_X86_64" ] 	&& cmake_Import=${CMake_Windows_X86_64_Import}
 
-	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 		&& CMAKE_IMPORT=cmake
-	#[ "${Target_Tuple-}" = "Android_Arm32" ]			&& CMAKE_IMPORT=cmake
-	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake
-	#[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& CMAKE_IMPORT=mingw-w64-clang-i686-cmake
-	#[ "${Target_Tuple-}" = "Windows_X86_Gcc" ]			&& CMAKE_IMPORT=mingw-w64-i686-cmake
-	#[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]	&& CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake
-	#[ "${Target_Tuple-}" = "Windows_X86_64_Gcc" ]		&& CMAKE_IMPORT=mingw-w64-x86_64-cmake
-	#[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake
-	[ -z ${CMAKE_IMPORT-} ]								&& CMAKE_IMPORT=cmake  #Default
-	dk_call dk_assertVar CMAKE_IMPORT
+	[ "${WSL_DISTRO_NAME-}" = "Alpine" ]		 		&& cmake_Import=cmake
+	#[ "${Target_Tuple-}" = "Android_Arm32" ]			&& cmake_Import=cmake
+	#[ "${Target_Tuple-}" = "Windows_Arm64_Clang" ]		&& cmake_Import=mingw-w64-clang-aarch64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_Clang" ]		&& cmake_Import=mingw-w64-clang-i686-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_Gcc" ]			&& cmake_Import=mingw-w64-i686-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_Clang" ]	&& cmake_Import=mingw-w64-clang-x86_64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_Gcc" ]		&& cmake_Import=mingw-w64-x86_64-cmake
+	#[ "${Target_Tuple-}" = "Windows_X86_64_Ucrt" ]		&& cmake_Import=mingw-w64-ucrt-x86_64-cmake
+	[ -z ${cmake_Import-} ]								&& cmake_Import=cmake  #Default
+	dk_call dk_assertVar cmake_Import
 	
-	if dk_call dk_isUrl "${CMAKE_IMPORT}"; then
+	if dk_call dk_isUrl "${cmake_Import}"; then
 		dk_call dk_info "Installing CMake from file download"
 		
-		CMAKE_IMPORT_FILE=$(dk_call dk_basename "${CMAKE_IMPORT}")
-		dk_call dk_removeExtension ${CMAKE_IMPORT_FILE} CMAKE_FOLDER
-		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
-		dk_call dk_toLower ${CMAKE_FOLDER} CMAKE_FOLDER
+		cmake_Import_File=$(dk_call dk_basename "${cmake_import}")
+		dk_call dk_removeExtension ${cmake_Import_File} cmake_Folder
+		#dk_call dk_convertToCIdentifier "${cmake_Folder}" cmake_Folder
+		dk_call dk_toLower ${cmake_Folder} cmake_Folder
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-		CMAKE_DIR="${DKTOOLS_DIR}/${CMAKE_FOLDER}"
+		cmake="${DKTOOLS_DIR}/${cmake_Folder}"
 		
-		[ "${Host_Os}" = "Windows" ]   && cmake_exe=${CMAKE_DIR}/bin/cmake.exe
-		[ "${Host_Os}" = "Mac" ]       && cmake_exe=${CMAKE_DIR}/CMake.app/Contents/bin/cmake
-		[ "${Host_Os}" = "Linux" ]     && cmake_exe=${CMAKE_DIR}/bin/cmake
-		[ "${Host_Os}" = "Raspberry" ] && cmake_exe=${CMAKE_DIR}/bin/cmake
+		[ "${Host_Os}" = "Windows" ]   && cmake_exe=${cmake}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && cmake_exe=${cmake}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && cmake_exe=${cmake}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && cmake_exe=${cmake}/bin/cmake
 		[ -z ${cmake_exe} ]            && dk_call dk_error "no cmake found for this OS"
 		dk_call dk_assertVar cmake_exe
 		
@@ -74,12 +74,12 @@ dk_installCmake() {
 		dk_call dk_echo
 		dk_call dk_info "Installing cmake . . ."
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-		dk_call dk_download "${CMAKE_IMPORT}" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
-		#dk_call dk_extract "${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
-		dk_call dk_smartExtract	"${DKDOWNLOAD_DIR}/${CMAKE_IMPORT_FILE}" "${CMAKE_DIR}"
+		dk_call dk_download "${cmake_Import}" "${DKDOWNLOAD_DIR}"/"${cmake_Import_File}"
+		#dk_call dk_extract "${dk_download}" "${DKTOOLS_DIR}"
+		dk_call dk_smartExtract	"${dk_download}" "${cmake}"
 		
-		#dk_call dk_removeExtension ${CMAKE_IMPORT_FILE} CMAKE_DL_NAME
-		#dk_call dk_rename "${DKTOOLS_DIR}/${CMAKE_DL_NAME}" "${CMAKE_DIR}"
+		#dk_call dk_removeExtension ${cmake_Import_File} cmake_Import_Name
+		#dk_call dk_rename "${DKTOOLS_DIR}/${cmake_Import_Name}" "${cmake}"
         
 		dk_call dk_pathExists "${cmake_exe}" || dk_call dk_error "cannot find cmake"
 
@@ -90,7 +90,7 @@ dk_installCmake() {
 		#dk_call dk_pathExists ${cmake_exe} && cmake_exe=$(realpath ${cmake_exe})
 		#dk_call dk_realpath ${cmake_exe} cmake_exe
 		#dk_call dk_printVar cmake_exe
-		dk_call dk_commandExists cmake || dk_call dk_installPackage ${CMAKE_IMPORT}
+		dk_call dk_commandExists cmake || dk_call dk_installPackage ${cmake_Import}
 		export cmake_exe="$(command -v cmake)"
 		#cmake_exe=$(dk_call dk_realpath "${cmake_exe}")
 		dk_call dk_assertVar cmake_exe

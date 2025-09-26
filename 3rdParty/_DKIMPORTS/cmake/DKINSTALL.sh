@@ -39,15 +39,15 @@ DKINSTALL() {
 		dk_call dk_info "Installing CMake from direct download"
 		
 		dk_call dk_basename "${cmake_Import}" cmake_Import_FILE
-		dk_call dk_removeExtension "${cmake_Import_FILE}" CMAKE_FOLDER
-		#dk_call dk_convertToCIdentifier "${CMAKE_FOLDER}" CMAKE_FOLDER
-		dk_call dk_toLower "${CMAKE_FOLDER}" CMAKE_FOLDER
+		dk_call dk_removeExtension "${cmake_Import_FILE}" cmake_Install_Folder
+		#dk_call dk_convertToCIdentifier "${cmake_Install_Folder}" cmake_Install_Folder
+		dk_call dk_toLower "${cmake_Install_Folder}" cmake_Install_Folder
 		
 		dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
-		[ "${Host_Os}" = "Windows" ]   && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake.exe
-		[ "${Host_Os}" = "Mac" ]       && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/CMake.app/Contents/bin/cmake
-		[ "${Host_Os}" = "Linux" ]     && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
-		[ "${Host_Os}" = "Raspberry" ] && export cmake_exe=${DKTOOLS_DIR}/${CMAKE_FOLDER}/bin/cmake
+		[ "${Host_Os}" = "Windows" ]   && export cmake_exe=${DKTOOLS_DIR}/${cmake_Install_Folder}/bin/cmake.exe
+		[ "${Host_Os}" = "Mac" ]       && export cmake_exe=${DKTOOLS_DIR}/${cmake_Install_Folder}/CMake.app/Contents/bin/cmake
+		[ "${Host_Os}" = "Linux" ]     && export cmake_exe=${DKTOOLS_DIR}/${cmake_Install_Folder}/bin/cmake
+		[ "${Host_Os}" = "Raspberry" ] && export cmake_exe=${DKTOOLS_DIR}/${cmake_Install_Folder}/bin/cmake
 		[ -z ${cmake_exe} ]            && dk_call dk_error "no cmake for this OS"
 		dk_call dk_printVar cmake_exe
 		
@@ -59,8 +59,8 @@ DKINSTALL() {
 		dk_call dk_download "${cmake_Import}" "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}"
 		#dk_call dk_extract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
 		#dk_call dk_removeExtension ${cmake_Import_NAME} cmake_Import_NAME
-		#dk_call dk_rename "${DKTOOLS_DIR}/${cmake_Import_NAME}" "${CMAKE_FOLDER}"
-		#echo ${CMAKE_FOLDER}>"${DKTOOLS_DIR}\${CMAKE_FOLDER}\installed"
+		#dk_call dk_rename "${DKTOOLS_DIR}/${cmake_Import_NAME}" "${cmake_Install_Folder}"
+		#echo ${cmake_Install_Folder}>"${DKTOOLS_DIR}\${cmake_Install_Folder}\installed"
 		dk_call dk_smartExtract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
 		dk_call dk_pathExists "${cmake_exe}" || dk_call dk_error "cannot find cmake.exe"; return -1
 

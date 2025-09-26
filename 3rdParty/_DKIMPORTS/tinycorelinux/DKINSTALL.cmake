@@ -50,7 +50,7 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 
 	### Create the virtual image (10gb)
 	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-img create -f qcow2 tinycore.img 10G
-	dk_exec(${QEMU_IMG_EXE} create -f qcow2 tinycore.img 10G)
+	dk_exec(${qemu_img_exe} create -f qcow2 tinycore.img 10G)
 
 	### Launching the VM
 	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl

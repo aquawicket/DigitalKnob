@@ -18,23 +18,23 @@ include_guard()
 
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${EMBED_IMPORT} NAME embed)
+dk_import		(${embed_Import} NAME embed)
 
 dk_depend(tbb)
 
 
 ### LINK ###
-dk_include			(${EMBED}/include)
+dk_include			(${embed}/include)
 if(MSVC)
-	dk_libDebug		(${EMBED_Debug_Dir}/embed.lib)
-	dk_libRelease	(${EMBED_Release_Dir}/embed.lib)
+	dk_libDebug		(${embed_Debug_Dir}/embed.lib)
+	dk_libRelease	(${embed_Release_Dir}/embed.lib)
 else()
-	dk_libDebug		(${EMBED_Debug_Dir}/libembed.a)
-	dk_libRelease	(${EMBED_Release_Dir}/libembed.a)
+	dk_libDebug		(${embed_Debug_Dir}/libembed.a)
+	dk_libRelease	(${embed_Release_Dir}/libembed.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${EMBED} ${TBB_CMAKE}) # -fexperimental-library
+dk_configure(${embed} ${tbb_Cmake}) # -fexperimental-library
 
 
 ### COMPILE ###

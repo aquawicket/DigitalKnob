@@ -17,7 +17,7 @@ case "$HOST_ARCH" in
     ;;
 esac
 
-HOST_EXE=""
+Host_Exe=""
 Host_Os=`uname -s`
 case "$Host_Os" in
     Darwin)
@@ -31,7 +31,7 @@ case "$Host_Os" in
         ;;
     CYGWIN*|*_NT-*)
         Host_Os=windows
-        HOST_EXE=.exe
+        Host_Exe=.exe
         if [ "x$OSTYPE" = xcygwin ] ; then
             Host_Os=cygwin
         fi

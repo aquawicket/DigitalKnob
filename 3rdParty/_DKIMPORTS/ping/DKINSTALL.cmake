@@ -16,6 +16,6 @@ include_guard()
 # https://github.com/sryze/ping/archive/refs/heads/master.zip
 
 ### INSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ping/dkconfig.txt")
-dk_import			(${PING_IMPORT} NAME ping)
+dk_import			(${ping_Import} NAME ping)

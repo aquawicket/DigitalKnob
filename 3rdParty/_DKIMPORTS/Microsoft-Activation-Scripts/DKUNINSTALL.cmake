@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${MICROSOFT-ACTIVATION-SCRIPTS_IMPORT} NAME Microsoft-Activation-Scripts)
-dk_delete			("${MICROSOFT-ACTIVATION-SCRIPTS}")
+dk_importVariables	(${Microsoft-Activation-Scripts_Import} NAME Microsoft-Activation-Scripts)
+dk_delete			("${Microsoft-Activation-Scripts}")

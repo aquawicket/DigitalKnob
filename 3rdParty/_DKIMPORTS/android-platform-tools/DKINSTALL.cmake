@@ -64,8 +64,8 @@ endif()
 
 
 if(Windows_Host)
-	dk_set(ADB_EXE "${android-sdk}/platform-tools/adb.exe")
-	dk_assertPath(ADB_EXE)
+	dk_set(adb_exe "${android-sdk}/platform-tools/adb.exe")
+	dk_assertPath(adb_exe)
 endif()
 
 # 34.0.3

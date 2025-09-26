@@ -17,4 +17,4 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${KSODARI-BATCH-FILES_IMPORT} NAME ksodari-Batch-files)
+dk_import			(${ksodari-Batch-files_Import})

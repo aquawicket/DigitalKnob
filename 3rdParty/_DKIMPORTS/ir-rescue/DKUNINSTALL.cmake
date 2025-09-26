@@ -16,7 +16,7 @@ include_guard()
 # https://github.com/diogo-fernan/ir-rescue/archive/refs/heads/master.zip
 
 ### UnINSTALL ###
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
+dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ir-rescue/dkconfig.txt")
-dk_importVariables	(${IR-RESCUE_IMPORT} NAME ir-rescue)
-dk_delete			("${IR-RESCUE}")
+dk_importVariables	(${ir-rescue_Import})
+dk_delete			("${ir-rescue}")

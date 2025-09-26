@@ -18,7 +18,7 @@ include_guard()
 
 ### UNINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	("${KEYLOGGER_IMPORT}" NAME keylogger)
+dk_importVariables	("${keylogger_Import}")
 
 # TODO - kill keylogger process
-dk_delete("${KEYLOGGER}")
+dk_delete("${keylogger}")

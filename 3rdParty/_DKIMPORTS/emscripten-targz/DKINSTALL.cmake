@@ -17,5 +17,5 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${EMSCRIPTEN-TARGZ_IMPORT})
-dk_copy				("${CMAKE_CURRENT_LIST_DIR}/RUN.cmd" "${EMSCRIPTEN-TARGZ}/RUN.cmd" OVERWRITE)
+dk_import			(${emscripten-Targz_Import})
+dk_copy				("${CMAKE_CURRENT_LIST_DIR}/RUN.cmd" "${emscripten-TARGZ}/RUN.cmd" OVERWRITE)

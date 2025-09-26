@@ -18,10 +18,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_import APP
 	%dk_call% dk_assertVar QEMU
 
-	%dk_call% dk_set QEMU_IMG_EXE %QEMU%/qemu-img.exe
+	%dk_call% dk_set qemu_img_exe %QEMU%/qemu-img.exe
 	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU%/qemu-system-x86_64.exe
 	
-	if EXIST "%QEMU_IMG_EXE%" (%return%)
+	if EXIST "%qemu_img_exe%" (%return%)
 	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."
 	
 	::C:\Users\Administrator\DigitalKnob\download\qemu-w64-setup-20250806.exe /D=C:\Users\Administrator\DigitalKnob\DKTools\qemu-w64-setup-20250806
@@ -31,6 +31,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_exec %dk_download:/=\% /D=%QEMU_WIN%
 	%dk_download:/=\% /S /D=%QEMU_WIN%
 	
-	%dk_call% dk_assertPath "%QEMU_IMG_EXE%"
+	%dk_call% dk_assertPath "%qemu_img_exe%"
 %endfunction%
 

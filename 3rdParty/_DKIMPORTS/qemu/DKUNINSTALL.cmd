@@ -1,6 +1,6 @@
 @echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFile%/DigitalKnob/Development/DKBatch/functions/)
+if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFile%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
@@ -9,24 +9,24 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# DKUNINSTALL()
 ::#
 ::#	  windows uninstall registry location
-::#   HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
+::#   HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\qemu
 ::#
 :DKUNINSTALL
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	if defined Windows_X86_Host      (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
-	if defined Windows_X86_64_Host   (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe")
+	if defined Windows_X86_Host      (set "qemu_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
+	if defined Windows_X86_64_Host   (set "qemu_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe")
 	
-	%dk_call% dk_basename %QEMU_DL% QEMU_IMPORT_FILE
-    %dk_call% dk_removeExtension %QEMU_IMPORT_FILE% QEMU_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
-    %dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
+	%dk_call% dk_basename %qemu_DL% qemu_Import_File
+    %dk_call% dk_removeExtension %qemu_Import_File% qemu_Install_Name
+    ::%dk_call% dk_convertToCIdentifier %qemu_Install_Name% qemu_Install_Name
+    %dk_call% dk_toLower %qemu_Install_Name% qemu_Install_Name
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
+	%dk_call% dk_set qemu_DIR %DKTOOLS_DIR%\%qemu_Install_Name%
 	
-	%dk_call% dk_info "%QEMU_DIR%\qemu-uninstall.exe"
-	%dk_call% "%QEMU_DIR%\qemu-uninstall.exe"
+	%dk_call% dk_info "%qemu_DIR%\qemu-uninstall.exe"
+	%dk_call% "%qemu_DIR%\qemu-uninstall.exe"
 %endfunction%
 
 

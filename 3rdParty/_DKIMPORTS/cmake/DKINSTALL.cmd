@@ -33,6 +33,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	:: Add cmake to git_bash (symlink)
 	::%dk_call% dk_validate bash_exe "%dk_call% dk_depend git"
-	::%bash_exe% -c "ln ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/bin/cmake /usr/bin/cmake"
-	::%bash_exe% -c "ln -s ${HOME}/DigitalKnob/DKTools/%CMAKE_FOLDER%/share/cmake-3.29 /usr/share/cmake-3.29"
+	::%bash_exe% -c "ln ${HOME}/DigitalKnob/DKTools/%cmake_Install_Folder%/bin/cmake /usr/bin/cmake"
+	::%bash_exe% -c "ln -s ${HOME}/DigitalKnob/DKTools/%cmake_Install_Folder%/share/cmake-3.29 /usr/share/cmake-3.29"
 %endfunction%

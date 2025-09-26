@@ -15,15 +15,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
 	
-	set "PYTHON3_IMPORT=!Python3_%Host_Tuple%_Import!"
-::	if NOT defined PYTHON3_IMPORT	(set "PYTHON3_IMPORT=python3")
+	set "python3_Import=!Python3_%Host_Tuple%_Import!"
+::	if NOT defined python3_Import	(set "python3_Import=python3")
 	
-	::%dk_call% dk_isUrl %PYTHON3_IMPORT% && (
-		%dk_call% dk_importVariables "%PYTHON3_IMPORT%" IMPORT_PATH %~dp0
+	::%dk_call% dk_isUrl %python3_Import% && (
+		%dk_call% dk_importVariables "%python3_Import%" IMPORT_PATH %~dp0
 	::)
 
 	:: UNINSTALL
-	%dk_call% dk_delete "%PYTHON3%"
+	%dk_call% dk_delete "%python3%"
 	
 %endfunction%
 

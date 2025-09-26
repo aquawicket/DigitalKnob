@@ -76,13 +76,13 @@ cyan="\033[36m"
 white="\033[37m"
 
 
-CMake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
-CMake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
-#CMake_Mac10_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
-CMake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
-CMake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-arm64.zip
-CMake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
-CMake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-i386.zip
+cmake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
+cmake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
+#cmake_Mac10_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
+cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-macos-universal.tar.gz
+cmake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-arm64.zip
+cmake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
+cmake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/dk_download/v3.29.5/cmake-3.29.5-windows-i386.zip
 
 Git_Windows_X86_Import=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe
 Git_Windows_X86_64_Import=https://github.com/git-for-windows/git/releases/dk_download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe
@@ -784,50 +784,50 @@ dk_installCmake() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	######################################################################################################
-	if [ "${Host_Os}" 		= "Android" ]; 				then CMAKE_IMPORT=cmake;							fi
-	if [ "${Host_Tuple}" 	= "Windows_Arm32" ];		then CMAKE_IMPORT=$CMake_Windows_Arm32_Import;				fi
-	if [ "${Host_Tuple}" 	= "Windows_Arm64" ];		then CMAKE_IMPORT=$CMake_Windows_Arm64_Import;				fi
-	if [ "${Host_Tuple}" 	= "Windows_X86" ];			then CMAKE_IMPORT=$CMake_Windows_X86_Import;				fi
-	if [ "${Host_Tuple}"	= "Windows_X86_64" ];		then CMAKE_IMPORT=$CMake_Windows_X86_Import_64;				fi
-	if [ "${Host_Os}" 		= "Mac" ];					then CMAKE_IMPORT=$CMake_Mac_X86_64_Import;					fi
-	if [ "${Host_Tuple}" 	= "Linux_X86_64" ];			then CMAKE_IMPORT=$CMake_Linux_X86_64_Import;			fi
-	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];			then CMAKE_IMPORT=$CMake_Linux_Arm64_Import;			fi
-	if [ "${Host_Tuple}" 	= "Raspberry_Arm64" ];		then CMAKE_IMPORT=$CMake_Linux_Arm64_Import;			fi
-	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 		then CMAKE_IMPORT=cmake;							fi
-	if [ "${Target_Tuple}" 	= "Windows_Arm64_Clang" ]; 	then CMAKE_IMPORT=mingw-w64-clang-aarch64-cmake;	fi
-	if [ "${Target_Tuple}" 	= "Windows_X86_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-i686-cmake;		fi
-	if [ "${Target_Tuple}" 	= "Windows_X86_Gcc" ]; 		then CMAKE_IMPORT=mingw-w64-i686-cmake;				fi
-	if [ "${Target_Tuple}"	= "Windows_X86_64_Clang" ];	then CMAKE_IMPORT=mingw-w64-clang-x86_64-cmake;		fi
-	if [ "${Target_Tuple}" 	= "Windows_X86_64_Gcc" ];	then CMAKE_IMPORT=mingw-w64-x86_64-cmake;			fi
-	if [ "${Target_Tuple}" 	= "Windows_X86_64_Ucrt" ]; 	then CMAKE_IMPORT=mingw-w64-ucrt-x86_64-cmake;		fi
+	if [ "${Host_Os}" 		= "Android" ]; 				then cmake_Import=cmake;							fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm32" ];		then cmake_Import=$cmake_Windows_Arm32_Import;				fi
+	if [ "${Host_Tuple}" 	= "Windows_Arm64" ];		then cmake_Import=$cmake_Windows_Arm64_Import;				fi
+	if [ "${Host_Tuple}" 	= "Windows_X86" ];			then cmake_Import=$cmake_Windows_X86_Import;				fi
+	if [ "${Host_Tuple}"	= "Windows_X86_64" ];		then cmake_Import=$cmake_Windows_X86_Import_64;				fi
+	if [ "${Host_Os}" 		= "Mac" ];					then cmake_Import=$cmake_Mac_X86_64_Import;					fi
+	if [ "${Host_Tuple}" 	= "Linux_X86_64" ];			then cmake_Import=$cmake_Linux_X86_64_Import;			fi
+	if [ "${Host_Tuple}" 	= "Linux_Arm64" ];			then cmake_Import=$cmake_Linux_Arm64_Import;			fi
+	if [ "${Host_Tuple}" 	= "Raspberry_Arm64" ];		then cmake_Import=$cmake_Linux_Arm64_Import;			fi
+	if [ "${Target_Tuple}" 	= "Android_Arm32" ]; 		then cmake_Import=cmake;							fi
+	if [ "${Target_Tuple}" 	= "Windows_Arm64_Clang" ]; 	then cmake_Import=mingw-w64-clang-aarch64-cmake;	fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_Clang" ];	then cmake_Import=mingw-w64-clang-i686-cmake;		fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_Gcc" ]; 		then cmake_Import=mingw-w64-i686-cmake;				fi
+	if [ "${Target_Tuple}"	= "Windows_X86_64_Clang" ];	then cmake_Import=mingw-w64-clang-x86_64-cmake;		fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_64_Gcc" ];	then cmake_Import=mingw-w64-x86_64-cmake;			fi
+	if [ "${Target_Tuple}" 	= "Windows_X86_64_Ucrt" ]; 	then cmake_Import=mingw-w64-ucrt-x86_64-cmake;		fi
 	
-	dk_printVar CMAKE_IMPORT
-	if dk_url ${CMAKE_IMPORT}; then
+	dk_printVar cmake_Import
+	if dk_url ${cmake_Import}; then
 		dk_info "Installing CMake from dl files"
-		dk_printVar CMAKE_IMPORT
+		dk_printVar cmake_Import
 		
-		dk_basename "$CMAKE_IMPORT" CMAKE_IMPORT_FILE
-		dk_printVar CMAKE_IMPORT_FILE
+		dk_basename "$cmake_Import" cmake_Import_FILE
+		dk_printVar cmake_Import_FILE
 		
-		CMAKE_FOLDER="${CMAKE_IMPORT_FILE%.*}"		# remove everything past last dot
-		dk_printVar CMAKE_FOLDER
-		dk_debug "CMAKE_IMPORT_FILE extension = ${CMAKE_FOLDER##*.}"
-		if [ "${CMAKE_FOLDER##*.}" = "tar" ]; then
-			CMAKE_FOLDER="${CMAKE_FOLDER%.*}"	# .tar.?? files remove past the last TWO dots
+		cmake_Install_Folder="${cmake_Import_FILE%.*}"		# remove everything past last dot
+		dk_printVar cmake_Install_Folder
+		dk_debug "cmake_Import_FILE extension = ${cmake_Install_Folder##*.}"
+		if [ "${cmake_Install_Folder##*.}" = "tar" ]; then
+			cmake_Install_Folder="${cmake_Install_Folder%.*}"	# .tar.?? files remove past the last TWO dots
 		fi
 		
-		#dk_convertToCIdentifier "$CMAKE_FOLDER" CMAKE_FOLDER
-		dk_toLower CMAKE_FOLDER
-		dk_printVar CMAKE_FOLDER
+		#dk_convertToCIdentifier "$cmake_Install_Folder" cmake_Install_Folder
+		dk_toLower cmake_Install_Folder
+		dk_printVar cmake_Install_Folder
 		
 		if [ "${Host_Os}" = "Windows" ]; then
-			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake.exe
+			cmake_exe=${DKTOOLS_DIR}/$cmake_Install_Folder/bin/cmake.exe
 		elif [ "${Host_Os}" = "Mac" ]; then
-			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/CMake.app/Contents/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$cmake_Install_Folder/CMake.app/Contents/bin/cmake
 		elif [ "${Host_Os}" = "Linux" ]; then
-			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$cmake_Install_Folder/bin/cmake
 		elif [ "${Host_Os}" = "Raspberry" ]; then
-			cmake_exe=${DKTOOLS_DIR}/$CMAKE_FOLDER/bin/cmake
+			cmake_exe=${DKTOOLS_DIR}/$cmake_Install_Folder/bin/cmake
 		else
 			dk_error "no cmake for this OS"
 		fi
@@ -839,8 +839,8 @@ dk_installCmake() {
 
 		dk_echo
 		dk_info "Installing cmake . . ."
-		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}"
-		dk_extract "${DKDOWNLOAD_DIR}"/"${CMAKE_IMPORT_FILE}" "${DKTOOLS_DIR}"
+		dk_download "$CMAKE_DL" "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}"
+		dk_extract "${DKDOWNLOAD_DIR}"/"${cmake_Import_FILE}" "${DKTOOLS_DIR}"
 		
 		#if ! dk_pathExists ${cmake_exe}; then error "cannot find cmake"; fi
 
@@ -850,7 +850,7 @@ dk_installCmake() {
 		cmake_exe=$(command -v cmake)
 		dk_printVar cmake_exe
 		if ! dk_commandExists cmake; then
-			dk_installPackage ${CMAKE_IMPORT}
+			dk_installPackage ${cmake_Import}
 		fi	
 		cmake_exe=$(command -v cmake)
 		dk_printVar cmake_exe

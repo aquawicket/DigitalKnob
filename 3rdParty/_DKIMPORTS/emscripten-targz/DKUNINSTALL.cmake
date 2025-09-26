@@ -18,5 +18,5 @@ include_guard()
 ### UnINSTALL ###
 dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/emscripten-targz/dkconfig.txt")
-dk_importVariables	(${EMSCRIPTEN-TARGZ_IMPORT} NAME emscripten-targz)
-dk_delete			("${EMSCRIPTEN-TARGZ}")
+dk_importVariables	(${emscripten-TARGZ_Import} NAME emscripten-targz)
+dk_delete			("${emscripten-TARGZ}")

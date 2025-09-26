@@ -29,6 +29,6 @@ dk_installPackage(tbb)
 
 # MSYS2 (-ltbb)
 if(MSYSTEM)
-	dk_set(TBB_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-ltbb")
+	dk_set(tbb_Cmake "-DCMAKE_EXE_LINKER_FLAGS=-ltbb")
 endif()
 	

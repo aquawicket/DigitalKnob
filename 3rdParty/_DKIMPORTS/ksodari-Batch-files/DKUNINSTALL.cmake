@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${KSODARI-BATCH-FILES_IMPORT} NAME ksodari-Batch-files)
-dk_delete			("${KSODARI-BATCH-FILES}")
+dk_importVariables	(${ksodari-Batch-files_Import})
+dk_delete			("${ksodari-Batch-files}")

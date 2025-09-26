@@ -63,14 +63,14 @@ dk_mkdir("${msys2_CacheDir}")
 
 ### exe installer ###
 #if((NOT DEFINED DKUPDATE) AND (EXISTS "${msys2}/msys2.exe"))
-#	dk_notice("${msys2_FOLDER} is already installed, returning")
+#	dk_notice("${msys2_Install_Name} is already installed, returning")
 #	return()
 #else()
-#	dk_info("Installing ${msys2_FOLDER}")
-#	dk_import(${msys2_IMPORT})
+#	dk_info("Installing ${msys2_Install_Name}")
+#	dk_import(${msys2_Import})
 #	
 #	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-#	#dk_download(${msys2_IMPORT} $ENV{DKDOWNLOAD_DIR})
-#	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${msys2_IMPORT_FILE}" install --root "${msys2}" --confirm-command)
+#	#dk_download(${msys2_Import})
+#	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${msys2_Import_File}" install --root "${msys2}" --confirm-command)
 #endif()
 

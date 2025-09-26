@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${DEBLOAT-WINDOWS-10_IMPORT} NAME Debloat-Windows-10)
-dk_delete			("${DEBLOAT-WINDOWS-10}")
+dk_importVariables	(${Debloat-Windows-10_Import})
+dk_delete			("${Debloat-Windows-10}")

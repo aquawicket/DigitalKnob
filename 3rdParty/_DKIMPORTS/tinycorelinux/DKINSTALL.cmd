@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
 	%dk_call% dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% dk_depend qemu"
+	%dk_call% dk_validate qemu_img_exe "%dk_call% dk_depend qemu"
 	
 	%setlocal%
 		if EXIST "%TINYCORELINUX_IMG%" (%return%)
@@ -50,7 +50,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_info ". A LAUNCH shortcut will be created the int DKTools/TinyCoreLinux directory"
 		
 		::###### Create the virtual image (10gb) ######
-		%QEMU_IMG_EXE% create -f qcow2 %TINYCORELINUX_IMG% 10G
+		%qemu_img_exe% create -f qcow2 %TINYCORELINUX_IMG% 10G
 		
 		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"

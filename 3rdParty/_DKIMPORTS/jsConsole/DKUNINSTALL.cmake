@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${JSCONSOLE_IMPORT} NAME jsConsole)
-dk_delete			("${JSCONSOLE}")
+dk_ImportVariables	(${jsConsole_Import} NAME jsConsole)
+dk_delete			("${jsConsole}")

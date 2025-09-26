@@ -35,11 +35,11 @@ function Global:DKINSTALL() {
 
     
     ${cmake_Import_FILE} = dk_call dk_basename ${cmake_Import}
-	${CMAKE_FOLDER} = dk_call dk_removeExtension ${cmake_Import_FILE}
-    #${CMAKE_FOLDER} = dk_call dk_convertToCIdentifier ${CMAKE_FOLDER} 
-    #${CMAKE_FOLDER} = dk_call dk_toLower ${CMAKE_FOLDER}
+	${cmake_Install_Folder} = dk_call dk_removeExtension ${cmake_Import_FILE}
+    #${cmake_Install_Folder} = dk_call dk_convertToCIdentifier ${cmake_Install_Folder} 
+    #${cmake_Install_Folder} = dk_call dk_toLower ${cmake_Install_Folder}
 	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR";
-	$global:CMAKE_DIR = "$DKTOOLS_DIR/$CMAKE_FOLDER";
+	$global:CMAKE_DIR = "$DKTOOLS_DIR/$cmake_Install_Folder";
     $global:cmake_exe = "$CMAKE_DIR/bin/cmake.exe";
         
     if(dk_call dk_pathExists ${cmake_exe}){ return }

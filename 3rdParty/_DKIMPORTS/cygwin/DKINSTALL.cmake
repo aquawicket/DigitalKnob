@@ -24,29 +24,29 @@ endif()
 
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${cygwin_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_assertVar(CYGWIN)
-dk_set(CYGWIN_EXE "${CYGWIN}/Cygwin.bat")
+dk_assertVar(cygwin)
+dk_set(cygwin_EXE "${cygwin}/Cygwin.bat")
 
 
-if(NOT EXISTS "${CYGWIN}/bin/${CYGWIN_Url_Filename}")
-	dk_echo("Installing ${CYGWIN_Install_Name}")
+if(NOT EXISTS "${cygwin}/bin/${cygwin_Url_Filename}")
+	dk_echo("Installing ${cygwin_Install_Name}")
 		
 	### Download ###
-	dk_download(${CYGWIN_Url})
+	dk_download(${cygwin_Url})
 		
 	### FirewallAllow ###
 	dk_firewallAllow("${dk_download}") # cygwin setup-x86_64.exe
 		
 	### Install Cygwin ###
 	# "C:\Users\Administrator\DigitalKnob\download\setup-x86_64.exe" --quiet-mode --root C:\Users\Administrator\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64
-	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_IMPORT_FILE}" --quiet-mode --site https://mirrors.163.com/cygwin/ --root ${CYGWIN})
-	dk_exec("${dk_download}" --root ${CYGWIN})
+	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${cygwin_Import_File}" --quiet-mode --site https://mirrors.163.com/cygwin/ --root ${cygwin})
+	dk_exec("${dk_download}" --root ${cygwin})
 		
 	### Install Packages ###
 	dk_exec("${dk_download}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
 		
 	### Copy Setup exe to /bin ###
-	dk_copy("${dk_download}" "${CYGWIN}/bin/${CYGWIN_Url_Filename}")   # copy the installer to use as a package manager
+	dk_copy("${dk_download}" "${cygwin}/bin/${cygwin_Url_Filename}")   # copy the installer to use as a package manager
 endif()	
 
 #if(NOT EXISTS "???")
@@ -56,7 +56,7 @@ dk_validate(cmd_exe "dk_depend(cmd)")
 set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
 dk_exec(${cmd_exe} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
 	
-#execute_process(COMMAND ${CYGWIN_EXE} & crosstool-ng-build.sh)
+#execute_process(COMMAND ${cygwin_EXE} & crosstool-ng-build.sh)
 #endif	
 		
 # Install Packages

@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${FOLDER-LOCKER_IMPORT} NAME Folder-locker)
-dk_delete			("${FOLDER-LOCKER}")
+dk_importVariables	(${Folder-locker_Import})
+dk_delete			("${Folder-locker}")

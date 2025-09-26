@@ -19,21 +19,21 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-set(NOTEPADPP_IMPORT "${NotepadPP_${Host_Tuple}_Import}")
-dk_assertVar(NOTEPADPP_IMPORT)
+set(notepadpp_Import "${NotepadPP_${Host_Tuple}_Import}")
+dk_assertVar(notepadpp_Import)
 
-dk_importVariables(${NOTEPADPP_IMPORT})
+dk_importVariables(${notepadpp_Import})
 
 ### IMPORT ###
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_set(NOTEPADPP $ENV{DKTOOLS_DIR}/${NOTEPADPP_FOLDER})
-dk_import(${NOTEPADPP_IMPORT} _PATH_ ${NOTEPADPP})
-dk_set(NOTEPADPP_EXE "${NOTEPADPP}/notepad++.exe")
-#dk_nativePath(${NOTEPADPP_EXE} NOTEPADPP_EXE_WINPATH)
+dk_set(notepadpp $ENV{DKTOOLS_DIR}/${notepadpp_Folder})
+dk_import(${notepadpp_Import} _PATH_ ${notepadpp})
+dk_set(notepadpp_exe "${notepadpp}/notepad++.exe")
+#dk_nativePath(${notepadpp_exe} notepadpp_exe_WINPATH)
 
 
 ### dark mode ###
-dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${NOTEPADPP}/config.xml OVERWRITE)
+dk_copy($ENV{DKIMPORTS_DIR}/notepadpp/dark_config.xml ${notepadpp}/config.xml OVERWRITE)
 
 
 ### dk_installNotepadppContextMenu.cmd ###

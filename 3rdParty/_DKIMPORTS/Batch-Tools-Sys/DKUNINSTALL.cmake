@@ -17,5 +17,5 @@ include_guard()
 
 ### UnINSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_importVariables	(${Batch-Tools-Sys_IMPORT} NAME Batch-Tools-Sys)
+dk_importVariables	(${Batch-Tools-Sys_Import})
 dk_delete			("${Batch-Tools-Sys}")

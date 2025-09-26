@@ -18,4 +18,4 @@ include_guard()
 ### INSTALL ###
 dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
 dk_getFileParams	("$ENV{DKIMPORTS_DIR}/ir-rescue/dkconfig.txt")
-dk_import			(${IR-RESCUE_IMPORT} NAME ir-rescue)
+dk_import			(${ir-rescue_Import} NAME ir-rescue)
