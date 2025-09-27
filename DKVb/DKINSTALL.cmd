@@ -3,7 +3,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 
 :runDKVb
 	set "cscript_exe=%~1"
-	set "WSCRIPT_EXE=%~2"
+	set "wscript_exe=%~2"
 	set "DKVB_FUNCTIONS_DIR=%~3
 	set "DKSCRIPT_PATH=%~4"
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
@@ -15,7 +15,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	"%ComSpec%" /c %cscript_exe% //D //E:%ENGINE% //X //NoLogo "%DKSCRIPT_PATH:\=/%"
 	
 	::&& (echo( & echo exit_code:true %errorlevel%) || (echo( & echo exit_code:false %errorlevel%)
-	::%ComSpec% /c %WSCRIPT_EXE% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
+	::%ComSpec% /c %wscript_exe% //d //nologo //e:javascript "%DKSCRIPT_PATH%"
 
 %endfunction%
 
@@ -61,11 +61,11 @@ if "%~1" equ "" (goto:DKINSTALL)
 	%dk_call% dk_validate DKVB_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
 
 	::ftype DKVb="%ComSpec%" /c call "%~f0" "%DKVB_FUNCTIONS_DIR%" "%cscript_exe%" "%%1" %*
-	ftype DKVb=%ComSpec% /V:ON /K call "%~f0" "%cscript_exe%" "%WSCRIPT_EXE%" "%DKVB_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKVb=%ComSpec% /V:ON /K call "%~f0" "%cscript_exe%" "%wscript_exe%" "%DKVB_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKVb/DefaultIcon" "" "REG_SZ" "%cscript_exe%"
 	assoc .vbs=DKVb
 	
-	ftype DKJavascript=%ComSpec% /V:ON /K call "%~f0" "%cscript_exe%" "%WSCRIPT_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	ftype DKJavascript=%ComSpec% /V:ON /K call "%~f0" "%cscript_exe%" "%wscript_exe%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 
 
 	%dk_call% dk_success "DKVb install complete"
