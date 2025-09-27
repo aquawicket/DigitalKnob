@@ -13,14 +13,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	::### Test if already valid
-	if EXIST "%curl_exe%" ("%curl_exe%" --version 1>nul 2>nul & %return%)
-
+	if EXIST "%curl_exe%" (
+		%curl_exe% --version 1>nul 2>nul && %return%
+	)
 
 	if NOT EXIST "%curl_exe%" (set "curl_exe=%windir:\=/%/System32/curl.exe")
 	if NOT EXIST "%curl_exe%" (%dk_call% dk_findProgram curl_exe "curl.exe")
 	if NOT EXIST "%curl_exe%" (set "curl_exe=curl.exe")
 
-	
 	::### Test exists
 	if NOT EXIST "%curl_exe%" (%dk_call% dk_error "curl_exe:%curl_exe% not found" & %return%)
 	
