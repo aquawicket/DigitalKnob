@@ -65,7 +65,7 @@ setlocal disableDelayedExpansion
 endlocal
 
 	:edit_textfile
-	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_NOTEPADPP_EXE"
+	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_depend notepadpp_exe"
 	"%notepadpp_exe%" "%FUNCTION_FILE_H%"
 %endfunction%
 

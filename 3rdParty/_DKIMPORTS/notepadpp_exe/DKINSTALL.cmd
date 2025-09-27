@@ -6,10 +6,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 ::####################################################################
-::# dk_NOTEPADPP_EXE()
+::# DKINSTALL()
 ::#
 ::#
-:dk_NOTEPADPP_EXE
+:DKINSTALL
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
@@ -30,16 +30,3 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %endfunction%
 
 
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-%setlocal%
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_NOTEPADPP_EXE"
-    %dk_call% dk_echo "notepadpp_exe = %notepadpp_exe%"
-%endfunction%
