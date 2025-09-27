@@ -15,25 +15,34 @@ fi
 
 
 ##################################################################################
-# dk_wslFixNet(message)
+# DKINSTALL
 #
-#    https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747
-#
-dk_wslFixNet() {
+DKINSTALL() {
 	dk_debugFunc 0
-	echo "dk_wslFixNet.sh()"
+
+	(command -v "${wslpath_exe-}" 1>/dev/null) && return $?;
 	
-	#[ ! -n "${wslpath_exe-}" ] && return
+	[ ! -e "${wslpath_exe-}" ] && wslpath_exe="/usr/bin/wslpath"
+	[ ! -e "${wslpath_exe-}" ] && wslpath_exe="C:/Windows/System32/wslpath.exe"
+	[ ! -e "${wslpath_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && wslpath_exe=$(cygpath -u "${wslpath_exe}")
+	[ ! -e "${wslpath_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && wslpath_exe=$(wslpath -u "${wslpath_exe}")
+	[ ! -e "${wslpath_exe-}" ] && dk_call dk_installPackage wslpath
+	[ ! -e "${wslpath_exe-}" ] && wslpath_exe=$(command -v wslpath)
 	
-	echo "Applying WSL internet fix"
-	#[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"
-	#[   -e "/etc/resolv.conf" ] && echo "/etc/resolv.conf already exists" && return
+	### Test exists
+	[ -e "${wslpath_exe-}" ] || { dk_call dk_error "wslpath_exe:${wslpath_exe} not found"; return $?; }
 	
-	sudo sh -c 'chown aquawicket /etc'
-	sudo sh -c 'echo "nameserver 8.8.8.8" 		 > /etc/resolv.conf'
-	sudo sh -c 'echo "[network]" 					>> /etc/wsl.conf'
-	sudo sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-	#sudo sh -c 'chattr +i /etc/resolv.conf'
+	### Test command
+	(command -v "${wslpath_exe-}" 1>/dev/null) || { dk_call dk_error "wslpath_exe:${wslpath_exe-} failed to run"; return $?; }
+	
+	###### output ######
+	export wslpath_exe=${wslpath_exe};
+#	if [ -n "${1-}" ]; then
+#		eval ${1}=${wslpath_exe};
+#	else
+		builtin echo "${wslpath_exe}";
+#	fi
+	return $?;
 }
 
 
@@ -46,6 +55,10 @@ dk_wslFixNet() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
 	dk_debugFunc 0
+
+	dk_call dk_validate wslpath_exe "dk_call dk_depend wslpath_exe"
+	dk_call dk_echo "wslpath_exe = ${wslpath_exe-}"
 	
-	dk_wslFixNet
+	dk_call dk_validate wslpath_exe "dk_call dk_depend wslpath_exe"
+	dk_call dk_echo "wslpath_exe = ${wslpath_exe-}"
 }

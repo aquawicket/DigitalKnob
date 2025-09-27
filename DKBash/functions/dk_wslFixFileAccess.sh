@@ -24,7 +24,7 @@ dk_wslFixFileAccess(){
 	dk_debugFunc 0
 	echo "dk_wslFixFileAccess.sh()"
 	
-#	[ ! -n "${WSLPATH_EXE-}" ] && return
+#	[ ! -n "${wslpath_exe-}" ] && return
 	
 	echo "Applying WSL file access fix"
 #	[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"

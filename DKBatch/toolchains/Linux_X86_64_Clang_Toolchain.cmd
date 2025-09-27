@@ -9,7 +9,7 @@ if NOT defined Linux_Host if NOT defined Windows_Host (
 
 ::###### dk_depend wsl ######
 %dk_call% dk_validate DKIMPORTS_DIR	"%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_validate wsl_exe 		"%dk_call% dk_depend wsl"
+%dk_call% dk_validate wsl_exe 		"%dk_call% dk_depend wsl_exe"
 
 ::###### convert to wsl paths ######
 %dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR

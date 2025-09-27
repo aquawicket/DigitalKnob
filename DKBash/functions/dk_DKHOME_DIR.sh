@@ -41,12 +41,12 @@ dk_DKHOME_DIR() {
 		[   -e "${CYGPATH_EXE-}" ]	&& dk_call dk_printVar CYGPATH_EXE;
 		[   -e "${CYGPATH_EXE-}" ]	&& export DKHOME_DIR=$(cygpath -u $(${cmd_exe} "/c echo %USERPROFILE% | tr -d '\r'"));
 		
-		######  USERPROFILE -> WSLPATH_EXE -> DKHOME_DIR ######
-		[ ! -e "${WSLPATH_EXE-}" ]	&& export WSLPATH_EXE=$(command -v "wslpath") || $(true);
-		[   -e "${WSLPATH_EXE}" ]	&& export USERPROFILE=$(${WSLPATH_EXE} -u $(${cmd_exe} /c echo "%USERPROFILE%" | tr -d '\r'));
-		[ ! -e "${WSLPATH_EXE}" ]	&& unset WSLPATH_EXE;
-		[   -e "${WSLPATH_EXE-}" ]	&& dk_call dk_printVar WSLPATH_EXE;
-		[   -e "${WSLPATH_EXE-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${cmd_exe} /c echo "%USERPROFILE%" | tr -d '\r'));
+		######  USERPROFILE -> wslpath_exe -> DKHOME_DIR ######
+		[ ! -e "${wslpath_exe-}" ]	&& export wslpath_exe=$(command -v "wslpath") || $(true);
+		[   -e "${wslpath_exe}" ]	&& export USERPROFILE=$(${wslpath_exe} -u $(${cmd_exe} /c echo "%USERPROFILE%" | tr -d '\r'));
+		[ ! -e "${wslpath_exe}" ]	&& unset wslpath_exe;
+		[   -e "${wslpath_exe-}" ]	&& dk_call dk_printVar wslpath_exe;
+		[   -e "${wslpath_exe-}" ]	&& export DKHOME_DIR=$(wslpath -u $(${cmd_exe} /c echo "%USERPROFILE%" | tr -d '\r'));
 		
 		### DKHOME_DIR ###
 		#[ ! -e "${DKHOME_DIR-}" ]   && [ -e "$(grep -o "/storage/....-...." /proc/mounts)" ] && export DKHOME_DIR=$(grep -o "/storage/....-...." /proc/mounts) # Android sdcard

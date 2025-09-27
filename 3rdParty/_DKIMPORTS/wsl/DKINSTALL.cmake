@@ -35,18 +35,25 @@ if(DEFINED ENV{WSL_DISTRO_NAME})
 	dk_set(WSL 1)
 endif()
 
-#dk_findProgram(wsl_exe wsl "$ENV{SystemDrive}/Windows/System32")
-if(NOT wsl_exe)
-	if(EXISTS "$ENV{SystemDrive}/Windows/System32/wsl.exe")
-		dk_set(wsl_exe "$ENV{SystemDrive}/Windows/System32/wsl.exe")
-	endif()
+
+if(NOT EXISTS "${wsl_exe}")
+	#if(EXISTS "$ENV{SystemDrive}/Windows/System32/wsl.exe")
+		set(wsl_exe "$ENV{SystemDrive}/Windows/System32/wsl.exe")
+	#endif()
 endif()
-dk_assertVar(wsl_exe)
+
+if(NOT EXISTS "${wsl_exe}")
+	dk_findProgram(wsl_exe wsl.exe)
+endif()
+dk_assertPath("${wsl_exe}")
+dk_set(wsl_exe "${wsl_exe}")
 
 
-dk_findProgram(WSLPATH_EXE wslpath)
-if(NOT WSLPATH_EXE)
-	dk_set(WSLPATH_EXE wslpath)
+
+
+if(NOT wslpath_exe)
+	dk_findProgram(wslpath_exe wslpath.exe)
 endif()
-dk_assertVar(WSLPATH_EXE)
-#execute_process(COMMAND ${WSLPATH_EXE} -m $ENV{DKPOWERSHELL_FUNCTIONS_DIR} OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR)
+dk_assertVar(wslpath_exe)
+dk_set(wslpath_exe wslpath_exe)
+#execute_process(COMMAND ${wslpath_exe} -m $ENV{DKPOWERSHELL_FUNCTIONS_DIR} OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR)

@@ -11,9 +11,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :DKINSTALL
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_depend wsl
-	
-	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
 
 	::"%wsl_exe%" --list
 	::"%wsl_exe%" --list | findstr Debian > nul 2>&1 && echo Debian Found || echo Debian NOT Found
@@ -36,7 +34,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:: start shell:AppsFolder\TheDebianProject.DebianGNULinux_76v4gfsz19hv4!debian
 	:: %dk_call% dk_startPackage "Debian"
 	
-	::%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+	::%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
 	::"%wsl_exe%" -d Debian
 %endfunction%
 

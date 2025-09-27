@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::%setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
 	
 	if EXIST "%wsl_exe%" (
 		%dk_call% dk_info "WSL already installed"
@@ -67,7 +67,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	
 	:: Step 5 - Set WSL 2 as your default version
-	wsl --set-default-version 2
+	"%wsl_exe%" --set-default-version 2
 	
 	::wsl --install --web-download --distribution Ubuntu                         
 	::wsl --install --web-download --distribution Debian

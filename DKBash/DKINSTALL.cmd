@@ -40,7 +40,7 @@ set "DKBash_Env=WSL"
 	if /i "%DKBash_Env%" equ "WSL" (set "BASH_C_DIVE=/mnt/c")
 	
 	::############ (WSL2) ############
-	if /i "%DKBash_Env%" equ "WSL2" (%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl")
+	if /i "%DKBash_Env%" equ "WSL2" (%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe")
 	if /i "%DKBash_Env%" equ "WSL2" (%dk_call% dk_assertPath wsl_exe)
 	if /i "%DKBash_Env%" equ "WSL2" (set "BASH_ICON=%wsl_exe%")
 	if /i "%DKBash_Env%" equ "WSL2" (set bash_exe="%wsl_exe%" bash)

@@ -22,7 +22,7 @@ function(dk_createShortcut shortcut_path target_path) # arguments
 	
 	set(arguments ${ARGN})
 	if(DEFINED ENV{WSL_DISTRO_NAME})
-		#execute_process(COMMAND ${WSLPATH_EXE} -m "${shortcut_path}" OUTPUT_VARIABLE shortcut_path COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+		#execute_process(COMMAND ${wslpath_exe} -m "${shortcut_path}" OUTPUT_VARIABLE shortcut_path COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		#dk_replaceAll("${shortcut_path}" "/mnt/c" "C:" shortcut_path)
 		#dk_replaceAll("${target_path}" "/mnt/c" "C:" target_path)
 	endif()

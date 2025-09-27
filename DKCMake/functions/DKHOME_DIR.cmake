@@ -49,9 +49,9 @@ function(DKHOME_DIR)
 		
 		########### from WSL ###########
 		if(NOT EXISTS "${DKHOME_DIR}")
-			set(WSLPATH_EXE "wsl.exe")
-			if(EXISTS "${WSLPATH_EXE}")
-				execute_process(COMMAND ${WSLPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+			set(wslpath_exe "wsl.exe")
+			if(EXISTS "${wslpath_exe}")
+				execute_process(COMMAND ${wslpath_exe} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 			endif()
 		endif()
 
@@ -126,15 +126,15 @@ endfunction()
 #		dk_printVar(ENV{CYGPATH_EXE})
 #	endif()
 
-#	###### WSLPATH_EXE ######
-#	if(NOT EXISTS "${WSLPATH_EXE}")
-#		dk_findProgram(WSLPATH_EXE wslpath)
+#	###### wslpath_exe ######
+#	if(NOT EXISTS "${wslpath_exe}")
+#		dk_findProgram(wslpath_exe wslpath)
 #	endif()
-#	if(NOT EXISTS "${WSLPATH_EXE}")
-#		dk_warning("WSLPATH_EXE:${WSLPATH_EXE} not found")
+#	if(NOT EXISTS "${wslpath_exe}")
+#		dk_warning("wslpath_exe:${wslpath_exe} not found")
 #	else()
-#		dk_set(WSLPATH_EXE "${WSLPATH_EXE}")		# Globalize the variable
-#		dk_printVar(WSLPATH_EXE)
-#		set(ENV{WSLPATH_EXE} "${WSLPATH_EXE}")		# Set Environment Varible
-#		dk_printVar(ENV{WSLPATH_EXE})
+#		dk_set(wslpath_exe "${wslpath_exe}")		# Globalize the variable
+#		dk_printVar(wslpath_exe)
+#		set(ENV{wslpath_exe} "${wslpath_exe}")		# Set Environment Varible
+#		dk_printVar(ENV{wslpath_exe})
 #	endif()

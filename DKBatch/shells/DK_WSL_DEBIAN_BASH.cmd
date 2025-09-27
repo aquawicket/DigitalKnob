@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %dk_call% dk_title "Digitalknob DK_WSL_DEBIAN_BASH"
 %dk_call% dk_info "############ DK_WSL_DEBIAN_BASH environment ############"
 %dk_call% dk_info ""
-%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl"
+%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
 ::%wsl_exe% -d DEBIAN -e bash -li -c "exec bash"
 %wsl_exe% -d DEBIAN -e bash -li
 
