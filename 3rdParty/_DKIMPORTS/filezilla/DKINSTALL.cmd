@@ -14,5 +14,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_import APP
 
+	%dk_call% dk_set filezilla_exe "%filezilla%/filezilla.exe"
+	%dk_call% dk_debug "filezilla_exe = %filezilla_exe%"
+	%dk_call% dk_assertPath "%filezilla_exe%"
+	pause
 %endfunction%
 
