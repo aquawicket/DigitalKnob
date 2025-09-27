@@ -15,9 +15,9 @@ include_guard()
 #########################################################################
 # dk_upxCompress(path)
 #
-#	UPX compress an executable or dynamic library file
+#	upx compress an executable or dynamic library file
 #
-#	@path		- The full path to the binary file to compress with UPX
+#	@path		- The full path to the binary file to compress with upx
 #
 function(dk_upxCompress)
 	dk_debugFunc(1)
@@ -25,18 +25,18 @@ function(dk_upxCompress)
 	set(path "${ARGV0}")
 	dk_assertPath(path)
 	dk_depend(upx)
-	unset(ENV{UPX})
+	unset(ENV{upx})
 	
-	dk_info("UPX compressing ${path}, Please wait...")
+	dk_info("upx compressing ${path}, Please wait...")
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size before UPX compression ${FILESIZE}")
+	dk_info("File size before upx compression ${FILESIZE}")
 	
-	set(comand ${UPX_EXE} -9 -v --force ${path})
+	set(comand ${upx_exe} -9 -v --force ${path})
 	dk_exec(${comand})
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size after UPX compression ${FILESIZE}")
+	dk_info("File size after upx compression ${FILESIZE}")
 endfunction()
 
 

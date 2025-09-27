@@ -12,11 +12,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 1
 	
-	set "MSHTA_EXE=%systemroot:\=/%/System32/mshta.exe"
-    %dk_call% dk_assertPath MSHTA_EXE
+	set "mshta_exe=%systemroot:\=/%/System32/mshta.exe"
+    %dk_call% dk_assertPath mshta_exe
 	
     for /f "usebackq delims=" %%i in (
-        `@"%MSHTA_EXE%" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Select Folder:',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
+        `@"%mshta_exe%" "javascript:var objShellApp = new ActiveXObject('Shell.Application');var Folder = objShellApp.BrowseForFolder(0, 'Select Folder:',1, '::{20D04FE0-3AEA-1069-A2D8-08002B30309D}');try {new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(Folder.Self.Path)};catch (e){};close();" ^
         1^|more`
     ) do set "dk_selectFolder=%%i"
 	

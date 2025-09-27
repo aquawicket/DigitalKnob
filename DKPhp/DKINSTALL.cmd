@@ -4,13 +4,13 @@
 
 :::runDKPhp
 ::	set "DKPHP_FUNCTIONS_DIR=%~1"
-::	set "PHP_EXE=%~2"
+::	set "php_exe=%~2"
 ::	set "DKSCRIPT_PATH=%~3"
 ::	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
 ::
 ::	::###### run script ######'
-::	"%ComSpec%" /V:ON /K call %PHP_EXE% "%DKSCRIPT_PATH%"
-::	::"%ComSpec%" /V:ON /K call "%PHP_EXE%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
+::	"%ComSpec%" /V:ON /K call %php_exe% "%DKSCRIPT_PATH%"
+::	::"%ComSpec%" /V:ON /K call "%php_exe%" -r "include('%DKSCRIPT_PATH:\=/%');DKTEST();"
 ::	::###### exit_code ######
 ::	if %ERRORLEVEL% neq 0 (
 ::		echo ERROR:%ERRORLEVEL%
@@ -49,11 +49,11 @@
 	::###### Install DKPhp ######
 	%dk_call% dk_echo "Installing DKPhp . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate PHP_EXE "%dk_call% dk_depend php-src"
-	%dk_call% dk_assertPath PHP_EXE
+	%dk_call% dk_validate php_exe "%dk_call% dk_depend php-src"
+	%dk_call% dk_assertPath php_exe
 
-	ftype DKPhp="%ComSpec%" /V:ON /K call %PHP_EXE% "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR/DKPhp/DefaultIcon" "" "REG_SZ" "%PHP_EXE%"
+	ftype DKPhp="%ComSpec%" /V:ON /K call %php_exe% "%%1" %*
+	%dk_call% dk_registrySetKey "HKCR/DKPhp/DefaultIcon" "" "REG_SZ" "%php_exe%"
 	assoc .php=DKPhp
 
 	%dk_call% dk_success "DKPhp install complete"

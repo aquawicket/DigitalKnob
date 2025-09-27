@@ -15,9 +15,9 @@ include_guard()
 #########################################################################
 # dk_upxDecompress(path)
 #
-#	Decompress a UPX compressed file
+#	Decompress a upx compressed file
 #
-#	@path		- The full path to the binary file to decompress with UPX
+#	@path		- The full path to the binary file to decompress with upx
 #
 function(dk_upxDecompress)
 	dk_debugFunc(1)
@@ -25,18 +25,18 @@ function(dk_upxDecompress)
 	set(path "${ARGV0}")
 	dk_assertPath(path)
 	dk_depend(upx)
-	unset(ENV{UPX})
+	unset(ENV{upx})
 	
-	dk_info("UPX decompression ${path}, Please wait...")
+	dk_info("upx decompression ${path}, Please wait...")
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size before UPX decompression ${FILESIZE}")
+	dk_info("File size before upx decompression ${FILESIZE}")
 	
-	set(comand ${UPX_EXE} -d ${path})
+	set(comand ${upx_exe} -d ${path})
 	dk_exec(${comand})
 	
 	file(SIZE "${path}" FILESIZE)
-	dk_info("File size after UPX decompression ${FILESIZE}")
+	dk_info("File size after upx decompression ${FILESIZE}")
 endfunction()
 
 

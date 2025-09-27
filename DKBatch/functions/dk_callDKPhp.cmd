@@ -16,8 +16,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_func_=%~1"
 	set "_path_=%DKPHP_FUNCTIONS_DIR:\=/%/%_func_%.php"
 	
-	%dk_call% dk_validate PHP_EXE "%dk_call% dk_depend php-src"
-	%dk_call% dk_assertPath PHP_EXE
+	%dk_call% dk_validate php_exe "%dk_call% dk_depend php-src"
+	%dk_call% dk_assertPath php_exe
 	
 	%dk_call% dk_validate DKPHP_FUNCTIONS_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_assertPath DKPHP_FUNCTIONS_DIR
@@ -33,7 +33,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	set "PAUSE_ON_EXIT=0"
 	
-	set DKCOMMAND="%PHP_EXE%" "%_path_%" %dk_allButFirstArgs%
+	set DKCOMMAND="%php_exe%" "%_path_%" %dk_allButFirstArgs%
 	
 	set "dk_exec_ECHO_OUTPUT=0"
 	set "dk_exec_ECHO_ERROR=0"

@@ -54,7 +54,7 @@ endif()
 
 
 if(Windows)
-	dk_set(UPX_EXE "${UPX}/upx.exe")
+	dk_set(upx_exe "${upx}/upx.exe")
 endif()
 
-dk_assertPath(UPX_EXE)
+dk_assertPath(upx_exe)
