@@ -35,7 +35,7 @@ function(dk_reg_exe)
 		dk_validate(cmd_exe "dk_depend(cmd_exe)")
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		
-		###### CYGPATH_EXE ######
+		###### reg_exe ######
 		if(NOT EXISTS "${reg_exe}")
 			set(reg_exe $ENV{reg_exe})
 		endif()
