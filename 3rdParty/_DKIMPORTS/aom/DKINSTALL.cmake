@@ -20,12 +20,13 @@ include_guard()
 dk_depend			(nasm)
 
 ### IMPORT ###
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${aom_Import} NAME aom)
+#dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_import			(${aom_Import} NAME aom)
+dk_import			()
 
 ### LINK ###
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
-dk_include			(${aom)
+dk_include			(${aom})
 if(MSVC)
 	dk_libDebug		(${aom_Debug_Dir}/aom.lib)
 	dk_libRelease	(${aom_Release_Dir}/aom.lib)

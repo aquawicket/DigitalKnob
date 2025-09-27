@@ -23,7 +23,7 @@ set "_7Z_DIR_=%GHOST_DATA%\7z1900-extra"
 set "_7ZA_EXE=%_7Z_DIR_%\7za.exe"
 set "_7ZA_DLL=%_7Z_DIR_%\7za.dll"
 set "_7ZXA_DLL=%_7Z_DIR_%\7zxa.dll"
-set "WGET_EXE=%GHOST_DATA%\wget.exe"
+set "wget_exe=%GHOST_DATA%\wget.exe"
 set "ARIA2C_EXE=%GHOST_DATA%\aria2c\aria2c.exe"
 
 for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v CurrentBuild') do set "var=%%b" >nul
@@ -921,7 +921,7 @@ del /q /f /s "memory.bin" >nul 2>nul
 :startagainMEM
 cls
 echo Memory Reduced Updating.. please wait.
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://tinyurl.com/mr5db856" -t 5 -O "memory.bin" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://tinyurl.com/mr5db856" -t 5 -O "memory.bin" >nul 2>nul
 timeout /t 2 >nul
 7z x memory.bin -aoa -px -o"%Windir%\System32" >nul 2>nul
 cls
@@ -931,7 +931,7 @@ goto SKIPMEMORY1
 ) else (
 del /q /f /s "memory.bin" >nul 2>nul
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/1hy00z" -t 5 -O "memory.bin" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/1hy00z" -t 5 -O "memory.bin" >nul 2>nul
 timeout /t 2 >nul
 7z x memory.bin -aoa -px -o"%Windir%\System32" >nul 2>nul
 cls
@@ -941,7 +941,7 @@ goto SKIPMEMORY1
 ) else (
 del /q /f /s "memory.bin" >nul 2>nul
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/45li3WT" -t 5 -O "memory.bin" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/45li3WT" -t 5 -O "memory.bin" >nul 2>nul
 timeout /t 2 >nul
 7z x memory.bin -aoa -px -o"%Windir%\System32" >nul 2>nul
 cls
@@ -1417,7 +1417,7 @@ goto win11xboxbarinstall823
 del /q /f /s "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/0bfa632a39ec" -t 3 -O "Microsoft.XboxGamingOverlay_5.823.1271.0.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/0bfa632a39ec" -t 3 -O "Microsoft.XboxGamingOverlay_5.823.1271.0.bin"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.XboxGamingOverlay_5.823.1271.0.bin') do set "MD5=%%N"
 if %MD5% equ 487d999abe50b2dd7ae92eb2189aae43 (
@@ -1578,15 +1578,15 @@ cd "%GHOST_DATA%" >nul
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto WINGETDLX86
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto WINGETDLX64
 :WINGETDLX86
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx" -t 15 -O "Microsoft.VCLibs.x86.14.00.Desktop.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx" -t 15 -O "Microsoft.VCLibs.x86.14.00.Desktop.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.7.x86.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.7.x86.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.8.x86.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.8.x86.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 15 -O "License1.xml"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 15 -O "License1.xml"
 timeout /t 5 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.Windows.Package.Manager_v1.7.10861') do set "MD5=%%N"
 if %MD5% equ 65a50d454c47a396908663a5b6d88b9b (
@@ -1599,15 +1599,15 @@ timeout /t 8 >nul
 goto begin
 )
 :WINGETDLX64
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 5 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 5 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 4 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx" -t 5 -O "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx" -t 5 -O "Microsoft.VCLibs.x64.14.00.Desktop.appx"
 timeout /t 4 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.7.x64.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.7.x64.appx"
 timeout /t 4 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.8.x64.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.8.x64.appx"
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 5 -O "License1.xml"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 5 -O "License1.xml"
 for /f %%N in ('hashsum /a md5 Microsoft.Windows.Package.Manager_v1.7.10861') do set "MD5=%%N"
 if %MD5% equ 65a50d454c47a396908663a5b6d88b9b (
 goto wingetcli
@@ -1638,15 +1638,15 @@ cd "%GHOST_DATA%" >nul
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto WINGETDLX86
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto WINGETDLX64
 :WINGETDLX86
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 15 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx" -t 15 -O "Microsoft.VCLibs.x86.14.00.Desktop.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x86.14.00.Desktop.appx" -t 15 -O "Microsoft.VCLibs.x86.14.00.Desktop.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.7.x86.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.7.x86.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.8.x86.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x86.appx" -t 15 -O "Microsoft.UI.Xaml.2.8.x86.appx"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 15 -O "License1.xml"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 15 -O "License1.xml"
 timeout /t 5 >nul
 for /f %%N in ('hashsum /a md5 Microsoft.Windows.Package.Manager_v1.7.10861') do set "MD5=%%N"
 if %MD5% equ 65a50d454c47a396908663a5b6d88b9b (
@@ -1659,15 +1659,15 @@ timeout /t 8 >nul
 goto begin
 )
 :WINGETDLX64
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 5 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -t 5 -O "Microsoft.Windows.Package.Manager_v1.7.10861"
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx" -t 5 -O "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx" -t 5 -O "Microsoft.VCLibs.x64.14.00.Desktop.appx"
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.7.x64.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.7.x64.appx"
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.8.x64.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx" -t 5 -O "Microsoft.UI.Xaml.2.8.x64.appx"
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 5 -O "License1.xml"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/microsoft/winget-cli/releases/download/v1.7.10861/30fe89a9836a4cfbbd3fedce72a58680_License1.xml" -t 5 -O "License1.xml"
 for /f %%N in ('hashsum /a md5 Microsoft.Windows.Package.Manager_v1.7.10861') do set "MD5=%%N"
 if %MD5% equ 65a50d454c47a396908663a5b6d88b9b (
 goto wingetcli
@@ -1879,7 +1879,7 @@ goto win11widgetsinstall
 del /q /f /s "Microsoft.WidgetsforWindows11_422.33900.0.0.bin" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/c7b41e73" -t 3 -O "Microsoft.WidgetsforWindows11_422.33900.0.0.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/c7b41e73" -t 3 -O "Microsoft.WidgetsforWindows11_422.33900.0.0.bin"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WidgetsforWindows11_422.33900.0.0.bin') do set "MD5=%%N"
 if %MD5% equ 6adcc63b4dba634efce4e74d1a9d0981 (
@@ -1998,7 +1998,7 @@ cls
 :XADMINXX1W10C
 cls
 cd "%GHOST_DATA%" >nul 2>nul
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3DTtBFT" -t 5 >nul 2>nul
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3DTtBFT" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3DTtBFT* >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
@@ -2713,7 +2713,7 @@ timeout /t 2 >nul
 goto opwin11
 :win1118X
 cd "%GHOST_DATA%" >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Dpuup7" -t 5 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Dpuup7" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *3Dpuup7* >nul 2>nul
 cls
 %nhcolor% 07 " ====================================================================================================================="
@@ -3829,22 +3829,22 @@ if "%var%" equ "1709" goto :winrex64download1809
 if "%var%" equ "1703" goto :winrex64download1809
 if "%var%" equ "1607" goto :winreforltsb1607
 :winrex64download
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 ::echo 9865f5d10881b60aeacea22dd7894bce  "Windows.Recovery.wim" | hashsum /c /q && (
 ::%nhcolor% 08 "%green%|PASS|%white% Windows.Recovery.wim"
 ::) || (
 ::del /q /f /s Windows.Recovery.wim >nul 2>nul
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
 ::)
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -3928,10 +3928,10 @@ goto netframework
 :netframework1
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1CYhxA0Kk_y-g87uWtIr-aJ28Zhat93OA" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fViDe1DR43G9V-3a3r-VJQRM4JSSBu3D" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TOdAB0Hm9Qes8onVrCCzkv3aZyFsUzEH" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1CYhxA0Kk_y-g87uWtIr-aJ28Zhat93OA" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fViDe1DR43G9V-3a3r-VJQRM4JSSBu3D" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TOdAB0Hm9Qes8onVrCCzkv3aZyFsUzEH" -t 3 -O microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.003
 cls
 :: Force Netframework 4
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework" /v "OnlyUseLatestCLR" /t REG_DWORD /d 0 /f
@@ -3949,8 +3949,8 @@ goto begin
 :netframework2
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1jDLIJj_1FrzBA-oq3p6jmwdqCpifpqPa" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1jDLIJj_1FrzBA-oq3p6jmwdqCpifpqPa" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
 cls
 :: Force Netframework 4
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework" /v "OnlyUseLatestCLR" /t REG_DWORD /d 0 /f
@@ -3963,8 +3963,8 @@ goto begin
 :netframework3
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Kce9FBdkpjTOPhRNCr3s5Y1DwIIUCpVh" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Kce9FBdkpjTOPhRNCr3s5Y1DwIIUCpVh" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab"
 cls
 :: Force Netframework 4
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework" /v "OnlyUseLatestCLR" /t REG_DWORD /d 0 /f
@@ -3977,8 +3977,8 @@ goto begin
 :netframework4
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BIKNQKGjqN3CB88zSwL0G22xyM9B_rL5" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BIKNQKGjqN3CB88zSwL0G22xyM9B_rL5" -t 3 -O "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~x86~~.cab"
 cls
 :: Force Netframework 4
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework" /v "OnlyUseLatestCLR" /t REG_DWORD /d 0 /f
@@ -4058,7 +4058,7 @@ goto onedrive0
 :onedrive1
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://oneclient.sfx.ms/Win/Prod/19.174.0902.0013/OneDriveSetup.exe" -t 30 -O OneDriveSetup.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://oneclient.sfx.ms/Win/Prod/19.174.0902.0013/OneDriveSetup.exe" -t 30 -O OneDriveSetup.exe
 Reg Add "HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive" /v "DisableFileSyncNGSC" /t REG_DWORD /d 0 /f
 cls
 OneDriveSetup.exe
@@ -4104,12 +4104,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -4265,7 +4265,7 @@ cd "%GHOST_DATA%"
 cls
 del /s /q setup.exe 2>nul >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://nilesoft.org/download/shell/1.9.15/setup.exe" -O "setup.exe" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://nilesoft.org/download/shell/1.9.15/setup.exe" -O "setup.exe" -t 1
 timeout /t 2 >nul
 cls
 echo installing please wait..
@@ -4450,7 +4450,7 @@ echo %green%Nope...NOT for this version. && timeout /t 4 >nul && goto ghst
 :checkbuildstartmenu
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 "NSudoLG.exe" -U:T -P:E cmd /c Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledState" /t REG_DWORD /d "2" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c Reg add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledStateOptions" /t REG_DWORD /d "1" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c reg delete "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\0" /f
@@ -4485,7 +4485,7 @@ cls
 :yesiwantnewicons
 cls
 cd "%GHOST_DATA%"
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 "NSudoLG.exe" -U:T -P:E cmd /c Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledState" /t REG_DWORD /d "2" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\4\215754378" /v "EnabledStateOptions" /t REG_DWORD /d "0" /f >nul 2>nul
 "NSudoLG.exe" -U:T -P:E cmd /c Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\0\2093230218" /v "EnabledState" /t REG_DWORD /d "2" /f >nul 2>nul
@@ -4574,12 +4574,12 @@ del /s /q "GhostSpectre_Wallpaper.zip" >nul
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -4597,7 +4597,7 @@ cls
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Ly4D6t" -o"GhostSpectre_Wallpaper.zip"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://tinyurl.com/3f3hbp3n" -O "GhostSpectre_Wallpaper.zip" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://tinyurl.com/3f3hbp3n" -O "GhostSpectre_Wallpaper.zip" -t 1
 timeout /t 2 >nul
 if NOT EXIST "GhostSpectre_Wallpaper.zip" (
 cls
@@ -5159,10 +5159,10 @@ cls
 cls
 ::powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\SystemApps\*Microsoft.MicrosoftEdge_8wekyb3d8bbwe*
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 15 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YZNcjXyPGnK7tmyc-gcppGodPP547WAY" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.479.7z
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ylpln0nksgdurblctmeA17pzJRemkL_8" -t 30 -O Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe.7z
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11hrMJj9A5CGh3eJ_QzBAIoD2OO9P44oL" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.476.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 15 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YZNcjXyPGnK7tmyc-gcppGodPP547WAY" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.479.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ylpln0nksgdurblctmeA17pzJRemkL_8" -t 30 -O Microsoft.MicrosoftEdgeDevToolsClient_8wekyb3d8bbwe.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11hrMJj9A5CGh3eJ_QzBAIoD2OO9P44oL" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.476.7z
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -5193,8 +5193,8 @@ powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\WinSxS\*amd64_mi
 cls
 powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\SystemApps\*Microsoft.MicrosoftEdge_8wekyb3d8bbwe*
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1vBn7BkMS8NDT70TIFwXGZMbqynTTdawJ" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.449.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11hrMJj9A5CGh3eJ_QzBAIoD2OO9P44oL" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.449.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1vBn7BkMS8NDT70TIFwXGZMbqynTTdawJ" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.449.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11hrMJj9A5CGh3eJ_QzBAIoD2OO9P44oL" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.449.zip
 del /q /f /s "Microsoft.MicrosoftEdge.zip"
 del /q /f /s "Microsoft.amd64_microsoft-windows-microsoftedge.zip"
 del /q /f /s "Microsoft.MicrosoftEdge.18363.449.zip"
@@ -5224,8 +5224,8 @@ powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\WinSxS\*amd64_mi
 cls
 powershell Remove-Item -Recurse -Force $env:systemdrive\Windows\SystemApps\*Microsoft.MicrosoftEdge_8wekyb3d8bbwe*
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=149s57fA3_6VMiuBGLik8mc1nCsX57_7J" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.418.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1VkyZTb6V5O4aDmy3_VefreW4uJtzpfqn" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.418.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=149s57fA3_6VMiuBGLik8mc1nCsX57_7J" -t 30 -O Microsoft.MicrosoftEdge_8wekyb3d8bbwe.18363.418.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1VkyZTb6V5O4aDmy3_VefreW4uJtzpfqn" -t 30 -O amd64_microsoft-windows-microsoftedge_31bf3856ad364e35_10.0.18362.418.zip
 del /q /f /s "Microsoft.MicrosoftEdge.zip"
 del /q /f /s "Microsoft.amd64_microsoft-windows-microsoftedge.zip"
 del /q /f /s "Microsoft.MicrosoftEdge.18363.449.zip"
@@ -5291,13 +5291,13 @@ cls
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 echo Microsoft Connect x64
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2S7jfN6" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2S7jfN6" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
 goto :mirax64check
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 echo Microsoft Connect x86
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3fNDad2" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3fNDad2" -t 5 -O Microsoft.PPIProjection_cw5n1h2txyewy.zip
 goto :mirax86check
 )
 :mirax64check
@@ -5401,12 +5401,12 @@ goto :dp2342
 :dp2342
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -5500,12 +5500,12 @@ cls
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -6958,12 +6958,12 @@ goto :xbox1strun
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -7111,8 +7111,8 @@ goto begin
 :gamebar2
 cls
 cd "%GHOST_DATA%"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1l6n6IPN20zBdOfgqb8VdoDqIDmbmGk80" -t 5 -O "remove-xboxgamebar.ps1"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/ncuibarkz042btp/remove-xboxgamebar.ps1?dl=1" -t 5 -O "remove-xboxgamebar.ps1"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1l6n6IPN20zBdOfgqb8VdoDqIDmbmGk80" -t 5 -O "remove-xboxgamebar.ps1"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/ncuibarkz042btp/remove-xboxgamebar.ps1?dl=1" -t 5 -O "remove-xboxgamebar.ps1"
 cls
 powershell -ExecutionPolicy Bypass -File "remove-xboxgamebar.ps1"
 cls
@@ -7187,8 +7187,8 @@ goto xpass
 :xpass1
 cls
 cd "%GHOST_DATA%"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xYRUNoUMnHMf5Mc7Fyp9Iv78frDdShR2" -t 5 -O XboxInstaller.exe
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 5 -O XboxInstaller.exe
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xYRUNoUMnHMf5Mc7Fyp9Iv78frDdShR2" -t 5 -O XboxInstaller.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 5 -O XboxInstaller.exe
 XboxInstaller.exe
 cd..
 cls
@@ -7247,14 +7247,14 @@ cls
 echo Microsoft Zune Music for X64
 timeout /t 3 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=15hF-kwRM1hStgFg3Mtz8gJF1is7Bar23" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1N68ds3aafDi9r0_Wz5QSezQbKxwNVm0o" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ymh8aB5pTAT4Loj8fQA0V-w0EdeODba_" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yPK2tqYBuO0Y3b7d1_e2kxYGeh9vOckQ" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11SsL7RFqiFjvuTuYtvWJQIsXihiXvCA1" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1m9lzOsdxoLWRvN0YNyzwvkuXEizCqIIP" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=15hF-kwRM1hStgFg3Mtz8gJF1is7Bar23" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1N68ds3aafDi9r0_Wz5QSezQbKxwNVm0o" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ymh8aB5pTAT4Loj8fQA0V-w0EdeODba_" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yPK2tqYBuO0Y3b7d1_e2kxYGeh9vOckQ" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11SsL7RFqiFjvuTuYtvWJQIsXihiXvCA1" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1m9lzOsdxoLWRvN0YNyzwvkuXEizCqIIP" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 %_7ZA_EXE% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
@@ -7275,12 +7275,12 @@ cls
 echo Microsoft Zune Music for X86
 timeout /t 3 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1N68ds3aafDi9r0_Wz5QSezQbKxwNVm0o" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ymh8aB5pTAT4Loj8fQA0V-w0EdeODba_" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11SsL7RFqiFjvuTuYtvWJQIsXihiXvCA1" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1m9lzOsdxoLWRvN0YNyzwvkuXEizCqIIP" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1N68ds3aafDi9r0_Wz5QSezQbKxwNVm0o" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ymh8aB5pTAT4Loj8fQA0V-w0EdeODba_" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=11SsL7RFqiFjvuTuYtvWJQIsXihiXvCA1" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1m9lzOsdxoLWRvN0YNyzwvkuXEizCqIIP" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 %_7ZA_EXE% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
@@ -7330,7 +7330,7 @@ call :PainText 05 " a"
 call :PainText 05 " i"
 call :PainText 05 " t"
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.lumito.net/public/projects/wget2/wget2-1.99.2.zip" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.lumito.net/public/projects/wget2/wget2-1.99.2.zip" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 for /f %%N in ('hashsum /a md5 wget2-1.99.2.zip') do set "MD5=%%N"
 if %MD5% equ e8bb3d1a6be4cb1d33e13f8b592a405a (
 goto :skip
@@ -7340,7 +7340,7 @@ del /q /f /s "wget2-1.99.2.zip" >nul 2>nul
 goto wgetserver2
 )
 :wgetserver2
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 :skip
 timeout /t 1 >nul
 %_7ZA_EXE% x wget2-1.99.2.zip -aoa >nul 2>nul
@@ -7363,12 +7363,12 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -7630,7 +7630,7 @@ call :PainText 05 " i"
 call :PainText 05 " t"
 
 timeout /t 5 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.lumito.net/public/projects/wget2/wget2-1.99.2.zip" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.lumito.net/public/projects/wget2/wget2-1.99.2.zip" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 for /f %%N in ('hashsum /a md5 wget2-1.99.2.zip') do set "MD5=%%N"
 if %MD5% equ e8bb3d1a6be4cb1d33e13f8b592a405a (
 goto :skip
@@ -7640,7 +7640,7 @@ del /q /f /s "wget2-1.99.2.zip" >nul
 goto wgetserver2
 )
 :wgetserver2
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 :skip
 timeout /t 1 >nul
 %_7ZA_EXE% x wget2-1.99.2.zip -aoa >nul 2>nul
@@ -7663,12 +7663,12 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -7732,7 +7732,7 @@ timeout /t 5 >nul
 cd "%GHOST_DATA%"
 del /Q "update" >nul 2>nul
 ::wget2\bin\wget2 --no-check-certificate --http2 "https://bit.ly/3xab01A" -t 5 -O"update" >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3xab01A" -O "update" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3xab01A" -O "update" -t 1 >nul 2>nul
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
@@ -7745,7 +7745,7 @@ goto runtimeinstallx86server2
 )
 
 :runtimeinstallx86server2
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3vaWndm" -O "update" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3vaWndm" -O "update" -t 1 >nul 2>nul
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
@@ -7758,7 +7758,7 @@ goto runtimeinstallx86server3
 )
 
 :runtimeinstallx86server3
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3ghcyBq" -O "update" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3ghcyBq" -O "update" -t 1 >nul 2>nul
 timeout /t 1 >nul
 for /f %%N in ('hashsum /a md5 update') do set "MD5=%%N"
 if %MD5% equ 7c122d0a8e629868123460b12cc5f291 (
@@ -7925,12 +7925,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -8002,12 +8002,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -8062,7 +8062,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/37xXVEf" -t 5 -O "remove.yourphone.ps1"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/37xXVEf" -t 5 -O "remove.yourphone.ps1"
 cls
 powershell -ExecutionPolicy Bypass -File "remove.yourphone.ps1"
 cls
@@ -8425,41 +8425,41 @@ timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
 ::GOOGLE TEAM DRIVE
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RcxAdPV_SMAtvDUhX8NEH-psTqzjG6Tp" -t 5 -O "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1oUuKAUG_R6UdjUKxXcdOwCi2pKBWrTHt" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=17hYLbqucS8zNca2lNMs5g5zGsFaOdNEY" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1iQRrw1XvS7rrb2iPJIiTQRzvHLI8j1" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YlHBbTYmDX8fdjILARfUAxYho-RRi-ii" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1boZxeWI5PDSdnona45_WxLDjRyuN69" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19hAOtlVooNJpw90TLKIVpOHBuefh7yQB" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BoscmOvZJKGSX_74ItoJ528L0NqH_YX0" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1lHp1sj-x7Dmupgl2sYr0zCOMPwgVJ-1O" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1NR9xPl1OEaNTLJiYTUVLSEiaH0bkPe-n" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1mJcuZU3TByMh2uv2iHSsAQBbsrhi1R6a" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FImW4jyjEc4xzwEmIkxhpeSaBQDaFtDV" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=18fVXS-sf6e62G8CbP59HgZy3eNBHyRKv" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1MX3YsjD73faU4c8Du0OEVBBSxOkYdhwP" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1ClTZozYjGlpk0s72nBnGiwIiitShxAZq" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dhHHvejGQFtPaLHqknkjW8S6_E-duf0R" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1S0tpAVblvj9L3pC4JpCnB5MHYL71evPX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lbt1V6GD652CF8kidEwdUdcjpK7rH4rX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TydD5WkXlDOnqkLUm8lGvWt8KLdYtyhB" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GfBG5pNKCaveC3BGR0ZnLABELr9Vp0Ye" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1f_kZP_dctDYIKdPkz67KvJM9LTbz455z" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yfHMUdBpPrxKxY7evgIJDml5xJcj6yJP" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qVthkbeKfXyXiXy1RONSBzBZaJtnNfag" -t 15 -O Microsoft.DesktopAppInstaller_2019.515.2246.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AlWq9ED6QkH051Vtctozji-6pM3ElkcU" -t 15 -O Microsoft.VP9VideoExtensions_1.0.21972.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gz5uBEykW2XoPWX0cASm-m0q9_NyGyz1" -t 15 -O Microsoft.StorePurchaseApp_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1H42gKAY3H7aQm9e5ch6yhPGTwDbPZsfq" -t 15 -O Microsoft.XboxIdentityProvider_12.54.26001.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1pdoC-TTvFOozF43y4onWg3x-tE4U9ina" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RsTzCu4OgBOEAdotYtX6_gZ0MilCjIbJ" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QCYEm9AxpySufJk35EDBXT_JkxuMTiS_" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RcxAdPV_SMAtvDUhX8NEH-psTqzjG6Tp" -t 5 -O "Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1oUuKAUG_R6UdjUKxXcdOwCi2pKBWrTHt" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=17hYLbqucS8zNca2lNMs5g5zGsFaOdNEY" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1iQRrw1XvS7rrb2iPJIiTQRzvHLI8j1" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YlHBbTYmDX8fdjILARfUAxYho-RRi-ii" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1boZxeWI5PDSdnona45_WxLDjRyuN69" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19hAOtlVooNJpw90TLKIVpOHBuefh7yQB" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BoscmOvZJKGSX_74ItoJ528L0NqH_YX0" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1lHp1sj-x7Dmupgl2sYr0zCOMPwgVJ-1O" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1NR9xPl1OEaNTLJiYTUVLSEiaH0bkPe-n" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1mJcuZU3TByMh2uv2iHSsAQBbsrhi1R6a" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FImW4jyjEc4xzwEmIkxhpeSaBQDaFtDV" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=18fVXS-sf6e62G8CbP59HgZy3eNBHyRKv" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1MX3YsjD73faU4c8Du0OEVBBSxOkYdhwP" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1ClTZozYjGlpk0s72nBnGiwIiitShxAZq" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dhHHvejGQFtPaLHqknkjW8S6_E-duf0R" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1S0tpAVblvj9L3pC4JpCnB5MHYL71evPX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lbt1V6GD652CF8kidEwdUdcjpK7rH4rX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TydD5WkXlDOnqkLUm8lGvWt8KLdYtyhB" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GfBG5pNKCaveC3BGR0ZnLABELr9Vp0Ye" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1f_kZP_dctDYIKdPkz67KvJM9LTbz455z" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yfHMUdBpPrxKxY7evgIJDml5xJcj6yJP" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qVthkbeKfXyXiXy1RONSBzBZaJtnNfag" -t 15 -O Microsoft.DesktopAppInstaller_2019.515.2246.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AlWq9ED6QkH051Vtctozji-6pM3ElkcU" -t 15 -O Microsoft.VP9VideoExtensions_1.0.21972.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gz5uBEykW2XoPWX0cASm-m0q9_NyGyz1" -t 15 -O Microsoft.StorePurchaseApp_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1H42gKAY3H7aQm9e5ch6yhPGTwDbPZsfq" -t 15 -O Microsoft.XboxIdentityProvider_12.54.26001.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1pdoC-TTvFOozF43y4onWg3x-tE4U9ina" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RsTzCu4OgBOEAdotYtX6_gZ0MilCjIbJ" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QCYEm9AxpySufJk35EDBXT_JkxuMTiS_" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.003
 ::Store pass
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gOCNhxx0sfU2Hvgc7dnpFsrBPVSrgPBd" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1HWjdjx30n61Zs642vYY9dZE5pnnFNZUz" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5oWoWSMN2vC5iIp9fWXEC4bgyGl9w89" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gOCNhxx0sfU2Hvgc7dnpFsrBPVSrgPBd" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1HWjdjx30n61Zs642vYY9dZE5pnnFNZUz" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5oWoWSMN2vC5iIp9fWXEC4bgyGl9w89" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -8522,29 +8522,29 @@ timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
 ::GOOGLE TEAM DRIVE
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1oUuKAUG_R6UdjUKxXcdOwCi2pKBWrTHt" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1iQRrw1XvS7rrb2iPJIiTQRzvHLI8j1" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1boZxeWI5PDSdnona45_WxLDjRyuN69" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BoscmOvZJKGSX_74ItoJ528L0NqH_YX0" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1NR9xPl1OEaNTLJiYTUVLSEiaH0bkPe-n" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FImW4jyjEc4xzwEmIkxhpeSaBQDaFtDV" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1MX3YsjD73faU4c8Du0OEVBBSxOkYdhwP" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dhHHvejGQFtPaLHqknkjW8S6_E-duf0R" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lbt1V6GD652CF8kidEwdUdcjpK7rH4rX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GfBG5pNKCaveC3BGR0ZnLABELr9Vp0Ye" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yfHMUdBpPrxKxY7evgIJDml5xJcj6yJP" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qVthkbeKfXyXiXy1RONSBzBZaJtnNfag" -t 15 -O Microsoft.DesktopAppInstaller_2019.515.2246.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gz5uBEykW2XoPWX0cASm-m0q9_NyGyz1" -t 15 -O Microsoft.StorePurchaseApp_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1H42gKAY3H7aQm9e5ch6yhPGTwDbPZsfq" -t 15 -O Microsoft.XboxIdentityProvider_12.54.26001.0_neutral_~_8wekyb3d8bbwe.AppxBundle
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1pdoC-TTvFOozF43y4onWg3x-tE4U9ina" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RsTzCu4OgBOEAdotYtX6_gZ0MilCjIbJ" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QCYEm9AxpySufJk35EDBXT_JkxuMTiS_" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1oUuKAUG_R6UdjUKxXcdOwCi2pKBWrTHt" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1iQRrw1XvS7rrb2iPJIiTQRzvHLI8j1" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1V1boZxeWI5PDSdnona45_WxLDjRyuN69" -t 15 -O Microsoft.NET.Native.Framework.2.1_2.1.27427.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BoscmOvZJKGSX_74ItoJ528L0NqH_YX0" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27405.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1NR9xPl1OEaNTLJiYTUVLSEiaH0bkPe-n" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FImW4jyjEc4xzwEmIkxhpeSaBQDaFtDV" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1MX3YsjD73faU4c8Du0OEVBBSxOkYdhwP" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dhHHvejGQFtPaLHqknkjW8S6_E-duf0R" -t 15 -O Microsoft.NET.Native.Runtime.2.1_2.1.26424.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lbt1V6GD652CF8kidEwdUdcjpK7rH4rX" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GfBG5pNKCaveC3BGR0ZnLABELr9Vp0Ye" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yfHMUdBpPrxKxY7evgIJDml5xJcj6yJP" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27629.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qVthkbeKfXyXiXy1RONSBzBZaJtnNfag" -t 15 -O Microsoft.DesktopAppInstaller_2019.515.2246.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gz5uBEykW2XoPWX0cASm-m0q9_NyGyz1" -t 15 -O Microsoft.StorePurchaseApp_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1H42gKAY3H7aQm9e5ch6yhPGTwDbPZsfq" -t 15 -O Microsoft.XboxIdentityProvider_12.54.26001.0_neutral_~_8wekyb3d8bbwe.AppxBundle
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1pdoC-TTvFOozF43y4onWg3x-tE4U9ina" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1RsTzCu4OgBOEAdotYtX6_gZ0MilCjIbJ" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QCYEm9AxpySufJk35EDBXT_JkxuMTiS_" -t 15 -O Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.003
 ::Store pass
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gOCNhxx0sfU2Hvgc7dnpFsrBPVSrgPBd" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1HWjdjx30n61Zs642vYY9dZE5pnnFNZUz" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5oWoWSMN2vC5iIp9fWXEC4bgyGl9w89" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1gOCNhxx0sfU2Hvgc7dnpFsrBPVSrgPBd" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1HWjdjx30n61Zs642vYY9dZE5pnnFNZUz" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5oWoWSMN2vC5iIp9fWXEC4bgyGl9w89" -t 15 -O Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -8661,10 +8661,10 @@ timeout /t 3 >nul
 cls
 ::MD5XCHECKING
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/svk2dhnoar9smiv/hashsum.bat?dl=1" -t 1 -O "%Systemroot%\System32\hashsum.bat"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://api.onedrive.com/v1.0/shares/s!AiOAYMWSismjk26v5l_4CELBvWuN/root/content" -t 1 -O "%Systemroot%\System32\hashsum.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/svk2dhnoar9smiv/hashsum.bat?dl=1" -t 1 -O "%Systemroot%\System32\hashsum.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://api.onedrive.com/v1.0/shares/s!AiOAYMWSismjk26v5l_4CELBvWuN/root/content" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 ::CATBOX
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/2pu5pp.bat" -t 1 -O "%Systemroot%\System32\hashsum.bat"
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/2pu5pp.bat" -t 1 -O "%Systemroot%\System32\hashsum.bat"
 if EXIST "%Systemroot%\System32\hashsum.bat" goto skip
 :skip
 cd "%GHOST_DATA%"
@@ -8676,7 +8676,7 @@ if %ERRORLEVEL% EQU 1 goto exit
 :store2
 cd "%GHOST_DATA%"
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/0tl7631thxosrk6/Remove-store.ps1?dl=1" -t 5 -O "remove-store.ps1"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/0tl7631thxosrk6/Remove-store.ps1?dl=1" -t 5 -O "remove-store.ps1"
 cls
 cd "%GHOST_DATA%"
 cls
@@ -8733,7 +8733,7 @@ cls
 cd "%GHOST_DATA%"
 del /s /q PotPlayerSetup64.exe >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe" -t 5 -O PotPlayerSetup64.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe" -t 5 -O PotPlayerSetup64.exe
 PotPlayerSetup64.exe
 cd..
 cls
@@ -8744,7 +8744,7 @@ cls
 cd "%GHOST_DATA%"
 del /s /q PotPlayerSetup32.exe >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup.exe" -t 5 -O PotPlayerSetup32.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup.exe" -t 5 -O PotPlayerSetup32.exe
 PotPlayerSetup32.exe
 cd..
 cls
@@ -8801,7 +8801,7 @@ goto begin
 :edgecb1
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeStablePage&Channel=Stable&language=en" -t 5 -O MicrosoftEdgeSetup.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeStablePage&Channel=Stable&language=en" -t 5 -O MicrosoftEdgeSetup.exe
 MicrosoftEdgeSetup.exe
 cd..
 cls
@@ -8810,7 +8810,7 @@ goto begin
 :edgecb2
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Beta&language=en" -t 5 -O MicrosoftEdgeSetupBeta.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Beta&language=en" -t 5 -O MicrosoftEdgeSetupBeta.exe
 MicrosoftEdgeSetupBeta.exe
 cd..
 cls
@@ -8819,7 +8819,7 @@ goto begin
 :edgecb3
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Dev&language=en" -t 5 -O MicrosoftEdgeSetupDev.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Dev&language=en" -t 5 -O MicrosoftEdgeSetupDev.exe
 MicrosoftEdgeSetupDev.exe
 cd..
 cls
@@ -8828,7 +8828,7 @@ goto begin
 :edgecb4
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Canary&language=en" -t 5 -O MicrosoftEdgeSetupCanary.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?ProductreleaseID=Edge&platform=Default&version=Edge&source=EdgeInsiderPage&Channel=Canary&language=en" -t 5 -O MicrosoftEdgeSetupCanary.exe
 MicrosoftEdgeSetupCanary.exe
 cd..
 cls
@@ -8863,7 +8863,7 @@ goto op13
 :moz1
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mzl.la/3o6YriV" -t 5 -O "Firefox Installer.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mzl.la/3o6YriV" -t 5 -O "Firefox Installer.exe"
 "Firefox Installer.exe"
 cd..
 cls
@@ -8990,7 +8990,7 @@ goto op14
 cd "%GHOST_DATA%"
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
 googlechromestandaloneenterprise64.msi
 cd..
 cls
@@ -8999,14 +8999,14 @@ goto begin
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
 googlechromestandaloneenterprise.msi
 goto begin
 )
 :gog1
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "http://dl.google.com/update2/installers/ChromeSetup.exe" -t 5 -O"ChromeSetup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "http://dl.google.com/update2/installers/ChromeSetup.exe" -t 5 -O"ChromeSetup.exe"
 ::wget2\bin\wget2 -c --progress=bar --http2 "http://dl.google.com/chrome/install/chrome_installer.exe" -t 1
 ChromeSetup.exe
 cd..
@@ -9016,7 +9016,7 @@ goto begin
 :gog2
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 5 -O"googlechromestandaloneenterprise64.msi"
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi" -t 1
 googlechromestandaloneenterprise64.msi
 cd..
@@ -9026,7 +9026,7 @@ goto begin
 :gog3
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 5 -O"googlechromestandaloneenterprise.msi"
 ::wget2\bin\wget2 -c --progress=bar --http2 "https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise.msi" -t 1
 googlechromestandaloneenterprise.msi
 cd..
@@ -9114,7 +9114,7 @@ goto op18
 :brave1
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup.exe" -t 5 -O "BraveBrowserSetup.x64.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup.exe" -t 5 -O "BraveBrowserSetup.x64.exe"
 BraveBrowserSetup.x64.exe
 timeout /t 2 >nul
 cls
@@ -9122,7 +9122,7 @@ goto begin
 :brave2
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup32.exe" -t 5 -O "BraveBrowserSetup.x86.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://brave-browser-downloads.s3.brave.com/latest/BraveBrowserSetup32.exe" -t 5 -O "BraveBrowserSetup.x86.exe"
 BraveBrowserSetup.x86.exe
 timeout /t 2 >nul
 cls
@@ -9130,7 +9130,7 @@ goto begin
 ::360
 ::cls
 ::cd "%GHOST_DATA%"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://free.360totalsecurity.com/totalsecurity/360TS_Setup_10.6.0.1338.exe" -t 5 -O "360TS_Setup_10.6.0.1338.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://free.360totalsecurity.com/totalsecurity/360TS_Setup_10.6.0.1338.exe" -t 5 -O "360TS_Setup_10.6.0.1338.exe"
 ::360TS_Setup_10.6.0.1338.exe
 cd..
 cls
@@ -9210,7 +9210,7 @@ goto :downloadvsi
 )
 :downloadvsi
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3zNyqes" -t 15 -O "vc_redist.x64.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3zNyqes" -t 15 -O "vc_redist.x64.exe"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3zNyqes" -o"vc_redist.x64.exe"
 for /f %%N in ('hashsum /a md5 vc_redist.x64.exe') do set "MD5=%%N"
 if %MD5% equ be433764fa9bbe0f2f9c654f6512c9e0 (
@@ -9225,7 +9225,7 @@ timeout /t 2 >nul
 goto :WTHx643
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3ESPeEf" -t 15 -O "vc_redist.x86.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3ESPeEf" -t 15 -O "vc_redist.x86.exe"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3ESPeEf" -o"vc_redist.x86.exe"
 for /f %%N in ('hashsum /a md5 vc_redist.x86.exe') do set "MD5=%%N"
 if %MD5% equ 24e8177b25c072f4fb0d37496ccdbb34 (
@@ -9257,12 +9257,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9276,7 +9276,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/abbodi1406/vcredist/releases/download/v0.80.0/VisualCppRedist_AIO_x86_x64_80.zip" -t 15 -O "VisualCppRedist_AIO_x86_x64_80.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/abbodi1406/vcredist/releases/download/v0.80.0/VisualCppRedist_AIO_x86_x64_80.zip" -t 15 -O "VisualCppRedist_AIO_x86_x64_80.zip"
 cls
 %_7ZA_EXE% x VisualCppRedist_AIO_x86_x64_80.zip -aoa
 "VisualCppRedist_AIO_x86_x64.exe"
@@ -9346,8 +9346,8 @@ goto op17
 :dx1
 cls
 cd "%GHOST_DATA%"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10ODuWZsH1bXuOKO1zqWfxRY8B1h_VyCR" -t 5 -O dxwebsetup.exe
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" -t 5 -O dxwebsetup.exe
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10ODuWZsH1bXuOKO1zqWfxRY8B1h_VyCR" -t 5 -O dxwebsetup.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" -t 5 -O dxwebsetup.exe
 dxwebsetup.exe
 cd..
 cls
@@ -9358,12 +9358,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9412,7 +9412,7 @@ goto usersrequest
 :usr001
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86_64/LibreOffice_7.1.3_Win_x64.msi" -t 15 -O "LibreOffice_7.1.3_Win_x64.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86_64/LibreOffice_7.1.3_Win_x64.msi" -t 15 -O "LibreOffice_7.1.3_Win_x64.msi"
 LibreOffice_7.1.3_Win_x64.msi
 cd..
 cls
@@ -9421,7 +9421,7 @@ goto usersrequest
 :usr002
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86/LibreOffice_7.1.3_Win_x86.msi" -t 15 -O "LibreOffice_7.1.3_Win_x86.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.nus.edu.sg/mirror/tdf/libreoffice/stable/7.1.3/win/x86/LibreOffice_7.1.3_Win_x86.msi" -t 15 -O "LibreOffice_7.1.3_Win_x86.msi"
 LibreOffice_7.1.3_Win_x86.msi
 cd..
 cls
@@ -9444,11 +9444,11 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win32/vlc-3.0.11-win32.exe" -t 5 -O "vlc-3.0.11-win32.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win32/vlc-3.0.11-win32.exe" -t 5 -O "vlc-3.0.11-win32.exe"
 vlc-3.0.11-win32.exe
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win64/vlc-3.0.11-win64.exe" -t 5 -O "vlc-3.0.11-win64.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://mirror.downloadvn.com/videolan/vlc/3.0.11/win64/vlc-3.0.11-win64.exe" -t 5 -O "vlc-3.0.11-win64.exe"
 vlc-3.0.11-win64.exe
 )
 cd..
@@ -9474,12 +9474,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9517,7 +9517,7 @@ goto usersrequest
 :usr007
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/AshampooSnapPortable_12.0.3_Multilingual.paf-RSLOAD.NET-.exe" -t 5 -O "AshampooSnapPortable_12.0.3_Multilingual.portable.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/AshampooSnapPortable_12.0.3_Multilingual.paf-RSLOAD.NET-.exe" -t 5 -O "AshampooSnapPortable_12.0.3_Multilingual.portable.exe"
 explorer /select,"AshampooSnapPortable_12.0.3_Multilingual.portable.exe"
 cd..
 cls
@@ -9533,7 +9533,7 @@ cls
 ::echo %white%=======================================================================
 ::echo %white%Password Rar: %yellow%ghostspectre23
 ::echo %white%=======================================================================
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/ccleaner_pro_5.79.8704.zip" -t 5 -O "Ccleaner_pro_5.79.8704.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/ccleaner_pro_5.79.8704.zip" -t 5 -O "Ccleaner_pro_5.79.8704.zip"
 ::pause
 explorer /select,"ccleaner_pro_5.79.8704.zip"
 cd..
@@ -9545,12 +9545,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9624,7 +9624,7 @@ goto usersrequest
 :usr011
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/072/MBRWSetup-RSLOAD.NET-.rar" -t 5 -O "MBRWSetup.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/072/MBRWSetup-RSLOAD.NET-.rar" -t 5 -O "MBRWSetup.rar"
 explorer /select,"MBRWSetup.rar"
 cd..
 cls
@@ -9633,7 +9633,7 @@ goto usersrequest
 :usr012
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MAGIX.Vegas.Pro.v18.0.527-RSLOAD.NET-.rar" -t 15 -O "Magix.Vegas.Pro.v18.0.527.repack.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MAGIX.Vegas.Pro.v18.0.527-RSLOAD.NET-.rar" -t 15 -O "Magix.Vegas.Pro.v18.0.527.repack.rar"
 explorer /select,"Magix.Vegas.Pro.v18.0.527.repack.rar"
 cd..
 cls
@@ -9642,7 +9642,7 @@ goto usersrequest
 :usr013
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.2/npp.7.9.2.Installer.exe" -t 5 -O "npp.7.9.2.Installer.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.9.2/npp.7.9.2.Installer.exe" -t 5 -O "npp.7.9.2.Installer.exe"
 explorer /select,"npp.7.9.2.Installer.exe"
 cd..
 cls
@@ -9654,12 +9654,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9676,7 +9676,7 @@ cls
 cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3mv31Xy" -t 15 -O "Movavi.Video.Suite.21.0.1.RePack.zip"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3mv31Xy" -t 15 -O "Movavi.Video.Suite.21.0.1.RePack.zip"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false --http-user="rsload.net" --http-passwd="rsload.net"  "http://95.141.198.238/noload2/files/074/movavi_video_suite 21.3.0.zip" -o"Movavi_Video_Suite_v21.3.0.x64.zip"
 
 explorer /select,"Movavi_Video_Suite_v21.3.0.x64.zip"
@@ -9712,7 +9712,7 @@ cd "%GHOST_DATA%"
 ::echo  %white%Please uninstall previous version before install this version.
 timeout /t 6 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/chemtable soft organizer 9.01.zip" -t 5 -O "Soft.Organizer.9.01.repack.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/chemtable soft organizer 9.01.zip" -t 5 -O "Soft.Organizer.9.01.repack.zip"
 ::explorer /select,"Soft.Organizer.9.01.zip"
 cls
 %_7ZA_EXE% x "Soft.Organizer.9.01.repack.zip" -aoa -pio -o"Soft.Organizer.9.01.repack"
@@ -9737,7 +9737,7 @@ goto usersrequest
 :usr017
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -t 5 -O "TeamViewer_Setup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -t 5 -O "TeamViewer_Setup.exe"
 explorer /select,"TeamViewer_Setup.exe"
 cls
 timeout /t 1 >nul
@@ -9748,12 +9748,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9825,7 +9825,7 @@ goto usersrequest
 :usr020
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/-RSLOAD.NET-FLv20.7.2.1863.rar" -t 15 -O "FL.Studio.Producer.Edition.20.7.2.1863.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/-RSLOAD.NET-FLv20.7.2.1863.rar" -t 15 -O "FL.Studio.Producer.Edition.20.7.2.1863.rar"
 explorer /select,"FL.Studio.Producer.Edition.20.7.2.1863.rar"
 cls
 timeout /t 1 >nul
@@ -9872,12 +9872,12 @@ goto ErrorMD5msstore
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -9981,7 +9981,7 @@ goto usersrequest
 :usr022
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.anydesk.com/AnyDesk.exe" -t 5 -O "AnyDesk.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://download.anydesk.com/AnyDesk.exe" -t 5 -O "AnyDesk.exe"
 explorer /select,"AnyDesk.exe"
 cls
 timeout /t 1 >nul
@@ -9989,7 +9989,7 @@ goto usersrequest
 :usr023
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://files3.codecguide.com/K-Lite_Codec_Pack_1550_Full.exe" -t 5 -O "K-Lite_Codec_Pack_1550_Full.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://files3.codecguide.com/K-Lite_Codec_Pack_1550_Full.exe" -t 5 -O "K-Lite_Codec_Pack_1550_Full.exe"
 explorer /select,"K-Lite_Codec_Pack_1550_Full.exe"
 cls
 timeout /t 1 >nul
@@ -9997,30 +9997,30 @@ goto usersrequest
 :usr024
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WcePVqtkImMCfh42PJ5E6syodTnQzbzq" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WcePVqtkImMCfh42PJ5E6syodTnQzbzq" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1yuUb_0NRuVaVFLGEPSYqSX5Pu7laV4a_" -t 5 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
 )
 ::Mail and Calender
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fHSmmPtbtFgnvTgJ5A61QXguOZWSsn1l" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1alrgbXrLUrSZMTk49GWhrgR-ReJYF_gL" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10QXwVcpJ8COpt7cKijNMiFnVrZ3qeSGm" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5bSm7O9rd9BIhHJKVTKI3okxTrldXQC" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WjfPprjUplDMc9GOQmR5L23ptUWvuFCG" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Yg58QPv7sO7MTpewSECXyMPxB5j3RBX9" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JhRb0DhE34klahuf_-4ZZFsIBYp9Piok" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1UlvVVEr5IIs1zJz732g5QQTwSxCN0WQj" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1aV72eNs-vNpvJ63gAKWWGHFiym8g1c2K" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JO6naJPo2LPfM8pUsR2yfnzpgxXB6tUf" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OC58RHL8gtITgCdXLLsMdp1grayJ6aDo" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dqz2IUpfyTPnChpxbNlbk6h_k0GEz5LS" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dpLH2tH-HFO1Gf07wKZdoCv3HSBS8iXQ" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WD24CZH9km8fiDAxOlsQNfU2byCTaBqQ" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1C_bqmbrISSMDhCLrIRdo45ItumJGwSLm" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fHSmmPtbtFgnvTgJ5A61QXguOZWSsn1l" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1alrgbXrLUrSZMTk49GWhrgR-ReJYF_gL" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10QXwVcpJ8COpt7cKijNMiFnVrZ3qeSGm" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X5bSm7O9rd9BIhHJKVTKI3okxTrldXQC" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.004
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WjfPprjUplDMc9GOQmR5L23ptUWvuFCG" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.005
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Yg58QPv7sO7MTpewSECXyMPxB5j3RBX9" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.006
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JhRb0DhE34klahuf_-4ZZFsIBYp9Piok" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.007
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1UlvVVEr5IIs1zJz732g5QQTwSxCN0WQj" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.008
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1aV72eNs-vNpvJ63gAKWWGHFiym8g1c2K" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.009
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JO6naJPo2LPfM8pUsR2yfnzpgxXB6tUf" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.010
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OC58RHL8gtITgCdXLLsMdp1grayJ6aDo" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.011
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dqz2IUpfyTPnChpxbNlbk6h_k0GEz5LS" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.012
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1dpLH2tH-HFO1Gf07wKZdoCv3HSBS8iXQ" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.013
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1WD24CZH9km8fiDAxOlsQNfU2byCTaBqQ" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.014
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1C_bqmbrISSMDhCLrIRdo45ItumJGwSLm" -t 5 -O Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.015
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -10218,12 +10218,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10242,7 +10242,7 @@ cls
 color 03
 %ARIA2C_EXE% --no-conf --file-allocation=none --http-user="rsload.net" --http-passwd="rsload.net" --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false "http://95.141.198.238/noload2/files/066/Adobe.Illustrator.2021.v25.2.3.259-RSLOAD.NET-.exe" -o"Adobe.Illustrator.2021.v25.2.3.259.x64.exe"
 pause
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.193.17/noload2/files/066/Adobe.Illustrator.2021.v25.2.1.236-RSLOAD.NET-.exe" -t 15 -O "Adobe.Illustrator.2020.v25.2.1.236.x64.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.193.17/noload2/files/066/Adobe.Illustrator.2021.v25.2.1.236-RSLOAD.NET-.exe" -t 15 -O "Adobe.Illustrator.2020.v25.2.1.236.x64.exe"
 explorer /select,"Adobe.Illustrator.2021.v25.2.3.259.x64.exe"
 cls
 timeout /t 1 >nul
@@ -10253,12 +10253,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10287,7 +10287,7 @@ goto usersrequest
 :usr027
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/Process_Lasso_v10.0.3.6-RSLOAD.NET-.exe" -t 5 -O "Process.Lasso.10.0.3.6.RePack.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/Process_Lasso_v10.0.3.6-RSLOAD.NET-.exe" -t 5 -O "Process.Lasso.10.0.3.6.RePack.exe"
 explorer /select,"Process.Lasso.10.0.3.6.RePack.exe"
 ::del /q /f "Process Lasso 9.7.0.48 RePack (& Portable) by TryRooM.rar" >nul 2>nul
 cls
@@ -10299,7 +10299,7 @@ cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto netspeedmonx86
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" goto netspeedmonx64
 :netspeedmonx64
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x64_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x64_setup.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x64_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x64_setup.msi"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DATA%\netspeedmonitor_2_5_4_0_x64_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
@@ -10316,7 +10316,7 @@ timeout /t 1 >nul
 cls
 goto usersrequest
 :netspeedmonx86
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x86_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x86_setup.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://download.krutarth.network/windows/netspeedmonitor_2_5_4_0_x86_setup.msi" -t 5 -O "netspeedmonitor_2_5_4_0_x86_setup.msi"
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "%GHOST_DATA%\netspeedmonitor_2_5_4_0_x86_setup.msi" /t REG_SZ /d "WIN7RTM" /f
 cls
 echo installing...
@@ -10353,12 +10353,12 @@ del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >n
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10453,12 +10453,12 @@ cls
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10560,12 +10560,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10614,12 +10614,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10663,12 +10663,12 @@ del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10747,12 +10747,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10769,7 +10769,7 @@ cls
 echo %white% WGET2 DOWNLOADER
 echo %white%=======================================================================
 ::wget2\bin\wget2 -c --progress=bar "https://ghosttoolbox.shortcm.li/IOBit_Smart_Defrag_7.0.0.62.repack.zip" -t 5
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/iobit smart defrag 7.0.0.62.zip" -t 5 -O "IOBit_Smart_Defrag_7.0.0.62.repack.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/iobit smart defrag 7.0.0.62.zip" -t 5 -O "IOBit_Smart_Defrag_7.0.0.62.repack.zip"
 echo %white%=======================================================================
 timeout /t 3 >nul
 %_7ZA_EXE% x "IOBit_Smart_Defrag_7.0.0.62.repack.zip" -aoa -pisd -o"IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
@@ -10794,12 +10794,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10865,12 +10865,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -10951,14 +10951,14 @@ goto usersrequest
 :usr075
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/065/ParkControl.Pro-1.3.1.8-RSLOAD.NET-.zip" -t 5 -O "ParkControl.Pro-1.3.1.8.repack.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/065/ParkControl.Pro-1.3.1.8-RSLOAD.NET-.zip" -t 5 -O "ParkControl.Pro-1.3.1.8.repack.zip"
 cls
 explorer /select,"ParkControl.Pro-1.3.1.8.repack.zip"
 goto usersrequest
 :usr070
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3c01xSG" -t 5 -O "EASEUS.Partition.Master.15.8.Repack.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://bit.ly/3c01xSG" -t 5 -O "EASEUS.Partition.Master.15.8.Repack.zip"
 cls
 explorer /select,"EASEUS.Partition.Master.15.8.Repack.zip"
 cls
@@ -10981,12 +10981,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11249,7 +11249,7 @@ goto usersrequest
 :usr0368:
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn-download.ccleanerbrowser.com/ccleaner_browser_setup.exe" -t 15 -O "ccleaner_browser_setup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn-download.ccleanerbrowser.com/ccleaner_browser_setup.exe" -t 15 -O "ccleaner_browser_setup.exe"
 cls
 ccleaner_browser_setup.exe
 cls
@@ -11304,12 +11304,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11326,7 +11326,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/sck7yppck7q4i57/Defaults.7z?dl=1" --dir="%Windir%\Ico\Iconspack" -o"Defaults.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -11373,7 +11373,7 @@ goto ghst
 cd "%GHOST_DATA%"
 cls
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/34wWUP9" --dir="%Windir%\Ico\Iconspack" -o"Defaults.Iconspack"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/868de923" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/868de923" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
 %nhcolor% 08 " --------------"
@@ -11419,7 +11419,7 @@ goto ghst
 :icons001windows1122H2
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/39a62b71" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/39a62b71" -t 15 -O "%Windir%\Ico\Iconspack\Defaults.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
 %nhcolor% 08 " --------------"
@@ -11467,12 +11467,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11489,7 +11489,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/ivzo9afv24hzwzm/ARC%20Regular%20Blue.7z?dl=1" --dir="%Windir%\Ico\Iconspack" -o"ARC_Regular_Blue.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -11536,12 +11536,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11558,7 +11558,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/q8vtn2uhxn1bjl3/Nord.7z?dl=1" --dir="%Windir%\Ico\Iconspack" -o"Nord.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -11613,12 +11613,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11635,7 +11635,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Nuiqv2" --dir="%Windir%\Ico\Iconspack" -o"Lumicons.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -11684,12 +11684,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11706,7 +11706,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3rSq0yB" --dir="%Windir%\Ico\Iconspack" -o"Sweet.Paranoia.Iconspack"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -11761,13 +11761,13 @@ goto ghst
 cls
 cd "%GHOST_DATA%"
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup32.zip" -t 15 -O "QuickCpuSetup32.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup32.zip" -t 15 -O "QuickCpuSetup32.zip"
 explorer /select,"QuickCpuSetup32.zip"
 cls
 goto usersrequest
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup64.zip" -t 15 -O "QuickCpuSetup64.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://coderbag.com/assets/downloads/cpm/currentversion/QuickCpuSetup64.zip" -t 15 -O "QuickCpuSetup64.zip"
 explorer /select,"QuickCpuSetup64.zip"
 cls
 goto usersrequest
@@ -11775,12 +11775,12 @@ goto usersrequest
 :usr037
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11802,7 +11802,7 @@ timeout /t 7 >nul
 %nhcolor% 08 " ----------------"
 color 03
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3qL72ZK" -o"Abelssoft.SSD.Fresh.2021.10.05.35.GHOSTSPECTRE.zip"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/064/Abelssoft.SSD.Fresh.rar" -t 5 -O "Abelssoft.SSD.Fresh.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/064/Abelssoft.SSD.Fresh.rar" -t 5 -O "Abelssoft.SSD.Fresh.rar"
 timeout /t 3 >nul
 cls
 ::echo %white%===============================
@@ -11831,12 +11831,12 @@ echo %white%====================================================================
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11898,7 +11898,7 @@ goto usersrequest
 :usr039
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/Sublime.Text.-RSLOAD.NET-.rar" -t 15 -O "Sublime Text 3.2.2 Build 3211 Dev.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/Sublime.Text.-RSLOAD.NET-.rar" -t 15 -O "Sublime Text 3.2.2 Build 3211 Dev.rar"
 cls
 explorer /select,"Sublime Text 3.2.2 Build 3211 Dev.rar"
 cls
@@ -11906,7 +11906,7 @@ goto usersrequest
 :usr040
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/AOMEI.Partition.Assistant.v9.2.1-RSLOAD.NET-.rar" -t 15 -O "AOMEI.Partition.Assistant.9.2.1.repack.rar"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/AOMEI.Partition.Assistant.v9.2.1-RSLOAD.NET-.rar" -t 15 -O "AOMEI.Partition.Assistant.9.2.1.repack.rar"
 cls
 explorer /select,"AOMEI.Partition.Assistant.9.2.1.repack.rar"
 cls
@@ -11916,12 +11916,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11952,12 +11952,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -11989,12 +11989,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12020,7 +12020,7 @@ goto usersrequest
 :usr044
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/users2/EfreeMaN1/ANTIVIRUS/GlarysoftMalwareHunter/rsload.net.Glarysoft.Malware.Hunter.pro.zip" -t 15 -O "Glarysoft.Malware.Hunter.pro.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/users2/EfreeMaN1/ANTIVIRUS/GlarysoftMalwareHunter/rsload.net.Glarysoft.Malware.Hunter.pro.zip" -t 15 -O "Glarysoft.Malware.Hunter.pro.zip"
 cls
 explorer /select,"Glarysoft.Malware.Hunter.pro.zip"
 cls
@@ -12028,7 +12028,7 @@ goto usersrequest
 :usr045
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/easeus data recovery wizard te 14.0.zip" -t 15 -O "EaseUS.Data.Recovery.Wizard.14.0.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/easeus data recovery wizard te 14.0.zip" -t 15 -O "EaseUS.Data.Recovery.Wizard.14.0.zip"
 cls
 explorer /select,"EaseUS.Data.Recovery.Wizard.14.0.zip"
 cls
@@ -12036,7 +12036,7 @@ goto usersrequest
 :usr046
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MiniTool_Power_Data_Recovery_v9.2.0-RSLOAD.NET-.exe" -t 15 -O "MiniTool_Power_Data_Recovery_v9.2.0.repack.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/074/MiniTool_Power_Data_Recovery_v9.2.0-RSLOAD.NET-.exe" -t 15 -O "MiniTool_Power_Data_Recovery_v9.2.0.repack.exe"
 cls
 explorer /select,"MiniTool_Power_Data_Recovery_v9.2.0.repack.exe"
 cls
@@ -12054,7 +12054,7 @@ goto begin
 )
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/37krRHX" -t 5 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/37krRHX" -t 5 >nul 2>nul
 del /q /s *cookies.txt* >nul 2>nul && del /q /s *37krRHX* >nul 2>nul
 
 if EXIST "Youtube-DLP\yt-dlp.exe" (
@@ -12087,10 +12087,10 @@ goto youwhotemate
 :YTYES
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12212,12 +12212,12 @@ timeout /t 3 >nul
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12300,12 +12300,12 @@ timeout /t 3 >nul
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12373,7 +12373,7 @@ goto usr048
 cls
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/z7lfc6kz2yl2dj1/remove-camera.ps1?dl=1" -t 5 -O "remove-camera.ps1"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/z7lfc6kz2yl2dj1/remove-camera.ps1?dl=1" -t 5 -O "remove-camera.ps1"
 cls
 powershell -ExecutionPolicy Bypass -File "remove-camera.ps1"
 cls
@@ -12407,12 +12407,12 @@ cls
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12517,12 +12517,12 @@ cls
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12611,12 +12611,12 @@ del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bb
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12698,12 +12698,12 @@ del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bb
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -12775,7 +12775,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto Videoderx86
 :Videoderx64
 cls
 COLOR 09
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://static.videoder.net/desktop/release/win/x64/Videoder Setup 1.0.9.exe" -t 15 -O "Videoder.Setup.1.0.9.x64.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://static.videoder.net/desktop/release/win/x64/Videoder Setup 1.0.9.exe" -t 15 -O "Videoder.Setup.1.0.9.x64.exe"
 cls
 explorer /select,"Videoder.Setup.1.0.9.x64.exe"
 cls
@@ -12783,7 +12783,7 @@ goto usersrequest
 :Videoderx86
 cls
 COLOR 09
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://static.videoder.net/desktop/release/win/x32/Videoder Setup 1.0.9.exe" -t 15 -O "Videoder.Setup.1.0.9.x86.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://static.videoder.net/desktop/release/win/x32/Videoder Setup 1.0.9.exe" -t 15 -O "Videoder.Setup.1.0.9.x86.exe"
 cls
 explorer /select,"Videoder.Setup.1.0.9.x86.exe"
 cls
@@ -12814,7 +12814,7 @@ if EXIST "%PROGRAMDATA%\Microsoft\DRM" rmdir /s /q "%PROGRAMDATA%\Microsoft\DRM"
 if EXIST "%SYSTEMDRIVE%\EdgeBlocker" rmdir /s /q "%SYSTEMDRIVE%\EdgeBlocker" >nul 2>nul
 if EXIST "%WinDir%\System32\Visual" rmdir /s /q "%WinDir%\System32\Visual" >nul 2>nul
 :skip_hello
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://youtu.be/kHZUYiyaH8k" -t 5 -O"analytic" >nul 2>nul
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://youtu.be/kHZUYiyaH8k" -t 5 -O"analytic" >nul 2>nul
 :: Start GhostToolbox
 cd "%GHOST_DIR%" >nul 2>nul
 set INSTALL_PATH1="ghost.toolbox.7z";
@@ -12833,7 +12833,7 @@ mode con cols=120 lines=40 > nul
 title GHOST TOOLBOX %GSTVER% %GARC% && goto imnotdoneyet
 ::cls
 ::cd "%GHOST_DATA%"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X-jV784dVUimOeomBq99INoSEd4gk0Ak" -t 15 -O "WiseCare 365 Pro v5.4.7.543.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1X-jV784dVUimOeomBq99INoSEd4gk0Ak" -t 15 -O "WiseCare 365 Pro v5.4.7.543.exe"
 ::explorer /select,"WiseCare 365 Pro v5.4.7.543.exe"
 ::cls
 ::timeout /t 1 >nul
@@ -12841,7 +12841,7 @@ goto usersrequest
 ::usr033
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1DirTc97l_aE9aHBrcXfkp3HLh3deSr7g" -t 15 -O "Treesize Professional v7.1.2.1461.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1DirTc97l_aE9aHBrcXfkp3HLh3deSr7g" -t 15 -O "Treesize Professional v7.1.2.1461.exe"
 explorer /select,"Treesize Professional v7.1.2.1461.exe"
 cls
 timeout /t 1 >nul
@@ -12849,7 +12849,7 @@ goto usersrequest
 ::usr034
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kxbDHz4K7FaLZdhAPPzaJ5jobGrzrYIA" -t 15 -O "TeamViewer v15.1.3937.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kxbDHz4K7FaLZdhAPPzaJ5jobGrzrYIA" -t 15 -O "TeamViewer v15.1.3937.exe"
 explorer /select,"TeamViewer v15.1.3937.exe"
 cls
 timeout /t 1 >nul
@@ -12857,7 +12857,7 @@ goto usersrequest
 ::usr035
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&confirm=vQL9&id=1bj-8F5fZj0qj3qfi6pfBoWZnQXPFL-hv" -t 15 -O "Stardock Start10 v10.1.80.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&confirm=vQL9&id=1bj-8F5fZj0qj3qfi6pfBoWZnQXPFL-hv" -t 15 -O "Stardock Start10 v10.1.80.exe"
 explorer /select,"Stardock Start10 v10.1.80.exe"
 cls
 timeout /t 1 >nul
@@ -13158,16 +13158,16 @@ goto checkrevision
 :onenote
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Tz_rGI4R9j_imdd_MjYOX8FMhGayfaFx" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1E7CuuU0soiPhNn3GlBOFrxbYFHLLdjMi" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1PdVX2YMSJ1X5ebVgcahClVLeD5Ddf9Yd" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.003
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1mUAo3VIz0AHgLEBTh9njfl-0S7uM0fW-" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.004
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rog3gbp55m473SfnMvooAaqHBhvsXoRk" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.005
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BtSwKRPJ44dG-mGmcZtUlneL-ARm6608" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.006
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BfdHoDNaIouz7N7lG_TDpKq5xw6mDS2W" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.007
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FjykptEAy35E5V4NGy6-Q_Chu5OHePK4" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.008
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=12oO3U0zzQClV0cqaCO-Cnr4pw34xMTd2" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.009
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Tz_rGI4R9j_imdd_MjYOX8FMhGayfaFx" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1E7CuuU0soiPhNn3GlBOFrxbYFHLLdjMi" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1PdVX2YMSJ1X5ebVgcahClVLeD5Ddf9Yd" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1mUAo3VIz0AHgLEBTh9njfl-0S7uM0fW-" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.004
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rog3gbp55m473SfnMvooAaqHBhvsXoRk" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.005
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BtSwKRPJ44dG-mGmcZtUlneL-ARm6608" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.006
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1BfdHoDNaIouz7N7lG_TDpKq5xw6mDS2W" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.007
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1FjykptEAy35E5V4NGy6-Q_Chu5OHePK4" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.008
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=12oO3U0zzQClV0cqaCO-Cnr4pw34xMTd2" -t 15 -O Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.009
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -13312,7 +13312,7 @@ goto skipwhatsapps
 del /q /f /s "WhatsAppDesktop.bin" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/ee800fa9d2d9" -t 3 -O "WhatsAppDesktop.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/ee800fa9d2d9" -t 3 -O "WhatsAppDesktop.bin"
 cls
 for /f %%N in ('hashsum /a md5 WhatsAppDesktop.bin') do set "MD5=%%N"
 if %MD5% equ 38023767bfe6a6efa569889169c3a93d (
@@ -13383,7 +13383,7 @@ goto skiptelegram
 del /q /f /s "TelegramMessengerLLP.TelegramDesktop" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/cce89992dd37" -t 3 -O "TelegramMessengerLLP.TelegramDesktop"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://matix.li/cce89992dd37" -t 3 -O "TelegramMessengerLLP.TelegramDesktop"
 cls
 for /f %%N in ('hashsum /a md5 TelegramMessengerLLP.TelegramDesktop') do set "MD5=%%N"
 if %MD5% equ 7c36816f4418529890b265a1cc7322bc (
@@ -13422,7 +13422,7 @@ cls
 echo SERVER 01 - HK
 timeout /t 2 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://matix.li/3b802a3c507b" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://matix.li/3b802a3c507b" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
 timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
@@ -13436,7 +13436,7 @@ cls
 echo SERVER 02 - US
 timeout /t 2 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/microsoft.-store.-windows-11.23-h-2.x-64/Microsoft.Store.Windows11.23H2.x64.bin" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/microsoft.-store.-windows-11.23-h-2.x-64/Microsoft.Store.Windows11.23H2.x64.bin" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
 timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
@@ -13450,7 +13450,7 @@ cls
 echo SERVER 03 - US
 timeout /t 2 >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/6vfdr3" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/6vfdr3" -t 5 -O "Microsoft.Store.Windows11.23H2.x64.bin"
 timeout /t 2 >nul
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.Store.Windows11.23H2.x64.bin') do set "MD5=%%N"
@@ -13570,8 +13570,8 @@ cls
 echo SERVER 01 - US
 timeout /t 2 >nul
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HjPlZM" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3BOgJOk" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HjPlZM" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3BOgJOk" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3BOgJOk" -o"Microsoft.WindowsStore_22202.1402.2.0.Base"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
@@ -13585,8 +13585,8 @@ cls
 echo SERVER 02 - HK
 timeout /t 2 >nul
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HhRsx8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HhRsx8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -o"Microsoft.WindowsStore_22202.1402.2.0.Base"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
@@ -13600,8 +13600,8 @@ cls
 echo SERVER 03 - US
 timeout /t 2 >nul
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3JUIsj0" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sfiVeD" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3JUIsj0" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sfiVeD" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3sfiVeD" -o"Microsoft.WindowsStore_22202.1402.2.0.Base"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
@@ -13623,7 +13623,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/36ro1Mf" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/36ro1Mf" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/36ro1Mf" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13634,7 +13634,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=a3e8ec5a21&url=https://plus2.uhub.com/share/EkG4JD0kt2aU92Kx" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=a3e8ec5a21&url=https://plus2.uhub.com/share/EkG4JD0kt2aU92Kx" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=a3e8ec5a21&url=https://plus2.uhub.com/share/EkG4JD0kt2aU92Kx" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13645,7 +13645,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://onedrive.live.com/download?cid=B05B6F928B4A01FF&resid=B05B6F928B4A01FF!127&authkey=AMjuHwF6mNaE3X8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://onedrive.live.com/download?cid=B05B6F928B4A01FF&resid=B05B6F928B4A01FF!127&authkey=AMjuHwF6mNaE3X8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://onedrive.live.com/download?cid=B05B6F928B4A01FF&resid=B05B6F928B4A01FF!127&authkey=AMjuHwF6mNaE3X8" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13681,8 +13681,8 @@ del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
 )
 cls
 echo SERVER 02 - HK
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HhRsx8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3HhRsx8" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://api.jl-workshop.com/v2/csdlg/download?h=ab8cc4bb2e&url=https://plus2.uhub.com/share/CpgNng4qYKobxEXQ" -o"Microsoft.WindowsStore_22202.1402.2.0.Base"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
@@ -13694,8 +13694,8 @@ del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Base" >nul
 )
 cls
 echo SERVER 03 - US
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3JUIsj0" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sfiVeD" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3JUIsj0" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sfiVeD" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Base"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3sfiVeD" -o"Microsoft.WindowsStore_22202.1402.2.0.Base"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Base') do set "MD5=%%N"
@@ -13716,7 +13716,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sgdxry" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3sgdxry" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3sgdxry" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13727,7 +13727,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3vd9aj1" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3vd9aj1" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3vd9aj1" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13738,7 +13738,7 @@ goto installwindowsstore2022
 del /q /f /s "Microsoft.WindowsStore_22202.1402.2.0.Dependency" >nul
 )
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3HjIakj" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3HjIakj" -t 5 -O"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3HjIakj" -o"Microsoft.WindowsStore_22202.1402.2.0.Dependency"
 cls
 for /f %%N in ('hashsum /a md5 Microsoft.WindowsStore_22202.1402.2.0.Dependency') do set "MD5=%%N"
@@ -13856,12 +13856,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -13958,12 +13958,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -14042,12 +14042,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -14144,12 +14144,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -14406,38 +14406,38 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" goto storex86
 COLOR 09
 %nhcolor% 07 " %red%Microsoft Store x64 "
 %nhcolor% 07 " ====================================================================================================================="
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_9vrnCvAHOU0d_1HAuuoUL1Jk-pKOTVz" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1idM8UW7cBS9fIyJfSaKYKZuX9Y2QRKIn" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rYTn82ExwMv3rs0Gi_6cw3bXX97xBa_X" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19WzAWaKQgrLAWru_rR4DfhMkzfUzBvQq" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qI5ukN0Hlr6ci4piNueHhVCyqchACbnw" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fbjXuR_BDSEs_4plj1PWEvdsNrfEPwBO" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1suPWnc41OdpYpmmlSL9jnm32Awt_7T-P" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AJa6eLdv9SNu0ZBTb0yHd65mKzTsiemg" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EGKxq8Y3h8bWpA3esVw3eDzP7mhj1TLd" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1p-EtHYnmc-cfVjae4T6ANPQfsZBXVSS2" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GSJRPg0xgM_Ll4JBbslWvVMDQ8IBqQDO" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_mc1Uc0Xc-D7LLxrZ4sFW7JRLvsPlCJe" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TxEYG-ATh-z1OWVGBHKasXeujogcI_D7" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lo3dRiJHJOE6LVh5LscYg3idkS26isc9" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rorqLC_XW-Llf3H2W9IsDcZyycJpsI8_" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QJa9U2Lsl1c2gc1teoilQxdoUqdIMWk4" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1nKcf2e661zP07_SUK8Ugj48eriPHkNaw" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10ozkW0TOvAwXbWojTDx2WiAKe9fuBODb" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YDVXKdoSXC7e3xpHn4jCUNkNYAKZxbl1" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SlMjMRC68kIVytoKB4r8ib_q5ycKhYw2" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1XxuNGEx_Bqu-exmFniWsVCzAvbKfz0oI" -t 15 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x64__8wekyb3d8bbwe.Appx
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xm4PxIM-6OZCFVgpNHUYX9Rzn2c3hmPN" -t 5 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JEgkNrZBU36tsN5WIzwMGrUT90t8nM9S" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1hx6YLF93IE7uU1wUVHun0kT6ZHFk0XyI" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1-OfLrfrUGIwshWsib7WYssY8sDdtZajt" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EMO13CGf4qpPtFliQmONTdBQS93v4Z55" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1L9xf-tMMGdAXSbnzwYsS6vc_fAruIGZ7" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1G98PITGxhoOY86aoCQmIVwhQhp-DXVP9" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_9vrnCvAHOU0d_1HAuuoUL1Jk-pKOTVz" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1idM8UW7cBS9fIyJfSaKYKZuX9Y2QRKIn" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rYTn82ExwMv3rs0Gi_6cw3bXX97xBa_X" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19WzAWaKQgrLAWru_rR4DfhMkzfUzBvQq" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1qI5ukN0Hlr6ci4piNueHhVCyqchACbnw" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fbjXuR_BDSEs_4plj1PWEvdsNrfEPwBO" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1suPWnc41OdpYpmmlSL9jnm32Awt_7T-P" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AJa6eLdv9SNu0ZBTb0yHd65mKzTsiemg" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EGKxq8Y3h8bWpA3esVw3eDzP7mhj1TLd" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1p-EtHYnmc-cfVjae4T6ANPQfsZBXVSS2" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1GSJRPg0xgM_Ll4JBbslWvVMDQ8IBqQDO" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_mc1Uc0Xc-D7LLxrZ4sFW7JRLvsPlCJe" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1TxEYG-ATh-z1OWVGBHKasXeujogcI_D7" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lo3dRiJHJOE6LVh5LscYg3idkS26isc9" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rorqLC_XW-Llf3H2W9IsDcZyycJpsI8_" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1QJa9U2Lsl1c2gc1teoilQxdoUqdIMWk4" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1nKcf2e661zP07_SUK8Ugj48eriPHkNaw" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=10ozkW0TOvAwXbWojTDx2WiAKe9fuBODb" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YDVXKdoSXC7e3xpHn4jCUNkNYAKZxbl1" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SlMjMRC68kIVytoKB4r8ib_q5ycKhYw2" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1XxuNGEx_Bqu-exmFniWsVCzAvbKfz0oI" -t 15 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x64__8wekyb3d8bbwe.Appx
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xm4PxIM-6OZCFVgpNHUYX9Rzn2c3hmPN" -t 5 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JEgkNrZBU36tsN5WIzwMGrUT90t8nM9S" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1hx6YLF93IE7uU1wUVHun0kT6ZHFk0XyI" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1-OfLrfrUGIwshWsib7WYssY8sDdtZajt" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EMO13CGf4qpPtFliQmONTdBQS93v4Z55" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1L9xf-tMMGdAXSbnzwYsS6vc_fAruIGZ7" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1G98PITGxhoOY86aoCQmIVwhQhp-DXVP9" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -14980,7 +14980,7 @@ goto startyoutubexx
 :YTLPDLX1XXX
 cls
 cd "%GHOST_DATA%" >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3kXvN8a" -o"Ghost_Youtube-DLP"
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
@@ -15032,7 +15032,7 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 
 :YTLPDLX1
 cd "%GHOST_DATA%" >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
 goto YTLPDLXX
@@ -15096,7 +15096,7 @@ echo YTDLP updating..
 timeout /t 2 >nul
 cls
 cd "%GHOST_DATA%" >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/24tve7.7z" -O "Ghost_Youtube-DLP3" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/24tve7.7z" -O "Ghost_Youtube-DLP3" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP3') do set "MD5=%%N"
 if %MD5% equ 2f411a32635b03e1d8f091aecec4ac48 (
 goto YTDLP3EXT
@@ -15104,7 +15104,7 @@ goto YTDLP3EXT
 del /q /f /s "Ghost_Youtube-DLP3" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://matix.li/fb803337e32d" -t 5 -O "Ghost_Youtube-DLP3" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://matix.li/fb803337e32d" -t 5 -O "Ghost_Youtube-DLP3" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP3') do set "MD5=%%N"
 if %MD5% equ 2f411a32635b03e1d8f091aecec4ac48 (
 goto YTDLP3EXT
@@ -15147,7 +15147,7 @@ del /q /f /s "Ghost_Youtube-DLP" >nul
 
 :YTLPDLX2
 cd "%GHOST_DATA%" >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3kXvN8a" -O "Ghost_Youtube-DLP" -t 1
 for /f %%N in ('hashsum /a md5 Ghost_Youtube-DLP') do set "MD5=%%N"
 if %MD5% equ 91290d37a7b4f9b90154fa4c8138d48f (
 goto YTLPDLXX2
@@ -15805,13 +15805,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto 03ANDROIDX
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto 03ANDROIDX
@@ -15877,26 +15877,26 @@ goto :03ANDROIDX
 COLOR 09
 %nhcolor% 07 " %red%Microsoft Store x86 "
 %nhcolor% 07 " ====================================================================================================================="
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1idM8UW7cBS9fIyJfSaKYKZuX9Y2QRKIn" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19WzAWaKQgrLAWru_rR4DfhMkzfUzBvQq" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fbjXuR_BDSEs_4plj1PWEvdsNrfEPwBO" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AJa6eLdv9SNu0ZBTb0yHd65mKzTsiemg" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1p-EtHYnmc-cfVjae4T6ANPQfsZBXVSS2" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_mc1Uc0Xc-D7LLxrZ4sFW7JRLvsPlCJe" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lo3dRiJHJOE6LVh5LscYg3idkS26isc9" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1nKcf2e661zP07_SUK8Ugj48eriPHkNaw" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YDVXKdoSXC7e3xpHn4jCUNkNYAKZxbl1" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xm4PxIM-6OZCFVgpNHUYX9Rzn2c3hmPN" -t 15 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JEgkNrZBU36tsN5WIzwMGrUT90t8nM9S" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1hx6YLF93IE7uU1wUVHun0kT6ZHFk0XyI" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1-OfLrfrUGIwshWsib7WYssY8sDdtZajt" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EMO13CGf4qpPtFliQmONTdBQS93v4Z55" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1L9xf-tMMGdAXSbnzwYsS6vc_fAruIGZ7" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1G98PITGxhoOY86aoCQmIVwhQhp-DXVP9" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1idM8UW7cBS9fIyJfSaKYKZuX9Y2QRKIn" -t 15 -O Microsoft.NET.Native.Framework.1.3_1.3.24211.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=19WzAWaKQgrLAWru_rR4DfhMkzfUzBvQq" -t 15 -O Microsoft.NET.Native.Framework.1.7_1.7.27413.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1fbjXuR_BDSEs_4plj1PWEvdsNrfEPwBO" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1AJa6eLdv9SNu0ZBTb0yHd65mKzTsiemg" -t 15 -O Microsoft.NET.Native.Runtime.1.3_1.3.23901.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1p-EtHYnmc-cfVjae4T6ANPQfsZBXVSS2" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.25531.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1_mc1Uc0Xc-D7LLxrZ4sFW7JRLvsPlCJe" -t 15 -O Microsoft.NET.Native.Runtime.1.7_1.7.27422.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Lo3dRiJHJOE6LVh5LscYg3idkS26isc9" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.27328.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1nKcf2e661zP07_SUK8Ugj48eriPHkNaw" -t 15 -O Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1YDVXKdoSXC7e3xpHn4jCUNkNYAKZxbl1" -t 15 -O Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1xm4PxIM-6OZCFVgpNHUYX9Rzn2c3hmPN" -t 15 -O Microsoft.VP9VideoExtensions_1.0.22681.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1JEgkNrZBU36tsN5WIzwMGrUT90t8nM9S" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1hx6YLF93IE7uU1wUVHun0kT6ZHFk0XyI" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.002
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1-OfLrfrUGIwshWsib7WYssY8sDdtZajt" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.003
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1EMO13CGf4qpPtFliQmONTdBQS93v4Z55" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.004
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1L9xf-tMMGdAXSbnzwYsS6vc_fAruIGZ7" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.005
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1G98PITGxhoOY86aoCQmIVwhQhp-DXVP9" -t 15 -O Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.006
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1twnTHg9TJx3QctCWPXooIINgANX3AOZl" -t 15 -O remove.store.exe
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
@@ -16691,7 +16691,7 @@ goto soundFX
 cd "%GHOST_DATA%"
 cls
 ::https://download.fxsound.com/fxsoundlatest
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3BoMJsU" -O fxsound_setup.exe -t 5
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3BoMJsU" -O fxsound_setup.exe -t 5
 cls
 start fxsound_setup.exe >nul
 goto soundFX
@@ -16743,12 +16743,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -16804,12 +16804,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -16887,12 +16887,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -16967,12 +16967,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -17038,7 +17038,7 @@ timeout /t 2 >nul
 goto sound
 :gamingmodeONLY
 cd "%GHOST_DATA%" >nul 2>nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3G9OQU6" -t 5 -O"analytic" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3G9OQU6" -t 5 -O"analytic" >nul 2>nul
 del /q /f /s "analytic" >nul 2>nul
 :gamingmode
 @echo off
@@ -17092,7 +17092,7 @@ goto upS01
 cls
 cd "%GHOST_DATA%" >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
 cls
 %_7ZA_EXE% x "Magpie_v0.10.1.zip" -aoa -o"%PROGRAMFILES%\Magpie"
 if EXIST "%PROGRAMFILES%\Magpie\Magpie.exe" (mklink "%USERPROFILE%\Desktop\Magpie" "%PROGRAMFILES%\Magpie\Magpie.exe") >nul 2>nul
@@ -17104,7 +17104,7 @@ goto upS01
 cls
 cd "%GHOST_DATA%" >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/xjbsde.6" -t 5 -O"Lossless.Scaling.2.6.0.6"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://files.catbox.moe/xjbsde.6" -t 5 -O"Lossless.Scaling.2.6.0.6"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
 %nhcolor% 08 " --------------"
@@ -17144,14 +17144,14 @@ goto upS02
 :osd003
 cd "%GHOST_DATA%" >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://dl.gamepp.com/global/GamePP_International.exe" -t 5 -O"GamePP_International.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://dl.gamepp.com/global/GamePP_International.exe" -t 5 -O"GamePP_International.exe"
 cls
 "GamePP_International.exe"
 goto upS02
 :osd002
 cd "%GHOST_DATA%" >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://ftp.nluug.nl/pub/games/PC/guru3d/afterburner/[Guru3D.com]-MSIAfterburner.zip" -t 5 -O"MSIAfterburner.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://ftp.nluug.nl/pub/games/PC/guru3d/afterburner/[Guru3D.com]-MSIAfterburner.zip" -t 5 -O"MSIAfterburner.zip"
 cls
 %_7ZA_EXE% x "MSIAfterburner.zip" -aoa -o"MSIAfterburner"
 FOR %%i in ("MSIAfterburner\MSI*.exe") do Set FileName1="%%i"
@@ -17162,7 +17162,7 @@ goto upS02
 :osd001
 cd "%GHOST_DATA%" >nul
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://cxblobs.blob.core.windows.net/releases/CapFrameX_v1.7.1_Setup.zip" -t 5 -O"CapFrameX_v1.7.1_Setup.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://cxblobs.blob.core.windows.net/releases/CapFrameX_v1.7.1_Setup.zip" -t 5 -O"CapFrameX_v1.7.1_Setup.zip"
 cls
 %_7ZA_EXE% x "CapFrameX_v1.7.1_Setup.zip" -aoa -o"CapFrameX"
 FOR %%i in ("CapFrameX\CapFrameX*.exe") do Set FileName1="%%i"
@@ -17464,18 +17464,18 @@ cd "%GHOST_DATA%"
 cls
 %nhcolor% 07 " %red%Cortana Beta for Windows 10 version 2004"
 %nhcolor% 07 " ====================================================================================================================="
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 15 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kzuPjxENfF1jwh-dRxtu4dnXaYxV0shl" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1lUOy8ZSl9S3LZfIeuy2LKiktscPInwR1" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rorqLC_XW-Llf3H2W9IsDcZyycJpsI8_" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SlMjMRC68kIVytoKB4r8ib_q5ycKhYw2" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ko2QK2q4U42Ppuf4NMfNeRooxqfhHGTV" -t 15 -O "Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Uusbv2i64iz6OsXXr8Bd0JZIDTSq6udp" -t 15 -O "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ko-9bT3HpJpSTlNgqWSbSYMrz3Y-XbW7" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OiZSJrqXrPwX6OKOMxodfh9wBI934XnE" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002"
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1w4iYnGtLJMxCPDZsm1qFTsWmnAsFld4X" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 15 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1kzuPjxENfF1jwh-dRxtu4dnXaYxV0shl" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1lUOy8ZSl9S3LZfIeuy2LKiktscPInwR1" -t 15 -O Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1rorqLC_XW-Llf3H2W9IsDcZyycJpsI8_" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SbQOcT8LQm6sLAWvaEfIQYy24EFb5yN3" -t 15 -O Microsoft.NET.Native.Runtime.2.2_2.2.28604.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1SlMjMRC68kIVytoKB4r8ib_q5ycKhYw2" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1tUgy3ToVMll_JaPDEcnWqzR188AzBdpt" -t 15 -O Microsoft.VCLibs.140.00.UWPDesktop_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ko2QK2q4U42Ppuf4NMfNeRooxqfhHGTV" -t 15 -O "Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Uusbv2i64iz6OsXXr8Bd0JZIDTSq6udp" -t 15 -O "Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1Ko-9bT3HpJpSTlNgqWSbSYMrz3Y-XbW7" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OiZSJrqXrPwX6OKOMxodfh9wBI934XnE" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.002"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1w4iYnGtLJMxCPDZsm1qFTsWmnAsFld4X" -t 15 -O "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.003"
 cls
 %nhcolor% 08 " MD5 HASH CHECK"
 %nhcolor% 08 " --------------"
@@ -17651,7 +17651,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Win
 goto begin
 :cortanabetauninstall
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/yeb8ni4fqp4tweu/remove-cortanabeta.ps1?dl=1" -t 5 -O remove-cortanabeta.ps1
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/yeb8ni4fqp4tweu/remove-cortanabeta.ps1?dl=1" -t 5 -O remove-cortanabeta.ps1
 cls
 powershell -ExecutionPolicy Bypass -File "remove-cortanabeta.ps1"
 cls
@@ -17699,12 +17699,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -17779,12 +17779,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -17881,12 +17881,12 @@ goto op10
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -17989,12 +17989,12 @@ cls
 :download
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18057,7 +18057,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/kb55wm3ocpn1bj0/remove-photos.ps1?dl=1" -t 5 -O "remove-photos.ps1"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/kb55wm3ocpn1bj0/remove-photos.ps1?dl=1" -t 5 -O "remove-photos.ps1"
 cls
 powershell -ExecutionPolicy Bypass -File "remove-photos.ps1"
 cls
@@ -18092,12 +18092,12 @@ del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.App
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18205,12 +18205,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18296,7 +18296,7 @@ if "%var%" equ "22631" goto win11themecheck01
 :win11patchF01
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\GHOSTDARK.theme" echo %green%Set Themes GHOST SPECTRE - Full Dark (beta test) && timeout /t 4 >nul && themeswitcher.exe GHOSTDARK.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18310,12 +18310,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18437,7 +18437,7 @@ if "%var%" equ "22631" goto win11themecheck02
 :win11patchF02
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\GHOSTNOIDX1.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX1 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18451,12 +18451,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18473,7 +18473,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2Rjjowv" -o"themes.GHOSTNOIDX1.7z"
 for /f %%N in ('hashsum /a md5 "themes.GHOSTNOIDX1.7z"') do set "MD5=%%N"
 if %MD5% equ ba675f00027bca6da38afdb64c2324e0 (
@@ -18572,7 +18572,7 @@ if "%var%" equ "22631" goto win11themecheck03
 :win11patchF03
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\GHOSTNOIDX2.theme" echo %green%Set Themes GHOST SPECTRE - GHOSTNOIDX2 && timeout /t 4 >nul && themeswitcher.exe GHOSTNOIDX2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18586,12 +18586,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18608,7 +18608,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3oet4oh" -o"themes.GHOSTNOIDX2.7z"
 for /f %%N in ('hashsum /a md5 "themes.GHOSTNOIDX2.7z"') do set "MD5=%%N"
 if %MD5% equ e66ab98d30388e5f4c4844713f20d85e (
@@ -18697,7 +18697,7 @@ if "%var%" equ "22631" goto win11themecheck04
 :win11patchF04
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\BIBDarkMode1.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 1 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode1.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18711,12 +18711,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18733,7 +18733,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3eJMG0g" -o"theme.BIBDarkMode.7z"
 for /f %%N in ('hashsum /a md5 "theme.BIBDarkMode.7z"') do set "MD5=%%N"
 if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
@@ -18822,7 +18822,7 @@ if "%var%" equ "22631" goto win11themecheck05
 :win11patchF05
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\BIBDarkMode2.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 2 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode2.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18836,12 +18836,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18858,7 +18858,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3eJMG0g" -o"theme.BIBDarkMode.7z"
 for /f %%N in ('hashsum /a md5 "theme.BIBDarkMode.7z"') do set "MD5=%%N"
 if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
@@ -18947,7 +18947,7 @@ if "%var%" equ "22631" goto win11themecheck06
 :win11patchF06
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\BIBDarkMode3.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark Mode 3 && timeout /t 4 >nul && themeswitcher.exe BIBDarkMode3.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -18961,12 +18961,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -18983,7 +18983,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3eJMG0g" -o"theme.BIBDarkMode.7z"
 for /f %%N in ('hashsum /a md5 "theme.BIBDarkMode.7z"') do set "MD5=%%N"
 if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
@@ -19072,7 +19072,7 @@ if "%var%" equ "22631" goto win11themecheck07
 :win11patchF07
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\BIBDarkModeMac.theme" echo %green%Set Themes GHOST SPECTRE - BIB Dark ModeMac && timeout /t 4 >nul && themeswitcher.exe BIBDarkModeMac.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19086,12 +19086,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19108,7 +19108,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3eJMG0g" -o"theme.BIBDarkMode.7z"
 for /f %%N in ('hashsum /a md5 "theme.BIBDarkMode.7z"') do set "MD5=%%N"
 if %MD5% equ 5cc5a2deefe7616baf14347d1f033f4e (
@@ -19197,7 +19197,7 @@ if "%var%" equ "22631" goto win11themecheck08
 :win11patchF08
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\Fluent.Dark.Mode.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Dark Mode && timeout /t 4 >nul && themeswitcher.exe Fluent.Dark.Mode.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19211,12 +19211,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19233,7 +19233,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3ybjE1b" -o"theme.Fluent.7z"
 for /f %%N in ('hashsum /a md5 "theme.Fluent.7z"') do set "MD5=%%N"
 if %MD5% equ 7def6ed7533159d79c20db748a277710 (
@@ -19322,7 +19322,7 @@ if "%var%" equ "22631" goto win11themecheck09
 :win11patchF09
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\Fluent.Day.theme" echo %green%Set Themes GHOST SPECTRE - Fluent Day && timeout /t 4 >nul && themeswitcher.exe Fluent.Day.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19336,12 +19336,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19358,7 +19358,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3ybjE1b" -o"theme.Fluent.7z"
 for /f %%N in ('hashsum /a md5 "theme.Fluent.7z"') do set "MD5=%%N"
 if %MD5% equ 7def6ed7533159d79c20db748a277710 (
@@ -19447,7 +19447,7 @@ if "%var%" equ "22631" goto win11themecheck10
 :win11patchF10
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\Penumbra10ws.theme" echo %green%Set Themes GHOST SPECTRE - Penumbra 10ws && timeout /t 4 >nul && themeswitcher.exe Penumbra10ws.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19461,12 +19461,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19483,7 +19483,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2SSxTrK" -o"theme.Penumbra10.7z"
 for /f %%N in ('hashsum /a md5 "theme.Penumbra10.7z"') do set "MD5=%%N"
 if %MD5% equ 1e30adf4013f244d233e85b5370004ee (
@@ -19571,7 +19571,7 @@ if "%var%" equ "22631" goto win11themecheck11
 :win11patchF11
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\HNY.Dark.theme" echo %green%Set Themes GHOST SPECTRE - HNY Dark && timeout /t 4 >nul && themeswitcher.exe HNY.Dark.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19585,12 +19585,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19607,7 +19607,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3fnfjj5" -o"theme.HNY.7z"
 for /f %%N in ('hashsum /a md5 "theme.HNY.7z"') do set "MD5=%%N"
 if %MD5% equ f9fe8c57566c5c3223c77c88c15db50d (
@@ -19695,7 +19695,7 @@ if "%var%" equ "22631" goto win11themecheck12
 :win11patchF12
 cls
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3a6LWiZ" -t 5 -O "%GHOST_TEMP%\ThemeSwitcher.7z"
 %_7Z_DIR_%\x64\7za x %GHOST_TEMP%\ThemeSwitcher.7z -aoa -ptheme -o"%windir%\System32" >nul 2>nul
 if EXIST "%windir%\Resources\Themes\HNY.Light.theme" echo %green%Set Themes GHOST SPECTRE - HNY Light && timeout /t 4 >nul && themeswitcher.exe HNY.Light.theme && taskkill /F /IM explorer.exe >nul && timeout /t 2 >nul && start explorer && goto ghst
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" echo %green%Only for 64bit. && timeout /t 3 >nul && goto begin
@@ -19709,12 +19709,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19731,7 +19731,7 @@ cls
 %nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 %nhcolor% 08 " ----------------"
 color 03
-::%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
+::%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/syg40ecwcy5in4q/NSudoLG.exe?dl=1" -t 5 -O %Systemroot%\System32\NSudoLG.exe
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/3fnfjj5" -o"theme.HNY.7z"
 for /f %%N in ('hashsum /a md5 "theme.HNY.7z"') do set "MD5=%%N"
 if %MD5% equ f9fe8c57566c5c3223c77c88c15db50d (
@@ -19810,7 +19810,7 @@ goto begin
 cls
 if EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V1 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/p21bfpi9vt505gt/DARK.LIGHT.PURPLE.V1.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/p21bfpi9vt505gt/DARK.LIGHT.PURPLE.V1.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
 for /f %%N in ('hashsum /a md5 "GHOSTSPECTRE - DARK LIGHT PURPLE V1.deskthemepack"') do set "MD5=%%N"
@@ -19833,7 +19833,7 @@ goto ghst
 cls
 if EXIST "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V2 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/oy83dnjoinhxkkk/DARK.LIGHT.PURPLE.V2.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://uc95b8e7d03d677b9e8fefb42958.dl.dropboxusercontent.com/s/oy83dnjoinhxkkk/DARK.LIGHT.PURPLE.V2.deskthemepack?dl=1" -t 5 -O "%Windir%\Resources\Themes\GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
 for /f %%N in ('hashsum /a md5 "GHOSTSPECTRE - DARK LIGHT PURPLE V2.deskthemepack"') do set "MD5=%%N"
@@ -19856,7 +19856,7 @@ goto ghst
 cls
 if EXIST "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" echo %green%Set Default Themes GHOST SPECTRE - DARK LIGHT PURPLE V3 && timeout /t 4 >nul && "%Windir%\Resources\Themes\GHOSTV3.deskthemepack" >nul 2>nul && taskkill /IM "SystemSettings.exe" /F >nul 2>nul && goto ghst
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3GvoHg5" -t 5 -O "%Windir%\Resources\Themes\GHOSTV3.deskthemepack"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3GvoHg5" -t 5 -O "%Windir%\Resources\Themes\GHOSTV3.deskthemepack"
 cls
 cd "%Windir%\Resources\Themes"
 for /f %%N in ('hashsum /a md5 "GHOSTV3.deskthemepack"') do set "MD5=%%N"
@@ -19880,7 +19880,7 @@ cls
 cd "%GHOST_DATA%"
 cls
 COLOR 09
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/068/ut pack 1.2.3.50.zip" -t 15 -O "uTorrent 3.5.5 Build 46038.repack.zip"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/068/ut pack 1.2.3.50.zip" -t 15 -O "uTorrent 3.5.5 Build 46038.repack.zip"
 cls
 ::echo %white%===============================
 ::echo %white%Password Zip: %yellow%repack.me
@@ -19895,12 +19895,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -19963,12 +19963,12 @@ cls
 cd "%GHOST_DATA%"
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -20690,13 +20690,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto 03ANDROID
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2Y3VA3c" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/2Y3VA3c" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3pWakg7" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3pWakg7" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\non.bat"
 goto 03ANDROID
@@ -20829,12 +20829,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -20929,12 +20929,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21010,7 +21010,7 @@ cls
 cd "%GHOST_DATA%"
 cls
 COLOR 09
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://downloads.vivaldi.com/stable/Vivaldi.3.4.2066.76.x64.exe" -t 15 -O "Vivaldi.3.4.2066.76.x64.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "https://downloads.vivaldi.com/stable/Vivaldi.3.4.2066.76.x64.exe" -t 15 -O "Vivaldi.3.4.2066.76.x64.exe"
 cls
 explorer /select,"Vivaldi.3.4.2066.76.x64.exe"
 cls
@@ -21021,12 +21021,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21054,12 +21054,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21087,12 +21087,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21120,12 +21120,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21161,12 +21161,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21203,12 +21203,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21253,12 +21253,12 @@ goto vmdownload
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21304,12 +21304,12 @@ goto vmdownload
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21346,12 +21346,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21415,12 +21415,12 @@ echo %white%====================================================================
 )
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -21500,12 +21500,12 @@ timeout /t 3 >nul
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -22222,13 +22222,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2008
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2008
@@ -22742,13 +22742,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2211
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2211
@@ -23293,13 +23293,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2301NON
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301NON
@@ -23812,13 +23812,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2301ROOT
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2301ROOT
@@ -24371,13 +24371,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2304NON
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304NON
@@ -24891,13 +24891,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2304ROOT
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2304ROOT
@@ -25288,7 +25288,7 @@ if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305NON
 
@@ -25342,7 +25342,7 @@ if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 timeout /t 2 >nul
 goto ANDROIDX2305NON
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305NON
 
@@ -25466,13 +25466,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2305NON
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305NON
@@ -25824,7 +25824,7 @@ if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305ROOT
 
@@ -25878,7 +25878,7 @@ if EXIST "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" (
 timeout /t 2 >nul
 goto ANDROIDX2305ROOT
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\WSA.lnk"
 goto ANDROIDX2305ROOT
 
@@ -26002,13 +26002,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2305ROOT
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2305ROOT
@@ -26205,7 +26205,7 @@ goto WSADL2309N
 ::CAT
 :WSADL2309N
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/qweqweqwe_202310/QWEQWEQWE" -t 5 -O "WSA_2309.40000.2.0_x64-NonRoot.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/qweqweqwe_202310/QWEQWEQWE" -t 5 -O "WSA_2309.40000.2.0_x64-NonRoot.exe"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://archive.org/download/qweqweqwe_202310/QWEQWEQWE" -o"WSA_2309.40000.2.0_x64-NonRoot.exe"
 cls
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-NonRoot.exe') do set "MD5=%%N"
@@ -26291,7 +26291,7 @@ Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
 goto ANDROIDX2309NON
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309NON
 :ADB06X2309N
@@ -26414,13 +26414,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2309NON
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309NON
@@ -26576,7 +26576,7 @@ goto WSADL2309R
 ::CAT
 :WSADL2309R
 cls
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/QWEWSDXWS/QWEWSDXWS" -t 5 -O "WSA_2309.40000.2.0_x64-Root.exe"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/QWEWSDXWS/QWEWSDXWS" -t 5 -O "WSA_2309.40000.2.0_x64-Root.exe"
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://archive.org/download/QWEWSDXWS/QWEWSDXWS" -o"WSA_2309.40000.2.0_x64-Root.exe"
 cls
 for /f %%N in ('hashsum /a md5 WSA_2309.40000.2.0_x64-Root.exe') do set "MD5=%%N"
@@ -26612,7 +26612,7 @@ explorer "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Run.bat"
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309ROOT
 
@@ -26667,7 +26667,7 @@ Powershell Start-Process "wsa://com.android.settings"
 timeout /t 2 >nul
 goto ANDROIDX2309ROOT
 )
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://archive.org/download/wsa_20230619/WSA.lnk" -O "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk" -t 1 >nul 2>nul
 "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\WSA.lnk"
 goto ANDROIDX2309ROOT
 
@@ -26791,13 +26791,13 @@ explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\no
 goto ANDROIDX2309ROOT
 )
 cd "%GHOST_DATA%"
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
 )
 cls
-%WGET_EXE% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
+%wget_exe% -q --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/pvflh89ollnusn5/nonx.bat?dl=1" -t 5 -O "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 if EXIST "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat" (
 explorer.exe "%GHOST_DIR%\Android\platform-tools\systrace\catapult\common\bin\nonx.bat"
 goto ANDROIDX2309ROOT
@@ -27035,7 +27035,7 @@ del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
 echo  please wait..
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Wh9BEp" -O EdgeBlocker.bin -t 5
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Wh9BEp" -O EdgeBlocker.bin -t 5
 cls
 %nhcolor% 08 " --------------"
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -27049,7 +27049,7 @@ goto edgeblockR
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/edge-chromium-blocker/EdgeChromium_Blocker" -O EdgeBlocker.bin -t 5
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/edge-chromium-blocker/EdgeChromium_Blocker" -O EdgeBlocker.bin -t 5
 cls
 %nhcolor% 08 " --------------"
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -27229,7 +27229,7 @@ del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
 echo  please wait..
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Wh9BEp" -O EdgeBlocker.bin -t 5
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://bit.ly/3Wh9BEp" -O EdgeBlocker.bin -t 5
 cls
 %nhcolor% 08 " --------------"
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -27243,7 +27243,7 @@ goto edgeblockR
 del /q /f /s "EdgeBlocker.bin" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/edge-chromium-blocker/EdgeChromium_Blocker" -O EdgeBlocker.bin -t 5
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/edge-chromium-blocker/EdgeChromium_Blocker" -O EdgeBlocker.bin -t 5
 cls
 %nhcolor% 08 " --------------"
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -27436,12 +27436,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27455,7 +27455,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe" -t 5 -O "SteamSetup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe" -t 5 -O "SteamSetup.exe"
 timeout /t 5 >nul
 cls
 echo Installing... please wait..
@@ -27469,12 +27469,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27488,7 +27488,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://origin-a.akamaihd.net/Origin-Client-Download/origin/live/OriginThinSetup.exe" -t 5 -O "OriginThinSetup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://origin-a.akamaihd.net/Origin-Client-Download/origin/live/OriginThinSetup.exe" -t 5 -O "OriginThinSetup.exe"
 timeout /t 5 >nul
 cls
 echo Installing... please wait..
@@ -27502,12 +27502,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27521,7 +27521,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://ubistatic3-a.akamaihd.net/orbit/launcher_installer/UbisoftConnectInstaller.exe" -t 5 -O "UbisoftConnectInstaller.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://ubistatic3-a.akamaihd.net/orbit/launcher_installer/UbisoftConnectInstaller.exe" -t 5 -O "UbisoftConnectInstaller.exe"
 cls
 echo Installing... please wait..
 UbisoftConnectInstaller.exe
@@ -27534,12 +27534,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27553,7 +27553,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe" -t 5 -O "GOG_Galaxy_2.0.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe" -t 5 -O "GOG_Galaxy_2.0.exe"
 cls
 echo Installing... please wait..
 GOG_Galaxy_2.0.exe
@@ -27566,12 +27566,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27585,7 +27585,7 @@ rename aria2-1.36.0-win-64bit-build1 aria2c >nul
 rename aria2-1.36.0-win-32bit-build1 aria2c >nul
 cls
 :startdownload
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/38Krwe8" -t 5 -O "EpicInstaller-10.19.2.msi"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/38Krwe8" -t 5 -O "EpicInstaller-10.19.2.msi"
 cls
 echo Installing... please wait..
 EpicInstaller-10.19.2.msi
@@ -27598,12 +27598,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27620,7 +27620,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://blizz.ly/3hzFDqN" -t 15 -O "Battle.net-Setup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://blizz.ly/3hzFDqN" -t 15 -O "Battle.net-Setup.exe"
 ::%ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://blizz.ly/3hzFDqN" -t 5 -O "Battle.net-Setup.exe"
 cls
 echo Installing... please wait..
@@ -27634,12 +27634,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27656,7 +27656,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://itch.io/app/download" -t 15 -O "itch-setup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://itch.io/app/download" -t 15 -O "itch-setup.exe"
 cls
 echo Installing... please wait..
 itch-setup.exe
@@ -27670,12 +27670,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27692,7 +27692,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.cdp.bethesda.net/BethesdaNetLauncher_Setup.exe" -t 15 -O "BethesdaNetLauncher_Setup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.cdp.bethesda.net/BethesdaNetLauncher_Setup.exe" -t 15 -O "BethesdaNetLauncher_Setup.exe"
 cls
 echo Installing... please wait..
 BethesdaNetLauncher_Setup.exe
@@ -27705,12 +27705,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27727,7 +27727,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EADesktopInstaller.exe" -t 15 -O "EADesktopInstaller.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://origin-a.akamaihd.net/EA-Desktop-Client-Download/installer-releases/EADesktopInstaller.exe" -t 15 -O "EADesktopInstaller.exe"
 cls
 echo Installing... please wait..
 EADesktopInstaller.exe
@@ -27740,12 +27740,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27762,7 +27762,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 15 -O "XboxInstaller.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://assets.xbox.com/installer/20190628.8/anycpu/XboxInstaller.exe" -t 15 -O "XboxInstaller.exe"
 cls
 echo Installing... please wait..
 XboxInstaller.exe
@@ -27775,12 +27775,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27797,7 +27797,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe" -t 15 -O "Rockstar-Games-Launcher.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://gamedownloads.rockstargames.com/public/installer/Rockstar-Games-Launcher.exe" -t 15 -O "Rockstar-Games-Launcher.exe"
 cls
 echo Installing... please wait..
 Rockstar-Games-Launcher.exe
@@ -27810,12 +27810,12 @@ cd "%GHOST_DATA%"
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27832,7 +27832,7 @@ cls
 ::%nhcolor% 08 " %white%ARIA2 DOWNLOADER"
 ::%nhcolor% 08 " ----------------"
 ::color 03
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.amazongames.com/AmazonGamesSetup.exe" -t 15 -O "AmazonGamesSetup.exe"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://download.amazongames.com/AmazonGamesSetup.exe" -t 15 -O "AmazonGamesSetup.exe"
 cls
 echo Installing... please wait..
 AmazonGamesSetup.exe
@@ -27864,12 +27864,12 @@ echo %white%====================================================================
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27885,7 +27885,7 @@ cls
 :startdownload
 echo %white% WGET DOWNLOADER
 echo %white%=======================================================================
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/3236z3.Appx" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/3236z3.Appx" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
 timeout /t 3 >nul
 ::rename "3l4jkf4" "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
 echo %white%=======================================================================
@@ -27905,7 +27905,7 @@ echo %white%====================================================================
 cls
 echo %white% WGET DOWNLOADER
 echo %white%=======================================================================
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/g202m9blil6vd9v/3236z3.Appx?dl=1" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/g202m9blil6vd9v/3236z3.Appx?dl=1" -t 5 -O"AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx"
 timeout /t 3 >nul
 ::rename "3l4jkf4" "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx" >nul
 echo %white%=======================================================================
@@ -27971,12 +27971,12 @@ echo %white%====================================================================
 cls
 if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-32bit-build1.zip" -t 5 -O aria2c.7z
 )
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
@@ -27992,7 +27992,7 @@ cls
 :startdownload
 echo %white% WGET DOWNLOADER
 echo %white%=======================================================================
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/1t7ft3.appx" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/1t7ft3.appx" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
 timeout /t 3 >nul
 ::rename "3lqzzn5" "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
 echo %white%=======================================================================
@@ -28012,7 +28012,7 @@ echo %white%====================================================================
 cls
 echo %white% WGET DOWNLOADER
 echo %white%=======================================================================
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/y1xy9o356e88bxj/1t7ft3.appx?dl=1" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/y1xy9o356e88bxj/1t7ft3.appx?dl=1" -t 5 -O"AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx"
 timeout /t 3 >nul
 ::rename "3lqzzn5" "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >nul
 echo %white%=======================================================================
@@ -28092,7 +28092,7 @@ echo %white%====================================================================
 )
 cls
 :: CAT MOE
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/mz3ktv.bin" -t 5 -O"StartAllBack.v3.7.8.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/mz3ktv.bin" -t 5 -O"StartAllBack.v3.7.8.bin"
 
 timeout /t 2 >nul
 cls
@@ -28110,8 +28110,8 @@ echo %white%====================================================================
 )
 :: Uhub
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/scl/fi/aubzeqrcqiqfs982mtcut/StartAllBack.v3.7.8.bin?rlkey=uj31mroy31c88z7j6babmzp4c&dl=1" -t 5 -O"StartAllBack.v3.7.8.bin"
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/ac93deef" -t 5 -O"StartAllBack.v3.7.8.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/scl/fi/aubzeqrcqiqfs982mtcut/StartAllBack.v3.7.8.bin?rlkey=uj31mroy31c88z7j6babmzp4c&dl=1" -t 5 -O"StartAllBack.v3.7.8.bin"
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/ac93deef" -t 5 -O"StartAllBack.v3.7.8.bin"
 timeout /t 2 >nul
 cls
 echo %white%=======================================================================
@@ -28128,7 +28128,7 @@ echo %white%====================================================================
 )
 :: ONE DRIVE Enterprises
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/51fd27ca" -t 3 -O "StartAllBack.v3.7.8.bin"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://cdn.matix-media.net/dd/51fd27ca" -t 3 -O "StartAllBack.v3.7.8.bin"
 timeout /t 2 >nul
 cls
 echo %white%=======================================================================
@@ -28322,7 +28322,7 @@ cls
 cd "%GHOST_DATA%"
 echo Copilot update... please wait.
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3uimBzy" -t 5 -O "copilot_prev" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3uimBzy" -t 5 -O "copilot_prev" >nul 2>nul
 for /f %%N in ('hashsum /a md5 copilot_prev') do set "MD5=%%N"
 if %MD5% equ d047a4aa9b82b830cc01412806a7b8e6 (
 goto Costart
@@ -28330,7 +28330,7 @@ goto Costart
 del /q /f /s "copilot_prev" >nul
 )
 timeout /t 2 >nul
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/j6ydkp" -t 5 -O "copilot_prev" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/j6ydkp" -t 5 -O "copilot_prev" >nul 2>nul
 for /f %%N in ('hashsum /a md5 copilot_prev') do set "MD5=%%N"
 if %MD5% equ d047a4aa9b82b830cc01412806a7b8e6 (
 goto Costart
@@ -28338,7 +28338,7 @@ goto Costart
 del /q /f /s "copilot_prev" >nul
 )
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://ckd9-my.sharepoint.com/:u:/g/personal/ghostclouds_ckd9_onmicrosoft_com/Ec61T7d74bxJrngQtMEQiTwBiHFh5x8QqZNhTtX3ObwoqQ?e=yIRHvM&download=1" -t 5 -O "copilot_prev" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://ckd9-my.sharepoint.com/:u:/g/personal/ghostclouds_ckd9_onmicrosoft_com/Ec61T7d74bxJrngQtMEQiTwBiHFh5x8QqZNhTtX3ObwoqQ?e=yIRHvM&download=1" -t 5 -O "copilot_prev" >nul 2>nul
 for /f %%N in ('hashsum /a md5 copilot_prev') do set "MD5=%%N"
 if %MD5% equ d047a4aa9b82b830cc01412806a7b8e6 (
 goto Costart
@@ -28386,7 +28386,7 @@ goto copilotoldversion
 )
 
 :skipVX
-::%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/thebookisclosed/ViVe/releases/download/v0.3.3/ViVeTool-v0.3.3.zip" -t 5 -O "copilot_prev_force" >nul 2>nul
+::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/thebookisclosed/ViVe/releases/download/v0.3.3/ViVeTool-v0.3.3.zip" -t 5 -O "copilot_prev_force" >nul 2>nul
 timeout /t 2 >nul
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "1" /f >nul 2>nul
 Reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "1" /f >nul 2>nul
@@ -28660,7 +28660,7 @@ goto Costart
 cls
 cd "%GHOST_DATA%"
 echo Copilot Preview update... please wait.
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/qotg5v.7z" -t 5 -O "copilot_prev" >nul 2>nul
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://files.catbox.moe/qotg5v.7z" -t 5 -O "copilot_prev" >nul 2>nul
 timeout /t 2 >nul
 :Costart
 7z x "copilot_prev" -aoa -pco -o"%PROGRAMFILES(X86)%\Copilot\" >nul 2>nul
@@ -28725,7 +28725,7 @@ DEL /s /q "%USERPROFILE%\AppData\Local\Packages\Microsoft.Windows.ContentDeliver
 timeout /t 3 >nul
 
 cls
-%WGET_EXE% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/microsoft.-windows.-content-delivery-manager-cw-5n-1h-2txyewy.-7z_202310/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy.7z" -t 5 -O "spotlight"
+%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://archive.org/download/microsoft.-windows.-content-delivery-manager-cw-5n-1h-2txyewy.-7z_202310/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy.7z" -t 5 -O "spotlight"
 timeout /t 2 >nul
 7z x "spotlight" -aoa -o"%Windir%\SystemApps"
 timeout /t 2 >nul

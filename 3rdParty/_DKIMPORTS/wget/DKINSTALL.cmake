@@ -19,11 +19,11 @@ dk_installPackage(wget)
 
 ### Msys2 ###
 if(MSYSTEM)
-	dk_findProgram(WGET_EXE wget "${msys2}/usr/bin")
+	dk_findProgram(wget_exe wget "${msys2}/usr/bin")
 endif()
 
 ### Tiny Core Linux ###
 if(TINYCORE)
 	#dk_exec(tce-load -wi wget)
-	dk_findProgram(WGET_EXE wget)
+	dk_findProgram(wget_exe wget)
 endif()
