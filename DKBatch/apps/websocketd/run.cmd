@@ -13,7 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 	
 	%dk_call% dk_validate WEBSOCKETD_EXE "%dk_call% dk_depend websocketd"
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd_exe"
 	
 	::%WEBSOCKETD_EXE% --devconsole --port=8080 count.cmd
 	::%WEBSOCKETD_EXE% --devconsole --port=8080 C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\DKBuilder\DKBuilder.cmd

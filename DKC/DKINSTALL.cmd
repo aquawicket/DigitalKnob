@@ -126,7 +126,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::###### DK_C_COMPILER ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 
-	if "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh")
+	if "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh_exe")
 	if "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc")
 	if "%Target_Env%" equ "Clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend clang")
 	if "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend gcc")

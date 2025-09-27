@@ -19,7 +19,7 @@ set "DKBash_Env=WSL"
 
 	::###### Install DKBash ######
 	echo Installing DKBash . . .
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd_exe"
 	
 	::########### (GIT) #############
 	if /i "%DKBash_Env%" equ "GIT" (%dk_call% dk_validate bash_exe "%dk_call% dk_depend bash GIT")

@@ -44,7 +44,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	%dk_call% dk_validate nodejs_EXE "%dk_call% dk_depend nodejs"
 	%dk_call% dk_registryDeleteKey "HKCR\DKBatch"
 	
-	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd_exe"
 	ftype DKJavascript="%cmd_exe%" /c call "%~f0" "%nodejs_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR\DKJavascript\DefaultIcon" "" "REG_SZ" "%nodejs_EXE%"
 	

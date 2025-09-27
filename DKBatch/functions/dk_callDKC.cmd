@@ -76,7 +76,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if /i "%Target_Env%" equ "Cosmo" (
-		%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh"
+		%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh_exe"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend Cosmo"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!sh_exe! !COSMOCC_C_COMPILER!"

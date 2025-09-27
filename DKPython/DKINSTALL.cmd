@@ -53,7 +53,7 @@ exit /b %ERRORLEVEL%
 	::###### Install DKPython ######
 	%dk_call% dk_validate DKPYTHON_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd_exe"
 	%dk_call% dk_validate python_exe				"%dk_call% dk_depend python3"
 
 	ftype DKPython="%cmd_exe%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%python_exe%" "%%1" %*

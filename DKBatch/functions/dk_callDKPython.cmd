@@ -28,7 +28,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_allButFirstArgs %*
 	
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate cmd_exe 		"%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe 		"%dk_call% dk_depend cmd_exe"
 	%dk_call% dk_validate python_exe 	"%dk_call% dk_depend python3"
 	
 	::############ DKPython function call ############

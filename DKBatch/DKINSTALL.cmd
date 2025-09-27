@@ -44,7 +44,7 @@ if "%~1" equ "" (goto DKINSTALL)
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
 	
-	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd"
+	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd_exe"
 	::%dk_call% dk_validate tcc_exe					"%dk_call% dk_depend tcc-rt"
 	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_	"%dk_call% dk_DKBRANCH_DIR"
 
