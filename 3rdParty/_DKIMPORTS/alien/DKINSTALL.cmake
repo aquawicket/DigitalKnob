@@ -18,3 +18,4 @@ include_guard()
 
 dk_installPackage(alien)
 dk_findProgram(alien_exe alien)
+dk_assertPath(alien_exe)

@@ -15,7 +15,6 @@ include_guard()
 ############ ant ############
 # https://github.com/apache/ant.git
 
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import		(${ant_Import} NAME ant)
-dk_setEnv		("ANT_HOME" ${ant})
-dk_setEnv		("VS_AntHome" ${ant})
+dk_import(APP)
+dk_setEnv("ANT_HOME" ${ant})
+dk_setEnv("VS_AntHome" ${ant})

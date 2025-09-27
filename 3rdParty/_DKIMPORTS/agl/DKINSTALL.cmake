@@ -15,7 +15,7 @@ include_guard()
 ############ agl ############
 # https://developer.apple.com/documentation/agl/agl?language=objc
 
-dk_validate(Host_Os "dk_Host_Os()")
+#dk_validate(Host_Os "dk_Host_Os()")
 if(NOT Mac_Host)
 	dk_disable(agl)
 	dk_return()
