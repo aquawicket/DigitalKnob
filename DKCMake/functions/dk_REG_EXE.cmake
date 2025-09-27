@@ -12,23 +12,23 @@ include_guard()
 #########################################################################
 
 ####################################################################
-# dk_REG_EXE()
+# dk_reg_exe()
 #
 #
-function(dk_REG_EXE)
+function(dk_reg_exe)
     dk_debugFunc()
 
 	###### SET ######
 	if(ARGV)
-		dk_set(REG_EXE "${ARGV0}")
+		dk_set(reg_exe "${ARGV0}")
 		
 	###### GET ######
-	elseif(DEFINED ENV{REG_EXE})	
-		dk_set(REG_EXE "$ENV{REG_EXE}")
+	elseif(DEFINED ENV{reg_exe})	
+		dk_set(reg_exe "$ENV{reg_exe}")
 	
 	else()
-		if(EXISTS "${REG_EXE}")
-			dk_debug("REG_EXE:${REG_EXE} already set")
+		if(EXISTS "${reg_exe}")
+			dk_debug("reg_exe:${reg_exe} already set")
 			return()
 		endif()
 		
@@ -36,17 +36,17 @@ function(dk_REG_EXE)
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		
 		###### CYGPATH_EXE ######
-		if(NOT EXISTS "${REG_EXE}")
-			set(REG_EXE $ENV{REG_EXE})
+		if(NOT EXISTS "${reg_exe}")
+			set(reg_exe $ENV{reg_exe})
 		endif()
-		if(NOT EXISTS "${REG_EXE}")
-			dk_findProgram(REG_EXE reg.exe)
+		if(NOT EXISTS "${reg_exe}")
+			dk_findProgram(reg_exe reg.exe)
 		endif()
 	endif()
 	
 	###### FINALIZE ######
-	dk_set(REG_EXE "${REG_EXE}")		# Globalize the variable
-	dk_assertPath(REG_EXE)
+	dk_set(reg_exe "${reg_exe}")		# Globalize the variable
+	dk_assertPath(reg_exe)
 endfunction()
 
 
@@ -59,21 +59,21 @@ function(DKTEST)
     dk_debugFunc()
  
 	dk_echo()
-	dk_echo("Test Getting REG_EXE . . .")
-    dk_REG_EXE()
-	if(EXISTS "${REG_EXE}")
-		dk_success("REG_EXE = ${REG_EXE}")
+	dk_echo("Test Getting reg_exe . . .")
+    dk_reg_exe()
+	if(EXISTS "${reg_exe}")
+		dk_success("reg_exe = ${reg_exe}")
 	else()
-		dk_error("REG_EXE = ${REG_EXE}")
+		dk_error("reg_exe = ${reg_exe}")
 	endif()
 	
 	
 	dk_echo()
-	dk_echo("Test Setting REG_EXE . . .")
-    dk_REG_EXE("C:/reg.exe")
-	if(EXISTS "${REG_EXE}")
-		dk_success("REG_EXE = ${REG_EXE}")
+	dk_echo("Test Setting reg_exe . . .")
+    dk_reg_exe("C:/reg.exe")
+	if(EXISTS "${reg_exe}")
+		dk_success("reg_exe = ${reg_exe}")
 	else()
-		dk_error("REG_EXE = ${REG_EXE}")
+		dk_error("reg_exe = ${reg_exe}")
 	endif()
 endfunction()

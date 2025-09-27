@@ -31,7 +31,7 @@ function(dk_timeout)
 	
 	###### CMD ######
 	if(CMD_SHELL)
-		dk_validate(timeout_exe "dk_TIMEOUT_EXE()")
+		dk_validate(timeout_exe "dk_depend(timeout_exe)")
 		set(command "(${timeout_exe} /t ${seconds})")
 		message("CMD> ${command}")
 		execute_process(COMMAND "${cmd_exe}" /c "${command}")

@@ -13,10 +13,10 @@ include_guard()
 
 
 ####################################################################
-# dk_POWERSHELL_EXE()
+# dk_powershell_exe()
 #
 #
-function(dk_POWERSHELL_EXE)
+function(dk_powershell_exe)
     dk_debugFunc()
 
 	if(EXISTS "${powershell_exe}")

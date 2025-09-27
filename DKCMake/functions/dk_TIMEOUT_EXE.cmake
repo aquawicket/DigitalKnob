@@ -12,10 +12,10 @@ include_guard()
 #########################################################################
 
 ####################################################################
-# dk_TIMEOUT_EXE()
+# dk_timeout_exe()
 #
 #
-function(dk_TIMEOUT_EXE)
+function(dk_timeout_exe)
     dk_debugFunc()
 
 	if(EXISTS "${timeout_exe}")
@@ -53,6 +53,6 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_TIMEOUT_EXE()
+    dk_timeout_exe()
     dk_printVar(timeout_exe)
 endfunction()
