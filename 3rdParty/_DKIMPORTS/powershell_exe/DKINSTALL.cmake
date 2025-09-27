@@ -71,7 +71,7 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_envList(PLUGIN POP)
-	dk_validate(powershell_exe "dk_depend(powershell)")
+	dk_validate(powershell_exe "dk_depend(powershell_exe)")
 	dk_debug("powershell_exe = ${powershell_exe}")
 
 endfunction()	

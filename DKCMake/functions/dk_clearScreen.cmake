@@ -30,7 +30,7 @@ function(dk_clearScreen)
 	
 	### powershell ###
 	find_program(powershell_exe powershell.exe)
-	#dk_depend(powershell)
+	#dk_depend(powershell_exe)
 	if(powershell_exe)
 		#dk_exec(${powershell_exe} clear)
 		execute_process(COMMAND ${powershell_exe} clear) # faster
@@ -38,7 +38,7 @@ function(dk_clearScreen)
 	endif()
 	
 #	### cmd ###	
-#	dk_validate(cmd_exe "dk_depend(cmd)")
+#	dk_validate(cmd_exe "dk_depend(cmd_exe)")
 #	if(cmd_exe)
 #		dk_exec(cls)  					# FIXME: only clears 1 line
 #		execute_process(COMMAND cls)  	# FIXME: only clears 1 line

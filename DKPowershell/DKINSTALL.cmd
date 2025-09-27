@@ -53,7 +53,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	::###### Install DKPowershell ######
 	%dk_call% dk_validate DKIMPORTS_DIR 				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate powershell_exe 				"%dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe 				"%dk_call% dk_depend powershell_exe"
 	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
 
 	::###### DKPowershell ######

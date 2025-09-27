@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "command=%~1"
 	set "fileout=%~2"
 	
-	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 	%powershell_exe% "%command% 2>&1 | tee %fileout%"
 	
 %endfunction%

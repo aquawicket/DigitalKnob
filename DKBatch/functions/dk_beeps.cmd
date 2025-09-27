@@ -25,7 +25,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	::### Method 1 - powershell beep ###
-	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 	"%powershell_exe%" "%song%"
 
 	::### Method 3 - echo BELL character ###

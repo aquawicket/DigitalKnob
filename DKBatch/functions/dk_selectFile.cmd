@@ -13,7 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0 1
 	
-	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
     for /f "delims=" %%G in ('%powershell_exe:/=\% -noprofile "iex (${%~f0} | out-string)"') do (
 		set "dk_selectFile=%%~G"
     )

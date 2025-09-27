@@ -32,7 +32,7 @@ function(dk_CYGPATH_EXE)
 			return()
 		endif()
 		
-		dk_validate(cmd_exe "dk_depend(cmd)")
+		dk_validate(cmd_exe "dk_depend(cmd_exe)")
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		
 		###### CYGPATH_EXE ######

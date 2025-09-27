@@ -47,7 +47,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	::###### Try powershell.exe [System.IO.Compression.ZipFile]::ExtractToDirectory ######
 	if NOT EXIST "%dk_extract_dest%" (
-		%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+		%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 		%powershell_exe% Add-Type -Assembly 'System.IO.Compression.Filesystem'; [System.IO.Compression.ZipFile]::ExtractToDirectory^('%dk_extract_file%', '%dk_extract_dest%'^)
 		%dk_call% dk_isNonEmptyDirectory "%dk_extract_dest%" || %dk_call% dk_delete "%dk_extract_dest%"
 	)

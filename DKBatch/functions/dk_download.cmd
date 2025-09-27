@@ -77,7 +77,7 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	if NOT EXIST "%destination%_DOWNLOADING" (
 		if NOT defined dk_download_DISABLE_powershell (
 			%dk_call% dk_debug "Dowloading using powershell"
-			rem %dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell"
+			rem %dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 			powershell.exe -Command "$cli = New-Object System.Net.WebClient; "^
 			"$cli.Headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'; "^
 			"$cli.DownloadFile('%url%', '%destination%_DOWNLOADING');"

@@ -20,7 +20,7 @@ include_guard()
 function(dk_title)
     dk_debugFunc(0 99)
  
-	#dk_validate(cmd_exe "dk_depend(cmd)")
+	#dk_validate(cmd_exe "dk_depend(cmd_exe)")
 
 	if(EXISTS "${cmd_exe}")
 		execute_process(COMMAND ${cmd_exe} /c title ${ARGV})

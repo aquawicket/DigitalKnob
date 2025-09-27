@@ -50,7 +50,7 @@ function(dk_beep)
 	
 	###### POWERSHELL ######
 #	find_program(powershell_exe powershell.exe)
-	dk_validate(powershell_exe "dk_depend(powershell)")
+	dk_validate(powershell_exe "dk_depend(powershell_exe)")
 	if(EXISTS "${powershell_exe}")
 		set(cmnd ${powershell_exe} "[console]::beep(${frequency},${duration})")
 		dk_debug("cmnd = ${cmnd}")

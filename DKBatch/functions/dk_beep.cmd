@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::%dk_call% dk_debugFunc 0 2
 
 	::### Method 1 - powershell beep ###
-	if NOT defined powershell_exe (%dk_call% dk_depend powershell)
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 	if "%~1" equ "" (set frequency=500) else (set frequency=%~1)
 	if "%~2" equ "" (set duration=500)  else (set duration=%~1)
 	"%powershell_exe%" "[console]::beep(%frequency%,%duration%)"
@@ -56,7 +56,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set G#2=415)
 	(set A3=440)
 	
-	if NOT defined powershell_exe (%dk_call% dk_depend powershell)
+	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
 	call :dk_beep %G#1% 500
 	call :dk_beep %A2% 500
 	call :dk_beep %A#2% 500

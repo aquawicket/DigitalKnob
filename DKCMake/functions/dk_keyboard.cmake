@@ -19,7 +19,7 @@ include_guard()
 function(dk_keyboard)
 	dk_debugFunc(0)
 
-	dk_validate(cmd_exe "dk_depend(cmd)")
+	dk_validate(cmd_exe "dk_depend(cmd_exe)")
 	if(cmd_exe)
 		dk_validate(ENV{DKBATCH_FUNCTIONS_DIR} "dk_DKBRANCH_DIR()")
 		dk_chdir($ENV{DKBATCH_FUNCTIONS_DIR})
