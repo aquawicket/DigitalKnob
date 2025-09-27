@@ -13,22 +13,36 @@ if [ -z "${DK_LOADED-}" ]; then
 fi
 ##################################################################################
 
-
-####################################################################
-# dk_curl_exe()
+##################################################################################
+# DKINSTALL
 #
-#
-dk_curl_exe() {
-	#dk_debugFunc 0
+DKINSTALL() {
+	dk_debugFunc 0
 
-	[ -e "${curl_exe-}" ] && return
-
-	curl_exe=$(command -v curl)
-	dk_call dk_assertPath "${curl_exe}"
-	export curl_exe="${curl_exe}"
+	(command -v "${sudo_exe-}" 1>/dev/null) && return $?;
+	
+	[ ! -e "${sudo_exe-}" ] && sudo_exe="/usr/bin/sudo"
+	[ ! -e "${sudo_exe-}" ] && sudo_exe="C:/Windows/System32/sudo.exe"
+	[ ! -e "${sudo_exe-}" ] && (command -v 'cygpath' 1>/dev/null) && sudo_exe=$(cygpath -u "${sudo_exe}")
+	[ ! -e "${sudo_exe-}" ] && (command -v 'wslpath' 1>/dev/null) && sudo_exe=$(wslpath -u "${sudo_exe}")
+	[ ! -e "${sudo_exe-}" ] && dk_call dk_installPackage sudo
+	[ ! -e "${sudo_exe-}" ] && sudo_exe=$(command -v sudo)
+	
+	### Test exists
+	[ -e "${sudo_exe-}" ] || { dk_call dk_error "sudo_exe:${sudo_exe} not found"; return $?; }
+	
+	### Test command
+	(command -v "${sudo_exe-}" 1>/dev/null) || { dk_call dk_error "sudo_exe:${sudo_exe-} failed to run"; return $?; }
+	
+	###### output ######
+	export sudo_exe=${sudo_exe};
+#	if [ -n "${1-}" ]; then
+#		eval ${1}=${sudo_exe};
+#	else
+		builtin echo "${sudo_exe}";
+#	fi
+	return $?;
 }
-
-
 
 
 
@@ -36,11 +50,11 @@ dk_curl_exe() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
-	#dk_debugFunc 0
+	dk_debugFunc 0
 
-	dk_call dk_curl_exe
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate sudo_exe "dk_call dk_depend sudo_exe"
+	dk_call dk_echo "sudo_exe = ${sudo_exe-}"
 	
-	dk_call dk_curl_exe
-	dk_call dk_echo "curl_exe = ${curl_exe-}"
+	dk_call dk_validate sudo_exe "dk_call dk_depend sudo_exe"
+	dk_call dk_echo "sudo_exe = ${sudo_exe-}"
 }
