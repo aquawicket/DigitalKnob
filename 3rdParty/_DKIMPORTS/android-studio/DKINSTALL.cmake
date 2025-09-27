@@ -29,7 +29,7 @@ elseif(Mac_Host)
 	if(NOT EXISTS "/Applications/Android Studio.app")
 		dk_download		(${android-studio_Mac_Import})
 		# https://apple.stackexchange.com/a/73931
-		dk_depend		(sudo)
+		dk_validate		(sudo_exe "dk_depend(sudo_exe)")
 		dk_exec			(${sudo_exe} hdiutil attach ${dk_download})
 		dk_copy			("/Volumes/Android\ Studio\ -\ Dolphin\ \|\ 2021.3.1\ Patch\ 1/Android\ Studio.app" "/Applications/Android\ Studio.app")
 		dk_exec			(${sudo_exe} hdiutil detach "/Volumes/Android\ Studio\ -\ Dolphin\ \|\ 2021.3.1\ Patch\ 1")

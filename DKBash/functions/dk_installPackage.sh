@@ -34,50 +34,50 @@ dk_installPackage() {
 	dk_call dk_info "dk_installPackage() installing ${1}. . ."
 	
 	if (command -v apk); then
-		dk_run ${SUDO_EXE} apk add "${1}"					# Alpine Package Keeper (alpine Linux)
+		dk_run ${sudo_exe} apk add "${1}"					# Alpine Package Keeper (alpine Linux)
 		return
 	elif (command -v apt-get); then
-		dk_run ${SUDO_EXE} apt-get -y install "${1}"		# Apt-get (debian)
+		dk_run ${sudo_exe} apt-get -y install "${1}"		# Apt-get (debian)
 		return
 	elif (command -v apt); then	
-		dk_run ${SUDO_EXE} apt -y install "${1}"			# Apt (debian)
+		dk_run ${sudo_exe} apt -y install "${1}"			# Apt (debian)
 		return
 	elif (command -v brew); then	
-		dk_run ${SUDO_EXE} brew install "${1}"				# Homebrew (MacOS)
+		dk_run ${sudo_exe} brew install "${1}"				# Homebrew (MacOS)
 		return
 	elif (command -v dnf); then
-		dk_run ${SUDO_EXE} dnf install "${1}"				# Dnf (yum)
+		dk_run ${sudo_exe} dnf install "${1}"				# Dnf (yum)
 		return
 	elif (command -v emerge); then	
-		dk_run ${SUDO_EXE} emerge "${1}"					# Portage
+		dk_run ${sudo_exe} emerge "${1}"					# Portage
 		return
 	elif (command -v nix-env); then	
-		dk_run ${SUDO_EXE} nix-env -i "${1}"				# Nix
+		dk_run ${sudo_exe} nix-env -i "${1}"				# Nix
 		return
 	elif (command -v ohpm); then	
-		dk_run ${SUDO_EXE} ohpm install "${1}"				# Ohpm
+		dk_run ${sudo_exe} ohpm install "${1}"				# Ohpm
 		return
 	elif (command -v pkg); then
-		dk_run ${SUDO_EXE} pkg install "${1}"				# Termux
+		dk_run ${sudo_exe} pkg install "${1}"				# Termux
 		return
 	elif (command -v pacman); then
 		dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-		dk_run ${SUDO_EXE} pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
+		dk_run ${sudo_exe} pacman -S "${1}" --needed --noconfirm --cachedir ${DKDOWNLOAD_DIR}	# Pacman
 		return
 	elif (command -v swupd); then
-		dk_run ${SUDO_EXE} swupd bundle-add "${1}"			# Swupd
+		dk_run ${sudo_exe} swupd bundle-add "${1}"			# Swupd
 		return
 	elif (command -v tce-load); then
-		dk_run ${SUDO_EXE} tce-load -wil "${1}"     		# Tiny core Linux
+		dk_run ${sudo_exe} tce-load -wil "${1}"     		# Tiny core Linux
 		return
 	elif (command -v winget); then
-		dk_run ${SUDO_EXE} winget install "${1}"			# WinGet
+		dk_run ${sudo_exe} winget install "${1}"			# WinGet
 		return
 	elif (command -v xbps-install); then
-		dk_run ${SUDO_EXE} xbps-install "${1}"				# Xbps
+		dk_run ${sudo_exe} xbps-install "${1}"				# Xbps
 		return
 	elif (command -v zypper); then
-		dk_run ${SUDO_EXE} zypper in "${1}"				# Zypper
+		dk_run ${sudo_exe} zypper in "${1}"				# Zypper
 		return
 	else
 		dk_call dk_error "ERROR: no package managers found"

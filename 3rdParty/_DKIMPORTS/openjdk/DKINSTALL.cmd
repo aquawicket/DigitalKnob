@@ -79,19 +79,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::	%dk_call% dk_set CURRENT_DIR /usr
 	::)
 	
-	::if defined Android_Host (
-	::	%dk_call% dk_set SUDO ""
-	::	%dk_call% dk_set APT "apt"
-	::) else (
-	::	%dk_call% dk_set SUDO "sudo"
-	::	%dk_call% dk_set APT "apt-get"
-	::)
-	
 	if defined Android_Host (
 		%dk_call% dk_command pkg install openjdk-17 -y
 	) else (
-		%dk_call% dk_command %SUDO% apt update
-		%dk_call% dk_command %SUDO% apt -y install openjdk-11-jdk
+		%dk_call% dk_command %sudo_exe% apt update
+		%dk_call% dk_command %sudo_exe% apt -y install openjdk-11-jdk
 	)
 	
 	%dk_call% dk_command java --version

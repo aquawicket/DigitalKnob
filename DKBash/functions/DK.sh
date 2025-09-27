@@ -56,11 +56,11 @@ DK(){
 	#echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
 	echo ""
 	
-	###### SUDO_EXE ######
-	SUDO_EXE(){
-		[ ! -e "${SUDO_EXE-}" ]	&& export SUDO_EXE=$(command -v sudo)
-		[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
-		echo "SUDO_EXE = '${SUDO_EXE-}'" >&2
+	###### sudo_exe ######
+	sudo_exe(){
+		[ ! -e "${sudo_exe-}" ]	&& export sudo_exe=$(command -v sudo)
+		[ -e "${sudo_exe-}" ]	&& echo "${sudo_exe}" || unset sudo_exe
+		echo "sudo_exe = '${sudo_exe-}'" >&2
 	}
     
 	###### Reload Main Script with bash ######
@@ -208,8 +208,8 @@ dk_download() {
     
     #dk_commandExists "wget" || dk_installPackage wget
     #dk_commandExists "curl" || dk_installPackage curl
-	[ ! -e "${2}" ] && (command -v curl &>/dev/null) && $(SUDO_EXE) curl --silent -Lo "${2}" "${1}"
-    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && $(SUDO_EXE) wget -P "${parentdir}" "${1}"
+	[ ! -e "${2}" ] && (command -v curl &>/dev/null) && $(sudo_exe) curl --silent -Lo "${2}" "${1}"
+    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && $(sudo_exe) wget -P "${parentdir}" "${1}"
    
     # cd "${OLDPWD}"
 }
@@ -298,21 +298,21 @@ dk_installPackage() {
 	
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk)           				&& ${SUDO_EXE-} apk add ${1} 			&& return	# Alpine Package Keeper (alpine Linux)
-	(command -v apt-get)       				&& ${SUDO_EXE-} apt-get -y install ${1} && return	# Apt-get (debian)
-	(command -v apt)           				&& ${SUDO_EXE-} apt -y install ${1}		&& return	# Apt (debian)
-	(command -v brew)          				&& ${SUDO_EXE-} brew install ${1} 		&& return	# Homebrew (MacOS)
-	(command -v dnf)           				&& ${SUDO_EXE-} dnf install ${1} 		&& return	# Dnf (yum)
-	(command -v emerge &>/dev/null)        	&& ${SUDO_EXE-} merge ${1} 				&& return	# Portage
-	(command -v nix-env &>/dev/null)       	&& ${SUDO_EXE-} nix-env -i ${1} 		&& return	# Nix
-	(command -v ohpm &>/dev/null)          	&& ${SUDO_EXE-} ohpm install ${1} 		&& return	# Ohpm
-	(command -v pkg &>/dev/null)           	&& ${SUDO_EXE-} pkg install ${1} 		&& return	# Termux
-	(command -v pacman &>/dev/null)        	&& ${SUDO_EXE-} pacman -S ${1} 			&& return	# Pacman
-	(command -v swupd &>/dev/null)         	&& ${SUDO_EXE-} swupd bundle-add ${1} 	&& return	# Swupd
-	(command -v tce-load &>/dev/null)      	&& ${SUDO_EXE-} tce-load -wil ${1} 		&& return 	# Tiny core Linux
-	(command -v winget &>/dev/null)        	&& ${SUDO_EXE-} winget install ${1} 	&& return	# WinGet
-	(command -v xbps-install &>/dev/null)	&& ${SUDO_EXE-} xbps-install ${1} 		&& return	# Xbps
-	(command -v zypper &>/dev/null)			&& ${SUDO_EXE-} zypper in ${1} 			&& return	# Zypper
+    (command -v apk)           				&& ${sudo_exe-} apk add ${1} 			&& return	# Alpine Package Keeper (alpine Linux)
+	(command -v apt-get)       				&& ${sudo_exe-} apt-get -y install ${1} && return	# Apt-get (debian)
+	(command -v apt)           				&& ${sudo_exe-} apt -y install ${1}		&& return	# Apt (debian)
+	(command -v brew)          				&& ${sudo_exe-} brew install ${1} 		&& return	# Homebrew (MacOS)
+	(command -v dnf)           				&& ${sudo_exe-} dnf install ${1} 		&& return	# Dnf (yum)
+	(command -v emerge &>/dev/null)        	&& ${sudo_exe-} merge ${1} 				&& return	# Portage
+	(command -v nix-env &>/dev/null)       	&& ${sudo_exe-} nix-env -i ${1} 		&& return	# Nix
+	(command -v ohpm &>/dev/null)          	&& ${sudo_exe-} ohpm install ${1} 		&& return	# Ohpm
+	(command -v pkg &>/dev/null)           	&& ${sudo_exe-} pkg install ${1} 		&& return	# Termux
+	(command -v pacman &>/dev/null)        	&& ${sudo_exe-} pacman -S ${1} 			&& return	# Pacman
+	(command -v swupd &>/dev/null)         	&& ${sudo_exe-} swupd bundle-add ${1} 	&& return	# Swupd
+	(command -v tce-load &>/dev/null)      	&& ${sudo_exe-} tce-load -wil ${1} 		&& return 	# Tiny core Linux
+	(command -v winget &>/dev/null)        	&& ${sudo_exe-} winget install ${1} 	&& return	# WinGet
+	(command -v xbps-install &>/dev/null)	&& ${sudo_exe-} xbps-install ${1} 		&& return	# Xbps
+	(command -v zypper &>/dev/null)			&& ${sudo_exe-} zypper in ${1} 			&& return	# Zypper
 	(command -v dk_installPackage &>/dev/null)  && (echo "ERROR: No package managers found."; exit ${BASH_LINENO[0]};)
 
 	dk_installPackage ${1}

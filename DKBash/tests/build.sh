@@ -103,7 +103,7 @@ dk_buildMain() {
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
 		dk_info "calling sudo chown -R $LOGNAME $HOME to allow windows write access to \\\wsl.localhost\DISTRO\home\\$LOGNAME"
-		#${SUDO_EXE} chown -R "$LOGNAME" "$HOME"
+		#${sudo_exe} chown -R "$LOGNAME" "$HOME"
 	fi
 
 	dk_printVar SHLVL			# https://stackoverflow.com/a/4511483/688352
@@ -1090,9 +1090,9 @@ dk_validate_sudo() {
 	[ ${#} -gt 0 ] && dk_error "too many arguments"
 	
 	if command -v "sudo" >/dev/null; then
-		SUDO_EXE="sudo"
+		sudo_exe="sudo"
 	fi
-	${SUDO_EXE} echo
+	${sudo_exe} echo
 }
 
 
@@ -1915,7 +1915,7 @@ dk_gitUpdate() {
 		dk_call "$git_exe" checkout -b "$DKBRANCH" main
 		dk_call "$git_exe" push --set-upstream origin "$DKBRANCH"
 	fi
-	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build.sh
+	#dk_call ${sudo_exe} chmod +x "${DKBRANCH_DIR}"/build.sh
 }
 
 

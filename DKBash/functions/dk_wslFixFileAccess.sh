@@ -15,7 +15,7 @@ fi
 
 
 ####################################################################
-# dk_SUDO_EXE()
+# dk_sudo_exe()
 #
 #	Fix WSL retaining file permissions 
 # https://superuser.com/a/1392722/600216

@@ -74,7 +74,7 @@ dk_gitUpdate() {
 		"${git_exe}" -C "${DKBRANCH_DIR}" checkout -b "${DKBRANCH}" main
 		"${git_exe}" -C "${DKBRANCH_DIR}" push --set-upstream origin "${DKBRANCH}"
 	fi
-	#dk_call ${SUDO_EXE} chmod +x "${DKBRANCH_DIR}"/build
+	#dk_call ${sudo_exe} chmod +x "${DKBRANCH_DIR}"/build
 }
 
 

@@ -16,7 +16,7 @@ if [ -z "${DK_LOADED-}" ]; then
 	[ ! -e "${DK_SH}" ]  				&& (command -v curl) 														&& curl -Lo "${DK_SH}" "${HDK_SH}";
 	[ ! -e "${DK_SH}" ]  				&& (command -v wget) 														&& wget -P "${DK_SH}" "${HDK_SH}";
 	#[ ! -e "${DK_SH}" ]  				&& (echo "DK_SH:${DK_SH} does not exist"; exit ${BASH_LINENO[0]};) 
-	#[ -e "$(SUDO_EXE)" ] 				&& $(SUDO_EXE) chmod 777 "${DK_SH}";
+	#[ -e "$(sudo_exe)" ] 				&& $(sudo_exe) chmod 777 "${DK_SH}";
 	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*;
 fi
 

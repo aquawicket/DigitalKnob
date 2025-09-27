@@ -12,12 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+####################################################
 # https://terminator-gtk3.readthedocs.io/en/latest/
 
-
-#Linux_Host_dk_chdir(/usr)
-dk_depend(sudo)
-#Linux_Host_dk_exec(${sudo_exe} apt -y install terminator) #FIXME sudo needed
-#Mac_Host_dk_exec(brew install terminator)
 dk_installPackage(terminator)

@@ -21,20 +21,20 @@ fi
 dk_validateSudo() {
 	dk_debugFunc 0
 
-	(command -v "sudo" >/dev/null 2>&1) 	&& export SUDO_EXE=$(command -v "sudo") || return
+	(command -v "sudo" >/dev/null 2>&1) 	&& export sudo_exe=$(command -v "sudo") || return
 	(command -v "builtin" >/dev/null 2>&1) 	&& BUILTIN_EXE=$(command -v "builtin")
 	(command -v 'cmd.exe' 1>/dev/null) 		&& export cmd_exe=$(command -v 'cmd.exe')
 	[ -n "${cmd_exe-}" ] && DKSUDOPW=$(${cmd_exe} /c echo %DKSUDOPW% | tr -d '\r');
 	
 	if [ -n "${DKSUDOPW-}" ]; then
-		${BUILTIN_EXE} echo ${DKSUDOPW} | ${SUDO_EXE} -S echo >/dev/null 2>&1 && (
-			SUDO_EXE="builtin echo ${DKSUDOPW} | ${SUDO_EXE} -S";
+		${BUILTIN_EXE} echo ${DKSUDOPW} | ${sudo_exe} -S echo >/dev/null 2>&1 && (
+			sudo_exe="builtin echo ${DKSUDOPW} | ${sudo_exe} -S";
 		) || (
 			echo "Password stored in DKSUDOPW failed"
 		)		
 	fi
 	
-	${SUDO_EXE} echo >/dev/null 2>&1 || echo "sudo password failed";
+	${sudo_exe} echo >/dev/null 2>&1 || echo "sudo password failed";
 }
 
 

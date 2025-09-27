@@ -24,7 +24,7 @@ https://stackoverflow.com/a/65293474/688352
 ### Fix internet access
 ### https://github.com/microsoft/WSL/issues/5420#issuecomment-646479747
 
-	(command -v sudo) && export SUDO_EXE=sudo \
+	(command -v sudo) && export sudo_exe=sudo \
 	${SUDO} rm /etc/resolv.conf \
 	${SUDO} sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf' \
 	${SUDO} sh -c 'echo "[network]" > /etc/wsl.conf' \

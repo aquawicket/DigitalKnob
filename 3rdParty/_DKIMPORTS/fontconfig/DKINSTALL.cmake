@@ -19,14 +19,11 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 if(Apple)
-	#dk_depend(sudo)
-	#dk_exec(${sudo_exe} port install fontconfig)
 	dk_installPackage(fontconfig)
 	dk_return()
 endif()
 
 ### IMPORT ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_import		(${FONTCONFIG_DL}										FONTCONFIG_INCLUDE_DIR)
 
 ### LINK ###

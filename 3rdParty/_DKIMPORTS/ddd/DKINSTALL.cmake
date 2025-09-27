@@ -16,15 +16,7 @@ include_guard()
 # https://www.gnu.org/software/ddd/
 # https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz
 
-
-dk_validate(Target_Config  "dk_Target_Config()")
-
 ### IMPORT ###
 #dk_import(https://ftp.gnu.org/gnu/ddd/ddd-3.3.12.tar.gz)
 
-
-# TODO
-# sudo apt-get install ddd
-#dk_depend(sudo)
-#Linux_Host_dk_exec(${sudo_exe} apt -y install ddd)
 dk_installPackage(ddd)

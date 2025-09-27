@@ -19,11 +19,4 @@ if(NOT Linux AND NOT Raspberry)
 endif()
 
 ### INSTALL ###
-if(TINYCORE)
-	#dk_exec(tce-load -wi libXfixes-dev.tcz)
-	dk_installPackage(libXfixes-dev.tcz)
-else()
-	#dk_depend(sudo)
-	#dk_exec(${sudo_exe} apt -y install libxfixes-dev)
-	dk_installPackage(libxfixes-dev)
-endif()
+dk_installPackage(libxfixes-dev)

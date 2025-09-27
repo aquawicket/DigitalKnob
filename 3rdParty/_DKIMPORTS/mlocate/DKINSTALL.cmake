@@ -23,7 +23,6 @@ endif()
 
 ### INSTALL ###
 dk_chdir(/usr)
-#dk_depend(sudo)
-#dk_exec(${sudo_exe} apt -y install mlocate)
 dk_installPackage(mlocate)
+dk_validate(sudo_exe "dk_depend(sudo_exe)")
 dk_exec(${sudo_exe} updatedb)
