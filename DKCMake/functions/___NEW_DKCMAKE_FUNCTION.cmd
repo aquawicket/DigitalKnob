@@ -70,8 +70,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	
 	:edit_textfile
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
-	"%NOTEPADPP_EXE%" "%dk_inputBox%.cmake"
+	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_NOTEPADPP_EXE"
+	"%notepadpp_exe%" "%dk_inputBox%.cmake"
 %endfunction%
 
 

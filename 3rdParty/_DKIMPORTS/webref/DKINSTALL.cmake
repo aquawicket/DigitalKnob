@@ -22,7 +22,7 @@ dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
 
 ### Build Interface Tree ###
 if(Windows)
-	dk_exec(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
+	dk_exec(${node_exe} ${WEBREF}/DKBuildInterfaces.js)
 endif()
 
 #dk_mkdir(${WEBREF}/DKWebAPIs)

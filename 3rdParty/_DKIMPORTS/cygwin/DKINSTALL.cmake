@@ -25,7 +25,7 @@ endif()
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${cygwin_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(cygwin)
-dk_set(cygwin_EXE "${cygwin}/Cygwin.bat")
+dk_set(cygwin_exe "${cygwin}/Cygwin.bat")
 
 
 if(NOT EXISTS "${cygwin}/bin/${cygwin_Url_Filename}")
@@ -56,7 +56,7 @@ dk_validate(cmd_exe "dk_depend(cmd)")
 set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
 dk_exec(${cmd_exe} /V:ON /c "${INSTALL_CROSSTOOL_CMD}")
 	
-#execute_process(COMMAND ${cygwin_EXE} & crosstool-ng-build.sh)
+#execute_process(COMMAND ${cygwin_exe} & crosstool-ng-build.sh)
 #endif	
 		
 # Install Packages

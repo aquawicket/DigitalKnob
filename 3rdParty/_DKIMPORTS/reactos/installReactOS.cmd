@@ -45,12 +45,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%qemu_img_exe% create -f qcow2 %reactos_Img% 10G
 
 		::###### Launching the VM ######
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%reactos_Img% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%qemu-system-x86_64_exe% -cdrom %DKDOWNLOAD_DIR%/ReactOS-0.4.14-release-119-gce0b4ff-iso/ReactOS-0.4.14-release-119-gce0b4ff.iso -boot menu=on -drive file=%reactos_Img% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 		
 		::###### create ReactOS Launcher ######
 		%dk_call% dk_set REACTOS_launcher "%reactos%\LAUNCH.cmd"
 		if EXIST "%REACTOS_launcher%" (%return%)
-		%dk_call% dk_fileWrite "%REACTOS_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%reactos_Img% -cpu max -smp 2 -vga virtio -display sdl"
+		%dk_call% dk_fileWrite "%REACTOS_launcher%" "start %qemu-system-x86_64_exe% -boot menu=on -drive file=%reactos_Img% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 
 

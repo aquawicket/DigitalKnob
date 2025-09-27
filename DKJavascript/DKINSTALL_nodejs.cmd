@@ -2,12 +2,12 @@
 if "%~1" equ "" (goto DKINSTALL)
 
 :runDKJavascript
-	set "NODEJS_EXE=%~1"
+	set "nodejs_EXE=%~1"
 	set "DKJAVASCRIPT_FUNCTIONS_DIR=%~2
 	set "DKSCRIPT_PATH=%~3"
 	for %%Z in ("%DKSCRIPT_PATH%") do set "DKJAVASCRIPT_FILE=%%~nxZ"
 	cd %SystemDrive%\
-    start %NODEJS_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
+    start %nodejs_EXE% %DKJAVASCRIPT_FUNCTIONS_DIR%\DKNodeServer.js
 	explorer "http://127.0.0.1:8080/Users/Administrator/DigitalKnob/Development/DKHtml/index.html?DKTEST=%DKSCRIPT_PATH%"
 %endfunction%
 
@@ -41,12 +41,12 @@ if "%~1" equ "" (goto DKINSTALL)
 	::###### Install DKJavascript ######
 	%dk_call% dk_echo "Installing DKJavascript . . ."
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NODEJS_EXE "%dk_call% dk_depend nodejs"
+	%dk_call% dk_validate nodejs_EXE "%dk_call% dk_depend nodejs"
 	%dk_call% dk_registryDeleteKey "HKCR\DKBatch"
 	
 	%dk_call% dk_validate cmd_exe "%dk_call% dk_depend cmd"
-	ftype DKJavascript="%cmd_exe%" /c call "%~f0" "%NODEJS_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKJavascript\DefaultIcon" "" "REG_SZ" "%NODEJS_EXE%"
+	ftype DKJavascript="%cmd_exe%" /c call "%~f0" "%nodejs_EXE%" "%DKJAVASCRIPT_FUNCTIONS_DIR%" "%%1" %*
+	%dk_call% dk_registrySetKey "HKCR\DKJavascript\DefaultIcon" "" "REG_SZ" "%nodejs_EXE%"
 	
 	%dk_call% dk_registryDeleteKey "HKCR\.js"
 	%dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.js"

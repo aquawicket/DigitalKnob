@@ -52,7 +52,7 @@ endif()
 if(Windows_Host)
 	dk_import(${openjdk_Windows_X86_64_Import} IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 	dk_assertPath(openjdk)
-	dk_set(JAVAC_EXE "${openjdk}/bin/javac.exe")
+	dk_set(javac_exe "${openjdk}/bin/javac.exe")
 
 	###### JAVA_VERSION ######
 	set(ENV{JAVA_VERSION} 11)

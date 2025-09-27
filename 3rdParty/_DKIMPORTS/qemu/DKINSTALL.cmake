@@ -19,21 +19,21 @@ include_guard()
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_Host)
-	dk_set	(qemu_DL https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
+	dk_set	(qemu_Import https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe)
 endif()
-dk_assertVar(qemu_DL)
+dk_assertVar(qemu_Import)
 
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_importVariables(${qemu_DL} ROOT $ENV{DKTOOLS_DIR})
+dk_importVariables(${qemu_Import} ROOT $ENV{DKTOOLS_DIR})
 
 
 #dk_set(qemu $ENV{DKTOOLS_DIR}/${qemu_FOLDER})
-dk_set(qemu_IMG_EXE ${qemu}/qemu-img.exe)
-dk_set(qemu_SYSTEM_X86_64_EXE ${qemu}/qemu-system-x86_64.exe)
+dk_set(qemu-img_exe ${qemu}/qemu-img.exe)
+dk_set(qemu-system-x86_64_exe ${qemu}/qemu-system-x86_64.exe)
 
 ### INSTALL ###
-if(NOT EXISTS ${qemu_IMG_EXE})
-	dk_download(${qemu_DL})
+if(NOT EXISTS ${qemu-img_exe})
+	dk_download(${qemu_Import})
 	dk_nativePath(${qemu} qemu_Native)
 	dk_echo("Installing ${qemu_FOLDER} . . .")
 	dk_set(command_string "${dk_download}" /S /D=${qemu_Native})

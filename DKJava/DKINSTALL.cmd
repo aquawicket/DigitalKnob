@@ -27,9 +27,9 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::###### run executable ######
 	cls
 	title %DKJava_FILE%
-	set "JAVA_EXE=%COMPILER_EXE:javac=java%"
+	set "java_exe=%COMPILER_EXE:javac=java%"
 	
-    %JAVA_EXE:/=\% %APP% &:: && (echo returned TRUE) || (echo returned FALSE)
+    %java_exe:/=\% %APP% &:: && (echo returned TRUE) || (echo returned FALSE)
 	::echo C:\Users\Administrator\DigitalKnob\Development\3rdParty\openjdk-11_windows-x64_bin\bin\java.exe %APP%
 	
 	::###### exit_code ######
@@ -76,13 +76,13 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	::###### Install Java ######
 	%dk_call% dk_depend openjdk
-	%dk_call% dk_assertPath "%JAVA_EXE%"
-	%dk_call% dk_assertPath "%JAVAC_EXE%"
+	%dk_call% dk_assertPath "%java_exe%"
+	%dk_call% dk_assertPath "%javac_exe%"
 	
-	::"%JAVA_EXE%" -classpath %USERPROFILE%\DigitalKnob\Development\DKJava\functions com.DigitalKnob.DKJava
+	::"%java_exe%" -classpath %USERPROFILE%\DigitalKnob\Development\DKJava\functions com.DigitalKnob.DKJava
 	
 	::###### COMPILER_EXE ######
-	set "COMPILER_EXE=%JAVAC_EXE%"
+	set "COMPILER_EXE=%javac_exe%"
 	%dk_call% dk_assertPath "%COMPILER_EXE%"
 	ftype DKJava=%ComSpec% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .java=DKJava

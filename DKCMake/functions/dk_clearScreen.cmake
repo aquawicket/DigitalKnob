@@ -22,9 +22,9 @@ function(dk_clearScreen)
 	
 #	### pwsh ###
 #	dk_depend(pwsh)
-#	if(PWSH_EXE)
-#		#dk_exec(${PWSH_EXE} clear)
-#		execute_process(COMMAND ${PWSH_EXE} clear) # faster
+#	if(pwsh_exe)
+#		#dk_exec(${pwsh_exe} clear)
+#		execute_process(COMMAND ${pwsh_exe} clear) # faster
 #		return()
 #	endif()
 	
@@ -47,7 +47,7 @@ function(dk_clearScreen)
 
 #	### sh ###
 #	dk_depend(sh)
-#	if(SH_EXE)
+#	if(sh_exe)
 #		#dk_exec(clear)
 #		execute_process(COMMAND clear) # faster
 #		return()

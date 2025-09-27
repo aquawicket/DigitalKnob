@@ -25,7 +25,7 @@ endif()
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${cygwin_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 dk_assertVar(CYGWIN)
-dk_set(CYGWIN_EXE "${CYGWIN}/Cygwin.bat")
+dk_set(cygwin_exe "${CYGWIN}/Cygwin.bat")
 
 
 if(NOT EXISTS "${CYGWIN}")

@@ -14,19 +14,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::############ Try local notepad++.exe in DKTools first #############
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	if NOT EXIST "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%" NO_ERROR)
+	if NOT EXIST "%notepadpp_exe%" (%dk_call% dk_findProgram notepadpp_exe "notepad++.exe" "%DKTOOLS_DIR%" NO_ERROR)
 	
-	if NOT EXIST "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%")
+	if NOT EXIST "%notepadpp_exe%" (%dk_call% dk_findProgram notepadpp_exe "notepad++.exe" "%ProgramFiles%")
 
 	::############ Install Notepad++ ############
 	::%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	::%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_depend notepadpp"
+	::%dk_call% dk_validate notepadpp_exe "%dk_call% dk_depend notepadpp"
 	
-::	if NOT EXIST "%NOTEPADPP_EXE%" (
+::	if NOT EXIST "%notepadpp_exe%" (
 ::		%dk_call% dk_error "could NOT find notepad++.exe.  is it installed?"
 ::		%return%
 ::	)
 
-	%dk_call% dk_installContextMenu "Edit with Notepad++" "%NOTEPADPP_EXE%" "%NOTEPADPP_EXE:/=\% %%%%%%%%1"
+	%dk_call% dk_installContextMenu "Edit with Notepad++" "%notepadpp_exe%" "%notepadpp_exe:/=\% %%%%%%%%1"
 %endfunction%
 

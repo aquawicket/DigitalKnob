@@ -13,20 +13,20 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
   
-    if EXIST "%NOTEPADPP_EXE%" (%return%)
+    if EXIST "%notepadpp_exe%" (%return%)
    
 	::###### search for notepad++.exe in 'DKTOOLS_DIR' ######
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%DKTOOLS_DIR%" NO_HALT
+	%dk_call% dk_findProgram notepadpp_exe "notepad++.exe" "%DKTOOLS_DIR%" NO_HALT
 
     ::###### search for notepad.exe on 'C:/Program Files' ######
-	if NOT EXIST "%NOTEPADPP_EXE%" (%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%")
+	if NOT EXIST "%notepadpp_exe%" (%dk_call% dk_findProgram notepadpp_exe "notepad++.exe" "%ProgramFiles%")
 
 	endlocal & (
-		set "NOTEPADPP_EXE=%NOTEPADPP_EXE:\=/%"
+		set "notepadpp_exe=%notepadpp_exe:\=/%"
 	)
 	
-	%dk_call% dk_assertPath "%NOTEPADPP_EXE%"
+	%dk_call% dk_assertPath "%notepadpp_exe%"
 %endfunction%
 
 
@@ -40,6 +40,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
-    %dk_call% dk_echo "NOTEPADPP_EXE = %NOTEPADPP_EXE%"
+	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_NOTEPADPP_EXE"
+    %dk_call% dk_echo "notepadpp_exe = %notepadpp_exe%"
 %endfunction%

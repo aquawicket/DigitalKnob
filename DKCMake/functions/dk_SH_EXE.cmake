@@ -12,36 +12,36 @@ include_guard()
 #########################################################################
 
 ####################################################################
-# dk_SH_EXE()
+# dk_sh_exe()
 #
 #
-function(dk_SH_EXE)
+function(dk_sh_exe)
 	dk_debugFunc()
 
-	if(EXISTS "${SH_EXE}")
-		dk_debug("SH_EXE:${SH_EXE} already set")
+	if(EXISTS "${sh_exe}")
+		dk_debug("sh_exe:${sh_exe} already set")
 		return()
 	endif()
 
-	### from SH_EXE environment variable ###
-	if(NOT EXISTS "${SH_EXE}")
-		dk_set(SH_EXE "$ENV{SH_EXE}")
+	### from sh_exe environment variable ###
+	if(NOT EXISTS "${sh_exe}")
+		dk_set(sh_exe "$ENV{sh_exe}")
 	endif()
 	
 	### from SH environment variable ###
-	if(NOT EXISTS "${SH_EXE}")
-		dk_set(SH_EXE "$ENV{SH}")
+	if(NOT EXISTS "${sh_exe}")
+		dk_set(sh_exe "$ENV{SH}")
 	endif()
 
 	### from Msys2 bash ###
-	if(NOT EXISTS "${SH_EXE}")
+	if(NOT EXISTS "${sh_exe}")
 		dk_depend(msys2)
-		dk_findProgram(MSYS2_SH_EXE sh "${msys2}/usr/bin")
-		dk_set(SH_EXE ${msys2_SH_EXE})
+		dk_findProgram(MSYS2_sh_exe sh "${msys2}/usr/bin")
+		dk_set(sh_exe ${msys2_sh_exe})
 	endif()
 	
-	if(NOT EXISTS "${SH_EXE}")
-		dk_fatal("SH_EXE:${SH_EXE} not found")
+	if(NOT EXISTS "${sh_exe}")
+		dk_fatal("sh_exe:${sh_exe} not found")
 		return()
 	endif()
 endfunction()
@@ -55,10 +55,10 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	dk_SH_EXE()
-	if(EXISTS "${SH_EXE}")
-		dk_success("SH_EXE = ${SH_EXE}")
+	dk_sh_exe()
+	if(EXISTS "${sh_exe}")
+		dk_success("sh_exe = ${sh_exe}")
 	else()
-		dk_error("SH_EXE = ${SH_EXE}")
+		dk_error("sh_exe = ${sh_exe}")
 	endif()
 endfunction()

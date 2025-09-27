@@ -113,7 +113,7 @@ endif()
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
 dk_chdir(${openssl_Build_Dir})
-#Emscripten_Debug_dk_configure(${openssl} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${git_exe} -DPYTHON_EXECUTABLE=${PYTHON3_EXE})
+#Emscripten_Debug_dk_configure(${openssl} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${git_exe} -DPYTHON_EXECUTABLE=${python3_exe})
 if(Debug)
 	if(Android_Arm32_Clang)
 		dk_configure		(${openssl} ${perl_exe} ../../Configure no-shared --debug android-arm CC=${ANDROID_CXX_COMPILER} -D__ANDROID_API__=${ANDROID_API})

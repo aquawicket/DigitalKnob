@@ -19,7 +19,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertVar QEMU
 
 	%dk_call% dk_set qemu_img_exe %QEMU%/qemu-img.exe
-	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU%/qemu-system-x86_64.exe
+	%dk_call% dk_set qemu-system-x86_64_exe %QEMU%/qemu-system-x86_64.exe
 	
 	if EXIST "%qemu_img_exe%" (%return%)
 	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."

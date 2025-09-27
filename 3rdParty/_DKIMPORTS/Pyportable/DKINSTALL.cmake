@@ -18,12 +18,12 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 ### INSTALL ###
 if(Windows_Host)
-	dk_set(PYTHON_EXE ${pyportable}/python.exe)
+	dk_set(python_exe ${pyportable}/python.exe)
 	
 	dk_import(https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip)
 
 	if(NOT EXISTS ${pyportable}/Scripts/pip.exe)
-		dk_exec(${PYTHON_EXE} -m ensurepip)
+		dk_exec(${python_exe} -m ensurepip)
 	endif()
 
 	dk_prependEnvPath("${pyportable}")
@@ -35,7 +35,7 @@ if(Windows_Host)
 	dk_debug(Python_LIBRARIES)
 endif()
 
-#dk_debug(PYTHON_EXE)
-#dk_exec(${PYTHON_EXE} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
+#dk_debug(python_exe)
+#dk_exec(${python_exe} --version OUTPUT_VARIABLE PYTHON_VERSION ERROR_VARIABLE PYTHON_VERSION)
 #dk_debug(PYTHON_VERSION)
-dk_assert_path(PYTHON_EXE)
+dk_assert_path(python_exe)

@@ -20,7 +20,7 @@ echo GHOST_DATA = %GHOST_DATA%
 set "GHOST_TEMP=%GHOST_DIR%\temp"
 echo GHOST_TEMP = %GHOST_TEMP%
 set "_7Z_DIR_=%GHOST_DATA%\7z1900-extra"
-set "_7ZA_EXE=%_7Z_DIR_%\7za.exe"
+set "7za_exe=%_7Z_DIR_%\7za.exe"
 set "_7ZA_DLL=%_7Z_DIR_%\7za.dll"
 set "_7ZXA_DLL=%_7Z_DIR_%\7zxa.dll"
 set "wget_exe=%GHOST_DATA%\wget.exe"
@@ -1434,7 +1434,7 @@ Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureE
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f >nul
 timeout /t 1 >nul
 cd "%GHOST_TEMP%"
-%_7ZA_EXE% x "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" -aoa -pxbr -o"%GHOST_TEMP%"
+%7za_exe% x "Microsoft.XboxGamingOverlay_5.823.1271.0.bin" -aoa -pxbr -o"%GHOST_TEMP%"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%"
 cls
@@ -1522,7 +1522,7 @@ cls
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "1" /f 2>nul
 Reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "GameDVR_Enabled" /t REG_DWORD /d "1" /f 2>nul
 timeout /t 1 >nul
-%_7ZA_EXE% x Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pxbox -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pxbox -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.721.9022.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -1894,7 +1894,7 @@ goto WTHx643
 cls
 timeout /t 1 >nul
 ::"NSudoLG.exe" -U:T -P:E cmd /c FOR /d /r "%PROGRAMFILES%\WindowsApps\" %%d in (*MicrosoftWindows.Client.Widgets*) do @if EXIST "%%d" rd /q /s "%%d" >nul
-::::%_7ZA_EXE% x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%GHOST_TEMP%\Widgets"
+::::%7za_exe% x Microsoft.WidgetsforWindows11_422.33900.0.0.bin -aoa -pghostwidgets -o"%GHOST_TEMP%\Widgets"
 timeout /t 2 >nul
 cls
 echo %cyan%Installing please wait...
@@ -2308,8 +2308,8 @@ goto WTHx643
 :win11phoneinstall
 cls
 timeout /t 1 >nul
-%_7ZA_EXE% x Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001 -aoa -pphone -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
-%_7ZA_EXE% x Microsoft.YourPhone_Dependencies.x64.Appx -aoa -pdependencies -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe.001 -aoa -pphone -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.YourPhone_Dependencies.x64.Appx -aoa -pdependencies -o"%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.YourPhone_2021.1015.2146.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -2402,7 +2402,7 @@ timeout /t 2 >nul
 cls
 :win11paintinstall
 cls
-%_7ZA_EXE% x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -2456,7 +2456,7 @@ goto WTHx643
 cls
 :win11paintinstall2
 cls
-%_7ZA_EXE% x Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.Paint_11.2110.0.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -2529,7 +2529,7 @@ goto WTHx643
 )
 :win11snippinstall
 cls
-%_7ZA_EXE% x Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psnipping -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psnipping -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.ScreenSketch_2021.2108.37.0_neutral_~_8wekyb3d8bbwe"
 Powershell Add-AppxPackage -Path Microsoft.UI.Xaml.2.4_2.42007.9001.0_x64__8wekyb3d8bbwe.Appx
@@ -2951,7 +2951,7 @@ goto WTHx643
 cls
 :win11notepadinstall
 cls
-%_7ZA_EXE% x Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 1 >nul
 cd "%GHOST_TEMP%\Microsoft.WindowsNotepad_10.2103.12.0_neutral_~_8wekyb3d8bbwe" >nul
@@ -3006,7 +3006,7 @@ goto WTHx643
 cls
 :win11notepadinstall
 cls
-%_7ZA_EXE% x Microsoft.WindowsNotepad_11.2112.32.0.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0"
+%7za_exe% x Microsoft.WindowsNotepad_11.2112.32.0.Appx -aoa -pnotepad -o"%GHOST_TEMP%\Microsoft.WindowsNotepad_11.2112.32.0"
 cls
 timeout /t 1 >nul
 echo Installing...
@@ -3078,7 +3078,7 @@ goto WTHx643
 cls
 :win11hevcinstall
 cls
-%_7ZA_EXE% x Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe"
+%7za_exe% x Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe"
 cls
 timeout /t 1 >nul
 cd "%GHOST_TEMP%\Microsoft.HEVC+AV1.VideoExtension.8wekyb3d8bbwe" >nul
@@ -3248,9 +3248,9 @@ echo Please wait... 3
 ::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache
 REG DELETE "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache" /f >nul 2>nul
 Reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "1" /f >nul
-%_7ZA_EXE% x TEST1.bin -aoa -ptest -o"%APPDATA%\" >nul
-%_7ZA_EXE% x TEST2.bin -aoa -ptest -o"%WinDir%\" >nul
-%_7ZA_EXE% x TEST3.bin -aoa -ptest -o"%SYSTEMDRIVE%\" >nul
+%7za_exe% x TEST1.bin -aoa -ptest -o"%APPDATA%\" >nul
+%7za_exe% x TEST2.bin -aoa -ptest -o"%WinDir%\" >nul
+%7za_exe% x TEST3.bin -aoa -ptest -o"%SYSTEMDRIVE%\" >nul
 timeout /t 2 >nul
 regedit.exe /S %WinDir%\ExplorerPatcher2.reg >nul
 regedit.exe /S %WinDir%\ExplorerPatcher1.reg >nul
@@ -3837,7 +3837,7 @@ if "%var%" equ "1607" goto :winreforltsb1607
 ::%wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://kende-my.sharepoint.com/:u:/g/personal/k9788_office365svip_top/EQ8iu1sTvP5JuhLDZCYlL3gBjHHal_z6FEx8Vej2TErwHg?e=aH4Rkk&download=1" -t 3 -O Windows.Recovery.wim
 ::)
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -3849,7 +3849,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -3939,7 +3939,7 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework" /v "OnlyUseLatestC
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.001 -aoa
+%7za_exe% x microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.7z.001 -aoa
 cls
 dism /online /add-package /packagepath:microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab
 del /q /f /s "microsoft-windows-netfx3-ondemand-package~31bf3856ad364e35~amd64~~.cab"
@@ -4102,7 +4102,7 @@ del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable.lnk" >nul
 del /q /f /s "%USERPROFILE%\Desktop\DriverEasy Portable" >nul
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -4114,7 +4114,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -4143,7 +4143,7 @@ goto :WTHx643
 timeout /t 2 >nul
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
-%_7ZA_EXE% x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
+%7za_exe% x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %_7Z_DIR_%\x64\7za x "DriverEasy.5.6.15.34863.7z" -aoa -pde -o"%PROGRAMFILES%\"
@@ -4572,7 +4572,7 @@ cls
 cd "%GHOST_DATA%"
 del /s /q "GhostSpectre_Wallpaper.zip" >nul
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -4584,7 +4584,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -4605,7 +4605,7 @@ echo file NOT found
 timeout /t 4 >nul
 goto ghst
 )
-%_7ZA_EXE% x GhostSpectre_Wallpaper.zip -aoa -o"%GHOST_DIR%\GhostSpectre_Wallpaper" >nul
+%7za_exe% x GhostSpectre_Wallpaper.zip -aoa -o"%GHOST_DIR%\GhostSpectre_Wallpaper" >nul
 explorer /select,"%GHOST_DIR%\GhostSpectre_Wallpaper"
 timeout /t 2 >nul
 goto ghst
@@ -5399,7 +5399,7 @@ goto :installdp12
 goto :dp2342
 )
 :dp2342
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -5411,7 +5411,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -5498,7 +5498,7 @@ goto :tk121212
 cls
 :tk121212
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -5510,7 +5510,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -5555,7 +5555,7 @@ timeout /t 3 >nul
 )
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 ::powershell expand-archive -path Touch_keyboard_Dependencies.zip -force
-%_7ZA_EXE% x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
+%7za_exe% x "Touch_keyboard_Dependencies.zip" -aoa -ptkp -o"Touch_keyboard_Dependencies"
 cls
 cd "%GHOST_DATA%\Touch_keyboard_Dependencies"
 cls
@@ -6956,7 +6956,7 @@ goto :xbox1strun
 )
 :xbox1strun
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -6968,7 +6968,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -7060,7 +7060,7 @@ cls
 cls
 echo %red%Microsoft Xbox Game Bar for %cyan%X64
 cls
-%_7ZA_EXE% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -7089,7 +7089,7 @@ goto begin
 cls
 echo %red%Microsoft Xbox Game Bar for %cyan%X86
 cls
-%_7ZA_EXE% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pgamebar -o"%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.XboxGamingOverlay_5.621.3231.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -7257,7 +7257,7 @@ cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
-%_7ZA_EXE% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
+%7za_exe% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27323.0_x64__8wekyb3d8bbwe.Appx
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -7283,7 +7283,7 @@ cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://docs.google.com/uc?export=download&id=1OwYXH7mSSK8uRwg_mf_Shcec9C-GQKUb" -t 5 -O Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.003
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
-%_7ZA_EXE% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
+%7za_exe% x Microsoft.ZuneMusic_2019.19101.10711.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27323.0_x86__8wekyb3d8bbwe.Appx
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x86__8wekyb3d8bbwe.Appx
@@ -7343,7 +7343,7 @@ goto wgetserver2
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 :skip
 timeout /t 1 >nul
-%_7ZA_EXE% x wget2-1.99.2.zip -aoa >nul 2>nul
+%7za_exe% x wget2-1.99.2.zip -aoa >nul 2>nul
 timeout /t 3 >nul
 rename wget2-1.99.2 wget2 >nul
 timeout /t 3 >nul
@@ -7361,7 +7361,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
@@ -7373,7 +7373,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul 2>nul
+%7za_exe% x aria2c.7z -aoa >nul 2>nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -7643,7 +7643,7 @@ goto wgetserver2
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://bit.ly/3dm2LJt" -t 5 -O "wget2-1.99.2.zip" >nul 2>nul
 :skip
 timeout /t 1 >nul
-%_7ZA_EXE% x wget2-1.99.2.zip -aoa >nul 2>nul
+%7za_exe% x wget2-1.99.2.zip -aoa >nul 2>nul
 timeout /t 3 >nul
 rename wget2-1.99.2 wget2 >nul
 timeout /t 3 >nul
@@ -7661,7 +7661,7 @@ for /f "tokens=2*" %%a in ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\G
 ::cls
 :: DL REV
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip >nul 2>nul
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z >nul 2>nul
@@ -7673,7 +7673,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul 2>nul
+%7za_exe% x aria2c.7z -aoa >nul 2>nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -7772,7 +7772,7 @@ goto runtimeinstallx86
 
 :runtimeinstallx86
 timeout /t 2 >nul
-%_7ZA_EXE% x "update" -aoa -pruntimex86 -o"%Windir%\System32" >nul 2>nul
+%7za_exe% x "update" -aoa -pruntimex86 -o"%Windir%\System32" >nul 2>nul
 timeout /t 2 >nul
 del /Q "update" >nul 2>nul
 cd "%Windir%\System32"
@@ -7849,7 +7849,7 @@ goto WTHx64
 )
 
 :ghostboxinstallx86
-%_7ZA_EXE% x "update" -aoa -pghostboxx -o"%GHOST_DIR%" >nul 2>nul
+%7za_exe% x "update" -aoa -pghostboxx -o"%GHOST_DIR%" >nul 2>nul
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Ghost_Revision" /t REG_SZ /d "11" /f >nul 2>nul
 del /Q "update" >nul 2>nul
 del /Q "update" >nul 2>nul
@@ -7923,7 +7923,7 @@ timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -7935,7 +7935,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -7958,7 +7958,7 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
 cls
 cd "%GHOST_TEMP%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -8000,7 +8000,7 @@ timeout /t 3 >nul
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -8012,7 +8012,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -8035,7 +8035,7 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pyourphone789 -o"%GHOST_TEMP%"
 cls
 cd "%GHOST_TEMP%\Microsoft.YourPhone_2020.724.243.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -8228,7 +8228,7 @@ goto ghostboxx86server2
 :ghostboxx86server2
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2UH9RAV" -o "update" >nul 2>nul
 :ghostboxinstallx86
-%_7ZA_EXE% x "update" -aoa -pghostboxx -o"%GHOST_DIR%" >nul 2>nul
+%7za_exe% x "update" -aoa -pghostboxx -o"%GHOST_DIR%" >nul 2>nul
 REG ADD "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Ghost_Revision" /t REG_SZ /d "11" /f >nul 2>nul
 del /Q "update" >nul 2>nul
 cls && color 01
@@ -8299,7 +8299,7 @@ goto WTHx643
 timeout /t 2 >nul
 :wingetinstallX
 cd "%GHOST_DATA%" >nul 2>nul
-%_7ZA_EXE% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
 cls
 timeout /t 5 >nul
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
@@ -8463,9 +8463,9 @@ cd "%GHOST_DATA%"
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
+%7za_exe% x Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
+%7za_exe% x Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x64__8wekyb3d8bbwe.Appx
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
@@ -8548,9 +8548,9 @@ cd "%GHOST_DATA%"
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
+%7za_exe% x Microsoft.XboxApp_48.55.30001.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
+%7za_exe% x Microsoft.WindowsStore_11909.1002.313.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
 cls
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
 cls
@@ -8950,7 +8950,7 @@ if NOT EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%red%MISSING"
 if EXIST "%Windir%\System32\hashsum.bat" set "HASHMD5=%green%ENABLE"
 
 if EXIST "%_7ZA_DLL%" (
-	if EXIST "%_7ZA_EXE%" (
+	if EXIST "%7za_exe%" (
 		if EXIST "%_7ZXA_DLL%" (goto :wgetchecking)
 	)
 )
@@ -9255,7 +9255,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9267,7 +9267,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9278,7 +9278,7 @@ cls
 :startdownload
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/abbodi1406/vcredist/releases/download/v0.80.0/VisualCppRedist_AIO_x86_x64_80.zip" -t 15 -O "VisualCppRedist_AIO_x86_x64_80.zip"
 cls
-%_7ZA_EXE% x VisualCppRedist_AIO_x86_x64_80.zip -aoa
+%7za_exe% x VisualCppRedist_AIO_x86_x64_80.zip -aoa
 "VisualCppRedist_AIO_x86_x64.exe"
 cls
 echo deleting previous version...
@@ -9356,7 +9356,7 @@ goto begin
 :dxoffline
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9368,7 +9368,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9385,7 +9385,7 @@ color 03
 ::http://jerryching.changeip.org/Software/Microsoft/DirectX%209.0c%20(Full)/directx_Jun2010_redist.exe
 timeout /t 5 >nul
 cls
-%_7ZA_EXE% x directX_offline.exe -aoa -o"directX_offline" >nul
+%7za_exe% x directX_offline.exe -aoa -o"directX_offline" >nul
 cd "directX_offline"
 cls
 echo Installing..
@@ -9472,7 +9472,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9484,7 +9484,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9543,7 +9543,7 @@ goto usersrequest
 :usr009
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9555,7 +9555,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9652,7 +9652,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9664,7 +9664,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9715,7 +9715,7 @@ cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/073/chemtable soft organizer 9.01.zip" -t 5 -O "Soft.Organizer.9.01.repack.zip"
 ::explorer /select,"Soft.Organizer.9.01.zip"
 cls
-%_7ZA_EXE% x "Soft.Organizer.9.01.repack.zip" -aoa -pio -o"Soft.Organizer.9.01.repack"
+%7za_exe% x "Soft.Organizer.9.01.repack.zip" -aoa -pio -o"Soft.Organizer.9.01.repack"
 cls
 echo. The program is being installed... Wait for the operation to complete.
 timeout /t 3 >nul
@@ -9746,7 +9746,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9758,7 +9758,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9806,7 +9806,7 @@ cls
 echo  %white%Installing... Please Wait...
 timeout /t 2 >nul
 ::powershell expand-archive -path WinRAR.v6.01-GHOSTSPECTRE.7z -force >nul 2>nul
-%_7ZA_EXE% x WinRAR.v6.01-GHOSTSPECTRE.7z -aoa -pghost123 -o"WinRAR.v6.01-GHOSTSPECTRE"
+%7za_exe% x WinRAR.v6.01-GHOSTSPECTRE.7z -aoa -pghost123 -o"WinRAR.v6.01-GHOSTSPECTRE"
 timeout /t 3 >nul
 cd "WinRAR.v6.01-GHOSTSPECTRE"
 timeout /t 2 >nul
@@ -9870,7 +9870,7 @@ goto ErrorMD5msstore
 )
 :downloadasc
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -9882,7 +9882,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -9913,7 +9913,7 @@ goto :ascserver2
 cls
 echo Installing in progress... please wait... do NOT clicks or moving your mouse.
 taskkill /F /IM explorer.exe >nul 2>nul
-%_7ZA_EXE% x Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip -aoa -pASC -o"%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul
+%7za_exe% x Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE.zip -aoa -pASC -o"%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE" >nul
 cd "%GHOST_TEMP%\Advanced.SystemCare.Pro.14.3.0.241.GHOSTSPECTRE"
 ping -n 15 127.0.0.1 >nul
 Start /wait advanced-systemcare-setup.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
@@ -10181,7 +10181,7 @@ goto :ErrorMD5
 )
 timeout /t 5 >nul
 cls
-%_7ZA_EXE% x Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
+%7za_exe% x Microsoft.windowscommunicationsapps_16005.12228.20356.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pxxx
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 ::set /a UBRDEC=%UBRHEX% >nul
@@ -10216,7 +10216,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10228,7 +10228,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10251,7 +10251,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10263,7 +10263,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10351,7 +10351,7 @@ goto :install3dpaint
 del /q /f /s "Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10363,7 +10363,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10402,7 +10402,7 @@ goto WTHx643
 )
 :install3dpaint
 cls
-%_7ZA_EXE% x Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsp -o"%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsp -o"%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.MSPaint_2020.420.2001.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
@@ -10451,7 +10451,7 @@ goto ScreenSketchdl
 cls
 :ScreenSketchdl
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10463,7 +10463,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10477,7 +10477,7 @@ cls
 cls
 :ScreenSketchinstall
 cls
-%_7ZA_EXE% x Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsss -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsss -o"%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.ScreenSketch_2020.814.2355.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
@@ -10558,7 +10558,7 @@ goto op10
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10570,7 +10570,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10581,7 +10581,7 @@ cls
 :startdownload
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/2VAZj3j" -o"Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx"
 cls
-%_7ZA_EXE% x Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsmr -o"%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsmr -o"%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.MixedReality.Portal_2000.19101.1211.0_neutral_~_8wekyb3d8bbwe"
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
@@ -10612,7 +10612,7 @@ goto usersrequest
 :usr032
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10624,7 +10624,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10661,7 +10661,7 @@ goto iobitDBinstall
 del /q /f /s "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" >nul
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10673,7 +10673,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10723,7 +10723,7 @@ goto WTHx643
 )
 :iobitDBinstall
 cls
-%_7ZA_EXE% x "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" -aoa -pdb -o"IOBit.Driver.Booster.v9.3.0.209.Repack"
+%7za_exe% x "IOBit.Driver.Booster.v9.3.0.209.Repack.bin" -aoa -pdb -o"IOBit.Driver.Booster.v9.3.0.209.Repack"
 timeout /t 3 >nul
 cls
 echo. The program is being installed... Wait for the operation to complete.
@@ -10745,7 +10745,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10757,7 +10757,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10772,7 +10772,7 @@ echo %white%====================================================================
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate --user rsload.net --password rsload.net "http://95.141.198.238/noload2/files/066/iobit smart defrag 7.0.0.62.zip" -t 5 -O "IOBit_Smart_Defrag_7.0.0.62.repack.zip"
 echo %white%=======================================================================
 timeout /t 3 >nul
-%_7ZA_EXE% x "IOBit_Smart_Defrag_7.0.0.62.repack.zip" -aoa -pisd -o"IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
+%7za_exe% x "IOBit_Smart_Defrag_7.0.0.62.repack.zip" -aoa -pisd -o"IOBit_Smart_Defrag_7.0.0.62.repack" >nul 2>nul
 echo. The program is being installed... Wait for the operation to complete.
 timeout /t 3 >nul
 cd "IOBit_Smart_Defrag_7.0.0.62.repack"
@@ -10792,7 +10792,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10804,7 +10804,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10819,7 +10819,7 @@ color 03
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://bit.ly/39sTgVd" -o"O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE.zip"
 timeout /t 5 >nul
 cls
-%_7ZA_EXE% x "O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE.zip" -aoa -pood -o"O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE"
+%7za_exe% x "O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE.zip" -aoa -pood -o"O&O.Defrag.Pro.24.1.6505.repack.GHOSTSPECTRE"
 cls
 echo. The program is being installed... Wait for the operation to complete.
 timeout /t 3 >nul
@@ -10863,7 +10863,7 @@ cls
 :LuDaShi1
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10875,7 +10875,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -10912,7 +10912,7 @@ goto usersrequest
 :LuDaShi1yes
 cls
 echo. The program is being installed... Wait for the operation to complete.
-%_7ZA_EXE% x "LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -aoa -o"%PROGRAMFILES%\LuDaShi.5.1020.1295.1215" >nul 2>nul
+%7za_exe% x "LuDaShi.5.1020.1295.1215.GHOSTSPECTRE.7z" -aoa -o"%PROGRAMFILES%\LuDaShi.5.1020.1295.1215" >nul 2>nul
 timeout /t 5 >nul
 if EXIST "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES(X86)%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
 if EXIST "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe" (mklink "%USERPROFILE%\Desktop\MasterLU Classic" "%PROGRAMFILES%\LuDaShi.5.1020.1295.1215\ComputerZ_CN.exe") >nul 2>nul
@@ -10979,7 +10979,7 @@ del /q /f /s "Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -10991,7 +10991,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11032,7 +11032,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pcalcu -o"%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pcalcu -o"%GHOST_TEMP%\Microsoft.WindowsCalculator_2020.2103.8.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 if "%ARC%" equ "x64" goto :calcx64
@@ -11141,7 +11141,7 @@ del /q /f /s "Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Ap
 goto :stickyserver2
 )
 cls
-%_7ZA_EXE% x Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psticky -o"%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -psticky -o"%GHOST_TEMP%\Microsoft.MicrosoftStickyNotes_3.7.78.0_neutral_~_8wekyb3d8bbwe"
 cls
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set "ARC=x86" || set "ARC=x64"
 if "%ARC%" equ "x64" goto :stickyx64
@@ -11302,7 +11302,7 @@ if "%var%" equ "22621" goto icons001windows1122H2
 if "%var%" equ "22631" goto icons001windows1122H2
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11314,7 +11314,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11465,7 +11465,7 @@ goto ghst
 :icons002
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11477,7 +11477,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11534,7 +11534,7 @@ goto ghst
 :icons003
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11546,7 +11546,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11611,7 +11611,7 @@ goto ghst
 :icons004
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11623,7 +11623,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11682,7 +11682,7 @@ goto ghst
 :icons005
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11694,7 +11694,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11773,7 +11773,7 @@ cls
 goto usersrequest
 )
 :usr037
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11785,7 +11785,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11829,7 +11829,7 @@ del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.960.0_x64__56jybvy8sckqj.zip" >n
 echo %white%=======================================================================
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11841,7 +11841,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11914,7 +11914,7 @@ goto usersrequest
 :usr041
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11926,7 +11926,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11950,7 +11950,7 @@ goto usersrequest
 :usr042
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11962,7 +11962,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -11987,7 +11987,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -11999,7 +11999,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12085,7 +12085,7 @@ timeout /t 2 >nul
 cls
 goto youwhotemate
 :YTYES
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
 )
@@ -12095,7 +12095,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12182,7 +12182,7 @@ timeout /t 7 >nul
 goto begin
 :ytextract
 ::Reg.exe add "HKLM\SOFTWARE\WOW6432Node\GhostSpectre" /v "Youtube_DL" /t REG_SZ /d "[41] | Ghost Youtube Downloader" /f >nul 2>nul
-%_7ZA_EXE% x Ghost_YoutubeDL -aoa -pghostytyt
+%7za_exe% x Ghost_YoutubeDL -aoa -pghostytyt
 timeout /t 1 >nul
 cls
 goto YoutubeCONS
@@ -12210,7 +12210,7 @@ goto :download
 :download
 timeout /t 3 >nul
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12222,7 +12222,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12263,7 +12263,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -12298,7 +12298,7 @@ goto :download
 :download
 timeout /t 3 >nul
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12310,7 +12310,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12337,7 +12337,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmshub -o"%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.MicrosoftOfficeHub_18.2006.1031.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -12405,7 +12405,7 @@ goto :download
 cls
 :download
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12417,7 +12417,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12456,7 +12456,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -12515,7 +12515,7 @@ goto :download
 cls
 :download
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12527,7 +12527,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12554,7 +12554,7 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscamera -o"%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsCamera_2021.105.10.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -12609,7 +12609,7 @@ goto :msnoteinstallx64
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12621,7 +12621,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12662,7 +12662,7 @@ goto :WTHx643
 timeout /t 3 >nul
 cls
 cls
-%_7ZA_EXE% x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -12696,7 +12696,7 @@ goto :installnotex86
 del /q /f /s "Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -12708,7 +12708,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -12750,7 +12750,7 @@ timeout /t 3 >nul
 cls
 :installnotex86
 cls
-%_7ZA_EXE% x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmsnote -o"%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.Office.OneNote_16002.13127.20098.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -13171,7 +13171,7 @@ cd "%GHOST_DATA%"
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p1note
+%7za_exe% x Microsoft.Office.OneNote_16002.12624.20042.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p1note
 cls
 Powershell Add-AppxPackage -Path Microsoft.VCLibs.140.00_14.0.27810.0_x64__8wekyb3d8bbwe.Appx
 cls
@@ -13247,7 +13247,7 @@ goto ErrorMD5msstore
 :updatewindowstorex64install
 cd "%GHOST_DATA%"
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%PROGRAMFILES%\WindowsApps"
+%7za_exe% x Microsoft.WindowsStore.Update.12107.x64.GHOSTSPECTRE.Appx -aoa -pwindowsapps -o"%PROGRAMFILES%\WindowsApps"
 timeout /t 2 >nul
 cls
 echo %white%Microsoft Windows Store Silent Installing.. Please Wait...
@@ -13326,7 +13326,7 @@ cls
 :skipwhatsapps
 cls
 echo %cyan%Installing please wait...
-%_7ZA_EXE% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
+%7za_exe% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
 echo.
 timeout /t 5 >nul
 cd "%GHOST_TEMP%\" >nul 2>nul
@@ -13397,7 +13397,7 @@ cls
 :skiptelegram
 cls
 echo %cyan%Installing please wait...
-::%_7ZA_EXE% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
+::%7za_exe% x WhatsAppDesktop.bin -aoa -pwassap -o"%GHOST_TEMP%"
 echo.
 timeout /t 5 >nul
 ::cd "%GHOST_TEMP%\" >nul 2>nul
@@ -13776,9 +13776,9 @@ goto WTHx643
 )
 :install
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Base -aoa -pstore2022 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsStore_22202.1402.2.0.Base -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
 echo %cyan%Installing please wait...
 echo.
@@ -13822,9 +13822,9 @@ goto WTHx643
 )
 :install
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Base -aoa -pstore2022 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsStore_22202.1402.2.0.Base -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsStore_22202.1402.2.0.Dependency -aoa -pstore2022 -o"%GHOST_TEMP%"
 cls
 echo %cyan%Installing please wait...
 echo.
@@ -13854,7 +13854,7 @@ cls
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -13866,7 +13866,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -13956,7 +13956,7 @@ goto :store1strun
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -13968,7 +13968,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -13998,13 +13998,13 @@ timeout /t 5 >nul
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul 2>nul
-::%_7ZA_EXE% x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
+::%7za_exe% x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
 takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 timeout /t 2 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
@@ -14040,7 +14040,7 @@ cls
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -14052,7 +14052,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -14142,7 +14142,7 @@ goto :store1strunx86
 timeout /t 7 >nul
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -14154,7 +14154,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -14187,7 +14187,7 @@ takeown /f "%localappdata%\packages" /r /d y >nul 2>nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul 2>nul
 regsvr32 quartz.dll /s >nul 2>nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
@@ -14312,7 +14312,7 @@ goto :WTHx643
 cls
 echo Taking ownership..please wait...
 ::powershell expand-archive -path 7z1900-extra.zip -force
-::%_7ZA_EXE% x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul
+::%7za_exe% x "%GHOST_TEMP%\WindowsApps.zip" -aoa -o"%PROGRAMFILES%\" >nul
 takeown /f "%localappdata%\packages" /r /d y >nul
 takeown /f "%PROGRAMFILES%\WindowsApps" /r /d y >nul
 regsvr32 quartz.dll /s
@@ -14329,7 +14329,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1703 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1703 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_11811.1001.2713.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -14441,7 +14441,7 @@ COLOR 09
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pstorepwd
+%7za_exe% x Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pstorepwd
 cls
 ::MD5CHECKX64
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -14889,7 +14889,7 @@ echo %white%====================================================================
 goto :ytserver2
 )
 :YTCONSINSTALL
-%_7ZA_EXE% x "youtubedl-update.01.01.2022" -aoa -pYTX -o"Youtube\" >nul 2>nul
+%7za_exe% x "youtubedl-update.01.01.2022" -aoa -pYTX -o"Youtube\" >nul 2>nul
 timeout /t 2 >nul
 del /q /f /s "youtubedl-update.01.01.2022" >nul 2>nul
 del /q /f /s "youtubedl-update.01.01.2022" >nul 2>nul
@@ -15017,7 +15017,7 @@ goto WTHx643
 :YTLPDLXX2XXXX
 cd "%GHOST_DATA%" >nul
 cls
-%_7ZA_EXE% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
+%7za_exe% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 goto :YTCONS
 
 :YTDLP1
@@ -15059,7 +15059,7 @@ goto WTHx643
 :YTLPDLXX
 cd "%GHOST_DATA%" >nul
 cls
-%_7ZA_EXE% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
+%7za_exe% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 :YTDLPvideo
 cls
 cd "%GHOST_DATA%\Youtube-DLP"
@@ -15113,7 +15113,7 @@ del /q /f /s "Ghost_Youtube-DLP3" >nul
 )
 :YTDLP3EXT
 cls
-%_7ZA_EXE% x Ghost_Youtube-DLP3 -aoa -pytdlp3 -o"Youtube-DLP" >nul
+%7za_exe% x Ghost_Youtube-DLP3 -aoa -pytdlp3 -o"Youtube-DLP" >nul
 del /s /q Ghost_Youtube-DLP3 >nul
 :YTDLP3
 cd "%GHOST_DATA%\Youtube-DLP"
@@ -15174,7 +15174,7 @@ goto WTHx643
 :YTLPDLXX2
 cd "%GHOST_DATA%" >nul
 cls
-%_7ZA_EXE% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
+%7za_exe% x Ghost_Youtube-DLP -aoa -pYTDLP -o"Youtube-DLP"
 :YTDLPaudio
 cls
 cd "%GHOST_DATA%\Youtube-DLP"
@@ -15251,7 +15251,7 @@ echo %white%====================================================================
 goto :ytserver2
 )
 :YTCONSINSTALLMP3
-%_7ZA_EXE% x "youtubedl-update.12.31.2021" -aoa -pYTX -o"Youtube\"
+%7za_exe% x "youtubedl-update.12.31.2021" -aoa -pYTX -o"Youtube\"
 timeout /t 2 >nul
 del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
 del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
@@ -15334,7 +15334,7 @@ echo %white%====================================================================
 goto :ytserver2
 )
 :YTCONSINSTALLVIDEO
-%_7ZA_EXE% x "youtubedl-update.12.31.2021" -aoa -pYTX -o"Youtube\"
+%7za_exe% x "youtubedl-update.12.31.2021" -aoa -pYTX -o"Youtube\"
 timeout /t 2 >nul
 del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
 del /q /f /s "youtubedl-update.12.31.2021" >nul 2>nul
@@ -15660,7 +15660,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto 03ANDROIDX
 :ADB04X
@@ -15831,7 +15831,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
@@ -15849,7 +15849,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2204.40000.19.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto 03ANDROIDX
@@ -15900,7 +15900,7 @@ COLOR 09
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pstorepwd
+%7za_exe% x Microsoft.WindowsStore_12004.1001.113.0_neutral_~_8wekyb3d8bbwe.7z.001 -aoa -pstorepwd
 cls
 ::MD5CHECKX86
 %nhcolor% 08 " MD5 HASH CHECK"
@@ -16741,7 +16741,7 @@ goto sound
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16753,7 +16753,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -16778,7 +16778,7 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x SoundBlaster_720.7z -aoa
+%7za_exe% x SoundBlaster_720.7z -aoa
 cls
 cd "%GHOST_DATA%"
 timeout /t 2 >nul
@@ -16802,7 +16802,7 @@ mkdir "Dolby Atmos 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16814,7 +16814,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -16885,7 +16885,7 @@ mkdir "Dolby Atmos 3 for Gaming" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16897,7 +16897,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -16965,7 +16965,7 @@ mkdir "Nahimic 3" >nul 2>nul && timeout /t 5 >nul && cls
 COLOR 09
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -16977,7 +16977,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -17004,8 +17004,8 @@ goto :WTHx643
 )
 timeout /t 3 >nul
 ::cd "%GHOST_DATA%"
-::%_7ZA_EXE% x "%GHOST_DATA%\Nahimic 3\A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.7z.001" -aoa -o"%GHOST_DATA%\Nahimic 3"
-::%_7ZA_EXE% x "%GHOST_DATA%\Nahimic 3\Drivers.7z" -aoa -o"%GHOST_DATA%\Nahimic 3"
+::%7za_exe% x "%GHOST_DATA%\Nahimic 3\A-Volute.Nahimic_1.4.1.0_neutral_~_w2gh52qy24etm.7z.001" -aoa -o"%GHOST_DATA%\Nahimic 3"
+::%7za_exe% x "%GHOST_DATA%\Nahimic 3\Drivers.7z" -aoa -o"%GHOST_DATA%\Nahimic 3"
 cls
 cd "%GHOST_DATA%\Nahimic 3"
 Powershell Add-AppxPackage -Path Microsoft.NET.Native.Runtime.1.4_1.4.24201.0_x64__8wekyb3d8bbwe.Appx
@@ -17094,7 +17094,7 @@ cd "%GHOST_DATA%" >nul
 cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://github.com/Blinue/Magpie/releases/download/v0.10.1/Magpie_v0.10.1.zip" -t 5 -O"Magpie_v0.10.1.zip"
 cls
-%_7ZA_EXE% x "Magpie_v0.10.1.zip" -aoa -o"%PROGRAMFILES%\Magpie"
+%7za_exe% x "Magpie_v0.10.1.zip" -aoa -o"%PROGRAMFILES%\Magpie"
 if EXIST "%PROGRAMFILES%\Magpie\Magpie.exe" (mklink "%USERPROFILE%\Desktop\Magpie" "%PROGRAMFILES%\Magpie\Magpie.exe") >nul 2>nul
 cls
 echo for Non Administrator account please right click and run as Administrator to run Magpie.
@@ -17116,7 +17116,7 @@ if %MD5% equ 0012d6a90a7c70a15591222a4e8d13a4 (
 del /q /f /s "Lossless.Scaling.2.6.0.6" >nul
 goto :WTHx643
 )
-%_7ZA_EXE% x "Lossless.Scaling.2.6.0.6" -aoa -o"%PROGRAMFILES%"
+%7za_exe% x "Lossless.Scaling.2.6.0.6" -aoa -o"%PROGRAMFILES%"
 if EXIST "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe" (mklink "%USERPROFILE%\Desktop\Lossless Scaling" "%PROGRAMFILES%\Lossless Scaling\LosslessScaling.exe") >nul 2>nul
 cls
 goto upS01
@@ -17153,7 +17153,7 @@ cd "%GHOST_DATA%" >nul
 cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://ftp.nluug.nl/pub/games/PC/guru3d/afterburner/[Guru3D.com]-MSIAfterburner.zip" -t 5 -O"MSIAfterburner.zip"
 cls
-%_7ZA_EXE% x "MSIAfterburner.zip" -aoa -o"MSIAfterburner"
+%7za_exe% x "MSIAfterburner.zip" -aoa -o"MSIAfterburner"
 FOR %%i in ("MSIAfterburner\MSI*.exe") do Set FileName1="%%i"
 %FileName1%
 timeout /t 1 >nul
@@ -17164,7 +17164,7 @@ cd "%GHOST_DATA%" >nul
 cls
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate -r -np -N --user-agent="Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)" "https://cxblobs.blob.core.windows.net/releases/CapFrameX_v1.7.1_Setup.zip" -t 5 -O"CapFrameX_v1.7.1_Setup.zip"
 cls
-%_7ZA_EXE% x "CapFrameX_v1.7.1_Setup.zip" -aoa -o"CapFrameX"
+%7za_exe% x "CapFrameX_v1.7.1_Setup.zip" -aoa -o"CapFrameX"
 FOR %%i in ("CapFrameX\CapFrameX*.exe") do Set FileName1="%%i"
 %FileName1%
 timeout /t 1 >nul
@@ -17570,7 +17570,7 @@ goto :ErrorMD5
 cls
 powershell expand-archive -path 7z1900-extra.zip -force
 cls
-%_7ZA_EXE% x "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001" -aoa -pcortana
+%7za_exe% x "Microsoft.549981C3F5F10_2.2004.22762.0_neutral_~_8wekyb3d8bbwe.001" -aoa -pcortana
 cls
 if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 powershell add-appxpackage -path Microsoft.NET.Native.Framework.2.2_2.2.27912.0_x86__8wekyb3d8bbwe.Appx
@@ -17697,7 +17697,7 @@ cls
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17709,7 +17709,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -17732,7 +17732,7 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -17777,7 +17777,7 @@ cls
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17789,7 +17789,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -17812,7 +17812,7 @@ goto :ErrorMD5
 )
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pmscortanabeta -o"%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.549981C3F5F10_2.2007.9736.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -17879,7 +17879,7 @@ goto op10
 
 :msphotosx64
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17891,7 +17891,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -17952,7 +17952,7 @@ cls
 %nhcolor% 07 " %red%Microsoft Windows Photos x64"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
@@ -17987,7 +17987,7 @@ goto :download
 )
 cls
 :download
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -17999,7 +17999,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18033,7 +18033,7 @@ cls
 %nhcolor% 07 " %red%Microsoft Windows Photos x86"
 timeout /t 3 >nul
 cls
-::%_7ZA_EXE% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
+::%7za_exe% x Microsoft.windows.photos_8wekyb3d8bbwe.Appx -aoa -pphotos -o"%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\microsoft.windows.photos_8wekyb3d8bbwe"
 cls
@@ -18090,7 +18090,7 @@ goto :zunecheckxinstall
 del /q /f /s "Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx" >nul
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18102,7 +18102,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18137,8 +18137,8 @@ cls
 %nhcolor% 07 " %red%Microsoft Zune Music x64"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
-%_7ZA_EXE% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore0appx -o"%GHOST_TEMP%\Microsoft.WindowsStore_12010.1001.113.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 3 >nul
 cd "%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
@@ -18177,7 +18177,7 @@ cls
 %nhcolor% 07 " %red%Microsoft Zune Music x86"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pzune321 -o"%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
 cls
 timeout /t 3 >nul
 cd "%GHOST_TEMP%\Microsoft.ZuneMusic_2019.20032.12611.0_neutral_~_8wekyb3d8bbwe"
@@ -18203,7 +18203,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18215,7 +18215,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18237,7 +18237,7 @@ cls
 %nhcolor% 07 " %red%Microsoft Store x64"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1607 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -pstore1607 -o"%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
 cls
 cd "%GHOST_TEMP%\Microsoft.WindowsStore_11809.1001.813.0_neutral_~_8wekyb3d8bbwe"
 cls
@@ -18308,7 +18308,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18320,7 +18320,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18449,7 +18449,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18461,7 +18461,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18584,7 +18584,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18596,7 +18596,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18709,7 +18709,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18721,7 +18721,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18834,7 +18834,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18846,7 +18846,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -18959,7 +18959,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -18971,7 +18971,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19084,7 +19084,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19096,7 +19096,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19209,7 +19209,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19221,7 +19221,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19334,7 +19334,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19346,7 +19346,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19459,7 +19459,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19471,7 +19471,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19583,7 +19583,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19595,7 +19595,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19707,7 +19707,7 @@ echo %green%Only for Windows 10 Version 2004/1909 or higher. && timeout /t 4 >nu
 cls
 :themedownloads
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19719,7 +19719,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19893,7 +19893,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19905,7 +19905,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -19921,7 +19921,7 @@ color 03
 timeout /t 5 >nul
 explorer /select,"IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE.zip"
 cls
-%_7ZA_EXE% x "IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE.zip" -aoa -pio -o"IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE"
+%7za_exe% x "IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE.zip" -aoa -pio -o"IOBit_Uninstaller_10.1.0.21.repack.GHOSTSPECTRE"
 cls
 echo. The program is being installed... Wait for the operation to complete.
 timeout /t 3 >nul
@@ -19961,7 +19961,7 @@ echo %white%NVIDIA GEFORCE GAME READY 470.05 WHQL (DCH) x64 - %yellow%GeForce De
 timeout /t 5 >nul
 cls
 cd "%GHOST_DATA%"
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -19973,7 +19973,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -20031,7 +20031,7 @@ goto WTHx643
 timeout /t 2 >nul
 :wingetinstallX
 cd "%GHOST_DATA%" >nul 2>nul
-%_7ZA_EXE% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.DesktopAppInstaller.Appx -aoa -o"%GHOST_TEMP%"
 cls
 timeout /t 5 >nul
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
@@ -20454,7 +20454,7 @@ goto WTHx643
 :androidinstall2nd
 cls
 timeout /t 1 >nul
-%_7ZA_EXE% x MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p8wekyb3d8bbwe -o"%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe.001 -aoa -p8wekyb3d8bbwe -o"%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -20476,7 +20476,7 @@ cls
 echo Installing Windows Subsystem For Android Optional...
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
-%_7ZA_EXE% x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
+%7za_exe% x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0"
 cls
 rmdir /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 del /s /q "%GHOST_TEMP%\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
@@ -20562,7 +20562,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto 03ANDROID
 :ADB02
@@ -20752,7 +20752,7 @@ goto WTHx643
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
-%_7ZA_EXE% x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
+%7za_exe% x Android.optional -aoa -proot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0" >nul
 cls
 echo Please wait..connecting to Subsystem for Android... do NOT close Play Store.
 START %LOCALAPPDATA%\Microsoft\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe\WsaClient.exe /launch wsa://com.android.vending
@@ -20818,7 +20818,7 @@ goto WTHx643
 taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
-%_7ZA_EXE% x Android.kernel.un -aoa -punroot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools" >nul
+%7za_exe% x Android.kernel.un -aoa -punroot -o"%PROGRAMFILES%\Microsoft\MicrosoftCorporationII.WindowsSubsystemForAndroid_1.7.32815.0\Tools" >nul
 cls
 echo Devices is unroot now.
 timeout /t 2 >nul
@@ -20827,7 +20827,7 @@ goto 03ANDROID
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -20839,7 +20839,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -20863,7 +20863,7 @@ cls
 %nhcolor% 07 " %red%Netflix x64"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+%7za_exe% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
 cd "%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
@@ -20898,7 +20898,7 @@ goto begin
 %nhcolor% 07 " %red%Netflix x86"
 timeout /t 3 >nul
 cls
-%_7ZA_EXE% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
+%7za_exe% x 4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8.Appx -aoa -pnetf321 -o"%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
 cd "%GHOST_TEMP%\4DF9E0F8.Netflix_6.97.752.0_neutral_~_mcm4njqhnhss8"
 cls
@@ -20927,7 +20927,7 @@ goto begin
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -20939,7 +20939,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21019,7 +21019,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21031,7 +21031,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21052,7 +21052,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21064,7 +21064,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21085,7 +21085,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21097,7 +21097,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21118,7 +21118,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21130,7 +21130,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21159,7 +21159,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21171,7 +21171,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21201,7 +21201,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21213,7 +21213,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21251,7 +21251,7 @@ goto vmdownload
 )
 :vmdownload
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21263,7 +21263,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21302,7 +21302,7 @@ goto vmdownload
 )
 :vmdownload
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21314,7 +21314,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21344,7 +21344,7 @@ goto usersrequest
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21356,7 +21356,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21413,7 +21413,7 @@ echo %white%====================================================================
 del /q /f /s "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" >nul
 echo %white%=======================================================================
 )
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21425,7 +21425,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21473,7 +21473,7 @@ goto :nvidiotcp
 cls
 echo Installing... please wait..
 timeout /t 5 >nul
-%_7ZA_EXE% x "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
+%7za_exe% x "NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64.7z" -aoa -o"%PROGRAMFILES%\" >nul 2>nul
 cls
 if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%USERPROFILE%\Desktop\") >nul 2>nul
 if EXIST "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\Nvidia Control Panel.exe" (copy "%PROGRAMFILES%\NVIDIACorp.NVIDIAControlPanel_8.1.958.0_x64\AppxMetadata\Nvidia Control Panel.lnk" "%Appdata%\Microsoft\Windows\Start Menu\Programs\") >nul 2>nul
@@ -21498,7 +21498,7 @@ cd "%GHOST_DATA%"
 cls
 timeout /t 3 >nul
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -21510,7 +21510,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -21532,7 +21532,7 @@ cls
 cls
 echo %red%Microsoft.HEVCVideoExtension for %cyan%X64
 cls
-%_7ZA_EXE% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+%7za_exe% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
 cd "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
 cls
@@ -21554,7 +21554,7 @@ goto usersrequest
 cls
 echo %red%Microsoft.HEVCVideoExtension for %cyan%X86
 cls
-%_7ZA_EXE% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
+%7za_exe% x Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe.Appx -aoa -phevc -o"%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe" >nul 2>nul
 cls
 cd "%GHOST_TEMP%\Microsoft.HEVCVideoExtensions_1.0.41031.70__8wekyb3d8bbwe"
 cls
@@ -22077,7 +22077,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2008
 :ADB04X2008
@@ -22248,7 +22248,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
@@ -22266,7 +22266,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2208.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2008
@@ -22593,7 +22593,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2211
 :ADB04X2211
@@ -22768,7 +22768,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
@@ -22786,7 +22786,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2211.40000.11.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2211
@@ -23142,7 +23142,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2301NON
 :ADB04X2301N
@@ -23319,7 +23319,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
@@ -23337,7 +23337,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301NON
@@ -23663,7 +23663,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2301ROOT
 :ADB04X2301R
@@ -23838,7 +23838,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
@@ -23856,7 +23856,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2301.40000.4.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2301ROOT
@@ -24223,7 +24223,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2304NON
 :ADB04X2304N
@@ -24397,7 +24397,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
@@ -24415,7 +24415,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304NON
@@ -24744,7 +24744,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2304ROOT
 :ADB04X2304R
@@ -24917,7 +24917,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
@@ -24935,7 +24935,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2304.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2304ROOT
@@ -25313,7 +25313,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2305NON
 :ADB04X2305N
@@ -25492,7 +25492,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
@@ -25510,7 +25510,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305NON
@@ -25849,7 +25849,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2305ROOT
 :ADB04X2305R
@@ -26028,7 +26028,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
@@ -26046,7 +26046,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2305.40000.5.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2305ROOT
@@ -26222,7 +26222,7 @@ cls
 echo.
 timeout /t 3 >nul
 echo Installing...
-%_7ZA_EXE% x "WSA_2309.40000.2.0_x64-NonRoot.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
+%7za_exe% x "WSA_2309.40000.2.0_x64-NonRoot.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
 timeout /t 3 >nul
 NONROOT >> "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\nonroot"
 cls
@@ -26261,7 +26261,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2309NON
 :ADB04X2309N
@@ -26440,7 +26440,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
@@ -26458,7 +26458,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309NON
@@ -26594,7 +26594,7 @@ echo.
 cls
 echo Installing...
 timeout /t 3 >nul
-%_7ZA_EXE% x "WSA_2309.40000.2.0_x64-Root.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
+%7za_exe% x "WSA_2309.40000.2.0_x64-Root.exe" -aoa -pwsa2309 -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64"
 timeout /t 3 >nul
 ROOT >> "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\root"
 cls
@@ -26637,7 +26637,7 @@ cd "%GHOST_DATA%"
 cls
 %ARIA2C_EXE% -x16 -s16 --console-log-level=warn --no-conf --file-allocation=none --check-certificate=false --continue=true --allow-overwrite=true --auto-file-renaming=false --continue=true --allow-overwrite=true --auto-file-renaming=false "https://dl.google.com/android/repository/platform-tools_r31.0.3-windows.zip" -o"platform-tools_r31.0.3-windows.zip"
 cls
-%_7ZA_EXE% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
+%7za_exe% x platform-tools_r31.0.3-windows.zip -aoa -pd -o"%GHOST_DIR%\Android"
 timeout /t 1 >nul
 goto ANDROIDX2309ROOT
 :ADB04X2309R
@@ -26817,7 +26817,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.R" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %cyan% WSA is Rooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
@@ -26835,7 +26835,7 @@ taskkill /f /im "WsaClient.exe" /t >nul 2>nul
 timeout /t 2 >nul
 cd "%GHOST_DATA%"
 timeout /t 1 >nul
-%_7ZA_EXE% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
+%7za_exe% x "%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools\kernel.U" -aoa -punroot -o"%PROGRAMFILES%\Microsoft\WSA_2309.40000.2.0_x64\Tools" >nul
 echo %cyan% WSA is Unrooted!
 timeout /t 3 >nul
 goto ANDROIDX2309ROOT
@@ -26937,7 +26937,7 @@ goto WTHx643
 cls
 echo %cyan%Installing please wait...
 echo.
-%_7ZA_EXE% x Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle -aoa -pt -o"%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
+%7za_exe% x Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe.Msixbundle -aoa -pt -o"%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul 2>nul
 cls
 timeout /t 1 >nul
 cd "%GHOST_TEMP%\Microsoft.WindowsTerminal_2021.1019.2143.0_neutral_~_8wekyb3d8bbwe" >nul
@@ -27065,7 +27065,7 @@ goto :WTHx643
 )
 :edgeblockR
 cls
-%_7ZA_EXE% x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
+%7za_exe% x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
 ::Echo "EdgeBlocker\EdgeChromium_Blocker.cmd" /b > edge.cmd
 ::Echo exit >> edge.cmd
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DATA%\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
@@ -27259,7 +27259,7 @@ goto :WTHx643
 )
 :edgeblockR
 cls
-%_7ZA_EXE% x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
+%7za_exe% x "EdgeBlocker.bin" -aoa -o"EdgeBlocker" >nul
 ::Echo "EdgeBlocker\EdgeChromium_Blocker.cmd" /b > edge.cmd
 ::Echo exit >> edge.cmd
 NSudoLG.exe -U:T -P:E -ShowWindowMode:Hide "%GHOST_DATA%\EdgeBlocker\EdgeChromium_Blocker.cmd" /b
@@ -27434,7 +27434,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27446,7 +27446,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27467,7 +27467,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27479,7 +27479,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27500,7 +27500,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27512,7 +27512,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27532,7 +27532,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27544,7 +27544,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27564,7 +27564,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27576,7 +27576,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27596,7 +27596,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27608,7 +27608,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27632,7 +27632,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27644,7 +27644,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27668,7 +27668,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27680,7 +27680,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27703,7 +27703,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27715,7 +27715,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27738,7 +27738,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27750,7 +27750,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27773,7 +27773,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27785,7 +27785,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27808,7 +27808,7 @@ goto gameclient
 cls
 cd "%GHOST_DATA%"
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27820,7 +27820,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27862,7 +27862,7 @@ del /q /f /s "AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ct
 echo %white%=======================================================================
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27874,7 +27874,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -27926,7 +27926,7 @@ goto WTHx643
 :installcp
 cls
 echo %green%Installing Intel Graphics Experience.. please wait.
-%_7ZA_EXE% x AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx -aoa -pintelG -o"%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
+%7za_exe% x AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt.Appx -aoa -pintelG -o"%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\AppUp.IntelGraphicsExperience_1.100.3370.70_neutral_~_8j3eq9eme6ctt" >nul
 timeout /t 2 >nul
@@ -27969,7 +27969,7 @@ del /q /f /s "AppUp.IntelGraphicsControlPanel_3.3.0.0_x64__8j3eq9eme6ctt.appx" >
 echo %white%=======================================================================
 )
 cls
-if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%_7ZA_EXE%" if EXIST "%_7ZXA_DLL%" goto startdownload
+if EXIST "%ARIA2C_EXE%" if EXIST "%_7ZA_DLL%" if EXIST "%7za_exe%" if EXIST "%_7ZXA_DLL%" goto startdownload
 if "%PROCESSOR_ARCHITECTURE%" equ "AMD64" (
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://www.dropbox.com/s/h0213cloq4jqaei/7z1900-extra.zip?dl=1" -t 5 -O 7z1900-extra.zip
 %wget_exe% -q --show-progress --load-cookies cookies.txt --save-cookies cookies.txt --keep-session-cookie -c --no-check-certificate "https://github.com/tatsuhiro-t/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip" -t 5 -O aria2c.7z
@@ -27981,7 +27981,7 @@ if "%PROCESSOR_ARCHITECTURE%" equ "x86" (
 cls
 powershell expand-archive -path 7z1900-extra.zip -force >nul 2>nul
 cls
-%_7ZA_EXE% x aria2c.7z -aoa >nul
+%7za_exe% x aria2c.7z -aoa >nul
 cls
 del /Q "aria2c.7z" >nul
 del /Q "7z1900-extra.zip" >nul
@@ -28147,7 +28147,7 @@ echo %white%====================================================================
 :installstartallb
 cls
 echo Installing.. please wait...
-%_7ZA_EXE% x "StartAllBack.v3.7.8.bin" -aoa -px
+%7za_exe% x "StartAllBack.v3.7.8.bin" -aoa -px
 del /q /f /s "StartAllBack.v3.5.7.bin" >nul 2>nul
 del /q /f /s "StartAllBack.v3.6.3.bin" >nul 2>nul
 del /q /f /s "StartAllBack.v3.6.4.bin" >nul 2>nul
@@ -28471,7 +28471,7 @@ timeout /t 2 >nul
 cls
 :win10paintinstall
 cls
-%_7ZA_EXE% x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
+%7za_exe% x Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe.Appx -aoa -ppaint -o"%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 2 >nul
 cd "%GHOST_TEMP%\Microsoft.Paint_10.2103.1.0_neutral_~_8wekyb3d8bbwe"
 timeout /t 1 >nul
@@ -28618,9 +28618,9 @@ goto WTHx643
 )
 :XXCAMINSTALL
 cls
-%_7ZA_EXE% x Microsoft.WindowsCamera_2022.2210.9.70.bin -aoa -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsCamera_2022.2210.9.70.bin -aoa -o"%GHOST_TEMP%"
 cls
-%_7ZA_EXE% x Microsoft.WindowsCamera_2022.2210.9.70.bin -aoa -o"%GHOST_TEMP%"
+%7za_exe% x Microsoft.WindowsCamera_2022.2210.9.70.bin -aoa -o"%GHOST_TEMP%"
 cls
 echo %cyan%Installing please wait...
 echo.

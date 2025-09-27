@@ -10,11 +10,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# https://walterteng.com/using-zsh-on-windows
 
 %dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
-%dk_call% dk_findProgram PACMAN_EXE pacman.exe "%msys2%/usr/bin"
+%dk_call% dk_findProgram pacman_exe pacman.exe "%msys2%/usr/bin"
 
 ::#	if NOT defined DKUPDATE (
-::#		if EXIST "%PACMAN_EXE%" (
-::#			%dk_call% dk_notice "PACMAN_EXE is already installed, returning"
+::#		if EXIST "%pacman_exe%" (
+::#			%dk_call% dk_notice "pacman_exe is already installed, returning"
 ::#			%return%
 ::#		)
 ::# )
@@ -33,14 +33,14 @@ if NOT EXIST "%MSYS2_GPGDir%" (
 	%dk_call% dk_killProcess gpg-agent.exe NO_HALT
 )
 
-%dk_call% dk_assertPath PACMAN_EXE
+%dk_call% dk_assertPath pacman_exe
 
 :: %msys2%/var/lib/pacman
 if NOT EXIST "%MSYS2_DBPath%/sync" (
-	%dk_call% dk_exec "%PACMAN_EXE%" -Syu --noconfirm
+	%dk_call% dk_exec "%pacman_exe%" -Syu --noconfirm
 )
 
-%dk_call% dk_FirewallAllow "pacman" "%PACMAN_EXE%"
+%dk_call% dk_FirewallAllow "pacman" "%pacman_exe%"
 
 ::%dk_call% dk_installPackage pacman
 

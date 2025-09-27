@@ -80,5 +80,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_findProgram(PYTHON_EXE python)
+	dk_findProgram(python_exe python)
 endfunction()

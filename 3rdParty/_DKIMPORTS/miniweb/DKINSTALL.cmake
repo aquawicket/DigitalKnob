@@ -19,4 +19,4 @@ dk_validate(Target_Config  "dk_Target_Config()")
 
 
 Windows_dk_import(https://sourceforge.net/projects/miniweb/files/miniweb/0.8/miniweb-win32-20130309.zip)
-Windows_dk_set(MINIWEB_EXE "${MINIWEB}/miniweb.exe")
+Windows_dk_set(miniweb_exe "${MINIWEB}/miniweb.exe")

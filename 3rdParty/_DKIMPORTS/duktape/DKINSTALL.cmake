@@ -61,7 +61,7 @@ if(NOT EXISTS ${duktape}/src/duktape.c)
 		-DDUK_USE_FATAL_HANDLER
 		-DDUK_USE_GLOBAL_BINDING
 		-DDUK_USE_INTERRUPT_COUNTER)
-	#dk_exec(${NODE_EXE} ${duktape}/src-tools/index.js configure --output-directory ${duktape}/src --source-directory ${duktape}/src-input --config-directory ${duktape}/config)
+	#dk_exec(${node_exe} ${duktape}/src-tools/index.js configure --output-directory ${duktape}/src --source-directory ${duktape}/src-input --config-directory ${duktape}/config)
 endif()
 
 dk_configure()

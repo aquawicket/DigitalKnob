@@ -22,7 +22,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate qemu_img_exe "%dk_call% dk_depend qemu"
 
 ::	if NOT EXIST "%winpe_qcow%" (%qemu_img_exe% convert -O qcow2 "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" "%winpe_qcow%")
-::	%QEMU_SYSTEM_X86_64_EXE% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+::	%qemu-system-x86_64_exe% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 ::	%return%
 			
 	::###### winpe_qcow ######
@@ -49,9 +49,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%qemu-system-x86_64_exe% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 			
-		::%QEMU_SYSTEM_X86_64_EXE% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		::%qemu-system-x86_64_exe% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	:end_WIN_IMG
 		
 	::###### WINPE_launcher ######
@@ -60,8 +60,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_info "%WINPE_launcher% already exists"
 		%return%
 	)
-	::%dk_call% dk_fileWrite "%WINPE_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" -boot menu=on -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
-	%dk_call% dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" "start %QEMU_SYSTEM_X86_64_EXE% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
+	::%dk_call% dk_fileWrite "%WINPE_launcher%" "start %qemu-system-x86_64_exe% -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" -boot menu=on -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
+	%dk_call% dk_fileWrite "%WINPE_launcher%" -cdrom "%DKDOWNLOAD_DIR%/%WINPE_IMPORT_FILE%" "start %qemu-system-x86_64_exe% -drive file=%winpe_qcow% -m 1G -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 	
 

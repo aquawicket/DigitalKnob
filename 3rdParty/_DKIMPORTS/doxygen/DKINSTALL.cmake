@@ -25,13 +25,13 @@ endif()
 
 ### IMPORT ###
 if(Windows_Host)
-	dk_set(DOXYGEN_EXE "${ProgramFiles}/doxygen/bin/doxygen.exe")
+	dk_set(doxygen_exe "${ProgramFiles}/doxygen/bin/doxygen.exe")
 else()
-	dk_set(DOXYGEN_EXE "/Applications/Doxygen.app") #FIXME
+	dk_set(doxygen_exe "/Applications/Doxygen.app") #FIXME
 endif()
 
 
-if(NOT EXISTS ${DOXYGEN_EXE})
+if(NOT EXISTS ${doxygen_exe})
 	if(Windows_Host)
 		dk_import(https://github.com/doxygen/doxygen/releases/download/Release_1_9_6/doxygen-1.9.6-setup.exe)
 		dk_exec($ENV{DKDOWNLOAD_DIR}/doxygen-1.9.6-setup.exe)

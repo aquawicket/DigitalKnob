@@ -29,8 +29,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_allButFirstArgs %*
 	
-	%dk_call% dk_validate JAVA_EXE "%dk_call% dk_JAVA_EXE.cmd"
-	set DKCOMMAND=%ComSpec% /c %JAVAC_EXE%  %DKJAVA_FUNCTIONS_DIR%/DK.js; %DKJAVA_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
+	%dk_call% dk_validate java_exe "%dk_call% dk_java_exe.cmd"
+	set DKCOMMAND=%ComSpec% /c %javac_exe%  %DKJAVA_FUNCTIONS_DIR%/DK.js; %DKJAVA_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
 	
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (

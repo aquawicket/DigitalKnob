@@ -29,7 +29,7 @@ endif()
 
 if(Android_Host)
 	dk_installPackage("${Imagemagick_Android_Import}")
-	execute_process(COMMAND command -v convert OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE)	
+	execute_process(COMMAND command -v convert OUTPUT_VARIABLE magick_exe)	
 elseif(Unix_Host)
 	dk_import("${Imagemagick_Unix_Import}")
 elseif(Windows_X86_Host)
@@ -60,14 +60,14 @@ if(Windows_Host)
 endif()
 
 
-if(NOT EXISTS "${IMAGEMAGICK_CONVERT_EXE}")
+if(NOT EXISTS "${magick_exe}")
 	if(Windows_Host)
-		dk_findProgram	(IMAGEMAGICK_CONVERT_EXE magick.exe "${IMAGEMAGICK}")
-		dk_assertPath	(IMAGEMAGICK_CONVERT_EXE)
+		dk_findProgram	(magick_exe magick.exe "${IMAGEMAGICK}")
+		dk_assertPath	(magick_exe)
 	endif()
 endif()
 
-dk_set(IMAGEMAGICK_CONVERT_EXE "${IMAGEMAGICK_CONVERT_EXE}")
+dk_set(magick_exe "${magick_exe}")
 
 
 

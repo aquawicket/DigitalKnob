@@ -25,9 +25,9 @@ dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate			(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 
 dk_importVariables("${ida_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR} INSTALL_ROOT ${DKTOOLS_DIR})
-dk_set				(IDA64_EXE "${IDA}/ida64.exe")
+dk_set				(ida64_exe "${IDA}/ida64.exe")
 
-if(EXISTS "${IDA64_EXE}")
+if(EXISTS "${ida64_exe}")
 	dk_notice("ida is already installed")
 	return()
 endif()

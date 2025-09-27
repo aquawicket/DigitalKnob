@@ -71,10 +71,10 @@ if NOT defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
 	if "%Target_Env%" equ "cosmocc" (
-		%dk_call% dk_validate SH_EXE				"%dk_call% dk_depend sh"
+		%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
-		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
+		set "COMPILER_EXE=!sh_exe! !COSMOCC_C_COMPILER!"
 	)
 
 	if "%Target_Env%" equ "clang" (

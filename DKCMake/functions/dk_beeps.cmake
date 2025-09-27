@@ -49,9 +49,9 @@ function(dk_beeps)
 #	endif()
 
 #	###### SH ######
-#	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)	
-#	if(EXISTS "${SH_EXE}")
-#		set(cmnd ${SH_EXE} -c "read -p '' stdin&& echo $stdin")
+#	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE sh_exe OUTPUT_STRIP_TRAILING_WHITESPACE)	
+#	if(EXISTS "${sh_exe}")
+#		set(cmnd ${sh_exe} -c "read -p '' stdin&& echo $stdin")
 #		#message("${cmnd}")
 #		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
 #		if("${stdin}" STREQUAL "$stdin")

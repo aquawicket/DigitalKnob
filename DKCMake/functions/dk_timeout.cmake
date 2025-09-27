@@ -52,7 +52,7 @@ function(dk_timeout)
 	elseif(SH_SHELL)
 		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
 		message("SH> ${command}")
-		execute_process(COMMAND "${SH_EXE}" -c ${command})
+		execute_process(COMMAND "${sh_exe}" -c ${command})
 	
 	###### NOT FOUND ######
 	else()

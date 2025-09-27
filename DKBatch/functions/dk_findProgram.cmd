@@ -72,8 +72,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_echo
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_findProgram PWSH_EXE "pwsh.exe" "%DKTOOLS_DIR%"
-	%dk_call% dk_echo "PWSH_EXE = %PWSH_EXE%"
+	%dk_call% dk_findProgram pwsh_exe "pwsh.exe" "%DKTOOLS_DIR%"
+	%dk_call% dk_echo "pwsh_exe = %pwsh_exe%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_findProgram powershell_exe "powershell.exe" "%windir%/System32"
@@ -88,8 +88,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "cmd_exe = %cmd_exe%"
 	
 	%dk_call% dk_echo
-	%dk_call% dk_findProgram NOTEPADPP_EXE "notepad++.exe" "%ProgramFiles%"
-	%dk_call% dk_echo "NOTEPADPP_EXE = %NOTEPADPP_EXE%"
+	%dk_call% dk_findProgram notepadpp_exe "notepad++.exe" "%ProgramFiles%"
+	%dk_call% dk_echo "notepadpp_exe = %notepadpp_exe%"
 
 	%dk_call% dk_echo
 	%dk_call% dk_findProgram wsl_exe "wsl.exe" "%windir%/System32" 

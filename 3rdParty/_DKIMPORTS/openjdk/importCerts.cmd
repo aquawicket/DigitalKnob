@@ -11,7 +11,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 set "GOOGLE_CERT=%JAVA_HOME%\google.cer"
 set "MAVEN_CERT=%JAVA_HOME%\maven.cer"
-set "KEYTOOL_EXE=%JAVA_HOME%\bin\keytool.exe"
+set "keytool_exe=%JAVA_HOME%\bin\keytool.exe"
 if EXIST "%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe" (set "openssl_exe=%ProgramFiles(x86)%\OpenSSL-win32\bin\openssl.exe")
 if EXIST "%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe" (set "openssl_exe=%ProgramFiles%\OpenSSL-Win64\bin\openssl.exe")
 
@@ -31,8 +31,8 @@ taskkill /F /IM /T "java.exe"
 
 :: create and import the google.cer key
 %dk_call% dk_echo -n | "%openssl_exe%" s_client -connect google.com:443 | "%openssl_exe%" x509 > "%GOOGLE_CERT%"
-"%KEYTOOL_EXE%" -import -noprompt -alias google -cacerts -file "%GOOGLE_CERT%" -storepass changeit && %dk_call% dk_echo "keytool: no errors" || %dk_call% dk_error "keytool returned an error"
+"%keytool_exe%" -import -noprompt -alias google -cacerts -file "%GOOGLE_CERT%" -storepass changeit && %dk_call% dk_echo "keytool: no errors" || %dk_call% dk_error "keytool returned an error"
 
 :: create and import the maven.cer key
 %dk_call% dk_echo -n | "%openssl_exe%" s_client -connect repo.maven.apache.org:443 | "%openssl_exe%" x509 > "%MAVEN_CERT%"
-"%KEYTOOL_EXE%" -import -noprompt -alias maven -cacerts -file "%MAVEN_CERT%" -storepass changeit && %dk_call% dk_echo "keytool: no errors" || %dk_call% dk_error "keytool returned an error"
+"%keytool_exe%" -import -noprompt -alias maven -cacerts -file "%MAVEN_CERT%" -storepass changeit && %dk_call% dk_echo "keytool: no errors" || %dk_call% dk_error "keytool returned an error"

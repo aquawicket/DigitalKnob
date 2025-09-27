@@ -31,11 +31,11 @@ else()
 	dk_set	(core-temp_Import   ${core_temp_Setup_Import})
 endif()
 
-set(core-temp_EXE "${core-temp}/Core Temp.exe")
+set(Core_Temp_exe "${core-temp}/Core Temp.exe")
 dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 dk_import(${core-temp_Import} ROOT "${DKTOOLS_DIR}" PATCH)
 
-set(core-temp_EXE "${core-temp}/Core Temp.exe")
+set(Core_Temp_exe "${core-temp}/Core Temp.exe")
 
 
 

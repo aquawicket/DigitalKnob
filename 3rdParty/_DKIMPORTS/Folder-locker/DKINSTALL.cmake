@@ -26,6 +26,6 @@ if(EXISTS ${folderLocker.exe})
 endif()
 
 dk_depend(7z)
-message("${7ZA_EXE} x \"${FOLDER-LOCKER}/FolderLocker-1.3.0.msi\" -o${FOLDER-LOCKER}/TEMP")
-execute_process(COMMAND ${7ZA_EXE} x "${FOLDER-LOCKER}/FolderLocker-1.3.0.msi" -o${FOLDER-LOCKER}/BIN)
+message("${7za_exe} x \"${FOLDER-LOCKER}/FolderLocker-1.3.0.msi\" -o${FOLDER-LOCKER}/TEMP")
+execute_process(COMMAND ${7za_exe} x "${FOLDER-LOCKER}/FolderLocker-1.3.0.msi" -o${FOLDER-LOCKER}/BIN)
 dk_debug("folderLocker.exe = ${folderLocker.exe}")

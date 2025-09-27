@@ -18,18 +18,18 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 dk_validate(Host_Tuple "dk_Host_Tuple()")
-set(NODEJS_DL "${NodeJS_${Host_Tuple}_Import}")
-dk_assertVar(NODEJS_DL)
+set(nodejs_Import "${NodeJS_${Host_Tuple}_Import}")
+dk_assertVar(nodejs_Import)
 
-dk_importVariables(${NODEJS_DL})
+dk_importVariables(${nodejs_Import})
 
 ### IMPORT ###
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_set(NODEJS $ENV{DKTOOLS_DIR}/${NODEJS_FOLDER})
-dk_import(${NODEJS_DL} _PATH_ ${NODEJS})
-dk_set(NODE_EXE ${NODEJS}/node.exe)
-dk_set(NPM_EXE ${NODEJS}/npm.cmd)
-#dk_nativePath(${NODE_EXE} NODE_EXE_WINPATH)
-#dk_setEnv("PATH" "${NODEJS}")
+dk_set(nodejs $ENV{DKTOOLS_DIR}/${nodejs_FOLDER})
+dk_import(${nodejs_Import} _PATH_ ${nodejs})
+dk_set(node_exe "${nodejs}/node.exe")
+dk_set(npm_exe "${nodejs}/npm.cmd")
+#dk_nativePath(${node_exe} node_exe_WINPATH)
+#dk_setEnv("PATH" "${nodejs}")
 
-#dk_exec(${NPM_EXE} install --save glob -g)
+#dk_exec(${npm_exe} install --save glob -g)

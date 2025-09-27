@@ -13,8 +13,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate NUGET_EXE        "%dk_call% dk_depend nuget"
-	%NUGET_EXE% install Microsoft.UI.Xaml
+	%dk_call% dk_validate nuget_exe        "%dk_call% dk_depend nuget"
+	%nuget_exe% install Microsoft.UI.Xaml
 %endfunction%
 
 

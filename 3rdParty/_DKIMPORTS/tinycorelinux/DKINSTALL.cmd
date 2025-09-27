@@ -54,12 +54,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		
 		::###### Launching the VM ######
 		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_IMPORT_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%qemu-system-x86_64_exe% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_IMPORT_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		::###### create TinyCoreLinux Launcher ######
 		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"
 		if EXIST "%TINYCORELINUX_launcher%" (%return%)
-		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
+		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %qemu-system-x86_64_exe% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 	
 

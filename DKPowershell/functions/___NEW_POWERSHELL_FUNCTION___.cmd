@@ -57,8 +57,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	endlocal
 	
 	:edit_textfile
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
-	"%NOTEPADPP_EXE%" "%FUNCTION_FILE%"
+	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_NOTEPADPP_EXE"
+	"%notepadpp_exe%" "%FUNCTION_FILE%"
 %endfunction%
 
 

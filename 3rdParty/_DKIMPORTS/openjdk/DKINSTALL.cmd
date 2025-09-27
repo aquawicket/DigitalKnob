@@ -31,8 +31,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
 	if NOT defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL%)
 	
-	set "JAVA_EXE=%OPENJDK%/bin/java.exe"
-	set "JAVAC_EXE=%OPENJDK%/bin/javac.exe"
+	set "java_exe=%OPENJDK%/bin/java.exe"
+	set "javac_exe=%OPENJDK%/bin/javac.exe"
 	::%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
 	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
 	%dk_call% dk_nativePath %OPENJDK% OPENJDK_NATIVE

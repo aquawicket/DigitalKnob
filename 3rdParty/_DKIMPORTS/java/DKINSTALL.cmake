@@ -23,11 +23,11 @@ dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_importVariables("${java_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-dk_set(JAVA_EXE ${JAVA}/bin/java.exe)
+dk_set(java_exe ${JAVA}/bin/java.exe)
 
 ### INSTALL ###
-dk_info("looking for java at ${JAVA_EXE}")
-if(NOT EXISTS "${JAVA_EXE}")
+dk_info("looking for java at ${java_exe}")
+if(NOT EXISTS "${java_exe}")
 	dk_download(${JAVA_Url})
 	dk_info("Installing ${JAVA_Url_Filename} . . . please wait")
 	#dk_delete(${JAVA})
@@ -38,10 +38,10 @@ if(NOT EXISTS "${JAVA_EXE}")
 		dk_exec(${dk_download} INSTALLDIR=${JAVA_WIN} /L "${DK3RDPARTY_DIR}/java_install.log") # /s  = silent install (not working)
 	endif()
 else()
-	dk_info("Found java at ${JAVA_EXE}")
+	dk_info("Found java at ${java_exe}")
 endif()
 
-if(NOT EXISTS "${JAVA_EXE}")
+if(NOT EXISTS "${java_exe}")
 	dk_fatal("JAVA IS NOT FOUND OR INVALID")
 endif()
 
