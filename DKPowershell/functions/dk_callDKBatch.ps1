@@ -9,18 +9,15 @@ function Global:dk_callDKBatch() {
 	dk_debugFunc 2 99
 	
     ### get required variables ###
-    #dk_validate CMD_EXE "??"
+    #dk_validate cmd_exe "dk_depend cmd_exe"
     #dk_validate DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()"
-    
     
     ### get ALL_BUT_FIRST_ARGS ###
     ### get LAST_ARG ###
     
-    
     ### Call DKPowershell function ###
-	#cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN} 
+	#cmd /c call "dk_messageBox.cmd" rtn_var ${ARGN}
 	
-   
     ### process the return value ###
     #dk_debug "output_variable = ${output_variable}"
 	#$2="${output_variable}"
