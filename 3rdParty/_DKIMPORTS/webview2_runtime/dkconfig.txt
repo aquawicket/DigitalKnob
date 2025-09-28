@@ -1,6 +1,7 @@
 ###### webview2_runtime ######
 # https://go.microsoft.com/fwlink/?linkid=2124701
 # https://go.microsoft.com/fwlink/?linkid=2124701
+# https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/eb295810-08dc-4e76-b709-2dc2d52a4d37/MicrosoftEdgeWebView2RuntimeInstallerX64.exe
 
-Webview2_Runtime_Windows_X86_64_Import=https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/eb295810-08dc-4e76-b709-2dc2d52a4d37/MicrosoftEdgeWebView2RuntimeInstallerX64.exe
-# Webview2_Runtime_Windows_X86_64_Import=https://go.microsoft.com/fwlink/?linkid=2124701
+webview2_runtime_Windows_X86_64_Import=https://go.microsoft.com/fwlink/?linkid=2124701
+webview2_runtime_Import_Name=MicrosoftEdgeWebView2RuntimeInstallerX64

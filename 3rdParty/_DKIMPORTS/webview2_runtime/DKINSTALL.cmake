@@ -17,5 +17,5 @@ include_guard()
 
 ### INSTALL ###
 dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple "dk_Host_Tuple()")
-dk_import			(${Webview2_Runtime_${Host_Tuple}_Import} NAME webview2_runtime)
+dk_download			(${webview2_runtime_Windows_X86_64_Import})
+dk_exec				(${dk_download})

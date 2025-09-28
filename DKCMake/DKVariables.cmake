@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+message("DKVariables.cmake()")
+dk_pause()
 ### DK.cmake ############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -10,6 +12,7 @@ endif()
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
 #########################################################################
+
 
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
@@ -159,7 +162,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 	dk_set(GNU 1)
 dk_echo("GNU:                          '${GNU}'")
 	
-elseif(CMAKE_GENERATOR MATCHES "Visual Studio")
+elseif((CMAKE_GENERATOR MATCHES "Visual Studio") OR (DEFINED ENV{MSVC}))
 	if(MSVC)
 		dk_warning("MSVC was allready set")
 	endif()

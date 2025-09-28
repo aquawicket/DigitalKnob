@@ -18,10 +18,10 @@ include_guard()
 #endif()
 
 ###### visualstudio ######
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_unset(visualstudio_Install_Path)
-dk_assertVar(visualstudio_Year)
-dk_assertVar(visualstudio_Major)
+#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+#dk_unset(visualstudio_Install_Path)
+#dk_assertVar(visualstudio_Year)
+#dk_assertVar(visualstudio_Major)
 
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 set(vs_setup_bootstrapper_exe "${DKDOWNLOAD_DIR}/vs_bootstrapper_d15/vs_setup_bootstrapper.exe")
@@ -35,7 +35,7 @@ dk_firewallAllow("${visualstudio_setup_exe}")
 #
 # https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
 
-#dk_set(visualstudio_Install_Path	"$ENV{DKTOOLS_DIR}/VS")
+#dk_set(visualstudio_Install_Path	"C:/Program Files \(x86\)/Microsoft Visual Studio")
 #dk_set(visualstudio_Cache_Path		"$ENV{DKDOWNLOAD_DIR}/VS")
 #dk_set(visualstudio_Year 			2022)												# 2019, 2022
 #dk_set(visualstudio_Flavor			"BuildTools") 										# BuildTools, Community			
@@ -44,76 +44,116 @@ dk_firewallAllow("${visualstudio_setup_exe}")
 
 
 
+###### visualstudio_Major ######
+if(NOT visualstudio_Major)
+	set(visualstudio_Major		17)
+endif()
+dk_debug("visualstudio_Major = ${visualstudio_Major}")
+
 
 ###### visualstudio_Install_Path ######
 if(NOT visualstudio_Install_Path)
 	set(visualstudio_Install_Path		"C:/Program Files \(x86\)/Microsoft Visual Studio")
-else()
-	set(visualstudio_Install_Flag		--path install=${visualstudio_Install_Path})
 endif()
+dk_debug("visualstudio_Install_Path = ${visualstudio_Install_Path}")
+set(visualstudio_Install_Flag		--path install=${visualstudio_Install_Path})
+
 
 ###### visualstudio_Cache_Path ######
 if(NOT visualstudio_Cache_Path)
-	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#set(visualstudio_Cache_Path	"$ENV{DKDOWNLOAD_DIR}/VS")
 	set(visualstudio_Cache_Path		"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
+#dk_assertPath("${visualstudio_Cache_Path}")
+dk_debug("visualstudio_Cache_Path = ${visualstudio_Cache_Path}")
 set(visualstudio_Cache_Flag			--path cache=${visualstudio_Cache_Path})		
 
-###### visualstudio_Flavor ######
-if(NOT visualstudio_Flavor)
-	dk_set(visualstudio_Flavor 		"BuildTools")
-endif()
-
-###### visualstudio_Import ######
-if(NOT visualstudio_Import)
-	dk_set(visualstudio_Import 		"https://aka.ms/vs/${visualstudio_Major}/release/vs_${visualstudio_Flavor}.exe")
-endif()
 
 ###### visualstudio_Year ######
 macro(visualstudio_Year)
 	file(GLOB children RELATIVE "${visualstudio_Install_Path}" "${visualstudio_Install_Path}/*")
 	foreach(child ${children})
 		if(IS_DIRECTORY "${visualstudio_Install_Path}/${child}")
-			if(EXISTS "${visualstudio_Install_Path}/${child}/${visualstudio_Flavor}")
+			#dk_isNumber("${child}")
+			#if(dk_isNumber)
 				set(visualstudio_Year ${child})
-				dk_printVar(${visualstudio_Year})
-			endif()
+				break()
+			#endif()
 		endif()
 	endforeach()
 	if(NOT ${visualstudio_Year})
-		dk_warning("visualstudio_Year(): Could not locate year.")
+		dk_warning("visualstudio_Year(): Could not locate year. Defaulting to 2022")
 		dk_set(visualstudio_Year "2022") # DEFAULT
 	endif()
-	dk_printVar(${visualstudio_Year})
 endmacro()
 if(NOT visualstudio_Year)
 	visualstudio_Year()
 endif()
+dk_debug("visualstudio_Year = ${visualstudio_Year}")
+set(visualstudio_Year_Dir "${visualstudio_Install_Path}/${visualstudio_Year}")
+dk_debug("visualstudio_Year_Dir = ${visualstudio_Year_Dir}")
 
 
-macro(visualstudio_Version)
-	file(GLOB children RELATIVE "${visualstudio_Install_Path}/VC/Tools/MSVC" "${visualstudio_Install_Path}/VC/Tools/MSVC/*")
+###### visualstudio_Flavor ######
+macro(visualstudio_Flavor)
+	dk_assertPath("${visualstudio_Year_Dir}")
+	file(GLOB children RELATIVE "${visualstudio_Year_Dir}" "${visualstudio_Year_Dir}/*")
 	foreach(child ${children})
-		if(IS_DIRECTORY "${visualstudio_Install_Path}/VC/Tools/MSVC/${child}")
-			if(EXISTS "${visualstudio_Install_Path}/VC/Tools/MSVC/${child}/bin/Hostx86")
+		if(IS_DIRECTORY "${visualstudio_Year_Dir}/${child}")
+			#if(child IN_LIST Flavors)
+				set(visualstudio_Flavor ${child})
+				break()
+			#endif()
+		endif()
+	endforeach()
+	if(NOT ${visualstudio_Flavor})
+		dk_warning("visualstudio_Flavor(): Could not locate flavor. Defaulting to BuildTools")
+		dk_set(visualstudio_Flavor "BuildTools") # DEFAULT
+	endif()
+endmacro()
+if(NOT visualstudio_Flavor)
+	visualstudio_Flavor()
+endif()
+dk_debug("visualstudio_Flavor = ${visualstudio_Flavor}")
+set(visualstudio_Flavor_Dir "${visualstudio_Year_Dir}/${visualstudio_Flavor}")
+
+
+###### visualstudio_Import ######
+macro(visualstudio_Import)
+	dk_set(visualstudio_Import 		"https://aka.ms/vs/${visualstudio_Major}/release/vs_${visualstudio_Flavor}.exe")
+endmacro()
+if(NOT visualstudio_Import)
+	visualstudio_Import()
+endif()
+dk_debug("visualstudio_Import = ${visualstudio_Import}")
+
+
+###### visualstudio_Version ######
+macro(visualstudio_Version)
+	dk_assertPath("${visualstudio_Flavor_Dir}/VC/Tools/MSVC")
+	file(GLOB children RELATIVE "${visualstudio_Flavor_Dir}/VC/Tools/MSVC" "${visualstudio_Flavor_Dir}/VC/Tools/MSVC/*")
+	foreach(child ${children})
+		if(IS_DIRECTORY "${visualstudio_Flavor_Dir}/VC/Tools/MSVC/${child}")
+			#dk_isNumber("${child}")
+			#if(dk_isNumber)
 				set(visualstudio_Version ${child})
-				dk_printVar(${visualstudio_Version})
-			endif()
+				break()
+			#endif()
 		endif()
 	endforeach()
 	if(NOT ${visualstudio_Version})
-		dk_warning("visualstudio_Version(): Could not locate version.")
-		#dk_set(visualstudio_Version "14.42.34433") # DEFAULT
+		dk_warning("visualstudio_Version(): Could not locate version. Defaulting to 14.44.35207")
+		dk_set(visualstudio_Version "14.44.35207") # DEFAULT
 	endif()
-	dk_printVar(${visualstudio_Version})
 endmacro()
 if(NOT visualstudio_Version)
 	visualstudio_Version()
 endif()
+dk_debug("visualstudio_Version = ${visualstudio_Version}")
+
 
 ###### VS ######
-dk_set(VS	"${visualstudio_Install_Path}/${visualstudio_Year}/${visualstudio_Flavor}")
+dk_set(VS	"${visualstudio_Flavor_Dir}")
 
 
 
@@ -141,26 +181,10 @@ if(NOT EXISTS "${VS}")
 	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${visualstudio_Import_File} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
 	#execute_process(COMMAND ${dk_download} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall TIMEOUT 1)
 
-	### wait for vs_setup_bootstrapper.exe to exist in C:/Users/Administrator/AppData/Local/Temp ###
-#	dk_debug("waiting for vs_setup_bootstrapper.exe . . .")
-#	while(NOT vs_setup_bootstrapper_exe)
-#		dk_findProgram(vs_setup_bootstrapper_exe vs_setup_bootstrapper.exe "C:/Users/Administrator/AppData/Local/Temp")
-#	endwhile()
-#	dk_debug("vs_setup_bootstrapper_exe = ${vs_setup_bootstrapper_exe}")
-#	dk_firewallAllow("${vs_setup_bootstrapper_exe}")
-	
-	### wait for setup.exe to exist in C:/Program Files (x86)/Microsoft Visual Studio/Installer ###
-#	dk_debug("waiting for setup.exe . . .")
-#	while(NOT EXISTS "${visualstudio_setup_exe}")
-#		dk_findProgram(visualstudio_setup_exe setup.exe "$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer")
-#	endwhile()
-#	dk_debug("visualstudio_setup_exe = ${visualstudio_setup_exe}")
-#	dk_firewallAllow("${visualstudio_setup_exe}")
-
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	while(NOT EXISTS "${visualstudio_Cache_Path}")
 		dk_sleep(1)
 	endwhile()
+	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	dk_copy("${visualstudio_Cache_Path}" "$ENV{DKDOWNLOAD_DIR}/VS")
 else()
 	dk_info("Visual Studio ${visualstudio_Flavor} ${visualstudio_Major} ${visualstudio_Year} already installed")
@@ -168,8 +192,10 @@ endif()
 
 ###### set VS variables ######
 
-dk_validate(visualstudio_Year 		"visualstudio_Year()")
-dk_validate(visualstudio_Version 	"visualstudio_Version()")
+#dk_validate(visualstudio_Year 		"visualstudio_Year()")
+#dk_assertVar(visualstudio_Year)
+#dk_validate(visualstudio_Version 	"visualstudio_Version()")
+#dk_assertVar(visualstudio_Version)
 dk_set(VS_GENERATOR 				"Visual Studio ${visualstudio_Major} ${visualstudio_Year}")
 dk_set(VS_MAKE_PROGRAM				"${VS}/MSBuild/Current/Bin/amd64/MSBuild.exe")
 dk_set(VS_MAKE_VCVARSALL			"${VS}/VC/Auxiliary/Build/vcvarsall.bat")

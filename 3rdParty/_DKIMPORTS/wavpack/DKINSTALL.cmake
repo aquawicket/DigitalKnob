@@ -24,7 +24,7 @@ dk_import(https://github.com/dbry/WavPack/archive/2fbee4e.zip)
 ### LINK ###
 dk_include			(${WAVPACK}/include						WAVPACK_INCLUDE_DIR)
 dk_validate			(Target_Tuple "dk_Target_Tuple()")
-if(MSVC AND Windows)
+if(Windows AND MSVC)
 	dk_libDebug		(${WAVPACK_Debug_Dir}/wavpack.lib		WAVPACK_LIBRARY_DEBUG)
 	dk_libRelease	(${WAVPACK_Release_Dir}/wavpack.lib		WAVPACK_LIBRARY_RELEASE)
 else()

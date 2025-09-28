@@ -42,6 +42,8 @@ function(dk_download)
 	dk_getParameter(NO_HALT REMOVE)
 	#dk_debug("NO_HALT = ${NO_HALT}")
 	
+	
+	
 	set(CMAKE_TLS_VERIFY=0)
 
 	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
@@ -50,6 +52,7 @@ function(dk_download)
 	dk_includes("${ARGV}" "${ARGV0}")
 	if(dk_includes)
 		set(url "${ARGV0}")
+		#dk_getUrl(${url} url)						# get the true url if redirect
 	else()
 		dk_warning("ARGV0:${ARGV0} was not found in ARGV:${ARGV}")
 	endif()
