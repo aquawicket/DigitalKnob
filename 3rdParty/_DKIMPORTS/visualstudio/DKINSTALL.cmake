@@ -193,28 +193,49 @@ else()
 endif()
 
 ###### set VS variables ######
+if("${Host_Arch}" STREQUAL "X86")
+	set(VS_HOST "Hostx86")
+elseif("${Host_Arch}" STREQUAL "X86_64")
+	set(VS_HOST "Hostx64")
+elseif("${Host_Arch}" STREQUAL "Arm32")
+	set(VS_HOST "HostARM")	# NOTE: HostARM is probobly not available
+elseif("${Host_Arch}" STREQUAL "Arm64")
+	set(VS_HOST "HostARM64")
+else()
+	dk_error("unable to set VS_HOST")
+endif()
 
-#dk_validate(visualstudio_Year 		"visualstudio_Year()")
-#dk_assertVar(visualstudio_Year)
-#dk_validate(visualstudio_Version 	"visualstudio_Version()")
-#dk_assertVar(visualstudio_Version)
 dk_set(VS_GENERATOR 				"Visual Studio ${visualstudio_Major} ${visualstudio_Year}")
 dk_set(VS_MAKE_PROGRAM				"${VS}/MSBuild/Current/Bin/amd64/MSBuild.exe")
 dk_set(VS_MAKE_VCVARSALL			"${VS}/VC/Auxiliary/Build/vcvarsall.bat")
 
+### Arm32 ###
+dk_set(VS_ARM32_GENERATOR_PLATFORM	ARM)
+dk_set(VS_ARM32_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm/nmake.exe")
+dk_set(VS_ARM32_COMPILER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm/cl.exe")
+dk_set(VS_ARM32_LINKER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm/link.exe")
+dk_set(VS_ARM32_DUMPBIN 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm/dumpbin.exe")
+
+### Arm64 ###
 dk_set(VS_ARM64_GENERATOR_PLATFORM	ARM64)
+dk_set(VS_ARM64_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm64/nmake.exe")
+dk_set(VS_ARM64_COMPILER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm64/cl.exe")
+dk_set(VS_ARM64_LINKER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm64/link.exe")
+dk_set(VS_ARM64_DUMPBIN 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/arm64/dumpbin.exe")
 
+### X86 ###
 dk_set(VS_X86_GENERATOR_PLATFORM	Win32)
-dk_set(VS_X86_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x86/nmake.exe")
-dk_set(VS_X86_COMPILER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x86/cl.exe")
-dk_set(VS_X86_LINKER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x86/link.exe")
-dk_set(VS_X86_DUMPBIN 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx86/x86/dumpbin.exe")
+dk_set(VS_X86_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x86/nmake.exe")
+dk_set(VS_X86_COMPILER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x86/cl.exe")
+dk_set(VS_X86_LINKER 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x86/link.exe")
+dk_set(VS_X86_DUMPBIN 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x86/dumpbin.exe")
 
+### X86_64 ###
 dk_set(VS_X86_64_GENERATOR_PLATFORM	x64)
-dk_set(VS_X86_64_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x64/nmake.exe")
-dk_set(VS_X86_64_COMPILER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x64/cl.exe")
-dk_set(VS_X86_64_LINKER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx64/x64/link.exe")
-dk_set(VS_X86_64_DUMPBIN 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/Hostx86/x64/dumpbin.exe")
+dk_set(VS_X86_64_NMAKE 				"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x64/nmake.exe")
+dk_set(VS_X86_64_COMPILER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x64/cl.exe")
+dk_set(VS_X86_64_LINKER 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x64/link.exe")
+dk_set(VS_X86_64_DUMPBIN 			"${VS}/VC/Tools/MSVC/${visualstudio_Version}/bin/${VS_HOST}/x64/dumpbin.exe")
 
 
 
