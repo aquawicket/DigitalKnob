@@ -185,13 +185,6 @@ else()
 	dk_append	(DKCONFIGURE_FLAGS --disable-static)
 endif()
 
-dk_debug("########## DKBuildFlags.cmake ##########")
-dk_printVar(GNU)
-dk_printVar(MSVC)
-dk_printVar(MINGW)
-dk_printVar(MSYS)
-dk_printVar(XCODE)
-		
 if(MSVC)
 	dk_append(CMAKE_C_FLAGS_DEBUG		/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG)
 	dk_append(CMAKE_C_FLAGS_RELEASE		/MT /O2 /Ob2 /DNDEBUG)
