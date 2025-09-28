@@ -39,16 +39,16 @@ project(${Target_App})
 include_directories(${Target_App_Dir})
 include_directories(${DKCPP_PLUGINS_DIR})
 	
-foreach(each_include $ENV{DKINCLUDES_LIST})
-	include_directories(${each_include})
+foreach(_include $ENV{DKINCLUDES_LIST})
+	include_directories(${_include})
 endforeach()
 
-foreach(each_define $ENV{DKDEFINES_LIST})
-	add_definitions(-D${each_define})
+foreach(_define $ENV{DKDEFINES_LIST})
+	add_definitions(-D${_define})
 endforeach()
 
-foreach(each_linkdir $ENV{DKLINKDIRS_LIST})
-	link_directories(${each_linkdir})
+foreach(_linkdir $ENV{DKLINKDIRS_LIST})
+	link_directories(${_linkdir})
 endforeach()
 
 ### CURRENT_PLUGIN ###
@@ -77,21 +77,16 @@ if(Windows)
         ${Target_App_Dir}/Windows/*.rc
     )
     list(APPEND App_SRC ${Icon_SRC})
-endif()
-
-if(EXISTS "${Target_App_Dir}/icon.ico")
-    if(Windows)
-        list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h")
-        list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc")
-    endif()
-endif()
-
-
-if(HAVE_DK)
-    if(Windows)
-        list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h")
-        list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc")
-    endif()
+	
+	if(EXISTS "${Target_App_Dir}/icon.ico")
+		list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h")
+		list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.rc")
+	endif()
+	
+	if(HAVE_DK)
+		list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h")
+		list(APPEND App_SRC  "${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc")
+	endif()
 endif()
 
 dk_load(dk_Target_Tuple)
@@ -115,4 +110,11 @@ else()
 	elseif(Release)
 		target_link_libraries(${Target_App} $ENV{RELEASE_LIBS} $ENV{LIBS})
 	endif()
+endif()
+
+if(MSVC)
+	dk_replaceAll("${DEBUG_LINK_FLAGS}"  ";"  " "  DEBUG_FLAGS)
+	dk_replaceAll("${RELEASE_LINK_FLAGS}"  ";"  " "  RELEASE_FLAGS)
+	set_target_properties(${Target_App} PROPERTIES LINK_FLAGS_DEBUG ${DEBUG_FLAGS} LINK_FLAGS_RELEASE ${RELEASE_FLAGS})
+	set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${Target_App})
 endif()
