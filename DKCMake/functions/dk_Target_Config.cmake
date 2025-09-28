@@ -33,6 +33,7 @@ function(dk_Target_Config)
 	
 	### MULTI_CONFIG ###
 	if(MULTI_CONFIG)
+		dk_unset(CMAKE_BUILD_TYPE)
 		if(CMAKE_BUILD_TYPE)
 			dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
 		endif()
@@ -50,6 +51,7 @@ function(dk_Target_Config)
 		
 	### SINGLE_CONFIG ###
 	else()
+		dk_unset(CMAKE_CONFIGURATION_TYPES)
 		if(CMAKE_CONFIGURATION_TYPES)
 			dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
 		endif()

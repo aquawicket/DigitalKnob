@@ -18,10 +18,12 @@ include_guard()
 #endif()
 
 ###### visualstudio ######
+# https://learn.microsoft.com/en-us/answers/questions/192162/visual-studio-build-tools-silent-install
+#
+
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 #dk_unset(visualstudio_Install_Path)
-#dk_assertVar(visualstudio_Year)
-#dk_assertVar(visualstudio_Major)
+
 
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 set(vs_setup_bootstrapper_exe "${DKDOWNLOAD_DIR}/vs_bootstrapper_d15/vs_setup_bootstrapper.exe")
@@ -120,7 +122,7 @@ set(visualstudio_Flavor_Dir "${visualstudio_Year_Dir}/${visualstudio_Flavor}")
 
 ###### visualstudio_Import ######
 macro(visualstudio_Import)
-	dk_set(visualstudio_Import 		"https://aka.ms/vs/${visualstudio_Major}/release/vs_${visualstudio_Flavor}.exe")
+	dk_set(visualstudio_Import 	"https://aka.ms/vs/${visualstudio_Major}/release/vs_${visualstudio_Flavor}.exe")
 endmacro()
 if(NOT visualstudio_Import)
 	visualstudio_Import()
