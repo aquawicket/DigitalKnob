@@ -19,12 +19,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto:output
 	)
 
-	rem ###### GET ######
-	if "%Target_App_Cache%" neq "" (
-		echo(
-		echo( 0^) %Target_App_Cache%
-	)
-
 	rem ### read DKBuilder.cache file ###
 	if EXIST "%DKCACHE_DIR%/DKBuilder.cache" (
 		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
@@ -49,18 +43,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:endloop1
 
 	rem ### prepend cache selection if available ###
-	if defined Target_App_Cache if defined Target_Os_Cache if defined Target_Arch_Cache if defined Target_Env_Cache if defined Target_Type_Cache (
-		%dk_call% Array/dk_unshift dk_getDirectories "re-run '%Target_App_Cache%_%Target_Os_Cache%_%Target_Arch_Cache%_%Target_Env_Cache%_%Target_Type_Cache%'"
+	if defined Target_App_Cache (
+		%dk_call% Array/dk_unshift dk_getDirectories "%Target_App_Cache%"
 		%dk_call% Array/dk_unshift commands "call:runCache"
 	)
 	goto end_runCache
 	:runCache
-		%dk_call% dk_info "re-running cached dk_getDirectories..."
 		%dk_call% dk_set Target_App		%Target_App_Cache%
-		%dk_call% dk_set Target_Os		%Target_Os_Cache%
-		%dk_call% dk_set Target_Arch	%Target_Arch_Cache%
-		%dk_call% dk_set Target_Env		%Target_Env_Cache%
-		%dk_call% dk_set Target_Type	%Target_Type_Cache%
 		%return%
 	:end_runCache
 
@@ -85,6 +74,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:loop2
 		if NOT defined dk_getDirectories[%n%] goto endloop2
 		echo %n%: !dk_getDirectories[%n%]!
+		if "%n%" equ "0" (echo. )
 		set /a n+=1
 		goto loop2
 	:endloop2
