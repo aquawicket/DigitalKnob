@@ -12,14 +12,11 @@ include_guard()
 #########################################################################
 
 
-###### WavPack ######
+############ wavpack ############
 # https://github.com/dbry/WavPack/archive/d9c4a35.zip
+# https://github.com/dbry/WavPack/archive/2fbee4e.zip
 
-
-### INSTALL ###
-#dk_import(https://github.com/dbry/WavPack/archive/d9c4a35.zip)
-dk_import(https://github.com/dbry/WavPack/archive/2fbee4e.zip)
-
+dk_import()
 
 ### LINK ###
 dk_include			(${WAVPACK}/include						WAVPACK_INCLUDE_DIR)

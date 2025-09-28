@@ -14,10 +14,8 @@ include_guard()
 
 ############ wasm2brs ############
 # https://github.com/MotleyCoderDev/wasm2brs.git
+# https://github.com/MotleyCoderDev/wasm2brs/archive/671b23b8.zip
 
-dk_validate(Target_Config  "dk_Target_Config()")
-
-### IMPORT ###
-dk_import(https://github.com/MotleyCoderDev/wasm2brs/archive/671b23b8.zip)
+dk_import()
 
 # TODO

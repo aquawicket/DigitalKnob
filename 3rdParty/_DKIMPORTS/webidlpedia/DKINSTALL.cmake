@@ -14,10 +14,10 @@ include_guard()
 
 ############ webidlpedia ############
 # https://github.com/dontcallmedom/webidlpedia.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip
+# https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip
 
-#dk_import(https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip)
-dk_import(https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip)
+dk_import()
 
 ### Build WebAPIs Tree ###
 dk_mkdir(${WEBIDLPEDIA}/DKWebAPIs)

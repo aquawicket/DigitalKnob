@@ -14,22 +14,21 @@ include_guard()
 
 ############ wasm3 ############
 # https://github.com/wasm3/wasm3.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/wasm3/wasm3/archive/79d412ea.zip
 
-### IMPORT ###
-dk_import(https://github.com/wasm3/wasm3/archive/79d412ea.zip)
+dk_import()
 
 ### LINK ###
-dk_include				(${WASM3})
-dk_include				(${WASM3}/${Target_Tuple})
-Apple_dk_libDebug		(${WASM3}/${Target_Tuple}/source/${Debug_Dir}/libm3.a)
-Apple_dk_libRelease		(${WASM3}/${Target_Tuple}/source/${Release_Dir}/libm3.a)
+dk_include				(${wasm3})
+dk_include				(${wasm3}/${Target_Tuple})
+Apple_dk_libDebug		(${wasm3}/${Target_Tuple}/source/${Debug_Dir}/libm3.a)
+Apple_dk_libRelease		(${wasm3}/${Target_Tuple}/source/${Release_Dir}/libm3.a)
 if(NOT Apple)
-	Unix_dk_libDebug	(${WASM3_Debug_Dir}/source/libm3.a)
-	Unix_dk_libRelease	(${WASM3_Release_Dir}/source/libm3.a)
+	Unix_dk_libDebug	(${wasm3_Debug_Dir}/source/libm3.a)
+	Unix_dk_libRelease	(${wasm3_Release_Dir}/source/libm3.a)
 endif()
-Windows_dk_libDebug			(${WASM3}/${Target_Tuple}/source/${Debug_Dir}/m3.lib)
-Windows_dk_libRelease		(${WASM3}/${Target_Tuple}/source/${Release_Dir}/m3.lib)
+Windows_dk_libDebug			(${wasm3}/${Target_Tuple}/source/${Debug_Dir}/m3.lib)
+Windows_dk_libRelease		(${wasm3}/${Target_Tuple}/source/${Release_Dir}/m3.lib)
 
 ### GENERATE ###
 dk_configure()

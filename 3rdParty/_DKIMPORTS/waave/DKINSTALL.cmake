@@ -12,32 +12,33 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ waave ############
 # https://sourceforge.net/projects/waave
+# git://git.code.sf.net/p/waave/code
 # https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
 
-
-### DEPEND ###
 dk_depend(ffmpeg)
 dk_depend(sdl)
 
 
-### IMPORT ###
-dk_import(https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz PATCH)
-#dk_import(git://git.code.sf.net/p/waave/code)
+dk_import()
 
 
 ### LINK ###
-dk_include			(${WAAVE}/src)
-Unix_dk_libDebug	(${WAAVE_Debug_Dir}/libwaave.a)
-Unix_dk_libRelease	(${WAAVE_Release_Dir}/libwaave.a)
-Windows_dk_libDebug		(${WAAVE_Debug_Dir}/waave.lib)
-Windows_dk_libRelease	(${WAAVE_Release_Dir}/waave.lib)
+dk_include			(${waave}/src)
+if(MSVC)
+	dk_libDebug		(${waave_Debug_Dir}/waave.lib)
+	dk_libRelease	(${waave_Release_Dir}/waave.lib)
+else()
+	dk_libDebug		(${waave_Debug_Dir}/libwaave.a)
+	dk_libRelease	(${waave_Release_Dir}/libwaave.a)
+endif()
+
 
 
 ### GENERATE ###
-dk_configure(${WAAVE} ${FFMPEG-DEV_CMAKE} ${sdl_CMAKE})
+dk_configure(${waave} ${ffmpeg-dev_CMAKE} ${sdl_CMAKE})
 
 
 ### COMPILE ###
-dk_build(${WAAVE} waave)
+dk_build(${waave} waave)

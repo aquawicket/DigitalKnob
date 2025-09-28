@@ -1,0 +1,5 @@
+############ wasi ############
+# https://github.com/WebAssembly/WASI.git
+# https://github.com/WebAssembly/WASI/archive/dbe2733c.zip
+
+wasi_Import=https://github.com/WebAssembly/WASI/archive/dbe2733c.zip

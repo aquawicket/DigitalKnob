@@ -15,40 +15,46 @@ include_guard()
 ############ vscode ############
 # https://code.visualstudio.com/docs/editor/portable
 # https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-darwin-universal.zip
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-win32-arm64-1.87.1.zip
+# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-win32-x64-1.87.1.zip
 
-if(EXISTS ${VSCODE_EXE})
-	dk_debug("VSCODE_EXE already set to: ${VSCODE_EXE}")
+if(EXISTS ${vscode_exe})
+	dk_debug("vscode_exe already set to: ${vscode_exe}")
 	return()
 endif()
 
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_validate(Host_Tuple "dk_Host_Tuple()")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-### DOWNLOAD ###
-set(VSCODE_Import "${VSCode_${Host_Tuple}_Import}")
+
+set(vscode_Import "${VSCode_${Host_Tuple}_Import}")
 
 
-dk_assertVar(VSCODE_Import)
+dk_assertVar(vscode_Import)
 
-dk_basename(${VSCODE_Import} VSCODE_Import_FILE)
-dk_removeExtension(${VSCODE_Import_FILE} VSCODE_Install_Name)
-dk_convertToCIdentifier(${VSCODE_Install_Name} VSCODE_Install_Name)
-dk_toLower(${VSCODE_Install_Name} VSCODE_Install_Name)
+dk_basename(${vscode_Import} vscode_Import_FILE)
+dk_removeExtension(${vscode_Import_FILE} vscode_Install_Name)
+dk_convertToCIdentifier(${vscode_Install_Name} vscode_Install_Name)
+dk_toLower(${vscode_Install_Name} vscode_Install_Name)
 
-dk_set(VSCODE $ENV{DKTOOLS_DIR}/${VSCODE_Install_Name})
+dk_set(vscode $ENV{DKTOOLS_DIR}/${vscode_Install_Name})
 if(Windows_Host)
-	dk_set(VSCODE_EXE ${VSCODE}/Code.exe)
+	dk_set(vscode_exe ${vscode}/Code.exe)
 else()
-	dk_set(VSCODE_EXE ${VSCODE}/code)
+	dk_set(vscode_exe ${vscode}/code)
 endif()
 
 
 
 ### IMPORT ###
-if(NOT EXISTS ${VSCODE_EXE})
+if(NOT EXISTS ${vscode_exe})
 	dk_mkdir	($ENV{DKTOOLS_DIR})
-	dk_import	(${VSCODE_Import} _PATH_ ${VSCODE})
-	dk_mkdir	(${VSCODE}/data)
+	dk_import	(${vscode_Import} _PATH_ ${vscode})
+	dk_mkdir	(${vscode}/data)
 endif()
 
-#dk_printVar(VSCODE_EXE)
+#dk_debug("vscode_exe = ${vscode_exe}")

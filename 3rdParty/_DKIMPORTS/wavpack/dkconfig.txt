@@ -1,0 +1,5 @@
+############ wavpack ############
+# https://github.com/dbry/WavPack/archive/d9c4a35.zip
+# https://github.com/dbry/WavPack/archive/2fbee4e.zip
+
+wavpack_Import=https://github.com/dbry/WavPack/archive/2fbee4e.zip

@@ -1,0 +1,5 @@
+############ wasm2brs ############
+# https://github.com/MotleyCoderDev/wasm2brs.git
+# https://github.com/MotleyCoderDev/wasm2brs/archive/671b23b8.zip
+
+wasm2brs_Import=https://github.com/MotleyCoderDev/wasm2brs/archive/671b23b8.zip
