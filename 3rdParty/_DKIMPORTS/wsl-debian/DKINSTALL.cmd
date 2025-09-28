@@ -5,8 +5,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
+::############ wsl-debian ############
+::# wsl-debian_Import"https://wslstorestorage.blob.core.windows.net/wslblob/TheDebianProject.DebianGNULinux_1.12.2.0_neutral___76v4gfsz19hv4.AppxBundle"
 ::#
 :DKINSTALL
 	%dk_call% dk_debugFunc 0

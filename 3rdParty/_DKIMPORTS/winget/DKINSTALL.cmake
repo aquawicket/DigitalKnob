@@ -13,12 +13,11 @@ include_guard()
 
 
 ############ winget ############
+# https://aka.ms/getwingetpreview
 # https://learn.microsoft.com/en-us/windows/package-manager/winget
 
-#dk_download(https://aka.ms/getwingetpreview)
-dk_getUrl(${winget_Import})
-dk_debug("${dk_getUrl}")
-dk_download(${dk_getUrl})
-#TODO
+dk_import(APP)
+
+# TODO
 
 

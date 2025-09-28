@@ -14,11 +14,12 @@ include_guard()
 
 ############ webref ############
 # https://github.com/w3c/webref.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/w3c/webref/archive/48fcf557.zip
 
 dk_depend(nodejs)
 
-dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
+#dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
+dk_import()
 
 ### Build Interface Tree ###
 if(Windows)

@@ -19,14 +19,13 @@ include_guard()
 
 
 ###### Download the Windows ADK 10.1.26100.2454 (December 2024) ######
-# https://download.microsoft.com/download/2/d/9/2d9c8902-3fcd-48a6-a22a-432b08bed61e/ADK/adksetup.exe
 #if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 dk_set(windows_adk_Install_Path "$ENV{DKTOOLS_DIR}/ADK")
 #if(NOT EXISTS "${windows_adk_Install_Path}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADK")
-		dk_download("https://go.microsoft.com/fwlink/?linkid=2289980")
+		dk_download("${windows_adk_Import}")
 		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADK") # /q
 	#endif()
 
@@ -36,13 +35,12 @@ dk_set(windows_adk_Install_Path "$ENV{DKTOOLS_DIR}/ADK")
 
 
 ###### Download the Windows PE add-on for the Windows ADK 10.1.26100.2454 (December 2024) ######
-# https://download.microsoft.com/download/5/5/6/556e01ec-9d78-417d-b1e1-d83a2eff20bc/ADKWinPEAddons/adkwinpesetup.exe
 #if(NOT EXISTS "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Assessment and Deployment Kit/Windows Preinstallation Environment")
 dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
 #if(NOT EXISTS "${windows_adk_Install_Path}")
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons")
-		dk_download("https://go.microsoft.com/fwlink/?linkid=2289981")
+		dk_download("${windows_adk_PE_Import}")
 		execute_process(COMMAND cmd /c "${dk_download}" /layout "$ENV{DKDOWNLOAD_DIR}/ADKWinPEAddons") # /q)
 	#endif()
 	

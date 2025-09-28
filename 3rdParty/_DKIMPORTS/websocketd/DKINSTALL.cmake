@@ -18,5 +18,6 @@ include_guard()
 ### INSTALL ###
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-dk_validate	(Host_Tuple "dk_Host_Tuple()")
-dk_import	(${websocketd_${Host_Tuple}_Import})
+#dk_validate(Host_Tuple "dk_Host_Tuple()")
+#dk_import(${websocketd_${Host_Tuple}_Import})
+dk_import()

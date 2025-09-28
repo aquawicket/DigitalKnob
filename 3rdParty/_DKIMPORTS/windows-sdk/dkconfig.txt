@@ -1,3 +1,18 @@
+############ windows-sdk ############
+# file:///C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/windows-sdk/windows-sdk.mhtml
+# https://software-static.download.prss.microsoft.com/dbazure/888969d5-f34g-4e03-ac9d-1f9786c66749/26100.1.240331-1435.ge_release_WindowsSDK.iso
+# https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
+# Windows SDK for Windows 11 (10.0.22621.2428)		Released October 2023.
+# Windows SDK for Windows 11 (10.0.22621.1778)		Released in May 2023.
+# Windows SDK for Windows 11 (10.0.22621.755)		Released as part of Windows 11, version 22H2. Servicing update 10.0.22000.755 on 10/25/22: ARM64 support 
+# Windows SDK for Windows 11 (10.0.22000.194)		Released in Windows 11. w/ servicing update 10.0.22000.832 on 7/29/22: Critical updates for building Arm64EC
+# Windows 10 SDK version 2104 (10.0.20348.0)		Windows Server development. Desktop development, see release notes for changes than benefit by updating.	
+# https://go.microsoft.com/fwlink/?linkid=2272523)	# iso
+# https://go.microsoft.com/fwlink/?linkid=2272610)	# installer
+# https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-arm64.exe
+# https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-x86.exe
+# https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-x64.exe
 
-#windows-sdk_Windows_X86_64_Import=https://software-static.download.prss.microsoft.com/dbazure/888969d5-f34g-4e03-ac9d-1f9786c66749/26100.1.240331-1435.ge_release_WindowsSDK.iso
-windows-sdk_Windows_X86_64_Import=https://download.microsoft.com/download/2/6/f/26f7aa55-ef6f-4882-b19b-a1be0e7328fe/KIT_BUNDLE_WINDOWSSDK_MEDIACREATION/winsdksetup.exe
+windows-sdk_Windows_Arm64_Import=https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-arm64.exe
+windows-sdk_Windows_X86_Import=https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-x86.exe
+windows-sdk_Windows_X86_64_Import=https://aka.ms/windowsappsdk/1.8/1.8.250916003/windowsappruntimeinstall-x64.exe

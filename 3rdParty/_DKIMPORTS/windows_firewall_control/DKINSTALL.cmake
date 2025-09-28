@@ -23,19 +23,17 @@ if(NOT Windows_Host)
 endif()
 
 
-
-
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 dk_set(wfcUI_exe "${ProgramFiles}/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 
 ### INSTALL ###
-dk_basename(${WINDOWS_FIREWALL_CONTROL_Import} WINDOWS_FIREWALL_CONTROL_Import_File)
+dk_basename(${windows_firewall_control_Import} windows_firewall_control_Import_File)
 if(NOT EXISTS "${wfcUI_exe}")
-	dk_info("Installing ${WINDOWS_FIREWALL_CONTROL_Import_File}")
-	dk_download(${WINDOWS_FIREWALL_CONTROL_Import_File})
+	dk_info("Installing ${windows_firewall_control_Import_File}")
+	dk_download(${windows_firewall_control_Import_File})
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_exec($ENV{DKDOWNLOAD_DIR}/${WINDOWS_FIREWALL_CONTROL_Import_File})
+	dk_exec($ENV{DKDOWNLOAD_DIR}/${windows_firewall_control_Import_File})
 else()
-	dk_notice("${WINDOWS_FIREWALL_CONTROL_Import_File} is already installed")
+	dk_notice("${windows_firewall_control_Import_File} is already installed")
 endif()
 dk_assertPath("${wfcUI_exe}")

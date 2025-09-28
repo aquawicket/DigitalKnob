@@ -13,7 +13,7 @@ include_guard()
 
 
 ############ wget ############
-dk_validate(Target_Config  "dk_Target_Config()")
+#
 
 dk_installPackage(wget)
 

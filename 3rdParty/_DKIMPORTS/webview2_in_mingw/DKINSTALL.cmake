@@ -12,10 +12,7 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
-dk_validate(Target_Tuple "dk_Target_Tuple()")
 ############ webview2_in_mingw ############
-
 dk_import()
 
 dk_assertPath("${webview2_in_mingw}")

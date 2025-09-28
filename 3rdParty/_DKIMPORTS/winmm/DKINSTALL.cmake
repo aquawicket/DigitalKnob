@@ -14,7 +14,7 @@ include_guard()
 
 ############ winmm ############
 # https://docs.microsoft.com/en-us/windows/win32/multimedia/windows-multimedia-start-page?redirectedfrom=MSDN
-dk_validate(Target_Config  "dk_Target_Config()")
+# 
 
 if(NOT Windows)
 	dk_disable(winmm)

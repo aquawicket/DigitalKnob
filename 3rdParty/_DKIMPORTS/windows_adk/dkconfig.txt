@@ -1,3 +1,7 @@
+############ windows_adk ############
+# https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install
+# https://go.microsoft.com/fwlink/?linkid=2289980
+# https://go.microsoft.com/fwlink/?linkid=2289981
 # curl https://go.microsoft.com/fwlink/?linkid=2289980 -sI -o nul -w %{redirect_url} 
 
 windows_adk_Import=https://go.microsoft.com/fwlink/?linkid=2289980

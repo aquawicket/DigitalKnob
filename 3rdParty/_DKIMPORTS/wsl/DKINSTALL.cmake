@@ -12,11 +12,12 @@ include_guard()
 #########################################################################
 
 
-############ wsl ############
-#dk_validate(Target_Config  "dk_Target_Config()")
-# https://learn.microsoft.com/en-us/windows/wsl/
+##################### wsl ###############################################
+# https://learn.microsoft.com/en-us/windows/wsl
 # https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command
 # https://learn.microsoft.com/en-us/windows/wsl/install-manual
+# Troubleshooting:	https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
+# Custom Distro:	https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
 
 #if(Windows_Host)
 #	dk_exec(wsl --install)

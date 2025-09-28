@@ -14,7 +14,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
 	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	set "WSL_ALPINE_IMPORT=!Wsl_Alpine_%Host_Tuple%_Import!"
+	set "wsl_alpine_Import=!Wsl_Alpine_%Host_Tuple%_Import!"
 	%dk_call% dk_assertVar WSL_ALPINE_IMPORT
 
 	%dk_call% dk_depend wsl

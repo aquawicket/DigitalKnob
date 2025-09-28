@@ -5,10 +5,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
-::#     https://github.com/microsoft/terminal
+::############ windows_terminal ############
+::# https://github.com/microsoft/terminal
+::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip
+::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip
+::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip
 ::#
 :DKINSTALL
 ::%setlocal%
