@@ -24,9 +24,10 @@
 * SOFTWARE.
 */
 
-#include <stdio.h>
-#include <string.h>  // for strlen
-#include <assert.h>
+#include <iostream>	// for std::cin.get()
+#include <stdio.h>	// for assert()
+#include <string.h>	
+#include <assert.h>	// for strlen()
 #include "zlib.h"
 
 int main(int argc, char** argv){
@@ -95,5 +96,7 @@ int main(int argc, char** argv){
     // make sure uncompressed is exactly equal to original.
     assert(strcmp(a,c)==0);
 	
+	std::cout << "(press enter to exit)" << std::endl;
+	std::cin.get(); //wait for enter to exit
     return 0;
 }

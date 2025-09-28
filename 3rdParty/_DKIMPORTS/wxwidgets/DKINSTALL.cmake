@@ -13,24 +13,24 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 
+############ wxwidgets ############
 # https://github.com/wxWidgets/wxWidgets.git
+# https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip
 
 
-
-#dk_import(https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip)
 dk_import()
 
 
 ### LINK ###
-dk_include			(${WXWIDGETS}/include)
-Unix_dk_libDebug	(${WXWIDGETS_Debug_Dir}/libwxwidgets.a)
-Unix_dk_libRelease	(${WXWIDGETS_Release_Dir}/libwxwidgets.a)
-Windows_dk_libDebug		(${WXWIDGETS_Debug_Dir}/wxwidgets.lib)
-Windows_dk_libRelease	(${WXWIDGETS_Release_Dir}/wxwidgets.lib)
+dk_include				(${wxwidgets}/include)
+Unix_dk_libDebug		(${wxwidgets_Debug_Dir}/libwxwidgets.a)
+Unix_dk_libRelease		(${wxwidgets_Release_Dir}/libwxwidgets.a)
+Windows_dk_libDebug		(${wxwidgets_Debug_Dir}/wxwidgets.lib)
+Windows_dk_libRelease	(${wxwidgets_Release_Dir}/wxwidgets.lib)
 
 
 ### GENERATE ###
-dk_configure(${WXWIDGETS})
+dk_configure(${wxwidgets})
 
 
 ### COMPILE ###

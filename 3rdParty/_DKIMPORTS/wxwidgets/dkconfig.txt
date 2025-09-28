@@ -1,1 +1,4 @@
+############ wxwidgets ############
+# https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip
+
 wxwidgets_Import=https://github.com/wxWidgets/wxWidgets/archive/refs/heads/master.zip

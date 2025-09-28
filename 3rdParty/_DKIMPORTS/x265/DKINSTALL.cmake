@@ -14,20 +14,20 @@ include_guard()
 
 ############ x265 ############
 # https://bitbucket.org/multicoreware/x265_git.git
-#dk_validate(Target_Config  "dk_Target_Config()")
+# https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip
+
 
 ### IMPORT ###
-#dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip)
 dk_import()
 
 ### LINK ###
-dk_include		(${X265}/include)
-dk_include		(${X265}/${Target_Tuple})
-dk_libDebug		(${X265_Debug_Dir}/libx265.a)
-dk_libRelease	(${X265_Release_Dir}/libx265.a)
+dk_include		(${x265}/include)
+dk_include		(${x265}/${Target_Tuple})
+dk_libDebug		(${x265_Debug_Dir}/libx265.a)
+dk_libRelease	(${x265_Release_Dir}/libx265.a)
 
 ### GENERATE ###
-dk_configure(${X265})
+dk_configure(${x265})
 
 ### COMPILE ###
 dk_build()
