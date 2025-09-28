@@ -34,12 +34,12 @@ DKHOME_DIR() {
 		[ ! -e "${cmd_exe}" ]		&& unset cmd_exe
 		[   -e "${cmd_exe-}" ]		&& dk_call dk_printVar cmd_exe
 		
-		######  USERPROFILE -> CYGPATH_EXE -> DKHOME_DIR ######
-		[ ! -e "${CYGPATH_EXE-}" ]	&& export CYGPATH_EXE=$(command -v "cygpath") || $(true)
-		[   -e "${CYGPATH_EXE}" ]	&& export USERPROFILE=$(${CYGPATH_EXE} -u $(${cmd_exe} "/c echo %USERPROFILE% | tr -d '\r'"))
-		[ ! -e "${CYGPATH_EXE}" ]	&& unset CYGPATH_EXE
-		[   -e "${CYGPATH_EXE-}" ]	&& dk_call dk_printVar CYGPATH_EXE
-		[   -e "${CYGPATH_EXE-}" ]	&& export DKHOME_DIR=$(cygpath -u $(${cmd_exe} "/c echo %USERPROFILE% | tr -d '\r'"))
+		######  USERPROFILE -> cygpath_exe -> DKHOME_DIR ######
+		[ ! -e "${cygpath_exe-}" ]	&& export cygpath_exe=$(command -v "cygpath") || $(true)
+		[   -e "${cygpath_exe}" ]	&& export USERPROFILE=$(${cygpath_exe} -u $(${cmd_exe} "/c echo %USERPROFILE% | tr -d '\r'"))
+		[ ! -e "${cygpath_exe}" ]	&& unset cygpath_exe
+		[   -e "${cygpath_exe-}" ]	&& dk_call dk_printVar cygpath_exe
+		[   -e "${cygpath_exe-}" ]	&& export DKHOME_DIR=$(cygpath -u $(${cmd_exe} "/c echo %USERPROFILE% | tr -d '\r'"))
 		
 		######  USERPROFILE -> wslpath_exe -> DKHOME_DIR ######
 		[ ! -e "${wslpath_exe-}" ]	&& export wslpath_exe=$(command -v "wslpath") || $(true)

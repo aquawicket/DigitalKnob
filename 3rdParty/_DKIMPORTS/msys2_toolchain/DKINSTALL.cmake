@@ -22,7 +22,7 @@ if(NOT Windows_Host)
 endif()
 
 ### Return if msys2_exe is already set
-#if(EXISTS ${msys2_EXE})
+#if(EXISTS ${msys2_exe})
 #	dk_return()
 #endif()
 

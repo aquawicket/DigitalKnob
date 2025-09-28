@@ -41,9 +41,9 @@ function(DKHOME_DIR)
 	
 		########### from MSYS ###########
 		if(NOT EXISTS "${DKHOME_DIR}")
-			set(CYGPATH_EXE "/usr/bin/cygpath.exe")
-			if(EXISTS "${CYGPATH_EXE}")
-				execute_process(COMMAND ${CYGPATH_EXE} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+			set(cygpath_exe "/usr/bin/cygpath.exe")
+			if(EXISTS "${cygpath_exe}")
+				execute_process(COMMAND ${cygpath_exe} -u "$ENV{USERPROFILE}" OUTPUT_VARIABLE DKHOME_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 			endif()
 		endif()
 		
@@ -100,30 +100,30 @@ endfunction()
 
 
 
-#	###### CYGPATH_EXE ######
-#	if(NOT EXISTS "${CYGPATH_EXE}")
+#	###### cygpath_exe ######
+#	if(NOT EXISTS "${cygpath_exe}")
 #		if(EXISTS "/usr/bin/cygpath.exe")
-#			dk_set(CYGPATH_EXE "/usr/bin/cygpath.exe")
+#			dk_set(cygpath_exe "/usr/bin/cygpath.exe")
 #		endif()
 #	endif()
 #	if(cmd_exe)
-#			execute_process(COMMAND where /R C:\\Users\\Administrator cygpath.exe OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-#			dk_printVar(CYGPATH_EXE)
+#			execute_process(COMMAND where /R C:\\Users\\Administrator cygpath.exe OUTPUT_VARIABLE cygpath_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+#			dk_printVar(cygpath_exe)
 #		endif()
 #	endif()
-#	if(NOT EXISTS "${CYGPATH_EXE}")
-#		execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#	if(NOT EXISTS "${cygpath_exe}")
+#		execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE cygpath_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 #	endif()
-#	if(NOT EXISTS "${CYGPATH_EXE}")
-#		dk_findProgram(CYGPATH_EXE cygpath.exe)
+#	if(NOT EXISTS "${cygpath_exe}")
+#		dk_findProgram(cygpath_exe cygpath.exe)
 #	endif()
-#	if(NOT EXISTS "${CYGPATH_EXE}")
-#		dk_warning("CYGPATH_EXE:${CYGPATH_EXE} not found")
+#	if(NOT EXISTS "${cygpath_exe}")
+#		dk_warning("cygpath_exe:${cygpath_exe} not found")
 #	else()
-#		dk_set(CYGPATH_EXE "${CYGPATH_EXE}")		# Globalize the variable
-#		dk_printVar(CYGPATH_EXE)
-#		set(ENV{CYGPATH_EXE} "${CYGPATH_EXE}")		# Set Environment Varible
-#		dk_printVar(ENV{CYGPATH_EXE})
+#		dk_set(cygpath_exe "${cygpath_exe}")		# Globalize the variable
+#		dk_printVar(cygpath_exe)
+#		set(ENV{cygpath_exe} "${cygpath_exe}")		# Set Environment Varible
+#		dk_printVar(ENV{cygpath_exe})
 #	endif()
 
 #	###### wslpath_exe ######

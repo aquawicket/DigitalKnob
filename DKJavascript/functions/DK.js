@@ -88,11 +88,11 @@ function stringify(obj) {
 //############ NodeJS ############
 if(USE_NODEJS){
 	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
-	dk_validate(NODEJS_EXE, DKIMPORTS_DIR+"/nodejs/dk_install.js")
+	dk_validate(nodejs_exe, DKIMPORTS_DIR+"/nodejs/dk_install.js")
 	
 	//COMSPEC = dk_env("%COMSPEC%")
 	WScript_Shell = new ActiveXObject("WScript.Shell");
-	WScript_Shell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
+	WScript_Shell.Run('start '+nodejs_exe+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
 	WScript_Shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/DigitalKnob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
 }
 

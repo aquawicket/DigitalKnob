@@ -52,7 +52,7 @@ dk_callDKCSharp
 	if NOT defined Target_Env (set "Target_Env=%default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
-	::###### CSC_EXE ######
+	::###### csc_exe ######
 	:: TODO:  note, reference DKINSTALL.cmd for how to call DKCSharp methods from batch script
 
 	::###### _c_file_ ######

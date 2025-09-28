@@ -56,11 +56,11 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	
 	### Result from stdout								[STDOUT]
 	dk_echo("\n");
-	$PHP_EXE = "C:\Users\Administrator\DigitalKnob\DKTools\php-src-php-8.4.11-win32-vs17-x64\php.exe";
+	$php_exe = "C:\Users\Administrator\DigitalKnob\DKTools\php-src-php-8.4.11-win32-vs17-x64\php.exe";
 	$resultF = "";
 	$exit_code = -1;
 	putenv("DKTEST=OFF");
-	exec("$PHP_EXE dk_testReturn.php inputF", $resultF, $exit_code);
+	exec("$php_exe dk_testReturn.php inputF", $resultF, $exit_code);
 	dk_echo("resultF = ".end($resultF)."\n");
 	dk_echo("exit_code = $exit_code\n");
 }}

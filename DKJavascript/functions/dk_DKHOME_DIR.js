@@ -19,14 +19,14 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 		}
 	}
 
-	//###### WSLPATH_EXE ######
-	//dk_set(WSLPATH_EXE   WSL_EXE+" wslpath")
-	//dk_printVar(WSLPATH_EXE)
+	//###### wslpath_exe ######
+	//dk_set(wslpath_exe   wsl_exe+" wslpath")
+	//dk_printVar(wslpath_exe)
 
 	//if not defined HOMEDRIVE        !dk_call! dk_warning "HOMEDRIVE is invalid"
 	//if not defined HOMEPATH         !dk_call! dk_warning "HOMEPATH is invalid"
 	
-	//if exist "!WSLPATH_EXE!"        !dk_call! dk_exec "!WSLPATH_EXE! -u !DKHOME_DIR!" DKHOME_DIR
+	//if exist "!wslpath_exe!"        !dk_call! dk_exec "!wslpath_exe! -u !DKHOME_DIR!" DKHOME_DIR
 
 	dk_depend("dk_assertPath"); dk_assertPath(DKHOME_DIR);
 	

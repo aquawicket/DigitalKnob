@@ -1,7 +1,7 @@
 @echo off
 
-for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
-set "COMPILER_EXE=%CSC_EXE:\=/%"
+for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "csc_exe=%%#"
+set "COMPILER_EXE=%csc_exe:\=/%"
 if NOT defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
 	
 set "DKCSharp_FILE=ImageShow.cs"
@@ -75,8 +75,8 @@ if %ERRORLEVEL% neq 0 (
 	::###### Install DKCSharp ######
 	::###### COMPILER_EXE ######
 	:: find csc.exe
-	for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
-	set "COMPILER_EXE=%CSC_EXE:\=/%"
+	for /r "%SystemRoot:\=/%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "csc_exe=%%#"
+	set "COMPILER_EXE=%csc_exe:\=/%"
 	%dk_call% dk_assertPath COMPILER_EXE
 	ftype DKCSharp="%ComSpec%" /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .cs=DKCSharp

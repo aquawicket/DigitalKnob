@@ -30,7 +30,7 @@ dk_download "https://github.com/koalaman/shellcheck/releases/download/${SHELLCHE
 
 dest_path="${DKTOOLS_DIR}/shellcheck-${SHELLCHECK_VERSION}"
 dk_smartExtract "${DKDOWNLOAD_DIR}/${SHELLCHECK_IMPORT_FILE}" "${dest_path}"
-SHELLCHECK_EXE="${dest_path}/shellcheck"
+shellcheck_exe="${dest_path}/shellcheck"
 
 #cp "shellcheck-${scversion}/shellcheck" /usr/bin/
-"${SHELLCHECK_EXE} --version"	
+"${shellcheck_exe} --version"	

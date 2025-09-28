@@ -224,10 +224,10 @@ wslpath_exe(){
 }
 
 ##################################################################################
-# CYGPATH_EXE()
+# cygpath_exe()
 #
-CYGPATH_EXE(){
-	builtin echo "CYGPATH_EXE()"
+cygpath_exe(){
+	builtin echo "cygpath_exe()"
 	
 	(command -v cygpath >&2) || echo "cygpath Not Found" >&2
 }
@@ -239,7 +239,7 @@ DKSCRIPT_VARS(){
 	#echo "DKSCRIPT_VARS()";
 	
 	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(wslpath_exe)" ] && export DKSCRIPT_PATH=$($(wslpath_exe) -u $(dk_realpath ${0}));	 	# Windows subsystem for Linux
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}));		# Git for Windows	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(cygpath_exe)" ] && export DKSCRIPT_PATH=$($(cygpath_exe) -u $(dk_realpath ${0}));		# Git for Windows	
 	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0});														# Default
     [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || (echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"; exit ${BASH_LINENO[0]};)    
     #export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";

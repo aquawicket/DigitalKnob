@@ -20,36 +20,36 @@ function(dk_CYGPATH_EXE)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(CYGPATH_EXE "${ARGV0}")
+		dk_set(cygpath_exe "${ARGV0}")
 		
 	###### GET ######
-	elseif(DEFINED ENV{CYGPATH_EXE})	
-		dk_set(CYGPATH_EXE "$ENV{CYGPATH_EXE}")
+	elseif(DEFINED ENV{cygpath_exe})	
+		dk_set(cygpath_exe "$ENV{cygpath_exe}")
 	
 	else()
-		if(EXISTS "${CYGPATH_EXE}")
-			dk_debug("CYGPATH_EXE:${CYGPATH_EXE} already set")
+		if(EXISTS "${cygpath_exe}")
+			dk_debug("cygpath_exe:${cygpath_exe} already set")
 			return()
 		endif()
 		
 		dk_validate(cmd_exe "dk_depend(cmd_exe)")
 		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
 		
-		###### CYGPATH_EXE ######
-		if(NOT EXISTS "${CYGPATH_EXE}")
-			set(CYGPATH_EXE $ENV{CYGPATH_EXE})
+		###### cygpath_exe ######
+		if(NOT EXISTS "${cygpath_exe}")
+			set(cygpath_exe $ENV{cygpath_exe})
 		endif()
-		if(NOT EXISTS "${CYGPATH_EXE}")
-			execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE CYGPATH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if(NOT EXISTS "${cygpath_exe}")
+			execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE cygpath_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 		endif()
-		if(NOT EXISTS "${CYGPATH_EXE}")
-			dk_findProgram(CYGPATH_EXE cygpath.exe ${DKTOOL_DIR})
+		if(NOT EXISTS "${cygpath_exe}")
+			dk_findProgram(cygpath_exe cygpath.exe ${DKTOOL_DIR})
 		endif()
 	endif()
 	
 	###### FINALIZE ######
-	dk_set(CYGPATH_EXE "${CYGPATH_EXE}")		# Globalize the variable
-	#dk_assertPath(CYGPATH_EXE)
+	dk_set(cygpath_exe "${cygpath_exe}")		# Globalize the variable
+	#dk_assertPath(cygpath_exe)
 endfunction()
 
 
@@ -62,20 +62,20 @@ function(DKTEST)
     dk_debugFunc()
  
 	dk_echo()
-	dk_echo("Test Getting CYGPATH_EXE . . .")
+	dk_echo("Test Getting cygpath_exe . . .")
     dk_CYGPATH_EXE()
-	if(EXISTS "${CYGPATH_EXE}")
-		dk_success("CYGPATH_EXE = ${CYGPATH_EXE}")
+	if(EXISTS "${cygpath_exe}")
+		dk_success("cygpath_exe = ${cygpath_exe}")
 	else()
-		dk_error("CYGPATH_EXE = ${CYGPATH_EXE}")
+		dk_error("cygpath_exe = ${cygpath_exe}")
 	endif()
 	
 	dk_echo()
-	dk_echo("Test Setting CYGPATH_EXE . . .")
+	dk_echo("Test Setting cygpath_exe . . .")
     dk_CYGPATH_EXE("C:/cygpath.exe")
-	if(EXISTS "${CYGPATH_EXE}")
-		dk_success("CYGPATH_EXE = ${CYGPATH_EXE}")
+	if(EXISTS "${cygpath_exe}")
+		dk_success("cygpath_exe = ${cygpath_exe}")
 	else()
-		dk_error("CYGPATH_EXE = ${CYGPATH_EXE}")
+		dk_error("cygpath_exe = ${cygpath_exe}")
 	endif()
 endfunction()

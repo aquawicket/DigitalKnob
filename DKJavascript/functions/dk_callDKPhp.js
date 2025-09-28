@@ -26,18 +26,18 @@ dk_callDKPhp = function dk_callDKPhp_f() {
 	var ComSpec = dk_env("ComSpec");
 	
 	//dk_exec(ComSpec+' /V:ON /c call "'+DKIMPORTS_DIR+'/php-src/DKINSTALL"');
-	//PHP_EXE = dk_env('PHP_EXE');
+	//php_exe = dk_env('php_exe');
 	
 	//DKBATCH_FUNCTIONS_DIR_ = dk_env("DKBATCH_FUNCTIONS_DIR_");
 	//DKBATCH_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/";
 	
 	dk_assertPath(ComSpec);
-	//dk_assertPath(PHP_EXE);
+	//dk_assertPath(php_exe);
 	dk_assertPath(DKPHP_FUNCTIONS_DIR);
 	//dk_assertVar(func);
 	
 	var DKCOMMAND=ComSpec+' /V:ON /c call "'+DKPHP_FUNCTIONS_DIR+'/'+func+'.php" '+args;
-	//var DKCOMMAND = ComSpec+' /V:ON /c call '+PHP_EXE+' '+DKPHP_FUNCTIONS_DIR+'/'+func+'.php'; //dk_allButFirstArgs
+	//var DKCOMMAND = ComSpec+' /V:ON /c call '+php_exe+' '+DKPHP_FUNCTIONS_DIR+'/'+func+'.php'; //dk_allButFirstArgs
 	console.log("DKCOMMAND = "+DKCOMMAND);
 	//dk_exec(DKCOMMAND);
 }

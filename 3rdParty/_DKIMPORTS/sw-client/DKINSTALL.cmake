@@ -12,12 +12,11 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
 # https://software-network.org/client/
 
 Windows_dkimport(https://software-network.org/client/sw-master-windows-client.zip)
 Mac_dk_import(https://software-network.org/client/sw-master-macos-client.tar.gz)
 Linux_dk_import(https://software-network.org/client/sw-master-linux-client.tar.gz)
 
-dk_setEnv("PATH" "${SW_CLIENT}")
-Windows_dk_set(SW_EXE ${SW_CLIENT}/sw.exe)
+dk_setEnv("PATH" "${sw-client}")
+Windows_dk_set(sw_exe ${sw-client}/sw.exe)

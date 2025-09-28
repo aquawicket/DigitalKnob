@@ -49,10 +49,10 @@ dk_callDKC = function dk_callDKC_f(){
 	//###### COMPILER_EXE ######
 	dk_validate DKIMPORTS_DIR "dk_DKIMPORTS_DIR"
 	if "%target_env%" equ "cosmocc" (
-		dk_validate SH_EXE				"%DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
+		dk_validate sh_exe				"%DKIMPORTS_DIR%/sh/DKINSTALL.cmd"
 		dk_validate COSMOCC_C_COMPILER	"%DKIMPORTS_DIR%/cosmocc/DKINSTALL.cmd"
 		dk_assertPath COSMOCC_C_COMPILER
-		set "COMPILER_EXE=!SH_EXE! !COSMOCC_C_COMPILER!"
+		set "COMPILER_EXE=!sh_exe! !COSMOCC_C_COMPILER!"
 	)
 
 	if "%target_env%" equ "clang" (

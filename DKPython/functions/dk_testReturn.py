@@ -67,7 +67,7 @@ def DKTEST():
 	# https://docs.python.org/3.5/library/subprocess.html#subprocess.run
     
     #run(args, *, stdin=None, input=None, stdout=None, stderr=None, shell=False, timeout=None, check=False)
-    resultF = subprocess.run(["%PYTHON3_EXE:\=/%", "dk_basename.py", "C:/Windows/System32"], shell=True, capture_output=True, text=True)
+    resultF = subprocess.run(["%python3_exe:\=/%", "dk_basename.py", "C:/Windows/System32"], shell=True, capture_output=True, text=True)
     dk_echo("resultF = "+resultF.stdout)
 
 

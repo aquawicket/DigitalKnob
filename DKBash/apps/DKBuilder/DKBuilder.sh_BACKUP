@@ -36,9 +36,9 @@ CMD_EXE(){
 	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe-NOTFOUND"
 }
 
-###### CYGPATH_EXE ######
-CYGPATH_EXE(){
-	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath-NOTFOUND"
+###### cygpath_exe ######
+cygpath_exe(){
+	(command -v cygpath) && export cygpath_exe=$(command -v cygpath) || echo "cygpath-NOTFOUND"
 }
 
 ###### WSLPATH_EXE ######
@@ -55,7 +55,7 @@ ANDROID_SDCARD(){
 DKHOME_DIR(){
 	######   DKHOME_DIR($*)  ######
 	[ ! -e "${DKHOME_DIR-}" ] && [ -n "$(WSLPATH_EXE)" ] 	&& (export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r'))) 	# Windows subsystem for Linux
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& (export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))) 	# Git for windows
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(cygpath_exe)" ] 	&& (export DKHOME_DIR=$($(cygpath_exe) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'"))) 	# Git for windows
 #	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD); 															# Android sdcard
 	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}";
 	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| (echo "DKHOME_DIR-NOTFOUND" & exit -1); 
