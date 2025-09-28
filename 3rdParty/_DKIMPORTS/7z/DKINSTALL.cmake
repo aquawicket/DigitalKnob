@@ -16,8 +16,8 @@ include_guard()
 # https://www.7-zip.org
 
 ### INSTALL ###
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${7z_Url_Windows_X86_64})
+dk_import(APP)
+
 dk_assertVar		(7z)
 dk_set				(7za_exe	"${7z}/7za.exe")
 dk_assertPath		(7za_exe)

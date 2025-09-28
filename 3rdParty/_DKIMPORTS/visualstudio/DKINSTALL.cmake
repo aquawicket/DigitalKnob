@@ -19,10 +19,15 @@ include_guard()
 
 ###### visualstudio ######
 dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_unset(visualstudio_Install_Path)
 dk_assertVar(visualstudio_Year)
 dk_assertVar(visualstudio_Major)
 
-dk_firewallAllow("$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer/setup.exe") #visualstudio setup.exe
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+set(vs_setup_bootstrapper_exe "${DKDOWNLOAD_DIR}/vs_bootstrapper_d15/vs_setup_bootstrapper.exe")
+dk_firewallAllow("${vs_setup_bootstrapper_exe}")
+set(visualstudio_setup_exe "C:/Program Files \(x86\)/Microsoft Visual Studio/Installer/setup.exe")
+dk_firewallAllow("${visualstudio_setup_exe}") 
 
 #############################################################################################################
 # C:/Program Files (x86)/Microsoft Visual Studio    /2022      /BuildTools    /VC/Tools/MSVC   /14.42.34433
@@ -42,7 +47,7 @@ dk_firewallAllow("$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer/se
 
 ###### visualstudio_Install_Path ######
 if(NOT visualstudio_Install_Path)
-	set(visualstudio_Install_Path		"$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio")
+	set(visualstudio_Install_Path		"C:/Program Files \(x86\)/Microsoft Visual Studio")
 else()
 	set(visualstudio_Install_Flag		--path install=${visualstudio_Install_Path})
 endif()
@@ -51,7 +56,7 @@ endif()
 if(NOT visualstudio_Cache_Path)
 	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	#set(visualstudio_Cache_Path	"$ENV{DKDOWNLOAD_DIR}/VS")
-	set(visualstudio_Cache_Path		"$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/DL")
+	set(visualstudio_Cache_Path		"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
 set(visualstudio_Cache_Flag			--path cache=${visualstudio_Cache_Path})		
 
@@ -117,7 +122,6 @@ dk_set(VS	"${visualstudio_Install_Path}/${visualstudio_Year}/${visualstudio_Flav
 if(NOT EXISTS "${VS}")
 	dk_info("Installing Visual Studio ${visualstudio_Flavor} ${visualstudio_Year} ${visualstudio_Version}. . .")
 	dk_download(${visualstudio_Import})
-	#dk_download(${visualstudio_Import})
 	
 	# Visual Studio Installer Options
 	# https://learn.microsoft.com/en-us/visualstudio/install/use-command-line-parameters-to-install-visual-studio?view=vs-2022
@@ -129,23 +133,29 @@ if(NOT EXISTS "${VS}")
 	# --norestart			- postpone system restart after install
 	# --downloadThenInstall - Donwload packages before installing
 	# --quiet				- Prevents any user interface from being displayed
-	
-	
-	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${visualstudio_Import_File} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
-	execute_process(COMMAND ${dk_download} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall TIMEOUT 1)
+	dk_validate(7za_exe "dk_depend(7z)")
+	dk_delete("${DKDOWNLOAD_DIR}/vs_bootstrapper_d15")
+	execute_process(COMMAND ${7za_exe} x ${dk_download} WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
+	execute_process(COMMAND ${vs_setup_bootstrapper_exe} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
 
-	### wait for vs_setup_bootstrapper.exe to exist in C:/windows/temp ###
-	while(NOT vs_setup_bootstrapper_exe)
-		dk_findProgram(vs_setup_bootstrapper_exe vs_setup_bootstrapper.exe "$ENV{windir}/Temp")
-	endwhile()
-	dk_printVar(vs_setup_bootstrapper_exe)
-	dk_firewallAllow("${vs_setup_bootstrapper_exe}")
+	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${visualstudio_Import_File} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
+	#execute_process(COMMAND ${dk_download} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall TIMEOUT 1)
+
+	### wait for vs_setup_bootstrapper.exe to exist in C:/Users/Administrator/AppData/Local/Temp ###
+#	dk_debug("waiting for vs_setup_bootstrapper.exe . . .")
+#	while(NOT vs_setup_bootstrapper_exe)
+#		dk_findProgram(vs_setup_bootstrapper_exe vs_setup_bootstrapper.exe "C:/Users/Administrator/AppData/Local/Temp")
+#	endwhile()
+#	dk_debug("vs_setup_bootstrapper_exe = ${vs_setup_bootstrapper_exe}")
+#	dk_firewallAllow("${vs_setup_bootstrapper_exe}")
 	
-	while(NOT EXISTS "${visualstudio_setup_exe}")
-		dk_findProgram(visualstudio_setup_exe setup.exe "$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer")
-	endwhile()
-	dk_printVar(visualstudio_setup_exe)
-	dk_firewallAllow("${visualstudio_setup_exe}")
+	### wait for setup.exe to exist in C:/Program Files (x86)/Microsoft Visual Studio/Installer ###
+#	dk_debug("waiting for setup.exe . . .")
+#	while(NOT EXISTS "${visualstudio_setup_exe}")
+#		dk_findProgram(visualstudio_setup_exe setup.exe "$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer")
+#	endwhile()
+#	dk_debug("visualstudio_setup_exe = ${visualstudio_setup_exe}")
+#	dk_firewallAllow("${visualstudio_setup_exe}")
 
 	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
 	while(NOT EXISTS "${visualstudio_Cache_Path}")
