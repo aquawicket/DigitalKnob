@@ -14,9 +14,8 @@ dk_set(CMAKE_MAKE_PROGRAM 			${VS_MAKE_PROGRAM})					# https://cmake.org/cmake/h
 dk_set(CMAKE_GENERATOR_PLATFORM		${VS_X86_64_GENERATOR_PLATFORM})	# https://cmake.org/cmake/help/latest/variable/CMAKE_GENERATOR_PLATFORM.html
 dk_set(CMAKE_CXX_COMPILER			${VS_X86_64_COMPILER})				# https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER.html
 dk_set(CMAKE_C_COMPILER				${VS_X86_64_COMPILER})				# https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_COMPILER.html
-
-#dk_set(CMAKE_DUMPBIN				${VS_X86_64_DUMPBIN})
-#dk_set(CMAKE_LINKER				${VS_X86_64_LINKER})
+dk_set(CMAKE_DUMPBIN				${VS_X86_64_DUMPBIN})
+dk_set(CMAKE_LINKER					${VS_X86_64_LINKER})
 #dk_append(DKCONFIGURE_FLAGS		--build=x86_64-w64-msvc)
 
 ###### C Compiler Options ######

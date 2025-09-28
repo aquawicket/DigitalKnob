@@ -52,5 +52,5 @@ dk_append(CMAKE_CXX_FLAGS
 ###### Linker Options ######
 # https://learn.microsoft.com/en-us/cpp/build/reference/linker-options?view=msvc-170
 dk_append(CMAKE_EXE_LINKER_FLAGS	
-	/ENTRY:mainCRTStartup		# https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=msvc-170
+	/ENTRY:WinMainCRTStartup	# https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=msvc-170
 ) 	
