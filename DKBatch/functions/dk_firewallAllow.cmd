@@ -51,10 +51,10 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 	)
 
 	::###### Windows Firewall Control ######
-	if NOT EXIST "%WFC_EXE%" 	(set "WFC_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
-	if NOT EXIST "%WFCUI_EXE%" 	(set "WFCUI_EXE=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
-	if EXIST "%WFC_EXE%"		(set "WFC_APP=%WFC_EXE%")
-	if EXIST "%WFCUI_EXE%"		(set "WFC_APP=%WFCUI_EXE%")
+	if NOT EXIST "%wfc_exe%" 	(set "wfc_exe=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
+	if NOT EXIST "%wfcUI_exe%" 	(set "wfcUI_exe=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
+	if EXIST "%wfc_exe%"		(set "WFC_APP=%wfc_exe%")
+	if EXIST "%wfcUI_exe%"		(set "WFC_APP=%wfcUI_exe%")
 
 	::echo "%WFC_APP:/=\%" -allow "%_file_:/=\%"
 	"%WFC_APP:/=\%" -allow "%_file_:/=\%" || (echo errorlevel = !errorlevel! & %clearerror%)

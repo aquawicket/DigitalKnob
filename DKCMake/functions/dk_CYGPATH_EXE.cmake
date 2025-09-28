@@ -12,10 +12,10 @@ include_guard()
 #########################################################################
 
 ####################################################################
-# dk_CYGPATH_EXE()
+# dk_cygpath_exe()
 #
 #
-function(dk_CYGPATH_EXE)
+function(dk_cygpath_exe)
     dk_debugFunc()
 
 	###### SET ######
@@ -63,7 +63,7 @@ function(DKTEST)
  
 	dk_echo()
 	dk_echo("Test Getting cygpath_exe . . .")
-    dk_CYGPATH_EXE()
+    dk_cygpath_exe()
 	if(EXISTS "${cygpath_exe}")
 		dk_success("cygpath_exe = ${cygpath_exe}")
 	else()
@@ -72,7 +72,7 @@ function(DKTEST)
 	
 	dk_echo()
 	dk_echo("Test Setting cygpath_exe . . .")
-    dk_CYGPATH_EXE("C:/cygpath.exe")
+    dk_cygpath_exe("C:/cygpath.exe")
 	if(EXISTS "${cygpath_exe}")
 		dk_success("cygpath_exe = ${cygpath_exe}")
 	else()

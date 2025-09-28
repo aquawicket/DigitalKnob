@@ -17,15 +17,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 	%dk_call% dk_importVariables %macro_pack_Import% IMPORT_PATH %DKIMPORTS_DIR%/macro_pack
-	%dk_call% dk_set macro_pack_EXE "%macro_pack%/%macro_pack_IMPORT_FILE%"
+	%dk_call% dk_set macro_pack_exe "%macro_pack%/%macro_pack_IMPORT_FILE%"
 	
-	if EXIST "%macro_pack_EXE%" (%return%)
+	if EXIST "%macro_pack_exe%" (%return%)
 	%dk_call% dk_echo
 	%dk_call% dk_info "Installing macro_pack . . ."
 	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
 	%dk_call% dk_download %macro_pack_Import%
 	%dk_call% dk_copy "%dk_download%" "%macro_pack%/%macro_pack_IMPORT_FILE%"
-	if NOT EXIST "%macro_pack_EXE%" (%dk_call% dk_error "cannot find macro_pack_EXE:%macro_pack_EXE%")
+	if NOT EXIST "%macro_pack_exe%" (%dk_call% dk_error "cannot find macro_pack_exe:%macro_pack_exe%")
 
 %endfunction%
 
