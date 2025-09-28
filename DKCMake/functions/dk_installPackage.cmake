@@ -137,7 +137,7 @@ function(dk_installPackage)
 	endif()
 
 	### Msys2 ###
-	dk_depend(pacman_exe)
+	dk_validate(pacman_exe "dk_depend(pacman)")
 	if(pacman_exe)
 		dk_assertPath(pacman_exe)
 		if(EXISTS "${msys2_CacheDir}/db.lck")
