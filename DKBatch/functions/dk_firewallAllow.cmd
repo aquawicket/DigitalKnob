@@ -27,7 +27,6 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 		%dk_call% dk_basename !_file_! _name_
 		%dk_call% dk_removeExtension !_name_! _name_
 	)
-	
 	%dk_call% dk_assertVar _file_
 	%dk_call% dk_assertVar _name_
 	
@@ -44,10 +43,10 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 
 	%dk_call% dk_notice "Adding firewall allow rule for %_name_% %_file_% . . ."
 	
-	%dk_call% dk_findProgram NETSH_EXE netsh.exe "%windir%/System32" NO_ERROR
-	if EXIST "%NETSH_EXE%" (
-		%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
-		%NETSH_EXE% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
+	%dk_call% dk_findProgram netsh_exe netsh.exe "%windir%/System32" NO_ERROR
+	if EXIST "%netsh_exe%" (
+		%netsh_exe% advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
+		%netsh_exe% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	)
 
 	::###### Windows Firewall Control ######
