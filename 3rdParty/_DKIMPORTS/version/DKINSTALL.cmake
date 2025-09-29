@@ -14,7 +14,6 @@ include_guard()
 
 ############ version ############
 # https://learn.microsoft.com/en-us/windows/win32/api/winver/nf-winver-getfileversioninfoa
-dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows)
 	dk_disable(version)

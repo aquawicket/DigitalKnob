@@ -112,6 +112,7 @@ endif()
 
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
+set(OLDPWD "${PWD}")
 dk_chdir(${openssl_Build_Dir})
 #Emscripten_Debug_dk_configure(${openssl} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${git_exe} -DPYTHON_EXECUTABLE=${python3_exe})
 if(Debug)

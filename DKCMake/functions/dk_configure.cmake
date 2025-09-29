@@ -240,5 +240,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_depend(zlib)
-	dk_configure(${ZLIB})
+	dk_configure(${zlib})
 endfunction()

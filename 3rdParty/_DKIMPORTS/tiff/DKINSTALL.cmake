@@ -41,7 +41,7 @@ dk_import()
 
 
 ### LINK ###
-dk_include					(${TIFF}/libtiff										TIFF_INCLUDE_DIR)
+dk_include					(${tiff}/libtiff										TIFF_INCLUDE_DIR)
 dk_include					(${TIFF_Config_Dir}/libtiff								TIFF_INCLUDE_DIRS)
 #Debug_dk_include			(${TIFF_Config_Dir}/libtiff/${Debug_Dir}				TIFF_INCLUDE_DIRS)
 #Release_dk_include			(${TIFF_Config_Dir}/libtiff/${Release_Dir}				TIFF_INCLUDE_DIRS)
@@ -79,7 +79,7 @@ else()
 endif()
 
 ### GENERATE ###
-dk_configure(${TIFF}
+dk_configure(${tiff}
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
 	-Dtiff-tests=OFF				# "build TIFF tests" ON
@@ -93,4 +93,4 @@ dk_configure(${TIFF}
 	${zstd_CMAKE})
 
 ### COMPILE ###
-dk_build(${TIFF})# tiff)
+dk_build(${tiff})# tiff)

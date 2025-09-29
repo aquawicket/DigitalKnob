@@ -50,51 +50,51 @@ dk_import(https://github.com/libarchive/libarchive/archive/6567375.zip)
 
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
-dk_include					(${LIBARCHIVE_DIR}/libarchive)
-dk_include					(${LIBARCHIVE_TUPLE_DIR})
+dk_include					(${libarchive}/libarchive)
+dk_include					(${libarchive_Tuple_Dir})
 if(Android)
-	dk_include				(${LIBARCHIVE_DIR}/contrib/android/include)
+	dk_include				(${libarchive}/contrib/android/include)
 endif()
 
 if(MULTI_CONFIG)
 	if(MSVC)
 		if(Windows)
-			dk_libDebug		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Debug_Dir}/archive.lib)
-			dk_libRelease	(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Release_Dir}/archive.lib)
+			dk_libDebug		(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
+			dk_libRelease	(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
 		endif()
 	else()
-		dk_libDebug			(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Debug_Dir}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE_TUPLE_DIR}/libarchive/${Release_Dir}/libarchive.a)
+		dk_libDebug			(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
+		dk_libRelease		(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE_TUPLE_DIR}/${Debug_Dir}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE_TUPLE_DIR}/${Release_Dir}/libarchive/libarchive.a)
+	dk_libDebug				(${libarchive_Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
+	dk_libRelease			(${libarchive_Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
-set(LIBARCHIVE_CONFIGURE 
-	${LIBARCHIVE_DIR}
+set(libarchive_CONFIGURE 
+	${libarchive}
 	-DENABLE_ACL=ON
-	-DENABLE_BZip2=${BZIP2}
+	-DENABLE_BZip2=${bzip2}
 	-DENABLE_CAT=ON
 	-DENABLE_CAT_SHARED=OFF
-	-DENABLE_CNG=${LIBBCRYPT}
+	-DENABLE_CNG=${libbcrypt}
 	-DENABLE_COVERAGE=OFF
 	-DENABLE_CPIO=ON
 	-DENABLE_CPIO_SHARED=OFF
-	-DENABLE_EXPAT=${LIBEXPAT}
-	-DENABLE_ICONV=${LIBICONV}
+	-DENABLE_EXPAT=${libexpat}
+	-DENABLE_ICONV=${libiconv}
 	-DENABLE_INSTALL=OFF
-	-DENABLE_LIBB2=${LIBB2} 
-	#-DENABLE_LIBGCC=${LIBGCC}
-	-DENABLE_LIBXML2=${LIBXML2} 
-	-DENABLE_LZ4=${LZ4} 
-	-DENABLE_LZMA=${XZ}
-	-DENABLE_LZO=${LZO}
+	-DENABLE_LIBB2=${libb2} 
+	#-DENABLE_LIBGCC=${libgcc}
+	-DENABLE_LIBXML2=${libxml2} 
+	-DENABLE_LZ4=${lz4} 
+	-DENABLE_LZMA=${xz}
+	-DENABLE_LZO=${lzo}
 	-DENABLE_MBEDTLS=OFF
 	-DENABLE_NETTLE=OFF
-	#-DENABLE_OPENSSL=${OPENSSL}
+	#-DENABLE_OPENSSL=${openssl}
 	-DENABLE_PCREPOSIX=OFF
 	-DENABLE_SAFESEH="AUTO"
 	-DENABLE_TAR=ON
@@ -104,8 +104,8 @@ set(LIBARCHIVE_CONFIGURE
 	-DENABLE_UNZIP_SHARED=OFF
 	-DENABLE_WERROR=OFF
 	-DENABLE_XATTR=ON
-	-DENABLE_ZLIB=${ZLIB}
-	-DENABLE_ZSTD=${ZSTD}
+	-DENABLE_ZLIB=${zlib}
+	-DENABLE_ZSTD=${zstd}
 	-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
 	-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 	-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
@@ -113,80 +113,80 @@ set(LIBARCHIVE_CONFIGURE
 	-DLIBXML2_XMLLINT_EXECUTABLE=OFF
 	-DPOSIX_REGEX_LIB="AUTO"
 	-DUSE_BZIP2_DLL=OFF
-	-DUSE_BZIP2_STATIC=${BZIP2}
+	-DUSE_BZIP2_STATIC=${bzip2}
 	#-DWINDOWS_VERSION="WIN10"
 	-DZLIB_DLL=OFF
-	${BZIP2_CMAKE}
-	#${CRYPTOPP_CMAKE}
-	${LIBB2_CMAKE}
-	${LIBBCRYPT_CMAKE}
-	${LIBEXPAT_CMAKE}
-	${LIBGCC_CMAKE}
-	${LIBICONV_CMAKE}
-	${LIBXML2_CMAKE}
-	${LZ4_CMAKE}
-	${LZO_CMAKE}
-	#${OPENSSL_CMAKE}
-	${PCRE2_CMAKE}
-	${XZ_CMAKE}
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE})
+	${bzip2_CMAKE}
+	#${cryptopp_CMAKE}
+	${libb2_CMAKE}
+	${libbcrypt_CMAKE}
+	${libexpat_CMAKE}
+	${libgcc_CMAKE}
+	${libiconv_CMAKE}
+	${libxml2_CMAKE}
+	${lz4_CMAKE}
+	${lzo_CMAKE}
+	#${openssl_CMAKE}
+	${pcre2_CMAKE}
+	${xz_CMAKE}
+	${zlib_CMAKE}
+	${zstd_CMAKE})
 	
 		
 		
 if(Android)
-	dk_append(LIBARCHIVE_CONFIGURE "-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TUPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include")
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive_Tuple_Dir} -I${libarchive}/contrib/android/include")
 else()
-	dk_append(LIBARCHIVE_CONFIGURE -DENABLE_OPENSSL=${OPENSSL})
-	dk_append(LIBARCHIVE_CONFIGURE ${OPENSSL_CMAKE})
+	dk_append(libarchive_CONFIGURE -DENABLE_OPENSSL=${openssl})
+	dk_append(libarchive_CONFIGURE ${openssl_CMAKE})
 endif()
 
 if(Ios)
-	dk_append(LIBARCHIVE_CONFIGURE "-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive")
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive}/libarchive")
 
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Iossim)
-	dk_append(LIBARCHIVE_CONFIGURE "-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive")
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive}/libarchive")
 	
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TUPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
 if(Windows)
 	if(NOT MSVC)
-		dk_append(LIBARCHIVE_CONFIGURE "-DCMAKE_C_FLAGS=-DLIBXML_STATIC")
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_CMAKE_PATH=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_PACKAGE_REGISTRY=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_CMAKE_SYSTEM_PATH=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=FALSE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_IGNORE_PATH=TRUE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_IGNORE_PREFIX_PATH=TRUE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PATH=TRUE)
-		dk_append(LIBARCHIVE_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PREFIX_PATH=TRUE)
-		dk_append(LIBARCHIVE_CONFIGURE -DLibXml2_ROOT=${LIBXML2})
-		#dk_append(LIBARCHIVE_CONFIGURE -DENABLE_LIBGCC=${LIBGCC})
-		dk_append(LIBARCHIVE_CONFIGURE -DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR})
+		dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-DLIBXML_STATIC")
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_PACKAGE_REGISTRY=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_SYSTEM_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_IGNORE_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_IGNORE_PREFIX_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PREFIX_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DLibXml2_ROOT=${libxml2})
+		#dk_append(libarchive_CONFIGURE -DENABLE_LIBGCC=${libgcc})
+		dk_append(libarchive_CONFIGURE -DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR})
 	endif()
-	dk_append(LIBARCHIVE_CONFIGURE -DWINDOWS_VERSION="WIN10")
+	dk_append(libarchive_CONFIGURE -DWINDOWS_VERSION="WIN10")
 endif()
 
 
 
 ### CONFIGURE ###
-dk_configure(${LIBARCHIVE_CONFIGURE})
+dk_configure(${libarchive_CONFIGURE})
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE_DIR} archive_static)
+dk_build(${libarchive} archive_static)

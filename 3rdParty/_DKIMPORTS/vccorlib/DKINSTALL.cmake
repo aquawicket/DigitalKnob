@@ -13,8 +13,6 @@ include_guard()
 
 
 ############## vccorlib ############
-# vccorlib
-dk_validate(Target_Config  "dk_Target_Config()")
 
 if(NOT Windows)
 	dk_disable(vccorlib)
@@ -25,5 +23,5 @@ dk_findLibrary(vccorlib.lib)
 
 # MSYS2 (-lvccorlib)
 if(MSYSTEM)
-	dk_set(VCCORLIB_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lvccorlib")
+	dk_set(vccorlib_CMAKE "-DCMAKE_EXE_LINKER_FLAGS=-lvccorlib")
 endif()

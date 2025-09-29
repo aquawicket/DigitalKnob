@@ -15,11 +15,11 @@ include_guard()
 ############ vcpkg ############
 # Getting Started  https://vcpkg.io/en/getting-started.html
 # Documentation    https://vcpkg.io/en/docs/README.html
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/microsoft/vcpkg/archive/cff6ed45.zip
 
-dk_import(https://github.com/microsoft/vcpkg/archive/cff6ed45.zip)
+dk_import(APP)
 
-dk_chdir(${VCPKG})
+dk_chdir(${vcpkg})
 
 if(Windows)
 	dk_exec(bootstrap-vcpkg.bat)

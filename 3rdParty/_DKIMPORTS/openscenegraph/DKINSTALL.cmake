@@ -2154,7 +2154,7 @@ Android_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2165,7 +2165,7 @@ Android_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2206,7 +2206,7 @@ Emscripten_Debug_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2217,7 +2217,7 @@ Emscripten_Debug_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2253,7 +2253,7 @@ Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2264,7 +2264,7 @@ Emscripten_Release_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2308,7 +2308,7 @@ Ios_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2319,7 +2319,7 @@ Ios_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2368,7 +2368,7 @@ Iossim_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2379,7 +2379,7 @@ Iossim_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2414,7 +2414,7 @@ Linux_Debug_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2425,7 +2425,7 @@ Linux_Debug_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2456,7 +2456,7 @@ Linux_Release_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2467,7 +2467,7 @@ Linux_Release_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2504,7 +2504,7 @@ Mac_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2515,7 +2515,7 @@ Mac_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2550,7 +2550,7 @@ Raspberry_Debug_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2561,7 +2561,7 @@ Raspberry_Debug_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2592,7 +2592,7 @@ Raspberry_Release_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2603,7 +2603,7 @@ Raspberry_Release_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}
@@ -2641,7 +2641,7 @@ Windows_dk_configure(${OPENSCENEGRAPH}
 	${BOOST_CMAKE}
 	${CURL_CMAKE}
 	${FFMPEG_CMAKE}
-	${FONTCONFIG_CMAKE}
+	${fontconfig_CMAKE}
 	${freetype_CMAKE}
 	${GDAL_CMAKE}
 	${giflib_CMAKE}
@@ -2652,7 +2652,7 @@ Windows_dk_configure(${OPENSCENEGRAPH}
 	${libpng_CMAKE}
 	${LIBVNCSERVER_CMAKE}
 	${LIBX11_DEV_CMAKE}
-	${LIBXML2_CMAKE}
+	${libxml2_CMAKE}
 	${MSINTTYPES_CMAKE}
 	${OPENGL_CMAKE}
 	${sdl_CMAKE}

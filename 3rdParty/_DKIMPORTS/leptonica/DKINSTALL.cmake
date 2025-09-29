@@ -57,7 +57,7 @@ dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_Config_Dir})
 
 ### GENERATE ###
 #dk_configure(${LEPTONICA} 
-#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Tuple} /I${LIBPNG} /I${LIBPNG}/${Target_Tuple} /I${TIFF}/${Target_Tuple}/libtiff" 
+#	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Tuple} /I${libpng} /I${libpng}/${Target_Tuple} /I${tiff}/${Target_Tuple}/libtiff" 
 #	-DSTATIC=ON 
 #	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
 #	-DSW_BUILD=OFF 

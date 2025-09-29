@@ -106,7 +106,7 @@ if(MSVC)
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${harfbuzz_CMAKE}
-		${LUA_CMAKE}
+		${lua_CMAKE}
 		${lunasvg_CMAKE}
 		${sdl_CMAKE} 
 		${sdl_image_CMAKE} 
@@ -136,7 +136,7 @@ if(MSVC)
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${harfbuzz_CMAKE}
-		${LUA_CMAKE}
+		${lua_CMAKE}
 		${lunasvg_CMAKE}
 		${sdl_CMAKE} 
 		${sdl_image_CMAKE} 
@@ -165,7 +165,7 @@ else()
 		${freetype_CMAKE} 
 		${GLEW_CMAKE}
 		${harfbuzz_CMAKE}
-		${LUA_CMAKE}
+		${lua_CMAKE}
 		${lunasvg_CMAKE}
 		${rlottie_CMAKE}
 		${sdl_CMAKE} 

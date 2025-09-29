@@ -15,9 +15,8 @@ include_guard()
 ############ verysleepy ############
 # https://github.com/VerySleepy/verysleepy.git
 # http://www.codersnotes.com/sleepy/
-# https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 # https://github.com/VerySleepy/verysleepy/archive/refs/tags/v0.91.zip (source)
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 
 if(NOT Windows_Host)
 	return()
@@ -29,4 +28,5 @@ elseif(Windows_X86_64)
 	dk_set(VERYSLEEPY "${ProgramFiles}/Very Sleepy")
 endif()
 dk_set(sleepy_exe "${VERYSLEEPY}/sleepy.exe")
-dk_import(https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe)
+dk_import(APP)
+dk_exec(${dk_download})

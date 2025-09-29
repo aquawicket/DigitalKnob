@@ -120,7 +120,7 @@ dk_set(libxml2_CMAKE
 
 #Android_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${xz_CMAKE} 
 #	${zlib_CMAKE})
@@ -128,7 +128,7 @@ dk_set(libxml2_CMAKE
 ##Apple_dk_exec(${DKCONFIGURE_BUILD})
 #Apple_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${PYTHON_CMAKE} 
 #	${xz_CMAKE} 
 #	${zlib_CMAKE})
@@ -136,7 +136,7 @@ dk_set(libxml2_CMAKE
 ##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
 #E#MSCRIPTEN_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
@@ -144,14 +144,14 @@ dk_set(libxml2_CMAKE
 #Linux_dk_configure(${libxml2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
 ##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
 #Raspberry_dk_configure(${libxml2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${xz_CMAKE} 
 #	${zlib_CMAKE})
 
@@ -175,10 +175,10 @@ dk_configure(${libxml2}
 	-DLIBXML2_WITH_FTP=OFF					# Add the FTP support OFF
 	-DLIBXML2_WITH_HTML=ON					# Add the HTML support ON
 	-DLIBXML2_WITH_HTTP=ON					# Add the HTTP support ON
-	-DLIBXML2_WITH_ICONV=${LIBICONV}		# Add ICONV support ON
+	-DLIBXML2_WITH_ICONV=${libiconv}		# Add ICONV support ON
 	-DLIBXML2_WITH_ICU=OFF					# Add ICU support OFF
 	-DLIBXML2_WITH_LEGACY=OFF				# Add deprecated APIs for compatibility OFF
-	-DLIBXML2_WITH_LZMA=${XZ}				# Use liblzma ON
+	-DLIBXML2_WITH_LZMA=${xz}				# Use liblzma ON
 	-DLIBXML2_WITH_MEM_DEBUG=OFF			# Add the memory debugging module OFF
 	-DLIBXML2_WITH_MODULES=OFF				# Add the dynamic modules support ON
 	-DLIBXML2_WITH_OUTPUT=ON				# Add the serialization support ON
@@ -202,8 +202,8 @@ dk_configure(${libxml2}
 	-DLIBXML2_WITH_XPATH=ON					# Add the XPATH support ON
 	-DLIBXML2_WITH_XPTR=ON					# Add the XPointer support ON
 	-DLIBXML2_WITH_XPTR_LOCS=OFF			# Add support for XPointer locations OFF
-	-DLIBXML2_WITH_ZLIB=${ZLIB}				# Use libz ON
-	${LIBICONV_CMAKE} 
+	-DLIBXML2_WITH_ZLIB=${zlib}				# Use libz ON
+	${libiconv_CMAKE} 
 	${python3_CMAKE}
 	${xz_CMAKE} 
 	${zlib_CMAKE})

@@ -13,9 +13,6 @@ include_guard()
 
 
 ############ vfw32 ############
-
-dk_validate(Target_Config  "dk_Target_Config()")
-
 if(NOT Windows)
 	dk_disable(vfw32)
 	dk_return()

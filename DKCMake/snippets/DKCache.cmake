@@ -35,30 +35,30 @@ set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/DigitalKnob/Development/3rdParty" CA
 ##${STDINT}
 
 set(ZLIB $ENV{DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
-if(EXISTS ${ZLIB}/${Target_Tuple}/Release/zlibstatic.lib)
-	set(ZLIB_INCLUDE_DIR ${ZLIB} CACHE PATH "" FORCE)
-	set(ZLIB_LIBRARY ${ZLIB}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
-	set(ZLIB_LIBRARY_DEBUG ${ZLIB}/${Target_Tuple}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
-	set(ZLIB_LIBRARY_RELEASE ${ZLIB}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+if(EXISTS ${zlib}/${Target_Tuple}/Release/zlibstatic.lib)
+	set(ZLIB_INCLUDE_DIR ${zlib} CACHE PATH "" FORCE)
+	set(ZLIB_LIBRARY ${zlib}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	set(ZLIB_LIBRARY_DEBUG ${zlib}/${Target_Tuple}/Debug/zlibstatic.lib CACHE FILEPATH "" FORCE)
+	set(ZLIB_LIBRARY_RELEASE ${zlib}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
 endif()
 
 #execute_process(COMMAND ${cmd_exe} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
 set(BZIP2 $ENV{DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
-if(EXISTS ${BZIP2}/${Target_Tuple}/libbz2.lib)
-	set(BZIP2_ROOT ${BZIP2} CACHE PATH "" FORCE)
-	set(BZIP2_INCLUDE_DIR ${BZIP2} CACHE PATH "" FORCE)
-	set(BZIP2_LIBRARY ${BZIP2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
-	set(BZIP2_LIBRARY_DEBUG ${BZIP2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
-	set(BZIP2_LIBRARY_RELEASE ${BZIP2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
-	set(LIBGCC_LIBRARY ${BZIP2}/${Target_Tuple}/libgcc.lib CACHE FILEPATH "" FORCE)
+if(EXISTS ${bzip2}/${Target_Tuple}/libbz2.lib)
+	set(BZIP2_ROOT ${bzip2} CACHE PATH "" FORCE)
+	set(BZIP2_INCLUDE_DIR ${bzip2} CACHE PATH "" FORCE)
+	set(BZIP2_LIBRARY ${bzip2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(BZIP2_LIBRARY_DEBUG ${bzip2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(BZIP2_LIBRARY_RELEASE ${bzip2}/${Target_Tuple}/libbz2.lib CACHE FILEPATH "" FORCE)
+	set(LIBGCC_LIBRARY ${bzip2}/${Target_Tuple}/libgcc.lib CACHE FILEPATH "" FORCE)
 endif()
 
 
 set(TIFF $ENV{DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
-if(EXISTS ${TIFF}/${Target_Tuple}/Release/tiff-static.lib)
-	set(TIFF_INCLUDE_DIR ${TIFF}/libtiff CACHE PATH "" FORCE)
-	set(TIFF_INCLUDE_DIR2 ${TIFF}/${Target_Tuple} CACHE PATH "" FORCE)
+if(EXISTS ${tiff}/${Target_Tuple}/Release/tiff-static.lib)
+	set(TIFF_INCLUDE_DIR ${tiff}/libtiff CACHE PATH "" FORCE)
+	set(TIFF_INCLUDE_DIR2 ${tiff}/${Target_Tuple} CACHE PATH "" FORCE)
 endif()
 
 
