@@ -38,10 +38,17 @@ function(dk_Target_Config)
 	dk_validate(DKCMAKE_DIR "dk_DKBRANCH_DIR()")
 	dk_load("${DKCMAKE_DIR}/DKVariables.cmake")
 	
+	dk_CMAKE_GENERATOR()
+	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 	if(MSVC OR XCODE) # OR Msvc OR Xcode)
-		dk_set(MULTI_CONFIG 1)
+		### Target_Config_Type ###
+		dk_set(Target_Config_Type 	"MULTI_CONFIG")
+		
+		### MULTI_CONFIG ###
+		dk_set(${Target_Config_Type} 1)
+		dk_assertVar(MULTI_CONFIG)
 	endif()
 	dk_success("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
 	dk_success("MULTI_CONFIG = ${MULTI_CONFIG}")
@@ -74,7 +81,7 @@ function(dk_Target_Config)
 		dk_assertVar(CMAKE_GENERATOR)
 		
 		### CMAKE_GENERATOR ###
-		dk_assertVar(CMAKE_CONFIGURATION_TYPES)
+		#dk_assertVar(CMAKE_CONFIGURATION_TYPES)
 		dk_debug("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
 		
 	### SINGLE_CONFIG ###

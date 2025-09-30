@@ -29,11 +29,21 @@ function(dk_configure)
 	elseif(${CURRENT_PLUGIN})
 		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()
-	dk_assertVar(Source_Dir)
+	dk_assertPath("${Source_Dir}")
+	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+	endif()
 	dk_debug("Source_Dir = ${Source_Dir}")
 
+#	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
+#	dk_validate(Target_Config_Type "dk_Target_Config()")
+#	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
+#	dk_pause()
+
 	### Config_Dir ###
+	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	dk_validate(${CURRENT_PLUGIN}_Config_Dir "dk_Target_Config()")
+	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	set(Config_Dir "${${CURRENT_PLUGIN}_Config_Dir}")
 	dk_assertVar(Config_Dir)
 	dk_debug("Config_Dir = ${Config_Dir}")
@@ -50,10 +60,6 @@ function(dk_configure)
 		dk_call(dk_allButFirstArgs ${ARGV})
 	endif()
 	
-	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_configure(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
-	endif()
-
 	#if(NOT REBUILDALL)
 		#dk_debug("${CURRENT_PLUGIN}_LIBS = ${${CURRENT_PLUGIN}_LIBS}")
 		foreach(lib ${${CURRENT_PLUGIN}_LIBS})
@@ -80,9 +86,7 @@ function(dk_configure)
 	dk_pathExists("${Source_Dir}/configure"      			configure)
 	dk_pathExists("${Source_Dir}/configure.ac"   			configure.ac)
 
-	#### cd into build directory
-	set(OLDPWD "${PWD}")
-	dk_chdir("${Build_Dir}")
+
 	
 	############ Configure with CMAKE ############
 	# Configure with CMake		(multi_config / single_config)
@@ -111,6 +115,10 @@ function(dk_configure)
 	############ Configure with ../../configure ############
 	#
 	elseif(configure OR configure.ac)
+		#### cd into build directory
+		set(OLDPWD "${PWD}")
+		dk_chdir("${Build_Dir}")
+		
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
@@ -135,11 +143,18 @@ function(dk_configure)
 			dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 		endif()
 		
+		#### return to previous working directory
+		dk_chdir("${OLDPWD}")
 		
 	############ configure with provided commands #############
 	# No Specific configure type. Just pass the arguments to dk_exec to run	
 	#
 	else()
+		
+		#### cd into build directory
+		set(OLDPWD "${PWD}")
+		dk_chdir("${Build_Dir}")
+		
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
 		dk_fileAppend("${Build_Dir}/DKBUILD.log" "${dk_allButFirstArgs}\n")
 			
@@ -152,10 +167,12 @@ function(dk_configure)
 			dk_fileAppend("${Build_Dir}/DKBUILD.log" "${dk_exec}\n\n\n")
 			dk_unset(dk_allButFirstArgs)
 		endif()
+		
+		#### return to previous working directory
+		dk_chdir("${OLDPWD}")
 	endif()
 	
-	#### return to previous working directory
-	dk_chdir("${OLDPWD}")
+	
 	
 	
 	#### restore any altered flags ####
