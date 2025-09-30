@@ -23,21 +23,22 @@ endif()
 #
 function(dk_chdir)
 	dk_debugFunc(1)
+	dk_debug("dk_chdir(${ARGV})")
   
-	set(_path_ ${ARGV0})
+	#set(_path_ ${ARGV0})
   
-	if(NOT EXISTS ${_path_})
-		dk_warning("dk_chdir(${ARGV}): path:${_path_} does not exist")
+	if(NOT EXISTS "${ARGV0}")
+		dk_warning("dk_chdir(${ARGV}): path:${ARGV0} does not exist")
 		return()
 	endif()
 	
-	if("${PWD}" EQUAL "${_path_}")
-		dk_error("dk_chdir(${ARGV}): PWD is already set to ${_path_}")
+	if("${PWD}" EQUAL "${ARGV0}")
+		dk_error("dk_chdir(${ARGV}): PWD is already set to ${ARGV0}")
 		return()
 	endif()
 	
 	dk_set(OLDPWD "${PWD}")
-	dk_set(PWD "${_path_}")
+	dk_set(PWD "${ARGV0}")
 endfunction()
 
 
