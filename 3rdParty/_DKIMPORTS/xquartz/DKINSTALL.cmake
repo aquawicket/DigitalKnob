@@ -17,8 +17,6 @@ include_guard()
 # https://www.xquartz.org/releases/index.html
 # https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg
 
-dk_validate(Target_Config  "dk_Target_Config()")
-
 if(NOT Mac)
 	dk_disable(xquartz)
 	dk_return()

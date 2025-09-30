@@ -18,9 +18,6 @@ include_guard()
 # https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
 
 ### IMPORT ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#dk_validate(Target_Config  "dk_Target_Config()")
-#dk_import(${zlib_Import})
 dk_import()
 
 ### DKBIN ###
@@ -31,29 +28,49 @@ dk_import()
 #set(zlib_Debug_Dir		"${zlib_LIB}/${Target_Tuple}/${Debug_Dir}")		# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Debug
 #set(zlib_Release_Dir 	"${zlib_LIB}/${Target_Tuple}/${Release_Dir}")	# C:/Users/Administrator/DigitalKnob/DKBIN/lib/zlib/Windows_X86_64_Clang/Release
 
+#dk_debug("Target_Config_Type = ${Target_Config_Type}")
+#dk_debug("zlib               = ${zlib}")
+#dk_debug("zlib_Tuple_Dir     = ${zlib_Tuple_Dir}")
+#dk_debug("zlib_Build_Dir     = ${zlib_Build_Dir}")
+#dk_debug("zlib_Config_Dir    = ${zlib_Config_Dir}")
+#dk_debug("zlib_Debug_Dir     = ${zlib_Debug_Dir}")
+#dk_debug("zlib_Release_Dir   = ${zlib_Release_Dir}")
+#dk_pause()
+
+### SINGLE_CONFIG & MULTI_CONFIG
+# zlib               = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828
+# zlib_Tuple_Dir     = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}
+# zlib_Debug_Dir     = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}/Debug
+# zlib_Release_Dir   = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}/Release
+
+### SINGLE_CONFIG
+# zlib_Config_Dir    = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}/Release
+# zlib_Build_Dir     = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}/Release
+
+### MULTI_CONFIG
+# zlib_Config_Dir    = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}
+# zlib_Build_Dir     = C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-d476828/${Target_Tuple}/Debug
+
+
+
 ### LINK ###
 dk_include				(${zlib}								ZLIB_INCLUDE_DIR)
 dk_include				(${zlib_Config_Dir}						ZLIB_INCLUDE_DIR2)
 if(MSVC)
 	if(Windows)	
-		dk_libDebug		(${zlib_Debug_Dir}/zd.lib				ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${zlib_Release_Dir}/z.lib 				ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${zlib_Debug_Dir}/zd.lib				ZLIB_LIBRARY_DEBUG		ZLIB_LIBRARY)
+		dk_libRelease	(${zlib_Release_Dir}/z.lib 				ZLIB_LIBRARY_RELEASE	ZLIB_LIBRARY)
 	endif()
 else()
 	if(Windows)
-		dk_libDebug		(${zlib_Debug_Dir}/libzlibstatic.a		ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${zlib_Release_Dir}/libzlibstatic.a	ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${zlib_Debug_Dir}/libzlibstatic.a		ZLIB_LIBRARY_DEBUG		ZLIB_LIBRARY)
+		dk_libRelease	(${zlib_Release_Dir}/libzlibstatic.a	ZLIB_LIBRARY_RELEASE	ZLIB_LIBRARY)
 	else()
-		dk_libDebug		(${zlib_Debug_Dir}/libz.a				ZLIB_LIBRARY_DEBUG)
-		dk_libRelease	(${zlib_Release_Dir}/libz.a				ZLIB_LIBRARY_RELEASE)
+		dk_libDebug		(${zlib_Debug_Dir}/libz.a				ZLIB_LIBRARY_DEBUG		ZLIB_LIBRARY)
+		dk_libRelease	(${zlib_Release_Dir}/libz.a				ZLIB_LIBRARY_RELEASE	ZLIB_LIBRARY)
 	endif()
 endif()
-if(Debug)
-	dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_DEBUG})
-endif()
-if(Release)
-	dk_set(ZLIB_LIBRARY ${ZLIB_LIBRARY_RELEASE})
-endif()
+
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindZLIB.html

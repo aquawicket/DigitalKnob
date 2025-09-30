@@ -25,7 +25,9 @@ function(dk_registryContains)
 
 	dk_validate(reg_exe "dk_depend(reg_exe)")
 	
+	dk_set(dk_exec_ECHO_OUTPUT	0)
 	dk_exec(${reg_exe} query "${_reg_path_}")
+	dk_set(dk_exec_ECHO_OUTPUT	1)
 	#dk_debug("${dk_exec_stdout}")
 	
 	dk_includes("${dk_exec_stdout}" "${_find_}")

@@ -34,7 +34,9 @@ endif()
 #if(Emscripten)
 #	dk_depend(python3)
 #endif()
-dk_depend(dl)
+if(Unix)
+	dk_depend(dl)
+endif()
 dk_depend(pthread)
 dk_depend(ws2_32)
 dk_depend(crypt32)
@@ -54,7 +56,6 @@ dk_import()
 ### LINK ###
 dk_include				(${openssl}/include								OPENSSL_INCLUDE_DIR)
 dk_include				(${openssl_Config_Dir}/include					OPENSSL_INCLUDE_DIR2)
-dk_set					(OPENSSL_ROOT_DIR 								${openssl_Config_Dir})
 if(MSVC)
 	if(Windows_X86)
 		dk_libDebug		(${openssl}/lib/libeay32MTd.lib					LIB_EAY_DEBUG)
@@ -70,19 +71,20 @@ if(MSVC)
 	endif()
 	dk_libDebug			(${openssl_Config_Dir}/libcrypto.lib			OPENSSL_CRYPTO_DEBUG_LIBRARY	OPENSSL_CRYPTO_LIBRARY)
 	dk_libRelease		(${openssl_Config_Dir}/libcrypto.lib			OPENSSL_CRYPTO_RELEASE_LIBRARY	OPENSSL_CRYPTO_LIBRARY)
-	dk_libDebug			(${openssl_Config_Dir}/libssl.lib				OPENSSL_SSL_DEBUG_LIBRARY		OPENSSL_SSL_LIBRARY)
-	dk_libRelease		(${openssl_Config_Dir}/libssl.lib				OPENSSL_SSL_RELEASE_LIBRARY		OPENSSL_SSL_LIBRARY)
 	dk_libDebug			(${openssl_Config_Dir}/providers/liblegacy.lib	OPENSSL_LEGACY_DEBUG_LIBRARY	OPENSSL_LEGACY_LIBRARY)
 	dk_libRelease		(${openssl_Config_Dir}/providers/liblegacy.lib	OPENSSL_LEGACY_RELEASE_LIBRARY	OPENSSL_LEGACY_LIBRARY)
+	dk_libDebug			(${openssl_Config_Dir}/libssl.lib				OPENSSL_SSL_DEBUG_LIBRARY		OPENSSL_SSL_LIBRARY)
+	dk_libRelease		(${openssl_Config_Dir}/libssl.lib				OPENSSL_SSL_RELEASE_LIBRARY		OPENSSL_SSL_LIBRARY)
 else()
 	dk_libDebug			(${openssl_Config_Dir}/libcrypto.a				OPENSSL_CRYPTO_DEBUG_LIBRARY	OPENSSL_CRYPTO_LIBRARY)
 	dk_libRelease		(${openssl_Config_Dir}/libcrypto.a				OPENSSL_CRYPTO_RELEASE_LIBRARY	OPENSSL_CRYPTO_LIBRARY)
-	dk_libDebug			(${openssl_Config_Dir}/libssl.a					OPENSSL_SSL_DEBUG_LIBRARY		OPENSSL_SSL_LIBRARY)
-	dk_libRelease		(${openssl_Config_Dir}/libssl.a					OPENSSL_SSL_RELEASE_LIBRARY		OPENSSL_SSL_LIBRARY)
 	dk_libDebug			(${openssl_Config_Dir}/providers/liblegacy.a	OPENSSL_LEGACY_DEBUG_LIBRARY	OPENSSL_LEGACY_LIBRARY)
 	dk_libRelease		(${openssl_Config_Dir}/providers/liblegacy.a	OPENSSL_LEGACY_RELEASE_LIBRARY	OPENSSL_LEGACY_LIBRARY)
+	dk_libDebug			(${openssl_Config_Dir}/libssl.a					OPENSSL_SSL_DEBUG_LIBRARY		OPENSSL_SSL_LIBRARY)
+	dk_libRelease		(${openssl_Config_Dir}/libssl.a					OPENSSL_SSL_RELEASE_LIBRARY		OPENSSL_SSL_LIBRARY)
 endif()
-dk_set					(OPENSSL_LIBRARIES								${openssl_Config_Dir})
+dk_set(OPENSSL_ROOT_DIR 	${openssl_Config_Dir})
+dk_set(OPENSSL_LIBRARIES	${openssl_Config_Dir})
 
 
 ### 3RDPARTY LINK ###
@@ -112,8 +114,6 @@ endif()
 
 # https://wiki.openssl.org/index.php/Compilation_and_Installation
 ### GENERATE ###
-set(OLDPWD "${PWD}")
-dk_chdir(${openssl_Build_Dir})
 #Emscripten_Debug_dk_configure(${openssl} -DBUILD_OPENSSL=ON -DGIT_EXECUTABLE=${git_exe} -DPYTHON_EXECUTABLE=${python3_exe})
 if(Debug)
 	if(Android_Arm32_Clang)
@@ -205,7 +205,7 @@ endif()
 
 dk_exec("${perl_exe}" configdata.pm --dump WORKING_DIRECTORY "${openssl_Config_Dir}")
 
-dk_chdir("${OLDPWD}")
+
 ### COMPILE ###
 dk_build()
 

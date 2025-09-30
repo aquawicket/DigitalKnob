@@ -15,49 +15,87 @@ include_guard()
 #########################################################################
 # dk_Target_Config()
 #
-#	This is where the CMakeLists.txt or configure file is located in a Plugin
+#	This is where makefiles and config files are generated to. This is not nessecarily where binary files are compiled to.
+#	For example, This is equivelent to cmake's Build_Directory and where it will generate CMakeCache.txt and makefiles.
+#   This path may change according to which CMAKE_GENERATOR is used. With SINGLE_CONFIG Generators, this path is the same as the 
+#	binary output directory. With MULTI_CONFIG Generators like visual studio, This is where the project files, makefiles, etc are 
+#	generated. And unlike SINGLE_CONFIG Generators, binaries will be build into a sub_folder like Debug or Release.
 #
-#	SINGLE_CONFIG:	zlib-master/Windows_X86_64_Clang/Debug/CMakeLists.txt	Target_Config = Windows_X86_64_Clang/Debug
-#   MULTI_CONFIG:	zlib-master/Windows_X86_64_Msvc/CMakeLists.txt			Target_Config = Windows_X86_64_Msvc
-#
-#	SINGLE_CONFIG:	zlib-master/Windows_X86_64_Clang/Debug					Target_Build = Windows_X86_64_Clang/Debug
-#	MULTI_CONFIG:	zlib-master/Windows_X86_64_Msvc/Debug			 		Target_Build = Windows_X86_64_Msvc/Debug
+#	### CMAKE OUTPUT EXAMPLE ###
+#	SINGLE_CONFIG:	
+#		Project files -> ${Library}/${Target_Tuple}/Debug/CMakeCache.txt
+#		Binary files  -> ${Library}/${Target_Tuple}/Debug/library.a
+#   MULTI_CONFIG:	
+#		Project files -> ${Library}/${Target_Tuple}/CMakeCache.txt
+#		Binary files  -> ${Library}/${Target_Tuple}/Debug/library.a
 #
 function(dk_Target_Config)
 	dk_debugFunc(0)
 	
 	dk_validate(Target_Type  	"dk_Target_Type()")
 	
+	dk_validate(Target_Tuple  	"dk_Target_Tuple()")
+	dk_validate(DKCMAKE_DIR "dk_DKBRANCH_DIR()")
+	dk_load("${DKCMAKE_DIR}/DKVariables.cmake")
+	
 	###### set MULTI_CONFIG / SINGLE_CONFIG variables ######
 	get_property(MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+	if(MSVC OR XCODE) # OR Msvc OR Xcode)
+		dk_set(MULTI_CONFIG 1)
+	endif()
+	dk_success("CMAKE_GENERATOR = ${CMAKE_GENERATOR}")
+	dk_success("MULTI_CONFIG = ${MULTI_CONFIG}")
 	
 	### MULTI_CONFIG ###
 	if(MULTI_CONFIG)
+		### Unset SINGLE_CONFIG ###
+		dk_unset(SINGLE_CONFIG)
+	
+		### Unset CMAKE_BUILD_TYPE ###
 		dk_unset(CMAKE_BUILD_TYPE)
 		if(CMAKE_BUILD_TYPE)
 			dk_error("multi-config generators don't use CMAKE_BUILD_TYPE")
 		endif()
 		
-		dk_set(MULTI_CONFIG 1)
-		dk_unset(SINGLE_CONFIG)
+		### Target_Config_Type ###
+		dk_set(Target_Config_Type 	"MULTI_CONFIG")
 		
-		dk_validate(Target_Tuple	"dk_Target_Tuple()")
-		dk_set(Target_Config 	${Target_Tuple})
-		
-		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
-		dk_debug("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
+		### MULTI_CONFIG ###
+		dk_set(${Target_Config_Type} 1)
 		dk_assertVar(MULTI_CONFIG)
+		
+		### Target_Config ###
+		dk_validate(Target_Tuple	"dk_Target_Tuple()")
+		dk_set(Target_Config 		${Target_Tuple})
 		dk_assertVar(Target_Config)
+		
+		### CMAKE_GENERATOR ###
+		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
+		dk_assertVar(CMAKE_GENERATOR)
+		
+		### CMAKE_GENERATOR ###
+		dk_assertVar(CMAKE_CONFIGURATION_TYPES)
+		dk_debug("*** ${CMAKE_GENERATOR}: Generator is MULTI_CONFIG (${CMAKE_CONFIGURATION_TYPES}) ***")
 		
 	### SINGLE_CONFIG ###
 	else()
+		### Unset MULTI_CONFIG ###
+		dk_unset(MULTI_CONFIG)
+		
+		### Unset CMAKE_CONFIGURATION_TYPES ###
 		dk_unset(CMAKE_CONFIGURATION_TYPES)
 		if(CMAKE_CONFIGURATION_TYPES)
 			dk_error("single-config generators don't use CMAKE_CONFIGURATION_TYPES")
 		endif()
 		
-		dk_set(SINGLE_CONFIG 1)
-		dk_unset(MULTI_CONFIG)
+		### Target_Config_Type ###
+		dk_set(Target_Config_Type 	"SINGLE_CONFIG")
+		
+		### SINGLE_CONFIG ###
+		dk_set(${Target_Config_Type} 1)
+		dk_assertVar(SINGLE_CONFIG)
+		
+		### CMAKE_BUILD_TYPE / Target_Config ###
 		dk_validate(Target_Tuple	"dk_Target_Tuple()")
 		if(Debug)
 			dk_set(CMAKE_BUILD_TYPE Debug)
@@ -66,14 +104,20 @@ function(dk_Target_Config)
 			dk_set(CMAKE_BUILD_TYPE Release)
 			dk_set(Target_Config ${Target_Tuple}/${Release_Dir})
 		endif()
-		
-		dk_assertVar(SINGLE_CONFIG)
 		dk_assertVar(CMAKE_BUILD_TYPE)
 		dk_assertVar(Target_Config)
+		
+		### CMAKE_GENERATOR ###
 		dk_validate(CMAKE_GENERATOR "dk_CMAKE_GENERATOR()")
+		dk_assertVar(CMAKE_GENERATOR)
 		dk_debug("*** ${CMAKE_GENERATOR}: Generator is SINGLE_CONFIG (${CMAKE_BUILD_TYPE}) ***")
 	endif()
 	
+	### CURRENT_PLUGIN_Config_Dir ###
+	if(CURRENT_PLUGIN)
+		dk_set(${CURRENT_PLUGIN}_Config_Dir "${${CURRENT_PLUGIN}}/${Target_Config}")
+	endif()
+		
 	### Target_Build ###
 	if(Debug)
 		dk_set(Target_Build   ${Target_Tuple}/${Debug_Dir})
@@ -81,6 +125,10 @@ function(dk_Target_Config)
 		dk_set(Target_Build   ${Target_Tuple}/${Release_Dir})
 	endif()
 	dk_assertVar(Target_Build)
+	
+	if(CURRENT_PLUGIN)
+		dk_set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Build}")
+	endif()
 	
 endfunction()
 

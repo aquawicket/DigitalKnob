@@ -121,7 +121,10 @@ dk_echo("Host_Tuple:                   '${Host_Tuple}'")
 
 ############ Get Target Variables ############
 dk_validate(Target_Config   "dk_Target_Config()")
-dk_echo("Target_Config:                '${Target_Config}'")
+#dk_echo("Target_Config:     '${Target_Config}'")
+
+#dk_load(dk_toolchain)
+#dk_toolchain()
 
 ###############################################################
 ## Set variables for paths
@@ -204,7 +207,7 @@ dk_echo("MSVC:                         '${MSVC}'")
 
 else()
 	if(NOT CMAKE_SCRIPT_MODE_FILE)
-		dk_fatal("Could not determin Environment Variable")
+		dk_fatal("Could not determin IDE Environment Variable")
 	endif()
 endif()
 

@@ -1,4 +1,6 @@
 #!/usr/bin/cmake -P
+
+
 ### DK.cmake ###############################################################
 if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 	cmake_policy(SET CMP0009 NEW)
@@ -43,9 +45,9 @@ function(dk_firewallAllow)
 	
 	dk_registryContains("HKLM/SYSTEM/ControlSet001/Services/SharedAccess/Parameters/FirewallPolicy/FirewallRules" "${_executable_}")
 	if(dk_registryContains)
-#		#if("${dk_firewallAllow_WARNINGS}" STREQUAL "1")
-			dk_notice("registry already contains a firewall rule for '${_executable_}'")
-#		#endif()
+		if("${dk_firewallAllow_DEBUG}" STREQUAL "1")
+			dk_debug("registry already contains a firewall rule for '${_executable_}'")
+		endif()
 		return()
 	endif()
 	

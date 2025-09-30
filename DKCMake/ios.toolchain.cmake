@@ -190,11 +190,11 @@ if(DEFINED XCODE_VERSION_INT)
 elseif(DEFINED ENV{_XCODE_VERSION_INT})
   set(XCODE_VERSION_INT "$ENV{_XCODE_VERSION_INT}")
 elseif(NOT DEFINED XCODE_VERSION_INT)
-  find_program(XCODEBUILD_EXECUTABLE xcodebuild)
-  if(NOT XCODEBUILD_EXECUTABLE)
+  find_program(xcodebuild_exeCUTABLE xcodebuild)
+  if(NOT xcodebuild_exeCUTABLE)
     message(FATAL_ERROR "xcodebuild not found. Please install either the standalone commandline tools or Xcode.")
   endif()
-  execute_process(COMMAND ${XCODEBUILD_EXECUTABLE} -version
+  execute_process(COMMAND ${xcodebuild_exeCUTABLE} -version
           OUTPUT_VARIABLE XCODE_VERSION_INT
           ERROR_QUIET
           OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -598,7 +598,7 @@ if(DEFINED CMAKE_OSX_SYSROOT_INT)
 elseif(DEFINED ENV{_CMAKE_OSX_SYSROOT_INT})
   set(CMAKE_OSX_SYSROOT_INT "$ENV{_CMAKE_OSX_SYSROOT_INT}")
 elseif(NOT DEFINED CMAKE_OSX_SYSROOT_INT)
-  execute_process(COMMAND ${XCODEBUILD_EXECUTABLE} -version -sdk ${SDK_NAME} Path
+  execute_process(COMMAND ${xcodebuild_exeCUTABLE} -version -sdk ${SDK_NAME} Path
           OUTPUT_VARIABLE CMAKE_OSX_SYSROOT_INT
           ERROR_QUIET
           OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -654,7 +654,7 @@ if(DEFINED SDK_VERSION)
 elseif(DEFINED ENV{_SDK_VERSION})
   set(SDK_VERSION "$ENV{_SDK_VERSION}")
 elseif(NOT DEFINED SDK_VERSION)
-  execute_process(COMMAND ${XCODEBUILD_EXECUTABLE} -sdk ${CMAKE_OSX_SYSROOT_INT} -version SDKVersion
+  execute_process(COMMAND ${xcodebuild_exeCUTABLE} -sdk ${CMAKE_OSX_SYSROOT_INT} -version SDKVersion
           OUTPUT_VARIABLE SDK_VERSION
           ERROR_QUIET
           OUTPUT_STRIP_TRAILING_WHITESPACE)

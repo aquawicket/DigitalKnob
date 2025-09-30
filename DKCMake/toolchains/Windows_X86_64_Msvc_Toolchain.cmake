@@ -7,6 +7,7 @@ if(NOT Windows_Host)
 	dk_exit()
 endif()
 
+dk_set(MSVC 1)
 dk_depend(visualstudio)
 
 dk_set(CMAKE_GENERATOR				${VS_GENERATOR})					# https://cmake.org/cmake/help/latest/variable/CMAKE_GENERATOR.html

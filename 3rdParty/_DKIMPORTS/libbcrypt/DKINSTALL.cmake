@@ -39,7 +39,7 @@ elseif(Windows_X86_64_Gcc)
 	dk_depend(msys2)
 	dk_set(LIBBCRYPT_LIB "${msys2}/mingw64/lib/libbcrypt.a")
 
-# Msvc
+# MSVC
 elseif(Windows_Arm32_Msvc)
 	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
 elseif(Windows_Arm64_Msvc)

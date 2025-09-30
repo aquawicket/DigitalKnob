@@ -169,7 +169,6 @@ function(dk_importVariables)
 	PLUGIN_Import_Dirname()
 	PLUGIN_Import_Name()
 	
-	
 	#PLUGIN_Tuple_Dir()
 	#PLUGIN_Build_Dir()
 	#PLUGIN_Config_Dir()
