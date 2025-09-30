@@ -1,0 +1,7 @@
+############ lua ############
+# https://github.com/lua/lua.git
+# https://www.lua.org/ftp/lua-5.4.3.tar.gz
+# https://github.com/lubgr/lua-cmake.git
+# https://github.com/lua/lua/archive/fd0e1f53.zip
+
+lua_Import=https://github.com/lua/lua/archive/fd0e1f53.zip

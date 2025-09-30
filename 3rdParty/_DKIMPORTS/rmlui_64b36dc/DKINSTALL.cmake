@@ -12,9 +12,10 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ rmlui_64b36dc ############
 # https://github.com/mikke89/RmlUi.git
 # https://github.com/aquawicket/RmlUi.git
+# https://github.com/mikke89/RmlUi/archive/64b36dc4775e3c2eefcd93bdb873cc402c0bbcea.zip
 
 
 ### DEPEND ###
@@ -35,16 +36,15 @@ endif()
 
 
 ### IMPORT ###
-#dk_import(https://github.com/mikke89/RmlUi.git TAG 64b36dc)
-dk_import(https://github.com/mikke89/RmlUi/archive/64b36dc4775e3c2eefcd93bdb873cc402c0bbcea.zip)
+dk_import()
 
 
 # Version fix #
-dk_fileReplace(${RMLUI}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
+dk_fileReplace(${rmlui_64b36dc}/CMakeLists.txt "list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION" "#list(APPEND CORE_PRIVATE_DEFS RMLUI_VERSION")
 
 # Android FIX
 if(Android)
-	dk_fileReplace(${RMLUI}/CMakeLists.txt "target_compile_features" "#target_compile_features")
+	dk_fileReplace(${rmlui_64b36dc}/CMakeLists.txt "target_compile_features" "#target_compile_features")
 endif()
 
 
@@ -53,107 +53,110 @@ dk_define(RMLUI_STATIC_LIB)
 Android_dk_define(CHOBO_FLAT_MAP_NO_THROW)
 Android_dk_define(RMLUI_USE_CUSTOM_RTTI)
 
-dk_include		(${RMLUI}/Include					RML_INCLUDE_DIR)
-dk_include		(${RMLUI}/Source)
+dk_include		(${rmlui_64b36dc}/Include	RML_INCLUDE_DIR)
+dk_include		(${rmlui_64b36dc}/Source	RML_INCLUDE_DIR2)
 
 dk_addTarget	(rmlui RmlCore)
 dk_addTarget	(rmlui RmlDebugger)
 
 if(rmlui_RmlCore)
-	if(MSVC)
-		Windows_dk_libDebug		(${RMLUI_Debug_Dir}/RmlCore.lib)
-		Windows_dk_libRelease	(${RMLUI_Release_Dir}/RmlCore.lib)
+	dk_define				(HAVE_rmlui_RmlCore)
+	if(Windows AND MSVC)
+		dk_libDebug			(${rmlui_64b36dc_Debug_Dir}/RmlCore.lib)
+		dk_libRelease		(${rmlui_64b36dc_Release_Dir}/RmlCore.lib)
 	else()
-		dk_libDebug			(${RMLUI_Debug_Dir}/libRmlCore.a)
-		dk_libRelease		(${RMLUI_Release_Dir}/libRmlCore.a)
+		dk_libDebug			(${rmlui_64b36dc_Debug_Dir}/libRmlCore.a)
+		dk_libRelease		(${rmlui_64b36dc_Release_Dir}/libRmlCore.a)
 	endif()
 endif()
 
 if(rmlui_RmlDebugger)
-	dk_define				(HAVE_rmlui_debugger)
-	if(MSVC)
-		Windows_dk_libRelease	(${RMLUI_Release_Dir}/RmlDebugger.lib)
-		Windows_dk_libDebug		(${RMLUI_Debug_Dir}/RmlDebugger.lib)
+	dk_define				(HAVE_rmlui_RmlDebugger)
+	if(Windows AND MSVC)
+		dk_libRelease		(${rmlui_64b36dc_Release_Dir}/RmlDebugger.lib)
+		dk_libDebug			(${rmlui_64b36dc_Debug_Dir}/RmlDebugger.lib)
 	else()
-		dk_libDebug			(${RMLUI_Debug_Dir}/libRmlDebugger.a)
-		dk_libRelease		(${RMLUI_Release_Dir}/libRmlDebugger.a)
+		dk_libDebug			(${rmlui_64b36dc_Debug_Dir}/libRmlDebugger.a)
+		dk_libRelease		(${rmlui_64b36dc_Release_Dir}/libRmlDebugger.a)
 	endif()
 endif()
 
 ### GENERATE ###
 if(MSVC)
-	Windows_dk_configure(${RMLUI}
-		"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
-		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
-		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
-		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
-		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
-		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
-		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
-		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
-		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${freetype_CMAKE} 
-		${GLEW_CMAKE}
-		${harfbuzz_CMAKE}
-		${lua_CMAKE}
-		${lunasvg_CMAKE}
-		${sdl_CMAKE} 
-		${sdl_image_CMAKE} 
-		${sfml_CMAKE})
-	
-	Android_dk_configure(${RMLUI}
-		"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
-		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
-		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
-		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
-		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
-		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
-		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
-		-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
-		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
-		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
-		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
-		-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
-		-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
-		-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
-		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
-		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
-		${freetype_CMAKE} 
-		${GLEW_CMAKE}
-		${harfbuzz_CMAKE}
-		${lua_CMAKE}
-		${lunasvg_CMAKE}
-		${sdl_CMAKE} 
-		${sdl_image_CMAKE} 
-		${sfml_CMAKE}) 
+	if(Windows)
+		dk_configure(${rmlui_64b36dc}
+			"-DCMAKE_CXX_FLAGS=/DRMLUI_STATIC_LIB /I${RML_INCLUDE_DIR}"
+			-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
+			-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
+			-DBUILD_LUA_BINDINGS=${lua}	 			# "Build Lua bindings" OFF
+			-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
+			-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
+			-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
+			-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
+			-DENABLE_HARFBUZZ=${harfbuzz}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+			-DENABLE_LOTTIE_PLUGIN=${rlottie} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
+			-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
+			-DENABLE_SVG_PLUGIN=${lunasvg_CMAKE}	# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
+			-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
+			-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
+			-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
+			-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
+			-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
+			-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
+			-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
+			-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
+			${freetype_CMAKE} 
+			${glew_CMAKE}
+			${harfbuzz_CMAKE}
+			${lua_CMAKE}
+			${lunasvg_CMAKE}
+			${sdl_CMAKE} 
+			${sdl_image_CMAKE} 
+			${sfml_CMAKE})
+	elseif(Android)
+		Android_dk_configure(${rmlui_64b36dc}
+			"-DCMAKE_CXX_FLAGS=-DRMLUI_STATIC_LIB -DCHOBO_FLAT_MAP_NO_THROW -std=c++1z"
+			-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
+			-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
+			-DBUILD_LUA_BINDINGS=${lua}	 			# "Build Lua bindings" OFF
+			-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
+			-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
+			-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
+			-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
+			-DENABLE_HARFBUZZ=${harfbuzz}				# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+			-DENABLE_LOTTIE_PLUGIN=${rlottie} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
+			-DENABLE_PRECOMPILED_HEADERS=ON			# "Enable precompiled headers" ON
+			-DENABLE_SVG_PLUGIN=${lunasvg}			# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
+			-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
+			-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
+			-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
+			-DRMLUI_TRACY_CONFIGURATION=OFF			# "Enable a separate Tracy configuration type for multi-config generators such as Visual Studio, otherwise enable Tracy in all configurations." ON
+			-DRMLUI_TRACY_MEMORY_PROFILING=OFF		# "Overload global operator new/delete to track memory allocations in Tracy." ON
+			-DRMLUI_TRACY_PROFILING=OFF				# "Enable profiling with Tracy. Source files can be placed in Dependencies/tracy." OFF
+			-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
+			-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
+			${freetype_CMAKE} 
+			${glew_CMAKE}
+			${harfbuzz_CMAKE}
+			${lua_CMAKE}
+			${lunasvg_CMAKE}
+			${sdl_CMAKE} 
+			${sdl_image_CMAKE} 
+			${sfml_CMAKE})
+	endif()
 else()
-	dk_configure(${RMLUI}
+	dk_configure(${rmlui_64b36dc}
 		-DBUILD_FRAMEWORK=OFF 					# "Build Framework bundle for OSX" OFF
 		-DBUILD_LUA_BINDINGS_FOR_LUAJIT=OFF 	# "Build Lua bindings using luajit" OFF
-		-DBUILD_LUA_BINDINGS=${LUA}	 			# "Build Lua bindings" OFF
+		-DBUILD_LUA_BINDINGS=${lua}	 			# "Build Lua bindings" OFF
 		-DBUILD_SAMPLES=OFF 					# "Build samples" OFF
 		-DBUILD_UNIVERSAL_BINARIES=OFF 			# "Build universal binaries for all architectures supported" ON
 		-DCUSTOM_CONFIGURATION=OFF				# "Customize RmlUi configuration files for overriding the default configuration and types." OFF
 		-DDISABLE_RTTI_AND_EXCEPTIONS=OFF		# "Build with rtti and exceptions disabled." OFF
-		-DENABLE_HARFBUZZ=${HARFBUZZ}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
-		-DENABLE_LOTTIE_PLUGIN=${RLOTTIE} 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
+		-DENABLE_HARFBUZZ=${harfbuzz}			# "Enable HarfBuzz for text-shaping sample. Requires the HarfBuzz library." OFF
+		-DENABLE_LOTTIE_PLUGIN=${rlottie}	 		# "Enable Plugin for Lottie animations. Requires the rlottie library." OFF
 		-DENABLE_PRECOMPILED_HEADERS=OFF		# "Enable precompiled headers" ON
-		-DENABLE_SVG_PLUGIN=${LUNASVG}			# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
+		-DENABLE_SVG_PLUGIN=${lunasvg}			# "Enable Plugin for SVG images. Requires the lunasvg library." OFF
 		-DMATRIX_ROW_MAJOR=OFF 					# "Use row-major matrices. Column-major matrices are used by default." OFF
 		-DNO_FONT_INTERFACE_DEFAULT=OFF			# "Do not include the default font engine in the build. Allows building without the FreeType dependency, but a custom font engine must be created and set." OFF
 		-DNO_THIRDPARTY_CONTAINERS=OFF			# "Only use standard library containers." OFF
@@ -163,7 +166,7 @@ else()
 		-DRMLUI_VK_DEBUG=OFF					# "Enable debugging mode for Vulkan renderer." OFF
 		-DWARNINGS_AS_ERRORS=OFF				# "Treat compiler warnings as errors." OFF
 		${freetype_CMAKE} 
-		${GLEW_CMAKE}
+		${glew_CMAKE}
 		${harfbuzz_CMAKE}
 		${lua_CMAKE}
 		${lunasvg_CMAKE}
@@ -177,9 +180,9 @@ endif()
 
 ### COMPILE ###
 if(rmlui_RmlCore)
-	dk_build(${RMLUI} RmlCore)
+	dk_build(${rmlui_64b36dc} RmlCore)
 endif()
 
 if(rmlui_RmlDebugger)
-	dk_build(${RMLUI} RmlDebugger)
+	dk_build(${rmlui_64b36dc} RmlDebugger)
 endif()

@@ -41,23 +41,23 @@ dk_import()
 
 
 ### LINK ###
-dk_include					(${tiff}/libtiff										TIFF_INCLUDE_DIR)
-dk_include					(${TIFF_Config_Dir}/libtiff								TIFF_INCLUDE_DIRS)
-#Debug_dk_include			(${TIFF_Config_Dir}/libtiff/${Debug_Dir}				TIFF_INCLUDE_DIRS)
-#Release_dk_include			(${TIFF_Config_Dir}/libtiff/${Release_Dir}				TIFF_INCLUDE_DIRS)
+dk_include				(${tiff}/libtiff										TIFF_INCLUDE_DIR)
+dk_include				(${tiff_Config_Dir}/libtiff								TIFF_INCLUDE_DIRS)
+#Debug_dk_include		(${tiff_Config_Dir}/libtiff/${Debug_Dir}				TIFF_INCLUDE_DIRS)
+#Release_dk_include		(${tiff_Config_Dir}/libtiff/${Release_Dir}				TIFF_INCLUDE_DIRS)
 if(MULTI_CONFIG)
 	if(MSVC)
-		dk_libDebug			(${TIFF_Config_Dir}/libtiff/${Debug_Dir}/tiffd.lib		TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_Config_Dir}/libtiff/${Release_Dir}/tiff.lib		TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/${Debug_Dir}/tiffd.lib		TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/${Release_Dir}/tiff.lib		TIFF_LIBRARY_RELEASE)
 	else()
-		dk_libDebug			(${TIFF_Config_Dir}/libtiff/${Debug_Dir}/libtiff.a		TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_Config_Dir}/libtiff/${Release_Dir}/libtiff.a	TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/${Debug_Dir}/libtiff.a		TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/${Release_Dir}/libtiff.a	TIFF_LIBRARY_RELEASE)
 	endif()
 else()	
-		dk_libDebug			(${TIFF_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_RELEASE)
 endif()
-dk_set						(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
+dk_set					(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
@@ -93,4 +93,4 @@ dk_configure(${tiff}
 	${zstd_CMAKE})
 
 ### COMPILE ###
-dk_build(${tiff})# tiff)
+dk_build(${tiff}) # tiff)
