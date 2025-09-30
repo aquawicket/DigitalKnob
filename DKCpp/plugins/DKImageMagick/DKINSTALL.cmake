@@ -26,6 +26,6 @@ dk_configure()
 dk_build()
 
 if(Windows_X86)
-	dk_copy(${IMAGEMAGICK}/magick.exe ${Target_App_Dir}/assets/DKImageMagick/magick.exe OVERWRITE)
-	##UPX_COMPRESS(${Target_App_Dir}/assets/DKImageMagick/magick.exe)
+	dk_copy(${imagemagick}/magick.exe ${Target_App_Dir}/assets/DKImageMagick/magick.exe OVERWRITE)
+	# UPX_COMPRESS(${Target_App_Dir}/assets/DKImageMagick/magick.exe)
 endif()

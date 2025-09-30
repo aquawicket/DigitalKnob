@@ -50,7 +50,7 @@ function(dk_resizeImage)
 
 	else()
 		dk_depend(imagemagick)
-		dk_findProgram(convert_exe convert ${IMAGEMAGICK})
+		dk_findProgram(convert_exe convert ${imagemagick})
 		dk_assertPath(convert_exe)
 		dk_exec(${convert_exe} ${inpath} -resize ${width}x${height} ${outpath})
 	

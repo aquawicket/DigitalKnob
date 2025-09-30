@@ -1,4 +1,4 @@
-Imagemagick_Android_Import=imagemagick
-Imagemagick_Unix_Import=https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-0.zip
-Imagemagick_Windows_X86_Import=https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-portable-Q16-x86.zip
-Imagemagick_Windows_X86_64_Import=https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-47-portable-Q16-x64.zip
+imagemagick_Android_Import=imagemagick
+imagemagick_Unix_Import=https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-3.zip
+imagemagick_Windows_X86_Import=https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-3-portable-Q16-x86.zip
+imagemagick_Windows_X86_64_Import=https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-3-portable-Q16-x64.zip

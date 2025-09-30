@@ -35,17 +35,9 @@ function(dk_configure)
 	endif()
 	dk_debug("Source_Dir = ${Source_Dir}")
 
-#	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
-#	dk_validate(Target_Config_Type "dk_Target_Config()")
-#	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
-#	dk_pause()
-
 	### Config_Dir ###
-	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	dk_validate(${CURRENT_PLUGIN}_Config_Dir "dk_Target_Config()")
-	dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	set(Config_Dir "${${CURRENT_PLUGIN}_Config_Dir}")
-	dk_assertVar(Config_Dir)
 	dk_debug("Config_Dir = ${Config_Dir}")
 	
 	### Build_Dir ###
@@ -80,12 +72,12 @@ function(dk_configure)
 		dk_call(dk_clearCmakeCache "${Config_Dir}")
 	#endif()
 
-	# This needs to be case sensitive. For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
-	# This will cause problems on unix and any casesensitive platforms, so we need file Exists conditions to be case sensitive.
+	# Path checks needs to be case sensitive. 
+	# For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
+	# This will cause problems on unix and any casesensitive platforms, so we use dk_pathExists because it is case sensitive.
 	dk_call(dk_pathExists "${Source_Dir}/CMakeLists.txt" 	CMakeLists.txt)
 	dk_pathExists("${Source_Dir}/configure"      			configure)
 	dk_pathExists("${Source_Dir}/configure.ac"   			configure.ac)
-
 
 	
 	############ Configure with CMAKE ############
@@ -117,13 +109,16 @@ function(dk_configure)
 	elseif(configure OR configure.ac)
 		#### cd into build directory
 		set(OLDPWD "${PWD}")
+		if(NOT EXISTS "${Build_Dir}")
+			dk_mkdir("${Build_Dir}")
+		endif()		
 		dk_chdir("${Build_Dir}")
 		
 		# Configure with Autotools	(single_config)
 		dk_echo("###### Configuring ${CURRENT_PLUGIN} with ../../configure ######")
 			
 		dk_fileAppend("${Build_Dir}/DKBUILD.log" "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
-		if(EXISTS "${${CURRRENT_PLUGIN}_Build_Dir}/configure")
+		if(EXISTS "${${CURRRENT_PLUGIN}}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
 				dk_validate(bash_exe "dk_depend(bash)")
 				dk_exec(${bash_exe} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
@@ -150,9 +145,11 @@ function(dk_configure)
 	# No Specific configure type. Just pass the arguments to dk_exec to run	
 	#
 	else()
-		
 		#### cd into build directory
 		set(OLDPWD "${PWD}")
+		if(NOT EXISTS "${Build_Dir}")
+			dk_mkdir("${Build_Dir}")
+		endif()	
 		dk_chdir("${Build_Dir}")
 		
 		dk_notice("###### configure type not detected for ${CURRENT_PLUGIN}. Running provided commands unaltered ######")
