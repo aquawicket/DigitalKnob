@@ -18,7 +18,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
     %~2
    
-	if "%~3" equ "NO_HALT" (%return%)
+	if /i "%~3" equ "NO_HALT" (%return%)
     if NOT defined %~1		%dk_call% dk_error "dk_validatePath was unable to set the path variable:%~1 with the code provided"
 	if NOT EXIST "!%~1!"    %dk_call% dk_error "dk_validatePath was unable to locate the path:%~1 with the code provided"
 %endfunction%

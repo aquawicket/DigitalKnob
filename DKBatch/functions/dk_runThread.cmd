@@ -4,7 +4,7 @@ if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /
 if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
-if "%~1" equ "dk_runThread.LoopFunc" goto %1
+if /i "%~1" equ "dk_runThread.LoopFunc" goto %1
 
 
 ::################################################################################

@@ -12,7 +12,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 %setlocal%
 	%dk_call% dk_debugFunc 0
 
-    if "%1" equ "wipe" goto wipe
+    if /i "%1" equ "wipe" goto wipe
        
     %dk_call% dk_clearScreen
     %dk_call% dk_echo

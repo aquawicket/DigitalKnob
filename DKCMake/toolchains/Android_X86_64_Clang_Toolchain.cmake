@@ -11,7 +11,7 @@ dk_set(ANDROID_STL						c++_static)
 dk_set(ANDROID_STL_FORCE_FEATURES		1)
 dk_set(ANDROID_TOOLCHAIN				clang)
 
-dk_set(CMAKE_TOOLCHAIN_FILE				"${android-ndk}/buil/cmake/android.toolchain.cmake")
+dk_set(CMAKE_TOOLCHAIN_FILE				"${android-ndk}/build/cmake/android.toolchain.cmake")
 dk_set(CMAKE_GENERATOR					"Unix Makefiles")
 dk_assertVar(Android_Host_Tag)
 if(Windows_Host)

@@ -8,8 +8,8 @@ set "BACKUP=%FOLDER:_BACKUP=%_BACKUP"
 echo   ~dp0 = %~dp0
 echo    SRC = %SRC%
 echo BACKUP = %BACKUP%
-if "%~dp0" equ "%SRC%\" 	(goto :BACKUP)
-if "%~dp0" equ "%BACKUP%\" 	(goto :RESTORE)
+if /i "%~dp0" equ "%SRC%\" 	(goto :BACKUP)
+if /i "%~dp0" equ "%BACKUP%\" 	(goto :RESTORE)
 
 :BACKUP
 	echo BACKUP:

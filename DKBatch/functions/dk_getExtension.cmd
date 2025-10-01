@@ -27,7 +27,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "dk_getExtension="
 	for /L %%i in (1,1,10) do (
 		set "pathname=!pathname:*.=!"
-		for /L %%i in (1,1,3) do if /I "!pathname!" equ "!ext[%%i]!" (
+		for /L %%i in (1,1,3) do if /i "!pathname!" equ "!ext[%%i]!" (
 			set "dk_getExtension=.!ext[%%i]!"
 			goto endloop
 		)

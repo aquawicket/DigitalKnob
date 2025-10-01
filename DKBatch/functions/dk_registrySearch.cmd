@@ -36,7 +36,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "LINE=%%a"
 		set "LINE=!LINE:~,4!"
 		rem echo LINE = !LINE!
-		if "!LINE!" equ "HKEY" (
+		if /i "!LINE!" equ "HKEY" (
 			set "regpath=%%a"
 			set "value_name="
 			set "value_type="

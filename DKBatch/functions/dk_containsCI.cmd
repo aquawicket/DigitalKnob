@@ -17,7 +17,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "_haystack_=%~1"
     set "_needle_=%~2"
 	
-	if /I NOT "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
+	if /i NOT "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
         if "%~3" neq "" (endlocal & set "%3=true")
 		set "_haystack_="
 		set "_needle_="
@@ -44,13 +44,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set string "There is a NeEdLe in this haystack"
     %dk_call% dk_set substring "needle"
     %dk_call% dk_containsCI "%string%" "%substring%" result
-    if "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+    if /i "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
    
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_containsCI "%string%" "%substring%" result
-    if "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+    if /i "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
     ::FIXME: ERRORLEVEL is still 1
    
    

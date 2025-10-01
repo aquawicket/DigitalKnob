@@ -27,12 +27,12 @@ set "dk_call_IGNORE=dk_debugFunc"
 	)
 
 	:: don't add these functions to the callstack, just call them
-	if "%~1" equ "init"					(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "pushStack"			(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "popStack"				(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "setGlobal" 			(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "setReturn" 			(call :%* & exit /b !errorlevel!)
-	if "%~1" equ "printStackVariables"	(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "init"					(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "pushStack"				(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "popStack"				(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "setGlobal" 			(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "setReturn" 			(call :%* & exit /b !errorlevel!)
+	if /i "%~1" equ "printStackVariables"	(call :%* & exit /b !errorlevel!)
 
 	::###### Stack Variables ######
 	(set __CMND__=%~1)
@@ -42,7 +42,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 	(set __FILENAME__=%~nx1)
 	(set __FUNC__=%~n1)
 	
-	if "!dk_call_IGNORE:%__FUNC__%=!" equ "%dk_call_IGNORE%" (set "__IGNORE__=1") else (set "__IGNORE__=")
+	if /i "!dk_call_IGNORE:%__FUNC__%=!" equ "%dk_call_IGNORE%" (set "__IGNORE__=1") else (set "__IGNORE__=")
 	
 	set dk_allButFirstArgs=%*
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (set __ARGV__=%%b)
@@ -70,7 +70,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 	::###### Entry ############################################################################################
 	if "%dk_call_PRINT_CALLS%" equ "1" (echo dk_call ^> %__CMND__% !__ARGV__!)
 	
-::	if defined dk_call_IGNORE if "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" title DKBatch: %__FUNC__%(%__ARGV__%)
+::	if defined dk_call_IGNORE if /i "X!dk_call_IGNORE:%__FUNC__%=!X" equ "X%dk_call_IGNORE%X" title DKBatch: %__FUNC__%(%__ARGV__%)
 
 	call %__CMND__:/=\% %__ARGV__% && (
 		set "__STATUS__=!errorlevel!"

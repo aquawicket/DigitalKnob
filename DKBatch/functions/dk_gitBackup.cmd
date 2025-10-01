@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
 	if "%~1" neq "" (set "repo_path=%~1")
 	if "%~2" neq "" (set "git_file=%~2")
-	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	if /i "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 
 	::###### error if repository doesn't exist
 	if NOT EXIST "%repo_path%/.git" (

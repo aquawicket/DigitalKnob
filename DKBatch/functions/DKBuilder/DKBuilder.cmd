@@ -17,7 +17,7 @@ if "!DE!" neq "" (echo ERROR: enableDelayedExpansion failed!)
 	set "HDK_CMD=%DKHTTP%/DKBatch/functions/DK.cmd")
 	
 	::###### TEMPORARY for WinPE #######
-	if "%SystemDrive%" equ "X:" (
+	if /i "%SystemDrive%" equ "X:" (
 		if NOT EXIST "%windir%\System32\curl.exe" 		(copy "C:\Windows\System32\curl.exe"		"%windir%\System32\curl.exe")
 		if NOT EXIST "%windir%\System32\certutil.exe" 	(copy "C:\Windows\System32\certutil.exe" 	"%windir%\System32\certutil.exe")
 	)

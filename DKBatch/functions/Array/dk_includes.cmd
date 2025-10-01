@@ -40,6 +40,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			if "%~3" neq "" (endlocal & set "%3=true")
 			endlocal & (set dk_includes=true) & exit /b 0
 		)
+		rem ###### case-insensitive compair ######
+		rem if /i "!%_arry_%[%count%]!" equ "%~2" (
+		rem 	if "%~3" neq "" (endlocal & set "%3=true")
+		rem 	endlocal & (set dk_includes=true) & exit /b 0
+		rem )
 		set /a count+=1
 		goto includes_loop
 	)

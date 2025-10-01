@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	for /f "tokens=1* delims==" %%A in ('wmic os get BuildNumber /value') do (
 	for /f "tokens=*" %%S in ("%%B") do (
-		if "%%A" equ "BuildNumber" set "OS_BUILD=%%S"
+		if /i "%%A" equ "BuildNumber" set "OS_BUILD=%%S"
 	))
 	
 	endlocal & (

@@ -21,7 +21,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	set "_from_=%~1"
 	set "_to_=%~2"
-	if "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
+	if /i "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 	
 	%dk_call% dk_info "Renameing %_from_% to %_to_%"
 	

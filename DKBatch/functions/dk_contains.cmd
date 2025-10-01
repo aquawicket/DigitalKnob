@@ -56,13 +56,13 @@ setlocal
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 	::FIXME: ERRORLEVEL is still 1
 
 	::###### Using user defined return value
@@ -70,13 +70,13 @@ setlocal
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
 	%dk_call% dk_contains "%string%" "%substring%" myResult
-	if "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%" myResult
-	if "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 	::FIXME: ERRORLEVEL is still 1
 
 	::###### Using if ERRORLEVEL

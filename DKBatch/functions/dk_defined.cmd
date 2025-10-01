@@ -37,12 +37,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo
     %dk_call% dk_set _variable_ "is defined"
     %dk_call% dk_defined _variable_ result
-    if "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
+    if /i "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
    
     %dk_call% dk_echo
     %dk_call% dk_unset _variable_
     %dk_call% dk_defined _variable_ result
-    if "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
+    if /i "%result%" equ "true" (echo _variable_ is defined) else (echo _variable_ is NOT defined)
     ::FIXME: ERRORLEVEL is still 1
    
    

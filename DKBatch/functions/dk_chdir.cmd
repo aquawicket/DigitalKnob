@@ -23,8 +23,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_error "dk_chdir(%*): path:%dk_chdir% does NOT EXIST"
 		%return%
 	)
-	if "%DKPWD%" equ "%dk_chdir%" (
-		%dk_call% dk_warning "dk_chdir(%*): DKPWD is already set to %dk_chdir%"
+	if /i "%DKPWD%" equ "%dk_chdir%" (
+		%dk_call% dk_notice "dk_chdir(%*): DKPWD is already set to %dk_chdir%"
 		%return%
 	)
 	cd "%dk_chdir:/=\%"

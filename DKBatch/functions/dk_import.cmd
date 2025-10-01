@@ -33,7 +33,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_basename %Import_Path% Import_Name
 	
 	%dk_call% dk_getParameterValue APP %*
-	if "!%Import_Name%_Type!" equ "APP" (set "APP=1")
+	if /i "!%Import_Name%_Type!" equ "APP" (set "APP=1")
 	if defined APP (
 		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
 		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
@@ -52,19 +52,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_download %PLUGIN_Url%
 	
 	%dk_call% dk_getExtension %PLUGIN_Url% PLUGIN_Url_Extension
-	if "%PLUGIN_Url_Extension%" equ ".7z"		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".bz"		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".bz2" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".gz" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".rar" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".sfx.exe" 	(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".tar" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".tar.gz" 	(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".tgz" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".xz" 		(set "FileType=Archive")
-	if "%PLUGIN_Url_Extension%" equ ".zip" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".7z"		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".bz"		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".bz2" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".gz" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".rar" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".sfx.exe" 	(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".tar" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".tar.gz" 	(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".tgz" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".xz" 		(set "FileType=Archive")
+	if /i "%PLUGIN_Url_Extension%" equ ".zip" 		(set "FileType=Archive")
 	
-	if "%FileType%" equ "Archive" (
+	if /i "%FileType%" equ "Archive" (
 		%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN_Install_Path%"
 	)
 
@@ -81,7 +81,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::	if NOT defined DKOFFLINE (
 ::		rem ###### Import from Git Repository ######
 ::		%dk_call% dk_getExtension %url% extension
-::		if "!extension!" equ ".git" (
+::		if /i "!extension!" equ ".git" (
 ::			
 ::			%dk_call% dk_depend git
 ::			

@@ -43,10 +43,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "padR=!padR!!padchar!"
 	)
 	
-	if "%align%" equ "L" (
+	if /i "%align%" equ "L" (
 		set "rtn_var=!padL!!str!!padR!"
 	)
-	if "%align%" equ "R" (
+	if /i "%align%" equ "R" (
 		set "rtn_var=!padR!!str!!padL!"
 	)
 	

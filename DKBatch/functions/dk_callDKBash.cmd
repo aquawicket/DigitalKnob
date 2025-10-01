@@ -37,11 +37,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_allButFirstArgs %*
 
 	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:=/c%"
-	if "%dk_callDKBash_ENV%" equ "WSL" (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
-	if "%dk_callDKBash_ENV%" equ "WSL" (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
+	if /i "%dk_callDKBash_ENV%" equ "WSL" (set "DKSCRIPT_PATH=%DKSCRIPT_PATH:/c/=/mnt/c/%")
+	if /i "%dk_callDKBash_ENV%" equ "WSL" (set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:/c/=/mnt/c/%")	
 
 	set "PAUSE_ON_EXIT=0"
-	if "%dk_callDKBash_ENV%" equ "WSL" (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
+	if /i "%dk_callDKBash_ENV%" equ "WSL" (set WSLENV=DKSCRIPT_PATH/u:DKBASH_FUNCTIONS_DIR_/u:PAUSE_ON_EXIT/u)
 
 	set DKCOMMAND=%bash_exe% -c '%_path_% %dk_allButFirstArgs%'
 	

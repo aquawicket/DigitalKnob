@@ -23,7 +23,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:done
 	echo DKSHELL_NAME = %DKSHELL_NAME%
 
-	if "%DKSHELL_NAME%" equ "powershell" for /F "tokens=* USEBACKQ" %%F IN (`where powershell.exe`) do set DKSHELL_PATH=%%F
+	if /i "%DKSHELL_NAME%" equ "powershell" for /F "tokens=* USEBACKQ" %%F IN (`where powershell.exe`) do set DKSHELL_PATH=%%F
 	if NOT defined DKSHELL_PATH set "DKSHELL_PATH=%SHELL%"
 	if NOT defined DKSHELL_PATH set "DKSHELL_PATH=%ComSpec%"
 	echo DKSHELL_PATH = %DKSHELL_PATH%

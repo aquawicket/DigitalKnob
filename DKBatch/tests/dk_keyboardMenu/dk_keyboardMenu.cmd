@@ -11,9 +11,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     ::%dk_call% dk_debugFunc 1 99
  setlocal
 
-	if "%~1" equ "NEW" echo dk_keyboardMenu NEW
-	if "%~1" equ "ADD" echo dk_keyboardMenu ADD
-	if "%~1" equ "RUN" echo dk_keyboardMenu RUN
+	if /i "%~1" equ "NEW" echo dk_keyboardMenu NEW
+	if /i "%~1" equ "ADD" echo dk_keyboardMenu ADD
+	if /i "%~1" equ "RUN" echo dk_keyboardMenu RUN
       
     %dk_call% dk_echo
     echo  1)  Option1

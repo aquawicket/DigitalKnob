@@ -16,7 +16,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "_file_=%~1"
 
 	for /f "delims== tokens=1,2" %%A in (%_file_:/=\%) do (
-		if "%%A" equ "%~2" (
+		if /i "%%A" equ "%~2" (
 			endlocal & (
 				set "%~2=%%B"
 			)

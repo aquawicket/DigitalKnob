@@ -84,7 +84,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	::###### output ######
 	endlocal & (
 		set "Test/dk_test=%Test/dk_test%"
-		if "%~1" equ "RTN_VAR" (
+		if /i "%~1" equ "RTN_VAR" (
 			set "%~1=%Test/dk_test%"
 		) else (
 			echo %Test/dk_test%

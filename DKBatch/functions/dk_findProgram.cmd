@@ -39,9 +39,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "dk_findProgram=%dk_exec:\=/%"
 
 	if NOT EXIST "%dk_exec%" (
-		if "%~4" equ "NO_ERROR" (
+		if /i "%~4" equ "NO_ERROR" (
 			%dk_call% dk_return 0
-		) else if "%~4" equ "NO_HALT" (
+		) else if /i "%~4" equ "NO_HALT" (
 			%dk_call% dk_return 0 "%_filename_% NOT found"
 		) else (
 			%dk_call% dk_return -1 "%_filename_% NOT found"

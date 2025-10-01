@@ -5,8 +5,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#################################################################################################################################################
 
 
-if "%~1" equ ":dk_keyboard.BeginReceiving" goto %1
-if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
+if /i "%~1" equ ":dk_keyboard.BeginReceiving" goto %1
+if /i "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 
 ::################################################################################
 ::# dk_keyboard()
@@ -19,7 +19,7 @@ if "%~1" equ ":dk_keyboard.Keyboard_Loop" goto %1
 
     echo dk_keyboard %*
    
-    if "%~1" equ "callback" set callback=%~2 %~3
+    if /i "%~1" equ "callback" set callback=%~2 %~3
     ::if defined callback echo callback = %callback%
     %dk_call% dk_debugFunc 0 3 || %dk_call% dk_error "%dk_call% dk_debugFunc failed!"
    

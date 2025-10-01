@@ -38,10 +38,10 @@
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set ERROR_CODE=%ERRORLEVEL%
-if "%~1" equ "IF_ERROR" (goto :IF_ERROR)
-if "%~1" equ "ERROR" (goto :ERROR)
-if "%~1" equ "IF_FATAL" (goto :IF_FATAL)
-if "%~1" equ "FATAL" (goto :FATAL)
+if /i "%~1" equ "IF_ERROR" (goto :IF_ERROR)
+if /i "%~1" equ "ERROR" (goto :ERROR)
+if /i "%~1" equ "IF_FATAL" (goto :IF_FATAL)
+if /i "%~1" equ "FATAL" (goto :FATAL)
 
 :IF_ERROR
 if "%ERROR_CODE%" neq "0" (

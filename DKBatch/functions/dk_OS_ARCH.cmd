@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	for /f "tokens=1* delims==" %%A in ('wmic os get OSArchitecture /value') do (
 	for /f "tokens=*" %%S in ("%%B") do (
-		if "%%A" equ "OSArchitecture" set "OS_ARCH=%%S"
+		if /i "%%A" equ "OSArchitecture" set "OS_ARCH=%%S"
 	))
 	
 	endlocal & (

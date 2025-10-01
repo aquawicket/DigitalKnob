@@ -40,7 +40,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 :dk_debugFunc
 %setlocal%
 	
-	if "%__FUNC__%" equ "dk_debugFunc" %endfunction%
+	if /i "%__FUNC__%" equ "dk_debugFunc" %endfunction%
 	if NOT defined __FUNC__ (%endfunction%)
 	
     :: ###### VALIDATE ARGUMENTS ######

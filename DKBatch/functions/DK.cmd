@@ -253,7 +253,7 @@ echo ### ERROR: SHOULD NOT GET HERE ### ^& pause
 	if NOT EXIST "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
 	if NOT EXIST "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
 	if EXIST "%DKCACHE_DIR%" (
-		if "%DKSCRIPT_NAME%" equ "DKBuilder" (
+		if /i "%DKSCRIPT_NAME%" equ "DKBuilder" (
 			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
 		)
 	)
@@ -398,7 +398,7 @@ setlocal enableDelayedExpansion
 	%pushStack%
 	%dk_call% dk_debugFunc 0
 
-	if "%DKSCRIPT_NAME%" equ "DK" (
+	if /i "%DKSCRIPT_NAME%" equ "DK" (
 		echo cannot call DK.cmd from itself
 		%return%
 	)

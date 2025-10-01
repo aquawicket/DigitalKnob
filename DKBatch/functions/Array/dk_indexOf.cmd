@@ -47,6 +47,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			endlocal & set "dk_indexOf=%_count_%"
 			%endfunction%
 		)
+		::###### case-insensitive compair ######
+		::if /i "%~2" equ "%_value_%" (
+		::	endlocal & set "dk_indexOf=%_count_%"
+		::	%endfunction%
+		::)
 
 		set /a "_count_+=1"
 	goto indexOf_loop

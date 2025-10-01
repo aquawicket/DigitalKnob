@@ -14,7 +14,7 @@ set "bash_Default=git" &:: git, msys2, wsl
 	%dk_call% dk_debugFunc 1
 	
 	if exist "%bash_exe%" (
-		if "%bash_env%" equ "%~1" (
+		if /i "%bash_env%" equ "%~1" (
 			%return%
 		)
 	)
@@ -32,7 +32,7 @@ set "bash_Default=git" &:: git, msys2, wsl
 	)
 		
 	rem ###### msys2 ######
-	if "%bash_env%" equ "msys2" (
+	if /i "%bash_env%" equ "msys2" (
 		%dk_call% dk_validate msys2 "%dk_call% dk_depend msys2"
 		set "msys2_bash_exe=!msys2!/usr/bin/bash.exe"
 		set "msys2_bash_icon=!msys2!/msys2.exe"
@@ -41,7 +41,7 @@ set "bash_Default=git" &:: git, msys2, wsl
 	)
 	
 	rem ###### WSL ######
-	if "%bash_env%" equ "wsl" (
+	if /i "%bash_env%" equ "wsl" (
 		%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
 		set "wsl_bash_exe=%windir:\=/%/System32/bash.exe"
 		set "wsl_bash_icon=!wsl_exe!"

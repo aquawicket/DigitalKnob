@@ -15,7 +15,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	for /f "tokens=1* delims==" %%A in ('wmic os get Caption /value') do (
 	for /f "tokens=*" %%S in ("%%B") do (
-		if "%%A" equ "Caption" set "OS_NAME=%%S"
+		if /i "%%A" equ "Caption" set "OS_NAME=%%S"
 	))
 	
 	endlocal & (

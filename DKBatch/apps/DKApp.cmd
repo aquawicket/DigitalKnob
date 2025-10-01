@@ -4,7 +4,7 @@ set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" equ "%func:~0,1%" (goto %func%)
 
-if "%~1" equ "DKApp.onKeyDown" (goto:%~1)
+if /i "%~1" equ "DKApp.onKeyDown" (goto:%~1)
 
 
 ::### get _argc and _argv ###

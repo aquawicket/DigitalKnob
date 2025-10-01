@@ -13,7 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_debugFunc 0 99
 
     :getParameter_loop
-	if "%~1" equ "%~2" (
+	if /i "%~1" equ "%~2" (
 		if "%~3" equ "" (set "_value_=1")
 		if "%~3" neq "" (set "_value_=%~3")
 		goto end_getParameter_loop

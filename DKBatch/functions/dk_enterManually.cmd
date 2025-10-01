@@ -33,7 +33,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_folderName "%Target_App_Dir%" parent
 	%dk_call% dk_printVar parent
 
-	if "%parent%" equ "apps" %return%
+	if /i "%parent%" equ "apps" %return%
 	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%\%Target_App%"
 
 	:: create apps/<Target_App>/DKINSTALL.cmake

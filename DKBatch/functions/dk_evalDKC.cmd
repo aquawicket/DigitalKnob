@@ -61,7 +61,7 @@ if NOT defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 	if NOT defined Target_Env (set "Target_Env=%dk_evalDKC_Default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 	
-	if "%Target_Env%" equ "cosmocc" (
+	if /i "%Target_Env%" equ "cosmocc" (
 		set "Target_Os=cosmocc"
 		set "Target_Arch=cosmocc"
 	)
@@ -70,19 +70,19 @@ if NOT defined dk_evalDKC_Default_Target_Env (set "dk_evalDKC_Default_Target_Env
 
 	::###### COMPILER_EXE ######
 	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	if "%Target_Env%" equ "cosmocc" (
+	if /i "%Target_Env%" equ "cosmocc" (
 		%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh_exe"
 		%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc"
 		%dk_call% dk_assertPath COSMOCC_C_COMPILER
 		set "COMPILER_EXE=!sh_exe! !COSMOCC_C_COMPILER!"
 	)
 
-	if "%Target_Env%" equ "clang" (
+	if /i "%Target_Env%" equ "clang" (
 		%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend clang"
 		%dk_call% dk_assertPath CLANG_C_COMPILER
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
-	if "%Target_Env%" equ "gcc" (
+	if /i "%Target_Env%" equ "gcc" (
 		%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend gcc"
 		%dk_call% dk_assertPath GCC_C_COMPILER
 		set "COMPILER_EXE=!GCC_C_COMPILER!"
