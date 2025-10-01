@@ -45,7 +45,7 @@ elseif(Emscripten)
 		dk_set(CMAKE_MAKE_PROGRAM	make)
 	else()
 		dk_depend(emsdk)
-		dk_set(CMAKE_MAKE_PROGRAM	"${EMSDK}/upstream/emscripten/emmake${bat}")
+		dk_set(CMAKE_MAKE_PROGRAM	"${emsdk}/upstream/emscripten/emmake${bat}")
 	endif()
 	
 elseif(Windows_Arm64_Clang)

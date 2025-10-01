@@ -47,7 +47,7 @@ function(dk_make)
 	# https://github.com/emscripten-core/emscripten/issues/2005#issuecomment-32162107
 	if(Emscripten)
 		dk_error("No proper dk_make() implemented for Emscripten" NO_HALT)
-		dk_set(EMMAKE ${EMSDK}/upstream/emscripten/emmake)
+		dk_set(EMMAKE ${emsdk}/upstream/emscripten/emmake)
 		dk_chdir(${Source_Dir}/${Target_Config})
 		
 		if(Target)

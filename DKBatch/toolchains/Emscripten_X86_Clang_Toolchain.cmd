@@ -17,7 +17,7 @@ set CMAKE_GENERATOR="Unix Makefiles"
 ::	%dk_call% dk_echo "paused in Emscripten toolchain because Android_Host"
 ::	%return%
 ::)
-::%dk_call% dk_validate EMSDK						"%dk_call% dk_depend emsdk"
+::%dk_call% dk_validate emsdk						"%dk_call% dk_depend emsdk"
 ::%dk_call% dk_set CMAKE_GENERATOR					"Unix Makefiles"
 ::if defined Windows_Host (
 ::	%dk_call% dk_validate MSYS2 					"%dk_call% dk_depend msys2"
@@ -26,11 +26,11 @@ set CMAKE_GENERATOR="Unix Makefiles"
 ::) else if defined Linux_Host (
 ::	%dk_call% dk_set CMAKE_MAKE_PROGRAM				make
 ::) else (
-::	%dk_call% dk_set CMAKE_MAKE_PROGRAM				"%EMSDK%/upstream/emscripten/emmake%bat%"
+::	%dk_call% dk_set CMAKE_MAKE_PROGRAM				"%emsdk%/upstream/emscripten/emmake%bat%"
 ::)
-::%dk_call% dk_set CMAKE_TOOLCHAIN_FILE 			"%EMSDK%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmd"
-::%dk_call% dk_set CMAKE_C_COMPILER					"%EMSDK%/upstream/emscripten/emcc%bat%"
-::%dk_call% dk_set CMAKE_CXX_COMPILER				"%EMSDK%/upstream/emscripten/em++%bat%"
+::%dk_call% dk_set CMAKE_TOOLCHAIN_FILE 			"%emsdk%/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmd"
+::%dk_call% dk_set CMAKE_C_COMPILER					"%emsdk%/upstream/emscripten/emcc%bat%"
+::%dk_call% dk_set CMAKE_CXX_COMPILER				"%emsdk%/upstream/emscripten/em++%bat%"
 rem  %dk_call% dk_append CMAKE_C_FLAGS				-DEMSDK -std=gnu11
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DEMSDK -std=gnu++17)
 ::%dk_call% dk_set CMAKE_C_COMPILER_WORKS			1

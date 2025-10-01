@@ -697,12 +697,12 @@ elseif(Emscripten)
 	if(Debug)
 		if(Windows_Host)
 			set(RUN_SCRIPT_DEBUG
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html"
+				"${emsdk_ENV} & ${emsdk}/upstream/emscripten/emrun.bat ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html"
 			)
 			dk_fileWrite(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/Run.bat ${RUN_SCRIPT_DEBUG})
 		else()
 			set(RUN_SCRIPT_DEBUG
-				"\#!/bin/bash\n${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html"
+				"\#!/bin/bash\n${emsdk_ENV} & ${emsdk}/upstream/emscripten/emrun ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html"
 			)
 			dk_fileWrite(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/Run.sh "${RUN_SCRIPT_DEBUG}")
 			dk_exec(chmod 777 ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/Run.sh)
@@ -711,13 +711,13 @@ elseif(Emscripten)
 	if(Release)
 		if(Windows_Host)
 			set(RUN_SCRIPT_RELEASE
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun.bat ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html"
+				"${emsdk_ENV} & ${emsdk}/upstream/emscripten/emrun.bat ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html"
 			)
 			dk_fileWrite(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/Run.bat ${RUN_SCRIPT_RELEASE})
 		else()
 			set(RUN_SCRIPT_RELEASE
 				"\#!/bin/bash\n"
-				"${EMSDK_ENV} & ${EMSDK}/upstream/emscripten/emrun ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html"
+				"${emsdk_ENV} & ${emsdk}/upstream/emscripten/emrun ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html"
 			)
 			dk_fileWrite(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/Run.sh ${RUN_SCRIPT_RELEASE})
 			dk_exec(chmod 777 ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/Run.sh)

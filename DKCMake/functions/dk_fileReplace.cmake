@@ -56,8 +56,8 @@ function(DKTEST)
 	
 	dk_fileReplace("C:/Users/Administrator/DigitalKnob/Development/README.md" "replaced" "DigitalKnob")
 	
-	dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
-	#dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
+	dk_fileReplace("${emsdk_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
+	#dk_fileReplace("${emsdk_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
 	
 	set(filepath "C:/Users/Administrator/DigitalKnob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
 	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_RELEASE" "#set(CMAKE_CXX_FLAGS_RELEASE")
