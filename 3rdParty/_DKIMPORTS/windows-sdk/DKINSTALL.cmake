@@ -28,4 +28,6 @@ include_guard()
 
 
 dk_import()
-dk_exec("${dk_download}")
+dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+dk_debug("${DKDOWNLOAD_DIR}/${${CURRENT_PLUGIN}_Download_Basename}")
+dk_exec("${DKDOWNLOAD_DIR}/${${CURRENT_PLUGIN}_Download_Basename}")

@@ -40,14 +40,16 @@ elseif(Windows_X86_64_Gcc)
 	dk_set(LIBBCRYPT_LIB "${msys2}/mingw64/lib/libbcrypt.a")
 
 # MSVC
+#set(WINSDK_VER "10.0.22621.0")
+set(WINSDK_VER "10.0.26100.0")
 elseif(Windows_Arm32_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm/bcrypt.lib")
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/${WINSDK_VER}/um/arm/bcrypt.lib")
 elseif(Windows_Arm64_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/arm64/bcrypt.lib")
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/${WINSDK_VER}/um/arm64/bcrypt.lib")
 elseif(Windows_X86_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x86/bcrypt.lib")
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/${WINSDK_VER}/um/x86/bcrypt.lib")
 elseif(Windows_X86_64_Msvc)
-	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64/bcrypt.lib")
+	dk_set(LIBBCRYPT_LIB "$ENV{SystemDrive}/Program Files (x86)/Windows Kits/10/Lib/${WINSDK_VER}/um/x64/bcrypt.lib")
 	
 # Ucrt
 elseif(Windows_X86_64_Ucrt)
