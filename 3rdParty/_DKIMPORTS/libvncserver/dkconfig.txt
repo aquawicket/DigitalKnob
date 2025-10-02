@@ -1,0 +1,5 @@
+############ libvncserver ############
+# https://github.com/LibVNC/libvncserver.git
+# https://github.com/LibVNC/libvncserver/archive/f7735c48.zip
+
+libvncserver_Import=https://github.com/LibVNC/libvncserver/archive/f7735c48.zip
