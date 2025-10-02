@@ -104,7 +104,7 @@ fi
 [ -z ${dk_log_TODO_TRACE-} ]			&& dk_log_TODO_TRACE=0
 [ -z ${dk_log_TODO_LINE-} ]				&& dk_log_TODO_LINE=0
 [ -z ${dk_log_TODO_SOUND-} ]			&& dk_log_TODO_SOUND=0
-[ -z ${dk_log_TODO_TIMEOUT-} ]			&& dk_log_TODO_TIMEOUT=1
+[ -z ${dk_log_TODO_TIMEOUT-} ]			&& dk_log_TODO_TIMEOUT=0
 [ -z ${dk_log_TODO_PAUSE-} ]			&& dk_log_TODO_PAUSE=0
 [ -z ${dk_log_TODO_HALT-} ]				&& dk_log_TODO_HALT=0
 
@@ -126,7 +126,7 @@ fi
 [ -z ${dk_log_FIXME_TRACE-} ]			&& dk_log_FIXME_TRACE=0
 [ -z ${dk_log_FIXME_LINE-} ]			&& dk_log_FIXME_LINE=0
 [ -z ${dk_log_FIXME_SOUND-} ]			&& dk_log_FIXME_SOUND=0
-[ -z ${dk_log_FIXME_TIMEOUT-} ]			&& dk_log_FIXME_TIMEOUT=3
+[ -z ${dk_log_FIXME_TIMEOUT-} ]			&& dk_log_FIXME_TIMEOUT=0
 [ -z ${dk_log_FIXME_PAUSE-} ]			&& dk_log_FIXME_PAUSE=0
 [ -z ${dk_log_FIXME_HALT-} ]			&& dk_log_FIXME_HALT=0
 
@@ -160,7 +160,7 @@ fi
 [ -z ${dk_log_ERROR_LINE-} ]			&& dk_log_ERROR_LINE=0
 [ -z ${dk_log_ERROR_SOUND-} ]			&& dk_log_ERROR_SOUND=0
 [ -z ${dk_log_ERROR_TIMEOUT-} ]			&& dk_log_ERROR_TIMEOUT=0
-[ -z ${dk_log_ERROR_PAUSE-} ]			&& dk_log_ERROR_PAUSE=1
+[ -z ${dk_log_ERROR_PAUSE-} ]			&& dk_log_ERROR_PAUSE=0
 [ -z ${dk_log_ERROR_HALT-} ]			&& dk_log_ERROR_HALT=0
 
 # FATAL
@@ -171,7 +171,7 @@ fi
 [ -z ${dk_log_FATAL_LINE-} ]			&& dk_log_FATAL_LINE=0
 [ -z ${dk_log_FATAL_SOUND-} ]			&& dk_log_FATAL_SOUND=0
 [ -z ${dk_log_FATAL_TIMEOUT-} ]			&& dk_log_FATAL_TIMEOUT=0
-[ -z ${dk_log_FATAL_PAUSE-} ]			&& dk_log_FATAL_PAUSE=1
+[ -z ${dk_log_FATAL_PAUSE-} ]			&& dk_log_FATAL_PAUSE=0
 [ -z ${dk_log_FATAL_HALT-} ]			&& dk_log_FATAL_HALT=0
 
 ##################################################################################

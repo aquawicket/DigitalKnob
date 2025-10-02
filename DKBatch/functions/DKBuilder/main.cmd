@@ -20,12 +20,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_validate DKBRANCH_DIR		"%dk_call% dk_DKBRANCH_DIR"
 	
 	if NOT EXIST "%DKDESKTOP_DIR%/DigitalKnob.lnk" (
-		rem NOTE: Version v4.0.30319 of the .NET Framework is not installed and it is required to run version 3 of Windows PowerShell.
-		rem %dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
+		%dk_call% dk_createShortcut "%DIGITALKNOB_DIR%" "%DKDESKTOP_DIR%/DigitalKnob.lnk"
 	)
 	
-	::NOTE: Version v4.0.30319 of the .NET Framework is not installed and it is required to run version 3 of Windows PowerShell.
-	::%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
+	%dk_call% dk_quickAccessPin "%DIGITALKNOB_DIR%"
 	
 	if NOT EXIST "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" (
 		%dk_call% dk_download "%DKHTTP_DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd"
@@ -35,7 +33,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_createSymlink "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%DKDESKTOP_DIR%/DKBuilder.cmd"
 	)
 
-	
 	%dk_call% dk_unset pickUpdate
 	%dk_call% dk_unset Target_App
 	%dk_call% dk_unset Target_Os
@@ -88,19 +85,110 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		if defined Target_Env	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Env_Cache=%Target_Env%")
 		if defined Target_Type	(%dk_call% dk_fileAppend	"%DKCACHE_DIR%/DKBuilder.cache" "Target_Type_Cache=%Target_Type%")
 		
-		::### If we are on windows, we can build linux through WSL (Windows Subsystem fo Linux)
-		:: wslpath -u 
+		::### TODO: handle disabled tuples
+		::# Android 		Arm32			Clang		Debug
+		::# Android 		Arm32			Clang		Release
+		::# Android 		Arm64 			Clang		Debug
+		::# Android 		Arm64 			Clang		Release
+		::# Android 		X86 			Clang		Debug
+		::# Android 		X86 			Clang		Release
+		::# Android 		X86_64 			Clang		Debug
+		::# Android 		X86_64 			Clang		Release
+		::# Cosmo			Cosmo			Cosmo		Debug
+		::# Cosmo			Cosmo			Cosmo		Release
+		::# Emscripten 		X86 			Clang		Debug
+		::# Emscripten 		X86 			Clang		Release
+		::# Ios 			Arm32 			Clang		Debug
+		::# Ios 			Arm32 			Clang		Release
+		::# Ios 			Arm64 			Clang		Debug
+		::# Ios 			Arm64 			Clang		Release
+		::# Ios 			X86 			Clang		Debug
+		::# Ios 			X86 			Clang		Release
+		::# Ios 			X86_64 			Clang		Debug
+		::# Ios 			X86_64 			Clang		Release
+		::# Iossim 			Arm32 			Clang		Debug
+		::# Iossim 			Arm32 			Clang		Release
+		::# Iossim 			Arm64 			Clang		Debug
+		::# Iossim 			Arm64 			Clang		Release
+		::# Iossim 			X86 			Clang		Debug
+		::# Iossim 			X86 			Clang		Release
+		::# Iossim 			X86 			Clang		Debug
+		::# Iossim 			X86 			Clang		Release
+		::# Linux 			Arm32 			Clang		Debug
+		::# Linux 			Arm32 			Clang		Release
+		::# Linux 			Arm32 			Gcc			Debug
+		::# Linux 			Arm32 			Gcc			Release
+		::# Linux 			Arm64 			Clang		Debug
+		::# Linux 			Arm64 			Clang		Release
+		::# Linux 			Arm64 			Gcc			Debug
+		::# Linux 			Arm64 			Gcc			Release
+		::# Linux 			X86 			Clang		Debug
+		::# Linux 			X86 			Clang		Release
+		::# Linux 			X86 			Gcc			Debug
+		::# Linux 			X86 			Gcc			Release
+		::# Linux 			X86_64 			Clang		Debug
+		::# Linux 			X86_64 			Clang		Release
+		::# Linux 			X86_64 			Gcc			Debug
+		::# Linux 			X86_64 			Gcc			Release
+		::# Mac 			Arm32 			Clang		Debug
+		::# Mac 			Arm32 			Clang		Release
+		::# Mac 			Arm64 			Clang		Debug
+		::# Mac 			Arm64 			Clang		Release
+		::# Mac 			X86 			Clang		Debug
+		::# Mac 			X86 			Clang		Release
+		::# Mac 			X86_64 			Clang		Debug
+		::# Mac 			X86_64 			Clang		Release
+		::# Raspberry 		Arm32 			Clang		Debug
+		::# Raspberry 		Arm32 			Clang		Release
+		::# Raspberry 		Arm32 			Gcc			Debug
+		::# Raspberry 		Arm32 			Gcc			Release
+		::# Raspberry 		Arm64 			Clang		Debug
+		::# Raspberry 		Arm64 			Clang		Release
+		::# Raspberry 		Arm64 			Gcc			Debug
+		::# Raspberry 		Arm64 			Gcc			Release
+		::# Windows 		Arm32 			Clang		Debug
+		::# Windows 		Arm32 			Clang		Release
+		::# Windows 		Arm32 			Gcc			Debug
+		::# Windows 		Arm32 			Gcc			Release
+		::# Windows 		Arm32 			Msvc		Debug
+		::# Windows 		Arm32 			Msvc		Release
+		::# Windows 		Arm64 			Clang		Debug
+		::# Windows 		Arm64 			Clang		Release
+		::# Windows 		Arm64 			Gcc			Debug
+		::# Windows 		Arm64 			Gcc			Release
+		::# Windows 		Arm64 			Msvc		Debug
+		::# Windows 		Arm64 			Msvc		Release
+		::# Windows 		X86 			Clang		Debug
+		::# Windows 		X86 			Clang		Release
+		::# Windows 		X86 			Gcc			Debug
+		::# Windows 		X86 			Gcc			Release
+		::# Windows 		X86 			Msvc		Debug
+		::# Windows 		X86 			Msvc		Release
+		::# Windows 		X86_64 			Clang		Debug
+		::# Windows 		X86_64 			Clang		Release
+		::# Windows 		X86_64 			Gcc			Debug
+		::# Windows 		X86_64 			Gcc			Release
+		::# Windows 		X86_64 			Msvc		Debug
+		::# Windows 		X86_64 			Msvc		Release
+		::# Windows 		X86_64 			Ucrt		Debug
+		::# Windows 		X86_64 			Ucrt		Release
+		
+		::### On Windows_Host, we can build linux through WSL (Windows Subsystem fo Linux)
 		if /i "%Target_Os%" equ "Linux" (
 			set "wsl_exe=%windir:\=/%/System32/wsl.exe"
-			set "DKBASH_APPS_DIR=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps"
-			%wsl_exe% %DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh
+			rem set "DKBASH_APPS_DIR=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps"
+			set "DKBuilder_sh=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh"
+			set "pickUpdate=1"
+			set WSLENV=%WSLENV%:pickUpdate:Target_App:Target_Os:Target_Arch:Target_Env:Target_Type:Target_Tuple
+			rem %wsl_exe% /bin/bash -c "%DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh"
+			%wsl_exe% /bin/bash -c "%DKBuilder_sh%"
 			goto while_loop
 		)
 		
 		::### Pass the Target variables to CMake to take over
 		::########### cmake Command ###################
 		%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
-		%dk_call% dk_chdir %DKCPP_APPS_DIR%/%Target_App%
+		%dk_call% dk_chdir "%DKCPP_APPS_DIR%/%Target_App%"
 		%dk_call% dk_validate cmake_exe "%dk_call% dk_depend cmake"
 		%cmake_exe% -P "%DKCPP_APPS_DIR%/%Target_App%/DKINSTALL.cmake"
 		

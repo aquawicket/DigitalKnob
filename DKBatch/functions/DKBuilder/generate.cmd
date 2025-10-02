@@ -56,14 +56,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	set "Target_Level=RebuildAll"
 	set "Target_Link=Static"
 
-	::if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	::if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	::if /i "%Target_Type%"	equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	::if /i "%Target_Level%" equ "Build"		(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
-	::if /i "%Target_Level%" equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
-	::if /i "%Target_Level%" equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
-	::if /i "%Target_Link%"	equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
-	::if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	::if /i "%Target_Type%"		equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	::if /i "%Target_Type%"		equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	::if /i "%Target_Type%"		equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	::if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
+	::if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
+	::if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
+	::if /i "%Target_Link%"		equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
+	::if /i "%Target_Link%"		equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 	
 	if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_set Debug 1)
 	if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_set Release 1)

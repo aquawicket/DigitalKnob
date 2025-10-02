@@ -137,7 +137,7 @@ dk_buildMain() {
 	
 	while :
 	do
-		if [ -z "${UPDATE-}" ];     then dk_pickUpdate;  continue; fi
+		if [ -z "${pickUpdate-}" ];     then dk_pickUpdate;  continue; fi
 		if [ -z "${Target_App-}" ];        then dk_Target_App;     continue; fi
 		if [ -z "${Target_Tuple-}" ];  then dk_pickOs;      continue; fi
 		if [ -z "${Target_Type-}" ];       then dk_Target_Type;    continue; fi
@@ -146,7 +146,7 @@ dk_buildMain() {
 		dk_generate	
 		dk_buildApp
 		
-		unset UPDATE
+		unset pickUpdate
 		unset Target_App
 		unset Target_Tuple
 		unset Target_Type
@@ -216,7 +216,7 @@ dk_pickUpdate() {
 		Target_App=$Target_App_Cache
 		Target_Tuple=$Target_Tuple_Cache
 		Target_Type=$Target_Type_Cache
-		UPDATE=1
+		pickUpdate=1
 	elif [ "${input}" = "1" ]; then
 		dk_gitUpdate
 	elif [ "${input}" = "2" ]; then
@@ -236,7 +236,7 @@ dk_pickUpdate() {
 	elif [ "${input}" = "9" ]; then
 		exit 0	
 	elif [ "${input}" = "" ]; then
-		UPDATE=1
+		pickUpdate=1
 	else
 		dk_warning "invalid selection"
 	fi
@@ -289,7 +289,7 @@ dk_Target_App() {
 	elif [ "${input}" = "9" ]; then
 		clear
 	elif [ "${input}" = "10" ]; then
-		UPDATE=
+		pickUpdate=
 	elif [ "${input}" = "11" ]; then
 		dk_call dk_reload
 	elif [ "${input}" = "12" ]; then

@@ -20,18 +20,26 @@ include_guard()
 function(dk_title)
     dk_debugFunc(0 99)
  
-	#dk_validate(cmd_exe "dk_depend(cmd_exe)")
-
-	if(EXISTS "${cmd_exe}")
-		execute_process(COMMAND ${cmd_exe} /c title ${ARGV})
-	elseif(EXISTS "$ENV{ComSpec}")
-		execute_process(COMMAND $ENV{ComSpec} /c title ${ARGV})
+	############ SET ############
+	if(ARGV0)
+		set(dk_title "${ARGV0}")
+		
+		dk_validate(cmd_exe "dk_depend(cmd_exe)")
+		if(EXISTS "${cmd_exe}")
+			execute_process(COMMAND ${cmd_exe} /c title ${dk_title})
+		elseif(EXISTS "$ENV{ComSpec}")
+			execute_process(COMMAND $ENV{ComSpec} /c title ${dk_title})
+		endif()
+	
+	############ GET ############
 	else()
-		execute_process(COMMAND cmd.exe /c title ${ARGV})
+		# TODO
+		message("${dk_title}") 
 	endif()
 	
-	###### method_2: dk_callDKBatch ######
-	# dk_callDKBatch(dk_title ${ARGV})
+	###### output ######
+	set(dk_title ${dk_title} PARENT_SCOPE)
+
 endfunction()
 
 
@@ -48,7 +56,29 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
 
-    dk_title("------------DKCMake: dk_title TEST 1 ..............")
+	### SET ###
+	dk_title("------------DKCMake: dk_title TEST 1 ..............")
+	
+	### GET ###
+	dk_title()
+	dk_echo("dk_title = ${dk_title}")
+	dk_pause()
+	
+	
+	### SET ###
     dk_title("------------DKCMake: dk_title TEST 2 ..............")
+	
+	### GET ###
+	dk_title()
+	dk_echo("dk_title = ${dk_title}")
+	dk_pause()
+	
+	
+	### SET ###
 	dk_title("------------DKCMake: dk_title TEST 3 ..............")
+	
+	### GET ###
+	dk_title()
+	dk_echo("dk_title = ${dk_title}")
+	dk_pause()
 endfunction()

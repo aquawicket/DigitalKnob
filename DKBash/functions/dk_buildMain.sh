@@ -4,12 +4,12 @@ if [ -z "${DK_LOADED-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')								&& echo "cmd_exe = ${cmd_exe}"
-	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
-	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')	&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})								&& echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)									&& echo "bash_exe = ${bash_exe}"
 	[ -e "${DK_SH}" ]					|| export DK_SH="$(dirname $0)/DK.sh"									&& echo "DK_SH = ${DK_SH}"
 	[ -e "${DK_SH}" ]					|| export DK_SH=$(find "${HOME}" -name "DK.sh")							&& echo "DK_SH = ${DK_SH}"
-	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*								|| exec "${DK_SH}" "$0" $*
 fi
 ##################################################################################
 
@@ -51,10 +51,10 @@ dk_buildMain() {
 	
 	while :
 	do
-		[ -z "${UPDATE-}" ] && dk_call dk_pickUpdate || true
+		[ -z "${pickUpdate-}" ] && dk_call dk_pickUpdate || true
 		
 		if [ -e "${BUILD_LIST_FILE-}" ]; then
-			UPDATE=1
+			pickUpdate=1
 			declare -A BUILD_LIST
 			dk_call dk_fileToMatrix "${BUILD_LIST_FILE}" BUILD_LIST
 			[ -n "${_line-}" ] || _line=0
@@ -76,7 +76,7 @@ dk_buildMain() {
 					Target_Tuple="${BUILD_LIST[${_line},1]}"
 					Target_Type="${BUILD_LIST[${_line},2]}"
 #					echo ""
-#					echo "UPDATE = ${UPDATE-}"
+#					echo "pickUpdate = ${pickUpdate-}"
 #					echo "_line = ${_line}"
 #					echo "0 = ${BUILD_LIST[${_line},0]-}"
 #					echo "1 = ${BUILD_LIST[${_line},1]-}"
@@ -88,7 +88,7 @@ dk_buildMain() {
 				fi
 			fi
 		fi
-		echo "UPDATE 		= ${UPDATE-}"
+		echo "pickUpdate 	= ${pickUpdate-}"
 		echo "Target_App 	= ${Target_App-}"
 		echo "Target_Os 	= ${Target_Os-}"
 		echo "Target_Arch 	= ${Target_Arch-}"
@@ -104,7 +104,7 @@ dk_buildMain() {
 		[ -z "${Target_Tuple-}" ] 	&& dk_call dk_Target_Tuple
 		
 		# save selections to DKBuilder.cache file
-		dk_call dk_validate DKCACHE_DIR "dk_DKCACHE_DIR"
+		dk_call dk_validate DKCACHE_DIR "dk_call dk_DKCACHE_DIR"
 		dk_call dk_fileWrite "${DKCACHE_DIR}/DKBuilder.cache" "Target_App_Cache=${Target_App-}"
 		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Os_Cache=${Target_Os-}"
 		dk_call dk_fileAppend "${DKCACHE_DIR}/DKBuilder.cache" "Target_Arch_Cache=${Target_Arch-}"
@@ -124,7 +124,7 @@ dk_buildMain() {
 		#dk_call dk_buildApp
 		
 		if [ ! -e "${BUILD_LIST_FILE-}" ]; then
-			dk_call dk_unset UPDATE
+			dk_call dk_unset pickUpdate
 		fi
 		dk_call dk_unset Target_App
 		dk_call dk_unset Target_Os
