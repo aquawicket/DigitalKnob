@@ -75,7 +75,10 @@ function(dk_download)
     #dk_assertVar(url)
 	#dk_printVar(url)							# https://aquawicket.com/download/myFile.txt
 	
-	dk_getUrl(${url} url)						# get the true url if redirect
+	dk_httpResponse(${url})
+	if((${dk_httpResponse} GREATER 299) AND (${dk_httpResponse} LESS 400))
+		dk_getUrl(${url} url)						# get the true url if redirect
+	endif()
 	dk_dirname(${url} url_dir)
 	dk_assertVar(url_dir)
 	dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
@@ -197,6 +200,6 @@ function(DKTEST)
 	
 	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
 	
-	dk_download("https://github.com/aquawicket/DigitalKnob/archive/2bba2848909f18f0903faab902193afd3a7dacf4.zip")
+	dk_download("https://go.microsoft.com/fwlink/?linkid=2289980")
 	dk_echo("dk_download = ${dk_download}")
 endfunction()

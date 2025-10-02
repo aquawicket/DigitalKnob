@@ -1,6 +1,3 @@
-HelloWorld		Linux 			X86_64 			Clang		Release
-HelloWorld		Windows 		X86_64 			Clang		Release
-
 ########################### HelloWorld ##########################
 HelloWorld		Android 		Arm32			Clang		Debug
 HelloWorld		Android 		Arm32			Clang		Release
