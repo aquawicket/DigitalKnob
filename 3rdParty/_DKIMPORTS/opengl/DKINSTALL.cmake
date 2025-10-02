@@ -15,7 +15,7 @@ include_guard()
 dk_validate(Target_Config  "dk_Target_Config()")
 
 
-if(Android OR IOS OR Iossim)
+if(Android OR Ios OR Iossim)
 	dk_depend(opengles)
 endif()
 

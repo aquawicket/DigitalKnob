@@ -59,6 +59,7 @@ function(dk_installPackage)
 	endif()
 	
 	### Apt-get (debian) ###
+	execute_process(COMMAND $ENV{DKSHELL} -c "command -v sudo" OUTPUT_VARIABLE sudo_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 	execute_process(COMMAND $ENV{DKSHELL} -c "command -v apt-get" OUTPUT_VARIABLE apt-get_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
 	if(apt-get_exe)
 		dk_validate(sudo_exe "dk_depend(sudo_exe)")

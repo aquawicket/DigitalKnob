@@ -14,7 +14,8 @@ include_guard()
 
 ############ ios-cmake ############
 # https://github.com/leetal/ios-cmake
+# https://github.com/leetal/ios-cmake/archive/ad96a372.zip
 
-dk_import(https://github.com/leetal/ios-cmake/archive/ad96a372.zip)
+dk_import()
 
-dk_copy(${IOS_CMAKE}/ios.toolchain.cmake $ENV{DKCMAKE_DIR}/ios.toolchain.cmake OVERWRITE)
+dk_copy("${ios_cmake}/ios.toolchain.cmake" "$ENV{DKCMAKE_DIR}/ios.toolchain.cmake" OVERWRITE)

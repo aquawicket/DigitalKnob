@@ -38,8 +38,8 @@ function(dk_findProgram VAR filename)
 	#	set(${VAR}_second_pass 1)
 	#endif()
 	
-	if(${VAR})
-		dk_error("error {VAR} already set to ${VAR}")
+	if(${${VAR}})
+		dk_error("error ${VAR} already set to ${${VAR}}")
 	endif()
 	
 	if(ARGN)

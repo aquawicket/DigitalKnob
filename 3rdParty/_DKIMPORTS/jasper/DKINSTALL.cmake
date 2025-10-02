@@ -12,30 +12,34 @@ include_guard()
 #########################################################################
 
 
-dk_validate(Target_Tuple "dk_Target_Tuple()")
+############ jasper ############
 # https://github.com/jasper-software/jasper.git
+# https://github.com/jasper-software/jasper/archive/refs/heads/master.zip
 
-
-### IMPORT ###
-#dk_import(https://github.com/jasper-software/jasper.git)
-dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zip)
-
+dk_import()
 
 ### LINK ###
-dk_include				(${JASPER}/include)
-dk_include				(${JASPER}/${Target_Tuple})
-Android_dk_libDebug		(${JASPER}/${Target_Tuple}/src/libjasper/jasperd.a)
-Android_dk_libRelease	(${JASPER}/${Target_Tuple}/src/libjasper/jasper.a)
-Apple_dk_libDebug		(${JASPER}/${Target_Tuple}/src/libjasper/libjasper.a)
-Apple_dk_libRelease		(${JASPER}/${Target_Tuple}/src/libjasper/libjasper.a)
-Emscripten_dk_libDebug	(${JASPER_Debug_Dir}/src/libjasper/libjasper.a)
-Emscripten_dk_libRelease(${JASPER_Release_Dir}/src/libjasper/libjasper.a)
-Linux_dk_libDebug		(${JASPER_Debug_Dir}/src/libjasper/libjasper.a)
-Linux_dk_libRelease		(${JASPER_Release_Dir}/src/libjasper/libjasper.a)
-Raspberry_dk_libDebug	(${JASPER_Debug_Dir}/src/libjasper/libjasper.a)
-Raspberry_dk_libRelease	(${JASPER_Release_Dir}/src/libjasper/libjasper.a)
-Windows_dk_libDebug			(${JASPER}/${Target_Tuple}/src/libjasper/jasperd.lib)
-Windows_dk_libRelease		(${JASPER}/${Target_Tuple}/src/libjasper/jasper.lib)
+dk_include			(${jasper}/include)
+dk_include			(${jasper_Tuple_Dir})
+if(Android)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/jasperd.a)	
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/jasper.a)
+elseif(Apple)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/libjasper.a)
+elseif(Emscripten)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Linux)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Raspberry)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Windows)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/jasperd.lib)
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/jasper.lib)
+endif()
 
 
 ### GENERATE ###

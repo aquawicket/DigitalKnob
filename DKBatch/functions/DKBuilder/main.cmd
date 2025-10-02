@@ -179,7 +179,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			rem set "DKBASH_APPS_DIR=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps"
 			set "DKBuilder_sh=/mnt/c/Users/Administrator/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh"
 			set "pickUpdate=1"
-			set WSLENV=%WSLENV%:pickUpdate:Target_App:Target_Os:Target_Arch:Target_Env:Target_Type:Target_Tuple
+set WSLENV=%WSLENV%:^
+USERPROFILE/p:^
+SystemDrive/p:^
+SystemRoot/p:^
+windir/p:^
+wsl_exe/p:^
+pickUpdate:^
+Target_App:^
+Target_Os:^
+Target_Arch:^
+Target_Env:^
+Target_Type:^
+Target_Tuple
 			rem %wsl_exe% /bin/bash -c "%DKBASH_APPS_DIR%/DKBuilder/DKBuilder.sh"
 			%wsl_exe% /bin/bash -c "%DKBuilder_sh%"
 			goto while_loop

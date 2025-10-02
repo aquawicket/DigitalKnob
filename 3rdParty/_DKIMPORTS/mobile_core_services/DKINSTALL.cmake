@@ -17,7 +17,7 @@ include_guard()
 
 dk_validate(Target_Config  "dk_Target_Config()")
 
-if(NOT IOS AND NOT Iossim)
+if(NOT Ios AND NOT Iossim)
 	dk_disable(mobile_core_services)
 	dk_return()
 endif()

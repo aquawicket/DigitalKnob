@@ -33,7 +33,7 @@ include_guard()
 #dk_validate(Target_Config  "dk_Target_Config()")
 dk_validate(Target_Tuple "dk_Target_Tuple()")
 
-#if(Android OR IOS OR Iossim OR Mac)
+#if(Android OR Ios OR Iossim OR Mac)
 #	dk_disable(upx)
 #	dk_return()
 #endif()

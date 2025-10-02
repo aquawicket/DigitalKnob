@@ -31,14 +31,26 @@ function(DKINSTALL)
 	if(NOT EXISTS "${curl_exe}")
 		string(REPLACE "\\" "/" windir "$ENV{windir}")
 		set(curl_exe "${windir}/System32/curl.exe")
+		dk_debug("curl_exe = ${curl_exe}")
 	endif()
 	
 	if(NOT EXISTS "${curl_exe}")
 		dk_findProgram(curl_exe "curl.exe")
+		dk_debug("curl_exe = ${curl_exe}")
+	endif()
+	
+	if(NOT EXISTS "${curl_exe}")
+		dk_findProgram(curl_exe "curl")
+		dk_debug("curl_exe = ${curl_exe}")
 	endif()
 
 	if(NOT EXISTS "${curl_exe}")
 		set(curl_exe "curl.exe")
+		dk_debug("curl_exe = ${curl_exe}")
+	endif()
+	
+	if(NOT EXISTS "${curl_exe}")
+		set(curl_exe "curl")
 		dk_debug("curl_exe = ${curl_exe}")
 	endif()
 

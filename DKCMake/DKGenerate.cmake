@@ -1464,7 +1464,7 @@ endforeach()
 #dk_buildLog(" ### Dynamic libraries ###")
 #if(Linux OR Raspberry OR Android)
 #	dk_exec(ldd >> ${Target_App_Dir}/${Target_Tuple}/DKBUILD.log)
-#elseif(Mac OR IOS)
+#elseif(Mac OR Ios)
 	# TODO
 	#dk_exec(otool -L ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
 #elseif(Windows)	

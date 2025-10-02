@@ -24,7 +24,7 @@ include_guard()
 # https://gsdview.appspot.com/chromium-browser-official/chromium-81.0.4044.138.tar.xz										### chromium source
 
 dk_validate(Target_Config  "dk_Target_Config()")
-if(IOS OR Iossim OR Android OR (Windows AND (NOT MSVC)))
+if(Ios OR Iossim OR Android OR (Windows AND (NOT MSVC)))
 	dk_disable(cef_binary)
 	dk_return()
 endif()

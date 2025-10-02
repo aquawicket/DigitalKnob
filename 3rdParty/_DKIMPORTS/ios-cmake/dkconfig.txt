@@ -1,0 +1,5 @@
+############ ios-cmake ############
+# https://github.com/leetal/ios-cmake
+# https://github.com/leetal/ios-cmake/archive/ad96a372.zip
+
+ios-cmake=https://github.com/leetal/ios-cmake/archive/ad96a372.zip

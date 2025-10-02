@@ -13,13 +13,12 @@ include_guard()
 
 
 ############ leptonica ############
-# https://github.com/DanBloomberg/leptonica
-# README: https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386/
 # http://www.leptonica.org
-# https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
 # http://www.leptonica.org/source/leptonica-1.74.4.tar.gz
-
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386
+# https://github.com/DanBloomberg/leptonica.git
+# https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
+# https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip
 
 ### DEPEND ###
 dk_depend(giflib)
@@ -31,52 +30,41 @@ dk_depend(tiff)
 dk_depend(zlib)
 
 ### IMPORT ###
-dk_import(https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip)
+dk_import()
 
 ### LINK ###
-dk_include					(${LEPTONICA})
-dk_include					(${LEPTONICA}/${Target_Tuple}/src)
-dk_include					(${LEPTONICA_Release_Dir}/src)
+dk_include					(${leptonica})
+dk_include					(${leptonica_Tuple_Dir}/src)
+dk_include					(${leptonica_Build_Dir}/src)
 if(MULTI_CONFIG)
- if(MSVC)
-	Windows_dk_libDebug			(${LEPTONICA}/${Target_Tuple}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
-	Windows_dk_libRelease		(${LEPTONICA}/${Target_Tuple}/src/${Release_Dir}/leptonica-1.84.0.lib)
-	Android_dk_libDebug		(${LEPTONICA}/${Target_Tuple}/src/${Debug_Dir}/libleptonica.a)
-	Android_dk_libRelease	(${LEPTONICA}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
- else()
-	dk_libDebug				(${LEPTONICA}/${Target_Tuple}/src/${Debug_Dir}/libleptonica.a)
-	dk_libRelease			(${LEPTONICA}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
- endif()
+	if(Windows AND MSVC)
+		dk_libDebug			(${leptonica}/${Target_Tuple}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
+		dk_libRelease		(${leptonica}/${Target_Tuple}/src/${Release_Dir}/leptonica-1.84.0.lib)
+	else()
+		dk_libDebug			(${leptonica}/${Target_Tuple}/src/${Debug_Dir}/libleptonica.a)
+		dk_libRelease		(${leptonica}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
+	endif()
 else()
-	dk_libDebug				(${LEPTONICA_Debug_Dir}/src/libleptonica.a)
-	dk_libRelease			(${LEPTONICA_Release_Dir}/src/libleptonica.a)
+	dk_libDebug				(${leptonica_Debug_Dir}/src/libleptonica.a)
+	dk_libRelease			(${leptonica_Release_Dir}/src/libleptonica.a)
 endif()
 
 ### 3RDPARTY LINK ###
-dk_set(LEPTONICA_CMAKE -DLeptonica_DIR=${LEPTONICA_Config_Dir})
+dk_set(leptonica_CMAKE -DLeptonica_DIR=${leptonica_Config_Dir})
 
 ### GENERATE ###
-#dk_configure(${LEPTONICA} 
+dk_configure(${leptonica}
 #	"-DCMAKE_CXX_FLAGS=/I${LIBJPEG_TURBO}/${Target_Tuple} /I${libpng} /I${libpng}/${Target_Tuple} /I${tiff}/${Target_Tuple}/libtiff" 
-#	-DSTATIC=ON 
-#	-DCMAKE_INSTALL_PREFIX=${LEPTONICA} 
-#	-DSW_BUILD=OFF 
-#	${giflib_CMAKE} 
-#	${libjpeg-turbo_CMAKE} 
-#	${libpng_CMAKE} 
-#	${tiff_CMAKE} 
-#	${zlib_CMAKE})
-	
-dk_configure(${LEPTONICA} 
 	-DSTATIC=ON 
-	-DCMAKE_INSTALL_PREFIX=${LEPTONICA}
+	-DCMAKE_INSTALL_PREFIX=${leptonica}
 	-DSW_BUILD=OFF
 	${giflib_CMAKE}
 	${libjpeg-turbo_CMAKE}
 	${libpng_CMAKE}
 	${libwebp_CMAKE}
 	${tiff_CMAKE}
-	${zlib_CMAKE})
+	${zlib_CMAKE}
+)
 
 ### COMPILE ###
-dk_build(${LEPTONICA} leptonica)
+dk_build(${leptonica} leptonica)

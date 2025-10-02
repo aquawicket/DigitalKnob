@@ -46,14 +46,14 @@ function(DKINSTALL)
 
 	### Test exists
 	if(NOT EXISTS "${cmd_exe}") 
-		dk_error("cmd_exe:${cmd_exe} not found")
+		dk_notice("cmd_exe:${cmd_exe} not found")
 		return()
 	endif()
 	
 	### Test command
 	execute_process(COMMAND ${cmd_exe} /c ver RESULT_VARIABLE exit_code OUTPUT_QUIET)
 	if(${exit_code})
-		dk_error("cmd_exe:${cmd_exe} failed to run")
+		dk_notice("cmd_exe:${cmd_exe} failed to run")
 		return()
 	endif()
 

@@ -19,7 +19,7 @@ include_guard()
 #dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 #dk_validate(Target_Config  "dk_Target_Config()")
-if(IOS OR Iossim OR Android)
+if(Ios OR Iossim OR Android)
 	dk_disable(glew)
 	dk_return()
 endif()

@@ -16,7 +16,7 @@ dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE
 ############ DKCef ############
 #NOTE: Use ${CMAKE_PROJECT_NAME} to reference the root parent project if needed
 dk_validate(Target_Config  "dk_Target_Config()")
-#if(Android OR IOS OR Iossim OR (Windows AND (NOT MSVC)))
+#if(Android OR Ios OR Iossim OR (Windows AND (NOT MSVC)))
 	dk_disable(DKCef)
 	dk_return()
 #endif()

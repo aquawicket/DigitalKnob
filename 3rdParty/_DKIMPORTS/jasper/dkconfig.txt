@@ -1,0 +1,5 @@
+############ jasper ############
+# https://github.com/jasper-software/jasper.git
+# https://github.com/jasper-software/jasper/archive/refs/heads/master.zip
+
+jasper_Import=https://github.com/jasper-software/jasper/archive/refs/heads/master.zip

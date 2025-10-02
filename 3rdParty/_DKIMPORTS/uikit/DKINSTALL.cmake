@@ -15,9 +15,8 @@ include_guard()
 ############ uikit ############
 # https://developer.apple.com/documentation/UIKit
 
-dk_validate(Target_Config  "dk_Target_Config()")
 
-if(NOT IOS)
+if(NOT Ios)
 	dk_disable(uikit)
 	dk_return()
 endif()

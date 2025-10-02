@@ -16,7 +16,7 @@ include_guard()
 # https://www.khronos.org/opensles/
 
 dk_validate(Target_Tuple "dk_Target_Tuple()")
-if(NOT Android AND NOT IOS AND NOT Iossim)
+if(NOT Android AND NOT Ios AND NOT Iossim)
 	dk_disable(opensles)
 	dk_return()
 endif()

@@ -15,10 +15,6 @@ include_guard()
 ############ lame ############
 # https://sourceforge.net/p/lame/svn/HEAD/tree
 # https://github.com/lameproject/lame.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/lameproject/lame/archive/1f5cc948.zip
 
-### IMPORT ###
-dk_import(https://github.com/lameproject/lame/archive/1f5cc948.zip)
-
-
-# TODO
+dk_import()
