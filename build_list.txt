@@ -1,3 +1,6 @@
+HelloWorld		Linux 			X86_64 			Clang		Release
+HelloWorld		Windows 		X86_64 			Clang		Release
+
 ########################### HelloWorld ##########################
 HelloWorld		Android 		Arm32			Clang		Debug
 HelloWorld		Android 		Arm32			Clang		Release
@@ -39,10 +42,10 @@ HelloWorld		Emscripten 		X86 			Clang		Release
 #HelloWorld		Linux 			X86 			Clang		Release
 #HelloWorld		Linux 			X86 			Gcc			Debug
 #HelloWorld		Linux 			X86 			Gcc			Release
-#HelloWorld		Linux 			X86_64 			Clang		Debug
-#HelloWorld		Linux 			X86_64 			Clang		Release
-#HelloWorld		Linux 			X86_64 			Gcc			Debug
-#HelloWorld		Linux 			X86_64 			Gcc			Release
+HelloWorld		Linux 			X86_64 			Clang		Debug
+HelloWorld		Linux 			X86_64 			Clang		Release
+HelloWorld		Linux 			X86_64 			Gcc			Debug
+HelloWorld		Linux 			X86_64 			Gcc			Release
 #HelloWorld		Mac 			Arm32 			Clang		Debug
 #HelloWorld		Mac 			Arm32 			Clang		Release
 #HelloWorld		Mac 			Arm64 			Clang		Debug
@@ -127,10 +130,10 @@ DKPreprocessor		Emscripten 		X86 			Clang		Release
 #DKPreprocessor		Linux 			X86 			Clang		Release
 #DKPreprocessor		Linux 			X86 			Gcc			Debug
 #DKPreprocessor		Linux 			X86 			Gcc			Release
-#DKPreprocessor		Linux 			X86_64 			Clang		Debug
-#DKPreprocessor		Linux 			X86_64 			Clang		Release
-#DKPreprocessor		Linux 			X86_64 			Gcc			Debug
-#DKPreprocessor		Linux 			X86_64 			Gcc			Release
+DKPreprocessor		Linux 			X86_64 			Clang		Debug
+DKPreprocessor		Linux 			X86_64 			Clang		Release
+DKPreprocessor		Linux 			X86_64 			Gcc			Debug
+DKPreprocessor		Linux 			X86_64 			Gcc			Release
 #DKPreprocessor		Mac 			Arm32 			Clang		Debug
 #DKPreprocessor		Mac 			Arm32 			Clang		Release
 #DKPreprocessor		Mac 			Arm64 			Clang		Debug
@@ -215,10 +218,10 @@ DKCore		Emscripten 		X86 			Clang		Release
 #DKCore		Linux 			X86 			Clang		Release
 #DKCore		Linux 			X86 			Gcc			Debug
 #DKCore		Linux 			X86 			Gcc			Release
-#DKCore		Linux 			X86_64 			Clang		Debug
-#DKCore		Linux 			X86_64 			Clang		Release
-#DKCore		Linux 			X86_64 			Gcc			Debug
-#DKCore		Linux 			X86_64 			Gcc			Release
+DKCore		Linux 			X86_64 			Clang		Debug
+DKCore		Linux 			X86_64 			Clang		Release
+DKCore		Linux 			X86_64 			Gcc			Debug
+DKCore		Linux 			X86_64 			Gcc			Release
 #DKCore		Mac 			Arm32 			Clang		Debug
 #DKCore		Mac 			Arm32 			Clang		Release
 #DKCore		Mac 			Arm64 			Clang		Debug
@@ -303,10 +306,10 @@ DKJavascript		Emscripten 		X86 			Clang		Release
 #DKJavascript		Linux 			X86 			Clang		Release
 #DKJavascript		Linux 			X86 			Gcc			Debug
 #DKJavascript		Linux 			X86 			Gcc			Release
-#DKJavascript		Linux 			X86_64 			Clang		Debug
-#DKJavascript		Linux 			X86_64 			Clang		Release
-#DKJavascript		Linux 			X86_64 			Gcc			Debug
-#DKJavascript		Linux 			X86_64 			Gcc			Release
+DKJavascript		Linux 			X86_64 			Clang		Debug
+DKJavascript		Linux 			X86_64 			Clang		Release
+DKJavascript		Linux 			X86_64 			Gcc			Debug
+DKJavascript		Linux 			X86_64 			Gcc			Release
 #DKJavascript		Mac 			Arm32 			Clang		Debug
 #DKJavascript		Mac 			Arm32 			Clang		Release
 #DKJavascript		Mac 			Arm64 			Clang		Debug
@@ -391,10 +394,10 @@ DKSDL		Emscripten 		X86 			Clang		Release
 #DKSDL		Linux 			X86 			Clang		Release
 #DKSDL		Linux 			X86 			Gcc			Debug
 #DKSDL		Linux 			X86 			Gcc			Release
-#DKSDL		Linux 			X86_64 			Clang		Debug
-#DKSDL		Linux 			X86_64 			Clang		Release
-#DKSDL		Linux 			X86_64 			Gcc			Debug
-#DKSDL		Linux 			X86_64 			Gcc			Release
+DKSDL		Linux 			X86_64 			Clang		Debug
+DKSDL		Linux 			X86_64 			Clang		Release
+DKSDL		Linux 			X86_64 			Gcc			Debug
+DKSDL		Linux 			X86_64 			Gcc			Release
 #DKSDL		Mac 			Arm32 			Clang		Debug
 #DKSDL		Mac 			Arm32 			Clang		Release
 #DKSDL		Mac 			Arm64 			Clang		Debug
@@ -479,10 +482,11 @@ DKSDLRml		Emscripten 		X86 			Clang		Release
 #DKSDLRml		Linux 			X86 			Clang		Release
 #DKSDLRml		Linux 			X86 			Gcc			Debug
 #DKSDLRml		Linux 			X86 			Gcc			Release
-#DKSDLRml		Linux 			X86_64 			Clang		Debug
-#DKSDLRml		Linux 			X86_64 			Clang		Release
-#DKSDLRml		Linux 			X86_64 			Gcc			Debug
-#DKSDLRml		Linux 			X86_64 			Gcc			Release
+DKSDLRml		Linux 			X86_64 			Clang		Debug
+DKSDLRml		Linux 			X86_64 			Clang		Release
+DKSDLRml		Linux 			X86_64 			Clang		Release
+DKSDLRml		Linux 			X86_64 			Gcc			Debug
+DKSDLRml		Linux 			X86_64 			Gcc			Release
 #DKSDLRml		Mac 			Arm32 			Clang		Debug
 #DKSDLRml		Mac 			Arm32 			Clang		Release
 #DKSDLRml		Mac 			Arm64 			Clang		Debug
