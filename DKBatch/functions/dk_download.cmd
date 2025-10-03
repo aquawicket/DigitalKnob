@@ -20,7 +20,7 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	
     set "url=%~1"
 	%dk_call% dk_httpResponse "%url%"
-	if %dk_httpResponse% gtr 299 if %dk_httpResponse% lss 400 (
+	if %dk_httpResponse% gtr 299  if %dk_httpResponse% lss 400  if %dk_httpResponse% neq 302 (
 		%dk_call% dk_getUrl "%url%" url
 	)
 
