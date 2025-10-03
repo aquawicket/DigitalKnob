@@ -76,7 +76,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 		set "__STATUS__=!errorlevel!"
 		set "__BOOL__=true"
 		if defined __STACK__%ENTRY% (
-			call :setGlobal "__STACK__%ENTRY%" "%lblack%!__STACK__%ENTRY%! %white%status:%green%!__STATUS__!%clr%"
+			call :setGlobal "__STACK__%ENTRY%" %lblack%!__STACK__%ENTRY%! %white%status:%green%!__STATUS__!%clr%
 		)
 		
 		if "%dk_call_PRINT_EXIT%" equ "1" (call :dk_call_PRINT_EXIT)
@@ -85,7 +85,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 		set "__STATUS__=!errorlevel!"
 		set "__BOOL__=false"
 		if defined __STACK__%ENTRY% (
-			call :setGlobal "__STACK__%ENTRY%" "%lblack%!__STACK__%ENTRY%! %white%status:%red%!__STATUS__!%clr%"
+			call :setGlobal "__STACK__%ENTRY%" %lblack%!__STACK__%ENTRY%! %white%status:%red%!__STATUS__!%clr%
 		)
 		
 		rem ###### Print function exit ######
@@ -93,7 +93,7 @@ set "dk_call_IGNORE=dk_debugFunc"
 		if "%dk_call_EXIT_TO_FILE%" equ "1" (call :dk_call_EXIT_TO_FILE)
 		set /a LVL-=1
 	)
-	
+
 	::### NOTE: We can keep the whole stack if we comment this out.
 	call :popStack
 
@@ -129,7 +129,8 @@ exit /b !errorlevel!
 		set "_lvl_=%LVL%"
 	)
 	call :updateIndent %_lvl_%
-	echo %pad%%_lvl_%х!__STACK__%_ent_%! > \\.\pipe\TestPipe
+	echo %pad%%_lvl_%х!__STACK__%_ent_%!
+	::echo %pad%%_lvl_%х!__STACK__%_ent_%! > \\.\pipe\TestPipe
 exit /b !errorlevel!
 
 ::####################################################################
@@ -150,7 +151,8 @@ exit /b !errorlevel!
 	
 	call :updateIndent %_lvl_%
 	if "!__STATUS__!" equ "0" (set STATUS=%green%!__STATUS__!:!__BOOL__!%clr%) else (set STATUS=%red%!__STATUS__!:!__BOOL__!%clr%)
-	echo %pad%  им!__STACK__%_ent_%! > \\.\pipe\TestPipe
+	echo %pad%  им!__STACK__%_ent_%!
+	::echo %pad%  им!__STACK__%_ent_%! > \\.\pipe\TestPipe
 exit /b !errorlevel!
 
 ::####################################################################

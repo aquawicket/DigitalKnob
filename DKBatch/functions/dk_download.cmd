@@ -19,14 +19,18 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 	%dk_call% dk_debugFunc 1 2
 	
     set "url=%~1"
-	::%dk_call% dk_getUrl %url% url
-	::%dk_call% dk_debug "dk_getUrl = %dk_getUrl%"
+	%dk_call% dk_httpResponse "%url%"
+	if %dk_httpResponse% gtr 299 if %dk_httpResponse% lss 400 (
+		%dk_call% dk_getUrl "%url%" url
+	)
+
+	echo url = "%url%"
 	
     set "destination=%~2"	
 	if /i "%~3" equ "OVERWRITE" (set "OVERWRITE=1") else (set "OVERWRITE=0")
 
     %dk_call% dk_basename "%url%"
-	%dk_call% dk_assertVar dk_basename
+::	%dk_call% dk_assertVar dk_basename
 
     if defined destination (%dk_call% dk_realpath "%destination%" destination)
   
@@ -138,36 +142,39 @@ if NOT defined dk_download_BACKUP_SERVER_TEST	(set "dk_download_BACKUP_SERVER_TE
 %setlocal%
 	%dk_call% dk_debugFunc 0
 	
-	echo(
-	echo( ### Test Initial download
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
+::	echo(
+::	echo( ### Test Initial download
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	
-	echo(
-	echo( ### Test NO OVERWRITE
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
+::	echo(
+::	echo( ### Test NO OVERWRITE
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd"
 	
-	echo(
-	echo( ### Test OVERWRITE
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+::	echo(
+::	echo( ### Test OVERWRITE
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
-	echo(
-	echo( ### Test dk_download_DISABLE_curl
-	set "dk_download_DISABLE_curl=1"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+::	echo(
+::	echo( ### Test dk_download_DISABLE_curl
+::	set "dk_download_DISABLE_curl=1"
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
-	echo(
-	echo( ### Test dk_download_DISABLE_powershell
-	set "dk_download_DISABLE_powershell=1"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+::	echo(
+::	echo( ### Test dk_download_DISABLE_powershell
+::	set "dk_download_DISABLE_powershell=1"
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 
-	echo(
-	echo( ### Test dk_download_DISABLE_certutil
-	set "dk_download_DISABLE_certutil=1"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+::	echo(
+::	echo( ### Test dk_download_DISABLE_certutil
+::	set "dk_download_DISABLE_certutil=1"
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
 	
-	::NOTE: this will roduce and error as all download methods are now turned off
-	echo(
-	echo( ### Test dk_download_DISABLE_bitsadmin
-	set "dk_download_DISABLE_bitsadmin=1"
-	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+::	::NOTE: this will roduce and error as all download methods are now turned off
+::	echo(
+::	echo( ### Test dk_download_DISABLE_bitsadmin
+::	set "dk_download_DISABLE_bitsadmin=1"
+::	%dk_call% dk_download "https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "" OVERWRITE
+
+	%dk_call% dk_download "https://go.microsoft.com/fwlink/?linkid=2289980"
+	%dk_call% dk_echo "dk_download = %dk_download%"
 %endfunction%

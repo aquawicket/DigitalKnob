@@ -90,22 +90,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 	
-	::"%windir:\=/%/System32/curl.exe" -sI -o nul -w "%{http_code}" "http://www.google.com/index.html"
-	
-	::%dk_call% dk_setEx command "%curl_exe% -sI -o nul -w %%{http_code} %~1"
-	::set command=%curl_exe% -sI -o nul -w "%%{http_code}" "%~1"
-
-	set command=%curl_exe% "%~1" -sI -o nul -w "%%%%%%%%{http_code}\n"
-	%dk_call% dk_exec %command%
-	set "dk_httpResponse=%dk_exec%"
-	
-::	###### Curl exit codes ######	
-::	https://everything.curl.dev/cmdline/exitcode.html
-	
-::	for /f "usebackq tokens=*" %%A in (`%command%`) do (
-::		set "dk_httpResponse=%%A"
-::	)
-::
+	for /f "tokens=*" %%a in ('%curl_exe% -G "%~1" -s --write-out "%%{http_code}" --fail --output "dk_httpResponse_log.txt"') do set dk_httpResponse=%%a
 	
 	::###### output ######
 	endlocal & (

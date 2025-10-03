@@ -13,15 +13,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
 	
-	set command=%curl_exe% %~1 -sI -o nul -w %%{redirect_url}
-	
-	set command=%curl_exe% "%~1" -sI -o nul -w "%%%%%%%%{redirect_url}\n"
-	%dk_call% dk_exec %command%
-	if defined dk_exec (
-		set "dk_getUrl=%dk_exec%"
-	) else (
-		set "dk_getUrl=%~1"
-	)
+	for /f "tokens=*" %%a in ('curl -G "%~1" -s --write-out "%%{redirect_url}" --fail --output "dk_getUrl_log.txt"') do set dk_getUrl=%%a
 	
 	::###### output ######
 	endlocal & (
