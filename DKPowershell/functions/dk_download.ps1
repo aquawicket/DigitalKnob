@@ -10,9 +10,17 @@ function Global:dk_download() {
 	dk_debugFunc 1 2;
 	dk_call dk_echo "dk_download($args)";
 	
-	${url}=$args[0];
-	${destination}=$args[1];
+	${url}=$($args[0]);
+	${destination}=$($args[1]);
 	
+	dk_call dk_httpResponse ${url};
+	dk_call dk_debug "dk_httpResponse = ${dk_httpResponse}";
+	if((${dk_httpResponse} -gt 299) -AND (${dk_httpResponse} -lt 400)){# -AND (${dk_httpResponse} -ne 302)){
+		dk_call dk_getUrl ${url};
+		${url} = ${dk_getUrl};
+		dk_call dk_debug "url = ${url}"
+	}
+
 	${url_filename} = Split-Path ${url} -leaf;
 	dk_call dk_assertVar "url_filename";
 
@@ -35,7 +43,7 @@ function Global:dk_download() {
 	# make sure the destination parent directory exists
 	${global:destination_dir} = dk_call dk_dirname "${destination}";
 	dk_call dk_assertVar "destination_dir";
-	if(!Test-Path "${destination_dir}"){ dk_call dk_mkdir "${destination_dir}"; }
+	if(!(Test-Path "${destination_dir}")){ dk_call dk_mkdir "${destination_dir}"; }
 	
 	# method 1
 	Invoke-WebRequest -URI ${url} -OutFile ${destination} -ErrorAction SilentlyContinue; #-SkipHttpErrorCheck;
@@ -50,8 +58,6 @@ function Global:dk_download() {
 	
 	# method 3
 	#Start-BitsTransfer -Source $url -Destination $destination;
-	
-	
 }
 
 
@@ -59,7 +65,10 @@ function Global:dk_download() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1";
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "DKBuilder.ps1";
-	dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
+	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1";
+	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "DKBuilder.ps1";
+	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
+	
+	dk_call dk_download "https://go.microsoft.com/fwlink/?linkid=2289980"
+	dk_call dk_echo "dk_download = ${dk_download}"
 }

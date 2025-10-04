@@ -8,17 +8,10 @@ if(!$dk_set_ps1){ $dk_set_ps1 = 1; } else{ return; } #include guard
 function Global:dk_set() {
 	dk_debugFunc 2;
 	
-	#Write-Host "args = $($args)";
-	#Write-Host "args[0] = $($args[0])";
-	#Write-Host "args[1] = $($args[1])";
 	${_variable_}=$($args[0]);
-	#$(_value_)=$($args[1]);
 	${_value_}=$($args) | Select-Object -Skip 1;
 	
-	#Write-Host "_variable_ = ${_variable_}";
-	#Write-Host "_value_ = ${_value_}";
-	#Write-Host "dk_set(${_variable_}, ${_value_})";
-	
+
 	#if(!${_value_}){ ${_value_}=$($args[1]); }
 	#${_variable_arry} = ${_variable_}.Split(".");
 #	if(${_variable_arry}[1]){
@@ -33,9 +26,22 @@ function Global:dk_set() {
 #		Write-Host "Set-Variable Name ${_variable_arry}[0] Value ${_value_} -Scope Global";
 #		Set-Variable -Name ${_variable_arry}[0] -Value ${_value_} -Scope Global;
 #	}
+	
+	### Set every already existing scope instance of the variable
+	if(Test-Path variable:${_variable_}){
+		$ScopeList = (0..( ( Get-PSCallStack ).count + 2 )) + 'Script';
+		foreach ($scope in $ScopeList){
+			if($(gv -Scope $scope -Name ${_variable_} -ErrorAction SilentlyContinue)){
+				Set-Variable -Scope $scope -Name ${_variable_} -Value ${_value_};
+				break;
+			}
+		}
+	}
 
-	#Write-Host "dk_set(${_variable_}, ${_value_})"
-	Set-Variable -Name ${_variable_} -Value ${_value_} -Scope Global;
+	### Set global scope variable 
+	Set-Variable -Scope Global -Name ${_variable_} -Value ${_value_};
+	
+	### Set Environment Variable
 	Set-Item env:${_variable_} ${_value_};
 }
 

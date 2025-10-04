@@ -45,18 +45,18 @@ DKTEST() {
 
 	url="http://www.google.com/index.html"
 	dk_call dk_getUrl "${url}"
-	echo "url:'${url}' dk_getUrl = ${dk_getUrl}"
+	echo "dk_getUrl = ${dk_getUrl}"
 	
 	url="http://www.nonexisting.com/nofile.no"
 	dk_call dk_getUrl "${url}"
-	echo "url:'${url}' dk_getUrl = ${dk_getUrl}"
+	echo "dk_getUrl = ${dk_getUrl}"
 	
 	url="https://aka.ms/vs/16/release/VC_redist.x86.exe"
 	dk_call dk_getUrl "${url}"
-	echo "url:'${url}' dk_getUrl = ${dk_getUrl}"
+	echo "dk_getUrl = ${dk_getUrl}"
 	
 	url="https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net35-sp1-offline-installer"
 	dk_call dk_getUrl "${url}"
-	echo "url:'${url}' dk_getUrl = ${dk_getUrl}"
+	echo "dk_getUrl = ${dk_getUrl}"
 
 }

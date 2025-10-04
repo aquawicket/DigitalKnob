@@ -25,7 +25,7 @@ dk_download() {
 	dk_call dk_debug "url = ${url}"
 	
 	dk_call dk_httpResponse ${url}
-	if [ ${dk_httpResponse} -gt 299 ] && [ ${dk_httpResponse} -lt 400 ]; then
+	if [ ${dk_httpResponse} -gt 299 ] && [ ${dk_httpResponse} -lt 400 ] && [ ${dk_httpResponse} -ne 302 ]; then
 		dk_call dk_getUrl ${url} url
 	fi
 	

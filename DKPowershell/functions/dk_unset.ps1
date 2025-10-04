@@ -8,10 +8,12 @@ if(!$dk_unset_ps1){ $dk_unset_ps1 = 1; } else{ return; } #include guard
 function Global:dk_unset() {
 	dk_debugFunc 1;
 
-	${var}=$args[0];
+	${var}=$($args[0]);
 	
 	if(Test-Path "variable:${var}"){ 
+		Clear-Variable -Name "${var}" -Force;
 		Remove-Variable -Name "${var}" -Scope Global -ErrorAction SilentlyContinue;
+		Get-Variable -Name "${var}" | Remove-Variable -Force
 		return; 
 	}
 	

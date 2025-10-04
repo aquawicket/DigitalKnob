@@ -32,7 +32,6 @@ endif()
 #
 function(dk_download)
 	dk_debugFunc(1 3)
-	dk_debug("dk_download(${ARGV})")
 	
 	###### Args ######
 	dk_getParameterValue(NAME REMOVE)
@@ -51,12 +50,11 @@ function(dk_download)
 	# If this issue still exists, I believe dk_debugfunc() to more than likely be the cause.
 	dk_includes("${ARGV}" "${ARGV0}")
 	if(dk_includes)
-		set(url "${ARGV0}")
-		#dk_getUrl(${url} url)						# get the true url if redirect
+		set(url "${ARGV0}")			
 	else()
 		dk_warning("ARGV0:${ARGV0} was not found in ARGV:${ARGV}")
 	endif()
-	#dk_echo("url = ${url}")
+	#dk_debug("url = ${url}")
 	
 	
 	dk_includes("${ARGV}" "${ARGV1}")
@@ -66,30 +64,26 @@ function(dk_download)
 		dk_warning("ARGV1:${ARGV1} was not found in ARGV:${ARGV}")
 	endif()
 	dk_echo("dest_path = ${dest_path}")
+	#dk_debug("dest_path = ${dest_path}")
 	
-	
-	# Setup all url variables
-	#if(NOT url)
-	#	dk_fatal("url:${url} is invalid")
-	#endif()
-    #dk_assertVar(url)
-	#dk_printVar(url)							# https://aquawicket.com/download/myFile.txt
-	
+	# get the true url if redirect
 	dk_httpResponse(${url})
-	if((${dk_httpResponse} GREATER 299) AND (${dk_httpResponse} LESS 400))
-		dk_getUrl(${url} url)						# get the true url if redirect
+	if((${dk_httpResponse} GREATER 299) AND (${dk_httpResponse} LESS 400) AND (NOT ${dk_httpResponse} EQUAL 302))
+		dk_getUrl(${url} url)
 	endif()
+	#dk_debug("url = ${url}")
+	
 	dk_dirname(${url} url_dir)
 	dk_assertVar(url_dir)
-	dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
+	#dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
 	
 	dk_basename(${url} url_filename)
 	dk_assertVar(url_filename)
-	dk_debug("url_filename = ${url_filename}")	# myFile.txt
+	#dk_debug("url_filename = ${url_filename}")	# myFile.txt
 	
 	dk_getExtension(${url} url_ext)	
 	#dk_assertVar(url_ext)
-	dk_debug("url_ext = ${url_ext}")			# .txt    
+	#dk_debug("url_ext = ${url_ext}")			# .txt    
 	
 	
 	# Setup all dest_path variables
@@ -102,7 +96,7 @@ function(dk_download)
 	if(IS_DIRECTORY ${dest_path})
 		set(dest_path "${dest_path}/${url_filename}")
 	endif()
-	dk_printVar(dest_path)						# C:/Users/Administrator/Downloads/myFile.txt
+	dk_debug("dest_path = ${dest_path}")		# C:/Users/Administrator/Downloads/myFile.txt
 	set(dk_download ${dest_path} PARENT_SCOPE)
 	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
