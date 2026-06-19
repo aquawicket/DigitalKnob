@@ -1,9 +1,11 @@
-![](http://digitalknob.com/Digitalknob/Digitalknob/logo.png)
-# Digitalknob
+![](http://aquawicket.com/DigitalKnob/logo.png)
+# DigitalKnob
 
-<!-- [![Gitter](https://badges.gitter.im/Digitalknob/community.svg)](https://gitter.im/Digitalknob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
 
-### Digitalknob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
+<!-- [![Gitter](https://badges.gitter.im/DigitalKnob/community.svg)](https://gitter.im/DigitalKnob/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) -->
+
+
+### DigitalKnob is a Cross-Platform Solution that embraces C++, JavaScript, Html, and CSS.
 *"Apps should look and act the same on every operating system and browser."* <br><br>
 
 ### Supported Platforms
@@ -12,10 +14,10 @@ Windows x86_64 <br>
 Mac x86_64 <br>
 Linux x86 <br>
 Linux x86_64 <br>
-iPhone/iPad arm64 (<br>
+iPhone/iPad Arm64 (<br>
 iPhone/iPad-Simulator x86_64 <br>
-Android arm32 <br>
-Android arm64 <br>
+Android Arm32 <br>
+Android Arm64 <br>
 Raspberry Pi <br>
 Chrome <br>
 Safari <br>
@@ -305,58 +307,57 @@ zstd
 
 # How to build
 ### Windows Host
-Download and run [DKBuilder.cmd](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd)
+Download and run [DKBuilder.cmd](http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd)
    or
-Download and run [DKBuilder.ps1](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
+Download and run [DKBuilder.ps1](http://aquawicket.com/DigitalKnob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1)
 
 ### Unix Host
-Download [DKBuilder.sh](https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
+Download [DKBuilder.sh](http://aquawicket.com/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh) <br>
 From terminal run 'chmod 777 /path/to/DKBuilder.sh' <br>
 Run '/path/to/DKBuilder.sh'
 
 ### DKCMake
-Digitalknob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
+DigitalKnob uses it's own build system powered by the cmake scripting language. (DKCMake) <br>
 Invoking cmake -G"<generator>" -S<DKCMake_directory> -B<DKCpp/apps/MyApp/'OS'> will use a universal /DKCMake/CMakeLists.txt script. <br>
 The build system will differenciate the appropriate scripts to use when the output directory is pointed to a valid <OS> folder
-EXAMPLE: "<DKCpp/apps/MyApp/ios_arm64>" <br>
+EXAMPLE: "<DKCpp/apps/MyApp/Ios_Arm64>" <br>
 
 Valid <'OS'>'s are <br>
-android_arm32 <br>
-android_arm64 <br>
-emscripten <br>
-ios_arm32 <br>
-ios_arm64 <br>
-iossim_x86 <br>
-iossim_x86_64 <br>
-linux_x86 <br>
-linux_x86_64 <br>
-mac_x86 <br>
-mac_x86_64 <br>
-raspberry_arm32 <br>
-raspberry_arm64 <br>
-win_x86 <br>
-win_x86_64 <br>
+Android_Arm32 <br>
+Android_Arm64 <br>
+Emscripten <br>
+Ios_Arm32 <br>
+Ios_Arm64 <br>
+Iossim_X86 <br>
+Iossim_x86_64 <br>
+Linux_X86 <br>
+Linux_X86_64 <br>
+Mac_x86 <br>
+Mac_X86_64 <br>
+Raspberry_Arm32 <br>
+Raspberry_Arm64 <br>
+Windows_X86 <br>
+Windows_X86_64 <br>
 
-EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/digitalknob/Development/DKCMake -BC:/Users/<username>/digitalknob/Development/DKCpp/apps/DKCore/win_x86
+EXAMPLE: cmake -G"Visual Studio 17 2022" -SC:/Users/<username>/DigitalKnob/Development/DKCMake -BC:/Users/<username>/DigitalKnob/Development/DKCpp/apps/DKCore/Windows_X86
 	"will use Visual Studio 17 2022 to build DKCore for the windows i686 platform"
 "NOTE: using build.sh to build DKBuilder, and using DKBuilder_APP.exe is the prefered and tested way to build DK Apps" 
-
 
 
 
 <br><br><br>
 [Forking, Branching and Pull Requests](https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches)<br>
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
-[.](http://aquawicket.github.io/Digitalknob/DKPlugins/index.html)
+[.](http://aquawicket.com/DigitalKnob/Development/DKCpp/plugins/index.html)
 
 
 # License
-Digitalknob is published under the MIT license. 
-This repository references the use of third-party source code and assets with their own licenses. Upon any use of Digitalknob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
+DigitalKnob is published under the MIT license. 
+This repository references the use of third-party source code and assets with their own licenses. Upon any use of DigitalKnob and/or any part of its code base, you hereby fully agree to, and acknowledge all licensees of said third-party source code.
 
 MIT License
 
-Copyright (c) 2010-2025 Digitalknob, and contributors
+Copyright (c) 2010-2025 DigitalKnob, and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

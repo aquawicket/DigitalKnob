@@ -1,0 +1,5 @@
+############ ccleaner ############
+# https://download.ccleaner.com/portable/ccsetup639.zip
+
+ccleaner_Type=Tool
+ccleaner_Import=https://download.ccleaner.com/portable/ccsetup639.zip

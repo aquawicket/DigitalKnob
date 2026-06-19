@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)									&& echo "bash_exe = ${bash_exe}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
+	[ -e "${DK_SH}" ]					|| export DK_SH=$(find "${HOME}" -name "DK.sh")							&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ################################################################################
 # dk_arrayIncludes(array, searchElement)
@@ -26,13 +39,12 @@
 #
 dk_arrayIncludes() {
 	dk_debugFunc 2 3
-	#dk_call dk_validateArgs array string
 	
-	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
+	eval local array='("${'$1'[@]}")';
 	for ((index=0; index < ${#array[@]}; index++ )); do
-		[ "${2}" = "${array[${index}]}" ] && return $(true)
+		[ "${2}" = "${array[${index}]}" ] && return $(true);
 	done
-	return $(false)
+	return $(false);
 }
 
 
@@ -44,12 +56,12 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	array123=(1 2 3)
-	dk_call dk_arrayIncludes array123 2     && echo "true" || echo "false" # true
-	dk_call dk_arrayIncludes array123 4     && echo "true" || echo "false" # false
-	#dk_call dk_arrayIncludes array123 3 3  && echo "true" || echo "false" # false
-	#dk_call dk_arrayIncludes array123 3 -1 && echo "true" || echo "false" # true
-	array12NaN=(1 2 NaN)
-	dk_call dk_arrayIncludes array12NaN NaN && echo "true" || echo "false" # true
-	array123q=("1" "2" "3")
-	dk_call dk_arrayIncludes array123q 3    && echo "true" || echo "false" # false   # FIXME:  incorrect
+	dk_call dk_arrayIncludes array123 2     && echo "'array123' includes '2' = true"     || echo "'array123' includes '2' = false";
+	dk_call dk_arrayIncludes array123 4     && echo "'array123' includes '4' = true"     || echo "'array123' includes '4' = false";
+	#dk_call dk_arrayIncludes array123 3 3  && echo "'array123' includes '3 3' = true"   || echo "'array123' includes '3 3' = false";
+	#dk_call dk_arrayIncludes array123 3 -1 && echo "'array123' includes '3 -1' = true"  || echo "'array123' includes '3 -1' = false";
+	array12NaN=(1 2 NaN);
+	dk_call dk_arrayIncludes array12NaN NaN && echo "'array12NaN' includes 'NaN' = true" || echo "'array12NaN' includes 'NaN' = false";
+	array123q=("1" "2" "3");
+	dk_call dk_arrayIncludes array123q 3    && echo "'array123q' includes '3' = true"    || echo "'array123q' includes '3' = false";
 }

@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ################################################################################
@@ -9,7 +10,7 @@
 #
 function dk_fixme() {
 	#dk_debugFunc(1);
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_log.php");
+	dk_source("dk_log");
 	
 	if(!isset($argv)){
 		$argv = func_get_args();
@@ -29,5 +30,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

@@ -1,0 +1,2873 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://vector-of-bool.github.io/2017/01/21/cmrc.html
+Subject: A Resource Compiler with CMake and Standard C++
+Date: Mon, 30 Jun 2025 17:11:29 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----"
+
+
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----
+Content-Type: text/html
+Content-ID: <frame-4ED93A5BDFFB44B06CF007AA8F89D070@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://vector-of-bool.github.io/2017/01/21/cmrc.html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-3af7f345-a5bd-4d4a-a0df-feeb56b49a66@mhtml.blink" /><l=
+ink rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-ce8c43c5-2305-4aa3=
+-b0ce-b640ce8395bf@mhtml.blink" />
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width,minimum-scale=3D1=
+,initial-scale=3D1">
+  <meta name=3D"theme-color" content=3D"#777777">
+  <title>A Resource Compiler with CMake and Standard C++</title>
+  <meta name=3D"description" content=3D"<p>I recently worked on a project w=
+hich required that I serve a static web page from an embedded C++ HTTP serv=
+er. I could have gone the fairly simple route of installing the static page=
+ files alongside the executable and serving them from the filesystem, but t=
+here was a catch: One of the requirements was extreme portability. This pro=
+gram should be a single executable file that can be moved around and execut=
+ed all by itself without having a bunch of files lying around.</p>">
+  <link rel=3D"icon" href=3D"https://vector-of-bool.github.io/favicon.png" =
+type=3D"image/png">
+
+  <link rel=3D"canonical" href=3D"https://vector-of-bool.github.io/2017/01/=
+21/cmrc.html">
+  <link rel=3D"alternate" href=3D"https://vector-of-bool.github.io/feed.xml=
+" type=3D"application/rss+xml" title=3D"vector<bool>{ true, true, false };"=
+>
+
+  <meta property=3D"og:url" content=3D"/2017/01/21/cmrc.html">
+
+  <meta property=3D"og:title" content=3D"A Resource Compiler with CMake and=
+ Standard C++">
+  <meta name=3D"twitter:title" content=3D"A Resource Compiler with CMake an=
+d Standard C++">
+
+  <meta property=3D"article:published_time" content=3D"2017-01-21 00:00:00 =
++0000">
+  <meta property=3D"article:modified_time" content=3D"2017-01-21 00:00:00 +=
+0000">
+
+  <meta property=3D"og:type" content=3D"article">
+  <meta property=3D"og:description" content=3D"In which I try my hand at (m=
+ildly) literate programming, but also make something pretty cool in a singl=
+e CMake script file">
+  <meta name=3D"twitter:card" content=3D"summary">
+  <meta name=3D"twitter:description" content=3D"In which I try my hand at (=
+mildly) literate programming, but also make something pretty cool in a sing=
+le CMake script file">
+
+ =20
+  <!-- This stylesheet will apply when JS is enabeld -->
+ =20
+  <!-- This sheet will apply when JS is disabled -->
+ =20
+ =20
+ =20
+  <link rel=3D"preload" href=3D"https://vector-of-bool.github.io/">
+<link rel=3D"prefetch" href=3D"https://vector-of-bool.github.io/projects/">=
+<link rel=3D"prefetch" href=3D"https://vector-of-bool.github.io/"></head>
+
+<body>
+
+  <header role=3D"banner" class=3D"banner">
+  <div class=3D"title">
+    <h1 class=3D"nomargin"><a href=3D"https://vector-of-bool.github.io/">ve=
+ctor&lt;bool&gt;{ true, true, false };</a></h1>
+    <h3 class=3D"nomargin subtitle">The creations of a mad(dening) template=
+ specialization</h3>
+  </div>
+  <div class=3D"pages">
+    <a href=3D"https://vector-of-bool.github.io/" class=3D"page-link">Blog<=
+/a>
+    <!--<a href=3D/about/ class=3D"page-link">About</a>-->
+    <!--<a href=3D/contact.html class=3D"page-link">Contact</a>-->
+    <a href=3D"https://vector-of-bool.github.io/projects/" class=3D"page-li=
+nk">Projects</a>
+  </div>
+</header>
+
+  <div class=3D"page-container">
+    <div vb-content=3D"" id=3D"smart-content-area" aria-label=3D"Content" s=
+tyle=3D"position: relative;">
+      <div backdrop=3D"" class=3D"container-rect"></div>
+      <div clipper=3D"">
+        <div holder=3D""></div>
+        <div content=3D"">
+          <article class=3D"post h-entry" itemscope=3D"" itemtype=3D"http:/=
+/schema.org/BlogPosting">
+
+  <header class=3D"post-header">
+    <h1 class=3D"post-title p-name" itemprop=3D"name headline">A Resource C=
+ompiler with CMake and Standard C++</h1>
+    <p class=3D"post-meta">
+      <time class=3D"dt-published" datetime=3D"2017-01-21T00:00:00+00:00" i=
+temprop=3D"datePublished">Jan 21, 2017
+      </time></p>
+  </header>
+
+  <div class=3D"post-content e-content" itemprop=3D"articleBody">
+    <p>I recently worked on a project which required that I serve a static =
+web page
+from an embedded C++ HTTP server. I could have gone the fairly simple route=
+ of
+installing the static page files alongside the executable and serving them
+from the filesystem, but there was a catch: One of the requirements was ext=
+reme
+portability. This program should be a single executable file that can be mo=
+ved
+around and executed all by itself without having a bunch of files lying aro=
+und.</p>
+
+<p>I could have gone the truly hideous route of writing the entire static p=
+age
+inline as a string literal. I don=E2=80=99t think it requires much explaina=
+tion on why
+I didn=E2=80=99t want to do this. I opted to go with the single-page applic=
+ation
+approach: The interface itself is fairly simple. Still, I didn=E2=80=99t wa=
+nt to have
+something ugly and hard to maintain. I wanted to be able to work with all m=
+y
+favorite web tooling, Bower, Polymer, etc. I also wanted a half-decent edit=
+ing
+experience. It should be abundantly clear as to why an inline string litera=
+l
+approach would be completely unusable.</p>
+
+<p>Of course, the best alternative is <em>resource compilation</em>. For an=
+y unfamiliar
+with the term: This is when you take arbitrary files and bake them into an
+executable (or library), which you can then load and read from at runtime. =
+It=E2=80=99s
+a fairly common technique, but usually requires quite a bit of external too=
+ling
+and dependencies to get it up and running. There are a few common technique=
+s:</p>
+
+<ul>
+  <li>Qt=E2=80=99s <code class=3D"language-plaintext highlighter-rouge">qrc=
+</code>: This is popular among Qt projects, and it works amazingly well. It
+is tightly integrated with <code class=3D"language-plaintext highlighter-ro=
+uge">QFile</code> and <code class=3D"language-plaintext highlighter-rouge">=
+QDir</code>, so opening and reading files
+that were compiled in as resources with <code class=3D"language-plaintext h=
+ighlighter-rouge">qrc</code> is as simple as opening and
+reading real files on disk. I=E2=80=99ve used it in the past to greate effe=
+ct. The
+big problem is that this requires dragging in the entire Qt ecosystem. Anyo=
+ne
+familiar with Qt knows that you can=E2=80=99t just pick-and-choose your fav=
+orite parts
+from Qt and just use those. It=E2=80=99s an all-or-nothing deal. That=E2=80=
+=99s why Qt is
+known as a <em>framework</em>, rather than a <em>library</em>. I didn=E2=80=
+=99t want to pull in Qt
+and all the things it entailed. I wanted an executable that was small and
+easy to distribute, and Qt=E2=80=99s licensing would make that difficult. B=
+esides
+that, even if I were able to statically link Qt into the program, the binar=
+y
+size would probably explode (not to mention all the other libraries that Qt
+depends on).</li>
+  <li>Microsoft=E2=80=99s <code class=3D"language-plaintext highlighter-rou=
+ge">rc</code>: This is common on Windows platforms, and is actually how
+executables on Windows get their icons. I=E2=80=99m not as familiar with th=
+is
+technique, but I was unable to make use of it because I needed the program =
+to
+be cross-platform. This method just wouldn=E2=80=99t work.</li>
+  <li><a href=3D"https://www.linuxjournal.com/content/embedding-file-execut=
+able-aka-hello-world-version-5967">A pretty neat trick using <code class=3D=
+"language-plaintext highlighter-rouge">objcopy</code></a>:
+I=E2=80=99ve tinkered with this in the past, but it=E2=80=99s somewhat impr=
+actical because of
+the weird implications with the linker and symbol names. Of course, it it a=
+lso
+only available when <code class=3D"language-plaintext highlighter-rouge">ob=
+jcopy</code> is also available, which again, makes it not
+cross-platform. A no-go.</li>
+  <li>Many, many, other toolset-specific techniques.</li>
+</ul>
+
+<p>I ended up inventing a CMake-based script which would compile the arbitr=
+ary
+files. I can=E2=80=99t show the exact script here (nor would I want to, it =
+was a pretty
+big hack), but I think I=E2=80=99d like to build something upon the same id=
+eas:
+Something that others my find usable and informative.</p>
+
+<h1 id=3D"a-cmake-foundation">A CMake Foundation</h1>
+
+<p>CMake has quite a few tricks up its sleeves that most users are complete=
+ly
+unaware of. I=E2=80=99ll be going over those in this post as we see what ki=
+nd of magic
+we can pull off. I=E2=80=99ll be building this CMake-based resource compile=
+r as I write
+this, so it will be learning experience for both of us. My goal is that all=
+ of
+this code should work with standard CMake and standard C++11, no more, no l=
+ess.</p>
+
+<p>Let=E2=80=99s begin!</p>
+
+<h1 id=3D"the-process">The Process</h1>
+
+<h2 id=3D"step-1-a-simple-test-case">Step 1: A Simple Test Case</h2>
+
+<p>While I don=E2=80=99t want to do full-scale TDD, I want to write a littl=
+e example that
+I=E2=80=99d like to get working, and then actually implement. Here will be =
+an example
+C++ program:</p>
+
+<div class=3D"language-c++ highlighter-rouge"><div class=3D"highlight"><pre=
+ class=3D"highlight"><code><span class=3D"cp">#include</span> <span class=
+=3D"cpf">&lt;cmrc/cmrc.hpp&gt;</span><span class=3D"cp">
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">&lt;iostream&gt;</sp=
+an><span class=3D"cp">
+</span>
+<span class=3D"kt">int</span> <span class=3D"nf">main</span><span class=3D"=
+p">()</span> <span class=3D"p">{</span>
+  <span class=3D"n">CMRC_INIT</span><span class=3D"p">(</span><span class=
+=3D"n">hello</span><span class=3D"p">);</span>
+  <span class=3D"k">auto</span> <span class=3D"n">data</span> <span class=
+=3D"o">=3D</span> <span class=3D"n">cmrc</span><span class=3D"o">::</span><=
+span class=3D"n">open</span><span class=3D"p">(</span><span class=3D"s">"he=
+llo.txt"</span><span class=3D"p">);</span>
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><=
+span class=3D"o">::</span><span class=3D"n">string</span><span class=3D"p">=
+(</span><span class=3D"n">data</span><span class=3D"p">.</span><span class=
+=3D"n">begin</span><span class=3D"p">(),</span> <span class=3D"n">data</spa=
+n><span class=3D"p">.</span><span class=3D"n">end</span><span class=3D"p">(=
+))</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"sc">'\n'</span><=
+span class=3D"p">;</span>
+<span class=3D"p">}</span>
+</code></pre></div></div>
+
+<p>Here=E2=80=99s my idea:</p>
+
+<ol>
+  <li><code class=3D"language-plaintext highlighter-rouge">cmrc/cmrc.hpp</c=
+ode> will be a header file with the resource-file loading library.</li>
+  <li><code class=3D"language-plaintext highlighter-rouge">CMRC_INIT</code>=
+ will initialize the resource library. This will be required, I
+believe. We=E2=80=99ll discuss it a bit more later.</li>
+  <li><code class=3D"language-plaintext highlighter-rouge">cmrc::open</code=
+> will open a compiled-in resource by filename. What type does it
+return? I=E2=80=99m not sure yet=E2=80=A6 But it should have a <code class=
+=3D"language-plaintext highlighter-rouge">begin()</code> and <code class=3D=
+"language-plaintext highlighter-rouge">end()</code>
+returning two RandomAccessIterators.</li>
+</ol>
+
+<p>That=E2=80=99s it! Fairly simple, and I=E2=80=99m hoping that upon this =
+one could build more
+complex and useful abstractions.</p>
+
+<p>Compiling the file would be simple. Here=E2=80=99s the <code class=3D"la=
+nguage-plaintext highlighter-rouge">CMakeLists.txt</code> I=E2=80=99d like =
+to
+have:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">cmake_minimum_required</spa=
+n><span class=3D"p">(</span>VERSION 3.6<span class=3D"p">)</span>
+<span class=3D"nb">project</span><span class=3D"p">(</span>CMRCExample<span=
+ class=3D"p">)</span>
+
+<span class=3D"nb">include</span><span class=3D"p">(</span>CMakeRC.cmake<sp=
+an class=3D"p">)</span>
+
+<span class=3D"nf">cmrc_add_resource_library</span><span class=3D"p">(</spa=
+n>hello hello.txt<span class=3D"p">)</span>
+<span class=3D"nb">add_executable</span><span class=3D"p">(</span>main main=
+.cpp<span class=3D"p">)</span>
+<span class=3D"nb">target_link_libraries</span><span class=3D"p">(</span>ma=
+in PRIVATE hello<span class=3D"p">)</span>
+
+<span class=3D"nb">include</span><span class=3D"p">(</span>CTest<span class=
+=3D"p">)</span>
+<span class=3D"nb">enable_testing</span><span class=3D"p">()</span>
+<span class=3D"nb">add_test</span><span class=3D"p">(</span>main main<span =
+class=3D"p">)</span>
+<span class=3D"nb">set_property</span><span class=3D"p">(</span>TEST main P=
+ROPERTY PASS_REGULAR_EXPRESSION <span class=3D"s2">"Hello, world!"</span><s=
+pan class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>Here=E2=80=99s the idea here:</p>
+
+<ol>
+  <li><code class=3D"language-plaintext highlighter-rouge">CMakeRC.cmake</c=
+ode> is the script that we=E2=80=99ll be going over in this post. It will
+be doing most of the heavy lifting.</li>
+  <li><code class=3D"language-plaintext highlighter-rouge">cmrc_add_resourc=
+e_library</code> does a bunch of magic and eventually calls
+<code class=3D"language-plaintext highlighter-rouge">add_library</code> to =
+generate a new target with the given resource files compiled
+in.</li>
+  <li><code class=3D"language-plaintext highlighter-rouge">target_link_libr=
+aries</code> called with the resource library will make the
+resources defined in the linked library available to the linkee.</li>
+  <li>The simple test case should output <code class=3D"language-plaintext =
+highlighter-rouge">Hello, world!</code>, so we set that as the
+expected output for CTest to check for us.</li>
+</ol>
+
+<p>Of course, we need an example resource file to compile. That will be
+<code class=3D"language-plaintext highlighter-rouge">hello.txt</code>, whic=
+h contains the text <code class=3D"language-plaintext highlighter-rouge">He=
+llo, world!</code>. We should expect that to
+be the output of the program.</p>
+
+<h2 id=3D"step-2-getting-the-test-case-to-build">Step 2: Getting the Test C=
+ase to Build</h2>
+
+<p>Of course, trying to build the test case won=E2=80=99t even configure. W=
+e can get it to
+at least configure by adding a <code class=3D"language-plaintext highlighte=
+r-rouge">CMakeRC.cmake</code> file like this:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>cmrc_add_resource_library name<span class=3D"p">)</span>
+    <span class=3D"nb">add_library</span><span class=3D"p">(</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n> INTERFACE<span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>We=E2=80=99ll see it fail to build immediately as it cannot find <code c=
+lass=3D"language-plaintext highlighter-rouge">cmrc.hpp</code>. We must
+generate this file! We can do that when <code class=3D"language-plaintext h=
+ighlighter-rouge">CMakeRC.cmake</code> is first included. Let=E2=80=99s
+add some basic content at the top of the module:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">if</span><span class=3D"p">=
+(</span>COMMAND cmrc_add_resource_library<span class=3D"p">)</span>
+    <span class=3D"c1"># CMakeRC has already been included! Don't do anythi=
+ng</span>
+    <span class=3D"nb">return</span><span class=3D"p">()</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+
+<span class=3D"nb">set</span><span class=3D"p">(</span>this_script <span cl=
+ass=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">CMAKE_CUR=
+RENT_LIST_FILE</span><span class=3D"si">}</span><span class=3D"s2">"</span>=
+<span class=3D"p">)</span>
+
+<span class=3D"nb">set</span><span class=3D"p">(</span>CMRC_INCLUDE_DIR <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">CMAK=
+E_BINARY_DIR</span><span class=3D"si">}</span><span class=3D"s2">/_cmrc/inc=
+lude"</span> CACHE INTERNAL <span class=3D"s2">"Directory for CMakeRC inclu=
+de files"</span><span class=3D"p">)</span>
+<span class=3D"c1"># Let's generate the primary include file</span>
+<span class=3D"nb">file</span><span class=3D"p">(</span>MAKE_DIRECTORY <spa=
+n class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">CMRC_=
+INCLUDE_DIR</span><span class=3D"si">}</span><span class=3D"s2">/cmrc"</spa=
+n><span class=3D"p">)</span>
+<span class=3D"nb">file</span><span class=3D"p">(</span>WRITE <span class=
+=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">CMRC_INCLUDE=
+_DIR</span><span class=3D"si">}</span><span class=3D"s2">/cmrc/cmrc.hpp"</s=
+pan> <span class=3D"s2">[=3D=3D[
+#ifndef CMRC_CMRC_HPP_INCLUDED
+#define CMRC_CMRC_HPP_INCLUDED
+
+#include &lt;string&gt;
+
+namespace cmrc {
+
+class resource {
+public:
+    char* begin() { return nullptr; }
+    char* end() { return nullptr; }
+};
+
+extern resource open(const char* fname) { return {}; }
+inline resource open(const std::string&amp; fname) {
+    return open(fname.data());
+}
+
+}
+
+#endif // CMRC_CMRC_HPP_INCLUDED
+]=3D=3D]</span><span class=3D"p">)</span>
+
+<span class=3D"nb">add_library</span><span class=3D"p">(</span>cmrc-base IN=
+TERFACE<span class=3D"p">)</span>
+<span class=3D"nb">target_include_directories</span><span class=3D"p">(</sp=
+an>cmrc-base INTERFACE <span class=3D"s2">"</span><span class=3D"si">${</sp=
+an><span class=3D"nv">CMRC_INCLUDE_DIR</span><span class=3D"si">}</span><sp=
+an class=3D"s2">"</span><span class=3D"p">)</span>
+<span class=3D"nb">target_compile_features</span><span class=3D"p">(</span>=
+cmrc-base INTERFACE cxx_nullptr<span class=3D"p">)</span>
+<span class=3D"nb">set_property</span><span class=3D"p">(</span>TARGET cmrc=
+-base PROPERTY INTERFACE_CXX_EXTENSIONS OFF<span class=3D"p">)</span>
+<span class=3D"nb">add_library</span><span class=3D"p">(</span>cmrc::base A=
+LIAS cmrc-base<span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>Now, as soon as <code class=3D"language-plaintext highlighter-rouge">CMa=
+keRC.cmake</code> is included, there will be a target <code class=3D"langua=
+ge-plaintext highlighter-rouge">cmrc::base</code>
+that can be linked to so that anyone can get the proper include directories=
+. We
+can propagate that further by modifying <code class=3D"language-plaintext h=
+ighlighter-rouge">cmrc_add_resource_library</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>cmrc_add_resource_library name<span class=3D"p">)</span>
+    <span class=3D"nb">add_library</span><span class=3D"p">(</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n> INTERFACE<span class=3D"p">)</span>
+    <span class=3D"nb">target_link_libraries</span><span class=3D"p">(</spa=
+n><span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"=
+si">}</span> INTERFACE cmrc::base<span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>Now anyone who links to a resource library will also link to <code class=
+=3D"language-plaintext highlighter-rouge">cmrc::base</code>, and
+will be able to include <code class=3D"language-plaintext highlighter-rouge=
+">cmrc/cmrc.hpp</code>. They=E2=80=99ll also get the required compiler
+flags for <code class=3D"language-plaintext highlighter-rouge">nullptr</cod=
+e> to be available when they compile. Great!</p>
+
+<p>Of course, the test case doesn=E2=80=99t yet pass. We=E2=80=99ve got a f=
+ew things to do before
+we can get there=E2=80=A6</p>
+
+<h2 id=3D"step-3-compiling-a-resource">Step 3: Compiling a Resource</h2>
+
+<p>Now, how does one actually <em>compile an arbitrary file</em>? Well, it=
+=E2=80=99s not actually
+hard <em>in theory</em>. What we need is to convert the file to a sequence =
+of
+character literals that we will put into a <code class=3D"language-plaintex=
+t highlighter-rouge">char[]</code> array that can then be read
+by the program at runtime.</p>
+
+<p>So, how do we do that?</p>
+
+<p>Well, we need to generate a source file that can be read by the compiler=
+. CMake
+has great support for this via <code class=3D"language-plaintext highlighte=
+r-rouge">add_custom_command</code>! Let=E2=80=99s define a function,
+called <code class=3D"language-plaintext highlighter-rouge">_cmrc_generate_=
+intermediate_cpp</code>, which will generate an intermediate
+C++ file containing such a character array:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>_cmrc_generate_intermediate_cpp outfile infile<span class=3D=
+"p">)</span>
+    <span class=3D"nb">add_custom_command</span><span class=3D"p">(</span>
+        <span class=3D"c1"># This is the file we will generate</span>
+        OUTPUT <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">outfile</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span>
+        <span class=3D"c1"># These are the primary files that affect the ou=
+tput</span>
+        DEPENDS <span class=3D"s2">"</span><span class=3D"si">${</span><spa=
+n class=3D"nv">infile</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=
+=3D"nv">this_script</span><span class=3D"si">}</span><span class=3D"s2">"</=
+span>
+        COMMAND
+            <span class=3D"s2">"</span><span class=3D"si">${</span><span cl=
+ass=3D"nv">CMAKE_COMMAND</span><span class=3D"si">}</span><span class=3D"s2=
+">"</span>
+                -D_CMRC_GENERATE_MODE=3DTRUE
+                <span class=3D"s2">"-DINPUT_FILE=3D</span><span class=3D"si=
+">${</span><span class=3D"nv">infile</span><span class=3D"si">}</span><span=
+ class=3D"s2">"</span>
+                <span class=3D"s2">"-DOUTPUT_FILE=3D</span><span class=3D"s=
+i">${</span><span class=3D"nv">outfile</span><span class=3D"si">}</span><sp=
+an class=3D"s2">"</span>
+                -P <span class=3D"s2">"</span><span class=3D"si">${</span><=
+span class=3D"nv">this_script</span><span class=3D"si">}</span><span class=
+=3D"s2">"</span>
+        COMMENT <span class=3D"s2">"Generating intermediate file for </span=
+><span class=3D"si">${</span><span class=3D"nv">infile</span><span class=3D=
+"si">}</span><span class=3D"s2">"</span>
+    <span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>Well=E2=80=A6 It doesn=E2=80=99t actually generate the array. It adds a =
+build command which
+will generate the file <em>at build time</em>. We <em>do not</em> want to g=
+enerate the
+intermediate file immediately: It may be costly (the input file may be very
+large), or the input file may be the output of a previous build command. Th=
+is
+also allows us to make use of any inherent parallelism afforded us by a bui=
+ld
+tool like Make or Ninja. We invoke the <code class=3D"language-plaintext hi=
+ghlighter-rouge">CMakeRC.cmake</code> script as the build
+command using <code class=3D"language-plaintext highlighter-rouge">cmake -P=
+</code>, which is quite a useful trick for building more
+complex commands. We pass in three primary arguments: the input file, the o=
+utput
+file, and a boolean <code class=3D"language-plaintext highlighter-rouge">_C=
+MRC_GENERATE_MODE</code>. I=E2=80=99ll get back to that one later.</p>
+
+<p>So, how do we use <code class=3D"language-plaintext highlighter-rouge">_=
+cmrc_generate_intermediate_cpp</code>?
+We modify <code class=3D"language-plaintext highlighter-rouge">cmrc_add_res=
+ource_library</code> to call <code class=3D"language-plaintext highlighter-=
+rouge">_cmrc_generate_intermediate_cpp</code>
+for each resource file pass in, like so:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>cmrc_add_resource_library name<span class=3D"p">)</span>
+    <span class=3D"c1"># Generate a static library with the compiled in cha=
+racter arrays.</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>sources<span cla=
+ss=3D"p">)</span>
+    <span class=3D"nb">foreach</span><span class=3D"p">(</span>input IN LIS=
+TS ARGN<span class=3D"p">)</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abs_input <span class=3D"s2">"</span><span class=3D"si">${</span><sp=
+an class=3D"nv">input</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> ABSOLUTE<span class=3D"p">)</span>
+        <span class=3D"c1"># Generate a filename based on the input filenam=
+e that we can put in</span>
+        <span class=3D"c1"># the intermediate directory.</span>
+        <span class=3D"nb">file</span><span class=3D"p">(</span>RELATIVE_PA=
+TH relpath <span class=3D"s2">"</span><span class=3D"si">${</span><span cla=
+ss=3D"nv">CMAKE_CURRENT_SOURCE_DIR</span><span class=3D"si">}</span><span c=
+lass=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D"si">${</span=
+><span class=3D"nv">abs_input</span><span class=3D"si">}</span><span class=
+=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">if</span><span class=3D"p">(</span>relpath MATCH=
+ES <span class=3D"s2">"^</span><span class=3D"se">\\</span><span class=3D"s=
+2">.</span><span class=3D"se">\\</span><span class=3D"s2">."</span><span cl=
+ass=3D"p">)</span>
+            <span class=3D"c1"># For now we just error on files that exist =
+outside of the soure dir.</span>
+            <span class=3D"nb">message</span><span class=3D"p">(</span>SEND=
+_ERROR <span class=3D"s2">"Cannot add file '</span><span class=3D"si">${</s=
+pan><span class=3D"nv">input</span><span class=3D"si">}</span><span class=
+=3D"s2">': File must be in a subdirectory of the source directory"</span><s=
+pan class=3D"p">)</span>
+            <span class=3D"nf">continue</span><span class=3D"p">()</span>
+        <span class=3D"nb">endif</span><span class=3D"p">()</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abspath <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">CMAKE_CURRENT_BINARY_DIR</span><span class=3D"si">}</span><sp=
+an class=3D"s2">/</span><span class=3D"si">${</span><span class=3D"nv">name=
+</span><span class=3D"si">}</span><span class=3D"s2">-intermediate/</span><=
+span class=3D"si">${</span><span class=3D"nv">relpath</span><span class=3D"=
+si">}</span><span class=3D"s2">.cpp"</span> ABSOLUTE<span class=3D"p">)</sp=
+an>
+        <span class=3D"c1"># Generate the rule for the intermediate source =
+file</span>
+        <span class=3D"nf">_cmrc_generate_intermediate_cpp</span><span clas=
+s=3D"p">(</span><span class=3D"s2">"</span><span class=3D"si">${</span><spa=
+n class=3D"nv">abspath</span><span class=3D"si">}</span><span class=3D"s2">=
+"</span> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=
+=3D"nv">abs_input</span><span class=3D"si">}</span><span class=3D"s2">"</sp=
+an><span class=3D"p">)</span>
+        <span class=3D"nb">list</span><span class=3D"p">(</span>APPEND sour=
+ces <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"n=
+v">abspath</span><span class=3D"si">}</span><span class=3D"s2">"</span><spa=
+n class=3D"p">)</span>
+    <span class=3D"nb">endforeach</span><span class=3D"p">()</span>
+    <span class=3D"c1"># Generate the actual static library. Each source fi=
+le is just a single file</span>
+    <span class=3D"c1"># with a character array compiled in containing the =
+contents of the</span>
+    <span class=3D"c1"># corresponding resource file.</span>
+    <span class=3D"nb">add_library</span><span class=3D"p">(</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n> STATIC <span class=3D"si">${</span><span class=3D"nv">sources</span><spa=
+n class=3D"si">}</span><span class=3D"p">)</span>
+    <span class=3D"nb">target_link_libraries</span><span class=3D"p">(</spa=
+n><span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"=
+si">}</span> PUBLIC cmrc::base<span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>Currently, we error if the resource it outside of the source directory. =
+That=E2=80=99s
+pretty bad, but we=E2=80=99ll get to that later, as it requires a bit of tr=
+ickery to get
+right.</p>
+
+<p>If you try to build now, you=E2=80=99ll see an error about <code class=
+=3D"language-plaintext highlighter-rouge">add_library</code> being
+un-scriptable. This is because <code class=3D"language-plaintext highlighte=
+r-rouge">_cmrc_generate_intermediate_cpp</code> uses the
+existing <code class=3D"language-plaintext highlighter-rouge">CMakeRC.cmake=
+</code> as the script that will generate the intermediate
+C++ file. When using <code class=3D"language-plaintext highlighter-rouge">-=
+P</code> mode to CMake, we cannot use some commands, including
+<code class=3D"language-plaintext highlighter-rouge">add_library</code> (af=
+ter all, such a thing doesn=E2=80=99t make sense). This is the
+purpose of the <code class=3D"language-plaintext highlighter-rouge">_CMRC_G=
+ENERATE_MODE</code> flag I mentioned earlier. At the top of
+the <code class=3D"language-plaintext highlighter-rouge">CMakeRC.cmake</cod=
+e> script, we=E2=80=99ll add a short-circuit to do something different
+if this flag is set:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">if</span><span class=3D"p">=
+(</span>_CMRC_GENERATE_MODE<span class=3D"p">)</span>
+    <span class=3D"nb">message</span><span class=3D"p">(</span>STATUS <span=
+ class=3D"s2">"Generating file </span><span class=3D"si">${</span><span cla=
+ss=3D"nv">OUTPUT_FILE</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span><span class=3D"p">)</span>
+    <span class=3D"nb">return</span><span class=3D"p">()</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>If I run the build now, we=E2=80=99ll see <code class=3D"language-plaint=
+ext highlighter-rouge">Generating file &lt;some-path&gt;/hello.txt.cpp</cod=
+e>,
+followed by an immediate compiler error because it tries to compile that C+=
++
+file, but we never really generated it. So, how do we generate it?</p>
+
+<p>When I was initially thinking about how to solve this resource-compiling
+problem, the one thing that made me immediately think that CMake was up to =
+the
+task was one very specific and rarely used CMake feature: <code class=3D"la=
+nguage-plaintext highlighter-rouge">file(READ HEX)</code>. Yep,
+CMake=E2=80=99s <code class=3D"language-plaintext highlighter-rouge">file(R=
+EAD)</code> command lets you read in the bytes of a file as a sequence
+of hexadecimal digits, just by using the <code class=3D"language-plaintext =
+highlighter-rouge">HEX</code> keyword on the end. And
+what can we do with those digits? Well, we can use them to generate charact=
+er
+literals, of course! Here=E2=80=99s a simple example:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"c1"># Read in the digits</span>
+<span class=3D"nb">file</span><span class=3D"p">(</span>READ <span class=3D=
+"s2">"</span><span class=3D"si">${</span><span class=3D"nv">INPUT_FILE</spa=
+n><span class=3D"si">}</span><span class=3D"s2">"</span> bytes HEX<span cla=
+ss=3D"p">)</span>
+<span class=3D"c1"># Forat each pair into a character literal</span>
+<span class=3D"nb">string</span><span class=3D"p">(</span>REGEX REPLACE <sp=
+an class=3D"s2">"(..)"</span> <span class=3D"s2">"'</span><span class=3D"se=
+">\\\\</span><span class=3D"s2">x</span><span class=3D"se">\\</span><span c=
+lass=3D"s2">1', "</span> chars <span class=3D"s2">"</span><span class=3D"si=
+">${</span><span class=3D"nv">bytes</span><span class=3D"si">}</span><span =
+class=3D"s2">"</span><span class=3D"p">)</span>
+<span class=3D"c1"># Just write it to stdout for this example</span>
+<span class=3D"nb">message</span><span class=3D"p">(</span><span class=3D"s=
+2">"</span><span class=3D"si">${</span><span class=3D"nv">chars</span><span=
+ class=3D"si">}</span><span class=3D"s2">"</span><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>This example stands entirely on its own, none of the other code is neede=
+d.
+Execute it like so:</p>
+
+<div class=3D"language-sh highlighter-rouge"><div class=3D"highlight"><pre =
+class=3D"highlight"><code>cmake <span class=3D"nt">-DINPUT_FILE</span><span=
+ class=3D"o">=3D</span>hello.txt <span class=3D"nt">-P</span> CMakeRC.cmake
+</code></pre></div></div>
+
+<p>You=E2=80=99ll see the contents of the file printed to standard out, but=
+ as a
+comma-separated list of character literals:</p>
+
+<div class=3D"language-plaintext highlighter-rouge"><div class=3D"highlight=
+"><pre class=3D"highlight"><code>'\x48', '\x65', '\x6c', '\x6c', '\x6f', '\=
+x2c', '\x20', '\x77', '\x6f', '\x72', '\x6c', '\x64', '\x21',
+</code></pre></div></div>
+
+<p>Integrating this into our existing <code class=3D"language-plaintext hig=
+hlighter-rouge">CMakeRC.cmake</code> is very simple:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">if</span><span class=3D"p">=
+(</span>_CMRC_GENERATE_MODE<span class=3D"p">)</span>
+    <span class=3D"c1"># Read in the digits</span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>READ <span clas=
+s=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">INPUT_FILE<=
+/span><span class=3D"si">}</span><span class=3D"s2">"</span> bytes HEX<span=
+ class=3D"p">)</span>
+    <span class=3D"c1"># Format each pair into a character literal</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REGEX REPLACE=
+ <span class=3D"s2">"(..)"</span> <span class=3D"s2">"'</span><span class=
+=3D"se">\\\\</span><span class=3D"s2">x</span><span class=3D"se">\\</span><=
+span class=3D"s2">1', "</span> chars <span class=3D"s2">"</span><span class=
+=3D"si">${</span><span class=3D"nv">bytes</span><span class=3D"si">}</span>=
+<span class=3D"s2">"</span><span class=3D"p">)</span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>WRITE <span cla=
+ss=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">OUTPUT_FIL=
+E</span><span class=3D"si">}</span><span class=3D"s2">"</span> <span class=
+=3D"s2">"
+namespace { const char file_array[] =3D { </span><span class=3D"si">${</spa=
+n><span class=3D"nv">chars</span><span class=3D"si">}</span><span class=3D"=
+s2"> }; }
+extern const char* const file_begin =3D file_array;
+extern const char* const file_end =3D file_array + sizeof(file_array);
+"</span><span class=3D"p">)</span>
+    <span class=3D"nb">return</span><span class=3D"p">()</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>Everything should now compile and run, but the test will still fail. If =
+you take
+a peek into the build directory, you can see the intermediate generated fil=
+e:</p>
+
+<div class=3D"language-c++ highlighter-rouge"><div class=3D"highlight"><pre=
+ class=3D"highlight"><code><span class=3D"k">namespace</span> <span class=
+=3D"p">{</span> <span class=3D"k">const</span> <span class=3D"kt">char</spa=
+n> <span class=3D"n">file_array</span><span class=3D"p">[]</span> <span cla=
+ss=3D"o">=3D</span> <span class=3D"p">{</span> <span class=3D"sc">'\x48'</s=
+pan><span class=3D"p">,</span> <span class=3D"sc">'\x65'</span><span class=
+=3D"p">,</span> <span class=3D"sc">'\x6c'</span><span class=3D"p">,</span> =
+<span class=3D"sc">'\x6c'</span><span class=3D"p">,</span> <span class=3D"s=
+c">'\x6f'</span><span class=3D"p">,</span> <span class=3D"sc">'\x2c'</span>=
+<span class=3D"p">,</span> <span class=3D"sc">'\x20'</span><span class=3D"p=
+">,</span> <span class=3D"sc">'\x77'</span><span class=3D"p">,</span> <span=
+ class=3D"sc">'\x6f'</span><span class=3D"p">,</span> <span class=3D"sc">'\=
+x72'</span><span class=3D"p">,</span> <span class=3D"sc">'\x6c'</span><span=
+ class=3D"p">,</span> <span class=3D"sc">'\x64'</span><span class=3D"p">,</=
+span> <span class=3D"sc">'\x21'</span> <span class=3D"p">};</span> <span cl=
+ass=3D"p">}</span>
+<span class=3D"k">extern</span> <span class=3D"k">const</span> <span class=
+=3D"kt">char</span><span class=3D"o">*</span> <span class=3D"k">const</span=
+> <span class=3D"n">file_begin</span> <span class=3D"o">=3D</span> <span cl=
+ass=3D"n">file_array</span><span class=3D"p">;</span>
+<span class=3D"k">extern</span> <span class=3D"k">const</span> <span class=
+=3D"kt">char</span><span class=3D"o">*</span> <span class=3D"k">const</span=
+> <span class=3D"n">file_end</span> <span class=3D"o">=3D</span> <span clas=
+s=3D"n">file_array</span> <span class=3D"o">+</span> <span class=3D"k">size=
+of</span><span class=3D"p">(</span><span class=3D"n">file_array</span><span=
+ class=3D"p">);</span>
+</code></pre></div></div>
+
+<p>The <code class=3D"language-plaintext highlighter-rouge">file_array</cod=
+e> will contain the contents of our <code class=3D"language-plaintext highl=
+ighter-rouge">hello.txt</code> file encoded as a
+C++ character array. Pretty neat, and it only took 8 SLOC in <code class=3D=
+"language-plaintext highlighter-rouge">CMakeRC.cmake</code>!</p>
+
+<p>There=E2=80=99s a problem, though: We=E2=80=99ve named the two pointers =
+<code class=3D"language-plaintext highlighter-rouge">file_begin</code> and
+<code class=3D"language-plaintext highlighter-rouge">file_end</code>, and w=
+e never vary them when compiling files. This means that we can
+only compile one resource into our binary, ever! That=E2=80=99s pretty usel=
+ess=E2=80=A6</p>
+
+<p>In addition, how do we go about accessing the contents from <code class=
+=3D"language-plaintext highlighter-rouge">cmrc::open</code>? We
+could just return a pointer to <code class=3D"language-plaintext highlighte=
+r-rouge">file_begin</code> and <code class=3D"language-plaintext highlighte=
+r-rouge">file_end</code>, but we want to get
+rid of names those and somehow access based on filename. Hm=E2=80=A6</p>
+
+<h2 id=3D"step-4-encoding-the-filesystem-structure">Step 4: Encoding the Fi=
+lesystem Structure</h2>
+
+<p>We want to be able to access things by the path from which they were com=
+piled,
+so we must somehow encode the file paths into both the symbol names as well=
+ as
+some kind of lookup-table that is searched at runtime based on filenames.</=
+p>
+
+<h3 id=3D"step-4a-generating-identifierssymbols">Step 4a: Generating Identi=
+fiers/Symbols</h3>
+
+<p>This is actually a fairly simple task. We want to make a symbol based on=
+ the
+name of the file that is passed in to <code class=3D"language-plaintext hig=
+hlighter-rouge">cmrc_add_resource_library</code>. Let=E2=80=99s make
+a function to do that:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>_cm_encode_fpath var fpath<span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>MAKE_C_IDENTI=
+FIER <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">fpath</span><span class=3D"si">}</span><span class=3D"s2">"</span> iden=
+t<span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>MD5 hash <spa=
+n class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">fpath=
+</span><span class=3D"si">}</span><span class=3D"s2">"</span><span class=3D=
+"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>SUBSTRING <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">hash=
+</span><span class=3D"si">}</span><span class=3D"s2">"</span> 0 4 hash<span=
+ class=3D"p">)</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span><span class=3D"s=
+i">${</span><span class=3D"nv">var</span><span class=3D"si">}</span> f_<spa=
+n class=3D"si">${</span><span class=3D"nv">hash</span><span class=3D"si">}<=
+/span>_<span class=3D"si">${</span><span class=3D"nv">ident</span><span cla=
+ss=3D"si">}</span> PARENT_SCOPE<span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>We do not manipulation of the path: We assume that the caller of
+<code class=3D"language-plaintext highlighter-rouge">_cm_encode_fpath</code=
+> will pass us in the path that they want to be encoded,
+exactly as they want it. To make us of this, we need to change up
+<code class=3D"language-plaintext highlighter-rouge">_cmrc_generate_interme=
+diate_cpp</code> a little bit:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>_cmrc_generate_intermediate_cpp libname symbol outfile infil=
+e<span class=3D"p">)</span>
+    <span class=3D"nb">add_custom_command</span><span class=3D"p">(</span>
+        <span class=3D"c1"># This is the file we will generate</span>
+        OUTPUT <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">outfile</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span>
+        <span class=3D"c1"># These are the primary files that affect the ou=
+tput</span>
+        DEPENDS <span class=3D"s2">"</span><span class=3D"si">${</span><spa=
+n class=3D"nv">infile</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=
+=3D"nv">this_script</span><span class=3D"si">}</span><span class=3D"s2">"</=
+span>
+        COMMAND
+            <span class=3D"s2">"</span><span class=3D"si">${</span><span cl=
+ass=3D"nv">CMAKE_COMMAND</span><span class=3D"si">}</span><span class=3D"s2=
+">"</span>
+                -D_CMRC_GENERATE_MODE=3DTRUE
+                -DLIBRARY=3D<span class=3D"si">${</span><span class=3D"nv">=
+libname</span><span class=3D"si">}</span>
+                -DSYMBOL=3D<span class=3D"si">${</span><span class=3D"nv">s=
+ymbol</span><span class=3D"si">}</span>
+                <span class=3D"s2">"-DINPUT_FILE=3D</span><span class=3D"si=
+">${</span><span class=3D"nv">infile</span><span class=3D"si">}</span><span=
+ class=3D"s2">"</span>
+                <span class=3D"s2">"-DOUTPUT_FILE=3D</span><span class=3D"s=
+i">${</span><span class=3D"nv">outfile</span><span class=3D"si">}</span><sp=
+an class=3D"s2">"</span>
+                -P <span class=3D"s2">"</span><span class=3D"si">${</span><=
+span class=3D"nv">this_script</span><span class=3D"si">}</span><span class=
+=3D"s2">"</span>
+        COMMENT <span class=3D"s2">"Generating intermediate file for </span=
+><span class=3D"si">${</span><span class=3D"nv">infile</span><span class=3D=
+"si">}</span><span class=3D"s2">"</span>
+    <span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>We add two new parameters to the front: a <code class=3D"language-plaint=
+ext highlighter-rouge">libname</code> and a <code class=3D"language-plainte=
+xt highlighter-rouge">symbol</code>. <code class=3D"language-plaintext high=
+lighter-rouge">symbol</code> is
+where we=E2=80=99ll pass the name of the symbol for the file, whereas <code=
+ class=3D"language-plaintext highlighter-rouge">libname</code> will
+pass the name of the resource library we are generating. That way, to resou=
+rce
+libraries which compile in a file with the same path will not collide with
+eachother. We pass <code class=3D"language-plaintext highlighter-rouge">lib=
+name</code> and <code class=3D"language-plaintext highlighter-rouge">symbol=
+</code> to our generation script as <code class=3D"language-plaintext highl=
+ighter-rouge">LIBRARY</code>
+and <code class=3D"language-plaintext highlighter-rouge">SYMBOL</code>, res=
+pectively.</p>
+
+<p>We=E2=80=99ll also need to change the generating block at the top of <co=
+de class=3D"language-plaintext highlighter-rouge">CMakeRC.cmake</code> to
+make use of these new options:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">if</span><span class=3D"p">=
+(</span>_CMRC_GENERATE_MODE<span class=3D"p">)</span>
+    <span class=3D"c1"># Read in the digits</span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>READ <span clas=
+s=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">INPUT_FILE<=
+/span><span class=3D"si">}</span><span class=3D"s2">"</span> bytes HEX<span=
+ class=3D"p">)</span>
+    <span class=3D"c1"># Format each pair into a character literal</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REGEX REPLACE=
+ <span class=3D"s2">"(..)"</span> <span class=3D"s2">"'</span><span class=
+=3D"se">\\\\</span><span class=3D"s2">x</span><span class=3D"se">\\</span><=
+span class=3D"s2">1', "</span> chars <span class=3D"s2">"</span><span class=
+=3D"si">${</span><span class=3D"nv">bytes</span><span class=3D"si">}</span>=
+<span class=3D"s2">"</span><span class=3D"p">)</span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>WRITE <span cla=
+ss=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">OUTPUT_FIL=
+E</span><span class=3D"si">}</span><span class=3D"s2">"</span> <span class=
+=3D"s2">"
+namespace { const char file_array[] =3D { </span><span class=3D"si">${</spa=
+n><span class=3D"nv">chars</span><span class=3D"si">}</span><span class=3D"=
+s2"> }; }
+namespace cmrc { namespace </span><span class=3D"si">${</span><span class=
+=3D"nv">LIBRARY</span><span class=3D"si">}</span><span class=3D"s2"> { name=
+space res_chars {
+extern const char* const </span><span class=3D"si">${</span><span class=3D"=
+nv">SYMBOL</span><span class=3D"si">}</span><span class=3D"s2">_begin =3D f=
+ile_array;
+extern const char* const </span><span class=3D"si">${</span><span class=3D"=
+nv">SYMBOL</span><span class=3D"si">}</span><span class=3D"s2">_end =3D fil=
+e_array + sizeof(file_array);
+}}}
+"</span><span class=3D"p">)</span>
+    <span class=3D"nb">return</span><span class=3D"p">()</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>The only thing we needed to change was the generated C++ code template. =
+Great!</p>
+
+<p>The last thing we need to do is change our call to
+<code class=3D"language-plaintext highlighter-rouge">_cmrc_generate_interme=
+diate_cpp</code> in <code class=3D"language-plaintext highlighter-rouge">cm=
+rc_add_resource_library</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"c1"># Generate a symbol name fo=
+r the file's character array</span>
+<span class=3D"nf">_cm_encode_fpath</span><span class=3D"p">(</span>sym <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">inpu=
+t</span><span class=3D"si">}</span><span class=3D"s2">"</span><span class=
+=3D"p">)</span>
+<span class=3D"c1"># Generate the identifier for the resource library's nam=
+espace</span>
+<span class=3D"nb">string</span><span class=3D"p">(</span>MAKE_C_IDENTIFIER=
+ <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">=
+name</span><span class=3D"si">}</span><span class=3D"s2">"</span> ident<spa=
+n class=3D"p">)</span>
+<span class=3D"c1"># Generate the rule for the intermediate source file</sp=
+an>
+<span class=3D"nf">_cmrc_generate_intermediate_cpp</span><span class=3D"p">=
+(</span><span class=3D"si">${</span><span class=3D"nv">ident</span><span cl=
+ass=3D"si">}</span> <span class=3D"si">${</span><span class=3D"nv">sym</spa=
+n><span class=3D"si">}</span> <span class=3D"s2">"</span><span class=3D"si"=
+>${</span><span class=3D"nv">abspath</span><span class=3D"si">}</span><span=
+ class=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D"si">${</sp=
+an><span class=3D"nv">abs_input</span><span class=3D"si">}</span><span clas=
+s=3D"s2">"</span><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>And that=E2=80=99s that! We can now add as many source files as we wish,=
+ and each one
+will be compiled to a different object file using a different symbol.</p>
+
+<h3 id=3D"step-4b-generating-a-lookup-table">Step 4b: Generating a Lookup T=
+able</h3>
+
+<p>The final step will be to generate some code to actually access the reso=
+urce
+files at runtime. We can do this by generating a simple C++ file for the
+library which references each file by name and the corresponding symbol nam=
+es.
+This will require that we slightly modify just about everything we=E2=80=99=
+ve done at
+least a little bit. For this simple use case, we can maintain a single glob=
+al
+lookup table for all the resources that are loaded at runtime. Here=E2=80=
+=99s what
+the string for <code class=3D"language-plaintext highlighter-rouge">cmrc.hp=
+p</code> should contain:</p>
+
+<div class=3D"language-c++ highlighter-rouge"><div class=3D"highlight"><pre=
+ class=3D"highlight"><code><span class=3D"cp">#ifndef CMRC_CMRC_HPP_INCLUDE=
+D
+#define CMRC_CMRC_HPP_INCLUDED
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">&lt;string&gt;</span=
+><span class=3D"cp">
+#include</span> <span class=3D"cpf">&lt;map&gt;</span><span class=3D"cp">
+#include</span> <span class=3D"cpf">&lt;mutex&gt;</span><span class=3D"cp">
+</span>
+<span class=3D"cp">#define CMRC_INIT(libname) \
+    do { \
+        extern void cmrc_init_resources_##libname(); \
+        cmrc_init_resources_##libname(); \
+    } while (0)
+</span>
+<span class=3D"k">namespace</span> <span class=3D"n">cmrc</span> <span clas=
+s=3D"p">{</span>
+
+<span class=3D"k">class</span> <span class=3D"nc">resource</span> <span cla=
+ss=3D"p">{</span>
+    <span class=3D"k">const</span> <span class=3D"kt">char</span><span clas=
+s=3D"o">*</span> <span class=3D"n">_begin</span> <span class=3D"o">=3D</spa=
+n> <span class=3D"nb">nullptr</span><span class=3D"p">;</span>
+    <span class=3D"k">const</span> <span class=3D"kt">char</span><span clas=
+s=3D"o">*</span> <span class=3D"n">_end</span> <span class=3D"o">=3D</span>=
+ <span class=3D"nb">nullptr</span><span class=3D"p">;</span>
+<span class=3D"nl">public:</span>
+    <span class=3D"k">const</span> <span class=3D"kt">char</span><span clas=
+s=3D"o">*</span> <span class=3D"n">begin</span><span class=3D"p">()</span> =
+<span class=3D"k">const</span> <span class=3D"p">{</span> <span class=3D"k"=
+>return</span> <span class=3D"n">_begin</span><span class=3D"p">;</span> <s=
+pan class=3D"p">}</span>
+    <span class=3D"k">const</span> <span class=3D"kt">char</span><span clas=
+s=3D"o">*</span> <span class=3D"n">end</span><span class=3D"p">()</span> <s=
+pan class=3D"k">const</span> <span class=3D"p">{</span> <span class=3D"k">r=
+eturn</span> <span class=3D"n">_end</span><span class=3D"p">;</span> <span =
+class=3D"p">}</span>
+
+    <span class=3D"n">resource</span><span class=3D"p">()</span> <span clas=
+s=3D"o">=3D</span> <span class=3D"k">default</span><span class=3D"p">;</spa=
+n>
+    <span class=3D"n">resource</span><span class=3D"p">(</span><span class=
+=3D"k">const</span> <span class=3D"kt">char</span><span class=3D"o">*</span=
+> <span class=3D"n">beg</span><span class=3D"p">,</span> <span class=3D"k">=
+const</span> <span class=3D"kt">char</span><span class=3D"o">*</span> <span=
+ class=3D"n">end</span><span class=3D"p">)</span> <span class=3D"o">:</span=
+> <span class=3D"n">_begin</span><span class=3D"p">(</span><span class=3D"n=
+">beg</span><span class=3D"p">),</span> <span class=3D"n">_end</span><span =
+class=3D"p">(</span><span class=3D"n">end</span><span class=3D"p">)</span> =
+<span class=3D"p">{}</span>
+<span class=3D"p">};</span>
+
+<span class=3D"k">using</span> <span class=3D"n">resource_table</span> <spa=
+n class=3D"o">=3D</span> <span class=3D"n">std</span><span class=3D"o">::</=
+span><span class=3D"n">map</span><span class=3D"o">&lt;</span><span class=
+=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">string</span>=
+<span class=3D"p">,</span> <span class=3D"n">resource</span><span class=3D"=
+o">&gt;</span><span class=3D"p">;</span>
+
+<span class=3D"k">namespace</span> <span class=3D"n">detail</span> <span cl=
+ass=3D"p">{</span>
+
+<span class=3D"kr">inline</span> <span class=3D"n">resource_table</span><sp=
+an class=3D"o">&amp;</span> <span class=3D"n">table_instance</span><span cl=
+ass=3D"p">()</span> <span class=3D"p">{</span>
+    <span class=3D"k">static</span> <span class=3D"n">resource_table</span>=
+ <span class=3D"n">table</span><span class=3D"p">;</span>
+    <span class=3D"k">return</span> <span class=3D"n">table</span><span cla=
+ss=3D"p">;</span>
+<span class=3D"p">}</span>
+
+<span class=3D"kr">inline</span> <span class=3D"n">std</span><span class=3D=
+"o">::</span><span class=3D"n">mutex</span><span class=3D"o">&amp;</span> <=
+span class=3D"n">table_instance_mutex</span><span class=3D"p">()</span> <sp=
+an class=3D"p">{</span>
+    <span class=3D"k">static</span> <span class=3D"n">std</span><span class=
+=3D"o">::</span><span class=3D"n">mutex</span> <span class=3D"n">mut</span>=
+<span class=3D"p">;</span>
+    <span class=3D"k">return</span> <span class=3D"n">mut</span><span class=
+=3D"p">;</span>
+<span class=3D"p">}</span>
+
+<span class=3D"c1">// We restrict access to the resource table through a mu=
+tex so that multiple</span>
+<span class=3D"c1">// threads can access it safely.</span>
+<span class=3D"k">template</span> <span class=3D"o">&lt;</span><span class=
+=3D"k">typename</span> <span class=3D"nc">Func</span><span class=3D"p">&gt;=
+</span>
+<span class=3D"kr">inline</span> <span class=3D"k">auto</span> <span class=
+=3D"n">with_table</span><span class=3D"p">(</span><span class=3D"n">Func</s=
+pan> <span class=3D"n">fn</span><span class=3D"p">)</span> <span class=3D"o=
+">-&gt;</span> <span class=3D"k">decltype</span><span class=3D"p">(</span><=
+span class=3D"n">fn</span><span class=3D"p">(</span><span class=3D"n">std</=
+span><span class=3D"o">::</span><span class=3D"n">declval</span><span class=
+=3D"o">&lt;</span><span class=3D"n">resource_table</span><span class=3D"o">=
+&amp;&gt;</span><span class=3D"p">()))</span> <span class=3D"p">{</span>
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">lock_guard</span><span class=3D"o">&lt;</span><span class=3D"n">std</span=
+><span class=3D"o">::</span><span class=3D"n">mutex</span><span class=3D"o"=
+>&gt;</span> <span class=3D"n">lk</span><span class=3D"p">{</span> <span cl=
+ass=3D"n">table_instance_mutex</span><span class=3D"p">()</span> <span clas=
+s=3D"p">};</span>
+    <span class=3D"k">return</span> <span class=3D"n">fn</span><span class=
+=3D"p">(</span><span class=3D"n">table_instance</span><span class=3D"p">())=
+;</span>
+<span class=3D"p">}</span>
+
+<span class=3D"p">}</span>
+
+<span class=3D"kr">inline</span> <span class=3D"n">resource</span> <span cl=
+ass=3D"n">open</span><span class=3D"p">(</span><span class=3D"k">const</spa=
+n> <span class=3D"kt">char</span><span class=3D"o">*</span> <span class=3D"=
+n">fname</span><span class=3D"p">)</span> <span class=3D"p">{</span>
+    <span class=3D"k">return</span> <span class=3D"n">detail</span><span cl=
+ass=3D"o">::</span><span class=3D"n">with_table</span><span class=3D"p">([<=
+/span><span class=3D"n">fname</span><span class=3D"p">](</span><span class=
+=3D"k">const</span> <span class=3D"n">resource_table</span><span class=3D"o=
+">&amp;</span> <span class=3D"n">table</span><span class=3D"p">)</span> <sp=
+an class=3D"p">{</span>
+        <span class=3D"k">auto</span> <span class=3D"n">iter</span> <span c=
+lass=3D"o">=3D</span> <span class=3D"n">table</span><span class=3D"p">.</sp=
+an><span class=3D"n">find</span><span class=3D"p">(</span><span class=3D"n"=
+>fname</span><span class=3D"p">);</span>
+        <span class=3D"k">if</span> <span class=3D"p">(</span><span class=
+=3D"n">iter</span> <span class=3D"o">=3D=3D</span> <span class=3D"n">table<=
+/span><span class=3D"p">.</span><span class=3D"n">end</span><span class=3D"=
+p">())</span> <span class=3D"p">{</span>
+            <span class=3D"k">return</span> <span class=3D"n">resource</spa=
+n> <span class=3D"p">{};</span>
+        <span class=3D"p">}</span>
+        <span class=3D"k">return</span> <span class=3D"n">iter</span><span =
+class=3D"o">-&gt;</span><span class=3D"n">second</span><span class=3D"p">;<=
+/span>
+    <span class=3D"p">});</span>
+<span class=3D"p">}</span>
+
+<span class=3D"kr">inline</span> <span class=3D"n">resource</span> <span cl=
+ass=3D"n">open</span><span class=3D"p">(</span><span class=3D"k">const</spa=
+n> <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n"=
+>string</span><span class=3D"o">&amp;</span> <span class=3D"n">fname</span>=
+<span class=3D"p">)</span> <span class=3D"p">{</span>
+    <span class=3D"k">return</span> <span class=3D"n">open</span><span clas=
+s=3D"p">(</span><span class=3D"n">fname</span><span class=3D"p">.</span><sp=
+an class=3D"n">data</span><span class=3D"p">());</span>
+<span class=3D"p">}</span>
+
+<span class=3D"p">}</span>
+
+<span class=3D"cp">#endif // CMRC_CMRC_HPP_INCLUDED
+</span></code></pre></div></div>
+
+<p>It=E2=80=99s pretty compact: There=E2=80=99s not much to this file.</p>
+
+<p><code class=3D"language-plaintext highlighter-rouge">with_table</code> p=
+rotects against races on accessing the lookup table.
+We use a regular mutex in this case, but using a <code class=3D"language-pl=
+aintext highlighter-rouge">shared_mutex</code> would
+definitely lead to better performance under load on <code class=3D"language=
+-plaintext highlighter-rouge">open</code>, since multiple
+threads should be able to safely read from the table at any time. In my
+example, I=E2=80=99m sticking to what is available to C++11, just because t=
+hat=E2=80=99s
+what I had available when implementing my previous version.</p>
+
+<p>We can now see the definition of that <code class=3D"language-plaintext =
+highlighter-rouge">CMRC_INIT</code> macro as well. We=E2=80=99ll get to
+that shortly. For now, we can leave it aside.</p>
+
+<p>The <code class=3D"language-plaintext highlighter-rouge">resource</code>=
+ class is beginning to be filled out. It honestly doesn=E2=80=99t need
+much. We can create it from two pointers, and the <code class=3D"language-p=
+laintext highlighter-rouge">begin()</code> and <code class=3D"language-plai=
+ntext highlighter-rouge">end()</code> member
+functions will return those pointers.</p>
+
+<p>There are two considerable changes to <code class=3D"language-plaintext =
+highlighter-rouge">cmrc_add_resource_library</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>cmrc_add_resource_library name<span class=3D"p">)</span>
+    <span class=3D"c1"># Generate the identifier for the resource library's=
+ namespace</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>MAKE_C_IDENTI=
+FIER <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">name</span><span class=3D"si">}</span><span class=3D"s2">"</span> libid=
+ent<span class=3D"p">)</span>
+    <span class=3D"c1"># Generate a library with the compiled in character =
+arrays.</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>cpp_content <spa=
+n class=3D"s2">[=3D[
+        #include &lt;cmrc/cmrc.hpp&gt;
+        #include &lt;map&gt;
+
+        namespace cmrc { namespace %{libident} {
+
+        namespace res_chars {
+        // These are the files which are available in this resource library
+        $&lt;JOIN:$&lt;TARGET_PROPERTY:%{libname},CMRC_EXTERN_DECLS&gt;,
+        &gt;
+        }
+
+        inline void load_resources() {
+            // This initializes the list of resources and pointers to their=
+ data
+            static std::once_flag flag;
+            std::call_once(flag, [] {
+                cmrc::detail::with_table([](resource_table&amp; table) {
+                    $&lt;JOIN:$&lt;TARGET_PROPERTY:%{libname},CMRC_TABLE_PO=
+PULATE&gt;,
+                    &gt;
+                });
+            });
+        }
+
+        namespace {
+            extern struct resource_initializer {
+                resource_initializer() {
+                    load_resources();
+                }
+            } dummy;
+        }
+
+        }}
+
+        // The resource library initialization function. Intended to be cal=
+led
+        // before anyone intends to use any of the resource defined by this
+        // resource library
+        extern void cmrc_init_resources_%{libident}() {
+            cmrc::%{libident}::load_resources();
+        }
+    ]=3D]</span><span class=3D"p">)</span>
+    <span class=3D"nb">get_filename_component</span><span class=3D"p">(</sp=
+an>libdir <span class=3D"s2">"</span><span class=3D"si">${</span><span clas=
+s=3D"nv">CMAKE_CURRENT_BINARY_DIR</span><span class=3D"si">}</span><span cl=
+ass=3D"s2">/</span><span class=3D"si">${</span><span class=3D"nv">name</spa=
+n><span class=3D"si">}</span><span class=3D"s2">"</span> ABSOLUTE<span clas=
+s=3D"p">)</span>
+    <span class=3D"nb">get_filename_component</span><span class=3D"p">(</sp=
+an>libcpp <span class=3D"s2">"</span><span class=3D"si">${</span><span clas=
+s=3D"nv">libdir</span><span class=3D"si">}</span><span class=3D"s2">/lib.cp=
+p"</span> ABSOLUTE<span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REPLACE <span=
+ class=3D"s2">"%{libname}"</span> <span class=3D"s2">"</span><span class=3D=
+"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</span><spa=
+n class=3D"s2">"</span> cpp_content <span class=3D"s2">"</span><span class=
+=3D"si">${</span><span class=3D"nv">cpp_content</span><span class=3D"si">}<=
+/span><span class=3D"s2">"</span><span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REPLACE <span=
+ class=3D"s2">"%{libident}"</span> <span class=3D"s2">"</span><span class=
+=3D"si">${</span><span class=3D"nv">libident</span><span class=3D"si">}</sp=
+an><span class=3D"s2">"</span> cpp_content <span class=3D"s2">"</span><span=
+ class=3D"si">${</span><span class=3D"nv">cpp_content</span><span class=3D"=
+si">}</span><span class=3D"s2">"</span><span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REPLACE <span=
+ class=3D"s2">"</span><span class=3D"se">\n</span><span class=3D"s2">      =
+  "</span> <span class=3D"s2">"</span><span class=3D"se">\n</span><span cla=
+ss=3D"s2">"</span> cpp_content <span class=3D"s2">"</span><span class=3D"si=
+">${</span><span class=3D"nv">cpp_content</span><span class=3D"si">}</span>=
+<span class=3D"s2">"</span><span class=3D"p">)</span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>GENERATE OUTPUT=
+ <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">=
+libcpp</span><span class=3D"si">}</span><span class=3D"s2">"</span> CONTENT=
+ <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">=
+cpp_content</span><span class=3D"si">}</span><span class=3D"s2">"</span><sp=
+an class=3D"p">)</span>
+    <span class=3D"c1"># Generate the actual static library. Each source fi=
+le is just a single file</span>
+    <span class=3D"c1"># with a character array compiled in containing the =
+contents of the</span>
+    <span class=3D"c1"># corresponding resource file.</span>
+    <span class=3D"nb">add_library</span><span class=3D"p">(</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n> STATIC <span class=3D"si">${</span><span class=3D"nv">libcpp</span><span=
+ class=3D"si">}</span><span class=3D"p">)</span>
+    <span class=3D"nb">target_link_libraries</span><span class=3D"p">(</spa=
+n><span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"=
+si">}</span> PUBLIC cmrc::base<span class=3D"p">)</span>
+    <span class=3D"nb">foreach</span><span class=3D"p">(</span>input IN LIS=
+TS ARGN<span class=3D"p">)</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abs_input <span class=3D"s2">"</span><span class=3D"si">${</span><sp=
+an class=3D"nv">input</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> ABSOLUTE<span class=3D"p">)</span>
+        <span class=3D"c1"># Generate a filename based on the input filenam=
+e that we can put in</span>
+        <span class=3D"c1"># the intermediate directory.</span>
+        <span class=3D"nb">file</span><span class=3D"p">(</span>RELATIVE_PA=
+TH relpath <span class=3D"s2">"</span><span class=3D"si">${</span><span cla=
+ss=3D"nv">CMAKE_CURRENT_SOURCE_DIR</span><span class=3D"si">}</span><span c=
+lass=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D"si">${</span=
+><span class=3D"nv">abs_input</span><span class=3D"si">}</span><span class=
+=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">if</span><span class=3D"p">(</span>relpath MATCH=
+ES <span class=3D"s2">"^</span><span class=3D"se">\\</span><span class=3D"s=
+2">.</span><span class=3D"se">\\</span><span class=3D"s2">."</span><span cl=
+ass=3D"p">)</span>
+            <span class=3D"c1"># For now we just error on files that exist =
+outside of the soure dir.</span>
+            <span class=3D"nb">message</span><span class=3D"p">(</span>SEND=
+_ERROR <span class=3D"s2">"Cannot add file '</span><span class=3D"si">${</s=
+pan><span class=3D"nv">input</span><span class=3D"si">}</span><span class=
+=3D"s2">': File must be in a subdirectory of the source directory"</span><s=
+pan class=3D"p">)</span>
+            <span class=3D"nf">continue</span><span class=3D"p">()</span>
+        <span class=3D"nb">endif</span><span class=3D"p">()</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abspath <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">libdir</span><span class=3D"si">}</span><span class=3D"s2">/i=
+ntermediate/</span><span class=3D"si">${</span><span class=3D"nv">relpath</=
+span><span class=3D"si">}</span><span class=3D"s2">.cpp"</span> ABSOLUTE<sp=
+an class=3D"p">)</span>
+        <span class=3D"c1"># Generate a symbol name for the file's characte=
+r array</span>
+        <span class=3D"nf">_cm_encode_fpath</span><span class=3D"p">(</span=
+>sym <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">input</span><span class=3D"si">}</span><span class=3D"s2">"</span><span=
+ class=3D"p">)</span>
+        <span class=3D"c1"># Generate the rule for the intermediate source =
+file</span>
+        <span class=3D"nf">_cmrc_generate_intermediate_cpp</span><span clas=
+s=3D"p">(</span><span class=3D"si">${</span><span class=3D"nv">libident</sp=
+an><span class=3D"si">}</span> <span class=3D"si">${</span><span class=3D"n=
+v">sym</span><span class=3D"si">}</span> <span class=3D"s2">"</span><span c=
+lass=3D"si">${</span><span class=3D"nv">abspath</span><span class=3D"si">}<=
+/span><span class=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D=
+"si">${</span><span class=3D"nv">abs_input</span><span class=3D"si">}</span=
+><span class=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">target_sources</span><span class=3D"p">(</span><=
+span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si"=
+>}</span> PRIVATE <span class=3D"si">${</span><span class=3D"nv">abspath</s=
+pan><span class=3D"si">}</span><span class=3D"p">)</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_EXTERN_DECLS
+            <span class=3D"s2">"// Pointers to </span><span class=3D"si">${=
+</span><span class=3D"nv">input</span><span class=3D"si">}</span><span clas=
+s=3D"s2">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_begin</span><span class=3D"se">\;</span><span class=3D"s2=
+">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_end</span><span class=3D"se">\;</span><span class=3D"s2">=
+"</span>
+            <span class=3D"p">)</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_TABLE_POPULATE
+            <span class=3D"s2">"table.emplace(</span><span class=3D"se">\"<=
+/span><span class=3D"si">${</span><span class=3D"nv">input</span><span clas=
+s=3D"si">}</span><span class=3D"se">\"</span><span class=3D"s2">, resource{=
+res_chars::</span><span class=3D"si">${</span><span class=3D"nv">sym</span>=
+<span class=3D"si">}</span><span class=3D"s2">_begin, res_chars::</span><sp=
+an class=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}<=
+/span><span class=3D"s2">_end})</span><span class=3D"se">\;</span><span cla=
+ss=3D"s2">"</span>
+            <span class=3D"p">)</span>
+    <span class=3D"nb">endforeach</span><span class=3D"p">()</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>There are two important new things going on here:</p>
+
+<ol>
+  <li>The library has one main C++ file contained in the <code class=3D"lan=
+guage-plaintext highlighter-rouge">cpp_content</code> string. We
+use CMake=E2=80=99s bracketed argument syntax, so we must do the variable
+replacement ourselves in the lines following. This file is written to the
+path defined by the <code class=3D"language-plaintext highlighter-rouge">li=
+bcpp</code> variable. The content of the file is written
+using <code class=3D"language-plaintext highlighter-rouge">file(GENERATE)</=
+code> rather than <code class=3D"language-plaintext highlighter-rouge">file=
+(WRITE)</code>. I=E2=80=99m planning on
+immediately doing some refactoring of this function which will make this
+decision much more clear soon. We use two target properties to generate the
+file: <code class=3D"language-plaintext highlighter-rouge">CMRC_EXTERN_DECL=
+S</code> and <code class=3D"language-plaintext highlighter-rouge">CMRC_TABL=
+E_POPULATE</code>, both of which are
+properties containing lines of C++ code which will declare the resource
+pointers and populate the lookup table, respectively.</li>
+  <li>As we loop through and generate each resource file=E2=80=99s object f=
+ile, we append
+to the aforementioned target properties the relevant lines of C++ code that
+will both declare the resource pointers and populate the lookup table for
+the file.</li>
+</ol>
+
+<p>You=E2=80=99ll also notice that the resource library=E2=80=99s C++ file =
+defines a function
+beginning with <code class=3D"language-plaintext highlighter-rouge">cmrc_in=
+it_resources_</code> and ending with the library=E2=80=99s name. This
+is the function that must be called to initialize the resource library at
+runtime. This leads back to the <code class=3D"language-plaintext highlight=
+er-rouge">CMRC_INIT</code> macro. This macro must be called
+with the name of the resource library: It calls this function to initialize=
+ the
+resources therein. If this macro is not called, the resources will not be
+available when we ask for them with <code class=3D"language-plaintext highl=
+ighter-rouge">cmrc::open</code>. There are a few things I=E2=80=99ve
+tried to get aroud this requirement:</p>
+
+<ol>
+  <li>Define a static object inside the library=E2=80=99s C++ file whose co=
+nstructor will
+initialize the resources
+    <ul>
+      <li>This is a good idea, and it works pretty well. But alas! The link=
+er is not
+so keen on letting us succeed so easily: Since we reference no symbols
+from the resource library from <code class=3D"language-plaintext highlighte=
+r-rouge">main()</code> neither directly nor indirectly,
+the linker never considers the object file for inclusion, and the object
+file is simply discarded: It assumes (Perhaps incorrectly?) that since
+nothing in the translation unit is referenced from another TU, that TU can
+have no effect on the rest of the program. This is an important linker
+optimization. There <em>are</em> ways to get around it, such as using speci=
+fic
+linker flags to tell it to never discard any symbols or to specifically
+link in a given object file. I myself was unable to find a way to get these
+to work in a cross-platform manner using CMake.</li>
+    </ul>
+  </li>
+  <li>Define a global constructor using <code class=3D"language-plaintext h=
+ighlighter-rouge">__attribute__ ((constructor))</code>
+    <ul>
+      <li>This works as well, but only on GCC/Clang, and it still suffers a=
+ll the
+same problems listed above for static object constructors.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>If anyone can find a way to initialize the resource tables without the
+<code class=3D"language-plaintext highlighter-rouge">CMRC_INIT</code> macro=
+, <em>please</em> don=E2=80=99t hesitate to contact me or leave an issue/PR=
+ on
+the GitHub project.</p>
+
+<h2 id=3D"step-5-celebrate">Step 5: Celebrate?</h2>
+
+<p>Well, the test is passing now: We see =E2=80=9CHello, world!=E2=80=9D on=
+ the output, and CTest
+recognizes it as a passing test too. Great! But I think we can make some
+improvements=E2=80=A6</p>
+
+<h2 id=3D"step-6-another-test">Step 6: Another Test</h2>
+
+<p>Let=E2=80=99s check that we can read larger, non-text files. Here=E2=80=
+=99s a new test case that
+reads in an image of a flower and tests it against a compiled in <code clas=
+s=3D"language-plaintext highlighter-rouge">flower.jpg</code>.</p>
+
+<div class=3D"language-c++ highlighter-rouge"><div class=3D"highlight"><pre=
+ class=3D"highlight"><code><span class=3D"cp">#include</span> <span class=
+=3D"cpf">&lt;cmrc/cmrc.hpp&gt;</span><span class=3D"cp">
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">&lt;algorithm&gt;</s=
+pan><span class=3D"cp">
+#include</span> <span class=3D"cpf">&lt;fstream&gt;</span><span class=3D"cp=
+">
+#include</span> <span class=3D"cpf">&lt;iterator&gt;</span><span class=3D"c=
+p">
+#include</span> <span class=3D"cpf">&lt;iostream&gt;</span><span class=3D"c=
+p">
+</span>
+
+<span class=3D"kt">int</span> <span class=3D"nf">main</span><span class=3D"=
+p">(</span><span class=3D"kt">int</span> <span class=3D"n">argc</span><span=
+ class=3D"p">,</span> <span class=3D"kt">char</span><span class=3D"o">**</s=
+pan> <span class=3D"n">argv</span><span class=3D"p">)</span> <span class=3D=
+"p">{</span>
+    <span class=3D"k">if</span> <span class=3D"p">(</span><span class=3D"n"=
+>argc</span> <span class=3D"o">!=3D</span> <span class=3D"mi">2</span><span=
+ class=3D"p">)</span> <span class=3D"p">{</span>
+        <span class=3D"n">std</span><span class=3D"o">::</span><span class=
+=3D"n">cerr</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"Inv=
+alid arguments passed to flower</span><span class=3D"se">\n</span><span cla=
+ss=3D"s">"</span><span class=3D"p">;</span>
+        <span class=3D"k">return</span> <span class=3D"mi">2</span><span cl=
+ass=3D"p">;</span>
+    <span class=3D"p">}</span>
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"Reading =
+flower from "</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">ar=
+gv</span><span class=3D"p">[</span><span class=3D"mi">1</span><span class=
+=3D"p">]</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"sc">'\n'</=
+span><span class=3D"p">;</span>
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">ifstream</span> <span class=3D"n">flower_fs</span><span class=3D"p">{</sp=
+an> <span class=3D"n">argv</span><span class=3D"p">[</span><span class=3D"m=
+i">1</span><span class=3D"p">],</span> <span class=3D"n">std</span><span cl=
+ass=3D"o">::</span><span class=3D"n">ios_base</span><span class=3D"o">::</s=
+pan><span class=3D"n">binary</span> <span class=3D"p">};</span>
+    <span class=3D"k">if</span> <span class=3D"p">(</span><span class=3D"o"=
+>!</span><span class=3D"n">flower_fs</span><span class=3D"p">)</span> <span=
+ class=3D"p">{</span>
+        <span class=3D"n">std</span><span class=3D"o">::</span><span class=
+=3D"n">cerr</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"Inv=
+alid filename passed to flower: "</span> <span class=3D"o">&lt;&lt;</span> =
+<span class=3D"n">argv</span><span class=3D"p">[</span><span class=3D"mi">1=
+</span><span class=3D"p">]</span> <span class=3D"o">&lt;&lt;</span> <span c=
+lass=3D"sc">'\n'</span><span class=3D"p">;</span>
+        <span class=3D"k">return</span> <span class=3D"mi">2</span><span cl=
+ass=3D"p">;</span>
+    <span class=3D"p">}</span>
+
+    <span class=3D"k">using</span> <span class=3D"n">iter</span> <span clas=
+s=3D"o">=3D</span> <span class=3D"n">std</span><span class=3D"o">::</span><=
+span class=3D"n">istreambuf_iterator</span><span class=3D"o">&lt;</span><sp=
+an class=3D"kt">char</span><span class=3D"o">&gt;</span><span class=3D"p">;=
+</span>
+    <span class=3D"k">const</span> <span class=3D"k">auto</span> <span clas=
+s=3D"n">fs_size</span> <span class=3D"o">=3D</span> <span class=3D"n">std</=
+span><span class=3D"o">::</span><span class=3D"n">distance</span><span clas=
+s=3D"p">(</span><span class=3D"n">iter</span><span class=3D"p">(</span><spa=
+n class=3D"n">flower_fs</span><span class=3D"p">),</span> <span class=3D"n"=
+>iter</span><span class=3D"p">());</span>
+    <span class=3D"n">flower_fs</span><span class=3D"p">.</span><span class=
+=3D"n">seekg</span><span class=3D"p">(</span><span class=3D"mi">0</span><sp=
+an class=3D"p">);</span>
+
+    <span class=3D"n">CMRC_INIT</span><span class=3D"p">(</span><span class=
+=3D"n">hello</span><span class=3D"p">);</span>
+    <span class=3D"k">auto</span> <span class=3D"n">flower_rc</span> <span =
+class=3D"o">=3D</span> <span class=3D"n">cmrc</span><span class=3D"o">::</s=
+pan><span class=3D"n">open</span><span class=3D"p">(</span><span class=3D"s=
+">"flower.jpg"</span><span class=3D"p">);</span>
+    <span class=3D"k">const</span> <span class=3D"k">auto</span> <span clas=
+s=3D"n">rc_size</span> <span class=3D"o">=3D</span> <span class=3D"n">std</=
+span><span class=3D"o">::</span><span class=3D"n">distance</span><span clas=
+s=3D"p">(</span><span class=3D"n">flower_rc</span><span class=3D"p">.</span=
+><span class=3D"n">begin</span><span class=3D"p">(),</span> <span class=3D"=
+n">flower_rc</span><span class=3D"p">.</span><span class=3D"n">end</span><s=
+pan class=3D"p">());</span>
+    <span class=3D"k">if</span> <span class=3D"p">(</span><span class=3D"n"=
+>rc_size</span> <span class=3D"o">!=3D</span> <span class=3D"n">fs_size</sp=
+an><span class=3D"p">)</span> <span class=3D"p">{</span>
+        <span class=3D"n">std</span><span class=3D"o">::</span><span class=
+=3D"n">cerr</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"Flo=
+wer file sizes do not match: FS =3D=3D "</span> <span class=3D"o">&lt;&lt;<=
+/span> <span class=3D"n">fs_size</span> <span class=3D"o">&lt;&lt;</span> <=
+span class=3D"s">", RC =3D=3D "</span> <span class=3D"o">&lt;&lt;</span> <s=
+pan class=3D"n">rc_size</span> <span class=3D"o">&lt;&lt;</span> <span clas=
+s=3D"s">"</span><span class=3D"se">\n</span><span class=3D"s">"</span><span=
+ class=3D"p">;</span>
+        <span class=3D"k">return</span> <span class=3D"mi">1</span><span cl=
+ass=3D"p">;</span>
+    <span class=3D"p">}</span>
+    <span class=3D"k">if</span> <span class=3D"p">(</span><span class=3D"o"=
+>!</span><span class=3D"n">std</span><span class=3D"o">::</span><span class=
+=3D"n">equal</span><span class=3D"p">(</span><span class=3D"n">flower_rc</s=
+pan><span class=3D"p">.</span><span class=3D"n">begin</span><span class=3D"=
+p">(),</span> <span class=3D"n">flower_rc</span><span class=3D"p">.</span><=
+span class=3D"n">end</span><span class=3D"p">(),</span> <span class=3D"n">i=
+ter</span><span class=3D"p">(</span><span class=3D"n">flower_fs</span><span=
+ class=3D"p">)))</span> <span class=3D"p">{</span>
+        <span class=3D"n">std</span><span class=3D"o">::</span><span class=
+=3D"n">cerr</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"Flo=
+wer file contents do not match</span><span class=3D"se">\n</span><span clas=
+s=3D"s">"</span><span class=3D"p">;</span>
+        <span class=3D"k">return</span> <span class=3D"mi">1</span><span cl=
+ass=3D"p">;</span>
+    <span class=3D"p">}</span>
+<span class=3D"p">}</span>
+</code></pre></div></div>
+
+<p>It=E2=80=99s fairly simple as well: It reads in the path to the source i=
+mage as a
+command line argument, checks that the size of the file on disk and file in
+memory are the same, then checks that they are byte-for-byte identical. Her=
+e=E2=80=99s
+the definition for this executable and test case in the <code class=3D"lang=
+uage-plaintext highlighter-rouge">CMakeLists.txt</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">add_executable</span><span =
+class=3D"p">(</span>flower flower.cpp<span class=3D"p">)</span>
+<span class=3D"nb">target_link_libraries</span><span class=3D"p">(</span>fl=
+ower PRIVATE hello<span class=3D"p">)</span>
+<span class=3D"nb">add_test</span><span class=3D"p">(</span>flower flower <=
+span class=3D"si">${</span><span class=3D"nv">CMAKE_CURRENT_SOURCE_DIR</spa=
+n><span class=3D"si">}</span>/flower.jpg<span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>We just need to add a <code class=3D"language-plaintext highlighter-roug=
+e">flower.jpg</code> file into the source directory. The
+particular image is unimportant, but I=E2=80=99ve chosen a 2.5 MB image fro=
+m WikiMedia
+Commons in the public domain, <a href=3D"https://upload.wikimedia.org/wikip=
+edia/commons/0/0c/White_and_yellow_flower.JPG">found here</a>.</p>
+
+<p>Running CTest again, the <code class=3D"language-plaintext highlighter-r=
+ouge">flower</code> test will fail because the resource size is
+zero! That=E2=80=99s because we haven=E2=80=99t added it to the <code class=
+=3D"language-plaintext highlighter-rouge">hello</code> resource library.</p=
+>
+
+<p>I <em>could</em> just add it to the list of resources to our original
+<code class=3D"language-plaintext highlighter-rouge">cmrc_add_resource_libr=
+ary</code> above, <em>or</em> I could take the opportunity to refactor
+out some of the ugly from <code class=3D"language-plaintext highlighter-rou=
+ge">cmrc_add_resource_library</code>. I did the latter:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">function</span><span class=
+=3D"p">(</span>cmrc_add_resources name<span class=3D"p">)</span>
+    <span class=3D"nb">get_target_property</span><span class=3D"p">(</span>=
+is_reslib <span class=3D"si">${</span><span class=3D"nv">name</span><span c=
+lass=3D"si">}</span> CMRC_IS_RESOURCE_LIBRARY<span class=3D"p">)</span>
+    <span class=3D"nb">if</span><span class=3D"p">(</span>NOT TARGET <span =
+class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</s=
+pan> OR NOT is_reslib<span class=3D"p">)</span>
+        <span class=3D"nb">message</span><span class=3D"p">(</span>SEND_ERR=
+OR <span class=3D"s2">"cmrc_add_resources called on target '</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n><span class=3D"s2">' which is not an existing resource library"</span><sp=
+an class=3D"p">)</span>
+        <span class=3D"nb">return</span><span class=3D"p">()</span>
+    <span class=3D"nb">endif</span><span class=3D"p">()</span>
+
+    <span class=3D"c1"># Generate the identifier for the resource library's=
+ namespace</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>MAKE_C_IDENTI=
+FIER <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">name</span><span class=3D"si">}</span><span class=3D"s2">"</span> libid=
+ent<span class=3D"p">)</span>
+
+    <span class=3D"nb">foreach</span><span class=3D"p">(</span>input IN LIS=
+TS ARGN<span class=3D"p">)</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abs_input <span class=3D"s2">"</span><span class=3D"si">${</span><sp=
+an class=3D"nv">input</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> ABSOLUTE<span class=3D"p">)</span>
+        <span class=3D"c1"># Generate a filename based on the input filenam=
+e that we can put in</span>
+        <span class=3D"c1"># the intermediate directory.</span>
+        <span class=3D"nb">file</span><span class=3D"p">(</span>RELATIVE_PA=
+TH relpath <span class=3D"s2">"</span><span class=3D"si">${</span><span cla=
+ss=3D"nv">CMAKE_CURRENT_SOURCE_DIR</span><span class=3D"si">}</span><span c=
+lass=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D"si">${</span=
+><span class=3D"nv">abs_input</span><span class=3D"si">}</span><span class=
+=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">if</span><span class=3D"p">(</span>relpath MATCH=
+ES <span class=3D"s2">"^</span><span class=3D"se">\\</span><span class=3D"s=
+2">.</span><span class=3D"se">\\</span><span class=3D"s2">."</span><span cl=
+ass=3D"p">)</span>
+            <span class=3D"c1"># For now we just error on files that exist =
+outside of the soure dir.</span>
+            <span class=3D"nb">message</span><span class=3D"p">(</span>SEND=
+_ERROR <span class=3D"s2">"Cannot add file '</span><span class=3D"si">${</s=
+pan><span class=3D"nv">input</span><span class=3D"si">}</span><span class=
+=3D"s2">': File must be in a subdirectory of the source directory"</span><s=
+pan class=3D"p">)</span>
+            <span class=3D"nf">continue</span><span class=3D"p">()</span>
+        <span class=3D"nb">endif</span><span class=3D"p">()</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abspath <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">libdir</span><span class=3D"si">}</span><span class=3D"s2">/i=
+ntermediate/</span><span class=3D"si">${</span><span class=3D"nv">relpath</=
+span><span class=3D"si">}</span><span class=3D"s2">.cpp"</span> ABSOLUTE<sp=
+an class=3D"p">)</span>
+        <span class=3D"c1"># Generate a symbol name for the file's characte=
+r array</span>
+        <span class=3D"nf">_cm_encode_fpath</span><span class=3D"p">(</span=
+>sym <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">relpath</span><span class=3D"si">}</span><span class=3D"s2">"</span><sp=
+an class=3D"p">)</span>
+        <span class=3D"c1"># Generate the rule for the intermediate source =
+file</span>
+        <span class=3D"nf">_cmrc_generate_intermediate_cpp</span><span clas=
+s=3D"p">(</span><span class=3D"si">${</span><span class=3D"nv">libident</sp=
+an><span class=3D"si">}</span> <span class=3D"si">${</span><span class=3D"n=
+v">sym</span><span class=3D"si">}</span> <span class=3D"s2">"</span><span c=
+lass=3D"si">${</span><span class=3D"nv">abspath</span><span class=3D"si">}<=
+/span><span class=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D=
+"si">${</span><span class=3D"nv">abs_input</span><span class=3D"si">}</span=
+><span class=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">target_sources</span><span class=3D"p">(</span><=
+span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si"=
+>}</span> PRIVATE <span class=3D"si">${</span><span class=3D"nv">abspath</s=
+pan><span class=3D"si">}</span><span class=3D"p">)</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_EXTERN_DECLS
+            <span class=3D"s2">"// Pointers to </span><span class=3D"si">${=
+</span><span class=3D"nv">input</span><span class=3D"si">}</span><span clas=
+s=3D"s2">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_begin</span><span class=3D"se">\;</span><span class=3D"s2=
+">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_end</span><span class=3D"se">\;</span><span class=3D"s2">=
+"</span>
+            <span class=3D"p">)</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_TABLE_POPULATE
+            <span class=3D"s2">"table.emplace(</span><span class=3D"se">\"<=
+/span><span class=3D"si">${</span><span class=3D"nv">relpath</span><span cl=
+ass=3D"si">}</span><span class=3D"se">\"</span><span class=3D"s2">, resourc=
+e{res_chars::</span><span class=3D"si">${</span><span class=3D"nv">sym</spa=
+n><span class=3D"si">}</span><span class=3D"s2">_begin, res_chars::</span><=
+span class=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">=
+}</span><span class=3D"s2">_end})</span><span class=3D"se">\;</span><span c=
+lass=3D"s2">"</span>
+            <span class=3D"p">)</span>
+    <span class=3D"nb">endforeach</span><span class=3D"p">()</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>Now, any time we wish to add additional resources to a resource library,=
+ we can
+call <code class=3D"language-plaintext highlighter-rouge">cmrc_add_resource=
+s</code> instead of providing them all upfront. I have further
+plans for this function later.</p>
+
+<p>Additionally, our <code class=3D"language-plaintext highlighter-rouge">c=
+mrc_add_resource_library</code> function now is much simpler, with
+only four lines at the tail end:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code>    <span class=3D"nb">add_library</span><span=
+ class=3D"p">(</span><span class=3D"si">${</span><span class=3D"nv">name</s=
+pan><span class=3D"si">}</span> STATIC <span class=3D"si">${</span><span cl=
+ass=3D"nv">libcpp</span><span class=3D"si">}</span><span class=3D"p">)</spa=
+n>
+    <span class=3D"nb">target_link_libraries</span><span class=3D"p">(</spa=
+n><span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"=
+si">}</span> PUBLIC cmrc::base<span class=3D"p">)</span>
+    <span class=3D"nb">set_property</span><span class=3D"p">(</span>TARGET =
+<span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si=
+">}</span> PROPERTY CMRC_IS_RESOURCE_LIBRARY TRUE<span class=3D"p">)</span>
+    <span class=3D"nf">cmrc_add_resources</span><span class=3D"p">(</span><=
+span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si"=
+>}</span> <span class=3D"si">${</span><span class=3D"nv">ARGN</span><span c=
+lass=3D"si">}</span><span class=3D"p">)</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>We simply make use of our factored out functionality. Convenient and eas=
+y. Now,
+to add our <code class=3D"language-plaintext highlighter-rouge">flower.jpg<=
+/code> to our resource library we simply add one line to our
+<code class=3D"language-plaintext highlighter-rouge">CMakeLists.txt</code>:=
+</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nf">cmrc_add_resources</span><s=
+pan class=3D"p">(</span>hello flower.jpg<span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>And now our <code class=3D"language-plaintext highlighter-rouge">hello</=
+code> resource library now contains the <code class=3D"language-plaintext h=
+ighlighter-rouge">flower.jpg</code>, and our
+tests are all green!</p>
+
+<h2 id=3D"step-7-moar-features">Step 7: Moar Features</h2>
+
+<p>Qt=E2=80=99s resource system has some pretty snazzy features, like the a=
+bility to
+rewrite file path prefixes. Wouldn=E2=80=99t that be great? I=E2=80=99d lik=
+e that too.</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code>
+<span class=3D"nb">function</span><span class=3D"p">(</span>cmrc_add_resour=
+ces name<span class=3D"p">)</span>
+    <span class=3D"nb">get_target_property</span><span class=3D"p">(</span>=
+is_reslib <span class=3D"si">${</span><span class=3D"nv">name</span><span c=
+lass=3D"si">}</span> CMRC_IS_RESOURCE_LIBRARY<span class=3D"p">)</span>
+    <span class=3D"nb">if</span><span class=3D"p">(</span>NOT TARGET <span =
+class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</s=
+pan> OR NOT is_reslib<span class=3D"p">)</span>
+        <span class=3D"nb">message</span><span class=3D"p">(</span>SEND_ERR=
+OR <span class=3D"s2">"cmrc_add_resources called on target '</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si">}</spa=
+n><span class=3D"s2">' which is not an existing resource library"</span><sp=
+an class=3D"p">)</span>
+        <span class=3D"nb">return</span><span class=3D"p">()</span>
+    <span class=3D"nb">endif</span><span class=3D"p">()</span>
+
+    <span class=3D"nb">set</span><span class=3D"p">(</span>options<span cla=
+ss=3D"p">)</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>args WHENCE PREF=
+IX<span class=3D"p">)</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>list_args<span c=
+lass=3D"p">)</span>
+    <span class=3D"nb">cmake_parse_arguments</span><span class=3D"p">(</spa=
+n>PARSE_ARGV 1 ARG <span class=3D"s2">"</span><span class=3D"si">${</span><=
+span class=3D"nv">options</span><span class=3D"si">}</span><span class=3D"s=
+2">"</span> <span class=3D"s2">"</span><span class=3D"si">${</span><span cl=
+ass=3D"nv">args</span><span class=3D"si">}</span><span class=3D"s2">"</span=
+> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv"=
+>list_args</span><span class=3D"si">}</span><span class=3D"s2">"</span><spa=
+n class=3D"p">)</span>
+
+    <span class=3D"nb">if</span><span class=3D"p">(</span>NOT ARG_WHENCE<sp=
+an class=3D"p">)</span>
+        <span class=3D"nb">set</span><span class=3D"p">(</span>ARG_WHENCE <=
+span class=3D"si">${</span><span class=3D"nv">CMAKE_CURRENT_SOURCE_DIR</spa=
+n><span class=3D"si">}</span><span class=3D"p">)</span>
+    <span class=3D"nb">endif</span><span class=3D"p">()</span>
+
+    <span class=3D"c1"># Generate the identifier for the resource library's=
+ namespace</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>MAKE_C_IDENTI=
+FIER <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">name</span><span class=3D"si">}</span><span class=3D"s2">"</span> libid=
+ent<span class=3D"p">)</span>
+
+    <span class=3D"nb">foreach</span><span class=3D"p">(</span>input IN LIS=
+TS ARG_UNPARSED_ARGUMENTS<span class=3D"p">)</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abs_input <span class=3D"s2">"</span><span class=3D"si">${</span><sp=
+an class=3D"nv">input</span><span class=3D"si">}</span><span class=3D"s2">"=
+</span> ABSOLUTE<span class=3D"p">)</span>
+        <span class=3D"c1"># Generate a filename based on the input filenam=
+e that we can put in</span>
+        <span class=3D"c1"># the intermediate directory.</span>
+        <span class=3D"nb">file</span><span class=3D"p">(</span>RELATIVE_PA=
+TH relpath <span class=3D"s2">"</span><span class=3D"si">${</span><span cla=
+ss=3D"nv">ARG_WHENCE</span><span class=3D"si">}</span><span class=3D"s2">"<=
+/span> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=
+=3D"nv">abs_input</span><span class=3D"si">}</span><span class=3D"s2">"</sp=
+an><span class=3D"p">)</span>
+        <span class=3D"nb">if</span><span class=3D"p">(</span>relpath MATCH=
+ES <span class=3D"s2">"^</span><span class=3D"se">\\</span><span class=3D"s=
+2">.</span><span class=3D"se">\\</span><span class=3D"s2">."</span><span cl=
+ass=3D"p">)</span>
+            <span class=3D"c1"># For now we just error on files that exist =
+outside of the soure dir.</span>
+            <span class=3D"nb">message</span><span class=3D"p">(</span>SEND=
+_ERROR <span class=3D"s2">"Cannot add file '</span><span class=3D"si">${</s=
+pan><span class=3D"nv">input</span><span class=3D"si">}</span><span class=
+=3D"s2">': File must be in a subdirectory of </span><span class=3D"si">${</=
+span><span class=3D"nv">ARG_WHENCE</span><span class=3D"si">}</span><span c=
+lass=3D"s2">"</span><span class=3D"p">)</span>
+            <span class=3D"nf">continue</span><span class=3D"p">()</span>
+        <span class=3D"nb">endif</span><span class=3D"p">()</span>
+        <span class=3D"nb">get_filename_component</span><span class=3D"p">(=
+</span>abspath <span class=3D"s2">"</span><span class=3D"si">${</span><span=
+ class=3D"nv">libdir</span><span class=3D"si">}</span><span class=3D"s2">/i=
+ntermediate/</span><span class=3D"si">${</span><span class=3D"nv">relpath</=
+span><span class=3D"si">}</span><span class=3D"s2">.cpp"</span> ABSOLUTE<sp=
+an class=3D"p">)</span>
+        <span class=3D"c1"># Generate a symbol name relpath the file's char=
+acter array</span>
+        <span class=3D"nf">_cm_encode_fpath</span><span class=3D"p">(</span=
+>sym <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"=
+nv">relpath</span><span class=3D"si">}</span><span class=3D"s2">"</span><sp=
+an class=3D"p">)</span>
+        <span class=3D"c1"># Generate the rule for the intermediate source =
+file</span>
+        <span class=3D"nf">_cmrc_generate_intermediate_cpp</span><span clas=
+s=3D"p">(</span><span class=3D"si">${</span><span class=3D"nv">libident</sp=
+an><span class=3D"si">}</span> <span class=3D"si">${</span><span class=3D"n=
+v">sym</span><span class=3D"si">}</span> <span class=3D"s2">"</span><span c=
+lass=3D"si">${</span><span class=3D"nv">abspath</span><span class=3D"si">}<=
+/span><span class=3D"s2">"</span> <span class=3D"s2">"</span><span class=3D=
+"si">${</span><span class=3D"nv">abs_input</span><span class=3D"si">}</span=
+><span class=3D"s2">"</span><span class=3D"p">)</span>
+        <span class=3D"nb">target_sources</span><span class=3D"p">(</span><=
+span class=3D"si">${</span><span class=3D"nv">name</span><span class=3D"si"=
+>}</span> PRIVATE <span class=3D"si">${</span><span class=3D"nv">abspath</s=
+pan><span class=3D"si">}</span><span class=3D"p">)</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_EXTERN_DECLS
+            <span class=3D"s2">"// Pointers to </span><span class=3D"si">${=
+</span><span class=3D"nv">input</span><span class=3D"si">}</span><span clas=
+s=3D"s2">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_begin</span><span class=3D"se">\;</span><span class=3D"s2=
+">"</span>
+            <span class=3D"s2">"extern const char* const </span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_end</span><span class=3D"se">\;</span><span class=3D"s2">=
+"</span>
+            <span class=3D"p">)</span>
+        <span class=3D"nb">if</span><span class=3D"p">(</span>ARG_PREFIX AN=
+D NOT ARG_PREFIX MATCHES <span class=3D"s2">"/$"</span><span class=3D"p">)<=
+/span>
+            <span class=3D"nb">set</span><span class=3D"p">(</span>ARG_PREF=
+IX <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv=
+">ARG_PREFIX</span><span class=3D"si">}</span><span class=3D"s2">/"</span><=
+span class=3D"p">)</span>
+        <span class=3D"nb">endif</span><span class=3D"p">()</span>
+        <span class=3D"nb">set_property</span><span class=3D"p">(</span>TAR=
+GET <span class=3D"si">${</span><span class=3D"nv">name</span><span class=
+=3D"si">}</span> APPEND PROPERTY CMRC_TABLE_POPULATE
+            <span class=3D"s2">"// Table entry for </span><span class=3D"si=
+">${</span><span class=3D"nv">input</span><span class=3D"si">}</span><span =
+class=3D"s2">"</span>
+            <span class=3D"s2">"table.emplace(</span><span class=3D"se">\"<=
+/span><span class=3D"si">${</span><span class=3D"nv">ARG_PREFIX</span><span=
+ class=3D"si">}${</span><span class=3D"nv">relpath</span><span class=3D"si"=
+>}</span><span class=3D"se">\"</span><span class=3D"s2">, resource{res_char=
+s::</span><span class=3D"si">${</span><span class=3D"nv">sym</span><span cl=
+ass=3D"si">}</span><span class=3D"s2">_begin, res_chars::</span><span class=
+=3D"si">${</span><span class=3D"nv">sym</span><span class=3D"si">}</span><s=
+pan class=3D"s2">_end})</span><span class=3D"se">\;</span><span class=3D"s2=
+">"</span>
+            <span class=3D"p">)</span>
+    <span class=3D"nb">endforeach</span><span class=3D"p">()</span>
+<span class=3D"nb">endfunction</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<p>The primary change is that we now have two keyword arguments to
+<code class=3D"language-plaintext highlighter-rouge">cmrc_add_resources</co=
+de>: <code class=3D"language-plaintext highlighter-rouge">WHENCE</code> and=
+ <code class=3D"language-plaintext highlighter-rouge">PREFIX</code>. <code =
+class=3D"language-plaintext highlighter-rouge">WHENCE</code> determines the=
+ root
+directory where each resource is read from. This handles the case where we =
+want
+to add resource files which exist outside of the source directory: We simpl=
+y
+need to tell <code class=3D"language-plaintext highlighter-rouge">CMakeRC</=
+code> how to rewrite the paths into the resource library.
+<code class=3D"language-plaintext highlighter-rouge">PREFIX</code> lets us =
+add a directory-like prefix to the path at runtime.</p>
+
+<h2 id=3D"step-8-publish">Step 8: Publish!</h2>
+
+<p>I feel pretty good about the code as it is now, and I think it=E2=80=99s=
+ fairly usable
+in its current state. As such, the code can all be found <a href=3D"https:/=
+/github.com/vector-of-bool/cmrc">on github</a>,
+and should be easy to use. Feedback, comments, and bug reports are all welc=
+ome!</p>
+
+<h2 id=3D"step-9-fix-bugs-and-make-it-better">Step 9: Fix Bugs and Make it =
+Better</h2>
+
+<blockquote>
+  <p><em>This section was added on March 3rd, 2018.</em></p>
+</blockquote>
+
+<p>It=E2=80=99s been a while since I wrote =E2=80=9CStep 8,=E2=80=9D and a =
+few things have happened.</p>
+
+<h3 id=3D"fix-dependency-ordering">Fix Dependency Ordering</h3>
+
+<p>While it didn=E2=80=99t break anything, we had a bit of sadness in the w=
+ay CMake
+evaluated our dependencies. The trouble was that every time the user ran th=
+e
+CMake configure, we=E2=80=99d re-write the <code class=3D"language-plaintex=
+t highlighter-rouge">cmrc.hpp</code> and <code class=3D"language-plaintext =
+highlighter-rouge">lib.cpp</code> files. Build tools
+that work on timestamps (most of them) would consider every file that inclu=
+ded
+<code class=3D"language-plaintext highlighter-rouge">cmrc.hpp</code> to be =
+out-of-date and would rebuild them, <em>even if the file had
+identical contents</em>. No good.</p>
+
+<p>To fix the issue with <code class=3D"language-plaintext highlighter-roug=
+e">cmrc.hpp</code>, we split generating the file into a phase
+where we generate the string content, then write the file <em>only</em> if =
+the content
+on disk has changed. That means this:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">file</span><span class=3D"p=
+">(</span>WRITE <span class=3D"s2">"</span><span class=3D"si">${</span><spa=
+n class=3D"nv">CMRC_INCLUDE_DIR</span><span class=3D"si">}</span><span clas=
+s=3D"s2">/cmrc/cmrc.hpp"</span> <span class=3D"s2">[[&lt;content&gt;]]</spa=
+n><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>becomes this:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">set</span><span class=3D"p"=
+>(</span>hpp_content <span class=3D"s2">[[&lt;content&gt;]]</span><span cla=
+ss=3D"p">)</span>
+<span class=3D"nb">set</span><span class=3D"p">(</span>cmrc_hpp <span class=
+=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">CMRC_INCLUDE=
+_DIR</span><span class=3D"si">}</span><span class=3D"s2">/cmrc/cmrc.hpp"</s=
+pan> CACHE INTERNAL <span class=3D"s2">""</span><span class=3D"p">)</span>
+<span class=3D"nb">set</span><span class=3D"p">(</span>_generate 1<span cla=
+ss=3D"p">)</span>
+<span class=3D"nb">if</span><span class=3D"p">(</span>EXISTS <span class=3D=
+"s2">"</span><span class=3D"si">${</span><span class=3D"nv">cmrc_hpp</span>=
+<span class=3D"si">}</span><span class=3D"s2">"</span><span class=3D"p">)</=
+span>
+    <span class=3D"nb">file</span><span class=3D"p">(</span>READ <span clas=
+s=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">cmrc_hpp</s=
+pan><span class=3D"si">}</span><span class=3D"s2">"</span> _current<span cl=
+ass=3D"p">)</span>
+    <span class=3D"nb">if</span><span class=3D"p">(</span>_current STREQUAL=
+ hpp_content<span class=3D"p">)</span>
+        <span class=3D"nb">set</span><span class=3D"p">(</span>_generate 0<=
+span class=3D"p">)</span>
+    <span class=3D"nb">endif</span><span class=3D"p">()</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+<span class=3D"nb">file</span><span class=3D"p">(</span>GENERATE OUTPUT <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">cmrc=
+_hpp</span><span class=3D"si">}</span><span class=3D"s2">"</span> CONTENT <=
+span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">hp=
+p_content</span><span class=3D"si">}</span><span class=3D"s2">"</span> COND=
+ITION <span class=3D"si">${</span><span class=3D"nv">_generate</span><span =
+class=3D"si">}</span><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>In the above, we set <code class=3D"language-plaintext highlighter-rouge=
+">hpp_content</code> to the file contents, then read the
+already-existing file (if it exists). We set a <code class=3D"language-plai=
+ntext highlighter-rouge">_generate</code> variable to <code class=3D"langua=
+ge-plaintext highlighter-rouge">1</code> if
+we need to generate, otherwise <code class=3D"language-plaintext highlighte=
+r-rouge">0</code>. The <code class=3D"language-plaintext highlighter-rouge"=
+>file(GENERATE ...)</code> line will
+conditionally write the file depending on the value of <code class=3D"langu=
+age-plaintext highlighter-rouge">_generate</code>.</p>
+
+<p>Generating the <code class=3D"language-plaintext highlighter-rouge">lib.=
+cpp</code> file is a little more complex because we don=E2=80=99t know
+what it=E2=80=99s final content will be at the time we call <code class=3D"=
+language-plaintext highlighter-rouge">file(GENERATE ...)</code> for
+it. For this reason, we instead use <code class=3D"language-plaintext highl=
+ighter-rouge">add_custom_command</code> to generate the file
+using CMake=E2=80=99s <code class=3D"language-plaintext highlighter-rouge">=
+copy_if_different</code> subcommand. We=E2=80=99ll use <code class=3D"langu=
+age-plaintext highlighter-rouge">file(GENERATE ...)</code> to
+generate an intermediate file and then add a custom command to copy to the
+final destination. That changes this line:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">file</span><span class=3D"p=
+">(</span>GENERATE OUTPUT <span class=3D"s2">"</span><span class=3D"si">${<=
+/span><span class=3D"nv">libcpp</span><span class=3D"si">}</span><span clas=
+s=3D"s2">"</span> CONTENT <span class=3D"s2">"</span><span class=3D"si">${<=
+/span><span class=3D"nv">cpp_content</span><span class=3D"si">}</span><span=
+ class=3D"s2">"</span><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>To several lines:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">get_filename_component</spa=
+n><span class=3D"p">(</span>lib_tmp_cpp <span class=3D"s2">"</span><span cl=
+ass=3D"si">${</span><span class=3D"nv">libdir</span><span class=3D"si">}</s=
+pan><span class=3D"s2">/lib_.cpp"</span> ABSOLUTE<span class=3D"p">)</span>
+<span class=3D"nb">file</span><span class=3D"p">(</span>GENERATE OUTPUT <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">lib_=
+tmp_cpp</span><span class=3D"si">}</span><span class=3D"s2">"</span> CONTEN=
+T <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv"=
+>cpp_content</span><span class=3D"si">}</span><span class=3D"s2">"</span><s=
+pan class=3D"p">)</span>
+<span class=3D"nb">get_filename_component</span><span class=3D"p">(</span>l=
+ibcpp <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D=
+"nv">libdir</span><span class=3D"si">}</span><span class=3D"s2">/lib.cpp"</=
+span> ABSOLUTE<span class=3D"p">)</span>
+<span class=3D"nb">add_custom_command</span><span class=3D"p">(</span>OUTPU=
+T <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv"=
+>libcpp</span><span class=3D"si">}</span><span class=3D"s2">"</span>
+    DEPENDS <span class=3D"s2">"</span><span class=3D"si">${</span><span cl=
+ass=3D"nv">lib_tmp_cpp</span><span class=3D"si">}</span><span class=3D"s2">=
+"</span> <span class=3D"s2">"</span><span class=3D"si">${</span><span class=
+=3D"nv">cmrc_hpp</span><span class=3D"si">}</span><span class=3D"s2">"</spa=
+n>
+    COMMAND <span class=3D"si">${</span><span class=3D"nv">CMAKE_COMMAND</s=
+pan><span class=3D"si">}</span> -E copy_if_different <span class=3D"s2">"</=
+span><span class=3D"si">${</span><span class=3D"nv">lib_tmp_cpp</span><span=
+ class=3D"si">}</span><span class=3D"s2">"</span> <span class=3D"s2">"</spa=
+n><span class=3D"si">${</span><span class=3D"nv">libcpp</span><span class=
+=3D"si">}</span><span class=3D"s2">"</span>
+    COMMENT <span class=3D"s2">"Generating </span><span class=3D"si">${</sp=
+an><span class=3D"nv">name</span><span class=3D"si">}</span><span class=3D"=
+s2"> resource loader"</span>
+    <span class=3D"p">)</span>
+</code></pre></div></div>
+
+<h3 id=3D"fix-the-libdir-path-bug">Fix the <code class=3D"language-plaintex=
+t highlighter-rouge">libdir</code> Path Bug</h3>
+
+<p><code class=3D"language-plaintext highlighter-rouge">cmrc_add_resources<=
+/code> had a bug: It used the <code class=3D"language-plaintext highlighter=
+-rouge">libdir</code> variable that was set locally in the <code class=3D"l=
+anguage-plaintext highlighter-rouge">cmrc_add_resource_library</code> funct=
+ion. This variable told it where to put generated files for the resource li=
+brary. If this variable wasn=E2=80=99t set, <code class=3D"language-plainte=
+xt highlighter-rouge">cmrc_add_resources</code> added files at incorrect pa=
+ths.</p>
+
+<p>Since <code class=3D"language-plaintext highlighter-rouge">libdir</code>=
+ is associated with the resource library, we=E2=80=99ll set it as a target
+property in <code class=3D"language-plaintext highlighter-rouge">cmrc_add_r=
+esource_library</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">set_property</span><span cl=
+ass=3D"p">(</span>TARGET <span class=3D"si">${</span><span class=3D"nv">nam=
+e</span><span class=3D"si">}</span> PROPERTY CMRC_LIBDIR <span class=3D"s2"=
+>"</span><span class=3D"si">${</span><span class=3D"nv">libdir</span><span =
+class=3D"si">}</span><span class=3D"s2">"</span><span class=3D"p">)</span>
+</code></pre></div></div>
+
+<p>And read it back in <code class=3D"language-plaintext highlighter-rouge"=
+>cmrc_add_resources</code>:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">get_target_property</span><=
+span class=3D"p">(</span>libdir <span class=3D"si">${</span><span class=3D"=
+nv">name</span><span class=3D"si">}</span> CMRC_LIBDIR<span class=3D"p">)</=
+span>
+</code></pre></div></div>
+
+<h3 id=3D"generate-the-intermediate-c-files-faster">Generate the Intermedia=
+te C++ Files Faster</h3>
+
+<p>For large input files, generating the C++ code takes a while. On my mach=
+ine,
+encoding a 10MB file of random bytes takes about 22 seconds. It=E2=80=99s n=
+ot
+<em>horrible</em>, but it could be faster.</p>
+
+<p>For this speedup, I changed the generated code a bit: Instead of writing=
+ a
+literal array of characters, I generate a single string literal of <code cl=
+ass=3D"language-plaintext highlighter-rouge">\xNN</code>
+escapes. No need to worry about commas.</p>
+
+<blockquote>
+  <p>I also tried to generate a single big C++11 raw-string literal of the =
+raw
+input content, but certain sequence of bytes simply won=E2=80=99t be accept=
+ed by the
+compiler.</p>
+</blockquote>
+
+<p>The biggest speedup I could manage was by doing the transform with more =
+than
+one byte at a time. Experimentation reveals that doing <em>five</em> bytes =
+per regex
+match gives the best performance. That means that this:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">string</span><span class=3D=
+"p">(</span>REGEX REPLACE <span class=3D"s2">"(..)"</span> <span class=3D"s=
+2">"'</span><span class=3D"se">\\\\</span><span class=3D"s2">x</span><span =
+class=3D"se">\\</span><span class=3D"s2">1', "</span> chars <span class=3D"=
+s2">"</span><span class=3D"si">${</span><span class=3D"nv">bytes</span><spa=
+n class=3D"si">}</span><span class=3D"s2">"</span><span class=3D"p">)</span=
+>
+</code></pre></div></div>
+
+<p>becomes this:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"nb">string</span><span class=3D=
+"p">(</span>REGEX REPLACE <span class=3D"s2">"(..)(..)(..)(..)(..)"</span> =
+<span class=3D"s2">"</span><span class=3D"se">\\\\</span><span class=3D"s2"=
+>x</span><span class=3D"se">\\</span><span class=3D"s2">1</span><span class=
+=3D"se">\\\\</span><span class=3D"s2">x</span><span class=3D"se">\\</span><=
+span class=3D"s2">2</span><span class=3D"se">\\\\</span><span class=3D"s2">=
+x</span><span class=3D"se">\\</span><span class=3D"s2">3</span><span class=
+=3D"se">\\\\</span><span class=3D"s2">x</span><span class=3D"se">\\</span><=
+span class=3D"s2">4</span><span class=3D"se">\\\\</span><span class=3D"s2">=
+x</span><span class=3D"se">\\</span><span class=3D"s2">5"</span> chars <spa=
+n class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">bytes=
+</span><span class=3D"si">}</span><span class=3D"s2">"</span><span class=3D=
+"p">)</span>
+</code></pre></div></div>
+
+<p>But we=E2=80=99re not done yet. We=E2=80=99ll have some leftover bytes u=
+nless the file is
+exactly a multiple of five bytes in size. The workaround is a bit ugly, but=
+ the
+speedup is worth it:</p>
+
+<div class=3D"language-cmake highlighter-rouge"><div class=3D"highlight"><p=
+re class=3D"highlight"><code><span class=3D"c1"># Since we did this in grou=
+ps, we have some leftovers to clean up</span>
+<span class=3D"nb">string</span><span class=3D"p">(</span>LENGTH <span clas=
+s=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">bytes</span=
+><span class=3D"si">}</span><span class=3D"s2">"</span> n_bytes2<span class=
+=3D"p">)</span>
+<span class=3D"nb">math</span><span class=3D"p">(</span>EXPR n_bytes <span =
+class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">n_bytes=
+2</span><span class=3D"si">}</span><span class=3D"s2"> / 2"</span><span cla=
+ss=3D"p">)</span>
+<span class=3D"nb">math</span><span class=3D"p">(</span>EXPR remainder <spa=
+n class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">n_byt=
+es</span><span class=3D"si">}</span><span class=3D"s2"> % 5"</span><span cl=
+ass=3D"p">)</span> <span class=3D"c1"># &lt;-- '5' is the grouping count fr=
+om above</span>
+<span class=3D"nb">set</span><span class=3D"p">(</span>cleanup_re <span cla=
+ss=3D"s2">"$"</span><span class=3D"p">)</span>
+<span class=3D"nb">set</span><span class=3D"p">(</span>cleanup_sub <span cl=
+ass=3D"p">)</span>
+<span class=3D"nb">while</span><span class=3D"p">(</span>remainder<span cla=
+ss=3D"p">)</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>cleanup_re <span=
+ class=3D"s2">"(..)</span><span class=3D"si">${</span><span class=3D"nv">cl=
+eanup_re</span><span class=3D"si">}</span><span class=3D"s2">"</span><span =
+class=3D"p">)</span>
+    <span class=3D"nb">set</span><span class=3D"p">(</span>cleanup_sub <spa=
+n class=3D"s2">"</span><span class=3D"se">\\\\</span><span class=3D"s2">x</=
+span><span class=3D"se">\\</span><span class=3D"si">${</span><span class=3D=
+"nv">remainder</span><span class=3D"si">}${</span><span class=3D"nv">cleanu=
+p_sub</span><span class=3D"si">}</span><span class=3D"s2">"</span><span cla=
+ss=3D"p">)</span>
+    <span class=3D"nb">math</span><span class=3D"p">(</span>EXPR remainder =
+<span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">r=
+emainder</span><span class=3D"si">}</span><span class=3D"s2"> - 1"</span><s=
+pan class=3D"p">)</span>
+<span class=3D"nb">endwhile</span><span class=3D"p">()</span>
+<span class=3D"nb">if</span><span class=3D"p">(</span>NOT cleanup_re STREQU=
+AL <span class=3D"s2">"$"</span><span class=3D"p">)</span>
+    <span class=3D"nb">string</span><span class=3D"p">(</span>REGEX REPLACE=
+ <span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">=
+cleanup_re</span><span class=3D"si">}</span><span class=3D"s2">"</span> <sp=
+an class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">clea=
+nup_sub</span><span class=3D"si">}</span><span class=3D"s2">"</span> chars =
+<span class=3D"s2">"</span><span class=3D"si">${</span><span class=3D"nv">c=
+hars</span><span class=3D"si">}</span><span class=3D"s2">"</span><span clas=
+s=3D"p">)</span>
+<span class=3D"nb">endif</span><span class=3D"p">()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Doing math in CMake code is a miserable experience.</p>
+</blockquote>
+
+<p>We=E2=80=99ll also need to fix the pointer to the resource end. Since we=
+ are using a
+string literal character array, we=E2=80=99ll have an extra null terminator=
+ that wasn=E2=80=99t
+in the original file. Instead of using <code class=3D"language-plaintext hi=
+ghlighter-rouge">sizeof(file_array)</code>, well just drop
+<code class=3D"language-plaintext highlighter-rouge">@n_bytes@</code> into =
+the code template. This has the edded benefit that we can now
+guarantee that resource file pointers are null-terminated.</p>
+
+<p>With this change, processing a 10MB file only takes ten seconds on my ma=
+chine.
+It=E2=80=99s still <em>way</em> slower than if we did this in native code, =
+but the speed issue
+isn=E2=80=99t a huge concern since we can process multiple files in paralle=
+l and
+resources are rarely more than several megabytes.</p>
+
+<p>Again, all the code can be found and downloaded <a href=3D"https://githu=
+b.com/vector-of-bool/cmrc">on GitHub</a>.</p>
+
+  </div>
+</article>
+
+         =20
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=3D"flex"></div>
+  <footer vb-footer=3D"">
+    <img class=3D"me" alt=3D"Avatar Icon" src=3D"https://vector-of-bool.git=
+hub.io/favicon.png">
+    <div class=3D"who">
+      <h2>Hey there,</h2>
+      <p>
+        I am a developer living and working in the United States.
+        <a href=3D"https://vector-of-bool.github.io/feed.xml">Subscribe via=
+ RSS</a>
+      </p>
+    </div>
+    <div class=3D"stuff">
+      <h2>My Stuff</h2>
+      <p>
+        You can find my creations on <a href=3D"https://github.com/vector-o=
+f-bool">GitHub</a>
+        and my short-form nonsense on
+        <a href=3D"https://bsky.app/profile/vector-of-bool.bsky.social">Blu=
+esky</a>.
+      </p>
+    </div>
+  </footer>
+
+  <link rel=3D"stylesheet" href=3D"https://vector-of-bool.github.io/css/syn=
+tax.css">
+
+
+</body></html>
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://vector-of-bool.github.io/css/syntax.css
+
+@charset "utf-8";
+
+h3 > code, li > code, p > a > code, p > code { font-family: Consolas, "Cour=
+ier New", Courier, "Liberation Mono", monospace; }
+
+p > a > code { color: rgb(149, 190, 125); }
+
+.highlight span { font-family: Consolas, "Courier New", Courier, FreeMono, =
+monospace; }
+
+.highlight .hll { background-color: rgb(64, 64, 64); }
+
+.highlight { background: rgb(32, 32, 32); color: rgb(208, 208, 208); }
+
+.highlight .c { color: rgb(153, 153, 153); font-style: italic; }
+
+.highlight .err { color: rgb(166, 23, 23); background-color: rgb(227, 210, =
+210); }
+
+.highlight .esc { color: rgb(208, 208, 208); }
+
+.highlight .g { color: rgb(208, 208, 208); }
+
+.highlight .k { color: rgb(96, 169, 240); }
+
+.highlight .l { color: rgb(208, 208, 208); }
+
+.highlight .n { color: rgb(208, 208, 208); }
+
+.highlight .o { color: rgb(208, 208, 208); }
+
+.highlight .x { color: rgb(208, 208, 208); }
+
+.highlight .p { color: rgb(208, 208, 208); }
+
+.highlight .ch { color: rgb(104, 171, 44); font-style: italic; }
+
+.highlight .cm { color: rgb(104, 171, 44); font-style: italic; }
+
+.highlight .cp { color: rgb(104, 171, 44); font-weight: bold; }
+
+.highlight .cpf { color: rgb(104, 171, 44); font-style: italic; }
+
+.highlight .c1 { color: rgb(104, 171, 44); font-style: italic; }
+
+.highlight .cs { color: rgb(229, 8, 8); font-weight: bold; background-color=
+: rgb(82, 0, 0); }
+
+.highlight .gd { color: rgb(210, 35, 35); }
+
+.highlight .ge { color: rgb(208, 208, 208); font-style: italic; }
+
+.highlight .gr { color: rgb(210, 35, 35); }
+
+.highlight .gh { color: rgb(255, 255, 255); font-weight: bold; }
+
+.highlight .gi { color: rgb(88, 152, 25); }
+
+.highlight .go { color: rgb(204, 204, 204); }
+
+.highlight .gp { color: rgb(170, 170, 170); }
+
+.highlight .gs { color: rgb(208, 208, 208); font-weight: bold; }
+
+.highlight .gu { color: rgb(255, 255, 255); text-decoration: underline; }
+
+.highlight .gt { color: rgb(210, 35, 35); }
+
+.highlight .kc { color: rgb(96, 169, 240); font-weight: bold; }
+
+.highlight .kd { color: rgb(96, 169, 240); font-weight: bold; }
+
+.highlight .kn { color: rgb(96, 169, 240); font-weight: bold; }
+
+.highlight .kp { color: rgb(96, 169, 240); }
+
+.highlight .kr { color: rgb(96, 169, 240); }
+
+.highlight .kt { color: rgb(96, 169, 240); }
+
+.highlight .ld { color: rgb(208, 208, 208); }
+
+.highlight .m { color: rgb(249, 235, 176); }
+
+.highlight .s { color: rgb(237, 157, 19); }
+
+.highlight .na { color: rgb(187, 187, 187); }
+
+.highlight .nb { color: rgb(36, 144, 157); }
+
+.highlight .nc { color: rgb(208, 208, 208); }
+
+.highlight .no { color: rgb(64, 255, 255); }
+
+.highlight .nd { color: rgb(255, 165, 0); }
+
+.highlight .ni { color: rgb(208, 208, 208); }
+
+.highlight .ne { color: rgb(187, 187, 187); }
+
+.highlight .nf { color: rgb(208, 208, 208); }
+
+.highlight .nl { color: rgb(208, 208, 208); }
+
+.highlight .nn { color: rgb(208, 208, 208); text-decoration: underline; }
+
+.highlight .nx { color: rgb(208, 208, 208); }
+
+.highlight .py { color: rgb(208, 208, 208); }
+
+.highlight .nt { color: rgb(96, 169, 240); font-weight: bold; }
+
+.highlight .nv { color: rgb(64, 255, 255); }
+
+.highlight .ow { color: rgb(96, 169, 240); font-weight: bold; }
+
+.highlight .w { color: rgb(102, 102, 102); }
+
+.highlight .mb { color: rgb(249, 235, 176); }
+
+.highlight .mf { color: rgb(249, 235, 176); }
+
+.highlight .mh { color: rgb(249, 235, 176); }
+
+.highlight .mi { color: rgb(249, 235, 176); }
+
+.highlight .mo { color: rgb(249, 235, 176); }
+
+.highlight .sa { color: rgb(237, 157, 19); }
+
+.highlight .sb { color: rgb(237, 157, 19); }
+
+.highlight .sc { color: rgb(237, 157, 19); }
+
+.highlight .dl { color: rgb(237, 157, 19); }
+
+.highlight .sd { color: rgb(237, 157, 19); }
+
+.highlight .s2 { color: rgb(237, 157, 19); }
+
+.highlight .se { color: rgb(237, 157, 19); }
+
+.highlight .sh { color: rgb(237, 157, 19); }
+
+.highlight .si { color: rgb(237, 157, 19); }
+
+.highlight .sx { color: rgb(255, 165, 0); }
+
+.highlight .sr { color: rgb(237, 157, 19); }
+
+.highlight .s1 { color: rgb(237, 157, 19); }
+
+.highlight .ss { color: rgb(237, 157, 19); }
+
+.highlight .bp { color: rgb(36, 144, 157); }
+
+.highlight .fm { color: rgb(208, 208, 208); }
+
+.highlight .vc { color: rgb(64, 255, 255); }
+
+.highlight .vg { color: rgb(64, 255, 255); }
+
+.highlight .vi { color: rgb(64, 255, 255); }
+
+.highlight .vm { color: rgb(64, 255, 255); }
+
+.highlight .il { color: rgb(249, 235, 176); }
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://vector-of-bool.github.io/favicon.png
+
+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
+
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-ce8c43c5-2305-4aa3-b0ce-b640ce8395bf@mhtml.blink
+
+@charset "utf-8";
+
+:root { --js-none: none; }
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-3af7f345-a5bd-4d4a-a0df-feeb56b49a66@mhtml.blink
+
+@charset "utf-8";
+
+html { overflow-y: scroll; --text-color: #eee; --accent-color: #ddd; --max-=
+width: 840px; }
+
+body { background-color: rgb(51, 51, 51); color: var(--text-color); font-fa=
+mily: Ubuntu, Arial, Helvetica, sans-serif; text-shadow: rgba(0, 0, 0, 0.4)=
+ 0px 1px 2px; margin: 0px; transition: margin 300ms linear; display: flex; =
+flex-direction: column; min-height: 100vh; }
+
+code, pre { font-family: Consolas, "Courier New", Courier, FreeMono, monosp=
+ace; }
+
+.highlight { padding: 0.8em 0.9em; line-height: 1.2em; }
+
+.flex { flex: 1 1 0%; }
+
+:link { color: coral; }
+
+:visited { color: chocolate; }
+
+[reveal-target]:not([reveal-show]) { display: var(--js-none); }
+
+[reveal-button]:not([reveal-linked]) { display: none; }
+
+header.banner { background-color: rgb(68, 68, 68); background-image: linear=
+-gradient(rgb(85, 85, 85), rgb(51, 51, 51)); z-index: 10; box-shadow: rgba(=
+0, 0, 0, 0.5) 0px 1px 3px, rgba(0, 0, 0, 0.3) 0px 1px 15px, rgb(119, 119, 1=
+19) 0.5px 1px inset, rgb(17, 17, 17) -0.5px -1px inset; transition: padding=
+ 300ms, border-radius 300ms; display: flex; flex-direction: column; overflo=
+w: hidden; }
+
+header.banner > div.title { transition: padding 300ms; padding: 30px; }
+
+div.pages { display: flex; flex-direction: row; box-shadow: rgba(0, 0, 0, 0=
+.2) 0px -1px; background-color: rgb(119, 119, 119); }
+
+.pages .page-link { text-decoration: none; color: var(--text-color); font-s=
+ize: 14pt; flex: 1 1 0%; text-align: center; height: 50px; line-height: 50p=
+x; border-style: solid; border-color: rgb(51, 51, 51); border-image: initia=
+l; border-width: 1px 1px 1px 0px; transition: box-shadow 60ms, font-size 30=
+0ms; box-shadow: rgba(255, 255, 255, 0.4) 0.5px 1px 0px inset, rgba(0, 0, 0=
+, 0.1) -0.5px -1px inset; user-select: none; -webkit-tap-highlight-color: t=
+ransparent; background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0=
+, 0, 0.2)); }
+
+.pages .page-link:first-child { border-left: none; }
+
+.pages .page-link:hover { background-image: linear-gradient(rgb(136, 136, 1=
+36), rgb(122, 122, 122)); }
+
+.pages .page-link:active { box-shadow: rgba(0, 0, 0, 0.3) -0.5px -1px inset=
+, rgba(0, 0, 0, 0.4) 0.5px 1px 3px inset; }
+
+header.banner h1 > a { color: var(--text-color); text-decoration: none; }
+
+header .subtitle { font-style: italic; color: rgb(204, 204, 204); }
+
+.nomargin { margin: 0px; }
+
+[vb-content] { min-width: var(--max-width); max-width: var(--max-width); ma=
+rgin: 0px auto; transition: 300ms; display: block; position: relative; }
+
+[vb-content] [clipper] { overflow: hidden; position: relative; }
+
+[vb-content] [clipper] [holder] { position: absolute; }
+
+.post .post-content { padding: 30px; }
+
+.post p, .post li { line-height: 1.5em; }
+
+.post-content > :first-child, div.aside > :first-child { margin-top: 0px; }
+
+div.aside + div.aside { margin-top: 16px; }
+
+.post-content > :last-child { margin-bottom: 0px; }
+
+div.aside > * { margin-bottom: 5px; margin-top: 0px; }
+
+div.aside > :last-child { margin-bottom: 0px; }
+
+.post .post-header { padding: 20px; border-bottom: 1px solid rgb(51, 51, 51=
+); box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 15px, rgba(120, 120, 120, 0.3) 1p=
+x 1px 0px inset, rgba(0, 0, 0, 0.5) -1px -1px 0px inset; background-color: =
+rgb(102, 85, 17); background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(=
+0, 0, 0, 0.3)); }
+
+.post .post-header h1 { border: none; margin-top: 0px; }
+
+.container-rect, [vb-project] { background-color: rgb(68, 68, 68); border-r=
+adius: 5px; box-shadow: rgba(0, 0, 0, 0.8) 0px 1px 3px; box-sizing: border-=
+box; }
+
+[vb-project] { margin: 10px; }
+
+[vb-project] .header { padding: 10px; width: 100%; border-bottom: 1px solid=
+ rgb(34, 34, 34); background-color: rgb(51, 51, 51); box-sizing: border-box=
+; }
+
+[vb-project] .body { padding: 10px; width: 100%; box-sizing: border-box; di=
+splay: flex; flex-direction: row; }
+
+[vb-project] .body .icon { margin: 10px; }
+
+[vb-content] > [backdrop] { z-index: -10; position: absolute; border-top-le=
+ft-radius: 0px; border-top-right-radius: 0px; inset: 0px; }
+
+.column { display: flex; flex-direction: column; }
+
+[vb-content] [content] { z-index: -1; display: flex; flex-direction: column=
+; }
+
+[vb-content] h1:not(.post-title), [vb-content] h2, [vb-content] h3, [vb-con=
+tent] h4, [vb-content] h5, [vb-content] h6 { text-align: initial; }
+
+[vb-content] h1 { font-size: 2em; }
+
+[vb-content] h2 { font-size: 1.5em; }
+
+[vb-content] div:not(.override-img-styles) img { max-width: 100%; object-fi=
+t: contain; height: auto !important; }
+
+ol, ul { padding-inline-start: 30px; }
+
+ol > :not(:first-child), ul > :not(:first-child) { margin-top: 10px; }
+
+div.aside ol > :not(:first-child), div.aside ul > :not(:first-child) { marg=
+in-top: 3px; }
+
+[vb-footer] { position: relative; margin-top: 30px; min-height: 150px; padd=
+ing: 0px 20px; background-color: rgb(85, 85, 85); box-shadow: rgba(0, 0, 0,=
+ 0.6) 0px -1px 0px; overflow: hidden; transition: margin 300ms; display: fl=
+ex; align-items: center; }
+
+[vb-footer] > :not(:first-child) { margin-left: 20px; max-width: 200px; }
+
+[vb-footer] > div { border-left: 1px solid white; padding-left: 20px; heigh=
+t: 100px; }
+
+[vb-footer] img.me { border-radius: 100px; width: 100px; height: 100px; bor=
+der: 10px solid rgb(51, 51, 51); box-shadow: rgba(0, 0, 0, 0.8) 1px 1px 5px=
+; }
+
+[vb-footer] .who { max-width: 200px; }
+
+[vb-footer] h2, [vb-footer] p { margin: 0px; }
+
+[vb-footer]::before { content: ""; position: absolute; left: -10px; right: =
+-10px; top: -15px; height: 15px; box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 3px=
+, rgba(0, 0, 0, 0.3) 0px 2px 8px; }
+
+.page-heading { margin: 0px; }
+
+.post-list { display: flex; flex-direction: column; margin-top: 15px; margi=
+n-bottom: 30px; }
+
+.post-list > a.post-link { display: block; padding: 5px; margin-top: 10px; =
+background-color: rgb(85, 85, 85); border-radius: 10px; overflow-wrap: brea=
+k-word; white-space: normal; border-width: 2px 2px 15px; border-style: soli=
+d; border-image: initial; text-decoration: none; border-color: rgba(255, 25=
+5, 255, 0.4); -webkit-tap-highlight-color: transparent; transition: box-sha=
+dow 100ms, transform 100ms; box-shadow: rgba(0, 0, 0, 0.8) 0px 1px 5px; }
+
+a.post-link:hover { transform: scale(1.03) translate(-1px, -1px) rotate(0.5=
+deg); box-shadow: rgba(0, 0, 0, 0.8) 3px 4px 10px; }
+
+.post-link__title { font-size: 18pt; color: var(--text-color); font-weight:=
+ bold; margin: 10px; text-align: left; }
+
+.post-link__meta { display: flex; flex-direction: row; justify-content: spa=
+ce-between; align-items: flex-start; margin: 10px; }
+
+.post-link__desc { font-size: 12pt; color: var(--text-color); font-style: i=
+talic; text-align: right; max-width: 600px; }
+
+.post-link__date { color: var(--accent-color); font-size: 12pt; white-space=
+: nowrap; }
+
+div.page-container { display: flex; flex-direction: column; }
+
+div.page-container > p:not(:first-child) { margin-top: 24px; }
+
+div.post-content h1 { font-style: italic; margin-top: 25px; }
+
+.post-meta { font-style: italic; font-size: 10pt; text-shadow: none; color:=
+ rgb(204, 204, 204); }
+
+.display-contents { display: contents; }
+
+div.page-container .admonition { background-color: rgb(76, 15, 0); border: =
+2px solid rgb(142, 38, 0); padding: 15px; border-radius: 3px; color: rgb(22=
+0, 220, 220); text-shadow: none; box-shadow: rgba(0, 0, 0, 0.8) 0px 1px 3px=
+; margin: 15px; }
+
+div.page-container .admonition p:last-child { margin-bottom: 0px; }
+
+.admonition > :first-child { margin-top: 0px; }
+
+.comments-container { display: var(--no-js-none); align-self: stretch; tran=
+sition: margin 300ms; padding: 10px; background-color: rgb(61, 61, 61); bor=
+der-top-left-radius: 0px; border-top-right-radius: 0px; border-top: 1px sol=
+id rgb(119, 119, 119); }
+
+.dark-button { user-select: none; text-align: center; padding: 5px; border-=
+radius: 3px; background-color: rgb(85, 85, 85); border: 1px solid rgb(34, 3=
+4, 34); box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 3px; cursor: pointer; transi=
+tion: background-color 50ms, transform 50ms; }
+
+.dark-button:active { background-color: rgb(68, 68, 68); transform: transla=
+teY(2px); }
+
+div.highlighter-rouge { border: 1px solid rgba(0, 0, 0, 0.3); padding: 1px;=
+ border-radius: 2px; background-color: rgba(0, 0, 0, 0.2); }
+
+div.highlighter-rouge + div.highlighter-rouge { margin-top: 10px; }
+
+code.highlighter-rouge { border: 1px solid rgba(0, 0, 0, 0.3); border-radiu=
+s: 2px; padding: 0px 3px; background-color: rgba(0, 0, 0, 0.05); white-spac=
+e: nowrap; }
+
+div.highlighter-rouge > .highlight { padding: 0px; }
+
+div.highlighter-rouge > .highlight > .highlight { overflow-x: auto; margin:=
+ 0px; box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 5px inset; }
+
+.aside { border-radius: 6px; padding: 10px; background-image: linear-gradie=
+nt(transparent, rgba(0, 0, 0, 0.3)); box-shadow: rgba(0, 0, 0, 0.6) 0px 2px=
+ 5px, rgba(255, 255, 255, 0.2) 0px 1px 1px 0px inset, rgba(0, 0, 0, 0.3) -0=
+.5px -1px 1px 0px inset; }
+
+.aside.note { background-color: rgb(79, 79, 167); }
+
+.aside.warning { background-color: darkred; }
+
+.post blockquote { font-size: 14pt; border-left: 3px solid var(--accent-col=
+or); padding-left: 10px; margin: 10px; }
+
+.post blockquote > p { line-height: 1.2em; }
+
+div.footnotes { font-size: 90%; font-style: italic; border-top: 1px solid v=
+ar(--accent-color); }
+
+div.image-frame { text-align: center; display: flex; flex-direction: column=
+; }
+
+div.image-frame:not(.no-shadow) > :first-child { border-radius: 5px; overfl=
+ow: hidden; box-shadow: rgba(0, 0, 0, 0.5) 0px 2px 5px, rgba(0, 0, 0, 0.2) =
+0px 2px 8px, rgba(0, 0, 0, 0.15) 0px 2px 8px; will-change: box-shadow; tran=
+sition: box-shadow 100ms linear, transform 100ms linear; display: inline-fl=
+ex; flex-direction: column; margin: 0px; padding: 0px; line-height: 0; max-=
+width: 100%; }
+
+div.image-frame:not(.no-shadow) > :first-child:hover { box-shadow: rgba(0, =
+0, 0, 0.5) 0px 4px 8px, rgba(0, 0, 0, 0.2) 0px 4px 11px, rgba(0, 0, 0, 0.15=
+) 0px 4px 12px; }
+
+div.image-frame:not(.no-shadow) > p > :not(:first-child) { line-height: ini=
+tial; padding: 5px; align-self: start; font-size: 8pt; font-style: italic; =
+}
+
+@media (max-width: 880px) {
+  body { max-width: none; }
+  [vb-content] { margin: 0px; width: 100%; max-width: unset; min-width: uns=
+et; }
+  [vb-content] > [backdrop] { border-radius: 0px; }
+}
+
+@media (max-width: 750px) {
+  header.banner { border-bottom-left-radius: 0px; border-bottom-right-radiu=
+s: 0px; }
+  header.banner > div.title { padding: 15px; }
+  header.banner h1 { white-space: nowrap; font-size: 18pt; }
+}
+
+@media (max-width: 500px) {
+  [vb-footer] { margin-top: 0px; padding: 20px 0px; flex-direction: column;=
+ text-align: center; }
+  [vb-footer] > :not(:first-child) { margin-left: 0px; margin-top: 20px; }
+  [vb-footer] > div { width: 200px; height: unset; border-left: none; borde=
+r-top: 1px solid white; padding: 20px 0px 0px; }
+  .post .post-content { padding: 15px; }
+}
+
+@media (max-width: 385px) {
+  header.banner { text-align: center; }
+  .banner .page-link { font-size: 10pt; }
+  header.banner h1 { font-size: 12pt; margin-bottom: 10px; }
+}
+------MultipartBoundary--G2t5Ub39U2bQAQ03dJiwI9Do46vqP4lEHxlejuhbdR------

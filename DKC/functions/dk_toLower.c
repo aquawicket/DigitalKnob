@@ -8,7 +8,12 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-	char str[] = "AbCdEfGhIjKlMnOp";
+	//### Special Characters ###
+	//#     ALL:  ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+	//#   VALID:  !   # $ % & ' ( ) * + , - . / : ; < = > ? @ [   ] ^ _ ` { | } ~
+	//# INVALID:	"                                           \
+	
+	char str[] = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ1234567890 ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~";
 	dk_echo("str = %s\n", str);
 	dk_toLower(str);
 	dk_echo("str = %s\n", str);

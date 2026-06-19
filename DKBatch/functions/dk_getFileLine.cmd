@@ -1,43 +1,50 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_getFileLine(filepath, match_string)
-::#
-::#
+rem ################################################################################
+rem # dk_getFileLine(filepath, match_string)
+rem #
+rem #
 :dk_getFileLine
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 2 
- 
+%setlocal%
+
 	set "_filepath_=%~f1"
 	set "_filepath_=%_filepath_:/=\%"
-	%dk_call% dk_assertPath "%_filepath_%"
-    
-    for /f "delims=:" %%a in ('findstr /n /c:"%~2" "%_filepath_%"') do (
+	rem %dk_call% dk_assertPath "%_filepath_%"
+   
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
+    for /f "delims=:" %%a in ('%findstr.exe% /n /c:"%~2" "%_filepath_%"') do (
 		if "!line!" equ "" (
 			set "line=%%a"
 		) else (
 			set "line=!line!;%%a"
 		)
 	)
- 
+
 	endlocal & set "dk_getFileLine=%line%"
-:: DEBUG 
-::	echo %line%: '%~2'
+rem DEBUG
+rem	echo %line%: '%~2'
 %endfunction%
 
 
-:: FIND THIS LINE
+rem FIND THIS LINE
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-    %dk_call% dk_debugFunc 0
+%setlocal%
 
-::    %dk_call% dk_getFileLine "../../README.md" "How to build"
+rem    %dk_call% dk_getFileLine "../../README.md" "How to build"
 	%dk_call% dk_getFileLine "%~0" ":: FIND THIS LINE"
 	echo dk_getFileLine = %dk_getFileLine%
 %endfunction%

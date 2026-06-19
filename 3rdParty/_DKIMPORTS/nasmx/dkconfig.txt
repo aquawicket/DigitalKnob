@@ -1,0 +1,5 @@
+############ nasmx ############
+# https://github.com/thlorenz/nasmx/archive/35f709b4088a3a7c0222e6b28e5453c6e95e4a26.zip
+
+nasmx_Import=https://github.com/thlorenz/nasmx/archive/35f709b4088a3a7c0222e6b28e5453c6e95e4a26.zip
+

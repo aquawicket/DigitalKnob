@@ -1,0 +1,7 @@
+############ z264 ############
+# https://code.videolan.org/videolan/x264.git
+# https://code.videolan.org/videolan/x264/-/archive/80c1c47c/x264-80c1c47c.zip
+# https://code.videolan.org/videolan/x264/-/archive/0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee/x264-0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee.zip
+
+x264_Import=https://code.videolan.org/videolan/x264/-/archive/0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee/x264-0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee.zip
+x264_Depends=msys2;nasm

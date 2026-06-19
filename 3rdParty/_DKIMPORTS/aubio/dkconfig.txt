@@ -1,1 +1,6 @@
-AUBIO_IMPORT=https://github.com/aubio/aubio/archive/152d6819b360c2e7b379ee3f373d444ab3df0895.zip
+############### aubio ###############
+# https://aubio.org/manual/latest/installing.html
+# https://github.com/aubio/aubio.git
+# https://github.com/aubio/aubio/archive/5461304a598952ffdca78f90cef5b6c82475ec4a.zip
+
+aubio_Import=https://github.com/aubio/aubio/archive/5461304a598952ffdca78f90cef5b6c82475ec4a.zip

@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-################################################################################
+
+#########################################################################
 # dk_arrayAt(array, index)
 #
 #	Takes an array instance with an integer value and returns the item at that index, 
@@ -21,27 +32,16 @@ include_guard()
 function(dk_arrayAt)
 	dk_debugFunc(2 99)
 
-#	if(DEFINED "${ARGV0}")
-#		set(array 	"${${ARGV0}}")
-#	elseif(DEFINED ARGV0)
-#		set(array 	"${ARGV0}")
-#	else()
-#		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
-#	endif()
-#	#dk_printVar(array)
 	dk_getArg(0 array)
-
-#	if(DEFINED "${ARGV1}")
-#		set(index 	"${${ARGV1}}")
-#	elseif(DEFINED ARGV0)
-#		set(index 	"${ARGV1}")
-#	else()
-#		dk_fatal("dk_arrayLength(${ARGV}): index is invalid.")
-#	endif()
 	dk_getArg(1 index)
-
+	
 	list(GET array ${index} dk_arrayAt)
+	
+	### return ###
 	set(dk_arrayAt ${dk_arrayAt} PARENT_SCOPE)
+	if(${ARGC} GREATER 2)
+		set(${ARGV2} ${dk_arrayAt} PARENT_SCOPE)
+	endif()
 endfunction()
 
 
@@ -64,8 +64,8 @@ function(DKTEST)
 	dk_arrayAt(myArray 0)
 	dk_info("dk_arrayAt 0 = ${dk_arrayAt}")
 
-	dk_arrayAt("myArray" 1)
-	dk_info("dk_arrayAt 1 = ${dk_arrayAt}")
+	dk_arrayAt(myArray 1 resultB)
+	dk_info("resultB 1 = ${resultB}" PARENT_SCOPE)
 
 	dk_arrayAt("${myArray}" 2)
 	dk_info("dk_arrayAt 2 = ${dk_arrayAt}")
@@ -75,17 +75,17 @@ function(DKTEST)
 
 	set(at 4)
 	dk_arrayAt(myArray at)
-	dk_info("dk_arrayAt 4 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 5)
 	dk_arrayAt(myArray "at")
-	dk_info("dk_arrayAt 5 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 6)
 	dk_arrayAt(myArray ${at})
-	dk_info("dk_arrayAt 6 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 
 	set(at 7)
 	dk_arrayAt(myArray "${at}")
-	dk_info("dk_arrayAt 7 = ${dk_arrayAt}")
+	dk_info("dk_arrayAt ${at} = ${dk_arrayAt}")
 endfunction()

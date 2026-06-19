@@ -1,20 +1,29 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# __CALLER__(frame)
-::#
+rem ############################################################################
+rem # __CALLER__(frame)
+rem #
 :__CALLER__
-setlocal
-	%dk_call% dk_debugFunc 0 1
- 
-	if "%~1" equ "" (set "_FRAME_=0") else (set "_FRAME_=%1")
+%setlocal%
+
+	if "%_FRAME_%" equ "" (set "_FRAME_=%~1")
+	if "%_FRAME_%" equ "" (set "_FRAME_=0")
 	set /a _FRAME_+=1
-	::echo FAME = %_FRAME_%
-	::call dk_set __CALER__ "!FUNCNAME[%_FRAME_%]!()"
+	
+	rem echo FAME = %_FRAME_%
+	rem call dk_set __CALER__ "!FUNCNAME[%_FRAME_%]!()"
 	
 	call dk_set __CALLER__ !DKSTACK[%_FRAME_%].__FUNCTION__!
 	echo __CALLER__ = %__CALLER__%
@@ -22,12 +31,11 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
- 
+
 	call __CALLER__
 	echo __CALLER__ = %__CALLER__%
 %endfunction%

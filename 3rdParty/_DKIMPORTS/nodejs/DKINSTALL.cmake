@@ -1,31 +1,32 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
-# https://nodejs.org/dist/v14.16.1/node-v14.16.1-win-x86.zip
+############ nodejs ############
+# https://nodejs.org
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip
 # https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip
 
+dk_import()
 
-dk_validate(host_triple "dk_host_triple()")
-### BINARY DISTRIBUTIONS (PORTABLE) ###
-LINUX_ARM64_HOST_dk_set	(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz)
-WIN_X86_HOST_dk_set		(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip)
-WIN_X86_64_HOST_dk_set	(NODEJS_DL https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip)
-dk_assertVar(NODEJS_DL)
+dk_set(node_exe "${nodejs}/node.exe")
+dk_set(npm_exe "${nodejs}/npm.cmd")
 
-dk_importVariables(${NODEJS_DL})
-
-### IMPORT ###
-dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-dk_set(NODEJS_DIR $ENV{DKTOOLS_DIR}/${NODEJS_FOLDER})
-dk_import(${NODEJS_DL} PATH ${NODEJS_DIR})
-dk_set(NODE_EXE ${NODEJS_DIR}/node.exe)
-dk_set(NPM_EXE ${NODEJS_DIR}/npm.cmd)
-#dk_nativePath(${NODE_EXE} NODE_EXE_WINPATH)
-#dk_setEnv("PATH" "${NODEJS_DIR}")
-
-#dk_command(${NPM_EXE} install --save glob -g)
+#dk_pathToNative(${node_exe} node_exe_WINPATH)
+#dk_setEnv("PATH" "${nodejs}")
+#dk_exec(${npm_exe} install --save glob -g)

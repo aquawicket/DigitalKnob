@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-################################################################################
+
+#########################################################################
 # dk_getDirectories(path rtn_var)
 #
 #   reference: https://stackoverflow.com/a/138581
@@ -11,7 +22,7 @@ function(dk_getDirectories path rtn_var)
     dk_debugFunc()
 	#dk_verbose("dk_getDirectories(${path}, ${rtn_var})")
     
-	dk_getOption(RECURSIVE)
+	dk_getParameter(RECURSIVE)
 	
 	if(RECURSIVE)
 		file(GLOB_RECURSE children LIST_DIRECTORIES true ${path}/*)
@@ -27,9 +38,6 @@ function(dk_getDirectories path rtn_var)
 
     # Return the array to the calling scope
 	set(${rtn_var} ${_directories_} PARENT_SCOPE)
-	
-# DEBUG
-#	dk_printVar(_directories_)
 endfunction()
 
 
@@ -41,8 +49,8 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
  
-	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
-    dk_getDirectories("$ENV{DIGITALKNOB_DIR}" directories)# RECURSIVE)
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+    dk_getDirectories("${DIGITALKNOB_DIR}" directories) # RECURSIVE)
     dk_printVar(directories)
 endfunction()
     

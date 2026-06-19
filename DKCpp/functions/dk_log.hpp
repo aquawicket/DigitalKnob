@@ -272,7 +272,7 @@
 	#define dk_log_FATAL_TAG "FATAL: "
 #endif
 #ifndef dk_log_FATAL_PAUSE
-	#define dk_log_FATAL_PAUSE 1
+	#define dk_log_FATAL_PAUSE 0
 #endif
 #ifndef dk_log_FATAL_TRACE	
 	#define dk_log_FATAL_TRACE 0

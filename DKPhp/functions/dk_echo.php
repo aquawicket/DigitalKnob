@@ -1,14 +1,16 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
 # dk_echo()
 #
 function dk_echo(){
-	#dk_debugFunc();
+	#dk_debugFunc(1, 99);
 
 	$argv = func_get_args();
+	#$argc = func_num_args();
 	$argv_str = implode(";", $argv);
-	$argc = func_num_args();
+	
 	echo "$argv_str";
 
 	/*
@@ -35,13 +37,10 @@ function dk_echo(){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 if(!function_exists('DKTEST')){ function DKTEST() {
-	#dk_debugFunc();
+	#dk_debugFunc(0);
 
-	$ret = dk_echo("testing dk_echo()\n");
-
-	//$ret = dk_echo("testing dk_echo()", "abc", 123, "\n");
-	//echo "dk_echo():ret = $ret\n";
+	dk_echo("testing dk_echo()\n");
 }}
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

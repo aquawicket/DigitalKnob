@@ -1,20 +1,27 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-#if(!$__ARGC__){ $__ARGC__ = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+#if(!$__ARGC___ps1){ $__ARGC___ps1 = 1; } else{ return; } #include guard
 
 
 ##################################################################################
 # __ARGC__(frame)
 #
 function GLOBAL:__ARGC__($_FRAME_=1) {
-	#$ubpc = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments.count
-	#$bpc = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count
-	#$ARGC = $ubpc;
+	$BoundParameterCount = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
+	#if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters[0].Value -eq ""){
+	#	$BoundParameterCount = 0;
+	#}
 	
-	#Write-Host "Bound = $bpc, Unbound = $ubpc, ARGC =" + $ARGC;
-	#return $ARGC;
+	$UnboundArgumentCount = $(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments.count;
+	#if ($(Get-PSCallStack)[$_FRAME_].InvocationInfo.UnboundArguments[0].Value -eq ""){
+	#	$UnboundArgumentCount = 0;
+	#}
 	
-	return $(Get-PSCallStack)[$_FRAME_].InvocationInfo.BoundParameters.count;
-	
+#	Write-Host " ";
+#	Write-Host "BoundParameterCount = $BoundParameterCount";
+#	Write-Host "UnboundArgumentCount = $UnboundArgumentCount";
+	${__ARGC__} = ($BoundParameterCount + $UnboundArgumentCount);
+#	Write-Host "__ARGC__ = $__ARGC__";
+	return ${__ARGC__};
 }
 
 

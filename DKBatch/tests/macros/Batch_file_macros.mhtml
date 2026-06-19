@@ -1,0 +1,465 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://ss64.com/nt/syntax-macros.html
+Subject: Batch file macros | cmd - Windows CMD - SS64.com
+Date: Wed, 24 Sep 2025 20:27:59 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----"
+
+
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----
+Content-Type: text/html
+Content-ID: <frame-12D22C4D3088206E4831EB9EABEC8AEA@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://ss64.com/nt/syntax-macros.html
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-75233b2c-c8d7-49ea-bb58-0db714274464@mhtml.blink" />
+<meta name=3D"viewport" content=3D"width=3D1000, initial-scale=3D1">
+<link rel=3D"stylesheet" href=3D"https://ss64.com/main.css" type=3D"text/cs=
+s">
+<link rel=3D"icon" href=3D"https://ss64.com/favicon.ico" sizes=3D"48x48">
+<link rel=3D"icon" href=3D"https://ss64.com/favicon.svg" sizes=3D"any" type=
+=3D"image/svg+xml">
+<title>Batch file macros | cmd - Windows CMD - SS64.com</title>
+<link rel=3D"canonical" href=3D"https://ss64.com/nt/syntax-macros.html">
+
+
+</head>
+<body><!-- #BeginLibraryItem "/Library/head_ntsyntax.lbi" --><div id=3D"tna=
+v"><ul>
+<li class=3D"tbtn"><a href=3D"https://ss64.com/">SS64</a></li>
+<li class=3D"tbtn"><a href=3D"https://ss64.com/nt">CMD <svg viewBox=3D"0 0 =
+13 20.1" width=3D"13" height=3D"13" style=3D"transform: rotate(0deg);"><pat=
+h d=3D"M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0 2.9"></path></=
+svg></a></li>
+<li class=3D"tbtn"><a href=3D"https://ss64.com/nt/syntax.html">How-to <svg =
+viewBox=3D"0 0 13 20.1" width=3D"13" height=3D"13" style=3D"transform: rota=
+te(0deg);"><path d=3D"M0 2.9l7.2 7.2-7.1 7.1L3 20.1l7.1-7.1 2.9-2.9L2.9 0 0=
+ 2.9"></path></svg></a></li>
+<li><div id=3D"search"><form action=3D"https://www.google.com/search" metho=
+d=3D"get">
+<input type=3D"text" name=3D"q" id=3D"qu" size=3D"27" maxlength=3D"255" ari=
+a-label=3D"Search text">
+<input class=3D"submit mousetrap" value=3D"Search" id=3D"btn" type=3D"submi=
+t">
+</form></div></li>
+</ul></div><!-- #EndLibraryItem --><h1>How-to: Create Batch file macros</h1=
+>=20
+<p>A macro allows you to embed blocks of code in a variable. Like calling a=
+ <a href=3D"https://ss64.com/nt/call.html">subroutine</a> or <a href=3D"htt=
+ps://ss64.com/nt/syntax-functions.html">function</a> this allows reusing th=
+e same block of code multiple times, the difference is that by placing the =
+code in a variable the performance will be much faster.</p>
+<p>This is an advanced technique but can be very useful in scripts that inc=
+lude large blocks of code or looping commands where the performance of othe=
+r methods is too slow.</p>
+<p>A  macro which runs <a href=3D"https://ss64.com/nt/exit.html">exit /b</a=
+></p>
+<blockquote>
+<p class=3D"code">set _ex=3Dexit /b</p>
+</blockquote>
+<p>You can then exit a subroutine with:</p>
+<blockquote>
+<p class=3D"code">%_ex%</p>
+</blockquote>
+<p>A   macro which lists all the .CSV files in a folder:</p>
+<blockquote>
+<p class=3D"code">Set _macro=3DDir c:\demo\*.csv</p>
+</blockquote>
+<p>We can now run the Macro like this:</p>
+<blockquote>
+<p><span class=3D"code">%_macro%</span><br>
+</p>
+</blockquote>
+<p>So far so like the <a href=3D"https://ss64.com/nt/doskey.html">DOSKEY</a=
+> command, but to make this more powerful you will want to pass arguments t=
+o the macro, in the example above you might want to pass the name of the fo=
+lder/file to be listed.</p>
+<p>We can use a placeholder character, (in this case #) and then use <a hre=
+f=3D"https://ss64.com/nt/syntax-replace.html">variable String Substitution<=
+/a> to swap that out at runtime:</p>
+<blockquote>
+<p class=3D"code">SET _macroDir=3DDir # /s</p>
+</blockquote>
+<p>We can now run the Macro to get a file listing including subdirectories =
+like this:</p>
+<blockquote>
+<p><span class=3D"code">%_macroDir:#=3Dc:\demo\*.csv%<br>%_macroDir:#=3Dc:\=
+work\*.txt%</span><br>
+</p>
+</blockquote>
+Another example which counts numbers:
+<blockquote>
+<p class=3D"code">SET "_macroCount=3DFOR /L %%G in (1, 1, #) DO (Echo %%G)"=
+  </p>
+</blockquote>
+<p>Calling that macro and passing 3</p>
+<blockquote>
+<p class=3D"code">%_macroCount:#=3D3%  </p>
+<p>Will output:</p>
+<p class=3D"code">1<br>
+2<br>
+3</p>
+</blockquote>
+<p>Passing multiple arguments to a macro is a little more complex, the  met=
+hod discovered by <a href=3D"https://www.dostips.com/forum/viewtopic.php?f=
+=3D3&amp;t=3D2518">Jeb</a>, is to place a <span class=3D"code"><a href=3D"h=
+ttps://ss64.com/nt/for_l.html">For /L</a></span> command within the macro, =
+set to run 2 steps each time the macro is run:</p>
+<ul>
+<li>In the first step the arguments are stored in a variable (<span class=
+=3D"code">argv</span>)</li>
+<li>In the second step the main body of the macro runs and can (optionally)=
+ read the variable</li>
+</ul>
+<p>The basic structure of the macro definition:</p>
+<pre>Set _macro=3DFor /l %%n in (1 1 2) do if %%n=3D=3D2 (Echo Main MACRO g=
+oes here.) else setlocal enableDelayedExpansion ^&amp; Set argv=3D,=20
+
+%_macro% arg1 arg2
+
+ :: The macro will expand to:
+ :: for /l %%n in (1 1 2) do if %%n=3D=3D2 (Echo Main MACRO goes here.) els=
+e setlocal enableDelayedExpansion &amp; Set argv=3D, arg1 arg2
+
+ :: which is equivalent to:
+ ::    setlocal enableDelayedExpansion
+ ::    Set argv=3D arg1 arg2
+ ::    Echo Main MACRO goes here.</pre>
+<h3><a id=3D"e" tabindex=3D"-1"></a>Examples</h3>
+<pre>@Echo off
+cls
+setlocal DisableDelayedExpansion
+set LF=3D^
+
+
+::Above 2 blank lines are required - do not remove
+set ^"\n=3D^^^%LF%%LF%^%LF%%LF%^^"
+
+set _macrodemo=3Dfor /L %%n in (1 1 2) do if %%n=3D=3D2 <b>(</b>%\n%
+      for /F "tokens=3D1 delims=3D, " %%G in ("!argv!") do (%\n%
+         echo _argument1=3D%%G %\n%
+         set "_argument1=3D!%%~G!"%\n%
+         dir !_argument1!<b>\*.xls</b>%\n%
+      ) %\n%
+<b>)</b> ELSE setlocal enableDelayedExpansion ^&amp; set argv=3D,
+
+set "_testfolder=3D<b>c:\demo</b>"
+%_macrodemo% _testfolder</pre>
+<p>In a macro where more than one argument need to be passed, these will be=
+come tokens 2,3,4... in the FOR / F command.</p>
+<p>A library of macros can be defined by running a single MACROS.CMD batch =
+file, allowing the library macros to be used in multiple batch files.</p>
+<p>Credits: Ed Dyreen, Jeb and Dave Benham, the original dostips forum thre=
+ads are <a href=3D"https://www.dostips.com/forum/viewtopic.php?f=3D3&amp;t=
+=3D1827">here</a> (basic concepts) and <a href=3D"https://www.dostips.com/f=
+orum/viewtopic.php?f=3D3&amp;t=3D2518">here</a> (macros with parameters).</=
+p>
+<p><span class=3D"quote"><i>=E2=80=9CMacro dictionary definition: 1. Large =
+2. Long 3. Inclusive=E2=80=9D ~ from the Greek 'makros'</i></span></p>
+<h3>Related commands</h3>
+<p class=3D"space">How-to: <a href=3D"https://ss64.com/nt/syntax-functions.=
+html">functions</a> - How to package blocks of code.<br>
+<a href=3D"https://ss64.com/nt/call.html">CALL</a> - Call one batch program=
+/subroutine from another.<br>
+<a href=3D"https://stackoverflow.com/questions/6379619/explain-how-dos-batc=
+h-newline-variable-hack-works">How the %LF% newline variable hack works</a>=
+ - StackOverflow.<br>
+<a href=3D"https://ss64.com/nt/doskey.html">DOSKEY</a> - Edit command line,=
+ recall commands, and create macros.</p><!-- #BeginLibraryItem "/Library/fo=
+ot_nt.lbi" --><!-- AuctionX Display platform tag START -->
+<div id=3D"27677x300x250x4627x_ADSLOT1" clicktrack=3D"%%CLICK_URL_ESC%%"></=
+div>
+<!-- AuctionX Display platform tag END -->
+<hr>
+<div id=3D"bl">&nbsp;</div>
+<div id=3D"br">Copyright =C2=A9 1999-2025 <a href=3D"https://ss64.com/">SS6=
+4.com</a><br>
+Some rights reserved</div><!-- #EndLibraryItem -->
+
+<iframe name=3D"__tcfapiLocator" style=3D"display: none;"></iframe><iframe =
+name=3D"__gppLocator" style=3D"display: none;"></iframe></body></html>
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://ss64.com/main.css
+
+@charset "utf-8";
+
+html { font-size: 100%; scroll-padding-top: 45px; }
+
+:root { --link: #0715DE; --link-dark: #0303E1; --link-active: #337FE8; --bt=
+n-col: #F8F9FA; --btn-col-active: #01AF3F; --btn-link: #0A22D0; --txt-activ=
+e: #1676F1; --txt-dark: #141414; --font-monospace: Menlo, ui-monospace, Mon=
+aco, "Roboto Mono", "Oxygen Mono", "Ubuntu Mono", "Source Code Pro", "Fira =
+Mono", monospace; }
+
+body { background-color: rgb(217, 217, 222); transition: background-color 1=
+s; color: var(--txt-dark); font-family: "Helvetica Neue", Helvetica, Arial,=
+ Oxygen-Sans, Roboto, Ubuntu, sans-serif; font-size: 1rem; font-weight: 400=
+; margin: 15px; }
+
+p, ol, ul, h1, h2, h3, h4, dt, dd, table { font-weight: 400; line-height: 1=
+.3rem; }
+
+p, hr, ol, ul, dd, dl, aside { max-width: 1000px; }
+
+hr { color: rgb(255, 255, 255); margin-left: 0px; text-align: left; }
+
+pre, tt, code, .code { font-family: var(--font-monospace), monospace; }
+
+pre, tt, code { font-size: 1rem; color: rgb(0, 0, 0); line-height: 1.125rem=
+; }
+
+code { color: rgb(104, 0, 0); }
+
+h1 { clear: both; font-size: 1.5rem; line-height: 1.563rem; }
+
+h2 { color: var(--txt-dark); font-family: Palatino, "Palatino Linotype", Ge=
+orgia, serif; font-size: 1.375rem; line-height: 1.563rem; margin: 1.9ex 0px=
+ 0px; }
+
+h3 { color: var(--txt-dark); font-size: 1.125rem; line-height: 1.3rem; font=
+-weight: 700; }
+
+tr, td, input { font-family: "Helvetica Neue", Helvetica, Arial, Oxygen-San=
+s, Roboto, Ubuntu, sans-serif; font-size: 1rem; font-weight: 400; }
+
+abbr { border-bottom: 1px dotted var(--txt-dark); text-decoration: none; }
+
+aside { border-left: 6px solid var(--btn-col-active); padding-left: 15px; }
+
+blockquote { margin-right: 0px; margin-left: 40px; }
+
+i { color: rgb(7, 87, 44); }
+
+i i { font-weight: bold; }
+
+.body { font-family: "Helvetica Neue", Helvetica, Arial, Oxygen-Sans, Robot=
+o, Ubuntu, sans-serif; font-size: 1rem; }
+
+.highlight { color: rgb(0, 95, 159); text-decoration: none; }
+
+.quote { color: rgb(7, 87, 44); font-family: Palatino, Georgia, FreeSerif, =
+serif; font-style: italic; }
+
+.ix { color: var(--txt-dark); font-size: 1.125rem; text-decoration: underli=
+ne rgb(136, 136, 136); text-underline-offset: 0.15em; }
+
+a:link { color: var(--link); text-decoration: none; }
+
+a:visited { color: rgb(153, 27, 193); text-decoration: none; }
+
+a:hover { color: var(--link); text-decoration: underline; text-underline-of=
+fset: 0.25em; }
+
+a:active { color: var(--link-active); text-decoration: none; border-bottom:=
+ 1px solid var(--link-active); }
+
+a[href^=3D"#"]:hover { color: rgb(67, 155, 234); }
+
+summary:active { color: rgb(16, 93, 190); }
+
+#bl { float: left; max-width: 500px; width: 50%; }
+
+#br { font-size: 0.75rem; float: left; margin-bottom: 15px; max-width: 500p=
+x; text-align: right; width: 50%; }
+
+#tnav { background-color: rgb(217, 217, 222); transition: background-color =
+1s; height: 45px; width: 1000px; position: sticky; top: 0px; z-index: 10; }
+
+#tnav > ul { list-style: none; margin: 0px; padding: 0px; }
+
+#tnav > ul > li { display: block; float: left; line-height: 40px; margin: 0=
+px 0.3em 0px 0px; outline: none; align-content: center; text-align: center;=
+ width: 140px; }
+
+.space { line-height: 1.3em; }
+
+@media (pointer: coarse) and (hover: none) {
+  .space { line-height: 2.1rem; }
+  .az { line-height: 2.1rem; }
+  td, p { line-height: 1.5rem; font-size: 1.2rem; }
+  pre .space { line-height: 1.75em; font-size: 1.2rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+}
+
+.tbtn { background-color: var(--btn-col); border-color: gray; border-radius=
+: 0.5rem; border-style: solid; border-width: 1px; cursor: pointer; user-sel=
+ect: none; font-family: Helvetica, Arial, Oxygen-Sans, Roboto, Ubuntu, sans=
+-serif; font-size: 1.125rem; font-weight: 400; height: 40px; transition: ba=
+ckground-color 0.25s; box-shadow: rgba(0, 0, 0, 0.19) 0px 1px 2px, rgba(0, =
+0, 0, 0.082) 0px 6px 12px; }
+
+.tbtn a { display: block; text-decoration: none; border-radius: 7px; backgr=
+ound-color: var(--btn-col); transition: background-color 0.25s; }
+
+.tbtn a:link { color: var(--btn-link); }
+
+.tbtn a:visited { color: var(--btn-link); }
+
+.tbtn a:hover { background-color: rgb(29, 185, 84); color: var(--txt-dark);=
+ transition: background-color 0.25s; box-shadow: rgba(255, 255, 255, 0.4) 0=
+px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 1px; }
+
+.tbtn:focus { border: 1px solid rgb(75, 141, 248); outline: none; color: rg=
+b(34, 146, 49); }
+
+.tbtn:active { border: 1px solid rgb(51, 144, 70); background-color: var(--=
+btn-col-active); outline: none; transition: background-color 0.25s; }
+
+.tbtn a:hover:active { color: var(--txt-active); }
+
+#tnav a { border-bottom: none; }
+
+.tbtn svg { fill: rgb(2, 48, 232); }
+
+.tbtn:hover svg { fill: rgb(255, 254, 254); }
+
+.tbtn:active svg { fill: rgb(204, 204, 204); }
+
+.tflat { color: var(--txt-dark); border-color: gray; border-radius: 8px; bo=
+rder-style: solid; border-width: 1px; font-size: 1.1em; font-family: Helvet=
+ica, Arial, Oxygen-Sans, Roboto, Ubuntu, sans-serif; user-select: none; hei=
+ght: 40px; box-shadow: rgba(0, 0, 0, 0.19) 0px 1px 2px, rgba(0, 0, 0, 0.082=
+) 0px 6px 12px; }
+
+@media (prefers-color-scheme: dark) {
+  body { background-color: rgb(189, 189, 198); transition: background-color=
+ 1s; }
+  .az tr { border-bottom: 1pt solid rgb(166, 166, 166); }
+  hr { color: rgb(232, 232, 232); }
+  #tnav { background-color: rgb(189, 189, 198); transition: background-colo=
+r 1s; }
+  a:link, a:hover { color: var(--link-dark); }
+  a:visited { color: rgb(125, 18, 158); }
+  .highlight { color: rgb(34, 69, 154); }
+}
+
+#search { margin-left: 50px; width: 420px; }
+
+#qu { border-radius: 5px; border-width: 1px; border-style: solid; border-co=
+lor: rgb(124, 124, 124) rgb(172, 181, 190) rgb(172, 181, 190); box-shadow: =
+rgb(204, 204, 204) 0px 1px 0px inset; color: rgba(0, 0, 0, 0.81); height: 1=
+.125rem; line-height: 1.4rem; left: 10px; padding: 6px 6px 6px 8px; positio=
+n: relative; display: block; float: left; top: 6px; z-index: 1; caret-color=
+: var(--link-dark); transition: border 0.15s ease-in; }
+
+#qu:focus { outline: none; border-bottom: 1.5px solid rgb(77, 144, 254); tr=
+ansition: border 0.15s ease-out; }
+
+#btn { background: var(--btn-col); border: 1px solid gray; border-radius: 4=
+px; color: var(--btn-link); cursor: pointer; display: block; font-size: 0.8=
+75rem; font-weight: normal; float: left; padding-bottom: 3px; position: rel=
+ative; left: 20px; top: 6px; text-align: center; transition: background-col=
+or 0.25s, color 0.15s; width: 110px; height: 32px; appearance: none; box-sh=
+adow: rgba(0, 0, 0, 0.19) 0px 1px 2px, rgba(0, 0, 0, 0.082) 0px 6px 12px; }
+
+#btn:focus { border: 1px solid rgb(75, 141, 248); outline: none; color: rgb=
+(34, 146, 49); }
+
+#btn:hover { background-color: rgb(29, 185, 84); color: var(--txt-dark); tr=
+ansition: background-color 0.25s, color 0.15s; box-shadow: rgba(255, 255, 2=
+55, 0.4) 0px 1px 0px inset, rgba(0, 0, 0, 0.2) 0px 1px 1px; }
+
+#btn:active { background-color: var(--btn-col-active); border: 1px solid rg=
+b(103, 103, 103); color: rgb(211, 211, 211); outline: none; transition: bac=
+kground-color 0.25s, color 0.15s; }
+
+table { border-collapse: collapse; max-width: 990px; margin-left: 10px; }
+
+td, th { padding: 4px 8px; margin: 0px; vertical-align: top; text-align: le=
+ft; }
+
+td img { vertical-align: top; }
+
+th { background-color: rgb(145, 192, 252); transition: background-color 1s,=
+ color 2s; font-weight: normal; position: sticky; top: 0px; z-index: 20; he=
+ight: 35px; }
+
+tr { border-bottom: 0.5px solid rgb(150, 150, 150); }
+
+thead tr { border-bottom: none; }
+
+tr:nth-child(2n) td { background-color: rgb(214, 214, 219); }
+
+table.sortable th { cursor: default; color: blue; transition: background-co=
+lor 1s, color 2s; }
+
+table.sortable th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not=
+(.sorttable_nosort)::after { content: url("data:image/gif;base64,R0lGODlhFQ=
+AJAIABAAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wT=
+XBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRh=
+LyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzE=
+yLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3=
+JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91d=
+D0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6=
+c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHh=
+tbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2=
+N1bWVudElEPSJ4bXAuZGlkOjAxODAxMTc0MDcyMDY4MTE4OEM2REYyN0ExMDhBNDJFIiB4bXBNT=
+TpEb2N1bWVudElEPSJ4bXAuZGlkOjdCNTAyODcwMEY4NjExRTBBMzkyQzAyM0E1RDk3RDc3IiB4=
+bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjdCNTAyODZGMEY4NjExRTBBMzkyQzAyM0E1RDk3RDc=
+3IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgTWFjaW50b3NoIj4gPHhtcE=
+1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MDE4MDExNzQwNzIwNjgxM=
+Tg4QzZERjI3QTEwOEE0MkUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDE4MDExNzQwNzIw=
+NjgxMTg4QzZERjI3QTEwOEE0MkUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC9=
+4OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+=
+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvr=
+q2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2=
+dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz4=
+9PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBg=
+UEAwIBAAAh+QQBAAABACwAAAAAFQAJAAACF4yPgMsJ2mJ4VDKKrd4GVz5lYPeMiVUAADs=3D");=
+ }
+
+thead th:first-child { border-top-left-radius: 6px; border-bottom-left-radi=
+us: 6px; }
+
+thead th:last-child { border-top-right-radius: 6px; border-bottom-right-rad=
+ius: 6px; }
+
+#rowhover tr:hover td { background-color: rgb(224, 224, 230); }
+
+@media (prefers-color-scheme: dark) {
+  th { background-color: rgb(17, 102, 192); color: whitesmoke; transition: =
+background-color 1s, color 2s; }
+  table.sortable th { background-color: rgb(17, 102, 192); color: whitesmok=
+e; transition: background-color 1s, color 2s; }
+  th a:link { color: rgb(199, 237, 252); }
+  th a:visited { color: rgb(247, 221, 255); }
+  tr:nth-child(2n) td { background-color: rgb(191, 191, 202); }
+  #qu:focus { box-shadow: rgb(77, 144, 254) 0px 0px 4px 0px; }
+}
+
+@media print {
+  @page { margin: 0px; }
+  body { margin: 0px 25px; background-color: rgb(255, 255, 255); }
+  @page { margin-top: 40px; margin-bottom: 50px; }
+  #qc-cmp2-persistent-link { display: none; }
+  .tbtn, .tflat { box-shadow: none; }
+}
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-75233b2c-c8d7-49ea-bb58-0db714274464@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----
+Content-Type: text/html
+Content-ID: <frame-02ED8CBBC8FBC6C676A5FA71A76E26EA@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL----
+Content-Type: text/html
+Content-ID: <frame-D9FF66A9C1A361F79F29CB4FD732AC0B@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--6FfGoy0qRkGAJPLitCPV0rdOj0YXDNLSO4yg1AHNUL------

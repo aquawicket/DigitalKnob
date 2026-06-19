@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)									&& echo "bash_exe = ${bash_exe}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $(dirname $0))/DK.sh"                   && echo "DK_SH = ${DK_SH}"
+	[ -e "${DK_SH}" ]					|| export DK_SH=$(find "${HOME}" -name "DK.sh")							&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ################################################################################
 # dk_arrayLength(array)
@@ -13,13 +26,14 @@
 #
 dk_arrayLength() {
 	dk_debugFunc 1 2
-	#dk_call dk_validateArgs array optional:rtn_var
 	
-	eval local array=('${'$1'[@]}')			#typeset -n array=${1}
-	local arrayLength=${#array[@]}
+	eval local array=('${'$1'[@]}');			#typeset -n array=${1}
 	
-	[ ${#} -gt 1 ] && eval ${2}=${arrayLength} && return
-	dk_return ${arrayLength} && return
+	eval export dk_arrayLength=${#array[@]};
+	
+	[ ${#} -gt 1 ] && eval ${2}=${dk_arrayLength} || builtin echo "${dk_arrayLength}";
+	#[ ${#} -gt 1 ] && eval ${2}=${dk_arrayLength} || dk_return ${dk_arrayLength};
+	return $?;
 }
 
 
@@ -36,14 +50,14 @@ DKTEST() {
 	myArrayA[3]="4 5 6"
 	myArrayA[4]="h i j"
 	dk_call dk_arrayLength myArrayA myArrayLengthA
+	dk_call dk_printVar dk_arrayLength
 	dk_call dk_printVar myArrayLengthA
 	
 	
 	myArrayB[0]="h i j"
 	myArrayB[1]="4 5 6"
 	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
 	myArrayLengthB=$(dk_call dk_arrayLength myArrayB)
+	#dk_call dk_printVar dk_arrayLength
 	dk_call dk_printVar myArrayLengthB
 }

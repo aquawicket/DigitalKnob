@@ -7,9 +7,9 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-	dk_assertPath("/c/Users/Administrator/digitalknob");
-	dk_assertPath("C:/Users/Administrator/digitalknob");
-	dk_assertPath("C:\\Users\\Administrator\\digitalknob");
+	dk_assertPath("/c/Users/Administrator/DigitalKnob");
+	dk_assertPath("C:/Users/Administrator/DigitalKnob");
+	dk_assertPath("C:\\Users\\Administrator\\DigitalKnob");
 	dk_assertPath("C:/NonExistent");
     
 	return 0;

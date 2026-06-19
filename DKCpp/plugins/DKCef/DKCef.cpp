@@ -1,5 +1,5 @@
 ﻿/*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -107,19 +107,19 @@ bool DKCef::Init(){
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
-			elf_dll = DKFile::local_assets + "/DKCef/win_x86_Debug/chrome_elf.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/Windows_X86_Debug/chrome_elf.dll";
 			if(!DKFile::PathExists(elf_dll))
 				return DKERROR(elf_dll + ": path not found! \n");
 
-			cef_dll = DKFile::local_assets + "/DKCef/win_x86_Debug/libcef.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/Windows_X86_Debug/libcef.dll";
 			if(!DKFile::PathExists(cef_dll))
 				return DKERROR(cef_dll + ": path not found! \n");
 #		else
-			elf_dll = DKFile::local_assets + "/DKCef/win_x86_Release/chrome_elf.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/Windows_X86_Release/chrome_elf.dll";
 			if(!DKFile::PathExists(elf_dll))
 				return DKERROR(elf_dll + ": path not found! \n");
 
-			cef_dll = DKFile::local_assets + "/DKCef/win_x86_Release/libcef.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/Windows_X86_Release/libcef.dll";
 			if(!DKFile::PathExists(cef_dll))
 				return DKERROR(cef_dll + ": path not found! \n");
 #		endif
@@ -145,19 +145,19 @@ bool DKCef::Init(){
 		DKString elf_dll;
 		DKString cef_dll;
 #		ifdef DEBUG
-			elf_dll = DKFile::local_assets + "/DKCef/win_x86_64_Debug/chrome_elf.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/Windows_X86_64_Debug/chrome_elf.dll";
 			if(!DKFile::PathExists(elf_dll))
 				return DKERROR(elf_dll + ": path not found! \n");
 
-			cef_dll = DKFile::local_assets + "/DKCef/win_x86_64_Debug/libcef.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/Windows_X86_64_Debug/libcef.dll";
 			if(!DKFile::PathExists(cef_dll))
 				return DKERROR(cef_dll + ": path not found! \n");
 #		else
-			elf_dll = DKFile::local_assets + "/DKCef/win_x86_64_Release/chrome_elf.dll";
+			elf_dll = DKFile::local_assets + "/DKCef/Windows_X86_64_Release/chrome_elf.dll";
 			if(!DKFile::PathExists(elf_dll))
 				return DKERROR(elf_dll + ": path not found! \n");
 
-			cef_dll = DKFile::local_assets + "/DKCef/win_x86_64_Release/libcef.dll";
+			cef_dll = DKFile::local_assets + "/DKCef/Windows_X86_64_Release/libcef.dll";
 			if(!DKFile::PathExists(cef_dll))
 				return DKERROR(cef_dll + ": path not found! \n");
 #		endif
@@ -265,16 +265,16 @@ bool DKCef::Init(){
 #	if WIN
 #		if WIN_X86
 #			ifdef DEBUG
-				DKString ep = DKFile::local_assets + "/DKCef/win_x86_Debug/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/Windows_X86_Debug/DKCefChild.exe";
 #			else
-				DKString ep = DKFile::local_assets + "/DKCef/win_x86_Release/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/Windows_X86_Release/DKCefChild.exe";
 #			endif
 #		endif
 #		if WIN_X86_64
 #			ifdef DEBUG
-				DKString ep = DKFile::local_assets + "/DKCef/win_x86_64_Debug/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/Windows_X86_64_Debug/DKCefChild.exe";
 #			else
-				DKString ep = DKFile::local_assets + "/DKCef/win_x86_64_Release/DKCefChild.exe";
+				DKString ep = DKFile::local_assets + "/DKCef/Windows_X86_64_Release/DKCefChild.exe";
 #			endif
 #		endif
 

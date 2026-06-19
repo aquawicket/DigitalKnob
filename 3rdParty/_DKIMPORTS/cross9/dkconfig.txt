@@ -1,0 +1,4 @@
+###### cross9 ######
+# https://justine.lol/cosmopolitan/windows-compiling.html
+
+cross9_Import=https://justine.lol/linux-compiler-on-windows/cross9.zip

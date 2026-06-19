@@ -1,33 +1,63 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
-# dk_assets(plugin)
+
+#########################################################################
+# dk_assets(Source_Dir)
 #
 #	Add a library's files to the App's assets
 #
-#	@plugin		- TODO
+#	@Source_Dir - The path to the library or Plugin who's assets we wish to include
 #
-function(dk_assets plugin)
-	dk_debugFunc(1)
+function(dk_assets)
+	dk_debugFunc(0 1)
 	
-	if(NOT DKAPP)
-		return()
+	#if(NOT DKAPP)
+	#		return()
+	#endif()
+	
+	###### CURRENT_PLUGIN ######
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_basename("${${CURRENT_PLUGIN}}")
+	set(Plugin_Name "${dk_basename}")
+	
+	###### Source_Dir ######
+	if(ARGV AND	(EXISTS "${ARGV0}"))
+		set(Source_Dir "${ARGV0}")
+#	elseif(IsPlugin)
+#		dk_getImportPath("${ARGV0}")
+#		set(Source_Dir "${dk_getImportPath}")
+	else()
+		set(Source_Dir "${${CURRENT_PLUGIN}}")
 	endif()	
-	dk_getPathToPlugin(${plugin} plugin_path)
-	if(NOT plugin_path)
-		dk_fatal("${plugin} plugin not found")
+	dk_assertPath(Source_Dir)
+
+	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
+		dk_notice("dk_assets(): Source_Dir:${Source_Dir} != CURRENT_PLUGIN:${${CURRENT_PLUGIN}}")
 	endif()
-	dk_info("Importing ${plugin} assets...")
+	
+	dk_info("Importing ${Source_Dir} assets...")
 	
 	set(ASSETS 
-		PATTERN *.h EXCLUDE
+		PATTERN *.TEMP EXCLUDE
+		PATTERN *.TMP EXCLUDE
 		PATTERN *.c EXCLUDE
 		PATTERN *.cmake EXCLUDE
 		PATTERN *.cpp EXCLUDE
 		PATTERN *.dir EXCLUDE
 		PATTERN *.filters EXCLUDE
+		PATTERN *.h EXCLUDE
 		PATTERN *.lib EXCLUDE
 		PATTERN *.manifest EXCLUDE
 		PATTERN *.mm EXCLUDE
@@ -35,34 +65,48 @@ function(dk_assets plugin)
 		PATTERN *.plist EXCLUDE
 		PATTERN *.rc EXCLUDE
 		PATTERN *.sln EXCLUDE
-		PATTERN *.tmp EXCLUDE
-		PATTERN *.TMP EXCLUDE
 		PATTERN *.temp EXCLUDE
-		PATTERN *.TEMP EXCLUDE
+		PATTERN *.tmp EXCLUDE
 		PATTERN *.vcxproj EXCLUDE
+		PATTERN Android_Arm32_* EXCLUDE
+		PATTERN Android_Arm64_* EXCLUDE
+		PATTERN Android_X86_* EXCLUDE
+		PATTERN Android_X86_64_* EXCLUDE
 		PATTERN CMakeFiles EXCLUDE
 		PATTERN CMakeLists.txt EXCLUDE
+		PATTERN Emscripten_Arm32_* EXCLUDE
+		PATTERN Emscripten_Arm64_* EXCLUDE
+		PATTERN Emscripten_X86_* EXCLUDE
+		PATTERN Emscripten_X86_64_* EXCLUDE
+		PATTERN Ios_Arm32_* EXCLUDE
+		PATTERN Ios_Arm64_* EXCLUDE
+		PATTERN Ios_X86_* EXCLUDE
+		PATTERN Ios_X86_64_* EXCLUDE
+		PATTERN Iossim_Arm32_* EXCLUDE
+		PATTERN Iossim_Arm64_* EXCLUDE
+		PATTERN Iossim_X86_* EXCLUDE
+		PATTERN Iossim_X86_64_* EXCLUDE
+		PATTERN Linux_Arm32_* EXCLUDE
+		PATTERN Linux_Arm64_* EXCLUDE
+		PATTERN Linux_X86_* EXCLUDE
+		PATTERN Linux_X86_64_* EXCLUDE
+		PATTERN Mac_Arm32_* EXCLUDE
+		PATTERN Mac_Arm64_* EXCLUDE
+		PATTERN Mac_X86_* EXCLUDE
+		PATTERN Mac_X86_64_* EXCLUDE
+		PATTERN Raspberry_Arm32_* EXCLUDE
+		PATTERN Raspberry_Arm64_* EXCLUDE
+		PATTERN Raspberry_X86_* EXCLUDE
+		PATTERN Raspberry_X86_64_* EXCLUDE
+		PATTERN Windows_Arm32_* EXCLUDE
+		PATTERN Windows_Arm64_* EXCLUDE
+		PATTERN Windows_X86_* EXCLUDE
+		PATTERN Windows_X86_64_* EXCLUDE
+		PATTERN dktest EXCLUDE
 		PATTERN temp.txt EXCLUDE
-		PATTERN win_x86 EXCLUDE
-		PATTERN win_x86_64 EXCLUDE
-		PATTERN mac_x86 EXCLUDE
-		PATTERN mac_x86_64 EXCLUDE
-		PATTERN ios_arm32 EXCLUDE
-		PATTERN ios_arm64 EXCLUDE
-		PATTERN iossim_x86 EXCLUDE
-		PATTERN iossim_x86_64 EXCLUDE
-		PATTERN linux_x86 EXCLUDE
-		PATTERN linux_x86_64 EXCLUDE
-		PATTERN android_arm32 EXCLUDE
-		PATTERN android_arm64 EXCLUDE
-		PATTERN android_x86 EXCLUDE
-		PATTERN android_x86_64 EXCLUDE
-		PATTERN raspberry_arm32 EXCLUDE
-		PATTERN raspberry_arm64 EXCLUDE
-		PATTERN emscripten EXCLUDE
-		PATTERN dktest EXCLUDE)
+	)
 	
-	file(COPY ${plugin_path} DESTINATION ${DK_Project_Dir}/assets ${ASSETS})
+	file(COPY "${${CURRENT_PLUGIN}_Import_Path}" DESTINATION "${Target_App_Dir}/assets" ${ASSETS})
 endfunction()
 
 

@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_move){ $dk_move = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_move_ps1){ $dk_move_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_move(from to)
@@ -18,12 +18,12 @@ function Global:dk_move($_from_, $_to_) {
 	dk_call dk_info "Moving $_from_ to $_to_"
 	
 	if(!(dk_call dk_pathExists "$_from_")){
-		dk_call dk_error "dk_move: $_from_ not found"
+		dk_call dk_error "dk_move: $_from_ NOT found"
 	}
 	
 	if(dk_call dk_pathExists "$_to_"){
 		if($OVERWRITE -ne 1){
-			dk_call dk_error "Cannot move file. Destiantion exists and OVERWRITE is not set"
+			dk_call dk_error "Cannot move file. Destiantion exists AND OVERWRITE is NOT set"
 		}
 		#dk_call dk_delete $_to_
 	}
@@ -37,9 +37,14 @@ function Global:dk_move($_from_, $_to_) {
 }
 
 
+
+
+
+
+
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST(){
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	

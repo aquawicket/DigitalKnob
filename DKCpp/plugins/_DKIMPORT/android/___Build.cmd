@@ -7,18 +7,18 @@ call %APP_ROOT%___Clean
 
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
-set "target_type=Debug"
+set "Target_Type=Debug"
 ::set "ABI=armeabi-v7a"
 set "ABI=arm64-v8a"
 ::set "ABI=i686"
 ::set "ABI=x86_64"
 
 :: Choose a C++ Compilers setting
-:: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
-set compiler=CMAKE
+:: 		options: cmake, NDK, CLANG    or GRADLE: must be enabled in build.gradle
+set compiler=cmake
 
 :: Use gradle to compile Java and Generate apk pagkage?
-:: Otherwide the normal android tools will be used 
+:: Otherwide the normal android tools will be used
 set GRADLE=1
 
 
@@ -29,13 +29,13 @@ echo #############  BUILD SETTINGS ###############
 echo      compiler = %compiler%
 echo        GRADLE = %GRADLE%
 echo           ABI = %ABI%
-echo    target_type = %target_type%
+echo    Target_Type = %Target_Type%
 echo #############################################
 
 
 :: App package name and lable
 set "TYPE=com"
-set "COMPANY=digitalknob"
+set "COMPANY=DigitalKnob"
 set "APP_NAME=dk"
 set "APP_LABEL=DKApp"
 
@@ -44,13 +44,13 @@ set "APP_LABEL=DKApp"
 set "keypass=123456"
 set "FirstLastName=aquawicket"
 set "Unit=IT"
-set "Orginization=digitalknob"
+set "Orginization=DigitalKnob"
 set "City=Perris"
 set "State=CA"
 set "Country=US"
 ::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::: CMAKE / CLANG :::::::::::::::::::
+::::::::::::: cmake / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
 set "ANDROID_API=31"
 set "ANDROID_MIN_API=19"
@@ -61,20 +61,20 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
+if NOT EXIST %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME NOT FOUND" )
 
 :: JDK
-if %GRADLE% equ 0 ( 
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
+if %GRADLE% equ 0 (
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -95,10 +95,10 @@ set "PLATFORM=%ANDROID_HOME%/platforms/android-%ANDROID_API%"
 set "NDK_ROOT=%ANDROID_HOME%/ndk/%NDK%"
 
 :::::::::: CLANG  ( ndk_toolchain ) ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if "%ABI%"=="armeabi-v7a"	(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\armv7a-linux-androideabi%ANDROID_API%-clang")
-if "%ABI%"=="arm64-v8a"		(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android%ANDROID_API%-clang")
-if "%ABI%"=="x86"			( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\i686-linux-androideabi%ANDROID_API%-clang")
-if "%ABI%"=="x86_64"		( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\x86_64-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="armeabi-v7a"	(set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/armv7a-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="arm64-v8a"		(set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android%ANDROID_API%-clang")
+if "%ABI%"=="x86"			( set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/i686-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="x86_64"		( set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/x86_64-linux-androideabi%ANDROID_API%-clang")
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -117,7 +117,7 @@ echo 4. Generate R.java file with Android Asset Packaging Tool (aapt)
 :: -f overwrite any existing output file
 :: -m create package directories under the output directory
 :: -J generate the R.java file and set the output directory
-:: -S the resource directory 
+:: -S the resource directory
 :: -M the manifest file
 :: -I include the platform/android.jar file
 %IF_ERROR% "Failed to Generate R.java file with Android Asset Packaging Tool (aapt)"
@@ -152,18 +152,18 @@ if "%compiler%"=="GRADLE" goto :gradle
 
 
 
-:::::: COMPILE WITH CMAKE ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if %compiler% neq CMAKE goto :end
-echo Compiling with CMAKE
+:::::: COMPILE WITH cmake ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+if %compiler% neq cmake goto :end
+echo Compiling with cmake
 ::Prep Visual Studio Project
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/Directory.Build.targets %CMAKE_BINARY_DIR%/Directory.Build.targets
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
-"%CMAKE_EXE%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
-%IF_ERROR% "CMAKE failed to generate the project files."
-"%CMAKE_EXE%" --build %CMAKE_BINARY_DIR% --target main
-::call CopyPath %CMAKE_BINARY_DIR%/%target_type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+"%cmake.exe%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
+%IF_ERROR% "cmake failed to generate the project files."
+"%cmake.exe%" --build %CMAKE_BINARY_DIR% --target main
+::call CopyPath %CMAKE_BINARY_DIR%/%Target_Type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -171,8 +171,8 @@ echo Compiling with CMAKE
 if %compiler% neq NDK goto :end
 echo Compiling with ndk-build
 call %NDK_ROOT%/ndk-build NDK_LOG=1 APP_BUILD_SCRIPT=%APP_PATH%/cpp/Android.mk NDK_PROJECT_PATH=%APP_PATH%
-call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
-call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
+call CopyPath %APP_PATH%/libs/%ABI%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+call CopyPath %APP_PATH%/libs/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -193,11 +193,11 @@ call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%
 ::)
 if %GRADLE% neq 1 goto :end
 echo Compiling with Gradle
-set "GRADLE_USER_HOME=%USERPROFILE%\digitalknob\Development\3rdParty\gradle"
+set "GRADLE_USER_HOME=%USERPROFILE%/Digital Knob/Development/3rdParty/gradle"
 setx GRADLE_USER_HOME %GRADLE_USER_HOME%
 
 echo 2. Run gradle clean build
-%ComSpec% /c %APP_ROOT%gradlew --project-dir %APP_ROOT% %GRADLE_SETTING% --info clean build 
+%ComSpec% /c %APP_ROOT%gradlew --project-dir %APP_ROOT% %GRADLE_SETTING% --info clean build
 %IF_ERROR% "Gradle Build Failed"
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -220,7 +220,7 @@ echo 11. Zipalign the APK package
 
 
 ::echo 12. Create a key store and key for signing with the Java keytool
-if not exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
+if NOT EXIST "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
 %IF_ERROR% "failed to Create a key store and key for signing with the Java keytool"
 
 
@@ -241,7 +241,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% equ 0 ( 
+if %ERRORLEVEL% equ 0 (
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	"%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"
@@ -252,7 +252,7 @@ if %ERRORLEVEL% equ 0 (
 
 echo 16. Install the apk package to android device
 if %GRADLE% equ 1 (
-	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
+	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%/app/build/outputs/apk/debug/app-debug.apk
 ) else (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_PATH%/build/%APK_NAME%.apk
 )

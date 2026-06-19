@@ -1,0 +1,22 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat]
+[-HKEY_CURRENT_USER\Software\Classes\.bat]
+[-HKEY_CURRENT_USER\SOFTWARE\Classes\batfile]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.bat]
+@="batfile"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\batfile\shell\open\command]
+@="\"%1\" %*"
+
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cmd]
+[-HKEY_CURRENT_USER\Software\Classes\.cmd]
+[-HKEY_CURRENT_USER\SOFTWARE\Classes\cmdfile]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\.cmd]
+@="cmdfile"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\cmdfile\shell\open\command]
+@="\"%1\" %*"

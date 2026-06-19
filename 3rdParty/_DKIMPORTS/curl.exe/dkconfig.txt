@@ -1,0 +1,13 @@
+############ curl.exe ############
+# https://curl.se/download.html
+# https://github.com/curl/curl
+# https://robertying.io/posts/compile-openssl-and-curl-for-android
+# https://curl.se/docs/install.html
+# https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip
+# https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip
+# https://github.com/curl/curl/archive/4841e4290dfca768328401522f319225e819824c.zip
+# https://curl.se/windows/dl-8.18.0_2/curl-8.18.0_2-win64-mingw.zip
+# https://cosmo.zip/pub/cosmos/bin/curl
+
+curl.exe_Type=Tool
+curl.exe_Import=https://cosmo.zip/pub/cosmos/bin/curl

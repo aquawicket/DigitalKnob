@@ -1,1 +1,5 @@
-GME_DL=https://github.com/libgme/game-music-emu/archive/cb2c1cc.zip
+###### gme ######
+# https://github.com/libgme/game-music-emu.git
+# https://github.com/libgme/game-music-emu/archive/cb2c1cc.zip
+
+gme_Import=https://github.com/libgme/game-music-emu/archive/cb2c1cc.zip

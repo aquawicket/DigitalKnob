@@ -1,53 +1,48 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
-
-
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-    if defined linux_arm64_host       (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz")
-    if defined linux_x86_64_host      (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz")
-    if defined mac_arm64_host         (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz")
-	if defined mac_x86_64_host        (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz")
-    if defined win_x86_host           (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip")
-    if defined win_x86_64_host        (set "NODEJS_DL=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip")
-    if not defined NODEJS_DL          (%dk_call% dk_error "NODEJS_DL is invalid")
+rem %setlocal%
 	
-    %dk_call% dk_basename %NODEJS_DL% NODEJS_DL_FILE
-	%dk_call% dk_removeExtension %NODEJS_DL_FILE% NODEJS_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %NODEJS_FOLDER% NODEJS_FOLDER
-    %dk_call% dk_toLower %NODEJS_FOLDER% NODEJS_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set NODEJS_DIR %DKTOOLS_DIR%\%NODEJS_FOLDER%
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
+	set "nodejs_Import=!NodeJS_%Host_Tuple%_Import!"
+	%dk_call% dk_assertVar nodejs_Import
 	
-    %dk_call% dk_set NODEJS_EXE "%NODEJS_DIR%\node.exe"
-        
-    if exist "%NODEJS_EXE%" (goto installed)
-        %dk_call% dk_info " "
-        %dk_call% dk_info "Installing NodeJS . . ."
-        %dk_call% dk_download "%NODEJS_DL%"
-	    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	    %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NODEJS_DL_FILE%" "%NODEJS_DIR%"
-        if NOT exist "%NODEJS_EXE%" (%dk_call% dk_error "cannot find NODEJS_EXE:%NODEJS_EXE%")
-	:installed		
+	%dk_call% dk_importVariables %nodejs_Import%
+	%dk_call% dk_assertVar nodejs
+	
+    %dk_call% dk_set nodejs_exe "%nodejs%/node.exe"
+    if EXIST "%nodejs_exe%" (%return%)
+	
+    %dk_call% dk_info
+    %dk_call% dk_info "Installing NodeJS . . ."
+    %dk_call% dk_download "%nodejs_Import%"
+	%dk_call% dk_smartExtract "%dk_download%" "%nodejs%"
+	%dk_call% dk_assertPath nodejs_exe
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
- 
+%setlocal%
+
 	%dk_call% DKINSTALL
 %endfunction%

@@ -1,31 +1,35 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ fftw3 ############
 # https://github.com/FFTW/fftw3.git
-dk_load(dk_builder)
+# https://github.com/FFTW/fftw3/archive/187045ea.zip
 
-### IMPORT ###
-dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam 	("$ENV{DKIMPORTS_DIR}/fftw3/dkconfig.txt" FFTW3_DL)
-dk_import			(${FFTW3_DL})
+dk_import()
 
-### LINK ###
-dk_include			(${FFTW3_DIR}/include)
+dk_include			(${fftw3}/include)
 if(MSVC)
-	dk_libDebug		(${FFTW3_DEBUG_DIR}/fftw3.lib)
-	dk_libRelease	(${FFTW3_RELEASE_DIR}/fftw3.lib)
+	dk_libDebug		(${fftw3_Debug_Dir}/fftw3.lib)
+	dk_libRelease	(${fftw3_Release_Dir}/fftw3.lib)
 else()
-	dk_libDebug		(${FFTW3_DEBUG_DIR}/libfftw3.a)
-	dk_libRelease	(${FFTW3_RELEASE_DIR}/libfftw3.a)
+	dk_libDebug		(${fftw3_Debug_Dir}/libfftw3.a)
+	dk_libRelease	(${fftw3_Release_Dir}/libfftw3.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${FFTW3_DIR}
+dk_configure(${fftw3}
 	-DBUILD_TESTS=OFF				# "Build tests" ON
 	-DENABLE_OPENMP=OFF				# "Use OpenMP for multithreading" OFF
 	-DENABLE_THREADS=OFF 			# "Use pthread for multithreading" OFF
@@ -40,4 +44,4 @@ dk_configure(${FFTW3_DIR}
 	-DDISABLE_FORTRAN=OFF) 			# "Disable Fortran wrapper routines" OFF
 
 ### COMPILE ###
-dk_build(${FFTW3_DIR})# fftw3)
+dk_build()

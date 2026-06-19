@@ -1,14 +1,22 @@
 ########################################################################################
-# Remove these lines and rename all instaces of [_LIB_NAME_] to the name of your library
-dk_undepend(_TEMPLATE-LIB_)
+# Remove these lines and rename all instaces of [LIBNAME] to the name of your library
+dk_disable(_TEMPLATE-LIB_)
 dk_return()
 ########################################################################################
 
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ###### [_lib_name_] ######
@@ -16,26 +24,25 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/organization/[_lib_name_]
 
 ### DEPENDS ###
-#dk_depend(libname)
+#dk_validate(libname "dk_depend(libname)")
 
 ### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/[_lib_name_]/dkconfig.txt _LIB_NAME_._IMPORT)
-dk_import		(${_LIB_NAME_})
+#dk_fileVariables("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_import			(${LIBNAME})
 
 ### LINK ###
-dk_include			(${_LIB_NAME_}/include)
+dk_include			(${LIBNAME}/include)
 if(MSVC)
-	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/package.lib)
-	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/package.lib)
+	dk_libDebug		(${LIBNAME_Debug_Dir}/package.lib)
+	dk_libRelease	(${LIBNAME_Release_Dir}/package.lib)
 else()
-	dk_libDebug		(${_LIB_NAME_._DEBUG_DIR}/libpackage.a)
-	dk_libRelease	(${_LIB_NAME_._RELEASE_DIR}/libpackage.a)
+	dk_libDebug		(${LIBNAME_Debug_Dir}/libpackage.a)
+	dk_libRelease	(${LIBNAME_Release_Dir}/libpackage.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${_LIB_NAME_})
+dk_configure(${LIBNAME})
 
 
 ### COMPILE ###
-dk_build(${_LIB_NAME_} package)
+dk_build(${LIBNAME} package)

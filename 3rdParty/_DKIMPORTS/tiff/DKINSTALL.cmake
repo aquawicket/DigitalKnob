@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ tiff ############
@@ -12,7 +20,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://gitlab.com/libtiff/libtiff/-/archive/v4.2.0/libtiff-v4.2.0.zip
 # https://gitlab.com/libtiff/libtiff.git
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-dk_load(dk_builder)
+#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(libjpeg-turbo)
@@ -26,31 +34,34 @@ dk_depend(zstd)
 #-- Could NOT find LERC (missing: LERC_LIBRARY LERC_INCLUDE_DIR)
 #-- Could NOT find GLUT (missing: GLUT_glut_LIBRARY)
 
+
 ### IMPORT ###
-dk_import(https://gitlab.com/libtiff/libtiff/-/archive/685c7326/libtiff-685c7326.zip)
+#dk_import(${tiff_Import})
+dk_import()
+
 
 ### LINK ###
-dk_include					(${TIFF}/libtiff										TIFF_INCLUDE_DIR)
-dk_include					(${TIFF_CONFIG_DIR}/libtiff								TIFF_INCLUDE_DIRS)
-#DEBUG_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}				TIFF_INCLUDE_DIRS)
-#RELEASE_dk_include			(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}				TIFF_INCLUDE_DIRS)
+dk_include				(${tiff}/libtiff										TIFF_INCLUDE_DIR)
+dk_include				(${tiff_Config_Dir}/libtiff								TIFF_INCLUDE_DIRS)
+#Debug_dk_include		(${tiff_Config_Dir}/libtiff/${Debug_Dir}				TIFF_INCLUDE_DIRS)
+#Release_dk_include		(${tiff_Config_Dir}/libtiff/${Release_Dir}				TIFF_INCLUDE_DIRS)
 if(MULTI_CONFIG)
 	if(MSVC)
-		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/tiffd.lib		TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}/tiff.lib		TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/${Debug_Dir}/tiffd.lib		TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/${Release_Dir}/tiff.lib		TIFF_LIBRARY_RELEASE)
 	else()
-		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/${DEBUG_DIR}/libtiff.a		TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/${RELEASE_DIR}/libtiff.a	TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/${Debug_Dir}/libtiff.a		TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/${Release_Dir}/libtiff.a	TIFF_LIBRARY_RELEASE)
 	endif()
 else()	
-		dk_libDebug			(${TIFF_CONFIG_DIR}/libtiff/libtiff.a					TIFF_LIBRARY_DEBUG)
-		dk_libRelease		(${TIFF_CONFIG_DIR}/libtiff/libtiff.a					TIFF_LIBRARY_RELEASE)
+		dk_libDebug		(${tiff_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_DEBUG)
+		dk_libRelease	(${tiff_Config_Dir}/libtiff/libtiff.a					TIFF_LIBRARY_RELEASE)
 endif()
-dk_set						(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
+dk_set					(TIFF_LIBRARIES 										"${TIFF_LIBRARY_DEBUG};${TIFF_LIBRARY_RELEASE}")
 
 ### 3RDPARTY LINK ###
 # https://cmake.org/cmake/help/latest/module/FindTIFF.html
-dk_set(TIFF_CMAKE
+dk_set(tiff_CMAKE
 	-DTIFF_INCLUDE_DIR=${TIFF_INCLUDE_DIR}
 	-DTIFF_INCLUDE_DIRS=${TIFF_INCLUDE_DIRS}
 	-DTIFF_LIBRARY_DEBUG=${TIFF_LIBRARY_DEBUG}
@@ -58,17 +69,17 @@ dk_set(TIFF_CMAKE
 	-DTIFF_LIBRARIES=${TIFF_LIBRARIES}
 	"-DCMAKE_EXE_LINKER_FLAGS=${TIFF_LIBRARIES}")	
 if(MSVC)
-	dk_append(TIFF_CMAKE
+	dk_append(tiff_CMAKE
 		"-DCMAKE_C_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}"
 		"-DCMAKE_CXX_FLAGS=/I${TIFF_INCLUDE_DIR} /I${TIFF_INCLUDE_DIRS}")
 else()	
-	dk_append(TIFF_CMAKE
+	dk_append(tiff_CMAKE
 		"-DCMAKE_C_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}"
 		"-DCMAKE_CXX_FLAGS=-I${TIFF_INCLUDE_DIR} -I${TIFF_INCLUDE_DIRS}")
 endif()
 
 ### GENERATE ###
-dk_configure(${TIFF}
+dk_configure(${tiff}
 	-Dtiff-tools=OFF				# "build TIFF tools" ON
 	-Dtiff-tools-unsupported=OFF	# "build unsupported TIFF tools" OFF
 	-Dtiff-tests=OFF				# "build TIFF tests" ON
@@ -76,10 +87,10 @@ dk_configure(${TIFF}
 	-Dtiff-docs=OFF					# "build TIFF documentation" ON
 	-Dtiff-deprecated=OFF			# "build TIFF deprecated features" OFF
 	-Dtiff-install=OFF				# "install TIFF targets" ${TIFF_INSTALL_DEFAULT}
-	${LIBJPEG_TURBO_CMAKE} 
-	${XZ_CMAKE}
-	${ZLIB_CMAKE}
-	${ZSTD_CMAKE})
+	${libjpeg-turbo_CMAKE} 
+	${xz_CMAKE}
+	${zlib_CMAKE}
+	${zstd_CMAKE})
 
 ### COMPILE ###
-dk_build(${TIFF} tiff)
+dk_build(${tiff}) # tiff)

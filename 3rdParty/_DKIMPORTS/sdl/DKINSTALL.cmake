@@ -1,20 +1,27 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+############ sdl ############
 # https://github.com/libsdl-org/SDL
 # https://www.libsdl.org/
 # https://www.libsdl.org/release/SDL2-2.0.18.zip
 # https://stackoverflow.com/a/57734435/688352		# _libiconv or _iconv undefined symbol on Mac OSX
 # https://github.com/libsdl-org/SDL/blob/53141a56b4520489ab64ad0ba2c49fbd1a456901/docs/README-cmake.md
 
-
 ### DEPEND ###
-if(ANDROID)
+if(Android)
 	dk_depend(android)
 	dk_depend(android-build-tools)
 	dk_depend(android-platform-tools)
@@ -22,7 +29,7 @@ if(ANDROID)
 	dk_depend(opengles)
 	dk_depend(opensles)
 endif()
-if(IOS OR IOSSIM)
+if(Ios OR Iossim)
 	dk_depend(audio_toolbox)
 	dk_depend(av_foundation)
 	dk_depend(core_audio)
@@ -37,13 +44,13 @@ if(IOS OR IOSSIM)
 	dk_depend(uikit)
 	#dk_define(SDL_VIDEO_RENDER_OGL)
 endif()
-if(LINUX)
+if(Linux)
 	dk_depend(dl)
 	dk_depend(libxfixes-dev)
 	dk_depend(opengl)
 	dk_depend(pthread)
 endif()
-if(MAC)
+if(Mac)
 	dk_depend(appkit)
 	dk_depend(audio_toolbox)
 	dk_depend(audiounit)
@@ -62,10 +69,10 @@ if(MAC)
 	dk_depend(opengl)
 	dk_depend(quartz_core)
 endif()
-if(RASPBERRY)
+if(Raspberry)
 	dk_depend(opengl)
 endif()
-if(WIN)
+if(Windows)
 	dk_depend(imm32)
 	dk_depend(opengl)
 	dk_depend(setupapi)
@@ -75,183 +82,131 @@ if(WIN)
 endif()
 
 ### IMPORT ###
-dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip)
-#dk_import(https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.30.9.zip)
-#dk_import(https://github.com/libsdl-org/SDL.git BRANCH main) # SDL3
+dk_import()
+
+### INCLUDE ###
+dk_include		(${sdl}/include								SDL2_INCLUDE_DIR)
+dk_include		(${sdl_Build_Dir}/include					SDL2_INCLUDE_DIR2)
+if(Android)
+	dk_include	(${sdl}/src									SDL2_INCLUDE_DIR3)
+	dk_include	(${android-ndk}/sources/android/cpufeatures SDL2_INCLUDE_DIR4)
+endif()
+if(Raspberry)
+	dk_include	(/opt/vc/lib								SDL2_INCLUDE_DIR3)
+endif()
 
 
-### LINK ###
-dk_include		(${SDL}/include			SDL2_INCLUDE_DIR)
-if(ANDROID)
-	dk_include	(${ANDROID_NDK}/sources/android/cpufeatures)
-	dk_include	(${SDL}/src)
-endif()
-if(DEBUG)
-	dk_include	(${SDL_DEBUG_DIR}/include)
-endif()
-if(RELEASE)
-	dk_include	(${SDL_RELEASE_DIR}/include)
-endif()
-if(RASPBERRY)
-	dk_include	(/opt/vc/lib)
-endif()
-#dk_addTarget(sdl SDL2static)	# TODO
+#dk_addTarget(sdl SDL2-static)	# TODO
 #dk_addTarget(sdl SDL2main)		# TODO
+set(sdl_SDL2-static 1)
+if(Ios OR Iossim OR Android)
+	set(sdl_SDL2main   1)
+endif()
 
-#if(sdl_SDL2static)
-if(MSVC)
-		dk_libDebug		(${SDL_DEBUG_DIR}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL_RELEASE_DIR}/SDL2-static.lib		SDL2_LIBRARY_RELEASE)
-else()
-	if(ANDROID)
-		dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2.a				SDL2_LIBRARY_DEBUG)
+########### sdl_SDL2static ##########
+if(sdl_SDL2-static)
+	if(MSVC)
+			dk_libDebug		(${sdl_Debug_Dir}/SDL2-staticd.lib		SDL2_LIBRARY_DEBUG		SDL2_LIBRARY)
+			dk_libRelease	(${sdl_Release_Dir}/SDL2-static.lib		SDL2_LIBRARY_RELEASE	SDL2_LIBRARY)
 	else()
-		dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2d.a			SDL2_LIBRARY_DEBUG)
+		if(Android)
+			dk_libDebug		(${sdl_Debug_Dir}/libSDL2.a				SDL2_LIBRARY_DEBUG		SDL2_LIBRARY)
+		else()
+			dk_libDebug		(${sdl_Debug_Dir}/libSDL2d.a			SDL2_LIBRARY_DEBUG		SDL2_LIBRARY)
+		endif()
+		dk_libRelease		(${sdl_Release_Dir}/libSDL2.a			SDL2_LIBRARY_RELEASE	SDL2_LIBRARY)
 	endif()
-	dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2.a			SDL2_LIBRARY_RELEASE)
 endif()
 
-if(DEBUG)
-	dk_set				(SDL2_LIBRARY							${SDL2_LIBRARY_DEBUG})
-endif()
-if(RELEASE)
-	dk_set				(SDL2_LIBRARY							${SDL2_LIBRARY_RELEASE})
-endif()
+#if(Android)
+#	dk_libDebug(${sdl_Debug_Dir}/libhidapi.a)
+#	dk_libRelease(${sdl_Release_Dir}/libhidapi.a)
 #endif()
 
-#ANDROID_dk_libDebug(${SDL_DEBUG_DIR}/libhidapi.a)
-#ANDROID_dk_libRelease(${SDL_RELEASE_DIR}/libhidapi.a)
-
-#if(SDL_SDL2main)
-	#ANDROID_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG)
-	#ANDROID_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#LINUX_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#LINUX_dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#MAC_dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#MAC_dk_libRelease		(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#RASPBERRY_dk_libDebug	(${SDL_DEBUG_DIR}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG)
-	#RASPBERRY_dk_libRelease(${SDL_RELEASE_DIR}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE)
-	#WIN_dk_libDebug		(${SDL_DEBUG_DIR}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG)
-	#WIN_dk_libRelease		(${SDL_RELEASE_DIR}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE)
-	if(IOS OR IOSSIM)
-		dk_libDebug		(${SDL_DEBUG_DIR}/libSDL2maind.a		SDL2MAIN_LIBRARY_DEBUG)
-		dk_libRelease	(${SDL_RELEASE_DIR}/libSDL2main.a		SDL2MAIN_LIBRARY_RELEASE)
+########### sdl_SDL2main ##########
+if(sdl_SDL2main)
+	if(MSVC)
+		dk_libDebug		(${sdl_Debug_Dir}/SDL2maind.lib		SDL2MAIN_LIBRARY_DEBUG		SDL2MAIN_LIBRARY)
+		dk_libRelease	(${sdl_Release_Dir}/SDL2main.lib	SDL2MAIN_LIBRARY_RELEASE	SDL2MAIN_LIBRARY)
+	else()
+		if(Android)
+			dk_libDebug	(${sdl_Debug_Dir}/libSDL2main.a		SDL2MAIN_LIBRARY_DEBUG		SDL2MAIN_LIBRARY)
+		else()
+			dk_libDebug	(${sdl_Debug_Dir}/libSDL2maind.a	SDL2MAIN_LIBRARY_DEBUG		SDL2MAIN_LIBRARY)
+		endif()
+		dk_libRelease	(${sdl_Release_Dir}/libSDL2main.a	SDL2MAIN_LIBRARY_RELEASE	SDL2MAIN_LIBRARY)
 	endif()
-#endif()
+endif()
 
 
 ### 3RDPARTY LINK ###
-#ANDROID_dk_set(SDL_CMAKE
-#	"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
-#	"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
-#	-DSDL2_DIR=${SDL}/cmake
-#	-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
-#	-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_DEBUG}
-#	-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
-#	-DSDL2_LIBRARY_DEBUG=${SDL2_LIBRARY_DEBUG}
-#	-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE})
-#	
+#if(Android)
+#	dk_set(sdl_CMAKE -DSDL2_DIR=${sdl}/cmake)
+#endif()
 
-if(MULTI_CONFIG)
-	if(MSVC)
-		dk_set(SDL_CMAKE
+if(MSVC)
+	dk_set(sdl_CMAKE
 		"-DCMAKE_C_FLAGS=/I${SDL2_INCLUDE_DIR}"
 		"-DCMAKE_CXX_FLAGS=/I${SDL2_INCLUDE_DIR}" 
-		-DSDL2_DIR=${SDL_CONFIG_DIR}
+		-DSDL2_DIR=${sdl_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
 		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY}
 		-DSDL2_LIBRARY=${SDL2_LIBRARY}
 		-DSDL2_LIBRARY_DEBUG=${SDL2_LIBRARY_DEBUG}
 		-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE}
-		-DSDL2_MAIN_LIBRARY=${SDL2_LIBRARY})
-		
-	else()
-		dk_set(SDL_CMAKE
+		-DSDL2_MAIN_LIBRARY=${SDL2MAIN_LIBRARY})
+else()		
+	dk_set(sdl_CMAKE
 		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_CXX_FLAGS=-${SDL2_INCLUDE_DIR}" 
-		-DSDL2_DIR=${SDL_CONFIG_DIR}
+		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}" 
+		-DSDL2_DIR=${sdl_Config_Dir}
 		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
-		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
-		-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
+		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY}
+		-DSDL2_LIBRARY=${SDL2_LIBRARY}
 		-DSDL2_LIBRARY_DEBUG=${SDL2_LIBRARY_DEBUG}
-		-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE}
-		-DSDL2_MAIN_LIBRARY=${SDL2_LIBRARY_RELEASE})
-	endif()
-	
-	dk_set(SDLMAIN_CMAKE
+		-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE})
+endif()
+
+if(sdl_SDL2main)	
+	dk_set(sdlmain_CMAKE
+		-DSDL2MAIN_LIBRARY=${SDL2MAIN_LIBRARY}
 		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG}
 		-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
-else()
-	if(DEBUG)
-		dk_set(SDL_CMAKE
-		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_LIBRARY_DEBUG}"
-		-DSDL2_DIR=${SDL_CONFIG_DIR}
-		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
-		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_DEBUG}
-		-DSDL2_LIBRARY=${SDL2_LIBRARY_DEBUG}
-		-DSDL2_LIBRARY_DEBUG=${SDL2_LIBRARY_DEBUG})
-		
-		dk_set(SDLMAIN_CMAKE
-		-DSDL2MAIN_LIBRARY=${SDL2MAIN_LIBRARY_DEBUG}
-		-DSDL2MAIN_LIBRARY_DEBUG=${SDL2MAIN_LIBRARY_DEBUG})
-	endif()	
-		
-	if(RELEASE)
-		dk_set(SDL_CMAKE
-		"-DCMAKE_C_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_CXX_FLAGS=-I${SDL2_INCLUDE_DIR}"
-		"-DCMAKE_EXE_LINKER_FLAGS=${SDL2_LIBRARY_RELEASE}"
-		-DSDL2_DIR=${SDL_CONFIG_DIR}
-		-DSDL2_INCLUDE_DIR=${SDL2_INCLUDE_DIR}
-		-DSDL2_LIBRARY_TEMP=${SDL2_LIBRARY_RELEASE}
-		-DSDL2_LIBRARY=${SDL2_LIBRARY_RELEASE}
-		-DSDL2_LIBRARY_RELEASE=${SDL2_LIBRARY_RELEASE})
-		
-		dk_set(SDLMAIN_CMAKE
-		-DSDL2MAIN_LIBRARY=${SDL2MAIN_LIBRARY_RELEASE}
-		-DSDL2MAIN_LIBRARY_RELEASE=${SDL2MAIN_LIBRARY_RELEASE})
-	endif()
 endif()
 
 
-### GENERATE ###
 
-# Remove some flags for some builds
-if(ANDROID OR EMSCRIPTEN OR MAC)
-	dk_validate(DKCMAKE_BUILD "dk_load($ENV{DKCMAKE_DIR}/DKBuildFlags.cmake)")
+### CONFIGURE ###
+if(Android OR Emscripten OR Mac)	# Remove some flags for some builds
+	dk_validate(DKCMAKE_BUILD "dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
 	string(REPLACE "-std=c17" 	""	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "-std=c++1z" "" 	DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 	string(REPLACE "  " 		" " DKCMAKE_BUILD "${DKCMAKE_BUILD}")
 endif()
 
-if(ANDROID_ARM32)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DLIBTYPE=STATIC )
-elseif(ANDROID_ARM64)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DLIBTYPE=STATIC -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" ${ICONV_CMAKE})
-elseif(EMSCRIPTEN)
-	dk_configure		(${SDL})
-elseif(IOS OR IOSSIM)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0)
-elseif(LINUX)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DDIRECTX=OFF -DVIDEO_WAYLAND=OFF)
-elseif(MAC)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE})
-elseif(RASPBERRY)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=ON)
-elseif(WIN)
-	dk_configure		(${SDL} -DSDL_SHARED=OFF -DLIBTYPE=STATIC -DSDL_LIBC=ON)
+if(Android_Arm32)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC)
+elseif(Android_Arm64)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 "-DCMAKE_CXX_FLAGS=-DHAVE_GCC_ATOMICS=1" ${ICONV_CMAKE})
+elseif(Emscripten)
+	dk_configure		(${sdl})
+elseif(Ios OR Iossim)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DSDL_OPENGLES=ON -DSDL_METAL=ON -DSDL_JOYSTICK=OFF -DSDL_HAPTIC=OFF -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0)
+elseif(Linux)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=OFF -DVIDEO_OPENGL=ON -DDIRECTX=OFF -DVIDEO_WAYLAND=OFF)
+elseif(Mac)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DSDL_OPENGL=ON -DSDL_METAL=ON -DHAVE_BUILTIN_ICONV=0 -DHAVE_LIBICONV=0 ${ICONV_CMAKE})
+elseif(Raspberry)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DVIDEO_OPENGLES=ON)
+elseif(Windows)
+	dk_configure		(${sdl} -DSDL_SHARED=OFF -DLIBTYPE=STATIC -DSDL_LIBC=ON)
 endif()
 
 
 ### COMPILE ###
-dk_build(${SDL} SDL2-static)
-dk_build(${SDL} SDL2main)
-
-#if(SDL_SDL2static)
-	#dk_build(${SDL} SDL2-static)
-#endif()
-#if(SDL_SDL2main)
-	#dk_build(${SDL} SDL2main)
-#endif()
+if(sdl_SDL2-static)
+	dk_build(${sdl} SDL2-static)
+endif()
+if(sdl_SDL2main)
+	dk_build(${sdl} SDL2main)
+endif()

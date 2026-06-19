@@ -8,8 +8,8 @@
 #define DKMAIN 1
 int main(int argc, char** argv){
 	
-	char* from = "/C/Users/Administrator/digitalknob";
-    char* to = "/C/Users/Administrator/digitalknob/Development/DKC/functions/dk_relativePath.c";
+	char* from = "/C/Users/Administrator/DigitalKnob";
+    char* to = "/C/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_relativePath.c";
 
     char* relative_path;
 	int exit_status = dk_relativePath(from, to, &relative_path);

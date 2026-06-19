@@ -1,0 +1,1258 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="DtTutoFirstBatch_files/filelist.xml">
+<link rel=Edit-Time-Data href="DtTutoFirstBatch_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>DOS - My First Batch File</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Keywords>dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser</o:Keywords>
+  <o:Template>Dt.dot</o:Template>
+  <o:LastAuthor>HP Authorized Customer</o:LastAuthor>
+  <o:Revision>28</o:Revision>
+  <o:TotalTime>40</o:TotalTime>
+  <o:Created>2005-12-28T05:04:00Z</o:Created>
+  <o:LastSaved>2006-02-25T04:30:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>828</o:Words>
+  <o:Characters>4724</o:Characters>
+  <o:Lines>39</o:Lines>
+  <o:Paragraphs>11</o:Paragraphs>
+  <o:CharactersWithSpaces>5541</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>TextFit</w:Zoom>
+  <w:DisplayBackgroundShape/>
+  <w:UpdateStylesOnOpen/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="_style.css?v=0001">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-update:auto;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:13.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-parent:Code;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.Code, li.Code, div.Code
+	{mso-style-name:Code;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	mso-style-update:auto;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	mso-list:l0 level1 lfo4;
+	tab-stops:list .25in;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.PageTitle, li.PageTitle, div.PageTitle
+	{mso-style-name:PageTitle;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.ads, li.ads, div.ads
+	{mso-style-name:ads;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.men, li.men, div.men
+	{mso-style-name:men;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nav, li.nav, div.nav
+	{mso-style-name:nav;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inst, li.inst, div.inst
+	{mso-style-name:inst;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inde, li.inde, div.inde
+	{mso-style-name:inde;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resu, li.resu, div.resu
+	{mso-style-name:resu;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.instr, li.instr, div.instr
+	{mso-style-name:instr;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resul, li.resul, div.resul
+	{mso-style-name:resul;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel, li.ysel, div.ysel
+	{mso-style-name:ysel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel, li.nsel, div.nsel
+	{mso-style-name:nsel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel1, li.ysel1, div.ysel1
+	{mso-style-name:ysel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel1, li.nsel1, div.nsel1
+	{mso-style-name:nsel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.bod, li.bod, div.bod
+	{mso-style-name:bod;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.codeop, li.codeop, div.codeop
+	{mso-style-name:codeop;
+	font-size:8.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.xyz
+	{mso-style-name:xyz;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:530192825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-406048876 -1919616146 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-style-link:Bullets;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1463158827;
+	mso-list-template-ids:1196599110;}
+@list l1:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"%3\)";
+	mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-text:"\(%4\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	margin-left:1.5in;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.75in;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:2.0in;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel="shortcut icon" href=favicon.ico>
+<link rel=icon href="animated_favicon1.gif" type="image/gif">
+<meta name=keywords
+content="dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#FEFEFE" lang=EN-US link=blue vlink=purple style='tab-interval:
+.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzTop.htm&quot; \c html <span style='mso-element:field-separator'></span></span><![endif]--><script language="JavaScript">
+<!-- 
+var redi=1; // -->
+</script><span class=xyz><? echo "<script language='JavaScript'><!--\n var redi=0; \n// --></script>"; ?>&nbsp;</span>
+<script language="JavaScript">
+<!--
+if (redi==1) {
+    var l=location.toString().split(".");
+    var l0=l[l.length-2].split("/");
+    var l1=l0[l0.length-1];
+    var l2=l[l.length-1];
+    var target = "https://www.dostips.com/"+l1+".php";
+    document.writeln("<center><H1>This site has been updated.  You will be forwarted to<br><br>\n<a href='" + target + "'>" + target + "</a></H1></center>");
+    for (i=0; i<100; i++) document.writeln("<br>\n");
+    setTimeout("top.location.replace(target)",3000);
+}
+// -->
+</script></p>
+
+<? include_once 'zTop.php'; ?>
+
+<p class=PageTitle><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><span style='mso-field-code:" TITLE   \\* MERGEFORMAT "'>DOS - My First
+Batch File</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>You have heard a lot about DOS and
+batch files but you just can't figure out how to create one yourself?<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>Learn here how to create your first
+DOS patch program in a few easy steps.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><!--[if supportFields]><span
+style='color:black'><span style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>TOC \o &quot;1-3&quot; \h \z \u <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587138">1<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>General<span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587138
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100330038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587139">2<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Create
+a DOS batch - &quot;hello.bat&quot;<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587139
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100330039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587140">3<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Execute
+a DOS batch - &quot;hello.bat&quot;<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587140
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100340030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587141">4<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Summary<span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587141
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100340031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587142">5<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>How
+to continue from here<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587142
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100340032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587138"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>General</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>DOS batch files are written in
+  plain text.<span style='mso-spacerun:yes'> </span>Any text editor that can
+  store plain text can be used to create a new DOS batch file.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>DOS batch files use the file
+  extension <b style='mso-bidi-font-weight:normal'>.bat</b> or <b
+  style='mso-bidi-font-weight:normal'>.cmd</b>.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>In our simple example we will
+  use Notepad to create a batch file right on the desktop. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The Notepad program is available
+  on all Windows platforms.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587139"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Create a DOS batch -
+  &quot;hello.bat&quot;</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Use Notepad to create a new file
+  called <b style='mso-bidi-font-weight:normal'>hello.bat</b> on your
+  desktop.<span style='mso-spacerun:yes'> </span>Add the code shown below to
+  the file and save it.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>This can be done step by step as
+  follows:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-size:8.0pt;
+  font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;
+  color:black'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the Start menu
+  click: <b style='mso-bidi-font-weight:normal'>Programs - Accessories -
+  Notepad</b></span><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=MsoNormal><span style='color:black'>The Notepad program starts up
+  showing an empty document with the title: "Untitled - Notepad"</span><span
+  style='font-size:8.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the Notepad menu
+  click:<span style='mso-spacerun:yes'> </span><b style='mso-bidi-font-weight:
+  normal'>File - Save As</b><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=MsoNormal><span style='color:black'>The Save As dialog shows up<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the Save As
+  dialog use the <b style='mso-bidi-font-weight:normal'>Save in</b> drop down
+  box to select: <b style='mso-bidi-font-weight:normal'>Desktop</b><o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the <b
+  style='mso-bidi-font-weight:normal'>File name</b> field overwrite the file
+  name by typing: <b style='mso-bidi-font-weight:normal'>hello.bat</b><o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Click:<b
+  style='mso-bidi-font-weight:normal'> Save<o:p></o:p></b></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=MsoNormal><span style='color:black'>The Save As dialog will
+  close.<span style='mso-spacerun:yes'> </span>Notepad shows an empty document
+  with the title: "hello.bat - Notepad".<span style='mso-spacerun:yes'>
+  </span>A new icon with the name hello.bat appears on the Desktop.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Type or copy/paste
+  the following code into notepad:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>@echo Hello world.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>@pause<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the Notepad menu
+  choose: File - Save<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Congrats<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=MsoNormal><span style='color:black'>Done!<span
+  style='mso-spacerun:yes'> </span>Your fist DOS batch file is ready to run.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt' x:num x:fmla="=A7+1">
+  <h1><a name="_Toc128587140"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>3<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Execute a DOS batch
+  - &quot;hello.bat&quot;</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-size:8.0pt;
+  font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;
+  color:black'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Minimize all windows
+  and locate the icon called <b style='mso-bidi-font-weight:normal'>hello.bat</b>
+  on your desktop.</span><span style='font-size:8.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-size:8.0pt;
+  font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;
+  color:black'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Double click the <b
+  style='mso-bidi-font-weight:normal'>hello.bat</b> icon</span><span
+  style='font-size:8.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=MsoNormal><span style='color:black'>A new window will open showing the
+  following message:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='background:#F3F3F3;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'>Hello world.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'>Press any key to continue . . .<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Press any key, e.g.
+  Space<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The window will close.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A7+1">
+  <p class=MsoNormal><span style='color:black'>Congrats<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>You just executed your first DOS
+  batch.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:21'>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt' x:num x:fmla="=A7+1">
+  <h1><a name="_Toc128587141"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>4<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Summary</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:22'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>When double clicking hello.bat on
+  the desktop the file was passed to the DOS command processor.<span
+  style='mso-spacerun:yes'> </span>Independent from the executed batch file
+  the command processor will always open a new window.<span
+  style='mso-spacerun:yes'> </span>This window will close when the command
+  processor finished executing the batch file.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The command processor executes
+  the commands listed in the batch file line by line.<span
+  style='mso-spacerun:yes'> </span>Commands in the batch file can instruct the
+  command processor to interact with the user, i.e. to show some text output in
+  the window or to wait for keyboard input.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>If not instructed differently
+  the command processor echoes each command from the batch to the window before
+  executing it.<span style='mso-spacerun:yes'> </span>This can be useful for
+  testing and debugging but is usually annoying in the final version of the
+  batch file and because of this omitted in the example by having the ‘@' sign
+  in front of each line.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:23'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Inside Hello.bat <o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The first line instructs the
+  command processor to show the text: "Hello World."<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The second line instructs the
+  command processor to pause till the user hits a key on the keyboard.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>After pressing a key the batch
+  file finishes and the command processor will close the window.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Lesson learned<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The simple example teaches three
+  features of the command processor.<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>The <b
+  style='mso-bidi-font-weight:normal'>echo</b> command displays text on the
+  screen.<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>The <b
+  style='mso-bidi-font-weight:normal'>pause</b> command causes the command
+  processor to pause until the user hits a key on the keyboard.<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>The ‘<b
+  style='mso-bidi-font-weight:normal'>@</b>' sign at the beginning of a line
+  prevents the command processor to echo the line on the screen while
+  executing.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:25'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Tip<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>To turn off the echoing of
+  commands for the whole batch file use the "<b style='mso-bidi-font-weight:
+  normal'>@echo off</b>" command as first command in the batch file.<span
+  style='mso-spacerun:yes'> </span>The hello.bat example can be rewritten as
+  follows in order to avoid an ‘<b style='mso-bidi-font-weight:normal'>@</b>'
+  in front of each line:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:26'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo Hello world.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>pause<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:27'>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:none;
+  border-bottom:solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587142"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>5<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>How to continue from
+  here</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:28'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Now you have your first DOS
+  batch running and you may want to know what all you can use it for. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>A whole group of predefined DOS
+  commands is available with your operating system that can be used to enhance
+  this simple example and make a useful application out of it.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>To list all predefined dos
+  commands open a command console and type <b style='mso-bidi-font-weight:normal'>help</b>.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>This can be done as follows:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:29'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-size:8.0pt;
+  font-family:Symbol;mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;
+  color:black'><span style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the Start menu
+  click: <b style='mso-bidi-font-weight:normal'>Run</b></span><span
+  style='font-size:8.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:30'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The <b style='mso-bidi-font-weight:
+  normal'>Run</b> dialog box opens<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:31'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>In the <b
+  style='mso-bidi-font-weight:normal'>Open</b> edit box type: <b
+  style='mso-bidi-font-weight:normal'>cmd.exe</b><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:32'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The command console opens
+  reporting the windows version.<span style='mso-spacerun:yes'> </span>A
+  blinking cursor shows up.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:33'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Enter: <b
+  style='mso-bidi-font-weight:normal'>help</b> and hit the<span
+  style='mso-spacerun:yes'> </span><b style='mso-bidi-font-weight:normal'>Enter</b>
+  key<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:34'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='font-size:8.0pt;mso-bidi-font-family:Arial;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>A list of predefined DOS
+  commands with a brief description shows up.<span style='mso-spacerun:yes'>
+  </span>Followed by the blinking curser waiting for more input.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:35'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='color:black'>Do<o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Pick any dos command
+  from the list.<span style='mso-spacerun:yes'> </span>Type <b
+  style='mso-bidi-font-weight:normal'>help</b> and the DOS command to get more
+  information about it's usage.<span style='mso-spacerun:yes'> </span>I.e.
+  type: <b style='mso-bidi-font-weight:normal'>help echo</b> and hit <b
+  style='mso-bidi-font-weight:normal'>Enter</b> to get the details about the <b
+  style='mso-bidi-font-weight:normal'>echo</b> command<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:36'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='color:black'>Example<o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;background:#F3F3F3;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>C:\&gt;help echo<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>Displays messages, or turns
+  command-echoing on or off.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>ECHO [ON | OFF]<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>ECHO [message]<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>Type ECHO without parameters to
+  display the current echo setting.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>C:\&gt;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:37;mso-yfti-lastrow:yes'>
+  <td width="8%" valign=top style='width:8.18%;padding:0in 5.4pt 0in 5.4pt'
+  x:num x:fmla="=A12+1">
+  <p class=MsoNormal><span style='color:black'>Lesson learned</span><span
+  style='font-size:8.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="91%" valign=top style='width:91.82%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>There is a whole list of
+  predefined DOS commands available.<span style='mso-spacerun:yes'> </span>Those
+  DOS commands can be combined in a batch file in order to build a useful DOS
+  batch application.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzBottom.htm&quot; \c html <span style='mso-element:
+field-separator'></span></span><![endif]-->&nbsp; </p>
+
+<? include 'zBottom.php'; ?>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146e28741ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

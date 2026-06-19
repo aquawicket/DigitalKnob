@@ -1,0 +1,6 @@
+############ lame ############
+# https://sourceforge.net/p/lame/svn/HEAD/tree
+# https://github.com/lameproject/lame.git
+# https://github.com/lameproject/lame/archive/1f5cc9487284d5950343aa5d4f70de433468070a.zip
+
+lame_Import=https://github.com/lameproject/lame/archive/1f5cc9487284d5950343aa5d4f70de433468070a.zip

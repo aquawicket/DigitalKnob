@@ -1,0 +1,6 @@
+############ json ############
+# https://github.com/nlohmann/json.git
+# https://github.com/nlohmann/json/archive/63258397761b3dd96dd171e5a5ad5aa915834c35.zip
+# https://github.com/nlohmann/json/archive/30b28175e46827153d8a51d75540ef888aa83d8b.zip
+
+json_Import=https://github.com/nlohmann/json/archive/63258397761b3dd96dd171e5a5ad5aa915834c35.zip

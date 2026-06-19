@@ -1,24 +1,83 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ############ clang ############
+rem # https://packages.msys2.org/package/mingw-w64-x86_64-clang?repo=mingw64
+rem #
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+rem %setlocal%
+	
+	%dk_call% dk_validate Host_Tuple	%dk_call% dk_Host_Tuple
+	%dk_call% dk_validate Target_Tuple	%dk_call% DKBuilder/Target_Tuple
+	%dk_call% dk_validate msys2 		%dk_call% dk_depend msys2
 
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/clang/DKINSTALL.cmake)" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-	%dk_call% dk_assertVar CLANG_C_COMPILER
-	%dk_call% dk_assertVar CLANG_CXX_COMPILER
-::	endlocal & (
-::		set "CLANG_C_COMPILER=%CLANG_C_COMPILER%"
-::		set "CLANG_CXX_COMPILER=%CLANG_CXX_COMPILER%"
-::	)
+	%dk_call% dk_installPackage clang
+	
+	if defined Android (
+		%dk_call% dk_validate ANDROID_NDK 		%dk_call% dk_depend android-ndk
+		%dk_call% dk_set clang_exe   	"%ANDROID_NDK%/toolchains/llvm/prebuilt/%Android_Host_Tag%/bin/clang.exe"
+		%dk_call% dk_set clang++_exe  	"%ANDROID_NDK%/toolchains/llvm/prebuilt/%Android_Host_Tag%/bin/clang++.exe"
+	) else if defined Linux_Host (
+		if EXIST "/usr/bin/clang" (
+			%dk_call% dk_set clang_exe	"usr/bin/clang"
+		) else if EXIST "/usr/local/bin/clang" (
+			%dk_call% dk_set clang_exe	"/usr/local/bin/clang"
+		)
+
+		if EXIST "/usr/bin/clang++" (
+			%dk_call% dk_set clang++_exe	"/usr/bin/clang++"
+		) else if EXIST "/usr/local/bin/clang++" (
+			%dk_call% dk_set clang++_exe	"/usr/local/bin/clang++"
+		)
+	) else if defined Windows_Arm64_Clang (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set CLANGARM64_BIN		"!msys2!/clangarm64/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/clangarm64/bin/clang.exe"
+		%dk_call% dk_set clang++_exe 	"!msys2!/clangarm64/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/clangarm64/bin/windres.exe"
+	) else if defined Windows_X86_Clang (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set CLANG32_BIN		"!msys2!/clang32/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/clang32/bin/clang.exe"
+		%dk_call% dk_set clang++_exe		"!msys2!/clang32/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/clang32/bin/windres.exe"
+	) else if defined Windows_X86_64_Clang (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set CLANG64_BIN		"!msys2!/clang64/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/clang64/bin/clang.exe"
+		%dk_call% dk_set clang++_exe 	"!msys2!/clang64/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/clang64/bin/windres.exe"
+	) else if defined Windows_X86_Gcc (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set MINGW32_BIN		"!msys2!/mingw32/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/mingw32/bin/clang.exe"
+		%dk_call% dk_set clang++_exe 	"!msys2!/mingw32/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/mingw32/bin/windres.exe"
+	) else if defined Windows_X86_64_Gcc (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set MINGW64_BIN		"!msys2!/mingw64/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/mingw64/bin/clang.exe"
+		%dk_call% dk_set clang++_exe 	"!msys2!/mingw64/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/mingw64/bin/windres.exe"
+	) else if defined Windows_X86_64_Ucrt (
+		%dk_call% dk_validate MSYS2 			%dk_call% dk_depend msys2
+		rem %dk_call% dk_set UCRT64_BIN			"!msys2!/ucrt64/bin"
+		%dk_call% dk_set clang_exe   	"!msys2!/ucrt64/bin/clang.exe"
+		%dk_call% dk_set clang++_exe 	"!msys2!/ucrt64/bin/clang++.exe"
+		%dk_call% dk_set CLANG_RC_COMPILER  	"!msys2!/ucrt64/bin/windres.exe"
+	)
+
 %endfunction%
 
 
@@ -26,10 +85,13 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	%dk_call% DKINSTALL
+	%dk_call% dk_validate clang_exe %dk_call% dk_depend clang
+	%dk_call% dk_debug "clang_exe = %clang_exe%"
+	
+	%dk_call% dk_validate clang_exe %dk_call% dk_depend clang
+	%dk_call% dk_debug "clang_exe = %clang_exe%"
 %endfunction%

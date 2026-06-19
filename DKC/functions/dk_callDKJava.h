@@ -18,23 +18,23 @@ int dk_callDKJava(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKJava.h";
-	char* DKJAVA_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKJava/functions/";
+	char* cmd_exe = "cmd.exe";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKJava.h";
+	char* DKJAVA_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKJava/functions/";
 
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKJava.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKJava.h")) {
       dk_error("putenv failed \n");
       return -1;
     }
-	if(-1 == putenv("DKJAVA_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKJava/functions/")) {
+	if(-1 == putenv("DKJAVA_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKJava/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     } 
 	
-	char* func_path = "C:/Users/Administrator/digitalknob/Development/DKJava/functions/";
+	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKJava/functions/";
 	char DKJAVA_COMMAND[512];
-	//int err = sprintf(DKJAVA_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKJAVA_FUNCTIONS_DIR_=%s) & (set PATH=!DKJAVA_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKJAVA_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKJAVA_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKJAVA_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKJAVA_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKJAVA_FUNCTIONS_DIR_=%s) & (set PATH=!DKJAVA_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKJAVA_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKJAVA_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKJAVA_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKJAVA_COMMAND);
 	
 	FILE *fp;

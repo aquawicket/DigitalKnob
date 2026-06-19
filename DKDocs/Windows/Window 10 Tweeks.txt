@@ -1,0 +1,307 @@
+Windows 10 LTSC lite tweeking proceedures
+-----------------------------------------
+*** Install Windows ***
+
+*** First run information ***
+875MB Memory used
+
+DO NOT CONNECT TO THE INTERNET YET
+
+
+*** Disable Windows Defender Antivirus ***
+run "gpedit.msc"
+goto Computer COnfiguraion -> Adminitrative Templates -> Windows Compononts -> Windows Defender Antivirus
+Enable "Turn off Windows Defender Antivirus"
+Enable "Turn off routine remediation"
+
+
+*** Disable Windows Updates ***
+run "gpedit.msc"
+goto Computer COnfiguraion -> Adminitrative Templates -> Windows Compononts -> Windows Update
+Disable "Configure Automatic Updates"
+
+
+*** msconfig ***
+>Goto services tab and uncheck these
+Adaptive Brightness
+Application Layer Gateway Service	
+Alljoyn Router Service	
+AVCTP Service	
+Bitlocker	
+Bluetooth Support Service
+Certificate Propagation
+Connected User Experience and Telemetry
+Diagnostic Policy Service	
+Diagnostic Service Host	
+Diagnostic System Host	
+Distributed Link Tracking Client	
+Download Maps Manager
+Encrypting File System (EFS)
+Enterprise App Management Service  (LOCKED)
+Fax	
+File History Service	
+GameDVR and Broadcast	
+Geolocation Service
+Internet Connection Sharing
+IP Helper	
+Netlogon	
+Offline Files	
+Parental Control	
+Payments and NFC/SE Manager	
+Phone Service
+Print Spooler
+Program Compatibility Assistant Service
+Remote Registry
+Retail Demo Service
+Secondary Logon
+Security Center (LOCKED)
+Smart Card
+Smart Card Device Enumeration Service
+Smart Card Removal Policy
+TCP/IP NetBIOS Helper
+Touch Keyboard and Handwriting Panel Service
+Windows Biometric Service
+Windows Camera Frame Server
+Windows Connect Now
+Windows Defender Firewall
+Windows Error Reporting Service
+Windows Image Acquisition
+Windows Insider Service
+Windows Media Player Network Sharing Service
+Windows Mobile Hotspot Service
+Windows Search
+Windows Time
+Windows Update	
+Xbox Accessory Live Auth Manager
+Xbox Live Auth Manager
+Xbox Live Game Save
+Xbox Live Networking Services
+
+
+*** Services ***
+>Stop these services and set them to Disabled
+   Windows Update
+
+
+*** Virus & threat protection setings ***
+Turn off "Real time protecion", click Dismiss
+Turn off "Cloud-delivered protection", click Dismiss
+Turn off "Automatic sample submission", click Dismiss
+
+
+*** Recycle Bin ***
+Set Custom size to 100
+Select Don't move files..
+Check Display delete...
+Remove Recycle Bin from desktop under: Themes -> Desktop Icon Settings
+
+*** Hard Drive ***
+Goto C: Properties
+Uncheck "Allow files on this drive...",  click ignore all
+
+
+CONNECT TO THE INTERNET
+
+*** Register Windows ***
+copy MAS_1.4_AIO_CRC32_9A7B5B05 to desktop and run it
+press 2 for HWID Activation
+delete MAS_1.4_AIO_CRC32_9A7B5B05 from the desktop
+
+DISCONNECT FROM INTERNET
+   
+*** Visual Effects ***
+Choose "Adjust for best performance"
+
+*** Performance Options / Advanced ***
+choose Adjust for best performance of "Background services"
+
+*** Virtual memory ***
+Choose "No Paging File" and restart
+
+*** Colors menu ***
+Turn off transparency effects
+Choose Dark mode
+
+*** Additional Power Setings ***
+Create a power plan and choose High Performance or Ultra if available
+Change "turn off display" to 3 minutes for Battery, 15 minutes for plugged in
+
+*** Change advances power settings ***
+> Power buttons and lid
+   > Lid close action
+      > On battery: Sleep
+      > Plugged in: Do Nothing
+   > Power button action
+      > On battery: Shutdown
+      > Plugged in: Shutdown
+> Processor power management
+   > Maximum processor state:
+      > On battery: 90%
+      > Plugged in: 90%
+
+
+*** User Accounts ***
+Change use account controll settings -> set slider all the way down
+
+
+*** Taskbar settings ***
+Turn off "Replace COmand Prompt with Windows Powershell"
+always show all icons in notification area
+
+*** Bluetooth & other devices ***
+Set bluetooth to off
+
+*** Sound Control Panel ***
+Goto Sounds Tab -> Change Sound Scheme to: No Sounds
+Goto Communications Tab -> Select: Do Nothing
+
+*** Printers and Scanners ***
+uncheck "Let Windows manage my default printer"
+
+*** Privacy Settings ***
+> General
+   Turn off "Let apps use advertising ID..."
+   Turn off "Let websites provide locally relevant..."
+   Turn off "Let windows track app launches..."
+   Turn off "Show me suggested content in the Settings app"
+> Speech
+   turn off
+> Inking & typing personalization
+   turn off
+   Click View user dictionary -> click Clear dictionary
+> Diagnostics & feedback
+   Delete diagnostic data, click delete
+   Change "Feedback frequency" to Never
+> Activity history
+   Uncheck "Store my activity history"
+   Click Clear under "Clear activity history"
+> Location
+   Click Clear under "Clear location"
+> Camera
+   Click change, set to off
+> Microphone
+   Click change, set to off
+> Notification
+   CLick change, set to off
+> Account Info
+   Click change, set to off
+> Contacts
+   CClick change, set to off
+> Calander
+   Click change, set to off
+> Call history
+   Click change, set to off
+> Email
+   Click change, set to off
+> Tasks
+   Click change, set to off
+> Messaging
+   Click change, set to off
+> Radios
+   Click change, set to off
+> Email
+   Click change, set to off
+> Other devices
+   turn off
+> Background Apps
+   turn off
+> App diagnostics
+   Click change, set to off
+> Documents
+   Click change, set to off
+> Pictures
+   Click change, set to off
+> Videos
+   Click change, set to off
+> File system
+   Click change, set to off
+
+
+*** Turn Windows features on or off ***
+Uncheck everything except ".NET Framwork 4.7..." and click OK
+
+*** Apps & features ***
+Click Manage optional features, Uninstall anything that appears
+
+
+*** Startup ***
+Turn off "Windows Security notification icon"
+
+CONNECT TO THE INTERNET
+
+*** Install / Update all device drivers
+Download and install Driver Booster Free, scan and install all drivers
+Uninstall driver booster
+
+DISSCONNECT FROM THE INTERNET AND RESTART
+
+*** Change adapter settings ***
+right-click on each adapter, click properties, uncheck everything except TCP/IPv4, click OK
+
+*** Mobile hotspot ***
+Turn off "Turn on remotley"
+
+*** Device Manager ***
+click view, show hidden devices
+Uninstall all devices not connected to the system (greyed out)  -> (Select, delete, enter)
+Disable all Microsoft Network Device. WAN Miniports, Microsoft Wi-Fi Direct Virtual Adapters, Etc
+Disable all Software devices
+Disable all Cameras
+Disable all Bluetooth adapters
+Disable all Microphones
+Disable any Unknown devices
+
+*** App & browser control ***
+Set "Check apps and files" to Off, click Dismiss
+Set "Smartscreen for Microsoft tore apps" to Off, click Dismiss
+
+*** File Explorer -> Folder Options***
+> General
+   Uncheck "Show recently used files in..."
+   Uncheck "Show frequently used folders..."
+   Click "Clear"
+> View
+   Select "Show hidden files, folders, and drives"
+   Uncheck "Hide empty drives"
+   Uncheck "Hide Extensions for known file typees"
+   Uncheck "Hide protected operating system files"
+   click OK
+
+*** Typing ***
+Turn off "Autocorrect misspelled words"
+Turn off "Add a period after I double-tap the spacebar"
+> Suggestion and autocorrections
+   Turn off "English" and any other items that appear
+
+*** AutoPlay ***
+Turn Off "Use AutoPlay for all media and devices"
+Change "Removable drive" to Take no action
+CHange "Memory card" to Take no action
+
+*** Date & Time
+Turn off "Set time automatically"
+Turn off "Adjust for dayight saving..."
+
+
+*** Delivery Optimization ***
+Turn off "Allow downloads from other PCs"
+> Advanced options
+   Check all 4 boxes and move all 4 sliders to the lowest setting
+
+*** For developers ***
+select "Developer mode"
+> File Explorer
+   click apply
+> Remote Desktop
+   Uncheck "Change settings to all connections... ", click apply
+> PowerShell
+   click apply
+
+
+**** DO THESE LAST ****
+
+*** Disk cleanup ***
+perform a disk cleanup on the windows drive, check all boxes, delete files
+perform a disk cleanup on the windows drive, click "Clean up system files", check all boxes, delete files
+
+

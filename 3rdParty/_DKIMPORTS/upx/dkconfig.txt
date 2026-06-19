@@ -1,0 +1,23 @@
+############ upx ############
+# https://github.com/upx/upx
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-amd64_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-arm64_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-armeb_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-arm_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-dos.zip
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-i386_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-mipsel_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-mips_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-powerpc64le_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-powerpc_linux.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-src.tar.xz
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win32.zip
+# https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip
+
+upx_Type=Tool
+upx_Windows_X86_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win32.zip
+upx_Windows_X86_64_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip
+upx_Linux_X86_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-i386_linux.tar.xz
+upx_Linux_X86_64_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-amd64_linux.tar.xz
+upx_Raspberry_Arm32_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-arm_linux.tar.xz
+upx_DOS_Import=https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-dos.zip

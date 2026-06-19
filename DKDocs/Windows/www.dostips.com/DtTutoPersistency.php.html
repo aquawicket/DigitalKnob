@@ -1,0 +1,1492 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="DtTutoPersistency_files/filelist.xml">
+<link rel=Edit-Time-Data href="DtTutoPersistency_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>DOS - Persistent Variables</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Keywords>dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser</o:Keywords>
+  <o:Template>Dt.dot</o:Template>
+  <o:LastAuthor>HP Authorized Customer</o:LastAuthor>
+  <o:Revision>122</o:Revision>
+  <o:TotalTime>316</o:TotalTime>
+  <o:Created>2005-12-27T02:53:00Z</o:Created>
+  <o:LastSaved>2006-03-15T02:38:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1444</o:Words>
+  <o:Characters>8235</o:Characters>
+  <o:Lines>68</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>9660</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>TextFit</w:Zoom>
+  <w:DisplayBackgroundShape/>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:UpdateStylesOnOpen/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="_style.css?v=0001">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-update:auto;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:13.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-parent:Code;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.bullets, li.bullets, div.bullets
+	{mso-style-name:bullets;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.Code, li.Code, div.Code
+	{mso-style-name:Code;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+p.Bullets0, li.Bullets0, div.Bullets0
+	{mso-style-name:Bullets;
+	mso-style-update:auto;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	mso-list:l0 level1 lfo4;
+	tab-stops:list .25in;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.PageTitle, li.PageTitle, div.PageTitle
+	{mso-style-name:PageTitle;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.ads, li.ads, div.ads
+	{mso-style-name:ads;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.men, li.men, div.men
+	{mso-style-name:men;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nav, li.nav, div.nav
+	{mso-style-name:nav;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inst, li.inst, div.inst
+	{mso-style-name:inst;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inde, li.inde, div.inde
+	{mso-style-name:inde;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resu, li.resu, div.resu
+	{mso-style-name:resu;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.instr, li.instr, div.instr
+	{mso-style-name:instr;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resul, li.resul, div.resul
+	{mso-style-name:resul;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel, li.ysel, div.ysel
+	{mso-style-name:ysel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel, li.nsel, div.nsel
+	{mso-style-name:nsel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel1, li.ysel1, div.ysel1
+	{mso-style-name:ysel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel1, li.nsel1, div.nsel1
+	{mso-style-name:nsel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.AdH468, li.AdH468, div.AdH468
+	{mso-style-name:AdH468;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.bod, li.bod, div.bod
+	{mso-style-name:bod;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.codeop, li.codeop, div.codeop
+	{mso-style-name:codeop;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ccmmt, li.ccmmt, div.ccmmt
+	{mso-style-name:c_cmmt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ccmnt, li.ccmnt, div.ccmnt
+	{mso-style-name:c_cmnt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.cpvar, li.cpvar, div.cpvar
+	{mso-style-name:c_pvar;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.clabl, li.clabl, div.clabl
+	{mso-style-name:c_labl;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.adsh, li.adsh, div.adsh
+	{mso-style-name:adsh;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.xyz
+	{mso-style-name:xyz;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:530192825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-406048876 -1919616146 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-style-link:Bullets;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1463158827;
+	mso-list-template-ids:1196599110;}
+@list l1:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"%3\)";
+	mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-text:"\(%4\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	margin-left:1.5in;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.75in;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:2.0in;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel="shortcut icon" href=favicon.ico>
+<link rel=icon href="animated_favicon1.gif" type="image/gif">
+<meta name=keywords
+content="dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="5122"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#FEFEFE" lang=EN-US link=blue vlink=purple style='tab-interval:
+.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzTop.htm&quot; \c HTML <span style='mso-element:field-separator'></span></span><![endif]--><script language="JavaScript">
+<!-- 
+var redi=1; // -->
+</script><span class=xyz><? echo "<script language='JavaScript'><!--\n var redi=0; \n// --></script>"; ?>&nbsp;</span>
+<script language="JavaScript">
+<!--
+if (redi==1 && window == top) {
+    var l=location.toString().split(".");
+    var l0=l[l.length-2].split("/");
+    var l1=l0[l0.length-1];
+    var l2=l[l.length-1];
+    var target = "https://www.dostips.com/"+l1+".php";
+    document.writeln("<center><H1>This site has been updated.  You will be forwarted to<br><br>\n<a href='" + target + "'>" + target + "</a></H1></center>");
+    for (i=0; i<100; i++) document.writeln("<br>\n");
+    setTimeout("top.location.replace(target)",3000);
+}
+// -->
+</script></p>
+
+<? include_once 'zTop.php'; ?>
+
+<p class=PageTitle><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><span style='mso-field-code:" TITLE   \\* MERGEFORMAT "'>DOS -
+Persistent Variables</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>Want to remember the state of your
+DOS batch over different sessions?<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>Want to make you DOS batch
+available in the network but store user preferences local?<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>Persist variables is what you
+need.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>Ideally you somehow mark your
+variables to be persistent and have one function to store all persistent
+variables and one function to restore persistent value back into the
+variables.<span style='mso-spacerun:yes'> </span>Learn here how to do this.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><!--[if supportFields]><span
+style='color:black'><span style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>TOC \o &quot;1-3&quot; \h \z \u <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135640">1<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Example
+Batch to Start With<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135640
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135641">2<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Mark
+Variables to be Persistent<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135641
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135642">3<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>getPersistentVars
+- Function<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135642
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135643">4<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>savePersistentVars
+- Function<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135643
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135644">5<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>restorePersistentVars
+- Function<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135644
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc130135645">6<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Example
+- Persistent Variables<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc130135645
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330030003100330035003600340035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135640"></a><a name="_Toc123413829"><span
+  style='mso-bookmark:_Toc130135640'><![if !supportLists]><span
+  style='mso-fareast-font-family:Arial;color:black'><span style='mso-list:Ignore'>1<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Example Batch to
+  Start With</span></span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Description</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Copy the following code into an empty batch file (e.g.<span
+  class=GramE>: "</span><span class=SpellE>DosTips.bat</span>").<span
+  style='mso-spacerun:yes'> </span>Get familiar with it by executing it and
+  changing some of the variables when prompted.<span style='mso-spacerun:yes'>
+  </span>Close the application using the "q" option and then run it again.<span
+  style='mso-spacerun:yes'> </span>As you will see all variable changes from
+  the previous run are lost.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--- Prepare the Command Processor ---<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--initialize the variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <b>color</b>=1e<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <b>lines</b>=20<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <b>title</b>=Hello World<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>:<st1:place w:st="on">LOOP</st1:place><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--apply the variable settings<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>color %color%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>title %title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>MODE CON: LINES=%lines% COLS=80<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--show current settings<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.Currently</span></span><span
+  style='color:black'> the variables are:<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>color=%color%<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>lines=%lines%<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>title=%title%<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--let the change the variables<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.Assign</span></span><span
+  style='color:black'> new values, for example enter:<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>color=2e<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>lines=40<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>title=HI THERE<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <span class=SpellE>cmd</span>=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p <span class=SpellE>cmd</span>=Or
+  enter q to quit: <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /<span class=SpellE>i</span>
+  &quot;%<span class=SpellE>cmd</span>%&quot;==&quot;q&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--execute the SET command and loop back<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SET %<span class=SpellE>cmd</span>%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:<st1:place w:st="on">LOOP</st1:place><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>This batch program uses three variables <b
+  style='mso-bidi-font-weight:normal'>color</b>, <b style='mso-bidi-font-weight:
+  normal'>lines</b>, and <b style='mso-bidi-font-weight:normal'>title</b>.<span
+  style='mso-spacerun:yes'> </span>The user can change the variables.<span
+  style='mso-spacerun:yes'> </span>However after closing the application with
+  �<b style='mso-bidi-font-weight:normal'>q</b>' all settings are gone.<span
+  style='mso-spacerun:yes'> </span>Our goal is to have all three variables
+  persistent so that when running the batch next time the previews setting show
+  up. <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135641"></a><a name="_Toc123413830"><span
+  style='mso-bookmark:_Toc130135641'><![if !supportLists]><span
+  style='mso-fareast-font-family:Arial;color:black'><span style='mso-list:Ignore'>2<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Mark Variables to be
+  Persistent</span></span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Description</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The challenge is to mark a variable as persistent but
+  still keep the code looking good and maintainable.<span
+  style='mso-spacerun:yes'> </span>Changing the SET command to a function call
+  where the variable gets initialized the first time meets the requirement:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> color=1e<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> lines=20<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> title=Hello World<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The </span><span class=SpellE><b style='mso-bidi-font-weight:
+  normal'><span style='color:black'>setPersist</span></b></span><b
+  style='mso-bidi-font-weight:normal'><span style='color:black'> </span></b><span
+  style='color:black'>function will just do what the set function did,
+  assigning a value to the variable.</span><span style='mso-bidi-font-size:
+  9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:<span class=SpellE>setPersist</span></span></b><span
+  style='color:black'> -- to be called to initialize persistent variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %*: arguments for the SET
+  command<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set %*<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width="11%" valign=top style='width:11.12%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="88%" valign=top style='width:88.88%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Of course just replacing the <b style='mso-bidi-font-weight:
+  normal'>SET</b> command with a call to <span class=SpellE><b
+  style='mso-bidi-font-weight:normal'>setPersis</b></span> doesn't make the
+  variable persistent, but we can write another function now that parses the
+  batch file for all lines containing the <span class=SpellE><b
+  style='mso-bidi-font-weight:normal'>call:setPersist</b></span><span
+  style='mso-spacerun:yes'> </span>command and automatically persist the corresponding
+  variables.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135642"></a><a name="_Toc123413831"><span
+  style='mso-bookmark:_Toc130135642'><![if !supportLists]><span
+  style='mso-fareast-font-family:Arial;color:black'><span style='mso-list:Ignore'>3<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]></span></a><span class=SpellE><span
+  style='mso-bookmark:_Toc123413831'><span style='mso-bookmark:_Toc130135642'><span
+  style='color:black'>getPersistentVars</span></span></span></span><span
+  style='mso-bookmark:_Toc123413831'><span style='mso-bookmark:_Toc130135642'><span
+  style='color:black'> - Function</span></span></span><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Description</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <span class=SpellE>getPersistentVars</span> function
+  parses its owning batch file for lines calling the <span class=SpellE><b
+  style='mso-bidi-font-weight:normal'>setParsist</b></span> function and
+  collects the associated variables in a comma separated list.<span
+  style='mso-spacerun:yes'> </span>The comma speared list of strings can easy
+  be parsed later using the <b style='mso-bidi-font-weight:normal'>FOR</b>
+  function.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>:<span class=SpellE>getPersistentVars</span>
+  -- returns a comma separated list of persistent variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>    </span>-- %~1: reference to return
+  variable <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <span class=SpellE>retlist</span>=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set parse=<span class=SpellE>findstr</span>
+  /<span class=SpellE>i</span> /<span class=SpellE>c:&quot;call:setPersist</span>&quot;
+  &quot;%~f0%&quot;^|find /v &quot;<span class=SpellE>ButNotThisLine</span>&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=2 <span
+  class=SpellE>delims</span>== &quot; %%a in ('&quot;%parse%&quot;') do (set <span
+  class=SpellE>retlist</span>=!<span class=SpellE>retlist!%%a</span>,)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%<span class=SpellE>retlist</span>%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF</span><span
+  style='mso-bidi-font-size:10.0pt;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>How it works<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <span class=SpellE><b style='mso-bidi-font-weight:
+  normal'>findstr</b></span> command applied to </span><span style='color:black'>&quot;<b
+  style='mso-bidi-font-weight:normal'>%~f0%</b>&quot; (</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>the
+  batch file itself )</span><span style='color:black'> </span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>filters
+  all lines having the "</span><span class=SpellE><b style='mso-bidi-font-weight:
+  normal'><span style='color:black'>call:setPersist</span></b></span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>"
+  command in it, which is what we want.<span style='mso-spacerun:yes'>
+  </span>In addition it finds the line that searches for the "</span><span
+  class=SpellE><b style='mso-bidi-font-weight:normal'><span style='color:black'>call:setPersist</span></b></span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>"
+  string within the <span class=SpellE><b style='mso-bidi-font-weight:normal'>getPersistentVars</b></span>
+  function itself, which we don't want.<span style='mso-spacerun:yes'>
+  </span>So we need to pipe the <span class=SpellE><b style='mso-bidi-font-weight:
+  normal'>findstr</b></span> output into another <b style='mso-bidi-font-weight:
+  normal'>find</b> command that filters the unwanted output.<span
+  style='mso-spacerun:yes'> </span>The resulting parser code will be stored
+  into the <b style='mso-bidi-font-weight:normal'>parse</b> variable and is
+  being used in the <b style='mso-bidi-font-weight:normal'>FOR</b> command of
+  the next line. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <b style='mso-bidi-font-weight:normal'>FOR</b> command
+  splits each line found by the parse command using " " (space) and "="
+  (assignment operator) as delimiters.<span style='mso-spacerun:yes'>
+  </span>This way the first token found will always be the string "</span><span
+  class=SpellE><b style='mso-bidi-font-weight:normal'><span style='color:black'>call:setPersist</span></b></span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>" and
+  the second token will always be the variable name that we are looking for.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The variable name will then be added to the return list
+  called <span class=SpellE><b style='mso-bidi-font-weight:normal'>retlist</b></span>
+  adding a trailing comma in order to separate the variable names from each
+  other.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135643"></a><a name="_Toc123413832"><span
+  style='mso-bookmark:_Toc130135643'><![if !supportLists]><span
+  style='mso-fareast-font-family:Arial;color:black'><span style='mso-list:Ignore'>4<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]></span></a><span class=SpellE><span
+  style='mso-bookmark:_Toc123413832'><span style='mso-bookmark:_Toc130135643'><span
+  style='color:black'>savePersistentVars</span></span></span></span><span
+  style='mso-bookmark:_Toc123413832'><span style='mso-bookmark:_Toc130135643'><span
+  style='color:black'> - Function</span></span></span><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Description</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <span class=SpellE>savePersistentVars</span> function
+  creates an executable batch file having a SET command for each variable to be
+  persisted.<span style='mso-spacerun:yes'> </span>The values can easily be
+  restored by executing this batch file.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code</span><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>:<span class=SpellE>savePersistentVars</span>
+  -- Save values of persistent variables into a file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>    </span>-- %~1: batch file name to
+  save to<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.&gt;&quot;%~1&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call :<span class=SpellE>getPersistentVars</span>
+  <span class=SpellE>persvars</span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for %%a in (%<span class=SpellE>persvars</span>%)
+  do (<span class=SpellE>echo.SET</span> %%a=!%%a!&gt;&gt;&quot;%~1&quot;)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>How it works<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <b style='mso-bidi-font-weight:normal'>SETLOCAL</b>
+  call ensures that changes to the </span><span class=SpellE><b
+  style='mso-bidi-font-weight:normal'><span style='color:black'>persvars</span></b></span><span
+  style='color:black'> variable is invisible outside the function.<span
+  style='mso-spacerun:yes'> </span>A corresponding <b style='mso-bidi-font-weight:
+  normal'>ENDLOCAL</b> is implicitly being executed by the GOTO:EOF command at
+  the end of the function.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <b style='mso-bidi-font-weight:normal'>echo.&gt;&quot;%~1&quot;</b>
+  command creates an empty new file whether or not one already exist. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The call to <span class=SpellE>getPersistentVars</span>
+  returns the comma separated list of persistent variables into the <span
+  class=SpellE><b style='mso-bidi-font-weight:normal'>persvars</b></span>
+  variable.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <span class=SpellE><b style='mso-bidi-font-weight:
+  normal'>persvars</b></span> variable is then being parsed by the <b
+  style='mso-bidi-font-weight:normal'>FOR</b> command which adds a<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:Arial;color:black'>SET
+  &lt;VAR&gt;=&lt;CURRENTVALUE&gt;</span></b><span style='mso-bidi-font-size:
+  9.0pt;mso-bidi-font-family:Arial;color:black'> entry for each persistent
+  variable to the new created file.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135644"></a><a name="_Toc123413833"><span
+  style='mso-bookmark:_Toc130135644'><![if !supportLists]><span
+  style='mso-fareast-font-family:Arial;color:black'><span style='mso-list:Ignore'>5<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]></span></a><span class=SpellE><span
+  style='mso-bookmark:_Toc123413833'><span style='mso-bookmark:_Toc130135644'><span
+  style='color:black'>restorePersistentVars</span></span></span></span><span
+  style='mso-bookmark:_Toc123413833'><span style='mso-bookmark:_Toc130135644'><span
+  style='color:black'> - Function</span></span></span><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>The <span class=SpellE>restorePersistentVars</span>
+  function shall simply execute the batch file that stores the commands to
+  restore the persistent variables.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>:<span class=SpellE>restorePersistentVars</span>
+  -- Restore the values of the persistent variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>     </span>-- %~1: batch file name
+  to restore from<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if exist &quot;%<span class=SpellE>FilePersist</span>%&quot;
+  call &quot;%<span class=SpellE>FilePersist</span>%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:21'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc130135645"></a><a name="_Toc123413834"></a><a
+  name="_Toc123321531"></a><![if !supportLists]><span style='mso-bookmark:_Toc130135645'><span
+  style='mso-bookmark:_Toc123413834'><span style='mso-fareast-font-family:Arial;
+  color:black'><span style='mso-list:Ignore'>6<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span></span></span><![endif]><span style='mso-bookmark:_Toc130135645'><span
+  style='mso-bookmark:_Toc123413834'><span style='color:black'>Example -
+  Persistent Variables</span></span></span><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:22'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Some modifications have been made to the previous example
+  in order to make the variables for the color, the number of lines, and the
+  window title persistent.<span style='mso-spacerun:yes'> </span>The relevant
+  modification are shown in bold below.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Copy the new code into an empty batch file (e.g.: "<span
+  class=SpellE>DosTips.bat</span>").<span style='mso-spacerun:yes'> </span>Get
+  familiar with it by executing it and changing some of the variables when
+  prompted.<span style='mso-spacerun:yes'> </span>Close the application using
+  the "q" option and reopen it.<span style='mso-spacerun:yes'> </span>As you
+  will see the variables show the values as set in the previous run.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:23'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--- Prepare the Command Processor ---<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--define the filename where persistent variables get <span
+  class=SpellE>storred</span><o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.<span style='mso-spacerun:yes'> </span>just add a + to
+  the name of THIS file, i.e. &quot;<span class=SpellE>DosTips.bat</span>&quot;
+  - &quot;<span class=SpellE>DosTips+.bat</span>&quot;<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>set <span class=SpellE>FilePersist</span>=%~dpn0+%~x0<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--initialize the variables<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> color=1e<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> lines=20<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:setPersist</span></b></span><span
+  style='color:black'> title=Hello World<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--restore the persistent variables<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><b><span style='color:black'>call:restorePersistentVars</span></b></span><b><span
+  style='color:black'> &quot;%<span class=SpellE>FilePersist</span>%&quot;<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>:<st1:place w:st="on">LOOP</st1:place><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--apply the variable settings<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>color %color%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>title %title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>MODE CON: LINES=%lines% COLS=80<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--show current settings<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.Currently</span></span><span
+  style='color:black'> the variables are:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>color=%color%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>lines=%lines%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>title=%title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--let the change the variables<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.Assign</span></span><span
+  style='color:black'> new values, for example enter:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>color=2e<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>lines=40<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'>
+  </span>title=HI THERE<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set <span class=SpellE>cmd</span>=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p <span class=SpellE>cmd</span>=Or
+  enter q to quit: <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /<span class=SpellE>i</span>
+  &quot;%<span class=SpellE>cmd</span>%&quot;==&quot;q&quot; (<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'><span style='mso-spacerun:yes'>
+  </span><span class=SpellE>call:savePersistentVars</span> &quot;%<span
+  class=SpellE>FilePersist</span>%&quot;<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>rem</span></span><span
+  style='color:black'>.--execute the SET command and loop back<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SET %<span class=SpellE>cmd</span>%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:<st1:place w:st="on">LOOP</st1:place><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:-----------------------------------------------------<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:-- functions to be added below
+  here<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:-----------------------------------------------------<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span class=SpellE>setPersist</span>
+  -- to be called to initialize persistent variables<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %*: set command arguments<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>set %*<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>GOTO:EOF<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span class=SpellE>getPersistentVars</span>
+  -- returns a comma separated list of persistent variables<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span
+  style='mso-spacerun:yes'>    </span>-- %~1: reference to return
+  variable <o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>SETLOCAL<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>set <span class=SpellE>retlist</span>=<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>set parse=<span class=SpellE>findstr</span>
+  /<span class=SpellE>i</span> /<span class=SpellE>c:&quot;call:setPersist</span>&quot;
+  &quot;%~f0%&quot;^|find /v &quot;<span class=SpellE>ButNotThisLine</span>&quot;<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>for /f &quot;tokens=2 <span
+  class=SpellE>delims</span>== &quot; %%a in ('&quot;%parse%&quot;') do (set <span
+  class=SpellE>retlist</span>=!<span class=SpellE>retlist!%%a</span>,)<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%<span class=SpellE>retlist</span>%<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>)<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>GOTO:EOF <o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span class=SpellE>savePersistentVars</span>
+  -- Save values of persistent variables into a file<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span
+  style='mso-spacerun:yes'>    </span>-- %~1: file name<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>SETLOCAL<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>echo.&gt;&quot;%~1&quot;<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>call :<span class=SpellE>getPersistentVars</span>
+  <span class=SpellE>persvars</span><o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>for %%a in (%<span class=SpellE>persvars</span>%)
+  do (<span class=SpellE>echo.SET</span> %%a=!%%a!&gt;&gt;&quot;%~1&quot;)<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>GOTO:EOF<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span class=SpellE>restorePersistentVars</span>
+  -- Restore the values of the persistent variables<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:<span
+  style='mso-spacerun:yes'>     </span>-- %~1: batch file name
+  to restore from<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>if exist &quot;%<span
+  class=SpellE>FilePersist</span>%&quot; call &quot;%<span class=SpellE>FilePersist</span>%&quot;<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>GOTO:EOF</span></b><span
+  style='color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>After closing the batch application
+  using the "q" option a new file is being created in the same directory as the
+  batch application itself.<span style='mso-spacerun:yes'> </span>The new created
+  batch file list all persistent variables, i.e.:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:25'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Output<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>SET color=2e<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SET lines=20<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SET title=Hi There<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:26'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Note<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>From here on it's easy to add more persistent
+  variables.<span style='mso-spacerun:yes'> </span>Simply add another
+  variable to the "initialize the variables" section of the batch file, e.g.:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:27;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span class=SpellE><span style='color:black'>call:setPersist</span></span><span
+  style='color:black'> <span class=SpellE>myvar</span>=<span class=SpellE>myvalue</span><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzBottom.htm&quot; \c html <span style='mso-element:
+field-separator'></span></span><![endif]-->&nbsp; </p>
+
+<? include 'zBottom.php'; ?>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f14701ceb1ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

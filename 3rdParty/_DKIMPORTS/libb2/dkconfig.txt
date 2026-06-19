@@ -1,0 +1,5 @@
+############# libb2 ############
+# https://github.com/BLAKE2/libb2.git
+# https://github.com/BLAKE2/libb2/archive/643decfbf8ae600c3387686754d74c84144950d1.zip
+
+libb2_Import=https://github.com/BLAKE2/libb2/archive/643decfbf8ae600c3387686754d74c84144950d1.zip

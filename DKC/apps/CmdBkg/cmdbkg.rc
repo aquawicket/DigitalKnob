@@ -1,0 +1,70 @@
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+// ***************************************************************************************************
+// ************* Update these 9 macros and the language statement. Don't alter the rest. *************
+
+// https://docs.microsoft.com/en-us/windows/desktop/menurc/versioninfo-resource
+#define APP_VS          3,0,0,0
+#define APP_BUILD_MONTH "July"
+#define APP_BUILD_YEAR  "2021"
+#define APP_DEVELOPER   "Mikael Sollenborn & Steffen Illhardt"
+#define APP_COMPANY     ""
+#define APP_NAME        "CmdBkg"
+#define APP_COMMENT     "CmdBkg - Background image for console window"
+
+// https://docs.microsoft.com/en-us/windows/desktop/menurc/stringfileinfo-block#remarks
+// ... as four HEX digits each
+#define APP_LANG        0409 // Language=US English
+#define APP_CHARSET     04E4 // CharSet=Windows Multilingual (HEX for 1252)
+
+// https://docs.microsoft.com/en-us/windows/desktop/menurc/language-statement
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+// ***************************************************************************************************
+// ***************************************************************************************************
+
+
+
+#define VERSTRING_HELPER(a,b,c,d) #a "." #b "." #c "." #d
+#define MAKE_VERSTRING(v) VERSTRING_HELPER(v)
+#define CONCAT_LANG_CHARSET_HELPER(a,b) #a #b
+#define CONCAT_LANG_CHARSET(a,b) CONCAT_LANG_CHARSET_HELPER(a,b)
+#define MAKE_HEX_HELPER(h,n) h##n
+#define MAKE_HEX(n) MAKE_HEX_HELPER(0x,n)
+
+VS_VERSION_INFO    VERSIONINFO
+  FILEVERSION      APP_VS
+  PRODUCTVERSION   APP_VS
+  FILEFLAGSMASK    VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+  FILEFLAGS        VS_FF_DEBUG|VS_FF_PRIVATEBUILD|VS_FF_PRERELEASE
+#else
+  FILEFLAGS        0x0L  // final version
+#endif
+  FILEOS           VOS_NT_WINDOWS32
+  FILETYPE         VFT_APP
+  FILESUBTYPE      VFT2_UNKNOWN // not used
+{
+  BLOCK "StringFileInfo"
+  {
+    BLOCK CONCAT_LANG_CHARSET(APP_LANG,APP_CHARSET)
+    {
+      VALUE "Build",            APP_BUILD_MONTH " " APP_BUILD_YEAR "\0"
+      VALUE "Comments",         APP_COMMENT "\0"
+      VALUE "CompanyName",      APP_COMPANY "\0"
+      VALUE "Developer",        APP_DEVELOPER "\0"
+      VALUE "FileDescription",  APP_COMMENT "\0"
+      VALUE "FileVersion",      MAKE_VERSTRING(APP_VS) "\0"
+      VALUE "InternalName",     APP_NAME "\0"
+      VALUE "LegalCopyright",   "\251 " APP_BUILD_YEAR " " APP_DEVELOPER "\0"
+      VALUE "OriginalFilename", APP_NAME ".exe\0"
+      VALUE "ProductName",      APP_NAME "\0"
+      VALUE "ProductVersion",   MAKE_VERSTRING(APP_VS) "\0"
+    } // BLOCK "040904E4"
+  } // BLOCK "StringFileInfo"
+  BLOCK "VarFileInfo"
+  {
+    VALUE "Translation", MAKE_HEX(APP_LANG), MAKE_HEX(APP_CHARSET)
+  } // BLOCK "VarFileInfo"
+}

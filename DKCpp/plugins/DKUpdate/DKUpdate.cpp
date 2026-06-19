@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -39,18 +39,30 @@
 
 //////////////////////////////////////
 //     Default update files
-// win_x86     - http://DigitalKnob.com/Download/DKApp.exe
-// win63     - http://DigitalKnob.com/Download/DKApp_64.exe
-// mac_x86     - http://DigitalKnob.com/Download/DKApp_mac_x86.zip
-// mac_x86_64     - http://DigitalKnob.com/Download/DKApp_mac_x86_64.zip
-// linux_x86   - http://DigitalKnob.com/Download/DKApp_linux_x86.zip
-// linux_x86_64   - http://DigitalKnob.com/Download/DKApp_linux_x86_64.zip
-// ios_arm32     - http://DigitalKnob.com/Download/DKApp_ios_arm32.zip
-// ios_arm64     - http://DigitalKnob.com/Download/DKApp_ios_arm64.zip
-// iossim_x86  - http://DigitalKnob.com/Download/DKApp_iossim_x86.zip
-// iossim_x86_64  - http://DigitalKnob.com/Download/DKApp_iossim_x86_64.zip
-// android_arm32 - http://DigitalKnob.com/Download/DKApp.apk
-// android_arm64 - http://DigitalKnob.com/Download/DKApp_64.apk
+// Windows_Arm32	- http://DigitalKnob.com/Download/DKApp_Windows_Arm32.exe
+// Windows_Arm64	- http://DigitalKnob.com/Download/DKApp_Windows_Arm64.exe
+// Windows_X86		- http://DigitalKnob.com/Download/DKApp_Windows_X86.exe
+// Windows_X86_64	- http://DigitalKnob.com/Download/DKApp_Windows_X86_64.exe
+// Mac_Arm32		- http://DigitalKnob.com/Download/DKApp_Mac_Arm32.zip
+// Mac_Arm64		- http://DigitalKnob.com/Download/DKApp_Mac_Arm64.zip
+// Mac_X86			- http://DigitalKnob.com/Download/DKApp_Mac_X86.zip
+// Mac_X86_64		- http://DigitalKnob.com/Download/DKApp_Mac_X86_64.zip
+// Linux_Arm32		- http://DigitalKnob.com/Download/DKApp_Linux_Arm32.zip
+// Linux_Arm64		- http://DigitalKnob.com/Download/DKApp_Linux_Arm64.zip
+// Linux_X86		- http://DigitalKnob.com/Download/DKApp_Linux_X86.zip
+// Linux_X86_64		- http://DigitalKnob.com/Download/DKApp_Linux_X86_64.zip
+// Ios_Arm32		- http://DigitalKnob.com/Download/DKApp_Ios_Arm32.zip
+// Ios_Arm64		- http://DigitalKnob.com/Download/DKApp_Ios_Arm64.zip
+// Ios_X86			- http://DigitalKnob.com/Download/DKApp_Ios_X86.zip
+// Ios_X86_64		- http://DigitalKnob.com/Download/DKApp_Ios_X86_64.zip
+// Iossim_X86		- http://DigitalKnob.com/Download/DKApp_Iossim_X86.zip
+// Iossim_X86_64	- http://DigitalKnob.com/Download/DKApp_Iossim_X86_64.zip
+// Iossim_Arm32		- http://DigitalKnob.com/Download/DKApp_Iossim_Arm32.zip
+// Iossim_Arm64		- http://DigitalKnob.com/Download/DKApp_Iossim_Arm64.zip
+// Android_Arm32	- http://DigitalKnob.com/Download/DKApp_Android_Arm32.apk
+// Android_Arm64	- http://DigitalKnob.com/Download/DKApp_Android_Arm64.apk
+// Android_X86		- http://DigitalKnob.com/Download/DKApp_Android_X86.apk
+// Android_X86_64	- http://DigitalKnob.com/Download/DKApp_Android_X86_64.apk
 
 DKString DKUpdate::url;
 
@@ -74,29 +86,29 @@ bool DKUpdate::Init(){
 #endif
 #if MAC_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86]", url);
-	if(url.empty()){ url = downloads+app+"_mac_x86.zip"; }
+	if(url.empty()){ url = downloads+app+"_Mac_X86.zip"; }
 #endif
 #if MAC_X86_64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_MAC_X86_64]", url);
-	if(url.empty()){ url = downloads+app+"_mac_x86_64.zip"; }
+	if(url.empty()){ url = downloads+app+"_Mac_X86_64.zip"; }
 #endif
 #ifdef LINUX_X86
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86]", url);
-	if(url.empty()){ url = downloads+app+"_linux_x86.zip"; }
+	if(url.empty()){ url = downloads+app+"_Linux_X86.zip"; }
 #endif
 #if LINUX_X86_64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_LINUX_X86_64]", url);
-	if(url.empty()){ url = downloads+app+"_linux_x86_64.zip"; }
+	if(url.empty()){ url = downloads+app+"_Linux_X86_64.zip"; }
 #endif
 #if IOS_ARM32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM32]", url);
-	if(url.empty()){ url = downloads+app+"_ios_arm32.zip"; }
+	if(url.empty()){ url = downloads+app+"_Ios_Arm32.zip"; }
 #endif
 #if IOS_ARM64
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_IOS_ARM64]", url);
-	if(url.empty()){ url = downloads+app+"_ios_arm64.zip"; }
+	if(url.empty()){ url = downloads+app+"_Ios_Arm64.zip"; }
 #endif
-#if ANDROID_ARM32
+#if Android_Arm32
 	DKFile::GetSetting(DKFile::local_assets + "settings.txt", "[UPDATE_ANDROID_ARM32]", url);
 	if(url.empty()){ url = downloads+app+".apk"; }
 #endif
@@ -222,7 +234,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	//TODO - recursive plugin file downloading
 	
 	//ok, here we are going to copy the url to the assets folder
-	//I.E.   digitalknob.com/TradePost/DKBrowser  ->  c:/digitalknob/Development/DKCpp/apps/TradePost/DKBrowser
+	//I.E.   DigitalKnob.com/TradePost/DKBrowser  ->  c:/DigitalKnob/Development/DKCpp/apps/TradePost/DKBrowser
 
 	//first check that the url exists
 	DKCurl::Instance("DKCurlUpdate");
@@ -230,17 +242,17 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 		return DKERROR("DKUpdate::UpdatePlugin("+url+"): the url does not exist\n");
 	DKINFO("DKUpdate::UpdatePlugin("+url+"): we found it!\n");
 
-	//now we have to find the folder relative to http://digitalknob.com/DKFile/DKFile.php
-	//I.E:  http://digitalknob.com/TradePost/TradePost = ../../TradePost/TradePost
-	//I.E:  http://digitalknob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
-	//I.E:  http://digitalknob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
+	//now we have to find the folder relative to http://DigitalKnob.com/DKFile/DKFile.php
+	//I.E:  http://DigitalKnob.com/TradePost/TradePost = ../../TradePost/TradePost
+	//I.E:  http://DigitalKnob.com/DKInputTest/DKNotePad = ../../DKInputTest/DKNotePad
+	//I.E:  http://DigitalKnob.com/Digitalknob/DKFpsTest = ../../Digitalknob/DKFpsTest
 
-	if(!has(url, "http://digitalknob.com/"))
-		return DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from digitalknob.com\n");
+	if(!has(url, "http://DigitalKnob.com/"))
+		return DKERROR("DKUpdate::UpdatePlugin("+url+"): Plugins can only be obtained from DigitalKnob.com\n");
 	
 	DKString url2 = url;
-	replace(url2, "http://digitalknob.com/", "../../");
-	DKString new_url = "http://digitalknob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
+	replace(url2, "http://DigitalKnob.com/", "../../");
+	DKString new_url = "http://DigitalKnob.com/Digitalknob/DKFile/DKFile.php?DirectoryContents="+url2;
 	DKINFO("new_url = "+new_url+"\n");
 	DKString output;
 	if(!DKCurl::Get("DKCurlUpdate")->HttpToString(new_url, output))
@@ -255,7 +267,7 @@ bool DKUpdate::UpdatePlugin(const DKString& url){
 	toStringArray(arry, output, ",");
 	replace(url2, "../../", "");
 	for(unsigned int i=0; i<arry.size(); i++){
-		arry[i] = "http://digitalknob.com/"+url2+"/"+arry[i];
+		arry[i] = "http://DigitalKnob.com/"+url2+"/"+arry[i];
 		DKINFO("arry["+toString(i)+"] = "+arry[i]+"\n");
 	}
 

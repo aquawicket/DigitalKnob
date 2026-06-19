@@ -1,28 +1,41 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_isEmptyDirectory(path rtn_var)
-::#
-::#
+rem ####################################################################
+rem # dk_isEmptyDirectory(path)
+rem #
+rem #
 :dk_isEmptyDirectory
-setlocal
-	%dk_call% dk_debugFunc 1 2
+%setlocal%
 	
-	set "_path_=%~1"
-	set "_path_=%_path_:\=/%"
+	set "dk_isEmptyDirectory_argv1=%~1"
+	set "dk_isEmptyDirectory=0"
 	
-	if not exist %_path_%/* (%dk_call% dk_error "%~1 is not a directory" && exit /b 13)
-	
-	for /F %%i in ('dir /b /a "%~1/*"') do (
-		if "%~2" neq "" (endlocal & set "%2=false")
-		exit /b 1
+	if NOT EXIST "%~1\*" (
+		set /a "dk_isEmptyDirectory=1"
 	)
-	if "%~2" neq "" (endlocal & set "%2=true")
-	exit /b 0
+	
+	for /F %%i in ('dir /b /a "%~1\*" 2^>nul') do (
+		set /a "dk_isEmptyDirectory=1"
+	)
+	
+	:return
+	endlocal & (
+		set "dk_isEmptyDirectory=%dk_isEmptyDirectory%"
+		set "dk_isEmptyDirectory_argv1=%dk_isEmptyDirectory_argv1%"
+	)
+	%return% %dk_isEmptyDirectory%
 %endfunction%
 
 
@@ -31,24 +44,60 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
+  
+	rem ###### Create The Directories and Files ######
+	set "EmptyDir=C:/NotEmptyDir/EmptyDir"
+	set "NotEmptyDir=C:/NotEmptyDir"
+	set "NotDir=C:/NotEmptyDir/file.txt"
+	set "NonExistentDir=C:/NonExistentDir"
+	%dk_call% dk_mkdir "%EmptyDir%"
+	if NOT EXIST "%NotDir%" (echo. > %NotDir%)
+
+    rem ###### Using if return value
+ 	%dk_call% dk_echo
+    %dk_call% dk_isEmptyDirectory "%EmptyDir%"
+	if "%dk_isEmptyDirectory%" equ "0" (%dk_call% dk_success "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")	else (%dk_call% dk_error "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")
+
+    %dk_call% dk_isEmptyDirectory "%NotEmptyDir%"
+    if "%dk_isEmptyDirectory%" equ "0" (%dk_call% dk_error "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")	else (%dk_call% dk_success "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")
+	
+	%dk_call% dk_isEmptyDirectory "%NotDir%"
+    if "%dk_isEmptyDirectory%" equ "0" (%dk_call% dk_error "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")	else (%dk_call% dk_success "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")
+	
+	%dk_call% dk_isEmptyDirectory "%NonExistentDir%"
+    if "%dk_isEmptyDirectory%" equ "0" (%dk_call% dk_error "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")	else (%dk_call% dk_success "dk_isEmptyDirectory '!dk_isEmptyDirectory_argv1!' = %dk_isEmptyDirectory%")
    
-    ::###### Using if return value
-    %dk_call% dk_isEmptyDirectory "C:/Windows" result
-    if "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
-    %dk_call% dk_isEmptyDirectory "C:/NotADir" result
-    if "%result%" equ "true" (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
-    
-    ::###### Using if ERRORLEVEL
-    %dk_call% dk_isEmptyDirectory "C:/Windows"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
-    %dk_call% dk_isEmptyDirectory "C:/NotADir"
-    if not ERRORLEVEL 1 (%dk_call% dk_info "'C:/Windows' is a directory") else (%dk_call% dk_info "'C:/Windows' is NOT a directory")
-    
-    ::###### Using && and || conditionals
-    %dk_call% dk_isEmptyDirectory "C:/Windows" && %dk_call% dk_info "'C:/Windows' is a directory" || %dk_call% dk_info "'C:/Windows' is NOT a directory"
-    %dk_call% dk_isEmptyDirectory "C:/NotADir" && %dk_call% dk_info "'C:/NotADir' is a directory" || %dk_call% dk_info "'C:/NotADir' is NOT a directory"
+    rem ###### Using if ERRORLEVEL
+	%dk_call% dk_echo
+	%dk_call% dk_isEmptyDirectory "%EmptyDir%"
+	if NOT ERRORLEVEL 1 (echo.%green%)	else (echo.%red%)
+	echo %__CALL__% "%__PATH__:/=\%" %__ARGS__%
+	echo %clr%
+	
+	%dk_call% dk_isEmptyDirectory "%NotEmptyDir%"
+	if NOT ERRORLEVEL 1 (%dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory")	else (%dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory")
+	%dk_call% dk_isEmptyDirectory "%NotDir%"
+	if NOT ERRORLEVEL 1 (%dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory")	else (%dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory")
+	%dk_call% dk_isEmptyDirectory "%NonExistentDir%"
+	if NOT ERRORLEVEL 1 (%dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory")	else (%dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory")
+   
+    rem ###### Using && and || conditionals
+	echo.
+	%dk_call% dk_isEmptyDirectory "%EmptyDir%"       && %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is a empty directory"	|| %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	%dk_call% dk_isEmptyDirectory "%NotEmptyDir%"    && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"		|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	%dk_call% dk_isEmptyDirectory "%NotDir%"         && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"		|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	%dk_call% dk_isEmptyDirectory "%NonExistentDir%" && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"		|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	
+	rem ###### called directly Using && and || conditionals
+	echo.
+	call "%DKBATCH_FUNCTIONS_DIR_%dk_isEmptyDirectory.cmd" "%EmptyDir%"       && %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is a empty directory"	|| %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	call "%DKBATCH_FUNCTIONS_DIR_%dk_isEmptyDirectory.cmd" "%NotEmptyDir%"    && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"	|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	call "%DKBATCH_FUNCTIONS_DIR_%dk_isEmptyDirectory.cmd" "%NotDir%"         && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"	|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	call "%DKBATCH_FUNCTIONS_DIR_%dk_isEmptyDirectory.cmd" "%NonExistentDir%" && %dk_call% dk_error "'!dk_isEmptyDirectory_argv1!' is a empty directory"	|| %dk_call% dk_success "'!dk_isEmptyDirectory_argv1!' is NOT a empty directory"
+	
+	:cleanup
+	%dk_call% dk_delete "%NotEmptyDir%"
 %endfunction%

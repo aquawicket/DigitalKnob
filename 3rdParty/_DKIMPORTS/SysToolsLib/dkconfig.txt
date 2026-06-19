@@ -1,0 +1,5 @@
+############ SysToolsLib ############
+# https://github.com/JFLarvoire/SysToolsLib/archive/refs/heads/master.zip
+
+SysToolsLib_Import=https://github.com/JFLarvoire/SysToolsLib/archive/refs/heads/master.zip
+

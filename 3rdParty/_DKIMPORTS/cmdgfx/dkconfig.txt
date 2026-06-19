@@ -1,0 +1,5 @@
+############ cmdgfx ############
+# https://github.com/misol1/cmdgfx/archive/fdf9df653d95fc13046d4a552b881a71af0a3282.zip
+
+cmdgfx_Import=https://github.com/misol1/cmdgfx/archive/fdf9df653d95fc13046d4a552b881a71af0a3282.zip
+

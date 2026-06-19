@@ -1,43 +1,44 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKUNINSTALL
-::#
+rem ####################################################################
+rem # DKUNINSTALL
+rem #
 :DKUNINSTALL
-setlocal
-    %dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined MAC_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_MAC_X86_64_IMPORT%")
-	if defined WIN_ARM64_HOST         (set "PYTHON3_IMPORT=%PYTHON3_WIN_ARM64_IMPORT%")
-	if defined WIN_X86_HOST           (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_IMPORT%")
-	if defined WIN_X86_64_HOST        (set "PYTHON3_IMPORT=%PYTHON3_WIN_X86_64_IMPORT%")
-	if defined LINUX_X86_64_HOST      (set "PYTHON3_IMPORT=%PYTHON3_LINUX_X86_64_IMPORT%")
-::	if not defined PYTHON3_IMPORT     (set "PYTHON3_IMPORT=python3")
+	set "python3_Import=!Python3_%Host_Tuple%_Import!"
+rem 	if NOT defined python3_Import	(set "python3_Import=python3")
 	
-	::%dk_call% dk_isUrl %PYTHON3_IMPORT% && (
-		%dk_call% dk_importVariables "%PYTHON3_IMPORT%" IMPORT_PATH %~dp0
-	::)
+	rem %dk_call% dk_isUrl %python3_Import% && (
+		%dk_call% dk_importVariables "%python3_Import%" IMPORT_PATH %~dp0
+	rem )
 
-	:: UNINSTALL
-	%dk_call% dk_delete "%PYTHON3%"
+	rem  UNINSTALL
+	%dk_call% dk_delete "%python3%"
 	
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
 	%dk_call% DKUNINSTALL
 %endfunction%

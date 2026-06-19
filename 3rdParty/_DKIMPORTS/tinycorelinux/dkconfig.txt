@@ -1,0 +1,5 @@
+############ tinycorelinux ############
+# http://tinycorelinux.net/downloads.html
+# http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
+
+tinycorelinux_Import=http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso

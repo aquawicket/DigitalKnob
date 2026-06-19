@@ -1,89 +1,145 @@
-var index = "file:///C:/Users/Administrator/digitalknob/Development/DKHtml/index.html";
-var assets = "file:///C:/Users/Administrator/digitalknob/Development";
+// DKINIT_js
+
+//############ wscript_shell ############
+// https://www.experts-exchange.com/questions/20976723/JScript-set-environment-variables.html
+if(typeof ActiveXObject !== "undefined" && typeof wscript_shell === "undefined"){
+	wscript_shell = new ActiveXObject("WScript.Shell");
+}
+if(typeof ENV === "undefined" && typeof wscript_shell !== "undefined"){ var ENV = wscript_shell.Environment("Process"); }
+
+
+dk_stdout = function dk_stdout_f(msg){
+	if(typeof WScript !== "undefined" && typeof WScript.StdOut !== "undefined" && typeof WScript.StdOut.Writeline !== "undefined"){
+		WScript.StdOut.Writeline(msg);
+	} else if (typeof ActiveXObject !== "undefined"){
+		var fso = new ActiveXObject('Scripting.FileSystemObject');
+		var ss = fso.GetStandardStream(1);
+		if(typeof ss.Write !== "undefined"){
+			ss.Write(msg);
+		}
+	} else {
+		//NO Alert function found.
+	}
+}
+dk_stdout("dk_stdout DK.js \n");
+
+//###### JS_PATH ######
+if(typeof ENV !== "undefined" && ENV("DKINIT_js") !== ""){
+	var JS_PATH = ENV("DKINIT_js");
+}
+
+//###### dk_alert() ######
+dk_alert = function dk_alert_f(msg){
+	if(typeof alert !== "undefined"){
+		alert(msg);
+	} else if (typeof wscript_shell !== "undefined"){
+		wscript_shell.Popup(msg);
+	} else {
+		//NO Alert function found.
+	}
+}
+//dk_alert("dk_alert DK.js");
+
+var index = "file:///X:/Users/Default/Digital Knob/Development/DKHtml/functions/DK.html";
+var assets = "file:///C:/Users/Administrator/Digital Knob/Development";
 var USE_FILESYSTEM = 1;
 var USE_NODEJS=0;
 
+/*
+function stringify(obj) {
+    var str = '';
+    for (var p in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
+}
+*/
 
 //###### console.log ######
 (function(con){
 	'use strict';
 	var prop, method;
 	var empty = {};
-	if(typeof ActiveXObject === "function"){
-		if(typeof WScript === "object"){
-			if(typeof WScript.StdOut !== "undefined")
-			var print = function(msg){ WScript.StdOut.Write(msg+"\n"); };
-		} else {
-			var print = function(msg){
-				// https://stackoverflow.com/a/52793021/688352
-				//var WShell = new ActiveXObject('WScript.Shell');
-				//var WShellExec = WShell.Exec("cmd /c echo "+msg);
-				if(typeof dkconsole === "object"){
-					dkconsole.log(msg);
-				}
-			}
-		}
+	
+	//### print
+	if(typeof dkconsole === "object"){
+		var print = function(msg){ dkconsole.log(msg); }
+	} else if(typeof console === "object" && typeof console.log === "function"){
+		var print = function(msg){ console.log(msg); }
+	} else if(typeof WScript === "object" && typeof WScript.StdOut !== "undefined"){		
+		var print = function(msg){ WScript.StdOut.Write(msg+"\n"); }
+	} else if(typeof ActiveXObject === "function" && typeof new ActiveXObject('Scripting.FileSystemObject') === 'object'){
+		var print = function(msg){ new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(msg+"\n"); }
+	} else {
+		var print = function(msg){ /*alert(msg+"\n");*/ }
+//		alert("ERROR in console");
 	}
+
+  //var assert         = function(msg){ print(msg); }
+  //var count          = function(msg){ print(msg); }
+	var debug          = function(msg){ print("\x1b[94m"+msg+"\x1b[0m"); }
+  //var dir            = function(msg){ print(msg); }
+  //var dirxml         = function(msg){ print(msg); }
+	var info           = function(msg){ print("\x1b[37m"+msg+"\x1b[0m"); }
+    var error          = function(msg){ print("\x1b[91m"+msg+"\x1b[0m"); }
+  //var exception      = function(msg){ print(msg); }
+  //var group          = function(msg){ print(msg); }
+  //var groupCollapsed = function(msg){ print(msg); }
+  //var groupEnd       = function(msg){ print(msg); }
+    var log            = function(msg){ print(msg); }
+  //var markTimeline   = function(msg){ print(msg); }
+  //var profile        = function(msg){ print(msg); }
+  //var profileEnd     = function(msg){ print(msg); }
+  //var time           = function(msg){ print(msg); }
+  //var timeEnd        = function(msg){ print(msg); }
+  //var trace          = function(msg){ print(msg); }
+	var warn           = function(msg){ print("\x1b[33m"+msg+"\x1b[0m"); }
+	
 	var properties = 'memory'.split(',');
 	var methods = ('assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn').split(',');
-	while (prop = properties.pop()) con[prop] = con[prop] || empty;
-	while (method = methods.pop()) con[method] = con[method] || print;
+	while (prop = properties.pop()){
+		con[prop] = con[prop] || empty;
+	}
+	while (method = methods.pop()){
+		     if(method === "")              { con[method] = con[method] || print;          }
+	  //else if(method === "assert")        { con[method] = con[method] || assert;         }
+	  //else if(method === "count")         { con[method] = con[method] || count;          }
+		else if(method === "debug")         { con[method] = con[method] || debug;          }
+	  //else if(method === "dir")	        { con[method] = con[method] || dir;            }
+	  //else if(method === "dirxml")        { con[method] = con[method] || dirxml;         }
+		else if(method === "info")          { con[method] = con[method] || info;           }
+		else if(method === "error")         { con[method] = con[method] || error;          }
+	  //else if(method === "exception")     { con[method] = con[method] || exception;      }
+	  //else if(method === "group")         { con[method] = con[method] || group;          }
+	  //else if(method === "groupCollapsed"){ con[method] = con[method] || groupCollapsed; }
+	  //else if(method === "groupEnd")      { con[method] = con[method] || groupEnd;       }
+	    else if(method === "log")           { con[method] = con[method] || log;            }
+	  //else if(method === "markTimeline")  { con[method] = con[method] || markTimeline;   }
+	  //else if(method === "profile")       { con[method] = con[method] || profile;        }
+	  //else if(method === "profileEnd")    { con[method] = con[method] || profileEnd;     }
+	  //else if(method === "time")          { con[method] = con[method] || time;           }
+	  //else if(method === "timeEnd")       { con[method] = con[method] || timeEnd;        }
+	  //else if(method === "trace")         { con[method] = con[method] || trace;          }	
+		else if(method === "warn")          { con[method] = con[method] || warn;           }
+		else                                { con[method] = con[method] || print;          }
+	}
 })(this.console = this.console || {});
+console.log("console.log");
 
-//############ dk_check ############
-dk_check = function(object){
-	if(typeof this[object] === "undefined"){console.error(object+" is invalid\n");}
-}
 
 //############ NodeJS ############
 if(USE_NODEJS){
 	dk_validate(DKIMPORTS_DIR, "dk_DKIMPORTS_DIR");
-	dk_validate(NODEJS_EXE, DKIMPORTS_DIR+"/nodejs/dk_install.js")
+	dk_validate(nodejs_exe, DKIMPORTS_DIR+"/nodejs/dk_install.js")
 	
 	//COMSPEC = dk_env("%COMSPEC%")
-	WShell = new ActiveXObject("WScript.Shell");
-	WShell.Run('start '+NODEJS_EXE+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
-	WShell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/digitalknob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
+	wscript_shell = new ActiveXObject("WScript.Shell");
+	wscript_shell.Run('start '+nodejs_exe+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
+	//wscript_shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/Digital Knob/Development/DKHtml/functions/DK.html?DKTEST="+DKSCRIPT_PATH')
+	wscript_shell.Run('explorer "file:///Users/Administrator/Digital Knob/Development/DKHtml/functions/DK.html?DKTEST="+DKSCRIPT_PATH')
 }
-
-//########### DKENGINE ###########
-if(typeof DKScriptEngine === "undefined"){
-	if(typeof ScriptEngine !== "undefined"){
-		var DKScriptEngine = ScriptEngine();
-		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
-	}
-}
-dk_check('DKScriptEngine');
-dk_check('DKScriptEngine_Version');
-
-
-//############ globalThis ############
-if(typeof globalThis === "undefined"){
-	var globalThis = (function (){  
-		return this || (1, eval)('this');  
-	}());
-	console.log("globalThis = "+typeof globalThis);
-}
-dk_check('globalThis');
-
-
-
-//############ window ############
-if(typeof window === "undefined"){
-	var window = (function Window(){
-		return this || (1, eval)('this');  
-	}());
-	
-	window.constructor = (function Constructor(){
-		return this || (1, eval)('this');  
-	}());
-	
-	window.constructor.name = "window";
-	console.log("window = "+typeof window);
-}
-dk_check('window');
-
-
 
 //##############################################################
 //# dk_valid(<objectPath>)
@@ -92,174 +148,187 @@ dk_check('window');
 //#		Returns true if the object path exists and False if the object path is undefined.
 //#
 dk_valid = function(){
-	
 	if(typeof arguments[0] !== "string"){
 		console.error("dk_valid(): arg1 must be a string");
 		return -1;
 	}
-	if(typeof globalThis === "undefined"){
-		console.error("dk_valid(): requires a valid globalThis object.");
+	if(typeof this === "undefined"){
+		console.error("dk_valid(): requires a valid 'this' object.");
 		return -1;
 	}
-	
 	var arry = arguments[0].split(".");
+	if(typeof this[arry[0]] === "undefined"){
+		//console.error("dk_valid(): "+arry[0]+" is invalid.");
+		return false;
+	}
+	
+	/*
 	if(arry[0] === "globalThis"){ arry.shift(); }
 	if(arry[0] === "window"){ arry.shift(); }
 	if(arry[0] === "self"){ arry.shift(); }
-
-	currentObject = globalThis;
+	*/
+	
+	currentObject = this;
 	result = true;
 	
 	for (var i = 0; i < arry.length; i++) {
 		result = false;
 		if(typeof currentObject[arry[i]] !== "undefined"){
-			currentObject = currentObject[arry[i]];
+			if(i < arry.length-1){
+				currentObject = currentObject[arry[i]];
+				continue;
+			}
 			result = true;
 		}
 		if(result === false){
 			break;
 		}
 	}
-	
 	return result;
 }
 
-
-dk_call = function dk_call(){
-	var _ARGV_ = "";
-	for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
-	console.log("dk_call("+_ARGV_+")");
-
-	var arry = arguments[0].split(".");
-	if(typeof window === "undefined"){ 
-		console.error("window is invalid");
-		return false; 
-	}
-
-	var currentObject = window;
-	for (var i = 1; i < arry.length-1; i++) {
-		console.log("\n")
-		if(typeof currentObject[arry[i]] === "object"){
-			currentObject = currentObject[arry[i]];
-		}
-		if(typeof currentObject[arry[i]] === "function"){
-			currentObject = currentObject[arry[i]]();
-		}
-
-		console.log("typeof currentObject "+i+" = "+ typeof currentObject);
-		
-
-		/*
-		if(typeof window[arry[i]] !== "undefined"){
-			console.log("typeof currentObject.arry["+i+"] = "+ typeof currentObject.arry[i]);
-		}
-		*/
-	}
-	
-	/*
-	if(arry.length > 0){ dk_call.valid = (typeof window !== "undefined") }
-	if(dk_call.valid && (arry.length > 1)){ dk_call.valid = (typeof window[arry[1]] !== "undefined") }
-	if(dk_call.valid && (arry.length > 1)){
-		console.log("typeof window[arry[1]] = "+typeof window[arry[1]]);
-		if(typeof window[arry[1]] === "function"){
-			console.log('call -> window['+arry[1]+']()');
-			dk_call.value = window[arry[1]]();
-		}
-	}
-	
-	console.log("typeof dk_call.value = "+ typeof dk_call.value);
-	return dk_call.value;
-	*/
+//############ dk_assert ############
+dk_assert = function(object){
+	if(!dk_valid(object)){ console.error(object+" is invalid\n"); }
 }
+
+//########### DKENGINE ###########
+if(!dk_valid("DKScriptEngine")){
+	if(dk_valid("ScriptEngine")){
+		var DKScriptEngine = ScriptEngine();
+		var DKScriptEngine_Version = ScriptEngineMajorVersion()+"."+ScriptEngineMinorVersion()+"."+ScriptEngineBuildVersion();
+	}
+}
+//dk_assert("DKScriptEngine");
+///dk_assert("DKScriptEngine_Version");
+console.log("\x1b[102m"+"\x1b[30m"+DKScriptEngine+" "+DKScriptEngine_Version+"\x1b[0m")
+
+//############ globalThis ############
+if(!dk_valid("globalThis")){
+	var globalThis = (function (){  
+		return this || (1, eval)('this');  
+	}());
+}
+dk_assert("globalThis");
+
+
+//############ window ############
+if(!dk_valid("window")){
+	var window = (function Window(){
+		return this || (1, eval)('this');  
+	}());
+}
+dk_assert('window');
+
+//############ dk ############
+window.dk = new Object;
+
+//############ dk_call ############
+if(!dk_valid("dk_call")){
+	dk_call = function dk_call(){
+		var _ARGV_ = "";
+		for (var i = 0; i < arguments.length; i++) {_ARGV_ += ", "+arguments[i];}
+		console.log("dk_call("+_ARGV_+")");
+
+		var arry = arguments[0].split(".");
+		if(!dk_valid("window")){ 
+			console.error("window is invalid");
+			return false; 
+		}
+
+		var currentObject = window;
+		for (var i = 1; i < arry.length-1; i++) {
+			console.log("\n")
+			if(typeof currentObject[arry[i]] === "object"){
+				currentObject = currentObject[arry[i]];
+			}
+			if(typeof currentObject[arry[i]] === "function"){
+				currentObject = currentObject[arry[i]]();
+			}
+			console.log("typeof currentObject "+i+" = "+ typeof currentObject);
+		}
+	}
+}
+
 
 //############ DKBrowser ############
-DKBrowser = function DKBrowser_f(){
-	var output = [];
+if(!dk_valid("DKBrowser")){
+	DKBrowser = function DKBrowser_f(){
+		var output = [];
+		var hasNavigator = dk_valid('window.navigator');
+		console.log("hasNavigator = "+hasNavigator);
+		
+		// Hta
+		var isHta = dk_valid("window.ActiveXObject");// && dk_valid("window.WScript");
+		if(isHta){ output.push("isHta"); }
 
-	var hasNavigator = dk_valid('window.navigator');
-	console.log("hasNavigator = "+hasNavigator);
-	
-	// Hta
-	var isHta = dk_valid("window.ActiveXObject") && dk_valid("window.WScript");
-	if(isHta){ output.push("isHta"); }
+		// Brave
+		var isBrave = dk_valid("window.navigator.brave.isBrave.name");
+		if(isBrave){ output.push("isBrave"); }
 
-	// Brave
-	var isBrave = dk_valid("window.navigator.brave.isBrave.name");
-	if(isBrave){ output.push("isBrave"); }
+		// Opera 8.0+
+		var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("window.navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
+		if(isOpera){ output.push("isOpera"); }
 
-	// Opera 8.0+
-	var isOpera = dk_valid("window.opr.addons") || dk_valid("window.oprera") || (dk_valid("navigator.userAgent.indexOf") && (navigator.userAgent.indexOf(' OPR/') >= 0));
-	if(isOpera){ output.push("isOpera"); }
+		// Firefox 1.0+
+		var isFirefox = dk_valid("window.InstallTrigger");
+		if(isFirefox){ output.push("isFirefox"); }
 
-	// Firefox 1.0+
-	var isFirefox = dk_valid("window.InstallTrigger");
-	if(isFirefox){ output.push("isFirefox"); }
+		// Safari 3.0+ "[object HTMLElementConstructor]" 
+		var isSafari = dk_valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
+		|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+		if(isSafari){ output.push("isSafari"); }
 
-	// Safari 3.0+ "[object HTMLElementConstructor]" 
-	var isSafari = dk_valid("window.HTMLElement") && /constructor/i.test(window.HTMLElement) 
-	|| (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
-	if(isSafari){ output.push("isSafari"); }
+		// Internet Explorer 6-11
+		var isIE = /*@cc_on!@*/false || dk_valid("document.documentMode");
+		if(isIE){ output.push("isIE"); }
 
-	// Internet Explorer 6-11
-	var isIE = /*@cc_on!@*/false || dk_valid("document.documentMode");
-	if(isIE){ output.push("isIE"); }
+		// Edge 20+
+		var isEdge = !isIE && dk_valid("window.StyleMedia");
+		if(isEdge){ output.push("isEdge"); }
 
-	// Edge 20+
-	var isEdge = !isIE && dk_valid("window.StyleMedia");
-	if(isEdge){ output.push("isEdge"); }
+		// Chrome 1 - 79
+		var isChrome = dk_valid("window.chrome") && dk_valid("window.chrome.webstore") || dk_valid("window.chrome.runtime");
+		if(isChrome){ output.push("isChrome"); }
 
-	// Chrome 1 - 79
-	var isChrome = dk_valid("window.chrome") && dk_valid("window.chrome.webstore") || dk_valid("window.chrome.runtime");
-	if(isChrome){ output.push("isChrome"); }
+		// Edge (based on chromium) detection
+		var isEdgeChromium = isChrome && dk_valid("window.navigator.userAgent.indexOf") && (window.navigator.userAgent.indexOf("Edg") != -1);
+		if(isEdgeChromium){ output.push("isEdgeChromium"); }
 
-	// Edge (based on chromium) detection
-	var isEdgeChromium = isChrome && dk_valid("window.navigator.userAgent.indexOf") && (window.navigator.userAgent.indexOf("Edg") != -1);
-	if(isEdgeChromium){ output.push("isEdgeChromium"); }
+		// Blink engine detection
+		var isBlink = (isChrome || isOpera) && dk_valid("window.CSS");
+		if(isBlink){ output.push("isBlink"); }
 
-	// Blink engine detection
-	var isBlink = (isChrome || isOpera) && dk_valid("window.CSS");
-	if(isBlink){ output.push("isBlink"); }
-
-	return output.toString();
+		return output.toString();
+	}
 }
+dk_assert('DKBrowser');
 console.log("DKBrowser() = "+DKBrowser());
 
-//dk_check('DKBrowser');
-
-
-
-
-
-
 //############ ARGV, ARGC ############
-if(typeof WScript === "object"){
+if(dk_valid("WScript.Arguments")){
 	ARGC = WScript.Arguments.Count();
 	var ARGV = new Array(ARGC);
     for(var i = 0; i < ARGV.length; ++i){
         ARGV[i] = WScript.Arguments(i);
-		//console.log("ARGV["+i+"] = "+ARGV[i]);
+		console.log("ARGV["+i+"] = "+ARGV[i]);
     }
-	//console.log("ARGV = "+ARGV+"\n");
-	//console.log("ARGC = "+ARGC+"\n");
+	console.log("ARGV = "+ARGV+"\n");
+	console.log("ARGC = "+ARGC+"\n");
+	dk_assert("ARGV");
+	dk_assert("ARGC");
 }
 
-
-
-
-
-
-
 //############ String.prototype.replaceAll (polyfill) ############
-if(typeof String.prototype.replaceAll === "undefined"){
+if(!dk_valid("String.prototype.replaceAll")){
 	String.prototype.replaceAll = function replaceAll(search, replace){ 
 		return this.split(search).join(replace); 
 	}
 }
-//dk_check('String.prototype.replaceAll');
-
+dk_assert('String.prototype.replaceAll');
 
 //############ XMLHttpRequest ############
-if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp){
+if(!dk_valid("XMLHttpRequest")){ // || !ie7xmlhttp){
 	if(typeof ActiveXObject === "function"){
 		XMLHttpRequest = function(){
 			return new ActiveXObject("Msxml2.XMLHTTP.6.0");
@@ -267,23 +336,24 @@ if(typeof XMLHttpRequest == "undefined"){ // || !ie7xmlhttp){
 		console.log("XMLHttpRequest = "+typeof XMLHttpRequest);
 	}
 }
-dk_check('XMLHttpRequest');
-
+dk_assert('XMLHttpRequest');
 
 //############ dk_source ############
-if(typeof dk_source === "undefined"){
-	dk_source = function(url, dk_source_callback){
+if(!dk_valid("dk_source")){
+	dk_source = function dk_source_f(url, dk_source_callback){
 		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
+		url = url.replaceAll("file:///", "");
+		
 		//############ Msxml2.XMLHTTP.6.0 ############
 		if(typeof WScript === "object"){
 			if(USE_FILESYSTEM == 1){
-				// C:/Path/Format
-				var url = url.replaceAll("file:///", "");
+				// C:/Path/Format		
 				console.log("url = "+url);
 				(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
 			} else {
 				// file:///C:/Path/Format
+				url = "file:///"+url;
 				var xmlHttpRequest = new XMLHttpRequest;
 				xmlHttpRequest.open("GET", url, true);
 				xmlHttpRequest.send();
@@ -293,7 +363,9 @@ if(typeof dk_source === "undefined"){
 					//console.log("###################################################################");
 					//console.log("###################################################################");
 					//console.log(xmlHttpRequest.responseText);
-					eval(xmlHttpRequest.responseText);
+					//eval(xmlHttpRequest.responseText);
+					var fn = Function(xmlHttpRequest.responseText);
+					fn();
 					//console.log("###################################################################");
 					//console.log("###################################################################");
 					//console.log("###################################################################");
@@ -301,13 +373,15 @@ if(typeof dk_source === "undefined"){
 			}
 			//console.log("checking for callback");
 			if(dk_source_callback){
-				console.log("dk_source_callback");
+				//console.log("dk_source_callback");
 				dk_source_callback();
 				return;
 			} else {
-				console.log("no dk_source_callback");
+				//console.log("no dk_source_callback");
 			}
-		} else { //############ Browsers ############
+		
+		//################## Browsers ##################
+		} else if(dk_valid("document.createElement")){ 
 			// file:///C:/Path/Format
 			var script = document.createElement("script");
 			script.src = url;  
@@ -326,12 +400,11 @@ if(typeof dk_source === "undefined"){
 		}	
 	}
 }
-dk_check('dk_source');
+dk_assert('dk_source');
 
-
-//############ DOMDocument ############
-if(typeof ActiveXObject === "function"){
-	if(typeof document === "undefined"){ 
+//############ document ############
+if(typeof document === "undefined"){ 
+	if(typeof ActiveXObject === "function"){
 		var document = new ActiveXObject("Msxml2.DOMDocument.6.0");
 		console.log("document = "+typeof document);
 		document.async = true;
@@ -343,81 +416,91 @@ if(typeof ActiveXObject === "function"){
 		}
 	}
 }
-dk_check('document');
+dk_assert('document');
 
-
-//############ WShell ############
+//############ wscript_shell ############
 if(typeof ActiveXObject === "function"){
-	if(typeof WShell === "undefined"){ 
-		var WShell = new ActiveXObject("WScript.Shell");
-		console.log("WShell = "+typeof WShell);
-	}
+	if(!dk_valid("wscript_shell")){
+		wscript_shell = function(){
+			wscript_shell = new ActiveXObject("WScript.Shell");
+			return wscript_shell;
+		}
+	} 
 }
-//dk_check('WShell');
+//dk_assert('wscript_shell');
 
 /*
 //############ documentElement ############
-if(typeof documentElement === "undefined"){ 
+if(!dk_valid("documentElement")){ 
 	var documentElement = document.documentElement;
 	//console.log("documentElement: "+documentElement.xml+"\n\n");
 }
-dk_check('documentElement');
+dk_assert('documentElement');
 */
 
-
 //############ location ############
-if(typeof location === "undefined"){ 
+if(!dk_valid("location")){
 	var location = new Object;
 }
-dk_check('location');
+dk_assert('location');
 
 //######### location.href #########
-if(typeof location.href === "undefined"){
+if(!dk_valid("location.href")){
 	if(typeof document.url !== "undefined"){
 		location.href = document.url;
 	}
 }
+dk_assert("location.href");
 console.log("location.href = "+location.href);
 
 //######### DKSCRIPT_PATH / DKSCRIPT_ARGS #########
-if(typeof DKSCRIPT_PATH === "undefined"){
-	if(typeof WScript_Shell !== "undefined"){ 
-		var DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%").replaceAll("\\", "/");
-		var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
-	} else if(typeof location.href !== "undefined"){
+if(!dk_valid("DKSCRIPT_PATH")){
+		
+	if(dk_valid("location.href")){
 		var DKSCRIPT_PATH = location.href;
 	}
+	else if(dk_valid("wscript_shell")){
+		wscript_shell();
+		if(dk_valid("wscript_shell.ExpandEnvironmentStrings")){
+			var DKSCRIPT_PATH = wscript_shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%");//.replaceAll("\\", "/");
+			var DKSCRIPT_ARGS = wscript_shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
+		}
+	}
 }
-if(typeof DKSCRIPT_PATH === "undefined"){
-	console.error("DKSCRIPT_PATH invalid");
-}
+dk_assert("DKSCRIPT_PATH");
 console.log("DKSCRIPT_PATH = "+DKSCRIPT_PATH);
 
 //######### DKSCRIPT_DIR ############
-if(typeof DKSCRIPT_DIR === "undefined"){
+if(!dk_valid("DKSCRIPT_DIR")){
 	DKSCRIPT_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf("/"));
-	console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
 }
-//######### DKSCRIPT_FILE ############
-if(typeof DKSCRIPT_FILE === "undefined"){
-	DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
-	console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
-}
-//######### DKSCRIPT_NAME ############
-if(typeof DKSCRIPT_NAME === "undefined"){
-	DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
-	console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
-}
-//######### DKSCRIPT_EXT ############
-if(typeof DKSCRIPT_EXT === "undefined"){
-	DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
-	console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
-}
+dk_assert("DKSCRIPT_DIR");
+console.log("DKSCRIPT_DIR = "+DKSCRIPT_DIR);
 
+//######### DKSCRIPT_FILE ############
+if(!dk_valid("DKSCRIPT_FILE")){
+	DKSCRIPT_FILE = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1); 
+}
+dk_assert("DKSCRIPT_FILE");
+console.log("DKSCRIPT_FILE = "+DKSCRIPT_FILE);
+
+//######### DKSCRIPT_NAME ############
+if(!dk_valid("DKSCRIPT_NAME")){
+	DKSCRIPT_NAME = DKSCRIPT_PATH.substr(DKSCRIPT_PATH.lastIndexOf("/")+1, (DKSCRIPT_PATH.lastIndexOf(".") - DKSCRIPT_PATH.lastIndexOf("/")-1)); 
+}
+dk_assert("DKSCRIPT_NAME");
+console.log("DKSCRIPT_NAME = "+DKSCRIPT_NAME);
+
+//######### DKSCRIPT_EXT ############
+if(!dk_valid("DKSCRIPT_EXT")){
+	DKSCRIPT_EXT = DKSCRIPT_FILE.substr(DKSCRIPT_FILE.lastIndexOf(".")); 
+}
+dk_assert("DKSCRIPT_EXT");
+console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
 
 //###### DKHOME_DIR variables ######
-var DIGITALKNOB = "digitalknob"
-var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1);
+if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "Digital Knob"; }
+var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1).replaceAll("file:///", "");
 var DKCACHE_DIR = DKHOME_DIR+"/.dk"
 var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
 
@@ -473,9 +556,9 @@ var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
 var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
 var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
 var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
-var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
-var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
-var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
+var DKVBS_DIR = DKBRANCH_DIR+"/DKVbs"
+var DKVBS_FUNCTIONS_DIR = DKVBS_DIR+"/functions"
+var DKVBS_FUNCTIONS_DIR_ = DKVBS_DIR+"/functions/"
 var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
 
 //############ queryString ############
@@ -485,13 +568,13 @@ if(typeof location === "object"){
 		queryString = location.search;
 	}
 	else if(typeof location.href === "string"){
-		queryString=location.href.split('?')[1];
+		queryString = location.href.split('?')[1];
 	}
 }
-//dk_check('queryString');
+//dk_assert('queryString');
 
 //###### DKSCRIPT variables ######
-//if(typeof ARGV !== "undefined" && ARGV.length > 0){
+//if(dk_valid("ARGV") && ARGV.length > 0){
 //	if(ARGV.length > 1){
 //		var href = ARGV(1).replaceAll("\\", "/");
 //	} else {
@@ -502,30 +585,12 @@ if(typeof location === "object"){
 //	var DKSCRIPT_PATH = location.href;
 //}
 
+//############ alert() ############
+if(!dk_valid("alert")){ dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){ /*alert("test");*/ }); }
+dk_assert('alert');
 
-
-
-
-//############ alert ############
-if(typeof alert === "undefined"){
-	dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){
-		//alert("test");
-	});
-}
-dk_check('alert');
-
-/*
-//############ console ############
-if(typeof console === "undefined"){
-	dk_source(assets+"/DKJavascript/polyfills/console.js", function(){
-		console.log("loaded console.js");
-	});
-}
-dk_check('console');
-*/
-
-//############ onDOMContentLoaded ############
-if(typeof onDOMContentLoaded === "undefined"){
+//############ onDOMContentLoaded() ############
+if(!dk_valid("onDOMContentLoaded")){
 	function onDOMContentLoaded(){
 		console.log("onDOMContentLoaded()")
 		if(!window){ alert("window is invalid"); return; }
@@ -539,67 +604,86 @@ if(typeof onDOMContentLoaded === "undefined"){
 		}
 	}
 }
-dk_check('onDOMContentLoaded');
+dk_assert('onDOMContentLoaded');
 
 //############ document.addEventListener ############
-if(typeof document.addEventListener !== "undefined"){
-	document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
+if(dk_valid("document.addEventListener")){ 
+	if(dk_valid("document.addEventListener")){
+		document.addEventListener("DOMContentLoaded", onDOMContentLoaded());
+	}
 }
-//dk_check('document.addEventListener');
 
 //############ body_onload ############
 function body_onload(){
-	console.log("body_onload()")
-	if(!window.document.body){ 
-		alert("window.document.body is invalid"); 
-		return; 
-	}
-		
+	console.log("body_onload()");
+	
+	dk_assert('window.document.body');
+	
 	if(DKSCRIPT_FILE === "index.html"){
 		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
 		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function dk_source_callback(){
 			main();
 		});
+	} 
+	else {
+		var APP_NAME = DKSCRIPT_NAME;
+		console.log(DKJAVASCRIPT_DIR+"/functions/"+APP_NAME+".js")
+		dk_source(DKJAVASCRIPT_DIR+"/functions/"+APP_NAME+".js", function dk_source_callback(){
+			//main();
+		});
 	}
 }
-dk_check('body_onload');
+dk_assert('body_onload');
 
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js");
-//dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js");
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_color.js", function dk_color_callback(){});
-
-
+//if(!dk_valid("globalThis"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/globalThis.js"); 		}
+//if(!dk_valid("window"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/window.js"); 			}
+//if(!dk_valid("Document"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/Document.js"); 		}
+//if(!dk_valid("alert"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js"); 			}
+//if(!dk_valid("addEventListener"))	{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/addEventListener.js"); }
+//if(!dk_valid("FileSystem"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js"); 		}
+//if(!dk_valid("WshShell"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js"); 		}
+//if(!dk_valid("replaceAll"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js"); 		}
+if(!dk_valid("dk_depend"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_depend.js"); 		}
+if(dk_valid("dk_depend")) 			{ dk_depend("dk_color"); }
+//dk_depend("DKPlugin");
+//dk_depend("DKFile");
+//dk_depend("DKGui");
+//dk_depend("DKErrorHandler");
+//dk_depend("dk_color", function dk_color_callback(){}); }
 
 //############ DKTEST ############
-if(typeof ARGV !== "undefined"){ 
+if(dk_valid("ARGV")){ 
 	if(ARGC > 0){ var JS_PATH = ARGV[0]; }
 	if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
-	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
-	var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
-	var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
-	var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-	dk_source(JS_PATH, function dk_source_callback(){
-
-		//############ DKTEST MODE ############
-		if(JS_EXT !== ".js"){ return }
-		//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
-		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT TEST MODE ###### "+JS_FILE+" ######## DKJAVASCRIPT TEST MODE ######"+clr+"\n");
-		DKTEST(); // if(DKTEST() !== 0){return;}
-		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT END TEST ####### "+JS_FILE+" ######## DKJAVASCRIPT END TEST #######"+clr+"\n");
-		//dk_pause();
-		//exit %errorlevel%
-	});
-	
-} else {
-	console.log("TODO");
 }
+	
+if(dk_valid("JS_PATH")) {
+	JS_PATH = JS_PATH.replaceAll("\\", "/");
+	console.log("JS_PATH = "+JS_PATH);
+	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+	console.log("JS_DIR = "+JS_DIR);
+	var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+	console.log("JS_FILE = "+JS_FILE);
+	var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+	console.log("JS_NAME = "+JS_NAME);
+	var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+	console.log("JS_EXT = "+JS_EXT);
 		
+	dk_source(JS_PATH, function dk_source_callback(){
+		//############ DKTEST MODE ############
+		if(JS_EXT === ".js"){
+			//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
+			console.log(bg_magenta+white+"\n######## DKJAVASCRIPT TEST MODE ###### "+JS_FILE+" ######## DKJAVASCRIPT TEST MODE ######"+clr+" \n");
+			
+			DKTEST(); // if(DKTEST() !== 0){return;}
+			
+			console.log(bg_magenta+white+"\n######## DKJAVASCRIPT END TEST ####### "+JS_FILE+" ######## DKJAVASCRIPT END TEST #######"+clr+" \n");
+		}
+	});
+} else {
+	console.debug("DK.js:736 TODO");
+}	
+
 /*
 if(typeof ARGV !== "undefined"){
 	FUNC_NAME = ARGV[0].substr(ARGV[0].lastIndexOf("/")+1, (ARGV[0].lastIndexOf(".") - ARGV[0].lastIndexOf("/")-1)); 
@@ -640,3 +724,102 @@ if(typeof ARGV !== "undefined"){
 */
 
 
+// dk.sendRequest()
+dk.sendRequest = function dk_sendRequest(httpMethod, url, dk_sendRequest_callback){
+//    required({
+//        httpMethod
+//    }, {
+//        url
+//    }, {
+//        dk_sendRequest_callback
+//    });
+    if (httpMethod){
+        switch (httpMethod){
+        case "GET":
+        case "POST":
+        case "PUT":
+        case "HEAD":
+        case "DELETE":
+        case "PATCH":
+        case "OPTIONS":
+        case "CONNECT":
+        case "TRACE":
+            break;
+        default:
+            return error("httpMethod '" + httpMethod + "' invalid", dk_sendRequest_callback(false));
+        }
+    }
+    if (dk_sendRequest_callback.length < 3)
+        return error("dk_sendRequest_callback requires 3 arguments (success, url, data)", dk_sendRequest_callback(false));
+
+    var xhr;
+    try {
+        !xhr && (xhr = new XMLHttpRequest());
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml3.XMLHTTP"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.6.0"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP.3.0"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Msxml2.XMLHTTP"));
+    } catch (e){}
+    try {
+        !xhr && (xhr = new ActiveXObject("Microsoft.XMLHTTP"));
+    } catch (e){}
+    if (!xhr)
+        return error("Error creating xhr object", dk_sendRequest_callback(false));
+
+    //FIXME: duktape
+    //url = encodeURIComponent(url).replace(";", "%3B");
+    xhr.open(httpMethod, url, true);
+    //https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+    if (httpMethod === "POST" || httpMethod === "Put")
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.timeout = 20000;
+
+    //Possible error codes
+    //https://github.com/richardwilkes/cef/blob/master/cef/enums_gen.go
+    xhr.onabort = function xhr_onabort(event){
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onabort");
+        //console.debug("XMLHttpRequest.onabort(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
+    }
+    xhr.onerror = function xhr_onerror(event){
+        console.error && console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> onerror");
+        //console.debug("XMLHttpRequest.onerror(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, xhr.responseText);
+    }
+    xhr.onload = function xhr_onload(event){
+        //console.debug("XMLHttpRequest.onload(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(true, url, xhr.responseText);
+    }
+    xhr.onloadend = function xhr_onloadend(event){//console.debug("XMLHttpRequest.onloadend(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onloadstart = function xhr_onloadstart(event){//console.debug("XMLHttpRequest.onloadstart(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onprogress = function xhr_onprogress(event){//console.debug("XMLHttpRequest.onprogress(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    }
+    xhr.onreadystatechange = function xhr_onreadystatechange(event){//console.log("XMLHttpRequest.onreadystatechange(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+    /*
+        if (xhr.readyState === 4){
+            if (xhr.status >= 200 && xhr.status < 400 || !xhr.status)
+                dk_sendRequest_callback(true, url, xhr.responseText);
+            else
+                dk_sendRequest_callback(false, url, xhr.responseText);
+        }
+        */
+    }
+    xhr.ontimeout = function xhr_ontimeout(event){
+        dk.console.error && dk.console.error("GET <a href=' " + url + " ' target='_blank' style='color:rgb(213,213,213)'>" + url + "</a> net::ERR_CONNECTION_TIMED_OUT");
+        //console.debug("XMLHttpRequest.ontimeout(): " + file + " readyState:" + xhr.readyState + " status:" + xhr.status);
+        return dk_sendRequest_callback(false, url, "ontimeout");
+    }
+
+    console.log("dk.sendRequest("+httpMethod+","+decodeURIComponent(url)+")")
+    xhr.send();
+}

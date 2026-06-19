@@ -1,164 +1,31 @@
-#!/usr/bin/env sh
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin;
+	(command -v 'cygpath' 1>/dev/null)	&& HOME=$(cygpath -u $USERPROFILE)											&& echo "cygpath: HOME = ${HOME}";
+	(command -v 'cmd.exe' 1>/dev/null)	&& cmd_exe=$(command -v 'cmd.exe')											&& echo "cmd_exe = ${cmd_exe}";
+	(command -v 'cmd.exe' 1>/dev/null)	&& USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')				&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}";
+	(command -v 'wslpath' 1>/dev/null)	&& HOME=$(wslpath -u ${USERPROFILE})										&& echo "wslpath: HOME = ${HOME}";
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}";
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="$(dirname $(dirname $(dirname $0)))/functions/DK.sh"		&& echo "DK_SH = ${DK_SH}";
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}";
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}";
+	[ ! -e "${DK_SH}" ]					&& [ -z "${HDK_SH}" ] && export HDK_SH="http://aquawicket.com/DigitalKnob/Development/DKBash/functions/DK.sh";
+	[ ! -e "${DK_SH}" ]					&& mkdir -p "$(dirname ${DK_SH})";
+	#[ ! -e "${DK_SH}" ]			 	&& [ -e "$(curl_exe)" ] && dk_call dk_firewallAllow "CURL" "$(curl_exe)" 	&& $(curl_exe) --silent --show-error --location --create-dirs --output "${DK_SH}" "${HDK_SH}";
+	[ ! -e "${DK_SH}" ]  				&& (command -v curl) 														&& curl --location --output "${DK_SH}" "${HDK_SH}";
+	[ ! -e "${DK_SH}" ]  				&& (command -v wget) 														&& wget -P "${DK_SH}" "${HDK_SH}";
+	#[ ! -e "${DK_SH}" ]  				&& (echo "DK_SH:${DK_SH} does not exist"; exit ${BASH_LINENO[0]};) 
+	#[ -e "$(sudo_exe)" ] 				&& $(sudo_exe) chmod 777 "${DK_SH}";
+	[ -z "${DKStorage_DIR-}" ]			&& export DKStorage_DIR="${HOME}/DigitalKnob/DKStorage"						&& echo "DKStorage_DIR = ${DKStorage_DIR}";
+	[ ! -e "${DKStorage_DIR}" ]			&& mkdir -p "${DKStorage_DIR}";
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*;
+fi
 
-############ dk_onError trap ############
-(set -o posix 		 2>/dev/null)	&& set -o posix			|| echo "'set -o posix' failed"
-(set -o pipefail 	 2>/dev/null)	&& set -o pipefail  	|| echo "'set -o pipefail' failed"  	# trace ERR through pipes
-(set -E				 2>/dev/null)	&& set -E  				|| echo "'set -E' failed" 				# set -E : trace ERR through 'time command' and other functions
-(set -u				 2>/dev/null)	&& set -u			   	|| echo "'set -u' failed" 				# set -u : exit the script if you try to use an uninitialised variable
-(set -e				 2>/dev/null)	&& set -e  				|| echo "'set -e' failed" 				# set -e : exit the script if any statement returns a non-true
-(shopt -s extdebug	 2>/dev/null)	&& shopt -s extdebug	|| echo "'shopt -s extdebug' failed" 
-(trap dk_onError ERR 2>/dev/null)   && trap dk_onError ERR  || echo "'trap dk_onError ERR' failed"
 
-dk_onError(){
-	exitcode=$?	
-	echo "" >&2
-	if [ -n "${1-}" ];then
-		echo "ERROR: '${1-}'" >&2
-	else
-		echo "ERROR: '${BASH_COMMAND-}'" >&2
-	fi
-	[ -n "${BASH_SOURCE-}" ] && echo "file: $BASH_SOURCE" >&2 || echo "file: $0" >&2
-	[ -n "${BASH_LINENO-}" ] && echo "line: $BASH_LINENO" >&2 || echo "line: ${LINENO-}" >&2
-	echo "exit_code: ${exitcode}" >&2
-	echo "" >&2
-	read -rp 'Press Enter to continue...'
-	exit ${exitcode}
+
+DKBuilder() {
+	dk_debugFunc 0;
+	
+	dk_call dk_buildMain;
 }
-############ dk_onError trap ############
-
-###### SUDO_EXE ######
-SUDO_EXE(){
-	(command -v sudo) && export SUDO_EXE=$(command -v sudo) || echo "sudo-NOTFOUND" >&2
-}
-
-###### CMD_EXE ######
-CMD_EXE(){
-	(command -v cmd.exe) && export CMD_EXE=$(command -v cmd.exe) || echo "cmd.exe-NOTFOUND" >&2
-}
-
-###### CYGPATH_EXE ######
-CYGPATH_EXE(){
-	(command -v cygpath) && export CYGPATH_EXE=$(command -v cygpath) || echo "cygpath-NOTFOUND"  >&2
-}
-
-###### WSLPATH_EXE ######
-WSLPATH_EXE(){
-	(command -v wslpath) && export WSLPATH_EXE=$(command -v wslpath) || echo "wslpath-NOTFOUND"  >&2
-}
-
-###### WSLPATH_EXE ######
-ANDROID_SDCARD(){
-	(grep -o "/storage/....-...." /proc/mounts) && export ANDROID_SDCARD=$(grep -o "/storage/....-...." /proc/mounts) || echo "ANDROID_SDCARD() failed"  >&2
-}
-
-###### DKHOME_DIR ######
-DKHOME_DIR(){
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(WSLPATH_EXE)" ] 	&& export DKHOME_DIR=$($(WSLPATH_EXE) -u $($(CMD_EXE) /c echo "%USERPROFILE%" | tr -d '\r')) 	# Windows subsystem for linux
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(CYGPATH_EXE)" ] 	&& export DKHOME_DIR=$($(CYGPATH_EXE) -u $($(CMD_EXE) "/c echo %USERPROFILE% | tr -d '\r'")) 	# Git for windows
-#	[ ! -e "${DKHOME_DIR-}" ] && [ -e "$(ANDROID_SDCARD)" ] && export DKHOME_DIR=$(ANDROID_SDCARD) 															# Android sdcard
-	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	&& export DKHOME_DIR="${HOME}"
-	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}"   	|| echo "DKHOME_DIR-NOTFOUND"  >&2
-}
-
-###### DKCACHE_DIR ######
-DKCACHE_DIR(){
-	[ ! -e "${DKCACHE_DIR-}" ] && export DKCACHE_DIR="$(DKHOME_DIR)/.dk"
-	[ ! -e "${DKCACHE_DIR-}" ] && mkdir "${DKCACHE_DIR}"
-	[   -e "${DKCACHE_DIR-}" ] && echo "${DKCACHE_DIR-}"   	|| echo "DKCACHE_DIR-NOTFOUND"  >&2
-}
-
-###### DIGITALKNOB_DIR ######
-DIGITALKNOB_DIR(){
-	[ ! -e "${DIGITALKNOB_DIR-}" ] && export DIGITALKNOB_DIR="$(DKHOME_DIR)/digitalknob"
-	[ ! -e "${DIGITALKNOB_DIR-}" ] && mkdir "${DIGITALKNOB_DIR}"
-	[   -e "${DIGITALKNOB_DIR-}" ] && echo "${DIGITALKNOB_DIR-}"   	|| echo "DIGITALKNOB_DIR-NOTFOUND"  >&2
-}
-
-###### DKBRANCH_DIR ######
-DKBRANCH_DIR(){
-	[ ! -e "${DKBRANCH_DIR-}" ] && export DKBRANCH_DIR="$(DIGITALKNOB_DIR)/Development"
-	[ ! -e "${DKBRANCH_DIR-}" ] && mkdir "${DKBRANCH_DIR}"
-	[   -e "${DKBRANCH_DIR-}" ] && echo "${DKBRANCH_DIR-}"   	|| echo "DKBRANCH_DIR-NOTFOUND"  >&2
-}
-
-###### DKBASH_DIR ######
-DKBASH_DIR(){
-	[ ! -e "${DKBASH_DIR-}" ] && export DKBASH_DIR="$(DKBRANCH_DIR)/DKBash"
-	[ ! -e "${DKBASH_DIR-}" ] && mkdir "${DKBASH_DIR}"
-	[   -e "${DKBASH_DIR-}" ] && echo "${DKBASH_DIR-}"   	|| echo "DKBASH_DIR-NOTFOUND"  >&2
-}
-
-###### DKBASH_FUNCTIONS_DIR ######
-DKBASH_FUNCTIONS_DIR(){
-	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && export DKBASH_FUNCTIONS_DIR="$(DKBASH_DIR)/functions"
-	[ ! -e "${DKBASH_FUNCTIONS_DIR-}" ] && mkdir "${DKBASH_FUNCTIONS_DIR}"
-	[   -e "${DKBASH_FUNCTIONS_DIR-}" ] && echo "${DKBASH_FUNCTIONS_DIR-}"   	|| echo "DKBASH_FUNCTIONS_DIR-NOTFOUND"  >&2
-}
-
-###### CHATTR_EXE ######
-CHATTR_EXE(){
-	(command -v chattr) && export CHATTR_EXE=$(command -v chattr) || echo "chattr-NOTFOUND"  >&2
-}
-
-###### WGET_EXE ######
-WGET_EXE(){
-	(command -v wget) && export WGET_EXE=$(command -v wget) || echo "wget-NOTFOUND"  >&2
-}
-
-###### CURL_EXE ######
-CURL_EXE(){
-	(command -v curl) && export CURL_EXE=$(command -v curl) || echo "curl-NOTFOUND"  >&2
-}
-
-###### Net fix for WSL ######
-#dk_wslFixNet(){
-#	[ ! -e "$(WSLPATH_EXE)" ] && return
-#		
-#	echo "Applying WSL internet fix"
-#	#[ -e "/etc/resolv.conf" ] && $(SUDO_EXE) rm -f /etc/resolv.conf
-#	($(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf') && $(SUDO_EXE) sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
-#	$(SUDO_EXE) sh -c 'echo "[network]" > /etc/wsl.conf'
-#	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
-#	#$(SUDO_EXE) chattr +i /etc/resolv.conf
-#}
-
-###	Fix WSL retaining file permissions 
-### https://superuser.com/a/1392722/600216
-#dk_wslFixFileAccess(){
-#	[ ! -e "$(WSLPATH_EXE)" ] && return
-#	
-#	[ ! -e "/etc" ] && echo "ERROR: /etc directory does not exist"
-#	[   -e "/etc/wsl.conf" ] && echo "/etc/wsl.conf already exists" && return
-#	
-#	$(SUDO_EXE) sh -c 'echo "" 										 	 > "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "[boot]" 									>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "systemd=true"								>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "[automount]"								>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "enabled = true"							>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "root = /mnt/"								>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "options = \"metadata,umask=22,fmask=11\"" 	>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo ""											>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "[network]" 								>> "/etc/wsl.conf"'
-#	$(SUDO_EXE) sh -c 'echo "generateResolvConf = false" 				>> "/etc/wsl.conf"'
-#}
-
-
-[ "$(DKCACHE_DIR)/$(basename $0)" -ef "$0)" ] && [ -e "$(DKCACHE_DIR)" ] 	&& cp "$0" "$(DKCACHE_DIR)/$(basename $0)"
-[ -e "$(DKCACHE_DIR)/DKBash" ] 	&& export > "$(DKCACHE_DIR)/default_env.sh"
-
-
-export DK="$(DKBASH_FUNCTIONS_DIR)/DK.sh"
-export HDK="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions/DK.sh"
-[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && $(CURL_EXE) -Lo "${DK}" "${HDK}"
-[ ! -e "${DK}" ] && [ -e "$(WGET_EXE)" ] && $(WGET_EXE) -P "${DK}" "${HDK}"
-#[ ! -e "${DK}" ] && [ -e "$(CURL_EXE)" ] && dk_call dk_firewallAllow "CURL" "$(CURL_EXE)" && $(CURL_EXE) -Lo "${DK}" "${HDK}"
-[ ! -e "${DK}" ] && echo "DK:${DK} does not exist" && exit 1
-
-$(SUDO_EXE) chmod 777 "${DK}"
-. "${DK}" # $0 $*
-
-
-
-#####################
-dk_call dk_buildMain

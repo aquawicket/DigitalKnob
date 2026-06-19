@@ -1,0 +1,1512 @@
+
+<!-- saved from url=(0067)https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<link rel="stylesheet" type="text/css" href="./Windows&#39; Commands and Batch Files_files/new.css">
+<link rel="stylesheet" type="text/css" href="./Windows&#39; Commands and Batch Files_files/styles.css">
+
+<title>Windows' Commands and Batch Files</title>
+
+<style type="text/css">
+</style> 
+
+</head>
+
+<body>  
+
+<center><h1>
+Commands and Batch Files
+</h1></center>
+
+<!--
+<blockquote><pre>
+for /f %a in ('dir /b *.bat') do dir /b %a
+for /f %a in ("*.bat") do dir /b %a
+
+: copies all *.bat files to *-old.bat (both do the same thing)
+for /f %a in ('dir /b *.bat') do copy /y %a %~na-old.%~xa
+
+cd ..\..\..\
+
+:type names.txt | cut -d, -f 3 > logins.txt && for /f %a in ('type logins.txt') do mkdir %a
+
+type names.txt | cut -d, -f 3 > logins.txt
+for /f %%a in ('type logins.txt') do mkdir %%a
+
+for /f %a in ('dir /ad /b') do explorer %a
+</pre></blockquote>
+-->
+
+<!--
+********************************************************************************
+********************************************************************************
+******************************************************************************** 
+-->
+<p class="sectionheader">
+Overview
+</p>
+
+Some obvious questions:
+<ul>
+<li>What are commands?</li>
+<li>What are batch files?</li>
+<li>Why do we need them?</li>
+<li>How useful are they?</li>
+<li>In this age of <a href="http://www.gnu.org/software/bash/">bash</a>, 
+	<a href="http://www.perl.org/">perl</a>, <a href="http://www.python.org/">python</a> and other more powerful tools, are they worth learning?</li>
+</ul>
+ 
+Windows traditionally came with a very rudimentary way to automate some tasks. The technique is batch file programming. Newer version of Windows
+are beginning to include more advanced tools such as <a href="http://technet.microsoft.com/en-us/scriptcenter/dd742419">power shell</a>.
+<p>
+In its most simplest
+form, a batch file is simply a text file that contains a bunch of commands to run. Hence the term "batch". 
+For example, the following shows the contents of a very trivial batch file that:
+
+</p><ul>
+<li>compiles/links some .c files,</li>
+<li>runs the resulting executable redirecting its output to a file,</li>
+<li>then diffs that file with another text file.</li>
+</ul>
+
+Batch file with three commands:
+<blockquote><pre>:: Builds, runs, and diffs the test program
+gcc -o program.exe driver.c file.c 
+program.exe &gt; output.txt
+diff output.txt output-master.txt
+</pre></blockquote>
+
+If the name of this batch file is <tt>build.bat</tt>, then you simply type that filename on the command line:
+
+<blockquote><pre>C:\&gt; build.bat
+</pre></blockquote>
+
+Like executables, supplying the extension is optional (and rarely needed):
+
+<blockquote><pre>C:\&gt; build
+</pre></blockquote>
+
+Essentially, if you can type it on the command line, you can put it in a batch file. 
+<ul>
+<li>Internal (built-in) commands like <tt><b>dir, cls, copy, del, type</b></tt></li>
+<li>External commands like <tt><b>attrib.exe, xcopy.exe, notepad.exe, explorer.exe</b></tt>, and other batch files</li>
+</ul>
+
+<!--
+********************************************************************************
+********************************************************************************
+******************************************************************************** 
+-->
+<p class="sectionheader">
+Commands
+</p>
+
+
+The command interpreter on Windows is <tt><b>cmd.exe</b></tt>. (Older versions used <tt><b>command.exe</b></tt>.) When you type a command in the command window, the system is
+searched in the order listed below. As soon as a matching command is found, the search ends. 
+<ol>
+	<li>Internal commands are looked at first</li>
+	<li>External commands are searched:</li>
+	<ol>
+		<li>The current directory</li>
+	  <li>Directories listed in the <tt><b>PATH</b></tt> environment variable are searched in the order listed</li>
+	</ol>
+</ol>
+	
+If no extension is provided, the search appends these extensions in order:
+<blockquote>
+<ol>
+	<li>.com</li>
+	<li>.exe</li>
+	<li>.bat</li>
+	<li>.cmd</li>
+</ol>
+</blockquote>
+
+So, if you have a file named <tt><b>go.exe</b></tt> and <tt><b>go.bat</b></tt> and you type just <tt><b>go</b></tt> at the command
+line, then <tt><b>go.exe</b></tt> will run. If you want to run the batch file, you must type <tt><b>go.bat</b></tt> to override 
+the default behavior.
+<p>
+	
+All commands have the same structure and syntax. Once you understand this simple syntax, the commands won't appear so cryptic and arbitrary.
+The structure of a command is:
+
+</p><blockquote><pre><b>COMMAND</b> [<font color="red"><b>/option1 /option2 /option3 ...</b></font>] [<font color="blue"><b>arg1 arg2 arg3 ...</b></font>]
+</pre></blockquote>
+
+Some Windows commands will accept the minus sign <tt><b>-</b></tt> as well as the forward slash <tt><b>/</b></tt> (Linux and Mac OS X don't use the forward slash):
+<blockquote><pre><b>COMMAND</b> [<font color="red"><b>-option1 -option2 -option3 ...</b></font>] [<font color="blue"><b>arg1 arg2 arg3 ...</b></font>]
+</pre></blockquote>
+
+Also, some options can take arguments themselves:
+
+<blockquote><pre><b>COMMAND</b> [<font color="red"><b>-option1</b></font> <font color="grey"><b>optarg1</b></font> <font color="red"><b>-option2 -option3</b></font> <font color="grey"><b>optarg3</b></font> <font color="red"><b>...</b></font>] [<font color="blue"><b>arg1 arg2 arg3 ...</b></font>]
+</pre></blockquote>
+
+
+Notes: (These apply to commands on most operating systems, including Windows, Linux, and Mac OS X)
+<ul>
+	<li>The very first item on the command line <b>MUST</b> be a command (internal or external).</li>
+	<li>Some commands can have their behavior altered by various options.</li>
+	<li>Some options require arguments and some options have optional arguments.</li>
+	<li>Many commands require arguments and options to be supplied.</li>
+	<li>Many commands will perform their default behavior in the absence of options or arguments.</li>
+	<li>One or more spaces separate options and arguments. (That's why having filenames and folder names with spaces is a bad idea.)</li>
+	<li>If you must deal with a file or folder with a space in the name, enclose it in "double-quotes".</li>
+	<li>Some commands allow you to mix the options with the arguments. (Some commands require all options before or after all of the arguments to the command.)</li>
+</ul>
+
+<b>Examples:</b> Try all of these on a Windows computer. (You may have to modify the directory names)
+
+<ul>
+	<li><b><tt>cls</tt></b> - Clears the screen (internal).
+	</li><li><b><tt>dir</tt></b> - Lists the contents of a directory (internal).
+<blockquote><pre>C:\&gt; <b>dir</b> 
+C:\&gt; <b>dir</b> <font color="blue"><b>c:\windows</b></font>
+C:\&gt; <b>dir</b> <font color="red"><b>/w</b></font> <font color="blue"><b>c:\windows</b></font>
+C:\&gt; <b>dir</b> <font color="blue"><b>"C:\Program Files"</b></font>
+</pre></blockquote>
+</li>
+
+	<li><b><tt>copy</tt></b> - Makes a copy of a file or multiple files (internal, assumes that a file named <tt>a.txt</tt> already exists).
+<blockquote><pre>C:\&gt; <b>copy</b> <font color="blue"><b>a.txt b.txt</b></font> 
+C:\&gt; <b>copy</b> <font color="blue"><b>a.txt b.txt c:\sandbox</b></font>
+C:\&gt; <b>copy</b> <font color="red"><b>/Y</b></font> <font color="blue"><b>a.txt b.txt c:\sandbox</b></font>
+C:\&gt; <b>copy</b> <font color="blue"><b>a.txt + b.txt + c.txt d.txt</b></font>
+C:\&gt; <b>copy</b> <font color="red"><b>/B</b></font> <font color="blue"><b>a.mp3 + b.mp3 + c.mp3 d.mp3</b></font>
+</pre></blockquote>
+</li>
+
+	<li><b><tt>xcopy</tt></b> - More powerful command to copy multiple files (external).
+<blockquote><pre><b>xcopy</b> <font color="red"><b>/C /D /E /F /H /I /Y</b></font> <font color="blue"><b>C:\windows\*.exe C:\sandbox</b></font>
+</pre></blockquote>
+</li>
+
+	<li><b><tt>g++</tt></b> - GNU C++ compiler (from Cygwin, not part of Windows)
+<blockquote><pre><b>g++</b> <font color="red"><b>-Wall -Wextra -ansi -pedantic -o</b></font> <font color="grey"><b>program.exe</b></font> <font color="blue"><b>main.cpp file1.cpp file2.cpp</b></font>
+</pre></blockquote>
+</li>
+
+</ul>
+
+<p></p><hr width="90%"><p>
+
+<b>Redirection and Piping</b>
+</p><p>
+This is where the real power of the command line lies. It is simply impossible (or, at the very least, tremendously difficult) to do these things using a graphical user interface (GUI). There is a wealth of information about this on the Internet. 
+You can start 
+<a href="http://ss64.com/nt/syntax-redirection.html">here</a> and 
+<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/redirection.mspx?mfr=true">here</a> to learn more about this for Windows.
+</p><p>
+</p><p class="info">
+Fortunately, Windows does have the ability to do redirection and piping, but, unfortunately, Windows does not provide most of the necessary commands/programs to make use of these techniques. The easiest way
+to get these missing commands/programs is to install Cygwin on Windows. That will give you 95% of what you will need to be productive from the command line in Windows. For Linux and Mac OS X, all of the necessary
+commands/programs are already present.
+</p>
+
+In a nutshell:
+<ul>
+	<li>To redirect input from a file to a program using the <tt>&lt;</tt> operator. (Example: <tt>prog &lt; input.txt</tt>)</li>
+	<li>To redirect output from a program to a file, use the <tt>&gt;</tt> operator. (Example: <tt>prog &gt; output.txt</tt>)</li>
+	<li>To append output to a file (instead of overwrite the file) use the <tt>&gt;&gt;</tt> operator.  (Example: <tt>prog &gt;&gt; output.txt</tt>)
+	</li><li>To connect stdout of a one program to stdin of another program, use the <tt>|</tt> operator. (Example: <tt>prog1 | prog2</tt>)</li>
+</ul>
+
+<p>
+	
+	
+Examples showing commands, redirection, piping, switches, arguments: (<tt>sort</tt>, <tt>cut</tt>, and <tt>uniq</tt> are part of Cygwin, not Windows)
+</p><blockquote><pre>C:\&gt; ipconfig | grep "IP Address" | cut -c 45- | grep "192.168" | sort
+
+C:\&gt; ipconfig | grep "IP Address" | cut -c 45- | grep "192.168" | cut -b9- | sort
+
+C:\&gt; ipconfig | grep "IP Address" | cut -c 45- | cut -d. -f1,2 | sort | uniq
+</pre></blockquote>
+
+<blockquote><pre>C:\&gt; ipconfig &gt; ip.txt
+C:\&gt; grep "IP Address" &lt; ip.txt | cut -c 45- | cut -d. -f1,2 | sort | uniq &gt; results.txt
+C:\&gt; type results.txt
+</pre></blockquote>
+
+Here is <a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/ip.txt">ip.txt</a> from a Windows XP computer. You'll have to modify the command above for Windows 7 because the format
+of the output has changed.
+<p>
+
+
+
+
+</p><blockquote><pre></pre></blockquote>
+
+<blockquote><pre></pre></blockquote>
+	
+	
+<a href="http://en.wikipedia.org/wiki/Batch_file">More info</a>.
+<p>
+<a href="http://technet.microsoft.com/en-us/library/cc723564.aspx">Detailed info</a> on the Windows NT command shell. 
+By the way, <span id="wpurl"><a class="wplabel">Windows NT</a></span><a class="wplink" href="http://en.wikipedia.org/wiki/Windows_NT">Windows NT</a> 
+is the basis for all NT operating systems (2000, Vista, 7, etc.) Previous versions of Windows (Windows 3.0, Windows 95, 98) were different (internally).
+And, yes, Windows NT really did start at version 3.1!
+
+</p><blockquote>
+<table border="1" cellspacing="0" cellpadding="10">
+<tbody><tr><th>Marketing Name</th><th>Internal Name</th><th>Date Released</th><th>Build No.</th></tr>
+
+<tr align="center"><td>Windows NT 3.1</td>        <td>NT 3.1</td> <td>July 1993</td>     <td>528</td></tr>
+<tr align="center"><td>Windows NT 3.5</td>        <td>NT 3.5</td> <td>September 1994</td><td>807</td></tr>
+<tr align="center"><td>Windows NT 3.51</td>       <td>NT 3.51</td><td>May 1995</td>      <td>1057</td></tr>
+<tr align="center"><td>Windows NT 4</td>          <td>NT 4.0</td> <td>July 1996</td>     <td>1381</td></tr>
+<tr align="center"><td>Windows 2000</td>          <td>NT 5.0</td> <td>December 1999</td> <td>2195</td></tr>
+<tr align="center"><td>Windows XP</td>            <td>NT 5.1</td> <td>August 2001</td>   <td>2600</td></tr>
+<tr align="center"><td>Windows Server 2003</td>   <td>NT 5.2</td> <td>March 2003</td>    <td>3790</td></tr>
+<tr align="center"><td>Windows Vista</td>         <td>NT 6.0</td> <td>January 2007</td>  <td>6000</td></tr>
+<tr align="center"><td>Windows Server 2008</td>   <td>NT 6.0</td> <td>March 2008</td>    <td>6001</td></tr>
+<tr align="center"><td>Windows 7</td>             <td>NT 6.1</td> <td>October 2009</td>  <td>7600</td></tr>
+<tr align="center"><td>Windows Server 2008 R2</td><td>NT 6.1</td> <td>October 2009</td>  <td>7600</td></tr>
+<tr align="center"><td>Windows 8</td>             <td>NT 6.2</td> <td>October 2012</td>  <td>9200</td></tr>
+<tr align="center"><td>Windows Server 2012</td>   <td>NT 6.2</td> <td>September 2012</td><td>9200</td></tr>
+</tbody></table>
+</blockquote>
+
+
+
+
+
+<p>
+<!--
+********************************************************************************
+********************************************************************************
+******************************************************************************** 
+-->
+</p><p class="sectionheader">
+Short Reference
+</p>
+
+There are many commands used in batch file programming, and like most programming, they follow the 80/20 rule (or even 90/10) rule:
+
+<blockquote><pre><i>"80% of the time you will use 20% of the commands"</i>
+</pre></blockquote>
+
+The fastest way to find out how a command works is to get help from the command line. Windows doesn't have a facility like the
+man pages on Linux and with Cygwin. Instead, to get help on a command type:
+
+<blockquote><pre>C:&gt; <i>command</i> /?
+</pre></blockquote>
+
+or 
+
+<blockquote>
+C:&gt; help <i>command</i>
+</blockquote>
+
+where <i>command</i> is an internal or external command (e.g. <tt><b>dir</b></tt>, <tt><b>copy</b></tt>, <tt><b>attrib</b></tt>, etc.)
+<p>
+
+In my opinion, these are the commands you'll use most of the time. Consider them the "core" commands. Well, some aren't really core,
+but are simple and you may find them useful on their own or within batch files.
+
+</p><blockquote><pre></pre></blockquote>
+
+
+<a href="http://technet.microsoft.com/en-us/library/cc750054.aspx">Some core batch file techniques</a> 
+
+<blockquote><pre></pre></blockquote>
+
+
+<blockquote>
+<a name="TOP"></a>
+<table border="1" cellpadding="5" cellspacing="0">
+<tbody><tr><th>Command</th><th>Brief Description</th></tr>
+
+<tr><td bgcolor="#D0D0D0"><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#ATTRIB">attrib.exe</a></td><td>[external] Read/set file attributes (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/attrib.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#CALL">call</a></td><td>Call a batch file from within a batch file (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/call.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#CD">chdir</a>, cd</td><td>Change directory (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/chdir.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#CHOICE">choice</a></td><td>Prompt user for input. Not in XP or before. (<a href="http://technet.microsoft.com/en-us/library/cc732504(WS.10).aspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#CLS">cls</a></td><td>Clears the screen (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/cls.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#COLOR">color</a></td><td>Changes command window colors (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/color.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#COPY">copy</a></td><td>Copy files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/copy.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#DATE">date</a></td><td>Read or set the date (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/date.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#DEL">del</a></td><td>Delete files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/del.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#DIR">dir</a></td><td>List files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/dir.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#ECHO">echo</a></td><td>Print to the screen (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/echo.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#FOR">for</a></td><td>Looping construct (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/for.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#GOTOO">goto</a></td><td>Jump to a label in a batch file (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/goto.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#IF">if</a></td><td>Conditional construct (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/if.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#MKDIR">mkdir</a>, md</td><td>Create (make) a new directory (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/mkdir.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#MOVE">move</a></td><td>Move files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/move.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#PATH">path</a></td><td>Display the value of the PATH variable (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/path.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#PAUSE">pause</a></td><td>Pause a batch file (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/pause.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#PROMPT">prompt</a></td><td>Set the text/style of the prompt (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/prompt.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#POPD">popd</a></td><td>Pop most recent directory and change to it (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/popd.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#PUSHD">pushd</a></td><td>Save current directory and change (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/pushd.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#RMDIR">rmdir</a>, rd</td><td>Deletes (removes) a directory (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rmdir.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#REM">rem</a></td><td>Comment (remark), also :: (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rem.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#RENAME">rename</a>, ren</td><td>Rename a file (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rename.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#SET">set</a></td><td>Read or set an environment variable (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/set.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#SHIFT">shift</a></td><td>Cycle through parameters to batch files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/shift.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#START">start</a></td><td>Start another program (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/start.mspx">details</a>)</td></tr>
+<tr><td><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TYPE">type</a></td><td>Display the contents of a text file (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/type.mspx">details</a>)</td></tr>
+<tr><td bgcolor="#D0D0D0"><a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#XCOPY">xcopy.exe</a></td><td>[external] A more powerful way to copy files (<a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/xcopy.mspx">details</a>)</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+
+One of the most important aspects of working at the command prompt is to customize it so you can be productive. This includes things like:
+</p><ul>
+	<li>Changing the size and fonts of the command window</li>
+	<li>Changing the colors of the text and background (<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#COLOR">COLOR</a>)</li>
+	<li>Enabling Quick Edit mode and buffer sizes</li>
+	<li>Modifying what is displayed at the prompt. (<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#PROMPT">PROMPT</a>)</li>
+</ul>
+
+<!--
+********************************************************************************
+********************************************************************************
+******************************************************************************** 
+-->
+<p class="sectionheader">
+Long Reference
+</p>
+
+By the way, the bulk of this reference was created with a batch file called <a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/makehelp.bat.txt">makehelp.bat</a>. Modifying it
+so that there are hyperlinks and matches the output below is an exercise for the student. The resulting HTML output will look like this:
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/winhelp.html">winhelp.html</a>.
+<p>
+Hints:
+</p><ul>
+	<li>Special characters need to be escaped with the carat (<tt>^</tt>) character. Special characters are: 
+			<blockquote><pre><big>&amp; | ( ) &lt; &gt; ^</big>
+		</pre></blockquote>
+	</li>
+
+	<li>Accessing variables in batch files require two percent signs:
+		<blockquote><pre>set name=Fred
+echo %Fred%
+		</pre></blockquote>
+	</li>
+	<li>Printing a percent sign (<tt>%</tt>) requires two of them:
+		<blockquote><pre>echo "We're having a 25%% off sale today!"
+		</pre></blockquote>
+	</li>
+	<li>UPPERCASE and lowercase are different in URLs. (Index.html is not the same as index.html, even if you think it works.)</li>
+	<li>To print a blank line, use echo with a period (no space between echo and the period):
+		<blockquote><pre>echo.
+		</pre></blockquote>
+	</li>
+	<li>Use variables where you can. You are programmers, so I shouldn't have to say that. If I told you I want the file named <b>doshelp.html</b> instead
+		of <b>winhelp.html</b>, or the base URL change, if you need to change more than one line, you've done it wrong.
+	</li>
+</ul>
+
+<pre><p></p><hr width="100%"><a name="ATTRIB"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/attrib.mspx">ATTRIB</a>
+
+Displays or changes file attributes.
+
+ATTRIB [+R | -R] [+A | -A ] [+S | -S] [+H | -H] [drive:][path][filename]
+       [/S [/D]]
+
+  +   Sets an attribute.
+  -   Clears an attribute.
+  R   Read-only file attribute.
+  A   Archive file attribute.
+  S   System file attribute.
+  H   Hidden file attribute.
+  [drive:][path][filename]
+      Specifies a file or files for attrib to process.
+  /S  Processes matching files in the current folder
+      and all subfolders.
+  /D  Processes folders as well.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="CALL"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/call.mspx">CALL</a>
+Calls one batch program from another.
+
+CALL [drive:][path]filename [batch-parameters]
+
+  batch-parameters   Specifies any command-line information required by the
+                     batch program.
+
+If Command Extensions are enabled CALL changes as follows:
+
+CALL command now accepts labels as the target of the CALL.  The syntax
+is:
+
+    CALL :label arguments
+
+A new batch file context is created with the specified arguments and
+control is passed to the statement after the label specified.  You must
+"exit" twice by reaching the end of the batch script file twice.  The
+first time you read the end, control will return to just after the CALL
+statement.  The second time will exit the batch script.  Type GOTO /?
+for a description of the GOTO :EOF extension that will allow you to
+"return" from a batch script.
+
+In addition, expansion of batch script argument references (%0, %1,
+etc.) have been changed as follows:
+
+
+    %* in a batch script refers to all the arguments (e.g. %1 %2 %3
+        %4 %5 ...)
+
+    Substitution of batch parameters (%n) has been enhanced.  You can
+    now use the following optional syntax:
+
+        %~1         - expands %1 removing any surrounding quotes (")
+        %~f1        - expands %1 to a fully qualified path name
+        %~d1        - expands %1 to a drive letter only
+        %~p1        - expands %1 to a path only
+        %~n1        - expands %1 to a file name only
+        %~x1        - expands %1 to a file extension only
+        %~s1        - expanded path contains short names only
+        %~a1        - expands %1 to file attributes
+        %~t1        - expands %1 to date/time of file
+        %~z1        - expands %1 to size of file
+        %~$PATH:1   - searches the directories listed in the PATH
+                       environment variable and expands %1 to the fully
+                       qualified name of the first one found.  If the
+                       environment variable name is not defined or the
+                       file is not found by the search, then this
+                       modifier expands to the empty string
+
+    The modifiers can be combined to get compound results:
+
+        %~dp1       - expands %1 to a drive letter and path only
+        %~nx1       - expands %1 to a file name and extension only
+        %~dp$PATH:1 - searches the directories listed in the PATH
+                       environment variable for %1 and expands to the
+                       drive letter and path of the first one found.
+        %~ftza1     - expands %1 to a DIR like output line
+
+    In the above examples %1 and PATH can be replaced by other
+    valid values.  The %~ syntax is terminated by a valid argument
+    number.  The %~ modifiers may not be used with %*
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="CHDIR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/chdir.mspx">CHDIR</a>
+Displays the name of or changes the current directory.
+
+CHDIR [/D] [drive:][path]
+CHDIR [..]
+CD [/D] [drive:][path]
+CD [..]
+
+  ..   Specifies that you want to change to the parent directory.
+
+Type CD drive: to display the current directory in the specified drive.
+Type CD without parameters to display the current drive and directory.
+
+Use the /D switch to change current drive in addition to changing current
+directory for a drive.
+
+If Command Extensions are enabled CHDIR changes as follows:
+
+The current directory string is converted to use the same case as
+the on disk names.  So CD C:\TEMP would actually set the current
+directory to C:\Temp if that is the case on disk.
+
+CHDIR command does not treat spaces as delimiters, so it is possible to
+CD into a subdirectory name that contains a space without surrounding
+the name with quotes.  For example:
+
+    cd \winnt\profiles\username\programs\start menu
+
+is the same as:
+
+    cd "\winnt\profiles\username\programs\start menu"
+
+which is what you would have to type if extensions were disabled.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="CLS"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/cls.mspx">CLS</a> 
+ 
+Clears the screen.
+
+CLS
+ 
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a> 
+<p></p><hr width="100%"><a name="COLOR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/color.mspx">COLOR </a>
+Sets the default console foreground and background colors.
+
+COLOR [attr]
+
+  attr        Specifies color attribute of console output
+
+Color attributes are specified by TWO hex digits -- the first
+corresponds to the background; the second the foreground.  Each digit
+can be any of the following values:
+
+    0 = Black       8 = Gray
+    1 = Blue        9 = Light Blue
+    2 = Green       A = Light Green
+    3 = Aqua        B = Light Aqua
+    4 = Red         C = Light Red
+    5 = Purple      D = Light Purple
+    6 = Yellow      E = Light Yellow
+    7 = White       F = Bright White
+
+If no argument is given, this command restores the color to what it was
+when CMD.EXE started.  This value either comes from the current console
+window, the /T command line switch or from the DefaultColor registry
+value.
+
+The COLOR command sets ERRORLEVEL to 1 if an attempt is made to execute
+the COLOR command with a foreground and background color that are the
+same.
+
+Example: "COLOR fc" produces light red on bright white
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="COPY"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/copy.mspx">COPY</a>
+Copies one or more files to another location.
+
+COPY [/D] [/V] [/N] [/Y | /-Y] [/Z] [/A | /B ] source [/A | /B]
+     [+ source [/A | /B] [+ ...]] [destination [/A | /B]]
+
+  source       Specifies the file or files to be copied.
+  /A           Indicates an ASCII text file.
+  /B           Indicates a binary file.
+  /D           Allow the destination file to be created decrypted
+  destination  Specifies the directory and/or filename for the new file(s).
+  /V           Verifies that new files are written correctly.
+  /N           Uses short filename, if available, when copying a file with a
+               non-8dot3 name.
+  /Y           Suppresses prompting to confirm you want to overwrite an
+               existing destination file.
+  /-Y          Causes prompting to confirm you want to overwrite an
+               existing destination file.
+  /Z           Copies networked files in restartable mode.
+
+The switch /Y may be preset in the COPYCMD environment variable.
+This may be overridden with /-Y on the command line.  Default is
+to prompt on overwrites unless COPY command is being executed from
+within a batch script.
+
+To append files, specify a single file for destination, but multiple files
+for source (using wildcards or file1+file2+file3 format).
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="DATE"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/date.mspx">DATE</a>
+Displays or sets the date.
+
+DATE [/T | date]
+
+Type DATE without parameters to display the current date setting and
+a prompt for a new one.  Press ENTER to keep the same date.
+
+If Command Extensions are enabled the DATE command supports
+the /T switch which tells the command to just output the
+current date, without prompting for a new date.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="DEL"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/del.mspx">DEL</a>
+Deletes one or more files.
+
+DEL [/P] [/F] [/S] [/Q] [/A[[:]attributes]] names
+ERASE [/P] [/F] [/S] [/Q] [/A[[:]attributes]] names
+
+  names         Specifies a list of one or more files or directories.
+                Wildcards may be used to delete multiple files. If a
+                directory is specified, all files within the directory
+                will be deleted.
+
+  /P            Prompts for confirmation before deleting each file.
+  /F            Force deleting of read-only files.
+  /S            Delete specified files from all subdirectories.
+  /Q            Quiet mode, do not ask if ok to delete on global wildcard
+  /A            Selects files to delete based on attributes
+  attributes    R  Read-only files            S  System files
+                H  Hidden files               A  Files ready for archiving
+                -  Prefix meaning not
+
+If Command Extensions are enabled DEL and ERASE change as follows:
+
+The display semantics of the /S switch are reversed in that it shows
+you only the files that are deleted, not the ones it could not find.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="DIR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/dir.mspx">DIR</a>
+Displays a list of files and subdirectories in a directory.
+
+DIR [drive:][path][filename] [/A[[:]attributes]] [/B] [/C] [/D] [/L] [/N]
+  [/O[[:]sortorder]] [/P] [/Q] [/S] [/T[[:]timefield]] [/W] [/X] [/4]
+
+  [drive:][path][filename]
+              Specifies drive, directory, and/or files to list.
+
+  /A          Displays files with specified attributes.
+  attributes   D  Directories                R  Read-only files
+               H  Hidden files               A  Files ready for archiving
+               S  System files               -  Prefix meaning not
+  /B          Uses bare format (no heading information or summary).
+  /C          Display the thousand separator in file sizes.  This is the
+              default.  Use /-C to disable display of separator.
+  /D          Same as wide but files are list sorted by column.
+  /L          Uses lowercase.
+  /N          New long list format where filenames are on the far right.
+  /O          List by files in sorted order.
+  sortorder    N  By name (alphabetic)       S  By size (smallest first)
+               E  By extension (alphabetic)  D  By date/time (oldest first)
+               G  Group directories first    -  Prefix to reverse order
+  /P          Pauses after each screenful of information.
+  /Q          Display the owner of the file.
+  /S          Displays files in specified directory and all subdirectories.
+  /T          Controls which time field displayed or used for sorting
+  timefield   C  Creation
+              A  Last Access
+              W  Last Written
+  /W          Uses wide list format.
+  /X          This displays the short names generated for non-8dot3 file
+              names.  The format is that of /N with the short name inserted
+              before the long name. If no short name is present, blanks are
+              displayed in its place.
+  /4          Displays four-digit years
+
+Switches may be preset in the DIRCMD environment variable.  Override
+preset switches by prefixing any switch with - (hyphen)--for example, /-W.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="ECHO"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/echo.mspx">ECHO</a>
+Displays messages, or turns command-echoing on or off.
+
+  ECHO [ON | OFF]
+  ECHO [message]
+
+Type ECHO without parameters to display the current echo setting.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="FOR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/for.mspx">FOR</a>
+Runs a specified command for each file in a set of files.
+
+FOR %variable IN (set) DO command [command-parameters]
+
+  %variable  Specifies a single letter replaceable parameter.
+  (set)      Specifies a set of one or more files.  Wildcards may be used.
+  command    Specifies the command to carry out for each file.
+  command-parameters
+             Specifies parameters or switches for the specified command.
+
+To use the FOR command in a batch program, specify %%variable instead
+of %variable.  Variable names are case sensitive, so %i is different
+from %I.
+
+If Command Extensions are enabled, the following additional
+forms of the FOR command are supported:
+
+FOR /D %variable IN (set) DO command [command-parameters]
+
+    If set contains wildcards, then specifies to match against directory
+    names instead of file names.
+
+FOR /R [[drive:]path] %variable IN (set) DO command [command-parameters]
+
+    Walks the directory tree rooted at [drive:]path, executing the FOR
+    statement in each directory of the tree.  If no directory
+    specification is specified after /R then the current directory is
+    assumed.  If set is just a single period (.) character then it
+    will just enumerate the directory tree.
+
+FOR /L %variable IN (start,step,end) DO command [command-parameters]
+
+    The set is a sequence of numbers from start to end, by step amount.
+    So (1,1,5) would generate the sequence 1 2 3 4 5 and (5,-1,1) would
+    generate the sequence (5 4 3 2 1)
+
+FOR /F ["options"] %variable IN (file-set) DO command [command-parameters]
+FOR /F ["options"] %variable IN ("string") DO command [command-parameters]
+FOR /F ["options"] %variable IN ('command') DO command [command-parameters]
+
+    or, if usebackq option present:
+
+FOR /F ["options"] %variable IN (file-set) DO command [command-parameters]
+FOR /F ["options"] %variable IN ('string') DO command [command-parameters]
+FOR /F ["options"] %variable IN (`command`) DO command [command-parameters]
+
+    filenameset is one or more file names.  Each file is opened, read
+    and processed before going on to the next file in filenameset.
+    Processing consists of reading in the file, breaking it up into
+    individual lines of text and then parsing each line into zero or
+    more tokens.  The body of the for loop is then called with the
+    variable value(s) set to the found token string(s).  By default, /F
+    passes the first blank separated token from each line of each file.
+    Blank lines are skipped.  You can override the default parsing
+    behavior by specifying the optional "options" parameter.  This
+    is a quoted string which contains one or more keywords to specify
+    different parsing options.  The keywords are:
+
+        eol=c           - specifies an end of line comment character
+                          (just one)
+        skip=n          - specifies the number of lines to skip at the
+                          beginning of the file.
+        delims=xxx      - specifies a delimiter set.  This replaces the
+                          default delimiter set of space and tab.
+        tokens=x,y,m-n  - specifies which tokens from each line are to
+                          be passed to the for body for each iteration.
+                          This will cause additional variable names to
+                          be allocated.  The m-n form is a range,
+                          specifying the mth through the nth tokens.  If
+                          the last character in the tokens= string is an
+                          asterisk, then an additional variable is
+                          allocated and receives the remaining text on
+                          the line after the last token parsed.
+        usebackq        - specifies that the new semantics are in force,
+                          where a back quoted string is executed as a
+                          command and a single quoted string is a
+                          literal string command and allows the use of
+                          double quotes to quote file names in
+                          filenameset.
+
+    Some examples might help:
+
+FOR /F "eol=; tokens=2,3* delims=, " %i in (myfile.txt) do @echo %i %j %k
+
+    would parse each line in myfile.txt, ignoring lines that begin with
+    a semicolon, passing the 2nd and 3rd token from each line to the for
+    body, with tokens delimited by commas and/or spaces.  Notice the for
+    body statements reference %i to get the 2nd token, %j to get the
+    3rd token, and %k to get all remaining tokens after the 3rd.  For
+    file names that contain spaces, you need to quote the filenames with
+    double quotes.  In order to use double quotes in this manner, you also
+    need to use the usebackq option, otherwise the double quotes will be
+    interpreted as defining a literal string to parse.
+
+    %i is explicitly declared in the for statement and the %j and %k
+    are implicitly declared via the tokens= option.  You can specify up
+    to 26 tokens via the tokens= line, provided it does not cause an
+    attempt to declare a variable higher than the letter 'z' or 'Z'.
+    Remember, FOR variables are single-letter, case sensitive, global, 
+    and you can't have more than 52 total active at any one time.
+
+    You can also use the FOR /F parsing logic on an immediate string, by
+    making the filenameset between the parenthesis a quoted string,
+    using single quote characters.  It will be treated as a single line
+    of input from a file and parsed.
+
+    Finally, you can use the FOR /F command to parse the output of a
+    command.  You do this by making the filenameset between the
+    parenthesis a back quoted string.  It will be treated as a command
+    line, which is passed to a child CMD.EXE and the output is captured
+    into memory and parsed as if it was a file.  So the following
+    example:
+
+      FOR /F "usebackq delims==" %i IN (`set`) DO @echo %i
+
+    would enumerate the environment variable names in the current
+    environment.
+
+In addition, substitution of FOR variable references has been enhanced.
+You can now use the following optional syntax:
+
+    %~I         - expands %I removing any surrounding quotes (")
+    %~fI        - expands %I to a fully qualified path name
+    %~dI        - expands %I to a drive letter only
+    %~pI        - expands %I to a path only
+    %~nI        - expands %I to a file name only
+    %~xI        - expands %I to a file extension only
+    %~sI        - expanded path contains short names only
+    %~aI        - expands %I to file attributes of file
+    %~tI        - expands %I to date/time of file
+    %~zI        - expands %I to size of file
+    %~$PATH:I   - searches the directories listed in the PATH
+                   environment variable and expands %I to the
+                   fully qualified name of the first one found.
+                   If the environment variable name is not
+                   defined or the file is not found by the
+                   search, then this modifier expands to the
+                   empty string
+
+The modifiers can be combined to get compound results:
+
+    %~dpI       - expands %I to a drive letter and path only
+    %~nxI       - expands %I to a file name and extension only
+    %~fsI       - expands %I to a full path name with short names only
+    %~dp$PATH:I - searches the directories listed in the PATH
+                   environment variable for %I and expands to the
+                   drive letter and path of the first one found.
+    %~ftzaI     - expands %I to a DIR like output line
+
+In the above examples %I and PATH can be replaced by other valid
+values.  The %~ syntax is terminated by a valid FOR variable name.
+Picking upper case variable names like %I makes it more readable and
+avoids confusion with the modifiers, which are not case sensitive.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="GOTOO"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/goto.mspx">GOTO</a>
+Directs cmd.exe to a labeled line in a batch program.
+
+GOTO label
+
+  label   Specifies a text string used in the batch program as a label.
+
+You type a label on a line by itself, beginning with a colon.
+
+If Command Extensions are enabled GOTO changes as follows:
+
+GOTO command now accepts a target label of :EOF which transfers control
+to the end of the current batch script file.  This is an easy way to
+exit a batch script file without defining a label.  Type CALL /?  for a
+description of extensions to the CALL command that make this feature
+useful.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p<hr width="100%"><a name="IF"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/if.mspx">IF</a>
+Performs conditional processing in batch programs.
+
+IF [NOT] ERRORLEVEL number command
+IF [NOT] string1==string2 command
+IF [NOT] EXIST filename command
+
+  NOT               Specifies that Windows should carry out 
+                    the command only if the condition is false.
+
+  ERRORLEVEL number Specifies a true condition if the last program run
+                    returned an exit code equal to or greater than the number
+                    specified.
+
+  string1==string2  Specifies a true condition if the specified text strings
+                    match.
+
+  EXIST filename    Specifies a true condition if the specified filename
+                    exists.
+
+  command           Specifies the command to carry out if the condition is
+                    met.  Command can be followed by ELSE command which
+                    will execute the command after the ELSE keyword if the
+                    specified condition is FALSE
+
+The ELSE clause must occur on the same line as the command after the IF.  For
+example:
+
+    IF EXIST filename. (
+        del filename.
+    ) ELSE (
+        echo filename. missing.
+    )
+
+The following would NOT work because the del command needs to be terminated
+by a newline:
+
+    IF EXIST filename. del filename. ELSE echo filename. missing
+
+Nor would the following work, since the ELSE command must be on the same line
+as the end of the IF command:
+
+    IF EXIST filename. del filename.
+    ELSE echo filename. missing
+
+The following would work if you want it all on one line:
+
+    IF EXIST filename. (del filename.) ELSE echo filename. missing
+
+If Command Extensions are enabled IF changes as follows:
+
+    IF [/I] string1 compare-op string2 command
+    IF CMDEXTVERSION number command
+    IF DEFINED variable command
+
+where compare-op may be one of:
+
+    EQU - equal
+    NEQ - not equal
+    LSS - less than
+    LEQ - less than or equal
+    GTR - greater than
+    GEQ - greater than or equal
+
+and the /I switch, if specified, says to do case insensitive string
+compares.  The /I switch can also be used on the string1==string2 form
+of IF.  These comparisons are generic, in that if both string1 and
+string2 are both comprised of all numeric digits, then the strings are
+converted to numbers and a numeric comparison is performed.
+
+The CMDEXTVERSION conditional works just like ERRORLEVEL, except it is
+comparing against an internal version number associated with the Command
+Extensions.  The first version is 1.  It will be incremented by one when
+significant enhancements are added to the Command Extensions.
+CMDEXTVERSION conditional is never true when Command Extensions are
+disabled.
+
+The DEFINED conditional works just like EXISTS except it takes an
+environment variable name and returns true if the environment variable
+is defined.
+
+%ERRORLEVEL% will expand into a string representation of
+the current value of ERRORLEVEL, provided that there is not already
+an environment variable with the name ERRORLEVEL, in which case you
+will get its value instead.  After running a program, the following
+illustrates ERRORLEVEL use:
+
+    goto answer%ERRORLEVEL%
+    :answer0
+    echo Program had return code 0
+    :answer1
+    echo Program had return code 1
+
+You can also using the numerical comparisons above:
+
+    IF %ERRORLEVEL% LEQ 1 goto okay
+
+%CMDCMDLINE% will expand into the original command line passed to
+CMD.EXE prior to any processing by CMD.EXE, provided that there is not
+already an environment variable with the name CMDCMDLINE, in which case
+you will get its value instead.
+
+%CMDEXTVERSION% will expand into a string representation of the
+current value of CMDEXTVERSION, provided that there is not already
+an environment variable with the name CMDEXTVERSION, in which case you
+will get its value instead.
+<p></p><hr width="100%"><a name="MKDIR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/mkdir.mspx">MKDIR</a>
+Creates a directory.
+
+MKDIR [drive:]path
+MD [drive:]path
+
+If Command Extensions are enabled MKDIR changes as follows:
+
+MKDIR creates any intermediate directories in the path, if needed.
+For example, assume \a does not exist then:
+
+    mkdir \a\b\c\d
+
+is the same as:
+
+    mkdir \a
+    chdir \a
+    mkdir b
+    chdir b
+    mkdir c
+    chdir c
+    mkdir d
+
+which is what you would have to type if extensions were disabled.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="MOVE"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/move.mspx">MOVE</a>
+Moves files and renames files and directories.
+
+To move one or more files:
+MOVE [/Y | /-Y] [drive:][path]filename1[,...] destination
+
+To rename a directory:
+MOVE [/Y | /-Y] [drive:][path]dirname1 dirname2
+
+  [drive:][path]filename1 Specifies the location and name of the file
+                          or files you want to move.
+  destination             Specifies the new location of the file. Destination
+                          can consist of a drive letter and colon, a
+                          directory name, or a combination. If you are moving
+                          only one file, you can also include a filename if
+                          you want to rename the file when you move it.
+  [drive:][path]dirname1  Specifies the directory you want to rename.
+  dirname2                Specifies the new name of the directory.
+
+  /Y                      Suppresses prompting to confirm you want to
+                          overwrite an existing destination file.
+  /-Y                     Causes prompting to confirm you want to overwrite
+                          an existing destination file.
+
+The switch /Y may be present in the COPYCMD environment variable.
+This may be overridden with /-Y on the command line.  Default is
+to prompt on overwrites unless MOVE command is being executed from
+within a batch script.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="NOW"></a>
+This command is not supported by the help utility.  Try "now /?".
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="PATH"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/path.mspx">PATH</a>
+Displays or sets a search path for executable files.
+
+PATH [[drive:]path[;...][;%PATH%]
+PATH ;
+
+Type PATH ; to clear all search-path settings and direct cmd.exe to search
+only in the current directory.
+Type PATH without parameters to display the current path.
+Including %PATH% in the new path setting causes the old path to be
+appended to the new setting.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="PAUSE"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/pause.mspx">PAUSE</a>
+Suspends processing of a batch program and displays the message
+    Press any key to continue . . . 
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="PROMPT"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/prompt.mspx">PROMPT</a>
+Changes the cmd.exe command prompt.
+
+PROMPT [text]
+
+  text    Specifies a new command prompt.
+
+Prompt can be made up of normal characters and the following special codes:
+
+  $A   &amp; (Ampersand)
+  $B   | (pipe)
+  $C   ( (Left parenthesis)
+  $D   Current date
+  $E   Escape code (ASCII code 27)
+  $F   ) (Right parenthesis)
+  $G   &gt; (greater-than sign)
+  $H   Backspace (erases previous character)
+  $L   &lt; (less-than sign)
+  $N   Current drive
+  $P   Current drive and path
+  $Q   = (equal sign)
+  $S     (space)
+  $T   Current time
+  $V   Windows version number
+  $_   Carriage return and linefeed
+  $$   $ (dollar sign)
+
+If Command Extensions are enabled the PROMPT command supports
+the following additional formatting characters:
+
+  $+   zero or more plus sign (+) characters depending upon the
+       depth of the PUSHD directory stack, one character for each
+       level pushed.
+
+  $M   Displays the remote name associated with the current drive
+       letter or the empty string if current drive is not a network
+       drive.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="POPD"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/popd.mspx">POPD</a>
+Changes to the directory stored by the PUSHD command.
+
+POPD
+
+
+If Command Extensions are enabled the POPD command will delete
+any temporary drive letter created by PUSHD when you POPD that
+drive off the pushed directory stack.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="PUSHD"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/pushd.mspx">PUSHD</a>
+Stores the current directory for use by the POPD command, then
+changes to the specified directory.
+
+PUSHD [path | ..]
+
+  path        Specifies the directory to make the current directory.
+
+If Command Extensions are enabled the PUSHD command accepts
+network paths in addition to the normal drive letter and path.
+If a network path is specified, PUSHD will create a temporary
+drive letter that points to that specified network resource and
+then change the current drive and directory, using the newly
+defined drive letter.  Temporary drive letters are allocated from
+Z: on down, using the first unused drive letter found.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="RMDIR"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rmdir.mspx">RMDIR</a>
+Removes (deletes) a directory.
+
+RMDIR [/S] [/Q] [drive:]path
+RD [/S] [/Q] [drive:]path
+
+    /S      Removes all directories and files in the specified directory
+            in addition to the directory itself.  Used to remove a directory
+            tree.
+
+    /Q      Quiet mode, do not ask if ok to remove a directory tree with /S
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="REM"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rem.mspx">REM</a>
+Records comments (remarks) in a batch file or CONFIG.SYS.
+
+REM [comment]
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="RENAME"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/rename.mspx">RENAME</a>
+Renames a file or files.
+
+RENAME [drive:][path]filename1 filename2.
+REN [drive:][path]filename1 filename2.
+
+Note that you cannot specify a new drive or path for your destination file.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="SET"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/set.mspx">SET</a>
+Displays, sets, or removes cmd.exe environment variables.
+
+SET [variable=[string]]
+
+  variable  Specifies the environment-variable name.
+  string    Specifies a series of characters to assign to the variable.
+
+Type SET without parameters to display the current environment variables.
+
+If Command Extensions are enabled SET changes as follows:
+
+SET command invoked with just a variable name, no equal sign or value
+will display the value of all variables whose prefix matches the name
+given to the SET command.  For example:
+
+    SET P
+
+would display all variables that begin with the letter 'P'
+
+SET command will set the ERRORLEVEL to 1 if the variable name is not
+found in the current environment.
+
+SET command will not allow an equal sign to be part of the name of
+a variable.
+
+Two new switches have been added to the SET command:
+
+    SET /A expression
+    SET /P variable=[promptString]
+
+The /A switch specifies that the string to the right of the equal sign
+is a numerical expression that is evaluated.  The expression evaluator
+is pretty simple and supports the following operations, in decreasing
+order of precedence:
+
+    ()                  - grouping
+    ! ~ -               - unary operators
+    * / %               - arithmetic operators
+    + -                 - arithmetic operators
+    &lt;&lt; &gt;&gt;               - logical shift
+    &amp;                   - bitwise and
+    ^                   - bitwise exclusive or
+    |                   - bitwise or
+    = *= /= %= += -=    - assignment
+      &amp;= ^= |= &lt;&lt;= &gt;&gt;=
+    ,                   - expression separator
+
+If you use any of the logical or modulus operators, you will need to
+enclose the expression string in quotes.  Any non-numeric strings in the
+expression are treated as environment variable names whose values are
+converted to numbers before using them.  If an environment variable name
+is specified but is not defined in the current environment, then a value
+of zero is used.  This allows you to do arithmetic with environment
+variable values without having to type all those % signs to get their
+values.  If SET /A is executed from the command line outside of a
+command script, then it displays the final value of the expression.  The
+assignment operator requires an environment variable name to the left of
+the assignment operator.  Numeric values are decimal numbers, unless
+prefixed by 0x for hexadecimal numbers, and 0 for octal numbers.
+So 0x12 is the same as 18 is the same as 022. Please note that the octal
+notation can be confusing: 08 and 09 are not valid numbers because 8 and
+9 are not valid octal digits.
+
+The /P switch allows you to set the value of a variable to a line of input
+entered by the user.  Displays the specified promptString before reading
+the line of input.  The promptString can be empty.
+
+Environment variable substitution has been enhanced as follows:
+
+    %PATH:str1=str2%
+
+would expand the PATH environment variable, substituting each occurrence
+of "str1" in the expanded result with "str2".  "str2" can be the empty
+string to effectively delete all occurrences of "str1" from the expanded
+output.  "str1" can begin with an asterisk, in which case it will match
+everything from the beginning of the expanded output to the first
+occurrence of the remaining portion of str1.
+
+May also specify substrings for an expansion.
+
+    %PATH:~10,5%
+
+would expand the PATH environment variable, and then use only the 5
+characters that begin at the 11th (offset 10) character of the expanded
+result.  If the length is not specified, then it defaults to the
+remainder of the variable value.  If either number (offset or length) is
+negative, then the number used is the length of the environment variable
+value added to the offset or length specified.
+
+    %PATH:~-10%
+
+would extract the last 10 characters of the PATH variable.
+
+    %PATH:~0,-2%
+
+would extract all but the last 2 characters of the PATH variable.
+
+Finally, support for delayed environment variable expansion has been
+added.  This support is always disabled by default, but may be
+enabled/disabled via the /V command line switch to CMD.EXE.  See CMD /?
+
+Delayed environment variable expansion is useful for getting around
+the limitations of the current expansion which happens when a line
+of text is read, not when it is executed.  The following example
+demonstrates the problem with immediate variable expansion:
+
+    set VAR=before
+    if "%VAR%" == "before" (
+        set VAR=after
+        if "%VAR%" == "after" @echo If you see this, it worked
+    )
+
+would never display the message, since the %VAR% in BOTH IF statements
+is substituted when the first IF statement is read, since it logically
+includes the body of the IF, which is a compound statement.  So the
+IF inside the compound statement is really comparing "before" with
+"after" which will never be equal.  Similarly, the following example
+will not work as expected:
+
+    set LIST=
+    for %i in (*) do set LIST=%LIST% %i
+    echo %LIST%
+
+in that it will NOT build up a list of files in the current directory,
+but instead will just set the LIST variable to the last file found.
+Again, this is because the %LIST% is expanded just once when the
+FOR statement is read, and at that time the LIST variable is empty.
+So the actual FOR loop we are executing is:
+
+    for %i in (*) do set LIST= %i
+
+which just keeps setting LIST to the last file found.
+
+Delayed environment variable expansion allows you to use a different
+character (the exclamation mark) to expand environment variables at
+execution time.  If delayed variable expansion is enabled, the above
+examples could be written as follows to work as intended:
+
+    set VAR=before
+    if "%VAR%" == "before" (
+        set VAR=after
+        if "!VAR!" == "after" @echo If you see this, it worked
+    )
+
+    set LIST=
+    for %i in (*) do set LIST=!LIST! %i
+    echo %LIST%
+
+If Command Extensions are enabled, then there are several dynamic
+environment variables that can be expanded but which don't show up in
+the list of variables displayed by SET.  These variable values are
+computed dynamically each time the value of the variable is expanded.
+If the user explicitly defines a variable with one of these names, then
+that definition will override the dynamic one described below:
+
+%CD% - expands to the current directory string.
+
+%DATE% - expands to current date using same format as DATE command.
+
+%TIME% - expands to current time using same format as TIME command.
+
+%RANDOM% - expands to a random decimal number between 0 and 32767.
+
+%ERRORLEVEL% - expands to the current ERRORLEVEL value
+
+%CMDEXTVERSION% - expands to the current Command Processor Extensions
+    version number.
+
+%CMDCMDLINE% - expands to the original command line that invoked the
+    Command Processor.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="SHIFT"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/shift.mspx">SHIFT</a>
+Changes the position of replaceable parameters in a batch file.
+
+SHIFT [/n]
+
+If Command Extensions are enabled the SHIFT command supports
+the /n switch which tells the command to start shifting at the
+nth argument, where n may be between zero and eight.  For example:
+
+    SHIFT /2
+
+would shift %3 to %2, %4 to %3, etc. and leave %0 and %1 unaffected.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="START"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/start.mspx">START</a>
+Starts a separate window to run a specified program or command.
+
+START ["title"] [/D path] [/I] [/MIN] [/MAX] [/SEPARATE | /SHARED]
+      [/LOW | /NORMAL | /HIGH | /REALTIME | /ABOVENORMAL | /BELOWNORMAL]
+      [/AFFINITY <hex affinity="">] [/WAIT] [/B] [command/program]
+      [parameters]
+
+    "title"     Title to display in  window title bar.
+    path        Starting directory
+    B           Start application without creating a new window. The
+                application has ^C handling ignored. Unless the application
+                enables ^C processing, ^Break is the only way to interrupt
+                the application
+    I           The new environment will be the original environment passed
+                to the cmd.exe and not the current environment.
+    MIN         Start window minimized
+    MAX         Start window maximized
+    SEPARATE    Start 16-bit Windows program in separate memory space
+    SHARED      Start 16-bit Windows program in shared memory space
+    LOW         Start application in the IDLE priority class
+    NORMAL      Start application in the NORMAL priority class
+    HIGH        Start application in the HIGH priority class
+    REALTIME    Start application in the REALTIME priority class
+    ABOVENORMAL Start application in the ABOVENORMAL priority class
+    BELOWNORMAL Start application in the BELOWNORMAL priority class
+    AFFINITY    The new application will have the specified processor
+                affinity mask, expressed as a hexadecimal number.
+    WAIT        Start application and wait for it to terminate
+    command/program
+                If it is an internal cmd command or a batch file then
+                the command processor is run with the /K switch to cmd.exe.
+                This means that the window will remain after the command
+                has been run.
+
+                If it is not an internal cmd command or batch file then
+                it is a program and will run as either a windowed application
+                or a console application.
+
+    parameters  These are the parameters passed to the command/program
+
+
+If Command Extensions are enabled, external command invocation
+through the command line or the START command changes as follows:
+
+non-executable files may be invoked through their file association just
+    by typing the name of the file as a command.  (e.g.  WORD.DOC would
+    launch the application associated with the .DOC file extension).
+    See the ASSOC and FTYPE commands for how to create these
+    associations from within a command script.
+
+When executing an application that is a 32-bit GUI application, CMD.EXE
+    does not wait for the application to terminate before returning to
+    the command prompt.  This new behavior does NOT occur if executing
+    within a command script.
+
+When executing a command line whose first token is the string "CMD "
+    without an extension or path qualifier, then "CMD" is replaced with
+    the value of the COMSPEC variable.  This prevents picking up CMD.EXE
+    from the current directory.
+
+When executing a command line whose first token does NOT contain an
+    extension, then CMD.EXE uses the value of the PATHEXT
+    environment variable to determine which extensions to look for
+    and in what order.  The default value for the PATHEXT variable
+    is:
+
+        .COM;.EXE;.BAT;.CMD
+
+    Notice the syntax is the same as the PATH variable, with
+    semicolons separating the different elements.
+
+When searching for an executable, if there is no match on any extension,
+then looks to see if the name matches a directory name.  If it does, the
+START command launches the Explorer on that path.  If done from the
+command line, it is the equivalent to doing a CD /D to that path.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="TIME"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/time.mspx">TIME</a>
+Displays or sets the system time.
+
+TIME [/T | time]
+
+Type TIME with no parameters to display the current time setting and a prompt
+for a new one.  Press ENTER to keep the same time.
+
+If Command Extensions are enabled the TIME command supports
+the /T switch which tells the command to just output the
+current time, without prompting for a new time.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="TYPE"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/type.mspx">TYPE</a>
+Displays the contents of a text file or files.
+
+TYPE [drive:][path]filename
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+<p></p><hr width="100%"><a name="XCOPY"></a><a href="http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/xcopy.mspx">XCOPY</a>
+Copies files and directory trees.
+
+XCOPY source [destination] [/A | /M] [/D[:date]] [/P] [/S [/E]] [/V] [/W]
+                           [/C] [/I] [/Q] [/F] [/L] [/G] [/H] [/R] [/T] [/U]
+                           [/K] [/N] [/O] [/X] [/Y] [/-Y] [/Z]
+                           [/EXCLUDE:file1[+file2][+file3]...]
+
+  source       Specifies the file(s) to copy.
+  destination  Specifies the location and/or name of new files.
+  /A           Copies only files with the archive attribute set,
+               doesn't change the attribute.
+  /M           Copies only files with the archive attribute set,
+               turns off the archive attribute.
+  /D:m-d-y     Copies files changed on or after the specified date.
+               If no date is given, copies only those files whose
+               source time is newer than the destination time.
+  /EXCLUDE:file1[+file2][+file3]...
+               Specifies a list of files containing strings.  Each string
+               should be in a separate line in the files.  When any of the
+               strings match any part of the absolute path of the file to be
+               copied, that file will be excluded from being copied.  For
+               example, specifying a string like \obj\ or .obj will exclude
+               all files underneath the directory obj or all files with the
+               .obj extension respectively.
+  /P           Prompts you before creating each destination file.
+  /S           Copies directories and subdirectories except empty ones.
+  /E           Copies directories and subdirectories, including empty ones.
+               Same as /S /E. May be used to modify /T.
+  /V           Verifies each new file.
+  /W           Prompts you to press a key before copying.
+  /C           Continues copying even if errors occur.
+  /I           If destination does not exist and copying more than one file,
+               assumes that destination must be a directory.
+  /Q           Does not display file names while copying.
+  /F           Displays full source and destination file names while copying.
+  /L           Displays files that would be copied.
+  /G           Allows the copying of encrypted files to destination that does
+               not support encryption.
+  /H           Copies hidden and system files also.
+  /R           Overwrites read-only files.
+  /T           Creates directory structure, but does not copy files. Does not
+               include empty directories or subdirectories. /T /E includes
+               empty directories and subdirectories.
+  /U           Copies only files that already exist in destination.
+  /K           Copies attributes. Normal Xcopy will reset read-only attributes.
+  /N           Copies using the generated short names.
+  /O           Copies file ownership and ACL information.
+  /X           Copies file audit settings (implies /O).
+  /Y           Suppresses prompting to confirm you want to overwrite an
+               existing destination file.
+  /-Y          Causes prompting to confirm you want to overwrite an
+               existing destination file.
+  /Z           Copies networked files in restartable mode.
+
+The switch /Y may be preset in the COPYCMD environment variable.
+This may be overridden with /-Y on the command line.
+
+<a href="https://azrael.digipen.edu/~mmead/www/Courses/CS180/BatchFiles.html#TOP">Back to table</a>
+</hex></p<hr></pre>
+
+
+<blockquote>
+<table border="0" cellspacing="5" cellpadding="0">
+<tbody><tr><th></th><th></th><th></th></tr>
+<tr valign="top">
+<td>
+<blockquote><pre></pre></blockquote>
+</td>
+<td>
+<blockquote><pre></pre></blockquote>
+</td>
+<td>
+<blockquote><pre></pre></blockquote>
+</td>
+</tr></tbody></table>
+</blockquote>
+
+<tt><b></b></tt>
+
+<blockquote>
+<table border="0" cellspacing="5" cellpadding="5">
+<tbody><tr><th></th><th></th></tr>
+<tr valign="top">
+<td>
+<blockquote><pre></pre></blockquote>
+</td>
+<td>
+<blockquote><pre></pre></blockquote>
+</td>
+</tr></tbody></table>
+</blockquote>
+
+<blockquote><pre></pre></blockquote>
+
+<blockquote><pre></pre></blockquote>
+
+<blockquote><pre></pre></blockquote>
+
+
+</body></html>

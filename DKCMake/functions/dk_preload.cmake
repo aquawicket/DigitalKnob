@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_preload(fn)
 #
 #	load a ${fn}.cmake file located in the DKCMake path 
@@ -40,14 +51,14 @@ endmacro()
 
 macro(dk_parseFunctionsAndLoad fn fpath)
 	dk_echo("dk_parseFunctionsAndLoad(${ARGV})")
-	if(EXISTS $ENV{DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
-		set(${fn}_file $ENV{DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
-	elseif(EXISTS $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
-		set(${fn}_file $ENV{DKCMAKE_DIR}/functions/${fpath}.cmake)
+	if(EXISTS ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+		set(${fn}_file ${DKCMAKE_FUNCTIONS_DIR}/${fpath}.cmake)
+	elseif(EXISTS ${DKCMAKE_DIR}/functions/${fpath}.cmake)
+		set(${fn}_file ${DKCMAKE_DIR}/functions/${fpath}.cmake)
 	elseif(EXISTS ${fpath})
 		set(${fn}_file ${fpath})
 	else()
-		dk_echo(FATAL_ERROR "${fpath}: file not found")
+		dk_echo(FATAL_ERROR "fpath:'${fpath}' NOT FOUND")
 	endif()
 			
 	if(${${fn}_file} IN_LIST dk_load_list)
@@ -62,7 +73,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 		file(READ ${${fn}_file} ${fn}_contents)
 		#string(REGEX MATCHALL "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
 				
-		## Match text that contains *dk_*( 		I.E.  WIN_HOST_dk_, MAC_X86_64_dk_, dk_
+		## Match text that contains *dk_*( 		I.E.  Windows_Host_dk_, MAC_X86_64_dk_, dk_
 		string(REGEX MATCHALL "[A-Za-z0-9_]*[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_matches "${${fn}_contents}")
 		unset(${fn}_contents)
 		list(REMOVE_DUPLICATES ${fn}_matches)
@@ -73,7 +84,7 @@ macro(dk_parseFunctionsAndLoad fn fpath)
 				
 			#dk_verbose("item-in = ${${fn}_item}")
 				
-			## remove any prefix to dk_*( 		I.E.  WIN_HOST_dk_  becomes dk_
+			## remove any prefix to dk_*( 		I.E.  Windows_Host_dk_  becomes dk_
 			string(REGEX MATCH "[Dd][Kk]_.[A-Za-z0-9_\t]*\\(" ${fn}_item ${${fn}_item})
 			#dk_verbose("item-out = ${${fn}_item}")
 				
@@ -119,9 +130,9 @@ endif()
 #	dk_dirname(${CMAKE_CURRENT_LIST_DIR} DKCMAKE_DIR)
 #	dk_basename(${CMAKE_CURRENT_LIST_DIR} DKCMAKE)
 #	if(${DKCMAKE} STREQUAL "DKCMake")
-#		set(ENV{DKCMAKE_DIR} $ENV{DKCMAKE_DIR} CACHE INTERNAL "" FORCE)
+#		set(DKCMAKE_DIR ${DKCMAKE_DIR} CACHE INTERNAL "" FORCE)
 #	endif()
-#	dk_echo("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+#	dk_echo("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 #endif()
 	
 #dk_preload(dk_DIGITALKNOB_DIR)

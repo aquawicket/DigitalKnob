@@ -1,5 +1,5 @@
 Windows Registry Editor Version 5.00
-;@(cls & %__AppDir__%reg.exe import "%~f0" & goto :eof)
+;@(cls & %SystemRoot%\System32\reg.exe import "%~f0" & goto :eof)
 
 [-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat]
 [-HKEY_CURRENT_USER\Software\Classes\.bat]

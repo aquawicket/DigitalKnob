@@ -1,0 +1,5 @@
+###### metacall ######
+# https://github.com/metacall/core
+# https://github.com/metacall/core/archive/5b592ac0.zip
+
+metacall_Import=https://github.com/metacall/core/archive/5b592ac0.zip

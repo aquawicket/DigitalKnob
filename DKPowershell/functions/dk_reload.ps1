@@ -1,12 +1,12 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_reload){ $dk_reload = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_reload_ps1){ $dk_reload_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_reload()
 #
 #
 function Global:dk_reload() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
 	if(!(dk_call dk_pathExists "${DKSCRIPT_PATH}")){ dk_call dk_error "DKSCRIPT_PATH is invalid"; return ${false} }
 	
@@ -27,7 +27,7 @@ function Global:dk_reload() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_pause "Press any key to test dk_reload"
 	dk_call dk_reload

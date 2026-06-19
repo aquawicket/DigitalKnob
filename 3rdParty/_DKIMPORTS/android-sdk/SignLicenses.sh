@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 if [ -e /proc/device-tree/model ]; then
 	MODEL=$(tr -d '\0' </proc/device-tree/model)
@@ -11,11 +11,13 @@ echo "machtype = $MACHTYPE"
 
 ### set DIGITALKNOB_DIR
 if [[ -n "$USERPROFILE" ]]; then
-	DIGITALKNOB_DIR="$USERPROFILE\digitalknob"
+	DigitalKnob="Digital Knob"
+	DIGITALKNOB_DIR="$USERPROFILE\${DigitalKnob}"
 	DIGITALKNOB_DIR=$(sed 's.C:./c.g' <<< $DIGITALKNOB_DIR)
 	DIGITALKNOB_DIR=$(sed 's.\\./.g' <<< $DIGITALKNOB_DIR)
 else
-	DIGITALKNOB_DIR="$HOME/digitalknob"
+	DigitalKnob="Digital Knob"
+	DIGITALKNOB_DIR="$HOME/DigitalKnob"
 fi
 mkdir -p $DIGITALKNOB_DIR
 print_var DIGITALKNOB_DIR

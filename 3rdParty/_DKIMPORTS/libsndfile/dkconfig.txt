@@ -1,0 +1,5 @@
+############ libsndfile ############
+# https://github.com/libsndfile/libsndfile.git
+# https://github.com/libsndfile/libsndfile/archive/58c05b87162264200b1aa7790be260fd74c9deee.zip
+
+libsndfile_Import=https://github.com/libsndfile/libsndfile/archive/58c05b87162264200b1aa7790be260fd74c9deee.zip

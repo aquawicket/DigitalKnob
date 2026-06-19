@@ -1,0 +1,5 @@
+############ vscode-emscripten-debugging ############
+# https://github.com/floooh/vscode-emscripten-debugging/archive/f436c6618a9f2372ddc2bd04b5a3b552a158a65d.zip
+
+vscode-emscripten-debugging_Import=https://github.com/floooh/vscode-emscripten-debugging/archive/f436c6618a9f2372ddc2bd04b5a3b552a158a65d.zip
+

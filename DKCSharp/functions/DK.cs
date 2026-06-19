@@ -1,3 +1,4 @@
+// DKINIT_cs
 // TODO:  each DK.ext file displays the context it's in the version and path to the shell and the DKSCRIPT_PATH
 
 using System;					// https://learn.microsoft.com/en-us/dotnet/api/system?view=net-8.0

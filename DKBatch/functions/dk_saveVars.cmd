@@ -1,33 +1,40 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_saveVars()
-::#
-::#    https://stackoverflow.com/a/41872317/688352
-::#
+rem ################################################################################
+rem # dk_saveVars()
+rem #
+rem #    https://stackoverflow.com/a/41872317/688352
+rem #
 :dk_saveVars
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	::	rem We need a temporary file to store the original environment
-	::for %%f in ("original_vars.tmp") do (
-	::	rem Retrieve the original environment to the temporary file
-	::	start /i /wait /min "" "%ComSpec%" /c">""%%~ff"" set "
-	::)
+	rem	rem We need a temporary file to store the original environment
+	rem for %%f in ("original_vars.tmp") do (
+	rem	rem Retrieve the original environment to the temporary file
+	rem	start /i /wait /min "" "%ComSpec%" /c">""%%~ff"" set "
+	rem )
 
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
 	
-::	:: move current_vars to prev_vars
-::	if exist "%DKCACHE_DIR%\current_vars.tmp" (
-::	    %dk_call% dk_rename %DKCACHE_DIR%\current_vars.tmp %DKCACHE_DIR%\prev_vars.tmp  OVERWRITE
-::	)
+rem	rem move current_vars to prev_vars
+rem	if EXIST "%DKCACHE_DIR%\current_vars.tmp" (
+rem	    %dk_call% dk_rename %DKCACHE_DIR%\current_vars.tmp %DKCACHE_DIR%\prev_vars.tmp  OVERWRITE
+rem	)
 
-	:: save the current environment variables
-	set > %DKCACHE_DIR%\current_vars.tmp
+	rem save the current environment variables
+	set > %DKCACHE_DIR%/current_vars.tmp
 %endfunction%
 
 
@@ -36,10 +43,10 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 	%dk_call% dk_saveVars
+	%dk_call% dk_echo "variables saved to %DKCACHE_DIR%/current_vars.tmp"
 %endfunction%

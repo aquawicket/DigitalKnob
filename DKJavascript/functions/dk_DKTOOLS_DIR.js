@@ -1,5 +1,5 @@
-if(typeof dk_env === "undefined")	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); }
-if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
+if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); 		}
+if(!dk_valid("dk_assertPath"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); 	}
 //(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js").OpenTextFile(url, 1).ReadAll();
 
 //####################################################################
@@ -20,16 +20,11 @@ dk_DKTOOLS_DIR = function dk_DKTOOLS_DIR(){
 	} 
 	//############ GET ############
 	else {
-		if(typeof dk_DIGITALKNOB_DIR === "undefined"){ 
-			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){
-				dk_DIGITALKNOB_DIR()
-			}); 
-		}
+		if(!dk_valid("dk_DIGITALKNOB_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){ dk_DIGITALKNOB_DIR(); }); }
 		DKTOOLS_DIR = DIGITALKNOB_DIR+"/DKTools";
 	}
 
 	dk_assertPath(DKTOOLS_DIR);
-	//window["DKTOOLS_DIR"] = DKTOOLS_DIR;
 }
 
 

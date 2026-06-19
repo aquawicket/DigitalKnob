@@ -1,0 +1,6 @@
+############ HxD ############
+# https://mh-nexus.de/downloads/HxDSetup.zip
+
+HxD_Type=Tool
+HxD_Import=https://mh-nexus.de/downloads/HxDSetup.zip
+

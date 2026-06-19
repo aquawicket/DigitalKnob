@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Object Test</title>
+</head>
+<body>
+
+<!-- Home -->
+<a id="home" href="index.html">home</a><br /><br />
+<a style="font-weight:bold;font-size:20px;">Object Test</a><br /><br />
+
+<!-- Place scratch code in here -->
+<a id="element1">element1</a><br />
+<a id="element2">element2</a><br />
+<a id="output" style=""></a><br />
+
+
+<script>
+	var a = document.getElementById("element1");
+	var b = document.getElementById("element1");
+	if(a === b){
+		console.log("DKDom object comparison: a === b");
+		document.getElementById("output").innerHTML += "Object comparison: a === b <br />";
+	}
+	else if(a == b){
+		console.log("DKDom object comparison: a == b");
+		document.getElementById("output").innerHTML += "<br></br>Object comparison: a == b <br />";
+	}
+	else{
+		console.log("DKDom object comparison: a != b");
+		document.getElementById("output").innerHTML += "<br></br>Object comparison: a != b <br />";
+	}
+
+
+	var c = document.createElement("div");
+	document.body.appendChild(c);
+	c.id = "c";
+	c.innerHTML = "elementC";
+
+
+	var d = document.getElementById("c");
+	if(c === d){
+		console.log("DKDom object comparison: c === d");
+		document.getElementById("output").innerHTML += "Object comparison: c === d <br />";
+	}
+	else if(c == d){
+		console.log("DKDom object comparison: c == d");
+		document.getElementById("output").innerHTML += "Object comparison: c == d <br />";
+	}
+	else{
+		console.log("DKDom object comparison: c != d");
+		document.getElementById("output").innerHTML += "Object comparison: c != d <br />";
+	}
+
+	document.getElementById("output").style.color = "blue";
+</script>
+
+
+</body>
+</html>

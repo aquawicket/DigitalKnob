@@ -1,0 +1,9 @@
+############ libiconv ############
+# https://www.gnu.org/software/libiconv/
+# https://savannah.gnu.org/projects/libiconv
+# https://stackoverflow.com/a/57734435/688352
+# https://cmake.org/cmake/help/latest/module/FindIconv.html
+# http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz
+# https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
+
+libiconv_Import=https://mirror.freedif.org/GNU/libiconv/libiconv-1.14.tar.gz

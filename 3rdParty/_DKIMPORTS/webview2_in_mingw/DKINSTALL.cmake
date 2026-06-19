@@ -1,35 +1,44 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ webview2_in_mingw ############
-dk_import("https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip" PATCH)
+dk_depend(webview2_runtime)
 
-dk_include("${WEBVIEW2_IN_MINGW}/WebView/include")
+dk_import()
 
-dk_libDebug("${WEBVIEW2_IN_MINGW_DEBUG_DIR}/webview2.exe")
-dk_libRelease("${WEBVIEW2_IN_MINGW_RELEASE_DIR}/webview2.exe")
+dk_assertPath("${webview2_in_mingw}")
+dk_include("${webview2_in_mingw}/WebView/include")
 
-if(WIN_X86)
+set(webview2_in_mingw_Debug_Dir "${webview2_in_mingw}/${Target_Tuple}/Debug")
+set(webview2_in_mingw_Release_Dir "${webview2_in_mingw}/${Target_Tuple}/Release")
+dk_libDebug("${webview2_in_mingw_Debug_Dir}/webview2.exe")
+dk_libRelease("${webview2_in_mingw_Release_Dir}/webview2.exe")
+
+if(Windows_X86)
 	set(ARCH "Win32")
-else(WIN_X86_64)
+else(Windows_X86_64)
 	set(ARCH "x64")
 endif()
+dk_assertVar(ARCH)
 
-set(WEBVIEW2GUID_LIB		"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Guid.lib")
-set(WEBVIEW2LOADER_DLL_LIB	"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll.lib")
-set(WEBVIEW2LOADER_DLL		"${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll")
+set(webview2guid_LIB		"${webview2_in_mingw}/WebView/${ARCH}/WebView2Guid.lib")
+set(webview2loader_DLL_LIB	"${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll.lib")
+set(webview2loader_DLL		"${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll")
 
-dk_configure(${WEBVIEW2_IN_MINGW} -DARCH=${ARCH})
+dk_configure("${webview2_in_mingw}" -DARCH=${ARCH})
 
-dk_build(${WEBVIEW2_IN_MINGW})
+dk_build()
 
-dk_copy(${WEBVIEW2_IN_MINGW}/WebView/${ARCH}/WebView2Loader.dll ${WEBVIEW2_IN_MINGW_BUILD_DIR}/WebView2Loader.dll)
-
-
-
-
-
+dk_copy("${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll" "${webview2_in_mingw_Debug_Dir}/WebView2Loader.dll")

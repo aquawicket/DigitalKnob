@@ -1,47 +1,34 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKUNINSTALL()
-::#
+rem ####################################################################
+rem # DKUNINSTALL()
+rem #
 :DKUNINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined win_arm64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip")
-    if defined win_x86_host		(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip")
-    if defined win_x86_64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip")
-	if not defined NOTEPADPP_IMPORT	(%dk_call% dk_error "NOTEPADPP_IMPORT is invalid")
+rem %setlocal%
 	
-	%dk_call% dk_basename %NOTEPADPP_IMPORT% NOTEPADPP_IMPORT_FILE
-	%dk_call% dk_removeExtension %NOTEPADPP_IMPORT_FILE% NOTEPADPP_FOLDER
-	::%dk_call% dk_convertToCIdentifier %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	%dk_call% dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%/%NOTEPADPP_FOLDER%"
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_importVariables !notepadpp_%Host_Tuple%_Import! INSTALL_ROOT %DKTOOLS_DIR%
 
-	::FIXME: kill notepad++.exe process
-	%dk_call% dk_delete "%NOTEPADPP_DIR%"
+	rem ### Uninstall Context Menu ###
+	%dk_call% dk_uninstall notepadpp/contextMenu
 	
-	::### Uninstall Context Menu ###
-	%dk_call% "%DKIMPORTS_DIR%/notepadpp/contextMenu/DKUNINSTALL.cmd"
-
-	::### Uninstall File Associations ###
-	%dk_call% "%DKIMPORTS_DIR%/notepadpp/fileAssoc/DKUNINSTALL.cmd"
+	rem ### Uninstall File Associations ###
+	%dk_call% dk_uninstall notepadpp/fileAssoc
+	
+	rem FIXME: kill notepad++.exe process
+	%dk_call% dk_delete "%notepadpp%"
 %endfunction%
 
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
- 
-    %dk_call% DKUNINSTALL
-%endfunction%

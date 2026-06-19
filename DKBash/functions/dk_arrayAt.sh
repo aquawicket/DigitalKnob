@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ################################################################################
 # dk_arrayAt(array, index)
@@ -21,14 +34,12 @@ dk_arrayAt() {
 	dk_debugFunc 2 3
 	#dk_call dk_validateArgs array int optional:rtn_var
 	
-	#eval local arrayAt='("${'${1}'[${2}]}")'
-	eval local arrayAt='${'${1}'[${2}]}'
+	eval local _arrayAt='${'${1}'[${2}]}'
+	[ -n "${3-}" ] && local rtn_var="${3}" || local rtn_var="dk_arrayAt"
 	
-	### return value ###
-	#[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
-	[ ${#} -gt 2 ] && eval ${3}='${'${1}'[${2}]}' && return	# return value using return variable
-	dk_return "${arrayAt}" && return						# return value using command substitution
-	#dk_return "${"${1}"[${2}]}" && return					# return value using command substitution
+	###### return ######
+	eval "${rtn_var}=\"${_arrayAt}\"" 	# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayAt}"				# return value in COMMAND_SUBSTITUTION
 }
 
 
@@ -40,27 +51,26 @@ dk_arrayAt() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	myArrayA[0]="a b c"
-	myArrayA[1]="1 2 3"
-	myArrayA[2]="d e f"
-	myArrayA[3]="4 5 6"
-	myArrayA[4]="h i j"
-	dk_call dk_printVar myArrayA
-	dk_call dk_arrayAt myArrayA 2 arrayAtA	# returned value using return variable
-	dk_call dk_printVar arrayAtA
-	dk_call dk_echo "dk_arrayAt(MyArrayA 2) = ${arrayAtA}"
-	[ "${arrayAtA}" = "d e f" ] || dk_call dk_error "dk_arrayAt() failed"
-	[ "${arrayAtA}" = "d e f" ] && dk_call dk_info "dk_arrayAt() suceeded" 
+	myArray[0]="a b c"
+	myArray[1]="1 2 3"
+	myArray[2]="d e f"
+	myArray[3]="4 5 6"
+	myArray[4]="h i j"
+	myArray[5]="7 8 9"
+	dk_call dk_printVar myArray
 	
-	myArrayB[0]="h i j"
-	myArrayB[1]="4 5 6"
-	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
-	dk_call dk_printVar myArrayB
-	arrayAtB=$(dk_call dk_arrayAt myArrayB 3)	# returned value using command substitution
-	dk_call dk_printVar arrayAtB
-	dk_call dk_echo "dk_arrayAt(MyArrayB 3) = ${arrayAtB}"
-	[ "${arrayAtB}" = "1 2 3" ] || dk_call dk_error "dk_arrayAt() failed"
-	[ "${arrayAtB}" = "1 2 3" ] && dk_call dk_info "dk_arrayAt() suceeded"
+	# return value in FUNCTION_NAME
+	dk_call dk_arrayAt myArray 1
+	dk_call dk_printVar dk_arrayAt
+	[ "${dk_arrayAt}" = "1 2 3" ] && dk_call dk_success "dk_arrayAt() suceeded" || dk_call dk_error "dk_arrayAt() failed"
+	
+	# return value in RETURN_VAR
+	dk_call dk_arrayAt myArray 2 rv_arrayAt
+	dk_call dk_printVar rv_arrayAt
+	[ "${rv_arrayAt}" = "d e f" ] && dk_call dk_success "dk_arrayAt() suceeded" || dk_call dk_error "dk_arrayAt() failed"
+	
+	# return value in COMMAND_SUBSTITUTION
+	cs_arrayAt=$(dk_call dk_arrayAt myArray 3)
+	dk_call dk_printVar cs_arrayAt
+	[ "${cs_arrayAt}" = "4 5 6" ] && dk_call dk_success "dk_arrayAt() suceeded" || dk_call dk_error "dk_arrayAt() failed"
 }

@@ -1,0 +1,15 @@
+############ bsdtar.exe ############
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_linux_arm64
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_linux_amd64
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_darwin_arm64
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_darwin_amd64
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_windows_x86_64.exe
+# https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_windows_arm64.exe
+
+bsdtar.exe_Type=Tool
+bsdtar.exe_Linux_Arm64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_linux_arm64
+bsdtar.exe_Linux_X86_64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_linux_amd64
+bsdtar.exe_Mac_Arm64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_darwin_arm64
+bsdtar.exe_Mac_X86_64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_darwin_amd64
+bsdtar.exe_Windows_Arm64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_windows_arm64.exe
+bsdtar.exe_Windows_X86_64_Import=https://github.com/aspect-build/bsdtar-prebuilt/releases/download/v3.8.1-fix.1/tar_windows_x86_64.exe

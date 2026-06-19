@@ -3,13 +3,12 @@
 //#
 //#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
-dk_pathExists = function dk_pathExists_f(path){
+dk_pathExists = function dk_pathExists_f(){
 	//dk_debugFunc(1);
 	
-	if(typeof fileSystemObject === "undefined"){ 
-		fileSystemObject = new ActiveXObject("Scripting.FileSystemObject");
-	}
-	return (fileSystemObject.FolderExists(path) || fileSystemObject.FileExists(path));
+	dk_depend("dk_fileSystem");
+	dk_assert("dk_fileSystem.FolderExists");
+	return (dk_fileSystem.FolderExists(arguments[0]) || dk_fileSystem.FileExists(arguments[0]));
 }
 
 
@@ -24,14 +23,13 @@ DKTEST = function DKTEST_f(){
 	if(dk_pathExists(myPath)){
 	    console.log("'"+myPath+"' exists");	
 	} else {
-	    console.log("'"+myPath+"' does not exist");
+	    console.error("'"+myPath+"' does not exist");
 	}
 	
 	var myPath = "C:/NonExistent";
 	if(dk_pathExists(myPath)){
 	    console.log("'"+myPath+"' exists");	
 	} else {
-	    console.log("'"+myPath+"' does not exist");
+	    console.error("'"+myPath+"' does not exist");
 	}
-
 }

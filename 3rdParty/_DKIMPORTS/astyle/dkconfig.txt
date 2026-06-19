@@ -1,4 +1,9 @@
-ASTYLE_IMPORT=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
+###### astyle ######
+# http://astyle.sourceforge.net
+# https://sourceforge.net/projects/astyle/files/latest/download
+# https://managedway.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
+# https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
-#ASTYLE_IMPORT=https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip
-#ASTYLE_IMPORT=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip?viasf=1
+astyle_Import=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip
+#astyle_Import=https://sourceforge.net/projects/astyle/files/astyle/astyle%203.1/AStyle_3.1_windows.zip
+#astyle_Import=https://pilotfiber.dl.sourceforge.net/project/astyle/astyle/astyle%203.1/AStyle_3.1_windows.zip?viasf=1

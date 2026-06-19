@@ -5,17 +5,17 @@ rem   utility pattern and/or line number.
 rem Command arguments:
 rem %1 - Optional flags:
 rem      -n - prints line number prefix "<N>:" for each found string from file.
-rem           By default, the line number prefix does not print.
+rem           By default, the line number prefix does NOT print.
 rem      -f1 - filter by line numbers for strings after %4..%N filter pattern.
 rem           By default, filters by line numbers from the file.
 rem      -pe - treats input file as a Portable Executable file
-rem           (the strings.exe must exist).
+rem           (the strings.exe must EXIST).
 rem           By default, the file treated as a text file.
 rem %1 - Path to a directory with a file to extract.
 rem %2 - Relative path to a text/binary file with strings.
 rem %3 - Set of line numbers separated by : character to print strings of.
 rem      These line numbers by default are line numbers of strings from the
-rem      file, not from filtered output. If you want to point line numbers
+rem      file, NOT from filtered output. If you want to point line numbers
 rem      after %4..%N filter pattern, then you must use -f1 flag.
 rem      If empty, then treated as "all strings".
 rem %4..%N - Arguments for findstr command line in first filter.
@@ -62,10 +62,10 @@ set "FLAGS="
 rem flags always at first
 set "FLAG=%~1"
 
-if not "%FLAG%" equ "" ^
-if not "%FLAG:~0,1%" equ "-" set "FLAG="
+if "%FLAG%" neq "" ^
+if "%FLAG:~0,1%" neq "-" set "FLAG="
 
-if not "%FLAG%" equ "" (
+if "%FLAG%" neq "" (
   if "%FLAG%" equ "-n" set FLAG_PRINT_LINE_NUMBER_PREFIX=1
   if "%FLAG%" equ "-f1" set FLAG_F1_LINE_NUMBER_FILTER=1
   if "%FLAG%" equ "-pe" set FLAG_FILE_FORMAT_PE=1
@@ -79,21 +79,21 @@ set "DIR_PATH=%~dpf1"
 set "FILE_PATH=%~2"
 
 set "FILE_PATH_PREFIX="
-if not "%DIR_PATH%" equ "" set "FILE_PATH_PREFIX=%DIR_PATH%\"
+if "%DIR_PATH%" neq "" set "FILE_PATH_PREFIX=%DIR_PATH%\"
 
-if not "%FILE_PATH_PREFIX%" equ "" ^
-if not exist "%FILE_PATH_PREFIX%" (
-  echo.%?~nx0%: error: Directory path does not exist: "%FILE_PATH_PREFIX%"
+if "%FILE_PATH_PREFIX%" neq "" ^
+if NOT EXIST "%FILE_PATH_PREFIX%" (
+  echo.%?~nx0%: error: Directory path does NOT EXIST: "%FILE_PATH_PREFIX%"
   exit /b 1
 ) >&2
 
 if "%FILE_PATH%" equ "" (
-  echo.%?~nx0%: error: File path does not set.
+  echo.%?~nx0%: error: File path does NOT set.
   exit /b 2
 ) >&2
 
-if not exist "%FILE_PATH_PREFIX%%FILE_PATH%" (
-  echo.%?~nx0%: error: File path does not exist: "%FILE_PATH_PREFIX%%FILE_PATH%"
+if NOT EXIST "%FILE_PATH_PREFIX%%FILE_PATH%" (
+  echo.%?~nx0%: error: File path does NOT EXIST: "%FILE_PATH_PREFIX%%FILE_PATH%"
   exit /b 3
 ) >&2
 
@@ -123,7 +123,7 @@ set "FINDSTR_FIRST_FILTER_CMD_LINE="
 :FINDSTR_FIRST_FILTER_LOOP
 set ARG=%1
 
-if not "!ARG!" equ "" (
+if "!ARG!" neq "" (
   set FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE! !ARG!
   shift
   goto FINDSTR_FIRST_FILTER_LOOP
@@ -136,7 +136,7 @@ set OUTPUT_HAS_NUMBER_PREFIX=0
 rem in case if /N at the end
 set "FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE! "
 
-rem 1. add /N parameter to first filter if must print line prefixes and -f1 flag is not set.
+rem 1. add /N parameter to first filter if must print line prefixes and -f1 flag is NOT set.
 rem 2. flags prefixed output if must print line prefixes.
 if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
   if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
@@ -147,9 +147,9 @@ if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
   set OUTPUT_HAS_NUMBER_PREFIX=1
 )
 
-rem 1. add /N parameter to first filter and flags prefixed output if lines filter is not empty and -f1 flag is not set.
-rem 2. add /B parameter to lines filter if lines filter is not empty
-if not "!FINDSTR_LINES_FILTER_CMD_LINE!" equ "" (
+rem 1. add /N parameter to first filter and flags prefixed output if lines filter is NOT empty and -f1 flag is NOT set.
+rem 2. add /B parameter to lines filter if lines filter is NOT empty
+if "!FINDSTR_LINES_FILTER_CMD_LINE!" neq "" (
   if %FLAG_F1_LINE_NUMBER_FILTER% equ 0 (
     if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" equ "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
       set "FINDSTR_FIRST_FILTER_CMD_LINE=/N !FINDSTR_FIRST_FILTER_CMD_LINE!"
@@ -164,7 +164,7 @@ if not "!FINDSTR_LINES_FILTER_CMD_LINE!" equ "" (
 rem 1. remove /N parameter from first filter if -f1 flag is set.
 rem 2. flags prefixed output if -f1 flag is set.
 if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 (
-  if not "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" equ "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
+  if "!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!" neq "!FINDSTR_FIRST_FILTER_CMD_LINE!" (
     set "FINDSTR_FIRST_FILTER_CMD_LINE=!FINDSTR_FIRST_FILTER_CMD_LINE:/N =!"
   )
   set OUTPUT_HAS_NUMBER_PREFIX=1
@@ -185,7 +185,7 @@ if %FLAG_FILE_FORMAT_PE% equ 0 (
 )
 
 if %FLAG_F1_LINE_NUMBER_FILTER% neq 0 set CMD_LINE=!CMD_LINE! ^| findstr /N /R /C:".*"
-if not "!FINDSTR_LINES_FILTER_CMD_LINE!" equ "" set CMD_LINE=!CMD_LINE! ^| findstr !FINDSTR_LINES_FILTER_CMD_LINE!
+if "!FINDSTR_LINES_FILTER_CMD_LINE!" neq "" set CMD_LINE=!CMD_LINE! ^| findstr !FINDSTR_LINES_FILTER_CMD_LINE!
 
 rem echo !CMD_LINE! >&2
 (
@@ -195,7 +195,7 @@ rem echo !CMD_LINE! >&2
   if %OUTPUT_HAS_NUMBER_PREFIX% neq 0 (
     if %FLAG_PRINT_LINE_NUMBER_PREFIX% neq 0 (
       %CMD_LINE% 2>nul
-    ) else ( 
+    ) else (
       for /F "usebackq eol= tokens=1,* delims=:" %%i in (`^(%CMD_LINE: | findstr = ^| findstr %^) 2^>nul`) do echo.%%j
     )
   ) else (

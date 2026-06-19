@@ -1,15 +1,30 @@
-dk_info("DK/DKINSTALL.cmake")
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-if(ANDROID)
+
+dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
+
+if(Android)
 	dk_depend(log)
 	#dk_depend(sdl)		# SDL_AndroidGetExternalStorageState()
 	set(CMAKE_POSITION_INDEPENDENT_CODE ON)		# https://stackoverflow.com/a/38297422
 endif()
-if(IOS OR IOSSIM)
+if(Ios OR Iossim)
 	dk_depend(uikit)
 	#LIST(APPEND DK_SRC DK/DKiOS.mm)
 endif()
-if(LINUX)
+if(Linux)
 	#dk_depend(mesa)
 	#dk_depend(libgl1-mesa-dev)
 	dk_depend(libx11-dev)
@@ -19,14 +34,14 @@ if(LINUX)
 	#dk_depend(simple-getch)
 	dk_depend(libstdc++fs)
 endif()
-if(MAC)
+if(Mac)
 	dk_depend(core_foundation)
 	dk_depend(core_services)
 	dk_depend(core_graphics)
 	dk_depend(carbon)		# for DKOSinfo.cpp Gestalt()
 	dk_depend(iokit)		# for DKMac.cpp IO*() and kIO*()
 endif()
-if(RASPBERRY)
+if(Raspberry)
 	#dk_depend(mesa)
 	#dk_depend(libgl1-mesa-dev)
 	dk_depend(libx11-dev)
@@ -35,16 +50,29 @@ if(RASPBERRY)
 	dk_depend(libxtst-dev)
 	#dk_depend(simple-getch)
 endif()
-if(WIN)
+if(Windows)
 	dk_depend(psapi)		# GetProcessMemoryInfo()
 	dk_depend(pdh)			# PdhOpenQueryA()
 	dk_depend(dxva2)		# GetNumberOfPhysicalMonitorsFromHMONITOR()
 endif()
 
 dk_depend(backward-cpp)
-dk_depend(boxer)
+#dk_depend(boxer)
 dk_depend(fmt)
 
 
-dk_generateCmake(DK)
-dk_assets(DK)
+
+
+# TODO:  dk_configure and dk_build both use a path as a parameter.  However, dk_generateCmake only uses a folder name of the Plugin.
+# To make things more conformed and less restrictive, Lets change dk_generateCmake to also use a path as a parameter.
+# All 4 of those functions below should be able to take ("${CMAKE_CURRENT_LIST_DIR}") as the input parameter.
+
+
+dk_generateCmake()
+dk_assets()
+dk_configure()
+dk_build()
+
+
+
+

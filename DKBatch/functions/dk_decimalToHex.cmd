@@ -1,30 +1,46 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_decimalToHex(decimal)
-::#
-::#	reference: https://www.ascii-code.com
-::#
+rem ####################################################################
+rem # dk_decimalToHex(decimal)
+rem #
+rem #	reference: https://www.ascii-code.com
+rem #
 :dk_decimalToHex
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 1
+%setlocal%
 
-	set "_LOOKUP_=0123456789abcdef"
-	set "_hex_="
-	set "_prefix_="
-	if "%~1" equ "" set "_hex_=00" & goto endlookup
-	set /a A=%~1
-	if %A% lss 0 set /a A=0xfffffff + %A% + 1 & set "_prefix_=f"
-	:loop
-		set /a B=%A% %% 16 & set /a A=%A% / 16
-		set "_hex_=!_LOOKUP_:~%B%,1!%_hex_%"
-		if %A% gtr 0 goto loop
-	:endlookup
-	endlocal & set "dk_decimalToHex=0x%_prefix_%%_hex_%"
+	set /a A=%1
+	set map=0123456789ABCDEF
+	set H=
+
+	:Hexloop
+	set /a B=!A! %%16 & set /a A /=16 
+	set H=!map:~%B%,1!!H!
+	if !A! gtr 0 goto :Hexloop
+	if %1 lss 16 (set H=0%H%)
+	set "dk_decimalToHex=0x%H%"
+
+	:return
+	endlocal & (
+		set "dk_decimalToHex_1=%~1"
+		set "dk_decimalToHex=%dk_decimalToHex%"
+		if "%~2" neq "" (
+			set "%~2=%dk_decimalToHex%"
+		) else (
+			rem echo %dk_decimalToHex%
+		)
+	)
 %endfunction%
 
 
@@ -32,12 +48,12 @@ setlocal enableDelayedExpansion
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	%dk_call% dk_set myDecimal 45
-	%dk_call% dk_decimalToHex "%myDecimal%"
-	%dk_call% dk_printVar dk_decimalToHex
+	for /l %%N in (0 1 999999) do (
+		%dk_call% dk_decimalToHex %%N
+		%dk_call% dk_echo "!dk_decimalToHex_1! = !dk_decimalToHex!"
+	)
 %endfunction%

@@ -1,0 +1,6 @@
+############ pestudio ############
+# https://www.winitor.com/
+# https://www.winitor.com/tools/pestudio/current/pestudio.zip
+
+pesuudio_Type=Tool
+pestudio_Import=https://www.winitor.com/tools/pestudio/current/pestudio.zip

@@ -1,19 +1,22 @@
-#/usr/bin/cmake -P 
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}") 
-set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/") 
-endif() 
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake") 
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
  
  
 ###### browsh ###### 
 # https://github.com/browsh-org/browsh/releases/download/v1.8.0/browsh_1.8.0_windows_amd64.exe 
  
-### INSTALL ### 
-dk_validate		(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()") 
-dk_getFileParams("$ENV{DKIMPORTS_DIR}/browsh/dkconfig.txt")
+dk_import()
 
-dk_validate(dk_host_triple "dk_host_triple()")
-if(WIN_HOST)
-	set(BROWSH_IMPORT "${BROWSH_WIN_X86_64_IMPORT}")
-endif()
-dk_import		(${BROWSH_IMPORT} NAME browsh) 
+dk_download(${browsh_Url} ${browsh})
+#dk_exec(${dk_download})

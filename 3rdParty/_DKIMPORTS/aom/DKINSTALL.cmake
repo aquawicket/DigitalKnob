@@ -1,36 +1,37 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ aom ############
 # Alliance for Open Media
 # https://aomedia.googlesource.com/aom.git
-#
 
-### DEPEND ###
-dk_depend			(nasm)
+dk_validate(nasm "dk_depend(nasm)")
 
-### IMPORT ###
-dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam		($ENV{DKIMPORTS_DIR}/aom/dkconfig.txt AOM_IMPORT)
-dk_import			(${AOM_IMPORT} NAME aom)
+dk_import()
 
-### LINK ###
-dk_validate			(target_triple "dk_target_triple()")
-dk_include			(${AOM_DIR})
+dk_include			(${aom})
 if(MSVC)
-	dk_libDebug		(${AOM_DEBUG_DIR}/aom.lib)
-	dk_libRelease	(${AOM_RELEASE_DIR}/aom.lib)
+	dk_libDebug		(${aom_Debug_Dir}/aom.lib)
+	dk_libRelease	(${aom_Release_Dir}/aom.lib)
 else()
-	dk_libDebug		(${AOM_DEBUG_DIR}/libaom.a)
-	dk_libRelease	(${AOM_RELEASE_DIR}/libaom.a)
+	dk_libDebug		(${aom_Debug_Dir}/libaom.a)
+	dk_libRelease	(${aom_Release_Dir}/libaom.a)
 endif()
 
 ### GENERATE ###
-dk_configure		(${AOM_DIR}) # -DAOM_TARGET_CPU=generic)
+dk_configure		(${aom}) # -DAOM_TARGET_CPU=generic)
 
 ### COMPILE ###
-dk_build			(${AOM_DIR})
+dk_build			(${aom})

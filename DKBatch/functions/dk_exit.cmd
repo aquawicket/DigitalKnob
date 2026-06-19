@@ -1,38 +1,60 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-if not defined dk_exit_PAUSE set "dk_exit_PAUSE=1"
-::################################################################################
-::# dk_exit(exit_code)
-::#
-::#
+
+rem #################### dk_exit settings ##########################################
+rem set "dk_exit_PAUSE_ON_EXIT=1"
+rem set "dk_exit_PAUSE_ON_ERROR=1"
+rem ################################################################################
+rem # dk_exit(exit_code)
+rem #
+rem #		Exit the process or script with an exit_ststus
+rem #
 :dk_exit
-::setlocal
-	%dk_call% dk_debugFunc 0 1
- 
-	if "%~1" gtr "%EXIT_CODE%" %dk_call% dk_set EXIT_CODE %~1
+%setlocal%
+
+	if "%~1" neq "%exit_code%" 			(%dk_call% dk_set exit_code %~1)
+	if errorlevel 1 					(set "exit_code=%errorlevel%")
+    if "%errorlevel%" gtr "%exit_code%" (set "exit_code=%errorlevel%")
+    if "%~1" gtr "%exit_code%" 			(set "exit_code=%~1")
+   
+    if "%dk_exit_PAUSE_ON_EXIT%" equ "1" (
+		%dk_call% dk_echo "*** dk_exit_PAUSE_ON_EXIT ***"
+		set "PAUSE=1"
+	)
+	if "%dk_exit_PAUSE_ON_ERROR%" equ "1" (
+		if "%exit_code%" neq "0" (
+			%dk_call% dk_echo "*** dk_exit_PAUSE_ON_ERROR ***"
+			set "PAUSE=1"
+		)
+	)
 	
-    ::if "%EXIT_CODE%" equ "" set "EXIT_CODE=0"
-	if ERRORLEVEL 1 set "EXIT_CODE=%errorlevel%"
-    if "%errorlevel%" gtr "%EXIT_CODE%" set "EXIT_CODE=%errorlevel%"
-    if "%~1" gtr "%EXIT_CODE%" set "EXIT_CODE=%~1"
-    
-    if "%dk_exit_PAUSE%" equ "1" %dk_call% dk_echo "*** dk_exit_PAUSE: EXIT_CODE:%EXIT_CODE% ***" && %dk_call% dk_pause "Press any key to exit . . ."
-    
-    exit %EXIT_CODE%
+	%dk_call% dk_echo "exit_code:'%exit_code%'"
+	
+	if "%PAUSE%" equ "1" (
+		%dk_call% dk_pause "Press any key to exit . . ."
+	)
+    exit %exit_code%
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    ::%dk_call% dk_exit
-    ::%dk_call% dk_exit 0
+    rem %dk_call% dk_exit
+    rem %dk_call% dk_exit 0
     %dk_call% dk_exit 13
 %endfunction%

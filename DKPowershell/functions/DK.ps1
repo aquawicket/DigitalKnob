@@ -1,15 +1,16 @@
-if(${env:DK_PS1}){return} else{ ${env:DK_PS1}=1 }	# include_guard
+if(${env:DKINIT_ps1}){return 0;} else{ ${env:DKINIT_ps1}=1; }
+
 
 ### Print Version Info ###
-Write-Host ""
-$DKSHELL = (Get-Process -Id $pid).Name
-$DKSHELL_VERSION = $PSVersionTable.PSVersion.ToString()
-$DKSHELL_PATH = (get-command $DKSHELL).Path
-$global:ESC = "$([char]27)" 				# escape character
-Write-Host "${ESC}[44m ${ESC}[30m $DKSHELL Version $DKSHELL_VERSION ${ESC}[0m"
-Write-Host "DKSHELL_PATH = $DKSHELL_PATH"
-Write-Host "DKSCRIPT_PATH = $DKSCRIPT_PATH"
-Write-Host "'"
+Write-Host "";
+${env:DKSHELL} = (Get-Process -Id $pid).Name;
+${env:DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
+${env:DKSHELL_PATH} = (get-command ${env:DKSHELL}).Path -replace "\\", "/";
+if(!${global:ESC}){ ${global:ESC} = "$([char]27)"; }				# escape character
+Write-Host "${ESC}[44m ${ESC}[30m ${env:DKSHELL} Version ${env:DKSHELL_VERSION} ${ESC}[0m";
+Write-Host "DKSHELL_PATH = ${env:DKSHELL_PATH}";
+${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace "\\", "/";
+Write-Host "DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 
 
 #####################################################################
@@ -19,76 +20,93 @@ Write-Host "'"
 #
 function DK() {
 
+	# Error trap
+	# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_trap?view=powershell-7.4&WT.mc_id=M365-MVP-5000284
+	trap { 
+		'DigitalKnob found an Error';
+		dk_call dk_stacktrace;
+		Read-Host;
+	}
+	
 	###### Initialize Language specifics ######
-	dk_init
+	dk_init;
 	
 	###### Reload Main Script with powershell ######
-	# dk_reloadWithPowershell
+	# dk_reloadWithPowershell;
 	
 	############ Get DKPOWERSHELL variables ############
-	dk_DKPOWERSHELL_VARS
+	dk_DKPOWERSHELL_VARS;
 	
 	############ Get DKHTTP variables ############
-	dk_DKHTTP_VARS
+	dk_DKHTTP_VARS;
 
-	############ get dk_source and dk_call ######
-	dk_initFiles
+	############ get dk_source AND dk_call ######
+	dk_initFiles;
 	
 	############ Setup dk_callStack ############
-	#dk_setupCallstack
-	#call dk_callStack
-	#:dk_callStackReturn
+	#dk_setupCallstack;
+	#call dk_callStack;
+	#:dk_callStackReturn;
 	
 	############ Get DKSCRIPT variables ############
-	dk_DKSCRIPT_VARS
+	dk_DKSCRIPT_VARS;
 	
 	##### CD into the DKSCRIPT_DIR directory #####
-	#cd "${DKSCRIPT_DIR}"
+	#cd "${DKSCRIPT_DIR}";
 	
 	############ Set Options ############
-	#dk_setOptions
+	#dk_setOptions;
 	
 	
 	############ LOAD FUNCTION FILES ############
-	dk_source __TIME__
-	dk_source __FILE__
-	dk_source __LINE__
-	dk_source __FUNCTION__
-	dk_source __ARGC__
-	dk_source __ARGV__
-	dk_source __CALLER__
-	dk_source dk_debugFunc
-	dk_call dk_color 1
-	dk_call dk_logo
+	dk_source __TIME__;
+	dk_source __FILE__;
+	dk_source __LINE__;
+	dk_source __FUNCTION__;
+	dk_source __ARGC__;
+	dk_source __ARGV__;
+	dk_source __CALLER__;
+	dk_source dk_debugFunc;
+	dk_call dk_color 1;
+	dk_call dk_logo;
 	
-	if(Test-Path "${DKSCRIPT_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
-	} elseif(Test-Path "${DKBRANCH_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	if(Test-Path "${env:DKSCRIPT_DIR}/dkconfig.txt"){
+		dk_call dk_fileVariables "${env:DKSCRIPT_DIR}/dkconfig.txt";
+	} elseif(Test-Path "${env:DKBRANCH_DIR}/dkconfig.txt"){
+		dk_call dk_fileVariables "${env:DKBRANCH_DIR}/dkconfig.txt";
 	}
-	#dk_source ${DKSCRIPT_PATH}
+	#dk_source ${env:DKSCRIPT_PATH}
 	
-	#Write-Output "env:PATH = $env:PATH"
-	#$env:PATH += ";${DKPOWERSHELL_FUNCTIONS_DIR}"
+	#Write-Output "env:PATH = ${env:PATH}";
+	#${env:PATH} += ";${env:DKPOWERSHELL_FUNCTIONS_DIR}";
 	
-	#. DKPOWERSHELL_FUNCTIONS_DIR/dk_thisFunction
+	
+	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
 	
 	###### DKTEST MODE ######
-	if(!("${DKSCRIPT_EXT}" -eq ".ps1")){ return }
-	#if(!(dk_call dk_fileContains "function DKTEST()")){ return }
-
-	Write-Output ""
-	Write-Output "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}"
-	Write-Output ""
-	#$include_guard = $DKSCRIPT_NAME.Substring(0, $DKSCRIPT_NAME.lastIndexOf('.'))
-	#dk_unset $include_guard
-	. ${DKSCRIPT_PATH}
-	DKTEST
-	Write-Output ""
-	Write-Output "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}"
-	Write-Output ""
-	Read-Host -Prompt "Press Enter to exit" 
-	exit
+	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:DKTEST()"){
+		dk_call dk_echo "\n";
+		dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_PATH ###### DKTEST MODE ########${clr}\n";
+		dk_call dk_echo  "\n";
+		. ${DKSCRIPT_PATH};
+		DKTEST;
+		dk_call dk_echo "\n";
+		dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_PATH ######## END TEST #########${clr}\n";
+		dk_call dk_echo "\n";
+		dk_call dk_pause "Press Enter to exit";
+		dk_call dk_exit
+	}
+	
+	
+	###### DKSCRIPT_NAME() ######
+	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:${DKSCRIPT_NAME}()"){
+		. ${DKSCRIPT_PATH};
+		dk_call ${DKSCRIPT_PATH};
+		dk_call dk_exit
+	}
+	
+	###### DKSCRIPT_PATH ######
+	. ${DKSCRIPT_PATH};
 }
 
 
@@ -98,77 +116,111 @@ function DK() {
 # dk_echo()
 #
 function dk_echo(){
-	$allArgs = $PsBoundParameters.Values + ${args} 
-	Write-Host $allArgs
+	if(!($args[0])){
+		${message} = "\n";
+	} else {
+		${message} = "${args}";
+	}
+	if("${dk_echo_NONEWLINE}" -eq "1"){
+		${message} = ${message} -replace "\\n", "`n";
+		Write-Host -NoNewline "${message}";
+	} else {
+		${message} = ${message} -replace "\\n", "";
+		Write-Host "${message}";
+	}
 }
 
 ##################################################################################
 # dk_init()
 #
 function dk_init(){
-	Write-Host "Loading DKPowershell DigitalKnob . . ."
+	Write-Host "Loading DKPowershell DigitalKnob . . .";
 }
 
 ##################################################################################
 # dk_DKPOWERSHELL_VARS()
 #
 function dk_DKPOWERSHELL_VARS(){
-	$env:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	$global:DKPOWERSHELL_FUNCTIONS_DIR = Split-Path -Parent $PSCommandPath
-	$global:DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/';
-	$global:DKPOWERSHELL_DIR = Split-Path -Parent ${DKPOWERSHELL_FUNCTIONS_DIR}
-	$global:DKPOWERSHELL_FUNCTIONS_DIR_ = "${DKPOWERSHELL_FUNCTIONS_DIR}/"
+	Write-Host "PSCommandPath = ${PSCommandPath}";
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR}) 	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= Split-Path -Parent ${PSCommandPath}; }
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/'; }
+	if(!${env:DKPOWERSHELL_DIR})			{ ${env:DKPOWERSHELL_DIR} 				= Split-Path -Parent ${env:DKPOWERSHELL_FUNCTIONS_DIR}; }
+	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR_})	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR_}  	= "${env:DKPOWERSHELL_FUNCTIONS_DIR}/";}
+	
+	${global:DKPOWERSHELL_DIR} 				= ${env:DKPOWERSHELL_DIR};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR};
+	${global:DKPOWERSHELL_FUNCTIONS_DIR_} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR_};
 }
 
 ##################################################################################
 # dk_DKHTTP_VARS()
 #
 function dk_DKHTTP_VARS(){
-	$global:DKHTTP_DIGITALKNOB_DIR = "https://raw.githubusercontent.com/aquawicket/DigitalKnob"
-	$global:DKHTTP_DKBRANCH_DIR = "$DKHTTP_DIGITALKNOB_DIR/Development"
-	$global:DKHTTP_DKPOWERSHELL_DIR = "$DKHTTP_DKBRANCH_DIR/DKPowershell"
-	$global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = "$DKHTTP_DKPOWERSHELL_DIR/functions"
+	if(!${env:DKHTTP_DIGITALKNOB_DIR})				{ ${env:DKHTTP_DIGITALKNOB_DIR} 			= "http://aquawicket.com/DigitalKnob"; }
+	if(!${env:DKHTTP_DKBRANCH_DIR})					{ ${env:DKHTTP_DKBRANCH_DIR}				= "${env:DKHTTP_DIGITALKNOB_DIR}/Development"; }
+	if(!${env:DKHTTP_DKPOWERSHELL_DIR})				{ ${env:DKHTTP_DKPOWERSHELL_DIR}			= "${env:DKHTTP_DKBRANCH_DIR}/DKPowershell"; }
+	if(!${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}	= "${env:DKHTTP_DKPOWERSHELL_DIR}/functions"; }
+	
+	${global:DKHTTP_DIGITALKNOB_DIR} 			= ${env:DKHTTP_DIGITALKNOB_DIR};
+	${global:DKHTTP_DKBRANCH_DIR} 				= ${env:DKHTTP_DKBRANCH_DIR}; 
+	${global:DKHTTP_DKPOWERSHELL_DIR} 			= ${env:DKHTTP_DKPOWERSHELL_DIR}; 
+	${global:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR} = ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR};
 }
 
 ##################################################################################
 # dk_initFiles
 #
 function dk_initFiles(){
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_source.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_call.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" }
-	. ${DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1" }
+	. "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_source.ps1";
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1" }
+	. "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_call.ps1";
 }
 
 ##################################################################################
 # dk_setupCallstack()
 #
 function dk_setupCallstack(){
-	if(!(Test-Path "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1")){ Invoke-WebRequest -URI "$DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR/dk_callStack.ps1" -OutFile "${DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" }
+	if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1")){ Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" -OutFile "${env:DKPOWERSHELL_FUNCTIONS_DIR}/dk_callStack.ps1" }
 }
 
 ##################################################################################
 # dk_DKSCRIPT_VARS()
 #
 function dk_DKSCRIPT_VARS(){
-	if(!${DKSCRIPT_PATH}){ $global:DKSCRIPT_PATH = Get-EntryPointAbsFilePath }
-	$global:DKSCRIPT_PATH = ${DKSCRIPT_PATH} -replace '\\', '/';
-	if(!(Test-Path ${DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH not found!"; exit } 
-	$global:DKSCRIPT_ARGS = ${args}
-	$global:DKSCRIPT_DIR = Split-Path -Parent ${DKSCRIPT_PATH}
-	$global:DKSCRIPT_DIR = ${DKSCRIPT_DIR} -replace '\\', '/';
-	if(!(Test-Path ${DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR not found!"; exit } 
-	$global:DKSCRIPT_NAME = Split-Path -Leaf ${DKSCRIPT_PATH}
-	if(!${DKSCRIPT_EXT}){ $global:DKSCRIPT_EXT = [System.IO.Path]::GetExtension("$DKSCRIPT_PATH") }
+	### DKSCRIPT_PATH ###
+	if(!${env:DKSCRIPT_PATH}){ ${env:DKSCRIPT_PATH} = Get-EntryPointAbsFilePath; }
+	${env:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH} -replace '\\', '/';
+	if(!(Test-Path ${env:DKSCRIPT_PATH})){ dk_call dk_echo "DKSCRIPT_PATH:'${env:DKSCRIPT_PATH}' NOT found!\n"; exit -1; } 
+	
+	### DKSCRIPT_ARGS ###
+	if(!${env:DKSCRIPT_ARGS}){ ${env:DKSCRIPT_ARGS} = ${args}; }
+	
+	### DKSCRIPT_DIR ###
+	if(!${env:DKSCRIPT_DIR}){ ${env:DKSCRIPT_DIR} = Split-Path -Parent "${env:DKSCRIPT_PATH}"; }
+	${env:DKSCRIPT_DIR} = ${env:DKSCRIPT_DIR} -replace '\\', '/';
+	if(!(Test-Path ${env:DKSCRIPT_DIR})){ dk_call dk_echo "DKSCRIPT_DIR:'${env:DKSCRIPT_DIR}' NOT found!\n"; exit -1; } 
+	
+	### DKSCRIPT_NAME ###
+	if(!${env:DKSCRIPT_NAME}){ ${env:DKSCRIPT_NAME} = Split-Path -Leaf "${env:DKSCRIPT_PATH}"; }
+	
+	### DKSCRIPT_EXT ###
+	if(!${env:DKSCRIPT_EXT}){ ${env:DKSCRIPT_EXT} = [System.IO.Path]::GetExtension("${env:DKSCRIPT_PATH}"); }
+	
+	${global:DKSCRIPT_PATH} = ${env:DKSCRIPT_PATH};
+	${global:DKSCRIPT_ARGS} = ${env:DKSCRIPT_ARGS};
+	${global:DKSCRIPT_DIR}	= ${env:DKSCRIPT_DIR};
+	${global:DKSCRIPT_NAME} = ${env:DKSCRIPT_NAME};
+	${global:DKSCRIPT_EXT} 	= ${env:DKSCRIPT_EXT};
 }
 
 ##################################################################################
 # Get-EntryPointAbsFilePath()
 #
 function Get-EntryPointAbsFilePath() {
-    # NOTE 1: Do not use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (not entry point script).
-    # NOTE 2: '$global:PSScriptRoot' is not the same as '$PSScriptRoot' and seems to correspond to the entry point script directory,
-    # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but not
+    # NOTE 1: Do NOT use '$MyInvocation.PSScriptRoot' because it corresponds to the path of the calling script (NOT entry point script).
+    # NOTE 2: '$global:PSScriptRoot' is NOT the same as '$PSScriptRoot' AND seems to correspond to the entry point script directory,
+    # but it is set only when the main script is invoked from powershell command like [PowerShell.exe -File "MainScript.ps1"] but NOT
     # when "MainScript.ps1" is invoked from a PowerShell session (prompt) like [PS C:/Temp>. MainScript.ps1].
     $CallStack = Get-PSCallStack
     # We take the last stack element (correponding to the first call).
@@ -177,11 +229,11 @@ function Get-EntryPointAbsFilePath() {
     $FirstCall = $CallStack[$CallStack.Count - 1];
     if($null -ne $FirstCall.ScriptName){ return $FirstCall.ScriptName; }
     # We take the second call (assuming that we are run under a PowerShell session).
-    # To make sure this call is coming from the execution of a script file (and not from the execution a cmdlet in the interpreter, like a function in a module),
+    # To make sure this call is coming from the execution of a script file (AND NOT from the execution a cmdlet in the interpreter, like a function in a module),
     # we check the 'FunctionName' property which equals "<ScriptBlock>" when a call is performed from a script block, like a ps1 file.
-    # This test is not required for the first call, as a PowerShell module can't be run.
+    # This test is NOT required for the first call, as a PowerShell module can't be run.
     $SecondCall = $CallStack[$CallStack.Count - 2];
-    if($null -ne $SecondCall.ScriptName -and $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
+    if($null -ne $SecondCall.ScriptName -AND $SecondCall.FunctionName -eq "<ScriptBlock>") { return $SecondCall.ScriptName; }
     throw "No PowerShell entry point script could be found. This cmdlet ""$($MyInvocation.MyCommand.Name)"" is intended to be called only via the execution of a script file.";
 }
 

@@ -1,26 +1,35 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_strlen(string_var rtn_var)
-::#
-::#
+rem ####################################################################
+rem # dk_strlen(string_var)
+rem #
+rem #
 :dk_strlen
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 2
+%setlocal%
 
     set "s=#!%~1!"
-    set "len=0"
+    set "dk_strlen=0"
     for %%N in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-        if not "!s:~%%N,1!" equ "" (
-            set /a "len+=%%N"
+        if "!s:~%%N,1!" neq "" (
+            set /a "dk_strlen+=%%N"
             set "s=!s:~%%N!"
         )
     )
-    endlocal & set "%2=%len%"
+    endlocal & (
+		set "dk_strlen=%dk_strlen%"
+	)
 %endfunction%
 
 
@@ -29,13 +38,11 @@ setlocal enableDelayedExpansion
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    %dk_call% dk_set str "some example string"
-    %dk_call% dk_strlen str length
-	%dk_call% dk_echo "%str%"
-    %dk_call% dk_echo "str is %length% characters long"
+    set "str=some example string"
+    %dk_call% dk_strlen str
+	%dk_call% dk_echo "dk_strlen = %dk_strlen%"
 %endfunction%

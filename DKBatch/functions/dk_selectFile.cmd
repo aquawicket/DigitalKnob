@@ -1,24 +1,45 @@
-<# : chooser.bat
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+<# : dk_selectFile.cmd
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_selectFile(<rtn_var>:optional)
-::#
+rem ################################################################################
+rem # dk_selectFile()
+rem #
 :dk_selectFile
-setlocal
-	%dk_call% dk_debugFunc 1
+%setlocal%
 	
-	%dk_call% dk_validate POWERSHELL_EXE "%dk_call% dk_POWERSHELL_EXE"
-    for /f "delims=" %%I in ('%POWERSHELL_EXE% -noprofile "iex (${%~f0} | out-string)"') do (
-		set "dk_selectFile=%%~I"
-    )
+	rem ### Try powershell
+	%dk_call% dk_validate powershell.exe %dk_call% dk_findFile powershell.exe
+	if exist "%powershell.exe%" (
+		for /f "delims=" %%G in ('%powershell.exe:/=\% -noprofile "iex (${%~f0} | out-string)"') do (
+			set "dk_selectFile=%%~G"
+			goto:return
+		)
+	)
+	
+	rem ### Try mshta.exe
+	%dk_call% dk_validate mshta.exe %dk_call% dk_findFile mshta.exe
+	if NOT EXIST "%mshta.exe%" (goto:return)
+	set dialog="about:<input type=file id=FILE><script>FILE.click();new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).WriteLine(FILE.value);close();resizeTo(0,0);</script>"
+	for /f "tokens=* delims=" %%p in ('mshta.exe %dialog%') do (
+		set "dk_selectFile=%%p"
+		goto:return
+	)
+	
+	:return
 	endlocal & (
 		set "dk_selectFile=%dk_selectFile:\=/%"
-		if not "%~1" equ "" (set "%~1=%dk_selectFile:\=/%")
 	)
 %endfunction%
 
@@ -26,14 +47,15 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    %dk_call% dk_selectFile mySelection
-    %dk_call% dk_echo "dk_selectFile = '%dk_selectFile%'"
-	%dk_call% dk_echo "mySelection = '%mySelection%'"
+	%dk_call% dk_selectFile
+    %dk_call% dk_debug "dk_selectFile = '%dk_selectFile%'"
+	
+    %dk_call% dk_selectFile & set "myFile=!dk_selectFile!"
+    %dk_call% dk_debug "myFile = '%myFile%'"
 %endfunction%
 
 

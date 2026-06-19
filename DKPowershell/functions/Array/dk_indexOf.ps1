@@ -1,14 +1,14 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_indexOf){ $Array_dk_indexOf = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_indexOf){ $Array_dk_indexOf_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
-# Array:dk_indexOf(array, searchElement) -> rtn_val
-# Array:dk_indexOf(array, searchElement, fromIndex) -> rtn_val
+# Array/dk_indexOf(array, searchElement) -> rtn_val
+# Array/dk_indexOf(array, searchElement, fromIndex) -> rtn_val
 #
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
 #
-function Global:Array:dk_indexOf($array, $searchElement) {
-	dk_debugFunc 2
+function Global:Array/dk_indexOf($array, $searchElement) {
+	dk_debugFunc 2;
 	
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly } 
 	else { $_array_ = $array }
@@ -29,25 +29,25 @@ function Global:Array:dk_indexOf($array, $searchElement) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$myArray = @('a', 'b', 'c', 'd', 'e')
 	
-	$indexA = dk_call Array:dk_indexOf myArray "a" 
-	dk_call dk_echo "indexA = ${indexA}"
+	$indexA = dk_call Array/dk_indexOf myArray "a" 
+	dk_call dk_echo "indexA = ${indexA}\n"
 	
-	$indexB = dk_call Array:dk_indexOf $myArray "b"
-	dk_call dk_echo "indexB = ${indexB}"
+	$indexB = dk_call Array/dk_indexOf $myArray "b"
+	dk_call dk_echo "indexB = ${indexB}\n"
 	
-	$indexC = dk_call Array:dk_indexOf myArray "c" 
-	dk_call dk_echo "indexC = ${indexC}"
+	$indexC = dk_call Array/dk_indexOf myArray "c" 
+	dk_call dk_echo "indexC = ${indexC}\n"
 	
-	$indexD = dk_call Array:dk_indexOf $myArray "d" indexD
-	dk_call dk_echo "indexD = ${indexD}"
+	$indexD = dk_call Array/dk_indexOf $myArray "d" indexD
+	dk_call dk_echo "indexD = ${indexD}\n"
 	
-	$indexE = dk_call Array:dk_indexOf myArray "e" 
-	dk_call dk_echo "indexE = ${indexE}"
+	$indexE = dk_call Array/dk_indexOf myArray "e" 
+	dk_call dk_echo "indexE = ${indexE}\n"
 	
-	$indexN = dk_call Array:dk_indexOf $myArray "nonExistant" 
-	dk_call dk_echo "indexN = ${indexN}"
+	$indexN = dk_call Array/dk_indexOf $myArray "nonExistant" 
+	dk_call dk_echo "indexN = ${indexN}\n"
 }

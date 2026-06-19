@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="tree v2.1.0 © 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro">
+ <title>DigitalKnob</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+ </style>
+</head>
+<body>
+	<h1>DigitalKnob</h1><p>
+	[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:44]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./">.</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:33]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./Array/">Array</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:33]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./Test/">Test</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1578&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__ARGC__.sh">__ARGC__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3315&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__ARG__.sh">__ARG__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2355&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__ARGV__.sh">__ARGV__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1607&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__CALLER__.sh">__CALLER__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3406&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayAt.sh">dk_arrayAt.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5024&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayConcat.sh">dk_arrayConcat.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3601&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayCopyWithin.sh">dk_arrayCopyWithin.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2093&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayFlat.sh">dk_arrayFlat.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4538&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayIncludes.sh">dk_arrayIncludes.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3760&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayJoin.sh">dk_arrayJoin.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2904&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayLength.sh">dk_arrayLength.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3397&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayPop.sh">dk_arrayPop.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3596&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayPush.sh">dk_arrayPush.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4327&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayShift.sh">dk_arrayShift.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3681&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayUnshift.sh">dk_arrayUnshift.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2857&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertArgs.sh">dk_assertArgs.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3982&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertPath.sh">dk_assertPath.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2549&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertVar.sh">dk_assertVar.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1931&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_atob.sh">dk_atob.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2748&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_basename.sh">dk_basename.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1959&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_btoa.sh">dk_btoa.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3458&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_buildApp.sh">dk_buildApp.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5682&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_buildMain.sh">dk_buildMain.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1738&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_builtins.sh">dk_builtins.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1795&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_bundleSource.sh">dk_bundleSource.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1771&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBash.sh">dk_callDKBash.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3804&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBatch.sh">dk_callDKBatch.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1768&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCmake.sh">dk_callDKCmake.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCpp.sh">dk_callDKCpp.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1222&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKC.sh">dk_callDKC.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHta.sh">dk_callDKHta.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHtml.sh">dk_callDKHtml.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJavascript.sh">dk_callDKJavascript.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJava.sh">dk_callDKJava.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPhp.sh">dk_callDKPhp.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2396&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPowershell.sh">dk_callDKPowershell.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPython.sh">dk_callDKPython.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1229&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKVbs.sh">dk_callDKVbs.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2155&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_call.sh">dk_call.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2307&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_chdir.sh">dk_chdir.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1678&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_chown.sh">dk_chown.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1912&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_clearCmakeCache.sh">dk_clearCmakeCache.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1504&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_clearScreen.sh">dk_clearScreen.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2715&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_cmakeEval.sh">dk_cmakeEval.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21843&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_color.sh">dk_color.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1800&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_commandExists.sh">dk_commandExists.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1858&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_confirm.sh">dk_confirm.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2278&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_containsCI.sh">dk_containsCI.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2172&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_contains.sh">dk_contains.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4449&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_convertToCIdentifier.sh">dk_convertToCIdentifier.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2878&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_copy.sh">dk_copy.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2268&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_createSymlink.sh">dk_createSymlink.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1546&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_crlf.sh">dk_crlf.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1787&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_crlfToLf.sh">dk_crlfToLf.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1868&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_currentDirectory.sh">dk_currentDirectory.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2996&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debugFunc.sh">dk_debugFunc.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1656&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debug.sh">dk_debug.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1750&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_decimalToAscii.sh">dk_decimalToAscii.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1626&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_decimalToHex.sh">dk_decimalToHex.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2359&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_defined.sh">dk_defined.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1896&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_delete.sh">dk_delete.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2513&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_deleteTempFiles.sh">dk_deleteTempFiles.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2220&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_depend.sh">dk_depend.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2494&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DIGITALKNOB_DIR.sh">dk_DIGITALKNOB_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1935&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_dirname.sh">dk_dirname.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2088&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DK3RDPARTY_DIR.sh">dk_DK3RDPARTY_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6591&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKBRANCH_DIR.sh">dk_DKBRANCH_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2104&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKCACHE_DIR.sh">dk_DKCACHE_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2058&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKDESKTOP_DIR.sh">dk_DKDESKTOP_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2191&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKDOWNLOAD_DIR.sh">dk_DKDOWNLOAD_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3698&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKHOME_DIR.sh">dk_DKHOME_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2089&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKIMPORTS_DIR.sh">dk_DKIMPORTS_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2419&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKTOOLS_DIR.sh">dk_DKTOOLS_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2149&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKUSERNAME.sh">dk_DKUSERNAME.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1594&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_downloadDK.sh">dk_downloadDK.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7549&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_download.sh">dk_download.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3501&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.sh">dk_echo.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2603&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_enterManually.sh">dk_enterManually.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1652&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_error.sh">dk_error.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1554&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_errorStatus.sh">dk_errorStatus.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6973&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_escapeSequences.sh">dk_escapeSequences.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2395&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exec.sh">dk_exec.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2041&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exit.sh">dk_exit.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1590&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_export.sh">dk_export.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1995&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_extract.sh">dk_extract.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1655&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fatal.sh">dk_fatal.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1652&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileAppend.sh">dk_fileAppend.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2025&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileContains.sh">dk_fileContains.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1519&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileSize.sh">dk_fileSize.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1929&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileToArray.sh">dk_fileToArray.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2466&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileToMatrix.sh">dk_fileToMatrix.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1890&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileVariable.sh">dk_fileVariable.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4934&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileVariables.sh">dk_fileVariables.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1592&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileWrite.sh">dk_fileWrite.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3886&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_firewallAllow.sh">dk_firewallAllow.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1650&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fixme.sh">dk_fixme.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1744&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_freshRun.sh">dk_freshRun.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9899&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_generate.sh">dk_generate.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1533&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getAttributes.sh">dk_getAttributes.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1897&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getcwd.sh">dk_getcwd.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1644&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getDefaultGateway.sh">dk_getDefaultGateway.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2957&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getDirectories.sh">dk_getDirectories.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3046&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getExtension.sh">dk_getExtension.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2878&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFiles.sh">dk_getFiles.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1613&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFirstPath.sh">dk_getFirstPath.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1660&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFullPath.sh">dk_getFullPath.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1611&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFuncName.sh">dk_getFuncName.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2259&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getParameterValue.sh">dk_getParameterValue.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2139&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getShellType.sh">dk_getShellType.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1694&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getTime.sh">dk_getTime.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2288&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getUrl.sh">dk_getUrl.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1730&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getUsername.sh">dk_getUsername.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2522&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitBundle.sh">dk_gitBundle.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2075&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitCheckRemote.sh">dk_gitCheckRemote.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4098&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitCommit.sh">dk_gitCommit.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1690&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitDiffSummary.sh">dk_gitDiffSummary.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1650&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitStatus.sh">dk_gitStatus.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4267&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitUpdate.sh">dk_gitUpdate.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1663&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_hasValue.sh">dk_hasValue.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1630&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_haveInternet.sh">dk_haveInternet.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1648&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_hexToAscii.sh">dk_hexToAscii.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1707&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_hexToDecimal.sh">dk_hexToDecimal.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2004&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_hexToVariable.sh">dk_hexToVariable.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3627&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DKHOME_DIR.sh">DKHOME_DIR.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5718&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Arch.sh">dk_Host_Arch.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5647&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Env.sh">dk_Host_Env.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5523&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Os.sh">dk_Host_Os.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1972&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Tuple.sh">dk_Host_Tuple.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4294&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_httpStatus.sh">dk_httpStatus.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3840&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_import.sh">dk_import.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25279&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_importVariables.sh">dk_importVariables.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2011&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_includeGuard.sh">dk_includeGuard.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2172&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_includes.sh">dk_includes.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1648&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_info.sh">dk_info.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;106&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_inputBox.sh">dk_inputBox.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1995&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installAndroidNdk.sh">dk_installAndroidNdk.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1689&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installClang.sh">dk_installClang.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6130&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installCmake.sh">dk_installCmake.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3052&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installContextMenu.sh">dk_installContextMenu.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1894&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installEmscripten.sh">dk_installEmscripten.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2271&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installGit.sh">dk_installGit.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1881&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installHomebrew.sh">dk_installHomebrew.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1567&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installMsys2.sh">dk_installMsys2.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3582&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installPackage.sh">dk_installPackage.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2432&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isArray.sh">dk_isArray.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2829&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isChildPathOf.sh">dk_isChildPathOf.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1842&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isDirectory.sh">dk_isDirectory.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2115&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isEmpty.sh">dk_isEmpty.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2004&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isFunction.sh">dk_isFunction.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2863&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isNumber.sh">dk_isNumber.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2522&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isString.sh">dk_isString.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1827&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isUrl.sh">dk_isUrl.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2098&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isVariable.sh">dk_isVariable.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1712&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboardInput.sh">dk_keyboardInput.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1815&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboardInputTimeout.sh">dk_keyboardInputTimeout.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;24414&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboard.sh">dk_keyboard.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2443&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_listToArray.sh">dk_listToArray.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5920&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_load.sh">dk_load.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3910&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_load.sh.BACKUP.sh">dk_load.sh.BACKUP.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2102&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_logo.sh">dk_logo.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10907&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_log.sh">dk_log.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1593&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_messageBox.sh">dk_messageBox.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2072&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_minMaxArgs.sh">dk_minMaxArgs.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1469&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mkdir.sh">dk_mkdir.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_move.sh">dk_move.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1660&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_notice.sh">dk_notice.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2833&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_onError.sh">dk_onError.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1723&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_onEvent.sh">dk_onEvent.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2163&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_onExit.sh">dk_onExit.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1584&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_onSigterm.sh">dk_onSigterm.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1588&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_onSigusr1.sh">dk_onSigusr1.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2452&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_packageInstalled.sh">dk_packageInstalled.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1788&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathExists.sh">dk_pathExists.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3170&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathToNative.sh">dk_pathToNative.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3122&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathToWindows.sh">dk_pathToWindows.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1870&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pause.sh">dk_pause.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4722&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pickUpdate.sh">dk_pickUpdate.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2001&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printFuncInfo.sh">dk_printFuncInfo.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2391&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printVariables.sh">dk_printVariables.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6910&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printVar.sh">dk_printVar.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1529&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pullAssets.sh">dk_pullAssets.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1530&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pushAssets.sh">dk_pushAssets.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2020&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_readCache.sh">dk_readCache.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3077&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_readlink.sh">dk_readlink.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2619&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_realpath.sh">dk_realpath.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2139&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_registryContains.sh">dk_registryContains.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1933&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_reload.sh">dk_reload.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2457&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeAll.sh">dk_removeAll.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1604&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeCarrageReturns.sh">dk_removeCarrageReturns.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2851&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeExtension.sh">dk_removeExtension.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1521&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeFromFile.sh">dk_removeFromFile.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2684&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_rename.sh">dk_rename.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2237&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_replaceAll.sh">dk_replaceAll.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2746&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_require.sh">dk_require.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3011&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_resetAll.sh">dk_resetAll.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2250&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_return.sh">dk_return.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1367&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_run.sh">dk_run.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4702&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_saveArgs.sh">dk_saveArgs.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1619&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_set.sh">dk_set.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2704&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sftpUpoad.sh">dk_sftpUpoad.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16145&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DK.sh">DK.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2792&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_showFileLine.sh">dk_showFileLine.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4570&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_signalHandler.sh">dk_signalHandler.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1737&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep_ms.sh">dk_sleep_ms.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1528&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep.sh">dk_sleep.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4029&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_smartExtract.sh">dk_smartExtract.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5272&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_source.sh">dk_source.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2930&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_stacktrace.sh">dk_stacktrace.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1666&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_success.sh">dk_success.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1619&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_SUDO_EXE.sh_BACKUP">dk_SUDO_EXE.sh_BACKUP</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2853&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_App.sh">dk_Target_App.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2640&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Arch.sh">dk_Target_Arch.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2647&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Env.sh">dk_Target_Env.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3072&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Os.sh">dk_Target_Os.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2340&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Tuple.sh">dk_Target_Tuple.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2211&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Type.sh">dk_Target_Type.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1529&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testError.sh">dk_testError.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3454&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testReturn.sh">dk_testReturn.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7373&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_test.sh">dk_test.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1820&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_timeout.sh">dk_timeout.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1651&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_todo.sh">dk_todo.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2622&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toLower.sh">dk_toLower.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2637&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toUpper.sh">dk_toUpper.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2487&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_trimNonAlphaNumeric.sh">dk_trimNonAlphaNumeric.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1996&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_trim.sh">dk_trim.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1825&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_tryCatch.sh">dk_tryCatch.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1648&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_unset.sh">dk_unset.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2725&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_urlExists.sh">dk_urlExists.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4252&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validateArgs.sh">dk_validateArgs.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2723&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validateDK.sh">dk_validateDK.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2340&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validateOstype.sh">dk_validateOstype.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1610&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validatePackage.sh">dk_validatePackage.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2545&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validatePath.sh">dk_validatePath.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2310&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validate.sh">dk_validate.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2536&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validateSudo.sh_BACKUP">dk_validateSudo.sh_BACKUP</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2217&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_variableInfo.sh">dk_variableInfo.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1663&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_verbose.sh">dk_verbose.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1663&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_warning.sh">dk_warning.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3591&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_wslFix.sh">dk_wslFix.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1703&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_wslInit.sh">dk_wslInit.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1704&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__FILE__.sh">__FILE__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1588&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__FUNCTION__.sh">__FUNCTION__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1582&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__LINE__.sh">__LINE__.sh</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3258&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___NEW_BASH_FUNCTION___.cmd">___NEW_BASH_FUNCTION___.cmd</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1468&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___TEMPLATE___.sh">___TEMPLATE___.sh</a><br>
+	└── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4533&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__TIME__.sh">__TIME__.sh</a><br>

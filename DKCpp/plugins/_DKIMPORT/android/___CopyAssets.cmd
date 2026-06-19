@@ -1,18 +1,18 @@
 @echo off
 :: https://developer.android.com/studio/projects
 
-set "PACKAGE_NAME=com.digitalknob.dk"
-::if not "%1"=="" set PACKAGE_NAME=%~1
+set "PACKAGE_NAME=com.DigitalKnob.dk"
+::if "%1" neq "" set PACKAGE_NAME=%~1
 
 
 set APP_ROOT=%~dp0
 
-if not exist %ANDROID_HOME% ( 
-	%ERROR% "ANDROID_HOME environment variable not set"
+if NOT EXIST "%ANDROID_HOME%" (
+	%ERROR% "ANDROID_HOME environment variable NOT set"
 )
 
 set ASSETS=%APP_ROOT%/app/src/main/assets
-if exist %APP_ROOT%../assets (
+if EXIST "%APP_ROOT%../assets" (
 	set ASSETS=%APP_ROOT%../assets
 )
 

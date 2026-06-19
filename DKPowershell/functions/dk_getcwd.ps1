@@ -1,0 +1,34 @@
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_getcwd_ps1){ $dk_getcwd_ps1 = 1; } else{ return; } #include guard
+
+
+#########################################################################
+if( !(${DKPWD}) ){ ${global:DKPWD} = $(get-location) -replace "\\", "/"; }
+#########################################################################
+# dk_getcwd()
+#
+#    Get the working directory
+#
+#
+function Global:dk_getcwd() {
+	dk_debugFunc 0;
+
+	${global:DKPWD} = $(get-location) -replace "\\", "/";
+	${global:dk_getcwd} = ${DKPWD};
+}
+
+
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
+function Global:DKTEST() { 
+	dk_debugFunc 0;
+	
+	dk_call dk_getcwd;
+	dk_call dk_echo "DKOLDPWD = ${DKOLDPWD}";
+	dk_call dk_echo "DKPWD = ${DKPWD}\n";
+}

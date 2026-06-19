@@ -1,38 +1,68 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_clearScreen()
 #
-#	Clear the console
+#	Clear the terminal
 #
 function(dk_clearScreen)
 	dk_debugFunc()
 	
-	### Powershell ###
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(POWERSHELL_EXE)
-		execute_process(COMMAND powershell clear)
+#	### pwsh ###
+#	dk_depend(pwsh)
+#	if(pwsh_exe)
+#		#dk_exec(${pwsh_exe} clear)
+#		execute_process(COMMAND ${pwsh_exe} clear) # faster
+#		return()
+#	endif()
+	
+	### powershell ###
+	find_program(powershell_exe powershell.exe)
+	#dk_depend(powershell_exe)
+	if(powershell_exe)
+		#dk_exec(${powershell_exe} clear)
+		execute_process(COMMAND ${powershell_exe} clear) # faster
 		return()
 	endif()
 	
-	### Cmd ###
-	dk_depend(cmd)
-	if(CMD_EXE)
-		execute_process(COMMAND ${CMD_EXE} /c clear)  # FIXME: only clears 1 line
+#	### cmd ###	
+#	dk_validate(cmd.exe "dk_depend(cmd.exe)")
+#	if(cmd.exe)
+#		dk_exec(cls)  					# FIXME: only clears 1 line
+#		execute_process(COMMAND cls)  	# FIXME: only clears 1 line
+#		return()
+#	endif()
+
+#	### sh ###
+#	dk_depend(sh)
+#	if(sh_exe)
+#		#dk_exec(clear)
+#		execute_process(COMMAND clear) # faster
+#		return()
+#	endif()
+	
+	### bash ###
+	dk_validate(bash_exe "dk_depend(bash_exe)")
+	if(bash_exe)
+		#dk_exec(clear)
+		execute_process(COMMAND clear) # faster
 		return()
 	endif()
 	
-	### Bash ###
-	dk_depend(bash)
-	if(BASH_EXE)
-		execute_process(COMMAND clear)
-		return()
-	endif()
-	
-	dk_fatal("no clear screen commands available")
-	
+	dk_fatal("Could not find pwsh, powershell, cmd, sh or bash")
 endfunction()
 
 

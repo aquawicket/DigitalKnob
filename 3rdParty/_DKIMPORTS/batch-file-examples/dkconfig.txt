@@ -1,0 +1,5 @@
+###### batch-file-examples ######
+# https://github.com/Archive-projects/Batch-File-examples
+# https://github.com/Archive-projects/Batch-File-examples/archive/84bb1dda319bafc91a83fc58c590a541010344b9.zip
+
+batch-file-examples_Import=https://github.com/Archive-projects/Batch-File-examples/archive/84bb1dda319bafc91a83fc58c590a541010344b9.zip

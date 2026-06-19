@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ###### astyle ######
@@ -12,29 +20,26 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://svn.code.sf.net/p/astyle/code/trunk astyle-code
 
 ### IMPORT ###
-dk_validate			(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam		($ENV{DKIMPORTS_DIR}/astyle/dkconfig.txt ASTYLE_IMPORT)
-dk_import			(${ASTYLE_IMPORT})
+dk_import()
 
 ### LINK ###
-dk_validate			(target_triple "dk_target_triple()")
-dk_include			(${ASTYLE_DIR}/src)
+dk_include			(${astyle}/src)
 
-if(WIN)
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/AStyleLib.a)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/AStyleLib.a)
+if(Windows)
+	dk_libDebug		(${astyle_Debug_Dir}/AStyleLib.a)
+	dk_libRelease	(${astyle_Release_Dir}/AStyleLib.a)
 else()
-	dk_libDebug		(${ASTYLE_DEBUG_DIR}/libastyle.a)
-	dk_libRelease	(${ASTYLE_RELEASE_DIR}/libastyle.a)
+	dk_libDebug		(${astyle_Debug_Dir}/libastyle.a)
+	dk_libRelease	(${astyle_Release_Dir}/libastyle.a)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${ASTYLE_DIR}
+dk_configure(${astyle}
 	-DBUILD_JAVA_LIBS=OFF 		# "Build java library"   OFF
 	#-DBUILD_SHARED_LIBS=OFF 	# "Build shared library" OFF
 	#-DBUILD_STATIC_LIBS=ON		# "Build static library" OFF
 ) 	
 
 ### COMPILE ###
-dk_build(${ASTYLE_DIR})
+dk_build()

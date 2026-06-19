@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS Batch - Date and Time</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='ysel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS Batch - Date and Time</H1>
+<span class='shortText'>Using date and time functions in DOS.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Batch.FileDate'>File age in days</a></td>
+<td class='text'>Convert the file date into Julian Days to determine the age of a file age in days.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsDateTime.php'>DOS Batch - Date and Time</a></td>
+<td class='text'>Using date and time functions in DOS.</td>
+</tr>
+<tr><td class='title'><a href='#Function.CmpFTime'>:CmpFTime</a></td>
+<td class='text'>compares the time of two files, succeeds if condition is met, fails otherwise</td>
+</tr>
+<tr><td class='title'><a href='#Function.date2jdate'>:date2jdate</a></td>
+<td class='text'>converts a gregorian calender date to julian day format</td>
+</tr>
+<tr><td class='title'><a href='#Function.dayOfYear'>:dayOfYear</a></td>
+<td class='text'>returns the day of the year, i.e. 1 for 1/1/2008, 266 for 12/31/2008</td>
+</tr>
+<tr><td class='title'><a href='#Function.DeleteIfOld'>:DeleteIfOld</a></td>
+<td class='text'>deletes file or directory if older than given number of days</td>
+</tr>
+<tr><td class='title'><a href='#Function.ftime'>:ftime</a></td>
+<td class='text'>returns the file time in julian days</td>
+</tr>
+<tr><td class='title'><a href='#Function.jdate'>:jdate</a></td>
+<td class='text'>converts a date string to julian day number with respect to regional date format</td>
+</tr>
+<tr><td class='title'><a href='#Function.jdate2date'>:jdate2date</a></td>
+<td class='text'>converts julian days to gregorian date format</td>
+</tr>
+<tr><td class='title'><a href='#Function.Unique'>:Unique</a></td>
+<td class='text'>returns a unique string based on a date-time-stamp, YYYYMMDDhhmmsscc</td>
+</tr>
+</table>    <hr>
+    <a name=''></a>
+    <a name='Batch.FileDate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-03-30</font></font></div>
+    <H2>File age in days - Convert the file date into Julian Days to determine the age of a file age in days</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Date and Time functions are useful for:
+<ul>
+    <li>Calculations with date and time values</li>
+    <li>Determine the age of files in days</li>
+    <li>Determine the date difference in days</li>
+</ul>
+</p>
+<p>The example in this section demonstrates how to use the <b>:ftime</b> function to 
+determine the age in days of all files in the temp directory.</p>
+<p>Two variables are used
+<ul>
+    <li>tnow - stores the current day in julian days format by calling <b>:jdate</b></li>
+    <li>tfile - stores the file date in julian days format by calling <b>:ftime</b></li>
+</ul>
+</p>
+<p>Using <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> and exclamation marks around environment variables ensures that 
+the `tfile`variable  is substituted properly during each loop.  Read more about this behavior 
+in the <a href="DosCommandIndex.htm#SET">SET</a> command help (bottom half of the help text).</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFTime.bat'>BatchFTime.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>cd&nbsp;/d&nbsp;&quot;%temp%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>call:jdate&nbsp;tnow&nbsp;&quot;%date%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%F</span>&nbsp;in&nbsp;(*.*)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:ftime&nbsp;tfile&nbsp;&quot;<span class=c_pvar>%%F</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;/a&nbsp;diff=tnow-tfile</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.<span class=c_pvar>%%~nxF</span>&nbsp;is&nbsp;!diff!&nbsp;days&nbsp;old</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>ECHO.&amp;PAUSE&amp;GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Functions&nbsp;start&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='ftime'>:ftime</a></span><span class=c_cmmt>&nbsp;JD&nbsp;filename&nbsp;attr&nbsp;--&nbsp;returns&nbsp;the&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;[out]&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valref&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;attr&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;time&nbsp;field&nbsp;to&nbsp;be&nbsp;used,&nbsp;creation/last-access/last-write,&nbsp;see&nbsp;'dir&nbsp;/?',&nbsp;i.e.&nbsp;/tc,&nbsp;/ta,&nbsp;/tw,&nbsp;default&nbsp;is&nbsp;/tw</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20090322&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;file=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>set&nbsp;attr=<span class=c_pvar>%~3</span></span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;attr&nbsp;(call:jdate&nbsp;JD&nbsp;&quot;-&nbsp;<span class=c_pvar>%~t2</span>&quot;</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;dir&nbsp;%attr%&nbsp;/-c&nbsp;&quot;%file%&quot;|findstr&nbsp;&quot;^^[0-9]&quot;&quot;')&nbsp;do&nbsp;call:jdate&nbsp;JD&nbsp;&quot;<span class=c_pvar>%%a</span>&quot;)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='jdate'>:jdate</a></span><span class=c_cmmt>&nbsp;JD&nbsp;DateStr&nbsp;--&nbsp;converts&nbsp;a&nbsp;date&nbsp;string&nbsp;to&nbsp;julian&nbsp;day&nbsp;number&nbsp;with&nbsp;respect&nbsp;to&nbsp;regional&nbsp;date&nbsp;format</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DateStr&nbsp;[in,opt]&nbsp;&nbsp;-&nbsp;date&nbsp;string,&nbsp;e.g.&nbsp;&quot;03/31/2006&quot;&nbsp;or&nbsp;&quot;Fri&nbsp;03/31/2006&quot;&nbsp;or&nbsp;&quot;31.3.2006&quot;</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://groups.google.com/group/alt.msdos.batch.nt/browse_frm/thread/a0c34d593e782e94/50ed3430b6446af8#50ed3430b6446af8</span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;DateStr=<span class=c_pvar>%~2</span>&amp;if&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;==&quot;&quot;&nbsp;set&nbsp;DateStr=%date%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%DateStr:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD=dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>00000002.ini is 42 days old
+ActivePerlInstall.log is 39 days old
+BatchJDate.bat is 0 days old
+control.xml is 34 days old
+debugf.txt is 26 days old
+DFC5A2B2.TMP is 3 days old
+EML30.tmp is 2 days old
+EML39.tmp is 2 days old
+EML3D.tmp is 2 days old
+EXCEL.log is 20 days old
+fdm9E1.tmp is 39 days old
+gtb2C4.tmp is 62 days old
+tmp.cab is 62 days old - gtb2
+h2rC95.tmp is 36 days old
+hpodvd09.log is 1 days old
+hpzcoi00.log is 7 days old
+hpzcoi01.log is 7 days old
+hpzcoi02.log is 7 days old
+hpzcoi03.log is 7 days old
+IMT10.xml is 73 days old
+IMT11.xml is 73 days old
+IMT12.xml is 73 days old
+IMT13.xml is 73 days old
+IMT14.xml is 73 days old
+IMT2B.xml is 73 days old
+IMTF.xml is 73 days old
+java_install_reg.log is 7 days old
+jusched.log is 1 days old
+LSBurnWatcher.log is 1 days old
+msohdinh.tmp is 62 days old
+patch.exe is 850 days old
+patchw32.dll is 850 days old
+r2hC94.tmp is 36 days old
+
+Press any key to continue . . .
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.CmpFTime'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:CmpFTime - compares the time of two files, succeeds if condition is met, fails otherwise</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#CmpFTime'>:CmpFTime</a> op file1 file2 attr1 attr2 </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='CmpFTime'>:CmpFTime</a></span><span class=c_cmmt>&nbsp;op&nbsp;file1&nbsp;file2&nbsp;attr1&nbsp;attr2&nbsp;--&nbsp;compares&nbsp;the&nbsp;time&nbsp;of&nbsp;two&nbsp;files,&nbsp;succeeds&nbsp;if&nbsp;condition&nbsp;is&nbsp;met,&nbsp;fails&nbsp;otherwise</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;op&nbsp;&nbsp;&nbsp;&nbsp;[in]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;compare&nbsp;operator,&nbsp;see&nbsp;'IF&nbsp;/?',&nbsp;i.e.EQU,&nbsp;NEQ,&nbsp;LSS,&nbsp;LEQ,&nbsp;GTR,&nbsp;GEQ</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;fileL&nbsp;[in]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;file&nbsp;name,&nbsp;left&nbsp;side&nbsp;of&nbsp;comparisation</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;file2&nbsp;[in]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;file&nbsp;name,&nbsp;right&nbsp;side&nbsp;of&nbsp;comparisation</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;attrL&nbsp;[in,opt]&nbsp;-&nbsp;time&nbsp;field&nbsp;to&nbsp;be&nbsp;used&nbsp;for&nbsp;fileL,&nbsp;see&nbsp;'dir&nbsp;/?',&nbsp;i.e.&nbsp;/tc,&nbsp;/ta,&nbsp;/tw,&nbsp;default&nbsp;is&nbsp;/tw</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;attrR&nbsp;[in,opt]&nbsp;-&nbsp;time&nbsp;field&nbsp;to&nbsp;be&nbsp;used&nbsp;for&nbsp;fileR,&nbsp;default&nbsp;is&nbsp;attrL</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;DateAndTime,FileOperation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;op=<span class=c_pvar>%~1</span></span><br>
+<span style='color=#000000'>set&nbsp;fileL=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>set&nbsp;fileR=<span class=c_pvar>%~3</span></span><br>
+<span style='color=#000000'>set&nbsp;attrL=<span class=c_pvar>%~4</span></span><br>
+<span style='color=#000000'>set&nbsp;attrR=<span class=c_pvar>%~5</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%op%&quot;==&quot;&quot;&nbsp;set&nbsp;op===</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%attrL%&quot;==&quot;&quot;&nbsp;set&nbsp;attrL=/tw</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%attrR%&quot;==&quot;&quot;&nbsp;set&nbsp;attrR=%attrL%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1-6&nbsp;delims=/:&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;dir&nbsp;%attrL%&nbsp;/-c&nbsp;&quot;%fileL%&quot;|findstr&nbsp;&quot;^^[0-1]&quot;&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;TL=<span class=c_pvar>%%c</span><span class=c_pvar>%%a</span><span class=c_pvar>%%b</span><span class=c_pvar>%%f</span><span class=c_pvar>%%d</span><span class=c_pvar>%%e</span></span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1-6&nbsp;delims=/:&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;dir&nbsp;%attrR%&nbsp;/-c&nbsp;&quot;%fileR%&quot;|findstr&nbsp;&quot;^^[0-1]&quot;&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;TR=<span class=c_pvar>%%c</span><span class=c_pvar>%%a</span><span class=c_pvar>%%b</span><span class=c_pvar>%%f</span><span class=c_pvar>%%d</span><span class=c_pvar>%%e</span></span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%TL%&quot;&nbsp;%op%&nbsp;&quot;%TR%&quot;&nbsp;(<span class=c_cmmt>rem.)&nbsp;ELSE&nbsp;set=2&gt;NUL</span></span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.date2jdate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:date2jdate - converts a gregorian calender date to julian day format</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#date2jdate'>:date2jdate</a> JD YYYY MM DD </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='date2jdate'>:date2jdate</a></span><span class=c_cmmt>&nbsp;JD&nbsp;YYYY&nbsp;MM&nbsp;DD&nbsp;--&nbsp;converts&nbsp;a&nbsp;gregorian&nbsp;calender&nbsp;date&nbsp;to&nbsp;julian&nbsp;day&nbsp;format</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;[out]&nbsp;-&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;YYYY&nbsp;[in]&nbsp;&nbsp;-&nbsp;gregorian&nbsp;year,&nbsp;i.e.&nbsp;2006</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;MM&nbsp;&nbsp;&nbsp;[in]&nbsp;&nbsp;-&nbsp;gregorian&nbsp;month,&nbsp;i.e.&nbsp;12&nbsp;for&nbsp;december</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DD&nbsp;&nbsp;&nbsp;[in]&nbsp;&nbsp;-&nbsp;gregorian&nbsp;day,&nbsp;i.e.&nbsp;31</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://aa.usno.navy.mil/faq/docs/JD_Formula.html</span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;yy=<span class=c_pvar>%~2</span>&quot;&amp;set&nbsp;&quot;mm=<span class=c_pvar>%~3</span>&quot;&amp;set&nbsp;&quot;dd=<span class=c_pvar>%~4</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>if&nbsp;%yy%&nbsp;LSS&nbsp;100&nbsp;set&nbsp;/a&nbsp;yy+=2000&nbsp;&amp;<span class=c_cmmt>rem&nbsp;Adds&nbsp;2000&nbsp;to&nbsp;two&nbsp;digit&nbsp;years</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD=dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.dayOfYear'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-06-12</font></font></div>
+    <H2>:dayOfYear - returns the day of the year, i.e. 1 for 1/1/2008, 266 for 12/31/2008</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#dayOfYear'>:dayOfYear</a> JD DateStr </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='dayOfYear'>:dayOfYear</a></span><span class=c_cmmt>&nbsp;JD&nbsp;DateStr&nbsp;--&nbsp;returns&nbsp;the&nbsp;day&nbsp;of&nbsp;the&nbsp;year,&nbsp;i.e.&nbsp;1&nbsp;for&nbsp;1/1/2008,&nbsp;266&nbsp;for&nbsp;12/31/2008</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;day&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;variable&nbsp;name&nbsp;to&nbsp;store&nbsp;resulting&nbsp;day&nbsp;of&nbsp;the&nbsp;year</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DateStr&nbsp;[in,opt]&nbsp;&nbsp;-&nbsp;date&nbsp;string,&nbsp;e.g.&nbsp;&quot;3/31/2006&quot;&nbsp;or&nbsp;&quot;Fri&nbsp;03/31/2006&quot;&nbsp;or&nbsp;&quot;31.3.2006&quot;,&nbsp;or&nbsp;omit&nbsp;form&nbsp;current&nbsp;date</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://groups.google.com/group/alt.msdos.batch.nt/browse_frm/thread/a0c34d593e782e94/50ed3430b6446af8#50ed3430b6446af8</span><br>
+<span style='color=#000000'>:$created&nbsp;20080612&nbsp;:$changed&nbsp;20080612&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;DateStr=<span class=c_pvar>%~2</span>&quot;&amp;if&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;==&quot;&quot;&nbsp;set&nbsp;&quot;DateStr=%date%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%DateStr:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD=dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=1,dd=1&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD-=-1+dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.DeleteIfOld'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:DeleteIfOld - deletes file or directory if older than given number of days</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#DeleteIfOld'>:DeleteIfOld</a> name days tnow </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Dependencies:</td>
+      <td class='text'  VALIGN='top'> <a href="#ftime">:ftime</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='DeleteIfOld'>:DeleteIfOld</a></span><span class=c_cmmt>&nbsp;name&nbsp;days&nbsp;tnow&nbsp;--&nbsp;deletes&nbsp;file&nbsp;or&nbsp;directory&nbsp;if&nbsp;older&nbsp;than&nbsp;given&nbsp;number&nbsp;of&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;name&nbsp;[in]&nbsp;-&nbsp;name&nbsp;of&nbsp;file&nbsp;or&nbsp;directory</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;days&nbsp;[in]&nbsp;-&nbsp;number&nbsp;of&nbsp;days&nbsp;to&nbsp;expire</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;tnow&nbsp;[in]&nbsp;-&nbsp;today's&nbsp;date&nbsp;in&nbsp;julia&nbsp;days</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;DateAndTime,FileOperation</span><br>
+<span style='color=#000000'>:$source&nbsp;www.DosTips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;days=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;tnow=<span class=c_pvar>%~3</span>&quot;</span><br>
+<span style='color=#000000'>call:ftime&nbsp;tfile&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;diff=tnow-tfile&quot;</span><br>
+<span style='color=#000000'>if&nbsp;%diff%&nbsp;LEQ&nbsp;%days%&nbsp;EXIT&nbsp;/b</span><br>
+<span style='color=#000000'>set&nbsp;&quot;attr=<span class=c_pvar>%~a1</span>&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>rem&nbsp;ECHO.%attr%,&nbsp;%attr:~0,1%,&nbsp;<span class=c_pvar>%~nx1</span>&nbsp;is&nbsp;%diff%&nbsp;days&nbsp;old</span></span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%attr:~0,1%&quot;==&quot;d&quot;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;rd&nbsp;/Q&nbsp;/S&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;/Q&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.ftime'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-03-22</font></font></div>
+    <H2>:ftime - returns the file time in julian days</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#ftime'>:ftime</a> JD filename attr </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Dependencies:</td>
+      <td class='text'  VALIGN='top'> <a href="#jdate">:jdate</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='ftime'>:ftime</a></span><span class=c_cmmt>&nbsp;JD&nbsp;filename&nbsp;attr&nbsp;--&nbsp;returns&nbsp;the&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;[out]&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valref&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;attr&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;time&nbsp;field&nbsp;to&nbsp;be&nbsp;used,&nbsp;creation/last-access/last-write,&nbsp;see&nbsp;'dir&nbsp;/?',&nbsp;i.e.&nbsp;/tc,&nbsp;/ta,&nbsp;/tw,&nbsp;default&nbsp;is&nbsp;/tw</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20090322&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;file=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>set&nbsp;attr=<span class=c_pvar>%~3</span></span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;attr&nbsp;(call:jdate&nbsp;JD&nbsp;&quot;-&nbsp;<span class=c_pvar>%~t2</span>&quot;</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;dir&nbsp;%attr%&nbsp;/-c&nbsp;&quot;%file%&quot;|findstr&nbsp;&quot;^^[0-9]&quot;&quot;')&nbsp;do&nbsp;call:jdate&nbsp;JD&nbsp;&quot;<span class=c_pvar>%%a</span>&quot;)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.jdate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-03-28</font></font></div>
+    <H2>:jdate - converts a date string to julian day number with respect to regional date format</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#jdate'>:jdate</a> JD DateStr </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='jdate'>:jdate</a></span><span class=c_cmmt>&nbsp;JD&nbsp;DateStr&nbsp;--&nbsp;converts&nbsp;a&nbsp;date&nbsp;string&nbsp;to&nbsp;julian&nbsp;day&nbsp;number&nbsp;with&nbsp;respect&nbsp;to&nbsp;regional&nbsp;date&nbsp;format</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DateStr&nbsp;[in,opt]&nbsp;&nbsp;-&nbsp;date&nbsp;string,&nbsp;e.g.&nbsp;&quot;03/31/2006&quot;&nbsp;or&nbsp;&quot;Fri&nbsp;03/31/2006&quot;&nbsp;or&nbsp;&quot;31.3.2006&quot;</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://groups.google.com/group/alt.msdos.batch.nt/browse_frm/thread/a0c34d593e782e94/50ed3430b6446af8#50ed3430b6446af8</span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20090328&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;DateStr=<span class=c_pvar>%~2</span>&amp;if&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;==&quot;&quot;&nbsp;set&nbsp;DateStr=%date%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%DateStr:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>if&nbsp;%yy%&nbsp;LSS&nbsp;100&nbsp;set&nbsp;/a&nbsp;yy+=2000&nbsp;&amp;<span class=c_cmmt>rem&nbsp;Adds&nbsp;2000&nbsp;to&nbsp;two&nbsp;digit&nbsp;years</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD=dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.jdate2date'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:jdate2date - converts julian days to gregorian date format</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#jdate2date'>:jdate2date</a> JD YYYY MM DD </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='jdate2date'>:jdate2date</a></span><span class=c_cmmt>&nbsp;JD&nbsp;YYYY&nbsp;MM&nbsp;DD&nbsp;--&nbsp;converts&nbsp;julian&nbsp;days&nbsp;to&nbsp;gregorian&nbsp;date&nbsp;format</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;[in]&nbsp;&nbsp;-&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;YYYY&nbsp;[out]&nbsp;-&nbsp;gregorian&nbsp;year,&nbsp;i.e.&nbsp;2006</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;MM&nbsp;&nbsp;&nbsp;[out]&nbsp;-&nbsp;gregorian&nbsp;month,&nbsp;i.e.&nbsp;12&nbsp;for&nbsp;december</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DD&nbsp;&nbsp;&nbsp;[out]&nbsp;-&nbsp;gregorian&nbsp;day,&nbsp;i.e.&nbsp;31</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://aa.usno.navy.mil/faq/docs/JD_Formula.html</span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;L=&nbsp;<span class=c_pvar>%~1</span>+68569,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N=&nbsp;4*L/146097,&nbsp;L=&nbsp;L-(146097*N+3)/4,&nbsp;I=&nbsp;4000*(L+1)/1461001</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;L=&nbsp;L-1461*I/4+31,&nbsp;J=&nbsp;80*L/2447,&nbsp;&nbsp;K=&nbsp;L-2447*J/80,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L=&nbsp;J/11</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;J=&nbsp;J+2-12*L,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I=&nbsp;100*(N-49)+I+L</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;YYYY=&nbsp;I,&nbsp;&nbsp;MM=100+J,&nbsp;&nbsp;DD=100+K</span><br>
+<span style='color=#000000'>set&nbsp;MM=%MM:~-2%</span><br>
+<span style='color=#000000'>set&nbsp;DD=%DD:~-2%</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~2</span>=%YYYY%)&nbsp;ELSE&nbsp;echo.%YYYY%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~3</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~3</span>=%MM%)&nbsp;ELSE&nbsp;echo.%MM%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~4</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~4</span>=%DD%)&nbsp;ELSE&nbsp;echo.%DD%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.Unique'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:Unique - returns a unique string based on a date-time-stamp, YYYYMMDDhhmmsscc</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#Unique'>:Unique</a> ret </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='Unique'>:Unique</a></span><span class=c_cmmt>&nbsp;ret&nbsp;--&nbsp;returns&nbsp;a&nbsp;unique&nbsp;string&nbsp;based&nbsp;on&nbsp;a&nbsp;date-time-stamp,&nbsp;YYYYMMDDhhmmsscc</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;ret&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;unique&nbsp;string</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringOperation,DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%date:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1-4&nbsp;delims=:.&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%time:&nbsp;=0%&quot;)&nbsp;do&nbsp;@set&nbsp;UNIQUE=%yy<span class=c_pvar>%%m</span>m<span class=c_pvar>%%d</span>d%<span class=c_pvar>%%A</span><span class=c_pvar>%%B</span><span class=c_pvar>%%C</span><span class=c_pvar>%%D</span></span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%UNIQUE%)&nbsp;ELSE&nbsp;echo.%UNIQUE%</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146b9af51ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

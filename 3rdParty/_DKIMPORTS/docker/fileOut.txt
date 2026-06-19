@@ -1,0 +1,6 @@
+0: ############ docker ############
+1: # https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
+2: 
+3: docker_Type=Tool
+4: docker_Import=https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
+5: 

@@ -1,25 +1,32 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ x265 ############
 # https://bitbucket.org/multicoreware/x265_git.git
-dk_load(dk_builder)
+# https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip
+#
+function(DKINSTALL)
 
-### IMPORT ###
-dk_import(https://bitbucket.org/multicoreware/x265_git/get/dd594f59.zip)
+	dk_import()
 
-### LINK ###
-dk_include		(${X265}/include)
-dk_include		(${X265}/${target_triple})
-dk_libDebug		(${X265_DEBUG_DIR}/libx265.a)
-dk_libRelease	(${X265_RELEASE_DIR}/libx265.a)
+	dk_include		(${x265}/include)
+	dk_include		(${x265_Tuple_Dir})
+	dk_libDebug		(${x265_Debug_Dir}/libx265.a)
+	dk_libRelease	(${x265_Release_Dir}/libx265.a)
 
-### GENERATE ###
-dk_configure(${X265})
+	dk_configure()
 
-### COMPILE ###
-dk_build(${X265})
+	dk_build()
+endfunction()

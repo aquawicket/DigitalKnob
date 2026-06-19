@@ -1,0 +1,5 @@
+############ ir-rescue ############
+# https://github.com/diogo-fernan/ir-rescue.git
+# https://github.com/diogo-fernan/ir-rescue/archive/f6f48de90d48b92355fe9216f7e53cfc107f363d.zip
+
+ir-rescue_Import=https://github.com/diogo-fernan/ir-rescue/archive/f6f48de90d48b92355fe9216f7e53cfc107f363d.zip

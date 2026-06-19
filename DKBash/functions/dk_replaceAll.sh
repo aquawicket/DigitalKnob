@@ -1,38 +1,52 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
 
 
 ##################################################################################
-# dk_replaceAll("input" "searchValue" "newValue" <output_variable>)
+# dk_replaceAll("input" "searchValue" "newValue" rtn_var)
 #
 #
 dk_replaceAll() {
-	dk_debugFunc 3 4
+	dk_debugFunc 3 4;
 	
-    input="${1}"
-	searchValue="${2}"
-	newValue="${3}"
-    _replaceAll_=
+    input="${1}";
+	searchValue="${2}";
+	newValue="${3}";
+    dk_replaceAll=;
 		
     while [ -n "${input}" ]; do
-        LEFT=${input%%"${searchValue}"*}
+        LEFT=${input%%"${searchValue}"*};
 
         if [ "${LEFT}" = "${input}" ]; then
-            _replaceAll_=${_replaceAll_}${input}
-			break
+            dk_replaceAll=${dk_replaceAll}${input};
+			break;
         fi
 
-        _replaceAll_=${_replaceAll_}${LEFT}${newValue}
-        input=${input#*"$searchValue"}
+        dk_replaceAll=${dk_replaceAll}${LEFT}${newValue};
+        input=${input#*"$searchValue"};
     done
 	
-	### return value ###
-	dk_call dk_printVar _replaceAll_
-	[ ${#} -gt 3 ] && eval "${4}='${_replaceAll_}'" && return  # return value when using rtn_var parameter 
-	dk_return ${_replaceAll_}; return						  # return value when using command substitution
 	
-#DEBUG
-#	dk_printVar _replaceAll_
+	###### return ######
+	export dk_replaceAll=${dk_replaceAll};
+	if [ -n "${4-}" ]; then
+		export ${4}=${dk_replaceAll};
+	else
+		builtin echo "${dk_replaceAll}";
+	fi
+	return $?;
 }
 
 

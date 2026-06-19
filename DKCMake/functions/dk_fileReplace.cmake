@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_fileReplace(filePath, find, replace)
 #
 #	TODO
@@ -20,11 +31,11 @@ function(dk_fileReplace)
 	
 	dk_assertVar(ARGV1)
 	set(find ${ARGV1})
-	dk_replaceAll("${find}" "\'" "" find)
+	#dk_replaceAll("${find}" "\'" "" find)
 	
 	dk_assertVar(ARGV2)
 	set(replace ${ARGV2})
-	dk_replaceAll("${replace}" "\'" "" replace)
+	#dk_replaceAll("${replace}" "\'" "" replace)
 	
 	file(READ ${filepath} fileString)
 	string(FIND "${fileString}" "${find}" found)
@@ -44,12 +55,12 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_fileReplace("C:/Users/Administrator/digitalknob/Development/README.md" "replaced" "DigitalKnob")
+	dk_fileReplace("C:/Users/Administrator/DigitalKnob/Development/README.md" "replaced" "DigitalKnob")
 	
-	dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
-	#dk_fileReplace("${EMSDK_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
+	dk_fileReplace("${emsdk_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0\;" 			"var USE_SDL = false\;")
+	#dk_fileReplace("${emsdk_DIR}/upstream/emscripten/src/settings.js" "var USE_SDL = 0;" 			"var USE_SDL = false;"			NO_HALT)
 	
-	set(filepath "C:/Users/Administrator/digitalknob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
+	set(filepath "C:/Users/Administrator/DigitalKnob/Development/3rdParty/rlottie-e3026b1e/CMakeLists.txt")
 	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_RELEASE" "#set(CMAKE_CXX_FLAGS_RELEASE")
 	dk_fileReplace("${filepath}" "set(CMAKE_CXX_FLAGS_DEBUG" "#set(CMAKE_CXX_FLAGS_DEBUG")
 endfunction()

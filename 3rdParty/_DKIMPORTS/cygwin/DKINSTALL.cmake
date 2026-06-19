@@ -1,56 +1,63 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
-set(CYGWIN 1)
+
 ############ cgywin ############
 # https://www.cygwin.com
 # https://cygwin.com/faq/faq.html#faq.setup.cli
-if(CYGWIN)
-	dk_validate(host_triple "dk_host_triple()")
-	if(NOT WIN_HOST)
-		dk_undepend(cygwin)
-		return()
-	endif()
+# https://www.cygwin.com/setup-x86_64.exe
 
-	dk_set(CYGWIN_DL https://www.cygwin.com/setup-x86_64.exe)
-	dk_importVariables(${CYGWIN_DL})
-	dk_set(CYGWIN_EXE "${CYGWIN_DIR}/Cygwin.bat")
-
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-
-	if(NOT EXISTS "${CYGWIN_DIR}/bin/${CYGWIN_DL_FILE}")
-		dk_echo("Installing ${CYGWIN_FOLDER}")
-		
-		### Download ###
-		dk_download(${CYGWIN_DL} $ENV{DKDOWNLOAD_DIR})
-		
-		### FirewallAllow ###
-		dk_firewallAllow("Cygwin_Setup" "$ENV{DKDOWNLOAD_DIR}/setup-x86_64.exe")
-		
-		### Install Cygwin ###
-		dk_command("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" --quiet-mode --root ${CYGWIN_DIR})
-		
-		### Install Packages ###
-		dk_command("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
-		
-		### Copy Setup exe to /bin ###
-		dk_copy("$ENV{DKDOWNLOAD_DIR}/${CYGWIN_DL_FILE}" "${CYGWIN_DIR}/bin/${CYGWIN_DL_FILE}")   # copy the installer to use as a package manager
-	endif()	
-
-	#if(NOT EXISTS "???")
-	dk_info("running install_crosstool.cmd")
-	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_nativePath("${CMD_EXE}" CMD_EXE)
-	set(INSTALL_CROSSTOOL_CMD "$ENV{DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
-	execute_process(COMMAND ${CMD_EXE} /c "${INSTALL_CROSSTOOL_CMD}")
-	
-	#execute_process(COMMAND ${CYGWIN_EXE} & crosstool-ng-build.sh)
-	#endif	
-		
-	# Install Packages
-	# setup-x86.exe -q -P <packagename>
+if(NOT Windows_Host)
+	dk_disable(cygwin)
+	return()
 endif()
+
+dk_importVariables("${cygwin_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
+dk_assertVar(cygwin)
+dk_set(cygwin_exe "${cygwin}/Cygwin.bat")
+
+
+if(NOT EXISTS "${cygwin}/bin/${cygwin_Url_Filename}")
+	dk_echo("Installing ${cygwin_Install_Name}")
+		
+	### Download ###
+	dk_download(${cygwin_Url})
+		
+	### FirewallAllow ###
+	dk_firewallAllow("${dk_download}") # cygwin setup-x86_64.exe
+		
+	### Install Cygwin ###
+	# "C:\Users\Administrator\DigitalKnob\download\setup-x86_64.exe" --quiet-mode --root C:\Users\Administrator\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64
+	#dk_exec("${DKDOWNLOAD_DIR}/${cygwin_Import_File}" --quiet-mode --site https://mirrors.163.com/cygwin/ --root ${cygwin})
+	dk_exec("${dk_download}" --root ${cygwin})
+		
+	### Install Packages ###
+	dk_exec("${dk_download}" -a x86_64 -d -q -P "tar,wget,gcc-core,gcc-g++,binutils,make,cmake,automake,autoconf,git,patch,unzip,flex,bison,gperf,help2man,libtool,gettext,libgmp10,libgmp-devel,libmpfr6,libmpfr-devel,libmpc3,libmpc-devel,libncurses-devel,libintl-devel")
+		
+	### Copy Setup exe to /bin ###
+	dk_copy("${dk_download}" "${cygwin}/bin/${cygwin_Url_Filename}")   # copy the installer to use as a package manager
+endif()	
+
+#if(NOT EXISTS "???")
+dk_info("running install_crosstool.cmd")
+dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+dk_validate(cmd.exe "dk_depend(cmd.exe)")
+set(install_crosstool_cmd "${DKIMPORTS_DIR}/cygwin/install_crosstool.cmd")
+dk_exec(${cmd.exe} /V:ON /c "${install_crosstool_cmd}")
+	
+#execute_process(COMMAND ${cygwin_exe} & crosstool-ng-build.sh)
+#endif	
+		
+# Install Packages
+# setup-x86.exe -q -P <packagename>

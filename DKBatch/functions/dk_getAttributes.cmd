@@ -1,29 +1,37 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_getAttributes(<pathname>, <rtn_var>:optional)
-::#
-::#		Reference: https://ss64.com/nt/syntax-args.html#attributes
-::#
-::#		 Attribute                    Expansion 
-::#		 FILE_ATTRIBUTE_DIRECTORY     d-------- 
-::#		 FILE_ATTRIBUTE_READONLY      -r------- 
-::#		 FILE_ATTRIBUTE_ARCHIVE       --a------ 
-::#		 FILE_ATTRIBUTE_HIDDEN        ---h----- 
-::#		 FILE_ATTRIBUTE_SYSTEM        ----s---- 
-::#		 FILE_ATTRIBUTE_COMPRESSED    -----c--- 
-::#		 FILE_ATTRIBUTE_OFFLINE       ------o-- 
-::#		 FILE_ATTRIBUTE_TEMPORARY     -------t- 
-::#		 FILE_ATTRIBUTE_REPARSE_POINT --------l
-::#		 FILE_ATTRIBUTE_NORMAL        ---------
-::#
+rem ################################################################################
+rem # dk_getAttributes(<pathname>, <rtn_var>:optional)
+rem #
+rem #		Reference: https://ss64.com/nt/syntax-args.html#attributes
+rem #
+rem #		 Attribute                    Expansion
+rem #		 FILE_ATTRIBUTE_DIRECTORY     d--------
+rem #		 FILE_ATTRIBUTE_READONLY      -r-------
+rem #		 FILE_ATTRIBUTE_ARCHIVE       --a------
+rem #		 FILE_ATTRIBUTE_HIDDEN        ---h-----
+rem #		 FILE_ATTRIBUTE_SYSTEM        ----s----
+rem #		 FILE_ATTRIBUTE_COMPRESSED    -----c---
+rem #		 FILE_ATTRIBUTE_OFFLINE       ------o--
+rem #		 FILE_ATTRIBUTE_TEMPORARY     -------t-
+rem #		 FILE_ATTRIBUTE_REPARSE_POINT --------l
+rem #		 FILE_ATTRIBUTE_NORMAL        ---------
+rem #
 :dk_getAttributes
-setlocal
-	%dk_call% dk_debugFunc 2
+rem :dk_fileAttributes
+%setlocal%
 
 	set "pathname=%1"
 	set "pathname=%pathname:"=%"
@@ -42,12 +50,11 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	set "myPath=C:/Users/Administrator/Desktop/digitalknob"
+	set "myPath=%USERPROFILE:\=/%/Desktop/DigitalKnob"
 	%dk_call% dk_getAttributes "%myPath%" attributes
 	%dk_call% dk_echo "dk_getAttributes = %dk_getAttributes%"
 	%dk_call% dk_echo "attributes = %attributes%"

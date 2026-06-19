@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ###### autotools ######
@@ -12,14 +20,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://www.xmodulo.com/fix-failed-to-run-aclocal.html
 # https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install
 
-if(MAC_HOST)
+if(Mac_Host)
 	dk_depend			(autogen)
 	dk_depend			(autoconf)
 	dk_depend			(automake)
-elseif(CLANG OR MINGW OR UCRT)
+elseif(NOT MSVC)
 	dk_installPackage	(autotools)
-	dk_validate			(MSYS2 "dk_depend(msys2)")
-	set					(ENV{ACLOCAL_PATH} "${MSYS2}/usr/share/aclocal")
-	dk_set				(AUTORECONF "${MSYS2}/usr/bin/autoreconf")
+	dk_depend			(msys2)
+	set					(ENV{ACLOCAL_PATH} "${msys2}/usr/share/aclocal")
+	dk_set				(AUTORECONF "${msys2}/usr/bin/autoreconf")
 endif()
 

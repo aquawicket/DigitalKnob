@@ -1,25 +1,31 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ dl ############
-dk_load(dk_builder)
 
-if(NOT UNIX)
-	dk_undepend(dl)
+if(NOT Unix)
+	dk_disable(dl)
 	dk_return()
 endif()
 
-if(ANDROID)
-	dk_depend(android-ndk)
-endif()
+#if(Android)
+	dk_validate(android-ndk "dk_depend(android-ndk)")
+#endif()
 
 dk_findLibrary(dl NO_HALT)
-if(LINUX)
-	dk_lib	(dl)
-elseif(RASPBERRY)
+
+if(Linux OR Raspberry)
 	dk_lib	(dl)
 endif()

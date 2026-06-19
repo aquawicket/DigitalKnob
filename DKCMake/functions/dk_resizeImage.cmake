@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_resizeImage(inpath width height outpath)
 #
 #	@inpath		- Full path of the image file to resize
@@ -22,27 +33,27 @@ function(dk_resizeImage)
 	dk_mkdir(${outdir})
 	dk_assertPath(${outdir})
 	
-	if(ANDROID_HOST)
+	if(Android_Host)
 		dk_installPackage(imagemagick)
 
 		###### BASH ######
-		execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-		if(EXISTS "${BASH_EXE}")
-			execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-			execute_process(COMMAND ${BASH_EXE} -c "command -v 'convert'" OUTPUT_VARIABLE IMAGEMAGICK_CONVERT_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)	
-			dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
-			#message("${cmnd}")
-			set(cmnd ${BASH_EXE} -c "${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath}")
+		dk_exec(bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe)
+		if(EXISTS "${bash_exe}")
+			dk_exec(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe)
+			dk_exec(COMMAND ${bash_exe} -c "command -v 'convert'" OUTPUT_VARIABLE convert_exe)	
+			dk_assertPath(convert_exe)
+			#dk_echo("${cmnd}")
+			set(cmnd ${bash_exe} -c "${convert_exe} ${inpath} -resize ${width}x${height} ${outpath}")
 		endif()
 
-	elseif(MAC_HOST)
+	elseif(Mac_Host)
 		dk_exec(sips -z ${width} ${height} ${inpath} --out ${outpath})
 
 	else()
 		dk_depend(imagemagick)
-		dk_findProgram(IMAGEMAGICK_CONVERT_EXE convert ${IMAGEMAGICK})
-		dk_assertPath(IMAGEMAGICK_CONVERT_EXE)
-		dk_exec(${IMAGEMAGICK_CONVERT_EXE} ${inpath} -resize ${width}x${height} ${outpath})
+		dk_findProgram(convert_exe convert ${imagemagick})
+		dk_assertPath(convert_exe)
+		dk_exec(${convert_exe} ${inpath} -resize ${width}x${height} ${outpath})
 	
 	endif()
 endfunction()
@@ -55,9 +66,9 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	set(inpath "C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKCore/icons/icon.png")
+	set(inpath "C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon.png")
 	set(width 36)
 	set(height 36)
-	set(outpath "C:/Users/Administrator/digitalknob/Development/DKCpp/apps/DKCore/icons/icon_36x36.png")
+	set(outpath "C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon_36x36.png")
 	dk_resizeImage(${inpath} ${width} ${height} ${outpath})
 endfunction()

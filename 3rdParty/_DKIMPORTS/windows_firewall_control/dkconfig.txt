@@ -1,1 +1,5 @@
-WINDOWS_FIREWALL_CONTROL_IMPORT=https://www.binisoft.org/download/wfc6setup.exe
+############ windows_firewall_control ############
+# https://www.binisoft.org/wfc
+# https://www.binisoft.org/download/wfc6setup.exe
+
+windows_firewall_control_Windows_X86_64_Import=https://www.binisoft.org/download/wfc6setup.exe

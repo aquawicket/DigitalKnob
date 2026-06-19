@@ -1,0 +1,5 @@
+################## boxer ##################
+# https://github.com/aaronmjacobs/Boxer.git
+# https://github.com/aaronmjacobs/Boxer/archive/5561c0fa1262f9b182a56cd0b06bcdca84a029a6.zip
+
+boxer_Import=https://github.com/aaronmjacobs/Boxer/archive/5561c0fa1262f9b182a56cd0b06bcdca84a029a6.zip

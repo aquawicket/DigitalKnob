@@ -1,0 +1,10 @@
+############ cryptopp ############
+# https://www.cryptopp.com/
+# https://github.com/weidai11/cryptopp.git
+# https://github.com/weidai11/cryptopp/archive/60f81a77e0c9a0e7ffc1ca1bc438ddfa2e43b78e.zip
+
+cryptopp_Unix_Import=https://github.com/weidai11/cryptopp/archive/refs/tags/CRYPTOPP_8_5_0.zip
+cryptopp_Windows_Import=https://github.com/weidai11/cryptopp/archive/60f81a77e0c9a0e7ffc1ca1bc438ddfa2e43b78e.zip
+
+
+

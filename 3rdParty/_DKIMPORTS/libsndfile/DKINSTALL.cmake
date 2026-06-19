@@ -1,15 +1,21 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ libsndfile ############
 # https://github.com/libsndfile/libsndfile.git
-dk_load(dk_builder)
 
-### DEPEND ###
 dk_depend(flac)
 dk_depend(lame)
 dk_depend(mpg123)
@@ -19,22 +25,18 @@ dk_depend(opus)
 #dk_depend(sqlite)
 dk_depend(vorbis)
 
-### IMPORT ###
 dk_import(https://github.com/libsndfile/libsndfile/archive/58c05b87.zip)
 
-### LINK ###
-dk_include			(${LIBSNDFILE}/include)
-dk_include			(${LIBSNDFILE}/${target_triple})
+dk_include			(${libsndfile}/include)
+dk_include			(${libsndfile}/${Target_Tuple})
 if(MSVC)
-	dk_libDebug		(${LIBSNDFILE_DEBUG_DIR}/sndfile.lib)
-	dk_libRelease	(${LIBSNDFILE_RELEASE_DIR}/sndfile.lib)
+	dk_libDebug		(${libsndfile_Debug_Dir}/sndfile.lib)
+	dk_libRelease	(${libsndfile_Release_Dir}/sndfile.lib)
 else()
-	dk_libDebug		(${LIBSNDFILE_DEBUG_DIR}/libsndfile.a)
-	dk_libRelease	(${LIBSNDFILE_RELEASE_DIR}/libsndfile.a)
+	dk_libDebug		(${libsndfile_Debug_Dir}/libsndfile.a)
+	dk_libRelease	(${libsndfile_Release_Dir}/libsndfile.a)
 endif()
 
-### GENERATE ###
-dk_configure(${LIBSNDFILE} ${FLAC_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${OGG_CMAKE} ${OPUS_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${VORBIS_CMAKE})
+dk_configure(${libsndfile} ${flac_CMAKE} ${LAME_CMAKE} ${MPG123_CMAKE} ${ogg_CMAKE} ${opus_CMAKE} ${SPEEX_CMAKE} ${SQLITE_CMAKE} ${vorbis_CMAKE})
 
-### COMPILE ###
-dk_build(${LIBSNDFILE})
+dk_build()

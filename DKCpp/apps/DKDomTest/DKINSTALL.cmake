@@ -1,63 +1,53 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-dk_load(dk_builder)
-
-#dk_depend(netsurf)
-dk_depend(webref)
-
-dk_depend(DKDuktape)
-dk_depend(DK)
-dk_depend(DKAssets)
-
-
-###### Standard Interfaces ######
-dk_depend(DKInterface)
-dk_depend(DKConsole)
-dk_depend(DKEvent)
-dk_depend(DKEventListener)
-dk_depend(DKEventTarget)
-dk_depend(DKCustomEvent)
-dk_depend(DKNonElementParentNode)		# Mixin
-dk_depend(DKDocument)
-dk_depend(DKScreen)
-dk_depend(DKWindow)
-dk_depend(DKUIEvent)
-dk_depend(DKFocusEvent)
-dk_depend(DKMouseEvent)
-dk_depend(DKWheelEvent)
-dk_depend(DKInputEvent)
-dk_depend(DKKeyboardEvent)
-dk_depend(DKCompositionEvent)
-dk_depend(DKDragEvent)
-dk_depend(DKNavigator)
-dk_depend(DKURL)
-dk_depend(DKLocation)
-dk_depend(DKCSSStyleDeclaration)
-dk_depend(DKNode)
-dk_depend(DKInnerHTML)					# Mixin
-dk_depend(DKElementCSSInlineStyle)		# Mixin
-dk_depend(DKElement)
-dk_depend(DKHTMLCollection)
-dk_depend(DKHTMLElement)
-dk_depend(DKHTMLBodyElement)
-dk_depend(DKHTMLImageElement)
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 
-###### DigitalKnob Interfaces ######
-dk_depend(DKConsoleWindow)
-dk_depend(DKSDLWindow)
-dk_depend(DKSDLRmlDocument)
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}dk_call.cmake")
+dk_call(dk_DKBRANCH_DIR)
+dk_call(dk_Target_Tuple)
+dk_call(dk_set Target_App_Dir "${CMAKE_CURRENT_LIST_DIR}")
 
-dk_depend(DKRmlInterface)
-dk_depend(DKRmlEventListener)
-dk_depend(DKRmlEventTarget)
-dk_depend(DKRmlLocation)
-dk_depend(DKRmlCSSStyleDeclaration)
-dk_depend(DKRmlNode)
-dk_depend(DKRmlElementCSSInlineStyle)	# Mixin
-dk_depend(DKRmlInnerHTML)				# Mixin
-dk_depend(DKRmlElement)
-dk_depend(DKRmlNonElementParentNode)	# Mixin
-dk_depend(DKRmlDocument)
-dk_depend(DKRmlHTMLElement)
-dk_depend(DKWebTest)
+dk_basename("${Target_App_Dir}")
+dk_envList(PLUGIN PUSH 		"${dk_basename}")
+dk_set(${CURRENT_PLUGIN}	"${Target_App_Dir}")
+
+if(EXISTS "${Target_App_Dir}/depends.cmake")
+	include("${Target_App_Dir}/depends.cmake")
+endif()
+
+############ Plugins.h file ############
+if(PLUGINS_FILE)
+	dk_set(PLUGINS_FILE		${PLUGINS_FILE})
+	dk_replaceAll("${PLUGINS_FILE}" "#include 	\"DKWindow.h\""  ""  	PLUGINS_FILE)
+	#dk_replaceAll("${PLUGINS_FILE}"  "\\n"  	"\n" 			 		PLUGINS_FILE)
+	dk_replaceAll("${PLUGINS_FILE}"  ";"  		""  					PLUGINS_FILE)
+endif()
+dk_fileWrite("${Target_App_Dir}/DKPlugins.h" "${PLUGINS_FILE}")
+
+dk_set(DKCPP_PLUGINS_DIR 	"${DKCPP_PLUGINS_DIR}")
+file(GLOB HEADER_FILES RELATIVE ${DKCPP_PLUGINS_DIR} ${CMAKE_CURRENT_LIST_DIR}/*.h)
+foreach(header ${HEADER_FILES})
+	if(NOT PLUGINS_FILE MATCHES "${header}")
+		dk_set(PLUGINS_FILE ${PLUGINS_FILE} "#include \"${header}\"\\n")
+	endif()
+endforeach()
+########################################
+
+#dk_call(dk_copy "${DKCPP_PLUGINS_DIR}/_DKIMPORT/_CMakeLists.txt_" "${Target_App_Dir}/CMakeLists.txt" OVERWRITE)
+dk_load(dk_generateAppCmake)
+dk_generateAppCmake()
+
+dk_define(DKAPP)
+dk_call(dk_configure "${Target_App_Dir}")
+dk_build("${Target_App_Dir}")

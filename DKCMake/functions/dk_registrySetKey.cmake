@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_registrySetKey(key value data)
 #
 #	TODO
@@ -14,14 +25,17 @@ include_guard()
 function(dk_registrySetKey key value data)
 	dk_debugFunc()
 
-	
-	if(WIN_HOST)
+	dk_validate(Host_Os "dk_Host_Os()")
+	if(Windows_Host)
+		dk_validate(reg_exe "dk_depend(reg_exe)")
 		dk_replaceAll(${key}  "/"  "\\"  key)
 		dk_replaceAll(${value}  "/"  "\\"  value)
 		dk_replaceAll(${data}  "/"  "\\"  data)
-		execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
-		dk_verbose(output)
-		dk_verbose(_failed)
+		#execute_process(COMMAND reg add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output ERROR_VARIABLE _output RESULT_VARIABLE _failed)
+		dk_exec(${reg_exe} add "${key}" /v "${value}" /t REG_SZ /d "${data}" /f /reg:64 OUTPUT_VARIABLE _output)
+		dk_verbose(dk_exec_output)
+	else()
+		dk_error("dk_registrySetKey() is only available on Windows_Host")
 	endif()
 endfunction()
 
@@ -32,5 +46,15 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_todo()
+	dk_echo("DKTEST")
+	
+	dk_set(dk_exec_PRINT_CALL		1) 			# dk_exec_call
+	dk_set(dk_exec_PRINT_COMMAND	1) 			# dk_exec_command
+	dk_set(dk_exec_PRINT_EXITCODES	1)			# dk_exec_exitcodes
+	dk_set(dk_exec_PRINT_EXITCODE 	1)			# dk_exec_exitcode
+	dk_set(dk_exec_PRINT_STDERR 	1)			# dk_exec_stderr[]
+	dk_set(dk_exec_PRINT_STDOUT		1)			# dk_exec_stdout[]
+	dk_set(dk_exec_PRINT_OUTPUT 	1)			# dk_exec
+
+	dk_registrySetKey("HKCU/aquawicket/test" "test value" "user data test")
 endfunction()

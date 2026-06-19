@@ -3,10 +3,10 @@ setlocal ENABLEDELAYEDEXPANSION
 @echo off
 
 @NET FILE 1>NUL 2>NUL
-if not '%errorlevel%' == '0' ( 
+if NOT '%errorlevel%' == '0' (
   @rem if access denied error, run self as wsh-jscript to elevate.
   goto :UAC_ELEVATE
-) else ( 
+) else (
   @rem otherwise run.
   goto :NODE_JS
 )
@@ -14,7 +14,7 @@ goto:eof
 
 :UAC_ELEVATE
   @rem Pass this file's filename as command line arguments.
-  @cscript //nologo //e:jscript "%~f0" "%~f0"
+  @cscript.exe //nologo //e:jscript "%~f0" "%~f0"
   exit /b
 
 :NODE_JS
@@ -25,7 +25,7 @@ goto:eof
 // javascript block.
 function wscriptMain(filename){
   // Run this bat file again with "runas" parameter
-  var uac = new ActiveXObject("Shell.Application"); 
+  var uac = new ActiveXObject("Shell.Application");
   uac.ShellExecute(filename, "", "", "runas", 1);
 }
 

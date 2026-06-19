@@ -1,22 +1,48 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-################################################################################
-# dk_callDKCmake(function, arguments..., rtn_var)
+
+
+#########################################################################
+# dk_callDKCmake(function, arguments...)
 #
 #
-function(dk_callDKCmake func rtn_var)
+function(dk_callDKCmake)
     dk_debugFunc()
+    #dk_debug("dk_callDKCMake(${ARGV})")
+	
+	set(func ${ARGV0})
+	dk_load("dk_allButFirstArgs")
+	dk_allButFirstArgs(${ARGV})
+	set(args ${dk_allButFirstArgs})
+	separate_arguments(args NATIVE_COMMAND "${args}")
+	
+	dk_debug("func = ${func}")
+	dk_debug("args = ${args}")
+	
+	dk_load("${func}")
+	cmake_language(CALL ${func} ${args})
+	set(dk_callDKCmake "${${func}}" PARENT_SCOPE)
     
-    ### get required variables ###
-    dk_validate(ENV{DKIMPORTS_DIR}           "dk_DKBRANCH_DIR()")
-	dk_depend(cmake)
-	dk_validate(ENV{DKCMAKE_DIR}             "dk_DKBRANCH_DIR()")
-    dk_validate(DKCMAKE_FUNCTIONS_DIR   "dk_DKBRANCH_DIR()")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR}           "$ENV{DKCMAKE_FUNCTIONS_DIR}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_}          "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
-	set(ENV{DKSCRIPT_PATH}                   "$ENV{DKSCRIPT_PATH}")
+	### get required variables ###
+#    dk_validate(DKIMPORTS_DIR          	"dk_DKBRANCH_DIR()")
+#	dk_depend(cmake)
+#	dk_validate(DKCMAKE_DIR		            "dk_DKBRANCH_DIR()")
+#   dk_validate(DKCMAKE_FUNCTIONS_DIR		"dk_DKBRANCH_DIR()")
+#	dk_set(DKCMAKE_FUNCTIONS_DIR      		"${DKCMAKE_FUNCTIONS_DIR}")
+#	dk_set(ENV{DKCMAKE_FUNCTIONS_DIR_}     	"${DKCMAKE_FUNCTIONS_DIR}/")
+#	dk_set(DKSCRIPT_PATH              		"${DKSCRIPT_PATH}")
     
     
     ### get ALL_BUT_FIRST_ARGS ###
@@ -27,39 +53,43 @@ function(dk_callDKCmake func rtn_var)
     
     
     ### Call DKCmake function ###
-    set(DKCOMMAND "${func}(${ARGN})")
-    set(DKCMAKE_COMMAND "${CMAKE_EXE} -DDKCOMMAND=${DKCOMMAND} -DDKSCRIPT_PATH=$ENV{DKSCRIPT_PATH} -DQUEUE_BUILD=ON -DDKCMAKE_FUNCTIONS_DIR_=$ENV{DKCMAKE_FUNCTIONS_DIR_} -P $ENV{DKCMAKE_DIR}/DKEval.cmake")
+#   set(DKCOMMAND "${func}(${ARGN})")
+#    set(DKCMAKE_COMMAND "${cmake_exe} -DDKCOMMAND=${DKCOMMAND} -DDKSCRIPT_PATH=${DKSCRIPT_PATH} -DDKCMAKE_FUNCTIONS_DIR_=$ENV{DKCMAKE_FUNCTIONS_DIR_} -P ${DKCMAKE_DIR}/DKEval.cmake")
     #dk_echo("${DKCMAKE_COMMAND}")
-    execute_process(COMMAND ${DKCMAKE_COMMAND} WORKING_DIRECTORY "$ENV{DKCMAKE_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
+#    execute_process(COMMAND ${DKCMAKE_COMMAND} WORKING_DIRECTORY "${DKCMAKE_FUNCTIONS_DIR}" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
     
     
     ### process the return value ###
     #dk_echo("output = ${output}")
     #if("${LAST_ARG}" STREQUAL "rtn_var")
-        string(FIND "${output}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
-        if(last_newline_pos GREATER -1)
-            string(SUBSTRING "${output}" ${last_newline_pos} -1 rtn_value) # Extract the last line
-        else()
-            set(rtn_value "${output}") # If no newline character was found, the whole string is the last line
-        endif()
-        string(STRIP "${rtn_value}" rtn_value)
+#        string(FIND "${output}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
+#        if(last_newline_pos GREATER -1)
+#            string(SUBSTRING "${output}" ${last_newline_pos} -1 dk_callDKCmake) # Extract the last line
+#        else()
+#            set(dk_callDKCmake "${output}") # If no newline character was found, the whole string is the last line
+#        endif()
+#        string(STRIP "${dk_callDKCmake}" dk_callDKCmake)
         
-        set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
-        execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
+#        set(dk_callDKCmake "${dk_callDKCmake}" PARENT_SCOPE)
+#        execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${dk_callDKCmake}")
     #endif()
-    
-# DEBUG
-#	dk_printVar(rtn_value)
 endfunction()
 
 
 
+if(DEFINED ENV{callDKCmake_func})
+	dk_debug("ENV{callDKCmake_func} = $ENV{callDKCmake_func}")
+	dk_debug("ENV{callDKCmake_args} = $ENV{callDKCmake_args}")
+	dk_callDKCmake($ENV{callDKCmake_func} $ENV{callDKCmake_args})
+	message("${dk_callDKCmake}")
+endif()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
     dk_debugFunc()
-    
-    dk_callDKCmake(dk_test "FROM DKCmake" "dk_callDKCmake.cmake" rtn_var)
-	dk_echo()
-    dk_echo("rtn_var = ${rtn_var}")
+    dk_debug("DKTEST()")
+	
+    dk_callDKCmake(dk_basename "C:/Windows/System32")
+	dk_debug()
+    dk_debug("dk_callDKCmake = ${dk_callDKCmake}")
 endfunction()

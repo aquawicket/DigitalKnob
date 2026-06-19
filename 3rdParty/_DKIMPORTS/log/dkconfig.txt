@@ -1,0 +1,8 @@
+############ log #############
+#
+#	Android log library
+#
+# https://source.android.com/docs/core/tests/debug/understanding-logging
+# https://developer.android.com/reference/android/util/Log
+
+dk_depend(android-ndk)

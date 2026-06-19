@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_delete(path) [NO_HALT]
 #
 #	Remove a file or directory
@@ -13,7 +24,7 @@ include_guard()
 function(dk_delete)
 	dk_debugFunc(1 2)
 	
-	dk_getOption(NO_HALT)
+	dk_getParameter(NO_HALT)
 
 	if(NOT EXISTS "${ARGV0}")
 		dk_warning("${ARGV0} does not exist")
@@ -21,7 +32,7 @@ function(dk_delete)
 	endif()
 	
 	### delete the path ###
-	dk_debug("deleting ${ARGV0}")
+	#dk_debug("deleting ${ARGV0}")
 	file(REMOVE_RECURSE "${ARGV0}")
 	#execute_process(COMMAND -E rm "${ARGN}")
 	
@@ -40,6 +51,10 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_fileWrite(removeMe.file "created file to test dk_delete")
-	dk_delete("removeMe.file")
+	#dk_fileWrite(removeMe.file "created file to test dk_delete")
+	#dk_delete("removeMe.file")
+	
+	set(ENV{CMAKE} "C:/Users/Administrator/DigitalKnob/DKTools/cmake-3.29.5-windows-x86_64")
+	#dk_delete			("$ENV{CMAKE}")			# CMAKE cannot delete itself
+	dk_callDKBatch(dk_delete "$ENV{CMAKE}")
 endfunction()

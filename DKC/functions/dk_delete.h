@@ -13,11 +13,13 @@
 int dk_delete(const char* path){
 	
 	// Attempt to delete the file
-	int exit_status = remove(path);
-    if(exit_status == 0){
+	int _dk_delete = remove(path);
+    if(_dk_delete == 0){
         dk_success("File deleted successfully.\n");
+		exit_status = 0;
     } else {
         dk_error("Error: Unable to delete the file.\n");
+		exit_status = 13;
     }
     return exit_status;
 };

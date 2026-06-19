@@ -1,35 +1,37 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-############ asio ############
+################## asio ##################
 # https://github.com/chriskohlhoff/asio
-#
-dk_depend			(clang)
-dk_depend			(make)
-dk_basename			("${CMAKE_CURRENT_LIST_DIR}" current_plugin)
-dk_getFileParam		(${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt ${current_plugin}_import)
-#dk_importVariables	(${${current_plugin}_import} NAME ${current_plugin})
-dk_import			(${${current_plugin}_import} NAME ${current_plugin})
+
+dk_depend(clang)
+dk_depend(make)
 
 
+dk_import()
 
 ### LINK ###
-dk_toUpper("${current_plugin}" CURRENT_PLUGIN)
 dk_include			(${${CURRENT_PLUGIN}}/asio/include)
 if(MSVC)
-	dk_libDebug		(${${CURRENT_PLUGIN}_DEBUG_DIR}/${current_plugin}.lib)
-	dk_libRelease	(${${CURRENT_PLUGIN}_RELEASE_DIR}/${current_plugin}.lib)
+	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/${CURRENT_PLUGIN}.lib)
+	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/${CURRENT_PLUGIN}.lib)
 else()
-	dk_libDebug		(${${CURRENT_PLUGIN}_DEBUG_DIR}/lib${current_plugin}.a)
-	dk_libRelease	(${${CURRENT_PLUGIN}_RELEASE_DIR}/lib${current_plugin}.a)
+	dk_libDebug		(${${CURRENT_PLUGIN}_Debug_Dir}/lib${CURRENT_PLUGIN}.a)
+	dk_libRelease	(${${CURRENT_PLUGIN}_Release_Dir}/lib${CURRENT_PLUGIN}.a)
 endif()
-
 
 dk_configure("${${CURRENT_PLUGIN}}" ${CMAKE_MAKE_PROGRAM} -f "${${CURRENT_PLUGIN}}/asio/src/Makefile.mgw")
 
-
-dk_build("${${CURRENT_PLUGIN}}")
+dk_build()

@@ -1,0 +1,5 @@
+############ lz4 ############
+# https://github.com/lz4/lz4.git
+# https://github.com/lz4/lz4/archive/c609c16aed95ed339e142535b1b270e7b9e24ac1.zip
+
+lz4_Import=https://github.com/lz4/lz4/archive/c609c16aed95ed339e142535b1b270e7b9e24ac1.zip

@@ -1,0 +1,6 @@
+############ libexpat ############
+# https://github.com/libexpat/libexpat.git
+# https://github.com/libexpat/libexpat/archive/b70c8f5e511826dfd1c9f38b51fe0495dd140dec.zip
+
+#libexpat_Import=https://github.com/libexpat/libexpat/archive/b70c8f5e511826dfd1c9f38b51fe0495dd140dec.zip
+libexpat_Import=https://github.com/libexpat/libexpat/archive/libexpat-b70c8f5e511826dfd1c9f38b51fe0495dd140dec.zip

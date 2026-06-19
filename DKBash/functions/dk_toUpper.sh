@@ -1,19 +1,38 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ##################################################################################
-# dk_toUpper(<input> <output>)
+# dk_toUpper(<input> <rtn_var:OPTIONAL>)
 #
 #
 dk_toUpper() {
 	dk_debugFunc 1 2
 
-	local _toUpper_=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]')
+	#dk_toUpper=${1^^};  # bash 4.0+
+	dk_toUpper=$(builtin echo "${1}" | tr '[:lower:]' '[:upper:]');
 	
-	### return value ###
-	dk_call dk_printVar _toUpper_
-	[ ${#} -gt 1 ] && eval "${2}=${_toUpper_}" && return  # return value when using rtn_var parameter 
-	dk_return ${_toUpper_}; return						  # return value when using command substitution
+	
+	###### return ######
+	export dk_toUpper=${dk_toUpper};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_toUpper};
+	else
+		builtin echo "${dk_toUpper}";
+	fi
+	return $?;
 }
 
 
@@ -22,6 +41,26 @@ dk_toUpper() {
 DKTEST() {
 	dk_debugFunc 0
 	
-	dk_call dk_toUpper "CoNvErT tHiS sTrInG tO aLl UpPeRcAsE" uppercase
-	echo "uppercase = ${uppercase}"
+	### Special Characters ###
+	#     ALL:  ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+	#   VALID:  !   # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _   { | } ~
+	# INVALID:    "                                                   `        
+	dk_call dk_echo
+	myVar="a A b B c C d D e E f F g G h H i I j J k K l L m M n N o O p P q Q r R s S t T u U v V w W x X y Y z Z 1 2 3 4 5 6 7 8 9 0 ! # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ { | } ~"
+	dk_call dk_printVar myVar
+	
+	# return value in FUNCTION_NAME
+	dk_call dk_echo
+	dk_call dk_toUpper "${myVar}"					
+	dk_call dk_printVar dk_toUpper
+	
+	# return value in RETURN_VAR
+	dk_call dk_echo
+	dk_call dk_toUpper "${myVar}" rv_toUpper		
+	dk_call dk_printVar rv_toUpper
+	
+	# return value in COMMAND_SUBSTITUTION
+	dk_call dk_echo
+	cs_toUpper=$(dk_call dk_toUpper "${myVar}")		
+	dk_call dk_printVar cs_toUpper
 }

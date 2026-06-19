@@ -1,9 +1,21 @@
-#!/usr/bin/env sh
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
+
 
 # https://stackoverflow.com/a/65204171/688352
-[ -z "${DKBASH_FUNCTIONS_DIR_-}" ] && export DKBASH_FUNCTIONS_DIR_="../../../DKBash/functions/"
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
-
 ################################################################################
 # installPacman()
 #
@@ -47,9 +59,9 @@ installPacman() {
 	#https://repo.msys2.org/msys/x86_64/pacman-mirrors-20221016-1-any.pkg.tar.zst
 	
 	for f in $pacman; do echo "https://repo.msys2.org/msys/$HOSTTYPE/$f" && dk_call dk_download https://repo.msys2.org/msys/$HOSTTYPE/$f ${DKDOWNLOAD_DIR}/$f; done
-	#dk_call dk_download http://aquawicket.com/download/pacman-6.0.1-26-x86_64.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-6.0.1-26-x86_64.pkg.tar.zst
-	#dk_call dk_download http://aquawicket.com/download/pacman-mirrors-20221016-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-mirrors-20221016-1-any.pkg.tar.zst
-	#dk_call dk_download http://aquawicket.com/download/msys2-keyring-1~20221024-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/msys2-keyring-1~20221024-1-any.pkg.tar.zst
+	#dk_call dk_download http://aquawicket.com/DigitalKnob/download/pacman-6.0.1-26-x86_64.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-6.0.1-26-x86_64.pkg.tar.zst
+	#dk_call dk_download http://aquawicket.com/DigitalKnob/download/pacman-mirrors-20221016-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/pacman-mirrors-20221016-1-any.pkg.tar.zst
+	#dk_call dk_download http://aquawicket.com/DigitalKnob/download/msys2-keyring-1~20221024-1-any.pkg.tar.zst ${DKDOWNLOAD_DIR}/msys2-keyring-1~20221024-1-any.pkg.tar.zst
 	#for f in $pacman; do echo "https://repo.msys2.org/msys/$HOSTTYPE/$f" && curl https://repo.msys2.org/msys/$HOSTTYPE/$f -fo ~/Downloads/$f; done
 	
 	

@@ -1,0 +1,5 @@
+############ gdal ############
+# https://github.com/OSGeo/gdal.git
+# https://github.com/OSGeo/gdal/archive/2327638e4a399ac1e902623bfda68a03956288b6.zip
+
+gdal_Import=https://github.com/OSGeo/gdal/archive/2327638e4a399ac1e902623bfda68a03956288b6.zip

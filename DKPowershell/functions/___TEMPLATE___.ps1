@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$@FUNCTION_NAME@){ $@FUNCTION_NAME@ = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1 } else { . '${PSScriptRoot}/DK.ps1' }
+if(!$@FUNCTION_NAME@){ $@FUNCTION_NAME@_ps1 = 1; } else{ return; } #include guard
 
 
 ################################################################################
@@ -26,7 +26,7 @@ function Global:@FUNCTION_NAME@() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call @FUNCTION_NAME@ @ARGS@
 }

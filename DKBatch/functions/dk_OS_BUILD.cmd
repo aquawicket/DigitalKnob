@@ -1,26 +1,34 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_OS_BUILD()
-::#
-::#
+rem ############################################################################
+rem # dk_OS_BUILD()
+rem #
 :dk_OS_BUILD
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	for /f "tokens=1* delims==" %%A in ('wmic os get BuildNumber /value') do (
+	%dk_call% dk_validate WMIC.exe %dk_call% dk_findFile WMIC.exe
+	for /f "tokens=1* delims==" %%A in ('%WMIC.exe:/=\% os get BuildNumber /value') do (
 	for /f "tokens=*" %%S in ("%%B") do (
-		if "%%A" equ "BuildNumber" set "OS_BUILD=%%S"
+		if /i "%%A" equ "BuildNumber" set "dk_OS_BUILD=%%S"
 	))
 	
+	:return
 	endlocal & (
-		set "OS_BUILD=%OS_BUILD%"
+		set "dk_OS_BUILD=%dk_OS_BUILD%"
 	)
-)
+	rem %dk_call% dk_debug "dk_OS_BUILD = %dk_OS_BUILD%"
 %endfunction%
 
 
@@ -28,11 +36,10 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 	%dk_call% dk_OS_BUILD
-	echo OS_BUILD = '%OS_BUILD%'
+	%dk_call% dk_debug "dk_OS_BUILD = '%dk_OS_BUILD%'"
 %endfunction%

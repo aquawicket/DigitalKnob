@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ libxml2 ############
@@ -12,9 +20,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
 # https://fuchsia.googlesource.com/third_party/libxml2/
 
-dk_load(dk_builder)
 
 ### DEPEND ###
+#if(NOT EXISTS ${libxml2}/configure)
+dk_depend(autoconf)
+dk_depend(automake)
+dk_depend(libtool)
+dk_depend(pkgconf)
+#endif()
 dk_depend(libiconv)
 dk_depend(python3)
 dk_depend(xz)
@@ -22,59 +35,54 @@ dk_depend(zlib)
 
 
 ### IMPORT ###
-dk_import(https://github.com/GNOME/libxml2/archive/refs/tags/v2.12.5.tar.gz)
+dk_import() #PATCH
 
-if(NOT EXISTS ${LIBXML2}/configure)
-	dk_depend(autoconf)
-	dk_depend(automake)
-	dk_depend(libtool)
-endif()
 
 ### LINK ###
 dk_define				(LIBXML_STATIC)
-dk_include				(${LIBXML2_DIR})
-dk_include				(${LIBXML2_DIR}/include 				LIBXML2_INCLUDE_DIR)
+#dk_include				(${libxml2})
+dk_include				(${libxml2}/include 					LIBXML2_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
-	dk_include			(${LIBXML2_CONFIG_DIR}					LIBXML2_INCLUDE_DIR2)
+	dk_include			(${libxml2_Config_Dir}					LIBXML2_INCLUDE_DIR2)
 else()
-	if(DEBUG)
-		dk_include    	(${LIBXML2_DEBUG_DIR}					LIBXML2_INCLUDE_DIR2)
+	if(Debug)
+		dk_include    	(${libxml2_Debug_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
-	if(RELEASE)
-		dk_include 		(${LIBXML2_RELEASE_DIR}					LIBXML2_INCLUDE_DIR2)
+	if(Release)
+		dk_include 		(${libxml2_Release_Dir}					LIBXML2_INCLUDE_DIR2)
 	endif()
 endif()
 
 if(MSVC)
-	if(WIN)
-		dk_libDebug		(${LIBXML2_DEBUG_DIR}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBXML2_RELEASE_DIR}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE)
+	if(Windows)
+		dk_libDebug		(${libxml2_Debug_Dir}/libxml2sd.lib		LIBXML2_LIBRARY_DEBUG		LIBXML2_LIBRARY)
+		dk_libRelease	(${libxml2_Release_Dir}/libxml2s.lib	LIBXML2_LIBRARY_RELEASE		LIBXML2_LIBRARY)
 	endif()
 else()
-	dk_libDebug			(${LIBXML2_DEBUG_DIR}/libxml2.a			LIBXML2_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBXML2_RELEASE_DIR}/libxml2.a		LIBXML2_LIBRARY_RELEASE)
+	dk_libDebug			(${libxml2_Debug_Dir}/libxml2.a			LIBXML2_LIBRARY_DEBUG		LIBXML2_LIBRARY)
+	dk_libRelease		(${libxml2_Release_Dir}/libxml2.a		LIBXML2_LIBRARY_RELEASE		LIBXML2_LIBRARY)
 endif()
 
-if(DEBUG)
-	set(LIBXML2_LIBRARY		${LIBXML2_LIBRARY_DEBUG})
-endif()
-if(RELEASE)
-	set(LIBXML2_LIBRARY		${LIBXML2_LIBRARY_RELEASE})
-endif()
+#if(Debug)
+#	set(LIBXML2_LIBRARY		${LIBXML2_LIBRARY_DEBUG})
+#endif()
+#if(Release)
+#	set(LIBXML2_LIBRARY		${LIBXML2_LIBRARY_RELEASE})
+#endif()
 
 ### CMAKE 3RDPARTY LINK ###
-dk_set(LIBXML2_CMAKE 
+dk_set(libxml2_CMAKE 
 	-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR}
 	-DLIBXML2_LIBRARY=${LIBXML2_LIBRARY} 
 	"-DLIBXML2_INCLUDE_DIRS=${LIBXML2_INCLUDE_DIR} ${LIBXML2_INCLUDE_DIR2}" 
-	-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARY} 
-	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}" 
-	"-DCMAKE_CXX_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}")
+	-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARY}) 
+	#"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}" 
+	#"-DCMAKE_CXX_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR} -I${LIBXML2_INCLUDE_DIR2}")
 
 ### GENERATE ###
-#if(NOT EXISTS ${LIBXML2}/configure)
-#	dk_queueCommand(../../autogen.sh)
+#if(NOT EXISTS ${libxml2}/configure)
+#	dk_exec(../../autogen.sh)
 	#--with-c14n             Canonical XML 1.0 support (on)
 	#--with-catalog          XML Catalogs support (on)
 	#--with-debug            debugging module and shell (on)
@@ -111,55 +119,67 @@ dk_set(LIBXML2_CMAKE
 	#--with-legacy           maximum ABI compatibility (off)
 #endif()
 
-#ANDROID_dk_configure(${LIBXML2} 
+#Android_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${PYTHON_CMAKE} 
-#	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${xz_CMAKE} 
+#	${zlib_CMAKE})
 
-##APPLE_dk_queueCommand(${DKCONFIGURE_BUILD})
-#APPLE_dk_configure(${LIBXML2} 
+##Apple_dk_exec(${DKCONFIGURE_BUILD})
+#Apple_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
+#	${libiconv_CMAKE} 
 #	${PYTHON_CMAKE} 
-#	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${xz_CMAKE} 
+#	${zlib_CMAKE})
 
-##EMSCRIPTEN_dk_queueCommand(${DKCONFIGURE_BUILD})
-#E#MSCRIPTEN_dk_configure(${LIBXML2} 
+##Emscripten_dk_exec(${DKCONFIGURE_BUILD})
+#E#MSCRIPTEN_dk_configure(${libxml2} 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${libiconv_CMAKE} 
+#	${xz_CMAKE} 
+#	${zlib_CMAKE})
 
-##LINUX_dk_queueCommand(${DKCONFIGURE_BUILD} --with-python=no)
-#LINUX_dk_configure(${LIBXML2} 
+##Linux_dk_exec(${DKCONFIGURE_BUILD} --with-python=no)
+#Linux_dk_configure(${libxml2} 
 #	-DLIBXML2_WITH_PYTHON=OFF 
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${libiconv_CMAKE} 
+#	${xz_CMAKE} 
+#	${zlib_CMAKE})
 
-##RASPBERRY_dk_queueCommand(${DKCONFIGURE_BUILD})
-#RASPBERRY_dk_configure(${LIBXML2}
+##Raspberry_dk_exec(${DKCONFIGURE_BUILD})
+#Raspberry_dk_configure(${libxml2}
 #	"-DCMAKE_C_FLAGS=-DLIBXML_STATIC -DLIBXML_THREAD_ENABLED -DHAVE_ERRNO_H -I${LIBXML2_INCLUDE_DIR2}" 
-#	${LIBICONV_CMAKE} 
-#	${XZ_CMAKE} 
-#	${ZLIB_CMAKE})
+#	${libiconv_CMAKE} 
+#	${xz_CMAKE} 
+#	${zlib_CMAKE})
 
-#WIN_dk_queueCommand(${DKCONFIGURE_BUILD})
-dk_configure(${LIBXML2} 
+### TODO ### we still need to add flags to the configure.js call
+### We also need to make sure .js windows file association is set up.  look at DKJavascript/DKJavascript.reg
+#cscript.exe C:/Users/Administrator/DigitalKnob/Development/3rdParty/libxml2-e397651a/win32/configure.js compiler=mingw prefix=C:\Users\Administrator\DigitalKnob\Development\3rdParty\libxml2-e397651a\Windows_X86_64_Clang\Release
+if(Windows)
+	if(NOT EXISTS ${libxml2}/config.h)
+		dk_exec(cscript.exe configure.js compiler=mingw prefix=${libxml2_Build_Dir} WORKING_DIRECTORY "${libxml2}/win32")
+	endif()
+endif()
+
+#Windows_dk_exec(${DKCONFIGURE_BUILD})
+if(NOT EXISTS ${libxml2}/configure)
+	dk_exec(${libxml2}/autogen.sh)
+endif()
+dk_configure(${libxml2} 
 	-DLIBXML2_WITH_C14N=ON					# Add the Canonicalization support ON
 	-DLIBXML2_WITH_CATALOG=ON				# Add the Catalog support ON
 	-DLIBXML2_WITH_DEBUG=ON					# Add the debugging module ON
 	-DLIBXML2_WITH_FTP=OFF					# Add the FTP support OFF
 	-DLIBXML2_WITH_HTML=ON					# Add the HTML support ON
 	-DLIBXML2_WITH_HTTP=ON					# Add the HTTP support ON
-	-DLIBXML2_WITH_ICONV=${LIBICONV}		# Add ICONV support ON
+	-DLIBXML2_WITH_ICONV=${libiconv}		# Add ICONV support ON
 	-DLIBXML2_WITH_ICU=OFF					# Add ICU support OFF
 	-DLIBXML2_WITH_LEGACY=OFF				# Add deprecated APIs for compatibility OFF
-	-DLIBXML2_WITH_LZMA=${XZ}				# Use liblzma ON
+	-DLIBXML2_WITH_LZMA=${xz}				# Use liblzma ON
 	-DLIBXML2_WITH_MEM_DEBUG=OFF			# Add the memory debugging module OFF
 	-DLIBXML2_WITH_MODULES=OFF				# Add the dynamic modules support ON
 	-DLIBXML2_WITH_OUTPUT=ON				# Add the serialization support ON
@@ -183,11 +203,13 @@ dk_configure(${LIBXML2}
 	-DLIBXML2_WITH_XPATH=ON					# Add the XPATH support ON
 	-DLIBXML2_WITH_XPTR=ON					# Add the XPointer support ON
 	-DLIBXML2_WITH_XPTR_LOCS=OFF			# Add support for XPointer locations OFF
-	-DLIBXML2_WITH_ZLIB=${ZLIB}				# Use libz ON
-	${LIBICONV_CMAKE} 
-	${PYTHON3_CMAKE}
-	${XZ_CMAKE} 
-	${ZLIB_CMAKE})
+	-DLIBXML2_WITH_ZLIB=${zlib}				# Use libz ON
+	${libiconv_CMAKE} 
+	${python3_CMAKE}
+	${xz_CMAKE} 
+	${zlib_CMAKE})
 
 ### COMPILE ###
-dk_build(${LIBXML2} LibXml2)
+#dk_rename("${libxml2}/libxml2_VERSION" "${libxml2}/VERSION")
+dk_build(${libxml2}) # LibXml2)
+#dk_rename("${libxml2}/VERSION" "${libxml2}/libxml2_VERSION")

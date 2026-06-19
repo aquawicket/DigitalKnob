@@ -1,23 +1,30 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ########### libglfw3-dev ###########
-dk_load(dk_builder)
 if(NOT UNIX_HOST)
-	dk_undepend(libglfw3-dev)
+	dk_disable(libglfw3-dev)
 	dk_return()
 endif()
 
 ### INSTALL ###
-if(LINUX)
+if(Linux)
 	dk_installPackage(libglfw3-dev)
 endif()
-if(MAC)
-	#dk_command(brew install glfw3)
+if(Mac)
+	#dk_exec(brew install glfw3)
 	dk_installPackage(glfw3)
 	dk_include(/usr/local/include)
 	dk_lib(/usr/local/lib/libglfw.3.3.dylib)

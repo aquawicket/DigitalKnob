@@ -1,32 +1,32 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-
+#########################################################################
 
 ###### gme ######
-# https://github.com/libgme/game-music-emu
+# https://github.com/libgme/game-music-emu.git
+# https://github.com/libgme/game-music-emu/archive/cb2c1cc.zip
 
+dk_import		()
 
-### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	("$ENV{DKIMPORTS_DIR}/gme/dkconfig.txt" GME_DL)
-dk_import		(${GME_DL})
-
-### LINK ###
-dk_include			(${GME}/include)
-if(UNIX)
-	dk_libDebug		(${GME_DEBUG_DIR}/gme/libgme.a)
-	dk_libRelease	(${GME_RELEASE_DIR}/gme/libgme.a)
+dk_include			(${gme}/include)
+if(Unix)
+	dk_libDebug		(${gme_Debug_Dir}/gme/libgme.a)
+	dk_libRelease	(${gme_Release_Dir}/gme/libgme.a)
 else()
-	dk_libDebug		(${GME_DEBUG_DIR}/gme/gme.lib)
-	dk_libRelease	(${GME_RELEASE_DIR}/gme/gme.lib)
+	dk_libDebug		(${gme_Debug_Dir}/gme/gme.lib)
+	dk_libRelease	(${gme_Release_Dir}/gme/gme.lib)
 endif()
 
-### GENERATE ###
-dk_configure(${GME})
+dk_configure()
 
-
-### COMPILE ###
-dk_build(${GME})
+dk_build()

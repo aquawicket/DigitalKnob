@@ -5,6 +5,7 @@ FilePointer 0 0 /C
 set EOF=%errorlevel%
 
 rem Set the offset to jump to the :subroutine
+
 setlocal EnableDelayedExpansion
 set "sub=%1"
 FilePointer 0 !%sub:~1%!

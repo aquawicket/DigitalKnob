@@ -1,41 +1,47 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ lua ############
 # https://github.com/lua/lua.git
 # https://www.lua.org/ftp/lua-5.4.3.tar.gz
 # https://github.com/lubgr/lua-cmake.git
+# https://github.com/lua/lua/archive/fd0e1f53.zip
 
-dk_load(dk_builder)
 
 ### IMPORT ###
-dk_import(https://github.com/lua/lua/archive/fd0e1f53.zip PATCH)
+dk_import()
 
 ### LINK ###
-dk_include			(${LUA}/include							LUA_INCLUDE_DIR)
-dk_include			(${LUA}/${target_triple}							LUA_INCLUDE_DIR2)
-DEBUG_dk_include	(${LUA_DEBUG_DIR}/include		LUA_INCLUDE_DIR2)
-RELEASE_dk_include	(${LUA_RELEASE_DIR}/include	LUA_INCLUDE_DIR2)
+dk_include			("${lua}/include"					LUA_INCLUDE_DIR)
+dk_include			("${lua_Tuple_Dir}"					LUA_INCLUDE_DIR2)
+dk_include			("${lua_Build_Dir}/include"			LUA_INCLUDE_DIR3)
 
-if(MSVC)
-	WIN_dk_libDebug		(${LUA_DEBUG_DIR}/lua.lib		LUA_DEBUG_LIBRARY)
-	WIN_dk_libRelease	(${LUA_RELEASE_DIR}/lua.lib	LUA_RELEASE_LIBRARY)
+
+if(Windows AND MSVC)
+	dk_libDebug		(${lua_Debug_Dir}/lua.lib			LUA_DEBUG_LIBRARY	LUA_LIBRARY)
+	dk_libRelease	(${lua_Release_Dir}/lua.lib			LUA_RELEASE_LIBRARY LUA_LIBRARY)
 else()
-	dk_libDebug			(${LUA_DEBUG_DIR}/liblua.a		LUA_DEBUG_LIBRARY)
-	dk_libRelease		(${LUA_RELEASE_DIR}/liblua.a	LUA_RELEASE_LIBRARY)
+	dk_libDebug		(${lua_Debug_Dir}/liblua.a			LUA_DEBUG_LIBRARY	LUA_LIBRARY)
+	dk_libRelease	(${lua_Release_Dir}/liblua.a		LUA_RELEASE_LIBRARY	LUA_LIBRARY)
 endif()
 
 ### 3RDPARTY LINK ###
-#DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_DEBUG_LIBRARY} )
-DEBUG_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR2} 	-DLUA_LIBRARIES=${LUA_DEBUG_LIBRARY} )
-RELEASE_dk_set		(LUA_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_RELEASE_LIBRARY} )
+dk_set		(lua_CMAKE -DLUA_INCLUDE_DIR=${LUA_INCLUDE_DIR} 	-DLUA_LIBRARIES=${LUA_LIBRARY})
 
 ### GENERATE ###
-dk_configure(${LUA})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${LUA} lua)
+dk_build(${lua} lua)

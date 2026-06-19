@@ -1,25 +1,33 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ verysleepy ############
 # https://github.com/VerySleepy/verysleepy.git
 # http://www.codersnotes.com/sleepy/
-# https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 # https://github.com/VerySleepy/verysleepy/archive/refs/tags/v0.91.zip (source)
-dk_load(dk_builder)
+# https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe
 
-if(NOT WIN_HOST)
+if(NOT Windows_Host)
 	return()
 endif()
 
-if(WIN_X86)
+if(Windows_X86)
 	dk_set(VERYSLEEPY "${ProgramFiles}/Very Sleepy/32")
-elseif(WIN_X86_64)
+elseif(Windows_X86_64)
 	dk_set(VERYSLEEPY "${ProgramFiles}/Very Sleepy")
 endif()
-dk_set(VERYSLEEPY_EXE "${VERYSLEEPY}/sleepy.exe")
-dk_import(https://github.com/VerySleepy/verysleepy/releases/download/v0.91/verysleepy-0.91.exe)
+dk_set(sleepy_exe "${VERYSLEEPY}/sleepy.exe")
+dk_import()
+dk_exec(${dk_download})

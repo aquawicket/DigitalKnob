@@ -1,23 +1,42 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_install()
-::#
-:dk_install
-::setlocal
-	%dk_call% dk_debugFunc 0
+rem ####################################################################
+rem # dk_install()
+rem #
+:DKINSTALL
+%setlocal%
+	%dk_call% dk_validate git.exe		%dk_call% dk_depend git
+	%dk_call% dk_validate git_bash_exe  %dk_call% dk_depend git
 	
-	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate GIT_EXE          "%dk_call% dk_installGit"
-	%dk_call% dk_validate GITBASH_EXE      "%dk_call% dk_installGit"
-	%dk_call% dk_installContextMenu "GIT ADD" "%GITBASH_EXE%" "\"%GIT_EXE:/=\%\" add \"%%%%%%%%1\""
-	
-	::%dk_call% dk_validate BASH_EXE       "%dk_call% %DKIMPORTS_DIR%\git\DKINSTALL.cmd"
-	::%dk_call% dk_installContextMenu "GIT ADD" "%BASH_EXE%" "\"%GIT_EXE:/=\%\" add \"%%%%1\""
+	rem ### Icon ###
+	rem "C:\Users\Administrator\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\git-bash.exe"	
+	rem ### Command ###
+	rem "C:\Windows\System32\cmd.exe" /c ("C:\Users\Administrator\Digita lKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" add "%1") || pause	
+	rem %dk_call% dk_installContextMenu "Git Add" "%git_bash_exe:/=\%" "\"%ComSpec%\" /c (\"%git.exe:/=\%\" add \"%%%%%%%%1\") & pause"
+
+	rem "reg.exe" ADD "HKCR\AllFilesystemObjects\shell\Git Add" /v Icon /t REG_SZ /d "%git_bash_exe:/=\%" /f
+	%dk_call% reg.exe ADD "HKCR\AllFilesystemObjects\shell\Git Add" /v Icon /t REG_SZ /d "%git_bash_exe:/=\%" /f
+	%dk_call% reg.exe ADD "HKCR\AllFilesystemObjects\shell\Git Add\command" /ve /d "\"%ComSpec%\" /c (\"%git.exe:/=\%\" add \"%%1\") ^|^| pause" /f
+
+	rem ### Icon ###
+	rem "C:\Users\Administrator\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\git-bash.exe"
+	rem ### Command ###	
+	rem "C:\Windows\System32\cmd.exe" /c ("C:\Users\Administrator\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\git.exe" clean -d -x -f "%1") || pause
+	rem %dk_call% dk_installContextMenu "Git Clean" "%git_bash_exe:/=\%" "\"%ComSpec%\" /c (\"%git.exe:/=\%\" clean -d -x -f \"%%%%%%%%1\") & pause"
+	%dk_call% reg.exe ADD "HKCR\AllFilesystemObjects\shell\Git Clean" /v Icon /t REG_SZ /d "%git_bash_exe:/=\%" /f
+	%dk_call% reg.exe ADD "HKCR\AllFilesystemObjects\shell\Git Clean\command" /ve /d "\"%ComSpec%\" /c (\"%git.exe:/=\%\" clean -d -x -f \"%%1\") || pause" /f
 %endfunction%
 
 
@@ -26,10 +45,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-    call :dk_install
+    %dk_call% dk_depend git/contextMenu
 %endfunction%

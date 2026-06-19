@@ -5,6 +5,6 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv){
-	return dk_chdir("C:/Users/Administrator/digitalknob");
+	return dk_chdir("C:/Users/Administrator/DigitalKnob");
 }
 #endif

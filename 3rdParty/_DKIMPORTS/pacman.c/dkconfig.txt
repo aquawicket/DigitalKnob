@@ -1,0 +1,5 @@
+############ pacman.c ############
+# https://github.com/floooh/pacman.c.git
+# https://github.com/floooh/pacman.c/archive/fffe99f778688acaf8ff38ee5e3582c85293e163.zip
+
+pacman.c_Import=https://github.com/floooh/pacman.c/archive/fffe99f778688acaf8ff38ee5e3582c85293e163.zip

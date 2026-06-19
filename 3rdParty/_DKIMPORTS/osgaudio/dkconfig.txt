@@ -1,0 +1,5 @@
+############ osgaudio ############
+# https://github.com/mccdo/osgaudio.git
+# https://github.com/mccdo/osgaudio/archive/be872549c8452cbbf44ec8235dfa5a74566cb06d.zip
+
+osgaudio_Import=https://github.com/mccdo/osgaudio/archive/be872549c8452cbbf44ec8235dfa5a74566cb06d.zip

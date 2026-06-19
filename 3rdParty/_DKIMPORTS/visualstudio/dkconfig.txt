@@ -1,0 +1,7 @@
+############ visualstudio ############
+# visualstudio_Import=https://aka.ms/vs/17/release/vs_BuildTools.exe
+# visualstudio_Flavor=BuildTools
+# visualstudio_Year=2022
+# visualstudio_Major=17
+ 
+visualstudio_Type=Tool

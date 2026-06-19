@@ -1,0 +1,192 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+endif()
+include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+include_guard()
+#########################################################################
+
+
+#########################################################################
+# libarchive
+#
+# 	Multi-format archive and compression library
+#
+# Reference: 	https://libarchive.org/
+# 				https://github.com/libarchive/libarchive
+# 				https://packages.msys2.org/base/libarchive
+#
+# Errors:
+# 	INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
+# 		https://github.com/libarchive/libarchive/issues/1563
+#
+
+dk_validate(Target_Config  "dk_Target_Config()")
+
+### DEPENDS ###
+dk_depend(bzip2)
+#dk_depend(libb2)
+#dk_depend(libbcrypt)
+dk_depend(libexpat)
+dk_depend(libgcc)
+dk_depend(libiconv)
+dk_depend(libxml2)
+dk_depend(lz4)
+dk_depend(lzo)
+dk_depend(pcre2)
+dk_depend(xz)
+dk_depend(zlib)
+dk_depend(zstd)
+
+
+### IMPORT ###
+dk_import(https://github.com/libarchive/libarchive/archive/6567375.zip)
+
+
+### LINK ###
+dk_define					(LIBARCHIVE_STATIC)
+dk_include					(${libarchive}/libarchive)
+dk_include					(${libarchive_Tuple_Dir})
+if(Android)
+	dk_include				(${libarchive}/contrib/android/include)
+endif()
+
+if(MULTI_CONFIG)
+	if(MSVC)
+		if(Windows)
+			dk_libDebug		(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
+			dk_libRelease	(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
+		endif()
+	else()
+		dk_libDebug			(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
+		dk_libRelease		(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
+	endif()
+else()
+	dk_libDebug				(${libarchive_Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
+	dk_libRelease			(${libarchive_Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
+endif()
+
+
+### GENERATE ###
+set(libarchive_CONFIGURE 
+	${libarchive}
+	-DENABLE_ACL=ON
+	-DENABLE_BZip2=${bzip2}
+	-DENABLE_CAT=ON
+	-DENABLE_CAT_SHARED=OFF
+	-DENABLE_CNG=${libbcrypt}
+	-DENABLE_COVERAGE=OFF
+	-DENABLE_CPIO=ON
+	-DENABLE_CPIO_SHARED=OFF
+	-DENABLE_EXPAT=${libexpat}
+	-DENABLE_ICONV=${libiconv}
+	-DENABLE_INSTALL=OFF
+	-DENABLE_LIBB2=${libb2} 
+	#-DENABLE_LIBGCC=${libgcc}
+	-DENABLE_LIBXML2=${libxml2} 
+	-DENABLE_LZ4=${lz4} 
+	-DENABLE_LZMA=${xz}
+	-DENABLE_LZO=${lzo}
+	-DENABLE_MBEDTLS=OFF
+	-DENABLE_NETTLE=OFF
+	#-DENABLE_OPENSSL=${openssl}
+	-DENABLE_PCREPOSIX=OFF
+	-DENABLE_SAFESEH="AUTO"
+	-DENABLE_TAR=ON
+	-DENABLE_TAR_SHARED=OFF
+	-DENABLE_TEST=OFF
+	-DENABLE_UNZIP=OFF
+	-DENABLE_UNZIP_SHARED=OFF
+	-DENABLE_WERROR=OFF
+	-DENABLE_XATTR=ON
+	-DENABLE_ZLIB=${zlib}
+	-DENABLE_ZSTD=${zstd}
+	-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+	-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
+	-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
+	-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
+	-DLIBXML2_XMLLINT_EXECUTABLE=OFF
+	-DPOSIX_REGEX_LIB="AUTO"
+	-DUSE_BZIP2_DLL=OFF
+	-DUSE_BZIP2_STATIC=${bzip2}
+	#-DWINDOWS_VERSION="WIN10"
+	-DZLIB_DLL=OFF
+	${bzip2_CMAKE}
+	#${cryptopp_CMAKE}
+	${libb2_CMAKE}
+	${libbcrypt_CMAKE}
+	${libexpat_CMAKE}
+	${libgcc_CMAKE}
+	${libiconv_CMAKE}
+	${libxml2_CMAKE}
+	${lz4_CMAKE}
+	${lzo_CMAKE}
+	#${openssl_CMAKE}
+	${pcre2_CMAKE}
+	${xz_CMAKE}
+	${zlib_CMAKE}
+	${zstd_CMAKE})
+	
+		
+		
+if(Android)
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive_Tuple_Dir} -I${libarchive}/contrib/android/include")
+else()
+	dk_append(libarchive_CONFIGURE -DENABLE_OPENSSL=${openssl})
+	dk_append(libarchive_CONFIGURE ${openssl_CMAKE})
+endif()
+
+if(Ios)
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive}/libarchive")
+
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
+endif()
+
+if(Iossim)
+	dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-I${libarchive}/libarchive")
+	
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
+endif()
+
+if(Windows)
+	if(NOT MSVC)
+		dk_append(libarchive_CONFIGURE "-DCMAKE_C_FLAGS=-DLIBXML_STATIC")
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_PACKAGE_REGISTRY=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_CMAKE_SYSTEM_PATH=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY=FALSE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_IGNORE_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_IGNORE_PREFIX_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DCMAKE_SYSTEM_IGNORE_PREFIX_PATH=TRUE)
+		dk_append(libarchive_CONFIGURE -DLibXml2_ROOT=${libxml2})
+		#dk_append(libarchive_CONFIGURE -DENABLE_LIBGCC=${libgcc})
+		dk_append(libarchive_CONFIGURE -DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR})
+	endif()
+	dk_append(libarchive_CONFIGURE -DWINDOWS_VERSION="WIN10")
+endif()
+
+
+
+### CONFIGURE ###
+dk_configure(${libarchive_CONFIGURE})
+
+### COMPILE ###
+dk_build(${libarchive} archive_static)

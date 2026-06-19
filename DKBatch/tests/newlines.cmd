@@ -1,18 +1,26 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 :: https://stackoverflow.com/questions/3294599/do-batch-files-support-multiline-variables
 
-::###### newline (echo: version) ######
-set \n=^&echo:
+::###### newline (echo. version) ######
+set \n=^&echo.
 
 :: echo text with newlines
 echo first line %\n%second line %\n%third line %\n%
 
-:: variable with newlines (does not work with &echo: )
+:: variable with newlines (does NOT work with &echo. )
 ::set multi=Line1%\n%
 ::set multi=%multi%Line2%\n%
 ::set multi=%multi%Line3%\n%
@@ -41,7 +49,7 @@ pause
 
 :: https://stackoverflow.com/a/5642300
 ::###### newline (without delayed expansion) ######
-(SET LF=^
+(set LF=^
 %=this line is empty=%
 )
 echo This text^%LF%%LF%uses two lines

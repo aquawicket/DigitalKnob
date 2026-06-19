@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ################################################################################
 # dk_arrayPop(array)
@@ -20,16 +33,19 @@ dk_arrayPop() {
 	dk_debugFunc 1 2
 	#dk_validateArgs array
 	
-	eval local array='("${'$1'[@]}")'			#typeset -n array=${1}
+	eval local array='("${'$1'[@]}")'		#typeset -n array=${1}	
+	[ -n "${2-}" ] && local rtn_var="${2}" || local rtn_var="dk_arrayPop"
+	
+	
 	local _length_=${#array[@]}
 	_length_=$((_length_ - 1))
-	eval local removedElement='("${'array'[$_length_]}")'
-	dk_unset array[$_length_]
+	eval local _arrayPop='("${'array'[$_length_]}")'
+	dk_call dk_unset array[$_length_]
 	
-	### return value ###
-	eval ${1}='("${array[@]}")'  # FIXME: command substitution cannot alter parent variables
-	[ ${#} -gt 1 ] && eval ${2}='"${removedElement}"' && return	# return value using return variable
-	dk_return "${removedElement}" && return						# return value using command substitution
+	###### return ######
+	eval ${1}='("${array[@]}")'				# update the parent array
+	eval ${rtn_var}='("${_arrayPop[@]}")'	# return value in FUNCTION_NAME or RETURN_VAR
+	dk_return "${_arrayPop[*]}"				# return value using command substitution
 }
 
 
@@ -38,86 +54,38 @@ dk_arrayPop() {
 DKTEST() { 
 	dk_debugFunc 0
 	
-	myArrayA[0]="a b c"
-	myArrayA[1]="1 2 3"
-	myArrayA[2]="d e f"
-	myArrayA[3]="4 5 6"
-	myArrayA[4]="h i j"
+	dk_call dk_echo
+	myArray[0]="a b c"
+	myArray[1]="1 2 3"
+	myArray[2]="d e f"
+	myArray[3]="4 5 6"
+	myArray[4]="h i j"
+	dk_call dk_printVar myArray
 	
-	dk_printVar myArrayA 
-	dk_echo
+	# return value in FUNCTION_NAME
+	dk_call dk_echo
+	dk_call dk_arrayPop myArray
+	dk_call dk_printVar myArray
+	dk_call dk_printVar dk_arrayPop
+	[ "${myArray[0]-}" = "a b c" ] && \
+	[ "${myArray[1]-}" = "1 2 3" ] && \
+	[ "${myArray[2]-}" = "d e f" ] && \
+	[ "${myArray[3]-}" = "4 5 6" ] && \
+	[ ! "${myArray[4]-}" = "h i j" ] && \
+	[ "${dk_arrayPop-}" = "h i j" ] && \
+	dk_call dk_success "dk_arrayPop succeeded" || \
+	dk_call dk_error "dk_arrayPop failed"
 	
-	dk_arrayPop myArrayA removedA
-	dk_printVar myArrayA
-	dk_printVar removedA
-	dk_echo
+	# return value in FUNCTION_NAME
+	dk_call dk_echo
+	dk_call dk_arrayPop myArray rv_arrayPop
+	dk_call dk_printVar myArray
+	dk_call dk_printVar rv_arrayPop
 	
-	dk_arrayPop myArrayA removedA
-	dk_printVar myArrayA
-	dk_printVar removedA
-	dk_echo
-	
-	dk_arrayPop myArrayA removedA
-	dk_printVar myArrayA
-	dk_printVar removedA
-	dk_echo
-	
-	dk_arrayPop myArrayA removedA
-	dk_printVar myArrayA
-	dk_printVar removedA
-	dk_echo
-	
-	dk_arrayPop myArrayA removedA
-	dk_printVar myArrayA
-	dk_printVar removedA
-	dk_echo
-	
-	# FIXME:  out of array bounds past here
-#	dk_arrayPop myArrayA removedA
-#	dk_printVar myArrayA
-#	dk_printVar removedA
-	dk_echo
-	dk_echo
-
-
 	# FIXME: command substitution cannot alter parent variables
-	myArrayB[0]="h i j"
-	myArrayB[1]="4 5 6"
-	myArrayB[2]="d e f"
-	myArrayB[3]="1 2 3"
-	myArrayB[4]="a b c"
-	
-	dk_printVar myArrayB 
-	dk_echo
-	
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
-	
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
-	
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
-	
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
-	
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
-	
-	# FIXME:  out of array bounds past here
-	removedB=$(dk_arrayPop myArrayB)
-	dk_printVar myArrayB
-	dk_printVar removedB
-	dk_echo
+	# return value in COMMAND_SUBSTITUTION
+	# dk_call dk_echo
+	# cs_arrayPop=$(dk_arrayPop myArray)
+	# dk_printVar myArray
+	# dk_printVar cs_arrayPop
 }

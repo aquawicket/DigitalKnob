@@ -1,7 +1,15 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 setlocal EnableDelayedExpansion
@@ -77,11 +85,12 @@ set "com[N]=N=1"
 set "com[P]=pause=1"
 set "com[T]=Dy=1"
 
+
 for /L %%# in () do (
    set "key="
-   for /F "delims=" %%k in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defined key set "key=%%k"
+   for /F "delims=" %%k in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if NOT defined key set "key=%%k"
    for /F %%k in ("!key:~-1!") do (
-      echo(!com[%%k]!
+      echo.!com[%%k]!
       if /I "%%k" equ "N" exit
    )
 )
@@ -188,13 +197,13 @@ for /L %%# in () do (
       )
       cls
       for /L %%i in (%top%,-1,-3) do (
-         echo(!F%%i!
-%F16x8%  if %%i geq %linesP2% echo(!F%%i!
-%F16x8%  if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+         echo.!F%%i!
+%F16x8%  if %%i geq %linesP2% echo.!F%%i!
+%F16x8%  if %%i geq 1 if %%i leq %lines% echo.!F%%i!
       )
 
-      rem ... if that was not possible:
-      if not defined b call :endGame & endlocal
+      rem ... if that was NOT possible:
+      if NOT defined b call :endGame & endlocal
 
       set "p1=!p0!"
       set /a "pI=0, del=delay, b=1!time:~-2!"
@@ -263,16 +272,16 @@ for /L %%# in () do (
          rem Update the Field in screen
          cls
          for /L %%i in (%top%,-1,-3) do (
-            echo(!F%%i!
-%F16x8%     if %%i geq %linesP2% echo(!F%%i!
-%F16x8%     if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+            echo.!F%%i!
+%F16x8%     if %%i geq %linesP2% echo.!F%%i!
+%F16x8%     if %%i geq 1 if %%i leq %lines% echo.!F%%i!
          )
 
          rem Update any changes in the piece
          set /a y+=Dy, x+=Dx
          if defined R set "p0=!p1!" & set "pI=!p!" & set "R="
 
-      ) else (   rem The piece can not be moved
+      ) else (   rem The piece can NOT be moved
 
          rem Recover the piece at its current position
          for /L %%i in (1,1,!i!) do (
@@ -302,9 +311,9 @@ for /L %%# in () do (
                echo  BEL Ctrl-G Ascii-7
                cls
                for /L %%i in (%top%,-1,-3) do (
-                  echo(!F%%i!
-%F16x8%           if %%i geq %linesP2% echo(!F%%i!
-%F16x8%           if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+                  echo.!F%%i!
+%F16x8%           if %%i geq %linesP2% echo.!F%%i!
+%F16x8%           if %%i geq 1 if %%i leq %lines% echo.!F%%i!
                )
                set "F-1=!F-1:~0,8! !Level!"
                set "F-2=!F-2:~0,8! !Rows!"
@@ -321,9 +330,9 @@ for /L %%# in () do (
                call :Delay 95
                cls
                for /L %%i in (%top%,-1,-3) do (
-                  echo(!F%%i!
-%F16x8%           if %%i geq %linesP2% echo(!F%%i!
-%F16x8%           if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+                  echo.!F%%i!
+%F16x8%           if %%i geq %linesP2% echo.!F%%i!
+%F16x8%           if %%i geq 1 if %%i leq %lines% echo.!F%%i!
                )
             )
 
@@ -342,7 +351,7 @@ for /L %%# in () do (
 set /P "=Play again? " < NUL
 :choice
    set /P "com="
-if not defined com goto choice
+if NOT defined com goto choice
 if /I "%com%" equ "Y" exit /B
 if /I "%com:~0,1%" neq "N" set "com=" & goto choice
 echo N
@@ -353,19 +362,19 @@ exit
 set "pause=!F%lines%!"
 set "F%lines%=  ³%spc:          =  PAUSED  %³"
 cls & for /L %%i in (%top%,-1,-3) do (
-         echo(!F%%i!
-%F16x8%  if %%i geq %linesP2% echo(!F%%i!
-%F16x8%  if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+         echo.!F%%i!
+%F16x8%  if %%i geq %linesP2% echo.!F%%i!
+%F16x8%  if %%i geq 1 if %%i leq %lines% echo.!F%%i!
       )
 :wait
    set /P "com="
-if not defined com goto wait
+if NOT defined com goto wait
 set "com="
 set "F%lines%=%pause%"
 cls & for /L %%i in (%top%,-1,-3) do (
-         echo(!F%%i!
-%F16x8%  if %%i geq %linesP2% echo(!F%%i!
-%F16x8%  if %%i geq 1 if %%i leq %lines% echo(!F%%i!
+         echo.!F%%i!
+%F16x8%  if %%i geq %linesP2% echo.!F%%i!
+%F16x8%  if %%i geq 1 if %%i leq %lines% echo.!F%%i!
       )
 set "pause="
 exit /B

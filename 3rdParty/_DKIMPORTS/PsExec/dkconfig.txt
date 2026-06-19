@@ -1,0 +1,5 @@
+############ PsExec ############
+# https://download.sysinternals.com/files/PSTools.zip
+
+PsExec_Import=https://download.sysinternals.com/files/PSTools.zip
+

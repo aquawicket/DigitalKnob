@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_gitApplyPatch(<directory> <patch_file>)
 #
 #	<directory>		- Full path to the directory of the file to patch
@@ -13,10 +24,10 @@ include_guard()
 function(dk_gitApplyPatch directory patch_file)
 	dk_debugFunc(2)
 	
-	dk_depend(git) # dk_import will push to the PLUGIN stack
+	dk_validate(git "dk_depend(git)") # git will be pushed to the PLUGIN stack
 	
 	dk_unset(COMMAND_ARGS)
-	dk_append(COMMAND_ARGS ${GIT_EXE})
+	dk_append(COMMAND_ARGS ${git_exe})
 	dk_append(COMMAND_ARGS apply)
 	dk_append(COMMAND_ARGS --verbose)
 	dk_append(COMMAND_ARGS --no-index)
@@ -25,7 +36,7 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_append(COMMAND_ARGS ${patch_file})
 	dk_append(COMMAND_ARGS --reject)
 	execute_process(COMMAND ${COMMAND_ARGS}
-					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
+					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
 					RESULT_VARIABLE result
 					OUTPUT_VARIABLE output
 					OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -37,8 +48,8 @@ function(dk_gitApplyPatch directory patch_file)
 	dk_success("Patch successful: ${patch_file}")
 	
 	
-#	dk_validate(GIT_EXE "dk_installGit()")
-#	dk_append(COMMAND_ARGS ${GIT_EXE})
+#	dk_validate(git_exe "dk_installGit()")
+#	dk_append(COMMAND_ARGS ${git_exe})
 #	dk_append(COMMAND_ARGS apply)
 #	dk_append(COMMAND_ARGS --verbose)
 #	dk_append(COMMAND_ARGS --no-index)
@@ -46,7 +57,7 @@ function(dk_gitApplyPatch directory patch_file)
 #	dk_append(COMMAND_ARGS --directory=${directory})
 #	dk_append(COMMAND_ARGS ${patch_file})
 #	execute_process(COMMAND ${COMMAND_ARGS}
-#					WORKING_DIRECTORY $ENV{DIGITALKNOB_DIR}
+#					WORKING_DIRECTORY ${DIGITALKNOB_DIR}
 #					RESULT_VARIABLE result
 #					OUTPUT_VARIABLE output
 #					OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -64,7 +75,7 @@ endfunction()
 function(DKTEST) 
 	dk_debugFunc()
 	
-	dk_gitApplyPatch("C:/Users/Administrator/digitalknob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
+	dk_gitApplyPatch("C:/Users/Administrator/DigitalKnob/Development/3rdParty/rmlui-master" "C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/rmlui/rmlui.patch")
 endfunction()
 
 

@@ -1,15 +1,15 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_delete){ $dk_delete = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_delete_ps1){ $dk_delete_ps1 = 1; } else{ return; } #include guard
 
 #####################################################################
 # dk_delete(path)
 #
 #
 function Global:dk_delete($path) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	if(!(dk_call dk_pathExists $path)){
-		dk_call dk_warning "dk_delete $path does not exist"
+		dk_call dk_warning "dk_delete $path does NOT exist"
 		return
 	}
 	
@@ -33,7 +33,7 @@ function Global:dk_delete($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_fileWrite "removeMe.file" "created file to test dk_delete"
 	dk_call dk_delete "removeMe.file"

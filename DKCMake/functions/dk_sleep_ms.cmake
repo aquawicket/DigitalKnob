@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_sleep_ms(milliseconds)
 #
 #	TODO
@@ -21,13 +32,13 @@ function(dk_sleep_ms)
 	# 123456789 = 123456.789
 	
 	set(milliseconds "00${ARGV0}")
-	#message("milliseconds = ${milliseconds}")
+	#dk_echo("milliseconds = ${milliseconds}")
 	string(LENGTH "${milliseconds}" length)
 	math(EXPR length "${length} - 3")
 	string(SUBSTRING ${milliseconds} ${length} -1 right)
 	string(SUBSTRING ${milliseconds} 0 ${length} left)
 	set(seconds "${left}.${right}")
-	#message("seconds = ${seconds}")
+	#dk_echo("seconds = ${seconds}")
 
 	execute_process(COMMAND ${CMAKE_COMMAND} -E sleep ${seconds})
 endfunction()
@@ -40,6 +51,6 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	set(milliseconds 3500)
-	message("sleeping for ${milliseconds} milliseconds...")
+	dk_echo("sleeping for ${milliseconds} milliseconds...")
 	dk_sleep_ms(${milliseconds})
 endfunction()

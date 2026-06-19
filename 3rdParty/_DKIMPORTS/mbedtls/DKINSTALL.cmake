@@ -1,53 +1,59 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ mbedtls ############
 # https://github.com/Mbed-TLS/mbedtls.git
-dk_load(dk_builder)
+# https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip
 
-### IMPORT ###
-#dk_import(https://github.com/Mbed-TLS/mbedtls.git)
-dk_import(https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip)
+dk_import()
 
-### LINK ###
-dk_include			(${MBEDTLS}/include)
+dk_include			(${mbedtls}/include												MBEDTLS_INCLUDE_DIR)
 
 # mbedtls
-UNIX_dk_libDebug	(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/libmbedtls.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedtls.a)
-WIN_dk_libDebug		(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/mbedtls.lib)
-WIN_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedtls.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedtls.a			MBEDTLS_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedtls.a		MBEDTLS_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedtls.lib			MBEDTLS_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedtls.lib		MBEDTLS_LIBRARY)
+endif()
 
 # mbedcrypto
-UNIX_dk_libDebug	(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/libmbedcrypto.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedcrypto.a)
-WIN_dk_libDebug		(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/mbedcrypto.lib)
-WIN_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedcrypto.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedcrypto.a		MBEDTLS_CRYPTO_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedcrypto.a	MBEDTLS_CRYPTO_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedcrypto.lib		MBEDTLS_CRYPTO_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedcrypto.lib		MBEDTLS_CRYPTO_LIBRARY)
+endif()
 
 # mbedx509
-UNIX_dk_libDebug	(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/libmbedx509.a)
-UNIX_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedx509.a)
-WIN_dk_libDebug		(${MBEDTLS}/${target_triple}/library/${DEBUG_DIR}/mbedx509.lib)
-WIN_dk_libRelease	(${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedx509.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedx509.a		MBEDTLS_X509_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedx509.a		MBEDTLS_X509_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedx509.lib			MBEDTLS_X509_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedx509.lib		MBEDTLS_X509_LIBRARY)
+endif()
 
-### 3RDPARTY LINK ###
-UNIX_dk_set(MBEDTLS_CMAKE 
-	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
-	-DMBEDTLS_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedtls.a
-	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedcrypto.a
-	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/libmbedx509.a)
-WIN_dk_set(MBEDTLS_CMAKE 
-	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
-	-DMBEDTLS_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedtls.lib
-	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedcrypto.lib
-	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${target_triple}/library/${RELEASE_DIR}/mbedx509.lib)
+dk_set(mbedtls_CMAKE 
+	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS_INCLUDE_DIR}
+	-DMBEDTLS_LIBRARY=${MBEDTLS_LIBRARY}
+	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS_CRYPTO_LIBRARY}
+	-DMBEDTLS_X509_LIBRARY=${MBEDTLS_X509_LIBRARY})
 
-### GENERATE ###
-dk_configure(${MBEDTLS})
+dk_configure()
 
-### COMPILE ###
-dk_build(${MBEDTLS})
+dk_build()

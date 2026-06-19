@@ -18,23 +18,23 @@ int dk_callDKHta(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKHta.h";
-	char* DKHTA_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKHta/functions/";
+	char* cmd_exe = "cmd.exe";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKHta.h";
+	char* DKHTA_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKHta/functions/";
 
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKHta.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKHta.h")) {
       dk_error("putenv failed \n");
       return -1;
     }
-	if(-1 == putenv("DKHTA_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKHta/functions/")) {
+	if(-1 == putenv("DKHTA_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKHta/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     } 
 	
-	char* func_path = "C:/Users/Administrator/digitalknob/Development/DKHta/functions/";
+	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKHta/functions/";
 	char DKHTA_COMMAND[512];
-	//int err = sprintf(DKHTA_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKHTA_FUNCTIONS_DIR_=%s) & (set PATH=!DKHTA_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKHTA_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKHTA_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKHTA_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKHTA_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKHTA_FUNCTIONS_DIR_=%s) & (set PATH=!DKHTA_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKHTA_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKHTA_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKHTA_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKHTA_COMMAND);
 	
 	FILE *fp;

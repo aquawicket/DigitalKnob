@@ -11,12 +11,12 @@
 #include <stdio.h>
 int v_dk_echo(const char* format, va_list args) {
 	return vprintf(format, args);
-}
+};
 
 int dk_echo(const char* format, ...) {
 	va_list args;
     va_start(args, format);
-	int exit_status = vprintf(format, args);
+	exit_status = vprintf(format, args);
     va_end(args);
     return exit_status;
 };

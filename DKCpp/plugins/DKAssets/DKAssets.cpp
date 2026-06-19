@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -193,11 +193,11 @@ bool DKAssets::GetAssetsPath(DKString& path){
     std::string::size_type pos = DKFile::app_path.find("/Library");
     DKString userpath = DKFile::app_path.substr(0, pos);
     DKStringArray folders;
-    DKFile::GetDirectoryContents(userpath + "/digitalknob", folders);
+    DKFile::GetDirectoryContents(userpath + "/DigitalKnob", folders);
     for(int i=0; i<folders.size(); ++i){
-        if(DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/") &&
-            DKFile::PathExists(userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/DKINSTALL.cmake")){
-            path = userpath + "/digitalknob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/";
+        if(DKFile::PathExists(userpath + "/DigitalKnob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/") &&
+            DKFile::PathExists(userpath + "/DigitalKnob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/DKINSTALL.cmake")){
+            path = userpath + "/DigitalKnob/"+folders[i]+"/DKCpp/apps/" + DKFile::app_name + "/assets/";
             return true;
         }
     }

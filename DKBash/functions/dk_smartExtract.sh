@@ -1,5 +1,17 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
 
 
 ##################################################################################
@@ -10,13 +22,14 @@ dk_smartExtract() {
 	dk_debugFunc 2
 
 	src="${1}"
+	dk_call dk_assertPath "${src}"  # TODO: change to dk_assertFile
 	dest="${2}"
 	
-	src_fullpath=$(dk_call dk_realpath "${src}")
-	src_directory="$(dk_call dk_dirname "${src_fullpath}")"
-	src_filename="$(dk_call dk_basename "${src_fullpath}")"
-	src_folder="${src_filename%.*}"
-	src_extractPath="${src_directory}/${src_filename}_EXTRACTED"
+	src_realpath="$(dk_call dk_realpath "${src}")"
+	src_dirname="$(dk_call dk_dirname "${src_realpath}")"
+	src_basename="$(dk_call dk_basename "${src_realpath}")"
+	src_folder="$(dk_call dk_basename "${src_basename}")" #src_folder="${src_basename%.*}"
+	src_extractPath="${src_dirname}/${src_basename}_EXTRACTED"
 	
 	#dk_realpath "${dest}" dest_fullpath
 	dest_fullpath="${dest}"
@@ -25,10 +38,10 @@ dk_smartExtract() {
 		dk_call dk_mkdir "${dest_fullpath}"
 	fi
 
-	dk_call dk_info "Extracting $src_filename . . ."
+	dk_call dk_info "Extracting $src_basename . . ."
 	[ -e "${src_extractPath}" ] && dk_call dk_delete "${src_extractPath}"
 	
-	dk_call dk_extract "$src_fullpath" "${src_extractPath}"
+	dk_call dk_extract "$src_realpath" "${src_extractPath}"
 	
 	dk_call dk_getDirectories "${src_extractPath}" directories
 	dk_call dk_printVar directories
@@ -62,10 +75,15 @@ DKTEST() {
 	dk_debugFunc 0
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-	dk_call dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
-	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
+	dk_call dk_download "https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz" "${DKDOWNLOAD_DIR}/cmake-3.29.5-linux-x86_64.tar.gz"
+	dk_call dk_validate DKTOOLS_DIR "dk_call dk_DKTOOLS_DIR"
+	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/cmake-3.29.5-linux-x86_64.tar.gz" "${DKTOOLS_DIR}/cmake-3.29.5-linux-x86_64"
 	
-	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-	dk_call dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"
-	dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6"
+	#dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+	#dk_call dk_download "https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip"
+	#dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/sdl-release-2.26.1.zip" "${DKDOWNLOAD_DIR}/sdl-release-2.26.1"
+	
+	#dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
+	#dk_call dk_download "https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz"
+	#dk_call dk_smartExtract "${DKDOWNLOAD_DIR}/xz-5.4.6.tar.gz" "${DKDOWNLOAD_DIR}/xz-5.4.6"
 }

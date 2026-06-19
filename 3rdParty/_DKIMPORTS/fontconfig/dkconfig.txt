@@ -1,1 +1,4 @@
-FONTCONFIG_DL=https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fontconfig-main.zip
+############ fontconfig ############
+# https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fontconfig-main.zip
+
+fontconfig_Import=https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/main/fontconfig-main.zip

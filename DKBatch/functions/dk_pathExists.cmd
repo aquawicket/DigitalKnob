@@ -1,26 +1,67 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_pathExists(path rtn_var)
-::#
+rem ####################################################################
+rem # dk_pathExists(>path> <rtn_var:Optional>)
+rem #
+rem #		Check if a case sensitive path exists
+rem #
 :dk_pathExists
-setlocal
-    %dk_call% dk_debugFunc 1 2
+	set "_dk_pathExists_CASE_SENSITIVE=1"
+%setlocal%
 
-    ::set "dk_pathExists=NOT ERRORLEVEL 1"
+	:init
+	rem ###### Clear and set function variables ######
+	set "currentScope=%~n0"
+	for /F "delims==" %%a in ('set %~n0 2^>nul') do (
+		set "%%a=NULL"
+	)
+	set %~n0_ARGC=0
+	for %%x in (%*) do (
+		set /A %~n0_ARGC+=1
+		set %~n0_ARGV!%~n0_ARGC!=%%x
+	)
+	set "%~n0=false"
+	if "%~1" equ "" (goto:return)
+	rem ##############################################
+	
+	set "arg1=%~1"
+	if defined %~1 (set "arg1=!%~1!")
+	
+	for %%G in ("%arg1%") do (set "_path_=%%~fG")
+	
+	if EXIST "%_path_%" (
+		set "dk_pathExists=true"
+	)
+	
+	echo %arg1:\=/%
+	echo %_path_:\=/%
+	if "%_dk_pathExists_CASE_SENSITIVE%" equ "1" (
+		if "%arg1:\=/%" neq "%_path_:\=/%" (
+			set "dk_pathExists=false"
+		)
+	)
     
-    ::set "_path=%~1"
-    if exist "%~1" (
-        if "%~2" neq "" (endlocal & set "%2=true")
-        exit /b 0
-    )
-    
-    if "%~2" neq "" (endlocal & set "%2=false")
-    exit /b 1
+	
+	:return
+	rem ########################################################
+	for /F "tokens=1,2 delims==" %%a in ('set %~n0') do endlocal & (
+		if "%currentScope%" equ "%~n0" endlocal
+		if /i "%%b" equ "NULL" (set "%%a=") else (set "%%a=%%b")
+	)
+	exit /b !%~n0:false=1!
+	rem ########################################################
 %endfunction%
 
 
@@ -28,57 +69,47 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    ::###### Using if return value
-    %dk_call% dk_echo
-    set "_path_=C:/Windows"
-    %dk_call% dk_pathExists "%_path_%" result
-    if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    
-    %dk_call% dk_echo
-    set "_path_=C:/NonExistent"
-    %dk_call% dk_pathExists "%_path_%" result
-    if "%result%" equ "true" (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    ::FIXME: ERRORLEVEL is still 1 
-    
-    
-    ::###### Using if ERRORLEVEL
-    %dk_call% dk_echo
+	rem ###### Using if return value
+    echo.
     set "_path_=C:/Windows"
     %dk_call% dk_pathExists "%_path_%"
-    if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    
-    %dk_call% dk_echo
+    if /i "%dk_pathExists%" equ "TRUE" (echo %dk_pathExists_ARGV1% EXISTS) else (call & echo %dk_pathExists_ARGV1% NOT FOUND)
+	
+    echo.
+    set "_path_=C:/windows"
+    %dk_call% dk_pathExists %_path_%
+    if /i "%dk_pathExists%" equ "true" (echo %dk_pathExists_ARGV1% EXISTS) else (call & echo %dk_pathExists_ARGV1% NOT FOUND)
+   
+    echo.
+    set "_path_=C:/windows"
+    %dk_call% dk_pathExists _path_
+    if /i "%dk_pathExists%" equ "TRUE" (echo %dk_pathExists_ARGV1% EXISTS) else (call & echo %dk_pathExists_ARGV1% NOT FOUND)
+
+   
+   
+    rem ###### Using if ERRORLEVEL
+    echo.
+    set "_path_=C:/Windows"
+    %dk_call% dk_pathExists "%_path_%"
+    if NOT ERRORLEVEL 1 (echo %dk_pathExists_ARGV1% EXISTS) else (call & echo %dk_pathExists_ARGV1% NOT FOUND)
+   
+    echo.
     set "_path_=C:/NonExistent"
     %dk_call% dk_pathExists "%_path_%"
-    if not ERRORLEVEL 1 (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    ::FIXME: ERRORLEVEL is still 1 
-    
-    
-    ::###### Using && and || conditionals
-    %dk_call% dk_echo
-    set "_path_=C:/Windows" 
-    %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exist)
-    
-    %dk_call% dk_echo
-    set "_path_=C:/NonExistent" 
-    %dk_call% dk_pathExists "%_path_%" && (echo %_path_% exists) || (echo %_path_% does NOT exist)
-    ::FIXME: ERRORLEVEL is still 1 
-    
-    
-    ::###### Experimental
-    ::  %dk_call% dk_echo
-    ::  set "_path_=C:/Windows"
-    ::  %dk_call% dk_pathExists "%_path_%"
-    ::  if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    ::
-    ::  %dk_call% dk_echo
-    ::  set "_path_=C:/NonExistent"
-    ::  %dk_call% dk_pathExists "%_path_%"
-    ::  if %dk_pathExists% (echo %_path_% exists) else (echo %_path_% does NOT exist)
-    ::  if not ERRORLEVEL 1 (echo ERRORLEVEL is 0) else (echo ERRORLEVEL is 1)
+    if NOT ERRORLEVEL 1 (echo %dk_pathExists_ARGV1% EXISTS) else (call & echo %dk_pathExists_ARGV1% NOT FOUND)
+
+   
+   
+    rem ###### Using && and || conditionals
+    echo.
+    set "_path_=C:/Windows"
+    %dk_call% dk_pathExists "%_path_%" && (echo !dk_pathExists_ARGV1! EXISTS) || (call & echo !dk_pathExists_ARGV1! NOT FOUND)
+   
+    echo.
+    set "_path_=C:/NonExistent"
+    %dk_call% dk_pathExists "%_path_%" && (echo !dk_pathExists_ARGV1! EXISTS) || (call & echo !dk_pathExists_ARGV1! NOT FOUND)
 %endfunction%

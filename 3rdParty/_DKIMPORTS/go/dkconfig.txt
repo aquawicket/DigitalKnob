@@ -1,0 +1,5 @@
+############ go ############
+# https://go.dev/dl/go1.26.3.windows-amd64.msi
+
+go_Import=https://go.dev/dl/go1.26.3.windows-amd64.msi
+

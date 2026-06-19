@@ -1,0 +1,5 @@
+############ openjpeg ############
+# https://github.com/uclouvain/openjpeg.git
+# https://github.com/uclouvain/openjpeg/archive/8ac526236416b9c28f73d4684cf9e8a66f1d134e.zip
+
+openjpeg_Import=https://github.com/uclouvain/openjpeg/archive/8ac526236416b9c28f73d4684cf9e8a66f1d134e.zip

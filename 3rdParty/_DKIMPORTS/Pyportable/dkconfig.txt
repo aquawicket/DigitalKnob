@@ -1,0 +1,5 @@
+############ Pyportable ############
+# https://github.com/sganis/pyportable
+# https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip
+
+Pyportable_Import=https://github.com/sganis/pyportable/releases/download/v2.7.10rc1/pyportable-2.7.10rc1.zip

@@ -1,45 +1,53 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_waitOnFileChange(<filename> <searchpath> <timeout>:optional)
-::#
+rem ##################################################################################
+rem # dk_waitOnFileChange(<filename> <searchpath> <timeout>:optional)
+rem #
 :dk_waitFindFile
-setlocal enableDelayedExpansion
-	::%dk_call% dk_debugFunc 1 2
+%setlocal%
 	set "filename=%~1"
 	set "searchPath=%~2"
 
 	set /a "seconds=0"
 	set /a "timeout=30"
-	if not "%~3" equ "" (set /a "timeout=%~3")
+	if "%~3" neq "" (set /a "timeout=%~3")
 	
 	echo Looking for %filename% in %searchPath% for %timeout% seconds. press q to skip
 	:dk_waitFindFile_LOOP
 
-		::where /R "%searchPath%" "%filename%" 2>nul
-		%dk_call% dk_findProgram FOUND_FILE "%filename%" "%searchPath%"
+		rem where /R "%searchPath%" "%filename%" 2>nul
+		rem %dk_call% dk_findProgram FOUND_FILE "%filename%" "%searchPath%"
+		%dk_call% dk_findFile "%filename%" "%searchPath%" FOUND_FILE
 
-        :: file found?
-        if defined FOUND_FILE ( 
+        rem file found?
+        if defined FOUND_FILE (
 			endlocal & (
 				set "dk_waitFindFile=%FOUND_FILE%"
 				%return%
 			)
 		)
 
-        :: Wait for a second before checking for the file again
+        rem Wait for a second before checking for the file again
         CHOICE /T 1 /C "yq" /D y > nul
 
-        :: User pressed Q? just quit
-        if not "%errorlevel%" equ "1" (goto :eof)
+        rem User pressed Q? just quit
+        if "%errorlevel%" neq "1" (goto :eof)
 
-        :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
+        rem Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (
-			(call )
+			%clearerror%
 			%return%
 		)
 		set /a "seconds=seconds+1"
@@ -51,12 +59,11 @@ setlocal enableDelayedExpansion
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	%dk_call% dk_waitFindFile "vs_setup_bootstrapper.exe" "C:\Windows\Temp" 60
+	%dk_call% dk_waitFindFile "vs_setup_bootstrapper.exe" "%SystemRoot%\Temp" 60
 	
 	echo file found or timeout reached
 %endfunction%

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -23,7 +23,7 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 */
-//see: digitalknob/3rdParty/libvncserver-master/client_examples/SDLvncviewer.c
+//see: DigitalKnob/3rdParty/libvncserver-master/client_examples/SDLvncviewer.c
 #include "DK/stdafx.h"
 #include "DKVncClient/DKVncClient.h"
 #include "DK/DKFile.h"

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -26,7 +26,7 @@
 
 #if HAVE_DKMySql
 #if HAVE_DKRocket
-#if HAVE_DKDuktape 
+# if HAVE_DKDuktape || __has_include("duktape.h")
 #pragma once
 #ifndef DKWidgetMySqlJS_H
 #define DKWidgetMySqlJS_H

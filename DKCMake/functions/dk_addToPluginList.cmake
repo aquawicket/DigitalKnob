@@ -1,24 +1,32 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
-# dk_addToPluginList(<plugin_name>)
+
+#########################################################################
+# dk_addToPluginList(<Plugin_name>)
 #
-#	<plugin_name>	- TODO
+#	<Plugin_name>	- TODO
 #
-function(dk_addToPluginList plugin_name)
+function(dk_addToPluginList PLUGIN_Import_Name)
 	dk_debugFunc(1)
 	
-	dk_getPathToPlugin(${plugin_name} plugin_path)
-	if(NOT EXISTS "${plugin_path}")
-		dk_fatal("${plugin_name} plugin not found")
+	dk_getImportPath(${PLUGIN_Import_Name} PLUGIN_Import_Path)
+	if(NOT EXISTS "${PLUGIN_Import_Path}")
+		dk_fatal("${PLUGIN_Import_Name} Plugin NOT FOUND")
 	endif()
-	dk_include(${plugin_path})
-	dk_append(DKPLUGIN_LIST "${plugin_name}")
-	
-# DEBUG
-#	dk_printVar(DKPLUGIN_LIST)
+	dk_include(${PLUGIN_Import_Path})
+	dk_append(DKPLUGIN_LIST "${PLUGIN_Import_Name}")
 endfunction()
 
 
@@ -28,5 +36,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_addToPluginList(todo) # TODO
+	dk_addToPluginList(zlib) # TODO
 endfunction()

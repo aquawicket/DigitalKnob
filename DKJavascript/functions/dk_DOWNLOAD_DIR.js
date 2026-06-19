@@ -1,5 +1,5 @@
-if(typeof dk_env === "dk_env"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); }
-if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
+if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); 		}
+if(!dk_valid("dk_assertPath"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); 	}
 
 //####################################################################
 //# dk_DKHOME_DIR()
@@ -19,11 +19,7 @@ dk_DKDOWNLOAD_DIR = function dk_DKDOWNLOAD_DIR_f(){
 	} 
 	//############ GET ############
 	else {
-		if(typeof dk_DIGITALKNOB_DIR === "undefined"){ 
-			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){
-				dk_DIGITALKNOB_DIR()
-			}); 
-		}
+		if(!dk_valid("dk_DIGITALKNOB_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){ dk_DIGITALKNOB_DIR() }); }
 		DKDOWNLOAD_DIR = DIGITALKNOB_DIR+"/download";
 	}
 

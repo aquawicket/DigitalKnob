@@ -1,57 +1,34 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
+%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
 
-::%dk_call% dk_source dk_convertToCIdentifier
-::%dk_call% dk_source dk_basename
-::%dk_call% dk_source dk_removeExtension
-::%dk_call% dk_source dk_toLower
-::%dk_call% dk_source dk_validate
-::####################################################################
-::# DKUNINSTALL
-::#
-::#
+rem  https://stackoverflow.com/a/67714373
+rem %dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+rem if NOT defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSystem")
+rem if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal")
+
+rem ####################################################################
+rem # DKUNINSTALL
+rem #
+rem #
 :DKUNINSTALL
-::setlocal
-    %dk_call% dk_debugFunc 0
- 
-    %dk_call% dk_validate host_triple  "%dk_call% dk_host_triple"
-    ::if defined win_arm32_host        (set "GIT_DL=")
-    ::if defined win_arm64_host        (set "GIT_DL=")
-    if defined win_x86_host            (set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-32-bit.7z.exe")
-    if defined win_x86_64_host         (set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe")
-    if not defined GIT_DL              (%dk_call% dk_error "GIT_DL is invalid")
-	
-::  %dk_call% dk_basename %GIT_DL% GIT_DL_FILE
-::  %dk_call% dk_removeExtension %GIT_DL_FILE% GIT_FOLDER
-::	%dk_call% dk_removeExtension %GIT_FOLDER% GIT_FOLDER
-::  %dk_call% dk_convertToCIdentifier %GIT_FOLDER% GIT_FOLDER
-::  %dk_call% dk_toLower %GIT_FOLDER% GIT_FOLDER
-    %dk_call% dk_importVariables %GIT_DL%
-	
-	:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	::### DO NOT USE GIT_DIR ###
-	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should not be set.")
-	::### DO NOT USE GIT_DIR ###
-	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	set "GIT=%DKTOOLS_DIR%\%GIT_FOLDER%"
+%setlocal%
 
-	::FIXME: kill git.exe process
-    %dk_call% dk_delete "%GIT%"
-        
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	
-	::### Uninstall Context Menu ###
-	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitContextMenu.cmd
+	%dk_call% dk_unimport APP
 
-	::### Uninstall File Associations ###
-	%dk_call% %DKIMPORTS_DIR%\git\dk_uninstallGitFileAssociations.cmd
-	
-	::### Remove PATH variable
-	:: TODO
+	%dk_call% dk_uninstall git/contextMenu
+
 %endfunction%
 
 
@@ -59,10 +36,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
     %dk_call% DKUNINSTALL
 %endfunction%

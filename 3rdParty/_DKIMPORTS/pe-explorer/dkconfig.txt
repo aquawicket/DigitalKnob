@@ -1,2 +1,7 @@
-PE_EXPLORER_IMPORT=https://www.heaventools.com/download/pexsetup.exe
+############ pe-explorer ############
+# https://www.pe-explorer.com
+# https://www.heaventools.com/download/pexsetup.exe
+
+pe-explorer_Type=Tool
+pe-explorer_Import=https://www.heaventools.com/download/pexsetup.exe
 

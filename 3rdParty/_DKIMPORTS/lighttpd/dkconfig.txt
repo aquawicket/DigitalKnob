@@ -1,0 +1,5 @@
+############ lighttpd ############
+# https://github.com/lighttpd/lighttpd1.4.git
+# https://github.com/lighttpd/lighttpd1.4/archive/dea55b509c1f85b07e3fca41235a53f0d282cab1.zip
+
+lighttpd_Import=https://github.com/lighttpd/lighttpd1.4/archive/dea55b509c1f85b07e3fca41235a53f0d282cab1.zip

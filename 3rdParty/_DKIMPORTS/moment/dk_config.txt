@@ -1,0 +1,7 @@
+############ moment ############
+# https://momentjs.com
+# https://github.com/moment/moment
+# https://momentjs.com/downloads/moment.min.js
+# https://github.com/moment/moment/raw/e9680920/moment.js
+
+moment_Import=https://github.com/moment/moment/raw/e9680920/moment.js

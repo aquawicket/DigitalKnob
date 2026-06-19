@@ -1,0 +1,5 @@
+############ Batch-Tools-Sys ############
+# https://github.com/Kerbalnut/Batch-Tools-SysAdmin
+# https://github.com/Kerbalnut/Batch-Tools-SysAdmin/archive/82441b3fdc1977f1d3e719f434a9785bde559b8b.zip
+
+Batch-Tools-Sys_Import=https://github.com/Kerbalnut/Batch-Tools-SysAdmin/archive/82441b3fdc1977f1d3e719f434a9785bde559b8b.zip

@@ -1,0 +1,207 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+
+
+#########################################################################
+# dk_Target_Tuple()
+#
+#	Target_Tuple = TODO
+#
+function(dk_Target_Tuple)
+	dk_debugFunc(0 1)
+
+	###### SET ######
+	if(ARGV)
+		dk_unset(Target_Tuple)
+		dk_set(Target_Tuple "${ARGV0}")
+		dk_set(${Target_Tuple} 1)
+	
+	
+	###### GET ######	
+	#elseif(DEFINED ENV{Target_Tuple})
+	#	dk_set(Target_Tuple "$ENV{Target_Tuple}")
+
+	else()
+		##### TODO:  Insert Cache options here ###
+		
+		if(NOT Target_Os)
+			dk_call(dk_Target_Os)
+		endif()
+		dk_assertVar(Target_Os)
+	
+		###### First Tuple ######
+		if(NOT Target_Arch)
+			dk_call(dk_Target_Arch)
+		endif()
+		dk_assertVar(Target_Arch)
+		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}")
+		dk_set(${Target_Tuple} 1)
+		
+		### VALIDATE RESULT ###
+		if	  (Android_Arm32)
+		elseif(Android_Arm64)
+		elseif(Android_X86_64)
+		elseif(Android_X86)
+		elseif(Cosmo_Cosmo)
+		elseif(Emscripten_Arm32)
+		elseif(Emscripten_Arm64)
+		elseif(Emscripten_X86_64)
+		elseif(Emscripten_X86)
+		elseif(Ios_Arm32)
+		elseif(Ios_Arm64)
+		elseif(Ios_X86_64)
+		elseif(Ios_X86)
+		elseif(Iossim_Arm32)
+		elseif(Iossim_Arm64)
+		elseif(Iossim_X86)
+		elseif(Iossim_X86)
+		elseif(Linux_Arm32)
+		elseif(Linux_Arm64)
+		elseif(Linux_X86_64)
+		elseif(Linux_X86)
+		elseif(Mac_Arm32)
+		elseif(Mac_Arm64)
+		elseif(Mac_X86_64)
+		elseif(Mac_X86)
+		elseif(Raspberry_Arm32)
+		elseif(Raspberry_Arm64)
+		elseif(Raspberry_X86_64)
+		elseif(Raspberry_X86)
+		elseif(Windows_Arm32)
+		elseif(Windows_Arm64)
+		elseif(Windows_X86_64)
+		elseif(Windows_X86)
+		else()
+			dk_fatal("Target_Tuple:'${Target_Tuple}' is INVALID!")
+		endif()
+		
+		###### Second Tuple ######
+		if(NOT Target_Env)
+			dk_call(dk_Target_Env)
+		endif()
+		dk_assertVar(Target_Env)		
+		dk_set(Target_Tuple "${Target_Os}_${Target_Arch}_${Target_Env}")
+		dk_set(${Target_Tuple} 1)
+			### VALIDATE RESULT ###
+		if	  (Android_Arm32_Clang)
+		elseif(Android_Arm64_Clang)
+		elseif(Android_X86_64_Clang)
+		elseif(Android_X86_Clang)
+		elseif(Cosmo_Cosmo_Cosmo)
+		elseif(Emscripten_Arm32_Clang)
+		elseif(Emscripten_Arm64_Clang)
+		elseif(Emscripten_X86_64_Clang)
+		elseif(Emscripten_X86_Clang)
+		elseif(Ios_Arm32_Clang)
+		elseif(Ios_Arm64_Clang)
+		elseif(Ios_X86_64_Clang)
+		elseif(Ios_X86_Clang)
+		elseif(Iossim_Arm32_Clang)
+		elseif(Iossim_Arm64_Clang)
+		elseif(Iossim_X86_Clang)
+		elseif(Iossim_X86_Clang)
+		elseif(Linux_Arm32_Clang)
+		elseif(Linux_Arm32_Gcc)
+		elseif(Linux_Arm64_Clang)
+		elseif(Linux_Arm64_Gcc)
+		elseif(Linux_X86_64_Clang)
+		elseif(Linux_X86_64_Gcc)
+		elseif(Linux_X86_Clang)
+		elseif(Linux_X86_Gcc)
+		elseif(Mac_Arm32_Clang)
+		elseif(Mac_Arm64_Clang)
+		elseif(Mac_X86_64_Clang)
+		elseif(Mac_X86_Clang)
+		elseif(Raspberry_Arm32_Clang)
+		elseif(Raspberry_Arm32_Gcc)
+		elseif(Raspberry_Arm64_Clang)
+		elseif(Raspberry_Arm64_Gcc)
+		elseif(Raspberry_X86_64_Clang)
+		elseif(Raspberry_X86_64_Gcc)
+		elseif(Raspberry_X86_Clang)
+		elseif(Raspberry_X86_Gcc)
+		elseif(Windows_Arm32_Clang)
+		elseif(Windows_Arm32_Gcc)
+		elseif(Windows_Arm32_Msvc)
+		elseif(Windows_Arm64_Clang)
+		elseif(Windows_Arm64_Gcc)
+		elseif(Windows_Arm64_Msvc)
+		elseif(Windows_X86_64_Clang)
+		elseif(Windows_X86_64_Gcc)
+		elseif(Windows_X86_64_Msvc)
+		elseif(Windows_X86_64_Ucrt)
+		elseif(Windows_X86_Clang)
+		elseif(Windows_X86_Gcc)
+		elseif(Windows_X86_Msvc)
+		elseif(Windows_X86_Ucrt)
+		else()
+			dk_fatal("Target_Tuple:'${Target_Tuple}' is INVALID!")
+		endif()
+	endif()
+	
+	
+	# GENERATOR			Target_Config		  		  	Target_Build
+	# -----------------------------------------------------------------------
+	# Visual Studio  	${Target_Tuple}					${Target_Tuple}/${Target_Type}		
+	# XCODE			    ${Target_Tuple}					${Target_Tuple}/${Target_Type} 
+	# MinGW Makefiles   ${Target_Tuple}/${Target_Type}	${Target_Tuple}/${Target_Type} 
+	# Unix Makefiles    ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}  
+	# ./configure       ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}
+
+	# https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
+	# https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
+	# https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html
+
+	###### FINALIZE ######	
+	dk_assertVar(Target_Tuple)
+	dk_debug("Target_Tuple = ${Target_Tuple}")
+	
+	dk_assertVar(${Target_Tuple})
+	dk_debug("${Target_Tuple} = ${${Target_Tuple}}")
+	
+	if(CURRENT_PLUGIN)
+		### CURRENT_PLUGIN_Tuple_Dir ###
+		dk_set(${CURRENT_PLUGIN}_Tuple_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}")
+		dk_debug("${CURRENT_PLUGIN}_Tuple_Dir = ${${CURRENT_PLUGIN}_Tuple_Dir}")
+	
+		### CURRENT_PLUGIN_Debug_Dir ###
+		dk_assertVar(Debug_Dir)
+		dk_set(${CURRENT_PLUGIN}_Debug_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Debug_Dir}")
+		dk_debug("${CURRENT_PLUGIN}_Debug_Dir = ${${CURRENT_PLUGIN}_Debug_Dir}")
+	
+		### CURRENT_PLUGIN_Release_Dir ###
+		dk_assertVar(Release_Dir)
+		dk_set(${CURRENT_PLUGIN}_Release_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Release_Dir}")
+		dk_debug("${CURRENT_PLUGIN}_Release_Dir = ${${CURRENT_PLUGIN}_Release_Dir}")
+	endif()
+endfunction()
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc(0)
+	
+	###### GET ######
+    dk_Target_Tuple()
+	dk_echo("Target_Tuple = ${Target_Tuple}")
+	dk_echo("${Target_Tuple} = ${${Target_Tuple}}")
+	
+	###### SET ######
+	dk_Target_Tuple("Windows_X86_Gcc")
+	dk_echo("Target_Tuple = ${Target_Tuple}")
+	dk_echo("${Target_Tuple} = ${${Target_Tuple}}")
+	
+endfunction()

@@ -1,47 +1,61 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_clipboard()
-::#	dk_clipboard(set)
-::#
-::#
+rem ####################################################################
+rem # dk_clipboard()
+rem #	dk_clipboard(set)
+rem #
+rem #
 :dk_clipboard
-setlocal
-	%dk_call% dk_debugFunc 0 1
+%setlocal%
 
-	::### SET ###
-	if not "%~1" equ "" (echo|set/p=%~1|clip)
+	rem ### SET ###
+	if "%~1" neq "" (echo|set/p=%~1|clip)
 
-	:: ###### GET ######
-	%dk_call% dk_exec powershell -command Get-Clipboard
+	rem ###### GET ######
+	%dk_call% dk_exec powershell.exe -command Get-Clipboard
+	set "dk_clipboard=%dk_exec%"
 
+	
+	:return
 	endlocal & (
-		set "dk_clipboard=%dk_exec%"
+		set "dk_clipboard=%dk_clipboard%"
+		if "%~2" neq "" (
+			set "%~2=%dk_clipboard%"
+		) else (
+			echo %dk_clipboard%
+		)
 	)
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	:: get the clipboard
+	rem get the clipboard
 	%dk_call% dk_echo "Getting the clipboard . . ."
 	%dk_call% dk_clipboard
 	%dk_call% dk_echo "dk_clipboard = %dk_clipboard%"
 
-	:: set the clipboard
+	rem set the clipboard
 	%dk_call% dk_echo "Setting the clipboard . . ."
 	%dk_call% dk_clipboard "clipboard test"
 	%dk_call% dk_echo "dk_clipboard = %dk_clipboard%"
 
-	:: get the clipboard
+	rem get the clipboard
 	%dk_call% dk_echo "Getting the clipboard . . ."
 	%dk_call% dk_clipboard
 	%dk_call% dk_echo "dk_clipboard = %dk_clipboard%"

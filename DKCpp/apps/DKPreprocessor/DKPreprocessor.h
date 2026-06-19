@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -227,10 +227,10 @@
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #	if DKBITS == 32
-#		ifndef ANDROID_ARM32
-#			define ANDROID_ARM32 1
+#		ifndef Android_Arm32
+#			define Android_Arm32 1
 #		endif
-#		define DKOS "ANDROID_ARM32"
+#		define DKOS "Android_Arm32"
 #		define DKOS_VERSION "UNKNOWN" //TOSTRING(__ANDROID_API__)  FIXME: defining from another macro
 #	endif
 #elif __linux__
@@ -275,10 +275,10 @@
 #	define DKCOMPILER "llvm"
 #   define DKCOMPILER_VERSION "UNKNOWN" //STR(__llvm__)  FIXME: defining from another macro
 #elif __MINGW64__
-#	define DKCOMPILER "Mingw64"
+#	define DKCOMPILER "MinGW64"
 #	define DKCOMPILER_VERSION STR(__MINGW64_VERSION_MAJOR) "." STR(__MINGW64_VERSION_MINOR) "." STR(__MINGW64_VERSION_BUGFIX)
 #elif __MINGW32__
-#	define DKCOMPILER "Mingw32"
+#	define DKCOMPILER "MinGW32"
 #	define DKCOMPILER_VERSION STR(__MINGW32_VERSION_MAJOR) "." STR(__MINGW32_VERSION_MINOR) "." STR(__MINGW32_VERSION_BUGFIX)
 #elif _MSC_VER	// https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170
 #	define DKCOMPILER "Microsoft Visual C++"
@@ -331,11 +331,11 @@
 #	define DKCPP_LANGUAGE_VERSION "UNKNOWN"
 #endif
 
-// BUILD_TYPE
+// Target_Type
 #if DEBUG
-#	define DKBUILD_TYPE "DEBUG"
+#	define Target_Type "DEBUG"
 #else
-#	define DKBUILD_TYPE "RELEASE"
+#	define Target_Type "RELEASE"
 #endif
 
 // RTTI

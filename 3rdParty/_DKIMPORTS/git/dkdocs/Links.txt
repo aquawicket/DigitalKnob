@@ -1,0 +1,4 @@
+Git/Repository on a USB stick 							https://en.wikibooks.org/wiki/Git/Repository_on_a_USB_stick
+Undoing, fixing, or removing commits in git				https://sethrobertson.github.io/GitFixUm/fixup.html
+Git Magic  												http://www-cs-students.stanford.edu/~blynn/gitmagic
+10 insanely useful git commands for common git tasks	https://www.datree.io/resources/git-commands

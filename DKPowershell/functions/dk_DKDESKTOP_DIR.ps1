@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_DKDESKTOP_DIR){ $dk_DKDESKTOP_DIR = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_DKDESKTOP_DIR_ps1){ $dk_DKDESKTOP_DIR_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_DKDESKTOP_DIR()
@@ -9,18 +9,26 @@ function Global:dk_DKDESKTOP_DIR() {
     dk_debugFunc 0 1
 
 	############ SET ############
-	if($($args[0])){  
-		$global:DKDESKTOP_DIR = "$($args[0])" 
-		return 0
-	}
+	if($($args[0])){
+		${env:DKDESKTOP_DIR} = $($args[0])
 	
 	############ GET ############
-	dk_call dk_validate DKHOME_DIR "dk_call dk_DKHOME_DIR" 
-	$global:DKDESKTOP_DIR = "${DKHOME_DIR}/Desktop" 
+	} else {
+		if(!(${env:DKDESKTOP})){
+			${env:DKDESKTOP}="Desktop"
+		}
+		if(!(${env:DKDESKTOP_DIR})){
+			$env:DKDESKTOP_DIR = "$(dk_call dk_DKHOME_DIR)/${env:DKDESKTOP}"
+		}
+	}	
+
+	############ FINALIZE ############
+	${env:DKDESKTOP_DIR} = ${env:DKDESKTOP_DIR} -replace '\\', '/';
 	
-	if(!(Test-Path $DKDESKTOP_DIR)){ 
-		dk_call dk_mkdir "${DKDESKTOP_DIR}" 
-	}
+	#if(!(Test-Path $DKDESKTOP_DIR)){ 
+	#	dk_call dk_mkdir "${DKDESKTOP_DIR}" 
+	#}
+	return ${env:DKDESKTOP_DIR}
 }
 
 
@@ -32,13 +40,17 @@ function Global:dk_DKDESKTOP_DIR() {
 function Global:DKTEST() {
     dk_debugFunc 0 
    
-	dk_call dk_echo
-	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . ."
+	###### GET ######
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Getting DKDESKTOP_DIR . . .\n";
 	dk_call dk_DKDESKTOP_DIR
-	dk_call dk_printVar DKDESKTOP_DIR
+	dk_call dk_echo "env:DKDESKTOP_DIR = ${env:DKDESKTOP_DIR}";
+    dk_call dk_echo "dk_DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR)'\n";
 	
-	dk_call dk_echo
-	dk_call dk_echo "Test Setting DKDESKTOP_DIR . . ."
+	###### SET ######
+	dk_call dk_echo "\n";
+	dk_call dk_echo "Test Setting dk_DKDESKTOP_DIR . . .\n";
 	dk_call dk_DKDESKTOP_DIR "C:/Desktop"
-	dk_call dk_printVar DKDESKTOP_DIR 
+	dk_call dk_echo "env:DKDESKTOP_DIR = ${env:DKDESKTOP_DIR}"
+	dk_call dk_echo "dk_DKDESKTOP_DIR = '$(dk_call dk_DKDESKTOP_DIR 'C:/Desktop')'\n";
 }

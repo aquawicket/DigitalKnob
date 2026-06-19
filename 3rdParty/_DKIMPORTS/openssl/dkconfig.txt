@@ -1,0 +1,5 @@
+############ openssl ############
+# https://github.com/openssl/openssl/archive/2f362e99a1178263c7102474f0190836166f416d.zip
+
+#openssl_Import=https://github.com/openssl/openssl/archive/2f362e99a1178263c7102474f0190836166f416d.zip
+openssl_Import=https://github.com/openssl/openssl/archive/openssl-2f362e99a1178263c7102474f0190836166f416d.zip

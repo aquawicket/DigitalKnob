@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ upx ############
@@ -22,32 +30,34 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip
 
 
+dk_import()
 
-#dk_load(dk_builder)
-dk_validate(target_triple "dk_target_triple()")
-
-#if(ANDROID OR IOS OR IOSSIM OR MAC)
-#	dk_undepend(upx)
-#	dk_return()
-#endif()
-
-if(WIN_X86)	
-	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win32.zip)
-elseif(WIN_X86_64)	
-	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-win64.zip)
-elseif(LINUX_X86)
-	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-i386_linux.tar.xz)
-elseif(LINUX_X86_64)
-	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-amd64_linux.tar.xz)
-elseif(RASPBERRY)
-	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-arm_linux.tar.xz)
-#elseif(DOS)
-#	dk_import(https://github.com/upx/upx/releases/download/v4.2.4/upx-4.2.4-dos.zip)
+if(Android_Arm32_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Android_Arm64_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Android_X86_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Android_X86_64_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Dos_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Linux_Arm32_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Linux_Arm64_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Linux_X86_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Linux_X86_64_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Mac_X86_64_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Raspberry_Host)
+	dk_set(upx_exe "${upx}/TODO")
+elseif(Windows_X86_Host)
+	dk_set(upx_exe "${upx}/upx.exe")
+elseif(Windows_X86_64_Host)
+	dk_set(upx_exe "${upx}/upx.exe")	
 endif()
 
-
-if(WIN)
-	dk_set(UPX_EXE "${UPX}/upx.exe")
-endif()
-
-dk_assertPath(UPX_EXE)
+dk_assertPath(upx_exe)

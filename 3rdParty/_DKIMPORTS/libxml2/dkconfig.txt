@@ -1,0 +1,9 @@
+############ libxml2 ############
+# https://gitlab.gnome.org/GNOME/libxml2
+# https://github.com/GNOME/libxml2
+# http://xmlsoft.org/sources/libxml2-2.9.8.tar.gz
+# https://github.com/GNOME/libxml2/archive/refs/tags/v2.9.8.zip
+# https://fuchsia.googlesource.com/third_party/libxml2/
+# https://github.com/GNOME/libxml2/archive/e397651a6221d95b4fde94b37c4cdfff0e23c1ac.zip
+
+libxml2_Import=https://github.com/GNOME/libxml2/archive/e397651a6221d95b4fde94b37c4cdfff0e23c1ac.zip

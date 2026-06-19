@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_imgToIco){ $dk_imgToIco = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_imgToIco_ps1){ $dk_imgToIco_ps1 = 1; } else{ return; } #include guard
 
 
 ################################################################################
@@ -28,7 +28,7 @@ public static class ImagingHelper
     /// </summary>
     /// <param name="inputBitmap">The input bitmap</param>
     /// <param name="output">The output stream</param>
-    /// <returns>Wether or not the icon was succesfully generated</returns>
+    /// <returns>Wether or NOT the icon was succesfully generated</returns>
     public static bool ConvertToIcon(Bitmap inputBitmap, Stream output)
     {
         if (inputBitmap == null)
@@ -36,7 +36,7 @@ public static class ImagingHelper
 
         int[] sizes = new int[] { 256, 48, 32, 16 };
 
-        // Generate bitmaps for all the sizes and toss them in streams
+        // Generate bitmaps for all the sizes AND toss them in streams
         List<MemoryStream> imageStreams = new List<MemoryStream>();
         foreach (int size in sizes)
         {
@@ -113,7 +113,7 @@ public static class ImagingHelper
     /// </summary>
     /// <param name="input">The input stream</param>
     /// <param name="output">The output stream</param
-    /// <returns>Wether or not the icon was succesfully generated</returns>
+    /// <returns>Wether or NOT the icon was succesfully generated</returns>
     public static bool ConvertToIcon(Stream input, Stream output)
     {
         Bitmap inputBitmap = (Bitmap)Bitmap.FromStream(input);
@@ -125,7 +125,7 @@ public static class ImagingHelper
     /// </summary>
     /// <param name="inputPath">The input path</param>
     /// <param name="outputPath">The output path</param>
-    /// <returns>Wether or not the icon was succesfully generated</returns>
+    /// <returns>Wether or NOT the icon was succesfully generated</returns>
     public static bool ConvertToIcon(string inputPath, string outputPath)
     {
         using (FileStream inputStream = new FileStream(inputPath, FileMode.Open))
@@ -142,7 +142,7 @@ public static class ImagingHelper
     /// </summary>
     /// <param name="inputImage">The input image</param>
     /// <param name="outputPath">The output path</param>
-    /// <returns>Wether or not the icon was succesfully generated</returns>
+    /// <returns>Wether or NOT the icon was succesfully generated</returns>
     public static bool ConvertToIcon(Image inputImage, string outputPath)
     {
         using (FileStream outputStream = new FileStream(outputPath, FileMode.OpenOrCreate))
@@ -153,7 +153,7 @@ public static class ImagingHelper
 
 
     /// <summary>
-    /// Resize the image to the specified width and height.
+    /// Resize the image to the specified width AND height.
     /// Found on stackoverflow: https://stackoverflow.com/questions/1922040/resize-an-image-c-sharp
     /// </summary>
     /// <param name="image">The image to resize.</param>
@@ -196,11 +196,11 @@ function Global:dk_imgToIco() {
 	$Destination = $($args[1]);
 
 	If (-Not 'ImagingHelper' -as [Type]) {
-		Throw 'The custom "ImagingHelper" type is not loaded'
+		Throw 'The custom "ImagingHelper" type is NOT loaded'
 	}
 
     $ResolvedFile = $ExecutionContext.SessionState.Path.GetResolvedPSPathFromPSPath($Path)
-    If (-not $ResolvedFile) { return }
+    If (-NOT $ResolvedFile) { return }
      
     [ImagingHelper]::ConvertToIcon($ResolvedFile[0].Path,$Destination)
 }
@@ -213,9 +213,9 @@ function Global:dk_imgToIco() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$imgFile = "C:/Users/Administrator/digitalknob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.png"
-	$icoFile = "C:/Users/Administrator/digitalknob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.ico"
+	$imgFile = "${ENV:USERPROFILE}/Digital Knob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.png"
+	$icoFile = "${ENV:USERPROFILE}/Digital Knob/Development/DKCpp/DKCpp/apps/DKCef/icons/icon.ico"
 	dk_call dk_imgToIco $imgFile $icoFile
 }

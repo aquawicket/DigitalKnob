@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -24,27 +24,13 @@
 * SOFTWARE.
 */
 
-#if HAVE_DKSDLWindow
-	#if !IOS && !ANDROID
-		#define SDL_MAIN_HANDLED
-	#else
-		#include "SDL_main.h"
-	#endif
-#endif
-
 #include "DK/DKApp.h"
 #include "assets.h"
 
 const char* BUILD_DATE = __DATE__;
 const char* BUILD_TIME = __TIME__;
 
-
 int main(int argc, char** argv){
-	#if HAVE_DKSDLWindow
-		#if !IOS && !EMSCRIPTEN
-			SDL_SetMainReady();
-		#endif
-	#endif
 	DKApp dkapp(argc, argv);
 	DKApp::Init();
 	DKApp::Loop();

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -606,7 +606,7 @@ DKString DKRml::eventToAddress(Rml::Event* event){
 Rml::Element* DKRml::addressToElement(const DKString& address){
 	//DKDEBUGFUNC(address);  //EXCESSIVE LOGGING
 	
-	//FIXME:  Error example (win_x86_64_mingw64_gcc)
+	//FIXME:  Error example (Windows_X86_64_mingw64_gcc)
 	//		0x0x23aefc8: the address is not a valid hex notation
 	//
 	Rml::Element* element = nullptr;

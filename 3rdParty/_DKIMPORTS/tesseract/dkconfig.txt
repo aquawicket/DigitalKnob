@@ -1,0 +1,6 @@
+############ tesseract ############
+# https://github.com/tesseract-ocr/tesseract.git
+# https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386
+# https://github.com/tesseract-ocr/tesseract/archive/21f1b39358929a7b20b47ef39b806dc81aa3b2b4.zip
+
+tesseract_Import=https://github.com/tesseract-ocr/tesseract/archive/21f1b39358929a7b20b47ef39b806dc81aa3b2b4.zip

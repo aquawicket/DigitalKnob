@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)									&& echo "bash_exe = ${bash_exe}"
+	[ -e "${DK_SH}" ]                  || export DK_SH="$(dirname $0)/DK.sh"                              && echo "DK_SH = ${DK_SH}"
+	[ -e "${DK_SH}" ]					|| export DK_SH=$(find "${HOME}" -name "DK.sh")							&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ##################################################################################
 # dk_source(function_name)
@@ -7,20 +20,85 @@
 #    @function_name	- the function name of the file to source and download if needed
 #
 dk_source(){
-	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
-	#echo "dk_source $*"
-
-	# load if it's an existing full path file
-	[ -e ${1} ] && . ${1} && return ${?}
-
-	# If it's a dk_function, download if it doesn't exist then load it
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "downloading ${1} . . ."
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || curl --silent -Lo ${DKBASH_FUNCTIONS_DIR}/${1}.sh ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh || $(true)
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] || echo "ERROR: failed to download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/${1}.sh  TO  ${DKBASH_FUNCTIONS_DIR}/${1}.sh" || [$(read -rp 'press enter to exit')] || exit 127;
+	#echo "dk_source($*)";
 	
-	#echo "${SUDO_EXE-} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh"
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] && ${SUDO_EXE-} chmod 777 ${DKBASH_FUNCTIONS_DIR}/${1}.sh
-	[ -e ${DKBASH_FUNCTIONS_DIR}/${1}.sh ] && . ${DKBASH_FUNCTIONS_DIR}/${1}.sh
+	#(command -v dk_debugFunc &>/dev/null) && dk_debugFunc 1
+	#echo "1 = ${1}"
+	[ -z "${1}" ] && (builtin echo "ERROR: dk_source($*) argument is empty"; return;)
+	
+	_fnc_=$1;
+	#DKHOME_DIR="/c/Users/Administrator"
+	[ -z "${DKHOME_DIR-}" ] && export DKHOME_DIR=$(DKHOME_DIR)
+	[ -z "${DKHTTP_DIR-}" ] && export DKHTTP_DIR="http://aquawicket.com"
+	
+	#####################################################################################################################################
+	# EXAMPLE INPUT                          								          			            			     dk_color
+	# EXAMPLE INPUT                                   C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\git/dkconfig.txt
+	
+	############ Correct the path delimiters ############
+	if [ ! -e "${_fnc_}" ]; then 	
+		###### Replace \ with / ######
+		_in_=${_fnc_}
+		_fnc_=
+		searchValue="\\"
+		newValue="/"
+		while [ -n "${_in_}" ]; do
+			LEFT=${_in_%%"${searchValue}"*}
+			if [ "${LEFT}" = "${_in_}" ]; then _fnc_=${_fnc_}${_in_}; break; fi
+			_fnc_=${_fnc_}${LEFT}${newValue}
+			_in_=${_in_#*"$searchValue"}
+		done 
+		# EXAMPLE RESULT                                                                                                       dk_color
+		# EXAMPLE RESULT	                            /c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	fi
+	
+	############ Get the full path and extension ############
+	if [ ! -e "${_fnc_}" ]; then 	
+		###### If func has no extension, append .sh ######
+		_fnc__noext="${_fnc_%.*}" # remove everything past last dot
+		[ "${_fnc_}" = "${_fnc__noext}" ] && _fnc_="${_fnc_}.sh";
+		# EXAMPLE RESULT																									   dk_color.sh
+		# EXAMPLE RESULT								/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+
+	    ###### If func doesn't contain /c/  ...prepend /c/Users/Administrator/DigitalKnob/Development/DKBash/functions/ ######
+		[ ! "${1#*"${_fnc_}"}" = "/c/" ] && _fnc_="${DKHOME_DIR}/DigitalKnob/Development/DKBash/functions/${_fnc_}";
+	    # EXAMPLE RESULT                                       /c/Administrator/DigitalKnob/Development/DKPowershell/functions/dk_color.sh
+	    # EXAMPLE RESULT                                /c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	fi
+
+	############ Download the file if missing ############
+	if [ ! -e "${_fnc_}" ]; then 	
+		###### Replace /c/Users/Administrator with http://aquawicket.com
+		_in_=${_fnc_}
+		_url_=
+		
+		while [ -n "${_in_}" ]; do
+			LEFT=${_in_%%"${DKHOME_DIR}"*}
+			if [ "${LEFT}" = "${_in_}" ]; then _url_=${_url_}${_in_}; break; fi
+			_url_=${_url_}${LEFT}${DKHTTP_DIR}
+			_in_=${_in_#*"$DKHOME_DIR"}
+		done
+		# EXAMPLE RESULT                http://aquawicket.com/DigitalKnob/Development/DKPowershell/_fnc_tions/dk_color.sh
+		# EXAMPLE RESULT	            http://aquawicket.com/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	
+		###### DOWNLOAD ######
+		dirn=$(dirname "${_fnc_}")
+		[ ! -e "${dirn}" ] && mkdir -p ${dirn}
+		echo "downloading '${_url_}' -> '${_fnc_}'";
+		[ ! -e "${_fnc_}" ] && (command -v curl) && curl --silent -Lo "${_fnc_}" "${_url_}";
+		[ ! -e "${_fnc_}" ] && (command -v "wget") && wget -P "${_fnc_}" "${_url_}"
+	fi
+	
+	############ Final Check ############
+	[ ! -e "${_fnc_}" ] && echo "ERROR: Failed to download ${_fnc_}" && return;
+#############################################################################################################################
+
+	
+	if [ -e "${_fnc_}" ]; then
+		#echo "sourcing ${_fnc_}";
+		[ ! "${1#*"${_fnc_}"}" = ".sh" ] && . "${_fnc_}";
+		return $?;
+	fi
 }
 
 

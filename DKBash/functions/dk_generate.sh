@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ##################################################################################
 # dk_generate()
@@ -9,16 +22,16 @@ dk_generate() {
 	dk_debugFunc 0
 
 	dk_call dk_echo
-	dk_call dk_echo "##################################################################"
-	dk_call dk_echo "     Generating ${target_app-} - ${target_triple-} - ${target_type-} - ${target_level-}"
-	dk_call dk_echo "##################################################################"
+	dk_call dk_echo "###################################################################################"
+	dk_call dk_echo "  Generating ${Target_App-} - ${Target_Tuple-} - ${Target_Type-} - ${Target_Level-}"
+	dk_call dk_echo "###################################################################################"
 	dk_call dk_echo
 
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
-	TARGET_PATH="${DKCPP_APPS_DIR}/${target_app}"
-	#dk_call dk_printVar TARGET_PATH
-	dk_call dk_mkdir "${TARGET_PATH}/${target_triple,,}"
-	dk_call dk_chdir "${TARGET_PATH}/${target_triple,,}"
+	Target_App_Dir="${DKCPP_APPS_DIR}/${Target_App}"
+	#dk_call dk_printVar Target_App_Dir
+	dk_call dk_mkdir "${Target_App_Dir}/${Target_Tuple,,}"
+	dk_call dk_chdir "${Target_App_Dir}/${Target_Tuple,,}"
 	dk_call dk_assertPath DKCMAKE_DIR
 	#dk_call dk_assertPath ${DKCMAKE_DIR}
 	CMAKE_SOURCE_DIR="${DKCMAKE_DIR}"
@@ -27,47 +40,45 @@ dk_generate() {
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
 	#$(dk_call dk_pathExists "${CMAKE_SOURCE_DIR}") || dk_call dk_error "CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR} does not exist"
 	#dk_call dk_printVar CMAKE_SOURCE_DIR
-	CMAKE_TARGET_PATH="${TARGET_PATH}"
-	#dk_call dk_printVar CMAKE_TARGET_PATH
 	
 	###### BUILD CMAKE_ARGS ARRAY ######
-	target_level="RebuildAll"
-	DKLINK="Static"
+	Target_Level="RebuildAll"
+	Target_Link="Static"
 	
 	#declare -a CMAKE_ARGS
 	#set --											#clear the positional parameters
 	CMAKE_ARGS=()
 	dk_call dk_arrayPush CMAKE_ARGS "-DDKCMAKE_FUNCTIONS_DIR_=${DKCMAKE_FUNCTIONS_DIR_}"
-	if [ "${target_type}" = "Debug" ]; then
+	if [ "${Target_Type}" = "Debug" ]; then
 		#set -- "-DDEBUG=ON" )
 		#set -- "${@}" "-DDEBUG=ON"
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=OFF"
-	elif [ "${target_type}" = "Release" ]; then
+	elif [ "${Target_Type}" = "Release" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=OFF" "-DRELEASE=ON"
-	elif [ "${target_type}" = "All" ]; then
+	elif [ "${Target_Type}" = "All" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DDEBUG=ON" "-DRELEASE=ON"
 	else
-		dk_call dk_error "target_type:${target_type} is invalid"
+		dk_call dk_error "Target_Type:${Target_Type} is invalid"
 	fi
 	
-	if [ "${target_level}" = "Build" ]; then
+	if [ "${Target_Level}" = "Build" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DBUILD=ON"
-	elif [ "${target_level}" = "Rebuild" ]; then
+	elif [ "${Target_Level}" = "Rebuild" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DREBUILD=ON"
-	elif [ "${target_level}" = "RebuildAll" ]; then
+	elif [ "${Target_Level}" = "RebuildAll" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DREBUILDALL=ON"
 	else
-		dk_call dk_error "target_level:${target_level} is invalid"
+		dk_call dk_error "Target_Level:${Target_Level} is invalid"
 	fi
 	
-	if [ "${DKLINK}" = "Static" ]; then
+	if [ "${Target_Link}" = "Static" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DSTATIC=ON"
 	fi
-	if [ "${DKLINK}" = "Shared" ]; then
+	if [ "${Target_Link}" = "Shared" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-DSHARED=ON"
 	fi
 	
-	CMAKE_BINARY_DIR="${CMAKE_TARGET_PATH}/${target_triple,,}/${target_type}"
+	CMAKE_BINARY_DIR="${Target_App_Dir}/${Target_Tuple}/${Target_Type}"
 	dk_call dk_mkdir "${CMAKE_BINARY_DIR}"
 	#dk_call dk_printVar CMAKE_BINARY_DIR
 	
@@ -96,74 +107,74 @@ dk_generate() {
 	#dk_call dk_arrayPush CMAKE_ARGS "--check-system-vars"
 	
 	# NOTE; ${var,,} converts the var value to lowercase. use ^^ for uppercase
-	if [ "${target_triple,,}" = "cosmo" ]; then
+	if [ "${Target_Tuple}" = "Cosmo" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "cygwin" ]; then
+	elif [ "${Target_Tuple}" = "Cygwin" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "android_arm32_clang" ]; then
+	elif [ "${Target_Tuple}" = "Android_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple,,}" = "android_arm64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Android_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple,,}" = "android_x86_clang" ]; then
+	elif [ "${Target_Tuple}" = "Android_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple,,}" = "android_x86_64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Android_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple,,}" = "emscripten_x86_clang" ]; then
+	elif [ "${Target_Tuple}" = "Emscripten_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "ios_arm32_clang" ]; then
+	elif [ "${Target_Tuple}" = "Ios_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "ios_arm64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Ios_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "iossim_x86_clang" ]; then
+	elif [ "${Target_Tuple}" = "Iossim_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "iossim_x86_64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Iossim_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "linux_x86_gcc" ]; then
+	elif [ "${Target_Tuple}" = "Linux_X86_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "linux_x86_64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Linux_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "linux_x86_64_gcc" ]; then
+	elif [ "${Target_Tuple}" = "Linux_X86_64_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "mac_x86_clang" ]; then
+	elif [ "${Target_Tuple}" = "Mac_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "mac_x86_64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Mac_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Xcode"
-	elif [ "${target_triple,,}" = "raspberry_arm32_clang" ]; then
+	elif [ "${Target_Tuple}" = "Raspberry_Arm32_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles" 
-	elif [ "${target_triple,,}" = "raspberry_arm64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Raspberry_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Unix Makefiles"
-	elif [ "${target_triple,,}" = "win_arm64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Windows_Arm64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANGARM64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clangarm64/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_clang" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang32/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_gcc" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW32"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw32/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_64_clang" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_64_Clang" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=CLANG64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/clang64/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_64_gcc" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_64_Gcc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=MINGW64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/mingw64/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_64_ucrt" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_64_Ucrt" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "MinGW Makefiles" "-DMSYSTEM=UCRT64"
 		dk_call dk_validate DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR"
 		export PATH=${DK3RDPARTY_DIR}/msys2-x86_64-20231026/ucrt64/bin:${PATH}
-	elif [ "${target_triple,,}" = "win_x86_64_msvc" ]; then
+	elif [ "${Target_Tuple}" = "Windows_X86_64_Msvc" ]; then
 		dk_call dk_arrayPush CMAKE_ARGS "-G" "Visual Studio 17 2022"
 	else
-		dk_call dk_fatal "Could no determine target_triple:${target_triple,,}"
+		dk_call dk_fatal "Could no determine Target_Tuple:${Target_Tuple,,}"
 	fi
 
 	###### CMAKE_TOOLCHAIN_FILE ######
-#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${target_triple,,}_toolchain.cmake"
+#	TOOLCHAIN="${DKCMAKE_DIR}/toolchains/${Target_Tuple,,}_toolchain.cmake"
 #	dk_call dk_echo "TOOLCHAIN = ${TOOLCHAIN}"
 #	if dk_call dk_pathExists "${TOOLCHAIN}"; then
 #		dk_call dk_arrayPush CMAKE_ARGS "-DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}"
@@ -187,13 +198,13 @@ dk_generate() {
 	###### CMake Configure ######
 	dk_call dk_installCmake
 	#dk_call dk_validate DKIMPORTS_DIR "dk_DKIMPORTS_DIR"
-	#dk_call ${DKIMPORTS_DIR}/cmake/dk_install.sh
+	#dk_call ${DKIMPORTS_DIR}/cmake/DKINSTALL.sh
 	
 	dk_call dk_echo
 	dk_call dk_echo "****** CMAKE COMMAND ******"
-	#dk_call dk_nativePath ${CMAKE_EXE} NATIVE_CMAKE_EXE
+	#dk_call dk_pathToNative ${cmake_exe} NATIVE_CMAKE_EXE
 	dk_call dk_printVar CMAKE_ARGS
-	dk_call ${CMAKE_EXE} "${CMAKE_ARGS[@]}" && dk_call dk_echo "CMake Generation Successful" || dk_call dk_error "CMake Generation Failed"
+	dk_call ${cmake_exe} "${CMAKE_ARGS[@]}" && dk_call dk_echo "CMake Generation Successful" || dk_call dk_error "CMake Generation Failed"
 	dk_call dk_echo
 }
 

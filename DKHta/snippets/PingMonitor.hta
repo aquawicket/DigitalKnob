@@ -1,0 +1,224 @@
+<html>
+<head>
+<title>pingMonitor</title>
+<HTA:APPLICATION 
+    ID="pingMonitor"
+    APPLICATIONNAME="pingMonitorHTA"
+    MINIMIZEBUTTON="no"
+    MAXIMIZEBUTTON="no"
+    SINGLEINSTANCE="no"
+    SysMenu="no"
+    BORDER="thin"
+/>
+<script type="text/vbscript" >
+
+Class ProcessOutputMonitor
+
+    Dim shell, fso, wmi
+    Dim processID, retCode, processQuery
+    Dim outputFile, inputFile
+
+    Private Sub Class_Initialize
+        Set fso     = CreateObject("Scripting.FileSystemObject")
+        Set shell   = CreateObject("WScript.Shell")
+        Set wmi     = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+        Set inputFile = Nothing 
+    End Sub
+
+    Private Sub Class_Terminate
+        freeResources
+    End Sub
+
+    Public Default Function Start( ByVal commandLine )
+    Const SW_HIDE = 0
+    Const SW_NORMAL = 1
+    Const TemporaryFolder = 2
+    Dim startUp
+
+        Start = False
+        If Not IsEmpty( processID ) Then Exit Function
+
+        outputFile  = fso.BuildPath( _
+            fso.GetSpecialFolder(TemporaryFolder) _ 
+            , Left(CreateObject("Scriptlet.TypeLib").GUID,38) & ".tmp" _ 
+        )
+
+        ' "%comspec%" /c">"outputFile" command arguments "
+        commandLine = Join( _ 
+            Array( _ 
+                quote(shell.ExpandEnvironmentStrings("%comspec%")) _ 
+                , "/c"">" & quote(outputFile) _ 
+                , commandLine _ 
+                , """" _ 
+            ) _ 
+            , " " _ 
+        )
+
+        ' https://msdn.microsoft.com/en-us/library/aa394375%28v=vs.85%29.aspx
+        Set startUp = wmi.Get("Win32_ProcessStartup").SpawnInstance_
+        startUp.ShowWindow = SW_HIDE
+
+        retCode = wmi.Get("Win32_Process").Create( commandLine , Null, startUp, processID )
+        If retCode <> 0 Then
+            freeResources
+            Exit Function 
+        End If 
+
+        processQuery = "SELECT ProcessID From Win32_Process WHERE ProcessID=" & processID 
+
+
+        Start = True
+    End Function 
+
+    Public Property Get StartReturnCode
+        StartReturnCode = retCode
+    End Property 
+
+    Public Property Get WasStarted
+    End Property 
+
+    Public Property Get PID
+        PID = processID
+    End Property 
+
+    Public Property Get IsRunning()
+        IsRunning = False 
+        If Not IsEmpty( processID ) Then 
+            If getWMIProcess() Is Nothing Then 
+                processID = Empty
+                freeResources
+            Else 
+                IsRunning = True
+            End If 
+        End If 
+    End Property 
+
+    Public Property Get NextLine
+        NextLine = getFromInputFile("line")
+    End Property 
+
+    Public Property Get NextData
+        NextData = getFromInputFile("all")
+    End Property
+
+    Private Function getFromInputFile( what )
+    Const ForReading = 1
+        getFromInputFile = Empty
+        If Not IsEmpty( processID ) Then 
+            If inputFile Is Nothing Then 
+                If fso.FileExists( outputFile ) Then 
+                    Set inputFile = fso.GetFile( outputFile ).OpenAsTextStream( ForReading )
+                End If 
+            End If 
+            If Not ( inputFile Is Nothing ) Then 
+                If Not inputFile.AtEndOfStream Then 
+                    Select Case what
+                        Case "line" :   getFromInputFile = inputFile.ReadLine()
+                        Case "all"  :   getFromInputFile = inputFile.ReadAll()
+                    End Select
+                End If 
+            End If 
+        End If 
+    End Function 
+
+    Private Function quote( text )
+        quote = """" & text & """"
+    End Function 
+
+    Private Function getWMIProcess()
+    Const wbemFlagForwardOnly = 32
+    Dim process
+        Set getWMIProcess = Nothing
+        If Not IsEmpty( processID ) Then 
+            For Each process In wmi.ExecQuery( processQuery, "WQL", wbemFlagForwardOnly )
+                Set getWMIProcess = process
+            Next 
+        End If 
+    End Function 
+
+    Private Sub freeResources()
+    Dim process
+        Set process = getWMIProcess()
+        If Not ( process Is Nothing ) Then 
+            process.Terminate
+        End If 
+        processID = Empty
+        processQuery = Empty
+        If Not ( inputFile Is Nothing ) Then 
+            inputFile.Close
+            Set inputFile = Nothing 
+            fso.DeleteFile outputFile 
+        End If 
+    End Sub
+
+End Class
+
+</script>
+
+<SCRIPT LANGUAGE="VBScript">
+
+Dim timerID
+Dim monitorGoogle, monitorMicrosoft
+
+Sub Window_onLoad
+    window.resizeTo 1024,400
+    Set monitorGoogle = New ProcessOutputMonitor
+        monitorGoogle.Start "ping -4 www.google.com"
+    Set monitorMicrosoft = New ProcessOutputMonitor
+        monitorMicrosoft.Start "ping -4 www.microsoft.com"
+
+    timerID = window.setInterval(GetRef("monitorPings"), 500)
+End Sub
+
+Sub monitorPings
+Dim buffer, keepRunning
+    keepRunning = False
+
+    buffer = monitorGoogle.NextData
+    If Not IsEmpty( buffer ) Then 
+        google.innerHTML = google.innerHTML & Replace( buffer, vbCrLf, "<br>" )
+        keepRunning = True
+    Else 
+        keepRunning = CBool( keepRunning Or monitorGoogle.IsRunning )
+    End If 
+
+    buffer = monitorMicrosoft.NextData
+    If Not IsEmpty( buffer ) Then 
+        microsoft.innerHTML = microsoft.innerHTML & Replace( buffer, vbCrLf, "<br>" )
+        keepRunning = True
+    Else 
+        keepRunning = CBool( keepRunning Or monitorMicrosoft.IsRunning )
+    End If 
+
+    If Not keepRunning Then 
+        window.clearInterval( timerID )
+        timerID = Empty
+        alert("Done")
+    End If 
+
+End Sub 
+
+Sub ExitProgram
+    If Not IsEmpty(timerID) Then window.clearInterval(timerID)
+    window.close()
+End Sub
+
+</SCRIPT>
+
+</head>
+
+<body>
+    <input id="checkButton" type="button" value="EXIT" name="run_button" onClick="ExitProgram" align="right">
+<br><br>
+    <span id="CurrentTime"></span>
+<br><br>
+    <table style="width:100%">
+        <tr><th style="width:50%;">microsoft</th><th style="width:50%">google</th></tr>
+        <tr>
+            <td id="microsoft" style="font-family=courier;font-size:0.6em;vertical-align:top;"></td>
+            <td id="google" style="font-family=courier;font-size:0.6em;vertical-align:top;"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

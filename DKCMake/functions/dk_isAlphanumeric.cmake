@@ -1,6 +1,16 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 ####################################################################
 # dk_isAlphanumeric(arg)
@@ -13,13 +23,21 @@ include_guard()
 function(dk_isAlphanumeric)
     dk_debugFunc()
  
-	dk_getArg(0 _arg0_)
+	#dk_getArg(0 _arg0_)
 	
-	dk_convertToCIdentifier("${_arg0_}" str_alphaNumeric)
-	if(("${_arg0_}" STREQUAL "${str_alphaNumeric}") OR ("_${_arg0_}" STREQUAL "${str_alphaNumeric}"))
-		set(dk_isAlphanumeric 1 PARENT_SCOPE)
+	dk_convertToCIdentifier("${ARGV0}" str_alphaNumeric)
+	if(("${ARGV0}" STREQUAL "${str_alphaNumeric}") OR ("_${ARGV0}" STREQUAL "${str_alphaNumeric}"))
+		set(dk_isAlphanumeric 1)
 	else()
-		set(dk_isAlphanumeric 0 PARENT_SCOPE)
+		set(dk_isAlphanumeric 0)
+	endif()
+	
+	###### return ######
+	set(dk_isAlphanumeric ${dk_isAlphanumeric} PARENT_SCOPE)
+	if(${ARGC} GREATER 1)
+		set(${output} ${dk_isAlphanumeric} PARENT_SCOPE)
+	else()
+		message("${dk_isAlphanumeric}")
 	endif()
 endfunction()
 

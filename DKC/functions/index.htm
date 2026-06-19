@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="tree v2.1.0 © 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro">
+ <title>DigitalKnob</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+ </style>
+</head>
+<body>
+	<h1>DigitalKnob</h1><p>
+	[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:44]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./">.</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:33]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./Test/">Test</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6456&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_app.c">dk_app.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5280&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_app.h">dk_app.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;811&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertPath.c">dk_assertPath.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;470&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertPath.h">dk_assertPath.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2105&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_basename.c">dk_basename.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1270&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_basename.h">dk_basename.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;601&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DK.c">DK.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;800&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBash.c">dk_callDKBash.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3452&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBash.h">dk_callDKBash.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;802&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBatch.c">dk_callDKBatch.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2248&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBatch.h">dk_callDKBatch.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;802&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCmake.c">dk_callDKCmake.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2232&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCmake.h">dk_callDKCmake.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCpp.c">dk_callDKCpp.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2188&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCpp.h">dk_callDKCpp.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;805&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCSharp.c">dk_callDKCSharp.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2254&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCSharp.h">dk_callDKCSharp.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHta.c">dk_callDKHta.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2188&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHta.h">dk_callDKHta.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHtml.c">dk_callDKHtml.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2210&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKHtml.h">dk_callDKHtml.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;799&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJava.c">dk_callDKJava.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2210&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJava.h">dk_callDKJava.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJavascript.c">dk_callDKJavascript.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2342&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKJavascript.h">dk_callDKJavascript.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPhp.c">dk_callDKPhp.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2188&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPhp.h">dk_callDKPhp.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;819&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPowershell.c">dk_callDKPowershell.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2399&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPowershell.h">dk_callDKPowershell.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;805&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPython.c">dk_callDKPython.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2254&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPython.h">dk_callDKPython.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;796&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKVbs.c">dk_callDKVbs.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2188&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKVbs.h">dk_callDKVbs.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;678&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_chdir.c">dk_chdir.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;318&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_chdir.h">dk_chdir.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21105&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_color.c">dk_color.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;19752&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_color.h">dk_color.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;711&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_confirm.c">dk_confirm.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;440&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_confirm.h">dk_confirm.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;665&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_copy.c">dk_copy.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2172&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_copy.h">dk_copy.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;957&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_currentDirectory.c">dk_currentDirectory.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;634&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_currentDirectory.h">dk_currentDirectory.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;822&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debug.c">dk_debug.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;650&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debugFunc.c">dk_debugFunc.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;293&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debugFunc.h">dk_debugFunc.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;525&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debug.h">dk_debug.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;629&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_delete.c">dk_delete.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;582&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_delete.h">dk_delete.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;712&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DIGITALKNOB_DIR.c">dk_DIGITALKNOB_DIR.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;452&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DIGITALKNOB_DIR.h">dk_DIGITALKNOB_DIR.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;993&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_dirname.c">dk_dirname.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;501&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_dirname.h">dk_dirname.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;768&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKHOME_DIR.c">dk_DKHOME_DIR.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;865&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKHOME_DIR.h">dk_DKHOME_DIR.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1038&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.c">dk_echo.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;368&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.c_BACKUP">dk_echo.c_BACKUP</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;484&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.h">dk_echo.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3596&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.h_BACKUP">dk_echo.h_BACKUP</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1831&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_endianness.c">dk_endianness.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;316&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_endianness.h">dk_endianness.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;951&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_envVariable.c">dk_envVariable.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;746&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_envVariable.h">dk_envVariable.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;824&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_error.c">dk_error.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;417&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_error.h">dk_error.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;809&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exec.c">dk_exec.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;764&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exec.h">dk_exec.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;612&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exit.c">dk_exit.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;265&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exit.h">dk_exit.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;824&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fatal.c">dk_fatal.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;414&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fatal.h">dk_fatal.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;703&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileRead.c">dk_fileRead.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1257&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileRead.h">dk_fileRead.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;675&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileWrite.c">dk_fileWrite.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1295&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileWrite.h">dk_fileWrite.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;824&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fixme.c">dk_fixme.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;414&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fixme.h">dk_fixme.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;876&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DK.h">DK.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;722&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DKHOME_DIR.c">DKHOME_DIR.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;850&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DKHOME_DIR.h">DKHOME_DIR.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;814&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_info.c">dk_info.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;515&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_info.h">dk_info.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;765&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboardEvent.c">dk_keyboardEvent.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20780&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboardEvent.h">dk_keyboardEvent.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1424&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_log.c">dk_log.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12785&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_log.h">dk_log.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;621&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mkdir.c">dk_mkdir.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;325&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mkdir.h">dk_mkdir.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;654&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_nanosleep.c">dk_nanosleep.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;404&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_nanosleep.h">dk_nanosleep.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;832&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_notice.c">dk_notice.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;422&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_notice.h">dk_notice.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1186&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathExists.c">dk_pathExists.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;348&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathExists.h">dk_pathExists.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;644&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pause.c">dk_pause.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;316&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pause.h">dk_pause.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1838&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_preprocessor.c">dk_preprocessor.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15678&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_preprocessor.h">dk_preprocessor.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;629&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printTimestamp.c">dk_printTimestamp.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;545&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printTimestamp.h">dk_printTimestamp.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;778&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_realpath.c">dk_realpath.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;564&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_realpath.h">dk_realpath.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;962&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_relativePath.c">dk_relativePath.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1264&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_relativePath.h">dk_relativePath.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1327&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_replaceAll.c">dk_replaceAll.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2071&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_replaceAll.h">dk_replaceAll.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;612&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep.c">dk_sleep.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;528&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep.h">dk_sleep.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;842&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_success.c">dk_success.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;428&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_success.h">dk_success.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;802&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_test.c">dk_test.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2819&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_test.h">dk_test.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1801&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testReturn.c">dk_testReturn.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;547&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testReturn.h">dk_testReturn.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;815&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_todo.c">dk_todo.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;412&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_todo.h">dk_todo.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1066&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toLower.c">dk_toLower.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;368&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toLower.h">dk_toLower.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1066&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toUpper.c">dk_toUpper.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;368&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toUpper.h">dk_toUpper.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;620&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_usleep.c">dk_usleep.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;554&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_usleep.h">dk_usleep.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;842&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_verbose.c">dk_verbose.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;431&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_verbose.h">dk_verbose.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;842&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_warning.c">dk_warning.c</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;430&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_warning.h">dk_warning.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7352&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./frame_timer_B.h">frame_timer_B.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2096&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./frame_timer.h">frame_timer.h</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4491&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___NEW_C_FUNCTION___.cmd">___NEW_C_FUNCTION___.cmd</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;620&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___TEMPLATE___.c">___TEMPLATE___.c</a><br>
+	└── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;254&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___TEMPLATE___.h">___TEMPLATE___.h</a><br>

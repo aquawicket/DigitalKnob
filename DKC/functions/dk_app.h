@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -29,16 +29,52 @@
 #define dk_app_h
 
 #include "DK.h"
-#include <stdbool.h>
+#include "dk_exit.h"
+#include "dk_printTimestamp.h"
+#include "dk_usleep.h"
+#include "frame_timer.h"
+#include "dk_keyboardEvent.h"
+
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
 
+/*
+#include <sys/time.h>
+bool GetTicks(double* ticks){
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	*ticks = ((ts.tv_sec * 1000.0) + (ts.tv_nsec / 1000000.0));
+	return true;
+};
+
+double a=0;
+double b=0;
+double work_time=0;
+double delta_ms=0;
+double sleep_time=0;
+void LimitFramerate2(){
+ // Maintain designated frequency of 5 Hz (200 ms per frame)
+        GetTicks(&a);
+        work_time = a - b;
+
+        if(work_time < 200.0){
+            delta_ms = 200.0 - work_time;
+            dk_usleep(delta_ms * 1000.0);
+        }
+
+        GetTicks(&b);
+        sleep_time = b - a;
+
+        // Your code here
+
+        printf("now:%f work_time:%f sleep_time:%f\n", b, work_time,  sleep_time);
+}
 //class dk_app{
 //public:
-
+*/
 /**
-*	@function dk_app(argc, argv) - This is the entry point for digitalknob
+*	@function dk_app(argc, argv) - This is the entry point for DigitalKnob
 *
 *	@param argc ::  Non-negative value representing the number of arguments passed to the program from the environment in which the program is run.
 *	@param argv ::	Pointer to the first element of an array of argc + 1 pointers, of which the last one is null and the previous ones, if any, 
@@ -48,24 +84,83 @@ extern const char* BUILD_TIME;
 *	@returns    ::	void
 *	https://en.cppreference.com/w/cpp/language/main_function
 */
-	int dk_app_dk_app(int argc, char** argv);
-	static void dk_app_Init();
-	static void dk_app_Load(){};
-	static void dk_app_Loop();
-#if EMSCRIPTEN
-	static EM_BOOL EM_DoFrame(double time, void* userData);
-#endif
-	static void dk_app_DoFrame();
-	static void dk_app_CallLoops();
-	
-	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
-	static void dk_app_Exit();
 
 	bool   dk_app_active;
 	bool   dk_app_paused;
 	int    dk_app_argc;
 	char** dk_app_argv;
+	
+	//TODO: https://en.cppreference.com/w/cpp/utility/program/exit
+	////////////////////
+	void dk_app_Exit() {
+		dk_app_active = false;
+		dk_exit(13);
+	};
+	
+	/////////////////////////
+	void dk_app_CallLoops() {
+		/*
+		for(unsigned int i = 0; i < loop_funcs.size(); ++i){
+			//if(active)
+				loop_funcs[i]();
+		}
+		*/
+		//dk_printTimestamp();
+		
+	};
+	
+	//////////////////////////////////////////////////
+	bool dk_app_DoFrame(double time, void* userData) {
+		if(dk_app_paused){ 
+			//DKUtil_Sleep(100);
+			return true;
+		}
 
+		//###### Frame Limiter and FPS ######
+		frame_timer();
+		
+		//###### Keyboard Events ######
+		char key;
+		dk_keyboardEvent(&key);	
+		if(key == 27){
+			dk_exit(key);
+		}
+		
+		dk_app_CallLoops(); //Call loop functions
+		return true;
+	};
+
+	////////////////////
+	void dk_app_Loop() {
+		while(dk_app_active){
+			#if EMSCRIPTEN
+				emscripten_request_animation_frame_loop(dk_app_DoFrame, 0);
+			#else
+				dk_app_DoFrame(0, 0);
+			#endif
+		}
+	};
+	
+	////////////////////
+	void dk_app_Init() {
+		dk_echo("Press Ctrl+C to end the program\n");
+		dk_app_active = true;
+	};
+	
+	////////////////////////////////////////////
+	int dk_app(int _argc, char** _argv) {
+		DK();
+		dk_app_argc = _argc;
+		dk_app_argv = _argv;
+		
+		dk_app_Init();
+		dk_app_Loop();
+		return 0;
+	};
+	
+	
+	
+	
 	/*
 	template<class T>
 	static void AppendLoopFunc(void (T::*func)(), T* instance){

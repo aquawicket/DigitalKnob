@@ -1,4 +1,4 @@
-import DKJAVA_FUNCTIONS_DIR.DK;
+//import com.DigitalKnob.DKJava;
 //#include_guard()
 
 //##################################################################################

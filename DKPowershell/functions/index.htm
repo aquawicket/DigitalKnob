@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <meta name="Author" content="Made by 'tree'">
+ <meta name="GENERATOR" content="tree v2.1.0 © 1996 - 2022 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro">
+ <title>DigitalKnob</title>
+ <style type="text/css">
+  BODY { font-family : monospace, sans-serif;  color: black;}
+  P { font-family : monospace, sans-serif; color: black; margin:0px; padding: 0px;}
+  A:visited { text-decoration : none; margin : 0px; padding : 0px;}
+  A:link    { text-decoration : none; margin : 0px; padding : 0px;}
+  A:hover   { text-decoration: underline; background-color : yellow; margin : 0px; padding : 0px;}
+  A:active  { margin : 0px; padding : 0px;}
+  .VERSION { font-size: small; font-family : arial, sans-serif; }
+  .NORM  { color: black;  }
+  .FIFO  { color: purple; }
+  .CHAR  { color: yellow; }
+  .DIR   { color: blue;   }
+  .BLOCK { color: yellow; }
+  .LINK  { color: aqua;   }
+  .SOCK  { color: fuchsia;}
+  .EXEC  { color: green;  }
+ </style>
+</head>
+<body>
+	<h1>DigitalKnob</h1><p>
+	[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:44]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./">.</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:34]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./Array/">Array</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;512&nbsp;09-Dec-2025&nbsp;02:34]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./Test/">Test</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1184&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__ARGC__.ps1">__ARGC__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1598&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__ARGV__.ps1">__ARGV__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;592&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__CALLER__.ps1">__CALLER__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5608&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./collect-wsl-logs.ps1">collect-wsl-logs.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2026&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayAt.ps1">dk_arrayAt.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1469&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_arrayLength.ps1">dk_arrayLength.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1048&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertPath.ps1">dk_assertPath.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1930&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_assertVar.ps1">dk_assertVar.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1145&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_atob.ps1">dk_atob.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1903&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_basename.ps1">dk_basename.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;527&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_beep.ps1">dk_beep.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1181&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_btoa.ps1">dk_btoa.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2365&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_buildApp.ps1">dk_buildApp.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2543&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_buildMain.ps1">dk_buildMain.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1047&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBash.ps1">dk_callDKBash.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1005&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKBatch.ps1">dk_callDKBatch.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;817&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKCmake.ps1">dk_callDKCmake.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;841&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_callDKPowershell.ps1">dk_callDKPowershell.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1867&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_call.ps1">dk_call.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1743&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_chdir.ps1">dk_chdir.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;992&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_clearCmakeCache.ps1">dk_clearCmakeCache.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;524&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_clearScreen.ps1">dk_clearScreen.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21319&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_color.ps1">dk_color.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;829&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_confirm.ps1">dk_confirm.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;872&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_contains.ps1">dk_contains.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2013&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_convertToCIdentifier.ps1">dk_convertToCIdentifier.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2049&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_copy.ps1">dk_copy.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;821&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_createCache.ps1">dk_createCache.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2541&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_createShortcut.ps1">dk_createShortcut.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;932&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_createSymlink.ps1">dk_createSymlink.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2462&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debugFunc.ps1">dk_debugFunc.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;690&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_debug.ps1">dk_debug.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;957&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_delete.ps1">dk_delete.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;864&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_deleteTempFiles.ps1">dk_deleteTempFiles.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1347&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_depend.ps1">dk_depend.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1652&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DIGITALKNOB_DIR.ps1">dk_DIGITALKNOB_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1068&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_dirname.ps1">dk_dirname.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1651&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DK3RDPARTY_DIR.ps1">dk_DK3RDPARTY_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8083&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKBRANCH_DIR.ps1">dk_DKBRANCH_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1543&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKCACHE_DIR.ps1">dk_DKCACHE_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1553&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKDESKTOP_DIR.ps1">dk_DKDESKTOP_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1652&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKDOWNLOAD_DIR.ps1">dk_DKDOWNLOAD_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1345&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKHOME_DIR.ps1">dk_DKHOME_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1641&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKIMPORTS_DIR.ps1">dk_DKIMPORTS_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1503&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_DKTOOLS_DIR.ps1">dk_DKTOOLS_DIR.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2860&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_download.ps1">dk_download.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;226&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_dumpLogProfile.ps1">dk_dumpLogProfile.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1526&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_echo.ps1">dk_echo.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1574&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_enterManually.ps1">dk_enterManually.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;755&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_error.ps1">dk_error.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;583&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_errorStatus.ps1">dk_errorStatus.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;947&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_exit.ps1">dk_exit.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;998&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_extract.ps1">dk_extract.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;692&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fatal.ps1">dk_fatal.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;707&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileAppend.ps1">dk_fileAppend.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2521&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileContains.ps1">dk_fileContains.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;782&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileMD5.ps1">dk_fileMD5.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;800&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileSHA256.ps1">dk_fileSHA256.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1223&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileVariable.ps1">dk_fileVariable.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4043&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileVariables.ps1">dk_fileVariables.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;621&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fileWrite.ps1">dk_fileWrite.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1084&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_findProgram.ps1">dk_findProgram.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;684&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_fixme.ps1">dk_fixme.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7075&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_generate.ps1">dk_generate.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;843&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getcwd.ps1">dk_getcwd.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;787&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getDirectories.ps1">dk_getDirectories.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2073&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getExtension.ps1">dk_getExtension.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;745&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFiles.ps1">dk_getFiles.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;700&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getFullPath.ps1">dk_getFullPath.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1076&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getPackagePath.ps1">dk_getPackagePath.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1190&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getParameter.ps1">dk_getParameter.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1331&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getParameterValue.ps1">dk_getParameterValue.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2128&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getUrl.ps1">dk_getUrl.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1341&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_getUrls.ps1">dk_getUrls.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;948&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitCheckRemote.ps1">dk_gitCheckRemote.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2130&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitCommit.ps1">dk_gitCommit.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;822&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitDiffSummary.ps1">dk_gitDiffSummary.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2661&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_gitUpdate.ps1">dk_gitUpdate.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2184&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Arch.ps1">dk_Host_Arch.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1614&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Os.ps1">dk_Host_Os.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1913&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Host_Tuple.ps1">dk_Host_Tuple.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;926&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_httpResponse.ps1">dk_httpResponse.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7270&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_imgToIco.ps1">dk_imgToIco.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3953&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_import.ps1">dk_import.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20691&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_importVariables.ps1">dk_importVariables.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20447&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_importVariables.ps1_BACKUP">dk_importVariables.ps1_BACKUP</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1442&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_includes.ps1">dk_includes.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;695&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_info.ps1">dk_info.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2719&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installCmake.ps1">dk_installCmake.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;530&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installGit.ps1">dk_installGit.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2587&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_installPackage.ps1">dk_installPackage.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1880&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isChildPathOf.ps1">dk_isChildPathOf.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1212&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isFunction.ps1">dk_isFunction.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;938&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_isUrl.ps1">dk_isUrl.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;603&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboardInput.ps1">dk_keyboardInput.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1006&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_keyboard.ps1">dk_keyboard.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;897&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_listPackages.ps1">dk_listPackages.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1140&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_listToArray.ps1">dk_listToArray.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3780&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_load.ps1">dk_load.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1193&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_logo.ps1">dk_logo.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;12990&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_log.ps1">dk_log.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2678&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_messageBox.ps1">dk_messageBox.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;634&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mkdir.ps1">dk_mkdir.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2673&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mouseEvent.ps1">dk_mouseEvent.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1062&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_mousePosition.ps1">dk_mousePosition.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1831&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_move.ps1">dk_move.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;707&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_notice.ps1">dk_notice.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1271&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pathExists.ps1">dk_pathExists.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;915&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pause.ps1">dk_pause.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3692&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pickUpdate.ps1">dk_pickUpdate.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1320&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_PipeClient.ps1">dk_PipeClient.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1499&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_PipeServer.ps1">dk_PipeServer.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1557&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_PostMessage.ps1">dk_PostMessage.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3610&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_printVar.ps1">dk_printVar.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9882&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./DK.ps1">DK.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;569&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pullAssets.ps1">dk_pullAssets.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;541&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_pushAssets.ps1">dk_pushAssets.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;886&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_quickAccessPin.ps1">dk_quickAccessPin.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;879&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_quickAccessUnpin.ps1">dk_quickAccessUnpin.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1245&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_readCache.ps1">dk_readCache.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1064&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_realpath.ps1">dk_realpath.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;955&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_reload.ps1">dk_reload.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1516&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeAll.ps1">dk_removeAll.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_removeExtension.ps1">dk_removeExtension.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1369&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_replaceAll.ps1">dk_replaceAll.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2150&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_resetAll.ps1">dk_resetAll.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4635&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_runAsTI.ps1">dk_runAsTI.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1052&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_screenOff.ps1">dk_screenOff.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1592&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_screenshot.ps1">dk_screenshot.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;852&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_selectFile.ps1">dk_selectFile.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1561&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_SendMessage.ps1">dk_SendMessage.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1345&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_setConsoleIcon.ps1">dk_setConsoleIcon.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1491&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_setIcon.ps1">dk_setIcon.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2306&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_set.ps1">dk_set.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1926&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_showFileLine.ps1">dk_showFileLine.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1358&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep_ms.ps1">dk_sleep_ms.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;590&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_sleep.ps1">dk_sleep.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2537&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_smartExtract.ps1">dk_smartExtract.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3265&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_source.ps1">dk_source.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2418&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_stacktrace.ps1">dk_stacktrace.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;820&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_startPackage.ps1">dk_startPackage.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;713&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_success.ps1">dk_success.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3022&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_App.ps1">dk_Target_App.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2346&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Arch.ps1">dk_Target_Arch.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2149&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Env.ps1">dk_Target_Env.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2760&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Os.ps1">dk_Target_Os.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1375&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Tuple.ps1">dk_Target_Tuple.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1672&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_Target_Type.ps1">dk_Target_Type.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;557&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testError.ps1">dk_testError.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11302&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_test.ps1">dk_test.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1197&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_testReturn.ps1">dk_testReturn.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1437&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_timeout.ps1">dk_timeout.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;682&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_todo.ps1">dk_todo.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1210&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toLower.ps1">dk_toLower.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1504&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_toUpper.ps1">dk_toUpper.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1323&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_trayAddOption.ps1">dk_trayAddOption.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1393&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_tray.ps1">dk_tray.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1128&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_trimNonAlphaNumeric.ps1">dk_trimNonAlphaNumeric.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1058&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_unset.ps1">dk_unset.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3592&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_validate.ps1">dk_validate.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;713&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_verbose.ps1">dk_verbose.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;715&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./dk_warning.ps1">dk_warning.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;626&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__FILE__.ps1">__FILE__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3123&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__FRAME__.ps1">__FRAME__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;595&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__FUNCTION__.ps1">__FUNCTION__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1214&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./GetConsoleWindow.ps1">GetConsoleWindow.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18287&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./icon.ico">icon.ico</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;579&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__LINE__.ps1">__LINE__.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3699&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___NEW_POWERSHELL_FUNCTION___.cmd">___NEW_POWERSHELL_FUNCTION___.cmd</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1677&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./SetWindowIcon.ps1">SetWindowIcon.ps1</a><br>
+	├── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;702&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./___TEMPLATE___.ps1">___TEMPLATE___.ps1</a><br>
+	└── [&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;581&nbsp;08-Dec-2025&nbsp;21:36]&nbsp;&nbsp;&nbsp;&nbsp;<a href="./__TIME__.ps1">__TIME__.ps1</a><br>

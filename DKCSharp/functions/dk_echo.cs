@@ -1,5 +1,5 @@
 
-public class APP {
+public class DK {
         	
 	//############################################################################
 	//# dk_echo(message)
@@ -14,7 +14,7 @@ public class APP {
 		
 		
 	//###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-	public static void DKTEST(){
+	[System.STAThread] public static void Main() {
 		dk_echo("DKTEST() dk_echo()");
 	}
 }

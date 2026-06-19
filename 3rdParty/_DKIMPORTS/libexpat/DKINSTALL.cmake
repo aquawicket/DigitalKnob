@@ -1,34 +1,42 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ libexpat ############
 # https://github.com/libexpat/libexpat.git
-dk_load(dk_builder)
+# https://github.com/libexpat/libexpat/archive/b70c8f5.zip
 
-### IMPORT ###
-dk_import(https://github.com/libexpat/libexpat/archive/b70c8f5.zip)
+dk_import()
 
-### LINK ###
-dk_include			(${LIBEXPAT}/include				    	LIBEXPAT_INCLUDE_DIR)
-dk_include			(${LIBEXPAT}/${target_triple})
+dk_include			(${libexpat}/include				    	EXPAT_INCLUDE_DIR 			LIBEXPAT_INCLUDE_DIR)
+dk_include			(${libexpat}/${Target_Tuple}				LIBEXPAT_INCLUDE_DIR2)
 if(MSVC)
-	dk_libDebug		(${LIBEXPAT_DEBUG_DIR}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
-	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
+	dk_libDebug		(${libexpat_Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE	LIBEXPAT_LIBRARY)
 else()
-	if(WIN)
-		dk_libDebug	(${LIBEXPAT_DEBUG_DIR}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
+	if(Windows)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
 	else()
-		dk_libDebug	(${LIBEXPAT_DEBUG_DIR}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
 	endif()
-	dk_libRelease	(${LIBEXPAT_RELEASE_DIR}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE	LIBEXPAT_LIBRARY)
 endif()
 
-### GENERATE ###
-dk_configure(${LIBEXPAT_DIR}/expat
+dk_set(libexpat_CMAKE
+		-DEXPAT_INCLUDE_DIR=${EXPAT_INCLUDE_DIR})
+		
+dk_configure("${libexpat}/expat"
 	-DEXPAT_BUILD_TOOLS=ON				# "Build the xmlwf tool for expat library"  ${_EXPAT_BUILD_TOOLS_DEFAULT} 
 	-DEXPAT_BUILD_EXAMPLES=ON       	# "Build the examples for expat library" ON
 	-DEXPAT_BUILD_TESTS=ON          	# "Build the tests for expat library" ON
@@ -47,14 +55,11 @@ dk_configure(${LIBEXPAT_DIR}/expat
 	-DEXPAT_DEV_URANDOM=ON           	# "Define to include code reading entropy from `/dev/urandom'." ON
 	-DEXPAT_WITH_GETRANDOM="AUTO"       # "Make use of getrandom function (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
 	-DEXPAT_WITH_SYS_GETRANDOM="AUTO"	# "Make use of syscall SYS_getrandom (ON|OFF|AUTO) [default=AUTO]" "AUTO" 
-	-DEXPAT_CHAR_TYPE=char            # "Character type to use (char|ushort|wchar_t) [default=char]" "char"
+	-DEXPAT_CHAR_TYPE=char            	# "Character type to use (char|ushort|wchar_t) [default=char]" "char"
 	-DEXPAT_ATTR_INFO=OFF             	# "Define to allow retrieving the byte offsets for attribute names and values" OFF
 	-DEXPAT_LARGE_SIZE=OFF            	# "Make XML_GetCurrent* functions return <(unsigned) long long> rather than <(unsigned) long>" OFF
 	-DEXPAT_MIN_SIZE=OFF            	# "Get a smaller (but slower) parser (in particular avoid multiple copies of the tokenizer)" OFF
 	-DEXPAT_MSVC_STATIC_CRT=ON      	# "Use /MT flag (static CRT) when compiling in MSVC" OFF
 	-D_EXPAT_M32=OFF)                	# "(Unofficial!) Produce 32bit code with -m32" OFF
 
-
-
-### COMPILE ###
-dk_build(${LIBEXPAT})
+dk_build()

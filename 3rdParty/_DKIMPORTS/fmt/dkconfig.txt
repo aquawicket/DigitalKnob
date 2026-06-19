@@ -1,0 +1,7 @@
+############ fmt ############
+# https://github.com/fmtlib/fmt.git
+# https://fmt.dev/latest/index.html
+# https://github.com/fmtlib/fmt/archive/fade652ade6e9ba4b16e7484cbda5ee4c9178918.zip
+
+#fmt_Import=https://github.com/fmtlib/fmt/archive/fade652ade6e9ba4b16e7484cbda5ee4c9178918.zip
+fmt_Import=https://github.com/fmtlib/fmt/archive/fmt-fade652ade6e9ba4b16e7484cbda5ee4c9178918.zip

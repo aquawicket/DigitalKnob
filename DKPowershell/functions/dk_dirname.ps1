@@ -1,19 +1,26 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_dirname){ $dk_dirname = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_dirname_ps1){ $dk_dirname_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_dirname(path)
 #
 #
-function Global:dk_dirname($path) {
-	dk_debugFunc 1
+function Global:dk_dirname() {
+	dk_debugFunc 1 2;
 	
-	#$dirname = (Get-Item $path).DirectoryName
-	#$dirname = (Resolve-Path -Path "$path" -ErrorAction SilentlyContinue -ErrorVariable _frperror).DirectoryName    #Calls Resolve-Path but works for files that don't exist.
-	#if(-not($dirname)){ $dirname = $_frperror[0].TargetObject } # http://devhawk.net/blog/2010/1/22/fixing-powershells-busted-resolve-path-cmdlet
-	$dirname = Split-Path $path -Parent 
-	dk_call dk_printVar dirname 
-	return $dirname
+	${_path_} = $args[0];
+	if(Test-Path variable:${_path_}){ ${_path_} = Get-Variable -Name (${_path_}) -ValueOnly; } 
+	
+	${dk_dirname} = Split-Path ${_path_} -Parent; 
+	${dk_dirname} = ${dk_dirname} -replace "\\", "/";
+
+	###### return ######
+	${global:dk_dirname} = ${dk_dirname}
+	if($args[1]) {
+		dk_call dk_set $args[1] ${dk_dirname};
+	} else {
+		return ${dk_dirname};
+	}
 }
 
 
@@ -27,11 +34,11 @@ function Global:dk_dirname($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$dirname = dk_call dk_dirname "C:/Windows/System32"
-	dk_call dk_echo "dirname = $dirname"
+	${dk_dirname} = dk_call dk_dirname "C:/Windows/System32";
+	dk_call dk_echo "dk_dirname = $dk_dirname\n";
 	
-	$dirname = dk_call dk_dirname "TEST"
-	dk_call dk_echo "dirname = $dirname"
+	${dk_dirname} = dk_call dk_dirname "Test1/Test2";
+	dk_call dk_echo "dk_dirname = $dk_dirname\n";
 }

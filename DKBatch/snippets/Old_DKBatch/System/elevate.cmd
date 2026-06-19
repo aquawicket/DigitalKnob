@@ -1,11 +1,11 @@
 ::::::::::::::::::::::::::::::::::::::::::::
-:: Elevate.cmd - Version 4
-:: Automatically check & get admin rights
-:: see "https://stackoverflow.com/a/12264592/1016343" for description
+rem Elevate.cmd - Version 4
+rem Automatically check & get admin rights
+rem see "https://stackoverflow.com/a/12264592/1016343" for description
 ::::::::::::::::::::::::::::::::::::::::::::
  @echo off
  CLS
- echo:
+ echo.
  ECHO =============================
  ECHO Running Admin shell
  ECHO =============================
@@ -26,7 +26,7 @@
 
 :getPrivileges
   if '%1'=='ELEV' (echo ELEV & shift /1 & goto gotPrivileges)
-  echo:
+  echo.
   ECHO **************************************
   ECHO Invoking UAC for Privilege Escalation
   ECHO **************************************
@@ -36,8 +36,8 @@
   ECHO For Each strArg in WScript.Arguments >> "%vbsGetPrivileges%"
   ECHO args = args ^& strArg ^& " "  >> "%vbsGetPrivileges%"
   ECHO Next >> "%vbsGetPrivileges%"
-  
-  if '%cmdInvoke%'=='1' goto InvokeCmd 
+ 
+  if '%cmdInvoke%'=='1' goto InvokeCmd
 
   ECHO UAC.ShellExecute "!batchPath!", args, "", "runas", 1 >> "%vbsGetPrivileges%"
   goto ExecElevation

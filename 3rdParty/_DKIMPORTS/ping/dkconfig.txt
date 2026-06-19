@@ -1,0 +1,5 @@
+############ ping ############
+# https://github.com/sryze/ping.git
+# https://github.com/sryze/ping/archive/f71f4abc89a88ceb2e9291cd7da83f71ea4894de.zip
+
+ping_Import=https://github.com/sryze/ping/archive/f71f4abc89a88ceb2e9291cd7da83f71ea4894de.zip

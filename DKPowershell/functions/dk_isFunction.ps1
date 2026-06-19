@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_isFunction){ $dk_isFunction = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_isFunction_ps1){ $dk_isFunction_ps1 = 1; } else{ return; } #include guard
 
 ##############################################################################
 # dk_isFunction(name rtn_var)
@@ -40,7 +40,7 @@ function test_function() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {###
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_echo "testing dk_isFunction(test_function)"
 	$isFunction = dk_call dk_isFunction "test_function" 

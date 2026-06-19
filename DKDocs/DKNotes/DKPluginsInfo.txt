@@ -3,7 +3,7 @@
 A DKPlugins is a folder, it's contents are compaitble with DigitalKnob.  i.e. DKPlugins/MyPlugin
 A DKPlugin can be anything from c++ files, to html, javascript, or just file assets ,.png,.txt.etc.
 Every Plugin must include a DKINSTALL.cmake file to run.
-Every Plugin must be located in the digitalknob/DKPlugins folder
+Every Plugin must be located in the DigitalKnob/DKPlugins folder
 
 
 *** DKASSETS() ***
@@ -20,7 +20,7 @@ This command will ensure DKZlib is built first and recognied by DKPng.
 
 *** DKINCLUDE() ***
 Source code need's to include header file locations.
-we can eaisly say DKINCLUDE("C:/Users/username/digitalknob/DKPlugins/3rdParty/vorbis/include")
+we can eaisly say DKINCLUDE("C:/Users/username/DigitalKnob/DKPlugins/3rdParty/vorbis/include")
 This will allow DKPlugins and the DKApp to see these header files. 
 
 *** DKPLUGIN() ***
@@ -70,4 +70,4 @@ ANDROID_RELEASE_INCLUDE()
 
 
 *** Notes ***
-Please look at digitalknob/DKCMake/Functions.cmake to see all of the available functions.
+Please look at DigitalKnob/DKCMake/Functions.cmake to see all of the available functions.

@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_msys2Bash(args) NO_HALT
 #
 #	TODO
@@ -16,9 +27,9 @@ function(dk_msys2Bash)
 	dk_assertVar(MSYSTEM)
 	dk_assertVar(MSYS2)
 	
-	dk_getOption(NO_HALT)
-	dk_getOption(NOECHO)
-	dk_getOptionValue(OUTPUT_VARIABLE)
+	dk_getParameter(NO_HALT)
+	dk_getParameter(NOECHO)
+	dk_getParameterValue(OUTPUT_VARIABLE)
 	
 	set(EXTRA_ARGS "")
 	
@@ -33,23 +44,23 @@ function(dk_msys2Bash)
 
 	set(bash "#!/bin/bash")
 	list(APPEND bash "cd ${PWD}")
-	if(win_x86_clang)
-		list(APPEND bash "export PATH=${MSYS2_DIR}/clang32/bin:$PATH")
-	elseif(win_x86_64_clang)	
-		list(APPEND bash "export PATH=${MSYS2_DIR}/clang64/bin:$PATH")
-	elseif(win_arm64_clang)
-		list(APPEND bash "export PATH=${MSYS2_DIR}/clangarm64/bin:$PATH")
-	elseif(win_x86_gcc)
-		list(APPEND bash "export PATH=${MSYS2_DIR}/mingw32/bin:$PATH")
-	elseif(win_x86_64_gcc)
-		list(APPEND bash "export PATH=${MSYS2_DIR}/mingw64/bin:$PATH")
-	elseif(win_x86_64_ucrt)
-		list(APPEND bash "export PATH=${MSYS2_DIR}/ucrt64/bin:$PATH")
+	if(Windows_X86_Clang)
+		list(APPEND bash "export PATH=${msys2}/clang32/bin:$PATH")
+	elseif(Windows_X86_64_Clang)	
+		list(APPEND bash "export PATH=${msys2}/clang64/bin:$PATH")
+	elseif(Windows_Arm64_Clang)
+		list(APPEND bash "export PATH=${msys2}/clangarm64/bin:$PATH")
+	elseif(Windows_X86_Gcc)
+		list(APPEND bash "export PATH=${msys2}/mingw32/bin:$PATH")
+	elseif(Windows_X86_64_Gcc)
+		list(APPEND bash "export PATH=${msys2}/mingw64/bin:$PATH")
+	elseif(Windows_X86_64_Ucrt)
+		list(APPEND bash "export PATH=${msys2}/ucrt64/bin:$PATH")
 	else()
 		dk_fatal("dk_msys2Bash(): ERROR: not CLANG32, CLANG64, CLANGARM64, MINGW32, MINGW64 or UCRT64")
 	endif()
 		
-	list(APPEND bash "export PATH=${MSYS2_DIR}/usr/bin:$PATH")
+	list(APPEND bash "export PATH=${msys2}/usr/bin:$PATH")
 	
 	dk_replaceAll("${ARGV}"  ";"  " "	ARGV)
 	list(APPEND bash "${ARGV}")
@@ -61,12 +72,12 @@ function(dk_msys2Bash)
 	dk_replaceAll("${bash}"  "C:/"  "/c/"  bash)
 	
 	### run bash as a file
-	#dk_fileWrite($ENV{DKCACHE_DIR}/dkscript.tmp ${bash})
-	#dk_exec(${MSYS2_DIR}/usr/bin/bash $ENV{DKCACHE_DIR}/dkscript.tmp NOECHO)	
+	#dk_fileWrite(${DKCACHE_DIR}/dkscript.tmp ${bash})
+	#dk_exec(${msys2}/usr/bin/bash ${DKCACHE_DIR}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
 	#dk_info("\n${clr}${magenta} dk_msys2Bash> ${bash}\n")
-	dk_exec(${MSYS2_DIR}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
+	dk_exec(${msys2}/usr/bin/bash -c "${bash}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 	
 	if(OUTPUT_VARIABLE)
 		set(${OUTPUT_VARIABLE} ${${OUTPUT_VARIABLE}} PARENT_SCOPE)

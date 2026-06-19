@@ -1,2 +1,8 @@
-VC_REDIST_X86_IMPORT=https://aka.ms/vs/16/release/vc_redist.x86.exe
-VC_REDIST_X86_64_IMPORT=https://aka.ms/vs/16/release/vc_redist.x64.exe
+############ vc_redist ############
+# https://aka.ms/vs/16/release/vc_redist.x86.exe
+# https://aka.ms/vs/16/release/vc_redist.x64.exe
+# https://aka.ms/vs/17/release/vc_redist.x86.exe
+# https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+vc_redist_Windows_X86_Import=https://aka.ms/vs/17/release/vc_redist.x86.exe
+vc_redist_Windows_X86_64_Import=https://aka.ms/vs/17/release/vc_redist.x64.exe

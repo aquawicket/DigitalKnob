@@ -1,40 +1,46 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
- 
-::############################################################################ 
-::# dk_openLineNumber(file, lineno) 
-::# 
-::# 
-:dk_openLineNumber 
-setlocal enableDelayedExpansion 
-	%dk_call% dk_debugFunc 1 2
- 
+
+rem ############################################################################
+rem # dk_openLineNumber(filepath, lineno)
+rem #
+rem #
+:dk_openLineNumber
+%setlocal%
+
 	set "filepath=%~1"
-	if "%~2" neq "" (set "lineno=-n%~2")
- 
-	%dk_call% dk_validate NOTEPADPP_EXE "%dk_call% dk_NOTEPADPP_EXE"
-	start "" "%NOTEPADPP_EXE%" "%filepath%" %lineno%
-%endfunction% 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### 
-:DKTEST 
-setlocal enableDelayedExpansion 
-	%dk_call% dk_debugFunc 0 
+	set "lineno=%~2"
 
-	::%dk_call% dk_openLineNumber "C:/Users/Administrator/digitalknob/Development/README.md"
-	%dk_call% dk_openLineNumber "C:/Users/Administrator/digitalknob/Development/README.md" 23
-%endfunction% 
- 
+	%dk_call% dk_validate notepadpp_exe %dk_call% dk_depend notepadpp_exe
+	start "" "%notepadpp_exe%" "%filepath%" -n%lineno%
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+%setlocal%
+
+	rem %dk_call% dk_openLineNumber "%USERPROFILE:\=/%/Digital Knob/Development/README.md"
+	%dk_call% dk_openLineNumber "%USERPROFILE:\=/%/Digital Knob/Development/README.md" 23
+%endfunction%
+

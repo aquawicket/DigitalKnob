@@ -1,14 +1,26 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-if(NOT DEFINED dk_callDKBatch_PRINT_COMMAND)
-	dk_set(dk_callDKBatch_PRINT_COMMAND 0)
-endif()
-if(NOT DEFINED dk_callDKBatch_PRINT_OUTPUT)
-	dk_set(dk_callDKBatch_PRINT_OUTPUT 0)
-endif()
-##################################################################################
+#########################################################################
+#dk_set(dk_callDKBatch_PRINT_CALL			1) 		# dk_callDKBatch_call
+#dk_set(dk_callDKBatch_PRINT_COMMAND		1) 		# dk_callDKBatch_command
+#dk_set(dk_callDKBatch_PRINT_EXITCODES		1)		# dk_callDKBatch_exitcodes
+#dk_set(dk_callDKBatch_PRINT_EXITCODE 		1)		# dk_callDKBatch_exitcode
+#dk_set(dk_callDKBatch_PRINT_STDERR 		1)		# dk_callDKBatch_stderr[]
+#dk_set(dk_callDKBatch_PRINT_STDOUT			1)		# dk_callDKBatch_stdout[]
+#dk_set(dk_callDKBatch_PRINT_OUTPUT 		1)		# dk_callDKBatch
+#########################################################################
 # dk_callDKBatch(<func>, <args...>)
 #
 #
@@ -16,44 +28,61 @@ endif()
 function(dk_callDKBatch func)
 	dk_debugFunc(1 99)
 
-	#set(func "${ARGV0}")
 	set(args ${ARGN})
 	#dk_replaceAll("${args}" "(" "#40" args)
 	#dk_replaceAll("${args}" ")" "#41" args)
 
-	### get ALL_BUT_FIRST_ARGS ###
-	#set(ALL_BUT_FIRST_ARGS                  ${ARGN})
-	### get LAST_ARG ###
-	#list(GET ARGN -1 LAST_ARG)
+#	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+#		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
+#	endif()
 
-	if(${dk_callDKBatch_PRINT_OUTPUT} EQUAL 1)
-		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
+	dk_validate(cmd.exe "dk_depend(cmd.exe)")
+	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
+	set(dk_callDKBatch_call "${func}(${args})")
+	set(dk_callDKBatch_command ${cmd.exe} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & if defined ${func} echo !${func}!)
+
+	if("${dk_callDKBatch_PRINT_CALL}" EQUAL 1)
+		dk_echo("${lblue}dk_callDKBatch_call${clr} = '${dk_callDKBatch_call}'")
 	endif()
-
-	### Call DKBatch function ###
-	dk_validate(CMD_EXE "dk_CMD_EXE()")
-	dk_validate(ENV{DKBATCH_FUNCTIONS_DIR_}		"dk_DKBRANCH_DIR()")	
-	set(DKBATCH_COMMAND ${CMD_EXE} /V:ON /c $ENV{DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & echo !${func}!)
-
 	if("${dk_callDKBatch_PRINT_COMMAND}" EQUAL 1)
-		message("DKBATCH_COMMAND = '${DKBATCH_COMMAND}'")
+		dk_echo("${lblue}dk_callDKBatch_command${clr} = '${dk_callDKBatch_command}'")
 	endif()
 
-	### FIXME ###
-	message("\n${DKBATCH_COMMAND}\n")
-	execute_process(COMMAND ${DKBATCH_COMMAND} OUTPUT_VARIABLE output_variable ECHO_OUTPUT_VARIABLE RESULT_VARIABLE result_variable WORKING_DIRECTORY "$ENV{DKBATCH_FUNCTIONS_DIR}" OUTPUT_STRIP_TRAILING_WHITESPACE)
-	
-	### process the return value ###
-	string(FIND "${output_variable}" "\n" last_newline_pos REVERSE)  # Find the position of the last newline character
-	if(last_newline_pos GREATER -1)
-		string(SUBSTRING "${output_variable}" ${last_newline_pos} -1 output_variable) # Extract the last line
-	endif()
-	string(STRIP "${output_variable}" output_variable)
+	dk_exec(${dk_callDKBatch_command} WORKING_DIRECTORY "${DKBATCH_FUNCTIONS_DIR}")
+	set(dk_callDKBatch_call 		"${dk_exec_call}" 		PARENT_SCOPE)
+	set(dk_callDKBatch_command 		"${dk_exec_command}" 	PARENT_SCOPE)
+	set(dk_callDKBatch_exitcodes 	"${dk_exec_exitcodes}" 	PARENT_SCOPE)
+	set(dk_callDKBatch_exitcode 	"${dk_exec_exitcode}" 	PARENT_SCOPE)
+	set(dk_callDKBatch_stderr 		"${dk_exec_stderr}" 	PARENT_SCOPE)
+	set(dk_callDKBatch_stdout 		"${dk_exec_stdout}" 	PARENT_SCOPE)
+	set(dk_callDKBatch		 		"${dk_exec}" 			PARENT_SCOPE)
 
-	message("        command = ${DKBATCH_COMMAND}\n")
-	message("output_variable = ${output_variable}")
-	message("result_variable = ${result_variable}")
-	set(dk_callDKBatch "${output_variable}" PARENT_SCOPE)
+	if("${dk_callDKBatch_PRINT_EXITCODE}" EQUAL 1)
+		#if(NOT "${dk_exec_exitcode}" STREQUAL "")
+			dk_echo("${lblue}dk_callDKBatch_exitcode${clr} = '${dk_exec_exitcode}'")
+		#endif
+	endif()
+	if("${dk_callDKBatch_PRINT_EXITCODES}" EQUAL 1)
+		#if(NOT "${dk_exec_exitcodes}" STREQUAL "")
+			dk_echo("${lblue}dk_callDKBatch_exitcodes${clr} = '${dk_exec_exitcodes}'")
+		#endif()
+	endif()
+	if("${dk_callDKBatch_PRINT_STDERR}" EQUAL 1)
+		#if(NOT "${dk_exec_stderr}" STREQUAL "")
+			dk_echo("${lblue}dk_callDKBatch_stderr${clr}   = '${dk_exec_stderr}'")
+		#endif()
+	endif()
+	if("${dk_callDKBatch_PRINT_STDOUT}" EQUAL 1)
+		#if(NOT "${dk_exec_stdout}" STREQUAL "")
+			dk_echo("${lblue}dk_callDKBatch_stdout${clr}   = '${dk_exec_stdout}'")
+		#endif()
+	endif()
+	if("${dk_callDKBatch_PRINT_OUTPUT}" EQUAL 1)
+		#if(NOT "${dk_exec}" STREQUAL "")
+			dk_echo("${lblue}dk_callDKBatch${clr}          = '${dk_exec}'")
+		#endif()
+	endif()
+
 endfunction()
 
 
@@ -66,20 +95,24 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 
-	#execute_process(COMMAND ${CMD_EXE} /c echo "Hello World" OUTPUT_VARIABLE output ECHO_OUTPUT_VARIABLE)
-	#dk_echo("output = ${output}")
-
-	#execute_process(COMMAND ${CMD_EXE} /V:ON /c "set /p input=& echo !input!" OUTPUT_VARIABLE input)
-	#dk_echo("input = ${input}")
-
-	dk_callDKBatch(dk_test "abc" "1 2 4")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+	dk_callDKBatch(dk_killProcess "gpg-agent.exe")
 	
-	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+#	dk_callDKBatch(dk_title "#########################################################################")
 	
-	dk_callDKBatch(dk_urlExists "http://www.nonExistentURL/fjafjkasfjas;d")
-	dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+#	dk_callDKBatch(dk_test "abc" "1 2 4")
+#	if(dk_callDKBatch)
+#		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+#	endif()
+	
+#	dk_callDKBatch(dk_urlExists "http://www.google.com/index.html")
+#	if(${dk_callDKBatch})
+#		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+#	endif()
+	
+#	dk_callDKBatch(dk_urlExists "http://www.nonExistentURL/fjafjkasfjas;d")
+#	if(${dk_callDKBatch})
+#		dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
+#	endif()
 	
 	#dk_callDKBatch(dk_test "abc" "1 2 4")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
@@ -87,8 +120,9 @@ function(DKTEST)
 	#dk_callDKBatch(dk_test "$ENV{SystemDrive}/Program Files (x86)/Edrum Monitor/EdrumMon.exe" "dk_callDKBatch.cmake")
 	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 
-	#dk_callDKBatch(dk_firewallAllow "Edrum Monitor" "$ENV{SystemDrive}/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe")
+	#dk_callDKBatch(dk_firewallAllow "$ENV{SystemDrive}/ProgramFiles (x86)/Edrum Monitor/EdrumMon.exe")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 
 	#dk_callDKBatch(dk_registryKeyExists rtn_var "HKEY_LOCAL_MACHINE/Software/Microsoft/Windows/CurrentVersion/Uninstall/QEMU")
-	#dk_echo("rtn_var = ${rtn_var}")
+	#dk_echo("dk_callDKBatch = ${dk_callDKBatch}")
 endfunction()

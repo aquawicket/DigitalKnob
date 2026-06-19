@@ -1,10 +1,10 @@
 Function Set-Window {
 <#
 .SYNOPSIS
-Retrieve/Set the window size and coordinates of a process window.
+Retrieve/Set the window size AND coordinates of a process window.
 
 .DESCRIPTION
-Retrieve/Set the size (height,width) and coordinates (x,y) 
+Retrieve/Set the size (height,width) AND coordinates (x,y) 
 of a process window.
 
 .PARAMETER ProcessName
@@ -57,7 +57,7 @@ Description: Set the coordinates on the window for the process PowerShell.exe
 
 .EXAMPLE
 $windowArray = Set-Window -Passthru
-WARNING: cmd (1096) is minimized! Coordinates will not be accurate.
+WARNING: cmd (1096) is minimized! Coordinates will NOT be accurate.
 
     PS C:\>$windowArray | Format-Table -AutoSize
 
@@ -67,7 +67,7 @@ WARNING: cmd (1096) is minimized! Coordinates will not be accurate.
 4088 explorer       1280,50  0,974         1280,1024    
 6880 powershell     1280,974 0,0           1280,974     
 
-Description: Get the coordinates of all visible windows and save them into the
+Description: Get the coordinates of all visible windows AND save them into the
              $windowArray variable. Then, display them in a table view.
 
 .EXAMPLE
@@ -175,7 +175,7 @@ Process {
                         $Rectangle.Bottom -lt 0 -AND
                         $Rectangle.Left   -lt 0 -AND
                         $Rectangle.Right  -lt 0) {
-                        Write-Warning "$($_.ProcessName) `($($_.Id)`) is minimized! Coordinates will not be accurate."
+                        Write-Warning "$($_.ProcessName) `($($_.Id)`) is minimized! Coordinates will NOT be accurate."
                     }
                     $Object = [PSCustomObject]@{
                         Id          = $_.Id

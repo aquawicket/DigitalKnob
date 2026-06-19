@@ -1,4 +1,4 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
@@ -23,7 +23,7 @@
 :: SOFTWARE.
 @echo off
 setlocal EnableDelayedExpansion
-if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: cmake_eval eval_code error
 ::
@@ -38,18 +38,18 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 
 ::###### cmake_eval ######
 :cmake_eval
-	if [%1] == [] 				echo "ERROR: cmake_eval() parameter1 is invalid" & goto:eof
+	if "%1" equ "" (echo "ERROR: cmake_eval() parameter1 is invalid" & goto:eof)
 	
 	set "DKBRANCH=Development"
-	set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
+	set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%\DKCMake"
 	
-	if exist "%ProgramFiles%\CMake\bin\cmake.exe" 		set "CMAKE_EXE=%ProgramFiles%\CMake\bin\cmake.exe"
-	if exist "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "CMAKE_EXE=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
-	if not exist "%CMAKE_EXE%" 							echo "ERROR: Could not locate CMAKE_EXE" & goto:eof
+	if EXIST "%ProgramFiles%\CMake\bin\cmake.exe" 		set "cmake.exe=%ProgramFiles%\CMake\bin\cmake.exe"
+	if EXIST "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "cmake.exe=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+	if NOT EXIST "%cmake.exe%" 							echo "ERROR: Could NOT locate cmake.exe" & goto:eof
 	
-	if not exist "%CMAKE_EXE%"		echo "ERROR: Could not locate CMAKE_EXE" 	& goto:eof
-	if not exist "%DKCMAKE_DIR%" 	echo "ERROR: Could not locate DKCMAKE_DIR" 	& goto:eof
+	if NOT EXIST "%cmake.exe%"		echo "ERROR: Could NOT locate cmake.exe" 	& goto:eof
+	if NOT EXIST "%DKCMAKE_DIR%" 	echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	:: cmake_eval begin
 	set commands=%1
@@ -60,18 +60,18 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	::echo DKCOMMAND = %DKCOMMAND%
 	call set DKCMAKE_DIR_DIR=%%DKCMAKE_DIR:^\=^/%%
 	
-	::echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	::echo "%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
 	if [%2] == [] goto no_return_values
 	goto with_return_values
 	
 	:no_return_values
-		"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
+		"%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
 		goto:eof
 		
 	:with_return_values
-		"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
-		if not exist %DKCMAKE_DIR%/cmake_vars.cmd goto:eof
+		"%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
+		if NOT EXIST "%DKCMAKE_DIR%/cmake_vars.cmd" goto:eof
 		call %DKCMAKE_DIR%\cmake_vars.cmd
 		del %DKCMAKE_DIR%\cmake_vars.cmd
 		
@@ -80,7 +80,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	::###### work with cmake return code files ######
 	:: std::out
 	set out=
-	if exist "cmake_eval.out" (
+	if EXIST "cmake_eval.out" (
 		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
 			set out=!out!%%x
 			echo %%x
@@ -92,7 +92,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 			
 	:: std::err
 	set err=
-	if exist "cmake_eval.err" (
+	if EXIST "cmake_eval.err" (
 		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
 			set err=!err!%%x
 			echo [91m %%x [0m

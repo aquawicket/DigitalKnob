@@ -1,7 +1,15 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 setlocal ENABLEEXTENSIONS DISABLEDELAYEDEXPANSION
@@ -15,7 +23,7 @@ goto :EOF
 
 :GetRegEnv
 FOR /F %%A IN ('REG query "%~1" /s^|find /I "REG_"') DO (
-    if /I not "%%~A" equ "Path" call :SetFromReg "%~1" "%%~A" "%%~A"
+    if /I NOT "%%~A" equ "Path" call :SetFromReg "%~1" "%%~A" "%%~A"
 )
 goto :EOF
 
@@ -27,7 +35,7 @@ goto :EOF
 :main
 REM Save temp
 set save_TEMP=%temp%
-if not defined save_TEMP set save_TEMP=%tmp%
+if NOT defined save_TEMP set save_TEMP=%tmp%
 
 for /F "delims==" %%A in ('set') do call :InheritOrDelete "%%~A"
 call :GetRegEnv "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
@@ -38,7 +46,7 @@ call :SetFromReg "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environm
 setlocal
 set u=
 call :SetFromReg "HKCU\Environment" Path u
-endlocal&if not "%Path%" equ "" if not "%u%" equ "" set Path=%Path%;%u%
+endlocal&if "%Path%" neq "" if "%u%" neq "" set Path=%Path%;%u%
 
 REM Restore TEMP/TMP
 set TEMP=%save_TEMP%

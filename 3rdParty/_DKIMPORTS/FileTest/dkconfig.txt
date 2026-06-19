@@ -1,0 +1,6 @@
+############ FileTest ############
+# http://zezula.net/en/tools/filetest.html
+# http://zezula.net/download/filetest.zip
+
+FileTest_Type=Tool
+FileTest_Import=http://zezula.net/download/filetest.zip

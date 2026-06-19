@@ -1,47 +1,55 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
+rem ####################################################################
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+::%setlocal%
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate WSL_EXE "%dk_call% %DKIMPORTS_DIR%/wsl/DKINSTALL.cmd"
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
+	set "wsl_alpine_Import=!Wsl_Alpine_%Host_Tuple%_Import!"
+	%dk_call% dk_assertVar WSL_ALPINE_IMPORT
+
+	%dk_call% dk_validate wsl %dk_call% dk_depend wsl
 	
-	%dk_call% dk_set LAUNCHER_DL "https://github.com/agowa/WSL-DistroLauncher-Alpine/releases/download/1.3.2/launcher.exe"
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_importVariables %WSL_ALPINE_IMPORT% ROOT %DKTOOLS_DIR%
 	
-	%dk_call% dk_echo   
-    %dk_call% dk_info "Installing WSL-Alpine Linux . . ."
-	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set ALPINE_DIR "%DKTOOLS_DIR%/AlpineLinux"
-	
-	if exist "%LAUNCHER_DL_FILE%" (goto alpine_installed)
-	%dk_call% dk_echo   
+	if EXIST "%LAUNCHER_IMPORT_FILE%" (%return%)
+	%dk_call% dk_echo  
     %dk_call% dk_info "Installing Alpine Linux . . ."
-	%dk_call% dk_download %LAUNCHER_DL%
-	%dk_call% dk_mkdir "%DKTOOLS_DIR%/AlpineLinux"
-	%dk_call% dk_basename %LAUNCHER_DL% LAUNCHER_DL_FILE
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_copy "%DKDOWNLOAD_DIR%/%LAUNCHER_DL_FILE%" "%ALPINE_DIR%/%LAUNCHER_DL_FILE%" OVERWRITE
-	"%ALPINE_DIR%/%LAUNCHER_DL_FILE%" config --default-user root
-	"%ALPINE_DIR%/%LAUNCHER_DL_FILE%"
-	%dk_call% dk_assertPath "%ALPINE_DIR%/%LAUNCHER_DL_FILE%"
-	:alpine_installed
+	%dk_call% dk_download "%WSL_ALPINE_IMPORT%"
+	%dk_call% dk_mkdir "%WSL_ALPINE%"
+	%dk_call% dk_basename "%WSL_ALPINE_IMPORT%"
+	%dk_call% dk_copy "%dk_download%" "%WSL_ALPINE%/%dk_basename%" OVERWRITE
+	%dk_call% dk_firewallAllow "%WSL_ALPINE%/%dk_basename%"
+
+	%dk_call% dk_assertPath "%WSL_ALPINE%/%dk_basename%"
+	
+	::%dk_call% dk_debug "%WSL_ALPINE:/=\%\%dk_basename% config --default-user root"
+	%WSL_ALPINE:/=\%\%dk_basename% config --default-user root
+	::%dk_call% dk_echo "%WSL_ALPINE:/=\%\%dk_basename%"
+	%WSL_ALPINE:/=\%\%dk_basename%
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
 	%dk_call% DKINSTALL
 %endfunction%

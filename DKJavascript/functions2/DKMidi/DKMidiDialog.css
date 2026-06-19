@@ -1,0 +1,33 @@
+#DKMidi/DKMidiDialog/.html
+{
+	position:absolute;
+	overflow:hidden;
+	width:420rem;
+	height:200rem;
+}
+
+#DKMidiDialogInputs
+{
+	position:absolute;
+	top:39rem;
+	left:4rem;
+	width:200rem;
+	height:150rem;
+	overflow-x:auto;
+	overflow-y:scroll;
+	border-width:1rem;
+	background-color:rgb(255,255,255);
+}
+
+#DKMidiDialogOutputs
+{
+	position:absolute;
+	top:39rem;
+	left:212rem;
+	width:200rem;
+	height:150rem;
+	overflow-x:auto;
+	overflow-y:scroll;
+	border-width:1rem;
+	background-color:rgb(255,255,255);
+}

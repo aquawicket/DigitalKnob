@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ##################################################################################
 # dk_color(on/off)
@@ -15,16 +28,15 @@
 dk_color() {
 	dk_debugFunc 0 1
 	
-	export USE_COLOR=1
+	export dk_color_ENABLE=1
 	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			dk_call dk_unset USE_COLOR
+			dk_call dk_unset dk_color_ENABLE
 		fi
 	fi
 	
-	if [ -n ${USE_COLOR-} ]; then
-	#if dk_call dk_defined USE_COLOR; then
-		export ESC=""     		 		# escape character
+	if [ -n ${dk_color_ENABLE-} ]; then
+		export ESC=""     		 			# escape character
 		
 		# Attributes on
 		export clr="${ESC}[0m"   			# Default					- Returns all attributes to the default state prior to modification
@@ -171,7 +183,7 @@ dk_color() {
 		dk_call dk_echo "${clr} COLOR OFF"
 	fi
 }
-#dk_call dk_color 1
+
 
 
 

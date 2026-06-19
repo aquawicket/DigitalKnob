@@ -1,95 +1,99 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-
+#########################################################################
 
 
 ############ make #############
 # https://packages.msys2.org/base/make
-if((NOT DKUPDATE) AND (EXISTS ${CMAKE_MAKE_PROGRAM}))
-	dk_notice("CMAKE_MAKE_PROGRAM is already set, returning")
+
+if((NOT DKUPDATE) AND (EXISTS "${CMAKE_MAKE_PROGRAM}"))
+	dk_notice("CMAKE_MAKE_PROGRAM:'${CMAKE_MAKE_PROGRAM}' is already set.")
 	dk_return()
 endif()
 
 
-#if(WIN_HOST)
-#	if(DEFINED ENV{MSYSTEM})
-#		dk_set(MSYSTEM "$ENV{MSYSTEM}")
-#		dk_set($ENV{MSYSTEM} 1)
-#		dk_validate(MSYS2 "dk_depend(msys2)")
-#	endif()
-#endif()
+if(Android)
+	if(Windows_Host)
+		dk_validate(android-ndk "dk_depend(android-ndk)")
+		dk_set(CMAKE_MAKE_PROGRAM	"${android-ndk}/prebuilt/${Android_Host_Tag}/bin/make${exe}")
+	endif()
+	
+elseif(Cosmopolitan)
+	if(Windows_Host)
+		dk_validate(msys2 "dk_depend(msys2)")
+		dk_installPackage(make)
+		dk_cacheVariable(PATH "${msys2}/usr/bin;$ENV{PATH}")
+		dk_set(CMAKE_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
+	endif()
+	
+elseif(Emscripten)
+	if(Windows_Host)
+		dk_validate(msys2 "dk_depend(msys2)")
+		dk_installPackage(make)
+		dk_set(CMAKE_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
+	elseif(Linux_Host)
+		dk_set(CMAKE_MAKE_PROGRAM	make)
+	else()
+		dk_depend(emsdk)
+		dk_set(CMAKE_MAKE_PROGRAM	"${emsdk}/upstream/emscripten/emmake${bat}")
+	endif()
+	
+elseif(Windows_Arm64_Clang)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/clangarm64/bin/mingw32-make.exe")
+	
+elseif(Windows_X86_Clang)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/clang32/bin/mingw32-make.exe")
+	
+elseif(Windows_X86_64_Clang)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/clang64/bin/mingw32-make.exe")	
 
+elseif(Windows_X86_Gcc)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/mingw32/bin/mingw32-make.exe")
+	
+elseif(Windows_X86_64_Gcc)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/mingw64/bin/mingw32-make.exe")
+	
+elseif(Windows_X86_64_Ucrt)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_installPackage("make")
+	dk_set(CMAKE_MAKE_PROGRAM	"${msys2}/ucrt64/bin/mingw32-make.exe")
 
-#dk_validate(target_triple "dk_target_triple()")
-#dk_validate(host_triple "dk_host_triple()")
+elseif(Windows_X86_Msvc)
+	dk_depend(visualstudio)
+	dk_set(CMAKE_MAKE_PROGRAM	${VS_MAKE_PROGRAM})
+	
+elseif(Windows_X86_64_Msvc)
+	dk_depend(visualstudio)
+	dk_set(CMAKE_MAKE_PROGRAM	${VS_MAKE_PROGRAM})
+endif()
 
-dk_installPackage("make")
+if((NOT CMAKE_MAKE_PROGRAM) AND (NOT EXISTS "${CMAKE_MAKE_PROGRAM}"))
+	dk_findProgram(CMAKE_MAKE_PROGRAM make)
+endif()
 
+if(NOT EXISTS "${CMAKE_MAKE_PROGRAM}")
+	dk_warning("Could not determine the make file to use. Attempting to just use 'make' and hope it's in the path envirnment.")
+	dk_set(CMAKE_MAKE_PROGRAM	make)
+endif()
 
-#if(cosmopolitan)
-#	if(WIN_HOST)
-#		dk_validate(MSYS2 "dk_depend(msys2)")
-#		dk_installPackage(make)
-#		dk_exportVars(PATH "${MSYS2_DIR}/usr/bin;$ENV{PATH}")
-#		dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")
-#	else()
-#		dk_findProgram(CMAKE_MAKE_PROGRAM make)
-#	endif()
-#	
-#elseif(emscripten)
-#	if(WIN_HOST)
-#		dk_validate(MSYS2 "dk_depend(msys2)")
-#		dk_installPackage(make)
-#		#dk_findProgram(CMAKE_MAKE_PROGRAM make "${MSYS2_DIR}/usr/bin")
-#	else()
-#		#dk_findProgram(CMAKE_MAKE_PROGRAM make)
-#	endif()
-#	
-#elseif(win_arm64_clang)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clangarm64/bin")
-#	
-#elseif(win_x86_clang)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang32/bin")
-#	
-#elseif(win_x86_64_clang)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/clang64/bin")	
-#elseif(win_x86_gcc)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw32/bin")
-#	
-#elseif(win_x86_64_gcc)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/mingw64/bin")
-#	
-#elseif(win_x86_64_ucrt)
-#	dk_validate(MSYS2 "dk_depend(msys2)")
-#	dk_installPackage("make")
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM mingw32-make "${MSYS2_DIR}/ucrt64/bin")
-#
-#elseif(win_x86_msvc)
-#	dk_depend(visualstudio)
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
-#	
-#elseif(win_x86_64_msvc)
-#	dk_depend(visualstudio)
-#	#dk_findProgram(CMAKE_MAKE_PROGRAM msbuild ${VISUAL_CPP_BUILD_TOOLS})
-#	
-#endif()
-#
-#if(NOT CMAKE_MAKE_PROGRAM)
-	#dk_findProgram(CMAKE_MAKE_PROGRAM make)
-#endif()
-
-
-#dk_assertVar(CMAKE_MAKE_PROGRAM)
+dk_assertVar(CMAKE_MAKE_PROGRAM)

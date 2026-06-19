@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
-if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
+if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit ) :: keep window open
 
 :main
 	:: find DigitalKnob directories
@@ -15,14 +15,14 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	echo DKCMAKE_DIR = %DKCMAKE_DIR%
 		
 	:: find cmake directory
-	set CMAKE_EXE=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
-	echo CMAKE_EXE = %CMAKE_EXE%
-	"%CMAKE_EXE%" --version
+	set cmake.exe=%DKTOOLS_DIR%\cmake_3_29_0_windows_x86_64\bin\cmake.exe
+	echo cmake.exe = %cmake.exe%
+	"%cmake.exe%" --version
 	:: we should actullly find the first folder that starts with cmake in the DKTools directory.	
 	
 	call set DKCMAKE_DIR=%%DKCMAKE_DIR:^\=^/%%
-	echo "%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
-	"%CMAKE_EXE%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+	echo "%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
+	"%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" -P "%DKCMAKE_DIR%/dev/Test.cmake"
 %endfunction%
 
 :: find_dkbranch_dir
@@ -33,7 +33,7 @@ if not defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 		for %%x in ("%current_dir%/../") do set parent_dir=%%~dpx
 		for %%a in ("%parent_dir%") do for %%b in ("%%~dpa\.") do set "parent_folder=%%~nxb"
 		set current_dir=%parent_dir%
-		if "%parent_folder%" neq "digitalknob" goto find_dkbranch_dir_loop
+		if "%parent_folder%" neq "DigitalKnob" goto find_dkbranch_dir_loop
 		if "%parent_dir:~-1%"=="\" set "parent_dir=%parent_dir:~0,-1%"
 		if "%parent_dir:~-1%"=="/" set "parent_dir=%parent_dir:~0,-1%"
 		set %1=%parent_dir%

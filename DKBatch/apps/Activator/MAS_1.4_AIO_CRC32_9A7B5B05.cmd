@@ -9,7 +9,7 @@ goto MAS_Start
 
    Microsoft Activation Scripts (MAS):
 
-   A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS 
+   A collection of scripts for activating Microsoft products using HWID / KMS38 / Online KMS
    activation methods with a focus on open-source code, less antivirus detection and user-friendliness.
 
    These scripts are mostly a fork of other honourable developer's tools and scripts.
@@ -21,7 +21,7 @@ goto MAS_Start
 
    Maintained by @WindowsAddict
 
-   To achieve this I have used the following projects as the base of this activator.  
+   To achieve this I have used the following projects as the base of this activator. 
    I would like to say thanks to the following authors for making such awesome projects.
 
 ====================================
@@ -33,14 +33,14 @@ goto MAS_Start
    *Anonymous    https://www.nsaneforums.com/topic/316668--/?do=findComment&comment=1497887
                  https://github.com/massgravel/MASSGRAVE
                  https://gitlab.com/massgrave/massgrave
-  
+ 
    @vyvojar      Original slshim (slc.dll)
                  https://github.com/vyvojar/slshim/releases
 
 ====================================
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -48,7 +48,7 @@ goto MAS_Start
                  https://www.nsaneforums.com/topic/316668--/page/22/?tab=comments#comment-1438005
 
 ====================================
-   Online KMS Activation: 
+   Online KMS Activation:
 ====================================
 
    @abbodi1406   Activate.cmd (KMS_VL_ALL)
@@ -94,7 +94,7 @@ goto MAS_Start
 
    @dbenham      Set buffer height independently of window height
                  https://stackoverflow.com/a/13351373
-                 
+                
    @Ratiborus    Ratiborus Tools
                  http://forum.ru-board.com/topic.cgi?forum=2&topic=5734#1
 
@@ -109,9 +109,9 @@ goto MAS_Start
 ====================================
    Kind Help:
 ====================================
-   
+  
    Thanks to the following people for answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -145,7 +145,7 @@ set "ErrLine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 goto MASend
 )
@@ -223,12 +223,12 @@ cls
 title  Microsoft Activation Scripts AIO 1.4
 mode con cols=98 lines=30
 set "MAS_Temp=%SystemRoot%\Temp\_MAS"
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 
 echo:
 echo:
 echo                   _______________________________________________________________
-echo                  ^|                                                               ^| 
+echo                  ^|                                                               ^|
 echo                  ^|                                                               ^|
 echo                  ^|      [1] Read Me                                              ^|
 echo                  ^|      ___________________________________________________      ^|
@@ -249,7 +249,7 @@ echo                  ^|                                                        
 echo                  ^|      [7] Credits         [8] Homepages          [9] Exit      ^|
 echo                  ^|                                                               ^|
 echo                  ^|_______________________________________________________________^|
-echo:          
+echo:         
 choice /C:123456789 /N /M ">                   Enter Your Choice in the Keyboard [1,2,3,4,5,6,7,8,9] : "
 
 if errorlevel  9 goto:Exit
@@ -327,7 +327,7 @@ echo               KMS activates for 180 Days.^(For core/ProWMC edition it is 30
 echo               Use Read Me for the more details.
 echo              _________________________________________________________________________
 echo:
-echo                      _________________________________________________________   
+echo                      _________________________________________________________  
 echo                     ^|                                                         ^|
 echo                     ^|                                                         ^|
 echo                     ^|     [1] Activate - Windows /Server /Office              ^|
@@ -339,7 +339,7 @@ echo                     ^|                                                     
 echo                     ^|     [4] Go to Main Menu                                 ^|
 echo                     ^|                                                         ^|
 echo                     ^|_________________________________________________________^|
-echo:                                                                               
+echo:                                                                              
 choice /C:1234 /N /M ">                     Enter Your Choice [1,2,3,4] : "
 
 if errorlevel 4 goto:MainMenu
@@ -376,7 +376,7 @@ echo                    ^|                                                      
 echo                    ^|      [6] Go to Main Menu                                 ^|
 echo                    ^|                                                          ^|
 echo                    ^|__________________________________________________________^|
-echo:                
+echo:               
 choice /C:123456 /N /M ">                     Enter Your Choice [1,2,3,4,5,6] : "
 
 if errorlevel 6 goto:MainMenu
@@ -418,7 +418,7 @@ echo                      ^|                                                    
 echo                      ^|   [8] Go to Main Menu                                 ^|
 echo                      ^|                                                       ^|
 echo                      ^|_______________________________________________________^|
-echo:     
+echo:    
 choice /C:12345678 /N /M ">                     Enter Your Choice [1,2,3,4,5,6,7,8] : "
 
 if errorlevel 8 goto:MainMenu
@@ -436,7 +436,7 @@ if errorlevel 1 goto:$OEM$HWID
 
 cls
 set "_ReadMe=%SystemRoot%\Temp\ReadMe.txt"
-if exist "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
+if EXIST "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
 call :_export %1 "%_ReadMe%" ASCII
 start notepad "%_ReadMe%"
 timeout /t 2 %_null%
@@ -450,7 +450,7 @@ Activation Type       Supported Product             Activation Period
 
 Digital License    -  Windows 10                 -  Permanent
 KMS38              -  Windows 10 / Server        -  Until the year 2038
-Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be 
+Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be
                                                     created for lifetime auto activation.
 
 ----------------------------------------------------------------------------------------------
@@ -464,18 +464,18 @@ Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task n
 ====================================================================================================
 
  - This activation is supported for Windows 10 ONLY.
- - This activation does not store any files in your system.
+ - This activation does NOT store any files in your system.
  - This activation is a permanent activation for your system Hardware.
 
- - On a system, this activation can be created for all the supported editions, and all can be 
+ - On a system, this activation can be created for all the supported editions, and all can be
    linked to Microsoft account without any issues.
 
- - Once a system is activated, this activation cannot be removed. (Because the license is stored in 
-   the Microsoft servers and not in the user's system.)
+ - Once a system is activated, this activation cannot be removed. (Because the license is stored in
+   the Microsoft servers and NOT in the user's system.)
 
- - Any significant changes in the Hardware (such as a motherboard) may deactivate the system. 
+ - Any significant changes in the Hardware (such as a motherboard) may deactivate the system.
    It is possible to reactivate a system that was deactivated because of significant hardware
-   changes, IF your activation, was linked to an online Microsoft account.
+   changes, if your activation, was linked to an online Microsoft account.
 
  - For activation to succeed, the Windows Update Service and internet connectivity must be enabled.
    If you are trying to activate without these conditions being met, then the system will auto-
@@ -485,17 +485,17 @@ Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task n
    - The Internet is required. (Only at the time of activation)
    - The system will auto-activate if Retail (Consumer) media was used for the installation.
    - The system will NOT auto-activate if VL (Business) media was used for the installation.
-     In this case, the user will have to insert that windows edition Retail/OEM key (find keys below 
+     In this case, the user will have to insert that windows edition Retail/OEM key (find keys below
      in this page) to activate, if the user doesn't wish to activate again using this script.
 
  - Possible reasons for activation failure:
-   - The Internet is not connected.
+   - The Internet is NOT connected.
    - Windows update service is disabled.
    - Use of a VPN, and/or a privacy-based hosts file, firewall rules.
    - Corrupt system files.
    - Microsoft servers block the activation request from some countries such as Iran.
    - Rarely, Microsoft's activation servers are the problem.
-   - Some machines are not able to generate GenuineTicket.xml file using gatherosstate.exe
+   - Some machines are NOT able to generate GenuineTicket.xml file using gatherosstate.exe
      The reason is unknown (to me). Please contact me if it happens to you.
 
    * Troubleshoot guide is listed below.
@@ -593,7 +593,7 @@ Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task n
 
 ____________________________________________________________________________________________________
 
-     You can safely delete the following files if it's not required for you.
+     You can safely delete the following files if it's NOT required for you.
 
      ClipUp.exe - Required to KMS38 activate Server Cor and Acor editions.
      ARM64_gatherosstate.exe and ARM64_slc.dll - Required to activate ARM64 Arch Windows 10.
@@ -641,17 +641,17 @@ ________________________________________________________________________________
    WYPNQ-8C467-V2W6J-TX4WX-WT2RQ    ProfessionalWorkstationN
    NJCF7-PW8QT-3324D-688JX-2YV66    ServerRdsh
    XQQYW-NFFMW-XJPBH-K8732-CKFFD    IoTEnterprise
-   
+  
    -------------------------------------------------------------------------------------------------
 
  - Make sure the Windows Update Service and internet are both enabled.
- - Open a command prompt (run cmd.exe) as administrator, and enter following listed commands in the 
+ - Open a command prompt (run cmd.exe) as administrator, and enter following listed commands in the
    the sequence in which they are given.
  - Enter Retail/OEM Key, (Replace '%key%' with the key from the above list) with the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /ipk %key%
 
- - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter 
+ - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter
    the following commands to generate GenuineTicket.xml file.
 
    For x86-x64 systems,
@@ -664,7 +664,7 @@ call "C:\Files\gatherosstatemodified.exe"
 
 call "C:\Files\gatherosstate.exe"
 
- - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the 
+ - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the
    folder named, "C:\ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\"
 
  - Now apply this ticket using the following commands in this sequence:
@@ -682,7 +682,7 @@ cscript /nologo %windir%\system32\slmgr.vbs /xpr
 
  - Done.
 
-   * Note - [clipup -v -o -altto <ticket_path>] method to apply the ticket was not suggested because
+   * Note - [clipup -v -o -altto <ticket_path>] method to apply the ticket was NOT suggested because
             of the issues in case the username have spaces or non English characters.
 
 ====================================================================================================
@@ -690,17 +690,17 @@ cscript /nologo %windir%\system32\slmgr.vbs /xpr
 ====================================================================================================
 
  - Make sure the internet is connected.
- 
- - Open CMD and type services.msc and hit Enter, When Services opens up, look for 'Windows Update'
-   and Make sure its startup type is set to Automatic. Some update blocking tools and scripts 
-   usually permanently block the update service, you need to make sure it's not the case.
 
- - VPN, privacy-based hosts and/or firewall rules may cause problems with the activation. Disable 
+ - Open CMD and type services.msc and hit Enter, When Services opens up, look for 'Windows Update'
+   and Make sure its startup type is set to Automatic. Some update blocking tools and scripts
+   usually permanently block the update service, you need to make sure it's NOT the case.
+
+ - VPN, privacy-based hosts and/or firewall rules may cause problems with the activation. Disable
    them if you are facing problems in activation.
 
  - Reboot the system.
 
- - Now run the script to activate Windows 10, and if unsuccessful, 
+ - Now run the script to activate Windows 10, and if unsuccessful,
    Try the troubleshoot button in the settings activation page.
    If still unsuccessful then read additional troubleshoot options listed below.
 
@@ -710,34 +710,34 @@ cscript /nologo %windir%\system32\slmgr.vbs /xpr
 
 Dism /online /Cleanup-Image /RestoreHealth
 
-   - After it's done, reboot the system and open CMD as administrator again, and enter the 
+   - After it's done, reboot the system and open CMD as administrator again, and enter the
      following command:
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      try cleaning the clipup using the following commands, it will reset all the HWID/KMS38 installed
-     licences in the current system installation. open CMD as administrator again, and enter the 
+     licences in the current system installation. open CMD as administrator again, and enter the
      following commands one by one:
 
 net stop ClipSVC
 rundll32 clipc.dll,ClipCleanUpState
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, 
+   - Reboot the system (important) and run the activation script, and if unsuccessful,
      Make sure hardware component proper drivers are installed, check manufacturer site/Windows-
      update for drivers.
 
    - After it's done, reboot the system and run the activation script, and if unsuccessful,
-     it may be time to start over from the very beginning and do a clean install of windows :D 
+     it may be time to start over from the very beginning and do a clean install of windows :D
 
 -------------------------------------------
  Activation is blocked in some countries -
@@ -750,7 +750,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
 ----------------------------------------------------------------------------------------------------
 
-   - Some machines are not able to generate GenuineTicket.xml file using gatherosstate.exe
+   - Some machines are NOT able to generate GenuineTicket.xml file using gatherosstate.exe
      The reason is unknown (to me). Please contact me if it happens to you.
 
 =========================================================================================================
@@ -769,7 +769,7 @@ rundll32 clipc.dll,ClipCleanUpState
 ---------------------------------------------------------------------------------------------------------
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -781,7 +781,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Kind Help:-
 
    Thanks for having my back and answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -800,7 +800,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Maintained by @WindowsAddict
 
-   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+   P.S. I (@WindowsAddict) did NOT help in the development of HWID/KMS38 Activation in any way, I only
    manage batch script tool which is based on the above mentioned original co-authors activation methods.
 
 =========================================================================================================
@@ -811,29 +811,29 @@ rundll32 clipc.dll,ClipCleanUpState
    KMS38 Activation:
 ====================================================================================================
 
- - This activation method activates Windows 10 and Windows Server (14393 and later builds), 
+ - This activation method activates Windows 10 and Windows Server (14393 and later builds),
    until the year 2038.
- - This activation method does not store any files on the system.
+ - This activation method does NOT store any files on the system.
 
  - Make sure the following things have been accounted for, before applying KMS38 Activation:
-   - Before the activation, if any KMS activator is installed, then make sure to uninstall it 
+   - Before the activation, if any KMS activator is installed, then make sure to uninstall it
      completely.
-   - After KMS38 activation for the Windows Operating System has been achieved, if you want to 
-     additionally, use the 180 Days KMS Activator for MS Office, then you must make sure that 
-     it (the 180 Days KMS Activator for MS Office) is compatible with Windows KMS38 activation. 
-     FYI, the following activators are compatible and can activate Office 
+   - After KMS38 activation for the Windows Operating System has been achieved, if you want to
+     additionally, use the 180 Days KMS Activator for MS Office, then you must make sure that
+     it (the 180 Days KMS Activator for MS Office) is compatible with Windows KMS38 activation.
+     FYI, the following activators are compatible and can activate Office
      without disrupting the Windows KMS38 activation.
 
      KMS_VL_ALL by @abbodi1406     https://forums.mydigitallife.net/posts/838808
      Online KMS Activation Script  https://www.nsaneforums.com/topic/316668-microsoft-activation-scripts/
 
- - Any KMS Activator which is not compatible with KMS38, may overwrite the KMS38 activation for 
-   Windows with its own 180 days activation, thereby destroying the KMS38 activation for Windows. 
-   To prevent this accidental overwriting, you can apply KMS38 protection for Windows, check 
+ - Any KMS Activator which is NOT compatible with KMS38, may overwrite the KMS38 activation for
+   Windows with its own 180 days activation, thereby destroying the KMS38 activation for Windows.
+   To prevent this accidental overwriting, you can apply KMS38 protection for Windows, check
    the Extras folder for more details.
 
  - Why is the script setting the specific KMS host to 127.0.0.2 (localhost)?
-   - By doing this, global KMS IP can not replace KMS38 activation but can be used with Office and
+   - By doing this, global KMS IP can NOT replace KMS38 activation but can be used with Office and
      other Windows Editions.
    - In case you don't like it, you can remove it with following codes, open CMD as admin and enter,
 
@@ -848,7 +848,7 @@ reg delete "HKU\S-1-5-20\%SPPk%\55c92734-d682-4d71-983e-d6ec3f16059f" /f
    Included topics-
 
    How does it work?
-   
+  
    https://pastebin.com/raw/7Xyaf15Z
    Mirror Link-
    https://textuploader.com/1dg8d/raw
@@ -951,7 +951,7 @@ reg delete "HKU\S-1-5-20\%SPPk%\55c92734-d682-4d71-983e-d6ec3f16059f" /f
 
 ____________________________________________________________________________________________________
 
-     You can safely delete the following files if it's not required for you.
+     You can safely delete the following files if it's NOT required for you.
 
      ClipUp.exe - Required to KMS38 activate Server Cor and Acor editions.
      ARM64_gatherosstate.exe and ARM64_slc.dll - Required to activate ARM64 Arch Windows 10.
@@ -963,9 +963,9 @@ ________________________________________________________________________________
  - Prerequisite:
 
    For Windows 10 / Server x86-x64 system, you need following files,
-   48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe       
+   48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe      
    fabb5a0fc1e6a372219711152291339af36ed0b5 *gatherosstate.exe
-   ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll           
+   ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll          
    * ClipUp.exe is only required to activate Server Cor and Acor editions.
 
    For Windows 10 ARM64 system, you need following files,
@@ -977,7 +977,7 @@ ________________________________________________________________________________
 
    -------------------------------------------------------------------------------------------------
 
-           GVLK                      Windows 10 Editions          
+           GVLK                      Windows 10 Editions         
 
    TX9XD-98N7V-6WMQ6-BX7FG-H8Q99     Core
    PVMJN-6DFY6-9CCP6-7BKTT-D3WVR     CoreCountrySpecific
@@ -1001,9 +1001,9 @@ ________________________________________________________________________________
    9FNHH-K3HBT-3W4TD-6383H-6XYWF     ProfessionalWorkstationN
    7NBT4-WGBQX-MP4H7-QXFF8-YP3KX     ServerRdsh                            [Less than 1809]
    CPWHC-NT2C7-VYW78-DHDB2-PG3GK     ServerRdsh                     [Greater or Equal 1809]
-   
-           GVLK                      Windows Server Editions    
-   
+  
+           GVLK                      Windows Server Editions   
+  
    QN4C6-GBJD2-FB422-GHWJK-GJG2R     ServerCloudStorage                       [Server 2016]
    CB7KF-BWN84-R7R2Y-793K2-8XDDG     ServerDatacenter, ServerDatacenterCor    [Server 2016]
    WMDGN-G9PQG-XVVXX-R3X43-63DFG     ServerDatacenter, ServerDatacenterCor    [Server 2019]
@@ -1020,29 +1020,29 @@ ________________________________________________________________________________
 
  - Make sure to properly and completely remove any previously-installed KMS activator if one already exists.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - Enter Generic Volume License Key (GVLK) (Replace '%key%' with the key from the above list) 
+ - Enter Generic Volume License Key (GVLK) (Replace '%key%' with the key from the above list)
    with the following command:
-   
+  
 cscript /nologo %windir%\system32\slmgr.vbs /ipk %key%
 
  - Set specific KMS host to 127.0.0.2 [Localhost] with the following command: (Run one by one)
-   - By doing this, the global KMS IP can not replace the KMS38 activation, and can then safely be used with MS Office 
+   - By doing this, the global KMS IP can NOT replace the KMS38 activation, and can then safely be used with MS Office
      and other Windows Editions.
    - It's optional.
 
 set spp=SoftwareLicensingProduct
-for /f "tokens=2 delims==" %G in ('"wmic path %spp% where (Description like '%%KMSCLIENT%%' and Name like 'Windows%%' and PartialProductKey is not NULL) get ID /VALUE"') do (set app=%G)
+for /f "tokens=2 delims==" %G in ('"wmic path %spp% where (Description like '%%KMSCLIENT%%' and Name like 'Windows%%' and PartialProductKey is NOT NULL) get ID /VALUE"') do (set app=%G)
 wmic path %spp% where ID='%app%' call ClearKeyManagementServiceMachine
 wmic path %spp% where ID='%app%' call ClearKeyManagementServicePort
 wmic path %spp% where ID='%app%' call SetKeyManagementServiceMachine MachineName="127.0.0.2"
 wmic path %spp% where ID='%app%' call SetKeyManagementServicePort 1688
 
- - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter 
+ - Make sure slc.dll and gatherosstate.exe files are located in the folder, "C:\Files" and enter
    following command to generate GenuineTicket.xml file.
 
 call "C:\Files\gatherosstate.exe"
 
- - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the 
+ - Now a GenuineTicket.xml file should be created in the folder "C:\Files\", copy and paste this file in the
    folder named, "C:\ProgramData\Microsoft\Windows\ClipSVC\GenuineTicket\"
 
  - Now apply this ticket using the following commands in this sequence:
@@ -1051,15 +1051,15 @@ call "C:\Files\gatherosstate.exe"
 net stop ClipSVC
 net start ClipSVC
 
- - Check the expiry date of the activation with the following command: 
+ - Check the expiry date of the activation with the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /xpr
 
- - If the expiry date is not in the year 2038, then enter the following command: 
+ - If the expiry date is NOT in the year 2038, then enter the following command:
 
 cscript /nologo %windir%\system32\slmgr.vbs /rearm-app 55c92734-d682-4d71-983e-d6ec3f16059f
 set spp=SoftwareLicensingProduct
-for /f "tokens=2 delims==" %G in ('"wmic path %spp% where (Description like '%%KMSCLIENT%%' and Name like 'Windows%%' and PartialProductKey is not NULL) get ID /VALUE"') do (set app=%G)
+for /f "tokens=2 delims==" %G in ('"wmic path %spp% where (Description like '%%KMSCLIENT%%' and Name like 'Windows%%' and PartialProductKey is NOT NULL) get ID /VALUE"') do (set app=%G)
 cscript /nologo %windir%\system32\slmgr.vbs /rearm-sku %app%
 
  - check expiry date again, now it should show activation until the year 2038.
@@ -1070,12 +1070,12 @@ cscript /nologo %windir%\system32\slmgr.vbs /rearm-sku %app%
    Troubleshoot activation issues:
 ====================================================================================================
 
- - Make sure to completely remove any previously-installed KMS activators if any exist, before 
+ - Make sure to completely remove any previously-installed KMS activators if any EXIST, before
    installing KMS38 activation.
 
  - Reboot the system.
 
- - Now run the script to activate Windows 10, and if unsuccessful, 
+ - Now run the script to activate Windows 10, and if unsuccessful,
    Try the troubleshoot button in settings activation page.
    If still unsuccessful then read additional troubleshoot options listed below.
 
@@ -1089,29 +1089,29 @@ Dism /online /Cleanup-Image /RestoreHealth
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, 
+   - Reboot the system (important) and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      try cleaning the clipup using the following commands, it will reset all the HWID/KMS38 installed
-     licences in the current system installation. open CMD as administrator again, and enter the 
+     licences in the current system installation. open CMD as administrator again, and enter the
      following commands one by one:
 
 net stop ClipSVC
 rundll32 clipc.dll,ClipCleanUpState
 
-   - Reboot the system (important) and run the activation script, and if unsuccessful, it may be 
-     time to start over from the very beginning and do a clean install of windows :D 
+   - Reboot the system (important) and run the activation script, and if unsuccessful, it may be
+     time to start over from the very beginning and do a clean install of windows :D
 
 ----------------------------------------------------------------------------------------------------
 
-   - Some machines are not able to generate GenuineTicket.xml file using gatherosstate.exe
+   - Some machines are NOT able to generate GenuineTicket.xml file using gatherosstate.exe
      The reason is unknown (to me). Please contact me if it happens to you.
 
 =========================================================================================================
@@ -1130,7 +1130,7 @@ rundll32 clipc.dll,ClipCleanUpState
 ---------------------------------------------------------------------------------------------------------
 
    HWID/KMS38 methods Suggestions and improvements:-
-  
+ 
    @sponpa       New ideas for the HWID/KM38 Generation
                  https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 
@@ -1142,7 +1142,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Kind Help:-
 
    Thanks for having my back and answering all of my queries. (In no particular order)
-   
+  
    @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 
    @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -1161,7 +1161,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Maintained by @WindowsAddict
 
-   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+   P.S. I (@WindowsAddict) did NOT help in the development of HWID/KMS38 Activation in any way, I only
    manage batch script tool which is based on the above mentioned original co-authors activation methods.
 
 =========================================================================================================
@@ -1173,7 +1173,7 @@ rundll32 clipc.dll,ClipCleanUpState
    Online KMS Activation script is just a fork of @abbodi1406's KMS_VL_ALL Project.
    KMS_VL_ALL homepage: https://forums.mydigitallife.net/posts/838808
 
-   This fork was made to avoid having any KMS binary files and system can be activated using 
+   This fork was made to avoid having any KMS binary files and system can be activated using
    some manual commands or transparent batch script files.
 
    This script is a part of 'Microsoft Activation Scripts' project.
@@ -1191,7 +1191,7 @@ rundll32 clipc.dll,ClipCleanUpState
 
  - This KMS script skips the activation of any permanently / KMS38-activated product.
  - This KMS script can activate both Retail and VL Windows / Server installation.
- - This KMS script can activate C2R Retail and VL Office, but not 2010/2013 MSI Retail Office. 
+ - This KMS script can activate C2R Retail and VL Office, but NOT 2010/2013 MSI Retail Office.
 
  ----------------------
  - Activation Renewal
@@ -1199,15 +1199,15 @@ rundll32 clipc.dll,ClipCleanUpState
 
  - KMS activates Windows / Server / Office for 180 Days. (For Core/ProWMC edition it is 30/45 Days)
 
- - By design, using the KMS activation method, the system contacts the registered server every 7 
-   days, and if contacted successfully it will automatically renew and reset the activation for the 
+ - By design, using the KMS activation method, the system contacts the registered server every 7
+   days, and if contacted successfully it will automatically renew and reset the activation for the
    the full period of 180 days again, starting from the day of successful contact.
-   If the system cannot contact the server, it will be deactivated after 180 days and it will 
+   If the system cannot contact the server, it will be deactivated after 180 days and it will
    remain deactivated until contact can be restored.
-   
- - The KMS servers I've added have been working steadily for two to three years, but there can be 
-   no guarantee that they will remain online indefinitely. If a registered server goes 
-   down, you will need to create a renewal task, or do a manual renewal, for the lifetime of the 
+  
+ - The KMS servers I've added have been working steadily for two to three years, but there can be
+   no guarantee that they will remain online indefinitely. If a registered server goes
+   down, you will need to create a renewal task, or do a manual renewal, for the lifetime of the
    activation.
 
    There are 3 ways you can renew the KMS server and as a result, renew the activation.
@@ -1215,7 +1215,7 @@ rundll32 clipc.dll,ClipCleanUpState
  1- Activate.cmd
 
    Run this file whenever the system needs activation. Depending upon the particular (never fully-knowable)
-   circumstances, a successful activation may last for a period of a MINIMUM of 180 days, 
+   circumstances, a successful activation may last for a period of a MINIMUM of 180 days,
    or a maximum of the full life of the machine it's running on, and you may never need to run it again.
 
  2- Manual Renewal via Desktop Context Menu
@@ -1233,7 +1233,7 @@ rundll32 clipc.dll,ClipCleanUpState
    It creates an easy to reach Desktop context menu for the manual activation renewal.
 
  3- Automatic Renewal via Task Scheduler
-   
+  
    This method put the following files in,
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx64.exe
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe
@@ -1245,8 +1245,8 @@ rundll32 clipc.dll,ClipCleanUpState
    The scheduled task runs only if the system is connected to the Internet.
    With this method, the Activation task can also be created which will run on the system login
    and after successful activation, this task will delete itself.
-  
-   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not 
+ 
+   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and NOT
    because of KMS, because for them it's suspicious to run long scripts in the background as Tasks.
 
    It's recommended to set exclusions in Antivirus for
@@ -1260,11 +1260,11 @@ rundll32 clipc.dll,ClipCleanUpState
  - Remarks
  ----------------------
 
- - This Online KMS Activation provides immediate global activation for Windows 8.1 and Windows 10, which 
-   means that in the following three scenarios, the system will self-activate when connected to the 
-   internet, and also means that users will not need to manually run the activation script again.
+ - This Online KMS Activation provides immediate global activation for Windows 8.1 and Windows 10, which
+   means that in the following three scenarios, the system will self-activate when connected to the
+   internet, and also means that users will NOT need to manually run the activation script again.
 
-   Scenario 1: Subsequent installation or alteration of any 2013, 2016, or 2019 Volume License 
+   Scenario 1: Subsequent installation or alteration of any 2013, 2016, or 2019 Volume License
                (VL) Office product.
    Scenario 2: Windows edition change (with GVLK).
    Scenario 3: Date change, system hardware change, etc.
@@ -1274,23 +1274,23 @@ rundll32 clipc.dll,ClipCleanUpState
      After activation, it leaves only the KMS Server name in the registry, which helps you to get the
      above-mentioned global activation feature whereby the system auto-renews the activations,
      so it's a good thing if you leave the server name in the registry.
-     However, you can clear this registered KMS Server name upon activation, and do that, open 
+     However, you can clear this registered KMS Server name upon activation, and do that, open
      the script with notepad and set Clear-KMS-Cache to 1 from 0.
      What is left in the system when Renewal methods are installed, has been mentioned.
 
- - This script includes the most-stable KMS servers (6+) list. The server selection process is 
+ - This script includes the most-stable KMS servers (6+) list. The server selection process is
    fully automatic. You don't need to worry about the server's availability.
 
- - If your system date is incorrect (beyond 180 days) and you are offline, the system will be 
-   deactivated, but will automatically reactivate when you correct the system date. 
+ - If your system date is incorrect (beyond 180 days) and you are offline, the system will be
+   deactivated, but will automatically reactivate when you correct the system date.
 
  - Why should you choose the Online KMS activation method over offline KMS?
    The main benefit of Online KMS activation is that it doesn't need any KMS binary file and system
    can be activated using some manual commands or transparent batch script files.
-   So this is for those who don't like/have difficulties/trust issue in offline KMS because of its 
+   So this is for those who don't like/have difficulties/trust issue in offline KMS because of its
    binary files and antivirus detections.
 
-   If you prefer offline KMS then checkout an open-source activator, 
+   If you prefer offline KMS then checkout an open-source activator,
    @abbodi1406's KMS_VL_ALL   https://forums.mydigitallife.net/posts/838808
 
 ----------------------------------------------------------------------------------------------------
@@ -1300,36 +1300,36 @@ rundll32 clipc.dll,ClipCleanUpState
  --------------------------------------
 
    This activation script will convert Office C2R Retail to Volume without needing separate tools.
-   
+  
    - Supports: Office 365, Office 2019, Office 2016, Office 2013
    - Activated Retail products will be skipped from conversion
      this includes valid Office 365 subscriptions, or perpetual Office (MAK, OEM, MSDN, Retail..)
    - Current Office licenses will be cleaned up (unless retail-activated Office detected)
      then, proper Volume licenses will be installed based on the detected Product IDs
    - Office Mondo suite cover all products, if detected, only its licenses will be installed
-   - Office 365 products will be converted with Mondo licenses by default  
+   - Office 365 products will be converted with Mondo licenses by default 
      also, corresponding Office 365 Retail Grace Key will be installed
    - Office 2016 products will be converted with corresponding Office 2019 licenses
    - Office Professional suite will be converted with Office 2019 ProPlus licenses
    - Office HomeBusiness/HomeStudent suites will be converted with Office 2019 Standard licenses
-   - If Office 2019 RTM licenses are not detected, Office 2016 licenses will be used instead
+   - If Office 2019 RTM licenses are NOT detected, Office 2016 licenses will be used instead
    - Office 2013 products follow the same logic but handled separately
-   - If main products SKUs are detected, single apps licenses will not be installed to avoid duplication
-   
-   - SKUs:  
-   O365ProPlus, O365Business, O365SmallBusPrem, O365HomePrem, O365EduCloud  
+   - If main products SKUs are detected, single apps licenses will NOT be installed to avoid duplication
+  
+   - SKUs: 
+   O365ProPlus, O365Business, O365SmallBusPrem, O365HomePrem, O365EduCloud 
    ProPlus, Professional, Standard, HomeBusiness, HomeStudent, Visio, Project
-   
-   * Apps:  
-   Access, Excel, InfoPath, Onenote, Outlook, PowerPoint, Publisher, SkypeForBusiness, Word, 
+  
+   * Apps: 
+   Access, Excel, InfoPath, Onenote, Outlook, PowerPoint, Publisher, SkypeForBusiness, Word,
    Groove (OneDrive for Business)
-   
-   - O365ProPlus, O365Business, O365SmallBusPrem, ProPlus cover all apps  
-   Professional cover all apps except SkypeForBusiness  
+  
+   - O365ProPlus, O365Business, O365SmallBusPrem, ProPlus cover all apps 
+   Professional cover all apps except SkypeForBusiness 
    Standard cover all apps except Access, SkypeForBusiness
-   
+  
    ## Notice
-   
+  
    - On Windows 7, Office 2016/2019 licensing service require Universal C Runtime to work correctly
    - UCRT is available in the latest Monthly Rollup, or the separate update KB3118401
    - Additionally, Office programs themselves require recent Windows 7 updates to start properly
@@ -1342,10 +1342,10 @@ rundll32 clipc.dll,ClipCleanUpState
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -1364,11 +1364,11 @@ rundll32 clipc.dll,ClipCleanUpState
 
    Supported Products: [Only Volume-capable]
 
-   Windows 8 / 8.1 / 10 (all official editions, except Windows 10 S)  
-   Windows 7 (Enterprise /N/E, Professional /N/E, Embedded Standard/POSReady/ThinPC)  
-   Windows Server 2008 R2 / 2012 / 2012 R2 / 2016 / 2019  
+   Windows 8 / 8.1 / 10 (all official editions, except Windows 10 S) 
+   Windows 7 (Enterprise /N/E, Professional /N/E, Embedded Standard/POSReady/ThinPC) 
+   Windows Server 2008 R2 / 2012 / 2012 R2 / 2016 / 2019 
    Office Volume 2010 / 2013 / 2016 / 2019
-   
+  
    [Activation script will convert Office C2R Retail O365/2013/2016/2019 to Volume]
 
 ----------------------------------------------------------------------------------------------------
@@ -1376,23 +1376,23 @@ rundll32 clipc.dll,ClipCleanUpState
    Unsupported Products:
 
    Office Retail [Office MSI Retail 2010/2013]
-   Windows Editions which do not support KMS activation by design:  
-   Windows Evaluation Editions  
-   Windows 7 (Starter, HomeBasic, HomePremium, Ultimate)  
-   Windows 10 (Cloud "S", IoTEnterprise, IoTEnterpriseS, ProfessionalSingleLanguage... etc)  
-   Windows Server (Server Foundation, Storage Server, Home Server 2011... etc) 
+   Windows Editions which do NOT support KMS activation by design: 
+   Windows Evaluation Editions 
+   Windows 7 (Starter, HomeBasic, HomePremium, Ultimate) 
+   Windows 10 (Cloud "S", IoTEnterprise, IoTEnterpriseS, ProfessionalSingleLanguage... etc) 
+   Windows Server (Server Foundation, Storage Server, Home Server 2011... etc)
 
 ----------------------------------------------------------------------------------------------------
 
    These editions are only KMS-activatable for 45 days at max:
-   Windows 10 Home edition variants  
+   Windows 10 Home edition variants 
    Windows 8.1 Core edition variants, Pro with Media Center, Pro Student
 
    These editions are only KMS-activatable for 30 days at max:
    Windows 8 Core edition variants, Pro with Media Center
 
-   Notes:  
-   Supported Windows products do need volume conversion, only the GVLK (KMS key) is needed, which 
+   Notes: 
+   Supported Windows products do need volume conversion, only the GVLK (KMS key) is needed, which
    the script will install accordingly.
    KMS Activation works in all (MBR, GPT, UEFI, BIOS) systems.
 
@@ -1426,29 +1426,29 @@ Renewal_Setup.cmd /dcm /swa
  - Activate.cmd
 
    - To run the script in Debug mode to find out the cause of errors in activation or just details,
-     search "set _Debug=" and change the value from 0 to 1. 
+     search "set _Debug=" and change the value from 0 to 1.
 
-   - To replace KMS38 activation with KMS activation, search "set SkipKMS38=" and change the value 
-     from 1 to 0. 
+   - To replace KMS38 activation with KMS activation, search "set SkipKMS38=" and change the value
+     from 1 to 0.
 
    - To skip Windows activation, search "set ActWindows=" and change the value from 1 to 0.
    - To skip Office activation, search "set ActOffice=" and change the value from 1 to 0.
-     - This is not effective if Windows and/or Office installation is already Volume (GVLK installed)
-     - In [Online KMS + HWID] $OEM$ preactivation, Windows KMS activation is turned off 
+     - This is NOT effective if Windows and/or Office installation is already Volume (GVLK installed)
+     - In [Online KMS + HWID] $OEM$ preactivation, Windows KMS activation is turned off
        by default.
 
-   - To turn OFF auto conversion for Office C2R Retail to Volume, search "set AutoR2V=" and 
+   - To turn OFF auto conversion for Office C2R Retail to Volume, search "set AutoR2V=" and
      change the value from 1 to 0.
 
    - To set the script to use only one specific KMS server address, search "set KMS_Server="
      paste the server address after the = sign.
 
    - To clear the KMS cache, search "set Clear-KMS-Cache=" and change the value from 0 to 1.
-     - Registered KMS server address (cache) enables the system to automatically renew the license 
+     - Registered KMS server address (cache) enables the system to automatically renew the license
        (for next 180 days) every 7 days, as long as the server is online.
-     - This process is the same as how the legal KMS works, so no security program will flag 
+     - This process is the same as how the legal KMS works, so no security program will flag
        this behavior.
-     - Changing this option here won't have any effect if manual (Desktop Context menu) and/or auto, 
+     - Changing this option here won't have any effect if manual (Desktop Context menu) and/or auto,
        renewal activation script is installed. [default (0)].
      - I recommend leaving this option as default (0).
 
@@ -1458,12 +1458,12 @@ Renewal_Setup.cmd /dcm /swa
 
  - Prerequisite:
 
-   online Public KMS Server List: 
+   online Public KMS Server List:
 
    kms.srv.crsoo.com
    kms.loli.beer
    kms8.MSGuides.com
-   
+  
    kms9.MSGuides.com
    kms.zhuxiaole.org
    kms.lolico.moe
@@ -1472,10 +1472,10 @@ Renewal_Setup.cmd /dcm /swa
    Generic Volume License Key (GVLK):
    Thanks to @abbodi1406 for the Key collection.
 
-        GVLK                        Edition                
-   
+        GVLK                        Edition               
+  
    Windows 10
-   
+  
    TX9XD-98N7V-6WMQ6-BX7FG-H8Q99    Home
    3KHY7-WNT83-DGQKR-F7HPR-844BM    Home N
    7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH    Home Single Language
@@ -1501,9 +1501,9 @@ Renewal_Setup.cmd /dcm /swa
    CPWHC-NT2C7-VYW78-DHDB2-PG3GK    Enterprise for Virtual Desktops
    7NBT4-WGBQX-MP4H7-QXFF8-YP3KX    Remote Server
    NBTWJ-3DR69-3C4V8-C26MC-GQ9M6    Lean
-   
+  
    Windows 8.1
-   
+  
    M9Q9P-WNJJT-6PXPY-DWX8H-6XWKK    Core
    7B9N3-D94CG-YTVHR-QBPX3-RJP64    Core N
    BB6NG-PQ82V-VRDPW-8XVD2-V8P66    Core Single Language
@@ -1523,9 +1523,9 @@ Renewal_Setup.cmd /dcm /swa
    R962J-37N87-9VVK2-WJ74P-XTMHR    with Bing China
    MX3RK-9HNGX-K3QKC-6PJ3F-W8D7B    Pro for Students
    TNFGH-2R6PB-8XM3K-QYHX2-J4296    Pro for Students N
-   
+  
    Windows 8
-   
+  
    BN3D2-R7TKB-3YPBD-8DRP2-27GG4    Core
    8N2M2-HWPGY-7PGT9-HGDD8-GVGGY    Core N
    2WN2H-YGCQR-KFX6K-CD6TF-84YXQ    Core Single Language
@@ -1538,9 +1538,9 @@ Renewal_Setup.cmd /dcm /swa
    JMNMF-RHW7P-DMY6X-RF3DR-X2BQT    Enterprise N
    RYXVT-BNQG7-VD29F-DBMRY-HT73M    Embedded Industry Pro
    NKB3R-R2F8T-3XCDP-7Q2KW-XWYQ2    Embedded Industry Enterprise
-   
+  
    Windows 7
-   
+  
    FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4    Professional
    MRPKT-YTG23-K7D7T-X2JMM-QY7MG    Professional N
    W82YF-2Q76Y-63HXB-FGJG9-GF7QX    Professional E
@@ -1550,9 +1550,9 @@ Renewal_Setup.cmd /dcm /swa
    YBYF6-BHCR3-JPKRB-CDW7B-F9BK4    Embedded POSReady 7
    XGY72-BRBBT-FF8MH-2GG8H-W7KCW    Embedded Standard
    73KQT-CD9G6-K7TQG-66MRP-CQ22C    Embedded ThinPC
-   
+  
    Windows Server 2019
-   
+  
    N69G4-B89J2-4G8F4-WWYCC-J464C    Standard
    WMDGN-G9PQG-XVVXX-R3X43-63DFG    Datacenter
    WVDHN-86M7X-466P6-VHXV7-YY726    Essentials
@@ -1560,9 +1560,9 @@ Renewal_Setup.cmd /dcm /swa
    N2KJX-J94YW-TQVFB-DG9YT-724CC    Standard ACor
    6NMRW-2C8FM-D24W7-TQWMY-CWH2D    Datacenter ACor
    GRFBW-QNDC4-6QBHG-CCK3B-2PR88    ServerARM64
-   
+  
    Windows Server 2016
-   
+  
    WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY    Standard
    CB7KF-BWN84-R7R2Y-793K2-8XDDG    Datacenter
    JCKRF-N37P4-C2D82-9YXRT-4M63B    Essentials
@@ -1571,23 +1571,23 @@ Renewal_Setup.cmd /dcm /swa
    PTXN8-JFHJM-4WC78-MPCBR-9W4KR    Standard ACor
    2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG    Datacenter ACor
    K9FYF-G6NCK-73M32-XMVPY-F9DRR    ServerARM64
-   
+  
    Windows Server 2012 R2
-   
+  
    D2N9P-3P6X9-2R39C-7RTCD-MDVJX    Standard
    W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9    Datacenter
    KNC87-3J2TX-XB4WP-VCPJV-M4FWM    Essentials
    3NPTF-33KPT-GGBPR-YX76B-39KDD    Cloud Storage
-   
+  
    Windows Server 2012
-   
+  
    XC9B7-NBPP2-83J2H-RHMBY-92BT4    Standard
    48HP8-DN98B-MYWDG-T2DCC-8W83P    Datacenter
    HM7DN-YVMH3-46JC3-XYTG7-CYQJJ    MultiPoint Standard
    XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G    MultiPoint Premium
-   
+  
    Windows Server 2008 R2
-   
+  
    6TPJF-RBVHG-WBW2R-86QPH-6RTM4    Web
    TT8MH-CG224-D3D7Q-498W2-9QCTX    HPC
    YC6KT-GKW9T-YTKYR-T4X34-R7VHC    Standard
@@ -1595,106 +1595,106 @@ Renewal_Setup.cmd /dcm /swa
    489J6-VHDMP-X63PK-3K798-CPX3Y    Enterprise
    GT63C-RJFQ3-4GMB6-BRFB9-CB83V    Itanium
    736RG-XDKJK-V34PF-BHK87-J6X3K    MultiPoint Server
-     
+    
    ----------------------------------------------------------------------------------------------------
-   
+  
    ----------------------------------------------
-    Windows /Server (All VL Supported Versions) 
+    Windows /Server (All VL Supported Versions)
    ----------------------------------------------
-   
- - Connect to the internet. 
+  
+ - Connect to the internet.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - Enter Generic Volume License Key (GVLK) (Replace %key% with the key from above list) with 
+ - Enter Generic Volume License Key (GVLK) (Replace %key% with the key from above list) with
    the following command:
 
 slmgr.vbs /ipk %key%
 
- - Register the KMS Server, (Replace %server% with one of the above-listed servers) 
+ - Register the KMS Server, (Replace %server% with one of the above-listed servers)
    (If activation is unsuccessful then try a different server) with the following command:
 
 slmgr.vbs /skms %server%
 
  - Activate Windows with the following command:
-   
+  
 slmgr.vbs /ato
-   
+  
  - Check Activation Status with the following command:
 
 slmgr.vbs /dli
-   
+  
  - Check Activation Expiry Date with the following command:
-   
+  
 slmgr.vbs /xpr
-   
- - Clear the name of the KMS server (Optional) (It'll prevent activation auto-renewal) with the following command: 
-   
+  
+ - Clear the name of the KMS server (Optional) (It'll prevent activation auto-renewal) with the following command:
+  
 slmgr.vbs /ckms
-   
- - Done. 
+  
+ - Done.
 
    ----------------------------------------------------------------------------
     Office VL Activation (Office 2010, 2013, 2016, 2019) -
    ----------------------------------------------------------------------------
-   
- - Connect to the internet. 
+  
+ - Connect to the internet.
  - Open CMD as Admin, and enter the following listed commands in the sequence in which they are given.
- - If Office is installed as VL (Volume License) then there is no need to enter its key. 
+ - If Office is installed as VL (Volume License) then there is no need to enter its key.
  - If Office is installed as Retail, then you need to convert it to VL, by using C2R-R2V by @abbodi1406
-   https://forums.mydigitallife.net/posts/1150042 
+   https://forums.mydigitallife.net/posts/1150042
 
  - Change to the directory where Office is installed.
    If your system is 32-bit Office on 32-bit Windows or 64-bit Office on 64-bit Windows use the following:
-   
+  
    For Office 2016 or 2019 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office16"
-   
+  
    For Office 2013 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office15"
-   
+  
    For Office 2010 enter the command:
-   
+  
 cd "C:\Program Files\Microsoft Office\Office14"
-   
+  
    --------------------------------------------------------------------------------
-   
+  
    If your system is 32-bit Office on 64-bit Windows, use the following:
-   
+  
    For Office 2016 or 2019 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office16"
-   
+  
    For Office 2013 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office15"
-   
+  
    For Office 2010 enter the command:
-   
+  
 cd "C:\Program Files (x86)\Microsoft Office\Office14"
-   
+  
    --------------------------------------------------------------------------------
-   
+  
  - Once all of that is done correctly, you must register the KMS Server, (In the following,
-   replace %server% with one of the above-listed servers.) (If activation is unsuccessful 
+   replace %server% with one of the above-listed servers.) (If activation is unsuccessful
    then try a different server.) with the following command:
 
-cscript ospp.vbs /sethst:%server% 
+cscript ospp.vbs /sethst:%server%
 
- - Activate Office with the following command: 
-   
-cscript ospp.vbs /act 
-   
+ - Activate Office with the following command:
+  
+cscript ospp.vbs /act
+  
  - Check Activation Status with the following command:
-   
+  
 cscript ospp.vbs /dstatus
- 
+
  - Clear the name of the KMS server, (Optional) (It'll prevent activation auto-renewal)
    with the appropriate following commands:
-   
+  
    To clear the KMS Server name for Office in Win 7, or Office 2010 on Win 8 or Win 10,
    enter each of the following commands in the sequence which is given:
-   
+  
 set "OSPP=HKLM\SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 reg delete "%OSPP%" /f /v KeyManagementServiceName 2>nul
 reg delete "%OSPP%" /f /v KeyManagementServicePort 2>nul
@@ -1709,7 +1709,7 @@ reg delete "HKLM\%SPPk%" /f /v KeyManagementServicePort 2>nul
 reg delete "HKLM\%SPPk%\0ff1ce15-a989-479d-af46-f275c6370663" /f 2>nul
 reg delete "HKEY_USERS\S-1-5-20\%SPPk%\0ff1ce15-a989-479d-af46-f275c6370663" /f 2>nul
 
- - Done. 
+ - Done.
 
 ====================================================================================================
    Troubleshoot activation issues:
@@ -1726,25 +1726,25 @@ Dism /online /Cleanup-Image /RestoreHealth
 
 sfc.exe /scannow
 
-   - After it's done, reboot the system and run the activation script, and if unsuccessful, 
+   - After it's done, reboot the system and run the activation script, and if unsuccessful,
      open CMD as administrator again, and enter the following command:
 
 slmgr.vbs /rearm
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      You may try to rebuild licensing Tokens.dat as suggested in https://support.microsoft.com/en-us/help/2736303
      (this will require to repair Office afterwards.)
 
-   - Reboot the system and run the activation script, and if unsuccessful, 
+   - Reboot the system and run the activation script, and if unsuccessful,
      Try KMS_VL_ALL by @abbodi1406 https://forums.mydigitallife.net/posts/838808/
-     If still unsuccessful, it may be time to start over from the very beginning 
-     and do a clean install of windows :D 
+     If still unsuccessful, it may be time to start over from the very beginning
+     and do a clean install of windows :D
 
    -------------------------------
 
    - If you have issues with Office activation, or got undesired or duplicate licenses (e.g. Office 2016 and 2019):
      Download Office Scrubber pack from https://forums.mydigitallife.net/posts/1466365/
-     To get rid of any conflicted licenses, run Uninstall_Licenses.cmd, then you must start any 
+     To get rid of any conflicted licenses, run Uninstall_Licenses.cmd, then you must start any
      Office program to repair the licensing. You may also try Uninstall_Keys.cmd for similar manner.
 
      If you wish to remove Office and leftovers completely and start clean:
@@ -1754,9 +1754,9 @@ slmgr.vbs /rearm
    - Can't activate Windows 7 with KMS: [Error 0xC004F035]
      Some OEM licensed computers cannot be activated with KMS on WINDOWS 7.
      Quote from the MS page https://tinyurl.com/yy8wfu5m
-     'Computers obtained through OEM channels that have an ACPI_SLIC table in the (BIOS) are 
+     'Computers obtained through OEM channels that have an ACPI_SLIC table in the (BIOS) are
      required to have a valid Windows marker in the same ACPI_SLIC table.
-     ---Computers that have an ACPI_SLIC table without a valid Windows marker generate an error 
+     ---Computers that have an ACPI_SLIC table without a valid Windows marker generate an error
      when a volume edition of Windows 7 is installed.'
 
 ====================================================================================================
@@ -1800,9 +1800,9 @@ slmgr.vbs /rearm
    KMS server 1688 port test with Powershell
    Multi KMS server integration
    Scheduled task to renew the activation
-                    
+                   
    And for solving countless problems in this batch script.
-   
+  
 ----------------------------------------------------------------------------------------------------
 
    Kind Help:-
@@ -1834,30 +1834,30 @@ slmgr.vbs /rearm
 
  - To create a Preactivated Windows installation .iso, do the following things:
    Copy the "$OEM$" folder to the "sources" folder in the Windows installation media (.iso or USB).
-   The directory will appear like this: \sources\$OEM$ in your altered .iso or on your bootable 
+   The directory will appear like this: \sources\$OEM$ in your altered .iso or on your bootable
    USB drive.
-   Now use this .iso or bootable USB drive to install Windows and it will either already be activated 
-   (KMS38) as soon as it boots, or will self-activate at first internet contact. 
+   Now use this .iso or bootable USB drive to install Windows and it will either already be activated
+   (KMS38) as soon as it boots, or will self-activate at first internet contact.
 
 ----------------------------------------------------------------------------------------------------
    HWID:
 ----------------------------------------------------------------------------------------------------
 
- - When using Digital License (HWID), no files are stored on the system, and when connected to the 
+ - When using Digital License (HWID), no files are stored on the system, and when connected to the
    internet for the first time, the system will self-activate at that time.
-   
+  
 ----------------------------------------------------------------------------------------------------
    KMS38:
 ----------------------------------------------------------------------------------------------------
 
- - When using KMS38, no files are stored on the system, and Windows becomes activated immediately 
+ - When using KMS38, no files are stored on the system, and Windows becomes activated immediately
    without further actions or connectivity of any kind being required.
 
 ----------------------------------------------------------------------------------------------------
    Online KMS (separately, or in combination with HWID or KMS38):
 ----------------------------------------------------------------------------------------------------
 
- - It creates the following 2 Activation/Renewal Methods. You can turn off any of them in 
+ - It creates the following 2 Activation/Renewal Methods. You can turn off any of them in
    setupcomplete.cmd file
 
    ----------------------------------------------------------
@@ -1877,12 +1877,12 @@ slmgr.vbs /rearm
    \Online_KMS_Activation_Script-Run_Once (Activation Task)
 
    The scheduled task runs only if the system is connected to the Internet.
-   Activation Task will run on the system login and after successful activation and registering 
-   online KMS server, this task will delete itself. leaving behind only one task to run weekly 
-   for the lifetime of the system. 
+   Activation Task will run on the system login and after successful activation and registering
+   online KMS server, this task will delete itself. leaving behind only one task to run weekly
+   for the lifetime of the system.
 
    ----------------------------------------------------------
-   
+  
    2- Manual Renewal via Desktop Context Menu---
 
    It creates Desktop context Menu for manual activation and renewal.
@@ -1893,63 +1893,63 @@ slmgr.vbs /rearm
    C:\ProgramData\Online_KMS_Activation\BIN\cleanosppx86.exe
    C:\ProgramData\Online_KMS_Activation\Activate.cmd
    C:\ProgramData\Online_KMS_Activation\Info.txt
-   
+  
    Registry entries:
    HKCR\DesktopBackground\shell\Activate Windows - Office
    HKCR\DesktopBackground\shell\Activate Windows - Office\command
 
    It creates an easy to reach the Desktop context menu for the manual activation renewal.
-   
+  
    ----------------------------------------------------------
 
    d30a0e4e5911d3ca705617d17225372731c770e2 *cleanosppx64.exe                   Virus Total = 0/66
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
    ----------------------------------------------------------
-   
-   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and not 
+  
+   IMPORTANT NOTE - Some sensitive AV's may flag the Automatic Renewal via the Task, and NOT
    because of KMS, because for them it's suspicious to run long scripts in the background as Tasks.
 
    It's recommended to set exclusions in Antivirus for
    C:\ProgramData\Online_KMS_Activation\Activate.cmd
 
    ----------------------------------------------------------
-   
- - When using Online KMS plus HWID Digital License, Online KMS script will be set to skip Windows 
-   activation (if the HWID activation was applied but was not successful due to lack of internet 
-   at the time of installation of Windows) but will register the KMS for other products, and all 
-   later installed Volume License (VL) products (MS Office) will self-activate when going online. 
+  
+ - When using Online KMS plus HWID Digital License, Online KMS script will be set to skip Windows
+   activation (if the HWID activation was applied but was NOT successful due to lack of internet
+   at the time of installation of Windows) but will register the KMS for other products, and all
+   later installed Volume License (VL) products (MS Office) will self-activate when going online.
 
- - When using Online KMS plus KMS38, Online KMS will not skip Windows activation but skip KMS38 
-   activation and will register the KMS for other products, and all subsequently-installed Volume 
+ - When using Online KMS plus KMS38, Online KMS will NOT skip Windows activation but skip KMS38
+   activation and will register the KMS for other products, and all subsequently-installed Volume
    License (VL) products (MS Office) will self-activate when going online.
 
 ----------------------------------------------------------------------------------------------------
    HWID (Fallback to KMS38):
 ----------------------------------------------------------------------------------------------------
-  
- - In this method, KMS38 will be used for the activation in case the Windows version is not 
+ 
+ - In this method, KMS38 will be used for the activation in case the Windows version is NOT
    supported by HWID. For example, Windows 10 LTSC and Windows server.
 
 ----------------------------------------------------------------------------------------------------
    Activation Type       Supported Product             Activation Period
 ----------------------------------------------------------------------------------------------------
-   
+  
    Digital License    -  Windows 10                 -  Permanent
    KMS38              -  Windows 10 / Server        -  Until the year 2038
-   Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be 
+   Online KMS         -  Windows / Server / Office  -  For 180 Days, renewal task needs to be
                                                        created for lifetime auto-activation.
-   
+  
 ----------------------------------------------------------------------------------------------------
-   
+  
    * For more details, use the ReadMe.txt included in the respective activation folders.
 :5:
 
@@ -1960,18 +1960,18 @@ slmgr.vbs /rearm
 
  - If you don't know what KMS38 is, then first check it in the Read Me.
 
- - By default, a KMS38 Activation is vulnerable to unintended overwriting/replacement and 
+ - By default, a KMS38 Activation is vulnerable to unintended overwriting/replacement and
    neutralization by a 180-Day KMS Activator (non-KMS38 Activator).
-   However, with a few tricks you can ensure that no alternative KMS Activator can replace KMS38 
+   However, with a few tricks you can ensure that no alternative KMS Activator can replace KMS38
    Activation by accident or even on purpose. This script demonstrate how to do/undo that.
 
  - Protect KMS38:
    - How does KMS38 Protection work?
-     In the KMS activation method, the Windows Operating System first checks the KMS IP registered 
-     as a specific KMS, and if that is not defined then it checks the Global KMS IP.
+     In the KMS activation method, the Windows Operating System first checks the KMS IP registered
+     as a specific KMS, and if that is NOT defined then it checks the Global KMS IP.
      Another fact is that if LocalHost (127.0.0.2) is defined as KMS IP in the Windows 8.1 and 10 OS's
-     then Windows will not accept it as a valid KMS IP.
-     This script simply utilizes the above facts to protect the KMS38 activation from being 
+     then Windows will NOT accept it as a valid KMS IP.
+     This script simply utilizes the above facts to protect the KMS38 activation from being
      overwritten by any alternative 'normal' 180-Day KMS Activation.
 
      Script steps-
@@ -2009,15 +2009,15 @@ where X is Windows edition Activation ID.
    What are those big blocks of text in this script? [MAS_1.4_AIO]
 ====================================================================================================
 
-   These big blocks of text contain the files required for the Activations, and Office Retail 2 VL 
+   These big blocks of text contain the files required for the Activations, and Office Retail 2 VL
    conversion.
 
    The file to text, and text to file, conversions are done with the script named "Compressed2TXT"
    by @AveYo aka BAU https://github.com/AveYo/Compressed2TXT
 
-   The purpose behind doing this is straightforward. It is to make an All-in-One script, and an 
+   The purpose behind doing this is straightforward. It is to make an All-in-One script, and an
    All-in-One script can't be created without file to text conversion.
-   But still if you are not feeling comfortable in using it then you can use another version I've made,
+   But still if you are NOT feeling comfortable in using it then you can use another version I've made,
 
    MAS - (separate files version)
    Homepages-
@@ -2025,7 +2025,7 @@ where X is Windows edition Activation ID.
    GitHub: https://github.com/massgravel/Microsoft-Activation-Scripts
    GitLab: https://gitlab.com/massgrave/microsoft-activation-scripts
 
-   When required, the script extracts the files into the "C:\Windows\Temp\_MAS" and / or 
+   When required, the script extracts the files into the "C:\Windows\Temp\_MAS" and / or
    "C:\Windows\Temp\_Ticket_Work\" folder.
 
    ================================================
@@ -2033,27 +2033,27 @@ where X is Windows edition Activation ID.
    ================================================
 
    1st big block of unreadable text contains following 4 files:
- 
+
    fabb5a0fc1e6a372219711152291339af36ed0b5 *gatherosstate.exe                  Virus Total = 0/71
    ca3a51fdfc8749b8be85f7904b1c238a6dfba135 *slc.dll                            Virus Total = 0/68
    578364cb2319da7999acd8c015b4ce8da8f1b282 *ARM64_gatherosstate.exe            Virus Total = 0/69
    5dbea3a580cf60391453a04a5c910a3ceca2b810 *ARM64_slc.dll                      Virus Total = 0/67
- 
+
    Virus Total Report Date: 2020-01-21
- 
+
   - File Sources:
-  
+ 
     - gatherosstate.exe (Original):
       From Windows 10 x86 14393 ADK
- 
+
     - ARM64_gatherosstate.exe (Original):
       From Windows 10 ARM64 18362 ISO
- 
+
     - ARM64_slc.dll and slc.dll:
- 
+
       Original slshim
       https://github.com/vyvojar/slshim
- 
+
       Improved by @mspaintmsi
       https://www.nsaneforums.com/topic/316668--/?do=findComment&comment=1497887
       https://github.com/massgravel/MASSGRAVE
@@ -2068,13 +2068,13 @@ where X is Windows edition Activation ID.
    =======================================================
 
    2nd big block of unreadable text contains this one file:
-  
+ 
    48d928b1bec25a56fe896c430c2c034b7866aa7a *ClipUp.exe                         Virus Total = 0/68
-  
+ 
    Virus Total Report Date: 2020-01-21
-  
+ 
    - File Sources:
-  
+ 
    - ClipUp.exe (Original):
      From Windows server 2016 x64 ISO
      This file is required to KMS38 activate Server Cor and Acor editions.
@@ -2084,16 +2084,16 @@ where X is Windows edition Activation ID.
    =======================================================
 
    3rd big block of unreadable text contains these 3 files:
-  
+ 
    d30a0e4e5911d3ca705617d17225372731c770e2 *cleanosppx64.exe                   Virus Total = 0/66
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
    9d5b4b3e761cca9531d64200dfbbfa0dec94f5b0 *_Info.txt                          Virus Total = 0/59
-  
+ 
    Virus Total Report Date: 12-11-2019
-   
-   These .exe files are official Microsoft files and in this script, these are used in 
+  
+   These .exe files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -2116,8 +2116,8 @@ for /f "delims=" %%a in ('%_psc% "& {write-host $([Environment]::GetFolderPath('
 cd /d "%desktop%"
 set "Dir=%desktop%\$OEM$\$$\Setup\Scripts"
 
-if exist $OEM$ goto Exist
-if not exist $OEM$ goto NotExist
+if EXIST $OEM$ goto Exist
+if NOT EXIST $OEM$ goto NotExist
 
 :Exist
 echo _____________________________________________________
@@ -2283,7 +2283,7 @@ exit /b
 call "%~dp0HWID_Activation_AIO.cmd" /u
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWIDsetup:
 
@@ -2301,7 +2301,7 @@ exit /b
 call "%~dp0KMS38_Activation_AIO.cmd" /u
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMS38setup:
 
@@ -2313,7 +2313,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2330,7 +2330,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMSsetup:
 
@@ -2342,7 +2342,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2362,7 +2362,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat %SkipW
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm %SkipWinAct%
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWIDKMSsetup:
 
@@ -2374,7 +2374,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2393,7 +2393,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :KMS38KMSsetup:
 
@@ -2413,19 +2413,19 @@ for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 
 ::  Check Windows Edition
 set osedition=
-for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' and PartialProductKey is not NULL) get LicenseFamily /VALUE" 2^>nul') do if not errorlevel 1 set "osedition=%%a"
-if not defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
+for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' and PartialProductKey is NOT NULL) get LicenseFamily /VALUE" 2^>nul') do if NOT errorlevel 1 set "osedition=%%a"
+if NOT defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
 
 ::  Check Installation type
 set instype=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if NOT errorlevel 1 set "instype=%%b"
 
 set KMS38=
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
 if "%osedition%" equ "EnterpriseG" set KMS38=1
 if "%osedition%" equ "EnterpriseGN" set KMS38=1
-if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%instype%" neq "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2434,7 +2434,7 @@ call "%~dp0HWID_Activation_AIO.cmd" /u
 )
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWID_FB_KMS38setup:
 
@@ -2446,7 +2446,7 @@ exit /b
 :: Change value from 1 to 0 to disable KMS Renewal And Activation Task
 set Renewal_And_Activation_Task=1
 
-:: Change value from 1 to 0 to disable KMS activation desktop context menu 
+:: Change value from 1 to 0 to disable KMS activation desktop context menu
 set Desktop_context_menu=1
 
 ============================================================================
@@ -2464,19 +2464,19 @@ for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 
 ::  Check Windows Edition
 set osedition=
-for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' and PartialProductKey is not NULL) get LicenseFamily /VALUE" 2^>nul') do if not errorlevel 1 set "osedition=%%a"
-if not defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
+for /f "tokens=2 delims==" %%a in ('"wmic path SoftwareLicensingProduct where (ApplicationID='55c92734-d682-4d71-983e-d6ec3f16059f' and PartialProductKey is NOT NULL) get LicenseFamily /VALUE" 2^>nul') do if NOT errorlevel 1 set "osedition=%%a"
+if NOT defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
 
 ::  Check Installation type
 set instype=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if NOT errorlevel 1 set "instype=%%b"
 
 set KMS38=
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseS" set KMS38=1
 if "%winbuild%" GEQ "17763" if "%osedition%" equ "EnterpriseSN" set KMS38=1
 if "%osedition%" equ "EnterpriseG" set KMS38=1
 if "%osedition%" equ "EnterpriseGN" set KMS38=1
-if not "%instype%" equ "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
+if "%instype%" neq "Client" echo %osedition%| findstr /I /B Server 1>nul && set KMS38=1
 
 if defined KMS38 (
 call "%~dp0KMS38_Activation_AIO.cmd" /u
@@ -2489,7 +2489,7 @@ if %Renewal_And_Activation_Task% EQU 1 call "%~dp0Renewal_Setup.cmd" /rat %SkipW
 if %Desktop_context_menu% EQU 1 call "%~dp0Renewal_Setup.cmd" /dcm %SkipWinAct%
 
 cd /d "%SystemRoot%\Setup\"
-if exist "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
+if EXIST "%SystemRoot%\Setup\Scripts\" @RD /S /Q "%SystemRoot%\Setup\Scripts\"
 exit /b
 :HWID_FB_KMS38-KMSsetup:
 
@@ -2504,7 +2504,7 @@ goto MainMenu
 
 cls
 set "_ReadMe=%SystemRoot%\Temp\ReadMe.txt"
-if exist "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
+if EXIST "%_ReadMe%" del /f /q "%_ReadMe%" %_null%
 call :_export 9 "%_ReadMe%" ASCII
 start notepad "%_ReadMe%"
 timeout /t 2 %_null%
@@ -2521,7 +2521,7 @@ goto MainMenu
 
 :Exit
 
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 exit /b
 
 :+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2537,7 +2537,7 @@ exit /b
 
 :_Start
 cls
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 md "%MAS_Temp%\" >nul 2>&1
 echo:&echo Extracting Files to %MAS_Temp%\
 pushd "%MAS_Temp%\"
@@ -2545,7 +2545,7 @@ exit /b
 
 :_End
 pushd "%SystemRoot%\Temp\"
-if exist "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
+if EXIST "%MAS_Temp%\" @RD /S /Q "%MAS_Temp%\" %_null%
 echo:&echo Cleaning Extracted Files...
 timeout /t 1 > nul
 exit /b
@@ -2557,8 +2557,8 @@ exit /b
 %_null% %_psc% "$f=[io.file]::ReadAllText('!batp_!') -split ':cleanospp\:.*';iex ($f[1]);X 1;"
 
 set ext_f=
-if not exist "%MAS_Temp%\BIN\cleanosppx64.exe" set ext_f=1
-if not exist "%MAS_Temp%\BIN\cleanosppx86.exe" set ext_f=1
+if NOT EXIST "%MAS_Temp%\BIN\cleanosppx64.exe" set ext_f=1
+if NOT EXIST "%MAS_Temp%\BIN\cleanosppx86.exe" set ext_f=1
 
 if defined ext_f (
 echo:
@@ -2635,7 +2635,7 @@ goto OnlineKMSActivation
 ::---------------------------------------------------------------------------------------------------------
 ::
 ::   HWID/KMS38 methods Suggestions and improvements:-
-::  
+:: 
 ::   @sponpa       New ideas for the HWID/KM38 Generation
 ::                 https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 ::
@@ -2647,7 +2647,7 @@ goto OnlineKMSActivation
 ::   Kind Help:-
 ::
 ::   Thanks for having my back and answering all of my queries. (In no particular order)
-::   
+::  
 ::   @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 ::
 ::   @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -2666,7 +2666,7 @@ goto OnlineKMSActivation
 ::
 ::   Maintained by @WindowsAddict
 ::
-::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+::   P.S. I (@WindowsAddict) did NOT help in the development of HWID/KMS38 Activation in any way, I only
 ::   manage batch script tool which is based on the above mentioned original co-authors activation methods.
 ::
 ::=========================================================================================================
@@ -2687,7 +2687,7 @@ set Unattended=
 set _args=
 set _elev=
 set "_arg1=%~1"
-if not defined _arg1 goto :DL_NoProgArgs
+if NOT defined _arg1 goto :DL_NoProgArgs
 set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
@@ -2712,7 +2712,7 @@ set wApp=55c92734-d682-4d71-983e-d6ec3f16059f
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 goto DL_Done
 )
@@ -2800,8 +2800,8 @@ mode con: cols=102 lines=31
 ::  Check Windows OS name
 
 set winos=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if not errorlevel 1 set "winos=%%b"
-if not defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if not errorlevel 1 set "winos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
+if NOT defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
 
 call :DL_CheckPermAct
 if defined PermAct (
@@ -2809,7 +2809,7 @@ if defined PermAct (
 echo ___________________________________________________________________________________________
 echo:
 call :DL_color1 "     " %Black% &call :DL_color "Checking: %winos% is Permanently Activated." %Green%
-call :DL_color1 "     " %Black% &call :DL_color "Activation is not required." %Gray%
+call :DL_color1 "     " %Black% &call :DL_color "Activation is NOT required." %Gray%
 echo ___________________________________________________________________________________________
 echo:
 if defined Unattended goto DL_Done
@@ -2845,12 +2845,12 @@ goto DL_Done
 ::  Check SKU value
 
 set SKU=
-for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
-if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
+for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
+if NOT defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
 
 if "%osSKU%" equ "" (
 %ELine%
-echo SKU value was not detected properly. Aborting...
+echo SKU value was NOT detected properly. Aborting...
 goto DL_Done
 )
 
@@ -2865,7 +2865,7 @@ echo [%winos% ^| %winbuild% ^| SKU:%osSKU%] HWID Activation is Not Supported.
 goto DL_Done
 )
 
-::  Check Windows Architecture 
+::  Check Windows Architecture
 
 set arch=
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > nul && set arch=x86|| set arch=x64
@@ -2912,12 +2912,12 @@ set "wlecho=Checking %_2%                        [Service Status -%wl_state%] [S
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 set "wuecho=Checking %_4%                       [Service Status -%wu_state%] [Startup Type -%wu_start_type%]"
 
-if not "%Cl_start_type%" equ "Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%wl_start_type%" equ "Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
-if not "%sp_start_type%" equ "Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if "%Cl_start_type%" neq "Demand"       (call :DL_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if "%wl_start_type%" neq "Demand"       (call :DL_color "%wlecho%" %Red% & set wlst_e=1) else (echo %wlecho%)
+if "%sp_start_type%" neq "Delayed-Auto" (call :DL_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
 if "%wu_start_type%" equ "Disabled" (set "_C=%Red%") else (set "_C=%Gray%")
-if not "%wu_start_type%" equ "Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
+if "%wu_start_type%" neq "Auto"         (call :DL_color "%wuecho%" %_C% & set wust_e=1) else (echo %wuecho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -2931,10 +2931,10 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%wlst_s%
 for %%# in (Clst_u,wlst_u,spst_u,wust_u) do if defined %%# set st_u=1
 if defined st_u (call :DL_color "Error in changing Startup Type to       [ %Clst_u%%wlst_u%%spst_u%%wust_u%]" %Red%)
 
-if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%wl_state%" equ "Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
-if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
-if not "%wu_state%" equ "Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
+if "%Cl_state%" neq "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if "%wl_state%" neq "Running" (%_psc% start-service %_2% %nul% && set wl_s=%_2% || set wl_u=%_2% )
+if "%sp_state%" neq "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if "%wu_state%" neq "Running" (%_psc% start-service %_4% %nul% && set wu_s=%_4% || set wu_u=%_4% )
 
 for %%# in (Cl_s,wl_s,sp_s,wu_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%wl_s%%sp_s%%wu_s%] [Successful])
@@ -2963,7 +2963,7 @@ for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%
 call echo Checking Installed Product Key          [%_channel%] [Partial Key -%%_partial%%]
 )
 
-if not defined _Keyexist (
+if NOT defined _Keyexist (
 set "InsKey=Installing Generic Product Key         "
 wmic path %sls% where __CLASS='%sls%' call InstallProductKey ProductKey="%key%" %nul% && (
 for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%' and PartialProductKey<>null" Get ProductKeyChannel /value 2^>nul') do set "_channel=%%#"
@@ -2981,7 +2981,7 @@ wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 
 echo:
 set "temp_=%SystemRoot%\Temp\_Ticket_Work"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 md "%temp_%\" %nul%
 
 pushd "%temp_%\"
@@ -3002,8 +3002,8 @@ set _slc_hash=ca3a51fdfc8749b8be85f7904b1c238a6dfba135
 )
 
 set cfailed=
-if not exist "%temp_%\gatherosstate.exe" set cfailed=1
-if not exist "%temp_%\slc.dll" set cfailed=1
+if NOT EXIST "%temp_%\gatherosstate.exe" set cfailed=1
+if NOT EXIST "%temp_%\slc.dll" set cfailed=1
 
 set "copyfiles=Extracting Required Files to Temp      "
 if defined cfailed (
@@ -3034,9 +3034,9 @@ echo %copyfiles% [%SystemRoot%\Temp\_Ticket_Work\] [Successful]
 
 set "GatherMod=Creating modified gatherosstate        "
 
-if not "%arch%" equ "ARM64" (
+if "%arch%" neq "ARM64" (
 rundll32 "%temp_%\slc.dll",PatchGatherosstate %nul%
-if not exist "%temp_%\gatherosstatemodified.exe" (
+if NOT EXIST "%temp_%\gatherosstatemodified.exe" (
 call :DL_color "%GatherMod% [Unsuccessful] Aborting" %Red%
 call :DL_color "Most likely Antivirus program blocked the process, disable it and-or create proper exclsuions." %Magenta%
 goto :DL_Act_Cont
@@ -3054,9 +3054,9 @@ set _gather=gatherosstate.exe
 set _gather=gatherosstatemodified.exe
 )
 
-:: Multiple attempts to generate the ticket because in some cases, one attempt is not enough.
+:: Multiple attempts to generate the ticket because in some cases, one attempt is NOT enough.
 
-set "_noxml=if not exist "%temp_%\GenuineTicket.xml""
+set "_noxml=if NOT EXIST "%temp_%\GenuineTicket.xml""
 
 start /wait "" "%temp_%/%_gather%" %nul%
 %_noxml% timeout /t 3 %nul%
@@ -3073,19 +3073,19 @@ goto :DL_Act_Cont
 echo %GenTicket% [Successful]
 )
 
-:: clipup -v -o -altto <Ticket path> method to apply ticket was not used to avoid the certain issues in case the username have spaces or non English names.
+:: clipup -v -o -altto <Ticket path> method to apply ticket was NOT used to avoid the certain issues in case the username have spaces or non English names.
 
 set "InsTicket=Installing GenuineTicket.xml           "
 set "TDir=%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket"
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 copy /y /b "%temp_%\GenuineTicket.xml" "%TDir%\GenuineTicket.xml" %nul%
 
-if not exist "%TDir%\GenuineTicket.xml" (
+if NOT EXIST "%TDir%\GenuineTicket.xml" (
 call :DL_color "Failed to copy Ticket to [%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket\] Aborting..." %Red%
 goto :DL_Act_Cont
 )
 
-set "_xmlexist=if exist "%TDir%\GenuineTicket.xml""
+set "_xmlexist=if EXIST "%TDir%\GenuineTicket.xml""
 
 %_psc% Restart-Service ClipSVC %nul%
 %_xmlexist% timeout /t 2 %nul%
@@ -3107,10 +3107,10 @@ set fallback_=1
 
 %_xmlexist% (
 call :DL_color "%InsTicket% [Unsuccessful] Aborting..." %Red%
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 goto :DL_Act_Cont
 ) else (
-if not defined fallback_ echo %InsTicket% [Successful]
+if NOT defined fallback_ echo %InsTicket% [Successful]
 if defined fallback_ call :DL_color "%InsTicket% [Successful] [Fallback method: clipup -v -o]" %Red%
 )
 
@@ -3125,7 +3125,7 @@ call :DL_CheckPermAct
 if defined PermAct goto DL_Act_successful
 
 call :DL_ReTry
-if not "%ErrCode%" equ "" set "Error_Code_=[Error Code %ErrCode%]"
+if "%ErrCode%" neq "" set "Error_Code_=[Error Code %ErrCode%]"
 call :DL_CheckPermAct
 
 :DL_Act_successful
@@ -3151,10 +3151,10 @@ call :DL_color "%changing_wust_back% [Unsuccessful]" %Red%
 )
 
 popd
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 
 set "delFiles=Cleaning Temp Files                    "
-if exist "%temp_%\" (
+if EXIST "%temp_%\" (
 call :DL_color "%delFiles% [Unsuccessful]" %Red%
 ) else (
 echo %delFiles% [Successful]
@@ -3195,14 +3195,14 @@ exit /b
 ::  Check Windows Permanent Activation status
 ::  Written by @abbodi1406
 
-wmic path %slp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is not NULL) get Name 2>nul | findstr /i "Windows" 1>nul && set PermAct=1||set PermAct=
+wmic path %slp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is NOT NULL) get Name 2>nul | findstr /i "Windows" 1>nul && set PermAct=1||set PermAct=
 exit /b
 
 ::========================================================================================================================================
 
 :DL_ReTry
 
-if defined IntCon if not defined wust_u if not defined wu_u call :DL_ReTry_2
+if defined IntCon if NOT defined wust_u if NOT defined wu_u call :DL_ReTry_2
 
 ::  Detect Error Code in the Activation
 ::  Written by @abbodi1406
@@ -3250,7 +3250,7 @@ if defined Unattended (
 echo Exiting in 3 seconds...
 if %winbuild% LSS 7600 (ping -n 3 127.0.0.1 > nul) else (timeout /t 3)
 :: set a value to use in certain conditions of setupcomplete.cmd file.
-if defined key if not defined PermAct (endlocal & endlocal & set HWIDAct=1)
+if defined key if NOT defined PermAct (endlocal & endlocal & set HWIDAct=1)
 exit /b
 )
 pause
@@ -3386,7 +3386,7 @@ exit /b
 ::  Virus Total Report Date: 2020-01-21
 ::
 :: - File Sources:
-:: 
+::
 ::   - gatherosstate.exe (Original):
 ::     From Windows 10 x86 14393 ADK
 ::
@@ -3541,7 +3541,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::D-1n#0n.l@0Teog+Yokwh/r8-4;37w;CP2Vn^19.CF[1W-6a{{YSPA~xz4}}b&C=7Fxca]G(/|w.Pe|3tMHbxCMS]suGOLViLeI[-S;@iR|[Q;OtxVR(&6b/sA7aK
 ::G$n?hU5.!#k_a&Rrbi1+RK-Q{F=4}p#-18r@M1nF5Zjt!_{}_c_s?^B^1H]5JTbcJ.U]af-i$WcNI~2zB/lIJ$@&/n$]E.C/hyv~@TqckMdPYD07k]{&(da9g~_Ny
 ::)Gz+intwG^d?4^hHW@gN?9YGy!@$k^F,XNKIlc4-u_l@ruDOF~W@xg{J?|MNl|nnxsGr/p7bPtQ&GPD5fM9jU#|VHyHgz{v-iXLJelv/q#tjUNF[73AXR.7@EdHra
-::8AFI-@1$CA5PFz@i,@l+wXjtvWnN+xdW+4.?LrtamAWr!H7mNH(y7F?IF!&Q{mE)_KexxOEKXu!ca)kU9JE/7l3BMcGey[+l67b-nG}YIrYjBHqbNwQMl9(MbW854
+::8AFI-@1$CA5PFz@i,@l+wXjtvWnN+xdW+4.?LrtamAWr!H7mNH(y7F?if!&Q{mE)_KexxOEKXu!ca)kU9JE/7l3BMcGey[+l67b-nG}YIrYjBHqbNwQMl9(MbW854
 ::,[@xl08h+YH#WyG+]P@+lHip@Q!|a}4LO8QaBjFxu,0D2BwOyq@x#?^MRC4YSK?v}ev4o|a1PPF?vKzT71!+y{PQT6=qC1V]t5}9[3u.vp#V/cevJu;btb#h=0eOj
 ::_^w$q8#5#d!K33=LX|Db|D}][QO_,N_CwLi2EmK=d5ppiJz#mP!.EZ[N8b!j_{X0M!7e)CQe-j/#rq?!M8rf[J?K&AG&6iXbQ4ViTx@/2o2pu1HJ~8G9Bb}]p!DV!
 ::Zf7IE?@[pFETK_w7^8^M(yOL-m;BhSt4EG{e&~m.[PbVjTy3{,366k?Hu9jFwjnQ(a-{b#H$Fm&j@3l8NGKK[o_n}+G~Jdl]M1MFxr3tI!_ZLp#DOsrkA+/SL2f-o
@@ -3989,7 +3989,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::A^=u&ttf2$m;04P@^9F[sBUM.xR?s|sVyN|YB_Y95JIRyA@/m4+X_j/sI@pIS#r$RB$uhyiDDxQ?qEEHu0xXI-Nmj=Th+fFBd0T!)o?rYiT?iQf!Nog//4_GKe}jt
 ::xIDndqw(e4R2lr8h2Z}T0;tE3v0#eG7TfM(A?LkQ(}RZWOZnEFCj9l(R06tht&wNGo4N3yDvEc6EP$l{.QIlMJava#oj~9Y;-N#{zYGA92,UhSm]XT6RM2s1UDvp;
 ::yDIffgHP.9/X3P7N5WGutX?fwGq#dSx;3H&DsRB~dJ,ZGedc,a7ovpKA^=g;R0Y7_3rK6C9iVCxPM9s}1=TSfU~(t^,K4DR|MGLzhx?TZ?6KmE;v&YNjqSWuKD].F
-::5[YW--J8Oh(/72i[OK1sEV8kw&(mmuY,_S+;f[}Ioe(UvCD8m1&}jpe47fdBm}NnSV,,88S^LCi,bqQrKHQKPV+!I~,wLEdGjwuN-NrnGhK~j+IF&J)m?|kdtAccg
+::5[YW--J8Oh(/72i[OK1sEV8kw&(mmuY,_S+;f[}Ioe(UvCD8m1&}jpe47fdBm}NnSV,,88S^LCi,bqQrKHQKPV+!I~,wLEdGjwuN-NrnGhK~j+if&J)m?|kdtAccg
 ::LGkbg(w]&r!Qcj[#gYvKHU(=By~$WDq,33]s[X)6C#3;uWTHwMQl.]tB!Nj~j-xh#Z5sk_;(=}hyCzZRRMo]pK05KMOtGHGqwS#};Rw,$NsB}&vXVOi,m^SP(H6hH
 ::riq0h7ZuL{q5B;cYg{LhNK4@LiugpZPQW)6Ym^A(jYBfjoeGn!b;x_&j){N?asEDPIO)N[rFmSNtJ1@ZHB|d}@WASc6jioSya-Yr4y[c)-r?}rBTBt0fjcui;NvHK
 ::?8hW8lC&OQ_H/q_ORTOQqKHo]CNpz4K7h(W!x@EoK.&(q8-N8,ibepS0HCM;UjXj[]|(1Cj(&$u7.MVlnU/8PkIdC1b#P0]BxxM_/(op/bsg5&V@6DsUVQPfSjR++
@@ -4383,7 +4383,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::utP{NL[ZRo75^1RH)Z{LR5KC]gf-![5VR?{old~@OLdjVpdrXKU^cR8Hy;vb|60$,$y!DR;rK)eSe8?QwoX{3!/RkCYNfo]Q?,sbGS1|?^Tf-[QE9XlkRII8s&ERd
 ::W5pxjMAJ,l2OR~~_4{WjY^59!mi[u_SL2/?EPwe;e~ZzC|7#Eg2S4CaOPOX(nGb)DtmMDC-H6,Vu[Hth2Fg,drtXYqEWjL./sQ]k0i-nT#G&0o9y,fpg#lQn!b&)Y
 ::j6$,rTcyO6Y!R?#PgD;R!r9MzZx/{[95wfz^ICnEwGJJiJh5eB{TP84$q|WlgsA1fR7vY_H~d.V(!YqPIWqn7)KOBU5Mr!u@10)S&64PUx}g,~t8qtW#oiS05$V9u
-::jJF7kX6(k#zq}[7P3$Y4]Euet)y@MvbjFp=$a,[Ci3=qo+WXVA$4E-W)e(r01GD@UF;9TALfdFa;#FI?|IF/,R}F|RVh]Ee.Kj$fioA02!JdVLBuzKX5ih#9-CK{)
+::jJF7kX6(k#zq}[7P3$Y4]Euet)y@MvbjFp=$a,[Ci3=qo+WXVA$4E-W)e(r01GD@UF;9TALfdFa;#FI?|if/,R}F|RVh]Ee.Kj$fioA02!JdVLBuzKX5ih#9-CK{)
 ::m|5#I^{FzfL#nMJsk?YZuc.!PZ,R#)cql_@Hq4nTVO+!X/{c4+nx4V;VWcTj+wIfXf@kQG^+5[c4pGKtt|Fubu4&z1lIM.OtmGt+Gn81sYYrDT8PyE6z3zaB7Q_pc
 ::b+Vx8DSLBn1PPq)NZw^MEIY6/T{=){Qz0PX2PYV7,z_.a[M!jRqN=i.fhnw2^Z,~m&^V)V[k^[/Nd-(Z(_r/X;Fx$xkS](gJ{KYTkhg0EGq{akp^tFYiB9?^/obZu
 ::XNeaNOL=By6M;^[&Hi8qGhYIP36agC8tyz7z{@({?kEPfylX@}{d&#@stdx)ANj-84upF(V#-ah@eaG@m^ZqAh);@W6Bauvy8LZc^BAs{={x}^ve?~nx;MsLzqc$o
@@ -5074,7 +5074,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::=Jj{,L#,GOhbzF9DP1#Bd[gZD7qJvtTz~l_?|5D^2[V0LIie4/X!Zu^1G(Wl__j|K5b/Nvb)kDSNd518Ah?h$7O]$n0NEYA+rI.2v/b_HEjk@pD2GR8J!{Y5DwlDF
 ::p0;tnYf1CvX)NG!$F;NV^NBD~p,#W7V9)!kFvGk-F63=$hHmHvFA!b9igiDuAMw(b(SjKq9p?BXe4aX/2++,ilYXO-&,@$=&s0F~|2tz$ue^d|-iF5BWlXiB5]sWL
 ::$V;r~Qz#O0{~7Gd@^0DZGgVepd4JD1L+,&Co$D.WtU!Xl8@=_X)Z9v8J=qv]Y54pf70i@0$o)Nj837.^{gE~dSyM26=Xi6ru1H[RoxGWMLh0O8KLQv548!$s48FG-
-::YT!m^bEw,.[Z.Q~7s2ljjfpsJU/IJ+O0QM!d#@^|_xlZ#xRB^s&c|NnB,IF^8~7yE0EP3+Nj6(+uBMyj[WXrO$dW{mE;^Pyl#!o8p=j;};6K]sK)Ng=WZTwaBvRgj
+::YT!m^bEw,.[Z.Q~7s2ljjfpsJU/IJ+O0QM!d#@^|_xlZ#xRB^s&c|NnB,if^8~7yE0EP3+Nj6(+uBMyj[WXrO$dW{mE;^Pyl#!o8p=j;};6K]sK)Ng=WZTwaBvRgj
 ::0T&dUMz2Um,.3sYZwY32jFFeLU}M}D3P&=({.vVmw0Mnd,|H6~&y?B#,NZ)u,nj}vi1V$d8)=zvp8v(xt1a.cQtkXB2N1Z/r.}z#WAc{o{FO+ddcRG0iRRjS9S=wb
 ::Y^#YP{FHD29)W!s]36yq#__P~Nl~E|pe,TV.-j4.mwC}$?]QoG-YcLv9^taqp;q1U$!kEGT^J/&AA[^gx?Ee;6JvVUEa8jmjC7!Vf0jC7)/Qk7a+AwQF/v!BUeBQg
 ::xzv&K2[G)HWI6j7A2)jW+}N?y0zYv9uoaOA3^iy5+!4qUdRU(ep.6A2!z44tqX~g{@q6HKJjhFV;8^VlrvmmKo$e5.6qRj;2aE.tod/?BvP]X=zYX^zRD7a6]9u2B
@@ -5227,7 +5227,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::#BbaibNf)w0]-uj1)_3+d8-H)!}wloQfYF]n1rfcbyC&PyD.Xm0CADISoqwQTuiLfdV$yYyU6rNKJ)Sv8A6(MyEtV5HntO1_n@am^G}#)wQok7@|i2+0Z7a,]B)-6
 ::AsbI.K6aDO=ttYF?QrG3AWK2z[z(Z}p4NJ!8B${aaIi-)]?TKje39BVhtCM$X=iu3]&_8@d(BT^L;jcqGCc;/HmWQr,nuz2.;g4XwjYS?ax|t)SZ5DERWBl;DDVnH
 ::(X9Hi0C|3X4r$;Xgoq#,,zjR)9(.spLDc)ickoHz5q0uFZ;dhBw@9}GpstAT|FmGG(Sb-_R2n~j#b.8As^Ov|d!p{i^6Jq!Tw54eXfJivQjF(H+f)xb7}48Jkk)JG
-::@12@;c4O3{RVub,Z?q3X!@Bol3J&M#WyiPx$-~lw=}9,O9Yx+7wKJj!elpnX[5(IF]k@!.YWOV{MP7XY(x^o_61iA?PREfo9+cOv6C7D5+1AF2LNf=yt,Y1vddEC)
+::@12@;c4O3{RVub,Z?q3X!@Bol3J&M#WyiPx$-~lw=}9,O9Yx+7wKJj!elpnX[5(if]k@!.YWOV{MP7XY(x^o_61iA?PREfo9+cOv6C7D5+1AF2LNf=yt,Y1vddEC)
 ::F|9hL(swu!{)/1.6#iVO[06S?U}BlGx@$q&&zM/)lru=eT]p&iOWRW5f@DAwa1,]llt61ndvB}RGHh56Eh2fYD$D_b@.frO^p2^Y$1/14Aid?wkEz)j$kVdQf/dZx
 ::g,vT|9VB[!/}~TrQ;06THtyvXGd|ojhuzP0(c@[XJNGbnwe^;#YQWP-sh1]#(t@2MdZI#v4djA?Of?2wKz-!xwK$6v3o=?paLsrB^s7W}7wE4Tnh8OYdot3obijFI
 ::/ZVY(tyiyk01t2CDgqs7jSpq}xwLpi=jAY!R8C@kaog3e!rjq!ngSAJvq1~QjH3c=bcMZ,SiIeZ#i(#2F9#~FsigP3R3p!#W^JjfiRFm=SnZ7qT[]/C8)sOvC(!53
@@ -5952,12 +5952,12 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::{zHgv+AqVaU2(X&_j3Q-?2XlLd=OFH!B&62BWTggr}NC5mj$UKz}fve^c6Si^&U^4DHwF1Zox..0G]lmC94ClEiZ542RU+Gp3|E9;{&VlQuZmLM{=_1)PU@l&5#9m
 ::veHeQ!MU_D-TT2XEH^{rOBnwiP8CGA&h1dYw+&!!Ajs)3aefsl(qSb@^oIo$dK+Ft-AH6.3Bm3ZXn@J@6kp#6@d(GF^frlW]YG}}O@{!qtn]n14.n}VPsAwc8]=+L
 ::(pk-7e(OV@s^!3z.5o=Z,$|SdD8}jLa,zpU|2@dP3Yl-?t8hW,jsc{r]K#{}sCdi~.f200_p[{X#7y}?K|{rnCdje|+LWI,WfPDREiAi+01(m{/bXFy!qK@b/sMBy
-::_uwUEHh0Zzg3A|_Zt1e1O1ipaa=|GG#IF$Z[=vdxIm_T#ki-R#4ye_bB];N^YRoPGuXz}AS&E_LSF[Eg1~wb0xNtvs7{#5v=(TsSq^nX&;eWV$2h]AB+GHkJSQ=Hd
+::_uwUEHh0Zzg3A|_Zt1e1O1ipaa=|GG#if$Z[=vdxIm_T#ki-R#4ye_bB];N^YRoPGuXz}AS&E_LSF[Eg1~wb0xNtvs7{#5v=(TsSq^nX&;eWV$2h]AB+GHkJSQ=Hd
 ::ujYU$u!?yY&C=)GIt7S-JI(?w=sr=toKpouS)W)8yCCjL4m~OV.Y/5=Ges,O)}T0b^dQ#]u?or;/Mh_i)^tSfJo$zovXHU]hh~vu{cbdm^,hpiT.{6;X(-odshW^O
 ::r6z1Di1O!bK5b6Lqb]4bq,[nmMVaQA{@EPL#iJ{&pXj2G?_x8+p#(?UHC/b01IZbN?ZBXNe2xtC5(IxErr4j,eyuA}QplqIs8;rF/LK^|1D[;C$$67-9,,v{h$iEF
 ::.|6{,]93DpyhR[[ecap$b9(@F9C]mBR.#+.gWBtT,ldiPfgf@aqpM;aaAfjFrS(?x,]1)uA,B}pTtW;.00000oa$s@mtlHRn!#u&,EXBQSWbL?o.)R$tlkCLW;Z.Y
 ::6m@B|5!wS]+FVfFb_9J.w^|i84gc]lI,Ohw_yoVJ/F)l|zr@3I#|WTHrZv8adXMz?EONrRrMxSX!)~o&9K4=aT1s-VLH6gI8]pmj5iF17osy)dD?|8;p+fLBkpIAg
-::yGprCr.)=jo[!Iq95krQv=$5ir7Nylt=O_Z^IF!zjY?qxLCl?;oOvF|(B&?tFAdS4o,YMyxg1MS/{=^1nJ#wZ6m;|0H9{nU)kcwy^XlK[,2i6r7,yt4QI,WPD)}Id
+::yGprCr.)=jo[!Iq95krQv=$5ir7Nylt=O_Z^if!zjY?qxLCl?;oOvF|(B&?tFAdS4o,YMyxg1MS/{=^1nJ#wZ6m;|0H9{nU)kcwy^XlK[,2i6r7,yt4QI,WPD)}Id
 ::dfWi@)D@go-gQn6-=MfogPz,spY#XPv~B?Bq6Q4&1fhASP+CDHefs[=n7xVCK(eGIDIq+YzThlxOWrpEkc3ZI&!6tKG+Sh?00000ba.kDMl@+QDi;Bam}Ehet)d2Z
 ::#!]pjsWe$W.R3cVYxH|(K0o1tEv?B(J1X3U^WF/#//M8-{5[r,y+QDZQ}6&,9]6IllcQ,|StE7x$QPgT5aC/j!AZ3I=B@aMJK=,qG7xLn]~{1Mvyu}!p$[dcSWCUy
 ::;lIJtxg)W&0MMMOl!H4+#,x-VOV570,-A;{]jM.jAA5uY$F3oFz!faOE-nh|&3t0-E(xpQq7GGzN#E)NlXQBA,{s[Z70o)02+diq8Q=8Se)=/TCQ4(rkUemAgV)ms
@@ -6256,7 +6256,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::$(!Xes9KyPU{f.3![AW@o9iREasTbU(bccn,knazM@M/zo+QbO1)#bM.d)[Jo)~XQ[QPiKd7wp3V-OvGC@P?YaclFU&sRFtGl{RvA8_qWUu$-xwW)yWGWuKzAX$9d
 ::IuJ99Fg2C;zeu3jXX4ce[lSx5U5_CE9NSy.dB4c/Y79$F-pC/m!7r85t8g)k#N5L0Vj;[u]X(~,)}/Ig!Q.K]Zi84dVa~FuXC9H^K@p/7j{Vc9H&1uY7G,VVFTN4|
 ::NeZ3][MiF+RuaO{c;#vDm?O-5@9tIg#Q08AewZ)j7jD@jm,^S+es7;&x$(/EFwV!lk@jH;pCExRan_7UfC$2#f~~iJS}M8YapI-9E.KI=Xv7?q3okz1F1M_v5Ld=m
-::i9@IF]_$$h?Bg~+,8z!k|Bl~M)qEz+ndv}IM+r&xaBbYCJnqcK@gFEKM@F$cu}1L]U!cM)p;YRW.Yk^4K;#AfQ8?9kI-I;jls.WTv-M&+dZ9Be/RJf.k01=;^!dPj
+::i9@if]_$$h?Bg~+,8z!k|Bl~M)qEz+ndv}IM+r&xaBbYCJnqcK@gFEKM@F$cu}1L]U!cM)p;YRW.Yk^4K;#AfQ8?9kI-I;jls.WTv-M&+dZ9Be/RJf.k01=;^!dPj
 ::^1qagE~hV#(]_Ug,,J}2-}zzaao&}4a~j8&U}Bo&(&cf$6kbk0hoUI]zGvA8fMCn|swJs-Sv=9@dRf}+zQ.J4P#-[Wp]FWNeWFGeyT=6HGOZs5jnM&rm9=4;-[8A1
 ::6^_xe$0;WZ?cx46WtIJbYijuF=)i)8/Ln/r@]_kiM0gTfr&Ct05/lV@31R6Xlir2A4Dwqv;w!t|k{7@,W)7t(oMbo7^{rpyZb)O7Sdt6IAfYbn7ih8(=letT.c({G
 ::^+gYrdiWQgRf^!e-d$w4ckCLoyLQaCo$HG9nbU]frY#mdmZGqvoZ_$)!m?/$,|.2VH#,7Y,iqkZsvFzL@$#^g5OrrNCZKGWYR$6iv_ViGmbp/H9i;V^^By|psA|Qk
@@ -7195,7 +7195,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::tg(CW{^[kvYS{-cs/(;.CMwYA+{e7H7gn]/!}q4pmv27av(uH|fz5=sl^|@zd0-ER&F!]S=mGSjpwKCN#=dr6$#uYC$NsejnOLQ?l[0;Rg-nVuG;S-OqI$&6?pUS1
 ::iy]1;Logm,4?8(&OHYz]Mc0=0=KI|_L})00o5a2qHGy-]b6jk48wDI|y}uC]_dA.^+@D3(?pbizrN3w#-u/.B/oYp.bxMX,M?AxJ.(N@tY5,4VqLa}x#$;Q300000
 ::-slL~xGyrz2+Pk/Fq1q?o5Nx?7]i9w-Xm2y{RWb[$WMkTx6Eoce,A4xrj+~c)H|LPrzKKA/,1cH{YrxJHM52otpWF!=2azuD+ENK(gfZ]UjHkQ3nUp-y@+H!@0=}=
-::O}lgt+gXs&[|l#8=[d-H!nXP_E&L/rzti5ghp&2cA$6/67+!;es}8W,]]!d}d(V5I-Tvw7U_MeFnCaL6zp}RB&beORHV]1DE,L?TOo;[A0_{7=00000{IF#sQj{x?
+::O}lgt+gXs&[|l#8=[d-H!nXP_E&L/rzti5ghp&2cA$6/67+!;es}8W,]]!d}d(V5I-Tvw7U_MeFnCaL6zp}RB&beORHV]1DE,L?TOo;[A0_{7=00000{if#sQj{x?
 ::r#}]&77k8A8UBl0mU$ZXD6HX=tHFD-,Pb}o_!3cdI!ti,8Kiq7xR3fdIi5Mj=jIYq)XY91kiCrqxHzvW;A7pE)r|vP{=-5-^p{jNW=1_?i6UbPNNbQ!.^((1IKyGW
 ::LLG^YjKX.Xa(@zxTqhvXMC2j_H&UXFQM@7acm#Juz!85LZS=!aVIueBTh1hSxD@IqfM06iA18(~6={FB99G2g0qYQ{+mS/^!KU)yzc]o@r]mk/-t-=y[8CZx.VvWz
 ::B#nT@vP8Ucb+Z^o)yx|_m#jXwr6kt?]{D5A#Bo}QR{|Or/;3xKBZJ]Oqoj[2m#TEjt1F5dfO@81qFp#$!L)jFRpTCx#$Oqj,3TUaTN6wVS)Uzv&+W4XC~nb)=zIg@
@@ -8337,7 +8337,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::v0ywCv!NoB!48x=O|R5fDZzFp@5MO{JG-.E9Y;)z;}ZPo)m[6#baahP2KU@yOxFh+g)w!7!dioDT7c4mH;g$v/50aypMHh~WL?L@-nf8_^(Jn&pkI&hL6My51^oI!
 ::=-j,|bJc$eMc2w(e4&utS^68wGdg!A_=)W;a|Gn2TGIs+;QxTEXh$S}55f0Aat?QHq-C/w0qB&)dfR~0reLeMHW#NGM)~CVHwy||wvC$ib/&gyf].|/e]AcYC5{hF
 ::.53Gt{;6HVgVPM}OZN#h8Dj3mNM?d^2E5dKOgL.lJ)n#gT;2wAg$/Rm&,;KfQd6xP)l^}EBbra/kv@9G)-oOjL~;mkJ]lH~cO.3.nl~38nj(?Iae?=TcHMRCLZxi.
-::@xT&Sm_xmGRM},!0t]}-bJXTuT/E!/6J!.$5?Voa6avF=Sz8Bj5bM~|IF$@x.CV(Ver|_$zaj//f~ObQk.]dJ=,@@c2yfUt[@n-=M&Jux5GL@yc#TR^[+6U(I5&o.
+::@xT&Sm_xmGRM},!0t]}-bJXTuT/E!/6J!.$5?Voa6avF=Sz8Bj5bM~|if$@x.CV(Ver|_$zaj//f~ObQk.]dJ=,@@c2yfUt[@n-=M&Jux5GL@yc#TR^[+6U(I5&o.
 ::4(V,9JvQb?XSE,d08iGlP8DDwl7+z$R]cgD[mEh3w{nVeGEDd0gHUVR$kM4;!hbe53T!]JBvcc]VaNEmcI&UZB@Ws4oo$EC(PT9u4XPHkIaXn[=^gaHnG[UBTd~Uw
 ::bK}5f,Jzh|1257K=-=q4nw}LvbNPZ,_lC{9Wdk9(ygDYxIk9c|&Fm2.92J3^rz&jV(Bevid;pcW$h&}Qg|.SS@1P-xZcBp2t&3OLi+bBtpTbE{O3]@aIS.F0sT[VH
 ::_QWqeIT)Oi&p?1)sUqpy$e.Yjaut|Jvoo#KMbyXicuV61nqh(.s9P_P;cZDf878q41f52e,Tk@8aCBV[f1xW#lOPtHF7MBGt^agkZgJEt0zbSid^9i)1Or61CqLxV
@@ -8574,7 +8574,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::c/,$}ir7PTAH(4=Ojr)#yTi+Bwe4fac5ZlsLM3+=c)86I!_l;PXa|Eg5^M~5f)Pw&POkOD4ccztml9xU#_1s]XLulY{[xf~BVJ0u-ji/@s+DxdV/6UW3V3kv-m1ZN
 ::7Z(}81I=Ld3$r.kgXg=i93zBUxu@?Ca^rMC7xV,wc9+2m@XNo,4&ukND7EWie#){vFH$j]D.^(h_vnM-t?#pYH6c$cGVlEL(/(BAO0~;;Cj=l7u?eI(Sn?em+)SO@
 ::teNAIiAyvto4AjOa,8hvEHFz&F+$E7ifM8n1/iqmBNHrSpV9..AeMnaYygZ}L!^9QU=SuiQHwCha~HQ.ZZn!?YMQA[q]261No=OEo8+eq!AXjb|8M]S5SUm1+rc6n
-::AD|J_5NTpLT^O;GoB~dR3ydHTwA1B4..$0ZK.7rkU=SxjQLBiQ#&(k_2[urs404|ZQ?_EKfEG}.d;.R1kf3r3Ld763{Q/#xW041t+O]t|kYiW@+QDo;Ab?Q~;v;IF
+::AD|J_5NTpLT^O;GoB~dR3ydHTwA1B4..$0ZK.7rkU=SxjQLBiQ#&(k_2[urs404|ZQ?_EKfEG}.d;.R1kf3r3Ld763{Q/#xW041t+O]t|kYiW@+QDo;Ab?Q~;v;if
 ::L^~&tEj|zxn4-}!LS$[=nuY40av&uAATYukWz.&bVDf_Ofch;sAV-|}OK.@gzBAusqt/.M2ta$6Krt#7EJ][!r3KU@AETBQQj2_dHB,FdoB~sW3k)twrtbnMO$_o2
 ::fLP@ToI?Jb)bIVfijVbocnKgdOT@JJ2&td+Icfq1t-,ymS/-pYN3Fmh5r6;MfMQiFSR@[CQwyp]K4wuZsuuVdYNklwIR+Sb3ycyGOw|NXgBuP-fLJ2D!Xfw=WVNh9
 ::/$wiE&vCW6++G),0tB^PgB+uCRZH1uH4D|Ry{Le95rAzi0v7$9Nk9k/EC4cGaxCuvshTY60CEuvxEd651^7e3EC,UZA[VU]T=55yA0xgNSBQMfAztDTd;?9N0Sg9!
@@ -8607,7 +8607,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::O;cspB23835oZewS}-EtUdWO.k69RNm?xI4]n^Z.hYtw3BBsGsCl}qvOyp$pIcFxB1cr$SGB@2hA][(g08C_2BAbA~#R5e+=Zqvbz~BOaM#R(m0TkT]0}(7@Cg-F-
 ::Z4eOEaWZrcCSqq1Gh~K{o({4aAH#YUPqlnZ;yN@;#m6n5;5LzNwSLS_Q-&K$3J]-W010EJ5TRrWv74p;Aynq?ks_bmP=@SU3)O!8MAXSZgy[+}go!a+/tYWy?u4NR
 ::#m5&j/H|~SR]H]T#m8E344hqjYUzyLQ-&W+3J]^Zfb20.NYXL|QA)x(AymxLB1QNvC_0KG1&@oa]=(c_4sl|d5hlcGh&,I.t,7&/7av.F;F]-dT7UDm79X{s3{-Qq
-::sTIe?GR28nrU2k&1qdB8fJh_$kf~)~9YVxVB2pyqfii,,EHHyWQB[}c^z+2[i!czvBF-{VwXBR+T71?IF/{ExRSU/pti[HWACt5eR;)SLB~w65nJHu|odQ(&5Exhh
+::sTIe?GR28nrU2k&1qdB8fJh_$kf~)~9YVxVB2pyqfii,,EHHyWQB[}c^z+2[i!czvBF-{VwXBR+T71?if/{ExRSU/pti[HWACt5eR;)SLB~w65nJHu|odQ(&5Exhh
 ::WVp##FvM{!t_PVbI=sUn^@XnSx;cY)k=OAGijRoo7(,20LiA)4o8rml/sRJZv.^3]W55zAVFe6EL!cP3/1IY#V3fqkFEEG{EFYplB2Q2TL-Zo=BpM,{@qo5fIunMN
 ::b#bgAQHzL^Q-5mj1qf=Hm[{XGATWTy7Fs5wzz~$S)putU$niq9h|6|~wgi!]Flv.(s2zcPi3X2AGZ^r25C{MvIfq8AAyN$6FbEbPsMTW5xE-JQ0RmcYn2Z8L5!__m
 ::i/tqniQJ2iBFT~5i/qQdCax)yu9]ZwgPhD;5exDXC}s[/BFat&[,yIo7GXo]h(WzgYFUisReVwlAA]@{xmq7{m?0QPAA]|}xmq8S$rPk-nF5.V6d.rZ0b.L)Ae-h,
@@ -8709,7 +8709,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::y&Bff]oh3/S3VO=8J9.!$@tTmohYaG+R;}E;^Pb,QjDShMF-zW[W4||r4Bx~eJ65^H)u4rl[-c+Hnl{m=(#FKHw$_tzZ&&${I(nS.3Oa0Lt{_b#aYH.VZK8gFQ1VU
 ::?t/vaOXjjLcJRv.m.447MjOM9k|dk$m9fxfKNl_zOu0pl]|{{Fpl{E0Qj!bdv^LSzw&P4[Zo8eB2cA$gHZ&QM;I5,1o6[6w;w|;ECr.K;j|CPvsF-pVklgmwd|4Ap
 ::x4x@{82kD!zM3E7,VXjiWAcs46-Xi/47$0$k^wl,BO{;yY|IeuZ3c)wQMmiG9UsIk=Du7t/@(O+RT4#C)z9WsY!{hSObZB8jq/_g-W+^5e!sE/JbPNPo2CX81p^s.
-::6#bseRurz&!JoH5qpJk.n#v)IF/qCQyTyEujqN9YT_NJqnf(9O&Q+L9E5C-?8_I;S^i?qKXT_3t4,LA0?RQMeIMLCD[xj_!HtmxQE3f-V4n^05Bimk|a_TBd#.jAQ
+::6#bseRurz&!JoH5qpJk.n#v)if/qCQyTyEujqN9YT_NJqnf(9O&Q+L9E5C-?8_I;S^i?qKXT_3t4,LA0?RQMeIMLCD[xj_!HtmxQE3f-V4n^05Bimk|a_TBd#.jAQ
 ::1vX^@)cB|zE=c=RF1.ga@W!}sbIaqL?btLveSmB8YqN&{R+n9vP2Xj;PX=L@cxjwu_d]?3&kjCRIP9to4.b!S^I()FNy;SyK-]9]G~WF0KKPqu.JV6bD^gluNq5f3
 ::FOx597K+w/@.TPbc^mL8pAA@@CYMn6wf=mh9a~jidSBqsU4p$Kv~VJ?2s@z[&.4-ND@ayz9!Ye-.v_w_n#bDy/+}i,]Eq&;0J}w.siX8_wNbIE/7BxSeW~]iwb_mL
 ::|MN}5NdNO#;sH,]ZJc#72HuKER8^mptGucVbLVVXbskLzPY5p0g!dIsc}!qWv2E/7KRh&A_m+.Gn]XE4U?|=kEJ4zZTgiJUF0IiOle3;OZ{uA!qrc]A^ZHIPyI{ZH
@@ -9921,7 +9921,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::40_/7E=sQX@?YoZq2zGFr#di#I^ZnSvuMs#MhqjHG+.q3=uBo;ee4N$^1_c8m8=vH3weQ88oypa#.WFnj]2h6BVi7,B{IC7X0-njZqsxTqzW4ErVj0nQh=dH7rqn$
 ::P#h1nUw$g}dXv2;8$HlA_wG/nI8kU-8?YSXt(2!_U#_op.9Xw4)&UH)4sV04V^Mijz3Odn80PzB[BuT01WyF]olIHAcq5mi?MYM,tM)v;jfY.M|2=G&Wo8qp=0Cn~
 ::RW./~Y?}uCR1;].ndg5{=;I//2GkI~-YA|DiG^aBe3ox@@7@-IQ#kRT0Knb9srMNqx&^DA)7rR-Ou-fJqn=kDP1Svv1!aou0eUfjb$l[5qmnAFwu}=Iqwd7EB(JO-
-::3_UvypUh0rNK!X?;0d/WKAE(c9_U2+U26VOywZJ79Iw5S^eXv/K8W#TpTLor{i,uN$Z63Lr#=r&pYg/&oW_kuN,d1|s9}b3WtJ;nbp-HMH/q/];NyFbS{+y(yT}IF
+::3_UvypUh0rNK!X?;0d/WKAE(c9_U2+U26VOywZJ79Iw5S^eXv/K8W#TpTLor{i,uN$Z63Lr#=r&pYg/&oW_kuN,d1|s9}b3WtJ;nbp-HMH/q/];NyFbS{+y(yT}if
 ::Mgmq7GP14aaT~Go@9C.|@{T)YcU+o}B_2=/JQHqDGirq&oG@s~bd@dN]@a{3i]}P4a|/@AQZb3$T9&tSCGK-4Ke]sYQU3g-nDYmqbKY66Ecqu0P)#LH?,zJwE@,8+
 ::phXJ(H}|,r|3-SLAJx5up~JX5,Dj9djna|dbdtkSi#-}IbmAubqNgpiUF^OjjDL;+c(^mC;R+rN&#F$hXhem&]Sx&9!c2}=]Vikcl4DuS{f|gaSBLbwNiNzgpnX~_
 ::x)yC3A{BC[U)bUDE8oGssAd2$q/^IkJbyN4h|tR+lMXCrT0D2~{/De^N^cN#!6En/S|aRpt~laX??bjiO&FXxL-WR$pxJcNdtWY$jXFo!P9jNo#Ca-DQ0c4GFA;IU
@@ -10325,7 +10325,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::K^2|i)YXkPs#&syfOG#bCabmpPt3MCkh}j/^DaA{Lz46XNiqle-[760wwcfK5HiE^/?y&BjgSnf&Hf[KmO{wZfVf@EA+GpAON(Td)^,0s@B+CE!7iW@$zf]lj5t#a
 ::fK@smZaGtk!tp1nPB@](cC]^2CN~jK9mOVH-!XbmV30~jqw-t5MlZ$NtSP;zy2Mj(2nJfT$Esz#P$nH}vIXv-X,1FX$&NJKvr1Q;TNWAp-C63h/f]o(#JO_t=U!P4
 ::E#2@@c68Z+Oqb-ry6Eu9)Jv=Dh~-12N5J}dwi}AmqW$Jb&l;ZMYwz.AyQua!VF?2Oshur4b/HQmUQ^g~wOVtBdMk=N,^o{Vuw/8C;o67@Pd68-mZ&s}f9O]vY_8_v
-::2+Iwcp.#x-ZJiuWvhZ7}@Yr}Ep3,YYxx7Lr;+xq~-cKg~IF&RbE/aj^2r?bWUu2SA@Kb[IVL|G[.uBP$,uU(@Ow+rNv}1L^7nkac.=0}A?wBC)0Qetv=1n+?@6NAm
+::2+Iwcp.#x-ZJiuWvhZ7}@Yr}Ep3,YYxx7Lr;+xq~-cKg~if&RbE/aj^2r?bWUu2SA@Kb[IVL|G[.uBP$,uU(@Ow+rNv}1L^7nkac.=0}A?wBC)0Qetv=1n+?@6NAm
 ::I@difqlYLdQbHQtORE!.4[W8EReR~6@zD|(fj3|d,^R]annyhRZL]FEHj)3O36$jJ-$VNSEX5Aw@FrkjB,DN!Ph]!+C/agY.?rAGJJO35Bis}Zm=Q1Mgi|[gbA,(5
 ::P5gwO,~=5C9i@.jO(yHi]KtU|5LUznAqpvGI43iF4hhSN$cKY(+4XJ+O!!Jx{)zCgpIi{B77T5U8OV8V$&(];va9G8_bilp6b)x01ak/oXQ~n=cH~QaZ?kHN;YHjx
 ::BtZ-F?Y;M~IH;f|eo,-7?6Y_l!SPON480_g-R+7iyIo5hv&nT~nyq06.!A/X8C3xo;GkAF,{D568Pj|,DbBdhqrK3|_iLW|xGw{_[laL,CGMtcuIE||aLhm3XuP(f
@@ -10925,7 +10925,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::---------------------------------------------------------------------------------------------------------
 ::
 ::   HWID/KMS38 methods Suggestions and improvements:-
-::  
+:: 
 ::   @sponpa       New ideas for the HWID/KM38 Generation
 ::                 https://www.nsaneforums.com/topic/316668--/page/21/?tab=comments#comment-1431257
 ::
@@ -10937,7 +10937,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::   Kind Help:-
 ::
 ::   Thanks for having my back and answering all of my queries. (In no particular order)
-::   
+::  
 ::   @AveYo aka @BAU, @sponpa, @mspaintmsi @RPO, @leitek8, @mxman2k, @Yen, @abbodi1406
 ::
 ::   @BorrowedWifi for providing support in fixing English grammar errors in the Read Me.
@@ -10956,7 +10956,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::
 ::   Maintained by @WindowsAddict
 ::
-::   P.S. I (@WindowsAddict) did not help in the development of HWID/KMS38 Activation in any way, I only 
+::   P.S. I (@WindowsAddict) did NOT help in the development of HWID/KMS38 Activation in any way, I only
 ::   manage batch script tool which is based on the above mentioned original co-authors activation methods.
 ::
 ::=========================================================================================================
@@ -10977,7 +10977,7 @@ set Unattended=
 set _args=
 set _elev=
 set "_arg1=%~1"
-if not defined _arg1 goto :K38_NoProgArgs
+if NOT defined _arg1 goto :K38_NoProgArgs
 set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
@@ -11002,7 +11002,7 @@ set wApp=55c92734-d682-4d71-983e-d6ec3f16059f
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 goto K38_Done
 )
@@ -11090,8 +11090,8 @@ mode con: cols=102 lines=30
 ::  Check Windows OS name
 
 set winos=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if not errorlevel 1 set "winos=%%b"
-if not defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if not errorlevel 1 set "winos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
+if NOT defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
 
 call :K38_CheckPermAct
 if defined PermAct (
@@ -11099,7 +11099,7 @@ if defined PermAct (
 echo ___________________________________________________________________________________________
 echo:
 call :K38_color1 "     " %Black% &call :K38_color "Checking: %winos% is Permanently Activated." %Green%
-call :K38_color1 "     " %Black% &call :K38_color "Activation is not required." %Gray%
+call :K38_color1 "     " %Black% &call :K38_color "Activation is NOT required." %Gray%
 echo ___________________________________________________________________________________________
 echo:
 if defined Unattended goto K38_Done
@@ -11135,12 +11135,12 @@ goto K38_Done
 ::  Check SKU value
 
 set SKU=
-for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
-if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
+for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
+if NOT defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
 
 if "%osSKU%" equ "" (
 %ELine%
-echo SKU value was not detected properly. Aborting...
+echo SKU value was NOT detected properly. Aborting...
 goto K38_Done
 )
 
@@ -11160,7 +11160,7 @@ goto K38_Done
 set app=
 for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp%' and LicenseFamily='%osedition%' and Description like '%%KMSCLIENT%%') get ID /VALUE" 2^>nul') do set "app=%%a"
 
-::  Check Windows Architecture 
+::  Check Windows Architecture
 
 set arch=
 reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > nul && set arch=x86|| set arch=x64
@@ -11184,10 +11184,10 @@ echo [%winos% ^| %winbuild% ^| %app%] KMS38 Activation is Not Supported.
 goto K38_Done
 )
 
-:: clipup.exe does not exist in server cor and acor editions.
+:: clipup.exe does NOT EXIST in server cor and acor editions.
 
 set A_Cor=
-echo %osedition%| findstr /I /B Server >nul && if not exist "%systemroot%\System32\clipup.exe" set A_Cor=1
+echo %osedition%| findstr /I /B Server >nul && if NOT EXIST "%systemroot%\System32\clipup.exe" set A_Cor=1
 
 ::========================================================================================================================================
 
@@ -11203,8 +11203,8 @@ for %%# in (%_1% %_3%) do call :K38_ServiceCheck %%#
 set "CLecho=Checking %_1%                        [Service Status -%Cl_state%] [Startup Type -%Cl_start_type%]"
 set "specho=Checking %_3%                         [Service Status -%sp_state%] [Startup Type -%sp_start_type%]"
 
-if not "%Cl_start_type%" equ "Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
-if not "%sp_start_type%" equ "Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
+if "%Cl_start_type%" neq "Demand"       (call :K38_color "%CLecho%" %Red% & set Clst_e=1) else (echo %CLecho%)
+if "%sp_start_type%" neq "Delayed-Auto" (call :K38_color "%specho%" %Red% & set spst_e=1) else (echo %specho%)
 
 echo:
 if defined Clst_e (sc config %_1% start= Demand %nul%       && set Clst_s=%_1%-Demand || set Clst_u=%_1%-Demand )
@@ -11216,8 +11216,8 @@ if defined st_s (echo Changing services Startup Type to       [ %Clst_s%%spst_s%
 for %%# in (Clst_u,spst_u) do if defined %%# set st_u=1
 if defined st_u (call :K38_color "Error in changing Startup Type to       [ %Clst_u%%spst_u%]" %Red%)
 
-if not "%Cl_state%" equ "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
-if not "%sp_state%" equ "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
+if "%Cl_state%" neq "Running" (%_psc% start-service %_1% %nul% && set Cl_s=%_1% || set Cl_u=%_1% )
+if "%sp_state%" neq "Running" (%_psc% start-service %_3% %nul% && set sp_s=%_3% || set sp_u=%_3% )
 
 for %%# in (Cl_s,sp_s) do if defined %%# set s_s=1
 if defined s_s (echo Starting services                       [ %Cl_s%%sp_s%] [Successful])
@@ -11241,7 +11241,7 @@ for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%
 call echo Checking Installed Product Key          [Volume:GVLK] [Partial Key -%%_partial%%]
 )
 
-if not defined _Keyexist (
+if NOT defined _Keyexist (
 set "InsKey=Installing KMS Client Setup Key        "
 wmic path %sls% where __CLASS='%sls%' call InstallProductKey ProductKey="%key%" %nul% && (
 call echo %%InsKey%% [%key%] [Successful]
@@ -11257,7 +11257,7 @@ wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 ::  Set specific KMS host to Local Host
 ::  Thanks to @abbodi1406
 
-::  By doing this, global KMS IP can not replace KMS38 activation but can be used with Office and other Windows Editions.
+::  By doing this, global KMS IP can NOT replace KMS38 activation but can be used with Office and other Windows Editions.
 
 echo:
 set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
@@ -11272,7 +11272,7 @@ wmic path %slp% where ID='%app%' call ClearKeyManagementServicePort %nul% || (se
 wmic path %slp% where ID='%app%' call SetKeyManagementServiceMachine MachineName="127.0.0.2" %nul% || (set setkms_error=1)
 wmic path %slp% where ID='%app%' call SetKeyManagementServicePort 1688 %nul% || (set setkms_error=1)
 
-if not defined setkms_error (
+if NOT defined setkms_error (
 echo %setkms_% [LocalHost 127.0.0.2] [Successful]
 ) else (
 call :K38_color "%setkms_% [LocalHost 127.0.0.2] [Unsuccessful]" %Red%
@@ -11284,7 +11284,7 @@ call :K38_color "%setkms_% [LocalHost 127.0.0.2] [Unsuccessful]" %Red%
 
 echo:
 set "temp_=%SystemRoot%\Temp\_Ticket_Work"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
 md "%temp_%\" %nul%
 
 pushd "%temp_%\"
@@ -11312,8 +11312,8 @@ popd
 )
 
 set cfailed=
-if not exist "%temp_%\gatherosstate.exe" set cfailed=1
-if not exist "%temp_%\slc.dll" set cfailed=1
+if NOT EXIST "%temp_%\gatherosstate.exe" set cfailed=1
+if NOT EXIST "%temp_%\slc.dll" set cfailed=1
 
 set "copyfiles=Extracting Required Files to Temp      "
 set "copyclipup=Extracting clipup.exe File to          "
@@ -11326,7 +11326,7 @@ goto K38_Act_Cont
 )
 
 if defined A_Cor (
-if not exist "%A_Cor_cl%" (
+if NOT EXIST "%A_Cor_cl%" (
 call :K38_color "%copyclipup% [%systemroot%\System32\] [Unsuccessful] Aborting..." %Red%
 call :K38_color "Most likely Antivirus program is interfering with the process." %Magenta%
 call :K38_color "Either make proper exclusions in the AV or use MAS separate files version." %Magenta%
@@ -11359,9 +11359,9 @@ if defined A_Cor echo %copyclipup% [%systemroot%\System32\] [Successful]
 
 ::========================================================================================================================================
 
-:: Multiple attempts to generate the ticket because in some cases, one attempt is not enough.
+:: Multiple attempts to generate the ticket because in some cases, one attempt is NOT enough.
 
-set "_noxml=if not exist "%temp_%\GenuineTicket.xml""
+set "_noxml=if NOT EXIST "%temp_%\GenuineTicket.xml""
 
 start /wait "" "%temp_%/gatherosstate.exe" %nul%
 %_noxml% timeout /t 3 %nul%
@@ -11378,19 +11378,19 @@ goto K38_Act_Cont
 echo %GenTicket% [Successful]
 )
 
-:: clipup -v -o -altto <Ticket path> method to apply ticket was not used to avoid the certain issues in case the username have spaces or non English names.
+:: clipup -v -o -altto <Ticket path> method to apply ticket was NOT used to avoid the certain issues in case the username have spaces or non English names.
 
 set "InsTicket=Installing GenuineTicket.xml           "
 set "TDir=%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket"
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 copy /y /b "%temp_%\GenuineTicket.xml" "%TDir%\GenuineTicket.xml" %nul%
 
-if not exist "%TDir%\GenuineTicket.xml" (
+if NOT EXIST "%TDir%\GenuineTicket.xml" (
 call :K38_color "Failed to copy Ticket to [%ProgramData%\Microsoft\Windows\ClipSVC\GenuineTicket\] Aborting..." %Red%
 goto K38_Act_Cont
 )
 
-set "_xmlexist=if exist "%TDir%\GenuineTicket.xml""
+set "_xmlexist=if EXIST "%TDir%\GenuineTicket.xml""
 
 %_psc% Restart-Service ClipSVC %nul%
 %_xmlexist% timeout /t 2 %nul%
@@ -11412,10 +11412,10 @@ set fallback_=1
 
 %_xmlexist% (
 call :K38_color "%InsTicket% [Unsuccessful] Aborting..." %Red%
-if exist "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
+if EXIST "%TDir%\*.xml" del /f /q "%TDir%\*.xml" %nul%
 goto K38_Act_Cont
 ) else (
-if not defined fallback_ echo %InsTicket% [Successful]
+if NOT defined fallback_ echo %InsTicket% [Successful]
 if defined fallback_ call :K38_color "%InsTicket% [Successful] [Fallback method: clipup -v -o]" %Red%
 )
 
@@ -11469,25 +11469,25 @@ call :K38_color "Try the Troubleshoot Guide listed in the ReadMe." %Magenta%
 
 :K38_Act_Cont
 
-::  clipup.exe does not exist in server cor and acor editions by default, it was copied there with this script.
+::  clipup.exe does NOT EXIST in server cor and acor editions by default, it was copied there with this script.
 
 echo:
 cd /d "!_work!\"
-if exist "%temp_%\" @RD /S /Q "%temp_%\" %nul%
-if defined A_Cor (if exist "%A_Cor_cl%" del /f /q "%A_Cor_cl%" %nul%)
+if EXIST "%temp_%\" @RD /S /Q "%temp_%\" %nul%
+if defined A_Cor (if EXIST "%A_Cor_cl%" del /f /q "%A_Cor_cl%" %nul%)
 
 set "delFiles=Cleaning Temp Files                    "
 set "delclipup=Deleting extracted clipup.exe file     "
 
-if exist "%temp_%\" (
+if EXIST "%temp_%\" (
 call :K38_color "%delFiles% [Unsuccessful]" %Red%
 ) else (
 echo %delFiles% [Successful]
 )
 
 if defined A_Cor (
-if exist "%A_Cor_cl%" call :K38_color "%delclipup% [Unsuccessful]" %Red%
-if not exist "%A_Cor_cl%" echo %delclipup% [Successful]
+if EXIST "%A_Cor_cl%" call :K38_color "%delclipup% [Unsuccessful]" %Red%
+if NOT EXIST "%A_Cor_cl%" echo %delclipup% [Successful]
 )
 
 goto K38_Done
@@ -11523,7 +11523,7 @@ exit /b
 ::  Check Windows Permanent Activation status
 ::  Written by @abbodi1406
 
-wmic path %slp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is not NULL) get Name 2>nul | findstr /i "Windows" 1>nul && set PermAct=1||set PermAct=
+wmic path %slp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is NOT NULL) get Name 2>nul | findstr /i "Windows" 1>nul && set PermAct=1||set PermAct=
 exit /b
 
 ::========================================================================================================================================
@@ -11544,7 +11544,7 @@ exit /b
 ::  Check Activation remaining time
 ::  Written by @abbodi1406
 
-for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
+for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
 exit /b
 
 ::========================================================================================================================================
@@ -11618,171 +11618,171 @@ exit /b
 
 :: Windows 10 [RS5]
 :32d2fab3-e4a8-42c2-923b-4bf4fd13e6ee
-set "key=M7XTQ-FN8P6-TTKYV-9D4CC-J462D" &:: Enterprise LTSC 2019
+set "key=M7XTQ-FN8P6-TTKYV-9D4CC-J462D" &rem Enterprise LTSC 2019
 exit /b
 
 :7103a333-b8c8-49cc-93ce-d37c09687f92
-set "key=92NFX-8DJQP-P6BBQ-THF9C-7CG2H" &:: Enterprise LTSC 2019 N
+set "key=92NFX-8DJQP-P6BBQ-THF9C-7CG2H" &rem Enterprise LTSC 2019 N
 exit /b
 
 :ec868e65-fadf-4759-b23e-93fe37f2cc29
-set "key=CPWHC-NT2C7-VYW78-DHDB2-PG3GK" &:: Enterprise for Virtual Desktops
+set "key=CPWHC-NT2C7-VYW78-DHDB2-PG3GK" &rem Enterprise for Virtual Desktops
 exit /b
 
 :0df4f814-3f57-4b8b-9a9d-fddadcd69fac
-set "key=NBTWJ-3DR69-3C4V8-C26MC-GQ9M6" &:: Lean
+set "key=NBTWJ-3DR69-3C4V8-C26MC-GQ9M6" &rem Lean
 exit /b
 
 :: Windows 10 [RS3]
 :82bbc092-bc50-4e16-8e18-b74fc486aec3
-set "key=NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J" &:: Pro Workstation
+set "key=NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J" &rem Pro Workstation
 exit /b
 
 :4b1571d3-bafb-4b40-8087-a961be2caf65
-set "key=9FNHH-K3HBT-3W4TD-6383H-6XYWF" &:: Pro Workstation N
+set "key=9FNHH-K3HBT-3W4TD-6383H-6XYWF" &rem Pro Workstation N
 exit /b
 
 :e4db50ea-bda1-4566-b047-0ca50abc6f07
-set "key=7NBT4-WGBQX-MP4H7-QXFF8-YP3KX" &:: Enterprise Remote Server
+set "key=7NBT4-WGBQX-MP4H7-QXFF8-YP3KX" &rem Enterprise Remote Server
 exit /b
 
 :: Windows 10 [RS2]
 :e0b2d383-d112-413f-8a80-97f373a5820c
-set "key=YYVX9-NTFWV-6MDM3-9PT4T-4M68B" &:: Enterprise G
+set "key=YYVX9-NTFWV-6MDM3-9PT4T-4M68B" &rem Enterprise G
 exit /b
 
 :e38454fb-41a4-4f59-a5dc-25080e354730
-set "key=44RPN-FTY23-9VTTB-MP9BX-T84FV" &:: Enterprise G N
+set "key=44RPN-FTY23-9VTTB-MP9BX-T84FV" &rem Enterprise G N
 exit /b
 
 :: Windows 10 [RS1]
 :2d5a5a60-3040-48bf-beb0-fcd770c20ce0
-set "key=DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ" &:: Enterprise 2016 LTSB
+set "key=DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ" &rem Enterprise 2016 LTSB
 exit /b
 
 :9f776d83-7156-45b2-8a5c-359b9c9f22a3
-set "key=QFFDN-GRT3P-VKWWX-X7T3R-8B639" &:: Enterprise 2016 LTSB N
+set "key=QFFDN-GRT3P-VKWWX-X7T3R-8B639" &rem Enterprise 2016 LTSB N
 exit /b
 
 :3f1afc82-f8ac-4f6c-8005-1d233e606eee
-set "key=6TP4R-GNPTD-KYYHQ-7B7DP-J447Y" &:: Pro Education
+set "key=6TP4R-GNPTD-KYYHQ-7B7DP-J447Y" &rem Pro Education
 exit /b
 
 :5300b18c-2e33-4dc2-8291-47ffcec746dd
-set "key=YVWGF-BXNMC-HTQYQ-CPQ99-66QFC" &:: Pro Education N
+set "key=YVWGF-BXNMC-HTQYQ-CPQ99-66QFC" &rem Pro Education N
 exit /b
 
 :: Windows 10 [TH]
 :58e97c99-f377-4ef1-81d5-4ad5522b5fd8
-set "key=TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" &:: Home
+set "key=TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" &rem Home
 exit /b
 
 :7b9e1751-a8da-4f75-9560-5fadfe3d8e38
-set "key=3KHY7-WNT83-DGQKR-F7HPR-844BM" &:: Home N
+set "key=3KHY7-WNT83-DGQKR-F7HPR-844BM" &rem Home N
 exit /b
 
 :cd918a57-a41b-4c82-8dce-1a538e221a83
-set "key=7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" &:: Home Single Language
+set "key=7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" &rem Home Single Language
 exit /b
 
 :a9107544-f4a0-4053-a96a-1479abdef912
-set "key=PVMJN-6DFY6-9CCP6-7BKTT-D3WVR" &:: Home China
+set "key=PVMJN-6DFY6-9CCP6-7BKTT-D3WVR" &rem Home China
 exit /b
 
 :2de67392-b7a7-462a-b1ca-108dd189f588
-set "key=W269N-WFGWX-YVC9B-4J6C9-T83GX" &:: Pro
+set "key=W269N-WFGWX-YVC9B-4J6C9-T83GX" &rem Pro
 exit /b
 
 :a80b5abf-76ad-428b-b05d-a47d2dffeebf
-set "key=MH37W-N47XK-V7XM9-C7227-GCQG9" &:: Pro N
+set "key=MH37W-N47XK-V7XM9-C7227-GCQG9" &rem Pro N
 exit /b
 
 :e0c42288-980c-4788-a014-c080d2e1926e
-set "key=NW6C2-QMPVW-D7KKK-3GKT6-VCFB2" &:: Education
+set "key=NW6C2-QMPVW-D7KKK-3GKT6-VCFB2" &rem Education
 exit /b
 
 :3c102355-d027-42c6-ad23-2e7ef8a02585
-set "key=2WH4N-8QGBV-H22JP-CT43Q-MDWWJ" &:: Education N
+set "key=2WH4N-8QGBV-H22JP-CT43Q-MDWWJ" &rem Education N
 exit /b
 
 :73111121-5638-40f6-bc11-f1d7b0d64300
-set "key=NPPR9-FWDCX-D2C8J-H872K-2YT43" &:: Enterprise
+set "key=NPPR9-FWDCX-D2C8J-H872K-2YT43" &rem Enterprise
 exit /b
 
 :e272e3e2-732f-4c65-a8f0-484747d0d947
-set "key=DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4" &:: Enterprise N
+set "key=DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4" &rem Enterprise N
 exit /b
 
 :7b51a46c-0c04-4e8f-9af4-8496cca90d5e
-set "key=WNMTR-4C88C-JK8YV-HQ7T2-76DF9" &:: Enterprise 2015 LTSB
+set "key=WNMTR-4C88C-JK8YV-HQ7T2-76DF9" &rem Enterprise 2015 LTSB
 exit /b
 
 :87b838b7-41b6-4590-8318-5797951d8529
-set "key=2F77B-TNFGY-69QQF-B8YKP-D69TJ" &:: Enterprise 2015 LTSB N
+set "key=2F77B-TNFGY-69QQF-B8YKP-D69TJ" &rem Enterprise 2015 LTSB N
 exit /b
 
 :: Windows Server 2019 [RS5]
 :de32eafd-aaee-4662-9444-c1befb41bde2
-set "key=N69G4-B89J2-4G8F4-WWYCC-J464C" &:: Standard
+set "key=N69G4-B89J2-4G8F4-WWYCC-J464C" &rem Standard
 exit /b
 
 :34e1ae55-27f8-4950-8877-7a03be5fb181
-set "key=WMDGN-G9PQG-XVVXX-R3X43-63DFG" &:: Datacenter
+set "key=WMDGN-G9PQG-XVVXX-R3X43-63DFG" &rem Datacenter
 exit /b
 
 :034d3cbb-5d4b-4245-b3f8-f84571314078
-set "key=WVDHN-86M7X-466P6-VHXV7-YY726" &:: Essentials
+set "key=WVDHN-86M7X-466P6-VHXV7-YY726" &rem Essentials
 exit /b
 
 :a99cc1f0-7719-4306-9645-294102fbff95
-set "key=FDNH6-VW9RW-BXPJ7-4XTYG-239TB" &:: Azure Core
+set "key=FDNH6-VW9RW-BXPJ7-4XTYG-239TB" &rem Azure Core
 exit /b
 
 :73e3957c-fc0c-400d-9184-5f7b6f2eb409
-set "key=N2KJX-J94YW-TQVFB-DG9YT-724CC" &:: Standard ACor
+set "key=N2KJX-J94YW-TQVFB-DG9YT-724CC" &rem Standard ACor
 exit /b
 
 :90c362e5-0da1-4bfd-b53b-b87d309ade43
-set "key=6NMRW-2C8FM-D24W7-TQWMY-CWH2D" &:: Datacenter ACor
+set "key=6NMRW-2C8FM-D24W7-TQWMY-CWH2D" &rem Datacenter ACor
 exit /b
 
 :8de8eb62-bbe0-40ac-ac17-f75595071ea3
-set "key=GRFBW-QNDC4-6QBHG-CCK3B-2PR88" &:: ServerARM64
+set "key=GRFBW-QNDC4-6QBHG-CCK3B-2PR88" &rem ServerARM64
 exit /b
 
 :: Windows Server 2016 [RS4]
 :43d9af6e-5e86-4be8-a797-d072a046896c
-set "key=K9FYF-G6NCK-73M32-XMVPY-F9DRR" &:: ServerARM64
+set "key=K9FYF-G6NCK-73M32-XMVPY-F9DRR" &rem ServerARM64
 exit /b
 
 :: Windows Server 2016 [RS3]
 :61c5ef22-f14f-4553-a824-c4b31e84b100
-set "key=PTXN8-JFHJM-4WC78-MPCBR-9W4KR" &:: Standard ACor
+set "key=PTXN8-JFHJM-4WC78-MPCBR-9W4KR" &rem Standard ACor
 exit /b
 
 :e49c08e7-da82-42f8-bde2-b570fbcae76c
-set "key=2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG" &:: Datacenter ACor
+set "key=2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG" &rem Datacenter ACor
 exit /b
 
 :: Windows Server 2016 [RS1]
 :8c1c5410-9f39-4805-8c9d-63a07706358f
-set "key=WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY" &:: Standard
+set "key=WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY" &rem Standard
 exit /b
 
 :21c56779-b449-4d20-adfc-eece0e1ad74b
-set "key=CB7KF-BWN84-R7R2Y-793K2-8XDDG" &:: Datacenter
+set "key=CB7KF-BWN84-R7R2Y-793K2-8XDDG" &rem Datacenter
 exit /b
 
 :2b5a1b0f-a5ab-4c54-ac2f-a6d94824a283
-set "key=JCKRF-N37P4-C2D82-9YXRT-4M63B" &:: Essentials
+set "key=JCKRF-N37P4-C2D82-9YXRT-4M63B" &rem Essentials
 exit /b
 
 :7b4433f4-b1e7-4788-895a-c45378d38253
-set "key=QN4C6-GBJD2-FB422-GHWJK-GJG2R" &:: Cloud Storage
+set "key=QN4C6-GBJD2-FB422-GHWJK-GJG2R" &rem Cloud Storage
 exit /b
 
 :3dbf341b-5f6c-4fa7-b936-699dce9e263f
-set "key=VP34G-4NPPG-79JTQ-864T4-R3MQX" &:: Azure Core
+set "key=VP34G-4NPPG-79JTQ-864T4-R3MQX" &rem Azure Core
 exit /b
 
 ::========================================================================================================================================
@@ -13380,7 +13380,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::|AUS|kB$YHY)I^Z9Ode7Q}Hs+Hx}26Z+Dl_.8/uLeVD#|0v@ZzKqFss=AjLuO2K)p[F=lxUPW,hn=IY=ut?D]m4;vhEhtrY$wq04e!iMCZ=$-7+78}!7d~dtUC79}
 ::TTw3WUoPvoq[66TA~kZdv^XqPB5Y&WyY4/H(EP}=4V,4iXQW@I)yxX&WO=M[ncP~da(?BuMXBo)UXUo4z2kQ~h6WB?6&FLG5uhG-BW5!RkdH9z7nz{0U1ZJh,l1YZ
 ::dRTAicP5#V?PSWb0?(B8fI8(6Rt?~gG&]Ya)tzK1XKYx3kNX/qq-2X7]~pV4ZhH{J(L5K=2mtgr=AAh-2j=h_a2&;B7=Kj{-Rk}4BN{^Jb7KygLvsiYJ^BU&nB[Jy
-::AuI4^5k4w_nK$C|0~ZMg-D+eumYllBK~IF$._;Dw!^n|^Rfmg/2af16NxJkqM|!/iZ~kA}&,RWor@UC3z&NEw@1;hfBj858t]6X~=p]SI{5jK0RgU[?twc$T?nW@]
+::AuI4^5k4w_nK$C|0~ZMg-D+eumYllBK~if$._;Dw!^n|^Rfmg/2af16NxJkqM|!/iZ~kA}&,RWor@UC3z&NEw@1;hfBj858t]6X~=p]SI{5jK0RgU[?twc$T?nW@]
 ::d!GCnRB}4VF@[-Hv0d}9_^qgRASQO;_~7&1ioCw8;Ki1vzp@@.xtZzy@RvUNBY.I&+))oxe5$r)prt}/hd@}DKBk(W89_|n@Yt#@cxsuKA[..-K|xcM4~l!P48T6o
 ::IMPF7lruAQ4zf;p8S&pscWJcT@y!^tsgpp+lvJp0.{3hnqsqEmkY^ShBuIMSaV!KK)L]#[DBALgSnz~sB0mLAiJz4[gmX5EiV.jf8s?x&/;+ToX[W,2AwD3$zq(m?
 ::7u!S;.(GlSeeZU_NAd76TEG}b|E~I_MWGX^t)okb7FI$_E]PU=#l=_)yWS9(Gepju2=Qk^wY_fuTZ}+0;U/aBwATzD0Wl]bd(~UO2WVVxX]Y$L..D{~GZ-pPR#APX
@@ -14818,11 +14818,11 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::.gGRB&=hN8^Z8abpaetiS[ptVP~H2O@Xdbv{)AjyDvXVWy?fkfA$PBwX$l/KvTz3@fXjVZ]4,_IS?)m~=U|V.tQKXj$hP?z+qVp(mM2QgyI5lvQUcd~XcQl^n_WTL
 ::JPRv1i4o|jeL&{4rCHthr73P]B4e;v(/9Zx7OB=;NlPM+BW[ZrP_${iU$]wZjm|9l/+GpmH0e.p-sVXi1ekj}gz&@#r~wOd@]x0dl@og7u61gvZG^J{[Vl]LT=8Uo
 ::XcOhY0R/Wu!}l0Nl{h)rfy?KLLaoCdESgVbpT3bV&SE2PPj]I1Y0{Zf|8m0-eAWU[Q27-~&_p]5m0d]_teV^gMqBszI@?bYbY04Q^S3,ElL)db_SV/sO~DfsMad0m
-::.FKqrwHrN4yyyFR,P~#B4=m$~IF.f#&(^Z)8wC.uqdhvk{mC,Ov3c+TUA,L9S]X4BUak{^xLQoGn|tB9pEu^CukxttFOaj~nv7mto@~z;^w?VXpW_UlRf0kAzJ&AJ
+::.FKqrwHrN4yyyFR,P~#B4=m$~if.f#&(^Z)8wC.uqdhvk{mC,Ov3c+TUA,L9S]X4BUak{^xLQoGn|tB9pEu^CukxttFOaj~nv7mto@~z;^w?VXpW_UlRf0kAzJ&AJ
 ::fyS,-xs^~GL#.#s9![YU/b9tc0bS5exU?~+]&Yn?]yu977s=kt,SDZL_!bu.oa}nWemnWX$08ZX4r;h5kcgU7[2|XV6@mvT9MH~_+kn;CerL6R@xcThYHLmx(-hmx
 ::,l{fNF2EUf]ZDXy]4xtwvfDrdh&$]C&2|k=I1c-)^j30^VQy!(TZi$A_(j[Lv8UDm5vw4$]4CA4,AQJL@fZz^^Qe^f[nEyOh,#=_&4OQcCq]g{x#-1W8-7PKK]/vX
 ::y&?2/&1n3i.!D,uA=/VSv4TpkulwQ[LFV,S1r)507y5962fD;H=pGCmP^d-9p{rIyDBf(T!$Tt!Y.zbTG.6IcD!&p^8B#fFtvQaUB{467RVq^WE.1JmF~0|l!;~CI
-::lVlXFvQVr6M(NTrKAK,RjE_W4F2}VSleJ0L/;x&A^H2i^L]xx-s{^QCwA2][Dp?HgJdqk3=sSHAp+|{VW6[?!(K9oZcCJ-_e&{|fIc+!IF]gt({d9i;7gt5u-4FzK
+::lVlXFvQVr6M(NTrKAK,RjE_W4F2}VSleJ0L/;x&A^H2i^L]xx-s{^QCwA2][Dp?HgJdqk3=sSHAp+|{VW6[?!(K9oZcCJ-_e&{|fIc+!if]gt({d9i;7gt5u-4FzK
 ::rT8xHd/w&X@-vaRcoG,=hBk?&YPGKEdg#_w!y!cLB[2NWm8(N)Z&pSS$$~wio)YtG]e0&TDkW-$&)1Nu41c[9f$^@png4fUx&c}RrSf7~q7hUQ+B)m3aB6}&$d$#0
 ::H2-&Cr7@kWPVwf&7hJ(gR=NsQ;bo5c+_iyKbD-@0hI$amK/G-IdG&Yu?Cg5)AS?F^0DT..Fg-jZLiwrqxDZkh?.6hq^}aLgk8rjadHgk#=!dpPJ_6lxqACKvzW$Yi
 ::xDmkD+Du~$bq+wu@D9+|FgtS1Epf5K/eI,zS2SwOKOS]dc&O)_4#{SLYysw6CEC6vD=~Kh2u{lDn|SgCL=]^DVIVVDol(Rxd,+SexeU2EBJ[)O0h2ro&+T.$oHVM-
@@ -15926,7 +15926,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::3WhT(4~7[NxAJQipE8J]M&648rg}^09QM6ukv~+fO$4F|su[g$ObSG5WRIbX[|?nC,8gUcR9z~(Z[u.Aep^UvOTeBiGyN_1yO6opR&G4=n,()Sfj[.?n5CN9+BdJe
 ::T|/icOBdp027PSYmboRgCi=PyW$.tPN!8#!KTltgBCMPEBXhTD5r?zR(XAd^]ukCu+syHm)-6L|K1L1V8&KNlN^qEX[6pW.;B0Si=5!w-o0/-Ul{xALyLjFNj38mK
 ::_20mvW=L[|Eu+l=J)tW[]p^&(T+{e9/w;5?9eW;FUuoN/qFxV,wGB;UOH6nQwJ+0J(Fy63S;^j|e^h0Uoi+r0$[Q?uqQ_lHs+mMjZt@P[XRvAT/[]($GXUyk[JvCu
-::YLyb]au,BBWfpmISA9=D$}LN},]+]O&WM,(/ZAwSBNLu;{3qt,b~IGBp}$B8Q19]~IF-Nin6Z|mtTqQ_K2t4?;.KK,!lK=/e6@JLjd{kcwa&uS$vBk!CZDh]w?CCg
+::YLyb]au,BBWfpmISA9=D$}LN},]+]O&WM,(/ZAwSBNLu;{3qt,b~IGBp}$B8Q19]~if-Nin6Z|mtTqQ_K2t4?;.KK,!lK=/e6@JLjd{kcwa&uS$vBk!CZDh]w?CCg
 ::=XD)$zAE/&q1_Tge[vOJdey]p;hK5(VYT);I&aVdT2gJz-mgMjL[mhVrS_Z2zReHg+iRgKnnym!2uh2@@v}QQS_G^CvfournU7FkQu/|xT_K39jlHC=[}E)mJZ_+-
 ::A.&z3SRi[76TDBLE|T5Nhw1c?E~QZX(2Dn1YWj,,Rym]a[VPGRTyu$=O9Uf@/xoE(g;Q^b.?9Zea9}-gZF^N5uWE=/h}~Lub=nbsli?[3FU8-Scn__WJj}nBI5C=u
 ::lw53rsg&$6W,uYl!krnyjluc-m{8T1rKRM]d0!81JM?5SvO_kvB15Hf7tGig/CIJy6W&lF50p9$4Vf)ru7B]]s79CWc^vwn4DMRh9E93&npJ75[u$Fw--KE&Wd.a.
@@ -16330,7 +16330,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::V+cWg/&vEPF21|vuEm+b.}|BU8KN8N6?c/7KUXR?_)iEqGEJUDlR3;8#ebT9G;k/H[s5_43UTMlJm{Y(5.~&Tgxw@RzLQqVvbyfhjB$9.uMJ08.Qg}(zg}cXJsFof
 ::raf1AYH[E^)almt4GZq;]29!;p$&[q+|[Yj8XLEmYg)tKqsw#Dp[Xh(?2A!HJv.@}4M-ZJw,z()YW[Q0ph|Jp]^jHOF]1p&lr-N7c-Dj+rE/C4+cKGF@m)X~nOvch
 ::vRZV/Y)Y+BP]q7pgK-u}oC.J;nu4UJtucUQcNYFDP=bj&XxRm&D}y3[.o.2[0Q$dAix(ZW3nh-XcJ}1q9$;lu_gzjyz{D51ysfnRMcI[yb@TEIFW{+PqV,SDs$Dj7
-::6)/KHWZQ~yL(O=w!E(rIGk/l)p{mEJ4E=q7xQODy&#w;G0.O1}B|GyW]IF$t=jqj8w]J~g8o8Etfz#^bW,71vLS.];YGhElPodg0ZiDH;yQg95,;zUW@EnvaL.3k7
+::6)/KHWZQ~yL(O=w!E(rIGk/l)p{mEJ4E=q7xQODy&#w;G0.O1}B|GyW]if$t=jqj8w]J~g8o8Etfz#^bW,71vLS.];YGhElPodg0ZiDH;yQg95,;zUW@EnvaL.3k7
 ::wU=[^8?)NGnp+c,caSbF+TrW}zMM}QD4D4Rx(9Akl$LGW??_+AfJ~fH.G-J@eUWj$ozG$aFVT|Wg#]|4u0[(J]wP(cuT?+4AK7d5Wx^q(Kkd2p!XgMn0Thki[@FnF
 ::hTIUB5(v0;X+Q5_cKVw6t?t}tlbf=$Ucnasp+vR^],1T@C2ca+0CqEXZU&32TQAHF;G|9q{ijO~aS1r?@_EdC)3uV8i+L2io[p+hOaDbS-Wchfw!J7YaWi&Kn+8)W
 ::oz87kKa95H;8h5qGsrH6rd4ejj;^mtlf9IvUdr-2q@ba8R3pr5Z+W,ql_HvFGJD=eQk4?Ep[-.$Wpo}V;Zl6?LW7IB(G_fsBB;(8b{=#nWYax(hb5!7f9k$p0@-rc
@@ -17285,7 +17285,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::s94ddu}6y(iKc,FkClbc5.hx~-rq#bQ1ojxkf@$n^nUDu.72;WT&1HN,qfCQn?K#dI~1=JJG.y^(-HJ@j}Z@,_^3M?_pbOT.U1T]S^m)73cKCK@.EAb=aUSu;zlK8
 ::!]K{a!(-t[?l2J[HQYv6y0se4z}Q!T0^V0R+n&!~exvq^n-AK[oXG#$ydtLdL5p7^H)(e;o]kzN(p,4n1[VW]2V/=G^+m=wB9I3~eLbq$9a-7r@f2OEZy)Kl{Q4;Z
 ::V}B6#;sEp~,L;xRKuW+F)~YzJFIw+G{T$r@g-/ye[1J]g_X5H4V^+_{PPb3hCjpe@M@nTbLViK-)_!M2^j~ipAN@|LkhAr[bEsKluxJ]_RxJC4qhjbT5d3DnAaKp?
-::q/YAw.~~#4r+[K}jH0/2d{jEYo6O(zx[)FnB@fuSPrWsBiTn@__e~7JfGr3jf@z,Mctr7!EFwq54rMt}IF/{tZp+uSm;oJiYSbU[kFO$m4=qe(f{+SdYvpe5(8cW=
+::q/YAw.~~#4r+[K}jH0/2d{jEYo6O(zx[)FnB@fuSPrWsBiTn@__e~7JfGr3jf@z,Mctr7!EFwq54rMt}if/{tZp+uSm;oJiYSbU[kFO$m4=qe(f{+SdYvpe5(8cW=
 ::!,e-J0WwI-$3b7F#E|RnJI#+XH^FGqdzw_mpXdSETw44!n)!M=t$u(?[6,C6{eLY{AAx.3GqDQq,ZH]ae(L6Q3V(Z!8VDi$yr.?PHUEi;utIZV&Jr8yK0C$YF2wd@
 ::$K8{7=kp/uts)j+kWcY;G3x[3d|o_jR^Zq8?DHo)w,C$_n14yCJbMvgWCP;All4HYY3KS7^5OZ_i3xow$]W05j#qLFj_xw5i!kxjV9yVx4Dg~+lNI[AlX0=o(^CpJ
 ::Ac&D8qR2x5aQlZn7IAMC_h109T-DF3HTve4pgoT6ev1F(yiv#_q|G36&7Vk$Ck5Nq0iVF2?Xz/2C@Lchs=c9}p_oe|$OMv#6O]q26Q~?Wp@Rk;S?!YwToBLVsDDBg
@@ -17889,7 +17889,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::Ljj/yEQW[~g?YR35+EO|]^m0GVqP7WgLYhbLjT!9Y?]+k]Az@XFf@v3?uS7GKe/kMCd.5&ZNx=Wk]!b$E;5H2+SMQ61L=nFNK6Yne6p{&Bf).6,VU6ce@JV1(6Uuh
 ::{_vhwSm}HH#8T{U3qP@?@rkwJK)X8aAzTn4wpJ.Q/Phm7-G]ytwLt@W^5y]=-R&Ao;tGvBRU7jzn)QZQ!o=e|9;81k]_h;L+J8lpr(BE~B4+/kJ8}D2K=ZKVFqSr6
 ::4coTZdLj~VeN6mCr=Iw9eq(d9!^!gN,8[rGXQPtYoC1Wno1|eY,X-taqa79NK1r8;RKRnAMcs7Dtgw/pW;xD.qZ,cAV6ZwJwFd[pQXy}W5qZyTqcEfO#X},?UfP4v
-::st2@HJL.CWp|?|7Edx]2k7!aNmm]yhJ^}L!IF?,~7qfYXH00{LpbG}5Y3~rTqIgRvBe;NhITh;~ig6a^OA]]fCY3tczn5?WGriN$zrJ3]D[L5$,d6e$nWDu0(J[&?
+::st2@HJL.CWp|?|7Edx]2k7!aNmm]yhJ^}L!if?,~7qfYXH00{LpbG}5Y3~rTqIgRvBe;NhITh;~ig6a^OA]]fCY3tczn5?WGriN$zrJ3]D[L5$,d6e$nWDu0(J[&?
 ::5_2}L?=3VJ?7RUC@&UR,etDgD!-Pv^]2}-[@/FkR_fygVFmZ,X_+.B4qmNt$fPsV5bcUxCoiLlqepz-q-cB.MdW^dypZp9VTmc9{rG/6!a~GM;-@jPZ6ik4mo.}HL
 ::-wXR0r+Pq-kFz!ofZ^#wDjLUF3Vp,{H6TM8A-@9&WbN-v2y&{?#izg8!H0d+c^3d+Y/NBspH!_gz3Y-=ljL|C/basThsKK0&knJIf-M$nqCJ_yc@Boj&bUKHzqC|{
 ::F?Z5BPgU?igQ}coj,v&(t?Aw8B2I)O&xw+~C=DZ,{3zIGwy,dbI=vi&)D.mToFK~HKwMR&iT?B[@d4k(mAi1(MJO9$f7tuVNY@H~,N{01Y7QZTW4)YlV62CF7&T8G
@@ -18077,7 +18077,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::NLV|O/g9#LEBjV&(ly[FU-Ml.!CD+@gnBKS9bN4yF7iq29z0s}(0ix1W],|u+O[#}Mnquu]q-?rMJEWL/4!V37rL]t$^R|X.^QL2f]+fK9wUF&6?pp(;[~d,H01Zz
 ::kK[zbeLLE)f7#![Ku;iU{vANSkD-#FVN&&(!0OM&KeOWz$g}-jH?2K7bGlG)Asls[t7zbFZT;w5g|],Lo.f.}eG]ywlj|[AJ7A!uxR2Xwo}N{+T+O~4w&[5)O|i2(
 ::XsqsvV]VKWNscE^f)~_XZ/VqRP&2_x9Wvi/Xz,_P=f!0NovKsk,K]}44X;FooQ^d5lAdot4Go4cpKq}E[^Ab#3lyTCq^Lti(ZYtwCWgf7vHbs/H&c+k]/z@zJnITv
-::VkZUNn!|u{3E|IF=U^#;VQ&nU#8d-rJ^,#eRRV?XEZ.8Opg&Tceah0&{^j6GYRZ3Xm.(w[PW/S{G0z$4Z2J0b-Ti[.,X1o}|21D8_agsJP+PdsGc6xREl/-IhIu&V
+::VkZUNn!|u{3E|if=U^#;VQ&nU#8d-rJ^,#eRRV?XEZ.8Opg&Tceah0&{^j6GYRZ3Xm.(w[PW/S{G0z$4Z2J0b-Ti[.,X1o}|21D8_agsJP+PdsGc6xREl/-IhIu&V
 ::B?BKczrOk(4B_UR)}i[F_G1RZ!qWdV2Y,C{H)uOr{6F&[x)nGQ=M=#5NBjlc-^Eb)+!Az+OvHuB3~JPGBsTGU/)#vr[4sriBXA[Q#/4E0SSA]pjUS-TdaOGg+|_o8
 ::9p!Cb=_5svSA(@xt7-g].wq,Y{{4sl,4#e.zs=0b{=fD1(!MxdKjdGBoUekS_x^r4NQD2p5(.@5eu@(b.w(y++}Mb-uCcApC-4?PaeuLi!}wS983/h-2c?Cd{r/D7
 ::nlCPl(!Xf/]6hi&W9QA+XdS|lPy@Kgu.L9TfwtZZGs^9rR@_}Pxdz1=#lG,b+hP2Vi3A][KbVs3tse.F?,tK?dhrzP$lEh[0(-yXBo6++#Ure__G,l1&K@Q}215c)
@@ -18092,7 +18092,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::6yX~=Lt!sgGWHUms]{_^FFqUFK84.62w,R#u&akG2lB$tvGT/8(xs3SbWUG/7EYnCT}gP2Q}O9Sgw$[@W+cCTkrp6#8fk;qoFJ+TftIt&u|Dn~GHoi}@ReJPn=F)4
 ::,1R3!5p)|8mXo|lhm~W7{NIb^a=4gpHkzpdxl~0k+{kI}2G3^2oJTyhPn1K-MYfU~5dX/#x$;ALL4RQAhiZQ)A5+GM|G#iq{TiXoAK(+u!sMgVAM;(VrHPafGO,9c
 ::g#II)ckryab@t6+cMPPV;;e+.6mkeCiD2O/t#3mCl+s-U/=+JXySua}Gmm[t0Y;0(mYpo)Iaj.nbyzX2;V/,,WiN,ju6E9I..fFwYopH)@zZ?cur4y&Bm!e@U?{#]
-::t7gQNeR=TgE3)I.4p?pcMDR&?]sumvNNS|FwXDIK8^GxBKn)$n=IF,Vpp]WS&kTCOF_I3vH_b!6F=Wy[1-Mm7@+aWOrinju716&]x+|rp9b?=Nl}]=O9T(?epSc9F
+::t7gQNeR=TgE3)I.4p?pcMDR&?]sumvNNS|FwXDIK8^GxBKn)$n=if,Vpp]WS&kTCOF_I3vH_b!6F=Wy[1-Mm7@+aWOrinju716&]x+|rp9b?=Nl}]=O9T(?epSc9F
 ::ajuI=Z2;~y8N)@m76vK-9Hw^c-se?5N(8QL,gun?;Agbh6FGB#]cTpPKb]&ae?X6C=CIz6{67c~p}$M}qfhPt-4Yy5!Mve?(cL0o2$!Fn]dh0Y]G^SjXB.@?qR+0I
 ::S!Uqc4J[HkKNQh2z$jNs?;Epyau{JCQ|3=EPgr3XqfMq/RvCRlvd@yhUkHq#EJy7MR4Ai5|J)cG#0-Wv&LT_|yjRoT(aod{ZxofPOYJrn)f!X,2GeB1^6lXYP+GT2
 ::lqSUJvla1M[2}OBC-,L^HdQoJ](RHl^TqMTp!R@NV^TQ!=g$.Vu+pui{UGxF.}^_^rnP[l=w|$^QVvS}X=X+CRZ}zq#6Mg]hf0]VQ5~4M/G?TW$23zSmGAH(m{i/v
@@ -18691,7 +18691,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::@~Y{MuEACfkZ@|l?ImvjuKK1f/IX0[f}DKGv5]HxI!R8Vc4xWEpvWSuINGcxs(5_8P=8g9oUcb~kLDc$gK-+loD7o,-LTM/ZB&LJ,.}u5&nOvo0=|1[vLYfwT|4f6
 ::m2{=?nN/!K9Y!slaWiz9x[cawS?J__scTev,93{gZ@CNx&NP$3Z3(]g]^QrE4+xr5z}ZKUI8Z8XX{NAHnR[3_nlOABc8jW/IvuAc&7b,}4apm]W0Z}4MevsBq_2v,
 ::x..jd=jP|J-vPMsj({2^9Qnkawu3~rr_(O[[yl[X[C_I^X3CoXdI1~zl,S2Tw#GxMR,ZGVyYvDA+il@=H8ZaN5_Jo|D9nu4FxY~uifZydFgS}[&~SYKAq6q]ZeTu{
-::TNVFJDmzae37J^D/k}5.smYxxJooW-eXO]HZzkr/!J~QzthjTm&,8[P+IF@=9R{(Zy~Kmu2Wc_0q0/M3g_aSr@FR9!.N6nDq5)D9r|.AJDH2b~3BR5uc~Q;~hQjlt
+::TNVFJDmzae37J^D/k}5.smYxxJooW-eXO]HZzkr/!J~QzthjTm&,8[P+if@=9R{(Zy~Kmu2Wc_0q0/M3g_aSr@FR9!.N6nDq5)D9r|.AJDH2b~3BR5uc~Q;~hQjlt
 ::aE,E{&k(N7yLMF_1(-lsG^PFB8vce_M|_sJ?fdEN3]8IjCBtqUglFc1DpEasQc1[H78JERDf4{pO4~F]+6^}7V!~?hfn70P4fKYEGtG_2euLvoAxSWfX@P0!9R6LJ
 ::Bb3um)(~zBrUN+n4o^JIHCKhap#QPiq6/+?[jf;+X#,s{DKk3lFBuPu+W-@9lW-^ACSnMH89RUps&raQ(EE#WxeoCELCQnFCz7g/.yh~Q]Y(AJY+z7m,7YI+[Kz;m
 ::eEhfbn_)}dzsnte!?IoCH=!@,{^{{DY3BRXUy{Ro2ufc2K25pL[{ZU~av-4n$/(o)80DGzx54F)FEoGR&MVegoc(|L#^iuAhWrKCz3/Mywh)c?kN5QKB{u?0/]Z$V
@@ -19141,7 +19141,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::LJ(I+z9S.cK0rb+.p+l!min0[uPO/QgAlJuA{2pN[dpCn!GJ]$eB9sfzo316Z{cG](gM^9jZ9?R1H!/I_|,A4hf&,jiSHTx,I-y|y|.Way|eaiGj-7={)otJ)Q/4[
 ::=-NL3+0OLg5DJ9fKtiL99isWaKm)rg=RKPyI9LHpd!5P151vOcb5[L]Dt?k4.yXda8n996YD#@eX(z~0c;!G^,T8-W4oO#/1za|7up#;7h1/erTE+SgZ##hqe5CuF
 ::37-uklg,WUu$?7#,rVwfKD1I@gJQiWe+!i@&Q~[.TehK#-CDR{^pN|^iLbf8;37F=)8SqkDBs6S$@7S;1fo!qy$acZz2cZlf[k-d!{UbJ5@D0cU^DDS3aNG8V|PP8
-::|4phdvP#{D&~.{_D~Xi2J8Vkdp|K2MW![-UR?6,IF$^L8.&;-ep[s@a,eNwVv;FDP8s6d0#jflmLU7KL6pFK&9y-Pf{lS&MTU6=lNq$V^jvZTTRc9)9Wb_b962weA
+::|4phdvP#{D&~.{_D~Xi2J8Vkdp|K2MW![-UR?6,if$^L8.&;-ep[s@a,eNwVv;FDP8s6d0#jflmLU7KL6pFK&9y-Pf{lS&MTU6=lNq$V^jvZTTRc9)9Wb_b962weA
 ::1Vg)_HuN/$rl{ovGs)N}S}6FPMlznqnNR5OW87|y@-nKj7rX}Iq]&!Vhc^RebM2TIw+Z//aYtW{[]WDLcUUW;Ri@lAEkER7{m_&X]jI!D@S7R1wk@kN!S6;xd[=+v
 ::$o10s!OfSS-2Pr;EU5SaVfsHIs$/]WMy_Z1L]4ao$6Jb+@$oDQ$&Chal8DeIw2Dd&jq@f^.GeWE^lu(JY_O{tv7|$go_LkEfCd#F-vcEnF_@k0bJ_=^Fvmzps&F/e
 ::#Fah{H(g6gv!Z8WrDg,YmgMeDmdU9t$9}NsC&&9-IKS^RQv8n,0FKwIwBlSI4@_d=J{V-YmYpUo)k}DW]9@FD2]p,@bd[9S,k!azT)tq}I(yBj#PR(br{D_wpj0U7
@@ -19211,7 +19211,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 ::MYYA!9YR]VhQ}}lePRpfU)e.pToz3W2i2x!3G(Xx;BAt)cw[NQ,88yD-pf3]/XfPLmceBMB;zz-rVZa9=k4(!;)yARq1l&J0QscZYPm~fS&xt|3hK)DT35FVXG&LH
 ::3&~Xi)m8RV$kE-1+|iFotOt|H[v,]VS2WlLg?D1z(.oUZ6kENKd+DU&^@QH?+ug#}=,NBtsNh$I_^1V?g(^Y!fLtNzQ){bu6-K~~sfE6;F}q)I(E-3lDDY5tK,S/p
 ::]{ukYro2hL#GVg_9]QN~WI|6+0?sTTp-A[uKr$Vi+iz=yFLQc}$1&B&c&i/h;T(@ob3.ryn354miYrYvave[S-hVKL2P8hQZP4?@tvmT;G7YO,J.+.(tgJ0D+;DJ=
-::+=H=@dya^;sWbiiys#P=@7-7YcigZIKV4chd6/hzBNSxS1-/=Ei}|$2g6e?a!T.!uP_^0&n/gGm0u[p}.C{ns{IF;l3YmaX&d[hZdPN6n4xbM$Y{)fL@rzqxaDtSu
+::+=H=@dya^;sWbiiys#P=@7-7YcigZIKV4chd6/hzBNSxS1-/=Ei}|$2g6e?a!T.!uP_^0&n/gGm0u[p}.C{ns{if;l3YmaX&d[hZdPN6n4xbM$Y{)fL@rzqxaDtSu
 ::?C=CK7$1QdPv+0fhKZLf[@v,v0o{Vx[Wk/f$ow9KkAeYL4cd3JI=,gq?RfHWjj;^aoqyQfCSM(uMc6IFd5cKPbxcux^e+Gh(UH6z+jPSasVP9{H$]LGe6kx|C08H.
 ::8=tPOV-Iy1KDF@sEm,Eo_DO.{E?wyhj,jToH/c}uMneQ81}-5d/F,PO!nXu/Rf15xtsTvTE-QzoPXnomV0U{2=.eXi!TFZ9u=^8XyT$4V$DA0btiEeCfy0S,!6X9w
 ::_Hmhx;FqigQ?5m_ND0M|UuC@@nHXrN[.IU+4aBa~w&5)XS613(ZWnEn3$D5lF9g,z/CLxp4W)JQKjJ?L-jS!p(dML@=,U5!9Re.Iy=rR~dc@_q+Q9S4Prf58;t}+M
@@ -20169,7 +20169,7 @@ Add-Type -Language CSharp -TypeDefinition @"
 set _Debug=0
 
 :: change to 0 to turn OFF Windows or Office activation via the script
-:: note: this is not effective if Windows and/or Office installation is already Volume (GVLK installed)
+:: note: this is NOT effective if Windows and/or Office installation is already Volume (GVLK installed)
 set ActWindows=1
 set ActOffice=1
 
@@ -20217,8 +20217,8 @@ set KMS_Port=1688
 ::  This script is a fork of 'KMS_VL_ALL - Smart Activation Script' Project
 ::  The main project is maintained by @abbodi1406
 ::  https://forums.mydigitallife.net/posts/838808
- 
-::  This fork was made to avoid having any KMS binary files and system can be activated using 
+
+::  This fork was made to avoid having any KMS binary files and system can be activated using
 ::  some manual commands or transparent batch script files.
 ::  Thanks to @RPO (MDL), for providing great help in making of this fork.
 
@@ -20242,7 +20242,7 @@ set _args=
 set _elev=
 set Task=
 set "_arg1=%~1"
-if not defined _arg1 goto :NoProgArgs
+if NOT defined _arg1 goto :NoProgArgs
 set "_args=%~1"
 set "_arg2=%~2"
 if defined _arg2 set "_args=%~1 %~2"
@@ -20262,7 +20262,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 goto Done
 )
@@ -20393,15 +20393,15 @@ exit /b
 
 :Clear-KMS-Cache
 
-if exist "%ProgramData%\Online_KMS_Activation\Activate.cmd" exit /b
+if EXIST "%ProgramData%\Online_KMS_Activation\Activate.cmd" exit /b
 if %Clear-KMS-Cache% NEQ 1 exit /b
 
-::  Clear-KMS-Cache.cmd  
+::  Clear-KMS-Cache.cmd 
 ::  https://forums.mydigitallife.net/posts/1511883
 ::  Written by @abbodi1406 (MDL)
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "OSPP=SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
@@ -20476,12 +20476,12 @@ set "_run=nul"
 if %Logger% EQU 1 set _run="%~dpn0_Silent.log"
 
 set "SysPath=%SystemRoot%\System32"
-if exist "%SystemRoot%\Sysnative\reg.exe" (set "SysPath=%SystemRoot%\Sysnative")
+if EXIST "%SystemRoot%\Sysnative\reg.exe" (set "SysPath=%SystemRoot%\Sysnative")
 set "Path=%SysPath%;%SystemRoot%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "_err===== ERROR ===="
 set "xOS=x64"
 set "xBit=x64"
-if /i %PROCESSOR_ARCHITECTURE%==x86 (if not defined PROCESSOR_ARCHITEW6432 (
+if /i %PROCESSOR_ARCHITECTURE%==x86 (if NOT defined PROCESSOR_ARCHITEW6432 (
   set "xOS=x86"
   set "xBit=x86"
   )
@@ -20492,7 +20492,7 @@ set "_log=%~dpn0"
 set "_work=%~dp0"
 if "%_work:~-1%" equ "\" set "_work=%_work:~0,-1%"
 for /f "skip=2 tokens=2*" %%a in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop') do call set "_dsk=%%b"
-if exist "%SystemDrive%\Users\Public\Desktop\desktop.ini" set "_dsk=%SystemDrive%\Users\Public\Desktop"
+if EXIST "%SystemDrive%\Users\Public\Desktop\desktop.ini" set "_dsk=%SystemDrive%\Users\Public\Desktop"
 setlocal EnableDelayedExpansion
 
 if %_Debug% EQU 0 (
@@ -20509,11 +20509,11 @@ if %_Debug% EQU 0 (
   set "_Nul6="
   set "_Nul3="
   set "_Pause="
-  copy /y nul "!_work!\#.rw" 1>nul 2>nul && (if exist "!_work!\#.rw" del /f /q "!_work!\#.rw") || (set "_log=!_dsk!\%~n0")
+  copy /y nul "!_work!\#.rw" 1>nul 2>nul && (if EXIST "!_work!\#.rw" del /f /q "!_work!\#.rw") || (set "_log=!_dsk!\%~n0")
   if %Silent% EQU 0 (
   echo:
   echo Running in Debug Mode...
-  if not defined _args (echo The window will be closed when finished) else (echo please wait...)
+  if NOT defined _args (echo The window will be closed when finished) else (echo please wait...)
   echo:
   echo writing debug log to:
   echo "!_log!_Debug.log"
@@ -20557,10 +20557,10 @@ if %errorlevel%==0 (goto IntConnected)
 
 if %loop%== %max_loop% (
 %ELine%
-echo Internet is not connected.
+echo Internet is NOT connected.
 echo: &exit /b 1
 )
-echo Checking: Internet is not connected.
+echo Checking: Internet is NOT connected.
 echo Waiting 30 s
 timeout /t 30 >nul
 set /a loop=%loop%+1
@@ -20608,7 +20608,7 @@ echo:
 
 :server
 if %online_server_count% equ 2 (
-%EchoRed% Error: Activation was not successful.
+%EchoRed% Error: Activation was NOT successful.
 echo Restart the system and try again.
 echo Read the troubleshoot guide in ReadMe.
 echo:
@@ -20620,7 +20620,7 @@ exit /b 1
 if %server_num% gtr !max_servers! (
 echo ------------------------------------------------------------------
 echo:
-%EchoRed% Error: Internet is not connected.
+%EchoRed% Error: Internet is NOT connected.
 echo:
 echo ------------------------------------------------------------------
 echo:
@@ -20668,9 +20668,9 @@ set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatfor
 for /f "tokens=6 delims=[]. " %%G in ('ver') do set winbuild=%%G
 set SSppHook=0
 for /f %%A in ('dir /b /ad %SysPath%\spp\tokens\skus') do (
-  if %winbuild% GEQ 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*GVLK*.xrm-ms" set SSppHook=1
-  if %winbuild% LSS 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*VLKMS*.xrm-ms" set SSppHook=1
-  if %winbuild% LSS 9200 if exist "%SysPath%\spp\tokens\skus\%%A\*VL-BYPASS*.xrm-ms" set SSppHook=1
+  if %winbuild% GEQ 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*GVLK*.xrm-ms" set SSppHook=1
+  if %winbuild% LSS 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*VLKMS*.xrm-ms" set SSppHook=1
+  if %winbuild% LSS 9200 if EXIST "%SysPath%\spp\tokens\skus\%%A\*VL-BYPASS*.xrm-ms" set SSppHook=1
 )
 set OsppHook=1
 sc query osppsvc %_Nul3%
@@ -20703,7 +20703,7 @@ if %OsppHook% NEQ 0 call :StopService osppsvc
 call :UpdateOSPPEntry osppsvc.exe
 
 SET Win10Gov=0
-IF %winbuild% LSS 14393 if %SSppHook% NEQ 0 GOTO :Main
+if %winbuild% LSS 14393 if %SSppHook% NEQ 0 GOTO :Main
 SET "EditionWMI="
 SET "EditionID="
 SET "RegKey=HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages"
@@ -20714,25 +20714,25 @@ FOR /F "TOKENS=8 DELIMS=\" %%A IN ('REG QUERY "%RegKey%" /f "%Pattern%" /k %_Nul
     FOR /F "TOKENS=3 DELIMS=-~" %%B IN ('ECHO %%A') DO SET "EditionPKG=%%B"
   )
 )
-IF /I "%EditionPKG:~-7%" equ "Edition" (
+if /I "%EditionPKG:~-7%" equ "Edition" (
 SET "EditionID=%EditionPKG:~0,-7%"
-) ELSE (
+) else (
 FOR /F "TOKENS=3 DELIMS=: " %%A IN ('DISM /English /Online /Get-CurrentEdition %_Nul6% ^| FIND /I "Current Edition :"') DO SET "EditionID=%%A"
 )
-FOR /F "TOKENS=2 DELIMS==" %%A IN ('"WMIC PATH SoftwareLicensingProduct WHERE (ApplicationID='%_wApp%' AND PartialProductKey is not NULL) GET LicenseFamily /VALUE" %_Nul6%') DO IF NOT ERRORLEVEL 1 SET "EditionWMI=%%A"
-IF NOT DEFINED EditionWMI (
-IF %winbuild% GEQ 17063 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') DO SET "EditionID=%%B"
-IF %winbuild% LSS 14393 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') DO SET "EditionID=%%B"
+FOR /F "TOKENS=2 DELIMS==" %%A IN ('"WMIC PATH SoftwareLicensingProduct WHERE (ApplicationID='%_wApp%' AND PartialProductKey is NOT NULL) GET LicenseFamily /VALUE" %_Nul6%') DO if NOT ERRORLEVEL 1 SET "EditionWMI=%%A"
+if NOT DEFINED EditionWMI (
+if %winbuild% GEQ 17063 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') DO SET "EditionID=%%B"
+if %winbuild% LSS 14393 FOR /F "SKIP=2 TOKENS=2*" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v EditionId') DO SET "EditionID=%%B"
 GOTO :Main
 )
-FOR %%A IN (Cloud,CloudN,IoTEnterprise,IoTEnterpriseS,ProfessionalSingleLanguage,ProfessionalCountrySpecific) DO (IF /I "%EditionWMI%" equ "%%A" GOTO :Main)
+FOR %%A IN (Cloud,CloudN,IoTEnterprise,IoTEnterpriseS,ProfessionalSingleLanguage,ProfessionalCountrySpecific) DO (if /I "%EditionWMI%" equ "%%A" GOTO :Main)
 SET "EditionID=%EditionWMI%"
 
 :Main
-IF DEFINED EditionID FOR %%A IN (EnterpriseG,EnterpriseGN) DO (IF /I "%EditionID%" equ "%%A" SET Win10Gov=1)
+if DEFINED EditionID FOR %%A IN (EnterpriseG,EnterpriseGN) DO (if /I "%EditionID%" equ "%%A" SET Win10Gov=1)
 if defined EditionID (set "_winos=Windows %EditionID% edition") else (set "_winos=Detected Windows")
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %_Nul6%') do if not errorlevel 1 set "_winos=%%b"
-set "nKMS=does not support KMS activation..."
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName %_Nul6%') do if NOT errorlevel 1 set "_winos=%%b"
+set "nKMS=does NOT support KMS activation..."
 set "nEval=Evaluation Editions cannot be activated. Please install full Windows OS."
 if defined EditionID echo %EditionID%| findstr /I /E Eval %_Nul1% && (
 set _eval=1
@@ -20745,7 +20745,7 @@ reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v ProductRele
 set "_C15R="
 reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath %_Nul3% && (
 reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds %_Nul3% && set "_C15R=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration"
-if not defined _C15R reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid %_Nul3% && set "_C15R=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag"
+if NOT defined _C15R reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid %_Nul3% && set "_C15R=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag"
 )
 set _V16Ids=Mondo,ProPlus,ProjectPro,VisioPro,Standard,ProjectStd,VisioStd,Access,SkypeforBusiness,OneNote,Excel,Outlook,PowerPoint,Publisher,Word
 set _R16Ids=%_V16Ids%,Professional,HomeBusiness,HomeStudent,O365Business,O365SmallBusPrem,O365HomePrem,O365EduCloud
@@ -20757,9 +20757,9 @@ call :RunSPP
 if %ActOffice% NEQ 0 call :RunOSPP
 if %ActOffice% EQU 0 (echo:&echo Office activation is OFF...)
 
-if exist "!_temp!\crv*.txt" del /f /q "!_temp!\crv*.txt"
-if exist "!_temp!\*chk.txt" del /f /q "!_temp!\*chk.txt"
-if exist "!_temp!\slmgr.vbs" del /f /q "!_temp!\slmgr.vbs"
+if EXIST "!_temp!\crv*.txt" del /f /q "!_temp!\crv*.txt"
+if EXIST "!_temp!\*chk.txt" del /f /q "!_temp!\*chk.txt"
+if EXIST "!_temp!\slmgr.vbs" del /f /q "!_temp!\slmgr.vbs"
 call :StopService sppsvc
 if %OsppHook% NEQ 0 call :StopService osppsvc
 
@@ -20767,7 +20767,7 @@ sc start sppsvc trigger=timer;sessionid=0 %_Nul3%
 echo:
 if %activation_ok%==0 (
 echo ------------------------------------------------------------------ &echo:
-if not %online_server_count%==2 (
+if NOT %online_server_count%==2 (
 echo Activation wasn't successful. Trying another server...&echo:
 echo ------------------------------------------------------------------ &echo:
 )
@@ -20801,12 +20801,12 @@ if %ActWindows% EQU 0 (
   )
 )
 if %Off1ce% EQU 0 if %WinVL% EQU 0 exit /b
-wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get Name %_Nul2% | findstr /i Windows %_Nul1% && (set _gvlk=1) || (set _gvlk=0)
+wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get Name %_Nul2% | findstr /i Windows %_Nul1% && (set _gvlk=1) || (set _gvlk=0)
 set gpr=0
-if %winbuild% GEQ 10240 if %SkipKMS38% NEQ 0 if %_gvlk% EQU 1 for /f "tokens=2 delims==" %%A in ('"wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get GracePeriodRemaining /VALUE" %_Nul6%') do set "gpr=%%A"
+if %winbuild% GEQ 10240 if %SkipKMS38% NEQ 0 if %_gvlk% EQU 1 for /f "tokens=2 delims==" %%A in ('"wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get GracePeriodRemaining /VALUE" %_Nul6%') do set "gpr=%%A"
 if %gpr% NEQ 0 if %gpr% GTR 259200 (
 set W1nd0ws=0
-wmic path %spp% where "ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL" get LicenseFamily %_Nul2% | findstr /i EnterpriseG %_Nul1% && (call set W1nd0ws=1)
+wmic path %spp% where "ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL" get LicenseFamily %_Nul2% | findstr /i EnterpriseG %_Nul1% && (call set W1nd0ws=1)
 )
 for /f "tokens=2 delims==" %%A in ('"wmic path %sps% get Version /VALUE"') do set ver=%%A
 wmic path %sps% where version='%ver%' call SetKeyManagementServiceMachine MachineName="%KMS_IP%" %_Nul3%
@@ -20873,16 +20873,16 @@ find /i "Office 15" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off15% EQU 0 exit /
 find /i "Office 16" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off16% EQU 0 exit /b)
 find /i "Office 19" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off19% EQU 0 exit /b)
 set _office=1
-wmic path %spp% where (PartialProductKey is not NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
+wmic path %spp% where (PartialProductKey is NOT NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
 for /f "tokens=3 delims==, " %%G in ('"wmic path %spp% where ID='%app%' get Name /value"') do set OffVer=%%G
 call :offchk%OffVer%
 exit /b
 
 :sppchkwin
 set _office=0
-if %winbuild% GEQ 14393 if %_gvlk% EQU 0 wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get Name %_Nul2% | findstr /i Windows %_Nul1% && (set _gvlk=1)
+if %winbuild% GEQ 14393 if %_gvlk% EQU 0 wmic path %spp% where (ApplicationID='%_wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get Name %_Nul2% | findstr /i Windows %_Nul1% && (set _gvlk=1)
 wmic path %spp% where ID='%app%' get LicenseStatus %_Nul2% | findstr "1" %_Nul1% && (echo:&call :activate&exit /b)
-wmic path %spp% where (PartialProductKey is not NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
+wmic path %spp% where (PartialProductKey is NOT NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
 if %_gvlk% EQU 1 exit /b
 if %WinPerm% EQU 1 exit /b
 if %winbuild% LSS 10240 (call :winchk&exit /b)
@@ -20895,7 +20895,7 @@ b71515d9-89a2-4c60-88c8-656fbcca7f3a,af43f7f0-3b1e-4266-a123-1fdb53f4323b,075aca
 ) do (
 if /i '%app%' EQU '%%A' exit /b
 )
-if not defined EditionID (call :winchk&exit /b)
+if NOT defined EditionID (call :winchk&exit /b)
 if %winbuild% LSS 14393 (call :winchk&exit /b)
 if /i '%app%' EQU '0df4f814-3f57-4b8b-9a9d-fddadcd69fac' if /i %EditionID% NEQ CloudE exit /b
 if /i '%app%' EQU 'e0c42288-980c-4788-a014-c080d2e1926e' if /i %EditionID% NEQ Education exit /b
@@ -20919,10 +20919,10 @@ call :winchk
 exit /b
 
 :winchk
-if not defined tok (if %winbuild% GEQ 9200 (set "tok=4") else (set "tok=7"))
+if NOT defined tok (if %winbuild% GEQ 9200 (set "tok=4") else (set "tok=7"))
 wmic path %spp% where (LicenseStatus='1' and Description like '%%KMSCLIENT%%') get Name %_Nul2% | findstr /i "Windows" %_Nul3% && (exit /b)
 echo:
-wmic path %spp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is not NULL) get Name %_Nul2% | findstr /i "Windows" %_Nul3% && (
+wmic path %spp% where (LicenseStatus='1' and GracePeriodRemaining='0' and PartialProductKey is NOT NULL) get Name %_Nul2% | findstr /i "Windows" %_Nul3% && (
 set WinPerm=1
 )
 if %WinPerm% EQU 0 (
@@ -21025,7 +21025,7 @@ find /i "Office 15" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off15% EQU 0 exit /
 find /i "Office 16" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off16% EQU 0 exit /b)
 find /i "Office 19" "!_temp!\sppchk.txt" %_Nul1% && (if %loc_off19% EQU 0 exit /b)
 set _office=0
-wmic path %spp% where (PartialProductKey is not NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
+wmic path %spp% where (PartialProductKey is NOT NULL) get ID %_Nul2% | findstr /i "%app%" %_Nul1% && (echo:&call :activate&exit /b)
 for /f "tokens=3 delims==, " %%G in ('"wmic path %spp% where ID='%app%' get Name /value"') do set OffVer=%%G
 call :offchk%OffVer%
 exit /b
@@ -21198,12 +21198,12 @@ if defined _C16R reg query %_C16R% /v ProductReleaseIds %_Nul2% | findstr 2019 %
 exit /b
 )
 
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" (
 set loc_off%1=1
 if %1 EQU 16 set _O16MSI=1
 if %1 EQU 15 set _O15MSI=1
 )
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\%1.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" (
 set loc_off%1=1
 if %1 EQU 16 set _O16MSI=1
 if %1 EQU 15 set _O15MSI=1
@@ -21225,9 +21225,9 @@ set loc_off%1=1
 exit /b
 )
 
-if exist "%ProgramFiles%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
-if %xOS%==x64 if exist "%ProgramW6432%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
-if %xOS%==x64 if exist "%ProgramFiles(x86)%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if EXIST "%ProgramFiles%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if %xOS%==x64 if EXIST "%ProgramW6432%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
+if %xOS%==x64 if EXIST "%ProgramFiles(x86)%\Microsoft Office\Office%1\OSPP.VBS" set loc_off%1=1
 exit /b
 
 :insKey
@@ -21235,7 +21235,7 @@ echo:
 set "_key="
 for /f "tokens=2 delims==" %%A in ('"wmic path %spp% where ID='%app%' get Name /VALUE"') do echo Installing Key for: %%A
 call :keys %app%
-if "%_key%" equ "" (echo Could not find matching KMS Client key&exit /b)
+if "%_key%" equ "" (echo Could NOT find matching KMS Client key&exit /b)
 wmic path %sps% where version='%ver%' call InstallProductKey ProductKey="%_key%" %_Nul3%
 set ERRORCODE=%ERRORLEVEL%
 if %ERRORCODE% NEQ 0 (
@@ -21321,11 +21321,11 @@ if %error1% EQU 1060 if %error2% EQU 1060 (
 goto :%_fC2R%
 )
 set _Office16=0
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if exist "%%b\root\Licenses16\ProPlus*.xrm-ms" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if EXIST "%%b\root\Licenses16\ProPlus*.xrm-ms" (
   set _Office16=1
 )
 set _Office15=0
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if exist "%%b\root\Licenses\ProPlus*.xrm-ms" (
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if EXIST "%%b\root\Licenses\ProPlus*.xrm-ms" (
   set _Office15=1
 )
 if %_Office16% EQU 0 if %_Office15% EQU 0 (
@@ -21341,10 +21341,10 @@ set "_Config="
 set "_PRIDs="
 set "_LicensesPath="
 set "_Integrator="
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_InstallRoot=%%b\root")
-if not "%_InstallRoot%" equ "" (
-  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v PackageGUID" %_Nul6%') do if not errorlevel 1 (set "_GUID=%%b")
-  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_ProductIds=%%b")
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v InstallPath" %_Nul6%') do if NOT errorlevel 1 (set "_InstallRoot=%%b\root")
+if "%_InstallRoot%" neq "" (
+  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun /v PackageGUID" %_Nul6%') do if NOT errorlevel 1 (set "_GUID=%%b")
+  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if NOT errorlevel 1 (set "_ProductIds=%%b")
   set "_Config=HKLM\SOFTWARE\Microsoft\Office\ClickToRun\Configuration"
   set "_PRIDs=HKLM\SOFTWARE\Microsoft\Office\ClickToRun\ProductReleaseIDs"
 )
@@ -21354,13 +21354,13 @@ for /f "skip=2 tokens=2*" %%a in ('"reg query %_PRIDs% /v ActiveConfiguration" %
 if "%_ProductIds%" equ "" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if not exist "%_LicensesPath%\ProPlus*.xrm-ms" (
+if NOT EXIST "%_LicensesPath%\ProPlus*.xrm-ms" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if not exist "%_Integrator%" (
+if NOT EXIST "%_Integrator%" (
 if %_Office15% EQU 0 (goto :%_fC2R%) else (goto :Reg15istry)
 )
-if exist "%_LicensesPath%\Word2019VL_KMS_Client_AE*.xrm-ms" (set "_tag=2019"&set "_ons= 2019") else (set "_tag="&set "_ons= 2016")
+if EXIST "%_LicensesPath%\Word2019VL_KMS_Client_AE*.xrm-ms" (set "_tag=2019"&set "_ons= 2019") else (set "_tag="&set "_ons= 2016")
 if %_Office15% EQU 0 goto :CheckC2R
 
 :Reg15istry
@@ -21370,47 +21370,47 @@ set "_Con15fig="
 set "_PR15IDs="
 set "_OSPP15Ready="
 set "_Licenses15Path="
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if not errorlevel 1 (set "_Install15Root=%%b\root")
-if not "%_Install15Root%" equ "" (
-  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if not errorlevel 1 (set "_Product15Ids=%%b")
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun /v InstallPath" %_Nul6%') do if NOT errorlevel 1 (set "_Install15Root=%%b\root")
+if "%_Install15Root%" neq "" (
+  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds" %_Nul6%') do if NOT errorlevel 1 (set "_Product15Ids=%%b")
   set "_Con15fig=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration /v ProductReleaseIds"
   set "_PR15IDs=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\ProductReleaseIDs"
   set "_OSPP15Ready=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\Configuration"
 )
 set "_OSPP15ReadT=REG_SZ"
 if "%_Product15Ids%" equ "" (
-  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid" %_Nul6%') do if not errorlevel 1 (set "_Product15Ids=%%b")
+  for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid" %_Nul6%') do if NOT errorlevel 1 (set "_Product15Ids=%%b")
   set "_Con15fig=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun\propertyBag /v productreleaseid"
   set "_OSPP15Ready=HKLM\SOFTWARE\Microsoft\Office\15.0\ClickToRun"
   set "_OSPP15ReadT=REG_DWORD"
 )
 set "_Licenses15Path=%_Install15Root%\Licenses"
-if exist "%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS" (
+if EXIST "%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramFiles%\Microsoft Office\Office15\OSPP.VBS"
-) else if exist "%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS" (
+) else if EXIST "%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramW6432%\Microsoft Office\Office15\OSPP.VBS"
-) else if exist "%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS" (
+) else if EXIST "%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS" (
   set "_OSPP15VBS=%ProgramFiles(x86)%\Microsoft Office\Office15\OSPP.VBS"
 )
 if "%_Product15Ids%" equ "" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
-if not exist "%_Licenses15Path%\ProPlus*.xrm-ms" (
+if NOT EXIST "%_Licenses15Path%\ProPlus*.xrm-ms" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
-if %winbuild% LSS 9200 if not exist "%_OSPP15VBS%" (
+if %winbuild% LSS 9200 if NOT EXIST "%_OSPP15VBS%" (
 if %_Office16% EQU 0 (goto :%_fC2R%) else (goto :CheckC2R)
 )
 
 :CheckC2R
 set _OMSI=0
 if %_Office16% EQU 0 (
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
 )
 if %_Office15% EQU 0 (
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
-for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if exist "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
+for /f "skip=2 tokens=2*" %%a in ('"reg query HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\15.0\Common\InstallRoot /v Path" %_Nul6%') do if EXIST "%%b\OSPP.VBS" set _OMSI=1
 )
 if %winbuild% GEQ 9200 (
 set _spp=SoftwareLicensingProduct
@@ -21422,8 +21422,8 @@ set _sps=OfficeSoftwareProtectionService
 set _vbsi="!_OSPP15VBS!" /inslic:
 )
 set "_wmi="
-for /f "tokens=2 delims==" %%# in ('"wmic path %_sps% get version /value" %_Nul6%') do if not errorlevel 1 set "_wmi=%%#"
-if not defined _wmi (
+for /f "tokens=2 delims==" %%# in ('"wmic path %_sps% get version /value" %_Nul6%') do if NOT errorlevel 1 set "_wmi=%%#"
+if NOT defined _wmi (
 goto :%_fC2R%
 )
 set _Retail=0
@@ -21432,23 +21432,23 @@ find /i "RETAIL channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 find /i "RETAIL(MAK) channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 find /i "TIMEBASED_SUB channel" "!_temp!\crvRetail.txt" %_Nul1% && set _Retail=1
 set "_copp="
-if exist "%SysPath%\msvcr100.dll" (
+if EXIST "%SysPath%\msvcr100.dll" (
 set _copp=1
-) else if exist "!_InstallRoot!\vfs\System\msvcr100.dll" (
+) else if EXIST "!_InstallRoot!\vfs\System\msvcr100.dll" (
 set _copp="!_InstallRoot!\vfs\System"
-) else if exist "!_Install15Root!\vfs\System\msvcr100.dll" (
+) else if EXIST "!_Install15Root!\vfs\System\msvcr100.dll" (
 set _copp="!_Install15Root!\vfs\System"
-) else if exist "%SystemRoot%\SysWOW64\msvcr100.dll" (
+) else if EXIST "%SystemRoot%\SysWOW64\msvcr100.dll" (
 set _copp=1
 set xBit=x86
-) else if exist "!_InstallRoot!\vfs\SystemX86\msvcr100.dll" (
+) else if EXIST "!_InstallRoot!\vfs\SystemX86\msvcr100.dll" (
 set _copp="!_InstallRoot!\vfs\SystemX86"
 set xBit=x86
-) else if exist "!_Install15Root!\vfs\SystemX86\msvcr100.dll" (
+) else if EXIST "!_Install15Root!\vfs\SystemX86\msvcr100.dll" (
 set _copp="!_Install15Root!\vfs\SystemX86"
 set xBit=x86
 )
-if not exist "!_work!\bin\cleanospp%xBit%.exe" (
+if NOT EXIST "!_work!\bin\cleanospp%xBit%.exe" (
 set "_copp="
 )
 if %_Retail% EQU 0 if %_OMSI% EQU 0 if defined _copp (
@@ -21800,7 +21800,7 @@ goto :GVLKC2R
 :InsLic
 set "_ID=%1Volume"
 set "_pkey="
-if not "%2" equ "" (
+if "%2" neq "" (
 set "_ID=%1Retail"
 set "_pkey=PidKey=%2"
 )
@@ -21817,7 +21817,7 @@ exit /b
 set "_ID=%1Volume"
 set "_patt=%1VL_"
 set "_pkey="
-if not "%2" equ "" (
+if "%2" neq "" (
 set "_ID=%1Retail"
 set "_patt=%1R_"
 set "_pkey=%2"
@@ -21842,7 +21842,7 @@ if %_Office15% EQU 1 (
 for %%a in (%_R15Ids%,ProPlus) do set "_%%a="
 )
 if %winbuild% GEQ 9200 wmic path %_sps% where version='%_wmi%' call RefreshLicenseStatus %_Nul3%
-if exist "%SysPath%\spp\store_test\2.0\tokens.dat" if defined _copp (
+if EXIST "%SysPath%\spp\store_test\2.0\tokens.dat" if defined _copp (
 %_cscript% %_SLMGR% /rilc
 )
 goto :%_sC2R%
@@ -21853,689 +21853,689 @@ goto :%1 %_Nul2%
 
 :: Windows 10 [RS5]
 :32d2fab3-e4a8-42c2-923b-4bf4fd13e6ee
-set "_key=M7XTQ-FN8P6-TTKYV-9D4CC-J462D" &:: Enterprise LTSC 2019
+set "_key=M7XTQ-FN8P6-TTKYV-9D4CC-J462D" &rem Enterprise LTSC 2019
 exit /b
 
 :7103a333-b8c8-49cc-93ce-d37c09687f92
-set "_key=92NFX-8DJQP-P6BBQ-THF9C-7CG2H" &:: Enterprise LTSC 2019 N
+set "_key=92NFX-8DJQP-P6BBQ-THF9C-7CG2H" &rem Enterprise LTSC 2019 N
 exit /b
 
 :ec868e65-fadf-4759-b23e-93fe37f2cc29
-set "_key=CPWHC-NT2C7-VYW78-DHDB2-PG3GK" &:: Enterprise for Virtual Desktops
+set "_key=CPWHC-NT2C7-VYW78-DHDB2-PG3GK" &rem Enterprise for Virtual Desktops
 exit /b
 
 :0df4f814-3f57-4b8b-9a9d-fddadcd69fac
-set "_key=NBTWJ-3DR69-3C4V8-C26MC-GQ9M6" &:: Lean
+set "_key=NBTWJ-3DR69-3C4V8-C26MC-GQ9M6" &rem Lean
 exit /b
 
 :: Windows 10 [RS3]
 :82bbc092-bc50-4e16-8e18-b74fc486aec3
-set "_key=NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J" &:: Pro Workstation
+set "_key=NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J" &rem Pro Workstation
 exit /b
 
 :4b1571d3-bafb-4b40-8087-a961be2caf65
-set "_key=9FNHH-K3HBT-3W4TD-6383H-6XYWF" &:: Pro Workstation N
+set "_key=9FNHH-K3HBT-3W4TD-6383H-6XYWF" &rem Pro Workstation N
 exit /b
 
 :e4db50ea-bda1-4566-b047-0ca50abc6f07
-set "_key=7NBT4-WGBQX-MP4H7-QXFF8-YP3KX" &:: Enterprise Remote Server
+set "_key=7NBT4-WGBQX-MP4H7-QXFF8-YP3KX" &rem Enterprise Remote Server
 exit /b
 
 :: Windows 10 [RS2]
 :e0b2d383-d112-413f-8a80-97f373a5820c
-set "_key=YYVX9-NTFWV-6MDM3-9PT4T-4M68B" &:: Enterprise G
+set "_key=YYVX9-NTFWV-6MDM3-9PT4T-4M68B" &rem Enterprise G
 exit /b
 
 :e38454fb-41a4-4f59-a5dc-25080e354730
-set "_key=44RPN-FTY23-9VTTB-MP9BX-T84FV" &:: Enterprise G N
+set "_key=44RPN-FTY23-9VTTB-MP9BX-T84FV" &rem Enterprise G N
 exit /b
 
 :: Windows 10 [RS1]
 :2d5a5a60-3040-48bf-beb0-fcd770c20ce0
-set "_key=DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ" &:: Enterprise 2016 LTSB
+set "_key=DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ" &rem Enterprise 2016 LTSB
 exit /b
 
 :9f776d83-7156-45b2-8a5c-359b9c9f22a3
-set "_key=QFFDN-GRT3P-VKWWX-X7T3R-8B639" &:: Enterprise 2016 LTSB N
+set "_key=QFFDN-GRT3P-VKWWX-X7T3R-8B639" &rem Enterprise 2016 LTSB N
 exit /b
 
 :3f1afc82-f8ac-4f6c-8005-1d233e606eee
-set "_key=6TP4R-GNPTD-KYYHQ-7B7DP-J447Y" &:: Pro Education
+set "_key=6TP4R-GNPTD-KYYHQ-7B7DP-J447Y" &rem Pro Education
 exit /b
 
 :5300b18c-2e33-4dc2-8291-47ffcec746dd
-set "_key=YVWGF-BXNMC-HTQYQ-CPQ99-66QFC" &:: Pro Education N
+set "_key=YVWGF-BXNMC-HTQYQ-CPQ99-66QFC" &rem Pro Education N
 exit /b
 
 :: Windows 10 [TH]
 :58e97c99-f377-4ef1-81d5-4ad5522b5fd8
-set "_key=TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" &:: Home
+set "_key=TX9XD-98N7V-6WMQ6-BX7FG-H8Q99" &rem Home
 exit /b
 
 :7b9e1751-a8da-4f75-9560-5fadfe3d8e38
-set "_key=3KHY7-WNT83-DGQKR-F7HPR-844BM" &:: Home N
+set "_key=3KHY7-WNT83-DGQKR-F7HPR-844BM" &rem Home N
 exit /b
 
 :cd918a57-a41b-4c82-8dce-1a538e221a83
-set "_key=7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" &:: Home Single Language
+set "_key=7HNRX-D7KGG-3K4RQ-4WPJ4-YTDFH" &rem Home Single Language
 exit /b
 
 :a9107544-f4a0-4053-a96a-1479abdef912
-set "_key=PVMJN-6DFY6-9CCP6-7BKTT-D3WVR" &:: Home China
+set "_key=PVMJN-6DFY6-9CCP6-7BKTT-D3WVR" &rem Home China
 exit /b
 
 :2de67392-b7a7-462a-b1ca-108dd189f588
-set "_key=W269N-WFGWX-YVC9B-4J6C9-T83GX" &:: Pro
+set "_key=W269N-WFGWX-YVC9B-4J6C9-T83GX" &rem Pro
 exit /b
 
 :a80b5abf-76ad-428b-b05d-a47d2dffeebf
-set "_key=MH37W-N47XK-V7XM9-C7227-GCQG9" &:: Pro N
+set "_key=MH37W-N47XK-V7XM9-C7227-GCQG9" &rem Pro N
 exit /b
 
 :e0c42288-980c-4788-a014-c080d2e1926e
-set "_key=NW6C2-QMPVW-D7KKK-3GKT6-VCFB2" &:: Education
+set "_key=NW6C2-QMPVW-D7KKK-3GKT6-VCFB2" &rem Education
 exit /b
 
 :3c102355-d027-42c6-ad23-2e7ef8a02585
-set "_key=2WH4N-8QGBV-H22JP-CT43Q-MDWWJ" &:: Education N
+set "_key=2WH4N-8QGBV-H22JP-CT43Q-MDWWJ" &rem Education N
 exit /b
 
 :73111121-5638-40f6-bc11-f1d7b0d64300
-set "_key=NPPR9-FWDCX-D2C8J-H872K-2YT43" &:: Enterprise
+set "_key=NPPR9-FWDCX-D2C8J-H872K-2YT43" &rem Enterprise
 exit /b
 
 :e272e3e2-732f-4c65-a8f0-484747d0d947
-set "_key=DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4" &:: Enterprise N
+set "_key=DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4" &rem Enterprise N
 exit /b
 
 :7b51a46c-0c04-4e8f-9af4-8496cca90d5e
-set "_key=WNMTR-4C88C-JK8YV-HQ7T2-76DF9" &:: Enterprise 2015 LTSB
+set "_key=WNMTR-4C88C-JK8YV-HQ7T2-76DF9" &rem Enterprise 2015 LTSB
 exit /b
 
 :87b838b7-41b6-4590-8318-5797951d8529
-set "_key=2F77B-TNFGY-69QQF-B8YKP-D69TJ" &:: Enterprise 2015 LTSB N
+set "_key=2F77B-TNFGY-69QQF-B8YKP-D69TJ" &rem Enterprise 2015 LTSB N
 exit /b
 
 :: Windows Server 2019 [RS5]
 :de32eafd-aaee-4662-9444-c1befb41bde2
-set "_key=N69G4-B89J2-4G8F4-WWYCC-J464C" &:: Standard
+set "_key=N69G4-B89J2-4G8F4-WWYCC-J464C" &rem Standard
 exit /b
 
 :34e1ae55-27f8-4950-8877-7a03be5fb181
-set "_key=WMDGN-G9PQG-XVVXX-R3X43-63DFG" &:: Datacenter
+set "_key=WMDGN-G9PQG-XVVXX-R3X43-63DFG" &rem Datacenter
 exit /b
 
 :034d3cbb-5d4b-4245-b3f8-f84571314078
-set "_key=WVDHN-86M7X-466P6-VHXV7-YY726" &:: Essentials
+set "_key=WVDHN-86M7X-466P6-VHXV7-YY726" &rem Essentials
 exit /b
 
 :a99cc1f0-7719-4306-9645-294102fbff95
-set "_key=FDNH6-VW9RW-BXPJ7-4XTYG-239TB" &:: Azure Core
+set "_key=FDNH6-VW9RW-BXPJ7-4XTYG-239TB" &rem Azure Core
 exit /b
 
 :73e3957c-fc0c-400d-9184-5f7b6f2eb409
-set "_key=N2KJX-J94YW-TQVFB-DG9YT-724CC" &:: Standard ACor
+set "_key=N2KJX-J94YW-TQVFB-DG9YT-724CC" &rem Standard ACor
 exit /b
 
 :90c362e5-0da1-4bfd-b53b-b87d309ade43
-set "_key=6NMRW-2C8FM-D24W7-TQWMY-CWH2D" &:: Datacenter ACor
+set "_key=6NMRW-2C8FM-D24W7-TQWMY-CWH2D" &rem Datacenter ACor
 exit /b
 
 :8de8eb62-bbe0-40ac-ac17-f75595071ea3
-set "_key=GRFBW-QNDC4-6QBHG-CCK3B-2PR88" &:: ServerARM64
+set "_key=GRFBW-QNDC4-6QBHG-CCK3B-2PR88" &rem ServerARM64
 exit /b
 
 :: Windows Server 2016 [RS4]
 :43d9af6e-5e86-4be8-a797-d072a046896c
-set "_key=K9FYF-G6NCK-73M32-XMVPY-F9DRR" &:: ServerARM64
+set "_key=K9FYF-G6NCK-73M32-XMVPY-F9DRR" &rem ServerARM64
 exit /b
 
 :: Windows Server 2016 [RS3]
 :61c5ef22-f14f-4553-a824-c4b31e84b100
-set "_key=PTXN8-JFHJM-4WC78-MPCBR-9W4KR" &:: Standard ACor
+set "_key=PTXN8-JFHJM-4WC78-MPCBR-9W4KR" &rem Standard ACor
 exit /b
 
 :e49c08e7-da82-42f8-bde2-b570fbcae76c
-set "_key=2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG" &:: Datacenter ACor
+set "_key=2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG" &rem Datacenter ACor
 exit /b
 
 :: Windows Server 2016 [RS1]
 :8c1c5410-9f39-4805-8c9d-63a07706358f
-set "_key=WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY" &:: Standard
+set "_key=WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY" &rem Standard
 exit /b
 
 :21c56779-b449-4d20-adfc-eece0e1ad74b
-set "_key=CB7KF-BWN84-R7R2Y-793K2-8XDDG" &:: Datacenter
+set "_key=CB7KF-BWN84-R7R2Y-793K2-8XDDG" &rem Datacenter
 exit /b
 
 :2b5a1b0f-a5ab-4c54-ac2f-a6d94824a283
-set "_key=JCKRF-N37P4-C2D82-9YXRT-4M63B" &:: Essentials
+set "_key=JCKRF-N37P4-C2D82-9YXRT-4M63B" &rem Essentials
 exit /b
 
 :7b4433f4-b1e7-4788-895a-c45378d38253
-set "_key=QN4C6-GBJD2-FB422-GHWJK-GJG2R" &:: Cloud Storage
+set "_key=QN4C6-GBJD2-FB422-GHWJK-GJG2R" &rem Cloud Storage
 exit /b
 
 :3dbf341b-5f6c-4fa7-b936-699dce9e263f
-set "_key=VP34G-4NPPG-79JTQ-864T4-R3MQX" &:: Azure Core
+set "_key=VP34G-4NPPG-79JTQ-864T4-R3MQX" &rem Azure Core
 exit /b
 
 :: Windows 8.1
 :fe1c3238-432a-43a1-8e25-97e7d1ef10f3
-set "_key=M9Q9P-WNJJT-6PXPY-DWX8H-6XWKK" &:: Core
+set "_key=M9Q9P-WNJJT-6PXPY-DWX8H-6XWKK" &rem Core
 exit /b
 
 :78558a64-dc19-43fe-a0d0-8075b2a370a3
-set "_key=7B9N3-D94CG-YTVHR-QBPX3-RJP64" &:: Core N
+set "_key=7B9N3-D94CG-YTVHR-QBPX3-RJP64" &rem Core N
 exit /b
 
 :c72c6a1d-f252-4e7e-bdd1-3fca342acb35
-set "_key=BB6NG-PQ82V-VRDPW-8XVD2-V8P66" &:: Core Single Language
+set "_key=BB6NG-PQ82V-VRDPW-8XVD2-V8P66" &rem Core Single Language
 exit /b
 
 :db78b74f-ef1c-4892-abfe-1e66b8231df6
-set "_key=NCTT7-2RGK8-WMHRF-RY7YQ-JTXG3" &:: Core China
+set "_key=NCTT7-2RGK8-WMHRF-RY7YQ-JTXG3" &rem Core China
 exit /b
 
 :ffee456a-cd87-4390-8e07-16146c672fd0
-set "_key=XYTND-K6QKT-K2MRH-66RTM-43JKP" &:: Core ARM
+set "_key=XYTND-K6QKT-K2MRH-66RTM-43JKP" &rem Core ARM
 exit /b
 
 :c06b6981-d7fd-4a35-b7b4-054742b7af67
-set "_key=GCRJD-8NW9H-F2CDX-CCM8D-9D6T9" &:: Pro
+set "_key=GCRJD-8NW9H-F2CDX-CCM8D-9D6T9" &rem Pro
 exit /b
 
 :7476d79f-8e48-49b4-ab63-4d0b813a16e4
-set "_key=HMCNV-VVBFX-7HMBH-CTY9B-B4FXY" &:: Pro N
+set "_key=HMCNV-VVBFX-7HMBH-CTY9B-B4FXY" &rem Pro N
 exit /b
 
 :096ce63d-4fac-48a9-82a9-61ae9e800e5f
-set "_key=789NJ-TQK6T-6XTH8-J39CJ-J8D3P" &:: Pro with Media Center
+set "_key=789NJ-TQK6T-6XTH8-J39CJ-J8D3P" &rem Pro with Media Center
 exit /b
 
 :81671aaf-79d1-4eb1-b004-8cbbe173afea
-set "_key=MHF9N-XY6XB-WVXMC-BTDCT-MKKG7" &:: Enterprise
+set "_key=MHF9N-XY6XB-WVXMC-BTDCT-MKKG7" &rem Enterprise
 exit /b
 
 :113e705c-fa49-48a4-beea-7dd879b46b14
-set "_key=TT4HM-HN7YT-62K67-RGRQJ-JFFXW" &:: Enterprise N
+set "_key=TT4HM-HN7YT-62K67-RGRQJ-JFFXW" &rem Enterprise N
 exit /b
 
 :0ab82d54-47f4-4acb-818c-cc5bf0ecb649
-set "_key=NMMPB-38DD4-R2823-62W8D-VXKJB" &:: Embedded Industry Pro
+set "_key=NMMPB-38DD4-R2823-62W8D-VXKJB" &rem Embedded Industry Pro
 exit /b
 
 :cd4e2d9f-5059-4a50-a92d-05d5bb1267c7
-set "_key=FNFKF-PWTVT-9RC8H-32HB2-JB34X" &:: Embedded Industry Enterprise
+set "_key=FNFKF-PWTVT-9RC8H-32HB2-JB34X" &rem Embedded Industry Enterprise
 exit /b
 
 :f7e88590-dfc7-4c78-bccb-6f3865b99d1a
-set "_key=VHXM3-NR6FT-RY6RT-CK882-KW2CJ" &:: Embedded Industry Automotive
+set "_key=VHXM3-NR6FT-RY6RT-CK882-KW2CJ" &rem Embedded Industry Automotive
 exit /b
 
 :e9942b32-2e55-4197-b0bd-5ff58cba8860
-set "_key=3PY8R-QHNP9-W7XQD-G6DPH-3J2C9" &:: with Bing
+set "_key=3PY8R-QHNP9-W7XQD-G6DPH-3J2C9" &rem with Bing
 exit /b
 
 :c6ddecd6-2354-4c19-909b-306a3058484e
-set "_key=Q6HTR-N24GM-PMJFP-69CD8-2GXKR" &:: with Bing N
+set "_key=Q6HTR-N24GM-PMJFP-69CD8-2GXKR" &rem with Bing N
 exit /b
 
 :b8f5e3a3-ed33-4608-81e1-37d6c9dcfd9c
-set "_key=KF37N-VDV38-GRRTV-XH8X6-6F3BB" &:: with Bing Single Language
+set "_key=KF37N-VDV38-GRRTV-XH8X6-6F3BB" &rem with Bing Single Language
 exit /b
 
 :ba998212-460a-44db-bfb5-71bf09d1c68b
-set "_key=R962J-37N87-9VVK2-WJ74P-XTMHR" &:: with Bing China
+set "_key=R962J-37N87-9VVK2-WJ74P-XTMHR" &rem with Bing China
 exit /b
 
 :e58d87b5-8126-4580-80fb-861b22f79296
-set "_key=MX3RK-9HNGX-K3QKC-6PJ3F-W8D7B" &:: Pro for Students
+set "_key=MX3RK-9HNGX-K3QKC-6PJ3F-W8D7B" &rem Pro for Students
 exit /b
 
 :cab491c7-a918-4f60-b502-dab75e334f40
-set "_key=TNFGH-2R6PB-8XM3K-QYHX2-J4296" &:: Pro for Students N
+set "_key=TNFGH-2R6PB-8XM3K-QYHX2-J4296" &rem Pro for Students N
 exit /b
 
 :: Windows Server 2012 R2
 :b3ca044e-a358-4d68-9883-aaa2941aca99
-set "_key=D2N9P-3P6X9-2R39C-7RTCD-MDVJX" &:: Standard
+set "_key=D2N9P-3P6X9-2R39C-7RTCD-MDVJX" &rem Standard
 exit /b
 
 :00091344-1ea4-4f37-b789-01750ba6988c
-set "_key=W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9" &:: Datacenter
+set "_key=W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9" &rem Datacenter
 exit /b
 
 :21db6ba4-9a7b-4a14-9e29-64a60c59301d
-set "_key=KNC87-3J2TX-XB4WP-VCPJV-M4FWM" &:: Essentials
+set "_key=KNC87-3J2TX-XB4WP-VCPJV-M4FWM" &rem Essentials
 exit /b
 
 :b743a2be-68d4-4dd3-af32-92425b7bb623
-set "_key=3NPTF-33KPT-GGBPR-YX76B-39KDD" &:: Cloud Storage
+set "_key=3NPTF-33KPT-GGBPR-YX76B-39KDD" &rem Cloud Storage
 exit /b
 
 :: Windows 8
 :c04ed6bf-55c8-4b47-9f8e-5a1f31ceee60
-set "_key=BN3D2-R7TKB-3YPBD-8DRP2-27GG4" &:: Core
+set "_key=BN3D2-R7TKB-3YPBD-8DRP2-27GG4" &rem Core
 exit /b
 
 :197390a0-65f6-4a95-bdc4-55d58a3b0253
-set "_key=8N2M2-HWPGY-7PGT9-HGDD8-GVGGY" &:: Core N
+set "_key=8N2M2-HWPGY-7PGT9-HGDD8-GVGGY" &rem Core N
 exit /b
 
 :8860fcd4-a77b-4a20-9045-a150ff11d609
-set "_key=2WN2H-YGCQR-KFX6K-CD6TF-84YXQ" &:: Core Single Language
+set "_key=2WN2H-YGCQR-KFX6K-CD6TF-84YXQ" &rem Core Single Language
 exit /b
 
 :9d5584a2-2d85-419a-982c-a00888bb9ddf
-set "_key=4K36P-JN4VD-GDC6V-KDT89-DYFKP" &:: Core China
+set "_key=4K36P-JN4VD-GDC6V-KDT89-DYFKP" &rem Core China
 exit /b
 
 :af35d7b7-5035-4b63-8972-f0b747b9f4dc
-set "_key=DXHJF-N9KQX-MFPVR-GHGQK-Y7RKV" &:: Core ARM
+set "_key=DXHJF-N9KQX-MFPVR-GHGQK-Y7RKV" &rem Core ARM
 exit /b
 
 :a98bcd6d-5343-4603-8afe-5908e4611112
-set "_key=NG4HW-VH26C-733KW-K6F98-J8CK4" &:: Pro
+set "_key=NG4HW-VH26C-733KW-K6F98-J8CK4" &rem Pro
 exit /b
 
 :ebf245c1-29a8-4daf-9cb1-38dfc608a8c8
-set "_key=XCVCF-2NXM9-723PB-MHCB7-2RYQQ" &:: Pro N
+set "_key=XCVCF-2NXM9-723PB-MHCB7-2RYQQ" &rem Pro N
 exit /b
 
 :a00018a3-f20f-4632-bf7c-8daa5351c914
-set "_key=GNBB8-YVD74-QJHX6-27H4K-8QHDG" &:: Pro with Media Center
+set "_key=GNBB8-YVD74-QJHX6-27H4K-8QHDG" &rem Pro with Media Center
 exit /b
 
 :458e1bec-837a-45f6-b9d5-925ed5d299de
-set "_key=32JNW-9KQ84-P47T8-D8GGY-CWCK7" &:: Enterprise
+set "_key=32JNW-9KQ84-P47T8-D8GGY-CWCK7" &rem Enterprise
 exit /b
 
 :e14997e7-800a-4cf7-ad10-de4b45b578db
-set "_key=JMNMF-RHW7P-DMY6X-RF3DR-X2BQT" &:: Enterprise N
+set "_key=JMNMF-RHW7P-DMY6X-RF3DR-X2BQT" &rem Enterprise N
 exit /b
 
 :10018baf-ce21-4060-80bd-47fe74ed4dab
-set "_key=RYXVT-BNQG7-VD29F-DBMRY-HT73M" &:: Embedded Industry Pro
+set "_key=RYXVT-BNQG7-VD29F-DBMRY-HT73M" &rem Embedded Industry Pro
 exit /b
 
 :18db1848-12e0-4167-b9d7-da7fcda507db
-set "_key=NKB3R-R2F8T-3XCDP-7Q2KW-XWYQ2" &:: Embedded Industry Enterprise
+set "_key=NKB3R-R2F8T-3XCDP-7Q2KW-XWYQ2" &rem Embedded Industry Enterprise
 exit /b
 
 :: Windows Server 2012
 :f0f5ec41-0d55-4732-af02-440a44a3cf0f
-set "_key=XC9B7-NBPP2-83J2H-RHMBY-92BT4" &:: Standard
+set "_key=XC9B7-NBPP2-83J2H-RHMBY-92BT4" &rem Standard
 exit /b
 
 :d3643d60-0c42-412d-a7d6-52e6635327f6
-set "_key=48HP8-DN98B-MYWDG-T2DCC-8W83P" &:: Datacenter
+set "_key=48HP8-DN98B-MYWDG-T2DCC-8W83P" &rem Datacenter
 exit /b
 
 :7d5486c7-e120-4771-b7f1-7b56c6d3170c
-set "_key=HM7DN-YVMH3-46JC3-XYTG7-CYQJJ" &:: MultiPoint Standard
+set "_key=HM7DN-YVMH3-46JC3-XYTG7-CYQJJ" &rem MultiPoint Standard
 exit /b
 
 :95fd1c83-7df5-494a-be8b-1300e1c9d1cd
-set "_key=XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G" &:: MultiPoint Premium
+set "_key=XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G" &rem MultiPoint Premium
 exit /b
 
 :: Windows 7
 :b92e9980-b9d5-4821-9c94-140f632f6312
-set "_key=FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4" &:: Professional
+set "_key=FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4" &rem Professional
 exit /b
 
 :54a09a0d-d57b-4c10-8b69-a842d6590ad5
-set "_key=MRPKT-YTG23-K7D7T-X2JMM-QY7MG" &:: Professional N
+set "_key=MRPKT-YTG23-K7D7T-X2JMM-QY7MG" &rem Professional N
 exit /b
 
 :5a041529-fef8-4d07-b06f-b59b573b32d2
-set "_key=W82YF-2Q76Y-63HXB-FGJG9-GF7QX" &:: Professional E
+set "_key=W82YF-2Q76Y-63HXB-FGJG9-GF7QX" &rem Professional E
 exit /b
 
 :ae2ee509-1b34-41c0-acb7-6d4650168915
-set "_key=33PXH-7Y6KF-2VJC9-XBBR8-HVTHH" &:: Enterprise
+set "_key=33PXH-7Y6KF-2VJC9-XBBR8-HVTHH" &rem Enterprise
 exit /b
 
 :1cb6d605-11b3-4e14-bb30-da91c8e3983a
-set "_key=YDRBP-3D83W-TY26F-D46B2-XCKRJ" &:: Enterprise N
+set "_key=YDRBP-3D83W-TY26F-D46B2-XCKRJ" &rem Enterprise N
 exit /b
 
 :46bbed08-9c7b-48fc-a614-95250573f4ea
-set "_key=C29WB-22CC8-VJ326-GHFJW-H9DH4" &:: Enterprise E
+set "_key=C29WB-22CC8-VJ326-GHFJW-H9DH4" &rem Enterprise E
 exit /b
 
 :db537896-376f-48ae-a492-53d0547773d0
-set "_key=YBYF6-BHCR3-JPKRB-CDW7B-F9BK4" &:: Embedded POSReady 7
+set "_key=YBYF6-BHCR3-JPKRB-CDW7B-F9BK4" &rem Embedded POSReady 7
 exit /b
 
 :e1a8296a-db37-44d1-8cce-7bc961d59c54
-set "_key=XGY72-BRBBT-FF8MH-2GG8H-W7KCW" &:: Embedded Standard
+set "_key=XGY72-BRBBT-FF8MH-2GG8H-W7KCW" &rem Embedded Standard
 exit /b
 
 :aa6dd3aa-c2b4-40e2-a544-a6bbb3f5c395
-set "_key=73KQT-CD9G6-K7TQG-66MRP-CQ22C" &:: Embedded ThinPC
+set "_key=73KQT-CD9G6-K7TQG-66MRP-CQ22C" &rem Embedded ThinPC
 exit /b
 
 :: Windows Server 2008 R2
 :a78b8bd9-8017-4df5-b86a-09f756affa7c
-set "_key=6TPJF-RBVHG-WBW2R-86QPH-6RTM4" &:: Web
+set "_key=6TPJF-RBVHG-WBW2R-86QPH-6RTM4" &rem Web
 exit /b
 
 :cda18cf3-c196-46ad-b289-60c072869994
-set "_key=TT8MH-CG224-D3D7Q-498W2-9QCTX" &:: HPC
+set "_key=TT8MH-CG224-D3D7Q-498W2-9QCTX" &rem HPC
 exit /b
 
 :68531fb9-5511-4989-97be-d11a0f55633f
-set "_key=YC6KT-GKW9T-YTKYR-T4X34-R7VHC" &:: Standard
+set "_key=YC6KT-GKW9T-YTKYR-T4X34-R7VHC" &rem Standard
 exit /b
 
 :7482e61b-c589-4b7f-8ecc-46d455ac3b87
-set "_key=74YFP-3QFB3-KQT8W-PMXWJ-7M648" &:: Datacenter
+set "_key=74YFP-3QFB3-KQT8W-PMXWJ-7M648" &rem Datacenter
 exit /b
 
 :620e2b3d-09e7-42fd-802a-17a13652fe7a
-set "_key=489J6-VHDMP-X63PK-3K798-CPX3Y" &:: Enterprise
+set "_key=489J6-VHDMP-X63PK-3K798-CPX3Y" &rem Enterprise
 exit /b
 
 :8a26851c-1c7e-48d3-a687-fbca9b9ac16b
-set "_key=GT63C-RJFQ3-4GMB6-BRFB9-CB83V" &:: Itanium
+set "_key=GT63C-RJFQ3-4GMB6-BRFB9-CB83V" &rem Itanium
 exit /b
 
 :f772515c-0e87-48d5-a676-e6962c3e1195
-set "_key=736RG-XDKJK-V34PF-BHK87-J6X3K" &:: MultiPoint Server ServerEmbeddedSolution
+set "_key=736RG-XDKJK-V34PF-BHK87-J6X3K" &rem MultiPoint Server ServerEmbeddedSolution
 exit /b
 
 :: Office 2019
 :0bc88885-718c-491d-921f-6f214349e79c
-set "_key=VQ9DP-NVHPH-T9HJC-J9PDT-KTQRG" &:: Professional Plus C2R-P
+set "_key=VQ9DP-NVHPH-T9HJC-J9PDT-KTQRG" &rem Professional Plus C2R-P
 exit /b
 
 :fc7c4d0c-2e85-4bb9-afd4-01ed1476b5e9
-set "_key=XM2V9-DN9HH-QB449-XDGKC-W2RMW" &:: Project Professional C2R-P
+set "_key=XM2V9-DN9HH-QB449-XDGKC-W2RMW" &rem Project Professional C2R-P
 exit /b
 
 :500f6619-ef93-4b75-bcb4-82819998a3ca
-set "_key=N2CG9-YD3YK-936X4-3WR82-Q3X4H" &:: Visio Professional C2R-P
+set "_key=N2CG9-YD3YK-936X4-3WR82-Q3X4H" &rem Visio Professional C2R-P
 exit /b
 
 :85dd8b5f-eaa4-4af3-a628-cce9e77c9a03
-set "_key=NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP" &:: Professional Plus
+set "_key=NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP" &rem Professional Plus
 exit /b
 
 :6912a74b-a5fb-401a-bfdb-2e3ab46f4b02
-set "_key=6NWWJ-YQWMR-QKGCB-6TMB3-9D9HK" &:: Standard
+set "_key=6NWWJ-YQWMR-QKGCB-6TMB3-9D9HK" &rem Standard
 exit /b
 
 :2ca2bf3f-949e-446a-82c7-e25a15ec78c4
-set "_key=B4NPR-3FKK7-T2MBV-FRQ4W-PKD2B" &:: Project Professional
+set "_key=B4NPR-3FKK7-T2MBV-FRQ4W-PKD2B" &rem Project Professional
 exit /b
 
 :1777f0e3-7392-4198-97ea-8ae4de6f6381
-set "_key=C4F7P-NCP8C-6CQPT-MQHV9-JXD2M" &:: Project Standard
+set "_key=C4F7P-NCP8C-6CQPT-MQHV9-JXD2M" &rem Project Standard
 exit /b
 
 :5b5cf08f-b81a-431d-b080-3450d8620565
-set "_key=9BGNQ-K37YR-RQHF2-38RQ3-7VCBB" &:: Visio Professional
+set "_key=9BGNQ-K37YR-RQHF2-38RQ3-7VCBB" &rem Visio Professional
 exit /b
 
 :e06d7df3-aad0-419d-8dfb-0ac37e2bdf39
-set "_key=7TQNQ-K3YQQ-3PFH7-CCPPM-X4VQ2" &:: Visio Standard
+set "_key=7TQNQ-K3YQQ-3PFH7-CCPPM-X4VQ2" &rem Visio Standard
 exit /b
 
 :9e9bceeb-e736-4f26-88de-763f87dcc485
-set "_key=9N9PT-27V4Y-VJ2PD-YXFMF-YTFQT" &:: Access
+set "_key=9N9PT-27V4Y-VJ2PD-YXFMF-YTFQT" &rem Access
 exit /b
 
 :237854e9-79fc-4497-a0c1-a70969691c6b
-set "_key=TMJWT-YYNMB-3BKTF-644FC-RVXBD" &:: Excel
+set "_key=TMJWT-YYNMB-3BKTF-644FC-RVXBD" &rem Excel
 exit /b
 
 :c8f8a301-19f5-4132-96ce-2de9d4adbd33
-set "_key=7HD7K-N4PVK-BHBCQ-YWQRW-XW4VK" &:: Outlook
+set "_key=7HD7K-N4PVK-BHBCQ-YWQRW-XW4VK" &rem Outlook
 exit /b
 
 :3131fd61-5e4f-4308-8d6d-62be1987c92c
-set "_key=RRNCX-C64HY-W2MM7-MCH9G-TJHMQ" &:: PowerPoint
+set "_key=RRNCX-C64HY-W2MM7-MCH9G-TJHMQ" &rem PowerPoint
 exit /b
 
 :9d3e4cca-e172-46f1-a2f4-1d2107051444
-set "_key=G2KWX-3NW6P-PY93R-JXK2T-C9Y9V" &:: Publisher
+set "_key=G2KWX-3NW6P-PY93R-JXK2T-C9Y9V" &rem Publisher
 exit /b
 
 :734c6c6e-b0ba-4298-a891-671772b2bd1b
-set "_key=NCJ33-JHBBY-HTK98-MYCV8-HMKHJ" &:: Skype for Business
+set "_key=NCJ33-JHBBY-HTK98-MYCV8-HMKHJ" &rem Skype for Business
 exit /b
 
 :059834fe-a8ea-4bff-b67b-4d006b5447d3
-set "_key=PBX3G-NWMT6-Q7XBW-PYJGG-WXD33" &:: Word
+set "_key=PBX3G-NWMT6-Q7XBW-PYJGG-WXD33" &rem Word
 exit /b
 
 :: Office 2016
 :829b8110-0e6f-4349-bca4-42803577788d
-set "_key=WGT24-HCNMF-FQ7XH-6M8K7-DRTW9" &:: Project Professional C2R-P
+set "_key=WGT24-HCNMF-FQ7XH-6M8K7-DRTW9" &rem Project Professional C2R-P
 exit /b
 
 :cbbaca45-556a-4416-ad03-bda598eaa7c8
-set "_key=D8NRQ-JTYM3-7J2DX-646CT-6836M" &:: Project Standard C2R-P
+set "_key=D8NRQ-JTYM3-7J2DX-646CT-6836M" &rem Project Standard C2R-P
 exit /b
 
 :b234abe3-0857-4f9c-b05a-4dc314f85557
-set "_key=69WXN-MBYV6-22PQG-3WGHK-RM6XC" &:: Visio Professional C2R-P
+set "_key=69WXN-MBYV6-22PQG-3WGHK-RM6XC" &rem Visio Professional C2R-P
 exit /b
 
 :361fe620-64f4-41b5-ba77-84f8e079b1f7
-set "_key=NY48V-PPYYH-3F4PX-XJRKJ-W4423" &:: Visio Standard C2R-P
+set "_key=NY48V-PPYYH-3F4PX-XJRKJ-W4423" &rem Visio Standard C2R-P
 exit /b
 
 :e914ea6e-a5fa-4439-a394-a9bb3293ca09
-set "_key=DMTCJ-KNRKX-26982-JYCKT-P7KB6" &:: MondoR
+set "_key=DMTCJ-KNRKX-26982-JYCKT-P7KB6" &rem MondoR
 exit /b
 
 :9caabccb-61b1-4b4b-8bec-d10a3c3ac2ce
-set "_key=HFTND-W9MK4-8B7MJ-B6C4G-XQBR2" &:: Mondo
+set "_key=HFTND-W9MK4-8B7MJ-B6C4G-XQBR2" &rem Mondo
 exit /b
 
 :d450596f-894d-49e0-966a-fd39ed4c4c64
-set "_key=XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99" &:: Professional Plus
+set "_key=XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99" &rem Professional Plus
 exit /b
 
 :dedfa23d-6ed1-45a6-85dc-63cae0546de6
-set "_key=JNRGM-WHDWX-FJJG3-K47QV-DRTFM" &:: Standard
+set "_key=JNRGM-WHDWX-FJJG3-K47QV-DRTFM" &rem Standard
 exit /b
 
 :4f414197-0fc2-4c01-b68a-86cbb9ac254c
-set "_key=YG9NW-3K39V-2T3HJ-93F3Q-G83KT" &:: Project Professional
+set "_key=YG9NW-3K39V-2T3HJ-93F3Q-G83KT" &rem Project Professional
 exit /b
 
 :da7ddabc-3fbe-4447-9e01-6ab7440b4cd4
-set "_key=GNFHQ-F6YQM-KQDGJ-327XX-KQBVC" &:: Project Standard
+set "_key=GNFHQ-F6YQM-KQDGJ-327XX-KQBVC" &rem Project Standard
 exit /b
 
 :6bf301c1-b94a-43e9-ba31-d494598c47fb
-set "_key=PD3PC-RHNGV-FXJ29-8JK7D-RJRJK" &:: Visio Professional
+set "_key=PD3PC-RHNGV-FXJ29-8JK7D-RJRJK" &rem Visio Professional
 exit /b
 
 :aa2a7821-1827-4c2c-8f1d-4513a34dda97
-set "_key=7WHWN-4T7MP-G96JF-G33KR-W8GF4" &:: Visio Standard
+set "_key=7WHWN-4T7MP-G96JF-G33KR-W8GF4" &rem Visio Standard
 exit /b
 
 :67c0fc0c-deba-401b-bf8b-9c8ad8395804
-set "_key=GNH9Y-D2J4T-FJHGG-QRVH7-QPFDW" &:: Access
+set "_key=GNH9Y-D2J4T-FJHGG-QRVH7-QPFDW" &rem Access
 exit /b
 
 :c3e65d36-141f-4d2f-a303-a842ee756a29
-set "_key=9C2PK-NWTVB-JMPW8-BFT28-7FTBF" &:: Excel
+set "_key=9C2PK-NWTVB-JMPW8-BFT28-7FTBF" &rem Excel
 exit /b
 
 :d8cace59-33d2-4ac7-9b1b-9b72339c51c8
-set "_key=DR92N-9HTF2-97XKM-XW2WJ-XW3J6" &:: OneNote
+set "_key=DR92N-9HTF2-97XKM-XW2WJ-XW3J6" &rem OneNote
 exit /b
 
 :ec9d9265-9d1e-4ed0-838a-cdc20f2551a1
-set "_key=R69KK-NTPKF-7M3Q4-QYBHW-6MT9B" &:: Outlook
+set "_key=R69KK-NTPKF-7M3Q4-QYBHW-6MT9B" &rem Outlook
 exit /b
 
 :d70b1bba-b893-4544-96e2-b7a318091c33
-set "_key=J7MQP-HNJ4Y-WJ7YM-PFYGF-BY6C6" &:: Powerpoint
+set "_key=J7MQP-HNJ4Y-WJ7YM-PFYGF-BY6C6" &rem Powerpoint
 exit /b
 
 :041a06cb-c5b8-4772-809f-416d03d16654
-set "_key=F47MM-N3XJP-TQXJ9-BP99D-8K837" &:: Publisher
+set "_key=F47MM-N3XJP-TQXJ9-BP99D-8K837" &rem Publisher
 exit /b
 
 :83e04ee1-fa8d-436d-8994-d31a862cab77
-set "_key=869NQ-FJ69K-466HW-QYCP2-DDBV6" &:: Skype for Business
+set "_key=869NQ-FJ69K-466HW-QYCP2-DDBV6" &rem Skype for Business
 exit /b
 
 :bb11badf-d8aa-470e-9311-20eaf80fe5cc
-set "_key=WXY84-JN2Q9-RBCCQ-3Q3J3-3PFJ6" &:: Word
+set "_key=WXY84-JN2Q9-RBCCQ-3Q3J3-3PFJ6" &rem Word
 exit /b
 
 :: Office 2013
 :dc981c6b-fc8e-420f-aa43-f8f33e5c0923
-set "_key=42QTK-RN8M7-J3C4G-BBGYM-88CYV" &:: Mondo
+set "_key=42QTK-RN8M7-J3C4G-BBGYM-88CYV" &rem Mondo
 exit /b
 
 :b322da9c-a2e2-4058-9e4e-f59a6970bd69
-set "_key=YC7DK-G2NP3-2QQC3-J6H88-GVGXT" &:: Professional Plus
+set "_key=YC7DK-G2NP3-2QQC3-J6H88-GVGXT" &rem Professional Plus
 exit /b
 
 :b13afb38-cd79-4ae5-9f7f-eed058d750ca
-set "_key=KBKQT-2NMXY-JJWGP-M62JB-92CD4" &:: Standard
+set "_key=KBKQT-2NMXY-JJWGP-M62JB-92CD4" &rem Standard
 exit /b
 
 :4a5d124a-e620-44ba-b6ff-658961b33b9a
-set "_key=FN8TT-7WMH6-2D4X9-M337T-2342K" &:: Project Professional
+set "_key=FN8TT-7WMH6-2D4X9-M337T-2342K" &rem Project Professional
 exit /b
 
 :427a28d1-d17c-4abf-b717-32c780ba6f07
-set "_key=6NTH3-CW976-3G3Y2-JK3TX-8QHTT" &:: Project Standard
+set "_key=6NTH3-CW976-3G3Y2-JK3TX-8QHTT" &rem Project Standard
 exit /b
 
 :e13ac10e-75d0-4aff-a0cd-764982cf541c
-set "_key=C2FG9-N6J68-H8BTJ-BW3QX-RM3B3" &:: Visio Professional
+set "_key=C2FG9-N6J68-H8BTJ-BW3QX-RM3B3" &rem Visio Professional
 exit /b
 
 :ac4efaf0-f81f-4f61-bdf7-ea32b02ab117
-set "_key=J484Y-4NKBF-W2HMG-DBMJC-PGWR7" &:: Visio Standard
+set "_key=J484Y-4NKBF-W2HMG-DBMJC-PGWR7" &rem Visio Standard
 exit /b
 
 :6ee7622c-18d8-4005-9fb7-92db644a279b
-set "_key=NG2JY-H4JBT-HQXYP-78QH9-4JM2D" &:: Access
+set "_key=NG2JY-H4JBT-HQXYP-78QH9-4JM2D" &rem Access
 exit /b
 
 :f7461d52-7c2b-43b2-8744-ea958e0bd09a
-set "_key=VGPNG-Y7HQW-9RHP7-TKPV3-BG7GB" &:: Excel
+set "_key=VGPNG-Y7HQW-9RHP7-TKPV3-BG7GB" &rem Excel
 exit /b
 
 :fb4875ec-0c6b-450f-b82b-ab57d8d1677f
-set "_key=H7R7V-WPNXQ-WCYYC-76BGV-VT7GH" &:: Groove
+set "_key=H7R7V-WPNXQ-WCYYC-76BGV-VT7GH" &rem Groove
 exit /b
 
 :a30b8040-d68a-423f-b0b5-9ce292ea5a8f
-set "_key=DKT8B-N7VXH-D963P-Q4PHY-F8894" &:: InfoPath
+set "_key=DKT8B-N7VXH-D963P-Q4PHY-F8894" &rem InfoPath
 exit /b
 
 :1b9f11e3-c85c-4e1b-bb29-879ad2c909e3
-set "_key=2MG3G-3BNTT-3MFW9-KDQW3-TCK7R" &:: Lync
+set "_key=2MG3G-3BNTT-3MFW9-KDQW3-TCK7R" &rem Lync
 exit /b
 
 :efe1f3e6-aea2-4144-a208-32aa872b6545
-set "_key=TGN6P-8MMBC-37P2F-XHXXK-P34VW" &:: OneNote
+set "_key=TGN6P-8MMBC-37P2F-XHXXK-P34VW" &rem OneNote
 exit /b
 
 :771c3afa-50c5-443f-b151-ff2546d863a0
-set "_key=QPN8Q-BJBTJ-334K3-93TGY-2PMBT" &:: Outlook
+set "_key=QPN8Q-BJBTJ-334K3-93TGY-2PMBT" &rem Outlook
 exit /b
 
 :8c762649-97d1-4953-ad27-b7e2c25b972e
-set "_key=4NT99-8RJFH-Q2VDH-KYG2C-4RD4F" &:: Powerpoint
+set "_key=4NT99-8RJFH-Q2VDH-KYG2C-4RD4F" &rem Powerpoint
 exit /b
 
 :00c79ff1-6850-443d-bf61-71cde0de305f
-set "_key=PN2WF-29XG2-T9HJ7-JQPJR-FCXK4" &:: Publisher
+set "_key=PN2WF-29XG2-T9HJ7-JQPJR-FCXK4" &rem Publisher
 exit /b
 
 :d9f5b1c6-5386-495a-88f9-9ad6b41ac9b3
-set "_key=6Q7VD-NX8JD-WJ2VH-88V73-4GBJ7" &:: Word
+set "_key=6Q7VD-NX8JD-WJ2VH-88V73-4GBJ7" &rem Word
 exit /b
 
 :: Office 2010
 :09ed9640-f020-400a-acd8-d7d867dfd9c2
-set "_key=YBJTT-JG6MD-V9Q7P-DBKXJ-38W9R" &:: Mondo
+set "_key=YBJTT-JG6MD-V9Q7P-DBKXJ-38W9R" &rem Mondo
 exit /b
 
 :ef3d4e49-a53d-4d81-a2b1-2ca6c2556b2c
-set "_key=7TC2V-WXF6P-TD7RT-BQRXR-B8K32" &:: Mondo2
+set "_key=7TC2V-WXF6P-TD7RT-BQRXR-B8K32" &rem Mondo2
 exit /b
 
 :6f327760-8c5c-417c-9b61-836a98287e0c
-set "_key=VYBBJ-TRJPB-QFQRF-QFT4D-H3GVB" &:: Professional Plus
+set "_key=VYBBJ-TRJPB-QFQRF-QFT4D-H3GVB" &rem Professional Plus
 exit /b
 
 :9da2a678-fb6b-4e67-ab84-60dd6a9c819a
-set "_key=V7QKV-4XVVR-XYV4D-F7DFM-8R6BM" &:: Standard
+set "_key=V7QKV-4XVVR-XYV4D-F7DFM-8R6BM" &rem Standard
 exit /b
 
 :df133ff7-bf14-4f95-afe3-7b48e7e331ef
-set "_key=YGX6F-PGV49-PGW3J-9BTGG-VHKC6" &:: Project Professional
+set "_key=YGX6F-PGV49-PGW3J-9BTGG-VHKC6" &rem Project Professional
 exit /b
 
 :5dc7bf61-5ec9-4996-9ccb-df806a2d0efe
-set "_key=4HP3K-88W3F-W2K3D-6677X-F9PGB" &:: Project Standard
+set "_key=4HP3K-88W3F-W2K3D-6677X-F9PGB" &rem Project Standard
 exit /b
 
 :92236105-bb67-494f-94c7-7f7a607929bd
-set "_key=D9DWC-HPYVV-JGF4P-BTWQB-WX8BJ" &:: Visio Premium
+set "_key=D9DWC-HPYVV-JGF4P-BTWQB-WX8BJ" &rem Visio Premium
 exit /b
 
 :e558389c-83c3-4b29-adfe-5e4d7f46c358
-set "_key=7MCW8-VRQVK-G677T-PDJCM-Q8TCP" &:: Visio Professional
+set "_key=7MCW8-VRQVK-G677T-PDJCM-Q8TCP" &rem Visio Professional
 exit /b
 
 :9ed833ff-4f92-4f36-b370-8683a4f13275
-set "_key=767HD-QGMWX-8QTDB-9G3R2-KHFGJ" &:: Visio Standard
+set "_key=767HD-QGMWX-8QTDB-9G3R2-KHFGJ" &rem Visio Standard
 exit /b
 
 :8ce7e872-188c-4b98-9d90-f8f90b7aad02
-set "_key=V7Y44-9T38C-R2VJK-666HK-T7DDX" &:: Access
+set "_key=V7Y44-9T38C-R2VJK-666HK-T7DDX" &rem Access
 exit /b
 
 :cee5d470-6e3b-4fcc-8c2b-d17428568a9f
-set "_key=H62QG-HXVKF-PP4HP-66KMR-CW9BM" &:: Excel
+set "_key=H62QG-HXVKF-PP4HP-66KMR-CW9BM" &rem Excel
 exit /b
 
 :8947d0b8-c33b-43e1-8c56-9b674c052832
-set "_key=QYYW6-QP4CB-MBV6G-HYMCJ-4T3J4" &:: Groove (SharePoint Workspace)
+set "_key=QYYW6-QP4CB-MBV6G-HYMCJ-4T3J4" &rem Groove (SharePoint Workspace)
 exit /b
 
 :ca6b6639-4ad6-40ae-a575-14dee07f6430
-set "_key=K96W8-67RPQ-62T9Y-J8FQJ-BT37T" &:: InfoPath
+set "_key=K96W8-67RPQ-62T9Y-J8FQJ-BT37T" &rem InfoPath
 exit /b
 
 :ab586f5c-5256-4632-962f-fefd8b49e6f4
-set "_key=Q4Y4M-RHWJM-PY37F-MTKWH-D3XHX" &:: OneNote
+set "_key=Q4Y4M-RHWJM-PY37F-MTKWH-D3XHX" &rem OneNote
 exit /b
 
 :ecb7c192-73ab-4ded-acf4-2399b095d0cc
-set "_key=7YDC2-CWM8M-RRTJC-8MDVC-X3DWQ" &:: Outlook
+set "_key=7YDC2-CWM8M-RRTJC-8MDVC-X3DWQ" &rem Outlook
 exit /b
 
 :45593b1d-dfb1-4e91-bbfb-2d5d0ce2227a
-set "_key=RC8FX-88JRY-3PF7C-X8P67-P4VTT" &:: Powerpoint
+set "_key=RC8FX-88JRY-3PF7C-X8P67-P4VTT" &rem Powerpoint
 exit /b
 
 :b50c4f75-599b-43e8-8dcd-1081a7967241
-set "_key=BFK7F-9MYHM-V68C7-DRQ66-83YTP" &:: Publisher
+set "_key=BFK7F-9MYHM-V68C7-DRQ66-83YTP" &rem Publisher
 exit /b
 
 :2d0882e7-a4e7-423b-8ccc-70d91e0158b1
-set "_key=HVHB3-C6FV7-KQX9W-YQG79-CRY7T" &:: Word
+set "_key=HVHB3-C6FV7-KQX9W-YQG79-CRY7T" &rem Word
 exit /b
 
 :ea509e87-07a1-4a45-9edc-eba5a39f36af
-set "_key=D6QFG-VBYP2-XQHM7-J97RH-VVRCK" &:: Small Business Basics
+set "_key=D6QFG-VBYP2-XQHM7-J97RH-VVRCK" &rem Small Business Basics
 exit /b
 
 :TheEnd
@@ -22564,10 +22564,10 @@ exit /b 0
 ::  9d5b4b3e761cca9531d64200dfbbfa0dec94f5b0 *_Info.txt                          Virus Total = 0/59
 ::
 ::  Virus Total Report Date: 12-11-2019
-::  
-::  These files are official Microsoft files and in this script, these are used in 
+:: 
+::  These files are official Microsoft files and in this script, these are used in
 ::  cleaning office license in C2R Retail office to VL conversion process.
-::  
+:: 
 ::  The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
 ::  You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -22783,7 +22783,7 @@ set DeskMenu=
 set _SkipWinAct=
 set _end=
 set "_arg1=%~1"
-if not defined _arg1 goto :NoProgArgs
+if NOT defined _arg1 goto :NoProgArgs
 set "_args=%~1"
 set "_arg2=%~2"
 set "_arg3=%~3"
@@ -22808,7 +22808,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 set _end=1
 goto Done
@@ -22894,9 +22894,9 @@ setlocal EnableDelayedExpansion
 
 ::========================================================================================================================================
 
-if not exist "!_work!\Activate.cmd" (
+if NOT EXIST "!_work!\Activate.cmd" (
 %ELine%
-echo File [Activate.cmd] does not exist in current folder..
+echo File [Activate.cmd] does NOT EXIST in current folder..
 echo It's required for the Task Creation.
 set _end=1
 goto Done
@@ -22969,13 +22969,13 @@ schtasks /delete /tn Online_KMS_Activation_Script-Renewal /f %nul%
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul && (
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
-If exist "%windir%\Online_KMS_Activation_Script\" (
+If EXIST "%windir%\Online_KMS_Activation_Script\" (
 @RD /s /q "%windir%\Online_KMS_Activation_Script\" %nul%
 )
-If exist "%ProgramData%\Online_KMS_Activation.cmd" (
+If EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 Reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 set DelDeskCont=1
@@ -22984,7 +22984,7 @@ set DelDeskCont=1
 md "%_dest%\BIN\" %nul%
 
 set "_temp=%SystemRoot%\Temp\_KMS_Task_Work"
-if exist "%_temp%\" @RD /S /Q "%_temp%\" %nul%
+if EXIST "%_temp%\" @RD /S /Q "%_temp%\" %nul%
 md "%_temp%\" %nul%
 
 call :Export renewal "%_temp%\Renewal.xml" Unicode
@@ -23005,17 +23005,17 @@ copy /y /b "!_work!\Activate.cmd" "%_dest%\Activate.cmd" %nul%
 schtasks /create /tn "Online_KMS_Activation_Script-Renewal" /ru "SYSTEM" /xml "%_temp%\Renewal.xml" %nul%
 if defined ActTask (schtasks /create /tn "Online_KMS_Activation_Script-Run_Once" /ru "SYSTEM" /xml "%_temp%\Run_Once.xml" %nul%)
 
-if exist "%_temp%\" @RD /S /Q "%_temp%\" %nul%
+if EXIST "%_temp%\" @RD /S /Q "%_temp%\" %nul%
 
 ::========================================================================================================================================
 
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul || (set error_=1)
 if defined ActTask reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul || (set error_=1)
 
-If not exist "%_dest%\Activate.cmd" (set error_=1)
-If not exist "%_dest%\Info.txt" (set error_=1)
-If not exist "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
-If not exist "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
+If NOT EXIST "%_dest%\Activate.cmd" (set error_=1)
+If NOT EXIST "%_dest%\Info.txt" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
 
 if defined error_ (
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul && (
@@ -23025,7 +23025,7 @@ reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" 
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
 echo _________________________________________________________________
@@ -23079,14 +23079,14 @@ goto Done
 cls
 title Add Desktop Context Menu
 
-If exist "%ProgramData%\Online_KMS_Activation.cmd" (
+If EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 set DelDeskCont=1
 )
 
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
 
-if exist "%_dest%\BIN\" (
+if EXIST "%_dest%\BIN\" (
 @RD /s /q "%_dest%\BIN\" %nul%
 )
 
@@ -23094,7 +23094,7 @@ md "%_dest%\BIN\" %nul%
 copy /y /b "!_work!\BIN\cleanosppx64.exe" "%_dest%\BIN\cleanosppx64.exe" %nul%
 copy /y /b "!_work!\BIN\cleanosppx86.exe" "%_dest%\BIN\cleanosppx86.exe" %nul%
 
-if exist "%_dest%\Activate.cmd" (
+if EXIST "%_dest%\Activate.cmd" (
 del /f /q "%_dest%\Activate.cmd" %nul%
 )
 
@@ -23106,7 +23106,7 @@ if defined _SkipWinAct (
 copy /y /b "!_work!\Activate.cmd" "%_dest%\Activate.cmd" %nul%
 )
 
-if exist "%_dest%\Info.txt" (
+if EXIST "%_dest%\Info.txt" (
 del /f /q "%_dest%\Info.txt" %nul%
 )
 
@@ -23115,10 +23115,10 @@ call :Export info "%_dest%\Info.txt" ASCII
 reg add "HKCR\DesktopBackground\shell\Activate Windows - Office" /v "Icon" /t REG_SZ /d "%SystemRoot%%\System32\shell32.dll,71" /f >nul 2>&1 || (set error_1=1)
 reg add "HKCR\DesktopBackground\shell\Activate Windows - Office\command" /ve /d "%_dest%\Activate.cmd" /f %nul% || (set error_1=1)
 
-If not exist "%_dest%\Activate.cmd" (set error_=1)
-If not exist "%_dest%\Info.txt" (set error_=1)
-If not exist "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
-If not exist "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
+If NOT EXIST "%_dest%\Activate.cmd" (set error_=1)
+If NOT EXIST "%_dest%\Info.txt" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx64.exe" (set error_=1)
+If NOT EXIST "%_dest%\BIN\cleanosppx86.exe" (set error_=1)
 
 reg query "HKCR\DesktopBackground\shell\Activate Windows - Office" %nul% || (set error_1=1)
 
@@ -23130,7 +23130,7 @@ reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" 
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 reg delete "HKCR\DesktopBackground\shell\Activate Windows - Office" /f %nul%
-If exist "%_dest%\" (
+If EXIST "%_dest%\" (
 @RD /s /q "%_dest%\" %nul%
 )
 echo _________________________________________________________________
@@ -23192,9 +23192,9 @@ goto ActivationRenewal
    Online KMS Activation:
 ====================================================================================================
 
-   The use of this script is to activate / renew your Windows /Server /Office license 
+   The use of this script is to activate / renew your Windows /Server /Office license
    using online KMS.
-   
+  
  - Scheduled task name (If Renewal Task is created) (Weekly).
    \Online_KMS_Activation_Script-Renewal
 
@@ -23202,11 +23202,11 @@ goto ActivationRenewal
    \Online_KMS_Activation_Script-Run_Once
 
    The scheduled task runs only if the system is connected to the Internet.
-   Activation Task will run on the system login and after successful activation, this task will 
+   Activation Task will run on the system login and after successful activation, this task will
    delete itself.
-   
- - If system preactivation is done via HWID + Online KMS, and HWID was applied but was not 
-   successful due to lack of internet at the time of installation of Windows, in that case, 
+  
+ - If system preactivation is done via HWID + Online KMS, and HWID was applied but was NOT
+   successful due to lack of internet at the time of installation of Windows, in that case,
    Online KMS script will be set to skip Windows activation.
 
  - Registry entry name and location (If desktop context menu is created).
@@ -23222,10 +23222,10 @@ goto ActivationRenewal
    39ed8659e7ca16aaccb86def94ce6cec4c847dd6 *cleanosppx86.exe                   Virus Total = 1/66
 
    Virus Total Report Date: 12-11-2019
-   
-   These files are official Microsoft files and in this script, these are used in 
+  
+   These files are official Microsoft files and in this script, these are used in
    cleaning office license in C2R Retail office to VL conversion process.
-   
+  
    The source of these files is the 'old' version of Microsoft Tool O15CTRRemove.diagcab
    You can get the original file here https://s.put.re/WFuXpyWA.zip
 
@@ -23234,7 +23234,7 @@ goto ActivationRenewal
    Online KMS Activation script is just a fork of @abbodi1406's KMS_VL_ALL Project.
    KMS_VL_ALL homepage: https://forums.mydigitallife.net/posts/838808
 
-   This fork was made to avoid having any KMS binary files and system can be activated using 
+   This fork was made to avoid having any KMS binary files and system can be activated using
    some manual commands or transparent batch script files.
 
    Online KMS Activation script is a part of 'Microsoft Activation Scripts'
@@ -23376,7 +23376,7 @@ goto ActivationRenewal
 
 :check
 
-for %%# in (%1 %2) do (if not exist "!_work!\BIN\%%#" (if defined _miss (set "_miss=!_miss! %%#") else (set "_miss=%%#")))
+for %%# in (%1 %2) do (if NOT EXIST "!_work!\BIN\%%#" (if defined _miss (set "_miss=!_miss! %%#") else (set "_miss=%%#")))
 if defined _miss (
 %ELine%
 echo Following required file^(s^) is missing in 'BIN' folder. Aborting...
@@ -23414,7 +23414,7 @@ set "ELine=echo: & %EchoRed% ==== ERROR ==== &echo:"
 
 for %%i in (powershell.exe) do if "%%~$path:i" equ "" (
 echo: &echo ==== ERROR ==== &echo:
-echo Powershell is not installed in the system.
+echo Powershell is NOT installed in the system.
 echo Aborting...
 goto UN_Done
 )
@@ -23442,17 +23442,17 @@ echo Deleting [Task] Online_KMS_Activation_Script-Run_Once
 schtasks /delete /tn Online_KMS_Activation_Script-Run_Once /f %nul%
 )
 
-If exist "%windir%\Online_KMS_Activation_Script\" (
+If EXIST "%windir%\Online_KMS_Activation_Script\" (
 echo Deleting [Folder] %windir%\Online_KMS_Activation_Script\
 @RD /s /q "%windir%\Online_KMS_Activation_Script\" %nul%
 )
 
-If exist "%ProgramData%\Online_KMS_Activation\" (
+If EXIST "%ProgramData%\Online_KMS_Activation\" (
 echo Deleting [Folder] %ProgramData%\Online_KMS_Activation\
 @RD /s /q "%ProgramData%\Online_KMS_Activation\" %nul%
 )
 
-if exist "%ProgramData%\Online_KMS_Activation.cmd" (
+if EXIST "%ProgramData%\Online_KMS_Activation.cmd" (
 echo Deleting [File] %ProgramData%\Online_KMS_Activation.cmd
 del /f /q "%ProgramData%\Online_KMS_Activation.cmd" %nul%
 )
@@ -23466,12 +23466,12 @@ echo:
 
 ::========================================================================================================================================
 
-::  Clear-KMS-Cache.cmd  
+::  Clear-KMS-Cache.cmd 
 ::  https://forums.mydigitallife.net/posts/1511883
 ::  Written by @abbodi1406 (MDL)
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "OSPP=SOFTWARE\Microsoft\OfficeSoftwareProtectionPlatform"
 set "SPPk=SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform"
@@ -23525,11 +23525,11 @@ goto :eof
 set error_=
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Renewal" >nul && (set error_=1)
 reg query "%key%" /f Path /s | find /i "\Online_KMS_Activation_Script-Run_Once" >nul && (set error_=1)
-If exist "%windir%\Online_KMS_Activation_Script\" (set error_=1)
-if exist "%ProgramData%\Online_KMS_Activation\" (set error_=1)
+If EXIST "%windir%\Online_KMS_Activation_Script\" (set error_=1)
+if EXIST "%ProgramData%\Online_KMS_Activation\" (set error_=1)
 
 reg query "HKCR\DesktopBackground\shell\Activate Windows - Office" >nul 2>&1 && (set error_=1)
-if exist "%ProgramData%\Online_KMS_Activation.cmd" (set error_=1)
+if EXIST "%ProgramData%\Online_KMS_Activation.cmd" (set error_=1)
 
 if defined error_ (
 echo ______________________________________
@@ -23574,18 +23574,18 @@ goto Ins_Done
 ::  Check Windows OS name
 
 set winos=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if not errorlevel 1 set "winos=%%b"
-if not defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if not errorlevel 1 set "winos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
+if NOT defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
 
 ::  Check SKU value
 
 set SKU=
-for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
-if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
+for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
+if NOT defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
 
 if "%osSKU%" equ "" (
 %ELine%
-echo SKU value was not detected properly. Aborting...
+echo SKU value was NOT detected properly. Aborting...
 goto Ins_Done
 )
 
@@ -23614,7 +23614,7 @@ goto Ins_Done
 cls
 echo ___________________________________________________________________________________________
 echo:
-echo  Install [%winos% ^| %winbuild%] Retail/OEM Key 
+echo  Install [%winos% ^| %winbuild%] Retail/OEM Key
 echo  [%key%]
 echo ___________________________________________________________________________________________
 echo:
@@ -23639,7 +23639,7 @@ for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%
 wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 echo:
 echo [%winos% ^| %winbuild%]
-call echo Installing %%_channel%% Key [%key%] 
+call echo Installing %%_channel%% Key [%key%]
 echo [Successful]
 ) || (
 %ELine%
@@ -23691,9 +23691,9 @@ setlocal EnableDelayedExpansion
 
 ::  Check Installation type
 set instype=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if not errorlevel 1 set "instype=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v InstallationType 2^>nul') do if NOT errorlevel 1 set "instype=%%b"
 
-if not "%instype%" equ "Client" (
+if "%instype%" neq "Client" (
 %ELine%
 echo Unsupported OS version [Server] Detected.
 echo OS Requirement - Windows 10 [17134] 1803 and later builds.
@@ -23702,13 +23702,13 @@ goto Ced_Done
 
 ::  Check Windows Edition
 set osedition=
-for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp%' and PartialProductKey is not NULL) get LicenseFamily /VALUE" 2^>nul') do if not errorlevel 1 set "osedition=%%a"
-if not defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
+for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp%' and PartialProductKey is NOT NULL) get LicenseFamily /VALUE" 2^>nul') do if NOT errorlevel 1 set "osedition=%%a"
+if NOT defined osedition for /f "tokens=3 delims=: " %%a in ('DISM /English /Online /Get-CurrentEdition 2^>nul ^| find /i "Current Edition :"') do set "osedition=%%a"
 
 cls
 if "%osedition%" equ "" (
 %ELine%
-echo OS Edition was not detected properly. Aborting...
+echo OS Edition was NOT detected properly. Aborting...
 goto Ced_Done
 )
 
@@ -23716,10 +23716,10 @@ goto Ced_Done
 
 echo _______________________________________________________________________________________________
 echo:
-echo  Note 1 - This script can not change 'Core'(Home) to 'Non-Core' (Pro) Editions.
+echo  Note 1 - This script can NOT change 'Core'(Home) to 'Non-Core' (Pro) Editions.
 echo           You'll have to do the above manually, Follow these steps.
 echo         - Disable internet.
-echo         - Go to Settings ^> Update ^& Security ^> Activation and 
+echo         - Go to Settings ^> Update ^& Security ^> Activation and
 echo           Insert 'Pro' Edition Product Key VK7JG-NPHTM-C97JM-9MPGT-3V66T
 echo         - Follow on screen instructions, Done. [Incase of errors, restart the system.]
 echo:
@@ -23757,7 +23757,7 @@ wmic path %sls% where __CLASS='%sls%' call InstallProductKey ProductKey="!key!" 
 for /f "tokens=2 delims==" %%# in ('wmic path %slp% where "ApplicationID='%wApp%' and PartialProductKey<>null" Get ProductKeyChannel /value 2^>nul') do set "_channel=%%#"
 wmic path %sls% where __CLASS='%sls%' call RefreshLicenseStatus %nul%
 echo:
-call echo Installing %%_channel%% Key [!key!] 
+call echo Installing %%_channel%% Key [!key!]
 echo [Successful]
 echo:
 echo Reboot is required to properly change the Edition.
@@ -23810,7 +23810,7 @@ set "ospp_get=%spp_get%"
 if %winbuild% geq 9200 set "spp_get=%spp_get%, DiscoveredKeyManagementServiceMachineIpAddress, KeyManagementServiceLookupDomain, ProductKeyChannel, VLActivationTypeEnabled"
 
 set "SysPath=%Windir%\System32"
-if exist "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
+if EXIST "%Windir%\Sysnative\reg.exe" (set "SysPath=%Windir%\Sysnative")
 set "Path=%SysPath%;%Windir%;%SysPath%\Wbem;%SysPath%\WindowsPowerShell\v1.0\"
 set "line2=************************************************************"
 set "line3=____________________________________________________________"
@@ -23825,13 +23825,13 @@ if %winbuild% lss 9200 call :casWpkey %ospp% %o15App% osppsvc ospp15
 echo %line2%
 echo ***                   Windows Status                     ***
 echo %line2%
-if not defined cW1nd0ws (
+if NOT defined cW1nd0ws (
 echo:
-echo Error: product key not found.
+echo Error: product key NOT found.
 goto :casWcon
 )
 set winID=1
-for /f "tokens=2 delims==" %%# in ('"wmic path %wspp% where (ApplicationID='%winApp%' and PartialProductKey is not null) get ID /value"') do (
+for /f "tokens=2 delims==" %%# in ('"wmic path %wspp% where (ApplicationID='%winApp%' and PartialProductKey is NOT null) get ID /value"') do (
   set "chkID=%%#"
   call :casWdet "%wspp%" "%wsps%" "%spp_get%"
   call :casWout
@@ -23842,14 +23842,14 @@ for /f "tokens=2 delims==" %%# in ('"wmic path %wspp% where (ApplicationID='%win
 :casWcon
 set winID=0
 set verbose=1
-if not defined c0ff1ce15 (
+if NOT defined c0ff1ce15 (
 if defined osppsvc goto :casWospp
 goto :casWend
 )
 echo %line2%
 echo ***                   Office Status                      ***
 echo %line2%
-for /f "tokens=2 delims==" %%# in ('"wmic path %wspp% where (ApplicationID='%o15App%' and PartialProductKey is not null) get ID /value"') do (
+for /f "tokens=2 delims==" %%# in ('"wmic path %wspp% where (ApplicationID='%o15App%' and PartialProductKey is NOT null) get ID /value"') do (
   set "chkID=%%#"
   call :casWdet "%wspp%" "%wsps%" "%spp_get%"
   call :casWout
@@ -23866,14 +23866,14 @@ echo %line2%
 echo ***                   Office Status                      ***
 echo %line2%
 )
-if defined ospp15 for /f "tokens=2 delims==" %%# in ('"wmic path %ospp% where (ApplicationID='%o15App%' and PartialProductKey is not null) get ID /value"') do (
+if defined ospp15 for /f "tokens=2 delims==" %%# in ('"wmic path %ospp% where (ApplicationID='%o15App%' and PartialProductKey is NOT null) get ID /value"') do (
   set "chkID=%%#"
   call :casWdet "%ospp%" "%osps%" "%ospp_get%"
   call :casWout
   echo %line3%
   echo:
 )
-if defined ospp14 for /f "tokens=2 delims==" %%# in ('"wmic path %ospp% where (ApplicationID='%o14App%' and PartialProductKey is not null) get ID /value"') do (
+if defined ospp14 for /f "tokens=2 delims==" %%# in ('"wmic path %ospp% where (ApplicationID='%o14App%' and PartialProductKey is NOT null) get ID /value"') do (
   set "chkID=%%#"
   call :casWdet "%ospp%" "%osps%" "%ospp_get%"
   call :casWout
@@ -23883,7 +23883,7 @@ if defined ospp14 for /f "tokens=2 delims==" %%# in ('"wmic path %ospp% where (A
 goto :casWend
 
 :casWpkey
-wmic path %1 where (ApplicationID='%2' and PartialProductKey is not null) get ID /value 2>nul | findstr /i ID 1>nul && (set %3=1&set %4=1)
+wmic path %1 where (ApplicationID='%2' and PartialProductKey is NOT null) get ID /value 2>nul | findstr /i ID 1>nul && (set %3=1&set %4=1)
 exit /b
 
 :casWdet
@@ -23946,15 +23946,15 @@ if %LicenseStatus% GTR 6 (
 set "License=Unknown"
 set "LicenseMsg="
 )
-if not defined cKmsClient exit /b
+if NOT defined cKmsClient exit /b
 
 if %KeyManagementServicePort%==0 set KeyManagementServicePort=1688
 set "KmsReg=Registered KMS machine name: %KeyManagementServiceMachine%:%KeyManagementServicePort%"
-if "%KeyManagementServiceMachine%" equ "" set "KmsReg=Registered KMS machine name: KMS name not available"
+if "%KeyManagementServiceMachine%" equ "" set "KmsReg=Registered KMS machine name: KMS name NOT available"
 
 if %DiscoveredKeyManagementServiceMachinePort%==0 set DiscoveredKeyManagementServiceMachinePort=1688
 set "KmsDns=KMS machine name from DNS: %DiscoveredKeyManagementServiceMachineName%:%DiscoveredKeyManagementServiceMachinePort%"
-if "%DiscoveredKeyManagementServiceMachineName%" equ "" set "KmsDns=DNS auto-discovery: KMS name not available"
+if "%DiscoveredKeyManagementServiceMachineName%" equ "" set "KmsDns=DNS auto-discovery: KMS name NOT available"
 
 for /f "tokens=* delims=" %%# in ('"wmic path %~2 get ClientMachineID, KeyManagementServiceHostCaching /value" ^| findstr ^=') do set "%%#"
 if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCaching=Enabled) else (set KeyManagementServiceHostCaching=Disabled)
@@ -23962,7 +23962,7 @@ if /i %KeyManagementServiceHostCaching%==True (set KeyManagementServiceHostCachi
 if %winbuild% lss 9200 exit /b
 if %~1 equ %ospp% exit /b
 
-if "%DiscoveredKeyManagementServiceMachineIpAddress%" equ "" set "DiscoveredKeyManagementServiceMachineIpAddress=not available"
+if "%DiscoveredKeyManagementServiceMachineIpAddress%" equ "" set "DiscoveredKeyManagementServiceMachineIpAddress=NOT available"
 
 if "%KeyManagementServiceLookupDomain%" equ "" set "KeyManagementServiceLookupDomain="
 
@@ -23987,14 +23987,14 @@ if defined ProductKeyChannel echo Product Key Channel: %ProductKeyChannel%
 echo Partial Product Key: %PartialProductKey%
 echo License Status: %License%
 if defined LicenseMsg echo %LicenseMsg%
-if not %LicenseStatus%==0 if not %EvaluationEndDate:~0,8%==16010101 echo Evaluation End Date: %EvaluationEndDate:~0,4%-%EvaluationEndDate:~4,2%-%EvaluationEndDate:~6,2% %EvaluationEndDate:~8,2%:%EvaluationEndDate:~10,2% UTC
-if not defined cKmsClient (
+if NOT %LicenseStatus%==0 if NOT %EvaluationEndDate:~0,8%==16010101 echo Evaluation End Date: %EvaluationEndDate:~0,4%-%EvaluationEndDate:~4,2%-%EvaluationEndDate:~6,2% %EvaluationEndDate:~8,2%:%EvaluationEndDate:~10,2% UTC
+if NOT defined cKmsClient (
 if defined ExpireMsg echo:&echo:    %ExpireMsg%
 exit /b
 )
 if defined VLActivationTypeEnabled echo Configured Activation Type: %VLActivationType%
 echo:
-if not %LicenseStatus%==1 (
+if NOT %LicenseStatus%==1 (
 echo Please activate the product in order to update KMS client information values.
 exit /b
 )
@@ -24061,8 +24061,8 @@ setlocal EnableDelayedExpansion
 ::  Check Windows OS name
 
 set winos=
-for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if not errorlevel 1 set "winos=%%b"
-if not defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if not errorlevel 1 set "winos=%%b"
+for /f "skip=2 tokens=2*" %%a in ('reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /v ProductName 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
+if NOT defined winos for /f "tokens=2* delims== " %%a in ('"wmic os get caption /value" 2^>nul') do if NOT errorlevel 1 set "winos=%%b"
 
 ::========================================================================================================================================
 
@@ -24071,9 +24071,9 @@ echo:
 echo %line%
 echo:
 echo    [1] Protect KMS38 Activation from being overwritten by 180 days KMS Activators
-echo:   
+echo:  
 echo    [2] Undo changes
-echo:   
+echo:  
 echo    [3] Go back
 echo:
 echo %line%
@@ -24095,32 +24095,32 @@ cls
 set _gvlk=
 wmic path %slp% where "ApplicationID='%wApp%' and PartialProductKey<>null" Get ProductKeyChannel 2>nul | findstr /i GVLK 1>nul && (set _gvlk=1)
 
-if not defined _gvlk (
+if NOT defined _gvlk (
 %ELine%
-echo System is not activated with KMS38. ^(KMS Key is not installed^)  Aborting...
+echo System is NOT activated with KMS38. ^(KMS Key is NOT installed^)  Aborting...
 goto PU_Done
 )
 
 ::  Check Activation Grace Period
 
 set gpr=
-for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
+for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
 
 if "%gpr%" LEQ "259200" (
 %ELine%
-echo System is not activated with KMS38.  Aborting...
+echo System is NOT activated with KMS38.  Aborting...
 goto PU_Done
 )
 
 ::  Check SKU value
 
 set SKU=
-for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
-if not defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if not errorlevel 1 (set osSKU=%%a)
+for /f "tokens=2 delims==" %%a IN ('"wmic Path Win32_OperatingSystem Get OperatingSystemSKU /format:LIST" 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
+if NOT defined SKU for /f "tokens=3 delims=." %%a in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\ProductOptions" /v OSProductPfn 2^>nul') do if NOT errorlevel 1 (set osSKU=%%a)
 
 if "%osSKU%" equ "" (
 %ELine%
-echo SKU value was not detected properly. Aborting...
+echo SKU value was NOT detected properly. Aborting...
 goto PU_Done
 )
 
@@ -24131,7 +24131,7 @@ call :K38_CheckEdition %nul%
 
 if "%osedition%" equ "" (
 %ELine%
-echo OS Edition was not detected properly. Aborting...
+echo OS Edition was NOT detected properly. Aborting...
 goto PU_Done
 )
 
@@ -24142,7 +24142,7 @@ for /f "tokens=2 delims==" %%a in ('"wmic path %slp% where (ApplicationID='%wApp
 
 if "%app%" equ "" (
 %ELine%
-echo Activation ID was not detected properly. Aborting...
+echo Activation ID was NOT detected properly. Aborting...
 goto PU_Done
 )
 
@@ -24159,7 +24159,7 @@ reg delete "HKU\S-1-5-20\%SPPk%\%wApp%" /f %nul%
 
 reg query "HKLM\%SPPk%\%wApp%" %nul% && (
 %ELine%
-echo Registry Key was not cleared successfully. Aborting...
+echo Registry Key was NOT cleared successfully. Aborting...
 goto PU_Done
 )
 
@@ -24177,7 +24177,7 @@ if defined setkms_error (
 reg delete "HKLM\%SPPk%\%wApp%" /f %nul%
 reg delete "HKU\S-1-5-20\%SPPk%\%wApp%" /f %nul%
 %ELine%
-echo Specific KMS host to Local Host was not properly applied. Aborting...
+echo Specific KMS host to Local Host was NOT properly applied. Aborting...
 goto PU_Done
 )
 
@@ -24186,18 +24186,18 @@ goto PU_Done
 reg delete "HKLM\%SPPk%\%wApp%" /f %nul%
 reg query "HKLM\%SPPk%\%wApp%" %nul% || (
 %ELine%
-echo Registry Key was not protected properly. Aborting...
+echo Registry Key was NOT protected properly. Aborting...
 goto PU_Done
 )
 
 ::  Check Activation Grace Period
 
 set gpr=
-for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is not NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
+for /f "tokens=2 delims==" %%# in ('"wmic path %slp% where (ApplicationID='%wApp%' and Description like '%%KMSCLIENT%%' and PartialProductKey is NOT NULL) get GracePeriodRemaining /VALUE" ') do set "gpr=%%#"
 
 if "%gpr%" LEQ "259200" (
 %ELine%
-echo System is not activated with KMS38.
+echo System is NOT activated with KMS38.
 goto PU_Done
 )
 
@@ -24234,7 +24234,7 @@ reg delete "HKU\S-1-5-20\%SPPk%\%wApp%" /f %nul%
 
 reg query "HKLM\%SPPk%\%wApp%" %nul% && (
 %ELine%
-echo Registry Key was not cleared successfully. Aborting...
+echo Registry Key was NOT cleared successfully. Aborting...
 goto PU_Done
 )
 

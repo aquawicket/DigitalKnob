@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_clearCmakeCache(path)
 #
 #   Clear the cmake cache files recursivley for the given directory
@@ -10,9 +21,9 @@ include_guard()
 function(dk_clearCmakeCache)
 	dk_debugFunc(1)
 	
-    dk_info("Deleting CMake cache files in ${ARGV0}")
+    dk_info("Deleting CMake cache files in ${ARGV0}. . .")
 
-	dk_delete("${ARGV0}/CMakeFiles")
+	dk_delete("${ARGV0}${CMAKE_FILES_DIRECTORY}")  # dk_delete("${ARGV0}/CMakeFiles")
 	dk_delete("${ARGV0}/CMakeCache.txt")
 	dk_delete("${ARGV0}/cmake_install.cmake")
 endfunction()
@@ -33,5 +44,5 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_clearCmakeCache("C:/Users/Administrator/digitalknob/Development/DKCpp/apps/HelloWorld/win_x86_64_clang/Debug")
+	dk_clearCmakeCache("C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Debug")
 endfunction()

@@ -1,0 +1,20 @@
+############ bash ############
+# https://www.gnu.org/software/bash/
+# https://packages.msys2.org/package/bash
+#	HOST		SHELL		BASH	Target_Os
+#----------------------------------------------------
+#	Android		termux		bash	Android
+#	Linux		tinycore	bash	Android, Linux
+#	Linux		ubuntu		bash	Android, Linux
+#	Mac     	osx			bash	Mac, Ios, Iossim
+#	Raspbery	pi			bash	Raspbery
+#	Windows 	clang32    	bash	Windows
+#	Windows 	clang64 	bash	Windows
+#	Windows 	clangarm64 	bash	Windows
+#	Windows 	git     	bash	Android, Windows
+#	Windows 	mingw32 	bash	Windows
+#	Windows 	mingw64 	bash	Windows
+#	Windows 	msys2  		bash	Android, Windows
+#	Windows 	ucrt64		bash	Windows
+#	Windows 	wsl_debian	bash	Linux
+#	Windows 	wsl_ubuntu	bash	Linux

@@ -1,0 +1,112 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+
+
+#########################################################################
+# dk_Target_Arch()
+#
+#	Target_Arch = Arm32, Arm64, X86, X86_64, Cosmopolitan
+#
+function(dk_Target_Arch)
+	dk_debugFunc(0 1)
+
+	
+	###### SET ######
+	if(ARGV)
+		dk_set(Target_Arch "${ARGV0}")
+	
+	###### GET ######	
+	elseif(DEFINED ENV{Target_Arch})
+		dk_set(Target_Arch "$ENV{Target_Arch}")
+	
+	else()
+		dk_echo()
+		if(Target_Arch_Cache)
+			dk_echo(" 0) ${Target_Arch_Cache}")
+		endif()
+		
+		dk_echo()
+		if(NOT Host_Arch)
+			dk_call(dk_Host_Arch)
+		endif()
+		dk_echo(" 1) ${Host_Arch}")
+		dk_echo(" 2) Arm32")
+		dk_echo(" 3) Arm64")
+		dk_echo(" 4) X86")
+		dk_echo(" 5) X86_64")
+		dk_echo(" 6) Cosmopolitan")
+		dk_echo(" 7) Go Back")
+		dk_echo(" 8) Exit")
+		dk_echo()
+		
+		dk_call(dk_keyboardInput input)
+		if("${input}" EQUAL "0")
+			dk_set(Target_Arch ${Target_Arch_Cache})
+		elseif("${input}" EQUAL "1")
+			dk_set(Target_Arch "${Host_Arch}")
+		elseif("${input}" EQUAL "2")
+			dk_set(Target_Arch "Arm32")
+		elseif("${input}" EQUAL "3")
+			dk_set(Target_Arch "Arm64")
+		elseif("${input}" EQUAL "4")
+			dk_set(Target_Arch "X86")
+		elseif("${input}" EQUAL "5")
+			dk_set(Target_Arch "X86_64")
+		elseif("${input}" EQUAL "6")
+			dk_set(Target_Arch "Cosmopolitan")
+		elseif("${input}" EQUAL "7")
+			dk_unset(Target_Os)
+		elseif("${input}" EQUAL "8")
+			dk_exit(0)
+		else()
+			dk_warning("invalid selection: '${input}'")
+		endif()
+	endif()
+	
+	dk_assertVar(Target_Arch)
+	dk_set(${Target_Arch} 1)
+		
+	
+	
+	###### VALIDATE RESULT ######
+		if(Arm32)
+	elseif(Arm64)
+	elseif(Cosmo)
+	elseif(X86)
+	elseif(X86_64)
+	else()
+		dk_fatal("Target_Arch:'${Target_Arch}' is INVALID!")
+	endif()
+	
+	dk_debug("Target_Arch = ${Target_Arch}")
+	dk_debug("${Target_Arch} = ${${Target_Arch}}")
+endfunction()
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc(0)
+	
+	###### GET ######
+    dk_Target_Arch()
+	dk_echo("Target_Arch = ${Target_Arch}")
+	dk_echo("${Target_Arch} = ${${Target_Arch}}")
+	
+	###### SET ######
+	dk_Target_Arch("I686")
+	dk_echo("Target_Arch = ${Target_Arch}")
+	dk_echo("${Target_Arch} = ${${Target_Arch}}")
+endfunction()

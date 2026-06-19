@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_unset(variable)
 #
 #	https://cmake.org/cmake/help/latest/command/unset.html
@@ -14,9 +25,9 @@ include_guard()
 function(dk_unset variable)
 	dk_debugFunc()
 	
-	#if(DEFINED ENV{${variable}})
-	#	unset(${variable} ENV)
-	#endif()
+	if(DEFINED ENV{${variable}})
+		unset(ENV{${variable}})
+	endif()
 	if(DEFINED CACHE{${variable}})  # The $CACHE{VAR} syntax can be used to do direct cache entry lookups
 		unset(${variable} CACHE)
 	endif()
@@ -35,7 +46,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	set(myVar "value of myVar")
+	dk_set(myVar "value of myVar")
 	dk_printVar(myVar)
 	if(myVar)
 		dk_info("if(myVar) is true")

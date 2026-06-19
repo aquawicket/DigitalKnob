@@ -1,30 +1,37 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-::https://stackoverflow.com/a/11576816
+rem https://stackoverflow.com/a/11576816
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" equ "%func:~0,1%" ( goto %func% )
 
-if not defined frame (set /a frame=0)
+if NOT defined frame (set /a frame=0)
 if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 :dk_dumpStack
-::setlocal
-    %dk_call% dk_debugFunc 1 99
-(   
+rem %setlocal%
+(  
     setlocal DisableDelayedExpansion
     if %frame% neq 0 (goto) 2>nul & (goto) 2>nul
-    
+   
     echo #################################################
     set /a "frame=%frame%"
     set "_returnVar=%~1"
 
-    
-    &:: FIXME: remove the need for calls here
+   
+    &rem FIXME: remove the need for calls here
     call set "caller[%frame%]=%%~0"
     call set "caller[%frame%].fullpath=%%~f0"
     call set "caller[%frame%].directory=%%~dp0"
@@ -39,7 +46,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     call set "caller.func=%%~n0"
     call set "DKTEST_caller=:DKTEST_%%~n0"
     call set "caller.args=%%*"
-    
+   
     echo caller                         = %caller%
     echo caller.fullpath                = %caller.fullpath%
     echo caller.directory               = %caller.directory%
@@ -49,19 +56,19 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     echo caller.args                    = %caller.args%
     call set _caller=%%caller[%frame%].fullpath:*%%~f0=%%
     echo _caller                        = %_caller%
-    
-    
+   
+   
     call echo caller[%frame%]           = %%caller[%frame%]%%
     call echo caller[%frame%].fullpath  = %%caller[%frame%].fullpath%%
     call echo caller[%frame%].directory = %%caller[%frame%].directory%%
     call echo caller[%frame%].filename  = %%caller[%frame%].filename%%
     call echo caller[%frame%].func      = %%caller[%frame%].func%%
     call echo caller[%frame%].args      = %%caller[%frame%].args%%
-    
-    
+   
+   
     echo "%caller%" = "%DKTEST_caller%"
     if "%caller%" equ "%DKTEST_caller%" (echo THEY ARE EQUAL!)
-    
+   
     if "%caller%" equ "" (
         %dk_call% dk_debug "CALLER IS EMPTY"
         setlocal DisableDelayedExpansion
@@ -87,18 +94,18 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 %endfunction%
 
 :call_return
-::setlocal
-	::call dk_dkebugFunc 0
+rem %setlocal%
+	rem call dk_dkebugFunc 0
 
- 
+
     call :dk_dumpStackReturn
 %endfunction%
 
 :dk_dumpStackReturn
-::setlocal
-	::call dk_dkebugFunc 0
+rem %setlocal%
+	rem call dk_dkebugFunc 0
 	
- 
+
     endlocal
     %caller[1].fullpath% %caller[1].args%
 %endfunction%
@@ -107,12 +114,11 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-::setlocal
-    %dk_call% dk_debugFunc 0
+rem %setlocal%
 
- 
+
     call :DKTEST_main
     %endfunction%
 
@@ -123,7 +129,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
     :DKTEST_dk_dumpStack
         %dk_call% dk_info ":DKTEST  %*"
         call:func1
-        
+       
         %dk_call% dk_info "caller[0] = %caller[0]%"
         %dk_call% dk_info "caller[1] = %caller[1]%"
         %dk_call% dk_info "caller[2] = %caller[2]%"
@@ -133,7 +139,7 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
         %dk_call% dk_info "caller[6] = %caller[6]%"
         %dk_call% dk_info "caller[7] = %caller[7]%"
         %dk_call% dk_info "returned from :DKTEST"
-        
+       
         %dk_call% dk_exit
     %endfunction%
 
@@ -141,11 +147,11 @@ if "%*" neq "" %dk_call% dk_error "%__FUNCTION__%(): too many arguments"
         %dk_call% dk_info ":func1 %*"
         call:func2
         %dk_call% dk_info "returned from func2"
-        ::call:func2 & (
-        ::  (goto) 2>nul
-        ::  call echo 0 = %%~0
-        ::  echo returned from func2
-        ::)
+        rem call:func2 & (
+        rem  (goto) 2>nul
+        rem  call echo 0 = %%~0
+        rem  echo returned from func2
+        rem )
     %endfunction%
 
     :func2

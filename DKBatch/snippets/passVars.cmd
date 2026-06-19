@@ -1,7 +1,15 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-::if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+rem if not defined DKINIT_cmd (
+rem 	setlocal enableDelayedExpansion
+rem 	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+rem 	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+rem 	if NOT EXIST "!DK.cmd!" (
+rem 		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+rem 	call "!DK.cmd:/=\!" "%%~0" %%*
+rem 	exit /b %errorlevel%
+rem )
+rem #################################################################################################################################################
 
 
 setlocal
@@ -12,7 +20,7 @@ call :initMacro
 call :ShowVariable ipOutput
 echo First line is %ipOutput[0]%
 
-echo( 
+echo.
 %$set% driveNames="wmic logicaldisk get name /value | findstr "Name""
 call :ShowVariable driveNames
 
@@ -25,7 +33,7 @@ setlocal EnableDelayedExpansion
 for /L %%n in (0 1 !%~1.max!) do (
     echo %%n: !%~1[%%n]!
 )
-echo(
+echo.
 exit /b
 
 :initMacro
@@ -41,7 +49,7 @@ if "!!" equ "" (
 %=empty=%
 )
 
-set $set=FOR /L %%N in (1 1 2) dO IF %%N==2 ( %\n%
+set $set=FOR /L %%N in (1 1 2) dO if %%N==2 ( %\n%
     setlocal EnableDelayedExpansion                                 %\n%
     for /f "tokens=1,* delims== " %%1 in ("!argv!") do (            %\n%
         endlocal                                                    %\n%
@@ -72,14 +80,14 @@ set $set=FOR /L %%N in (1 1 2) dO IF %%N==2 ( %\n%
                         set "%%~1[%%C]=%%~L" !                      %\n%
                         if %%C == 0 (                               %\n%
                             set "%%~1=%%~L" !                       %\n%
-                        ) ELSE (                                    %\n%
+                        ) else (                                    %\n%
                             set "%%~1=!%%~1!!LF!%%~L" !             %\n%
                         )                                           %\n%
                     )                                               %\n%
                     set /a %%~1.Len+=1                              %\n%
                 )                                                   %\n%
             )                                                       %\n%
-        ) ELSE (                                                    %\n%
+        ) else (                                                    %\n%
             %= Used if delayed expansion is disabled =%             %\n%
             for /F "delims=" %%O in ('"%%~2 | findstr /N ^^"') do ( %\n%
                 setlocal DisableDelayedExpansion                    %\n%

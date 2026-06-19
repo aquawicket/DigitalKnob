@@ -1,0 +1,4 @@
+############ core-js ############
+# https://github.com/zloirock/core-js.git
+
+core-js_Import=https://github.com/zloirock/core-js/archive/edb0539.zip

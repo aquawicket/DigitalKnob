@@ -1,0 +1,120 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+
+
+#########################################################################
+# dk_backupExecutable() 
+#
+#
+function(dk_backupExecutable)
+	dk_debugFunc()
+	
+	dk_assertPath(Target_App_Dir)
+	dk_assertVar(Target_Tuple)
+	dk_assertVar(Target_App)
+	
+	if(Android)
+		if(MULTI_CONFIG)
+			if(Debug)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/debug/app-debug.apk ${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+			endif()
+			if(Release)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk ${Target_App_Dir}/${Target_Tuple}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+			endif()
+		else()
+			if(Debug)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/app-debug.apk.backup OVERWRITE NO_HALT)
+			endif()
+			if(Release)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk.backup OVERWRITE NO_HALT)
+			endif()
+		endif()
+	endif()
+
+	if(Emscripten)
+		if(Debug)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.data 	${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html 	${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.js		${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.wasm 	${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.wasm.backup OVERWRITE NO_HALT)
+		elseif(Release)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.data 	${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.data.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html 	${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.html.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.js		${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.js.backup OVERWRITE NO_HALT)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.wasm 	${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.wasm.backup OVERWRITE NO_HALT)
+		endif()
+	endif()
+	
+	if(Ios OR Iossim)
+		if(Debug)
+			if(EXISTS ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app)
+				dk_delete(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup OVERWRITE)
+			endif()
+		endif()
+		if(Release)
+			if(EXISTS ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app)
+				dk_delete(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup)
+				dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup OVERWRITE)
+			endif()
+		endif()
+	endif()
+		
+	if(Linux)
+	if(NOT Raspberry)
+		if(Debug)
+			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
+		elseif(Release)
+			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
+		endif()
+	endif()
+	endif()
+	
+	if(Mac)
+		if(Debug)
+			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.app.backup OVERWRITE NO_HALT)
+		endif()
+		if(Release)
+			dk_copy(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.app.backup OVERWRITE NO_HALT)
+		endif()
+	endif()
+	
+	if(Raspberry)
+		if(Debug)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
+		elseif(Release)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App} ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.backup OVERWRITE NO_HALT)
+		endif()
+	endif()
+	
+	if(Windows)
+		if(Debug)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
+		endif()
+		if(Release)
+			dk_rename(${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/${Target_App}.exe.backup OVERWRITE NO_HALT)
+		endif()
+	endif()
+endfunction()
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+	dk_debugFunc(0)
+	
+	dk_backupExecutable()
+endfunction()

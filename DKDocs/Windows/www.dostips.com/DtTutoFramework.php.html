@@ -1,0 +1,1445 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="DtTutoFramework_files/filelist.xml">
+<link rel=Edit-Time-Data href="DtTutoFramework_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>DOS Batch - Solid Framework</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Keywords>dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser</o:Keywords>
+  <o:Template>Dt.dot</o:Template>
+  <o:LastAuthor>HP Authorized Customer</o:LastAuthor>
+  <o:Revision>45</o:Revision>
+  <o:TotalTime>136</o:TotalTime>
+  <o:Created>2005-12-28T05:03:00Z</o:Created>
+  <o:LastSaved>2006-02-25T04:30:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1211</o:Words>
+  <o:Characters>6903</o:Characters>
+  <o:Lines>57</o:Lines>
+  <o:Paragraphs>16</o:Paragraphs>
+  <o:CharactersWithSpaces>8098</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>TextFit</w:Zoom>
+  <w:DisplayBackgroundShape/>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:UpdateStylesOnOpen/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="_style.css?v=0001">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-update:auto;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:13.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-parent:Code;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.Code, li.Code, div.Code
+	{mso-style-name:Code;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	mso-style-update:auto;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	mso-list:l0 level1 lfo4;
+	tab-stops:list .25in;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.PageTitle, li.PageTitle, div.PageTitle
+	{mso-style-name:PageTitle;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.ads, li.ads, div.ads
+	{mso-style-name:ads;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.men, li.men, div.men
+	{mso-style-name:men;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nav, li.nav, div.nav
+	{mso-style-name:nav;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inst, li.inst, div.inst
+	{mso-style-name:inst;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inde, li.inde, div.inde
+	{mso-style-name:inde;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resu, li.resu, div.resu
+	{mso-style-name:resu;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.instr, li.instr, div.instr
+	{mso-style-name:instr;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resul, li.resul, div.resul
+	{mso-style-name:resul;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel, li.ysel, div.ysel
+	{mso-style-name:ysel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel, li.nsel, div.nsel
+	{mso-style-name:nsel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel1, li.ysel1, div.ysel1
+	{mso-style-name:ysel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel1, li.nsel1, div.nsel1
+	{mso-style-name:nsel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.bod, li.bod, div.bod
+	{mso-style-name:bod;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.codeop, li.codeop, div.codeop
+	{mso-style-name:codeop;
+	font-size:8.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.xyz
+	{mso-style-name:xyz;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:530192825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-406048876 -1919616146 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-style-link:Bullets;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1463158827;
+	mso-list-template-ids:1196599110;}
+@list l1:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"%3\)";
+	mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-text:"\(%4\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	margin-left:1.5in;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.75in;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:2.0in;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel="shortcut icon" href=favicon.ico>
+<link rel=icon href="animated_favicon1.gif" type="image/gif">
+<meta name=keywords
+content="dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,for,file,solutions,structured,menu,version,choice,lists,persistency,history,goto,functions,setlocal,variable,referencing,floating,point,arithmetic,string,manipulation,parser">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#FEFEFE" lang=EN-US link=blue vlink=purple style='tab-interval:
+.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzTop.htm&quot; \c html <span style='mso-element:field-separator'></span></span><![endif]--><script language="JavaScript">
+<!-- 
+var redi=1; // -->
+</script><span class=xyz><? echo "<script language='JavaScript'><!--\n var redi=0; \n// --></script>"; ?>&nbsp;</span>
+<script language="JavaScript">
+<!--
+if (redi==1) {
+    var l=location.toString().split(".");
+    var l0=l[l.length-2].split("/");
+    var l1=l0[l0.length-1];
+    var l2=l[l.length-1];
+    var target = "https://www.dostips.com/"+l1+".php";
+    document.writeln("<center><H1>This site has been updated.  You will be forwarted to<br><br>\n<a href='" + target + "'>" + target + "</a></H1></center>");
+    for (i=0; i<100; i++) document.writeln("<br>\n");
+    setTimeout("top.location.replace(target)",3000);
+}
+// -->
+</script></p>
+
+<? include_once 'zTop.php'; ?>
+
+<p class=PageTitle><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><span style='mso-field-code:" TITLE   \\* MERGEFORMAT "'>DOS Batch -
+Solid Framework</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><!--[if supportFields]><span
+style='color:black'><span style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>TOC \o &quot;1-3&quot; \h \z \u <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587171">1<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Creating
+a new DOS batch file<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587171
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587172">2<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Editing
+a DOS batch file<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587172
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587173">3<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Preparing
+the DOS batch file for the good stuff<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587173
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587174">4<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>SETLOCAL
+ENABLEDELAYEDEXPANSION<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587174
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587175">5<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Adding
+a Version History<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587175
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587176">6<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Updating
+the Version History<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587176
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587177">7<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Adding
+a Window Title<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587177
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587178">8<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Doing
+something useful<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587178
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587179">9<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Ending
+the Application<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587179
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100370039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587180">10<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Summary
+and Testing<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587180
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100380030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc128587181">11<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>  </span></span>Closing
+the Application after 5 seconds automatically<span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc128587181
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>4</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380037003100380031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587171"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Creating a new DOS
+  batch file</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Right click in an empty space on
+  your desktop and choose "New - Text Document" from the context menu.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>Rename the new created file from
+  &quot;<b>New Text Document.txt</b>&quot; to &quot;<span class=SpellE><b>dostips.bat</b></span>&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587172"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Editing a DOS batch
+  file</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Right click on the DOS batch
+  file and chose &quot;Edit&quot; from the context menu.<br>
+  The DOS batch file will open up in notepad.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587173"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>3<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Preparing the DOS
+  batch file for the good stuff</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The command processor needs to
+  be prepared for the good stuff following below.<span
+  style='mso-spacerun:yes'> </span>Add the following to the beginning of the
+  DOS file:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Prepare the Command Processor
+  --<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587174"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>4<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>SETLOCAL
+  ENABLEDELAYEDEXPANSION</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Adding delayed expansion was a
+  great enhancement for the command processor as it is an enabler for powerful
+  DOS batch coding.<span style='mso-spacerun:yes'> </span>Here a simple
+  example that shows the effect.<span style='mso-spacerun:yes'> </span>See the
+  also the help for the <b style='mso-bidi-font-weight:normal'>SET </b>command.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The takeaway is:<span
+  style='mso-spacerun:yes'> </span>If you want to process a variable within a
+  block like a loop then turn delayed expansions on.</span><span
+  style='mso-bidi-font-size:10.0pt;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL DISABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.DELAYEDEXPANSION</span></span><span
+  style='color:black'> are now DISABLED<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v1=bogus<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v2=bogus<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /l %%a in (1,1,4) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>set v1=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>set v2=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span><span class=SpellE>echo.a</span>=%%a, v1=%v1%, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo Percent<span
+  style='mso-spacerun:yes'>  </span>sign 1: '%%'<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'> Exclamation sign 1: '!'<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'> Exclamation sign 2: '^!'<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'>.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span class=SpellE><span style='color:black'>echo.DELAYEDEXPANSION</span></span><span
+  style='color:black'> are now ENABLED<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v1=bogus<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v2=bogus<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /l %%a in (1,1,4) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>set v1=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span>set v2=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>
+  </span><span class=SpellE>echo.a</span>=%%a, v1=%v1%, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo Percent<span
+  style='mso-spacerun:yes'>  </span>sign 1: '%%'<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>echo</span></span><span
+  style='color:black'> Exclamation sign 2: '^^!'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>ECHO.&amp;PAUSE&amp;GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#F3F3F3;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=Code><span style='color:black'>DELAYEDEXPANSION are now DISABLED<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=1, v1=bogus, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=2, v1=bogus, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=3, v1=bogus, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=4, v1=bogus, v2=<span class=GramE>!v2</span>!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Percent<span
+  style='mso-spacerun:yes'>  </span>sign 1: '%'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Exclamation sign 1: '!'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Exclamation sign 2: '!'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>DELAYEDEXPANSION are now ENABLED<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=1, v1=bogus, v2=1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=2, v1=bogus, v2=2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=3, v1=bogus, v2=3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>a=4, v1=bogus, v2=4<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Percent<span
+  style='mso-spacerun:yes'>  </span>sign 1: '%'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Exclamation sign 2: '!'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Press any key to continue . . .<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587175"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>5<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Adding a Version
+  History</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Adding and maintaining a version
+  history within you batch file is good practice in order to keep track of when
+  changed what.<span style='mso-spacerun:yes'> </span>Add the following code
+  block to you<span style='mso-spacerun:yes'> </span>batch file to implement a
+  nicely formatted<span style='mso-spacerun:yes'> </span>version history:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>REM.-- Version History<span
+  style='mso-spacerun:yes'> </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM<span
+  style='mso-spacerun:yes'>  </span>XX.XXX<span
+  style='mso-spacerun:yes'>  </span>YYYYMMDD Author Description<br>
+  <b>SET version=01.000-beta &amp;:<span class=GramE>20051201 <span
+  class=SpellE>p.h</span></span>.<span style='mso-spacerun:yes'>
+  </span>initial version, providing the framework<o:p></o:p></b></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>REM !!</span></span><span
+  style='color:black'> For a new version entry, copy the last entry down and
+  modify Date, Author and Description<br>
+  SET version=%version: =%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587176"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>6<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Updating the Version
+  History</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>The version history can be
+  updated by copying the last entry and modifying Date, Author, and Description
+  appropriately, i.e.:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>REM.-- Version History</span></p>
+  <p class=Code><span style='color:black'>REM<span
+  style='mso-spacerun:yes'>  </span>XX.XXX<span
+  style='mso-spacerun:yes'>  </span>YYYYMMDD Author Description<br>
+  SET version=01.000-beta &amp;:<span class=GramE>20051201 <span class=SpellE>p.h</span></span>.<span
+  style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'></span><span
+  class=GramE>initial</span> version, providing the framework<br>
+  <b>SET version=01.000<span style='mso-spacerun:yes'> 
+  </span>&amp;:20051202 <span class=SpellE>p.h</span>.<span
+  style='mso-spacerun:yes'> </span><span class=GramE>framework</span> ready</b><br>
+  <b>SET version=01.001<span style='mso-spacerun:yes'> 
+  </span>&amp;:20051203 <span class=SpellE>p.h</span>.<span
+  style='mso-spacerun:yes'> </span><span class=GramE>added</span> cool new
+  features<br>
+  </b>REM !! For a new version entry, copy the last entry down and modify Date,
+  Author and Description<br>
+  SET version=%version: =%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587177"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>7<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Adding a Window
+  Title</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Application name and version
+  seems to be just the right title for the application.<span
+  style='mso-spacerun:yes'> </span>Using a variable for the title string will
+  help adding additional information to the title later. Append the following
+  code block to the file:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>REM.-- Set the title<br>
+  SET title=%~nx0 - version %version%<br>
+  TITLE %title%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587178"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>8<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Doing something
+  useful</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:21'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>For now lets show some text to
+  demonstrate the frame work:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:22'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>REM<span class=GramE>.--</span> Do something
+  useful<br>
+  <span class=SpellE>echo.So</span> far so good.<br>
+  <span class=GramE>echo</span>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:23'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587179"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>9<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Ending the
+  Application</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Adding a 'pause' at the end will
+  allow the user to inspect screen outputs before closing the application
+  window:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:25'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>REM.-- End of application<br>
+  pause<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:26'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587180"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>10<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Summary and Testing</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:27'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>If you copied all code properly
+  into a batch file then your batch file should look like this:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:28'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Prepare the Command Processor
+  --<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Version History</span></p>
+  <p class=Code><span style='color:black'>REM<span
+  style='mso-spacerun:yes'>  </span>XX.XXX<span
+  style='mso-spacerun:yes'>  </span>YYYYMMDD Author Description<br>
+  SET version=01.000-beta &amp;:<span class=GramE>20051201 <span class=SpellE>p.h</span></span>.<span
+  style='mso-spacerun:yes'> </span><span class=GramE>initial</span> version,
+  providing the framework<br>
+  SET version=01.000<span style='mso-spacerun:yes'>  </span>&amp;:20051202 <span
+  class=SpellE>p.h</span>.<span style='mso-spacerun:yes'> </span>framework
+  ready<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>REM !!</span></span><span
+  style='color:black'> For a new version entry, copy the last entry down and
+  modify Date, Author and Description<br>
+  SET version=%version: =%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Set the title<br>
+  SET title=%~nx0 - version %version%<br>
+  TITLE %title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM<span class=GramE>.--</span> Do
+  something useful<br>
+  <span class=SpellE>echo.So</span> far so good.<br>
+  <span class=GramE>echo</span>.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- End of application<br>
+  pause<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:29'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>This is a good point to run the
+  application.<span style='mso-spacerun:yes'> </span>Double click <span
+  class=SpellE>dostips.bat</span> on your desktop.<br>
+  You should see a command window with the title:<br>
+  <span class=SpellE><b>dostips.bat</b></span><b> - version 01.000-beta<br>
+  </b>and the following text in the application window:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:30'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=bottom style='width:90.24%;background:#F3F3F3;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Code><span style='color:black'>So far so good.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><br>
+  Press any key to continue . . .<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:31'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128587181"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>11<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Closing the
+  Application after 5 seconds automatically</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:32'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>As you develop DOS batch files
+  you may find it annoying to have to hit a key when the application finished
+  just to close the window.<span style='mso-spacerun:yes'> </span>You may want
+  to have it close automatically but still being able to briefly scan over the
+  execution result shown in the window.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>A way to create a delay in a DOS
+  batch program is to ping the <span class=SpellE>localhost</span> or
+  127.0.0.1.<span style='mso-spacerun:yes'> </span>Sending 2 pings (ping -n 2 ...)
+  will cause a delay of very close to one second.<span
+  style='mso-spacerun:yes'> </span>Invoking multiple pings as needed gives
+  control about the delay time.<span style='mso-spacerun:yes'> </span>Showing
+  the remaining delay time in the window title will even let the user know
+  what's going on. <o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>Below the updated code.<span
+  style='mso-spacerun:yes'> </span>Note the changed "-- <b style='mso-bidi-font-weight:
+  normal'>End of application</b>" section.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>When running the application the
+  title will show a countdown of 5 seconds before the application closes.<span
+  style='mso-spacerun:yes'> </span>Changing the number 5 to 10 in the <b
+  style='mso-bidi-font-weight:normal'>FOR /l</b> statement would result in a 10
+  second countdown.<span style='mso-spacerun:yes'> </span>The user can optionally
+  press pause to keep the window open.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:33'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;background:#CCFFCC;padding:
+  0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>@echo off<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Prepare the Command Processor
+  --<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Version History</span></p>
+  <p class=Code><span style='color:black'>REM<span
+  style='mso-spacerun:yes'>  </span>XX.XXX<span
+  style='mso-spacerun:yes'>  </span>YYYYMMDD Author Description<br>
+  SET version=01.000-beta &amp;:<span class=GramE>20051201 <span class=SpellE>p.h</span></span>.<span
+  style='mso-spacerun:yes'> </span><span class=GramE>initial</span> version,
+  providing the framework<br>
+  SET version=01.000<span style='mso-spacerun:yes'>  </span>&amp;:20051202 <span
+  class=SpellE>p.h</span>.<span style='mso-spacerun:yes'> </span>framework
+  ready<o:p></o:p></span></p>
+  <p class=Code><span class=GramE><span style='color:black'>REM !!</span></span><span
+  style='color:black'> For a new version entry, copy the last entry down and
+  modify Date, Author and Description<br>
+  SET version=%version: =%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Set the title<br>
+  SET title=%~nx0 - version %version%<br>
+  TITLE %title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM<span class=GramE>.--</span> Do
+  something useful<br>
+  <span class=SpellE>echo.So</span> far so good.<br>
+  <span class=GramE>echo</span>.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>REM.-- End of application<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>FOR /l %%a in (5,-1,1) do (TITLE
+  %title% -- closing in %%<span class=SpellE>as&amp;ping</span> -n 2 -w 1
+  127.0.0.1&gt;NUL)<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>TITLE Press any key to close the <span
+  class=SpellE>application&amp;ECHO.&amp;GOTO:EOF</span></span></b><span
+  style='color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:34;mso-yfti-lastrow:yes'>
+  <td width="9%" valign=top style='width:9.76%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>What it's good for:<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.24%;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Closing an
+  application without user interaction<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Leave enough time to
+  view execution results<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>�<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>User can hit Pause
+  on the keyboard to keep the window open.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'></span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzBottom.htm&quot; \c html <span style='mso-element:
+field-separator'></span></span><![endif]-->&nbsp; </p>
+
+<? include 'zBottom.php'; ?>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146ec9c31ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

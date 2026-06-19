@@ -6,7 +6,7 @@
 #	mv /mingw64/bin/windres /mingw64/bin/windres2
 #
 # 2. copy this file to substitute the old windres
-#	cp /c/Users/Administrator/digitalknob/Development/3rdParty/_DKIMPORTS/msys2/windres /mingw64/bin/windres
+#	cp /c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/msys2/windres /mingw64/bin/windres
 #
 
 /mingw64/bin/windres2 --use-temp-file `echo "$*" | sed 's/\\\\//g'`

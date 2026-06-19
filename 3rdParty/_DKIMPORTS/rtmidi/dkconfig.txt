@@ -1,0 +1,5 @@
+############ rtmidi ############
+# https://github.com/thestk/rtmidi
+# https://github.com/thestk/rtmidi/archive/24b3a3bf99ddbeec2288629155c511b65f937049.zip
+
+rtmidi_Import=https://github.com/thestk/rtmidi/archive/24b3a3bf99ddbeec2288629155c511b65f937049.zip

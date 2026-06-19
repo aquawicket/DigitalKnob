@@ -1,48 +1,31 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::### DEPEND ###
-::dk_depend(vc_redist) #for VCRUNTIME140.dll
+rem ############ php-src ############
+rem # https://github.com/php/php-src.git
+rem # https://www.php.net
+rem # https://windows.php.net/downloads/releases
+rem # https://www.php.net/downloads.php
+rem # https://windows.php.net/downloads/releases/php-8.4.13-Win32-vs17-x86.zip
+rem # https://windows.php.net/downloads/releases/php-8.4.13-Win32-vs17-x64.zip
 
-
-::####################################################################
-::# DKINSTALL
-::#
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKINSTALL.cmd"
-
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined win_x86_host			(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x86.zip")
-	if defined win_x86_64_host		(set "PHP_SRC_DL=https://windows.php.net/downloads/releases/php-8.0.30-Win32-vs16-x64.zip")
-	if not defined PHP_SRC_DL		(%dk_call% dk_error "PHP_SRC_DL is invalid")
-
-	%dk_call% dk_importVariables %PHP_SRC_DL% IMPORT_PATH %DKIMPORTS_DIR%\php-src
-
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	set "PHP_EXE=%PHP_SRC%/php.exe"
-
-	if exist "%PHP_EXE%" (%return%)
-
-	%dk_call% dk_download "%PHP_SRC_DL%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%/%PHP_SRC_DL_FILE%" "%PHP_SRC%"
-
-	if not exist "%PHP_EXE%" (%dk_call% dk_error "cannot find PHP_EXE:%PHP_EXE%")
-%endfunction%
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-
-	%dk_call% DKINSTALL
+rem setlocal
+	rem %dk_call% dk_validate vc_redist %dk_call% dk_depend vc_redist
+	
+	%dk_call% dk_import
+	
+	set "php_exe=%php-src%/php.exe"
+	%dk_call% dk_assertFile php_exe
 %endfunction%

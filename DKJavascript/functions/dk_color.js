@@ -1,6 +1,20 @@
-//#!/bin/sh
-//[ -z "${DKINIT-}" ] && . "${DKBASH_FUNCTIONS_DIR_-}DK.sh"
+// shebang
+/*
+if(typeof ActiveXObject === "function"){
+	if(typeof wscript_shell !== "object")	{ var wscript_shell = new ActiveXObject("WScript.Shell"); }
+	if(typeof ENV !== "object")				{ var ENV = wscript_shell.Environment("Process"); }
+	if(typeof ENV === "object" && typeof wscript_shell === "object" && ENV("DKINIT_js") === "") {	
+		ENV("DKINIT_js") = WScript.ScriptFullName;
+		var USERPROFILE = ENV("USERPROFILE");
+		
+		//wscript_shell.Run("cmd /k mshta.exe \"file:///C:/Users/Administrator/Digital%20Knob/Development/DKHta/functions/DK.hta\" | for /f \"delims=\" %a in ('findstr \"^\"') do 	@echo %a", 1, 1);
+		var DK_js = "C:/Users/Administrator/Digital Knob/Development/DKJavascript/functions/DK.js";
+		var rtn = wscript_shell.Run("cmd /k cscript.exe //D //E:Javascript //X //NoLogo \""+DK_js+"\" \""+WScript.ScriptFullName+"\"", 1, 1);
+		//wscript_shell.Run("cmd /k mshta.exe \"javascript:new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write('Hello World');\" | for /f \"delims=\" %a in ('findstr \"^\"') do @echo %a", 1, 1);
+	}
+}
 
+*/
 //##################################################################################
 //# dk_color(on/off)
 //#
@@ -15,16 +29,16 @@
 dk_color = function dk_color_f(){
 	//dk_debugFunc(0 1)
 	
-	var USE_COLOR = 1;
+	var dk_color_ENABLE = 1;
 	
 /*	if [ ${#} -gt 0 ]; then
 		if [ ${1-} -eq 0 ]; then
-			delete this.USE_COLOR
+			delete this.dk_color_ENABLE
 		fi
 	fi
 */
 
-	if(USE_COLOR){
+	if(dk_color_ENABLE){
 		var ESC = "\x1b";    		 	// escape character
 		
 		// Attributes on
@@ -96,12 +110,12 @@ dk_color = function dk_color_f(){
 		this.bg_lwhite = ESC+"[107m";	// Bright Background White		- Applies bold/bright white to background
 		
 		// Foreground RGB Colors
-		this.RGB = ESC+"[38;2;"			// ${RGB}50;100;150m        	= ${ESC}[38;2;50;100;150m
+		this.RGB = ESC+"[38;2;";		// ${RGB}50;100;150m        	= ${ESC}[38;2;50;100;150m
 		
 		// Background RGB Colors
-		this.bg_RGB = ESC+"[48;2;"		// ${bg_RGB}150;100;50m     	= ${ESC}[38;2;150;100;50m
+		this.bg_RGB = ESC+"[48;2;";		// ${bg_RGB}150;100;50m     	= ${ESC}[38;2;150;100;50m
 		
-		console.log(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+" O"+green+"N"+clr)
+		console.log(blue+"C"+green+"O"+red+"L"+magenta+"O"+cyan+"R"+blue+" O"+green+"N"+clr);
 
 	} else {
 		delete this.ESC;
@@ -188,7 +202,7 @@ DKTEST = function DKTEST_f(){
 	console.log("");
 	
 	console.log(black+bg_lblack+"           Styles             "+clr);
-	console.log("clr       "+clr+" default "+clr);
+	console.log("clr        "+clr+" default "+clr);
 	console.log("bold       "+bold+" bold "+clr);
 	console.log("dim        "+dim+" dim "+clr);
 	console.log("italic     "+italic+" italic "+clr);

@@ -1,34 +1,34 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+::@echo off&rem ###### DK.cmd #########################################################################################################################
+::if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
+::if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+rem #################################################################################################################################################
 
 
-::####################################################################
+rem ####################################################################
 ::# dk_call(command args)
 ::#
 :dk_call
 	if "%~1" equ "" (echo ERROR: use 'call dk_call %%0' at the top of your script to initialize dk_call. & pause & exit 13 )
 	
-	if not defined endfunction  (set "endfunction=exit /b %errorlevel%")
+	if NOT defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	
-	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
+	rem don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
 	::(set "temp=%*")
 	::if "!temp:~0,1!" equ ":" (call %temp% && %endfunction%)
 	if "%~1" equ "setGlobal" 		(call :%* && %endfunction%)
 	if "%~1" equ "printCallStack" 	(call :%* && %endfunction%)
 	
 	::### Constant Variables ###
-	if not defined dk_call 		(set "dk_call=call dk_call")
-	if not defined GLOBAL_FILE 	(set "GLOBAL_FILE=C:\GLOBAL.txt")
-	if not defined LVL			(set /a "LVL=-1")
+	if NOT defined dk_call 		(set "dk_call=call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd")
+	if NOT defined GLOBAL_FILE 	(set "GLOBAL_FILE=%SystemDrive%/GLOBAL.txt")
+	if NOT defined LVL			(set /a "LVL=-1")
 	
 	(set "pad=")
 	(set "padB=      ")
 	(set "indent=        ")
 
 	::###### Stack Variables ######
-	(set "CMND=%~1") && (set "CMND=!CMND:::=\!")
+	(set "CMND=%~1") && (set "CMND=!CMND:::=/!")
 	(set "FILE=%~dpnx1")
 	(set "FUNC=%~n1")
 	(set "ARGV=%*")
@@ -48,8 +48,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	::###### Print function entry #####
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
-	if not "%_codepage_%" equ "65001" (chcp 65001>nul)
-	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	if "%_codepage_%" neq "65001" (chcp 65001>nul)
+	echo %pad%╚═► !FUNC!(!ARGV!)	&rem https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
 	::##################################
 	
@@ -60,7 +60,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%╔══ !FUNC!(!ARGV!)	&rem https://en.wikipedia.org/wiki/Code_page_437
 	echo %pad%▼
 	::#################################
 	
@@ -72,8 +72,8 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	(set /a "PLVL=LVL")
 	(set /a "LVL-=1")
 	
-	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
-	if exist "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
+	rem get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
+	if EXIST "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
     )
@@ -107,17 +107,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :setGlobal name value
 	set "%~1=%~2"
-	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
-	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	set "GLOBAL_%~1=%~2"			&rem prefix the variable name with GLOBAL_ and assign a value
+	set GLOBAL_ > "%GLOBAL_FILE%"	&rem place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 %endfunction%
 
 :printCallStack
-	echo:
+	echo.
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
 		if defined CMND_!num! (call echo !num!: %%CMND_!num!%%)
 	)
 	echo ###################################
-	echo:
+	echo.
 %endfunction%

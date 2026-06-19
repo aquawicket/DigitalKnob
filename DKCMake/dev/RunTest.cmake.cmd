@@ -1,4 +1,4 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
 :: For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
@@ -25,18 +25,18 @@
 :: CMakeScript Tester
 @echo off
 
-set "CMAKE_DL=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
+set "cmake_Import=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "DIGITALKNOB_DIR=%USERPROFILE%\digitalknob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\Digital Knob"
 set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
-if not exist "%CMAKE_EXE%" ( ERROR "Could not locate CMAKE_EXE" )
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if NOT EXIST "%cmake.exe%" ( ERROR "Could NOT locate cmake.exe" )
 
 :begin
 cls
 
 set "file=%DKCMAKE_DIR%/other/Test.cmake"
-"%CMAKE_EXE%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%" 
- 
-pause 
+"%cmake.exe%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
+
+pause

@@ -1,40 +1,46 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ opus ############
 # https://github.com/xiph/opus.git
+# https://github.com/xiph/opus/archive/7db26934.zip
 
-dk_load(dk_builder)
-
-### IMPORT ###
-dk_import(https://github.com/xiph/opus/archive/7db26934.zip)
+dk_import()
 
 ### LINK ###
 dk_include			(${OPUS}/include					OpusFile_INCLUDE_PATH)
-dk_include			(${OPUS}/${target_triple})
+dk_include			(${OPUS}/${Target_Tuple})
 if(MSVC)
-	dk_libDebug		(${OPUS_DEBUG_DIR}/opus.lib			OpusFile_LIBRARY_DEBUG)
-	dk_libRelease	(${OPUS_RELEASE_DIR}/opus.lib		OpusFile_LIBRARY_RELEASE)
+	dk_libDebug		(${OPUS_Debug_Dir}/opus.lib			OpusFile_LIBRARY_DEBUG)
+	dk_libRelease	(${OPUS_Release_Dir}/opus.lib		OpusFile_LIBRARY_RELEASE)
 else()
-	dk_libDebug		(${OPUS_DEBUG_DIR}/libopus.a		OpusFile_LIBRARY_DEBUG)
-	dk_libRelease	(${OPUS_RELEASE_DIR}/libopus.a		OpusFile_LIBRARY_RELEASE)
+	dk_libDebug		(${OPUS_Debug_Dir}/libopus.a		OpusFile_LIBRARY_DEBUG)
+	dk_libRelease	(${OPUS_Release_Dir}/libopus.a		OpusFile_LIBRARY_RELEASE)
 endif()
-if(DEBUG)
+if(Debug)
 	dk_set(OpusFile_LIBRARY ${OpusFile_LIBRARY_DEBUG})
 endif()
-if(RELEASE)
+if(Release)
 	dk_set(OpusFile_LIBRARY ${OpusFile_LIBRARY_RELEASE})
 endif()
 
-dk_set(OPUS_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_LIBRARY=${OpusFile_LIBRARY}) 
+dk_set(opus_CMAKE -DOpusFile_INCLUDE_PATH=${OpusFile_INCLUDE_PATH}  -DOpusFile_LIBRARY=${OpusFile_LIBRARY}) 
 
 
 ### GENERATE ###
-dk_configure(${OPUS})
+dk_configure()
 
 ### COMPILE ###
-dk_build(${OPUS})
+dk_build()

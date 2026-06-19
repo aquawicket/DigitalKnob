@@ -1,247 +1,250 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	if NOT DEFINED DK.cmd (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	call "%%DK.cmd:/=\%%" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_color(on/off)
-::#
-::# Enable / Disable console text and background coloring
-::#
-::#		on/off:		Default ON
-::#
-::#		https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-::#		https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
-::#		https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
-::#
+rem ##################################################################################
+rem # dk_color(on/off)
+rem #
+rem # Enable / Disable console text and background coloring
+rem #
+rem #		on/off:		Default ON
+rem #
+rem #		https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+rem #		https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+rem #		https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+rem #
 :dk_color
-::setlocal
-	%dk_call% dk_debugFunc 0 1
+rem %setlocal%
 
-	(set USE_COLOR=1)
-	if defined %1 if %1 equ 0 (set USE_COLOR=)
-
+	(set dk_color_ENABLE=1)
+	if defined %1 if %1 equ 0 (set dk_color_ENABLE=)
 
 	:USE_COLOR_if
-	if not defined USE_COLOR goto USE_COLOR_else
+	if NOT defined dk_color_ENABLE goto dk_color_DISABLE
 
-		::(set ESC="																&:: escape character	BAD: Uncopyable character
-		::for /f %%A in ('echo prompt $E^| cmd') do (set ESC=%%A)					&:: escape character	BAD: cryptic
-		::for /f %%A in ('forfiles /c "%ComSpec% /c echo 0x1B"') do (set ESC=%%A)	&:: escape character	BAD: Very slow
-		::for /l %%A in (27,1,1) do (cmd /c exit %%A & (set ESC=!^=ExitCodeAscii!)) &:: escape character	GOOD: Converts DECIMAL to ASCII
+		rem (set ESC="																&rem escape character	BAD: Uncopyable character
+		rem for /f %%A in ('echo prompt $E^| cmd') do (set ESC=%%A)					&rem escape character	BAD: cryptic
+		rem for /f %%A in ('forfiles /c "%ComSpec% /c echo 0x1B"') do (set ESC=%%A)	&rem escape character	BAD: Very slow
+		rem for /l %%A in (27,1,1) do (cmd /c exit %%A & (set ESC=!^=ExitCodeAscii!)) &rem escape character	GOOD: Converts DECIMAL to ASCII
 
-		::for /l %%A in (0,1,126)	do (cmd /c exit %%A & set /a "C%%A=!^=ExitCodeAscii!" & echo C%%A = !C%%A! >> ascii.txt)
+		rem for /l %%A in (0,1,126)	do (cmd /c exit %%A & set /a "C%%A=!^=ExitCodeAscii!" & >>ascii.txt echo C%%A = !C%%A!)
 
-		::############ C0 control codes #############
-		(set NUL=)							&:: Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
-		(set SOH=)							&:: Start of Heading - First character of the heading of a message
-		(set STX=)							&:: Start of Text - Terminates the header and starts the message text
-		(set ETX=)							&:: End of Text - Ends the message text, starts a footer (up to the next TC character)
-		(set EOT=)							&:: End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
-		(set EQN=)							&:: Enquiry - Trigger a response at the receiving end, to see if it is still present.
-		(set ACK=)							&:: Acknowledge - Indication of successful receipt of a message.
-		(set BEL=)							&:: Bell, Alert	- Call for attention from an operator.
-		(set BS=)							&:: Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
-		(set HT=	)						&:: Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+		rem ############ C0 control codes #############
+		(set NUL=)							&rem Null - Does nothing. The code of blank paper tape, and also used for padding to slow transmission
+		(set SOH=)							&rem Start of Heading - First character of the heading of a message
+		(set STX=)							&rem Start of Text - Terminates the header and starts the message text
+		(set ETX=)							&rem End of Text - Ends the message text, starts a footer (up to the next TC character)
+		(set EOT=)							&rem End of Transmission - Ends the transmission of one or more messages. May place terminals on standby.
+		(set EQN=)							&rem Enquiry - Trigger a response at the receiving end, to see if it is still present.
+		(set ACK=)							&rem Acknowledge - Indication of successful receipt of a message.
+		(set BEL=)							&rem Bell, Alert	- Call for attention from an operator.
+		(set BS=)							&rem Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+		(set HT=	)						&rem Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
 		(set LF=^
 %= This creates a Line Feed - DO NOT ALTER =%
-)											&:: Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
-		(set VT=)							&:: Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
-		(set FF=)							&:: Form Feed - Move down to the top of the next page.
-		for /f %%a in ('copy /Z "%~dpf0" nul') do (set CR=%%a)	 &:: Carriage Return - Move to column zero while staying on the same line.
-		(set SO=)							&:: Shift Out - Switch to an alternative character set.
-		(set SI=)							&:: Shift In - Return to regular character set after SO.
-		(set DLE=)							&:: Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
-		(set DC1=)							&:: Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
-		(set DC2=)							&:: Device Control Two
-		(set DC3=)							&:: Device Control Three
-		(set DC4=)							&:: Device Control Four
-		(set NAK=)							&:: Negative Acknowledge - Negative response to a sender, such as a detected error.
-		(set SYN=)							&:: Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
-		(set ETB=)							&:: End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
-		(set CAN=)							&:: Cancel - Indicates that the data preceding it are in error or are to be disregarded.
-		(set EM=)							&:: End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
-		set "SUB="							&:: Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
-		(set ESC=)							&:: Escape - Alters the meaning of a limited number of following bytes.
-		(set FS=)							&:: File Separator - Can be used as delimiters to mark fields of data structures. 
-		(set GS=)							&:: Group Separator
-		(set RS=)							&:: Record Separator
-		(set US=)							&:: Unit Separator - US is the lowest level
-		(set SP= )							&:: Space - Move right one character position.
-		(set DEL=)							&:: Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
+)											&rem Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+		(set VT=)							&rem Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+		(set FF=)							&rem Form Feed - Move down to the top of the next page.
+		for /f %%a in ('copy /Z "%~dpf0" nul') do (set CR=%%a)	 &rem Carriage Return - Move to column zero while staying on the same line.
+		(set SO=)							&rem Shift Out - Switch to an alternative character set.
+		(set SI=)							&rem Shift In - Return to regular character set after SO.
+		(set DLE=)							&rem Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
+		(set DC1=)							&rem Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
+		(set DC2=)							&rem Device Control Two
+		(set DC3=)							&rem Device Control Three
+		(set DC4=)							&rem Device Control Four
+		(set NAK=)							&rem Negative Acknowledge - Negative response to a sender, such as a detected error.
+		(set SYN=)							&rem Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
+		(set ETB=)							&rem End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
+		(set CAN=)							&rem Cancel - Indicates that the data preceding it are in error or are to be disregarded.
+		(set EM=)							&rem End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+		(set SUB=)							&rem Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
+		(set ESC=)							&rem Escape - Alters the meaning of a limited number of following bytes.
+		(set FS=)							&rem File Separator - Can be used as delimiters to mark fields of data structures.
+		(set GS=)							&rem Group Separator
+		(set RS=)							&rem Record Separator
+		(set US=)							&rem Unit Separator - US is the lowest level
+		(set SP= )							&rem Space - Move right one character position.
+		(set DEL=)							&rem Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
 
-		::############ C1 control codes #############
-		(set PAD=%ESC%@)					&:: Padding Character
-		(set HOP=%ESC%A)					&:: High Octet Preset
-		(set BPH=%ESC%B)					&:: Break Permitted Here
-		(set NBH=%ESC%C)					&:: No Break Here
-		(set IND=%ESC%D)					&:: Index
-		(set NEL=%ESC%E)					&:: Next Line
-		(set SSA=%ESC%F)					&:: Start of Selected Area
-		(set ESA=%ESC%G)					&:: End of Selected Area
-		(set HTS=%ESC%H)					&:: Horizontal Tabulation Set
-		(set HTJ=%ESC%I)					&:: Horizontal Tabulation With Justification
-		(set VTS=%ESC%J)					&:: Vertical Tabulation Set
-		(set PLD=%ESC%K)					&:: Partial Line Down
-		(set PLU=%ESC%L)					&:: Partial Line Up
-		(set RI=%ESC%M)						&:: Reverse Index
-		(set SS2=%ESC%N)					&:: Single Shift Two
-		(set SS3=%ESC%O)					&:: Single Shift Three
-		(set DCS=%ESC%P)					&:: Device Control String
-		(set PU1=%ESC%Q)					&:: Private Use 1
-		(set PU2=%ESC%R)					&:: Private Use 2
-		(set STS=%ESC%S)					&:: Set Transmit State
-		(set CCH=%ESC%T)					&:: Cancel character
-		(set MW=%ESC%U)						&:: Message Waiting
-		(set SPA=%ESC%V)					&:: Start of Protected Area
-		(set EPA=%ESC%W)					&:: End of Protected Area
-		(set SOS=%ESC%X)					&:: Start of String
-		(set SGC=%ESC%Y)					&:: Single Graphic Character Introducer
-		(set SCI=%ESC%Z)					&:: Single Character Introducer
-		(set CSI=%ESC%[)					&:: Control Sequence Introducer
-		(set ST=%ESC%\)						&:: String Terminator
-		(set OSC=%ESC%])					&:: Operating System Command
-		(set PM=%ESC%^^)					&:: Privacy Message
-		(set APC=%ESC%_)					&:: Application Program Command
+		rem ############ C1 control codes #############
+		(set PAD=%ESC%@)					&rem Padding Character
+		(set HOP=%ESC%A)					&rem High Octet Preset
+		(set BPH=%ESC%B)					&rem Break Permitted Here
+		(set NBH=%ESC%C)					&rem No Break Here
+		(set IND=%ESC%D)					&rem Index
+		(set NEL=%ESC%E)					&rem Next Line
+		(set SSA=%ESC%F)					&rem Start of Selected Area
+		(set ESA=%ESC%G)					&rem End of Selected Area
+		(set HTS=%ESC%H)					&rem Horizontal Tabulation Set
+		(set HTJ=%ESC%I)					&rem Horizontal Tabulation With Justification
+		(set VTS=%ESC%J)					&rem Vertical Tabulation Set
+		(set PLD=%ESC%K)					&rem Partial Line Down
+		(set PLU=%ESC%L)					&rem Partial Line Up
+		(set RI=%ESC%M)						&rem Reverse Index
+		(set SS2=%ESC%N)					&rem Single Shift Two
+		(set SS3=%ESC%O)					&rem Single Shift Three
+		(set DCS=%ESC%P)					&rem Device Control String
+		(set PU1=%ESC%Q)					&rem Private Use 1
+		(set PU2=%ESC%R)					&rem Private Use 2
+		(set STS=%ESC%S)					&rem Set Transmit State
+		(set CCH=%ESC%T)					&rem Cancel character
+		(set MW=%ESC%U)						&rem Message Waiting
+		(set SPA=%ESC%V)					&rem Start of Protected Area
+		(set EPA=%ESC%W)					&rem End of Protected Area
+		(set SOS=%ESC%X)					&rem Start of String
+		(set SGC=%ESC%Y)					&rem Single Graphic Character Introducer
+		(set SCI=%ESC%Z)					&rem Single Character Introducer
+		(set CSI=%ESC%[)					&rem Control Sequence Introducer
+		(set ST=%ESC%\)						&rem String Terminator
+		(set OSC=%ESC%])					&rem Operating System Command
+		(set PM=%ESC%^^)					&rem Privacy Message
+		(set APC=%ESC%_)					&rem Application Program Command
 
-		(set DECSC=%ESC%7)					&:: Save Cursor Position in Memory**
-		(set DECSR=%ESC%8)					&:: Restore Cursor Position from Memory**
+		(set DECSC=%ESC%7)					&rem Save Cursor Position in Memory**
+		(set DECSR=%ESC%8)					&rem Restore Cursor Position from Memory**
 
-		(set DECSCUSR0=%ESC%0%SP%q)			&:: User Shape
-		(set DECSCUSR1=%ESC%1%SP%q)			&:: Blinking Block
-		(set DECSCUSR2=%ESC%2%SP%q)			&:: Steady Block
-		(set DECSCUSR3=%ESC%3%SP%q)			&:: Blinking Underline
-		(set DECSCUSR4=%ESC%4%SP%q)			&:: Steady Underline
-		(set DECSCUSR5=%ESC%5%SP%q)			&:: Blinking Bar
-		(set DECSCUSR6=%ESC%6%SP%q)			&:: Steady Bar
+		(set DECSCUSR0=%ESC%0%SP%q)			&rem User Shape
+		(set DECSCUSR1=%ESC%1%SP%q)			&rem Blinking Block
+		(set DECSCUSR2=%ESC%2%SP%q)			&rem Steady Block
+		(set DECSCUSR3=%ESC%3%SP%q)			&rem Blinking Underline
+		(set DECSCUSR4=%ESC%4%SP%q)			&rem Steady Underline
+		(set DECSCUSR5=%ESC%5%SP%q)			&rem Blinking Bar
+		(set DECSCUSR6=%ESC%6%SP%q)			&rem Steady Bar
 
-		::############ CSI Commands #############
-		(set CCU=%CSI%A)					&:: Cursor Up 1 - Moves the cursor 1 cell in the given direction. If the cursor is already at the edge of the screen, this has no effect.
-		::(set CCU=%CSI%<n>A)				&:: Cursor Up -	Moves the cursor n (default 1) cells in the given direction. If the cursor is already at the edge of the screen, this has no effect.
-		(set CUD=%CSI%B)					&:: Cursor Down 1
-		::(set CCU=%CSI%<n>B)				&:: Cursor Down
-		(set CUF=%CSI%C)					&:: Cursor Forward 1
-		::(set CCU=%CSI%<n>C)				&:: Cursor Forward
-		(set CUB=%CSI%D)					&:: Cursor Back 1
-		::(set CCU=%CSI%<n>D)				&:: Cursor Back
-		(set CNL=%CSI%E)					&:: Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>E)				&:: Cursor Next Line - Moves cursor to beginning of the line n (default 1) lines down. (not ANSI.SYS)
-		(set CPL=%CSI%F)					&:: Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>F)				&:: Cursor Previous Line - Moves cursor to beginning of the line n (default 1) lines up. (not ANSI.SYS)
-		(set CHA=%CSI%G)					&:: Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (not ANSI.SYS)
-		::(set CCU=%CSI%<n>G)				&:: Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (not ANSI.SYS)
-		::(set CUP=%CSI%<n>;<m>H)			&:: Cursor Position	- Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
-		::(set HVP=%CSI%<y>;<x>f)			&:: Horizontal Vertical Position - Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
-		(set ANSISYSSC=%CSI%s)				&:: Save Cursor – **With no parameters, performs a save cursor operation like DECSC
-		(set ANSISYSRC=%CSI%u)				&:: Restore Cursor - **With no parameters, performs a restore cursor operation like DECRC
+		rem ############ CSI Commands #############
+		(set CCU=%CSI%A)					&rem Cursor Up 1 - Moves the cursor 1 cell in the given direction. If the cursor is already at the edge of the screen, this has no effect.
+		rem (set CCU=%CSI%<n>A)				&rem Cursor Up -	Moves the cursor n (default 1) cells in the given direction. If the cursor is already at the edge of the screen, this has no effect.
+		(set CUD=%CSI%B)					&rem Cursor Down 1
+		rem (set CCU=%CSI%<n>B)				&rem Cursor Down
+		(set CUF=%CSI%C)					&rem Cursor Forward 1
+		rem (set CCU=%CSI%<n>C)				&rem Cursor Forward
+		(set CUB=%CSI%D)					&rem Cursor Back 1
+		rem (set CCU=%CSI%<n>D)				&rem Cursor Back
+		(set CNL=%CSI%E)					&rem Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (NOT ANSI.SYS)
+		rem (set CCU=%CSI%<n>E)				&rem Cursor Next Line - Moves cursor to beginning of the line n (default 1) lines down. (NOT ANSI.SYS)
+		(set CPL=%CSI%F)					&rem Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (NOT ANSI.SYS)
+		rem (set CCU=%CSI%<n>F)				&rem Cursor Previous Line - Moves cursor to beginning of the line n (default 1) lines up. (NOT ANSI.SYS)
+		(set CHA=%CSI%G)					&rem Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (NOT ANSI.SYS)
+		rem (set CCU=%CSI%<n>G)				&rem Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (NOT ANSI.SYS)
+		rem (set CUP=%CSI%<n>;<m>H)			&rem Cursor Position	- Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
+		rem (set HVP=%CSI%<y>;<x>f)			&rem Horizontal Vertical Position - Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
+		(set ANSISYSSC=%CSI%s)				&rem Save Cursor – **With no parameters, performs a save cursor operation like DECSC
+		(set ANSISYSRC=%CSI%u)				&rem Restore Cursor - **With no parameters, performs a restore cursor operation like DECRC
 
-		::CSI n J	ED						&:: Erase in Display - Clears part of the screen. If n is 0 (or missing), clear from cursor to end of screen. If n is 1, clear from cursor to beginning of the screen. If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen and delete all lines saved in the scrollback buffer.
-		::CSI n K	EL						&:: Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does not change.
-		::CSI n S	SU						&:: Scroll Up - Scroll whole page up by n (default 1) lines. New lines are added at the bottom. (not ANSI.SYS)
-		::CSI n T	SD						&:: Scroll Down	- Scroll whole page down by n (default 1) lines. New lines are added at the top. (not ANSI.SYS)
-		::CSI n ; m f	HVP					&:: Horizontal Vertical Position - Same as CUP, but counts as a format effector function (like CR or LF) rather than an editor function (like CUD or CNL).
-		::CSI n m	SGR						&:: Select Graphic Rendition - Sets colors and style of the characters following this code
-		::CSI 5i							&:: AUX Port On	- Enable aux serial port usually for local serial printer
-		::CSI 4i							&:: AUX Port Off - Disable aux serial port usually for local serial printer
-		::CSI 6n	DSR						&:: Device Status Report - Reports the cursor position (CPR) by transmitting ESC[n;mR, where n is the row and m is the column.
-		(set ATT160=%CSI%?12)				&:: Text Cursor Blink
-		(set DECTCEM=%CSI%?25)				&:: Text Cursor Show/Hide
+		rem CSI n J	ED						&rem Erase in Display - Clears part of the screen. If n is 0 (or missing), clear from cursor to end of screen. If n is 1, clear from cursor to beginning of the screen. If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen and delete all lines saved in the scrollback buffer.
+		rem CSI n K	EL						&rem Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does NOT change.
+		rem CSI n S	SU						&rem Scroll Up - Scroll whole page up by n (default 1) lines. New lines are added at the bottom. (NOT ANSI.SYS)
+		rem CSI n T	SD						&rem Scroll Down	- Scroll whole page down by n (default 1) lines. New lines are added at the top. (NOT ANSI.SYS)
+		rem CSI n ; m f	HVP					&rem Horizontal Vertical Position - Same as CUP, but counts as a format effector function (like CR or LF) rather than an editor function (like CUD or CNL).
+		rem CSI n m	SGR						&rem Select Graphic Rendition - Sets colors and style of the characters following this code
+		rem CSI 5i							&rem AUX Port On	- Enable aux serial port usually for local serial printer
+		rem CSI 4i							&rem AUX Port Off - Disable aux serial port usually for local serial printer
+		rem CSI 6n	DSR						&rem Device Status Report - Reports the cursor position (CPR) by transmitting ESC[n;mR, where n is the row and m is the column.
+		(set ATT160=%CSI%?12)				&rem Text Cursor Blink
+		(set DECTCEM=%CSI%?25)				&rem Text Cursor Show/Hide
 	
-		::(SU=%CSI%<n>S)					&:: Scroll Up - Scroll text up by <n>. Also known as pan down, new lines fill in from the bottom of the screen
-		::(SD=%CSI%<n>T)					&:: Scroll Down - Scroll down by <n>. Also known as pan up, new lines fill in from the top of the screen
+		rem (SU=%CSI%<n>S)					&rem Scroll Up - Scroll text up by <n>. Also known as pan down, new lines fill in from the bottom of the screen
+		rem (SD=%CSI%<n>T)					&rem Scroll Down - Scroll down by <n>. Also known as pan up, new lines fill in from the top of the screen
 
-		(set "DEC=%ESC%(0")					&:: Enables DEC Line Drawing Mode
-		(set "ASCII=%ESC%(B")				&:: Enables ASCII Mode (Default)
+		(set "DEC=%ESC%(0")					&rem Enables DEC Line Drawing Mode
+		(set "ASCII=%ESC%(B")				&rem Enables ASCII Mode (Default)
 
-		::# Cursor
-		(set cursor_blink_on=%ATT160%h)		&:: Text Cursor Enable Blinking
-		(set cursor_blink_off=%ATT160%l)	&:: Text Cursor Disable Blinking
-		(set cursor_show=%DECTCEM%h)		&:: Text Cursor Enable Mode Show
-		(set cursor_hide=%DECTCEM%l)		&:: Text Cursor Enable Mode Hide
+		rem # Cursor
+		(set cursor_blink_on=%ATT160%h)		&rem Text Cursor Enable Blinking
+		(set cursor_blink_off=%ATT160%l)	&rem Text Cursor Disable Blinking
+		(set cursor_show=%DECTCEM%h)		&rem Text Cursor Enable Mode Show
+		(set cursor_hide=%DECTCEM%l)		&rem Text Cursor Enable Mode Hide
 
-		::# Attributes on
-		(set clr=%CSI%0m)					&:: Default					Reset all modes (styles and colors)
-		(set bright=%CSI%1m)				&:: Bright					Applies brightness flag to foreground color
-		(set dim=%CSI%2m)					&:: Dim						Applies dim flag to foreground color
-		(set italic=%CSI%3m)				&:: Italic
-		(set underline=%CSI%4m)				&:: Underline
-		(set blink=%CSI%5m)					&:: Blink
-		(set fblink=%CSI%6m)				&:: Rapid Blink
-		(set negative=%CSI%7m)				&:: Negative				Swaps foreground and background colors
-		(set invisible=%CSI%8m)				&:: Invisible
-		(set strike=%CSI%9m)				&:: Strike Through
+		rem # Attributes on
+		(set clr=%CSI%0m)					&rem Default					Reset all modes (styles and colors)
+		(set bright=%CSI%1m)				&rem Bright					Applies brightness flag to foreground color
+		(set dim=%CSI%2m)					&rem Dim						Applies dim flag to foreground color
+		(set italic=%CSI%3m)				&rem Italic
+		(set underline=%CSI%4m)				&rem Underline
+		(set blink=%CSI%5m)					&rem Blink
+		(set fblink=%CSI%6m)				&rem Rapid Blink
+		(set negative=%CSI%7m)				&rem Negative				Swaps foreground and background colors
+		(set invisible=%CSI%8m)				&rem Invisible
+		(set strike=%CSI%9m)				&rem Strike Through
 
-		::# Attributes off
-		::(set 20m=%CSI%20m)				&:: 20
-		::(set 21m=%CSI%21m)				&:: 21
-		(set nodim=%CSI%22m)				&:: No Dim					Removes brightness/intensity flag from foreground color
-		(set nobright=%CSI%22m)				&:: No Bright				Removes brightness/intensity flag from foreground color
-		(set noitalic=%CSI%23m)				&:: No Italic
-		(set nounderline=%CSI%24m)			&:: No Underline
-		(set noblink=%CSI%25m)				&:: No Blink
-		::(set 26m=%CSI%26m)				&:: 26
-		(set nonegative=%CSI%27m)			&:: No Negative				Returns foreground/background to normal
-		(set visible=%CSI%28m)				&:: No Invisible
-		(set nostrike=%CSI%29m)				&:: No Strike Through
+		rem # Attributes off
+		rem (set 20m=%CSI%20m)				&rem 20
+		rem (set 21m=%CSI%21m)				&rem 21
+		(set nodim=%CSI%22m)				&rem No Dim					Removes brightness/intensity flag from foreground color
+		(set nobright=%CSI%22m)				&rem No Bright				Removes brightness/intensity flag from foreground color
+		(set noitalic=%CSI%23m)				&rem No Italic
+		(set nounderline=%CSI%24m)			&rem No Underline
+		(set noblink=%CSI%25m)				&rem No Blink
+		rem (set 26m=%CSI%26m)				&rem 26
+		(set nonegative=%CSI%27m)			&rem No Negative				Returns foreground/background to normal
+		(set visible=%CSI%28m)				&rem No Invisible
+		(set nostrike=%CSI%29m)				&rem No Strike Through
 
-		::# Foreground Colors
-		(set black=%CSI%30m)				&:: Foreground Black			Applies non-dim/bright black to foreground
-		(set red=%CSI%31m)					&:: Foreground Red				Applies non-dim/bright red to foreground
-		(set green=%CSI%32m)				&:: Foreground Green			Applies non-dim/bright green to foreground
-		(set yellow=%CSI%33m)				&:: Foreground Yellow			Applies non-dim/bright yellow to foreground
-		(set blue=%CSI%34m)					&:: Foreground Blue				Applies non-dim/bright blue to foreground
-		(set magenta=%CSI%35m)				&:: Foreground Magenta			Applies non-dim/bright magenta to foreground
-		(set cyan=%CSI%36m)					&:: Foreground Cyan				Applies non-dim/bright cyan to foreground
-		(set white=%CSI%37m)				&:: Foreground White			Applies non-dim/bright white to foreground
-		(set extended=%CSI%38m)				&:: Foreground Extended			Applies extended color value to the foreground
-		(set fg_clr=%CSI%39m)				&:: Foreground Default			Applies only the foreground portion of the defaults
+		rem # Foreground Colors
+		(set black=%CSI%30m)				&rem Foreground Black			Applies non-dim/bright black to foreground
+		(set red=%CSI%31m)					&rem Foreground Red				Applies non-dim/bright red to foreground
+		(set green=%CSI%32m)				&rem Foreground Green			Applies non-dim/bright green to foreground
+		(set yellow=%CSI%33m)				&rem Foreground Yellow			Applies non-dim/bright yellow to foreground
+		(set blue=%CSI%34m)					&rem Foreground Blue				Applies non-dim/bright blue to foreground
+		(set magenta=%CSI%35m)				&rem Foreground Magenta			Applies non-dim/bright magenta to foreground
+		(set cyan=%CSI%36m)					&rem Foreground Cyan				Applies non-dim/bright cyan to foreground
+		(set white=%CSI%37m)				&rem Foreground White			Applies non-dim/bright white to foreground
+		(set extended=%CSI%38m)				&rem Foreground Extended			Applies extended color value to the foreground
+		(set fg_clr=%CSI%39m)				&rem Foreground Default			Applies only the foreground portion of the defaults
 
-		::# Background Colors
-		(set bg_black=%CSI%40m)				&:: Background Black			Applies non-dim/bright black to background
-		(set bg_red=%CSI%41m)				&:: Background Red				Applies non-dim/bright red to background
-		(set bg_green=%CSI%42m)				&:: Background Green			Applies non-dim/bright green to background
-		(set bg_yellow=%CSI%43m)			&:: Background Yellow			Applies non-dim/bright yellow to background
-		(set bg_blue=%CSI%44m)				&:: Background Blue				Applies non-dim/bright blue to background
-		(set bg_magenta=%CSI%45m)			&:: Background Magenta			Applies non-dim/bright magenta to background
-		(set bg_cyan=%CSI%46m)				&:: Background Cyan				Applies non-dim/bright cyan to background
-		(set bg_white=%CSI%47m)				&:: Background White			Applies non-dim/bright white to background
-		(set bg_extended=%CSI%48m)			&:: Background Extended			Applies extended color value to the background
-		(set bg_clr=%CSI%49m)	 			&:: Background Default			Applies only the background portion of the defaults
+		rem # Background Colors
+		(set bg_black=%CSI%40m)				&rem Background Black			Applies non-dim/bright black to background
+		(set bg_red=%CSI%41m)				&rem Background Red				Applies non-dim/bright red to background
+		(set bg_green=%CSI%42m)				&rem Background Green			Applies non-dim/bright green to background
+		(set bg_yellow=%CSI%43m)			&rem Background Yellow			Applies non-dim/bright yellow to background
+		(set bg_blue=%CSI%44m)				&rem Background Blue				Applies non-dim/bright blue to background
+		(set bg_magenta=%CSI%45m)			&rem Background Magenta			Applies non-dim/bright magenta to background
+		(set bg_cyan=%CSI%46m)				&rem Background Cyan				Applies non-dim/bright cyan to background
+		(set bg_white=%CSI%47m)				&rem Background White			Applies non-dim/bright white to background
+		(set bg_extended=%CSI%48m)			&rem Background Extended			Applies extended color value to the background
+		(set bg_clr=%CSI%49m)	 			&rem Background Default			Applies only the background portion of the defaults
 
-		::# Foreground Colors (light)
-		(set lblack=%CSI%90m)				&:: Bright Foreground Black		Applies bright black to foreground
-		(set lred=%CSI%91m)					&:: Bright Foreground Red		Applies bright red to foreground
-		(set lgreen=%CSI%92m)				&:: Bright Foreground Green		Applies bright green to foreground
-		(set lyellow=%CSI%93m)				&:: Bright Foreground Yellow	Applies bright yellow to foreground
-		(set lblue=%CSI%94m)				&:: Bright Foreground Blue		Applies bright blue to foreground
-		(set lmagenta=%CSI%95m)				&:: Bright Foreground Magenta	Applies bright magenta to foreground
-		(set lcyan=%CSI%96m)				&:: Bright Foreground Cyan		Applies bright cyan to foreground
-		(set lwhite=%CSI%97m)				&:: Bright Foreground White		Applies bright white to foreground
+		rem # Foreground Colors (light)
+		(set lblack=%CSI%90m)				&rem Bright Foreground Black		Applies bright black to foreground
+		(set lred=%CSI%91m)					&rem Bright Foreground Red		Applies bright red to foreground
+		(set lgreen=%CSI%92m)				&rem Bright Foreground Green		Applies bright green to foreground
+		(set lyellow=%CSI%93m)				&rem Bright Foreground Yellow	Applies bright yellow to foreground
+		(set lblue=%CSI%94m)				&rem Bright Foreground Blue		Applies bright blue to foreground
+		(set lmagenta=%CSI%95m)				&rem Bright Foreground Magenta	Applies bright magenta to foreground
+		(set lcyan=%CSI%96m)				&rem Bright Foreground Cyan		Applies bright cyan to foreground
+		(set lwhite=%CSI%97m)				&rem Bright Foreground White		Applies bright white to foreground
 
-		::# Background Colors (light)
-		(set bg_lblack=%CSI%100m)			&:: Bright Background Black		Applies bright black to background
-		(set bg_lred=%CSI%101m)				&:: Bright Background Red		Applies bright red to background
-		(set bg_lgreen=%CSI%102m)			&:: Bright Background Green		Applies bright green to background
-		(set bg_lyellow=%CSI%103m)			&:: Bright Background Yellow	Applies bright yellow to background
-		(set bg_lblue=%CSI%104m)			&:: Bright Background Blue		Applies bright blue to background
-		(set bg_lmagenta=%CSI%105m)			&:: Bright Background Magenta	Applies bright magenta to background
-		(set bg_lcyan=%CSI%106m)			&:: Bright Background Cyan		Applies bright cyan to background
-		(set bg_lwhite=%CSI%107m)			&:: Bright Background White		Applies bright white to background
+		rem # Background Colors (light)
+		(set bg_lblack=%CSI%100m)			&rem Bright Background Black		Applies bright black to background
+		(set bg_lred=%CSI%101m)				&rem Bright Background Red		Applies bright red to background
+		(set bg_lgreen=%CSI%102m)			&rem Bright Background Green		Applies bright green to background
+		(set bg_lyellow=%CSI%103m)			&rem Bright Background Yellow	Applies bright yellow to background
+		(set bg_lblue=%CSI%104m)			&rem Bright Background Blue		Applies bright blue to background
+		(set bg_lmagenta=%CSI%105m)			&rem Bright Background Magenta	Applies bright magenta to background
+		(set bg_lcyan=%CSI%106m)			&rem Bright Background Cyan		Applies bright cyan to background
+		(set bg_lwhite=%CSI%107m)			&rem Bright Background White		Applies bright white to background
 
-		::# Foreground RGB Colors
-		(set RGB=%CSI%38;2;)				&:: %RGB%50;100;150m			%CSI%38;2;50;100;150m
+		rem # Foreground RGB Colors
+		(set RGB=%CSI%38;2;)				&rem %RGB%50;100;150m			%CSI%38;2;50;100;150m
 
-		::# Background RGB Colors
-		(set bg_RGB=%CSI%48;2;)				&:: %bg_RGB%150;100;50m			%CSI%38;2;150;100;50m
+		rem # Background RGB Colors
+		(set bg_RGB=%CSI%48;2;)				&rem %bg_RGB%150;100;50m			%CSI%38;2;150;100;50m
 
-		%dk_call% dk_echo "%blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%"
+		echo %blue%C%green%O%red%L%magenta%O%cyan%R %blue%O%green%N%clr%
 	goto USE_COLOR_endif	
-	:USE_COLOR_else
-		::%dk_call% dk_unset ESC
-		::%dk_call% dk_unset clr
+	:dk_color_DISABLE
+		rem %dk_call% dk_unset ESC
+		rem %dk_call% dk_unset clr
 
-		::# Attributes on
+		rem # Attributes on
 		%dk_call% dk_unset bright
 		%dk_call% dk_unset dim
 		%dk_call% dk_unset italic
@@ -252,7 +255,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset invisible
 		%dk_call% dk_unset strike
 
-		::# Attributes off
+		rem # Attributes off
 		%dk_call% dk_unset nobright
 		%dk_call% dk_unset noitalic
 		%dk_call% dk_unset nounderline
@@ -261,7 +264,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset visible
 		%dk_call% dk_unset nostrike
 
-		::# Foreground Colors
+		rem # Foreground Colors
 		%dk_call% dk_unset black
 		%dk_call% dk_unset red
 		%dk_call% dk_unset green
@@ -271,9 +274,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset cyan
 		%dk_call% dk_unset white
 		%dk_call% dk_unset extended
-		::%dk_call% dk_unset fg_clr
+		rem %dk_call% dk_unset fg_clr
 
-		::# Background Colors
+		rem # Background Colors
 		%dk_call% dk_unset bg_black
 		%dk_call% dk_unset bg_red
 		%dk_call% dk_unset bg_green
@@ -283,9 +286,9 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset bg_cyan
 		%dk_call% dk_unset bg_white
 		%dk_call% dk_unset bg_extended
-		::%dk_call% dk_unset bg_clr
+		rem %dk_call% dk_unset bg_clr
 
-		::# Foreground Colors (bright)
+		rem # Foreground Colors (bright)
 		%dk_call% dk_unset lblack
 		%dk_call% dk_unset lred
 		%dk_call% dk_unset lgreen
@@ -295,7 +298,7 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset lcyan
 		%dk_call% dk_unset lwhite
 
-		::# Background Colors (bright)
+		rem # Background Colors (bright)
 		%dk_call% dk_unset bg_lblack
 		%dk_call% dk_unset bg_lred
 		%dk_call% dk_unset bg_lgreen
@@ -308,19 +311,19 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_unset RGB
 		%dk_call% dk_unset bg_RGB
 
-		dk_echo "%clr% COLOR OFF"
+		echo %clr%COLOR OFF
 	:USE_COLOR_endif
+exit /b !errorlevel!
 %endfunction%
-%dk_call% dk_color 1
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	echo:
+	echo.
 	echo %black% %bg_lblack%                 CSI codes              %clr%
 	echo CSI0m       %CSI%0m    CSI0m    %clr%
 	echo CSI1m       %CSI%1m    CSI1m    %clr%
@@ -454,7 +457,7 @@ setlocal
 	echo CSI?12h     %CSI%?12h    CSI?12h
 	echo CSI?12l     %CSI%?12l    CSI?12l
 
-	echo:
+	echo.
 	echo %black% %bg_lblack%                  Styles                %clr%
 	echo   clr                %clr%  default  %clr%
 	echo   bright             %bright%  bright  %clr%
@@ -476,15 +479,15 @@ setlocal
 	echo   strike             %strike%  strike  %clr%
 	echo   nostrike           %nostrike%  nostrike  %clr%
 	echo %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%           Style Combinations           %clr%
 	echo   bright,italic      %bright%  %italic% bright,italic    %clr%
 	echo   bright,underline   %bright%  %underline% bright,underline    %clr%
 	echo   bright,negative    %bright%  %negative% bright,negative    %clr%
 	echo   bright,strike      %bright%  %strike% bright,strike    %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%           Color Combinations           %clr%
 	echo   dim black          %dim%%black% dim black %clr%
 	echo   black              %black% black %clr%
@@ -510,8 +513,8 @@ setlocal
 	echo   dim white          %dim%%white% dim white %clr%
 	echo   white              %white% white %clr%
 	echo   bright white       %bright%%white% bright white %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%            Foreground Colors           %clr%
 	echo   black              %black% black %fg_clr%
 	echo   red                %red% red %fg_clr%
@@ -521,8 +524,8 @@ setlocal
 	echo   magenta            %magenta% magenta %fg_clr%
 	echo   cyan               %cyan% cyan %fg_clr%
 	echo   white              %white% white %fg_clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%            Background Colors           %clr%
 	echo   bg_black    %bg_black% bg_black   %bg_clr%
 	echo   bg_red      %bg_red% bg_red   %bg_clr%
@@ -532,8 +535,8 @@ setlocal
 	echo   bg_magenta  %bg_magenta% bg_magenta   %bg_clr%
 	echo   bg_cyan     %bg_cyan% bg_cyan   %bg_clr%
 	echo   bg_white    %bg_white% bg_white   %bg_clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%       Foreground Colors    bright      %clr%
 	echo   lblack      %lblack% lblack %clr%
 	echo   lred        %lred% lred %clr%
@@ -543,8 +546,8 @@ setlocal
 	echo   lmagenta    %lmagenta% lmagenta %clr%
 	echo   lcyan       %lcyan% lcyan %clr%
 	echo   lwhite      %lwhite% lwhite %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%       Background Colors - bright       %clr%
 	echo   bg_lblack      %bg_lblack%%black%   bg_lblack    %clr%
 	echo   bg_lred        %bg_lred%%black%     bg_lred    %clr%
@@ -554,8 +557,8 @@ setlocal
 	echo   bg_lmagenta    %bg_lmagenta%%black% bg_lmagenta    %clr%
 	echo   bg_lcyan       %bg_lcyan%%black%    bg_lcyan    %clr%
 	echo   bg_lwhite      %bg_lwhite%%black%   bg_lwhite    %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%         RGB Foreground Colors          %clr%
 	echo   %RGB%255;10;10m      RGB255;0;10m     %clr%
 	echo   %RGB%10;255;10m      RGB 0;255;10    %clr%
@@ -611,8 +614,8 @@ setlocal
 	echo   %RGB%0;0;10m      RGB 0;0;10     %clr%
 	echo   %RGB%0;0;5m      RGB 0;0;5      %clr%
 	echo   %RGB%0;0;0m      RGB 0;0;0      %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%          RGB Background Colors         %clr%
 	echo   %bg_RGB%255;10;10m      bg_RGB 255;0;10    %clr%
 	echo   %bg_RGB%10;255;10m      bg_RGB 0;255;10    %clr%
@@ -668,20 +671,20 @@ setlocal
 	echo   %bg_RGB%0;0;10m      bg_RGB 0;0;10      %clr%
 	echo   %bg_RGB%0;0;5m      bg_RGB 0;0;5       %clr%
 	echo   %bg_RGB%0;0;0m      bg_RGB 0;0;0       %clr%
-	echo: 
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%              Combinations              %clr%
 	echo  negative                  %negative%       inverse foreground / background        %clr%
 	echo  bg_yellow,red             %bg_yellow%%red%      yellow backgroud / red foreground       %clr%
 	echo  bg_yellow,red,negative    %bg_yellow%%red%%negative%             yellow / red inversed            %clr%
 	echo  bg_red,bg_green,bg_blue   %bg_red%     nested     %bg_green%     colors     %bg_blue%     text     %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%             ASCII Color Art            %clr%
-	echo:
+	echo.
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
-	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr% 
+	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
 	echo   %bg_blue% * * * * * * * * * %bg_red%                                %clr%
 	echo   %bg_blue%  * * * * * * * *  %bg_white%                                %clr%
@@ -692,17 +695,17 @@ setlocal
 	echo   %bg_red%                                                   %clr%
 	echo   %bg_white%                                                   %clr%
 	echo   %bg_red%                                                   %clr%
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%               ASCII Mode               %clr%
 	echo %ASCII% a b c d e f g h i j k l m n o p q r s t u v w x y z
-	echo:
-	echo:
+	echo.
+	echo.
 	echo %black% %bg_lblack%                DEC Mode                %clr%
 	echo %DEC% a b c d e f g h i j k l m n o p q r s t u v w x y z
 	echo %ASCII%
-	echo:
-	echo:
+	echo.
+	echo.
 %endfunction%
 
 

@@ -1,17 +1,24 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_replaceAll){ $dk_replaceAll = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_replaceAll_ps1){ $dk_replaceAll_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_replaceAll(input, searchValue, newValue) -> rtn_var
 #
 #
-function Global:dk_replaceAll($str, $searchValue, $newValue) {
-	dk_debugFunc 3
+function Global:dk_replaceAll() {
+	dk_debugFunc 3 4;
 
-	$replaceAll = $str -replace $searchValue, $newValue
+	# str 			= $args[0];
+	# searchValue 	= $args[1];
+	# newValue 		= $args[2];
 	
-	dk_call dk_printVar replaceAll
-	return $replaceAll
+	${global:dk_replaceAll} = $args[0] -replace $args[1], $args[2];
+	
+	if($args[3] -AND ${dk_replaceAll}) {
+		dk_call dk_set $args[3] ${dk_replaceAll};
+	} else {
+		return ${dk_replaceAll};
+	}
 }
 
 
@@ -31,11 +38,22 @@ function Global:dk_replaceAll($str, $searchValue, $newValue) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$string_var="AZC AZC Zannana Zread"
-	dk_call dk_info "string before:  ${string_var}"
+	### Result as global variable
+	dk_call dk_echo
+	dk_call dk_replaceAll ":ogs :on't :ance" ":" "D";
+	dk_call dk_echo "dk_replaceAll = ${dk_replaceAll}";
 	
-	$string_var = dk_call dk_replaceAll $string_var "Z" "B"
-	dk_call dk_info "string after:  ${string_var}"
+	### Result as return value
+	dk_call dk_echo
+	$resultA = dk_call dk_replaceAll "AZC AZC Zannana Zread" "Z" "B";
+	dk_call dk_echo "resultA = ${resultA}";
+	dk_call dk_echo "dk_replaceAll = ${dk_replaceAll}";
+	
+	### Result as parameter
+	dk_call dk_echo
+	dk_call dk_replaceAll "0pples 0re 0mazing" "0" "A" resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_replaceAll = ${dk_replaceAll}";
 }

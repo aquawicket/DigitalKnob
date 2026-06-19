@@ -1,0 +1,5 @@
+############ gstreamer ############
+# https://gitlab.freedesktop.org/gstreamer/gstreamer.git
+# https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/e57b6be649de12d08d1412a830389626a44087cf/gstreamer-e57b6be649de12d08d1412a830389626a44087cf.zip
+
+gstreamer_Import=https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/e57b6be649de12d08d1412a830389626a44087cf/gstreamer-e57b6be649de12d08d1412a830389626a44087cf.zip

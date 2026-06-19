@@ -1,21 +1,30 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ webref ############
 # https://github.com/w3c/webref.git
-dk_load(dk_builder)
+# https://github.com/w3c/webref/archive/48fcf557.zip
 
 dk_depend(nodejs)
 
-dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
+#dk_import(https://github.com/w3c/webref/archive/48fcf557.zip PATCH)
+dk_import()
 
 ### Build Interface Tree ###
-if(WIN)
-	dk_command(${NODE_EXE} ${WEBREF}/DKBuildInterfaces.js)
+if(Windows)
+	dk_exec(${node_exe} ${WEBREF}/DKBuildInterfaces.js)
 endif()
 
 #dk_mkdir(${WEBREF}/DKWebAPIs)

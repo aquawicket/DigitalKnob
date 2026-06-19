@@ -1,65 +1,72 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################## dk_printVar SETTINGS ####################
-if not defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
-if "%dk_printVar_ENABLE%" neq "1" (%return%)
-::################################################################################
-::# dk_printVar(variable)
-::#
-::#
+rem ################## dk_printVar SETTINGS ####################
+rem if NOT defined dk_printVar_ENABLE (set "dk_printVar_ENABLE=1")
+rem if "%dk_printVar_ENABLE%" neq "1" (%return%)
+rem ################################################################################
+rem # dk_printVar(variable)
+rem #
+rem #
 :dk_printVar
-setlocal
-    ::%dk_call% dk_debugFunc 1
-    
-    %dk_call% dk_isVariableName "%~1" || dk_return
-    
+%setlocal%
+   
+    rem %dk_call% dk_isVariableName "%~1" || %return%
+   
     :array
-		if not defined %~1[0] goto pointer
+		if NOT defined %~1[0] goto pointer
         set /a "n=0"
         :loop1
-            if not defined %~1[%n%] dk_return
+            if NOT defined %~1[%n%] %return%
 			
-			:: delayed expansion OFF
-            if "!DE!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% %%%~1[%n%]%% %clr%"
+			rem delayed expansion OFF
+            if "!!" neq "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% %%%~1[%n%]%% %clr%"
 			
-			:: delayed expansion ON
-			if "!DE!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% !%~1[%n%]! %clr%"
+			rem delayed expansion ON
+			if "!!" equ "" %dk_call% dk_echo "%cyan% ARRAY:%~1[%n%] =%blue% !%~1[%n%]! %clr%"
 
             set /a n+=1
-        goto :loop1 
-	dk_return
+        goto :loop1
+	%return%
 
     :pointer
-        if not defined %~1 goto undefined
+        if NOT defined %~1 goto undefined
 
-        :: delayed expansion OFF
-        if "!DE!" neq "" %dk_call% dk_isVariableName "%%%~1%%" || goto variable
-        if "!DE!" neq "" call set "_ptrB_=%%%~1%%"
-		if "!DE!" neq "" %dk_call% dk_defined "%%%~1%%" || goto variable
-		if "!DE!" neq "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %_ptrB_% =%blue% %%%_ptrB_%%% %clr%"
+        rem delayed expansion OFF
+        if "!!" neq "" %dk_call% dk_isVariableName "%%%~1%%" || goto variable
+        if "!!" neq "" call set "_ptrB_=%%%~1%%"
+		if "!!" neq "" %dk_call% dk_defined "%%%~1%%" || goto variable
+		if "!!" neq "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %blue%%_ptrB_% = %%%_ptrB_%%% %clr%"
 
-		:: delayed expansion ON
-        if "!DE!" equ "" %dk_call% dk_isVariableName "!%~1!" || goto variable
-        if "!DE!" equ "" set "_ptrB_=!%~1!"
-		if "!DE!" equ "" if not defined !%~1! goto variable
-		if "!DE!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %_ptrB_% =%blue% !%_ptrB_%! %clr%"
-    dk_return
+		rem delayed expansion ON
+        if "!!" equ "" %dk_call% dk_isVariableName "!%~1!" || goto variable
+        if "!!" equ "" set "_ptrB_=!%~1!"
+		if "!!" equ "" if NOT defined !%~1! goto variable
+		if "!!" equ "" %dk_call% dk_echo "%cyan% POINTER:%~1 = %blue%%_ptrB_% = !%_ptrB_%! %clr%"
+    %return%
 
     :variable	
-		:: delayed expansion OFF
-		if "!DE!" neq "" %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% %%%~1%% %clr%"
+		rem delayed expansion OFF
+		if "!!" neq "" %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% %%%~1%% %clr%"
 		
-		:: delayed expansion ON
-		if "!DE!" equ "" %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% !%~1! %clr%"
-    dk_return
+		rem delayed expansion ON
+		if "!!" equ "" %dk_call% dk_echo "%cyan% VARIABLE:%~1 =%blue% !%~1! %clr%"
+    %return%
 
     :undefined
         %dk_call% dk_echo "%cyan% %~1 =%red% UNDEFINED %clr%"
-	dk_return
+	%return%
 %endfunction%
 
 
@@ -67,10 +74,9 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 
     set "myVarA=This is a variable"
@@ -88,6 +94,6 @@ setlocal
     %dk_call% dk_printVar myVarD
     %dk_call% dk_printVar myVarD[1]
 
-    ::set "myVarE"
+    rem set "myVarE"
     %dk_call% dk_printVar myVarE
 %endfunction%

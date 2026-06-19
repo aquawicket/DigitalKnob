@@ -41,7 +41,7 @@ if ERRORLEVEL -3 (echo ERRORLEVEL ^<= -3     'ERRORLEVEL is less than or equal t
 if ERRORLEVEL -2 (echo ERRORLEVEL ^<= -2     'ERRORLEVEL is less than or equal to 2')
 if ERRORLEVEL -1 (echo ERRORLEVEL ^<= -1     'ERRORLEVEL is less than or equal to 1')
 if ERRORLEVEL  0 (echo ERRORLEVEL  =  0)
-if ERRORLEVEL  1 (echo ERRORLEVEL ^>=  1		'ERRORLEVEL is greater than or equal to 1')
+if ERRORLEVEL  1 (echo ERRORLEVEL ^>=  1	'ERRORLEVEL is greater than or equal to 1')
 if ERRORLEVEL  2 (echo ERRORLEVEL ^>=  2     'ERRORLEVEL is greater than or equal to 2')
 if ERRORLEVEL  3 (echo ERRORLEVEL ^>=  3     'ERRORLEVEL is greater than or equal to 2')
 

@@ -1,17 +1,17 @@
-message("############################################################################")
-message("################## cross_x86_64_cosmo_toolchain.cmake ######################")
-message("############################################################################")
+dk_echo("#########################################################################")
+dk_echo("################## Cross_X86_64_Cosmo_toolchain.cmake ######################")
+dk_echo("#########################################################################")
 
 dk_depend(cosmopolitan)
 #dk_depend(make)
 
 #dk_set(CMAKE_SYSTEM_NAME 					Generic)
-dk_set(COSMOPOLITAN 						1)
+dk_set(Cosmopolitan 						1)
 set(CMAKE_SKIP_RPATH 						ON)
 set(CMAKE_CROSSCOMPILING 					OFF)
 
-dk_validate(host_triple "dk_host_triple()")
-if(WIN_HOST)
+dk_validate(Host_Tuple "dk_Host_Tuple()")
+if(Windows_Host)
 	set(CMAKE_GENERATOR						"MSYS Makefiles")
 else()
 	set(CMAKE_GENERATOR						"Unix Makefiles")
@@ -27,15 +27,15 @@ dk_append(CMAKE_EXE_LINKER_FLAGS			-static) # -s)
 #dk_append(DKCONFIGURE_CFLAGS				${CMAKE_C_FLAGS})
 #dk_append(DKCONFIGURE_CXXFLAGS				${CMAKE_CXX_FLAGS})
 
-dk_validate(ENV{DKIMPORTS_DIR}					"dk_DKIMPORTS_DIR()")
+dk_validate(DKIMPORTS_DIR					"dk_DKIMPORTS_DIR()")
 dk_append(DKCMAKE_FLAGS
-	-DCMAKE_USER_MAKE_RULES_OVERRIDE=$ENV{DKIMPORTS_DIR}/COSMOPOLITAN/cosmo_user_make_rules_override.cmake
+	-DCMAKE_USER_MAKE_RULES_OVERRIDE=${DKIMPORTS_DIR}/Cosmopolitan/cosmo_user_make_rules_override.cmake
 	-DCMAKE_C_COMPILER_WORKS=1
 	-DCMAKE_CXX_COMPILER_WORKS=1)
 set(CMAKE_C_COMPILER_WORKS					1)
 set(CMAKE_CXX_COMPILER_WORKS        		1)
 set(CMAKE_CXX_FLAGS_INIT 					-fexceptions -frtti)
-set(CMAKE_USER_MAKE_RULES_OVERRIDE 			$ENV{DKIMPORTS_DIR}/COSMOPOLITAN/cosmo_user_make_rules_override.cmake)
+set(CMAKE_USER_MAKE_RULES_OVERRIDE 			${DKIMPORTS_DIR}/Cosmopolitan/cosmo_user_make_rules_override.cmake)
 set(CMAKE_ASM_OUTPUT_EXTENSION 				.o)
 set(CMAKE_C_OUTPUT_EXTENSION   				.o)
 set(CMAKE_CXX_OUTPUT_EXTENSION 				.o)
@@ -66,5 +66,5 @@ foreach(lang ASM C CXX)
 endforeach()
 
 
-############ COSMOPOLITAN BASH EXPORTS ############
-dk_set(COSMOPOLITAN_BIN						"export PATH=${COSMOPOLITAN}/tool/cosmocc/bin:$PATH")
+############ Cosmopolitan BASH EXPORTS ############
+dk_set(COSMOPOLITAN_BIN						"export PATH=${Cosmopolitan}/tool/cosmocc/bin:$PATH")

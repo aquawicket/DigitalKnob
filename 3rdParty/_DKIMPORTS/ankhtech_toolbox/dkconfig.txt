@@ -1,0 +1,8 @@
+###### ankhtech_toolbox ######
+# https://d9750.download-send.com/d/nryyw7au6cosj4l4onsfta7kzj7jhkkax5a2bclu466wflbbl4u3ovogbyivfspn3iwoq6gn/AT.Toolbox.zip
+
+ankhtech_toolbox_Type=Tool
+ankhtech_toolbox_Import=https://www.morkoskhalaf.com/ankhtech/Toolbox/AT.Toolbox.txt
+ankhtech_toolbox_Wget_exe=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/wget.exe
+ankhtech_toolbox_7z_exe=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.exe
+ankhtech_toolbox_7z_dll=https://www.morkoskhalaf.com/ankhtech/Toolbox/ATToolbox/Files/7z.dll

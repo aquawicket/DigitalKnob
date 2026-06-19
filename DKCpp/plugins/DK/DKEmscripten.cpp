@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -30,11 +30,11 @@
 
 
 bool DKEmscripten::GetScreenHeight(int& h){
-	return DKERROR("not impemented on emscripten")
+	return DKERROR("not impemented on Emscripten")
 }
 
 bool DKEmscripten::GetScreenWidth(int& w){
-	return DKERROR("not impemented on emscripten")
+	return DKERROR("not impemented on Emscripten")
 }
 
 #endif //EMSCRIPTEN

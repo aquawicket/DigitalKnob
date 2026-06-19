@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_isChildPathOf){ $dk_isChildPathOf = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_isChildPathOf_ps1){ $dk_isChildPathOf_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_isChildPathOf(haystack, needle, rtn_var)
@@ -39,9 +39,9 @@ function Global:dk_isChildPathOf() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-    dk_call dk_echo
+    dk_call dk_echo "\n";
     $childPath = "C:/Program Files/Internet Explorer/en-US"
     $parentPath = "C:/Program Files"
     if(dk_call dk_isChildPathOf $childPath $parentPath){
@@ -52,7 +52,7 @@ function Global:DKTEST() {
 	
 	
 	
-	 dk_call dk_echo
+	dk_call dk_echo "\n";
     $childPath = "C:/Program Files/Internet Explorer/en-US"
     $parentPath = "C:/NonExistent"
     if(dk_call dk_isChildPathOf $childPath $parentPath){

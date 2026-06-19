@@ -1,4 +1,5 @@
 // https://stackoverflow.com/a/17224012/688352
+if(!dk_valid("FileSystem"))	{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/FileSystem.js"); }
 
 //##################################################################################
 //# dk_download(url, destination)
@@ -57,8 +58,8 @@ if (fso.FileExists(filepath) == false){
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.js")
-	dk_download("https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.js", "DKBuilder.js")
+	dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKJavascript/apps/DKBuilder.js")
+	dk_download("https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKJavascript/apps/DKBuilder.js", "DKBuilderB.js")
 	//dk_download("https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.js", DKDOWNLOAD_DIR"+dk_download_batch_test/DKBuilder.sh")
 }
 

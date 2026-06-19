@@ -1,2 +1,12 @@
-CURL_WIN_DL=https://github.com/curl/curl/archive/f6cb707b.zip
-CURL_UNIX_DL=https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip
+############ curl ############
+# https://github.com/curl/curl
+# https://curl.se/
+# https://robertying.io/posts/compile-openssl-and-curl-for-android
+# https://curl.se/docs/install.html
+# https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip
+# https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip
+# https://github.com/curl/curl/archive/4841e4290dfca768328401522f319225e819824c.zip
+
+curl_Unix_Import=https://github.com/curl/curl/releases/download/curl-8_6_0/curl-8.6.0.zip
+#curl_Import=https://github.com/curl/curl/archive/f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip
+curl_Import=https://github.com/curl/curl/archive/curl-f6cb707b6a578bbf6be236f9df2dc471b2b0d68c.zip

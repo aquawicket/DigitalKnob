@@ -1,37 +1,78 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::###############################################################################
-::# dk_fileReplace(filePath, find, replace)
-::#
-::#
-::#	@filePath	- Path to the file to be altered.
-::#	@find		- The string to search for in the file.
-::#	@replace	- The string to replace the found string with
-::#
+rem ###############################################################################
+rem # dk_fileReplace(file, find, replace)
+rem #
+rem #		parses a File line by line and replaces a substring
+rem #
+rem #	@file	- Path to the file to be altered.
+rem #	@find		- The string to search for in the file.
+rem #	@replace	- The string to replace the found string with
+rem #
 :dk_fileReplace
-setlocal
-	%dk_call% dk_debugFunc 3 4
-	
-	set "filePath=%~1"
+%setlocal%
+	set "file=%~1"
 	set "find=%~2"
 	set "replace=%~3"
+
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
 	
-	%dk_call% dk_callDKCMake dk_fileReplace %filePath% %find% %replace%
+	setlocal disableDelayedExpansion enableExtensions 
+	>"%file:/=\%.new" (
+	  for /f "delims=" %%i in ('%findstr.exe:/=\% /n "^" "%file:/=\%"') do (
+		  set "line=%%i"
+		  setlocal enabledelayedexpansion
+		  set "line=!line:*:=!"
+		  if defined line set "line=!line:%~2=%~3!"
+		  echo.!line!
+		  endlocal
+	  )
+	)
+	endlocal
+	
+	move /y "%file:/=\%.new" "%file:/=\%" >nul
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_fileReplace C:/Users/Administrator/digitalknob/Development/README.md Digitalknob replaced
+	mkdir "%SystemDrive%\DK Test" 1>nul 2>nul
+	set "_file_=%SystemDrive%\DK Test\dk_fileReplace_TEST.txt"
+
+	> "%_file_%" (
+		echo one
+		echo two
+		echo three
+		echo four
+		echo five
+	) 
 	
+	echo.
+	echo ### Before ###
+	type "%_file_%"
+	
+	%dk_call% dk_fileReplace  "%_file_%"  "hre"  "##this string was replaced##"
+	
+	echo.
+	echo ### After ###
+	type "%_file_%"
 %endfunction%

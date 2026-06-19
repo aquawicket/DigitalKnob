@@ -1,5 +1,36 @@
-[APP_NAME]_VERSION 1.0
-[APP_NAME]_NAME=[APP_NAME].exe
-[APP_NAME]_DL=https://[APP_NAME].com
-[APP_NAME]=${ProgramFiles_x86}/[APP_NAME]
-[APP_NAME]_EXE=[APP_NAME].exe
+############ _TEMPLATE-APP_ ############
+# http://www._TEMPLATE-APP_.com
+
+_TEMPLATE-APP__Import=http://package_import.zip
+_TEMPLATE-APP__Android_Arm32_Import=http://package_android_arm32.zip
+_TEMPLATE-APP__Android_Arm64_Import=http://package_android_arm64.zip
+_TEMPLATE-APP__Android_X86_Import=http://package_android_x86.zip
+_TEMPLATE-APP__Android_X86_64_Import=http://package_android_x86_64.zip
+_TEMPLATE-APP__Emscripten_Arm32_Import=http://package_emscripten_arm32.zip
+_TEMPLATE-APP__Emscripten_Arm64_Import=http://package_emscripten_arm64.zip
+_TEMPLATE-APP__Emscripten_X86_Import=http://package_emscripten_x86.zip
+_TEMPLATE-APP__Emscripten_X86_64_Import=http://package_emscripten_x86_64.zip
+_TEMPLATE-APP__Ios_Arm32_Import=http://package_ios_arm32.zip
+_TEMPLATE-APP__Ios_Arm64_Import=http://package_ios_arm64.zip
+_TEMPLATE-APP__Ios_X86_Import=http://package_ios_x86.zip
+_TEMPLATE-APP__Ios_X86_64_Import=http://package_ios_x86_64.zip
+_TEMPLATE-APP__Iossim_Arm32_Import=http://package_iossim_arm32.zip
+_TEMPLATE-APP__Iossim_Arm64_Import=http://package_iossim_arm64.zip
+_TEMPLATE-APP__Iossim_X86_Import=http://package_iossim_x86.zip
+_TEMPLATE-APP__Iossim_X86_64_Import=http://package_iossim_x86_64.zip
+_TEMPLATE-APP__Linux_Arm32_Import=http://package_linux_arm32.zip
+_TEMPLATE-APP__Linux_Arm64_Import=http://package_linux_arm64.zip
+_TEMPLATE-APP__Linux_X86_Import=http://package_linux_x86.zip
+_TEMPLATE-APP__Linux_X86_64_Import=http://package_linux_x86_64.zip
+_TEMPLATE-APP__Mac_Arm32_Import=http://package_mac_arm32.zip
+_TEMPLATE-APP__Mac_Arm64_Import=http://package_mac_arm64.zip
+_TEMPLATE-APP__Mac_X86_Import=http://package_mac_x86.zip
+_TEMPLATE-APP__Mac_X86_64_Import=http://package_mac_x86_64.zip
+_TEMPLATE-APP__Raspberry_Arm32_Import=http://package_raspberry_arm32.zip
+_TEMPLATE-APP__Raspberry_Arm64_Import=http://package_raspberry_arm64.zip
+_TEMPLATE-APP__Raspberry_X86_Import=http://package_raspberry_x86.zip
+_TEMPLATE-APP__Raspberry_X86_64_Import=http://package_raspberry_x86_64.zip
+_TEMPLATE-APP__Windows_Arm32_Import=http://package_windows_arm32.zip
+_TEMPLATE-APP__Windows_Arm64_Import=http://package_windows_arm64.zip
+_TEMPLATE-APP__Windows_X86_Import=http://package_windows_x86.zip
+_TEMPLATE-APP__Windows_X86_64_Import=http://package_windows_x86_64.zip

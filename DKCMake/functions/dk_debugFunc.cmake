@@ -1,9 +1,21 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-#set(ENABLE_dk_debugFunc 1 CACHE INTERNAL "")
-##################################################################################
+
+#########################################################################
+# set(ENABLE_dk_debugFunc 1)
+#########################################################################
 # dk_debugFunc()
 #
 #	Prints the current file name, line number, function or macro name, and argument names with values
@@ -20,7 +32,7 @@ macro(dk_debugFunc)
 
 	###### argv/argc/argv<n> - this macro's arguments / argument count / each argument ######
 	set(argc 0)
-	set(argv "${ARGV}")
+	
 	foreach(arg IN LISTS argv)
 		set(argv${argc} ${arg})
 		math(EXPR argc "${argc}+1")
@@ -38,8 +50,8 @@ macro(dk_debugFunc)
 	unset(PARGV)
 	set(PARGC 0)
 	foreach(arg IN LISTS ARGV)
-		set(PARGV${PARGC} ${arg})
-		list(APPEND PARGV ${arg})
+		set(PARGV${PARGC} "${arg}")
+		list(APPEND PARGV "${arg}")
 		math(EXPR PARGC "${PARGC}+1")
 	endforeach()
 	set(__ARGV__ "${PARGV}"                           CACHE INTERNAL "")
@@ -65,17 +77,17 @@ macro(dk_debugFunc)
 	#variable_watch(__WATCH_FUNCTION__  dk_onCallstack)
     
 	### Check Argument Count ###
-	if("${argc}" STREQUAL "1")
-		if(${PARGC} LESS ${argv0})
-			dk_fatal("${__FUNCTION__}(${PARGV}) requires at least ${argv0} argments: got ${PARGC}")
-		elseif(${PARGC} GREATER ${argv0})
-			dk_fatal("${__FUNCTION__}(${PARGV}) takes ${argv0} argments max: got ${PARGC}")
+	if(argc EQUAL 1)
+		if(PARGC LESS argv0)
+			message("${red}${__FUNCTION__}(${PARGV}) requires at least '${argv0}' argments: got '${PARGC}'${clr}")
+		elseif(PARGC GREATER argv0)
+			message("${red}${__FUNCTION__}(${PARGV}) takes '${argv0}' argments max: got '${PARGC}'${clr}")
 		endif()
-	elseif("${argc}" STREQUAL "2")
-		if(${PARGC} LESS ${argv0})
-			dk_fatal("${__FUNCTION__}(${PARGV}) requires at least ${argv0} argments: got ${PARGC}")
-		elseif(${PARGC} GREATER ${argv1})
-			dk_fatal("${__FUNCTION__}(${PARGV}) takes ${argv1} argments max: got ${PARGC}")
+	elseif(argc EQUAL 2)
+		if(PARGC LESS argv0)
+			message("${red}${__FUNCTION__}(${PARGV}) requires at least '${argv0}' argments: got '${PARGC}'${clr}")
+		elseif(PARGC GREATER argv1)
+			message("${red}${__FUNCTION__}(${PARGV}) takes '${argv1}' argments max: got '${PARGC}'${clr}")
 		endif()
 	endif()
     

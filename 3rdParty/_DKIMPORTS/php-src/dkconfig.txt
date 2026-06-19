@@ -1,0 +1,11 @@
+############ php-src ############
+# https://github.com/php/php-src.git
+# https://www.php.net
+# https://windows.php.net/downloads/releases
+# https://www.php.net/downloads.php
+# https://windows.php.net/downloads/releases/php-8.5.1-Win32-vs17-x86.zip
+# https://windows.php.net/downloads/releases/php-8.5.1-Win32-vs17-x64.zip
+
+php-src_Type=Tool
+php-src_Windows_X86_Import=https://windows.php.net/downloads/releases/php-8.5.1-Win32-vs17-x86.zip
+php-src_Windows_X86_64_Import=https://windows.php.net/downloads/releases/php-8.5.1-Win32-vs17-x64.zip

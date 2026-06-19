@@ -1,1 +1,5 @@
-FILEZILLA_IMPORT=https://filezilla-project.org/nightlies/2025-04-17/win64/FileZilla.zip
+############ fileZilla ############
+# https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip
+ 
+fileZilla_Type=Tool
+fileZilla_Import=https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip

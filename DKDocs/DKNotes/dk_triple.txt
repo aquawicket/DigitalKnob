@@ -1,55 +1,55 @@
-# dk_triple
+# dk_tuple
 
 
 ########################################
 #
 #
-function dk_tripleAppend(<triple> <id> value)
+function dk_tupleAppend(<tuple> <id> value)
 	
 
 endfunction()
 
 
-dk_tripleAppend(HOST OS "WIN")
-	HOST_OS = WIN
-	WIN_HOST = 1
+dk_tupleAppend(Host Os "Windows")
+	Host_Os = Windows
+	Windows_Host = 1
 	
-dk_tripleAppend(HOST ARCH "ARM64")
-	HOST_OS = WIN
-	WIN_HOST = 1
-	HOST_ARCH = ARM64
-	ARM64_HOST = 1
-	HOST_OS_ARCH = WIN_ARM64
-	WIN_ARM64_HOST = 1
+dk_tupleAppend(Host Arch "Arm64")
+	Host_Os = Windows
+	Windows_Host = 1
+	Host_Arch = Arm64
+	Arm64_Host = 1
+	Host_Os_Arch = Windows_Arm64
+	Windows_Arm64_Host = 1
 	
-dk_tripleAppend(HOST ENV "MSVC")
-	HOST_OS = WIN
-	WIN_HOST = 1
-	HOST_ARCH = ARM64
-	ARM64_HOST = 1
-	HOST_ENV = MSVC
-	MSVC_HOST = 1
-	HOST_OS_ARCH = WIN_ARM64
-	WIN_ARM64_HOST = 1
-	HOST_OS_ENV = WIN_MSVC
-	WIN_MSVC_HOST = 1
-	HOST_ARCH_ENV = ARM64_MSVC
-	ARM64_MSVC_HOST = 1
+dk_tupleAppend(Host Env "Msvc")
+	Host_Os = Windows
+	Windows_Host = 1
+	Host_Arch = Arm64
+	Arm64_Host = 1
+	Host_Env = Msvc
+	Msvc_Host = 1
+	Host_Os_Arch = Windows_Arm64
+	Windows_Arm64_Host = 1
+	Host_Os_Env = Windows_Msvc
+	Windows_Msvc_Host = 1
+	Host_Arch_Env = Arm64_Msvc
+	Arm64_Msvc_Host = 1
 	
-dk_tripleAppend(HOST YEAR "2024")
-	HOST_OS = WIN						WIN_HOST                = 1
-	HOST_OS_ARCH = WIN_ARM64			WIN_ARM64_HOST          = 1
-	HOST_OS_ENV = WIN_MSVC				WIN_MSVC_HOST           = 1
-	HOST_OS_YEAR = WIN_2024				WIN_2024_HOST           = 1
-		HOST_ARCH = ARM64					ARM64_HOST          = 1	 
-		HOST_ARCH_ENV = ARM64_MSVC			ARM64_MSVC_HOST     = 1
-		HOST_ARCH_YEAR = ARM64_2024			ARM64_2024_HOST     = 1		
-			HOST_ENV = MSVC						MSVC_HOST       = 1
-			HOST_ENV_YEAR = MSVC_2024   		MSVC_2024_HOST  = 1
-				HOST_YEAR = 2024					2024_HOST   = 1  
+dk_tupleAppend(Host YEAR "2024")
+	Host_Os = Windows						Windows_Host		= 1
+	Host_Os_Arch = Windows_Arm64			Windows_Arm64_Host	= 1
+	Host_Os_Env = Windows_Msvc				Windows_Msvc_Host	= 1
+	Host_Os_YEAR = Windows_2024				Windows_2024_Host	= 1
+		Host_Arch = Arm64					Arm64_Host			= 1	 
+		Host_Arch_Env = Arm64_Msvc			Arm64_Msvc_Host		= 1
+		Host_Arch_YEAR = Arm64_2024			Arm64_2024_Host		= 1		
+			Host_Env = Msvc					Msvc_Host			= 1
+			Host_Env_YEAR = Msvc_2024   	Msvc_2024_Host		= 1
+				Host_YEAR = 2024			2024_Host			= 1  
 				
 				
-dk_tripleAppend(NAME ABCDE "12345")
+dk_tupleAppend(NAME ABCDE "12345")
 	NAME_A     			= 1				              			
 	NAME_A_B			= 1_2	
 	NAME_A_C			= 1_3
@@ -83,11 +83,11 @@ dk_tripleAppend(NAME ABCDE "12345")
 	NAME_E				= 5	
 				
 	
-dk_tripleAppend(DATE YEAR   "2024")
-dk_tripleAppend(DATE MONTH  "FEB")
-dk_tripleAppend(DATE DAY    "WED")
-dk_tripleAppend(DATE TIME   "12:32")
-dk_tripleAppend(DATE MIDDAY "AM")
+dk_tupleAppend(DATE YEAR   "2024")
+dk_tupleAppend(DATE MONTH  "FEB")
+dk_tupleAppend(DATE DAY    "WED")
+dk_tupleAppend(DATE TIME   "12:32")
+dk_tupleAppend(DATE MIDDAY "AM")
 	DATE_YEAR     					= 2024				              			
 	DATE_YEAR_MONTH					= 2024_FEB	
 	DATE_YEAR_DAY					= 2024_WED

@@ -1,30 +1,45 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_buildLog(entry) PATH
 #
 #	Log an entry to a DKBUILD.log file in the projects ouput directory.
 #   (will also be printed on screen)
 #
 #
-function(dk_buildLog entry)
-	dk_debugFunc()
+function(dk_buildLog)
+	dk_debugFunc(1 2)
 	
-	dk_getOptionValue(PATH)
+	dk_getParameterValue(PATH)
 	
-	if(DEFINED "${entry}")
-		set(msg "${entry} = ${${entry}}")
-	else()
-		set(msg "${entry}")
+	set(msg "${ARGV0}")
+	dk_echo("${msg}")
+		
+	if(NOT PATH)
+		dk_validate(Target_App_Dir "dk_Target_Tuple()")
+		dk_validate(Target_Config "dk_Target_Config()")
+		set(PATH "${Target_App_Dir}/${Target_Config}")
 	endif()
-	dk_info("${msg}")
+		
 	
-	dk_validate(DK_Project_Dir "dk_target_triple()")  #TODO - move to 'dk_DK_Project_Dir.cmake'
-	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	dk_assertPath("${DK_Project_Dir}/${CONFIG_PATH}")
-	dk_fileAppend("${DK_Project_Dir}/${CONFIG_PATH}/DKBUILD.log" "${msg}\n")
+	if(NOT EXISTS "${PATH}")
+		dk_warning("Cannot write DKBUILD.log. Directory does not exist")
+		return()
+	endif()
+	dk_fileAppend("${PATH}/DKBUILD.log" "${msg}\n")
 endfunction()
 
 

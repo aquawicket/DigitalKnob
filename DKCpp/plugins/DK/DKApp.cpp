@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -30,13 +30,13 @@
 #include "DK/DKFile.h"
 
 //WARNING_DISABLE
-#if HAVE_backward_cpp
+# if defined(__has_include) && __has_include(<backward.hpp>)
 	//#include <backward.hpp>
 #endif
-#if HAVE_boxer
+# if defined(__has_include) && __has_include(<boxer/boxer.h>)
 	#include <boxer/boxer.h>
 #endif
-#if ANDROID && HAVE_sdl
+# if defined(__has_include) && __has_include(<SDL.h>) && ANDROID
 	#include <SDL.h>
 #endif
 //WARNING_ENABLE
@@ -74,6 +74,11 @@ DKApp::DKApp(_argc, _argv)
 	_argv: (char**) The values of the arguments
 */
 DKApp::DKApp(int _argc, char** _argv){
+	
+# if defined(SDL_main_h_) && !IOS && !EMSCRIPTEN
+	SDL_SetMainReady();
+# endif
+	
 	DKDEBUGFUNC(_argc, _argv);
 	DKApp::argc = _argc;
 	DKApp::argv = _argv;
@@ -83,13 +88,13 @@ DKApp::DKApp(int _argc, char** _argv){
 
 	if (argc)
 		DKFile::exe_path = argv[0];
-	#if ANDROID
-		#if HAVE_sdl
+	#if defined(SDL_h_) && ANDROID
+		//#if HAVE_sdl
 			if (!SDL_AndroidGetExternalStorageState())
 				DKERROR("SDL_AndroidGetExternalStorageState(): failed");
 			const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();
 			DKFile::exe_path = externalStoragePath;
-		#endif
+		//#endif
 	#endif
 	#if EMSCRIPTEN
 		DKFile::GetCurrentPath(DKFile::exe_path);
@@ -105,7 +110,7 @@ DKApp::DKApp(int _argc, char** _argv){
 	GetOSFlag(osFlag);
 	DKString buildType;
 
-	DKINFO(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE) + "\n");
+	DKINFO(appName + " " + version + " " + osFlag + " " + toString(Target_Type) + "\n");
 	DKINFO("OS:          " + toString(DKOS) + "\n");
 	DKINFO("OS Version:  " + toString(DKOS_VERSION) + "\n");
 	DKINFO("Processor:   " + toString(DKARCH) + "\n");
@@ -113,11 +118,11 @@ DKApp::DKApp(int _argc, char** _argv){
 	DKINFO("Compiler:    " + toString(DKCOMPILER) + " " + toString(DKCOMPILER_VERSION)+ "\n");
 	DKINFO("C Version:   " + toString(DKC_LANGUAGE_VERSION) + "\n");
 	DKINFO("C++ Version: " + toString(DKCPP_LANGUAGE_VERSION) + "\n");
-	DKINFO("Build type:  " + toString(DKBUILD_TYPE) + "\n");
+	DKINFO("Target_Type: " + toString(Target_Type) + "\n");
 
 	#if WIN
 		DKWindows::CreateConsoleHandler();
-		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(DKBUILD_TYPE));
+		DKWindows::SetTitle(appName + " " + version + " " + osFlag + " " + toString(Target_Type));
 	#endif
 	DKString osInfo;
 	GetOSInfo(osInfo);

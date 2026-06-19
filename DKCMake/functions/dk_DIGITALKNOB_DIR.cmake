@@ -1,6 +1,16 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 ####################################################################
 # dk_DIGITALKNOB_DIR()
@@ -9,42 +19,31 @@ include_guard()
 function(dk_DIGITALKNOB_DIR)
 	dk_debugFunc()
 
-# 	if(DEFINED ENV{DIGITALKNOB_DIR})
-#		return()
-#	endif()
-
 	###### SET ######
-	if(ARGN0)
-		set(ENV{DIGITALKNOB_DIR} "${ARGN0}")
-		return()
-	endif()
+	if(ARGV)
+		dk_call( dk_set(DIGITALKNOB_DIR "${ARGV0}") )
 
-	### DIGITALKNOB_DIR ###
-	dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
-	dk_printVar(ENV{DKHOME_DIR})
+	###### GET ######
+	elseif(DEFINED ENV{DIGITALKNOB_DIR})
+		file(TO_CMAKE_PATH "$ENV{DIGITALKNOB_DIR}" DIGITALKNOB_DIR)
+	else()
+		dk_validate(DKHOME_DIR dk_DKHOME_DIR())
 	
-	#if(NOT DEFINED ENV{DIGITALKNOB} set "DIGITALKNOB=D i g i t a l K n o b")
-	if(NOT DEFINED ENV{DIGITALKNOB})
-		#dk_set(DIGITALKNOB "digitalknob")
-		set(ENV{DIGITALKNOB} "digitalknob")
+		if(NOT DEFINED DIGITALKNOB) 
+		#	dk_set(DIGITALKNOB "D i g i t a l K n o b") 
+			dk_call( dk_set(DIGITALKNOB "DigitalKnob") )
+		endif()
+
+		set(DIGITALKNOB_DIR "${DKHOME_DIR}/${DIGITALKNOB}")
 	endif()
-	#dk_set(DIGITALKNOB_DIR "$ENV{DKHOME_DIR}/$ENV{DIGITALKNOB}")
-	set(ENV{DIGITALKNOB_DIR} "$ENV{DKHOME_DIR}/$ENV{DIGITALKNOB}")
-    if(NOT EXISTS "$ENV{DIGITALKNOB_DIR}")
-		dk_mkdir("$ENV{DIGITALKNOB_DIR}")
+	
+	###### FINALIZE ######
+	if(NOT EXISTS "${DIGITALKNOB_DIR}")
+		dk_call( dk_mkdir("${DIGITALKNOB_DIR}") )
 	endif()
 	
-#	### DKDOWNLOAD_DIR ###
-#	#dk_set(ENV{DKDOWNLOAD_DIR} "$ENV{DIGITALKNOB_DIR}/download")
-#	if(NOT EXISTS "$ENV{DKDOWNLOAD_DIR}") 
-#		dk_mkdir("$ENV{DKDOWNLOAD_DIR}")
-#	endif()
-	
-#	### DKTOOLS_DIR ###
-#	dk_set(ENV{DKTOOLS_DIR} "$ENV{DIGITALKNOB_DIR}/DKTools")
-#	if(NOT EXISTS "$ENV{DKTOOLS_DIR}") 
-#		dk_mkdir("$ENV{DKTOOLS_DIR}")
-#	endif()
+	#dk_assertPath(DIGITALKNOB_DIR)
+	dk_call( dk_set(DIGITALKNOB_DIR "${DIGITALKNOB_DIR}") )
 endfunction()
 
 
@@ -56,6 +55,21 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
    
+	dk_echo()
+	dk_echo("Test Getting DIGITALKNOB_DIR . . .")
 	dk_DIGITALKNOB_DIR()
-    dk_printVar(ENV{DIGITALKNOB_DIR})
+	if(EXISTS "${DIGITALKNOB_DIR}")
+		dk_success("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	else()
+		dk_error("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	endif()
+	
+	dk_echo()
+	dk_echo("Test Setting DIGITALKNOB_DIR . . .")
+	dk_DIGITALKNOB_DIR("C:/DigitalKnob")
+	if(EXISTS "${DIGITALKNOB_DIR}")
+		dk_success("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	else()
+		dk_error("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
+	endif()
 endfunction()

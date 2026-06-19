@@ -1,0 +1,1264 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="DtTipsCopy_files/filelist.xml">
+<link rel=Edit-Time-Data href="DtTipsCopy_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>DOS - XCopy Copy Tips</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="State"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Keywords>copy,xcopy,dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,functions,setlocal</o:Keywords>
+  <o:Template>Dt.dot</o:Template>
+  <o:LastAuthor>HP Authorized Customer</o:LastAuthor>
+  <o:Revision>23</o:Revision>
+  <o:TotalTime>524</o:TotalTime>
+  <o:Created>2006-03-09T06:59:00Z</o:Created>
+  <o:LastSaved>2006-03-28T05:44:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>694</o:Words>
+  <o:Characters>3957</o:Characters>
+  <o:Lines>32</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>4642</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>BestFit</w:Zoom>
+  <w:DisplayBackgroundShape/>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:UpdateStylesOnOpen/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="_style.css?v=0001">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Verdana;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536871559 0 0 0 415 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-update:auto;
+	mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:13.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	font-size:11.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-parent:Code;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.Code, li.Code, div.Code
+	{mso-style-name:Code;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	mso-style-update:auto;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	mso-list:l0 level1 lfo4;
+	tab-stops:list .25in;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.PageTitle, li.PageTitle, div.PageTitle
+	{mso-style-name:PageTitle;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.ads, li.ads, div.ads
+	{mso-style-name:ads;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.men, li.men, div.men
+	{mso-style-name:men;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nav, li.nav, div.nav
+	{mso-style-name:nav;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inst, li.inst, div.inst
+	{mso-style-name:inst;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inde, li.inde, div.inde
+	{mso-style-name:inde;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resu, li.resu, div.resu
+	{mso-style-name:resu;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.instr, li.instr, div.instr
+	{mso-style-name:instr;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resul, li.resul, div.resul
+	{mso-style-name:resul;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel, li.ysel, div.ysel
+	{mso-style-name:ysel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel, li.nsel, div.nsel
+	{mso-style-name:nsel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel1, li.ysel1, div.ysel1
+	{mso-style-name:ysel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel1, li.nsel1, div.nsel1
+	{mso-style-name:nsel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.bod, li.bod, div.bod
+	{mso-style-name:bod;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.codeop, li.codeop, div.codeop
+	{mso-style-name:codeop;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ccmmt, li.ccmmt, div.ccmmt
+	{mso-style-name:c_cmmt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ccmnt, li.ccmnt, div.ccmnt
+	{mso-style-name:c_cmnt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.cpvar, li.cpvar, div.cpvar
+	{mso-style-name:c_pvar;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.clabl, li.clabl, div.clabl
+	{mso-style-name:c_labl;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.adsh, li.adsh, div.adsh
+	{mso-style-name:adsh;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.xyz
+	{mso-style-name:xyz;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:530192825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-406048876 -1919616146 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-style-link:Bullets;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1463158827;
+	mso-list-template-ids:1196599110;}
+@list l1:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"%3\)";
+	mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-text:"\(%4\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	margin-left:1.5in;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.75in;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:2.0in;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel="shortcut icon" href=favicon.ico>
+<link rel=icon href="animated_favicon1.gif" type="image/gif">
+<meta name=keywords
+content="copy,xcopy,dostips,cmd,commandline,copy,environment,tricks,dos,Win,XP,2000,command,batch,functions,setlocal">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="6146"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#FEFEFE" lang=EN-US link=blue vlink=purple style='tab-interval:
+.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzTop.htm&quot; \c html <span style='mso-element:field-separator'></span></span><![endif]--><script language="JavaScript">
+<!-- 
+var redi=1; // -->
+</script><span class=xyz><script language='JavaScript'><!--
+ var redi=0; 
+// --></script>&nbsp;</span>
+<script language="JavaScript">
+<!--
+if (redi==1 && window == top) {
+    var l=location.toString().split(".");
+    var l0=l[l.length-2].split("/");
+    var l1=l0[l0.length-1];
+    var l2=l[l.length-1];
+    var target = "https://www.dostips.com/"+l1+".php";
+    document.writeln("<center><H1>This site has been updated.  You will be forwarted to<br><br>\n<a href='" + target + "'>" + target + "</a></H1></center>");
+    for (i=0; i<100; i++) document.writeln("<br>\n");
+    setTimeout("top.location.replace(target)",3000);
+}
+// -->
+</script></p>
+
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='ysel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+
+<p class=PageTitle><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><span style='mso-field-code:" TITLE   \\* MERGEFORMAT "'>DOS - <span
+class=SpellE>XCopy</span> Copy Tips</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>This section provides answers to
+common file copy questions.<span style='mso-spacerun:yes'>  </span><a
+href="DosCommandIndex.htm#XCOPY" target="_blank"><span style='mso-ascii-font-family:
+Arial;mso-hansi-font-family:Arial;mso-bidi-font-family:"Times New Roman"'>Click
+here to view the XCOPY command reference</span></a>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><!--[if supportFields]><span
+style='color:black'><span style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>TOC \o &quot;1-3&quot; \h \z \u <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269951">1<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Copy
+new and newer files only<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269951
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269952">2<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Copy
+newer files only, destination must exist<span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269952
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269953">3<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Copy
+new files only<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269953
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269954">4<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Additional
+Task for each File to be copied<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269954
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269955">5<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Preserving
+the Directory Structure during Copy<span style='font-family:Arial;mso-bidi-font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269955
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='mso-no-proof:yes'><a href="#_Toc131269956">6<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1'>      </span></span>Test
+for Open File<span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'> PAGEREF _Toc131269956
+\h </span><span style='font-family:Arial;mso-bidi-font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-family:Arial;mso-bidi-font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100330031003200360039003900350036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-family:Arial;
+mso-bidi-font-family:"Times New Roman";color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='font-size:12.0pt;font-family:"Times New Roman";mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269951"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Copy new and newer
+  files only</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='color:black'>XCOPY's</span></span><span
+  style='color:black'> /D option makes sure that only new and newer files will
+  be copied.<o:p></o:p></span></p>
+  <p class=MsoNormal><span class=GramE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>source</span></b></span><span style='color:black'> can be
+  a file mask e.g.: *.*, my*.*, my*.log, directory\*.*<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>destination</span></b><span style='color:black'> can be a
+  directory e.g.: ., directory<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span class=SpellE><span style='color:black'>xcopy</span></span><span
+  style='color:black'> &quot;%source%&quot; &quot;%destination%&quot; /D /Y<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269952"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Copy newer files
+  only, destination must exist</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='color:black'>XCOPY's</span></span><span
+  style='color:black'> /U option makes sure that files will only be copied as
+  part of an update. <o:p></o:p></span></p>
+  <p class=MsoNormal><span class=GramE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>source</span></b></span><span style='color:black'> can be
+  a file mask e.g.: *.*, my*.*, my*.log, directory\*.*<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>destination</span></b><span style='color:black'> can be a
+  directory e.g.: ., directory<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span class=SpellE><span style='color:black'>xcopy</span></span><span
+  style='color:black'> &quot;%source%&quot; &quot;%destination%&quot; /D /U /Y<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269953"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>3<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Copy new files only</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span class=SpellE><span style='color:black'>XCOPY's</span></span><span
+  style='color:black'> /L option will not perform the actual copy but will list
+  the files that would be copied without the /L option.<span
+  style='mso-spacerun:yes'>  </span>The resulting file list can be used to
+  perform further checks before the actual copy.<span
+  style='mso-spacerun:yes'>  </span>In this example a <b style='mso-bidi-font-weight:
+  normal'>FOR</b> command parses the resulting file list and runs an additional
+  <b style='mso-bidi-font-weight:normal'>if not exist</b> check in order to
+  make sure that no file gets overwritten. <o:p></o:p></span></p>
+  <p class=MsoNormal><span class=GramE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>source</span></b></span><span style='color:black'> can be
+  a file mask e.g.: *.*, my*.*, my*.log, directory\*.*<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>destination</span></b><span style='color:black'> can be a
+  directory e.g.: ., directory<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>for /f %%a in ('<span class=SpellE>xcopy</span>
+  &quot;%source%&quot; &quot;%destination%&quot; /L /Y') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 	
+  </span>if not exist &quot;%destination%.\%%~<span class=SpellE>nxa</span>&quot;
+  <span class=SpellE>xcopy</span> &quot;%%a&quot; &quot;%destination%&quot; /Y<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269954"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>4<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Additional Task for
+  each File to be copied</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Having the ability to retrieve a
+  list of files that would be copied without actually performing the copy
+  allows executing additional tasks for each file listed.<span
+  style='mso-spacerun:yes'>  </span>Performing the copy itself becomes
+  optional.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The example shown here outputs a
+  nice message for each file being copied and removes all text file from the
+  destination folder that have the same name as the file to be copied but the
+  extension .txt.<o:p></o:p></span></p>
+  <p class=MsoNormal><span class=GramE><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>source</span></b></span><span style='color:black'> can be
+  a file mask e.g.: *.*, my*.*, my*.log, directory\*.*<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>destination</span></b><span style='color:black'> can be a
+  directory e.g.: ., directory<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='color:black'>for /f %%a in ('<span class=SpellE>xcopy</span>
+  &quot;%source%&quot; &quot;%destination%&quot; /L /Y') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span><span class=SpellE>echo.Copying</span> file '%%a' and removing
+  corresponding .txt files<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>if exist %%~dpna.txt <st1:place w:st="on"><st1:State w:st="on">del</st1:State></st1:place>
+  %%~dpna.txt<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span><span class=SpellE>xcopy</span> &quot;%%a&quot;
+  &quot;%destination%&quot; /Y<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)</span><span style='mso-bidi-font-size:
+  10.0pt;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269955"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>5<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Preserving the
+  Directory Structure during Copy</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>To copy files for backup purpose
+  it is often necessarily to preserve the directory structure in the backup
+  location.<span style='mso-spacerun:yes'>  </span>I.e. In order to backup all
+  *.<span class=SpellE>pst</span> files under the "</span><span
+  style='mso-bidi-font-size:10.0pt;color:black'>c:\Documents and Settings"
+  directory</span><span style='color:black'> and copy them to "c:\pstbackup\</span><span
+  style='mso-bidi-font-size:10.0pt;color:black'> Documents and Settings\...</span><span
+  style='color:black'>" the code shown here can be used.<o:p></o:p></span></p>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span
+  style='color:black'>Note:</span></b><span style='color:black'> You may think
+  that a simple "<span class=SpellE><b style='mso-bidi-font-weight:normal'>xcopy</b></span><b
+  style='mso-bidi-font-weight:normal'> &quot;C:\Documents and Settings\*.<span
+  class=SpellE>pst</span>&quot; &quot;c:\pstbackup\&quot; /Y/U/S</b>" does the
+  job, but testing showed that it will always returns "<b style='mso-bidi-font-weight:
+  normal'>File not found - *.<span class=SpellE>pst</span></b>".<span
+  style='mso-spacerun:yes'>  </span>So here a solution that does work:<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set <span
+  class=SpellE>sourcedir</span>=c:\Documents and Settings\*.<span class=SpellE>pst</span><o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set <span
+  class=SpellE>backupdir</span>=c:\pstbackup<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>for /f
+  &quot;tokens=*&quot; %%a in ('dir &quot;%<span class=SpellE>sourcedir</span>%&quot;
+  /s/b') do (<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'><span
+  style='mso-spacerun:yes'>  </span><span class=SpellE>xcopy</span>
+  &quot;%%a&quot; &quot;%<span class=SpellE>backupdir%.%%~pa</span>&quot; /Y/U<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc131269956"><![if !supportLists]><span style='mso-fareast-font-family:
+  Arial;color:black'><span style='mso-list:Ignore'>6<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Test for Open File</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Description<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:black'>The copy command can be used to check wither a file is open
+  without modifying it.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:black'>How it works:<o:p></o:p></span></p>
+  <p class=MsoNormal><span class=GramE><b><span style='font-size:10.0pt;
+  font-family:Verdana;color:black'>copy</span></b></span><b><span
+  style='font-size:10.0pt;font-family:Verdana;color:black'> /-y</span></b><span
+  style='font-size:10.0pt;font-family:Verdana;color:black'> will causes
+  prompting to confirm you want to overwrite the file. <br>
+  <span class=SpellE><span class=GramE><b>echo.N</b></span></span> will abort
+  the copy operation so that the copy really only checks whether the file is
+  open. <br>
+  <b>&gt;NUL</b> will make sure everything happens quietly without showing anything
+  on the screen. <br>
+  <br>
+  If the file (to be copied) is not open then the copy operation will be
+  successfully aborted by piping the 'N' into the conformation. Since such
+  abort indicates success, the code behind the <b style='mso-bidi-font-weight:
+  normal'>&amp;&amp;</b> will be executed.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;font-family:Verdana;
+  color:black'>If the file is open then the copy operation will fail and the
+  code behind the <b style='mso-bidi-font-weight:normal'>||</b> will be executed.
+  </span><span style='color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><span class=SpellE><span style='mso-bidi-font-size:10.0pt;
+  color:black'>echo.N|copy</span></span><span style='mso-bidi-font-size:10.0pt;
+  color:black'> /-y NUL &quot;%filename%&quot;&gt;NUL&amp;&amp;(<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'><span
+  style='mso-spacerun:yes'>  </span><span class=SpellE>echo<span class=GramE>.%</span>filename</span>%
+  is <b>free!</b><o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'><span
+  style='mso-spacerun:yes'>  </span><span class=SpellE><span class=GramE>rem</span></span>
+  leave this <span class=SpellE>rem</span> here at the block end!!!<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>) || (<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'><span
+  style='mso-spacerun:yes'>  </span><span class=SpellE>echo<span class=GramE>.%</span>filename</span>%
+  is <b>in use</b>!<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>)<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzBottom.htm&quot; \c html <span style='mso-element:
+field-separator'></span></span><![endif]-->&nbsp; </p>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='mso-bidi-font-size:
+9.0pt;mso-bidi-font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f1468ecde1ecd',t:'MTc2OTkyNDA2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

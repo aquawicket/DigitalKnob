@@ -1,5 +1,18 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
+
 
 ##################################################################################
 # dk_enterManually()
@@ -11,32 +24,32 @@ dk_enterManually() {
 	dk_call dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	dk_call dk_keyboardInput input
 	
-	target_app="_${input}_"
+	Target_App="_${input}_"
 	
-	#Search digitalknob for the matching entry containing a DKINSTALL.cmake file  
+	#Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file  
 	if test -f "${DKIMPORTS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKIMPORTS_DIR}/${input}
+		Target_App_Dir=${DKIMPORTS_DIR}/${input}
 	fi
 	if test -f "${DKCPP_PLUGINS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKCPP_PLUGINS_DIR}/${input}
+		Target_App_Dir=${DKCPP_PLUGINS_DIR}/${input}
 	fi
 	
 	dk_call dk_validate DKCPP_APPS_DIR "dk_call dk_DKBRANCH_DIR"
 	if test -f "${DKCPP_APPS_DIR}/${input}/DKINSTALL.cmake"; then
-		TARGET_PATH=${DKCPP_APPS_DIR}/${input}
+		Target_App_Dir=${DKCPP_APPS_DIR}/${input}
 		return $(true)
 	fi
-	dk_call dk_printVar TARGET_PATH
+	dk_call dk_printVar Target_App_Dir
 	
-	if [ ! -d "${DKCPP_APPS_DIR}/${target_app}" ]; then
-		dk_call dk_mkdir "${DKCPP_APPS_DIR}/${target_app}";
+	if [ ! -d "${DKCPP_APPS_DIR}/${Target_App}" ]; then
+		dk_call dk_mkdir "${DKCPP_APPS_DIR}/${Target_App}";
 	fi
 	
-	# create apps/<target_app>/DKINSTALL.cmake 
-	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${target_app}/DKINSTALL.cmake" "dk_depend(${input})"
+	# create apps/<Target_App>/DKINSTALL.cmake 
+	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${Target_App}/DKINSTALL.cmake" "dk_depend(${input})"
 	
-	# create apps/<target_app>/main.cpp
-	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${target_app}/main.cpp" "int main(int argc, char** argv) { return 0; }"
+	# create apps/<Target_App>/main.cpp
+	dk_call dk_fileWrite "${DKCPP_APPS_DIR}/${Target_App}/main.cpp" "int main(int argc, char** argv) { return 0; }"
 }
 
 

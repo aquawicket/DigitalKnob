@@ -1,0 +1,5 @@
+############# libpsl ############
+# https://github.com/rockdaboot/libpsl.git
+# https://github.com/rockdaboot/libpsl/archive/490bd6f.zip
+
+libpsl_Import=https://github.com/rockdaboot/libpsl/archive/490bd6f.zip

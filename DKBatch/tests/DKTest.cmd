@@ -1,7 +1,15 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 setlocal EnableDelayedExpansion
@@ -22,11 +30,11 @@ set "TEST_VAR=this is a test variable"
 :main
 	call dk_debug "main(%*)"
 	
-	echo: && echo ######################## TEST FIELD ######################## && echo:
+	echo. && echo ######################## TEST FIELD ######################## && echo.
 
 ::	#printenv
 ::	
-::	:: https://www.baeldung.com/linux/find-current-shell
+::	rem https://www.baeldung.com/linux/find-current-shell
 ::	$echo "readlink /proc/\$\$/exe = $(readlink /proc/$$/exe)"
 ::	$echo "cat /proc/\$\$/cmdline = cat /proc/$$/cmdline"
 ::	$echo "\$0 = $0"
@@ -51,7 +59,7 @@ set "TEST_VAR=this is a test variable"
 ::	$echo ""
 ::
 ::	############ Test Constructs ############
-::	:: https://tldp.org/LDP/abs/html/testconstructs.html#TTESTREF
+::	rem https://tldp.org/LDP/abs/html/testconstructs.html#TTESTREF
 ::
 ::	#unset=
 ::	v_=
@@ -67,7 +75,7 @@ set "TEST_VAR=this is a test variable"
 ::	$echo ""
 ::
 ::	### test ###
-::	evaluate test  
+::	evaluate test 
 ::	evaluate test 0
 ::	evaluate test 1
 ::	evaluate test abc
@@ -92,7 +100,7 @@ set "TEST_VAR=this is a test variable"
 ::	evaluate test "v_abc"
 ::	$echo ""
 ::	
-::	evaluate [        ] 
+::	evaluate [        ]
 ::	evaluate [ 0      ]
 ::	evaluate [ 1      ]
 ::	evaluate [ abc    ]
@@ -119,7 +127,7 @@ set "TEST_VAR=this is a test variable"
 ::	$echo ""
 ::
 ::	################ (BASH ONLY) #################
-::	### [[ ]] ### (BASH ONLY) 
+::	### [[ ]] ### (BASH ONLY)
 ::	#           $echo "[[   ]] is $error"
 ::	#[[ 0 ]] && $echo "[[ 0 ]] is $true" || $echo "[[ 0 ]] is $false"
 ::	#[[ 1 ]] && $echo "[[ 1 ]] is $true" || $echo "[[ 1 ]] is $false"
@@ -174,21 +182,21 @@ set "TEST_VAR=this is a test variable"
 ::	dk_stacktrace
 %endfunction%
 ::
-::::::::: print_stack() :::::::
+:::::::rem print_stack() :::::::
 ::print_stack
 ::	dk_debug "print_stack($@)"
-::  if [ $BASH ]; then
+rem  if [ $BASH ]; then
 ::		#echo "stack_size: ${#FUNCNAME[@]}"
 ::		(( n=${#FUNCNAME[@]}-1 ))
-::        for I in ${FUNCNAME[@]}
+rem        for I in ${FUNCNAME[@]}
 ::	    do
 ::		    echo "FUNCNAME[$n]: $I"
 ::			(( n-- ))
 ::	    done
-::    fi
+rem    fi
 ::%endfunction%
 ::
-::::::::: evaluate() ::::::::
+:::::::rem evaluate() ::::::::
 ::evaluate
 ::	#dk_debug "evaluate($@)"
 ::	export _true="${green}true${clr}"
@@ -227,4 +235,4 @@ set "TEST_VAR=this is a test variable"
 ::[ "$@" -ne "" ] && "$@"
 ::main "$@"
 ::
-::#exit $?  #exitcode
+::#exit $?  #exit_code

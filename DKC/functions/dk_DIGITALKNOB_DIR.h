@@ -16,7 +16,7 @@ int dk_DIGITALKNOB_DIR(){
 	dk_DKHOME_DIR();
 	char temp[1028];
 	DIGITALKNOB_DIR = temp;
-	sprintf(DIGITALKNOB_DIR, "%s/digitalknob", DKHOME_DIR);
+	sprintf(DIGITALKNOB_DIR, "%s/DigitalKnob", DKHOME_DIR);
 	
 
 	return 0;

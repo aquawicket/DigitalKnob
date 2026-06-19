@@ -1,11 +1,19 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/triblatron/osgRmlUi
 
 
@@ -17,16 +25,16 @@ dk_import(https://github.com/triblatron/osgRmlUi/archive/refs/heads/master.zip)
 
 ### LINK ###
 dk_include			(${OSGRMLUI}/include)
-dk_include			(${OSGRMLUI}/${target_triple})
-UNIX_dk_libDebug	(${OSGRMLUI_DEBUG_DIR}/libosgrmlui.a)
-UNIX_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/libosgrmlui.a)
-WIN_dk_libDebug		(${OSGRMLUI_DEBUG_DIR}/osgrmlui.lib)
-WIN_dk_libRelease	(${OSGRMLUI_RELEASE_DIR}/osgrmlui.lib)
+dk_include			(${OSGRMLUI}/${Target_Tuple})
+Unix_dk_libDebug	(${OSGRMLUI_Debug_Dir}/libosgrmlui.a)
+Unix_dk_libRelease	(${OSGRMLUI_Release_Dir}/libosgrmlui.a)
+Windows_dk_libDebug		(${OSGRMLUI_Debug_Dir}/osgrmlui.lib)
+Windows_dk_libRelease	(${OSGRMLUI_Release_Dir}/osgrmlui.lib)
 
 
 ### GENERATE ###
-dk_configure(${OSGRMLUI})
+dk_configure()
 
 
 ### COMPILE ###
-dk_build(${OSGRMLUI})
+dk_build()

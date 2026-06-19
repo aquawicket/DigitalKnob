@@ -1,12 +1,12 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_isUrl){ $dk_isUrl = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_isUrl_ps1){ $dk_isUrl_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_isUrl(str)
 #
 #
 function Global:dk_isUrl($str) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 	
 	if(dk_call dk_contains $str "://"){ $isUrl = $true }
 	else{ $isUrl = $false }
@@ -27,7 +27,7 @@ function Global:dk_isUrl($str) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$test_url = "http://www.aquawicket.com"
 	

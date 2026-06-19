@@ -1,13 +1,18 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	#file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	file(REAL_PATH "~/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR EXPAND_TILDE) 
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+#########################################################################
 
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -55,26 +60,26 @@ include_guard()
 
 # Target Operating Systems
 # https://en.wikipedia.org/wiki/Comparison_of_operating_systems
-# android
-# ios
-# linux
-# macos
-# raspberry
-# windows
+# Android
+# Ios
+# Linux
+# Macos
+# Raspberry
+# Windows
 
 # CPU Architectures
 # https://en.wikipedia.org/wiki/Comparison_of_instruction_set_architectures
-# x86
-# x86_64
-# arm32
-# arm64
+# X86
+# X86_64
+# Arm32
+# Arm64
 
 # C/C++ Compilers
 # https://en.wikipedia.org/wiki/List_of_compilers#C_compilers
 # https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers
-# clang
-# gcc
-# msvc
+# Clang
+# Gcc
+# Msvc
 
 # Javascript Engines
 # https://en.wikipedia.org/wiki/List_of_ECMAScript_engines
@@ -120,11 +125,11 @@ include_guard()
 #endif()
 #dk_info("CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
 #if(DKCMAKE_COMMAND_LINE_TOOLCHAIN)
-#	dk_printVar("DKCMAKE_COMMAND_LINE_TOOLCHAIN")
+#	dk_debug(""DKCMAKE_COMMAND_LINE_TOOLCHAIN = ${DKCMAKE_COMMAND_LINE_TOOLCHAIN}")
 #	dk_printVar(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")
-#	#dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
+#	#dk_load(${DKCMAKE_DIR}/toolchains/Windows_X86_64_clang_toolchain.cmake)
 #elseif(DKCMAKE_INTERNAL_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_INTERNAL_TOOLCHAIN")
 #else()
@@ -132,10 +137,10 @@ include_guard()
 #endif()
 
 
-dk_validate(host_triple   "dk_host_triple()")
-dk_validate(target_triple "dk_target_triple()")
+dk_validate(Host_Tuple   "dk_Host_Tuple()")
+dk_validate(Target_Tuple "dk_Target_Tuple()")
 ########### CORE DEPENDENCIES ############
-dk_depend(cmake)
+dk_validate(cmake_exe "dk_depend(cmake)")
 
 if(MINGW)
 	dk_unset(CMAKE_IMPORT_LIBRARY_SUFFIX)
@@ -163,7 +168,7 @@ dk_set(WARNING_5105						0)	# /wd5105 - macro producing defined is undefined beh
 dk_set(WARNING_LEVEL 					4)
 dk_set(CMAKE_VERBOSE_MAKEFILE			1)
 
-if(ANDROID)
+if(Android)
 	dk_set(POSITION_INDEPENDENT_EXECUTABLE 0) 
 endif()
 
@@ -187,7 +192,6 @@ if(MSVC)
 	dk_append(CMAKE_CXX_FLAGS_DEBUG		/MTd /Od /Ob0 /Zi /RTC1 /DDEBUG /D_DEBUG)
 	dk_append(CMAKE_CXX_FLAGS_RELEASE	/MT /O2 /Ob2 /DNDEBUG)
 else()
-	
 	dk_append(CMAKE_C_FLAGS_DEBUG		-DDEBUG -D_DEBUG -g)
 	dk_append(CMAKE_C_FLAGS_RELEASE		-O3 -DNDEBUG)
 	dk_append(CMAKE_CXX_FLAGS_DEBUG		-DDEBUG -D_DEBUG -g)
@@ -209,11 +213,11 @@ endif()
 ###### POSITION_INDEPENDENT_CODE ######
 # https://stackoverflow.com/a/3544211/688352   -fPIC vs -fpic
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fPIC
-if(WIN_HOST)
+if(Windows_Host)
 	dk_set(POSITION_INDEPENDENT_CODE 0)
 endif()
 if(POSITION_INDEPENDENT_CODE)
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		
 	else()
 		dk_append(CMAKE_C_FLAGS -fPIC)
@@ -222,7 +226,7 @@ if(POSITION_INDEPENDENT_CODE)
 	dk_append(DKCONFIGURE_CFLAGS -fPIC) 
 	dk_append(DKCONFIGURE_CXXFLAGS -fPIC) 
 else()	
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		
 	else()
 #		dk_append(CMAKE_C_FLAGS -fno-pic)
@@ -236,7 +240,7 @@ dk_printVar(POSITION_INDEPENDENT_CODE)
 ###### POSITION_INDEPENDENT_EXECUTABLE ######
 # https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fpie
 if(POSITION_INDEPENDENT_EXECUTABLE)
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 	
 	else()
 #		dk_append(CMAKE_C_FLAGS -fPIE)
@@ -245,7 +249,7 @@ if(POSITION_INDEPENDENT_EXECUTABLE)
 #	dk_append(DKCONFIGURE_CFLAGS -fPIE)
 #	dk_append(DKCONFIGURE_CXXFLAGS -fPIE)
 else()
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 	
 	else()
 		dk_append(CMAKE_C_FLAGS -fno-pie)
@@ -258,14 +262,14 @@ dk_printVar(POSITION_INDEPENDENT_EXECUTABLE)
 
 ###### RUN-TIME TYPE IDENTIFICATION ######
 if(ENABLE_RTTI)
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		dk_append(CMAKE_CXX_FLAGS /GR)
 	else()
 		dk_append(CMAKE_CXX_FLAGS -frtti)
 	endif()
 	dk_append(DKCONFIGURE_CXXFLAGS -frtti)
 else()
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		dk_append(CMAKE_C_FLAGS /GR-)
 		dk_append(CMAKE_CXX_FLAGS /GR-)
 	else()
@@ -280,7 +284,7 @@ dk_printVar(ENABLE_RTTI )
 
 ###### EXCEPTIONS ######
 if(ENABLE_EXCEPTIONS)
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		dk_append(CMAKE_C_FLAGS /EHsc)
 		dk_append(CMAKE_CXX_FLAGS /EHsc)
 	else()
@@ -290,7 +294,7 @@ if(ENABLE_EXCEPTIONS)
 #	dk_append(DKCONFIGURE_CFLAGS -fexceptions) 
 #	dk_append(DKCONFIGURE_CXXFLAGS -fexceptions)
 else()
-	if(WIN AND MSVC)
+	if(Windows AND MSVC)
 		dk_append(CMAKE_C_FLAGS /D_HAS_EXCEPTIONS=0)
 		dk_append(CMAKE_CXX_FLAGS /D_HAS_EXCEPTIONS=0)
 	else()
@@ -304,145 +308,11 @@ dk_printVar(ENABLE_EXCEPTIONS)
 
 
 
-
+dk_validate(DKCMAKE_DIR "dk_DKBRANCH_DIR()")
 
 #################### TOOLCHAINS ##########################
-if(NOT EXISTS "$ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake")
-	dk_error("$ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake Not Found")
-endif()
-dk_load($ENV{DKCMAKE_DIR}/toolchains/${target_triple}_toolchain.cmake)
+dk_toolchain()
 
-#[[
-### android_arm32
-if(ANDROID_ARM32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
-endif()
-
-### android_arm64
-if(ANDROID_ARM64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_arm32_toolchain.cmake)
-endif()
-
-### android_x86
-if(ANDROID_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_x86_toolchain.cmake)
-endif()
-
-### android_x86_64
-if(ANDROID_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/android_x86_64_toolchain.cmake)
-endif()
-
-### cosmopolitan ###
-if(COSMOPOLITAN)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/cosmopolitan_toolchain.cmake)
-endif()
-
-### emscripten_x86 ###
-if(EMSCRIPTEN_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/emscripten_x86_toolchain.cmake)
-endif()
-
-### ios_arm32 - XCODE ###
-if(IOS_ARM32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/ios_arm32_toolchain.cmake)
-endif()
-
-### ios_arm64 - XCODE ###
-if(IOS_ARM64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/ios_arm64_toolchain.cmake)
-endif()
-
-### iOS Simulator x86 - XCODE ###
-if(IOSSIM_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/iossim_x86_toolchain.cmake)
-endif()
-
-### iOS Simulator x86_64 - XCODE ###
-if(IOSSIM_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/iossim_x86_64_toolchain.cmake)
-endif()
-
-### Linux x86 ###
-if(LINUX_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_toolchain.cmake)
-endif()
-
-#### Linux x86_64 - clang ###
-if(LINUX_X86_64_CLANG)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_clang_toolchain.cmake)
-endif()
-
-#### Linux x86_64 - gcc ###
-if(LINUX_X86_64_GCC)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/linux_x86_64_gcc_toolchain.cmake)
-endif()
-
-### Mac x86 - XCODE ###
-if(MAC_X86)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/mac_x86_toolchain.cmake)
-endif()
-
-### Mac x86_64 - XCODE ###
-if(MAC_X86_64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/mac_x86_64_toolchain.cmake)
-endif()
-
-### Raspbery arm32 ###
-if(RASPBERRY_ARM32)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/raspberry_arm32_toolchain.cmake)
-endif()
-
-### Raspbery arm64 ###
-if(RASPBERRY_ARM64)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/raspberry_arm64_toolchain.cmake)
-endif()
-
-### Windows arm64 - CLANGARM64 ###
-if(win_arm64_clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_arm64_clang_toolchain.cmake)
-endif()
-
-### Windows x86 - MSVC ###
-if(win_x86_msvc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_msvc_toolchain.cmake)
-endif()
-
-### Windows x86 - MINGW32 ###
-if(win_x86_gcc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_gcc_toolchain.cmake)
-endif()
-
-### Windows x86 - CLANG32 ###
-if(win_x86_clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_clang_toolchain.cmake)
-endif()
-
-### Windows x86_64 - MSVC ###
-if(win_x86_64_msvc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msvc_toolchain.cmake)
-endif()
-
-### Windows x86_64 - CLANG64 ###
-if(win_x86_64_clang)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_clang_toolchain.cmake)
-endif()
-
-### Windows x86_64 - MINGW64 ###
-if(win_x86_64_gcc)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_gcc_toolchain.cmake)
-endif()
-
-### Windows x86_64 - UCRT64 ###
-if(win_x86_64_ucrt)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_ucrt_toolchain.cmake)
-endif()
-
-### Windows x86_64 - MSYS ###
-if(win_x86_64_msys)
-	dk_load($ENV{DKCMAKE_DIR}/toolchains/win_x86_64_msys_toolchain.cmake)
-endif()
-]]
 
 #dk_printVar(MSYSTEM)
 dk_assertVar(CMAKE_GENERATOR)
@@ -484,13 +354,13 @@ endif()
 
 
 
-# GENERATOR			CONFIG_PATH		  		  	BUILD_PATH
+# GENERATOR			Target_Config		  		  	Target_Build
 # -----------------------------------------------------------------------
-# Visual Studio  	${target_triple}					${target_triple}/${target_type}		
-# XCODE			    ${target_triple}					${target_triple}/${target_type} 
-# MinGW Makefiles   ${target_triple}/${target_type}	${target_triple}/${target_type} 
-# Unix Makefiles    ${target_triple}/${target_type}   ${target_triple}/${target_type}  
-# ./configure       ${target_triple}/${target_type}   ${target_triple}/${target_type}
+# Visual Studio  	${Target_Tuple}					${Target_Tuple}/${Target_Type}		
+# XCODE			    ${Target_Tuple}					${Target_Tuple}/${Target_Type} 
+# MinGW Makefiles   ${Target_Tuple}/${Target_Type}	${Target_Tuple}/${Target_Type} 
+# Unix Makefiles    ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}  
+# ./configure       ${Target_Tuple}/${Target_Type}  ${Target_Tuple}/${Target_Type}
 
 # https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#build-configurations
 # https://cmake.org/cmake/help/latest/variable/CMAKE_CONFIGURATION_TYPES.html
@@ -551,7 +421,7 @@ if(CMAKE_EXE_LINKER_FLAGS)
 	dk_append				(DKCMAKE_FLAGS 		-DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS})
 endif()
 
-###### ANDROID FLAGS ######
+###### Android FLAGS ######
 if(ANDROID_ABI)
 	dk_append				(DKCMAKE_FLAGS 		-DANDROID_ABI=${ANDROID_ABI})
 endif()
@@ -618,11 +488,11 @@ dk_printVar(DKCONFIGURE_FLAGS)
 
 
 ###### Set DKCMAKE_BUILD and DKCONFIGURE_BUILD variables ######
-if(EMSCRIPTEN)
+if(Emscripten)
 	dk_set(DKCMAKE_BUILD ${CMAKE_COMMAND} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ${EMCONFIGURE} ../../configure ${DKCONFIGURE_FLAGS})
 else()
-	dk_set(DKCMAKE_BUILD ${CMAKE_EXE} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
+	dk_set(DKCMAKE_BUILD ${cmake_exe} -G ${CMAKE_GENERATOR} ${DKCMAKE_FLAGS})
 	dk_set(DKCONFIGURE_BUILD ../../configure ${DKCONFIGURE_FLAGS})
 endif()
 

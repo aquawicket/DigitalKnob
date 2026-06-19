@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_pad(str padchar left right align rtn_var)
 #
 #	Pad the end of a string to length with a given character
@@ -61,25 +72,25 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_pad("padded string A" " " 3 18 L strA)
-	message("${strA}")
+	dk_echo("${strA}")
 
 	dk_pad("string B" " " 3 18 L strB)
-	message("${strB}")
+	dk_echo("${strB}")
 	
 	dk_pad("str C" " " 3 18 L strC)
-	message("${strC}")
+	dk_echo("${strC}")
 	
 	dk_pad("padded string D" " " 3 18 R strD)
-	message("${strD}")
+	dk_echo("${strD}")
 
 	dk_pad("string E" " " 3 18 R strE)
-	message("${strE}")
+	dk_echo("${strE}")
 	
 	dk_pad("str F" " " 3 18 R strF)
-	message("${strF}")
+	dk_echo("${strF}")
 	
 	
-	message("${strA} ${strD}")
-	message("${strB} ${strE}")
-	message("${strC} ${strF}")
+	dk_echo("${strA} ${strD}")
+	dk_echo("${strB} ${strE}")
+	dk_echo("${strC} ${strF}")
 endfunction()

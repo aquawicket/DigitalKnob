@@ -1,0 +1,63 @@
+   1хDK "C:/Users/Administrator/DigitalKnob/Development/DKHta/DKINSTALL.cmd"
+      2хDK:dk_DKSCRIPT_PATH "C:/Users/Administrator/DigitalKnob/Development/DKHta/DKINSTALL.cmd"
+         3хDK:dk_DKSCRIPT_ARGS "C:/Users/Administrator/DigitalKnob/Development/DKHta/DKINSTALL.cmd"
+            4хDK:dk_DKSCRIPT_DIR
+               5хDK:dk_DKSCRIPT_NAME
+                  6хDK:dk_DKSCRIPT_EXT
+                     7хDK:dk_DKCACHE_DIR
+                        8хDK:dk_reload
+                           9хDK:dk_DKHTTP_VARS
+                              10хDK:dk_initFiles
+                                 11хdk_call:init
+                                    12хdk_color
+                                       13хdk_debugFunc 0 1
+                                      им"dk_debugFunc 0 1 status:0" 
+                                    12хdk_validate DKBRANCH_DIR "call dk_call dk_DKBRANCH_DIR"
+                                       13хdk_debugFunc 2
+                                       13хdk_DKBRANCH_DIR
+                                          14хdk_debugFunc 0 1
+                                          14хdk_validate DIGITALKNOB_DIR "call dk_call dk_DIGITALKNOB_DIR"
+                                             15хdk_debugFunc 2
+                                             15хdk_DIGITALKNOB_DIR
+                                                16хdk_debugFunc 0 1
+                                                16хdk_validatePath DKHOME_DIR    "call dk_call DKHOME_DIR"
+                                                   17хdk_debugFunc 2
+                                                   17хDKHOME_DIR
+                                                      18хdk_debugFunc 0 1
+                                                      18хdk_assertPath DKHOME_DIR
+                                                         19хdk_debugFunc 0 99
+                                                16хdk_assertPath DIGITALKNOB_DIR
+                                                   17хdk_debugFunc 0 99
+                                    12хdk_fileVariables "C:/Users/Administrator/DigitalKnob/Development/dkconfig.txt"
+                                       13хdk_debugFunc 1
+                                       13хdk_trim dk_exit_PAUSE_ON_EXIT
+                                       13хdk_trim 1
+                                       13хdk_trim dk_exit_PAUSE_ON_ERROR
+                                       13хdk_trim 1
+                                       13хdk_trim dk_log_ERROR_PAUSE
+                                       13хdk_trim 1
+                                       13хdk_trim dk_log_FATAL_PAUSE
+                                       13хdk_trim 1
+                                    12хdk_logo
+                                       13хdk_debugFunc 0
+                                    12хdk_fileContains "C:/Users/Administrator/DigitalKnob/Development/DKHta/DKINSTALL.cmd" ":DKTEST"
+                                       13хdk_debugFunc 2 3
+                                      им"[90mdk_fileContains "C:/Users/Administrator/DigitalKnob/Development/DKHta/DKINSTALL.cmd" ":DKTEST" [37mstatus:[31m1[0m" 
+                                    12хdk_assertPath MSHTA_EXE
+                                       13хdk_debugFunc 0 99
+                                    12хdk_registrySetKey "HKCR/DKHta/DefaultIcon" "" "REG_SZ" "C:/Windows/SysWOW64/mshta.exe"
+                                       13хdk_debugFunc 1 4
+                                       13хdk_validate REG_EXE "call dk_call dk_REG_EXE"
+                                          14хdk_debugFunc 2
+                                          14хdk_REG_EXE
+                                             15хdk_debugFunc 0
+                                             15хdk_assertPath "C:/Windows/System32/reg.exe"
+                                                16хdk_debugFunc 0 99
+                                    12хdk_success "DKHta install complete"
+                                       13хdk_debugFunc 1
+                                       13хdk_log SUCCESS "DKHta install complete"
+                                          14хdk_debugFunc 1 2
+                                          14хdk_echo "[32mSUCCESS: DKHta install complete[0m"
+                                            им"[90mdk_echo "[32mSUCCESS: DKHta install complete[0m" [37mstatus:[31m1[0m" 
+                                         им"[90mdk_log SUCCESS "DKHta install complete" [37mstatus:[31m1[0m" 
+                                      им"[90mdk_success "DKHta install complete" [37mstatus:[31m1[0m" 

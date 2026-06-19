@@ -1,20 +1,29 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# Test/Test/dk_test(args)
-::#
+rem ####################################################################
+rem # Test/Test/dk_test(args)
+rem #
 :Test/Test/dk_test
-echo: & echo %bg_blue%-^> Test/Test/dk_test(%*)%clr%
-setlocal enableDelayedExpansion
-	::%dk_call% dk_debugFunc 0 99
+rem echo. & echo %bg_blue%-^> Test/Test/dk_test(%*)%clr%
+%setlocal%
+	set "Test/Test/dk_test=Return value from Test/Test/dk_test.cmd"
 	
 	echo ################# Test/Test/dk_test.cmd ################
+					    (echo      Test/Test/dk_test = %Test/Test/dk_test%)
 						(echo            ###### cmd variables ######)
-	if not "%~0" equ ""	(echo                      0 = '%~0')
+	if "%~0" neq ""		(echo                      0 = '%~0')
 						(echo                      * = '%*')
 	if "%~1" neq ""		(echo                      1 = '%~1')
 	if "%~2" neq ""		(echo                      2 = '%~2')
@@ -29,9 +38,9 @@ setlocal enableDelayedExpansion
 						(echo                   DATE = '%DATE%')
 						(echo                   TIME = '%TIME: =%')
 						(echo                ComSpec = '%ComSpec%')
-						(echo:)
+						(echo.)
 						(echo             ###### DK variables ######)
-						(echo                   test = '%test%')
+						(echo                dk_test = '%dk_test%')
 						(echo           DKSHELL_NAME = '%DKSHELL_NAME%')
 						(echo           DKSHELL_PATH = '%DKSHELL_PATH%')
 						(echo        DKSHELL_VERSION = '%DKSHELL_VERSION%')
@@ -72,26 +81,19 @@ setlocal enableDelayedExpansion
 						(echo            DKBATCH_DIR = '%DKBATCH_DIR%')
 						(echo  DKBATCH_FUNCTIONS_DIR = '%DKBATCH_FUNCTIONS_DIR%')
 						(echo DKBATCH_FUNCTIONS_DIR_ = '%DKBATCH_FUNCTIONS_DIR_%')
-						(echo:)
-						(echo      ###### return values before being set ######)
-						(echo                dk_test = '%dk_test%')
-						(echo             RETURN_VAR = '%RETURN_VAR%')
-						(echo             GLOBAL_VAR = '%GLOBAL_VAR%')
+						(echo.)
+						
 
-	%dk_call% dk_stacktrace
-
+	:return
 	endlocal & (
-		set "dk_test=this C"
-		%dk_call% setReturn RETURN_VAR "return C"
-		%dk_call% setGlobal GLOBAL_VAR "global C"
+		set "Test/Test/dk_test=%Test/Test/dk_test%"
+		if /i "%~1" equ "RTN_VAR" (
+			set "%~1=%Test/Test/dk_test%"
+		) else (
+			echo %Test/Test/dk_test%
+		)
 	)
-
-::	echo: & echo ### Test/Test/dk_test return values before end function ###
-::	echo              dk_test = '%dk_test%'
-::	echo           RETURN_VAR = '%RETURN_VAR%'
-::	echo           GLOBAL_VAR = '%GLOBAL_VAR%'
-
-echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo:
+rem echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo.
 %endfunction%
 
 
@@ -101,13 +103,12 @@ echo %bg_blue%^<- Test/dk_test(%*)%clr% & echo:
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 	%dk_call% Test/Test/dk_test ":DKTEST" "Test/Test/dk_test" "Test/Test:DKTEST" "1 2 3"
-	echo: & echo ### Test/Test/dk_test return values ###
+	echo. & echo ### Test/Test/dk_test return values ###
 	echo    dk_test = '%dk_test%'
 	echo RETURN_VAR = '%RETURN_VAR%'
 	echo GLOBAL_VAR = '%GLOBAL_VAR%'

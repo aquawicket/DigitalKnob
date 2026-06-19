@@ -1,30 +1,27 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ###### android-cmake ######
-# https://androidsdkoffline.blogspot.com/p/android-ndk-cmake-direct-download.html
+dk_validate(android-sdk "dk_depend(android-sdk)")
 
-dk_depend(android-sdk)
-
-# 3.18.1
-dk_validate(host_triple "dk_host_triple()")
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-if(WIN_HOST)
-	dk_getFileParam($ENV{DKIMPORTS_DIR}/android-cmake/dkconfig.txt ANDROID_CMAKE_WIN_IMPORT)
-	dk_import(${ANDROID_CMAKE_WIN_IMPORT} PATH ${ANDROID_SDK}/cmake)
-elseif(MAC_HOST)
-	dk_getFileParam($ENV{DKIMPORTS_DIR}/android-cmake/dkconfig.txt ANDROID_CMAKE_MAC_IMPORT)
-	dk_import(${ANDROID_CMAKE_MAC_IMPORT} PATH ${ANDROID_SDK}/cmake)
-elseif(LINUX_DL)
-	dk_getFileParam($ENV{DKIMPORTS_DIR}/android-cmake/dkconfig.txt ANDROID_CMAKE_LINUX_IMPORT)
-	dk_import(${ANDROID_CMAKE_LINUX_IMPORT} PATH ${ANDROID_SDK}/cmake)
+if(Windows_Host)
+	dk_import	(${android-cmake_Windows_Import} 	INSTALL_PATH ${android-sdk}/cmake)
+elseif(Mac_Host)
+	dk_import	(${android-cmake_Mac_Import} 		INSTALL_PATH ${android-sdk}/cmake)
+else()
+	dk_import	(${android-cmake_Linux_Import} 		INSTALL_PATH ${android-sdk}/cmake)
 endif()
 
-# 3.22.1
-#WIN_HOST_dk_import(https://dl.google.com/android/repository/cmake-3.22.1-windows.zip PATH ${ANDROID_SDK}/cmake)
-#MAC_HOST_dk_import(https://dl.google.com/android/repository/cmake-3.22.1-darwin.zip PATH ${ANDROID_SDK}/cmake)
-#LINUX_HOST_dk_import(https://dl.google.com/android/repository/cmake-3.22.1-linux.zip PATH ${ANDROID_SDK}/cmake)
+

@@ -1,42 +1,48 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# __ARGV__(<frame>)
-::#
-:::__ARGV__
-::	%dk_call% dk_debugFunc 0 1
-::setlocal
-:: 
-::	if not defined %1 (set "_FRAME_=0") else (set "_FRAME_=%1")
-::	::set /a _FRAME_-=1
-::	
-::	::set "_ARGC_=%BATCH_ARGC[$_FRAME_%]%"
-::	::for (( i=((_ARGC_)); i>=1; i-- )); do
-::	::	if not defined "%_ARGV_%" (set "_ARGV_=%BATCH_ARGV[%i%]%") else (set "_ARGV_=%_ARGV_%, %BATCH_ARGV[%i%]%")
-::	::done
-::	::%dk_call% dk_return "%_ARGV_%"
-::%endfunction%
+rem ############################################################################
+rem # __ARGV__(<frame>)
+rem #
+rem :__ARGV__
+remrem %setlocal%
+rem 
+rem	if "%_FRAME_%" equ "" (set "_FRAME_=%~1")
+rem	if "%_FRAME_%" equ "" (set "_FRAME_=0")
+rem 
+rem	::set /a _FRAME_-=1
+rem	
+rem	::set "_ARGC_=%BATCH_ARGC[$_FRAME_%]%"
+rem	::for (( i=((_ARGC_)); i>=1; i-- )); do
+rem	rem	if NOT defined "%_ARGV_%" (set "_ARGV_=%BATCH_ARGV[%i%]%") else (set "_ARGV_=%_ARGV_%, %BATCH_ARGV[%i%]%")
+rem	::done
+rem	::%dk_call% dk_return "%_ARGV_%"
+rem %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
- 
+%setlocal%
+
 	call :DKTEST_func abc 123 def 456 ghi 789
 %endfunction%
 
 
 :DKTEST_func
-setlocal
-	%dk_call% dk_debugFunc 6
+%setlocal%
 
- 
 	echo __ARGV__ = %__ARGV__%
 	echo ARGV[1] = %ARGV[1]%
 	echo ARGV[2] = %ARGV[2]%
@@ -45,4 +51,5 @@ setlocal
 	echo ARGV[5] = %ARGV[5]%
 	echo ARGV[6] = %ARGV[6]%
 	%dk_call% dk_printVar ARGV
+	%dk_call% dk_printVar __ARGV__
 %endfunction%

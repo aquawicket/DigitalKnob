@@ -1,39 +1,46 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_validate(target_triple "dk_target_triple()")
+############ jasper ############
 # https://github.com/jasper-software/jasper.git
+# https://github.com/jasper-software/jasper/archive/refs/heads/master.zip
 
+dk_import()
 
-### IMPORT ###
-#dk_import(https://github.com/jasper-software/jasper.git)
-dk_import(https://github.com/jasper-software/jasper/archive/refs/heads/master.zip)
+dk_include			(${jasper}/include)
+dk_include			(${jasper_Tuple_Dir})
+if(Android)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/jasperd.a)	
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/jasper.a)
+elseif(Apple)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/libjasper.a)
+elseif(Emscripten)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Linux)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Raspberry)
+	dk_libDebug		(${jasper_Debug_Dir}/src/libjasper/libjasper.a)
+	dk_libRelease	(${jasper_Release_Dir}/src/libjasper/libjasper.a)
+elseif(Windows)
+	dk_libDebug		(${jasper_Tuple_Dir}/src/libjasper/jasperd.lib)
+	dk_libRelease	(${jasper_Tuple_Dir}/src/libjasper/jasper.lib)
+endif()
 
+dk_configure()
 
-### LINK ###
-dk_include				(${JASPER}/include)
-dk_include				(${JASPER}/${target_triple})
-ANDROID_dk_libDebug		(${JASPER}/${target_triple}/src/libjasper/jasperd.a)
-ANDROID_dk_libRelease	(${JASPER}/${target_triple}/src/libjasper/jasper.a)
-APPLE_dk_libDebug		(${JASPER}/${target_triple}/src/libjasper/libjasper.a)
-APPLE_dk_libRelease		(${JASPER}/${target_triple}/src/libjasper/libjasper.a)
-EMSCRIPTEN_dk_libDebug	(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
-EMSCRIPTEN_dk_libRelease(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
-LINUX_dk_libDebug		(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
-LINUX_dk_libRelease		(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
-RASPBERRY_dk_libDebug	(${JASPER_DEBUG_DIR}/src/libjasper/libjasper.a)
-RASPBERRY_dk_libRelease	(${JASPER_RELEASE_DIR}/src/libjasper/libjasper.a)
-WIN_dk_libDebug			(${JASPER}/${target_triple}/src/libjasper/jasperd.lib)
-WIN_dk_libRelease		(${JASPER}/${target_triple}/src/libjasper/jasper.lib)
-
-
-### GENERATE ###
-dk_configure(${JASPER_DIR})
-
-
-### COMPILE ###
-dk_build(${JASPER_DIR})
+dk_build()

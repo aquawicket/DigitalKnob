@@ -1,21 +1,38 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
+
+dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 ############ DKHook ############
 
-#if(NOT WIN AND NOT LINUX)
+#if(NOT Windows AND NOT Linux)
 #	dk_return()
 #endif()
 
 if(HAVE_DKCef)
-	dk_depend(DKCef)
+	dk_validate(DKCef "dk_depend(DKCef)")
 endif()
-dk_generateCmake(DKHook)
-dk_assets(DKHook)
+
+
+############ DKHook ############
+dk_generateCmake()
+dk_assets()
+dk_configure()
+dk_build()
+
+
 
 ## add hoodll.dll to CMakeLists.txt on windows
 dk_appendCmake("\n\n")
@@ -31,9 +48,9 @@ dk_appendCmake("SET_TARGET_PROPERTIES(hookdll PROPERTIES LINKER_LANGUAGE CPP) \n
 
 
 # FIXME - these should be post built operations. hookdll.dll will not exist yet
-if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/win_x86_msvc/Release/hookdll.dll)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/win_x86_msvc/Release/hookdll.dll ${DK_Project_Dir}/assets/DKHook OVERWRITE)
+if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_Msvc/Release/hookdll.dll)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_Msvc/Release/hookdll.dll ${Target_App_Dir}/assets/DKHook OVERWRITE)
 endif()
-if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/win_x86_64_msvc/Release/hookdll.dll)
-	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/win_x86_64_msvc/Release/hookdll.dll ${DK_Project_Dir}/assets/DKHook OVERWRITE)
+if(EXISTS ${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_64_Msvc/Release/hookdll.dll)
+	dk_copy(${DKCPP_PLUGINS_DIR}/DKHook/Windows_X86_64_Msvc/Release/hookdll.dll ${Target_App_Dir}/assets/DKHook OVERWRITE)
 endif()

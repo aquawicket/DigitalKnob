@@ -1,26 +1,27 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_stacktrace){ $dk_stacktrace = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_stacktrace_ps1){ $dk_stacktrace_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_stacktrace()
 #
 #
 function Global:dk_stacktrace() {
-    dk_debugFunc 0
+    dk_debugFunc 0;
 
 	### VERSION 1 ###
-	$stack_size = $(Get-PSCallStack).count
-	dk_call dk_echo "STACKTRACE[${stack_size}]" 
-	$i = 0
-
-    while($i -lt $stack_size) {
-
-        $i=$i+1
-        $frame = $i - 2
-        if($i -eq 2){
-			dk_call dk_echo "  [${frame}] $(__FILE__ $i)}:$(__LINE__ $i):  $(__FUNCTION__ $i)($(__ARGV__ $i))"
-			continue
-        }
+	$i = 0;
+    $Global:_STACK_ = (Get-PSCallStack).Command;
+	
+#	Write-Host "_STACK_ = ${_STACK_}"
+    $_STACK_ | ForEach-Object {
+		#$(dk_call __FRAME__ $i)
+		$fileline = "[${i}] $(__FILE__ $i):$(__LINE__ $i):";
+		$args = "$(__ARGV__ $i)";
+		$args = $args.Trim();
+		$funcargs = "$(__FUNCTION__ $i)($(__ARGC__ $i): $args)";
+		$fileline = $fileline.PadRight(30,' ');
+        dk_call dk_echo "$($fileline)$($funcargs)";
+        $i++;
     }
 
 #	while [ "${i}" -lt "${stack_size}" ]; do
@@ -66,8 +67,14 @@ function Global:dk_stacktrace() {
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
-function Global:DKTEST() {
-	dk_debugFunc 0
+function Global:DKTEST_1() {
+	dk_debugFunc 0 99;
 	
-	dk_call dk_stacktrace
+	dk_call dk_stacktrace;
+}
+
+function Global:DKTEST() {
+	dk_debugFunc 0;
+	
+	dk_call DKTEST_1 abc 123
 }

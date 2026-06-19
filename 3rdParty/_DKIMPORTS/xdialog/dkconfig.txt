@@ -1,0 +1,1 @@
+xdialog_Import=https://github.com/mathgeniuszach/xdialog/archive/3c6134fd8e19611e850b1073c0d18146add26dd2.zip

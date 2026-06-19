@@ -1,64 +1,69 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ########### msys2 ###########
+rem # https://www.msys2.org
+rem # https://silentinstallhq.com/msys2-silent-install-how-to-guide
+rem # https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz
+rem #
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/gcc/DKINSTALL.cmake)" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-	%dk_call% dk_assertVar GCC_C_COMPILER
-	%dk_call% dk_assertVar GCC_CXX_COMPILER
+	%dk_call% dk_import
 	
+	set	"msys2_DBPath=%msys2%/var/lib/pacman"
+	rem set	"msys2_CacheDir=%msys2%/var/cache/pacman/pkg"
+	set	"msys2_LogFile=%msys2%/var/log/pacman.log"
+	set	"msys2_GPGDir=%msys2%/etc/pacman.d/gnupg"
+	set "msys2_dirmngr_exe=%msys2%/usr/bin/dirmngr.exe"
+	rem set	"msys2_BIN=%msys2%/usr/bin"
+	rem set	"CLANGARM64_BIN=%msys2%/clangarm64/bin"
+	rem set	"CLANG32_BIN=%msys2%/clang32/bin"
+	rem set	"CLANG64_BIN=%msys2%/clang64/bin"
+	rem set	"MINGW32_BIN=%msys2%/mingw32/bin"
+	rem set	"MINGW64_BIN=%msys2%/mingw64/bin"	
+	rem set	"UCRT64_BIN=%msys2%/ucrt64/bin"
+		
+	%dk_call% dk_firewallAllow "%msys2_dirmngr_exe%"
+		
+	%dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
+	set "msys2_CacheDir=%DKDOWNLOAD_DIR%/msys2/var/cache/pacman/pkg"
+	%dk_call% dk_mkdir "%msys2_CacheDir%"
 	
-	%endfunction%
-	::###### CMD INSTALL DISABLED (DEBUG) ####
-	::%dk_call% dk_set MSYS2_DL "https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe"
-	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-	
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_importVariables %MSYS2_DL% IMPORT_PATH %DKIMPORTS_DIR%\msys2 ROOT %DK3RDPARTY_DIR%
-	set	"MSYS2_DBPath=%MSYS2_DIR%/var/lib/pacman"
-	set	"MSYS2_CacheDir=%MSYS2_DIR%/var/cache/pacman/pkg"
-	set	"MSYS2_LogFile=%MSYS2_DIR%/var/log/pacman.log"
-	set	"MSYS2_GPGDir=%MSYS2_DIR%/etc/pacman.d/gnupg"
-	set	"MSYS2_BIN=%MSYS2%/usr/bin"
-	set	"CLANGARM64_BIN=%MSYS2%/clangarm64/bin"
-	set	"CLANG32_BIN=%MSYS2%/clang32/bin"
-	set	"CLANG64_BIN=%MSYS2%/clang64/bin"
-	set	"MINGW32_BIN=%MSYS2%/mingw32/bin"
-	set	"MINGW64_BIN=%MSYS2%/mingw64/bin"	
-	set	"UCRT64_BIN=%MSYS2%/ucrt64/bin"
-	set	"MSYS2_MAKE_PROGRAM=%MSYS2_BIN%/make.exe"
-	
-	::############ Install ############
-	if exist %MSYS2%\msys2.exe" (
-		echo "msys2 already installed"
-		%return%
+	%dk_call% dk_mkdir "%DKDOWNLOAD_DIR%/msys2"
+	%dk_call% dk_copy "%DKHttp_DKDownload_Dir:file:///=%/msys2" "%DKDOWNLOAD_DIR%/msys2"
+		
+	endlocal & (
+		set "msys2=%msys2%"
+		set	"msys2_DBPath=%msys2_DBPath%"
+		set	"msys2_CacheDir=%msys2_CacheDir%"
+		set	"msys2_LogFile=%msys2_LogFile%"
+		set	"msys2_GPGDir=%msys2_GPGDir%"
+		set "msys2_dirmngr_exe=%msys2_dirmngr_exe%"
+		rem set	"msys2_BIN=%msys2%/usr/bin"
+		rem set	"CLANGARM64_BIN=%msys2%/clangarm64/bin"
+		rem set	"CLANG32_BIN=%msys2%/clang32/bin"
+		rem set	"CLANG64_BIN=%msys2%/clang64/bin"
+		rem set	"MINGW32_BIN=%msys2%/mingw32/bin"
+		rem set	"MINGW64_BIN=%msys2%/mingw64/bin"	
+		rem set	"UCRT64_BIN=%msys2%/ucrt64/bin"
 	)
-	%dk_call% dk_info "Installing %MSYS2_FOLDER%"
-	%dk_call% dk_download %MSYS2_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	"%DKDOWNLOAD_DIR%/%MSYS2_DL_FILE%" install --root "%MSYS2%" --confirm-command
+	rem %dk_call% dk_debug "msys2 = %msys2%"
+%endfunction%	
 	
-	%dk_call% dk_assertVar MSYS2
-%endfunction%
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKINSTALL
-%endfunction%
+	
+	
+	
+

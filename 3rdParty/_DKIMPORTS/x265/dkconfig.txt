@@ -1,0 +1,5 @@
+############ x265 ############
+# https://bitbucket.org/multicoreware/x265_git.git
+# https://bitbucket.org/multicoreware/x265_git/get/dd594f59d951.zip
+
+x265_Import=https://bitbucket.org/multicoreware/x265_git/get/dd594f59d951.zip

@@ -1,0 +1,455 @@
+rem shebang
+@echo off
+
+rem ################################################
+:main
+::%function%
+
+	if "%~1" equ ":function" 	(goto:function)
+	if "%~1" equ ":endfunction" (goto:endfunction)
+
+	rem	call :DKCatchAll
+
+	rem ### include guard
+	if "%DKINIT_cmd%" neq "1" (set "DKINIT_cmd=1") else (exit /b %errorlevel%)
+
+	rem ### Print DKSHELL_NAME DKSHELL_VERSION ###
+	set "ESC="
+	set "DKSHELL_PATH=%ComSpec%"
+	for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%%~nZ")
+	for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
+	set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+	echo.%ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %DKSHELL_PATH% %ESC%[0m
+
+
+	if "!CMDCMDLINE!" neq "!CMDCMDLINE:/c=/k!" (set "RELOAD=1")
+	if "!DE!" neq "" (set "RELOAD=1")
+	if "%RELOAD%" equ "1" if "%RELOADED%" neq "1" (
+		echo. && echo."Reloading . . ."
+		set "RELOAD=0"
+		set "RELOADED=1"
+		set "DKINIT_cmd="
+		setlocal ENABLEDELAYEDEXPANSION ENABLEEXTENSIONS
+		
+		rem ### Reload cmd options
+		rem set COMMAND=start "" /B %ComSpec% /A /Q /D /E:ON /V:ON /K %*
+		
+		rem ### Reload cmd options without elevated permissions
+		set COMMAND=start "" /b runas /trustlevel:0x20000 /machine:amd64 "%ComSpec% /A /Q /D /E:ON /V:ON /K %*"
+		
+		cls
+		echo.
+		!COMMAND!
+		exit %errorlevel%
+		rem !COMMAND! | %DKBATCH_FUNCTIONS_DIR_%dk_tee.cmd %DKSCRIPT_NAME%.log
+		echo.%ESC%[31m ### ERROR: SHOULD NOT GET HERE ### %ESC%[0m & pause
+	)
+
+	rem ### Delayed Expansion Title and test
+	if "!DE!" equ "" (
+		title %CMDCMDLINE% delayedExpansion:ON
+	) else (
+		title %CMDCMDLINE% delayedExpansion:OFF
+		echo.%ESC%[31m ### ERROR: DKBatch requires delayed expansion ### %ESC%[0m & pause
+		exit /b %errorlevel%
+	)	
+
+	rem ### setup callstack related variables
+	if NOT 01 == 1 (
+	if "!DE!" equ "" (
+		if NOT DEFINED enter (
+			set enter=^
+			set err_level=^^!errorlevel^^!^&^
+			set prev_error=^^!error_code^^!^&^
+			set error_code=^^!err_level^^!^&^
+			^(if "^!err_level^!" neq "0" set last_error=^^!err_level^^!^)^&^
+			call set file=%%~f0^&^
+			call set func=%%~0^&^
+			call set args=%%*^&^
+			call %~f0 :function ^^!error_code^^! ^^!caller^^! ^^!file^^! ^^!func^^! ^^!args^^!)
+		)
+		
+		if NOT DEFINED exit (
+			set exit=^
+			set err_level=^^!errorlevel^^!^&^
+			set prev_error=^^!error_code^^!^&^
+			set error_code=^^!err_level^^!^&^
+			^(if "^!err_level^!" neq "0" set last_error=^^!err_level^^!^)^&^
+			call set file=%%~f0^&^
+			call set func=%%~0^&^
+			call set args=%%*^&^
+			call %~f0 :endfunction ^^!error_code^^! ^^!caller^^! ^^!file^^! ^^!func^^! ^^!args^^!^&^
+			call set caller=^^!func^^!^&^
+			exit /b ^^!error_code^^!
+		)
+		
+	)	
+	if NOT DEFINED function 	(set function=!enter!)
+	if NOT DEFINED endfunction  (set endfunction=!exit!)
+	if NOT DEFINED setlocal		(set setlocal=setlocal ENABLEDELAYEDEXPANSION ENABLEEXTENSIONS)
+	if NOT DEFINED return		(set return=call :return)
+	if NOT DEFINED pushStack	(set pushStack=call :pushStack %%~n0%%~0 %%*)
+	if NOT DEFINED clearerror	(set clearerror=%ComSpec% /c exit /b 0)
+	if NOT DEFINED seterror		(set seterror=%ComSpec% /c exit /b)
+	if NOT DEFINED true 		(set true=0)
+	if NOT DEFINED false 		(set false=1)
+	if NOT DEFINED NO_STDOUT 	(set NO_STDOUT=1>nul)
+	if NOT DEFINED NO_STDERR 	(set NO_STDERR=2>nul)
+	if NOT DEFINED NO_OUTPUT 	(set NO_OUTPUT=1>nul 2>nul)
+	if NOT DEFINED argv 		(set argv=%*)
+	if NOT DEFINED argv			(set argv=%~f0)
+	
+	call :DK %argv%
+	%return%
+	echo.%ESC%[31m ### ERROR: SHOULD NOT GET HERE ### %ESC%[0m & pause
+%endfunction%
+
+rem ################################################
+:function
+	set dk_allButFirstArgs=%*
+	for /f "tokens=5*" %%a in ("!dk_allButFirstArgs!") do (set dk_allButFirstArgs=%%b)
+	echo.%ESC%[35m ENTER: func:'%~n5' args:'%dk_allButFirstArgs%' file:'%~nx4' caller:'%~3' error_code:'%~2' %ESC%[0m
+goto:eof
+
+rem ################################################
+:endfunction
+	set dk_allButFirstArgs=%*
+	for /f "tokens=5*" %%a in ("!dk_allButFirstArgs!") do (set dk_allButFirstArgs=%%b)
+	echo.%ESC%[35m EXIT: func:'%~n5' args:'%dk_allButFirstArgs%' file:'%~nx4' caller:'%~3' error_code:'%~2' %ESC%[0m
+goto:eof
+
+rem ################################################
+:return exit_code
+%function%
+	if "%~1" neq "" (set return_code=%~1) else (set return_code=%errorlevel%)
+	%ComSpec% /c exit /b %return_code%
+	echo.:return(%return_code%)
+	pause
+	exit /b %return_code%
+%endfunction%
+
+rem ################################################
+:pushStack
+	if NOT DEFINED LVL 		(set /a "LVL=0")
+	if NOT DEFINED ENTRY	(set /a "ENTRY=0")
+	(set /a LVL+=1)
+	(set /a ENTRY+=1)
+	call :setGlobal __STACK__%ENTRY% %*
+exit /b %errorlevel%
+
+rem ################################################
+:setGlobal
+setlocal ENABLEDELAYEDEXPANSION ENABLEEXTENSIONS
+	set dk_allButFirstArgs=%*
+	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do endlocal & (set %1=%%b)
+exit /b %errorlevel%
+
+
+	
+	
+	
+	
+	
+rem ################################################
+:DK DKSCRIPT_PATH, DKSCRIPT_ARGS
+%function%
+	%pushStack%
+
+	rem #	TODO - switch to UNICODE code page
+	rem #   chcp 65001 >NUL
+
+	rem if 01 == 1 (echo.### TCC ###) else (echo.### CMD ###)
+
+	rem ###### PRINT_DE_STATUS #####
+	set PRINT_DE_STATUS=if "^!DE^!" equ "" (echo.[32mdelayed expansion = ON[0m) else (echo.[31mdelayed expansion = OFF[0m)
+	%PRINT_DE_STATUS%
+
+	if NOT DEFINED DKBATCH_FUNCTIONS_DIR_	(set "DKBATCH_FUNCTIONS_DIR_=%~dp0")
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:\=/%"
+
+	rem ###### DKSCRIPT_VARS ######
+	call :dk_DKSCRIPT_PATH "%~1"
+	call :dk_DKSCRIPT_ARGS "%~1"
+	call :dk_DKSCRIPT_FILE
+	call :dk_DKSCRIPT_DIR
+	call :dk_DKSCRIPT_NAME
+	call :dk_DKSCRIPT_EXT
+	call :dk_DKCACHE_DIR
+	call :dk_DKHTTP_VARS
+
+	rem ############ get dk_source and dk_call ######
+	call :dk_initFiles
+	
+	rem ############## init dk_call ###############
+	call %DKBATCH_FUNCTIONS_DIR_%dk_call.cmd init
+	
+	rem ############ load dkconfig.txt ############
+	::%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+	if EXIST "%DKSCRIPT_DIR%/dkconfig.txt" (
+		%dk_call% dk_fileVariables "%DKSCRIPT_DIR%/dkconfig.txt"
+	) else if EXIST "%DKBRANCH_DIR%/dkconfig.txt" (
+		%dk_call% dk_fileVariables "%DKBRANCH_DIR%/dkconfig.txt"
+	)
+	
+	rem %dk_call% dk_setLineNumbers "%~f0"
+	
+	if "%DKOFFLINE%" equ "1" (
+		%dk_call% dk_echo."%bg_yellow%%black%###### OFFLINE MODE ###### OFFLINE MODE ###### OFFLINE MODE ######%clr%"
+	)
+	
+	rem ############ Elevate Permissions ############
+	net session 1>nul 2>NUL && (echo.elevated permissions) || (echo.NO elevated permissions)
+	rem set "ENABLE_dk_elevate=1"
+	if "%ENABLE_dk_elevate%" neq "1" (goto skip_elevate)
+		net session 1>nul 2>nul && (goto skip_elevate)
+		if /i "%2" equ "elevated" (set "elevated=1")
+		if NOT DEFINED elevated (
+			set "elevated=1"
+			%dk_call% "%DKBATCH_FUNCTIONS_DIR_%dk_elevate.cmd" %DKSCRIPT_PATH%
+		)
+	:skip_elevate
+	
+
+	%dk_call% dk_logo
+
+	if "%DKSCRIPT_EXT%" neq ".cmd" if "%DKSCRIPT_EXT%" neq ".bat" (
+		echo. %red%ERROR: DKSCRIPT_EXT is NOT .cmd or .bat%clr%
+		%dk_call% dk_pause
+		%return%
+	)
+
+	rem ###### DKTEST() ######
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":DKTEST" && (
+		echo.
+		echo.%bg_magenta%%white%###### DKTEST MODE ###### %DKSCRIPT_FILE% ###### DKTEST MODE ######%clr%
+		echo.
+		%dk_call% dk_callFileLabel "%DKSCRIPT_PATH%" ":DKTEST"
+		echo.
+		echo.%bg_magenta%%white%######## END TEST ####### %DKSCRIPT_FILE% ######## END TEST #######%clr%
+		echo.
+		pause
+		%return%
+	) || (call )
+
+	rem ###### DKSCRIPT_NAME() ######
+	%dk_call% dk_fileContains "%DKSCRIPT_PATH%" ":%DKSCRIPT_NAME%" && (		
+		%dk_call% dk_callFileLabel "%DKSCRIPT_PATH%" ":%DKSCRIPT_NAME%"
+		%return%
+	) || (call )
+
+	call "%DKSCRIPT_PATH%"
+%endfunction%
+
+rem ################################################
+:dk_DKHTTP_VARS
+%function%
+	%pushStack%
+	if NOT DEFINED DKHTTP_DIGITALKNOB_DIR		(set "DKHTTP_DIGITALKNOB_DIR=http://aquawicket.com/DigitalKnob")
+	if NOT DEFINED DKHTTP_DKBRANCH_DIR			(set "DKHTTP_DKBRANCH_DIR=%DKHTTP_DIGITALKNOB_DIR%/Development")
+	if NOT DEFINED DKHTTP_DKBATCH_DIR			(set "DKHTTP_DKBATCH_DIR=%DKHTTP_DKBRANCH_DIR%/DKBatch")
+	if NOT DEFINED DKHTTP_DKBATCH_FUNCTIONS_DIR	(set "DKHTTP_DKBATCH_FUNCTIONS_DIR=%DKHTTP_DKBATCH_DIR%/functions")
+%endfunction%
+
+rem ################################################
+:dk_DKCACHE_DIR
+%function%
+	%pushStack%
+	if NOT EXIST "%DKCACHE_DIR%" (set "DKCACHE_DIR=%USERPROFILE:\=/%/.dk")
+	if NOT EXIST "%DKCACHE_DIR%" (mkdir "%DKCACHE_DIR:/=\%")
+	if EXIST "%DKCACHE_DIR%" (
+		if /i "%DKSCRIPT_NAME%" equ "DKBuilder" (
+			copy "%DKSCRIPT_PATH%" "%DKCACHE_DIR%" 1>nul 2>nul
+		)
+	)
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_EXT
+%function%
+	%pushStack%
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND & pause & %return% 256)
+	if NOT DEFINED DKSCRIPT_EXT		(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_EXT=%%~xZ")
+	if NOT DEFINED DKSCRIPT_EXT		(echo.DKSCRIPT_EXT:'%DKSCRIPT_EXT%' UNDEFINED & pause & %return% 258)
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_FILE
+%function%
+	%push%
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND & pause & %return% 266)
+	if NOT DEFINED DKSCRIPT_FILE	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_FILE=%%~nxZ")
+	if NOT DEFINED DKSCRIPT_FILE	(echo.DKSCRIPT_FILE:'%DKSCRIPT_FILE%' UNDEFINED & pause & %return% 268)
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_NAME
+%function%
+	%pushStack%
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND & pause & %return% 276)
+	if NOT DEFINED DKSCRIPT_NAME	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_NAME=%%~nZ")
+	if NOT DEFINED DKSCRIPT_NAME	(echo.DKSCRIPT_NAME:'%DKSCRIPT_NAME%' UNDEFINED & pause & %return% 278)
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_DIR
+%function%
+	%pushStack%
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND & pause & %return% 286)
+	if NOT EXIST "%DKSCRIPT_DIR%"	(for %%Z in (%DKSCRIPT_PATH%) do set "DKSCRIPT_DIR=%%~dpZ")
+	if EXIST 	 "%DKSCRIPT_DIR%"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:\=/%")
+	if "%DKSCRIPT_DIR:~-1%" equ "/"	(set "DKSCRIPT_DIR=%DKSCRIPT_DIR:~0,-1%")
+	if NOT EXIST "%DKSCRIPT_DIR%"	(echo.DKSCRIPT_DIR:'%DKSCRIPT_DIR%' NOT FOUND & pause & %return% 290)
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_ARGS
+%function%
+	%pushStack%
+	if NOT DEFINED DKSCRIPT_ARGS	(set DKSCRIPT_ARGS=%*)
+	if DEFINED DKSCRIPT_ARGS		(call set "DKSCRIPT_ARGS=%%DKSCRIPT_ARGS:*%~1 =%%")
+%endfunction%
+
+rem ################################################
+:dk_DKSCRIPT_PATH
+%function%
+	%pushStack%
+	if NOT DEFINED DKSCRIPT_PATH	(set "DKSCRIPT_PATH=%~1")
+	if DEFINED DKSCRIPT_PATH		(set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%")
+rem	if DEFINED DKSCRIPT_PATH		(call :readlink %DKSCRIPT_PATH% DKSCRIPT_PATH)
+	if NOT DEFINED DKSCRIPT_PATH	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' UNDEFINED & pause & %return% 357)
+	if NOT EXIST "%DKSCRIPT_PATH%"	(echo.DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND & pause & %return% 358)
+%endfunction%
+
+rem ################################################
+:dk_initFiles
+%function%
+	%pushStack%
+	if NOT DEFINED DKHome_DIR				(set "DKHome_DIR=%USERPROFILE:\=/%")
+	if NOT DEFINED DKHttp 					(set "DKHttp=http://aquawicket.com")
+	if NOT DEFINED DigitalKnob				(set "DigitalKnob=DigitalKnob")
+	if NOT DEFINED DigitalKnob_Dir 			(set "DigitalKnob_Dir=%DKHome_Dir%/%DigitalKnob%")
+	if NOT DEFINED DKStorage 				(set "DKStorage=DKStorage")
+	if NOT DEFINED DKStorage_Dir			(set "DKStorage_Dir=%DigitalKnob_Dir%/%DKStorage%")
+	if NOT DEFINED DKBranch 				(set "DKBranch=Development")
+	if NOT DEFINED DKBranch_Dir 			(set "DKBranch_Dir=%DigitalKnob_Dir%/%DKBranch%")
+	if NOT DEFINED DigitalKnob_bundle		(set "DigitalKnob_bundle=%DKStorage_Dir%/%DigitalKnob%.bundle")
+	if NOT DEFINED DigitalKnob_tar_gz 		(set "DigitalKnob_tar_gz=%DKStorage_Dir%/%DigitalKnob%.tar.gz")
+	if NOT DEFINED DKBatch 					(set "DKBatch=DKBatch")
+	if NOT DEFINED DKBatch_Dir 				(set "DKBatch_Dir=%DKBranch_Dir%/%DKBatch%")
+	if NOT DEFINED DKBatch_functions	 	(set "DKBatch_functions=%DigitalKnob%/%DKBranch%/%DKBatch%/functions")
+	if NOT DEFINED DKBatch_functions_Dir_ 	(set "DKBatch_functions_Dir_=%DKHome_Dir%/%DKBatch_functions%/")
+	if NOT DEFINED DKIMPORTS_DIR			(set "DKIMPORTS_DIR=%DKBranch_Dir%/3rdParty/_DKIMPORTS")
+	
+	if EXIST "%DKARCHIVE%" (
+		set "tar_exe=%SystemRoot%/System32/tar.exe"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd" 			(%tar_exe% -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_download.cmd)
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" 			(%tar_exe% -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_source.cmd)
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" 				(%tar_exe% -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_call.cmd)
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd" 			(%tar_exe% -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_return.cmd)
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd" 	(%tar_exe% -zxvf %DKARCHIVE% -C %DKBRANCH_DIR% DKBatch/functions/dk_printLastError.cmd)
+	) else (
+		set "curl_exe=%SystemRoot%/System32/curl.exe"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd"			"%curl_exe:/=\%" --silent --show-error --location --remove-on-error --create-dirs --output "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd" "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_download.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd"			"%curl_exe:/=\%" --silent --show-error --location --remove-on-error --create-dirs --output "%DKBATCH_FUNCTIONS_DIR_%dk_source.cmd" "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_source.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd"				"%curl_exe:/=\%" --silent --show-error --location --remove-on-error --create-dirs --output "%DKBATCH_FUNCTIONS_DIR_%dk_call.cmd" "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_call.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd"			"%curl_exe:/=\%" --silent --show-error --location --remove-on-error --create-dirs --output "%DKBATCH_FUNCTIONS_DIR_%dk_return.cmd" "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_return.cmd"
+		if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd"	"%curl_exe:/=\%" --silent --show-error --location --remove-on-error --create-dirs --output "%DKBATCH_FUNCTIONS_DIR_%dk_printLastError.cmd" "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/dk_printLastError.cmd"
+	)
+%endfunction%
+
+
+
+rem ################################################
+:DKCatchAll
+%function%
+	set "DKCatchAll=%USERPROFILE:\=/%/.dk/catchAll"
+	if DEFINED DKCatchAll (
+		if NOT exist "%DKCatchAll%" 	(mkdir "%DKCatchAll:/=\%")
+		if "%CD%" neq "%DKCatchAll%" 	(cd "%DKCatchAll%")
+	)
+%endfunction%
+
+rem ############################################################################
+rem # dk_callFileLabel(batch_file, :label, ...args)
+rem #
+rem #
+:dk_callFileLabel
+%function%
+%setlocal%
+	set "_file_=%~1"
+	set "_name_=%~n1"
+	set "_label_=%~2"
+	set "_label_=:%_label_::=%"
+	
+	set dk_allButFirst2Args=%*	
+	for /f "tokens=2*" %%a in ("!dk_allButFirst2Args!") do (
+		set dk_allButFirst2Args=%%b
+	)
+	set _args_=%dk_allButFirst2Args%
+	
+	rem echo %_file_% %_label_%
+	
+rem	%dk_call% dk_fileContains "%_file_%" "%_label_%" || (
+rem		%dk_call% dk_error "'%_file_%' does NOT contain '%_label_%'"
+rem		%return%
+rem	)
+	
+	set "dk_callFileLabel_TEMP=%TEMP%/%_name_%_%_label_::=%.cmd"
+
+	echo.@echo off>																			"%dk_callFileLabel_TEMP%"
+	echo.>>																					"%dk_callFileLabel_TEMP%"
+	echo.call %_label_%>>																	"%dk_callFileLabel_TEMP%"
+	echo.exit /b %%errorlevel%%>>															"%dk_callFileLabel_TEMP%"
+	echo.>>																					"%dk_callFileLabel_TEMP%"
+	echo.%_label_%>>																		"%dk_callFileLabel_TEMP%"
+	rem echo.setlocal enableDelayedExpansion>>												"%dk_callFileLabel_TEMP%"
+	echo.>>																					"%dk_callFileLabel_TEMP%"
+	echo.	%_file_:/=\% %_args_%>>															"%dk_callFileLabel_TEMP%"
+	echo.>>																					"%dk_callFileLabel_TEMP%"
+	echo.%%endfunction%%>>																	"%dk_callFileLabel_TEMP%"
+	echo.>>																					"%dk_callFileLabel_TEMP%"
+
+	call "%dk_callFileLabel_TEMP:/=\%"
+	del "%dk_callFileLabel_TEMP:/=\%"
+%endfunction%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rem ###### delayed expansion OFF ######
+rem if "!DE!" neq "" (
+rem 	title delayedExpansion OFF
+rem 	if NOT DEFINED exit (
+rem 		set exit=^
+rem 		call set err_level=%%errorlevel%%^&^
+rem 		call set prev_error=%%error_code%%^&^
+rem 		call set error_code=%%err_level%%^&^
+rem 		call set last_error=%%err_level%%^&^
+rem 		call set file=%%~nx0^&^
+rem 		call set func=%%~0^&^
+rem 		call set args=%%*^&^
+rem 		rem call echo.EXIT %%file%% %%func%%^(%%args%%^)^&^
+rem 		rem call echo.error_code = %%error_code%%^&^
+rem 		rem call echo.prev_error = %%prev_error%%^&^
+rem 		rem call echo.last_error = %%last_error%%^&^
+rem 		rem echo.^&^
+rem 		call exit /b %%error_code%%)
+rem 	if NOT DEFINED endfunction 	(call set "endfunction=%%exit%%")

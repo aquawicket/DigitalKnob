@@ -1,0 +1,8 @@
+############ wsl ############
+# https://learn.microsoft.com/en-us/windows/wsl
+# https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command
+# https://learn.microsoft.com/en-us/windows/wsl/install-manual
+# Troubleshooting:	https://learn.microsoft.com/en-us/windows/wsl/troubleshooting
+# Custom Distro:	https://learn.microsoft.com/en-us/windows/wsl/use-custom-distro
+
+wsl_X86_64_Import=https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi

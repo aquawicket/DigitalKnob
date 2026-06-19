@@ -1,16 +1,24 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 setlocal
- 
+
 ::------------------------------------------
 :: DEFINE MACROS
- 
+
 set callMacro=for /f "tokens=1-26" %%a in
- 
+
 set macroNum2Hex=do^
   setlocal enableDelayedExpansion^
   ^&(if defined hex set "hex=")^
@@ -117,14 +125,14 @@ set result
 
 ::==== Show timings =============================
 echo -------------------------
-echo:num2Hex macro time x 255 = %timeMacroNum2Hex%
-echo:         call time x 255 = %timeNum2Hex%
-echo:
-echo:toLower macro time x 255 = %timeMacroToLower%
-echo:         call time x 255 = %timeToLower%
-echo:
-echo:strLen  macro time x 255 = %timeMacroStrLen%
-echo:         call time x 255 = %timeStrLen%
+echo.num2Hex macro time x 255 = %timeMacroNum2Hex%
+echo.         call time x 255 = %timeNum2Hex%
+echo.
+echo.toLower macro time x 255 = %timeMacroToLower%
+echo.         call time x 255 = %timeToLower%
+echo.
+echo.strLen  macro time x 255 = %timeMacroStrLen%
+echo.         call time x 255 = %timeStrLen%
 pause
 exit /b
 
@@ -140,7 +148,7 @@ exit /b
       set /a "d=dec&15,dec>>=4"
       for %%d in (!d!) do set "hex=!map:~%%d,1!!hex!"
   )
-  endlocal&if "%~2" neq "" (set %~2=%hex%) else echo:%hex%
+  endlocal&if "%~2" neq "" (set %~2=%hex%) else echo.%hex%
 exit /b
 
 :strLen string len -- returns the length of a string
@@ -151,7 +159,7 @@ exit /b
     set /a "len|=1<<%%A"
     for %%B in (!len!) do if "!str:~%%B,1!"=="" set /a "len&=~1<<%%A"
   )
-  endlocal&if "%~2" neq "" (set /a %~2=%len%) else echo:%len%
+  endlocal&if "%~2" neq "" (set /a %~2=%len%) else echo.%len%
 exit /b
 
 :toLower strVar

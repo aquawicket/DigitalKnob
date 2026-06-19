@@ -1,10 +1,16 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
 CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${CMAKE_SOURCE_DIR}/functions/")
+if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+	cmake_policy(SET CMP0009 NEW)
+	file(GLOB_RECURSE DK.cmake "/DK.cmake")
+	list(GET DK.cmake 0 DK.cmake)
+	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
+	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
 endif()
-set(ENV{DKSCRIPT_PATH} "${CMAKE_SOURCE_DIR}/CMakeLists.txt")
 include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 include_guard()
+#########################################################################
 
 ### CMakeLists.txt for DKCMake ###
 ###
@@ -27,15 +33,15 @@ include_guard()
 ### *** building from the command line **
 ### DKCmake works a bit differenct than traditional CMake in that this CMakeFile.txt location is always used as the source directory.
 ### The app, platform and architecture are chosen by where the build directory is set to. For examples: say we want to build an app
-### in the DKCpp/apps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/digitalknob/Development ,
-### and the build directy will be set to /Users/username/digitalknob/Development/DKCpp/apps/MyApp/linux_x86_64/Debug. The set build directoy tells DKCMake everything 
+### in the DKCpp/apps directory called "MyApp" for linux x32_86 Debug.  The cmake source directory will be set here, /Users/username/DigitalKnob/Development ,
+### and the build directy will be set to /Users/username/DigitalKnob/Development/DKCpp/apps/MyApp/Linux_X86_64/Debug. The set build directoy tells DKCMake everything 
 ### it needs to know to begine to process, acuire all dependencies and build the project. 
 ###
-### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/digitalknob/Development/DKCpp/apps/DKBuilder/win_x86_64 -S C:/Users/username/digitalknob/Development
+### Example 2:  cmake -G "Visual Studio 17 2022" -A x64 -B C:/Users/username/DigitalKnob/Development/DKCpp/apps/DKBuilder/Windows_X86_64 -S C:/Users/username/DigitalKnob/Development
 ###
 ### Example 3: 
-###		cd /Users/username/digitalknob/Development/DKCpp/apps/DKTestAll/linux_x86_64/Release
-###		cmake -G "Unix Makefiles" /Users/username/digitalknob/Development
+###		cd /Users/username/DigitalKnob/Development/DKCpp/apps/DKTestAll/Linux_X86_64/Release
+###		cmake -G "Unix Makefiles" /Users/username/DigitalKnob/Development
 ###
 ###
 ### TODO: DKCMake options and variables 

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -55,8 +55,8 @@
 #include "DK/DKUtil.h"
 #include "DK/DKApp.h"
 
-#if DKAPP
+# if defined(__has_include) && __has_include("DKPlugins.h")
 #	include "DKPlugins.h"
-#endif
+# endif
 
 #endif

@@ -1,0 +1,6 @@
+############ jerryscript ############
+# https://jerryscript.net
+# https://github.com/jerryscript-project/jerryscript.git
+# https://github.com/jerryscript-project/jerryscript/archive/b7069350c2e52e7dc721dfb75f067147bd79b39b.zip
+
+jerryscript_Import=https://github.com/jerryscript-project/jerryscript/archive/b7069350c2e52e7dc721dfb75f067147bd79b39b.zip

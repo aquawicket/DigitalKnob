@@ -1,14 +1,14 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_clearCmakeCache){ $dk_clearCmakeCache = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_clearCmakeCache_ps1){ $dk_clearCmakeCache_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_clearCmakeCache()
 #
 #
 function Global:dk_clearCmakeCache() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 
-	# TODO: replace ${DIGITALKNOB_DIR} with $1 and call this functions while suplying the directory 
+	# TODO: replace ${DIGITALKNOB_DIR} with $1 AND call this functions while suplying the directory 
 	dk_call dk_info "Clearing CMake cache . . ."
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
 	cd "${DKBRANCH_DIR}"
@@ -21,7 +21,7 @@ function Global:dk_clearCmakeCache() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_clearCmakeCache
 }

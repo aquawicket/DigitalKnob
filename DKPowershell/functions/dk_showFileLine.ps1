@@ -1,14 +1,17 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_showFileLine){ $dk_showFileLine = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_showFileLine_ps1){ $dk_showFileLine_ps1 = 1; } else{ return; } #include guard
 
 if(!$MAX_LINES){ $global:MAX_LINES = 30 }
 ################################################################################
-# dk_showFileLine(filepath <match_string or line_num>)
+# dk_showFileLine(filepath, <match_string or line_num>)
 #
 #
 #
-function Global:dk_showFileLine($filepath, $goto) {
-	dk_debugFunc 2
+function Global:dk_showFileLine() {
+	dk_debugFunc 2;
+
+	$filepath = $($args[0]);
+	$goto	  = $($args[1]);
 
 	$lineno = $goto
 #	[ -n "${lastErrorFile-}" ] && _errfile="${lastErrorFile}"  || _errfile="$1"
@@ -30,7 +33,7 @@ function Global:dk_showFileLine($filepath, $goto) {
 #	fi
 #	
 	dk_call dk_echo " File: ${filepath}: ${lineno}"
-	dk_call dk_echo
+	dk_call dk_echo "\n";
 	
 	$half = $MAX_LINES / 2
 	$min = ($lineno - $half)
@@ -67,7 +70,7 @@ function Global:dk_showFileLine($filepath, $goto) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_showFileLine "../../README.md" "37"
 	dk_call dk_showFileLine $(__FILE__ 0) 5

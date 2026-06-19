@@ -1,22 +1,29 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_uptime(days hours minutes seconds)
-::#
-::# Args: %1 var to receive number of days of uptime (by ref)
-::#       %2 var to receive number of hours of uptime (by ref)
-::#       %3 var to receive number of minutes of uptime (by ref)
-::#       %4 var to receive number of seconds of uptime (optional, by ref)
-::#
-::#    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
-::# 
+rem ################################################################################
+rem # dk_uptime(days hours minutes seconds)
+rem #
+rem # Args: %1 var to receive number of days of uptime (by ref)
+rem #       %2 var to receive number of hours of uptime (by ref)
+rem #       %3 var to receive number of minutes of uptime (by ref)
+rem #       %4 var to receive number of seconds of uptime (optional, by ref)
+rem #
+rem #    REFERENCE: https://ritchielawrence.github.io/batchfunctionlibrary/
+rem #
 :dk_uptime
 setlocal enableExtensions
-    %dk_call% dk_debugFunc 4
 	
     set "c=net statistics work"
     set "t=2"
@@ -50,7 +57,8 @@ setlocal enableExtensions
     set /a "hh=100%hh%%%100"
     set /a "nn=100%nn%%%100"
     set /a "f=j*1440+hh*60+nn"
-    for /f "tokens=3-8 delims=/:M " %%a in ('%c%^|findstr/b /c:"Stat"') do (
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
+    for /f "tokens=3-8 delims=/:M " %%a in ('%c%^|%findstr.exe%/b /c:"Stat"') do (
         set "mm=%%a"
         set "dd=%%b"
         set "yy=%%c"
@@ -78,17 +86,27 @@ setlocal enableExtensions
     set /a "n%%=1440"
     set /a "hours=n/60"
     set /a "n%%=60"
-    endlocal & set "%1=%days%" & set "%2=%hours%" & set "%3=%n%" & set "%4=%ss%"
+	
+	:return
+    endlocal & (
+		set "dk_uptime_1=%days%"
+		set "dk_uptime_2=%hours%"
+		set "dk_uptime_3=%n%"
+		set "dk_uptime_4=%ss%"
+		set "findstr.exe=%findstr.exe%"
+	)
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    %dk_call% dk_uptime d h m s
-    echo System uptime: days:%d% hours:%h% minutes:%m% seconds:%s%
+    %dk_call% dk_uptime
+    echo System uptime: days:%dk_uptime_1% hours:%dk_uptime_2% minutes:%dk_uptime_3% seconds:%dk_uptime_4%
+	
+	%dk_call% dk_uptime
+    echo System uptime: days:%dk_uptime_1% hours:%dk_uptime_2% minutes:%dk_uptime_3% seconds:%dk_uptime_4%
 %endfunction%    

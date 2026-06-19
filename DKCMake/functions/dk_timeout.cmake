@@ -1,55 +1,65 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 
-##############################################################################
+#########################################################################
 # dk_timeout(seconds)
 # 
 #	Pause execution and wait for <enter> keypress to continue or amount of seconds to pass
 #
 function(dk_timeout) 
 	dk_debugFunc(0 1)
-	
 	dk_getArg(0 seconds 10)
 	
-	if("${seconds}" STREQUAL "")
-		set(seconds 10)
-	endif()
+#	if("${seconds}" STREQUAL "")
+#		dk_fatal("seconds:'${seconds}' is invalid")
+#		set(seconds 10)
+#	endif()
 	dk_assertVar(seconds)
 
-	###### CMD ######
-	dk_depend(cmd)
-	if(CMD_EXE)
-	#if(EXISTS "$ENV{COMSPEC}")
-		dk_validate(CMD_EXE "dk_CMD_EXE()")
-		dk_validate(TIMEOUT_EXE "dk_TIMEOUT_EXE()")
-		execute_process(COMMAND "${CMD_EXE}" /c "(${TIMEOUT_EXE} /t ${seconds})")
-		return()
-	endif()
+	dk_DKSHELL()
 	
+	###### CMD ######
+	if(CMD_SHELL)
+		dk_validate(timeout_exe "dk_depend(timeout_exe)")
+		set(command "(${timeout_exe} /t ${seconds})")
+		dk_echo("CMD> ${command}")
+		execute_process(COMMAND "${cmd.exe}" /c "${command}")
+		
 	###### POWERSHELL ######
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(EXISTS ${POWERSHELL_EXE})
-		execute_process(COMMAND ${POWERSHELL_EXE} -Command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
-		return()
-	endif()
+	elseif(POWERSHELL_SHELL)
+		set(command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
+		dk_echo("POWERSHELL> ${command}")
+		execute_process(COMMAND "${powershell_exe}" -Command "${command}")
 	
 	###### BASH ######
-	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(BASH_EXE)
-		execute_process(COMMAND ${BASH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
-		return()
-	endif()
+	elseif(BASH_SHELL)
+		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
+		dk_echo("BASH> ${command}")
+		execute_process(COMMAND "${bash_exe}" -c ${command})
 	
 	###### SH ######
-	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(SH_EXE)			
-		execute_process(COMMAND ${SH_EXE} -c "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
-		return()
-	endif()
+	elseif(SH_SHELL)
+		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
+		dk_echo("SH> ${command}")
+		execute_process(COMMAND "${sh_exe}" -c ${command})
 	
-	dk_fatal("dk_pause() failed:  cant find CMD, BASH, SH OR POWERSHELL")
+	###### NOT FOUND ######
+	else()
+		dk_error("Could not find cmd, powershell, bash or sh")
+	
+	endif()
 endfunction()
 
 
@@ -68,7 +78,7 @@ function(DKTEST)
 	
 	dk_timeout(1)
 	
-	dk_timeout("2")
+	dk_timeout(2)
 	
 	#set(timeA)
 	dk_timeout(${timeA})
@@ -77,7 +87,7 @@ function(DKTEST)
 	dk_timeout(${timeB})
 	
 	set(timeC 1)
-	dk_timeout("${timeC}")
+	dk_timeout(${timeC})
 	
 	set(timeD 2)
 	dk_timeout(timeD)

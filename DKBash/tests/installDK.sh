@@ -1,11 +1,11 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
-# wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
+# wget http://aquawicket.com/DigitalKnob/Development/installDK.sh
 # chmod sudo 777 installDK.sh
 # ./installDK.sh
 
 ###### install DK.sh ######
-export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
+export DKHTTP_DKBASH_FUNCTIONS_DIR="http://aquawicket.com/DigitalKnob/Development/DKBash/functions"
 export DKBASH_DIR="$PWD/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ ! -e ${DKBASH_DIR} ] && mkdir ${DKBASH_DIR}
@@ -25,7 +25,7 @@ dk_source dk_installGit
 dk_source dk_DKBRANCH_DIR
 dk_source dk_contains
 dk_source dk_DIGITALKNOB_DIR
-dk_source dk_host_triple
+dk_source dk_Host_Tuple
 dk_source dk_getExtension
 dk_source dk_removeExtension
 dk_source dk_mkdir
@@ -36,12 +36,12 @@ dk_source dk_pause
 dk_source dk_exit
 
 ###### Run Program ######
-dk_validate GIT_EXE "dk_installGit"
+dk_validate git_exe "dk_installGit"
 dk_validate DKBRANCH_DIR "dk_DKBRANCH_DIR"
 if [ ! -e "$DKBRANCH_DIR/.git" ]; then
-	$GIT_EXE clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
+	$git_exe clone https://github.com/aquawicket/DigitalKnob.git $DKBRANCH_DIR
 	cd $DKBRANCH_DIR
-	$GIT_EXE checkout $DKBRANCH
+	$git_exe checkout $DKBRANCH
 	echo "Digitalknob installation complete"
 else
 	echo "DigitalKnob is already installed at $DKBRANCH_DIR"

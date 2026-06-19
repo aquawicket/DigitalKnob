@@ -1,0 +1,35 @@
+.CodeMirror {
+  /* Set height, width, borders, and global font properties here */
+  font-family: monospace;
+  font-size: 9rem;
+  height: unset;
+  color: black;
+  direction: ltr;
+}
+.cm-fat-cursor div.CodeMirror-cursors {
+  z-index: unset;
+}
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler {
+  z-index: unset;
+}
+.CodeMirror-gutters {
+  z-index: unset;
+}
+.CodeMirror-gutter-wrapper {
+  z-index: auto;
+}
+.CodeMirror-gutter-background {
+  z-index: unset;
+}
+.CodeMirror-gutter-elt {
+  /* z-index: 0; */
+}
+.CodeMirror pre.CodeMirror-line-like {
+  z-index: unset;
+}
+.CodeMirror-linewidget {
+  z-index: unset;
+}
+div.CodeMirror-cursors {
+  z-index: unset;
+}

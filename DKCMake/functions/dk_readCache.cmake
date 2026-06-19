@@ -1,33 +1,44 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_readCache()
 #
 #
 function(dk_readCache)
 #	dk_debugFunc(3)
 	
-	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
-	if(NOT EXISTS "$ENV{DKCACHE_DIR}/DKBuilder.cache")
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
+	if(NOT EXISTS "${DKCACHE_DIR}/DKBuilder.cache")
 		dk_return()
 	endif()
-	#dk_unset(_target_app_)
-	#dk_unset(_target_triple_)
+	#dk_unset(Target_App_Cache)
+	#dk_unset(Target_Tuple_Cache)
 	#dk_unset(_target_type_)
 	
 	dk_echo("reading DKBuilder.cache...")
 	set(count 0)
 #	while read p; do
-#		[ "${count}" = "0" ] && _target_app_=$(builtin echo "${p}" | tr -d '\r')
-#		[ "${count}" = "1" ] && _target_triple_=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "0" ] && Target_App_Cache=$(builtin echo "${p}" | tr -d '\r')
+#		[ "${count}" = "1" ] && Target_Tuple_Cache=$(builtin echo "${p}" | tr -d '\r')
 #		[ "${count}" = "2" ] &&	_target_type_=$(builtin echo "${p}" | tr -d '\r')
 #		[ "${count}" = "3" ] && _target_env_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
-#	done < "$ENV{DKCACHE_DIR}"/DKBuilder.cache
+#	done < "${DKCACHE_DIR}"/DKBuilder.cache
 
-#	file(STRINGS "$ENV{DKCACHE_DIR}/DKBuilder.cache" lines)
+#	file(STRINGS "${DKCACHE_DIR}/DKBuilder.cache" lines)
 #	foreach(line ${lines})
 #		if(${count} EQUAL 0)
 #			set(${ARGV0} ${line})
@@ -41,10 +52,10 @@ function(dk_readCache)
 #		math(EXPR count "${count}+1")
 #	endforeach()
 	
-	#dk_echo("target_app = ${target_app}, target_triple = ${target_triple}, target_type = ${target_type}")
-	#set(${target_app}		"${target_app}")
-	#set(${target_triple} 	"${target_triple}")
-	#set(${target_type}		"${target_type}")
+	#dk_echo("Target_App = ${Target_App}, Target_Tuple = ${Target_Tuple}, Target_Type = ${Target_Type}")
+	#set(${Target_App}		"${Target_App}")
+	#set(${Target_Tuple} 	"${Target_Tuple}")
+	#set(${Target_Type}		"${Target_Type}")
 endfunction()
 
 
@@ -53,8 +64,8 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	#dk_readCache(target_app target_triple target_type)
-	#dk_printVar(target_app)
-	#dk_printVar(target_triple)
-	#dk_printVar(target_type)
+	#dk_readCache(Target_App Target_Tuple Target_Type)
+	#dk_printVar(Target_App)
+	#dk_printVar(Target_Tuple)
+	#dk_printVar(Target_Type)
 endfunction()

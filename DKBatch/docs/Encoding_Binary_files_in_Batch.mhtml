@@ -1,0 +1,992 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://techref.massmind.org/techref/dos/binbat.htm
+Subject: Encoding Binary files in Batch files
+Date: Sat, 1 Nov 2025 06:14:58 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----"
+
+
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/html
+Content-ID: <frame-53F8BD45ABA51E1AF204FBFCF7C970D1@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://techref.massmind.org/techref/dos/binbat.htm
+
+<!DOCTYPE html><html><head><meta http-equiv=3D"Content-Type" content=3D"tex=
+t/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D=
+"cid:css-576aba30-c725-49a3-9c0c-73292a131d36@mhtml.blink" /><link rel=3D"s=
+tylesheet" type=3D"text/css" href=3D"cid:css-93eb4241-2f78-41fe-9a96-8dd2ff=
+2c7520@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=3D"ci=
+d:css-805723b8-ca03-45ef-8d62-5182cc151254@mhtml.blink" />
+  <!-- Created with AOLpress/2.0 -->
+  <!-- AP: Created on: 20-May-2004 -->
+  <!-- AP: Last modified: 26-May-2004 -->
+  <title>Encoding Binary files in Batch files</title>
+
+
+
+ =20
+  <link rel=3D"stylesheet" type=3D"text/css" href=3D"http://techref.massmin=
+d.org/js/phone.css" media=3D"only screen and (max-width: 480px)">
+   <meta name=3D"viewport" content=3D"initial-scale=3D1, width=3Ddevice-wid=
+th">
+  <link href=3D"http://techref.massmind.org/js/googiespell.css" rel=3D"styl=
+esheet" type=3D"text/css" media=3D"all">
+ =20
+ =20
+ =20
+ =20
+  <meta name=3D"keywords" content=3D"Encoding Binary files in Batch files">
+  <meta name=3D"description" content=3D"Encoding Binary files in Batch file=
+s">
+</head>
+<body>
+
+<a href=3D"http://techref.massmind.org/techref/indexok.asp?spider=3D45962.1=
+347800926"><img src=3D"http://techref.massmind.org/images/null.gif" align=
+=3D"LEFT" height=3D"1" width=3D"1" border=3D"0" alt=3D"please dont rip this=
+ site"></a>
+<h1>
+  Encoding Binary files in <a href=3D"http://techref.massmind.org/techref/d=
+os/Commands.htm">Batch</a> files
+</h1>  <p align=3D"RIGHT"></p><p align=3D"RIGHT" width=3D"300"></p>
+
+<p>
+<i>The .mac source code files are for Ass486; Herbert Kleebauer's 68K-like
+assember</i>
+</p><p>
+To include com programs into batch files you have to write programs which
+only uses opcodes in the range 0x20 to 0x7e (without &lt; &gt; | % ^ &amp;
+" !). Small programs can be directly coded using the processor opcode table=
+.
+Two examples are ech and myinput:
+</p><p>
+ech.com is similar to the echo command. It writes the command line after
+the first " till the penultimate character to stdout (without an trailing
+CRLF) <a href=3D"http://techref.massmind.org/techref/dos/ech_mac.htm">ech.m=
+ac</a>
+</p><p>
+  </p><hr>
+<pre>@echo off
+echo XP,;P_,EP0Ex0Ez0Em3Em-ZBP(Eiu![j@_YQ2M@53#@CI~.8'uxCISZ[SC5.bM!C&gt;ec=
+h.com
+ech.com "line with &lt;&gt;|^&amp;%"&gt;tmp.txt
+ech.com "but no CRLF"&gt;&gt;tmp.txt
+del ech.com
+</pre>
+<p>
+  </p><hr>
+<p>
+myinput.com assigns a keyboard input to batch variable
+<a href=3D"http://techref.massmind.org/techref/dos/myinput_mac.htm">myinput=
+.mac</a>
+</p><p>
+  </p><hr>
+<pre>@echo off
+echo BATCH_INPUT___hgQX-PPP_XPPP E#HH0E50EG0Ef0Ehs&gt;myinput.com
+echo myinput.bat hoAX5@@PZYh@xX5@D3!r/P[WX,b,-PZh&gt;&gt;myinput.com
+echo X3!X2ErP,{,{PYX4=3D0ErWX,j,-PZh@@X3!=3Dset input&gt;&gt;myinput.com
+echo Enter name:
+myinput.com
+call myinput.bat
+del myinput.com
+del myinput.bat
+echo You entered %input%
+</pre>
+<p>
+  </p><hr>
+For larger programs (more than a few bytes) it is simpler to use a program
+to convert a normal com program to an ascii-only program. The batch below
+does this job. NOTE: you must assemble your com program with ORG=3D0x178 be=
+cause
+the first 120 bytes are needed for the decoding routine which is inserted
+by the convert program. Six bits of the original com program are coded in
+one ascii-byte, so your program must not exceed 47 kbyte. The decoding rout=
+ine
+of the convert program is (just as MYINPUT and ECH) directly written with
+ascii-only opcodes, the rest of the program is a normal com program, conver=
+ted
+by itself to ascii only bytes.=20
+  <hr>
+<pre>rem - save the lines below as CONVERT.BAT
+rem - write a COM program and assemble it with ORG=3D0x178 (PROG.COM)
+rem   (you must not use the standard ORG=3D0x100 for this com programs!!!!)
+rem - enter: CONVERT PROG.COM PROG.BAT
+rem - the BATCH file PROG.BAT contains an encoded form of PROG.COM
+
+@echo off
+echo Bj@jzh`0X-`/PPPPPPa(DE(DM(DO(Dh(Ls(Lu(LX(LeZRR]EEEUYRX2Dx=3D&gt;bat.co=
+m
+echo 0DxFP,0Xx.t0P,=3DXtGsB4o@$?PIyU WwX0GwUY Wv;ovBX2Gv0ExGIuht6&gt;&gt;ba=
+t.com
+echo ??wQ@tyM?WxI?@zA=3D`Lbw?y_y~?_xA[bz?B_L??oAN`_H?e?as?Fx?pkz?&gt;&gt;ba=
+t.com
+echo B_}A[aIA]b@MCs?A_rVAgr?\gBGpangV_~r?TO?wGJLy?hKxAG@z?G`L?K&gt;&gt;bat.=
+com
+echo K?wQO`LRaRPdwA_by??cxA_bL?@O=3DEt`x?y_z?P_L?@oXZ`SdBW\ngbTiA&gt;&gt;ba=
+t.com
+echo _Syi?To_gD_lWPOOnSOOOTg`ODgDCDgLCDgNCDggCDgrKDgtKDgWKDYdKT&gt;&gt;bat.=
+com
+echo \QQTDDDTQXTTCqWP}=3Dw@s`aTnbmSILl@gbdTo_n@EwCTokO@mwWDOosPW=3D&gt;&gt;=
+bat.com
+echo kOrFsTnsAP~c?@xHOTV_TPoWvDTvFTV_XPnzuPWAuTuFqSwDoStHFTusgD&gt;&gt;bat.=
+com
+echo a}}Oms`DlnbTdILOngbT}o_?`a}SbmsPLlnD??I??~?OBA@TEDCTHGFTKJ&gt;&gt;bat.=
+com
+echo ITNMLTQPOTTSRTWVUTZYXTp\[D`_1TcbaTfedTihgTlkjTonmTrqpTutsT&gt;&gt;bat.=
+com
+echo xwvT=3DzyD?}=3DD????}}??s`aTnbmSILl@gbdTg_nP0&gt;&gt;bat.com
+bat.com &lt;%1 &gt;%2
+del bat.com
+</pre>
+<p>
+  </p><hr>
+An example for a program generated with CONVERT is echoo. echoo is similar
+to echo, but you can also include binary characters by specifying the hex
+code:=20
+  <hr>
+<pre>@echo off
+echo Bj@jzh`0X-`/PPPPPPa(DE(DM(DO(Dh(Ls(Lu(LX(LeZRR]EEEUYRX2Dx=3D&gt;echoo.=
+com
+echo 0DxFP,0Xx.t0P,=3DXtGsB4o@$?PIyU WwX0GwUY Wv;ovBX2Gv0ExGIuht6&gt;&gt;ec=
+hoo.com
+echo ?@xAyJHmH@=3Da?}VjuN?_LEkS?`w`s_{OCIvJDGEHtc{OCIKGMgELCI?GGg&gt;&gt;ec=
+hoo.com
+echo EL?s?WL`LRBcx=3Dk_K?AxVD?fCo?Cd?BLDs0&gt;&gt;echoo.com
+
+echoo This line contains $3c $3e $7c $25 and $24  $0d$0a
+echoo           All leading spaces are removed=20
+echoo (to get identical results in DOS/Win9x/NT/2000)$0d$0a
+echoo $20       insert a explitcit space ($2420) if you want leading spaces=
+.=20
+del echoo.com
+</pre>
+<p>
+  </p><hr>
+As an other example you can use this method to generate a hex-to-binary con=
+verter
+with ascii-only opcodes. This allows you to include any binary file into
+a batch file. h2b.com has a string as a parameter. Any line in stdin, start=
+ing
+with this string, is converted from hex to binary and written to stdout.
+  <hr>
+<pre>@echo off
+if exist %0.bat %0.bat
+echo Bj@jzh`0X-`/PPPPPPa(DE(DM(DO(Dh(Ls(Lu(LX(LeZRR]EEEUYRX2Dx=3D&gt;h2b.co=
+m
+echo 0DxFP,0Xx.t0P,=3DXtGsB4o@$?PIyU WwX0GwUY Wv;ovBX2Gv0ExGIuht6&gt;&gt;h2=
+b.com
+echo ?@}I{uNWEF~NFAa_Lj@KLtH]~CEvEFIKbAa_wN@SuNS`{ECCttasae~BHM&gt;&gt;h2b.=
+com
+echo AcjFnvnHAwrvx[}gIKDw??Frt\gqj~{?s?csIsqo{O_KtBve{Sx{nB{Eu@&gt;&gt;h2b.=
+com
+echo fq`tkfk?e@oKCA_?_E@?WxAs?agBwRjnLK?s@w`G`LKLAcyA?@xAsZpk`L&gt;&gt;h2b.=
+com
+echo ~KxlqLct@vAc_A_yBJ@xAGZp?o?sBXq`LR@xUrFQt=3DA_E?B?~rB?~r0&gt;&gt;h2b.c=
+om
+
+h2b "::f1" &lt;%0 &gt;bild1.gif
+h2b "::f2" &lt;%0 &gt;bild2.gif
+h2b "::f3" &lt;%0 &gt;demo.com
+del h2b.com
+
+:: hex dump of bild1.gif
+::f1 4749463839614b001100a20000140b00fffbf7ff6600fffcfa0000000000
+::f1 000000000000002c000000004b0011000003a228badcfe30ca0901bd386b
+::f1 66b7ff5f078e64242a419aa2eabaa84cebb2731d2cc39357f1cd0ab306ec
+::f1 e503fa5cc8e26cc06c30778d53f0e758d988c6c715f7643ca10ae9902abc
+::f1 6db35372faebed86cb4399d23c6f917b32079bdb7c576169687354816702
+::f1 7b0a887e5a747f79593f8583897d7c0f6258695b9b479d58893a26704976
+::f1 909041a493a61e2725ae25adafb2acb3b52100b8b9babbbcbdbebfc0c1bf
+::f1 09003b
+
+:: hex dump of bild2.gif
+::f2 47494638396121001000b30000fffdfbff6702ffc39aff9e5effdfcaffef
+::f2 e5fff8f4ffffffc0c0c00000000000000000000000000000000000000000
+::f2 0021f90401000008002c0000000021001000000463f0c849abbd385f3384
+::f2 fe9911041e2811432a1499300e00388c743010d83ce26deddf16110d78d1
+::f2 f96a1dd6c485e4518ed0a1406044962451a80aa5751eaadd0a73a8a48c8f
+::f2 83f2a480548bd1ee892e0d2a4c05841886793581847d7e1f007882862611
+::f2 003b
+
+:: hex dump of an executable
+::f3 fcbe3301bf4301b95000b020f3aa89fab91000f3a4bbffffb93c00b409cd
+::f3 21b40bcd2108c0750801dae2f0f7dbebe9b44ccd21707265737320616e79
+::f3 206b65790d0a24
+</pre>
+<p>
+  </p><hr>
+A further method is, to make a dual executable file. Such a file is a valid
+batch program and a valid com program. You can generate such files with the
+following batch:
+<pre>rem - save the lines below as CONVERT.BAT
+rem - write a COM program and assemble it with ORG=3D0x200 (PROG.COM)
+rem   (you must not use the standard ORG=3D0x100 for this com programs!!!!)
+rem - enter: CONVERT PROG.COM PROG.BAT
+rem - the BATCH file PROG.BAT contains an encoded form of PROG.COM
+
+@echo off
+echo Bj@jzh`0X-`/PPPPPPa(DE(DM(DO(Dh(Ls(Lu(LX(LeZRR]EEEUYRX2Dx=3D&gt;ube.co=
+m
+echo 0DxFP,0Xx.t0P,=3DXtGsB4o@$?PIyU WwX0GwUY Wv;ovBX2Gv0ExGIuht6&gt;&gt;ub=
+e.com
+echo ??wQ@tyM@CxA?@zA=3D`Lbw??`y~?_xB{_z?B_L??oAN`_H?e?as?Fx?pkz?&gt;&gt;ub=
+e.com
+echo B_}A{bIB}_@MCs?A_rVAgr?\gBGpangV_~r?TO?wGJxy?xBxAG@z?G`L?K&gt;&gt;ube.=
+com
+echo K?wQO`LRaRPdwB?`y??cxB?`L?@O=3DEt`x??`z?F_L?@oXZ`S?BW\gBDTN_&gt;&gt;ub=
+e.com
+echo NPLEEDyyI?M_mOhqNT_brD___?gS_S_rhD_rhDa_`P`mhT_xqDlnbTdg_S&gt;&gt;ube.=
+com
+echo dc`T_mq@mnCTLsfCyyI?M_mOteNT__m@___?cd_S_shDdgsThe_SsrqTrp&gt;&gt;ube.=
+com
+echo _?hk_SrdmTmh_Sgs_S_rhDkheTLmd@yyI?M_mODcNP?iWTtyiD?`oOOgsO&gt;&gt;ube.=
+com
+echo OOOT`OOT`CgChCgCjCgCGCgSRKgSTKgSwKgCnKgCDKgSQQYTDD\TXTDTqW&gt;&gt;ube.=
+com
+echo QDOWCTyIL?_my?oWMDEWCTokO@gwWDOssPW=3DkOrJsTysE@sSsDc?TDHO~S&gt;&gt;ub=
+e.com
+echo `JxDWUVTVFoS_XTDzUVDAUnTFqWPDoUPHFWTsgtTILk?myy?Lo_??~IOBA&gt;&gt;ube.=
+com
+echo @TEDCTHGFTKJITNMLTQPOTTSRTWVUTZYXTp\[D`_1TcbaTfedTihgTlkjT&gt;&gt;ube.=
+com
+echo onmTrqpTutsTxwvT=3DzyD?}=3DD????IL??myy?my_?0&gt;&gt;ube.com
+ube.com &lt;%1 &gt;%2
+del ube.com
+</pre>
+<p>
+  </p><hr>
+As an example, here is a binary executable batch header (source code:
+<a href=3D"http://techref.massmind.org/techref/dos/echadd_mac.htm">echadd.m=
+ac</a>) which supports 2 functions:
+<p>
+<tt>e (echo) and + (increment)</tt>
+</p><p>
+The increment function increments a decimal number by 1.
+</p><p>
+<tt>example: ube.com +123</tt>
+</p><p>
+will write 124 to stdout (note: no space allowed after + and after the numb=
+er)
+</p><p>
+The echo function is similar to the standard echo command. The text after
+the echo command is written to stdout. No &lt;CR&gt; &lt;LF&gt; is appended=
+.
+You can output any byte by writing the hex value ($3c for &lt; or $0d for
+&lt;CR&gt; ...). $t writes the current date in the form yymmdd to stdout.
+After writing the command line text, echo reads from stdin and writes to
+stdout until a &lt;CR&gt; or &lt;EOF&gt; is read. This byte transfer from
+stdin to stdout can be modified by subcommands:
+</p><ul>
+  <li>
+    l converts all characters to lower case
+  </li><li>
+    u converts all characters to upper case
+  </li><li>
+    _ converts all spaces to _
+  </li><li>
+    . will copy until the first . (.. until the second . and so on)
+  </li><li>
+    : will copy after the first . (:: after the second . and so on)
+</li></ul>
+<p>
+The @ must be the first character in the batch file and there must be no
+trailing spaces in the first 13 lines.=20
+  </p><hr>
+<pre>@EChO OFF
+::. NOrisc     This is a binary com header. Don't
+::. NOfun      edit the first 13 lines in this file.
+::. NO$EXj@jz50!@4(PPPPPPa(D!(D)(D+(DH(LS(LU(L8(L/(LEZRR]EEEUYRX2DXP
+::. NX0DXFP,0Xx(t4P,=3DXtKsF4:tT4U@$?PIyK!WVX0GWUY WV;oVBX2GV0EXGIuht,
+::. ?A}I{uNWNN}VINw`{ECCus_ssd{Sj{_?B@spNxH]HTw`}@qr?C}bux{OCEFKNMoS
+::. gqx=3DB@GoBYyE?@xAuwNTECIQtk{SE}CK{B_?CttD_M}B1{BO}CtpB`E?tm{OE}CK
+::. {Ba?CtyCaM}B_{B?NMt\ICwd{ECCwtcCs{?QNltPisEHH`LbuuGN@BpozGgbgBYp
+::. G?PaKgonOG?w?FgJBYyE?ExA?WgJ?@xAgCj~g?Wqg?Tqj?Fqzgx]dq?Ss?H[Y_`X
+::. I{B?{osLRsLS_EuBs~B[IxUCq`{Sy{OOjKvp@{GO{Eq@AvYDu_soB`E?Es~Ft_{O
+::. 1oAWaEuBs~B[Ix\Ctm{OE}tMjBaom{nA}LtpBaM?EFtpBaE?]j?m?_gBgXjzB?So
+::. ????quuBoDB?FHoGpBBDcB?1~sIGLZp{aB`ksBY`@z?H`L?KINBf?Ecc?_KbxVkV
+::. C?Bw_?f{_?Co_?Br0
+
+REM ***************** WIN98 batch***************************
+REM This batch file will read a word from keyboard,  convert
+REM all filenames with this extention to upper case, replace
+REM spaces in the filename by _ and insert the current  date=20
+REM in font of the new filename=20
+
+if [%1]=3D=3D[] goto main
+_ &lt;nul e $t%1|_ &gt;&gt;__.bat eu_ $0d$0aren %1=20
+goto ende
+
+:main
+if exist %0 copy %0 _.com
+if exist %0.bat copy %0.bat _.com
+
+_ &lt;nul e enter file extention:
+_ &gt;__.bat e set ext=3D
+call __.bat
+del  __.bat
+LFNFOR on
+for %%i in (*.%ext%) do call %0 "%%i"
+LFNFOR off
+
+del _.com
+echo check __.bat and execute it
+REM call __
+
+:ende
+
+</pre>
+<p>
+  </p><hr>
+<p>
+CM3 (dissassembly <a href=3D"http://techref.massmind.org/techref/dos/cm3_tx=
+t.htm">CM3.txt</a>)
+</p><p>
+
+See also:
+</p><ul>
+   <li>
+<a title=3D"JMN-EFP-786" name=3D"44172.8594444444" href=3D"http://www.virja=
+code.com/experimental3/" target=3D"_top">
+http://www.virjacode.com/experimental3/</a>=20
+TPK Healy has made one file that can run on DOS 16, Win 32 (will also run o=
+n Win 64), Linux arm or x86 32 or 64. The program is really a script (using=
+ the above technique and some bash scripting) to unpack (from itself) a cop=
+y of the C program compiled under the matching OS. The file script.txt is t=
+he base, and the compiled programs are added to it via the linux commands: =
+<pre>cat prog_dos16bit.exe | xxd -p \
+| awk '{ print \" ::dos16bit \" $s \"\\r\" }' &gt;&gt; script.txt
+cat script.txt prog_mswin_x86_32.exe prog_x86_32 prog_x86_64 \
+prog_arm32 prog_arm64 &gt; ftsha256.bat</pre>
+Once that is done, the offsets in the linux section must be updated to poin=
+t to the start and encode the length of each program.=20
+
+<!-- 44172.8594444444 EOR --><a style=3D"color:#AF4040" title=3D"Click to l=
+ogin and reply" rel=3D"nofollow" href=3D"http://techref.massmind.org/techre=
+f/login/default.asp?req=3D/techref/update.asp%3Fact=3Dreply%26url=3D/Techre=
+f/dos/binbat.htm%26id=3D44172.8594444444">+</a>
+
+  </li><li>
+    <a href=3D"http://users.cybercity.dk/~bse26236/">http://users.cybercity=
+.dk/~bse26236/</a>
+</li></ul>
+<p>
+</p><p>
+Parse a string
+</p><pre>:: Parse a string (%str%)
+@echo off
+
+:: Set string to parse
+set str=3Dsome text
+
+echo `h}aXP5y`P]4nP_XW(F4(F6(F=3D(FF)FH(FL(Fe(FR0FTs*}`A?+,&gt; %temp%.\t1.=
+com
+echo fkOU):G*@Crv,*t$HU[rlf~#IubfRfXf(V#fj}fX4{PY$@fPfZsZ$:K0&gt;&gt; %temp=
+%.\t1.com
+echo 6$-tH[fHzt'fZJtxP'7:p*_q5b*RJo09Mleb\f7+V(52O-f,`u/\vm(]&gt;&gt; %temp=
+%.\t1.com
+echo e.iv+y7(-W:ldwn0V.-Z0I6l3)@f2r=3D?rV+5lYzH]'=3Dv\{)(c\#&gt;&gt; %temp%=
+.\t1.com
+:loop
+if "%str%"=3D=3D"" goto endloop
+%temp%.\t1.com %str%&gt; %temp%.\t2.bat
+call %temp%.\t2.bat str c
+
+:: Right here, %C% will represent each character
+:: from the parsed string
+echo "%c%"
+
+goto loop
+:endloop
+for %%? in (t1.com t2.bat) do del %temp%.\%%?
+</pre>
+<p>
+<a title=3D"JMN-EFP-786" name=3D"38129.9706134259">Process each line of a f=
+ile</a>
+</p><pre>@echo off
+if "%1"=3D=3D"GoTo" goto %2
+
+echo `h}aXP5y`P]4nP_XW(F4(F6(F=3D(FF)FH(FL(Fe(FR0FTs*}`A?+,&gt; %temp%.\pfx=
+.com
+echo fkOU):G*@Crv,*t$HU[rlf~#IubfRfXf(V#fj}fX4{PY$@fPfZsZ$:KrM$&gt;&gt; %te=
+mp%.\pfx.com
+echo 00rqdO1iI$W?DAj{?_@EuF)1F8b1j$MC?Be.]tI:PAJrff764F0T'}$$5]&gt;&gt; %te=
+mp%.\pfx.com
+echo 7$MG{Fdl$@i*JtSA$$5d80rL@bB=3Di{A$'FJDbqJ2Djw}D{1~Eu6=3D?rV+5l&gt;&gt;=
+ %temp%.\pfx.com
+echo YzHw8TKc3O}@A$$$)$#&gt;&gt; %temp%.\pfx.com
+:: filename.ext is the file to be processed
+%temp%.\pfx.com &lt; filename.ext &gt; %temp%.\t1.bat
+set P=3Dcall %0 GoTo process
+:: Set below the variable name where the string should be saved
+call %temp%.\t1.bat LINE
+set P=3D
+del %temp%.\t1.bat
+goto eof
+
+:process
+:: On this label, each line from the file to be processed will be
+:: once represented by a variable (its name is defined above)
+echo LINE=3D%LINE%
+goto eof
+
+:eof
+</pre>
+<!-- 38129.9706134259 EOR --><a style=3D"color:#AF4040" title=3D"Click to l=
+ogin and reply" rel=3D"nofollow" href=3D"http://techref.massmind.org/techre=
+f/login/default.asp?req=3D/techref/update.asp%3Fact=3Dreply%26url=3D/Techre=
+f/dos/binbat.htm%26id=3D38129.9706134259">+</a>
+<p>
+</p><p>
+See also:
+</p><ul>
+  <li>
+    <a href=3D"http://www.infionline.net/~wtnewton/batch/conv2bat.htm">http=
+://www.infionline.net/~wtnewton/batch/conv2bat.htm</a>
+    (cached <a href=3D"http://techref.massmind.org/techref/dos/conv2bat.htm=
+">20040524</a>)
+</li></ul>
+<hr><table><tbody><tr><td><small>file: /Techref/dos/binbat.htm, <span id=3D=
+"lt"> NaNKB (1 imgs) in 0.215s is NaNKBps</span>, updated: 2020/12/10 10:59=
+, local time: 2025/11/1 03:14,=20
+
+</small><form action=3D"http://techref.massmind.org/techref/search.asp#resu=
+lt" method=3D"POST">
+<div id=3D"upperright" style=3D"position:absolute;top:0;right:0;width:200px=
+;text-align:right;color:gray;background-color:#FFFFFF;border-width:2px;"><s=
+mall><sup>
+<a style=3D"color:#AF4040;text-decoration:none;" title=3D"Go to the top pag=
+e" href=3D"http://techref.massmind.org/techref/index.htm">TOP</a>=20
+<a style=3D"color:#AF4040;text-decoration:none;" title=3D"Monthly Change Lo=
+g for the site" href=3D"http://techref.massmind.org/techref/new202511.txt">=
+NEW</a>
+
+<a style=3D"color:#AF4040;text-decoration:none;" title=3D"More pages like t=
+his." href=3D"http://techref.massmind.org/techref/search.asp?from=3D%2FTech=
+ref%2Fdos%2Fbinbat%2Ehtm">MORE</a>=20
+<a style=3D"color:#AF4040;text-decoration:none;" title=3D"I'm willing to pa=
+y for help, please refer me to a qualified consultant" href=3D"mailto:webma=
+ster@massmind.org?subject=3DI%20need%20someone%20to%20help%20me%20with%3A%2=
+0">
+HELP</a>
+<a style=3D"color:#AF4040;text-decoration:none;" title=3D"Advanced search" =
+href=3D"http://techref.massmind.org/techref/search.asp">
+FIND:</a>&nbsp;
+<input style=3D"background-color:transparent;padding:0px;border-width:1px;f=
+ont-size:small;border-style:solid;border-color:#AF0000" title=3D"Free text =
+search" type=3D"TEXT" id=3D"search" name=3D"qu" size=3D"20" maxlength=3D"10=
+0" value=3D"Search">
+=20
+
+</sup></small></div>
+</form>
+<div id=3D"upperleft" style=3D"position:absolute;top:0;left:0;color:gray;fi=
+lter:progid:DXImageTransform.Microsoft.Alpha(opacity=3D75);"><small>
+<a href=3D"http://techref.massmind.org/techref/indexok.asp?top"> </a>
+<sup>74.222.120.68:<a style=3D"color:#AF4040" rel=3D"nofollow" href=3D"http=
+://techref.massmind.org/techref/login/default.asp?req=3D403%3Bhttp%3A%2F%2F=
+techref%2Emassmind%2Eorg%3A80%2Ftechref%2Fdos%2Fbinbat%2Ehtm">LOG IN</a></s=
+up></small></div><div align=3D"CENTER" style=3D"position:absolute;top:0;lef=
+t:20%;width:40%"><div id=3D"fb-root" class=3D" fb_reset"><font color=3D"#FF=
+0000"><b>=C2=A92025 <a title=3D"Why does RIP/GRAB/SPIDERing lead to ads and=
+ sponsors? Click here." href=3D"http://techref.massmind.org/dontripthissite=
+.htm" style=3D"color:red">PLEASE DON'T RIP!</a> <a href=3D"http://techref.m=
+assmind.org/techref/siteclosing.htm">This site will close without warning</=
+a>.</b></font> <div style=3D"position: absolute; top: -10000px; width: 0px;=
+ height: 0px;"><div></div></div></div>
+</div>
+
+</td></tr>
+</tbody></table>
+<hr><table bgcolor=3D"#F0F0F0"><tbody><tr><td>&nbsp;</td><td><small>=C2=A92=
+025 These pages are served without commercial sponsorship. (No popup ads, e=
+tc...).Bandwidth abuse increases hosting cost forcing sponsorship or shutdo=
+wn. This server aggressively defends against automated copying for any reas=
+on including offline viewing, duplication, etc... Please respect this requi=
+rement and <font face=3D"Comic Sans MS" color=3D"#FF0000">DO NOT RIP THIS S=
+ITE</font>. <a href=3D"http://techref.massmind.org/dontripthissite.htm">Que=
+stions?</a><div id=3D"fb-root">Please <i>DO</i> link to this page! <a href=
+=3D"http://digg.com/submit?phase=3D2&amp;url=3Dhttp://techref.massmind.org/=
+techref%2Fdos%2Fbinbat%2Ehtm&amp;title=3DEncoding+Binary+files+in+Batch+fil=
+es">Digg it!</a>&nbsp;/&nbsp;<a title=3D"Suggest to Make!" href=3D"http://m=
+akezine.com/cs/user/create/link?x-t=3Dsuggestlink.form&amp;url=3Dhttp%3A%2F=
+%2Ftechref%2Emassmind%2Eorg%2Ftechref%2Fdos%2Fbinbat%2Ehtm&amp;description=
+=3DEncoding+Binary+files+in+Batch+files&amp;title=3Dtechref%2Emassmind%2Eor=
+g">MAKE!</a><fb:like href=3D"http://techref.massmind.org/techref/dos/binbat=
+.htm" send=3D"false" layout=3D"button_count" width=3D"450" show_faces=3D"tr=
+ue" action=3D"recommend" font=3D""></fb:like></div><br><tt>&lt;A HREF=3D"ht=
+tp://techref.massmind.org/techref/dos/binbat.htm"&gt; Encoding Binary files=
+ in Batch files&lt;/A&gt;</tt></small></td></tr></tbody></table><hr>
+<div style=3D"float:left;width:600px">
+<a name=3D"form"> </a>
+<form action=3D"http://techref.massmind.org/techref/update.asp" method=3D"P=
+OST">
+
+
+
+
+After you find an appropriate page, you are invited to=20
+<input type=3D"Submit" value=3D"Post"> your=20
+<select size=3D"4" name=3D"act">
+  <option value=3D"Questions:">question</option>
+  <option value=3D"Comments:" selected=3D"">comment</option>
+  <option value=3D"See also:">link</option>
+  <option value=3D"Code:">preformated text</option>
+	</select>
+to this <a href=3D"http://techref.massmind.org/idea/websites.htm"><i>massmi=
+nd</i></a> site! <small>(posts will be visible only to you before review)</=
+small>
+Just type a nice message (short messages are blocked as spam) in the box an=
+d press the Post button.
+(<a href=3D"http://techref.massmind.org/techref/language/html/index.htm">HT=
+ML</a> welcomed, but not the &lt;A tag:=20
+Instead, use the link box to link to another page.=20
+<a href=3D"http://techref.massmind.org/techref/idea/website/codetutorial.ht=
+m">A tutorial is available</a>
+<a href=3D"http://techref.massmind.org/techref/private.asp?req=3Dmembership=
+">Members</a> can=20
+<a rel=3D"nofollow" href=3D"http://techref.massmind.org/techref/login/defau=
+lt.asp?req=3D403%3Bhttp%3A%2F%2Ftechref%2Emassmind%2Eorg%3A80%2Ftechref%2Fd=
+os%2Fbinbat%2Ehtm">login</a>=20
+to post directly, become page editors, and be credited for their posts.=20
+<br>
+<a style=3D"cursor:hand;background-color:silver;border-style:outset;border-=
+width:thin" title=3D"Bold Ctrl+B"><b>&nbsp;B </b></a> <a style=3D"cursor:ha=
+nd;background-color:silver;border-style:outset;border-width:thin" title=3D"=
+Italic Ctrl+I"><i>&nbsp;I </i></a> <a style=3D"cursor:hand;background-color=
+:silver;border-style:outset;border-width:thin" title=3D"Underline Ctrl+U"><=
+u>&nbsp;u </u></a> <a style=3D"cursor:hand;background-color:silver;border-s=
+tyle:outset;border-width:thin" title=3D"Blockquote"><img src=3D"http://tech=
+ref.massmind.org/images/bq.gif" alt=3D"Blockquote"> </a> <span id=3D"spell_=
+container" style=3D"background-color:silver;border-style:outset;border-widt=
+h:thin"></span>
+
+<br><textarea id=3D"txt" name=3D"txt" rows=3D"4" cols=3D"65"></textarea>
+<small>
+	<br>Link?&nbsp;Put&nbsp;it&nbsp;here:&nbsp;<input name=3D"file" type=3D"TE=
+XT" size=3D"60">
+	<br>if&nbsp;you&nbsp;want&nbsp;a&nbsp;response,=20
+	please&nbsp;enter&nbsp;your&nbsp;email&nbsp;address:&nbsp;<input name=3D"e=
+mail" type=3D"TEXT" size=3D"40">
+	<input type=3D"Submit" value=3D"Post">
+<br>Attn spammers: All posts are reviewed before being made visible to anyo=
+ne other than the poster.=20
+	</small>
+</form>
+
+</div>
+<table style=3D"background:#f8f8f8;"><tbody><tr><td>Did you find what you n=
+eeded?=20
+<ul>
+<li>
+<i>"Not quite. <a href=3D"http://techref.massmind.org/techref/search.asp?fr=
+om=3D%2FTechref%2Fdos%2Fbinbat%2Ehtm"> Look for more pages like this one."<=
+/a></i>=20
+
+
+</li><li><form action=3D"http://techref.massmind.org/techref/search.asp#res=
+ult" method=3D"POST">
+=20
+
+ <i>"No. I'm looking for:=20
+<input type=3D"TEXT" name=3D"SearchString" size=3D"40" maxlength=3D"100" va=
+lue=3D""><input type=3D"SUBMIT" name=3D"Action" value=3D"Fetch">"</i></form=
+>
+</li><li><a href=3D"http://techref.massmind.org/techref/search.asp">
+<i>"No. Take me to the search page."</i></a>
+</li><li><a href=3D"http://techref.massmind.org/techref/index.htm">
+<i>"No. Take me to the top so I can drill down by catagory"</i></a>
+</li><li><a href=3D"mailto:webmaster@massmind.org?subject=3DI%20need%20some=
+one%20to%20help%20me%20with%3A%20">
+<i>"No. I'm willing to pay for help, please refer me to a qualified consult=
+ant"</i></a>
+
+</li></ul>
+</td></tr></tbody></table>
+
+
+<hr style=3D"clear:both;">
+<table width=3D"30%" bgcolor=3D"#F0F0F0" align=3D"LEFT"><tbody><tr><td>&nbs=
+p;</td><td>
+<!-- massmind.org -->
+<!-- Encoding Binary files in Batch files -->
+<!-- Encoding Binary files in Batch files -->
+<h3>Welcome to massmind.org!</h3>
+</td></tr></tbody></table>=20
+<table width=3D"30%" bgcolor=3D"#F0F0F0" align=3D"RIGHT"><tbody><tr><td>&nb=
+sp;</td><td>
+<h2>Welcome to techref.massmind.org!</h2>
+</td></tr></tbody></table>
+<p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+</p><p>&nbsp;
+.
+
+
+
+
+</p></body></html>
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://techref.massmind.org/images/bq.gif
+
+R0lGODlhEAAQAPcAAAAAAAAA/yIiIjMzM0RERFVVVWZmZnd3d4iIiJmZmaqqqru7u8zMzN3d3e7u
+7v///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAA4ALAAAAAAQABAA
+AAg6AB0IHEiwoMGDBwEoXMhw4cCGEBUinEgRYUSIDy8yrMixY4CMGAcG+OjgooORKElWHNnxJMiG
+FiMGBAA7
+
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://techref.massmind.org/images/null.gif
+
+R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==
+
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://techref.massmind.org/js/googiespell.css
+
+@charset "utf-8";
+
+body { font-family: Verdana, Arial, Helvetica, sans-serif; }
+
+.googie_window { font-size: 0.9em; font-family: sans-serif; text-align: lef=
+t; border: 1px solid rgb(85, 85, 85); background-color: rgb(236, 239, 255);=
+ margin: 0px; position: absolute; visibility: hidden; z-index: 300; padding=
+: 1px; width: 165px; }
+
+.googie_list { margin: 0px; padding: 0px; }
+
+.googie_list td { padding: 1px 0px; cursor: pointer; list-style-type: none;=
+ color: rgb(0, 0, 0); }
+
+.googie_list_onhover { background-color: rgb(251, 236, 114); }
+
+.googie_list_onout { background-color: rgb(236, 239, 255); }
+
+.googie_list_selected { background-color: rgb(204, 204, 204); }
+
+.googie_list_revert { color: rgb(185, 20, 121); }
+
+.googie_list_close { color: rgb(185, 20, 20); }
+
+.googie_link { color: rgb(185, 20, 20); text-decoration: underline; cursor:=
+ pointer; }
+
+.googie_check_spelling_link { color: rgb(0, 73, 183); text-decoration: unde=
+rline; cursor: pointer; }
+
+.googie_no_style { text-decoration: none; }
+
+.googie_resume_editing { color: green; text-decoration: underline; cursor: =
+pointer; }
+
+.googie_check_spelling_ok { color: white; background-color: green; padding-=
+left: 2px; padding-right: 2px; cursor: pointer; }
+
+.googie_lang_3d_click img { vertical-align: middle; border-width: 1px; bord=
+er-style: solid; border-color: rgb(85, 85, 85) rgb(177, 177, 177) rgb(177, =
+177, 177) rgb(85, 85, 85); }
+
+.googie_lang_3d_on img { vertical-align: middle; border-width: 1px; border-=
+style: solid; border-color: rgb(177, 177, 177) rgb(85, 85, 85) rgb(85, 85, =
+85) rgb(177, 177, 177); }
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://techref.massmind.org/js/phone.css
+
+@charset "utf-8";
+
+body { background-color: rgb(221, 221, 221); color: rgb(34, 34, 34); font-f=
+amily: Helvetica; font-size: 14px; margin: 0px; padding: 0px; }
+
+#nearist textarea { background-color: rgb(221, 221, 221); color: red; }
+
+h1 { margin: 0px auto; background-color: rgb(204, 204, 204); background-ima=
+ge: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgb(204, 204, 204)), to(r=
+gb(153, 153, 153))); border-color: rgb(102, 102, 102); border-style: solid;=
+ border-width: 0px 0px 1px; color: rgb(34, 34, 34); display: block; font-si=
+ze: 20px; font-weight: bold; padding: 10px 0px; text-align: center; text-de=
+coration: none; text-shadow: rgb(255, 255, 255) 0px 1px 0px; }
+
+img { max-width: 100%; }
+
+#adtopright { display: none; }
+
+#upperright { display: none; }
+
+#fb-root { display: none; }
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-805723b8-ca03-45ef-8d62-5182cc151254@mhtml.blink
+
+@charset "utf-8";
+
+.fb_hidden { position: absolute; top: -10000px; z-index: 10001; }
+
+.fb_reposition { overflow: hidden; position: relative; }
+
+.fb_invisible { display: none; }
+
+.fb_reset { background: none; border: 0px; border-spacing: 0px; color: rgb(=
+0, 0, 0); cursor: auto; direction: ltr; font-family: "lucida grande", tahom=
+a, verdana, arial, sans-serif; font-size: 11px; font-style: normal; font-va=
+riant: normal; font-weight: 400; letter-spacing: normal; line-height: 1; ma=
+rgin: 0px; overflow: visible; padding: 0px; text-align: left; text-decorati=
+on: none; text-indent: 0px; text-shadow: none; text-transform: none; visibi=
+lity: visible; white-space: normal; word-spacing: normal; }
+
+.fb_reset > div { overflow: hidden; }
+
+@keyframes fb_transform {=20
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.fb_animate { animation: 0.3s ease 0s 1 normal forwards running fb_transfor=
+m; }
+
+.fb_hidden { position: absolute; top: -10000px; z-index: 10001; }
+
+.fb_reposition { overflow: hidden; position: relative; }
+
+.fb_invisible { display: none; }
+
+.fb_reset { background: none; border: 0px; border-spacing: 0px; color: rgb(=
+0, 0, 0); cursor: auto; direction: ltr; font-family: "lucida grande", tahom=
+a, verdana, arial, sans-serif; font-size: 11px; font-style: normal; font-va=
+riant: normal; font-weight: 400; letter-spacing: normal; line-height: 1; ma=
+rgin: 0px; overflow: visible; padding: 0px; text-align: left; text-decorati=
+on: none; text-indent: 0px; text-shadow: none; text-transform: none; visibi=
+lity: visible; white-space: normal; word-spacing: normal; }
+
+.fb_reset > div { overflow: hidden; }
+
+@keyframes fb_transform {=20
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.fb_animate { animation: 0.3s ease 0s 1 normal forwards running fb_transfor=
+m; }
+
+.fb_dialog { background: rgba(82, 82, 82, 0.7); position: absolute; top: -1=
+0000px; z-index: 10001; }
+
+.fb_dialog_advanced { border-radius: 8px; padding: 10px; }
+
+.fb_dialog_content { background: rgb(255, 255, 255); color: rgb(55, 55, 55)=
+; }
+
+.fb_dialog_close_icon { background: url("https://connect.facebook.net/rsrc.=
+php/v4/yq/r/IE9JII6Z1Ys.png") 0px 0px no-repeat scroll transparent; cursor:=
+ pointer; display: block; height: 15px; position: absolute; right: 18px; to=
+p: 17px; width: 15px; }
+
+.fb_dialog_mobile .fb_dialog_close_icon { left: 5px; right: auto; top: 5px;=
+ }
+
+.fb_dialog_padding { background-color: transparent; position: absolute; wid=
+th: 1px; z-index: -1; }
+
+.fb_dialog_close_icon:hover { background: url("https://connect.facebook.net=
+/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png") 0px -15px no-repeat scroll transparent;=
+ }
+
+.fb_dialog_close_icon:active { background: url("https://connect.facebook.ne=
+t/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png") 0px -30px no-repeat scroll transparent=
+; }
+
+.fb_dialog_iframe { line-height: 0; }
+
+.fb_dialog_content .dialog_title { background: rgb(109, 132, 180); border: =
+1px solid rgb(54, 88, 153); color: rgb(255, 255, 255); font-size: 14px; fon=
+t-weight: 700; margin: 0px; }
+
+.fb_dialog_content .dialog_title > span { background: url("https://connect.=
+facebook.net/rsrc.php/v4/yd/r/Cou7n-nqK52.gif") 5px 50% no-repeat; float: l=
+eft; padding: 5px 0px 7px 26px; }
+
+body.fb_hidden { height: 100%; left: 0px; margin: 0px; overflow: visible; p=
+osition: absolute; top: -10000px; transform: none; width: 100%; }
+
+.fb_dialog.fb_dialog_mobile.loading { background: url("https://connect.face=
+book.net/rsrc.php/v4/ya/r/3rhSv5V8j3o.gif") 50% 50% no-repeat rgb(255, 255,=
+ 255); min-height: 100%; min-width: 100%; overflow: hidden; position: absol=
+ute; top: 0px; z-index: 10001; }
+
+.fb_dialog.fb_dialog_mobile.loading.centered { background: none; height: au=
+to; min-height: initial; min-width: initial; width: auto; }
+
+.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner { wi=
+dth: 100%; }
+
+.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content { backgroun=
+d: none; }
+
+.loading.centered #fb_dialog_loader_close { clear: both; color: rgb(255, 25=
+5, 255); display: block; font-size: 18px; padding-top: 20px; }
+
+#fb-root #fb_dialog_ipad_overlay { background: rgba(0, 0, 0, 0.4); inset: 0=
+px; min-height: 100%; position: absolute; width: 100%; z-index: 10000; }
+
+#fb-root #fb_dialog_ipad_overlay.hidden { display: none; }
+
+.fb_dialog.fb_dialog_mobile.loading iframe { visibility: hidden; }
+
+.fb_dialog_mobile .fb_dialog_iframe { position: sticky; top: 0px; }
+
+.fb_dialog_content .dialog_header { border-bottom: 1px solid rgb(4, 59, 135=
+); border-top-color: rgb(4, 59, 135); border-right-color: rgb(4, 59, 135); =
+border-left-color: rgb(4, 59, 135); box-shadow: rgb(255, 255, 255) 0px 1px =
+1px -1px inset; color: rgb(255, 255, 255); font: 700 14px Helvetica, sans-s=
+erif; text-overflow: ellipsis; text-shadow: rgba(0, 30, 84, 0.298) 0px -1px=
+ 0px; vertical-align: middle; white-space: nowrap; }
+
+.fb_dialog_content .dialog_header table { height: 43px; width: 100%; }
+
+.fb_dialog_content .dialog_header td.header_left { font-size: 12px; padding=
+-left: 5px; vertical-align: middle; width: 60px; }
+
+.fb_dialog_content .dialog_header td.header_right { font-size: 12px; paddin=
+g-right: 5px; vertical-align: middle; width: 60px; }
+
+.fb_dialog_content .touchable_button { background-clip: padding-box; border=
+: 1px solid rgb(41, 72, 125); border-radius: 3px; display: inline-block; li=
+ne-height: 18px; margin-top: 3px; max-width: 85px; padding: 4px 12px; posit=
+ion: relative; }
+
+.fb_dialog_content .dialog_header .touchable_button input { background: non=
+e; border: none; color: rgb(255, 255, 255); font: 700 12px Helvetica, sans-=
+serif; margin: 2px -12px; padding: 2px 6px 3px; text-shadow: rgba(0, 30, 84=
+, 0.298) 0px -1px 0px; }
+
+.fb_dialog_content .dialog_header .header_center { color: rgb(255, 255, 255=
+); font-size: 16px; font-weight: 700; line-height: 18px; text-align: center=
+; vertical-align: middle; }
+
+.fb_dialog_content .dialog_content { background: url("https://connect.faceb=
+ook.net/rsrc.php/v4/y9/r/jKEcVPZFk-2.gif") 50% 50% no-repeat; border-width:=
+ 0px 1px; border-right-style: solid; border-left-style: solid; border-right=
+-color: rgb(74, 74, 74); border-left-color: rgb(74, 74, 74); border-image: =
+initial; border-bottom-style: initial; border-bottom-color: initial; border=
+-top-style: initial; border-top-color: initial; height: 150px; }
+
+.fb_dialog_content .dialog_footer { background: rgb(245, 246, 247); border-=
+width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(74, 7=
+4, 74) rgb(74, 74, 74); border-image: initial; height: 40px; }
+
+#fb_dialog_loader_close { float: left; }
+
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon { visibility: hidden; }
+
+#fb_dialog_loader_spinner { animation: 1.2s linear 0s infinite normal none =
+running rotateSpinner; background-color: transparent; background-image: url=
+("https://connect.facebook.net/rsrc.php/v4/yD/r/t-wz8gw1xG1.png"); backgrou=
+nd-position: 50% 50%; background-repeat: no-repeat; height: 24px; width: 24=
+px; }
+
+@keyframes rotateSpinner {=20
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.fb_iframe_widget { display: inline-block; position: relative; }
+
+.fb_iframe_widget span { display: inline-block; position: relative; text-al=
+ign: justify; }
+
+.fb_iframe_widget iframe { position: absolute; }
+
+.fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_=
+iframe_widget_fluid_desktop iframe { max-width: 100%; }
+
+.fb_iframe_widget_fluid_desktop iframe { min-width: 220px; position: relati=
+ve; }
+
+.fb_iframe_widget_lift { z-index: 1; }
+
+.fb_iframe_widget_fluid { display: inline; }
+
+.fb_iframe_widget_fluid span { width: 100%; }
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-93eb4241-2f78-41fe-9a96-8dd2ff2c7520@mhtml.blink
+
+@charset "utf-8";
+
+.imageye-selected { outline: black solid 2px !important; box-shadow: rgba(0=
+, 0, 0, 0.5) 0px 0px 10px !important; }
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-576aba30-c725-49a3-9c0c-73292a131d36@mhtml.blink
+
+@charset "utf-8";
+
+body { font-family: Arial, Verdana, Helvetica, sans-serif; }
+
+h1 { border-bottom: 1px solid rgb(0, 0, 0); padding-bottom: 2px; padding-to=
+p: 20px; }
+
+h2 { margin: 0px 100px 5px 0px; border-bottom: 1px solid rgb(0, 0, 0); padd=
+ing-bottom: 1px; padding-top: 10px; }
+
+a:visited { color: rgb(0, 0, 187); }
+
+ul { list-style-position: inside; }
+
+.fb-like-box iframe { width: 250px !important; height: 200px !important; }
+
+.responsivesky { width: 320px; height: 50px; }
+
+@media (min-width: 500px) {
+  .responsivesky { width: 468px; height: 60px; }
+}
+
+@media (min-width: 800px) {
+  .responsivesky { width: 728px; height: 90px; }
+}
+------MultipartBoundary--bm8v7kwtQkPFTZX7mbTo3RLIJZKuYU6x9ySJC6byRs------

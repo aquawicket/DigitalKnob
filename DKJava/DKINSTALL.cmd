@@ -3,24 +3,22 @@ if "%~1" equ "" (goto :DKINSTALL)
 
 :runDKCSharp
 	set "COMPILER_EXE=%~1"
-	if not defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
+	if NOT defined COMPILER_EXE (echo ERROR: COMPILER_EXE is invalid)
 	
 	set "DKJava_FILE=%~2"
-	if not defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
+	if NOT defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
 	
-	:: get the app name
+	rem get the app name
 	for %%Z in ("%DKJava_FILE%") do (set "APP=%%~nZ")
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if exist %APP%.exe (del %APP%.exe)
+	if EXIST "%APP%.exe" (del %APP%.exe)
 
-	::%COMPILER_EXE% /nologo /out:%APP%.exe  %DKJava_FILE%
-	::%COMPILER_EXE% /nologo /out:%APP%.exe DK.cs %DKJava_FILE%
-	%COMPILER_EXE% /nologo /out:%APP%.exe *.java
+	%COMPILER_EXE% %DKJava_FILE%
 	
-	if not exist "%APP%.exe" (
-		echo: 
+	if NOT EXIST "%APP%.java" (
+		echo.
 		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
 		goto:eof
@@ -29,7 +27,10 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::###### run executable ######
 	cls
 	title %DKJava_FILE%
-    %ComSpec% /v:on /k "%APP%.exe" && (echo returned TRUE) || (echo returned FALSE)
+	set "java_exe=%COMPILER_EXE:javac=java%"
+	
+    %java_exe:/=\% %APP% &rem  && (echo returned TRUE) || (echo returned FALSE)
+	::echo C:/Users/Administrator/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin/bin/java.exe %APP%
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -67,17 +68,29 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	echo Installing DKJava . . .
 	
-	::###### DK.cmd ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+	rem shebang
+	@echo off&rem ###### DK.cmd #########################################################################################################################
+	if not defined DKINIT_cmd (
+		setlocal enableDelayedExpansion
+		if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+		if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+		if NOT EXIST "!DK.cmd!" (
+			start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+		call "!DK.cmd:/=\!" "%%~0" %%*
+		exit /b %errorlevel%
+	)
+	rem #################################################################################################################################################
 	
-	::###### Install DKCSharp ######
+	::###### Install Java ######
+	%dk_call% dk_validate openjdk %dk_call% dk_depend openjdk
+	%dk_call% dk_assertPath "%java_exe%"
+	%dk_call% dk_assertPath "%javac_exe%"
+	
+	::"%java_exe%" -classpath %USERPROFILE%/Digital Knob/Development/DKJava/functions com.DigitalKnob.DKJava
+	
 	::###### COMPILER_EXE ######
-	:: find csc.exe
-	for /r "%SystemRoot%/Microsoft.NET/Framework/" %%# in ("*csc.exe") do  set "CSC_EXE=%%#"
-	set "COMPILER_EXE=%CSC_EXE%"
-	%dk_call% dk_assertVar COMPILER_EXE
+	set "COMPILER_EXE=%javac_exe%"
+	%dk_call% dk_assertPath "%COMPILER_EXE%"
 	ftype DKJava=%ComSpec% /V:ON /K call "%~f0" "%COMPILER_EXE%" "%%1" %%*
 	assoc .java=DKJava
 	

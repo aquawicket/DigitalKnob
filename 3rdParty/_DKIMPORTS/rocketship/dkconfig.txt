@@ -1,0 +1,5 @@
+############ RocketShip ############
+# https://github.com/netpipe/RocketShip.git
+# https://github.com/netpipe/RocketShip/archive/705f32fa0e79b47e98621d4591e0387666b25103.zip
+
+RocketShip_Import=https://github.com/netpipe/RocketShip/archive/705f32fa0e79b47e98621d4591e0387666b25103.zip

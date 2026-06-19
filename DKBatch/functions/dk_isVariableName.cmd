@@ -1,37 +1,57 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_isVariableName(string rtn_var)
-::#
-::#  https://stackoverflow.com/a/17584764
-::#
-::#
-::#
-::#
+rem ####################################################################
+rem # dk_isVariableName(string rtn_var)
+rem #
+rem #  https://stackoverflow.com/a/17584764
+rem #
+rem #
+rem #
+rem #
 :dk_isVariableName
-setlocal
-	%dk_call% dk_debugFunc 1 2
- 
-    ::set "arg1=%~1"
-    ::if defined "%~1" call set "arg1=%%%arg1%%%"
-	
-	for /f "delims=$-_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" %%A in ("%~1") do (set "bad_characters=%%A")
+setlocal disableDelayedExpansion
 
-    if not defined bad_characters (
-		set "dk_isVariableName=0"
-	) else (
-		set "dk_isVariableName=1"
+  set name=%~1
+  set %~1=PASSED
+  call set value=%%%~1%%
+
+rem  echo.
+rem  echo name = %name%
+rem  echo value = %value%
+
+  if "%value%" equ "PASSED" (set "dk_isVariableName=0") else (set "dk_isVariableName=1")
+
+  
+rem  for /f "delims=$-_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" %%A in ("%~1") do (set "bad_characters=%%A")
+rem
+rem  if defined bad_characters (
+rem		set "dk_isVariableName=1"
+rem		rem echo bad_characters = %bad_characters%
+rem	) else (
+rem		set "dk_isVariableName=0"
+rem	)
+
+	set "_SCOPE_=%~n0"
+	for /F "delims=" %%G in ('set %~n0') do (
+		if "%_SCOPE_%" equ "%~n0" endlocal
+		set "%%G"
 	)
-    
-	endlocal & (
-		set "dk_isVariableName=%dk_isVariableName%"
-		if "%~2" neq "" (set "%2=%dk_isVariableName%")
-		exit /b %dk_isVariableName%
+	if %dk_isVariableName% equ 0 (
+		set /P "=%~1 " <nul
 	)
+	exit /b %dk_isVariableName%
 %endfunction%
 
 
@@ -39,314 +59,21 @@ setlocal
 
 
 
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+setlocal DisableDelayedExpansion
+	echo __NUL__ %red%FAILED%clr%
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____" && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	call :dk_isVariableName "____"  && (echo %green%PASSED%clr%) || (echo %red%FAILED%clr%)
+	
 
-	set "name=__NULL__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_error "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-    %dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__	__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-::	set "name=__LF__"
-::	set "%name%=PASSED"
-::	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-::	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-::	set "name=__CR__"
-::	set "%name%=PASSED"
-::	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-::	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__ __"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__!__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__^"__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__#__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__$__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__%%__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__^&__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__'__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__(__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__)__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__*__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=__+__"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
-
-	set "name=____"
-	set "%name%=PASSED"
-	if "!%name%!" neq "PASSED" (%dk_call% dk_error "variabl name '%name%' failed") else (%dk_call% dk_success "%name% = '!%name%!'")
-	%dk_call% dk_isVariableName %name% && %dk_call% dk_success "'%name%' is a valid variable name" || %dk_call% dk_info "'%name%' is NOT a valid variable name"
+	
+	for /F "delims=" %%a in ('cmd /U /C type "X:\Users\Default\Digital Knob\Development\test\ascii.txt" ^| find /V ""') do (echo "%%a")
+	
 %endfunction%

@@ -1,20 +1,24 @@
+
+
+
 //################################################################################
-//# dk_basename(path)
+//# dk_basename(path, rtn_var)
 //#
-//#    https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/filesystemobject-object
 //#
-dk_basename = function dk_basename_f(path, basename){
+dk_basename = function dk_basename_f(){
 	//dk_debugFunc(1);
 	
-	if(typeof filesystem === "undefined"){ 
-		filesystem = new ActiveXObject("Scripting.FileSystemObject");
-	}
+	dk_depend("dk_fileSystem");
+	dk_assert("dk_fileSystem.GetBaseName");
+	dk_basename.value = dk_fileSystem.GetBaseName(arguments[0]);
 	
-	if(typeof filesystem !== "undefined"){ 
-		dk_basename.value = filesystem.GetBaseName(path);
-		return 0;
+	//###### return ######
+	if(typeof arguments[1] !== "undefined"){
+		arguments[1].value = dk_basename.value;
+	} else {
+		console.log(dk_basename.value);
 	}
-	return 1; // error
+	return dk_basename.value;
 }
 
 
@@ -22,11 +26,27 @@ dk_basename = function dk_basename_f(path, basename){
 
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-DKTEST = function DKTEST_callback(){
+DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	var myPath = "C:/Windows/System32";
-    var ret = dk_basename(myPath);
-	console.log("myPath:'"+myPath+"' dk_basename.value = "+dk_basename.value);
-	return ret;
+	dk_depend("dk_echo");
+	
+	//### Result as global variable
+	dk_echo("\n");
+	dk_basename("A:/directoryA/filenameA.extA");
+	dk_echo("dk_basename.value = "+dk_basename.value);
+	
+	//### Result as variable parameter
+	dk_echo("\n");
+	var resultB = {};
+	dk_basename("B:/directoryB/filenameB.extB", resultB);
+	dk_echo("resultB = "+resultB.value);
+	dk_echo("dk_basename.value = "+dk_basename.value);
+	
+	//### Result as return value
+	dk_echo("\n");
+	resultC = dk_basename("C:/directoryC/filenameC.extC");
+	dk_echo("resultC = "+resultC);
+	dk_echo("dk_basename.value = "+dk_basename.value);
+	
 }

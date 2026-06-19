@@ -1,0 +1,6 @@
+############ waave ############
+# https://sourceforge.net/projects/waave
+# git://git.code.sf.net/p/waave/code
+# https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz
+
+waave_Import=https://sourceforge.net/projects/waave/files/waave/waave-3.01.tar.gz 

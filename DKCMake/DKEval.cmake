@@ -1,12 +1,18 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	file(TO_CMAKE_PATH "$ENV{USERPROFILE}$ENV{HOME}/digitalknob/Development/DKCMake/functions" DKCMAKE_FUNCTIONS_DIR)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "$ENV{DKCMAKE_FUNCTIONS_DIR}/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+#########################################################################
 
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -30,33 +36,33 @@ include_guard()
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-message("DKCOMMAND = ${DKCOMMAND}")
+dk_debug("DKCOMMAND = ${DKCOMMAND}")
 string(REPLACE "\'" "\"" DKCOMMAND "${DKCOMMAND}")
 dk_parseFunctionsAndLoadFromString("${DKCOMMAND}")
 dk_eval("${DKCOMMAND}")
 
 if(DKRETURN)
-	#message("DKRETURN = ${DKRETURN}")
+	#dk_debug("DKRETURN = ${DKRETURN}")
 
 #	## create windows cmd script to set the return variables
-#	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+#	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
 #	foreach(item ${DKRETURN})
 #		set(line "set \"${item}=${${item}}\" \n")
-#		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
-#		dk_exportVars(${item} "${${item}}")
+#		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+#		dk_cacheVariable(${item} "${${item}}")
 #	endforeach()
 
 #	## create unix shell script to set the return variables
-#	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
-#	dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
+#	dk_delete(${DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
+#	dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/sh \n")
 #	foreach(var ${DKRETURN})
 #		dk_convertToCIdentifier(${var} var_)
 #		set(line "export ${var_}=\"${${var}}\" \n")
-#		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+#		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 #	endforeach()
 
-	dk_load(dk_exportVars)
+	dk_load(dk_cacheVariable)
 	foreach(item ${DKRETURN})
-		dk_exportVars(${item} "${${item}}")
+		dk_cacheVariable(${item} "${${item}}")
 	endforeach()
 endif()

@@ -1,32 +1,34 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+############ lighttpd ############
 # https://github.com/lighttpd/lighttpd1.4.git
+# https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip
 
+dk_import()
 
-### IMPORT ###
-#dk_import(https://github.com/lighttpd/lighttpd1.4.git)
-dk_import(https://github.com/lighttpd/lighttpd1.4/archive/refs/heads/master.zip)
+dk_include			(${lighttpd}/lib)
+dk_include			(${lighttpd_Build_Dir})
+if(Windows)
+	dk_libDebug		(${lighttpd}/${Target_Tuple}/lib/${Debug_Dir}/liblighttpd.lib)
+	dk_libRelease	(${lighttpd}/${Target_Tuple}/lib/${Release_Dir}/liblighttpd.lib)
+else()
+	dk_libDebug		(${lighttpd}/${Target_Tuple}/lib/${Debug_Dir}/liblighttpd.a)
+	dk_libRelease	(${lighttpd}/${Target_Tuple}/lib/${Release_Dir}/liblighttpd.a)
+endif()
 
+dk_configure() # -DLWS_WITH_SSL=OFF
 
-### LINK ###
-dk_include			(${LIGHTTPD}/lib)
-DEBUG_dk_include	(${LIGHTTPD_DEBUG_DIR})
-RELEASE_dk_include	(${LIGHTTPD_RELEASE_DIR})
-UNIX_dk_libDebug	(${LIGHTTPD}/${target_triple}/lib/${DEBUG_DIR}/liblighttpd.a)
-UNIX_dk_libRelease	(${LIGHTTPD}/${target_triple}/lib/${RELEASE_DIR}/liblighttpd.a)
-WIN_dk_libDebug		(${LIGHTTPD}/${target_triple}/lib/${DEBUG_DIR}/liblighttpd.lib)
-WIN_dk_libRelease	(${LIGHTTPD}/${target_triple}/lib/${RELEASE_DIR}/liblighttpd.lib)
-
-
-### GENERATE ###
-dk_configure(${LIGHTTPD}) # -DLWS_WITH_SSL=OFF
-
-
-### COMPILE ###
-dk_build(${LIGHTTPD} LIGHTTPD)
+dk_build(${lighttpd} LIGHTTPD)

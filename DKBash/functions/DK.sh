@@ -1,43 +1,109 @@
-#!/usr/bin/env sh
-[ -n "${DK_SH-}" ] && return
-export DK_SH=1
-$(true)
+#!/bin/sh
 
-### Print Shell Path ad Version ###
-export ESC=""  # escape character
-[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
-export DKSHELL=$(basename ${DKSHELL_PATH})
-export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
-echo ""
-echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
-echo "DKSHELL_PATH  ${DKSHELL_PATH}"
-echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
-echo ""
+# DKINIT_sh
+#echo "################## DK.sh($*) ##################";
+echo "\$DKINIT_sh = ${DKINIT_sh}"
+[ -z "${DKINIT_sh-}" ] && export DKINIT_sh=1 || return
+echo "\$DKINIT_sh = ${DKINIT_sh}"
+echo "\$SHLVL = ${SHLVL}"
+echo "\$_ = $_";
+echo "\$\$ = $$";
+echo "\$0 = $0";
+echo "\$SHELL = ${SHELL-}";
+echo "\$BASH = ${BASH-}";
+echo "\$BASHOPTS = ${BASHOPTS-}"
+echo "\$BASHPID = ${BASHPID-}"
+echo "\$BASH_ALIASES = ${BASH_ALIASES-}"
+echo "\$BASH_ARGC = ${BASH_ARGC-}"
+echo "\$BASH_ARGV = ${BASH_ARGV-}"
+echo "\$BASH_ARGV0 = ${BASH_ARGV0-}"
+echo "\$BASH_CMDS = ${BASH_CMDS-}"
+echo "\$BASH_COMMAND = ${BASH_COMMAND-}"
+echo "\$BASH_COMPAT = ${BASH_COMPAT-}"
+echo "\$BASH_ENV = ${BASH_ENV-}"
+echo "\$BASH_EXECUTION_STRING = ${BASH_EXECUTION_STRING-}"
+echo "\$BASH_LINENO = ${BASH_LINENO-}"
+echo "\$BASH_LOADABLES_PATH = ${BASH_LOADABLES_PATH-}"
+echo "\$BASH_MONOSECONDS = ${BASH_MONOSECONDS-}"
+echo "\$BASH_REMATCH = ${BASH_REMATCH-}"
+echo "\$BASH_SOURCE = ${BASH_SOURCE-}"
+echo "\$BASH_SUBSHELL = ${BASH_SUBSHELL-}"
+echo "\$BASH_TRAPSIG = ${BASH_TRAPSIG-}"
+echo "\$BASH_VERSINFO = ${BASH_VERSINFO-}"
+echo "\$BASH_VERSION = ${BASH_VERSION-}"
+echo "\$BASH_XTRACEFD = ${BASH_XTRACEFD-}"
+echo "ps \$\$ = $(command ps -o comm -p $$)";
+
+
+[ -z "${DKSCRIPT_PATH-}" ] && [ -e "${1-}" ] && export DKSCRIPT_PATH="${1-}";
+
 
 ##################################################################################
 # DK()
 #
 DK(){
-	###### SUDO_EXE ######
-	SUDO_EXE(){
-		[ -e "${SUDO_EXE-}" ]	|| export SUDO_EXE=$(command -v sudo) || true
-		[ -e "${SUDO_EXE-}" ]	&& echo "${SUDO_EXE}" || unset SUDO_EXE
-		echo "SUDO_EXE = '${SUDO_EXE-}'" >&2
-	}
+	#echo "################## DK($*) ##################";
+	
+	DKSCRIPT_PATH=$(realpath ${DKSCRIPT_PATH});
+	echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+
+	### Print Shell Path and Version ###
+	export ESC=""  # escape character
+	[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
+	export DKSHELL=$(basename ${DKSHELL_PATH})
+	export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
+	echo ""
+	echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
+	echo ""
+	
+	alias clearerror=true;
+#	###### sudo_exe ######
+#	sudo_exe(){
+#		[ ! -e "${sudo_exe-}" ]	&& export sudo_exe=$(command -v sudo)
+#		[ -e "${sudo_exe-}" ]	&& echo ${sudo_exe} --version || unset sudo_exe
+#		echo "sudo_exe = '${sudo_exe-}'" >&2
+#	}
     
 	###### Reload Main Script with bash ######
-	[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
+	dkreloadWithBash
+	#[ $# -eq 0 ] && dkreloadWithBash || dkreloadWithBash $*
 
 	############ Set Options ############
     dksetOptions
 	
 	############ load dk_source ######
-	export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
-    export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
-	export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/"
-    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] || dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR}/dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
-    [ -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && . "${DKBASH_FUNCTIONS_DIR_}dk_source.sh"
- 
+#	[ ! -n "${DKBRANCH-}" ]						&& export DKBRANCH="Development"
+	
+	[ ! -n "${DKHTTP_DKHOME_DIR-}" ]			&& export DKHTTP_DKHOME_DIR="http://aquawicket.com"
+#	[ ! -n "${DKHTTP_DIGITALKNOB_DIR-}" ]		&& export DKHTTP_DIGITALKNOB_DIR="${DKHTTP_DKHOME_DIR}/DigitalKnob"
+#	[ ! -n "${DKHTTP_DKBRANCH_DIR-}" ]			&& export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}"
+#	[ ! -n "${DKHTTP_DKBASH_DIR-}" ]			&& export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
+#	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKHOME_DIR}/DigitalKnob/Development/DKBash/functions";
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/";
+	echo "DKHTTP_DKBASH_FUNCTIONS_DIR_ = ${DKHTTP_DKBASH_FUNCTIONS_DIR_}"
+
+	######   DKHOME_DIR()  ######
+	(command -v wslpath) && (command -v cmd.exe) && export DKHOME_DIR=$(wslpath -u $(cmd.exe /c echo "%USERPROFILE%" | tr -d '\r'));
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	(command -v cmd.exe) && (command -v cygpath) && export DKHOME_DIR=$(cygpath -u $(cmd.exe "/c echo "%USERPROFILE%" | tr -d '\r'"));
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	[ ! -e "${DKHOME_DIR-}" ] && [ -e "${HOME}" ] 		 	           && export DKHOME_DIR="${HOME}";
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+	[   -e "${DKHOME_DIR-}" ] && echo "${DKHOME_DIR-}" || (echo "DKHOME_DIR-NOTFOUND"; exit ${BASH_LINENO[0]};) 
+	echo "DKHOME_DIR = ${DKHOME_DIR-}"
+
+	[ ! -n "${DKBASH_FUNCTIONS_DIR-}" ]		&& export DKBASH_FUNCTIONS_DIR="${DKHOME_DIR}/DigitalKnob/Development/DKBash/functions";
+	[ ! -n "${DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKBASH_FUNCTIONS_DIR_="${DKBASH_FUNCTIONS_DIR}/";
+	echo "DKBASH_FUNCTIONS_DIR_ = ${DKBASH_FUNCTIONS_DIR_}"
+
+#   export DKBASH_FUNCTIONS_DIR=$(cd -- "$(dirname "${BASH_SOURCE-}")"; pwd -P)
+
+#	[ -e "${DKBASH_FUNCTIONS_DIR_}DK.sh" ] || (echo "ERROR: DKBASH_FUNCTIONS_DIR:'${DKBASH_FUNCTIONS_DIR}' is incorrect"; exit 1)
+    [ ! -e "${DKBASH_FUNCTIONS_DIR_}dk_source.sh" ] && dk_download ${DKHTTP_DKBASH_FUNCTIONS_DIR_}dk_source.sh ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
+	. ${DKBASH_FUNCTIONS_DIR_}dk_source.sh
+	echo "loaded dk_source"
+	
     ############ LOAD FUNCTION FILES ############
 	#dk_source dk_callStack
     dk_source dk_return
@@ -51,7 +117,7 @@ DK(){
     dk_source __CALLER__
     dk_source dk_debugFunc
     dk_source dk_onExit        # EXIT handler
-	dk_source dk_onError       # ERR handler
+	#dk_source dk_onError       # ERR handler
 	dk_source dk_realpath
 	dk_source dk_call
 	dk_source dk_download
@@ -64,103 +130,144 @@ DK(){
 #	sudo apt-get update
 #	sudo apt-get upgrade
 #	/mnt/c/Windows/System32/cmd.exe /c 'wsl --shutdown'
-
+	
 	############ Get DKSCRIPT variables ############
-    DKSCRIPT_VARS
+    DKSCRIPT_VARS $*
 	
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	if [ -e "${DKSCRIPT_DIR}/dkconfig.txt" ]; then
-		dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
-	elif [ -e "${DKBRANCH_DIR}/dkconfig.txt" ]; then
-		dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
-	fi
+	[ -e "${DKSCRIPT_DIR}/dkconfig.txt" ] && dk_call dk_fileVariables "${DKSCRIPT_DIR}/dkconfig.txt"
+	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_fileVariables "${DKBRANCH_DIR}/dkconfig.txt"
+	
 
-    ###### DKTEST MODE ######
-    [ "${DKSCRIPT_EXT}" = ".sh" ] || return 0
-	dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()" || return 0
-    dk_call dk_echo
-    dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_NAME} ###### DKTEST MODE ######${clr-}"
-	dk_call dk_echo
-    #dk_call dk_echo "${bg_RGB}20;20;20m"
-    dk_source "${DKSCRIPT_PATH}"
-    #dk_call dk_echo "$(type DKTEST | sed '1,1d')"             # print DKTEST(){ ... } code
-    #dk_call dk_echo "${clr}"
-    DKTEST
-    dk_call dk_echo
-    dk_call dk_echo "${bg_magenta-}${white-}########################## END TEST ################################${clr-}"
-    dk_call dk_echo
-    dk_call dk_exit 0
+	if [ ! "${DKSCRIPT_EXT-}" = ".sh" ]; then
+		echo "DKSCRIPT_PATH:'${DKSCRIPT_PATH-}' is not DKBash";
+		#echo "* = $*";
+		#. $1;
+		#echo "dk_call $(basename ${1%.*}) $2;";
+		#dk_call $(basename ${1%.*}) $2;
+		#dk_call dk_exit $?;
+		return $?;
+		#exit $?;
+		#dk_call dk_exit $?;
+	fi
+	
+	###### DKTEST() ######
+	if (dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()") && [ -z "${DKTEST-}" ]; then
+		dk_call dk_echo;
+		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######${clr-}";
+		dk_call dk_echo;
+		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
+		(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
+		dk_call dk_echo;
+		dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_FILE} ####### END DKTEST ######${clr-}";
+		dk_call dk_echo;
+		dk_call dk_exit $?;
+		return $?;
+		#exit $?;
+		#dk_call dk_exit $?;
+	fi
+	
+	###### DKSCRIPT_NAME() ######
+	if (dk_call dk_fileContains "${DKSCRIPT_PATH}" "${DKSCRIPT_NAME}()"); then
+		dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_NAME}(${DKSCRIPT_ARGS}) ########################${clr-}";
+		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
+		(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} ${DKSCRIPT_ARGS} || echo "'${DKSCRIPT_NAME}()' failed";
+		return $?;
+		#exit $?;
+		#dk_call dk_exit $?;
+	fi
+	
+	###### DKSCRIPT_PATH ######
+	dk_source "${DKSCRIPT_PATH}";
+	
+	#dk_call dk_exit $?;
 }
 
 ##################################################################################
 # dkreloadWithBash()
 #
-dkreloadWithBash(){
-	[ -n "${BASH-}" ] && return
-	(command -v bash &>/dev/null) || dk_installPackage bash
-	(command -v bash &>/dev/null) && export BASH_EXE=$(command -v bash) || echo "ERROR: bash not found" || exit 1
-	echo "Reloading ${0} with ${BASH_EXE} . . ."
-	unset DK_SH
-	exec ${BASH_EXE} "${0}"
-	#exec env -i HOME="$HOME" PATH="$PATH" BASH_EXE="${BASH_EXE}" ${BASH_EXE} -l -c '${0}'
+dkreloadWithBash() {
+	[ -e "${bash_exe}" ] && return 0;
+	
+	echo "dkreloadWithBash"
+	(command -v bash) &>/dev/null || dk_installPackage bash || (echo "ERROR: dk_installPackage bash failed"; exit ${BASH_LINENO[0]};)
+	(command -v bash) &>/dev/null && export bash_exe=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
+	echo "Reloading ${DKSCRIPT_PATH} with ${bash_exe} . . .";
+	unset DKINIT_sh;
+	dk_call dk_pause;
+	
+	[ -e "${DKSCRIPT_PATH}" ] && exec "${bash_exe}" "${DKSCRIPT_PATH}"
+	#(echo "ERROR: 'dkreloadWithBash' failed"; exit ${BASH_LINENO[0]};)
+	#exec env -i HOME="$HOME" PATH="$PATH" bash_exe="${bash_exe}" ${bash_exe} -l -c '${0}';
 }
+
+
 
 ##################################################################################
 # dk_download(url, destination)
 #
 #
 dk_download() {
-    if [ -e "${2-}" ]; then
-        echo "WARNING: dk_download(): ${2} already exists"
-        return 0
-    fi
+	echo "dk_download($*)"
+	
+    [ -e "${2-}" ] && (echo "WARNING: dk_download(): ${2} already exists"; return 0;)
     echo "Downloading $(basename ${1}) . . ."
+	echo "${1} ->  ${2}"
     parentdir="$(dirname "${2}")"
-    OLDPWD=${PWD}
-    cd "${parentdir}"
+    # OLDPWD=${PWD}
+    # cd "${parentdir}"
     
     #dk_commandExists "wget" || dk_installPackage wget
     #dk_commandExists "curl" || dk_installPackage curl
-    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && $(SUDO_EXE) wget -P "${parentdir}" "${1}"
-    [ ! -e "${2}" ] && (command -v curl &>/dev/null) && $(SUDO_EXE) curl --silent -Lo "${2}" "${1}"
-    
-    cd "${OLDPWD}"
+	[ ! -e "${2}" ] && (command -v curl &>/dev/null) && $(sudo_exe) curl --silent -Lo "${2}" "${1}"
+    [ ! -e "${2}" ] && (command -v wget &>/dev/null) && $(sudo_exe) wget -P "${parentdir}" "${1}"
+   
+    # cd "${OLDPWD}"
 }
 
 ##################################################################################
-# WSLPATH_EXE()
+# wslpath_exe()
 #
-WSLPATH_EXE(){
-	(command -v wslpath >&2) || echo "wslpath Not Found"  >&2
+wslpath_exe(){
+	#echo "wslpath_exe()"
+	
+	(command -v wslpath >&2) || echo "wslpath Not Found" >&2
 }
 
 ##################################################################################
-# CYGPATH_EXE()
+# cygpath_exe()
 #
-CYGPATH_EXE(){
-	(command -v cygpath >&2) || echo "cygpath Not Found"  >&2
+cygpath_exe(){
+	builtin echo "cygpath_exe()"
+	
+	(command -v cygpath >&2) || echo "cygpath Not Found" >&2
 }
 
 ##################################################################################
 # DKSCRIPT_VARS()
 #
 DKSCRIPT_VARS(){
-	#echo "0 = ${0}"
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(WSLPATH_EXE)" ] && export DKSCRIPT_PATH=$($(WSLPATH_EXE) -u $(dk_realpath ${0})) 	# Windows subsystem for linux
-	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(CYGPATH_EXE)" ] && export DKSCRIPT_PATH=$($(CYGPATH_EXE) -u $(dk_realpath ${0}))	# Git for Windows
-	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0})													# Default
-    [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found" || exit 1    
-    export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"						
-    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR = ${DKSCRIPT_DIR}"
-    export DKSCRIPT_NAME=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}"
-    export DKSCRIPT_EXT=".${DKSCRIPT_NAME##*.}"				&& echo "DKSCRIPT_EXT = ${DKSCRIPT_EXT}"
+	#echo "DKSCRIPT_VARS()";
+	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(wslpath_exe)" ] && export DKSCRIPT_PATH=$($(wslpath_exe) -u $(dk_realpath ${0}));	 	# Windows subsystem for Linux
+	[ ! -e "${DKSCRIPT_PATH-}" ] && [ -e "$(cygpath_exe)" ] && export DKSCRIPT_PATH=$($(cygpath_exe) -u $(dk_realpath ${0}));		# Git for Windows	
+	[ ! -e "${DKSCRIPT_PATH-}" ] && export DKSCRIPT_PATH=$(dk_realpath ${0});														# Default
+    [ -e "${DKSCRIPT_PATH}" ]	 && echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}" || (echo "ERROR: DKSCRIPT_PATH:${DKSCRIPT_PATH} not found"; exit ${BASH_LINENO[0]};)    
+    #export DKSCRIPT_ARGS=$(${*})							&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
+	export DKSCRIPT_ARGS=${@:2}								&& echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
+    export DKSCRIPT_DIR=$(dirname "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_DIR  = ${DKSCRIPT_DIR}";
+    export DKSCRIPT_FILE=$(basename "${DKSCRIPT_PATH}")		&& echo "DKSCRIPT_FILE = ${DKSCRIPT_FILE}";
+	export DKSCRIPT_NAME="${DKSCRIPT_FILE%.*}"				&& echo "DKSCRIPT_NAME = ${DKSCRIPT_NAME}";
+    export DKSCRIPT_EXT=".${DKSCRIPT_FILE##*.}"				&& echo "DKSCRIPT_EXT  = ${DKSCRIPT_EXT}";
 } 
 
 ##################################################################################
 # dksetOptions()
 #
 dksetOptions(){
+	#echo "dksetOptions()"
+	
     # https://pubs.opengroup.org/onlinepubs/007904875/utilities/set.html
 	# https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
     # $(set -a) && set -a	# Each variable or function that is created or modified is given the export attribute and marked for export to the environment of subsequent commands.
@@ -172,7 +279,7 @@ dksetOptions(){
     # $(set -m) && set -m	# Job control is enabled. All processes run in a separate process group. When a background job completes, the shell prints a line containing its exit status.
     # $(set -n) && set -n	# Read commands but do not execute them. This may be used to check a script for syntax errors. This option is ignored by interactive shells.
     # $(set -o) && set -o	# Set the option corresponding to option-name:
-    # $(set -o) && set +o	# Unset the option corresponding to option-name:
+    # $(set +o) && set +o	# Unset the option corresponding to option-name:
     # $(set -u) && set -u	# Treat unset variables and parameters other than the special parameters ‘@’ or ‘*’, as an error when performing parameter expansion.
     # $(set -v) && set -v	# Print shell input lines as they are read.
     # $(set -x) && set -x	# Print a trace of simple commands, for commands, case commands, select commands, and arithmetic for commands and their arguments or associated word lists.
@@ -200,32 +307,34 @@ dksetOptions(){
 #   https://www.digitalocean.com/community/tutorials/package-management-basics-apt-yum-dnf-pkg
 #
 dk_installPackage() {
+	
     (command -v ${1} &>/dev/null) && return $(true) 
     echo "installing ${1}. . ."
-    (command -v apk)           					&& ${SUDO_EXE} apk add ${1} && return				# Alpine Package Keeper (alpine linux)
-	(command -v apt-get)       					&& ${SUDO_EXE} apt-get -y install ${1} && return	# Apt-get (debian)
-	(command -v apt)           					&& ${SUDO_EXE} apt -y install ${1} && return		# Apt (debian)
-	(command -v brew)          					&& ${SUDO_EXE} brew install ${1} && return			# Homebrew (MacOS)
-	(command -v dnf)           					&& ${SUDO_EXE} dnf install ${1} && return			# Dnf (yum)
-	(command -v emerge &>/dev/null)        		&& ${SUDO_EXE} merge ${1} && return					# Portage
-	(command -v nix-env &>/dev/null)       		&& ${SUDO_EXE} nix-env -i ${1} && return			# Nix
-	(command -v ohpm &>/dev/null)          		&& ${SUDO_EXE} ohpm install ${1} && return			# Ohpm
-	(command -v pkg &>/dev/null)           		&& ${SUDO_EXE} pkg install ${1} && return			# Termux
-	(command -v pacman &>/dev/null)        		&& ${SUDO_EXE} pacman -S ${1} && return				# Pacman
-	(command -v swupd &>/dev/null)         		&& ${SUDO_EXE} swupd bundle-add ${1} && return		# Swupd
-	(command -v tce-load &>/dev/null)      		&& ${SUDO_EXE} tce-load -wil ${1} && return 	   	# Tiny core linux
-	(command -v winget &>/dev/null)        		&& ${SUDO_EXE} winget install ${1} && return		# WinGet
-	(command -v xbps-install &>/dev/null)		&& ${SUDO_EXE} xbps-install ${1} && return			# Xbps
-	(command -v zypper &>/dev/null)				&& ${SUDO_EXE} zypper in ${1} && return				# Zypper
-	(command -v dk_installPackage &>/dev/null)  && echo "ERROR: No package managers found." && exit 1 
+    (command -v apk)           				&& ${sudo_exe-} apk add ${1} 			&& return	# Alpine Package Keeper (alpine Linux)
+	(command -v apt-get)       				&& ${sudo_exe-} apt-get -y install ${1} && return	# Apt-get (debian)
+	(command -v apt)           				&& ${sudo_exe-} apt -y install ${1}		&& return	# Apt (debian)
+	(command -v brew)          				&& ${sudo_exe-} brew install ${1} 		&& return	# Homebrew (MacOS)
+	(command -v dnf)           				&& ${sudo_exe-} dnf install ${1} 		&& return	# Dnf (yum)
+	(command -v emerge &>/dev/null)        	&& ${sudo_exe-} merge ${1} 				&& return	# Portage
+	(command -v nix-env &>/dev/null)       	&& ${sudo_exe-} nix-env -i ${1} 		&& return	# Nix
+	(command -v ohpm &>/dev/null)          	&& ${sudo_exe-} ohpm install ${1} 		&& return	# Ohpm
+	(command -v pkg &>/dev/null)           	&& ${sudo_exe-} pkg install ${1} 		&& return	# Termux
+	(command -v pacman &>/dev/null)        	&& ${sudo_exe-} pacman -S ${1} 			&& return	# Pacman
+	(command -v swupd &>/dev/null)         	&& ${sudo_exe-} swupd bundle-add ${1} 	&& return	# Swupd
+	(command -v tce-load &>/dev/null)      	&& ${sudo_exe-} tce-load -wil ${1} 		&& return 	# Tiny core Linux
+	(command -v winget &>/dev/null)        	&& ${sudo_exe-} winget install ${1} 	&& return	# WinGet
+	(command -v xbps-install &>/dev/null)	&& ${sudo_exe-} xbps-install ${1} 		&& return	# Xbps
+	(command -v zypper &>/dev/null)			&& ${sudo_exe-} zypper in ${1} 			&& return	# Zypper
+	(command -v dk_installPackage &>/dev/null)  && (echo "ERROR: No package managers found."; exit ${BASH_LINENO[0]};)
 
-	${dk_installPackage} ${1}
-	(command -v ${1} &>/dev/null) || echo "ERROR: ${1}: command not found" || exit 1
+	dk_installPackage ${1}
+	(command -v ${1} &>/dev/null) || (echo "ERROR: ${1}: command not found"; exit ${BASH_LINENO[0]};) 
 }
 
 ##################################################################################
 # run DK()
-DK
+DK $* 
+
 
 
 

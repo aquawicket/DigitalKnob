@@ -1,15 +1,21 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-###### pe-explorer ######
-# https://www.pe-explorer.com/
+############ pe-explorer ############
+# https://www.pe-explorer.com
+# https://www.heaventools.com/download/pexsetup.exe
 
-
-### INSTALL ###
-dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-dk_getFileParam	($ENV{DKIMPORTS_DIR}/pe-explorer/dkconfig.txt PE_EXPLORER_IMPORT)
-dk_import		(${PE_EXPLORER_IMPORT} NAME PE_EXPLORER)
+dk_download("${${CURRENT_PLUGIN}_Url}")
+dk_exec("${dk_download}")

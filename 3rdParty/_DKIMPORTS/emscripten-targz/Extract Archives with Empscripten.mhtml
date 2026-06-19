@@ -1,0 +1,2759 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://mmore500.com/2020/01/26/emscripten-targz.html
+Subject: So You Want To Retrieve and Extract .tar.gz Archives with Empscripten
+Date: Tue, 22 Jul 2025 17:51:26 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----"
+
+
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/html
+Content-ID: <frame-AFED15BDB0322EEE109C36FC7D2AE0BE@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://mmore500.com/2020/01/26/emscripten-targz.html
+
+<!DOCTYPE html><html><head><meta http-equiv=3D"Content-Type" content=3D"tex=
+t/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D=
+"cid:css-f1629fc5-3c50-4e59-90e0-25a4b98e9835@mhtml.blink" /><link rel=3D"s=
+tylesheet" type=3D"text/css" href=3D"cid:css-54c1f52b-04a2-4d5b-9230-8df100=
+147e66@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=3D"ci=
+d:css-01284635-9425-4ad2-b5f6-7318fe47873a@mhtml.blink" /><link rel=3D"styl=
+esheet" type=3D"text/css" href=3D"cid:css-5ad1491e-f353-4157-9693-49a77ec99=
+32f@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=3D"cid:c=
+ss-3786dc1a-eb09-4901-82c4-230e2cf947b2@mhtml.blink" /><link rel=3D"stylesh=
+eet" type=3D"text/css" href=3D"cid:css-284dca80-28f6-44ef-aaaf-2a4ed22f9a73=
+@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-=
+8d242322-5e98-4cd0-bb77-61cf8165a143@mhtml.blink" /><link rel=3D"stylesheet=
+" type=3D"text/css" href=3D"cid:css-488bc81e-0bd0-4442-bd1e-3714c13b9391@mh=
+tml.blink" />
+ =20
+  <meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1">
+
+  <title>So You Want To Retrieve and Extract .tar.gz Archives with Empscrip=
+ten</title>
+  <meta name=3D"description" content=3D"As part of ongoing work with my sci=
+entific project=E2=80=99s cool cool web interface, I spent this afternoon a=
+nd evening figuring out how to download configuration a...">
+
+  <link rel=3D"stylesheet" href=3D"https://mmore500.com/css/main.css">
+  <link rel=3D"canonical" href=3D"https://mmore500.github.io/2020/01/26/ems=
+cripten-targz.html">
+  <link rel=3D"alternate" type=3D"application/rss+xml" title=3D"Matthew And=
+res Moreno" href=3D"https://mmore500.github.io/feed.xml">
+  <link rel=3D"stylesheet" href=3D"https://mmore500.com/resources/fontello-=
+fonticons/css/fontello.css">
+
+ =20
+
+
+
+</head>
+
+
+  <body><div id=3D"MathJax_Message" style=3D"display: none;"></div>
+
+    <header class=3D"site-header">
+
+  <div class=3D"wrapper">
+
+    <a class=3D"site-title" href=3D"https://mmore500.com/">Matthew Andres M=
+oreno</a>
+
+    <nav class=3D"site-nav">
+      <a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#" cl=
+ass=3D"menu-icon">
+        <svg viewBox=3D"0 0 18 15">
+          <path fill=3D"#424242" d=3D"M18,1.484c0,0.82-0.665,1.484-1.484,1.=
+484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C1=
+7.335,0,18,0.665,18,1.484L18,1.484z"></path>
+          <path fill=3D"#424242" d=3D"M18,7.516C18,8.335,17.335,9,16.516,9H=
+1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17=
+.335,6.031,18,6.696,18,7.516L18,7.516z"></path>
+          <path fill=3D"#424242" d=3D"M18,13.516C18,14.335,17.335,15,16.516=
+,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15=
+.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"></path>
+        </svg>
+      </a>
+
+      <div class=3D"trigger">
+        <class>
+
+   =20
+     <a href=3D"https://mmore500.com/about/" class=3D"page-link">About</a>
+   =20
+   =20
+   =20
+     <a href=3D"https://mmore500.com/works/" class=3D"page-link">Works</a>
+   =20
+   =20
+   =20
+     <a href=3D"https://mmore500.com/research/" class=3D"page-link">Researc=
+h</a>
+   =20
+   =20
+   =20
+     <a href=3D"https://mmore500.com/blog/" class=3D"page-link">Blog</a>
+   =20
+   =20
+   =20
+     <a href=3D"https://mmore500.com/portfolio/" class=3D"page-link">Photos=
+</a>
+   =20
+   =20
+
+      </class>
+</div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class=3D"page-content">
+      <div class=3D"wrapper">
+        <article class=3D"post" itemscope=3D"" itemtype=3D"http://schema.or=
+g/BlogPosting">
+
+  <header class=3D"post-header">
+    <h1 class=3D"post-title" itemprop=3D"name headline">So You Want To Retr=
+ieve and Extract .tar.gz Archives with Empscripten</h1>
+    <p class=3D"post-meta"><time datetime=3D"2020-01-26T00:00:00+00:00" ite=
+mprop=3D"datePublished">Jan 26, 2020</time></p>
+  </header>
+
+ =20
+
+  <div class=3D"post-content" itemprop=3D"articleBody">
+    <p>As part of ongoing work with <a href=3D"https://mmore500.github.io/d=
+ishtiny/">my scientific project=E2=80=99s cool cool web interface</a>, I sp=
+ent this afternoon and evening figuring out how to download configuration a=
+nd data files into the browser.
+I figured I should share what I learned!</p>
+
+<p>Emscripten=E2=80=99s nifty <a href=3D"https://emscripten.org/docs/portin=
+g/files/packaging_files.html">file packaging</a>, which prepares elements o=
+f the browser file system at compile time and packages it with your =E2=80=
+=9Cexecutable,=E2=80=9D had been my go to for a while.
+However, it became necessary to be able to swap out file contents without r=
+ecompiling so this no longer cut the mustard.</p>
+
+<p>The configuration and data files I work with are organized in a hierarch=
+ical structure with meaningful filenames that have unpredictable components=
+.
+I could try to have the user specify the filenames one by one in the browse=
+r then copy them down one by one, but that would be brittle and annoying.</=
+p>
+
+<p>Instead, I=E2=80=99d like to grab them all at once.
+A <a href=3D"https://en.wikipedia.org/wiki/Tar_(computing)">tar archive</a>=
+, which allows entire directory structures to be packaged into a single fil=
+e, seems an appealing option here.</p>
+
+<p>My files are big and repetitive, so I=E2=80=99d like to use <a href=3D"h=
+ttps://en.wikipedia.org/wiki/Gzip">gzip compression</a> so they=E2=80=99ll =
+serve up over the internets faster.</p>
+
+<p>Compressing and extracting <code class=3D"language-plaintext highlighter=
+-rouge">.tar.gz</code> archives at the terminal is easy<a href=3D"https://x=
+kcd.com/1168/">-ish</a>.
+Getting it going from a C++ program inside Emscripten=E2=80=99s browser san=
+dbox?
+A little harder, but once I found the right pieces to slot together not act=
+ually too bad!</p>
+
+<p>In this blog, I=E2=80=99ll briefly discuss each the components I assembl=
+ed and tweaked to create a minimal working example of retrieving and extrac=
+ting a <code class=3D"language-plaintext highlighter-rouge">.tar.gz</code> =
+archive with Emscripten.
+Then, I=E2=80=99ll walk you through getting the minimal working example act=
+ually running on your own machine.</p>
+
+<p>You can find all the complete minimal working example <a href=3D"https:/=
+/github.com/mmore500/emscripten-targz">on Github</a>.</p>
+
+<h2 id=3D"inflateh">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#inflateh" =
+class=3D"toc-anchor">=F0=9F=94=97</a> <code class=3D"language-plaintext hig=
+hlighter-rouge">inflate.h</code>
+</h2>
+
+<p>The first step is to decompress (or =E2=80=9Cinflate=E2=80=9D) the archi=
+ve.
+The <code class=3D"language-plaintext highlighter-rouge">zlib</code> projec=
+t, which has <a href=3D"https://github.com/emscripten-ports/zlib">a maintai=
+ned port for Emscripten</a>, provides a <code class=3D"language-plaintext h=
+ighlighter-rouge">gzFile_s</code> file handle analogous to the C-style <cod=
+e class=3D"language-plaintext highlighter-rouge">FILE</code> handle to get =
+at a gzipped file.</p>
+
+<p>So, we just do some <a href=3D"https://stackoverflow.com/questions/10195=
+343/copy-a-file-in-a-sane-safe-and-efficient-way">K &amp; R</a> B.S. to cop=
+y content from the gzipped file over to a regular file.</p>
+
+<h2 id=3D"untarh">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#untarh" cl=
+ass=3D"toc-anchor">=F0=9F=94=97</a> <code class=3D"language-plaintext highl=
+ighter-rouge">untar.h</code>
+</h2>
+
+<p>Now we just have a regular old <code class=3D"language-plaintext highlig=
+hter-rouge">tar</code> file.
+But we still have to do a little more work.
+This header provides <code class=3D"language-plaintext highlighter-rouge">u=
+ntar</code>, which reads that <code class=3D"language-plaintext highlighter=
+-rouge">tar</code> archive into the file system.</p>
+
+<p>I borrowed most of the code in this header from Tim Kientzle=E2=80=99s <=
+a href=3D"https://raw.githubusercontent.com/libarchive/libarchive/master/co=
+ntrib/untar.c">untar</a> and added support for long filenames stored using =
+<a href=3D"https://stackoverflow.com/questions/2078778/what-exactly-is-the-=
+gnu-tar-longlink-trick">@LongLink</a>.</p>
+
+<p>Besides standard library components, <code class=3D"language-plaintext h=
+ighlighter-rouge">untar.h</code> has no dependencies.</p>
+
+<h2 id=3D"maincc">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#maincc" cl=
+ass=3D"toc-anchor">=F0=9F=94=97</a> <code class=3D"language-plaintext highl=
+ighter-rouge">main.cc</code>
+</h2>
+
+<p>We use <a href=3D"https://emscripten.org/docs/api_reference/emscripten.h=
+.html#c.emscripten_wget"><code class=3D"language-plaintext highlighter-roug=
+e">emscripten_wget</code></a> to copy the <code class=3D"language-plaintext=
+ highlighter-rouge">.tar.gz</code> archive into Emscripten=E2=80=99s in-bro=
+wser file system.
+Then, we call <code class=3D"language-plaintext highlighter-rouge">inflate<=
+/code> and <code class=3D"language-plaintext highlighter-rouge">untar</code=
+> in sequence.
+Finally, we clean up the original <code class=3D"language-plaintext highlig=
+hter-rouge">.tar.gz</code> file (don=E2=80=99t need it anymore!) and print =
+some results to make sure everything worked.</p>
+
+<p>This file contains the interesting code bits and bops you=E2=80=99d plug=
+ into your project if you were trying to do this yourself, so I=E2=80=99ve =
+included a listing here for your edification. <img class=3D"emoji" title=3D=
+":apple:" alt=3D":apple:" src=3D"https://github.githubassets.com/images/ico=
+ns/emoji/unicode/1f34e.png" height=3D"20" width=3D"20"></p>
+
+<div class=3D"language-cpp highlighter-rouge"><div class=3D"highlight"><pre=
+ class=3D"highlight"><code><span class=3D"cp">#include</span> <span class=
+=3D"cpf">&lt;iostream&gt;</span><span class=3D"cp">
+#include</span> <span class=3D"cpf">&lt;stdio.h&gt;</span><span class=3D"cp=
+">
+#include</span> <span class=3D"cpf">&lt;fstream&gt;</span><span class=3D"cp=
+">
+#include</span> <span class=3D"cpf">&lt;set&gt;</span><span class=3D"cp">
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">&lt;experimental/fil=
+esystem&gt;</span><span class=3D"cp">
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">&lt;zlib.h&gt;</span=
+><span class=3D"cp">
+#include</span> <span class=3D"cpf">&lt;emscripten.h&gt;</span><span class=
+=3D"cp">
+</span>
+<span class=3D"cp">#include</span> <span class=3D"cpf">"inflate.h"</span><s=
+pan class=3D"cp">
+#include</span> <span class=3D"cpf">"untar.h"</span><span class=3D"cp">
+</span>
+<span class=3D"k">const</span> <span class=3D"n">std</span><span class=3D"o=
+">::</span><span class=3D"n">string</span> <span class=3D"n">source_filenam=
+e</span><span class=3D"p">{</span><span class=3D"s">"example.tar.gz"</span>=
+<span class=3D"p">};</span>
+
+<span class=3D"kt">int</span> <span class=3D"n">main</span><span class=3D"p=
+">()</span> <span class=3D"p">{</span>
+
+  <span class=3D"c1">// this call to copy down the tar.gz archive is blocki=
+ng</span>
+  <span class=3D"c1">// you have to compile with -s ASYNCIFY=3D1 to use it<=
+/span>
+  <span class=3D"c1">// emscripten_async_wget doesn't require ASYNCIFY</spa=
+n>
+  <span class=3D"n">emscripten_wget</span><span class=3D"p">(</span>
+    <span class=3D"s">"http://127.0.0.1:8000/example.tar.gz"</span><span cl=
+ass=3D"p">,</span>
+    <span class=3D"n">source_filename</span><span class=3D"p">.</span><span=
+ class=3D"n">c_str</span><span class=3D"p">()</span>
+  <span class=3D"p">);</span>
+
+  <span class=3D"k">auto</span> <span class=3D"n">file</span> <span class=
+=3D"o">=3D</span> <span class=3D"n">gzopen</span><span class=3D"p">(</span>=
+<span class=3D"n">source_filename</span><span class=3D"p">.</span><span cla=
+ss=3D"n">c_str</span><span class=3D"p">(),</span> <span class=3D"s">"rb"</s=
+pan><span class=3D"p">);</span>
+  <span class=3D"k">auto</span> <span class=3D"n">temp</span> <span class=
+=3D"o">=3D</span> <span class=3D"n">std</span><span class=3D"o">::</span><s=
+pan class=3D"n">tmpfile</span><span class=3D"p">();</span>
+
+  <span class=3D"c1">// unzip into temporary file</span>
+  <span class=3D"n">inflate</span><span class=3D"p">(</span><span class=3D"=
+n">file</span><span class=3D"p">,</span> <span class=3D"n">temp</span><span=
+ class=3D"p">);</span>
+
+  <span class=3D"n">gzclose</span><span class=3D"p">(</span><span class=3D"=
+n">file</span><span class=3D"p">);</span>
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+rewind</span><span class=3D"p">(</span><span class=3D"n">temp</span><span c=
+lass=3D"p">);</span>
+
+  <span class=3D"c1">// untar into present working directory</span>
+  <span class=3D"n">untar</span><span class=3D"p">(</span><span class=3D"n"=
+>temp</span><span class=3D"p">,</span> <span class=3D"s">"temp"</span><span=
+ class=3D"p">);</span>
+
+  <span class=3D"c1">// deletes temporary file</span>
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+fclose</span><span class=3D"p">(</span><span class=3D"n">temp</span><span c=
+lass=3D"p">);</span>
+
+  <span class=3D"c1">// remove the original .tar.gz archive... we don't nee=
+d it anymore!</span>
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+experimental</span><span class=3D"o">::</span><span class=3D"n">filesystem<=
+/span><span class=3D"o">::</span><span class=3D"n">remove</span><span class=
+=3D"p">(</span><span class=3D"n">source_filename</span><span class=3D"p">);=
+</span>
+
+  <span class=3D"c1">// print results</span>
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"time to pr=
+int results!"</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">st=
+d</span><span class=3D"o">::</span><span class=3D"n">endl</span><span class=
+=3D"p">;</span>
+
+  <span class=3D"k">for</span> <span class=3D"p">(</span><span class=3D"k">=
+const</span> <span class=3D"k">auto</span> <span class=3D"o">&amp;</span> <=
+span class=3D"n">filename</span> <span class=3D"o">:</span> <span class=3D"=
+n">std</span><span class=3D"o">::</span><span class=3D"n">set</span><span c=
+lass=3D"p">{</span>
+    <span class=3D"s">"example/example_file.txt"</span><span class=3D"p">,<=
+/span>
+    <span class=3D"s">"example/example_directory/another_file.txt"</span>
+  <span class=3D"p">})</span> <span class=3D"p">{</span>
+
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"filename=
+: "</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">filename</sp=
+an> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><span cla=
+ss=3D"o">::</span><span class=3D"n">endl</span><span class=3D"p">;</span>
+
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"  size: =
+"</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><spa=
+n class=3D"o">::</span><span class=3D"n">experimental</span><span class=3D"=
+o">::</span><span class=3D"n">filesystem</span><span class=3D"o">::</span><=
+span class=3D"n">file_size</span><span class=3D"p">(</span><span class=3D"n=
+">filename</span><span class=3D"p">)</span> <span class=3D"o">&lt;&lt;</spa=
+n> <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n"=
+>endl</span><span class=3D"p">;</span>
+
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"  conten=
+t: "</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><=
+span class=3D"o">::</span><span class=3D"n">endl</span><span class=3D"p">;<=
+/span>
+
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">ifstream</span> <span class=3D"n">file</span><span class=3D"p">{</span><s=
+pan class=3D"n">filename</span><span class=3D"p">};</span>
+
+    <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n=
+">string</span> <span class=3D"n">line</span><span class=3D"p">;</span>
+    <span class=3D"k">while</span><span class=3D"p">(</span><span class=3D"=
+n">getline</span><span class=3D"p">(</span><span class=3D"n">file</span><sp=
+an class=3D"p">,</span> <span class=3D"n">line</span><span class=3D"p">))</=
+span> <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D=
+"n">cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"    "<=
+/span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">line</span> <spa=
+n class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><span class=3D"o"=
+>::</span><span class=3D"n">endl</span><span class=3D"p">;</span>
+
+  <span class=3D"p">}</span>
+
+  <span class=3D"n">std</span><span class=3D"o">::</span><span class=3D"n">=
+cout</span> <span class=3D"o">&lt;&lt;</span> <span class=3D"s">"all done"<=
+/span> <span class=3D"o">&lt;&lt;</span> <span class=3D"n">std</span><span =
+class=3D"o">::</span><span class=3D"n">endl</span><span class=3D"p">;</span=
+>
+
+<span class=3D"p">}</span>
+</code></pre></div></div>
+
+<h2 id=3D"indexhtml">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#indexhtml"=
+ class=3D"toc-anchor">=F0=9F=94=97</a> <code class=3D"language-plaintext hi=
+ghlighter-rouge">index.html</code>
+</h2>
+
+<p>This html file gives us something to look at when we serve up the minima=
+l working example. :squirrel:</p>
+
+<h2 id=3D"exampletargz">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#exampletar=
+gz" class=3D"toc-anchor">=F0=9F=94=97</a> <code class=3D"language-plaintext=
+ highlighter-rouge">example.tar.gz</code>
+</h2>
+
+<p>This is the example <code class=3D"language-plaintext highlighter-rouge"=
+>.tar.gz</code> archive we want to retrieve and extract.</p>
+
+<div class=3D"language-plaintext highlighter-rouge"><div class=3D"highlight=
+"><pre class=3D"highlight"><code>example
+=E2=94=9C=E2=94=80=E2=94=80 example_directory
+=E2=94=82&nbsp;&nbsp; =E2=94=94=E2=94=80=E2=94=80 another_file.txt
+=E2=94=94=E2=94=80=E2=94=80 example_file.txt
+</code></pre></div></div>
+
+<h2 id=3D"compile--run">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#compile--r=
+un" class=3D"toc-anchor">=F0=9F=94=97</a> Compile &amp; Run</h2>
+
+<p>You=E2=80=99ll need a working copy of Emscripten to start with.
+Emscripten=E2=80=99s <a href=3D"https://emscripten.org/docs/getting_started=
+/index.html">Getting Started</a> page has instructions on getting that set =
+up.
+I used version 1.38.28.</p>
+
+<p>Grab the minimal working code.</p>
+
+<div class=3D"language-bash highlighter-rouge"><div class=3D"highlight"><pr=
+e class=3D"highlight"><code>git clone https://github.com/mmore500/emscripte=
+n-targz.git
+<span class=3D"nb">cd </span>emscripten-targz
+</code></pre></div></div>
+
+<p>Compile with <code class=3D"language-plaintext highlighter-rouge">emcc</=
+code> with flags to request zlib and asyncify.</p>
+
+<div class=3D"language-bash highlighter-rouge"><div class=3D"highlight"><pr=
+e class=3D"highlight"><code>emcc <span class=3D"nt">-std</span><span class=
+=3D"o">=3D</span>c++17 <span class=3D"nt">-s</span> <span class=3D"nv">USE_=
+ZLIB</span><span class=3D"o">=3D</span>1 <span class=3D"nt">-s</span> <span=
+ class=3D"nv">ASYNCIFY</span><span class=3D"o">=3D</span>1 <span class=3D"n=
+t">-O3</span> main.cc <span class=3D"nt">-o</span> example.js
+</code></pre></div></div>
+
+<p>All that=E2=80=99s left to do is serve it up=E2=80=A6</p>
+
+<div class=3D"language-bash highlighter-rouge"><div class=3D"highlight"><pr=
+e class=3D"highlight"><code>python3 <span class=3D"nt">-m</span> http.serve=
+r 8000
+</code></pre></div></div>
+
+<p>=E2=80=A6and surf over to <a href=3D"http://127.0.0.1:8000/">http://127.=
+0.0.1:8000</a> and pull up the JavaScript console in your developer tools. =
+<img class=3D"emoji" title=3D":sunglasses:" alt=3D":sunglasses:" src=3D"htt=
+ps://github.githubassets.com/images/icons/emoji/unicode/1f60e.png" height=
+=3D"20" width=3D"20"></p>
+
+<h2 id=3D"lets-chat">
+<a href=3D"https://mmore500.com/2020/01/26/emscripten-targz.html#lets-chat"=
+ class=3D"toc-anchor">=F0=9F=94=97</a> Let=E2=80=99s Chat</h2>
+
+<p>I would love to hear your thoughts, questions, and comments RE: Emscript=
+en <code class=3D"language-plaintext highlighter-rouge">.tar.gz</code> kung=
+ fu!!!</p>
+
+<p>I started a twitter thread (right below) so we can chat <img class=3D"em=
+oji" title=3D":phone:" alt=3D":phone:" src=3D"https://github.githubassets.c=
+om/images/icons/emoji/unicode/260e.png" height=3D"20" width=3D"20"> <img cl=
+ass=3D"emoji" title=3D":phone:" alt=3D":phone:" src=3D"https://github.githu=
+bassets.com/images/icons/emoji/unicode/260e.png" height=3D"20" width=3D"20"=
+> <img class=3D"emoji" title=3D":phone:" alt=3D":phone:" src=3D"https://git=
+hub.githubassets.com/images/icons/emoji/unicode/260e.png" height=3D"20" wid=
+th=3D"20"></p>
+
+<div class=3D"twitter-tweet twitter-tweet-rendered" style=3D"display: flex;=
+ max-width: 550px; width: 100%; margin-top: 10px; margin-bottom: 10px;"><if=
+rame id=3D"twitter-widget-0" scrolling=3D"no" frameborder=3D"0" allowtransp=
+arency=3D"true" allowfullscreen=3D"true" class=3D"" title=3D"X Post" src=3D=
+"cid:frame-293F70855E6622F89A87DF5C575FC701@mhtml.blink" style=3D"position:=
+ static; visibility: visible; width: 550px; height: 369px; display: block; =
+flex-grow: 1;" data-tweet-id=3D"1221698974379196418"></iframe></div>
+
+
+  </div>
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class=3D"site-footer">
+
+  <div class=3D"wrapper">
+    <div class=3D"footer-col-wrapper">
+      <div class=3D"footer-col footer-col-1">
+        <ul class=3D"contact-list">
+          <li>Matthew Andres Moreno (hehimhis)</li>
+          <li> postdoctoral scholar, University of Michigan
+ </li>
+          <li><a href=3D"https://scholar.google.com/citations?user=3DxROn8y=
+4AAAAJ">my google scholar profile</a></li>
+        </ul>
+
+
+      </div>
+
+      <div class=3D"footer-col footer-col-2">
+        <ul class=3D"social-media-list">
+
+            <li>
+<a href=3D"mailto:m.more500@gmail.com"><span class=3D"icon"><svg viewBox=3D=
+"0 0 512 512"><path fill=3D"currentColor" d=3D"M464 64H48C21.49 64 0 85.49 =
+0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.=
+49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841=
+ 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C=
+106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.=
+251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955=
+ 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.94=
+7-82.653V400H48z"></path></svg>
+</span><span class=3D"username">m.more500@gmail.com</span></a>
+</li>
+           =20
+            <li>
+              <a href=3D"https://twitter.com/morenomatthewa"><span class=3D=
+"icon icon--twitter"><svg viewBox=3D"0 0 16 16"><path fill=3D"#828282" d=3D=
+"M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,=
+1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2=
+.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5=
+.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.=
+134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.=
+027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9=
+.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c=
+-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.92=
+8,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.=
+283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"></path></svg>
+</span><span class=3D"username">morenomatthewa</span></a>
+
+            </li>
+           =20
+           =20
+            <li>
+              <a href=3D"https://github.com/mmore500"><span class=3D"icon i=
+con--github"><svg viewBox=3D"0 0 16 16"><path fill=3D"#828282" d=3D"M7.999,=
+0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388=
+,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.=
+614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053=
+-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843=
+,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3=
+.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.6=
+5 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1=
+.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.1=
+57,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.6=
+37-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2=
+.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15=
+.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
+</span><span class=3D"username">mmore500</span></a>
+
+            </li>
+           =20
+          </ul>
+
+
+      </div>
+
+      <div class=3D"footer-col footer-col-3">
+
+        <svg xmlns=3D"http://www.w3.org/2000/svg" xmlns:xlink=3D"http://www=
+.w3.org/1999/xlink" width=3D"96" height=3D"20"><linearGradient id=3D"b" x2=
+=3D"0" y2=3D"100%"><stop offset=3D"0" stop-color=3D"#bbb" stop-opacity=3D".=
+1"></stop><stop offset=3D"1" stop-opacity=3D".1"></stop></linearGradient><c=
+lipPath id=3D"a"><rect width=3D"96" height=3D"20" rx=3D"3" fill=3D"#fff"></=
+rect></clipPath><g clip-path=3D"url(#a)"><path fill=3D"#555" d=3D"M0 0h57v2=
+0H0z"></path><path fill=3D"#FFA500" d=3D"M57 0h39v20H57z"></path><path fill=
+=3D"url(#b)" d=3D"M0 0h96v20H0z"></path></g><g fill=3D"#fff" text-anchor=3D=
+"middle" font-family=3D"DejaVu Sans,Verdana,Geneva,sans-serif" font-size=3D=
+"110"><text x=3D"295" y=3D"150" fill=3D"#010101" fill-opacity=3D".3" transf=
+orm=3D"scale(.1)" textLength=3D"500">subscribe</text><text x=3D"295" y=3D"1=
+40" transform=3D"scale(.1)" textLength=3D"500">subscribe</text><text x=3D"7=
+60" y=3D"150" fill=3D"#010101" fill-opacity=3D".3" transform=3D"scale(.1)" =
+textLength=3D"240">RSS</text><text x=3D"760" y=3D"140" transform=3D"scale(.=
+1)" textLength=3D"240">RSS</text></g><a target=3D"_blank" xlink:href=3D"htt=
+ps://mmore500.github.io/feed.xml"><path fill=3D"rgba(0,0,0,0)" d=3D"M0 0h47=
+v20H0z"></path></a> <a target=3D"_blank" xlink:href=3D"https://mmore500.git=
+hub.io/feed.xml"><path fill=3D"rgba(0,0,0,0)" d=3D"M47 0h49v20H47z"></path>=
+</a></svg>
+
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+
+   =20
+   =20
+
+   =20
+
+ =20
+
+
+<iframe scrolling=3D"no" frameborder=3D"0" allowtransparency=3D"true" src=
+=3D"cid:frame-41B1CC7BA6C74F306A4056A55C1557A7@mhtml.blink" title=3D"Twitte=
+r settings iframe" style=3D"display: none;"></iframe><iframe id=3D"rufous-s=
+andbox" scrolling=3D"no" frameborder=3D"0" allowtransparency=3D"true" allow=
+fullscreen=3D"true" style=3D"position: absolute; visibility: hidden; displa=
+y: none; width: 0px; height: 0px; padding: 0px; border: none;" title=3D"Twi=
+tter analytics iframe"></iframe></body></html>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://github.githubassets.com/images/icons/emoji/unicode/260e.png
+
+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
+A91qe6vM2DLRAAAAAElFTkSuQmCC
+
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png
+
+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
+
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://github.githubassets.com/images/icons/emoji/unicode/1f34e.png
+
+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
+
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://mmore500.com/resources/fontello-fonticons/css/fontello.css
+
+@charset "utf-8";
+
+@font-face { font-family: fontello; src: url("../font/fontello.woff2?507845=
+04") format("woff2"), url("../font/fontello.woff?50784504") format("woff"),=
+ url("../font/fontello.ttf?50784504") format("truetype"); font-weight: norm=
+al; font-style: normal; }
+
+[class^=3D"icon-"]::before, [class*=3D" icon-"]::before { font-family: font=
+ello; font-style: normal; font-weight: normal; display: inline-block; text-=
+decoration: inherit; width: 1em; margin-right: 0.2em; text-align: center; f=
+ont-variant: normal; text-transform: none; line-height: 1em; margin-left: 0=
+.2em; -webkit-font-smoothing: antialiased; }
+
+.icon-web-page-click::before { content: "=EE=A0=80"; }
+
+.icon-icon-twitter::before { content: "=EE=A0=81"; }
+
+.icon-rss::before { content: "=EE=A0=82"; }
+
+.icon-contrast::before { content: "=EE=A0=83"; }
+
+.icon-icon-email::before { content: "=EE=A0=84"; }
+
+.icon-icon-github::before { content: "=EE=A0=85"; }
+
+.icon-github::before { content: "=EE=A0=86"; }
+
+.icon-github-circled::before { content: "=EE=A0=87"; }
+
+.icon-fast-forward::before { content: "=EE=A0=88"; }
+
+.icon-shuffle::before { content: "=EE=A0=89"; }
+
+.icon-code::before { content: "=EE=A0=8A"; }
+
+.icon-article-alt::before { content: "=EE=A0=8B"; }
+
+.icon-lock-open::before { content: "=EE=A0=8C"; }
+
+.icon-smashmag::before { content: "=EE=A0=8D"; }
+
+.icon-lock-open-filled::before { content: "=EE=A0=8E"; }
+
+.icon-attach-1::before { content: "=EE=A0=8F"; }
+
+.icon-lock::before { content: "=EE=A0=90"; }
+
+.icon-calendar::before { content: "=EE=A0=91"; }
+
+.icon-lock-open-1::before { content: "=EE=A0=92"; }
+
+.icon-tags::before { content: "=EE=A0=93"; }
+
+.icon-tag::before { content: "=EE=A0=94"; }
+
+.icon-export::before { content: "=EE=A0=95"; }
+
+.icon-adjust::before { content: "=EE=A0=96"; }
+
+.icon-attention::before { content: "=EE=A0=97"; }
+
+.icon-location::before { content: "=EE=A0=98"; }
+
+.icon-download::before { content: "=EE=A0=99"; }
+
+.icon-rss-1::before { content: "=EE=A0=9A"; }
+
+.icon-rss-alt::before { content: "=EE=A0=9B"; }
+
+.icon-attach::before { content: "=EE=A0=9C"; }
+
+.icon-archive::before { content: "=EE=A0=9D"; }
+
+.icon-terminal::before { content: "=EE=A0=9E"; }
+
+.icon-cloud::before { content: "=EE=A0=9F"; }
+
+.icon-video::before { content: "=EE=A0=A0"; }
+
+.icon-upload::before { content: "=EE=A0=A1"; }
+
+.icon-home::before { content: "=EE=A0=A2"; }
+
+.icon-info-circled::before { content: "=EE=A0=A3"; }
+
+.icon-help-circled::before { content: "=EE=A0=A4"; }
+
+.icon-cancel::before { content: "=EE=A0=A5"; }
+
+.icon-cancel-circled::before { content: "=EE=A0=A6"; }
+
+.icon-cancel-circled2::before { content: "=EE=A0=A7"; }
+
+.icon-camera::before { content: "=EE=A0=A8"; }
+
+.icon-picture::before { content: "=EE=A0=A9"; }
+
+.icon-camera-alt::before { content: "=EE=A0=AA"; }
+
+.icon-user::before { content: "=EE=A0=AB"; }
+
+.icon-star::before { content: "=EE=A0=AC"; }
+
+.icon-star-empty::before { content: "=EE=A0=AD"; }
+
+.icon-link-ext::before { content: "=EF=82=8E"; }
+
+.icon-download-cloud::before { content: "=EF=83=AD"; }
+
+.icon-upload-cloud::before { content: "=EF=83=AE"; }
+
+.icon-github-1::before { content: "=EF=84=93"; }
+
+.icon-code-1::before { content: "=EF=84=A1"; }
+
+.icon-help::before { content: "=EF=84=A8"; }
+
+.icon-info::before { content: "=EF=84=A9"; }
+
+.icon-lock-open-alt::before { content: "=EF=84=BE"; }
+
+.icon-export-alt::before { content: "=EF=85=8D"; }
+
+.icon-paper-plane-empty::before { content: "=EF=87=99"; }
+
+.icon-binoculars::before { content: "=EF=87=A5"; }
+
+.icon-balance-scale::before { content: "=EF=89=8E"; }
+
+.icon-amazon::before { content: "=EF=89=B0"; }
+
+.icon-calendar-plus-o::before { content: "=EF=89=B1"; }
+
+.icon-calendar-minus-o::before { content: "=EF=89=B2"; }
+
+.icon-calendar-times-o::before { content: "=EF=89=B3"; }
+
+.icon-calendar-check-o::before { content: "=EF=89=B4"; }
+
+.icon-address-card::before { content: "=EF=8A=BB"; }
+
+.icon-address-card-o::before { content: "=EF=8A=BC"; }
+
+.icon-user-circle::before { content: "=EF=8A=BD"; }
+
+.icon-user-circle-o::before { content: "=EF=8A=BE"; }
+
+.icon-id-card::before { content: "=EF=8B=82"; }
+
+.icon-id-card-o::before { content: "=EF=8B=83"; }
+
+.icon-window-restore::before { content: "=EF=8B=92"; }
+
+.icon-window-close::before { content: "=EF=8B=93"; }
+
+.icon-window-close-o::before { content: "=EF=8B=94"; }
+
+.icon-youtube::before { content: "=EF=8C=93"; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://mmore500.com/css/main.css
+
+@charset "utf-8";
+
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figur=
+e { margin: 0px; padding: 0px; }
+
+body { font-style: normal; font-variant: normal; font-size-adjust: none; fo=
+nt-optical-sizing: auto; font-variation-settings: normal; font-weight: 400;=
+ font-stretch: normal; font-size: 16px; line-height: 1.5; font-family: "Hel=
+vetica Neue", Helvetica, Arial, sans-serif; color: rgb(17, 17, 17); backgro=
+und-color: rgb(253, 253, 253); text-size-adjust: 100%; font-feature-setting=
+s: "kern"; font-kerning: normal; }
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight =
+{ margin-bottom: 15px; }
+
+.alignright { float: right; }
+
+hr { border-width: 1px 0px; border-right-style: initial; border-left-style:=
+ initial; border-right-color: initial; border-left-color: initial; border-i=
+mage: initial; height: 0px; border-top-style: solid; border-top-color: rgba=
+(0, 0, 0, 0.1); border-bottom-style: solid; border-bottom-color: rgba(255, =
+255, 255, 0.3); }
+
+.baseimg { max-width: 100%; vertical-align: middle; }
+
+figure > img { display: block; }
+
+figcaption { font-size: 14px; }
+
+ul, ol { margin-left: 30px; }
+
+li > ul, li > ol { margin-bottom: 0px; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: 400; }
+
+a { color: rgb(42, 122, 226); text-decoration: none; }
+
+a:visited { color: rgb(23, 86, 169); }
+
+a:hover { color: rgb(17, 17, 17); text-decoration: underline; }
+
+blockquote { color: rgb(130, 130, 130); border-left: 4px solid rgb(232, 232=
+, 232); padding-left: 15px; font-size: 18px; letter-spacing: -1px; font-sty=
+le: italic; }
+
+blockquote > :last-child { margin-bottom: 0px; }
+
+pre, code { font-size: 15px; border: 1px solid rgb(232, 232, 232); border-r=
+adius: 3px; background-color: rgb(238, 238, 255); }
+
+code { padding: 1px 5px; }
+
+pre { padding: 8px 12px; overflow-x: auto; }
+
+pre > code { border: 0px; padding-right: 0px; padding-left: 0px; }
+
+.wrapper { max-width: calc(740px); margin-right: auto; margin-left: auto; p=
+adding-right: 30px; padding-left: 30px; }
+
+@media screen and (max-width: 800px) {
+  .wrapper { max-width: calc(770px); padding-right: 15px; padding-left: 15p=
+x; }
+}
+
+.wrapper::after, .footer-col-wrapper::after { content: ""; display: table; =
+clear: both; }
+
+.icon > svg { display: inline-block; width: 16px; height: 16px; vertical-al=
+ign: middle; }
+
+.icon > svg path { fill: rgb(130, 130, 130); }
+
+.icon--rss > svg path { fill: rgb(255, 255, 255); }
+
+.wrapper { max-width: calc(740px); margin-right: auto; margin-left: auto; p=
+adding-right: 30px; padding-left: 30px; }
+
+@media screen and (max-width: 800px) {
+  .wrapper { max-width: calc(770px); padding-right: 15px; padding-left: 15p=
+x; }
+}
+
+.wrapper::after, .footer-col-wrapper::after { content: ""; display: table; =
+clear: both; }
+
+.container { display: flex; }
+
+.flex-item { flex-grow: 0.5; }
+
+.gist .csv-data { overflow: auto; max-height: 350px; }
+
+.gist .file { max-height: 400px; overflow: auto !important; }
+
+.gist .type-csv { overflow: hidden !important; }
+
+.collapsible { background-color: rgb(119, 119, 119); color: white; cursor: =
+pointer; padding: 18px; width: 100%; border: none; text-align: left; outlin=
+e: none; font-size: 15px; }
+
+.content { padding: 0px 18px; display: none; overflow: hidden; }
+
+a.button.efflux { flex-grow: 1; flex-basis: 0px; cursor: pointer; margin: 0=
+px 10px; padding: 5px; border: 1px solid black; background-color: transpare=
+nt; border-radius: 8px; text-align: center; }
+
+a.button.efflux:hover { background-color: rgb(232, 232, 232); }
+
+details.lollipop > summary, .peek_details.lollipop > .peek_summary { list-s=
+tyle: ""; display: flex; align-items: center; cursor: pointer; transition: =
+margin 150ms ease-out; padding-bottom: 0px; margin-left: 0.625em; border-le=
+ft: 2px solid transparent; }
+
+details.lollipop > summary:hover, .peek_details.lollipop > .peek_summary:ho=
+ver { text-decoration: underline; }
+
+details.lollipop summary > *, .peek_details.lollipop .peek_summary > * { di=
+splay: inline; }
+
+details.lollipop > summary::before, .peek_details.lollipop > .peek_summary:=
+:before { content: url("data:image/svg+xml; utf8, %3Csvg xmlns=3D'http://ww=
+w.w3.org/2000/svg' height=3D'2em' width=3D'1.25em' %3E%3Ctext x=3D'50%25' y=
+=3D'50%25' font-size=3D'1.9em' dominant-baseline=3D'middle' text-anchor=3D'=
+middle'%3E=E2=8E=89%3C/text%3E%3C/svg%3E"); margin-right: 5px; display: fle=
+x; align-items: center; font-weight: bold; margin-left: -0.625em; }
+
+details[open].lollipop > summary::before, .peek_details[open].lollipop > .p=
+eek_summary::before { content: url("data:image/svg+xml; utf8, %3Csvg xmlns=
+=3D'http://www.w3.org/2000/svg' height=3D'2em' width=3D'1.25em' %3E%3Ctext =
+x=3D'50%25' y=3D'50%25' font-weight=3D'bold' font-size=3D'x-large' dominant=
+-baseline=3D'middle' text-anchor=3D'middle'%3E=E2=97=89%3C/text%3E%3C/svg%3=
+E"); display: flex; align-items: center; margin-right: 0.275em; margin-left=
+: -0.625em; }
+
+summary.lollipop::-webkit-details-marker, .peek_summary.lollipop::-webkit-d=
+etails-marker, summary.lollipop::marker, .peek_summary.lollipop::marker { l=
+ist-style-type: ""; display: none; }
+
+details.lollipop[open] > summary { transition: padding 150ms ease-out; padd=
+ing-bottom: 10px; }
+
+details.lollipop[open] > summary, .peek_details.lollipop[open] > .peek_summ=
+ary { list-style-type: ""; margin-left: 0.625em; border-left: 2px solid; bo=
+rder-image: linear-gradient(to top, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 50%, tra=
+nsparent 50%, transparent 100%) 1 100% / 1 / 0 stretch; }
+
+.lollipop-detail { margin-left: 0.625em; border-left: 2px dashed; padding-l=
+eft: 0.9em; margin-bottom: 10px; }
+
+details.lollipop[open] > .lollipop-detail { margin-top: -10px; }
+
+details.lollipop[open] > .lollipop-detail, .peek_details.lollipop[open] > .=
+lollipop-detail { border-left: 2px solid; }
+
+@keyframes details-show {=20
+  0% { opacity: 0; }
+}
+
+details[open].lollipop > :not(summary) { animation: 150ms ease-in-out 0s 1 =
+normal none running details-show; }
+
+.peek_details.lollipop > * > .peek-lollipop-mask { transition: max-height 0=
+.2s cubic-bezier(0, 1, 0, 1) -0.05s; }
+
+.peek_details[open].lollipop > * > .peek-lollipop-mask { transition-timing-=
+function: cubic-bezier(0.5, 0, 1, 0); transition-delay: 0s; }
+
+.exit-cursor { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns=3D\"http:/=
+/www.w3.org/2000/svg\" width=3D\"30\" height=3D\"30\" style=3D\"font-size: =
+25px; font-weight: bold; paint-order: stroke; stroke: %23ffffff; stroke-wid=
+th: 5px; stroke-linecap: butt; stroke-linejoin: miter; font-weight: 800;\"%=
+3E%3Ctext x=3D\"50%25\" y=3D\"50%25\" dominant-baseline=3D\"middle\" text-a=
+nchor=3D\"middle\"%3E=F0=9F=97=99%3C/text%3E%3C/svg%3E"), auto; }
+
+.escape-cursor { cursor: url("data:image/svg+xml;utf8,%3Csvg xmlns=3D\"http=
+://www.w3.org/2000/svg\" width=3D\"30\" height=3D\"30\" style=3D\"font-size=
+: 25px; font-weight: bold; paint-order: stroke; stroke: %23ffffff; stroke-w=
+idth: 5px; stroke-linecap: butt; stroke-linejoin: miter; font-weight: 800;\=
+"%3E%3Ctext x=3D\"50%25\" y=3D\"50%25\" dominant-baseline=3D\"middle\" text=
+-anchor=3D\"middle\"%3E=E2=8E=8B%3C/text%3E%3C/svg%3E"), auto; }
+
+a.button { appearance: button; text-decoration: none; color: initial; }
+
+.peek-lollipop-mask { width: 100%; margin-bottom: 5px; padding-bottom: 5px;=
+ max-height: 200px; overflow: hidden; text-overflow: ellipsis; content: "";=
+ position: relative; }
+
+.peek-lollipop-mask::before { content: ""; width: 100%; height: 100%; posit=
+ion: absolute; left: 0px; top: 0px; background: linear-gradient(transparent=
+ 150px, rgb(255, 255, 255)); }
+
+.peek_details.lollipop[open] > * > .peek-lollipop-mask { width: initial; ma=
+rgin-bottom: initial; padding-bottom: initial; max-height: 99999px; overflo=
+w: initial; text-overflow: initial; content: ""; position: initial; }
+
+.peek_details.lollipop[open] > * > .peek-lollipop-mask::before { content: "=
+"; width: initial; height: initial; position: initial; left: initial; top: =
+initial; background: initial; }
+
+html { overflow-y: scroll; }
+
+@-webkit-keyframes target-fade {=20
+  0% { background-color: rgb(232, 232, 232); }
+  100% { background-color: transparent; }
+}
+
+@keyframes target-fade {=20
+  0% { background-color: rgb(232, 232, 232); }
+  100% { background-color: transparent; }
+}
+
+.site-header { border-top: 5px solid rgb(66, 66, 66); border-bottom: 1px so=
+lid rgb(232, 232, 232); min-height: 56px; position: relative; }
+
+.site-title { font-size: 26px; font-weight: 300; line-height: 56px; letter-=
+spacing: -1px; margin-bottom: 0px; float: left; }
+
+.site-title, .site-title:visited { color: rgb(66, 66, 66); }
+
+.site-nav { z-index: 100; float: right; line-height: 56px; }
+
+.site-nav .menu-icon { display: none; }
+
+.site-nav .page-link { color: rgb(17, 17, 17); line-height: 1.5; }
+
+.site-nav .page-link:not(:last-child) { margin-right: 20px; }
+
+@media screen and (max-width: 800px) {
+  .site-nav { position: absolute; top: 9px; right: 15px; background-color: =
+rgb(253, 253, 253); border: 1px solid rgb(232, 232, 232); border-radius: 5p=
+x; text-align: right; }
+  .site-nav .menu-icon { display: block; float: right; width: 36px; height:=
+ 26px; line-height: 0; padding-top: 10px; text-align: center; }
+  .site-nav .menu-icon > svg { width: 18px; height: 15px; }
+  .site-nav .menu-icon > svg path { fill: rgb(66, 66, 66); }
+  .site-nav .trigger { clear: both; display: none; }
+  .site-nav:hover .trigger { display: block; padding-bottom: 5px; }
+  .site-nav .page-link { display: block; padding: 5px 10px; margin-left: 20=
+px; }
+  .site-nav .page-link:not(:last-child) { margin-right: 0px; }
+}
+
+.site-footer { border-top: 1px solid rgb(232, 232, 232); padding: 30px 0px =
+0px; }
+
+.footer-heading { font-size: 18px; margin-bottom: 15px; }
+
+.contact-list, .social-media-list { list-style: none; margin-left: 0px; }
+
+.footer-col-wrapper { font-size: 15px; color: rgb(130, 130, 130); margin-le=
+ft: -15px; }
+
+.footer-col { float: left; margin-bottom: 0px; padding-left: 15px; }
+
+.footer-col-1 { width: calc(50% - 15px); }
+
+.footer-col-2 { width: calc(30% - 15px); }
+
+.footer-col-3 { width: calc(10% - 15px); }
+
+@media screen and (max-width: 800px) {
+  .footer-col-1, .footer-col-2 { width: calc(50% - 15px); }
+  .footer-col-3 { width: calc(100% - 15px); }
+}
+
+@media screen and (max-width: 800px) {
+  .footer-col { float: none; width: calc(100% - 15px); }
+}
+
+.page-content { padding: 30px 0px; }
+
+.page-heading { font-size: 20px; }
+
+.post-list { margin-left: 0px; list-style: none; }
+
+.post-list > li { margin-bottom: 30px; }
+
+.post-meta { font-size: 14px; color: rgb(130, 130, 130); }
+
+.post-link { display: block; font-size: 24px; }
+
+.post-header { margin-bottom: 30px; }
+
+.post-title { font-size: 42px; letter-spacing: -1px; line-height: 1; }
+
+@media screen and (max-width: 800px) {
+  .post-title { font-size: 36px; }
+}
+
+.post-content { margin-bottom: 30px; }
+
+.post-content h2 { font-size: 32px; }
+
+@media screen and (max-width: 800px) {
+  .post-content h2 { font-size: 28px; }
+}
+
+.post-content h3 { font-size: 26px; }
+
+@media screen and (max-width: 800px) {
+  .post-content h3 { font-size: 22px; }
+}
+
+.post-content h4 { font-size: 20px; }
+
+@media screen and (max-width: 800px) {
+  .post-content h4 { font-size: 18px; }
+}
+
+.clearfix::before, .clearfix::after { content: " "; display: table; }
+
+.clearfix::after { clear: both; }
+
+.project { width: 33.33%; height: 250px; float: left; vertical-align: middl=
+e; box-sizing: border-box; padding: 10px; }
+
+@media screen and (max-width: 800px) {
+  .project { width: 100%; }
+}
+
+.thumbnail { width: 100%; height: 230px; overflow: hidden; }
+
+.thumbnail img { width: 160%; height: auto; position: relative; left: -40%;=
+ top: 0%; }
+
+.thumbnail a { float: left; position: relative; width: 100%; height: 230px;=
+ }
+
+.thumbnail a span { display: none; position: absolute; inset: 0px; backgrou=
+nd: rgba(0, 0, 0, 0.4); color: rgb(232, 232, 232); padding: 40px; text-alig=
+n: center; }
+
+.thumbnail a span { display: block; }
+
+.blankbox { background: rgb(253, 253, 253); }
+
+.img_row { height: 275px; width: 100%; overflow: hidden; box-sizing: border=
+-box; padding: 5px; }
+
+.col { width: 100%; height: 100%; float: left; object-fit: cover; box-sizin=
+g: border-box; padding: 5px; }
+
+.right { float: right; }
+
+.one { width: 33.33%; }
+
+.two { width: 66.66%; }
+
+.three { width: 100%; }
+
+.caption { height: 100%; color: rgb(170, 170, 170); text-align: center; ver=
+tical-align: middle; font-size: 12px; }
+
+.hideflex { padding-left: 40px; flex-grow: 1; }
+
+@media screen and (max-width: 800px) {
+  .hideflex { display: none; }
+}
+
+.toc-anchor:hover { text-decoration: none; }
+
+.toc-longlist { padding: 0px; margin-left: 80px; margin-right: 0px; margin-=
+bottom: 30px; list-style: none; columns: 2; }
+
+.toc-shortlist { padding: 0px; margin-left: 80px; margin-right: 0px; margin=
+-bottom: 30px; list-style: none; columns: 1; }
+
+.toc { position: relative; min-height: 150px; }
+
+.toc-label { transform: rotate(-90deg); letter-spacing: 3px; margin-left: -=
+20px; top: 50px; position: absolute; }
+
+.recipe-contents { display: -webkit-flex; flex-wrap: wrap; }
+
+.recipe-contents .ingredients { width: 200px; padding: 10px; }
+
+.recipe-contents .directions { padding: 10px; flex: 1 1 250px; }
+
+.recipe-contents .notes { padding: 10px; flex: 1 1 100%; }
+
+.recipe-overview { padding: 0px 0px 20px; margin: auto; text-align: center;=
+ }
+
+.recipe-overview svg { position: relative; top: 6px; }
+
+.recipe-overview span { margin: 0px 18px 0px 3px; }
+
+.recipe-overview li { list-style: none; padding: 0px 10px 10px; margin: 0px=
+; display: inline-block; text-align: initial; }
+
+.highlight { background: rgb(255, 255, 255); }
+
+.highlighter-rouge .highlight { background: rgb(238, 238, 255); }
+
+.highlight .c { color: rgb(153, 153, 136); font-style: italic; }
+
+.highlight .err { color: rgb(166, 23, 23); background-color: rgb(227, 210, =
+210); }
+
+.highlight .k { font-weight: bold; }
+
+.highlight .o { font-weight: bold; }
+
+.highlight .cm { color: rgb(153, 153, 136); font-style: italic; }
+
+.highlight .cp { color: rgb(153, 153, 153); font-weight: bold; }
+
+.highlight .c1 { color: rgb(153, 153, 136); font-style: italic; }
+
+.highlight .cs { color: rgb(153, 153, 153); font-weight: bold; font-style: =
+italic; }
+
+.highlight .gd { color: rgb(0, 0, 0); background-color: rgb(255, 221, 221);=
+ }
+
+.highlight .gd .x { color: rgb(0, 0, 0); background-color: rgb(255, 170, 17=
+0); }
+
+.highlight .ge { font-style: italic; }
+
+.highlight .gr { color: rgb(170, 0, 0); }
+
+.highlight .gh { color: rgb(153, 153, 153); }
+
+.highlight .gi { color: rgb(0, 0, 0); background-color: rgb(221, 255, 221);=
+ }
+
+.highlight .gi .x { color: rgb(0, 0, 0); background-color: rgb(170, 255, 17=
+0); }
+
+.highlight .go { color: rgb(136, 136, 136); }
+
+.highlight .gp { color: rgb(85, 85, 85); }
+
+.highlight .gs { font-weight: bold; }
+
+.highlight .gu { color: rgb(170, 170, 170); }
+
+.highlight .gt { color: rgb(170, 0, 0); }
+
+.highlight .kc { font-weight: bold; }
+
+.highlight .kd { font-weight: bold; }
+
+.highlight .kp { font-weight: bold; }
+
+.highlight .kr { font-weight: bold; }
+
+.highlight .kt { color: rgb(68, 85, 136); font-weight: bold; }
+
+.highlight .m { color: rgb(0, 153, 153); }
+
+.highlight .s { color: rgb(221, 17, 68); }
+
+.highlight .na { color: teal; }
+
+.highlight .nb { color: rgb(0, 134, 179); }
+
+.highlight .nc { color: rgb(68, 85, 136); font-weight: bold; }
+
+.highlight .no { color: teal; }
+
+.highlight .ni { color: purple; }
+
+.highlight .ne { color: rgb(153, 0, 0); font-weight: bold; }
+
+.highlight .nf { color: rgb(153, 0, 0); font-weight: bold; }
+
+.highlight .nn { color: rgb(85, 85, 85); }
+
+.highlight .nt { color: navy; }
+
+.highlight .nv { color: teal; }
+
+.highlight .ow { font-weight: bold; }
+
+.highlight .w { color: rgb(187, 187, 187); }
+
+.highlight .mf { color: rgb(0, 153, 153); }
+
+.highlight .mh { color: rgb(0, 153, 153); }
+
+.highlight .mi { color: rgb(0, 153, 153); }
+
+.highlight .mo { color: rgb(0, 153, 153); }
+
+.highlight .sb { color: rgb(221, 17, 68); }
+
+.highlight .sc { color: rgb(221, 17, 68); }
+
+.highlight .sd { color: rgb(221, 17, 68); }
+
+.highlight .s2 { color: rgb(221, 17, 68); }
+
+.highlight .se { color: rgb(221, 17, 68); }
+
+.highlight .sh { color: rgb(221, 17, 68); }
+
+.highlight .si { color: rgb(221, 17, 68); }
+
+.highlight .sx { color: rgb(221, 17, 68); }
+
+.highlight .sr { color: rgb(0, 153, 38); }
+
+.highlight .s1 { color: rgb(221, 17, 68); }
+
+.highlight .ss { color: rgb(153, 0, 115); }
+
+.highlight .bp { color: rgb(153, 153, 153); }
+
+.highlight .vc { color: teal; }
+
+.highlight .vg { color: teal; }
+
+.highlight .vi { color: teal; }
+
+.highlight .il { color: rgb(0, 153, 153); }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-488bc81e-0bd0-4442-bd1e-3714c13b9391@mhtml.blink
+
+@charset "utf-8";
+
+.MJXp-script { font-size: 0.8em; }
+
+.MJXp-right { transform-origin: right center; }
+
+.MJXp-bold { font-weight: bold; }
+
+.MJXp-italic { font-style: italic; }
+
+.MJXp-scr { font-family: MathJax_Script, "Times New Roman", Times, STIXGene=
+ral, serif; }
+
+.MJXp-frak { font-family: MathJax_Fraktur, "Times New Roman", Times, STIXGe=
+neral, serif; }
+
+.MJXp-sf { font-family: MathJax_SansSerif, "Times New Roman", Times, STIXGe=
+neral, serif; }
+
+.MJXp-cal { font-family: MathJax_Caligraphic, "Times New Roman", Times, STI=
+XGeneral, serif; }
+
+.MJXp-mono { font-family: MathJax_Typewriter, "Times New Roman", Times, STI=
+XGeneral, serif; }
+
+.MJXp-largeop { font-size: 150%; }
+
+.MJXp-largeop.MJXp-int { vertical-align: -0.2em; }
+
+.MJXp-math { display: inline-block; line-height: 1.2; text-indent: 0px; fon=
+t-family: "Times New Roman", Times, STIXGeneral, serif; white-space: nowrap=
+; border-collapse: collapse; }
+
+.MJXp-display { display: block; text-align: center; margin: 1em 0px; }
+
+.MJXp-math span { display: inline-block; }
+
+.MJXp-box { display: block !important; text-align: center; }
+
+.MJXp-box::after { content: " "; }
+
+.MJXp-rule { display: block !important; margin-top: 0.1em; }
+
+.MJXp-char { display: block !important; }
+
+.MJXp-mo { margin: 0px 0.15em; }
+
+.MJXp-mfrac { margin: 0px 0.125em; vertical-align: 0.25em; }
+
+.MJXp-denom { display: inline-table !important; width: 100%; }
+
+.MJXp-denom > * { display: table-row !important; }
+
+.MJXp-surd { vertical-align: top; }
+
+.MJXp-surd > * { display: block !important; }
+
+.MJXp-script-box > * { display: table !important; height: 50%; }
+
+.MJXp-script-box > * > * { display: table-cell !important; vertical-align: =
+top; }
+
+.MJXp-script-box > :last-child > * { vertical-align: bottom; }
+
+.MJXp-script-box > * > * > * { display: block !important; }
+
+.MJXp-mphantom { visibility: hidden; }
+
+.MJXp-munderover, .MJXp-munder { display: inline-table !important; }
+
+.MJXp-over { display: inline-block !important; text-align: center; }
+
+.MJXp-over > * { display: block !important; }
+
+.MJXp-munderover > *, .MJXp-munder > * { display: table-row !important; }
+
+.MJXp-mtable { vertical-align: 0.25em; margin: 0px 0.125em; }
+
+.MJXp-mtable > * { display: inline-table !important; vertical-align: middle=
+; }
+
+.MJXp-mtr { display: table-row !important; }
+
+.MJXp-mtd { text-align: center; padding: 0.5em 0px 0px 0.5em; display: tabl=
+e-cell !important; }
+
+.MJXp-mtr > .MJXp-mtd:first-child { padding-left: 0px; }
+
+.MJXp-mtr:first-child > .MJXp-mtd { padding-top: 0px; }
+
+.MJXp-mlabeledtr { display: table-row !important; }
+
+.MJXp-mlabeledtr > .MJXp-mtd:first-child { padding-left: 0px; }
+
+.MJXp-mlabeledtr:first-child > .MJXp-mtd { padding-top: 0px; }
+
+.MJXp-merror { background-color: rgb(255, 255, 136); color: rgb(204, 0, 0);=
+ border: 1px solid rgb(204, 0, 0); padding: 1px 3px; font-style: normal; fo=
+nt-size: 90%; }
+
+.MJXp-scale0 { transform: scaleX(0); }
+
+.MJXp-scale1 { transform: scaleX(0.1); }
+
+.MJXp-scale2 { transform: scaleX(0.2); }
+
+.MJXp-scale3 { transform: scaleX(0.3); }
+
+.MJXp-scale4 { transform: scaleX(0.4); }
+
+.MJXp-scale5 { transform: scaleX(0.5); }
+
+.MJXp-scale6 { transform: scaleX(0.6); }
+
+.MJXp-scale7 { transform: scaleX(0.7); }
+
+.MJXp-scale8 { transform: scaleX(0.8); }
+
+.MJXp-scale9 { transform: scaleX(0.9); }
+
+.MathJax_PHTML .noError { font-size: 90%; text-align: left; color: black; p=
+adding: 1px 3px; border: 1px solid; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-8d242322-5e98-4cd0-bb77-61cf8165a143@mhtml.blink
+
+@charset "utf-8";
+
+.MathJax_Preview { color: rgb(136, 136, 136); }
+
+#MathJax_Message { position: fixed; left: 1em; bottom: 1.5em; background-co=
+lor: rgb(230, 230, 230); border: 1px solid rgb(149, 149, 149); margin: 0px;=
+ padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto;=
+ white-space: nowrap; }
+
+#MathJax_MSIE_Frame { position: absolute; top: 0px; left: 0px; width: 0px; =
+z-index: 101; border: 0px; margin: 0px; padding: 0px; }
+
+.MathJax_Error { color: rgb(204, 0, 0); font-style: italic; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-284dca80-28f6-44ef-aaaf-2a4ed22f9a73@mhtml.blink
+
+@charset "utf-8";
+
+#MathJax_Zoom { position: absolute; background-color: rgb(240, 240, 240); o=
+verflow: auto; display: block; z-index: 301; padding: 0.5em; border: 1px so=
+lid black; margin: 0px; font-weight: normal; font-style: normal; text-align=
+: left; text-indent: 0px; text-transform: none; line-height: normal; letter=
+-spacing: normal; word-spacing: normal; overflow-wrap: normal; white-space:=
+ nowrap; float: none; box-sizing: content-box; box-shadow: rgb(170, 170, 17=
+0) 5px 5px 15px; }
+
+#MathJax_ZoomOverlay { position: absolute; left: 0px; top: 0px; z-index: 30=
+0; display: inline-block; width: 100%; height: 100%; border: 0px; padding: =
+0px; margin: 0px; background-color: white; opacity: 0; }
+
+#MathJax_ZoomFrame { position: relative; display: inline-block; height: 0px=
+; width: 0px; }
+
+#MathJax_ZoomEventTrap { position: absolute; left: 0px; top: 0px; z-index: =
+302; display: inline-block; border: 0px; padding: 0px; margin: 0px; backgro=
+und-color: white; opacity: 0; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-3786dc1a-eb09-4901-82c4-230e2cf947b2@mhtml.blink
+
+@charset "utf-8";
+
+.MJX_Assistive_MathML { top: 0px; left: 0px; clip: rect(1px, 1px, 1px, 1px)=
+; user-select: none; position: absolute !important; padding: 1px 0px 0px !i=
+mportant; border: 0px !important; height: 1px !important; width: 1px !impor=
+tant; overflow: hidden !important; display: block !important; }
+
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block { width: 100% !important; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-5ad1491e-f353-4157-9693-49a77ec9932f@mhtml.blink
+
+@charset "utf-8";
+
+.MathJax_Preview .MJXf-math { color: inherit !important; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-01284635-9425-4ad2-b5f6-7318fe47873a@mhtml.blink
+
+@charset "utf-8";
+
+#MathJax_About { position: fixed; left: 50%; width: auto; text-align: cente=
+r; border: 3px outset; padding: 1em 2em; background-color: rgb(221, 221, 22=
+1); color: black; cursor: default; font-family: message-box; font-size: 120=
+%; font-style: normal; text-indent: 0px; text-transform: none; line-height:=
+ normal; letter-spacing: normal; word-spacing: normal; overflow-wrap: norma=
+l; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; box=
+-shadow: rgb(128, 128, 128) 0px 10px 20px; }
+
+#MathJax_About.MathJax_MousePost { outline: none; }
+
+.MathJax_Menu { position: absolute; background-color: white; color: black; =
+width: auto; padding: 2px; border: 1px solid rgb(204, 204, 204); margin: 0p=
+x; cursor: default; font-style: ; font-variant: normal; font-weight: ; font=
+-stretch: ; font-size: ; font-family: ; font-optical-sizing: ; font-size-ad=
+just: ; font-kerning: ; font-feature-settings: ; font-variation-settings: ;=
+ text-align: left; text-indent: 0px; text-transform: none; line-height: nor=
+mal; letter-spacing: normal; word-spacing: normal; overflow-wrap: normal; w=
+hite-space: nowrap; float: none; z-index: 201; box-shadow: rgb(128, 128, 12=
+8) 0px 10px 20px; }
+
+.MathJax_MenuItem { padding: 2px 2em; background: transparent; }
+
+.MathJax_MenuArrow { position: absolute; right: 0.5em; padding-top: 0.25em;=
+ color: rgb(102, 102, 102); font-size: 0.75em; }
+
+.MathJax_MenuActive .MathJax_MenuArrow { color: white; }
+
+.MathJax_MenuArrow.RTL { left: 0.5em; right: auto; }
+
+.MathJax_MenuCheck { position: absolute; left: 0.7em; }
+
+.MathJax_MenuCheck.RTL { right: 0.7em; left: auto; }
+
+.MathJax_MenuRadioCheck { position: absolute; left: 1em; }
+
+.MathJax_MenuRadioCheck.RTL { right: 1em; left: auto; }
+
+.MathJax_MenuLabel { padding: 2px 2em 4px 1.33em; font-style: italic; }
+
+.MathJax_MenuRule { border-top: 1px solid rgb(204, 204, 204); margin: 4px 1=
+px 0px; }
+
+.MathJax_MenuDisabled { color: graytext; }
+
+.MathJax_MenuActive { background-color: highlight; color: highlighttext; }
+
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus { background-color: r=
+gb(232, 232, 232); }
+
+.MathJax_ContextMenu:focus { outline: none; }
+
+.MathJax_ContextMenu .MathJax_MenuItem:focus { outline: none; }
+
+#MathJax_AboutClose { top: 0.2em; right: 0.2em; }
+
+.MathJax_Menu .MathJax_MenuClose { top: -10px; left: -10px; }
+
+.MathJax_MenuClose { position: absolute; cursor: pointer; display: inline-b=
+lock; border: 2px solid rgb(170, 170, 170); border-radius: 18px; font-famil=
+y: "Courier New", Courier; font-size: 24px; color: rgb(240, 240, 240); }
+
+.MathJax_MenuClose span { display: block; background-color: rgb(170, 170, 1=
+70); border: 1.5px solid; border-radius: 18px; line-height: 0; padding: 8px=
+ 0px 6px; }
+
+.MathJax_MenuClose:hover { color: white !important; border: 2px solid rgb(2=
+04, 204, 204) !important; }
+
+.MathJax_MenuClose:hover span { background-color: rgb(204, 204, 204) !impor=
+tant; }
+
+.MathJax_MenuClose:hover:focus { outline: none; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-54c1f52b-04a2-4d5b-9230-8df100147e66@mhtml.blink
+
+@charset "utf-8";
+
+.MathJax_Hover_Frame { border-radius: 0.25em; box-shadow: rgb(136, 51, 170)=
+ 0px 0px 15px; display: inline-block; position: absolute; border: 1px solid=
+ rgb(170, 102, 221) !important; }
+
+.MathJax_Menu_Button .MathJax_Hover_Arrow { position: absolute; cursor: poi=
+nter; display: inline-block; border: 2px solid rgb(170, 170, 170); border-r=
+adius: 4px; font-family: "Courier New", Courier; font-size: 9px; color: rgb=
+(240, 240, 240); }
+
+.MathJax_Menu_Button .MathJax_Hover_Arrow span { display: block; background=
+-color: rgb(170, 170, 170); border: 1px solid; border-radius: 3px; line-hei=
+ght: 0; padding: 4px; }
+
+.MathJax_Hover_Arrow:hover { color: white !important; border: 2px solid rgb=
+(204, 204, 204) !important; }
+
+.MathJax_Hover_Arrow:hover span { background-color: rgb(204, 204, 204) !imp=
+ortant; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-f1629fc5-3c50-4e59-90e0-25a4b98e9835@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/html
+Content-ID: <frame-41B1CC7BA6C74F306A4056A55C1557A7@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://platform.twitter.com/widgets/widget_iframe.2f70fb173b9000da126c79afe2098f02.html?origin=https%3A%2F%2Fmmore500.com
+
+<!DOCTYPE html><html><head><meta http-equiv=3D"Content-Type" content=3D"tex=
+t/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D=
+"cid:css-0b949bea-dc8c-4ec3-967d-939a439fa0dd@mhtml.blink" /><meta chartset=
+=3D"utf-8">
+<title>Twitter Widget Iframe</title>
+<link rel=3D"preconnect" href=3D"https://fonts.googleapis.com/" crossorigin=
+=3D"use-credentials"><link rel=3D"preconnect" href=3D"https://fonts.gstatic=
+.com/"><link rel=3D"stylesheet" href=3D"https://fonts.googleapis.com/css2?f=
+amily=3DMulish:wght@200;300;400;500;600;700;800;900&amp;display=3Dswa"></he=
+ad><body>
+
+
+</body></html>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&display=swa
+
+@charset "utf-8";
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 200; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 200; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 200; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 200; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 200; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 300; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 300; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 300; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 300; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 300; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 400; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 400; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 400; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 400; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 400; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 500; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 500; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 500; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 500; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 500; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 600; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 600; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 600; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 600; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 600; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 700; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 700; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 700; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 700; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 700; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 800; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 800; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 800; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 800; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 800; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 900; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0gotcqA.woff2=
+") format("woff2"); unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2=
+DFF, U+A640-A69F, U+FE2E-FE2F; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 900; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk2wotcqA.woff2=
+") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, =
+U+2116; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 900; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0AotcqA.woff2=
+") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-1=
+69, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+=
+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 900; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk0QotcqA.woff2=
+") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2=
+D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, =
+U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: Mulish; font-style: normal; font-weight: 900; src=
+: url("https://fonts.gstatic.com/s/mulish/v17/1Ptvg83HX_SGhgqk3wot.woff2") =
+format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6,=
+ U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+=
+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-0b949bea-dc8c-4ec3-967d-939a439fa0dd@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/html
+Content-ID: <frame-293F70855E6622F89A87DF5C575FC701@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://platform.twitter.com/embed/Tweet.html?dnt=false&embedId=twitter-widget-0&features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfZm9zbnJfc29mdF9pbnRlcnZlbnRpb25zX2VuYWJsZWQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X21peGVkX21lZGlhXzE1ODk3Ijp7ImJ1Y2tldCI6InRyZWF0bWVudCIsInZlcnNpb24iOm51bGx9LCJ0ZndfZXhwZXJpbWVudHNfY29va2llX2V4cGlyYXRpb24iOnsiYnVja2V0IjoxMjA5NjAwLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3Nob3dfYmlyZHdhdGNoX3Bpdm90c19lbmFibGVkIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19kdXBsaWNhdGVfc2NyaWJlc190b19zZXR0aW5ncyI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdXNlX3Byb2ZpbGVfaW1hZ2Vfc2hhcGVfZW5hYmxlZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfdmlkZW9faGxzX2R5bmFtaWNfbWFuaWZlc3RzXzE1MDgyIjp7ImJ1Y2tldCI6InRydWVfYml0cmF0ZSIsInZlcnNpb24iOm51bGx9LCJ0ZndfbGVnYWN5X3RpbWVsaW5lX3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9mcm9udGVuZCI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9fQ%3D%3D&frame=false&hideCard=false&hideThread=false&id=1221698974379196418&lang=en&origin=https%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscripten-targz.html&sessionId=fd079a6fec51a060dde21f68d968d8a0764e7d1a&theme=light&widgetsVersion=2615f7e52b7e0%3A1702314776716&width=550px
+
+<!DOCTYPE html><html dir=3D"ltr" lang=3D"en" style=3D"overflow-y: scroll; o=
+verscroll-behavior-y: none;"><head><meta http-equiv=3D"Content-Type" conten=
+t=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css"=
+ href=3D"cid:css-af44a676-f417-4a51-ab1e-f068195084ec@mhtml.blink" /><link =
+rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-5fc1b89a-8276-477a-b9c=
+b-108a79283b97@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" hr=
+ef=3D"cid:css-d435c3d7-566b-4093-b6b8-ed2aed357adf@mhtml.blink" /><link rel=
+=3D"stylesheet" type=3D"text/css" href=3D"cid:css-411ad9ac-9a36-419f-8db3-f=
+af0d0d2d47d@mhtml.blink" /><title>Twitter Embed</title></head><body><div id=
+=3D"app"><div class=3D"css-1dbjc4n r-13awgt0 r-12vffkv"><div class=3D"css-1=
+dbjc4n r-13awgt0 r-12vffkv"><div class=3D"css-1dbjc4n r-1ets6dv r-1q9bdsx r=
+-rs99b7 r-1loqt21 r-vakc41 r-y54riw r-1udh08x"><div tabindex=3D"0"></div><a=
+rticle role=3D"article" tabindex=3D"0" class=3D"css-1dbjc4n r-14lw9ot r-1ny=
+4l3l r-iphfwy r-1qhn6m8 r-i023vh r-ttdzmv r-o7ynqc r-6416eg"><a href=3D"htt=
+ps://twitter.com/mmore500/status/1221698974379196418?ref_src=3Dtwsrc%5Etfw%=
+7Ctwcamp%5Etweetembed%7Ctwterm%5E1221698974379196418%7Ctwgr%5Efd079a6fec51a=
+060dde21f68d968d8a0764e7d1a%7Ctwcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore=
+500.github.io%2F2020%2F01%2F26%2Femscripten-targz.html" rel=3D"noopener nor=
+eferrer nofollow" target=3D"_blank" aria-label=3D"Visit this post on X" rol=
+e=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21"></a><div =
+class=3D"css-1dbjc4n r-18u37iz r-kzbkwu"><div class=3D"css-1dbjc4n r-1ny4l3=
+l"><div class=3D"css-1dbjc4n r-1adg3ll r-bztko3" data-testid=3D"UserAvatar-=
+Container-mmore500" style=3D"height: 48px; width: 48px;"><div class=3D"r-1a=
+dg3ll r-13qz1uu" style=3D"padding-bottom: 100%;"></div><div class=3D"r-1p0d=
+tai r-1pi2tsx r-1d2f490 r-u8s1d r-ipm5af r-13qz1uu"><div class=3D"css-1dbjc=
+4n r-1adg3ll r-1pi2tsx r-1wyvozj r-bztko3 r-u8s1d r-1v2oles r-desppf r-13qz=
+1uu"><div class=3D"r-1adg3ll r-13qz1uu" style=3D"padding-bottom: 100%;"></d=
+iv><div class=3D"r-1p0dtai r-1pi2tsx r-1d2f490 r-u8s1d r-ipm5af r-13qz1uu">=
+<div class=3D"css-1dbjc4n r-sdzlij r-ggadg3 r-1udh08x r-u8s1d r-8jfcpp" sty=
+le=3D"height: calc(100% + 4px); width: calc(100% + 4px);"><a href=3D"https:=
+//twitter.com/mmore500?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm=
+%5E1221698974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7C=
+twcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26=
+%2Femscripten-targz.html" rel=3D"noopener noreferrer nofollow" target=3D"_b=
+lank" aria-hidden=3D"true" role=3D"link" tabindex=3D"-1" class=3D"css-4rbku=
+5 css-18t94o4 css-1dbjc4n r-1niwhzg r-1loqt21 r-1pi2tsx r-1ny4l3l r-o7ynqc =
+r-6416eg r-13qz1uu" style=3D""><div class=3D"css-1dbjc4n r-sdzlij r-1wyvozj=
+ r-1udh08x r-633pao r-u8s1d r-1v2oles r-desppf" style=3D"height: calc(100% =
+- 4px); width: calc(100% - 4px);"><div class=3D"css-1dbjc4n r-1pi2tsx r-13q=
+z1uu" style=3D"background-color: rgba(0, 0, 0, 0);"></div></div><div class=
+=3D"css-1dbjc4n r-sdzlij r-1wyvozj r-1udh08x r-633pao r-u8s1d r-1v2oles r-d=
+esppf" style=3D"height: calc(100% - 4px); width: calc(100% - 4px);"><div cl=
+ass=3D"css-1dbjc4n r-14lw9ot r-1pi2tsx r-13qz1uu"></div></div><div class=3D=
+"css-1dbjc4n r-14lw9ot r-sdzlij r-1wyvozj r-1udh08x r-633pao r-u8s1d r-1v2o=
+les r-desppf" style=3D"height: calc(100% - 4px); width: calc(100% - 4px);">=
+<div class=3D"css-1dbjc4n r-1adg3ll r-1udh08x" style=3D""><div class=3D"r-1=
+adg3ll r-13qz1uu" style=3D"padding-bottom: 100%;"></div><div class=3D"r-1p0=
+dtai r-1pi2tsx r-1d2f490 r-u8s1d r-ipm5af r-13qz1uu"><div aria-label=3D"" c=
+lass=3D"css-1dbjc4n r-1p0dtai r-1mlwlqe r-1d2f490 r-1udh08x r-u8s1d r-zchln=
+j r-ipm5af r-417010" style=3D""><div class=3D"css-1dbjc4n r-1niwhzg r-vvn4i=
+n r-u6sd8q r-4gszlv r-1p0dtai r-1pi2tsx r-1d2f490 r-u8s1d r-zchlnj r-ipm5af=
+ r-13qz1uu r-1wyyakw" style=3D"background-image: url(&quot;https://pbs.twim=
+g.com/profile_images/855219682940522501/4JjxHZ_M_bigger.jpg&quot;);"></div>=
+<img alt=3D"" draggable=3D"true" src=3D"https://pbs.twimg.com/profile_image=
+s/855219682940522501/4JjxHZ_M_bigger.jpg" class=3D"css-9pa8cd"></div></div>=
+</div></div><div class=3D"css-1dbjc4n r-sdzlij r-1wyvozj r-1udh08x r-u8s1d =
+r-1v2oles r-desppf" style=3D"height: calc(100% - 4px); width: calc(100% - 4=
+px);"><div class=3D"css-1dbjc4n r-12181gd r-1pi2tsx r-1ny4l3l r-o7ynqc r-64=
+16eg r-13qz1uu"></div></div></a></div></div></div></div></div></div><div cl=
+ass=3D"css-1dbjc4n r-eqz5dr r-1777fci r-4amgru r-1kh6xel"><div class=3D"css=
+-1dbjc4n r-1ny4l3l"><div class=3D"css-1dbjc4n r-1wbh5a2 r-dnmrzs r-1ny4l3l"=
+><div class=3D"css-1dbjc4n r-1wbh5a2 r-dnmrzs r-1ny4l3l"><a href=3D"https:/=
+/twitter.com/mmore500?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%=
+5E1221698974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ct=
+wcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%=
+2Femscripten-targz.html" rel=3D"noopener noreferrer nofollow" target=3D"_bl=
+ank" role=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-=
+1wbh5a2 r-dnmrzs r-1ny4l3l"><div class=3D"css-1dbjc4n r-1awozwy r-18u37iz r=
+-dnmrzs"><div dir=3D"auto" class=3D"css-901oao r-1awozwy r-18jsvk2 r-6koalj=
+ r-1qd0xha r-a023e6 r-b88u0q r-rjixqe r-bcqeeo r-1udh08x r-3s2u2q r-qvutc0"=
+ style=3D""><span class=3D"css-901oao css-16my406 css-1hf3ou5 r-poiln3 r-bc=
+qeeo r-qvutc0"><span class=3D"css-901oao css-16my406 r-poiln3 r-bcqeeo r-qv=
+utc0">mmore500 (NOT work stuff; </span><img alt=3D"=F0=9F=92=BC" draggable=
+=3D"false" src=3D"https://abs-0.twimg.com/emoji/v2/svg/1f4bc.svg" class=3D"=
+r-4qtqp9 r-dflpy8 r-sjv1od r-zw8f10 r-10akycc r-h9hxbl" width=3D"18" height=
+=3D"18"><span class=3D"css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0"> =
+</span><img alt=3D"=E2=9E=A1=EF=B8=8F" draggable=3D"false" src=3D"https://a=
+bs-0.twimg.com/emoji/v2/svg/27a1.svg" class=3D"r-4qtqp9 r-dflpy8 r-sjv1od r=
+-zw8f10 r-10akycc r-h9hxbl" width=3D"18" height=3D"18"><span class=3D"css-9=
+01oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0"> @MorenoMatthewA)</span><span=
+ class=3D"css-901oao css-16my406 r-poiln3 r-bcqeeo r-1pos5eu r-qvutc0"></sp=
+an></span></div><div dir=3D"auto" class=3D"css-901oao r-18jsvk2 r-xoduu5 r-=
+18u37iz r-1q142lx r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0" =
+style=3D""><span class=3D"css-901oao css-16my406 r-1awozwy r-xoduu5 r-poiln=
+3 r-bcqeeo r-qvutc0"></span></div></div></a><div class=3D"css-1dbjc4n r-1aw=
+ozwy r-18u37iz r-1wbh5a2"><a href=3D"https://twitter.com/mmore500?ref_src=
+=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1221698974379196418%7Ctwgr%=
+5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ctwcon%5Es1_&amp;ref_url=3Dhttp=
+s%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscripten-targz.html" rel=
+=3D"noopener noreferrer nofollow" target=3D"_blank" role=3D"link" tabindex=
+=3D"-1" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-d=
+nmrzs r-1ny4l3l"><div class=3D"css-1dbjc4n"><div dir=3D"ltr" class=3D"css-9=
+01oao css-1hf3ou5 r-14j79pv r-18u37iz r-1qd0xha r-1wvb978 r-a023e6 r-16dba4=
+1 r-rjixqe r-bcqeeo r-qvutc0" style=3D""><span class=3D"css-901oao css-16my=
+406 r-poiln3 r-bcqeeo r-qvutc0">@mmore500</span></div></div></a><div class=
+=3D"css-1dbjc4n r-18u37iz r-1q142lx"><div dir=3D"auto" aria-hidden=3D"true"=
+ class=3D"css-901oao r-14j79pv r-1q142lx r-1qd0xha r-a023e6 r-16dba41 r-rji=
+xqe r-bcqeeo r-s1qlax r-qvutc0" style=3D""><span class=3D"css-901oao css-16=
+my406 r-poiln3 r-bcqeeo r-qvutc0">=C2=B7</span></div><a href=3D"https://twi=
+tter.com/intent/follow?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm=
+%5E1221698974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7C=
+twcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26=
+%2Femscripten-targz.html&amp;screen_name=3Dmmore500" dir=3D"auto" rel=3D"no=
+opener noreferrer nofollow" target=3D"_blank" role=3D"link" class=3D"css-4r=
+bku5 css-18t94o4 css-901oao r-1loqt21 r-1qd0xha r-a023e6 r-b88u0q r-rjixqe =
+r-bcqeeo r-qvutc0" style=3D"color: rgb(0, 111, 214);"><span class=3D"css-90=
+1oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">Follow</span></a></div></div><=
+/div></div></div></div><a href=3D"https://twitter.com/mmore500/status/12216=
+98974379196418?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E12216=
+98974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ctwcon%5E=
+s1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscr=
+ipten-targz.html" rel=3D"noopener noreferrer nofollow" target=3D"_blank" ar=
+ia-label=3D"View on X" role=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1d=
+bjc4n r-sdzlij r-1loqt21 r-1jj8364 r-1ny4l3l r-o7ynqc r-6416eg"><svg viewBo=
+x=3D"0 0 24 24" aria-hidden=3D"true" class=3D"r-18jsvk2 r-4qtqp9 r-yyyyoo r=
+-6zzn7w r-19fsva8 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-q1j0wu"><g><path d=
+=3D"M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.7=
+5H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.1=
+26H5.117z"></path></g></svg></a></div><div class=3D"css-1dbjc4n"><div dir=
+=3D"auto" lang=3D"en" class=3D"css-901oao r-18jsvk2 r-1dqbpge r-1qd0xha r-a=
+dyw6z r-16dba41 r-135wba7 r-bcqeeo r-bnwqim r-qvutc0" data-testid=3D"tweetT=
+ext"><span class=3D"css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">thro=
+wing together this Quality Blog on retrieving and extracting .tar.gz archiv=
+es with </span><span class=3D"r-18u37iz"><a dir=3D"ltr" href=3D"https://twi=
+tter.com/hashtag/Empscripten?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7C=
+twterm%5E1221698974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7=
+d1a%7Ctwcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F0=
+1%2F26%2Femscripten-targz.html&amp;src=3Dhashtag_click" rel=3D"noopener nor=
+eferrer nofollow" target=3D"_blank" role=3D"link" class=3D"css-4rbku5 css-1=
+8t94o4 css-901oao css-16my406 r-1loqt21 r-poiln3 r-bcqeeo r-qvutc0" style=
+=3D"color: rgb(0, 111, 214);">#Empscripten</a></span><span class=3D"css-901=
+oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0"> at 230 am ...
+
+so I'll let you guess how much fiddling and twiddling it took to get workin=
+g </span><img alt=3D"=F0=9F=99=83" draggable=3D"false" src=3D"https://abs-0=
+.twimg.com/emoji/v2/svg/1f643.svg" class=3D"r-4qtqp9 r-dflpy8 r-sjv1od r-zw=
+8f10 r-10akycc r-h9hxbl" width=3D"24" height=3D"24"><span class=3D"css-901o=
+ao css-16my406 r-poiln3 r-bcqeeo r-qvutc0"> </span><img alt=3D"=F0=9F=99=83=
+" draggable=3D"false" src=3D"https://abs-0.twimg.com/emoji/v2/svg/1f643.svg=
+" class=3D"r-4qtqp9 r-dflpy8 r-sjv1od r-zw8f10 r-10akycc r-h9hxbl" width=3D=
+"24" height=3D"24"><img alt=3D"=F0=9F=99=83" draggable=3D"false" src=3D"htt=
+ps://abs-0.twimg.com/emoji/v2/svg/1f643.svg" class=3D"r-4qtqp9 r-dflpy8 r-s=
+jv1od r-zw8f10 r-10akycc r-h9hxbl" width=3D"24" height=3D"24"><span class=
+=3D"css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">
+
+</span><a dir=3D"ltr" href=3D"https://t.co/ovolzUmqot" rel=3D"noopener nore=
+ferrer nofollow" target=3D"_blank" role=3D"link" class=3D"css-4rbku5 css-18=
+t94o4 css-901oao css-16my406 r-1loqt21 r-poiln3 r-bcqeeo r-qvutc0" style=3D=
+"color: rgb(0, 111, 214);"><span aria-hidden=3D"true" class=3D"css-901oao c=
+ss-16my406 r-poiln3 r-hiw28u r-qvk6io r-bcqeeo r-qvutc0">https://</span>mmo=
+re500.github.io/2020/01/26/ems<span aria-hidden=3D"true" class=3D"css-901oa=
+o css-16my406 r-poiln3 r-hiw28u r-qvk6io r-bcqeeo r-qvutc0">cripten-targz.h=
+tml</span><span aria-hidden=3D"true" class=3D"css-901oao css-16my406 r-poil=
+n3 r-bcqeeo r-lrvibr r-qvutc0">=E2=80=A6</span></a></div></div><div class=
+=3D"css-1dbjc4n r-1awozwy r-18u37iz r-1bymd8e"><div dir=3D"auto" class=3D"c=
+ss-901oao css-1hf3ou5 r-18jsvk2 r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcq=
+eeo r-qvutc0"><div class=3D"css-1dbjc4n r-xoduu5"><div class=3D"css-1dbjc4n=
+ r-1d09ksm r-1471scf r-18u37iz r-1wbh5a2"><span class=3D"css-901oao css-16m=
+y406 r-14j79pv r-poiln3 r-bcqeeo r-qvutc0" style=3D""><a href=3D"https://tw=
+itter.com/mmore500/status/1221698974379196418?ref_src=3Dtwsrc%5Etfw%7Ctwcam=
+p%5Etweetembed%7Ctwterm%5E1221698974379196418%7Ctwgr%5Efd079a6fec51a060dde2=
+1f68d968d8a0764e7d1a%7Ctwcon%5Es1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.git=
+hub.io%2F2020%2F01%2F26%2Femscripten-targz.html" rel=3D"noopener noreferrer=
+ nofollow" target=3D"_blank" aria-label=3D"2:38 AM =C2=B7 Jan 27, 2020" rol=
+e=3D"link" class=3D"css-4rbku5 css-18t94o4 css-901oao css-16my406 r-14j79pv=
+ r-1loqt21 r-xoduu5 r-1q142lx r-1w6e6rj r-poiln3 r-9aw3ui r-bcqeeo r-3s2u2q=
+ r-qvutc0" style=3D""><time datetime=3D"2020-01-27T07:38:28.000Z">2:38 AM =
+=C2=B7 Jan 27, 2020</time></a></span></div></div></div><a href=3D"https://h=
+elp.twitter.com/en/twitter-for-websites-ads-info-and-privacy" rel=3D"noopen=
+er noreferrer nofollow" target=3D"_blank" aria-label=3D"X Ads info and priv=
+acy" role=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-sdzlij r-1=
+loqt21 r-mabqd8 r-1777fci r-1jj8364 r-2eo2mk r-1ny4l3l r-o7ynqc r-6416eg r-=
+1yvhtrz"><svg viewBox=3D"0 0 24 24" aria-hidden=3D"true" class=3D"r-14j79pv=
+ r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"><g><path=
+ d=3D"M13.5 8.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S11.17 7 12 7s1.5.67 =
+1.5 1.5zM13 17v-5h-2v5h2zm-1 5.25c5.66 0 10.25-4.59 10.25-10.25S17.66 1.75 =
+12 1.75 1.75 6.34 1.75 12 6.34 22.25 12 22.25zM20.25 12c0 4.56-3.69 8.25-8.=
+25 8.25S3.75 16.56 3.75 12 7.44 3.75 12 3.75s8.25 3.69 8.25 8.25z"></path><=
+/g></svg></a></div><div class=3D"css-1dbjc4n r-1habvwh r-1ets6dv r-5kkj8d r=
+-18u37iz r-14gqq1x r-1h8ys4a"><a href=3D"https://twitter.com/intent/like?re=
+f_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1221698974379196418%7C=
+twgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ctwcon%5Es1_&amp;ref_url=
+=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscripten-targz.htm=
+l&amp;tweet_id=3D1221698974379196418" rel=3D"noopener noreferrer nofollow" =
+target=3D"_blank" aria-label=3D"Like. This post has 3 likes" role=3D"link" =
+class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1awozwy r-1loqt21 r-18u37iz r=
+-1mf7evn r-1ny4l3l r-o7ynqc r-6416eg"><div tabindex=3D"-1" class=3D"css-1db=
+jc4n r-sdzlij r-mabqd8 r-1777fci r-cnkkqs r-1yvhtrz"><svg viewBox=3D"0 0 24=
+ 24" aria-hidden=3D"true" class=3D"r-vkub15 r-4qtqp9 r-1sreavd r-1xvli5t r-=
+dnmrzs r-bnwqim r-1plcrui r-lrvibr"><g><path d=3D"M20.884 13.19c-1.351 2.48=
+-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.=
+36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.5=
+6 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.=
+896 1.81.846 4.17-.514 6.67z"></path></g></svg></div><div dir=3D"auto" clas=
+s=3D"css-901oao css-1hf3ou5 r-14j79pv r-1qd0xha r-1b43r93 r-b88u0q r-1cwl3u=
+0 r-13hce6t r-bcqeeo r-qvutc0"><span class=3D"css-901oao css-16my406 r-poil=
+n3 r-bcqeeo r-qvutc0">3</span></div></a><a href=3D"https://twitter.com/inte=
+nt/tweet?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E12216989743=
+79196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ctwcon%5Es1_&am=
+p;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscripten-=
+targz.html&amp;in_reply_to=3D1221698974379196418" rel=3D"noopener noreferre=
+r nofollow" target=3D"_blank" aria-label=3D"Reply to this post on X" role=
+=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1awozwy r-1loqt21 r=
+-18u37iz r-1mf7evn r-1ny4l3l r-o7ynqc r-6416eg"><div tabindex=3D"-1" class=
+=3D"css-1dbjc4n r-sdzlij r-mabqd8 r-1777fci r-1yvhtrz"><svg viewBox=3D"0 0 =
+24 24" aria-hidden=3D"true" class=3D"r-1cvl2hr r-4qtqp9 r-4r3dic r-1xvli5t =
+r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"><g><path d=3D"M1.751 10c0-4.42 3.584-=
+8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-=
+8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01z"></path></g></svg></d=
+iv><div dir=3D"auto" class=3D"css-901oao css-1hf3ou5 r-14j79pv r-1qd0xha r-=
+1b43r93 r-b88u0q r-1cwl3u0 r-13hce6t r-bcqeeo r-qvutc0"><span class=3D"css-=
+901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0">Reply</span></div></a><div r=
+ole=3D"button" tabindex=3D"0" class=3D"css-18t94o4 css-1dbjc4n r-1awozwy r-=
+18u37iz r-1wbh5a2 r-1ny4l3l r-o7ynqc r-6416eg"><div tabindex=3D"-1" class=
+=3D"css-1dbjc4n r-sdzlij r-mabqd8 r-1777fci r-cnkkqs r-1yvhtrz"><svg viewBo=
+x=3D"0 0 24 24" aria-hidden=3D"true" class=3D"r-14j79pv r-4qtqp9 r-yyyyoo r=
+-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr"><g><path d=3D"M18.36 5.64c-1=
+.95-1.96-5.11-1.96-7.07 0L9.88 7.05 8.46 5.64l1.42-1.42c2.73-2.73 7.16-2.73=
+ 9.9 0 2.73 2.74 2.73 7.17 0 9.9l-1.42 1.42-1.41-1.42 1.41-1.41c1.96-1.96 1=
+.96-5.12 0-7.07zm-2.12 3.53l-7.07 7.07-1.41-1.41 7.07-7.07 1.41 1.41zm-12.0=
+2.71l1.42-1.42 1.41 1.42-1.41 1.41c-1.96 1.96-1.96 5.12 0 7.07 1.95 1.96 5.=
+11 1.96 7.07 0l1.41-1.41 1.42 1.41-1.42 1.42c-2.73 2.73-7.16 2.73-9.9 0-2.7=
+3-2.74-2.73-7.17 0-9.9z"></path></g></svg></div><div dir=3D"auto" class=3D"=
+css-901oao css-1hf3ou5 r-14j79pv r-1qd0xha r-1b43r93 r-b88u0q r-1cwl3u0 r-1=
+3hce6t r-bcqeeo r-qvutc0"><span class=3D"css-901oao css-16my406 r-poiln3 r-=
+bcqeeo r-qvutc0">Copy link</span></div></div></div><div class=3D"css-1dbjc4=
+n r-kzbkwu r-1h8ys4a"><a href=3D"https://twitter.com/mmore500/status/122169=
+8974379196418?ref_src=3Dtwsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E122169=
+8974379196418%7Ctwgr%5Efd079a6fec51a060dde21f68d968d8a0764e7d1a%7Ctwcon%5Es=
+1_&amp;ref_url=3Dhttps%3A%2F%2Fmmore500.github.io%2F2020%2F01%2F26%2Femscri=
+pten-targz.html" rel=3D"noopener noreferrer nofollow" target=3D"_blank" rol=
+e=3D"link" class=3D"css-4rbku5 css-18t94o4 css-1dbjc4n r-1niwhzg r-1ets6dv =
+r-sdzlij r-1phboty r-rs99b7 r-1loqt21 r-15ysp7h r-4wgw6l r-1ny4l3l r-ymttw5=
+ r-o7ynqc r-6416eg r-lrvibr" style=3D""><div dir=3D"auto" class=3D"css-901o=
+ao r-1awozwy r-6koalj r-18u37iz r-16y2uox r-1qd0xha r-a023e6 r-b88u0q r-177=
+7fci r-rjixqe r-bcqeeo r-q4m81j r-qvutc0" style=3D"color: rgb(0, 111, 214);=
+"><span class=3D"css-901oao css-16my406 css-1hf3ou5 r-poiln3 r-1b43r93 r-1c=
+wl3u0 r-bcqeeo r-qvutc0"><span class=3D"css-901oao css-16my406 r-poiln3 r-b=
+cqeeo r-qvutc0">Read 2 replies</span></span></div></a></div></article></div=
+></div></div></div><div style=3D"width: 0px; height: 0px;"></div></body></h=
+tml>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/svg+xml
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://abs-0.twimg.com/emoji/v2/svg/1f643.svg
+
+<svg xmlns=3D"http://www.w3.org/2000/svg" viewBox=3D"0 0 36 36"><path fill=
+=3D"#FFCC4D" d=3D"M0 18C0 8.059 8.059 0 18 0s18 8.059 18 18-8.059 18-18 18S=
+0 27.941 0 18"/><path fill=3D"#664500" d=3D"M8.665 12.871c.178.161.444.171.=
+635.029.039-.029 3.922-2.9 8.7-2.9 4.766 0 8.662 2.871 8.7 2.9.191.142.457.=
+13.635-.029.177-.16.217-.424.094-.628C27.3 12.029 24.212 7 18 7s-9.301 5.02=
+8-9.429 5.243c-.123.205-.084.468.094.628z"/><ellipse fill=3D"#664500" cx=3D=
+"11.5" cy=3D"21.5" rx=3D"2.5" ry=3D"3.5"/><ellipse fill=3D"#664500" cx=3D"2=
+4.5" cy=3D"21.5" rx=3D"2.5" ry=3D"3.5"/></svg>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/svg+xml
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://abs-0.twimg.com/emoji/v2/svg/27a1.svg
+
+<svg xmlns=3D"http://www.w3.org/2000/svg" viewBox=3D"0 0 36 36"><path fill=
+=3D"#3B88C3" d=3D"M36 32c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4V4c0-2.2=
+09 1.791-4 4-4h28c2.209 0 4 1.791 4 4v28z"/><path fill=3D"#FFF" d=3D"M7 14h=
+9V7l13 11-13 11v-7H7z"/></svg>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/svg+xml
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://abs-0.twimg.com/emoji/v2/svg/1f4bc.svg
+
+<svg xmlns=3D"http://www.w3.org/2000/svg" viewBox=3D"0 0 36 36"><path fill=
+=3D"#9A4E1C" d=3D"M32 8h-6V4c0-2.209-1.791-4-4-4h-8c-2.209 0-4 1.791-4 4v4H=
+4c-2.209 0-4 1.791-4 4v20c0 2.209 1.791 4 4 4h28c2.209 0 4-1.791 4-4V12c0-2=
+.209-1.791-4-4-4zM12 6c0-1.104.896-2 2-2h8c1.104 0 2 .896 2 2v2H12V6z"/><pa=
+th fill=3D"#662113" d=3D"M36 20c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4v=
+-8c0-2.209 1.791-4 4-4h28c2.209 0 4 1.791 4 4v8z"/><path fill=3D"#9A4E1C" d=
+=3D"M36 18c0 2.209-1.791 4-4 4H4c-2.209 0-4-1.791-4-4v-6c0-2.209 1.791-4 4-=
+4h28c2.209 0 4 1.791 4 4v6z"/><path fill=3D"#CCD6DD" d=3D"M22 18c0 1.104-.8=
+96 2-2 2h-4c-1.104 0-2-.896-2-2s.896-2 2-2h4c1.104 0 2 .896 2 2"/></svg>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: image/jpeg
+Content-Transfer-Encoding: base64
+Content-Location: https://pbs.twimg.com/profile_images/855219682940522501/4JjxHZ_M_bigger.jpg
+
+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
+ICAgICAgICAgICAgICAgICAgICAgICA=
+
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-411ad9ac-9a36-419f-8db3-faf0d0d2d47d@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-d435c3d7-566b-4093-b6b8-ed2aed357adf@mhtml.blink
+
+@charset "utf-8";
+
+[stylesheet-group=3D"0"] { }
+
+html { text-size-adjust: 100%; -webkit-tap-highlight-color: rgba(0, 0, 0, 0=
+); }
+
+body { margin: 0px; }
+
+input::-webkit-search-cancel-button, input::-webkit-search-decoration, inpu=
+t::-webkit-search-results-button, input::-webkit-search-results-decoration =
+{ display: none; }
+
+[stylesheet-group=3D"0.1"] { }
+
+:focus:not([data-focusvisible-polyfill]) { outline: none; }
+
+[stylesheet-group=3D"0.5"] { }
+
+.css-4rbku5 { background-color: rgba(0, 0, 0, 0); color: inherit; font: inh=
+erit; list-style: none; margin: 0px; text-align: inherit; text-decoration: =
+none; }
+
+.css-18t94o4 { cursor: pointer; }
+
+[stylesheet-group=3D"1"] { }
+
+.css-1dbjc4n { -webkit-box-align: stretch; -webkit-box-direction: normal; -=
+webkit-box-orient: vertical; align-items: stretch; border: 0px solid black;=
+ box-sizing: border-box; display: flex; flex-basis: auto; flex-direction: c=
+olumn; flex-shrink: 0; margin: 0px; min-height: 0px; min-width: 0px; paddin=
+g: 0px; position: relative; z-index: 0; }
+
+.css-901oao { border: 0px solid black; box-sizing: border-box; color: rgb(0=
+, 0, 0); display: inline; font: 14px -apple-system, BlinkMacSystemFont, "Se=
+goe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; padding: 0px; w=
+hite-space: pre-wrap; overflow-wrap: break-word; }
+
+.css-16my406 { color: inherit; font: inherit; white-space: inherit; }
+
+.css-1hf3ou5 { max-width: 100%; overflow: hidden; text-overflow: ellipsis; =
+white-space: nowrap; overflow-wrap: normal; }
+
+.css-9pa8cd { inset: 0px; height: 100%; opacity: 0; position: absolute; wid=
+th: 100%; z-index: -1; }
+
+[stylesheet-group=3D"2"] { }
+
+.r-13awgt0 { flex: 1 1 0%; }
+
+.r-1ets6dv { border-color: rgb(207, 217, 222); }
+
+.r-1q9bdsx { border-radius: 12px; }
+
+.r-rs99b7 { border-width: 1px; }
+
+.r-1udh08x { overflow: hidden; }
+
+.r-1adg3ll { display: block; }
+
+.r-bztko3 { overflow: visible; }
+
+.r-sdzlij { border-radius: 9999px; }
+
+.r-6koalj { display: flex; }
+
+.r-4qtqp9 { display: inline-block; }
+
+.r-xoduu5 { display: inline-flex; }
+
+.r-19fsva8 { margin: 0px; }
+
+.r-1471scf { display: inline; }
+
+.r-1phboty { border-style: solid; }
+
+.r-1jkafct { border-radius: 2px; }
+
+[stylesheet-group=3D"2.1"] { }
+
+.r-4amgru { margin-left: 4px; margin-right: 4px; }
+
+.r-s1qlax { padding-left: 4px; padding-right: 4px; }
+
+.r-ymttw5 { padding-left: 16px; padding-right: 16px; }
+
+.r-ppnd1t { margin-bottom: 1px; margin-top: 1px; }
+
+.r-1vvnge1 { padding-bottom: 2px; padding-top: 2px; }
+
+[stylesheet-group=3D"2.2"] { }
+
+.r-12vffkv > * { pointer-events: auto; }
+
+.r-12vffkv { pointer-events: none !important; }
+
+.r-1loqt21 { cursor: pointer; }
+
+.r-vakc41 { max-width: 550px; }
+
+.r-y54riw { min-width: 250px; }
+
+.r-14lw9ot { background-color: rgb(255, 255, 255); }
+
+.r-iphfwy { padding-bottom: 4px; }
+
+.r-1qhn6m8 { padding-left: 16px; }
+
+.r-i023vh { padding-right: 16px; }
+
+.r-ttdzmv { padding-top: 12px; }
+
+.r-o7ynqc { transition-duration: 0.2s; }
+
+.r-6416eg { transition-property: background-color, box-shadow; }
+
+.r-1ny4l3l { outline-style: none; }
+
+.r-18u37iz { -webkit-box-direction: normal; -webkit-box-orient: horizontal;=
+ flex-direction: row; }
+
+.r-kzbkwu { padding-bottom: 12px; }
+
+.r-13qz1uu { width: 100%; }
+
+.r-1p0dtai { bottom: 0px; }
+
+.r-1pi2tsx { height: 100%; }
+
+.r-1d2f490 { left: 0px; }
+
+.r-u8s1d { position: absolute; }
+
+.r-ipm5af { top: 0px; }
+
+.r-1wyvozj { left: 50%; }
+
+.r-1v2oles { top: 50%; }
+
+.r-desppf { transform: translateX(-50%) translateY(-50%); }
+
+.r-ggadg3 { left: -2px; }
+
+.r-8jfcpp { top: -2px; }
+
+.r-633pao { pointer-events: none !important; }
+
+.r-12181gd { box-shadow: rgba(0, 0, 0, 0.03) 0px 0px 2px inset; }
+
+.r-eqz5dr { -webkit-box-direction: normal; -webkit-box-orient: vertical; fl=
+ex-direction: column; }
+
+.r-1777fci { -webkit-box-pack: center; justify-content: center; }
+
+.r-1kh6xel { max-width: calc(100% - 84px); }
+
+.r-1wbh5a2 { flex-shrink: 1; }
+
+.r-dnmrzs { max-width: 100%; }
+
+.r-1awozwy { -webkit-box-align: center; align-items: center; }
+
+.r-bcqeeo { min-width: 0px; }
+
+.r-qvutc0 { overflow-wrap: break-word; }
+
+.r-rjixqe { line-height: 20px; }
+
+.r-1qd0xha { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Ro=
+boto, Helvetica, Arial, sans-serif; }
+
+.r-a023e6 { font-size: 15px; }
+
+.r-b88u0q { font-weight: 700; }
+
+.r-3s2u2q { white-space: nowrap; }
+
+.r-poiln3 { font-family: inherit; }
+
+.r-dflpy8 { height: 1.2em; }
+
+.r-sjv1od { margin-left: 0.075em; }
+
+.r-zw8f10 { margin-right: 0.075em; }
+
+.r-10akycc { vertical-align: -20%; }
+
+.r-h9hxbl { width: 1.2em; }
+
+.r-1pos5eu { vertical-align: middle; }
+
+.r-16dba41 { font-weight: 400; }
+
+.r-1q142lx { flex-shrink: 0; }
+
+.r-1wvb978 { font-feature-settings: "ss01"; }
+
+.r-1jj8364 { margin-left: auto; }
+
+.r-yyyyoo { fill: currentcolor; }
+
+.r-1xvli5t { height: 1.25em; }
+
+.r-bnwqim { position: relative; }
+
+.r-1plcrui { vertical-align: text-bottom; }
+
+.r-lrvibr { user-select: none; }
+
+.r-18jsvk2 { color: rgb(15, 20, 25); }
+
+.r-6zzn7w { height: 25px; }
+
+.r-q1j0wu { width: 25px; }
+
+.r-1dqbpge { cursor: text; }
+
+.r-hiw28u { font-size: 0px; }
+
+.r-qvk6io { line-height: 0px; }
+
+.r-1bymd8e { margin-top: 2px; }
+
+.r-1d09ksm { -webkit-box-align: baseline; align-items: baseline; }
+
+.r-1w6e6rj { flex-wrap: wrap; }
+
+.r-9aw3ui { gap: 4px; }
+
+.r-mabqd8 { height: 32px; }
+
+.r-2eo2mk { margin-right: -4px; }
+
+.r-1yvhtrz { width: 32px; }
+
+.r-14j79pv { color: rgb(83, 100, 113); }
+
+.r-n6v787 { font-size: 13px; }
+
+.r-1habvwh { -webkit-box-align: start; align-items: flex-start; }
+
+.r-5kkj8d { border-top-width: 1px; }
+
+.r-14gqq1x { margin-top: 4px; }
+
+.r-1h8ys4a { padding-top: 4px; }
+
+.r-1mf7evn { margin-right: 20px; }
+
+.r-cnkkqs { margin-left: -4px; }
+
+.r-vkub15 { color: rgb(249, 24, 128); }
+
+.r-1sreavd { fill: rgb(249, 24, 128); }
+
+.r-1b43r93 { font-size: 14px; }
+
+.r-1cwl3u0 { line-height: 16px; }
+
+.r-13hce6t { margin-left: 4px; }
+
+.r-1cvl2hr { color: rgb(29, 155, 240); }
+
+.r-4r3dic { fill: rgb(29, 155, 240); }
+
+.r-15ysp7h { min-height: 32px; }
+
+.r-4wgw6l { min-width: 32px; }
+
+.r-q4m81j { text-align: center; }
+
+.r-16y2uox { -webkit-box-flex: 1; flex-grow: 1; }
+
+.r-adyw6z { font-size: 20px; }
+
+.r-135wba7 { line-height: 24px; }
+
+.r-1mlwlqe { flex-basis: auto; }
+
+.r-417010 { z-index: 0; }
+
+.r-1niwhzg { background-color: rgba(0, 0, 0, 0); }
+
+.r-vvn4in { background-position: center center; }
+
+.r-u6sd8q { background-repeat: no-repeat; }
+
+.r-4gszlv { background-size: cover; }
+
+.r-zchlnj { right: 0px; }
+
+.r-1wyyakw { z-index: -1; }
+
+.r-x572qd { background-color: rgb(247, 249, 249); }
+
+.r-1ddef8g { text-decoration-line: underline; }
+
+.r-tjvw6i { text-decoration-thickness: 1px; }
+
+.r-105ug2t { pointer-events: auto !important; }
+
+.r-2tavb8 { background-color: rgba(0, 0, 0, 0.6); }
+
+.r-7q8q6z { cursor: default; }
+
+.r-bt1l66 { min-height: 20px; }
+
+.r-1jaylin { width: max-content; }
+
+.r-1gkfh8e { font-size: 11px; }
+
+.r-56xrmm { line-height: 12px; }
+
+.r-146iojx { max-width: 300px; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-5fc1b89a-8276-477a-b9cb-108a79283b97@mhtml.blink
+
+@charset "utf-8";
+
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/res=
+ponsive-web/client-web/Chirp-Light.3a18e64a.woff2") format("woff2"), url("h=
+ttps://abs.twimg.com/responsive-web/client-web/Chirp-Light.7a5673aa.woff") =
+format("woff"); font-weight: 300; }
+
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/res=
+ponsive-web/client-web/Chirp-Regular.80fda27a.woff2") format("woff2"), url(=
+"https://abs.twimg.com/responsive-web/client-web/Chirp-Regular.60b215ba.wof=
+f") format("woff"); font-weight: 400; }
+
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/res=
+ponsive-web/client-web/Chirp-Medium.f8e2739a.woff2") format("woff2"), url("=
+https://abs.twimg.com/responsive-web/client-web/Chirp-Medium.20fc288a.woff"=
+) format("woff"); font-weight: 500; }
+
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/res=
+ponsive-web/client-web/Chirp-Bold.ebb56aba.woff2") format("woff2"), url("ht=
+tps://abs.twimg.com/responsive-web/client-web/Chirp-Bold.a573679a.woff") fo=
+rmat("woff"); font-weight: 700; }
+
+@font-face { font-family: TwitterChirp; src: url("https://abs.twimg.com/res=
+ponsive-web/client-web/Chirp-Heavy.f44ae4ea.woff2") format("woff2"), url("h=
+ttps://abs.twimg.com/responsive-web/client-web/Chirp-Heavy.d70ec7ca.woff") =
+format("woff"); font-weight: 800; }
+
+@font-face { font-family: TwitterChirpExtendedHeavy; src: url("https://abs.=
+twimg.com/fonts/v1/chirp-extended-heavy-web.woff2") format("woff2"), url("h=
+ttps://abs.twimg.com/fonts/v1/chirp-extended-heavy-web.woff") format("woff"=
+); font-weight: 800; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-af44a676-f417-4a51-ab1e-f068195084ec@mhtml.blink
+
+@charset "utf-8";
+
+input::placeholder { user-select: none; }
+
+iframe { color-scheme: auto; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/html
+Content-ID: <frame-217646F189370296A26F97309ED1A1DA@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+
+<html class=3D"SandboxRoot"><head><meta http-equiv=3D"Content-Type" content=
+=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" =
+href=3D"cid:css-2f3e2213-58dc-437b-ba8c-88925f56e77a@mhtml.blink" /><base t=
+arget=3D"_blank"></head><body></body></html>
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-2f3e2213-58dc-437b-ba8c-88925f56e77a@mhtml.blink
+
+@charset "utf-8";
+
+.SandboxRoot { display: none; }
+------MultipartBoundary--xoxAA33JgUyqhVrJZM3CAL09zFKUQrsoX6naxfu7oB------

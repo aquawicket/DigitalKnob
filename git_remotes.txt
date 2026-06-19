@@ -1,0 +1,30 @@
+Git remotes from scratch
+
+To erase everything, delete each named remote entry with this command 
+git remote remove <name> 
+
+check remote with this command
+git remote -v
+
+see the origin list in config files 
+git config --list --show-origin
+
+
+#### Create the origin remote (if origin doesn't exist) ###
+	git remote add origin E:\DigitalKnob\Development
+
+#### Set the repo origin url (if origin already exists) ####
+	git remote set-url origin E:\DigitalKnob\Development
+
+### set 'Development' to track 'origin/Development' ###
+	git push --set-upstream origin Development
+
+
+### you should now be able to push and pull from origin ###
+
+### Add another push url
+### https://stackoverflow.com/a/12795747
+	git remote set-url origin --push --add E:\DigitalKnob\Developmemt.git
+	git remote set-url origin --push --add F:\DigitalKnob\Developmemt.git
+	git remote set-url origin --push --add ssh://u108565871@access912915170.webspace-data.io/~/DigitalKnob/Development
+	git remote set-url origin --push --add https://github.com/aquawicket/DigitalKnob	

@@ -1,0 +1,5 @@
+###### [crosstool-ng] ######
+# https://github.com/crosstool-ng/crosstool-ng
+# https://github.com/crosstool-ng/crosstool-ng/archive/32f288e61fee8528931bcd55bf106cf0cfb4e2a1.zip
+
+crosstool-ng_Import=https://github.com/crosstool-ng/crosstool-ng/archive/32f288e61fee8528931bcd55bf106cf0cfb4e2a1.zip

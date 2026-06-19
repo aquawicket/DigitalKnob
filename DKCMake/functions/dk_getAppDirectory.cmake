@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_getAppDirectory(rtn_var)
 #
 #	Get the OS default app directory
@@ -13,24 +24,24 @@ function(dk_getAppDirectory rtn_var)
 	dk_debugFunc()
 	
 	set(USE_32BIT 1)
-	if(WIN_HOST)
+	if(Windows_Host)
 		set(appDirectory "C:/Program Files")
-		if(${USE_32BIT} AND ${WIN_X86_64_HOST})
+		if(${USE_32BIT} AND ${Windows_X86_64_Host})
 			set(appDirectory "C:/Program Files (x86)")
 		endif()
-	elseif(MAC_HOST)
+	elseif(Mac_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(IOS_HOST)
+	elseif(Ios_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(LINUX_HOST)
+	elseif(Linux_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(RASPBERRY_HOST)
+	elseif(Raspberry_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
-	elseif(ANDROID_ANDROID)
+	elseif(Android_Host)
 		dk_todo() #TODO
 		set(appDirectory "/")
 	endif()

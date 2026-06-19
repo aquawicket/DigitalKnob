@@ -8,13 +8,13 @@ for /f "tokens=* delims=" %%v in ('dir /b /s /a:-d  /o:-n "%SystemRoot%\Microsof
    set "JSC_EXE=%%v"
 )
 
-if not exist "%~n0.exe" (
+if NOT EXIST "%~n0.exe" (
     "%JSC_EXE%" /nologo /out:"%~n0.exe" "%~dpsfnx0"
 )
 
 echo %~n0.exe  "%JSC_EXE%" %*
 %~n0.exe  "%JSC_EXE%" %*
-::del /q /f %~n0.exe 1>nul 2>nul 
+::del /q /f %~n0.exe 1>nul 2>nul
 endlocal & exit /b %errorlevel%
 */
 
@@ -32,7 +32,7 @@ import System.Diagnostics;
 
 var arguments:String[] = Environment.GetCommandLineArgs();
 if (arguments.length<3){
-    Console.WriteLine("Path to cmd/bat file not given");
+    Console.WriteLine("Path to cmd/bat file NOT given");
     Environment.Exit(1);
 }
 

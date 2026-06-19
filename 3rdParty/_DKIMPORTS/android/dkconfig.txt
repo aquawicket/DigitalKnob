@@ -1,0 +1,2 @@
+############ libandroid ############
+# https://developer.android.com/ndk/guides/stable_apis#tracing

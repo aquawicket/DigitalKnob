@@ -1,41 +1,47 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKUNINSTALL()
-::#
-::#	  windows uninstall registry location
-::#   HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
-::#
+rem ####################################################################
+rem # DKUNINSTALL()
+rem #
+rem #	  windows uninstall registry location
+rem #   HKLM/Software/Microsoft/Windows/CurrentVersion/Uninstall/qemu
+rem #
 :DKUNINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+rem %setlocal%
 	
-	if defined win_x86_host      (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
-	if defined win_x86_64_host   (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe")
+	if defined Windows_X86_Host      (set "qemu_Import=https://qemu.weilnetz.de/w32/qemu-w32-setup-20221230.exe")
+	if defined Windows_X86_64_Host   (set "qemu_Import=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240423.exe")
 	
-	%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
-    %dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
-    %dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
+	%dk_call% dk_basename %qemu_Import% qemu_Import_File
+    %dk_call% dk_removeExtension %qemu_Import_File% qemu_Install_Name
+    rem %dk_call% dk_convertToCIdentifier %qemu_Install_Name% qemu_Install_Name
+    %dk_call% dk_toLower %qemu_Install_Name% qemu_Install_Name
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_set qemu_DIR %DKTOOLS_DIR%/%qemu_Install_Name%
 	
-	%dk_call% dk_info "%QEMU_DIR%\qemu-uninstall.exe"
-	%dk_call% "%QEMU_DIR%\qemu-uninstall.exe"
+	%dk_call% dk_info "%qemu_DIR%/qemu-uninstall.exe"
+	%dk_call% "%qemu_DIR:/=\%\qemu-uninstall.exe"
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
 	%dk_call% DKUNINSTALL
 %endfunction%

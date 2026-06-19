@@ -1,106 +1,68 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-############ libx11-dev ############
+############ libiconv ############
 # https://www.gnu.org/software/libiconv/
 # https://savannah.gnu.org/projects/libiconv
 # https://stackoverflow.com/a/57734435/688352
 # https://cmake.org/cmake/help/latest/module/FindIconv.html
-#
+# http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz
+# https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz
 
-dk_load(dk_builder)
+dk_import()
 
-### IMPORT ###
-#dk_import(https://ftp.gnu.org/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
-dk_import(http://ftp.vim.org/ftp/gnu/libiconv/libiconv-1.14.tar.gz PATCH)
+dk_include			(${libiconv})															# config.h
+dk_include			(${libiconv}/include 					Iconv_INCLUDE_DIR)
+dk_include			(${libiconv_Config_Dir})
+dk_include			(${libiconv_Build_Dir})
 
-
-
-### LINK ###
-dk_include				(${LIBICONV_DIR})
-dk_include				(${LIBICONV_DIR}/include 				LIBICONV_INCLUDE_DIR)
-dk_include				(${LIBICONV_CONFIG_DIR})
-if(DEBUG)
-	dk_include			(${LIBICONV_DEBUG_DIR})
-endif()
-if(RELEASE)
-	dk_include			(${LIBICONV_RELEASE_DIR})
-endif()
 
 # libcharset
-if(MSVC)
-	if(WIN)
-		dk_libDebug		(${LIBICONV_DEBUG_DIR}/charset.lib		LIBICONV_CHARSET_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBICONV_RELEASE_DIR}/charset.lib	LIBICONV_CHARSET_LIBRARY_RELEASE)
-	endif()
+if(Windows AND MSVC)
+	dk_libDebug		(${libiconv_Debug_Dir}/charset.lib		Iconv_CHARSET_LIBRARY_DEBUG 	Iconv_CHARSET_LIBRARY)
+	dk_libRelease	(${libiconv_Release_Dir}/charset.lib	Iconv_CHARSET_LIBRARY_RELEASE	Iconv_CHARSET_LIBRARY)
 else()
-	dk_libDebug			(${LIBICONV_DEBUG_DIR}/libcharset.a		LIBICONV_CHARSET_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV_RELEASE_DIR}/libcharset.a	LIBICONV_CHARSET_LIBRARY_RELEASE)
+	dk_libDebug		(${libiconv_Debug_Dir}/libcharset.a		Iconv_CHARSET_LIBRARY_DEBUG		Iconv_CHARSET_LIBRARY)
+	dk_libRelease	(${libiconv_Release_Dir}/libcharset.a	Iconv_CHARSET_LIBRARY_RELEASE	Iconv_CHARSET_LIBRARY)
 endif()
 
 #libiconv
-if(MSVC)
-	if(WIN)
-		dk_libDebug		(${LIBICONV_DEBUG_DIR}/iconv.lib		LIBICONV_LIBRARY_DEBUG)
-		dk_libRelease	(${LIBICONV_RELEASE_DIR}/iconv.lib		LIBICONV_LIBRARY_RELEASE)
-	endif()
+if(Windows AND MSVC)
+	dk_libDebug		(${libiconv_Debug_Dir}/iconv.lib		Iconv_LIBRARY_DEBUG				Iconv_LIBRARY)
+	dk_libRelease	(${libiconv_Release_Dir}/iconv.lib		Iconv_LIBRARY_RELEASE			Iconv_LIBRARY)
 else()
-	dk_libDebug			(${LIBICONV_DEBUG_DIR}/libiconv.a		LIBICONV_LIBRARY_DEBUG)
-	dk_libRelease		(${LIBICONV_RELEASE_DIR}/libiconv.a		LIBICONV_LIBRARY_RELEASE)
+	dk_libDebug		(${libiconv_Debug_Dir}/libiconv.a		Iconv_LIBRARY_DEBUG				Iconv_LIBRARY)
+	dk_libRelease	(${libiconv_Release_Dir}/libiconv.a		Iconv_LIBRARY_RELEASE			Iconv_LIBRARY)
 endif()
 
-if(DEBUG)
-	dk_set(Iconv_LIBRARY "${LIBICONV_LIBRARY_DEBUG}")
-elseif(RELEASE)
-	dk_set(Iconv_LIBRARY "${LIBICONV_LIBRARY_RELEASE}")
-endif()
-
-
-### 3RDPARTY LINK ###
 if(MULTI_CONFIG)
-	dk_set(LIBICONV_CMAKE
-		#-DLIBICONV_PATH=${LIBICONV}
-		#-DICONV_DIR=${LIBICONV}
-		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-		#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_DEBUG};${LIBICONV_LIBRARY_DEBUG}"
-		-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
-		-DIconv_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_DEBUG};${LIBICONV_LIBRARY_DEBUG};${LIBICONV_CHARSET_LIBRARY_RELEASE};${LIBICONV_LIBRARY_RELEASE}"
-		-DIconv_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-		-DIconv_LIBRARY=${Iconv_LIBRARY})
+	dk_set(libiconv_CMAKE
+		-DIconv_INCLUDE_DIR=${Iconv_INCLUDE_DIR}
+		-DIconv_INCLUDE_DIRS=${Iconv_INCLUDE_DIRS}
+		-DIconv_LIBRARY=${Iconv_LIBRARY}
+		-DIconv_LIBRARIES="${Iconv_CHARSET_LIBRARY_DEBUG};${Iconv_LIBRARY_DEBUG};${Iconv_CHARSET_LIBRARY_RELEASE};${Iconv_LIBRARY_RELEASE}"
+		-DICONV_INCLUDE_DIR=${Iconv_INCLUDE_DIR})
 else()
-	if(DEBUG)
-		dk_set(LIBICONV_CMAKE
-			#-DLIBICONV_PATH=${LIBICONV}
-			#-DICONV_DIR=${LIBICONV}
-			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-			#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_DEBUG};${LIBICONV_LIBRARY_DEBUG};${LIBICONV_CHARSET_LIBRARY_RELEASE};${LIBICONV_LIBRARY_RELEASE}"
-			-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
-			-DIconv_LIBRARIES=${LIBICONV_CHARSET_LIBRARY_DEBUG};${Iconv_LIBRARY}
-			-DIconv_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-			-DIconv_LIBRARY=${Iconv_LIBRARY})
-	endif()
-	if(RELEASE)
-		dk_set(LIBICONV_CMAKE 
-			#-DLIBICONV_PATH=${LIBICONV}
-			#-DICONV_DIR=${LIBICONV}
-			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-			#-DICONV_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_RELEASE};${LIBICONV_LIBRARY_RELEASE}"
-			-DIconv_INCLUDE_DIRS=${LIBICONV_INCLUDE_DIR}
-			-DIconv_LIBRARIES="${LIBICONV_CHARSET_LIBRARY_RELEASE};${Iconv_LIBRARY}"
-			-DIconv_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
-			-DIconv_LIBRARY=${Iconv_LIBRARY})
-	endif()
+	dk_set(libiconv_CMAKE
+		-DIconv_INCLUDE_DIR=${Iconv_INCLUDE_DIR}
+		-DIconv_INCLUDE_DIRS=${Iconv_INCLUDE_DIRS}
+		-DIconv_LIBRARY=${Iconv_LIBRARY}
+		-DIconv_LIBRARIES=${Iconv_LIBRARY}
+		-DICONV_INCLUDE_DIR=${Iconv_INCLUDE_DIR})
 endif()
 
+dk_configure()
 
-
-### GENERATE ###
-dk_configure(${LIBICONV_DIR})
-
-
-### COMPILE ###
-dk_build(${LIBICONV_DIR} iconv)
+dk_build(${libiconv} iconv)

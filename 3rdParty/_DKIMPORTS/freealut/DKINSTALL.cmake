@@ -1,60 +1,62 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ freealut ############
 # https://github.com/vancegroup/freealut.git
 # http://distro.ibiblio.org/rootlinux/rootlinux-ports/more/freealut/freealut-1.1.0.tar.gz
-dk_load(dk_builder)
+# https://github.com/vancegroup/freealut/archive/8abb4207.zip
 
-### DEPENDS ###
 dk_depend(msinttypes)
 dk_depend(openal)
 
-### IMPORT ###
-dk_import(https://github.com/vancegroup/freealut/archive/8abb4207.zip PATCH)
+dk_import() # PATCH
 
-### LINK ###
 dk_define			(AL_LIBTYPE_STATIC)
-dk_include			(${FREEALUT}/include										ALUT_INCLUDE_DIR)
+dk_include			(${freealut}/include										ALUT_INCLUDE_DIR)
 if(MSVC)
-	dk_libDebug		(${FREEALUT}/${target_triple}/src/${DEBUG_DIR}/alut_static.lib		ALUT_LIBRARY_DEBUG)
-	dk_libRelease	(${FREEALUT}/${target_triple}/src/${RELEASE_DIR}/alut_static.lib	ALUT_LIBRARY_RELEASE)
-elseif(APPLE OR ANDROID)
-	dk_libDebug		(${FREEALUT}/${target_triple}/src/${DEBUG_DIR}/libalut_static.a	ALUT_LIBRARY_DEBUG)
-	dk_libRelease	(${FREEALUT}/${target_triple}/src/${RELEASE_DIR}/libalut_static.a	ALUT_LIBRARY_RELEASE)
+	dk_libDebug		(${freealut_Tuple_Dir}/src/${Debug_Dir}/alut_static.lib		ALUT_LIBRARY_DEBUG		ALUT_LIBRARY)
+	dk_libRelease	(${freealut_Tuple_Dir}/src/${Release_Dir}/alut_static.lib	ALUT_LIBRARY_RELEASE	ALUT_LIBRARY)
+elseif(Apple OR Android)
+	dk_libDebug		(${freealut_Tuple_Dir}/src/${Debug_Dir}/libalut_static.a	ALUT_LIBRARY_DEBUG		ALUT_LIBRARY)
+	dk_libRelease	(${freealut_Tuple_Dir}/src/${Release_Dir}/libalut_static.a	ALUT_LIBRARY_RELEASE	ALUT_LIBRARY)
 else()
-	dk_libDebug		(${FREEALUT_DEBUG_DIR}/src/libalut_static.a					ALUT_LIBRARY_DEBUG)
-	dk_libRelease	(${FREEALUT_RELEASE_DIR}/src/libalut_static.a				ALUT_LIBRARY_RELEASE)
-endif()
-if(DEBUG)
-	set(ALUT_LIBRARY	${ALUT_LIBRARY_DEBUG})
-endif()
-if(RELEASE)
-	set(ALUT_LIBRARY	${ALUT_LIBRARY_RELEASE})
+	dk_libDebug		(${freealut_Build_Dir}/src/libalut_static.a					ALUT_LIBRARY_DEBUG		ALUT_LIBRARY)
+	dk_libRelease	(${freealut_Build_Dir}/src/libalut_static.a					ALUT_LIBRARY_RELEASE	ALUT_LIBRARY)
 endif()
 
-### 3RDPARTY LINK ###
+
+dk_set(freealut_CMAKE 
+	-DALUT_INCLUDE_DIR=${ALUT_INCLUDE_DIR} 
+	-DALUT_LIBRARY_DEBUG=${ALUT_LIBRARY_DEBUG} 
+	-DALUT_LIBRARY=${ALUT_LIBRARY})
 if(MSVC)
-	WIN_dk_set	(FREEALUT_CMAKE "-DCMAKE_CXX_FLAGS=/I${ALUT_INCLUDE_DIR}" -DALUT_INCLUDE_DIR=${ALUT_INCLUDE_DIR} -DALUT_LIBRARY_DEBUG=${ALUT_LIBRARY_DEBUG} -DALUT_LIBRARY=${ALUT_LIBRARY})
+	dk_append(freealut_CMAKE "-DCMAKE_CXX_FLAGS=/I${ALUT_INCLUDE_DIR}")
 else()
-	dk_set		(FREEALUT_CMAKE "-DCMAKE_CXX_FLAGS=-I${ALUT_INCLUDE_DIR}" -DALUT_INCLUDE_DIR=${ALUT_INCLUDE_DIR} -DALUT_LIBRARY_DEBUG=${ALUT_LIBRARY_DEBUG} -DALUT_LIBRARY=${ALUT_LIBRARY})
+	dk_append(freealut_CMAKE "-DCMAKE_CXX_FLAGS=-I${ALUT_INCLUDE_DIR}")
 endif()
 
-### GENERATE ###
+
 if(MSVC)
-	dk_configure(${FREEALUT_DIR} ${OPENAL_CMAKE} ${MSINTTYPES_CMAKE})
+	dk_configure(${freealut} ${openal_CMAKE} ${msinttypes_CMAKE})
 else()
-	dk_configure(${FREEALUT_DIR} ${OPENAL_CMAKE})
+	dk_configure(${freealut} ${openal_CMAKE})
 endif()
 
-### COMPILE ###
-ANDROID_dk_build	(${FREEALUT_DIR} alut_static)
-APPLE_dk_build		(${FREEALUT_DIR} alut_static)
-EMSCRIPTEN_dk_build	(${FREEALUT_DIR})
-LINUX_dk_build		(${FREEALUT_DIR})
-RASPBERRY_dk_build	(${FREEALUT_DIR})
-WIN_dk_build		(${FREEALUT_DIR} alut_static)
+
+if(Android OR Apple OR Windows)
+	dk_build(${freealut} alut_static)
+else()
+	dk_build(${freealut})
+endif()

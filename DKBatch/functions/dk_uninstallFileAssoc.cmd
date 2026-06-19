@@ -1,72 +1,79 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#################################################################################
-::# dk_uninstallFileAssoc(extension)
-::#
-::#
+rem #################################################################################
+rem # dk_uninstallFileAssoc(extension)
+rem #
+rem #
 :dk_uninstallFileAssoc
-setlocal
-	%dk_call% dk_debugFunc 1
-    :: <_extension_>  i.e. ".txt"
+%setlocal%
+    rem <_extension_>  i.e. ".txt"
     set "_extension_=%~1"
-    
-    ::  Computer\HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
-    ::  Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
-    ::
-    :: https://ss64.com/nt/ftype.html
-    
-::  Example
-::      %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
-::      ftype DKPowershell=%POWERSHELL_EXE% "%%1"
-::      assoc .ps1=DKPowershell
+   
+    rem  Computer\HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts
+    rem  Seems to be a better place to change file associations. They take precidence over ftype and assoc commands
+    rem 
+    rem https://ss64.com/nt/ftype.html
+   
+rem  Example
+rem      %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.ps1"
+rem      ftype DKPowershell=%powershell.exe% "%%1"
+rem      assoc .ps1=DKPowershell
     %dk_call% dk_registryDeleteKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%"
-    
-    
+   
+   
 
-    
+   
 
-    
-    :: set file association through registry
-    
-    ::HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\OpenWithList REG_SZ:a=program.exe
-    ::%dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\OpenWithList" "a" "REG_SZ" "%~2"
-    
-    ::HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\OpenWithList REG_SZ:MRUList=program.a
-    ::%dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\OpenWithList" "MRUList" "REG_SZ" "a"
-    
-    ::HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\UserChoice REG_SZ:ProgId=Applications\program.exe
-    ::%dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\UserChoice" "ProgId" "REG_SZ" "Applications\%_exeFilename_%"
+   
+    rem set file association through registry
+   
+    rem HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\OpenWithList REG_SZ:a=program.exe
+    rem %dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\OpenWithList" "a" "REG_SZ" "%~2"
+   
+    rem HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\OpenWithList REG_SZ:MRUList=program.a
+    rem %dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\OpenWithList" "MRUList" "REG_SZ" "a"
+   
+    rem HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.cpp\UserChoice REG_SZ:ProgId=Applications\program.exe
+    rem %dk_call% dk_registrySetKey "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\%_extension_%\UserChoice" "ProgId" "REG_SZ" "Applications\%_exeFilename_%"
 
-    ::[HKCR\.txt]
-    ::@="emeditor.txt"
-    ::%dk_call% dk_registrySetKey "HKCR\%_extension_%" "" "REG_SZ" "%_dkname_%"
+    rem [HKCR\.txt]
+    rem @="emeditor.txt"
+    rem %dk_call% dk_registrySetKey "HKCR\%_extension_%" "" "REG_SZ" "%_dkname_%"
 
-    ::[HKCR\emeditor.txt]
-    ::@="Text Document"
-    ::set "_description_=Text Document"
-    ::%dk_call% dk_registrySetKey "HKCR\%_dkname_%" "" "REG_SZ" "%_description_%"
+    rem [HKCR\emeditor.txt]
+    rem @="Text Document"
+    rem set "_description_=Text Document"
+    rem %dk_call% dk_registrySetKey "HKCR\%_dkname_%" "" "REG_SZ" "%_description_%"
 
-    ::[HKCR\emeditor.txt\DefaultIcon]
-    ::@="%SystemRoot%\\SysWow64\\imageres.dll,-102"
-    ::%dk_call% dk_registrySetKey "HKCR\%_dkname_%\DefaultIcon" "" "REG_SZ" "%SystemRoot%\\SysWow64\\imageres.dll,-102"
+    rem [HKCR\emeditor.txt\DefaultIcon]
+    rem @="%SystemRoot%\\SysWow64\\imageres.dll,-102"
+    rem %dk_call% dk_registrySetKey "HKCR\%_dkname_%\DefaultIcon" "" "REG_SZ" "%SystemRoot%\\SysWow64\\imageres.dll,-102"
 
-    ::[HKCR\emeditor.txt\shell]
+    rem [HKCR\emeditor.txt\shell]
 
-    ::[HKCR\emeditor.txt\shell\open]
+    rem [HKCR\emeditor.txt\shell\open]
 
-    ::[HKCR\emeditor.txt\shell\open\command]
-    ::@="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" \"%1\""
-    ::%dk_call% dk_registrySetKey "HKCR\%_dkname_%\shell\open\command" "" "REG_EXPAND_SZ" "\"%_exe_%\" \"%%%%^1\""
-    
-    ::[HKCR\emeditor.txt\shell\print]
+    rem [HKCR\emeditor.txt\shell\open\command]
+    rem @="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" \"%1\""
+    rem %dk_call% dk_registrySetKey "HKCR\%_dkname_%\shell\open\command" "" "REG_EXPAND_SZ" "\"%_exe_%\" \"%%%%^1\""
+   
+    rem [HKCR\emeditor.txt\shell\print]
 
-    ::[HKCR\emeditor.txt\shell\print\command]
-    ::@="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" /p \"%1\""
-    ::%dk_call% dk_registrySetKey "HKCR\%_dkname_%\shell\print\command" "@" "REG_SZ" "\"%_exe_%\" /p \"%1\""
+    rem [HKCR\emeditor.txt\shell\print\command]
+    rem @="\"C:\\Program Files\\EmEditor\\EMEDITOR.EXE\" /p \"%1\""
+    rem %dk_call% dk_registrySetKey "HKCR\%_dkname_%\shell\print\command" "@" "REG_SZ" "\"%_exe_%\" /p \"%1\""
 %endfunction%
 
 
@@ -75,10 +82,9 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
     %dk_call% dk_uninstallFileAssoc ".txt"
 %endfunction%

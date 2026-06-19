@@ -1,2 +1,6 @@
-#MSYS2_DL=https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz
-MSYS2_DL=https://aquawicket.com/download/msys2-base-x86_64-20241208.tar.xz
+########### msys2 ###########
+# https://www.msys2.org
+# https://silentinstallhq.com/msys2-silent-install-how-to-guide
+# https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz
+
+msys2_Windows_X86_64_Import=https://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20241208.tar.xz

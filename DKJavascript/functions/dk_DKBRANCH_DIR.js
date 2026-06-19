@@ -1,5 +1,4 @@
-if(typeof dk_env === "dk_env"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); }
-if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
+
 
 //####################################################################
 //# dk_DKHOME_DIR()
@@ -8,27 +7,26 @@ if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions
 dk_DKBRANCH_DIR = function dk_DKBRANCH_DIR_f(){
     //dk_debugFunc(0 1);
 
-	//###### Print 'function(arguments)' ######
-	//var _ARGV_ = "";
-	//for (var i = 0; i < arguments.length; i++) {_ARGV_ += arguments[i];}
-	//console.log("dk_DKBRANCH_DIR("+_ARGV_+")");
-
 	//############ SET ############
-	if(arguments[0]){ 
+	if(arguments.length > 0){
 		DKBRANCH_DIR = arguments[0];
 	} 
+	
 	//############ GET ############
 	else {
-		if(typeof dk_DIGITALKNOB_DIR === "undefined"){ 
-			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DIGITALKNOB_DIR.js", function(){
-				dk_DIGITALKNOB_DIR()
-			}); 
-		}
+		dk_depend("dk_DIGITALKNOB_DIR"); dk_DIGITALKNOB_DIR();
 		DKBRANCH_DIR = DIGITALKNOB_DIR+"/Development";
 	}
 
-	dk_assertPath(DKBRANCH_DIR);
-	//window["DKBRANCH_DIR"] = DKBRANCH_DIR;
+	//dk_depend("dk_assertPath"); dk_assertPath(DKBRANCH_DIR);
+	
+	//###### return ######
+	if(typeof arguments[1] !== "undefined"){
+		arguments[1].value = DKBRANCH_DIR;
+	} else {
+		console.log(DKBRANCH_DIR);
+	}
+	return DKBRANCH_DIR;
 }
 
 
@@ -40,7 +38,12 @@ dk_DKBRANCH_DIR = function dk_DKBRANCH_DIR_f(){
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
+	
+	dk_depend("dk_echo");
 
 	dk_DKBRANCH_DIR();
-	console.log("DKBRANCH_DIR = "+DKBRANCH_DIR);
+	dk_echo("DKBRANCH_DIR = "+DKBRANCH_DIR);
+	
+	dk_DKBRANCH_DIR("C:/Windows");
+	dk_echo("DKBRANCH_DIR = "+DKBRANCH_DIR);
 };

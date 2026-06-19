@@ -1,50 +1,50 @@
-:: This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+rem This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
-:: For the latest information, see https://github.com/aquawicket/DigitalKnob
+rem For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
-:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+rem Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
 ::
-:: Permission is hereby granted, free of charge, to any person obtaining a copy
-:: of this software and associated documentation files(the "Software"), to deal
-:: in the Software without restriction, including without limitation the rights
-:: to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-:: copies of the Software, and to permit persons to whom the Software is
-:: furnished to do so, subject to the following conditions :
+rem Permission is hereby granted, free of charge, to any person obtaining a copy
+rem of this software and associated documentation files(the "Software"), to deal
+rem in the Software without restriction, including without limitation the rights
+rem to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+rem copies of the Software, and to permit persons to whom the Software is
+rem furnished to do so, subject to the following conditions :
 ::
-:: The above copyright notice and this permission notice shall be included in all
-:: copies or substantial portions of the Software.
+rem The above copyright notice and this permission notice shall be included in all
+rem copies or substantial portions of the Software.
 ::
-:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-:: SOFTWARE.
+rem THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+rem IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+rem FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+rem AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+rem SOFTWARE.
 
 ::%DKBATCH%
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::    %ERROR%  message
-:: %IF_ERROR%  message
-::    %FATAL%  message
-:: %IF_FATAL%  message
+rem    %ERROR%  message
+rem %IF_ERROR%  message
+rem    %FATAL%  message
+rem %IF_FATAL%  message
 ::
 ::
-::    %ERROR%: Throw an error message, then continue script
-:: %IF_ERROR%: Throw an error message if %ERRORLEVEL% is not 0, then continue script
-::    %FATAL%: Throw an error message, then exit script
-:: %IF_FATAL%: Throw an error messate if %ERRORLEVEL% is not 0, then exit script
+rem    %ERROR%: Throw an error message, then continue script
+rem %IF_ERROR%: Throw an error message if %ERRORLEVEL% is NOT 0, then continue script
+rem    %FATAL%: Throw an error message, then exit script
+rem %IF_FATAL%: Throw an error messate if %ERRORLEVEL% is NOT 0, then exit script
 ::
 ::
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set ERROR_CODE=%ERRORLEVEL%
-if "%~1" equ "IF_ERROR" (goto :IF_ERROR)
-if "%~1" equ "ERROR" (goto :ERROR)
-if "%~1" equ "IF_FATAL" (goto :IF_FATAL)
-if "%~1" equ "FATAL" (goto :FATAL)
+if /i "%~1" equ "IF_ERROR" (goto :IF_ERROR)
+if /i "%~1" equ "ERROR" (goto :ERROR)
+if /i "%~1" equ "IF_FATAL" (goto :IF_FATAL)
+if /i "%~1" equ "FATAL" (goto :FATAL)
 
 :IF_ERROR
-if not "%ERROR_CODE%" equ "0" (
+if "%ERROR_CODE%" neq "0" (
 	echo [91m ERROR: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	pause
@@ -61,7 +61,7 @@ exit /b %ERROR_CODE%
 
 
 :IF_FATAL
-if not "%ERROR_CODE%" equ "0" (
+if "%ERROR_CODE%" neq "0" (
 	echo [31m FATAL: %ERROR_CODE%   %3 [0m
 	call :print_error %*
 	echo Press any key to exit . . .
@@ -92,7 +92,7 @@ exit %ERROR_CODE%
 		if !n! LSS !max! (
 			if !n! GTR !min! (
 				set str=%%a
-				set str=!str::=:	! 
+				set str=!str::=:	!
 				if !n! equ !line! (
 					echo [30;41m^>  !str![0m
 				) else (
@@ -102,6 +102,6 @@ exit %ERROR_CODE%
 		)		
 		set /a n+=1
 	)
-	echo:
-	echo:
+	echo.
+	echo.
 goto:eof

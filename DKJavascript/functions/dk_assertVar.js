@@ -1,17 +1,18 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_error.js", function(){
+dk_depend("dk_error");
 
 
 //################################################################################
 //# dk_assertVar(expression)
 //#
 dk_assertVar = function dk_assertVar_f(variable){
-	//dk_debugFunc 0
+	//dk_debugFunc(0);
 
-	if(typeof globalThis[variable] !== "undefined"){ 
+	if(dk_valid(variable)){
 		return;
 	}
 
-	dk_error("ASSERTION: dk_assertVar(%*): "+variable+" not defined");
+	dk_error("ASSERTION: dk_assertVar("+arguments[0]+"): "+variable+" not defined");
+	return 1;
 }
 
 
@@ -23,7 +24,6 @@ dk_assertVar = function dk_assertVar_f(variable){
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_f(callback){
 	//dk_debugFunc(0)
-	console.log("dk_assertVar DKTEST()");
 
     //dk_set(myVar string);
 	myVar = "string";
@@ -47,6 +47,3 @@ DKTEST = function DKTEST_f(callback){
 	
 	if(callback){ callback(); }
 }
-
-//# sourceURL=dk_assertVar.js
-});

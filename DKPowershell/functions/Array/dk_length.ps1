@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_length){ $Array_dk_length = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_length){ $Array_dk_length_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_length(array) -> rtn_var
@@ -7,14 +7,14 @@ if(!$Array_dk_length){ $Array_dk_length = 1 } else{ return } #include guard
 #    reference: https://www.w3schools.com/js/js_array_methods.asp#mark_length
 #
 function Global:Array:dk_length($array) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 	
 	if($null -eq $array){ $arrayLength = 0; dk_printVar arrayLength; return $arrayLength }
 	if(Test-Path variable:$array){ $_array_ = Get-Variable -Name ($array) -ValueOnly -ErrorAction SilentlyContinue } 
 	else {
 		$_array_ = $array 
 		if(!($_array_.count -gt 1)){
-			dk_call dk_warning "Array:dk_length($array): are you sure the parameter is an array?"
+			dk_call dk_warning "Array:dk_length($array): are you sure the parameter is an array?";
 			$arrayLength = 0; dk_printVar arrayLength; return $arrayLength
 		}
 	}
@@ -30,26 +30,26 @@ function Global:Array:dk_length($array) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	
 	$myArray = @('element 1', 'element 2', 'element 3')
 	$length = Array:dk_length myArray
-	dk_echo "length = $length"
+	dk_echo "length = $length\n";
 	
 	$myArrayB = @('element A', 'element B', 'element C')
 	$lengthB = Array:dk_length myArrayB
-	dk_echo "lengthB = $lengthB"
+	dk_echo "lengthB = $lengthB\n";
 	
 	$myArrayC = @()
 	$lengthC = Array:dk_length myArrayC
-	dk_echo "lengthC = $lengthC"
+	dk_echo "lengthC = $lengthC\n";
 	
-	$myArrayD = ""
+	$myArrayD = "";
 	$lengthD = Array:dk_length myArrayD
-	dk_echo "lengthD = $lengthD"
+	dk_echo "lengthD = $lengthD\n";
 	
 	$lengthZ = Array:dk_length myArrayZ
-	dk_echo "lengthZ = $lengthZ"
+	dk_echo "lengthZ = $lengthZ\n";
 	dk_printVar myArrayZ
 }

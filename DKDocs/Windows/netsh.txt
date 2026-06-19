@@ -1,0 +1,21 @@
+1. List Available Networks & Profiles
+To see available networks:                           netsh wlan show networks.
+To see saved profiles:                               netsh wlan show profiles. 
+
+
+2. Connect to an Existing Profile                    netsh wlan connect name="MyHomeWiFi" 
+
+
+3. Connect Using SSID & Password                     netsh wlan connect ssid="MyNewNetwork" key="MySecretPass123"
+This method often requires a profile to exist first
+
+4. Connect with Specific Adapter (If Multiple)        netsh wlan show interfaces (look for "Wi-Fi", "Wireless", etc.). 
+                                                      netsh wlan connect ssid=YourSSID name=ProfileName interface="Wi-Fi".
+
+
+
+5. Advanced: Creating a Profile via XML
+Export a known profile: netsh wlan export profile     name="KnownProfileName" folder="C:\Temp".
+Edit the XML file (e.g., C:\Temp\Wi-Fi-KnownProfileName.xml) to change the <SSID> and <KeyMaterial> (password) to your new network's details.
+Add the new profile: netsh wlan add profile filename="C:\Temp\NewProfileName.xml".
+Connect: netsh wlan connect name="NewProfileName". 

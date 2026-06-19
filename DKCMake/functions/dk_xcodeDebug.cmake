@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_xcodeDebug(path) #target
 #
 #	TODO
@@ -13,7 +24,7 @@ include_guard()
 function(dk_xcodeDebug path)
 	dk_debugFunc()
 	
-	if(NOT MAC_HOST)
+	if(NOT Mac_Host)
 		dk_return()
 	endif()
 	
@@ -21,11 +32,11 @@ function(dk_xcodeDebug path)
 		dk_fatal("dk_xcodeDebug(${path}) path does not exist")
 	endif()
 	
-	if(DEBUG AND QUEUE_BUILD)
+	if(Debug)
 		if(${ARGC} GREATER 1)
-			dk_exec(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${target_triple})
+			dk_exec(xcodebuild -target ${ARGV1} -configuration Debug build WORKING_DIRECTORY ${path}/${Target_Tuple})
 		else()
-			dk_exec(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${target_triple})
+			dk_exec(xcodebuild -configuration Debug build WORKING_DIRECTORY ${path}/${Target_Tuple})
 		endif()
 	endif()
 endfunction()

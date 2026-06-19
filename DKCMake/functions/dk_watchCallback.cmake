@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-#include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##############################################################################
+
+#########################################################################
 # dk_watchCallback(variable, access, value, current_list_file, stack)
 # 
 #	Description:  https://cmake.org/cmake/help/latest/command/variable_watch.html
@@ -25,7 +36,7 @@ macro(dk_watchCallback variable access value current_list_file stack)
 	#	dk_echo("${cyan}  file     = ${current_list_file} ${clr}")
 		dk_echo("${cyan}  stack    = ${stack} ${clr}")
 		dk_echo("${cyan}  > ${CMAKE_CURRENT_FUNCTION_LIST_FILE}:${CMAKE_CURRENT_FUNCTION_LIST_LINE}   ${CMAKE_CURRENT_FUNCTION}()")
-	#	dk_echo("${cyan}#########################################################################################################${clr}")
+	#	dk_echo("${cyan}#########################################################################${clr}")
 	endif()
 endmacro()
 

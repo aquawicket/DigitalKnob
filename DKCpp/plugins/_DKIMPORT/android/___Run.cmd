@@ -6,16 +6,16 @@ set "APP_PATH=%APP_ROOT%app/src/main"
 
 echo 1. Set and map all variables and environment variables
 :: Build architecture and type
-set "target_type=Debug"
+set "Target_Type=Debug"
 ::set "ABI=armeabi-v7a"
 set "ABI=arm64-v8a"
 
 :: Choose a C++ Compilers setting
-:: 		options: CMAKE, NDK, CLANG    or GRADLE: must be enabled in build.gradle
-set compiler=CMAKE
+:: 		options: cmake, NDK, CLANG    or GRADLE: must be enabled in build.gradle
+set compiler=cmake
 
 :: Use gradle to compile Java and Generate apk pagkage?
-:: Otherwide the normal android tools will be used 
+:: Otherwide the normal android tools will be used
 set GRADLE=1
 
 
@@ -26,13 +26,13 @@ echo #############  BUILD SETTINGS ###############
 echo      compiler = %compiler%
 echo        GRADLE = %GRADLE%
 echo           ABI = %ABI%
-echo    target_type = %target_type%
+echo    Target_Type = %Target_Type%
 echo #############################################
 
 
 :: App package name and lable
 set "TYPE=com"
-set "COMPANY=digitalknob"
+set "COMPANY=DigitalKnob"
 set "APP_NAME=dk"
 set "APP_LABEL=DKApp"
 
@@ -41,13 +41,13 @@ set "APP_LABEL=DKApp"
 set "keypass=123456"
 set "FirstLastName=aquawicket"
 set "Unit=IT"
-set "Orginization=digitalknob"
+set "Orginization=DigitalKnob"
 set "City=Perris"
 set "State=CA"
 set "Country=US"
 ::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::: CMAKE / CLANG :::::::::::::::::::
+::::::::::::: cmake / CLANG :::::::::::::::::::
 :: Android api, ndk and tools versions
 set "ANDROID_API=31"
 set "NDK=23.1.7779620"
@@ -57,26 +57,26 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if not exist %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does not exist" )
+if NOT EXIST "%ANDROID_HOME%" ( %ERROR% "Environment Variable ANDROID_HOME NOT FOUND" )
 
 :: JDK
-if %GRADLE% equ 0 ( 
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
+if %GRADLE% equ 0 (
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=C:/Users/%USERNAME%/digitalknob/Development/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if exist "C:/Program Files/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files/CMake/bin/cmake.exe"
-if exist "C:/Program Files (x86)/CMake/bin/cmake.exe" set "CMAKE_EXE=C:/Program Files (x86)/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		(set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe")
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	(set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe")
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
 
-if "%ABI%"=="armeabi-v7a" (	set "CMAKE_GENERATOR_ARCH=ARM" & goto :end )
-if "%ABI%"=="arm64-v8a" ( set "CMAKE_GENERATOR_ARCH=arm64" & goto :end )
+if "%ABI%"=="armeabi-v7a" 	(set "CMAKE_GENERATOR_ARCH=ARM" & goto:end)
+if "%ABI%"=="arm64-v8a" 	(set "CMAKE_GENERATOR_ARCH=arm64" & goto:end)
 %FATAL% "ABI is invalid"
 :end
 
@@ -106,7 +106,7 @@ if "%ABI%"=="armeabi-v7a" (
 
 
 ::echo 12. Create a key store and key for signing with the Java keytool
-::if not exist "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
+::if NOT EXIST "%APP_PATH%/build/keystore.jks" "%JAVA_HOME%/bin/keytool" -genkeypair -keystore %APP_PATH%/build/keystore.jks -alias androidkey -validity 10000 -keyalg RSA -keysize 2048 -storepass %keypass% -dname "CN=%FirstLastName%, OU=%Unit%, O=%Orginization%, L=%City%, S=%State%, C=%Country%" -keypass %keypass%
 ::%IF_ERROR% "failed to Create a key store and key for signing with the Java keytool"
 
 
@@ -127,7 +127,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% equ 0 ( 
+if %ERRORLEVEL% equ 0 (
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	"%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"

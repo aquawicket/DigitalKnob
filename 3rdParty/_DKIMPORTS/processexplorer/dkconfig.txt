@@ -1,0 +1,5 @@
+############ processexplorer ############
+# https://download.sysinternals.com/files/ProcessExplorer.zip
+
+processexplorer_Type=Tool
+processexplorer_Import=https://download.sysinternals.com/files/ProcessExplorer.zip

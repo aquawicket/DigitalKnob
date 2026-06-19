@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_Pop){ $Array_dk_Pop = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_Pop){ $Array_dk_Pop_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_Pop(array)
@@ -8,12 +8,12 @@ if(!$Array_dk_Pop){ $Array_dk_Pop = 1 } else{ return } #include guard
 #    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop
 #
 function Global:Array:dk_Pop($array) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	#if($array -isnot [System.Object]){ dk_call dk_error "Not a System.Object"; return ${false} }
 	if($array.count -eq 0){ $arrayPop = "undefined"; dk_call dk_printVar arrayPop; return $arrayPop }
 	if(Test-Path variable:$array){ $array = Get-Variable -Name ($array) -ValueOnly }
-	if($array -isnot [System.Collections.ArrayList]){ dk_call dk_error "array is not an ArrayList"; return ${false} }	
+	if($array -isnot [System.Collections.ArrayList]){ dk_call dk_error "array is NOT an ArrayList"; return ${false} }	
 	if($array.count -eq 0){ $arrayPop = "undefined"; dk_call dk_printVar arrayPop; return $arrayPop }
 	
 	$arrayPop = $array[$array.count-1]
@@ -27,13 +27,13 @@ function Global:Array:dk_Pop($array) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$myArray = [System.Collections.ArrayList]('a', 'b', 'c')
 	dk_call Array:dk_Pop $myArray
-	dk_call dk_echo "myArray = $myArray"
+	dk_call dk_echo "myArray = $myArray\n";
 	
 	$myArrayB = [System.Collections.ArrayList]('1', '2', '3')
 	dk_call Array:dk_Pop $myArrayB
-	dk_call dk_echo "myArrayB = $myArrayB"
+	dk_call dk_echo "myArrayB = $myArrayB\n";
 }

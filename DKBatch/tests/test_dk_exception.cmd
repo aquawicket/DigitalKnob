@@ -1,16 +1,24 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
+rem ####################################################################
 ::# test_dk_exception.cmd
 ::#
 ::#
 
 setlocal disableDelayedExpansion
-if not defined @Try call dk_exception init
+if NOT defined @Try call dk_exception init
 
 set /a cnt+=1
 echo Main Iteration %cnt% - Calling :Sub
@@ -20,13 +28,13 @@ echo Main Iteration %cnt% - Calling :Sub
 %@EndTry%
 :@Catch
   setlocal enableDelayedExpansion
-  echo(
+  echo.
   echo Main Iteration %cnt% - Exception detected:
   echo   Code     = !exception.code!
   echo   Message  = !exception.msg!
   echo   Location = !exception.loc!
   echo Rethrowing modified exception
-  echo(
+  echo.
   endlocal
   call dk_exception rethrow -%cnt% "Main Exception" "%~f0<%~0>"
 :@EndCatch
@@ -52,7 +60,7 @@ echo :Sub Iteration %cnt% - Start
 %@EndTry%
 :@Catch
   setlocal enableDelayedExpansion
-  echo(
+  echo.
   echo :Sub Iteration %cnt% - Exception detected:
   echo   Code     = !exception.code!
   echo   Message  = !exception.msg!
@@ -61,12 +69,12 @@ echo :Sub Iteration %cnt% - Start
   %= Handle the exception if iteration count is a multiple of 5, else rethrow it with new properties =%
   set /a "1/(cnt%%5)" 2>nul && (
     echo Rethrowing modified exception
-    echo(
+    echo.
     call dk_exception rethrow -%cnt% ":Sub Exception" "%~f0<%~0>"
   ) || (
     call dk_exception clear
     echo Exception handled
-    echo(
+    echo.
   )
   pause
 :@EndCatch

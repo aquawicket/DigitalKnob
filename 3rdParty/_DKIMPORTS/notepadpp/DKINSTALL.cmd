@@ -1,60 +1,84 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined win_arm64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip")
-    if defined win_x86_host		(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip")
-    if defined win_x86_64_host	(set "NOTEPADPP_IMPORT=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip")
-	if not defined NOTEPADPP_IMPORT	(%dk_call% dk_error "NOTEPADPP_IMPORT is invalid")
+	%dk_call% dk_import
 	
-	%dk_call% dk_basename %NOTEPADPP_IMPORT% NOTEPADPP_IMPORT_FILE
-	%dk_call% dk_removeExtension %NOTEPADPP_IMPORT_FILE% NOTEPADPP_FOLDER
-    %dk_call% dk_toLower %NOTEPADPP_FOLDER% NOTEPADPP_FOLDER
-	::%dk_call% dk_importVariables %CMAKE_DL%
+	set "notepadpp_exe=%notepadpp%/notepad++.exe"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"	
-	%dk_call% dk_set NOTEPADPP_DIR "%DKTOOLS_DIR%/%NOTEPADPP_FOLDER%"
-	%dk_call% dk_set NOTEPADPP_EXE "%NOTEPADPP_DIR%/notepad++.exe"
+	rem ### Add Dark Mode ###
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/config.xml" "%notepadpp%/config.xml" OVERWRITE
+	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/shortcuts.xml" "%notepadpp%/shortcuts.xml" OVERWRITE
 	
-	if exist "%NOTEPADPP_EXE%" (goto installed)
-	    %dk_call% dk_echo   
-        %dk_call% dk_info "Installing notepad++ . . ."
-        %dk_call% dk_download %NOTEPADPP_IMPORT%
-	    %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-        %dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%NOTEPADPP_IMPORT_FILE%" "%NOTEPADPP_DIR%"
-	if NOT exist "%NOTEPADPP_EXE%" (%dk_call% dk_error "cannot find NOTEPADPP_EXE:%NOTEPADPP_EXE%")
-	:installed
+	rem ### Add Context Menu ###
+	%dk_call% dk_depend notepadpp/contextMenu
 	
-	::### Add Dark Mode ###
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/dark_config.xml" "%NOTEPADPP_DIR%/config.xml" OVERWRITE
+	rem ### Add File Associations ###
+	rem %dk_call% dk_depend notepadpp/fileAssoc
 	
-	::### Add Context Menu ###
-	%dk_call% "%DKIMPORTS_DIR%/notepadpp/contextMenu/DKINSTALL.cmd"
+	:return
+	endlocal & (
+		"set notepadpp_exe=%notepadpp_exe%"
+	)
 	
-	::### Add File Associations ###
-	::%dk_call% %DKIMPORTS_DIR%/notepadpp/fileAssoc/DKINSTALL.cmd
-%endfunction%
-
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+%endfunction%	
+	
+	
+	
+	
+	
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% DKINSTALL
-%endfunction%
+	%dk_call% dk_validate notepadpp %dk_call% dk_depend notepadpp
+%endfunction%	
+	
+	
+rem 	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+rem 	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
+rem 	set "notepadpp_Import=!notepadpp_%Host_Tuple%_Import!"
+rem 	%dk_call% dk_assertVar notepadpp_Import
+rem 	
+rem 	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+rem 	%dk_call% dk_importVariables %notepadpp_Import% ROOT %DKTOOLS_DIR%
+rem 	
+rem 	rem %dk_call% dk_set notepadpp_DIR "%DKTOOLS_DIR%/%notepadpp_FOLDER%"
+rem 	%dk_call% dk_set notepadpp_exe "%notepadpp%/notepad++.exe"
+rem 	
+rem 	if EXIST "%notepadpp_exe%" (goto installed)
+rem 	
+rem 	%dk_call% dk_echo  
+rem   %dk_call% dk_info "Installing notepad++ . . ."
+rem 	%dk_call% dk_download %notepadpp_Import%
+rem 	%dk_call% dk_smartExtract "%dk_download%" "%notepadpp%"
+rem 	%dk_call% dk_assertPath notepadpp_exe
+rem 	:installed
+rem 	
+rem 	rem ### Add Dark Mode ###
+rem 	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+rem 	%dk_call% dk_copy "%DKIMPORTS_DIR%/notepadpp/dark_config.xml" "%notepadpp%/config.xml" OVERWRITE
+rem 	
+rem 	rem ### Add Context Menu ###
+rem 	%dk_call% dk_depend notepadpp/contextMenu"
+rem 	
+rem 	rem ### Add File Associations ###
+rem 	rem %dk_call% dk_depend notepadpp/fileAssoc
+rem %endfunction%

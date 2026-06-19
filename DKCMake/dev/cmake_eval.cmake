@@ -1,7 +1,17 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -43,7 +53,7 @@ include_guard()
 #		#fwrite_temp("" ".cmake")
 #		#ans(__eval_temp_file)
 #		# speedup: statically write filename so eval boils down to 3 function calls
-#		set(__eval_temp_file $ENV{DKCMAKE_DIR}/__eval_temp_file.cmake)
+#		set(__eval_temp_file ${DKCMAKE_DIR}/__eval_temp_file.cmake)
 #		file(WRITE "${__eval_temp_file}" "
 #			function(eval eval_code)
 #			file(WRITE ${__eval_temp_file} \"\${eval_code}\")
@@ -65,18 +75,18 @@ if(DKRETURN)
 	#message(STATUS "DKRETURN = ${DKRETURN}")
 	
 	## create windows cmd to set variables
-	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
+	dk_delete(${DKCMAKE_DIR}/cmake_vars.cmd NO_HALT)
 	foreach(item ${DKRETURN})
 		set(line "set \"${item}=${${item}}\" \n")
-		dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
+		dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.cmd "${line}\n")
 	endforeach()
 	
 	## create unix shell to set variables 
-	dk_delete($ENV{DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
-	dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "#!/bin/bash \n")
+	dk_delete(${DKCMAKE_DIR}/cmake_vars.sh NO_HALT)
+	dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "#!/bin/bash \n")
 	foreach(var ${DKRETURN})
 		dk_convertToCIdentifier(${var} var_)
 		set(line "export ${var_}=\"${${var}}\" \n")
-        dk_fileAppend($ENV{DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
+        dk_fileAppend(${DKCMAKE_DIR}/cmake_vars.sh "${line}\n")
 	endforeach()
 endif()

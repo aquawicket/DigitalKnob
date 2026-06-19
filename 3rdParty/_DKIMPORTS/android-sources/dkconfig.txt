@@ -1,2 +1,28 @@
-ANDROID_SOURCES_VERSION=26
-ANDROID_SOURCES_DL=https://dl.google.com/android/repository/sources-26_r01.zip
+###### android-sources ######
+# https://github.com/AndroidSDKSources
+# https://androidsdkoffline.blogspot.com/p/android-sdk-sources-download.html
+
+
+android-sources_Version=26
+android-sources_Import=https://dl.google.com/android/repository/sources-26_r01.zip
+
+#android-sources_Version=27
+#android-sources_Import=https://dl.google.com/android/repository/sources-27_r01.zip
+
+#android-sources_Version=28
+#android-sources_Import=https://dl.google.com/android/repository/sources-28_r01.zip
+
+#android-sources_Version=29
+#android-sources_Import=https://dl.google.com/android/repository/sources-29_r01.zip
+
+#android-sources_Version=30
+#android-sources_Import=https://dl.google.com/android/repository/sources-30_r01.zip
+
+#android-sources_Version=31
+#android-sources_Import=https://dl.google.com/android/repository/sources-31_r01.zip
+
+#android-sources_Version=32
+#android-sources_Import=https://dl.google.com/android/repository/sources-32_r01.zip
+
+#android-sources_Version=33
+#android-sources_Import=https://dl.google.com/android/repository/sources-33_r01.zip

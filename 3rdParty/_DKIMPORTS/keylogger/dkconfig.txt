@@ -1,1 +1,5 @@
-KEYLOGGER_IMPORT=https://github.com/GiacomoLaw/Keylogger/archive/142eebd.zip
+############ keylogger ############
+# https://github.com/GiacomoLaw/Keylogger.git
+# https://github.com/GiacomoLaw/Keylogger/archive/142eebd7dee0ac6067642804e80df4b4f375a7bd.zip
+
+keylogger_Import=https://github.com/GiacomoLaw/Keylogger/archive/142eebd7dee0ac6067642804e80df4b4f375a7bd.zip

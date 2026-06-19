@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_info){ $dk_info = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_info_ps1){ $dk_info_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_info(message)
@@ -8,10 +8,15 @@ if(!$dk_info){ $dk_info = 1 } else{ return } #include guard
 #
 #    @message	- The message to print
 #
-function Global:dk_info($message) {
-	dk_debugFunc 1
+function Global:dk_info() {
+	dk_debugFunc 0 1;
 	
-	dk_call dk_log INFO "$message"
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
+	
+	dk_call dk_log INFO "$($args[0])";
 }
 
 
@@ -26,8 +31,8 @@ function Global:dk_info($message) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_info "test message from dk_info"
+	dk_call dk_info "test message from dk_info";
 }
 

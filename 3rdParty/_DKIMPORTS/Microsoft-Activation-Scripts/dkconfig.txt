@@ -1,0 +1,5 @@
+############ Microsoft_Activation_Scripts ############
+# https://github.com/massgravel/Microsoft-Activation-Scripts.git
+# https://github.com/massgravel/Microsoft-Activation-Scripts/archive/b064fc628a1e40738ac520f5e790895977817434.zip
+
+Microsoft_Activation_Scripts_Import=https://github.com/massgravel/Microsoft-Activation-Scripts/archive/b064fc628a1e40738ac520f5e790895977817434.zip

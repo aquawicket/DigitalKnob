@@ -1,27 +1,45 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-################################################################################
-# dk_chdir(directory)
+
+#########################################################################
+# dk_chdir(path)
 #
+#	change working directory
 #
-function(dk_chdir directory)
-	dk_debugFunc()
+function(dk_chdir)
+	dk_debugFunc(1)
+	
+	###### dk_chdir() Settings #################
+	if(NOT PWD)
+		dk_set(PWD "${CMAKE_CURRENT_LIST_DIR}")
+	endif()
   
-	#dk_assertPath(directory)
-	if(NOT EXISTS ${directory})
-		dk_warning("dk_chdir(${ARGV}): directory:${directory} does not exist")
+	#set(_path_ ${ARGV0})
+  
+	if(NOT EXISTS "${ARGV0}")
+		dk_warning("dk_chdir(${ARGV}): path:${ARGV0} does not exist")
 		return()
 	endif()
 	
-	if("${PWD}" EQUAL "${directory}")
-		dk_error("dk_chdir(${directory}): PWD is already set to ${directory}")
+	if("${PWD}" EQUAL "${ARGV0}")
+		dk_error("dk_chdir(${ARGV}): PWD is already set to ${ARGV0}")
+		return()
 	endif()
 	
 	dk_set(OLDPWD "${PWD}")
-	dk_set(PWD "${directory}")
-	dk_info("dk_chdir(${directory}): working directory set to ${directory}")
+	dk_set(PWD "${ARGV0}")
 endfunction()
 
 
@@ -34,6 +52,19 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_chdir($ENV{DKDOWNLOAD_DIR})
+	dk_echo()
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
+	
+	dk_echo()
+	dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
+	dk_chdir("${DKBRANCH_DIR}")
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
+	
+	dk_echo()
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+	dk_chdir("${DKTOOLS_DIR}")
+	dk_echo("OLD Current Directory = ${OLDPWD}")
+	dk_echo("Current Directory = ${PWD}")
 endfunction()

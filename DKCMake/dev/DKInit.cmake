@@ -1,8 +1,18 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 return()
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -44,24 +54,24 @@ dk_info("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
 
 ### Set DKCMAKE_DIR ###
-dk_set(ENV{DKCMAKE_DIR} ${CMAKE_SOURCE_DIR})
-dk_info("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+dk_set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR})
+dk_info("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 
 ### Set DKBRANCH_DIR
-string(FIND "$ENV{DKCMAKE_DIR}" "DKCMake" pos)
+string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
 math(EXPR pos "${pos}-1")
-string(SUBSTRING $ENV{DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
-dk_set(ENV{DKBRANCH}_DIR $ENV{DKBRANCH_DIR})
-dk_info("DKBRANCH_DIR = $ENV{DKBRANCH_DIR}")
+string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
+dk_set(DKBRANCH_DIR "${DKBRANCH_DIR}")
+dk_info("DKBRANCH_DIR = ${DKBRANCH_DIR}")
 
 ### Set DIGITALKNOB_DIR
-string(FIND "$ENV{DKBRANCH_DIR}" "digitalknob" pos)
-string(SUBSTRING $ENV{DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
-dk_set(DIGITALKNOB_DIR $ENV{DIGITALKNOB_DIR}digitalknob)
-dk_info("DIGITALKNOB_DIR = $ENV{DIGITALKNOB_DIR}")
+string(FIND "${DKBRANCH_DIR}" "DigitalKnob" pos)
+string(SUBSTRING ${DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
+dk_set(DIGITALKNOB_DIR ${DIGITALKNOB_DIR}DigitalKnob)
+dk_info("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
 
 ### Set DK3RDPARTY_DIR
-dk_set(DK3RDPARTY_DIR $ENV{DKBRANCH_DIR}/3rdParty)
+dk_set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty)
 
 ### Set DK_BINARY_DIR ###
 dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
@@ -92,16 +102,16 @@ math(EXPR after_underscore "${first_underscore}+1" OUTPUT_FORMAT DECIMAL)
 string(SUBSTRING "${DK_BINARY_OSARCH}" ${after_underscore} -1 DK_BINARY_ARCH)
 dk_info("DK_BINARY_ARCH = ${DK_BINARY_ARCH}")
 
-### Set DK_Project_Dir ###
-dk_dirname(${DK_BINARY_OSARCH_DIR} DK_Project_Dir)
-dk_info("DK_Project_Dir = ${DK_Project_Dir}")
+### Set Target_App_Dir ###
+dk_dirname(${DK_BINARY_OSARCH_DIR} Target_App_Dir)
+dk_info("Target_App_Dir = ${Target_App_Dir}")
 	
 	
 if(1)
 	
-# android_arm32
-if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
-	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+# Android_Arm32
+if(${DK_BINARY_OSARCH} MATCHES "Android_Arm32")
+	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"armeabi-v7a")
@@ -125,9 +135,9 @@ if(${DK_BINARY_OSARCH} MATCHES "android_arm32")
 	dk_set(CMAKE_CXX_FLAGS 					"${ANDROID_NDK_CXX_FLAGS}")
 endif()
 
-# android_arm64
-if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
-	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+# Android_Arm64
+if(${DK_BINARY_OSARCH} MATCHES "Android_Arm64")
+	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"arm64-v8a")
@@ -151,8 +161,8 @@ if(${DK_BINARY_OSARCH} MATCHES "android_arm64")
 	dk_set(CMAKE_CXX_FLAGS 					"${ANDROID_NDK_CXX_FLAGS}")
 endif()
 
-# ios_arm32
-if(${DK_BINARY_OSARCH} MATCHES "ios_arm32")
+# Ios_Arm32
+if(${DK_BINARY_OSARCH} MATCHES "Ios_Arm32")
 	dk_set(IOS_PLATFORM 					"OS")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -163,9 +173,9 @@ if(${DK_BINARY_OSARCH} MATCHES "ios_arm32")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# ios_arm64
-if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+# Ios_Arm64
+if(${DK_BINARY_OSARCH} MATCHES "Ios_Arm64")
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"OS64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -176,9 +186,9 @@ if(${DK_BINARY_OSARCH} MATCHES "ios_arm64")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# iossim_x86
-if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+# Iossim_X86
+if(${DK_BINARY_OSARCH} MATCHES "Iossim_X86")
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -190,9 +200,9 @@ if(${DK_BINARY_OSARCH} MATCHES "iossim_x86")
 	dk_set(DEPLOYMENT_TARGET				"${IOS_DEPLOYMENT_TARGET}")
 endif()
 
-# iossim_x86_64
-if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")	
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+# Iossim_x86_64
+if(${DK_BINARY_OSARCH} MATCHES "Iossim_x86_64")	
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -205,16 +215,16 @@ if(${DK_BINARY_OSARCH} MATCHES "iossim_x86_64")
 endif()
 
 
-# mac_x86
-if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86")
+# Mac_X86
+if(${DK_BINARY_OSARCH} MATCHES 	"Mac_X86")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"i686")
-	dk_set(MAC_X86							"ON")
+	dk_set(Mac_X86							"ON")
 endif()
 
-# mac_x86_64
-if(${DK_BINARY_OSARCH} MATCHES 	"mac_x86_64")
+# Mac_X86_64
+if(${DK_BINARY_OSARCH} MATCHES 	"Mac_X86_64")
 	dk_set(CMAKE_OSX_ARCHITECTURES			"x86_64")
-	dk_set(MAC_X86_64						"ON")
+	dk_set(Mac_X86_64						"ON")
 endif()
 
 endif()

@@ -1,21 +1,28 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_contains(<haystack>, <needle>, <ret:optional>)
-::#
-::#
+rem ################################################################################
+rem # dk_contains(<haystack>, <needle>, <ret:optional>)
+rem #
+rem #
 :dk_contains
-setlocal enableDelayedExpansion
-	%dk_call% dk_debugFunc 2 3
+%setlocal%
 
 	set "_haystack_=%~1"
 	set "_needle_=%~2"
 	
-	if not "XXX!_haystack_:%_needle_%=!XXX" equ "XXX%_haystack_%XXX" (
+	if "XXX!_haystack_:%_needle_%=!XXX" neq "XXX%_haystack_%XXX" (
 		set "_haystack_="
 		set "_needle_="
 		endlocal & (
@@ -45,55 +52,54 @@ setlocal enableDelayedExpansion
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal   
-	%dk_call% dk_debugFunc 0
+setlocal  
 
-	::###### Using dk_contains return value
+	rem ###### Using dk_contains return value
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	if /i "%dk_contains%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	rem FIXME: ERRORLEVEL is still 1
 
-	::###### Using user defined return value
+	rem ###### Using user defined return value
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
 	%dk_call% dk_contains "%string%" "%substring%" myResult
-	if "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if /i "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%" myResult
-	if "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	if /i "%myResult%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	rem FIXME: ERRORLEVEL is still 1
 
-	::###### Using if ERRORLEVEL
+	rem ###### Using if ERRORLEVEL
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	if NOT ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
 
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%"
-	if not ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1 
+	if NOT ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
+	rem FIXME: ERRORLEVEL is still 1
 
 
-	::###### Using && and || conditionals
+	rem ###### Using && and || conditionals
 	%dk_call% dk_echo
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "needle"
@@ -103,5 +109,5 @@ setlocal
 	%dk_call% dk_set string "There is a needle in this haystack"
 	%dk_call% dk_set substring "straw"
 	%dk_call% dk_contains "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
-	::FIXME: ERRORLEVEL is still 1
+	rem FIXME: ERRORLEVEL is still 1
 %endfunction%

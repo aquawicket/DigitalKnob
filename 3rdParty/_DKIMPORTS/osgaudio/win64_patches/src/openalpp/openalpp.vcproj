@@ -38,7 +38,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				MkTypLibCompatible="false"
 				TargetEnvironment="3"
 				GenerateStublessProxies="true"
@@ -51,10 +51,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions=" /IC:/digitalknob/Libs/openal/include /MP"
+				AdditionalOptions=" /IC:/DigitalKnob/Libs/openal/include /MP"
 				Optimization="0"
 				InlineFunctionExpansion="0"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;DEBUG;_DEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;Debug\&quot;;openalpp_EXPORTS"
 				ExceptionHandling="1"
 				BasicRuntimeChecks="3"
@@ -74,7 +74,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;DEBUG;_DEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;Debug\&quot;;openalpp_EXPORTS"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				MkTypLibCompatible="false"
 				TargetEnvironment="3"
 				GenerateStublessProxies="true"
@@ -134,10 +134,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions=" /IC:/digitalknob/Libs/openal/include /MP"
+				AdditionalOptions=" /IC:/DigitalKnob/Libs/openal/include /MP"
 				Optimization="2"
 				InlineFunctionExpansion="2"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;Release\&quot;;openalpp_EXPORTS"
 				ExceptionHandling="1"
 				RuntimeLibrary="0"
@@ -155,7 +155,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;Release\&quot;;openalpp_EXPORTS"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -202,7 +202,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				MkTypLibCompatible="false"
 				TargetEnvironment="3"
 				GenerateStublessProxies="true"
@@ -215,10 +215,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions=" /IC:/digitalknob/Libs/openal/include /MP"
+				AdditionalOptions=" /IC:/DigitalKnob/Libs/openal/include /MP"
 				Optimization="1"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;;openalpp_EXPORTS"
 				ExceptionHandling="1"
 				RuntimeLibrary="2"
@@ -236,7 +236,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;;openalpp_EXPORTS"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -245,13 +245,13 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /machine:x64"
-				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib C:\digitalknob\Libs\freealut\win64\Release\alut_static.lib C:\digitalknob\Libs\openal\win64\Release\OpenAL32.lib C:\digitalknob\Libs\ogg\win64\Release\src\.libs\libogg.lib C:\digitalknob\Libs\vorbis\win64\Release\lib\.libs\libvorbis.lib C:\digitalknob\Libs\vorbis\win64\Release\lib\.libs\libvorbisfile.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osg.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgDB.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgUtil.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgGA.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgText.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgViewer.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\OpenThreads.lib "
-				OutputFile="C:\digitalknob\Libs\osgAudio\win64\bin\MinSizeRel\openalpp.dll"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib C:\DigitalKnob\Libs\freealut\win64\Release\alut_static.lib C:\DigitalKnob\Libs\openal\win64\Release\OpenAL32.lib C:\DigitalKnob\Libs\ogg\win64\Release\src\.libs\libogg.lib C:\DigitalKnob\Libs\vorbis\win64\Release\lib\.libs\libvorbis.lib C:\DigitalKnob\Libs\vorbis\win64\Release\lib\.libs\libvorbisfile.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osg.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgDB.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgUtil.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgGA.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgText.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgViewer.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\OpenThreads.lib "
+				OutputFile="C:\DigitalKnob\Libs\osgAudio\win64\bin\MinSizeRel\openalpp.dll"
 				Version="0.0"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
-				ProgramDatabaseFile="C:\digitalknob\Libs\osgAudio\win64\bin\MinSizeRel\openalpp.pdb"
-				ImportLibrary="C:\digitalknob\Libs\osgAudio\win64\lib\MinSizeRel\openalpp.lib"
+				ProgramDatabaseFile="C:\DigitalKnob\Libs\osgAudio\win64\bin\MinSizeRel\openalpp.pdb"
+				ImportLibrary="C:\DigitalKnob\Libs\osgAudio\win64\lib\MinSizeRel\openalpp.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -298,7 +298,7 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				MkTypLibCompatible="false"
 				TargetEnvironment="3"
 				GenerateStublessProxies="true"
@@ -311,10 +311,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions=" /IC:/digitalknob/Libs/openal/include /MP"
+				AdditionalOptions=" /IC:/DigitalKnob/Libs/openal/include /MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;;openalpp_EXPORTS"
 				ExceptionHandling="1"
 				RuntimeLibrary="2"
@@ -333,7 +333,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="WIN32;WIN64;_WINDOWS;OSG_LIBRARY_STATIC;AL_LIBTYPE_STATIC;NDEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;OPENALPP_EXPORTS;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;;openalpp_EXPORTS"
-				AdditionalIncludeDirectories="C:\digitalknob\Libs\osgAudio\win64\include;C:\digitalknob\Libs\osgAudio\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\digitalknob\Libs\OpenSceneGraph-3.3.7\include;C:\digitalknob\Libs\freealut\include;C:\digitalknob\Libs\openal\include\AL;C:\digitalknob\Libs\ogg\include;C:\digitalknob\Libs\vorbis\include;"
+				AdditionalIncludeDirectories="C:\DigitalKnob\Libs\osgAudio\win64\include;C:\DigitalKnob\Libs\osgAudio\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\include;C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\include;C:\DigitalKnob\Libs\freealut\include;C:\DigitalKnob\Libs\openal\include\AL;C:\DigitalKnob\Libs\ogg\include;C:\DigitalKnob\Libs\vorbis\include;"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -342,14 +342,14 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalOptions=" /machine:x64 /debug"
-				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib C:\digitalknob\Libs\freealut\win64\Release\alut_static.lib C:\digitalknob\Libs\openal\win64\Release\OpenAL32.lib C:\digitalknob\Libs\ogg\win64\Release\src\.libs\libogg.lib C:\digitalknob\Libs\vorbis\win64\Release\lib\.libs\libvorbis.lib C:\digitalknob\Libs\vorbis\win64\Release\lib\.libs\libvorbisfile.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osg.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgDB.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgUtil.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgGA.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgText.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgViewer.lib C:\digitalknob\Libs\OpenSceneGraph-3.3.7\win64\lib\OpenThreads.lib "
-				OutputFile="C:\digitalknob\Libs\osgAudio\win64\bin\RelWithDebInfo\openalpp.dll"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib C:\DigitalKnob\Libs\freealut\win64\Release\alut_static.lib C:\DigitalKnob\Libs\openal\win64\Release\OpenAL32.lib C:\DigitalKnob\Libs\ogg\win64\Release\src\.libs\libogg.lib C:\DigitalKnob\Libs\vorbis\win64\Release\lib\.libs\libvorbis.lib C:\DigitalKnob\Libs\vorbis\win64\Release\lib\.libs\libvorbisfile.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osg.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgDB.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgUtil.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgGA.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgText.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\osgViewer.lib C:\DigitalKnob\Libs\OpenSceneGraph-3.3.7\win64\lib\OpenThreads.lib "
+				OutputFile="C:\DigitalKnob\Libs\osgAudio\win64\bin\RelWithDebInfo\openalpp.dll"
 				Version="0.0"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="C:\digitalknob\Libs\osgAudio\win64\bin\RelWithDebInfo\openalpp.pdb"
-				ImportLibrary="C:\digitalknob\Libs\osgAudio\win64\lib\RelWithDebInfo\openalpp.lib"
+				ProgramDatabaseFile="C:\DigitalKnob\Libs\osgAudio\win64\bin\RelWithDebInfo\openalpp.pdb"
+				ImportLibrary="C:\DigitalKnob\Libs\osgAudio\win64\lib\RelWithDebInfo\openalpp.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -381,79 +381,79 @@
 			Name="Source Files"
 			>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\AudioBase.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\AudioBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\AudioConvert.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\AudioConvert.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\AudioEnvironment.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\AudioEnvironment.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Capture.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Capture.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\DeviceUpdater.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\DeviceUpdater.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Error.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Error.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\FileStream.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\FileStream.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\FileStreamUpdater.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\FileStreamUpdater.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\GroupSource.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\GroupSource.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Listener.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Listener.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\NetStream.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\NetStream.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\NetUpdater.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\NetUpdater.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Openalpp.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Openalpp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Sample.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Sample.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\SoundData.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\SoundData.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Source.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Source.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\SourceBase.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\SourceBase.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\Stream.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\Stream.cpp"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\StreamUpdater.cpp"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\StreamUpdater.cpp"
 				>
 			</File>
 		</Filter>
@@ -461,106 +461,106 @@
 			Name="Header Files"
 			>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\AudioBase.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\AudioBase.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\AudioConvert.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\AudioConvert.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\AudioEnvironment.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\AudioEnvironment.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Capture.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Capture.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\config.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\config.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\DeviceUpdater.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\DeviceUpdater.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Error.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Error.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Export.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Export.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\FileStream.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\FileStream.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\FileStreamUpdater.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\FileStreamUpdater.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\GroupSource.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\GroupSource.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Listener.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Listener.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\NetStream.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\NetStream.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\NetUpdater.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\NetUpdater.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\PositionedObject.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\PositionedObject.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Sample.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Sample.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\SoundData.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\SoundData.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Source.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Source.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\SourceBase.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\SourceBase.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\Stream.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\Stream.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\StreamUpdater.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\StreamUpdater.h"
 				>
 			</File>
 			<File
-				RelativePath="C:\digitalknob\Libs\osgAudio\include\openalpp\windowsstuff.h"
+				RelativePath="C:\DigitalKnob\Libs\osgAudio\include\openalpp\windowsstuff.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt"
+			RelativePath="C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt"
 			>
 			<FileConfiguration
 				Name="Debug|x64"
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/digitalknob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
-					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/digitalknob/Libs/osgAudio -BC:/digitalknob/Libs/osgAudio/win64 --check-stamp-file C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
-					AdditionalDependencies="C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\digitalknob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
-					Outputs="C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
+					Description="Building Custom Rule C:/DigitalKnob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
+					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/DigitalKnob/Libs/osgAudio -BC:/DigitalKnob/Libs/osgAudio/win64 --check-stamp-file C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
+					AdditionalDependencies="C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\DigitalKnob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
+					Outputs="C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -568,10 +568,10 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/digitalknob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
-					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/digitalknob/Libs/osgAudio -BC:/digitalknob/Libs/osgAudio/win64 --check-stamp-file C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
-					AdditionalDependencies="C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\digitalknob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
-					Outputs="C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
+					Description="Building Custom Rule C:/DigitalKnob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
+					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/DigitalKnob/Libs/osgAudio -BC:/DigitalKnob/Libs/osgAudio/win64 --check-stamp-file C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
+					AdditionalDependencies="C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\DigitalKnob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
+					Outputs="C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -579,10 +579,10 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/digitalknob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
-					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/digitalknob/Libs/osgAudio -BC:/digitalknob/Libs/osgAudio/win64 --check-stamp-file C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
-					AdditionalDependencies="C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\digitalknob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
-					Outputs="C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
+					Description="Building Custom Rule C:/DigitalKnob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
+					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/DigitalKnob/Libs/osgAudio -BC:/DigitalKnob/Libs/osgAudio/win64 --check-stamp-file C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
+					AdditionalDependencies="C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\DigitalKnob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
+					Outputs="C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
 				/>
 			</FileConfiguration>
 			<FileConfiguration
@@ -590,10 +590,10 @@
 				>
 				<Tool
 					Name="VCCustomBuildTool"
-					Description="Building Custom Rule C:/digitalknob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
-					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/digitalknob/Libs/osgAudio -BC:/digitalknob/Libs/osgAudio/win64 --check-stamp-file C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
-					AdditionalDependencies="C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\digitalknob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\digitalknob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
-					Outputs="C:\digitalknob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
+					Description="Building Custom Rule C:/DigitalKnob/Libs/osgAudio/src/openalpp/CMakeLists.txt"
+					CommandLine="C:\PROGRA~2\CMake\bin\cmake.exe -HC:/DigitalKnob/Libs/osgAudio -BC:/DigitalKnob/Libs/osgAudio/win64 --check-stamp-file C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp&#x0D;&#x0A;if errorlevel 1 goto :VCReportError&#x0D;&#x0A;"
+					AdditionalDependencies="C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;C:\DigitalKnob\Libs\osgAudio\CMakeModules\ModuleInstall.cmake;C:\DigitalKnob\Libs\osgAudio\src\openalpp\CMakeLists.txt;"
+					Outputs="C:\DigitalKnob\Libs\osgAudio\win64\src\openalpp\CMakeFiles\generate.stamp"
 				/>
 			</FileConfiguration>
 		</File>

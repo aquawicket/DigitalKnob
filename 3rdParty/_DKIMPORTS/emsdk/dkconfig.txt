@@ -1,0 +1,18 @@
+############ emsdk ############
+# https://github.com/emscripten-core/emsdk.git
+# https://emscripten.org/index.html
+# https://lyceum-allotments.github.io/2016/06/emscripten-and-sdl-2-tutorial-part-1
+# https://github.com/emscripten-core/emsdk/archive/refs/tags/2.0.26.zip
+# https://storage.googleapis.com
+# https://storage.googleapis.com/webassembly
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/node-v20.18.0-win-x64.zip 									-> ${EMSDK}/node/20.18.0_64bit
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/python-3.9.2-4-amd64+pywin32.zip 							-> ${EMSDK}/python/3.9.2-nuget_64bit
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/portable_jre_8_update_152_64bit.zip						-> ${EMSDK}/java/8.152_64bit
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/win/8fe01288bc35668c13316324336ea00195dfb814/wasm-binaries.zip	-> ${EMSDK}/upstream
+# https://storage.googleapis.com/webassembly/emscripten-releases-builds/deps/mingw_4.6.2_32bit.zip										-> ${EMSDK}/mingw/4.6.2_32bit
+# https://github.com/emscripten-core/emsdk/archive/861ce44b2470e3eb2344d7c1382b2a7d10d707af.zip
+# https://github.com/emscripten-core/emsdk/archive/refs/tags/4.0.20.zip
+# https://github.com/emscripten-core/emsdk/archive/fc80c2d5444759d9f176d8df46d46b129d244e9d.zip
+
+#emsdk_Import=https://github.com/emscripten-core/emsdk/archive/fc80c2d5444759d9f176d8df46d46b129d244e9d.zip
+emsdk_Import=https://github.com/emscripten-core/emsdk/archive/emsdk-fc80c2d5444759d9f176d8df46d46b129d244e9d.zip

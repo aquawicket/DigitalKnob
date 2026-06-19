@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 
-set(DIGITALKNOB_DIR C:/Users/Administrator/digitalknob)
+set(DIGITALKNOB_DIR C:/Users/Administrator/DigitalKnob)
 set(SDL ${DIGITALKNOB_DIR}/Development/3rdParty/sdl-release-2.26.0)
 set(SDL_TTF ${DIGITALKNOB_DIR}/Development/3rdParty/sdl_ttf-main)
 set(FREETYPE ${DIGITALKNOB_DIR}/Development/3rdParty/freetype-2.5.5)

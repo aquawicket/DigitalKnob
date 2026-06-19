@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -66,8 +66,8 @@ bool GetOSFlag(DKString& flag){
 #if RASPBERRY_ARM64
 	flag = "RASPBERRY_ARM64";
 #endif
-#if ANDROID_ARM32
-	flag = "ANDROID_ARM32";
+#if Android_Arm32
+	flag = "Android_Arm32";
 #endif
 #if ANDROID_ARM64
 	flag = "ANDROID_ARM64";

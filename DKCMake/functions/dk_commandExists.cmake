@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_commandExists()
 #
 #
@@ -11,17 +22,17 @@ function(dk_commandExists shell commandName rtn_var)
 		
 	## Test for command in BASH	
 	if("${shell}" STREQUAL "BASH")
-		dk_depend(bash)
-		execute_process(COMMAND ${BASH_EXE} -c "command -v ${commandName}" OUTPUT_VARIABLE output)
+		dk_validate(bash_exe "dk_depend(bash_exe)")
+		execute_process(COMMAND ${bash_exe} -c "command -v ${commandName}" OUTPUT_VARIABLE output)
 		set(${rtn_var} ${output} PARENT_SCOPE)
 		#dk_printVar(output)
 		return()
 	
 	## Test for command in CMD
 	elseif("${shell}" STREQUAL "CMD")
-		dk_depend(cmd)
-		dk_validate(ENV{DKBATCH_FUNCTIONS_DIR} "dk_DKBRANCH_DIR()")
-		execute_process(COMMAND ${CMD_EXE} /c call "$ENV{DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
+		dk_validate(cmd.exe "dk_depend(cmd.exe)")
+		dk_validate(DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
+		execute_process(COMMAND ${cmd.exe} /c call "$ENV{DKBATCH_FUNCTIONS_DIR}/dk_commandExists.cmd" ${commandName} result & echo !result! OUTPUT_VARIABLE output)
 		set(${rtn_var} ${output} PARENT_SCOPE)
 		#dk_printVar(output)
 		return()

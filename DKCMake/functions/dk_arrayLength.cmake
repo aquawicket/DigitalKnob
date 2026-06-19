@@ -1,9 +1,20 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-################################################################################
-# dk_arrayLength(array)
+
+#########################################################################
+# dk_arrayLength(array rtn_var)
 #
 #	The length data property of an Array instance represents the number of elements in that array. 
 #	The value is an unsigned, 32-bit integer that is always numerically greater than the highest index in the array.
@@ -21,8 +32,14 @@ function(dk_arrayLength)
 		dk_fatal("dk_arrayLength(${ARGV}): array is invalid.")
 	endif()
 
+	###### return ######
 	list(LENGTH array dk_arrayLength)
 	set(dk_arrayLength ${dk_arrayLength} PARENT_SCOPE)
+	if(${ARGC} GREATER 1)
+		set(${ARGV1} ${dk_arrayLength} PARENT_SCOPE)
+	else()
+		message("${dk_arrayLength}")
+	endif()
 endfunction()
 
 

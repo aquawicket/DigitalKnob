@@ -1,5 +1,17 @@
-#!/usr/bin/env sh
-[ -z "${DK_SH-}" ] && . "${DKBASH_FUNCTIONS_DIR_-./}DK.sh"
+#!/bin/sh
+###### DK.sh #####################################################################
+if [ -z "${DKINIT_sh-}" ]; then
+	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
+	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
+	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
+	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
+	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
+	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
+	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
+fi
+##################################################################################
 
 
 ##################################################################################
@@ -7,17 +19,25 @@
 #
 #
 dk_removeExtension() {
-	dk_debugFunc 1 2
+	dk_debugFunc 1 2;
 
+	_filepath_="${1}";
+	if ! [ "${_filepath_##*.tar.}" = "${_filepath_}" ]; then
+		dk_removeExtension="${_filepath_%.tar.*}";
+	elif ! [ "${_filepath_##*.7z.}" = "${_filepath_}" ]; then
+		dk_removeExtension="${_filepath_%.7z.*}";
+	else
+		dk_removeExtension="${_filepath_%.*}";
+	fi
 	
-	_filepath_="${1}"
-	_filepath_="${_filepath_%.*}"									    # remove everything past last dot
-	[ "${_filepath_##*.}" = "tar" ] &&	_filepath_="${_filepath_%.*}"	# if .tar remove everything past last dot
-
-	### return value ###
-	dk_call dk_printVar _filepath_
-	[ ${#} -gt 1 ] && eval "${2}=${_filepath_}" && return  # return value when using rtn_var parameter 
-	dk_return ${_filepath_}; return						  # return value when using command substitution 
+	###### return ######
+	export dk_removeExtension=${dk_removeExtension};
+	if [ -n "${2-}" ]; then
+		export ${2}=${dk_removeExtension};
+	else
+		builtin echo "${dk_removeExtension}";
+	fi
+	return $?;
 }
 
 
@@ -25,7 +45,26 @@ dk_removeExtension() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST() {
 
-	filepath="/test/test2/xfile.extension"
-	dk_removeExtension "${filepath}" name
-	echo "name = ${name}"
+	### Result as global variable
+	dk_call dk_echo
+	dk_call dk_removeExtension "A:/directoryA/filenameA.extA";
+	dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";
+	
+	### Result as parameter
+	dk_call dk_echo
+	dk_call dk_removeExtension "B:/directoryB/filenameB.tar.gz" resultB;
+	dk_call dk_echo "resultB = ${resultB}";
+	dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";
+	
+	### Result as return value
+	dk_call dk_echo
+	resultC=$(dk_call dk_removeExtension "C:/directoryC/filenameC.target.gz");
+	dk_call dk_echo "resultC = ${resultC}";
+	#dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";					#NOTE: export cannot be seen outside of command substituion
+	
+	### Result as parameter
+	dk_call dk_echo
+	dk_call dk_removeExtension "D:/directoryD/filenameD" resultD;
+	dk_call dk_echo "resultD = ${resultD}";
+	dk_call dk_echo "dk_removeExtension = ${dk_removeExtension}";
 }

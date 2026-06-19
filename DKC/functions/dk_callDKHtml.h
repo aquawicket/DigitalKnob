@@ -18,23 +18,23 @@ int dk_callDKHtml(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKHtml.h";
-	char* DKHTML_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKHtml/functions/";
+	char* cmd_exe = "cmd.exe";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKHtml.h";
+	char* DKHTML_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKHtml/functions/";
 
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKHtml.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKHtml.h")) {
       dk_error("putenv failed \n");
       return -1;
     }
-	if(-1 == putenv("DKHTML_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKHtml/functions/")) {
+	if(-1 == putenv("DKHTML_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKHtml/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     } 
 	
-	char* func_path = "C:/Users/Administrator/digitalknob/Development/DKHtml/functions/";
+	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKHtml/functions/";
 	char DKHTML_COMMAND[512];
-	//int err = sprintf(DKHTML_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKHTML_FUNCTIONS_DIR_=%s) & (set PATH=!DKHTML_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKHTML_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKHTML_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKHTML_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKHTML_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKHTML_FUNCTIONS_DIR_=%s) & (set PATH=!DKHTML_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKHTML_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKHTML_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKHTML_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKHTML_COMMAND);
 	
 	FILE *fp;

@@ -1,29 +1,40 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKUNINSTALL
-::#
+rem ####################################################################
+rem # DKUNINSTALL
+rem #
 :DKUNINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-	if not defined TCC_RT_IMPORT	(%dk_call% dk_error "TCC_RT_IMPORT is invalid")
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
+	if NOT defined tcc-rt_Import	(%dk_call% dk_error "tcc-rt_Import is invalid")
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables %TCC_RT_IMPORT% ROOT %DKTOOLS_DIR%
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_importVariables %tcc-rt_Import% INSTALL_ROOT %DKTOOLS_DIR%
 	
-	%dk_call% dk_set TCC_RT_EXE "%TCC_RT%/tcc.exe"
-	if not exist "%TCC_RT_EXE%" (%return%)
+	%dk_call% dk_set tcc-rt_exe "%tcc-rt%/tcc.exe"
+	if NOT EXIST "%tcc-rt_exe%" (%return%)
 	
-	:: UNINSTALL
-	%dk_call% dk_echo   
+	rem  UNINSTALL
+	%dk_call% dk_echo  
     %dk_call% dk_info "UnInstalling tcc-rt . . ."
-	"MsiExec.exe" /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
+	%dk_call% msiexec.exe /uninstall {B11E65DB-66DF-4987-9D13-014EFC915DF2} /quiet
+	
+	if EXIST "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk" (
+		%dk_call% dk_delete "%SystemDrive%/Users/Public/Desktop/TCC-RT 32.lnk"
+	)
 %endfunction%
 
 
@@ -31,10 +42,11 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
 	%dk_call% DKUNINSTALL
 %endfunction%

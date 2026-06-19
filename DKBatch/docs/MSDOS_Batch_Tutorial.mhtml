@@ -1,0 +1,1662 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://web.archive.org/web/20080815090922/http://www.allenware.com/icsw/icswidx.htm
+Subject: MS-DOS/MSDOS Batch Files: Batch File Tutorial and Reference
+Date: Sat, 1 Nov 2025 06:29:26 -0400
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----"
+
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/html
+Content-ID: <frame-3585C582FA1334557FCEE0897C3B1F27@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://web.archive.org/web/20080815090922/http://www.allenware.com/icsw/icswidx.htm
+
+<html style=3D"--wm-toolbar-height: 1px;"><head><meta http-equiv=3D"Content=
+-Type" content=3D"text/html; charset=3Dwindows-1252"><link rel=3D"styleshee=
+t" type=3D"text/css" href=3D"cid:css-16aa66cd-8feb-4163-889a-f02fa1ca26b5@m=
+html.blink" />
+
+
+
+
+
+
+<link rel=3D"stylesheet" type=3D"text/css" href=3D"https://web-static.archi=
+ve.org/_static/css/banner-styles.css?v=3Dp7PEIJWi">
+<link rel=3D"stylesheet" type=3D"text/css" href=3D"https://web-static.archi=
+ve.org/_static/css/iconochive.css?v=3D3PDvdIFv">
+<!-- End Wayback Rewrite JS Include -->
+<title>MS-DOS/MSDOS Batch Files: Batch File Tutorial and Reference</title>
+<meta name=3D"description" content=3D"Learn to write MS-DOS/MSDOS Batch Fil=
+es. Free, interactive Lessons in your Web Browser with Batch Command Refere=
+nce built in. You need no prior knowledge.">
+
+<link rel=3D"stylesheet" type=3D"text/css" href=3D"about:blank../cf/icswmz.=
+css">
+</head>
+<body><!-- BEGIN WAYBACK TOOLBAR INSERT -->
+
+<div id=3D"wm-ipp-base" lang=3D"en" style=3D"display: block; direction: ltr=
+; height: 1px;" toolbar-mode=3D"auto"><template shadowmode=3D"closed"><div =
+id=3D"wm-ipp" style=3D"position:fixed;left:0;top:0;right:0;" class=3D"">
+<div id=3D"donato" style=3D"position:relative;width:100%;height:0;">
+  <div id=3D"donato-base">
+    <iframe id=3D"donato-if" src=3D"cid:frame-A618F8C29C6C37E2F2EBEE3619FFA=
+605@mhtml.blink" scrolling=3D"no" frameborder=3D"0" style=3D"width:100%; he=
+ight:100%">
+    </iframe>
+  </div>
+</div><div id=3D"wm-ipp-inside" style=3D"display: none;">
+  <div id=3D"wm-toolbar" style=3D"position:relative;display:flex;flex-flow:=
+row nowrap;justify-content:space-between;">
+    <div id=3D"wm-logo" style=3D"/*width:110px;*/padding-top:12px;">
+      <a href=3D"https://web.archive.org/web/" title=3D"Wayback Machine hom=
+e page"><img src=3D"https://web-static.archive.org/_static/images/toolbar/w=
+ayback-toolbar-logo-200.png" alt=3D"Wayback Machine" style=3D"width:100px" =
+border=3D"0"></a>
+    </div>
+    <div class=3D"c" style=3D"display:flex;flex-flow:column nowrap;justify-=
+content:space-between;flex:1;">
+      <form class=3D"u" style=3D"display:flex;flex-direction:row;flex-wrap:=
+nowrap;" target=3D"_top" method=3D"get" action=3D"https://web.archive.org/w=
+eb/submit" name=3D"wmtb" id=3D"wmtb"><input type=3D"text" name=3D"url" id=
+=3D"wmtbURL" value=3D"http://www.allenware.com/icsw/icswidx.htm" style=3D"f=
+lex:1;" autocomplete=3D"off"><input type=3D"submit" value=3D"Go">
+      </form>
+      <div style=3D"display:flex;flex-flow:row nowrap;align-items:flex-end;=
+">
+                <div class=3D"s" id=3D"wm-nav-captures" style=3D"flex:1;"><=
+a class=3D"t" href=3D"https://web.archive.org/web/*/http://www.allenware.co=
+m/icsw/icswidx.htm" title=3D"See a list of every capture for this URL">438 =
+captures</a><div class=3D"r" title=3D"Timespan for captures of this URL">8 =
+Mar 2003 - 3 Oct 2024</div></div>
+        <div class=3D"k">
+          <a href=3D"https://web.archive.org/web/20010101000000/http://www.=
+allenware.com/icsw/icswidx.htm" id=3D"wm-graph-anchor">
+            <div id=3D"wm-ipp-sparkline" title=3D"Explore captures for this=
+ URL" style=3D"position: relative">
+              <canvas id=3D"wm-sparkline-canvas" width=3D"750" height=3D"27=
+" border=3D"0"></canvas>
+            <div class=3D"yt" style=3D"display: none; width: 25px; height: =
+27px; left: 125px;"></div><div class=3D"mt" style=3D"display: none; width: =
+2px; height: 27px; left: 126px;"></div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class=3D"n">
+      <table>
+        <tbody>
+          <!-- NEXT/PREV MONTH NAV AND MONTH INDICATOR -->
+          <tr class=3D"m">
+            <td class=3D"b" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20080715073457/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"15 Jul 2008"><strong>Jul</strong></a></td>
+            <td class=3D"c" id=3D"displayMonthEl" title=3D"You are here: 09=
+:09:22 Aug 15, 2008">Aug</td>
+            <td class=3D"f" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20080923025143/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"23 Sep 2008"><strong>Sep</strong></a></td>
+          </tr>
+          <!-- NEXT/PREV CAPTURE NAV AND DAY OF MONTH INDICATOR -->
+          <tr class=3D"d">
+            <td class=3D"b" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20080814061028/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"06:10:28 Aug 14, 2008"><img src=3D"https://web-static.archive.org/_sta=
+tic/images/toolbar/wm_tb_prv_on.png" alt=3D"Previous capture" width=3D"14" =
+height=3D"16" border=3D"0"></a></td>
+            <td class=3D"c" id=3D"displayDayEl" style=3D"width:34px;font-si=
+ze:22px;white-space:nowrap;" title=3D"You are here: 09:09:22 Aug 15, 2008">=
+15</td>
+            <td class=3D"f" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20080816103515/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"10:35:15 Aug 16, 2008"><img src=3D"https://web-static.archive.org/_sta=
+tic/images/toolbar/wm_tb_nxt_on.png" alt=3D"Next capture" width=3D"14" heig=
+ht=3D"16" border=3D"0"></a></td>
+          </tr>
+          <!-- NEXT/PREV YEAR NAV AND YEAR INDICATOR -->
+          <tr class=3D"y">
+            <td class=3D"b" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20070716010315/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"16 Jul 2007"><strong>2007</strong></a></td>
+            <td class=3D"c" id=3D"displayYearEl" title=3D"You are here: 09:=
+09:22 Aug 15, 2008">2008</td>
+            <td class=3D"f" nowrap=3D"nowrap"><a href=3D"https://web.archiv=
+e.org/web/20100127134631/http://www.allenware.com:80/icsw/icswidx.htm" titl=
+e=3D"27 Jan 2010"><strong>2010</strong></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class=3D"r" style=3D"display:flex;flex-flow:column nowrap;align-it=
+ems:flex-end;justify-content:space-between;">
+      <div id=3D"wm-btns" style=3D"text-align:right;height:23px;">
+                <span class=3D"xxs">
+          <div id=3D"wm-save-snapshot-success">success</div>
+          <div id=3D"wm-save-snapshot-fail">fail</div>
+          <a id=3D"wm-save-snapshot-open" href=3D"https://web.archive.org/w=
+eb/20080815090922/http://www.allenware.com/icsw/icswidx.htm#" title=3D"Shar=
+e via My Web Archive" style=3D"display: none;">
+            <span class=3D"iconochive-web"></span>
+          </a>
+          <a href=3D"https://archive.org/account/login.php" title=3D"Sign I=
+n" id=3D"wm-sign-in" style=3D"display: inline-block;">
+            <span class=3D"iconochive-person"></span>
+          </a>
+          <span id=3D"wm-save-snapshot-in-progress" class=3D"iconochive-web=
+" style=3D"display: none;"></span>
+        </span>
+                <a class=3D"xxs" href=3D"https://help.archive.org/help/cate=
+gory/the-wayback-machine/" title=3D"Get some help using the Wayback Machine=
+" style=3D"top:-6px;"><span class=3D"iconochive-question" style=3D"color:rg=
+b(87,186,244);font-size:160%;"></span></a>
+        <a id=3D"wm-tb-close" href=3D"https://web.archive.org/web/200808150=
+90922/http://www.allenware.com/icsw/icswidx.htm#close" style=3D"top:-2px;" =
+title=3D"Close the toolbar"><span class=3D"iconochive-remove-circle" style=
+=3D"color:#888888;font-size:240%;"></span></a>
+      </div>
+      <div id=3D"wm-share" class=3D"xxs">
+        <a href=3D"https://web.archive.org/web/20080815090922/http://web.ar=
+chive.org/screenshot/http://www.allenware.com/icsw/icswidx.htm" id=3D"wm-sc=
+reenshot" title=3D"screenshot" style=3D"visibility: hidden;">
+          <span class=3D"wm-icon-screen-shot"></span>
+        </a>
+        <a href=3D"https://web.archive.org/web/20080815090922/http://www.al=
+lenware.com/icsw/icswidx.htm#" id=3D"wm-video" title=3D"video">
+          <span class=3D"iconochive-movies"></span>
+        </a>
+        <a id=3D"wm-share-facebook" href=3D"https://web.archive.org/web/200=
+80815090922/http://www.allenware.com/icsw/icswidx.htm#" data-url=3D"https:/=
+/web.archive.org/web/20080815090922/http://www.allenware.com:80/icsw/icswid=
+x.htm" title=3D"Share on Facebook" style=3D"margin-right:5px;" target=3D"_b=
+lank"><span class=3D"iconochive-facebook" style=3D"color:#3b5998;font-size:=
+160%;"></span></a>
+        <a id=3D"wm-share-twitter" href=3D"https://web.archive.org/web/2008=
+0815090922/http://www.allenware.com/icsw/icswidx.htm#" data-url=3D"https://=
+web.archive.org/web/20080815090922/http://www.allenware.com:80/icsw/icswidx=
+.htm" title=3D"Share on Twitter" style=3D"margin-right:5px;" target=3D"_bla=
+nk"><span class=3D"iconochive-twitter" style=3D"color:#1dcaff;font-size:160=
+%;"></span></a>
+      </div>
+      <div style=3D"padding-right:2px;text-align:right;white-space:nowrap;"=
+>
+        <a id=3D"wm-expand" class=3D"wm-btn wm-closed" href=3D"https://web.=
+archive.org/web/20080815090922/http://www.allenware.com/icsw/icswidx.htm#ex=
+pand"><span id=3D"wm-expand-icon" class=3D"iconochive-down-solid"></span> <=
+span class=3D"xxs" style=3D"font-size:80%;">About this capture</span></a>
+      </div>
+    </div>
+  </div>
+    <div id=3D"wm-capinfo" style=3D"border-top:1px solid #777;display:none;=
+ overflow: hidden">
+        <div id=3D"wm-capinfo-notice" source=3D"api"></div>
+                <div id=3D"wm-capinfo-collected-by">
+    <div style=3D"background-color:#666;color:#fff;font-weight:bold;text-al=
+ign:center;padding:2px 0;">COLLECTED BY</div>
+    <div style=3D"padding:3px;position:relative" id=3D"wm-collected-by-cont=
+ent">
+            <div style=3D"display:inline-block;vertical-align:top;width:50%=
+;">
+			<span class=3D"c-logo" style=3D"background-image:url(https://archive.org=
+/services/img/alexacrawls);"></span>
+		Organization: <a style=3D"color:#33f;" href=3D"https://archive.org/detail=
+s/alexacrawls" target=3D"_new"><span class=3D"wm-title">Alexa Crawls</span>=
+</a>
+		<div style=3D"max-height:75px;overflow:hidden;position:relative;">
+	  <div style=3D"position:absolute;top:0;left:0;width:100%;height:75px;back=
+ground:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0)=
+ 90%,rgba(255,255,255,255) 100%);"></div>
+	  Starting in 1996, <a href=3D"http://www.alexa.com/">Alexa Internet</a> h=
+as been donating their crawl data to the Internet Archive.  Flowing in ever=
+y day, these data are added to the <a href=3D"http://web.archive.org/">Wayb=
+ack Machine</a> after an embargo period.
+	</div>
+	      </div>
+      <div style=3D"display:inline-block;vertical-align:top;width:49%;">
+			<span class=3D"c-logo" style=3D"background-image:url(https://archive.org=
+/services/img/51_crawl)"></span>
+		<div>Collection: <a style=3D"color:#33f;" href=3D"https://archive.org/det=
+ails/51_crawl" target=3D"_new"><span class=3D"wm-title">51_crawl</span></a>=
+</div>
+		<div style=3D"max-height:75px;overflow:hidden;position:relative;">
+	  <div style=3D"position:absolute;top:0;left:0;width:100%;height:75px;back=
+ground:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,0)=
+ 90%,rgba(255,255,255,255) 100%);"></div>
+	  this data is currently not publicly accessible.
+	</div>
+	      </div>
+    </div>
+    </div>
+    <div id=3D"wm-capinfo-timestamps">
+    <div style=3D"background-color:#666;color:#fff;font-weight:bold;text-al=
+ign:center;padding:2px 0;" title=3D"Timestamps for the elements of this pag=
+e">TIMESTAMPS</div>
+    <div>
+      <div id=3D"wm-capresources" style=3D"margin:0 5px 5px 5px;max-height:=
+250px;overflow-y:scroll !important"></div>
+      <div id=3D"wm-capresources-loading" style=3D"text-align:left;margin:0=
+ 20px 5px 5px;display:none"><img src=3D"https://web-static.archive.org/_sta=
+tic/images/loading.gif" alt=3D"loading"></div>
+    </div>
+    </div>
+  </div></div></div><link rel=3D"stylesheet" type=3D"text/css" href=3D"http=
+s://web-static.archive.org/_static/css/banner-styles.css?v=3Dp7PEIJWi"><lin=
+k rel=3D"stylesheet" type=3D"text/css" href=3D"https://web-static.archive.o=
+rg/_static/css/iconochive.css?v=3D3PDvdIFv"><div class=3D"wb-autocomplete-s=
+uggestions "></div></template>
+</div><div id=3D"wm-ipp-print">The Wayback Machine - https://web.archive.or=
+g/web/20080815090922/http://www.allenware.com:80/icsw/icswidx.htm</div>
+
+<!-- END WAYBACK TOOLBAR INSERT -->
+ <div class=3D"ly"><h2 align=3D"center"><a href=3D"https://web.archive.org/=
+web/20080815090922/http://www.allenware.com/">Read how to use this Interact=
+ive Course</a></h2><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></di=
+v>
+
+<div class=3D"lm"><p>Interactive Batch Course with built-in Reference</p></=
+div>
+<div class=3D"bd"><p>The versatile MS-DOS/MSDOS <span class=3D"bg">Batch La=
+nguage</span> automates routine tasks with <span class=3D"bg">Batch files</=
+span> (lists of Batch commands). Learn how to write Batch files with this <=
+span class=3D"bg">free</span>, interactive Course and built-in Batch Refere=
+nce. You need no prior knowledge of Batch files: you're guided through each=
+ step on screen in your Web Browser =96 no need for printouts.</p></div>
+<div class=3D"lm"><p>What's new or quick if you're in a rush?</p></div>
+<div class=3D"bd"><p>Try our <a href=3D"https://web.archive.org/web/2008081=
+5090922/http://www.allenware.com/icsw/icswref.htm">Batch&nbsp;Reference</a>=
+, our <a href=3D"https://web.archive.org/web/20080815090922/http://www.alle=
+nware.com/mcsw/bus.htm">Batch&nbsp;Troubleshooting</a> tips, or <a href=3D"=
+https://web.archive.org/web/20080815090922/http://www.allenware.com/mcsw/in=
+dex.htm">Batch&nbsp;Library</a> with example Batch files. If you enjoy our =
+interactive tutorials, take our shorter <a href=3D"https://web.archive.org/=
+web/20080815090922/http://www.allenware.com/sdem/sdmidx.htm">HTML&nbsp;for&=
+nbsp;newcomers</a>, or try a brief interactive session that shows our train=
+ing ideas in action with our <a href=3D"https://web.archive.org/web/2008081=
+5090922/http://www.allenware.com/sdem/qlook.htm">Quick&nbsp;Look</a>. </p><=
+/div>
+<div class=3D"lm"><p>The full Batch Course or just a <nobr></nobr></p></div=
+>
+<div class=3D"bd"><p>In our full Course of 21 interactive Lessons, you buil=
+d a menu-driven Batch file project for backup, and learn a wide range of Ba=
+tch file skills. Try the full Batch File Course, or a <nobr><img src=3D"htt=
+ps://web.archive.org/web/20080815090922im_/http://www.allenware.com/cf/bcav=
+.gif">click</nobr> for details. Use a link below: the Lesson loads in your =
+Browser.</p></div>
+<div class=3D"ce"><h4>Lesson Index and Course Syllabus</h4></div>
+<a name=3D"Lesson0"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw000.htm">Introduc=
+tion</a><br>Get introduced first</p></div>
+<div class=3D"bd"><p>This fully-interactive Course probably isn't like anyt=
+hing else you've met on the Web. That's why there's an interactive <a href=
+=3D"https://web.archive.org/web/20080815090922/http://www.allenware.com/ics=
+w/icsw000.htm">Introduction</a>. Think of it as Lesson Zero. You will:
+</p><ul><li>Learn to use the interactive Exercises on which the entire Cour=
+se is based</li>
+<li>Create the working folder used for all the Batch file work that follows=
+</li>
+<li>Create and configure the <span class=3D"tsk">&nbsp;BatchWindow&nbsp;</s=
+pan> (a DVM, or DOS box) for Batch work</li>
+<li>Configure and practise with the multiple window layout used in the Less=
+ons</li>
+<li>Learn to use our clickable, on-screen <span class=3D"bg">Course Referen=
+ce</span> for Batch file terms</li></ul><p></p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p>The Lesson pages are designed so that you can <nobr><i=
+mg src=3D"https://web.archive.org/web/20080815090922im_/http://www.allenwar=
+e.com/cf/bcav.gif">(click</nobr> for details) .</p>
+<p>The Course is written for Windows 95/98/ME. <nobr></nobr> users who want=
+ to try the Course need <nobr><a href=3D"https://web.archive.org/web/200808=
+15090922/http://www.allenware.com/icsw/nt2000xp.zip">Add-on Pack2.1</a></no=
+br> <nobr>(click<img src=3D"https://web.archive.org/web/20080815090922im_/h=
+ttp://www.allenware.com/icsw/bca.gif"></nobr> for a summary).</p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p><span class=3D"fg">&nbsp;Note&nbsp;</span> Our clickab=
+le on-screen Course Reference loads with every Lesson and grows in detail a=
+s you progress. We don't load it with this Lesson Index and Syllabus page, =
+which gives only an overview. So Batch terms/commands on this Index page ar=
+en't clickable.</p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p><span class=3D"fr">&nbsp;Backup&nbsp;</span> <b>Batch =
+files are powerful tools. Always backup. Read our <a href=3D"https://web.ar=
+chive.org/web/20080815090922/http://www.allenware.com/icsw/rcfp.htm#Disclai=
+mer">Disclaimer</a>.</b></p></div>
+<div class=3D"dvs"><p></p><hr><p></p></div>
+<div class=3D"lm"><p>Two ways to study:<br><b>1</b> Graduated Lessons</p></=
+div>
+<div class=3D"bd"><p>In the <a href=3D"https://web.archive.org/web/20080815=
+090922/http://www.allenware.com/icsw/icsw000.htm">Introduction</a> you lear=
+nt to create a custom MS-DOS window that is ideal for Batch file work. To f=
+ollow an interactive, thorough, and <span class=3D"bg">carefully graduated<=
+/span> set of Lessons in which you learn to write your own Batch files, con=
+tinue with the <a href=3D"https://web.archive.org/web/20080815090922/http:/=
+/www.allenware.com/icsw/icswidx.htm#Lesson1">Lesson&nbsp;1&nbsp;Syllabus</a=
+> now.</p></div>
+<div class=3D"lm"><p><b>2</b> Work from reference</p></div>
+<div class=3D"bd"><p>Alternatively, if you're already very familiar with th=
+e MS-DOS Batch Language, and need only a DOS command reference with syntax =
+examples, see our <a href=3D"https://web.archive.org/web/20080815090922/htt=
+p://www.allenware.com/icsw/icswref.htm">Batch&nbsp;Reference</a>:</p></div>
+<a name=3D"Lesson21"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icswref.htm">Batch&nb=
+sp;Reference</a></p></div>
+<div class=3D"bd"><p>Contents of <a href=3D"https://web.archive.org/web/200=
+80815090922/http://www.allenware.com/icsw/icswref.htm">Batch&nbsp;Reference=
+</a> =96 <span class=3D"bg">Batch File Command Reference</span>
+</p><ul><li>Batch file commands alphabetically, with cross-references and e=
+xamples of use</li>
+<li>Batch file commands grouped by <span class=3D"bg">Function</span> (cros=
+s-referenced, and with examples)</li>
+<li>How to find the <span class=3D"bg">short-form</span> <span class=3D"bb"=
+>8.3</span> path to long-name files or folders</li>
+<li>How to find UNC <span class=3D"bg">network paths</span> to use Batch fi=
+le commands across networks</li>
+<li>Full treatment of <span class=3D"bg">delays and waits</span> to delay B=
+atch files:
+<ul><li>Pause a Batch file from 1 second to many hours (with <span class=3D=
+"bb">choice</span> or <span class=3D"bb">ping</span>)</li>
+<li>Detecting when a Batch file delay is cut short with <span class=3D"ky">=
+&nbsp;Ctrl&nbsp;C&nbsp;</span>+<span class=3D"ky">&nbsp;N&nbsp;</span></li>
+<li>How to have a Batch file wait for a Windows GUI process to finish</li>
+<li>Batch file that waits for an event in another Batch file (running in pa=
+rallel)</li></ul></li>
+<li>How to <span class=3D"bg">document</span> your Batch files with <span c=
+lass=3D"bb">comments</span></li>
+<li>Remember the <span class=3D"np"><span class=3D"og">/?</span></span> <sp=
+an class=3D"bg">help switch</span> that's built-in to Batch commands</li>
+<li>How to install the legacy MS-DOS version <span class=3D"bg">6.22 Help</=
+span> system</li></ul><p></p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p>Our clickable on-screen Reference to DOS Batch command=
+s and terms also loads with <span class=3D"bg">every</span> Lesson. Follow =
+the Course and the Reference grows in detail as you progress, matching what=
+ you've learnt (there's no confusion with material not covered until later)=
+.</p></div>
+<div class=3D"dvs"><p></p><hr><p></p></div>
+<a name=3D"Lesson1"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw010.htm">Lesson 1=
+</a></p></div>
+<div class=3D"bd"><p>Make sure you take the <a href=3D"https://web.archive.=
+org/web/20080815090922/http://www.allenware.com/icsw/icsw000.htm">Introduct=
+ion</a> first (it's the session in which you build the custom <span class=
+=3D"tsk">&nbsp;BatchWindow&nbsp;</span> that the Course needs, and learn to=
+ use all the interactive features).</p>
+<p>Syllabus for <a href=3D"https://web.archive.org/web/20080815090922/http:=
+//www.allenware.com/icsw/icsw010.htm">Lesson 1</a> =96 <span class=3D"bg">E=
+CHO and Environment variables</span>:
+</p><ul><li>Use the <span class=3D"bb">ECHO</span> command to write text to=
+ the screen</li>
+<li>Run Windows programs from the command line with the <span class=3D"bb">=
+start</span> command</li>
+<li>Manage file types (extensions) properly when saving with <b>Notepad</b>=
+</li>
+<li>Write simple Batch files to learn how <span class=3D"bb">ECHO</span>ed =
+text works in them</li>
+<li>Use <span class=3D"bb">CLS</span> to clear the DVM display window conte=
+nts</li>
+<li>Set, clear, and list environment variables with the <span class=3D"bb">=
+SET</span> command</li>
+<li>Expand environment variables to use their contents</li>
+<li>Print the DVM screen with <span class=3D"ky">&nbsp;Shift&nbsp;</span>+<=
+span class=3D"ky">&nbsp;PrintScrn&nbsp;</span></li>
+<li>Avoid common errors with the <span class=3D"bb">ECHO</span> and <span c=
+lass=3D"bb">SET</span> commands</li></ul><p></p></div>
+<a name=3D"Lesson2"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw020.htm">Lesson 2=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw020.htm">Lesson 2</a> =96 <s=
+pan class=3D"bg">Using Child Shells</span>:</p><ul><li>Understand shell pro=
+grams, comparing <span class=3D"fs">Explorer</span> and <span class=3D"fs">=
+COMMAND.COM</span></li>
+<li>Open, work in, and <span class=3D"bb">EXIT</span> child <span class=3D"=
+bb">command</span> shells</li>
+<li>Use the <span class=3D"bb">PROMPT</span> command to change the appearan=
+ce of the prompt</li>
+<li>Understand the use of environment variables in child and parent shells<=
+/li>
+<li>Use an altered prompt appearance for immediate-mode work in a child she=
+ll</li>
+<li>Use a Return-code shell to make <span class=3D"bb">ERRORLEVEL</span> ch=
+anges visible</li>
+<li>Return <span class=3D"bb">ERRORLEVEL</span> exit codes for Windows prog=
+rams <span class=3D"bb">start</span>ed from Batch files</li>
+<li>Clear the <span class=3D"bb">ERRORLEVEL</span> to zero with a Single-us=
+e shell</li>
+<li>Write a Batch file to open a Return-code shell automatically</li>
+<li>Use <span class=3D"bb">command</span> debug mode to single-step through=
+ a Batch file</li></ul>
+<span class=3D"fg">&nbsp;Note&nbsp;</span> From now, each Lesson needs your=
+ files from the previous one. Use your own files, if you can. If you can't =
+(or if you want to retake a previous Lesson), download the files from the l=
+ink at the start of the Lesson, and click<img src=3D"https://web.archive.or=
+g/web/20080815090922im_/http://www.allenware.com/icsw/bca.gif"><nobr></nobr=
+> instructions.<p></p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p><span class=3D"fg">&nbsp;Errorlevels&nbsp;</span> Down=
+load our Windows 95/98/ME <nobr>Batch command <a href=3D"about:blank../mcsw=
+/errorlevels.zip">ErrorLevel&nbsp;list</a></nobr> now (or in any Lesson whe=
+never you click on the term <span class=3D"bb">ERRORLEVEL</span>).</p></div=
+>
+<a name=3D"Lesson3"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw030.htm">Lesson 3=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw030.htm">Lesson 3</a> =96 <s=
+pan class=3D"bg">Using choice and ERRORLEVELs</span>:
+</p><ul><li>Use the <span class=3D"bb">choice</span> command to get replies=
+ from a list of options</li>
+<li>Use a Return-code shell to see the reply codes returned by <span class=
+=3D"bb">choice</span></li>
+<li>Define the reply list in <span class=3D"bb">choice</span> with the <spa=
+n class=3D"fs">/c:</span> switch</li>
+<li>Define a case-sensitive <span class=3D"bb">choice</span> reply list wit=
+h the <span class=3D"fs">/s</span> switch</li>
+<li>Test for <span class=3D"bb">ERRORLEVEL</span> values with the <span cla=
+ss=3D"br">greater-than-or-equal-to</span> test</li>
+<li>Use <span class=3D"bb">IF</span> <nobr><span class=3D"fs">NOT</span></n=
+obr> <span class=3D"bb">ERRORLEVEL</span> to test for return codes <span cl=
+ass=3D"br">less-than</span> a given value</li>
+<li>Combine two <span class=3D"bb">ERRORLEVEL</span> tests in one line to t=
+est for <span class=3D"br">exact-equality</span></li>
+<li>Write a Batch file to ask a question and act on the answer supplied</li=
+></ul><p></p></div>
+<a name=3D"Lesson4"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw040.htm">Lesson 4=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw040.htm">Lesson 4</a> =96 <s=
+pan class=3D"bg">Finding the current ERRORLEVEL</span>:
+</p><ul><li>Use <span class=3D"bb">choice</span> to set given values for th=
+e current <span class=3D"bb">ERRORLEVEL</span></li>
+<li>Use sequential <span class=3D"bb">IF</span> tests to set a variable to =
+the current <span class=3D"bb">ERRORLEVEL</span></li>
+<li>Write a simple Batch file to show the current <span class=3D"bb">ERRORL=
+EVEL</span> for useful values</li>
+<li>Check the results of the <span class=3D"bb">ERRORLEVEL</span> script in=
+ a Return-code shell</li>
+<li>Suppress spurious messages with the <span class=3D"fs">&gt;</span><span=
+ class=3D"bb">NUL</span> syntax</li></ul><p></p></div>
+<a name=3D"Lesson5"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw050.htm">Lesson 5=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw050.htm">Lesson 5</a> =96 <s=
+pan class=3D"bg">Scripts as Useful Intermediate Tools</span>:
+</p><ul><li>Use <span class=3D"bb">comment</span>s to explain lines of Batc=
+h code in scripts</li>
+<li>Use Commented Labels to create the logical plan of a script</li>
+<li>Design a Setup Batch file, to help build and test the main script proje=
+ct</li>
+<li><span class=3D"bb">SET</span>, use and clear variables holding values u=
+sed in a script</li>
+<li>Control and alter the flow of logic in a Batch file with <span class=3D=
+"bb">GOTO</span> commands</li>
+<li>Correctly use (and avoid) fall-through from one code section to another=
+</li></ul><p></p></div>
+<a name=3D"Lesson6"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw060.htm">Lesson 6=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw060.htm">Lesson 6</a> =96 <s=
+pan class=3D"bg">Designing Menus in Batch scripts</span>:
+</p><ul><li>Design a Batch file menu with <span class=3D"bb">ECHO</span>ed =
+messages and <span class=3D"bb">choice</span></li>
+<li>Use a Return-code shell to study the <span class=3D"bb">ERRORLEVEL</spa=
+n>s returned by a menu</li>
+<li>Use a "quoted prompt" to align <span class=3D"bb">choice</span> prompt =
+with menu text</li>
+<li>Act on user-replies to a menu with correctly ordered <nobr><span class=
+=3D"bb">IF</span> <span class=3D"bb">ERRORLEVEL</span></nobr> tests</li>
+<li>Use <span class=3D"bb">ECHO</span>ed messages to check the flow of logi=
+c through a menu is correct</li>
+<li>Code menu <span class=3D"bb">IF</span> tests so they fail safe if <span=
+ class=3D"bb">choice</span> command is missing or corrupt</li></ul><p></p><=
+/div>
+<a name=3D"Lesson7"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw070.htm">Lesson 7=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw070.htm">Lesson 7</a> =96 <s=
+pan class=3D"bg">Redirection and File Management</span>:
+</p><ul><li>Use <span class=3D"bb">DIR</span> to list files and folders alp=
+habetically <span class=3D"br">o</span>rdered with the <span class=3D"fs">/=
+<span class=3D"or">o</span></span> switch</li>
+<li>Use <span class=3D"bb">DIR</span> with the <span class=3D"fs">/<span cl=
+ass=3D"op">b</span></span> (<span class=3D"bp">b</span>are or plain) switch=
+ and <span class=3D"fs">/<span class=3D"og">s</span></span> (include <span =
+class=3D"bg">s</span>ubfolders) switch </li>
+<li>Understand the folder <nobr><span class=3D"bb">dot alias</span>es</nobr=
+> <span class=3D"qfx">.</span> and <span class=3D"qfx">..</span>, and use <=
+span class=3D"bb">relative path</span>s</li>
+<li>Redirect the <span class=3D"bb">STDOUT</span> output channel to <span c=
+lass=3D"bb">device</span>s such as <span class=3D"bb">PRN</span> or <span c=
+lass=3D"bb">COM1</span></li>
+<li>Create files with the <span class=3D"bb">redirection</span> operator <s=
+pan class=3D"bb">&gt;</span></li>
+<li>Append to existing files with the append operator <span class=3D"bb">&g=
+t;&gt;</span></li>
+<li>Display the contents of text files with the <span class=3D"bb">TYPE</sp=
+an> command</li>
+<li>Combine files using <span class=3D"bb">TYPE</span> and the append opera=
+tor <span class=3D"bb">&gt;&gt;</span></li>
+<li>Use <span class=3D"bb">wildcard</span>s with <span class=3D"bb">DIR</sp=
+an> to limit the file types that it lists</li>
+<li>Create folders with <span class=3D"bb">MD</span> and remove them again =
+with <span class=3D"bb">RD</span></li>
+<li>Change the <nobr><span class=3D"bb">current folder</span></nobr> with <=
+span class=3D"bb">CD</span></li>
+<li>Create transient workfiles in the <span class=3D"bb">TEMP</span> (tempo=
+rary) folder</li>
+<li>Use the <nobr><span class=3D"bb">emending suffix</span></nobr> <span cl=
+ass=3D"ky">&nbsp;.\&nbsp;</span> for reliable use of folder paths stored in=
+ variables</li>
+<li>Use <span class=3D"bb">DEL</span> to remove workfiles (and keep the har=
+d drive tidy)</li></ul><p></p></div>
+<a name=3D"Lesson8"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw080.htm">Lesson 8=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw080.htm">Lesson 8</a> =96 <s=
+pan class=3D"bg">Managing Workfiles and Debugging Batch scripts</span>:
+</p><ul><li>Begin coding the Build option of the Setup Batch file</li>
+<li>More techniques for debugging errors in Batch files</li>
+<li>Create transient working files in the <span class=3D"bb">TEMP</span> fo=
+lder with the <nobr><span class=3D"bb">emending suffix</span></nobr></li>
+<li>Use <span class=3D"bb">COPY</span> to copy a file to a new destination =
+name in a new folder</li>
+<li>Use <span class=3D"bb">COPY</span> with a <span class=3D"bb">wildcard</=
+span> to copy multiple files in one operation</li>
+<li>Make subfolder structures with the <span class=3D"bb">MD</span> command=
+</li>
+<li>Use <span class=3D"bb">ECHO&nbsp;ON</span> and <span class=3D"bb">@ECHO=
+&nbsp;OFF</span> to debug a section of problem Batch code</li><li>Use <span=
+ class=3D"bb">deltree</span> to remove subfolder structures</li>
+<li>Avoid stalling a script when <span class=3D"bb">deltree</span> prompts =
+for y/n confirmation</li>
+<li>Redirect unwanted <span class=3D"bb">deltree</span> reports to <span cl=
+ass=3D"bb">NUL</span></li>
+<li>Use <span class=3D"bb">deltree</span> safely while developing scripts t=
+hat use it</li>
+<li>Use a confirmation sub-menu for user-confirmation of major actions</li>=
+</ul><p></p></div>
+<a name=3D"Lesson9"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw090.htm">Lesson 9=
+</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw090.htm">Lesson 9</a> =96 <s=
+pan class=3D"bg">Copying and concatenating files</span>:
+</p><ul><li>Finish coding the Build option of the Setup Batch file</li>
+<li><span class=3D"bb">Comment</span> out script lines temporarily during d=
+evelopment</li>
+<li>Use <span class=3D"bb">COPY</span> with <span class=3D"fs">/y</span> (=
+=3D<span class=3D"fs">y</span>es) to overwrite existing files without confi=
+rmation</li>
+<li>Use the <span class=3D"fs">/a-d</span> switch combination of <span clas=
+s=3D"bb">DIR</span> to list only filenames, not foldernames</li>
+<li>Use the <span class=3D"fx">\*.*</span> suffix to force a destination to=
+ be recognised as a folder</li>
+<li>Use <span class=3D"bb">DIR</span> with the <span class=3D"fs">/s</span>=
+ (=3Dsubfolder) switch to search for file(s) on disk</li>
+<li>Use <span class=3D"bb">COPY</span> with <span class=3D"ky">&nbsp;+&nbsp=
+;</span>, or a <span class=3D"bb">wildcard</span>, to concatenate files</li=
+>
+<li>Use <span class=3D"bb">fc</span> to compare two files, to see whether o=
+r not they differ</li>
+<li>Review the Batch file debugging techniques covered so far</li>
+<li>Use <span class=3D"bb">deltree</span> to delete a list of files</li></u=
+l><p></p></div>
+<a name=3D"Lesson10"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw100.htm">Lesson 1=
+0</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw100.htm">Lesson 10</a> =96 <=
+span class=3D"bg">Testing for existence of files or folders</span>:
+</p><ul><li>Understand use of <nobr><span class=3D"bb">IF</span> <span clas=
+s=3D"bb">EXIST</span></nobr> to check whether or not particular files exist=
+</li>
+<li> Understand use of <nobr><span class=3D"bb">IF</span> <span class=3D"bb=
+">EXIST</span><span class=3D"fs"> FolderName\NUL</span></nobr> to test exis=
+tence of a folder</li>
+<li>Practise inserting breakpoints with <span class=3D"bb">ECHO</span> and =
+<span class=3D"bb">PAUSE</span> to debug script errors</li>
+<li>Insert timed delays in a script with <span class=3D"bb">choice</span></=
+li></ul><p></p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p><span class=3D"fg">&nbsp;Note&nbsp;</span> For a detai=
+led account (with many syntax examples) of how to insert fixed-time delays =
+in batch files, how to wait for a Windows process to finish, or wait for an=
+ event (in another batch file running in parallel), see our <a href=3D"http=
+s://web.archive.org/web/20080815090922/http://www.allenware.com/icsw/icswre=
+f.htm#Delays">Batch&nbsp;Reference</a>.</p></div>
+<a name=3D"Lesson11"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw110.htm">Lesson 1=
+1</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw110.htm">Lesson 11</a> =96 <=
+span class=3D"bg">Finish Coding the Setup Batch script</span>:
+</p><ul><li>Finish coding the Setup Batch script and thoroughly test it</li=
+><li>Further practice to consolidate the Batch skills already learnt</li>
+</ul><p></p></div>
+<a name=3D"Lesson12"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw120.htm">Lesson 1=
+2</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw120.htm">Lesson 12</a> =96 <=
+span class=3D"bg">Command-line Parameters and String Comparison</span>:
+</p><ul><li>Use the Command-line parameter symbols <nobr><span class=3D"fx"=
+>%0 - %9</span></nobr> within a Batch file</li>
+<li>[Bracket] syntax for examining the expansion of empty environment varia=
+bles</li>
+<li>Use <span class=3D"bb">IF</span> Text=3D=3DText and <span class=3D"bb">=
+IF</span> <span class=3D"fs">NOT</span> Text=3D=3DText comparison test</li>
+<li>Handle <span class=3D"bb">IF</span> comparison for strings that may be =
+empty</li>
+<li>Use <span class=3D"bb">ECHO</span> to understand how a complex line of =
+Batch code is parsed</li>
+<li>Use doubled <span class=3D"ky">&nbsp;%%&nbsp;</span> syntax for literal=
+ display of text with <span class=3D"ky">&nbsp;%&nbsp;</span> characters</l=
+i>
+<li>Use optional command-line parameters (detecting whether or not present)=
+</li></ul><p></p></div>
+<a name=3D"Lesson13"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw130.htm">Lesson 1=
+3</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw130.htm">Lesson 13</a> =96 <=
+span class=3D"bg">Plan and Menu Logic of Backup script</span>:
+</p><ul><li>Plan the Backup script project</li>
+<li>Code the project plan as a commented label outline</li>
+<li>Use mixed-case labels to indicate the unique (operational) part of labe=
+l</li>
+<li>Design the Backup script menu for the different backup functions</li>
+<li>Code the logic flow through the Backup script menu</li>
+<li>Examine syntax of the <span class=3D"bb">FOR</span> command to do repet=
+itive tasks</li></ul><p></p></div>
+<a name=3D"Lesson14"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw140.htm">Lesson 1=
+4</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw140.htm">Lesson 14</a> =96 <=
+span class=3D"bg">Understanding File Backup methods</span>:
+</p><ul><li>Discuss design of efficient backup strategies</li>
+<li>Examine the date stamp backup method with <span class=3D"bb">xcopy</spa=
+n> and the <span class=3D"fs">/d</span> switch</li>
+<li>Practise date stamp backup of sample files in immediate mode</li>
+<li>Keep quick working notes in a disk file created with <span class=3D"bb"=
+>redirection</span></li>
+<li>Use <span class=3D"bb">find</span> to search for text targets in files<=
+/li>
+<li>Use the <span class=3D"bb">fc</span> command to compare multiple files<=
+/li></ul><p></p></div>
+<a name=3D"Lesson15"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw150.htm">Lesson 1=
+5</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw150.htm">Lesson 15</a> =96 <=
+span class=3D"bg">Coding Backup option and a Drive-Ready test</span>:
+</p><ul><li>Code and test preliminary version of the main option of the Bac=
+kup script</li>
+<li>Format floppy disks from the command line with the <span class=3D"bb">f=
+ormat</span> command</li>
+<li>Use variable expansions as components of a command line</li>
+<li>Use the <span class=3D"fs">/s</span> switch of <span class=3D"bb">xcopy=
+</span> to include subfolders in a copy operation</li>
+<li>Use a Return-code shell to document <span class=3D"bb">ERRORLEVEL</span=
+>s returned by a command</li>
+<li>Use <span class=3D"bb">xcopy</span> to create a test to detect <nobr>"d=
+rive ready"</nobr> condition without stalling</li></ul><p></p></div>
+<a name=3D"Lesson16"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw160.htm">Lesson 1=
+6</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw160.htm">Lesson 16</a> =96 <=
+span class=3D"bg">Using the Pipe operator</span>:
+</p><ul><li>Understand use of the <span class=3D"bb">pipe</span> operator t=
+o connect  <span class=3D"bb">STDOUT</span> to <span class=3D"bb">STDIN</sp=
+an></li>
+<li>Correctly type the <span class=3D"bb">pipe</span> operator in a DVM and=
+ in <b>Notepad</b></li>
+<li>Use of simple test for correct <span class=3D"bb">pipe</span> operator =
+typed on unfamiliar machine</li>
+<li>Examine <span class=3D"bb">ERRORLEVEL</span>s returned from <span class=
+=3D"bb">find</span> using Return-code shell</li>
+<li>The <span class=3D"fs"><span class=3D"og">0</span></span>=3DF<span clas=
+s=3D"bg">0</span>und&nbsp; <span class=3D"fs"><span class=3D"or">1</span></=
+span>=3DM<span class=3D"br">1</span>ssing mnemonic for <span class=3D"bb">E=
+RRORLEVEL</span>s returned by <span class=3D"bb">find</span></li>
+<li>Use <span class=3D"bb">find</span> with input <span class=3D"bb">redire=
+ction</span> or a <span class=3D"bb">pipe</span> to suppress dashed header<=
+/li>
+<li>Recognise aborted <span class=3D"bb">pipe</span> operation file remnant=
+s in the <span class=3D"bb">TEMP</span> folder</li>
+<li>Summarise <span class=3D"bb">DIR</span> output by piping it through <sp=
+an class=3D"bb">find</span></li>
+<li>Use Return-code shell to see intermediate <span class=3D"bb">ERRORLEVEL=
+</span>s in <span class=3D"bb">pipe</span> operations</li>
+<li>Use <span class=3D"bb">find</span> to tailor an <span class=3D"bb">ERRO=
+RLEVEL</span> from the text of another command (<span class=3D"bb">xcopy</s=
+pan>)</li>
+<li>Understand design of <span class=3D"bb">find</span> targets for reliabl=
+e location of character patterns</li>
+<li>Detect no-backup-needed condition and display suitable message</li>
+</ul><p></p></div>
+<a name=3D"Lesson17"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw170.htm">Lesson 1=
+7</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw170.htm">Lesson 17</a> =96 <=
+span class=3D"bg">Synchronizing a Backup, and more Pipe work</span>:
+</p><ul><li>Discuss and code the <b>Synchronize</b> option of the Backup sc=
+ript</li>
+<li>Reply automatically to Batch command questions with a <span class=3D"bb=
+">pipe</span></li>
+<li>Quick-format a disk non-interactively with replies <span class=3D"bb">p=
+ipe</span>d from a file</li>
+<li>Quick-format a disk non-interactively with replies <span class=3D"bb">p=
+ipe</span>d from <span class=3D"bb">ECHO</span>+<span class=3D"bb">more</sp=
+an></li>
+<li>Use a <span class=3D"bb">pipe</span> to reply to <span class=3D"bb">xco=
+py</span>'s <span class=3D"ky">&nbsp;F&nbsp;</span>ile or <span class=3D"ky=
+">&nbsp;D&nbsp;</span>irectory(=3Dfolder) query</li>
+<li>Use the <span class=3D"bb">REN</span> command to rename files</li>
+<li>Understand and avoid filename/foldername conflicts in file backup</li>
+<li>Practise care using <span class=3D"bb">deltree</span> with parameters i=
+n variables</li>
+<li>Use a one-line <span class=3D"bb">choice</span> question to get confirm=
+ation for critical actions</li>
+<li>Make a menu option execute additional code from another option automati=
+cally</li>
+<li>Use of blank display line to avoid <span class=3D"bb">ECHO</span> delay=
+s arising from disk activity</li></ul><p></p></div>
+<a name=3D"Lesson18"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw180.htm">Lesson 1=
+8</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw180.htm">Lesson 18</a> =96 <=
+span class=3D"bg">Coding the Check and Restore options</span>:
+</p><ul><li>Discuss and code the <b>Check</b> and <b>Restore</b> options of=
+ the Backup script</li>
+<li>Get useful information from <span class=3D"bb">xcopy</span> and its /<s=
+pan class=3D"bg">l</span>=3D(<span class=3D"bg">l</span>ist only) switch</l=
+i>
+<li>Use the <span class=3D"bb">move</span> command to move files</li>
+<li>Further practice to consolidate Batch skills already learnt</li></ul><p=
+></p></div>
+<a name=3D"Lesson19"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw190.htm">Lesson 1=
+9</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw190.htm">Lesson 19</a> =96 <=
+span class=3D"bg">Finishing the Backup script project</span>:
+</p><ul><li>Use <span class=3D"bb">choice</span> to offer user options with=
+ timeout default reply</li>
+<li>Turn list display on/off using <span class=3D"bb">redirection</span> to=
+ <span class=3D"bb">device</span> name in a variable</li><li>Add Usage inst=
+ructions to Batch file to guide the user</li>
+<li>Automatically direct users to Usage instructions if they make input err=
+ors</li>
+<li>Manage Windows <b>Explorer</b> windows from the command line</li>
+<li>Run the Backup Batch script from a Windows <b>Shortcut</b></li>
+<li>Use built-in Windows help system for assistance with Shortcut settings<=
+/li>
+<li>Understand Batch file Shortcut settings for <b>Font</b> and <b>Environm=
+ent size</b></li>
+<li>Configure command-line parameters in a Batch file Shortcut</li>
+<li>Use the <span class=3D"ky">&nbsp;?&nbsp;</span> parameter to enable the=
+ command-line parameter pop-up box</li>
+<li>Use the <b>Mark</b>, <b>Copy</b>, and <b>Paste</b> buttons in a DVM win=
+dow</li>
+<li>Ensure DVM window closes automatically when a Batch file finishes</li><=
+/ul><p></p></div>
+<a name=3D"Lesson20"></a>
+<div class=3D"lm"><p> <img src=3D"https://web.archive.org/web/2008081509092=
+2im_/http://www.allenware.com/icsw/bca.gif"> <a href=3D"https://web.archive=
+.org/web/20080815090922/http://www.allenware.com/icsw/icsw200.htm">Lesson 2=
+0</a></p></div>
+<div class=3D"bd"><p>Syllabus for <a href=3D"https://web.archive.org/web/20=
+080815090922/http://www.allenware.com/icsw/icsw200.htm">Lesson 20</a> =96 <=
+span class=3D"bg">Further Batch skills and Practice</span>:
+</p><ul><li>Advanced uses of <span class=3D"bb">FOR</span> command</li>
+<li>Use of "quotes" to group text and <span class=3D"ky">&nbsp;Space&nbsp;<=
+/span>s together in <span class=3D"bb">FOR</span> statements</li>
+<li>Remove "quotes" around text in variables with <span class=3D"bb">FOR</s=
+pan></li>
+<li>Use, and suppress, special <span class=3D"bb">FOR</span> treatment of <=
+span class=3D"ky">&nbsp;/&nbsp;</span> character</li>
+<li>Use <span class=3D"bb">wildcard</span>s in <span class=3D"bb">FOR</span=
+> statements to scan through matching filenames</li>
+<li>Hide files from <span class=3D"bb">FOR</span> <span class=3D"bb">wildca=
+rd</span> scan with <span class=3D"bb">attrib</span> <span class=3D"fx">+h<=
+/span> (hidden attribute)</li>
+<li>Use <span class=3D"bb">LFNFOR</span> to make a <span class=3D"bb">FOR</=
+span> <span class=3D"bb">wildcard</span> scan return Long File Names</li>
+<li>Use a <span class=3D"bb">FOR</span> statement to replace multiple insta=
+nces of similar commands</li>
+<li>Understand the <span class=3D"br">64</span> token limit in command line=
+s (eg: a long <span class=3D"bb">FOR</span> <span class=3D"fs">IN DO</span>=
+)</li>
+<li>Use an <span class=3D"bb">ECHO</span>+<span class=3D"bb">choice</span> =
+<span class=3D"bb">pipe</span> to return <span class=3D"bb">ERRORLEVEL</spa=
+n>s in scripts</li>
+<li>Understand use of <span class=3D"bb">REM</span> <span class=3D"bb">pipe=
+</span> to avoid failure of <span class=3D"bb">choice</span> timed delays</=
+li>
+<li>Create loops in Batch files to repeat command sequences</li>
+<li>Loop through an unknown number of parameters by <span class=3D"bb">SHIF=
+T</span>ing and <span class=3D"bb">IF</span> testing</li>
+<li><span class=3D"bb">CALL</span> a second script (returning to the first =
+when the second one finishes)</li>
+<li>Use <span class=3D"bb">fc</span> combined with a <span class=3D"bb">fin=
+d</span> <span class=3D"bb">pipe</span> to return an <span class=3D"bb">ERR=
+ORLEVEL</span> for comparisons</li><li>Practise Batch ingenuity (use  <span=
+ class=3D"bb">fc</span> to check a string is a valid number)</li></ul><p></=
+p></div>
+<div class=3D"lm"><p><a href=3D"https://web.archive.org/web/20080815090922/=
+http://www.allenware.com/icsw/icswref.htm">Batch&nbsp;Reference</a>
+</p></div>
+<div class=3D"bd"><p>When you've completed all the Batch Lessons and want t=
+o consult the full Batch Course Reference again to brush up on details, try=
+ our <a href=3D"https://web.archive.org/web/20080815090922/http://www.allen=
+ware.com/icsw/icswref.htm">Batch&nbsp;Reference</a>.</p></div>
+<div class=3D"lm"><p>Any further questions</p></div>
+<div class=3D"bd"><p>If you have questions or comments about this Batch Fil=
+e Course, please <a href=3D"mailto:webcontact@allenware.com?subject=3DAllen=
+ware.com%20website&amp;body=3DAttention:%20Allen%20and%20Company">Contact u=
+s</a> (your email subject line should contain: <nobr><span class=3D"bg">All=
+enware.com website</span></nobr>). Please be <span class=3D"bg">sure</span>=
+ to say whether you are using Windows 95/98/ME or Windows NT/2000/XP.</p></=
+div>
+<div class=3D"lm"><p>Links to Batch File information on the Web</p></div>
+<div class=3D"bd"><p>Our own interest was originally stimulated by the high=
+ly intuitive techniques developed by <a href=3D"https://web.archive.org/web=
+/20080815090922/http://members.cox.net/tglbatch/">Tom Lavedas</a>, whose We=
+bsite is well worth studying. For general links, Frank-Peter Schultze keeps=
+ an up-to-date, detailed list of <a href=3D"https://web.archive.org/web/200=
+80815090922/http://www.fpschultze.de/bss.htm">Batch&nbsp;Bookmarks</a> that=
+'s very useful.</p></div>
+<div class=3D"lm"></div>
+<div class=3D"bd"><p>Above all, enjoy writing your own Batch files. After c=
+ompleting the Course, the Batch Language will make sense. And Windows will =
+be more productive, and far more fun!</p></div>
+<div class=3D"lm"><p>Our <a href=3D"https://web.archive.org/web/20080815090=
+922/http://www.allenware.com/icsw/rcfp.htm">Changes and Plans</a> and usual=
+ <a href=3D"https://web.archive.org/web/20080815090922/http://www.allenware=
+.com/icsw/rcfp.htm#Disclaimer">Disclaimer</a></p></div>
+<div class=3D"bd"><p>Recent site changes and future plans are detailed in o=
+ur <a href=3D"https://web.archive.org/web/20080815090922/http://www.allenwa=
+re.com/icsw/rcfp.htm">Changes and Plans</a> page. Our Demonstration Courses=
+ are free, with no adverts. Before taking one, read our <a href=3D"https://=
+web.archive.org/web/20080815090922/http://www.allenware.com/icsw/rcfp.htm#D=
+isclaimer">Disclaimer</a>.</p></div>
+<div class=3D"ce">William Allen and Linda Allen</div>
+<div class=3D"ce">=A9 Copyright 2003-08 Allen &amp; Company. All rights res=
+erved =A9</div>
+</body></html><!--
+     FILE ARCHIVED ON 09:09:22 Aug 15, 2008 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 10:31:19 Nov 01, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+--><!--
+playback timings (ms):
+  captures_list: 9.256 (7)
+  exclusion.robots: 0.217 (7)
+  exclusion.robots.policy: 0.132 (7)
+  esindex: 0.08 (7)
+  cdx.remote: 311.39 (7)
+  LoadShardBlock: 580.462 (24)
+  PetaboxLoader3.datanode: 518.901 (25)
+  load_resource: 131.341
+  PetaboxLoader3.resolve: 61.015
+-->
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://web.archive.org/web/20080815090922im_/http://www.allenware.com/icsw/bca.gif
+
+R0lGODlhEwAKALMAAAAA/+fOpf//////////////////////////////////////////////////
+/////yH5BAEAAAEALAAAAAATAAoAAAQWMMhJq704600Bvx4IjGQZftKJqmirRQA7
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: https://web-static.archive.org/_static/images/loading.gif
+
+R0lGODlhFAAUAOMIAAAAABoaGjMzM0xMTGZmZoCAgJmZmbKysv//////////////////////////
+/////yH/C05FVFNDQVBFMi4wAwEAAAAh+QQBCgAIACwAAAAAFAAUAAAEUxDJSau9CADMteZTEEje
+hhzHJYqkiaLWOlZvGs8WDO6UIPAGw8TnAwWDEuKPcxQml0YnjzcYYAqFS7VqwWItWyuCQJB4s2Ax
+mWxGg9bl6YQtl0cAACH5BAEKAA8ALAAAAAAUABQAAART8MlJq70vBMy15pMgSN72AMAliqSJotY6
+Vm8azxYM7tQw8IfDxOcDBYMS4o9zFCaXRiePRyBgDIZLtWrBYi1b66NQkHizYDGZbEaD1uXphC2X
+RwAAIfkEAQoADwAsAAAAABQAFAAABFPwyUmrvU8IzLXm0zBI3vYEwSWKpImi1jpWbxrPFgzuFEHw
+AMDE5wMFgxLij3MUJpdGJ49XKGAOh0u1asFiLVvrw2CQeLNgMZlsRoPW5emELZdHAAAh+QQBCgAP
+ACwAAAAAFAAUAAAEU/DJSau9bwzMteYTQUje9gjCJYqkiaLWOlZvGs8WDO5UUfCBwMTnAwWDEuKP
+cxQml0Ynj2cwYACAS7VqwWItW+vjcJB4s2AxmWxGg9bl6YQtl0cAACH5BAEKAA8ALAAAAAAUABQA
+AART8MlJq72PEMy15lNRSN72DMMliqSJotY6Vm8azxYM7pRh8ALBxOcDBYMS4o9zFCaXRiePdzhg
+AoFLtWrBYi1b6wMAkHizYDGZbEaD1uXphC2XRwAAIfkEAQoADwAsAAAAABQAFAAABFPwyUmrva8U
+zLXmk2FI3vYQxCWKpImi1jpWbxrPFgzu1HHwg8HE5wMFgxLij3MUJpdGJ48HAGAEgku1asFiLVvr
+IxCQeLNgMZlsRoPW5emELZdHAAAh+QQBCgAPACwAAAAAFAAUAAAEU/DJSau9zxjMtebTcUje9hTF
+JYqkiaLWOlZvGs8WDO4UAPAEwsTnAwWDEuKPcxQml0YnjxcIYAaDS7VqwWItW+tDIJB4s2AxmWxG
+g9bl6YQtl0cAACH5BAEKAA8ALAAAAAAUABQAAART8MlJq73vHMy15hMASN72GMYliqSJotY6Vm8a
+zxYM7lQQ8IXCxOcDBYMS4o9zFCaXRiePJxBgCIRLtWrBYi1b62MwkHizYDGZbEaD1uXphC2XRwAA
+Ow==
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://web-static.archive.org/_static/images/toolbar/wm_tb_nxt_on.png
+
+iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAMhJREFUeNqU0s8KAUEcwPHBJjm5KHkCV+07cJHkKZRyUK6cKYeVPxd5
+BVcHjspB+VPKA7g4cHNQwndqp/awMb9ffdra+jazMxtx3c9UKTXCTgkmihK28JCWhG//2cARdcRt
+wuBkMMQGRUloJo8F5shJQjMV/9D6SElCPQk0cUINMdvQTBYTHFCWhGaSeheOILihiwGeNuELM7Rx
+NS//hUu0sLe9jjOqKIRFYSve0fP/nsevrTiBVfV3dHCxOSkdrjDGWnInXwEGAM40IjLd/vWIAAAA
+AElFTkSuQmCC
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://web-static.archive.org/_static/images/toolbar/wm_tb_prv_on.png
+
+iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ
+bWFnZVJlYWR5ccllPAAAAMZJREFUeNqU07EKQWEUwHEuSSaLkicgg3TZzCySvIKk2GVgJZmsBg9g
+8QK8gcHoASwGNoMS/l+db6Au3zn1W279b+fe796w779Cyimi7ymCFBbYox51CGLoYIS0XHv+C2uY
+ynofExRmJWgG3fE7TGKMHuK/VrFhRJ7DRBmXN2XCBibIa87Ek5US2sM04Ro5DHDRhGbumMu6Szxc
+QztndFHGVhPaOaCKFo6a0Iz5+jcoYYira2jnhhkKWNlO83ec0EYFu7cAAwCVABzGI3/GxAAAAABJ
+RU5ErkJggg==
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://web-static.archive.org/_static/images/toolbar/wayback-toolbar-logo-200.png
+
+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
+
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+
+@charset "windows-1252";
+=0A
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://web-static.archive.org/_static/css/iconochive.css?v=3PDvdIFv
+
+@charset "utf-8";
+
+@font-face { font-family: Iconochive-Regular; src: url("../fonts/Iconochive=
+-Regular.woff") format("woff"), url("../fonts/Iconochive-Regular.ttf") form=
+at("truetype"); font-weight: normal; font-style: normal; }
+
+[class^=3D"iconochive-"], [class*=3D" iconochive-"] { speak: none; font-sty=
+le: normal; font-weight: normal; font-variant: normal; text-transform: none=
+; line-height: 1; -webkit-font-smoothing: antialiased; font-family: Iconoch=
+ive-Regular !important; }
+
+.iconochive-Uplevel::before { content: "=E2=86=B5"; }
+
+.iconochive-exit::before { content: "=F0=9F=9A=A3"; }
+
+.iconochive-beta::before { content: "=CE=B2"; }
+
+.iconochive-logo::before { content: "=F0=9F=8F=9B"; }
+
+.iconochive-audio::before { content: "=F0=9F=95=A8"; }
+
+.iconochive-movies::before { content: "=F0=9F=8E=9E"; }
+
+.iconochive-software::before { content: "=F0=9F=92=BE"; }
+
+.iconochive-texts::before { content: "=F0=9F=95=AE"; }
+
+.iconochive-etree::before { content: "=F0=9F=8E=A4"; }
+
+.iconochive-image::before { content: "=F0=9F=96=BC"; }
+
+.iconochive-web::before { content: "=F0=9F=97=94"; }
+
+.iconochive-collection::before { content: "=E2=88=91"; }
+
+.iconochive-folder::before { content: "=F0=9F=93=82"; }
+
+.iconochive-data::before { content: "=F0=9F=97=83"; }
+
+.iconochive-tv::before { content: "=F0=9F=93=BA"; }
+
+.iconochive-article::before { content: "=F0=9F=97=8F"; }
+
+.iconochive-question::before { content: "=E2=8D=B0"; }
+
+.iconochive-question-dark::before { content: "?"; }
+
+.iconochive-info::before { content: "i"; }
+
+.iconochive-info-small::before { content: "=E2=93=98"; }
+
+.iconochive-comment::before { content: "=F0=9F=97=A9"; }
+
+.iconochive-comments::before { content: "=F0=9F=97=AA"; }
+
+.iconochive-person::before { content: "=F0=9F=91=A4"; }
+
+.iconochive-people::before { content: "=F0=9F=91=A5"; }
+
+.iconochive-eye::before { content: "=F0=9F=91=81"; }
+
+.iconochive-rss::before { content: "=E2=88=9E"; }
+
+.iconochive-time::before { content: "=F0=9F=95=91"; }
+
+.iconochive-quote::before { content: "=E2=9D=9D"; }
+
+.iconochive-disc::before { content: "=F0=9F=92=BF"; }
+
+.iconochive-tv-commercial::before { content: "=F0=9F=92=B0"; }
+
+.iconochive-search::before { content: "=F0=9F=94=8D"; }
+
+.iconochive-search-star::before { content: "=E2=9C=BD"; }
+
+.iconochive-tiles::before { content: "=E2=8A=9E"; }
+
+.iconochive-list::before { content: "=E2=87=B6"; }
+
+.iconochive-list-bulleted::before { content: "=E2=8C=97"; }
+
+.iconochive-latest::before { content: "=E2=88=88"; }
+
+.iconochive-left::before { content: "=CB=82"; }
+
+.iconochive-right::before { content: "=CB=83"; }
+
+.iconochive-left-solid::before { content: "=E2=97=82"; }
+
+.iconochive-right-solid::before { content: "=E2=96=B8"; }
+
+.iconochive-up-solid::before { content: "=E2=96=B4"; }
+
+.iconochive-down-solid::before { content: "=E2=96=BE"; }
+
+.iconochive-dot::before { content: "=E2=8F=A4"; }
+
+.iconochive-dots::before { content: "=E2=96=A6"; }
+
+.iconochive-columns::before { content: "=E2=96=AF"; }
+
+.iconochive-sort::before { content: "=E2=87=95"; }
+
+.iconochive-atoz::before { content: "=F0=9F=94=A4"; }
+
+.iconochive-ztoa::before { content: "=F0=9F=94=A5"; }
+
+.iconochive-upload::before { content: "=F0=9F=93=A4"; }
+
+.iconochive-download::before { content: "=F0=9F=93=A5"; }
+
+.iconochive-favorite::before { content: "=E2=98=85"; }
+
+.iconochive-heart::before { content: "=E2=99=A5"; }
+
+.iconochive-play::before { content: "=E2=96=B6"; }
+
+.iconochive-play-framed::before { content: "=F0=9F=8E=AC"; }
+
+.iconochive-fullscreen::before { content: "=E2=9B=B6"; }
+
+.iconochive-mute::before { content: "=F0=9F=94=87"; }
+
+.iconochive-unmute::before { content: "=F0=9F=94=8A"; }
+
+.iconochive-share::before { content: "=F0=9F=8E=81"; }
+
+.iconochive-edit::before { content: "=E2=9C=8E"; }
+
+.iconochive-reedit::before { content: "=E2=9C=90"; }
+
+.iconochive-gear::before { content: "=E2=9A=99"; }
+
+.iconochive-remove-circle::before { content: "=E2=9D=8E"; }
+
+.iconochive-plus-circle::before { content: "=F0=9F=97=96"; }
+
+.iconochive-minus-circle::before { content: "=F0=9F=97=95"; }
+
+.iconochive-x::before { content: "=F0=9F=97=99"; }
+
+.iconochive-fork::before { content: "=E2=8B=94"; }
+
+.iconochive-trash::before { content: "=F0=9F=97=91"; }
+
+.iconochive-warning::before { content: "=E2=9A=A0"; }
+
+.iconochive-flash::before { content: "=F0=9F=97=B2"; }
+
+.iconochive-world::before { content: "=F0=9F=97=BA"; }
+
+.iconochive-lock::before { content: "=F0=9F=94=92"; }
+
+.iconochive-unlock::before { content: "=F0=9F=94=93"; }
+
+.iconochive-twitter::before { content: "=F0=9F=90=A6"; }
+
+.iconochive-facebook::before { content: "f"; }
+
+.iconochive-googleplus::before { content: "g"; }
+
+.iconochive-reddit::before { content: "=F0=9F=91=BD"; }
+
+.iconochive-tumblr::before { content: "T"; }
+
+.iconochive-pinterest::before { content: "=F0=9D=93=9F"; }
+
+.iconochive-popcorn::before { content: "=F0=9F=92=A5"; }
+
+.iconochive-email::before { content: "=F0=9F=93=A7"; }
+
+.iconochive-embed::before { content: "=F0=9F=94=97"; }
+
+.iconochive-gamepad::before { content: "=F0=9F=95=B9"; }
+
+.iconochive-Zoom_In::before { content: "+"; }
+
+.iconochive-Zoom_Out::before { content: "-"; }
+
+.iconochive-RSS::before { content: "=F0=9F=93=A8"; }
+
+.iconochive-Light_Bulb::before { content: "=F0=9F=92=A1"; }
+
+.iconochive-Add::before { content: "=E2=8A=95"; }
+
+.iconochive-Tab_Activity::before { content: "=E2=8C=98"; }
+
+.iconochive-Forward::before { content: "=E2=8F=A9"; }
+
+.iconochive-Backward::before { content: "=E2=8F=AA"; }
+
+.iconochive-No_Audio::before { content: "=F0=9F=94=88"; }
+
+.iconochive-Pause::before { content: "=E2=8F=B8"; }
+
+.iconochive-No_Favorite::before { content: "=E2=98=86"; }
+
+.iconochive-Unike::before { content: "=E2=99=A1"; }
+
+.iconochive-Song::before { content: "=E2=99=AB"; }
+
+.iconochive-No_Flag::before { content: "=E2=9A=90"; }
+
+.iconochive-Flag::before { content: "=E2=9A=91"; }
+
+.iconochive-Done::before { content: "=E2=9C=93"; }
+
+.iconochive-Check::before { content: "=E2=9C=94"; }
+
+.iconochive-Refresh::before { content: "=E2=9F=B3"; }
+
+.iconochive-Headphones::before { content: "=F0=9F=8E=A7"; }
+
+.iconochive-Chart::before { content: "=F0=9F=93=88"; }
+
+.iconochive-Bookmark::before { content: "=F0=9F=93=91"; }
+
+.iconochive-Documents::before { content: "=F0=9F=93=9A"; }
+
+.iconochive-Newspaper::before { content: "=F0=9F=93=B0"; }
+
+.iconochive-Podcast::before { content: "=F0=9F=93=B6"; }
+
+.iconochive-Radio::before { content: "=F0=9F=93=BB"; }
+
+.iconochive-Cassette::before { content: "=F0=9F=93=BC"; }
+
+.iconochive-Shuffle::before { content: "=F0=9F=94=80"; }
+
+.iconochive-Loop::before { content: "=F0=9F=94=81"; }
+
+.iconochive-Low_Audio::before { content: "=F0=9F=94=89"; }
+
+.iconochive-First::before { content: "=F0=9F=8E=96"; }
+
+.iconochive-Invisible::before { content: "=F0=9F=95=B6"; }
+
+.iconochive-Computer::before { content: "=F0=9F=96=B3"; }
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: image/svg+xml
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://web-static.archive.org/_static/images/web-screenshot.svg
+
+<svg height=3D"20" viewBox=3D"0 0 24 20" width=3D"24" xmlns=3D"http://www.w=
+3.org/2000/svg"><g fill=3D"none" fill-rule=3D"evenodd"><path d=3D"m0 0h24v2=
+0h-24z" fill=3D"#fff"/><path d=3D"m18.5721525 15.8731314h-2.213751v-2.16100=
+43h2.213751zm-3.2647703 0h-2.2149026v-2.1610043h2.2149026zm3.1265692-11.569=
+96429v5.82540599 1.5252793h-16.86629045v-1.5252793-5.82540599zm-6.4790971 1=
+1.56996429h-10.35448576v-2.1160889h10.35448576zm-11.9548543-13.0731314v6.74=
+421283 7.72244617h20v-7.72244617-6.74421283z" fill=3D"#333" fill-rule=3D"no=
+nzero" transform=3D"matrix(1 0 0 -1 0 18.067)"/><rect fill=3D"#333" height=
+=3D"10" rx=3D"1" stroke=3D"#333" width=3D"14.906" x=3D"8" y=3D"9"/><circle =
+cx=3D"15.453" cy=3D"14" fill=3D"#fff" r=3D"3.491"/><circle cx=3D"15.453" cy=
+=3D"14" fill=3D"#333" r=3D"1.604"/></g></svg>
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://web-static.archive.org/_static/css/banner-styles.css?v=p7PEIJWi
+
+@charset "utf-8";
+
+:root { --wm-toolbar-height: 65px; }
+
+#wm-ipp-base { height: 65px; padding: 0px; margin: 0px; border: none; backg=
+round: none transparent; }
+
+#wm-ipp { z-index: 2147483647; }
+
+#wm-ipp, #wm-ipp * { font-family: "Lucida Grande", Helvetica, Arial, sans-s=
+erif; font-size: 12px; line-height: 1.2; letter-spacing: 0px; width: auto; =
+height: auto; max-width: none; max-height: none; min-height: 0px; outline: =
+none; float: none; text-align: left; border: none; color: rgb(0, 0, 0); tex=
+t-indent: 0px; position: initial; background: none; min-width: 0px !importa=
+nt; }
+
+#wm-ipp div, #wm-ipp canvas { display: block; }
+
+#wm-ipp div, #wm-ipp tr, #wm-ipp td, #wm-ipp a, #wm-ipp form { padding: 0px=
+; margin: 0px; border: none; border-radius: 0px; background-color: transpar=
+ent; background-image: none; height: auto; }
+
+#wm-ipp table { border: none; border-collapse: collapse; margin: 0px; paddi=
+ng: 0px; width: auto; font-size: inherit; }
+
+#wm-ipp form input { height: auto; display: inline; margin: 0px; color: rgb=
+(0, 0, 0); background: none rgb(255, 255, 255); border: 1px solid rgb(102, =
+102, 102); padding: 1px !important; }
+
+#wm-ipp form input[type=3D"submit"] { padding: 0px 8px !important; margin: =
+1px 0px 1px 5px !important; width: auto !important; border: 1px solid rgb(0=
+, 0, 0) !important; background: rgb(255, 255, 255) !important; color: rgb(0=
+, 0, 0) !important; }
+
+#wm-ipp form input[type=3D"submit"]:hover { background: rgb(238, 238, 238) =
+!important; cursor: pointer !important; }
+
+#wm-ipp form input[type=3D"submit"]:active { transform: translateY(1px); }
+
+#wm-ipp a { display: inline; }
+
+#wm-ipp a:hover { text-decoration: underline; }
+
+#wm-ipp a.wm-btn:hover { text-decoration: none; color: rgb(255, 255, 0) !im=
+portant; }
+
+#wm-ipp a.wm-btn:hover span { color: rgb(255, 255, 0) !important; }
+
+#wm-ipp #wm-ipp-inside { margin: 0px 6px; border-right: 5px solid rgb(0, 0,=
+ 0); border-bottom: 5px solid rgb(0, 0, 0); border-left: 5px solid rgb(0, 0=
+, 0); border-image: initial; border-top: none; background-color: rgba(255, =
+255, 255, 0.9); box-shadow: rgb(51, 51, 51) 1px 1px 4px; border-radius: 0px=
+ 0px 8px 8px; }
+
+#wm-ipp #wm-logo { padding: 0px 10px; vertical-align: middle; min-width: 10=
+0px; flex: 0 0 100px; }
+
+#wm-ipp .c { padding-left: 4px; }
+
+#wm-ipp .c .u { margin-top: 4px !important; }
+
+#wm-ipp .n { vertical-align: bottom; padding: 0px 0px 0px 5px !important; }
+
+#wm-ipp .n a { text-decoration: none; color: rgb(51, 51, 255); font-weight:=
+ bold; }
+
+#wm-ipp .n .b { overflow: visible; white-space: nowrap; color: rgb(153, 153=
+, 170); vertical-align: middle; padding: 0px 6px 0px 0px !important; text-a=
+lign: right !important; }
+
+#wm-ipp .n .y .b { padding: 0px 6px 2px 0px !important; }
+
+#wm-ipp .n .c { background: rgb(0, 0, 0); color: rgb(255, 255, 0); font-wei=
+ght: bold; text-align: center; padding: 0px !important; }
+
+#wm-ipp.hi .n td.c { color: rgb(236, 0, 140); }
+
+#wm-ipp .n td.f { overflow: visible; white-space: nowrap; color: rgb(153, 1=
+53, 170); vertical-align: middle; padding: 0px 0px 0px 6px !important; text=
+-align: left !important; }
+
+#wm-ipp .n tr.m td { text-transform: uppercase; white-space: nowrap; paddin=
+g: 2px 0px; }
+
+#wm-ipp .c .s { vertical-align: bottom; padding: 0px 5px 0px 0px !important=
+; }
+
+#wm-ipp #wm-nav-captures { white-space: nowrap; }
+
+#wm-ipp .c .s a.t { color: rgb(51, 51, 255); font-weight: bold; line-height=
+: 1.8; }
+
+#wm-ipp .c .s div.r { color: rgb(102, 102, 102); font-size: 9px; white-spac=
+e: nowrap; }
+
+#wm-ipp .c .k { padding-bottom: 1px; }
+
+#wm-ipp .c .s { padding: 0px 5px 2px 0px !important; }
+
+#wm-ipp td#displayMonthEl { padding: 2px 0px !important; }
+
+#wm-ipp td#displayYearEl { padding: 0px 0px 2px !important; }
+
+div#wm-ipp-sparkline { position: relative; white-space: nowrap; background-=
+color: rgb(255, 255, 255); cursor: pointer; line-height: 0.9; }
+
+#sparklineImgId, #wm-sparkline-canvas { position: relative; z-index: 9012; =
+max-width: none; }
+
+#wm-ipp-sparkline div.yt { position: absolute; top: 0px; z-index: 9010 !imp=
+ortant; background-color: rgb(255, 255, 0) !important; }
+
+#wm-ipp-sparkline div.mt { position: absolute; top: 0px; z-index: 9013 !imp=
+ortant; background-color: rgb(236, 0, 140) !important; }
+
+#wm-ipp .r { margin-left: 4px; }
+
+#wm-ipp .r a { color: rgb(51, 51, 255); border: none; position: relative; b=
+ackground-color: transparent; text-decoration: none; background-repeat: no-=
+repeat !important; background-position: 100% 100% !important; }
+
+#wm-ipp #wm-capinfo { border-radius: 0px 0px 4px 4px; }
+
+#wm-ipp #wm-capinfo .c-logo { display: block; float: left; margin-right: 3p=
+x; width: 90px; min-height: 90px; max-height: 290px; border-radius: 45px; o=
+verflow: hidden; background-position: 50% center; background-size: auto 90p=
+x; box-shadow: rgb(208, 208, 208) 0px 0px 2px 2px inset; }
+
+#wm-ipp #wm-capinfo .c-logo span { display: inline-block; }
+
+#wm-ipp #wm-capinfo .c-logo img { height: 90px; position: relative; left: -=
+50%; }
+
+#wm-ipp #wm-capinfo .wm-title { font-size: 130%; }
+
+#wm-ipp #wm-capinfo a.wm-selector { display: inline-block; color: rgb(170, =
+170, 170); padding: 2px 8px; text-decoration: none !important; }
+
+#wm-ipp #wm-capinfo a.wm-selector.selected { background-color: rgb(102, 102=
+, 102); }
+
+#wm-ipp #wm-capinfo a.wm-selector:hover { color: rgb(255, 255, 255); }
+
+#wm-ipp #wm-capinfo.notice-only #wm-capinfo-collected-by, #wm-ipp #wm-capin=
+fo.notice-only #wm-capinfo-timestamps { display: none; }
+
+#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content { background-col=
+or: rgb(255, 255, 0); padding: 5px; font-size: 14px; text-align: center; }
+
+#wm-ipp #wm-capinfo #wm-capinfo-notice .wm-capinfo-content * { font-size: 1=
+4px; text-align: center; }
+
+#wm-ipp #wm-expand { right: 1px; bottom: -1px; color: rgb(255, 255, 255); b=
+ackground-color: rgb(102, 102, 102) !important; padding: 0px 5px 0px 3px !i=
+mportant; border-radius: 3px 3px 0px 0px !important; }
+
+#wm-ipp #wm-expand span { color: rgb(255, 255, 255); }
+
+#wm-ipp #wm-expand #wm-expand-icon { display: inline-block; transition: tra=
+nsform 0.5s; transform-origin: 50% 45%; }
+
+#wm-ipp #wm-expand.wm-open #wm-expand-icon { transform: rotate(180deg); }
+
+#wm-ipp #wmtb { text-align: right; }
+
+#wm-ipp #wmtb #wmtbURL { width: calc(100% - 45px); }
+
+#wm-ipp #wm-graph-anchor { border-right: 1px solid rgb(204, 204, 204); }
+
+html.wb-highlight { box-shadow: rgb(165, 14, 58) 0px 0px 0px 3px inset !imp=
+ortant; }
+
+.wb-highlight { outline: rgb(165, 14, 58) solid 3px !important; }
+
+#wm-ipp-print { display: none !important; }
+
+@media print {
+  #wm-ipp-base { display: none !important; }
+  #wm-ipp-print { white-space: nowrap; overflow: hidden; text-overflow: ell=
+ipsis; display: block !important; }
+}
+
+@media (max-width: 414px) {
+  #wm-ipp .xxs { display: none !important; }
+}
+
+@media (min-width: 1055px) {
+  #wm-ipp #wm-graph-anchor { display: block !important; }
+}
+
+@media (max-width: 1054px) {
+  #wm-ipp #wm-graph-anchor { display: none !important; }
+}
+
+@media (max-width: 1163px) {
+  #wm-logo { display: none !important; }
+}
+
+#wm-btns { white-space: nowrap; margin-top: -2px; }
+
+#wm-btns #wm-save-snapshot-open { margin-right: 7px; top: -6px; }
+
+#wm-btns #wm-sign-in { box-sizing: content-box; display: none; margin-right=
+: 7px; top: -8px; border: 2px solid rgb(0, 0, 0); border-radius: 14px; padd=
+ing-right: 2px; padding-bottom: 2px; width: 11px; height: 11px; }
+
+#wm-btns #wm-sign-in > .iconochive-person { font-size: 12.5px; }
+
+#wm-save-snapshot-open > .iconochive-web { color: rgb(0, 0, 0); font-size: =
+160%; }
+
+#wm-ipp #wm-share { display: flex; align-items: flex-end; justify-content: =
+space-between; }
+
+#wm-share > #wm-screenshot { display: inline-block; margin-right: 3px; visi=
+bility: hidden; }
+
+#wm-screenshot > .iconochive-image { color: rgb(0, 0, 0); font-size: 160%; =
+}
+
+#wm-share > #wm-video { display: inline-block; margin-right: 3px; visibilit=
+y: hidden; }
+
+#wm-video > .iconochive-movies { color: rgb(0, 0, 0); display: inline-block=
+; font-size: 150%; margin-bottom: 2px; }
+
+#wm-btns #wm-save-snapshot-in-progress { display: none; font-size: 160%; op=
+acity: 0.5; position: relative; margin-right: 7px; top: -5px; }
+
+#wm-btns #wm-save-snapshot-success { display: none; color: green; position:=
+ relative; top: -7px; }
+
+#wm-btns #wm-save-snapshot-fail { display: none; color: red; position: rela=
+tive; top: -7px; }
+
+.wm-icon-screen-shot { display: inline-block; background: url("../images/we=
+b-screenshot.svg") 0% 0% / contain no-repeat !important; width: 22px !impor=
+tant; height: 19px !important; }
+
+#donato { height: 0px; margin: 0px; padding: 0px; border-bottom: 1px solid =
+rgb(153, 153, 153) !important; }
+
+body.wm-modal { height: auto !important; overflow: hidden !important; }
+
+#donato #donato-base { width: 100%; height: 100%; margin: 0px; padding: 0px=
+; position: absolute; z-index: 2147483639; }
+
+body.wm-modal #donato #donato-base { position: fixed; inset: 0px; z-index: =
+2147483640; }
+
+.wb-autocomplete-suggestions { font-family: "Lucida Grande", Helvetica, Ari=
+al, sans-serif; font-size: 12px; text-align: left; cursor: default; border-=
+width: 0px 1px 1px; border-right-style: solid; border-bottom-style: solid; =
+border-left-style: solid; border-right-color: rgb(204, 204, 204); border-bo=
+ttom-color: rgb(204, 204, 204); border-left-color: rgb(204, 204, 204); bord=
+er-image: initial; border-top-style: initial; border-top-color: initial; ba=
+ckground: rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.1) -1px 1px 3px; =
+position: absolute; display: none; z-index: 2147483647; max-height: 254px; =
+overflow: hidden auto; box-sizing: border-box; }
+
+.wb-autocomplete-suggestion { position: relative; padding: 0px 0.6em; line-=
+height: 23px; white-space: nowrap; overflow: hidden; text-overflow: ellipsi=
+s; font-size: 1.02em; color: rgb(51, 51, 51); }
+
+.wb-autocomplete-suggestion b { font-weight: bold; }
+
+.wb-autocomplete-suggestion.selected { background: rgb(240, 240, 240); }
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-16aa66cd-8feb-4163-889a-f02fa1ca26b5@mhtml.blink
+
+@charset "windows-1252";
+
+.imageye-selected { outline: black solid 2px !important; box-shadow: rgba(0=
+, 0, 0, 0.5) 0px 0px 10px !important; }
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD----
+Content-Type: text/html
+Content-ID: <frame-A618F8C29C6C37E2F2EBEE3619FFA605@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://archive.org/includes/donate.php?as_page=1&platform=wb&referer=https%3A//web.archive.org/web/20080815090922/http%3A//www.allenware.com/icsw/icswidx.htm
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body></body></html>
+------MultipartBoundary--tKScDY2I4bUIjn7PAY2b2eAlBKIBlxOJKqC0IdpqbD------

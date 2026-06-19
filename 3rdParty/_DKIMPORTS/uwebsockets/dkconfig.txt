@@ -1,0 +1,6 @@
+############ uwebsockets ############
+# https://github.com/uNetworking/uWebSockets
+# https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.zip
+# https://github.com/uNetworking/uWebSockets/archive/refs/tags/v20.36.0.zip
+
+uwebsockets=https://github.com/uNetworking/uWebSockets/archive/refs/tags/v0.14.8.zip

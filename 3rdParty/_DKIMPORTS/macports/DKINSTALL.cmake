@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ macports ############
@@ -11,18 +19,14 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 # https://github.com/macports/macports-base/releases
 # https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg
 
-if(NOT MAC_HOST)
+if(NOT Mac_Host)
 	return()
 endif()
 
-dk_load(dk_builder)
+dk_importVariables("${macports${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-### VERSION ###
-dk_set(MACPORTS_DL https://github.com/macports/macports-base/releases/download/v2.7.1/MacPorts-2.7.1-11-BigSur.pkg)
-
-if(NOT EXISTS $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	dk_download(${MACPORTS_DL} $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)		
-	dk_command(chmod +x $ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg)
-	dk_set(QUEUE_BUILD ON)
-	#MAC_dk_queueCommand($ENV{DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
+if(NOT EXISTS ${macports_Url})
+	dk_download(${macports_Url})		
+	dk_exec(chmod +x ${dk_download})
+	#dk_exec(${DKDOWNLOAD_DIR}/MacPorts-2.7.1-11-BigSur.pkg) #FIXME
 endif()

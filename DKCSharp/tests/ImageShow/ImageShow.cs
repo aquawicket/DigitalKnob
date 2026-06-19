@@ -30,6 +30,12 @@ namespace DKConsole {
             bool bMaximumWindow,
             [Out][MarshalAs(UnmanagedType.LPStruct)] ConsoleFontInfo lpConsoleCurrentFont);
 
+		[DllImport("kernel32.dll", SetLastError = true)]
+		private static extern bool SetConsoleIcon(IntPtr hIcon);
+		public static bool SetConsoleIcon(Icon icon) {
+            return SetConsoleIcon(icon.Handle);
+        }
+	
         [StructLayout(LayoutKind.Sequential)]
         internal class ConsoleFontInfo {
             internal int nFont;
@@ -92,6 +98,9 @@ namespace DKConsole {
                 }
                 ++i;
             }
+			
+			
+			
             catch (Exception e) {
                 Thread t = Thread.CurrentThread;
                 Thread.Sleep(1300); 
@@ -118,6 +127,9 @@ namespace DKConsole {
 			Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 			ConsoleImage img = new ConsoleImage();
 			img.view_image();
+			
+			Icon ico = new Icon("C:\\icon.ico");
+			SetConsoleIcon(ico.Handle);
 		}
     }
 }

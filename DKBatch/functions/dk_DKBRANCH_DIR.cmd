@@ -1,41 +1,48 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_DKBRANCH_DIR()
-::#
+rem ####################################################################
+rem # dk_DKBRANCH_DIR()
+rem #
 :dk_DKBRANCH_DIR
-::setlocal
-	%dk_call% dk_debugFunc 0 1
+rem %setlocal%
 
-	:: https://stackoverflow.com/a/33662275
-	:: If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
+	rem https://stackoverflow.com/a/33662275
+	rem If the current folder matches the current branch set DKBRANCH. Otherwise, default to Development
 
-::	if not "%~1" equ "" (
-::		set "DKBRANCH_DIR=%~1"
-::	)
+rem	if "%~1" neq "" (
+rem		set "DKBRANCH_DIR=%~1"
+rem	)
 
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DIGITALKNOB_DIR %dk_call% dk_DIGITALKNOB_DIR
 
-	if not defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
+	if NOT defined DKBRANCH  (set "DKBRANCH=Development")			&rem set the default branch
 	rem for %%I in (.) do set "CURRENT_FOLDER=%%~nxI"				&rem get the current folder
-	rem if not defined GIT_EXE (%dk_call% dk_installGit)
-	rem if exist "%CD%\.git" (
-	rem 	"%GIT_EXE%" "-C %DKBRANCH_DIR% branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
+	rem if NOT defined git.exe (%dk_call% dk_depend git)
+	rem if EXIST "%CD%\.git" (
+	rem 	"%git.exe%" "-C %DKBRANCH_DIR% branch | find "* %CURRENT_FOLDER%" > NUL & if ERRORLEVEL 0 (
 	rem 		set "DKBRANCH=%CURRENT_FOLDER%"
 	rem 	)
 	rem )
 	rem %dk_call% dk_printVar DKBRANCH
-	if not defined DKBRANCH_DIR (set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
+	if NOT defined DKBRANCH_DIR (set "DKBRANCH_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%")
 
 	set "DKBASH_DIR=%DKBRANCH_DIR%/DKBash"
 		set "DKBASH_FUNCTIONS_DIR=%DKBASH_DIR%/functions"
 		set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR%/"
 
-	if not defined DKBATCH_DIR (set "DKBATCH_DIR=%DKBRANCH_DIR%/DKBatch")
+	if NOT defined DKBATCH_DIR (set "DKBATCH_DIR=%DKBRANCH_DIR%/DKBatch")
 		set "DKBATCH_FUNCTIONS_DIR=%DKBATCH_DIR%/functions"
 		set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR%/"
 
@@ -85,18 +92,17 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "DKPYTHON_FUNCTIONS_DIR=%DKPYTHON_DIR%/functions"
 		set "DKPYTHON_FUNCTIONS_DIR_=%DKPYTHON_FUNCTIONS_DIR%/"
 		
-	set "DKVB_DIR=%DKBRANCH_DIR%/DKVb"
-		set "DKVB_FUNCTIONS_DIR=%DKVB_DIR%/functions"
-		set "DKVB_FUNCTIONS_DIR_=%DKVB_FUNCTIONS_DIR%/"
+	set "DKVBS_DIR=%DKBRANCH_DIR%/DKVbs"
+		set "DKVBS_FUNCTIONS_DIR=%DKVBS_DIR%/functions"
+		set "DKVBS_FUNCTIONS_DIR_=%DKVBS_FUNCTIONS_DIR%/"
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 	%dk_call% dk_echo
 	%dk_call% dk_echo "Test Getting DKBRANCH_DIR . . ."

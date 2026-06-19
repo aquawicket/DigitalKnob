@@ -18,7 +18,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     endif()
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     set(SFML_OS_UNIX 1)
-    if(ANDROID)
+    if(Android)
         set(SFML_OS_ANDROID 1)
         # use the OpenGL ES implementation on Android
         set(OPENGL_ES 1)
@@ -40,7 +40,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "^NetBSD$")
     # don't use the OpenGL ES implementation on NetBSD
     set(OPENGL_ES 0)
 elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
-    if(IOS)
+    if(Ios)
         set(SFML_OS_IOS 1)
 
         # use the OpenGL ES implementation on iOS

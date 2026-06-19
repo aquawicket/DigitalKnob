@@ -1,0 +1,5 @@
+############ wasm3 ############
+# https://github.com/wasm3/wasm3.git
+# https://github.com/wasm3/wasm3/archive/79d412ea5fcf92f0efe658d52827a0e0a96ff442.zip
+
+wasm3_Import=https://github.com/wasm3/wasm3/archive/79d412ea5fcf92f0efe658d52827a0e0a96ff442.zip

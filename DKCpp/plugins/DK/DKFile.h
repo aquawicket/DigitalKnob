@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -101,12 +101,12 @@ public:
 	static bool VerifyPath(DKString& path);
 	static bool ValidatePath(DKString& path);
   
-	static DKString exe_path;      //example:  C:/Users/username/digitalknob/Development/DKCpp/apps/DKMyApp/win_x86/Release/DKMyApp.exe
+	static DKString exe_path;      //example:  C:/Users/username/DigitalKnob/Development/DKCpp/apps/DKMyApp/Windows_X86/Release/DKMyApp.exe
 	static DKString exe_name;      //example:  DKMyApp.exe
-	static DKString app_path;      //example:  C:/Users/username/digitalknob/Development/DKCpp/apps/DKMyApp/win_x86/Release
+	static DKString app_path;      //example:  C:/Users/username/DigitalKnob/Development/DKCpp/apps/DKMyApp/Windows_X86/Release
 	static DKString app_name;      //example:  DKMyApp
-	static DKString local_assets;  //example:  C:/Users/username/digitalknob/Development/DKCpp/apps/DKMyApp/assets
-	static DKString online_assets; //example:  http://digitalknob.com/DKMyApp
+	static DKString local_assets;  //example:  C:/Users/username/DigitalKnob/Development/DKCpp/apps/DKMyApp/assets
+	static DKString online_assets; //example:  http://DigitalKnob.com/DKMyApp
 };
 
 #endif //DKFile_H

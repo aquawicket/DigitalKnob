@@ -4,17 +4,17 @@
 ;set ppopup_executable=popup.exe
 ;set "message2=%~1"
 ;
-;del /q /f %tmp%\yes >nul 2>&1
+;del /q /f %tmp%\yes 1>nul 2>nul
 ;
-;copy /y "%~f0" "%temp%\popup.sed" >nul 2>&1
+;copy /y "%~f0" "%temp%\popup.sed" 1>nul 2>nul
 
-;(echo(FinishMessage=%message2%)>>"%temp%\popup.sed";
-;(echo(TargetName=%cd%\%ppopup_executable%)>>"%temp%\popup.sed";
-;(echo(FriendlyName=%message1_title%)>>"%temp%\popup.sed"
+;(echo.FinishMessage=%message2%)>>"%temp%\popup.sed";
+;(echo.TargetName=%cd%\%ppopup_executable%)>>"%temp%\popup.sed";
+;(echo.FriendlyName=%message1_title%)>>"%temp%\popup.sed"
 ;
 ;iexpress /n /q /m %temp%\popup.sed
 ;%ppopup_executable%
-;rem del /q /f %ppopup_executable% >nul 2>&1
+;rem del /q /f %ppopup_executable% 1>nul 2>nul
 
 ;pause
 
@@ -45,7 +45,7 @@ AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
 [SourceFiles]
-SourceFiles0=%WINDIR%\System32\
+SourceFiles0=%SystemRoot%\System32\
 [SourceFiles0]
 %FILE0%=
 

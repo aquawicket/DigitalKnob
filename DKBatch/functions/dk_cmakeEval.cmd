@@ -1,105 +1,107 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_cmakeEval(cmake_commands, return_variables, -DVARS)
-::#
+rem ################################################################################
+rem # dk_cmakeEval(cmake_commands, return_variables, -DVARS)
+rem #
 :dk_cmakeEval
-::setlocal
-	%dk_call% dk_debugFunc 1 4
+rem %setlocal%
 
-	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR		%dk_call% dk_DKIMPORTS_DIR
 	%dk_call% dk_assertPath DKIMPORTS_DIR
 
-	%dk_call% dk_validate DKCMAKE_DIR		"%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKCMAKE_DIR		%dk_call% dk_DKBRANCH_DIR
 	%dk_call% dk_assertPath DKCMAKE_DIR
 
-	%dk_call% dk_validate CMAKE_EXE			"%dk_call% %DKIMPORTS_DIR%/cmake/DKINSTALL.cmd"
-	%dk_call% dk_assertPath CMAKE_EXE
-
-	::%dk_call% dk_set DKCOMMAND "%~1"
 	set DKCOMMAND=%~1
-	%dk_call% dk_set DKRETURN "%~2"
-	%dk_call% dk_set DKVARS "%~3"
+	if "%~2" neq "" (%dk_call% dk_set DKRETURN "%~2")
+	if "%~3" neq "" (%dk_call% dk_set DKVARS "%~3")
 	%dk_call% dk_set DK_EVAL "%DKCMAKE_DIR:\=/%/DKEval.cmake"
 
-	::### build CMAKE_ARGS ###
-	:: append %DKCOMMAND% to CMAKE_ARGS with quotes removed
-::	if defined DKCOMMAND  (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%%)
+	rem ### build CMAKE_ARGS ###
+	rem append %DKCOMMAND% to CMAKE_ARGS with quotes removed
+rem	if defined DKCOMMAND  (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKCOMMAND=%%DKCOMMAND:"=%%)
 	if defined DKCOMMAND  set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCOMMAND=%DKCOMMAND:\=/%"
 
-	:: append %DKRETURN% to CMAKE_ARGS with quotes removed
-::	if defined DKRETURN   (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%)
+	rem append %DKRETURN% to CMAKE_ARGS with quotes removed
+rem	if defined DKRETURN   (call set CMAKE_ARGS=%CMAKE_ARGS% -DDKRETURN=%%DKRETURN:"=%%)
 	if defined DKRETURN   set CMAKE_ARGS=%CMAKE_ARGS% "-DDKRETURN=%DKRETURN%"
 	
-	:: append %DKVARS% to CMAKE_ARGS with quotes removed
-::	if defined DKVARS	 (call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%)
+	rem append %DKVARS% to CMAKE_ARGS with quotes removed
+rem	if defined DKVARS	 (call set CMAKE_ARGS=%CMAKE_ARGS% %%DKVARS:"=%%)
 	if defined DKVARS	 set CMAKE_ARGS=%CMAKE_ARGS% %DKVARS%
- 
-	::set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
+
+	rem set "CMAKE_ARGS=%CMAKE_ARGS% -DDKCMAKE_FUNCTIONS_DIR="%DKCMAKE_FUNCTIONS_DIR%""
 	set CMAKE_ARGS=%CMAKE_ARGS% "-DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_:\=/%"
 	set CMAKE_ARGS=%CMAKE_ARGS% -P
 	set CMAKE_ARGS=%CMAKE_ARGS% %DK_EVAL%
-	::set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
-	::set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
-	::set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
+	rem set "CMAKE_ARGS=%CMAKE_ARGS% "--log-level=TRACE""
+	rem set "CMAKE_ARGS=%CMAKE_ARGS% >cmake_eval.out"
+	rem set "CMAKE_ARGS=%CMAKE_ARGS% 2>cmake_eval.err"
 
-	::### call the cmake command ###
-	echo "%CMAKE_EXE%" %CMAKE_ARGS%
-	"%CMAKE_EXE%" %CMAKE_ARGS%
+	rem ### call the cmake command ###
+	echo cmake.exe %CMAKE_ARGS%
+	%dk_call% cmake.exe %CMAKE_ARGS%
 
-	::###### IMPORT VARIABLES ######
-	if not defined DKRETURN (%return%)
-	%dk_call% dk_importVars
+	rem ###### IMPORT VARIABLES ######
+	if NOT defined DKRETURN (%return%)
+	%dk_call% dk_loadCache
 
-::  ## these lines are deprecated ###
-::  if not defined DKRETURN %return%
-::  if not exist %DKCMAKE_DIR%\cmake_vars.cmd %return%
-::   
-::  endlocal
-::  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd
-::  del %DKCMAKE_DIR%\cmake_vars.cmd
+rem  ## these lines are deprecated ###
+rem  if NOT defined DKRETURN %return%
+rem  if NOT EXIST "%DKCMAKE_DIR%\cmake_vars.cmd" (%return%)
+rem  
+rem  endlocal
+rem  %dk_call% %DKCMAKE_DIR%\cmake_vars.cmd
+rem  del %DKCMAKE_DIR%\cmake_vars.cmd
 
-	::%dk_call% dk_printVar ERRORLEVEL
+	rem %dk_call% dk_printVar ERRORLEVEL
 
-	::###### work with cmake return code files ######
-	:: std::out
-::	set "out="
-::	if exist "cmake_eval.out" (
-::		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
-::			set "out=!out!%%x"
-::			echo %%x
-::		)
-::	)
-	::out contains all of the lines
-	::del cmake_eval.out
-	::echo %out%	
+	rem ###### work with cmake return code files ######
+	rem std::out
+rem	set "out="
+rem	if EXIST "cmake_eval.out" (
+rem		for /f "Tokens=* Delims=" %%x in (cmake_eval.out) do (
+rem			set "out=!out!%%x"
+rem			echo %%x
+rem		)
+rem	)
+	rem out contains all of the lines
+	rem del cmake_eval.out
+	rem echo %out%	
 
-	:: std::err
-::	set "err="
-::	if exist "cmake_eval.err" (
-::		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
-::			set "err=!err!%%x"
-::			echo [91m %%x [0m
-::		)
-::	)
-	::del cmake_eval.out
-	::err contains all of the lines
-	::echo %err%
-	  
-	::%dk_call% dk_checkError
+	rem std::err
+rem	set "err="
+rem	if EXIST "cmake_eval.err" (
+rem		for /f "Tokens=* Delims=" %%x in (cmake_eval.err) do (
+rem			set "err=!err!%%x"
+rem			echo [91m %%x [0m
+rem		)
+rem	)
+	rem del cmake_eval.out
+	rem err contains all of the lines
+	rem echo %err%
+	 
+	rem %dk_call% dk_checkError
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
 	%dk_call% dk_cmakeEval "dk_test('test dk_info message')" "return_valueA;return_valueB"
 	echo return_valueA = %return_valueA%

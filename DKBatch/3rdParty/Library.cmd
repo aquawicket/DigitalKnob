@@ -11,7 +11,7 @@
 :#                  of the debugging library to the header of the main routine#
 :#                  (Always keep the whole debugging library at the beginning,#
 :#                  even if you have no immediate need for it. The first time #
-:#		    you'll have a bug, it'll be priceless!)                   # 
+:#		    you'll have a bug, it'll be priceless!)                   #
 :#                  Update the header and the main routine.                   #
 :#                                                                            #
 :#                  Microsoft reference page on batch files:		      #
@@ -32,8 +32,8 @@
 :#                  Filenames cannot contain characters: \ / : * ? " < > |    #
 :#                  But they can contain: & ( ) ^ @ , ; % ! [ ] { } = ' + ` ~ #
 :#                  Conclusion: Always put "quotes" around file names.        #
-:#                  Warning: Even "quotes" do not resolve issues with: ^ % !  #
-:#                  Files containing these 3 characters will not be processed #
+:#                  Warning: Even "quotes" do NOT resolve issues with: ^ % !  #
+:#                  Files containing these 3 characters will NOT be processed #
 :#                  correctly, except in a for loop with delayed expansion off.
 :#                                                                            #
 :#                  When cmd parses a line, it does the following steps:      #
@@ -55,7 +55,7 @@
 :#                  For a complete description of the cmd line parser, see:   #
 :#                  https://stackoverflow.com/a/4095133		              #
 :#                                                                            #
-:#                  Steps 4 & 5 are not done for the call command.            #
+:#                  Steps 4 & 5 are NOT done for the call command.            #
 :#                  Step 3 is done, but the redirections are ignored.         #
 :#                                                                            #
 :#                  The following four instructions are equivalent:           #
@@ -79,7 +79,7 @@
 :#                  * Use :# for comments instead of rem.                     #
 :#                    + The # sign is the standard comment marker for most    #
 :#                       other scripting languages.                           #
-:#                    + This stands out better than the :: used by many.      #
+:#                    + This stands out better than the rem used by many.      #
 :#                    + This avoids echoing the comment in echo on mode.      #
 :#                    + Gotcha: A :# comment in a ( block of code ) must be   #
 :#                       followed by a valid command. No blank line allowed.  #
@@ -88,7 +88,7 @@
 :#                       replacements. Ex, this will fail with a syntax error:#
 :#                         if "%ARG:-=%" equ "v" ( :# -v or v-                   #
 :#                       Protecting that code in an 'if defined ARG (code)'   #
-:#                       does not help. The root cause is not the comment,    #
+:#                       does NOT help. The root cause is NOT the comment,    #
 :#                       but the ':'. Changing the comment to 'rem -v or v-'  #
 :#                       fixes the issue, but 'rem -v : v-' would also fail.  #
 :#                  * Always enquote args sent, and dequote args received.    #
@@ -97,9 +97,9 @@
 :#                    + Best strategy for preserving reserved chars in val.   #
 :#                  * Always use echo.%STRING% instead of echo %STRING%       #
 :#                    + This will work even for empty strings.                #
-:#                  * Do not worry about strings with unbalanced quotes.      #
+:#                  * Do NOT worry about strings with unbalanced quotes.      #
 :#                    + File names cannot contain quotes.                     #
-:#                    + This is not a general purpose language anyway.        #
+:#                    + This is NOT a general purpose language anyway.        #
 :#                  * Do worry about arguments with unbalanced quotes.        #
 :#                    + The last argument can contain unbalanced quotes.      #
 :#                  * Always surround routines by init call and protection    #
@@ -116,7 +116,7 @@
 :#                      :MyFunc.End                                           #
 :#                                                                            #
 :#                  Gotcha:                                                   #
-:#                  * It is not possible a call a subroutine from inside a    #
+:#                  * It is NOT possible a call a subroutine from inside a    #
 :#                    for /f ('command pipeline'). This is because this       #
 :#                     command pipeline is executed in a sub-shell, and has   #
 :#                     no access to the rest of the batch file.               #
@@ -140,7 +140,7 @@
 :#                  Added tee routine from dostips.com forum topic #32615.    #
 :#   2014-11-19 JFL Added routine PopArg, and use it in the main routine.     #
 :#   2015-03-02 JFL Added routine GetServerAddress.			      #
-:#   2015-03-18 JFL Rewrote PopArg, which did not process quotes properly.    #
+:#   2015-03-18 JFL Rewrote PopArg, which did NOT process quotes properly.    #
 :#   2015-04-16 JFL Added my own version of macro management macros, working  #
 :#                  with DelayedExpansion enabled.                            #
 :#   2015-10-18 JFL Bug fix: Function :now output date was incorrect if loop  #
@@ -200,7 +200,7 @@
 :#   2016-12-08 JFL Moved the most common initializations into :Library.Init. #
 :#   2016-12-12 JFL Fixed function call/return logging when sourcing this lib.#
 :#   2016-12-14 JFL Fixed macros RETURN0 and RETURN#.                         #
-:#   2016-12-16 JFL Changed %EXEC% to not capture commands output by default. #
+:#   2016-12-16 JFL Changed %EXEC% to NOT capture commands output by default. #
 :#   2017-01-13 JFL Added option -f to routine :Exec.                         #
 :#   2017-01-16 JFL Use bright colors for [Success]/[Warning]/[Failure] in    #
 :#                  :Echo.Color, and added an optional suffix and end of line.#
@@ -247,7 +247,7 @@
 
 :# Check Windows version: minimum requirement Windows
 :# 2000, but useful only for Windows XP SP2 and later
-if not "%OS%" equ "Windows_NT"     goto Err9X
+if "%OS%" neq "Windows_NT"     goto Err9X
 ver | find "Windows NT" >NUL && goto ErrNT
 
 :# Mechanism for calling subroutines in this library, either locally or from another script.
@@ -272,7 +272,7 @@ if '%1'=='-call' !ARGS:~1!& exit /b
 :# Mechanism for "sourcing" this library from another script.
 if '%1'=='source' (
   endlocal & endlocal &:# Define everything in the context of the caller script
-  if not "!!" equ "" >&2 echo "%SFULL%" %1 Error: Must be called with DelayedExpansion ENABLED. & exit /b 1
+  if "!!" neq "" >&2 echo "%SFULL%" %1 Error: Must be called with DelayedExpansion ENABLED. & exit /b 1
   set ^"LCALL=call "%SFULL%" call^"	&rem :# This is the full path of this library's ARG0
 ) else (
   set "LCALL=call"
@@ -281,7 +281,7 @@ if '%1'=='source' (
 :# Initialize the most commonly used library components.
 call :Library.Init
 
-if '%1'=='source' exit /b 0	&:# If we're sourcing this lib, we're done. 
+if '%1'=='source' exit /b 0	&:# If we're sourcing this lib, we're done.
 
 :# Go process command-line arguments
 goto Main
@@ -294,7 +294,7 @@ goto Main
 exit /b
 
 :Err9X
-echo Error: Does not work on Windows 9x
+echo Error: Does NOT work on Windows 9x
 goto:eof
 
 :ErrNT
@@ -322,7 +322,7 @@ call :Exec.Init			&:# Conditional execution routines
 set FOREACHLINE=for /f "delims="
 
 :# HOME variable. For analogy with Unix systems.
-if not defined HOME set "HOME=%USERPROFILE%"
+if NOT defined HOME set "HOME=%USERPROFILE%"
 
 goto:eof
 
@@ -361,7 +361,7 @@ goto:eof
 :#                                                                            #
 :#  Notes 	    PopArg works around the defect of the shift command,      #
 :#                  which pops the first argument from the %* list, but does  #
-:#                  not remove it from %*.                                    #
+:#                  NOT remove it from %*.                                    #
 :#                  Also works around another defect with tricky characters   #
 :#                  like ! or ^ being lost when variable expansion is on.     #
 :#                                                                            #
@@ -380,19 +380,19 @@ goto:eof
 :#                  workaround to process the /? argument.                    #
 :#                                                                            #
 :#                  Known limitation: Special character ^ is preserved within #
-:#                  "quoted" arguments, but not within unquoted arguments.    #
+:#                  "quoted" arguments, but NOT within unquoted arguments.    #
 :#                                                                            #
 :#                  Known limitation: After using :PopArg, all consecutive    #
 :#                  argument separators in %ARGS% are replaced by one space.  #
 :#                  For example: "A==B" becomes "A B"                         #
-:#                  This does not change the result of subsequent calls to    #
+:#                  This does NOT change the result of subsequent calls to    #
 :#                  :PopArg, but this prevents from using the tail itself as  #
-:#                  an argument. => Do not use :PopArg to get :Exec args!     #
+:#                  an argument. => Do NOT use :PopArg to get :Exec args!     #
 :#                                                                            #
 :#                  To do: Detect if the last arg has mismatched quotes, and  #
 :#                  if it does, append one.                                   #
 :#                  Right now such mismatched quotes will cause an error here.#
-:#                  Do not work around this error to only pass back the bad   #
+:#                  Do NOT work around this error to only pass back the bad   #
 :#                  argument, as this will only cause more errors further down#
 :#                                                                            #
 :#  History                                                                   #
@@ -419,7 +419,7 @@ for /f %%c in (%TEMP%\1A.chr) do set "SUB=%%c"
 exit /b
 
 :Call.Init
-if not defined LCALL set "LCALL=call"	&:# Macro to call functions in this library
+if NOT defined LCALL set "LCALL=call"	&:# Macro to call functions in this library
 set "POPARG=%LCALL% :PopArg"
 set "POPSARG=%LCALL% :PopSimpleArg"
 
@@ -484,13 +484,13 @@ if defined ARGS (
   setlocal EnableDelayedExpansion
   for /f "delims=" %%a in ("!ARGS:%%=%%%%!") do endlocal & set ^"PopArg.ARGS=%%a^"
 )
-:# Note: The following call doubles ^ within "quotes", but not those outside of quotes.
+:# Note: The following call doubles ^ within "quotes", but NOT those outside of quotes.
 :# So :PopArg.Helper will correctly record ^ within quotes, but miss those outside. (Unless quadrupled!)
 :# The only way to fix this would be to completely rewrite :PopArg as a full fledged batch parser written in batch!
-call :PopArg.Helper %PopArg.ARGS% >NUL 2>NUL &:# Output redirections ensure the call help is not actually output.
-:# Finding that impossible combination now is proof that the call was not executed.
+call :PopArg.Helper %PopArg.ARGS% >NUL 2>NUL &:# Output redirections ensure the call help is NOT actually output.
+:# Finding that impossible combination now is proof that the call was NOT executed.
 :# In this case, try again with the /? quoted, to prevent the call parser from processing it.
-:# Note that we can not systematically do this /? enquoting, else it's "/?" that would break the call.
+:# Note that we can NOT systematically do this /? enquoting, else it's "/?" that would break the call.
 if "%ARG%" equ "Yes" if [%"ARG"%]==[No] call :PopArg.Helper %PopArg.ARGS:/?="/?"%
 set "PopArg.ARGS="
 goto:eof
@@ -499,7 +499,7 @@ set "ARG=%~1"		&:# Remove quotes from the argument
 set ^""ARG"=%1^"	&:# The same with quotes, if any, should we need them
 if defined ARG set "ARG=%ARG:^^=^%"
 if defined "ARG" set ^""ARG"=%"ARG":^^=^%^"
-:# Rebuild the tail of the argument line, as shift does not do it
+:# Rebuild the tail of the argument line, as shift does NOT do it
 :# Never quote the set ARGS command, else some complex quoted strings break
 set ARGS=%2
 :PopArg.GetNext
@@ -532,14 +532,14 @@ goto:eof
 if "!!" equ "" (	:# The local scope has expansion on
   :# Prepare one variable, in a local scope with !expansion! on, for %expansion% in another scope with !expansion! on
   :Prep2ExpandVar.Eon INVAR [OUTVAR]
-  if not "%~2" equ "" set "%~2=!%~1!" & shift
+  if "%~2" neq "" set "%~2=!%~1!" & shift
   if defined %1 (
     for %%e in (sp tab cr lf quot amp vert lt gt hat percnt) do ( :# Encode named character entities
       for %%c in ("!@%%e!") do (
 	set "%~1=!%~1:%%~c= @%%e !"
       )
     )
-    call set "%~1=%%%~1:^!= @excl %%" 	& rem :# Encode exclamation points                          
+    call set "%~1=%%%~1:^!= @excl %%" 	& rem :# Encode exclamation points                         
     call set "%~1=%%%~1: =^!%%"		& rem :# Encode final expandable entities
   )
   exit /b
@@ -549,7 +549,7 @@ if "!!" equ "" (	:# The local scope has expansion on
   setlocal EnableDelayedExpansion
   set "VALUE=!%~1!"
   call :Prep2ExpandVar.Eon VALUE
-  if not "%~2" equ "" shift
+  if "%~2" neq "" shift
   endlocal & set "%~1=%VALUE%"
   exit /b
 )
@@ -571,7 +571,7 @@ if "!!" equ "" (	:# The local scope has expansion on
 :# Prepare variables containing pathnames that will be passed as "arguments"
 :PrepArgVars
 set "%~1=!%~1:%%=%%%%!"				&:# Escape percent signs
-if not [%2]==[] shift & goto :PrepArgVars
+if NOT [%2]==[] shift & goto :PrepArgVars
 goto:eof
 
 :# Indirect call, with the label and arguments in a variable
@@ -629,7 +629,7 @@ exit /b
 :#                                                                            #
 :#                  The use of the Line Feed character as command separator   #
 :#                  within macros is a clever trick, that helps debugging,    #
-:#                  but it is not necessary for macros to work.               #
+:#                  but it is NOT necessary for macros to work.               #
 :#                  This helps debugging, because this allows to output the   #
 :#                  macro definition as a structured string spanning several  #
 :#                  lines, looking exactly like a normal function with one    #
@@ -687,7 +687,7 @@ set "MACRO=for %%$ in (1 2) do if %%$==2"				&:# Prolog code of a macro
 set "/MACRO=else setlocal enableDelayedExpansion %&% set MACRO.ARGS="	&:# Epilog code of a macro
 set "ENDMACRO=endlocal"	&:# Ends the macro local scope started in /MACRO. Necessary before macro exit.
 
-set "ON_MACRO_EXIT=for /f "delims=" %%r in ('echo"	&:# Begin the return variables definitions 
+set "ON_MACRO_EXIT=for /f "delims=" %%r in ('echo"	&:# Begin the return variables definitions
 set "/ON_MACRO_EXIT=') do %ENDMACRO% %&% %%r"		&:# End the return variables definitions
 
 :# Primitive macro debugging definitions
@@ -698,7 +698,7 @@ set "/ON_MACRO_EXIT=') do %ENDMACRO% %&% %%r"		&:# End the return variables defi
 :# Ex: %IF_XDLEVEL% 2 set VARIABLE
 :# Recommended: Use set, instead of echo, to display variable values. This is sometimes
 :# annoying because this displays other unwanted variables. But this is the only way
-:# to be sure to display _all_ tricky characters correctly in any expansion mode. 
+:# to be sure to display _all_ tricky characters correctly in any expansion mode.
 :# Note: These debugging macros slow down a lot their enclosing macro.
 :#       They should be removed from the released code.
 set "XDLEVEL=0" &:# 0=No macro debug; 1=medium debug; 2=full debug; 3=Even more debug
@@ -798,7 +798,7 @@ goto:eof
 :#                                                                            #
 :#  Notes           All output from these routines is sent to the log file.   #
 :#                  The debug output is sent stdout or stderr, depending on   #
-:#                  variable %>DEBUGOUT%.				      # 
+:#                  variable %>DEBUGOUT%.				      #
 :#                                                                            #
 :#                  Traced functions are indented, based on the call depth.   #
 :#                  Use %ECHO% to get the same indentation of normal output.  #
@@ -857,7 +857,7 @@ goto :Debug.End
 
 :Debug.Init
 :# Preliminary checks to catch common problems
-if exist echo >&2 echo WARNING: The file "echo" in the current directory will cause problems. Please delete it and retry.
+if EXIST echo >&2 echo WARNING: The file "echo" in the current directory will cause problems. Please delete it and retry.
 :# Inherited variables from the caller: DEBUG, VERBOSE, INDENT, >DEBUGOUT
 :# Initialize other debug variables
 set "ECHO=%LCALL% :Echo"
@@ -869,7 +869,7 @@ set UPVAR=call set DEBUG.RETVARS=%%DEBUG.RETVARS%%
 set RETURN=call set "DEBUG.ERRORLEVEL=%%ERRORLEVEL%%" %&% %MACRO% ( %\n%
   set DEBUG.EXITCODE=%!%MACRO.ARGS%!%%\n%
   if defined DEBUG.EXITCODE set DEBUG.EXITCODE=%!%DEBUG.EXITCODE: =%!%%\n%
-  if not defined DEBUG.EXITCODE set DEBUG.EXITCODE=%!%DEBUG.ERRORLEVEL%!%%\n%
+  if NOT defined DEBUG.EXITCODE set DEBUG.EXITCODE=%!%DEBUG.ERRORLEVEL%!%%\n%
   for %%l in ("%'!%LF%'!%") do ( %# Make it easy to insert line-feeds in any mode #% %\n%
     set "DEBUG.SETARGS=""" %# The initial "" makes sure that for loops below never get an empty arg list #% %\n%
     for %%v in (%!%DEBUG.RETVARS%!%) do ( %\n%
@@ -887,17 +887,17 @@ set RETURN=call set "DEBUG.ERRORLEVEL=%%ERRORLEVEL%%" %&% %MACRO% ( %\n%
     ) %\n%
     if %!%DEBUG%!%==1 ( %# Build the debug message and display it #% %\n%
       set "DEBUG.MSG=return %'!%DEBUG.EXITCODE%'!%" %\n%
-      for /f "delims=" %%v in ("%'!%DEBUG.SETARGS: =%%~l%'!%") do if not %%v=="" ( %# for /f avoids issues with ? and * #% %\n%
+      for /f "delims=" %%v in ("%'!%DEBUG.SETARGS: =%%~l%'!%") do if NOT %%v=="" ( %# for /f avoids issues with ? and * #% %\n%
 	set "DEBUG.MSG=%'!%DEBUG.MSG%'!% %%@amp%% set %%v" %!% %\n%
       ) %\n%
       call set "DEBUG.MSG=%'!%DEBUG.MSG:%%=%%@excl%%%'!%" %# Change all percent to ! #%  %\n%
       if defined ^^%>%DEBUGOUT ( %# If we use a debugging stream distinct from stdout #% %\n%
-	%LCALL% :Echo.Eval2DebugOut DEBUG.MSG %# Use a helper routine, as delayed redirection does not work #% %\n%
+	%LCALL% :Echo.Eval2DebugOut DEBUG.MSG %# Use a helper routine, as delayed redirection does NOT work #% %\n%
       ) else ( %# Output directly here, which is faster #% %\n%
 	for /f "delims=" %%c in ("%'!%INDENT%'!%%'!%DEBUG.MSG%'!%") do echo %%c%# Use a for loop to do a double !variable! expansion #%%\n%
       ) %\n%
       if defined LOGFILE ( %# If we have to send a copy to a log file #% %\n%
-	%LCALL% :Echo.Eval2LogFile DEBUG.MSG %# Use a helper routine, as delayed redirection does not work #% %\n%
+	%LCALL% :Echo.Eval2LogFile DEBUG.MSG %# Use a helper routine, as delayed redirection does NOT work #% %\n%
       ) %\n%
     ) %\n%
     for %%r in (%!%DEBUG.EXITCODE%!%) do ( %# Carry the return values through the endlocal barriers #% %\n%
@@ -906,7 +906,7 @@ set RETURN=call set "DEBUG.ERRORLEVEL=%%ERRORLEVEL%%" %&% %MACRO% ( %\n%
 	set "DEBUG.SETARGS=%%a" %\n%
 	if "%'!%%'!%" equ "" ( %# Delayed expansion is ON #% %\n%
 	  call set "DEBUG.SETARGS=%'!%DEBUG.SETARGS:%%=%%@excl%%%'!%" %# Change all percent to ! #%  %\n%
-	  for /f "delims=" %%v in ("%'!%DEBUG.SETARGS: =%%~l%'!%") do if not %%v=="" ( %# for /f avoids issues with ? and * #% %\n%
+	  for /f "delims=" %%v in ("%'!%DEBUG.SETARGS: =%%~l%'!%") do if NOT %%v=="" ( %# for /f avoids issues with ? and * #% %\n%
 	    set %%v %# Set each upvar variable in the caller's scope #% %\n%
 	  ) %\n%
 	) else ( %# Delayed expansion is OFF #% %\n%
@@ -926,9 +926,9 @@ set RETURN=call set "DEBUG.ERRORLEVEL=%%ERRORLEVEL%%" %&% %MACRO% ( %\n%
 :Debug.Init.2
 set "LOG=%LCALL% :Echo.Log"
 set ">>LOGFILE=>>%LOGFILE%"
-if not defined LOGFILE set "LOG=rem" & set ">>LOGFILE=rem"
+if NOT defined LOGFILE set "LOG=rem" & set ">>LOGFILE=rem"
 if .%LOGFILE%.==.NUL. set "LOG=rem" & set ">>LOGFILE=rem"
-if .%NOREDIR%.==.1. set "LOG=rem" & set ">>LOGFILE=rem" &:# A parent script is already redirecting output. Trying to do it again here would fail. 
+if .%NOREDIR%.==.1. set "LOG=rem" & set ">>LOGFILE=rem" &:# A parent script is already redirecting output. Trying to do it again here would fail.
 set "ECHO.V=%LCALL% :Echo.Verbose"
 set "ECHO.D=%LCALL% :Echo.Debug"
 set "ECHOVARS.V=%LCALL% :EchoVars.Verbose"
@@ -952,12 +952,12 @@ set ">MSGOUT.D[1]=%>DEBUGOUT%"
 :# Preserve INDENT if it contains just spaces, else clear it.
 for /f %%s in ('echo.%INDENT%') do set "INDENT="
 :# Preserve the log file name, else by default use NUL.
-:# if not defined LOGFILE set "LOGFILE=NUL"
+:# if NOT defined LOGFILE set "LOGFILE=NUL"
 :# VERBOSE mode can only be 0 or 1. Default is 0.
-if not .%VERBOSE%.==.1. set "VERBOSE=0"
+if NOT .%VERBOSE%.==.1. set "VERBOSE=0"
 call :Verbose.%VERBOSE%
 :# DEBUG mode can only be 0 or 1. Default is 0.
-if not .%DEBUG%.==.1. set "DEBUG=0"
+if NOT .%DEBUG%.==.1. set "DEBUG=0"
 goto :Debug.%DEBUG%
 
 :Debug.SetLog
@@ -972,10 +972,10 @@ set "IF_DEBUG=if .%DEBUG%.==.1."
 set "FUNCTION0=rem"
 set FUNCTION=%MACRO.GETEXP% %&% %MACRO% ( %\n%
   call set "FUNCTION.NAME=%%0" %\n%
-  call set ARGS=%%*%# Do not quote this, to keep string/non string alternance #%%\n%
+  call set ARGS=%%*%# Do NOT quote this, to keep string/non string alternance #%%\n%
   if defined ARGS set ARGS=%!%ARGS:^^^^^^^^^^^^^^^^=^^^^^^^^%!%%# ^carets are doubled in quoted strings, halved outside. => Quadruple them if using unquoted ones #%%\n%
   set "DEBUG.RETVARS=" %\n%
-  if not defined MACRO.ARGS set "MACRO.ARGS=%'!%MACRO.EXP%'!%" %\n%
+  if NOT defined MACRO.ARGS set "MACRO.ARGS=%'!%MACRO.EXP%'!%" %\n%
   setlocal %!%MACRO.ARGS%!% %\n%
 ) %/MACRO%
 set "RETURN0=exit /b"
@@ -984,9 +984,9 @@ set "EXEC.ARGS= %EXEC.ARGS%"
 set "EXEC.ARGS=%EXEC.ARGS: -d=%"
 set "EXEC.ARGS=%EXEC.ARGS:~1%"
 :# Optimization to speed things up in non-debug mode
-if not defined LOGFILE set "ECHO.D=echo >NUL"
+if NOT defined LOGFILE set "ECHO.D=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHO.D=echo >NUL"
-if not defined LOGFILE set "ECHOVARS.D=echo >NUL"
+if NOT defined LOGFILE set "ECHOVARS.D=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHOVARS.D=echo >NUL"
 goto:eof
 
@@ -998,22 +998,22 @@ set "IF_DEBUG=if .%DEBUG%.==.1."
 set "FUNCTION0=call %LCALL% :Debug.Entry0 %%0 %%*"
 set FUNCTION=%MACRO.GETEXP% %&% %MACRO% ( %\n%
   call set "FUNCTION.NAME=%%0" %\n%
-  call set ARGS=%%*%# Do not quote this, to keep string/non string aternance #%%\n%
+  call set ARGS=%%*%# Do NOT quote this, to keep string/non string aternance #%%\n%
   if defined ARGS set ARGS=%!%ARGS:^^^^^^^^^^^^^^^^=^^^^^^^^%!%%# ^carets are doubled in quoted strings, halved outside. => Quadruple them if using unquoted ones #%%\n%
   if %!%DEBUG%!%==1 ( %# Build the debug message and display it #% %\n%
     set DEBUG.MSG=call %!%FUNCTION.NAME%!% %!%ARGS%!%%\n%
     if defined ^^%>%DEBUGOUT ( %# If we use a debugging stream distinct from stdout #% %\n%
-      %LCALL% :Echo.2DebugOut DEBUG.MSG %# Use a helper routine, as delayed redirection does not work #% %\n%
+      %LCALL% :Echo.2DebugOut DEBUG.MSG %# Use a helper routine, as delayed redirection does NOT work #% %\n%
     ) else ( %# Output directly here, which is faster #% %\n%
       echo%!%INDENT%!% %!%DEBUG.MSG%!%%\n%
     ) %\n%
     if defined LOGFILE ( %# If we have to send a copy to a log file #% %\n%
-      %LCALL% :Echo.2LogFile DEBUG.MSG %# Use a helper routine, as delayed redirection does not work #% %\n%
+      %LCALL% :Echo.2LogFile DEBUG.MSG %# Use a helper routine, as delayed redirection does NOT work #% %\n%
     ) %\n%
     call set "INDENT=%'!%INDENT%'!%  " %\n%
   ) %\n%
   set "DEBUG.RETVARS=" %\n%
-  if not defined MACRO.ARGS set "MACRO.ARGS=%'!%MACRO.EXP%'!%" %\n%
+  if NOT defined MACRO.ARGS set "MACRO.ARGS=%'!%MACRO.EXP%'!%" %\n%
   setlocal %!%MACRO.ARGS%!% %\n%
 ) %/MACRO%
 set "RETURN0=call %LCALL% :Debug.Return0 %%ERRORLEVEL%% & exit /b"
@@ -1062,11 +1062,11 @@ endlocal
 goto:eof &:# %RETURN.ERR% will be processed in the %DEBUG#% macro.
 
 :# A lightweight alternative for the %RETURN% macro.
-:# Only traces the %ERRORLEVEL%, but not the variables returned.
+:# Only traces the %ERRORLEVEL%, but NOT the variables returned.
 :# Trace the return from a subroutine, and do the actual return, in a single call
 :Return
 :# gotcha: setlocal sometimes clears %ERRORLEVEL%, so the reading must be on same line
-setlocal & set "ERR=%~1" & if not defined ERR set "ERR=%ERRORLEVEL%"
+setlocal & set "ERR=%~1" & if NOT defined ERR set "ERR=%ERRORLEVEL%"
 %IF_DEBUG% %>DEBUGOUT% echo   exit /b %ERR%
 :# An explicit endlocal isn't required, as (goto) does it automatically.
 2>NUL (goto) & exit /b %ERR% &:# Endlocal and pop one call stack, then return to the upper level
@@ -1080,9 +1080,9 @@ set "EXEC.ARGS= %EXEC.ARGS%"
 set "EXEC.ARGS=%EXEC.ARGS: -v=%"
 set "EXEC.ARGS=%EXEC.ARGS:~1%"
 :# Optimization to speed things up in non-verbose mode
-if not defined LOGFILE set "ECHO.V=echo >NUL"
+if NOT defined LOGFILE set "ECHO.V=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHO.V=echo >NUL"
-if not defined LOGFILE set "ECHOVARS.V=echo >NUL"
+if NOT defined LOGFILE set "ECHOVARS.V=echo >NUL"
 if .%LOGFILE%.==.NUL. set "ECHOVARS.V=echo >NUL"
 goto:eof
 
@@ -1117,7 +1117,7 @@ goto :Echo.Log
 
 :Echo.Eval2DebugOut %1=Name of string, with !variables! that need to be evaluated first
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
-set "STRING=!%1!" &:# !variables! not yet expanded; They will be on next line
+set "STRING=!%1!" &:# !variables! NOT yet expanded; They will be on next line
 %>DEBUGOUT% echo.%INDENT%%STRING%
 goto:eof
 
@@ -1128,7 +1128,7 @@ goto:eof
 
 :Echo.Eval2LogFile %1=Name of string, with variables that need to be evaluated first
 setlocal EnableDelayedExpansion &:# Make sure that !variables! get expanded
-set "STRING=!%1!" &:# !variables! not yet expanded; They will be on next line
+set "STRING=!%1!" &:# !variables! NOT yet expanded; They will be on next line
 %>>LOGFILE% echo.%INDENT%%STRING%
 goto:eof
 
@@ -1202,7 +1202,7 @@ set ">MSGOUT="
 :EchoVals.1
 set "EchoVals.LINE=" &:# Use a qualified name, in case the caller passes a variable called LINE
 for %%v in (%*) do set "EchoVals.LINE=!EchoVals.LINE! !%%v!"
-if not defined EchoVals.LINE set "EchoVals.LINE= " &:# Make sure there's a head space even if the variable list was empty
+if NOT defined EchoVals.LINE set "EchoVals.LINE= " &:# Make sure there's a head space even if the variable list was empty
 %>MSGOUT% echo.%INDENT%!EchoVals.LINE:~1!
 if defined LOGFILE %>>LOGFILE% echo.%INDENT%!EchoVals.LINE:~1!
 endlocal & exit /b
@@ -1217,14 +1217,14 @@ setlocal EnableDelayedExpansion
 set ">MSGOUT=!>MSGOUT.D[%DEBUG%]!"
 goto :EchoVals.1
 
-:# Echo the value of multiple strings on the same line. They must not contain double quotes.
+:# Echo the value of multiple strings on the same line. They must NOT contain double quotes.
 :EchoStrings	%1=Quoted_String, %2=Quoted_String, ...
 setlocal DisableDelayedExpansion
 set ">MSGOUT="
 :EchoStrings.1
 set "LINE=" &:# No need for a qualified name, since we don't use caller variables
 for %%v in (%*) do set "LINE=%LINE% %%~v"
-if not defined LINE set "LINE= " &:# Make sure there's a head space even if the string list was empty
+if NOT defined LINE set "LINE= " &:# Make sure there's a head space even if the string list was empty
 %>MSGOUT% echo.%INDENT%%LINE:~1%
 if defined LOGFILE %>>LOGFILE% echo.%INDENT%%LINE:~1%
 endlocal & exit /b
@@ -1267,14 +1267,14 @@ goto :EchoStrings.1
 :#                  Exec.SetErrorLevel	Change the current ERRORLEVEL	      #
 :#                                                                            #
 :#  Exec Arguments  -l          Log the output to the log file.               #
-:#                  -L          Do not send the output to the log file. (Dflt)#
+:#                  -L          Do NOT send the output to the log file. (Dflt)#
 :#                  -t          Tee all output to the log file if there's a   #
 :#                              usable tee.exe.                               #
 :#                              Known limitation: The exit code is always 0.  #
 :#                  -e          Always echo the command.		      #
 :#		    -f		Force executing the command, even in NOEXEC m.#
 :#                  -v          Trace the command in verbose mode. (Default)  #
-:#                  -V          Do not trace the command in verbose mode.     #
+:#                  -V          Do NOT trace the command in verbose mode.     #
 :#                  %*          The command and its arguments                 #
 :#                              Quote redirection operators. Ex:              #
 :#                              %EXEC% find /I "error" "<"logfile.txt ">"NUL  #
@@ -1362,7 +1362,7 @@ set "EXEC=%LCALL% :Exec"
 set "ECHO.X=%LCALL% :Echo.X"
 set "ECHO.XD=%LCALL% :Echo.XD"
 set "ECHO.XVD=%LCALL% :Echo.XVD"
-if not .%NOEXEC%.==.1. set "NOEXEC=0"
+if NOT .%NOEXEC%.==.1. set "NOEXEC=0"
 :# Quick and simple DO macros, supporting a single command, no redirections, no tricky chars!
 set _DO=%MACRO%     ( %LCALL% :Echo     %!%MACRO.ARGS%!% %&% %ON_MACRO_EXIT%%!%MACRO.ARGS%!%%/ON_MACRO_EXIT% ) %/MACRO%
 set _DO.D=%MACRO%   ( %LCALL% :Echo.D   %!%MACRO.ARGS%!% %&% %ON_MACRO_EXIT%%!%MACRO.ARGS%!%%/ON_MACRO_EXIT% ) %/MACRO%
@@ -1374,7 +1374,7 @@ set "XEXEC@=%XCALL% :Exec.ExecVar"
 :# Check if there's a tee.exe program available
 :# set "Exec.HaveTee=0"
 :# tee.exe --help >NUL 2>NUL
-:# if not errorlevel 1 set "Exec.HaveTee=1"
+:# if NOT errorlevel 1 set "Exec.HaveTee=1"
 for %%t in (tee.exe) do set "Exec.tee=%%~$PATH:t"
 :# Initialize ERRORLEVEL with known values
 set "TRUE.EXE=(call,)"	&:# Macro to silently set ERRORLEVEL to 0
@@ -1415,14 +1415,14 @@ goto :Echo.Log
 exit /b %1
 
 :# Execute a command, logging its output.
-:# Use for informative commands that should always be run, even in NOEXEC mode. 
+:# Use for informative commands that should always be run, even in NOEXEC mode.
 :Do
 set "Exec.ErrorLevel=%ERRORLEVEL%" &:# Save the initial errorlevel
 setlocal EnableExtensions DisableDelayedExpansion &:# Clears the errorlevel
 %IF_NOEXEC% call :Exec.On
 goto :Exec.Start
 
-:# Execute critical operations that should not be run in NOEXEC mode.
+:# Execute critical operations that should NOT be run in NOEXEC mode.
 :# Version supporting input and output redirections, and pipes.
 :# Redirection operators MUST be surrounded by quotes. Ex: "<" or ">" or ">>"
 :Exec
@@ -1433,14 +1433,14 @@ set "Exec.NOREDIR=%NOREDIR%"
 set "Exec.Redir="				&:# The selected redirection. Default: none
 set "Exec.2Redir=>>%LOGFILE%,2>&1"		&:# What to change it to, to enable redirection
 if .%NOREDIR%.==.1. set "Exec.2Redir="		&:# Several cases forbid redirection
-if not defined LOGFILE set "Exec.2Redir="
+if NOT defined LOGFILE set "Exec.2Redir="
 if /i .%LOGFILE%.==.NUL. set "Exec.2Redir="
 set "Exec.IF_VERBOSE=%IF_VERBOSE%"		&:# Echo the command in verbose mode
 set "Exec.IF_EXEC=%IF_EXEC%"			&:# IF_EXEC macro
 set "Exec.IF_NOEXEC=%IF_NOEXEC%"		&:# IF_NOEXEC macro
 :# Record the command-line to execute.
 :# Never comment (set Exec.cmd) lines themselves, to avoid appending extra spaces.
-:# Use %*, but not %1 ... %9, because %N miss non-white argument separators like = , ;
+:# Use %*, but NOT %1 ... %9, because %N miss non-white argument separators like = , ;
 set ^"Exec.Cmd=%*^" &:# Doubles ^carets within "quoted" strings, and halves those outside
 set ^"Exec.Cmd=%Exec.Cmd:^^=^%^" &:# Fix the # of ^carets within "quoted" strings
 :# Process optional arguments
@@ -1452,7 +1452,7 @@ for /f "tokens=1* delims= " %%a in ("-!Exec.Cmd:*%1=!") do endlocal & set Exec.C
 shift
 :Exec.GetArgs
 if "%~1" equ "-l" set "Exec.Redir=%Exec.2Redir%" & goto :Exec.NextArg :# Do send the output to the log file
-if "%~1" equ "-L" set "Exec.Redir=" & goto :Exec.NextArg :# Do not send the output to the log file
+if "%~1" equ "-L" set "Exec.Redir=" & goto :Exec.NextArg :# Do NOT send the output to the log file
 if "%~1" equ "-t" if defined Exec.2Redir ( :# Tee the output to the log file
   :# Warning: This prevents from getting the command exit code!
   if defined Exec.tee set "Exec.Redir= 2>&1 | %Exec.tee% -a %LOGFILE%"
@@ -1461,7 +1461,7 @@ if "%~1" equ "-t" if defined Exec.2Redir ( :# Tee the output to the log file
 if "%~1" equ "-e" set "Exec.IF_VERBOSE=if 1==1" & goto :Exec.NextArg :# Always echo the command
 if "%~1" equ "-f" set "Exec.IF_EXEC=if 1==1" & set "Exec.IF_NOEXEC=if 0==1" & goto :Exec.NextArg :# Always execute the command
 if "%~1" equ "-v" set "Exec.IF_VERBOSE=%IF_VERBOSE%" & goto :Exec.NextArg :# Echo the command in verbose mode
-if "%~1" equ "-V" set "Exec.IF_VERBOSE=if 0==1" & goto :Exec.NextArg :# Do not echo the command in verbose mode
+if "%~1" equ "-V" set "Exec.IF_VERBOSE=if 0==1" & goto :Exec.NextArg :# Do NOT echo the command in verbose mode
 :# Anything else is part of the command. Prepare to display it and run it.
 :# First stage: Split multi-char ops ">>" "2>" "2>>". Make sure to keep ">" signs quoted every time.
 :# Do NOT use surrounding quotes for these set commands, else quoted arguments will break.
@@ -1470,8 +1470,8 @@ set Exec.Cmd=%Exec.Cmd:">>&"=">"">""&"%
 set Exec.Cmd=%Exec.Cmd:">&"=">""&"%
 :# If there are output redirections, then cancel any attempt at redirecting output to the log file.
 set "Exec.Cmd1=%Exec.Cmd:"=%" &:# Remove quotes in the command string, to allow quoting the whole string.
-if not "%Exec.Cmd1:>=%" equ "%Exec.Cmd1%" set "Exec.Redir="
-if defined Exec.Redir set "Exec.NOREDIR=1" &:# make sure child scripts do not try to redirect output again 
+if "%Exec.Cmd1:>=%" neq "%Exec.Cmd1%" set "Exec.Redir="
+if defined Exec.Redir set "Exec.NOREDIR=1" &:# make sure child scripts do NOT try to redirect output again
 :# Second stage: Convert quoted redirection operators (Ex: ">") to a usable (Ex: >) and a displayable (Ex: ^>) value.
 :# Must be done once for each of the four < > | & operators.
 :# Since each operation removes half of ^ escape characters, then insert
@@ -1553,7 +1553,7 @@ for /f %%A in ('cls') do set "FF=%%A"
 :# The following commands end up with a loop that works identically both
 :# inside a batch file, and at the cmd.exe prompt.
 set "@=%"	&:# Ends up as % at cmd prompt, or undefined in a batch
-if not defined @ set "@=%%"	&:# If undefined (in a batch) redefine as %
+if NOT defined @ set "@=%%"	&:# If undefined (in a batch) redefine as %
 for /l %@%N in (1,1,3) do @echo Loop %@%N   &:# Display the loop number
 
 :#----------------------------------------------------------------------------#
@@ -1634,7 +1634,7 @@ set ^"/n=^^^%LF%%LF%^%LF%%LF%"
 set ^"//n=^^^^^^%/n%%/n%^^%/n%%/n%"
 set ^"///n=^^^^^^^^^^^^%//n%%//n%^^^^%//n%%//n%"
 set ^"////n=^^^^^^^^^^^^^^^^^^^^^^^^%///n%%///n%^^^^^^^^%///n%%///n%"
-:: set ^"//n=^^^^^^^%LF%%LF%^%LF%%LF%^^^%LF%%LF%^%LF%%LF%"
+rem set ^"//n=^^^^^^^%LF%%LF%^%LF%%LF%^^^%LF%%LF%^%LF%%LF%"
 
 @rem newline macros (linefeed + line continuation)
 set ^"\n=%//n%^^"
@@ -1644,12 +1644,12 @@ set ^"\\\n=%////n%^^"
 setlocal enableDelayedExpansion
 
 @rem check inline expansion
-echo(
+echo.
 set ^"NL=^%LF%%LF%"
 if '!LF!'=='!NL!' echo '^^!LF^^!'    == '^^^^%%LF%%%%LF%%'
 
 @rem check linefeed macros
-echo(
+echo.
 set "ddx=!/n!" & set "edx=!LF!"
 call :check && (echo '%%/n%%'    == '^^!LF^^!') || (echo ???)
 set "ddx=!//n!" & set "edx=!/n!"
@@ -1660,7 +1660,7 @@ set "ddx=!////n!" & set "edx=!///n!"
 call :check && (echo '%%////n%%' == '^^!///n^^!') || (echo ???)
 
 @rem check newline macros
-echo(
+echo.
 set "ddx=!\n!" & set "edx=!LF!^"
 call :check && (echo '%%\n%%'    == '^^!LF^^!^^^^') || (echo ???)
 set "ddx=!\\n!" & set "edx=!/n!^"
@@ -1692,10 +1692,10 @@ if "!dvar!" equ "!evar!" (call;) else (call) & goto:eof
 :#
 :#  2) Trailing control characters are stripped from each line.
 :#
-:#  3) Lines will not appear on the console until a newline is issued, or
+:#  3) Lines will NOT appear on the console until a newline is issued, or
 :#     when the input is exhaused. This can be a problem if the left side of
 :#     the pipe issues a prompt and then waits for user input on the same line.
-:#     The prompt will not appear until after the input is provided.
+:#     The prompt will NOT appear until after the input is provided.
 :#
 :# From http://www.dostips.com/forum/viewtopic.php?p=32615#p32615
 :#----------------------------------------------------------------------------#
@@ -1714,7 +1714,7 @@ set "teeTemp=%temp%\tee%time::=_%"
       copy /y nul "%%~nxF" >nul
       for /f "tokens=2 delims=(/" %%A in (
         '^<nul copy /-y nul "%%~nxF"'
-      ) do if not defined yes set "yes=%%A"
+      ) do if NOT defined yes set "yes=%%A"
       popd
     )
     for /f %%A in ("!yes!") do (
@@ -1742,8 +1742,8 @@ for /l %%. in () do (
   if defined ln (
     if "!ln:~0,4!" equ ":END" exit
     set "ln=!ln:*]=!"
-    (echo(!ln!)>&7
-    if defined redirect (echo(!ln!)>&8
+    (echo.!ln!)>&7
+    if defined redirect (echo.!ln!)>&8
   )
 )
 
@@ -1757,7 +1757,7 @@ for /l %%. in () do (
 :#                                                                            #
 :#  Note            Allows testing if enabling delayed expansion works.       #
 :#                  But, contrary to what I thought when I created the        #
-:#		    routine, the effect does not survive the return.          #
+:#		    routine, the effect does NOT survive the return.          #
 :#                  So this routine CANNOT be used to enable variable         #
 :#                  expansion.                                                #
 :#                                                                            #
@@ -1792,16 +1792,16 @@ if errorlevel 1 (
   >&2 echo or set HKCU\Software\Microsoft\Command Processor\DelayedExpansion=1
   exit /b 1
 )
-:# Check if delayed variable expansion works now 
+:# Check if delayed variable expansion works now
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" goto :EnableExpansionFailed
+  if "!VAR!" neq "after" goto :EnableExpansionFailed
 )
 :# Success
 exit /b 0
 
-:# Test proving that the :EnableExpansion routine does not have lasting effects.
+:# Test proving that the :EnableExpansion routine does NOT have lasting effects.
 :EnableExpansion.Test
 setlocal EnableExtensions DisableDelayedExpansion
 echo :# First attempt with variable expansion disabled
@@ -1832,7 +1832,7 @@ if errorlevel 1 (
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" (
+  if "!VAR!" neq "after" (
     >&2 echo Error: Delayed environment variable expansion must be enabled.
     >&2 echo Please restart your cmd.exe shell with the /V option,
     >&2 echo or set HKLM\Software\Microsoft\Command Processor\DelayedExpansion=1
@@ -1937,10 +1937,10 @@ goto:eof
 :#                  a single dash "-" and no CRLF in the end.                 #
 :#                                                                            #
 :#                  Known limitations:                                        #
-:#                  Backspaces do not work across a line break, so the        #
+:#                  Backspaces do NOT work across a line break, so the        #
 :#                  technique can have problems if the line wraps.            #
 :#                  For example, printing a string with length between 74-79  #
-:#                  will not work properly in a 80-columns console.           #
+:#                  will NOT work properly in a 80-columns console.           #
 :#                                                                            #
 :#  History                                                                   #
 :#   2011-03-17 JEB Published the first sample on stackoverflow.com           #
@@ -1961,7 +1961,7 @@ goto:eof
 :#                  Removed the . in the temp file. findstr can search a BS.  #
 :#                  Removed a call level to improve performance a bit.        #
 :#                  Added comments.                                           #
-:#                  New implementation not using a temporary file.            #
+:#                  New implementation NOT using a temporary file.            #
 :#   2012-10-06 JFL Fixed the problem with displaying "!".                    #
 :#   2012-11-13 JFL Copy the string into the log file, if defined.            #
 :#   2017-01-16 JFL Use bright colors for [Success]/[Warning]/[Failure],      #
@@ -1969,7 +1969,7 @@ goto:eof
 :#   2017-01-25 JFL Changed the final string to valid PowerShell comment ##-  #
 :#                                                                            #
 :#----------------------------------------------------------------------------#
- 
+
 call :Echo.Color.Init
 goto Echo.Color.End
 
@@ -1989,15 +1989,15 @@ pushd "%ECHO.DIR%"
 findstr /p /r /a:%~1 "^^##-" "!str!\..\!ECHO.FILE!" nul
 popd
 :# Remove the name of this script from the output. (Dependant on its length.)
-for /l %%n in (1,1,24) do if not "!ECHO.FILE:~%%n!" equ "" <nul set /p "=%ECHO.DEL%"
+for /l %%n in (1,1,24) do if "!ECHO.FILE:~%%n!" neq "" <nul set /p "=%ECHO.DEL%"
 :# Remove the other unwanted characters "\..\: ##-"
 <nul set /p "=%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%%ECHO.DEL%"
 :# Append the optional CRLF
-if not "%~3" equ "" echo.&if defined LOGFILE %>>LOGFILE% echo.
+if "%~3" neq "" echo.&if defined LOGFILE %>>LOGFILE% echo.
 endlocal & endlocal & goto:eof
 
 :Echo.Color.Var %1=Color %2=StrVar [%3=/n]
-if not defined %~2 goto:eof
+if NOT defined %~2 goto:eof
 setlocal enableDelayedExpansion
 set "str=!%~2!"
 goto :Echo.Color.2
@@ -2026,7 +2026,7 @@ set "txt=^" & %ECHO.COLOR%.Var 0c txt
 %ECHO.COLOR% 1d ^""" & rem # Escape the '"' character
 %ECHO.COLOR% 1e "*"
 %ECHO.COLOR% 1f "?"
-%ECHO.COLOR% 2a "!" & rem # This one does not need escaping in disableDelayedExpansion mode
+%ECHO.COLOR% 2a "!" & rem # This one does NOT need escaping in disableDelayedExpansion mode
 %ECHO.COLOR% 2b "."
 %ECHO.COLOR% 2c ".."
 %ECHO.COLOR% 2d "/"
@@ -2037,8 +2037,8 @@ set complex="c:\hello world!/.\..\\a//^<%%>&|!" /^^^<%%^>^&^|!\
 %ECHO.COLOR%.Var 74 complex /n
 goto:eof
 
-:# Experimental code that does not work...
-:# Check if this script contains a trailing :eof. If not, add one.
+:# Experimental code that does NOT work...
+:# Check if this script contains a trailing :eof. If NOT, add one.
 set "ECHO.FULL=%ECHO.DIR%%ECHO.FILE%"
 findstr /r "^^-" "%ECHO.FULL%" >NUL 2>&1
 if errorlevel 1 (
@@ -2050,7 +2050,7 @@ echo three
   for /f "delims=" %%s in ('findstr /r "^-" "%ECHO.FULL%"') do set "ECHO.TMP=%%s"
   %ECHOVARS% ECHO.TMP
 )
-  if not "%ECHO.TMP:~1%" equ "" >&2 echo Error: Please remove all CRLF after the trailing -
+  if "%ECHO.TMP:~1%" neq "" >&2 echo Error: Please remove all CRLF after the trailing -
 
 :#----------------------------------------------------------------------------#
 
@@ -2063,7 +2063,7 @@ set "strvar=str"
 goto :Echo.Color1.2
 
 :Echo.Color1.Var %1=Color %2=StrVar [%3=/n]
-if not defined %~2 goto:eof
+if NOT defined %~2 goto:eof
 setlocal enableDelayedExpansion
 set "strvar=%~2"
 :Echo.Color1.2
@@ -2074,7 +2074,7 @@ set "str=!str:"=\"!"
 pushd "%TEMP%"
 findstr /P /L /A:%~1 "%ECHO.BS%" "!str!\..\x" nul
 popd
-if not "%~3" equ "" echo.
+if "%~3" neq "" echo.
 endlocal & goto:eof
 
 :Echo.Color1.Init
@@ -2143,7 +2143,7 @@ set "ECHOF=call :EchoF"
 goto:eof
 
 :EchoF fmt str1 str2 ... -- outputs columns of strings right or left aligned
-::                       -- fmt [in] - format string specifying column width and alignment. Ex: "[-10] / [10] / []"
+rem                       -- fmt [in] - format string specifying column width and alignment. Ex: "[-10] / [10] / []"
 :$created 20060101 :$changed 20091130 :$categories Echo
 :# Updated 20121026 JFL: Added tons of comments.
 :#                       Fixed a bug if invoked in a loop on %%c or %%f or %%l or %%s or %%i.
@@ -2155,13 +2155,13 @@ set ";line="   &:# Output string. Initially empty.
 set ";spac=                                                     "
 set ";i=1"     &:# Argument index. 1=fmt; 2=str1; ...
 :# %ECHOVARS.D% ";fmt" ";line" ";spac" ";i"
-:# For each substring in fmt split at each "]"... (So looking like "Fixed text[SIZE]".) 
+:# For each substring in fmt split at each "]"... (So looking like "Fixed text[SIZE]".)
 for /f "tokens=1,2 delims=[" %%a in ('"echo..%;fmt:]=&echo..%"') do ( :# %%a=Fixed text before "["; %%b=size after "["
   call set /a ";i=%%;i%%+1"                            &:# Compute the next str argument index.
   call call set ";subst=%%%%~%%;i%%%;spac%%%%%~%%;i%%" &:# Append that str at both ends of the spacer
 :# %ECHOVARS.D% ";i" ";subst"
   if "%%b" equ "" (         :# Unspecified width. Use the string as it is.
-    call call set ";subst=%%%%~%%;i%%" 
+    call call set ";subst=%%%%~%%;i%%"
   ) else if %%b0 GEQ 0 ( :# Cut a left-aligned field at the requested size.
     call set ";subst=%%;subst:~0,%%b%%"
   ) else (               :# Cut a right-aligned field at the requested size.
@@ -2177,7 +2177,7 @@ endlocal & exit /b
 :# Original Format function from dostips.com
 
 :Format fmt str1 str2 ... -- outputs columns of strings right or left aligned
-::                        -- fmt [in] - format string specifying column width and alignment, i.e. "[-10][10][10]"
+rem                        -- fmt [in] - format string specifying column width and alignment, i.e. "[-10][10][10]"
 :$created 20060101 :$changed 20091130 :$categories Echo
 :$source http://www.dostips.com
 SETLOCAL
@@ -2189,7 +2189,7 @@ for /f "tokens=1,2 delims=[" %%a in ('"echo..%fmt:]=&echo..%"') do (
     set /a i+=1
     call call set "subst=%%%%~%%i%%%spac%%%%%~%%i%%"
     if %%b0 GEQ 0 (call set "subst=%%subst:~0,%%b%%"
-    ) ELSE        (call set "subst=%%subst:~%%b%%")
+    ) else        (call set "subst=%%subst:~%%b%%")
     call set "const=%%a"
     call set "line=%%line%%%%const:~1%%%%subst%%"
 )
@@ -2227,7 +2227,7 @@ if "%~2" equ "" %RETURN% 1 &:# Missing argument
 set "%~2=0"
 if defined %~1 for /l %%b in (12,-1,0) do (
   set /a "i=(%~2|(1<<%%b))-1"
-  for %%i in (!i!) do if not "!%~1:~%%i,1!" equ "" set /a "%~2=%%i+1"
+  for %%i in (!i!) do if "!%~1:~%%i,1!" neq "" set /a "%~2=%%i+1"
 )
 %RETURN%
 
@@ -2236,7 +2236,7 @@ setlocal EnableDelayedExpansion
 set "len=0"
 if defined %~1 for /l %%b in (12,-1,0) do (
   set /a "i=(len|(1<<%%b))-1"
-  for %%i in (!i!) do if not "!%~1:~%%i,1!" equ "" set /a "len=%%i+1"
+  for %%i in (!i!) do if "!%~1:~%%i,1!" neq "" set /a "len=%%i+1"
 )
 endlocal & if "%~2" neq "" set "%~2=%len%"
 exit /b
@@ -2268,7 +2268,7 @@ exit /b
 :strcpy
 %FUNCTION%
 %UPVAR% %~1
-if not "%~1" equ "%~2" call set "%~1=%%%~2%%"
+if "%~1" neq "%~2" call set "%~1=%%%~2%%"
 %RETURN%
 
 :# Append the content of a variable to another one
@@ -2299,7 +2299,7 @@ call set "%~1=%%%~1%%%%%~2%%"
 :# %1 = Variable name
 :strlwr
 %FUNCTION%
-if not defined %~1 %RETURN%
+if NOT defined %~1 %RETURN%
 %UPVAR% %~1
 for %%a in ("A=a" "B=b" "C=c" "D=d" "E=e" "F=f" "G=g" "H=h" "I=i"
             "J=j" "K=k" "L=l" "M=m" "N=n" "O=o" "P=p" "Q=q" "R=r"
@@ -2314,7 +2314,7 @@ for %%a in ("A=a" "B=b" "C=c" "D=d" "E=e" "F=f" "G=g" "H=h" "I=i"
 :# %1 = Variable name
 :strupr
 %FUNCTION%
-if not defined %~1 %RETURN%
+if NOT defined %~1 %RETURN%
 %UPVAR% %~1
 for %%a in ("a=A" "b=B" "c=C" "d=D" "e=E" "f=F" "g=G" "h=H" "i=I"
             "j=J" "k=K" "l=L" "m=M" "n=N" "o=O" "p=P" "q=Q" "r=R"
@@ -2333,8 +2333,8 @@ set "C0=!%~2!"
 set "I=0"
 :strchr.loop
 set "C=!%~1:~%I%,1!"
-if not defined C set "I=-1" & goto :strchr.exit
-if not "%C%%C%" equ "%C0%%C0%" set /a "I+=1" & goto :strchr.loop
+if NOT defined C set "I=-1" & goto :strchr.exit
+if "%C%%C%" neq "%C0%%C0%" set /a "I+=1" & goto :strchr.loop
 :strchr.exit
 endlocal & if "%~3" neq "" set "%~3=%I%"
 exit /b
@@ -2359,7 +2359,7 @@ set "I=0"
 :strstr.loop
 if %I% GTR %IMAX% set "I=-1" & goto :strstr.exit
 set "SS=!%~1:~%I%,%L%!"
-if not "!SS!" equ "!%~2!" set /a "I+=1" & goto :strstr.loop
+if "!SS!" neq "!%~2!" set /a "I+=1" & goto :strstr.loop
 :strstr.exit
 %ECHO.D% return %~3=%I%
 endlocal & if "%~3" neq "" set "%~3=%I%"
@@ -2388,10 +2388,10 @@ exit /b
 :# %2 = Characters to be trimmed. Default: space and tab
 :trimleft
 %FUNCTION% EnableExtensions DisableDelayedExpansion
-if not defined %~1 %RETURN%
+if NOT defined %~1 %RETURN%
 call set "string=%%%~1%%"
 set "chars=%~2"
-if not defined chars set "chars=	 "
+if NOT defined chars set "chars=	 "
 :# %ECHOVARS.D% %~1 chars
 for /f "tokens=* delims=%chars%" %%a in ("%string%") do set "string=%%a"
 %UPVAR% %~1
@@ -2403,13 +2403,13 @@ set "%~1=%string%"
 :# %2 = Characters to be trimmed. Default: space and tab
 :trimright
 %FUNCTION% EnableExtensions DisableDelayedExpansion
-if not defined %~1 %RETURN%
+if NOT defined %~1 %RETURN%
 call set "string=%%%~1%%"
 set "chars=%~2"
-if not defined chars set "chars=	 "
+if NOT defined chars set "chars=	 "
 :# %ECHOVARS.D% RETVAR %~1 string chars DEBUG.RETVARS
 :trimright_loop
-if not defined string goto trimright_exit
+if NOT defined string goto trimright_exit
 for /f "delims=%chars%" %%a in ("%string:~-1%") do goto trimright_exit
 set "string=%string:~0,-1%"
 goto trimright_loop
@@ -2423,7 +2423,7 @@ set "%~1=%string%"
 :# %2 = Characters to be trimmed. Default: space and tab
 :trim
 %FUNCTION%
-if not defined %~1 %RETURN%
+if NOT defined %~1 %RETURN%
 call :trimleft "%~1" "%~2"
 call :trimright "%~1" "%~2"
 %UPVAR% %~1
@@ -2446,7 +2446,7 @@ call :trimright "%~1" "%~2"
 %FUNCTION% EnableDelayedExpansion
 set "VARNAME=%~1"
 %UPVAR% %VARNAME%
-set "%VARNAME%=!%VARNAME%!::" &:# Note that :: cannot appear in a pathname
+set "%VARNAME%=!%VARNAME%!::" &:# Note that rem cannot appear in a pathname
 set "%VARNAME%=!%VARNAME%:\::=::!"
 set "%VARNAME%=!%VARNAME%:::=!"
 %RETURN%
@@ -2479,12 +2479,12 @@ set "%VARNAME%=!%VARNAME%:::=!"
 :# Replace characters
 :# Advantage: Works with CHAR ':' '*' '~'
 :# Advantage: The string can contain LF and '"' characters
-:# Drawback: Does not work with '='.
+:# Drawback: Does NOT work with '='.
 :ReplaceChars %1=STRVAR  %2=CHAR  %3=REPLACEMENT  %4=RETVAR (Default: STRVAR)
 %FUNCTION% EnableDelayedExpansion
 set "STRING=!%~1!"
 set "REPL=%~3"
-set "RETVAR=%~4" & if not defined RETVAR set "RETVAR=%~1"
+set "RETVAR=%~4" & if NOT defined RETVAR set "RETVAR=%~1"
 set "RESULT="
 if defined STRING (
   call :strlen.q STRING SLEN	&:# SLEN = Full string length
@@ -2509,12 +2509,12 @@ set "!RETVAR!=!RESULT!"
 :# Replace delimiter sets
 :# Advantage: Simple and fast; Works with CHAR '=' ':'
 :# Drawback: Multiple consecutive CHARs are replaced by a single REPL string.
-:# Drawback: Does not work on strings with LF or '!' characters.
+:# Drawback: Does NOT work on strings with LF or '!' characters.
 :ReplaceDelimSets %1=STRVAR  %2=CHAR  %3=REPLACEMENT  %4=RETVAR (Default: STRVAR)
 %FUNCTION% EnableDelayedExpansion
-set "STRING=[!%~1:^=^^^^!]" &:# Make mure the string does not begin or end with delims
+set "STRING=[!%~1:^=^^^^!]" &:# Make mure the string does NOT begin or end with delims
 set "REPL=%~3"
-set "RETVAR=%~4" & if not defined RETVAR set "RETVAR=%~1"
+set "RETVAR=%~4" & if NOT defined RETVAR set "RETVAR=%~1"
 set "RESULT="
 :ReplaceDelimSets.loop
 for /f "delims=%~2 tokens=1*" %%s in ("!STRING!") do (
@@ -2532,12 +2532,12 @@ set "!RETVAR!=!RESULT:~1,-1!"
 :# Replace delimiters
 :# Inspired by npocmaka post: http://www.dostips.com/forum/viewtopic.php?p=29901#p29901
 :# Advantage: Works with CHAR '=' ':'
-:# Drawback: Does not work on strings with LF or '"' characters.
+:# Drawback: Does NOT work on strings with LF or '"' characters.
 :ReplaceDelims %1=STRVAR  %2=CHAR  %3=REPLACEMENT  %4=RETVAR (Default: STRVAR)
 %FUNCTION% DisableDelayedExpansion
-call set "STRING=[%%%~1%%]"	&:# Make mure the string does not begin or end with delims
+call set "STRING=[%%%~1%%]"	&:# Make mure the string does NOT begin or end with delims
 set "REPL=%~3"
-set "RETVAR=%~4" & if not defined RETVAR set "RETVAR=%~1"
+set "RETVAR=%~4" & if NOT defined RETVAR set "RETVAR=%~1"
 set "RESULT="
 call :strlen.q STRING SLEN	&:# SLEN = Full string length
 :ReplaceDelims.loop
@@ -2563,16 +2563,16 @@ set "%RETVAR%=%RESULT:~1,-1%"
 :# Replace = characters
 :# Advantage: No dependency on the :strlen routine
 :# Drawback: Max 256 = characters
-:# Drawback: Does not work on strings with LF or '!' characters
+:# Drawback: Does NOT work on strings with LF or '!' characters
 :ReplaceEquals %1=STRVAR %2=REPVAR or "=REPLACEMENT" %3=RETVAR (Default: STRVAR)
-if not defined %1 exit /b &:# Avoid issues with empty strings
+if NOT defined %1 exit /b &:# Avoid issues with empty strings
 %FUNCTION% EnableDelayedExpansion
 for /F "delims==" %%v in ('set $_ 2^>NUL') do set "%%v=" &:# Clear existing $_XXX variables
 :# $_=input  $f=Termination flag  $v=output value  $r=replacement var
 set "$_=!%~1!." & set "$f=1" & set "$v=" & set "$r=%~2"
 if /i "!$_:%$_%=%$_%!" equ "!$_!" %RETURN% 0	&:# No = sign in $_. Return now to save time
-if defined $r if not "!$r:~0,1!" equ "=" (set "$r=!%~2!") else set "$r=!$r:~1!" &:# $r=replacement value
-set "$o=%~3" & if not defined $o set "$o=%~1"
+if defined $r if "!$r:~0,1!" neq "=" (set "$r=!%~2!") else set "$r=!$r:~1!" &:# $r=replacement value
+set "$o=%~3" & if NOT defined $o set "$o=%~1"
 for /L %%i in (0,1,256) do if defined $f (
   for /F "delims==" %%a in ('set $_') do (
     set "$a=%%a" & set "$b=!%%a!" &:# $a=$_variable name  $b=its value=all that followed the first =
@@ -2652,9 +2652,9 @@ if "%~2" equ "" %RETURN%
 setlocal
 call set "string=%%%~2%%"
 set "chars=%~3"
-if not defined chars set "chars=	 "
+if NOT defined chars set "chars=	 "
 set "list="
-if not defined string goto split_exit
+if NOT defined string goto split_exit
 :# If the string begins with separator characters, begin the list with an empty substring.
 set head_chars=true
 for /f "delims=%chars%" %%a in ("%string:~0,1%") do set head_chars=false
@@ -2663,7 +2663,7 @@ if %head_chars%==true (
   :# Remove the head separators. Necessary to correctly detect the tail separators.
   for /f "tokens=* delims=%chars%" %%a in ("%string%") do set "string=%%a"
 )
-if not defined string goto split_exit
+if NOT defined string goto split_exit
 :# If the string ends with separator characters, prepare to append an empty substring to the list.
 set tail_chars=true
 for /f "delims=%chars%" %%a in ("%string:~-1%") do set tail_chars=false
@@ -2689,7 +2689,7 @@ for %%i in (%foreach_list%) do (set "%1=%%i" & %~3)
 :lsort LIST_NAME [RETVAR]
 %FUNCTION% EnableExtensions EnableDelayedExpansion
 set "RETVAR=%~2"
-if not defined RETVAR set "RETVAR=%~1"
+if NOT defined RETVAR set "RETVAR=%~1"
 %UPVAR% %RETVAR%
 set "SORTED_LIST="
 %ECHOVARS.D% %~1
@@ -2719,7 +2719,7 @@ exit /b
 :#                  be quoted.                                                #
 :#                  I've added "@" that needs quoting if first char in cmd.   #
 :#                                                                            #
-:#                  Although this is not the objective of this function,      #
+:#                  Although this is NOT the objective of this function,      #
 :#                  some effort is made to also produce a usable string if    #
 :#                  the input contains characters that are invalid in file    #
 :#                  names. Inner '"' are removed. "|&<>" are quoted.	      #
@@ -2740,24 +2740,24 @@ exit /b
 :condquote	 %1=Input variable. %2=Opt. output variable.
 setlocal EnableExtensions Disabledelayedexpansion
 set "RETVAR=%~2"
-if not defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
+if NOT defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
 call set "P=%%%~1%%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=""" & goto :condquote_ret
+if NOT defined P set "P=""" & goto :condquote_ret
 :# Remove double quotes inside P. (Fails if P is empty)
 set "P=%P:"=%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=""" & goto :condquote_ret
+if NOT defined P set "P=""" & goto :condquote_ret
 :# Look for any special character that needs quoting
 :# Added "@" that needs quoting ahead of commands.
-:# Added "|&<>" that are not valid in file names, but that do need quoting if used in an argument string.
+:# Added "|&<>" that are NOT valid in file names, but that do need quoting if used in an argument string.
 echo."%P%"|findstr /C:" " /C:"&" /C:"(" /C:")" /C:"[" /C:"]" /C:"{" /C:"}" /C:"^^" /C:"=" /C:";" /C:"!" /C:"'" /C:"+" /C:"," /C:"`" /C:"~" /C:"@" /C:"|" /C:"&" /C:"<" /C:">" >NUL
-if not errorlevel 1 set P="%P%"
+if NOT errorlevel 1 set P="%P%"
 :condquote_ret
 :# Contrary to the general rule, do NOT enclose the set commands below in "quotes",
 :# because this interferes with the quoting already added above. This would
 :# fail if the quoted string contained an & character.
-:# But because of this, do not leave any space around & separators.
+:# But because of this, do NOT leave any space around & separators.
 endlocal&set %RETVAR%=%P%&exit /b 0
 
 :#----------------------------------------------------------------------------#
@@ -2767,18 +2767,18 @@ endlocal&set %RETVAR%=%P%&exit /b 0
 :condquote	 %1=Input variable. %2=Opt. output variable.
 %FUNCTION% EnableExtensions EnableDelayedExpansion
 set "RETVAR=%~2"
-if not defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
+if NOT defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
 %UPVAR% %RETVAR%
 set "P=!%~1!"
 :# Remove double quotes inside P. (Fails if P is empty, so skip this in this case)
 if defined P set ^"P=!P:"=!"
 :# If the value is empty, don't go any further.
-if not defined P set "P=""" & goto :condquote_ret
+if NOT defined P set "P=""" & goto :condquote_ret
 :# Look for any special character that needs "quoting". See list from (cmd /?).
 :# Added "@" that needs quoting ahead of commands.
-:# Added "|&<>" that are not valid in file names, but that do need quoting if used in an argument string.
+:# Added "|&<>" that are NOT valid in file names, but that do need quoting if used in an argument string.
 echo."!P!"|findstr /C:" " /C:"&" /C:"(" /C:")" /C:"[" /C:"]" /C:"{" /C:"}" /C:"^^" /C:"=" /C:";" /C:"!" /C:"'" /C:"+" /C:"," /C:"`" /C:"~" /C:"@" /C:"|" /C:"&" /C:"<" /C:">" >NUL
-if not errorlevel 1 set P="!P!"
+if NOT errorlevel 1 set P="!P!"
 :condquote_ret
 set "%RETVAR%=!P!"
 %RETURN% 0
@@ -2792,16 +2792,16 @@ set "%RETVAR%=!P!"
 setlocal enableextensions
 call set "P=%%%~1%%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=""" & goto :condquote_ret
+if NOT defined P set "P=""" & goto :condquote_ret
 :# Remove double quotes inside P. (Fails if P is empty)
 set "P=%P:"=%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=""" & goto :condquote_ret
+if NOT defined P set "P=""" & goto :condquote_ret
 set RETVAR=%~2
 if "%RETVAR%" equ "" set RETVAR=%~1
 for %%c in (" " "&" "(" ")" "@" "," ";" "[" "]" "{" "}" "=" "'" "+" "`" "~") do (
   :# Note: Cannot directly nest for loops, due to incorrect handling of /f in the inner loop.
-  cmd /c "for /f "tokens=1,* delims=%%~c" %%a in (".%%P%%.") do @if not "%%b" equ "" exit 1"
+  cmd /c "for /f "tokens=1,* delims=%%~c" %%a in (".%%P%%.") do @if "%%b" neq "" exit 1"
   if errorlevel 1 (
     set P="%P%"
     goto :condquote_ret
@@ -2811,7 +2811,7 @@ for %%c in (" " "&" "(" ")" "@" "," ";" "[" "]" "{" "}" "=" "'" "+" "`" "~") do 
 :# Contrary to the general rule, do NOT enclose the set command below in "quotes",
 :# because this interferes with the quoting already added above. This would
 :# fail if the quoted string contained an & character.
-:# But because of this, do not leave any space around & separators.
+:# But because of this, do NOT leave any space around & separators.
 endlocal&set RETVAL=%P%&set %RETVAR%=%P%&%RETURN%
 
 :#----------------------------------------------------------------------------#
@@ -2820,19 +2820,19 @@ endlocal&set RETVAL=%P%&set %RETVAR%=%P%&%RETURN%
 :condquote4PS	 %1=Input variable. %2=Opt. output variable.
 setlocal EnableExtensions Disabledelayedexpansion
 set "RETVAR=%~2"
-if not defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
+if NOT defined RETVAR set "RETVAR=%~1" &:# By default, change the input variable itself
 call set "P=%%%~1%%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=''" & goto :condquote4PS_ret
+if NOT defined P set "P=''" & goto :condquote4PS_ret
 :# Remove double quotes inside P. (Fails if P is empty)
 set "P=%P:"=%"
 :# If the value is empty, don't go any further.
-if not defined P set "P=''" & goto :condquote4PS_ret
+if NOT defined P set "P=''" & goto :condquote4PS_ret
 :# Look for any special character that needs quoting in batch
 :# Added "@" that needs quoting ahead of commands.
-:# Added "|&<>" that are not valid in file names, but that do need quoting if used in an argument string.
+:# Added "|&<>" that are NOT valid in file names, but that do need quoting if used in an argument string.
 echo."%P%"|findstr /C:" " /C:"&" /C:"(" /C:")" /C:"[" /C:"]" /C:"{" /C:"}" /C:"^^" /C:"=" /C:";" /C:"!" /C:"'" /C:"+" /C:"," /C:"`" /C:"~" /C:"@" /C:"|" /C:"&" /C:"<" /C:">" >NUL
-if not errorlevel 1 set "P='%P:'=''%'"
+if NOT errorlevel 1 set "P='%P:'=''%'"
 :condquote4PS_ret
 endlocal & set "%RETVAR%=%P%" & exit /b
 
@@ -2907,7 +2907,7 @@ ping -n %N% 127.0.0.1 >NUL 2>&1
 :# Function GetProcess: Set PID and TITLE with the current console PID and title string.
 :GetProcess
 %FUNCTION% EnableExtensions
-if not defined SFULL >&2 echo Function GetProcess error: Please set "SFULL=%%~0" in script initialization. & %RETURN% 1
+if NOT defined SFULL >&2 echo Function GetProcess error: Please set "SFULL=%%~0" in script initialization. & %RETURN% 1
 :# Get the list of command prompts titles
 for /f "tokens=2,9*" %%a in ('tasklist /v /nh /fi "IMAGENAME eq cmd.exe"') do set TITLE.%%a=%%c
 :# Change the current title to a statistically unique value
@@ -2917,14 +2917,14 @@ title %RDMTITLE%
 :# Find our PID
 set N=3
 :GetProcessAgain
-:# Note: Do not filter by title, because when running as administrator, there's a prefix: Administrator:
+:# Note: Do NOT filter by title, because when running as administrator, there's a prefix: Administrator:
 :#       And at any time, there's a temporary suffix: The name of the running script (This very script!) and its arguments.
 :# for /f "tokens=2" %%a in ('tasklist /v /nh /fi "WINDOWTITLE eq %RDMTITLE%"') do set PID=%%a
 for /f "tokens=2,9*" %%a in ('tasklist /v /nh /fi "IMAGENAME eq cmd.exe" ^| findstr "%RDMTITLE%"') do set "PID=%%a" & set "TITLENOW=%%c"
 :# Gotcha: Sometimes the above command returns a wrong TITLENOW, containing "N/A". (What would it be in localized versions of Windows?)
 :# Maybe there's a small (variable?) delay before and entry with the new title appears in Windows task list?
 :# Maybe it's another instance with the findstr command itself that disrupts the test?
-:# Anyway, double check the result, and try again up to 3 times if it's bad. 
+:# Anyway, double check the result, and try again up to 3 times if it's bad.
 echo "%TITLENOW%" | findstr "%RDMTITLE%" >nul
 if errorlevel 1 (
   if .%DEBUG%.==.1. (
@@ -2932,7 +2932,7 @@ if errorlevel 1 (
     :# Note: This tasklist has never returned an entry with N/A, but tests with teeing the initial tasklist above have.
     tasklist /v /nh /fi "IMAGENAME eq cmd.exe"
   )
-  if not %N%==0 (
+  if NOT %N%==0 (
     if .%DEBUG%.==.1. >&2 echo Scan cmd.exe windows titles again.
     set /a N=N-1
     goto GetProcessAgain
@@ -2957,7 +2957,7 @@ call set "PREFIX=%%TITLENOW:%RDMTITLE%=";rem %%
 :# Now trim the possible prefix and suffix from the title
 :# In the absence of a special char (like ^) to anchor the match string at the beginning,
 :# prefix the prefix with our random string, to avoid problems if the prefix string is repeated elsewhere in the string
-:# Additional gotcha: Initially there's 1 space between the prefix and title; 
+:# Additional gotcha: Initially there's 1 space between the prefix and title;
 :# but the title command always ends up putting 2 spaces there. So erase all spaces there.
 call :trimright PREFIX
 set "TITLE=%RDMTITLE% %TITLE%"
@@ -3005,7 +3005,7 @@ title %TITLE%
 :#  Arguments       %1 = Variable name. Default: PID                          #
 :#                                                                            #
 :#  Notes 	    Uses a lock file to make sure that two scripts running    #
-:#                  within 0.01s of each other do not get the same uid string.#
+:#                  within 0.01s of each other do NOT get the same uid string.#
 :#                  The instance that fails retries until it succeeds.        #
 :#                  No side effect on the window title.                       #
 :#                                                                            #
@@ -3018,7 +3018,7 @@ title %TITLE%
 
 :GetPID [VARNAME]
 %FUNCTION% EnableExtensions DisableDelayedExpansion
-set "PIDVAR=%~1" & if not defined PIDVAR set "PIDVAR=PID"
+set "PIDVAR=%~1" & if NOT defined PIDVAR set "PIDVAR=PID"
 %UPVAR% %PIDVAR%
 :GetPID.retry
 set "lock=%temp%\%~nx0.%time::=.%.lock"
@@ -3152,7 +3152,7 @@ set FOREACHLINE=for /f "delims="
 :#  Returns 	    %1 or ARG     The first argument, unquoted                #
 :#                  '%1' or 'ARG' The first argument, with its quotes, if any #
 :#                                                                            #
-:#  Notes 	    Despite its name, this routine does not work like MSVC's  #
+:#  Notes 	    Despite its name, this routine does NOT work like MSVC's  #
 :#                  command-line parser, for which rules are:                 #
 :#                  Every " quote flips string mode                           #
 :#                  2N backslashes + " ==> N backslashes and begin/end quote  #
@@ -3161,7 +3161,7 @@ set FOREACHLINE=for /f "delims="
 :#                                                                            #
 :#                  Here, rules are:                                          #
 :#                  Quotes flip string mode; Backslashes are output literally.#
-:#                  Exception: \" generates a " , and this does not flip mode.#
+:#                  Exception: \" generates a " , and this does NOT flip mode.#
 :#                                                                            #
 :#  History                                                                   #
 :#   2019-12-03 JFL Created this routine.                                     #
@@ -3174,10 +3174,10 @@ set FOREACHLINE=for /f "delims="
 %ECHOVARS.D% ARGS
 setlocal EnableDelayedExpansion
 set "VAR=%~1"
-if not defined VAR set "VAR=ARG"
+if NOT defined VAR set "VAR=ARG"
 set "ARG="
 set "'ARG'="
-if not defined ARGS goto :PopCArg.Exit
+if NOT defined ARGS goto :PopCArg.Exit
 set "I=0"
 :# Skip initial spaces and tabs
 %ECHO.D% # 1 Skip initial spaces and tabs
@@ -3188,7 +3188,7 @@ set /a "I+=1"
 :PopCArg.Begin1
 set "C=!ARGS:~%I%,1!"
 %ECHOVARS.D% I C
-if not defined C goto :PopCArg.Done
+if NOT defined C goto :PopCArg.Done
 if "%C%%C%" equ "  " goto :PopCArg.Loop1
 if "%C%%C%" equ "		" goto :PopCArg.Loop1
 :# Collect argument contents
@@ -3201,7 +3201,7 @@ set /a "I+=1"
 :PopCArg.Begin2
 set "C=!ARGS:~%I%,1!"
 %ECHOVARS.D% I C
-if not defined C goto :PopCArg.Done
+if NOT defined C goto :PopCArg.Done
 if %STRING_MODE%==0 (
   if "%C%%C%" equ "  " goto :PopCArg.Step3
   if "%C%%C%" equ "		" goto :PopCArg.Step3
@@ -3229,7 +3229,7 @@ set /a "I+=1"
 :PopCArg.Begin3
 set "C=!ARGS:~%I%,1!"
 %ECHOVARS.D% I C
-if not defined C goto :PopCArg.Done
+if NOT defined C goto :PopCArg.Done
 if "%C%%C%" equ "  " goto :PopCArg.Loop3
 if "%C%%C%" equ "		" goto :PopCArg.Loop3
 :PopCArg.Done
@@ -3269,7 +3269,7 @@ exit /b
 :# Compute the depth of a pathname. %1=pathname. Ex: A\B\C -> 3 ; \A -> 1 ; A\ -> 1
 :path_depth
 %FUNCTION%
-if not "%~2" equ "" set "RETVAR=%~2"
+if "%~2" neq "" set "RETVAR=%~2"
 call :path_depth2 %*
 %UPVAR% %RETVAR%
 set %RETVAR%=%RETVAL%
@@ -3290,8 +3290,8 @@ goto:eof
 :path_depth1
 set RETVAL=0
 for /f "tokens=1* delims=\" %%i in ("%~1") do (
-  if not "%%j" equ "" call :path_depth1 "%%j"
-  if not "%%i" equ "" set /a RETVAL=RETVAL+1
+  if "%%j" neq "" call :path_depth1 "%%j"
+  if "%%i" neq "" set /a RETVAL=RETVAL+1
 )
 goto:eof
 
@@ -3318,7 +3318,7 @@ for /f "delims=" %%a in ("%~a1") do set "%~2=%%~a"
 exit /b
 
 :is_dir pathname       -- Check if a pathname refers to an existing directory
-for /f "tokens=1,2 delims=d" %%a in ("-%~a1") do if not "%%~b" equ "" exit /b 0
+for /f "tokens=1,2 delims=d" %%a in ("-%~a1") do if "%%~b" neq "" exit /b 0
 exit /b 1
 
 :is_dir2 pathname       -- Check if a pathname refers to an existing directory
@@ -3356,14 +3356,14 @@ if errorlevel 1 (
 :is_empty_dir %1=Directory name - Returns errorlevel 0 if it's an empty dir
 2>&1 dir /b /a "%~1\*" | >NUL findstr "^" && exit /b 1 || exit /b 0
 
-:# Check if a directory has files (subdirectories will not be counted)
+:# Check if a directory has files (subdirectories will NOT be counted)
 :has_files %1=Directory name - Returns errorlevel 0 if directory has files
 >NUL 2>NUL dir /a-d "%~1\*"
 exit /b
 
-:# Check if a directory has subdirectories (files will not be counted)
+:# Check if a directory has subdirectories (files will NOT be counted)
 :has_dirs %1=Directory name - Returns errorlevel 0 if directory has files
-2>NUL dir /b /ad "%~1\*" | >NUL findstr "^" 
+2>NUL dir /b /ad "%~1\*" | >NUL findstr "^"
 exit /b
 
 :#----------------------------------------------------------------------------#
@@ -3372,8 +3372,8 @@ exit /b
 :#                                                                            #
 :#  Description     Check if FILE %1 is newer than FILE %2                    #
 :#                                                                            #
-:#  Arguments       %1	    pathname of file #1. Must exist.                  #
-:#                  %2	    pathname of file #2. May not exist.               #
+:#  Arguments       %1	    pathname of file #1. Must EXIST.                  #
+:#                  %2	    pathname of file #2. May NOT EXIST.               #
 :#                                                                            #
 :#  Notes 	    Returns errorlevel 0 FILE1 is newer, 1 if same or older   #
 :#                                                                            #
@@ -3385,9 +3385,9 @@ exit /b
 :is_newer FILE1 FILE2
 :# Query xcopy to know if the copy by date would be done.
 :# If the copy is done, the file name is output.
-:# If that name does not contain "\", then the drive name "C:" is prepended!
+:# If that name does NOT contain "\", then the drive name "C:" is prepended!
 :# So search either for a : or a \
-if not exist %2 exit /b 0 &:# ERRORLEVEL 0 if target is missing
+if NOT EXIST %2 exit /b 0 &:# ERRORLEVEL 0 if target is missing
 xcopy /d /l /y %1 %2 | findstr ": \\" >nul &:# ERRORLEVEL 0 if newer, 1 if older
 if errorlevel 1 %ECHO.D% %2 is already up-to-date
 exit /b
@@ -3420,14 +3420,14 @@ if "%RETVAR%" equ "" set "RETVAR=RETVAL"
 set "NAME=!%~1!"
 :basename.trim_path
 set "NAME=%NAME:*\=%"
-if not "%NAME%" equ "%NAME:\=%" goto :basename.trim_path
+if "%NAME%" neq "%NAME:\=%" goto :basename.trim_path
 %UPVAR% %RETVAR%
 set "%RETVAR%=%NAME%"
 %RETURN%
 
 :#----------------------------------------------------------------------------#
 
-:# Simpler version not supporting wild-cards, but that works with any absolute or relative pathname
+:# Simpler version NOT supporting wild-cards, but that works with any absolute or relative pathname
 
 :# Returns the directory part of the pathname, so that %DIRVAR%\NAME refers to that file
 :basename PATHNAME DIRVAR
@@ -3510,16 +3510,16 @@ set "FULL_SHORT=%~fs1"           &:# Make sure it really is short all the way th
 set "FULL_SHORT=%FULL_SHORT:~3%" &:# Remove the drive and initial \
 set "FULL_LONG=%~d1"             &:# Begin with just the drive
 if defined FULL_SHORT for %%x in ("!FULL_SHORT:\=" "!") do ( :# Loop on all short components
-  set "ATTRIB_OUTPUT=" &:# If the file does not exist, filter-out attrib.exe error message on stdout, with its - before the drive.
+  set "ATTRIB_OUTPUT=" &:# If the file does NOT EXIST, filter-out attrib.exe error message on stdout, with its - before the drive.
   for /f "delims=" %%l in ('attrib "!FULL_LONG!\%%~x" 2^>NUL ^| findstr /v /c:" - %~d1"') do set "ATTRIB_OUTPUT=%%l"
   if defined ATTRIB_OUTPUT ( :# Extract the long name from the attrib.exe output
     for %%f in ("!ATTRIB_OUTPUT:*\=\!") do set "LONG_NAME=%%~nxf"
-  ) else (                   :# Use the short name (which does not exist)
+  ) else (                   :# Use the short name (which does NOT EXIST)
     set "LONG_NAME=%%~x"
   )
   set "FULL_LONG=!FULL_LONG!\!LONG_NAME!"
 ) else set "FULL_LONG=%~d1\"
-endlocal & if not "%~2" equ "" (set "%~2=%FULL_LONG%") else echo %FULL_LONG%
+endlocal & if "%~2" neq "" (set "%~2=%FULL_LONG%") else echo %FULL_LONG%
 exit /b
 
 :#----------------------------------------------------------------------------#
@@ -3532,7 +3532,7 @@ exit /b
 :#                                                                            #
 :#  Notes 	    Based on sample in http://superuser.com/a/764725          #
 :#                                                                            #
-:#                  Creates file if it does not exist.                        #
+:#                  Creates file if it does NOT EXIST.                        #
 :#                  Just uses cmd built-ins.                                  #
 :#                  Works even on read-only files, like touch does.           #
 :#                                                                            #
@@ -3545,7 +3545,7 @@ exit /b
 
 :touch
 %FUNCTION%
-if not exist "%~1" type NUL >>"%~1"& %RETURN%
+if NOT EXIST "%~1" type NUL >>"%~1"& %RETURN%
 set _ATTRIBUTES=%~a1
 if "%~a1" equ "%_ATTRIBUTES:r=%" (copy "%~1"+,,) else attrib -r "%~1" & copy "%~1"+,, & attrib +r "%~1"
 %RETURN%
@@ -3563,7 +3563,7 @@ goto:eof
 :#                                                                            #
 :#  Arguments                                                                 #
 :#                                                                            #
-:#  Notes 	    Do not use %FUNCTION% or %RETURN%, as these do require    #
+:#  Notes 	    Do NOT use %FUNCTION% or %RETURN%, as these do require    #
 :#                  command extensions to work.                               #
 :#                  Only use command.com-compatible syntax!                   #
 :#                                                                            #
@@ -3578,7 +3578,7 @@ goto:eof
 :# Get cmd extensions and delayed expansion settings
 :extensions.get returns errorlevel=1 if extensions are disabled
 ver >NUL &:# Clear the errorlevel
-:# Note: Don't use quotes around set commands in the next two lines, as this will not work if extensions are disabled
+:# Note: Don't use quotes around set commands in the next two lines, as this will NOT work if extensions are disabled
 set EXTENSIONS=DisableExtensions
 set DELAYEDEXPANSION=DisableDelayedExpansion
 set "EXTENSIONS=EnableExtensions" 2>NUL &:# Fails if extensions are disabled
@@ -3589,7 +3589,7 @@ goto %EXTENSIONS.RETURN% :eof 2>NUL &:# goto:eof will work, but report an error 
 :extensions.show
 setlocal &:# Avoid changing the parent environment
 set EXTENSIONS.RETURN=:extensions.show.ret
-goto :extensions.get &:# call :extensions.get will not work if extensions are disabled
+goto :extensions.get &:# call :extensions.get will NOT work if extensions are disabled
 :extensions.show.ret
 %ECHO% SetLocal %EXTENSIONS% %DELAYEDEXPANSION%
 endlocal &:# Restore the parent environment
@@ -3607,7 +3607,7 @@ if errorlevel 1 (
 set VAR=before
 if "%VAR%" equ "before" (
   set VAR=after
-  if not "!VAR!" equ "after" (
+  if "!VAR!" neq "after" (
     >&2 echo Error: Failed to enable delayed environment variable expansion.
     >&2 echo This script requires Windows XP or later.
     endlocal & set "RETVAL=1" & goto:eof
@@ -3632,7 +3632,7 @@ endlocal & set "RETVAL=0" & goto:eof
 :#----------------------------------------------------------------------------#
 
 :# Find the current IP address
-:get_IP_address %1=Ouput variable name; Default name: MYIP   
+:get_IP_address %1=Ouput variable name; Default name: MYIP  
 %FUNCTION%
 set "RETVAR=%~1"
 if "%RETVAR%" equ "" set "RETVAR=MYIP"
@@ -3711,7 +3711,7 @@ net localgroup Administrators | more /E +%HeaderLines% | find /V "%FooterLine%"
 :#  Description     Count IP addresses in a range                             #
 :#                                                                            #
 :#  Arguments       %1	    First address. Ex: 192.168.0.1                    #
-:#                  %2	    Last address, not included in the count.          #
+:#                  %2	    Last address, NOT included in the count.          #
 :#                                                                            #
 :#  Notes 	    Adapted from a sample published by Walid Toumi:           #
 :#                  http://walid-toumi.blogspot.com/                          #
@@ -3753,7 +3753,7 @@ endlocal & set "RETVAL=%a%" & goto:eof
 :#                  Tested in English, French, German, Spanish, Simplified    #
 :#		    Chinese, Japanese.                                        #
 :#                                                                            #
-:#                  Uses %TIME% and not "TIME /T" because %TIME% gives more:  #
+:#                  Uses %TIME% and NOT "TIME /T" because %TIME% gives more:  #
 :#                  %TIME% returns [H]H:MM:SS.hh			      #
 :#		    "TIME /T" returns MM:SS only.                             #
 :#                                                                            #
@@ -3828,7 +3828,7 @@ endlocal & set "RETVAL=%NOW%" & set "NOW=%NOW%" & goto:eof
 
 :#----------------------------------------------------------------------------#
 
-:# Other implementation, independant of the locale, but not of the language, and not relying on the registry.
+:# Other implementation, independant of the locale, but NOT of the language, and NOT relying on the registry.
 :# This will work for all languages that output a hint like (mm-dd-yy)
 :# This can easily be adapted to other languages: French=(jj-mm-aa) German=(TT-MM-JJ) Spanish=(dd-mm-aa) Japanese ([]-[]-[])
 :# But Chinese outputs a string without dashes: ([][][]) so this would be more difficult.
@@ -3881,7 +3881,7 @@ exit /b
 :#  Returns         Env. vars. VAR.DAY VAR.HOUR VAR.MINUTE VAR.SECOND VAR.MS  #
 :#                  for days, hours, minutes, seconds, milliseconds           #
 :#                                                                            #
-:#  Notes 	    When not using dates, ignore VAR.DAY, and short durations #
+:#  Notes 	    When NOT using dates, ignore VAR.DAY, and short durations #
 :#                  will be correct, even across the midnight boundary.       #
 :#                                                                            #
 :#  History                                                                   #
@@ -3900,14 +3900,14 @@ setlocal
 set /a "YEAR=10000%~1 %% 10000, MONTH=100%~2 %% 100, DAY=100%~3 %% 100" &:# Make sure they have no leading 0
 if %YEAR% LSS 100 set /a YEAR+=2000 &:# Assume two digit years are in the 21st century
 set /a JD=DAY-32075+1461*(YEAR+4800+(MONTH-14)/12)/4+367*(MONTH-2-(MONTH-14)/12*12)/12-3*((YEAR+4900+(MONTH-14)/12)/100)/4
-endlocal & if not "%~4" equ "" (set %~4=%JD%) else (echo.%JD%)
+endlocal & if "%~4" neq "" (set %~4=%JD%) else (echo.%JD%)
 exit /b
 
 :# Extract components from an ISO 8601 date/time
 :Time.Split TIME OUTSTRUCT # TIME=[YYYY-MM-DD_]HH:MM:SS[.m[m[m]]] _=T| |_
 setlocal EnableExtensions EnableDelayedExpansion
 for /f "tokens=1,2 delims=T_ " %%a in ("%~1") do set "_DATE=%%a" & set "_TIME=%%b"
-if not defined _TIME set "_TIME=%_DATE%" & set "_DATE="
+if NOT defined _TIME set "_TIME=%_DATE%" & set "_DATE="
 for /f "tokens=1,2 delims=.," %%a in ("%_TIME%") do set "_TIME=%%a" & set "_MS=%%b000" & set "_MS=!_MS:~0,3!"
 endlocal & (
   for /f "tokens=1,2,3 delims=-" %%a in ("%_DATE%") do set "%~2.YEAR=%%a" & set "%~2.MONTH=%%b" & set "%~2.DAY=%%c"
@@ -3990,12 +3990,12 @@ setlocal EnableExtensions EnableDelayedExpansion
 %ECHO.D% call %0 %*
 set "NUM1="
 for /f "tokens=* delims=0" %%a in ("%~1") do set "NUM1=%%a" &:# Trim left 0s
-if not defined NUM1 set "NUM1=0"
-if not "%NUM1%" equ "%~1" %ECHOVARS.D% NUM1
+if NOT defined NUM1 set "NUM1=0"
+if "%NUM1%" neq "%~1" %ECHOVARS.D% NUM1
 set "NUM2="
 for /f "tokens=* delims=0" %%a in ("%~2") do set "NUM2=%%a" &:# Trim left 0s
-if not defined NUM2 set "NUM2=0"
-if not "%NUM2%" equ "%~2" %ECHOVARS.D% NUM2
+if NOT defined NUM2 set "NUM2=0"
+if "%NUM2%" neq "%~2" %ECHOVARS.D% NUM2
 if %NUM1% LSS %NUM2% endlocal & set "%~3=<" & exit /b 0
 if %NUM1% GTR %NUM2% endlocal & set "%~3=>" & exit /b 0
 endlocal & set "%~3==" & exit /b 0
@@ -4013,14 +4013,14 @@ for /f "delims=.-_ tokens=1,2,3" %%i in ("%~2") do (
   set "V2MINOR=%%~j"
   set "V2PATCH=%%~k"
 )
-if not defined V1MAJOR exit /b 1
-if not defined V2MAJOR exit /b 1
+if NOT defined V1MAJOR exit /b 1
+if NOT defined V2MAJOR exit /b 1
 call :compare_vernum "%V1MAJOR%" "%V2MAJOR%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 call :compare_vernum "%V1MINOR%" "%V2MINOR%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 call :compare_vernum "%V1PATCH%" "%V2PATCH%" DIF
-if not "%DIF%" equ "=" endlocal & set "%~3=%DIF%" & exit /b 0
+if "%DIF%" neq "=" endlocal & set "%~3=%DIF%" & exit /b 0
 endlocal  & set "%~3==" & exit /b 0
 
 :#----------------------------------------------------------------------------#
@@ -4052,13 +4052,13 @@ for /f "delims=" %%l in ('netsh advfirewall firewall show rule name^=%1 verbose'
   for /f "tokens=1,* delims=:" %%a in ('echo.%%l') do (
     set "RULE.NAME=%%a"  &:# Property name
     set "RULE.VALUE=%%b" &:# Property value
-    if not "%%b" equ "" (
+    if "%%b" neq "" (
       if "!RULE.NAME!" equ "Rule Name" ( :# It's a new rule
       	set "RULE.I=!RULE.N!"
 	set "RULE.LIST=!RULE.LIST! !RULE.I!"
       	set /a "RULE.N=!RULE.N!+1"
       ) else ( :# It's a property of the current rule.
-      	set "RULE.NAME=!RULE.NAME: =_!"	& rem :# Make sure it does not contain spaces
+      	set "RULE.NAME=!RULE.NAME: =_!"	& rem :# Make sure it does NOT contain spaces
 	call set "RULE[%%RULE.I%%].PROPERTIES=%%RULE[!RULE.I!].PROPERTIES%% !RULE.NAME!"
       	:# %%b is the value, but we need to skip all spaces after the :
       	for /f "tokens=1,*" %%c in ('echo 1 !RULE.VALUE!') do (
@@ -4123,8 +4123,8 @@ for /f "tokens=1,2" %%a in ('nslookup %NAME% 2^>NUL') do (
   %ECHOVARS.D% A B
   set "ADDRESS=%%b"			&REM Normally the address is the second token.
   if "%%b" equ "" set "ADDRESS=%%a"	&REM But for final addresses it may be the first.
-  if not "!A!" equ "!A::=!" set /a "NFIELD=NFIELD+1" &REM Count lines with a NAME: header.
-  if "!NFIELD!" equ "0" set "ADDRESS="	&REM The first two values are for the DNS server, not for the target server.
+  if "!A!" neq "!A::=!" set /a "NFIELD=NFIELD+1" &REM Count lines with a NAME: header.
+  if "!NFIELD!" equ "0" set "ADDRESS="	&REM The first two values are for the DNS server, NOT for the target server.
   if "!NFIELD!" equ "1" set "ADDRESS="
   if "!NFIELD!" equ "2" set "ADDRESS="
   %ECHOVARS.D% NFIELD ADDRESS
@@ -4161,10 +4161,10 @@ set "OUTVAR="
 if "%~1" equ "" goto got_keys_args
 if "%~1" equ "-c" shift & set "OPTS=%OPTS% /c" & goto get_keys_args
 if "%~1" equ "-f" shift & set "PATTERN=%~1" & shift & goto get_keys_args
-if not defined KEY set "KEY=%~1" & shift & goto get_keys_args
-if not defined OUTVAR set "OUTVAR=%~1" & shift & goto get_keys_args
+if NOT defined KEY set "KEY=%~1" & shift & goto get_keys_args
+if NOT defined OUTVAR set "OUTVAR=%~1" & shift & goto get_keys_args
 :got_keys_args
-if not defined OUTVAR set "OUTVAR=KEYS"
+if NOT defined OUTVAR set "OUTVAR=KEYS"
 set "%OUTVAR%="
 %ECHOVARS.D% KEY OUTVAR
 %UPVAR% %OUTVAR%
@@ -4204,10 +4204,10 @@ if "%~1" equ "" goto got_values_args
 if "%~1" equ "-/" shift & set "DETAILS=1" & goto get_values_args
 if "%~1" equ "-c" shift & set "OPTS=%OPTS% /c" & goto get_values_args
 if "%~1" equ "-f" shift & set "PATTERN=%~1" & shift & goto get_values_args
-if not defined KEY set "KEY=%~1" & shift & goto get_values_args
-if not defined OUTVAR set "OUTVAR=%~1" & shift & goto get_values_args
+if NOT defined KEY set "KEY=%~1" & shift & goto get_values_args
+if NOT defined OUTVAR set "OUTVAR=%~1" & shift & goto get_values_args
 :got_values_args
-if not defined OUTVAR set "OUTVAR=VALUES"
+if NOT defined OUTVAR set "OUTVAR=VALUES"
 set "%OUTVAR%="
 %ECHOVARS.D% KEY OUTVAR
 %UPVAR% %OUTVAR%
@@ -4216,7 +4216,7 @@ if "%FULLPATH%" equ "1" set "BEFORE=%KEY%\"
 :# Use reg.exe to get the key information
 set CMD=reg query "%KEY%" /f !PATTERN! !OPTS!
 %ECHO.D% %CMD%
-:# For each line in CMD output... 
+:# For each line in CMD output...
 set "SEPARATOR="
 %FOREACHLINE% %%i in ('%CMD%') do (
   set "LINE=%%i"
@@ -4226,8 +4226,8 @@ set "SEPARATOR="
   set "LINE=!LINE:~4!"
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
-  if "!HEAD!" equ "    " if not "!HEAD2!" equ "    " (
-    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
+  if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
+    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB.
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
     %ECHOVARS.D% TOKENS
@@ -4265,7 +4265,7 @@ set "SEPARATOR="
 :#  History                                                                   #
 :#   2014-06-23 JFL Renamed GetValue as GetRegistryValue.                     #
 :#                  Fixed the default (nameless) value reading.               #
-:#                  Don't display errors, but return 1 if value not found.    #
+:#                  Don't display errors, but return 1 if value NOT found.    #
 :#   2021-03-03 JFL Don't output error messages, and return an exit code.     #
 :#                                                                            #
 :#----------------------------------------------------------------------------#
@@ -4277,9 +4277,9 @@ set "KEY=%~1"
 set "NAME=%~2"
 set "VALUEVAR=%~3"
 set "TYPEVAR=%~4"
-if not defined VALUEVAR set "VALUEVAR=VALUE"
+if NOT defined VALUEVAR set "VALUEVAR=VALUE"
 set "%VALUEVAR%="
-:# Returning the type is optional. Do not define a default for TYPEVAR.
+:# Returning the type is optional. Do NOT define a default for TYPEVAR.
 %ECHOVARS.D% KEY NAME VALUEVAR TYPEVAR
 %UPVAR% %VALUEVAR%
 if defined TYPEVAR %UPVAR% %TYPEVAR%
@@ -4300,8 +4300,8 @@ set "RETCODE=1"
   set "LINE=!LINE:~4!"
   :# But extra lines of multi-lined values are indented by >20 spaces.
   set "HEAD2=!LINE:~0,4!"
-  if "!HEAD!" equ "    " if not "!HEAD2!" equ "    " (
-    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB. 
+  if "!HEAD!" equ "    " if "!HEAD2!" neq "    " (
+    :# Some versions of reg.exe use 4 spaces as field separator; others use a TAB.
     :# Change the 4-spaces around the REG_XX type word to a TAB.
     set "TOKENS=!LINE:    =	!"
     %ECHOVARS.D% TOKENS
@@ -4321,13 +4321,13 @@ if defined TYPEVAR set %TYPEVAR%=%TYPE%
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
-:#  Function        ReadPassword					      #
+:#  Function        ReadPassword					    					  #
 :#                                                                            #
 :#  Description     Prompt for a password string, displaying only stars       #
 :#                                                                            #
-:#  Arguments       VAR="Prompt string"					      #
+:#  Arguments       VAR="Prompt string"									      #
 :#                                                                            #
-:#  Notes 	    Returns the password string in variable VAR.              #
+:#  Notes 	    	Returns the password string in variable VAR.              #
 :#                                                                            #
 :#  History                                                                   #
 :#   2017-03-16 APA Published at https://www.dostips.com/forum/viewtopic.php?f=3&t=8442&sid=7d459deb904a629c16a11e6f9bd658be#p55984
@@ -4354,16 +4354,16 @@ set i=0
 
 rem Get the localized xcopy prompt
 set "msg="
-for /F "delims=" %%a in ('echo.^|xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defined msg set "msg=%%a"
+for /F "delims=" %%a in ('echo.^|xcopy /W "%~F0" "%~F0" 2^>NUL') do if NOT defined msg set "msg=%%a"
 
 :ReadPassword.nextKey
    set "key="
-   for /F "delims=" %%a in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if not defined key set "key=%%a"
+   for /F "delims=" %%a in ('xcopy /W "%~F0" "%~F0" 2^>NUL') do if NOT defined key set "key=%%a"
 
    rem Remove the localized xcopy prompt from the beginning of the string
    set key=!key:%msg%=!
    rem If the key is a question mark, it'll have been lost in the set "key=%%a" above
-   if not defined key set "key=^!"
+   if NOT defined key set "key=^!"
 
    rem If key is CR: terminate input
    if "!key:~-1!" equ "!CR!" goto :ReadPassword.endRead
@@ -4411,7 +4411,7 @@ echo set "RETURN=%RETURN%"
 %ECHOVARS.D% RETURN
 
 for %%f in ("A%%A" "BB" "CC") do @echo f=%%f
-  
+ 
 set A=a
 set B=b
 set V=A
@@ -4495,9 +4495,9 @@ call :noop2 %~1
 %FUNCTION%
 call :extensions.show
 %UPVAR% RETVAL
-:# Do not use parenthesis, in case there are some in the return value
+:# Do NOT use parenthesis, in case there are some in the return value
 if "!!" equ "" set "RETVAL=!ARGS:* =!"
-if not "!!" equ "" set "RETVAL=%ARGS:* =%"
+if "!!" neq "" set "RETVAL=%ARGS:* =%"
 %RETURN% %~1
 
 :noop3d %1=retcode %2=string to return in RETVAL
@@ -4576,7 +4576,7 @@ if "!!" equ "" (
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
-:#  Function        EscapeCmdString					      #
+:#  Function        EscapeCmdString										      #
 :#                                                                            #
 :#  Description     Prepare a command for passing through multiple parsings   #
 :#                                                                            #
@@ -4585,12 +4585,12 @@ if "!!" equ "" (
 :#                  %3	Number of parsings to go through. Default: 1          #
 :#                  %4	# of the above with !expansion. Default: 1 if exp. on #
 :#                                                                            #
-:#  Notes 	    The cmd parser tokenizer removes levels of ^ escaping.    #
+:#  Notes 	    	The cmd parser tokenizer removes levels of ^ escaping.    #
 :#                  This routine escapes a command line, or an argument, so   #
 :#                  that special characters like ^ & | > < ( ) make it        #
-:#		    through intact through one or more tokenizations.	      #
+:#		    		through intact through one or more tokenizations.	      #
 :#                                                                            #
-:#                  Known limitation: The LF character is not managed.        #
+:#                  Known limitation: The LF character is NOT managed.        #
 :#                                                                            #
 :#  History                                                                   #
 :#   2019-10-03 JFL Initial implementation                                    #
@@ -4604,9 +4604,9 @@ set "H0=^^"		&:# Return a Hat ^ with QUOTE_MODE 0=off
 set "H1=^"		&:# Return a Hat ^ with QUOTE_MODE 1=on
 if %CallerExp%==1 set "H0=!H0!!H0!" & set "H1=!H1!!H1!" &:# !escape our return value
 set "NPESC=1"			  &:# Default number of %expansion escaping to do
-if not "%~3" equ "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do 
+if "%~3" neq "" set "NPESC=%~3"  &:# specified # of extra %expansion escaping to do
 set /a "NXESC=%CallerExp%*NPESC"  &:# Default number of !expansion escaping to do
-if not "%~4" equ "" set "NXESC=%~4"  &:# specified # of extra !expansion escaping to do
+if "%~4" neq "" set "NXESC=%~4"  &:# specified # of extra !expansion escaping to do
 for /l %%i in (1,1,%NXESC%) do set "H0=!H0!!H0!" & set "H1=!H1!!H1!"
 for /l %%i in (1,1,%NPESC%) do set "H0=!H0!!H0!"
 :# Define characters that need escaping outside of quotes
@@ -4614,7 +4614,7 @@ for %%c in ("<" ">" "|" "&" "(" ")") do set ^"EscapeCmdString.NE[%%c]=1^"
 set ^"STRING=!%1!^"
 %ECHOVARS.D% STRING H0 H1
 set "OUTVAR=%2"
-if not defined OUTVAR set "OUTVAR=%1"
+if NOT defined OUTVAR set "OUTVAR=%1"
 set "RESULT="
 set "QUOTE_MODE=0"	&:# 1=Inside a quoted string
 set "ESCAPE=0"		&:# 1=The previous character was a ^ character
@@ -4623,11 +4623,11 @@ set "N=-1"
   set /a "N+=1"
   set "C=!STRING:~%N%,1!" &:# Get the Nth character in the string
   %ECHOVARS.D% N C
-  if not defined C goto :EscapeCmdString.end
+  if NOT defined C goto :EscapeCmdString.end
   if "!C!!C!" equ """" (
     if !ESCAPE!==0 (
       set /a "QUOTE_MODE=1-QUOTE_MODE"
-    ) else ( :# Open " quotes can be escaped, but not close " quotes
+    ) else ( :# Open " quotes can be escaped, but NOT close " quotes
       if "!QUOTE_MODE!" equ "0" set "RESULT=!RESULT!!H0:~1!"
     )
   ) else if "!C!" equ "^" (
@@ -4638,7 +4638,7 @@ set "N=-1"
   ) else if defined EscapeCmdString.NE["!C!"] ( :# Characters that need escaping outside of quotes
     if "!QUOTE_MODE!" equ "0" set "RESULT=!RESULT!!H0:~1!"
   )
-  if not "!C!" equ "^" set "ESCAPE=0"
+  if "!C!" neq "^" set "ESCAPE=0"
   set "RESULT=!RESULT!!C!"
   %ECHOSVARS.D% RESULT
 goto :EscapeCmdString.loop
@@ -4663,10 +4663,10 @@ set "%1=EnableDelayedExpansion"
 exit /b
 
 :# Convert the supported html entities to their corresponding character
-:# Internal subroutine that does not create a setlocal frame. Only uses !expansion!.
+:# Internal subroutine that does NOT create a setlocal frame. Only uses !expansion!.
 :ConvertEntities.internal %1=INPUTVAR [%2=OUTPUTVAR]
 set "OUTVAR=%2"
-if not defined OUTVAR set "OUTVAR=%1"
+if NOT defined OUTVAR set "OUTVAR=%1"
 set "ARG=!%1!"
 %ECHOSVARS.D% 1 ARG
 for %%e in (quot lt gt amp vert rpar lpar rbrack lbrack sp bs cr lf hat) do (
@@ -4678,12 +4678,12 @@ for %%e in (quot lt gt amp vert rpar lpar rbrack lbrack sp bs cr lf hat) do (
 :# So use the % character instead
 set "ARG=!ARG:%%=[percnt]!" &:# Make sure there are no % characters in ARG
 set "ARG2=!ARG:[excl]=%%!"
-if not "!ARG2!" equ "!ARG!" ( :# If ARG does contain ! characters
+if "!ARG2!" neq "!ARG!" ( :# If ARG does contain ! characters
   set "ARG="		  &:# Then individually convert each % to an !
   set "N=0"
   :ConvertEntities.loop
     set "C=!ARG2:~%N%,1!"
-    if not defined C goto :ConvertEntities.end_loop
+    if NOT defined C goto :ConvertEntities.end_loop
     if "!C!" equ "%%" set "C=^!"
     set "ARG=!ARG!!C!"
     set /a "N+=1"
@@ -4713,7 +4713,7 @@ goto:eof
 )
 call :ConvertEntities %*
 %CE.DEBUG.RESTORE%
-if not [%2]==[] shift
+if NOT [%2]==[] shift
 %ECHOVARS.D% %1 &:# Only report the result string
 exit /b
 
@@ -4762,26 +4762,26 @@ exit /b
 %CMD_BEFORE%
 set ^"CMDLINE=!ARGS!^"
 call :ConvertEntitiesNoDebug CMDLINE
-if not %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
+if NOT %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
 for /l %%n in (1,1,%NLOOPS%) do %EXEC% !CMDLINE!
-if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
-if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
+if NOT %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
+if NOT %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
 goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test call one command line. Display start/end time if looping.
-:# Do not add anything to the inner do loop, such as echoing the command, as this
+:# Do NOT add anything to the inner do loop, such as echoing the command, as this
 :# would prevent from doing accurate measurements of the duration of the command.
 
 :call_cmd_line
 %CMD_BEFORE%
 set ^"CMDLINE=!ARGS!^"
 call :ConvertEntitiesNoDebug CMDLINE
-if not %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
+if NOT %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
 for /l %%n in (1,1,%NLOOPS%) do call !CMDLINE!
-if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
-if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
+if NOT %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
+if NOT %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
 goto:eof
 
@@ -4791,16 +4791,16 @@ goto:eof
 set ^"CMDLINE=%%%ARG%%% !ARGS!^"
 call :ConvertEntitiesNoDebug CMDLINE
 %ECHOVARS.D% CMDLINE
-if not %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
+if NOT %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
 for /l %%n in (1,1,%NLOOPS%) do call !CMDLINE!
-if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
-if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
+if NOT %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
+if NOT %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 %CMD_AFTER%
 goto:eof
 
 :#----------------------------------------------------------------------------#
 :# Test call N command lines. Display start/end time if looping.
-:# Do not add anything to the inner do loop, such as echoing the command, as this
+:# Do NOT add anything to the inner do loop, such as echoing the command, as this
 :# would prevent from doing accurate measurements of the duration of the commands.
 
 :call_all_cmds
@@ -4809,7 +4809,7 @@ goto:eof
 set NCMDS=0
 :call_all_cmds.next_arg
 %POPARG%
-if not defined "ARG" goto :call_all_cmds.done_args
+if NOT defined "ARG" goto :call_all_cmds.done_args
 set /a NCMDS+=1
 call :ConvertEntitiesNoDebug ARG
 %IF_XDLEVEL% 2 set ARG | findstr ARG=
@@ -4825,10 +4825,10 @@ if defined CMD_AFTER call :ConvertEntities CMD_AFTER
 )
 :# Run all commands in a loop, measuring the total duration when looping more than once
 if defined CMD_BEFORE !CMD_BEFORE!
-if not %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
+if NOT %NLOOPS%==1 echo Start at %TIME% & set "T0=%TIME%"
 for /l %%n in (1,1,%NLOOPS%) do for /l %%c in (1,1,%NCMDS%) do call %%CMD[%%c]%% &:# Don't use !CMD[]! in case one command disables expansion
-if not %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
-if not %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
+if NOT %NLOOPS%==1 echo End at %TIME% & set "T1=%TIME%"
+if NOT %NLOOPS%==1 call :Time.Delta %T0% %T1% -f D & echo Delta = !D.HOUR!:!D.MINUTE!:!D.SECOND!.!D.MS:~0,2!
 if defined CMD_AFTER !CMD_AFTER!
 goto:eof
 
@@ -4916,7 +4916,7 @@ set "V2=%~2"
 :testR
 %FUNCTION% EnableDelayedExpansion
 set "STRING=@||&&(())<<>>^^^^,,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!""
-call :testR2 "With EnableDelayedExpansion" "last but not least"
+call :testR2 "With EnableDelayedExpansion" "last but NOT least"
 %ECHO% :# In testR
 %ECHOVARS% V1 S V2
 
@@ -4926,7 +4926,7 @@ set "V2="
 
 setlocal DisableDelayedExpansion
 set  STRING=@^|^|^&^&(())^<^<^>^>^^^^,,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_!CD!"
-call :testR2 "With DisableDelayedExpansion" "last but not least"
+call :testR2 "With DisableDelayedExpansion" "last but NOT least"
 %ECHO% :# In testR
 %ECHOVARS% V1 S V2
 endlocal
@@ -4941,7 +4941,7 @@ endlocal
 :# set "STRING=@(())^^^^,,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!"
 :# set STRING=!STRING!"@||&&(())<<>>^^,,;;  %%%%^!^!**??[[]]==~~''%%CD%%_^!CD^!"
 set "STRING0=@||&&(())<<>>^^^^,,;;  %%%%^!^!**??[[]]==~~''%%CD%%_^!CD^!"
-set "STRING1=@(()),,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!" &:# Remove ||&&^^<<>> that cause problems when not quoted
+set "STRING1=@(()),,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!" &:# Remove ||&&^^<<>> that cause problems when NOT quoted
 set STRING=!STRING1! "!STRING0!"
 set STRING
 @echo on
@@ -5025,7 +5025,7 @@ endlocal
 :# set "STRING=@(())^^^^,,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!"
 :# set STRING=!STRING!"@||&&(())<<>>^^,,;;  %%%%^!^!**??[[]]==~~''%%CD%%_^!CD^!"
 set "_STRING0=@||&&(())<<>>^^^^,,;;  %%%%^!^!**??[[]]==~~''%%CD%%_^!CD^!"
-set "_STRING1=@(()),,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!" &:# Remove ||&&^^<<>> that cause problems when not quoted
+set "_STRING1=@(()),,;;  %%%%^!^!**??[[]]==~~''""%%CD%%_^!CD^!" &:# Remove ||&&^^<<>> that cause problems when NOT quoted
 set STRING=!_STRING1! "!_STRING0!"
 echo :# The initial string
 set STRING
@@ -5310,7 +5310,7 @@ set "CMD_AFTER="
 set "CMD_BEFORE="
 set "CMDLINE=!ARG0! !ARGS!"
 :next_arg
-if not defined ARGS set "ARG=" & set ""ARG"=" & goto :Start
+if NOT defined ARGS set "ARG=" & set ""ARG"=" & goto :Start
 %POPARG%
 %ECHOVARS.D% ARG ARGS
 if "!ARG!" equ "-?" goto :Help
@@ -5321,7 +5321,7 @@ if "!ARG!" equ "-c" goto :call_all_cmds
 if "!ARG!" equ "-C" goto :call_cmd_line
 if "!ARG!" equ "-d" call :Debug.On & %ECHOVARS% CMDLINE ARG ARGS & goto next_arg
 if "!ARG!" equ "-d0" set ">DEBUGOUT=>NUL" & call :Debug.On & goto next_arg	&:# Useful for library performance measurements
-if "!ARG!" equ "-d1" set ">DEBUGOUT=>&3" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines to 
+if "!ARG!" equ "-d1" set ">DEBUGOUT=>&3" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines to
 if "!ARG!" equ "-d2" set ">DEBUGOUT=>&2" & call :Debug.On & goto next_arg	&:# Useful to test debug output routines
 if "!ARG!" equ "-e" goto EchoArgs
 if "!ARG!" equ "-E" goto :exec_cmd_line
@@ -5353,5 +5353,5 @@ goto :next_arg
 :# This library does nothing. Display the help screen.
 goto :Help
 
-:# The following line, used by :Echo.Color, must be last and not end by a CRLF.
+:# The following line, used by :Echo.Color, must be last and NOT end by a CRLF.
 ##-

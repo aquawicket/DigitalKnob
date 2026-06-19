@@ -1,0 +1,5 @@
+######## luajit ########
+# https://github.com/LuaJIT/LuaJIT.git
+# https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v2.1.zip
+
+luajit_Import=https://github.com/LuaJIT/LuaJIT/archive/refs/heads/v2.1.zip

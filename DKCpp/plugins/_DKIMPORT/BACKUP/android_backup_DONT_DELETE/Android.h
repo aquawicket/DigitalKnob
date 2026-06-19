@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -33,40 +33,40 @@
 
 extern "C" {
 
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_initJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_DK_initJNIBridge(JNIEnv *env, jobject jobj){
 		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DK_exitJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_DK_exitJNIBridge(JNIEnv *env, jobject jobj){
 		exitJNIBridge(env, jobj);
 	}
-	JNIEXPORT jstring JNICALL Java_digitalknob_dkapp_DK_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
+	JNIEXPORT jstring JNICALL Java_DigitalKnob_dkapp_DK_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
 		return CallCppFunction(env, cls, data);
 	}
 	
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DKMain_initJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_DKMain_initJNIBridge(JNIEnv *env, jobject jobj){
 		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_DKMain_exitJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_DKMain_exitJNIBridge(JNIEnv *env, jobject jobj){
 		exitJNIBridge(env, jobj);
 	}
-	JNIEXPORT jstring JNICALL Java_digitalknob_dkapp_DKMain_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
+	JNIEXPORT jstring JNICALL Java_DigitalKnob_dkapp_DKMain_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
 		return CallCppFunction(env, cls, data);
 	}
 	
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_initJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_SDLActivity_initJNIBridge(JNIEnv *env, jobject jobj){
 		DKFile::exe_path = "dkapp";
 		initJNIBridge(env, jobj);
 	}
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_exitJNIBridge(JNIEnv *env, jobject jobj){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_SDLActivity_exitJNIBridge(JNIEnv *env, jobject jobj){
 		exitJNIBridge(env, jobj);
 	}
-	JNIEXPORT void JNICALL Java_digitalknob_dkapp_SDLActivity_initSDL(JNIEnv* env, jclass cls, jobject array){
+	JNIEXPORT void JNICALL Java_DigitalKnob_dkapp_SDLActivity_initSDL(JNIEnv* env, jclass cls, jobject array){
 		initSDL(env,cls,array);
 	}
 	/*
-	JNIEXPORT jstring JNICALL Java_digitalknob_dkapp_SDLActivity_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
+	JNIEXPORT jstring JNICALL Java_DigitalKnob_dkapp_SDLActivity_CallCppFunction(JNIEnv *env, jclass cls, jstring data){
 		return CallCppFunction(env, cls, data);
 	}
 	*/

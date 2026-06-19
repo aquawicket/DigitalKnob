@@ -1,487 +1,814 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
+
+###########################################################################################################################
+# dk_importVariables(Url Rtn_Var) IMPORT_ROOT Import_Name IMPORT_PATH INSTALL_ROOT INSTALL_NAME INSTALL_PATH VERSION BRANCH 
+#
+#											###### EXAMPLES ######
+#	Url										https://github.com/madler/zlib.git     							* github repository link
+#											https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
+#											https://github.com/madler/zlib        							* github page
+#											https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
+#											https://website.com/executable.exe              				* executable file
+#
+#
+#	IMPORT_ROOT	(optional)					C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
+#
+#
+#	Import_Name (optional)					zlib
+#
+#
+#	IMPORT_PATH (optional)					C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+#
+#
+#	INSTALL_ROOT (optional)					C:/Users/Administrator/DigitalKnob/Development/DKTools
+#
+#
+#	INSTALL_NAME (optional)					zlib-8-5-2025
+#											myZLIB
+#
+#	INSTALL_PATH (optional)					C:/Users/Administrator/DigitalKnob/Development/DKTools/zlib-8-5-2025
+#											C:/Users/Administrator/DigitalKnob/Development/DKTools/myZLIB
+#
+#	VERSION (optional)						master
+#
+#
+#	BRANCH (optional)						develop
+#											master
 #################################################################################
-# dk_importVariables(PLUGIN_URL) BRANCH FOLDER NAME PATH ROOT TAG VERSION
-#
-#	PLUGIN_URL (arg0)					###### EXAMPLES ######
-#	This url of the plugin to import.	https://github.com/madler/zlib.git     							* github repository link
-#										https://github.com/madler/zlib/archive/refs/heads/master.zip	* github sourcecode download
-#										https://github.com/madler/zlib        							* github page
-#										https://zlib.net/zlib-1.3.1.tar.gz								* library sourcecode download
-#										https://website.com/executable.exe              				* executable file
-#
-#	IMPORT_PATH (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
-#
-#	BRANCH (optional)
-#										develop
-#										master
-#
-#	FOLDER (optional)
-#										zlib-develop
-#										zlib-master
-#
-#	NAME (optional)
-#										zlib
-#										myZLIB
-#
-#	PATH (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-#										C:/Users/name/digitalknob/Development/3rdParty/myZLIB
-#
-#	ROOT (optional)
-#										C:/Users/name/digitalknob/Development/3rdParty
-#										C:/Users/name/MyLibraries
-#
-#	TAG (optional)
-#										v1.3.1
-#										v1.2.13
-#
-#	VERSION (optional)
-#										master
+#	
+#	PRINTVARS - specifying PRINTVARS will dump the current variable values of the current PLUGIN
 #
 function(dk_importVariables)
-	dk_debugFunc()
+	#dk_debugFunc(1 9)
 	
-	set(URL ${ARGV0})
-	dk_assertVar(URL)
-#	dk_printVar(URL)
-	
-	unset(IMPORT_PATH)
-	dk_getOptionValue(IMPORT_PATH) 	# C:/Users/name/digitalknob/Development/3rdParty/_DKIMPORTS/zlib
-#	dk_printVar(IMPORT_PATH)
-	
-	unset(BRANCH)
-	dk_getOptionValue(BRANCH) 		# master
-#	dk_printVar(BRANCH)
-	
-	unset(FOLDER)
-	dk_getOptionValue(FOLDER)		# zlib-master
-#	dk_printVar(FOLDER)
-	
-	unset(NAME)
-	dk_getOptionValue(NAME)			# zlib
-	dk_printVar(NAME)
-	
-	unset(PATH)
-	dk_getOptionValue(PATH)			# C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-#	dk_printVar(PATH)
-	
-	unset(ROOT)
-	dk_getOptionValue(ROOT)			# C:/Users/name/digitalknob/Development/3rdParty
-#	dk_printVar(ROOT)
-	
-	unset(TAG)
-	dk_getOptionValue(TAG)			# v1.3.1
-#	dk_printVar(TAG)
-	
-	unset(VERSION)
-	dk_getOptionValue(VERSION)		# master
-#	dk_printVar(VERSION)
-	
-	
-### POPULATE VARIABLES ###
-# PLUGIN_URL				- from arg:URL													  	: https://github.com/madler/zlib/archive/refs/heads/master.zip
-# PLUGIN_URL_LIST			- from PLUGIN_URL											 		: https:;github.com;madler;zlib;archive;refs;heads;master.zip
-# PLUGIN_URL_LENGTH			- from PLUGIN_URL_LIST												: 8
-# PLUGIN_URL_NODE(n)		- from PLUGIN_URL_LIST												: [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
-# PLUGIN_URL_FILENAME   	- from PLUGIN_URL													: master.zip
-# PLUGIN_URL_EXTENSION  	- from PLUGIN_URL_FILENAME											: .zip
-# PLUGIN_URL_FILE      		- from PLUGIN_URL_FILENAME											: master
-	
-# PLUGIN_IMPORT				- from CMAKE_CURRENT_LIST_DIR										: 1
-# PLUGIN_IMPORT_PATH		- from CMAKE_CURRENT_LIST_DIR										: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
-# PLUGIN_IMPORT_NAME		- from PLUGIN_IMPORT_PATH											: zlib
-
-# PLUGIN_GIT				- from PLUGIN_URL													: 1
-# PLUGIN_GIT_FILENAME		- from PLUGIN_URL													: zlib
-# PLUGIN_GIT_NAME			- from PLUGIN_GIT_FILENAME											: zlib
-# PLUGIN_GIT_BRANCH			- from default:master OR arg:BRANCH									: master
-# PLUGIN_GIT_TAG			- from default: OR arg:TAG
-	
-# PLUGIN_INSTALL_NAME		- from PLUGIN_IMPORT_NAME, PLUGIN_GIT_NAME or PLUGIN_URL_NAME		: zlib
-# PLUGIN_INSTALL_VERSION	- from PLUGIN_URL_FILE and PLUGIN_IMPORT_NAME						: master
-# PLUGIN_INSTALL_FOLDER     - from PLUGIN_INSTALL_NAME amd PLUGIN_INSTALL_VERSION				: zlib-master
-# PLUGIN_INSTALL_ROOT		- from default:DK3RDPARTY OR arg:ROOT								: C:/Users/name/digitalknob/Development/3rdParty
-# PLUGIN_INSTALL_PATH		- from PLUGIN_INSTALL_ROOT and PLUGIN_INSTALL_FOLDER				: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-	
-# <PLUGIN>					- from PLUGIN_IMPORT_NAME						:ZLIB   			: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-# <CURRENT_PLUGIN>			- from <PLUGIN>									:ZLIB				: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-# <PLUGIN>_DIR				- from PLUGIN_INSTALL_PATH						:ZLIB_DIR			: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-# <PLUGIN>_URL				- from PLUGIN_URL								:ZLIB_URL			: https://github.com/madler/zlib/archive/refs/heads/master.zip
-# <PLUGIN>_DL_FILE			- from PLUGIN_URL_FILENAME						:ZLIB_DL_FILE		: master.zip
-# <PLUGIN>_VERSION          - from PLUGIN_INSTALL_VERSION					:ZLIB_VERSION		: master
-# <PLUGIN>_FOLDER			- from PLUGIN_INSTALL_FOLDER					:ZLIB_FOLDER		: zlib-master
-# <PLUGIN>_IMPORT_NAME		- from PLUGIN_IMPORT_NAME						:ZLIB_IMPORT_NAME	: zlib
-# <PLUGIN>_BRANCH			- from PLUGIN_GIT_BRANCH						:ZLIB_BRANCH		: master
-# <PLUGIN>_TAG				- from PLUGIN_GIT_TAG							:ZLIB_TAG			: 
-# <PLUGIN>_TRIPLE_DIR		- from PLUGIN_INSTALL_PATH and target_triple	:ZLIB_TRIPLE_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
-# <PLUGIN>_CONFIG_DIR		- from PLUGIN_INSTALL_PATH and CONFIG_DIR		:ZLIB_CONFIG_DIR	: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
-# <PLUGIN>_BUILD_DIR		- from PLUGIN_INSTALL_PATH and BUILD_DIR		:ZLIB_BUILD_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
-# <PLUGIN>_DEBUG_DIR		- from PLUGIN_INSTALL_PATH and DEBUG_DIR		:ZLIB_DEBUG_DIR		: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
-# <PLUGIN>_RELEASE_DIR		- from PLUGIN_INSTALL_PATH and RELEASE_DIR		:ZLIB_RELEASE_DIR	: :/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
-	
-	
-	##############################################
-	############ PLUGIN_URL VARIABLES ############
-	##############################################						################################# EXAMPLE ##########################
-	# PLUGIN_URL
-	unset(PLUGIN_URL)
-	set(PLUGIN_URL ${URL})	
-#	dk_printVar(PLUGIN_URL)												# PLUGIN_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	
-	# PLUGIN_URL_FILENAME
-	unset(PLUGIN_URL_FILENAME)
-	dk_basename(${PLUGIN_URL} PLUGIN_URL_FILENAME)							
-#	dk_printVar(PLUGIN_URL_FILENAME)									# PLUGIN_URL_FILENAME: master.zip
-	
-	# PLUGIN_URL_LIST
-	unset(PLUGIN_URL_LIST)
-	dk_replaceAll(${PLUGIN_URL}  "/"  ";"  PLUGIN_URL_LIST)					
-#	dk_printVar(PLUGIN_URL_LIST)										# PLUGIN_URL_LIST: https:;github.com;madler;zlib;archive;refs;heads;master.zip
-	
-	# PLUGIN_GIT
-	unset(PLUGIN_GIT)
-	dk_includes(PLUGIN_URL "https://github.com")
-	if(${dk_includes})
-		set(PLUGIN_GIT 1)
-	endif()		
-#	dk_printVar(PLUGIN_GIT)												# PLUGIN_GIT: 1
-	
-	# PLUGIN_URL_EXTENSION
-	unset(PLUGIN_URL_EXTENSION)
-	dk_getExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_EXTENSION)			
-#	dk_printVar(PLUGIN_URL_EXTENSION)									# PLUGIN_URL_EXTENSION: .zip
-
-	# PLUGIN_URL_FILE
-	unset(PLUGIN_URL_FILE)
-	dk_removeExtension(${PLUGIN_URL_FILENAME} PLUGIN_URL_FILE)				
-#	dk_printVar(PLUGIN_URL_FILE)										# PLUGIN_URL_FILE: master
-
-	# PLUGIN_URL_NODE(n)
-	# split the url into list converting / to divider ;
-	set(index 0)
-	foreach(PLUGIN_URL_ITEM ${PLUGIN_URL_LIST})
-		unset(PLUGIN_URL_NODE${index})
-		set(PLUGIN_URL_NODE${index} ${PLUGIN_URL_ITEM})						
-#		dk_printVar(PLUGIN_URL_NODE${index})							# PLUGIN_URL_NODE(n): [0]https: [1]github.com [2]madler [3]zlib [4]archive [5]refs [6]heads [7]master.zip
-		math(EXPR index ${index}+1)
-	endforeach()
-	
-	# PLUGIN_URL_LENGTH
-	unset(PLUGIN_URL_LENGTH)
-	list(LENGTH PLUGIN_URL_LIST PLUGIN_URL_LENGTH)							
-#	dk_printVar(PLUGIN_URL_LENGTH)										# PLUGIN_URL_LENGTH: 8
-	
-
-	#######################################################
-	############### PLUGIN_IMPORT VARIABLES ###############
-	#######################################################
-	if(NOT IMPORT_PATH)
-		set(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}")
-	endif()
-#	dk_printVar(IMPORT_PATH)
-	
-	# PLUGIN_IMPORT
-	unset(PLUGIN_IMPORT)
-	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-	if(IMPORT_PATH MATCHES "$ENV{DKIMPORTS_DIR}")
-		set(PLUGIN_IMPORT 1)
-	endif()	
-#	dk_printVar(PLUGIN_IMPORT)											# PLUGIN_IMPORT: 1
-	
-	# PLUGIN_IMPORT_PATH
-	unset(PLUGIN_IMPORT_PATH)
-	if(IMPORT_PATH)
-		set(PLUGIN_IMPORT_PATH "${IMPORT_PATH}")		
-	endif()
-#	dk_printVar(PLUGIN_IMPORT_PATH)										# PLUGIN_IMPORT_PATH: C:\Users\name\digitalknob\Development\3rdParty\_DKIMPORTS\zlib
-
-	# PLUGIN_IMPORT_NAME
-	unset(PLUGIN_IMPORT_NAME)
-	dk_dirname(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_DIR)
-#	dk_printVar(PLUGIN_IMPORT_DIR)
-	if("${PLUGIN_IMPORT_DIR}" STREQUAL "$ENV{DKIMPORTS_DIR}")
-		dk_basename(${PLUGIN_IMPORT_PATH} PLUGIN_IMPORT_NAME)		
-	elseif(NAME)
-		#dk_fixme("PLUGIN_IMPORT_NAME is the parent folder name only if the next parent folder is _DKIMPORTS")
-		set(PLUGIN_IMPORT_NAME ${NAME})
-	else()
-		set(PLUGIN_IMPORT_NAME ${PLUGIN_URL_FILE})
-	endif()
-#	dk_printVar(PLUGIN_IMPORT_NAME)										# PLUGIN_IMPORT_NAME: zLib	
-	
-	# PLUGIN_IMPORT_NAME_LOWER
-	unset(PLUGIN_IMPORT_NAME_LOWER)
-	dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)
-#	dk_printVar(PLUGIN_IMPORT_NAME_LOWER)								# PLUGIN_IMPORT_NAME_LOWER: zlib
-	
-	# PLUGIN_IMPORT_NAME_UPPER
-	unset(PLUGIN_IMPORT_NAME_UPPER)
-	dk_toUpper(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_UPPER)
-#	dk_printVar(PLUGIN_IMPORT_NAME_UPPER)								# PLUGIN_IMPORT_NAME_UPPER: ZLIB
-	
-	##############################################
-	############ PLUGIN_GIT VARIABLES ############
-	##############################################
-	if(PLUGIN_GIT)
-		# PLUGIN_GIT_FILENAME
-		unset(PLUGIN_GIT_FILENAME)
-		list(GET PLUGIN_URL_LIST 3 PLUGIN_GIT_FILENAME)										
-		dk_printVar(PLUGIN_GIT_FILENAME)								# PLUGIN_GIT_FILENAME: zlib
-		
-		# PLUGIN_GIT_NAME
-		unset(PLUGIN_GIT_NAME)
-		dk_replaceAll(${PLUGIN_GIT_FILENAME} ".git" "" PLUGIN_GIT_NAME)			
-#		dk_printVar(PLUGIN_GIT_NAME)									# PLUGIN_GIT_NAME: zlib
-		
-		# PLUGIN_GIT_NAME_LOWER
-		unset(PLUGIN_GIT_NAME_LOWER)
-		dk_toLower(${PLUGIN_GIT_NAME} 		PLUGIN_GIT_NAME_LOWER)
-#		dk_printVar(PLUGIN_GIT_NAME_LOWER)								# PLUGIN_GIT_NAME_LOWER: zlib
-		
-		# PLUGIN_GIT_BRANCH
-		unset(PLUGIN_GIT_BRANCH)
-		if(BRANCH)
-			set(PLUGIN_GIT_BRANCH ${BRANCH})
-		endif()
-		#dk_getGitBranchName(${PLUGIN_URL} PLUGIN_GIT_BRANCH)					
-		if(NOT PLUGIN_GIT_BRANCH)
-			set(PLUGIN_GIT_BRANCH master)
-		endif()
-#		dk_printVar(PLUGIN_GIT_BRANCH)									# PLUGIN_GIT_BRANCH: master
-		
-		# PLUGIN_GIT_TAG
-		unset(PLUGIN_GIT_TAG)
-		if(TAG)
-			set(PLUGIN_GIT_TAG ${TAG})
-		endif()
-	endif()
-
-	
-	##################################################
-	############ PLUGIN_INSTALL VARIABLES ############
-	##################################################
-	# PLUGIN_INSTALL_NAME
-	unset(PLUGIN_INSTALL_NAME)
-	if(NAME)
-		set(PLUGIN_INSTALL_NAME ${NAME})
-	elseif(PLUGIN_IMPORT_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_IMPORT_NAME})
-	elseif(PLUGIN_GIT_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_GIT_NAME})
-	elseif(PLUGIN_URL_NAME)
-		set(PLUGIN_INSTALL_NAME ${PLUGIN_URL_NAME})							
-	endif()
-	#dk_convertToCIdentifier(${PLUGIN_INSTALL_NAME} PLUGIN_INSTALL_NAME)
-#	dk_printVar(PLUGIN_INSTALL_NAME)									# PLUGIN_INSTALL_NAME: zlib
-
-	# PLUGIN_INSTALL_VERSION
-	unset(PLUGIN_INSTALL_VERSION)
-	if(VERSION)
-		set(PLUGIN_INSTALL_VERSION ${VERSION})
-	elseif(PLUGIN_IMPORT_NAME AND PLUGIN_URL_FILE)
-		dk_toLower(${PLUGIN_IMPORT_NAME} PLUGIN_IMPORT_NAME_LOWER)	
-		dk_toLower(${PLUGIN_URL_FILE}    PLUGIN_URL_FILE_LOWER)
-		# calculate the plugin version		
-		dk_replaceAll(${PLUGIN_URL_FILE_LOWER} ${PLUGIN_IMPORT_NAME_LOWER} "" PLUGIN_INSTALL_VERSION)	
-		if(${PLUGIN_IMPORT_NAME_LOWER} STREQUAL ${PLUGIN_URL_FILE_LOWER})
-			if(PLUGIN_GIT_TAG)
-				set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_TAG})
-			elseif(PLUGIN_GIT_BRANCH)
-				set(PLUGIN_INSTALL_VERSION ${PLUGIN_GIT_BRANCH})
-			else()
-				set(PLUGIN_INSTALL_VERSION master)
-			endif()
-		endif()
-
-		string(FIND ${PLUGIN_INSTALL_VERSION} - index)
-		if(${index} EQUAL 0)
-			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
-		endif()
-			
-		string(FIND ${PLUGIN_INSTALL_VERSION} _ index)
-		if(${index} EQUAL 0)
-			string(SUBSTRING ${PLUGIN_INSTALL_VERSION} 1 -1 PLUGIN_INSTALL_VERSION)
-		endif()
-	endif()
-	if(NOT PLUGIN_INSTALL_VERSION)
-		set(PLUGIN_INSTALL_VERSION "UNKNOWN")
-	endif()
-	dk_printVar(PLUGIN_INSTALL_VERSION)									# PLUGIN_INSTALL_VERSION: master
-
-	# PLUGIN_INSTALL_FOLDER
-	unset(PLUGIN_INSTALL_FOLDER)
-	if(FOLDER)
-		set(PLUGIN_INSTALL_FOLDER ${FOLDER})
-	elseif(PLUGIN_INSTALL_VERSION)
-		set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME}-${PLUGIN_INSTALL_VERSION})
-	else()
-		set(PLUGIN_INSTALL_FOLDER ${PLUGIN_INSTALL_NAME})
-	endif()
-	dk_printVar(PLUGIN_INSTALL_FOLDER)									# PLUGIN_INSTALL_FOLDER: zlib-master
-
-	# PLUGIN_INSTALL_ROOT
-	unset(PLUGIN_INSTALL_ROOT)
-	if(ROOT)
-		set(PLUGIN_INSTALL_ROOT "${ROOT}")
-		unset(ROOT)
-	else()
-		dk_assertPath($ENV{DK3RDPARTY_DIR})
-		set(PLUGIN_INSTALL_ROOT $ENV{DK3RDPARTY_DIR})
-	endif()
-	dk_printVar(PLUGIN_INSTALL_ROOT)									# PLUGIN_INSTALL_ROOT: C:/Users/name/digitalknob/Development/3rdParty
-
-	# PLUGIN_INSTALL_PATH
-	unset(PLUGIN_INSTALL_PATH)
-	if(PATH)
-		set(PLUGIN_INSTALL_PATH ${PATH})
-	else()
-		#dk_assertPath(PLUGIN_INSTALL_ROOT)	
-		#dk_assertVar(PLUGIN_INSTALL_FOLDER)
-		set(PLUGIN_INSTALL_PATH ${PLUGIN_INSTALL_ROOT}/${PLUGIN_INSTALL_FOLDER})			
-	endif()
-	dk_printVar(PLUGIN_INSTALL_PATH)									# PLUGIN_INSTALL_PATH: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-
-	
-	
-	
-	##############################################
-	############# <PLUGIN>_VARIABLES #############
-	##############################################
-	###### Print the current plugin to the window title bar ######
-	if(NOT DEFINED ENV{CURRENT_PLUGIN})
-		dk_envList(PLUGIN PUSH "${PLUGIN_IMPORT_NAME_UPPER}")
-	endif()
-	dk_assertVar(ENV{CURRENT_PLUGIN})
-	
-	message("############# $ENV{CURRENT_PLUGIN}_VARIABLES #############")
-	if(PLUGIN_IMPORT_NAME_LOWER AND PLUGIN_GIT_NAME_LOWER)
-		if(NOT "${PLUGIN_IMPORT_NAME_LOWER}" STREQUAL "${PLUGIN_GIT_NAME_LOWER}")
-			dk_warning("PLUGIN_IMPORT_NAME:${PLUGIN_IMPORT_NAME_LOWER} and PLUGIN_GIT_NAME:${PLUGIN_GIT_NAME_LOWER} do not match ")
-		endif()
-	endif()
-
-	### NOTE:
-	#	We may wish to create a PLUGIN_STACK to hold a referece to out plugin order. If and when plugins are built nested inside eachother at 
-	#   multiple levels, we'll need to keep up with the current position in the stack. 
-	#	For example, libpng depends on zlib. We import libpng, CURRENT_PLUGIN is LIBPNG. Inside libpng's build script we depend on zlib. 
-	#   Now the CURRENT_PLUGIN is ZLIB. Zlib get's configured and built and returns back the libpng to configure, problem is CURRENT_PLUGIN is still ZLIB.
-	#   So we need to pop zlib off of the stack when it completes so out CURRENT_PLUGIN points back to libpng. Currently dk_importVariables is how we
-	#   push the current plugin to the stack, we just need to find a good place to pop from the stack.
-	
-	# <PLUGIN>
-	unset($ENV{CURRENT_PLUGIN})
-	dk_set($ENV{CURRENT_PLUGIN} ${PLUGIN_INSTALL_PATH})
-#	dk_printVar($ENV{CURRENT_PLUGIN})										# ZLIB: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-	
-	# <PLUGIN>_DIR      ### DO NOT USE GIT_DIR ###
-	unset($ENV{CURRENT_PLUGIN}_DIR)
-	if(NOT "$ENV{CURRENT_PLUGIN}" STREQUAL "GIT")
-		dk_set($ENV{CURRENT_PLUGIN}_DIR ${PLUGIN_INSTALL_PATH})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_DIR)								# ZLIB_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master
-	endif()
-	
-	# <PLUGIN>_URL
-	unset($ENV{CURRENT_PLUGIN}_URL)
-	dk_set($ENV{CURRENT_PLUGIN}_URL ${PLUGIN_URL})
-#	dk_printVar($ENV{CURRENT_PLUGIN}_URL)									# ZLIB_URL: https://github.com/madler/zlib/archive/refs/heads/master.zip
-	
-	# <PLUGIN>_DL_FILE
-	unset($ENV{CURRENT_PLUGIN}_DL_FILE)
-	dk_set($ENV{CURRENT_PLUGIN}_DL_FILE ${PLUGIN_URL_FILENAME})
-	dk_printVar($ENV{CURRENT_PLUGIN}_DL_FILE)								# ZLIB_DL_FILE: master.zip
-	
-	# <PLUGIN>_VERSION
-	unset($ENV{CURRENT_PLUGIN}_VERSION)
-	dk_set($ENV{CURRENT_PLUGIN}_VERSION ${PLUGIN_INSTALL_VERSION})
-#	dk_printVar($ENV{CURRENT_PLUGIN}_VERSION)								# ZLIB_VERSION: master
-
-	# <PLUGIN>_FOLDER
-	unset($ENV{CURRENT_PLUGIN}_FOLDER)
-	dk_set($ENV{CURRENT_PLUGIN}_FOLDER ${PLUGIN_INSTALL_FOLDER})
-#	dk_printVar($ENV{CURRENT_PLUGIN}_FOLDER)								# ZLIB_FOLDER: zlib-master	
-	
-	# <PLUGIN>_IMPORT_NAME
-	unset($ENV{CURRENT_PLUGIN}_IMPORT_NAME)
-	dk_set($ENV{CURRENT_PLUGIN}_IMPORT_NAME ${PLUGIN_IMPORT_NAME_LOWER})
-#	dk_printVar($ENV{CURRENT_PLUGIN}_IMPORT_NAME)							# ZLIB_IMPORT_NAME: zlib
-		
-	# <PLUGIN>_BRANCH
-	unset($ENV{CURRENT_PLUGIN}_BRANCH)
-	if(PLUGIN_GIT_BRANCH)
-		dk_set($ENV{CURRENT_PLUGIN}_BRANCH ${PLUGIN_GIT_BRANCH})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_BRANCH)							# ZLIB_BRANCH: master
-	endif()
-	
-	# <PLUGIN>_TAG
-	unset($ENV{CURRENT_PLUGIN}_TAG)
-	if(PLUGIN_GIT_TAG)
-		dk_set($ENV{CURRENT_PLUGIN}_TAG ${PLUGIN_GIT_TAG})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_TAG)								# ZLIB_TAG:
-	endif()
-	
-	
-	
-	#####################################################
-	############# TARGET <PLUGIN>_VARIABLES #############
-	#####################################################
-	# These variables require a target_triple
-	if(NOT target_triple)
+	dk_getParameter(PRINTVARS)
+	if(PRINTVARS)
+		PRINTVARS()
 		return()
 	endif()
-	dk_validate(target_triple "dk_target_triple()")
 	
-	# <PLUGIN>_TRIPLE_DIR
-	unset($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)
-	if(target_triple)
-		dk_set($ENV{CURRENT_PLUGIN}_TRIPLE_DIR ${PLUGIN_INSTALL_PATH}/${target_triple})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_TRIPLE_DIR)						# ZLIB_TRIPLE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang
+	dk_unset(PLUGIN)
+	#dk_unset(PLUGIN_Args)
+	#dk_unset(PLUGIN_Build_Dir)
+	#dk_unset(PLUGIN_Config_Dir)
+	#dk_unset(PLUGIN_DKConfig)
+	#dk_unset(PLUGIN_Debug_Dir)
+	#dk_unset(PLUGIN_Download_Basename)
+	#dk_unset(PLUGIN_Id)
+	#dk_unset(PLUGIN_Import_Dirname)
+	#dk_unset(PLUGIN_Import_Name)
+	#dk_unset(PLUGIN_Import_Name_Lower)
+	#dk_unset(PLUGIN_Import_Name_Upper)
+	dk_unset(PLUGIN_Import_Path)
+	#dk_unset(PLUGIN_Install_Dirname)
+	#dk_unset(PLUGIN_Install_Name)
+	#dk_unset(PLUGIN_Install_Path)
+	#dk_unset(PLUGIN_Release_Dir)
+	#dk_unset(PLUGIN_Tuple_Dir)
+	#dk_unset(PLUGIN_Url)
+	#dk_unset(PLUGIN_Url_Basename)
+	#dk_unset(PLUGIN_Url_Extension)
+	#dk_unset(PLUGIN_Url_Name)
+	#dk_unset(PLUGIN_Url_Name_Lower)
+	#dk_unset(PLUGIN_Version)	
+																###### EXAMPLE ######
+	### IMPORT_PATH (PLUGIN_Import_Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+	dk_unset(IMPORT_PATH)
+	dk_getParameterValue(IMPORT_PATH)
+	set(PLUGIN_Import_Path "${IMPORT_PATH}" CACHE INTERNAL "" FORCE)
+	#dk_debug("PLUGIN_Import_Path = '${PLUGIN_Import_Path}'")
+	
+	PLUGIN()
+	set(${PLUGIN}_Import_Path ${PLUGIN_Import_Path} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Path = '${${PLUGIN}_Import_Path}'")
+	
+	### PLUGIN_Args												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+	set(${PLUGIN}_Args ${ARGV} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Args = '${${PLUGIN}_Args}'")
+	
+	### IMPORT_ROOT (PLUGIN;Import_Dirname)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
+	dk_unset(IMPORT_ROOT)
+	dk_getParameterValue(IMPORT_ROOT)
+	set(${PLUGIN}_Import_Dirname "${IMPORT_ROOT}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Dirname = '${${PLUGIN}_Import_Dirname}'")
+
+	### IMPORT_NAME (PLUGIN_Import_Name)						zlib
+	dk_unset(IMPORT_NAME)
+	dk_getParameterValue(IMPORT_NAME)
+	#dk_debug("IMPORT_NAME = '${IMPORT_NAME}'")
+	set(${PLUGIN}_Import_Name "${IMPORT_NAME}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Name = '${${PLUGIN}_Import_Name}'")
+	
+	### INSTALL_ROOT (PLUGIN_Install_Dirname)					/c/Users/Administrator/DigitalKnob/Development/3rdParty
+	dk_unset(INSTALL_ROOT)
+	dk_getParameterValue(INSTALL_ROOT)
+	#dk_debug("INSTALL_ROOT = '${INSTALL_ROOT}'")
+	set(${PLUGIN}_Install_Dirname "${INSTALL_ROOT}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Dirname = '${${PLUGIN}_Install_Dirname}'")
+
+	### INSTALL_NAME (PLUGIN_Install_Name)						zlib-master
+	dk_unset(INSTALL_NAME)
+	dk_getParameterValue(INSTALL_NAME)
+	#dk_debug("INSTALL_NAME = '${INSTALL_NAME}'")
+	set(${PLUGIN}_Install_Name "${INSTALL_NAME}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Name = '${${PLUGIN}_Install_Name}'")
+
+	### INSTALL_PATH (PLUGIN_Install_Path)						/c/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master
+	dk_unset(INSTALL_PATH)
+	dk_getParameterValue(INSTALL_PATH)
+	#dk_debug("INSTALL_PATH = '${INSTALL_PATH}'")
+	set(${PLUGIN}_Install_Path "${INSTALL_PATH}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Path = '${${PLUGIN}_Install_Path}'")
+
+	### VERSION (PLUGIN_Version)								v1.3.1
+	dk_unset(VERSION)
+	dk_getParameterValue(VERSION)
+	#dk_debug("VERSION = '${VERSION}'")
+	set(${PLUGIN}_Version "${VERSION}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Version = '${${PLUGIN}_Version}'")
+
+	### BRANCH (PLUGIN_Branch)									master
+	dk_unset(BRANCH)
+	dk_getParameterValue(BRANCH)
+	#dk_debug("BRANCH = '${BRANCH}'")
+	set(${PLUGIN}_Branch "${BRANCH}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Branch = '${${PLUGIN}_Branch}'")
+		
+#	### PLUGIN_Url												"https://github.com/madler/zlib/archive/refs/heads/master.zip"
+#	dk_isUrl("${ARGV0}")
+#	if(dk_isUrl)
+#		set(${PLUGIN}_Url "${ARGV0}" CACHE INTERNAL "" FORCE)
+#		#dk_getUrl(${${PLUGIN}_Url} ${PLUGIN}_Url)	
+#	endif()
+#	#dk_debug("${PLUGIN}_Url = '${${PLUGIN}_Url}'")
+
+	### PLUGIN_ vars
+	PLUGIN_DKConfig()
+	PLUGIN_Import_Name()
+	PLUGIN_Import_Path()
+	#PLUGIN_Id()
+	#PLUGIN_Args()
+	PLUGIN_Url()
+	PLUGIN_Url_Basename()
+	PLUGIN_Url_Name()
+	PLUGIN_Url_Extension()
+	PLUGIN_Import_Dirname()
+	#PLUGIN_Tuple_Dir()
+	#PLUGIN_Build_Dir()
+	#PLUGIN_Config_Dir()
+	#PLUGIN_Debug_Dir()
+	#PLUGIN_Release_Dir()
+	PLUGIN_Version()
+	PLUGIN_Download()
+	PLUGIN_Download_Basename()
+	PLUGIN_Install_Dirname()
+	PLUGIN_Install_Name()
+	PLUGIN_Install_Path()
+	
+	### ${PLUGIN}
+	dk_set(${PLUGIN} "${${PLUGIN}_Install_Path}")
+	#dk_debug("${PLUGIN} = '${${PLUGIN}}'")
+	
+	#####################################################
+	############# PLUGIN_Target_Directries ##############
+	#####################################################
+		
+	### PLUGIN_Tuple_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+	if(${PLUGIN}_Install_Path AND Target_Tuple)
+		dk_set(${PLUGIN}_Tuple_Dir "${${PLUGIN}_Install_Path}/${Target_Tuple}")
+		#dk_debug("${PLUGIN}_Tuple_Dir = '${${PLUGIN}_Tuple_Dir}'")
 	endif()
 	
-	# <PLUGIN>_CONFIG_DIR
-	unset($ENV{CURRENT_PLUGIN}_CONFIG_DIR)
-	dk_validate(CONFIG_PATH "dk_CONFIG_PATH()")
-	if(CONFIG_PATH)
-		dk_set($ENV{CURRENT_PLUGIN}_CONFIG_DIR ${PLUGIN_INSTALL_PATH}/${CONFIG_PATH})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_CONFIG_DIR)						# ZLIB_CONFIG_DIR: C:/Users/user/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	### PLUGIN_Config_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	if(${PLUGIN}_Install_Path AND Target_Config)
+		#dk_validate(Target_Config "dk_Target_Config()")
+		dk_set(${PLUGIN}_Config_Dir "${${PLUGIN}_Install_Path}/${Target_Config}")
+		#dk_debug("${PLUGIN}_Config_Dir = '${${PLUGIN}_Config_Dir}'")
+	endif()
+
+	### PLUGIN_Build_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	if(${PLUGIN}_Install_Path AND Target_Build)
+		dk_set(${PLUGIN}_Build_Dir "${${PLUGIN}_Install_Path}/${Target_Build}")
+		#dk_debug("${PLUGIN}_Build_Dir = '${${PLUGIN}_Build_Dir}'")
 	endif()
 	
-	# <PLUGIN>_BUILD_DIR
-	unset($ENV{CURRENT_PLUGIN}_BUILD_DIR)
-	if(BUILD_PATH)
-		dk_set($ENV{CURRENT_PLUGIN}_BUILD_DIR ${PLUGIN_INSTALL_PATH}/${BUILD_PATH})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_BUILD_DIR)							# ZLIB_BUILD_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	### PLUGIN_Debug_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	if(${PLUGIN}_Tuple_Dir AND Debug_Dir)
+		dk_set(${PLUGIN}_Debug_Dir "${${PLUGIN}_Tuple_Dir}/${Debug_Dir}")
+		#dk_debug("${PLUGIN}_Debug_Dir = '${${PLUGIN}_Debug_Dir}'")
 	endif()
 	
-	# <PLUGIN>_DEBUG_DIR
-	unset($ENV{CURRENT_PLUGIN}_DEBUG_DIR)
-	if(DEBUG_DIR)
-		dk_set($ENV{CURRENT_PLUGIN}_DEBUG_DIR ${PLUGIN_INSTALL_PATH}/${target_triple}/${DEBUG_DIR})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_DEBUG_DIR)							# ZLIB_DEBUG_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Debug
+	### PLUGIN_Release_Dir										C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+	if(${PLUGIN}_Tuple_Dir AND Release_Dir)
+		dk_set(${PLUGIN}_Release_Dir "${${PLUGIN}_Tuple_Dir}/${Release_Dir}")
+		#dk_debug("${PLUGIN}_Release_Dir = '${${PLUGIN}_Release_Dir}'")
 	endif()
 	
-	# <PLUGIN>_RELEASE_DIR
-	unset($ENV{CURRENT_PLUGIN}_RELEASE_DIR)
-	if(RELEASE_DIR)
-		dk_set($ENV{CURRENT_PLUGIN}_RELEASE_DIR ${PLUGIN_INSTALL_PATH}/${target_triple}/${RELEASE_DIR})
-#		dk_printVar($ENV{CURRENT_PLUGIN}_RELEASE_DIR)						# ZLIB_RELEASE_DIR: C:/Users/name/digitalknob/Development/3rdParty/zlib-master/win_x86_64_clang/Release
-	endif()
-	
+	#dk_copyVariables("PLUGIN_" "${PLUGIN}_")			### PLUGIN_ to ZLIB_
+	#dk_copyVariables("PLUGIN_" "${PLUGIN_Id}_")		### PLUGIN_ ti zlib
+	PRINTVARS()
 endfunction()
 
 
 
+##################################
+function(PLUGIN_DKConfig)
+	if(${PLUGIN}_DKConfig)
+		return()
+	endif()
+	dk_assertVar(PLUGIN)
+	
+	PLUGIN_Import_Path()
+	if(EXISTS "${${PLUGIN}_Import_Path}/dkconfig.txt")
+		set(${PLUGIN}_DKConfig "${${PLUGIN}_Import_Path}/dkconfig.txt")
+	endif()
+
+	if(NOT ${PLUGIN}_DKConfig)
+		dk_notice("${PLUGIN}_DKConfig is invalid")
+	endif()
+	
+	set(${PLUGIN}_DKConfig ${${PLUGIN}_DKConfig} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_DKConfig = '${${PLUGIN}_DKConfig}'")
+endfunction()
+
+##################################
+function(PLUGIN_Type)
+	if(${PLUGIN}_Type)
+		return()
+	endif()
+	
+	PLUGIN_DKConfig()
+	if(${PLUGIN}_DKConfig)
+		dk_fileVariables("${${PLUGIN}_DKConfig}")
+	endif()	
+		
+	if(NOT ${PLUGIN}_Type)
+		dk_notice("${PLUGIN}_Type is invalid")
+	endif()
+	
+	set(${PLUGIN}_Type ${${PLUGIN}_Type} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Type = '${${PLUGIN}_Type}'")	
+endfunction()
+
+
+##################################
+function(PLUGIN_Import)
+	if(${PLUGIN}_Import)
+		return()
+	endif()
+	
+	PLUGIN_DKConfig()
+	if(${PLUGIN}_DKConfig)
+		dk_fileVariables("${${PLUGIN}_DKConfig}")
+		
+		### ${PLUGIN}_Import ###                                    				###### EXAMPLE ######
+		
+		### <PLUGIN>_Import
+		### <PLUGIN>_Host_Tuple_Import
+		dk_validate(Host_Tuple "dk_Host_Tuple()")									#      Windows_X86_64
+		if(${PLUGIN}_${Host_Tuple}_Import)											# zlib_Windows_X86_64_Import
+			set(${PLUGIN}_Import "${PLUGIN}_${Host_Tuple}_Import")
+		
+		### <PLUGIN>_Host_Os_Import
+		elseif(${PLUGIN}_${Host_Os}_Import)											# zlib_Windows_Import
+			set(${PLUGIN}_Import "${PLUGIN}_${Host_Os}_Import")
+		
+		### <PLUGIN>_Host_Arch_Import
+		elseif(${PLUGIN}_${Host_Arch}_Import)										# zlib_Windows_Import
+			set(${PLUGIN}_Import "${PLUGIN}_${Host_Arch}_Import")
+		
+		### <PLUGIN>_Apple_Import
+		elseif(Apple_Host AND ${PLUGIN}_Apple_Import)								# zlib_Apple_Import
+			set(${PLUGIN}_Import "${PLUGIN}_Apple_Import")
+			
+		### <PLUGIN>_Linux_Import
+		elseif(Linux_Host AND ${PLUGIN}_Linux_Import)								# zlib_Linux_Import
+			set(${PLUGIN}_Import "${PLUGIN}_Linux_Import")
+			
+		### <PLUGIN>_Unix_Import
+		elseif(Unix_Host AND ${PLUGIN}_Unix_Import)									# zlib_Unix_Import
+			set(${PLUGIN}_Import "${PLUGIN}_Unix_Import")
+		
+		### <PLUGIN>_Windows_Import
+		elseif(Windows_Host AND ${PLUGIN}_Windows_Import)							# zlib_Windows_Import
+			set(${PLUGIN}_Import "${PLUGIN}_Windows_Import")
+		
+		### Default
+		#elseif(${PLUGIN}_Import)													# zlib_Import
+			#set(${PLUGIN}_Import "${PLUGIN}_Import")
+		else()
+			dk_notice("No Import found for ${PLUGIN}:${${PLUGIN}_Import_Path}")
+		endif()
+	endif()
+	
+	if(NOT ${PLUGIN}_Import)
+		dk_notice("${PLUGIN}_Import is invalid")
+	endif()
+	
+	set(${PLUGIN}_Import ${${PLUGIN}_Import} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import = '${${PLUGIN}_Import}'")
+endfunction()
 
 
 
+##################################
+function(PLUGIN_Download)
+	if(${PLUGIN}_Download)
+		return()
+	endif()
+	
+#	PLUGIN_Import_Name()
+#	PLUGIN_Url_Name()
+#	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+#	if(NOT "${${PLUGIN}_Import_Name}" MATCHES "${${PLUGIN}_Url_Name}")
+#		PLUGIN_Install_Name()
+#		PLUGIN_Url_Extension()
+#		dk_set(${PLUGIN}_Download "${DKDOWNLOAD_DIR}/${${PLUGIN}_Install_Name}${${PLUGIN}_Url_Extension}")
+#	else()
+	dk_DKDOWNLOAD_DIR()
+	PLUGIN_Url_Basename()
+	if(DKDOWNLOAD_DIR AND ${PLUGIN}_Url_Basename)
+		dk_set(${PLUGIN}_Download "${DKDOWNLOAD_DIR}/${${PLUGIN}_Url_Basename}")
+	endif()
+	
+	if(NOT ${PLUGIN}_Download)
+		dk_notice("${PLUGIN}_Download is invalid")
+	endif()
+	
+	set(${PLUGIN}_Download "${${PLUGIN}_Download}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Download = ${${PLUGIN}_Download}")
+endfunction()
+
+##################################
+function(PLUGIN_Download_Basename)
+	if(${PLUGIN}_Download_Basename)
+		return()
+	endif()
+	
+#	PLUGIN_Import_Name()
+#	PLUGIN_Url_Name()
+#	if(NOT "${${PLUGIN}_Import_Name}" MATCHES "${${PLUGIN}_Url_Name}")
+#		PLUGIN_Install_Name()
+#		PLUGIN_Url_Extension()
+#		dk_set(${PLUGIN}_Download_Basename "${${PLUGIN}_Install_Name}${${PLUGIN}_Url_Extension}")
+#	else()
+#		PLUGIN_Url_Basename()
+#		dk_set(${PLUGIN}_Download_Basename "${${PLUGIN}_Url_Basename}")
+#	endif()
+
+	PLUGIN_Download()
+	if(${PLUGIN}_Download)
+		dk_basename(${${PLUGIN}_Download} ${PLUGIN}_Download_Basename)
+	endif()
+
+	if(NOT ${PLUGIN}_Download_Basename)
+		dk_notice("${PLUGIN}_Download_Basename is invalid")
+	endif()
+	
+	set(${PLUGIN}_Download_Basename "${${PLUGIN}_Download_Basename}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Download_Basename = ${${PLUGIN}_Download_Basename}")
+endfunction()
+
+############################
+function(PLUGIN_Import_Name)
+	if(${PLUGIN}_Import_Name)
+		return()
+	endif()
+		
+	PLUGIN_Import_Path()
+	if(${PLUGIN}_Import_Path)
+		dk_basename("${${PLUGIN}_Import_Path}"	${PLUGIN}_Import_Name)
+	else()
+		PLUGIN_Url()
+		dk_includes("${${PLUGIN}_Url}" "https://github.com" dk_includes)
+		if(dk_includes)
+			dk_replaceAll(${${PLUGIN}_Url}			"/" 	"" 	${PLUGIN}_Url_List)
+			dk_replaceAll(${${PLUGIN}_Url_List} 	";;" 	";" ${PLUGIN}_Url_List)
+			if(NOT ${PLUGIN}_Url_List)
+				dk_error("${PLUGIN}_Url_List is invalid")
+			endif()
+			#dk_debug("${PLUGIN}_Url_List = '${${PLUGIN}_Url_List}'")
+			
+			#d_k_listToArray("${${PLUGIN}_Url_List}"  ${PLUGIN}_Url_Array)
+			#dk_printVar(${PLUGIN}_Url_Array)
+			#if(NOT ${PLUGIN}_Url_Array)
+			#	dk_error("${PLUGIN}_Url_Array is invalid")
+			#endif()
+			##dk_debug("${PLUGIN}_Url_Array = '${${PLUGIN}_Url_Array}'")
+			
+			#dk_arrayAt(${PLUGIN}_Url_Array	3	${PLUGIN}_Import_Name)
+			#if(NOT ${PLUGIN}_Import_Name)
+			#	dk_error("${PLUGIN}_Import_Name is invalid")
+			#endif()
+		endif()
+		#dk_debug("${PLUGIN}_Import_Name = '${${PLUGIN}_Import_Name}'")
+	endif()
+	
+	if(NOT ${PLUGIN}_Import_Name)
+		dk_notice("${PLUGIN}_Import_Name is invalid")
+	endif()
+	
+	set(${PLUGIN}_Import_Name "${${PLUGIN}_Import_Name}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Name = '${${PLUGIN}_Import_Name}'")
+endfunction()
+
+##################################
+function(PLUGIN_Import_Name_Lower)
+	if(${PLUGIN}_Import_Name_Lower)
+		return()
+	endif()
+	
+	PLUGIN_Import_Name()
+	if(${PLUGIN}_Import_Name)
+		dk_toLower("${${PLUGIN}_Import_Name}" 	${PLUGIN}_Import_Name_Lower)
+	endif()
+	
+	if(NOT ${PLUGIN}_Import_Name_Lower)
+		dk_error("${PLUGIN}_Import_Name_Lower is invalid")
+	endif()
+	
+	set(${PLUGIN}_Import_Name_Lower "${${PLUGIN}_Import_Name_Lower}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Name_Lower = '${${PLUGIN}_Import_Name_Lower}'")
+endfunction()
+
+##################################
+function(PLUGIN_Import_Dirname)
+	if(${PLUGIN}_Import_Dirname)
+		return()
+	endif()
+	
+	PLUGIN_Import_Path()
+	if(${PLUGIN}_Import_Path)
+		dk_dirname("${${PLUGIN}_Import_Path}" 	${PLUGIN}_Import_Dirname)
+	endif()
+	
+	if(NOT ${PLUGIN}_Import_Dirname)
+		dk_notice("${PLUGIN}_Import_Dirname is invalid")
+	endif()
+	
+	set(${PLUGIN}_Import_Dirname "${${PLUGIN}_Import_Dirname}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Dirname = '${${PLUGIN}_Import_Dirname}'")
+endfunction()
+
+################################
+function(PLUGIN_Install_Dirname)
+	if(${PLUGIN}_Install_Dirname)
+		return()
+	endif()
+	
+	PLUGIN_Type()
+	if(${PLUGIN}_Type)
+		if("${${PLUGIN}_Type}" STREQUAL "Tool")
+			dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+			set(${PLUGIN}_Install_Dirname "${DKTOOLS_DIR}")
+		endif()
+	else()
+		dk_DK3RDPARTY_DIR()
+		if(DK3RDPARTY_DIR)
+			set(${PLUGIN}_Install_Dirname "${DK3RDPARTY_DIR}")
+		endif()
+	endif()
+	
+	if(NOT ${PLUGIN}_Install_Dirname)
+		dk_error("${PLUGIN}_Install_Dirname is invalid")
+	endif()
+	
+	set(${PLUGIN}_Install_Dirname ${${PLUGIN}_Install_Dirname}  CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Dirname = '${${PLUGIN}_Install_Dirname}'")
+endfunction()
+
+#############################
+function(PLUGIN_Url_Basename)
+	if(${PLUGIN}_Url_Basename)
+		return()
+	endif()
+	
+	PLUGIN_Url()
+	if(${PLUGIN}_Url)
+		dk_basename(${${PLUGIN}_Url})
+		set(${PLUGIN}_Url_Basename ${dk_basename})
+		string(REPLACE "?" "" ${PLUGIN}_Url_Basename ${${PLUGIN}_Url_Basename})
+		string(REPLACE "=" "" ${PLUGIN}_Url_Basename ${${PLUGIN}_Url_Basename})
+	endif()
+
+	if(NOT ${PLUGIN}_Url_Basename)
+		dk_notice("${PLUGIN}_Url_Basename is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url_Basename ${${PLUGIN}_Url_Basename} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url_Basename = '${${PLUGIN}_Url_Basename}'")
+endfunction()
+
+#############################
+function(PLUGIN_Url_Dirname)
+	if(${PLUGIN}_Url_Dirname)
+		return()
+	endif()
+	
+	PLUGIN_Url()
+	if(${PLUGIN}_Url)
+		dk_dirname("${${PLUGIN}_Url}" ${PLUGIN}_Url_Dirname)
+	endif()
+	
+	if(NOT ${PLUGIN}_Url_Dirname)
+		dk_notice("${PLUGIN}_Url_Dirname is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url_Dirname ${${PLUGIN}_Url_Dirname} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url_Dirname = '${${PLUGIN}_Url_Dirname}'")
+endfunction()
+
+##############################
+function(PLUGIN_Url_Extension)
+	if(${PLUGIN}_Url_Extension)
+		return()
+	endif()
+	
+	PLUGIN_Url_Basename()
+	if(${PLUGIN}_Url_Basename)
+		dk_getExtension("${${PLUGIN}_Url_Basename}" ${PLUGIN}_Url_Extension)
+	endif()
+	
+	if(NOT ${PLUGIN}_Url_Extension)
+		dk_notice("${PLUGIN}_Url_Extension is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url_Extension ${${PLUGIN}_Url_Extension} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url_Extension = '${${PLUGIN}_Url_Extension}'")
+endfunction()
+
+#########################
+function(PLUGIN_Url_Name)
+	if(${PLUGIN}_Url_Name)
+		return()
+	endif()
+	
+	PLUGIN_Url_Basename()
+	if(${PLUGIN}_Url_Basename)
+		dk_removeExtension("${${PLUGIN}_Url_Basename}" ${PLUGIN}_Url_Name)
+	endif()
+	
+	if(NOT ${PLUGIN}_Url_Name)
+		dk_notice("${PLUGIN}_Url_Name is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url_Name ${${PLUGIN}_Url_Name} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url_Name = '${${PLUGIN}_Url_Name}'")
+endfunction()
+
+###############################
+function(PLUGIN_Url_Name_Lower)
+	if(${PLUGIN}_Url_Name_Lower)
+		return()
+	endif()
+	
+	PLUGIN_Url_Name()
+	if(${PLUGIN}_Url_Name)
+		dk_toLower(${${PLUGIN}_Url_Name})
+		set(${PLUGIN}_Url_Name_Lower ${dk_toLower})
+	endif()
+	
+	if(NOT ${PLUGIN}_Url_Name_Lower)
+		dk_notice("${PLUGIN}_Url_Name_Lower is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url_Name_Lower ${${PLUGIN}_Url_Name_Lower} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url_Name_Lower = '${${PLUGIN}_Url_Name_Lower}'")
+endfunction()
+
+####################
+function(PLUGIN_Url)
+	if(${PLUGIN}_Url)
+		return()
+	endif()
+	
+	PLUGIN_Import()
+	if(${${PLUGIN}_Import})
+		dk_set(${PLUGIN}_Url ${${${PLUGIN}_Import}})
+	elseif(${PLUGIN}_Import)
+		dk_set(${PLUGIN}_Url ${${PLUGIN}_Import})
+	endif()
+	
+	if(NOT ${PLUGIN}_Url)
+		dk_notice("${PLUGIN}_Url is invalid")
+	endif()
+	
+	set(${PLUGIN}_Url ${${PLUGIN}_Url} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Url = '${${PLUGIN}_Url}'")
+endfunction()
+
+#############################
+function(PLUGIN_Install_Name)
+	if(${PLUGIN}_Install_Name)
+		return()
+	endif()
+	
+	PLUGIN_Import_Name()
+	PLUGIN_Version()
+	if((${PLUGIN}_Import_Name) AND (${PLUGIN}_Version))
+		set(${PLUGIN}_Install_Name "${${PLUGIN}_Import_Name}-${${PLUGIN}_Version}")
+	elseif(NOT ${PLUGIN}_Install_Name)	
+		set(${PLUGIN}_Install_Name "${${PLUGIN}_Import_Name}")
+	endif()
+	
+	if(NOT ${PLUGIN}_Install_Name)
+		dk_error("${PLUGIN}_Install_Name is invalid")
+	endif()
+	
+	set(${PLUGIN}_Install_Name ${${PLUGIN}_Install_Name} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Name = '${${PLUGIN}_Install_Name}'")
+endfunction()
+
+#############################
+function(PLUGIN_Install_Path)
+	if(${PLUGIN}_Install_Path)
+		return()
+	endif()
+	
+	PLUGIN_Install_Dirname()	
+	PLUGIN_Install_Name()
+	if(${PLUGIN}_Install_Dirname AND ${PLUGIN}_Install_Name)
+		set(${PLUGIN}_Install_Path "${${PLUGIN}_Install_Dirname}/${${PLUGIN}_Install_Name}")
+	endif()
+	
+	if(NOT ${PLUGIN}_Install_Path)
+		dk_error("${PLUGIN}_Install_Path is invalid")
+	endif()
+	
+	set(${PLUGIN}_Install_Path ${${PLUGIN}_Install_Path} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Install_Path = '${${PLUGIN}_Install_Path}'")
+endfunction()
+
+############################
+function(PLUGIN_Import_Path)
+	if(${PLUGIN}_Import_Path)
+		return()
+	endif()
+	
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	if(PLUGIN AND DKIMPORTS_DIR)
+		set(${PLUGIN}_Import_Path "${DKIMPORTS_DIR}/${PLUGIN}")
+	elseif(${CURRENT_PLUGIN}_Import_Path)
+		set(${PLUGIN}_Import_Path "${${CURRENT_PLUGIN}_Import_Path}")
+	#elseif(CMAKE_CURRENT_FUNCTION_LIST_DIR)
+		#dk_debug("CMAKE_CURRENT_FUNCTION_LIST_DIR = ${CMAKE_CURRENT_FUNCTION_LIST_DIR}")
+	endif()
+	
+	if(NOT ${PLUGIN}_Import_Path)
+		dk_notice("${PLUGIN}_Import_Path is invalid")
+	endif()
+		
+	set(${PLUGIN}_Import_Path ${${PLUGIN}_Import_Path} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Path = '${${PLUGIN}_Import_Path}'")
+endfunction()
+
+########################
+function(PLUGIN_Version)
+	if(${PLUGIN}_Version)
+		return()
+	endif()
+	
+	PLUGIN_Url_Name_Lower()
+	if(${PLUGIN}_Url_Name_Lower)
+		PLUGIN_Import_Name_Lower()
+		if(${PLUGIN}_Import_Name_Lower)
+			dk_replaceAll("${${PLUGIN}_Url_Name_Lower}" 	"${${PLUGIN}_Import_Name_Lower}" 	""  ${PLUGIN}_Version)
+		endif()
+		if(NOT ${PLUGIN}_Version)
+			#PLUGIN_Tag()
+			set(${PLUGIN}_Version ${${PLUGIN}_TAG})
+		endif()
+		if(NOT ${PLUGIN}_Version)
+			#PLUGIN_Branch()
+			set(${PLUGIN}_Version ${${PLUGIN}_Branch})
+		endif()
+	endif()
+	
+	dk_trimNonAlphaNumeric("${${PLUGIN}_Version}" ${PLUGIN}_Version)
+	
+	if(NOT ${PLUGIN}_Version)
+		dk_notice("${PLUGIN}_Version is invalid")
+	endif()
+	
+	set(${PLUGIN}_Version "${${PLUGIN}_Version}" CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Version = '${${PLUGIN}_Version}'")
+endfunction()
+
+##################################
+function(PLUGIN_Import_Name_Upper)
+	if(${PLUGIN}_Import_Name_Upper)
+		return()
+	endif()
+	
+	PLUGIN_Import_Name()
+	dk_toUpper("${${PLUGIN}_Import_Name}" ${PLUGIN}_Import_Name_Upper)
+	
+	if(NOT ${PLUGIN}_Import_Name_Upper)
+		dk_error("${PLUGIN}_Import_Name_Upper is invalid")
+	endif()
+	
+	set(${PLUGIN}_Import_Name_Upper ${${PLUGIN}_Import_Name_Upper} CACHE INTERNAL "" FORCE)
+	#dk_debug("${PLUGIN}_Import_Name_Upper = '${${PLUGIN}_Import_Name_Upper}'")
+endfunction()
+
+###################
+#function(PLUGIN_Id)
+#	if(${${PLUGIN}_Id})
+#		return()
+#	endif()
+#	
+#	PLUGIN_Import_Name()
+#
+#	if(NOT ${PLUGIN}_Import_Name)
+#		dk_error("${PLUGIN}_Import_Name is invalid")
+#	endif()
+#	#dk_debug("${PLUGIN}_Import_Name = '${${PLUGIN}_Import_Name}'")
+#	
+# 	set(${PLUGIN}_Id "${${PLUGIN}_Import_Name}" CACHE INTERNAL "" FORCE)
+#	if(NOT ${PLUGIN}_Id)
+#		dk_error("${PLUGIN}_Id is invalid")
+#	endif()
+#	#dk_debug("${PLUGIN}_Id = '${${PLUGIN}_Id}'")
+#	
+#	set(${PLUGIN}_Id ${${PLUGIN}_Id} CACHE INTERNAL "" FORCE)
+#endfunction()
+	
+###################
+function(PLUGIN)
+	if(PLUGIN)
+		return()
+	endif()
+	
+	if(PLUGIN_Import_Name)
+		dk_debug("PLUGIN_Import_Name = '${PLUGIN_Import_Name}'")
+		set(PLUGIN ${PLUGIN_Import_Name})
+	elseif(PLUGIN_Import_Path)
+		dk_debug("PLUGIN_Import_Path = '${PLUGIN_Import_Path}'")
+		dk_basename(${PLUGIN_Import_Path} PLUGIN)
+	elseif(CURRENT_PLUGIN)
+		dk_debug("CURRENT_PLUGIN = '${CURRENT_PLUGIN}'")
+		set(PLUGIN ${CURRENT_PLUGIN})
+	elseif(DKSCRIPT_DIR)
+		dk_debug("DKSCRIPT_DIR = '${DKSCRIPT_DIR}'")
+		dk_basename(${DKSCRIPT_DIR} PLUGIN)
+	else()
+		dk_error("Found no way to get the PLUGIN name")
+	endif()
+	
+	if(NOT PLUGIN)
+		PLUGIN_Import_Name()
+		set(PLUGIN "${${PLUGIN}_Import_Name}")
+	endif()
+	
+	if(NOT PLUGIN)
+		dk_error("PLUGIN is invalid")
+	endif()
+	
+	set(PLUGIN ${PLUGIN} CACHE INTERNAL "" FORCE)
+	dk_debug("PLUGIN = '${PLUGIN}'")
+endfunction()
+	
 
 
-
-
-
+	
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+###################
+function(PRINTVARS)
+	dk_debug()
+	dk_debug("################## PLUGIN variables ##################")
+	dk_printPrefixVars("PLUGIN")
+	dk_debug()
+	
+	dk_debug()
+	dk_debug("######################## ${PLUGIN} variables ########################")
+	dk_printPrefixVars("${PLUGIN}")
+	dk_debug()
+endfunction()	
 
 
 
@@ -489,5 +816,8 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	dk_importVariables("https://github.com/git-for-windows/git/releases/download/v2.44.0.windows.1/PortableGit-2.44.0-64-bit.7z.exe"  NAME git   ROOT $ENV{DKTOOLS_DIR})
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	dk_importVariables(IMPORT_PATH "${DKIMPORTS_DIR}/git")
+	dk_importVariables(PRINTVARS)
+	
 endfunction()

@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
@@ -16,12 +17,12 @@ function dk_color(){
 //	echo "###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n";
 
 /*
-	$USE_COLOR = 0;
+	$dk_color_ENABLE = 0;
 	if(isset($argv[0])){
-		$USE_COLOR = $argv[0];
+		$dk_color_ENABLE = $argv[0];
 	}
 	
-	if($USE_COLOR != 1){
+	if($dk_color_ENABLE != 1){
 		//return 0;
 	}
 */
@@ -36,14 +37,14 @@ function dk_color(){
 	global $EQN; $EQN="\005";						// Enquiry - Trigger a response at the receiving end, to see if it is still present.
 	global $ACK; $ACK="\006";						// Acknowledge - Indication of successful receipt of a message.
 	global $BEL; $BEL="\007";						// Bell, Alert	- Call for attention from an operator.
-	global  $BS;  $BS="\010";						// Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
-	global  $HT;  $HT="\011";						// Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
-	global  $LF;  $LF="\012";						// Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
-	global  $VT;  $VT="\013";						// Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
-	global  $FF;  $FF="\014";						// Form Feed - Move down to the top of the next page.
-	global  $CR;  $CR="\015";						// Carriage Return - Move to column zero while staying on the same line.
-	global  $SO;  $SO="\016";						// Shift Out - Switch to an alternative character set.
-	global  $SI;  $SI="\017";						// Shift In - Return to regular character set after SO.
+	global $BS;  $BS="\010";						// Backspace - Move one position leftwards. Next character may overprint or replace the character that was there.
+	global $HT;  $HT="\011";						// Character Tabulation, Horizontal Tabulation	- Move right to the next tab stop.
+	global $LF;  $LF="\012";						// Line Feed - Move down to the same position on the next line (some devices also moved to the left column).
+	global $VT;  $VT="\013";						// Line Tabulation, Vertical Tabulation - Move down to the next vertical tab stop.
+	global $FF;  $FF="\014";						// Form Feed - Move down to the top of the next page.
+	global $CR;  $CR="\015";						// Carriage Return - Move to column zero while staying on the same line.
+	global $SO;  $SO="\016";						// Shift Out - Switch to an alternative character set.
+	global $SI;  $SI="\017";						// Shift In - Return to regular character set after SO.
 	global $DLE; $DLE="\020";						// Data Link Escape - Cause a number of contiguously following characters to be interpreted in some different way
 	global $DC1; $DC1="\021";						// Device Control One - Turn on (DC1 and DC2) or off (DC3 and DC4) devices.
 	global $DC2; $DC2="\022";						// Device Control Two
@@ -53,80 +54,80 @@ function dk_color(){
 	global $SYN; $SYN="\026";						// Synchronous Idle - Sent in synchronous transmission systems when no other character is being transmitted.
 	global $ETB; $ETB="\027";						// End of Transmission Block - End of a transmission block of data when data are divided into such blocks.
 	global $CAN; $CAN="\030";						// Cancel - Indicates that the data preceding it are in error or are to be disregarded.
-	global  $EM;  $EM="\031";						// End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
+	global $EM;  $EM="\031";						// End of medium - Indicates on paper or magnetic tapes that the end of the usable tape had been reached.
 	global $SUB; $SUB="\032";						// Substitute -Replaces a character that was found to be invalid or in error. Should be ignored.
 	global $ESC; $ESC="\033";						// Escape - Alters the meaning of a limited number of following bytes.
-	global $FS;   $FS="\034";						// File Separator - Can be used as delimiters to mark fields of data structures. 
-	global $GS;   $GS="\035";						// Group Separator
-	global $RS;   $RS="\036";						// Record Separator
-	global $US;   $US="\037";						// Unit Separator - US is the lowest level
-	global $SP;   $SP="\040";						// Space - Move right one character position.
+	global $FS;  $FS="\034";						// File Separator - Can be used as delimiters to mark fields of data structures. 
+	global $GS;  $GS="\035";						// Group Separator
+	global $RS;  $RS="\036";						// Record Separator
+	global $US;  $US="\037";						// Unit Separator - US is the lowest level
+	global $SP;  $SP="\040";						// Space - Move right one character position.
 	global $DEL; $DEL="\177";						// Delete - Should be ignored. Used to delete characters on punched tape by punching out all the holes.
 	
 	//############ C1 control codes #############
-	global $PAD; $PAD="${ESC}@";					// Padding Character
-	global $HOP; $HOP="${ESC}A";					// High Octet Preset
-	global $BPH; $BPH="${ESC}B";					// Break Permitted Here
-	global $NBH; $NBH="${ESC}C";					// No Break Here
-	global $IND; $IND="${ESC}D";					// Index
-	global $NEL; $NEL="${ESC}E";					// Next Line
-	global $SSA; $SSA="${ESC}F";					// Start of Selected Area
-	global $ESA; $ESA="${ESC}G";					// End of Selected Area
-	global $HTS; $HTS="${ESC}H";					// Horizontal Tabulation Set
-	global $HTJ; $HTJ="${ESC}I";					// Horizontal Tabulation With Justification
-	global $VTS; $VTS="${ESC}J";					// Vertical Tabulation Set
-	global $PLD; $PLD="${ESC}K";					// Partial Line Down
-	global $PLU; $PLU="${ESC}L";					// Partial Line Up
-	global $RI;   $RI="${ESC}M";					// Reverse Index
-	global $SS2; $SS2="${ESC}N";					// Single Shift Two
-	global $SS3; $SS3="${ESC}O";					// Single Shift Three
-	global $DCS; $DCS="${ESC}P";					// Device Control String
-	global $PU1; $PU1="${ESC}Q";					// Private Use 1
-	global $PU2; $PU2="${ESC}R";					// Private Use 2
-	global $STS; $STS="${ESC}S";					// Set Transmit State
-	global $CCH; $CCH="${ESC}T";					// Cancel character
-	global  $MW;  $MW="${ESC}U";					// Message Waiting
-	global $SPA; $SPA="${ESC}V";					// Start of Protected Area
-	global $EPA; $EPA="${ESC}W";					// End of Protected Area
-	global $SOS; $SOS="${ESC}X";					// Start of String
-	global $SGC; $SGC="${ESC}Y";					// Single Graphic Character Introducer
-	global $SCI; $SCI="${ESC}Z";					// Single Character Introducer
-	global $CSI; $CSI="${ESC}[";					// Control Sequence Introducer
-	global $ST; $ST="${ESC}\\";						// String Terminator
-	global $OSC; $OSC="${ESC}]";					// Operating System Command
-	global $PM; $PM="${ESC}^^";						// Privacy Message
-	global $APC; $APC="${ESC}_";					// Application Program Command
+	global $PAD; $PAD="{$ESC}@";					// Padding Character
+	global $HOP; $HOP="{$ESC}A";					// High Octet Preset
+	global $BPH; $BPH="{$ESC}B";					// Break Permitted Here
+	global $NBH; $NBH="{$ESC}C";					// No Break Here
+	global $IND; $IND="{$ESC}D";					// Index
+	global $NEL; $NEL="{$ESC}E";					// Next Line
+	global $SSA; $SSA="{$ESC}F";					// Start of Selected Area
+	global $ESA; $ESA="{$ESC}G";					// End of Selected Area
+	global $HTS; $HTS="{$ESC}H";					// Horizontal Tabulation Set
+	global $HTJ; $HTJ="{$ESC}I";					// Horizontal Tabulation With Justification
+	global $VTS; $VTS="{$ESC}J";					// Vertical Tabulation Set
+	global $PLD; $PLD="{$ESC}K";					// Partial Line Down
+	global $PLU; $PLU="{$ESC}L";					// Partial Line Up
+	global $RI;  $RI= "{$ESC}M";			   			// Reverse Index
+	global $SS2; $SS2="{$ESC}N";					// Single Shift Two
+	global $SS3; $SS3="{$ESC}O";					// Single Shift Three
+	global $DCS; $DCS="{$ESC}P";					// Device Control String
+	global $PU1; $PU1="{$ESC}Q";					// Private Use 1
+	global $PU2; $PU2="{$ESC}R";					// Private Use 2
+	global $STS; $STS="{$ESC}S";					// Set Transmit State
+	global $CCH; $CCH="{$ESC}T";					// Cancel character
+	global $MW;  $MW= "{$ESC}U";						// Message Waiting
+	global $SPA; $SPA="{$ESC}V";					// Start of Protected Area
+	global $EPA; $EPA="{$ESC}W";					// End of Protected Area
+	global $SOS; $SOS="{$ESC}X";					// Start of String
+	global $SGC; $SGC="{$ESC}Y";					// Single Graphic Character Introducer
+	global $SCI; $SCI="{$ESC}Z";					// Single Character Introducer
+	global $CSI; $CSI="{$ESC}[";					// Control Sequence Introducer
+	global $ST;  $ST= "{$ESC}\\";					// String Terminator
+	global $OSC; $OSC="{$ESC}]";					// Operating System Command
+	global $PM;  $PM= "{$ESC}^^";					// Privacy Message
+	global $APC; $APC="{$ESC}_";					// Application Program Command
 
-	global $DECSC; $DECSC="${ESC}7";				// Save Cursor Position in Memory**
-	global $DECSR; $DECSR="${ESC}8";				// Restore Cursor Position from Memory**
+	global $DECSC; $DECSC="{$ESC}7";				// Save Cursor Position in Memory**
+	global $DECSR; $DECSR="{$ESC}8";				// Restore Cursor Position from Memory**
 
-	global $DECSCUSR0; $DECSCUSR0="${ESC}0${SP}q";	// User Shape
-	global $DECSCUSR1; $DECSCUSR1="${ESC}1${SP}q";	// Blinking Block
-	global $DECSCUSR2; $DECSCUSR2="${ESC}2${SP}q";	// Steady Block
-	global $DECSCUSR3; $DECSCUSR3="${ESC}3${SP}q";	// Blinking Underline
-	global $DECSCUSR4; $DECSCUSR4="${ESC}4${SP}q";	// Steady Underline
-	global $DECSCUSR5; $DECSCUSR5="${ESC}5${SP}q";	// Blinking Bar
-	global $DECSCUSR6; $DECSCUSR6="${ESC}6${SP}q";	// Steady Bar
+	global $DECSCUSR0; $DECSCUSR0="{$ESC}0{$SP}q";	// User Shape
+	global $DECSCUSR1; $DECSCUSR1="{$ESC}1{$SP}q";	// Blinking Block
+	global $DECSCUSR2; $DECSCUSR2="{$ESC}2{$SP}q";	// Steady Block
+	global $DECSCUSR3; $DECSCUSR3="{$ESC}3{$SP}q";	// Blinking Underline
+	global $DECSCUSR4; $DECSCUSR4="{$ESC}4{$SP}q";	// Steady Underline
+	global $DECSCUSR5; $DECSCUSR5="{$ESC}5{$SP}q";	// Blinking Bar
+	global $DECSCUSR6; $DECSCUSR6="{$ESC}6{$SP}q";	// Steady Bar
 
 	//############ CSI Commands #############
-	global $CCU; $CCU="${CSI}A";			// Cursor Up 1 - Moves the cursor 1 cell in the given direction. If the cursor is already at the edge of the screen, this has no effect.
-	//$CCU="${CSI}<n>A";					// Cursor Up -	Moves the cursor n (default 1) cells in the given direction. If the cursor is already at the edge of the screen, this has no effect.
-	global $CUD; $CUD="${CSI}B";			// Cursor Down 1
-	//$CCU="${CSI}<n>B";					// Cursor Down
-	global $CUF; $CUF="${CSI}C";			// Cursor Forward 1
-	//$CCU="${CSI}<n>C";					// Cursor Forward
-	global $CUB; $CUB="${CSI}D";			// Cursor Back 1
-	//$CCU="${CSI}<n>D";					// Cursor Back
-	global $CNL; $CNL="${CSI}E";			// Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (not ANSI.SYS)
-	//$CCU="${CSI}<n>E";					// Cursor Next Line - Moves cursor to beginning of the line n (default 1);" lines down. (not ANSI.SYS)
-	global $CPL; $CPL="${CSI}F";			// Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (not ANSI.SYS)
-	//$CCU="${CSI}<n>F";					// Cursor Previous Line - Moves cursor to beginning of the line n (default 1);" lines up. (not ANSI.SYS)
-	global $CHA; $CHA="${CSI}G";			// Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (not ANSI.SYS)
-	//$CCU="${CSI}<n>G";					// Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (not ANSI.SYS)
-	//$CUP="${CSI}<n>;<m>H;";				// Cursor Position	- Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
-	//$HVP="${CSI}<y>;<x>f;";				// Horizontal Vertical Position - Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
-	global $ANSISYSSC; $ANSISYSSC="${CSI}s";// Save Cursor – **With no parameters, performs a save cursor operation like DECSC
-	global $ANSISYSRC; $ANSISYSRC="${CSI}u";// Restore Cursor - **With no parameters, performs a restore cursor operation like DECRC
+	global $CCU; $CCU="{$CSI}A";			// Cursor Up 1 - Moves the cursor 1 cell in the given direction. If the cursor is already at the edge of the screen, this has no effect.
+	//$CCU="{$CSI}<n>A";					// Cursor Up -	Moves the cursor n (default 1) cells in the given direction. If the cursor is already at the edge of the screen, this has no effect.
+	global $CUD; $CUD="{$CSI}B";			// Cursor Down 1
+	//$CCU="{$CSI}<n>B";					// Cursor Down
+	global $CUF; $CUF="{$CSI}C";			// Cursor Forward 1
+	//$CCU="{$CSI}<n>C";					// Cursor Forward
+	global $CUB; $CUB="{$CSI}D";			// Cursor Back 1
+	//$CCU="{$CSI}<n>D";					// Cursor Back
+	global $CNL; $CNL="{$CSI}E";			// Cursor Next Line 1 - Moves cursor to beginning of the line 1 line down. (not ANSI.SYS)
+	//$CCU="{$CSI}<n>E";					// Cursor Next Line - Moves cursor to beginning of the line n (default 1);" lines down. (not ANSI.SYS)
+	global $CPL; $CPL="{$CSI}F";			// Cursor Previous Line 1 - Moves cursor to beginning of the line 1 line up. (not ANSI.SYS)
+	//$CCU="{$CSI}<n>F";					// Cursor Previous Line - Moves cursor to beginning of the line n (default 1);" lines up. (not ANSI.SYS)
+	global $CHA; $CHA="{$CSI}G";			// Cursor Horizontal Absolute 1 - Moves the cursor to column 1. (not ANSI.SYS)
+	//$CCU="{$CSI}<n>G";					// Cursor Horizontal Absolute - Moves the cursor to column n (default 1). (not ANSI.SYS)
+	//$CUP="{$CSI}<n>;<m>H;";				// Cursor Position	- Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
+	//$HVP="{$CSI}<y>;<x>f;";				// Horizontal Vertical Position - Cursor moves to <x>; <y> coordinate within the viewport, where <x> is the column of the <y> line
+	global $ANSISYSSC; $ANSISYSSC="{$CSI}s";// Save Cursor – **With no parameters, performs a save cursor operation like DECSC
+	global $ANSISYSRC; $ANSISYSRC="{$CSI}u";// Restore Cursor - **With no parameters, performs a restore cursor operation like DECRC
 
 	//CSI n J	ED							// Erase in Display - Clears part of the screen. If n is 0 (or missing;, clear from cursor to end of screen. If n is 1, clear from cursor to beginning of the screen. If n is 2, clear entire screen (and moves cursor to upper left on DOS ANSI.SYS). If n is 3, clear entire screen and delete all lines saved in the scrollback buffer.
 	//CSI n K	EL							// Erase in Line - Erases part of the line. If n is 0 (or missing), clear from cursor to the end of the line. If n is 1, clear from cursor to beginning of the line. If n is 2, clear entire line. Cursor position does not change.
@@ -137,97 +138,97 @@ function dk_color(){
 	//CSI 5i								// AUX Port On	- Enable aux serial port usually for local serial printer
 	//CSI 4i								// AUX Port Off - Disable aux serial port usually for local serial printer
 	//CSI 6n	DSR							// Device Status Report - Reports the cursor position (CPR) by transmitting ESC[n;mR, where n is the row and m is the column.
-	global $ATT160; $ATT160="${CSI}?12";	// Text Cursor Blink
-	global $DECTCEM; $DECTCEM="${CSI}?25";	// Text Cursor Show/Hide
+	global $ATT160; $ATT160="{$CSI}?12";	// Text Cursor Blink
+	global $DECTCEM; $DECTCEM="{$CSI}?25";	// Text Cursor Show/Hide
 	
-	//(SU="${CSI}<n>S";						// Scroll Up - Scroll text up by <n>. Also known as pan down, new lines fill in from the bottom of the screen
-	//(SD="${CSI}<n>T";						// Scroll Down - Scroll down by <n>. Also known as pan up, new lines fill in from the top of the screen
+	//(SU="{$CSI}<n>S";						// Scroll Up - Scroll text up by <n>. Also known as pan down, new lines fill in from the bottom of the screen
+	//(SD="{$CSI}<n>T";						// Scroll Down - Scroll down by <n>. Also known as pan up, new lines fill in from the top of the screen
 
-	global $DEC; $DEC="${ESC}(0";			// Enables DEC Line Drawing Mode
-	global $ASCII; $ASCII="${ESC}(B";		// Enables ASCII Mode (Default)
+	global $DEC; $DEC="{$ESC}(0";			// Enables DEC Line Drawing Mode
+	global $ASCII; $ASCII="{$ESC}(B";		// Enables ASCII Mode (Default)
 
 	//# Cursor
-	global $cursor_blink_on; $cursor_blink_on="${ATT160}h";		// Text Cursor Enable Blinking
-	global $cursor_blink_off; $cursor_blink_off="${ATT160}l";	// Text Cursor Disable Blinking
-	global $cursor_show; $cursor_show="${DECTCEM}h";			// Text Cursor Enable Mode Show
-	global $cursor_hide; $cursor_hide="${DECTCEM}l";			// Text Cursor Enable Mode Hide
+	global $cursor_blink_on; $cursor_blink_on="{$ATT160}h";		// Text Cursor Enable Blinking
+	global $cursor_blink_off; $cursor_blink_off="{$ATT160}l";	// Text Cursor Disable Blinking
+	global $cursor_show; $cursor_show="{$DECTCEM}h";			// Text Cursor Enable Mode Show
+	global $cursor_hide; $cursor_hide="{$DECTCEM}l";			// Text Cursor Enable Mode Hide
 
 	//# Attributes on
-	global $clr; $clr="${CSI}0m";					// Default					Reset all modes (styles and colors;
-	global $bright; $bright="${CSI}1m";				// Bright					Applies brightness flag to foreground color
-	global $dim; $dim="${CSI}2m";					// Dim						Applies dim flag to foreground color
-	global $italic; $italic="${CSI}3m";				// Italic
-	global $underline; $underline="${CSI}4m";		// Underline
-	global $blink; $blink="${CSI}5m";				// Blink
-	global $fblink; $fblink="${CSI}6m";				// Rapid Blink
-	global $negative; $negative="${CSI}7m";			// Negative				Swaps foreground and background colors
-	global $invisible; $invisible="${CSI}8m";		// Invisible
-	global $strike; $strike="${CSI}9m";				// Strike Through
+	global $clr; $clr="{$CSI}0m";					// Default					Reset all modes (styles and colors;
+	global $bright; $bright="{$CSI}1m";				// Bright					Applies brightness flag to foreground color
+	global $dim; $dim="{$CSI}2m";					// Dim						Applies dim flag to foreground color
+	global $italic; $italic="{$CSI}3m";				// Italic
+	global $underline; $underline="{$CSI}4m";		// Underline
+	global $blink; $blink="{$CSI}5m";				// Blink
+	global $fblink; $fblink="{$CSI}6m";				// Rapid Blink
+	global $negative; $negative="{$CSI}7m";			// Negative				Swaps foreground and background colors
+	global $invisible; $invisible="{$CSI}8m";		// Invisible
+	global $strike; $strike="{$CSI}9m";				// Strike Through
 
 	//# Attributes off
-	//$20m="${CSI}20m";								// 20
-	//$21m="${CSI}21m";								// 21
-	global $nodim; $nodim="${CSI}22m";				// No Dim					Removes brightness/intensity flag from foreground color
-	global $nobright; $nobright="${CSI}22m";		// No Bright				Removes brightness/intensity flag from foreground color
-	global $noitalic; $noitalic="${CSI}23m";		// No Italic
-	global $nounderline; $nounderline="${CSI}24m";	// No Underline
-	global $noblink; $noblink="${CSI}25m";			// No Blink
-	//$26m="${CSI}26m";								// 26
-	global $nonegative; $nonegative="${CSI}27m";	// No Negative				Returns foreground/background to normal
-	global $noinvisible; $noinvisible="${CSI}28m";	// No Invisible
-	global $nostrike; $nostrike="${CSI}29m";		// No Strike Through
+	//$20m="{$CSI}20m";								// 20
+	//$21m="{$CSI}21m";								// 21
+	global $nodim; $nodim="{$CSI}22m";				// No Dim					Removes brightness/intensity flag from foreground color
+	global $nobright; $nobright="{$CSI}22m";		// No Bright				Removes brightness/intensity flag from foreground color
+	global $noitalic; $noitalic="{$CSI}23m";		// No Italic
+	global $nounderline; $nounderline="{$CSI}24m";	// No Underline
+	global $noblink; $noblink="{$CSI}25m";			// No Blink
+	//$26m="{$CSI}26m";								// 26
+	global $nonegative; $nonegative="{$CSI}27m";	// No Negative				Returns foreground/background to normal
+	global $noinvisible; $noinvisible="{$CSI}28m";	// No Invisible
+	global $nostrike; $nostrike="{$CSI}29m";		// No Strike Through
 
 	//# Foreground Colors
-	global $black; $black="${CSI}30m";				// Foreground Black			Applies non-dim/bright black to foreground
-	global $red; $red="${CSI}31m";					// Foreground Red				Applies non-dim/bright red to foreground
-	global $green; $green="${CSI}32m";				// Foreground Green			Applies non-dim/bright green to foreground
-	global $yellow; $yellow="${CSI}33m";			// Foreground Yellow			Applies non-dim/bright yellow to foreground
-	global $blue; $blue="${CSI}34m";				// Foreground Blue				Applies non-dim/bright blue to foreground
-	global $magenta; $magenta="${CSI}35m";			// Foreground Magenta			Applies non-dim/bright magenta to foreground
-	global $cyan; $cyan="${CSI}36m";				// Foreground Cyan				Applies non-dim/bright cyan to foreground
-	global $white; $white="${CSI}37m";				// Foreground White			Applies non-dim/bright white to foreground
-	global $extended; $extended="${CSI}38m";		// Foreground Extended			Applies extended color value to the foreground
-	global $fg_clr; $fg_clr="${CSI}39m";			// Foreground Default			Applies only the foreground portion of the defaults
+	global $black; $black="{$CSI}30m";				// Foreground Black			Applies non-dim/bright black to foreground
+	global $red; $red="{$CSI}31m";					// Foreground Red				Applies non-dim/bright red to foreground
+	global $green; $green="{$CSI}32m";				// Foreground Green			Applies non-dim/bright green to foreground
+	global $yellow; $yellow="{$CSI}33m";			// Foreground Yellow			Applies non-dim/bright yellow to foreground
+	global $blue; $blue="{$CSI}34m";				// Foreground Blue				Applies non-dim/bright blue to foreground
+	global $magenta; $magenta="{$CSI}35m";			// Foreground Magenta			Applies non-dim/bright magenta to foreground
+	global $cyan; $cyan="{$CSI}36m";				// Foreground Cyan				Applies non-dim/bright cyan to foreground
+	global $white; $white="{$CSI}37m";				// Foreground White			Applies non-dim/bright white to foreground
+	global $extended; $extended="{$CSI}38m";		// Foreground Extended			Applies extended color value to the foreground
+	global $fg_clr; $fg_clr="{$CSI}39m";			// Foreground Default			Applies only the foreground portion of the defaults
 
 	//# Background Colors
-	global $bg_black; $bg_black="${CSI}40m";		// Background Black			Applies non-dim/bright black to background
-	global $bg_red; $bg_red="${CSI}41m";			// Background Red				Applies non-dim/bright red to background
-	global $bg_green; $bg_green="${CSI}42m";		// Background Green			Applies non-dim/bright green to background
-	global $bg_yellow; $bg_yellow="${CSI}43m";		// Background Yellow			Applies non-dim/bright yellow to background
-	global $bg_blue; $bg_blue="${CSI}44m";			// Background Blue				Applies non-dim/bright blue to background
-	global $bg_magenta; $bg_magenta="${CSI}45m";	// Background Magenta			Applies non-dim/bright magenta to background
-	global $bg_cyan; $bg_cyan="${CSI}46m";			// Background Cyan				Applies non-dim/bright cyan to background
-	global $bg_white; $bg_white="${CSI}47m";		// Background White			Applies non-dim/bright white to background
-	global $bg_extended; $bg_extended="${CSI}48m";	// Background Extended			Applies extended color value to the background
-	global $bg_clr; $bg_clr="${CSI}49m";	 		// Background Default			Applies only the background portion of the defaults
+	global $bg_black; $bg_black="{$CSI}40m";		// Background Black			Applies non-dim/bright black to background
+	global $bg_red; $bg_red="{$CSI}41m";			// Background Red				Applies non-dim/bright red to background
+	global $bg_green; $bg_green="{$CSI}42m";		// Background Green			Applies non-dim/bright green to background
+	global $bg_yellow; $bg_yellow="{$CSI}43m";		// Background Yellow			Applies non-dim/bright yellow to background
+	global $bg_blue; $bg_blue="{$CSI}44m";			// Background Blue				Applies non-dim/bright blue to background
+	global $bg_magenta; $bg_magenta="{$CSI}45m";	// Background Magenta			Applies non-dim/bright magenta to background
+	global $bg_cyan; $bg_cyan="{$CSI}46m";			// Background Cyan				Applies non-dim/bright cyan to background
+	global $bg_white; $bg_white="{$CSI}47m";		// Background White			Applies non-dim/bright white to background
+	global $bg_extended; $bg_extended="{$CSI}48m";	// Background Extended			Applies extended color value to the background
+	global $bg_clr; $bg_clr="{$CSI}49m";	 		// Background Default			Applies only the background portion of the defaults
 
 	//# Foreground Colors (light)
-	global $lblack; $lblack="${CSI}90m";				// Bright Foreground Black		Applies bright black to foreground
-	global $lred; $lred="${CSI}91m";					// Bright Foreground Red		Applies bright red to foreground
-	global $lgreen; $lgreen="${CSI}92m";				// Bright Foreground Green		Applies bright green to foreground
-	global $lyellow; $lyellow="${CSI}93m";				// Bright Foreground Yellow	Applies bright yellow to foreground
-	global $lblue; $lblue="${CSI}94m";					// Bright Foreground Blue		Applies bright blue to foreground
-	global $lmagenta; $lmagenta="${CSI}95m";				// Bright Foreground Magenta	Applies bright magenta to foreground
-	global $lcyan; $lcyan="${CSI}96m";					// Bright Foreground Cyan		Applies bright cyan to foreground
-	global $lwhite; $lwhite="${CSI}97m";				// Bright Foreground White		Applies bright white to foreground
+	global $lblack; $lblack="{$CSI}90m";				// Bright Foreground Black		Applies bright black to foreground
+	global $lred; $lred="{$CSI}91m";					// Bright Foreground Red		Applies bright red to foreground
+	global $lgreen; $lgreen="{$CSI}92m";				// Bright Foreground Green		Applies bright green to foreground
+	global $lyellow; $lyellow="{$CSI}93m";				// Bright Foreground Yellow	Applies bright yellow to foreground
+	global $lblue; $lblue="{$CSI}94m";					// Bright Foreground Blue		Applies bright blue to foreground
+	global $lmagenta; $lmagenta="{$CSI}95m";				// Bright Foreground Magenta	Applies bright magenta to foreground
+	global $lcyan; $lcyan="{$CSI}96m";					// Bright Foreground Cyan		Applies bright cyan to foreground
+	global $lwhite; $lwhite="{$CSI}97m";				// Bright Foreground White		Applies bright white to foreground
 
 	//# Background Colors (light)
-	global $bg_lblack; $bg_lblack="${CSI}100m";			// Bright Background Black		Applies bright black to background
-	global $bg_lred; $bg_lred="${CSI}101m";				// Bright Background Red		Applies bright red to background
-	global $bg_lgreen; $bg_lgreen="${CSI}102m";			// Bright Background Green		Applies bright green to background
-	global $bg_lyellow; $bg_lyellow="${CSI}103m";			// Bright Background Yellow	Applies bright yellow to background
-	global $bg_lblue; $bg_lblue="${CSI}104m";				// Bright Background Blue		Applies bright blue to background
-	global $bg_lmagenta; $bg_lmagenta="${CSI}105m";			// Bright Background Magenta	Applies bright magenta to background
-	global $bg_lcyan; $bg_lcyan="${CSI}106m";				// Bright Background Cyan		Applies bright cyan to background
-	global $bg_lwhite; $bg_lwhite="${CSI}107m";			// Bright Background White		Applies bright white to background
+	global $bg_lblack; $bg_lblack="{$CSI}100m";			// Bright Background Black		Applies bright black to background
+	global $bg_lred; $bg_lred="{$CSI}101m";				// Bright Background Red		Applies bright red to background
+	global $bg_lgreen; $bg_lgreen="{$CSI}102m";			// Bright Background Green		Applies bright green to background
+	global $bg_lyellow; $bg_lyellow="{$CSI}103m";			// Bright Background Yellow	Applies bright yellow to background
+	global $bg_lblue; $bg_lblue="{$CSI}104m";				// Bright Background Blue		Applies bright blue to background
+	global $bg_lmagenta; $bg_lmagenta="{$CSI}105m";			// Bright Background Magenta	Applies bright magenta to background
+	global $bg_lcyan; $bg_lcyan="{$CSI}106m";				// Bright Background Cyan		Applies bright cyan to background
+	global $bg_lwhite; $bg_lwhite="{$CSI}107m";			// Bright Background White		Applies bright white to background
 
 	//# Foreground RGB Colors
-	global $RGB; $RGB="${CSI}38;2;";					// ".$GLOBALS['RGB']."50;100;150m			"${CSI}38;2;50;100;150m";
+	global $RGB; $RGB="{$CSI}38;2;";					// ".$GLOBALS['RGB']."50;100;150m			"{$CSI}38;2;50;100;150m";
 
 	//# Background RGB Colors
-	global $bg_RGB; $bg_RGB="${CSI}48;2;";				// ".$GLOBALS['bg_RGB']."150;100;50m			"${CSI}38;2;150;100;50m
+	global $bg_RGB; $bg_RGB="{$CSI}48;2;";				// ".$GLOBALS['bg_RGB']."150;100;50m			"{$CSI}38;2;150;100;50m
 
-	echo("${blue}C${green}O${red}L${magenta}O${cyan}R ${blue}O${green}N${clr}\n");
+	echo("{$blue}C{$green}O{$red}L{$magenta}O{$cyan}R {$blue}O{$green}N{$clr}\n");
 /*
 	goto USE_COLOR_endif
 	:USE_COLOR_else
@@ -301,7 +302,7 @@ function dk_color(){
 	dk_unset RGB
 	dk_unset bg_RGB
 
-	dk_echo "${clr} COLOR OFF"
+	dk_echo "{$clr} COLOR OFF"
 	:USE_COLOR_endif
 	*/
 }
@@ -696,6 +697,6 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 	echo("\n");
 }}
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 
 ?>

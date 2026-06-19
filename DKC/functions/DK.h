@@ -1,9 +1,10 @@
+// DKINIT_c
 #pragma once
 #ifndef DK_h
 #define DK_h
 
 int DK_C = 0;
-int exit_status;
+int exit_status = 0;
 char* DKSCRIPT_PATH;
 char* DKSCRIPT_DIR;
 char* DKSCRIPT_FILE;
@@ -37,8 +38,7 @@ char* DKC_FUNCTIONS_DIR_;
 //#include "dk_DIGITALKNOB_DIR.h"
 
 int DK() {
-	dk_echo("\x1B[104m \x1B[30m - %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
-	return 0;
+	return dk_echo("\x1B[104m \x1B[30m - %s %s \x1B[0m \n\n", DKCOMPILER, DKCOMPILER_VERSION);
 }
 
 

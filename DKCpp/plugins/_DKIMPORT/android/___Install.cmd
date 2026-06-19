@@ -10,7 +10,7 @@ set "PACKAGE_NAME=%TYPE%.%COMPANY%.%APP_NAME%"
 
 :: App package name and lable
 set "TYPE=com"
-set "COMPANY=digitalknob"
+set "COMPANY=DigitalKnob"
 set "APP_NAME=dk"
 set "APP_LABEL=DKApp"
 
@@ -19,7 +19,7 @@ echo 15. Uninstall any previous matching package
 ::echo error level from list packages is %ERRORLEVEL%
 %ComSpec% /c "%ANDROID_HOME%/platform-tools/adb" shell pm list packages %PACKAGE_NAME% | findstr /I /C:"%PACKAGE_NAME%"
 ::echo error level from list packages findstr is %ERRORLEVEL%
-if %ERRORLEVEL% equ 0 ( 
+if %ERRORLEVEL% equ 0 (
 	echo uninstalling previous %PACKAGE_NAME%  package . . .
 	%ComSpec% /c "%ANDROID_HOME%/platform-tools/adb" shell pm uninstall %PACKAGE_NAME%
 	%IF_ERROR% "Failed to Uninstall previous package"
@@ -38,5 +38,5 @@ if %GRADLE% equ 1 (
 
 
 ::echo 17. Copying assets to device
-::call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME% 
+::call %APP_ROOT%___CopyAssets.cmd %PACKAGE_NAME%
 

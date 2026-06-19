@@ -1,57 +1,92 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
+
+rem echo.
+rem if "%~1" neq "" (echo 1 = %~1)
+rem if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
+rem if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
 
 
-if not defined dk_return_PRINT (set "dk_return_PRINT=0")
-if not defined dk_return (set "dk_return=dk_return")
-::################################################################################
-::dk_return(exit_code, message)
-::#
-::#		dk_return						pass
-::#		dk_return -1					FIXME
-::#		dk_return  1					FIXME
-::#		dk_return "message"				pass
-::#		dk_return  0 "message"			pass
-::#		dk_return -1 "error message"	fail
-::#		dk_return  1 "error message"	fail
-::#
+rem if NOT defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+if NOT defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
+rem if NOT defined dk_return (set "dk_return=%dk_call% dk_return")
+
+rem ################################################################################
+rem dk_return(exit_code, message)
+rem #
+rem #		dk_return						pass
+rem #		dk_return  0					pass
+rem #		dk_return "message"				pass
+rem #		dk_return  0 "message"			pass
+rem #		dk_return -1					error
+rem #		dk_return  1					error
+rem #		dk_return -1 "error message"	error
+rem #		dk_return  1 "error message"	error
+rem #
 :dk_return
-::setlocal enableDelayedExpansion
-	::if 1%1 neq +1%1 (echo %~1 is not_numeric) else (echo %~1 is numeric)
-	
-	::if "%~1" equ "" endlocal & (
-	if "%~1" equ "" (
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_STATUS=%errorlevel%"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGS=!__ARGV__!"
-		set "LAST_MESSAGE=dk_return generic"
-		if "%dk_return_PRINT%" equ "1" (call dk_printLastError)
-	)
-	::if "%~2" equ "" endlocal & (
-	if "%~2" equ "" (
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_STATUS=%errorlevel%"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGV=!__ARGV__!"
-		set "LAST_MESSAGE=%~1"
-		if "%dk_return_PRINT%" equ "1" call dk_printLastError
-	)
-	::if "%~2" neq "" endlocal & (
-	if "%~2" neq "" (
-		set "dk_return_PRINT=%dk_return_PRINT%"
-		set "LAST_STATUS=%~1"
-		set "LAST_FILE=!__FILENAME__!"
-		set "LAST_FUNC=!__FUNC__!"
-		set "LAST_ARGV=!__ARGV__!"
-		set "LAST_MESSAGE=%~2"
-		if "%dk_return_PRINT%" equ "1" call dk_printLastError
-	)
-	
-	if "%dk_return_PRINT%" equ "1" dk_printLastError
+%setlocal%
 
-::call exit /b %LAST_STATUS%
+	set "arg1=%~1"
+	set "arg2=%~2"
+	if defined %~1 (set "arg1=!%~1!")
+	
+	if NOT defined arg1 (goto :endNumCheck)
+	set "arg1=%arg1:.=%"
+	set "arg1=%arg1:+=%"
+	if %arg1:-=% equ +%arg1:-=% (set "arg1IsNumber=1")
+	:endNumCheck
+
+	rem ##### No Parameters ######
+	if NOT defined arg1 (
+
+		rem echo ##### No Parameters ######
+		set "LAST_STATUS=!errorlevel!"
+		set "LAST_MESSAGE="
+	
+	rem ##### 1 Parameter ######
+	) else if NOT defined arg2 (
+
+		rem echo ##### 1 Parameter ######
+		if defined arg1IsNumber (
+			set "LAST_STATUS=%~1"
+			set "LAST_MESSAGE="
+		) else (
+			set "LAST_STATUS=!errorlevel!"
+			set "LAST_MESSAGE=%~1"
+		)
+
+	rem ##### 2 Parameters ######
+	) else if defined arg2 (
+
+		rem echo ##### 2 Parameters ######
+		set "LAST_STATUS=%~1"
+		set "LAST_MESSAGE="
+	)
+
+	set "dk_return_PRINT=!dk_return_PRINT!"
+	set "LAST_FILE=!__FILENAME__!"
+	set "LAST_FUNC=!__FUNC__!"
+	set "LAST_ARGS=!__ARGV__!"
+	
+	if "%dk_return_PRINT_SUCCESS%" equ "1" (
+		if "!LAST_STATUS!" equ "0"	(echo "!LAST_FUNC!(!LAST_ARGV!):%green%!LAST_STATUS! '!LAST_MESSAGE!' %clr%")
+	) 
+	if "%dk_return_PRINT_ERRORS%" equ "1" (
+		if "!LAST_STATUS!" neq "0"	(
+			echo "!LAST_FUNC!(!LAST_ARGV!):%red%!LAST_STATUS! '!LAST_MESSAGE!' %clr%"
+			%dk_call% dk_stacktrace
+		)
+	)
+	
+rem exit /b !LAST_STATUS! & set "LAST_STATUS="
+exit /b 0

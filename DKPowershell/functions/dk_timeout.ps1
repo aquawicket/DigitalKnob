@@ -1,10 +1,10 @@
 . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1
-if(!$dk_timeout){ $dk_timeout = 1 } else{ return } #include guard
+if(!$dk_timeout_ps1){ $dk_timeout_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_timeout(seconds)
 #
-#	Pause execution and wait for <enter> keypress to continue or amount of seconds to pass
+#	Pause execution AND wait for <enter> keypress to continue or amount of seconds to pass
 #
 function Global:dk_timeout() {
 	dk_debugFunc 0 1
@@ -14,14 +14,14 @@ function Global:dk_timeout() {
 	if(!$seconds){
 		$seconds = 10
 	}
-	dk_assertVar seconds
+	dk_call dk_assertVar seconds
 	
 #	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."
 #	$counter = 0
-#	while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt $seconds)){
+#	while(!$Host.UI.RawUI.KeyAvailable -AND ($counter++ -lt $seconds)){
 #		[Threading.Thread]::Sleep(1000)
 #	}
-	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }
+	Write-Host "Waiting for ${seconds} seconds, press a key to continue .."; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -AND ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }
 }
 
 
@@ -38,7 +38,7 @@ function Global:dk_timeout() {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call dk_timeout
 	

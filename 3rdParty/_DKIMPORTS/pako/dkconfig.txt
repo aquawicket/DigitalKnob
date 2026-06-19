@@ -1,0 +1,5 @@
+############ pako ############
+# https://github.com/nodeca/pako.git
+# https://github.com/nodeca/pako/archive/62cb729e7813176ce2d2694b89c8724680fca383.zip
+
+pako_Import=https://github.com/nodeca/pako/archive/62cb729e7813176ce2d2694b89c8724680fca383.zip

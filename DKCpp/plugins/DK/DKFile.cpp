@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -38,11 +38,11 @@
 #include <cstring>
 //WARNING_ENABLE
 
-DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKCpp/apps/DKBuilder/win_x86/Release/DKBuilder.exe
+DKString DKFile::exe_path;      //EXAMPLE:  C:/Users/aquawicket/DigitalKnob/Development/DKCpp/apps/DKBuilder/Windows_X86/Release/DKBuilder.exe
 DKString DKFile::exe_name;      //EXAMPLE:  DKBuilder.exe
-DKString DKFile::app_path;      //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKCpp/apps/DKBuilder/win_x86/Release/
+DKString DKFile::app_path;      //EXAMPLE:  C:/Users/aquawicket/DigitalKnob/Development/DKCpp/apps/DKBuilder/Windows_X86/Release/
 DKString DKFile::app_name;      //EXAMPLE:  DKBuilder
-DKString DKFile::local_assets;  //EXAMPLE:  C:/Users/aquawicket/digitalknob/Development/DKCpp/apps/DKBuilder/assets/
+DKString DKFile::local_assets;  //EXAMPLE:  C:/Users/aquawicket/DigitalKnob/Development/DKCpp/apps/DKBuilder/assets/
 DKString DKFile::online_assets; //EXAMPLE:  http://aquawicket.github.io/DigitalKnob/DKCpp/plugins/
 
 bool DKFile::DebugPath(const DKString& path){
@@ -306,7 +306,7 @@ bool DKFile::GetAppPath(DKString& apppath){
 	apppath = DKFile::exe_path;
 	found = apppath.find_last_of("/");
 	apppath.erase(apppath.begin() + found + 1, apppath.end());
-	//apppath = "/mnt/sdcard/digitalknob/";
+	//apppath = "/mnt/sdcard/DigitalKnob/";
 	/*
 	#include <SDL.h>
 	const char* externalStoragePath = SDL_AndroidGetExternalStoragePath();

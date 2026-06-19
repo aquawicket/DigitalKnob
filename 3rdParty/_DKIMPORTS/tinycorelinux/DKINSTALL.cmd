@@ -1,36 +1,43 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
+rem ####################################################################
 ::# DKINSTALL()
 ::#
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+::%setlocal%
 	
 	set "TINYCORELINUX_RPI=http://www.tinycorelinux.net/15.x/aarch64/test_releases/RPi/piCore64-15.0.0-beta2.zip"
 	set "TINYCORELINUX_X86=http://www.tinycorelinux.net/15.x/x86/release/Core-current.iso"
 	set "TINYCORELINUX_X86_64=http://www.tinycorelinux.net/15.x/x86_64/release/CorePure64-current.iso"
 	set "TINYCORELINUX_DL=%TINYCORELINUX_X86_64%"
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set TINYCORELINUX_DIR "%DKTOOLS_DIR%\TinyCoreLinux"
-	%dk_call% dk_set TINYCORELINUX_IMG %TINYCORELINUX_DIR%\tinycore.img
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate QEMU_IMG_EXE "%dk_call% %DKIMPORTS_DIR%\qemu\DKINSTALL.cmd"
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_set tinycorelinux_dir "%DKTOOLS_DIR%/TinyCoreLinux"
+	%dk_call% dk_set tinycorelinux_img %tinycorelinux_dir%/tinycore.img
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate qemu_img_exe %dk_call% dk_depend qemu
 	
-	setlocal
-		if exist "%TINYCORELINUX_IMG%" (%return%)
+	%setlocal%
+		if EXIST "%tinycorelinux_img%" (%return%)
 		
 		%dk_call% dk_info "Installing tiny-core-linux . . ."
-		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_DL_FILE
+		%dk_call% dk_basename %TINYCORELINUX_DL% TINYCORELINUX_IMPORT_FILE
 		%dk_call% dk_download %TINYCORELINUX_DL%
 		
 		::###### create and cd into install directory ######
-		%dk_call% dk_mkdir %TINYCORELINUX_DIR% 
+		%dk_call% dk_mkdir %TINYCORELINUX_DIR%
 		%dk_call% dk_chdir %TINYCORELINUX_DIR%
 		
 		::###### Install the OS to the .img file ######
@@ -49,25 +56,24 @@ if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_info ". A LAUNCH shortcut will be created the int DKTools/TinyCoreLinux directory"
 		
 		::###### Create the virtual image (10gb) ######
-		%QEMU_IMG_EXE% create -f qcow2 %TINYCORELINUX_IMG% 10G
+		%qemu_img_exe% create -f qcow2 %TINYCORELINUX_IMG% 10G
 		
 		::###### Launching the VM ######
-		%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-		%QEMU_SYSTEM_X86_64_EXE% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_DL_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
+		%dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
+		%qemu-system-x86_64_exe% -cdrom %DKDOWNLOAD_DIR%/%TINYCORELINUX_IMPORT_FILE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -m 1G -cpu max -smp 2 -vga virtio -display sdl
 	
 		::###### create TinyCoreLinux Launcher ######
-		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%\LAUNCH.cmd"
-		if exist "%TINYCORELINUX_launcher%" (%return%)
-		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %QEMU_SYSTEM_X86_64_EXE% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
+		%dk_call% dk_set TINYCORELINUX_launcher "%TINYCORELINUX_DIR%/LAUNCH.cmd"
+		if EXIST "%TINYCORELINUX_launcher%" (%return%)
+		%dk_call% dk_fileWrite "%TINYCORELINUX_launcher%" "start %qemu-system-x86_64_exe% -boot menu=on -drive file=%TINYCORELINUX_IMG% -cpu max -smp 2 -vga virtio -display sdl"
 %endfunction%
 	
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
 	%dk_call% DKINSTALL
 %endfunction%

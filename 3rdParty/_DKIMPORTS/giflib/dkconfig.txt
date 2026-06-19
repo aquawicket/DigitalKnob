@@ -1,0 +1,9 @@
+############ giflib ############
+# http://giflib.sourceforge.net
+# https://github.com/mirrorer/giflib.git
+# https://github.com/mirrorer/giflib/archive/fa37672085ce4b3d62c51627ab3c8cf2dda8009a.zip
+# https://sourceforge.net/projects/giflib/files/giflib-5.1.1.tar.gz
+# https://stackoverflow.com/a/34102586/688352  #'aclocal-1.15' is missing on your system
+# https://github.com/nesbox/giflib/archive/1aa11b06d0025eda77b56aec8254130654d4397b.zip
+
+giflib_Import=https://github.com/nesbox/giflib/archive/1aa11b06d0025eda77b56aec8254130654d4397b.zip

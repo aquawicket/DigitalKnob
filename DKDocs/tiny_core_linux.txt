@@ -1,1 +1,0 @@
-tce-load -wi wget; wget https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKBuilder.sh

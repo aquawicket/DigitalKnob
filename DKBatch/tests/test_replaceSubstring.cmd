@@ -1,5 +1,5 @@
-:: https://stackoverflow.com/a/13222794/688352
-:: https://stackoverflow.com/a/39141462/688352
+rem  https://stackoverflow.com/a/13222794/688352
+rem  https://stackoverflow.com/a/39141462/688352
 @echo off
 
 
@@ -29,15 +29,15 @@
 :replace_substring <input> <replace> <with> rtn_var
    set "input_string=%1"
    call set "%4=%%input_string:%2=%3%%"
-   
-   ::set "replace=%2"
-   ::call set "%4=%%input:%replace%=%with%%%"
-   
-   ::set "with=%3"
-   ::call set "%4=%%input:%2=%with%%%"
-   
-   ::set "output=%4"
-   ::call set "output=%%input:%replace%=%with%%%"
+  
+   rem set "replace=%2"
+   rem call set "%4=%%input:%replace%=%with%%%"
+  
+   rem set "with=%3"
+   rem call set "%4=%%input:%2=%with%%%"
+  
+   rem set "output=%4"
+   rem call set "output=%%input:%replace%=%with%%%"
 %endfunction%
 
 :replace_in_variable <variable> <replace> <with>

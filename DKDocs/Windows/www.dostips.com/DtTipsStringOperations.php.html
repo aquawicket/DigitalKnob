@@ -1,0 +1,1120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS - String Operations</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='ysel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS - String Operations</H1>
+<span class='shortText'>Basic string operations in batch like you are used to from other programming languages.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Function.lTrim'>:lTrim</a></td>
+<td class='text'>strips white spaces (or other characters) from the beginning of a string</td>
+</tr>
+<tr><td class='title'><a href='#Function.rTrim'>:rTrim</a></td>
+<td class='text'>strips white spaces (or other characters) from the end of a string</td>
+</tr>
+<tr><td class='title'><a href='#Function.StartsWith'>:StartsWith</a></td>
+<td class='text'>Tests if a text starts with a given string</td>
+</tr>
+<tr><td class='title'><a href='#Function.strLen'>:strLen</a></td>
+<td class='text'>returns the length of a string</td>
+</tr>
+<tr><td class='title'><a href='#Function.toCamelCase'>:toCamelCase</a></td>
+<td class='text'>converts a string to camel case</td>
+</tr>
+<tr><td class='title'><a href='#Function.toLower'>:toLower</a></td>
+<td class='text'>converts uppercase character to lowercase</td>
+</tr>
+<tr><td class='title'><a href='#Function.toUpper'>:toUpper</a></td>
+<td class='text'>converts lowercase character to uppercase</td>
+</tr>
+<tr><td class='title'><a href='#Function.Trim'>:Trim</a></td>
+<td class='text'>strip white spaces (or other characters) from the beginning and end of a string</td>
+</tr>
+<tr><td class='title'><a href='#Function.trimSpaces'>:trimSpaces</a></td>
+<td class='text'>trims spaces around string variable</td>
+</tr>
+<tr><td class='title'><a href='#Function.trimSpaces2'>:trimSpaces2</a></td>
+<td class='text'>trims spaces around string and assigns result to variable</td>
+</tr>
+<tr><td class='title'><a href='#Function.Unique'>:Unique</a></td>
+<td class='text'>returns a unique string based on a date-time-stamp, YYYYMMDDhhmmsscc</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.AlignRight'>Align Right</a></td>
+<td class='text'>Align text to the right i.e. to improve readability of number columns.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsStringManipulation.php'>DOS - String Manipulation</a></td>
+<td class='text'>Basic string manipulation in batch like you are used to from other programming languages.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsStringOperations.php'>DOS - String Operations</a></td>
+<td class='text'>Basic string operations in batch like you are used to from other programming languages.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.LeftString'>Left String</a></td>
+<td class='text'>Extract characters from the beginning of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.MapLookup'>Map and Lookup</a></td>
+<td class='text'>Use Key-Value pair list to lookup and translate values.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.MidString'>Mid String</a></td>
+<td class='text'>Extract a Substring by Position.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Remove'>Remove</a></td>
+<td class='text'>Remove a substring using string substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RemoveBothEnds'>Remove both Ends</a></td>
+<td class='text'>Remove the first and the last character of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RemoveSpaces'>Remove Spaces</a></td>
+<td class='text'>Remove all spaces in a string via substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Replace'>Replace</a></td>
+<td class='text'>Replace a substring using string substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RightString'>Right String</a></td>
+<td class='text'>Extract characters from the end of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.SplitString'>Split String</a></td>
+<td class='text'>Split a String, Extract Substrings by Delimiters.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.StringConcatenation'>String Concatenation</a></td>
+<td class='text'>Add one string to another string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimLeftFOR'>Trim Left</a></td>
+<td class='text'>Trim spaces from the beginning of a string via "FOR" command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimQuotes'>Trim Quotes</a></td>
+<td class='text'>Remove surrounding quotes via FOR command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimRightFOR'>Trim Right</a></td>
+<td class='text'>Trim spaces from the end of a string via "FOR" command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimRightSubst'>Trim Right</a></td>
+<td class='text'>Trim spaces from the end of a string via substitution.</td>
+</tr>
+</table>    <hr>
+    <a name=''></a>
+    <a name='Function.lTrim'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-27</font></font></div>
+    <H2>:lTrim - strips white spaces (or other characters) from the beginning of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#lTrim'>:lTrim</a> string char </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='lTrim'>:lTrim</a></span><span class=c_cmmt>&nbsp;string&nbsp;char&nbsp;--&nbsp;strips&nbsp;white&nbsp;spaces&nbsp;(or&nbsp;other&nbsp;characters)&nbsp;from&nbsp;the&nbsp;beginning&nbsp;of&nbsp;a&nbsp;string</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;string&nbsp;[in,out]&nbsp;-&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;trimmed</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;char&nbsp;&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;character&nbsp;to&nbsp;be&nbsp;trimmed,&nbsp;default&nbsp;is&nbsp;space</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080227&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>call&nbsp;set&nbsp;&quot;string=%<span class=c_pvar>%%~1</span>%%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;charlist=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;charlist&nbsp;set&nbsp;&quot;charlist=&nbsp;&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=*&nbsp;delims=%charlist%&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%string%&quot;)&nbsp;do&nbsp;set&nbsp;&quot;string=<span class=c_pvar>%%a</span>&quot;</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;&quot;<span class=c_pvar>%~1</span>=%string%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.rTrim'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:rTrim - strips white spaces (or other characters) from the end of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#rTrim'>:rTrim</a> string char max </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='rTrim'>:rTrim</a></span><span class=c_cmmt>&nbsp;string&nbsp;char&nbsp;max&nbsp;--&nbsp;strips&nbsp;white&nbsp;spaces&nbsp;(or&nbsp;other&nbsp;characters)&nbsp;from&nbsp;the&nbsp;end&nbsp;of&nbsp;a&nbsp;string</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;string&nbsp;[in,out]&nbsp;-&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;trimmed</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;char&nbsp;&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;character&nbsp;to&nbsp;be&nbsp;trimmed,&nbsp;default&nbsp;is&nbsp;space</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;max&nbsp;&nbsp;&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;maximum&nbsp;number&nbsp;of&nbsp;characters&nbsp;to&nbsp;be&nbsp;trimmed&nbsp;from&nbsp;the&nbsp;end,&nbsp;default&nbsp;is&nbsp;32</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>call&nbsp;set&nbsp;string=%<span class=c_pvar>%%~1</span>%%</span><br>
+<span style='color=#000000'>set&nbsp;char=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>set&nbsp;max=<span class=c_pvar>%~3</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%char%&quot;==&quot;&quot;&nbsp;set&nbsp;char=&nbsp;&amp;<span class=c_cmmt>rem&nbsp;one&nbsp;space</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%max%&quot;==&quot;&quot;&nbsp;set&nbsp;max=32</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(1,1,%max%)&nbsp;do&nbsp;if&nbsp;&quot;!string:~-1!&quot;==&quot;%char%&quot;&nbsp;set&nbsp;string=!string:~0,-1!</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~1</span>=%string%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.StartsWith'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-20</font></font></div>
+    <H2>:StartsWith - Tests if a text starts with a given string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#StartsWith'>:StartsWith</a> text string </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='StartsWith'>:StartsWith</a></span><span class=c_cmmt>&nbsp;text&nbsp;string&nbsp;--&nbsp;Tests&nbsp;if&nbsp;a&nbsp;text&nbsp;starts&nbsp;with&nbsp;a&nbsp;given&nbsp;string</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN]&nbsp;text&nbsp;&nbsp;&nbsp;-&nbsp;text&nbsp;to&nbsp;be&nbsp;searched</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN]&nbsp;string&nbsp;-&nbsp;string&nbsp;to&nbsp;be&nbsp;tested&nbsp;for</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20080320&nbsp;:$changed&nbsp;20080320&nbsp;:$categories&nbsp;StringOperation,Condition</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;txt=<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;str=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>if&nbsp;defined&nbsp;str&nbsp;call&nbsp;set&nbsp;&quot;s=%str%<span class=c_pvar>%%t</span>xt:*%str%=%%&quot;</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%txt%&quot;&nbsp;NEQ&nbsp;&quot;%s%&quot;&nbsp;set=2&gt;NUL</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.strLen'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2010-11-16</font></font></div>
+    <H2>:strLen - returns the length of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#strLen'>:strLen</a> string len </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='strLen'>:strLen</a></span><span class=c_cmmt>&nbsp;string&nbsp;len&nbsp;--&nbsp;returns&nbsp;the&nbsp;length&nbsp;of&nbsp;a&nbsp;string</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;string&nbsp;[in]&nbsp;&nbsp;-&nbsp;variable&nbsp;name&nbsp;containing&nbsp;the&nbsp;string&nbsp;being&nbsp;measured&nbsp;for&nbsp;length</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;len&nbsp;&nbsp;&nbsp;&nbsp;[out]&nbsp;-&nbsp;variable&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;return&nbsp;the&nbsp;string&nbsp;length</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;Many&nbsp;thanks&nbsp;to&nbsp;'sowgtsoi',&nbsp;but&nbsp;also&nbsp;'jeb'&nbsp;and&nbsp;'amel27'&nbsp;dostips&nbsp;forum&nbsp;users&nbsp;helped&nbsp;making&nbsp;this&nbsp;short&nbsp;and&nbsp;efficient</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20081122&nbsp;:$changed&nbsp;20101116&nbsp;:$categories&nbsp;StringOperation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>(&nbsp;&nbsp;&nbsp;SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;str=A!<span class=c_pvar>%~1</span>!&quot;&amp;<span class=c_cmmt>rem&nbsp;keep&nbsp;the&nbsp;A&nbsp;up&nbsp;front&nbsp;to&nbsp;ensure&nbsp;we&nbsp;get&nbsp;the&nbsp;length&nbsp;and&nbsp;not&nbsp;the&nbsp;upper&nbsp;bound</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;it&nbsp;also&nbsp;avoids&nbsp;trouble&nbsp;in&nbsp;case&nbsp;of&nbsp;empty&nbsp;string</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;len=0&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/L&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(12,-1,0)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;/a&nbsp;&quot;len|=1&lt;&lt;<span class=c_pvar>%%A</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;<span class=c_pvar>%%B</span>&nbsp;in&nbsp;(!len!)&nbsp;do&nbsp;if&nbsp;&quot;!str:~<span class=c_pvar>%%B</span>,1!&quot;==&quot;&quot;&nbsp;set&nbsp;/a&nbsp;&quot;len&amp;=~1&lt;&lt;<span class=c_pvar>%%A</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;/a&nbsp;<span class=c_pvar>%~2</span>=%len%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.toCamelCase'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:toCamelCase - converts a string to camel case</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#toCamelCase'>:toCamelCase</a> str </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='toCamelCase'>:toCamelCase</a></span><span class=c_cmmt>&nbsp;str&nbsp;--&nbsp;converts&nbsp;a&nbsp;string&nbsp;to&nbsp;camel&nbsp;case</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;str&nbsp;[in,out]&nbsp;-&nbsp;valref&nbsp;of&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;converted</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20080219&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;<span class=c_pvar>%~1</span>&nbsp;EXIT&nbsp;/b</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;make&nbsp;all&nbsp;lower&nbsp;case</span></span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;A=a&quot;&nbsp;&quot;B=b&quot;&nbsp;&quot;C=c&quot;&nbsp;&quot;D=d&quot;&nbsp;&quot;E=e&quot;&nbsp;&quot;F=f&quot;&nbsp;&quot;G=g&quot;&nbsp;&quot;H=h&quot;&nbsp;&quot;I=i&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;J=j&quot;&nbsp;&quot;K=k&quot;&nbsp;&quot;L=l&quot;&nbsp;&quot;M=m&quot;&nbsp;&quot;N=n&quot;&nbsp;&quot;O=o&quot;&nbsp;&quot;P=p&quot;&nbsp;&quot;Q=q&quot;&nbsp;&quot;R=r&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;S=s&quot;&nbsp;&quot;T=t&quot;&nbsp;&quot;U=u&quot;&nbsp;&quot;V=v&quot;&nbsp;&quot;W=w&quot;&nbsp;&quot;X=x&quot;&nbsp;&quot;Y=y&quot;&nbsp;&quot;Z=z&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&Auml;=&auml;&quot;&nbsp;&quot;&Ouml;=&ouml;&quot;&nbsp;&quot;&Uuml;=&uuml;&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=%<span class=c_pvar>%%~1</span>:<span class=c_pvar>%%~a</span>%%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>call&nbsp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=&nbsp;%<span class=c_pvar>%%~1</span>%%&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;make&nbsp;first&nbsp;character&nbsp;upper&nbsp;case</span></span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;&nbsp;a=A&quot;&nbsp;&quot;&nbsp;b=B&quot;&nbsp;&quot;&nbsp;c=C&quot;&nbsp;&quot;&nbsp;d=D&quot;&nbsp;&quot;&nbsp;e=E&quot;&nbsp;&quot;&nbsp;f=F&quot;&nbsp;&quot;&nbsp;g=G&quot;&nbsp;&quot;&nbsp;h=H&quot;&nbsp;&quot;&nbsp;i=I&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&nbsp;j=J&quot;&nbsp;&quot;&nbsp;k=K&quot;&nbsp;&quot;&nbsp;l=L&quot;&nbsp;&quot;&nbsp;m=M&quot;&nbsp;&quot;&nbsp;n=N&quot;&nbsp;&quot;&nbsp;o=O&quot;&nbsp;&quot;&nbsp;p=P&quot;&nbsp;&quot;&nbsp;q=Q&quot;&nbsp;&quot;&nbsp;r=R&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&nbsp;s=S&quot;&nbsp;&quot;&nbsp;t=T&quot;&nbsp;&quot;&nbsp;u=U&quot;&nbsp;&quot;&nbsp;v=V&quot;&nbsp;&quot;&nbsp;w=W&quot;&nbsp;&quot;&nbsp;x=X&quot;&nbsp;&quot;&nbsp;y=Y&quot;&nbsp;&quot;&nbsp;z=Z&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&nbsp;&auml;=&Auml;&quot;&nbsp;&quot;&nbsp;&ouml;=&Ouml;&quot;&nbsp;&quot;&nbsp;&uuml;=&Uuml;&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=%<span class=c_pvar>%%~1</span>:<span class=c_pvar>%%~a</span>%%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>call&nbsp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=%<span class=c_pvar>%%~1</span>:&nbsp;=%%&quot;</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.toLower'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:toLower - converts uppercase character to lowercase</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#toLower'>:toLower</a> str </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='toLower'>:toLower</a></span><span class=c_cmmt>&nbsp;str&nbsp;--&nbsp;converts&nbsp;uppercase&nbsp;character&nbsp;to&nbsp;lowercase</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;str&nbsp;[in,out]&nbsp;-&nbsp;valref&nbsp;of&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;converted</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;<span class=c_pvar>%~1</span>&nbsp;EXIT&nbsp;/b</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;A=a&quot;&nbsp;&quot;B=b&quot;&nbsp;&quot;C=c&quot;&nbsp;&quot;D=d&quot;&nbsp;&quot;E=e&quot;&nbsp;&quot;F=f&quot;&nbsp;&quot;G=g&quot;&nbsp;&quot;H=h&quot;&nbsp;&quot;I=i&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;J=j&quot;&nbsp;&quot;K=k&quot;&nbsp;&quot;L=l&quot;&nbsp;&quot;M=m&quot;&nbsp;&quot;N=n&quot;&nbsp;&quot;O=o&quot;&nbsp;&quot;P=p&quot;&nbsp;&quot;Q=q&quot;&nbsp;&quot;R=r&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;S=s&quot;&nbsp;&quot;T=t&quot;&nbsp;&quot;U=u&quot;&nbsp;&quot;V=v&quot;&nbsp;&quot;W=w&quot;&nbsp;&quot;X=x&quot;&nbsp;&quot;Y=y&quot;&nbsp;&quot;Z=z&quot;&nbsp;&quot;&Auml;=&auml;&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&Ouml;=&ouml;&quot;&nbsp;&quot;&Uuml;=&uuml;&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;<span class=c_pvar>%~1</span>=%<span class=c_pvar>%%~1</span>:<span class=c_pvar>%%~a</span>%%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.toUpper'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:toUpper - converts lowercase character to uppercase</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#toUpper'>:toUpper</a> str </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='toUpper'>:toUpper</a></span><span class=c_cmmt>&nbsp;str&nbsp;--&nbsp;converts&nbsp;lowercase&nbsp;character&nbsp;to&nbsp;uppercase</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;str&nbsp;[in,out]&nbsp;-&nbsp;valref&nbsp;of&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;converted</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;<span class=c_pvar>%~1</span>&nbsp;EXIT&nbsp;/b</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;a=A&quot;&nbsp;&quot;b=B&quot;&nbsp;&quot;c=C&quot;&nbsp;&quot;d=D&quot;&nbsp;&quot;e=E&quot;&nbsp;&quot;f=F&quot;&nbsp;&quot;g=G&quot;&nbsp;&quot;h=H&quot;&nbsp;&quot;i=I&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;j=J&quot;&nbsp;&quot;k=K&quot;&nbsp;&quot;l=L&quot;&nbsp;&quot;m=M&quot;&nbsp;&quot;n=N&quot;&nbsp;&quot;o=O&quot;&nbsp;&quot;p=P&quot;&nbsp;&quot;q=Q&quot;&nbsp;&quot;r=R&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;s=S&quot;&nbsp;&quot;t=T&quot;&nbsp;&quot;u=U&quot;&nbsp;&quot;v=V&quot;&nbsp;&quot;w=W&quot;&nbsp;&quot;x=X&quot;&nbsp;&quot;y=Y&quot;&nbsp;&quot;z=Z&quot;&nbsp;&quot;&auml;=&Auml;&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;&ouml;=&Ouml;&quot;&nbsp;&quot;&uuml;=&Uuml;&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;<span class=c_pvar>%~1</span>=%<span class=c_pvar>%%~1</span>:<span class=c_pvar>%%~a</span>%%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.Trim'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:Trim - strip white spaces (or other characters) from the beginning and end of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#Trim'>:Trim</a> string char max </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Dependencies:</td>
+      <td class='text'  VALIGN='top'> <a href="#lTrim">:lTrim</a>, <a href="#rTrim">:rTrim</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='Trim'>:Trim</a></span><span class=c_cmmt>&nbsp;string&nbsp;char&nbsp;max&nbsp;--&nbsp;strip&nbsp;white&nbsp;spaces&nbsp;(or&nbsp;other&nbsp;characters)&nbsp;from&nbsp;the&nbsp;beginning&nbsp;and&nbsp;end&nbsp;of&nbsp;a&nbsp;string</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;string&nbsp;[in,out]&nbsp;-&nbsp;string&nbsp;variable&nbsp;to&nbsp;be&nbsp;trimmed</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;char&nbsp;&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;character&nbsp;to&nbsp;be&nbsp;trimmed,&nbsp;default&nbsp;is&nbsp;space</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;max&nbsp;&nbsp;&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;maximum&nbsp;number&nbsp;of&nbsp;characters&nbsp;to&nbsp;be&nbsp;trimmed&nbsp;from&nbsp;the&nbsp;end,&nbsp;default&nbsp;is&nbsp;32</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>call:lTrim&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>call:rTrim&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;&nbsp;&quot;<span class=c_pvar>%~3</span>&quot;</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.trimSpaces'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-23</font></font></div>
+    <H2>:trimSpaces - trims spaces around string variable</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#trimSpaces'>:trimSpaces</a> varref </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Dependencies:</td>
+      <td class='text'  VALIGN='top'> <a href="#trimSpaces2">:trimSpaces2</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='trimSpaces'>:trimSpaces</a></span><span class=c_cmmt>&nbsp;varref&nbsp;--&nbsp;trims&nbsp;spaces&nbsp;around&nbsp;string&nbsp;variable</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;varref&nbsp;[in,out]&nbsp;-&nbsp;variable&nbsp;to&nbsp;be&nbsp;trimmed</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080223&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>call&nbsp;call:trimSpaces2&nbsp;<span class=c_pvar>%~1</span>&nbsp;%<span class=c_pvar>%%~1</span>%%</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.trimSpaces2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:trimSpaces2 - trims spaces around string and assigns result to variable</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#trimSpaces2'>:trimSpaces2</a> retval string </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='trimSpaces2'>:trimSpaces2</a></span><span class=c_cmmt>&nbsp;retval&nbsp;string&nbsp;--&nbsp;trims&nbsp;spaces&nbsp;around&nbsp;string&nbsp;and&nbsp;assigns&nbsp;result&nbsp;to&nbsp;variable</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;retvar&nbsp;[out]&nbsp;variable&nbsp;name&nbsp;to&nbsp;store&nbsp;the&nbsp;result&nbsp;in</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;string&nbsp;[in]&nbsp;&nbsp;string&nbsp;to&nbsp;trim,&nbsp;must&nbsp;not&nbsp;be&nbsp;in&nbsp;quotes</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringManipulation</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1*&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%*&quot;)&nbsp;do&nbsp;set&nbsp;&quot;<span class=c_pvar>%%A</span>=<span class=c_pvar>%%B</span>&quot;</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Function.Unique'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-19</font></font></div>
+    <H2>:Unique - returns a unique string based on a date-time-stamp, YYYYMMDDhhmmsscc</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>call<a href='#Unique'>:Unique</a> ret </td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='Unique'>:Unique</a></span><span class=c_cmmt>&nbsp;ret&nbsp;--&nbsp;returns&nbsp;a&nbsp;unique&nbsp;string&nbsp;based&nbsp;on&nbsp;a&nbsp;date-time-stamp,&nbsp;YYYYMMDDhhmmsscc</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;ret&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;unique&nbsp;string</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219&nbsp;:$categories&nbsp;StringOperation,DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%date:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1-4&nbsp;delims=:.&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%time:&nbsp;=0%&quot;)&nbsp;do&nbsp;@set&nbsp;UNIQUE=%yy<span class=c_pvar>%%m</span>m<span class=c_pvar>%%d</span>d%<span class=c_pvar>%%A</span><span class=c_pvar>%%B</span><span class=c_pvar>%%C</span><span class=c_pvar>%%D</span></span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%UNIQUE%)&nbsp;ELSE&nbsp;echo.%UNIQUE%</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152731'></a>
+    <a name='Snippets.AlignRight'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Align Right - Align text to the right i.e. to improve readability of number columns</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Add leading spaces to a string to make sure the output lines up.  I.e. for variables no longer than 8 characters add 8 spaces at the front and then show only the last 8 characters of the variable.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;x=3000</span><br>
+<span style='color=#000000'>set&nbsp;y=2</span><br>
+<span style='color=#000000'>set&nbsp;x=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%x%</span><br>
+<span style='color=#000000'>set&nbsp;y=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%y%</span><br>
+<span style='color=#000000'>echo.X=%x:~-8%</span><br>
+<span style='color=#000000'>echo.Y=%y:~-8%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>X=    3000
+Y=       2
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152734'></a>
+    <a name='Snippets.LeftString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Left String - Extract characters from the beginning of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Left</b> function in VB a batch script can return a specified number of characters from the left side of a string by specifying a substring for an expansion given a position of 0 and a length using :~  while expanding a variable content.  The example shows how to return the first 4 characters of a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~0,4%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+poli
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152738'></a>
+    <a name='Snippets.MapLookup'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Map and Lookup - Use Key-Value pair list to lookup and translate values</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This example shows an approach to map a name of a month into it`s corresponding two digit number.  The key-value pairs are listed in the map variable separated by semicolon.  Key and value itself are separated by one dash character.  Same can be used to tranlate a day-of-the-week short string into a day-of-the-week long string by changing the map content only.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>REM&nbsp;----&nbsp;Example&nbsp;1:&nbsp;Translate&nbsp;name&nbsp;of&nbsp;month&nbsp;into&nbsp;two&nbsp;digit&nbsp;number&nbsp;----</span></span><br>
+<span style='color=#000000'>SET&nbsp;v=Mai</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>SET&nbsp;map=Jan-01;Feb-02;Mar-03;Apr-04;Mai-05;Jun-06;Jul-07;Aug-08;Sep-09;Oct-10;Nov-11;Dec-12</span><br>
+<span style='color=#000000'>CALL&nbsp;SET&nbsp;v=<span class=c_pvar>%%m</span>ap:*%v%-=%%</span><br>
+<span style='color=#000000'>SET&nbsp;v=%v:;=&amp;<span class=c_cmmt>rem.%</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>ECHO.%v%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;----&nbsp;Example&nbsp;2:&nbsp;Translate&nbsp;abbreviation&nbsp;into&nbsp;full&nbsp;string&nbsp;----</span></span><br>
+<span style='color=#000000'>SET&nbsp;v=sun</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;map=mon-Monday;tue-Tuesday;wed-Wednesday;thu-Thursday;fri-Friday;sat-Saturday;sun-Sunday</span><br>
+<span style='color=#000000'>CALL&nbsp;SET&nbsp;v=<span class=c_pvar>%%m</span>ap:*%v%-=%%</span><br>
+<span style='color=#000000'>SET&nbsp;v=%v:;=&amp;<span class=c_cmmt>rem.%</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;ECHO.%v%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>05
+  Sunday
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152733'></a>
+    <a name='Snippets.MidString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Mid String - Extract a Substring by Position</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Mid</b> function in VB a batch script can return a specified number of characters from any position inside a string by specifying a substring for an expansion given a position and length using :~ while expanding a variable content.  The example here shows how to extract the parts of a date.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo.Date&nbsp;&nbsp;&nbsp;:&nbsp;%date%</span><br>
+<span style='color=#000000'>echo.Weekday:&nbsp;%date:~0,3%</span><br>
+<span style='color=#000000'>echo.Month&nbsp;&nbsp;:&nbsp;%date:~4,2%</span><br>
+<span style='color=#000000'>echo.Day&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%date:~7,2%</span><br>
+<span style='color=#000000'>echo.Year&nbsp;&nbsp;&nbsp;:&nbsp;%date:~10,4%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Date   : Sat 03/11/2006
+Weekday: Sat
+Month  : 03
+Day    : 11
+Year   : 2006
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152730'></a>
+    <a name='Snippets.Remove'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove - Remove a substring using string substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The string substitution feature can also be used to remove a substring from another string.  The example shown here removes all occurrences of "the " from the string variable <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=the&nbsp;cat&nbsp;in&nbsp;the&nbsp;hat</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:the&nbsp;=%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>the cat in the hat
+cat in hat
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152736'></a>
+    <a name='Snippets.RemoveBothEnds'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove both Ends - Remove the first and the last character of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Using <b>:~1,-1</b> within a variable expansion will remove the first and last character of the string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~1,-1%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+oliti
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152728'></a>
+    <a name='Snippets.RemoveSpaces'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove Spaces - Remove all spaces in a string via substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This script snippet can be used to remove all spaces from a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;word&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;=%</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;      word       &quot;
+&quot;word&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152729'></a>
+    <a name='Snippets.Replace'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Replace - Replace a substring using string substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>To replace a substring with another string use the string substitution feature.  The example shown here replaces all occurrences "teh" misspellings with "the" in the string variable <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=teh&nbsp;cat&nbsp;in&nbsp;teh&nbsp;hat</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:teh=the%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>teh cat in teh hat
+the cat in the hat
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152735'></a>
+    <a name='Snippets.RightString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Right String - Extract characters from the end of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Right</b> function in VB a batch script can return a specified number of characters from the right side of a string by specifying a substring for an expansion given a negative position using :~  while expanding a variable content.  The example shows how to return the last 4 characters of a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~-4%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+itic
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152732'></a>
+    <a name='Snippets.SplitString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Split String - Split a String, Extract Substrings by Delimiters</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the <b>FOR</b> command to split a string into parts.  The example shows how to split a date variable into its  parts.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo.--&nbsp;Split&nbsp;off&nbsp;the&nbsp;first&nbsp;date&nbsp;token,&nbsp;i.e.&nbsp;day&nbsp;of&nbsp;the&nbsp;week</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%date%&quot;)&nbsp;do&nbsp;set&nbsp;d=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>echo.Date&nbsp;&nbsp;&nbsp;:&nbsp;%date%</span><br>
+<span style='color=#000000'>echo.d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%d%</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.--&nbsp;Split&nbsp;the&nbsp;date&nbsp;into&nbsp;weekday,&nbsp;month,&nbsp;day,&nbsp;and&nbsp;year,&nbsp;using&nbsp;slash&nbsp;and&nbsp;space&nbsp;as&nbsp;delimiters</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,3,4&nbsp;delims=/&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%date%&quot;)&nbsp;do&nbsp;set&nbsp;wday=<span class=c_pvar>%%a</span>&amp;set&nbsp;month=<span class=c_pvar>%%b</span>&amp;set&nbsp;day=<span class=c_pvar>%%c</span>&amp;set&nbsp;year=<span class=c_pvar>%%d</span></span><br>
+<span style='color=#000000'>echo.Weekday:&nbsp;%wday%</span><br>
+<span style='color=#000000'>echo.Month&nbsp;&nbsp;:&nbsp;%month%</span><br>
+<span style='color=#000000'>echo.Day&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%day%</span><br>
+<span style='color=#000000'>echo.Year&nbsp;&nbsp;&nbsp;:&nbsp;%year%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>-- Split off the first date token, i.e. day of the week
+Date   : Thu 12/02/2005
+d      : Thu
+
+-- Split the date into weekday, month, day, and year, using slash and space as delimiters
+Weekday: Thu
+Month  : 12
+Day    : 02
+Year   : 2005
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Snippets.StringConcatenation'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-26</font></font></div>
+    <H2>String Concatenation - Add one string to another string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This example shows how to add two strings in DOS.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;&quot;str1=Hello&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str2=World&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str3=%str1<span class=c_pvar>%%s</span>tr2%&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str4=%str1%&nbsp;%str2%&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str1=%str1%&nbsp;DOS&nbsp;%str2%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str3%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str4%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str1%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>HelloWorld
+  Hello World
+  Hello DOS World
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152726'></a>
+    <a name='Snippets.TrimLeftFOR'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-28</font></font></div>
+    <H2>Trim Left - Trim spaces from the beginning of a string via "FOR" command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the <b>FOR</b> command to trim spaces at the beginning of a variable.  In this example the variable to be trimmed is <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;Leading&nbsp;spaces&nbsp;to&nbsp;truncate</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=*&nbsp;delims=&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%str%&quot;)&nbsp;do&nbsp;set&nbsp;str=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;               15 Leading spaces to truncate&quot;
+&quot;15 Leading spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152737'></a>
+    <a name='Snippets.TrimQuotes'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Quotes - Remove surrounding quotes via FOR command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The <b>FOR</b> command can be used to safely remove quotes surrounding a string.  If the string does not have quotes then it will remain unchanged.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&quot;cmd&nbsp;politic&quot;</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;useback&nbsp;tokens=*&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('%str%')&nbsp;do&nbsp;set&nbsp;str=<span class=c_pvar>%%~a</span></span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;cmd politic&quot;
+cmd politic
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152727'></a>
+    <a name='Snippets.TrimRightFOR'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Right - Trim spaces from the end of a string via "FOR" command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Trimming spaces at the end of a variable seems a little tricky.  The following example shows how to use a <b>FOR</b> loop to trim <b>up to 31</b> spaces from the end of a string.  It assumes that <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is enabled.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=15&nbsp;Trailing&nbsp;Spaces&nbsp;to&nbsp;truncate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(1,1,31)&nbsp;do&nbsp;if&nbsp;&quot;!str:~-1!&quot;==&quot;&nbsp;&quot;&nbsp;set&nbsp;str=!str:~0,-1!</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;15 Trailing Spaces to truncate               &quot;
+&quot;15 Trailing Spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152727'></a>
+    <a name='Snippets.TrimRightSubst'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Right - Trim spaces from the end of a string via substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Trimming spaces at the end of a variable seems a little tricky.  The following example shows how to use the string substitution feature to trim <b>up to 31 spaces</b> from the end of a string.  It assumes that the string to be trimmed never contains two hash "##" characters in a row.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=15&nbsp;Trailing&nbsp;Spaces&nbsp;to&nbsp;truncate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;str=%str%##</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:##=%</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;15 Trailing Spaces to truncate               &quot;
+&quot;15 Trailing Spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146ae9951ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

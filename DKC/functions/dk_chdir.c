@@ -7,7 +7,7 @@
 #ifndef DKMAIN
 #define DKMAIN 1
 int main(int argc, char** argv){
-	int exit_status = dk_chdir("C:/Users/Administrator/digitalknob");
+	int exit_status = dk_chdir("C:/Users/Administrator/DigitalKnob");
 	return exit_status;
 }
 #endif

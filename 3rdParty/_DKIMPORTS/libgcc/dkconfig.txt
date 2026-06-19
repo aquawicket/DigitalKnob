@@ -1,0 +1,4 @@
+############## libgcc ################
+# https://gcc.gnu.org/onlinedocs/gccint/Libgcc.html
+
+libgcc_Version=14.2.0

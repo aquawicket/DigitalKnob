@@ -1,0 +1,21 @@
+make an app open on startup (Linux)
+https://unix.stackexchange.com/a/523605    https://www.linode.com/docs/guides/start-service-at-boot/
+
+print contents of X events (Linux)
+xev 
+
+create a file from terminal (Unix)
+sudo touch filname.ext
+
+give file execute permissions (Unix)
+sudo chmod +x filepath/filename.ext
+
+give ALL permissions (Unix)
+sudo chmod +777 filepath/filename.ext
+
+printenv (Unix)
+print list of currect environment variables
+
+See a list of required shared library of an executable (Unix)
+ldd executable.name
+

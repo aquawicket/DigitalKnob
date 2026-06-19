@@ -1,1 +1,6 @@
-XZ_DL=https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz
+############ xz ############
+# https://github.com/tukaani-project/xz.git
+# https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
+# https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
+
+xz_Import=https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz

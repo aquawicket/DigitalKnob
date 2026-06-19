@@ -1,39 +1,47 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
-if(ANDROID)
-	#dk_findLibrary(OpenGLES ${ANDROID_NDK}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
+dk_validate(Target_Config  "dk_Target_Config()")
+if(Android)
+	#dk_findLibrary(OpenGLES ${android-ndk}/toolchains/llvm/prebuilt/linux-aarch64/sysroot/usr/include)
 	dk_define(GL_GLEXT_PROTOTYPES)
 	dk_lib(GLESv1_CM)
 	dk_lib(GLESv2)
 endif()
 
-if(IOS)
+if(Ios)
 	dk_findLibrary(OpenGLES)
 endif()
 
-if(IOSSIM)
+if(Iossim)
 	dk_findLibrary(OpenGLES)
 endif()
 
-#if(LINUX)
+#if(Linux)
 	#dk_depend(opengl)
 #endif()
 
-#if(MAC)
+#if(Mac)
 	#dk_depend(opengl)
 #endif()
 
-#if(RASPBERRY)
+#if(Raspberry)
 	#dk_depend(opengl)
 #endif()	
 
-#if(WIN)
+#if(Windows)
 	#dk_depend(opengl)
 #endif()
 

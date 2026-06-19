@@ -1,62 +1,78 @@
-@echo off
-if "%~1" equ "" (goto DKINSTALL)
-
-:runDKBash
-	set "DKBASH_FUNCTIONS_DIR=%~1"
-	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:\=/%"
-	set "DKBASH_FUNCTIONS_DIR=%DKBASH_FUNCTIONS_DIR:C:/=/c/%"
-	set "DKBASH_FUNCTIONS_DIR_=%~1/"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	set "BASH_EXE=%~2"
-	set "DKSCRIPT_PATH=%~3"
-	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:\=/%"
-	set "DKSCRIPT_PATH=%DKSCRIPT_PATH:C:/=/c/%"
-
-	::###### run script ######
-	::"%GITBASH_EXE%" %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
-	"%BASH_EXE%" -c %DKSCRIPT_PATH% && (echo returned TRUE) || (echo returned FALSE && pause)
-
-	::###### exit_code ######
-	if %ERRORLEVEL% neq 0 (
-		echo ERROR:%ERRORLEVEL%
-		pause
-	)
-	
-	:: FIXME:  bash only returns 0
-%endfunction%
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-
-
-
-
-
-
-
-
+rem ##########################################
 :DKINSTALL
-	if "%~1" neq "" (goto:eof)
-
-	echo Installing DKBash . . .
-
-	::###### DK.cmd ######
-	if not defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/")
-	if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+    set "DKBash_Env=GIT"
+    rem set "DKBash_Env=MSYS2"
+    rem set "DKBash_Env=WSL"
+    rem set "DKBash_Env=WSL2"
+%setlocal%
+	if "%~1" neq ":DKINSTALL" (
+        echo :DKINSTALL %*
+		%dk_call% dk_fatal "DKBash/DKINSTALL.cmd does NOT take arguments"
+		exit /b -1
+	)
 
 	::###### Install DKBash ######
-	%dk_call% dk_validate DKBASH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate BASH_EXE "%dk_call% dk_installGit"
-
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:\=/%"
-	set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_:C:/=/c/%"
-	%~1
-	::ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-	ftype DKBash="%ComSpec%" /V:ON /k set "DKBASH_FUNCTIONS_DIR_=%DKBASH_FUNCTIONS_DIR_%" ^&^& set "f=%%1" ^&^& set "f=^!f:\=/^!" ^&^& set "f=^!f:C:=/c^!" ^&^& "%BASH_EXE%" -c "^!f^!"
-	::ftype DKBash=%ComSpec% /c call "%~f0" "%DKBASH_FUNCTIONS_DIR%" "%BASH_EXE%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR\DKBash\DefaultIcon" "" "REG_SZ" "%BASH_EXE%"
+	echo Installing DKBash . . .
+	rem set "PATH=%PATH%"
+	
+	rem ########### (GIT) #############
+	if /i "%DKBash_Env%" equ "GIT" (
+        %dk_call% dk_validate bash_exe %dk_call% dk_depend bash_exe git
+        %dk_call% dk_validate cygpath_exe %dk_call% dk_depend cygpath_exe
+  )
+	
+	::########### (MSYS2) #############
+	if /i "%DKBash_Env%" equ "MSYS2" (%dk_call% dk_validate bash_exe %dk_call% dk_depend bash_exe msys2)
+	if /i "%DKBash_Env%" equ "MSYS2" (%dk_call% dk_assertPath bash_exe)
+rem	if /i "%DKBash_Env%" equ "MSYS2" (set bash_exe="%bash_exe%")
+	if /i "%DKBash_Env%" equ "MSYS2" (set "BASH_C_DIVE=/x")
+	
+	::############ (WSL) ############
+	if /i "%DKBash_Env%" equ "WSL" (%dk_call% dk_validate bash_exe %dk_call% dk_depend bash_exe wsl)
+	if /i "%DKBash_Env%" equ "WSL" (%dk_call% dk_assertPath bash_exe)
+rem	if /i "%DKBash_Env%" equ "WSL" (set bash_exe="%bash_exe%")
+	if /i "%DKBash_Env%" equ "WSL" (set "BASH_C_DIVE=/mnt/x")
+	
+	::############ (WSL2) ############
+	if /i "%DKBash_Env%" equ "WSL2" (%dk_call% dk_validate wsl.exe %dk_call% dk_depend wsl.exe)
+	if /i "%DKBash_Env%" equ "WSL2" (%dk_call% dk_assertPath wsl.exe)
+	if /i "%DKBash_Env%" equ "WSL2" (set "BASH_ICON=%wsl.exe%")
+	if /i "%DKBash_Env%" equ "WSL2" (set bash_exe="%wsl.exe%" bash)
+	if /i "%DKBash_Env%" equ "WSL2" (set "BASH_C_DIVE=/mnt/x")
+	
+	
+	rem for /F %%Z in (%ComSpec%) do (set ComSpec=%%~fZ)
+	rem for %%G in ("%ComSpec%") do set "ComSpec=%%~G"
+	rem %dk_call% dk_assertPath "%ComSpec%"
+    rem %dk_call% dk_assertPath "%cygpath_exe%"
+    rem %dk_call% dk_assertPath "%bash_exe%"
+	
+	::### Add the DKBash command to the registry ###
+	rem ### "%ComSpec%" /V:ON /k FOR /F "usebackq delims=" %%a IN (`"X:\Users\Default\Digital Knob\DKTools\git-portable-2.46.2-64-bit\usr\bin\cygpath.exe" '%1'`) DO "X:\Users\Default\Digital Knob\DKTools\git-portable-2.46.2-64-bit\usr\bin\bash.exe" "%%a"
+	ftype DKBash="%ComSpec:/=\%" /V:ON /k FOR /F "usebackq delims=" %%%%a IN (`"%cygpath_exe:/=\%" '%%1'`^) DO "%bash_exe:/=\%" "%%%%a"
+	rem  "C:/Users/Administrator/Digital Knob/Development/3rdParty/msys2-base-x86_64-20241208/usr/bin/bash.exe" -c "/c/Users/Administrator/Digital Knob/Development/DKBash/functions/dk_debug.sh"
+	rem  "C:/Users/Administrator/Digital Knob/Development/3rdParty/msys2-base-x86_64-20241208/usr/bin/env.exe" MSYSTEM=MSYS /usr/bin/bash "/c/Users/Administrator/Digital Knob/Development/DKBash/functions/dk_debug.sh"
+	
+	::### associate .sh with DKBash ###	
 	assoc .sh=DKBash
-
+	
+	::########### ICON #############
+	::%dk_call% dk_assertPath BASH_ICON
+	%dk_call% dk_registrySetKey "HKCR/DKBash/DefaultIcon" "" "REG_SZ" "%BASH_ICON%"
+	
 	%dk_call% dk_success "DKBash install complete"
 %endfunction%

@@ -1,62 +1,39 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL
-::#
-::#
+::############ vscode ############
+::# https://code.visualstudio.com/docs/editor/portable
+::# https://fossies.org/windows/misc/VSCode-win32-x64-1.87.1.zip
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-darwin-universal.zip
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-win32-arm64-1.87.1.zip
+::# https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/vscode-win32-x64-1.87.1.zip
+
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0
+::%setlocal%
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-	if defined mac_host          (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-darwin-universal.zip")
-	if defined linux_arm32_host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-armhf-1709684464.tar.gz")
-	if defined linux_arm64_host  (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-arm64-1709684476.tar.gz")
-	if defined linux_x86_64_host (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/code-stable-x64-1709684476.tar.gz")
-	if defined win_arm64_host    (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-arm64-1.87.1.zip")
-	if defined win_x86_64_host   (set "VSCODE_DL=https://vscode.download.prss.microsoft.com/dbazure/download/stable/1e790d77f81672c49be070e04474901747115651/VSCode-win32-x64-1.87.1.zip")
-	if not defined VSCODE_DL	 (%dk_call% dk_error "VSCODE_DL is invalid")
+	%dk_call% dk_import
 	
-	%dk_call% dk_basename %VSCODE_DL% VSCODE_DL_FILE
-	%dk_call% dk_removeExtension %VSCODE_DL_FILE% VSCODE_FOLDER
-	::%dk_call% dk_convertToCIdentifier %VSCODE_FOLDER% VSCODE_FOLDER
-	%dk_call% dk_toLower %VSCODE_FOLDER% VSCODE_FOLDER
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_set VSCODE_DIR "%DKTOOLS_DIR%\%VSCODE_FOLDER%"
-	
-	if defined win_host (
-		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%\Code.exe
-	) else (
-		%dk_call% dk_set VSCODE_EXE %VSCODE_DIR%\code
+	if /i "%Host_Os%" equ "Windows" ( 
+		%dk_call% dk_set vscode_exe "%vscode_Install_Path%/Code.exe"
+	) else ( 
+		%dk_call% dk_set vscode_exe "%vscode_Install_Path%/code"
 	)	
-
-	if exist %VSCODE_EXE% (goto vscodeInstalled)
-	%dk_call% dk_echo 
-    %dk_call% dk_info "Installing VSCode . . ."
-	%dk_call% dk_mkdir %DKTOOLS_DIR%
-::	%dk_call% dk_import %VSCODE_DL% PATH %VSCODE_DIR%
-	%dk_call% dk_download %VSCODE_DL%
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-	%dk_call% dk_smartExtract "%DKDOWNLOAD_DIR%\%VSCODE_DL_FILE%" "%VSCODE_DIR%"
-	%dk_call% dk_mkdir %VSCODE_DIR%\data
-	if not exist %VSCODE_EXE% (%dk_call% dk_error "cannot find %VSCODE_EXE%")
-	:vscodeInstalled
+	%dk_call% dk_assertPath "%vscode_exe%"
+	%dk_call% dk_firewallAllow "%vscode_exe%"
 	
-	::###### dk_installVSCodeFileAssociations.cmd ######
-	%dk_call% %DKIMPORTS_DIR%\vscode\dk_installVSCodeFileAssociations.cmd
-%endfunction%
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-	
-	%dk_call% DKINSTALL
+	%dk_call% dk_depend vscode/fileAssoc
 %endfunction%

@@ -1,20 +1,20 @@
-::EXCEPTION.BAT Version 1.4
-::
-:: Provides exception handling for Windows batch scripts.
-::
-:: Designed and written by Dave Benham, with important contributions from
-:: DosTips users jeb and siberia-man
-::
-:: Full documentation is at the bottom of this script
-::
-:: History:
-::   v1.4 2016-08-16  Improved detection of command line delayed expansion
-::                    using an original idea by jeb
-::   v1.3 2015-12-12  Added paged help option via MORE
-::   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
-::   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
-::   v1.0 2015-06-26  Initial versioned release with embedded documentation
-::
+rem EXCEPTION.BAT Version 1.4
+rem 
+rem Provides exception handling for Windows batch scripts.
+rem 
+rem Designed and written by Dave Benham, with important contributions from
+rem DosTips users jeb and siberia-man
+rem 
+rem Full documentation is at the bottom of this script
+rem 
+rem History:
+rem   v1.4 2016-08-16  Improved detection of command line delayed expansion
+rem                    using an original idea by jeb
+rem   v1.3 2015-12-12  Added paged help option via MORE
+rem   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
+rem   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
+rem   v1.0 2015-06-26  Initial versioned release with embedded documentation
+rem 
 @echo off
 if "%~1" equ "/??" goto pagedHelp
 if "%~1" equ "/?" goto help
@@ -24,21 +24,21 @@ shift /1 & goto %~1
 
 :throw  errCode  errMsg  errLoc
 set "exception.Stack="
-:: Fall through to :rethrow
+rem Fall through to :rethrow
 
 
 :rethrow  errCode  errMsg  errLoc
 setlocal disableDelayedExpansion
-if not defined exception.Restart set "exception.Stack=[%~1:%~2] %exception.Stack%"
+if NOT defined exception.Restart set "exception.Stack=[%~1:%~2] %exception.Stack%"
 for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "delims=" %%3 in ("%~3") do (
   setlocal enableDelayedExpansion
   for /l %%# in (1 1 10) do for /f "delims=" %%S in (" !exception.Stack!") do (
     (goto) 2>NUL
     setlocal enableDelayedExpansion
-    if "!DE!" equ "" (
+    if "!!" equ "" (
       endlocal
       setlocal disableDelayedExpansion
-      call set "funcName=%%~0"  
+      call set "funcName=%%~0" 
       call set "batName=%%~f0"
       if defined exception.Restart (set "exception.Restart=") else call set "exception.Stack=%%funcName%%%%S"
       setlocal EnableDelayedExpansion
@@ -46,7 +46,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
         endlocal
         endlocal
         set "exception.Code=%%1"
-        if "!DE!" equ "" (
+        if "!!" equ "" (
           call "%~f0" setDelayed
         ) else (
           set "exception.Msg=%%2"
@@ -54,7 +54,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
           set "exception.Stack=%%S"
         )
         set "exception.Try="
-        (call ) %NO_OUTPUT%
+        %clearerror%
         goto :@Catch
       )
     ) else (
@@ -62,7 +62,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
       if "^!^" equ "^!" (
         call "%~f0" showDelayed
       ) else (
-        echo(
+        echo.
         echo Unhandled batch exception:
         echo   Code = %%1
         echo   Msg  = %%2
@@ -77,13 +77,13 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
   setlocal disableDelayedExpansion
   call "%~f0" rethrow %1 %2 %3
 )
-:: Never reaches here
+rem Never reaches here
 
 
 :init
 set "@Try=call set exception.Try=%%~f0:%%~0"
 set "@EndTry=set "exception.Try=" & goto :@endCatch"
-:: Fall through to :clear
+rem Fall through to :clear
 
 
 :clear
@@ -93,8 +93,8 @@ exit /b
 
 :Kill - Cease all processing, ignoring any remaining cached commands
 setlocal disableDelayedExpansion
-if not exist "%temp%\Kill.Yes" call :buildYes
-call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
+if NOT EXIST "%temp%\Kill.Yes" call :buildYes
+call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>nul
 :CtrlC
 @%ComSpec% /c exit -1073741510
 
@@ -104,7 +104,7 @@ set "yes="
 copy nul Kill.Yes >nul
 for /f "delims=(/ tokens=2" %%Y in (
   '"copy /-y nul Kill.Yes <nul"'
-) do if not defined yes set "yes=%%Y"
+) do if NOT defined yes set "yes=%%Y"
 echo %yes%>Kill.Yes
 popd
 exit /b
@@ -135,7 +135,7 @@ for %%. in (.) do (
 )
 for /f "delims=" %%2 in ("%v2:!=^!%") do for /f "delims=" %%3 in ("%v3:!=^!%") do for /f "delims=" %%S in ("%vS:!=^!%") do (
   endlocal
-  echo(
+  echo.
   echo Unhandled batch exception:
   echo   Code = %%1
   echo   Msg  = %%2
@@ -149,7 +149,7 @@ exit /b
 :help
 setlocal disableDelayedExpansion
 for /f "delims=:" %%N in ('findstr /rbn ":::DOCUMENTATION:::" "%~f0"') do set "skip=%%N"
-for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do echo(%%B
+for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do echo.%%B
 exit /b
 
 
@@ -157,19 +157,19 @@ exit /b
 :pagedHelp
 setlocal disableDelayedExpansion
 for /f "delims=:" %%N in ('findstr /rbn ":::DOCUMENTATION:::" "%~f0"') do set "skip=%%N"
-((for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do @echo(%%B)|more /e) 2>nul
+((for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do @echo.%%B)|more /e) 2>nul
 exit /b
 
 
 :-v
 :/v
 :version
-echo(
+echo.
 for /f "delims=:" %%A in ('findstr "^::EXCEPTION.BAT" "%~f0"') do echo %%A
 exit /b
 
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rem :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::DOCUMENTATION:::
 
 EXCEPTION.BAT is a pure batch script utility that provides robust exception
@@ -210,7 +210,7 @@ A TRY/CATCH block is structured as follows:
 - Any script or :labeled routine that uses TRY/CATCH must have at least one
   SETLOCAL prior to the appearance of the first TRY.
 
-- TRY/CATCH blocks use labels, so they should not be placed within parentheses.
+- TRY/CATCH blocks use labels, so they should NOT be placed within parentheses.
   It can be done, but the parentheses block is broken when control is passed to
   the :@Catch or :@EndCatch label, and the code becomes difficult to interpret
   and maintain.
@@ -223,14 +223,14 @@ A TRY/CATCH block is structured as follows:
 - GOTO must never transfer control from outside TRY/CATCH to within a TRY or
   CATCH block.
 
-- CALL should not be used to call a label within a TRY or CATCH block.
+- CALL should NOT be used to call a label within a TRY or CATCH block.
 
 - CALLed routines containing TRY/CATCH must have labels that are unique within
   the script. This is generally good batch programming practice anyway.
   It is OK for different scripts to share :label names.
 
 - If a script or routine recursively CALLs itself and contains TRY/CATCH, then
-  it must not throw an exception until after execution of the first %@Try%
+  it must NOT throw an exception until after execution of the first %@Try%
 
 Exceptions are thrown by using
 
@@ -249,8 +249,8 @@ where
                within square brackets.
 
 The Message and Location values must be quoted if they contain spaces or poison
-characters like & | < >. The values must not contain additional internal quotes,
-and they must not contain a caret ^.
+characters like & | < >. The values must NOT contain additional internal quotes,
+and they must NOT contain a caret ^.
 
 The following variables will be defined for use by the CATCH block:
 
@@ -258,10 +258,10 @@ The following variables will be defined for use by the CATCH block:
   exception.Msg   = the Message value
   exception.Loc   = the Location value
   exception.Stack = traces the call stack from the CATCH block (or command line
-                    if not caught), all the way to the exception.
+                    if NOT caught), all the way to the exception.
 
-If the exception is not caught, then all four values are printed as part of the
-"unhandled exception" message, and the exception variables are not defined.
+If the exception is NOT caught, then all four values are printed as part of the
+"unhandled exception" message, and the exception variables are NOT defined.
 
 A CATCH block should always do ONE of the following at the end:
 
@@ -272,7 +272,7 @@ A CATCH block should always do ONE of the following at the end:
 
   Clear should never be used within a Try block.
 
-- If the exception has not been fully handled, then a new exception should be
+- If the exception has NOT been fully handled, then a new exception should be
   thrown which can be caught by a higher level CATCH. You can throw a new
   exception using the normal THROW, which will clear exception.Stack and any
   higher CATCH will have no awareness of the original exception.
@@ -289,7 +289,7 @@ A CATCH block should always do ONE of the following at the end:
   Rethrow should only be used within a CATCH block.
 
 
-One last restriction - the full path to EXCEPTION.BAT must not include ! or ^.
+One last restriction - the full path to EXCEPTION.BAT must NOT include ! or ^.
 
 
 This documentation can be accessed via the following commands

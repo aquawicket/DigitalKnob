@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_buildMain()
 #
 #
@@ -21,34 +32,51 @@ function(dk_buildMain)
 #	endif()
 
 #	dk_printVar SHLVL		# https://stackoverflow.com/a/4511483/688352
-	dk_assertPath($ENV{DKSCRIPT_DIR})
+	dk_assertPath(${DKSCRIPT_DIR})
 	
 	while(1)
 		if(NOT DEFINED ENV{UPDATE})
 			dk_pickUpdate()
 			continue()
 		endif()
-		if(NOT DEFINED target_app)
-			dk_target_app()
+		
+		if(NOT DEFINED Target_App)
+			dk_Target_App()
 			continue()
 		endif()
-		if(NOT DEFINED target_triple)
-			dk_target_triple_SET()
-			continue()
-		endif()
-		if(NOT DEFINED target_type)
-			dk_target_type()
+		if(DEFINED DISABLE_${Target_App})
+			dk_notice("${Target_App} is disabled")
+			unset(Target_App)
 			continue()
 		endif()
 		
-		dk_createCache()
+		if(NOT DEFINED Target_Tuple)
+			dk_Target_Tuple()
+			continue()
+		endif()
+		if(DEFINED DISABLE_${Target_Tuple})
+			dk_notice("${Target_Tuple} is disabled")
+			unset(Target_Tuple)
+			continue()
+		endif()
+		
+		if(NOT DEFINED Target_Type)
+			dk_Target_Type()
+			continue()
+		endif()
+		if(DEFINED DISABLE_${Target_Type})
+			dk_notice("${Target_Type} is disabled")
+			unset(Target_Type)
+			continue()
+		endif()
+		
 		dk_generate()
 		dk_buildApp()
 		
 		dk_unset(ENV{UPDATE})
-		dk_unset(target_app)
-		dk_unset(target_triple)
-		dk_unset(target_type)
+		dk_unset(Target_App)
+		dk_unset(Target_Tuple)
+		dk_unset(Target_Type)
 	endwhile()
 endfunction()
 

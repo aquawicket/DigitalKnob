@@ -1,9 +1,19 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} ${CMAKE_SOURCE_DIR}/../../DKCMake/functions/)
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+#########################################################################
+
+
+dk_importVariables(IMPORT_PATH "${CMAKE_CURRENT_LIST_DIR}" INSTALL_PATH "${CMAKE_CURRENT_LIST_DIR}")
 
 dk_depend(DKAssets)
 dk_depend(DKCurl)
@@ -11,26 +21,31 @@ if(HAVE_DKDuktape)
 	dk_depend(DKDuktape)
 endif()
 if(HAVE_DKCef)
-	dk_depend(DKCef)
+	dk_validate(DKCef "dk_depend(DKCef)")
 endif()
 
 
-dk_generateCmake(DKMySql)
-dk_assets(DKMySql)
+############ DKMySql ############
+dk_generateCmake()
+dk_assets()
+dk_configure()
+dk_build()
+
+
 
 #DKENABLE(mysql) ##MySql library
 if(mysql)
-	dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-	SET(PATH_MYSQL_WIN32 $ENV{DK3RDPARTY_DIR}/mysql-5.6.16-win32)
-	SET(PATH_MYSQL_WIN64 $ENV{DK3RDPARTY_DIR}/mysql-5.6.16-winx64)
-	SET(PATH_MYSQL_MAC $ENV{DK3RDPARTY_DIR}/mysql-5.6.16-osx10.7-x86_64)
-	SET(PATH_MYSQL_LINUX $ENV{DK3RDPARTY_DIR}/libmysqlclient-dev_5.5.40-1_amd64)
+	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+	SET(PATH_MYSQL_WIN32 ${DK3RDPARTY_DIR}/mysql-5.6.16-win32)
+	SET(PATH_MYSQL_WIN64 ${DK3RDPARTY_DIR}/mysql-5.6.16-winx64)
+	SET(PATH_MYSQL_MAC ${DK3RDPARTY_DIR}/mysql-5.6.16-osx10.7-x86_64)
+	SET(PATH_MYSQL_LINUX ${DK3RDPARTY_DIR}/libmysqlclient-dev_5.5.40-1_amd64)
 	dk_include(${PATH_MYSQL}/include)
 	dk_include(${PATH_MYSQL}/include/mysql)
-	WIN_dk_libDebug(${PATH_MYSQL}/lib/debug/mysqlclient.lib)
-	WIN_dk_libRelease(${PATH_MYSQL}/lib/mysqlclient.lib)
-	APPLE_dk_libDebug(${PATH_MYSQL}/lib/libmysqlclient.a)
-	APPLE_dk_libRelease(${PATH_MYSQL}/lib/libmysqlclient.a)
-	LINUX_dk_libDebug(${PATH_MYSQL}/lib/x86_64-linux-gnu/libmysqlclient.a)
-	LINUX_dk_libRelease(${PATH_MYSQL}/lib/x86_64-linux-gnu/libmysqlclient.a)
+	Windows_dk_libDebug(${PATH_MYSQL}/lib/debug/mysqlclient.lib)
+	Windows_dk_libRelease(${PATH_MYSQL}/lib/mysqlclient.lib)
+	Apple_dk_libDebug(${PATH_MYSQL}/lib/libmysqlclient.a)
+	Apple_dk_libRelease(${PATH_MYSQL}/lib/libmysqlclient.a)
+	Linux_dk_libDebug(${PATH_MYSQL}/lib/x86_64-linux-gnu/libmysqlclient.a)
+	Linux_dk_libRelease(${PATH_MYSQL}/lib/x86_64-linux-gnu/libmysqlclient.a)
 endif(mysql)

@@ -1,0 +1,7 @@
+############ windowdetective ############
+# https://sourceforge.net/projects/windowdetective/files/latest/download
+# https://downloads.sourceforge.net/project/windowdetective/release-3.5.1/Window-Detective-3.5.1-setup.exe
+
+windowdetective_Type=Tool
+windowdetective_Import=https://downloads.sourceforge.net/project/windowdetective/release-3.5.1/Window-Detective-3.5.1-setup.exe
+

@@ -1,0 +1,4 @@
+############ yt-dlp ############
+# https://github.com/yt-dlp/yt-dlp/archive/73922e66e437fb4bb618bdc119a96375081bf508.zip
+
+yt-dlp_Import=https://github.com/yt-dlp/yt-dlp/archive/73922e66e437fb4bb618bdc119a96375081bf508.zip

@@ -1,4 +1,4 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
+//if(!dk_valid("DK"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){});			}
 
 //################################################################################
 //# __TEMPLATE__()
@@ -6,6 +6,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_log.js");
 //#
 __TEMPLATE__ = function __TEMPLATE___f(){
 	//dk_debugFunc(0);
+	
 	var _ARGV_ = "";
 	for (var i = 0; i < arguments.length; i++){ _ARGV_ += arguments[i]; }
 	console.log("__TEMPLATE__("+_ARGV_+")");

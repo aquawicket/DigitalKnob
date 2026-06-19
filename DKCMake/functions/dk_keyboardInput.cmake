@@ -1,61 +1,30 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##############################################################################
+
+#########################################################################
 # dk_keyboardInput(RETURN_VAR)
 # 
 #
 function(dk_keyboardInput)
 	dk_debugFunc(1)
 	
-	###### BASH ######
-	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE BASH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)
-	if(EXISTS "${BASH_EXE}")
-		set(cmnd ${BASH_EXE} -c "read -p '' stdin&& echo $stdin")
-		#message("${cmnd}")
-		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
-		if("${stdin}" STREQUAL "$stdin")
-			set(stdin "")
-		endif()
-		set(${ARGV0} "${stdin}" PARENT_SCOPE)
-		return()
-	endif()
-	
-	
-	###### SH ######
-	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE SH_EXE OUTPUT_STRIP_TRAILING_WHITESPACE)	
-	if(EXISTS "${SH_EXE}")
-		set(cmnd ${SH_EXE} -c "read -p '' stdin&& echo $stdin")
-		#message("${cmnd}")
-		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
-		if("${stdin}" STREQUAL "$stdin")
-			set(stdin "")
-		endif()
-		set(${ARGV0} "${stdin}" PARENT_SCOPE)
-		return()
-	endif()
-	
-	
-	###### POWERSHELL ######
-	find_program(POWERSHELL_EXE powershell.exe)
-	if(EXISTS "${POWERSHELL_EXE}")
-		set(cmnd ${POWERSHELL_EXE} Read-Host)
-		#message("${cmnd}")
-		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
-		if("${stdin}" STREQUAL "$stdin")
-			set(stdin "")
-		endif()
-		set(${ARGV0} "${stdin}" PARENT_SCOPE)		
-		return()
-	endif()
-	
-	
 	###### CMD ######
-	if(EXISTS "$ENV{COMSPEC}")
-		string(REPLACE "/" "\\" CMD_EXE "$ENV{COMSPEC}")  # convert to windows path delimiters
-		set(cmnd "${CMD_EXE}" /V:ON /c "set /p stdin=& echo !stdin!")
-		#message("${cmnd}")
+	if(EXISTS "$ENV{ComSpec}")
+		string(REPLACE "/" "\\" ComSpec "$ENV{ComSpec}")  # convert to windows path delimiters
+		set(cmnd "${ComSpec}" /V:ON /c "set /p stdin=& echo !stdin!")
+		#dk_echo("${cmnd}")
 		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)		
 		if("${stdin}" STREQUAL "!stdin!")
 			set(stdin "")
@@ -64,6 +33,45 @@ function(dk_keyboardInput)
 		return()
 	endif()
 	
+	###### POWERSHELL ######
+	find_program(powershell_exe powershell.exe)
+	if(EXISTS "${powershell_exe}")
+		set(cmnd ${powershell_exe} Read-Host)
+		#dk_echo("${cmnd}")
+		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if("${stdin}" STREQUAL "$stdin")
+			set(stdin "")
+		endif()
+		set(${ARGV0} "${stdin}" PARENT_SCOPE)		
+		return()
+	endif()
+	
+	###### BASH ######
+	execute_process(COMMAND bash -c "command -v 'bash'" OUTPUT_VARIABLE bash_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+	if(EXISTS "${bash_exe}")
+		set(cmnd ${bash_exe} -c "read -p '' stdin&& echo $stdin")
+		#dk_echo("${cmnd}")
+		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if("${stdin}" STREQUAL "$stdin")
+			set(stdin "")
+		endif()
+		set(${ARGV0} "${stdin}" PARENT_SCOPE)
+		return()
+	endif()
+	
+	###### SH ######
+	execute_process(COMMAND sh -c "command -v 'sh'" OUTPUT_VARIABLE sh_exe OUTPUT_STRIP_TRAILING_WHITESPACE)	
+	if(EXISTS "${sh_exe}")
+		set(cmnd ${sh_exe} -c "read -p '' stdin&& echo $stdin")
+		#dk_echo("${cmnd}")
+		execute_process(COMMAND ${cmnd} OUTPUT_VARIABLE stdin OUTPUT_STRIP_TRAILING_WHITESPACE)
+		if("${stdin}" STREQUAL "$stdin")
+			set(stdin "")
+		endif()
+		set(${ARGV0} "${stdin}" PARENT_SCOPE)
+		return()
+	endif()
+
 	dk_fatal("Could not locate bash, sh, powershell or cmd")
 endfunction()
 

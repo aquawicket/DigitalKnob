@@ -1,74 +1,106 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_source(function_name)
-::#
-::#    @function_name   - the function name of the file to source and download if needed
-::#
+rem ################################################################################
+rem # dk_source(function_name)
+rem #
+rem #    @function_name   - the function name of the file to source. Download if needed
+rem #
 :dk_source
-setlocal
-    ::%dk_call% dk_debugFunc 1
+rem %setlocal%
 	
-    :: load if it's an existing full path file
-	set "_file_=%~1"
-	::set "_file_=%_file_:/=\%"
-    if exist "%_file_%" exit /b 0    &:: NOTE: should we add the dirpath to the PATH environment variable here?
-    
-	if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" exit /b 0
+	set "_fnc_=%~1"
+	if NOT defined _fnc_		(echo ERROR: dk_source _fnc_:%_fnc_% EMPTY 		& exit /b 1)
+	if "%_fnc_%" equ "" 		(echo ERROR: dk_source _fnc_:%_fnc_% UNDEFINED 	& exit /b 1)
+	if EXIST "%_fnc_%" 			(exit /b %errorlevel%)
+		
+	if NOT defined DKHOME_DIR 	(%dk_call% DKHOME_DIR)
+	if NOT defined DKHTTP_DIR 	(set "DKHTTP_DIR=http://aquawicket.com")
+	if NOT defined DKBRANCH_DIR	(%dk_call% dk_DKBRANCH_DIR)
+		
+	rem ###### ensure .cmd extension
+	set "_fnc_=%_fnc_:.cmd=%.cmd"
+	if EXIST "%_fnc_%" (exit /b %errorlevel%)
 	
-    :: If it's a dk_function, download if it doesn't exist then load it
-    if not defined DKHTTP_DKBATCH_FUNCTIONS_DIR echo [31m ERROR: DKHTTP_DKBATCH_FUNCTIONS_DIR is invalid [0m & pause
-    
-    echo downloading %_file_%.cmd to %DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd
-    
-	::%dk_call% dk_dirname %DKBATCH_FUNCTIONS_DIR_%%~1.cmd source_dir
-	for %%Z in ("%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd") do set "_dirname_=%%~dpZ"
-	if not exist "%_dirname_%"   mkdir "%_dirname_%"
-	::%dk_call% dk_mkdir %source_dir%
+	rem ###### Atempt to extract the file from DigitalKnob.tar.gz
+	if "%DKOFFLINE%" equ "1" (
+		if EXIST "%DigitalKnob_tar_gz%" 			(%dk_call% tar.exe -zxvf "%DigitalKnob_tar_gz%" -C "%DKBRANCH_DIR%" DKBatch/functions/%_fnc_%)
+		if EXIST "%DKBATCH_FUNCTIONS_DIR_%%_fnc_%" 	(exit /b %errorlevel%)
+	)
 	
-    :: FIXME: causes infinate recursion loop
-    :: Try dk_download
-    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_download.cmd" %dk_call% dk_download "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd" "%DKBATCH_FUNCTIONS_DIR_%%~1.cmd"
-    ::if exist "%DKBATCH_FUNCTIONS_DIR_%%~1.cmd" exit /b 0
-    
-    :: FIXME: causes infinate recursion loop
-    :: Try dk_powershell
-    ::if exist "%DKBATCH_FUNCTIONS_DIR_%dk_powershell.cmd" %dk_call% dk_powershell "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%~1.cmd', '%DKBATCH_FUNCTIONS_DIR_%%~1.cmd')"
-    ::if exist "%DKBATCH_FUNCTIONS_DIR_%%~1.cmd" exit /b 0
-    
-    :: Try powershell
-    powershell /? %NO_STDOUT% && powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_%.cmd', '%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd')"
-    if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" exit /b 0
-    
-    :: Try dk_powershell
-    %dk_call% dk_powershell -Command "(New-Object Net.WebClient).DownloadFile('%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_%.cmd', '%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd')"
-    if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" exit /b 0
-    
-    :: Try curl
-    curl --help %NO_STDOUT% && curl "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_%.cmd" -o "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd"
-    if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" exit /b 0
-    
-    :: Try certutil
-    certutil.exe /? %NO_STDOUT% && certutil.exe -urlcache -split -f "%DKHTTP_DKBATCH_FUNCTIONS_DIR%/%_file_%.cmd" "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd"
-    if exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" exit /b 0
-    
-    if not exist "%DKBATCH_FUNCTIONS_DIR_%%_file_%.cmd" echo [31m failed to download %_file_%.cmd [0m
-%endfunction%
+	rem ###### If func doesn't contain C:  ...prepend C:\Users\Administrator\Digital Knob\Development\DKBash\functions\ ######
+	if "!_fnc_:%SystemDrive%=!" equ "%_fnc_%" 	(set "_fnc_=%DKBATCH_FUNCTIONS_DIR_%%_fnc_%")
+	if EXIST "%_fnc_%" 							(exit /b %errorlevel%)
+
+	rem ############ Download the file if missing #############
+	rem ###### Replace DKHOME_DIR:'C:/Users/Administrator' with DKHTTP_DIR:'http://aquawicket.com'
+	if NOT EXIST "%_fnc_%" (
+		rem call set "_url_=%%_fnc_:%DKHOME_DIR%=%DKHTTP_DIR%%%"
+		set "_url_=!_fnc_:%DKHOME_DIR%=%DKHTTP_DIR%!"
+	)
+	set "_url_=%_url_:\=/%"
+	
+	rem ### Get URL
+	for %%Z in ("%_fnc_%") do 	(set "dirn=%%~dpZ")
+	if "%dirn:~-1%" equ "\" 	(set "dirn=%dirn:~0,-1%")
+	if "%dirn:~-1%" equ "/" 	(set "dirn=%dirn:~0,-1%")
+	if NOT EXIST "%dirn%" 		(mkdir "%dirn:/=\%")	
+	
+	rem ### DOWNLOAD
+	echo downloading %_url_:/=\% . . .
+	set "curl.exe=%SystemRoot%\System32\curl.exe"
+	if NOT EXIST "%_fnc_%" (
+		"%curl.exe:/=\%" --version 1>nul 2>nul && (
+			"%curl.exe:/=\%" --silent --show-error --remove-on-error --location "%_url_:\=/%" --create-dirs --output "%_fnc_%"
+		)
+	)
+
+rem	set "certutil.exe=%SystemRoot%\System32\certutil.exe"
+rem	if NOT EXIST "%_fnc_%" (
+rem		"%certutil.exe:/=\%" 1>nul 2>nul && (
+rem			"%certutil.exe:/=\%" -urlcache -split -f "%_url_:\=/%" "%_fnc_%"
+rem		)
+rem	)
+	
+rem	set "bitsadmin.exe=%SystemRoot%\System32\bitsadmin.exe"
+rem	if NOT EXIST "%_fnc_%" (
+rem		"%bitsadmin.exe:/=\%" 1>nul 2>nul && (
+rem			"%bitsadmin.exe:/=\%" /transfer /Download /priority Foreground "%_url_:\=/%" "%_fnc_%"
+rem		)
+rem	)
+	
+	rem ############ Final Check ############
+	if NOT EXIST "%_fnc_%" (
+		echo ERROR   Failed to download %_fnc_%
+		exit /b 1
+	)
+%endfunction%	
+	
 
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST 
-setlocal
-	%dk_call% dk_debugFunc 0
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+:DKTEST
+%setlocal%
 
+	del "dk_info.cmd_BACKUP"
+	ren "dk_info.cmd" "dk_info.cmd_BACKUP"
+	del "dk_info.cmd"
+	pause
     %dk_call% dk_source dk_info
-    %dk_call% dk_info "test message using dk_source to download it first"
+    call dk_info "test dk_info using dk_source to download it first"
 %endfunction%

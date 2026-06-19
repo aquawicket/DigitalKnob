@@ -1,0 +1,5 @@
+###### sdl2_giflib_sa ######
+# https://github.com/theMealena/SDL2_giflib_sa.git
+# https://github.com/theMealena/SDL2_giflib_sa/archive/5de3547094f4fa95024af33a211ba45e5f6255db.zip
+
+sdl2_giflib_sa_Import=https://github.com/theMealena/SDL2_giflib_sa/archive/5de3547094f4fa95024af33a211ba45e5f6255db.zip

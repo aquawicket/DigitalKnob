@@ -1,0 +1,5 @@
+############ Opera ############
+# https://download2.portableapps.com/portableapps/OperaPortable/OperaPortable_126.0.5750.59.paf.exe
+
+Opear_Type=Tool
+Opera_Import=https://download2.portableapps.com/portableapps/OperaPortable/OperaPortable_126.0.5750.59.paf.exe

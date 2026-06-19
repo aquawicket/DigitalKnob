@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -28,7 +28,6 @@
 #ifndef DKSDLWindow_H
 #define DKSDLWindow_H
 
-//#define SDL_MAIN_HANDLED 1 //Bypass SDL_main() //https://wiki.libsdl.org/SDL_SetMainReady
 //WARNING_DISABLE
 #include "SDL.h"
 //WARNING_ENABLE

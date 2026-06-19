@@ -1,17 +1,23 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-############ libvnc ############
+############ libvncserver ############
 # https://github.com/LibVNC/libvncserver.git
+# https://github.com/LibVNC/libvncserver/archive/f7735c48.zip
 
-dk_load(dk_builder)
-
-### DEPEND ###
-if(APPLE)
+if(Apple)
 	dk_depend(gnutls)
 endif()
 dk_depend(libjpeg-turbo)
@@ -22,76 +28,91 @@ dk_depend(sdl)
 dk_depend(zlib)
 
 ### IMPORT ###
-dk_import(https://github.com/LibVNC/libvncserver/archive/f7735c48.zip)
+dk_import()
 
 ### LINK ###
-dk_include				(${LIBVNCSERVER})
-dk_include				(${LIBVNCSERVER}/include)
-dk_include				(${LIBVNCSERVER}/examples)
-dk_include				(${LIBVNCSERVER}/${target_triple})
-dk_include				(${LIBVNCSERVER}/${target_triple}/include)
-DEBUG_dk_include		(${LIBVNCSERVER_DEBUG_DIR})
-RELEASE_dk_include		(${LIBVNCSERVER_RELEASE_DIR})
-DEBUG_dk_include		(${LIBVNCSERVER_DEBUG_DIR}/include)
-RELEASE_dk_include		(${LIBVNCSERVER_RELEASE_DIR}/include)
+dk_include				(${libvncserver}							LIBVNCSERVER_INCLUDE_DIR)
+dk_include				(${libvncserver}/include)
+dk_include				(${libvncserver}/examples)
+dk_include				(${libvncserver_Tuple_Dir})
+dk_include				(${libvncserver_Tuple_Dir}/include)
+dk_include				(${libvncserver_Build_Dir})
+dk_include				(${libvncserver_Build_Dir}/include)
 
 # vncserver
 if(MSVC)
-	dk_libDebug		(${LIBVNCSERVER_DEBUG_DIR}/vncserver.lib)
-	dk_libRelease	(${LIBVNCSERVER_RELEASE_DIR}/vncserver.lib)
+	dk_libDebug		(${libvncserver_Debug_Dir}/vncserver.lib		LIBVNCSERVER_LIBRARY)
+	dk_libRelease	(${libvncserver_Release_Dir}/vncserver.lib		LIBVNCSERVER_LIBRARY)
 else()
-	dk_libDebug		(${LIBVNCSERVER_DEBUG_DIR}/libvncserver.a)
-	dk_libRelease	(${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a)
+	dk_libDebug		(${libvncserver_Debug_Dir}/libvncserver.a		LIBVNCSERVER_LIBRARY)
+	dk_libRelease	(${libvncserver_Release_Dir}/libvncserver.a		LIBVNCSERVER_LIBRARY)
 endif()
 
 # vncclient
 if(MSVC)
-	dk_libDebug		(${LIBVNCSERVER_DEBUG_DIR}/vncclient.lib)
-	dk_libRelease	(${LIBVNCSERVER_RELEASE_DIR}/vncclient.lib)
+	dk_libDebug		(${libvncserver_Debug_Dir}/vncclient.lib		LIBVNCCLIENT_LIBRARY)
+	dk_libRelease	(${libvncserver_Release_Dir}/vncclient.lib		LIBVNCCLIENT_LIBRARY)
 else()
-	dk_libDebug		(${LIBVNCSERVER_DEBUG_DIR}/libvncclient.a)
-	dk_libRelease	(${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
+	dk_libDebug		(${libvncserver_Debug_Dir}/libvncclient.a		LIBVNCCLIENT_LIBRARY)
+	dk_libRelease	(${libvncserver_Release_Dir}/libvncclient.a		LIBVNCCLIENT_LIBRARY)
 endif()
 
 ### 3RDPARTY LINK ###
-ANDROID_DEBUG_dk_set		(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncclient.a)
-ANDROID_RELEASE_dk_set		(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
-APPLE_dk_set				(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER}/${target_triple}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER}/${target_triple}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
-EMSCRIPTEN_DEBUG_dk_set		(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncclient.a)
-EMSCRIPTEN_RELEASE_dk_set	(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
-LINUX_DEBUG_dk_set			(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncclient.a)
-LINUX_RELEASE_dk_set		(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
-RASPBERRY_DEBUG_dk_set		(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_DEBUG_DIR}/libvncclient.a)
-RASPBERRY_RELEASE_dk_set	(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" "-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/libvncclient.a)
+if(Android)
+dk_set(libvncserver_CMAKE 
+	"-DCMAKE_C_FLAGS=-I${LIBVNCSERVER_INCLUDE_DIR} -I${libvncserver_Build_Dir}" 
+	"-DCMAKE_CXX_FLAGS=-I${LIBVNCSERVER_INCLUDE_DIR} -I${libvncserver_Build_Dir}" 
+	-DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER_INCLUDE_DIR} 
+	-DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_LIBRARY} 
+	-DLIBVNCCLIENT_LIBRARY=${LIBVNCCLIENT_LIBRARY}
+)
+endif()
+
+
+
+Apple_dk_set				(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Tuple_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Tuple_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/libvncclient.a)
+
+Emscripten_Debug_dk_set		(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Debug_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Debug_Dir}/libvncclient.a)
+
+Emscripten_Release_dk_set	(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/libvncclient.a)
+
+Linux_Debug_dk_set			(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Debug_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Debug_Dir}/libvncclient.a)
+
+Linux_Release_dk_set		(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/libvncclient.a)
+
+Raspberry_Debug_dk_set		(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Debug_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Debug_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Debug_Dir}/libvncclient.a)
+
+Raspberry_Release_dk_set	(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" "-DCMAKE_CXX_FLAGS=-I${libvncserver} -I${libvncserver_Release_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/libvncserver.a -DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/libvncclient.a)
+
 if(MSVC)
-	WIN_dk_set				(LIBVNCSERVER_CMAKE "/DCMAKE_C_FLAGS=/I${LIBVNCSERVER} /I${LIBVNCSERVER}/${target_triple}" "/DCMAKE_CXX_FLAGS=/I${LIBVNCSERVER} /I${LIBVNCSERVER}/${target_triple}" /DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} /DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/vncserver.lib /DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/vncclient.lib)
+	Windows_dk_set			(libvncserver_CMAKE "/DCMAKE_C_FLAGS=/I${libvncserver} /I${libvncserver_Tuple_Dir}" "/DCMAKE_CXX_FLAGS=/I${libvncserver} /I${libvncserver_Tuple_Dir}" /DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} /DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/vncserver.lib /DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/vncclient.lib)
 else()
-	WIN_dk_set				(LIBVNCSERVER_CMAKE "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER}/${target_triple}" "-DCMAKE_CXX_FLAGS==I${LIBVNCSERVER} =I${LIBVNCSERVER}/${target_triple}" -DLIBVNCSERVER_INCLUDE_DIR=${LIBVNCSERVER} -DLIBVNCSERVER_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/vncserver.lib -DLIBVNCCLIENT_LIBRARY=${LIBVNCSERVER_RELEASE_DIR}/vncclient.lib)
+	Windows_dk_set			(libvncserver_CMAKE "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Tuple_Dir}" "-DCMAKE_CXX_FLAGS==I${libvncserver} =I${libvncserver_Tuple_Dir}" -DLIBVNCSERVER_INCLUDE_DIR=${libvncserver} -DLIBVNCSERVER_LIBRARY=${libvncserver_Release_Dir}/vncserver.lib -DLIBVNCCLIENT_LIBRARY=${libvncserver_Release_Dir}/vncclient.lib)
 endif()
 
 ### GENERATE ###
-ANDROID_DEBUG_dk_configure		(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-ANDROID_RELEASE_dk_configure	(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-APPLE_dk_configure				(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON -DWITH_LZO=OFF)
-EMSCRIPTEN_DEBUG_dk_configure	(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-EMSCRIPTEN_RELEASE_dk_configure	(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-LINUX_DEBUG_dk_configure		(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-LINUX_RELEASE_dk_configure		(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-RASPBERRY_DEBUG_dk_configure	(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_DEBUG_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
-RASPBERRY_RELEASE_dk_configure	(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER_RELEASE_DIR}" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
+Android_Debug_dk_configure		(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Android_Release_dk_configure	(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Apple_dk_configure				(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON -DWITH_LZO=OFF)
+Emscripten_Debug_dk_configure	(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Emscripten_Release_dk_configure	(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Linux_Debug_dk_configure		(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Linux_Release_dk_configure		(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Raspberry_Debug_dk_configure	(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
+Raspberry_Release_dk_configure	(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Build_Dir}" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
 
 if(MSVC)
-	WIN_dk_configure			(${LIBVNCSERVER} "/DCMAKE_C_FLAGS=/I${LIBVNCSERVER} /I${LIBVNCSERVER}/${target_triple}/include" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} /DWITH_JPEG=ON)
+	Windows_dk_configure			(${libvncserver} "/DCMAKE_C_FLAGS=/I${libvncserver} /I${libvncserver_Tuple_Dir}/include" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} /DWITH_JPEG=ON)
 else()
-	WIN_dk_configure			(${LIBVNCSERVER} "-DCMAKE_C_FLAGS=-I${LIBVNCSERVER} -I${LIBVNCSERVER}/${target_triple}/include" ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${OPENSSL_CMAKE} ${SDL_CMAKE} ${ZLIB_CMAKE} -DWITH_JPEG=ON)
+	Windows_dk_configure			(${libvncserver} "-DCMAKE_C_FLAGS=-I${libvncserver} -I${libvncserver_Tuple_Dir}/include" ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${openssl_CMAKE} ${sdl_CMAKE} ${zlib_CMAKE} -DWITH_JPEG=ON)
 endif()
 
 ### PATCH ###
-if(APPLE OR EMSCRIPTEN)
-	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
-	dk_fileReplace(${LIBVNCSERVER}/${CONFIG_PATH}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
+if(Apple OR Emscripten)
+	dk_fileReplace(${libvncserver}/${Target_Config}/rfb/rfbconfig.h "\n#include <unistd.h>" "")
+	dk_fileReplace(${libvncserver}/${Target_Config}/rfb/rfbconfig.h "UNISTD_H  1" "UNISTD_H  1 \n#include <unistd.h>")
 endif()
 
 ### COMPILE ###
-dk_build(${LIBVNCSERVER} vncserver)
-dk_build(${LIBVNCSERVER} vncclient)
+dk_build(${libvncserver} vncserver)
+dk_build(${libvncserver} vncclient)

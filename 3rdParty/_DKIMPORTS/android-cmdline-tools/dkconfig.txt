@@ -1,0 +1,16 @@
+############ android-cmdline-tools ############
+# https://androidsdkmanager.azurewebsites.net/
+# https://developer.android.com/studio/releases/cmdline-tools
+# https://developer.android.com/studio?hl=fr#command-tools
+# https://androidsdkoffline.blogspot.com/p/android-sdk-cmdline-tools-offline.html
+
+
+# 7583922
+# android-cmdline-tools_Windows_Import=https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip
+# android-cmdline-tools_Mac_Import=https://dl.google.com/android/repository/commandlinetools-mac-7583922_latest.zip
+# android-cmdline-tools_Linux_Impot=https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+
+# 8512546
+android-cmdline-tools_Windows_Import=https://dl.google.com/android/repository/commandlinetools-win-8512546_latest.zip
+android-cmdline-tools_Mac_Import=https://dl.google.com/android/repository/commandlinetools-mac-8512546_latest.zip
+android-cmdline-tools_Linux_Impot=https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip

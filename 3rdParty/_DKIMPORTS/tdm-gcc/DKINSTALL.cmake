@@ -1,50 +1,45 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
+
 
 ############ tdm-gcc ############
 # https://github.com/jmeubank/tdm-gcc
+# https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm-1/tdm-gcc-10.3.0.exe
+# https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe
 
-dk_validate(host_triple "dk_host_triple()")
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-#dk_getFileParam("$ENV{DKIMPORTS_DIR}/tdm-gcc/dkconfig.txt" VERSION)
-
-
-### DOWNLOAD ###
-if(WIN_X86_HOST)
-	set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm-1/tdm-gcc-10.3.0.exe)
-endif()
-if(WIN_X86_64_HOST)
-	set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe)
-	#set(TDM-GCC_DL https://github.com/jmeubank/tdm-gcc-src/releases/download/v10.3.0-tdm64-1/gcc-10.3.0-tdm64-1-c++.zip)
-endif()
-if(WIN_HOST AND NOT TDM-GCC_DL)
-	dk_fatal("TDM-GCC_DL is invalid!")
+if(Windows_X86_Host)
+	set(tdm-gcc_Import https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm-1/tdm-gcc-10.3.0.exe)
+elseif(Windows_X86_64_Host)
+	#set(tdm-gcc_Import https://github.com/jmeubank/tdm-gcc-src/releases/download/v10.3.0-tdm64-1/gcc-10.3.0-tdm64-1-c++.zip)
+	set(tdm-gcc_Import https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe)
+else()
+	dk_fatal("tdm-gcc_Import is invalid!")
 endif()
 
-
-### TDM-GCC variables ###
-if(TDM-GCC_DL)
-	dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-	dk_importVariables(${TDM-GCC_DL})
-	#dk_import(${TDM-GCC_DL})
+if(tdm-gcc_Import)
+	dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+	dk_importVariables(${tdm-gcc_Import})
 endif()
 
+set(mingwvars_bat "${tdm-gcc}/mingwvars.bat")
 
-### First Check ###
-set(MINGWVARS_BAT "${TDM-GCC}/mingwvars.bat")
-
-### INSTALL ###
-if(NOT EXISTS "${MINGWVARS_BAT}")
-	dk_debug(" Installing tdm-gcc . . . . ")
-	dk_download(${TDM-GCC_DL} $ENV{DKDOWNLOAD_DIR})			
-	dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${TDM-GCC_DL_FILE}" TDM-GCC_INSTALL_FILE)
-	dk_nativePath("${TDM-GCC}" TDM-GCC_INSTALL_PATH)
-	execute_process(COMMAND ${TDM-GCC_INSTALL_FILE} COMMAND_ECHO STDOUT)
+if(NOT EXISTS "${mingwvars_bat}")
+	dk_debug("Installing tdm-gcc . . . . ")
+	dk_download(${tdm-gcc_Import} ${DKDOWNLOAD_DIR})			
+	dk_pathToNative("${DKDOWNLOAD_DIR}/${tdm-gcc_IMPORT_FILE}" tdm-gcc_INSTALL_FILE)
+	dk_pathToNative("${tdm-gcc}" tdm-gcc_INSTALL_PATH)
+	execute_process(COMMAND ${tdm-gcc_INSTALL_FILE} COMMAND_ECHO STDOUT)
 endif()
 
-
-## Second Check ###
-dk_assertPath(MINGWVARS_BAT)
+dk_assertPath(mingwvars_bat)

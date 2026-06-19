@@ -1,13 +1,24 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+############ pofodo ############
 # http://podofo.sourceforge.net
-# https://github.com/mekentosj/podofo
+# https://github.com/mekentosj/podofo.git
+
+dk_validate(Target_Config  "dk_Target_Config()")
+
 
 
 ### DEPEND ###
@@ -21,42 +32,40 @@ dk_depend(tiff)
 dk_depend(zlib)
 
 
-### IMPORT ###
-#dk_import(https://github.com/mekentosj/podofo.git)
-dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
+dk_import()
 
 
 
 ### LINK ###
-dk_include				(${PODOFO_DIR})
-dk_include				(${PODOFO_DIR}/podofo)
-dk_include				(${PODOFO}/${target_triple})
-DEBUG_dk_include		(${PODOFO_DEBUG_DIR})
-RELEASE_dk_include		(${PODOFO_RELEASE_DIR})
-ANDROID_dk_libDebug		(${PODOFO_DEBUG_DIR}/obj/local/armeabi-v7a/libpodofo.a)
-ANDROID_dk_libRelease	(${PODOFO_RELEASE_DIR}/obj/local/armeabi-v7a/libpodofo.a)
-APPLE_dk_libDebug		(${PODOFO}/${target_triple}/src/podofo/${DEBUG_DIR}/libpodofo.a)
-APPLE_dk_libRelease		(${PODOFO}/${target_triple}/src/podofo/${RELEASE_DIR}/libpodofo.a)
-EMSCRIPTEN_dk_libDebug	(${PODOFO_DEBUG_DIR}/src/podofo/libpodofo.a)
-EMSCRIPTEN_dk_libRelease(${PODOFO_RELEASE_DIR}/src/podofo/libpodofo.a)
-LINUX_dk_libDebug		(${PODOFO_DEBUG_DIR}/src/podofo/libpodofo.a)
-LINUX_dk_libRelease		(${PODOFO_RELEASE_DIR}/src/podofo/libpodofo.a)
-RASPBERRY_dk_libDebug	(${PODOFO_DEBUG_DIR}/src/podofo/libpodofo.a)
-RASPBERRY_dk_libRelease	(${PODOFO_RELEASE_DIR}/src/podofo/libpodofo.a)
-WIN_dk_libDebug			(${PODOFO}/${target_triple}/src/podofo/${DEBUG_DIR}/podofo.lib)
-WIN_dk_libRelease		(${PODOFO}/${target_triple}/src/podofo/${RELEASE_DIR}/podofo.lib)
+dk_include				(${podofo})
+dk_include				(${podofo}/podofo)
+dk_include				(${podofo}/${Target_Tuple})
+Debug_dk_include		(${podofo_Debug_Dir})
+Release_dk_include		(${podofo_Release_Dir})
+Android_dk_libDebug		(${podofo_Debug_Dir}/obj/local/armeabi-v7a/libpodofo.a)
+Android_dk_libRelease	(${podofo_Release_Dir}/obj/local/armeabi-v7a/libpodofo.a)
+Apple_dk_libDebug		(${podofo}/${Target_Tuple}/src/podofo/${Debug_Dir}/libpodofo.a)
+Apple_dk_libRelease		(${podofo}/${Target_Tuple}/src/podofo/${Release_Dir}/libpodofo.a)
+Emscripten_dk_libDebug	(${podofo_Debug_Dir}/src/podofo/libpodofo.a)
+Emscripten_dk_libRelease(${podofo_Release_Dir}/src/podofo/libpodofo.a)
+Linux_dk_libDebug		(${podofo_Debug_Dir}/src/podofo/libpodofo.a)
+Linux_dk_libRelease		(${podofo_Release_Dir}/src/podofo/libpodofo.a)
+Raspberry_dk_libDebug	(${podofo_Debug_Dir}/src/podofo/libpodofo.a)
+Raspberry_dk_libRelease	(${podofo_Release_Dir}/src/podofo/libpodofo.a)
+Windows_dk_libDebug		(${podofo}/${Target_Tuple}/src/podofo/${Debug_Dir}/podofo.lib)
+Windows_dk_libRelease	(${podofo}/${Target_Tuple}/src/podofo/${Release_Dir}/podofo.lib)
 
 
 ### GENERATE ###
-ANDROID_dk_configure	(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}")
-EMSCRIPTEN_dk_configure	(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}")
-IOSSIM_dk_configure		(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}" -DPODOFO_NO_FONTMANAGER=ON)
-IOS_dk_configure		(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}" -DPODOFO_NO_FONTMANAGER=ON)
-LINUX_dk_configure		(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}")
-MAC_dk_configure		(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}")
-RASPBERRY_dk_configure	(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=-I${LIBPNG} -I${TIFF}/${target_triple}/libtiff -I${ZLIB}/${target_triple}")
-WIN_dk_configure		(${PODOFO} -DPODOFO_BUILD_STATIC=ON ${CRYPTOPP_CMAKE} ${FONTCONFIG_CMAKE} ${FREETYPE_CMAKE} ${LIBJPEG_TURBO_CMAKE} ${LIBPNG_CMAKE} ${LUA_CMAKE} ${TIFF_CMAKE} ${ZLIB_CMAKE} "-DCMAKE_CXX_FLAGS=/I${LIBPNG} /I${TIFF}/${target_triple}/libtiff /I${ZLIB}/${target_triple}")
+Android_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
+Emscripten_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
+Iossim_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}" -DPODOFO_NO_FONTMANAGER=ON)
+Ios_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}" -DPODOFO_NO_FONTMANAGER=ON)
+Linux_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
+Mac_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
+Raspberry_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
+Windows_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=/I${libpng} /I${tiff}/${Target_Tuple}/libtiff /I${zlib}/${Target_Tuple}")
 
 
 ### COMPILE ###
-dk_build(${PODOFO} podofo_static)
+dk_build(${podofo} podofo_static)

@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-#if(!$__FRAME__){ $__FRAME__ = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+#if(!$__FRAME___ps1){ $__FRAME___ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # __FRAME__(frame)
@@ -18,9 +18,11 @@ function GLOBAL:__FRAME__($_FRAME_=1) {
 		
 	$invocationInfo = $callStackFrame.InvocationInfo
 		#echo "invocationInfo = $invocationInfo"
+		$boundParametersCount = $invocationInfo.BoundParameters.count
+			echo "boundParametersCount = $boundParametersCount"
 		$boundParameters = $invocationInfo.BoundParameters
 			#echo "boundParameters = $boundParameters"
-			foreach ($keyValue in $boundParameters.GetEnumerator()) { echo "$($keyValue.Key) = $($keyValue.Value)" }
+			foreach ($keyValue in $boundParameters.GetEnumerator()) { echo "$($keyValue.Key)=$($keyValue.Value)" }
 		$commandOrigin = $invocationInfo.CommandOrigin
 			echo "commandOrigin = $commandOrigin"
 		$displayScriptPosition = $invocationInfo.DisplayScriptPosition
@@ -53,8 +55,11 @@ function GLOBAL:__FRAME__($_FRAME_=1) {
 			echo "scriptName = $scriptName"
 		$statement = $invocationInfo.Statement
 			echo "statement = $statement"
+		$unboundArgumentsCount = $invocationInfo.UnboundArguments.count
+			echo "unboundArgumentsCount = $unboundArgumentsCount"
 		$unboundArguments = $invocationInfo.UnboundArguments
 			echo "unboundArguments = $unboundArguments"
+			foreach ($keyValue in $unboundArguments.GetEnumerator()) { echo "$($keyValue.Key)=$($keyValue.Value)" }
 }
 
 

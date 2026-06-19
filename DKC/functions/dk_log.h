@@ -351,7 +351,7 @@
 	#define dk_log_FATAL_LINE 0
 #endif
 #ifndef dk_log_FATAL_TIMEOUT
-	#define dk_log_FATAL_TIMEOUT 1
+	#define dk_log_FATAL_TIMEOUT 0
 #endif
 #ifndef dk_log_FATAL_PAUSE
 	#define dk_log_FATAL_PAUSE 0
@@ -503,7 +503,8 @@ int v_dk_log(int level, const char* format, va_list args) {
 	sprintf(message, "%s%s%s", level_color, message, clr);
 	
 	//###### ECHO MESSAGE ######
-	int ret = printf("%s", message);
+	//int ret = printf("%s", message);
+	int ret = dk_echo("%s", message);
 	
 	//###### TRACE ######
 	//todo

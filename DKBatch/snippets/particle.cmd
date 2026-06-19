@@ -1,10 +1,18 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		"%SystemRoot%\System32\curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-SETLOCAL ENABLEDELAYEDEXPANSION
+setlocal enableDelaydExpansion
 FOR /F %%A in ('ECHO prompt $E^| cmd') DO SET "ESC=%%A"
 ::d = dummy variable, par = particle
 SET /A "par[life]=11","par[rate]=2","par[orgcol]=0","par[rmax]=3","par[rmin]=1","orgin[x]=15","orgin[y]=10"
@@ -22,7 +30,7 @@ FOR /L %%# in () DO (
     FOR /L %%J in (1,40,1000000) DO REM
     SET "par[disp]="
     SET /A "life+=1","d[new]=life%%par[rate]"
-    IF !d[new]! EQU 0 (
+    if !d[new]! EQU 0 (
         SET /A "par[num]+=1","d[life]=life+par[life]"
         SET "par[list]=!par[list]! !par[num]!"
         SET "par[!par[num]!]=!d[life]! !orgin[x]! !orgin[y]! %par[orgcol]%"
@@ -30,7 +38,7 @@ FOR /L %%# in () DO (
     FOR %%Q in (!par[list]!) DO (
         FOR /F "tokens=1-4" %%A in ("!par[%%Q]!") DO (
             SET /A "d[x]=%%B","d[y]=%%C","d[rand]=!RANDOM! * (par[rmax] - par[rmin] + 1) / 32768 + par[rmin]","d[col]=%%D %par[fade]%"
-            IF !life! EQU %%A (
+            if !life! EQU %%A (
                 SET "par[disp]=!par[disp]!%par[end]%"
                 SET "par[list]=!par[list]:%%Q=!"
             ) else (

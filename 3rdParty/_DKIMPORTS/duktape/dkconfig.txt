@@ -1,0 +1,12 @@
+############ duktape ############
+# https://duktape.org
+# https://duktape.org/duktape-2.6.0.tar.xz
+# https://github.com/Squareys/duktape/tree/let-support
+# https://github.com/aquawicket/duktape/archive/refs/heads/let-support.zip
+# https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
+# https://github.com/svaarala/duktape.git
+# https://wiki.duktape.org/projectsusingduktape
+# https://github.com/aquawicket/duktape/archive/duktape-0701a460ca25c2dc76a96bd3187849ca278d1865.zip
+# http://aquawicket.com/DigitalKnob/download/duktape-0701a460ca25c2dc76a96bd3187849ca278d1865.zip
+
+duktape_Import=http://aquawicket.com/DigitalKnob/download/duktape-0701a460ca25c2dc76a96bd3187849ca278d1865.zip

@@ -1,4 +1,4 @@
-###############################################################################
+#########################################################################
 # TestReturnValue(args rtn_var)
 #
 #	Example function that uses returns value with a supplied variable 
@@ -18,7 +18,7 @@ TestReturnValue("ABC" "123" 5 myResult)
 message(STATUS "TestReturnValue() -> myResult = ${myResult}") # should print->  return value = ABC;123;5
 
 
-###############################################################################
+#########################################################################
 # CreateFunction(name contents args)
 #
 #	Example that creates functions dynamicaly at run time

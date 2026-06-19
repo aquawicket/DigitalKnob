@@ -1,0 +1,5 @@
+############ libwebp ############
+# https://github.com/webmproject/libwebp
+# https://github.com/webmproject/libwebp/archive/84b118c9c32584442375f812732989553292fcbc.zip
+
+libwebp_Import=https://github.com/webmproject/libwebp/archive/84b118c9c32584442375f812732989553292fcbc.zip

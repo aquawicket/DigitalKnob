@@ -1,0 +1,9 @@
+### DEPEND ###
+dk_depend(DK)
+dk_depend(DKDuktape)
+#dk_depend(DKDuktapeDom)
+dk_depend(DKAssets)
+dk_depend(DKFile)
+dk_depend(DKSDLText)
+dk_depend(DKSDLWindow)
+dk_depend(DKWindow)

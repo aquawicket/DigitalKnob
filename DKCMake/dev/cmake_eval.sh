@@ -1,4 +1,4 @@
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -45,10 +45,10 @@ fi
 red="\033[31m"
 
 
-DIGITALKNOB_DIR=/c/Users/aquawicket/digitalknob
+DIGITALKNOB_DIR=/c/Users/aquawicket/DigitalKnob
 DKCMAKE_DIR="$DIGITALKNOB_DIR/Development/DKCMake"
-CMAKE_EXE=$(which cmake)
-#echo "CMAKE_EXE = $CMAKE_EXE"
+cmake_exe=$(which cmake)
+#echo "cmake_exe = $cmake_exe"
 
 commands="$@"
 #echo "commands = $commands"
@@ -57,8 +57,8 @@ DKCOMMAND="$commands"
 #echo "DKCOMMAND = $DKCOMMAND"
 
 
-#$CMAKE_EXE -DDKCMAKE_DIR=$DKCMAKE_DIR "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR_DIR/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
-$CMAKE_EXE "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR/dev/cmake_eval.cmake
+#$cmake_exe -DDKCMAKE_DIR=$DKCMAKE_DIR "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR_DIR/dev/cmake_eval.cmake --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+$cmake_exe "-DDKCOMMAND=$DKCOMMAND" -P $DKCMAKE_DIR/dev/cmake_eval.cmake
 echo return code: $? 
 
 

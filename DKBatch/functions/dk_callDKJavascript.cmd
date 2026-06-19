@@ -1,50 +1,63 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_callDKJavascript(function, arguments...)
-::#
-::#
+rem ####################################################################
+rem # dk_callDKJavascript(function, arguments...)
+rem #
+rem #
 :dk_callDKJavascript
-setlocal
-	%dk_call% dk_debugFunc 1 99
+%setlocal%
 
-	::### Get DKJAVASCRIPT_FUNCTIONS_DIR
-	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	set "_func_=%~1"
+	set "_path_=%DKJAVASCRIPT_FUNCTIONS_DIR:\=/%/%_func_%.js"
+	
+	%dk_call% dk_validate DKJAVASCRIPT_FUNCTIONS_DIR  %dk_call% dk_DKBRANCH_DIR
 
-	::### Get DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR
-	if not defined DKHTTP_DKJAVASCRIPT_DIR				(set "DKHTTP_DKJAVASCRIPT_DIR=%DKHTTP_DKBRANCH_DIR%/DKJavascript")
-	if not defined DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR	(set "DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR=%DKHTTP_DKJAVASCRIPT_DIR%/functions")
+	if NOT defined DKHTTP_DKJAVASCRIPT_DIR				(set "DKHTTP_DKJAVASCRIPT_DIR=%DKHTTP_DKBRANCH_DIR%/DKJavascript")
+	if NOT defined DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR	(set "DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR=%DKHTTP_DKJAVASCRIPT_DIR%/functions")
 
-	::### Download files if missing
-	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js		(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js")
-	if not exist %DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js	(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js")
+	if NOT EXIST "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js"	(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js" "%DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js")
+	if NOT EXIST "%_path_%"								(%dk_call% dk_download "%DKHTTP_DKJAVASCRIPT_FUNCTIONS_DIR%/%~1.js" "%_path_%")
 
-	::### ALL_BUT_FIRST ###
-	set "ALL_BUT_FIRST=%*"
-	if defined ALL_BUT_FIRST (set "ALL_BUT_FIRST=!ALL_BUT_FIRST:%~1 =!")
+	%dk_call% dk_allButFirstArgs %*
 
-	set "CSCRIPT_EXE=C:/Windows/System32/cscript.exe"
-	set DKJAVASCRIPT_COMMAND=%ComSpec% /c %CSCRIPT_EXE% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %ALL_BUT_FIRST%
-	%dk_call% dk_exec %DKJAVASCRIPT_COMMAND%
+	%dk_call% dk_validate cscript.exe %dk_call% dk_findFile cscript.exe
+	
+	set DKCOMMAND=%ComSpec% /c %cscript.exe% //D //E:javascript //H:CScript //I //NoLogo //X %DKJAVASCRIPT_FUNCTIONS_DIR%/DK.js; %DKJAVASCRIPT_FUNCTIONS_DIR%/%1.js; %dk_allButFirstArgs%
+	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
 		set "dk_callDKJavascript=%dk_exec%"
+		set "%_func_%=%dk_exec%"
 	)
-
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-	%dk_call% dk_callDKJavascript dk_test "arg 1" "arg 2" "arg 3"
 	%dk_call% dk_echo
+	%dk_call% dk_callDKJavascript dk_testReturn inputA
 	%dk_call% dk_echo "dk_callDKJavascript = %dk_callDKJavascript%"
+	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	%dk_call% dk_echo
+	
+	%dk_call% dk_echo
+	%dk_call% dk_callDKJavascript dk_basename "%USERPROFILE:\=/%/Digital Knob/Development"
+	%dk_call% dk_echo "dk_callDKJavascript = %dk_callDKJavascript%"
+	%dk_call% dk_echo "dk_basename = %dk_basename%"
+	%dk_call% dk_echo
 %endfunction%

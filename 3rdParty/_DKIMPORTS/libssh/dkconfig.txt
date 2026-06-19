@@ -1,0 +1,5 @@
+############ libssh ############
+# https://github.com/canonical/libssh.git
+# https://github.com/canonical/libssh/archive/ac6d2fad4a8bf07277127736367e90387646363f.zip
+
+libssh_Import=https://github.com/canonical/libssh/archive/ac6d2fad4a8bf07277127736367e90387646363f.zip

@@ -1,18 +1,23 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_pathExists){ $dk_pathExists = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_pathExists_ps1){ $dk_pathExists_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_pathExists(filepath)
 #
 #
-function Global:dk_pathExists($filepath){
-	dk_debugFunc 1
+function Global:dk_pathExists(){
+	dk_debugFunc 1;
 
-	if(Test-Path $filepath){ $pathExists = $true } 
-	else { $pathExists = $false }
+	#$filepath = $args[0];
+
+	if(Test-Path $args[0]){ 
+		$global:dk_pathExists = $true; 
+	} 
+	else{ 
+		$global:dk_pathExists = $false; 
+	}
 	
-	#dk_call dk_printVar pathExists
-	return $pathExists
+	return $dk_pathExists;
 }
 
 
@@ -20,11 +25,24 @@ function Global:dk_pathExists($filepath){
 
 
 function Global:DKTEST(){ ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	if(dk_call dk_pathExists "DK.ps1"){ dk_call dk_info "The file exists" }
-	else{ dk_call dk_info "The file does NOT exist" }
+	### Result as global variable
+	dk_call dk_echo;
+	dk_call dk_pathExists "C:/Windows";
+	dk_call dk_echo "dk_pathExists = ${dk_pathExists}";
 	
-	if(dk_call dk_pathExists "nofile.ext"){ dk_call dk_info "The file exists" } 
-	else{ dk_call dk_info "The file does NOT exist" }
+	### Result as a condition (true)
+	dk_call dk_echo;
+	if(dk_call dk_pathExists "DK.ps1"){ dk_call dk_echo "The file exists"; }
+	else{ dk_call dk_echo "The file does NOT exist"; }
+	dk_call dk_echo "dk_pathExists = ${dk_pathExists}";
+	
+	### Result as a condition (false)
+	dk_call dk_echo;
+	if(dk_call dk_pathExists "nofile.ext"){ dk_call dk_echo "The file exists"; } 
+	else{ dk_call dk_echo "The file does NOT exist"; }
+	dk_call dk_echo "dk_pathExists = ${dk_pathExists}";
+	
+	
 }

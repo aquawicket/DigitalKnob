@@ -1,24 +1,34 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_removeExtension(filepath rtn_var)
-::#
-::#
+rem ##################################################################################
+rem # dk_removeExtension(filepath rtn_var:OPTIONAL)
+rem #
+rem #
 :dk_removeExtension
-setlocal
-    %dk_call% dk_debugFunc 1 2
-    
+%setlocal%
+   
     set "_filepath_=%~1"
     %dk_call% dk_getExtension "%_filepath_%"
-    %dk_call% dk_replaceAll "%_filepath_%" "%dk_getExtension%" ""
-    
+	if defined dk_getExtension (
+		set "dk_removeExtension=!_filepath_:%dk_getExtension%=!"
+	)
+   
+	rem %dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
     endlocal & (
-		set "dk_removeExtension=%dk_replaceAll%"
-		if "%~2" neq "" (set "%~2=%dk_replaceAll%")
+		set "dk_removeExtension=%dk_removeExtension%"
+		if "%~2" neq "" (set "%~2=%dk_removeExtension%")
 	)
 %endfunction%
 
@@ -27,12 +37,52 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-   
-    %dk_call% dk_set myPath "/test/test2/xfile.extension"
-    %dk_call% dk_removeExtension "%myPath%"
-    %dk_call% dk_printVar dk_removeExtension
+%setlocal%
+  
+	echo.
+	set "myPath=/test/test2/xfile.exten"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.zip"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.tar.gz"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.tar.xz.tar.gz.tar.xz"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.tar.x.gz"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.tar.xz"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.7z.exe.b"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+
+	echo.
+	set "myPath=test.7z.exe"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
+	
+	echo.
+	set "myPath=noExt"
+	%dk_call% dk_removeExtension "%myPath%"
+	%dk_call% dk_debug "dk_removeExtension = %dk_removeExtension%"
 %endfunction%

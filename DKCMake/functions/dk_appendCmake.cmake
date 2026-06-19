@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_appendCmake(<str>)
 #
 #	<str>	- TODO
@@ -11,9 +22,11 @@ function(dk_appendCmake)
 	dk_debugFunc(1)
 	set(str ${ARGV})
 	
-	dk_assertPath(plugin_path)
-	dk_fileAppend(${plugin_path}/CMakeLists.txt "${str}")
+	dk_assertVar(CURRENT_PLUGIN)
+	dk_assertPath(${CURRENT_PLUGIN})
+	dk_fileAppend(${CURRENT_PLUGIN}/CMakeLists.txt "${str}")
 endfunction()
+
 
 
 

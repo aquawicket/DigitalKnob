@@ -1,58 +1,56 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
-dk_load(dk_builder)
+#dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/facebook/zstd.git
 # https://github.com/facebook/folly/blob/main/CMake/FindZstd.cmake
 
 ### IMPORT ###
-dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/zstd/dkconfig.txt" ZSTD_DL)
-dk_import(${ZSTD_DL})
+dk_import()
 
 ### LINK ###
-dk_include				(${ZSTD_DIR}/lib										ZSTD_INCLUDE_DIR)
+dk_include				(${zstd}/lib											ZSTD_INCLUDE_DIR)
 if(MSVC)
-	if(WIN)
-		dk_libDebug		(${ZSTD_CONFIG_DIR}/lib/${DEBUG_DIR}/zstd_static.lib	Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_CONFIG_DIR}/lib/${RELEASE_DIR}/zstd_static.lib	Zstd_LIBRARY_RELEASE)
+	if(Windows)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/zstd_static.lib	ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/zstd_static.lib	ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 	else()
-		dk_libDebug		(${ZSTD_CONFIG_DIR}/lib/${DEBUG_DIR}/libzstd.a			Zstd_LIBRARY_DEBUG)
-		dk_libRelease	(${ZSTD_CONFIG_DIR}/lib/${RELEASE_DIR}/libzstd.a		Zstd_LIBRARY_RELEASE)
+		dk_libDebug		(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+		dk_libRelease	(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 	endif()
-elseif(APPLE)
-	dk_libDebug			(${ZSTD_CONFIG_DIR}/lib/${DEBUG_DIR}/libzstd.a			Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_CONFIG_DIR}/lib/${RELEASE_DIR}/libzstd.a		Zstd_LIBRARY_RELEASE)
+elseif(Apple)
+	dk_libDebug			(${zstd_Config_Dir}/lib/${Debug_Dir}/libzstd.a			ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/${Release_Dir}/libzstd.a		ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 else()
-	dk_libDebug			(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_DEBUG)
-	dk_libRelease		(${ZSTD_CONFIG_DIR}/lib/libzstd.a						Zstd_LIBRARY_RELEASE)
+	dk_libDebug			(${zstd_Config_Dir}/lib/libzstd.a						ZSTD_LIBRARY_DEBUG		ZSTD_LIBRARY)
+	dk_libRelease		(${zstd_Config_Dir}/lib/libzstd.a						ZSTD_LIBRARY_RELEASE	ZSTD_LIBRARY)
 endif()
-if(DEBUG)
-	dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_DEBUG})
-endif()
-if(RELEASE)
-	dk_set				(ZSTD_LIBRARY		${Zstd_LIBRARY_RELEASE})
-endif()
-dk_set					(Zstd_LIBRARY		${ZSTD_LIBRARY})
-dk_set					(Zstd_LIBRARIES		${Zstd_LIBRARY_DEBUG} ${Zstd_LIBRARY_RELEASE})
-dk_set					(Zstd_INCLUDE_DIR	${ZSTD_INCLUDE_DIR})
+dk_set					(ZSTD_LIBRARIES		\"${ZSTD_LIBRARY_DEBUG}\" \"${ZSTD_LIBRARY_RELEASE}\")
+
 
 ### 3RDPARTY LINK ###
-dk_set(ZSTD_CMAKE
+dk_set(zstd_CMAKE
 	-DZSTD_INCLUDE_DIR=${ZSTD_INCLUDE_DIR}
 	-DZSTD_LIBRARY=${ZSTD_LIBRARY}
-	-DZstd_LIBRARY=${Zstd_LIBRARY}
-	-DZstd_INCLUDE_DIR=${Zstd_INCLUDE_DIR} 
-	-DZstd_LIBRARY_DEBUG=${Zstd_LIBRARY_DEBUG} 
-	-DZstd_LIBRARY_RELEASE=${Zstd_LIBRARY_RELEASE} 
-	-DZstd_LIBRARIES=${Zstd_LIBRARIES}
-	"-DCMAKE_EXE_LINKER_FLAGS=${Zstd_LIBRARIES}")
-		
+	-DZSTD_LIBRARY_DEBUG=${ZSTD_LIBRARY_DEBUG} 
+	-DZSTD_LIBRARY_RELEASE=${ZSTD_LIBRARY_RELEASE} 
+	-DZSTD_LIBRARIES=${ZSTD_LIBRARIES}
+	"-DCMAKE_EXE_LINKER_FLAGS=${ZSTD_LIBRARIES}")
+
+
 ### GENERATE ###
-dk_configure(${ZSTD_DIR}/build/cmake
+dk_configure(${zstd}/build/cmake
 	-DZSTD_BUILD_CONTRIB=OFF		# "BUILD CONTRIB" OFF
 	-DZSTD_BUILD_PROGRAMS=OFF		# "BUILD PROGRAMS" ON
 	-DZSTD_BUILD_SHARED=OFF			# "BUILD SHARED LIBRARIES" ON
@@ -64,4 +62,4 @@ dk_configure(${ZSTD_DIR}/build/cmake
 	-DZSTD_USE_STATIC_RUNTIME=ON)	# "LINK TO STATIC RUN-TIME LIBRARIES" OFF
 
 ### COMPILE ###
-dk_build(${ZSTD_DIR})
+dk_build()

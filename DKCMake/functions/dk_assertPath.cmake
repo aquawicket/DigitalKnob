@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_assertPath(path)
 #
 #	If the expression compares equal to false (i.e., the expression is false), a error message is written and abort is called, terminating the scripts execution.
@@ -10,12 +21,14 @@ include_guard()
 #	@expression:  The expression to be evaluated. If this expression evaluates to false, this causes an assertion
 #
 function(dk_assertPath)
-	dk_debugFunc(1)
+	dk_debugFunc()
 
+	set(_name_ "PATH")
 	set(_path_ "${ARGV0}")
-#	if(DEFINED ${_path_})
-#		set(_path_ ${${_path_}})
-#	endif()
+	if(DEFINED ${_path_})
+		set(_name_ ${_path_})
+		set(_path_ ${${_path_}})
+	endif()
 	#dk_printVar(_path_)
 	
 	#dk_varToString(_path_ path_value)
@@ -25,8 +38,8 @@ function(dk_assertPath)
 		return()
 	endif()
 		
-	dk_fatal("${bg_red}${white}Assertion failed: Path Not Found path:'${_path_}:${${_path_}}'")
-
+	dk_echo("${bg_red}${white}Assertion failed: Path NOT FOUND '${_name_}':'${_path_}' ${clr}")
+	dk_fatal()
 endfunction()
 
 

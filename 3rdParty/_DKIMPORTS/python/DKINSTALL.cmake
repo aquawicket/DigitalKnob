@@ -1,8 +1,16 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ############ python ############
@@ -12,112 +20,111 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #
 #   windows uninstall registry location
 #	HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{A5F504DF-2ED9-4A2D-A2F3-9D2750DD42D6}
-#
 
-###### IMPORT ######
-dk_validate(host_triple "dk_host_triple()")
-if(LINUX_HOST)	
-	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz)
-elseif(MAC_HOST)
-	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18-macosx10.9.pkg)
-elseif(WIN_X86_HOST)
-	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.msi)
-elseif(WIN_X86_64_HOST)
-	dk_set(PYTHON_DL https://www.python.org/ftp/python/2.7.18/python-2.7.18.amd64.msi)
-endif()
-###### PYTHON_VARIABLES ######
-if(PYTHON_DL)
-	dk_importVariables(${PYTHON_DL})
-endif()
+#dk_basename(${PLUGIN_Import_Path} PLUGIN_Import_Name)
+#if(${PLUGIN_Import_Name}_${Host_Tuple}_Import)
+#	set(python_Import "${PLUGIN_Import_Name}_${Host_Tuple}_Import")
+#elseif(${PLUGIN_Import_Name}_Import)
+#	set(python_Import "${PLUGIN_Import_Name}_Import")
+#endif()
+#dk_importVariables(${${python_Import}})
+dk_import()	
 
-###### PYTHON_EXE (first check) ######
-dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-if(EXISTS "${PYTHON_DIR}")
-	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
+###### python_exe (first check) ######
+if(EXISTS "${python}")
+	dk_findProgram(python2_exe python "${python}")
+	set(python_exe ${python2_exe})
 elseif(EXISTS "/usr/local/bin")
-	dk_findProgram(PYTHON_EXE python "/usr/local/bin")
-elseif(NOT WIN_HOST)
-	dk_findProgram(PYTHON_EXE python)
+	dk_findProgram(python2_exe python "/usr/local/bin")
+	set(python_exe ${python2_exe})
+elseif(NOT Windows_Host)
+	dk_findProgram(python2_exe python)
+	set(python_exe ${python2_exe})
 endif()
-if(EXISTS "${PYTHON_DIR}/include")
-	dk_set(Python_INCLUDE_DIRS "${PYTHON_DIR}/include")
+if(EXISTS "${python}/include")
+	dk_set(Python_INCLUDE_DIRS "${python}/include")
 endif()
-if(EXISTS "${PYTHON_DIR}/libs")
-	dk_set(Python_LIBRARIES    "${PYTHON_DIR}/libs")
+if(EXISTS "${python}/libs")
+	dk_set(Python_LIBRARIES    "${python}/libs")
 endif()
 
 ###### INSTALL ######
-if(NOT EXISTS "${PYTHON_EXE}")
+if(NOT EXISTS "${python_exe}")
 	dk_info(" Installing python . . . . ")
-	if(MAC_HOST)
-		dk_download(${PYTHON_DL} $ENV{DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
-		dk_validate(SUDO_EXE "dk_depend(sudo)")
-		dk_command(${SUDO_EXE} installer -pkg $ENV{DKDOWNLOAD_DIR}/${PYTHON_DL_FILE} -target /)
-		#dk_command(${BASH_EXE} -c "command -v python" OUTPUT_VARIABLE PYTHON_EXE NO_HALT)
-	elseif(WIN_HOST)
-		dk_download(${PYTHON_DL} $ENV{DKDOWNLOAD_DIR}/${PYTHON_DL_FILE})
-		#dk_nativePath($ENV{DKDOWNLOAD_DIR} DKDOWNLOAD_DIR_WINPATH)
-		dk_replaceAll($ENV{DKDOWNLOAD_DIR} "/" "\\" DKDOWNLOAD_DIR_WINPATH)
-		#dk_nativePath(${PYTHON_DIR} PYTHON_WINPATH)
-		dk_replaceAll(${PYTHON_DIR} "/" "\\" PYTHON_WINPATH)
-		dk_fileWrite("${PYTHON_DIR}\\python_install.cmd" "${DKDOWNLOAD_DIR_WINPATH}\\${PYTHON_DL_FILE} /passive PrependPath=1 TargetDir=${PYTHON_WINPATH}")
-		dk_exec(${PYTHON_DIR}/python_install.cmd)
-	elseif(LINUX_HOST)
-		dk_import(${PYTHON_DL})
+	if(Linux_Host)
+		dk_import(${python_Import})
 		####   Code below used To run the command in a fresh environment    ####
 		#### exec env -i HOME="$HOME" PATH="$PATH" bash -l -c '>>COMMAND<<' ####
 		# './configure --enable-optimizations'
-		#execute_process(COMMAND bash -l -c './configure' WORKING_DIRECTORY "${PYTHON_DIR}")
-		execute_process(COMMAND exec env -i HOME="$ENV{HOME}" PATH="$ENV{PATH}" bash -l -c './configure' WORKING_DIRECTORY ${PYTHON_DIR})
-		execute_process(COMMAND make WORKING_DIRECTORY ${PYTHON_DIR})
+		#execute_process(COMMAND bash -l -c './configure' WORKING_DIRECTORY "${python}")
+		execute_process(COMMAND exec env -i HOME="$ENV{HOME}" PATH="$ENV{PATH}" bash -l -c './configure' WORKING_DIRECTORY ${python})
+		execute_process(COMMAND make WORKING_DIRECTORY ${python})
+	elseif(Mac_Host)
+		dk_download(${python_Import})
+		dk_validate(sudo_exe "dk_depend(sudo_exe)")
+		dk_exec(${sudo_exe} installer -pkg ${dk_download} -target /)
+		#dk_exec(${bash_exe} -c "command -v python" OUTPUT_VARIABLE python_exe NO_HALT)
+	elseif(Windows_Host)
+		dk_import()
+		#dk_download(${python_Import})
+		dk_replaceAll(${dk_download} "/" "\\" dk_download_win)
+		dk_replaceAll(${python} "--" "-" python)
+		dk_replaceAll(${python} "/" "\\" python_WIN)
+		dk_mkdir(${python})
+		dk_validate(cmd.exe "dk_depend(cmd.exe)")
+		dk_exec(${cmd.exe} /c ${dk_download_win} /passive PrependPath=1 TargetDir=${python_WIN})
 	else()
 		dk_installPackage(python)
 	endif()
 endif()
 
-###### PYTHON_EXE (second check) ######
-if(EXISTS "${PYTHON_DIR}")
-	dk_findProgram(PYTHON_EXE python "${PYTHON_DIR}")
+###### python_exe (second check) ######
+if(EXISTS "${python}")
+	dk_findProgram(python2_exe python "${python}")
+	set(python_exe ${python2_exe})
 elseif(EXISTS "/usr/local/bin")
-	dk_findProgram(PYTHON_EXE python "/usr/local/bin")
-elseif(NOT WIN_HOST)
-	dk_findProgram(PYTHON_EXE python)
+	dk_findProgram(python2_exe python "/usr/local/bin")
+	set(python_exe ${python2_exe})
+elseif(NOT Windows_Host)
+	dk_findProgram(python2_exe python)
+	set(python_exe ${python2_exe})
 endif()
-if(EXISTS "${PYTHON_DIR}/include")
-	dk_set(Python_INCLUDE_DIRS "${PYTHON_DIR}/include")
+if(EXISTS "${python}/include")
+	dk_set(Python_INCLUDE_DIRS "${python}/include")
 endif()
-if(EXISTS "${PYTHON_DIR}/libs")
-	dk_set(Python_LIBRARIES 	"${PYTHON_DIR}/libs")
-endif()
-
-
-if((NOT LINUX_HOST) AND (NOT ANDROID_HOST))
-	dk_assertPath(PYTHON)
-	dk_assertPath(PYTHON_EXE)
+if(EXISTS "${python}/libs")
+	dk_set(Python_LIBRARIES 	"${python}/libs")
 endif()
 
-if(WIN_HOST)
-	dk_firewallAllow("Python" "${PYTHON_EXE}")
+
+if((NOT Linux_Host) AND (NOT Android_Host))
+	dk_assertPath(python)
+	dk_assertPath(python2_exe)
+	dk_assertPath(python_exe)
+endif()
+
+if(Windows_Host)
+	dk_firewallAllow("${python2_exe}")
 endif()
 
 ### FIXME: we can't have both python2 and python3 in the environment path 
-#dk_prependEnvPath("${PYTHON_DIR}")
+#dk_prependEnvPath("${python}")
 
-###### PIP_EXE ######
-if(WIN_HOST)
-	dk_findProgram(PIP_EXE pip ${PYTHON_DIR}/Scripts)
-	if(NOT EXISTS ${PIP_EXE})
-		dk_exec(${PYTHON_EXE} -m ensurepip)
+###### pip_exe ######
+if(Windows_Host)
+	dk_findProgram(pip_exe pip ${python}/Scripts)
+	if(NOT EXISTS ${pip_exe})
+		dk_exec(${python_exe} -m ensurepip)
 	endif()
-	dk_findProgram(PIP_EXE pip ${PYTHON_DIR}/Scripts)
+	dk_findProgram(pip_exe pip ${python}/Scripts)
 	
-	dk_assertPath(PIP_EXE)
-	dk_exec(${PYTHON_EXE} -m pip install --upgrade pip)
+	dk_assertPath(pip_exe)
+	dk_exec(${python_exe} -m pip install --upgrade pip)
 endif()
 
 
 
-### MAC UNINTALL ###
+### Mac UNINTALL ###
 # Remove the third-party Python 2.7 framework
 # sudo rm -rf /Library/Frameworks/Python.framework/Versions/2.7
 	

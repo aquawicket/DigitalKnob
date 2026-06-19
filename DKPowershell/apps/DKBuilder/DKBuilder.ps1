@@ -3,57 +3,59 @@
 #${ENABLE_dk_debugFunc} = 1
 
 ###### INIT ######
-if(!${DKSCRIPT_PATH})							{ ${DKSCRIPT_PATH} = $Script:MyInvocation.MyCommand.Path }
-Write-Host "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
+if(!${env:DKSCRIPT_PATH})							{ ${env:DKSCRIPT_PATH} = $Script:MyInvocation.MyCommand.Path -replace '\\', '/'; }
+Write-Host "env:DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 
-if(!${DKHOME})									{ ${DKHOME} = "${env:USERPROFILE}" }
-Write-Host "DKHOME = ${DKHOME}"
-if(!${DKHTTP})									{ ${DKHTTP} = "https://raw.githubusercontent.com/aquawicket" }
-Write-Host "DKHTTP = ${DKHTTP}"
+if(!${env:DKHOME})									{ ${env:DKHOME} = "${env:USERPROFILE}" -replace '\\', '/'; }
+Write-Host "env:DKHOME = ${env:DKHOME}";
+if(!${env:DKHTTP})									{ ${env:DKHTTP} = "http://aquawicket.com"; }
+Write-Host "env:DKHTTP = ${env:DKHTTP}";
 
-if(!${DIGITALKNOB})								{ ${DIGITALKNOB} = "DigitalKnob" }
-Write-Host "DIGITALKNOB = ${DIGITALKNOB}"
-if(!${DIGITALKNOB_DIR})							{ ${DIGITALKNOB_DIR} = "${DKHOME}/${DIGITALKNOB}" }
-Write-Host "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
-if(!${DKHTTP_DIGITALKNOB_DIR})					{ ${DKHTTP_DIGITALKNOB_DIR} = "${DKHTTP}/${DIGITALKNOB}" }
-Write-Host "DKHTTP_DIGITALKNOB_DIR = ${DKHTTP_DIGITALKNOB_DIR}"
-if(!(Test-Path ${DIGITALKNOB_DIR}))				{ New-Item -Path ${DIGITALKNOB_DIR} -ItemType Directory }
-Write-Host "DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}"
+if(!${env:DIGITALKNOB})								{ ${env:DIGITALKNOB} = "Digital Knob"; }
+Write-Host "env:DIGITALKNOB = ${env:DIGITALKNOB}";
+if(!${env:DIGITALKNOB_DIR})							{ ${env:DIGITALKNOB_DIR} = "${env:DKHOME}/${env:DIGITALKNOB}"; }
+Write-Host "env:DIGITALKNOB_DIR = ${env:DIGITALKNOB_DIR}";
+if(!${env:DKHTTP_DIGITALKNOB})								{ ${env:DKHTTP_DIGITALKNOB} = "DigitalKnob"; }
+Write-Host "env:DKHTTP_DIGITALKNOB = ${env:DKHTTP_DIGITALKNOB}";
+if(!${env:DKHTTP_DIGITALKNOB_DIR})					{ ${env:DKHTTP_DIGITALKNOB_DIR} = "${env:DKHTTP}/${env:DKHTTP_DIGITALKNOB}"; }
+Write-Host "env:DKHTTP_DIGITALKNOB_DIR = ${env:DKHTTP_DIGITALKNOB_DIR}";
+if(!(Test-Path ${env:DIGITALKNOB_DIR}))				{ New-Item -Path ${env:DIGITALKNOB_DIR} -ItemType Directory; }
+Write-Host "env:DIGITALKNOB_DIR = ${env:DIGITALKNOB_DIR}";
 
-if(!${DKBRANCH})								{ ${DKBRANCH} = "Development" }
-Write-Host "DKBRANCH = ${DKBRANCH}"
-if(!${DKBRANCH_DIR})							{ ${DKBRANCH_DIR} = "${DIGITALKNOB_DIR}/${DKBRANCH}" }
-Write-Host "DKBRANCH_DIR = ${DKBRANCH_DIR}"
-if(!${DKHTTP_DKBRANCH_DIR})						{ ${DKHTTP_DKBRANCH_DIR} = "${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}" }
-Write-Host "DKHTTP_DKBRANCH_DIR = ${DKHTTP_DKBRANCH_DIR}"
-if(!(Test-Path ${DKBRANCH_DIR}))				{ New-Item -Path ${DKBRANCH_DIR} -ItemType Directory }
+if(!${env:DKBRANCH})								{ ${env:DKBRANCH} = "Development"; }
+Write-Host "env:DKBRANCH = ${env:DKBRANCH}";
+if(!${env:DKBRANCH_DIR})							{ ${env:DKBRANCH_DIR} = "${env:DIGITALKNOB_DIR}/${env:DKBRANCH}"; }
+Write-Host "env:DKBRANCH_DIR = ${env:DKBRANCH_DIR}";
+if(!${env:DKHTTP_DKBRANCH_DIR})						{ ${env:DKHTTP_DKBRANCH_DIR} = "${env:DKHTTP_DIGITALKNOB_DIR}/${env:DKBRANCH}"; }
+Write-Host "env:DKHTTP_DKBRANCH_DIR = ${env:DKHTTP_DKBRANCH_DIR}";
+if(!(Test-Path ${env:DKBRANCH_DIR}))				{ New-Item -Path ${env:DKBRANCH_DIR} -ItemType Directory; }
 
-if(!${DKPOWERSHELL})							{ ${DKPOWERSHELL} = "DKPowershell" }
-Write-Host "DKPOWERSHELL = ${DKPOWERSHELL}"
-if(!${DKPOWERSHELL_DIR})						{ ${DKPOWERSHELL_DIR} = "${DKBRANCH_DIR}/${DKPOWERSHELL}" }
-Write-Host "DKPOWERSHELL_DIR = ${DKPOWERSHELL_DIR}"
-if(!${DKHTTP_DKPOWERSHELL_DIR})					{ ${DKHTTP_DKPOWERSHELL_DIR} = "${DKHTTP_DKBRANCH_DIR}/${DKPOWERSHELL}" }
-Write-Host "DKHTTP_DKPOWERSHELL_DIR = ${DKHTTP_DKPOWERSHELL_DIR}"
-if(!(Test-Path ${DKPOWERSHELL_DIR}))			{ New-Item -Path ${DKPOWERSHELL_DIR} -ItemType Directory }
+if(!${env:DKPOWERSHELL})							{ ${env:DKPOWERSHELL} = "DKPowershell"; }
+Write-Host "env:DKPOWERSHELL = ${env:DKPOWERSHELL}";
+if(!${env:DKPOWERSHELL_DIR})						{ ${env:DKPOWERSHELL_DIR} = "${env:DKBRANCH_DIR}/${env:DKPOWERSHELL}"; }
+Write-Host "env:DKPOWERSHELL_DIR = ${env:DKPOWERSHELL_DIR}";
+if(!${env:DKHTTP_DKPOWERSHELL_DIR})					{ ${env:DKHTTP_DKPOWERSHELL_DIR} = "${env:DKHTTP_DKBRANCH_DIR}/${env:DKPOWERSHELL}"; }
+Write-Host "env:DKHTTP_DKPOWERSHELL_DIR = ${env:DKHTTP_DKPOWERSHELL_DIR}";
+if(!(Test-Path ${env:DKPOWERSHELL_DIR}))			{ New-Item -Path ${env:DKPOWERSHELL_DIR} -ItemType Directory; }
 
-if(!${DKPOWERSHELL_FUNCTIONS})					{ ${DKPOWERSHELL_FUNCTIONS} = "functions" }
-Write-Host "DKPOWERSHELL_FUNCTIONS = ${DKPOWERSHELL_FUNCTIONS}"
-if(!${DKPOWERSHELL_FUNCTIONS_DIR})				{ ${DKPOWERSHELL_FUNCTIONS_DIR} = "${DKPOWERSHELL_DIR}/${DKPOWERSHELL_FUNCTIONS}" }
-Write-Host "DKPOWERSHELL_FUNCTIONS_DIR = ${DKPOWERSHELL_FUNCTIONS_DIR}"
-if(!${DKPOWERSHELL_FUNCTIONS_DIR_})				{ ${DKPOWERSHELL_FUNCTIONS_DIR_} = "${DKPOWERSHELL_FUNCTIONS_DIR}/" }
-Write-Host "DKPOWERSHELL_FUNCTIONS_DIR_ = ${DKPOWERSHELL_FUNCTIONS_DIR_}"
-if(!${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR})		{ ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR} = "${DKHTTP_DKPOWERSHELL_DIR}/${DKPOWERSHELL_FUNCTIONS}" }
-Write-Host "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}"
-if(!${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_})		{ ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_} = "${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/" }
-Write-Host "DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_ = ${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_}"
-if(!(Test-Path ${DKPOWERSHELL_FUNCTIONS_DIR}))	{ New-Item -Path ${DKPOWERSHELL_FUNCTIONS_DIR} -ItemType Directory }
+if(!${env:DKPOWERSHELL_FUNCTIONS})					{ ${env:DKPOWERSHELL_FUNCTIONS} = "functions"; }
+Write-Host "env:DKPOWERSHELL_FUNCTIONS = ${env:DKPOWERSHELL_FUNCTIONS}";
+if(!${env:DKPOWERSHELL_FUNCTIONS_DIR})				{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} = "${env:DKPOWERSHELL_DIR}/${env:DKPOWERSHELL_FUNCTIONS}"; }
+Write-Host "env:DKPOWERSHELL_FUNCTIONS_DIR = ${env:DKPOWERSHELL_FUNCTIONS_DIR}";
+if(!${env:DKPOWERSHELL_FUNCTIONS_DIR_})				{ ${env:DKPOWERSHELL_FUNCTIONS_DIR_} = "${env:DKPOWERSHELL_FUNCTIONS_DIR}/"; }
+Write-Host "env:DKPOWERSHELL_FUNCTIONS_DIR_ = ${env:DKPOWERSHELL_FUNCTIONS_DIR_}";
+if(!${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR})		{ ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR} = "${env:DKHTTP_DKPOWERSHELL_DIR}/${env:DKPOWERSHELL_FUNCTIONS}"; }
+Write-Host "env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR = ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}";
+if(!${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_})		{ ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_} = "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}/"; }
+Write-Host "env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_ = ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_}";
+if(!(Test-Path ${env:DKPOWERSHELL_FUNCTIONS_DIR}))	{ New-Item -Path ${env:DKPOWERSHELL_FUNCTIONS_DIR} -ItemType Directory; }
 
 
-if(!(Test-Path ${DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1)){ 
-	Invoke-WebRequest -URI "${DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1" -OutFile ${DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1 
+if(!(Test-Path ${env:DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1)){ 
+	Invoke-WebRequest -URI "${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1" -OutFile ${env:DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1;
 }
-. ${DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1
-if(${DKLOADED}){ exit } else{ ${global:DKLOADED}=1 }	# ignore the fork process that will return from DK.ps1 above
+. ${env:DKPOWERSHELL_FUNCTIONS_DIR_}DK.ps1;
+if(${DKLOADED}){ exit } else{ ${global:DKLOADED}=1; }	# ignore the fork process that will return from DK.ps1 above
 
 
 
@@ -61,5 +63,5 @@ if(${DKLOADED}){ exit } else{ ${global:DKLOADED}=1 }	# ignore the fork process t
 
 
 ###### Load Main Program ######
-dk_call dk_buildMain
-Read-Host -Prompt "Press Enter to exit"
+dk_call dk_buildMain;
+Read-Host -Prompt "Press Enter to exit";

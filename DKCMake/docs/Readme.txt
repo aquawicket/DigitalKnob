@@ -1,25 +1,42 @@
 *** DKCMake: The DigitalKnob Build System ***
 
-* There is only one CMakeLists.txt file in the root of the /digitalknob folder.
+* There is only one CMakeLists.txt file in the root of the /DigitalKnob folder.
 
-* When running Cmake, the source path is always the /digitalknob folder, where the CMakeLists.txt file is located. 
-* The build directory is the path to the app followed by the OS.  i.e  DKCpp/apps/DKMyApp/win_x86  
+* When running Cmake, the source path is always the /DigitalKnob folder, where the CMakeLists.txt file is located. 
+* The build directory is the path to the app followed by the OS.  i.e  DKCpp/apps/DKMyApp/Windows_X86  
 	* Output Build OS's are
-		* /android_arm32
-		* /android_arm64
-		* /emscripten
-		* /ios_arm32
-		* /ios_arm64
-		* /iossim_x86
-		* /iossim_x86_64
-		* /linux_x86
-		* /linux_x86_64
-		* /mac_x86
-		* /mac_x86_64
-		* /raspberry_arm32
-		* /raspberry_arm64
-		* /win_x86
-		* /win_x86_64
+		* /Android_Arm32
+		* /Android_Arm64
+		* /Android_X86
+		* /Android_X86_64
+		* /Emscripten_Arm32
+		* /Emscripten_Arm64
+		* /Emscripten_X86
+		* /Emscripten_X86_64
+		* /Ios_Arm32
+		* /Ios_Arm64
+		* /Ios_X86
+		* /Ios_X86_64
+		* /Iossim_Arm32
+		* /Iossim_Arm64
+		* /Iossim_X86
+		* /Iossim_x86_64
+		* /Linux_Arm32
+		* /Linux_Arm64
+		* /Linux_X86
+		* /Linux_X86_64
+		* /Mac_Arm32
+		* /Mac_Arm64
+		* /Mac_X86
+		* /Mac_X86_64
+		* /Raspberry_Arm32
+		* /Raspberry_Arm64
+		* /Raspberry_X86
+		* /Raspberry_X86_64
+		* /Windows_Arm32
+		* /Windows_Arm64
+		* /Windows_X86
+		* /Windows_X86_64
 		
 * Note: DKCMake will fill in most variables by the path you have selected.		
 
@@ -38,10 +55,10 @@
 ****************************************************
 
 *** SOURCE DIRECTORY ****
-/digitalknob      ( I.E.  C:/Users/username/digitalknob for windows.. ,where the digitalknob folder resides on your system )
+/DigitalKnob      ( I.E.  C:/Users/username/DigitalKnob for windows.. ,where the DigitalKnob folder resides on your system )
 
 *** BINARY DIRECTORY ****
-/digitalknob/Development/DKCpp/apps/DKCore/win_x86   ( By setting the binary directory to be win_x86, most variables will be casted )
+/DigitalKnob/Development/DKCpp/apps/DKCore/Windows_X86   ( By setting the binary directory to be Windows_X86, most variables will be casted )
 
 
 ****************************************************
@@ -49,7 +66,7 @@
 ****************************************************
 
 Q. How do I add a 3rdParty library to DigitalKnob
-A. Take a look in the /digitalknob/3rdParty/_DKIMPORTS folder,   there you will find tons of examples of how DK uses DKINSTALL.cmake files.
+A. Take a look in the /DigitalKnob/3rdParty/_DKIMPORTS folder,   there you will find tons of examples of how DK uses DKINSTALL.cmake files.
 
 Q. How do I add an App
 A. For now, just rename any of the folders in /DKCpp/apps to your desired app name and use it as a template.

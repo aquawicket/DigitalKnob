@@ -1,4 +1,4 @@
-# This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
 # For the latest information, see https://github.com/aquawicket/DigitalKnob
 #
@@ -60,7 +60,7 @@ set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer")
 set (CMAKE_SYSTEM_NAME Darwin)
 set (CMAKE_SYSTEM_VERSION 1)
 set (UNIX True)
-set (APPLE True)
+set (Apple True)
 #set (IOS True)
 
 # Required as of cmake 2.8.10

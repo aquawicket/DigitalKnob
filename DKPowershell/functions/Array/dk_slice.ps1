@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$Array_dk_slice){ $Array_dk_slice = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$Array_dk_slice){ $Array_dk_slice_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # Array:dk_slice(array, start, end)
@@ -23,7 +23,7 @@ function Global:Array:dk_slice($array, $start, $end) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function Global:DKTEST 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	dk_call Array:dk_slice array start end_
 }

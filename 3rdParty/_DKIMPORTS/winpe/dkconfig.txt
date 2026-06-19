@@ -1,0 +1,7 @@
+############ winpe ############
+# winpe_Import=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuper%20Lite50MB.iso"
+# winpe_Import=https://ia802200.us.archive.org/22/items/windows-7-pesuper-lite-50-mb/Windows7PESuperLite50MB.iso"
+# winpe_Import=https://ia801808.us.archive.org/21/items/wpe-64/WPE64.iso"
+# https://a-34.1fichier.com/c898117937
+
+winpe_Import=https://a-34.1fichier.com/c898117937

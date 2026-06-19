@@ -18,23 +18,23 @@ int dk_callDKCSharp(char* func, char* args, char* rtn_var){
 	dk_echo("%s(%s)\n", func, args);
 // main( int argc, char *argv[] )
 
-	char* CMD_EXE = "cmd.exe";
-	char* DKSCRIPT_PATH = "C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKCSharp.h";
-	char* DKCSHARP_FUNCTIONS_DIR_ = "C:/Users/Administrator/digitalknob/Development/DKCSharp/functions/";
+	char* cmd_exe = "cmd.exe";
+	char* DKSCRIPT_PATH = "C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKCSharp.h";
+	char* DKCSHARP_FUNCTIONS_DIR_ = "C:/Users/Administrator/DigitalKnob/Development/DKCSharp/functions/";
 
-	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/digitalknob/Development/DKC/functions/dk_callDKCSharp.h")) {
+	if(-1 == putenv("DKSCRIPT_PATH=C:/Users/Administrator/DigitalKnob/Development/DKC/functions/dk_callDKCSharp.h")) {
       dk_error("putenv failed \n");
       return -1;
     }
-	if(-1 == putenv("DKCSHARP_FUNCTIONS_DIR_=C:/Users/Administrator/digitalknob/Development/DKCSharp/functions/")) {
+	if(-1 == putenv("DKCSHARP_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKCSharp/functions/")) {
       dk_error("putenv failed \n");
       return -1;
     } 
 	
-	char* func_path = "C:/Users/Administrator/digitalknob/Development/DKCSharp/functions/";
+	char* func_path = "C:/Users/Administrator/DigitalKnob/Development/DKCSharp/functions/";
 	char DKCSHARP_COMMAND[512];
-	//int err = sprintf(DKCSHARP_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKCSHARP_FUNCTIONS_DIR_=%s) & (set PATH=!DKCSHARP_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", CMD_EXE, DKSCRIPT_PATH, DKCSHARP_FUNCTIONS_DIR_, func, args);
-	int err = sprintf(DKCSHARP_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",CMD_EXE, DKCSHARP_FUNCTIONS_DIR_, func, args);
+	//int err = sprintf(DKCSHARP_COMMAND, "%s /V:ON /s /c \"(set DKSCRIPT_PATH=%s) & (set DKCSHARP_FUNCTIONS_DIR_=%s) & (set PATH=!DKCSHARP_FUNCTIONS_DIR_!;!PATH!) & echo !PATH! & call %s %s\"", cmd_exe, DKSCRIPT_PATH, DKCSHARP_FUNCTIONS_DIR_, func, args);
+	int err = sprintf(DKCSHARP_COMMAND, "%s /V:ON /s /c \"call %s%s.cmd %s\"",cmd_exe, DKCSHARP_FUNCTIONS_DIR_, func, args);
     dk_echo("%s\n", DKCSHARP_COMMAND);
 	
 	FILE *fp;

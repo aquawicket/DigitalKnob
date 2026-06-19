@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
@@ -6,7 +7,7 @@
 function dk_log(){
 	#dk_debugFunc(1 2)
 	#echo("###### ".__FUNCTION__."(".implode(";", func_get_args()).") ######\n");
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_color.php");
+	dk_source("dk_color");
 
 	if(!isset($dk_log_ENABLE)){ $dk_log_ENABLE = 1; }
 	if($dk_log_ENABLE != 1){ return 0; }
@@ -156,9 +157,9 @@ function dk_log(){
 	if(!isset($dk_log_FATAL_TRACE))			{ $dk_log_FATAL_TRACE=1; }
 	#if(!isset($dk_log_FATAL_LINE))			{ $dk_log_FATAL_LINE=0; }
 	#if(!isset($dk_log_FATAL_SOUND))		{ $dk_log_FATAL_SOUND=0; }
-	if(!isset($dk_log_FATAL_TIMEOUT))		{ $dk_log_FATAL_TIMEOUT=9; }
+	#if(!isset($dk_log_FATAL_TIMEOUT))		{ $dk_log_FATAL_TIMEOUT=9; }
 	#if(!isset($dk_log_FATAL_PAUSE))		{ $dk_log_FATAL_PAUSE=0; }
-	#if(!isset($dk_log_FATAL_HALT))			{ $dk_log_FATAL_HALT=0; }
+	#if(!isset($dk_log_FATAL_HALT))			{ $dk_log_FATAL_HALT=1; }
 	
 	if(!isset($argv)){
 		$argv = func_get_args();
@@ -224,5 +225,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

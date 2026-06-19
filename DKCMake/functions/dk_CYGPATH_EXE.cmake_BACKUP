@@ -1,0 +1,82 @@
+#!/usr/bin/cmake -P
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+
+####################################################################
+# dk_cygpath_exe()
+#
+#
+function(dk_cygpath_exe)
+    dk_debugFunc()
+
+	###### SET ######
+	if(ARGV)
+		dk_set(cygpath_exe "${ARGV0}")
+		
+	###### GET ######
+	elseif(DEFINED ENV{cygpath_exe})	
+		dk_set(cygpath_exe "$ENV{cygpath_exe}")
+	
+	else()
+		if(EXISTS "${cygpath_exe}")
+			dk_debug("cygpath_exe:${cygpath_exe} already set")
+			return()
+		endif()
+		
+		dk_validate(cmd_exe "dk_depend(cmd_exe)")
+		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+		
+		###### cygpath_exe ######
+		if(NOT EXISTS "${cygpath_exe}")
+			set(cygpath_exe $ENV{cygpath_exe})
+		endif()
+		if(NOT EXISTS "${cygpath_exe}")
+			execute_process(COMMAND $ENV{DKSHELL} -c "command -v cygpath" OUTPUT_VARIABLE cygpath_exe OUTPUT_STRIP_TRAILING_WHITESPACE)
+		endif()
+		if(NOT EXISTS "${cygpath_exe}")
+			dk_findProgram(cygpath_exe cygpath.exe ${DKTOOL_DIR})
+		endif()
+	endif()
+	
+	###### FINALIZE ######
+	dk_set(cygpath_exe "${cygpath_exe}")		# Globalize the variable
+	#dk_assertPath(cygpath_exe)
+endfunction()
+
+
+
+
+
+
+###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+function(DKTEST)
+    dk_debugFunc()
+ 
+	dk_echo()
+	dk_echo("Test Getting cygpath_exe . . .")
+    dk_cygpath_exe()
+	if(EXISTS "${cygpath_exe}")
+		dk_success("cygpath_exe = ${cygpath_exe}")
+	else()
+		dk_error("cygpath_exe = ${cygpath_exe}")
+	endif()
+	
+	dk_echo()
+	dk_echo("Test Setting cygpath_exe . . .")
+    dk_cygpath_exe("C:/cygpath.exe")
+	if(EXISTS "${cygpath_exe}")
+		dk_success("cygpath_exe = ${cygpath_exe}")
+	else()
+		dk_error("cygpath_exe = ${cygpath_exe}")
+	endif()
+endfunction()

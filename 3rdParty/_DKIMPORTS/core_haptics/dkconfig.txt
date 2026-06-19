@@ -1,0 +1,2 @@
+############ core_haptics ############
+# https://developer.apple.com/documentation/corehaptics?language=objc

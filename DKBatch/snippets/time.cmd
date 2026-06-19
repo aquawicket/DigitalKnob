@@ -1,7 +1,15 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 for /L %%L in (0,1,2147483648) do @(
@@ -49,7 +57,7 @@ for /L %%L in (0,1,2147483648) do @(
 		
 		rem  ###### Print all in centiseconds (centiseconds appended) ######
 	    rem echo count:!count!   TA:!time!   h:!hour_in_seconds!      m:!minute_in_seconds!      s:!second_in_seconds!
-		call dk_sleep 1000
+		%dk_call% dk_sleep 1000
 		echo count:!count!   TA:!time!   TB:%%A:%%B:%%C.%%D   h:!hour_in_centiseconds!    m:!minute_in_centiseconds!    s:!second_in_centiseconds!    cs:!centisecond!
 		rem echo count:!count!   TA:!time!   h:!hour_in_milliseconds!   m:!minute_in_milliseconds!   s:!second_in_milliseconds!   cs:!centiseconds_in_milliseconds!
 	)

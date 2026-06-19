@@ -1,17 +1,24 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_dateToSeconds(seconds %second% %minute% %hour% %day% %month% %year%)
-::#
-::#
+rem ##################################################################################
+rem # dk_dateToSeconds(seconds %second% %minute% %hour% %day% %month% %year%)
+rem #
+rem #
 :dk_dateToSeconds
-setlocal
-    %dk_call% dk_debugFunc 1 7
- 
+%setlocal%
+
     if "%~2" equ "" (set "ss=0")    else (set /a "ss=100%~2%%100")
     if "%~3" equ "" (set "nn=0")    else (set /a "nn=100%~3%%100")
     if "%~4" equ "" (set "hh=0")    else (set /a "hh=100%~4%%100")
@@ -22,7 +29,7 @@ setlocal
     set /a "dd=dd-1"
     set /a "mm=mm-1"
     set /a "yy=yy-1970"
-    
+   
     set /a "Seconds_ss=%ss%"
     set /a "Minutes_ss=%nn%*60+%Seconds_ss%"
     set /a "Hours_ss=%hh%*60*60+%Minutes_ss%"
@@ -38,18 +45,17 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
     %dk_call% dk_getDate Day Month Year
     %dk_call% dk_getTime CentiSecond Second Minute Hour
     echo TIMESTAMP = %Year%-%Month%-%Day%T%Hour%:%Minute%:%Second%.%CentiSecond%
-    
-    echo:
+   
+    echo.
     echo ###### dk_dateToSeconds ######
-    %dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year% 
+    %dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month% %Year%
     echo %Year%/%Month%/%Day% %Hour%:%Minute%:%Second% = %seconds% seconds
     %dk_call% dk_dateToSeconds seconds %Second% %Minute% %Hour% %Day% %Month%
     echo %Month%/%Day% %Hour%:%Minute%:%Second% = %seconds% seconds

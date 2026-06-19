@@ -1,20 +1,28 @@
+#!/usr/bin/php
 <?php
 
 ################################################################################
-# dk_dirname(<pathname>, <rtn_var>:optional)
+# dk_dirname(_path, rtn_var)
 #
 #   Returns a parent directory's path 
 #
 #   Reference: https://en.wikipedia.org/wiki/Dirname
 #
-function dk_dirname() {
+function dk_dirname($_path, &...$rtn_var) {
 	#dk_debugFunc(1 2);
+	global $dk_dirname;
 	
-	if(!isset($argv)){
-		$argv = func_get_args();
+	
+	$dk_dirname = dirname($_path);
+	
+	
+	###### return ######
+	if(isset($rtn_var[0])){
+		$rtn_var[0] = $dk_dirname;
+	} elseif(isset($dk_dirname)){
+		echo("$dk_dirname\n");
 	}
-	
-	return dirname($argv[0]);
+	return $dk_dirname;
 }
 
 
@@ -24,43 +32,35 @@ function dk_dirname() {
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc(0);
-	include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/dk_echo.php");
+	dk_source("dk_echo");
 	
-    $myPath = "C:/Windows/System32";
-    $dk_dirname = dk_dirname("$myPath");
-    dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
+	### Result as global variable
+	dk_echo("\n");
+	dk_dirname("A:/directoryA/filenameA.extA");
+	dk_echo("dk_dirname = ".$GLOBALS['dk_dirname']."\n");
 	
-	$myPath="C:/Windows/System32/";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
+	### Result as parameter variable
+	dk_echo("\n");
+	$resultB = "";
+	dk_dirname("B:/directoryB/filenameB.extB", $resultB);
+	dk_echo("resultB = $resultB\n");
+	dk_echo("dk_dirname = ".$GLOBALS['dk_dirname']."\n");
 	
-	$myPath="C:\\Windows\\System32";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
+	### Result as return value
+	dk_echo("\n");
+	$resultC=dk_dirname("C:/directoryC/filenameC.extC");
+	dk_echo("resultC = $resultC\n");
+	dk_echo("dk_dirname = ".$GLOBALS['dk_dirname']."\n");
 	
-	$myPath="C:\\Windows\\System32\\";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
-	
-	# FIXME
-	$myPath="/home/aquawicket/docs/.";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
-	
-	$myPath="/home/aquawicket/docs/";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
-	
-	$myPath="base.wiki";
-    $dk_dirname = dk_dirname("$myPath");
-	dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
-	
-	# FIXME
-	#$myPath="/";
-    #$dk_dirname = dk_dirname("$myPath");
-	#dk_echo("myPath:'$myPath' -> dk_dirname:'$dk_dirname'\n");
+	### Result as return value and parameter variable
+	dk_echo("\n");
+	$resultD1 = "";
+	$resultD2=dk_dirname("D:/directoryD/filenameD.extD", $resultD1);
+	dk_echo("resultD1 = $resultD1\n");
+	dk_echo("resultD2 = $resultD2\n");
+	dk_echo("dk_dirname = ".$GLOBALS['dk_dirname']."\n");
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/digitalknob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

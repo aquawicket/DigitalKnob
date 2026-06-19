@@ -4,8 +4,9 @@ import os
 import sys
 import platform
 
+# DKINIT_py
 ####################################################################
-# dk_test()
+# DK()
 #
 def DK(*args):
     #   dk_debugFunc 0 99

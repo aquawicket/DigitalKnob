@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_ndkDebug(path)
 #
 #	TODO
@@ -16,12 +27,12 @@ function(dk_ndkDebug path)
 		dk_fatal("dk_ndkDebug(${path}) path does not exist")
 	endif()
 	
-	if(DEBUG AND QUEUE_BUILD)
-		if(WIN_HOST)
-			dk_exec(${ANDROID_NDK}/ndk-build.cmd WORKING_DIRECTORY ${path}/${target_triple}/Debug)
+	if(Debug)
+		if(Windows_Host)
+			dk_exec(${android-ndk}/ndk-build.cmd WORKING_DIRECTORY ${path}/${Target_Tuple}/Debug)
 		endif()
 		if(UNIX_HOST)
-			dk_exec(${ANDROID_NDK}/ndk-build WORKING_DIRECTORY ${path}/${target_triple}/Debug)
+			dk_exec(${android-ndk}/ndk-build WORKING_DIRECTORY ${path}/${Target_Tuple}/Debug)
 		endif()
 	endif()
 endfunction()

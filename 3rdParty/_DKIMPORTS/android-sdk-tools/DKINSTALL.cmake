@@ -1,25 +1,27 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
 ###### android-sdk-tools ######
-# https://developer.android.com/studio/releases/sdk-tools
-# https://androidsdkoffline.blogspot.com/p/android-sdk-tools.html
+dk_validate(android-sdk "dk_depend(android-sdk)")
 
-dk_depend(android-sdk)
-dk_validate(host_triple "dk_host_triple()")
-if(WIN_HOST)
-	dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sdk-tools/dkconfig.txt ANDROID_SDK_TOOLS_WIN_DL)
-	dk_import		(${ANDROID_SDK_TOOLS_WIN_DL} PATH ${ANDROID_SDK}/tools PATCH)
-elseif(MAC_HOST)
-	dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sdk-tools/dkconfig.txt ANDROID_SDK_TOOLS_MAC_DL)
-	dk_import		(${ANDROID_SDK_TOOLS_MAC_DL} PATH ${ANDROID_SDK}/tools PATCH)
-elseif(LINUX_HOST)
-	dk_getFileParam	($ENV{DKIMPORTS_DIR}/android-sdk-tools/dkconfig.txt ANDROID_SDK_TOOLS_LINUX_DL)
-	dk_import		(${ANDROID_SDK_TOOLS_LINUX_DL} PATH ${ANDROID_SDK}/tools PATCH)
+if(Windows_Host)
+	dk_import(${android-sdk-tools_Windows_Import} 	INSTALL_PATH "${android-sdk}/tools") # PATCH)
+elseif(Mac_Host)
+	dk_import(${android-sdk-tools_Mac_Import} 		INSTALL_PATH "${android-sdk}/tools") # PATCH)
+elseif(Linux_Host)
+	dk_import(${android-sdk-tools_Linux_Import} 	INSTALL_PATH "${android-sdk}/tools") # PATCH)
 endif()
 
 # TODO

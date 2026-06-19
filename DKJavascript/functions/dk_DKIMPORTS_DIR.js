@@ -1,6 +1,6 @@
-if(typeof dk_env === "undefined")	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); }
-if(typeof dk_assertPath === "undefined"){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); }
-//(1, eval)(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js").OpenTextFile(url, 1).ReadAll();
+if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js", function(){}); 		}
+if(!dk_valid("dk_assertPath"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_assertPath.js", function(){}); 	}
+
 
 //####################################################################
 //# dk_DKIMPORTS_DIR()
@@ -20,16 +20,11 @@ dk_DKIMPORTS_DIR = function dk_DKIMPORTS_DIR_(){
 	} 
 	//############ GET ############
 	else {
-		if(typeof dk_DK3RDPARTY_DIR === "undefined"){ 
-			dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DK3RDPARTY_DIR.js", function(){
-				dk_DK3RDPARTY_DIR()
-			}); 
-		}
+		if(!dk_valid("dk_DK3RDPARTY_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DK3RDPARTY_DIR.js", function(){ dk_DK3RDPARTY_DIR(); }); }
 		DKIMPORTS_DIR = DK3RDPARTY_DIR+"/_DKIMPORTS";
 	}
 
 	dk_assertPath(DKIMPORTS_DIR);
-	//window["DKIMPORTS_DIR"] = DKIMPORTS_DIR;
 }
 
 

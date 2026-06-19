@@ -1,62 +1,57 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	if NOT DEFINED DK.cmd (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	call "%%DK.cmd:/=\%%" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-
-
-:: https://stackoverflow.com/a/67714373
-%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-if not defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=!DKCACHE_DIR!\.gitSystem")
-if not defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=!DKCACHE_DIR!\.gitGlobal")
-
-::####################################################################
-::# DKINSTALL
-::#
+rem ####################################################################
+rem # DKINSTALL
+rem #
 :DKINSTALL
-::setlocal
-	%dk_call% dk_debugFunc 0	
+	rem  https://stackoverflow.com/a/67714373
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+	if NOT defined GIT_CONFIG_SYSTEM (set "GIT_CONFIG_SYSTEM=%DKCACHE_DIR%/.gitSystem")
+	if NOT defined GIT_CONFIG_GLOBAL (set "GIT_CONFIG_GLOBAL=%DKCACHE_DIR%/.gitGlobal")
+%setlocal%
 	
-	%dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-    if defined win_arm64_host  (set "GIT_DL=%GIT_DL_WIN_ARM64%")
-    if defined win_x86_host    (set "GIT_DL=%GIT_DL_WIN_X86%")
-    if defined win_x86_64_host (set "GIT_DL=%GIT_DL_WIN_X86_64%")
-    %dk_call% dk_assertVar GIT_DL
-    
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	if not defined GIT (%dk_call% dk_importVariables %GIT_DL% NAME git ROOT %DKTOOLS_DIR%)
+	%dk_call% dk_import
 	
-	::############ DO NOT USE GIT_DIR ############
-	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should not be set.")   &:: https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
-	::############ DO NOT USE GIT_DIR ############
+	rem  https://stackoverflow.com/questions/15769263/how-does-git-dir-work-exactly
+	rem ############ DO NOT USE GIT_DIR ############
+	if defined GIT_DIR (%dk_call% dk_fatal "ERROR: GIT_DIR should NOT be set")
+	rem ############ DO NOT USE GIT_DIR ############
 	
-    set "GIT_EXE=%GIT%\bin\git.exe"
-	set "BASH_EXE=%GIT%\bin\bash.exe"
-    set "GITBASH_EXE=%GIT%\git-bash.exe"
-	set "PATCH_EXE=%GIT%\usr\bin\patch.exe"
-     
-    if exist "%GIT_EXE%" (%return%)
-    %dk_call% dk_echo   
-    %dk_call% dk_info "Installing git . . ."
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
-    %dk_call% dk_download %GIT_DL%
-    "%DKDOWNLOAD_DIR%\%GIT_DL_FILE%" -y -o "%GIT%"
+	rem if NOT defined bash_exe 		(set "bash_exe=%git%/bin/bash.exe")
+	rem if NOT defined git_exe 			(set "git_exe=%git%/bin/git.exe")
+	if NOT defined git.exe 				(set "git.exe=%git%/bin/git.exe")
+	if NOT defined git_bash_exe			(set "git_bash_exe=%git%/git-bash.exe")
+	if NOT defined git_remote_http_exe  (set "git_remote_http_exe=%git%/mingw64/libexec/git-core/git-remote-http.exe")
+	if NOT defined git_remote_https_exe (set "git_remote_https_exe=%git%/mingw64/libexec/git-core/git-remote-https.exe")
+	if NOT defined git_ssh_exe			(set "git_ssh_exe=%git%/usr/bin/ssh.exe")
+	rem if NOT defined patch_exe		(set "patch_exe=%git%/usr/bin/patch.exe")
+
+	%dk_call% dk_firewallAllow "%git_remote_http_exe%"
+	%dk_call% dk_firewallAllow "%git_remote_https_exe%"
+	%dk_call% dk_firewallAllow "%git_ssh_exe%"
 	
-	::###### Install Git Context Menu ######
-	"contextMenu/DKINSTALL.cmd"
-       
-    if NOT exist "%GIT_EXE%" (%dk_call% dk_error "cannot find git")
-%endfunction%
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-
-    %dk_call% DKINSTALL
+	rem ###### INSTALL ######
+	if EXIST "%git.exe%" (goto:return)
+	"%dk_import%" -y -o "%git%"
+	%dk_call% dk_assertPath "%git.exe%"
+	
+    rem ###### Install Git Context Menu ######
+    %dk_call% dk_depend git/contextMenu
+	
+	:return
+	endlocal & (
+		set "git=%git%"
+		set "git.exe=%git.exe%"
+		set "git_bash_exe=%git_bash_exe%"
+		set "git_ssh_exe=%git_ssh_exe%"
+	)
 %endfunction%

@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -89,7 +89,7 @@ int main(int argc, char** argv){
 	std::cout << "DKCOMPILER_VERSION     	" << DKCOMPILER_VERSION << "\n";
 	std::cout << "DKC_LANGUAGE_VERSION   	" << DKC_LANGUAGE_VERSION << "\n";
 	std::cout << "DKCPP_LANGUAGE_VERSION	" << DKCPP_LANGUAGE_VERSION << "\n";
-	std::cout << "DKBUILD_TYPE           	" << DKBUILD_TYPE << "\n";
+	std::cout << "Target_Type           	" << Target_Type << "\n";
 
 	return 0;
 }

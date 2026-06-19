@@ -1,40 +1,69 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-
-::################################################################################
-::# dk_gitClone(url, branch, dirctory)
-::#
-::#
+rem set "dk_gitClone_BACKUP=1"
+rem ################################################################################
+rem # dk_gitClone(repo_url, repo_path, repo_branch)
+rem #
+rem #
 :dk_gitClone
-setlocal
-	%dk_call% dk_debugFunc 2 3
-    
-	if not defined _URL_ (set "_URL_=%~1")
-	%dk_call% dk_assertVar "%_URL_%"
-	if not defined DKBRANCH_DIR (set "DKBRANCH_DIR=%~3")
-	%dk_call% dk_assertPath "%DKBRANCH_DIR%"
+%setlocal%
+   
+	rem ### repo_url
+	if "%repo_url%" equ "" (set "repo_url=%~1")
+	if "%repo_url%" equ "" (set "repo_url=%DKHttp_git_url%")
+	if "%repo_url%" equ "" (set "repo_url=%DKSsh_git_url%")
+	if "%repo_url%" equ "" (set "repo_url=http://aquawicket.com/DigitalKnob/Development.git")
 	
-	::###### error if repository already exists
-	if exist "%DKBRANCH_DIR%/.git" (%dk_call% dk_error "'%DKBRANCH_DIR%/.git' repository already exists" & %return%)
+	rem ### repo_branch
+	if "%repo_branch%" equ "" (set "repo_branch=%~3")
+	if "%repo_branch%" equ "" (set "repo_branch=Development")
 	
-	::###### backup if local path already exists and is not empty
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" || (%dk_call% dk_copy "%DKBRANCH_DIR%" "%DKBRANCH_DIR%_BACKUP" OVERWRITE)
-	if not exist ("%DKBRANCH_DIR%_BACKUP" %dk_call% dk_fatal "dk_copy failed")
+	rem ### repo_path
+	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+	if "%repo_path%" equ "" (set "repo_path=%~2")
+	if "%repo_path%" equ "" (set "repo_path=%DKBRANCH_DIR%")
+	if "%repo_path%" equ "" (
+		%dk_call% dk_validate DIGITALKNOB_DIR %dk_call% dk_DIGITALKNOB_DIR
+		set "repo_path=!DIGITALKNOB_DIR!/%repo_branch%"
+	)
 	
-	%dk_call% dk_validate GIT_EXE "%dk_call% dk_installGit"
+
+	rem ###### error if repository already exists
+	if EXIST "%repo_path%/.git" (%dk_call% dk_notice "'%repo_path%/.git' repository already exists" && %return%)
+		
+	rem ###### backup if local path already exists
+rem	if "%dk_gitClone_BACKUP%" equ "1" (
+		if EXIST "%repo_path%" (
+			%dk_call% dk_echo "Backing up %repo_path% . . ."
+			%dk_call% dk_copy "%repo_path%" "%repo_path%_BACKUP" OVERWRITE
+			if NOT EXIST ("%repo_path%_BACKUP" %dk_call% dk_fatal "dk_copy failed")
+		)
+rem	) else (
+rem		%dk_call% dk_isEmptyDirectory "%repo_path%" || (%dk_call% dk_delete "%repo_path%")
+rem	)
 	
-	::###### Clone if directory doesn't exist or is empty
-	if not exist "%DKBRANCH_DIR%" ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone "%_URL_%" "%DKBRANCH_DIR%" && %return%)
-	%dk_call% dk_isEmptyDirectory "%DKBRANCH_DIR%" && ("%GIT_EXE%" -C "%DKBRANCH_DIR%" clone %_URL_% "%DKBRANCH_DIR%" && %return%)
+	%dk_call% dk_validate git.exe %dk_call% dk_depend git
 	
-	::###### Fetch and checkout if directory already exists and is not empty
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" init -b %~2
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" remote add origin %_URL_%
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" fetch
-	"%GIT_EXE%" -C "%DKBRANCH_DIR%" checkout -t origin/%~2 -f
+	rem ###### Clone if directory doesn't EXIST or is empty
+	%dk_call% dk_mkdir "%repo_path%"
+	%dk_call% dk_isEmptyDirectory "%repo_path%" && ("%git.exe%" -C "%repo_path%" clone %repo_url% "%repo_path%" && %return%)
+	
+	rem ###### Fetch and checkout if directory already exists and is NOT empty
+rem	"%git.exe%" -C "%repo_path%" init -b %repo_branch%
+rem	"%git.exe%" -C "%repo_path%" remote add origin %repo_url%
+rem	"%git.exe%" -C "%repo_path%" fetch
+rem	"%git.exe%" -C "%repo_path%" checkout -t origin/%repo_branch% -f
 	
 %endfunction%
 
@@ -43,11 +72,16 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	echo dk_gitClone :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-    %dk_call% dk_gitClone https://github.com/aquawicket/DigitalKnob.git "D:\digitalknob\Development"
+	rem %dk_call% dk_assertVar DKStorage_Dir
+	rem %dk_call% dk_assertVar DIGITALKNOB_DIR
+	rem %dk_call% dk_gitClone "%DKGit_gitbundle%" "%DIGITALKNOB_DIR%/Development"
+	
+	rem %dk_call% dk_assertVar DIGITALKNOB_DIR
+	rem %dk_call% dk_gitClone "%DKSsh_git_url%" "%DIGITALKNOB_DIR%/Development"
+	
+	%dk_call% dk_gitClone
 %endfunction%

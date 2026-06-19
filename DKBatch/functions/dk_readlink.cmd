@@ -1,58 +1,70 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_readlink(path rtn_var)
-::#
-::#    read the contents of a symbolic link
-::#
-::#    SHELL: https://man7.org/linux/man-pages/man1/realpath.1.html
-::#    C:     https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html
-::#
+rem ################################################################################
+rem # dk_readlink(path rtn_var:OPTIONAL)
+rem #
+rem #    read the contents of a symbolic link
+rem #
+rem #    SHELL: https://man7.org/linux/man-pages/man1/realpath.1.html
+rem #    C:     https://pubs.opengroup.org/onlinepubs/9699919799/functions/readlink.html
+rem #
 :dk_readlink
-setlocal
-    %dk_call% dk_debugFunc 1 2
-    
-    set dk_readlink=%1
-	::if not exist "%dk_readlink%" (%return%)
-	
+%setlocal%
+
+    set dk_readlink=%~1
     set dk_readlink=%dk_readlink:"=%
 	set dk_readlink=%dk_readlink:/=\%
     if "%dk_readlink:~-1%" equ "\" set dk_readlink=%dk_readlink:~0,-1%
-
-	for /f "tokens=2 delims=[]" %%i in ('dir %dk_readlink%* ^| FIND "<SYMLINK"') do (set "dk_readlink=%%i")
 	
+	%dk_call% dk_validate find.exe %dk_call% dk_findFile find.exe
+	for /f "usebackq tokens=2 delims=[]" %%i in (`dir %dk_readlink%* 2^>nul ^| "%find.exe:/=\%" "<SYMLINK"`) do (
+		set "dk_readlink=%%i"
+	)
+
+	:return
 	endlocal & (
 		set "dk_readlink=%dk_readlink:\=/%"
 		if "%~2" neq "" (set "%~2=%dk_readlink:\=/%")
+		set "find.exe=%find.exe%"
 	)
+	rem %dk_call% dk_debug "dk_readlink = %dk_readlink%"
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-   
-	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop/DKBuilder.cmd"
-    %dk_call% dk_readlink "%myPath%"
-    %dk_call% dk_printVar dk_readlink
+%setlocal%
+  
+	set Path=
 	
-    %dk_call% dk_set myPath "C:/Users/Administrator/Desktop/digitalknob"
+	set "myPath=%USERPROFILE:\=/%/Desktop/DKBuilder.cmd"
     %dk_call% dk_readlink "%myPath%"
-    %dk_call% dk_printVar dk_readlink
+    %dk_call% dk_debug "%myPath% = '%dk_readlink%'"
 	
-	%dk_call% dk_set myPath "C:/Users/Administrator/Desktop"
+    set "myPath=%USERPROFILE:\=/%/Desktop/Digital Knob"
     %dk_call% dk_readlink "%myPath%"
-    %dk_call% dk_printVar dk_readlink
+    %dk_call% dk_debug "%myPath% = '%dk_readlink%'"
 	
-	%dk_call% dk_set myPath "C:/Users/Administrator/NonExistent"
+	set "myPath=%USERPROFILE:\=/%/Desktop"
     %dk_call% dk_readlink "%myPath%"
-    %dk_call% dk_printVar dk_readlink
+    %dk_call% dk_debug "%myPath% = '%dk_readlink%'"
+	
+	set "myPath=%USERPROFILE:\=/%/NonExistent"
+    %dk_call% dk_readlink "%myPath%"
+    %dk_call% dk_debug "%myPath% = '%dk_readlink%'"
 %endfunction%

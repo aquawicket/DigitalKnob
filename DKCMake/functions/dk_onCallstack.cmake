@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_onCallstack()
 #
 #	use this callback with the variable_watch function
@@ -10,7 +21,7 @@ include_guard()
 #	EXAMPLE:  variable_watch(VARIABLE dk_onCallstack)
 #
 macro(dk_onCallstack variable access value current_list_file stack)
-	#message("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
+	#dk_echo("dk_onCallstack(${variable} ${access} ${value} ${current_list_file} ${stack})")
 	if("${access}" STREQUAL "MODIFIED_ACCESS")
 		if("${value}" STREQUAL "dk_set")
 			return()
@@ -86,7 +97,7 @@ macro(dk_onCallstack variable access value current_list_file stack)
 		endwhile(${i} LESS ${__LEVEL__})
 		set(indent "${indent}-> ")
 		
-		message("${indent}${__FUNCTION__}(${__ARGV__})")	
+		dk_echo("${indent}${__FUNCTION__}(${__ARGV__})")	
 		#dk_echo("${cyan}${indent}${__TIME__}${__FILE__}:${__LINE__}   ${__FUNCTION__}(${__ARGV__})")
 	endif()
 endmacro()

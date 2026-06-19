@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -28,7 +28,17 @@
 #ifndef DKApp_H
 #define DKApp_H
 
-#include "DK/DK.h"
+# if defined(__has_include) && __has_include("DKPlugins.h") // Is as DKAPP
+#	if __has_include("SDL_main.h")
+#		if !IOS// && !ANDROID
+#			define SDL_MAIN_HANDLED
+#		else
+#			include "SDL_main.h"
+#		endif
+#	endif
+# endif
+
+# include "DK/DK.h"
 
 extern const char* BUILD_DATE;
 extern const char* BUILD_TIME;
@@ -37,7 +47,7 @@ class DKApp{
 public:
 
 /**
-*	@function DKApp(argc, argv) :: This is the entry point for digitalknob
+*	@function DKApp(argc, argv) :: This is the entry point for DigitalKnob
 *
 *	@param argc ::  Non-negative value representing the number of arguments passed to the program from the environment in which the program is run.
 *	@param argv ::	Pointer to the first element of an array of argc + 1 pointers, of which the last one is null and the previous ones, if any, 

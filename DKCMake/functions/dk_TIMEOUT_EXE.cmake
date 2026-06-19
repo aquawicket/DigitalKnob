@@ -1,37 +1,47 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 ####################################################################
-# dk_TIMEOUT_EXE()
+# dk_timeout_exe()
 #
 #
-function(dk_TIMEOUT_EXE)
+function(dk_timeout_exe)
     dk_debugFunc()
 
-	if(EXISTS "${TIMEOUT_EXE}")
-		dk_debug("TIMEOUT_EXE:${TIMEOUT_EXE} already set")
+	if(EXISTS "${timeout_exe}")
+		dk_debug("timeout_exe:${timeout_exe} already set")
 		return()
 	endif()
 	
-	###### TIMEOUT_EXE ######
-	if(NOT EXISTS "${TIMEOUT_EXE}")
-		dk_findProgram(TIMEOUT_EXE "timeout.exe")
+	###### timeout_exe ######
+	if(NOT EXISTS "${timeout_exe}")
+		dk_findProgram(timeout_exe "timeout.exe")
 	endif()
-	if(NOT EXISTS "${TIMEOUT_EXE}")
-		dk_set(TIMEOUT_EXE "$ENV{TIMEOUT_EXE}")
+	if(NOT EXISTS "${timeout_exe}")
+		dk_set(timeout_exe "$ENV{timeout_exe}")
 	endif()
-	if(NOT EXISTS "${TIMEOUT_EXE}")
-		dk_set(TIMEOUT_EXE "/c/Windows/System32/cmd.exe")
+	if(NOT EXISTS "${timeout_exe}")
+		dk_set(timeout_exe "/c/Windows/System32/cmd.exe")
 	endif()
-	if(NOT EXISTS "${TIMEOUT_EXE}")
-		dk_set(TIMEOUT_EXE "/mnt/c/Windows/System32/cmd.exe")
+	if(NOT EXISTS "${timeout_exe}")
+		dk_set(timeout_exe "/mnt/c/Windows/System32/cmd.exe")
 	endif()
-	if(NOT EXISTS "${TIMEOUT_EXE}")
-		dk_warning("TIMEOUT_EXE:${TIMEOUT_EXE} not found")
+	if(NOT EXISTS "${timeout_exe}")
+		dk_warning("timeout_exe:${timeout_exe} NOT FOUND")
 	else()
-		dk_set(TIMEOUT_EXE "${TIMEOUT_EXE}")				# Globalize the variable
-		set(ENV{TIMEOUT_EXE} "${TIMEOUT_EXE}")				# Set Environment Varible
+		dk_set(timeout_exe "${timeout_exe}")				# Globalize the variable
+		set(ENV{timeout_exe} "${timeout_exe}")				# Set Environment Varible
 	endif()
 endfunction()
 
@@ -44,6 +54,6 @@ endfunction()
 function(DKTEST)
     dk_debugFunc(0)
  
-    dk_TIMEOUT_EXE()
-    dk_printVar(TIMEOUT_EXE)
+    dk_timeout_exe()
+    dk_printVar(timeout_exe)
 endfunction()

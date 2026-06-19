@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_copy){ $dk_copy = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_copy_ps1){ $dk_copy_ps1 = 1; } else{ return; } #include guard
 
 #################################################################################
 # dk_copy(from to)
@@ -10,13 +10,14 @@ if(!$dk_copy){ $dk_copy = 1 } else{ return } #include guard
 #	@to			- The destination path to copy to
 #	OVERWRITE	- if any of the parameters equals OVERWRITE, overwritting existing file or folder is enabled
 #
-function Global:dk_copy($from, $to) {
+function Global:dk_copy() {
 	dk_debugFunc 2 3
 	
-	#$from = $args[0]
-	#$to = $args[1]
-	#$overwrite = $args[2]
-	if("$args[2]" = "OVERWRITE"){
+	$from = $($args[0]);
+	$to = $($args[1]);
+	$overwrite = $($args[2]);
+	
+	if($overwrite){
 		$OVERWRITE = 1
 	} else { 
 		$OVERWRITE = 0 
@@ -25,13 +26,13 @@ function Global:dk_copy($from, $to) {
 	dk_call dk_info "Copying ${from} to ${to}"
 	
 	if(!(dk_call dk_pathExists "${from}")){
-		dk_call dk_error "dk_copy: ${from} not found"
+		dk_call dk_error "dk_copy: ${from} NOT found"
 		return $false
 	}
 	
-	if(dk_call dk_pathExists "${to}")){
+	if(dk_call dk_pathExists "${to}"){
 		if("${OVERWRITE}" -ne "1"){
-			dk_call dk_error "dk_copy Cannot copy file. Destiantion exists and OVERWRITE is not set"
+			dk_call dk_error "dk_copy Cannot copy file. Destiantion exists AND OVERWRITE is NOT set"
 			return $false
 		}
 		dk_call dk_delete ${to}
@@ -42,12 +43,16 @@ function Global:dk_copy($from, $to) {
 	dk_call dk_mkdir "${_parent_dir_}"
 	
 	#cp -r "${from}" "${to}"
+	Copy-Item -Path "${from}" -Destination "${to}" -Recurse
 }
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
-DKTEST() {
-	dk_debugFunc 0
+function Global:DKTEST() {
+	dk_debugFunc 0;
+	
+	dk_call dk_copy "$(dk_call dk_DKBRANCH_DIR)"		"$(dk_call dk_DKBRANCH_DIR)_BACKUP"		"OVERWRITE";
+	return;
 	
 	dk_call dk_validate DIGITALKNOB_DIR "dk_call dk_DIGITALKNOB_DIR"
 	

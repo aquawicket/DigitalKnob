@@ -1,11 +1,11 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_sleep_ms){ $dk_sleep_ms = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_sleep_ms_ps1){ $dk_sleep_ms_ps1 = 1; } else{ return; } #include guard
 
 ####################################################################
 # dk_sleep_ms(milliseconds)
 #
 function Global:dk_sleep_ms($milliseconds) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 	
 	Start-Sleep -Milliseconds $milliseconds
 }
@@ -14,9 +14,33 @@ function Global:dk_sleep_ms($milliseconds) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###
 function Global:DKTEST() { 
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$milliseconds = 3500;
+	$milliseconds = 3000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 2000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 1000;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 500;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 250;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 125;
+	dk_call dk_echo "sleeping for $milliseconds milliseconds"
+	dk_call dk_sleep_ms $milliseconds
+	
+	$milliseconds = 125;
 	dk_call dk_echo "sleeping for $milliseconds milliseconds"
 	dk_call dk_sleep_ms $milliseconds
 }

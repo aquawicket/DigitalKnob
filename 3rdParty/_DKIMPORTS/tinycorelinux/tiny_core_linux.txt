@@ -1,0 +1,1 @@
+tce-load -wi wget; wget http://aquawicket.com/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh

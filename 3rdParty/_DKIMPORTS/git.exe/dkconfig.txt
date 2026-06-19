@@ -1,0 +1,5 @@
+############ git.exe ############
+# https://git-scm.com
+# https://github.com/git-for-windows/git
+
+git.exe=${git}/bin/git.exe

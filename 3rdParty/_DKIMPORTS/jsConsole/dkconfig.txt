@@ -1,0 +1,6 @@
+############ jsConsole ############
+# https://github.com/martin-nikolov/jsConsole.git
+# https://github.com/martin-nikolov/jsConsole/archive/a288481a70cc9698dac56f263b5aee40301dc7a8.zip
+
+
+jsConsole_Import=https://github.com/martin-nikolov/jsConsole/archive/a288481a70cc9698dac56f263b5aee40301dc7a8.zip

@@ -1,0 +1,151 @@
+# https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file
+# https://learn.microsoft.com/en-us/dotnet/standard/io/file-path-formats
+
+
+                                     ############ C: with \ seperators ############
+                           C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd  explorer  browser
+                       \\.\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd            browser
+                       \\?\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe               explorer
+               \\localhost\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe                         browser
+               \\127.0.0.1\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe             
+         \\win-31srrg2m2ld\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+         \\.\unc\localhost\C:\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+ \\wsl.localhost\Debian\mnt\c\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+
+        
+                                     ############ C$ with \ serperators ############
+                           C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+                       \\.\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+                       \\?\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe
+               \\localhost\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd  explorer  browser
+               \\127.0.0.1\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd  explorer  browser
+         \\win-31srrg2m2ld\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd  explorer  browser
+         \\.\unc\localhost\C$\Users\Administrator\DigitalKnob\Development\DKCpp\apps\HelloWorld\Windows_X86_64_Clang\Release\HelloWorld.exe          cmd            browser
+
+      
+                                     ############ C: with \\ seperators ############
+                        C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser
+                    \\.\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser
+                    \\?\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe  
+            \\localhost\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe                  browser
+            \\127.0.0.1\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe        
+      \\win-31srrg2m2ld\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe
+      \\.\unc\localhost\C:\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe
+
+ 
+                                     ############ C$ with \\ seperators ############
+                        C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe
+                    \\.\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe
+                    \\?\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe  
+            \\localhost\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser
+            \\127.0.0.1\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser      
+      \\win-31srrg2m2ld\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser
+      \\.\unc\localhost\C$\\Users\\Administrator\\DigitalKnob\\Development\\DKCpp\\apps\\HelloWorld\\Windows_X86_64_Clang\\Release\\HelloWorld.exe   cmd            browser
+
+              
+                                     ############ C: with / seperators ############
+                           C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe          cmd  explorer  browser
+                       \\.\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+                       \\?\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe               explorer
+               \\localhost\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+               \\127.0.0.1\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+         \\win-31srrg2m2ld\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+         \\.\unc\localhost\C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+                   file:///C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe               explorer  browser
+                  file://./C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+          file://localhost/C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe               explorer  browser
+          file://127.0.0.1/C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+    file://win-31srrg2m2ld/C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+
+
+                                     ############ C$ with / seperators ############
+                           C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+                       \\.\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe        
+                       \\?\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe   
+               \\localhost\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+               \\127.0.0.1\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+         \\win-31srrg2m2ld\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+         \\.\unc\localhost\C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+                   file:///C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+                  file://./C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+          file://localhost/C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe                         browser
+          file://127.0.0.1/C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe               explorer  browser   
+    file://win-31srrg2m2ld/C$/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe               explorer  browser
+
+ 
+                                     ############ Online Protocols ############
+                            http://aquawicket.com/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+    https://web.archive.org/http://aquawicket.com/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+           ftp://access912915170.webspace-data.io/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+          sftp://access912915170.webspace-data.io/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+                       /mnt/C/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+
+
+                                     ############ Variables ############
+                                   User           DK           Branch       Cpp    Apps  Target      Tuple                 Build    Bin
+                         C:/Users /Administrator /DigitalKnob /Development /DKCpp /apps /HelloWorld /Windows_X86_64_Clang /Release /HelloWorld.exe
+						 
+						 
+                                     ############ Variable breakdown ############
+${User}                             Administrator
+${User_Path}               C:/Users/Administrator
+
+${DK}                                             DigitalKnob
+${UserDK}                           Administrator/DigitalKnob
+${DK_Path}                 C:/Users/Administrator/DigitalKnob
+
+${Branch}                                                     Development
+${DKBranch}                                       DigitalKnob/Development
+${UserBranch}                       Administrator/DigitalKnob/Development
+${Branch_Path}             C:/Users/Administrator/DigitalKnob/Development
+
+${Cpp}                                                                   DKCpp
+${BranchCpp}                                                  Development/DKCpp
+${DKCpp}                                          DigitalKnob/Development/DKCpp
+${UserCpp}                          Administrator/DigitalKnob/Development/DKCpp
+${Cpp_Path}                C:/Users/Administrator/DigitalKnob/Development/DKCpp
+
+${Apps}                                                                         apps
+${CppApps}                                                                DKCpp/apps
+${BranchApps}                                                 Development/DKCpp/apps
+${DKApps}                                         DigitalKnob/Development/DKCpp/apps
+${UserApps}                         Administrator/DigitalKnob/Development/DKCpp/apps
+${Apps_Path}               C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps
+
+${Target}                                                                            HelloWorld
+${AppsTarget}                                                                   apps/HelloWorld
+${CppTarget}                                                              DKCpp/apps/HelloWorld
+${BranchTarget}                                               Development/DKCpp/apps/HelloWorld
+${DKTarget}                                       DigitalKnob/Development/DKCpp/apps/HelloWorld
+${UserTarget}                       Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld
+${Target_Path}             C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld
+
+${Tuple}                                                                                        Windows_X86_64_Clang
+${TargetTuple}                                                                       HelloWorld/Windows_X86_64_Clang
+${AppsTuple}                                                                    apps/HelloWorld/Windows_X86_64_Clang
+${CppTuple}                                                               DKCpp/apps/HelloWorld/Windows_X86_64_Clang
+${BranchTuple}                                                Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang
+${DKTuple}                                        DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang
+${UserTuple}                        Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang
+${Tuple_Path}              C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang    
+                                                                
+${Build}                                                                                                             Release
+${TupleBuild}                                                                                   Windows_X86_64_Clang/Release
+${TargetBuild}                                                                       HelloWorld/Windows_X86_64_Clang/Release
+${AppsBuild}                                                                    apps/HelloWorld/Windows_X86_64_Clang/Release
+${CppBuild}                                                               DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release
+${BranchBuild}                                                Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release
+${DKBuild}                                        DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release
+${UserBuild}                        Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release
+${DKBuild_Path}            C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release
+
+${Bin}                                                                                                                       HelloWorld.exe
+${BuildBin}                                                                                                          Release/HelloWorld.exe
+${TupleBin}                                                                                     Windows_X86_64_Clang/Release/HelloWorld.exe
+${TargetBin}                                                                         HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${AppsBin}                                                                      apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${CppBin}                                                                 DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${BranchBin}                                                  Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${DKBin}                                          DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${UserBin}                          Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe
+${Bin_Path}                C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Windows_X86_64_Clang/Release/HelloWorld.exe

@@ -15,19 +15,19 @@ if ($LogProfile -eq $null -Or ![System.IO.File]::Exists($LogProfile))
 {
     if ($LogProfile -eq $null)
     {
-        $url = "https://raw.githubusercontent.com/microsoft/WSL/master/diagnostics/wsl.wprp"
+        $url = "https://raw.githubusercontent.com/microsoft/WSL/master/diagnostics/wsl.wprp";
     }
     elseif ($LogProfile -eq "storage")
     {
-         $url = "https://raw.githubusercontent.com/microsoft/WSL/master/diagnostics/wsl_storage.wprp"
+         $url = "https://raw.githubusercontent.com/microsoft/WSL/master/diagnostics/wsl_storage.wprp";
     }
     else
     {
-        Write-Error "Unknown log profile: $LogProfile"
+        Write-Error "Unknown log profile: $LogProfile";
         exit 1
     }
 
-    $LogProfile = "$folder/wsl.wprp"
+    $LogProfile = "$folder/wsl.wprp";
     try {
         Invoke-WebRequest -UseBasicParsing $url -OutFile $LogProfile
     }
@@ -46,7 +46,7 @@ reg.exe export "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion"
 
 Get-Service wslservice -ErrorAction Ignore | Format-list * -Force  > $folder/wslservice.txt
 
-$wslconfig = "$env:USERPROFILE/.wslconfig"
+$wslconfig = "$env:USERPROFILE/.wslconfig";
 if (Test-Path $wslconfig)
 {
     Copy-Item $wslconfig $folder | Out-Null
@@ -57,26 +57,26 @@ get-acl "C:\ProgramData\Microsoft\Windows\WindowsApps" -ErrorAction Ignore | For
 Get-WindowsOptionalFeature -Online > $folder/optional-components.txt
 bcdedit.exe > $folder/bcdedit.txt
 
-$wprOutputLog = "$folder/wpr.txt"
+$wprOutputLog = "$folder/wpr.txt";
 
 wpr.exe -start $LogProfile -filemode 2>&1 >> $wprOutputLog
 if ($LastExitCode -Ne 0)
 {
-    Write-Host -ForegroundColor Yellow "Log collection failed to start (exit code: $LastExitCode), trying to reset it."
+    Write-Host -ForegroundColor Yellow "Log collection failed to start (exit code: $LastExitCode), trying to reset it.";
     wpr.exe -cancel 2>&1 >> $wprOutputLog
 
     wpr.exe -start $LogProfile -filemode 2>&1 >> $wprOutputLog
     if ($LastExitCode -Ne 0)
     {
-        Write-Host -ForegroundColor Red "Couldn't start log collection (exitCode: $LastExitCode)"
+        Write-Host -ForegroundColor Red "Couldn't start log collection (exitCode: $LastExitCode)";
     }
 }
 
 try
 {
-    Write-Host -NoNewLine "Log collection is running. Please "
-    Write-Host -NoNewLine -ForegroundColor Red "reproduce the problem "
-    Write-Host -NoNewLine "and once done press any key to save the logs."
+    Write-Host -NoNewLine "Log collection is running. Please ";
+    Write-Host -NoNewLine -ForegroundColor Red "reproduce the problem ";
+    Write-Host -NoNewLine "AND once done press any key to save the logs.";
 
     $KeysToIgnore =
           16,  # Shift (left or right)
@@ -113,7 +113,7 @@ try
         $Key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
     }
 
-    Write-Host "`nSaving logs..."
+    Write-Host "`nSaving logs...";
 }
 finally
 {
@@ -126,13 +126,13 @@ if ($Dump)
     $DumpMethod = $Assembly.GetNestedType('NativeMethods', 'NonPublic').GetMethod('MiniDumpWriteDump', [Reflection.BindingFlags] 'NonPublic, Static')
 
     $dumpFolder = Join-Path (Resolve-Path "$folder") dumps
-    New-Item -ItemType "directory" -Path "$dumpFolder"
+    New-Item -ItemType "directory" -Path "$dumpFolder";
 
-    $executables = "wsl", "wslservice", "wslhost", "msrdc", "dllhost"
+    $executables = "wsl", "wslservice", "wslhost", "msrdc", "dllhost";
     foreach($process in Get-Process | Where-Object { $executables -contains $_.ProcessName})
     {
-        $dumpFile =  "$dumpFolder/$($process.ProcessName).$($process.Id).dmp"
-        Write-Host "Writing $($dumpFile)"
+        $dumpFile =  "$dumpFolder/$($process.ProcessName).$($process.Id).dmp";
+        Write-Host "Writing $($dumpFile)";
 
         $OutputFile = New-Object IO.FileStream($dumpFile, [IO.FileMode]::Create)
 
@@ -145,15 +145,15 @@ if ($Dump)
                                               [IntPtr]::Zero))
 
         $OutputFile.Close()
-        if (-not $Result)
+        if (-NOT $Result)
         {
-            Write-Host "Failed to write dump for: $($dumpFile)"
+            Write-Host "Failed to write dump for: $($dumpFile)";
         }
     }
 }
 
-$logArchive = "$(Resolve-Path $folder).zip"
+$logArchive = "$(Resolve-Path $folder).zip";
 Compress-Archive -Path $folder -DestinationPath $logArchive
 Remove-Item $folder -Recurse
 
-Write-Host -ForegroundColor Green "Logs saved in: $logArchive. Please attach that file to the GitHub issue."
+Write-Host -ForegroundColor Green "Logs saved in: $logArchive. Please attach that file to the GitHub issue.";

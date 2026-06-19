@@ -1,161 +1,158 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+############ xz ############
 # https://github.com/tukaani-project/xz.git
 # https://github.com/tukaani-project/xz/releases/download/v5.4.6/xz-5.4.6.tar.gz
 # https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
+#
+function(DKINSTALL)
 
-### IMPORT ###
+	dk_import()
 
-#dk_import(https://github.com/tukaani-project/xz.git)
-dk_getFileParam("$ENV{DKIMPORTS_DIR}/xz/dkconfig.txt" XZ_DL)
-dk_import("${XZ_DL}")
+	#dk_fileReplace("${xz}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
+	#dk_fileReplace("${xz}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
+	#dk_fileReplace("${xz}/src/liblzma/api/lzma.h" "__cdecl" "")
 
-#dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__declspec(dllimport)" "")
-#dk_fileReplace("${XZ}/src/liblzma/common/common.h" "__declspec(dllexport)" "")
-#dk_fileReplace("${XZ}/src/liblzma/api/lzma.h" "__cdecl" "")
+	### autotools ###
+	#dk_set(xz_VERSION 5.2.5)
+	#dk_set(xz_Import https://tukaani.org/xz/${xz_FOLDER}.tar.gz)
+	#dk_set(xz_NAME xz-${xz_VERSION})
+	#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+	#dk_set(xz ${DK3RDPARTY_DIR}/${xz_FOLDER})
+	#dk_import(${xz_Import} ${xz})
 
-### autotools ###
-#dk_set(XZ_VERSION 5.2.5)
-#dk_set(XZ_DL https://tukaani.org/xz/${XZ_FOLDER}.tar.gz)
-#dk_set(XZ_NAME xz-${XZ_VERSION})
-#dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-#dk_set(XZ $ENV{DK3RDPARTY_DIR}/${XZ_FOLDER})
-#dk_import(${XZ_DL} ${XZ})
+	dk_define			(LZMA_API_STATIC)
+	dk_include			(${xz}/src/liblzma/api 			LIBLZMA_INCLUDE_DIR)
+	if(MSVC)
+		dk_libDebug		(${xz_Debug_Dir}/liblzma.lib	LIBLZMA_LIBRARY_DEBUG		LIBLZMA_LIBRARY)
+		dk_libRelease	(${xz_Release_Dir}/liblzma.lib	LIBLZMA_LIBRARY_RELEASE		LIBLZMA_LIBRARY)
+	else()
+		dk_libDebug		(${xz_Debug_Dir}/liblzma.a		LIBLZMA_LIBRARY_DEBUG		LIBLZMA_LIBRARY)
+		dk_libRelease	(${xz_Release_Dir}/liblzma.a	LIBLZMA_LIBRARY_RELEASE		LIBLZMA_LIBRARY)
+	endif()
 
+	if(MSVC)
+		dk_set(xz_CMAKE 
+			-DCMAKE_C_FLAGS=/DLZMA_API_STATIC 
+			-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC 
+			-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
+			-DLIBLZMA_LIBRARY_DEBUG=${LIBLZMA_LIBRARY_DEBUG} 
+			-DLIBLZMA_LIBRARY_RELEASE=${LIBLZMA_LIBRARY_RELEASE})
+	else()
+		dk_set(xz_CMAKE
+			"-DCMAKE_C_FLAGS=-DLZMA_API_STATIC"
+			"-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC"
+			-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
+			-DLIBLZMA_LIBRARY=${LIBLZMA_LIBRARY}
+			-DLIBLZMA_HAS_AUTO_DECODER=ON
+			-DLIBLZMA_HAS_EASY_ENCODER=ON
+			-DLIBLZMA_HAS_LZMA_PRESET=ON
+			"-DCMAKE_EXE_LINKER_FLAGS=\"${LIBLZMA_LIBRARY}\"")
+	endif()
 
-### LINK ###
-dk_define			(LZMA_API_STATIC)
-dk_include			(${XZ_DIR}/src/liblzma/api 		LIBLZMA_INCLUDE_DIR)
-if(MSVC)
-	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.lib	LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.lib	LIBLZMA_LIBRARY_RELEASE)
-else()
-	dk_libDebug		(${XZ_DEBUG_DIR}/liblzma.a		LIBLZMA_LIBRARY_DEBUG)
-	dk_libRelease	(${XZ_RELEASE_DIR}/liblzma.a	LIBLZMA_LIBRARY_RELEASE)
-endif()
-if(DEBUG)
-	dk_set			(LIBLZMA_LIBRARY  				${LIBLZMA_LIBRARY_DEBUG})
-endif()
-if(RELEASE)
-	dk_set			(LIBLZMA_LIBRARY				${LIBLZMA_LIBRARY_RELEASE})
-endif()
+	# TODO
+	# LIBLZMA_HAS_AUTO_DECODER
+	# LIBLZMA_HAS_EASY_ENCODER
+	# LIBLZMA_HAS_LZMA_PRESET
+	# ENABLE_SMALL "Reduce code size at expense of speed. This may be useful together with CMAKE_BUILD_TYPE=MinSizeRel."
+	# MICROLZMA_ENCODER "MicroLZMA encoder (needed by specific applications only)" ON
+	# MICROLZMA_DECODER "MicroLZMA decoder (needed by specific applications only)" ON
+	# LZIP_DECODER "Support lzip decoder" ON
+	# ALLOW_ATTR_IFUNC "Allow use of __attribute__((__ifunc__())) if supported by the system" ON
+	# CREATE_XZ_SYMLINKS "Create unxz and xzcat symlinks" ON
+	# CREATE_LZMA_SYMLINKS "Create lzma, unlzma, and lzcat symlinks" ON
 
-
-### 3RDPARTY LINK ###
-if(MSVC)
-	dk_set(XZ_CMAKE 
-		-DCMAKE_C_FLAGS=/DLZMA_API_STATIC 
-		-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC 
-		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
-		-DLIBLZMA_LIBRARY_DEBUG=${LIBLZMA_LIBRARY_DEBUG} 
-		-DLIBLZMA_LIBRARY_RELEASE=${LIBLZMA_LIBRARY_RELEASE})
-else()
-	dk_set(XZ_CMAKE
-		"-DCMAKE_C_FLAGS=-DLZMA_API_STATIC"
-		"-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC"
-		-DLIBLZMA_INCLUDE_DIR=${LIBLZMA_INCLUDE_DIR}
-		-DLIBLZMA_LIBRARY=${LIBLZMA_LIBRARY}
-		-DLIBLZMA_HAS_AUTO_DECODER=ON
-		-DLIBLZMA_HAS_EASY_ENCODER=ON
-		-DLIBLZMA_HAS_LZMA_PRESET=ON
-		"-DCMAKE_EXE_LINKER_FLAGS=${LIBLZMA_LIBRARY}")
-endif()
-
-# TODO
-# LIBLZMA_HAS_AUTO_DECODER
-# LIBLZMA_HAS_EASY_ENCODER
-# LIBLZMA_HAS_LZMA_PRESET
-# ENABLE_SMALL "Reduce code size at expense of speed. This may be useful together with CMAKE_BUILD_TYPE=MinSizeRel."
-# MICROLZMA_ENCODER "MicroLZMA encoder (needed by specific applications only)" ON
-# MICROLZMA_DECODER "MicroLZMA decoder (needed by specific applications only)" ON
-# LZIP_DECODER "Support lzip decoder" ON
-# ALLOW_ATTR_IFUNC "Allow use of __attribute__((__ifunc__())) if supported by the system" ON
-# CREATE_XZ_SYMLINKS "Create unxz and xzcat symlinks" ON
-# CREATE_LZMA_SYMLINKS "Create lzma, unlzma, and lzcat symlinks" ON
-
-### GENERATE ###
-if(MSVC)
-	dk_configure(${XZ_DIR} "-DCMAKE_C_FLAGS=/DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC")
-else()
-	dk_configure(${XZ_DIR} "-DCMAKE_C_FLAGS=-DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC")
-endif()
+	### GENERATE ###
+	if(MSVC)
+		dk_configure(${xz} "-DCMAKE_C_FLAGS=/DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC")
+	else()
+		dk_configure(${xz} "-DCMAKE_C_FLAGS=-DLZMA_API_STATIC" "-DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC")
+	endif()
 
 
 
-### COMPILE ###
-if(MSVC)
-	list(APPEND DEBUG_LINK_FLAGS /ignore:4217)
-	list(APPEND RELEASE_LINK_FLAGS /ignore:4217)
-endif()
-dk_build(${XZ_DIR} liblzma)
+	### COMPILE ###
+	if(MSVC)
+		list(APPEND DEBUG_LINK_FLAGS /ignore:4217)
+		list(APPEND RELEASE_LINK_FLAGS /ignore:4217)
+	endif()
+	dk_build(${xz} liblzma)
 
 
-#FIXME
-dk_return()
-#else()
+	#FIXME
+	dk_return()
+	#else()
 
-################## autotools #################################################
-#WIN_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#WIN_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#MAC_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#MAC_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#IOS_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#IOS_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#IOSSIM_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#IOSSIM_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#LINUX_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#LINUX_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#RASPBERRY_dk_libDebug(${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a)
-#RASPBERRY_dk_libRelease(${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-#ANDROID_dk_libDebug(${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
-#ANDROID_dk_libRelease(${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
+	################## autotools #################################################
+	#Windows_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Windows_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Mac_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Mac_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Ios_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Ios_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Iossim_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Iossim_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Linux_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Linux_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Raspberry_dk_libDebug(${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a)
+	#Raspberry_dk_libRelease(${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	#Android_dk_libDebug(${xz}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a)
+	#Android_dk_libRelease(${xz}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a)
 
-### 3RDPARTY LINK ###
-ANDROID_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ}/${target_triple}/obj/local/armeabi-v7a/liblzma.a)
-APPLE_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-LINUX_dk_set	(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-RASPBERRY_dk_set(XZ_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-WIN_dk_set		(XZ_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${XZ}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${XZ_DEBUG_DIR}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${XZ_RELEASE_DIR}/src/liblzma/.libs/liblzma.a)
-
-
-### GENERATE / COMPILE ###
-ANDROID_dk_chdir				(${XZ}/${target_triple})
-ANDROID_dk_queueCommand			(${DKCMAKE_BUILD} ${XZ})
-ANDROID_dk_visualStudio			(${XZ} liblzma)
-
-dk_chdir						(${XZ})
-dk_queueCommand					(autoreconf -f -i)
-		
-UNIX_DEBUG_dk_chdir				(${XZ_DEBUG_DIR})
-UNIX_DEBUG_dk_queueCommand		(${DKCONFIGURE_BUILD})
-
-UNIX_RELEASE_dk_chdir			(${XZ_RELEASE_DIR})
-UNIX_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
-
-UNIX_dk_build					(${XZ})
+	### 3RDPARTY LINK ###
+	Android_dk_set	(xz_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${xz}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${xz}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${xz}/${Target_Tuple}/obj/local/armeabi-v7a/liblzma.a)
+	Apple_dk_set	(xz_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${xz}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	Linux_dk_set	(xz_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${xz}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	Raspberry_dk_set(xz_CMAKE -DCMAKE_C_FLAGS=-DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=-DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${xz}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
+	Windows_dk_set	(xz_CMAKE -DCMAKE_C_FLAGS=/DLZMA_API_STATIC -DCMAKE_CXX_FLAGS=/DLZMA_API_STATIC -DLIBLZMA_INCLUDE_DIR=${xz}/src/liblzma/api -DLIBLZMA_LIBRARY_DEBUG=${xz_Debug_Dir}/src/liblzma/.libs/liblzma.a -DLIBLZMA_LIBRARY_RELEASE=${xz_Release_Dir}/src/liblzma/.libs/liblzma.a)
 
 
-WIN_X86_DEBUG_dk_chdir			(${XZ_DEBUG_DIR})
-WIN_X86_DEBUG_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	### GENERATE / COMPILE ###
+	Android_dk_chdir				(${xz}/${Target_Tuple})
+	Android_dk_exec					(${DKCMAKE_BUILD} ${xz})
+	Android_dk_visualStudio			(${xz} liblzma)
 
-WIN_X86_RELEASE_dk_chdir		(${XZ_RELEASE_DIR})
-WIN_X86_RELEASE_dk_queueCommand	(${DKCONFIGURE_BUILD})
+	dk_chdir						(${xz})
+	dk_exec							(autoreconf -f -i)
+			
+	Unix_Debug_dk_chdir				(${xz_Debug_Dir})
+	Unix_Debug_dk_exec				(${DKCONFIGURE_BUILD})
 
-WIN_X86_dk_build				(${XZ})
+	Unix_Release_dk_chdir			(${xz_Release_Dir})
+	Unix_Release_dk_exec			(${DKCONFIGURE_BUILD})
 
-# look at xz/windows/build.bash for details
-WIN_X86_64_DEBUG_dk_chdir		(${XZ_DEBUG_DIR})
-WIN_X86_64_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+	Unix_dk_build					(${xz})
 
-WIN_X86_64_RELEASE_dk_chdir		(${XZ_RELEASE_DIR})
-WIN_X86_64_DEBUG_dk_queueCommand(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
 
-WIN_X86_64_dk_build				(${XZ})
+	Windows_X86_Debug_dk_chdir		(${xz_Debug_Dir})
+	Windows_X86_Debug_dk_exec		(${DKCONFIGURE_BUILD})
 
-#endif()
+	Windows_X86_Release_dk_chdir	(${xz_Release_Dir})
+	Windows_X86_Release_dk_exec		(${DKCONFIGURE_BUILD})
+
+	Windows_X86_dk_build			(${xz})
+
+	# look at xz/windows/build.bash for details
+	Windows_X86_64_Debug_dk_chdir	(${xz_Debug_Dir})
+	Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD} --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+
+	Windows_X86_64_Release_dk_chdir	(${xz_Release_Dir})
+	Windows_X86_64_Debug_dk_exec(${DKCONFIGURE_BUILD}  --prefix= --enable-silent-rules --disable-dependency-tracking --disable-nls --disable-scripts)
+
+	Windows_X86_64_dk_build			(${xz})
+
+	#endif()
+endfunction()

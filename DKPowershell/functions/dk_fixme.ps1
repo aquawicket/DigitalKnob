@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_fixme){ $dk_fixme = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_fixme_ps1){ $dk_fixme_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################
 # dk_fixme(message)
@@ -8,10 +8,15 @@ if(!$dk_fixme){ $dk_fixme = 1 } else{ return } #include guard
 #
 #	@msg	- The message to print
 #
-function Global:dk_fixme($message){
-	dk_debugFunc 1
+function Global:dk_fixme(){
+	dk_debugFunc 0 1;
 	
-	dk_call dk_log FIXME "${message}"
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
+	
+	dk_call dk_log FIXME "$($args[0])";
 }
 
 
@@ -23,7 +28,7 @@ function Global:dk_fixme($message){
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	dk_call dk_fixme "test dk_fixme message"
+	dk_call dk_fixme "test dk_fixme message";
 }

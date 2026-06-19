@@ -1,11 +1,11 @@
 if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . './DK.ps1' }
-if(!$dk_assertPath){ $dk_assertPath = 1 } else{ return } #include guard
+if(!$dk_assertPath_ps1){ $dk_assertPath_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_assertPath(path)
 #
 function Global:dk_assertPath($path) {
-    dk_debugFunc 1
+    dk_debugFunc 1;
 
 	if(Test-Path variable:$path){
 		$_path_ = (Get-Item variable:$path).Value	# from variable name
@@ -17,7 +17,7 @@ function Global:dk_assertPath($path) {
 		return #${true}
 	} 
 	
-	dk_call dk_error "Assertion failed: $_path_ is not found!"
+	dk_call dk_error "Assertion failed: $_path_ is NOT found!";
 	return ${false}
 }
 
@@ -26,14 +26,14 @@ function Global:dk_assertPath($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
-	$sys32path = "C:/Windows/System32"
-	dk_call dk_assertPath "C:/Windows/System32"
-	dk_call dk_assertPath sys32path
-	dk_call dk_assertPath $sys32path
-	dk_call dk_assertPath "$sys32path"
-	dk_call dk_assertPath "sys32path"
+	$sys32path = "C:/Windows/System32";
+	dk_call dk_assertPath "C:/Windows/System32";
+	dk_call dk_assertPath sys32path;
+	dk_call dk_assertPath $sys32path;
+	dk_call dk_assertPath "$sys32path";
+	dk_call dk_assertPath "sys32path";
 	
-	dk_call dk_assertPath "C:/NonExistentPath"
+	dk_call dk_assertPath "C:/NonExistentPath";
 }

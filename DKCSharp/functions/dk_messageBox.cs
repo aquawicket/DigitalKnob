@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-public class APP {
+public class CS_dk_messageBox {
         	
 	[DllImport("user32.dll", CharSet = CharSet.Auto)]
 	public static extern int MessageBox(IntPtr hWnd, String text, String caption, uint type);

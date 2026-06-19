@@ -1,2 +1,3 @@
 @echo off
-BatCodeCheck /E %USERPROFILE%\digitalknob\Development\DKCMake\DKBatch\Test\test.cmd
+BatCodeCheck /E %USERPROFILE%\Digital Knob\Development\DKCMake\DKBatch\Test\test.cmd
+pause

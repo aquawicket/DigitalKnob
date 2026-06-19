@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_callDKPowershell(function, arguments..., rtn_var)
 #
 #
@@ -11,13 +22,13 @@ function(dk_callDKPowershell func rtn_var) #args
 	dk_debug("dk_callDKPowershell(${ARGV}).cmake")
 	
     ### get required variables ###
-	dk_printVar(POWERSHELL_EXE)
-    find_program(POWERSHELL_EXE powershell.exe)
+	dk_printVar(powershell_exe)
+    find_program(powershell_exe powershell.exe)
 	
 	dk_validate(DKPOWERSHELL_FUNCTIONS_DIR "dk_DKBRANCH_DIR()")
 	
     if(DEFINED ENV{WSL_DISTRO_NAME})
-		# execute_process(COMMAND ${WSLPATH_EXE} -m "$ENV{DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
+		# execute_process(COMMAND ${wslpath_exe} -m "$ENV{DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE DKPOWERSHELL_FUNCTIONS_DIR COMMAND_ECHO STDOUT OUTPUT_STRIP_TRAILING_WHITESPACE)
 		# set(ENV{DKPOWERSHELL_FUNCTIONS_DIR} "$ENV{DKPOWERSHELL_FUNCTIONS_DIR}")
 		dk_replaceAll("$ENV{DKPOWERSHELL_FUNCTIONS_DIR}" "/mnt/c" "C:" DKPOWERSHELL_FUNCTIONS_DIR)
 	endif()
@@ -31,15 +42,15 @@ function(dk_callDKPowershell func rtn_var) #args
 	#math(EXPR ARGC_LAST "${ARGC}-1")
 	#set(ARGV_LAST ${ARGV${ARGC_LAST}})
 	
-	dk_assertVar(POWERSHELL_EXE)
-	dk_printVar(POWERSHELL_EXE)
+	dk_assertVar(powershell_exe)
+	dk_printVar(powershell_exe)
 	
 	dk_assertVar(DKPOWERSHELL_FUNCTIONS_DIR)
 	dk_printVar(DKPOWERSHELL_FUNCTIONS_DIR)
     
     ### Call DKCmake function ###
-    #set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=$ENV{DKPOWERSHELL_FUNCTIONS_DIR};" "\$env:DKSCRIPT_EXT=$ENV{DKSCRIPT_EXT};" . "\$ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
-	set(DKPOWERSHELL_COMMAND ${POWERSHELL_EXE} -Command "$DKSCRIPT_EXT='$ENV{DKSCRIPT_EXT}';\n . $ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;\n ${func} ${ARGN}")
+    #set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=$ENV{DKPOWERSHELL_FUNCTIONS_DIR};" "\$DKSCRIPT_EXT=${DKSCRIPT_EXT};" . "\$ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
+	set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$DKSCRIPT_EXT='${DKSCRIPT_EXT}';\n . $ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;\n ${func} ${ARGN}")
     dk_echo("${DKPOWERSHELL_COMMAND}")
     execute_process(COMMAND ${DKPOWERSHELL_COMMAND} WORKING_DIRECTORY "$ENV{DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
 	
@@ -58,9 +69,6 @@ function(dk_callDKPowershell func rtn_var) #args
         set(${rtn_var} "${rtn_value}" PARENT_SCOPE)
         execute_process(COMMAND ${CMAKE_COMMAND} -E echo "${rtn_value}")
     #endif()
-    
-# DEBUG
-#	dk_printVar(rtn_value)
 endfunction()
 
 

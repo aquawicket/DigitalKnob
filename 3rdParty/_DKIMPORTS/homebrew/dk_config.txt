@@ -1,0 +1,7 @@
+############ homebrew ############
+# https://github.com/Homebrew/brew
+# https://brew.sh
+# https://raw.githubusercontent.com/Homebrew/install/master/install
+# https://github.com/Homebrew/brew/issues/10368
+
+homebrew_Import=https://raw.githubusercontent.com/Homebrew/install/master/install

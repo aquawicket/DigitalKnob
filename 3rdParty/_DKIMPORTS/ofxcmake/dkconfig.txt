@@ -1,0 +1,5 @@
+############ ofxcmake ############
+# https://github.com/tedmoore/ofxCMake.git
+# https://github.com/uclouvain/openjpeg/archive/8ac526236416b9c28f73d4684cf9e8a66f1d134e.zip
+
+ofxcmake_Import=https://github.com/uclouvain/openjpeg/archive/8ac526236416b9c28f73d4684cf9e8a66f1d134e.zip

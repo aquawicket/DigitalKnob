@@ -1,8 +1,19 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-###############################################################################
+
+#########################################################################
 # dk_fileIncludes(filepath find)
 #
 #	Check if a string contains a substring
@@ -22,7 +33,8 @@ function(dk_fileIncludes)
 #	else()
 #		dk_fatal("dk_fileIncludes(${ARGV}): ARGV0:${ARGV0} is invalid.")
 #	endif()
-	dk_getArg(0 filepath)
+	#dk_getArg(0 filepath)
+	set(filepath "${ARGV0}")
 	
 	### find ###
 #	if(DEFINED "${ARGV1}")
@@ -32,10 +44,15 @@ function(dk_fileIncludes)
 #	else()
 #		dk_fatal("dk_fileIncludes(${ARGV}): ARGV1:${ARGV1} is invalid.")
 #	endif()
-	dk_getArg(1 find)
+	#dk_getArg(1 find)
+	set(find "${ARGV1}")
+	
+	message("dk_fileIncludes('${filepath}' '${find}')")
 
-	file(READ ${filepath} variable)
+	file(READ "${filepath}" variable)
+
 	string(FIND "${variable}" "${find}" dk_fileIncludes)
+	message("dk_fileIncludes = ${dk_fileIncludes}")
 	math(EXPR dk_fileIncludes "${dk_fileIncludes}+1")
 	set(dk_fileIncludes ${dk_fileIncludes} PARENT_SCOPE)
 	

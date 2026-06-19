@@ -1,11 +1,18 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
-
-dk_load(dk_builder)
+############ libarchive ############
 # Multi-format archive and compression library
 #
 # https://libarchive.org/
@@ -26,6 +33,7 @@ dk_depend(libiconv)
 dk_depend(libxml2)
 dk_depend(lz4)
 dk_depend(lzo)
+#dk_depend(openssl)
 dk_depend(pcre2)
 dk_depend(xz)
 dk_depend(zlib)
@@ -33,57 +41,57 @@ dk_depend(zstd)
 
 
 ### IMPORT ###
-dk_import(https://github.com/libarchive/libarchive/archive/6567375.zip)
+dk_import()
 
 
 ### LINK ###
 dk_define					(LIBARCHIVE_STATIC)
-dk_include					(${LIBARCHIVE_DIR}/libarchive)
-dk_include					(${LIBARCHIVE_TRIPLE_DIR})
-if(ANDROID)
-	dk_include				(${LIBARCHIVE_DIR}/contrib/android/include)
+dk_include					(${libarchive}/libarchive)
+dk_include					(${libarchive_Tuple_Dir})
+if(Android)
+	dk_include				(${libarchive}/contrib/android/include)
 endif()
 
 if(MULTI_CONFIG)
 	if(MSVC)
-		if(WIN)
-			dk_libDebug		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/archive.lib)
-			dk_libRelease	(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/archive.lib)
+		if(Windows)
+			dk_libDebug		(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/archive.lib)
+			dk_libRelease	(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/archive.lib)
 		endif()
 	else()
-		dk_libDebug			(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${DEBUG_DIR}/libarchive.a)
-		dk_libRelease		(${LIBARCHIVE_TRIPLE_DIR}/libarchive/${RELEASE_DIR}/libarchive.a)
+		dk_libDebug			(${libarchive_Tuple_Dir}/libarchive/${Debug_Dir}/libarchive.a)
+		dk_libRelease		(${libarchive_Tuple_Dir}/libarchive/${Release_Dir}/libarchive.a)
 	endif()
 else()
-	dk_libDebug				(${LIBARCHIVE_TRIPLE_DIR}/${DEBUG_DIR}/libarchive/libarchive.a)
-	dk_libRelease			(${LIBARCHIVE_TRIPLE_DIR}/${RELEASE_DIR}/libarchive/libarchive.a)
+	dk_libDebug				(${libarchive_Tuple_Dir}/${Debug_Dir}/libarchive/libarchive.a)
+	dk_libRelease			(${libarchive_Tuple_Dir}/${Release_Dir}/libarchive/libarchive.a)
 endif()
 
 
 ### GENERATE ###
-if(ANDROID)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_TRIPLE_DIR} -I${LIBARCHIVE_DIR}/contrib/android/include"
+if(Android)
+	dk_configure(${libarchive}
+		"-DCMAKE_C_FLAGS=-I${libarchive_Tuple_Dir} -I${libarchive}/contrib/android/include"
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		#-DENABLE_OPENSSL=${OPENSSL}
+		#-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -93,56 +101,56 @@ if(ANDROID)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
 		-DPOSIX_REGEX_LIB="AUTO"
 		-DUSE_BZIP2_DLL=OFF
-		-DUSE_BZIP2_STATIC=${BZIP2}
+		-DUSE_BZIP2_STATIC=${bzip2}
 		#-DWINDOWS_VERSION=""
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		#${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		#${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 endif()
 
-if(EMSCRIPTEN)
-	dk_configure(${LIBARCHIVE_DIR}
+if(Emscripten)
+	dk_configure(${libarchive}
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -152,10 +160,10 @@ if(EMSCRIPTEN)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -163,46 +171,46 @@ if(EMSCRIPTEN)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 endif()
 
-if(IOS)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive" 
+if(Ios)
+	dk_configure(${libarchive}
+		"-DCMAKE_C_FLAGS=-I${libarchive}/libarchive" 
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -212,10 +220,10 @@ if(IOS)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -223,53 +231,53 @@ if(IOS)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-if(IOSSIM)
-	dk_configure(${LIBARCHIVE_DIR}
-		"-DCMAKE_C_FLAGS=-I${LIBARCHIVE_DIR}/libarchive"
+if(Iossim)
+	dk_configure(${libarchive}
+		"-DCMAKE_C_FLAGS=-I${libarchive}/libarchive"
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -279,10 +287,10 @@ if(IOSSIM)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -290,52 +298,52 @@ if(IOSSIM)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#include <time.h>\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef int errno_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "typedef time_t __time64_t;\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__GMTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE__CTIME64_S\n")
-	dk_fileAppend(${LIBARCHIVE_TRIPLE_DIR}/config.h "#undef HAVE_FUTIMESAT\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#include <time.h>\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef int errno_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "typedef time_t __time64_t;\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__GMTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE__CTIME64_S\n")
+	dk_fileAppend(${libarchive_Tuple_Dir}/config.h "#undef HAVE_FUTIMESAT\n")
 endif()
 
-if(LINUX)
-	dk_configure(${LIBARCHIVE_DIR}
+if(Linux)
+	dk_configure(${libarchive}
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -345,10 +353,10 @@ if(LINUX)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -356,45 +364,45 @@ if(LINUX)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 endif()
 
-if(MAC)
-	dk_configure(${LIBARCHIVE_DIR}
+if(Mac)
+	dk_configure(${libarchive}
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -404,10 +412,10 @@ if(MAC)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -415,45 +423,45 @@ if(MAC)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 endif()
 
-if(RASPBERRY)
-	dk_configure(${LIBARCHIVE_DIR}
+if(Raspberry)
+	dk_configure(${libarchive}
 		-DENABLE_ACL=ON
-		-DENABLE_BZip2=${BZIP2}
+		-DENABLE_BZip2=${bzip2}
 		-DENABLE_CAT=ON
 		-DENABLE_CAT_SHARED=OFF
-		-DENABLE_CNG=${LIBBCRYPT}
+		-DENABLE_CNG=${libbcrypt}
 		-DENABLE_COVERAGE=OFF
 		-DENABLE_CPIO=ON
 		-DENABLE_CPIO_SHARED=OFF
-		-DENABLE_EXPAT=${LIBEXPAT}
-		-DENABLE_ICONV=${LIBICONV}
+		-DENABLE_EXPAT=${libexpat}
+		-DENABLE_ICONV=${libiconv}
 		-DENABLE_INSTALL=OFF
-		-DENABLE_LIBB2=${LIBB2} 
-		-DENABLE_LIBGCC=${LIBGCC}
-		-DENABLE_LIBXML2=${LIBXML2} 
-		-DENABLE_LZ4=${LZ4} 
-		-DENABLE_LZMA=${XZ}
-		-DENABLE_LZO=${LZO}
+		-DENABLE_LIBB2=${libb2} 
+		-DENABLE_LIBGCC=${libgcc}
+		-DENABLE_LIBXML2=${libxml2} 
+		-DENABLE_LZ4=${lz4} 
+		-DENABLE_LZMA=${xz}
+		-DENABLE_LZO=${lzo}
 		-DENABLE_MBEDTLS=OFF
 		-DENABLE_NETTLE=OFF
-		-DENABLE_OPENSSL=${OPENSSL}
+		-DENABLE_OPENSSL=${openssl}
 		-DENABLE_PCREPOSIX=OFF
 		-DENABLE_SAFESEH="AUTO"
 		-DENABLE_TAR=ON
@@ -463,10 +471,10 @@ if(RASPBERRY)
 		-DENABLE_UNZIP_SHARED=OFF
 		-DENABLE_WERROR=OFF
 		-DENABLE_XATTR=ON
-		-DENABLE_ZLIB=${ZLIB}
-		-DENABLE_ZSTD=${ZSTD}
-		-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
-		-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+		-DENABLE_ZLIB=${zlib}
+		-DENABLE_ZSTD=${zstd}
+		#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR} 
+		#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 		-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR} 
 		-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES} 
 		-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -474,46 +482,46 @@ if(RASPBERRY)
 		-DUSE_BZIP2_DLL=OFF
 		-DUSE_BZIP2_STATIC=ON
 		#-DWINDOWS_VERSION="WIN10"
-		${BZIP2_CMAKE}
-		${CRYPTOPP_CMAKE}
-		${LIBB2_CMAKE}
-		${LIBBCRYPT_CMAKE}
-		${LIBEXPAT_CMAKE}
-		${LIBGCC_CMAKE}
-		${LIBICONV_CMAKE}
-		${LIBXML2_CMAKE}
-		${LZ4_CMAKE}
-		${LZO_CMAKE}
-		${OPENSSL_CMAKE}
-		${PCRE2_CMAKE}
-		${XZ_CMAKE}
-		${ZLIB_CMAKE}
-		${ZSTD_CMAKE})
+		${bzip2_CMAKE}
+		${cryptopp_CMAKE}
+		${libb2_CMAKE}
+		${libbcrypt_CMAKE}
+		${libexpat_CMAKE}
+		${libgcc_CMAKE}
+		${libiconv_CMAKE}
+		${libxml2_CMAKE}
+		${lz4_CMAKE}
+		${lzo_CMAKE}
+		${openssl_CMAKE}
+		${pcre2_CMAKE}
+		${xz_CMAKE}
+		${zlib_CMAKE}
+		${zstd_CMAKE})
 endif()
 
 if(MSVC)
-	if(WIN)
-		dk_configure(${LIBARCHIVE_DIR}
+	if(Windows)
+		dk_configure(${libarchive}
 			-DENABLE_ACL=ON
-			-DENABLE_BZip2=${BZIP2}
+			-DENABLE_BZip2=${bzip2}
 			-DENABLE_CAT=ON
 			-DENABLE_CAT_SHARED=OFF
-			-DENABLE_CNG=${LIBBCRYPT}
+			-DENABLE_CNG=${libbcrypt}
 			-DENABLE_COVERAGE=OFF
 			-DENABLE_CPIO=ON
 			-DENABLE_CPIO_SHARED=OFF
-			-DENABLE_EXPAT=${LIBEXPAT}
-			-DENABLE_ICONV=${LIBICONV}
+			-DENABLE_EXPAT=${libexpat}
+			-DENABLE_ICONV=${libiconv}
 			-DENABLE_INSTALL=OFF
-			-DENABLE_LIBB2=${LIBB2} 
-			-DENABLE_LIBGCC=${LIBGCC}
-			-DENABLE_LIBXML2=${LIBXML2} 
-			-DENABLE_LZ4=${LZ4} 
-			-DENABLE_LZMA=${XZ}
-			-DENABLE_LZO=${LZO}
+			-DENABLE_LIBB2=${libb2} 
+			-DENABLE_LIBGCC=${libgcc}
+			-DENABLE_LIBXML2=${libxml2} 
+			-DENABLE_LZ4=${lz4} 
+			-DENABLE_LZMA=${xz}
+			-DENABLE_LZO=${lzo}
 			-DENABLE_MBEDTLS=OFF
 			-DENABLE_NETTLE=OFF
-			-DENABLE_OPENSSL=${OPENSSL}
+			-DENABLE_OPENSSL=${openssl}
 			-DENABLE_PCREPOSIX=OFF
 			-DENABLE_SAFESEH="AUTO"
 			-DENABLE_TAR=ON
@@ -523,10 +531,10 @@ if(MSVC)
 			-DENABLE_UNZIP_SHARED=OFF
 			-DENABLE_WERROR=OFF
 			-DENABLE_XATTR=ON
-			-DENABLE_ZLIB=${ZLIB}
-			-DENABLE_ZSTD=${ZSTD}
-			-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR}
-			-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
+			-DENABLE_ZLIB=${zlib}
+			-DENABLE_ZSTD=${zstd}
+			#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR}
+			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR}
 			-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR}
 			-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES}
 			-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -534,25 +542,25 @@ if(MSVC)
 			-DUSE_BZIP2_DLL=OFF
 			-DUSE_BZIP2_STATIC=ON
 			-DWINDOWS_VERSION="WIN10"
-			${BZIP2_CMAKE}
-			${CRYPTOPP_CMAKE}
-			${LIBB2_CMAKE}
-			${LIBBCRYPT_CMAKE}
-			${LIBEXPAT_CMAKE}
-			${LIBGCC_CMAKE}
-			${LIBICONV_CMAKE}
-			${LIBXML2_CMAKE}
-			${LZ4_CMAKE}
-			${LZO_CMAKE}
-			${OPENSSL_CMAKE}
-			${PCRE2_CMAKE}
-			${XZ_CMAKE}
-			${ZLIB_CMAKE}
-			${ZSTD_CMAKE})
+			${bzip2_CMAKE}
+			${cryptopp_CMAKE}
+			${libb2_CMAKE}
+			${libbcrypt_CMAKE}
+			${libexpat_CMAKE}
+			${libgcc_CMAKE}
+			${libiconv_CMAKE}
+			${libxml2_CMAKE}
+			${lz4_CMAKE}
+			${lzo_CMAKE}
+			${openssl_CMAKE}
+			${pcre2_CMAKE}
+			${xz_CMAKE}
+			${zlib_CMAKE}
+			${zstd_CMAKE})
 	endif()
 else()
-	if(WIN)
-		dk_configure(${LIBARCHIVE_DIR}
+	if(Windows)
+		dk_configure(${libarchive}
 			"-DCMAKE_C_FLAGS=-DLIBXML_STATIC"
 			-DCMAKE_FIND_USE_CMAKE_PATH=FALSE
 			-DCMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH=FALSE
@@ -564,27 +572,27 @@ else()
 			-DCMAKE_IGNORE_PREFIX_PATH=TRUE
 			-DCMAKE_SYSTEM_IGNORE_PATH=TRUE
 			-DCMAKE_SYSTEM_IGNORE_PREFIX_PATH=TRUE
-			-DLibXml2_ROOT=${LIBXML2}
+			-DLibXml2_ROOT=${libxml2}
 			-DENABLE_ACL=ON
-			-DENABLE_BZip2=${BZIP2}
+			-DENABLE_BZip2=${bzip2}
 			-DENABLE_CAT=ON
 			-DENABLE_CAT_SHARED=OFF
-			-DENABLE_CNG=${LIBBCRYPT}
+			-DENABLE_CNG=${libbcrypt}
 			-DENABLE_COVERAGE=OFF
 			-DENABLE_CPIO=ON
 			-DENABLE_CPIO_SHARED=OFF
-			-DENABLE_EXPAT=${LIBEXPAT}
-			-DENABLE_ICONV=${LIBICONV}
+			-DENABLE_EXPAT=${libexpat}
+			-DENABLE_ICONV=${libiconv}
 			-DENABLE_INSTALL=OFF
-			-DENABLE_LIBB2=${LIBB2} 
-			#-DENABLE_LIBGCC=${LIBGCC}
-			-DENABLE_LIBXML2=${LIBXML2} 
-			-DENABLE_LZ4=${LZ4} 
-			-DENABLE_LZMA=${XZ}
-			-DENABLE_LZO=${LZO}
+			-DENABLE_LIBB2=${libb2} 
+			#-DENABLE_LIBGCC=${libgcc}
+			-DENABLE_LIBXML2=${libxml2} 
+			-DENABLE_LZ4=${lz4} 
+			-DENABLE_LZMA=${xz}
+			-DENABLE_LZO=${lzo}
 			-DENABLE_MBEDTLS=OFF
 			-DENABLE_NETTLE=OFF
-			-DENABLE_OPENSSL=${OPENSSL}
+			-DENABLE_OPENSSL=${openssl}
 			-DENABLE_PCREPOSIX=OFF
 			-DENABLE_SAFESEH="AUTO"
 			-DENABLE_TAR=ON
@@ -594,10 +602,10 @@ else()
 			-DENABLE_UNZIP_SHARED=OFF
 			-DENABLE_WERROR=OFF
 			-DENABLE_XATTR=ON
-			-DENABLE_ZLIB=${ZLIB}
-			-DENABLE_ZSTD=${ZSTD}
-			-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR}
-			-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
+			-DENABLE_ZLIB=${zlib}
+			-DENABLE_ZSTD=${zstd}
+			#-DEXPAT_INCLUDE_DIR=${LIBEXPAT_INCLUDE_DIR}
+			#-DICONV_INCLUDE_DIR=${LIBICONV_INCLUDE_DIR} 
 			-DLIBXML2_INCLUDE_DIR=${LIBXML2_INCLUDE_DIR}
 			-DLIBXML2_LIBRARIES=${LIBXML2_LIBRARIES}
 			-DLIBXML2_XMLLINT_EXECUTABLE=OFF
@@ -606,23 +614,23 @@ else()
 			-DUSE_BZIP2_STATIC=ON
 			-DWINDOWS_VERSION="WIN10"
 			-DZLIB_DLL=OFF
-			${BZIP2_CMAKE}
-			${LIBB2_CMAKE}
-			${LIBBCRYPT_CMAKE}
-			${LIBEXPAT_CMAKE}
-			${LIBGCC_CMAKE}
-			${LIBICONV_CMAKE}
-			${LIBXML2_CMAKE}
-			${LZ4_CMAKE}
-			${LZO_CMAKE}
-			${OPENSSL_CMAKE}
-			${PCRE2_CMAKE}
-			${XZ_CMAKE}
-			${ZLIB_CMAKE}
-			${ZSTD_CMAKE})
+			${bzip2_CMAKE}
+			${libb2_CMAKE}
+			${libbcrypt_CMAKE}
+			${libexpat_CMAKE}
+			${libgcc_CMAKE}
+			${libiconv_CMAKE}
+			${libxml2_CMAKE}
+			${lz4_CMAKE}
+			${lzo_CMAKE}
+			${openssl_CMAKE}
+			${pcre2_CMAKE}
+			${xz_CMAKE}
+			${zlib_CMAKE}
+			${zstd_CMAKE})
 	endif()
 endif()
 
 
 ### COMPILE ###
-dk_build(${LIBARCHIVE_DIR} archive_static)
+dk_build(${libarchive} archive_static)

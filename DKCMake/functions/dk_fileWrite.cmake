@@ -1,22 +1,38 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
-##################################################################################
+
+#########################################################################
 # dk_fileWrite(filepath, string)
 #
 #
-function(dk_fileWrite filepath str) 
+function(dk_fileWrite filepath) 
 	#dk_debugFunc(2)
 	
-	file(WRITE "${filepath}" "${str}")
+	list(JOIN ARGN "\n" str)
+	file(WRITE "${filepath}" "${str}\n")
 endfunction()
 
 
 
 
-
-
+function(dkmessage)
+	list(JOIN ARGV "\n" str)
+	message("\n########################")
+	message(${str})
+	message("########################")
+endfunction(dkmessage)
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST)
@@ -24,16 +40,15 @@ function(DKTEST)
 	
 	#dk_fileWrite("dk_fileWrite_TEST.txt" "string written by dk_fileWrite")
 	
-	dk_set(DESKTOP_FILE
-		"[Desktop Entry]\n"
-		"Encoding=UTF-8\n"
-		"Version=1.0\n"
-		"Type=Application\n"
-		"Terminal=true\n"
-		"Name=\${APP_NAME}\n"
-		"Exec=\${DK_Project_Dir}/\${target_triple}/Debug/\${APP_NAME}\n"
-		"Icon=\${DK_Project_Dir}/icons/icon.png\n")
+	dk_fileWrite("Target_App.desktop" "
+[Desktop Entry]
+Encoding=UTF-8
 
-	list(JOIN DESKTOP_FILE "" DESKTOP_FILE)
-	dk_fileWrite("APP_NAME.desktop" "${DESKTOP_FILE}")
+Version=1.0
+Type=Application
+Terminal=true
+Name=\${Target_App}
+Exec=\${Target_App_Dir}/\${Target_Tuple}/Debug/\${Target_App}
+Icon=\${Target_App_Dir}/icons/icon.png
+	")
 endfunction()

@@ -1,11 +1,19 @@
 #!/usr/bin/cmake -P
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}")
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "../../../DKCMake/functions/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+#########################################################################
 
 
-dk_load(dk_builder)
+dk_validate(Target_Config  "dk_Target_Config()")
 # https://github.com/grimfang4/sdl-gpu.git
 # https://github.com/grimfang4/sdl-gpu/issues/77   rmlui with sdl-gpu
 
@@ -20,33 +28,33 @@ dk_import(https://github.com/grimfang4/sdl-gpu/archive/refs/heads/master.zip)
 
 
 ### LINK ###
-dk_include					(${SDL_GPU_DIR}/include)
+dk_include					(${SDL_GPU}/include)
 if(MSVC)
-	WIN_dk_libDebug			(${SDL_GPU_CONFIG_DIR}/SDL_gpu-VS/lib/${DEBUG_DIR}/SDL2_gpu_s.lib)
-	WIN_dk_libRelease		(${SDL_GPU_CONFIG_DIR}/SDL_gpu-VS/lib/${RELEASE_DIR}/SDL2_gpu_s.lib)
-elseif(ANDROID)
-	ANDROID_dk_libDebug		(${SDL_GPU_CONFIG_DIR}/SDL_gpu-VS/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-	ANDROID_dk_libRelease	(${SDL_GPU_CONFIG_DIR}/SDL_gpu-VS/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-elseif(APPLE)
-	IOSSIM_dk_libDebug		(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-	IOSSIM_dk_libRelease	(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-	IOS_dk_libDebug			(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-	IOS_dk_libRelease		(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
-	MAC_dk_libDebug			(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu.a)
-	MAC_dk_libRelease		(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu.a)
-elseif(RASPBERRY)
-	RASPBERRY_dk_libDebug	(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${DEBUG_DIR}/libSDL2_gpu_s.a)
-	RASPBERRY_dk_libRelease	(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/${RELEASE_DIR}/libSDL2_gpu_s.a)
+	Windows_dk_libDebug			(${SDL_GPU_Config_Dir}/SDL_gpu-VS/lib/${Debug_Dir}/SDL2_gpu_s.lib)
+	Windows_dk_libRelease		(${SDL_GPU_Config_Dir}/SDL_gpu-VS/lib/${Release_Dir}/SDL2_gpu_s.lib)
+elseif(Android)
+	Android_dk_libDebug		(${SDL_GPU_Config_Dir}/SDL_gpu-VS/lib/${Debug_Dir}/libSDL2_gpu_s.a)
+	Android_dk_libRelease	(${SDL_GPU_Config_Dir}/SDL_gpu-VS/lib/${Release_Dir}/libSDL2_gpu_s.a)
+elseif(Apple)
+	Iossim_dk_libDebug		(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Debug_Dir}/libSDL2_gpu_s.a)
+	Iossim_dk_libRelease	(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Release_Dir}/libSDL2_gpu_s.a)
+	Ios_dk_libDebug			(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Debug_Dir}/libSDL2_gpu_s.a)
+	Ios_dk_libRelease		(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Release_Dir}/libSDL2_gpu_s.a)
+	Mac_dk_libDebug			(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Debug_Dir}/libSDL2_gpu.a)
+	Mac_dk_libRelease		(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Release_Dir}/libSDL2_gpu.a)
+elseif(Raspberry)
+	Raspberry_dk_libDebug	(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Debug_Dir}/libSDL2_gpu_s.a)
+	Raspberry_dk_libRelease	(${SDL_GPU_Config_Dir}/SDL_gpu/lib/${Release_Dir}/libSDL2_gpu_s.a)
 else()
-	dk_libDebug				(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-	dk_libRelease			(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-	dk_libDebug				(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
-	dk_libRelease			(${SDL_GPU_CONFIG_DIR}/SDL_gpu/lib/libSDL2_gpu.a)
+	dk_libDebug				(${SDL_GPU_Config_Dir}/SDL_gpu/lib/libSDL2_gpu.a)
+	dk_libRelease			(${SDL_GPU_Config_Dir}/SDL_gpu/lib/libSDL2_gpu.a)
+	dk_libDebug				(${SDL_GPU_Config_Dir}/SDL_gpu/lib/libSDL2_gpu.a)
+	dk_libRelease			(${SDL_GPU_Config_Dir}/SDL_gpu/lib/libSDL2_gpu.a)
 endif()
 
 
 ### GENERATE ###
-dk_configure(${SDL_GPU} ${SDL_CMAKE})
+dk_configure(${SDL_GPU} ${sdl_CMAKE})
 
 
 ### COMPILE ###

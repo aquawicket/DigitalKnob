@@ -1,5 +1,5 @@
-if( $env:DKPOWERSHELL_FUNCTIONS_DIR ){ . $env:DKPOWERSHELL_FUNCTIONS_DIR/DK.ps1 } else { . '/DK.ps1' }
-if(!$dk_getDirectories){ $dk_getDirectories = 1 } else{ return } #include guard
+if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(!$dk_getDirectories_ps1){ $dk_getDirectories_ps1 = 1; } else{ return; } #include guard
 
 ################################################################################
 # dk_getDirectories(path) -> rtn_var
@@ -7,7 +7,7 @@ if(!$dk_getDirectories){ $dk_getDirectories = 1 } else{ return } #include guard
 #
 #
 function Global:dk_getDirectories($path) {
-	dk_debugFunc 1
+	dk_debugFunc 1;
 
 	$directories = Get-ChildItem $path | Where-Object {$_.PSIsContainer} | Foreach-Object {$_.Name}
 	dk_call dk_printVar directories
@@ -27,7 +27,7 @@ function Global:dk_getDirectories($path) {
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST #####
 function Global:DKTEST() {
-	dk_debugFunc 0
+	dk_debugFunc 0;
 	
 	$directories = dk_call dk_getDirectories "C:/Windows"
 	dk_call dk_info "directories = $directories"

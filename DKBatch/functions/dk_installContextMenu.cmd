@@ -1,41 +1,55 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_installContextMenu(menuTitle, icon_exe, command)
-::#
+rem ################################################################################
+rem # dk_installContextMenu(menuTitle, icon_exe, command)
+rem #
 :dk_installContextMenu
-setlocal
-	%dk_call% dk_debugFunc 3
-	set "_menuTitle_=%~1"
+%setlocal%
+	
+    set "_menuTitle_=%~1"
     set "_icon_exe_=%~2"
-	set "_icon_exe_=%_icon_exe_:/=\%"
-    set "_command_=%~3"
-	set "_command_=%_command_:/=\%"
-    
-    %dk_call% dk_info "Adding '%_menuTitle_%' context menu to Registry"
-	%dk_call% dk_info "using %_icon_exe_% for the icon"
-    
-    ::### delete existing key ###
- ::   %dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%"
-    
-    ::### Menu Title ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
-    ::echo REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
-    ::REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
-    
-    ::### ICON ###
-    ::%dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-    echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
-    REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
-    
-    ::### COMMAND <args> ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
-    echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
-    REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+	for /f "tokens=2*" %%a in ("%*") do (set _command_=%%b)
+	echo _command_ = %_command_:/=\%
+	
+	rem set "_icon_exe_=%_icon_exe_:/=\%"
+	rem set "_command_=%_command_:/=\%"
+   
+    %dk_call% dk_debug "Adding '%_menuTitle_:/=\%' context menu to Registry"
+	%dk_call% dk_debug "Using '%_icon_exe_:/=\%' for the icon"
+   
+	%dk_call% dk_validate reg.exe %dk_call% dk_findFile reg.exe
+    rem ### delete existing key ###
+ rem   %dk_call% dk_registryDeleteKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%"
+   
+    rem ### Menu Title ###
+    rem %dk_call% dk_registrySetKey "HKCR/*/shell/%_menuTitle_%" "" "" "&%_menuTitle_%"
+    rem echo REG ADD "HKCR/*/shell/%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    rem REG ADD "HKCR/*/shell/%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+   
+    rem ### ICON ###
+	rem # NOTE: DO NOT surround icon exe path in esacped quotes. Example: "\"app.exe\"" is INCORRECT! Should be "app.exe"   
+rem echo %reg.exe% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_icon_exe_%\"" /f
+    "%reg.exe:/=\%" ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_:/=\%" /v Icon /t REG_SZ /d "%_icon_exe_:/=\%" /f
+rem echo %dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "\"%_icon_exe_%\""
+rem	 %dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "\"%_icon_exe_%\""
+   
+    rem ### COMMAND <args> ###
+rem echo %reg.exe% ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+     "%reg.exe:/=\%" ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_:/=\%\command" /ve /d "%_command_:/=\%" /f
+rem echo %dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" "" "" "%_command_%"
+rem     %dk_call% dk_registrySetKey "HKCR/AllFilesystemObjects/shell/%_menuTitle_%/command" "" "" "%_command_%"
 %endfunction%
 
 
@@ -43,12 +57,10 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
 
-    %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate GIT_EXE "%dk_call% %DKIMPORTS_DIR%\git\DKINSTALL.cmd"
-    %dk_call% dk_installContextMenu "GITADD" "GIT ADD" "GIT_EXE" "\"%GIT_EXE%\" add \"%%1\""
+	%dk_call% dk_validate git %dk_call% dk_depend git
+    %dk_call% dk_installContextMenu "GIT ADD" "%git.exe%" \"%git.exe%\" add \"%%~1\"
 %endfunction%

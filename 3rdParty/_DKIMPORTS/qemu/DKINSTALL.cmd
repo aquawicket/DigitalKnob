@@ -1,57 +1,44 @@
-@echo off&::########################################## DigitalKnob DKBatch ########################################################################
-if not exist "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if not defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*) 
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL
-::#
-::#	  windows uninstall registry location
-::#   HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\QEMU
-::#
+rem ###################### qemu ######################
+rem # https://www.qemu.org
+rem # https://qemu.weilnetz.de/w64/2022/qemu-w64-setup-20221230.exe
+rem # https://azeria-labs.com/emulate-raspberry-pi-with-qemu	# Emulate Raspberry Pi
+rem # https://qemu.weilnetz.de/w32/2022/qemu-w32-setup-20221230.exe
+rem # https://qemu.weilnetz.de/w64/2025/qemu-w64-setup-20250806.exe
+
 :DKINSTALL
-::setlocal
-    %dk_call% dk_debugFunc 0
+rem %setlocal%
+	
+	%dk_call% dk_import
 
-    %dk_call% dk_validate host_triple "%dk_call% dk_host_triple"
-    if defined win_x86_host     (set "QEMU_DL=https://qemu.weilnetz.de/w32/qemu-w32-setup-20240903.exe")
-    if defined win_x86_64_host  (set "QEMU_DL=https://qemu.weilnetz.de/w64/qemu-w64-setup-20240903.exe")
-    if not defined QEMU_DL 		(%dk_call% dk_error "QEMU_DL is invalid")
+	%dk_call% dk_set qemu_img_exe %QEMU%/qemu-img.exe
+	%dk_call% dk_set qemu-system-x86_64_exe %QEMU%/qemu-system-x86_64.exe
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	
-	%dk_call% dk_importVariables %QEMU_DL% IMPORT_PATH %~0 ROOT %DKTOOLS_DIR%
-	
-    ::%dk_call% dk_basename %QEMU_DL% QEMU_DL_FILE
-    ::%dk_call% dk_removeExtension %QEMU_DL_FILE% QEMU_FOLDER
-    ::%dk_call% dk_convertToCIdentifier %QEMU_FOLDER% QEMU_FOLDER
-    ::%dk_call% dk_toLower %QEMU_FOLDER% QEMU_FOLDER
-	::%dk_call% dk_importVariables %QEMU_DL%
+	if EXIST "%qemu_img_exe%" (%return%)
+	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."
 	
 	
-	::%dk_call% dk_set QEMU_DIR %DKTOOLS_DIR%\%QEMU_FOLDER%
-	%dk_call% dk_set QEMU_IMG_EXE %QEMU_DIR%\qemu-img.exe
-	%dk_call% dk_set QEMU_SYSTEM_X86_64_EXE %QEMU_DIR%\qemu-system-x86_64.exe
+	set qemu_Windows=%qemu:/=\%
+	rem FIXME: using dk_exec causes the installer to ignore the /D path
+	rem set "dk_exec_PRINT_COMMAND=1"
+	rem %dk_call% dk_exec %dk_download:/=\% /D=%QEMU_WIN%
 	
-	if exist "%QEMU_IMG_EXE%" (%return%)
+	rem C:/Users/Administrator/Digital Knob/download/qemu-w64-setup-20250806.exe /D=C:/Users/Administrator/Digita lKnob/DKTools/qemu-w64-setup-20250806
+	%dk_download:/=\% /S /D=%Qemu_Windows%
 	
-	%dk_call% dk_download %QEMU_DL%
-	%dk_call% dk_nativePath %QEMU_DIR% QEMU_INSTALL_PATH
-	%dk_call% dk_echo "Installing %QEMU_DL_FILE% . . ."
-	%dk_call% dk_set command_string ""%DKDOWNLOAD_DIR%\%QEMU_DL_FILE%" /S /D=%QEMU_INSTALL_PATH%"
-	%dk_call% %command_string%
-	
-	if NOT exist "%QEMU_IMG_EXE%" (%dk_call% dk_error "cannot find qemu")
+	%dk_call% dk_assertPath "%qemu_img_exe%"
 %endfunction%
 
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
-:DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
-	
-	%dk_call% DKINSTALL
-%endfunction%

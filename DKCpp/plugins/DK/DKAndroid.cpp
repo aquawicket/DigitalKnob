@@ -1,5 +1,5 @@
 /*
-* This source file is part of digitalknob, the cross-platform C/C++/Javascript/Html/Css Solution
+* This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 *
 * For the latest information, see https://github.com/aquawicket/DigitalKnob
 *
@@ -53,8 +53,8 @@ extern "C" {
 		return JNI_VERSION_1_6;
 	}
 
-	JNIEXPORT void Java_com_digitalknob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz){
-		DKINFO("Java_com_digitalknob_dk_DKApp_testFunc() \n");
+	JNIEXPORT void Java_com_DigitalKnob_dk_DKApp_testFunc(JNIEnv* env, jobject thiz){
+		DKINFO("Java_com_DigitalKnob_dk_DKApp_testFunc() \n");
 	}
 
 	void initJNIBridge(JNIEnv* env, jobject obj){
@@ -241,7 +241,7 @@ void DKAndroid::init(){
 		//CallJavaFunction("copyAsset", "DKBody.css");
 		//CallJavaFunction("copyAsset", "DKRocket.css");
 		//CallJavaFunction("copyAsset", "DKLoading.html");
-		//CallJavaFunction("copyAsset", "digitalknob.png");
+		//CallJavaFunction("copyAsset", "DigitalKnob.png");
 		//CallJavaFunction("copyAsset", "settings.txt");
 		//CallJavaFunction("copyAsset", "app.js");
 		//CallJavaFunction("copyAsset", "DKConsole.html");

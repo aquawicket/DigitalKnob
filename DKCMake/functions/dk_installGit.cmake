@@ -1,58 +1,68 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
 
 # https://git-scm.com
 # https://github.com/git-for-windows/git
 
 
-###############################################################################
+#########################################################################
 # dk_installGit()
 #
 function(dk_installGit)
 	dk_debugFunc()
 
 	### DOWNLOAD ###
-	dk_validate(host_triple "dk_host_triple()")
-	dk_validate(ENV{DKIMPORTS_DIR} "dk_DKIMPORTS_DIR()")
-	dk_getFileParam("$ENV{DKIMPORTS_DIR}/git/git.txt" GIT_DL_VERSION)
+	dk_validate(Host_Tuple "dk_Host_Tuple()")
+	dk_validate(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+	dk_fileVariables("${DKIMPORTS_DIR}/git/dkconfig.txt")
 	
 	### DOWNLOAD ###
-	if(WIN_X86_HOST)
-		set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-32-bit.7z.exe)
+	if(Windows_Arm64_Host)
+		set(GIT_Import "${GIT_WIN_ARM64_Import}")
+	elseif(Windows_X86_Host)
+		set(GIT_Import "${GIT_WIN_X86_Import}")
+	elseif(Windows_X86_64_Host)
+		set(GIT_Import "${GIT_WIN_X86_64_Import}")
 	endif()
-	if(WIN_X86_64_HOST)
-		set	(GIT_DL https://github.com/git-for-windows/git/releases/download/v${GIT_DL_VERSION}.windows.1/PortableGit-${GIT_DL_VERSION}-64-bit.7z.exe)
-	endif()
-	if(WIN_HOST AND NOT GIT_DL)
-		dk_fatal("GIT_DL is invalid!")
-		return()
+	if(Windows_Host)
+		dk_assertVar(GIT_Import)
 	endif()
 
 	### Get GIT variables ###
-	if(GIT_DL)
-		dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()")
-		dk_importVariables(${GIT_DL} NAME git ROOT $ENV{DKTOOLS_DIR})
+	if(GIT_Import)
+		dk_validate(DKTOOLS_DIR "dk_DKTOOLS_DIR()")
+		dk_importVariables(${GIT_Import} NAME git ROOT ${DKTOOLS_DIR})
 	endif()
 
 	### First Check ###
-	if(WIN_HOST)
-		dk_findProgram(GIT_EXE git.exe ${GIT}/bin)
-	elseif(ANDROID_HOST)
-		dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
+	if(Windows_Host)
+		dk_findProgram(git_exe git.exe ${git}/bin)
+	elseif(Android_Host)
+		dk_findProgram(git_exe git $ENV{PREFIX}/bin)
 	else()
-		dk_findProgram(GIT_EXE git /usr/bin)
+		dk_findProgram(git_exe git /usr/bin)
 	endif()
 
 	### INSTALL ###
-	if(NOT GIT_EXE)
+	if(NOT git_exe)
 		dk_debug(" Installing git . . . . ")
-		if(WIN_HOST)
-			#dk_download(${GIT_DL} $ENV{DKDOWNLOAD_DIR})
-			dk_download(${GIT_DL})			
-			dk_nativePath("$ENV{DKDOWNLOAD_DIR}/${GIT_DL_FILE}" GIT_DL_FILE_NATIVE)
-			dk_nativePath("${GIT}" GIT_NATIVE)
-			execute_process(COMMAND ${GIT_DL_FILE_NATIVE} -y -o ${GIT_NATIVE} COMMAND_ECHO STDOUT)
+		if(Windows_Host)
+			#dk_download(${GIT_Import} ${DKDOWNLOAD_DIR})
+			dk_download(${GIT_Import})			
+			dk_pathToNative("${DKDOWNLOAD_DIR}/${GIT_Import_FILE}" GIT_Import_FILE_NATIVE)
+			dk_pathToNative("${git}" GIT_NATIVE)
+			execute_process(COMMAND ${GIT_Import_FILE_NATIVE} -y -o ${GIT_NATIVE} COMMAND_ECHO STDOUT)
 			# setx PATH
 		else()
 			dk_installPackage(git)
@@ -60,19 +70,19 @@ function(dk_installGit)
 	endif()
 
 	## Second Check ###
-	if(WIN_HOST)
-		dk_findProgram(GIT_EXE git ${GIT}/bin)
-	elseif(ANDROID_HOST)
-		dk_findProgram(GIT_EXE git $ENV{PREFIX}/bin)
+	if(Windows_Host)
+		dk_findProgram(git_exe git ${git}/bin)
+	elseif(Android_Host)
+		dk_findProgram(git_exe git $ENV{PREFIX}/bin)
 	else()
-		dk_findProgram(GIT_EXE git /usr/bin)
+		dk_findProgram(git_exe git /usr/bin)
 	endif()
-	dk_assertPath(GIT_EXE)
-	dk_printVar(GIT_EXE)
+	dk_assertPath(git_exe)
+	dk_printVar(git_exe)
 
-	dk_command(${GIT_EXE} --version OUTPUT_VARIABLE GIT_VERSION)
-	dk_set(GIT_VERSION ${GIT_VERSION})
-	dk_info(GIT_VERSION)
+	dk_exec(${git_exe} --version OUTPUT_VARIABLE git_Version)
+	dk_set(git_Version ${git_Version})
+	dk_info(git_Version)
 endfunction()
 
 

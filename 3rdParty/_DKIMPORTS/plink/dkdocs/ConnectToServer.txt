@@ -1,0 +1,6 @@
+### Connect to a server ###
+plink.exe -ssh <SSH_username>@<SSH_host> -pw <SSH_password>
+
+### Connect to a server and run commands ###
+plink.exe -ssh <SSH_username>@<SSH_host> -pw <SSH_password> < <SSH_input_file> > <SSH_output_file>
+
