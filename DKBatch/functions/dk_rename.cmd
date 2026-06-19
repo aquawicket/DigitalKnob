@@ -1,23 +1,29 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_rename(from, to)
-::# dk_rename(from, to, OVERWRITE)
-::#
-::# Rename/Move a file or directory to another name/location
-::#
-::# @from		- The source path to move or rename
-::# @to			- The destination path to move or rename to
-::# OVERWRITE	- if OVERWRITE is specified, overwritting existing file or folder is enabled
-::#
+rem ##################################################################################
+rem # dk_rename(from, to)
+rem # dk_rename(from, to, OVERWRITE)
+rem #
+rem # Rename/Move a file or directory to another name/location
+rem #
+rem # @from		- The source path to move or rename
+rem # @to			- The destination path to move or rename to
+rem # OVERWRITE	- if OVERWRITE is specified, overwritting existing file or folder is enabled
+rem #
 :dk_rename
 %setlocal%
-	%dk_call% dk_debugFunc 2 3
 	
 	set "_from_=%~1"
 	set "_to_=%~2"
@@ -38,14 +44,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		%dk_call% dk_delete %_to_%
 	)
 	
-	:: the base directory of the %_to_% path must EXIST.	
+	rem the base directory of the %_to_% path must EXIST.	
 	%dk_call% dk_dirname "%_to_%"
-	if NOT EXIST "%dk_dirname%" (%dk_call% dk_mkdir "%dk_dirname%")
+	%dk_call% dk_mkdir "%dk_dirname%"
 	
-	move /Y "%_from_:/=\%" "%_to_:/=\%" %NO_STDOUT%
+	move /Y "%_from_:/=\%" "%_to_:/=\%" 1>nul 2>nul
 	
-	::TODO
-	::[ ? = "success" ]
+	rem TODO
+	rem [ ? = "success" ]
 %endfunction%
 
 
@@ -54,12 +60,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	%dk_call% dk_validate DIGITALKNOB_DIR %dk_call% dk_DIGITALKNOB_DIR
 	
 	%dk_call% dk_fileWrite "%DKCACHE_DIR%/renameMe.file" "dk_rename test"
 	%dk_call% dk_rename "%DKCACHE_DIR%/renameMe.file" "%DKCACHE_DIR%/iWasRenamed.txt" OVERWRITE

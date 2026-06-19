@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 #########################################################################
@@ -35,10 +36,10 @@ function(dk_callDKBatch func)
 #		set(ECHO_OUTPUT_VARIABLE "ECHO_OUTPUT_VARIABLE")
 #	endif()
 
-	dk_validate(cmd_exe "dk_depend(cmd_exe)")
+	dk_validate(cmd.exe "dk_depend(cmd.exe)")
 	dk_validate(DKBATCH_FUNCTIONS_DIR_		"dk_DKBRANCH_DIR()")
 	set(dk_callDKBatch_call "${func}(${args})")
-	set(dk_callDKBatch_command ${cmd_exe} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & if defined ${func} echo !${func}!)
+	set(dk_callDKBatch_command ${cmd.exe} /V:ON /c ${DKBATCH_FUNCTIONS_DIR_}${func}.cmd ${args} & if defined ${func} echo !${func}!)
 
 	if("${dk_callDKBatch_PRINT_CALL}" EQUAL 1)
 		dk_echo("${lblue}dk_callDKBatch_call${clr} = '${dk_callDKBatch_call}'")

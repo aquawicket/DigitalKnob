@@ -1,0 +1,5 @@
+############ putty ############
+# https://www.chiark.greenend.org.uk/~sgtatham/putty
+# https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.83-installer.msi
+
+putty_Import=https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.83-installer.msi

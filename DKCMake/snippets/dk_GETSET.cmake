@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -19,9 +20,9 @@ include_guard()
 function(GETSET)
     dk_debugFunc()
 
-	#message("ARGN = ${ARGN}")
+	#dk_echo("ARGN = ${ARGN}")
 	if(ARGN) ############ SET ############
-		#message("ARGN = ${ARGN}")
+		#dk_echo("ARGN = ${ARGN}")
 		set(GETSET "${ARGN}" PARENT_SCOPE)
 		
 	else() ############ GET ############
@@ -39,54 +40,54 @@ endfunction()
 function(DKTEST)
     dk_debugFunc()
    
-	message("")
-	message("##########################################")
+	dk_echo("")
+	dk_echo("##########################################")
 
 	###### GET ######
-	message("")
-	message("dk_validate(GETSET \"GETSET()\")")
+	dk_echo("")
+	dk_echo("dk_validate(GETSET \"GETSET()\")")
 	dk_validate(GETSET "GETSET()")
     dk_printVar(GETSET)
 	
 	###### SET ######
-	message("")
-	message("dk_validate(GETSET \"GETSET(\"value assigned by set A\")\")")
+	dk_echo("")
+	dk_echo("dk_validate(GETSET \"GETSET(\"value assigned by set A\")\")")
 	dk_validate(GETSET "GETSET(\"value assigned by set A\")")
 	dk_printVar(GETSET)
 	
 	###### GET ######
-	message("")
-	message("GETSET()")
+	dk_echo("")
+	dk_echo("GETSET()")
 	GETSET()
     dk_printVar(GETSET)
 	
 	###### SET ######
-	message("")
-	message("GETSET(\"value assigned by set B\")")
+	dk_echo("")
+	dk_echo("GETSET(\"value assigned by set B\")")
 	GETSET("value assigned by set B")
 	dk_printVar(GETSET)
 	
 	###### GET ######
-	message("")
-	message("dk_validate(GETSET \"GETSET()\")")
+	dk_echo("")
+	dk_echo("dk_validate(GETSET \"GETSET()\")")
 	dk_validate(GETSET "GETSET()")
     dk_printVar(GETSET)
 	
 	###### SET ######
-	message("")
-	message("dk_validate(GETSET \"GETSET('value assigned by set C')\")")
+	dk_echo("")
+	dk_echo("dk_validate(GETSET \"GETSET('value assigned by set C')\")")
 	dk_validate(GETSET "GETSET('value assigned by set C')")
 	dk_printVar(GETSET)
 	
 	###### GET ######
-	message("")
-	message("GETSET()")
+	dk_echo("")
+	dk_echo("GETSET()")
 	GETSET()
     dk_printVar(GETSET)
 	
 	###### SET ######
-	message("")
-	message("GETSET(\"value assigned by set D\")")
+	dk_echo("")
+	dk_echo("GETSET(\"value assigned by set D\")")
 	GETSET("value assigned by set D")
 	dk_printVar(GETSET)
 endfunction()

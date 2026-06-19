@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -16,32 +17,35 @@ include_guard()
 # https://git.savannah.gnu.org/cgit/gzip.git
 # git://git.savannah.gnu.org/gzip.git
 # https://github.com/kunpengcompute/gzip.git
+# https://github.com/kunpengcompute/gzip/archive/6a3ebab7.zip
 
-dk_validate(Target_Config  "dk_Target_Config()")
+dk_import()
 
-### IMPORT ###
-dk_import(https://github.com/kunpengcompute/gzip/archive/6a3ebab7e475fb5ca9b01c344eb45c27ea81ef89.zip)
-
-### LINK ###
-dk_include				(${GZIP}						GZIP_INCLUDE_DIR)
-dk_include				(${GZIP_Build_Dir}/lib				GZIP_INCLUDE_DIR2)
+dk_include			(${gzip}							GZIP_INCLUDE_DIR)
+dk_include			(${gzip}/include					GZIP_INCLUDE_DIR2)
+dk_include			(${gzip_Build_Dir}/lib				GZIP_INCLUDE_DIR3)
 
 # libversion
-Unix_dk_libDebug		(${GZIP_Debug_Dir}/libver.a			VER_DEBUG_LIBRARY)
-Unix_dk_libRelease		(${GZIP_Release_Dir}/libver.a		VER_RELEASE_LIBRARY)
-Windows_dk_libDebug		(${GZIP_Debug_Dir}/ver.a			VER_DEBUG_LIBRARY)
-Windows_dk_libRelease	(${GZIP_Release_Dir}/ver.a			VER_RELEASE_LIBRARY)
+if(Windows)
+	dk_libDebug		(${gzip_Debug_Dir}/ver.a			VER_DEBUG_LIBRARY		VER_LIBRARY)
+	dk_libRelease	(${gzip_Release_Dir}/ver.a			VER_RELEASE_LIBRARY		VER_LIBRARY)
+else()
+	dk_libDebug		(${gzip_Debug_Dir}/libver.a			VER_DEBUG_LIBRARY		VER_LIBRARY)
+	dk_libRelease	(${gzip_Release_Dir}/libver.a		VER_RELEASE_LIBRARY		VER_LIBRARY)
+endif()
+
 
 # libgzip
-Unix_dk_libDebug		(${GZIP_Debug_Dir}/lib/libgzip.a	GZIP_DEBUG_LIBRARY)
-Unix_dk_libRelease		(${GZIP_Release_Dir}/lib/libgzip.a	GZIP_RELEASE_LIBRARY)
-Windows_dk_libDebug		(${GZIP_Debug_Dir}/lib/gzip.a		GZIP_DEBUG_LIBRARY)
-Windows_dk_libRelease	(${GZIP_Release_Dir}/lib/gzip.a		GZIP_RELEASE_LIBRARY)
-Debug_dk_set			(GZIP_LIBRARY						${GZIP_DEBUG_LIBRARY})
-Release_dk_set			(GZIP_LIBRARY						${GZIP_RELEASE_LIBRARY})
+if(Windows)
+	dk_libDebug		(${gzip_Debug_Dir}/lib/gzip.a		GZIP_DEBUG_LIBRARY		GZIP_LIBRARY)
+	dk_libRelease	(${gzip_Release_Dir}/lib/gzip.a		GZIP_RELEASE_LIBRARY	GZIP_LIBRARY)
+else()
+	dk_libDebug		(${gzip_Debug_Dir}/lib/libgzip.a	GZIP_DEBUG_LIBRARY		GZIP_LIBRARY)
+	dk_libRelease	(${gzip_Release_Dir}/lib/libgzip.a	GZIP_RELEASE_LIBRARY	GZIP_LIBRARY)
+endif()
 
 ### 3RDPARTY LINK ###
-dk_set(GZIP_CMAKE 
+dk_set(gzip_CMAKE 
 	-DGZIP_INCLUDE_DIR=${GZIP_INCLUDE_DIR} 
 	-DGZIP_LIBRARY=${GZIP_LIBRARY})
 
@@ -51,58 +55,29 @@ string(REPLACE "--enable-static" 	"" 	DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
 string(REPLACE "  " 				" " DKCONFIGURE_BUILD "${DKCONFIGURE_BUILD}")
 
 
-Android_dk_configure			(${GZIP})
-Android_dk_build				(${GZIP})
+if(Apple OR Emscripten OR Linux OR Raspberry)
+	#dk_chdir		(${gzip})
+	dk_exec			(chmod 777 configure)
+	dk_exec			(chmod 777 build-aux/git-version-gen)
+	dk_exec			(chmod 777 build-aux/install-sh)
+endif()
+	
+if(Apple)
+	#dk_chdir		(${gzip_Build_Dir})
+	dk_configure	(${gzip} --disable-dependency-tracking "CFLAGS=-I${GZIP_INCLUDE_DIR2} -I${GZIP_INCLUDE_DIR3}")
+	#dk_exec		(make version)
+	#dk_exec		(make gzip)
+elseif(Windows)
+	#dk_chdir		(${gzip})
+	#dk_exec		(touch aclocal.m4 configure Makefile.am Makefile.in)
+	dk_configure	(${gzip} --disable-dependency-tracking CFLAGS="-I${GZIP_INCLUDE_DIR2} -I${GZIP_INCLUDE_DIR3}")
+else()
+	dk_configure	(${gzip})
+endif()
 
-#Apple_dk_chdir					(${GZIP})
-Apple_dk_exec					(chmod 777 configure)
-Apple_dk_exec					(chmod 777 build-aux/git-version-gen)
-Apple_dk_exec					(chmod 777 build-aux/install-sh)
-#Apple_Debug_dk_chdir			(${GZIP_Debug_Dir})
-Apple_Debug_dk_configure		(${GZIP} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP_Debug_Dir}/lib")
-#Apple_Debug_dk_exec			(make version)
-#Apple_Debug_dk_exec			(make gzip)
-#Apple_Release_dk_chdir			(${GZIP_Release_Dir})
-Apple_Release_dk_exec			(${GZIP_CONFIGURE} --disable-dependency-tracking "CFLAGS=-I${GZIP}/include -I${GZIP_Release_Dir}/lib")
-#Apple_Release_dk_exec			(make version)
-#Apple_Release_dk_exec			(make gzip)
-Apple_dk_build					(${GZIP})
 
-#Emscripten_dk_chdir			(${GZIP})
-Emscripten_dk_exec				(chmod 777 configure)
-Emscripten_dk_exec				(chmod 777 build-aux/git-version-gen)
-Emscripten_dk_exec				(chmod 777 build-aux/install-sh)
-#Emscripten_Debug_dk_chdir		(${GZIP_Debug_Dir})
-Emscripten_Debug_dk_configure	(${GZIP})
-#Emscripten_Release_dk_chdir	(${GZIP_Release_Dir})
-Emscripten_Release_dk_configure	(${GZIP})
-Emscripten_dk_build				(${GZIP})
-
-#Linux_dk_chdir					(${GZIP})
-Linux_dk_exec					(chmod 777 configure)
-Linux_dk_exec					(chmod 777 build-aux/git-version-gen)
-Linux_dk_exec					(chmod 777 build-aux/install-sh)
-#Linux_Debug_dk_chdir			(${GZIP_Debug_Dir})
-Linux_Debug_dk_configure		(${GZIP})
-#Linux_Release_dk_chdir			(${GZIP_Release_Dir})
-Linux_Release_dk_configure		(${GZIP})
-Linux_dk_build					(${GZIP})
-
-#Raspberry_dk_chdir				(${GZIP})
-Raspberry_dk_exec				(chmod 777 configure)
-Raspberry_dk_exec				(chmod 777 build-aux/git-version-gen)
-Raspberry_dk_exec				(chmod 777 build-aux/install-sh)
-#Raspberry_Debug_dk_chdir		(${GZIP_Debug_Dir})
-Raspberry_Debug_dk_configure	(${GZIP})
-#Raspberry_Release_dk_chdir		(${GZIP_Release_Dir})
-Raspberry_Release_dk_configure	(${GZIP})
-Raspberry_dk_build				(${GZIP})
-
-#Windows_dk_chdir				(${GZIP})
-#Windows_dk_exec				(touch aclocal.m4 configure Makefile.am Makefile.in)
-#Windows_Debug_dk_chdir			(${GZIP_Debug_Dir})
-Windows_Debug_dk_configure		(${GZIP} --disable-dependency-tracking CFLAGS="-I${GZIP}/include -I${GZIP_Debug_Dir}/lib")
-#Windows_Release_dk_chdir		(${GZIP_Release_Dir})
-Windows_Release_dk_configure	(${GZIP} --disable-dependency-tracking CFLAGS="-I${GZIP}/include -I${GZIP_Release_Dir}/lib")
-
-Windows_dk_build				(${GZIP} gzip)
+if(Windows)
+	dk_build(${gzip} gzip)
+else()
+	dk_build()
+endif()

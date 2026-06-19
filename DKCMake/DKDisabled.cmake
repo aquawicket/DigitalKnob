@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -188,7 +189,7 @@ if(Android)
 	dk_disable(DKWebview)			# compiling errors
 	dk_disable(android-java-tools) 	# download link broken
 	dk_disable(aom)					# build errors
-	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found
+	dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file NOT FOUND
 	dk_disable(bullet3)				# build errors
 	dk_disable(cryptopp)
 	dk_disable(freealut)			# DKFunctions.cmake:4405->dk_findFiles():  files is invalid
@@ -221,7 +222,7 @@ if(Emscripten)
 	dk_disable(DKCefChild)
 	dk_disable(DKCrypto)
 	dk_disable(DKCurl)				# requires curl
-	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file not found
+	dk_disable(DKDebug)				# DKDebug.cpp:158:10: fatal error: 'execinfo.h' file NOT FOUND
 	dk_disable(DKImageMagick)
 	dk_disable(DKJerryscript)
 	dk_disable(DKMidi)
@@ -296,7 +297,7 @@ if(Ios OR Iossim)
 	#dk_disable(DKVncClient)			# requires libvncserver
 	#dk_disable(DKVncServer)			# requires libvncserver
 	#dk_disable(aom)					# build errors
-	#dk_disable(boxer)				# COCOA_LIBRARY not found
+	#dk_disable(boxer)				# COCOA_LIBRARY NOT FOUND
 	#dk_disable(bullet3)				# OPENGL-NOTFOUND COCOA-NOTFOUND
 	#dk_disable(cryptopp)			# ** BUILD FAILED ** /blake2b_simd.cpp
 	#dk_disable(gdal)
@@ -312,7 +313,7 @@ if(Ios OR Iossim)
 	#dk_disable(ncurses)				# CMake Error: C preprocessor "/lib/cpp" fails sanity check
 	#dk_disable(opencv)				# CMAKE_SYSTEM_PROCESSOR is not defined
 	#dk_disable(opensles)			# could not locate OpenSLES Library
-	#dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file not found
+	#dk_disable(rtaudio)				# 'CoreAudio/AudioHardware.h' file NOT FOUND
 	#dk_disable(sdl_rtf)
 	##dk_disable(smpeg2)				# ** BUILD FAILED ** MPEGstream.cpp
 endif(Ios OR Iossim)
@@ -338,7 +339,7 @@ if(Linux)
 	#dk_disable(gdal)
 	#dk_disable(glew)				
 	#dk_disable(gnutls)
-	#dk_disable(imagemagick)			# libimagemagik.a not found
+	#dk_disable(imagemagick)			# libimagemagik.a NOT FOUND
 	#dk_disable(kdevelop)			# permission denied
 	#dk_disable(leptonica)			# build errors
 	#dk_disable(libexpat)
@@ -385,7 +386,7 @@ if(Raspberry)
 	#dk_disable(DKVncClient)			# requires libvncserver
 	#dk_disable(DKVncServer)			# requires libvncserver
 	#dk_disable(aom)
-	#dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file not found	
+	#dk_disable(boxer)				# fatal error : 'boxer/boxer.h' file NOT FOUND	
 	#dk_disable(emsdk)				# 64bit source only
 	#dk_disable(gdal)
 	#dk_disable(glew)
@@ -423,7 +424,7 @@ endif(Tinycore)
 if(MSVC) 
 	#dk_disable(DKOcr)				# requires tesseract
 	#dk_disable(DKScreenRecorder)    # requires opencv
-	#dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier not found
+	#dk_disable(DKSDLVideo)			# error: 'av_mallocz_array': identifier NOT FOUND
 	##dk_disable(DKSDLWaave)			# requires waave
 	#dk_disable(DKSDLWav)			# build errorsE
 	#dk_disable(DKThread)			# build errors

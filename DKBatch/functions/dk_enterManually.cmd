@@ -1,57 +1,62 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_enterManually()
-::#
-::#
+rem ####################################################################
+rem # dk_enterManually()
+rem #
+rem #
 :dk_enterManually
- ::%setlocal%
-	%dk_call% dk_debugFunc 0
+ rem %setlocal%
 
 	%dk_call% dk_info "Please type the name of the library, tool or app to build. Then press enter."
 	%dk_call% dk_keyboardInput
 
 	set "Target_App=_%dk_keyboardInput%_"
 
-	::Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file 
-	::%dk_call% dk_chdir %DIGITALKNOB_DIR%
-	::for /f "delims=" %%a in ('dir /b /s /a-d DKINSTALL.cmake ^| findstr /E /R "%dk_keyboardInput%\\DKINSTALL.cmake" ') do set "path=%%a"
-	::set "Target_App_Dir=%path:~0,-13%"
-	%dk_call% dk_validate DKIMPORTS_DIR		"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate DKCPP_PLUGINS_DIR	"%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate DKCPP_APPS_DIR	"%dk_call% dk_DKBRANCH_DIR"
-	if EXIST "%DKIMPORTS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" 	(set "Target_App_Dir=%DKIMPORTS_DIR%\%dk_keyboardInput%")
-	if EXIST "%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake" (set "Target_App_Dir=%DKCPP_PLUGINS_DIR%\%dk_keyboardInput%")
-	if EXIST "%DKCPP_APPS_DIR%\%dk_keyboardInput%\DKINSTALL.cmake"	(set "Target_App_Dir=%DKCPP_APPS_DIR%\%dk_keyboardInput%")
+	rem Search DigitalKnob for the matching entry containing a DKINSTALL.cmake file 
+	rem %dk_call% dk_chdir %DIGITALKNOB_DIR%
+	rem for /f "delims=" %%a in ('dir /b/s/a:-d DKINSTALL.cmake ^| %findstr.exe% /E /R "%dk_keyboardInput%\\DKINSTALL.cmake" ') do set "path=%%a"
+	rem set "Target_App_Dir=%path:~0,-13%"
+	%dk_call% dk_validate DKIMPORTS_DIR		%dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate DKCPP_PLUGINS_DIR	%dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_validate DKCPP_APPS_DIR	%dk_call% dk_DKBRANCH_DIR
+	if EXIST "%DKIMPORTS_DIR%/%dk_keyboardInput%/DKINSTALL.cmake" 	(set "Target_App_Dir=%DKIMPORTS_DIR%/%dk_keyboardInput%")
+	if EXIST "%DKCPP_PLUGINS_DIR%/%dk_keyboardInput%/DKINSTALL.cmake" (set "Target_App_Dir=%DKCPP_PLUGINS_DIR%/%dk_keyboardInput%")
+	if EXIST "%DKCPP_APPS_DIR%/%dk_keyboardInput%/DKINSTALL.cmake"	(set "Target_App_Dir=%DKCPP_APPS_DIR%/%dk_keyboardInput%")
 	%dk_call% dk_printVar Target_App_Dir
 
 	%dk_call% dk_folderName "%Target_App_Dir%" parent
 	%dk_call% dk_printVar parent
 
 	if /i "%parent%" equ "apps" %return%
-	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%\%Target_App%"
+	%dk_call% dk_mkdir "%DKCPP_APPS_DIR%/%Target_App%"
 
-	:: create apps/<Target_App>/DKINSTALL.cmake
+	rem create apps/<Target_App>/DKINSTALL.cmake
 	echo dk_depend(%dk_keyboardInput%) > "%DKCPP_APPS_DIR%\%Target_App%\DKINSTALL.cmake"
-	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%Target_App%\DKINSTALL.cmake" dk_depend(%dk_keyboardInput%)
+	rem %dk_call% dk_fileWrite "%DKCPP_APPS_DIR%/%Target_App%/DKINSTALL.cmake" dk_depend(%dk_keyboardInput%)
 
-	:: create apps/<Target_App>/main.cpp
+	rem create apps/<Target_App>/main.cpp
 	echo int main(int argc, char** argv) { return 0; } > "%DKCPP_APPS_DIR%\%Target_App%\main.cpp"
-	::%dk_call% dk_fileWrite "%DKCPP_APPS_DIR%\%Target_App%\main.cpp" "int main(int argc, char** argv) { return 0; }"
+	rem %dk_call% dk_fileWrite "%DKCPP_APPS_DIR%/%Target_App%/main.cpp" "int main(int argc, char** argv) { return 0; }"
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_enterManually
 %endfunction%

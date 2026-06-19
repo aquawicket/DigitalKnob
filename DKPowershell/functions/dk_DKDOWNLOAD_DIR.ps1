@@ -50,7 +50,7 @@ function Global:DKTEST() {
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting dk_DKDOWNLOAD_DIR . . .\n";
-	dk_call dk_DKDOWNLOAD_DIR "C:/Users/Administrator/DigitalKnob/download"
+	dk_call dk_DKDOWNLOAD_DIR "${ENV:USERPROFILE}/Digital Knob/download"
 	dk_call dk_echo "env:DKDOWNLOAD_DIR = ${env:DKDOWNLOAD_DIR}"
-	dk_call dk_echo "dk_DKDOWNLOAD_DIR = '$(dk_call dk_DKDOWNLOAD_DIR 'C:/Users/Administrator/DigitalKnob/download')'\n";
+	dk_call dk_echo "dk_DKDOWNLOAD_DIR = '$(dk_call dk_DKDOWNLOAD_DIR '${ENV:USERPROFILE}/Digital Knob/download')'\n";
 }

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -48,8 +49,8 @@ function(dk_callDKPowershell func rtn_var) #args
 	dk_printVar(DKPOWERSHELL_FUNCTIONS_DIR)
     
     ### Call DKCmake function ###
-    #set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=$ENV{DKPOWERSHELL_FUNCTIONS_DIR};" "\$env:DKSCRIPT_EXT=$ENV{DKSCRIPT_EXT};" . "\$ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
-	set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$DKSCRIPT_EXT='$ENV{DKSCRIPT_EXT}';\n . $ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;\n ${func} ${ARGN}")
+    #set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$env:DKPOWERSHELL_FUNCTIONS_DIR=$ENV{DKPOWERSHELL_FUNCTIONS_DIR};" "\$DKSCRIPT_EXT=${DKSCRIPT_EXT};" . "\$ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;" "${func} ${ARGN}")
+	set(DKPOWERSHELL_COMMAND ${powershell_exe} -Command "$DKSCRIPT_EXT='${DKSCRIPT_EXT}';\n . $ENV{DKPOWERSHELL_FUNCTIONS_DIR}/${func}.ps1;\n ${func} ${ARGN}")
     dk_echo("${DKPOWERSHELL_COMMAND}")
     execute_process(COMMAND ${DKPOWERSHELL_COMMAND} WORKING_DIRECTORY "$ENV{DKPOWERSHELL_FUNCTIONS_DIR}" OUTPUT_VARIABLE output OUTPUT_STRIP_TRAILING_WHITESPACE)
 	

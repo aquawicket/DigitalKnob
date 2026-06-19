@@ -1,16 +1,22 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_uninstallContextMenu(menuTitle, exe, command)
-::#
+rem ################################################################################
+rem # dk_uninstallContextMenu(menuTitle, exe, command)
+rem #
 :dk_uninstallContextMenu
 %setlocal%
-    %dk_call% dk_debugFunc 1 3
 
     set "_menuTitle_=%~1"
     set "_exe_=%~2"
@@ -18,35 +24,34 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
    
     %dk_call% dk_info "Uninstalling '%_menuTitle_%' context menu"
    
-    ::### delete existing key ###
+    rem ### delete existing key ###
     %dk_call% dk_registryDeleteKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%"
    
-    ::### Menu Title ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
-    ::echo REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
-    ::REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    rem ### Menu Title ###
+    rem %dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%" "" "" "&%_menuTitle_%"
+    rem echo REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
+    rem REG ADD "HKCR\*\shell\%_menuTitle_%" /ve /d "&%_menuTitle_%" /f
    
-    ::### ICON ###
-    ::%dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
-::  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
-::  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+    rem ### ICON ###
+    rem %dk_call% dk_registrySetKey "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" "Icon" "REG_SZ" "imageres.dll,-5324"
+rem  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
+rem  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%" /v Icon /t REG_SZ /d "\"%_exe_%\"" /f
    
-    ::### COMMAND <args> ###
-    ::%dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
-::  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
-::  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+    rem ### COMMAND <args> ###
+    rem %dk_call% dk_registrySetKey "HKCR\*\shell\%_menuTitle_%\command" "" "" "%_command_%"
+rem  echo REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
+rem  REG ADD "HKCR\AllFilesystemObjects\shell\%_menuTitle_%\command" /ve /d "%_command_%" /f
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-    %dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_validate git_exe "%dk_call% dk_depend git"
-    %dk_call% dk_uninstallContextMenu "GITADD" "GIT ADD" "git_exe" "\"%git_exe%\" add \"%%1\""
+    %dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+    %dk_call% dk_validate git.exe %dk_call% dk_depend git
+    %dk_call% dk_uninstallContextMenu "GITADD" "GIT ADD" "git.exe" "\"%git.exe%\" add \"%%1\""
 %endfunction%

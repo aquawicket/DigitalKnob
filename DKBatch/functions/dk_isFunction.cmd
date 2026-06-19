@@ -1,31 +1,42 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##############################################################################
-::# dk_isFunction(name) -> rtn_var
-::#
-::# Test if a string is a function name
-::#
-::# @name   - The name to test
-::# @rtn_var:   - True if the string is the name of a function, False if otherwise.
-::#
-::# https://stackoverflow.com/a/85932/688352
-::#
+rem ##############################################################################
+rem # dk_isFunction(name) -> rtn_var
+rem #
+rem # Test if a string is a function name
+rem #
+rem # @name  		- The name to test
+rem # @rtn_var:   - True if the string is the name of a function, False if otherwise.
+rem #
+rem # https://stackoverflow.com/a/85932/688352
+rem #
 :dk_isFunction
 %setlocal%
-	%dk_call% dk_debugFunc 1
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
     if %ERRORLEVEL% equ 0 (
-        if "%~2" neq "" (endlocal & set "%2=true")
-        exit /b 0
-    )
-   
-    if "%~2" neq "" (endlocal & set "%2=false")
-    exit /b 1
+        set "dk_isFunction=0"
+    ) else (
+		set "dk_isFunction=1"
+	)
+	
+	:return
+	endlocal & (
+		set "dk_isFunction=%dk_isFunction%"
+		if "%~2" neq "" (set "%~2=%dk_isFunction%")
+    ) 
+	exit /b %dk_isFunction%
 %endfunction%
 
 
@@ -36,12 +47,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
   
-    %dk_call% dk_isFunction "dk_debugFunc" && %dk_call% dk_info "'dk_debugFunc' is a function" || %dk_call% dk_info "'dk_debugFunc' is NOT a function"
     %dk_call% dk_isFunction "NotAFunction" && %dk_call% dk_info "'NotAFunction' is a function" || %dk_call% dk_info "'NotAFunction' is NOT a function"
 	%dk_call% dk_isFunction "DKTEST"       && %dk_call% dk_info "'DKTEST' is a function"       || %dk_call% dk_info "'DKTEST' is NOT a function"
 %endfunction%

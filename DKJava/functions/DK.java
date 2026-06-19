@@ -1,4 +1,4 @@
-// Main.java
+// DKINIT_java
 import com.DigitalKnob.DKJava.dk_echo; // Import the custom class
 
 public class Main {

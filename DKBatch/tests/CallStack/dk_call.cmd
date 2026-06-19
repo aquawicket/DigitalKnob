@@ -1,10 +1,10 @@
-::@echo off&::###### DK.cmd #########################################################################################################################
+::@echo off&rem ###### DK.cmd #########################################################################################################################
 ::if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+::if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+rem #################################################################################################################################################
 
 
-::####################################################################
+rem ####################################################################
 ::# dk_call(command args)
 ::#
 :dk_call
@@ -12,7 +12,7 @@
 	
 	if NOT defined endfunction  (set "endfunction=exit /b %errorlevel%")
 	
-	:: don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
+	rem don't add dk_call :functions to the call stack.  i.e :setGlobal, :printCallstack
 	::(set "temp=%*")
 	::if "!temp:~0,1!" equ ":" (call %temp% && %endfunction%)
 	if "%~1" equ "setGlobal" 		(call :%* && %endfunction%)
@@ -49,7 +49,7 @@
 	::###### Print function entry #####
 	for /f "tokens=4 delims= " %%G in ('chcp') do set _codepage_=%%G
 	if "%_codepage_%" neq "65001" (chcp 65001>nul)
-	echo %pad%╚═► !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%╚═► !FUNC!(!ARGV!)	&rem https://en.wikipedia.org/wiki/Code_page_437
 	call :printStackVariables
 	::##################################
 	
@@ -60,7 +60,7 @@
 ::###### Exit #############################################################################################
 	
 	::###### Print function exit ######
-	echo %pad%╔══ !FUNC!(!ARGV!)	&:: https://en.wikipedia.org/wiki/Code_page_437
+	echo %pad%╔══ !FUNC!(!ARGV!)	&rem https://en.wikipedia.org/wiki/Code_page_437
 	echo %pad%▼
 	::#################################
 	
@@ -72,7 +72,7 @@
 	(set /a "PLVL=LVL")
 	(set /a "LVL-=1")
 	
-	:: get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
+	rem get all variables from %GLOBAL_FILE% and apply them with GLOBAL_ prefixes removed
 	if EXIST "%GLOBAL_FILE%" for /F "usebackq delims=" %%a in ("%GLOBAL_FILE%") do (
 		set "line=%%a"
 		set "!line:GLOBAL_=!"
@@ -107,17 +107,17 @@
 
 :setGlobal name value
 	set "%~1=%~2"
-	set "GLOBAL_%~1=%~2"			&:: prefix the variable name with GLOBAL_ and assign a value
-	set GLOBAL_ > "%GLOBAL_FILE%"	&:: place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
+	set "GLOBAL_%~1=%~2"			&rem prefix the variable name with GLOBAL_ and assign a value
+	set GLOBAL_ > "%GLOBAL_FILE%"	&rem place all vairable with a GLOBAL_ prefix into %GLOBAL_FILE%
 %endfunction%
 
 :printCallStack
-	echo(
+	echo.
 	echo ############ CALLSTACK ############
 	for /l %%x in (1, 1, 100) do (
 		(set /a num=100-%%x)
 		if defined CMND_!num! (call echo !num!: %%CMND_!num!%%)
 	)
 	echo ###################################
-	echo(
+	echo.
 %endfunction%

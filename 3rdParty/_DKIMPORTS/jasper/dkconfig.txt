@@ -1,5 +1,5 @@
 ############ jasper ############
 # https://github.com/jasper-software/jasper.git
-# https://github.com/jasper-software/jasper/archive/refs/heads/master.zip
+# https://github.com/jasper-software/jasper/archive/7576bf0e4d5b25fac4bf0a8607aa451eb3ccb4a7.zip
 
-jasper_Import=https://github.com/jasper-software/jasper/archive/refs/heads/master.zip
+jasper_Import=https://github.com/jasper-software/jasper/archive/7576bf0e4d5b25fac4bf0a8607aa451eb3ccb4a7.zip

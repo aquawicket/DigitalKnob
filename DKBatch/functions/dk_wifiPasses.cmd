@@ -1,49 +1,66 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_wifiPasses()
-::#
+rem ################################################################################
+rem # dk_wifiPasses()
+rem #
 :dk_wifiPasses
-%setlocal%
-	%dk_call% dk_debugFunc 0
+rem !setlocal!
+setlocal enableDelayedExpansion
 
-    set "tempfile=%DKCACHE_DIR%\temp.txt"
-    if EXIST "!tempfile!" %dk_call% dk_delete !tempfile!
-    netsh wlan show profile | findstr All>> "!tempfile!"
+    set "tempfile=%DKCACHE_DIR%\dk_wifiPasses.tmp"
+	
+    if EXIST "%tempfile%" (%dk_call% dk_delete "%tempfile%")
+	%dk_call% dk_validate netsh.exe %dk_call% dk_findFile netsh.exe
+	
+    "%netsh.exe%" wlan show profile | findstr All>> "%tempfile%"
 
-    for /f "tokens=2 delims=:" %%i in (!tempfile!) do (
+    for /f "tokens=2 delims=:" %%i in (%tempfile%) do (
         set /a count+=1
-        set "list_!count!=%%i"
+        set "dk_wifiPasses!count!=%%i"
     )
-    %dk_call% dk_delete !tempfile!
+    %dk_call% dk_delete "%tempfile%"
 
+    for /l %%i in (1,1,%count%) do (
+        set dk_wifiPasses%%i=!dk_wifiPasses%%i:~1!
+    )
+
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
     for /l %%i in (1,1,!count!) do (
-        set list_%%i=!list_%%i:~1!
+        echo      Wi-Fi Name            : !dk_wifiPasses%%i!
+        "%netsh.exe%" wlan show profile name="!dk_wifiPasses%%i!" key=clear | %findstr.exe% Content
+        echo.
     )
-
-    for /l %%i in (1,1,!count!) do (
-        echo      Wi-Fi Name            : !list_%%i!
-        netsh wlan show profile name="!list_%%i!" key=clear | findstr Content
-        echo(
-    )
-%endfunction%
-
-
+	
+	:return
+	endlocal & (
+		set "netsh.exe=%netsh.exe%"
+		set "findstr.exe=%findstr.exe%"
+	)
+!endfunction!
 
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_wifiPasses
+	%dk_call% dk_wifiPasses
 %endfunction%

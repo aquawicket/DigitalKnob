@@ -1,0 +1,2 @@
+############ gdb ############
+# https://packages.msys2.org/base/gdb

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -124,7 +125,7 @@ include_guard()
 #endif()
 #dk_info("CMAKE_TOOLCHAIN_FILE = ${CMAKE_TOOLCHAIN_FILE}")
 #if(DKCMAKE_COMMAND_LINE_TOOLCHAIN)
-#	dk_printVar("DKCMAKE_COMMAND_LINE_TOOLCHAIN")
+#	dk_debug(""DKCMAKE_COMMAND_LINE_TOOLCHAIN = ${DKCMAKE_COMMAND_LINE_TOOLCHAIN}")
 #	dk_printVar(CMAKE_TOOLCHAIN_FILE)
 #elseif(DKCMAKE_LOAD_FILE_TOOLCHAIN)
 #	dk_printVar("DKCMAKE_LOAD_FILE_TOOLCHAIN")

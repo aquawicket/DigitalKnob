@@ -1,0 +1,5 @@
+############ reffy ############
+# https://github.com/w3c/reffy.git
+# https://github.com/w3c/reffy/archive/0819b71925dfe2a34bde41f9ed6c56f8cf5bbd37.zip
+
+reffy_Import=https://github.com/w3c/reffy/archive/0819b71925dfe2a34bde41f9ed6c56f8cf5bbd37.zip

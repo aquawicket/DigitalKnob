@@ -1,18 +1,24 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_containsCI(haystack, needle, rtn_var)
-::#
-::#		Case insensitive substring search
-::#
+rem ################################################################################
+rem # dk_containsCI(haystack, needle, rtn_var)
+rem #
+rem #		Case insensitive substring search
+rem #
 :dk_containsCI
 %setlocal%
-	%dk_call% dk_debugFunc 2 3
    
     set "_haystack_=%~1"
     set "_needle_=%~2"
@@ -34,12 +40,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-    %dk_call% dk_debugFunc 0
   
-    ::###### Using if return value
+    rem ###### Using if return value
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a NeEdLe in this haystack"
     %dk_call% dk_set substring "needle"
@@ -51,10 +56,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set substring "straw"
     %dk_call% dk_containsCI "%string%" "%substring%" result
     if /i "%result%" equ "true" (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using if ERRORLEVEL
+    rem ###### Using if ERRORLEVEL
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
@@ -66,10 +71,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set substring "straw"
     %dk_call% dk_containsCI "%string%" "%substring%"
     if NOT ERRORLEVEL 1 (%dk_call% dk_echo "string contains substring") else (%dk_call% dk_echo "string does NOT contain substring")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using && and || conditionals
+    rem ###### Using && and || conditionals
     %dk_call% dk_echo
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "needle"
@@ -79,5 +84,5 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_set string "There is a needle in this haystack"
     %dk_call% dk_set substring "straw"
     %dk_call% dk_containsCI "%string%" "%substring%" && (%dk_call% dk_echo "string contains substring") || (%dk_call% dk_echo "string does NOT contain substring")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
 %endfunction%

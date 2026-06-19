@@ -28,7 +28,7 @@
                                                          19Èdk_debugFunc 0 99
                                                 16Èdk_assertPath DIGITALKNOB_DIR
                                                    17Èdk_debugFunc 0 99
-                                    12Èdk_getFileParams "C:/Users/Administrator/DigitalKnob/Development/dkconfig.txt"
+                                    12Èdk_fileVariables "C:/Users/Administrator/DigitalKnob/Development/dkconfig.txt"
                                        13Èdk_debugFunc 1
                                        13Èdk_trim dk_exit_PAUSE_ON_EXIT
                                        13Èdk_trim 1

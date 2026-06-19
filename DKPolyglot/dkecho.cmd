@@ -1,0 +1,1 @@
+if "%*" equ "" (>con echo. ) else (>con echo.%*)

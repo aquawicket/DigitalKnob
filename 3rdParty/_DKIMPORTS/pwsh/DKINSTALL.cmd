@@ -1,39 +1,64 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ############ pwsh ############
+rem # https://github.com/PowerShell/PowerShell/releases
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-arm32.tar.gz
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-arm64.tar.gz
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-linux-x64.tar.gz
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-osx-arm64.tar.gz
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/powershell-7.2.19-osx-x64.tar.gz
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-arm32.zip
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-arm64.zip
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-x86.zip
+rem # https://github.com/PowerShell/PowerShell/releases/download/v7.2.19/PowerShell-7.2.19-win-x64.zip
+
 :DKINSTALL
-::%setlocal%
-	%dk_call% dk_debugFunc 0
+%setlocal%
 	
-	%dk_call% dk_import APP
+	%dk_call% dk_import
 	
-	%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
+	%dk_call% dk_validate Host_Os %dk_call% dk_Host_Os
+	echo Host_Os = %Host_Os%
 	if /i "%Host_Os%" equ "Windows" ( 
-		%dk_call% dk_set pwsh_exe "%pwsh_Install_Path%/pwsh.exe"
+		set "pwsh_exe=%pwsh_Install_Path%/pwsh.exe"
 	) else ( 
-		%dk_call% dk_set pwsh_exe "%pwsh_Install_Path%/pwsh"
+		set "pwsh_exe=%pwsh_Install_Path%/pwsh"
 	)	
+	echo pwsh_exe = %pwsh_exe%
 	%dk_call% dk_assertPath "%pwsh_exe%"
 	%dk_call% dk_firewallAllow "%pwsh_exe%"
 
-	if EXIST "%pwsh_exe%" (%dk_call% dk_success "pwsh install complete") else (%dk_call% dk_error "pwsh install failed")
-	pause
+	rem if EXIST "%pwsh_exe%" (%dk_call% dk_success "pwsh install complete") else (%dk_call% dk_error "pwsh install failed")
+	
+	:return
+	endlocal & (
+		set "Host_Os=%Host_Os%"
+		set "pwsh_exe=%pwsh_exe%"
+		set "pwsh=%pwsh%"
+	)
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% DKINSTALL
+	%dk_call% dk_validate pwsh_exe    %dk_call% dk_depend pwsh
+	%dk_call% dk_debug "pwsh = %pwsh%"
+	%dk_call% dk_debug "pwsh_exe = %pwsh_exe%"
+	 
 %endfunction%
 

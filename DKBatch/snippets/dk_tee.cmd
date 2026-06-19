@@ -31,7 +31,7 @@ if /I "%~2" neq "/A" if EXIST "%~1" (del "%~1")
 rem Create the semaphore-signal file and start the asynchronous Tee process
 echo X > Flag.out
 if EXIST Flag.in (del Flag.in)
-Cscript //nologo //E:javascript "%~F0" | "%~F0" %1 :TeeProcess
+cscript.exe //nologo //E:javascript "%~F0" | "%~F0" %1 :TeeProcess
 del Flag.out
 goto :EOF
 
@@ -51,8 +51,8 @@ goto :EOF
       set "line=!line:~1!"
    )
    rem Duplicate input line in Stdout and the Tee output file
-   echo(!line!
-   echo(!line!>> %1
+   echo.!line!
+   echo.!line!>> %1
 goto TeeProcess
 
 

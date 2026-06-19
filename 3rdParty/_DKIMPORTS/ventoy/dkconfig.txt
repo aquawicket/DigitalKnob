@@ -1,4 +1,11 @@
 ############ ventoy ############
+# https://www.ventoy.net/en/index.html
 # https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
+# https://github.com/ventoy/Ventoy/releases/download/v1.1.09/ventoy-1.1.09-livecd.iso
 
-ventoy_Windows_X86_64_Import=https://sourceforge.net/projects/ventoy/files/v1.1.05/ventoy-1.1.05-windows.zip
+
+
+
+ventoy_Linux_Import=https://github.com/ventoy/Ventoy/releases/download/v1.1.09/ventoy-1.1.09-linux.tar.gz
+ventoy_Windows_Import=https://github.com/ventoy/Ventoy/releases/download/v1.1.09/ventoy-1.1.09-windows.zip
+ventoy_Src=https://github.com/ventoy/Ventoy/archive/af34df278f7db24550507708d2b0601e49220cd8.zip

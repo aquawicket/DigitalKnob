@@ -11,7 +11,7 @@ call ../functions/DK.cmd
 :main
 	set cmnd_out=cmnd_out
 	
-	:: Simple variable replacement
+	rem Simple variable replacement
 ::	set cmndA=ver
 ::	for /f "usebackq tokens=*" %%a in (`%cmndA%`) do set "%cmndA%=%%a"
 ::	call echo %%%cmndA%%%
@@ -20,7 +20,7 @@ call ../functions/DK.cmd
 	set "testB=&for /f "usebackq tokens=*" %%a in (`ver`) do set "testB=%%a" & echo %testB%"
 	echo %testB%
 	
-	:: MACRO
+	rem MACRO
 setlocal enableDelayedExpansion
 	set Macro=&(%\n%
 		%dk_call% dk_echo "Macro()" %\n%
@@ -28,7 +28,7 @@ setlocal enableDelayedExpansion
 
 	%Macro%
 	
-	:: MACRO One Argument
+	rem MACRO One Argument
 setlocal enableDelayedExpansion
 	set MacroWithOneArg=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithOneArg(%%~1)" %\n%
@@ -38,7 +38,7 @@ setlocal enableDelayedExpansion
 	%MacroWithOneArg% abc
 	
 	
-	:: MACRO Two Arguments
+	rem MACRO Two Arguments
 setlocal enableDelayedExpansion
 	set MacroWithArgs=for %%# in (1 2) do if %%#==2 ( for /f "tokens=1-2" %%1 in ("^!args^!") do (%\n%
 		%dk_call% dk_echo "MacroWithArgs(%%~1, %%~2)" %\n%

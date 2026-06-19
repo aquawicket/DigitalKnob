@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -41,17 +42,17 @@ function(dk_patch Import_Name Install_Path)
 	
 	dk_notice("COPYING PATCH FILES FROM _IMPORTS/${${CURRENT_PLUGIN}_Import_Name} TO ${${CURRENT_PLUGIN}_Install_Path}")
 	dk_notice("To stop patch files from overwriting install files, remove the \"PATCH\" argument from the end of the dk_import or dk_install command")
-	dk_notice("located in $ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/DKINSTALL.cmake")
+	dk_notice("located in ${DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/DKINSTALL.cmake")
 	
-	dk_assertPath("$ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}")
+	dk_assertPath("${DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}")
 	if(NOT EXISTS "${CURRENT_PLUGIN}_Install_Path")
 		dk_mkdir("${CURRENT_PLUGIN}_Install_Path")
 	endif()
 	dk_assertPath("${CURRENT_PLUGIN}_Install_Path")
 	
-	dk_assertPath("$ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}")
+	dk_assertPath("${DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}")
 	dk_assertPath("${${CURRENT_PLUGIN}_Install_Path}")
-	dk_copy("$ENV{DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/" "${${CURRENT_PLUGIN}_Install_Path}/" OVERWRITE)
+	dk_copy("${DKIMPORTS_DIR}/${${CURRENT_PLUGIN}_Import_Name}/" "${${CURRENT_PLUGIN}_Install_Path}/" OVERWRITE)
 endfunction()
 
 

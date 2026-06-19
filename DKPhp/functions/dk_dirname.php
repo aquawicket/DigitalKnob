@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ################################################################################
@@ -15,7 +16,7 @@ function dk_dirname($_path, &...$rtn_var) {
 	$dk_dirname = dirname($_path);
 	
 	
-	### output ####
+	###### return ######
 	if(isset($rtn_var[0])){
 		$rtn_var[0] = $dk_dirname;
 	} elseif(isset($dk_dirname)){
@@ -61,5 +62,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

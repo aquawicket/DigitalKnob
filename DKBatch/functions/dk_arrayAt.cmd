@@ -1,54 +1,44 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_arrayAt(array, index)
-::#
-::#	Takes an array instance with an integer value and returns the item at that index,
-::#	allowing for positive and negative integers. Negative integers count back from the last item in the array  <-- TODO
-::#
-::#	PARAMETERS
-::#	index
-::#	Zero-based index of the array element to be returned, converted to an integer. Negative index counts back from the end of the array — if index < 0, index + Array/length is accessed.
-::#
-::#	RETURN VALUE
-::#	The element in the array matching the given index. Always returns undefined if index < -Array/length or index >= Array/length without attempting to access the corresponding property.
-::#
-::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
-::#
+rem ################################################################################
+rem # dk_arrayAt(array, index)
+rem #
+rem #	Takes an array instance with an integer value and returns the item at that index,
+rem #	allowing for positive and negative integers. Negative integers count back from the last item in the array  <-- TODO
+rem #
+rem #	PARAMETERS
+rem #	index
+rem #	Zero-based index of the array element to be returned, converted to an integer. Negative index counts back from the end of the array — if index < 0, index + Array/length is accessed.
+rem #
+rem #	RETURN VALUE
+rem #	The element in the array matching the given index. Always returns undefined if index < -Array/length or index >= Array/length without attempting to access the corresponding property.
+rem #
+rem #	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/at
+rem #
 :dk_arrayAt
 %setlocal%
-	%dk_call% dk_debugFunc 2 3
 
-::############ faster ############
 	endlocal & (
+		rem set "dk_arrayAt_*=%*"
+		rem set "dk_arrayAt_1=%~1"
+		rem set "dk_arrayAt_2=%~2"
+		rem set "dk_arrayAt_3=%~3"
 		set "dk_arrayAt=!%~1[%~2]!"
-		if "%~3" neq "" (set "%~3=!dk_arrayAt!") else (echo !dk_arrayAt!)
-		%return%
-	)
-::################################
-	
-	::###### input #######
-	set "_array_=%~1"
-	set "_index_=%~2"
-	
-	
-	::###### process ######
-	set "dk_arrayAt=!%_array_%[%_index_%]!"
-	
-	
-	::###### output ######
-	endlocal & (
-		set "dk_arrayAt=%dk_arrayAt%"
 		if "%~3" neq "" (
-			set "%~3=%dk_arrayAt%"
-		) else (
-			echo %dk_arrayAt%
-		)
+			set "%~3=!dk_arrayAt!"
+		) 
 	)
 %endfunction%
 
@@ -57,10 +47,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

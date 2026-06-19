@@ -79,7 +79,7 @@
 :#                  * Use :# for comments instead of rem.                     #
 :#                    + The # sign is the standard comment marker for most    #
 :#                       other scripting languages.                           #
-:#                    + This stands out better than the :: used by many.      #
+:#                    + This stands out better than the rem used by many.      #
 :#                    + This avoids echoing the comment in echo on mode.      #
 :#                    + Gotcha: A :# comment in a ( block of code ) must be   #
 :#                       followed by a valid command. No blank line allowed.  #
@@ -1634,7 +1634,7 @@ set ^"/n=^^^%LF%%LF%^%LF%%LF%"
 set ^"//n=^^^^^^%/n%%/n%^^%/n%%/n%"
 set ^"///n=^^^^^^^^^^^^%//n%%//n%^^^^%//n%%//n%"
 set ^"////n=^^^^^^^^^^^^^^^^^^^^^^^^%///n%%///n%^^^^^^^^%///n%%///n%"
-:: set ^"//n=^^^^^^^%LF%%LF%^%LF%%LF%^^^%LF%%LF%^%LF%%LF%"
+rem set ^"//n=^^^^^^^%LF%%LF%^%LF%%LF%^^^%LF%%LF%^%LF%%LF%"
 
 @rem newline macros (linefeed + line continuation)
 set ^"\n=%//n%^^"
@@ -1644,12 +1644,12 @@ set ^"\\\n=%////n%^^"
 setlocal enableDelayedExpansion
 
 @rem check inline expansion
-echo(
+echo.
 set ^"NL=^%LF%%LF%"
 if '!LF!'=='!NL!' echo '^^!LF^^!'    == '^^^^%%LF%%%%LF%%'
 
 @rem check linefeed macros
-echo(
+echo.
 set "ddx=!/n!" & set "edx=!LF!"
 call :check && (echo '%%/n%%'    == '^^!LF^^!') || (echo ???)
 set "ddx=!//n!" & set "edx=!/n!"
@@ -1660,7 +1660,7 @@ set "ddx=!////n!" & set "edx=!///n!"
 call :check && (echo '%%////n%%' == '^^!///n^^!') || (echo ???)
 
 @rem check newline macros
-echo(
+echo.
 set "ddx=!\n!" & set "edx=!LF!^"
 call :check && (echo '%%\n%%'    == '^^!LF^^!^^^^') || (echo ???)
 set "ddx=!\\n!" & set "edx=!/n!^"
@@ -1742,8 +1742,8 @@ for /l %%. in () do (
   if defined ln (
     if "!ln:~0,4!" equ ":END" exit
     set "ln=!ln:*]=!"
-    (echo(!ln!)>&7
-    if defined redirect (echo(!ln!)>&8
+    (echo.!ln!)>&7
+    if defined redirect (echo.!ln!)>&8
   )
 )
 
@@ -2143,7 +2143,7 @@ set "ECHOF=call :EchoF"
 goto:eof
 
 :EchoF fmt str1 str2 ... -- outputs columns of strings right or left aligned
-::                       -- fmt [in] - format string specifying column width and alignment. Ex: "[-10] / [10] / []"
+rem                       -- fmt [in] - format string specifying column width and alignment. Ex: "[-10] / [10] / []"
 :$created 20060101 :$changed 20091130 :$categories Echo
 :# Updated 20121026 JFL: Added tons of comments.
 :#                       Fixed a bug if invoked in a loop on %%c or %%f or %%l or %%s or %%i.
@@ -2177,7 +2177,7 @@ endlocal & exit /b
 :# Original Format function from dostips.com
 
 :Format fmt str1 str2 ... -- outputs columns of strings right or left aligned
-::                        -- fmt [in] - format string specifying column width and alignment, i.e. "[-10][10][10]"
+rem                        -- fmt [in] - format string specifying column width and alignment, i.e. "[-10][10][10]"
 :$created 20060101 :$changed 20091130 :$categories Echo
 :$source http://www.dostips.com
 SETLOCAL
@@ -2446,7 +2446,7 @@ call :trimright "%~1" "%~2"
 %FUNCTION% EnableDelayedExpansion
 set "VARNAME=%~1"
 %UPVAR% %VARNAME%
-set "%VARNAME%=!%VARNAME%!::" &:# Note that :: cannot appear in a pathname
+set "%VARNAME%=!%VARNAME%!::" &:# Note that rem cannot appear in a pathname
 set "%VARNAME%=!%VARNAME%:\::=::!"
 set "%VARNAME%=!%VARNAME%:::=!"
 %RETURN%
@@ -4321,13 +4321,13 @@ if defined TYPEVAR set %TYPEVAR%=%TYPE%
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
-:#  Function        ReadPassword					      #
+:#  Function        ReadPassword					    					  #
 :#                                                                            #
 :#  Description     Prompt for a password string, displaying only stars       #
 :#                                                                            #
-:#  Arguments       VAR="Prompt string"					      #
+:#  Arguments       VAR="Prompt string"									      #
 :#                                                                            #
-:#  Notes 	    Returns the password string in variable VAR.              #
+:#  Notes 	    	Returns the password string in variable VAR.              #
 :#                                                                            #
 :#  History                                                                   #
 :#   2017-03-16 APA Published at https://www.dostips.com/forum/viewtopic.php?f=3&t=8442&sid=7d459deb904a629c16a11e6f9bd658be#p55984
@@ -4576,7 +4576,7 @@ if "!!" equ "" (
 
 :#----------------------------------------------------------------------------#
 :#                                                                            #
-:#  Function        EscapeCmdString					      #
+:#  Function        EscapeCmdString										      #
 :#                                                                            #
 :#  Description     Prepare a command for passing through multiple parsings   #
 :#                                                                            #
@@ -4585,10 +4585,10 @@ if "!!" equ "" (
 :#                  %3	Number of parsings to go through. Default: 1          #
 :#                  %4	# of the above with !expansion. Default: 1 if exp. on #
 :#                                                                            #
-:#  Notes 	    The cmd parser tokenizer removes levels of ^ escaping.    #
+:#  Notes 	    	The cmd parser tokenizer removes levels of ^ escaping.    #
 :#                  This routine escapes a command line, or an argument, so   #
 :#                  that special characters like ^ & | > < ( ) make it        #
-:#		    through intact through one or more tokenizations.	      #
+:#		    		through intact through one or more tokenizations.	      #
 :#                                                                            #
 :#                  Known limitation: The LF character is NOT managed.        #
 :#                                                                            #

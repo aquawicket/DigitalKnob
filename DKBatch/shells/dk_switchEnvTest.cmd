@@ -1,23 +1,30 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 ::https://www.msys2.org/wiki/Launchers
-%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-%dk_call% dk_validate GIT "%dk_call% dk_depend git"
-%dk_call% dk_validate MSYS2 "%dk_call% dk_depend msys2"
+%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+%dk_call% dk_validate GIT %dk_call% dk_depend git
+%dk_call% dk_validate MSYS2 %dk_call% dk_depend msys2
 
 goto main
-:: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
-:: /usr/bin/bash -li 	
+rem env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
+rem /usr/bin/bash -li 	
 
-::   -l				= "invoke a new shell process"   
-::   -i 			= "make the shell interactive"
-::   -c <command> 	= "run a command"
+rem   -l				= "invoke a new shell process"   
+rem   -i 			= "make the shell interactive"
+rem   -c <command> 	= "run a command"
 
-:: Opening a new interactive shell
+rem Opening a new interactive shell
 ::%msys2%/usr/bin/env MSYSTEM=MSYS       /usr/bin/bash -li
 ::%msys2%/usr/bin/env MSYSTEM=MINGW32    /usr/bin/bash -li
 ::%msys2%/usr/bin/env MSYSTEM=MINGW64    /usr/bin/bash -li
@@ -26,15 +33,15 @@ goto main
 ::%msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
 ::%msys2%/usr/bin/env MSYSTEM=UCRT64     /usr/bin/bash -li
 
-:: Run a script in a new launched shell
-::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
+rem Run a script in a new launched shell
+::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/Digital Knob/Development/build.sh
 
 ::###### CMD ######
 :CMD
 	%dk_call% dk_title "Digitalknob CMD"
 	%dk_call% dk_clearScreen
 	%dk_call% dk_echo "You are in a CMD environment"
-	echo(
+	echo.
 	%dk_call% dk_echo "PATH = %PATH%"
 	pause
 %endfunction%
@@ -45,7 +52,7 @@ goto main
 	set "PATH=%git%\bin;%PATH%"
 	%dk_call% dk_clearScreen
 	echo You are in a GIT_CMD environment
-	echo(
+	echo.
 	echo PATH = %PATH%
 	pause
 %endfunction%
@@ -109,8 +116,8 @@ goto main
 ::###### WSL_DEBIAN ######
 :WSL_DEBIAN
 	%dk_call% dk_title "Digitalknob WSL_DEBIAN"
-	%dk_call% dk_validate wsl_exe "%dk_call% dk_depend wsl_exe"
-	"%wsl_exe%" -d Debian --exec ^ 
+	%dk_call% dk_validate wsl.exe %dk_call% dk_depend wsl.exe
+	"%wsl.exe%" -d Debian --exec ^ 
 	"clear && echo You are in a WSL_DEBIAN environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 

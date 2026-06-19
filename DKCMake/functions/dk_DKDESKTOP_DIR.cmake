@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -25,15 +26,15 @@ function(dk_DKDESKTOP_DIR)
 
 	###### GET ######
 	elseif(DEFINED ENV{DKDESKTOP_DIR})	
-		dk_set(DKDESKTOP_DIR "$ENV{DKDESKTOP_DIR}")
-	
+		file(TO_CMAKE_PATH "$ENV{DKDESKTOP_DIR}" DKDESKTOP_DIR)
 	else()
-		dk_validate(ENV{DKHOME_DIR} "dk_DKHOME_DIR()")
-		dk_set(DKDESKTOP_DIR "$ENV{DKHOME_DIR}/Desktop")
+		dk_validate(DKHOME_DIR "dk_DKHOME_DIR()")
+		set(DKDESKTOP_DIR "${DKHOME_DIR}/Desktop")
 	endif()
 	
 	###### FINALIZE ######
 	#dk_assertPath(${DKDESKTOP_DIR})
+	dk_set(DKDESKTOP_DIR "${DKDESKTOP_DIR}")
 endfunction()
 
 
@@ -51,7 +52,7 @@ function(DKTEST)
 	if(EXISTS "${DKDESKTOP_DIR}")
 		dk_success("DKDESKTOP_DIR = ${DKDESKTOP_DIR}")
 	else()
-		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' not found")
+		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' NOT FOUND")
 	endif()
 	
 	dk_echo()
@@ -60,6 +61,6 @@ function(DKTEST)
 	if(EXISTS "${DKDESKTOP_DIR}")
 		dk_success("DKDESKTOP_DIR = ${DKDESKTOP_DIR}")
 	else()
-		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' not found")
+		dk_error("DKDESKTOP_DIR:'${DKDESKTOP_DIR}' NOT FOUND")
 	endif()
 endfunction()

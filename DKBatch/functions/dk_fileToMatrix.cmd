@@ -1,18 +1,24 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_fileToMatrix(path rtn_var)
-::#
-::#  Read lines of a file into an grid and echo them back
-::#
+rem ################################################################################
+rem # dk_fileToMatrix(path rtn_var)
+rem #
+rem #  Read lines of a file into an grid and echo them back
+rem #
 :dk_fileToMatrix
 %setlocal%
-	%dk_call% dk_debugFunc 2
 
 	set "_file_=%~1"
 	set "_file_=%_file_:/=\%"
@@ -28,34 +34,36 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set /a _row_+=1
 	)
 
-	:: Return the grid to the calling scope
-	set "currentScope=1"
+	rem Return the grid to the calling scope
+	set "_SCOPE_=%~n0"
 	for /F "delims=" %%a in ('set %~2[') do (
-		if defined currentScope endlocal
+		if "%_SCOPE_%" equ "%~n0" endlocal
 		set "%%a"
 	)
 	
-::	endlocal & (
-::		for /F "delims=" %%a in ('set %~2[') do (
-::			set "%%a"
-::		)
-::	)
+rem	endlocal & (
+rem		for /F "delims=" %%a in ('set %~2[') do (
+rem			set "%%a"
+rem		)
+rem	)
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_fileToMatrix "%DKBRANCH_DIR%\build_list.txt" MyGrid
+rem	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+rem	%dk_call% dk_fileToMatrix "%DKBRANCH_DIR%\build_list.txt" MyGrid
+	
+	%dk_call% dk_selectFile
+	%dk_call% dk_fileToMatrix "%dk_selectFile%" MyGrid
 
-	::%dk_call% dk_fileToMatrix "fileToGrid_TEST.txt" MyGrid
+	rem %dk_call% dk_fileToMatrix "fileToGrid_TEST.txt" MyGrid
 
-	:: print items individually
+	rem print items individually
 	%dk_call% dk_printVar MyGrid[0][0]
 	%dk_call% dk_printVar MyGrid[1][1]
 	%dk_call% dk_printVar MyGrid[2][2]
@@ -67,7 +75,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_printVar MyGrid[8][8]
 	%dk_call% dk_printVar MyGrid[9][9]
 
-	:: print rows individually
+	rem print rows individually
 	%dk_call% dk_printVar MyGrid[0]
 	%dk_call% dk_printVar MyGrid[1]
 	%dk_call% dk_printVar MyGrid[2]

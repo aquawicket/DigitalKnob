@@ -30,7 +30,7 @@ dk_DKHOME_DIR = function dk_DKHOME_DIR_f(){
 
 	dk_depend("dk_assertPath"); dk_assertPath(DKHOME_DIR);
 	
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = DKHOME_DIR;
 	} else {

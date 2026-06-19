@@ -1,37 +1,35 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ fftw3 ############
 # https://github.com/FFTW/fftw3.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/FFTW/fftw3/archive/187045ea.zip
 
-### IMPORT ###
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_import			(${FFTW3_DL})
+dk_import()
 
-### LINK ###
-dk_include			(${FFTW3}/include)
+dk_include			(${fftw3}/include)
 if(MSVC)
-	dk_libDebug		(${FFTW3_Debug_Dir}/fftw3.lib)
-	dk_libRelease	(${FFTW3_Release_Dir}/fftw3.lib)
+	dk_libDebug		(${fftw3_Debug_Dir}/fftw3.lib)
+	dk_libRelease	(${fftw3_Release_Dir}/fftw3.lib)
 else()
-	dk_libDebug		(${FFTW3_Debug_Dir}/libfftw3.a)
-	dk_libRelease	(${FFTW3_Release_Dir}/libfftw3.a)
+	dk_libDebug		(${fftw3_Debug_Dir}/libfftw3.a)
+	dk_libRelease	(${fftw3_Release_Dir}/libfftw3.a)
 endif()
 
 ### GENERATE ###
-dk_configure(${FFTW3}
+dk_configure(${fftw3}
 	-DBUILD_TESTS=OFF				# "Build tests" ON
 	-DENABLE_OPENMP=OFF				# "Use OpenMP for multithreading" OFF
 	-DENABLE_THREADS=OFF 			# "Use pthread for multithreading" OFF

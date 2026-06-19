@@ -351,7 +351,7 @@
 	#define dk_log_FATAL_LINE 0
 #endif
 #ifndef dk_log_FATAL_TIMEOUT
-	#define dk_log_FATAL_TIMEOUT 1
+	#define dk_log_FATAL_TIMEOUT 0
 #endif
 #ifndef dk_log_FATAL_PAUSE
 	#define dk_log_FATAL_PAUSE 0

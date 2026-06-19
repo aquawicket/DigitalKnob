@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -33,30 +34,30 @@ function(dk_timeout)
 	if(CMD_SHELL)
 		dk_validate(timeout_exe "dk_depend(timeout_exe)")
 		set(command "(${timeout_exe} /t ${seconds})")
-		message("CMD> ${command}")
-		execute_process(COMMAND "${cmd_exe}" /c "${command}")
+		dk_echo("CMD> ${command}")
+		execute_process(COMMAND "${cmd.exe}" /c "${command}")
 		
 	###### POWERSHELL ######
 	elseif(POWERSHELL_SHELL)
 		set(command "Write-Host 'Waiting for ${seconds} seconds, press a key to continue ..'; $counter = 0; while(!$Host.UI.RawUI.KeyAvailable -and ($counter++ -lt ${seconds})){ [Threading.Thread]::Sleep(1000) }")
-		message("POWERSHELL> ${command}")
+		dk_echo("POWERSHELL> ${command}")
 		execute_process(COMMAND "${powershell_exe}" -Command "${command}")
 	
 	###### BASH ######
 	elseif(BASH_SHELL)
 		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\n\"")
-		message("BASH> ${command}")
+		dk_echo("BASH> ${command}")
 		execute_process(COMMAND "${bash_exe}" -c ${command})
 	
 	###### SH ######
 	elseif(SH_SHELL)
 		set(command "read -t ${seconds} -n 1 -s -r -p \"waiting ${seconds} seconds. Press any key to continue . . .\"")
-		message("SH> ${command}")
+		dk_echo("SH> ${command}")
 		execute_process(COMMAND "${sh_exe}" -c ${command})
 	
 	###### NOT FOUND ######
 	else()
-		dk_fatal("Could not find cmd, powershell, bash or sh")
+		dk_error("Could not find cmd, powershell, bash or sh")
 	
 	endif()
 endfunction()

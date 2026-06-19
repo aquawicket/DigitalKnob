@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -20,16 +21,11 @@ include_guard()
 # https://blog.rplasil.name/2015/09/compiling-openssl-with-emscripten.html
 # https://github.com/openssl/openssl/archive/2f362e9.zip
 
-
-#dk_validate(Target_Tuple "dk_Target_Tuple()")
 if(Android OR Windows_X86_Msvc)
 	dk_disable(openssl)
 	dk_return()
 endif()
 
-
-
-### DEPEND ###
 #dk_depend(openssl-cmake)
 #if(Emscripten)
 #	dk_depend(python3)
@@ -41,10 +37,8 @@ dk_depend(pthread)
 dk_depend(ws2_32)
 dk_depend(crypt32)
 dk_depend(perl)
-#if(Windows_Host)
-	dk_depend(msys2)
-#endif()
-dk_depend(nasm)
+dk_validate(msys2 "dk_depend(msys2)")
+dk_validate(nasm "dk_depend(nasm)")
 
 ### IMPORT ###
 dk_import()
@@ -54,8 +48,8 @@ dk_import()
 
 
 ### LINK ###
-dk_include				(${openssl}/include								OPENSSL_INCLUDE_DIR)
-dk_include				(${openssl_Config_Dir}/include					OPENSSL_INCLUDE_DIR2)
+dk_include				("${openssl}/include"								OPENSSL_INCLUDE_DIR)
+dk_include				("${openssl_Config_Dir}/include"					OPENSSL_INCLUDE_DIR2)
 if(MSVC)
 	if(Windows_X86)
 		dk_libDebug		(${openssl}/lib/libeay32MTd.lib					LIB_EAY_DEBUG)
@@ -103,12 +97,12 @@ if(MSVC)
 		-DLIB_EAY_RELEASE=${LIB_EAY_RELEASE}
 		-DSSL_EAY_DEBUG=${SSL_EAY_DEBUG}
 		-DSSL_EAY_RELEASE=${SSL_EAY_RELEASE}
-		"-DCMAKE_C_FLAGS=/I${OPENSSL_INCLUDE_DIR} /I${OPENSSL_INCLUDE_DIR2}"
-		"-DCMAKE_CXX_FLAGS=/I${OPENSSL_INCLUDE_DIR} /I${OPENSSL_INCLUDE_DIR2}")
+		"-DCMAKE_C_FLAGS=/I\"${OPENSSL_INCLUDE_DIR}\" /I\"${OPENSSL_INCLUDE_DIR2}\""
+		"-DCMAKE_CXX_FLAGS=/I\"${OPENSSL_INCLUDE_DIR}\" /I\"${OPENSSL_INCLUDE_DIR2}\"")
 else()
 	dk_append(openssl_CMAKE 
-		"-DCMAKE_C_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}"
-		"-DCMAKE_CXX_FLAGS=-I${OPENSSL_INCLUDE_DIR} -I${OPENSSL_INCLUDE_DIR2}")
+		"-DCMAKE_C_FLAGS=-I\"${OPENSSL_INCLUDE_DIR}\" -I\"${OPENSSL_INCLUDE_DIR2}\""
+		"-DCMAKE_CXX_FLAGS=-I\"${OPENSSL_INCLUDE_DIR}\" -I\"${OPENSSL_INCLUDE_DIR2}\"")
 endif()
 
 
@@ -163,7 +157,7 @@ if(Release)
 	if(Android_Arm32_Clang)
 		dk_configure		(${openssl} ${perl_exe} ../../Configure no-shared --release android-arm CC=clang++ -D__ANDROID_API__=${ANDROID_API})
 	elseif(Android_Arm64_Clang)
-		dk_validate(bash_exe "dk_depend(bash)")
+		dk_validate(bash_exe "dk_depend(bash_exe)")
 		dk_exec(${bash_exe} -c "echo $PATH")
 		dk_configure		(${openssl} ${perl_exe} ../../Configure no-shared --release android-arm64 CC=clang++ -D__ANDROID_API__=${ANDROID_API})
 	elseif(Emscripten)
@@ -226,8 +220,8 @@ dk_build()
 # if(NOT EXISTS ${openssl_BINARY_EXE})
 # 	dk_info("Installing openssl_binary")
 # 	if(Windows_Host)	
-# 		dk_download(https://slproweb.com/download/Win64OpenSSL-3_0_4.exe $ENV{DKDOWNLOAD_DIR}/Win64OpenSSL-3_0_4.exe)
-# 		dk_exec($ENV{DKDOWNLOAD_DIR}/Win64OpenSSL-3_0_4.exe)
+# 		dk_download(https://slproweb.com/download/Win64OpenSSL-3_0_4.exe ${DKDOWNLOAD_DIR}/Win64OpenSSL-3_0_4.exe)
+# 		dk_exec(${DKDOWNLOAD_DIR}/Win64OpenSSL-3_0_4.exe)
 # 	endif()
 # 	if(Mac_Host)
 # 		dk_exec(brew install openssl)

@@ -1,8 +1,10 @@
 #!/bin/sh
+
+# DKINIT_sh
 #echo "################## DK.sh($*) ##################";
-echo "\$DK_LOADED = ${DK_LOADED}"
-[ -z "${DK_LOADED-}" ] && export DK_LOADED=1 || return
-echo "\$DK_LOADED = ${DK_LOADED}"
+echo "\$DKINIT_sh = ${DKINIT_sh}"
+[ -z "${DKINIT_sh-}" ] && export DKINIT_sh=1 || return
+echo "\$DKINIT_sh = ${DKINIT_sh}"
 echo "\$SHLVL = ${SHLVL}"
 echo "\$_ = $_";
 echo "\$\$ = $$";
@@ -52,16 +54,15 @@ DK(){
 	export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
 	echo ""
 	echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m"
-	#echo "DKSHELL_PATH  ${DKSHELL_PATH}"
-	#echo "DKSCRIPT_PATH  ${DKSCRIPT_PATH-}"
 	echo ""
 	
-	###### sudo_exe ######
-	sudo_exe(){
-		[ ! -e "${sudo_exe-}" ]	&& export sudo_exe=$(command -v sudo)
-		[ -e "${sudo_exe-}" ]	&& echo "${sudo_exe}" || unset sudo_exe
-		echo "sudo_exe = '${sudo_exe-}'" >&2
-	}
+	alias clearerror=true;
+#	###### sudo_exe ######
+#	sudo_exe(){
+#		[ ! -e "${sudo_exe-}" ]	&& export sudo_exe=$(command -v sudo)
+#		[ -e "${sudo_exe-}" ]	&& echo ${sudo_exe} --version || unset sudo_exe
+#		echo "sudo_exe = '${sudo_exe-}'" >&2
+#	}
     
 	###### Reload Main Script with bash ######
 	dkreloadWithBash
@@ -73,12 +74,12 @@ DK(){
 	############ load dk_source ######
 #	[ ! -n "${DKBRANCH-}" ]						&& export DKBRANCH="Development"
 	
-#	[ ! -n "${DKHTTP_DKHOME_DIR-}" ]			&& export DKHTTP_DKHOME_DIR="https://raw.githubusercontent.com/aquawicket"
+	[ ! -n "${DKHTTP_DKHOME_DIR-}" ]			&& export DKHTTP_DKHOME_DIR="http://aquawicket.com"
 #	[ ! -n "${DKHTTP_DIGITALKNOB_DIR-}" ]		&& export DKHTTP_DIGITALKNOB_DIR="${DKHTTP_DKHOME_DIR}/DigitalKnob"
 #	[ ! -n "${DKHTTP_DKBRANCH_DIR-}" ]			&& export DKHTTP_DKBRANCH_DIR="${DKHTTP_DIGITALKNOB_DIR}/${DKBRANCH}"
 #	[ ! -n "${DKHTTP_DKBASH_DIR-}" ]			&& export DKHTTP_DKBASH_DIR="${DKHTTP_DKBRANCH_DIR}/DKBash"
 #	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKBASH_DIR}/functions"
-	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions";
+	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR="${DKHTTP_DKHOME_DIR}/DigitalKnob/Development/DKBash/functions";
 	[ ! -n "${DKHTTP_DKBASH_FUNCTIONS_DIR_-}" ]	&& export DKHTTP_DKBASH_FUNCTIONS_DIR_="${DKHTTP_DKBASH_FUNCTIONS_DIR}/";
 	echo "DKHTTP_DKBASH_FUNCTIONS_DIR_ = ${DKHTTP_DKBASH_FUNCTIONS_DIR_}"
 
@@ -135,40 +136,51 @@ DK(){
 	
 	############ dkconfig.txt settings ###########
 	dk_call dk_validate DKBRANCH_DIR "dk_call dk_DKBRANCH_DIR"
-	[ -e "${DKSCRIPT_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKSCRIPT_DIR}/dkconfig.txt"
-	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_getFileParams "${DKBRANCH_DIR}/dkconfig.txt"
+	[ -e "${DKSCRIPT_DIR}/dkconfig.txt" ] && dk_call dk_fileVariables "${DKSCRIPT_DIR}/dkconfig.txt"
+	[ -e "${DKBRANCH_DIR}/dkconfig.txt" ] && dk_call dk_fileVariables "${DKBRANCH_DIR}/dkconfig.txt"
 	
 
-    if [ -n "${DKSCRIPT_EXT}" ] && [ "${DKSCRIPT_EXT}" = ".sh" ]; then
-		###### DKTEST MODE ######
-		if (dk_call dk_fileContains "${DKSCRIPT_PATH-}" "DKTEST()") && [ -z "${DKTEST-}" ]; then
-			dk_call dk_echo;
-			dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######${clr-}";
-			dk_call dk_echo;
-			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
-			(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
-			dk_call dk_echo;
-			dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_FILE} ####### END DKTEST ######${clr-}";
-			dk_call dk_echo;
-			dk_call dk_exit $?;
-			#exit $?;
-		###### RUN MODE ######
-		else	
-			dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_NAME}(${DKSCRIPT_ARGS}) ########################${clr-}";
-			dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
-			(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} ${DKSCRIPT_ARGS} || echo "'${DKSCRIPT_NAME}()' failed";
-			dk_call dk_exit $?;
-			#exit $?; #dk_call dk_exit $?;
-		fi
-	else
-		echo "DKSCRIPT_PATH is not DKBash";
-		echo "* = $*";
-		. $1;
-		echo "dk_call $(basename ${1%.*}) $2;";
-		dk_call $(basename ${1%.*}) $2;
-		dk_call dk_exit $?;
+	if [ ! "${DKSCRIPT_EXT-}" = ".sh" ]; then
+		echo "DKSCRIPT_PATH:'${DKSCRIPT_PATH-}' is not DKBash";
+		#echo "* = $*";
+		#. $1;
+		#echo "dk_call $(basename ${1%.*}) $2;";
+		#dk_call $(basename ${1%.*}) $2;
+		#dk_call dk_exit $?;
+		return $?;
 		#exit $?;
+		#dk_call dk_exit $?;
 	fi
+	
+	###### DKTEST() ######
+	if (dk_call dk_fileContains "${DKSCRIPT_PATH}" "DKTEST()") && [ -z "${DKTEST-}" ]; then
+		dk_call dk_echo;
+		dk_call dk_echo "${bg_magenta-}${white-}###### DKTEST MODE ###### ${DKSCRIPT_FILE} ###### DKTEST MODE ######${clr-}";
+		dk_call dk_echo;
+		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
+		(command -v DKTEST 1>/dev/null) && DKTEST || echo "'DKTEST' failed";
+		dk_call dk_echo;
+		dk_call dk_echo "${bg_magenta-}${white-}####### END DKTEST ###### ${DKSCRIPT_FILE} ####### END DKTEST ######${clr-}";
+		dk_call dk_echo;
+		dk_call dk_exit $?;
+		return $?;
+		#exit $?;
+		#dk_call dk_exit $?;
+	fi
+	
+	###### DKSCRIPT_NAME() ######
+	if (dk_call dk_fileContains "${DKSCRIPT_PATH}" "${DKSCRIPT_NAME}()"); then
+		dk_call dk_echo "${bg_blue-}${white-}######################## ${DKSCRIPT_NAME}(${DKSCRIPT_ARGS}) ########################${clr-}";
+		dk_source "${DKSCRIPT_PATH}" || echo "'dk_source ${DKSCRIPT_FILE}' failed";
+		(command -v ${DKSCRIPT_NAME} 1>/dev/null) && ${DKSCRIPT_NAME} ${DKSCRIPT_ARGS} || echo "'${DKSCRIPT_NAME}()' failed";
+		return $?;
+		#exit $?;
+		#dk_call dk_exit $?;
+	fi
+	
+	###### DKSCRIPT_PATH ######
+	dk_source "${DKSCRIPT_PATH}";
+	
 	#dk_call dk_exit $?;
 }
 
@@ -182,7 +194,7 @@ dkreloadWithBash() {
 	(command -v bash) &>/dev/null || dk_installPackage bash || (echo "ERROR: dk_installPackage bash failed"; exit ${BASH_LINENO[0]};)
 	(command -v bash) &>/dev/null && export bash_exe=$(command -v bash) || (echo "ERROR: 'bash' not found"; exit ${BASH_LINENO[0]};)
 	echo "Reloading ${DKSCRIPT_PATH} with ${bash_exe} . . .";
-	unset DK_LOADED;
+	unset DKINIT_sh;
 	dk_call dk_pause;
 	
 	[ -e "${DKSCRIPT_PATH}" ] && exec "${bash_exe}" "${DKSCRIPT_PATH}"

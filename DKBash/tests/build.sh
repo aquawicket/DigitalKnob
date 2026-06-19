@@ -98,7 +98,7 @@ dk_buildMain() {
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
 	
-	dk_validateSudo
+	dk_call dk_depend sudo_exe
 	
 	if dk_defined WSLENV; then 
 		dk_info "WSLENV is on"
@@ -845,7 +845,7 @@ dk_installCmake() {
 		#if ! dk_pathExists ${cmake_exe}; then error "cannot find cmake"; fi
 
 	else	# Linux package
-		dk_info "Installing CMake from package managers"
+		dk_info "Installing CMake from package"
 		
 		cmake_exe=$(command -v cmake)
 		dk_printVar cmake_exe
@@ -1674,9 +1674,9 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installClang(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/clang/DKINSTALL.cmake')" "CLANG_C_COMPILER;CLANG_CXX_COMPILER"
-#	dk_printVar CLANG_C_COMPILER
-#	dk_printVar CLANG_CXX_COMPILER
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/clang/DKINSTALL.cmake')" "clang_exe;clang++_exe"
+#	dk_printVar clang_exe
+#	dk_printVar clang++_exe
 #}
 
 
@@ -1688,9 +1688,9 @@ dk_deleteTempFiles() {
 #	dk_verbose "dk_installGcc(${*})"
 #	[ ${#} -gt 0 ] && dk_error "Incorrect number of parameters"
 #
-#	dk_cmakeEval "include('${DKIMPORTS_DIR}/gcc/DKINSTALL.cmake')" "GCC_C_COMPILER;GCC_CXX_COMPILER"
-#	dk_printVar GCC_C_COMPILER
-#	dk_printVar GCC_CXX_COMPILER
+#	dk_cmakeEval "include('${DKIMPORTS_DIR}/gcc/DKINSTALL.cmake')" "gcc_exe;g++_exe"
+#	dk_printVar gcc_exe
+#	dk_printVar g++_exe
 #}
 
 

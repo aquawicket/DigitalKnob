@@ -1,0 +1,7 @@
+############ winscp ############
+# https://winscp.net/eng/index.php
+# https://winscp.net/download/WinSCP-6.5.3-Portable.zip/download
+# https://cdn.winscp.net/files/WinSCP-6.5.3-Portable.zip?secure=6OnlXQ4QRsKhmoH-6rdppw==,1760749223
+
+winscp_Type=Tool
+winscp_Import=https://cdn.winscp.net/files/WinSCP-6.5.3-Portable.zip?secure=6OnlXQ4QRsKhmoH-6rdppw==,1760749223

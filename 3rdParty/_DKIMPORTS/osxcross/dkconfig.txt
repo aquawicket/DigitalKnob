@@ -1,0 +1,5 @@
+############ osxcross ############
+# https://github.com/tpoechtrager/osxcross.git
+# https://github.com/tpoechtrager/osxcross/archive/e6ab3fa7423f9235ce9ed6381d6d3af191b46b59.zip
+
+osxcross_Import=https://github.com/tpoechtrager/osxcross/archive/e6ab3fa7423f9235ce9ed6381d6d3af191b46b59.zip

@@ -1,32 +1,38 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# Array/dk_join(array, separator)
-::#
-::#	The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string.
-::#	If the array has only one item, then that item will be returned without using the separator.
-::#
-::#	PARAMETERS
-::#	separator :optional
-::#		A string to separate each pair of adjacent elements of the array. If omitted, the array elements are separated with a comma (",").
-::#
-::#	RETURN VALUE
-::#	A string with all array elements joined. If Array/length is 0, the empty string is returned.
-::#
-::#	REFERENCE
-::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
-::#
+rem ################################################################################
+rem # Array/dk_join(array, separator)
+rem #
+rem #	The join() method of Array instances creates and returns a new string by concatenating all of the elements in this array, separated by commas or a specified separator string.
+rem #	If the array has only one item, then that item will be returned without using the separator.
+rem #
+rem #	PARAMETERS
+rem #	separator :optional
+rem #		A string to separate each pair of adjacent elements of the array. If omitted, the array elements are separated with a comma (",").
+rem #
+rem #	RETURN VALUE
+rem #	A string with all array elements joined. If Array/length is 0, the empty string is returned.
+rem #
+rem #	REFERENCE
+rem #	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
+rem #
 :dk_join
 %setlocal%
-	%dk_call% dk_debugFunc 2
 
-	::set "_arry_=%~1"
-	::set "_separator_=%~2"
+	rem set "_arry_=%~1"
+	rem set "_separator_=%~2"
 	set "_count_=0"
 	:join_loop
 	if defined %~1[%_count_%] (
@@ -44,10 +50,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

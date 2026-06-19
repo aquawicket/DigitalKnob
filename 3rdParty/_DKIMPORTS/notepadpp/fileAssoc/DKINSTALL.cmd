@@ -1,19 +1,25 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
-::%setlocal%
-	%dk_call% dk_debugFunc 0
+rem %setlocal%
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_depend notepadpp"
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate notepadpp_exe %dk_call% dk_depend notepadpp
 	%dk_call% dk_installFileAssoc .1 %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .2 %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .3 %notepadpp_exe%
@@ -44,12 +50,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_installFileAssoc .plist %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .pro %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .properties %notepadpp_exe%
-	::%dk_call% dk_installFileAssoc .ps1 %notepadpp_exe%
+	rem %dk_call% dk_installFileAssoc .ps1 %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .rc %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .reference %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .rsp %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .sed %notepadpp_exe%
-	::%dk_call% dk_installFileAssoc .sh %notepadpp_exe%
+	rem %dk_call% dk_installFileAssoc .sh %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .storyboard %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .targets %notepadpp_exe%
 	%dk_call% dk_installFileAssoc .traineddata %notepadpp_exe%

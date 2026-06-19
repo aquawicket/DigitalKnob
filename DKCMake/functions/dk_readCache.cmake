@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -19,8 +20,8 @@ include_guard()
 function(dk_readCache)
 #	dk_debugFunc(3)
 	
-	dk_validate(ENV{DKCACHE_DIR} "dk_DKCACHE_DIR()")
-	if(NOT EXISTS "$ENV{DKCACHE_DIR}/DKBuilder.cache")
+	dk_validate(DKCACHE_DIR "dk_DKCACHE_DIR()")
+	if(NOT EXISTS "${DKCACHE_DIR}/DKBuilder.cache")
 		dk_return()
 	endif()
 	#dk_unset(Target_App_Cache)
@@ -35,9 +36,9 @@ function(dk_readCache)
 #		[ "${count}" = "2" ] &&	_target_type_=$(builtin echo "${p}" | tr -d '\r')
 #		[ "${count}" = "3" ] && _target_env_=$(echo ${p} | tr -d '\r')
 #		count=$((count + 1))
-#	done < "$ENV{DKCACHE_DIR}"/DKBuilder.cache
+#	done < "${DKCACHE_DIR}"/DKBuilder.cache
 
-#	file(STRINGS "$ENV{DKCACHE_DIR}/DKBuilder.cache" lines)
+#	file(STRINGS "${DKCACHE_DIR}/DKBuilder.cache" lines)
 #	foreach(line ${lines})
 #		if(${count} EQUAL 0)
 #			set(${ARGV0} ${line})

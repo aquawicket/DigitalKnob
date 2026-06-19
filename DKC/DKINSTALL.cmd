@@ -35,12 +35,12 @@ if "%~1" equ "" (goto:DKINSTALL)
 ::	g++.exe -DHAVE_lib @CMakeFiles/app.dir/includes_CXX.rsp -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -MD -MT CMakeFiles/app.dir/C_/apps/app/main.cpp.obj -MF CMakeFiles/app.dir/C_/app/main.cpp.obj.d -o CMakeFiles/app.dir/C_/app/main.cpp.obj -c C:\app/main.cpp
 ::	g++.exe -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -Wl,--whole-archive CMakeFiles/HelloWorld.dir/objects.a -Wl,--no-whole-archive -o HelloWorld.exe -Wl,--out-implib,libHelloWorld.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/HelloWorld.dir/linkLibs.rsp
 
-	::set "LDFLAGS=-static -static-libgcc -static-libstdc++ %USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/msys2-base-x86_64-20241208/mingw64/lib/libwinpthread.a"
+	::set "LDFLAGS=-static -static-libgcc -static-libstdc++ %USERPROFILE:\=/%/Digital Knob/Development/3rdParty/msys2-base-x86_64-20241208/mingw64/lib/libwinpthread.a"
 	set COMPILE_COMMAND=%DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 	::set COMPILE_COMMAND=%DK_C_COMPILER% -v -frtti -fexceptions -march=x86-64 -DMSYSTEM=MINGW64 -DWIN -DWIN_X86_64 -D_WINDOWS -D_CRT_SECURE_NO_WARNINGS -D_USING_V110_SDK71_ -std=gnu++17 -DDEBUG -D_DEBUG -g -static -o HelloWorld.exe
 	
 	set "DKSCRIPT_PATH=%~1"
-	set "DKBATCH_FUNCTIONS_DIR_=C:/Users/Administrator/DigitalKnob/Development/DKBatch/functions/"
+	set "DKBATCH_FUNCTIONS_DIR_=%USERPROFILE:\=/%/Digital Knob/Development/DKBatch/functions/"
 
 	echo %COMPILE_COMMAND%
 	call %Comspec% /V:ON /c call %COMPILE_COMMAND%
@@ -48,7 +48,7 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::call %Comspec% /V:ON /c call %DKBATCH_FUNCTIONS_DIR_%dk_exec.cmd %DK_C_COMPILER% -v -o %APP_FILE% -static %DKC_FILE% -lgdi32 -lpthread
 
 	if NOT EXIST "%APP_FILE%" (
-		echo(
+		echo.
 		echo %red%ERROR: compilation of %DKC_FILE% failed.%clr%
 		pause
 		exit /b 13
@@ -56,13 +56,13 @@ if "%~1" equ "" (goto:DKINSTALL)
 
 	::###### run executable ######
 	title %DKC_FILE%
-	echo(
+	echo.
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.c ###### DKTEST MODE ######%clr%
-	echo(
+	echo.
 	"%ComSpec%" /v:on /c "%APP_FILE%"
-	echo(
+	echo.
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.c ######## END TEST #######%clr%
-	echo(
+	echo.
 
 	set "exit_code=%ERRORLEVEL%"
 	echo exit_code = %exit_code%
@@ -94,14 +94,21 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::if NOT defined Target_Arch	(set "Target_Arch=X86_64")
 	::if NOT defined Target_Env		(set "Target_Env=Gcc")
 
-	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	rem shebang
+	@echo off&rem ###### DK.cmd #########################################################################################################################
+	if not defined DKINIT_cmd (
+		setlocal enableDelayedExpansion
+		if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+		if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+		if NOT EXIST "!DK.cmd!" (
+			start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+		call "!DK.cmd:/=\!" "%%~0" %%*
+		exit /b %errorlevel%
+	)
+	rem #################################################################################################################################################
 
 	::###### Install DKC ######
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
 
 	::###### Target_Os ######
 	if NOT defined Target_Os (set "Target_Os=Windows")
@@ -124,16 +131,16 @@ if "%~1" equ "" (goto:DKINSTALL)
 	::if NOT defined MSYSTEM  if /i "%Target_Env%" equ "Gcc"   if "%Target_Arch%" equ "X86_64" set "MSYSTEM=MINGW64"
 
 	::###### DK_C_COMPILER ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
 
-	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh_exe")
-	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate COSMOCC_C_COMPILER	"%dk_call% dk_depend cosmocc")
-	if /i "%Target_Env%" equ "Clang"	(%dk_call% dk_validate CLANG_C_COMPILER		"%dk_call% dk_depend clang")
-	if /i "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate GCC_C_COMPILER		"%dk_call% dk_depend gcc")
+	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate sh_exe				%dk_call% dk_depend sh_exe)
+	if /i "%Target_Env%" equ "Cosmocc"	(%dk_call% dk_validate cosmocc_exe	%dk_call% dk_depend cosmocc)
+	if /i "%Target_Env%" equ "Clang"	(%dk_call% dk_validate clang_exe		%dk_call% dk_depend clang)
+	if /i "%Target_Env%" equ "Gcc"		(%dk_call% dk_validate gcc_exe		%dk_call% dk_depend gcc)
 	
-	if /i "%Target_Env%" equ "Cosmocc"	(set "DK_C_COMPILER=%sh_exe% %COSMOCC_C_COMPILER%")
-	if /i "%Target_Env%" equ "Clang"	(set "DK_C_COMPILER=%CLANG_C_COMPILER%")
-	if /i "%Target_Env%" equ "Gcc"		(set "DK_C_COMPILER=%GCC_C_COMPILER%")
+	if /i "%Target_Env%" equ "Cosmocc"	(set "DK_C_COMPILER=%sh_exe% %cosmocc_exe%")
+	if /i "%Target_Env%" equ "Clang"	(set "DK_C_COMPILER=%clang_exe%")
+	if /i "%Target_Env%" equ "Gcc"		(set "DK_C_COMPILER=%gcc_exe%")
 	%dk_call% dk_assertPath DK_C_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKC"

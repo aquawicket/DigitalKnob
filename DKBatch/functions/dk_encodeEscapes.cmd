@@ -1,32 +1,38 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_encodeEscapes(variable)
-::#
-::#  https://stackoverflow.com/a/17584764
-::#  https://www.robvanderwoude.com/escapechars.php
-::#
+rem ####################################################################
+rem # dk_encodeEscapes(variable)
+rem #
+rem #  https://stackoverflow.com/a/17584764
+rem #  https://www.robvanderwoude.com/escapechars.php
+rem #
 :dk_encodeEscapes
-::%setlocal%
-    %dk_call% dk_debugFunc 1 2
+rem %setlocal%
   
     set org=%*
-    if defined %* call set "org=%%%org%%%"  &:: FIXME: remove the need for call here
+    if defined %* call set "org=%%%org%%%"  &rem FIXME: remove the need for call here
     %setlocal%
-        if "!DE!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!" &:: remove any surrounding quotes
-        if "!DE!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%" &:: remove any surrounding quotes
+        if "!!" equ "" if "" == %org:~0,1%%org:~-1% set "org=!org:~1,-1!" &rem remove any surrounding quotes
+        if "!!" neq "" if "" == %org:~0,1%%org:~-1% set "org=%org:~1,-1%" &rem remove any surrounding quotes
     endlocal & set "org=%org%"
    
     set "org=%org:^=^^%"
     set "org=%org:<=^<%"
     set "org=%org:>=^>%"
     set "org=%org:"=""%"
-    ::set "org=%org:"=^"%"
+    rem set "org=%org:"=^"%"
     set "org=%org:&=^&%"
     set "org=%org:|=^|%"
     set "org=%org:'=^'%"
@@ -40,83 +46,83 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "var=%org%"
     if defined %* endlocal & set "%1=%var%"
    
-    ::%setlocal%  
-    ::set "org=!org:%=%%!"
-    ::endlocal & set "org=%org%"
+    rem %setlocal%  
+    rem set "org=!org:%=%%!"
+    rem endlocal & set "org=%org%"
    
-::  set "replaceWith=_"
-::  goto rtn
+rem  set "replaceWith=_"
+rem  goto rtn
    
-::  set "var=%var:""=_%"
-::  set "org=%var%"
+rem  set "var=%var:""=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:^^=_%"
-::  set "org=%var%"
+rem  set "var=%var:^^=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:^<=_%"
-::  set "org=%var%"
+rem  set "var=%var:^<=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:^>=_%"
-::  set "org=%var%"
+rem  set "var=%var:^>=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:`=_%"
-::  set "org=%var%"
+rem  set "var=%var:`=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:,=_%"
-::  set "org=%var%"
+rem  set "var=%var:,=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:;=_%"
-::  set "org=%var%"
+rem  set "var=%var:;=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:(=_%"
-::  set "org=%var%"
+rem  set "var=%var:(=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:)=_%"
-::  set "org=%var%"
+rem  set "var=%var:)=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:!=_%"
-::  set "org=%var%"
+rem  set "var=%var:!=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:\=_%"
-::  set "org=%var%"
+rem  set "var=%var:\=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:[=_%"
-::  set "org=%var%"
+rem  set "var=%var:[=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:]=_%"
-::  set "org=%var%"
+rem  set "var=%var:]=_%"
+rem  set "org=%var%"
 
-::  set "var=%var:.=_%"
-::  set "org=%var%"
+rem  set "var=%var:.=_%"
+rem  set "org=%var%"
 
-::  set "var=%var:?=_%"
-::  set "org=%var%"
+rem  set "var=%var:?=_%"
+rem  set "org=%var%"
    
-::  call :replaceEqualSign var _
-::  set "org=%var%"
+rem  call :replaceEqualSign var _
+rem  set "org=%var%"
 
-::  set "var=%var:|=_%"
-::  set "org=%var%"
+rem  set "var=%var:|=_%"
+rem  set "org=%var%"
    
-::  %dk_call% dk_echo ""%var%"|find "*">nul
-::  if NOT errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
-::  set "org=%var%"
+rem  %dk_call% dk_echo ""%var%"|find "*">nul
+rem  if NOT errorlevel 1 for /f "tokens=1* delims=*" %%A in ("%var%") do (set "var=%%A%replaceWith%%%B")
+rem  set "org=%var%"
    
-::  set "var=%var:^&=_%"
-::  set "org=%var%"
+rem  set "var=%var:^&=_%"
+rem  set "org=%var%"
    
-::  set "var=%var:^|=_%"
-::  set "org=%var%"
+rem  set "var=%var:^|=_%"
+rem  set "org=%var%"
    
-::  %setlocal%
-::  set "var=!var:%%%%=_!"
-::  if "!var!" neq "!org!" %dk_call% dk_echo "%% characters removed
-::  set "org=!var!"
-::  endlocal & set "org=%org%"
+rem  %setlocal%
+rem  set "var=!var:%%%%=_!"
+rem  if "!var!" neq "!org!" %dk_call% dk_echo "%% characters removed
+rem  set "org=!var!"
+rem  endlocal & set "org=%org%"
    
-    :: Simple method to detect character in a string
-    ::%dk_call% dk_echo ""%var%"|find "=">nul
-    ::if NOT errorlevel 1 %dk_call% dk_echo "equal sign detected
+    rem Simple method to detect character in a string
+    rem %dk_call% dk_echo ""%var%"|find "=">nul
+    rem if NOT errorlevel 1 %dk_call% dk_echo "equal sign detected
    
     :rtn
     if NOT defined %* %dk_call% dk_echo "var = %var%
@@ -129,7 +135,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :replaceEqualSign variable replaceWith
 %setlocal%
-	 ::%dk_call% dk_debugFunc 0
+
         set "equal=="
         set "with=%~2"
         set "_s=!%~1!#"
@@ -145,10 +151,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
    
     %dk_call% dk_echo
@@ -233,15 +238,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_encodeEscapes pipe
     echo pipe = %pipe%
    
-    ::set "percent=### %%%% ###"
-    ::%dk_call% dk_encodeEscapes percent
-    ::%dk_call% dk_echo "percent = %percent%
+    rem set "percent=### %%%% ###"
+    rem %dk_call% dk_encodeEscapes percent
+    rem %dk_call% dk_echo "percent = %percent%
    
     set "allchars=### ^ < > ` , ; = ( ) ! \ [ ] . ? & | " % ###"
     %dk_call% dk_encodeEscapes allchars
     %dk_call% dk_echo "allchars = %allchars%"
 
-    ::set "imposible=### This is impossible %path% ^& | <> "^& | <>" ^ ###"
-    ::%dk_call% dk_encodeEscapes imposible
-    ::%dk_call% dk_echo "imposible = %imposible%"
+    rem set "imposible=### This is impossible %path% ^& | <> "^& | <>" ^ ###"
+    rem %dk_call% dk_encodeEscapes imposible
+    rem %dk_call% dk_echo "imposible = %imposible%"
 %endfunction%

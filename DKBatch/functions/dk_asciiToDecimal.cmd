@@ -1,30 +1,35 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_asciiToDecimal(<ascii>, <rtn_var>:optional))
-::#
-::#	reference: https://www.ascii-code.com
-::#
+rem ####################################################################
+rem # dk_asciiToDecimal(<ascii>)
+rem #
+rem #	reference: https://www.ascii-code.com
+rem #
 :dk_asciiToDecimal
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
 	%dk_call% dk_asciiToHex %~1
 	%dk_call% dk_hexToDecimal %dk_asciiToHex%
+	set "dk_asciiToDecimal=%dk_hexToDecimal%"
 
-
-	::###### output ######
+	:return
 	endlocal & (
-		set "dk_hexToDecimal=%dk_hexToDecimal%"
+		set "dk_asciiToDecimal_1=%~1"
+		set "dk_asciiToDecimal=%dk_asciiToDecimal%"
 		if "%~2" neq "" (
-			set "%~2=%dk_hexToDecimal%"
-		) else (
-			echo %dk_hexToDecimal%
+			set "%~2=%dk_asciiToDecimal%"
 		)
 	)
 %endfunction%
@@ -34,20 +39,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+
+
+
+
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_set myAscii a
-	%dk_call% dk_asciiToDecimal %myAscii%
-	%dk_call% dk_echo "'%myAscii%': dk_asciiToDecimal = %dk_asciiToDecimal%"
-
-	%dk_call% dk_set myAscii b
-	%dk_call% dk_asciiToDecimal %myAscii%
-	%dk_call% dk_echo "'%myAscii%': dk_asciiToDecimal = %dk_asciiToDecimal%"
-
-	%dk_call% dk_set myAscii c
-	%dk_call% dk_asciiToDecimal %myAscii%
-	%dk_call% dk_echo "'%myAscii%': dk_asciiToDecimal = %dk_asciiToDecimal%"
+	%dk_call% dk_asciiToDecimal a 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal b 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal c 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal d 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal e 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal f 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
+	%dk_call% dk_asciiToDecimal g 	& %dk_call% dk_echo "'!dk_asciiToDecimal_1!' = !dk_asciiToDecimal!"
 %endfunction%

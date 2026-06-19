@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -18,57 +19,53 @@ include_guard()
 # https://robertying.io/posts/compile-openssl-and-curl-for-android
 # https://curl.se/docs/install.html
 
-### DEPEND ###
 #dk_depend(dl)
 dk_depend(libbcrypt)
-dk_depend(libpsl)
+#dk_depend(libpsl)
 dk_depend(libssh2)
 dk_depend(openssl)
 dk_depend(perl)
 dk_depend(pthread)
 dk_depend(system_configuration)
+#dk_depend(windows-sdk)		
+dk_depend(Wldap32)		# for USE_WIN32_LDAP
 dk_depend(ws2_32)
 dk_depend(zlib)
 dk_depend(zstd)
 
-### IMPORT ###
 dk_import()
 
+#if(MULTI_CONFIG)
+#	set(curl_Debug_Dir 		${curl_Tuple_Dir}/lib/${Debug_Dir})
+#	set(curl_Release_Dir 	${curl_Tuple_Dir}/lib/${Release_Dir})
+#	set(curl_Build_Dir		${curl_Tuple_Dir}/lib/${Target_Type})
+#else()
+#	set(curl_Debug_Dir 		${curl_Debug_Dir}/lib)
+#	set(curl_Release_Dir 	${curl_Release_Dir}/lib)
+#	set(curl_Build_Dir		${curl_${Target_Type}_Dir})
+#endif()
+#dk_printPrefixVars(${CURRENT_PLUGIN})
+#dk_pause()
 
-### LINK ###
 dk_define					(CURL_STATICLIB)
-dk_include					(${curl}/include 					CURL_INCLUDE_DIR)
-dk_include					(${curl_Config_Dir}/lib				CURL_INCLUDE_DIR2)
-
-if(MULTI_CONFIG)
-	set(curl_Debug_Dir 		${curl_Tuple_Dir}/lib/${Debug_Dir})
-	set(curl_Release_Dir 	${curl_Tuple_Dir}/lib/${Release_Dir})
-	set(curl_Build_Dir		${curl_Tuple_Dir}/lib/${Target_Type})
-else()
-	set(curl_Debug_Dir 		${curl_Debug_Dir}/lib)
-	set(curl_Release_Dir 	${curl_Release_Dir}/lib)
-endif()
+dk_define					(LIBSSH2_API)
+dk_include					(${curl}/include 								CURL_INCLUDE_DIR)
+dk_include					(${curl_Config_Dir}/lib							CURL_INCLUDE_DIR2)
 
 if(Windows AND MSVC)
-	dk_libDebug				(${curl_Debug_Dir}/curl-d.lib		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
-	dk_libRelease			(${curl_Release_Dir}/curl.lib		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
+	dk_libDebug				(${curl_Tuple_Dir}/lib/${Debug_Dir}/curl-d.lib	CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease			(${curl_Tuple_Dir}/lib/${Release_Dir}/curl.lib	CURL_RELEASE_LIBRARY	CURL_LIBRARY)
 else()		
-	dk_libDebug				(${curl_Debug_Dir}/libcurl-d.a		CURL_DEBUG_LIBRARY		CURL_LIBRARY)
-	dk_libRelease			(${curl_Release_Dir}/libcurl.a		CURL_RELEASE_LIBRARY	CURL_LIBRARY)
+	dk_libDebug				(${curl_Debug_Dir}/lib/libcurl-d.a				CURL_DEBUG_LIBRARY		CURL_LIBRARY)
+	dk_libRelease			(${curl_Release_Dir}/lib/libcurl.a				CURL_RELEASE_LIBRARY	CURL_LIBRARY)
 endif()
 
-
-### 3RDPARTY LINK ###
 dk_set(curl_CMAKE 
 	-DCURL_INCLUDE_DIR=${CURL_INCLUDE_DIR} 
 	-DCURL_LIBRARY=${CURL_LIBRARY})
-if(MSVC)
-	dk_append(curl_CMAKE "-DCMAKE_C_FLAGS=/I${curl_Tuple_Dir}/include/curl")
-elseif()
-	dk_append(curl_CMAKE "-DCMAKE_C_FLAGS=-I${curl_Tuple_Dir}/include")
-endif()
 
-### GENERATE ###
+dk_append(curl_CMAKE "-DCMAKE_C_FLAGS=-I\"${CURL_INCLUDE_DIR}\" -I\"${CURL_INCLUDE_DIR2}\"")
+
 if(MSVC AND Windows)
 	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
@@ -112,9 +109,9 @@ if(MSVC AND Windows)
 		-DCURL_STATIC_CRT=OFF							# "Set to ON to build libcurl with static CRT on Windows /MT" OFF
 		-DCURL_USE_BEARSSL=OFF							# "Enable BearSSL for SSL/TLS" OFF
 		-DCURL_USE_GSSAPI=OFF							# "Use GSSAPI implementation 'right now only Heimdal is supported with CMake build'" OFF
-		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
-		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
-		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
+		-DCURL_USE_LIBPSL=${libpsl}						# "Use libPSL" ON
+		-DCURL_USE_LIBSSH2=${libssh2}					# "Use libSSH2" ON
+		-DCURL_USE_LIBSSH=${libssh}						# "Use libSSH" ON
 		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
@@ -226,9 +223,9 @@ elseif(Mac)
 		-DCURL_STATIC_CRT=OFF							# "Set to ON to build libcurl with static CRT on Windows /MT" OFF
 		-DCURL_USE_BEARSSL=OFF							# "Enable BearSSL for SSL/TLS" OFF
 		-DCURL_USE_GSSAPI=OFF							# "Use GSSAPI implementation 'right now only Heimdal is supported with CMake build'" OFF
-		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
-		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
-		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
+		-DCURL_USE_LIBPSL=${libpsl}						# "Use libPSL" ON
+		-DCURL_USE_LIBSSH2=${libssh2}					# "Use libSSH2" ON
+		-DCURL_USE_LIBSSH=${libssh}						# "Use libSSH2" ON
 		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
@@ -300,9 +297,9 @@ elseif(Linux)
 		-DCURL_STATIC_CRT=OFF							# "Set to ON to build libcurl with static CRT on Windows /MT" OFF
 		-DCURL_USE_BEARSSL=OFF							# "Enable BearSSL for SSL/TLS" OFF
 		-DCURL_USE_GSSAPI=OFF							# "Use GSSAPI implementation 'right now only Heimdal is supported with CMake build'" OFF
-		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
-		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
-		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
+		-DCURL_USE_LIBPSL=${libpsl}						# "Use libPSL" ON
+		-DCURL_USE_LIBSSH2=${libssh2}					# "Use libSSH2" ON
+		-DCURL_USE_LIBSSH=${libssh}						# "Use libSSH2" ON
 		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
 		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
@@ -335,9 +332,9 @@ else()
 	dk_configure(${curl}
 		-DBUILD_CURL_EXE=ON								# "Set to ON to build curl executable." ON
 		-DBUILD_LIBCURL_DOCS=OFF 						# "to build libcurl man pages" ON
-		-DCURL_BROTLI=OFF								# "Set to ON to enable building curl with brotli support." OFF
+		-DCURL_BROTLI=${brotli}							# "Set to ON to enable building curl with brotli support." OFF
 		-DCURL_DISABLE_ALTSVC=OFF						# "disables alt-svc support" OFF
-		-DCURL_DISABLE_COOKIES=ON						# "disables cookies support" OFF
+		-DCURL_DISABLE_COOKIES=OFF						# "disables cookies support" OFF
 		-DCURL_DISABLE_DICT=OFF							# "disables DICT" OFF
 		-DCURL_DISABLE_DOH=OFF							# "disables DNS-over-HTTPS" OFF
 		-DCURL_DISABLE_FILE=OFF							# "disables FILE" OFF
@@ -348,8 +345,8 @@ else()
 		-DCURL_DISABLE_HTTP=OFF							# "disables HTTP" OFF
 		-DCURL_DISABLE_HTTP_AUTH=OFF					# "disables all HTTP authentication methods" OFF
 		-DCURL_DISABLE_IMAP=OFF							# "disables IMAP" OFF
-		-DCURL_DISABLE_LDAP=ON							# "disables LDAP" OFF
-		-DCURL_DISABLE_LDAPS=ON							# "disables LDAPS" OFF
+		-DCURL_DISABLE_LDAP=OFF							# "disables LDAP" OFF
+		-DCURL_DISABLE_LDAPS=OFF						# "disables LDAPS" OFF
 		-DCURL_DISABLE_LIBCURL_OPTION=OFF				# "disables --libcurl option from the curl tool" OFF
 		-DCURL_DISABLE_MIME=OFF							# "disables MIME support" OFF
 		-DCURL_DISABLE_MQTT=OFF							# "disables MQTT" OFF
@@ -370,15 +367,15 @@ else()
 		-DCURL_DISABLE_VERBOSE_STRINGS=OFF				# "disables verbose strings" OFF
 		-DCURL_ENABLE_EXPORT_TARGET=ON					# "to enable cmake export target" ON
 		-DCURL_ENABLE_SSL=ON							# "Enable SSL support" ON
-		-DCURL_LTO=OFF									# "Turn on compiler Link Time Optimizations" OFF
+		-DCURL_LTO=ON									# "Turn on compiler Link Time Optimizations" OFF
 		-DCURL_STATIC_CRT=OFF							# "Set to ON to build libcurl with static CRT on Windows /MT" OFF
 		-DCURL_USE_BEARSSL=OFF							# "Enable BearSSL for SSL/TLS" OFF
 		-DCURL_USE_GSSAPI=OFF							# "Use GSSAPI implementation 'right now only Heimdal is supported with CMake build'" OFF
-		-DCURL_USE_LIBPSL=OFF							# "Use libPSL" ON
-		-DCURL_USE_LIBSSH2=OFF							# "Use libSSH2" ON
-		-DCURL_USE_LIBSSH=OFF							# "Use libSSH2" ON
+		-DCURL_USE_LIBPSL=${libpsl}						# "Use libPSL" ON
+		-DCURL_USE_LIBSSH2=${libssh2}					# "Use libSSH2" ON
+		-DCURL_USE_LIBSSH=${libssh}						# "Use libSSH" ON
 		-DCURL_USE_OPENSSL=${openssl}					# "Enable OpenSSL for SSL/TLS" ${openssl_default} CURL_ENABLE_SSL OFF
-		-DCURL_USE_SCHANNEL=OFF							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
+		-DCURL_USE_SCHANNEL=ON							# "Enable Windows native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_SECTRANSP=OFF						# "Enable Apple OS native SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_USE_WOLFSSL=OFF							# "Enable wolfSSL for SSL/TLS" OFF CURL_ENABLE_SSL OFF
 		-DCURL_WERROR=OFF								# "Turn compiler warnings into errors" OFF
@@ -387,27 +384,28 @@ else()
 		-DENABLE_ARES=OFF								# "Set to ON to enable c-ares support" OFF
 		-DENABLE_CURLDEBUG=OFF							# "Set to ON to build with TrackMemory feature enabled" OFF
 		-DENABLE_DEBUG=OFF								# "Set to ON to enable curl debug features" OFF
-		-DENABLE_IPV6=OFF								# "Define to enable IPv6 support" ON
+		-DENABLE_IPV6=ON								# "Define to enable IPv6 support" ON
 		-DENABLE_THREADED_RESOLVER=OFF					# "Set to ON to enable threaded DNS lookup" ON "NOT ENABLE_ARES" OFF
 		-DENABLE_UNICODE=OFF							# "Set to ON to use the Unicode version of the Windows API functions" OFF
 		-DENABLE_UNIX_SOCKETS=ON						# "Define for want Unix domain sockets support" ON
 		-DHTTP_ONLY=OFF									# "disables all protocols except HTTP 'This overrides all CURL_DISABLE_* options'" OFF
 		-DPICKY_COMPILER=ON								# "Enable picky compiler options" ON
-		-DUSE_LIBIDN2=OFF								# "Use libidn2 for IDN support" ON
-		-DUSE_MSH3=OFF									# "Use msquic library for HTTP/3 support" OFF
-		-DUSE_NGHTTP2=OFF								# "Use nghttp2 library" OFF
-		-DUSE_NGTCP2=OFF								# "Use ngtcp2 and nghttp3 libraries for HTTP/3 support" OFF
-		-DUSE_QUICHE=OFF								# "Use quiche library for HTTP/3 support" OFF
-		-DUSE_WIN32_IDN=OFF								# "Use WinIDN for IDN support" OFF
-		-DUSE_WIN32_LDAP=OFF							# "Use Windows LDAP implementation" ON
+		-DUSE_LIBIDN2=${linidn2}						# "Use libidn2 for IDN support" ON
+		-DUSE_MSH3=${msquic}							# "Use msquic library for HTTP/3 support" OFF
+		-DUSE_NGHTTP2=${nghttp2}						# "Use nghttp2 library" OFF
+		-DUSE_NGTCP2=${ngtcp2}							# "Use ngtcp2 and nghttp3 libraries for HTTP/3 support" OFF
+		-DUSE_QUICHE=${quiche}							# "Use quiche library for HTTP/3 support" OFF
+		-DUSE_WIN32_IDN=${winidn}						# "Use WinIDN for IDN support" OFF
+		-DUSE_WIN32_LDAP=ON								# "Use Windows LDAP implementation" ON
 		${libbcrypt_CMAKE}
+		${libpsl_CMAKE}
+		${libssh2_CMAKE}
 		${openssl_CMAKE}
 		${zlib_CMAKE}
 		${zstd_CMAKE})
 endif()
 
 
-### COMPILE ###
 dk_build(${curl})
 
 

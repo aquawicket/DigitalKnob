@@ -1,20 +1,20 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ libwebp ############
 # https://github.com/webmproject/libwebp
-dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 dk_depend(giflib)
@@ -47,8 +47,8 @@ if(MSVC)
 #	Apple_dk_libDebug		(${libwebp_Debug_Dir}/libsharpyuv.a)
 #	Apple_dk_libRelease		(${libwebp_Release_Dir}/libsharpyuv.a)
 else()
-	dk_libDebug				(${libwebp_Debug_Dir}/libwebp.a)
-	dk_libRelease			(${libwebp_Release_Dir}/libwebp.a)
+	dk_libDebug				(${libwebp_Debug_Dir}/libwebp.a			LIBWEBP_LIBRARY_DEBUG)
+	dk_libRelease			(${libwebp_Release_Dir}/libwebp.a		LIBWEBP_LIBRARY_RELEASE)
 endif()
 
 ### 3RDPARTY LINK ###
@@ -58,7 +58,7 @@ dk_set(libwebp_CMAKE
 	-DWEBP_LIBRARY_RELEASE=${LIBWEBP_LIBRARY_RELEASE})
 
 ### GENERATE ###
-dk_configure				(${libwebp} ${giflib_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${sdl_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE})
+dk_configure(${libwebp} ${giflib_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${sdl_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE})
 
 ### COMPILE ###
-dk_build					(${libwebp} webp)
+dk_build	(${libwebp} webp)

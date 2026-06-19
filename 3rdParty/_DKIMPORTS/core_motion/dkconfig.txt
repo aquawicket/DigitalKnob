@@ -1,0 +1,2 @@
+############ core_motion #############
+# https://developer.apple.com/documentation/coremotion?language=objc

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -35,7 +36,7 @@ function(dk_createShortcut shortcut_path target_path) # arguments
 	
 	#FIXME: This does not work
 	#if(NOT EXISTS "${shortcut_path}")
-	#	dk_fatal("dk_createShortcut failed.  shortcut_path:${shortcut_path} not found")
+	#	dk_fatal("dk_createShortcut failed.  shortcut_path:${shortcut_path} NOT FOUND")
 	#endif()
 endfunction()
 
@@ -52,6 +53,6 @@ function(DKTEST)
 	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	dk_validate(DKDOWNLOAD_DIR  "dk_DIGITALKNOB_DIR()")
 	
-	#dk_createShortcut("$ENV{DKDESKTOP_DIR}/DigitalKnob.lnk" "C:/Users/Administrator/DigitalKnob")
+	#dk_createShortcut("${DKDESKTOP_DIR}/DigitalKnob.lnk" "C:/Users/Administrator/DigitalKnob")
 	dk_createShortcut("C:/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Linux_X86_64/Debug/HelloWorld_APP.lnk" "C:/Windows/System32/wsl.exe" "/mnt/c/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Linux_X86_64/Debug/HelloWorld_APP")
 endfunction()

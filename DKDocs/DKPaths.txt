@@ -1,0 +1,41 @@
+     DIGITALKNOB_DIR          =           C:/Users/aquawicket/DigitalKnob
+HTTP_DIGITALKNOB_DIR          = https://github.com/aquawicket/DigitalKnob
+
+     DKBRANCH_DIR             =           C:/Users/aquawicket/DigitalKnob/Development
+HTTP_DKBRANCH_DIR             = https://github.com/aquawicket/DigitalKnob/Development
+
+     DKCURRENT_DIR            =           C:/Users/aquawicket/DigitalKnob/Development/DKBatch/apps/DKBuilder
+HTTP_DKCURRENT_DIR            = https://github.com/aquawicket/DigitalKnob/Development/DKBatch/apps/DKBuilder
+
+     DKCURRENT_DIR_RELATIVE   =                                           Development/DKBatch/apps/DKBuilder
+HTTP_DKCURRENT_DIR_RELATIVE   =                                           Development/DKBatch/apps/DKBuilder
+
+
+Say we run     'C:/Users/aquawicket/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd'
+And it calls   '%dk_call% dk_function.cmd'
+
+### senarios is the file does not exist locally ###
+
+### Fullpath call ###
+* currentpath        C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKCore/
+* dk_call            C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKCore/func.cmd
+* localpath          C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKCore/func.cmd
+* httppath    https://github.com/aquawicket/DigitalKnob/Development/DKBatch/DKCore/func.cmd SUCCESS
+* downloadto         C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKCore/func.cmd
+
+### partial path call ###
+* currentpath		 C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKBuilder/
+* dk_call                                                                             func.cmd
+* localpath          C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKBuilder/func.cmd
+* httppath    https://github.com/aquawicket/DigitalKnob/Development/DKBatch/DKBuilder/func.cmd  SUCCESS
+* downloadto         C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKBuilder/func.cmd  
+
+### partial path call ###
+* currentpath		 C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKBuilder/
+* dk_call                                                                             func.cmd
+* localpath          C:/Users/Administrator/DigitalKnob/Development/DKBatch/DKBuilder/func.cmd
+* httppath    https://github.com/aquawicket/DigitalKnob/Development/DKBatch/DKBuilder/func.cmd  FAIL
+* fixhttppath https://github.com/aquawicket/DigitalKnob/Development/DKBatch/   DKCore/func.cmd
+* httppath    https://github.com/aquawicket/DigitalKnob/Development/DKBatch/   DKCore/func.cmd  SUCCESS
+* downloadto         C:/Users/Administrator/DigitalKnob/Development/DKBatch/   DKCore/func.cmd 
+

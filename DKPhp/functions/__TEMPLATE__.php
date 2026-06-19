@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
@@ -11,7 +12,7 @@ function __TEMPLATE__($input, &...$rtn_var){
 	$__TEMPLATE__ = $input;  # Replace all occurences of __TEMPLATE__ with the "FunctionName" and Replace this line with your code.
 	
 	
-	### output ####
+	###### return ######
 	if(isset($rtn_var[0])){
 		$rtn_var[0] = $__TEMPLATE__;			### Result as parameter variable
 	} elseif(isset($__TEMPLATE__)){
@@ -70,5 +71,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

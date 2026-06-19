@@ -1,0 +1,5 @@
+############ CMakeRC ############
+# https://github.com/vector-of-bool/cmrc
+# https://github.com/vector-of-bool/cmrc/archive/952ffddba731fc110bd50409e8d2b8a06abbd237.zip
+
+CMakeRC_Import=https://github.com/vector-of-bool/cmrc/archive/952ffddba731fc110bd50409e8d2b8a06abbd237.zip

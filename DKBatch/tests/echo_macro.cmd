@@ -24,10 +24,10 @@ exit /b
 )
 set ^"+@=for %%# in (1 2) do if %%#==2 (%\n%
     setlocal EnableDelayedExpansion%\n%
-	echo(!argv:~2!%\n%
+	echo.!argv:~2!%\n%
 rem for /F "tokens=*" %%a in ("!argv!") do (%\n%
 rem        endlocal%\n%
-rem        echo(%%~a%\n%
+rem        echo.%%~a%\n%
 rem        endlocal%\n%
 rem   )%\n%
 ) ELSE setlocal DisableDelayedExpansion ^& set argv=""

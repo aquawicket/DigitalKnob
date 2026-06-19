@@ -1,18 +1,25 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::https://stackoverflow.com/a/43123617/688352
+rem https://stackoverflow.com/a/43123617/688352
 
 set "func=%~0"
 for /F "delims=\" %%X in ("%func:*\=%") do set "func=%%X"
 if ":" equ "%func:~0,1%" ( goto %func% )
 
 
-:: *** Get the filename of the caller of this script, needed for later restart
+rem *** Get the filename of the caller of this script, needed for later restart
 :dk_getScriptPath
 (
     (goto) 2>nul
@@ -25,13 +32,13 @@ if ":" equ "%func:~0,1%" ( goto %func% )
 )
 %endfunction%
 
-:: *** Get the filename/cmd-line of the caller of the script
+rem *** Get the filename/cmd-line of the caller of the script
 :Step2
 (
     (goto) 2>nul
     (goto) 2>nul
     (goto) 2>nul
-    ::setlocal DisableDelayedExpansion
+    rem setlocal DisableDelayedExpansion
     set "_returnVar=%_returnVar%"  
     set "_lastpath=%_lastpath%"
     set "_lastargs=%_lastargs%"
@@ -49,12 +56,12 @@ if ":" equ "%func:~0,1%" ( goto %func% )
 )
 %endfunction%
 
-:: *** STEP3 Restart the requester batch, but jump to the label :dk_getScriptPath_return
+rem *** STEP3 Restart the requester batch, but jump to the label :dk_getScriptPath_return
 :Step3
     call :dk_getScriptPath_return
 %endfunction%
 
-:: *** This uses the trick, that starting a batch without CALL will jump to the last used label
+rem *** This uses the trick, that starting a batch without CALL will jump to the last used label
 :dk_getScriptPath_return
     if "%_returnVar%" neq "" set "%_returnVar%=%_callerpath%"
     endlocal

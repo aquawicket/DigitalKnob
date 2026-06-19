@@ -65,9 +65,9 @@ function Global:dk_download() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1";
-	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "DKBuilder.ps1";
-	#dk_call dk_download "https://raw.githubusercontent.com/aquawicket/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
+	#dk_call dk_download "http://aquawicket.com/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1";
+	#dk_call dk_download "http://aquawicket.com/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "DKBuilder.ps1";
+	#dk_call dk_download "http://aquawicket.com/Digitalknob/Development/DKPowershell/apps/DKBuilder/DKBuilder.ps1" "${env:DKDOWNLOAD_DIR}/dk_download_powershell_test/DKBuilder.ps1";
 	
 	dk_call dk_download "https://go.microsoft.com/fwlink/?linkid=2289980"
 	dk_call dk_echo "dk_download = ${dk_download}"

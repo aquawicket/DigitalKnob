@@ -3,23 +3,23 @@
 	setlocal
 	cls
 	echo compiling %~n0.exe. . .																							
-	set "bash_exe=%USERPROFILE%\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\bin\bash.exe"
-	#set "COSMO_C_COMPILER=/C/Users/Administrator/DigitalKnob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/cosmocc"
-	set "COSMO_C_COMPILER=/C/Users/Administrator/DigitalKnob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/x86_64-unknown-cosmo-c++"
+	set "bash_exe=%USERPROFILE:\=/%/Digital Knob/DKTools/git-portable-2.46.2-64-bit/bin/bash.exe"
+	#set "COSMO_C_COMPILER=/C/Users/Administrator/Digital Knob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/cosmocc"
+	set "COSMO_C_COMPILER=/C/Users/Administrator/Digital Knob/Development/3rdParty/cosmopolitan-e4d6eb3/bin/x86_64-unknown-cosmo-c++"
 
 	for %%Z in ("%~0") do set "APP_NAME=%%~nZ"
 	copy %~0 "%~n0.c"
 	set "C_FILE=%~n0.c"
-	set "COMPILER_EXE=%bash_exe% %COSMO_C_COMPILER%"
-	set "APP_EXE=%CD%\build\%APP_NAME%.exe"
+	set "COMPILER_EXE=%bash_exe:/=\% %COSMO_C_COMPILER%"
+	set "APP_EXE=%CD:\=/%/build/%APP_NAME%.exe"
 	set "COMPILE_COMMAND=%COMPILER_EXE% -DDKTEST=1 -o %APP_EXE% %C_FILE%"
 	
 	::###### Setup build directory
-	if NOT EXIST "%CD%\build" mkdir "%CD%\build"
+	if NOT EXIST "%CD%\build" (mkdir "%CD%\build")
 	
 	::###### Compile Code ######
 	echo compiling ...
-	if EXIST "%APP_EXE%"	(del "%APP_EXE%")
+	if EXIST "%APP_EXE%"	(del "%APP_EXE:/=\%")
 
 	echo %COMPILE_COMMAND%
 	%COMPILE_COMMAND%

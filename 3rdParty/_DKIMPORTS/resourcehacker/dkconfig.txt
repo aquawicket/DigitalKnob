@@ -1,0 +1,5 @@
+############ resourcehacker ############
+# https://www.angusj.com/resourcehacker/resource_hacker.zip
+
+resourcehacker_Type=Tool
+resourcehacker_Import=https://www.angusj.com/resourcehacker/resource_hacker.zip

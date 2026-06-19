@@ -1,1 +1,5 @@
-Batch_Script_Collection_Import=https://github.com/happy05dz/Batch-Script-Collection/archive/refs/heads/master.zip
+############ Batch_Script_Collection ############
+# https://github.com/happy05dz/Batch-Script-Collection
+# https://github.com/happy05dz/Batch-Script-Collection/archive/9ac133b53f6d4b908c6c928e03a71453d171f2da.zip
+
+Batch_Script_Collection_Import=https://github.com/happy05dz/Batch-Script-Collection/archive/9ac133b53f6d4b908c6c928e03a71453d171f2da.zip

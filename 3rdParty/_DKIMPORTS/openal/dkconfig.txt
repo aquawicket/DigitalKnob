@@ -1,0 +1,14 @@
+############ openal ############
+# https://openal.org/
+# https://openal-soft.org/
+# https://github.com/native-toolkit/openal-android
+# https://openal.org/downloads/OpenAL11CoreSDK.zip
+# https://www.openal-soft.org/openal-releases
+# https://www.openal-soft.org/openal-releases/openal-soft-1.21.1.tar.bz2
+# https://ftp.fau.de/macports/distfiles/openal-soft/
+# https://ftp.fau.de/macports/distfiles/openal-soft/openal-soft-1.21.1.tar.bz2
+# https://ftp.fau.de/macports/distfiles/openal-soft/openal-soft-1.24.2.tar.bz2
+
+openal_Android_Import=https://openal.org/downloads/OpenAL11CoreSDK.zip
+#openal_Import=https://ftp.fau.de/macports/distfiles/openal-soft/openal-soft-1.21.1.tar.bz2
+openal_Import=https://ftp.fau.de/macports/distfiles/openal-soft/openal-soft-1.24.2.tar.bz2

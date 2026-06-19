@@ -1,3 +1,12 @@
+############ notepadpp ############
+# https://notepad-plus-plus.org
+# https://github.com/notepad-plus-plus.git
+# https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip
+# https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip
+# https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip
+# Extensions to search .asm .bash .bat .c .cmake .cmd .cpp .cs .hta .htm .html .java .js .mhtml .php .pl .ps1 .py .sh .vbs
+
+notepadpp_Type=Tool
 notepadpp_Windows_Arm64_Import=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.arm64.zip
 notepadpp_Windows_X86_Import=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.zip
 notepadpp_Windows_X86_64_Import=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.portable.x64.zip

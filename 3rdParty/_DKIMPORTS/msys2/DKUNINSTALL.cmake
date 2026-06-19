@@ -1,32 +1,29 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ########### msys2 ###########
 # https://www.msys2.org
 # https://silentinstallhq.com/msys2-silent-install-how-to-guide
-dk_validate(Host_Os "dk_Host_Os()")
+
 if(NOT DEFINED Windows_Host)
 	dk_disable(msys2)
 	return()
 endif()
 
-############ MSYS2 variables ############
-dk_getFileParams	("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-dk_validate			(Host_Tuple "dk_Host_Tuple()")
 dk_importVariables	("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_assertVar(MSYS2)
-
+dk_assertVar		(MSYS2)
 
 dk_set				(msys2_DBPath		"${msys2}/var/lib/pacman")
 dk_set				(msys2_CacheDir		"${msys2}/var/cache/pacman/pkg")
@@ -41,23 +38,19 @@ dk_set				(MINGW64_BIN		"${msys2}/mingw64/bin")
 dk_set				(UCRT64_BIN			"${msys2}/ucrt64/bin")
 dk_set				(msys2_MAKE_PROGRAM "${msys2}/usr/bin/make.exe")
 
-############ INSTALL ############
-dk_import("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
-dk_firewallAllow("${msys2}/usr/bin/dirmngr.exe")
+dk_import			("${msys2_${Host_Tuple}_Import}" IMPORT_PATH ${CMAKE_CURRENT_LIST_DIR})
+dk_firewallAllow	("${msys2}/usr/bin/dirmngr.exe")
 
 ### Save Pacman database, keys and cache to download directory for offline buiding ###
-#dk_validate			(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
-#dk_copy("$ENV{DKIMPORTS_DIR}/msys2/pacman.conf" "${msys2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
-#dk_set				(msys2_DBPath		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
-#dk_set				(msys2_LogFile		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
-#dk_set				(msys2_GPGDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
-#dk_mkdir("${msys2_DBPath}")
+#dk_validate		(DKIMPORTS_DIR "dk_DKIMPORTS_DIR()")
+#dk_copy			("${DKIMPORTS_DIR}/msys2/pacman.conf" "${msys2}/etc/pacman.conf" OVERWRITE) #FIXME - move to pacman
+#dk_set				(msys2_DBPath		"${DKDOWNLOAD_DIR}/MSYS2/var/lib/pacman")
+#dk_set				(msys2_LogFile		"${DKDOWNLOAD_DIR}/MSYS2/var/log/pacman.log")
+#dk_set				(msys2_GPGDir		"${DKDOWNLOAD_DIR}/MSYS2/etc/pacman.d/gnupg")
+#dk_mkdir			("${msys2_DBPath}")
 dk_validate			(DKDOWNLOAD_DIR 	"dk_DKDOWNLOAD_DIR()")
-dk_set				(msys2_CacheDir		"$ENV{DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
-dk_mkdir("${msys2_CacheDir}")
-
-
-
+dk_set				(msys2_CacheDir		"${DKDOWNLOAD_DIR}/MSYS2/var/cache/pacman/pkg")
+dk_mkdir			("${msys2_CacheDir}")
 
 ### exe installer ###
 #if((NOT DEFINED DKUPDATE) AND (EXISTS "${msys2}/msys2.exe"))
@@ -67,8 +60,8 @@ dk_mkdir("${msys2_CacheDir}")
 #	dk_info("Installing ${msys2_Install_Name}")
 #	dk_import(${msys2_Import})
 #	
-#	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-#	#dk_download(${msys2_Import} $ENV{DKDOWNLOAD_DIR})
-#	#dk_exec("$ENV{DKDOWNLOAD_DIR}/${msys2_Import_FILE}" install --root "${msys2}" --confirm-command)
+#	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+#	#dk_download(${msys2_Import} ${DKDOWNLOAD_DIR})
+#	#dk_exec("${DKDOWNLOAD_DIR}/${msys2_Import_FILE}" install --root "${msys2}" --confirm-command)
 #endif()
 

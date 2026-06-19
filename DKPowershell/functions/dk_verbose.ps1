@@ -11,6 +11,11 @@ if(!$dk_verbose_ps1){ $dk_verbose_ps1 = 1; } else{ return; } #include guard
 function Global:dk_verbose(){
 	dk_debugFunc 0 1;
 	
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
+	
 	dk_call dk_log VERBOSE "$($args[0])";
 }
 

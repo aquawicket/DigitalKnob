@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
@@ -28,6 +29,7 @@ function __TEMPLATE__(){
 
 
 
+
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 if(!function_exists('DKTEST')){ function DKTEST() {
 	#dk_debugFunc 0
@@ -36,5 +38,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

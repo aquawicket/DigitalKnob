@@ -1,1 +1,7 @@
-BULLET3_DL=https://github.com/bulletphysics/bullet3/archive/e9c461b0.zip
+###### bullet3 ######
+# https://github.com/bulletphysics/bullet3.git
+# https://code.google.com/archive/p/bullet
+# https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/bullet/bullet-2.82-r2704.zip
+# https://github.com/bulletphysics/bullet3/archive/e9c461b0ace140d5c73972760781d94b7b5eee53.zip
+
+bullet3_Import=https://github.com/bulletphysics/bullet3/archive/e9c461b0ace140d5c73972760781d94b7b5eee53.zip

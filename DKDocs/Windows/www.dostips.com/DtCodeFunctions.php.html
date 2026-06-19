@@ -1,0 +1,3184 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="DtCodeFunctions_files/filelist.xml">
+<link rel=Edit-Time-Data href="DtCodeFunctions_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>DOS - Function Collection</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="State"/>
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>TextFit</w:Zoom>
+  <w:DisplayBackgroundShape/>
+  <w:UpdateStylesOnOpen/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<link rel=Stylesheet type="text/css" media=all href="_style.css?v=0001">
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:.25in;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+h4
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:14.0pt;
+	font-family:"Times New Roman";}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	font-size:13.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	font-size:11.0pt;
+	font-family:"Times New Roman";}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-style:italic;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	font-size:11.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:Arial;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{mso-style-update:auto;
+	mso-style-noshow:yes;
+	mso-style-next:Normal;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:9.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{mso-ansi-font-size:9.0pt;
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{mso-style-parent:Code;
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+p.Code, li.Code, div.Code
+	{mso-style-name:Code;
+	mso-style-parent:"";
+	line-height:normal;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-weight:bold;}
+p.Bullets, li.Bullets, div.Bullets
+	{mso-style-name:Bullets;
+	mso-style-update:auto;
+	margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.25in;
+	margin-bottom:.0001pt;
+	text-indent:-.25in;
+	mso-pagination:widow-orphan;
+	mso-list:l0 level1 lfo4;
+	tab-stops:list .25in;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.PageTitle, li.PageTitle, div.PageTitle
+	{mso-style-name:PageTitle;
+	mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:16.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;
+	mso-bidi-font-weight:normal;}
+p.AdH468, li.AdH468, div.AdH468
+	{mso-style-name:AdH468;
+	margin:0in;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+p.IndexTitle, li.IndexTitle, div.IndexTitle
+	{mso-style-name:IndexTitle;
+	mso-style-parent:"Plain Text";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+p.ads, li.ads, div.ads
+	{mso-style-name:ads;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.men, li.men, div.men
+	{mso-style-name:men;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nav, li.nav, div.nav
+	{mso-style-name:nav;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inst, li.inst, div.inst
+	{mso-style-name:inst;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.inde, li.inde, div.inde
+	{mso-style-name:inde;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resu, li.resu, div.resu
+	{mso-style-name:resu;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.instr, li.instr, div.instr
+	{mso-style-name:instr;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.resul, li.resul, div.resul
+	{mso-style-name:resul;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:9.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel, li.ysel, div.ysel
+	{mso-style-name:ysel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel, li.nsel, div.nsel
+	{mso-style-name:nsel;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.ysel1, li.ysel1, div.ysel1
+	{mso-style-name:ysel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#FEFEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.nsel1, li.nsel1, div.nsel1
+	{mso-style-name:nsel1;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	background:#EEEEFF;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.bod, li.bod, div.bod
+	{mso-style-name:bod;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.codeop, li.codeop, div.codeop
+	{mso-style-name:codeop;
+	mso-pagination:widow-orphan;
+	font-size:8.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.xyz
+	{mso-style-name:xyz;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:530192825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-406048876 -1919616146 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-style-link:Bullets;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:1463158827;
+	mso-list-template-ids:1196599110;}
+@list l1:level1
+	{mso-level-style-link:"Heading 1";
+	mso-level-text:%1;
+	mso-level-tab-stop:.25in;
+	mso-level-number-position:left;
+	margin-left:.25in;
+	text-indent:-.25in;}
+@list l1:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"%2\)";
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	margin-left:.5in;
+	text-indent:-.25in;}
+@list l1:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"%3\)";
+	mso-level-tab-stop:.75in;
+	mso-level-number-position:left;
+	margin-left:.75in;
+	text-indent:-.25in;}
+@list l1:level4
+	{mso-level-text:"\(%4\)";
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	margin-left:1.0in;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-text:"\(%5\)";
+	mso-level-tab-stop:1.25in;
+	mso-level-number-position:left;
+	margin-left:1.25in;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-text:"\(%6\)";
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	margin-left:1.5in;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:1.75in;
+	mso-level-number-position:left;
+	margin-left:1.75in;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	margin-left:2.0in;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:2.25in;
+	mso-level-number-position:left;
+	margin-left:2.25in;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+<link rel="shortcut icon" href=favicon.ico>
+<link rel=icon href="animated_favicon1.gif" type="image/gif">
+<meta name=keywords
+content="dostips,cmd,commandline,copy,environment,dos,Win,XP,2000,command,batch,for,file,menu,choice,lists,persistency,goto,functions,setlocal,string,parser">
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="3074"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#FEFEFE" lang=EN-US link=blue vlink=purple style='tab-interval:
+.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzTop.htm&quot; \c html <span style='mso-element:field-separator'></span></span><![endif]--><script language="JavaScript">
+<!-- 
+var redi=1; // -->
+</script><span class=xyz><? echo "<script language='JavaScript'><!--\n var redi=0; \n// --></script>"; ?>&nbsp;</span>
+<script language="JavaScript">
+<!--
+if (redi==1) {
+    var l=location.toString().split(".");
+    var l0=l[l.length-2].split("/");
+    var l1=l0[l0.length-1];
+    var l2=l[l.length-1];
+    var target = "https://www.dostips.com/"+l1+".php";
+    document.writeln("<center><H1>This site has been updated.  You will be forwarted to<br><br>\n<a href='" + target + "'>" + target + "</a></H1></center>");
+    for (i=0; i<100; i++) document.writeln("<br>\n");
+    setTimeout("top.location.replace(target)",3000);
+}
+// -->
+</script></p>
+
+<? include 'zTop.php'; ?>
+
+<p class=PageTitle><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'><span style='mso-field-code:" TITLE   \\* MERGEFORMAT "'>DOS - Function
+Collection</span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>The functions listed in this
+section serve as copy source to enhance your batch program.<span
+style='mso-spacerun:yes'>  </span>Simply copy paste the function into your
+batch program and start calling them.<span style='mso-spacerun:yes'> 
+</span>The provided test codes serve as examples on how to call the functions. <o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><!--[if supportFields]><span
+style='color:black'><span style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>TOC \o &quot;1-3&quot; \h \z \u <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586392">1<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Variable Persistency -
+:setPersist, :getPersistentVars, :savePersistentVars, :restorePersistentVars<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1'>  </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586392 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>1</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586393">2<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>String Trimming Left
+and Right - :trim, :trimLeft, :trimRight<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586393 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>2</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586394">3<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>String Length - :strLen<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586394 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>3</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390034000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586395">4<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Time Of Day and runtime
+measurements - :getTod, :getHHMMSSDD, :Tod2Str, :TodDiffNow<span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1'>  </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586395 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>4</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390035000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586396">5<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Circulate thru a List -
+:getNextInList<span style='font-size:12.0pt;font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586396 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>5</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390036000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586397">6<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Choose from List of
+last entered Values - :choiceListInput<span style='font-size:12.0pt;font-family:
+"Times New Roman";color:windowtext;display:none;mso-hide:screen;text-decoration:
+none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586397 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>6</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390037000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586398">7<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Opening the Registry
+Editor at a defined Location - :regedit<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586398 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>9</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390038000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586399">8<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Float &lt;-&gt; Integer
+Conversion - :F2I, :I2F<span style='font-size:12.0pt;font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586399 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>9</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003300390039000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586400">9<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'> </span></span>Extracting text blocks
+from a File - :extractFromFile<span style='font-size:12.0pt;font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586400 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>11</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003400300030000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:.5in right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586401">10<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'>    </span></span>Get THIS computers
+IP address - :getIP<span style='font-size:12.0pt;font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586401 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>13</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003400300031000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:.5in right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586402">11<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'>    </span></span>Wait, Sleep, Hold -
+:sleep<span style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586402 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>13</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003400300032000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:.5in right dotted 431.5pt'><span
+class=MsoHyperlink><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+mso-no-proof:yes'><a href="#_Toc128586403">12<span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1'>    </span></span>Progress Indicator -
+:initProgress, :doProgress<span style='font-size:12.0pt;font-family:"Times New Roman";
+color:windowtext;display:none;mso-hide:screen;text-decoration:none;text-underline:
+none'><span style='mso-tab-count:1 dotted'>. </span></span><!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-begin'></span></span><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'> PAGEREF _Toc128586403 \h </span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'>13</span><span
+style='font-size:12.0pt;font-family:"Times New Roman";color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003100320038003500380036003400300033000000</w:data>
+</xml><![endif]--></span><!--[if supportFields]><span style='font-size:12.0pt;
+font-family:"Times New Roman";color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-element:field-end'></span></span><![endif]--></a></span></span><span
+style='mso-no-proof:yes'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='color:
+black'>&nbsp;</span><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;mso-bidi-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='color:black'>&nbsp;&nbsp;<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;mso-padding-alt:0in 0in 0in 0in'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586392"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>1<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Variable Persistency
+  - :setPersist, :getPersistentVars, :savePersistentVars,
+  :restorePersistentVars</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Variable persistency can be
+  archived by storing the variable of interest into a file when the DOS batch
+  terminates and read them back in when the DOS batch starts up.<span
+  style='mso-spacerun:yes'>  </span>The <b style='mso-bidi-font-weight:normal'>setPersist</b>
+  function marks a variable to be persistent.<span style='mso-spacerun:yes'> 
+  </span>The <b style='mso-bidi-font-weight:normal'>savePersistentVars</b>
+  function stores the persistent variables into a file.<span
+  style='mso-spacerun:yes'>  </span>The <b style='mso-bidi-font-weight:normal'>restorePersistentVars</b>
+  function reads the variables back in from a file.</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>What
+  it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Remembering the
+  state of the batch program for the next run<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Allow user profiles<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Store information to
+  be used in the next run<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Implement execution
+  counters<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:setPersist</span></b><span
+  style='color:black'> -- to be called to initialize persistent variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>-- %*: set command arguments<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set %*<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:getPersistentVars</span></b><span
+  style='color:black'> -- returns a comma separated list of persistent
+  variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>  </span>-- %~1: reference to return
+  variable <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set retlist=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set parse=findstr /i
+  /c:&quot;call:setPersist&quot; &quot;%~f0%&quot;^|find /v
+  &quot;ButNotThisLine&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=2 delims== &quot;
+  %%a in ('&quot;%parse%&quot;') do (set retlist=!retlist!%%a,)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%retlist%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:savePersistentVars</span></b><span
+  style='color:black'> -- Save values of persistent variables into a file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~1: file name<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.&gt;&quot;%~1&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call :getPersistentVars persvars<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for %%a in (%persvars%) do (echo.SET
+  %%a=!%%a!&gt;&gt;&quot;%~1&quot;)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:restorePersistentVars</span></b><span
+  style='color:black'> -- Restore the values of the persistent variables<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~1: batch file name
+  to restore from<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if exist &quot;%FilePersist%&quot;
+  call &quot;%FilePersist%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>rem.--define the filename where
+  persistent variables get stored<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.<span style='mso-spacerun:yes'> 
+  </span>just add a + to the name of THIS file, i.e. &quot;DosTips.bat&quot; -
+  &quot;DosTips+.bat&quot;<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>set FilePersist=%~dpn0+%~x0<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--initialize the persistent
+  variables<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:setPersist</span></b><span
+  style='color:black'> var=Hello<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--read the persistent variables
+  from the storage<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:restorePersistentVars
+  &quot;%FilePersist%&quot;<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--modify the persistent variable<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var = '%var%'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Enter new string for var then
+  run the batch again.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p var=var = <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--save the persistent variables
+  to the storage<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:savePersistentVars
+  &quot;%FilePersist%&quot;<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>var = 'Hello'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Enter new string for var then run the
+  batch again.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586393"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>2<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>String Trimming Left
+  and Right - :trim, :trimLeft, :trimRight</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Three functions to trim spaces
+  around a value, i.e. left, right, left and right.</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:trimLeft </span></b><span
+  style='color:black'>-- trim leading spaces<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>    </span>-- %~1: variable reference, string
+  to be trimmed<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=* delims= &quot;
+  %%a in (&quot;!%~1!&quot;) do set %~1=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<b><o:p></o:p></b></span></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:trimRight </span></b><span
+  style='color:black'>-- trim trailing spaces<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>     </span>-- %~1: variable reference, string
+  to be trimmed<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=!%~1!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:trimRight_LOOP<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%s:~-1%&quot;==&quot; &quot;
+  set s=%s:~0,-1%&amp;goto:trimRight_LOOP<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>(ENDLOCAL &amp; REM.-- RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%s%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>:trim </span></b><span
+  style='color:black'>-- trim leading and trailing spaces<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span style='mso-spacerun:yes'>    
+  </span>-- %~1: variable reference, string to be trimmed<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:trimLeft %~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:trimRight %~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<b><o:p></o:p></b></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>set s=left trim nothing&amp;<span
+  style='mso-spacerun:yes'>   </span>call:trimLeft
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s= left trim one&amp;<span
+  style='mso-spacerun:yes'> </span>call:trimLeft
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=<span
+  style='mso-spacerun:yes'>    </span>left trim
+  plenty&amp;call:trimLeft s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=right trim nothing&amp;<span
+  style='mso-spacerun:yes'>  </span>call:trimRight
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=right trim one &amp;<span
+  style='mso-spacerun:yes'>     </span>call:trimRight
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=right trim plenty<span
+  style='mso-spacerun:yes'>   </span>&amp;call:trimRight
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=trim nothing&amp;<span
+  style='mso-spacerun:yes'>   </span>call:trim
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s= trim one left and one right
+  &amp;<span style='mso-spacerun:yes'> </span>call:trim
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set s=<span
+  style='mso-spacerun:yes'>    </span>trim plenty left and right<span
+  style='mso-spacerun:yes'>     </span>&amp;call:trim
+  s&amp;echo.&quot;!s!&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>&quot;left trim nothing&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;left trim one&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;left trim plenty&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;right trim nothing&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;right trim one&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;right trim plenty&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;trim nothing&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;trim one left and one
+  right&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;trim plenty left and
+  right&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586394"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>3<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>String Length -
+  :strLen</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>The :strLen function uses a
+  binary search approach to determine the length of a string.</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:strLen</span></b><span
+  style='color:black'> -- returns the length of a string via binary search, maximum
+  length 1023<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~1: in - varible name of a string
+  variable<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~2: out- string length<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set str=A!%~1!&amp;<span
+  style='mso-spacerun:yes'>  </span>rem keep the A up front to ensures we get
+  the length and not the upper bond<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>rem it also avoids trouble in
+  case of empty string<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set len=0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n=1024<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a n^&gt;^&gt;=1, len+=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span>if !str:~%len%!. == . set /a len-=n<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~2&quot; NEQ &quot;&quot; SET %~2=%len%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>for /l %%a in (0,1,10) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set s=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>for /l %%b in (0,1,%%a) do if /i %%b NEQ 0 set s=!s!x<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>call:strLen s len<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.&quot;!s!&quot; - length !len!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:21'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>&quot;&quot; - length 0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;x&quot; - length 1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xx&quot; - length 2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxx&quot; - length 3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxx&quot; - length 4<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxx&quot; - length 5<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxxx&quot; - length 6<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxxxx&quot; - length 7<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxxxxx&quot; - length 8<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxxxxxx&quot; - length 9<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>&quot;xxxxxxxxxx&quot; - length 10<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:22'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586395"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>4<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Time Of Day and
+  runtime measurements - :getTod, :getHHMMSSDD, :Tod2Str, :TodDiffNow</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:23'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>The <b style='mso-bidi-font-weight:
+  normal'>getTod</b> function returns a Time Of Day (Tod) integer value with a
+  precision of 1/100<sup>th</sup> of a second.<span style='mso-spacerun:yes'> 
+  </span>Together with the other functions this can be used for time capture
+  calculations like runtime measurements.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The getHHMMSSDD function allows
+  extracting the hours, minutes, seconds, and 1/100<sup>th</sup> of seconds
+  from a Tod integer.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The Tod2Str function allows to
+  freely format a Tod integer into a string, i.e. put the seconds, hours,
+  minutes where you want them. <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:24'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>What it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Runtime measurement<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:25'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Limits<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>No corrector for
+  days where daylight saving time is being turned on or off<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:26'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:getTod</span></b><span
+  style='color:black'> -- get a Time of Day value in 1/100th seconds<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span style='mso-spacerun:yes'>  
+  </span>-- %~1: out - timo of day<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a t=0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=1-4
+  delims=:.&quot; %%a in (&quot;%time: =0%&quot;) do set /a
+  t=(((1%%a*60)+1%%b)*60+1%%c)*100+1%%d-36610100<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%t%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:getHHMMSSDD</span></b><span
+  style='color:black'> -- split a Time Of Day integer into hours, minutes,
+  seconds, 1/100th<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~1: in<span
+  style='mso-spacerun:yes'>  </span>- time of day as integer<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~2: out - hours<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~3: out - minutes<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~4: out - seconds<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'> </span>-- %~5: out - 1/100th<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a t=%~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a hh=t/360000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a t-=hh*360000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a mm=t/6000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a t-=mm*6000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a ss=t/100<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a t-=ss*100<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~2&quot; NEQ &quot;&quot; SET %~2=%hh%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~3&quot; NEQ &quot;&quot; SET %~3=%mm%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~4&quot; NEQ &quot;&quot; SET %~4=%ss%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~5&quot; NEQ &quot;&quot; SET %~5=%t%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:Tod2Str</span></b><span
+  style='color:black'> -- format a Time Of Day integer into a time string<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~1: out - output string<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~2: in<span
+  style='mso-spacerun:yes'>  </span>- time of day<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~3: in<span
+  style='mso-spacerun:yes'>  </span>- formatter string, default is HH:MM:SS.DD<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set tod=%~2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=%~3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%f%&quot;==&quot;&quot; set
+  f=[TTTT]&amp;<span style='mso-spacerun:yes'>  </span>rem --if no
+  format given assume [TTTT] format<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set
+  f=%f:[TTTT]=[H]:[MM]:[SS].[DD]%&amp;<span style='mso-spacerun:yes'> 
+  </span>rem --replace [TTTT] with the default format<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:getHHMMSSDD tod h m s
+  d&amp;<span style='mso-spacerun:yes'>    </span>rem --extract the
+  numbers from the Time Of Day value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem -- ensure two digits, add leading
+  0 where necessarily<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set HH=0!h!&amp;set HH=!HH:~-2!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set MM=0!m!&amp;set MM=!MM:~-2!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set SS=0!s!&amp;set SS=!SS:~-2!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set DD=0!d!&amp;set DD=!DD:~-2!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem -- replace the format specifyiers
+  with real values<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[HH]=%HH%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[MM]=%MM%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[SS]=%SS%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[DD]=%DD%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[H]=%h%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[M]=%m%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[S]=%s%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!f:[D]=%d%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; (SET %~1=%f%) ELSE (ECHO.%f%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:TodDiffNow</span></b><span
+  style='color:black'> -- echos the time of day difference of Now-Base<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>-- %~1: in - Base time as variable<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>-- %~2: in - formatter string,
+  default is HH:MM:SS.DD<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>-- %~3: out- diff time or empty for
+  screen output<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set base=!%~1!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:getTod curr&amp;<span
+  style='mso-spacerun:yes'>     </span>rem --get the current
+  Time Of Day<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a diff=curr-base&amp;<span
+  style='mso-spacerun:yes'>   </span><span
+  style='mso-spacerun:yes'>  </span>rem --subtract the base to get the
+  difference<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /i diff LSS 0
+  diff+=24*60*60*100&amp; rem --when measuring over midnight add a full day<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:Tod2Str s %diff%
+  &quot;%~2&quot;&amp;<span style='mso-spacerun:yes'>    </span>rem
+  --format the difference as string<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~3&quot; NEQ &quot;&quot; (SET %~3=%s%) ELSE (ECHO.%s%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:27'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:28'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>Test
+  Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set delay=5<o:p></o:p></span></p>
+  <p class=Code><b><span style='mso-bidi-font-size:10.0pt;color:black'>call:getTod
+  t<o:p></o:p></span></b></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>echo.Starting
+  a %delay%s delay via ping...<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>FOR /l %%a
+  in (%delay%,-1,1) do ping -n 2 -w 1 127.0.0.1&gt;NUL<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>echo....finished.<o:p></o:p></span></p>
+  <p class=Code><b><span style='mso-bidi-font-size:10.0pt;color:black'>call:TodDiffNow
+  t &quot;The %delay%s delay via ping really took [TTTT]&quot;<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:29'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:30'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>Test
+  Code Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>Starting a 5s delay via ping...<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>...finished.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>The 5s delay via ping really took
+  0:00:06.39<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:31'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:32'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586396"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>5<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Circulate thru a
+  List - :getNextInList</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:33'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>The <b style='mso-bidi-font-weight:
+  normal'>getNextInList</b> function allows a variable to circulate thru a set
+  of values.<span style='mso-spacerun:yes'>  </span>Each time calling this
+  function the next entry in the choice list will be returned.<span
+  style='mso-spacerun:yes'>  </span>After passing the last entry the function
+  will start again with the first entry.</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:34'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>What it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Creating a state automat
+  in DOS<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Let the user
+  circulate through option rather than force typing.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:35'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:getNextInList</span></b><span
+  style='color:black'> -- return next value in list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~1 - in/out ref to current
+  value, returns new value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>   </span>-- %~2 - in<span
+  style='mso-spacerun:yes'>     </span>choice list, must start with delimiter
+  which must not be '@'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set lst=%~2&amp;<span
+  style='mso-spacerun:yes'>   </span>rem.-- get the choice list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%lst:~0,1%&quot; NEQ
+  &quot;%lst:~-1%&quot; echo.ERROR Choice list must start and end with the
+  delimiter&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set dlm=%lst:~-1%&amp;<span
+  style='mso-spacerun:yes'>  </span>rem.-- extract the delimiter used<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set old=!%~1!&amp;<span
+  style='mso-spacerun:yes'> </span>rem.-- get the current value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set fst=&amp;for /f
+  &quot;delims=%dlm%&quot; %%a in (&quot;%lst%&quot;) do set
+  fst=%%a&amp;rem.--get the first entry<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>     </span>rem.-- replace the
+  current value with a @, append the first value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set lll=!lst:%dlm%%old%%dlm%=%dlm%@%dlm%!%fst%%dlm%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>     </span>rem.-- get the
+  string after the @<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=2 delims=@&quot;
+  %%a in (&quot;%lll%&quot;) do set lll=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>     </span>rem.-- extract the
+  next value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;delims=%dlm%&quot; %%a
+  in (&quot;%lll%&quot;) do set new=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; (SET %~1=%new%) ELSE (echo.%new%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:36'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:37'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>rem.--modify the persistent variable<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set choiceList=,MO,TU,WE,TH,FR,SA,SU,<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.choice list =
+  &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set var=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var = '%var%'&amp;call:getNextInList
+  var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.var =
+  '%var%'&amp;call:getNextInList var &quot;%choiceList%&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:38'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:39'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>choice list =
+  &quot;,MO,TU,WE,TH,FR,SA,SU,&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = ''<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'MO'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'TU'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'WE'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'TH'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'FR'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'SA'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'SU'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'MO'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var = 'TU'<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:40'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Note<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>If var starts out empty or with
+  a bogus value then the getNextInChoiceList function will assign the first
+  value in the choice list, which is nice default behavior.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:41'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586397"></a><a name="_Toc123313340"></a><![if !supportLists]><span
+  style='mso-bookmark:_Toc128586397'><span style='mso-bidi-font-family:"Times New Roman";
+  color:black'><span style='mso-list:Ignore'>6<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span></span><![endif]><span style='mso-bookmark:_Toc128586397'><span
+  style='color:black'>Choose from List of last entered Values -
+  :choiceListInput</span></span><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:42'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>The <b style='mso-bidi-font-weight:
+  normal'>choiceListInput</b> function lets the user enter a value.<span
+  style='mso-spacerun:yes'>  </span>The value entered is returned by the
+  function and added to the end of a choice list.<span
+  style='mso-spacerun:yes'>  </span>The choice list is shown next time this
+  function is being called, and thus allows the user to pick from the list of
+  last entered value.<span style='mso-spacerun:yes'>  </span>The last chosen or
+  newly entered value is added to the end of the choice list and acts as
+  default input next time this function is being called.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The choice list is being stored
+  into a variable.<span style='mso-spacerun:yes'>  </span>The name of this
+  variable is to be passed into the function, which allows this function to be
+  called using different choice lists.<span style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:43'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>What it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Increases user
+  efficiency<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Allows picking
+  number from list instead of having to enter a long strings<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Only need to pick a
+  value when different from last run, otherwise just hit enter<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:44'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Tip<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Make the choice list variable
+  persistent in order to have it available over multiple batch file executions.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:45'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:choiceListInput</span></b><span
+  style='color:black'> - lets the user choose from list of last entered values<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'> </span>-- %~1 - out, returns input
+  value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'> </span>-- %~2 - in/out, ref to
+  choice list, returns trimmed reordered choice list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'> </span>-- %~3 - in, list title<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'> </span>-- %~4 - in, list entry count
+  limit<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l=,!%~2!,&amp;<span
+  style='mso-spacerun:yes'>     </span>rem.-- get the choice list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set t=%~3&amp;<span
+  style='mso-spacerun:yes'>    </span>rem.-- get the list title<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set c=%~4&amp;<span
+  style='mso-spacerun:yes'>    </span>rem.-- get the list entry count
+  limit<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set m=&amp;<span
+  style='mso-spacerun:yes'>  </span>rem.-- a message<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l2=,<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:choiceListInput_LOOP1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.%t%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set i=0&amp;for %%a in (%l%) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'> </span><span style='mso-spacerun:yes'>   </span>set
+  /a i+=1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set l2=!l2!!i!;%%~a,<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set v=%%~a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.<span style='mso-spacerun:yes'>  </span>!i! - %%~a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%m%&quot; NEQ &quot;&quot;
+  echo.<span style='mso-spacerun:yes'>  </span>^&gt;^&gt; %m%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [%v%]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v1=%v%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p v1=<span
+  style='mso-spacerun:yes'>  </span>: <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v2=!v1!&amp;set
+  v2=!v2:,=!&amp;set v2=!v2:@=!&amp;set v2=!v2:;=!&amp;set v2=!v2:&quot;=!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--reject entry with illegal
+  character<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;!v1!&quot; NEQ
+  &quot;!v2!&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set m=Note: ,;@&quot; and empty string not allowed.<span
+  style='mso-spacerun:yes'>  </span>Try again.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>goto:choiceListInput_LOOP1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--if first character is minus
+  then remove the entry<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set remove=&amp;if &quot;%v1:~0,1%&quot;==&quot;-&quot;
+  set remove=y&amp;set v1=%v1:~1%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set v=%v1%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--if number chosen then find
+  corresponding value<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l3=!l2:,%v%;=,@!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%l3%&quot; NEQ
+  &quot;%l2%&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>for /f &quot;delims=@ tokens=2&quot; %%a in (&quot;!l3!&quot;) do set
+  l3=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>for /f &quot;delims=,&quot;<span style='mso-spacerun:yes'>         
+  </span>%%a in (&quot;!l3!&quot;) do set v=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--remove value from list if exist<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l3=%l%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l=!l:,%v%,=,!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if
+  &quot;%remove%&quot;==&quot;y&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>if &quot;%l%&quot;==&quot;%l3%&quot; (set m='%v%' cannot be removed
+  from list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>) ELSE (set m='%v%' has been removed from list)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>goto:choiceListInput_LOOP1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%l%&quot;==&quot;%l3%&quot;
+  echo.<span style='mso-spacerun:yes'>  </span>^&gt;^&gt;'%v%' has been added
+  to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--add to the value to the end<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set l=!l:~1!%v%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--enforce the list entry count
+  limit if requested<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%c%&quot; NEQ &quot;&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set i=0&amp;for %%a in (%l%) do set /a i+=1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>if /i !i! GTR !c! (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>for /f &quot;delims=,
+  tokens=1,*&quot; %%a in (&quot;!l!&quot;) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>set l=%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>echo.<span
+  style='mso-spacerun:yes'>  </span>^&gt;^&gt;'%%a' dropped out of the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; (SET %~1=%v%) ELSE (echo.%v%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~2&quot; NEQ &quot;&quot; (SET %~2=%l%) ELSE (echo.%l%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>goto :eof<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:46'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:47'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test&nbsp;Code</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>if &quot;%~1&quot;==&quot;&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set z=%~dpn0.tmp<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>if exist &quot;!z!&quot; <st1:place w:st="on"><st1:State w:st="on">del</st1:State></st1:place>
+  &quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.a&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.b&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.c&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.d&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.2&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.-d&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.-1&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span><span style='mso-spacerun:yes'>  </span>echo.-1&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.z&gt;&gt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>&quot;%~f0&quot; auto&lt;&quot;!z!&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>rem.--modify the persistent variable<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>set choiceList=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set var=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:choiceListInput var choiceList
+  &quot;Selection List:&quot; 3&amp;echo.<span style='mso-spacerun:yes'> 
+  </span>--'!var!' has been selected<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:48'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value []<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'a' has been added to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'a' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [a]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'b' has been added to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'b' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [b]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'c' has been added to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'c' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>3 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [c]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'d' has been added to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'a' dropped out of the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'d' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>3 - d<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [d]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'d' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>3 - d<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [d]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'c' has been selected<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - d<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>3 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [c]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>2 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt; 'd' has been removed from list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [c]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt; 'b' has been removed from list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [c]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Selection List:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>1 - c<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt; 'b' cannot be removed from list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>Make a choice or enter a new value [c]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>&gt;&gt;'z' has been added to the list<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'> 
+  </span>--'z' has been selected<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:49'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:50'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  mso-border-bottom-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <h1><a name="_Toc128586398"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>7<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Opening the Registry
+  Editor at a defined Location - :regedit</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:51'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;mso-bidi-font-family:"Times New Roman";color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>When opening the registry editor
+  <b style='mso-bidi-font-weight:normal'>regedit.exe</b> it will have the last
+  registry key remembered and opens right where the user left off the last time
+  running it.<span style='mso-spacerun:yes'>  </span>The last registry key is
+  being remembered in the registry itself using the <b style='mso-bidi-font-weight:
+  normal'>LastKey</b> value in <b style='mso-bidi-font-weight:normal'>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit</b>.<span
+  style='mso-spacerun:yes'>  </span>To have <b style='mso-bidi-font-weight:
+  normal'>regedit.exe</b> open up at a specific location we just have to set
+  the <b style='mso-bidi-font-weight:normal'>LastKey</b> value properly before
+  invoking the regedit.exe.<span style='mso-spacerun:yes'>  </span>The <b
+  style='mso-bidi-font-weight:normal'>regedit </b>function </span><span
+  style='font-size:9.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-bidi-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:52'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>What is it good for<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Increasing user
+  efficiency<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Shortcut for
+  frequently observed registry entries<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:53'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Code</span><span
+  style='font-size:9.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-bidi-font-family:"Times New Roman";color:black'><o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'
+  x:str="'@echo off&#10;rem.--- Prepare the Command Processor ---&#10;SETLOCAL ENABLEEXTENSIONS&#10;SETLOCAL ENABLEDELAYEDEXPANSION">
+  <p class=Code><b><span style='mso-bidi-font-size:10.0pt;color:black'>:regedit</span></b><span
+  style='mso-bidi-font-size:10.0pt;color:black'> - opens the regedit at a
+  defined location<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %~1 - location<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set
+  StartKey=%~1<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set
+  tmpfile=%Temp%\RegeditLastKey.reg&amp;<span style='mso-spacerun:yes'>     
+  </span>rem --use a temporary .reg file to be imported via regedit<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>set
+  StartKey=%StartKey:\=\\%&amp;<span style='mso-spacerun:yes'>              
+  </span>rem --double up the back slashes<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>echo.Windows
+  Registry Editor Version 5.00&gt;&quot;%tmpfile%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>echo.[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit]&gt;&gt;&quot;%tmpfile%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>echo.&quot;LastKey&quot;=&quot;%StartKey%&quot;&gt;&gt;&quot;%tmpfile%&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>regedit /s
+  &quot;%tmpfile%&quot;&amp;<span style='mso-spacerun:yes'>                    
+  </span>rem --import the temporary .reg file<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>start /b
+  regedit&amp;<span style='mso-spacerun:yes'>                          
+  </span>rem --launch the registry editor and continue<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:54'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Code><b><span style='mso-bidi-font-size:10.0pt;color:black'><o:p>&nbsp;</o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:55'>
+  <td valign=top style='padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code<o:p></o:p></span></p>
+  </td>
+  <td valign=top style='background:#CCFFCC;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>REM --this
+  example WILL open the registry editor at HKEY_CURRENT_USER\Software\Microsoft<o:p></o:p></span></p>
+  <p class=Code><span style='mso-bidi-font-size:10.0pt;color:black'>call:regedit
+  &quot;HKEY_CURRENT_USER\Software\Microsoft&quot;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:56'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586399"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>8<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Float &lt;-&gt;
+  Integer Conversion - :F2I, :I2F</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:57'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>DOS does not support floating
+  point arithmetic.<span style='mso-spacerun:yes'>  </span>However with a
+  little trick floating point arithmetic is still possible.<span
+  style='mso-spacerun:yes'>  </span>A string storing a floating point value can
+  be converted into an integer using the <b style='mso-bidi-font-weight:normal'>F2I</b>
+  function.<span style='mso-spacerun:yes'>  </span>To preserve precision the
+  float will be multiplied by 10, 100, 1000, or more so that the fractions move
+  into the integer part of the value.<span style='mso-spacerun:yes'> 
+  </span>Having an integer now the value can be used in calculation using
+  standard DOS commands.<span style='mso-spacerun:yes'>  </span>At the end the
+  integer can be converted back into a float using the <b style='mso-bidi-font-weight:
+  normal'>I2F</b> function.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>This
+  works perfect for additions and subtractions.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>The
+  result of a multiplication of two factors will need to be divided by the
+  correcting factor 10, 100, 1000, or whatever was used.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>In
+  a division it is necessarily to multiply the dividend first the correcting
+  factor 10, 100, 1000, or whatever was used.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:58'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code&nbsp;</span><span
+  style='font-size:9.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:F2I</span></b><span
+  style='color:black'><span style='mso-spacerun:yes'>     </span>--
+  float to integer<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %~1: var ref, for in
+  place conversion<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %~2: precision<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=!%~1!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a prec=%~2 + 1&amp;rem.--keep
+  one more for rounding <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set nnn=&amp;for /l %%n in
+  (1,1,%prec%) do set nnn=!nnn!0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set mul=1%nnn%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=1,2 delims=.
+  &quot; %%a in (&quot;%f%&quot;) do (set f1=%%a&amp;set f2=%%b%nnn%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f2=1!f2:~0,%prec%!&amp;rem.--HexCludge--need
+  the 1 up front to not be confused with hex<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a i=f1*mul+f2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a i+=5&amp;rem.--ensure correct
+  rounding<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a
+  i-=mul&amp;rem.--HexCludge--need to subtract the 1 added earlier<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set i=%i:~0,-1%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>(ENDLOCAL &amp; REM.-- RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%i%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:I2F</span></b><span
+  style='color:black'><span style='mso-spacerun:yes'>     </span>--
+  integer to float<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %~1: var ref, for in
+  place conversion<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>:<span
+  style='mso-spacerun:yes'>   </span>-- %~2: precision<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set i=!%~1!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set prec=%~2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set nnn=&amp;for /l %%n in
+  (1,1,%prec%) do set nnn=!nnn!0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set mul=1%nnn%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a f1=i/mul<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a f2=i%%mul<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f2=%nnn%%f2%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f2=!f2:~-%prec%!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set f=%f1%.%f2%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>(ENDLOCAL &amp; REM.-- RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; SET %~1=%f%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:59'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:60'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code</span><span style='font-size:9.0pt;font-family:
+  Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>echo.Example conversion Float to
+  Integer<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=3.03<span
+  style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=1.1<span
+  style='mso-spacerun:yes'>   </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=1.1114<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=1.1115<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=9.9994<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set x=9.9995<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3&amp;echo.%x%<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>!x!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Example conversion Integer to
+  Float<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=1<span
+  style='mso-spacerun:yes'>     </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=12<span
+  style='mso-spacerun:yes'>    </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=123<span
+  style='mso-spacerun:yes'>   </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=1000<span
+  style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=1234<span
+  style='mso-spacerun:yes'>  </span><o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set y=12345 <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:I2F y 3&amp;echo.%y%<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>!y!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p x=Input x=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /p y=Input y=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I x 3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:F2I y 3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set calc=x*y &amp; set /a
+  z=!calc!/1000 &amp; call:I2F z 3 &amp; echo.!calc!= !z!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set calc=x/y &amp; set /a z=1000*!calc!
+  &amp; call:I2F z 3 &amp; echo.!calc!= !z!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set calc=x+y &amp; set /a
+  z=!calc!<span style='mso-spacerun:yes'> </span>&amp; call:I2F z 3 &amp;
+  echo.!calc!= !z!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set calc=x-y &amp; set /a
+  z=!calc!<span style='mso-spacerun:yes'> </span>&amp; call:I2F z 3 &amp;
+  echo.!calc!= !z!<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:61'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:62'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='mso-bidi-font-size:9.0pt;mso-bidi-font-family:
+  Arial;color:black'>Test Code Output</span><span style='font-size:9.0pt;
+  font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>Example conversion Float to Integer<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>3.03<span
+  style='mso-spacerun:yes'>     </span>F2I<span style='mso-spacerun:yes'>  
+  </span>3030<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1.1<span
+  style='mso-spacerun:yes'> </span>F2I<span style='mso-spacerun:yes'>  
+  </span>1100<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1.1114<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>1111<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1.1115<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>1112<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>9.9994<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>9999<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>9.9995<span
+  style='mso-spacerun:yes'>   </span>F2I<span style='mso-spacerun:yes'>  
+  </span>10000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Example conversion Integer to Float<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1<span
+  style='mso-spacerun:yes'>   </span>I2F<span style='mso-spacerun:yes'>  
+  </span>0.001<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>12<span
+  style='mso-spacerun:yes'>  </span>I2F<span style='mso-spacerun:yes'>  
+  </span>0.012<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>123<span
+  style='mso-spacerun:yes'> </span>I2F<span style='mso-spacerun:yes'>  
+  </span>0.123<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1000<span
+  style='mso-spacerun:yes'>     </span>I2F<span style='mso-spacerun:yes'>  
+  </span>1.000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>1234<span
+  style='mso-spacerun:yes'>     </span>I2F<span style='mso-spacerun:yes'>  
+  </span>1.234<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>12345<span
+  style='mso-spacerun:yes'>    </span>I2F<span style='mso-spacerun:yes'>  
+  </span>12.345<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Input x=12.12<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Input y=3.03<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>x*y = 36.723<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>x/y = 4.000<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>x+y = 15.150<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>x-y = 9.090<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:63'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586400"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>9<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Extracting text
+  blocks from a File - :extractFromFile</span></a><span style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:64'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>The
+  </span><b style='mso-bidi-font-weight:normal'><span style='color:black'>extractFromFile</span></b><span
+  style='color:black'> function allows extracting blocks of lines from a file
+  the extracted block will be send to the output window or can optionally be
+  piped into a file.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>Each block is identified by a
+  begin marker and an optional end marker.<span style='mso-spacerun:yes'> 
+  </span>If the end marker is omitted then the extraction stops at the end of
+  the file.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>If
+  begin marker can be any string that is unique with in the file.<span
+  style='mso-spacerun:yes'>  </span>If the begin marker end with a $ sign then
+  all variables used in the block are being substituted by its values.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:65'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>What
+  it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Compact DOS batch,
+  easy distribution<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Embedding text
+  blocks within the batch file itself to be extracted at runtime<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>I.e. Embed a FTP
+  script or a registry script within the DOS batch file <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:66'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:extractFromFile</span></b><span
+  style='color:black'> - extract lines from a file between begin and end mark<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>- %~1: begin mark, use '...$'
+  mark to allow variable substitution<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>- %~2: optional end mark,
+  default is end of file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>- %~3: optional source file,
+  default is THIS file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set bmk=%~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set emk=%~2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set src=%~3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a b=-1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a e=-1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%src%&quot;==&quot;&quot;
+  set src=%~f0&amp;<span style='mso-spacerun:yes'>   </span>::- if no
+  source file then assume THIS file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=1,*
+  delims=:&quot; %%a in ('&quot;findstr /n /b /c:&quot;%bmk%&quot;
+  &quot;%~f0&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set b=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set bmk=%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if<span style='mso-spacerun:yes'> 
+  </span>/i %b%==-1<span style='mso-spacerun:yes'>    </span>echo.ERROR: begin
+  mark '%bmk%' not found in '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%emk%&quot;==&quot;&quot;
+  (set /a e=2000000000) ELSE (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>for /f &quot;delims=:&quot; %%a in ('&quot;findstr /n /b
+  /c:&quot;%emk%&quot; &quot;%~f0&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>if /i %b% LSS %%a if /i !e!==-1 set
+  e=%%a&amp;<span style='mso-spacerun:yes'>  </span>rem -- find only the first one
+  after b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /i %e%==-1<span
+  style='mso-spacerun:yes'>     </span>echo.ERROR: end mark '%emk%' missing in
+  '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /i %b% GEQ %e% echo.ERROR: end
+  mark '%emk%' detected before begin mark '%bmk%' in '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;delims=:
+  tokens=1,*&quot; %%a in ('&quot;findstr /v /n /b /c:&quot;#$*ReturnAll*$#&quot;
+  &quot;%src%&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>if /i %b% LSS %%a if /i %%a LSS %e% (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>if
+  &quot;%bmk:~-1%&quot;==&quot;$&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>rem --substitution variables
+  within %%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>call echo.%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>) ELSE (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>rem --no variable substitution<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>echo.%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:67'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:68'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>@ECHO OFF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Prepare the Command Processor<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Extracting hello world block
+  into &quot;HelloWorld.bat&quot; file<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:extractFromFile
+  &quot;###Hello&quot; &quot;###&quot;</span></b><span style='color:black'>&gt;&quot;HelloWorld.bat&quot;<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>set var=This variable will been
+  substituted :)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Extracting a block to screen
+  with variable substitution<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:extractFromFile
+  &quot;###SubstBlock&quot; &quot;###&quot;<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>echo.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Extracting a block to screen
+  as-is<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:extractFromFile &quot;###AsIsBlock&quot;<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>:skip<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- End of application<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>FOR /l %%a in (5,-1,1) do (TITLE
+  %title% -- closing in %%as&amp;ping -n 2 -w 1 127.0.0.1&gt;NUL)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>TITLE Press any key to close the
+  application&amp;ECHO.&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>::------------------------------------------------------------------<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::-- functions start below here<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::------------------------------------------------------------------<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:extractFromFile</span></b><span
+  style='color:black'> - extract lines from a file between begin and end mark<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span><span
+  style='mso-spacerun:yes'>     </span>- %~1: begin mark, use '...$' mark to
+  allow variable substitution<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>- %~2: optional end mark,
+  default is end of file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>     </span>- %~3: optional source file,
+  default is THIS file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set bmk=%~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set emk=%~2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set src=%~3<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a b=-1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a e=-1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%src%&quot;==&quot;&quot;
+  set src=%~f0&amp;<span style='mso-spacerun:yes'>   </span>::- if no
+  source file then assume THIS file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=1,*
+  delims=:&quot; %%a in ('&quot;findstr /n /b /c:&quot;%bmk%&quot;
+  &quot;%~f0&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set b=%%a<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>set bmk=%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if<span style='mso-spacerun:yes'> 
+  </span>/i %b%==-1<span style='mso-spacerun:yes'>    </span>echo.ERROR: begin
+  mark '%bmk%' not found in '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if &quot;%emk%&quot;==&quot;&quot;
+  (set /a e=2000000000) ELSE (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>for /f &quot;delims=:&quot; %%a in ('&quot;findstr /n /b
+  /c:&quot;%emk%&quot; &quot;%~f0&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>if /i %b% LSS %%a if /i !e!==-1 set
+  e=%%a&amp;<span style='mso-spacerun:yes'>  </span>rem -- find only the first
+  one after b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /i %e%==-1<span
+  style='mso-spacerun:yes'>     </span>echo.ERROR: end mark '%emk%' missing in
+  '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if /i %b% GEQ %e% echo.ERROR: end
+  mark '%emk%' detected before begin mark '%bmk%' in '%src%'&amp;GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;delims=:
+  tokens=1,*&quot; %%a in ('&quot;findstr /v /n /b
+  /c:&quot;#$*ReturnAll*$#&quot; &quot;%src%&quot;&quot;') do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>if /i %b% LSS %%a if /i %%a LSS %e% (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>if
+  &quot;%bmk:~-1%&quot;==&quot;$&quot; (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>rem --sustitution variables
+  within %%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>call echo.%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>) ELSE (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>rem --no variable substitution<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>  </span>echo.%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span
+  style='mso-spacerun:yes'>   </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>::------------------------------------------------------------------<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::-- blocks start below here<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::------------------------------------------------------------------<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>###Hello###<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'>@ECHO OFF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>ECHO.Hello world<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>ECHO.<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>PAUSE<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO.EOF<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>###<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>###SubstBlock###$<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'>Arg 0 = %~0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~d0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~nx0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>mark<span style='mso-spacerun:yes'> 
+  </span>= %bmk%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var<span style='mso-spacerun:yes'>  
+  </span>= %var%<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>###<o:p></o:p></span></b></p>
+  <p class=Code><b><span style='color:black'><o:p>&nbsp;</o:p></span></b></p>
+  <p class=Code><b><span style='color:black'>###AsIsBlock###<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'>Arg 0 = %~0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~d0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~nx0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>mark<span style='mso-spacerun:yes'> 
+  </span>= %bmk%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var<span style='mso-spacerun:yes'>  
+  </span>= %var%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:69'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:70'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>Extracting hello world block into
+  &quot;HelloWorld.bat&quot; file<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Extracting a block to screen with
+  variable substitution<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Arg 0 = :extractFromFile<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = C:<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = myExtract.cmd<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>mark<span style='mso-spacerun:yes'> 
+  </span>= ###SubstBlock###$<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var<span style='mso-spacerun:yes'>  
+  </span>= This variable will been substituted :)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>Extracting a block to screen as-is<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Arg 0 = %~0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~d0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>batch = %~nx0<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>mark<span style='mso-spacerun:yes'> 
+  </span>= %bmk%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>var<span style='mso-spacerun:yes'>  
+  </span>= %var%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:71'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586401"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>10<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+  style='color:black'>Get THIS computers IP address - :getIP</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:72'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>The
+  <b style='mso-bidi-font-weight:normal'>getIP</b> function filters the IP
+  address from the <b style='mso-bidi-font-weight:normal'>ipconfig</b> command
+  output and returns it to the caller.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:73'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>:getIP -- return THIS computers IP
+  address<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span style='mso-spacerun:yes'>    
+  </span>-- %~1 - out, IP<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set ip=<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /f &quot;tokens=2,* delims=:.
+  &quot; %%a in ('&quot;ipconfig|find &quot;IP Address&quot;&quot;') do set
+  ip=%%b<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>( ENDLOCAL &amp; REM RETURN VALUES<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>IF &quot;%~1&quot; NEQ &quot;&quot; (SET %~1=%ip%) ELSE (echo.%ip%)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>goto :eof<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:74'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:75'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>rem.show this computers IP address<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call:getIP ip<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>echo This computers IP is: %ip%<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:76'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:77'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>This computers IP is: 4.239.36.199</span><span
+  style='mso-bidi-font-size:10.0pt;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:78'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586402"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>11<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+  style='color:black'>Wait, Sleep, Hold - :sleep</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:79'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>The
+  <b style='mso-bidi-font-weight:normal'>:sleep </b>function puts the batch execution
+  on hold for a certain amount of second. <o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:80'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:sleep</span></b><span
+  style='color:black'> -- waits some seconds before returning<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span style='mso-spacerun:yes'>    
+  </span>-- %~1 - in, number of seconds to wait<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>FOR /l %%a in (%~1,-1,1) do (ping -n
+  2 -w 1 127.0.0.1&gt;NUL)<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>goto :eof<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:81'>
+  <td colspan=2 valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.75pt 0in 5.75pt'>
+  <h1><a name="_Toc128586403"><![if !supportLists]><span style='mso-bidi-font-family:
+  "Times New Roman";color:black'><span style='mso-list:Ignore'>12<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp; </span></span></span><![endif]><span
+  style='color:black'>Progress Indicator - :initProgress, :doProgress</span></a><span
+  style='color:black'><o:p></o:p></span></h1>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:82'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>When a function processes tasks
+  in multiple steps it's always nice to give the user some progress
+  indication.<span style='mso-spacerun:yes'>  </span>The <b style='mso-bidi-font-weight:
+  normal'>initProgress</b> function will initialize a progress counter by
+  telling it the number of steps to come and initializes the progress display
+  to 0%. Calling <b style='mso-bidi-font-weight:normal'>doProgress</b> after
+  finishing each step will update the progress display by the internally
+  calculated percentage.<span style='mso-spacerun:yes'>  </span>I.e. Let's say
+  20 steps are to be performed then each call to <b style='mso-bidi-font-weight:
+  normal'>doProgress</b> will update the progress display by 5 percent.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='color:black'>The progress will be shown in
+  the Window title which as two advantages.<span style='mso-spacerun:yes'> 
+  </span>First, the progress output will not clutter the output window.<span
+  style='mso-spacerun:yes'>  </span>Second, even a minimized window will still
+  show the progress in the Windows task bar.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:83'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='font-size:9.0pt;font-family:Arial;color:black'>What
+  it's good for<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Show progress when
+  copying multiple files. Call initProgress passing the number of files to be
+  copied.<span style='mso-spacerun:yes'>  </span>Call doProgress after each
+  file.<o:p></o:p></span></p>
+  <p class=Bullets><![if !supportLists]><span style='font-family:Symbol;
+  mso-fareast-font-family:Symbol;mso-bidi-font-family:Symbol;color:black'><span
+  style='mso-list:Ignore'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span></span><![endif]><span style='color:black'>Show progress when
+  executing loops,<span style='mso-spacerun:yes'>  </span>Call initProgress
+  passing the loop count.<span style='mso-spacerun:yes'>  </span>Insert the <b
+  style='mso-bidi-font-weight:normal'>doProgress</b> call as last command
+  within the loop.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:84'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><b><span style='color:black'>:initProgress</span></b><span
+  style='color:black'> -- initialize an internal progress counter and display
+  the progress in percent<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>  </span>-- %~1: in<span
+  style='mso-spacerun:yes'>  </span>- progress counter maximum, equal to 100
+  percent<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>::<span
+  style='mso-spacerun:yes'>  </span>-- %~2: in<span
+  style='mso-spacerun:yes'>  </span>- title string formatter, default is '[P]
+  completed.'<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a ProgressCnt=-1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a ProgressMax=%~1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set ProgressFormat=%~2<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>if
+  &quot;%ProgressFormat%&quot;==&quot;&quot; set ProgressFormat=[PPPP]<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set
+  ProgressFormat=!ProgressFormat:[PPPP]=[P] completed.!<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>call :doProgress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><b><span style='color:black'>:doProgress</span></b><span
+  style='color:black'> -- display the next progress tick<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a ProgressCnt+=1<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set /a
+  per=100*ProgressCnt/ProgressMax<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>set per=!per!%%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>title %ProgressFormat:[P]=!per!%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>GOTO:EOF<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:85'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:86'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#CCFFCC;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>@ECHO OFF<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Prepare the Command Processor<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEEXTENSIONS<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SETLOCAL ENABLEDELAYEDEXPANSION<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>REM.-- Set the window title <o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>SET title=Window Title<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>TITLE %title%<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>set maxcnt=11<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'>call:initProgress maxcnt
+  &quot;%title%:<span style='mso-spacerun:yes'>  </span>[P]
+  progress&quot;&amp;<span style='mso-spacerun:yes'>    </span>rem --format
+  string is optional<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+  <p class=Code><span style='color:black'>echo.Simulating an task with !maxcnt!
+  cycles...<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>for /l %%C in (1,1,!maxcnt!) do (<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>echo.%%C&amp;call:sleep 1<o:p></o:p></span></p>
+  <p class=Code><b><span style='color:black'><span style='mso-spacerun:yes'>   
+  </span>call:doProgress<o:p></o:p></span></b></p>
+  <p class=Code><span style='color:black'>)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:87;mso-yfti-lastrow:yes'>
+  <td width="9%" valign=top style='width:9.28%;padding:0in 5.75pt 0in 5.75pt'>
+  <p class=MsoNormal><span style='color:black'>Test Code Output<o:p></o:p></span></p>
+  </td>
+  <td width="90%" valign=top style='width:90.72%;background:#F3F3F3;padding:
+  0in 5.75pt 0in 5.75pt'>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>0% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>9% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>18% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>27% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>36% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>45% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>54% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>63% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>72% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>81% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>90% progress<o:p></o:p></span></p>
+  <p class=Code><span style='color:black'>Window Title:<span
+  style='mso-spacerun:yes'>  </span>100% progress<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='color:black'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-begin'></span><span
+style='mso-spacerun:yes'> </span>INCLUDETEXT
+&quot;C:\\Web\\dostips\\zzBottom.htm&quot; \c html <span style='mso-element:
+field-separator'></span></span><![endif]-->&nbsp; </p>
+
+<? include 'zBottom.php'; ?>
+
+<p class=MsoNormal><!--[if supportFields]><span style='color:black'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='font-size:
+9.0pt;font-family:Arial;color:black'><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f1465dde81ecd',t:'MTc2OTkyNDA2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</html>

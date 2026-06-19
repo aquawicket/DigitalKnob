@@ -5,7 +5,7 @@ Load up Tiny Core Linux and open terminal and run these commands
 tce-load -wi openssl
 tce-load -wi wget
 tce-load -wi libzstd
-wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh
+wget http://aquawicket.com/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh
 chmod 777 build.sh
 ./build.sh
 

@@ -1,27 +1,71 @@
 @{' 2>nul&::'={\"<<BATCH_SCRIPT 2>/dev/null;#"}}[0]<#
 @echo off
-::########################## Batch Script Begin ##########################
+rem ########################## Batch Script Begin ##########################
 
-::### Print Batch Version Info ###
-if defined ComSpec (set "DKSHELL_PATH=%ComSpec:\=/%")
-for %%Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%%~nZ")
-for /f "tokens=2 delims=[]" %%v in ('ver') do (set "DKSHELL_VERSION=%%v")
-set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
-set "ESC="
-echo %ESC%[42m %ESC%[30m %DKSHELL_NAME% %DKSHELL_VERSION% %ESC%[0m %DKSHELL_PATH%
+rem Get the offsets of the labels in this NotBatch.txt file
+for /F "tokens=1,2 delims=:" %a in ('findstr /O "^:.*" ^< DKPolyglot') do (
+	echo.bat %b = %a
+	set "%b=%a"
+)
 
-echo:
-set "DKSCRIPT_PATH=%~0"
-set "DKSCRIPT_ARGS=%*"
-echo DKSCRIPT_PATH = %DKSCRIPT_PATH%
-echo DKSCRIPT_ARGS = %DKSCRIPT_ARGS%
-echo:
+dkcall :A
+dkcall :B
+dkcall :main
+exit %errorlevel%
 
-pause
+rem #######################
+:B
+	dkecho ### :B ###
+	dkecho     :B body
+	dkecho ### :B END ###
+	dkecho
+dkgoto :EOF
 
-::########################## Batch Script End ##########################
+rem ########################
+:main
+	dkecho ### :main ###
+	dkecho 0 = %0 = %0%
+	dkecho 1 = %1 = %1%
+	dkecho 2 = %2 = %2%
+	dkecho * = %* = %*%
+
+	rem >con attrib -r "DKPolyglot.bat"
+	rem >con copy /Y "DKPolyglot" "DKPolyglot.bat"
+	rem >con attrib +r "DKPolyglot.bat"
+	rem	attrib -r "DKPolyglot.cmd" & copy /Y "DKPolyglot" "DKPolyglot.cmd" && attrib +r "DKPolyglot.cmd"
+	rem	attrib -r "DKPolyglot.sh"  & copy /Y "DKPolyglot" "DKPolyglot.sh"  && attrib +r "DKPolyglot.sh"
+	rem	attrib -r "DKPolyglot.ps1" & copy /Y "DKPolyglot" "DKPolyglot.ps1" && attrib +r "DKPolyglot.ps1"
+
+	rem ### Print Batch Version Info ###
+	if defined ComSpec (set DKSHELL_PATH=%ComSpec:\=/%)
+	for %Z in ("%DKSHELL_PATH%") do (set "DKSHELL_NAME=%~nZ")
+	for /f "tokens=2 delims=[]" %v in ('ver') do (set "DKSHELL_VERSION=%v")
+	set "DKSHELL_VERSION=%DKSHELL_VERSION:Version =%"
+	dkecho [42m [30m %DKSHELL_NAME% %DKSHELL_VERSION% [0m %DKSHELL_PATH%
+	dkecho 
+	
+	rem ### Print all variables
+	set CMDCMDLINE=%CMDCMDLINE%
+	set __CD__=%__CD__%
+	set CD=%CD%
+	>con set
+	dkecho
+	
+	rem ### Pause before exit
+	dkecho ### :main END ###
+	dkecho
+dkgoto :EOF
+
+:A
+	dkecho ### :A ###
+	dkecho     :A body
+	dkecho ### :A END ###
+	dkecho
+dkgoto :EOF
+
+rem ########################## Batch Script End ##########################
 exit /b 0
-goto: eof
+dkgoto :EOF
 type con >nul
 BATCH_SCRIPT
 #>
@@ -32,23 +76,25 @@ BATCH_SCRIPT
 
 echo \" <<'POWERSHELL_SCRIPT' >/dev/null # " | Out-Null
 ########################## PowerShell Script Begin ##########################
-
-### Print Powershell Version Info ###
-${DKSHELL} = (Get-Process -Id $pid).Name;
-${DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
-${DKSHELL_PATH} = (get-command ${DKSHELL}).Path;
-if(!${global:ESC}){ ${global:ESC} = "$([char]27)"; }				# escape character
-Write-Host "${ESC}[44m${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m ${DKSHELL_PATH}";
-
-Write-Host "";
-${DKSCRIPT_PATH} = "${PSCommandPath}";
-${DKSCRIPT_ARGS} = "";
-Write-Host "DKSCRIPT_PATH = ${DKSCRIPT_PATH}";
-Write-Host "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}";
-Write-Host "";
-
-Read-Host;
-
+	Write-Output "Test" > CON;
+	$PSDefaultParameterValues = @{ '*:Encoding' = 'utf8' }
+	# attrib -r "DKPolyglot.bat"; copy "DKPolyglot" "DKPolyglot.bat"; attrib +r "DKPolyglot.bat";
+	# attrib -r "DKPolyglot.cmd"; copy "DKPolyglot" "DKPolyglot.cmd"; attrib +r "DKPolyglot.cmd";
+	# attrib -r "DKPolyglot.sh";  copy "DKPolyglot" "DKPolyglot.sh";  attrib +r "DKPolyglot.sh";
+	# attrib -r "DKPolyglot.ps1"; copy "DKPolyglot" "DKPolyglot.ps1"; attrib +r "DKPolyglot.ps1";
+	
+	### Print Powershell Version Info ###
+	${DKSHELL} = (Get-Process -Id $pid).Name;
+	${DKSHELL_VERSION} = $PSVersionTable.PSVersion.ToString();
+	${DKSHELL_PATH} = (get-command ${DKSHELL}).Path;
+	
+	Write-Host "$([char]27)[44m$([char]27)[30m ${DKSHELL} Version ${DKSHELL_VERSION} $([char]27)[0m ${DKSHELL_PATH}";
+	
+	### Print all variables
+	Get-Variable |%{ "`$`{0,-30} = {1}" -f $_.Name,$_.Value };
+	
+	### Pause before exit
+	Read-Host;
 
 ########################## PowerShell Script End ##########################
 while ( ! $MyInvocation.MyCommand.Source ) { $input_line = Read-Host }
@@ -62,24 +108,30 @@ POWERSHELL_SCRIPT
 
 set +o histexpand 2>/dev/null
 ########################## Bash Script Begin ##########################
+	
+	# chmod 777 "DKPolyglot.bat"; cp "DKPolyglot" "DKPolyglot.bat" && chmod 555 "DKPolyglot.bat"
+	# chmod 777 "DKPolyglot.cmd"; cp "DKPolyglot" "DKPolyglot.cmd" && chmod 555 "DKPolyglot.cmd"
+	# chmod 777 "DKPolyglot.sh";  cp "DKPolyglot" "DKPolyglot.sh"  && chmod 555 "DKPolyglot.sh"
+	# chmod 777 "DKPolyglot.ps1"; cp "DKPolyglot" "DKPolyglot.ps1" && chmod 555 "DKPolyglot.ps1"
+	
+	### Print Bash Version Info ###
+	export ESC=""  # escape character
+	[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
+	export DKSHELL=$(basename ${DKSHELL_PATH})
+	export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
+	echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m ${DKSHELL_PATH}"
 
-### Print Bash Version Info ###
-export ESC=""  # escape character
-[ -n "${BASH-}" ] && export DKSHELL_PATH=${BASH-} || export DKSHELL_PATH=${SHELL-}
-export DKSHELL=$(basename ${DKSHELL_PATH})
-export DKSHELL_VERSION="$($DKSHELL_PATH --help 2>&1 | head -1)"
-echo "${ESC}[45m ${ESC}[30m ${DKSHELL} Version ${DKSHELL_VERSION} ${ESC}[0m ${DKSHELL_PATH}"
-
-echo ""
-DKSCRIPT_PATH=$0
-DKSCRIPT_ARGS=$*
-echo "DKSCRIPT_PATH = ${DKSCRIPT_PATH}"
-echo "DKSCRIPT_ARGS = ${DKSCRIPT_ARGS}"
-echo ""
-
-read -rp ''
+	### Print all variables
+	echo ""
+	env -0 | sort -z | tr '\0' '\n'
+	echo ""
+	
+	### Pause before exit
+	read -rp ''
 
 ########################## Bash Script End ##########################
 case $- in *"i"*) cat /dev/stdin >/dev/null ;; esac
 exit
 #>
+
+:END

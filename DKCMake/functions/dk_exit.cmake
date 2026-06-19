@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 #################### dk_exit settings ##########################################
@@ -51,8 +52,11 @@ function(dk_exit) # exit_code)
 	
 	
 	if(CMAKE_SCRIPT_MODE_FILE)
-		message("cmake_language(EXIT ${exit_code})")
-		cmake_language(EXIT ${exit_code})  # => 3.29
+		if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.29")
+			cmake_language(EXIT ${exit_code})  # => 3.29
+		else()
+			dk_error("cmake_language(EXIT) requires Cmake 3.29 or greater")
+		endif()
 	else()
 	
 		### fallback methods ###
@@ -60,10 +64,10 @@ function(dk_exit) # exit_code)
 			execute_process(COMMAND killall -9 cmake)
 		else()
 			execute_process(COMMAND taskkill /IM cmake /F) #RESULT_VARIABLE result_variable RESULTS_VARIABLE results_variable OUTPUT_VARIABLE output_variable ERROR_VARIABLE error_variable OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_STRIP_TRAILING_WHITESPACE ECHO_OUTPUT_VARIABLE ECHO_ERROR_VARIABLE)
-			#message("result_variable = ${result_variable}")
-			#message("results_variable = ${results_variable}")
-			#message("output_variable = ${output_variable}")
-			#message("error_variable = ${error_variable}")
+			#dk_debug("result_variable = ${result_variable}")
+			#dk_debug("results_variable = ${results_variable}")
+			#dk_debug("output_variable = ${output_variable}")
+			#dk_debug("error_variable = ${error_variable}")
 		endif()
 	endif()
 endfunction()

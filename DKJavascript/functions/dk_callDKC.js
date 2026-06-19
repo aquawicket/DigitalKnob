@@ -7,7 +7,7 @@ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js");
 //#					https://www.vbsedit.com/html/f3358e96-3d5a-46c2-b43b-3107e586736e.asp
 //#
 dk_callDKC = function dk_callDKC_f(){
-	dk_debugFunc(1, 99);
+	//dk_debugFunc(1, 99);
  
 	//###### DEFAULT ENVIRONMENT ######
 	// clang, cosmocc, gcc, msvc 
@@ -61,9 +61,9 @@ dk_callDKC = function dk_callDKC_f(){
 		set "COMPILER_EXE=!CLANG_C_COMPILER!"
 	)
 	if "%target_env%" equ "gcc" (
-		dk_validate GCC_C_COMPILER		"%DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
-		dk_assertPath GCC_C_COMPILER
-		set "COMPILER_EXE=!GCC_C_COMPILER!"
+		dk_validate gcc.exe		"%DKIMPORTS_DIR%/gcc/DKINSTALL.cmd"
+		dk_assertPath gcc.exe
+		set "COMPILER_EXE=!gcc.exe!"
 	)
 
 	//###### _c_file_ ######
@@ -106,7 +106,7 @@ dk_callDKC = function dk_callDKC_f(){
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_callback(){
-	dk_debugFunc(0);
+	//dk_debugFunc(0);
 
 	dk_callDKC dk_test "arg 1" "arg 2" "arg 3"
 	dk_echo

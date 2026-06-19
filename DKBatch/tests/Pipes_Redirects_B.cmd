@@ -1,5 +1,5 @@
 @echo off
-echo(
+echo.
 echo ### Pipes_Redirects_B.cmd %* ###
 
 rem Read the piped input

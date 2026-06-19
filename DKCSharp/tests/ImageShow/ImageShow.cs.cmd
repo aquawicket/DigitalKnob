@@ -19,7 +19,7 @@ if EXIST "%APP%.exe" (del %APP%.exe)
 %COMPILER_EXE% /nologo /out:%APP%.exe *.cs
 	
 if NOT EXIST "%APP%.exe" (
-	echo(
+	echo.
 	echo ERROR: compilation of %DKCSharp_FILE% failed.
 	pause
 	goto:eof
@@ -66,11 +66,11 @@ if %ERRORLEVEL% neq 0 (
 	
 	echo Installing DKCSharp . . .
 	
-	@echo off&::###### DK.cmd #########################################################################################################################
+	@echo off&rem ###### DK.cmd #########################################################################################################################
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+	rem #################################################################################################################################################
 	
 	::###### Install DKCSharp ######
 	::###### COMPILER_EXE ######

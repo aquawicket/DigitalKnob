@@ -1,17 +1,23 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
+rem ############################################################################
 ::# ___NEW_BASH_FUNCTION___()
 ::#
 ::#
 :___NEW_BASH_FUNCTION___
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	::### name the new function
 	%dk_call% dk_inputBox
@@ -24,37 +30,39 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	setlocal disableDelayedExpansion
-	echo(#!/usr/bin/env bash>																	"${FUNCTION_FILE}"
-	echo(###### DK.sh #####################################################################>>	"${FUNCTION_FILE}"
-	echo( [ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*>>				"${FUNCTION_FILE}"
-	echo(##################################################################################>>	"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(##################################################################################>>	"${FUNCTION_FILE}"
-	echo(# ${FUNCTION}()>>																		"${FUNCTION_FILE}"
-	echo(#>>																					"${FUNCTION_FILE}"
-	echo(#>>																					"${FUNCTION_FILE}"
-	echo(${FUNCTION}() {>>																		"${FUNCTION_FILE}"
-	echo(	dk_debugFunc 0>>																	"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(}>>																					"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######>>			"${FUNCTION_FILE}"
-	echo(DKTEST() {>>																			"${FUNCTION_FILE}"
-	echo(	dk_debugFunc 0>>																	"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"
-	echo(>>	${FUNCTION}																			"${FUNCTION_FILE}"	
-	echo(>>	dk_call dk_debug("FUNCTION = ${FUNCTION}")											"${FUNCTION_FILE}"
-	echo(>>																						"${FUNCTION_FILE}"	
+	>"${FUNCTION_FILE}" (
+		echo.#!/usr/bin/env bash
+		echo.###### DK.sh #####################################################################
+		echo. [ -z "${DK_SH-}" ] && $(find "${HOME}" -name "DK.sh" -print) "$0" $*
+		echo.##################################################################################
+		echo.
+		echo.
+		echo.##################################################################################
+		echo.# ${FUNCTION}()
+		echo.#
+		echo.#
+		echo.${FUNCTION}() {
+		echo.	dk_debugFunc 0
+		echo.
+		echo.}
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.
+		echo.###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+		echo.DKTEST() {
+		echo.	dk_debugFunc 0
+		echo.
+		echo.	${FUNCTION}
+		echo.	dk_call dk_debug("FUNCTION = ${FUNCTION}")
+		echo.}
+	)
 	endlocal
 	
 	:edit_textfile
-	%dk_call% dk_validate notepadpp_exe "%dk_call% dk_depend notepadpp_exe"
+	%dk_call% dk_validate notepadpp_exe %dk_call% dk_depend notepadpp_exe
 	"%notepadpp_exe%" "${FUNCTION_FILE}"
 %endfunction%
 
@@ -75,10 +83,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% ___NEW_BASH_FUNCTION___
 %endfunction%

@@ -1,18 +1,24 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#####################################################################
-::# Target_Os()
-::#
-::#	  Target_Os = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
-::#
+rem #####################################################################
+rem # Target_Os()
+rem #
+rem #	  Target_Os = Android, Emscripten, Ios, Iossim, Linux, Mac, Raspberry, Windows
+rem #
 :Target_Os
 %setlocal%
-	%dk_call% dk_debugFunc 0 1
 
 	rem ###### SET ######
 	if "%~1" neq "" (
@@ -21,45 +27,48 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	rem ###### GET ######	
 	) else (
 		if "!Target_Os_Cache!" neq "" (
-			echo(
-			echo( 0^) !Target_Os_Cache!
+			echo.
+			echo. 0^) !Target_Os_Cache!
 		)
-		echo(
-		if NOT defined Host_Os (%dk_call% dk_Host_Os)
-		echo( 1^) !Host_Os!
-		echo( 2^) Android
-		echo( 3^) Cosmopolitan
-		echo( 4^) Emscripten
-		echo( 5^) Ios
-		echo( 6^) Iossim
-		echo( 7^) Linux
-		echo( 8^) Mac
-		echo( 9^) Raspberry
-		echo(10^) Windows
-		echo(11^) Go Back
-		echo(12^) Exit
-		echo(
+		echo.
+		rem if NOT defined Host_Os (%dk_call% dk_Host_Os)
+		%dk_call% dk_validate Host_OS %dk_call% dk_Host_Os
+		echo. 1^) !Host_Os!
+		echo. 2^) Android
+		echo. 3^) Cosmopolitan
+		echo. 4^) Emscripten
+		echo. 5^) Ios
+		echo. 6^) Iossim
+		echo. 7^) Linux
+		echo. 8^) Mac
+		echo. 9^) Raspberry
+		echo.10^) Windows
+		echo.11^) Go Back
+		echo.12^) Exit
+		echo.
 
 		%dk_call% dk_keyboardInput
-		
-		if "!dk_keyboardInput!" equ "0"		(set "Target_Os=!Target_Os_Cache!")
-		if "!dk_keyboardInput!" equ "1"		(set "Target_Os=!Host_Os!")
-		if "!dk_keyboardInput!" equ "2" 	(set "Target_Os=Android")
-		if "!dk_keyboardInput!" equ "3" 	(set "Target_Os=Cosmopolitan")
-		if "!dk_keyboardInput!" equ "4" 	(set "Target_Os=Emscripten")
-		if "!dk_keyboardInput!" equ "5" 	(set "Target_Os=Ios")
-		if "!dk_keyboardInput!" equ "6" 	(set "Target_Os=Iossim")
-		if "!dk_keyboardInput!" equ "7" 	(set "Target_Os=Linux")
-		if "!dk_keyboardInput!" equ "8" 	(set "Target_Os=Mac")
-		if "!dk_keyboardInput!" equ "9" 	(set "Target_Os=Raspberry")
-		if "!dk_keyboardInput!" equ "10"	(set "Target_Os=Windows")
-		if "!dk_keyboardInput!" equ "11"	(
-			endlocal & (
-				%dk_call% dk_unset Target_App
-				%return%
-			)
+			   if "!dk_keyboardInput!" equ "0"	(set "Target_Os=!Target_Os_Cache!"
+		) else if "!dk_keyboardInput!" equ "1"	(set "Target_Os=!Host_Os!"
+		) else if "!dk_keyboardInput!" equ "2" 	(set "Target_Os=Android"
+		) else if "!dk_keyboardInput!" equ "3" 	(set "Target_Os=Cosmopolitan"
+		) else if "!dk_keyboardInput!" equ "4" 	(set "Target_Os=Emscripten"
+		) else if "!dk_keyboardInput!" equ "5" 	(set "Target_Os=Ios"
+		) else if "!dk_keyboardInput!" equ "6" 	(set "Target_Os=Iossim"
+		) else if "!dk_keyboardInput!" equ "7" 	(set "Target_Os=Linux"
+		) else if "!dk_keyboardInput!" equ "8" 	(set "Target_Os=Mac"
+		) else if "!dk_keyboardInput!" equ "9" 	(set "Target_Os=Raspberry"
+		) else if "!dk_keyboardInput!" equ "10"	(set "Target_Os=Windows"
+		) else if "!dk_keyboardInput!" equ "11"	(
+			endlocal
+			%dk_call% dk_unset Target_App
+			%return%
+		) else if "!dk_keyboardInput!" equ "12"	(%dk_call% dk_exit 0
+		) else (
+			%dk_call% dk_error "dk_keyboardInput:'!dk_keyboardInput!' invalid selection"
+			endlocal
+			goto:Target_Os
 		)
-		if "!dk_keyboardInput!" equ "12"	(%dk_call% dk_exit 0)
 	)
 	
 	endlocal & (
@@ -73,19 +82,18 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	::###### GET ######
+	rem ###### GET ######
     %dk_call% Target_Os
-	%dk_call% dk_printVar Target_Os
-	%dk_call% dk_printVar %Target_Os%
+	%dk_call% dk_debug "Target_Os = %Target_Os%"
+	%dk_call% dk_debug "%Target_Os% = !%Target_Os%!"
 	
-	::###### SET ######
+	rem ###### SET ######
 	%dk_call% Target_Os "Windows"
-	%dk_call% dk_printVar Target_Os
-	%dk_call% dk_printVar %Target_Os%
+	%dk_call% dk_debug "Target_Os = %Target_Os%"
+	%dk_call% dk_debug "%Target_Os% = !%Target_Os%!"
 	
 %endfunction%

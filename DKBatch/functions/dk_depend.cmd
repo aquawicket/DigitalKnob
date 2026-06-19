@@ -1,33 +1,48 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	if NOT DEFINED DK.cmd (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	call "%%DK.cmd:/=\%%" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_depend(plugin)
-::#
-::#   Run the DKINSTALL.cmd file for the given 'plugin'
-::#  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
-::#
+rem ############################################################################
+rem # dk_depend(plugin)
+rem #
+rem #   Run the DKINSTALL.cmd file for the given 'plugin'
+rem #  '3rdParty/_IMPORTS/'plugin'/DKINSTALL.cmd'
+rem #
 :dk_depend
 %setlocal%
-	%dk_call% dk_debugFunc 1 99
 	
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate DIGITALKNOB_DIR "%dk_call% dk_DIGITALKNOB_DIR"
+	if "!DISABLE_%~1!" equ "1" (
+		%dk_call% dk_notice "%~1 is Disabled"
+		%return%
+	)
+		
+	set "CURRENT_PLUGIN=%~1"
+	%dk_call% dk_debug "CURRENT_PLUGIN = %CURRENT_PLUGIN%"
 	
-	set "dkInstall=%DKIMPORTS_DIR%/%~1/DKINSTALL.cmd"	
-	if NOT EXIST "%dkInstall%" (
-		call set "dkhttpInstall=%%dkInstall:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
-		%dk_call% dk_download "!dkhttpInstall!" "%dkInstall%"
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate DIGITALKNOB_DIR %dk_call% dk_DIGITALKNOB_DIR
+	
+	set "DKINSTALL_cmd=%DKIMPORTS_DIR%/%CURRENT_PLUGIN%/DKINSTALL.cmd"
+	if NOT EXIST "%DKINSTALL_cmd%" (
+		rem call set "DKHTTP_DKINSTALL_cmd=%%DKINSTALL_cmd:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%%%"
+		%dk_call% dk_assertVar DKHTTP_DIGITALKNOB_DIR
+		set "DKHTTP_DKINSTALL_cmd=!DKINSTALL_cmd:%DIGITALKNOB_DIR%=%DKHTTP_DIGITALKNOB_DIR%!"
+		%dk_call% dk_download "!DKHTTP_DKINSTALL_cmd!" "%DKINSTALL_cmd%"
 	)
 	
-	%dk_call% dk_allButFirstArgs %*
+	%dk_call% dk_allButFirstArgs %*	
 	endlocal & (
-		set "CURRENT_IMPORT=%DKIMPORTS_DIR%/%~1"
-		%dk_call% "%dkInstall%" %dk_allButFirstArgs%
+		set "CURRENT_PLUGIN=%CURRENT_PLUGIN%"
+		rem %dk_call% "%DKINSTALL_cmd%" %dk_allButFirstArgs%
+		echo call "%DKINSTALL_cmd:/=\%" %dk_allButFirstArgs%
+		call "%DKINSTALL_cmd:/=\%" %dk_allButFirstArgs%
 	)
 %endfunction%
 
@@ -41,17 +56,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
 
-	%dk_call% dk_depend git
-	echo git_exe = %git_exe%
+	set "git="
+	%dk_call% dk_validate git %dk_call% dk_depend git
+	%dk_call% dk_debug "git.exe = %git.exe%"
+	"%git.exe:/=\%" --version
 
-::	%dk_call% dk_depend bash GIT
-::	echo bash_exe = %bash_exe%
+	set "bash_exe="
+	%dk_call% dk_validate bash_exe %dk_call% dk_depend bash_exe GIT
+	%dk_call% dk_debug "bash_exe = %bash_exe%"
+	"%bash_exe:/=\%" --version
 	
-::	%dk_call% dk_depend bash MSYS2
-::	echo bash_exe = %bash_exe%
+	set "bash_exe="
+	%dk_call% dk_validate bash_exe %dk_call% dk_depend bash_exe MSYS2
+	%dk_call% dk_debug "bash_exe = %bash_exe%"
+	"%bash_exe:/=\%" --version
 %endfunction%
 

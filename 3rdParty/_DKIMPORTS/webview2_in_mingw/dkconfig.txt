@@ -1,4 +1,4 @@
 ############ webview2_in_mingw_Import ############
-# https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip
+# https://github.com/jchv/webview2-in-mingw/archive/c003dd6ecc60b67a00e779c86988aecfbaa07b88.zip
 
-webview2_in_mingw_Import=https://github.com/jchv/webview2-in-mingw/archive/c003dd6e.zip
+webview2_in_mingw_Import=https://github.com/jchv/webview2-in-mingw/archive/c003dd6ecc60b67a00e779c86988aecfbaa07b88.zip

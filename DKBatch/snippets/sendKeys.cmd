@@ -1,10 +1,10 @@
 @if (@CodeSection == @Batch) @then
 
-:: https://stackoverflow.com/questions/17038282/press-keyboard-keys-using-a-batch-file/17050135#17050135
+rem https://stackoverflow.com/questions/17038282/press-keyboard-keys-using-a-batch-file/17050135#17050135
 @echo off
 
 rem Use %SendKeys% to send keys to the keyboard buffer
-set SendKeys=CScript //nologo //E:javascript "%~F0"
+set SendKeys=cscript.exe //nologo //E:javascript "%~F0"
 
 rem Start the other program in the same Window
 start "" /B %ComSpec%

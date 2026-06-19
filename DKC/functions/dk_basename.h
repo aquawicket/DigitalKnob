@@ -28,7 +28,7 @@ int dk_basename(const char* path, char* dk_basename){
         base = (char*)_path_; // If no '/', the entire string is the basename
     }
 	
-	//###### output ######
+	//###### return ######
 	strcpy(dk_basename, base);
 	
 	return 0;

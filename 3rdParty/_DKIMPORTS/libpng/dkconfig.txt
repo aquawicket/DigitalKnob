@@ -1,6 +1,7 @@
 ############ libpng ############
-# https://github.com/glennrp/libpng
+# https://github.com/glennrp/libpng.git
 # http://www.libpng.org/pub/png/libpng.html
+# https://github.com/pnggroup/libpng/archive/0f07f70aa55e4771d00b0f8a238dca992fbb60e4.zip
 
 libpng_Major=1
 libpng_Minor=6

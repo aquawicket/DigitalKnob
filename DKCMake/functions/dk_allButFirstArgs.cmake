@@ -1,14 +1,15 @@
-#/usr/bin/cmake -P
+#!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -17,10 +18,10 @@ include_guard()
 # dk_allButFirstArgs(args)
 #
 #
-function(dk_allButFirstArgs arg1)
+function(dk_allButFirstArgs ARGV_0)
     dk_debugFunc(1 99)
 
-	set(dk_allButFirstArgs ${ARGN} PARENT_SCOPE)
+	set(dk_allButFirstArgs "${ARGN}" PARENT_SCOPE)
 endfunction()
 
 
@@ -36,5 +37,5 @@ endfunction()
 
 function(DKTEST_B)
 	dk_allButFirstArgs(${ARGV})
-	message("dk_allButFirstArgs = ${dk_allButFirstArgs}")
+	dk_debug("dk_allButFirstArgs = ${dk_allButFirstArgs}")
 endfunction()

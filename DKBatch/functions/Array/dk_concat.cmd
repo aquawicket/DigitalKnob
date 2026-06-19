@@ -1,29 +1,35 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# Array/dk_concat(array, {value1, value2, /* …, */ valueN})
-::#
-::#  Merge two or more arrays. This method does NOT change the existing arrays, but instead returns a new array
-::#
-::#	PARAMETERS
-::#	value1, …, valueN Optional
-::#		Arrays and/or values to concatenate into a new array
-::#		If all valueN parameters are omitted, concat returns a shallow copy of the existing array on which it is called. See the description below for more details.
-::#
-::#	RETURN VALUE
-::#	A new Array instance.
-::#
-::#	REFERENCE
-::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
-::#
+rem ################################################################################
+rem # Array::dk_concat(array, {value1, value2, /* …, */ valueN})
+rem #
+rem #  Merge two or more arrays. This method does NOT change the existing arrays, but instead returns a new array
+rem #
+rem #	PARAMETERS
+rem #	value1, …, valueN Optional
+rem #		Arrays and/or values to concatenate into a new array
+rem #		If all valueN parameters are omitted, concat returns a shallow copy of the existing array on which it is called. See the description below for more details.
+rem #
+rem #	RETURN VALUE
+rem #	A new Array instance.
+rem #
+rem #	REFERENCE
+rem #	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+rem #
 :dk_concat
 %setlocal%
-	%dk_call% dk_debugFunc 2
 
 	set "_arrayA_=%~1"
 	set "_arrayB_=%~2"
@@ -47,10 +53,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :concat_loop2
 	)
 
-	:: Return the array to the calling scope
-	set "currentScope=1"
+	rem Return the array to the calling scope
+	set "_SCOPE_=%~n0"
 	for /F "delims=" %%a in ('set %dk_concat%[') do (
-		if defined currentScope endlocal
+		if "%_SCOPE_%" equ "%~n0" endlocal
 		set "%%a"
 	)
 %endfunction%
@@ -58,27 +64,27 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
+	%dk_call% dk_echo
 	set "myArray1[0]=a b c"
 	set "myArray1[1]=d e f"
 	set "myArray1[2]=g h i"
 	%dk_call% dk_printVar myArray1
 
-	echo(
+	%dk_call% dk_echo
 	set "myArray2[0]=1 2 3"
 	set "myArray2[1]=4 5 6"
 	set "myArray2[2]=7 8 9"
 	%dk_call% dk_printVar myArray2
 
-	echo(
-	%dk_call% Array/dk_concat myArray1 myArray2
+	%dk_call% dk_echo
+	%dk_call% Array::dk_concat myArray1 myArray2
 	%dk_call% dk_printVar dk_concat
 
-	echo(
+	%dk_call% dk_echo
 	if ^
 	"%dk_concat[0]%" equ "a b c" if ^
 	"%dk_concat[1]%" equ "d e f" if ^
@@ -86,9 +92,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	"%dk_concat[3]%" equ "1 2 3" if ^
 	"%dk_concat[4]%" equ "4 5 6" if ^
 	"%dk_concat[5]%" equ "7 8 9" (
-		%dk_call% dk_success "Array/dk_concat succeeded"
+		%dk_call% dk_success "Array::dk_concat succeeded"
 		%return%
 	)
 	
-	%dk_call% dk_error "Array/dk_concat failed"
+	%dk_call% dk_error "Array::dk_concat failed"
 %endfunction%

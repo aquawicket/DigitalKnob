@@ -50,8 +50,8 @@ dk_run = function dk_run_f(){
 	}
 	
 	if(typeof ActiveXObject === "function"){
-		WshShell = new ActiveXObject("WScript.Shell");
-		WshShell.Run(strCommand, intWindowStyle, bWaitOnReturn);
+		wscript_Shell = new ActiveXObject("WScript.Shell");
+		wscript_Shell.Run(strCommand, intWindowStyle, bWaitOnReturn);
 	} else {
 		console.error("ActiveXObject not available in browsers");
 	}
@@ -65,5 +65,5 @@ dk_run = function dk_run_f(){
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
 	
-	dk_run("C:/Windows/System32/notepad.exe", 1, false);
+	dk_run("%SystemRoot%\\System32\\notepad.exe", 1, false);
 }

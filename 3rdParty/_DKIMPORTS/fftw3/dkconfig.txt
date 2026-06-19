@@ -1,1 +1,5 @@
-FFTW3_DL=https://github.com/FFTW/fftw3/archive/187045ea.zip
+############ fftw3 ############
+# https://github.com/FFTW/fftw3.git
+# https://github.com/FFTW/fftw3/archive/7947c101a5b724fe8b9784218388b46d7e247132.zip
+
+fftw3_Import=https://github.com/FFTW/fftw3/archive/7947c101a5b724fe8b9784218388b46d7e247132.zip

@@ -1,0 +1,6 @@
+############ reactos ############
+# https://reactos.org
+# https://reactos.org/wiki/QEMU
+# https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip
+
+reactos_Import=https://sourceforge.net/projects/reactos/files/ReactOS/0.4.14/ReactOS-0.4.14-release-119-gce0b4ff-iso.zip

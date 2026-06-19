@@ -11,6 +11,11 @@ if(!$dk_fatal_ps1){ $dk_fatal_ps1 = 1; } else{ return; } #include guard
 function Global:dk_fatal() {
 	dk_debugFunc 0 1;
 	
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
+	
 	dk_call dk_log FATAL "$($args[0])";
 }
 

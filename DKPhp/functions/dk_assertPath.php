@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 #$dk_assertPath_FORWARD_SLASHES=1;
@@ -164,5 +165,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 }}
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

@@ -1,32 +1,38 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_reload()
-::#
-::#
+rem ####################################################################
+rem # dk_reload()
+rem #
+rem #
 :dk_reload
 %setlocal%
-    %dk_call% dk_debugFunc 0
    
     if NOT EXIST "%DKSCRIPT_PATH%" (
-		%dk_call% dk_error "DKSCRIPT_PATH:%DKSCRIPT_PATH% does NOT EXIST"
+		%dk_call% dk_error "DKSCRIPT_PATH:'%DKSCRIPT_PATH%' NOT FOUND"
 		%return%
 	)
    
     %dk_call% dk_clearScreen
     %dk_call% dk_info "reloading %DKSCRIPT_PATH%. . ."
    
-    ::###### METHOD 1 ######
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+    rem ###### METHOD 1 ######
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
     %dk_call% dk_fileWrite "%DKCACHE_DIR%/reload" "%DKSCRIPT_PATH%"
 	%dk_call% dk_exit 0
        
-    ::###### METHOD 2 ######
+    rem ###### METHOD 2 ######
     ::start "" "%DKSCRIPT_PATH%" & dk_exit & dk_exit & dk_exit
 %endfunction%
 
@@ -35,10 +41,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
   
     %dk_call% dk_pause "Press any key to test dk_reload"
     %dk_call% dk_reload

@@ -18,7 +18,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	::###### exit_code ######
 	if %errorlevel% neq 0 (
-		echo exit_code:%errorlevel%
+		echo exit_code:'%errorlevel%'
 	)
 
 %endfunction%
@@ -38,17 +38,17 @@ if "%~1" equ "" (goto DKINSTALL)
 :DKINSTALL
 	if "%~1" neq "" (goto:eof)
 
-	@echo off&::###### DK.cmd #########################################################################################################################
+	@echo off&rem ###### DK.cmd #########################################################################################################################
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+	rem #################################################################################################################################################
 
 	echo Installing DKbat . . .
 	
 	::###### Install DKbat ######
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate cmd_exe 				"%dk_call% dk_depend cmd_exe"
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR %dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_validate cmd.exe 				%dk_call% dk_depend cmd
 
 	:: Set the registry entry for the exxtension
 	ftype DKbat="%ComSpec%" /c if EXIST "%~f0" ^

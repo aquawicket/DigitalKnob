@@ -44,19 +44,19 @@ exit /b %ERRORLEVEL%
 
 	echo Installing DKPython . . .
 
-	@echo off&::###### DK.cmd #########################################################################################################################
+	@echo off&rem ###### DK.cmd #########################################################################################################################
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+	rem #################################################################################################################################################
 
 	::###### Install DKPython ######
-	%dk_call% dk_validate DKPYTHON_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_validate DKIMPORTS_DIR				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd_exe"
-	%dk_call% dk_validate python_exe				"%dk_call% dk_depend python3"
+	%dk_call% dk_validate DKPYTHON_FUNCTIONS_DIR	%dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_validate DKIMPORTS_DIR				%dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate cmd.exe					%dk_call% dk_depend cmd
+	%dk_call% dk_validate python_exe				%dk_call% dk_depend python3
 
-	ftype DKPython="%cmd_exe%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%python_exe%" "%%1" %*
+	ftype DKPython="%cmd.exe%" /V:ON /K call "%~f0" "%DKPYTHON_FUNCTIONS_DIR%" "%python_exe%" "%%1" %*
 	%dk_call% dk_registrySetKey "HKCR/DKPython/DefaultIcon" "" "REG_SZ" "%python_exe%"	
 	assoc .py=DKPython
 

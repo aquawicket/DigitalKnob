@@ -157,7 +157,7 @@ copy nul "%keyFile%" >nul
 copy nul "%cmdFile%" >nul
 start "" /b cmd /c ^""%~f0" startController %keyStream%^>^>"%keyFile%" %cmdStream%^<"%cmdFile%" 2^>nul ^>nul^"
 cmd /c ^""%~f0" startGame %keyStream%^<"%keyFile%" %cmdStream%^>^>"%cmdFile%" ^<nul^"
-echo(
+echo.
 
 
 ::--------------------------------------------------------------
@@ -172,12 +172,12 @@ if "%=exitcode%" equ "00000002" (
   echo Game play can be improved by installing
   echo Aacini's CursorPos.exe, available at
   echo http://goo.gl/hr6Kkn
-  echo(
+  echo.
   echo Alternatively, if your console supports
   echo VT100 escape sequences, then you can
   echo enable VT100 mode within the SNAKE.BAT
   echo Graphic options menu.
-  echo(
+  echo.
   echo %cmdcmdline%|find /i "%~f0">nul&&pause
 )
 exit /b 0
@@ -290,22 +290,22 @@ set "invalid=*~="
 
 if %vt% equ 1 (
   for /f "delims=" %%E in (
-    'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo(0x1B"'
+    'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo.0x1B"'
   ) do (
     cls
     <nul set /p "=%%E7"
     set "cls=<nul set /p "=%%E8""
     set "ClearLine=<nul set /p "=%%E[K""
-    set "ClearPrev=echo(&echo(%%E[F%%E[K"
-    set "Up4=echo(%%E[F%%E[F%%E[F%%E[F%%E[F"
+    set "ClearPrev=echo.&echo.%%E[F%%E[K"
+    set "Up4=echo.%%E[F%%E[F%%E[F%%E[F%%E[F"
     set "ShowCursor=<nul set /p "=%%E[?25h""
     set "HideCursor=<nul set /p "=%%E[?25l""
     set "exitCode=0"
   )
 ) else if EXIST "%~dp0CursorPos.exe" (
   set "cls=CursorPos 0 0"
-  set "ClearLine=echo(                                   &CursorPos 0 -1"
-  set "ClearPrev=CursorPos 0 -0&echo(                                   "
+  set "ClearLine=echo.                                   &CursorPos 0 -1"
+  set "ClearPrev=CursorPos 0 -0&echo.                                   "
   set "Up4=CursorPos 0 -4"
   set "ShowCursor="
   set "HideCursor="
@@ -359,7 +359,7 @@ set screen=!screen!Speed = !Difficulty! !replay!!LF!Growth Rate = !growth!   Hig
 if defined replay if NOT defined replayFinished (%\n%
   set screen=!screen!!LF!!LF!Press a key to abort the replay%\n%
 )%\n%
-%cls%^&echo(!screen!
+%cls%^&echo.!screen!
 
 :: test  X  Y  ValueListVar
 :::  tests if value at coordinates X,Y is within contents of ValueListVar
@@ -398,7 +398,7 @@ for /l %%. in () do (
     del "%signal%"
     set "replayFinished=1"
     %draw%
-    echo(
+    echo.
     %ClearLine%
     <nul set /p "=Aborting... "
     findstr "^" >nul <&%keyStream%
@@ -428,7 +428,7 @@ for /l %%. in () do (
     if /i !key! equ !pause! (
 
       %=== pause game ===%
-      echo(
+      echo.
       %ShowCursor%
       call :ask "PAUSED - Press a key to continue..."
       %HideCursor%
@@ -441,7 +441,7 @@ for /l %%. in () do (
     ) else (
 
       %=== establish direction ===%
-      if NOT defined replay (echo(!key!.) >>"!gameLog!"
+      if NOT defined replay (echo.!key!.) >>"!gameLog!"
       for %%K in (!key!) do if !moveKeys! equ 2 (
         set /a "xDiff=xTurn%%K*!yDiff!, yDiff=yTurn%%K*!xDiff!"
       ) else if "!%%KAxis!" neq "!axis!" (
@@ -520,13 +520,13 @@ for /l %%. in () do (
         call :spinner !PX! !PY! death
         %draw%
         if defined newHi (
-          echo(
+          echo.
           echo New High Score - Congratulations^^!
           set "hi!diffCode!=!score!"
           copy "!gameLog!" "%hiFile%!diffCode!.txt" >nul
           >>"%hiFile%!diffCode!.txt" echo ::!score!
         )
-        echo(
+        echo.
         %ClearLine%
         %ShowCursor%
         call :ask "Press a key to continue..."
@@ -554,7 +554,7 @@ call :purge
 (%getKey% !upper! 0 1 2 3 4 5 6 7 8 9 " " _ - {Enter} !BS!)
 if defined key (
   if !key! equ {Enter} (
-    echo(
+    echo.
     exit /b
   )
   if !key! neq !BS! if !maxLen! gtr 0 (
@@ -635,9 +635,9 @@ cls
 call :resize
 set "loadAvailable="
 echo SNAKE.BAT v4.0 by Dave Benham
-echo(
+echo.
 echo Main Menu:
-echo(
+echo.
 echo   N - New game
 echo   F - Field size..... !size!
 echo   W - groWth rate.... !growth!
@@ -649,18 +649,18 @@ if defined saveAvailable   echo   S - Save a game
 if EXIST *.snake.txt       echo   L - Load and watch a saved game&set "loadAvailable=L"
 
 echo   Q - Quit
-echo(
+echo.
 set "hiAvailable="
 for /l %%N in (1 1 6) do if defined hi%%N (
   if NOT defined hiAvailable (
     echo Replay High Score:
-    echo(
+    echo.
   )
   set "desc=!desc%%N!........"
   set "hiAvailable=!hiAvailable! %%N"
   echo   %%N - !desc:~0,8! !hi%%N!
 )
-if defined hiAvailable echo(
+if defined hiAvailable echo.
 set "keys=N F W C G Q !hiAvailable! !replayAvailable! !saveAvailable! !loadAvailable!"
 call :ask ">" !keys!
 if /i !key! equ Q (
@@ -717,14 +717,14 @@ goto :mainMenu
 cls
 set "keys=T S M L W N"
 echo Field Size Options:
-echo(
+echo.
 echo   T - Tiny   15 x 10
 echo   S - Small  30 x 20
 echo   M - Medium 40 x 25
 echo   L - Large  47 x 32
 echo   W - Wide   82 x 19
 echo   N - Narrow 15 x 40
-echo(
+echo.
 call :ask ">" !keys!
 set "size=!size%key%!"
 set /a "dispWidth=!width%key%!, dispHeight=!height%key%!"
@@ -739,18 +739,18 @@ cls
 set "keys={Enter} T L R P"
 if !moveKeys! equ 4 set "keys=!keys! U D"
                     echo Control Options:
-                    echo(
+                    echo.
                     echo   T - Type... = !moveKeys! keys
-                    echo(
+                    echo.
                     echo   L - Left... = !left!
                     echo   R - Right.. = !right!
 if !moveKeys! equ 4 echo   U - Up..... = !up!
 if !moveKeys! equ 4 echo   D - Down... = !down!
-                    echo(
+                    echo.
                     echo   P - Pause.. = !pause!
-                    echo(
+                    echo.
                     echo   {Enter} - Return to Main Menu
-                    echo(
+                    echo.
 call :ask ">" !keys!
 if !key! equ {Enter} goto :saveUserPrefs
 if /i !key! equ T (
@@ -772,18 +772,18 @@ goto :controlOptions
 set "toggleVT100="
 cls
 echo Graphic Options:
-echo(
+echo.
 echo   B - Border...... = !bound!
 echo   E - Empty space. = !space!
 echo   H - snake Head.. = !head!
 echo   S - Snake body.. = !body!
 echo   F - Food........ = !food!
 echo   D - Death....... = !death!
-echo(
+echo.
 echo   V - VT100 mode.. = !vt%vt%!
-echo(
+echo.
 echo   {Enter} - Rturn to Main Menu
-echo(
+echo.
 call :ask ">" B E H S F D V {Enter}
 if !key! equ {Enter} goto :saveUserPrefs
 if /i !key! equ V (
@@ -824,13 +824,13 @@ for /l %%N in (1 1 6) do (
   set "desc=!desc%%N!           "
   echo    %%N   !desc:~0,11!    0.!delay:~-2!
 )
-echo(
+echo.
 call :ask "Pick a speed (1-6):" 1 2 3 4 5 6
 set "difficulty=!desc%key%!"
 set "delay=!delay%key%!"
 set "diffCode=%key%"
 echo %key% - %difficulty%
-echo(
+echo.
 <nul set /p "=Initializing."
 for %%A in (!configOptions!) do set "%%ASave=!%%A!"
 if defined replay (
@@ -895,7 +895,7 @@ if defined replay (
     for %%A in (!configOptions!) do (echo %%A=!%%A!)
     (echo END)
   )
-  echo(
+  echo.
   if !moveKeys! equ 4 (
     echo Controls: !up!=up !down!=down !left!=left !right!=right !pause!=pause
   ) else (
@@ -903,7 +903,7 @@ if defined replay (
   )
   echo Avoid running into yourself (!body!!body!!head!^) or wall (!bound!^)
   echo Eat food (!food!^) to grow.
-  echo(
+  echo.
   call :ask "Press a key to start..."
   %HideCursor%
   %sendCmd% go
@@ -932,7 +932,7 @@ set "grow=0"
 if !moveKeys! equ 4 set ^"keys=!keys! "!up!" "!down!"^"
 if defined Up4 if NOT defined replay (
   %Up4%
-  for /l %%N in (1 1 5) do (echo(                                             )
+  for /l %%N in (1 1 5) do (echo.                                             )
 )
 exit /b
 
@@ -1066,7 +1066,7 @@ for /l %%. in () do (
     if "!cmd!" equ "replay" (
       copy nul "%signal%" >nul
       set "cmd=go"
-    ) else (echo(!key!.)
+    ) else (echo.!key!.)
     if "!cmd!" neq "go" set "cmd=hold"
     set "key="
   )>&%keyStream%

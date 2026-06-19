@@ -1,5 +1,7 @@
 ############ pe-explorer ############
-# https://www.pe-explorer.com/
+# https://www.pe-explorer.com
+# https://www.heaventools.com/download/pexsetup.exe
 
-pe_explorer_Import=https://www.heaventools.com/download/pexsetup.exe
-pe_explorer_Type=APP
+pe-explorer_Type=Tool
+pe-explorer_Import=https://www.heaventools.com/download/pexsetup.exe
+

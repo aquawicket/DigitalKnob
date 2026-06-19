@@ -27,7 +27,7 @@ function Global:DKINSTALL() {
 	if(!(dk_call "${sudo_exe}" --version)){ dk_call dk_error "sudo_exe:${sudo_exe} failed to run"; return;}
 	
 	
-	###### output ######
+	###### return ######
 	${global:sudo_exe} = ${sudo_exe};
 #	#if($args[1]) {
 #	#	dk_call dk_set $args[1] ${sudo_exe};

@@ -1,38 +1,44 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
-::%setlocal%
-	%dk_call% dk_debugFunc 0
+rem %setlocal%
 	
-	::######### kill cmake.exe process #########
-	::# %dk_call% dk_killProcess cmake.exe
+	rem ######### kill cmake.exe process #########
+	rem # %dk_call% dk_killProcess cmake.exe
 
-	::######### kill cmake-gui.exe process #########
-	::# %dk_call% dk_killProcess cmake-gui.exe
+	rem ######### kill cmake-gui.exe process #########
+	rem # %dk_call% dk_killProcess cmake-gui.exe
 	
-	%dk_call% dk_import APP
+	%dk_call% dk_import
 
-	%dk_call% dk_validate Host_Os "%dk_call% dk_Host_Os"
+	%dk_call% dk_validate Host_Os %dk_call% dk_Host_Os
 	if /i "%Host_Os%" equ "Windows" ( 
-		%dk_call% dk_set cmake_exe "%PLUGIN_Install_Path%/bin/cmake.exe"
+		set "cmake.exe=%cmake%/bin/cmake.exe"
 	) else ( 
-		%dk_call% dk_set cmake_exe "%PLUGIN_Install_Path%/bin/cmake"
+		set "cmake.exe=%cmake%/bin/cmake"
 	)	
-	%dk_call% dk_assertPath "%cmake_exe%"
-	%dk_call% dk_firewallAllow "%cmake_exe%"
+	rem %dk_call% dk_assertPath "%cmake.exe%"
+	%dk_call% dk_firewallAllow "%cmake.exe%"
 
-	if EXIST "%cmake_exe%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
+	if EXIST "%cmake.exe%" (%dk_call% dk_success "cmake install complete") else (%dk_call% dk_error "cmake install failed")
 	
-	:: Add cmake to git_bash (symlink)
-	::%dk_call% dk_validate bash_exe "%dk_call% dk_depend git"
-	::%bash_exe% -c "ln ${HOME}/DigitalKnob/DKTools/%cmake_Install_Folder%/bin/cmake /usr/bin/cmake"
-	::%bash_exe% -c "ln -s ${HOME}/DigitalKnob/DKTools/%cmake_Install_Folder%/share/cmake-3.29 /usr/share/cmake-3.29"
+	rem Add cmake to git_bash (symlink)
+	rem %dk_call% dk_validate bash_exe %dk_call% dk_depend git
+	rem %bash_exe% -c "ln ${HOME}/Digital Knob/DKTools/%cmake_Install_Folder%/bin/cmake /usr/bin/cmake"
+	rem %bash_exe% -c "ln -s ${HOME}/Digital Knob/DKTools/%cmake_Install_Folder%/share/cmake-3.29 /usr/share/cmake-3.29"
 %endfunction%

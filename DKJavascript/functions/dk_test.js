@@ -1,11 +1,11 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js");
+//dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js");
 
 //################################################################################
 //# dk_test()
 //#
 //#
 dk_test = function dk_test_f(){
-	dk_debugFunc(0, 99);
+	//dk_debugFunc(0, 99);
 	
 	console.log("################# dk_test.js ################");
 	if(typeof DKBrowser !== "undefined")				{ console.log("                  DKBrowser = '"+DKBrowser()+"' ");				}
@@ -99,9 +99,9 @@ dk_test = function dk_test_f(){
 	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("               DKPYTHON_DIR = '"+DKPYTHON_DIR+"' ");			 		}
 	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("     DKPYTHON_FUNCTIONS_DIR = '"+DKPYTHON_FUNCTIONS_DIR+"' "); 	 	}
 	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("    DKPYTHON_FUNCTIONS_DIR_ = '"+DKPYTHON_FUNCTIONS_DIR+"' ");		}
-	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("                   DKVB_DIR = '"+DKVB_DIR+"' ");			 			}
-	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("         DKVB_FUNCTIONS_DIR = '"+DKVB_FUNCTIONS_DIR+"' "); 	 		}
-	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("        DKVB_FUNCTIONS_DIR_ = '"+DKVB_FUNCTIONS_DIR+"' ");			}
+	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("                   DKVBS_DIR = '"+DKVBS_DIR+"' ");			 			}
+	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("         DKVBS_FUNCTIONS_DIR = '"+DKVBS_FUNCTIONS_DIR+"' "); 	 		}
+	if(typeof DKSCRIPT_ARGS !== "undefined")			{ console.log("        DKVBS_FUNCTIONS_DIR_ = '"+DKVBS_FUNCTIONS_DIR+"' ");			}
 		
 	//setGlobal GLOBAL_VAR "This is a global variable"
 	//setReturn RETURN_VAR "This is a return variable"
@@ -116,9 +116,9 @@ dk_test = function dk_test_f(){
 
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_f(){
-	dk_debugFunc(0);
+	//dk_debugFunc(0);
 	
-	console.log("DKTEST()")
+	console.log("DKTEST()");
 	dk_test("from :DKTEST", "to dk_test");
 	//console.log("GLOBAL_VAR = "+GLOBAL_VAR)
 	//console.log("RETURN_VAR = "+RETURN_VAR)

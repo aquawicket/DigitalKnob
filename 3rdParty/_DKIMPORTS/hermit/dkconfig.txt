@@ -1,0 +1,5 @@
+############ hermit ############
+# https://github.com/dylibso/hermit/archive/69d848c37da88a6047acac0fa9c1b23aefc47af9.zip
+
+hermit_Import=https://github.com/dylibso/hermit/archive/69d848c37da88a6047acac0fa9c1b23aefc47af9.zip
+

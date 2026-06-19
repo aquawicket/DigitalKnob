@@ -1,0 +1,6 @@
+############ opencv ############
+# https://sourceforge.net/projects/opencvlibrary/files/opencv-unix/3.4.1/opencv-3.4.1.zip
+# https://github.com/opencv/opencv/archive/refs/tags/4.5.3.zip
+# https://github.com/opencv/opencv/archive/94d5ad09.zip
+
+opencv_Import=https://github.com/opencv/opencv/archive/94d5ad09.zip

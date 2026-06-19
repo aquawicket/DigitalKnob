@@ -1,0 +1,7 @@
+############ chart.js ############
+# https://github.com/chartjs/Chart.js
+# https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js
+# https://www.chartjs.org/
+# https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js
+
+chart.js_Import=https://github.com/chartjs/Chart.js/releases/download/v2.9.3/Chart.min.js

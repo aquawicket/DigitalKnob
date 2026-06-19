@@ -2,5 +2,8 @@
 # https://github.com/madler/zlib.git
 # http://www.zlib.net
 # https://chromium.googlesource.com/chromium/src/third_party/+archive/refs/heads/main/zlib.tar.gz
+# https://github.com/madler/zlib/archive/d476828316d05d54c6fd6a068b121b30c147b5cd.zip
+# https://github.com/madler/zlib/archive/5a82f71ed1dfc0bec044d9702463dbdf84ea3b71.zip
 
-zlib_Import=https://github.com/madler/zlib/archive/d476828.zip
+#zlib_Import=https://github.com/madler/zlib/archive/5a82f71ed1dfc0bec044d9702463dbdf84ea3b71.zip
+zlib_Import=https://github.com/madler/zlib/archive/zlib-5a82f71ed1dfc0bec044d9702463dbdf84ea3b71.zip

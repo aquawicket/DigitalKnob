@@ -1,17 +1,17 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
-#dk_load("$ENV{DKCMAKE_DIR}/DKVariables.cmake") # For Global settings and variables
 
 #########################################################################
 # dk_configure(Source_Dir, args...)
@@ -20,8 +20,8 @@ include_guard()
 #				  If no Install_Path is specified, ${${CURRENT_PLUGIN}} will be used
 #
 function(dk_configure)
+#dk_debug("dk_configure(${ARGV})")
 	dk_debugFunc(0 99)
-	dk_debug("dk_configure(${ARGV})")
 
 	###### Source_Dir ######
 	if(ARGV)
@@ -31,19 +31,22 @@ function(dk_configure)
 	endif()
 	dk_assertPath("${Source_Dir}")
 	if(NOT "${Source_Dir}" STREQUAL "${${CURRENT_PLUGIN}}")
-		dk_notice("dk_build(): Source_Dir:${Source_Dir} != ${CURRENT_PLUGIN}:${${CURRENT_PLUGIN}}")
+		dk_notice("dk_build(): Source_Dir:'${Source_Dir}' != ${CURRENT_PLUGIN}:'${${CURRENT_PLUGIN}}'")
 	endif()
-	dk_debug("Source_Dir = ${Source_Dir}")
+	#dk_debug("Source_Dir = '${Source_Dir}'")
 
 	### Config_Dir ###
 	dk_validate(${CURRENT_PLUGIN}_Config_Dir "dk_Target_Config()")
 	set(Config_Dir "${${CURRENT_PLUGIN}_Config_Dir}")
-	dk_debug("Config_Dir = ${Config_Dir}")
+	#dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	
-	### Build_Dir ###
-	dk_validate(${CURRENT_PLUGIN}_Build_Dir "dk_Target_Config()")
-	set(Build_Dir "${${CURRENT_PLUGIN}_Build_Dir}")
-	dk_debug("Build_Dir = ${Build_Dir}")
+	### ${CURRENT_PLUGIN}_Build_Dir ###
+	dk_validate(${CURRENT_PLUGIN}_Build_Dir "dk_Target_Build()")
+	set(Build_Dir "${${CURRENT_PLUGIN}_Config_Dir}")
+	#dk_debug("${CURRENT_PLUGIN}_Build_Dir = ${${CURRENT_PLUGIN}_Build_Dir}")
+	if(NOT EXISTS "${${CURRENT_PLUGIN}_Build_Dir}")
+		dk_mkdir("${${CURRENT_PLUGIN}_Build_Dir}")
+	endif()	
 	
 	#dk_printPrefixVars(${CURRENT_PLUGIN})
 	
@@ -69,13 +72,13 @@ function(dk_configure)
 	#endif()
 	
 	#if(REBUILDALL)
-		dk_call(dk_clearCmakeCache "${Config_Dir}")
+		dk_call(dk_clearCmakeCache "${${CURRENT_PLUGIN}_Config_Dir}")
 	#endif()
 
 	# Path checks needs to be case sensitive. 
 	# For example, openssl has Configure in it's root directory. On windows, if(EXISTS ${Install_Path}/configure) will return true.
 	# This will cause problems on unix and any casesensitive platforms, so we use dk_pathExists because it is case sensitive.
-	dk_call(dk_pathExists "${Source_Dir}/CMakeLists.txt" 	CMakeLists.txt)
+	dk_call(dk_pathExists("${Source_Dir}/CMakeLists.txt"	CMakeLists.txt))
 	dk_pathExists("${Source_Dir}/configure"      			configure)
 	dk_pathExists("${Source_Dir}/configure.ac"   			configure.ac)
 
@@ -86,11 +89,17 @@ function(dk_configure)
 	if(CMakeLists.txt)
 		dk_info("###### Configuring ${CURRENT_PLUGIN} with CMake ######")	
 		dk_validate(DKCMAKE_DIR		"dk_DKBRANCH_DIR()") 
-		dk_validate(CMAKE_GENERATOR	"dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		#dk_validate(CMAKE_GENERATOR	dk_load("${DKCMAKE_DIR}/DKBuildFlags.cmake"))
+		if(NOT CMAKE_GENERATOR)
+			dk_load("${DKCMAKE_DIR}/DKBuildFlags.cmake")
+		endif()
 		dk_validate(cmake_exe		"dk_depend(cmake)")
 		
 		#### create thr Cmake configure command ###
-		dk_validate(DKCMAKE_BUILD	"dk_load(${DKCMAKE_DIR}/DKBuildFlags.cmake)")
+		#dk_validate(DKCMAKE_BUILD	dk_load("${DKCMAKE_DIR}/DKBuildFlags.cmake"))
+		if(NOT DKCMAKE_BUILD)
+			dk_load("${DKCMAKE_DIR}/DKBuildFlags.cmake")
+		endif()
 		set(command_list ${DKCMAKE_BUILD} ${dk_allButFirstArgs} "-S" "${Source_Dir}" "-B" "${Config_Dir}")		
 		dk_mergeFlags("${command_list}" command_list)		
 	
@@ -120,7 +129,7 @@ function(dk_configure)
 		dk_fileAppend("${Build_Dir}/DKBUILD.log" "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}\n")
 		if(EXISTS "${${CURRRENT_PLUGIN}}/configure")
 			if(Windows_Host AND (MSYSTEM OR Android OR Emscripten))
-				dk_validate(bash_exe "dk_depend(bash)")
+				dk_validate(bash_exe "dk_depend(bash_exe)")
 				dk_exec(${bash_exe} -c "../../configure ${DKCONFIGURE_FLAGS} ${dk_allButFirstArgs}")
 				dk_fileAppend("${Build_Dir}/DKBUILD.log" "${dk_exec}\n\n\n")
 			else()
@@ -207,24 +216,38 @@ function(dk_configure)
 #	endif(PROJECT_INCLUDE_3RDPARTY)
 	
 	# Install 3rd Party Libs
-	if(INSTALL_DKLIBS)
-		#if(${isDKPlugin} EQUAL -1)
-			if(EXISTS "${Config_Dir}/cmake_install.cmake")
-				dk_exec(${CMAKE_COMMAND} --install "${Config_Dir}")
-			endif()
-		#endif()
-	endif(INSTALL_DKLIBS)
+#	if(INSTALL_DKLIBS)
+#		#if(${isDKPlugin} EQUAL -1)
+#			if(EXISTS "${Config_Dir}/cmake_install.cmake")
+#				dk_exec(${CMAKE_COMMAND} --install "${Config_Dir}")
+#			endif()
+#		#endif()
+#	endif(INSTALL_DKLIBS)
 	
 	
-	if("${${CURRENT_PLUGIN}}" MATCHES "${DKCPP_PLUGINS_DIR}") ##### TEST ME:
+#	if("${${CURRENT_PLUGIN}}" MATCHES "${DKCPP_PLUGINS_DIR}") ##### TEST ME:
 		# Install header files for DKPlugin
 		if(INSTALL_DKLIBS)
-			dk_info("Installing ${Plugin} header files")
-			file(INSTALL DIRECTORY "${${CURRENT_PLUGIN}}/" DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.h")
-			dk_deleteEmptyDirectories("${CMAKE_INSTALL_PREFIX}/include/${Plugin}")
+			dk_echo("### INSTALL_DKLIBS ###")
+			
+			dk_assertVar(CURRENT_PLUGIN)
+			dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
+			if(NOT ${CURRENT_PLUGIN}_Install_Name)
+				set(${CURRENT_PLUGIN}_Install_Name "${CURRENT_PLUGIN}")
+			endif()
+			dk_assertVar(${CURRENT_PLUGIN}_Install_Name)
+			dk_debug("${CURRENT_PLUGIN}_Install_Name = ${${CURRENT_PLUGIN}_Install_Name}")
+			
+			dk_info("Installing ${${CURRENT_PLUGIN}_Install_Name} header files")
+			set(${CURRENT_PLUGIN}_DKBIN "${CMAKE_INSTALL_PREFIX}/${${CURRENT_PLUGIN}_Install_Name}")
+			dk_debug("INSTALL ${${CURRENT_PLUGIN}} DESTINATION ${${CURRENT_PLUGIN}_DKBIN}")
+			file(INSTALL DIRECTORY "${${CURRENT_PLUGIN}}/" DESTINATION "${${CURRENT_PLUGIN}_DKBIN}" FILES_MATCHING PATTERN "*.h")
+			file(INSTALL DIRECTORY "${${CURRENT_PLUGIN}}/" DESTINATION "${${CURRENT_PLUGIN}_DKBIN}" FILES_MATCHING PATTERN "*.hpp")
+			file(INSTALL DIRECTORY "${${CURRENT_PLUGIN}}/" DESTINATION "${${CURRENT_PLUGIN}_DKBIN}" FILES_MATCHING PATTERN "*.inl") # RmlUI
+			#dk_deleteEmptyDirectories("${CMAKE_INSTALL_PREFIX}/include/${Plugin}")
 		endif()
 		
-		#Add the DKPlugin to the app project
+#		#Add the DKPlugin to the app project
 #		if(PROJECT_INCLUDE_DKPLUGINS)
 #			if(NOT CMAKE_SCRIPT_MODE_FILE)
 #				if(EXISTS "${${CURRENT_PLUGIN}}/CMakeLists.txt")
@@ -234,12 +257,12 @@ function(dk_configure)
 #		endif()
 		
 		# Install DKPlugin Libs
-		if(INSTALL_DKLIBS)
-			if(EXISTS "${Config_Dir}/cmake_install.cmake")
-				dk_exec(${CMAKE_COMMAND} --install "${Config_Dir}")
-			endif()
-		endif()
-	endif()
+#		if(INSTALL_DKLIBS)
+#			if(EXISTS "${Config_Dir}/cmake_install.cmake")
+#				dk_exec(${CMAKE_COMMAND} --install "${Config_Dir}")
+#			endif()
+#		endif()
+#	endif()
 endfunction()
 
 

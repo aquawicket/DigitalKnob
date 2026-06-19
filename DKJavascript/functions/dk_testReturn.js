@@ -1,4 +1,19 @@
-dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js");
+// shebang
+//#####################################################################################################
+//file:///C:/Users/Administrator/DigitalKnob/Development/DKJavascript/functions/dk_fileContains.js
+if(typeof ActiveXObject === "function"){
+	if(typeof wscript_shell !== "object")	{ var wscript_shell = new ActiveXObject("WScript.Shell"); }
+	if(typeof ENV !== "object")				{ var ENV = wscript_shell.Environment("Process"); }
+	if(typeof ENV === "object" && typeof wscript_shell === "object" && ENV("DKINIT_js") === "") {	
+		ENV("DKINIT_js") = WScript.ScriptFullName;
+		wscript_shell.Run("cmd /k mshta.exe \"file:///C:/Users/Administrator/DigitalKnob/Development/DKHta/functions/DK.hta\" | for /f \"delims=\" %a in ('findstr \"^\"') do 	@echo %a", 1, 1);
+		throw new Error('Program Terminated');
+	}
+}
+//#####################################################################################################
+
+
+//dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js");
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js");
 dk_source(DKJAVASCRIPT_DIR+"/functions/dk_exec.js");
 //################################################################################
@@ -10,7 +25,7 @@ dk_testReturn = function dk_testReturn_f(){
 	
 	testReturn = arguments[0].replace("input", "output");
 
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = testReturn;
 	} else {

@@ -1,11 +1,18 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-:: https://stackoverflow.com/a/61752820/688352
+rem https://stackoverflow.com/a/61752820/688352
 echo Press Y to break
 call:function
 
@@ -15,10 +22,10 @@ exit /b %errorlevel%
 :function
     echo Loop in progress...
     choice /C ny /T 1 /D n /N>x
-    <x >nul 2>&1 call :checkify
+    <x 1>nul 2>nul call :checkify
 goto:function
 
 
-:: When a batch file is interrupted via Ctrl-C, AKA STATUS_CONTROL_C_EXIT, it returns ErrorLevel -1073741510 or ExitCode C000013A. We can take advantage of this.
+rem When a batch file is interrupted via Ctrl-C, AKA STATUS_CONTROL_C_EXIT, it returns ErrorLevel -1073741510 or ExitCode C000013A. We can take advantage of this.
 :checkify
 %ComSpec% /c exit -1073741510

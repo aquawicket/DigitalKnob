@@ -1,5 +1,7 @@
-############ ida ###########
-#
+########### ida ############
+# https://hex-rays.com/ida-free/
+# https://out7.hex-rays.com/files/idafree84_windows.exe
 
 ida_Windows_X86_64_Import=https://out7.hex-rays.com/files/idafree84_windows.exe
-ida_Type=APP
+ida_Import=https://out7.hex-rays.com/files/idafree84_windows.exe
+ida_Type=Tool

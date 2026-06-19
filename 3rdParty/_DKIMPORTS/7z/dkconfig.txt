@@ -1,4 +1,32 @@
 ############ 7z ############
 # https://www.7-zip.org
+# https://www.7-zip.org/a/7z2409-extra.7z
+# https://www.7-zip.org/a/7z2501-linux-x64.tar.xz
+# https://www.7-zip.org/a/7z2501-linux-x86.tar.xz
+# https://www.7-zip.org/a/7z2501-linux-arm64.tar.xz
+# https://www.7-zip.org/a/7z2501-linux-arm.tar.xz
+# https://www.7-zip.org/a/7z2501-mac.tar.xz
+# https://www.7-zip.org/a/7zr.exe
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-arm.exe
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-arm64.exe
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-extra.7z
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-arm.tar.xz
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-arm64.tar.xz
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-x64.tar.xz
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-x86.tar.xz
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-mac.tar.xz
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501-x64.exe
+# https://github.com/ip7z/7zip/releases/download/25.01/7z2501.exe
 
+
+7z_Type=Tool
+7z_Linux_Arm32_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-arm.tar.xz
+7z_Linux_Arm64_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-x64.tar.xz
+7z_Linux_X86_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-x86.tar.xz
+7z_Linux_X86_64_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-linux-x64.tar.xz
+7z_Mac_X86_64=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-mac.tar.xz
 7z_Windows_X86_64_Import=https://www.7-zip.org/a/7z2409-extra.7z
+7z_Windows_X86_Import=https://github.com/ip7z/7zip/releases/download/25.01/7zr.exe
+7z_Windows_Arm32_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-arm.exe
+7z_Windows_Arm64_Import=https://github.com/ip7z/7zip/releases/download/25.01/7z2501-arm64.exe
+7z_Source=https://github.com/ip7z/7zip/releases/download/25.01/lzma2501.7z

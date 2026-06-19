@@ -1,20 +1,24 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ pofodo ############
 # http://podofo.sourceforge.net
-# https://github.com/mekentosj/podofo
+# https://github.com/mekentosj/podofo.git
+
+dk_validate(Target_Config  "dk_Target_Config()")
+
 
 
 ### DEPEND ###
@@ -28,9 +32,7 @@ dk_depend(tiff)
 dk_depend(zlib)
 
 
-### IMPORT ###
-#dk_import(https://github.com/mekentosj/podofo.git)
-dk_import(http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz)
+dk_import()
 
 
 
@@ -50,8 +52,8 @@ Linux_dk_libDebug		(${podofo_Debug_Dir}/src/podofo/libpodofo.a)
 Linux_dk_libRelease		(${podofo_Release_Dir}/src/podofo/libpodofo.a)
 Raspberry_dk_libDebug	(${podofo_Debug_Dir}/src/podofo/libpodofo.a)
 Raspberry_dk_libRelease	(${podofo_Release_Dir}/src/podofo/libpodofo.a)
-Windows_dk_libDebug			(${podofo}/${Target_Tuple}/src/podofo/${Debug_Dir}/podofo.lib)
-Windows_dk_libRelease		(${podofo}/${Target_Tuple}/src/podofo/${Release_Dir}/podofo.lib)
+Windows_dk_libDebug		(${podofo}/${Target_Tuple}/src/podofo/${Debug_Dir}/podofo.lib)
+Windows_dk_libRelease	(${podofo}/${Target_Tuple}/src/podofo/${Release_Dir}/podofo.lib)
 
 
 ### GENERATE ###
@@ -62,7 +64,7 @@ Ios_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontco
 Linux_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
 Mac_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
 Raspberry_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=-I${libpng} -I${tiff}/${Target_Tuple}/libtiff -I${zlib}/${Target_Tuple}")
-Windows_dk_configure		(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=/I${libpng} /I${tiff}/${Target_Tuple}/libtiff /I${zlib}/${Target_Tuple}")
+Windows_dk_configure	(${podofo} -DPODOFO_BUILD_STATIC=ON ${cryptopp_CMAKE} ${fontconfig_CMAKE} ${freetype_CMAKE} ${libjpeg-turbo_CMAKE} ${libpng_CMAKE} ${lua_CMAKE} ${tiff_CMAKE} ${zlib_CMAKE} "-DCMAKE_CXX_FLAGS=/I${libpng} /I${tiff}/${Target_Tuple}/libtiff /I${zlib}/${Target_Tuple}")
 
 
 ### COMPILE ###

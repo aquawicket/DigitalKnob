@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -71,8 +72,8 @@ function(dk_msys2Bash)
 	dk_replaceAll("${bash}"  "C:/"  "/c/"  bash)
 	
 	### run bash as a file
-	#dk_fileWrite($ENV{DKCACHE_DIR}/dkscript.tmp ${bash})
-	#dk_exec(${msys2}/usr/bin/bash $ENV{DKCACHE_DIR}/dkscript.tmp NOECHO)	
+	#dk_fileWrite(${DKCACHE_DIR}/dkscript.tmp ${bash})
+	#dk_exec(${msys2}/usr/bin/bash ${DKCACHE_DIR}/dkscript.tmp NOECHO)	
 	
 	### run bash as a string parameter
 	#dk_info("\n${clr}${magenta} dk_msys2Bash> ${bash}\n")

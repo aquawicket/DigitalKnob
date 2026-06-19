@@ -2,8 +2,14 @@
 # https://docs.python.org/3/using/windows.html
 # https://silentinstallhq.com/python-3-10-silent-install-how-to-guide/
 # https://wiki.termux.com/wiki/Python
+# https://stackoverflow.com/a/48906746
+# https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tar.xz
+# https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg
+# https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip
+# https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-amd64.zip
+# https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-win32.zip
 
-# 3.11.8
+python3_Type=Tool
 python3_Linux_X86_64_Import=https://www.python.org/ftp/python/3.11.8/Python-3.11.8.tar.xz
 python3_Mac_X86_64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-macos11.pkg
 python3_Windows_Arm64_Import=https://www.python.org/ftp/python/3.11.8/python-3.11.8-embed-arm64.zip

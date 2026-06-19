@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DosTips - The DOS Batch Guide</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DosTips - The DOS Batch Guide</H1>
+<span class='shortText'>Home Page</span><br><br>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This DOS batch guide brings <b>structure</b> into your DOS script by using real function like 
+constructs within a DOS batch file. It offers a <b>DOS function collection</b>, <b>tutorials</b> 
+and <b>examples</b>, plus a <b>forum</b> to discuss related topics.
+<br>
+<!-- SiteSearch Google -->
+<form method="get" action="DtGeneSearch.php" target="_top">
+<table border="0" bgcolor="#ffffff">
+<tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="https://www.google.com/">
+<img src="https://www.google.com/logos/Logo_25wht.gif" border="0" alt="Google" align="middle"></img></a>
+</td>
+<td nowrap="nowrap">
+<input type="hidden" name="domains" value="www.dostips.com"></input>
+<label for="sbi" style="display: none">Enter your search terms</label>
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi"></input>
+<label for="sbb" style="display: none">Submit search form</label>
+<input type="submit" name="sa" value="Search" id="sbb"></input>
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap">
+<table>
+<tr>
+<td>
+<input type="radio" name="sitesearch" value="" id="ss0"></input>
+<label for="ss0" title="Search the Web"><font size="-1" color="#000000">Web</font></label></td>
+<td>
+<input type="radio" name="sitesearch" value="www.dostips.com" checked id="ss1"></input>
+<label for="ss1" title="Search www.dostips.com"><font size="-1" color="#000000">www.dostips.com</font></label></td>
+</tr>
+</table>
+<input type="hidden" name="client" value="pub-4331089886589220"></input>
+<input type="hidden" name="forid" value="1"></input>
+<input type="hidden" name="channel" value="0649133363"></input>
+<input type="hidden" name="ie" value="ISO-8859-1"></input>
+<input type="hidden" name="oe" value="ISO-8859-1"></input>
+<input type="hidden" name="safe" value="active"></input>
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:11"></input>
+<input type="hidden" name="hl" value="en"></input>
+</td></tr></table>
+</form>
+<!-- SiteSearch Google --></td>
+    </tr>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='DtTipsArithmetic.php'>DOS - Arithmetic</a></td>
+<td class='text'>How to use SET /A for arithmetic in DOS</td>
+</tr>
+<tr><td class='title'><a href='DtTipsExperimental.php'>DOS - Experimental Stuff</a></td>
+<td class='text'>Experiments.</td>
+</tr>
+<tr><td class='title'><a href='DtTutoFirstBatch.php'>DOS - My First Batch File</a></td>
+<td class='text'>Learn how to write a DOS batch file yourself.</td>
+</tr>
+<tr><td class='title'><a href='DtGeneEnabler.php'>DOS - Powerful Enablers</a></td>
+<td class='text'>Basic yet powerful features make DOS a quite interesting script language.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeSnippets.php'>DOS - Script Snippets</a></td>
+<td class='text'>DOS Batch Script Snippets.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsStringManipulation.php'>DOS - String Manipulation</a></td>
+<td class='text'>Basic string manipulation in batch like you are used to from other programming languages.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsStringOperations.php'>DOS - String Operations</a></td>
+<td class='text'>Basic string operations in batch like you are used to from other programming languages.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsXCopy.php'>DOS - XCopy Copy Tips</a></td>
+<td class='text'>Use XCopy for more than copy.  I.e. check if a file is open and more...</td>
+</tr>
+<tr><td class='title'><a href='DtTipsDateTime.php'>DOS Batch - Date and Time</a></td>
+<td class='text'>Using date and time functions in DOS.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeBatchFiles.php'>DOS Batch - File Examples</a></td>
+<td class='text'>A collection of batch files.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsFtpBatchScript.php'>DOS Batch - FTP Scripts</a></td>
+<td class='text'>File Transfer with FTP, One-File Solutions.</td>
+</tr>
+<tr><td class='title'><a href='DtTutoFunctions.php'>DOS Batch - Function Tutorial</a></td>
+<td class='text'>What it is, why it`s important and how to write your own.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeCmdLib.php'>DOS Batch - Functions</a></td>
+<td class='text'>Keep your batch script clean, call DOS functions.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeInterfacing.php'>DOS Batch - Interfacing non DOS Software</a></td>
+<td class='text'>Embed other languages into your batch, like: Perl, SQL, FTP, ...</td>
+</tr>
+<tr><td class='title'><a href='DtTipsMenu.php'>DOS Batch - Menus</a></td>
+<td class='text'>Need a menu?  See which of these menu frameworks fits your needs.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsQuine.php'>DOS Batch - Quine Collection</a></td>
+<td class='text'>Self-Reproducing Batch Programs created by Peter Hartmann, founder of DosTips.com.</td>
+</tr>
+<tr><td class='title'><a href='DtGeneSitemap.php'>DosTips - Sitemap</a></td>
+<td class='text'>Detailed list of available pages at dostips.com</td>
+</tr>
+<tr><td class='title'><a href='/'>DosTips - The DOS Batch Guide</a></td>
+<td class='text'>Home Page</td>
+</tr>
+<tr><td class='title'><a href='DtGeneGeneral.php'>General</a></td>
+<td class='text'>Contact information, DosTips.com / CmdTips.com terms of use, ... and more</td>
+</tr>
+<tr><td class='title'><a href='/?i=UnitTest'>Unit Test Function Library</a></td>
+<td class='text'>Unit Test for DosTips Functions.</td>
+</tr>
+</table><br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f14a33c46f412',t:'MTc2OTkyNDA3Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

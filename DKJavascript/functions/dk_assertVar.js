@@ -5,7 +5,7 @@ dk_depend("dk_error");
 //# dk_assertVar(expression)
 //#
 dk_assertVar = function dk_assertVar_f(variable){
-	//dk_debugFunc 0
+	//dk_debugFunc(0);
 
 	if(dk_valid(variable)){
 		return;

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -29,9 +30,9 @@ function(dk_pause)
 	dk_echo("${pause_msg}")
 	
 	###### Cmd ######
-	if(DEFINED ENV{COMSPEC})
-		dk_replaceAll($ENV{COMSPEC} "/" "\\" cmd_exe)   # convert to windows path delimiters
-		set(cmnd ${cmd_exe} /c pause >nul)
+	if(DEFINED ENV{ComSpec})
+		dk_replaceAll($ENV{ComSpec} "/" "\\" ComSpec)   # convert to windows path delimiters
+		set(cmnd ${ComSpec} /c pause >nul)
 		#dk_debug("${cmnd}")
 		execute_process(COMMAND ${cmnd})
 		dk_return()
@@ -64,7 +65,7 @@ function(dk_pause)
 		dk_return()
 	endif()
 	
-	dk_fatal("dk_pause() failed:  cant find cmd_exe, bash_exe or sh_exe!")
+	dk_fatal("dk_pause() failed:  cant find cmd.exe, bash_exe or sh_exe!")
 endfunction()
 
 

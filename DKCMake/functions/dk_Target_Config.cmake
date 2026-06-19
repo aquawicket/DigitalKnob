@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -32,10 +33,9 @@ include_guard()
 function(dk_Target_Config)
 	dk_debugFunc(0)
 	
-	dk_validate(Target_Type  	"dk_Target_Type()")
-	
 	dk_validate(Target_Tuple  	"dk_Target_Tuple()")
-	dk_validate(DKCMAKE_DIR "dk_DKBRANCH_DIR()")
+	dk_validate(Target_Type  	"dk_Target_Type()")
+	dk_validate(DKCMAKE_DIR 	"dk_DKBRANCH_DIR()")
 	dk_load("${DKCMAKE_DIR}/DKVariables.cmake")
 	
 	dk_CMAKE_GENERATOR()
@@ -123,20 +123,9 @@ function(dk_Target_Config)
 	### CURRENT_PLUGIN_Config_Dir ###
 	if(CURRENT_PLUGIN)
 		dk_set(${CURRENT_PLUGIN}_Config_Dir "${${CURRENT_PLUGIN}}/${Target_Config}")
+		dk_debug("${CURRENT_PLUGIN}_Config_Dir = ${${CURRENT_PLUGIN}_Config_Dir}")
 	endif()
-		
-	### Target_Build ###
-	if(Debug)
-		dk_set(Target_Build   ${Target_Tuple}/${Debug_Dir})
-	elseif(Release)
-		dk_set(Target_Build   ${Target_Tuple}/${Release_Dir})
-	endif()
-	dk_assertVar(Target_Build)
-	
-	if(CURRENT_PLUGIN)
-		dk_set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Build}")
-	endif()
-	
+
 endfunction()
 
 

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -22,7 +23,7 @@ function(dk_Host_Os)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(Host_Os "${ARGV0}")
+		dk_set(Host_Os "${ARGV}")
 
 	###### GET ######
 	elseif(NOT DEFINED ENV{Host_Os})
@@ -58,8 +59,10 @@ function(dk_Host_Os)
 		dk_set(Host_Os "$ENV{Host_Os}")
 	endif()
 
+	dk_validateFunc(dk_assertVar)
 	dk_assertVar(Host_Os)
 	dk_set(${Host_Os}_Host 1)
+	dk_assertVar(${Host_Os}_Host)
 
 
 	###### VALIDATE RESULT ######
@@ -72,7 +75,7 @@ function(dk_Host_Os)
 	elseif(Raspberry_Host)
 	elseif(Windows_Host)
 	else()
-		dk_fatal("Host_OS:'${Host_OS}' is INVALID!")
+		dk_error("Host_OS:'${Host_OS}' is INVALID!")
 	endif()
 endfunction()
 
@@ -87,11 +90,11 @@ function(DKTEST)
 
 	###### GET ######
     dk_Host_Os()
-	dk_printVar(Host_Os)
-	dk_printVar(${Host_Os}_Host)
+	dk_debug("Host_Os = ${Host_Os}")
+	dk_debug("${Host_Os}_Host = ${${Host_Os}_Host}")
 	
 	###### SET ######
-	dk_Host_Os("Windows")
-	dk_printVar(Host_Os)
-	dk_printVar(${Host_Os}_Host)
+	dk_Host_Os("Raspberry_Host")
+	dk_debug("Host_Os = ${Host_Os}")
+	dk_debug("${Host_Os}_Host = ${${Host_Os}_Host}")
 endfunction()

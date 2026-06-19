@@ -6,7 +6,7 @@ https://github.com/termux/termux-app/releases/download/v0.118.0/termux-app_v0.11
 apt update
 apt upgrade -y
 apt install wget -y
-wget https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/build.sh
+wget http://aquawicket.com/DigitalKnob/Development/DKBash/apps/DKBuilder/DKBuilder.sh
 chmod 777 build.sh
 sed -i -e 's/\r$//' build.sh
 ./build.sh

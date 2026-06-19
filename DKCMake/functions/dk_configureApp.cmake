@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -108,7 +109,7 @@ function(dk_configureApp)
 		
 		####################### Create Executable Target ###################
 		if(HAVE_DK)
-			##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+			##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.h ${Target_App_Dir}/resource.h)
 			dk_copy(${DKCPP_PLUGINS_DIR}/_DKIMPORT/win/resource.rc ${Target_App_Dir}/resource.rc)
 			file(GLOB_RECURSE resources_SRC 
@@ -123,6 +124,9 @@ function(dk_configureApp)
 			add_executable(${Target_App} WIN32 ${App_SRC})
 		else()
 			add_executable(${Target_App} ${App_SRC})
+		endif()
+		if(Emscripten)
+			set(CMAKE_EXECUTABLE_SUFFIX ".html")
 		endif()
 		
 		########################## Add Dependencies ########################
@@ -185,5 +189,5 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
-	dk_configureApp("$ENV{DKCPP_APPS_DIR}/DKCore")
+	dk_configureApp("${DKCPP_APPS_DIR}/DKCore")
 endfunction()

@@ -1,52 +1,55 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 :main
     setlocal
 
-	set "file=%USERPROFILE%\DigitalKnob\Development\TODO.txt"
+	%dk_call% dk_validate DKBRANCH_DIR	%dk_call% dk_DKBRANCH_DIR
+	set "file=%DKBRANCH_DIR%/TODO.txt"
 	
-    if "%file%" equ "" goto :help
     if NOT EXIST "%file%" (
-        echo Input file '%file%' NOT found
-        goto :eof
+        echo Input file:'%file%' NOT found
+        goto:eof
     )
-
-    set FN=%file%
     set last_fdate=x
-
-    title Monitoring file: '%FN%'
+    title Monitoring file:'%file%'
 
     :repeat
-        :: Get the file date/time, size and attributes
-        for %%a in (%FN%) do set fdate=%%~ta.%%~za.%%~aa
+        rem Get the file date/time, size and attributes
+        for %%a in (%file%) do (set fdate=%%~ta.%%~za.%%~aa)
 
-        :: Different attributes found?
+        rem Different attributes found?
         if "%last_fdate%" neq "%fdate%" (
             %dk_call% dk_clearScreen
-			%dk_call% dk_echo "Monitoring %FN% for changes"
+			%dk_call% dk_echo "Monitoring %file% for changes"
 			%dk_call% dk_echo "   last file info = %last_fdate%"
 			%dk_call% dk_echo "current file info = %fdate%"
 			%dk_call% dk_echo "press 'q' to quit"
         )
 
-        :: Remember the new date/time
+        rem Remember the new date/time
         set last_fdate=%fdate%
 
-        :: Wait for a second before checking for the file modification again
-        CHOICE /T 1 /C "yq" /D y > nul
+        rem Wait for a second before checking for the file modification again
+		if NOT DEFINED choice.exe (
+			set "choice.exe=C:/Windows/System32/choice.exe"
+		)
+        "%choice.exe:/=\%" /T 1 /C "yq" /D y > nul
 
-        :: User pressed Q? just quit
-        if "%errorlevel%" neq "1" goto :eof
+        rem User pressed Q? just quit
+        if "%errorlevel%" neq "1" (goto:eof)
 
-        :: Repeat until user quits or Ctrl-C
-        goto repeat
-
-:help
-    echo Auto Python reinterpreter takes the input file name to autocompile as an argument
-	pause
-    goto :eof
+        rem Repeat until user quits or Ctrl-C
+        goto:repeat
+exit /b %errorlevel%

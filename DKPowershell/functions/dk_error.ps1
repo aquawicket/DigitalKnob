@@ -11,6 +11,11 @@ if(!$dk_error_ps1){ $dk_error_ps1 = 1; } else{ return; } #include guard
 function Global:dk_error() {
 	dk_debugFunc 0 1;
 	
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
+	
 	dk_call dk_log ERROR "$($args[0])";
 }
 
@@ -21,4 +26,6 @@ function Global:DKTEST() {
 	dk_debugFunc 0;
 	
 	dk_call dk_error "test dk_error message";
+	dk_call dk_error; 
+	dk_call dk_error "test dk_error new line";
 }

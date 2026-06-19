@@ -1,42 +1,49 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::# http://cplusplus.bordoon.com/cmd_exe_variables.html
+rem # http://cplusplus.bordoon.com/cmd_exe_variables.html
 
 :main
-::	set IN=%0
-set "IN=%windir%\NonExistent.file
-::	set "IN=%0"
-::	set IN=%~0
-::	set "IN=%~0"
-::	set "IN=%ProgramFiles%\WSL\wsl.exe"
-::	set "IN=%USERPROFILE%\DigitalKnob\Development\DKBatch\tests\test_blank.cmd"
-::	set "IN=%ProgramFiles:\=/%/WSL/wsl.exe"
-::  set "IN=test_dk_echo.cmd"
-::  set "IN=/test_dk_echo.cmd"
-::  set "IN=\test_dk_echo.cmd"
-::	set "IN=../docs.txt"
-::	set "IN=..\docs.txt"
-::	set "IN=..\functions\DK.cmd"
-::	set "IN=../functions/DK.cmd"
-::	set "IN=../functions\DK.cmd"
-::	set "IN=..\functions/DK.cmd"
-::	set "IN=..\\functions\\DK.cmd"
-::	set "IN=..//functions//DK.cmd"
-::	set "IN=..\..\DKBatch\functions\DK.cmd"
-::	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
-::	set IN=%USERPROFILE%\DigitalKnob\Development\DKBatch\
-::	set "IN=%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/DK.cmd"
-::	set "IN=%USERPROFILE%\DigitalKnob\Development\DKBatch"
+rem 	set IN=%0
+set "IN=%SystemRoot%\NonExistent.file
+rem 	set "IN=%0"
+rem 	set IN=%~0
+rem 	set "IN=%~0"
+rem 	set "IN=%ProgramFiles%\WSL\wsl.exe"
+rem 	set "IN=%USERPROFILE%\Digital Knob\Development\DKBatch\tests\test_blank.cmd"
+rem 	set "IN=%ProgramFiles:\=/%/WSL/wsl.exe"
+rem		set "IN=test_dk_echo.cmd"
+rem 	set "IN=/test_dk_echo.cmd"
+rem 	set "IN=\test_dk_echo.cmd"
+rem 	set "IN=../docs.txt"
+rem 	set "IN=..\docs.txt"
+rem 	set "IN=..\functions\DK.cmd"
+rem 	set "IN=../functions/DK.cmd"
+rem 	set "IN=../functions\DK.cmd"
+rem 	set "IN=..\functions/DK.cmd"
+rem 	set "IN=..\\functions\\DK.cmd"
+rem 	set "IN=..//functions//DK.cmd"
+rem 	set "IN=..\..\DKBatch\functions\DK.cmd"
+rem 	set "IN=..\..\DKBatch\..\Batch\functions\DK.cmd"
+rem 	set IN=%USERPROFILE%\Digital Knob\Development\DKBatch\
+rem 	set "IN=%USERPROFILE:\=/%/Digital Knob/Development/DKBatch/DK.cmd"
+rem 	set "IN=%USERPROFILE%\Digital Knob\Development\DKBatch"
 
 	echo IN         = "%IN%"
 
 	%dk_call% dk_pathExists "%IN%"
-	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" does NOT EXIST)
+	%dk_call% dk_pathExists "%IN%" && (echo "%IN%" exists) || (echo "%IN%" NOT FOUND)
 	
 	call :get_variable "%IN%" get_variable
 	echo get_variable   = %get_variable%
@@ -74,8 +81,8 @@ set "IN=%windir%\NonExistent.file
 %endfunction%
 
 
-:: print all variable names
-::for /f "usebackq delims==" %%i in (`set`) do @echo %%i
+rem  print all variable names
+rem for /f "usebackq delims==" %%i in (`set`) do @echo %%i
 
 :get_variable
 	set _input=%1

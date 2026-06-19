@@ -10,6 +10,6 @@
 	Set "Fmt=%~2"
 	if NOT defined Fmt (Set "Fmt=__FILE__(__LINE__): ERROR")
 	For /F "Delims=:" %%A In ('"Findstr /N "%~1" "%~f0""') Do (set /A "lineNr=%%A+%~30/10")
-	call set "Fmt=%%Fmt:__LINE__=%lineNr%%%"			&:: FIXME: remove the need for call here
+	call set "Fmt=%%Fmt:__LINE__=%lineNr%%%"			&rem FIXME: remove the need for call here
 	call echo.%%Fmt:__FILE__=%~nx0%%
-%endfunction%
+exit /b 0

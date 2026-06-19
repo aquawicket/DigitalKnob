@@ -1,0 +1,7 @@
+############ ilmerge ############
+# https://github.com/dotnet/ILMerge
+# https://www.nuget.org/packages/ilmerge
+# https://github.com/dotnet/ILMerge.git
+# https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip
+
+ilmerge=https://github.com/dotnet/ILMerge/archive/9ec1b3f29f6f11b8fc2ddcca4c055dae7b10d9e3.zip

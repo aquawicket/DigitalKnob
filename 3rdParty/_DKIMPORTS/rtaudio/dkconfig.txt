@@ -1,0 +1,6 @@
+############ rtaudio ############
+# https://github.com/thestk/rtaudio.git
+# https://github.com/thestk/rtaudio/archive/ab7daaae763c8e0dcea611a9e190fa46d95b2639.zip
+# https://github.com/thestk/rtaudio/archive/409636b5dcad3054ae5a9e85014bba3861b8edab.zip
+
+rtaudio_Import=https://github.com/thestk/rtaudio/archive/409636b5dcad3054ae5a9e85014bba3861b8edab.zip

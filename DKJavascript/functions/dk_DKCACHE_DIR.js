@@ -19,7 +19,7 @@ dk_DKCACHE_DIR = function dk_DKCACHE_DIR(){
 
 	//dk_depend("dk_assertPath"); dk_assertPath(DKCACHE_DIR);
 	
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = DKCACHE_DIR;
 	} else {

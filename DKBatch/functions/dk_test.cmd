@@ -1,17 +1,23 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_test(args)
-::#
+rem ####################################################################
+rem # dk_test(args)
+rem #
 :dk_test
-::echo( & echo %bg_blue%-^> dk_test(%*)%clr%
+rem echo. & echo %bg_blue%-^> dk_test(%*)%clr%
 %setlocal%
-	::%dk_call% dk_debugFunc 0 99
 
 	set "dk_test=Return value from dk_test.cmd"
 	
@@ -33,7 +39,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 					(echo                   DATE = %DATE%)
 					(echo                   TIME = %TIME: =%)
 					(echo                ComSpec = %ComSpec%)
-					(echo()
+					(echo.)
 					(echo             ###### DK variables ######)
 					(echo                 DK.cmd = %DK.cmd%)
 					(echo           DKSHELL_NAME = %DKSHELL_NAME%)
@@ -76,12 +82,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 					(echo            DKBATCH_DIR = %DKBATCH_DIR%)
 					(echo  DKBATCH_FUNCTIONS_DIR = %DKBATCH_FUNCTIONS_DIR%)
 					(echo DKBATCH_FUNCTIONS_DIR_ = %DKBATCH_FUNCTIONS_DIR_%)
-					(echo()
+					(echo.)
 					
 	%dk_call% Test/dk_test "dk_test" "Test/dk_test"
 	echo Test/dk_test = '%Test/dk_test%'
 	
-	::###### output ######
+	:return
 	endlocal & (
 		set "dk_test=%dk_test%"
 		if /i "%~1" equ "RTN_VAR" (
@@ -92,7 +98,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 	
 	exit /b 2
-::echo %bg_blue%^<- dk_test(%*)%clr% & echo(
+rem echo %bg_blue%^<- dk_test(%*)%clr% & echo.
 %endfunction%
 
 
@@ -102,13 +108,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-::	%dk_call% dk_test ":DKTEST" "dk_test" ":DKTEST" "1 2 3"
-::	echo      dk_test = '%dk_test%'
+rem	%dk_call% dk_test ":DKTEST" "dk_test" ":DKTEST" "1 2 3"
+rem	echo      dk_test = '%dk_test%'
 	
 	set command=dk_test
 	for /f "usebackq delims=" %%G in (`call %command% 2^>^&1 ^& call echo ExItCoDe%%^^errorlevel%%`) do (
@@ -121,8 +126,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		)
 	)
 	
-	echo(
-	echo(
+	echo.
+	echo.
 	echo ReTuRnVaL = %ReTuRnVaL%
 	echo ExItCoDe = %ExItCoDe%
 	exit /b %ExItCoDe%

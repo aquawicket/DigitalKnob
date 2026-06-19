@@ -1,20 +1,20 @@
-::EXCEPTION.BAT Version 1.4
-::
-:: Provides exception handling for Windows batch scripts.
-::
-:: Designed and written by Dave Benham, with important contributions from
-:: DosTips users jeb and siberia-man
-::
-:: Full documentation is at the bottom of this script
-::
-:: History:
-::   v1.4 2016-08-16  Improved detection of command line delayed expansion
-::                    using an original idea by jeb
-::   v1.3 2015-12-12  Added paged help option via MORE
-::   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
-::   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
-::   v1.0 2015-06-26  Initial versioned release with embedded documentation
-::
+rem EXCEPTION.BAT Version 1.4
+rem 
+rem Provides exception handling for Windows batch scripts.
+rem 
+rem Designed and written by Dave Benham, with important contributions from
+rem DosTips users jeb and siberia-man
+rem 
+rem Full documentation is at the bottom of this script
+rem 
+rem History:
+rem   v1.4 2016-08-16  Improved detection of command line delayed expansion
+rem                    using an original idea by jeb
+rem   v1.3 2015-12-12  Added paged help option via MORE
+rem   v1.2 2015-07-16  Use ComSpec instead of OS to detect delayed expansion
+rem   v1.1 2015-07-03  Preserve ! in exception attributes when delayed expansion enabled
+rem   v1.0 2015-06-26  Initial versioned release with embedded documentation
+rem 
 @echo off
 if "%~1" equ "/??" goto pagedHelp
 if "%~1" equ "/?" goto help
@@ -24,7 +24,7 @@ shift /1 & goto %~1
 
 :throw  errCode  errMsg  errLoc
 set "exception.Stack="
-:: Fall through to :rethrow
+rem Fall through to :rethrow
 
 
 :rethrow  errCode  errMsg  errLoc
@@ -35,7 +35,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
   for /l %%# in (1 1 10) do for /f "delims=" %%S in (" !exception.Stack!") do (
     (goto) 2>NUL
     setlocal enableDelayedExpansion
-    if "!DE!" equ "" (
+    if "!!" equ "" (
       endlocal
       setlocal disableDelayedExpansion
       call set "funcName=%%~0" 
@@ -46,7 +46,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
         endlocal
         endlocal
         set "exception.Code=%%1"
-        if "!DE!" equ "" (
+        if "!!" equ "" (
           call "%~f0" setDelayed
         ) else (
           set "exception.Msg=%%2"
@@ -54,7 +54,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
           set "exception.Stack=%%S"
         )
         set "exception.Try="
-        (call ) %NO_OUTPUT%
+        %clearerror%
         goto :@Catch
       )
     ) else (
@@ -62,7 +62,7 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
       if "^!^" equ "^!" (
         call "%~f0" showDelayed
       ) else (
-        echo(
+        echo.
         echo Unhandled batch exception:
         echo   Code = %%1
         echo   Msg  = %%2
@@ -77,13 +77,13 @@ for /f "delims=" %%1 in ("%~1") do for /f "delims=" %%2 in ("%~2") do for /f "de
   setlocal disableDelayedExpansion
   call "%~f0" rethrow %1 %2 %3
 )
-:: Never reaches here
+rem Never reaches here
 
 
 :init
 set "@Try=call set exception.Try=%%~f0:%%~0"
 set "@EndTry=set "exception.Try=" & goto :@endCatch"
-:: Fall through to :clear
+rem Fall through to :clear
 
 
 :clear
@@ -94,7 +94,7 @@ exit /b
 :Kill - Cease all processing, ignoring any remaining cached commands
 setlocal disableDelayedExpansion
 if NOT EXIST "%temp%\Kill.Yes" call :buildYes
-call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>&1
+call :CtrlC <"%temp%\Kill.Yes" 1>nul 2>nul
 :CtrlC
 @%ComSpec% /c exit -1073741510
 
@@ -135,7 +135,7 @@ for %%. in (.) do (
 )
 for /f "delims=" %%2 in ("%v2:!=^!%") do for /f "delims=" %%3 in ("%v3:!=^!%") do for /f "delims=" %%S in ("%vS:!=^!%") do (
   endlocal
-  echo(
+  echo.
   echo Unhandled batch exception:
   echo   Code = %%1
   echo   Msg  = %%2
@@ -149,7 +149,7 @@ exit /b
 :help
 setlocal disableDelayedExpansion
 for /f "delims=:" %%N in ('findstr /rbn ":::DOCUMENTATION:::" "%~f0"') do set "skip=%%N"
-for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do echo(%%B
+for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do echo.%%B
 exit /b
 
 
@@ -157,19 +157,19 @@ exit /b
 :pagedHelp
 setlocal disableDelayedExpansion
 for /f "delims=:" %%N in ('findstr /rbn ":::DOCUMENTATION:::" "%~f0"') do set "skip=%%N"
-((for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do @echo(%%B)|more /e) 2>nul
+((for /f "skip=%skip% tokens=1* delims=:" %%A in ('findstr /n "^" "%~f0"') do @echo.%%B)|more /e) 2>nul
 exit /b
 
 
 :-v
 :/v
 :version
-echo(
+echo.
 for /f "delims=:" %%A in ('findstr "^::EXCEPTION.BAT" "%~f0"') do echo %%A
 exit /b
 
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+rem :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :::DOCUMENTATION:::
 
 EXCEPTION.BAT is a pure batch script utility that provides robust exception

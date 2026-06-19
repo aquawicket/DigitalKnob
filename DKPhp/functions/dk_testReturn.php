@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 ##################################################################################
 # dk_testReturn(input, output)
@@ -10,7 +11,7 @@ function dk_testReturn($input, &...$rtn_var){
 	$dk_testReturn = str_replace("input", "output", "$input");
 	
 	
-	### output ####
+	###### return ######
 	if(isset($rtn_var[0])){
 		$rtn_var[0] = $dk_testReturn;			### Result as parameter variable
 	} elseif(isset($dk_testReturn)){
@@ -68,5 +69,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 
 
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

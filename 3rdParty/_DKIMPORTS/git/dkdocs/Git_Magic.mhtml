@@ -1,0 +1,2057 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://www-cs-students.stanford.edu/~blynn/gitmagic/book.html
+Subject: Git Magic
+Date: Wed, 12 Nov 2025 21:11:15 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--djTYCbQdLGAv9jQppZCzQ1T6TSHeZ1vgsZmIaE0Joy----"
+
+
+------MultipartBoundary--djTYCbQdLGAv9jQppZCzQ1T6TSHeZ1vgsZmIaE0Joy----
+Content-Type: text/html
+Content-ID: <frame-3A692B7E47D6E0EA6169218BB9882153@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www-cs-students.stanford.edu/~blynn/gitmagic/book.html
+
+<!DOCTYPE html><html xmlns=3D"http://www.w3.org/1999/xhtml" lang=3D"" xml:l=
+ang=3D""><head><meta http-equiv=3D"Content-Type" content=3D"text/html; char=
+set=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D"cid:css-968=
+0ae4e-7980-4dc9-8454-707e1d118331@mhtml.blink" /><link rel=3D"stylesheet" t=
+ype=3D"text/css" href=3D"cid:css-5994df9d-45cc-4a6d-9716-b25577ef0851@mhtml=
+.blink" />
+ =20
+  <meta name=3D"generator" content=3D"pandoc">
+  <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D=
+1.0, user-scalable=3Dyes">
+  <meta name=3D"author" content=3D"Ben Lynn">
+  <title>Git Magic</title>
+ =20
+</head>
+<body>
+<header id=3D"title-block-header">
+<h1 class=3D"title">Git Magic</h1>
+<p class=3D"author">Ben Lynn</p>
+<p class=3D"date">August 2007</p>
+</header>
+<h1 id=3D"_preface">Preface</h1>
+<p><a href=3D"http://git-scm.com/">Git</a> is a version control Swiss army
+knife. A reliable versatile multipurpose revision control tool whose
+extraordinary flexibility makes it tricky to learn, let alone
+master.</p>
+<p>As Arthur C. Clarke observed, any sufficiently advanced technology is
+indistinguishable from magic. This is a great way to approach Git:
+newbies can ignore its inner workings and view Git as a gizmo that can
+amaze friends and infuriate enemies with its wondrous abilities.</p>
+<p>Rather than go into details, we provide rough instructions for
+particular effects. After repeated use, gradually you will understand
+how each trick works, and how to tailor the recipes for your needs.</p>
+<ul>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+zh_cn/">Simplified Chinese</a>: by
+JunJie, Meng and JiangWei. Converted to <a href=3D"http://www-cs-students.s=
+tanford.edu/~blynn/gitmagic/intl/zh_tw/">Traditional Chinese</a> via
+<code>cconv -f UTF8-CN -t UTF8-TW</code>.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+fr/">French</a>: by Alexandre
+Garel, Paul Gaborit, and Nicolas Deram.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+de/">German</a>: by Benjamin
+Bellee and Armin Stebich; also <a href=3D"http://gitmagic.lordofbikes.de/">=
+hosted on Armin=E2=80=99s
+website</a>.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+it/">Italian</a>: by Mattia
+Rigotti.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+ko/">Korean</a>: by Jung-Ho (John)
+Han; also <a href=3D"https://sites.google.com/site/drinkhanjohn/useful-link=
+s/">hosted
+on John=E2=80=99s website</a>.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+pl/">Polish</a>: by Damian
+Michna.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+pt_br/">Brazilian Portuguese</a>:
+by Jos=C3=A9 In=C3=A1cio Serafini and Leonardo Siqueira Rodrigues.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+ru/">Russian</a>: by Tikhon
+Tarnavsky, Mikhail Dymskov, and others.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+es/">Spanish</a>: by Rodrigo
+Toledo and Ariset Llerena Tapia.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+uk/">Ukrainian</a>: by Volodymyr
+Bodenchuk.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/=
+vi/">Vietnamese</a>: by Tr=E1=BA=A7n Ng=E1=BB=8Dc
+Qu=C3=A2n; also <a href=3D"http://vnwildman.users.sourceforge.net/gitmagic/=
+">hosted on his
+website</a>.</p></li>
+</ul>
+<ul>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/book.=
+html">Single webpage</a>: barebones HTML, with no
+CSS.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/book.=
+pdf">PDF file</a>: printer-friendly.</p></li>
+<li><p><a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/book.=
+epub">EPUB file</a>: E-reader-friendly.</p></li>
+<li><p><a href=3D"http://packages.debian.org/gitmagic">Debian package</a>,
+<a href=3D"http://packages.ubuntu.com/gitmagic">Ubuntu package</a>: get a
+fast and local copy of this site. Handy <a href=3D"http://csdcf.stanford.ed=
+u/status/">when this server is
+offline</a>.</p></li>
+<li><p><a href=3D"http://www.amazon.com/Git-Magic-Ben-Lynn/dp/1451523343/">=
+Physical
+book [Amazon.com</a>]: 64 pages, 15.24cm x 22.86cm, black and white.
+Handy when there is no electricity.</p></li>
+</ul>
+<h2 id=3D"_thanks">Thanks!</h2>
+<p>I=E2=80=99m humbled that so many people have worked on translations of t=
+hese
+pages. I greatly appreciate having a wider audience because of the
+efforts of those named above.</p>
+<p>Dustin Sallings, Alberto Bertogli, James Cameron, Douglas
+Livingstone, Michael Budde, Richard Albury, Tarmigan, Derek Mahar, Frode
+Aannevik, Keith Rarick, Andy Somerville, Ralf Recker, =C3=98yvind A. Holm,
+Miklos Vajna, S=C3=A9bastien Hinderer, Thomas Miedema, Joe Malin, Tyler
+Breisacher, Sonia Hamilton, Julian Haagsma, Romain Lespinasse, Sergey
+Litvinov, Oliver Ferrigni, David Toca, =D0=A1=D0=B5=D1=80=D0=B3=D0=B5=D0=B9=
+ =D0=A1=D0=B5=D1=80=D0=B3=D0=B5=D0=B5=D0=B2, Jo=C3=ABl Thieffry,
+and Baiju Muthukadan contributed corrections and improvements.</p>
+<p>Fran=C3=A7ois Marier maintains the Debian package originally created by
+Daniel Baumann.</p>
+<p>My gratitude goes to many others for your support and praise. I=E2=80=99=
+m
+tempted to quote you here, but it might raise expectations to ridiculous
+heights.</p>
+<p>If I=E2=80=99ve left you out by mistake, please tell me or just send me =
+a
+patch!</p>
+<h2 id=3D"_license">License</h2>
+<p>This guide is released under <a href=3D"http://www.gnu.org/licenses/gpl-=
+3.0.html">the GNU General Public
+License, version 3</a> or any later version published by the Free
+Software Foundation.</p>
+<p>Naturally, the source is kept in a Git repository, and can be
+obtained by typing:</p>
+<pre><code>$ git clone git://repo.or.cz/gitmagic.git  # Creates "gitmagic" =
+directory.</code></pre>
+<p>or from one of the mirrors:</p>
+<pre><code>$ git clone git://github.com/blynn/gitmagic.git
+$ git clone git://git.assembla.com/gitmagic.git
+$ git clone git@bitbucket.org:blynn/gitmagic.git</code></pre>
+<p>GitHub, Assembla, and Bitbucket support private repositories, the
+latter two for free.</p>
+<h1 id=3D"_introduction">Introduction</h1>
+<p>I=E2=80=99ll use an analogy to introduce version control. See <a href=3D=
+"http://en.wikipedia.org/wiki/Revision_control">the Wikipedia entry
+on revision control</a> for a saner explanation.</p>
+<h2 id=3D"_work_is_play">Work is Play</h2>
+<p>I=E2=80=99ve played computer games almost all my life. In contrast, I on=
+ly
+started using version control systems as an adult. I suspect I=E2=80=99m no=
+t
+alone, and comparing the two may make these concepts easier to explain
+and understand.</p>
+<p>Think of editing your code, or document, as playing a game. Once
+you=E2=80=99ve made a lot of progress, you=E2=80=99d like to save. To do so=
+, you click
+on the <em>Save</em> button in your trusty editor.</p>
+<p>But this will overwrite the old version. It=E2=80=99s like those old sch=
+ool
+games which only had one save slot: sure you could save, but you could
+never go back to an older state. Which was a shame, because your
+previous save might have been right at an exceptionally fun part of the
+game that you=E2=80=99d like to revisit one day. Or worse still, your curre=
+nt
+save is in an unwinnable state, and you have to start again.</p>
+<h2 id=3D"_version_control">Version Control</h2>
+<p>When editing, you can <em>Save As=E2=80=A6</em> a different file, or cop=
+y the
+file somewhere first before saving if you want to savour old versions.
+You can compress them too to save space. This is a primitive and
+labour-intensive form of version control. Computer games improved on
+this long ago, many of them providing multiple automatically timestamped
+save slots.</p>
+<p>Let=E2=80=99s make the problem slightly tougher. Say you have a bunch of
+files that go together, such as source code for a project, or files for
+a website. Now if you want to keep an old version you have to archive a
+whole directory. Keeping many versions around by hand is inconvenient,
+and quickly becomes expensive.</p>
+<p>With some computer games, a saved game really does consist of a
+directory full of files. These games hide this detail from the player
+and present a convenient interface to manage different versions of this
+directory.</p>
+<p>Version control systems are no different. They all have nice
+interfaces to manage a directory of stuff. You can save the state of the
+directory every so often, and you can load any one of the saved states
+later on. Unlike most computer games, they=E2=80=99re usually smart about
+conserving space. Typically, only a few files change from version to
+version, and not by much. Storing the differences instead of entire new
+copies saves room.</p>
+<h2 id=3D"_distributed_control">Distributed Control</h2>
+<p>Now imagine a very difficult computer game. So difficult to finish
+that many experienced gamers all over the world decide to team up and
+share their saved games to try to beat it. Speedruns are real-life
+examples: players specializing in different levels of the same game
+collaborate to produce amazing results.</p>
+<p>How would you set up a system so they can get at each other=E2=80=99s sa=
+ves
+easily? And upload new ones?</p>
+<p>In the old days, every project used centralized version control. A
+server somewhere held all the saved games. Nobody else did. Every player
+kept at most a few saved games on their machine. When a player wanted to
+make progress, they=E2=80=99d download the latest save from the main server=
+,
+play a while, save and upload back to the server for everyone else to
+use.</p>
+<p>What if a player wanted to get an older saved game for some reason?
+Maybe the current saved game is in an unwinnable state because somebody
+forgot to pick up an object back in level three, and they want to find
+the latest saved game where the game can still be completed. Or maybe
+they want to compare two older saved games to see how much work a
+particular player did.</p>
+<p>There could be many reasons to want to see an older revision, but the
+outcome is the same. They have to ask the central server for that old
+saved game. The more saved games they want, the more they need to
+communicate.</p>
+<p>The new generation of version control systems, of which Git is a
+member, are known as distributed systems, and can be thought of as a
+generalization of centralized systems. When players download from the
+main server they get every saved game, not just the latest one. It=E2=80=99=
+s as
+if they=E2=80=99re mirroring the central server.</p>
+<p>This initial cloning operation can be expensive, especially if
+there=E2=80=99s a long history, but it pays off in the long run. One immedi=
+ate
+benefit is that when an old save is desired for any reason,
+communication with the central server is unnecessary.</p>
+<h2 id=3D"_a_silly_superstition">A Silly Superstition</h2>
+<p>A popular misconception is that distributed systems are ill-suited
+for projects requiring an official central repository. Nothing could be
+further from the truth. Photographing someone does not cause their soul
+to be stolen. Similarly, cloning the master repository does not diminish
+its importance.</p>
+<p>A good first approximation is that anything a centralized version
+control system can do, a well-designed distributed system can do better.
+Network resources are simply costlier than local resources. While we
+shall later see there are drawbacks to a distributed approach, one is
+less likely to make erroneous comparisons with this rule of thumb.</p>
+<p>A small project may only need a fraction of the features offered by
+such a system, but using systems that scale poorly for tiny projects is
+like using Roman numerals for calculations involving small numbers.</p>
+<p>Moreover, your project may grow beyond your original expectations.
+Using Git from the outset is like carrying a Swiss army knife even
+though you mostly use it to open bottles. On the day you desperately
+need a screwdriver you=E2=80=99ll be glad you have more than a plain
+bottle-opener.</p>
+<h2 id=3D"_merge_conflicts">Merge Conflicts</h2>
+<p>For this topic, our computer game analogy becomes too thinly
+stretched. Instead, let us again consider editing a document.</p>
+<p>Suppose Alice inserts a line at the beginning of a file, and Bob
+appends one at the end of his copy. They both upload their changes. Most
+systems will automatically deduce a reasonable course of action: accept
+and merge their changes, so both Alice=E2=80=99s and Bob=E2=80=99s edits ar=
+e
+applied.</p>
+<p>Now suppose both Alice and Bob have made distinct edits to the same
+line. Then it is impossible to proceed without human intervention. The
+second person to upload is informed of a <em>merge conflict</em>, and
+must choose one edit over another, or revise the line entirely.</p>
+<p>More complex situations can arise. Version control systems handle the
+simpler cases themselves, and leave the difficult cases for humans.
+Usually their behaviour is configurable.</p>
+<h1 id=3D"_basic_tricks">Basic Tricks</h1>
+<p>Rather than diving into a sea of Git commands, use these elementary
+examples to get your feet wet. Despite their simplicity, each of them
+are useful. Indeed, in my first months with Git I never ventured beyond
+the material in this chapter.</p>
+<h2 id=3D"_saving_state">Saving State</h2>
+<p>About to attempt something drastic? Before you do, take a snapshot of
+all files in the current directory with:</p>
+<pre><code>$ git init
+$ git add .
+$ git commit -m "My first backup"</code></pre>
+<p>Now if your new edits go awry, restore the pristine version:</p>
+<pre><code>$ git reset --hard</code></pre>
+<p>To save the state again:</p>
+<pre><code>$ git commit -a -m "Another backup"</code></pre>
+<h2 id=3D"_add_delete_rename">Add, Delete, Rename</h2>
+<p>The above only keeps track of the files that were present when you
+first ran <strong>git add</strong>. If you add new files or
+subdirectories, you=E2=80=99ll have to tell Git:</p>
+<pre><code>$ git add readme.txt Documentation</code></pre>
+<p>Similarly, if you want Git to forget about certain files:</p>
+<pre><code>$ git rm kludge.h obsolete.c
+$ git rm -r incriminating/evidence/</code></pre>
+<p>Git deletes these files for you if you haven=E2=80=99t already.</p>
+<p>Renaming a file is the same as removing the old name and adding the
+new name. There=E2=80=99s also the shortcut <strong>git mv</strong> which h=
+as
+the same syntax as the <strong>mv</strong> command. For example:</p>
+<pre><code>$ git mv bug.c feature.c</code></pre>
+<h2 id=3D"_advanced_undo_redo">Advanced Undo/Redo</h2>
+<p>Sometimes you just want to go back and forget about every change past
+a certain point because they=E2=80=99re all wrong. Then:</p>
+<pre><code>$ git log</code></pre>
+<p>shows you a list of recent commits, and their SHA1 hashes:</p>
+<pre><code>commit 766f9881690d240ba334153047649b8b8f11c664
+Author: Bob &lt;bob@example.com&gt;
+Date:   Tue Mar 14 01:59:26 2000 -0800
+
+    Replace printf() with write().
+
+commit 82f5ea346a2e651544956a8653c0f58dc151275c
+Author: Alice &lt;alice@example.com&gt;
+Date:   Thu Jan 1 00:00:00 1970 +0000
+
+    Initial commit.</code></pre>
+<p>The first few characters of the hash are enough to specify the
+commit; alternatively, copy and paste the entire hash. Type:</p>
+<pre><code>$ git reset --hard 766f</code></pre>
+<p>to restore the state to a given commit and erase all newer commits
+from the record permanently.</p>
+<p>Other times you want to hop to an old state briefly. In this case,
+type:</p>
+<pre><code>$ git checkout 82f5</code></pre>
+<p>This takes you back in time, while preserving newer commits. However,
+like time travel in a science-fiction movie, if you now edit and commit,
+you will be in an alternate reality, because your actions are different
+to what they were the first time around.</p>
+<p>This alternate reality is called a <em>branch</em>, and <a href=3D"http:=
+//www-cs-students.stanford.edu/~blynn/gitmagic/book.html#branch">we=E2=80=
+=99ll have more to say about this later</a>. For now,
+just remember that</p>
+<pre><code>$ git checkout master</code></pre>
+<p>will take you back to the present. Also, to stop Git complaining,
+always commit or reset your changes before running checkout.</p>
+<p>To take the computer game analogy again:</p>
+<ul>
+<li><p><strong><code>git reset --hard</code></strong>: load an old save
+and delete all saved games newer than the one just loaded.</p></li>
+<li><p><strong><code>git checkout</code></strong>: load an old game, but
+if you play on, the game state will deviate from the newer saves you
+made the first time around. Any saved games you make now will end up in
+a separate branch representing the alternate reality you have entered.
+<a href=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/book.html#br=
+anch">We deal with this later</a>.</p></li>
+</ul>
+<p>You can choose only to restore particular files and subdirectories by
+appending them after the command:</p>
+<pre><code>$ git checkout 82f5 some.file another.file</code></pre>
+<p>Take care, as this form of <strong>checkout</strong> can silently
+overwrite files. To prevent accidents, commit before running any
+checkout command, especially when first learning Git. In general,
+whenever you feel unsure about any operation, Git command or not, first
+run <strong>git commit -a</strong>.</p>
+<p>Don=E2=80=99t like cutting and pasting hashes? Then use:</p>
+<pre><code>$ git checkout :/"My first b"</code></pre>
+<p>to jump to the commit that starts with a given message. You can also
+ask for the 5th-last saved state:</p>
+<pre><code>$ git checkout master~5</code></pre>
+<h2 id=3D"_reverting">Reverting</h2>
+<p>In a court of law, events can be stricken from the record. Likewise,
+you can pick specific commits to undo.</p>
+<pre><code>$ git commit -a
+$ git revert 1b6d</code></pre>
+<p>will undo just the commit with the given hash. The revert is recorded
+as a new commit, which you can confirm by running <strong>git
+log</strong>.</p>
+<h2 id=3D"_changelog_generation">Changelog Generation</h2>
+<p>Some projects require a <a href=3D"http://en.wikipedia.org/wiki/Changelo=
+g">changelog</a>. Generate
+one by typing:</p>
+<pre><code>$ git log &gt; ChangeLog</code></pre>
+<h2 id=3D"_downloading_files">Downloading Files</h2>
+<p>Get a copy of a project managed with Git by typing:</p>
+<pre><code>$ git clone git://server/path/to/files</code></pre>
+<p>For example, to get all the files I used to create this site:</p>
+<pre><code>$ git clone git://git.or.cz/gitmagic.git</code></pre>
+<p>We=E2=80=99ll have much to say about the <strong>clone</strong> command
+soon.</p>
+<h2 id=3D"_the_bleeding_edge">The Bleeding Edge</h2>
+<p>If you=E2=80=99ve already downloaded a copy of a project using <strong>g=
+it
+clone</strong>, you can upgrade to the latest version with:</p>
+<pre><code>$ git pull</code></pre>
+<h2 id=3D"_instant_publishing">Instant Publishing</h2>
+<p>Suppose you=E2=80=99ve written a script you=E2=80=99d like to share with=
+ others. You
+could just tell them to download from your computer, but if they do so
+while you=E2=80=99re improving the script or making experimental changes, t=
+hey
+could wind up in trouble. Of course, this is why release cycles exist.
+Developers may work on a project frequently, but they only make the code
+available when they feel it is presentable.</p>
+<p>To do this with Git, in the directory where your script resides:</p>
+<pre><code>$ git init
+$ git add .
+$ git commit -m "First release"</code></pre>
+<p>Then tell your users to run:</p>
+<pre><code>$ git clone your.computer:/path/to/script</code></pre>
+<p>to download your script. This assumes they have ssh access. If not,
+run <strong>git daemon</strong> and tell your users to instead run:</p>
+<pre><code>$ git clone git://your.computer/path/to/script</code></pre>
+<p>From now on, every time your script is ready for release,
+execute:</p>
+<pre><code>$ git commit -a -m "Next release"</code></pre>
+<p>and your users can upgrade their version by changing to the directory
+containing your script and typing:</p>
+<pre><code>$ git pull</code></pre>
+<p>Your users will never end up with a version of your script you don=E2=80=
+=99t
+want them to see.</p>
+<h2 id=3D"_what_have_i_done">What Have I Done?</h2>
+<p>Find out what changes you=E2=80=99ve made since the last commit with:</p=
+>
+<pre><code>$ git diff</code></pre>
+<p>Or since yesterday:</p>
+<pre><code>$ git diff "@{yesterday}"</code></pre>
+<p>Or between a particular version and 2 versions ago:</p>
+<pre><code>$ git diff 1b6d "master~2"</code></pre>
+<p>In each case the output is a patch that can be applied with
+<strong>git apply</strong>. Try also:</p>
+<pre><code>$ git whatchanged --since=3D"2 weeks ago"</code></pre>
+<p>Often I=E2=80=99ll browse history with <a href=3D"http://sourceforge.net=
+/projects/qgit">qgit</a> instead, due to its
+slick photogenic interface, or <a href=3D"http://jonas.nitro.dk/tig/">tig</=
+a>, a text-mode interface that
+works well over slow connections. Alternatively, install a web server,
+run <strong>git instaweb</strong> and fire up any web browser.</p>
+<h2 id=3D"_exercise">Exercise</h2>
+<p>Let A, B, C, D be four successive commits where B is the same as A
+except some files have been removed. We want to add the files back at D.
+How can we do this?</p>
+<p>There are at least three solutions. Assuming we are at D:</p>
+<ol type=3D"1">
+<li><p>The difference between A and B are the removed files. We can
+create a patch representing this difference and apply it:</p>
+<pre><code>$ git diff B A | git apply</code></pre></li>
+<li><p>Since we saved the files back at A, we can retrieve them:</p>
+<pre><code>$ git checkout A foo.c bar.h</code></pre></li>
+<li><p>We can view going from A to B as a change we want to undo:</p>
+<pre><code>$ git revert B</code></pre></li>
+</ol>
+<p>Which choice is best? Whichever you prefer most. It is easy to get
+what you want with Git, and often there are many ways to get it.</p>
+<h1 id=3D"_cloning_around">Cloning Around</h1>
+<p>In older version control systems, checkout is the standard operation
+to get files. You retrieve a bunch of files in a particular saved
+state.</p>
+<p>In Git and other distributed version control systems, cloning is the
+standard operation. To get files, you create a <em>clone</em> of the
+entire repository. In other words, you practically mirror the central
+server. Anything the main repository can do, you can do.</p>
+<h2 id=3D"_sync_computers">Sync Computers</h2>
+<p>I can tolerate making tarballs or using <strong>rsync</strong> for
+backups and basic syncing. But sometimes I edit on my laptop, other
+times on my desktop, and the two may not have talked to each other in
+between.</p>
+<p>Initialize a Git repository and commit your files on one machine.
+Then on the other:</p>
+<pre><code>$ git clone other.computer:/path/to/files</code></pre>
+<p>to create a second copy of the files and Git repository. From now
+on,</p>
+<pre><code>$ git commit -a
+$ git pull other.computer:/path/to/files HEAD</code></pre>
+<p>will <em>pull</em> in the state of the files on the other computer
+into the one you=E2=80=99re working on. If you=E2=80=99ve recently made con=
+flicting
+edits in the same file, Git will let you know and you should commit
+again after resolving them.</p>
+<h2 id=3D"_classic_source_control">Classic Source Control</h2>
+<p>Initialize a Git repository for your files:</p>
+<pre><code>$ git init
+$ git add .
+$ git commit -m "Initial commit"</code></pre>
+<p>On the central server, initialize a <em>bare repository</em> in some
+directory:</p>
+<pre><code>$ mkdir proj.git
+$ cd proj.git
+$ git --bare init
+$ touch proj.git/git-daemon-export-ok</code></pre>
+<p>Start the Git daemon if necessary:</p>
+<pre><code>$ git daemon --detach  # it may already be running</code></pre>
+<p>For Git hosting services, follow the instructions to setup the
+initially empty Git repository. Typically one fills in a form on a
+webpage.</p>
+<p><em>Push</em> your project to the central server with:</p>
+<pre><code>$ git push central.server/path/to/proj.git HEAD</code></pre>
+<p>To check out the source, a developer types:</p>
+<pre><code>$ git clone central.server/path/to/proj.git</code></pre>
+<p>After making changes, the developer saves changes locally:</p>
+<pre><code>$ git commit -a</code></pre>
+<p>To update to the latest version:</p>
+<pre><code>$ git pull</code></pre>
+<p>Any merge conflicts should be resolved then committed:</p>
+<pre><code>$ git commit -a</code></pre>
+<p>To check in local changes into the central repository:</p>
+<pre><code>$ git push</code></pre>
+<p>If the main server has new changes due to activity by other
+developers, the push fails, and the developer should pull the latest
+version, resolve any merge conflicts, then try again.</p>
+<p>Developers must have SSH access for the above pull and push commands.
+However, anyone can see the source by typing:</p>
+<pre><code>$ git clone git://central.server/path/to/proj.git</code></pre>
+<p>The native git protocol is like HTTP: there is no authentication, so
+anyone can retrieve the project. Accordingly, by default, pushing is
+forbidden via the git protocol.</p>
+<h2 id=3D"_secret_source">Secret Source</h2>
+<p>For a closed-source project, omit the touch command, and ensure you
+never create a file named <code>git-daemon-export-ok</code>. The
+repository can no longer be retrieved via the git protocol; only those
+with SSH access can see it. If all your repos are closed, running the
+git daemon is unnecessary because all communication occurs via SSH.</p>
+<h2 id=3D"_bare_repositories">Bare repositories</h2>
+<p>A bare repository is so named because it has no working directory; it
+only contains files that are normally hidden away in the
+<code>.git</code> subdirectory. In other words, it maintains the history
+of a project, and never holds a snapshot of any given version.</p>
+<p>A bare repository plays a role similar to that of the main server in
+a centralized version control system: the home of your project.
+Developers clone your project from it, and push the latest official
+changes to it. Typically it resides on a server that does little else
+but disseminate data. Development occurs in the clones, so the home
+repository can do without a working directory.</p>
+<p>Many Git commands fail on bare repositories unless the
+<code>GIT_DIR</code> environment variable is set to the repository path,
+or the <code>--bare</code> option is supplied.</p>
+<h2 id=3D"_push_versus_pull">Push versus pull</h2>
+<p>Why did we introduce the push command, rather than rely on the
+familiar pull command? Firstly, pulling fails on bare repositories:
+instead you must <em>fetch</em>, a command we later discuss. But even if
+we kept a normal repository on the central server, pulling into it would
+still be cumbersome. We would have to login to the server first, and
+give the pull command the network address of the machine we=E2=80=99re pull=
+ing
+from. Firewalls may interfere, and what if we have no shell access to
+the server in the first place?</p>
+<p>However, apart from this case, we discourage pushing into a
+repository, because confusion can ensue when the destination has a
+working directory.</p>
+<p>In short, while learning Git, only push when the target is a bare
+repository; otherwise pull.</p>
+<h2 id=3D"_forking_a_project">Forking a Project</h2>
+<p>Sick of the way a project is being run? Think you could do a better
+job? Then on your server:</p>
+<pre><code>$ git clone git://main.server/path/to/files</code></pre>
+<p>Next, tell everyone about your fork of the project at your
+server.</p>
+<p>At any later time, you can merge in the changes from the original
+project with:</p>
+<pre><code>$ git pull</code></pre>
+<h2 id=3D"_ultimate_backups">Ultimate Backups</h2>
+<p>Want numerous tamper-proof geographically diverse redundant archives?
+If your project has many developers, don=E2=80=99t do anything! Every clone=
+ of
+your code is effectively a backup. Not just of the current state, but of
+your project=E2=80=99s entire history. Thanks to cryptographic hashing, if
+anyone=E2=80=99s clone becomes corrupted, it will be spotted as soon as the=
+y try
+to communicate with others.</p>
+<p>If your project is not so popular, find as many servers as you can to
+host clones.</p>
+<p>The truly paranoid should always write down the latest 20-byte SHA1
+hash of the HEAD somewhere safe. It has to be safe, not private. For
+example, publishing it in a newspaper would work well, because it=E2=80=99s=
+ hard
+for an attacker to alter every copy of a newspaper.</p>
+<h2 id=3D"_light_speed_multitask">Light-Speed Multitask</h2>
+<p>Say you want to work on several features in parallel. Then commit
+your project and run:</p>
+<pre><code>$ git clone . /some/new/directory</code></pre>
+<p>Thanks to <a href=3D"http://en.wikipedia.org/wiki/Hard_link">hardlinking=
+</a>, local
+clones require less time and space than a plain backup.</p>
+<p>You can now work on two independent features simultaneously. For
+example, you can edit one clone while the other is compiling. At any
+time, you can commit and pull changes from the other clone:</p>
+<pre><code>$ git pull /the/other/clone HEAD</code></pre>
+<h2 id=3D"_guerilla_version_control">Guerilla Version Control</h2>
+<p>Are you working on a project that uses some other version control
+system, and you sorely miss Git? Then initialize a Git repository in
+your working directory:</p>
+<pre><code>$ git init
+$ git add .
+$ git commit -m "Initial commit"</code></pre>
+<p>then clone it:</p>
+<pre><code>$ git clone . /some/new/directory</code></pre>
+<p>Now go to the new directory and work here instead, using Git to your
+heart=E2=80=99s content. Once in a while, you=E2=80=99ll want to sync with =
+everyone
+else, in which case go to the original directory, sync using the other
+version control system, and type:</p>
+<pre><code>$ git add .
+$ git commit -m "Sync with everyone else"</code></pre>
+<p>Then go to the new directory and run:</p>
+<pre><code>$ git commit -a -m "Description of my changes"
+$ git pull</code></pre>
+<p>The procedure for giving your changes to everyone else depends on the
+other version control system. The new directory contains the files with
+your changes. Run whatever commands of the other version control system
+are needed to upload them to the central repository.</p>
+<p>Subversion, perhaps the best centralized version control system, is
+used by countless projects. The <strong>git svn</strong> command
+automates the above for Subversion repositories, and can also be used to
+<a href=3D"http://google-opensource.blogspot.com/2008/05/export-git-project=
+-to-google-code.html">export
+a Git project to a Subversion repository</a>.</p>
+<h2 id=3D"_mercurial">Mercurial</h2>
+<p>Mercurial is a similar version control system that can almost
+seamlessly work in tandem with Git. With the <code>hg-git</code> plugin,
+a Mercurial user can losslessly push to and pull from a Git
+repository.</p>
+<p>Obtain the <code>hg-git</code> plugin with Git:</p>
+<pre><code>$ git clone git://github.com/schacon/hg-git.git</code></pre>
+<p>or Mercurial:</p>
+<pre><code>$ hg clone http://bitbucket.org/durin42/hg-git/</code></pre>
+<p>Sadly, I am unaware of an analogous plugin for Git. For this reason,
+I advocate Git over Mercurial for the main repository, even if you
+prefer Mercurial. With a Mercurial project, usually a volunteer
+maintains a parallel Git repository to accommodate Git users, whereas
+thanks to the <code>hg-git</code> plugin, a Git project automatically
+accommodates Mercurial users.</p>
+<p>Although the plugin can convert a Mercurial repository to a Git
+repository by pushing to an empty repository, this job is easier with
+the <code>hg-fast-export.sh</code> script, available from:</p>
+<pre><code>$ git clone git://repo.or.cz/fast-export.git</code></pre>
+<p>To convert, in an empty directory:</p>
+<pre><code>$ git init
+$ hg-fast-export.sh -r /hg/repo</code></pre>
+<p>after adding the script to your <code>$PATH</code>.</p>
+<h2 id=3D"_bazaar">Bazaar</h2>
+<p>We briefly mention Bazaar because it is the most popular free
+distributed version control system after Git and Mercurial.</p>
+<p>Bazaar has the advantage of hindsight, as it is relatively young; its
+designers could learn from mistakes of the past, and sidestep minor
+historical warts. Additionally, its developers are mindful of
+portability and interoperation with other version control systems.</p>
+<p>A <code>bzr-git</code> plugin lets Bazaar users work with Git
+repositories to some extent. The <code>tailor</code> program converts
+Bazaar repositories to Git repositories, and can do so incrementally,
+while <code>bzr-fast-export</code> is well-suited for one-shot
+conversions.</p>
+<h2 id=3D"_why_i_use_git">Why I use Git</h2>
+<p>I originally chose Git because I heard it could manage the
+unimaginably unmanageable Linux kernel source. I=E2=80=99ve never felt a ne=
+ed to
+switch. Git has served admirably, and I=E2=80=99ve yet to be bitten by its
+flaws. As I primarily use Linux, issues on other platforms are of no
+concern.</p>
+<p>Also, I prefer C programs and bash scripts to executables such as
+Python scripts: there are fewer dependencies, and I=E2=80=99m addicted to f=
+ast
+running times.</p>
+<p>I did think about how Git could be improved, going so far as to write
+my own Git-like tool, but only as an academic exercise. Had I completed
+my project, I would have stayed with Git anyway, as the gains are too
+slight to justify using an oddball system.</p>
+<p>Naturally, your needs and wants likely differ, and you may be better
+off with another system. Nonetheless, you can=E2=80=99t go far wrong with
+Git.</p>
+<h1 id=3D"_branch_wizardry">Branch Wizardry</h1>
+<p>Instant branching and merging are the most lethal of Git=E2=80=99s kille=
+r
+features.</p>
+<p><strong>Problem</strong>: External factors inevitably necessitate
+context switching. A severe bug manifests in the released version
+without warning. The deadline for a certain feature is moved closer. A
+developer whose help you need for a key section of the project is about
+to leave. In all cases, you must abruptly drop what you are doing and
+focus on a completely different task.</p>
+<p>Interrupting your train of thought can be detrimental to your
+productivity, and the more cumbersome it is to switch contexts, the
+greater the loss. With centralized version control we must download a
+fresh working copy from the central server. Distributed systems fare
+better, as we can clone the desired version locally.</p>
+<p>But cloning still entails copying the whole working directory as well
+as the entire history up to the given point. Even though Git reduces the
+cost of this with file sharing and hard links, the project files
+themselves must be recreated in their entirety in the new working
+directory.</p>
+<p><strong>Solution</strong>: Git has a better tool for these situations
+that is much faster and more space-efficient than cloning: <strong>git
+branch</strong>.</p>
+<p>With this magic word, the files in your directory suddenly shapeshift
+from one version to another. This transformation can do more than merely
+go back or forward in history. Your files can morph from the last
+release to the experimental version to the current development version
+to your friend=E2=80=99s version and so on.</p>
+<h2 id=3D"_the_boss_key">The Boss Key</h2>
+<p>Ever played one of those games where at the push of a button (=E2=80=9Ct=
+he
+boss key=E2=80=9D), the screen would instantly display a spreadsheet or
+something? So if the boss walked in the office while you were playing
+the game you could quickly hide it away?</p>
+<p>In some directory:</p>
+<pre><code>$ echo "I'm smarter than my boss" &gt; myfile.txt
+$ git init
+$ git add .
+$ git commit -m "Initial commit"</code></pre>
+<p>We have created a Git repository that tracks one text file containing
+a certain message. Now type:</p>
+<pre><code>$ git checkout -b boss  # nothing seems to change after this
+$ echo "My boss is smarter than me" &gt; myfile.txt
+$ git commit -a -m "Another commit"</code></pre>
+<p>It looks like we=E2=80=99ve just overwritten our file and committed it. =
+But
+it=E2=80=99s an illusion. Type:</p>
+<pre><code>$ git checkout master  # switch to original version of the file<=
+/code></pre>
+<p>and hey presto! The text file is restored. And if the boss decides to
+snoop around this directory, type:</p>
+<pre><code>$ git checkout boss  # switch to version suitable for boss' eyes=
+</code></pre>
+<p>You can switch between the two versions of the file as much as you
+like, and commit to each independently.</p>
+<h2 id=3D"_dirty_work">Dirty Work</h2>
+<p>Say you=E2=80=99re working on some feature, and for some reason, you nee=
+d to
+go back three versions and temporarily put in a few print statements to
+see how something works. Then:</p>
+<pre><code>$ git commit -a
+$ git checkout HEAD~3</code></pre>
+<p>Now you can add ugly temporary code all over the place. You can even
+commit these changes. When you=E2=80=99re done,</p>
+<pre><code>$ git checkout master</code></pre>
+<p>to return to your original work. Observe that any uncommitted changes
+are carried over.</p>
+<p>What if you wanted to save the temporary changes after all? Easy:</p>
+<pre><code>$ git checkout -b dirty</code></pre>
+<p>and commit before switching back to the master branch. Whenever you
+want to return to the dirty changes, simply type:</p>
+<pre><code>$ git checkout dirty</code></pre>
+<p>We touched upon this command in an earlier chapter, when discussing
+loading old states. At last we can tell the whole story: the files
+change to the requested state, but we must leave the master branch. Any
+commits made from now on take your files down a different road, which
+can be named later.</p>
+<p>In other words, after checking out an old state, Git automatically
+puts you in a new, unnamed branch, which can be named and saved with
+<strong>git checkout -b</strong>.</p>
+<h2 id=3D"_quick_fixes">Quick Fixes</h2>
+<p>You=E2=80=99re in the middle of something when you are told to drop
+everything and fix a newly discovered bug in commit
+<code>1b6d...</code>:</p>
+<pre><code>$ git commit -a
+$ git checkout -b fixes 1b6d</code></pre>
+<p>Then once you=E2=80=99ve fixed the bug:</p>
+<pre><code>$ git commit -a -m "Bug fixed"
+$ git checkout master</code></pre>
+<p>and resume work on your original task. You can even <em>merge</em> in
+the freshly baked bugfix:</p>
+<pre><code>$ git merge fixes</code></pre>
+<h2 id=3D"_merging">Merging</h2>
+<p>With some version control systems, creating branches is easy but
+merging them back together is tough. With Git, merging is so trivial
+that you might be unaware of it happening.</p>
+<p>We actually encountered merging long ago. The <strong>pull</strong>
+command in fact <em>fetches</em> commits and then merges them into your
+current branch. If you have no local changes, then the merge is a
+<em>fast forward</em>, a degenerate case akin to fetching the latest
+version in a centralized version control system. But if you do have
+local changes, Git will automatically merge, and report any
+conflicts.</p>
+<p>Ordinarily, a commit has exactly one <em>parent commit</em>, namely,
+the previous commit. Merging branches together produces a commit with at
+least two parents. This begs the question: what commit does
+<code>HEAD~10</code> really refer to? A commit could have multiple
+parents, so which one do we follow?</p>
+<p>It turns out this notation chooses the first parent every time. This
+is desirable because the current branch becomes the first parent during
+a merge; frequently you=E2=80=99re only concerned with the changes you made=
+ in
+the current branch, as opposed to changes merged in from other
+branches.</p>
+<p>You can refer to a specific parent with a caret. For example, to show
+the logs from the second parent:</p>
+<pre><code>$ git log HEAD^2</code></pre>
+<p>You may omit the number for the first parent. For example, to show
+the differences with the first parent:</p>
+<pre><code>$ git diff HEAD^</code></pre>
+<p>You can combine this notation with other types. For example:</p>
+<pre><code>$ git checkout 1b6d^^2~10 -b ancient</code></pre>
+<p>starts a new branch =E2=80=9Cancient=E2=80=9D representing the state 10 =
+commits back
+from the second parent of the first parent of the commit starting with
+1b6d.</p>
+<h2 id=3D"_uninterrupted_workflow">Uninterrupted Workflow</h2>
+<p>Often in hardware projects, the second step of a plan must await the
+completion of the first step. A car undergoing repairs might sit idly in
+a garage until a particular part arrives from the factory. A prototype
+might wait for a chip to be fabricated before construction can
+continue.</p>
+<p>Software projects can be similar. The second part of a new feature
+may have to wait until the first part has been released and tested. Some
+projects require your code to be reviewed before accepting it, so you
+might wait until the first part is approved before starting the second
+part.</p>
+<p>Thanks to painless branching and merging, we can bend the rules and
+work on Part II before Part I is officially ready. Suppose you have
+committed Part I and sent it for review. Let=E2=80=99s say you=E2=80=99re i=
+n the
+<code>master</code> branch. Then branch off:</p>
+<pre><code>$ git checkout -b part2</code></pre>
+<p>Next, work on Part II, committing your changes along the way. To err
+is human, and often you=E2=80=99ll want to go back and fix something in Par=
+t I.
+If you=E2=80=99re lucky, or very good, you can skip these lines.</p>
+<pre><code>$ git checkout master  # Go back to Part I.
+$ fix_problem
+$ git commit -a        # Commit the fixes.
+$ git checkout part2   # Go back to Part II.
+$ git merge master     # Merge in those fixes.</code></pre>
+<p>Eventually, Part I is approved:</p>
+<pre><code>$ git checkout master  # Go back to Part I.
+$ submit files         # Release to the world!
+$ git merge part2      # Merge in Part II.
+$ git branch -d part2  # Delete "part2" branch.</code></pre>
+<p>Now you=E2=80=99re in the <code>master</code> branch again, with Part II=
+ in
+the working directory.</p>
+<p>It=E2=80=99s easy to extend this trick for any number of parts. It=E2=80=
+=99s also
+easy to branch off retroactively: suppose you belatedly realize you
+should have created a branch 7 commits ago. Then type:</p>
+<pre><code>$ git branch -m master part2  # Rename "master" branch to "part2=
+".
+$ git branch master HEAD~7    # Create new "master", 7 commits upstream.</c=
+ode></pre>
+<p>The <code>master</code> branch now contains just Part I, and the
+<code>part2</code> branch contains the rest. We are in the latter
+branch; we created <code>master</code> without switching to it, because
+we want to continue work on <code>part2</code>. This is unusual. Until
+now, we=E2=80=99ve been switching to branches immediately after creation, a=
+s
+in:</p>
+<pre><code>$ git checkout HEAD~7 -b master  # Create a branch, and switch t=
+o it.</code></pre>
+<h2 id=3D"_reorganizing_a_medley">Reorganizing a Medley</h2>
+<p>Perhaps you like to work on all aspects of a project in the same
+branch. You want to keep works-in-progress to yourself and want others
+to see your commits only when they have been neatly organized. Start a
+couple of branches:</p>
+<pre><code>$ git branch sanitized    # Create a branch for sanitized commit=
+s.
+$ git checkout -b medley  # Create and switch to a branch to work in.</code=
+></pre>
+<p>Next, work on anything: fix bugs, add features, add temporary code,
+and so forth, committing often along the way. Then:</p>
+<pre><code>$ git checkout sanitized
+$ git cherry-pick medley^^</code></pre>
+<p>applies the grandparent of the head commit of the =E2=80=9Cmedley=E2=80=
+=9D branch to
+the =E2=80=9Csanitized=E2=80=9D branch. With appropriate cherry-picks you c=
+an construct
+a branch that contains only permanent code, and has related commits
+grouped together.</p>
+<h2 id=3D"_managing_branches">Managing Branches</h2>
+<p>List all branches by typing:</p>
+<pre><code>$ git branch</code></pre>
+<p>By default, you start in a branch named =E2=80=9Cmaster=E2=80=9D. Some a=
+dvocate
+leaving the =E2=80=9Cmaster=E2=80=9D branch untouched and creating new bran=
+ches for your
+own edits.</p>
+<p>The <strong>-d</strong> and <strong>-m</strong> options allow you to
+delete and move (rename) branches. See <strong>git help
+branch</strong>.</p>
+<p>The =E2=80=9Cmaster=E2=80=9D branch is a useful custom. Others may assum=
+e that your
+repository has a branch with this name, and that it contains the
+official version of your project. Although you can rename or obliterate
+the =E2=80=9Cmaster=E2=80=9D branch, you might as well respect this convent=
+ion.</p>
+<h2 id=3D"_temporary_branches">Temporary Branches</h2>
+<p>After a while you may realize you are creating short-lived branches
+frequently for similar reasons: every other branch merely serves to save
+the current state so you can briefly hop back to an older state to fix a
+high-priority bug or something.</p>
+<p>It=E2=80=99s analogous to changing the TV channel temporarily to see wha=
+t
+else is on. But instead of pushing a couple of buttons, you have to
+create, check out, merge, and delete temporary branches. Luckily, Git
+has a shortcut that is as convenient as a TV remote control:</p>
+<pre><code>$ git stash</code></pre>
+<p>This saves the current state in a temporary location (a
+<em>stash</em>) and restores the previous state. Your working directory
+appears exactly as it was before you started editing, and you can fix
+bugs, pull in upstream changes, and so on. When you want to go back to
+the stashed state, type:</p>
+<pre><code>$ git stash apply  # You may need to resolve some conflicts.</co=
+de></pre>
+<p>You can have multiple stashes, and manipulate them in various ways.
+See <strong>git help stash</strong>. As you may have guessed, Git
+maintains branches behind the scenes to perform this magic trick.</p>
+<h2 id=3D"_work_how_you_want">Work How You Want</h2>
+<p>You might wonder if branches are worth the bother. After all, clones
+are almost as fast, and you can switch between them with
+<strong>cd</strong> instead of esoteric Git commands.</p>
+<p>Consider web browsers. Why support multiple tabs as well as multiple
+windows? Because allowing both accommodates a wide variety of styles.
+Some users like to keep only one browser window open, and use tabs for
+multiple webpages. Others might insist on the other extreme: multiple
+windows with no tabs anywhere. Others still prefer something in
+between.</p>
+<p>Branching is like tabs for your working directory, and cloning is
+like opening a new browser window. These operations are fast and local,
+so why not experiment to find the combination that best suits you? Git
+lets you work exactly how you want.</p>
+<h1 id=3D"_lessons_of_history">Lessons of History</h1>
+<p>A consequence of Git=E2=80=99s distributed nature is that history can be
+edited easily. But if you tamper with the past, take care: only rewrite
+that part of history which you alone possess. Just as nations forever
+argue over who committed what atrocity, if someone else has a clone
+whose version of history differs to yours, you will have trouble
+reconciling when your trees interact.</p>
+<p>Some developers strongly feel history should be immutable, warts and
+all. Others feel trees should be made presentable before they are
+unleashed in public. Git accommodates both viewpoints. Like cloning,
+branching, and merging, rewriting history is simply another power Git
+gives you. It is up to you to use it wisely.</p>
+<h2 id=3D"_i_stand_corrected">I Stand Corrected</h2>
+<p>Did you just commit, but wish you had typed a different message? Then
+run:</p>
+<pre><code>$ git commit --amend</code></pre>
+<p>to change the last message. Realized you forgot to add a file? Run
+<strong>git add</strong> to add it, and then run the above command.</p>
+<p>Want to include a few more edits in that last commit? Then make those
+edits and run:</p>
+<pre><code>$ git commit --amend -a</code></pre>
+<h2 id=3D"_8230_and_then_some">=E2=80=A6 And Then Some</h2>
+<p>Suppose the previous problem is ten times worse. After a lengthy
+session you=E2=80=99ve made a bunch of commits. But you=E2=80=99re not quit=
+e happy with
+the way they=E2=80=99re organized, and some of those commit messages could =
+use
+rewording. Then type:</p>
+<pre><code>$ git rebase -i HEAD~10</code></pre>
+<p>and the last 10 commits will appear in your favourite $EDITOR. A
+sample excerpt:</p>
+<pre><code>pick 5c6eb73 Added repo.or.cz link
+pick a311a64 Reordered analogies in "Work How You Want"
+pick 100834f Added push target to Makefile</code></pre>
+<p>Older commits precede newer commits in this list, unlike the
+<code>log</code> command. Here, 5c6eb73 is the oldest commit, and
+100834f is the newest. Then:</p>
+<ul>
+<li><p>Remove commits by deleting lines. Like the revert command, but
+off the record: it will be as if the commit never existed.</p></li>
+<li><p>Reorder commits by reordering lines.</p></li>
+<li><p>Replace <code>pick</code> with:</p>
+<ul>
+<li><p><code>edit</code> to mark a commit for amending.</p></li>
+<li><p><code>reword</code> to change the log message.</p></li>
+<li><p><code>squash</code> to merge a commit with the previous
+one.</p></li>
+<li><p><code>fixup</code> to merge a commit with the previous one and
+discard the log message.</p></li>
+</ul></li>
+</ul>
+<p>For example, we might replace the second <code>pick</code> with
+<code>squash</code>:</p>
+<pre><code>pick 5c6eb73 Added repo.or.cz link
+squash a311a64 Reordered analogies in "Work How You Want"
+pick 100834f Added push target to Makefile</code></pre>
+<p>After we save and quit, Git merges a311a64 into 5c6eb73. Thus
+<strong>squash</strong> merges into the next commit up: think =E2=80=9Csqua=
+sh
+up=E2=80=9D.</p>
+<p>Git then combines their log messages and presents them for editing.
+The command <strong>fixup</strong> skips this step; the squashed log
+message is simply discarded.</p>
+<p>If you marked a commit with <strong>edit</strong>, Git returns you to
+the past, to the oldest such commit. You can amend the old commit as
+described in the previous section, and even create new commits that
+belong here. Once you=E2=80=99re pleased with the =E2=80=9Cretcon=E2=80=9D,=
+ go forward in time
+by running:</p>
+<pre><code>$ git rebase --continue</code></pre>
+<p>Git replays commits until the next <strong>edit</strong>, or to the
+present if none remain.</p>
+<p>You can also abandon the rebase with:</p>
+<pre><code>$ git rebase --abort</code></pre>
+<p>So commit early and commit often: you can tidy up later with
+rebase.</p>
+<h2 id=3D"_local_changes_last">Local Changes Last</h2>
+<p>You=E2=80=99re working on an active project. You make some local commits=
+ over
+time, and then you sync with the official tree with a merge. This cycle
+repeats itself a few times before you=E2=80=99re ready to push to the centr=
+al
+tree.</p>
+<p>But now the history in your local Git clone is a messy jumble of your
+changes and the official changes. You=E2=80=99d prefer to see all your chan=
+ges
+in one contiguous section, and after all the official changes.</p>
+<p>This is a job for <strong>git rebase</strong> as described above. In
+many cases you can use the <strong>--onto</strong> flag and avoid
+interaction.</p>
+<p>Also see <strong>git help rebase</strong> for detailed examples of
+this amazing command. You can split commits. You can even rearrange
+branches of a tree.</p>
+<p>Take care: rebase is a powerful command. For complicated rebases,
+first make a backup with <strong>git clone</strong>.</p>
+<h2 id=3D"_rewriting_history">Rewriting History</h2>
+<p>Occasionally, you need the source control equivalent of airbrushing
+people out of official photos, erasing them from history in a
+Stalinesque fashion. For example, suppose we intend to release a
+project, but it involves a file that should be kept private for some
+reason. Perhaps I left my credit card number in a text file and
+accidentally added it to the project. Deleting the file is insufficient,
+for the file can be accessed from older commits. We must remove the file
+from all commits:</p>
+<pre><code>$ git filter-branch --tree-filter 'rm top/secret/file' HEAD</cod=
+e></pre>
+<p>See <strong>git help filter-branch</strong>, which discusses this
+example and gives a faster method. In general,
+<strong>filter-branch</strong> lets you alter large sections of history
+with a single command.</p>
+<p>Afterwards, the <code>.git/refs/original</code> directory describes
+the state of affairs before the operation. Check the filter-branch
+command did what you wanted, then delete this directory if you wish to
+run more filter-branch commands.</p>
+<p>Lastly, replace clones of your project with your revised version if
+you want to interact with them later.</p>
+<h2 id=3D"_making_history">Making History</h2>
+<p>Want to migrate a project to Git? If it=E2=80=99s managed with one of th=
+e
+more well-known systems, then chances are someone has already written a
+script to export the whole history to Git.</p>
+<p>Otherwise, look up <strong>git fast-import</strong>, which reads text
+input in a specific format to create Git history from scratch. Typically
+a script using this command is hastily cobbled together and run once,
+migrating the project in a single shot.</p>
+<p>As an example, paste the following listing into temporary file, such
+as <code>/tmp/history</code>:</p>
+<pre><code>commit refs/heads/master
+committer Alice &lt;alice@example.com&gt; Thu, 01 Jan 1970 00:00:00 +0000
+data &lt;&lt;EOT
+Initial commit.
+EOT
+
+M 100644 inline hello.c
+data &lt;&lt;EOT
+#include &lt;stdio.h&gt;
+
+int main() {
+  printf("Hello, world!\n");
+  return 0;
+}
+EOT
+
+
+commit refs/heads/master
+committer Bob &lt;bob@example.com&gt; Tue, 14 Mar 2000 01:59:26 -0800
+data &lt;&lt;EOT
+Replace printf() with write().
+EOT
+
+M 100644 inline hello.c
+data &lt;&lt;EOT
+#include &lt;unistd.h&gt;
+
+int main() {
+  write(1, "Hello, world!\n", 14);
+  return 0;
+}
+EOT</code></pre>
+<p>Then create a Git repository from this temporary file by typing:</p>
+<pre><code>$ mkdir project; cd project; git init
+$ git fast-import --date-format=3Drfc2822 &lt; /tmp/history</code></pre>
+<p>You can checkout the latest version of the project with:</p>
+<pre><code>$ git checkout master .</code></pre>
+<p>The <strong>git fast-export</strong> command converts any repository
+to the <strong>git fast-import</strong> format, whose output you can
+study for writing exporters, and also to transport repositories in a
+human-readable format. Indeed, these commands can send repositories of
+text files over text-only channels.</p>
+<h2 id=3D"_where_did_it_all_go_wrong">Where Did It All Go Wrong?</h2>
+<p>You=E2=80=99ve just discovered a broken feature in your program which yo=
+u
+know for sure was working a few months ago. Argh! Where did this bug
+come from? If only you had been testing the feature as you
+developed.</p>
+<p>It=E2=80=99s too late for that now. However, provided you=E2=80=99ve bee=
+n committing
+often, Git can pinpoint the problem:</p>
+<pre><code>$ git bisect start
+$ git bisect bad HEAD
+$ git bisect good 1b6d</code></pre>
+<p>Git checks out a state halfway in between. Test the feature, and if
+it=E2=80=99s still broken:</p>
+<pre><code>$ git bisect bad</code></pre>
+<p>If not, replace "bad" with "good". Git again transports you to a
+state halfway between the known good and bad versions, narrowing down
+the possibilities. After a few iterations, this binary search will lead
+you to the commit that caused the trouble. Once you=E2=80=99ve finished you=
+r
+investigation, return to your original state by typing:</p>
+<pre><code>$ git bisect reset</code></pre>
+<p>Instead of testing every change by hand, automate the search by
+running:</p>
+<pre><code>$ git bisect run my_script</code></pre>
+<p>Git uses the return value of the given command, typically a one-off
+script, to decide whether a change is good or bad: the command should
+exit with code 0 when good, 125 when the change should be skipped, and
+anything else between 1 and 127 if it is bad. A negative return value
+aborts the bisect.</p>
+<p>You can do much more: the help page explains how to visualize
+bisects, examine or replay the bisect log, and eliminate known innocent
+changes for a speedier search.</p>
+<h2 id=3D"_who_made_it_all_go_wrong">Who Made It All Go Wrong?</h2>
+<p>Like many other version control systems, Git has a blame command:</p>
+<pre><code>$ git blame bug.c</code></pre>
+<p>which annotates every line in the given file showing who last changed
+it, and when. Unlike many other version control systems, this operation
+works offline, reading only from local disk.</p>
+<h2 id=3D"_personal_experience">Personal Experience</h2>
+<p>In a centralized version control system, history modification is a
+difficult operation, and only available to administrators. Cloning,
+branching, and merging are impossible without network communication. So
+are basic operations such as browsing history, or committing a change.
+In some systems, users require network connectivity just to view their
+own changes or open a file for editing.</p>
+<p>Centralized systems preclude working offline, and need more expensive
+network infrastructure, especially as the number of developers grows.
+Most importantly, all operations are slower to some degree, usually to
+the point where users shun advanced commands unless absolutely
+necessary. In extreme cases this is true of even the most basic
+commands. When users must run slow commands, productivity suffers
+because of an interrupted work flow.</p>
+<p>I experienced these phenomena first-hand. Git was the first version
+control system I used. I quickly grew accustomed to it, taking many
+features for granted. I simply assumed other systems were similar:
+choosing a version control system ought to be no different from choosing
+a text editor or web browser.</p>
+<p>I was shocked when later forced to use a centralized system. A flaky
+internet connection matters little with Git, but makes development
+unbearable when it needs to be as reliable as local disk. Additionally,
+I found myself conditioned to avoid certain commands because of the
+latencies involved, which ultimately prevented me from following my
+desired work flow.</p>
+<p>When I had to run a slow command, the interruption to my train of
+thought dealt a disproportionate amount of damage. While waiting for
+server communication to complete, I=E2=80=99d do something else to pass the
+time, such as check email or write documentation. By the time I returned
+to the original task, the command had finished long ago, and I would
+waste more time trying to remember what I was doing. Humans are bad at
+context switching.</p>
+<p>There was also an interesting tragedy-of-the-commons effect:
+anticipating network congestion, individuals would consume more
+bandwidth than necessary on various operations in an attempt to reduce
+future delays. The combined efforts intensified congestion, encouraging
+individuals to consume even more bandwidth next time to avoid even
+longer delays.</p>
+<h1 id=3D"_multiplayer_git">Multiplayer Git</h1>
+<p>Initially I used Git on a private project where I was the sole
+developer. Amongst the commands related to Git=E2=80=99s distributed nature=
+, I
+needed only <strong>pull</strong> and <strong>clone</strong> so could I
+keep the same project in different places.</p>
+<p>Later I wanted to publish my code with Git, and include changes from
+contributors. I had to learn how to manage projects with multiple
+developers from all over the world. Fortunately, this is Git=E2=80=99s fort=
+e,
+and arguably its raison d=E2=80=99=C3=AAtre.</p>
+<h2 id=3D"_who_am_i">Who Am I?</h2>
+<p>Every commit has an author name and email, which is shown by
+<strong>git log</strong>. By default, Git uses system settings to
+populate these fields. To set them explicitly, type:</p>
+<pre><code>$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com</code></pre>
+<p>Omit the global flag to set these options only for the current
+repository.</p>
+<h2 id=3D"_git_over_ssh_http">Git Over SSH, HTTP</h2>
+<p>Suppose you have SSH access to a web server, but Git is not
+installed. Though less efficient than its native protocol, Git can
+communicate over HTTP.</p>
+<p>Download, compile and install Git in your account, and create a
+repository in your web directory:</p>
+<pre><code>$ GIT_DIR=3Dproj.git git init
+$ cd proj.git
+$ git --bare update-server-info
+$ cp hooks/post-update.sample hooks/post-update</code></pre>
+<p>For older versions of Git, the copy command fails and you should
+run:</p>
+<pre><code>$ chmod a+x hooks/post-update</code></pre>
+<p>Now you can publish your latest edits via SSH from any clone:</p>
+<pre><code>$ git push web.server:/path/to/proj.git master</code></pre>
+<p>and anybody can get your project with:</p>
+<pre><code>$ git clone http://web.server/proj.git</code></pre>
+<h2 id=3D"_git_over_anything">Git Over Anything</h2>
+<p>Want to synchronize repositories without servers, or even a network
+connection? Need to improvise during an emergency? We=E2=80=99ve seen <a hr=
+ef=3D"http://www-cs-students.stanford.edu/~blynn/gitmagic/book.html#makingh=
+istory"><strong>git fast-export</strong> and <strong>git
+fast-import</strong> can convert repositories to a single file and
+back</a>. We could shuttle such files back and forth to transport git
+repositories over any medium, but a more efficient tool is <strong>git
+bundle</strong>.</p>
+<p>The sender creates a <em>bundle</em>:</p>
+<pre><code>$ git bundle create somefile HEAD</code></pre>
+<p>then transports the bundle, <code>somefile</code>, to the other party
+somehow: email, thumb drive, an <strong>xxd</strong> printout and an OCR
+scanner, reading bits over the phone, smoke signals, etc. The receiver
+retrieves commits from the bundle by typing:</p>
+<pre><code>$ git pull somefile</code></pre>
+<p>The receiver can even do this from an empty repository. Despite its
+size, <code>somefile</code> contains the entire original git
+repository.</p>
+<p>In larger projects, eliminate waste by bundling only changes the
+other repository lacks. For example, suppose the commit =E2=80=9C1b6d=E2=80=
+=A6=E2=80=9D is the
+most recent commit shared by both parties:</p>
+<pre><code>$ git bundle create somefile HEAD ^1b6d</code></pre>
+<p>If done frequently, one could easily forget which commit was last
+sent. The help page suggests using tags to solve this. Namely, after you
+send a bundle, type:</p>
+<pre><code>$ git tag -f lastbundle HEAD</code></pre>
+<p>and create new refresher bundles with:</p>
+<pre><code>$ git bundle create newbundle HEAD ^lastbundle</code></pre>
+<h2 id=3D"_patches_the_global_currency">Patches: The Global Currency</h2>
+<p>Patches are text representations of your changes that can be easily
+understood by computers and humans alike. This gives them universal
+appeal. You can email a patch to developers no matter what version
+control system they=E2=80=99re using. As long as your audience can read the=
+ir
+email, they can see your edits. Similarly, on your side, all you require
+is an email account: there=E2=80=99s no need to setup an online Git
+repository.</p>
+<p>Recall from the first chapter:</p>
+<pre><code>$ git diff 1b6d &gt; my.patch</code></pre>
+<p>outputs a patch which can be pasted into an email for discussion. In
+a Git repository, type:</p>
+<pre><code>$ git apply &lt; my.patch</code></pre>
+<p>to apply the patch.</p>
+<p>In more formal settings, when author names and perhaps signatures
+should be recorded, generate the corresponding patches past a certain
+point by typing:</p>
+<pre><code>$ git format-patch 1b6d</code></pre>
+<p>The resulting files can be given to <strong>git-send-email</strong>,
+or sent by hand. You can also specify a range of commits:</p>
+<pre><code>$ git format-patch 1b6d..HEAD^^</code></pre>
+<p>On the receiving end, save an email to a file, then type:</p>
+<pre><code>$ git am &lt; email.txt</code></pre>
+<p>This applies the incoming patch and also creates a commit, including
+information such as the author.</p>
+<p>With a browser email client, you may need to click a button to see
+the email in its raw original form before saving the patch to a
+file.</p>
+<p>There are slight differences for mbox-based email clients, but if you
+use one of these, you=E2=80=99re probably the sort of person who can figure=
+ them
+out easily without reading tutorials!</p>
+<h2 id=3D"_sorry_we_8217_ve_moved">Sorry, We=E2=80=99ve Moved</h2>
+<p>After cloning a repository, running <strong>git push</strong> or
+<strong>git pull</strong> will automatically push to or pull from the
+original URL. How does Git do this? The secret lies in config options
+created with the clone. Let=E2=80=99s take a peek:</p>
+<pre><code>$ git config --list</code></pre>
+<p>The <code>remote.origin.url</code> option controls the source URL;
+=E2=80=9Corigin=E2=80=9D is a nickname given to the source repository. As w=
+ith the
+=E2=80=9Cmaster=E2=80=9D branch convention, we may change or delete this ni=
+ckname but
+there is usually no reason for doing so.</p>
+<p>If the original repository moves, we can update the URL via:</p>
+<pre><code>$ git config remote.origin.url git://new.url/proj.git</code></pr=
+e>
+<p>The <code>branch.master.merge</code> option specifies the default
+remote branch in a <strong>git pull</strong>. During the initial clone,
+it is set to the current branch of the source repository, so even if the
+HEAD of the source repository subsequently moves to a different branch,
+a later pull will faithfully follow the original branch.</p>
+<p>This option only applies to the repository we first cloned from,
+which is recorded in the option <code>branch.master.remote</code>. If we
+pull in from other repositories we must explicitly state which branch we
+want:</p>
+<pre><code>$ git pull git://example.com/other.git master</code></pre>
+<p>The above explains why some of our earlier push and pull examples had
+no arguments.</p>
+<h2 id=3D"_remote_branches">Remote Branches</h2>
+<p>When you clone a repository, you also clone all its branches. You may
+not have noticed this because Git hides them away: you must ask for them
+specifically. This prevents branches in the remote repository from
+interfering with your branches, and also makes Git easier for
+beginners.</p>
+<p>List the remote branches with:</p>
+<pre><code>$ git branch -r</code></pre>
+<p>You should see something like:</p>
+<pre><code>origin/HEAD
+origin/master
+origin/experimental</code></pre>
+<p>These represent branches and the HEAD of the remote repository, and
+can be used in regular Git commands. For example, suppose you have made
+many commits, and wish to compare against the last fetched version. You
+could search through the logs for the appropriate SHA1 hash, but it=E2=80=
+=99s
+much easier to type:</p>
+<pre><code>$ git diff origin/HEAD</code></pre>
+<p>Or you can see what the =E2=80=9Cexperimental=E2=80=9D branch has been u=
+p to:</p>
+<pre><code>$ git log origin/experimental</code></pre>
+<h2 id=3D"_multiple_remotes">Multiple Remotes</h2>
+<p>Suppose two other developers are working on our project, and we want
+to keep tabs on both. We can follow more than one repository at a time
+with:</p>
+<pre><code>$ git remote add other git://example.com/some_repo.git
+$ git pull other some_branch</code></pre>
+<p>Now we have merged in a branch from the second repository, and we
+have easy access to all branches of all repositories:</p>
+<pre><code>$ git diff origin/experimental^ other/some_branch~5</code></pre>
+<p>But what if we just want to compare their changes without affecting
+our own work? In other words, we want to examine their branches without
+having their changes invade our working directory. Then rather than
+pull, run:</p>
+<pre><code>$ git fetch        # Fetch from origin, the default.
+$ git fetch other  # Fetch from the second programmer.</code></pre>
+<p>This just fetches histories. Although the working directory remains
+untouched, we can refer to any branch of any repository in a Git command
+because we now possess a local copy.</p>
+<p>Recall that behind the scenes, a pull is simply a
+<strong>fetch</strong> then <strong>merge</strong>. Usually we
+<strong>pull</strong> because we want to merge the latest commit after a
+fetch; this situation is a notable exception.</p>
+<p>See <strong>git help remote</strong> for how to remove remote
+repositories, ignore certain branches, and more.</p>
+<h2 id=3D"_my_preferences">My Preferences</h2>
+<p>For my projects, I like contributors to prepare repositories from
+which I can pull. Some Git hosting services let you host your own fork
+of a project with the click of a button.</p>
+<p>After I fetch a tree, I run Git commands to navigate and examine the
+changes, which ideally are well-organized and well-described. I merge my
+own changes, and perhaps make further edits. Once satisfied, I push to
+the main repository.</p>
+<p>Though I infrequently receive contributions, I believe this approach
+scales well. See <a href=3D"http://torvalds-family.blogspot.com/2009/06/hap=
+piness-is-warm-scm.html">this
+blog post by Linus Torvalds</a>.</p>
+<p>Staying in the Git world is slightly more convenient than patch
+files, as it saves me from converting them to Git commits. Furthermore,
+Git handles details such as recording the author=E2=80=99s name and email
+address, as well as the time and date, and asks the author to describe
+their own change.</p>
+<h1 id=3D"_git_grandmastery">Git Grandmastery</h1>
+<p>By now, you should be able to navigate the <strong>git help</strong>
+pages and understand almost everything. However, pinpointing the exact
+command required to solve a given problem can be tedious. Perhaps I can
+save you some time: below are some recipes I have needed in the
+past.</p>
+<h2 id=3D"_source_releases">Source Releases</h2>
+<p>For my projects, Git tracks exactly the files I=E2=80=99d like to archiv=
+e and
+release to users. To create a tarball of the source code, I run:</p>
+<pre><code>$ git archive --format=3Dtar --prefix=3Dproj-1.2.3/ HEAD</code><=
+/pre>
+<h2 id=3D"_commit_what_changed">Commit What Changed</h2>
+<p>Telling Git when you=E2=80=99ve added, deleted and renamed files is
+troublesome for certain projects. Instead, you can type:</p>
+<pre><code>$ git add .
+$ git add -u</code></pre>
+<p>Git will look at the files in the current directory and work out the
+details by itself. Instead of the second add command, run
+<code>git commit -a</code> if you also intend to commit at this time.
+See <strong>git help ignore</strong> for how to specify files that
+should be ignored.</p>
+<p>You can perform the above in a single pass with:</p>
+<pre><code>$ git ls-files -d -m -o -z | xargs -0 git update-index --add --r=
+emove</code></pre>
+<p>The <strong>-z</strong> and <strong>-0</strong> options prevent ill
+side-effects from filenames containing strange characters. As this
+command adds ignored files, you may want to use the <code>-x</code> or
+<code>-X</code> option.</p>
+<h2 id=3D"_my_commit_is_too_big">My Commit Is Too Big!</h2>
+<p>Have you neglected to commit for too long? Been coding furiously and
+forgotten about source control until now? Made a series of unrelated
+changes, because that=E2=80=99s your style?</p>
+<p>No worries. Run:</p>
+<pre><code>$ git add -p</code></pre>
+<p>For each edit you made, Git will show you the hunk of code that was
+changed, and ask if it should be part of the next commit. Answer with
+"y" or "n". You have other options, such as postponing the decision;
+type "?" to learn more.</p>
+<p>Once you=E2=80=99re satisfied, type</p>
+<pre><code>$ git commit</code></pre>
+<p>to commit precisely the changes you selected (the <em>staged</em>
+changes). Make sure you omit the <strong>-a</strong> option, otherwise
+Git will commit all the edits.</p>
+<p>What if you=E2=80=99ve edited many files in many places? Reviewing each
+change one by one becomes frustratingly mind-numbing. In this case, use
+<strong>git add -i</strong>, whose interface is less straightforward,
+but more flexible. With a few keystrokes, you can stage or unstage
+several files at a time, or review and select changes in particular
+files only. Alternatively, run <strong>git commit --interactive</strong>
+which automatically commits after you=E2=80=99re done.</p>
+<h2 id=3D"_the_index_git_8217_s_staging_area">The Index: Git=E2=80=99s Stag=
+ing
+Area</h2>
+<p>So far we have avoided Git=E2=80=99s famous <em>index</em>, but we must =
+now
+confront it to explain the above. The index is a temporary staging area.
+Git seldom shuttles data directly between your project and its history.
+Rather, Git first writes data to the index, and then copies the data in
+the index to its final destination.</p>
+<p>For example, <strong>commit -a</strong> is really a two-step process.
+The first step places a snapshot of the current state of every tracked
+file into the index. The second step permanently records the snapshot
+now in the index. Committing without the <strong>-a</strong> option only
+performs the second step, and only makes sense after running commands
+that somehow change the index, such as <strong>git add</strong>.</p>
+<p>Usually we can ignore the index and pretend we are reading straight
+from and writing straight to the history. On this occasion, we want
+finer control, so we manipulate the index. We place a snapshot of some,
+but not all, of our changes into the index, and then permanently record
+this carefully rigged snapshot.</p>
+<h2 id=3D"_don_8217_t_lose_your_head">Don=E2=80=99t Lose Your HEAD</h2>
+<p>The HEAD tag is like a cursor that normally points at the latest
+commit, advancing with each new commit. Some Git commands let you move
+it. For example:</p>
+<pre><code>$ git reset HEAD~3</code></pre>
+<p>will move the HEAD three commits back. Thus all Git commands now act
+as if you hadn=E2=80=99t made those last three commits, while your files re=
+main
+in the present. See the help page for some applications.</p>
+<p>But how can you go back to the future? The past commits know nothing
+of the future.</p>
+<p>If you have the SHA1 of the original HEAD then:</p>
+<pre><code>$ git reset 1b6d</code></pre>
+<p>But suppose you never took it down? Don=E2=80=99t worry: for commands li=
+ke
+these, Git saves the original HEAD as a tag called ORIG_HEAD, and you
+can return safe and sound with:</p>
+<pre><code>$ git reset ORIG_HEAD</code></pre>
+<h2 id=3D"_head_hunting">HEAD-hunting</h2>
+<p>Perhaps ORIG_HEAD isn=E2=80=99t enough. Perhaps you=E2=80=99ve just real=
+ized you made
+a monumental mistake and you need to go back to an ancient commit in a
+long-forgotten branch.</p>
+<p>By default, Git keeps a commit for at least two weeks, even if you
+ordered Git to destroy the branch containing it. The trouble is finding
+the appropriate hash. You could look at all the hash values in
+<code>.git/objects</code> and use trial and error to find the one you
+want. But there=E2=80=99s a much easier way.</p>
+<p>Git records every hash of a commit it computes in
+<code>.git/logs</code>. The subdirectory <code>refs</code> contains the
+history of all activity on all branches, while the file
+<code>HEAD</code> shows every hash value it has ever taken. The latter
+can be used to find hashes of commits on branches that have been
+accidentally lopped off.</p>
+<p>The reflog command provides a friendly interface to these log files.
+Try</p>
+<pre><code>$ git reflog</code></pre>
+<p>Instead of cutting and pasting hashes from the reflog, try:</p>
+<pre><code>$ git checkout "@{10 minutes ago}"</code></pre>
+<p>Or checkout the 5th-last visited commit via:</p>
+<pre><code>$ git checkout "@{5}"</code></pre>
+<p>See the =E2=80=9CSpecifying Revisions=E2=80=9D section of <strong>git he=
+lp
+rev-parse</strong> for more.</p>
+<p>You may wish to configure a longer grace period for doomed commits.
+For example:</p>
+<pre><code>$ git config gc.pruneexpire "30 days"</code></pre>
+<p>means a deleted commit will only be permanently lost once 30 days
+have passed and <strong>git gc</strong> is run.</p>
+<p>You may also wish to disable automatic invocations of <strong>git
+gc</strong>:</p>
+<pre><code>$ git config gc.auto 0</code></pre>
+<p>in which case commits will only be deleted when you run <strong>git
+gc</strong> manually.</p>
+<h2 id=3D"_building_on_git">Building On Git</h2>
+<p>In true UNIX fashion, Git=E2=80=99s design allows it to be easily used a=
+s a
+low-level component of other programs, such as GUI and web interfaces,
+alternative command-line interfaces, patch managements tools, importing
+and conversion tools and so on. In fact, some Git commands are
+themselves scripts standing on the shoulders of giants. With a little
+tinkering, you can customize Git to suit your preferences.</p>
+<p>One easy trick is to use built-in Git aliases to shorten your most
+frequently used commands:</p>
+<pre><code>$ git config --global alias.co checkout
+$ git config --global --get-regexp alias  # display current aliases
+alias.co checkout
+$ git co foo                              # same as 'git checkout foo'</cod=
+e></pre>
+<p>Another is to print the current branch in the prompt, or window
+title. Invoking</p>
+<pre><code>$ git symbolic-ref HEAD</code></pre>
+<p>shows the current branch name. In practice, you most likely want to
+remove the "refs/heads/" and ignore errors:</p>
+<pre><code>$ git symbolic-ref HEAD 2&gt; /dev/null | cut -b 12-</code></pre=
+>
+<p>The <code>contrib</code> subdirectory is a treasure trove of tools
+built on Git. In time, some of them may be promoted to official
+commands. On Debian and Ubuntu, this directory lives at
+<code>/usr/share/doc/git-core/contrib</code>.</p>
+<p>One popular resident is <code>workdir/git-new-workdir</code>. Via
+clever symlinking, this script creates a new working directory whose
+history is shared with the original repository:</p>
+<pre><code>$ git-new-workdir an/existing/repo new/directory</code></pre>
+<p>The new directory and the files within can be thought of as a clone,
+except since the history is shared, the two trees automatically stay in
+sync. There=E2=80=99s no need to merge, push, or pull.</p>
+<h2 id=3D"_daring_stunts">Daring Stunts</h2>
+<p>These days, Git makes it difficult for the user to accidentally
+destroy data. But if you know what you are doing, you can override
+safeguards for common commands.</p>
+<p><strong>Checkout</strong>: Uncommitted changes cause checkout to
+fail. To destroy your changes, and checkout a given commit anyway, use
+the force flag:</p>
+<pre><code>$ git checkout -f HEAD^</code></pre>
+<p>On the other hand, if you specify particular paths for checkout, then
+there are no safety checks. The supplied paths are quietly overwritten.
+Take care if you use checkout in this manner.</p>
+<p><strong>Reset</strong>: Reset also fails in the presence of
+uncommitted changes. To force it through, run:</p>
+<pre><code>$ git reset --hard 1b6d</code></pre>
+<p><strong>Branch</strong>: Deleting branches fails if this causes
+changes to be lost. To force a deletion, type:</p>
+<pre><code>$ git branch -D dead_branch  # instead of -d</code></pre>
+<p>Similarly, attempting to overwrite a branch via a move fails if data
+loss would ensue. To force a branch move, type:</p>
+<pre><code>$ git branch -M source target  # instead of -m</code></pre>
+<p>Unlike checkout and reset, these two commands defer data destruction.
+The changes are still stored in the .git subdirectory, and can be
+retrieved by recovering the appropriate hash from <code>.git/logs</code>
+(see "HEAD-hunting" above). By default, they will be kept for at least
+two weeks.</p>
+<p><strong>Clean</strong>: Some git commands refuse to proceed because
+they=E2=80=99re worried about clobbering untracked files. If you=E2=80=99re=
+ certain that
+all untracked files and directories are expendable, then delete them
+mercilessly with:</p>
+<pre><code>$ git clean -f -d</code></pre>
+<p>Next time, that pesky command will work!</p>
+<h2 id=3D"_preventing_bad_commits">Preventing Bad Commits</h2>
+<p>Stupid mistakes pollute my repositories. Most frightening are missing
+files due to a forgotten <strong>git add</strong>. Lesser transgressions
+are trailing whitespace and unresolved merge conflicts: though harmless,
+I wish these never appeared on the public record.</p>
+<p>If only I had bought idiot insurance by using a <em>hook</em> to
+alert me about these problems:</p>
+<pre><code>$ cd .git/hooks
+$ cp pre-commit.sample pre-commit  # Older Git versions: chmod +x pre-commi=
+t</code></pre>
+<p>Now Git aborts a commit if useless whitespace or unresolved merge
+conflicts are detected.</p>
+<p>For this guide, I eventually added the following to the beginning of
+the <strong>pre-commit</strong> hook to guard against
+absent-mindedness:</p>
+<pre><code>if git ls-files -o | grep '\.txt$'; then
+  echo FAIL! Untracked .txt files.
+  exit 1
+fi</code></pre>
+<p>Several git operations support hooks; see <strong>git help
+hooks</strong>. We activated the sample <strong>post-update</strong>
+hook earlier when discussing Git over HTTP. This runs whenever the head
+moves. The sample post-update script updates files Git needs for
+communication over Git-agnostic transports such as HTTP.</p>
+<h1 id=3D"_secrets_revealed">Secrets Revealed</h1>
+<p>We take a peek under the hood and explain how Git performs its
+miracles. I will skimp over details. For in-depth descriptions refer to
+<a href=3D"http://schacon.github.com/git/user-manual.html">the user
+manual</a>.</p>
+<h2 id=3D"_invisibility">Invisibility</h2>
+<p>How can Git be so unobtrusive? Aside from occasional commits and
+merges, you can work as if you were unaware that version control exists.
+That is, until you need it, and that=E2=80=99s when you=E2=80=99re glad Git=
+ was watching
+over you the whole time.</p>
+<p>Other version control systems force you to constantly struggle with
+red tape and bureaucracy. Permissions of files may be read-only unless
+you explicitly tell a central server which files you intend to edit. The
+most basic commands may slow to a crawl as the number of users
+increases. Work grinds to a halt when the network or the central server
+goes down.</p>
+<p>In contrast, Git simply keeps the history of your project in the
+<code>.git</code> directory in your working directory. This is your own
+copy of the history, so you can stay offline until you want to
+communicate with others. You have total control over the fate of your
+files because Git can easily recreate a saved state from
+<code>.git</code> at any time.</p>
+<h2 id=3D"_integrity">Integrity</h2>
+<p>Most people associate cryptography with keeping information secret,
+but another equally important goal is keeping information safe. Proper
+use of cryptographic hash functions can prevent accidental or malicious
+data corruption.</p>
+<p>A SHA1 hash can be thought of as a unique 160-bit ID number for every
+string of bytes you=E2=80=99ll encounter in your life. Actually more than t=
+hat:
+every string of bytes that any human will ever use over many
+lifetimes.</p>
+<p>As a SHA1 hash is itself a string of bytes, we can hash strings of
+bytes containing other hashes. This simple observation is surprisingly
+useful: look up <em>hash chains</em>. We=E2=80=99ll later see how Git uses =
+it to
+efficiently guarantee data integrity.</p>
+<p>Briefly, Git keeps your data in the <code>.git/objects</code>
+subdirectory, where instead of normal filenames, you=E2=80=99ll find only I=
+Ds.
+By using IDs as filenames, as well as a few lockfiles and timestamping
+tricks, Git transforms any humble filesystem into an efficient and
+robust database.</p>
+<h2 id=3D"_intelligence">Intelligence</h2>
+<p>How does Git know you renamed a file, even though you never mentioned
+the fact explicitly? Sure, you may have run <strong>git mv</strong>, but
+that is exactly the same as a <strong>git rm</strong> followed by a
+<strong>git add</strong>.</p>
+<p>Git heuristically ferrets out renames and copies between successive
+versions. In fact, it can detect chunks of code being moved or copied
+around between files! Though it cannot cover all cases, it does a decent
+job, and this feature is always improving. If it fails to work for you,
+try options enabling more expensive copy detection, and consider
+upgrading.</p>
+<h2 id=3D"_indexing">Indexing</h2>
+<p>For every tracked file, Git records information such as its size,
+creation time and last modification time in a file known as the
+<em>index</em>. To determine whether a file has changed, Git compares
+its current stats with those cached in the index. If they match, then
+Git can skip reading the file again.</p>
+<p>Since stat calls are considerably faster than file reads, if you only
+edit a few files, Git can update its state in almost no time.</p>
+<p>We stated earlier that the index is a staging area. Why is a bunch of
+file stats a staging area? Because the add command puts files into Git=E2=
+=80=99s
+database and updates these stats, while the commit command, without
+options, creates a commit based only on these stats and the files
+already in the database.</p>
+<h2 id=3D"_git_8217_s_origins">Git=E2=80=99s Origins</h2>
+<p>This <a href=3D"http://lkml.org/lkml/2005/4/6/121">Linux Kernel Mailing
+List post</a> describes the chain of events that led to Git. The entire
+thread is a fascinating archaeological site for Git historians.</p>
+<h2 id=3D"_the_object_database">The Object Database</h2>
+<p>Every version of your data is kept in the <em>object database</em>,
+which lives in the subdirectory <code>.git/objects</code>; the other
+residents of <code>.git/</code> hold lesser data: the index, branch
+names, tags, configuration options, logs, the current location of the
+head commit, and so on. The object database is elementary yet elegant,
+and the source of Git=E2=80=99s power.</p>
+<p>Each file within <code>.git/objects</code> is an <em>object</em>.
+There are 3 kinds of objects that concern us: <em>blob</em> objects,
+<em>tree</em> objects, and <em>commit</em> objects.</p>
+<h2 id=3D"_blobs">Blobs</h2>
+<p>First, a magic trick. Pick a filename, any filename. In an empty
+directory:</p>
+<pre><code>$ echo sweet &gt; YOUR_FILENAME
+$ git init
+$ git add .
+$ find .git/objects -type f</code></pre>
+<p>You=E2=80=99ll see
+<code>.git/objects/aa/823728ea7d592acc69b36875a482cdf3fd5c8d</code>.</p>
+<p>How do I know this without knowing the filename? It=E2=80=99s because th=
+e
+SHA1 hash of:</p>
+<pre><code>"blob" SP "6" NUL "sweet" LF</code></pre>
+<p>is aa823728ea7d592acc69b36875a482cdf3fd5c8d, where SP is a space, NUL
+is a zero byte and LF is a linefeed. You can verify this by typing:</p>
+<pre><code>$ printf "blob 6\000sweet\n" | sha1sum</code></pre>
+<p>Git is <em>content-addressable</em>: files are not stored according
+to their filename, but rather by the hash of the data they contain, in a
+file we call a <em>blob object</em>. We can think of the hash as a
+unique ID for a file=E2=80=99s contents, so in a sense we are addressing fi=
+les
+by their content. The initial <code>blob 6</code> is merely a header
+consisting of the object type and its length in bytes; it simplifies
+internal bookkeeping.</p>
+<p>Thus I could easily predict what you would see. The file=E2=80=99s name =
+is
+irrelevant: only the data inside is used to construct the blob
+object.</p>
+<p>You may be wondering what happens to identical files. Try adding
+copies of your file, with any filenames whatsoever. The contents of
+<code>.git/objects</code> stay the same no matter how many you add. Git
+only stores the data once.</p>
+<p>By the way, the files within <code>.git/objects</code> are compressed
+with zlib so you should not stare at them directly. Filter them through
+<a href=3D"http://www.zlib.net/zpipe.c">zpipe -d</a>, or type:</p>
+<pre><code>$ git cat-file -p aa823728ea7d592acc69b36875a482cdf3fd5c8d</code=
+></pre>
+<p>which pretty-prints the given object.</p>
+<h2 id=3D"_trees">Trees</h2>
+<p>But where are the filenames? They must be stored somewhere at some
+stage. Git gets around to the filenames during a commit:</p>
+<pre><code>$ git commit  # Type some message.
+$ find .git/objects -type f</code></pre>
+<p>You should now see 3 objects. This time I cannot tell you what the 2
+new files are, as it partly depends on the filename you picked. We=E2=80=99=
+ll
+proceed assuming you chose =E2=80=9Crose=E2=80=9D. If you didn=E2=80=99t, y=
+ou can rewrite
+history to make it look like you did:</p>
+<pre><code>$ git filter-branch --tree-filter 'mv YOUR_FILENAME rose'
+$ find .git/objects -type f</code></pre>
+<p>Now you should see the file
+<code>.git/objects/05/b217bb859794d08bb9e4f7f04cbda4b207fbe9</code>,
+because this is the SHA1 hash of its contents:</p>
+<pre><code>"tree" SP "32" NUL "100644 rose" NUL 0xaa823728ea7d592acc69b3687=
+5a482cdf3fd5c8d</code></pre>
+<p>Check this file does indeed contain the above by typing:</p>
+<pre><code>$ echo 05b217bb859794d08bb9e4f7f04cbda4b207fbe9 | git cat-file -=
+-batch</code></pre>
+<p>With zpipe, it=E2=80=99s easy to verify the hash:</p>
+<pre><code>$ zpipe -d &lt; .git/objects/05/b217bb859794d08bb9e4f7f04cbda4b2=
+07fbe9 | sha1sum</code></pre>
+<p>Hash verification is trickier via cat-file because its output
+contains more than the raw uncompressed object file.</p>
+<p>This file is a <em>tree</em> object: a list of tuples consisting of a
+file type, a filename, and a hash. In our example, the file type is
+100644, which means =E2=80=98rose` is a normal file, and the hash is the bl=
+ob
+object that contains the contents of `rose=E2=80=99. Other possible file ty=
+pes
+are executables, symlinks or directories. In the last case, the hash
+points to a tree object.</p>
+<p>If you ran filter-branch, you=E2=80=99ll have old objects you no longer =
+need.
+Although they will be jettisoned automatically once the grace period
+expires, we=E2=80=99ll delete them now to make our toy example easier to
+follow:</p>
+<pre><code>$ rm -r .git/refs/original
+$ git reflog expire --expire=3Dnow --all
+$ git prune</code></pre>
+<p>For real projects you should typically avoid commands like this, as
+you are destroying backups. If you want a clean repository, it is
+usually best to make a fresh clone. Also, take care when directly
+manipulating <code>.git</code>: what if a Git command is running at the
+same time, or a sudden power outage occurs? In general, refs should be
+deleted with <strong>git update-ref -d</strong>, though usually it=E2=80=99=
+s
+safe to remove <code>refs/original</code> by hand.</p>
+<h2 id=3D"_commits">Commits</h2>
+<p>We=E2=80=99ve explained 2 of the 3 objects. The third is a <em>commit</e=
+m>
+object. Its contents depend on the commit message as well as the date
+and time it was created. To match what we have here, we=E2=80=99ll have to =
+tweak
+it a little:</p>
+<pre><code>$ git commit --amend -m Shakespeare  # Change the commit message=
+.
+$ git filter-branch --env-filter 'export
+    GIT_AUTHOR_DATE=3D"Fri 13 Feb 2009 15:31:30 -0800"
+    GIT_AUTHOR_NAME=3D"Alice"
+    GIT_AUTHOR_EMAIL=3D"alice@example.com"
+    GIT_COMMITTER_DATE=3D"Fri, 13 Feb 2009 15:31:30 -0800"
+    GIT_COMMITTER_NAME=3D"Bob"
+    GIT_COMMITTER_EMAIL=3D"bob@example.com"'  # Rig timestamps and authors.
+$ find .git/objects -type f</code></pre>
+<p>You should now see
+<code>.git/objects/49/993fe130c4b3bf24857a15d7969c396b7bc187</code>
+which is the SHA1 hash of its contents:</p>
+<pre><code>"commit 158" NUL
+"tree 05b217bb859794d08bb9e4f7f04cbda4b207fbe9" LF
+"author Alice &lt;alice@example.com&gt; 1234567890 -0800" LF
+"committer Bob &lt;bob@example.com&gt; 1234567890 -0800" LF
+LF
+"Shakespeare" LF</code></pre>
+<p>As before, you can run zpipe or cat-file to see for yourself.</p>
+<p>This is the first commit, so there are no parent commits, but later
+commits will always contain at least one line identifying a parent
+commit.</p>
+<h2 id=3D"_indistinguishable_from_magic">Indistinguishable From Magic</h2>
+<p>Git=E2=80=99s secrets seem too simple. It looks like you could mix toget=
+her a
+few shell scripts and add a dash of C code to cook it up in a matter of
+hours: a melange of basic filesystem operations and SHA1 hashing,
+garnished with lock files and fsyncs for robustness. In fact, this
+accurately describes the earliest versions of Git. Nonetheless, apart
+from ingenious packing tricks to save space, and ingenious indexing
+tricks to save time, we now know how Git deftly changes a filesystem
+into a database perfect for version control.</p>
+<p>For example, if any file within the object database is corrupted by a
+disk error, then its hash will no longer match, alerting us to the
+problem. By hashing hashes of other objects, we maintain integrity at
+all levels. Commits are atomic, that is, a commit can never only
+partially record changes: we can only compute the hash of a commit and
+store it in the database after we already have stored all relevant
+trees, blobs and parent commits. The object database is immune to
+unexpected interruptions such as power outages.</p>
+<p>We defeat even the most devious adversaries. Suppose somebody
+attempts to stealthily modify the contents of a file in an ancient
+version of a project. To keep the object database looking healthy, they
+must also change the hash of the corresponding blob object since it=E2=80=
+=99s
+now a different string of bytes. This means they=E2=80=99ll have to change =
+the
+hash of any tree object referencing the file, and in turn change the
+hash of all commit objects involving such a tree, in addition to the
+hashes of all the descendants of these commits. This implies the hash of
+the official head differs to that of the bad repository. By following
+the trail of mismatching hashes we can pinpoint the mutilated file, as
+well as the commit where it was first corrupted.</p>
+<p>In short, so long as the 20 bytes representing the last commit are
+safe, it=E2=80=99s impossible to tamper with a Git repository.</p>
+<p>What about Git=E2=80=99s famous features? Branching? Merging? Tags? Mere
+details. The current head is kept in the file <code>.git/HEAD</code>,
+which contains a hash of a commit object. The hash gets updated during a
+commit as well as many other commands. Branches are almost the same:
+they are files in <code>.git/refs/heads</code>. Tags too: they live in
+<code>.git/refs/tags</code> but they are updated by a different set of
+commands.</p>
+<h1 id=3D"_git_shortcomings">Git Shortcomings</h1>
+<p>There are some Git issues I=E2=80=99ve swept under the carpet. Some can =
+be
+handled easily with scripts and hooks, some require reorganizing or
+redefining the project, and for the few remaining annoyances, one will
+just have to wait. Or better yet, pitch in and help!</p>
+<h2 id=3D"_sha1_weaknesses">SHA1 Weaknesses</h2>
+<p>As time passes, cryptographers discover more and more SHA1
+weaknesses. Already, finding hash collisions is feasible for well-funded
+organizations. Within years, perhaps even a typical PC will have enough
+computing power to silently corrupt a Git repository.</p>
+<p>Hopefully Git will migrate to a better hash function before further
+research destroys SHA1.</p>
+<h2 id=3D"_microsoft_windows">Microsoft Windows</h2>
+<p>Git on Microsoft Windows can be cumbersome:</p>
+<ul>
+<li><p><a href=3D"http://cygwin.com/">Cygwin</a>, a Linux-like environment
+for Windows, contains <a href=3D"http://cygwin.com/packages/git/">a
+Windows port of Git</a>.</p></li>
+<li><p><a href=3D"https://gitforwindows.org/">Git for Windows</a> is an
+alternative requiring minimal runtime support, though a few of the
+commands need some work.</p></li>
+</ul>
+<h2 id=3D"_unrelated_files">Unrelated Files</h2>
+<p>If your project is very large and contains many unrelated files that
+are constantly being changed, Git may be disadvantaged more than other
+systems because single files are not tracked. Git tracks changes to the
+whole project, which is usually beneficial.</p>
+<p>A solution is to break up your project into pieces, each consisting
+of related files. Use <strong>git submodule</strong> if you still want
+to keep everything in a single repository.</p>
+<h2 id=3D"_who_8217_s_editing_what">Who=E2=80=99s Editing What?</h2>
+<p>Some version control systems force you to explicitly mark a file in
+some way before editing. While this is especially annoying when this
+involves talking to a central server, it does have two benefits:</p>
+<ol type=3D"1">
+<li><p>Diffs are quick because only the marked files need be
+examined.</p></li>
+<li><p>One can discover who else is working on the file by asking the
+central server who has marked it for editing.</p></li>
+</ol>
+<p>With appropriate scripting, you can achieve the same with Git. This
+requires cooperation from the programmer, who should execute particular
+scripts when editing a file.</p>
+<h2 id=3D"_file_history">File History</h2>
+<p>Since Git records project-wide changes, reconstructing the history of
+a single file requires more work than in version control systems that
+track individual files.</p>
+<p>The penalty is typically slight, and well worth having as other
+operations are incredibly efficient. For example,
+<code>git checkout</code> is faster than <code>cp -a</code>, and
+project-wide deltas compress better than collections of file-based
+deltas.</p>
+<h2 id=3D"_initial_clone">Initial Clone</h2>
+<p>Creating a clone is more expensive than checking out code in other
+version control systems when there is a lengthy history.</p>
+<p>The initial cost is worth paying in the long run, as most future
+operations will then be fast and offline. However, in some situations,
+it may be preferable to create a shallow clone with the
+<code>--depth</code> option. This is much faster, but the resulting
+clone has reduced functionality.</p>
+<h2 id=3D"_volatile_projects">Volatile Projects</h2>
+<p>Git was written to be fast with respect to the size of the changes.
+Humans make small edits from version to version. A one-liner bugfix
+here, a new feature there, emended comments, and so forth. But if your
+files are radically different in successive revisions, then on each
+commit, your history necessarily grows by the size of your whole
+project.</p>
+<p>There is nothing any version control system can do about this, but
+standard Git users will suffer more since normally histories are
+cloned.</p>
+<p>The reasons why the changes are so great should be examined. Perhaps
+file formats should be changed. Minor edits should only cause minor
+changes to at most a few files.</p>
+<p>Or perhaps a database or backup/archival solution is what is actually
+being sought, not a version control system. For example, version control
+may be ill-suited for managing photos periodically taken from a
+webcam.</p>
+<p>If the files really must be constantly morphing and they really must
+be versioned, a possibility is to use Git in a centralized fashion. One
+can create shallow clones, which checks out little or no history of the
+project. Of course, many Git tools will be unavailable, and fixes must
+be submitted as patches. This is probably fine as it=E2=80=99s unclear why
+anyone would want the history of wildly unstable files.</p>
+<p>Another example is a project depending on firmware, which takes the
+form of a huge binary file. The history of the firmware is uninteresting
+to users, and updates compress poorly, so firmware revisions would
+unnecessarily blow up the size of the repository.</p>
+<p>In this case, the source code should be stored in a Git repository,
+and the binary file should be kept separately. To make life easier, one
+could distribute a script that uses Git to clone the code, and rsync or
+a Git shallow clone for the firmware.</p>
+<h2 id=3D"_global_counter">Global Counter</h2>
+<p>Some centralized version control systems maintain a positive integer
+that increases when a new commit is accepted. Git refers to changes by
+their hash, which is better in many circumstances.</p>
+<p>But some people like having this integer around. Luckily, it=E2=80=99s e=
+asy
+to write scripts so that with every update, the central Git repository
+increments an integer, perhaps in a tag, and associates it with the hash
+of the latest commit.</p>
+<p>Every clone could maintain such a counter, but this would probably be
+useless, since only the central repository and its counter matters to
+everyone.</p>
+<h2 id=3D"_empty_subdirectories">Empty Subdirectories</h2>
+<p>Empty subdirectories cannot be tracked. Create dummy files to work
+around this problem.</p>
+<p>The current implementation of Git, rather than its design, is to
+blame for this drawback. With luck, once Git gains more traction, more
+users will clamour for this feature and it will be implemented.</p>
+<h2 id=3D"_initial_commit">Initial Commit</h2>
+<p>A stereotypical computer scientist counts from 0, rather than 1.
+Unfortunately, with respect to commits, git does not adhere to this
+convention. Many commands are unfriendly before the initial commit.
+Additionally, some corner cases must be handled specially, such as
+rebasing a branch with a different initial commit.</p>
+<p>Git would benefit from defining the zero commit: as soon as a
+repository is constructed, HEAD would be set to the string consisting of
+20 zero bytes. This special commit represents an empty tree, with no
+parent, at some time predating all Git repositories.</p>
+<p>Then running git log, for example, would inform the user that no
+commits have been made yet, instead of exiting with a fatal error.
+Similarly for other tools.</p>
+<p>Every initial commit is implicitly a descendant of this zero
+commit.</p>
+<p>However there are some problem cases unfortunately. If several
+branches with different initial commits are merged together, then
+rebasing the result requires substantial manual intervention.</p>
+<h2 id=3D"_interface_quirks">Interface Quirks</h2>
+<p>For commits A and B, the meaning of the expressions "A..B" and "A=E2=80=
+=A6B"
+depends on whether the command expects two endpoints or a range. See
+<strong>git help diff</strong> and <strong>git help
+rev-parse</strong>.</p>
+<h1 id=3D"_translating_this_guide">Translating This Guide</h1>
+<p>I recommend the following steps for translating this guide, so my
+scripts can quickly produce HTML and PDF versions, and all translations
+can live in the same repository.</p>
+<p>Clone the source, then create a directory corresponding to the target
+language=E2=80=99s IETF tag: see <a href=3D"http://www.w3.org/International=
+/articles/language-tags/Overview.en.php">the
+W3C article on internationalization</a>. For example, English is "en"
+and Japanese is "ja". In the new directory, and translate the
+<code>txt</code> files from the "en" subdirectory.</p>
+<p>For instance, to translate the guide into <a href=3D"http://en.wikipedia=
+.org/wiki/Klingon_language">Klingon</a>, you
+might type:</p>
+<pre><code>$ git clone git://repo.or.cz/gitmagic.git
+$ cd gitmagic
+$ mkdir tlh  # "tlh" is the IETF language code for Klingon.
+$ cd tlh
+$ cp ../en/intro.txt .
+$ edit intro.txt  # Translate the file.</code></pre>
+<p>and so on for each text file.</p>
+<p>Edit the Makefile and add the language code to the
+<code>TRANSLATIONS</code> variable. You can now review your work
+incrementally:</p>
+<pre><code>$ make tlh
+$ firefox book-tlh/index.html</code></pre>
+<p>Commit your changes often, then let me know when they=E2=80=99re ready.
+GitHub has an interface that facilitates this: fork the "gitmagic"
+project, push your changes, then ask me to merge.</p>
+
+
+</body></html>
+------MultipartBoundary--djTYCbQdLGAv9jQppZCzQ1T6TSHeZ1vgsZmIaE0Joy----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-5994df9d-45cc-4a6d-9716-b25577ef0851@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--djTYCbQdLGAv9jQppZCzQ1T6TSHeZ1vgsZmIaE0Joy----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-9680ae4e-7980-4dc9-8454-707e1d118331@mhtml.blink
+
+@charset "utf-8";
+
+html { line-height: 1.5; font-family: Georgia, serif; font-size: 20px; colo=
+r: rgb(26, 26, 26); background-color: rgb(253, 253, 253); }
+
+body { margin: 0px auto; max-width: 36em; padding: 50px; hyphens: auto; ove=
+rflow-wrap: break-word; text-rendering: optimizelegibility; font-kerning: n=
+ormal; }
+
+@media (max-width: 600px) {
+  body { font-size: 0.9em; padding: 1em; }
+  h1 { font-size: 1.8em; }
+}
+
+@media print {
+  body { background-color: transparent; color: black; font-size: 12pt; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3, h4 { break-after: avoid; }
+}
+
+p { margin: 1em 0px; }
+
+a { color: rgb(26, 26, 26); }
+
+a:visited { color: rgb(26, 26, 26); }
+
+img { max-width: 100%; }
+
+h1, h2, h3, h4, h5, h6 { margin-top: 1.4em; }
+
+h5, h6 { font-size: 1em; font-style: italic; }
+
+h6 { font-weight: normal; }
+
+ol, ul { padding-left: 1.7em; margin-top: 1em; }
+
+li > ol, li > ul { margin-top: 0px; }
+
+blockquote { margin: 1em 0px 1em 1.7em; padding-left: 1em; border-left: 2px=
+ solid rgb(230, 230, 230); color: rgb(96, 96, 96); }
+
+code { font-family: Menlo, Monaco, "Lucida Console", Consolas, monospace; f=
+ont-size: 85%; margin: 0px; }
+
+pre { margin: 1em 0px; overflow: auto; }
+
+pre code { padding: 0px; overflow: visible; overflow-wrap: normal; }
+
+.sourceCode { background-color: transparent; overflow: visible; }
+
+hr { background-color: rgb(26, 26, 26); border: none; height: 1px; margin: =
+1em 0px; }
+
+table { margin: 1em 0px; border-collapse: collapse; width: 100%; overflow-x=
+: auto; display: block; font-variant-numeric: lining-nums tabular-nums; }
+
+table caption { margin-bottom: 0.75em; }
+
+tbody { margin-top: 0.5em; border-top: 1px solid rgb(26, 26, 26); border-bo=
+ttom: 1px solid rgb(26, 26, 26); }
+
+th { border-top: 1px solid rgb(26, 26, 26); padding: 0.25em 0.5em; }
+
+td { padding: 0.125em 0.5em 0.25em; }
+
+header { margin-bottom: 4em; text-align: center; }
+
+#TOC li { list-style: none; }
+
+#TOC ul { padding-left: 1.3em; }
+
+#TOC > ul { padding-left: 0px; }
+
+#TOC a:not(:hover) { text-decoration: none; }
+
+code { white-space: pre-wrap; }
+
+span.smallcaps { font-variant: small-caps; }
+
+span.underline { text-decoration: underline; }
+
+div.column { display: inline-block; vertical-align: top; width: 50%; }
+
+div.hanging-indent { margin-left: 1.5em; text-indent: -1.5em; }
+
+ul.task-list { list-style: none; }
+
+.display.math { display: block; text-align: center; margin: 0.5rem auto; }
+------MultipartBoundary--djTYCbQdLGAv9jQppZCzQ1T6TSHeZ1vgsZmIaE0Joy------

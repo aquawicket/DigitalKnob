@@ -60,7 +60,7 @@ setlocal EnableDelayedExpansion
 set "LF="
 
 :: Permanently redirect stdin to pipe input
-cmd /d /u /c "echo(&echo(" 0>&3 4>&0 | break
+cmd /d /u /c "echo.&echo." 0>&3 4>&0 | break
 
 :: Now reading from pipe
 pause>nul

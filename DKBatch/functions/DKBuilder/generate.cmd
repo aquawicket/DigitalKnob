@@ -1,22 +1,28 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# generate()
-::#
-::#
+rem ####################################################################
+rem # generate()
+rem #
+rem #
 :generate
- ::%setlocal%
-	%dk_call% dk_debugFunc 0
+ rem %setlocal%
 
 	set "CMAKE_ARGS="
 	
-	::###### DKBATCH_TOOLCHAIN ######
-	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_Toolchain.cmd
+	rem ###### DKBATCH_TOOLCHAIN ######
+	%dk_call% dk_set DKBATCH_TOOLCHAIN %DKBATCH_DIR%/toolchains/%Target_Tuple%_toolchain.cmd
  	if NOT EXIST "%DKBATCH_TOOLCHAIN%" (
 		%dk_call% dk_notice "%DKBATCH_TOOLCHAIN% NOT found. skipping..."
 		%dk_call% dk_unset CMAKE_GENERATOR
@@ -28,42 +34,42 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 	%dk_call% dk_title "Generating %Target_App% - %Target_Tuple% - %Target_Type%"
-::	%dk_call% dk_echo
-::	%dk_call% dk_echo "##################################################################"
-::	%dk_call% dk_echo "	  Generating %Target_App% - %Target_Tuple% - %Target_Type%"
-::	%dk_call% dk_echo "##################################################################"
-::	%dk_call% dk_echo
+rem	%dk_call% dk_echo
+rem	%dk_call% dk_echo "##################################################################"
+rem	%dk_call% dk_echo "	  Generating %Target_App% - %Target_Tuple% - %Target_Type%"
+rem	%dk_call% dk_echo "##################################################################"
+rem	%dk_call% dk_echo
 	
-	::############ Target_App_Dir ############
-	%dk_call% dk_validate DKCPP_APPS_DIR "%dk_call% dk_DKBRANCH_DIR"
+	rem ############ Target_App_Dir ############
+	%dk_call% dk_validate DKCPP_APPS_DIR %dk_call% dk_DKBRANCH_DIR
 	set "Target_App_Dir=%DKCPP_APPS_DIR%/%Target_App%"
 	
-	::############ Target_Tuple_Dir ############
+	rem ############ Target_Tuple_Dir ############
 	set "Target_Tuple_Dir=%Target_App_Dir%/%Target_Tuple%"
-	if NOT EXIST "%Target_Tuple_Dir%" (%dk_call% dk_mkdir "%Target_Tuple_Dir%")
+	%dk_call% dk_mkdir "%Target_Tuple_Dir%"
 	
-	::############ Get CMakeLists.txt file #############
+	rem ############ Get CMakeLists.txt file #############
 	if NOT EXIST "%Target_App_Dir%/CMakeLists.txt" (
 		%dk_call% dk_copy "%DKCPP_PLUGINS_DIR%/_DKIMPORT/_CMakeLists.txt_" "%Target_App_Dir%/CMakeLists.txt" OVERWRITE
 	)
 	
-	::############ set cmake Variables ###########
-	%dk_call% dk_validate DKCMAKE_DIR "%dk_call% dk_DKBRANCH_DIR"
-	::set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
+	rem ############ set cmake Variables ###########
+	%dk_call% dk_validate DKCMAKE_DIR %dk_call% dk_DKBRANCH_DIR
+	rem set "CMAKE_SOURCE_DIR=%DKCMAKE_DIR%"
 	set "CMAKE_SOURCE_DIR=%Target_App_Dir%"
 
-	::############ Create CMAKE_ARGS array ############
+	rem ############ Create CMAKE_ARGS array ############
 	set "Target_Level=RebuildAll"
 	set "Target_Link=Static"
 
-	::if /i "%Target_Type%"		equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
-	::if /i "%Target_Type%"		equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	::if /i "%Target_Type%"		equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
-	::if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
-	::if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
-	::if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
-	::if /i "%Target_Link%"		equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
-	::if /i "%Target_Link%"		equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
+	rem if /i "%Target_Type%"		equ "Debug"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON)
+	rem if /i "%Target_Type%"		equ "Release"		(%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	rem if /i "%Target_Type%"		equ "All"			(%dk_call% dk_appendArgs CMAKE_ARGS -DDEBUG=ON) && (%dk_call% dk_appendArgs CMAKE_ARGS -DRELEASE=ON)
+	rem if /i "%Target_Level%"	equ "Build"			(%dk_call% dk_appendArgs CMAKE_ARGS -DBUILD=ON)
+	rem if /i "%Target_Level%"	equ "Rebuild"		(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILD=ON)
+	rem if /i "%Target_Level%"	equ "RebuildAll"	(%dk_call% dk_appendArgs CMAKE_ARGS -DREBUILDALL=ON)
+	rem if /i "%Target_Link%"		equ "Static"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSTATIC=ON)
+	rem if /i "%Target_Link%"		equ "Shared"		(%dk_call% dk_appendArgs CMAKE_ARGS -DSHARED=OFF)
 	
 	if /i "%Target_Type%"	equ "Debug"			(%dk_call% dk_set Debug 1)
 	if /i "%Target_Type%"	equ "Release"		(%dk_call% dk_set Release 1)
@@ -75,84 +81,82 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	if /i "%Target_Link%"	equ "Shared"		(%dk_call% dk_set Shared 1)
 	
 
-	::############ DKCMAKE_FUNCTIONS_DIR_ ############
-	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
-	::%dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
+	rem ############ DKCMAKE_FUNCTIONS_DIR_ ############
+	%dk_call% dk_validate DKCMAKE_FUNCTIONS_DIR_ %dk_call% dk_DKBRANCH_DIR
+	rem %dk_call% dk_appendArgs CMAKE_ARGS -DDKCMAKE_FUNCTIONS_DIR_=%DKCMAKE_FUNCTIONS_DIR_%
 
-	::############ CMake Options ############
+	rem ############ CMake Options ############
 	%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_VERBOSE_MAKEFILE=1
-	::%dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_COLOR_DIAGNOSTICS=ON
+	rem %dk_call% dk_appendArgs CMAKE_ARGS -DCMAKE_COLOR_DIAGNOSTICS=ON
 	%dk_call% dk_appendArgs CMAKE_ARGS -Wdev
-	::%dk_call% dk_appendArgs CMAKE_ARGS -Werror=dev
+	rem %dk_call% dk_appendArgs CMAKE_ARGS -Werror=dev
 	%dk_call% dk_appendArgs CMAKE_ARGS -Wdeprecated
-	::%dk_call% dk_appendArgs CMAKE_ARGS -Werror=deprecated
-	::%dk_call% dk_appendArgs CMAKE_ARGS --graphviz=graphviz.txt
-	::%dk_call% dk_appendArgs CMAKE_ARGS --system-information system_information.txt
+	rem %dk_call% dk_appendArgs CMAKE_ARGS -Werror=deprecated
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --graphviz=graphviz.txt
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --system-information system_information.txt
 	%dk_call% dk_appendArgs CMAKE_ARGS --debug-trycompile
-	::%dk_call% dk_appendArgs CMAKE_ARGS --debug-output
-	::%dk_call% dk_appendArgs CMAKE_ARGS --trace
-	::%dk_call% dk_appendArgs CMAKE_ARGS --trace-expand
-	::%dk_call% dk_appendArgs CMAKE_ARGS --warn-uninitialized
-	::%dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
-	::%dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --debug-output
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --trace
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --trace-expand
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --warn-uninitialized
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --warn-unused-vars
+	rem %dk_call% dk_appendArgs CMAKE_ARGS --check-system-vars
 
-	::############ CMAKE_SOURCE_DIR ############
+	rem ############ CMAKE_SOURCE_DIR ############
 	%dk_call% dk_assertVar CMAKE_SOURCE_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -S="%CMAKE_SOURCE_DIR%"
 
-	::############ CMAKE_BINARY_DIR ############
+	rem ############ CMAKE_BINARY_DIR ############
 	if NOT defined MULTI_CONFIG	(set "SINGLE_CONFIG=1")
 	if defined MULTI_CONFIG		(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%")
 	if defined SINGLE_CONFIG	(set "CMAKE_BINARY_DIR=%Target_Tuple_Dir%/%Target_Type%")
 	%dk_call% dk_assertVar CMAKE_BINARY_DIR
 	%dk_call% dk_appendArgs CMAKE_ARGS -B="%CMAKE_BINARY_DIR%"
 	
-	::############ CMAKE_GENERATOR ############
+	rem ############ CMAKE_GENERATOR ############
 	%dk_call% dk_assertVar CMAKE_GENERATOR
 	%dk_call% dk_prependArgs CMAKE_ARGS -G %CMAKE_GENERATOR%
 
-	::############ Linux_x86_64 (WSL) ############
-	if /i "%Target_Os%" equ "Linux"	(set "wsl_exe=wsl")
-::  ###### WSL CMake Fix ######
-::  if defined WSLENV; then
-::		%dk_call% dk_chdir "$DKCMAKE_DIR"
-::		set -- "$@" "."
-::	fi
-	::if defined wsl_exe (
-	::	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
-	::)
-	if defined wsl_exe (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
-	if defined wsl_exe (%wsl_exe% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
-	if defined wsl_exe (%return%)
+	rem ############ Linux_x86_64 (WSL) ############
+	if /i "%Target_Os%" equ "Linux"	(set "wsl.exe=wsl")
+rem  ###### WSL CMake Fix ######
+rem  if defined WSLENV; then
+rem		%dk_call% dk_chdir "$DKCMAKE_DIR"
+rem		set -- "$@" "."
+rem	fi
+	rem if defined wsl.exe (
+	rem	%dk_call% dk_replaceAll "!CMAKE_ARGS!" "C:" "/mnt/c" WSL_CMAKE_ARGS
+	rem )
+	if defined wsl.exe (%dk_call% dk_replaceAll "!DKSCRIPT_DIR!" "C:" "/mnt/c" DKSCRIPT_DIR)
+	if defined wsl.exe (%wsl.exe% sh -c "export UPDATE=1 && export Target_App=%Target_App% && export Target_Tuple=%Target_Tuple% && export Target_Type=%Target_Type% && %DKSCRIPT_DIR:\=/%/DKBuilder.sh && exit $(true)")
+	if defined wsl.exe (%return%)
 
-	::###### CMake Configure ######
-	%dk_call% dk_validate DKIMPORTS_DIR  "%dk_call% dk_DKIMPORTS_DIR"
-	if NOT defined cmake_exe (%dk_call% dk_depend cmake")
+	rem ###### CMake Configure ######
+	%dk_call% dk_validate DKIMPORTS_DIR  %dk_call% dk_DKIMPORTS_DIR
 
-	::###### Delete Cmake Cache files ######
+	rem ###### Delete Cmake Cache files ######
 	%dk_call% dk_clearCmakeCache "%CMAKE_BINARY_DIR%"	
 	
-	::########### cmake Command ###################
-	echo "%cmake_exe%" %CMAKE_ARGS%
-	%dk_call% "%cmake_exe%" %CMAKE_ARGS% && (
+	rem ########### cmake Command ###################
+	echo cmake.exe %CMAKE_ARGS%
+	%dk_call% cmake.exe %CMAKE_ARGS% && (
 		%dk_call% dk_success "CMake Generation Successful"
 	) || (
 		%dk_call% dk_error "CMake Generation Failed"
 	)
-	::############################################
+	rem ############################################
 	
 	
 
-	::###### IMPORT VARIABLES ######
-	%dk_call% dk_importVars
+	rem ###### IMPORT VARIABLES ######
+	%dk_call% dk_loadCache
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% generate
 %endfunction%

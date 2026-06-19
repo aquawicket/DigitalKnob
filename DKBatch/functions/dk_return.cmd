@@ -1,30 +1,38 @@
-::@echo off&::###### DK.cmd #########################################################################################################################
-::if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-::echo(
-::if "%~1" neq "" (echo 1 = %~1)
-::if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
-::if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
+rem echo.
+rem if "%~1" neq "" (echo 1 = %~1)
+rem if "!errorlevel!" neq "" (echo errorlevel = !errorlevel!)
+rem if "!LAST_STATUS!" neq "" (echo LAST_STATUS = !LAST_STATUS!)
 
 
-::if NOT defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
+rem if NOT defined dk_return_PRINT_SUCCESS (set "dk_return_PRINT_SUCCESS=1")
 if NOT defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
-::if NOT defined dk_return (set "dk_return=%dk_call% dk_return")
+rem if NOT defined dk_return (set "dk_return=%dk_call% dk_return")
 
-::################################################################################
-::dk_return(exit_code, message)
-::#
-::#		dk_return						pass
-::#		dk_return  0					pass
-::#		dk_return "message"				pass
-::#		dk_return  0 "message"			pass
-::#		dk_return -1					error
-::#		dk_return  1					error
-::#		dk_return -1 "error message"	error
-::#		dk_return  1 "error message"	error
-::#
+rem ################################################################################
+rem dk_return(exit_code, message)
+rem #
+rem #		dk_return						pass
+rem #		dk_return  0					pass
+rem #		dk_return "message"				pass
+rem #		dk_return  0 "message"			pass
+rem #		dk_return -1					error
+rem #		dk_return  1					error
+rem #		dk_return -1 "error message"	error
+rem #		dk_return  1 "error message"	error
+rem #
 :dk_return
 %setlocal%
 
@@ -38,7 +46,7 @@ if NOT defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 	if %arg1:-=% equ +%arg1:-=% (set "arg1IsNumber=1")
 	:endNumCheck
 
-	::##### No Parameters ######
+	rem ##### No Parameters ######
 	if NOT defined arg1 (
 
 		rem echo ##### No Parameters ######
@@ -80,5 +88,5 @@ if NOT defined dk_return_PRINT_ERRORS (set "dk_return_PRINT_ERRORS=1")
 		)
 	)
 	
-::exit /b !LAST_STATUS! & set "LAST_STATUS="
+rem exit /b !LAST_STATUS! & set "LAST_STATUS="
 exit /b 0

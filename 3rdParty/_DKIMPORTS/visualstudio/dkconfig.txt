@@ -4,3 +4,4 @@
 # visualstudio_Year=2022
 # visualstudio_Major=17
  
+visualstudio_Type=Tool

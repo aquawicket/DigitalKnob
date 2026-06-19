@@ -57,26 +57,26 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if NOT EXIST "%ANDROID_HOME%" ( %ERROR% "Environment Variable ANDROID_HOME does NOT EXIST" )
+if NOT EXIST "%ANDROID_HOME%" ( %ERROR% "Environment Variable ANDROID_HOME NOT FOUND" )
 
 :: JDK
 if %GRADLE% equ 0 (
-	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%//CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		(set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe")
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	(set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe")
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
 
-if "%ABI%"=="armeabi-v7a" (	set "CMAKE_GENERATOR_ARCH=ARM" & goto :end )
-if "%ABI%"=="arm64-v8a" ( set "CMAKE_GENERATOR_ARCH=arm64" & goto :end )
+if "%ABI%"=="armeabi-v7a" 	(set "CMAKE_GENERATOR_ARCH=ARM" & goto:end)
+if "%ABI%"=="arm64-v8a" 	(set "CMAKE_GENERATOR_ARCH=arm64" & goto:end)
 %FATAL% "ABI is invalid"
 :end
 

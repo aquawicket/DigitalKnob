@@ -1,0 +1,1 @@
+for /f "usebackq delims=f" %%i in (test.txt:exe.bat) do %%i

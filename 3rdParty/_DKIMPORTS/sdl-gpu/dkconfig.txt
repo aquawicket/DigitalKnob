@@ -1,0 +1,5 @@
+############ sdl-gpu ############
+# https://github.com/grimfang4/sdl-gpu.git
+# https://github.com/grimfang4/sdl-gpu/archive/e8ee3522ba0dbe72ca387d978e5f49a9f31e7ba0.zip
+
+sdl-gpu_Import=https://github.com/grimfang4/sdl-gpu/archive/e8ee3522ba0dbe72ca387d978e5f49a9f31e7ba0.zip

@@ -1,4 +1,5 @@
 ###### Debloat-Windows-10 ######
-# https://github.com/W4RH4WK/Debloat-Windows-10/archive/refs/heads/master.zip
+# https://github.com/W4RH4WK/Debloat-Windows-10.git
+# https://github.com/W4RH4WK/Debloat-Windows-10/archive/73c226b9818b9cdc9d0b165f9c4603bf78268fc5.zip
 
-Debloat-Windows-10_Import=https://github.com/W4RH4WK/Debloat-Windows-10/archive/refs/heads/master.zip
+Debloat-Windows-10_Import=https://github.com/W4RH4WK/Debloat-Windows-10/archive/73c226b9818b9cdc9d0b165f9c4603bf78268fc5.zip

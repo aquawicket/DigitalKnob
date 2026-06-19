@@ -1,5 +1,5 @@
 @echo off
-:: https://stackoverflow.com/a/26079981/688352
+rem  https://stackoverflow.com/a/26079981/688352
 
 call :Test1
 call :Test2
@@ -24,7 +24,7 @@ exit /b
 exit /b
 
 :Test1
-	echo(
+	echo.
 	set Value=   a b c   
 	set Expected=a b c
 	echo   Before: [%Value%]
@@ -35,11 +35,11 @@ exit /b
 exit /b
 
 :Test2
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::            ALL:     a ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
-::        INVALID:       !       %
-::          VALID:     a     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem             ALL:     a ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem         INVALID:       !       %
+rem           VALID:     a     # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
         set Value=     a   " # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~      
 	      set Expected=a   " # $   & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 
@@ -51,11 +51,11 @@ exit /b
 exit /b
 
 :Test3
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::            ALL:     a ! " # $ %  & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
-::        INVALID:       !       %                           
-::          VALID:     a     # $    & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem             ALL:     a ! " # $ %  & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem         INVALID:       !       %                           
+rem           VALID:     a     # $    & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 		set Value=     a   " # $ %%%% & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~      
 	      set Expected=a   " # $ %% & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 
@@ -67,11 +67,11 @@ exit /b
 exit /b
 
 :Test4
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::            ALL:     a   ! " # $ %    & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
-::        INVALID:         !       %                           
-::          VALID:     a       # $      & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem             ALL:     a   ! " # $ %    & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+rem         INVALID:         !       %                           
+rem           VALID:     a       # $      & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 		set Value=     a ^^! " # $ %%%% & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~      
 	      set Expected=a ^^! " # $ %% & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 
@@ -83,7 +83,7 @@ exit /b
 exit /b
 
 :Test5
-	echo(
+	echo.
 	set /p Value="Enter string to trim: " %=%
 	echo Before: [%Value%]
 	call :dk_trim Output %Value%

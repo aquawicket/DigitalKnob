@@ -1,0 +1,5 @@
+############ winfsp ############
+# https://github.com/winfsp/winfsp/releases/download/v2.0/winfsp-2.0.23075.msi
+
+winfsp_Windows_Import=https://github.com/winfsp/winfsp/releases/download/v2.0/winfsp-2.0.23075.msi
+

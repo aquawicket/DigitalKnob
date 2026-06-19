@@ -1,4 +1,5 @@
-if(${env:DK_PS1}){return;} else{ ${env:DK_PS1}=1; }	# include_guard
+if(${env:DKINIT_ps1}){return 0;} else{ ${env:DKINIT_ps1}=1; }
+
 
 ### Print Version Info ###
 Write-Host "";
@@ -22,8 +23,9 @@ function DK() {
 	# Error trap
 	# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_trap?view=powershell-7.4&WT.mc_id=M365-MVP-5000284
 	trap { 
-		'DigitalKnob found an Error'; 
+		'DigitalKnob found an Error';
 		dk_call dk_stacktrace;
+		Read-Host;
 	}
 	
 	###### Initialize Language specifics ######
@@ -69,33 +71,42 @@ function DK() {
 	dk_call dk_logo;
 	
 	if(Test-Path "${env:DKSCRIPT_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${env:DKSCRIPT_DIR}/dkconfig.txt";
+		dk_call dk_fileVariables "${env:DKSCRIPT_DIR}/dkconfig.txt";
 	} elseif(Test-Path "${env:DKBRANCH_DIR}/dkconfig.txt"){
-		dk_call dk_getFileParams "${env:DKBRANCH_DIR}/dkconfig.txt";
+		dk_call dk_fileVariables "${env:DKBRANCH_DIR}/dkconfig.txt";
 	}
 	#dk_source ${env:DKSCRIPT_PATH}
 	
 	#Write-Output "env:PATH = ${env:PATH}";
 	#${env:PATH} += ";${env:DKPOWERSHELL_FUNCTIONS_DIR}";
 	
-	###### DKTEST MODE ######
+	
 	if("${env:DKSCRIPT_EXT}" -ne ".ps1"){ return; }
+	
+	###### DKTEST MODE ######
 	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:DKTEST()"){
 		dk_call dk_echo "\n";
-		dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_NAME ###### DKTEST MODE ########${clr}\n";
+		dk_call dk_echo "${bg_magenta}${white}###### DKTEST MODE ###### $DKSCRIPT_PATH ###### DKTEST MODE ########${clr}\n";
 		dk_call dk_echo  "\n";
 		. ${DKSCRIPT_PATH};
 		DKTEST;
 		dk_call dk_echo "\n";
-		dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_NAME ######## END TEST #########${clr}\n";
+		dk_call dk_echo "${bg_magenta}${white}######## END TEST ####### $DKSCRIPT_PATH ######## END TEST #########${clr}\n";
 		dk_call dk_echo "\n";
 		dk_call dk_pause "Press Enter to exit";
 		dk_call dk_exit
 	}
-	else {
+	
+	
+	###### DKSCRIPT_NAME() ######
+	if(dk_call dk_fileContains "${DKSCRIPT_PATH}" "function Global:${DKSCRIPT_NAME}()"){
 		. ${DKSCRIPT_PATH};
 		dk_call ${DKSCRIPT_PATH};
+		dk_call dk_exit
 	}
+	
+	###### DKSCRIPT_PATH ######
+	. ${DKSCRIPT_PATH};
 }
 
 
@@ -130,6 +141,7 @@ function dk_init(){
 # dk_DKPOWERSHELL_VARS()
 #
 function dk_DKPOWERSHELL_VARS(){
+	Write-Host "PSCommandPath = ${PSCommandPath}";
 	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR}) 	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= Split-Path -Parent ${PSCommandPath}; }
 	if(!${env:DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKPOWERSHELL_FUNCTIONS_DIR} 	= ${env:DKPOWERSHELL_FUNCTIONS_DIR} -replace '\\', '/'; }
 	if(!${env:DKPOWERSHELL_DIR})			{ ${env:DKPOWERSHELL_DIR} 				= Split-Path -Parent ${env:DKPOWERSHELL_FUNCTIONS_DIR}; }
@@ -144,7 +156,7 @@ function dk_DKPOWERSHELL_VARS(){
 # dk_DKHTTP_VARS()
 #
 function dk_DKHTTP_VARS(){
-	if(!${env:DKHTTP_DIGITALKNOB_DIR})				{ ${env:DKHTTP_DIGITALKNOB_DIR} 			= "https://raw.githubusercontent.com/aquawicket/DigitalKnob"; }
+	if(!${env:DKHTTP_DIGITALKNOB_DIR})				{ ${env:DKHTTP_DIGITALKNOB_DIR} 			= "http://aquawicket.com/DigitalKnob"; }
 	if(!${env:DKHTTP_DKBRANCH_DIR})					{ ${env:DKHTTP_DKBRANCH_DIR}				= "${env:DKHTTP_DIGITALKNOB_DIR}/Development"; }
 	if(!${env:DKHTTP_DKPOWERSHELL_DIR})				{ ${env:DKHTTP_DKPOWERSHELL_DIR}			= "${env:DKHTTP_DKBRANCH_DIR}/DKPowershell"; }
 	if(!${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR})	{ ${env:DKHTTP_DKPOWERSHELL_FUNCTIONS_DIR}	= "${env:DKHTTP_DKPOWERSHELL_DIR}/functions"; }

@@ -11,7 +11,7 @@ dk_dirname = function dk_dirname_f(){
 	dk_depend("dk_fileSystem");
 	dk_dirname.value = dk_fileSystem.GetParentFolderName(arguments[0]);
 	
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = dk_dirname.value;
 	} else {

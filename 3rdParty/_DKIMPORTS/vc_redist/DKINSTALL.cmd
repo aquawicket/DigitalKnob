@@ -1,8 +1,15 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 ::####### vc_redist ######
@@ -12,35 +19,34 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::#
 :DKINSTALL
 %setlocal% enableDelayedExpansion
-    %dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
+	%dk_call% dk_fileVariables "%~dp0/dkconfig.txt"
 	echo vc_redist_Windows_X86_Import = %vc_redist_Windows_X86_Import%
 	echo vc_redist_Windows_X86_64_Import = !vc_redist_Windows_X86_64_Import!
 	::###### 32Bit ######
-	set "VCCOMP140_X86_DLL=%windir:\=/%/SysWOW64/vcomp140.dll"
-	set "VCCOMP140_X86_DEBUG_DLL=%windir:\=/%/SysWOW64/vcomp140d.dll"
-	set "VCRUNTIME140_X86_DLL=%windir:\=/%/SysWOW64/vcruntime140.dll"
-	set "VCRUNTIME140_X86_DEBUG_DLL=%windir:\=/%/SysWOW64/vcruntime140d.dll"
+	set "VCCOMP140_X86_DLL=%SystemRoot:\=/%/SysWOW64/vcomp140.dll"
+	set "VCCOMP140_X86_DEBUG_DLL=%SystemRoot:\=/%/SysWOW64/vcomp140d.dll"
+	set "VCRUNTIME140_X86_DLL=%SystemRoot:\=/%/SysWOW64/vcruntime140.dll"
+	set "VCRUNTIME140_X86_DEBUG_DLL=%SystemRoot:\=/%/SysWOW64/vcruntime140d.dll"
 	if NOT EXIST "%VCCOMP140_X86_DLL%" if NOT EXIST "%VCCOMP140_X86_DEBUG_DLL%" (
 		%dk_call% dk_basename %vc_redist_Windows_X86_Import%
 		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!vc_redist_Windows_X86_Import!"
-		rem %dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		rem %dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
 		rem "!DKDOWNLOAD_DIR!/!dk_basename!" /install /quiet /norestart
 		"!dk_download!" /install /quiet /norestart
 	)
 	
 	::###### 64Bit ######
-	set "VCCOMP140_X86_64_DLL=%windir:\=/%/System32/vcomp140.dll"
-	set "VCCOMP140_X86_64_DEBUG_DLL=%windir:\=/%/System32/vcomp140d.dll"
-	set "VCRUNTIME140_X86_64_DLL=%windir:\=/%/System32/vcruntime140.dll"
-	set "VCRUNTIME140_X86_64_DEBUG_DLL=%windir:\=/%/System32/vcruntime140d.dll"
+	set "VCCOMP140_X86_64_DLL=%SystemRoot:\=/%/System32/vcomp140.dll"
+	set "VCCOMP140_X86_64_DEBUG_DLL=%SystemRoot:\=/%/System32/vcomp140d.dll"
+	set "VCRUNTIME140_X86_64_DLL=%SystemRoot:\=/%/System32/vcruntime140.dll"
+	set "VCRUNTIME140_X86_64_DEBUG_DLL=%SystemRoot:\=/%/System32/vcruntime140d.dll"
 	if NOT EXIST "%VCCOMP140_X86_64_DLL%" if NOT EXIST "%VCCOMP140_X86_64_DEBUG_DLL%" (
 		%dk_call% dk_basename %vc_redist_Windows_X86_64_Import%
 		%dk_call% dk_info "Installing Visual C Redistributable - !dk_basename!"
 		%dk_call% dk_download "!vc_redist_Windows_X86_64_Import!"
-		::%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+		::%dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
 		"!dk_download!" /install /quiet /norestart
 	)
 %endfunction%
@@ -49,10 +55,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL
 %endfunction%

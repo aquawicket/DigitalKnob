@@ -1,21 +1,28 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-::if NOT defined dk_firewallAllow_DEBUG 	(set "dk_firewallAllow_DEBUG=1")
-if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
-::###############################################################################
-::# dk_firewallAllow(executable)
-::# dk_firewallAllow(name executable)
-::#
-::#	  @name:optinal	- The name of the firewall rule
-::#   @executable	- The path to the executable to allow
-::#
+
+rem ###############################################################################
+rem # dk_firewallAllow(executable)
+rem # dk_firewallAllow(name executable)
+rem #
+rem #	  @name:optinal	- The name of the firewall rule
+rem #   @executable	- The path to the executable to allow
+rem #
 :dk_firewallAllow
+rem if NOT defined dk_firewallAllow_DEBUG 		(set "dk_firewallAllow_DEBUG=1")
+if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
 	if "%~2" neq "" (  
 		set "_name_=%~1"
@@ -36,29 +43,27 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 
 	%dk_call% dk_registryContains "HKLM\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" "%_file_:/=\%" && (
 		if "%dk_firewallAllow_WARNINGS%" equ "1" (
-			%dk_call% dk_notice "registry already contains a firewall rule for '%_file_%'"
+			%dk_call% dk_notice "registry already contains a firewall rule for '%_file_:/=\%'"
 		)
 		%return%
 	)
 
-	%dk_call% dk_notice "Adding firewall allow rule for %_name_% %_file_% . . ."
+	%dk_call% dk_notice "Adding firewall allow rule for %_name_% %_file_:/=\% . . ."
 	
-	%dk_call% dk_findProgram netsh_exe netsh.exe "%windir%/System32" NO_ERROR
-	if EXIST "%netsh_exe%" (
-		%netsh_exe% advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
-		%netsh_exe% advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
+	%dk_call% dk_validate netsh.exe %dk_call% dk_findFile netsh.exe
+	if EXIST "%netsh.exe%" (
+		%dk_call% netsh.exe advfirewall firewall add rule name="%_name_%" dir=in action=allow program="%_file_:/=\%" enable=yes profile=any >nul
+		%dk_call% netsh.exe advfirewall firewall add rule name="%_name_%" dir=out action=allow program="%_file_:/=\%" enable=yes profile=any >nul
 	)
 
-	::###### Windows Firewall Control ######
+	rem ###### Windows Firewall Control ######
 	if NOT EXIST "%wfc_exe%" 	(set "wfc_exe=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfc.exe")
 	if NOT EXIST "%wfcUI_exe%" 	(set "wfcUI_exe=%ProgramFiles:\=/%/Malwarebytes/Windows Firewall Control/wfcUI.exe")
 	if EXIST "%wfc_exe%"		(set "WFC_APP=%wfc_exe%")
 	if EXIST "%wfcUI_exe%"		(set "WFC_APP=%wfcUI_exe%")
 
-	::echo "%WFC_APP:/=\%" -allow "%_file_:/=\%"
 	"%WFC_APP:/=\%" -allow "%_file_:/=\%" || (echo errorlevel = !errorlevel! & %clearerror%)
-	::%dk_call% "%WFC_APP:/=\%" -allow "%_file_:/=\%"
-	::######################################
+	rem ######################################
 
 %endfunction%
 
@@ -67,10 +72,11 @@ if NOT defined dk_firewallAllow_WARNINGS 	(set "dk_firewallAllow_WARNINGS=1")
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_firewallAllow "C:\Users\Administrator\DigitalKnob\DKTools\git-portable-2.46.2-64-bit\mingw64\libexec\git-core\git-remote-https.exe"
+	%dk_call% dk_validate sftp_exe %dk_call% dk_depend OpenSSH
+	echo ssh_exe = %ssh_exe%
+	%dk_call% dk_firewallAllow "%ssh_exe%"
 %endfunction%

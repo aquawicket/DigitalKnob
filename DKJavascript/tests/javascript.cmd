@@ -14,7 +14,7 @@ goto:eof
 
 :UAC_ELEVATE
   @rem Pass this file's filename as command line arguments.
-  @cscript //nologo //e:jscript "%~f0" "%~f0"
+  @cscript.exe //nologo //e:jscript "%~f0" "%~f0"
   exit /b
 
 :NODE_JS

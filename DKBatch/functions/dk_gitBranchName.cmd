@@ -1,41 +1,57 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#########################################################################
-::# dk_gitBranchName(url rtn_var)
-::#
-::#	Return the name of the head branch from a git repository
-::#
-::#	@url	- The git url
-::#	@rtn_var	- Returns the name of the head branch
-::#
-::#	https://stackoverflow.com/a/31919435
-::#
+rem #########################################################################
+rem # dk_gitBranchName(repo_url rtn_var)
+rem #
+rem #	Return the name of the head branch from a git repository
+rem #
+rem #	@repo_url	- The git url
+rem #	@rtn_var	- Returns the name of the head branch
+rem #
+rem #	https://stackoverflow.com/a/31919435
+rem #
 :dk_gitBranchName
-	%dk_call% dk_debugFunc 1 2
+%setlocal%
 	
-	set "url=%~1"
-	%dk_call% dk_depend git
-			
-	%dk_call% dk_exec %git_exe% ls-remote %url% heads/*
+	rem ### repo_url
+	if "%repo_url%" equ "" (set "repo_url=%~1")
+	if "%repo_url%" equ "" (set "repo_url=ssh://u108565871@access912915170.webspace-data.io/~/DigitalKnob/Development.git")
 	
+	
+	%dk_call% dk_validate git.exe %dk_call% dk_depend git		
+	%dk_call% dk_exec %git.exe% ls-remote %repo_url% heads/*
+	set "dk_gitBranchName=%dk_exec%"
+	
+	:return
 	endlocal & (
-		set "dk_gitBranchName=%dk_exec%"
+		set "dk_gitBranchName=%dk_gitBranchName%"
+		if "%~2" neq "" (
+			set "%~2=%dk_gitBranchName%"
+		) else (
+			echo %dk_gitBranchName%
+		)
 	)
-
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_gitBranchName "https://github.com/aquawicket/DigitalKnob.git"
-	%dk_call% dk_printVar dk_gitBranchName 
+	rem %dk_call% dk_gitBranchName "ssh://u108565871@access912915170.webspace-data.io/~/DigitalKnob/Development.git"
+	%dk_call% dk_gitBranchName
+	%dk_call% dk_debug "dk_gitBranchName = %dk_gitBranchName%"
 %endfunction%

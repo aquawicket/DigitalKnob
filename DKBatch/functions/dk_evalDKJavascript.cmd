@@ -1,46 +1,63 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_evalDKJavascript()
-::#
-::#
+rem ############################################################################
+rem # dk_evalDKJavascript()
+rem #
+rem #		https://stackoverflow.com/q/51262326
+rem #
 :dk_evalDKJavascript
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	set "cscript_exe=%windir:\=/%/System32/cscript.exe"
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	echo %~1 > "%DKCACHE_DIR%/dk_evalJavascript_TEMP.js"
+	set "code=%~1"
 	
-	::############ DKJavascript function call ############
-	set DKCOMMAND=%ComSpec% /c %cscript_exe% //D //E:javascript //H:CScript //I //NoLogo //X "%DKCACHE_DIR%/dk_evalJavascript_TEMP.js";
-	%dk_call% dk_exec %DKCOMMAND%
-	endlocal & (
-		set "dk_evalDKJavascript=%dk_exec%"
+	rem Method 1 - mshta.exe javascript:
+	%dk_call% dk_validate mshta.exe %dk_call% dk_findFile mshta.exe
+	set DKCOMMAND=%mshta.exe:/=\% "javascript:%code%" 	
+	for /f "usebackq delims=" %%a in (`%DKCOMMAND%`) do (
+		@echo %%a
+		set "dk_evalDKJavascript=%%a"
 	)
+	
+	rem https://stackoverflow.com/q/51262326
+	rem %DKCOMMAND% | for /f "delims=" %%a in ('%findstr.exe% "^"') do @echo %%a
 
+
+	rem Method 2 - cscriopt.exe w/ temporary file
+rem	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+rem	echo %code% > "%DKCACHE_DIR%/dk_evalJavascript_TEMP.js"
+rem	%dk_call% dk_validate cscript.exe %dk_call% dk_findFile cscript.exe
+rem	set DKCOMMAND=%cscript.exe:/=\% //D //E:javascript //H:CScript //I //NoLogo //X "%DKCACHE_DIR%/dk_evalJavascript_TEMP.js"
+rem	for /f "delims=" %%a in ('%DKCOMMAND%') do (
+rem		@echo %%a
+rem		set "dk_evalDKJavascript=%%a"
+rem	)
+
+
+	:return
+	endlocal & (
+		set "dk_evalDKJavascript=%dk_evalDKJavascript%"
+	)
 %endfunction%
 
 
 
-
-
-
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
  
-	%dk_call% dk_evalDKJavascript "WScript.Echo('testing dk_evalDKJavascript');"
+	%dk_call% dk_evalDKJavascript "new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write('Hello World');close();"
+	%dk_call% dk_debug "dk_evalDKJavascript = '%dk_evalDKJavascript%'"
 %endfunction%
 

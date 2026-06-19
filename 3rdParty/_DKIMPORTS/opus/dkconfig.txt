@@ -1,0 +1,5 @@
+############ opus ############
+# https://github.com/xiph/opus.git
+# https://github.com/xiph/opus/archive/7db26934e4156597cb0586bb4d2e44dccdde1a59.zip
+
+opus_Import=https://github.com/xiph/opus/archive/7db26934e4156597cb0586bb4d2e44dccdde1a59.zip

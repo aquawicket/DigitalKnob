@@ -1,31 +1,41 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#################################################################################
-::# dk_keyboardInputTimeout(<default>, <timeout>, <ret>:OPTIONAL)
-::#
-::# reference: https://stackoverflow.com/a/7703584/688352
-::#            https://stackoverflow.com/a/33206814/688352
-::#
+rem #################################################################################
+rem # dk_keyboardInputTimeout(<default>, <timeout>, <ret>:OPTIONAL)
+rem #
+rem # reference: https://stackoverflow.com/a/7703584/688352
+rem #            https://stackoverflow.com/a/33206814/688352
+rem #
 :dk_keyboardInputTimeout
 %setlocal%
-	%dk_call% dk_debugFunc 0 3
    
     set "default=%~1"
     set /a "timeout=%~2"
    
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
     set "cache_file=%DKCACHE_DIR%/keyboardInputTimeout_cache.tmp"
     set "thread_file=%DKCACHE_DIR%/keyboardInputTimeout_thread.cmd"
-    %dk_call% dk_delete %cache_file% %NO_OUTPUT%
+    %dk_call% dk_delete "%cache_file%" 1>nul 2>nul
    
-    echo ^@echo off> %thread_file%
-    echo set /p var=>> %thread_file%
-    echo ^> %cache_file% echo %%var%%>> %thread_file%
-    start /b %ComSpec% /c %thread_file%
+    >"%thread_file%" (
+		echo ^@echo off
+		echo set /p var=
+		echo ^> "%cache_file:/=\%" echo %%var%%
+	)
+	
+    start "" /b "%ComSpec:/=\%" /c "%thread_file:/=\%"
    
     set "ESC="
     for /f %%a in ('copy /Z "%~dpf0" nul') do set "ASCII_13=%%a"
@@ -33,19 +43,20 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     :keyboard_input_timeout_loop
 		set /a "timeout-=1"
 		%dk_call% dk_title %timeout%
-		::<nul set /p "=.!ASCII_13!     %timeout%" <NUL
-		::<nul set /p "="<NUL
+		rem <nul set /p "=.!ASCII_13!     %timeout%" <NUL
+		rem <nul set /p "="<NUL
 
-		ping -n 2 localhost %NO_OUTPUT%
+		rem ping -n 2 localhost 1>nul 2>nul
+		%dk_call% dk_sleep 1
 		if !timeout! GTR 0 (
 			if NOT EXIST "%cache_file%" goto keyboard_input_timeout_loop
 		)
    
     :keyboard_input_timeout_result
-    del %thread_file% %NO_OUTPUT%
+    del "%thread_file:/=\%" 1>nul 2>nul
     if EXIST "%cache_file%" (
-        set /p dk_keyboardInputTimeout=<%cache_file%
-        %dk_call% dk_delete %cache_file% %NO_OUTPUT%
+        set /p dk_keyboardInputTimeout=<"%cache_file%"
+        del "%cache_file:/=\%" 1>nul 2>nul
     ) else (
         set "dk_keyboardInputTimeout=%default%"
     )
@@ -62,10 +73,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echo "Type some input and press enter, this will time out in 10 seconds"
     %dk_call% dk_keyboardInputTimeout "default" 10

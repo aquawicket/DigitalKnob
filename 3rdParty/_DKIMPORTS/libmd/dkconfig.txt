@@ -1,0 +1,5 @@
+############ libmd ############
+# https://github.com/guillemj/libmd.git
+# https://github.com/guillemj/libmd/archive/refs/heads/main.zip
+
+libmd_Import=https://github.com/guillemj/libmd/archive/refs/heads/main.zip

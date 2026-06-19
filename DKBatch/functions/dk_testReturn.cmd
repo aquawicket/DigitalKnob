@@ -1,17 +1,23 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_testReturn(input, output)
-::#
-::#
+rem ################################################################################
+rem # dk_testReturn(input, output)
+rem #
+rem #
 :dk_testReturn
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
 	set "input=%~1"
 	set "dk_testReturn=%input:input=output%"
@@ -31,39 +37,38 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	::### Result as global variable							[GLOBAL]
+	rem ### Result as global variable							[GLOBAL]
 	%dk_call% dk_echo
 	%dk_call% dk_testReturn "inputA"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as parameter variable						[GLOBAL][PARAM]
+	rem ### Result as parameter variable						[GLOBAL][PARAM]
 	%dk_call% dk_echo
 	%dk_call% dk_testReturn "inputB" resultB
 	%dk_call% dk_echo "resultB = %resultB%"
 	%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as return value							[GLOBAL][-R̶E̶T̶U̶R̶N̶ ]
-	::%dk_call% dk_echo
-	::%dk_call% resultC=dk_testReturn "inputC"				&::NOTE: batch doesn't support return values
-	::%dk_call% dk_echo "resultC = %resultC%"
-	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	rem ### Result as return value							[GLOBAL][-R̶E̶T̶U̶R̶N̶ ]
+	rem %dk_call% dk_echo
+	rem %dk_call% resultC=dk_testReturn "inputC"				&rem NOTE: batch doesn't support return values
+	rem %dk_call% dk_echo "resultC = %resultC%"
+	rem %dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result as return value and parameter variable 	[GLOBAL][PARAM][-R̶E̶T̶U̶R̶N̶ ]
-	::%dk_call% dk_echo
-	::%dk_call% resultD=dk_testReturn "inputDE"				&::NOTE: batch doesn't support return values
-	::%dk_call% dk_echo "resultD = %resultD%"
-	::%dk_call% dk_echo "resultE = %resultE%"
-	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
+	rem ### Result as return value and parameter variable 	[GLOBAL][PARAM][-R̶E̶T̶U̶R̶N̶ ]
+	rem %dk_call% dk_echo
+	rem %dk_call% resultD=dk_testReturn "inputDE"				&rem NOTE: batch doesn't support return values
+	rem %dk_call% dk_echo "resultD = %resultD%"
+	rem %dk_call% dk_echo "resultE = %resultE%"
+	rem %dk_call% dk_echo "dk_testReturn = %dk_testReturn%"
 	
-	::### Result from stdout								[STDOUT]
+	rem ### Result from stdout								[STDOUT]
 	%dk_call% dk_echo
 	for /f "usebackq tokens=*" %%G in (`call dk_testReturn.cmd "inputC"`) do (set "resultC=%%G")
 	%dk_call% dk_echo "resultC = %resultC%"
-	::%dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	&::NOTE: endlocal cannot be seen outside of command substituion			
+	rem %dk_call% dk_echo "dk_testReturn = %dk_testReturn%"	&rem NOTE: endlocal cannot be seen outside of command substituion			
 
 %endfunction%

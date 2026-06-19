@@ -1,22 +1,21 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ libpng ############
 # https://github.com/glennrp/libpng
 # http://www.libpng.org/pub/png/libpng.html
-
-#dk_validate(Target_Config  "dk_Target_Config()")
 
 ### DEPEND ###
 if(Emscripten)
@@ -30,101 +29,43 @@ dk_import()
 
 
 ### LINK ###
-dk_define					(PNG_STATIC)
-dk_include					(${libpng}  															PNG_INCLUDE_DIR)
-dk_include					(${libpng_Config_Dir}													PNG_INCLUDE_DIR2)
+dk_define			(PNG_STATIC)
+dk_include			(${libpng}  																PNG_INCLUDE_DIR)
+dk_include			(${libpng_Config_Dir}														PNG_INCLUDE_DIR2)
 
-if(MSVC)
-	if(Android)
-		dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}d.a			PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}.a			PNG_LIBRARY_RELEASE)
-	endif()
-	if(Windows)
-		dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}_staticd.lib	PNG_LIBRARY_DEBUG)
-		dk_libRelease		(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}_static.lib	PNG_LIBRARY_RELEASE)
-	endif()
-elseif(Apple)
-	dk_libDebug				(${libpng_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${libpng_Release_Dir}/libpng16d.a										PNG_LIBRARY_RELEASE)
+if(Windows AND MSVC)
+	dk_libDebug		("${libpng_Debug_Dir}/libpng16_staticd.lib"									PNG_LIBRARY_DEBUG		PNG_LIBRARY)
+	dk_libRelease	("${libpng_Release_Dir}/libpng16_static.lib"								PNG_LIBRARY_RELEASE		PNG_LIBRARY)
+	#dk_libDebug	("${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}_staticd.lib"		PNG_LIBRARY_DEBUG		PNG_LIBRARY)
+	#dk_libRelease	("${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}_static.lib"	PNG_LIBRARY_RELEASE		PNG_LIBRARY)
 else()
-	#dk_libDebug			(${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}d.a			PNG_LIBRARY_DEBUG)
-	#dk_libRelease			(${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}.a			PNG_LIBRARY_RELEASE)
-	dk_libDebug				(${libpng_Debug_Dir}/libpng16d.a										PNG_LIBRARY_DEBUG)
-	dk_libRelease			(${libpng_Release_Dir}/libpng16.a										PNG_LIBRARY_RELEASE)
+	dk_libDebug		("${libpng_Debug_Dir}/libpng16.a"											PNG_LIBRARY_DEBUG		PNG_LIBRARY)
+	dk_libRelease	("${libpng_Release_Dir}/libpng16.a"											PNG_LIBRARY_RELEASE		PNG_LIBRARY)
+	#dk_libDebug	("${libpng_Debug_Dir}/libpng${libpng_Major}${libpng_Minor}d.a"				PNG_LIBRARY_DEBUG		PNG_LIBRARY)
+	#dk_libRelease	("${libpng_Release_Dir}/libpng${libpng_Major}${libpng_Minor}.a"				PNG_LIBRARY_RELEASE		PNG_LIBRARY)
 endif()
 
 
 ### 3RDPARTY LINK ###
-if(MSVC)
-	if(Windows)
-		dk_set(libpng_CMAKE 
-		"-DCMAKE_C_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_CXX_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
-		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2} 
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
-	
-	elseif(Android)
-		dk_set(libpng_CMAKE 
-		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE}
-		-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2})
-	endif()
-elseif(Apple)
-	dk_set(libpng_CMAKE 
-	"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-	"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-	-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR} 
-	-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
+dk_set(libpng_CMAKE 
+	-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
+	-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
+	-DPNG_LIBRARY=${PNG_LIBRARY}
 	-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-	-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})	
-elseif(Raspberry)
-	if(Debug)
-		dk_set(libpng_CMAKE 
-		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"  
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
-	endif()
-	if(Release)
-		dk_set(libpng_CMAKE 
-		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2} 
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
-	endif()
+	-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE}
+	-DPNG_PNG_INCLUDE_DIR=${PNG_INCLUDE_DIR2})
+	
+if(Windows AND MSVC)
+	dk_append(libpng_CMAKE 
+		"-DCMAKE_C_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}" 
+		"-DCMAKE_CXX_FLAGS=/I${PNG_INCLUDE_DIR} /I${PNG_INCLUDE_DIR2}")
 else()
-	if(Debug)
-		dk_set(libpng_CMAKE 
-		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
-		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}"
-		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_DEBUG}"
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR}
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG}
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
-	endif()
-	if(Release)
-		dk_set(libpng_CMAKE 
+	dk_append(libpng_CMAKE 
 		"-DCMAKE_CXX_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}" 
-		"-DCMAKE_EXE_LINKER_FLAGS=${PNG_LIBRARY_RELEASE}"
-		-DPNG_INCLUDE_DIR=${PNG_INCLUDE_DIR} 
-		-DPNG_INCLUDE_DIR2=${PNG_INCLUDE_DIR2}
-		-DPNG_LIBRARY_DEBUG=${PNG_LIBRARY_DEBUG} 
-		-DPNG_LIBRARY_RELEASE=${PNG_LIBRARY_RELEASE})
-	endif()
-endif()
+		"-DCMAKE_C_FLAGS=-I${PNG_INCLUDE_DIR} -I${PNG_INCLUDE_DIR2}")
+endif()	
+			
+
 
 
 

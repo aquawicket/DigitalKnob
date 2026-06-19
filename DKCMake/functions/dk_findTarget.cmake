@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
-### DK.cmake ###############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -24,17 +25,17 @@ include_guard()
 function(dk_findTarget target RESULT_PATH RESULT_TYPE)
 	dk_debugFunc()
 	
-	dk_validate(ENV{DIGITALKNOB_DIR} "dk_DIGITALKNOB_DIR()")
+	dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
 	## search up to 4 levels deep
-	file(GLOB children RELATIVE $ENV{DIGITALKNOB_DIR}/ 
-		$ENV{DIGITALKNOB_DIR}/${target}/DKINSTALL.cmake 
-		$ENV{DIGITALKNOB_DIR}/**/${target}/DKINSTALL.cmake 
-		$ENV{DIGITALKNOB_DIR}/**/**/${target}/DKINSTALL.cmake 
-		$ENV{DIGITALKNOB_DIR}/**/**/**/${target}/DKINSTALL.cmake
-		$ENV{DIGITALKNOB_DIR}/**/**/**/**/${target}/DKINSTALL.cmake)
+	file(GLOB children RELATIVE ${DIGITALKNOB_DIR}/ 
+		${DIGITALKNOB_DIR}/${target}/DKINSTALL.cmake 
+		${DIGITALKNOB_DIR}/**/${target}/DKINSTALL.cmake 
+		${DIGITALKNOB_DIR}/**/**/${target}/DKINSTALL.cmake 
+		${DIGITALKNOB_DIR}/**/**/**/${target}/DKINSTALL.cmake
+		${DIGITALKNOB_DIR}/**/**/**/**/${target}/DKINSTALL.cmake)
 	foreach(child ${children})
-		dk_info("FOUND: $ENV{DIGITALKNOB_DIR}/${child}")
-		dk_replaceAll($ENV{DIGITALKNOB_DIR}/${child} "/DKINSTALL.cmake" "" path)
+		dk_info("FOUND: ${DIGITALKNOB_DIR}/${child}")
+		dk_replaceAll(${DIGITALKNOB_DIR}/${child} "/DKINSTALL.cmake" "" path)
 		set(${RESULT_PATH} ${path} PARENT_SCOPE)
 		
 		file(STRINGS ${path}/DKINSTALL.cmake dkmake_string)

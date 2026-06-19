@@ -1,0 +1,2 @@
+Functions with retrun values   https://oleksandrkvl.github.io/2020/08/09/allowing-cmake-functions-to-return-value.html
+Functions in CMake  https://cmakedev.readthedocs.io/en/latest/cmake/writing_functions.html

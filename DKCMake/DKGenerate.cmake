@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 #
@@ -35,7 +36,7 @@ include_guard()
 # SOFTWARE.
 
 
-dk_load("$ENV{DKCMAKE_DIR}/DKDisabled.cmake")
+dk_load("${DKCMAKE_DIR}/DKDisabled.cmake")
 
 dk_info("\n")
 dk_info("############################################################")
@@ -169,10 +170,10 @@ foreach(Plugin ${dkdepend_list})
 		dk_enable(${arg2})
 	endif()
 	
-	#################### PLUGIN_Install_Path #####################
-	dk_getPathToPlugin(${Plugin} PLUGIN_Install_Path)
-	dk_assertPath("${PLUGIN_Install_Path}")
-	dk_debug("${Plugin}:PLUGIN_Install_Path = ${PLUGIN_Install_Path}")
+	#################### PLUGIN_Import_Path #####################
+	dk_getImportPath(${Plugin} PLUGIN_Import_Path)
+	dk_assertPath("${PLUGIN_Import_Path}")
+	dk_debug("${Plugin}:PLUGIN_Import_Path = ${PLUGIN_Import_Path}")
 	
 	###############################################################################################
 	# This executes the 3rdParty library builds, and creates CMakeLists.txt files for DKCpp/plugins
@@ -218,8 +219,8 @@ foreach(Plugin ${dkdepend_list})
 		endif()
 	endif(PROJECT_INCLUDE_3RDPARTY)
 	
-	#install(TARGETS <target_name> DESTINATION $ENV{DIGITALKNOB_DIR}/DKInstall/lib/${Target_Tuple})
-	#install(FILES file.h DESTINATION $ENV{DIGITALKNOB_DIR}/DKInstall/lib/${Target_Tuple})
+	#install(TARGETS <target_name> DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${Target_Tuple})
+	#install(FILES file.h DESTINATION ${DIGITALKNOB_DIR}/DKInstall/lib/${Target_Tuple})
 	
 	####################### DKCpp/plugins #######################
 	# Libraries in the /DKCpp/plugins folder
@@ -241,6 +242,8 @@ foreach(Plugin ${dkdepend_list})
 		if(INSTALL_DKLIBS)
 			dk_info("Installing ${Plugin} header files")
 			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.h")
+			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.hpp")
+			file(INSTALL DIRECTORY ${PLUGIN_Install_Path}/ DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${Plugin} FILES_MATCHING PATTERN "*.inl") #RmlUi
 			dk_deleteEmptyDirectories(${CMAKE_INSTALL_PREFIX}/include/${Plugin})
 		endif()
 		
@@ -566,7 +569,7 @@ if(Android)
 		#if(Windows_Host)
 		#	dk_exec(${openjdk}/registerJDK.cmd)
 		#endif()
-		dk_depend(openjdk)
+		dk_validate(openjdk "dk_depend(openjdk)")
 		dk_depend(gradle)
 		
 		if(Windows_Host)
@@ -604,23 +607,23 @@ if(Android)
 	### Install apk to device ###
 	#dk_set(INSTALL_APK ON)
 	if(NOT Android_Host AND INSTALL_APK)
-		dk_validate(cmd_exe "dk_depend(cmd_exe)")
+		dk_validate(cmd.exe "dk_depend(cmd.exe)")
 		if(Debug)
-			dk_validate(cmd_exe "dk_depend(cmd_exe)")
+			dk_validate(cmd.exe "dk_depend(cmd.exe)")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-debug.apk> to device"
-				COMMAND ${cmd_exe} ${android-sdk}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk
+				COMMAND ${cmd.exe} ${android-sdk}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Debug_Dir}/app/build/outputs/apk/debug/app-debug.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-debug.apk> to device")
 		if(Release)
 		endif()
-			dk_validate(cmd_exe "dk_depend(cmd_exe)")
+			dk_validate(cmd.exe "dk_depend(cmd.exe)")
 			add_custom_command(
 				POST_BUILD
 				TARGET main
 				COMMAND ${CMAKE_COMMAND} -E echo "Installing <app-release-unsigned.apk> to device"
-				COMMAND ${cmd_exe} ${android-sdk}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk
+				COMMAND ${cmd.exe} ${android-sdk}/platform-tools/adb install -r ${Target_App_Dir}/${Target_Tuple}/${Release_Dir}/app/build/outputs/apk/release/app-release-unsigned.apk
 				COMMAND ${CMAKE_COMMAND} -E echo "Finnished installing <app-release-unsigned.apk> to device")
 		endif()
 	endif()
@@ -1202,7 +1205,7 @@ elseif(Windows_X86)
 		
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h" 		"${Target_App_Dir}/assets.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
@@ -1322,7 +1325,7 @@ elseif(Windows_X86_64)
 
 	####################### Create Executable Target ###################
 	if(HAVE_DK)
-		##set_source_files_properties($ENV{DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+		##set_source_files_properties(${DIGITALKNOB_DIR}/stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.h" 		"${Target_App_Dir}/assets.h")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/assets.rc" 		"${Target_App_Dir}/assets.rc")
 		dk_copy("${DKCPP_PLUGINS_DIR}/_DKIMPORT/Windows/icon.h" 		"${Target_App_Dir}/icon.h")
@@ -1419,7 +1422,7 @@ dk_buildLog("  STATIC_LIBRARY_OPTIONS:  ${STATIC_LIBRARY_OPTIONS}")
 dk_buildLog("             DEBUG_FLAGS:  ${DEBUG_FLAGS}")
 dk_buildLog("           RELEASE_FLAGS:  ${RELEASE_FLAGS}")
 dk_buildLog("                   FLAGS:  ${FLAGS}")
-dk_buildLog("          dkdefines_list:  ${dkdefines_list}")
+dk_buildLog("          DKDEFINES_LIST:  ${DKDEFINES_LIST}")
 dk_buildLog("         DKLINKDIRS_LIST:  ${DKLINKDIRS_LIST}")
 
 dk_buildLog("\n\n")

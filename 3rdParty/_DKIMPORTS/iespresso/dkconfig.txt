@@ -1,0 +1,7 @@
+############ iespresso ############
+# https://ss64.com/nt/iexpress.html
+# https://www.partitionwizard.com/partitionmanager/bat-to-exe.html
+# https://github.com/markgollnick/iespresso.git
+# https://github.com/markgollnick/iespresso/archive/57c23127a1d25614d44d7bfe289514dc94ddc3df.zip
+
+iespresso-Import=https://github.com/markgollnick/iespresso/archive/57c23127a1d25614d44d7bfe289514dc94ddc3df.zip

@@ -1,31 +1,30 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ imagemagick ############
 # https://github.com/ImageMagick/ImageMagick.git
 # https://imagemagick.org/index.php
+# https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-3.zip
+# https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-3-portable-Q16-x86.zip
+# https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-3-portable-Q16-x64.zip
 
-### DEPEND ###
 #dk_depend(ghostscript)
 
-dk_validate(Host_Tuple "dk_Host_Tuple()")
 if(Windows_Host)
 	dk_depend(vc_redist)
 endif()
-
-### IMPORT LIBRARY ###
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
 if(Android_Host)
 	dk_installPackage("${imagemagick_Android_Import}")

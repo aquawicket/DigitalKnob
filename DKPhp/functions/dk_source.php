@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 ##################################################################################
@@ -7,7 +8,7 @@ function dk_source(){
 	#dk_debugFunc(1);
 
 	$argv = func_get_args();
-	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/{$argv[0]}.php");
+	include_once(str_replace("\\", "/", $_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/{$argv[0]}.php");
 
 	return 0;
 }
@@ -24,5 +25,5 @@ if(!function_exists('DKTEST')){ function DKTEST() {
 
 }}
 
-include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/DigitalKnob/Development/DKPhp/functions/DK.php");
+include_once(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/Development/DKPhp/functions/DK.php");
 ?>

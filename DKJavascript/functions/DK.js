@@ -1,6 +1,48 @@
-var index = "file:///C:/Users/Administrator/DigitalKnob/Development/DKHtml/index.html";
-var assets = "file:///C:/Users/Administrator/DigitalKnob/Development";
-var USE_FILESYSTEM = 0;
+// DKINIT_js
+
+//############ wscript_shell ############
+// https://www.experts-exchange.com/questions/20976723/JScript-set-environment-variables.html
+if(typeof ActiveXObject !== "undefined" && typeof wscript_shell === "undefined"){
+	wscript_shell = new ActiveXObject("WScript.Shell");
+}
+if(typeof ENV === "undefined" && typeof wscript_shell !== "undefined"){ var ENV = wscript_shell.Environment("Process"); }
+
+
+dk_stdout = function dk_stdout_f(msg){
+	if(typeof WScript !== "undefined" && typeof WScript.StdOut !== "undefined" && typeof WScript.StdOut.Writeline !== "undefined"){
+		WScript.StdOut.Writeline(msg);
+	} else if (typeof ActiveXObject !== "undefined"){
+		var fso = new ActiveXObject('Scripting.FileSystemObject');
+		var ss = fso.GetStandardStream(1);
+		if(typeof ss.Write !== "undefined"){
+			ss.Write(msg);
+		}
+	} else {
+		//NO Alert function found.
+	}
+}
+dk_stdout("dk_stdout DK.js \n");
+
+//###### JS_PATH ######
+if(typeof ENV !== "undefined" && ENV("DKINIT_js") !== ""){
+	var JS_PATH = ENV("DKINIT_js");
+}
+
+//###### dk_alert() ######
+dk_alert = function dk_alert_f(msg){
+	if(typeof alert !== "undefined"){
+		alert(msg);
+	} else if (typeof wscript_shell !== "undefined"){
+		wscript_shell.Popup(msg);
+	} else {
+		//NO Alert function found.
+	}
+}
+//dk_alert("dk_alert DK.js");
+
+var index = "file:///X:/Users/Default/Digital Knob/Development/DKHtml/functions/DK.html";
+var assets = "file:///C:/Users/Administrator/Digital Knob/Development";
+var USE_FILESYSTEM = 1;
 var USE_NODEJS=0;
 
 /*
@@ -22,16 +64,17 @@ function stringify(obj) {
 	var empty = {};
 	
 	//### print
-	if(typeof ActiveXObject === "function"){
-		if(typeof WScript === "object"){
-			if(typeof WScript.StdOut !== "undefined"){
-				var print = function(msg){ WScript.StdOut.Write(msg+"\n"); }
-			}
-		}		
-	} else if(typeof dkconsole === "object"){
+	if(typeof dkconsole === "object"){
 		var print = function(msg){ dkconsole.log(msg); }
+	} else if(typeof console === "object" && typeof console.log === "function"){
+		var print = function(msg){ console.log(msg); }
+	} else if(typeof WScript === "object" && typeof WScript.StdOut !== "undefined"){		
+		var print = function(msg){ WScript.StdOut.Write(msg+"\n"); }
+	} else if(typeof ActiveXObject === "function" && typeof new ActiveXObject('Scripting.FileSystemObject') === 'object'){
+		var print = function(msg){ new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write(msg+"\n"); }
 	} else {
-		alert("ERROR in console");
+		var print = function(msg){ /*alert(msg+"\n");*/ }
+//		alert("ERROR in console");
 	}
 
   //var assert         = function(msg){ print(msg); }
@@ -40,12 +83,12 @@ function stringify(obj) {
   //var dir            = function(msg){ print(msg); }
   //var dirxml         = function(msg){ print(msg); }
 	var info           = function(msg){ print("\x1b[37m"+msg+"\x1b[0m"); }
-	var error          = function(msg){ print("\x1b[91m"+msg+"\x1b[0m"); }
+    var error          = function(msg){ print("\x1b[91m"+msg+"\x1b[0m"); }
   //var exception      = function(msg){ print(msg); }
   //var group          = function(msg){ print(msg); }
   //var groupCollapsed = function(msg){ print(msg); }
   //var groupEnd       = function(msg){ print(msg); }
-  //var log            = function(msg){ print(msg); }
+    var log            = function(msg){ print(msg); }
   //var markTimeline   = function(msg){ print(msg); }
   //var profile        = function(msg){ print(msg); }
   //var profileEnd     = function(msg){ print(msg); }
@@ -54,7 +97,6 @@ function stringify(obj) {
   //var trace          = function(msg){ print(msg); }
 	var warn           = function(msg){ print("\x1b[33m"+msg+"\x1b[0m"); }
 	
-		
 	var properties = 'memory'.split(',');
 	var methods = ('assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn').split(',');
 	while (prop = properties.pop()){
@@ -73,7 +115,7 @@ function stringify(obj) {
 	  //else if(method === "group")         { con[method] = con[method] || group;          }
 	  //else if(method === "groupCollapsed"){ con[method] = con[method] || groupCollapsed; }
 	  //else if(method === "groupEnd")      { con[method] = con[method] || groupEnd;       }
-	  //else if(method === "log")           { con[method] = con[method] || log;            }
+	    else if(method === "log")           { con[method] = con[method] || log;            }
 	  //else if(method === "markTimeline")  { con[method] = con[method] || markTimeline;   }
 	  //else if(method === "profile")       { con[method] = con[method] || profile;        }
 	  //else if(method === "profileEnd")    { con[method] = con[method] || profileEnd;     }
@@ -84,6 +126,8 @@ function stringify(obj) {
 		else                                { con[method] = con[method] || print;          }
 	}
 })(this.console = this.console || {});
+console.log("console.log");
+
 
 //############ NodeJS ############
 if(USE_NODEJS){
@@ -91,9 +135,10 @@ if(USE_NODEJS){
 	dk_validate(nodejs_exe, DKIMPORTS_DIR+"/nodejs/dk_install.js")
 	
 	//COMSPEC = dk_env("%COMSPEC%")
-	WScript_Shell = new ActiveXObject("WScript.Shell");
-	WScript_Shell.Run('start '+nodejs_exe+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
-	WScript_Shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/DigitalKnob/Development/DKHtml/index.html?DKTEST="+DKSCRIPT_PATH')
+	wscript_shell = new ActiveXObject("WScript.Shell");
+	wscript_shell.Run('start '+nodejs_exe+' '+DKJAVASCRIPT_FUNCTIONS_DIR+'\DKNodeServer.js')
+	//wscript_shell.Run('explorer "http://127.0.0.1:8080/Users/Administrator/Digital Knob/Development/DKHtml/functions/DK.html?DKTEST="+DKSCRIPT_PATH')
+	wscript_shell.Run('explorer "file:///Users/Administrator/Digital Knob/Development/DKHtml/functions/DK.html?DKTEST="+DKSCRIPT_PATH')
 }
 
 //##############################################################
@@ -147,9 +192,6 @@ dk_assert = function(object){
 	if(!dk_valid(object)){ console.error(object+" is invalid\n"); }
 }
 
-
-
-
 //########### DKENGINE ###########
 if(!dk_valid("DKScriptEngine")){
 	if(dk_valid("ScriptEngine")){
@@ -159,6 +201,7 @@ if(!dk_valid("DKScriptEngine")){
 }
 //dk_assert("DKScriptEngine");
 ///dk_assert("DKScriptEngine_Version");
+console.log("\x1b[102m"+"\x1b[30m"+DKScriptEngine+" "+DKScriptEngine_Version+"\x1b[0m")
 
 //############ globalThis ############
 if(!dk_valid("globalThis")){
@@ -167,6 +210,7 @@ if(!dk_valid("globalThis")){
 	}());
 }
 dk_assert("globalThis");
+
 
 //############ window ############
 if(!dk_valid("window")){
@@ -206,6 +250,7 @@ if(!dk_valid("dk_call")){
 	}
 }
 
+
 //############ DKBrowser ############
 if(!dk_valid("DKBrowser")){
 	DKBrowser = function DKBrowser_f(){
@@ -214,7 +259,7 @@ if(!dk_valid("DKBrowser")){
 		console.log("hasNavigator = "+hasNavigator);
 		
 		// Hta
-		var isHta = dk_valid("window.ActiveXObject") && dk_valid("window.WScript");
+		var isHta = dk_valid("window.ActiveXObject");// && dk_valid("window.WScript");
 		if(isHta){ output.push("isHta"); }
 
 		// Brave
@@ -260,33 +305,19 @@ if(!dk_valid("DKBrowser")){
 dk_assert('DKBrowser');
 console.log("DKBrowser() = "+DKBrowser());
 
-
-
-
-
-
-
-
 //############ ARGV, ARGC ############
 if(dk_valid("WScript.Arguments")){
 	ARGC = WScript.Arguments.Count();
 	var ARGV = new Array(ARGC);
     for(var i = 0; i < ARGV.length; ++i){
         ARGV[i] = WScript.Arguments(i);
-		//console.log("ARGV["+i+"] = "+ARGV[i]);
+		console.log("ARGV["+i+"] = "+ARGV[i]);
     }
-	//console.log("ARGV = "+ARGV+"\n");
-	//console.log("ARGC = "+ARGC+"\n");
+	console.log("ARGV = "+ARGV+"\n");
+	console.log("ARGC = "+ARGC+"\n");
 	dk_assert("ARGV");
 	dk_assert("ARGC");
 }
-
-
-
-
-
-
-
 
 //############ String.prototype.replaceAll (polyfill) ############
 if(!dk_valid("String.prototype.replaceAll")){
@@ -295,7 +326,6 @@ if(!dk_valid("String.prototype.replaceAll")){
 	}
 }
 dk_assert('String.prototype.replaceAll');
-
 
 //############ XMLHttpRequest ############
 if(!dk_valid("XMLHttpRequest")){ // || !ie7xmlhttp){
@@ -308,21 +338,22 @@ if(!dk_valid("XMLHttpRequest")){ // || !ie7xmlhttp){
 }
 dk_assert('XMLHttpRequest');
 
-
 //############ dk_source ############
 if(!dk_valid("dk_source")){
 	dk_source = function dk_source_f(url, dk_source_callback){
 		//console.log("dk_source("+url+")");
 		var url = url.replaceAll("\\", "/");
+		url = url.replaceAll("file:///", "");
+		
 		//############ Msxml2.XMLHTTP.6.0 ############
 		if(typeof WScript === "object"){
 			if(USE_FILESYSTEM == 1){
-				// C:/Path/Format
-				var url = url.replaceAll("file:///", "");
+				// C:/Path/Format		
 				console.log("url = "+url);
 				(1, eval)((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(url, 1).ReadAll());
 			} else {
 				// file:///C:/Path/Format
+				url = "file:///"+url;
 				var xmlHttpRequest = new XMLHttpRequest;
 				xmlHttpRequest.open("GET", url, true);
 				xmlHttpRequest.send();
@@ -387,16 +418,16 @@ if(typeof document === "undefined"){
 }
 dk_assert('document');
 
-//############ WScript_Shell ############
+//############ wscript_shell ############
 if(typeof ActiveXObject === "function"){
-	if(!dk_valid("WScript_Shell")){
-		WScript_Shell = function(){
-			WScript_Shell = new ActiveXObject("WScript.Shell");
-			return WScript_Shell;
+	if(!dk_valid("wscript_shell")){
+		wscript_shell = function(){
+			wscript_shell = new ActiveXObject("WScript.Shell");
+			return wscript_shell;
 		}
 	} 
 }
-//dk_assert('WScript_Shell');
+//dk_assert('wscript_shell');
 
 /*
 //############ documentElement ############
@@ -428,11 +459,11 @@ if(!dk_valid("DKSCRIPT_PATH")){
 	if(dk_valid("location.href")){
 		var DKSCRIPT_PATH = location.href;
 	}
-	else if(dk_valid("WScript_Shell")){
-		WScript_Shell();
-		if(dk_valid("WScript_Shell.ExpandEnvironmentStrings")){
-			var DKSCRIPT_PATH = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%");//.replaceAll("\\", "/");
-			var DKSCRIPT_ARGS = WScript_Shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
+	else if(dk_valid("wscript_shell")){
+		wscript_shell();
+		if(dk_valid("wscript_shell.ExpandEnvironmentStrings")){
+			var DKSCRIPT_PATH = wscript_shell.ExpandEnvironmentStrings("%DKSCRIPT_PATH%");//.replaceAll("\\", "/");
+			var DKSCRIPT_ARGS = wscript_shell.ExpandEnvironmentStrings("%DKSCRIPT_ARGS%");
 		}
 	}
 }
@@ -468,7 +499,7 @@ dk_assert("DKSCRIPT_EXT");
 console.log("DKSCRIPT_EXT = "+DKSCRIPT_EXT);
 
 //###### DKHOME_DIR variables ######
-if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "DigitalKnob"; }
+if(!dk_valid("DIGITALKNOB")){ var DIGITALKNOB = "Digital Knob"; }
 var DKHOME_DIR = DKSCRIPT_PATH.substr(0, DKSCRIPT_PATH.lastIndexOf(DIGITALKNOB)-1).replaceAll("file:///", "");
 var DKCACHE_DIR = DKHOME_DIR+"/.dk"
 var DKDESKTOP_DIR = DKHOME_DIR+"/Desktop"
@@ -525,11 +556,10 @@ var DKPOWERSHELL_FUNCTIONS_DIR_ = DKPOWERSHELL_DIR+"/functions/"
 var DKPYTHON_DIR = DKBRANCH_DIR+"/DKPython"
 var DKPYTHON_FUNCTIONS_DIR = DKPYTHON_DIR+"/functions"
 var DKPYTHON_FUNCTIONS_DIR_ = DKPYTHON_DIR+"/functions/"
-var DKVB_DIR = DKBRANCH_DIR+"/DKVb"
-var DKVB_FUNCTIONS_DIR = DKVB_DIR+"/functions"
-var DKVB_FUNCTIONS_DIR_ = DKVB_DIR+"/functions/"
+var DKVBS_DIR = DKBRANCH_DIR+"/DKVbs"
+var DKVBS_FUNCTIONS_DIR = DKVBS_DIR+"/functions"
+var DKVBS_FUNCTIONS_DIR_ = DKVBS_DIR+"/functions/"
 var DK_JS = DKJAVASCRIPT_FUNCTIONS_DIR+"/DK.js";
-
 
 //############ queryString ############
 var queryString = "undefined"
@@ -558,17 +588,6 @@ if(typeof location === "object"){
 //############ alert() ############
 if(!dk_valid("alert")){ dk_source(DKJAVASCRIPT_DIR+"/polyfills/alert.js", function(){ /*alert("test");*/ }); }
 dk_assert('alert');
-//alert('test');
-
-/*
-//############ console ############
-if(!dk_valid("console"){
-	dk_source(assets+"/DKJavascript/polyfills/console.js", function(){
-		console.log("loaded console.js");
-	});
-}
-dk_assert('console');
-*/
 
 //############ onDOMContentLoaded() ############
 if(!dk_valid("onDOMContentLoaded")){
@@ -594,23 +613,23 @@ if(dk_valid("document.addEventListener")){
 	}
 }
 
-
 //############ body_onload ############
 function body_onload(){
 	console.log("body_onload()");
 	
 	dk_assert('window.document.body');
-	/*
-	if(!dk_valid("window.document.body")){ 
-		alert("window.document.body is invalid"); 
-		return; 
-	}
-	*/
 	
 	if(DKSCRIPT_FILE === "index.html"){
 		var APP_NAME = DKSCRIPT_DIR.substr(DKSCRIPT_DIR.lastIndexOf("/")+1);
 		dk_source(DKJAVASCRIPT_DIR+"/apps/"+APP_NAME+"/main.js", function dk_source_callback(){
 			main();
+		});
+	} 
+	else {
+		var APP_NAME = DKSCRIPT_NAME;
+		console.log(DKJAVASCRIPT_DIR+"/functions/"+APP_NAME+".js")
+		dk_source(DKJAVASCRIPT_DIR+"/functions/"+APP_NAME+".js", function dk_source_callback(){
+			//main();
 		});
 	}
 }
@@ -625,38 +644,46 @@ dk_assert('body_onload');
 //if(!dk_valid("WshShell"))			{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/WshShell.js"); 		}
 //if(!dk_valid("replaceAll"))		{ dk_source(DKJAVASCRIPT_DIR+"/polyfills/replaceAll.js"); 		}
 if(!dk_valid("dk_depend"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_depend.js"); 		}
-dk_depend("dk_color");
+if(dk_valid("dk_depend")) 			{ dk_depend("dk_color"); }
 //dk_depend("DKPlugin");
 //dk_depend("DKFile");
 //dk_depend("DKGui");
 //dk_depend("DKErrorHandler");
 //dk_depend("dk_color", function dk_color_callback(){}); }
 
-
 //############ DKTEST ############
 if(dk_valid("ARGV")){ 
 	if(ARGC > 0){ var JS_PATH = ARGV[0]; }
 	if(ARGC > 1){ var JS_ARGS = ARGV[1]; }
-	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
-	var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
-	var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
-	var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
-	dk_source(JS_PATH, function dk_source_callback(){
-
-		//############ DKTEST MODE ############
-		if(JS_EXT !== ".js"){ return }
-		//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
-		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT TEST MODE ###### "+JS_FILE+" ######## DKJAVASCRIPT TEST MODE ######"+clr+"\n");
-		DKTEST(); // if(DKTEST() !== 0){return;}
-		console.log(bg_magenta+white+"\n######## DKJAVASCRIPT END TEST ####### "+JS_FILE+" ######## DKJAVASCRIPT END TEST #######"+clr+"\n");
-		//dk_pause();
-		//exit %errorlevel%
-	});
-	
-} else {
-	console.log("TODO");
 }
+	
+if(dk_valid("JS_PATH")) {
+	JS_PATH = JS_PATH.replaceAll("\\", "/");
+	console.log("JS_PATH = "+JS_PATH);
+	var JS_DIR = JS_PATH.substr(0, JS_PATH.lastIndexOf("/"));
+	console.log("JS_DIR = "+JS_DIR);
+	var JS_FILE = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1);
+	console.log("JS_FILE = "+JS_FILE);
+	var JS_NAME = JS_PATH.substr(JS_PATH.lastIndexOf("/")+1, (JS_PATH.lastIndexOf(".") - JS_PATH.lastIndexOf("/")-1));
+	console.log("JS_NAME = "+JS_NAME);
+	var JS_EXT = JS_FILE.substr(JS_FILE.lastIndexOf("."));
+	console.log("JS_EXT = "+JS_EXT);
 		
+	dk_source(JS_PATH, function dk_source_callback(){
+		//############ DKTEST MODE ############
+		if(JS_EXT === ".js"){
+			//if(dk_fileContains(DKSCRIPT_PATH, "DKTEST = function DKTEST_callback()") > 1){ return }
+			console.log(bg_magenta+white+"\n######## DKJAVASCRIPT TEST MODE ###### "+JS_FILE+" ######## DKJAVASCRIPT TEST MODE ######"+clr+" \n");
+			
+			DKTEST(); // if(DKTEST() !== 0){return;}
+			
+			console.log(bg_magenta+white+"\n######## DKJAVASCRIPT END TEST ####### "+JS_FILE+" ######## DKJAVASCRIPT END TEST #######"+clr+" \n");
+		}
+	});
+} else {
+	console.debug("DK.js:736 TODO");
+}	
+
 /*
 if(typeof ARGV !== "undefined"){
 	FUNC_NAME = ARGV[0].substr(ARGV[0].lastIndexOf("/")+1, (ARGV[0].lastIndexOf(".") - ARGV[0].lastIndexOf("/")-1)); 

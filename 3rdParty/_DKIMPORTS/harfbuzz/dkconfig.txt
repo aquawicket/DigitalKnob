@@ -1,4 +1,5 @@
 ############ harfbuzz ############
 # https://github.com/harfbuzz/harfbuzz.git
+# https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e3f50fcd582f2ee1667da6cde2e8562c3.zip
 
-harfbuzz_Import=https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e.zip
+harfbuzz_Import=https://github.com/harfbuzz/harfbuzz/archive/c1c0e82e3f50fcd582f2ee1667da6cde2e8562c3.zip

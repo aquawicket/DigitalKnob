@@ -1,4 +1,4 @@
-:: https://stackoverflow.com/a/43184105
+rem https://stackoverflow.com/a/43184105
 
 :test_forCall
 	if defined __callTest__ (

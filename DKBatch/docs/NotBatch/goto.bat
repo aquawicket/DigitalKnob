@@ -7,4 +7,6 @@ if %1 equ :EOF (
    rem Jump to a normal label
    setlocal EnableDelayedExpansion
    FilePointer 0 !%1!
+   rem set "label=%1"
+   rem FilePointer 0 !%label%!
 )

@@ -1,0 +1,4 @@
+############ pip ############
+# https://bootstrap.pypa.io/get-pip.py
+
+pip_Import=https://bootstrap.pypa.io/get-pip.py

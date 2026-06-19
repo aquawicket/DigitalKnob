@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -42,7 +43,7 @@ function(dk_install PLUGIN) #PATCH
 	#if(NOT ${PLUGIN_Import_Name} STREQUAL ${PLUGIN_Import_Name_lower})
 	#	dk_fatal("ERROR:  dk_install() (${PLUGIN_Import_Name}) must be all lowercase")
 	#endif()
-	dk_assertPath("$ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name}")
+	dk_assertPath("${DKIMPORTS_DIR}/${PLUGIN_Import_Name}")
 	
 	if(EXISTS "${PLUGIN_Install_Path}/installed")
 		dk_info("${PLUGIN_Import_Name} already installed")
@@ -64,8 +65,8 @@ function(dk_install PLUGIN) #PATCH
 	#dk_echo(" ")
 	
 	### set the PLUGIN_DL_Dirname
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	set(PLUGIN_DL_Dirname "$ENV{DKDOWNLOAD_DIR}")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	set(PLUGIN_DL_Dirname "${DKDOWNLOAD_DIR}")
 	
 	### set the PLUGIN_Import_Basename ###
 	# let's check that the PLUGIN_Url_Basename has at least the PLUGIN_Import_Name in it somewhere, or else we gotta rename it
@@ -203,10 +204,10 @@ function(dk_install PLUGIN) #PATCH
 	if(ARGN MATCHES "PATCH")
 		dk_patch(${PLUGIN_Import_Name} ${PLUGIN_Install_Path})
 	else()
-		file(GLOB ITEMS $ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name}/*)
+		file(GLOB ITEMS ${DKIMPORTS_DIR}/${PLUGIN_Import_Name}/*)
 		list(LENGTH ITEMS count)
 		if(${count} GREATER 1)
-			dk_notice(" Found ${count} items in the ${PLUGIN_Import_Name} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in $ENV{DKIMPORTS_DIR}/${PLUGIN_Import_Name}/DKINSTALL.cmake ")
+			dk_notice(" Found ${count} items in the ${PLUGIN_Import_Name} import folder. dk_install has not requested to PATCH the installed files. If needed, add PATCH as the last argument to the dk_install or dk_import command in ${DKIMPORTS_DIR}/${PLUGIN_Import_Name}/DKINSTALL.cmake ")
 		endif()
 	endif()
 	

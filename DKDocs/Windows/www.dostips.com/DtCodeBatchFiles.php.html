@@ -1,0 +1,1996 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS Batch - File Examples</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='ysel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS Batch - File Examples</H1>
+<span class='shortText'>A collection of batch files.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Batch.FtpPure'>Classic FTP</a></td>
+<td class='text'>Executing a FTP script.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.Menu2'>DOS Batch - Advanced Menu</a></td>
+<td class='text'>Toggle menu options, persist settings for the next run.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.AdvancedTemplate'>DOS Batch - Advanced Template</a></td>
+<td class='text'>Template with version history, window title, delayed automatic exit.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeBatchFiles.php'>DOS Batch - File Examples</a></td>
+<td class='text'>A collection of batch files.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FileList'>DOS Batch - File Search List</a></td>
+<td class='text'>Quickly find a file on your hard drive.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FindAndReplace'>DOS Batch - Find and Replace</a></td>
+<td class='text'>Search a file and replace all occurrences of a string with another string.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.DeletePrintJobs'>DOS Batch - Force Delete All Print Jobs</a></td>
+<td class='text'>Get rid of these pesky print jobs.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsFtpBatchScript.php'>DOS Batch - FTP Scripts</a></td>
+<td class='text'>File Transfer with FTP, One-File Solutions.</td>
+</tr>
+<tr><td class='title'><a href='DtCodeInterfacing.php'>DOS Batch - Interfacing non DOS Software</a></td>
+<td class='text'>Embed other languages into your batch, like: Perl, SQL, FTP, ...</td>
+</tr>
+<tr><td class='title'><a href='#Batch.Progress'>DOS Batch - Progress</a></td>
+<td class='text'>Show progress in batch using the title bar</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_1_3'>DOS Batch - Quine 109 bytes</a></td>
+<td class='text'>A pretty short DOS Batch Quine.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_2_2'>DOS Batch - Quine 134 bytes</a></td>
+<td class='text'>A pretty short DOS Batch Quine.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_1_1_1'>DOS Batch - Quine 159 bytes</a></td>
+<td class='text'>A pretty short DOS Batch Quine.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_1_2'>DOS Batch - Quine 259 bytes</a></td>
+<td class='text'>A DOS Batch Quine that makes no assumption.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_1_1'>DOS Batch - Quine 301 bytes</a></td>
+<td class='text'>A DOS Batch Quine that makes no assumption.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Quine_2_1'>DOS Batch - Quine 308 bytes</a></td>
+<td class='text'>A DOS Batch Quine that makes no assumption.</td>
+</tr>
+<tr><td class='title'><a href='#Quine.Shortest'>DOS Batch - Shortest Quine 109 Bytes</a></td>
+<td class='text'>Likely the shortest DOS Batch Quine ever.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.Menu'>DOS Batch - Simple Menu</a></td>
+<td class='text'>Simple menu framework.  Plug in a new menu item and coresponding script as single function block.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.SortTextWithNumbers'>DOS Batch - Sorting text with numbers</a></td>
+<td class='text'>Sorting that handles numbers as numbers not text.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FunctionTemplate'>DOS Function Template</a></td>
+<td class='text'>A function template with all features of a true DOS function.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.CommandIndex'>DOS Help File Builder</a></td>
+<td class='text'>Command reference in HTML format via batch.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FileDate'>File age in days</a></td>
+<td class='text'>Convert the file date into Julian Days to determine the age of a file age in days.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatchAutoLogin'>FTP - Automatic Login</a></td>
+<td class='text'>Automatically login to your FTP session with a single click.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatchDownloadOnlyNewFiles'>FTP - Download Only New Files</a></td>
+<td class='text'>Ftp script to download only files that don`t exist in local folder, i.e. to avoid overwrite</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatchUsingVariables'>FTP - Resolving Environment Variables</a></td>
+<td class='text'>Creating FTP script on the fly at runtime and using variables within the FTP script.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatch'>FTP - Simple Single Batch</a></td>
+<td class='text'>FTP script and batch in a single file.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatchUploadOnlyNewFiles'>FTP - Upload Only New Files</a></td>
+<td class='text'>Ftp script to upload only files that don`t exist in remote folder, i.e. incremental upload.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.FtpBatchLoginSharing'>FTP Scripts Sharing Login Info</a></td>
+<td class='text'>Manage the FTP login separately from your FTP scripts.</td>
+</tr>
+<tr><td class='title'><a href='#Interfacing.Sql'>OSQL.EXE - Run SQL script from DOS Batch</a></td>
+<td class='text'>SQL script and dos batch script in one file, the One-File Solution</td>
+</tr>
+<tr><td class='title'><a href='#Interfacing.Sql2'>OSQL.EXE - Run SQL script from DOS Batch, passing parameters</a></td>
+<td class='text'>Run SQL scripts with parameters passed in from the batch script.</td>
+</tr>
+<tr><td class='title'><a href='#Interfacing.Perl'>Perl - Perl Script within a DOS Batch</a></td>
+<td class='text'>Perl script and batch in a single file.</td>
+</tr>
+<tr><td class='title'><a href='#Interfacing.Perl2'>Perl Script within a DOS Batch with delayed exit</a></td>
+<td class='text'>Perl script and batch in a single file.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.SimpleTemplate'>Simple Batch Template</a></td>
+<td class='text'>Template with simple init and exit.</td>
+</tr>
+</table>    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpPure'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Classic FTP - Executing a FTP script</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>The FTP command support the "-s:ftpscript.txt" option.  The FTP commands listed in ftpscript.txt will automatically run after FTP starts.  The FTP command can be started from a batch file.</p>
+Example:
+<ul>
+    <li>FTP -v -i -s:ftpscript.txt</li>
+</ul>
+See also command line help: "C:>ftp -?"</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'>!:---&nbsp;FTP&nbsp;commands&nbsp;below&nbsp;here&nbsp;---</span><br>
+<span style='color=#000000'>lcd&nbsp;c:\MyLocalDirectory</span><br>
+<span style='color=#000000'>cd&nbsp;&nbsp;public_html/MyRemoteDirectory</span><br>
+<span style='color=#000000'>binary</span><br>
+<span style='color=#000000'>mput&nbsp;&quot;*.*&quot;</span><br>
+<span style='color=#000000'>disconnect</span><br>
+<span style='color=#000000'>bye</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>ftp&gt; open example.com
+User (Username:(none)):
+
+ftp&gt; !:--- FTP commands below here ---
+ftp&gt; lcd c:\MyLocalDirectory
+Local directory now c:\MyLocalDirectory.
+ftp&gt; cd  public_html/MyRemoteDirectory
+ftp&gt; binary
+ftp&gt; !: mput &quot;*.*&quot;
+ftp&gt; disconnect
+ftp&gt; bye
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.Menu2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Advanced Menu - Toggle menu options, persist settings for the next run</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Example - Installation Framework.
+<p>This example shows how to enhance a program with persistent settings that can be changed using a menu.</p>
+<p>I.e.:
+<ul>
+   <li>Choose 1 to change the 'Install version' from 'Client' to 'Server'.</li>
+   <li>Choose 1 again to change the 'Install version' back to 'Client'.</li>
+   <li>Choose 2 to change the 'Size of installation' from Full to 'Regular'.</li>
+   <li>Choose 2 again to change the 'Size of installation' to 'Mini'.</li>
+   <li>Choose 2 again to change the 'Size of installation' back to 'Full'.</li>
+   <li>Choose I to begin the installation.  Note: this example is just a simulation and will not install anything on your PC.</li>
+</ul>
+</p>
+Features:
+<ul>
+   <li>simple and well structured</li>
+   <li>settings changeable at runtime</li>
+   <li><b>settings are persistent</b>, the batch will remember all settings from the last run</li>
+   <li><b>progress indication</b> during simulated file installation</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchInstall.bat'>BatchInstall.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br><a name='53'>53.</a><br><a name='54'>54.</a><br><a name='55'>55.</a><br><a name='56'>56.</a><br><a name='57'>57.</a><br><a name='58'>58.</a><br><a name='59'>59.</a><br><a name='60'>60.</a><br><a name='61'>61.</a><br><a name='62'>62.</a><br><a name='63'>63.</a><br><a name='64'>64.</a><br><a name='65'>65.</a><br><a name='66'>66.</a><br><a name='67'>67.</a><br><a name='68'>68.</a><br><a name='69'>69.</a><br><a name='70'>70.</a><br><a name='71'>71.</a><br><a name='72'>72.</a><br><a name='73'>73.</a><br><a name='74'>74.</a><br><a name='75'>75.</a><br><a name='76'>76.</a><br><a name='77'>77.</a><br><a name='78'>78.</a><br><a name='79'>79.</a><br><a name='80'>80.</a><br><a name='81'>81.</a><br><a name='82'>82.</a><br><a name='83'>83.</a><br><a name='84'>84.</a><br><a name='85'>85.</a><br><a name='86'>86.</a><br><a name='87'>87.</a><br><a name='88'>88.</a><br><a name='89'>89.</a><br><a name='90'>90.</a><br><a name='91'>91.</a><br><a name='92'>92.</a><br><a name='93'>93.</a><br><a name='94'>94.</a><br><a name='95'>95.</a><br><a name='96'>96.</a><br><a name='97'>97.</a><br><a name='98'>98.</a><br><a name='99'>99.</a><br><a name='100'>100.</a><br><a name='101'>101.</a><br><a name='102'>102.</a><br><a name='103'>103.</a><br><a name='104'>104.</a><br><a name='105'>105.</a><br><a name='106'>106.</a><br><a name='107'>107.</a><br><a name='108'>108.</a><br><a name='109'>109.</a><br><a name='110'>110.</a><br><a name='111'>111.</a><br><a name='112'>112.</a><br><a name='113'>113.</a><br><a name='114'>114.</a><br><a name='115'>115.</a><br><a name='116'>116.</a><br><a name='117'>117.</a><br><a name='118'>118.</a><br><a name='119'>119.</a><br><a name='120'>120.</a><br><a name='121'>121.</a><br><a name='122'>122.</a><br><a name='123'>123.</a><br><a name='124'>124.</a><br><a name='125'>125.</a><br><a name='126'>126.</a><br><a name='127'>127.</a><br><a name='128'>128.</a><br><a name='129'>129.</a><br><a name='130'>130.</a><br><a name='131'>131.</a><br><a name='132'>132.</a><br><a name='133'>133.</a><br><a name='134'>134.</a><br><a name='135'>135.</a><br><a name='136'>136.</a><br><a name='137'>137.</a><br><a name='138'>138.</a><br><a name='139'>139.</a><br><a name='140'>140.</a><br><a name='141'>141.</a><br><a name='142'>142.</a><br><a name='143'>143.</a><br><a name='144'>144.</a><br><a name='145'>145.</a><br><a name='146'>146.</a><br><a name='147'>147.</a><br><a name='148'>148.</a><br><a name='149'>149.</a><br><a name='150'>150.</a><br><a name='151'>151.</a><br><a name='152'>152.</a><br><a name='153'>153.</a><br><a name='154'>154.</a><br><a name='155'>155.</a><br><a name='156'>156.</a><br><a name='157'>157.</a><br><a name='158'>158.</a><br><a name='159'>159.</a><br><a name='160'>160.</a><br><a name='161'>161.</a><br><a name='162'>162.</a><br><a name='163'>163.</a><br><a name='164'>164.</a><br><a name='165'>165.</a><br><a name='166'>166.</a><br><a name='167'>167.</a><br><a name='168'>168.</a><br><a name='169'>169.</a><br><a name='170'>170.</a><br><a name='171'>171.</a><br><a name='172'>172.</a><br><a name='173'>173.</a><br><a name='174'>174.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Version&nbsp;History&nbsp;--</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XX.XXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YYYYMMDD&nbsp;Author&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=01.000-beta&nbsp;&amp;<span class=c_cmmt>rem&nbsp;20051201&nbsp;p.h.&nbsp;&nbsp;initial&nbsp;version,&nbsp;providing&nbsp;the&nbsp;framework</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;!!&nbsp;For&nbsp;a&nbsp;new&nbsp;version&nbsp;entry,&nbsp;copy&nbsp;the&nbsp;last&nbsp;entry&nbsp;down&nbsp;and&nbsp;modify&nbsp;Date,&nbsp;Author&nbsp;and&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=%version:&nbsp;=%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Set&nbsp;the&nbsp;window&nbsp;title</span></span><br>
+<span style='color=#000000'>SET&nbsp;title=<span class=c_pvar>%~n0</span></span><br>
+<span style='color=#000000'>TITLE&nbsp;%title%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--initialize&nbsp;the&nbsp;variables</span></span><br>
+<span style='color=#000000'>set&nbsp;FilePersist=<span class=c_pvar>%~dpn0</span>+.cmd&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;--define&nbsp;the&nbsp;filename&nbsp;where&nbsp;persistent&nbsp;variables&nbsp;get&nbsp;stored</span></span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvrCli_choice=,Server,Client,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;SvrCli=Server</span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bShowReadMe_choice=,Yes,No,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;bShowReadMe=No</span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InstSize_choice=,Full,Regular,Mini,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;InstSize=Full</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.--read&nbsp;the&nbsp;persistent&nbsp;variables&nbsp;from&nbsp;the&nbsp;storage</span></span><br>
+<span style='color=#000000'>call:restorePersistentVars&nbsp;&quot;%FilePersist%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menuLOOP'>:menuLOOP</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.=&nbsp;Menu&nbsp;=================================================</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,*&nbsp;delims=_&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('&quot;findstr&nbsp;/b&nbsp;/c:&quot;:menu_&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&quot;')&nbsp;do&nbsp;echo.&nbsp;&nbsp;<span class=c_pvar>%%B</span>&nbsp;&nbsp;<span class=c_pvar>%%C</span></span><br>
+<span style='color=#000000'>set&nbsp;choice=</span><br>
+<span style='color=#000000'>echo.&amp;set&nbsp;/p&nbsp;choice=Make&nbsp;a&nbsp;choice&nbsp;or&nbsp;hit&nbsp;ENTER&nbsp;to&nbsp;quit:&nbsp;||(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:savePersistentVars&nbsp;&quot;%FilePersist%&quot;&amp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;--save&nbsp;the&nbsp;persistent&nbsp;variables&nbsp;to&nbsp;the&nbsp;storage</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;GOTO:EOF</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>echo.&amp;call:menu_%choice%</span><br>
+<span style='color=#000000'>GOTO:menuLOOP</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;menu&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_Options'>:menu_Options</a></span><span class=c_cmmt>:</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_1'>:menu_1</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Install&nbsp;version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'!SvrCli!'&nbsp;[!SvrCli_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;SvrCli&nbsp;&quot;!SvrCli_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_2'>:menu_2</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Size&nbsp;of&nbsp;installation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'!InstSize!'&nbsp;[!InstSize_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;InstSize&nbsp;&quot;!InstSize_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_3'>:menu_3</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Show&nbsp;Readme.txt&nbsp;when&nbsp;finished:&nbsp;'!bShowReadMe!'&nbsp;[!bShowReadMe_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;bShowReadMe&nbsp;&quot;!bShowReadMe_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_'>:menu_</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_Execute'>:menu_Execute</a></span><span class=c_cmmt>:</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_I'>:menu_I</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Start&nbsp;Installation&nbsp;(simulation&nbsp;only)</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;maxcnt=20</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;F&quot;&nbsp;set&nbsp;maxcnt=11</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;R&quot;&nbsp;set&nbsp;maxcnt=7</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;M&quot;&nbsp;set&nbsp;maxcnt=3</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.Simulating&nbsp;an&nbsp;installation&nbsp;for&nbsp;!maxcnt!&nbsp;files...</span><br>
+<span style='color=#000000'>call:initProgress&nbsp;maxcnt</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%C</span>&nbsp;in&nbsp;(1,1,!maxcnt!)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.Pretend&nbsp;to&nbsp;install&nbsp;!SvrCli!&nbsp;file&nbsp;<span class=c_pvar>%%C</span>.</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:sleep&nbsp;1</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:doProgress</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>call:sleep&nbsp;1</span><br>
+<span style='color=#000000'>TITLE&nbsp;%title%</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%bShowReadMe:~0,1%&quot;==&quot;Y&quot;&nbsp;notepad&nbsp;ReadMe.txt</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_C'>:menu_C</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Clear&nbsp;Screen</span></span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;helper&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='setPersist'>:setPersist</a></span><span class=c_cmmt>&nbsp;--&nbsp;to&nbsp;be&nbsp;called&nbsp;to&nbsp;initialize&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;%*:&nbsp;set&nbsp;command&nbsp;arguments</span></span><br>
+<span style='color=#000000'>set&nbsp;%*</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='getPersistentVars'>:getPersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;returns&nbsp;a&nbsp;comma&nbsp;separated&nbsp;list&nbsp;of&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;reference&nbsp;to&nbsp;return&nbsp;variable</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;retlist=</span><br>
+<span style='color=#000000'>set&nbsp;parse=findstr&nbsp;/i&nbsp;/c:&quot;call:setPersist&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>%&quot;^|find&nbsp;/v&nbsp;&quot;ButNotThisLine&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=2&nbsp;delims==&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;%parse%&quot;')&nbsp;do&nbsp;(set&nbsp;retlist=!retlist!<span class=c_pvar>%%a</span>,)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~1</span>=%retlist%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='savePersistentVars'>:savePersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;Save&nbsp;values&nbsp;of&nbsp;persistent&nbsp;variables&nbsp;into&nbsp;a&nbsp;file</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;file&nbsp;name</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>echo.&gt;&quot;<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>call&nbsp;:getPersistentVars&nbsp;persvars</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(%persvars%)&nbsp;do&nbsp;(echo.SET&nbsp;<span class=c_pvar>%%a</span>=!<span class=c_pvar>%%a</span>!&gt;&gt;&quot;<span class=c_pvar>%~1</span>&quot;)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='restorePersistentVars'>:restorePersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;Restore&nbsp;the&nbsp;values&nbsp;of&nbsp;the&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;batch&nbsp;file&nbsp;name&nbsp;to&nbsp;restore&nbsp;from</span></span><br>
+<span style='color=#000000'>if&nbsp;exist&nbsp;&quot;%FilePersist%&quot;&nbsp;call&nbsp;&quot;%FilePersist%&quot;</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='getNextInList'>:getNextInList</a></span><span class=c_cmmt>&nbsp;--&nbsp;return&nbsp;next&nbsp;value&nbsp;in&nbsp;list</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>&nbsp;-&nbsp;in/out&nbsp;ref&nbsp;to&nbsp;current&nbsp;value,&nbsp;returns&nbsp;new&nbsp;value</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~2</span>&nbsp;-&nbsp;in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;choice&nbsp;list,&nbsp;must&nbsp;start&nbsp;with&nbsp;delimiter&nbsp;which&nbsp;must&nbsp;not&nbsp;be&nbsp;'@'</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;lst=<span class=c_pvar>%~2</span>&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;choice&nbsp;list</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%lst:~0,1%&quot;&nbsp;NEQ&nbsp;&quot;%lst:~-1%&quot;&nbsp;echo.ERROR&nbsp;Choice&nbsp;list&nbsp;must&nbsp;start&nbsp;and&nbsp;end&nbsp;with&nbsp;the&nbsp;delimiter&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>set&nbsp;dlm=%lst:~-1%&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;extract&nbsp;the&nbsp;delimiter&nbsp;used</span></span><br>
+<span style='color=#000000'>set&nbsp;old=!<span class=c_pvar>%~1</span>!&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;current&nbsp;value</span></span><br>
+<span style='color=#000000'>set&nbsp;fst=&amp;for&nbsp;/f&nbsp;&quot;delims=%dlm%&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lst%&quot;)&nbsp;do&nbsp;set&nbsp;fst=<span class=c_pvar>%%a</span>&amp;<span class=c_cmmt>rem.--get&nbsp;the&nbsp;first&nbsp;entry</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;replace&nbsp;the&nbsp;current&nbsp;value&nbsp;with&nbsp;a&nbsp;@,&nbsp;append&nbsp;the&nbsp;first&nbsp;value</span></span><br>
+<span style='color=#000000'>set&nbsp;lll=!lst:%dlm<span class=c_pvar>%%o</span>ld<span class=c_pvar>%%d</span>lm%=%dlm%@%dlm%!%fst<span class=c_pvar>%%d</span>lm%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;string&nbsp;after&nbsp;the&nbsp;@</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=2&nbsp;delims=@&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lll%&quot;)&nbsp;do&nbsp;set&nbsp;lll=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;extract&nbsp;the&nbsp;next&nbsp;value</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;delims=%dlm%&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lll%&quot;)&nbsp;do&nbsp;set&nbsp;new=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%new%)&nbsp;ELSE&nbsp;(echo.%new%)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='initProgress'>:initProgress</a></span><span class=c_cmmt>&nbsp;--&nbsp;initialize&nbsp;an&nbsp;internal&nbsp;progress&nbsp;counter&nbsp;and&nbsp;display&nbsp;the&nbsp;progress&nbsp;in&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;in&nbsp;&nbsp;-&nbsp;progress&nbsp;counter&nbsp;maximum,&nbsp;equal&nbsp;to&nbsp;100&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~2</span>:&nbsp;in&nbsp;&nbsp;-&nbsp;title&nbsp;string&nbsp;formatter,&nbsp;default&nbsp;is&nbsp;'[P]&nbsp;completed.'</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressCnt=-1</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressMax=<span class=c_pvar>%~1</span></span><br>
+<span style='color=#000000'>set&nbsp;ProgressFormat=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%ProgressFormat%&quot;==&quot;&quot;&nbsp;set&nbsp;ProgressFormat=[PPPP]</span><br>
+<span style='color=#000000'>set&nbsp;ProgressFormat=!ProgressFormat:[PPPP]=[P]&nbsp;completed.!</span><br>
+<span style='color=#000000'>call&nbsp;:doProgress</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='doProgress'>:doProgress</a></span><span class=c_cmmt>&nbsp;--&nbsp;display&nbsp;the&nbsp;next&nbsp;progress&nbsp;tick</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressCnt+=1</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;per=100*ProgressCnt/ProgressMax</span><br>
+<span style='color=#000000'>set&nbsp;per=!per!%%</span><br>
+<span style='color=#000000'>title&nbsp;%ProgressFormat:[P]=!per!%</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>FOR&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(<span class=c_pvar>%~1</span>,-1,1)&nbsp;do&nbsp;(ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1&nbsp;127.0.0.1&gt;NUL)</span><br>
+<span style='color=#000000'>goto&nbsp;:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>= Menu =================================================
+
+  Options:
+  1  Install version              : 'Client' [Server,Client]
+  2  Size of installation         : 'Full' [Full,Regular,Mini]
+  3  Show Readme.txt when finished: 'No' [Yes,No]
+
+  Execute:
+  I  Start Installation (simulation only)
+  C  Clear Screen
+
+Make a choice or hit ENTER to quit:
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951133'></a>
+    <a name='Batch.AdvancedTemplate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Advanced Template - Template with version history, window title, delayed automatic exit</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This advanced batch template features:
+<ul>
+    <li>Initialization of the command processor </li>
+    <li>Version History for manual script change tracking</li>
+    <li>Window title of choice</li>
+    <li>Delayed exit for unattended completion</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchDelayOnExit.bat'>BatchDelayOnExit.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Version&nbsp;History&nbsp;--</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XX.XXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YYYYMMDD&nbsp;Author&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=01.000-beta&nbsp;&amp;<span class=c_cmmt>rem&nbsp;20051201&nbsp;p.h.&nbsp;&nbsp;initial&nbsp;version,&nbsp;providing&nbsp;the&nbsp;framework</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;!!&nbsp;For&nbsp;a&nbsp;new&nbsp;version&nbsp;entry,&nbsp;copy&nbsp;the&nbsp;last&nbsp;entry&nbsp;down&nbsp;and&nbsp;modify&nbsp;Date,&nbsp;Author&nbsp;and&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=%version:&nbsp;=%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Set&nbsp;the&nbsp;window&nbsp;title</span></span><br>
+<span style='color=#000000'>SET&nbsp;title=<span class=c_pvar>%~n0</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span></span><br>
+<span style='color=#000000'>echo.Hello&nbsp;World</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;End&nbsp;of&nbsp;application</span></span><br>
+<span style='color=#000000'>FOR&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(5,-1,1)&nbsp;do&nbsp;(TITLE&nbsp;%title%&nbsp;--&nbsp;closing&nbsp;in&nbsp;<span class=c_pvar>%%a</span>s&amp;ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1&nbsp;127.0.0.1&gt;NUL)</span><br>
+<span style='color=#000000'>TITLE&nbsp;Press&nbsp;any&nbsp;key&nbsp;to&nbsp;close&nbsp;the&nbsp;application&amp;ECHO.&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951141'></a>
+    <a name='Batch.FileList'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - File Search List - Quickly find a file on your hard drive</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This batch creates a lookup list of all files on the C: drive.
+<br>When running the batch the first time type a hyphen in order to build the lookup list first.
+</p>
+Features:
+<ul>
+    <li>The lookup list will be appended to the batch file itself.</li>
+    <li>Options: build/rebuild lookup list, or locate a file</li>
+    <li>Regular expressions are supported, see <a href="DosCommandIndex.htm#FINDSTR">FINDSTR</a> for details.</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchListOfFiles.bat'>BatchListOfFiles.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@<span class=c_cmmt>REM....&amp;SETLOCAL&nbsp;ENABLEEXTENSIONS&amp;SETLOCAL&nbsp;DISABLEDELAYEDEXPANSION</span></span><br>
+<span style='color=#000000'>@<span class=c_cmmt>REM....&amp;set&nbsp;/p&nbsp;s=FileSearch,&nbsp;type&nbsp;'-'&nbsp;to&nbsp;refresh&nbsp;lookup&nbsp;list:&nbsp;||GOTO:EOF</span></span><br>
+<span style='color=#000000'>@<span class=c_cmmt>REM....&amp;if&nbsp;.%s%&nbsp;NEQ&nbsp;.-&nbsp;echo.&amp;findstr&nbsp;%s%&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&amp;PAUSE&amp;GOTO:EOF</span></span><br>
+<span style='color=#000000'>@<span class=c_cmmt>REM....&amp;findstr&nbsp;/b&nbsp;/c:&quot;@REM....&amp;&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&gt;&quot;<span class=c_pvar>%~f0</span>.txt&quot;</span></span><br>
+<span style='color=#000000'>@<span class=c_cmmt>REM....&amp;dir&nbsp;/s/b&nbsp;c:\&nbsp;1&gt;&gt;&quot;<span class=c_pvar>%~f0</span>.txt&quot;&amp;move&nbsp;/Y&nbsp;&quot;<span class=c_pvar>%~f0</span>.txt&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;</span></span><br>
+<span style='color=#000000'>@<span class=c_cmmt>REM....&amp;GOTO:EOF</span></span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>FileSearch, type '-' to refresh lookup list: logoMed.gif
+
+C:\Python22\tcl\tk8.3\images\logoMed.gif
+Press any key to continue . . .
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951140'></a>
+    <a name='Batch.FindAndReplace'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-12-22</font></font></div>
+    <H2>DOS Batch - Find and Replace - Search a file and replace all occurrences of a string with another string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This batch allows string substitution in a text file.  It parses each line of a text file for a particular string and replaces it with another string.
+<br>I.e. To replace all occurrences of "Yellow Submarine" in "color.txt" with "uboot" and put the output on the screen run:
+<br><b>BatchSubstitute.bat "Yellow Submarine" uboot color.txt</b>
+<br>Or
+<br><b>type color.txt|BatchSubstitute.bat "Yellow Submarine" uboot</b>
+<br>
+<br>Optionally pipe the output into a new file, i.e.
+<br><b>BatchSubstitute.bat "Yellow Submarine" uboot color.txt>newfile.txt</b>
+<br>Or
+<br><b>type color.txt|BatchSubstitute.bat "Yellow Submarine" uboot>newfile.txt</b>
+</p>
+Note: Due to the nature of the FOR command and string substitution, the following known restrictions apply:
+<ul>
+    <li>Lines starting with "]" character will end up empty</li>
+    <li>OldStr must not start with "*"</li>
+    <li>Lines must not contain any of the following characters within a quoted string: "&<>|^", as discussed in this <a href="/forum/viewtopic.php?p=2600&highlight=#2600">post</a>.</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchSubstitute.bat'>BatchSubstitute.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor&nbsp;--</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;DISABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::BatchSubstitude&nbsp;-&nbsp;parses&nbsp;a&nbsp;File&nbsp;line&nbsp;by&nbsp;line&nbsp;and&nbsp;replaces&nbsp;a&nbsp;substring&quot;</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::syntax:&nbsp;BatchSubstitude.bat&nbsp;OldStr&nbsp;NewStr&nbsp;File</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OldStr&nbsp;[in]&nbsp;-&nbsp;string&nbsp;to&nbsp;be&nbsp;replaced</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NewStr&nbsp;[in]&nbsp;-&nbsp;string&nbsp;to&nbsp;replace&nbsp;with</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;File&nbsp;&nbsp;&nbsp;[in]&nbsp;-&nbsp;file&nbsp;to&nbsp;be&nbsp;parsed</span></span><br>
+<span style='color=#000000'>:$changed&nbsp;20100115</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>if&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;==&quot;&quot;&nbsp;findstr&nbsp;&quot;^<span class=c_cmmt>::&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&amp;GOTO:EOF</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,*&nbsp;delims=]&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('&quot;type&nbsp;%3|find&nbsp;/n&nbsp;/v&nbsp;&quot;&quot;&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;line=<span class=c_pvar>%%B</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;defined&nbsp;line&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;&quot;line=echo.<span class=c_pvar>%%l</span>ine:<span class=c_pvar>%~1</span>=<span class=c_pvar>%~2</span>%%&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;delims=&quot;&nbsp;<span class=c_pvar>%%X</span>&nbsp;in&nbsp;('&quot;echo.&quot;<span class=c_pvar>%%l</span>ine%%&quot;&quot;')&nbsp;do&nbsp;<span class=c_pvar>%%~X</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;ELSE&nbsp;echo.</span><br>
+<span style='color=#000000'>)</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>C:&gt;type BatchSubstitute.txt
+!!! THIS TEST DOESN`T REPLACE ANYTHING, IT JUST MAKES SURE
+!!! THE SCRIPT WORKS FOR SPECIAL CHARACTERS.
+!!! THE SCRIPT WOULD NOT WORK IF ANY OF THE CHARACTERs &amp;&lt;&gt;|^ WOULD
+!!! APPEAR WITHIN A QUOTED STRING
+Next line is empty
+
+this &gt; is a grater-than character
+this &lt; is a less-than character
+this ( is a opening bracket character
+this ) is a closing bracket character
+this % is a percent character
+this &amp; is an ampersand character
+this ! is an exclamation character
+this &quot; is a quote character
+this | is a vertical character
+this ^ is a up character
+this is a &quot;quoted string&quot;
+this is a %percented string%
+this is a !exclamationed string!
+a &quot;quoted ( opening bracket&quot;
+a &quot;quoted ) closing bracket&quot;
+a &quot;quoted % quote character&quot;
+a &quot;quoted ! quote character&quot;
+a &quot;quoted &quot; quote character&quot;
+
+C:&gt;BatchSubstitute.bat Oldtext Newtext BatchSubstitute.txt
+!!! THIS TEST DOESN`T REPLACE ANYTHING, IT JUST MAKES SURE
+!!! THE SCRIPT WORKS FOR SPECIAL CHARACTERS.
+!!! THE SCRIPT WOULD NOT WORK IF ANY OF THE CHARACTERs &amp;&lt;&gt;|^ WOULD
+!!! APPEAR WITHIN A QUOTED STRING
+Next line is empty
+
+this &gt; is a grater-than character
+this &lt; is a less-than character
+this ( is a opening bracket character
+this ) is a closing bracket character
+this % is a percent character
+this &amp; is an ampersand character
+this ! is an exclamation character
+this &quot; is a quote character
+this | is a vertical character
+this ^ is a up character
+this is a &quot;quoted string&quot;
+this is a %percented string%
+this is a !exclamationed string!
+a &quot;quoted ( opening bracket&quot;
+a &quot;quoted ) closing bracket&quot;
+a &quot;quoted % quote character&quot;
+a &quot;quoted ! quote character&quot;
+a &quot;quoted &quot; quote character&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.DeletePrintJobs'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2010-04-18</font></font></div>
+    <H2>DOS Batch - Force Delete All Print Jobs - Get rid of these pesky print jobs</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Did you ever pull the paper out of your printer to stop it from printing?  Then 
+surly next thing you did was power cycling the printer to empty the printer buffer 
+and then cancelling the print job from the printer spooler on your PC.  The print job 
+sometimes remains a long time in the printer queue before finally disappearing and 
+allowing the next print job to be processed.  This is annoying on my box it takes up 
+to 5 minutes.  Even rebooting the PC doesn`t help as it doesn`t empty the printer spooler.</p>
+<p>This little batch gets it done.  It temporarily stops the spooler service and removes all
+files from the printer queue.  <b>Beware though that all printer jobs will be deleted, not 
+only the ones that got canceled</b>.
+</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchDeleteAllPrintJobs.bat'>BatchDeleteAllPrintJobs.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>:$reference&nbsp;https://www.dostips.com/</span><br>
+<span style='color=#000000'>:$reference&nbsp;https://support.microsoft.com/kb/946737</span><br>
+<span style='color=#000000'>net&nbsp;stop&nbsp;spooler</span><br>
+<span style='color=#000000'>del&nbsp;&quot;%systemroot%\system32\spool\printers\*.shd&quot;</span><br>
+<span style='color=#000000'>del&nbsp;&quot;%systemroot%\system32\spool\printers\*.spl&quot;</span><br>
+<span style='color=#000000'>net&nbsp;start&nbsp;spooler</span><br>
+<span style='color=#000000'>pause</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.Progress'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-29</font></font></div>
+    <H2>DOS Batch - Progress - Show progress in batch using the title bar</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Showing progress in the output window seems impractical in DOS batch, since there is no way to 
+overwrite a previews output for an updated progress status during each progress tick.  Using the 
+<a href="DosCommandIndex.htm#ECHO">ECHO</a> command is not nice, screen content quickly scrolls out of sight.  A practicable alternative
+may be to use the window <a href="DosCommandIndex.htm#TITLE">TITLE</a> for the progress message.  A nice side effect is that you can 
+minimize the batch window and still observe the progress output in the task bar, since the task 
+bar text will always reflect the window title text.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/DosProgress.bat'>DosProgress.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'>set&nbsp;&quot;max=11&quot;</span><br>
+<span style='color=#000000'>call&nbsp;:initProgress&nbsp;%max%&nbsp;&quot;Window&nbsp;Title:&nbsp;[PPP]&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%N</span>&nbsp;in&nbsp;(1,1,%max%)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1&nbsp;127.0.0.1&gt;NUL</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:doProgress</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='initProgress'>:initProgress</a></span><span class=c_cmmt>&nbsp;max&nbsp;format&nbsp;--&nbsp;initialize&nbsp;an&nbsp;internal&nbsp;progress&nbsp;counter&nbsp;and&nbsp;display&nbsp;the&nbsp;progress&nbsp;in&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;max&nbsp;&nbsp;&nbsp;&nbsp;[in]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;progress&nbsp;counter&nbsp;maximum,&nbsp;equal&nbsp;to&nbsp;100&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;format&nbsp;[in,opt]&nbsp;-&nbsp;title&nbsp;string&nbsp;formatter,&nbsp;default&nbsp;is&nbsp;'[P]&nbsp;completed.'</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080327</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;ProgressCnt=-1&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;ProgressMax=<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;ProgressFormat=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;ProgressFormat&nbsp;set&nbsp;&quot;ProgressFormat=[PPPP]&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;ProgressFormat=%ProgressFormat:[PPPP]=[P]&nbsp;completed.%&quot;</span><br>
+<span style='color=#000000'>call:doProgress</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='doProgress'>:doProgress</a></span><span class=c_cmmt>&nbsp;--&nbsp;display&nbsp;the&nbsp;next&nbsp;progress&nbsp;tick</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080327</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;ProgressCnt+=1&quot;</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;per100=100*ProgressCnt/ProgressMax&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;per10=per100/10&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;per10m=10-per100/10-1&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;P=%per100%%%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;PP=&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%N</span>&nbsp;in&nbsp;(0,1,%per10%)&nbsp;do&nbsp;call&nbsp;set&nbsp;&quot;PP=<span class=c_pvar>%%P</span>P%%*&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%N</span>&nbsp;in&nbsp;(%per10%,1,9)&nbsp;do&nbsp;call&nbsp;set&nbsp;&quot;PP=<span class=c_pvar>%%P</span>P%%&nbsp;&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;PPP=&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%N</span>&nbsp;in&nbsp;(0,1,%per10m%)&nbsp;do&nbsp;call&nbsp;set&nbsp;&quot;PPP=<span class=c_pvar>%%P</span>PP%%*&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;ProgressFormat=%ProgressFormat:[P]=!P!%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;ProgressFormat=%ProgressFormat:[PP]=!PP!%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;ProgressFormat=%ProgressFormat:[PPP]=!PPP!%&quot;</span><br>
+<span style='color=#000000'>title&nbsp;%ProgressFormat%</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Output:</td>
+      <td class='text'  VALIGN='top'><img src="/DtAnimProgress.GIF"></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_1_3'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 109 bytes - A pretty short DOS Batch Quine</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>Run the Quine using the following command in order to make sure <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is 
+disabled and <a href="DosCommandIndex.htm#ECHO">ECHO</a> is OFF:
+<br>C:> Cmd /Q /V:Off /C BatchQuine.bat
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_1_3.bat'>BatchQuine_1_3.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>Set&nbsp;&quot;T=Echo&nbsp;Set&nbsp;&quot;T=!T!&quot;&amp;Call&nbsp;Echo&nbsp;Set&nbsp;E=!E!E!E!!E!E!E!&amp;Echo&nbsp;Cmd/V:On/C&quot;!E!T!E!&quot;&quot;</span><br>
+<span style='color=#000000'>Set&nbsp;E=%%</span><br>
+<span style='color=#000000'>Cmd/V:On/C&quot;%T%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Set &quot;T=Echo Set &quot;T=!T!&quot;&amp;Call Echo Set E=!E!E!E!!E!E!E!&amp;Echo Cmd/V:On/C&quot;!E!T!E!&quot;&quot;
+Set E=%%
+Cmd/V:On/C&quot;%T%&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_2_2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 134 bytes - A pretty short DOS Batch Quine</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>This little Quine has been developed by Peter Hartmann.  Run the Quine
+using the following command in order to make sure <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is disabled and <a href="DosCommandIndex.htm#ECHO">ECHO</a> is OFF:
+<br>C:> Cmd /Q /V:Off /C BatchQuine.bat
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_2_2.bat'>BatchQuine_2_2.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>Set&nbsp;&quot;T=Echo&nbsp;Set&nbsp;&quot;T=!T!&quot;&amp;Echo&nbsp;Set&nbsp;&quot;U=!U!&quot;&quot;</span><br>
+<span style='color=#000000'>Set&nbsp;&quot;U=Echo&nbsp;Cmd/V:On/CCmd/V:On/C!T!&amp;Cmd/V:On/C!U!&quot;</span><br>
+<span style='color=#000000'>Cmd/V:On/CCmd/V:On/C!T!&amp;Cmd/V:On/C!U!</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Set &quot;T=Echo Set &quot;T=!T!&quot;&amp;Echo Set &quot;U=!U!&quot;&quot;
+Set &quot;U=Echo Cmd/V:On/CCmd/V:On/C!T!&amp;Cmd/V:On/C!U!&quot;
+Cmd/V:On/CCmd/V:On/C!T!&amp;Cmd/V:On/C!U!
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_1_1_1'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 159 bytes - A pretty short DOS Batch Quine</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>Run the Quine using the following command in order to make sure <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is 
+disabled and <a href="DosCommandIndex.htm#ECHO">ECHO</a> is OFF:
+<br>C:> Cmd /Q /V:Off /C BatchQuine.bat
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_1_1_1.bat'>BatchQuine_1_1_1.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>Set&nbsp;&quot;T=Echo&nbsp;Set&nbsp;&quot;T=!T!&quot;&amp;Call&nbsp;Echo&nbsp;Set&nbsp;&quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo&nbsp;Setlocal&nbsp;Enabledelayedexpansion&amp;Echo&nbsp;!E!T!E!&quot;</span><br>
+<span style='color=#000000'>Set&nbsp;&quot;E=%%&quot;</span><br>
+<span style='color=#000000'>Setlocal&nbsp;Enabledelayedexpansion</span><br>
+<span style='color=#000000'>%T%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Set &quot;T=Echo Set &quot;T=!T!&quot;&amp;Call Echo Set &quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo Setlocal Enabledelayedexpansion&amp;Echo !E!T!E!&quot;
+Set &quot;E=%%&quot;
+Setlocal Enabledelayedexpansion
+%T%
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_1_2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 259 bytes - A DOS Batch Quine that makes no assumption</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>This little Quine has been developed by Peter Hartmann.
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_1_2.bat'>BatchQuine_1_2.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@Set&nbsp;&quot;Src=www.Dostips.com&quot;</span><br>
+<span style='color=#000000'>@Setlocal&nbsp;Disabledelayedexpansion</span><br>
+<span style='color=#000000'>@Set&nbsp;&quot;T=Echo&nbsp;@Set&nbsp;&quot;Src=www.Dostips.com&quot;&amp;Echo&nbsp;@Setlocal&nbsp;Disabledelayedexpansion&amp;Echo&nbsp;@Set&nbsp;&quot;T=!T!&quot;&amp;Call&nbsp;Echo&nbsp;@Set&nbsp;&quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo&nbsp;@Cmd&nbsp;/V:On&nbsp;/C&nbsp;&quot;!E!T!E!&quot;&quot;</span><br>
+<span style='color=#000000'>@Set&nbsp;&quot;E=%%&quot;</span><br>
+<span style='color=#000000'>@Cmd&nbsp;/V:On&nbsp;/C&nbsp;&quot;%T%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>@Set &quot;Src=www.Dostips.com&quot;
+@Setlocal Disabledelayedexpansion
+@Set &quot;T=Echo @Set &quot;Src=www.Dostips.com&quot;&amp;Echo @Setlocal Disabledelayedexpansion&amp;Echo @Set &quot;T=!T!&quot;&amp;Call Echo @Set &quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo @Cmd /V:On /C &quot;!E!T!E!&quot;&quot;
+@Set &quot;E=%%&quot;
+@Cmd /V:On /C &quot;%T%&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_1_1'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 301 bytes - A DOS Batch Quine that makes no assumption</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>This little Quine has been developed by Peter Hartmann.
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_1_1.bat'>BatchQuine_1_1.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@Set&nbsp;&quot;Src=www.Dostips.com&quot;</span><br>
+<span style='color=#000000'>@Setlocal&nbsp;Disabledelayedexpansion</span><br>
+<span style='color=#000000'>@Set&nbsp;&quot;T=Echo&nbsp;@Set&nbsp;&quot;Src=www.Dostips.com&quot;&amp;Echo&nbsp;@Setlocal&nbsp;Disabledelayedexpansion&amp;Echo&nbsp;@Set&nbsp;&quot;T=!T!&quot;&amp;Call&nbsp;Echo&nbsp;@Set&nbsp;&quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo&nbsp;@Setlocal&nbsp;Enabledelayedexpansion&amp;Echo&nbsp;@!E!T!E!&quot;</span><br>
+<span style='color=#000000'>@Set&nbsp;&quot;E=%%&quot;</span><br>
+<span style='color=#000000'>@Setlocal&nbsp;Enabledelayedexpansion</span><br>
+<span style='color=#000000'>@%T%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>@Set &quot;Src=www.Dostips.com&quot;
+@Setlocal Disabledelayedexpansion
+@Set &quot;T=Echo @Set &quot;Src=www.Dostips.com&quot;&amp;Echo @Setlocal Disabledelayedexpansion&amp;Echo @Set &quot;T=!T!&quot;&amp;Call Echo @Set &quot;E=!E!E!E!!E!E!E!&quot;&amp;Echo @Setlocal Enabledelayedexpansion&amp;Echo @!E!T!E!&quot;
+@Set &quot;E=%%&quot;
+@Setlocal Enabledelayedexpansion
+@%T%
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Quine_2_1'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Quine 308 bytes - A DOS Batch Quine that makes no assumption</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>This little Quine has been developed by Peter Hartmann.
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_2_1.bat'>BatchQuine_2_1.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@Echo&nbsp;Off</span><br>
+<span style='color=#000000'>Set&nbsp;&quot;Src=www.Dostips.com&quot;</span><br>
+<span style='color=#000000'>Setlocal&nbsp;Disabledelayedexpansion</span><br>
+<span style='color=#000000'>Set&nbsp;&quot;T=Echo&nbsp;@Echo&nbsp;Off&amp;Echo&nbsp;Set&nbsp;&quot;Src=www.Dostips.com&quot;&amp;Echo&nbsp;Setlocal&nbsp;Disabledelayedexpansion&amp;Echo&nbsp;Set&nbsp;&quot;T=!T!&quot;&amp;Echo&nbsp;Set&nbsp;&quot;U=!U!&quot;&quot;</span><br>
+<span style='color=#000000'>Set&nbsp;&quot;U=Echo&nbsp;Cmd&nbsp;/V:On&nbsp;/C&nbsp;Cmd&nbsp;/V:On&nbsp;/C&nbsp;!T!&amp;Cmd&nbsp;/V:On&nbsp;/C&nbsp;!U!&quot;</span><br>
+<span style='color=#000000'>Cmd&nbsp;/V:On&nbsp;/C&nbsp;Cmd&nbsp;/V:On&nbsp;/C&nbsp;!T!&amp;Cmd&nbsp;/V:On&nbsp;/C&nbsp;!U!</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>@Echo Off
+Set &quot;Src=www.Dostips.com&quot;
+Setlocal Disabledelayedexpansion
+Set &quot;T=Echo @Echo Off&amp;Echo Set &quot;Src=www.Dostips.com&quot;&amp;Echo Setlocal Disabledelayedexpansion&amp;Echo Set &quot;T=!T!&quot;&amp;Echo Set &quot;U=!U!&quot;&quot;
+Set &quot;U=Echo Cmd /V:On /C Cmd /V:On /C !T!&amp;Cmd /V:On /C !U!&quot;
+Cmd /V:On /C Cmd /V:On /C !T!&amp;Cmd /V:On /C !U!
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Quine.Shortest'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-11-13</font></font></div>
+    <H2>DOS Batch - Shortest Quine 109 Bytes - Likely the shortest DOS Batch Quine ever</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A Quine is a program whose only output is its program code.
+<br>Run the Quine using the following command in order to make sure <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is 
+disabled and <a href="DosCommandIndex.htm#ECHO">ECHO</a> is OFF:
+<br>C:> Cmd /Q /V:Off /C BatchQuine.bat
+<br><b>If you use this code make sure to add a reference to DosTips.com.</b></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchQuine_1_3.bat'>BatchQuine_1_3.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>Set&nbsp;&quot;T=Echo&nbsp;Set&nbsp;&quot;T=!T!&quot;&amp;Call&nbsp;Echo&nbsp;Set&nbsp;E=!E!E!E!!E!E!E!&amp;Echo&nbsp;Cmd/V:On/C&quot;!E!T!E!&quot;&quot;</span><br>
+<span style='color=#000000'>Set&nbsp;E=%%</span><br>
+<span style='color=#000000'>Cmd/V:On/C&quot;%T%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Set &quot;T=Echo Set &quot;T=!T!&quot;&amp;Call Echo Set E=!E!E!E!!E!E!E!&amp;Echo Cmd/V:On/C&quot;!E!T!E!&quot;&quot;
+Set E=%%
+Cmd/V:On/C&quot;%T%&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.Menu'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Simple Menu - Simple menu framework.  Plug in a new menu item and coresponding script as single function block</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This simple <b>menu framework</b> parses itself for batch labels of certain signature and lists them as menu items.  The self-parsing feature 
+makes the menu generic.  New menu items can be inserted by adding new function blocks without changing the menu infrastructure.
+</p>
+Features:
+<ul>
+    <li>simple and well structured</li>
+    <li>easy to enhance</li>
+    <li>easy to maintain</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchMenu.bat'>BatchMenu.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menuLOOP'>:menuLOOP</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.=&nbsp;Menu&nbsp;=================================================</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,*&nbsp;delims=_&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('&quot;findstr&nbsp;/b&nbsp;/c:&quot;:menu_&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&quot;')&nbsp;do&nbsp;echo.&nbsp;&nbsp;<span class=c_pvar>%%B</span>&nbsp;&nbsp;<span class=c_pvar>%%C</span></span><br>
+<span style='color=#000000'>set&nbsp;choice=</span><br>
+<span style='color=#000000'>echo.&amp;set&nbsp;/p&nbsp;choice=Make&nbsp;a&nbsp;choice&nbsp;or&nbsp;hit&nbsp;ENTER&nbsp;to&nbsp;quit:&nbsp;||GOTO:EOF</span><br>
+<span style='color=#000000'>echo.&amp;call:menu_%choice%</span><br>
+<span style='color=#000000'>GOTO:menuLOOP</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;menu&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_1'>:menu_1</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Have&nbsp;some&nbsp;fun</span></span><br>
+<span style='color=#000000'>echo.Have&nbsp;some&nbsp;fun&nbsp;by&nbsp;adding&nbsp;some&nbsp;more&nbsp;code&nbsp;right&nbsp;here</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_2'>:menu_2</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Get&nbsp;a&nbsp;water</span></span><br>
+<span style='color=#000000'>echo.Get&nbsp;a&nbsp;water&nbsp;and&nbsp;then&nbsp;add&nbsp;some&nbsp;code&nbsp;right&nbsp;here</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_'>:menu_</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_T'>:menu_T</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Tip</span></span><br>
+<span style='color=#000000'>echo.It's&nbsp;easy&nbsp;to&nbsp;add&nbsp;a&nbsp;line&nbsp;separator&nbsp;using&nbsp;one&nbsp;or&nbsp;more&nbsp;fake&nbsp;labels</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_C'>:menu_C</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Clear&nbsp;Screen</span></span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>= Menu =================================================
+
+  1  Have some fun
+  2  Get a water
+
+  T  Tip
+  C  Clear Screen
+
+Make a choice or hit ENTER to quit:
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951142'></a>
+    <a name='Batch.SortTextWithNumbers'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Sorting text with numbers - Sorting that handles numbers as numbers not text</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This batch sort`s text by handling the first number found in each line as real number not as text.</p>
+E.g.:
+<ul>
+    <li>In a text search 10 is less than 9, because the first letter 1 is less than 9</li>
+    <li>In a number search 10 is greater than 9</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><a href='/sortn.bat'>sortn.bat</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Abc9def
+Abc10def
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951131'></a>
+    <a name='Batch.FunctionTemplate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Function Template - A function template with all features of a true DOS function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The function template can be used as starting point for a new function.  Complete the template into a useful function like this:
+<ul>
+    <li>Rename the function</li>
+    <li>Add proper description for the function and its arguments</li>
+    <li>Fill in the function body</li>
+    <li>Return desired values</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFunctionTmpl.bat'>BatchFunctionTmpl.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myFunctionName'>:myFunctionName</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;function&nbsp;description&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;argument&nbsp;description&nbsp;here</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--function&nbsp;body&nbsp;here</span></span><br>
+<span style='color=#000000'>set&nbsp;LocalVar1=...</span><br>
+<span style='color=#000000'>set&nbsp;LocalVar2=...</span><br>
+<span style='color=#000000'>(ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;--&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~1</span>=%LocalVar1%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~2</span>=%LocalVar2%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951134'></a>
+    <a name='Batch.CommandIndex'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Help File Builder - Command reference in HTML format via batch</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>A DOS batch that creates a well formatted HTML file listing the help output for all DOS commands.</p>
+Features:
+<ul>
+    <li>Shows <b>progress indication</b> while creating the command reference</li>
+    <li>Outputs an <b>command index</b> with page links</li>
+    <li>Outputs the <b>command help text</b> for each DOS command documented by "C:>help /?"</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><a href='/DosCommandIndex.bat'>DosCommandIndex.bat</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><a href='/DosCommandIndex.htm'>DosCommandIndex.htm</a></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FileDate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-03-30</font></font></div>
+    <H2>File age in days - Convert the file date into Julian Days to determine the age of a file age in days</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Date and Time functions are useful for:
+<ul>
+    <li>Calculations with date and time values</li>
+    <li>Determine the age of files in days</li>
+    <li>Determine the date difference in days</li>
+</ul>
+</p>
+<p>The example in this section demonstrates how to use the <b>:ftime</b> function to 
+determine the age in days of all files in the temp directory.</p>
+<p>Two variables are used
+<ul>
+    <li>tnow - stores the current day in julian days format by calling <b>:jdate</b></li>
+    <li>tfile - stores the file date in julian days format by calling <b>:ftime</b></li>
+</ul>
+</p>
+<p>Using <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> and exclamation marks around environment variables ensures that 
+the `tfile`variable  is substituted properly during each loop.  Read more about this behavior 
+in the <a href="DosCommandIndex.htm#SET">SET</a> command help (bottom half of the help text).</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFTime.bat'>BatchFTime.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>cd&nbsp;/d&nbsp;&quot;%temp%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>call:jdate&nbsp;tnow&nbsp;&quot;%date%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%F</span>&nbsp;in&nbsp;(*.*)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:ftime&nbsp;tfile&nbsp;&quot;<span class=c_pvar>%%F</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;/a&nbsp;diff=tnow-tfile</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.<span class=c_pvar>%%~nxF</span>&nbsp;is&nbsp;!diff!&nbsp;days&nbsp;old</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>ECHO.&amp;PAUSE&amp;GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Functions&nbsp;start&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='ftime'>:ftime</a></span><span class=c_cmmt>&nbsp;JD&nbsp;filename&nbsp;attr&nbsp;--&nbsp;returns&nbsp;the&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;[out]&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;valref&nbsp;file&nbsp;time&nbsp;in&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;attr&nbsp;&nbsp;[in,opt]&nbsp;-&nbsp;time&nbsp;field&nbsp;to&nbsp;be&nbsp;used,&nbsp;creation/last-access/last-write,&nbsp;see&nbsp;'dir&nbsp;/?',&nbsp;i.e.&nbsp;/tc,&nbsp;/ta,&nbsp;/tw,&nbsp;default&nbsp;is&nbsp;/tw</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20090322&nbsp;:$categories&nbsp;DateAndTime</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;file=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>set&nbsp;attr=<span class=c_pvar>%~3</span></span><br>
+<span style='color=#000000'>if&nbsp;not&nbsp;defined&nbsp;attr&nbsp;(call:jdate&nbsp;JD&nbsp;&quot;-&nbsp;<span class=c_pvar>%~t2</span>&quot;</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;dir&nbsp;%attr%&nbsp;/-c&nbsp;&quot;%file%&quot;|findstr&nbsp;&quot;^^[0-9]&quot;&quot;')&nbsp;do&nbsp;call:jdate&nbsp;JD&nbsp;&quot;<span class=c_pvar>%%a</span>&quot;)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='jdate'>:jdate</a></span><span class=c_cmmt>&nbsp;JD&nbsp;DateStr&nbsp;--&nbsp;converts&nbsp;a&nbsp;date&nbsp;string&nbsp;to&nbsp;julian&nbsp;day&nbsp;number&nbsp;with&nbsp;respect&nbsp;to&nbsp;regional&nbsp;date&nbsp;format</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;JD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[out,opt]&nbsp;-&nbsp;julian&nbsp;days</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;DateStr&nbsp;[in,opt]&nbsp;&nbsp;-&nbsp;date&nbsp;string,&nbsp;e.g.&nbsp;&quot;03/31/2006&quot;&nbsp;or&nbsp;&quot;Fri&nbsp;03/31/2006&quot;&nbsp;or&nbsp;&quot;31.3.2006&quot;</span></span><br>
+<span style='color=#000000'>:$reference&nbsp;https://groups.google.com/group/alt.msdos.batch.nt/browse_frm/thread/a0c34d593e782e94/50ed3430b6446af8#50ed3430b6446af8</span><br>
+<span style='color=#000000'>:$created&nbsp;20060101&nbsp;:$changed&nbsp;20080219</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;DateStr=<span class=c_pvar>%~2</span>&amp;if&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;==&quot;&quot;&nbsp;set&nbsp;DateStr=%date%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;skip=1&nbsp;tokens=2-4&nbsp;delims=(-)&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;echo.|date&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;/f&nbsp;&quot;tokens=1-3&nbsp;delims=/.-&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%DateStr:*&nbsp;=%&quot;)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;<span class=c_pvar>%%a</span>=<span class=c_pvar>%%A</span>&amp;set&nbsp;<span class=c_pvar>%%b</span>=<span class=c_pvar>%%B</span>&amp;set&nbsp;<span class=c_pvar>%%c</span>=<span class=c_pvar>%%C</span>))</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;yy=10000%yy%&nbsp;<span class=c_pvar>%%1</span>0000,mm=100%mm%&nbsp;%%&nbsp;100,dd=100%dd%&nbsp;%%&nbsp;100&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;JD=dd-32075+1461*(yy+4800+(mm-14)/12)/4+367*(mm-2-(mm-14)/12*12)/12-3*((yy+4900+(mm-14)/12)/100)/4</span><br>
+<span style='color=#000000'>ENDLOCAL&nbsp;&amp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%JD%)&nbsp;ELSE&nbsp;(echo.%JD%)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>00000002.ini is 42 days old
+ActivePerlInstall.log is 39 days old
+BatchJDate.bat is 0 days old
+control.xml is 34 days old
+debugf.txt is 26 days old
+DFC5A2B2.TMP is 3 days old
+EML30.tmp is 2 days old
+EML39.tmp is 2 days old
+EML3D.tmp is 2 days old
+EXCEL.log is 20 days old
+fdm9E1.tmp is 39 days old
+gtb2C4.tmp is 62 days old
+tmp.cab is 62 days old - gtb2
+h2rC95.tmp is 36 days old
+hpodvd09.log is 1 days old
+hpzcoi00.log is 7 days old
+hpzcoi01.log is 7 days old
+hpzcoi02.log is 7 days old
+hpzcoi03.log is 7 days old
+IMT10.xml is 73 days old
+IMT11.xml is 73 days old
+IMT12.xml is 73 days old
+IMT13.xml is 73 days old
+IMT14.xml is 73 days old
+IMT2B.xml is 73 days old
+IMTF.xml is 73 days old
+java_install_reg.log is 7 days old
+jusched.log is 1 days old
+LSBurnWatcher.log is 1 days old
+msohdinh.tmp is 62 days old
+patch.exe is 850 days old
+patchw32.dll is 850 days old
+r2hC94.tmp is 36 days old
+
+Press any key to continue . . .
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpBatchAutoLogin'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-12-06</font></font></div>
+    <H2>FTP - Automatic Login - Automatically login to your FTP session with a single click</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>If you frequently find yourself calling <a href="DosCommandIndex.htm#FTP">FTP</a> from the command line, each time having to login and  
+change directory and change FTP modes, until you finally get where you want be in order to do some real 
+work then you may wish to get there with a singe click.
+<p>This little batch can connect to your FTP server and logs you in before it gives you the prompt.  You can 
+easily add more FTP commands to it, like changing directories or switching to binary mode or whatever you 
+like to be done before taking over control on the FTP prompt.
+<p>The FTP connection information is embedded within the batch itself.  The batch connects to an 
+FTP server by executing itself in FTP context using the <a href="DosCommandIndex.htm#FTP">FTP</a> -s option.  Once executing in FTP context 
+it executes all FTP commands listed in the file.  By omitting the final <a href="DosCommandIndex.htm#FTP">FTP</a> "bye" command it will stop
+at the FTP prompt and wait for user input.
+<p>Optionally a FTP script can be provided as input stream, that way multiple FTP scripts can share the same 
+login information.  Example:
+<p>FtpLogin.bat &lt;script1.ftp</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/FtpLogin.bat'>FtpLogin.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ftp&nbsp;-i&nbsp;-s:&quot;<span class=c_pvar>%~f0</span>&quot;&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'>pwd</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>ftp&gt; @ftp -i -s:&quot;%~f0&quot;&amp;GOTO:EOF
+Invalid command.
+ftp&gt; open example.com
+Connected to example.com.
+220-
+220 FTP Server ready
+User (example.com:(none)):
+331 Password required
+
+230 User logged in
+ftp&gt; pwd
+257 &quot;/&quot; is the current directory
+ftp&gt;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='Batch.FtpBatchGetNewFilesOnly'></a>
+    <a name='Batch.FtpBatchDownloadOnlyNewFiles'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2010-02-05</font></font></div>
+    <H2>FTP - Download Only New Files - Ftp script to download only files that don`t exist in local folder, i.e. to avoid overwrite</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This batch connects twice to the FTP server.  First time it retrieves a list of files
+on the FTP server.  This list is being trimmed to contain only files that don`t 
+already exist locally.  The files in the trimmed list are then downloaded during a second 
+connection.
+<p>Note: Since all files are passed into the FTP`s MGET command there might be a limit to the number 
+of files that can be processed at once.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFtpDownloadOnlyNewFiles.bat'>BatchFtpDownloadOnlyNewFiles.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br><a name='53'>53.</a><br><a name='54'>54.</a><br><a name='55'>55.</a><br><a name='56'>56.</a><br><a name='57'>57.</a><br><a name='58'>58.</a><br><a name='59'>59.</a><br><a name='60'>60.</a><br><a name='61'>61.</a><br><a name='62'>62.</a><br><a name='63'>63.</a><br><a name='64'>64.</a><br><a name='65'>65.</a><br><a name='66'>66.</a><br><a name='67'>67.</a><br><a name='68'>68.</a><br><a name='69'>69.</a><br><a name='70'>70.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@Echo&nbsp;Off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Define&nbsp;File&nbsp;Filter,&nbsp;i.e.&nbsp;files&nbsp;with&nbsp;extension&nbsp;.txt</span></span><br>
+<span style='color=#000000'>Set&nbsp;FindStrArgs=/E&nbsp;/C:&quot;.txt&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Extract&nbsp;Ftp&nbsp;Script&nbsp;to&nbsp;create&nbsp;List&nbsp;of&nbsp;Files</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FtpCommand=ls&quot;</span><br>
+<span style='color=#000000'>Call:extractFileSection&nbsp;&quot;[Ftp&nbsp;Script&nbsp;1]&quot;&nbsp;&quot;-&quot;&gt;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>Rem&nbsp;Notepad&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Execute&nbsp;Ftp&nbsp;Script,&nbsp;collect&nbsp;File&nbsp;Names</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FileList=&quot;</span><br>
+<span style='color=#000000'>For&nbsp;/F&nbsp;&quot;Delims=&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;('&quot;Ftp&nbsp;-v&nbsp;-i&nbsp;-s:&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;|Findstr&nbsp;%FindStrArgs%&quot;')&nbsp;Do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;Set&nbsp;&quot;FileList=<span class=c_pvar>%%F</span>ileList%%&nbsp;&quot;<span class=c_pvar>%%A</span>&quot;&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Extract&nbsp;Ftp&nbsp;Script&nbsp;to&nbsp;download&nbsp;files&nbsp;that&nbsp;don't&nbsp;exist&nbsp;in&nbsp;local&nbsp;folder</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FtpCommand=mget&quot;</span><br>
+<span style='color=#000000'>For&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;(%FileList%)&nbsp;Do&nbsp;If&nbsp;Not&nbsp;Exist&nbsp;&quot;<span class=c_pvar>%%~A</span>&quot;&nbsp;Call&nbsp;Set&nbsp;&quot;FtpCommand=<span class=c_pvar>%%F</span>tpCommand%%&nbsp;&quot;<span class=c_pvar>%%~A</span>&quot;&quot;</span><br>
+<span style='color=#000000'>Call:extractFileSection&nbsp;&quot;[Ftp&nbsp;Script&nbsp;1]&quot;&nbsp;&quot;-&quot;&gt;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>Rem&nbsp;Notepad&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>For&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;(%FtpCommand%)&nbsp;Do&nbsp;Echo.<span class=c_pvar>%%A</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Execute&nbsp;Ftp&nbsp;Script,&nbsp;download&nbsp;files</span></span><br>
+<span style='color=#000000'>ftp&nbsp;-i&nbsp;-s:&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>Del&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='extractFileSection'>:extractFileSection</a></span><span class=c_cmmt>&nbsp;StartMark&nbsp;EndMark&nbsp;FileName&nbsp;--&nbsp;extract&nbsp;a&nbsp;section&nbsp;of&nbsp;file&nbsp;that&nbsp;is&nbsp;defined&nbsp;by&nbsp;a&nbsp;start&nbsp;and&nbsp;end&nbsp;mark</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StartMark&nbsp;-&nbsp;start&nbsp;mark,&nbsp;use&nbsp;'...:S'&nbsp;mark&nbsp;to&nbsp;allow&nbsp;variable&nbsp;substitution</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN,OPT]&nbsp;EndMark&nbsp;&nbsp;&nbsp;-&nbsp;optional&nbsp;end&nbsp;mark,&nbsp;default&nbsp;is&nbsp;first&nbsp;empty&nbsp;line</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN,OPT]&nbsp;FileName&nbsp;&nbsp;-&nbsp;optional&nbsp;source&nbsp;file,&nbsp;default&nbsp;is&nbsp;THIS&nbsp;file</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20080219&nbsp;:$changed&nbsp;20100205&nbsp;:$categories&nbsp;ReadFile</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;Disabledelayedexpansion</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bmk=<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;emk=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;src=<span class=c_pvar>%~3</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bExtr=&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bSubs=&quot;</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%src%&quot;==&quot;&quot;&nbsp;set&nbsp;src=<span class=c_pvar>%~f0</span>&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;if&nbsp;no&nbsp;source&nbsp;file&nbsp;then&nbsp;assume&nbsp;THIS&nbsp;file</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,*&nbsp;delims=]&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('find&nbsp;/n&nbsp;/v&nbsp;&quot;&quot;&nbsp;&quot;%src%&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%emk%&quot;&nbsp;set&nbsp;&quot;bExtr=&quot;&amp;set&nbsp;&quot;bSubs=&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;defined&nbsp;bExtr&nbsp;if&nbsp;defined&nbsp;bSubs&nbsp;(call&nbsp;echo.<span class=c_pvar>%%B</span>)&nbsp;ELSE&nbsp;(echo.<span class=c_pvar>%%B</span>)</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%bmk%&quot;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;bExtr=Y&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%bmk%:S&quot;&nbsp;set&nbsp;&quot;bExtr=Y&quot;&amp;set&nbsp;&quot;bSubs=Y&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>[Ftp&nbsp;Script&nbsp;1]:S</span><br>
+<span style='color=#000000'>!Title&nbsp;Connecting...</span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Preparing...</span><br>
+<span style='color=#000000'>cd&nbsp;public_html/MyRemoteDirectory</span><br>
+<span style='color=#000000'>lcd&nbsp;c:\MyLocalDirectory</span><br>
+<span style='color=#000000'>binary</span><br>
+<span style='color=#000000'>hash</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Processing...&nbsp;%FtpCommand%</span><br>
+<span style='color=#000000'>%FtpCommand%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Disconnecting...</span><br>
+<span style='color=#000000'>disconnect</span><br>
+<span style='color=#000000'>bye</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpBatchUsingVariables'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-10-17</font></font></div>
+    <H2>FTP - Resolving Environment Variables - Creating FTP script on the fly at runtime and using variables within the FTP script</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This batch executed the FTP script embedded within the batch.  All variables in the FTP script will
+be resolved.
+<p>The <a href="DosCommandIndex.htm#FOR">FOR</a> loop extracts the FTP script into a temporary file.  It the <a href="DosCommandIndex.htm#ECHO">ECHO</a> command is 
+being <a href="DosCommandIndex.htm#CALL">CALL</a>ed for each line in order to resolve the variables.
+<p>Variables can be used within the FTP script the same way as in a batch script, including 
+any <a href="DtTipsStringManipulation.php">string manipulation</a> and command line arguments like %1 %2 %~n0 %* and so on.
+<p>All batch lines start with semicolon so that they will be ignored by the <a href="DosCommandIndex.htm#FOR">FOR</a> loop.  Semicolon
+is the default end-of-line (EOL) character used by the <a href="DosCommandIndex.htm#FOR">FOR</a> command.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>;@echo&nbsp;off</span><br>
+<span style='color=#000000'>;(for&nbsp;/f&nbsp;&quot;usebackq&nbsp;delims=&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;<span class=c_pvar>%~f0</span>&quot;)&nbsp;do&nbsp;call&nbsp;echo.<span class=c_pvar>%%A</span>)&gt;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>;ftp&nbsp;-i&nbsp;-s:&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>;GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'>!:---&nbsp;FTP&nbsp;commands&nbsp;below&nbsp;here&nbsp;---</span><br>
+<span style='color=#000000'>cd&nbsp;public_html/%COMPUTERNAME%</span><br>
+<span style='color=#000000'>binary</span><br>
+<span style='color=#000000'>hash&nbsp;on</span><br>
+<span style='color=#000000'>%*</span><br>
+<span style='color=#000000'>disconnect</span><br>
+<span style='color=#000000'>bye</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpBatch'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>FTP - Simple Single Batch - FTP script and batch in a single file</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Embed FTP script into a batch script.  Add this line at the beginning of the FTP script:</p>
+<b>@ftp -i -s:"%~f0"&GOTO:EOF</b>
+<p>The "FTP -s:ftpscript.txt" option executes a FTP script wheres "%~f0" resolved to the name of the running batch file.
+"GOTO:EOF" ends the batch script and makes sure the FTP script doesn`t run as part of the batch.
+<br>Good: You end up with only one file that contains the batch script and the FTP script combined.
+<br>Minor flaw: The batch command in the first line causes an "Invalid command." error when executed in FTP context, however the FTP execution will continue.</p>
+Features:
+<ul>
+    <li>Single file to distribute combining batch and FTP script</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ftp&nbsp;-i&nbsp;-s:&quot;<span class=c_pvar>%~f0</span>&quot;&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'>!:---&nbsp;FTP&nbsp;commands&nbsp;below&nbsp;here&nbsp;---</span><br>
+<span style='color=#000000'>lcd&nbsp;c:\MyLocalDirectory</span><br>
+<span style='color=#000000'>cd&nbsp;&nbsp;public_html/MyRemoteDirectory</span><br>
+<span style='color=#000000'>binary</span><br>
+<span style='color=#000000'>mput&nbsp;&quot;*.*&quot;</span><br>
+<span style='color=#000000'>disconnect</span><br>
+<span style='color=#000000'>bye</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>ftp&gt; @ftp -i -s:&quot;%~f0&quot;&amp;GOTO:EOF
+Invalid command.
+ftp&gt; open example.com
+User (Username:(none)):
+
+ftp&gt; !:--- FTP commands below here ---
+ftp&gt; lcd c:\MyLocalDirectory
+Local directory now c:\MyLocalDirectory.
+ftp&gt; cd  public_html/MyRemoteDirectory
+ftp&gt; binary
+ftp&gt; !: mput &quot;*.*&quot;
+ftp&gt; disconnect
+ftp&gt; bye
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpBatchUploadOnlyNewFiles'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2010-02-05</font></font></div>
+    <H2>FTP - Upload Only New Files - Ftp script to upload only files that don`t exist in remote folder, i.e. incremental upload</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This batch connects twice to the FTP server.  First time it retrieves a list of files
+on the FTP server.  Local files that are are not in this list will then be uploaded during a second 
+connection.
+<p>Note: Since all files are passed into the FTP`s MPUT command there might be a limit to the number 
+of files that can be processed at once.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFtpUploadOnlyNewFiles.bat'>BatchFtpUploadOnlyNewFiles.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br><a name='53'>53.</a><br><a name='54'>54.</a><br><a name='55'>55.</a><br><a name='56'>56.</a><br><a name='57'>57.</a><br><a name='58'>58.</a><br><a name='59'>59.</a><br><a name='60'>60.</a><br><a name='61'>61.</a><br><a name='62'>62.</a><br><a name='63'>63.</a><br><a name='64'>64.</a><br><a name='65'>65.</a><br><a name='66'>66.</a><br><a name='67'>67.</a><br><a name='68'>68.</a><br><a name='69'>69.</a><br><a name='70'>70.</a><br><a name='71'>71.</a><br><a name='72'>72.</a><br><a name='73'>73.</a><br><a name='74'>74.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@Echo&nbsp;Off</span><br>
+<span style='color=#000000'>Setlocal&nbsp;Enabledelayedexpansion</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Define&nbsp;File&nbsp;Filter,&nbsp;i.e.&nbsp;files&nbsp;with&nbsp;extension&nbsp;.txt</span></span><br>
+<span style='color=#000000'>Set&nbsp;FindStrArgs=/E&nbsp;/C:&quot;.txt&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Extract&nbsp;Ftp&nbsp;Script&nbsp;to&nbsp;create&nbsp;List&nbsp;of&nbsp;Files</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FtpCommand=ls&quot;</span><br>
+<span style='color=#000000'>Call:extractFileSection&nbsp;&quot;[Ftp&nbsp;Script&nbsp;1]&quot;&nbsp;&quot;-&quot;&gt;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>Rem&nbsp;Notepad&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Execute&nbsp;Ftp&nbsp;Script,&nbsp;collect&nbsp;File&nbsp;Names</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FileList=&quot;</span><br>
+<span style='color=#000000'>For&nbsp;/F&nbsp;&quot;Delims=&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;('&quot;Ftp&nbsp;-v&nbsp;-i&nbsp;-s:&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;|Findstr&nbsp;%FindStrArgs%&quot;')&nbsp;Do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;Set&nbsp;&quot;FileList=<span class=c_pvar>%%F</span>ileList%%&nbsp;&quot;<span class=c_pvar>%%A</span>&quot;&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Extract&nbsp;Ftp&nbsp;Script&nbsp;to&nbsp;upload&nbsp;files&nbsp;that&nbsp;don't&nbsp;exist&nbsp;in&nbsp;remote&nbsp;folder</span></span><br>
+<span style='color=#000000'>Set&nbsp;&quot;FtpCommand=mput&quot;</span><br>
+<span style='color=#000000'>For&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;(%FileList%)&nbsp;Do&nbsp;set&nbsp;&quot;Exist[&quot;<span class=c_pvar>%%~A</span>&quot;]=Y&quot;</span><br>
+<span style='color=#000000'>For&nbsp;/F&nbsp;&quot;Delims=&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;('&quot;dir&nbsp;/b&nbsp;&quot;%localdir%&quot;|Findstr&nbsp;%FindStrArgs%&quot;')&nbsp;Do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;Not&nbsp;defined&nbsp;Exist[&quot;<span class=c_pvar>%%~A</span>&quot;]&nbsp;Call&nbsp;Set&nbsp;&quot;FtpCommand=<span class=c_pvar>%%F</span>tpCommand%%&nbsp;&quot;<span class=c_pvar>%%~A</span>&quot;&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>Call:extractFileSection&nbsp;&quot;[Ftp&nbsp;Script&nbsp;1]&quot;&nbsp;&quot;-&quot;&gt;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'><span class=c_cmmt>rem&nbsp;&nbsp;Notepad&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>For&nbsp;<span class=c_pvar>%%A</span>&nbsp;In&nbsp;(%FtpCommand%)&nbsp;Do&nbsp;Echo.<span class=c_pvar>%%A</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;--&nbsp;Execute&nbsp;Ftp&nbsp;Script,&nbsp;download&nbsp;files</span></span><br>
+<span style='color=#000000'>ftp&nbsp;-i&nbsp;-s:&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>Del&nbsp;&quot;%temp%\<span class=c_pvar>%~n0</span>.ftp&quot;</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='extractFileSection'>:extractFileSection</a></span><span class=c_cmmt>&nbsp;StartMark&nbsp;EndMark&nbsp;FileName&nbsp;--&nbsp;extract&nbsp;a&nbsp;section&nbsp;of&nbsp;file&nbsp;that&nbsp;is&nbsp;defined&nbsp;by&nbsp;a&nbsp;start&nbsp;and&nbsp;end&nbsp;mark</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StartMark&nbsp;-&nbsp;start&nbsp;mark,&nbsp;use&nbsp;'...:S'&nbsp;mark&nbsp;to&nbsp;allow&nbsp;variable&nbsp;substitution</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN,OPT]&nbsp;EndMark&nbsp;&nbsp;&nbsp;-&nbsp;optional&nbsp;end&nbsp;mark,&nbsp;default&nbsp;is&nbsp;first&nbsp;empty&nbsp;line</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;[IN,OPT]&nbsp;FileName&nbsp;&nbsp;-&nbsp;optional&nbsp;source&nbsp;file,&nbsp;default&nbsp;is&nbsp;THIS&nbsp;file</span></span><br>
+<span style='color=#000000'>:$created&nbsp;20080219&nbsp;:$changed&nbsp;20100205&nbsp;:$categories&nbsp;ReadFile</span><br>
+<span style='color=#000000'>:$source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;Disabledelayedexpansion</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bmk=<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;emk=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;src=<span class=c_pvar>%~3</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bExtr=&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;bSubs=&quot;</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%src%&quot;==&quot;&quot;&nbsp;set&nbsp;src=<span class=c_pvar>%~f0</span>&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;if&nbsp;no&nbsp;source&nbsp;file&nbsp;then&nbsp;assume&nbsp;THIS&nbsp;file</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,*&nbsp;delims=]&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('find&nbsp;/n&nbsp;/v&nbsp;&quot;&quot;&nbsp;&quot;%src%&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%emk%&quot;&nbsp;set&nbsp;&quot;bExtr=&quot;&amp;set&nbsp;&quot;bSubs=&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;defined&nbsp;bExtr&nbsp;if&nbsp;defined&nbsp;bSubs&nbsp;(call&nbsp;echo.<span class=c_pvar>%%B</span>)&nbsp;ELSE&nbsp;(echo.<span class=c_pvar>%%B</span>)</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%bmk%&quot;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;bExtr=Y&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;/i&nbsp;&quot;<span class=c_pvar>%%B</span>&quot;==&quot;%bmk%:S&quot;&nbsp;set&nbsp;&quot;bExtr=Y&quot;&amp;set&nbsp;&quot;bSubs=Y&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>EXIT&nbsp;/b</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>[Ftp&nbsp;Script&nbsp;1]:S</span><br>
+<span style='color=#000000'>!Title&nbsp;Connecting...</span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Preparing...</span><br>
+<span style='color=#000000'>cd&nbsp;public_html/MyRemoteDirectory</span><br>
+<span style='color=#000000'>lcd&nbsp;c:\MyLocalDirectory</span><br>
+<span style='color=#000000'>binary</span><br>
+<span style='color=#000000'>hash</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Processing...&nbsp;%FtpCommand%</span><br>
+<span style='color=#000000'>%FtpCommand%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>!Title&nbsp;Disconnecting...</span><br>
+<span style='color=#000000'>disconnect</span><br>
+<span style='color=#000000'>bye</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.FtpBatchLoginSharing'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-12-06</font></font></div>
+    <H2>FTP Scripts Sharing Login Info - Manage the FTP login separately from your FTP scripts</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>If you have multiple FTP scripts that all use the same login information to your FTP site then you may 
+wish to manage the login information separately from your FTP scripts in a single place.  That way 
+if the username, password or hostname for the FTP connection changes you only need to edit a single place 
+instead of having to edit all FTP scripts one by one.
+<p>This automatic login script (also described in detail earlier) can be used to execute different FTP scripts
+that share the same login information stored within the batch file. 
+<p>Example: <b>FtpLogin.bat script1.ftp</b>
+<p><b>Note:</b> The FTP scripts passed into the batch must have the login sequence removed.
+<p><b>Note:</b> The FTP script executes even if the connection sequence fails potentially causing `Not connected` 
+and other errors.  This is no different from regularly executing <a href="DosCommandIndex.htm#FTP">FTP</a> with -s option.
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/FtpLoginSharing.bat'>FtpLoginSharing.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@type&nbsp;%1|ftp&nbsp;-i&nbsp;-s:&quot;<span class=c_pvar>%~f0</span>&quot;&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>open&nbsp;example.com</span><br>
+<span style='color=#000000'>username</span><br>
+<span style='color=#000000'>password</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc134470226'></a>
+    <a name='Interfacing.Sql'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>OSQL.EXE - Run SQL script from DOS Batch - SQL script and dos batch script in one file, the One-File Solution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Embedding SQL script within a batch script is just as easy. The following batch script 
+executes itself in SQL context.  The trick is the GOTO command in the first line of the script. 
+When executing GOTO START in batch context than the command processor will jump to the label ":START" 
+and execute the batch script.  The batch script will then run the OSQL.EXE using the batch file itself 
+as SQL file argument to be executed.
+When subsequently executing the GOTO START line in SQL context, the query language processor will jump 
+to the label "START:" and execute the SQL queries.
+In fact the file can be opened and executed in Query Analyzer as is, since the batch script in the file looks 
+like a comment to the query language processor.</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/Batch4SQL.bat'>Batch4SQL.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>GOTO&nbsp;START</span><br>
+<span style='color=#000000'>--&nbsp;DOS&nbsp;jumps&nbsp;to&nbsp;the&nbsp;':START'&nbsp;label</span><br>
+<span style='color=#000000'>--&nbsp;SQL&nbsp;jumps&nbsp;to&nbsp;the&nbsp;'START:'&nbsp;label</span><br>
+<span style='color=#000000'>--&nbsp;Source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>/*&nbsp;Begin&nbsp;of&nbsp;SQL&nbsp;comment,&nbsp;this&nbsp;makes&nbsp;the&nbsp;BATCH&nbsp;script&nbsp;invisible&nbsp;for&nbsp;SQL</span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;BATCH&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_labl><a name='START'>:START</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>CLS</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>OSQL.EXE&nbsp;-n&nbsp;-E&nbsp;-w&nbsp;65536&nbsp;-d&nbsp;NORTHWIND&nbsp;-i&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>PAUSE&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>*/</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>--&nbsp;SQL&nbsp;starts&nbsp;below&nbsp;here</span><br>
+<span style='color=#000000'>START:</span><br>
+<span style='color=#000000'>GO</span><br>
+<span style='color=#000000'>SELECT&nbsp;*&nbsp;FROM&nbsp;AUTHOR</span><br>
+<span style='color=#000000'>GO</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc134470227'></a>
+    <a name='Interfacing.Sql2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>OSQL.EXE - Run SQL script from DOS Batch, passing parameters - Run SQL scripts with parameters passed in from the batch script</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>Now we can embed SQL queries into a batch file.  But how can we pass arguments from the batch script into SQL?
+This can be done using a temporary table.  Temporary tables live as long as the connection to the SQL Server.
+But how can we fill a temporary table with runtime data and execute the embedded SQL script without creating two separate SQL Server connections by calling OSQL.EXE twice?
+The trick is that OSQL allows to use the -i and -q option at the same time whereas:
+<ul>
+    <li>-q specifies a query string to be executed</li>
+    <li>-i specifies a filename with SQL syntax to be executed</li>
+</ul>
+Both the query string and the SQL file will be executed using the same Server connection.  Some testing shows that the query string -q will always be executed before the -I SQL file, which allows us to use a query string to set up a temporary table.
+</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/Batch4SQL2.bat'>Batch4SQL2.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>GOTO&nbsp;START</span><br>
+<span style='color=#000000'>--&nbsp;DOS&nbsp;jumps&nbsp;to&nbsp;the&nbsp;':START'&nbsp;label</span><br>
+<span style='color=#000000'>--&nbsp;SQL&nbsp;jumps&nbsp;to&nbsp;the&nbsp;'START:'&nbsp;label</span><br>
+<span style='color=#000000'>--&nbsp;Source&nbsp;https://www.dostips.com</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>/*&nbsp;Begin&nbsp;of&nbsp;SQL&nbsp;comment,&nbsp;this&nbsp;makes&nbsp;the&nbsp;BATCH&nbsp;script&nbsp;invisible&nbsp;for&nbsp;SQL</span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;BATCH&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_labl><a name='START'>:START</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>CLS</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;/p&nbsp;AuthorName=Author&nbsp;Name:</span><br>
+<span style='color=#000000'>set&nbsp;/p&nbsp;AuthorCity=Author&nbsp;City:</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.-------------------------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.Execute&nbsp;THIS&nbsp;file&nbsp;in&nbsp;SQL&nbsp;context&nbsp;transmitting&nbsp;arguments&nbsp;per&nbsp;temp&nbsp;table</span></span><br>
+<span style='color=#000000'>set&nbsp;Args=</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.--BEGIN&nbsp;ARGS&nbsp;SECTION&nbsp;------------------</span></span><br>
+<span style='color=#000000'>set&nbsp;Args=%Args%&nbsp;INSERT&nbsp;#ArgsTable&nbsp;VALUES&nbsp;('AuthorName','%AuthorName%')</span><br>
+<span style='color=#000000'>set&nbsp;Args=%Args%&nbsp;INSERT&nbsp;#ArgsTable&nbsp;VALUES&nbsp;('AuthorCity','%AuthorCity%')</span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.--END&nbsp;&nbsp;&nbsp;ARGS&nbsp;SECTION&nbsp;------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;Args=&nbsp;-q&nbsp;&quot;SET&nbsp;NOCOUNT&nbsp;ON&nbsp;CREATE&nbsp;TABLE&nbsp;#ArgsTable(Arg&nbsp;char(16)&nbsp;PRIMARY&nbsp;KEY,&nbsp;Val&nbsp;char(32))&nbsp;%Args%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>OSQL.EXE&nbsp;-n&nbsp;-E&nbsp;-w&nbsp;65536&nbsp;-d&nbsp;NORTHWIND&nbsp;%Args%&nbsp;-i&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>PAUSE&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>*/</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>--&nbsp;SQL&nbsp;starts&nbsp;below&nbsp;here</span><br>
+<span style='color=#000000'>START:</span><br>
+<span style='color=#000000'>GO</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>DECLARE&nbsp;@AuthorName&nbsp;varchar(128)</span><br>
+<span style='color=#000000'>DECLARE&nbsp;@AuthorCity&nbsp;varchar(128)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>--Set&nbsp;defaults&nbsp;for&nbsp;values&nbsp;as&nbsp;needed</span><br>
+<span style='color=#000000'>SET&nbsp;@AuthorName&nbsp;=&nbsp;''</span><br>
+<span style='color=#000000'>SET&nbsp;@AuthorCity&nbsp;=&nbsp;''</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>--Copy&nbsp;data&nbsp;from&nbsp;temporary&nbsp;table&nbsp;into&nbsp;variables</span><br>
+<span style='color=#000000'>IF&nbsp;EXISTS&nbsp;(SELECT&nbsp;name,&nbsp;type&nbsp;FROM&nbsp;tempdb..sysobjects&nbsp;WHERE&nbsp;name&nbsp;like&nbsp;'#ArgsTable_%'&nbsp;AND&nbsp;type&nbsp;=&nbsp;'U')</span><br>
+<span style='color=#000000'>BEGIN</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;SELECT&nbsp;@AuthorName=Val&nbsp;FROM&nbsp;#ArgsTable&nbsp;&nbsp;WHERE&nbsp;Arg='AuthorName'</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;SELECT&nbsp;@AuthorCity=Val&nbsp;FROM&nbsp;#ArgsTable&nbsp;&nbsp;WHERE&nbsp;Arg='AuthorCity'</span><br>
+<span style='color=#000000'>END</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>print&nbsp;@AuthorName</span><br>
+<span style='color=#000000'>print&nbsp;@AuthorCity</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>GO</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc134470224'></a>
+    <a name='Interfacing.Perl'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Perl - Perl Script within a DOS Batch - Perl script and batch in a single file</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>It`s nice not to have to type <b>"perl -s Batch4Parl.pl"</b> into the command line and rather being able to just double click a Perl script in Explorer.  The trick of renaming the Perl .pl to a batch .bat file and wrapping a batch script around the Perl script is well known under Perl monks.  However the solution I have seen so far needed batch code before and after the Perl script where as the solution presented below only needs some lines of DOS at the top.  The added DOS script is generic and works independent from the name of the file.</p>
+<p>When running the batch the DOS command interpreter will read the first lines and execute the file itself in Perl context.</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/Batch4Perl.bat'>Batch4Perl.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@<span class=c_cmmt>rem&nbsp;=&nbsp;'source&nbsp;https://www.dostips.com</span></span><br>
+<span style='color=#000000'>@CD/d&quot;<span class=c_pvar>%~dp0</span>&quot;&amp;perl&nbsp;-s&nbsp;&quot;<span class=c_pvar>%~nx0</span>&quot;&nbsp;%*&amp;Exit/b&amp;:';</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>#perl&nbsp;script&nbsp;starts&nbsp;below&nbsp;here</span><br>
+<span style='color=#000000'>print&nbsp;'Hi&nbsp;there!&nbsp;&nbsp;DOS&nbsp;rocks!\n'</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc134470225'></a>
+    <a name='Interfacing.Perl2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Perl Script within a DOS Batch with delayed exit - Perl script and batch in a single file</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This example works just as the previews one but will wait 4 seconds before the application finally closes. 
+This is just enough time to inspect the screen output before the window vanishes.
+The delay can probably be done much easier in Perl, but somebody just starting on Perl might find this still useful.</p></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/Batch4Perl2.bat'>Batch4Perl2.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@<span class=c_cmmt>rem&nbsp;=&nbsp;'Perl,&nbsp;ccperl&nbsp;will&nbsp;read&nbsp;this&nbsp;as&nbsp;an&nbsp;array&nbsp;of&nbsp;assignment&nbsp;&amp;&nbsp;skip&nbsp;this&nbsp;block</span></span><br>
+<span style='color=#000000'>@CD&nbsp;/d&nbsp;&quot;<span class=c_pvar>%~dp0</span>&quot;</span><br>
+<span style='color=#000000'>@perl&nbsp;-s&nbsp;&quot;<span class=c_pvar>%~nx0</span>&quot;&nbsp;%*</span><br>
+<span style='color=#000000'>@FOR&nbsp;/L&nbsp;<span class=c_pvar>%%c</span>&nbsp;in&nbsp;(4,-1,1)&nbsp;do&nbsp;@(TITLE&nbsp;<span class=c_pvar>%~nx0</span>&nbsp;-&nbsp;<span class=c_pvar>%%c</span>s&nbsp;to&nbsp;close&nbsp;&amp;&nbsp;ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1000&nbsp;127.0.0.1&nbsp;&gt;NUL)</span><br>
+<span style='color=#000000'>@TITLE&nbsp;Press&nbsp;any&nbsp;key&nbsp;to&nbsp;close&nbsp;the&nbsp;window&amp;ECHO.&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>@<span class=c_cmmt>rem&nbsp;';</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>#perl&nbsp;script&nbsp;starts&nbsp;below&nbsp;here</span><br>
+<span style='color=#000000'>print&nbsp;'Hi&nbsp;there!&nbsp;&nbsp;DOS&nbsp;rocks!\n'</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc145951132'></a>
+    <a name='Batch.SimpleTemplate'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Simple Batch Template - Template with simple init and exit</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The function template can be used as starting point for a new batch.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchSimple.bat'>BatchSimple.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;your&nbsp;code&nbsp;goes&nbsp;here</span></span><br>
+<span style='color=#000000'>echo.Hello&nbsp;World</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;End&nbsp;of&nbsp;application</span></span><br>
+<span style='color=#000000'>ECHO.&amp;ECHO.Press&nbsp;any&nbsp;key&nbsp;to&nbsp;end&nbsp;the&nbsp;application.</span><br>
+<span style='color=#000000'>PAUSE&gt;NUL&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f1463b8e91ecd',t:'MTc2OTkyNDA2NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

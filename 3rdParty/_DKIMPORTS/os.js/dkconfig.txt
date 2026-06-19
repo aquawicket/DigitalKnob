@@ -1,0 +1,5 @@
+############ OS.js ############
+# https://github.com/os-js/OS.js.git
+# https://github.com/os-js/OS.js/archive/0aa874455e1ca5a31e7be193b3be14080300c2c1.zip
+
+OS.js_Import=https://github.com/os-js/OS.js/archive/0aa874455e1ca5a31e7be193b3be14080300c2c1.zip

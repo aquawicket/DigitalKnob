@@ -1,0 +1,4 @@
+############ libandroid-spawn ############
+# https://github.com/termux/termux-packages.git
+# https://github.com/termux/termux-packages/blob/master/packages/libandroid-spawn/build.sh
+

@@ -30,7 +30,7 @@ function Global:dk_chdir() {
 	${global:DKPWD} = "${_path_}";
 	set-location "${DKPWD}";
 	
-	###### output ######
+	###### return ######
 	${global:dk_chdir} = ${dk_chdir};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_chdir};

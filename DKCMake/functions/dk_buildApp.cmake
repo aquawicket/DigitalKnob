@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -27,19 +28,19 @@ function(dk_buildApp)
 	
 	dk_validate(DKCPP_APPS_DIR "dk_DKBRANCH_DIR()")
 	if(("${Target_Type}" STREQUAL "Debug") OR ("${Target_Type}" STREQUAL "All"))
-		if(EXISTS "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug/CMakeCache.txt")
-			execute_process(COMMAND ${cmake_exe} --build "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug" --verbose) #--config Debug
-		elseif(EXISTS "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt")
-			execute_process(COMMAND ${cmake_exe} --build "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --verbose) #--config Debug
+		if(EXISTS "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug/CMakeCache.txt")
+			execute_process(COMMAND ${cmake_exe} --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Debug" --verbose) #--config Debug
+		elseif(EXISTS "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt")
+			execute_process(COMMAND ${cmake_exe} --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --verbose) #--config Debug
 		else()
 			dk_error("Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Debug or ${Target_App}/${Target_Tuple}")
 		endif()
 	endif()
 	if(("${Target_Type}" STREQUAL "Release") OR ("${Target_Type}" STREQUAL "All"))
-		if(EXISTS "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release/CMakeCache.txt")
-			execute_process(COMMAND ${cmake_exe} --build "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release" --config Release --verbose)
-		elseif(EXISTS "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt")
-			execute_process(COMMAND ${cmake_exe} --build "$ENV{DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --config Release --verbose)
+		if(EXISTS "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release/CMakeCache.txt")
+			execute_process(COMMAND ${cmake_exe} --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/Release" --config Release --verbose)
+		elseif(EXISTS "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}/CMakeCache.txt")
+			execute_process(COMMAND ${cmake_exe} --build "${DKCPP_APPS_DIR}/${Target_App}/${Target_Tuple}" --config Release --verbose)
 		else()
 			dk_error("Could not find CMakeCache.txt in ${Target_App}/${Target_Tuple}/Release or ${Target_App}/${Target_Tuple}")
 		endif()

@@ -1,28 +1,34 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_echoAlign(align text)
-::#
-::#
+rem ##################################################################################
+rem # dk_echoAlign(align text)
+rem #
+rem #
 :dk_echoAlign
 %setlocal%
-	%dk_call% dk_debugFunc 2 
 
-    if "!DE!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
+    if "!!" neq "" %dk_call% dk_error "%__FUNCTION__% requires delayed expansion"
     (set^ tmp=%~2)
     if defined tmp (
         set "len=1"
         for %%p in (4096 2048 1024 512 256 128 64 32 16 8 4 2 1) do (
-            if "!DE!" equ "" if "!tmp:~%%p,1!" neq "" (
+            if "!!" equ "" if "!tmp:~%%p,1!" neq "" (
                 set /a "len+=%%p"
                 set "tmp=!tmp:~%%p!"
             )
-            if "!DE!" neq "" if "%tmp:~%%p,1%" neq "" (
+            if "!!" neq "" if "%tmp:~%%p,1%" neq "" (
                 set /a "len+=%%p"
                 call set "tmp=%%tmp:~%%p%%" &rem FIXME: remove the need for call here
             )
@@ -40,25 +46,24 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if /i "%1" equ "center" (
         set /a offsetnum=^(%cols% / 2^) - ^(%len% / 2^)
         set "offset="
-        if "!DE!" equ "" for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
-        if "!DE!" neq "" for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
+        if "!!" equ "" for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
+        if "!!" neq "" for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
     ) else if /i "%1" equ "right" (
         set /a offsetnum=^(%cols% - %len%^)
         set "offset="
-        if "!DE!" equ "" for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
-        if "!DE!" neq "" for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
+        if "!!" equ "" for /l %%i in (1 1 !offsetnum!) do set "offset=!offset! "
+        if "!!" neq "" for /l %%i in (1 1 %offsetnum%) do call set "offset=%%offset%% "
     )
 
-    echo(%offset%%~2
+    echo.%offset%%~2
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_echoAlign center "centered text"
     %dk_call% dk_echoAlign right "right aligned text"
@@ -66,11 +71,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     set "prep_text="
 
     for /l %%Z in (1 1 7) do (
-        if "!DE!" equ "" set "prep_text=!prep_text!aR"
-        if "!DE!" equ "" %dk_call% dk_echoAlign center "!prep_text!"
+        if "!!" equ "" set "prep_text=!prep_text!aR"
+        if "!!" equ "" %dk_call% dk_echoAlign center "!prep_text!"
        
-        if "!DE!" neq "" call set "prep_text=%%prep_text%%aR"
-        if "!DE!" neq "" %dk_call% dk_echoAlign center "%%prep_text%%"
+        if "!!" neq "" call set "prep_text=%%prep_text%%aR"
+        if "!!" neq "" %dk_call% dk_echoAlign center "%%prep_text%%"
     )
-    echo(
+    echo.
 %endfunction%

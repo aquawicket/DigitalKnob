@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 # FIXME: This is not fully functional. It take code from dk_getParameterValue() 
@@ -24,17 +25,17 @@ macro(dk_getParameterValues)
 	dk_debugFunc()
 	
 	###### ARGV - dk_getParameter args ######
-	#message("ARGV  = ${ARGV}")
+	#dk_debug("ARGV  = ${ARGV}")
 	
 	###### ARGN - dk_getParameter extra args ######
-	#message("ARGN  = ${ARGN}")
+	#dk_debug("ARGN  = ${ARGN}")
 	
 	###### PARGV - Parent Function args ######
 	unset(PARGV)
 	foreach(arg IN LISTS ARGV)
 		list(APPEND PARGV ${arg})
 	endforeach()
-	#message("PARGV = ${PARGV}")
+	#dk_debug("PARGV = ${PARGV}")
 
 	#########################################
 	
@@ -78,7 +79,7 @@ endfunction()
 function(TEST_dk_getParameter input1)
 	dk_debugFunc(1 99)
 	
-	message("TEST_dk_getParameter(${ARGV})")
+	dk_debug("TEST_dk_getParameter(${ARGV})")
 	set(OPTION1 "UNDEFINED")
 	set(OPTION2 "UNDEFINED")
 	set(OPTION3 "UNDEFINED")
@@ -89,12 +90,12 @@ function(TEST_dk_getParameter input1)
 	dk_getParameterValues(OPTION3)
 	dk_getParameterValues(OPTION4)
 	
-	message("")
-	message("######## AFTER ##################")
-	message("ARGV = ${ARGV}")
-	message("ARGN = ${ARGN}")
-	message("OPTION1 = ${OPTION1}")
-	message("OPTION2 = ${OPTION2}")
-	message("OPTION3 = ${OPTION3}")
-	message("OPTION4 = ${OPTION4}")
+	dk_debug("")
+	dk_debug("######## AFTER ##################")
+	dk_debug("ARGV = ${ARGV}")
+	dk_debug("ARGN = ${ARGN}")
+	dk_debug("OPTION1 = ${OPTION1}")
+	dk_debug("OPTION2 = ${OPTION2}")
+	dk_debug("OPTION3 = ${OPTION3}")
+	dk_debug("OPTION4 = ${OPTION4}")
 endfunction()

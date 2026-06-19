@@ -1,0 +1,5 @@
+############ pofodo ############
+# http://podofo.sourceforge.net
+# https://github.com/mekentosj/podofo.git
+
+pofodo_Import=http://sourceforge.net/projects/podofo/files/podofo/0.9.7/podofo-0.9.7.tar.gz

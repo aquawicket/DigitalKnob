@@ -16,7 +16,7 @@ function Global:dk_Target_App() {
 	} else {
 		### read DKBuilder.cache file ###
 		if(dk_call dk_pathExists "${DKCACHE_DIR}/DKBuilder.cache"){
-			dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache"
+			dk_call dk_fileVariables "${DKCACHE_DIR}/DKBuilder.cache"
 		}
 		
 		### get a list of the directories in DKCpp/apps ###

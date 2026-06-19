@@ -1,1 +1,4 @@
-EMSCRIPTEN-TARGZ_Import=https://github.com/mmore500/emscripten-targz/archive/da05a1a8.zip
+############ emscripten-targz ############
+# https://github.com/mmore500/emscripten-targz/archive/da05a1a8.zip
+
+emscripten-targz_Import=https://github.com/mmore500/emscripten-targz/archive/da05a1a8.zip

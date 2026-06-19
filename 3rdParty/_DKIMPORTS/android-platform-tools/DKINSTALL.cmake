@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -17,10 +18,7 @@ include_guard()
 # https://mirrors.cloud.tencent.com/AndroidSDK/
 # https://github.com/lzhiyong/android-sdk-tools
 
-dk_depend(android-sdk)
-
-
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(android-sdk "dk_depend(android-sdk)")
 
 if(Windows_Host)
 	dk_import(${android-platform-tools_Windows_Import}	INSTALL_PATH 	${android-sdk}/platform-tools)
@@ -44,8 +42,8 @@ elseif(Android_Host)
 
 	## Repackage Gradle's aapt2.jar with termux version of aapt2
 	if(NOT GRADLE_USER_HOME)
-		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-		dk_set(GRADLE_USER_HOME $ENV{DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
+		dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+		dk_set(GRADLE_USER_HOME ${DKDOWNLOAD_DIR}/.gradle) #TODO: move this into _DKIMPORTS as its own dependency
 	endif()
 	dk_set(AAPT2 ${GRADLE_USER_HOME}/caches/modules-2/files-2.1/com.android.tools.build/aapt2/7.0.3-7396180/942684a205d274f6b23f6d066cafcc12a17ce9ff)
 	if(EXISTS ${AAPT2}/aapt2-7.0.3-7396180-linux.jar)

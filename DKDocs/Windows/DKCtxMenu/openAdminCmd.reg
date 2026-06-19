@@ -1,0 +1,34 @@
+Windows Registry Editor Version 5.00
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHereAsAdmin]
+@="command"
+"Extended"=-
+"Icon"="imageres.dll,-5324"
+
+[HKEY_CLASSES_ROOT\Directory\shell\OpenCmdHereAsAdmin\command]
+@="cmd /c echo|set/p=\"%L\"|powershell -NoP -W 1 -NonI -NoL \"SaPs 'cmd' -Args '/c \"\"\"cd /d',$([char]34+$Input+[char]34),'^&^& start /b cmd.exe\"\"\"' -Verb RunAs\""
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHereAsAdmin]
+@="command"
+"Extended"=-
+"Icon"="imageres.dll,-5324"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHereAsAdmin\command]
+@="cmd /c echo|set/p=\"%V\"|powershell -NoP -W 1 -NonI -NoL \"SaPs 'cmd' -Args '/c \"\"\"cd /d',$([char]34+$Input+[char]34),'^&^& start /b cmd.exe\"\"\"' -Verb RunAs\""
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHereAsAdmin]
+@="command"
+"Extended"=-
+"Icon"="imageres.dll,-5324"
+
+[HKEY_CLASSES_ROOT\Drive\shell\OpenCmdHereAsAdmin\command]
+@="cmd /c echo|set/p=\"%L\"|powershell -NoP -W 1 -NonI -NoL \"SaPs 'cmd' -Args '/c \"\"\"cd /d',$([char]34+$Input+[char]34),'^&^& start /b cmd.exe\"\"\"' -Verb RunAs\""
+
+[-HKEY_CLASSES_ROOT\LibraryFolder\background\shell\OpenCmdHereAsAdmin]
+
+; To allow mapped drives to be available in command prompt
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableLinkedConnections"=dword:00000001
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

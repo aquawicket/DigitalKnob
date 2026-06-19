@@ -1,1 +1,5 @@
-EMBED_Import=https://github.com/MKlimenko/embed/archive/refs/heads/master.zip
+############ embed ############
+# https://github.com/MKlimenko/embed.git
+# https://github.com/MKlimenko/embed/archive/2f9a692be2f1ceb23748807118e3ae83c6521ac2.zip
+
+embed_Import=https://github.com/MKlimenko/embed/archive/2f9a692be2f1ceb23748807118e3ae83c6521ac2.zip

@@ -1,0 +1,5 @@
+############ tinyfilemanager ############
+# https://github.com/prasathmani/tinyfilemanager/archive/dd2e22781badf48b041643c5b2e428dd7965405f.zip
+
+tinyfilemanager_Import=https://github.com/prasathmani/tinyfilemanager/archive/dd2e22781badf48b041643c5b2e428dd7965405f.zip
+

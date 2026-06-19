@@ -1,0 +1,49 @@
+#!/bin/sh
+echo '*** hooks/post-receive called ***'
+
+# https://stackoverflow.com/a/14670278
+
+#echo "PWD = '${PWD}'"
+
+branch=Development
+#echo "branch = '${branch}'"
+
+if [ "$(basename ${PWD})" = "hooks" ]; then
+	repo_dir="$(dirname ${PWD})"
+else
+	repo_dir="${PWD}"
+fi
+#echo "repo_dir = '${repo_dir}'"
+
+dk_dir="$(dirname ${repo_dir})"
+#echo "dk_dir = '${dk_dir}'"
+
+#echo "cd ${repo_dir}"
+cd "${repo_dir}"
+echo "PWD = '${PWD}'"
+
+#echo "HEAD=`cat refs/heads/${branch}`"
+HEAD=`cat refs/heads/${branch}`
+
+#echo "mkdir -p ${dk_dir}/${branch}"
+mkdir -p "${dk_dir}/${branch}"
+
+# https://stackoverflow.com/questions/4541300/export-only-modified-and-added-files-with-folder-structure-in-git
+# https://stackoverflow.com/a/57670904
+currentID=$(git rev-parse --short HEAD)
+echo "currentID = '${currentID}'"
+if [ -e "${dk_dir}/${branch}/commit-id" ]; then
+	lastID=$(<"${dk_dir}/${branch}/commit-id")
+	echo "lastID = '${lastID}'"
+	echo "##### Exporting Changed Files #####"
+	echo "$(git diff-tree -r --no-commit-id --name-only --diff-filter=ACMRT HEAD ${lastID})"
+	echo "###################################"
+	git archive HEAD $(git diff-tree -r --no-commit-id --name-only --diff-filter=ACMRT HEAD ${lastID} | sed "s/ /\xA0/g") | tar -v -x -C "${dk_dir}/${branch}" && echo "$(git rev-parse --short HEAD)" > "${dk_dir}/${branch}/commit-id" || echo "FAILED"
+else
+	echo "##### Exporting All Files #####"
+	echo "*.*"
+	echo "###################################"
+	git archive HEAD | tar -v -x -C "${dk_dir}/${branch}" && echo "$(git rev-parse --short HEAD)" > "${dk_dir}/${branch}/commit-id" || echo "FAILED"
+fi
+
+echo '*** hooks/post-receive done ***'

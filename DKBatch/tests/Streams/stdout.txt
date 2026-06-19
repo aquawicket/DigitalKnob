@@ -1,0 +1,9 @@
+
+Pinging 8.8.8.8 with 32 bytes of data:
+General failure.
+General failure.
+General failure.
+General failure.
+
+Ping statistics for 8.8.8.8:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),

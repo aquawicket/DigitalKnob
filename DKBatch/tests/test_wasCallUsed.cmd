@@ -1,21 +1,21 @@
-:: https://stackoverflow.com/a/43184105
+rem  https://stackoverflow.com/a/43184105
 
 @echo off
 
-:: Check if this is the initial invocation or we have already determined how the batch file was started
-:: If already tested save method, remove test variable and goto main
+rem  Check if this is the initial invocation or we have already determined how the batch file was started
+rem  If already tested save method, remove test variable and goto main
 if defined __callTest__ (
     set "startMethod=%__callTest__%"
     set "__callTest__="
     goto :main
 )
 
-:: Initial invocation - Test routine
+rem  Initial invocation - Test routine
 
-:: Cancel current batch context and check if the new context is
-::   - batch (there was a call somewhere)
-::   - command line (no call)
-:: Once the invocation method is determined, restart the current batch
+rem  Cancel current batch context and check if the new context is
+rem    - batch (there was a call somewhere)
+rem    - command line (no call)
+rem  Once the invocation method is determined, restart the current batch
 setlocal enableextensions disabledelayedexpansion
 call :getCurrentFile _f0
 (
@@ -45,7 +45,7 @@ call :getCurrentFile _f0
 %endfunction%
 
 
-:: Main batch code
+rem  Main batch code
 :main
     setlocal enableextensions disabledelayedexpansion
     echo Method invocation is [ %startMethod% ]

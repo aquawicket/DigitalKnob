@@ -34,5 +34,5 @@ function Global:dk_quickAccessPin() {
 function Global:DKTEST() {
 	dk_debugFunc 0;
 	
-	dk_call dk_quickAccessPin("C:/Users/Administrator/DigitalKnob");
+	dk_call dk_quickAccessPin("${ENV:USERPROFILE}/Digital Knob");
 }

@@ -20,7 +20,7 @@ dk_DKBRANCH_DIR = function dk_DKBRANCH_DIR_f(){
 
 	//dk_depend("dk_assertPath"); dk_assertPath(DKBRANCH_DIR);
 	
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = DKBRANCH_DIR;
 	} else {

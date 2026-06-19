@@ -1,4 +1,4 @@
 ############ ant ############
 # https://github.com/apache/ant.git
 
-ant_Import=https://github.com/apache/ant/archive/146baef.zip
+ant_Import=https://github.com/apache/ant/archive/146baefac2d0d1e12fe86ee5215317a4bcb1ff9e.zip

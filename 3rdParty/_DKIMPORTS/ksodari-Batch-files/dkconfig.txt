@@ -1,1 +1,5 @@
-KSODARI-BATCH-FILES_Import=https://github.com/ksodari/Batch-files/archive/refs/heads/master.zip
+############ ksodari-Batch-files ############
+# https://github.com/ksodari/Batch-files.git
+# https://github.com/ksodari/Batch-files/archive/d76b6b6bd183016a19b0e9088917f6dd2fbf9047.zip
+
+ksodari-Batch-files_Import=https://github.com/ksodari/Batch-files/archive/d76b6b6bd183016a19b0e9088917f6dd2fbf9047.zip

@@ -1,47 +1,68 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_callFileLabel(batch_file label)
-::#
-::#
+rem ############################################################################
+rem # dk_callFileLabel(batch_file, :label, ...args)
+rem #
+rem #
 :dk_callFileLabel
 %setlocal%
-	%dk_call% dk_debugFunc 2
 
 	set "_file_=%~1"
+	set "_name_=%~n1"
 	set "_label_=%~2"
+	set "_label_=:%_label_::=%"
+	%dk_call% dk_allButFirst2Args %*
+	set _args_=%dk_allButFirst2Args%
 	
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	echo @echo off > 		"%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-	echo call %_label_% >> 	"%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-	echo %_label_% >> 		"%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-	echo "%_file_%" >> 		"%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-
-	%dk_call% "%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-	%dk_call% dk_delete "%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
-
+	
+	%dk_call% dk_fileContains "%_file_%" "%_label_%" || (
+		%dk_call% dk_error "_file_:'%_file_%' does NOT contain _label_:'%_label_%'"
+		%return%
+	)
+	
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+	set "dk_callFileLabel_TEMP=%DKCACHE_DIR%/dk_callFileLabel_TEMP.cmd"
+	
+	(
+		echo.@echo off
+		echo.
+		echo.call %_label_%
+		echo.exit /b %%errorlevel%%
+		echo.
+		echo.%_label_%
+		echo.	"%_file_:/=\%" %_args_%
+		echo.%%endfunction%%
+		echo.
+	) > "%dk_callFileLabel_TEMP%"
+	
+	call "%dk_callFileLabel_TEMP:/=\%"
+	rem del "%dk_callFileLabel_TEMP:/=\%"
 %endfunction%
 
 
 
 
 
-
-
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_callFileLabel "C:\Users\Administrator\DigitalKnob\Development\DKBatch\functions\dk_debug.cmd" ":DKTEST"
+	echo calling dk_debug.cmd :DKTEST. . .
+	%dk_call% dk_callFileLabel "C:\Users\Administrator\Digital Knob\Development\DKBatch\functions\dk_debug.cmd" ":DKTEST"
+	
+	echo calling dk_debug.cmd :dk_debug. . .
+	%dk_call% dk_callFileLabel "C:\Users\Administrator\Digital Knob\Development\DKBatch\functions\dk_debug.cmd" ":dk_debug" "test dk_debug string"
 %endfunction%
 

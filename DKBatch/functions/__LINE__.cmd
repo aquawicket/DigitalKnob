@@ -1,42 +1,48 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# __LINE__(frame)
-::#
+rem ############################################################################
+rem # __LINE__(frame)
+rem #
 :__LINE__
 %setlocal%
-    %dk_call% dk_debugFunc 0 1
 
-    if "%~1" equ "" (set "_FRAME_=0") else (set "_FRAME_=%~1")
-    ::set /a _FRAME_+=1
-	::%dk_call% dk_return "%BATCH_LINENO[%_FRAME_%]%"
+    if "%_FRAME_%" equ "" (set "_FRAME_=%~1")
+	if "%_FRAME_%" equ "" (set "_FRAME_=0")
+    rem set /a _FRAME_+=1
+	rem %dk_call% dk_return "%BATCH_LINENO[%_FRAME_%]%"
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-    ::prepareLineNumbers
-	set "JREPL=%DKBATCH_DIR%\3rdParty\JREPL.BAT"
+    rem prepareLineNumbers
+	set "JREPL=%DKBATCH_DIR%/3rdParty/JREPL.BAT"
 	if NOT EXIST %JREPL% %dk_call% dk_error "__LINE__ requires JREPL.BAT"
     >nul 2>nul (
-	  call %JREPL% "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f0" /o "%~f0.new"
-      fc /b "%~f0" "%~f0.new" && del "%~f0.new" || move /y "%~f0.new" "%~f0"
+		call %JREPL% "(\x25#=\x25)\d*(\x25=#\x25)" "$1+ln+$2" /j /f "%~f0" /o "%~f0.new"
+		fc /b "%~f0" "%~f0.new" && del "%~f0.new" || move /y "%~f0.new" "%~f0"
     )
 
-    echo line %#=%34%=#%
-    echo line %#=%35%=#%
+    echo line %#=%41%=#%
+    echo line %#=%42%=#%
 
     for %%G in ( 1 2 3) DO (
-       echo Within loop iteration %%G: line %#=%38%=#%
-       echo Within loop iteration %%G: line %#=%39%=#%
+       echo Within loop iteration %%G: line %#=%45%=#%
+       echo Within loop iteration %%G: line %#=%46%=#%
     )
 %endfunction%

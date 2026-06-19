@@ -1,50 +1,55 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_newline()
-::#
-::#    creates a newline variable assigned to %\n%
-::#
+rem ################################################################################
+rem # dk_newline()
+rem #
+rem #    creates a newline variable assigned to %\n%
+rem #
 :dk_newline
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-:: ###### METHOD A:  work with !\n!, Can be quoted or unquoted ######
+rem ###### METHOD A:  work with !\n!, Can be quoted or unquoted ######
 endlocal & (set \n=^
 %= This creates an escaped Line Feed - DO NOT ALTER =%
 )
 
-:: ###### METHOD B:  only works with %\n% (unquoted) ###
-:: ::DO NOT ALTER THE EMPTY LINES BELOW
-:: set NLM=^
-::
-::
-:: set \n=^^^%NLM%%NLM%^%NLM%%NLM%
-:: ::DO NOT ALTER THE EMPTY LINES ABOVE
+rem ###### METHOD B:  only works with %\n% (unquoted) ###
+rem ::DO NOT ALTER THE EMPTY LINES BELOW
+rem set NLM=^
+rem
+rem
+rem set \n=^^^%NLM%%NLM%^%NLM%%NLM%
+rem ::DO NOT ALTER THE EMPTY LINES ABOVE
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_newline
 
-::	echo(
-::	echo This should display %\n%a new line
-::	echo(
-::	echo "This should display %\n%a new line"
-	echo(
+rem	echo.
+rem	echo This should display %\n%a new line
+rem	echo.
+rem	echo "This should display %\n%a new line"
+	echo.
 	echo This is a sting with !\n!a new line
-	echo(
+	echo.
 	echo "This is a quoted string with !\n!a new line"
 	
 %endfunction%

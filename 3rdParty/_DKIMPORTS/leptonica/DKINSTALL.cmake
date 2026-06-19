@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -18,9 +19,8 @@ include_guard()
 # https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386
 # https://github.com/DanBloomberg/leptonica.git
 # https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
-# https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip
+# https://github.com/DanBloomberg/leptonica/archive/96a3d7451e7d717d8a0c88436f5ff7ea7129412e.zip
 
-### DEPEND ###
 dk_depend(giflib)
 dk_depend(libjpeg-turbo)
 dk_depend(libpng)
@@ -29,20 +29,18 @@ dk_depend(libwebp)
 dk_depend(tiff)
 dk_depend(zlib)
 
-### IMPORT ###
 dk_import()
 
-### LINK ###
 dk_include					(${leptonica})
 dk_include					(${leptonica_Tuple_Dir}/src)
 dk_include					(${leptonica_Build_Dir}/src)
 if(MULTI_CONFIG)
 	if(Windows AND MSVC)
-		dk_libDebug			(${leptonica}/${Target_Tuple}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
-		dk_libRelease		(${leptonica}/${Target_Tuple}/src/${Release_Dir}/leptonica-1.84.0.lib)
+		dk_libDebug			(${leptonica_Tuple_Dir}/src/${Debug_Dir}/leptonica-1.84.0d.lib)
+		dk_libRelease		(${leptonica_Tuple_Dir}/src/${Release_Dir}/leptonica-1.84.0.lib)
 	else()
-		dk_libDebug			(${leptonica}/${Target_Tuple}/src/${Debug_Dir}/libleptonica.a)
-		dk_libRelease		(${leptonica}/${Target_Tuple}/src/${Release_Dir}/libleptonica.a)
+		dk_libDebug			(${leptonica_Tuple_Dir}/src/${Debug_Dir}/libleptonica.a)
+		dk_libRelease		(${leptonica_Tuple_Dir}/src/${Release_Dir}/libleptonica.a)
 	endif()
 else()
 	dk_libDebug				(${leptonica_Debug_Dir}/src/libleptonica.a)

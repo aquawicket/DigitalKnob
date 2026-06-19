@@ -1,16 +1,22 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_commandExists(<command> rtn_var)
-::#
+rem ################################################################################
+rem # dk_commandExists(<command> rtn_var)
+rem #
 :dk_commandExists
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
     %ComSpec% /c "(help %~1 > nul || exit 0) && where %~1 > nul 2> nul"
    
@@ -20,7 +26,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "dk_commandExists=1"
 	)
    
-	::###### output ######
+	:return
 	endlocal & (
 		set "dk_commandExists=%dk_commandExists%"
 		if "%~2" neq "" (
@@ -36,45 +42,44 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-    ::###### Using if return value
+    rem ###### Using if return value
     %dk_call% dk_echo
    
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%" result
-    if /i "%result%" equ "0" (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
+    if /i "%result%" equ "0" (echo %_command_% exists) else (echo %_command_% NOT FOUND)
    
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%" result
-    if /i "%result%" equ "0" (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
-    ::FIXME: ERRORLEVEL is still 1
+    if /i "%result%" equ "0" (echo %_command_% exists) else (echo %_command_% NOT FOUND)
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using if ERRORLEVEL
+    rem ###### Using if ERRORLEVEL
     %dk_call% dk_echo
    
     %dk_call% dk_set _command_ echo
     %dk_call% dk_commandExists "%_command_%"
-    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
+    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% NOT FOUND)
    
     %dk_call% dk_set _command_ NonExistentCommand
     %dk_call% dk_commandExists "%_command_%"
-    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% does NOT EXIST)
-    ::FIXME: ERRORLEVEL is still 1
+    if NOT ERRORLEVEL 1 (echo %_command_% exists) else (echo %_command_% NOT FOUND)
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using && and || conditionals
+    rem ###### Using && and || conditionals
     %dk_call% dk_echo
    
     %dk_call% dk_set _command_ echo
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT EXIST)
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% NOT FOUND)
    
     %dk_call% dk_set _command_ NonExistentCommand  
-    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% does NOT EXIST)
-    ::FIXME: ERRORLEVEL is still 1
+    %dk_call% dk_commandExists "%_command_%" && (echo %_command_% exists) || (echo %_command_% NOT FOUND)
+    rem FIXME: ERRORLEVEL is still 1
 %endfunction%  
     

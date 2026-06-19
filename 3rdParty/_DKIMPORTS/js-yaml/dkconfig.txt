@@ -1,0 +1,7 @@
+############ js-yaml ############
+# https://github.com/nodeca/js-yaml.git
+# https://codeload.github.com/nodeca/js-yaml/zip/refs/tags/3.14.1 
+# https://github.com/nodeca/js-yaml/archive/0d3ca7a27b03a6c974790a30a89e456007d62976.zip
+# https://github.com/nodeca/js-yaml/archive/74a01992953302040be3277c08ba214a06f00b87.zip
+
+js-yaml_Import=https://github.com/nodeca/js-yaml/archive/0d3ca7a27b03a6c974790a30a89e456007d62976.zip

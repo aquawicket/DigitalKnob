@@ -1,6 +1,6 @@
 #!/bin/sh
 ###### DK.sh #####################################################################
-if [ -z "${DK_LOADED-}" ]; then
+if [ -z "${DKINIT_sh-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
@@ -29,7 +29,7 @@ dk_source(){
 	_fnc_=$1;
 	#DKHOME_DIR="/c/Users/Administrator"
 	[ -z "${DKHOME_DIR-}" ] && export DKHOME_DIR=$(DKHOME_DIR)
-	[ -z "${DKHTTP_DIR-}" ] && export DKHTTP_DIR="https://raw.githubusercontent.com/aquawicket"
+	[ -z "${DKHTTP_DIR-}" ] && export DKHTTP_DIR="http://aquawicket.com"
 	
 	#####################################################################################################################################
 	# EXAMPLE INPUT                          								          			            			     dk_color
@@ -68,8 +68,7 @@ dk_source(){
 
 	############ Download the file if missing ############
 	if [ ! -e "${_fnc_}" ]; then 	
-		###### Replace /c/Users/Administrator with ########
-		###### https://raw.githubusercontent.com/aquawicket
+		###### Replace /c/Users/Administrator with http://aquawicket.com
 		_in_=${_fnc_}
 		_url_=
 		
@@ -79,8 +78,8 @@ dk_source(){
 			_url_=${_url_}${LEFT}${DKHTTP_DIR}
 			_in_=${_in_#*"$DKHOME_DIR"}
 		done
-		# EXAMPLE RESULT                https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/_fnc_tions/dk_color.sh
-		# EXAMPLE RESULT	            https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+		# EXAMPLE RESULT                http://aquawicket.com/DigitalKnob/Development/DKPowershell/_fnc_tions/dk_color.sh
+		# EXAMPLE RESULT	            http://aquawicket.com/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
 	
 		###### DOWNLOAD ######
 		dirn=$(dirname "${_fnc_}")

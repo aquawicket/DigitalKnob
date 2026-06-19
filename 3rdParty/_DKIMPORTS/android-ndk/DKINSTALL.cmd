@@ -1,23 +1,29 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% dk_depend android-sdk
+	%dk_call% dk_validate android-sdk %dk_call% dk_depend android-sdk
 	
-	set "Import.Path=%CD:\=/%"
+	set "Import.Path=%CD%"
 	%dk_call% dk_assertPath "%Import.Path%/dkconfig.txt"
-	%dk_call% dk_getFileParams "%Import.Path%/dkconfig.txt"
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	%dk_call% dk_fileVariables "%Import.Path%/dkconfig.txt"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
 	%dk_call% dk_basename %Import.Path% Import.Name
 	
 	%dk_call% dk_assertVar %Import.Name%_%Host_Tuple%_Import
@@ -28,19 +34,4 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "Installing %PLUGIN_Url_Basename% . . ."
 	%dk_call% dk_download %PLUGIN_Url%
 	%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN_Install_Path%" 
-
 %endfunction%	
-	
-
-::	%dk_call% dk_validatePath DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-::    %dk_call% dk_cmakeEval "dk_load(%DKIMPORTS_DIR%/android-ndk/DKINSTALL.cmake)" "ANDROID_GENERATOR;ANDROID_API;ANDROID_NDK;ANDROID_TOOLCHAIN_FILE"
-::    %dk_call% dk_assertVar ANDROID_GENERATOR
-::    %dk_call% dk_assertVar ANDROID_API
-::    %dk_call% dk_assertVar ANDROID_NDK
-::    %dk_call% dk_assertVar ANDROID_TOOLCHAIN_FILE
-::	endlocal & (
-::		set "ANDROID_GENERATOR=%ANDROID_GENERATOR%"
-::		set "ANDROID_API=%ANDROID_API%"
-::		set "ANDROID_NDK=%ANDROID_NDK%"
-::		set "ANDROID_TOOLCHAIN_FILE=%ANDROID_TOOLCHAIN_FILE%"
-::	)

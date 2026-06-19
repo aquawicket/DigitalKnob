@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -19,37 +20,33 @@ include_guard()
 # https://codeload.github.com/Squareys/duktape/zip/refs/heads/let-support
 # https://github.com/svaarala/duktape/archive/refs/heads/master.zip
 # https://wiki.duktape.org/projectsusingduktape
+# https://github.com/aquawicket/duktape/archive/0701a46.zip
 
-dk_validate(Target_Config  "dk_Target_Config()")
-
-### DEPEND ###
 dk_depend(python3)
 dk_depend(pyyaml)
 #dk_depend(nodejs)
-#dk_depend(msys2)
+#dk_validate(msys2 "dk_depend(msys2)")
 
-### IMPORT ###
+
 dk_import() #PATCH
 
-### LINK ###
-if(MSVC AND Windows)
+
+if(Windows AND MSVC)
 	dk_define		(DUK_F_VBCC)
-endif()
-if(Android)
+elseif(Android)
 	dk_define		(DUK_F_32BIT_PTRS)
 endif()
-dk_include			(${duktape}/src)
+dk_include			("${duktape}/src")
 
-## TODO: create MSVC_dk_libDebug and MSVC_dk_libRelease
+
 if(MSVC)
-	dk_libDebug		(${duktape_Debug_Dir}/duktape.lib)
-	dk_libRelease	(${duktape_Release_Dir}/duktape.lib)
+	dk_libDebug		("${duktape_Debug_Dir}/duktape.lib")
+	dk_libRelease	("${duktape_Release_Dir}/duktape.lib")
 else()
-	dk_libDebug		(${duktape_Debug_Dir}/libduktape.a)
-	dk_libRelease	(${duktape_Release_Dir}/libduktape.a)
+	dk_libDebug		("${duktape_Debug_Dir}/libduktape.a")
+	dk_libRelease	("${duktape_Release_Dir}/libduktape.a")
 endif()
 
-### GENERATE ###
 if(NOT EXISTS ${duktape}/src/duktape.c)
 	#dk_exec(${python_exe} ${duktape}/util/dist.py)  # default generator	
 	dk_exec(${python_exe} ${duktape}/tools/configure.py
@@ -64,7 +61,8 @@ if(NOT EXISTS ${duktape}/src/duktape.c)
 	#dk_exec(${node_exe} ${duktape}/src-tools/index.js configure --output-directory ${duktape}/src --source-directory ${duktape}/src-input --config-directory ${duktape}/config)
 endif()
 
+
 dk_configure()
 
-### COMPILE ###
+
 dk_build()

@@ -1,0 +1,7 @@
+############ cpp-subprocess ############
+# https://github.com/tsaarni/cpp-subprocess.git
+# https://github.com/tsaarni/cpp-subprocess/archive/8d93da7a9e10cae3ce5888af92f26fbd7871d61e.zip
+# NOTE:		Header only library
+#			Use #include "subprocess.hpp"
+
+cpp-subprocess_Import=https://github.com/tsaarni/cpp-subprocess/archive/8d93da7a9e10cae3ce5888af92f26fbd7871d61e.zip

@@ -21,7 +21,7 @@ function Global:dk_getExtension() {
 		#${dk_getExtension} = [System.IO.Path]::GetExtension($args[0]);
 	}
 	
-	###### output ######
+	###### return ######
 	${global:dk_getExtension} = ${dk_getExtension};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_getExtension};

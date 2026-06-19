@@ -14,7 +14,7 @@ dk_env = function dk_env_f(){
 	//console.log("dk_env("+_ARGV_+")");
 	
 	var shell = WScript.CreateObject("WScript.Shell");
-	var env = shell.Environment("PROCESS");
+	var env = shell.Environment("Process");
 	//var env = shell.Environment("SYSTEM");
 	//var env = shell.Environment("USER");
 	//var env = shell.Environment("VOLATILE");
@@ -77,4 +77,9 @@ DKTEST = function DKTEST_f(){
 	console.log('var USERPROFILE = dk_env("USERPROFILE");');
 	var USERPROFILE = dk_env("USERPROFILE");
 	console.log("USERPROFILE = '"+USERPROFILE+"'");
+	
+	console.log('');
+	console.log('var CMDCMDLINE = dk_env("CMDCMDLINE");');
+	var CMDCMDLINE = dk_env("CMDCMDLINE");
+	console.log("CMDCMDLINE = '"+CMDCMDLINE+"'");
 }

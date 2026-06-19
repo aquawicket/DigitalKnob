@@ -1,6 +1,7 @@
 ############ vcpkg ############
 # Getting Started  https://vcpkg.io/en/getting-started.html
 # Documentation    https://vcpkg.io/en/docs/README.html
-# https://github.com/microsoft/vcpkg/archive/cff6ed45.zip
+# https://github.com/microsoft/vcpkg.git
+# https://github.com/microsoft/vcpkg/archive/cff6ed45719c0162fa7065fdac90506a0add812c.zip
 
-vcpkg_Import=https://github.com/microsoft/vcpkg/archive/cff6ed45.zip
+vcpkg_Import=https://github.com/microsoft/vcpkg/archive/cff6ed45719c0162fa7065fdac90506a0add812c.zip

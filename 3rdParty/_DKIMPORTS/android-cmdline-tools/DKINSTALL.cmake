@@ -1,24 +1,22 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ android-cmdline-tools ############
 
-dk_depend(android-sdk)
-#dk_depend(openjdk-8)
-
-#dk_validate(Host_Os "dk_Host_Os()")
-dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
+dk_validate(android-sdk "dk_depend(android-sdk)")
+##dk_validate(openjdk-8 "dk_depend(openjdk-8)")
 
 if(Windows_Host)
 	dk_import(${android-cmdline-tools_Windows_Import} 	INSTALL_PATH "${android-sdk}/cmdline-tools/latest")
@@ -36,7 +34,7 @@ dk_set(sdkmanager_bat "${android-cmdline-tools}/bin/sdkmanager.bat")
 ## FIXME
 dk_return()
 
-dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
+dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
 
 if(Windows_Host)
 	dk_exec(sdkmanager --sdk_root=${android-sdk} WORKING_DIRECTORY ${ANDROID_CMDLINE_TOOLS}/bin)

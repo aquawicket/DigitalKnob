@@ -1,26 +1,33 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_trimNonAlphaNumeric(string rtn_var)
-::#
-::#
+rem ################################################################################
+rem # dk_trimNonAlphaNumeric(string)
+rem #
+rem #	Remove Non-Alphanumeric characters from the front and back of a string
+rem #
 :dk_trimNonAlphaNumeric
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
 	set "_input_=%~1"
 	set "dk_trimNonAlphaNumeric="
 	set "map=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 
-	::echo %_input_:~0,1% 	&::=a
-	::echo %_input_:~1%   	&::=bcd
-	::echo %_input_:~-1%  	&::=d
-	::echo %_input_:~0,-1% 	&::abc
+	rem echo %_input_:~0,1% 	&rem =a
+	rem echo %_input_:~1%   	&rem =bcd
+	rem echo %_input_:~-1%  	&rem =d
+	rem echo %_input_:~0,-1% 	&rem abc
 	:dk_front_loop
 		if NOT defined _input_ (goto:dk_front_loop_end)
 		for /F "delims=*~ eol=*" %%C in ("%_input_:~0,1%") do (
@@ -53,14 +60,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	:dk_back_loop_end
 	
 
-	::###### output ######
+	:return
 	endlocal & (
 		set "dk_trimNonAlphaNumeric=%dk_trimNonAlphaNumeric%"
-		if "%~2" neq "" (
-			set "%~2=%dk_trimNonAlphaNumeric%"
-		) else (
-			echo %dk_trimNonAlphaNumeric%
-		)
+		if "%~2" neq "" (set "%~2=%dk_trimNonAlphaNumeric%")
 	)
 %endfunction%
 
@@ -69,17 +72,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	set "myVar=--0.2.134Beta--"
+	set "myVar=--.0.2.134Beta.--"
 	%dk_call% dk_trimNonAlphaNumeric "%myVar%"
 	%dk_call% dk_printVar dk_trimNonAlphaNumeric
 
-	::%dk_call% dk_set myVar "--0.2.134Beta"
-	::%dk_call% dk_trimNonAlphaNumeric "%myVar%" cIdentifier
-	::%dk_call% dk_printVar dk_trimNonAlphaNumeric
-	::%dk_call% dk_printVar cIdentifier
+	rem %dk_call% dk_set myVar "--0.2.134Beta"
+	rem %dk_call% dk_trimNonAlphaNumeric "%myVar%" cIdentifier
+	rem %dk_call% dk_printVar dk_trimNonAlphaNumeric
+	rem %dk_call% dk_printVar cIdentifier
 %endfunction%

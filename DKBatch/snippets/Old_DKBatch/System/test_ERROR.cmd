@@ -1,26 +1,26 @@
-:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
+rem This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
-:: For the latest information, see https://github.com/aquawicket/DigitalKnob
+rem For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
-:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+rem Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
 ::
-:: Permission is hereby granted, free of charge, to any person obtaining a copy
-:: of this software and associated documentation files(the "Software"), to deal
-:: in the Software without restriction, including without limitation the rights
-:: to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-:: copies of the Software, and to permit persons to whom the Software is
-:: furnished to do so, subject to the following conditions :
+rem Permission is hereby granted, free of charge, to any person obtaining a copy
+rem of this software and associated documentation files(the "Software"), to deal
+rem in the Software without restriction, including without limitation the rights
+rem to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+rem copies of the Software, and to permit persons to whom the Software is
+rem furnished to do so, subject to the following conditions :
 ::
-:: The above copyright notice and this permission notice shall be included in all
-:: copies or substantial portions of the Software.
+rem The above copyright notice and this permission notice shall be included in all
+rem copies or substantial portions of the Software.
 ::
-:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-:: SOFTWARE.
+rem THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+rem IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+rem FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+rem AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+rem SOFTWARE.
 
 ::%dkbatch%
 set "DKBATCH=@echo off & call ../dkbatch.cmd %%~f0 %%* & @setlocal enableextensions enabledelayedexpansion"
@@ -33,29 +33,29 @@ echo ##      TESTING Errors        ##
 echo ################################
 set ERRORLEVEL=0
 %IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
-echo(
+echo.
 	
 set ERRORLEVEL=1
 %IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
-echo(
+echo.
 
 %ERROR% "ERROR: This throws an error, and continues"
-echo(
+echo.
 
 set ERRORLEVEL=0
 %IF_FATAL% "IF_FATAL: This will be skipped since ERRORLEVEL = 0"
 echo IF_FATAL was called but skipped since ERRORLEVEL = 0
-echo(
+echo.
 	
 ::echo Setting ERRORLEVEL to 1 and calling IF_FATAL again.
-::echo(
+::echo.
 ::set ERRORLEVEL=1
 ::%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is NOT 0, and exits the program"
-::echo(
+::echo.
 
 echo This will never be reached since the IF_FATAL above exits the program
 %FATAL% "FATAL: This throws an error, and exits the program"
-echo(
+echo.
 
 
 %DKEND%

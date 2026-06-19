@@ -1,3 +1,4 @@
+// DKINIT_c
 #pragma once
 #ifndef DK_h
 #define DK_h

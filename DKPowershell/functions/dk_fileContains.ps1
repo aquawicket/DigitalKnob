@@ -19,7 +19,7 @@ function Global:dk_fileContains() {
 		${dk_fileContains}=$false; 
 	}
 
-	###### output ######
+	###### return ######
 	
 	${global:dk_fileContains} = ${dk_fileContains};
 	if($args[2]){

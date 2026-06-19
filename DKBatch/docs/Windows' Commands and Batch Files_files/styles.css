@@ -1,0 +1,151 @@
+pre.example 
+{  
+	font-family: "Courier New", Courier, mono; 
+	font-size: 12px; 
+	color: #000000; 
+	background-color: #FFFFdd; 
+	padding-top: 8px; 
+	padding-right: 8px; 
+	padding-bottom: 8px; 
+	padding-left: 8px; 
+	border: #000000; 
+	border-style: dashed; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px; 
+	width:auto;
+}
+
+.footnote, .warning, .info, .question
+{
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 64; 
+	color: #004400;
+  padding: 0.5em;
+  padding-left: 64px;
+  border-right: 1px #DDD solid;
+  border-bottom: 1px #DDD solid;
+  border-left: 1px #DDD solid;
+  border-top: 1px #DDD solid;
+  font-style: italic;
+  clear: both;
+  min-height: 48px;
+}
+
+.footnote
+{
+  #color: #004400;
+  #background: url(images/information.png) 0.5em 0.5em no-repeat #F8FFF8;
+}  
+
+.info
+{
+  color: #004400;
+  background: url(images/information.png) 0.5em 0.5em no-repeat #F8FFF8;
+}  
+
+.warning
+{
+  color: #004400;
+  background: url(images/exclamation.png) 0.5em 0.5em no-repeat #F8FFF8;
+}  
+
+.question
+{
+  color: #004400;
+  background: url(images/question.png) 0.5em 0.5em no-repeat #F8FFF8;
+}  
+
+a:link.download,
+a:active.download,
+a:visited.download
+{
+  background: url(images/bbtn-left.png) top left transparent no-repeat;
+  background: url(images/btnleft.png) top left transparent no-repeat;
+  font-size: 10pt;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  height: 27px;
+  margin: 0 16px 8px 0;
+  padding: 0 16px 1em 0;
+  width: auto;
+  color: #FFFFFF;
+  color: #000000;
+  border-bottom: none;
+}
+*>/**/a:link.download,
+*>/**/a:active.download,
+*>/**/a:visited.download
+{
+  padding-top: 4px;
+}
+
+pre.download
+{
+  padding-top: 4px;
+}
+
+a:link.download span, a:visited.download span, a:active.download span
+{
+  background: url(images/bbtn-right.png) top right transparent no-repeat;
+  background: url(images/btnright.png) top right transparent no-repeat;
+  margin: 0 0 4px 16px;
+  padding: 4px 16px 1em 0;
+  color: #FFFFFF;
+  color: #000000;
+  font-weight: normal;
+  height: 27px;
+}
+
+a:hover.download
+{
+  background: url(images/bbtn-left-glow.png) top left transparent no-repeat;
+  background: url(images/btnleft-hi.png) top left transparent no-repeat;
+  border-bottom: none;
+}
+
+a:hover.download span
+{
+  background: url(images/bbtn-right-glow.png) top right transparent no-repeat;
+  background: url(images/btnright-hi.png) top right transparent no-repeat;
+}
+
+cblockquote
+{
+  margin-left: 0px;
+  padding-top: .5em;
+  padding-left: 20px;
+  background: url(images/qleft.png) top left transparent no-repeat;
+}
+
+cblockquote > p
+{
+  background: url(images/qright.png) bottom right transparent no-repeat;
+  padding-right: 30px;
+  padding-bottom: 0.5em;
+}
+
+.cite
+{
+	margin-left: 30px;
+	margin-top: -10px;
+	margin-right: 0px;
+  font-style: italic;
+  #color: #0000CC;
+  #white-space: pre;
+}
+
+.pdf-icon {
+    margin-left: 3px;
+    padding: 0 0 0 19px;
+    background: url("images/pdficon16-x-16.png") no-repeat 0 50%;
+} 
+
+.video-icon {
+    margin-left: 3px;
+    padding: 0 0 0 19px;
+    background: url("images/videoicon16-x-16.png") no-repeat 0 50%;
+} 

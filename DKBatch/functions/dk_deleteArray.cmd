@@ -1,17 +1,23 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_deleteArray(array)
-::#
-::#
+rem ################################################################################
+rem # dk_deleteArray(array)
+rem #
+rem #
 :dk_deleteArray
- ::%setlocal%
-	%dk_call% dk_debugFunc 1
+ rem %setlocal%
 
 	set /a "n=0"
 	:loop1
@@ -22,19 +28,18 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	)
 
 	if defined %~1[0] (%dk_call% dk_error "%__FUNCTION__%: failed to delete array")
-	:: DOSTIPS version
-	:: :remove_array
-	:: for /f "delims==" %%a in ('"set %~1[ 2>NUL"') do set "%%a="
-	:: EXIT /b
+	rem DOSTIPS version
+	rem :remove_array
+	rem for /f "delims==" %%a in ('"set %~1[ 2>NUL"') do set "%%a="
+	rem EXIT /b
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"
@@ -45,6 +50,6 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_deleteArray myArrayA
 
-	echo(
+	echo.
 	%dk_call% dk_printVar myArrayA
 %endfunction%

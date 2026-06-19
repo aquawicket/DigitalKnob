@@ -14,7 +14,7 @@ function Global:dk_trimNonAlphaNumeric() {
 	
 	${dk_trimNonAlphaNumeric} = ${_input_}  -replace '(^[^a-zA-Z0-9]*)|([^a-zA-Z0-9]*$)', '';
 
-	###### output ######
+	###### return ######
 	${global:dk_trimNonAlphaNumeric} = ${dk_trimNonAlphaNumeric};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_trimNonAlphaNumeric};

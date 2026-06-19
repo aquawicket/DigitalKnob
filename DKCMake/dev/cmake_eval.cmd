@@ -44,11 +44,11 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%\%DKBRANCH%\DKCMake"
 	
-	if EXIST "%ProgramFiles%\CMake\bin\cmake.exe" 		set "cmake_exe=%ProgramFiles%\CMake\bin\cmake.exe"
-	if EXIST "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "cmake_exe=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
-	if NOT EXIST "%cmake_exe%" 							echo "ERROR: Could NOT locate cmake_exe" & goto:eof
+	if EXIST "%ProgramFiles%\CMake\bin\cmake.exe" 		set "cmake.exe=%ProgramFiles%\CMake\bin\cmake.exe"
+	if EXIST "%ProgramFiles(x86)%\CMake\bin\cmake.exe" 	set "cmake.exe=%ProgramFiles(x86)%\CMake\bin\cmake.exe"
+	if NOT EXIST "%cmake.exe%" 							echo "ERROR: Could NOT locate cmake.exe" & goto:eof
 	
-	if NOT EXIST "%cmake_exe%"		echo "ERROR: Could NOT locate cmake_exe" 	& goto:eof
+	if NOT EXIST "%cmake.exe%"		echo "ERROR: Could NOT locate cmake.exe" 	& goto:eof
 	if NOT EXIST "%DKCMAKE_DIR%" 	echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	:: cmake_eval begin
@@ -60,17 +60,17 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 	::echo DKCOMMAND = %DKCOMMAND%
 	call set DKCMAKE_DIR_DIR=%%DKCMAKE_DIR:^\=^/%%
 	
-	::echo "%cmake_exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
+	::echo "%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake" --log-level=TRACE >cmake_eval.out 2>cmake_eval.err
 	
 	if [%2] == [] goto no_return_values
 	goto with_return_values
 	
 	:no_return_values
-		"%cmake_exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
+		"%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" -P "%DKCMAKE_DIR%/dev/cmake_eval.cmake"
 		goto:eof
 		
 	:with_return_values
-		"%cmake_exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
+		"%cmake.exe%" "-DDKCMAKE_DIR=%DKCMAKE_DIR%" "-DDKCOMMAND=%DKCOMMAND%" "-DDKRETURN=%~2" -P %DKCMAKE_DIR%/dev/cmake_eval.cmake
 		if NOT EXIST "%DKCMAKE_DIR%/cmake_vars.cmd" goto:eof
 		call %DKCMAKE_DIR%\cmake_vars.cmd
 		del %DKCMAKE_DIR%\cmake_vars.cmd

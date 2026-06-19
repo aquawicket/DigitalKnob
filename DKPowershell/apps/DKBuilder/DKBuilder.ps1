@@ -8,14 +8,16 @@ Write-Host "env:DKSCRIPT_PATH = ${env:DKSCRIPT_PATH}";
 
 if(!${env:DKHOME})									{ ${env:DKHOME} = "${env:USERPROFILE}" -replace '\\', '/'; }
 Write-Host "env:DKHOME = ${env:DKHOME}";
-if(!${env:DKHTTP})									{ ${env:DKHTTP} = "https://raw.githubusercontent.com/aquawicket"; }
+if(!${env:DKHTTP})									{ ${env:DKHTTP} = "http://aquawicket.com"; }
 Write-Host "env:DKHTTP = ${env:DKHTTP}";
 
-if(!${env:DIGITALKNOB})								{ ${env:DIGITALKNOB} = "DigitalKnob"; }
+if(!${env:DIGITALKNOB})								{ ${env:DIGITALKNOB} = "Digital Knob"; }
 Write-Host "env:DIGITALKNOB = ${env:DIGITALKNOB}";
 if(!${env:DIGITALKNOB_DIR})							{ ${env:DIGITALKNOB_DIR} = "${env:DKHOME}/${env:DIGITALKNOB}"; }
 Write-Host "env:DIGITALKNOB_DIR = ${env:DIGITALKNOB_DIR}";
-if(!${env:DKHTTP_DIGITALKNOB_DIR})					{ ${env:DKHTTP_DIGITALKNOB_DIR} = "${env:DKHTTP}/${env:DIGITALKNOB}"; }
+if(!${env:DKHTTP_DIGITALKNOB})								{ ${env:DKHTTP_DIGITALKNOB} = "DigitalKnob"; }
+Write-Host "env:DKHTTP_DIGITALKNOB = ${env:DKHTTP_DIGITALKNOB}";
+if(!${env:DKHTTP_DIGITALKNOB_DIR})					{ ${env:DKHTTP_DIGITALKNOB_DIR} = "${env:DKHTTP}/${env:DKHTTP_DIGITALKNOB}"; }
 Write-Host "env:DKHTTP_DIGITALKNOB_DIR = ${env:DKHTTP_DIGITALKNOB_DIR}";
 if(!(Test-Path ${env:DIGITALKNOB_DIR}))				{ New-Item -Path ${env:DIGITALKNOB_DIR} -ItemType Directory; }
 Write-Host "env:DIGITALKNOB_DIR = ${env:DIGITALKNOB_DIR}";

@@ -7,6 +7,7 @@
 # https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line 	# How to get latest version on ubuntu
 # https://github.com/Kitware/CMake/releases
 
+cmake_Type=Tool
 cmake_Linux_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-aarch64.tar.gz
 cmake_Linux_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-linux-x86_64.tar.gz
 #cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-macos10.10-universal.tar.gz
@@ -14,9 +15,8 @@ cmake_Mac_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29
 cmake_Windows_Arm64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-arm64.zip
 cmake_Windows_X86_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-i386.zip
 cmake_Windows_X86_64_Import=https://github.com/Kitware/CMake/releases/download/v3.29.5/cmake-3.29.5-windows-x86_64.zip
-cmake_Type=APP
 
-
+# NOTES
 #[ "${Host_Os}"       = "Android" ]					&& cmake_Import=cmake
 #[ "${WSL_DISTRO_NAME-}" = "${Alpine-}" ]			&& cmake_Import=cmake
 #[ "${Host_Tuple}"    = "Windows_Arm32" ]			&& cmake_Import=${cmake_Windows_Arm32_Import}

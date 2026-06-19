@@ -1,81 +1,81 @@
 @echo off
 
-call :isNumber 0     	&:: OK	positive
-call :isNumber -0		&:: OK	positive
-call :isNumber 0-		&:: OK	Not numeric
-call :isNumber .0		&:: OK	positive
-call :isNumber 0.		&:: OK	positive
-call :isNumber -.0		&:: OK	positive
-call :isNumber -0.		&:: OK	positive
-call :isNumber 0-.		&:: OK	Not numeric
-call :isNumber .-0		&:: BAD	positive
-call :isNumber .0-		&:: OK	Not numeric
-call :isNumber 0.-		&:: OK	Not numeric
-call :isNumber --0		&:: OK	Not numeric
-call :isNumber -0-		&:: OK	Not numeric
-call :isNumber 0--		&:: OK	Not numeric
-call :isNumber ..0		&:: BAD	positive
-call :isNumber .0.		&:: BAD	positive
-call :isNumber 0..		&:: BAD	positive
+call :isNumber 0     	&rem OK	positive
+call :isNumber -0		&rem OK	positive
+call :isNumber 0-		&rem OK	Not numeric
+call :isNumber .0		&rem OK	positive
+call :isNumber 0.		&rem OK	positive
+call :isNumber -.0		&rem OK	positive
+call :isNumber -0.		&rem OK	positive
+call :isNumber 0-.		&rem OK	Not numeric
+call :isNumber .-0		&rem BAD	positive
+call :isNumber .0-		&rem OK	Not numeric
+call :isNumber 0.-		&rem OK	Not numeric
+call :isNumber --0		&rem OK	Not numeric
+call :isNumber -0-		&rem OK	Not numeric
+call :isNumber 0--		&rem OK	Not numeric
+call :isNumber ..0		&rem BAD	positive
+call :isNumber .0.		&rem BAD	positive
+call :isNumber 0..		&rem BAD	positive
 
-call :isNumber 1     	&:: OK	positive
-call :isNumber -1		&:: OK	negative
-call :isNumber 1-		&:: OK	Not numeric
-call :isNumber .1		&:: OK	positive
-call :isNumber 1.		&:: OK	positive
-call :isNumber -.1		&:: OK	negative
-call :isNumber -1.		&:: OK	negative
-call :isNumber 1-.		&:: OK	Not numeric
-call :isNumber .-1		&:: BAD	negative
-call :isNumber .1-		&:: OK	Not numeric
-call :isNumber 1.-		&:: OK	Not numeric
-call :isNumber --1		&:: OK	Not numeric
-call :isNumber -1-		&:: OK	Not numeric
-call :isNumber 1--		&:: OK	Not numeric
-call :isNumber ..1		&:: BAD	positive
-call :isNumber .1.		&:: BAD	positive
-call :isNumber 1..		&:: BAD	positive
-
-
+call :isNumber 1     	&rem OK	positive
+call :isNumber -1		&rem OK	negative
+call :isNumber 1-		&rem OK	Not numeric
+call :isNumber .1		&rem OK	positive
+call :isNumber 1.		&rem OK	positive
+call :isNumber -.1		&rem OK	negative
+call :isNumber -1.		&rem OK	negative
+call :isNumber 1-.		&rem OK	Not numeric
+call :isNumber .-1		&rem BAD	negative
+call :isNumber .1-		&rem OK	Not numeric
+call :isNumber 1.-		&rem OK	Not numeric
+call :isNumber --1		&rem OK	Not numeric
+call :isNumber -1-		&rem OK	Not numeric
+call :isNumber 1--		&rem OK	Not numeric
+call :isNumber ..1		&rem BAD	positive
+call :isNumber .1.		&rem BAD	positive
+call :isNumber 1..		&rem BAD	positive
 
 
 
-call :isNumber 1		&:: OK
-call :isNumber -1		&:: OK
-call :isNumber 2-		&:: OK
-call :isNumber 00		&:: OK
-call :isNumber -00		&:: OK
-call :isNumber 0-0		&:: OK
-call :isNumber 00-		&:: OK
-call :isNumber 11		&:: OK
-call :isNumber -11		&:: OK
-call :isNumber 1-1		&:: OK
-call :isNumber 11-		&:: OK
-call :isNumber 2-		&:: OK
-call :isNumber bob		&:: OK
-call :isNumber 1bob1	&:: OK
-call :isNumber			&:: OK
-call :isNumber 0.0		&:: OK
-call :isNumber 1.1		&:: OK
-call :isNumber -1.1		&:: OK
-call :isNumber 2-.		&:: OK
-call :isNumber 00.00	&:: OK
-call :isNumber 11.11	&:: OK
-call :isNumber -11.11	&:: OK
-call :isNumber -2.2		&:: OK
-call :isNumber 2-.2		&:: OK
-call :isNumber 2.-2		&:: OK
-call :isNumber 2.2-		&:: OK
-call :isNumber -03.30	&:: OK
-call :isNumber 0-3.30	&:: OK
-call :isNumber 03-.30	&:: OK
-call :isNumber 03.-30	&:: OK
-call :isNumber 03.3-0	&:: OK
-call :isNumber 03.30-	&:: OK
-call :isNumber --4		&:: OK
-call :isNumber -.4		&:: OK
-call :isNumber -0.4		&:: OK
-call :isNumber .-4		&:: BAD
+
+
+call :isNumber 1		&rem OK
+call :isNumber -1		&rem OK
+call :isNumber 2-		&rem OK
+call :isNumber 00		&rem OK
+call :isNumber -00		&rem OK
+call :isNumber 0-0		&rem OK
+call :isNumber 00-		&rem OK
+call :isNumber 11		&rem OK
+call :isNumber -11		&rem OK
+call :isNumber 1-1		&rem OK
+call :isNumber 11-		&rem OK
+call :isNumber 2-		&rem OK
+call :isNumber bob		&rem OK
+call :isNumber 1bob1	&rem OK
+call :isNumber			&rem OK
+call :isNumber 0.0		&rem OK
+call :isNumber 1.1		&rem OK
+call :isNumber -1.1		&rem OK
+call :isNumber 2-.		&rem OK
+call :isNumber 00.00	&rem OK
+call :isNumber 11.11	&rem OK
+call :isNumber -11.11	&rem OK
+call :isNumber -2.2		&rem OK
+call :isNumber 2-.2		&rem OK
+call :isNumber 2.-2		&rem OK
+call :isNumber 2.2-		&rem OK
+call :isNumber -03.30	&rem OK
+call :isNumber 0-3.30	&rem OK
+call :isNumber 03-.30	&rem OK
+call :isNumber 03.-30	&rem OK
+call :isNumber 03.3-0	&rem OK
+call :isNumber 03.30-	&rem OK
+call :isNumber --4		&rem OK
+call :isNumber -.4		&rem OK
+call :isNumber -0.4		&rem OK
+call :isNumber .-4		&rem BAD
 pause
 
 :isNumber

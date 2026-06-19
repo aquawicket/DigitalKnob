@@ -1,38 +1,38 @@
-:: http://lallouslab.net/2016/05/30/batchography-embedding-an-executable-file-in-a-batch-script
+rem http://lallouslab.net/2016/05/30/batchography-embedding-an-executable-file-in-a-batch-script
 
 @echo off
 setlocal enabledelayedexpansion
 
-set FN=%TEMP%\evil.tmp
+set "FN=%TEMP%\evil.tmp"
 call :extract-embedded-bin "%FN%"
-start %FN%
-goto :eof
+start "" "%FN%"
+goto:eof
 
 :extract-embedded-bin <1=OutFileName>
-setlocal
+	setlocal
 
-set MBEGIN=-1
-for /f "useback tokens=1 delims=: " %%a in (`findstr /B /N /C:"-----BEGIN CERTIFICATE-----" "%~f0"`) DO (
-	set /a MBEGIN=%%a-1
-)
+	set MBEGIN=-1
+	for /f "useback tokens=1 delims=: " %%a in (`findstr /B /N /C:"-----BEGIN CERTIFICATE-----" "%~f0"`) DO (
+		set /a MBEGIN=%%a-1
+	)
 
-if "%MBEGIN%" equ "-1" (
+	if "%MBEGIN%" equ "-1" (
+		endlocal
+		exit /b -1
+	)
+
+	rem Delete previous output files
+	if EXIST "%~1.tmp" del "%~1.tmp"
+	if EXIST "%~1" del "%~1" 
+
+	for /f "useback skip=%MBEGIN% tokens=* delims=" %%a in ("%~f0") DO (
+		echo %%a >> "%~1.tmp" 
+	)
+
+	certutil.exe -decode "%~1.tmp" "%~1" 1>nul 2>nul
+	del "%~1.tmp"
+
 	endlocal
-	exit /b -1
-)
-
-:: Delete previous output files
-if EXIST "%~1.tmp" del "%~1.tmp"
-if EXIST "%~1" del "%~1" 
-
-for /f "useback skip=%MBEGIN% tokens=* delims=" %%a in ("%~f0") DO (
-	echo %%a >>"%~1.tmp"
-)
-
-%CERTUTIL_EXE%  -decode "%~1.tmp" "%~1" >nul 2>&1
-del "%~1.tmp"
-
-endlocal
 exit /b 0
 
 -----BEGIN CERTIFICATE-----

@@ -1,6 +1,15 @@
-NodeJS_Linux_Arm64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz
-NodeJS_Linux_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz
-NodeJS_Mac_Arm64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz
-NodeJS_Mac_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz
-NodeJS_Windows_X86_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip
-NodeJS_Windows_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip
+############ nodejs ############
+# https://nodejs.org
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip
+# https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip
+
+nodejs_Linux_Arm64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-arm64.tar.gz
+nodejs_Linux_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-linux-x64.tar.gz
+nodejs_Mac_Arm64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-arm64.tar.gz
+nodejs_Mac_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-darwin-x64.tar.gz
+nodejs_Windows_X86_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x86.zip
+nodejs_Windows_X86_64_Import=https://nodejs.org/dist/v19.8.1/node-v19.8.1-win-x64.zip

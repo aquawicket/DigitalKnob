@@ -1,16 +1,16 @@
-message("#########################################################################")
-message("#################### Windows_X86_Gcc_Toolchain.cmake #######################")
-message("#########################################################################")
+dk_echo("#########################################################################")
+dk_echo("#################### Windows_X86_Gcc_toolchain.cmake #######################")
+dk_echo("#########################################################################")
 
 if(NOT Windows_Host)
 	dk_exit()
 endif()
 
-dk_depend(msys2)
+dk_validate(msys2 "dk_depend(msys2)")
 dk_depend(gcc)
 
 dk_set(MSYSTEM 						MINGW32)
-dk_prependEnvPath("${${MSYSTEM}_BIN}")
+dk_prependEnvPath(					"${${MSYSTEM}_BIN}")
 dk_set(CMAKE_GENERATOR				"MinGW Makefiles")
 dk_set(CMAKE_MAKE_PROGRAM 			"${${MSYSTEM}_BIN}/mingw32-make.exe")
 dk_set(CMAKE_C_COMPILER				"${${MSYSTEM}_BIN}/gcc.exe")

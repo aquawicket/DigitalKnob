@@ -32,21 +32,27 @@ if "%~1" equ "" (goto DKINSTALL)
 
 ::###### INSTALL ######
 :DKINSTALL
-	::echo %~0(%*)
 	if "%~1" neq "" (goto:eof)
 	
-	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	@rem shebang
+	@echo off&rem ###### DK.cmd #########################################################################################################################
+	if not defined DKINIT_cmd (
+		setlocal enableDelayedExpansion
+		if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+		if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+		if NOT EXIST "!DK.cmd!" (
+			start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+		call "!DK.cmd:/=\!" "%%~0" %%*
+		exit /b %errorlevel%
+	)
+	rem #################################################################################################################################################
 
 	::###### Install DKBatch ######
 	%dk_call% dk_echo "Installing DKBatch . . ."
 	
-	%dk_call% dk_validate cmd_exe					"%dk_call% dk_depend cmd_exe"
-	::%dk_call% dk_validate tcc_exe					"%dk_call% dk_depend tcc-rt"
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_	"%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate cmd.exe					%dk_call% dk_depend cmd
+	::%dk_call% dk_validate tcc_exe					%dk_call% dk_depend tcc-rt
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_	%dk_call% dk_DKBRANCH_DIR
 
 	::###### Set the registry entry for the extension ######
 	::###### cmd.exe ######
@@ -67,13 +73,13 @@ if "%~1" equ "" (goto DKINSTALL)
 	::## /K      		Carries out the command specified by string but remains
 	
 	rem ###### Method 1: use callback
-	ftype DKcmd="%cmd_exe:/=\%" /A /Q /D /E:ON /V:ON /C ^
-	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_%" ^& ^
+	ftype DKcmd="%cmd.exe:/=\%" /A /Q /D /E:ON /V:ON /C ^
+	set "DKBATCH_FUNCTIONS_DIR_=%DKBATCH_FUNCTIONS_DIR_:/=\%" ^& ^
 	call %CALLBACK% "%%1" %%*
 
 
 	::###### Set icons and file association ######
-	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%cmd_exe%"
+	%dk_call% dk_registrySetKey "HKCR/DKcmd/DefaultIcon" "" "REG_SZ" "%cmd.exe%"
 	assoc .cmd=DKcmd
 
 	%dk_call% dk_success "DKcmd install complete"

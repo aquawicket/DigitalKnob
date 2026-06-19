@@ -61,20 +61,20 @@ set "BUILD_TOOLS=30.0.3"
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo 2. Install 3rd party tools
 :: Android SDK
-if NOT EXIST %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME does NOT EXIST" )
+if NOT EXIST %ANDROID_HOME% ( %ERROR% "Environment Variable ANDROID_HOME NOT FOUND" )
 
 :: JDK
 if %GRADLE% equ 0 (
-	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-8-b04-windows-i586-14_jan_2020"
 ) else (
-	set "JAVA_HOME=%USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/openjdk-11_windows-x64_bin"
+	set "JAVA_HOME=%USERPROFILE:\=/%/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin"
 )
 call "%JAVA_HOME%/registerJDK.cmd"
 %IF_ERROR% "Failed at call to registerJDK.cmd"
 
 :: CMake
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
 set "CMAKE_SOURCE_DIR=%APP_PATH%/cpp"
 set "CMAKE_BINARY_DIR=%APP_ROOT%"
 %IF_ERROR% "Failed to find CMake, is it installed?"
@@ -95,10 +95,10 @@ set "PLATFORM=%ANDROID_HOME%/platforms/android-%ANDROID_API%"
 set "NDK_ROOT=%ANDROID_HOME%/ndk/%NDK%"
 
 :::::::::: CLANG  ( ndk_toolchain ) ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-if "%ABI%"=="armeabi-v7a"	(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\armv7a-linux-androideabi%ANDROID_API%-clang")
-if "%ABI%"=="arm64-v8a"		(set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\aarch64-linux-android%ANDROID_API%-clang")
-if "%ABI%"=="x86"			( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\i686-linux-androideabi%ANDROID_API%-clang")
-if "%ABI%"=="x86_64"		( set "ANDROID_TOOLCHAIN=%NDK_ROOT%\toolchains\llvm\prebuilt\windows-x86_64\bin\x86_64-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="armeabi-v7a"	(set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/armv7a-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="arm64-v8a"		(set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android%ANDROID_API%-clang")
+if "%ABI%"=="x86"			( set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/i686-linux-androideabi%ANDROID_API%-clang")
+if "%ABI%"=="x86_64"		( set "ANDROID_TOOLCHAIN=%NDK_ROOT%/toolchains/llvm/prebuilt/windows-x86_64/bin/x86_64-linux-androideabi%ANDROID_API%-clang")
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
@@ -160,9 +160,9 @@ echo Compiling with cmake
 ::call CopyPath %APP_PATH%/visualStudio/%ABI%/gradleAPK.androidproj %CMAKE_BINARY_DIR%/gradleAPK.androidproj
 
 ::Generate CMake project files
-"%cmake_exe%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
+"%cmake.exe%" -G "Visual Studio 17 2022" -A %CMAKE_GENERATOR_ARCH% -DANDROID_ABI=%ABI% -DANDROID_PLATFORM=%ANDROID_API% -DANDROID_NDK=%NDK_ROOT% -DCMAKE_TOOLCHAIN_FILE=%NDK_ROOT%/build/cmake/android.toolchain.cmake -DANDROID_TOOLCHAIN=clang -DANDROID_STL=c++_static %CMAKE_SOURCE_DIR% -B%CMAKE_BINARY_DIR%
 %IF_ERROR% "cmake failed to generate the project files."
-"%cmake_exe%" --build %CMAKE_BINARY_DIR% --target main
+"%cmake.exe%" --build %CMAKE_BINARY_DIR% --target main
 ::call CopyPath %CMAKE_BINARY_DIR%/%Target_Type%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -171,8 +171,8 @@ echo Compiling with cmake
 if %compiler% neq NDK goto :end
 echo Compiling with ndk-build
 call %NDK_ROOT%/ndk-build NDK_LOG=1 APP_BUILD_SCRIPT=%APP_PATH%/cpp/Android.mk NDK_PROJECT_PATH=%APP_PATH%
-call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
-call CopyPath %APP_PATH%\libs\%ABI%\libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
+call CopyPath %APP_PATH%/libs/%ABI%/libmain.so %APP_PATH%/build/apk/lib/%ABI%/libmain.so
+call CopyPath %APP_PATH%/libs/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%/libmain.so
 :end
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -193,7 +193,7 @@ call CopyPath %APP_PATH%/build/apk/lib/%ABI%/libmain.so %APP_PATH%/jniLibs/%ABI%
 ::)
 if %GRADLE% neq 1 goto :end
 echo Compiling with Gradle
-set "GRADLE_USER_HOME=%USERPROFILE%\DigitalKnob\Development\3rdParty\gradle"
+set "GRADLE_USER_HOME=%USERPROFILE%/Digital Knob/Development/3rdParty/gradle"
 setx GRADLE_USER_HOME %GRADLE_USER_HOME%
 
 echo 2. Run gradle clean build
@@ -252,7 +252,7 @@ if %ERRORLEVEL% equ 0 (
 
 echo 16. Install the apk package to android device
 if %GRADLE% equ 1 (
-	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%\app\build\outputs\apk\debug\app-debug.apk
+	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_ROOT%/app/build/outputs/apk/debug/app-debug.apk
 ) else (
 	"%ANDROID_HOME%/platform-tools/adb" install -r %APP_PATH%/build/%APK_NAME%.apk
 )

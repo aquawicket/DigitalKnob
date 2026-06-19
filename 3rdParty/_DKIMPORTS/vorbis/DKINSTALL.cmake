@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -21,14 +22,14 @@ include_guard()
 
 ### DEPEND ###
 dk_depend(libgcc)
-dk_depend(msys2)
+dk_validate(msys2 "dk_depend(msys2)")
 dk_depend(ogg)
 
 ### IMPORT ###
 dk_import()
 
 ### LINK ###
-dk_include				(${vorbis}/include											vorbis_INCLUDE_DIR)
+dk_include				(${vorbis}/include											VORBIS_INCLUDE_DIR)
 
 if(MULTI_CONFIG)
 	if(Windows AND MSVC)
@@ -55,7 +56,7 @@ else()
 		dk_libRelease	(${vorbis_Config_Dir}/lib/libvorbisfile.a					VORBISFILE_RELEASE_LIB	VORBISFILE_LIBRARY)
 endif()
 	
-dk_set(vorbis_LIBRARIES	${VORBIS_LIBRARY})
+dk_set(VORBIS_LIBRARIES	${VORBIS_LIBRARY} ${VORBISENC_LIBRARY} ${VORBISFILE_LIBRARY})
 
 ### 3RDPARTY LINK ###
 dk_set(vorbis_CMAKE 

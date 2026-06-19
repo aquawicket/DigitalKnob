@@ -14,7 +14,7 @@ function Global:dk_httpResponse() {
 	$response = Invoke-WebRequest -Method Get -Uri "${url}" -MaximumRedirection 0 -ErrorAction SilentlyContinue
 	$dk_httpResponse = $response.StatusCode
 	
-	###### output ######
+	###### return ######
 	${global:dk_httpResponse} = ${dk_httpResponse};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_httpResponse};

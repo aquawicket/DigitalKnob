@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# wget http://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/installDK.sh
+# wget http://aquawicket.com/DigitalKnob/Development/installDK.sh
 # chmod sudo 777 installDK.sh
 # ./installDK.sh
 
 ###### install DK.sh ######
-export DKHTTP_DKBASH_FUNCTIONS_DIR="https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBash/functions"
+export DKHTTP_DKBASH_FUNCTIONS_DIR="http://aquawicket.com/DigitalKnob/Development/DKBash/functions"
 export DKBASH_DIR="$PWD/DKBash"
 export DKBASH_FUNCTIONS_DIR="${DKBASH_DIR}/functions"
 [ ! -e ${DKBASH_DIR} ] && mkdir ${DKBASH_DIR}

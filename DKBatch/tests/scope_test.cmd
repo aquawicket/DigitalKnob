@@ -12,7 +12,7 @@ echo ######### SCOPE TEST ############
 :main
 set "globalVar=MAIN"
  setlocal
-	echo(
+	echo.
 	echo -^> main
 	
 	set "main=main"
@@ -27,14 +27,14 @@ set "globalVar=MAIN"
 	echo globalVar = %globalVar% & echo main = %main% & echo func1 = %func1% & echo func2 = %func2% & echo func3 = %func3%
 	
 	echo ^<- main
-	echo(
+	echo.
 goto:eof
 
 
 :func1
 set "globalVar=FUNC1"
  setlocal
-	echo(
+	echo.
 	echo ----^> func1
 
 	set "func1=func1"
@@ -44,14 +44,14 @@ set "globalVar=FUNC1"
 	echo globalVar = %globalVar% & echo main = %main% & echo func1 = %func1% & echo func2 = %func2% & echo func3 = %func3%
 	
 	echo ^<---- func1
-	echo(
+	echo.
 goto:eof
 
 
 :func2
 set "globalVar=FUNC2"
  setlocal
-	echo(
+	echo.
 	echo --------^> func2
 
 	set "func2=func2"
@@ -61,14 +61,14 @@ set "globalVar=FUNC2"
 	echo globalVar = %globalVar% & echo main = %main% & echo func1 = %func1% & echo func2 = %func2% & echo func3 = %func3%
 	
 	echo ^<-------- func2
-	echo(
+	echo.
 goto:eof
 
 
 :func3
 set "globalVar=FUNC3"
  setlocal
-	echo(
+	echo.
 	echo ------------^> func3
 
 	set "func3=func3"
@@ -89,5 +89,5 @@ set "globalVar=FUNC3"
 	pause
 	
 	echo ^<------------ func3
-	echo(
+	echo.
 goto:eof

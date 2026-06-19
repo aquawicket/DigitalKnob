@@ -24,8 +24,12 @@ function Global:dk_call(){
 			${func} = dk_call dk_removeExtension ${func}
 		}
 	}
-	
+
 	if(!${func}){ return; }
+	
+	#Write-Host "dk_call($func)";
+	
+	#Start-Process ${func} -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList ${AllButFirstArgs};
 	if($args[9]){
 		& $func $args[1] $args[2] $args[3] $args[4] $args[5] $args[6] $args[7] $args[8] $args[9];
 	}
@@ -56,7 +60,7 @@ function Global:dk_call(){
 	else {
 		& $func;
 	}
-	#Start-Process ${func} -WorkingDirectory $env:DKPOWERSHELL_FUNCTIONS_DIR -ArgumentList ${AllButFirstArgs};
+	#Write-Host "dk_call($func) $? $LASTEXITCODE";
 } 
 
 

@@ -1,4 +1,5 @@
 ###############################################
 # https://github.com/denoland/deno
+# https://github.com/denoland/deno/archive/979e2f71.zip
 
-Demo_Import=https://github.com/denoland/deno/archive/979e2f71.zip
+deno_Import=https://github.com/denoland/deno/archive/979e2f71.zip

@@ -1,2 +1,6 @@
+############ Sysinternals ############
+# https://live.sysinternals.com/files/SysinternalsSuite.zip
+
+Sysinternals_Type=Tool
 Sysinternals_Import=https://live.sysinternals.com/files/SysinternalsSuite.zip
-Sysinternals_Type=APP
+

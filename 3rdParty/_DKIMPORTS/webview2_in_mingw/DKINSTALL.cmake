@@ -1,18 +1,21 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ webview2_in_mingw ############
+dk_depend(webview2_runtime)
+
 dk_import()
 
 dk_assertPath("${webview2_in_mingw}")
@@ -34,8 +37,8 @@ set(webview2guid_LIB		"${webview2_in_mingw}/WebView/${ARCH}/WebView2Guid.lib")
 set(webview2loader_DLL_LIB	"${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll.lib")
 set(webview2loader_DLL		"${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll")
 
-dk_configure(${webview2_in_mingw} -DARCH=${ARCH})
+dk_configure("${webview2_in_mingw}" -DARCH=${ARCH})
 
 dk_build()
 
-dk_copy(${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll ${webview2_in_mingw_Debug_Dir}/WebView2Loader.dll)
+dk_copy("${webview2_in_mingw}/WebView/${ARCH}/WebView2Loader.dll" "${webview2_in_mingw_Debug_Dir}/WebView2Loader.dll")

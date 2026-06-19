@@ -1,49 +1,32 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_allButFirstArgs(args)
-::#
-::#
+rem ####################################################################
+rem # dk_allButFirstArgs(args)
+rem #
+rem #
 :dk_allButFirstArgs
 %setlocal%
-    %dk_call% dk_debugFunc 1 99
 
-	::###### input ######
-	set dk_allButFirstArgs=%*
-	
-	
-	::### Method 1
+	set dk_allButFirstArgs=%*	
 	for /f "tokens=1*" %%a in ("!dk_allButFirstArgs!") do (
 		set dk_allButFirstArgs=%%b
 	)
 	
-	::### Method 2
-	:: call set dk_allButFirstArgs=%%dk_allButFirstArgs:*%1 =%%
-
-	::### Method 3 - DEQUOTE
-	::	shift
-	::	set dk_allButFirstArgs=%~1
-	::	:loop
-	::	shift
-	::	if [%1]==[] goto afterloop
-	::	set dk_allButFirstArgs=%dk_allButFirstArgs% %~1
-	::	goto loop
-	::	:afterloop
-
-
-	::###### output ######
+	:return
 	endlocal & (
-		set "dk_allButFirstArgs=%dk_allButFirstArgs%"
-		rem if "%~2" neq "" (
-		rem 	set "%~2=%dk_allButFirstArgs%"
-		rem ) else (
-		rem 	echo %dk_allButFirstArgs%
-		rem )
+		set dk_allButFirstArgs=%dk_allButFirstArgs%
 	)
 %endfunction%
 
@@ -51,12 +34,10 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	
     call :DKTEST_func abc 123 def 456
 	call :DKTEST_func "abc" "123" "def" "456"
 	call :DKTEST_func	abc	123	def	456
@@ -64,21 +45,19 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 :DKTEST_func
 %setlocal%
-	%dk_call% dk_debugFunc 0 99
 	
-	echo(
-	echo( before
+	echo.
+	echo ### Original Args ###
 	call :DKTEST_printArgs %*
 	
-	call :dk_allButFirstArgs %*
+	%dk_call% dk_allButFirstArgs %*
 	
-	echo( after
+	echo ### allButFirstArgs ###
 	call :DKTEST_printArgs %dk_allButFirstArgs%
 %endfunction%
 	
 :DKTEST_printArgs
 %setlocal%
-	%dk_call% dk_debugFunc 0 99
 	
 	echo * = '%*'
 	if "%~1" neq "" (echo 1 = '%1')

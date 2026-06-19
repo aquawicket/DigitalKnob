@@ -96,7 +96,7 @@ exit /b
 exit /b
 
 :Test1
-	echo(
+	echo.
 	set args=a b c   
 	echo args    = %args%
 	set Expected=3
@@ -107,12 +107,12 @@ exit /b
 exit /b
 
 :Test2
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::        ALL:a ! " # $ % & ' ( ) * +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
-::    INVALID:  !       %
-::      VALID:a     # $   & ' ( ) * +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
-::            1   2 3 4   5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+rem        ALL:a ! " # $ % & ' ( ) * +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
+rem    INVALID:  !       %
+rem      VALID:a     # $   & ' ( ) * +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
+rem            1   2 3 4   5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
     set args=a   " # $   & ' ( ) * +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~      
 	echo args    = %args%
 	set Expected=31
@@ -123,12 +123,12 @@ exit /b
 exit /b
 	
 :Test3
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::       ALL:a ! " # $ %  & ' ( ) *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
-::   INVALID:  !       % 
-::     VALID:a     # $ %% & ' ( ) *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
-::           1 0 2 3 4 5  6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
+rem       ALL:a ! " # $ %  & ' ( ) *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
+rem   INVALID:  !       % 
+rem     VALID:a     # $ %% & ' ( ) *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
+rem           1 0 2 3 4 5  6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32
     set args=a   " # $ %% & ' ( ) *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^  _  `  {  |  }  ~
 	echo args    = !args!
 	set Expected=32
@@ -140,12 +140,12 @@ exit /b
 exit /b
 
 :Test4
-	echo(
+	echo.
 	SetLocal EnableDelayedExpansion
-::       ALL:a   ! " # $ %  & ' ( )  *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^   _  `  {  |  }  ~
-::   INVALID:    !       % 
-::     VALID:a ^^! " # $    & ' ( )  *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^   _  `  {  |  }  ~
-::           1 2   3 4 5 6  7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  28 29 30 31 32 33
+rem       ALL:a   ! " # $ %  & ' ( )  *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^   _  `  {  |  }  ~
+rem   INVALID:    !       % 
+rem     VALID:a ^^! " # $    & ' ( )  *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^   _  `  {  |  }  ~
+rem           1 2   3 4 5 6  7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  28 29 30 31 32 33
     set args=a ^^! " # $ %% & ' ( )  *  +  ,  -  .  /  :  ;  <  =  >  ?  @  [  \  ]  ^^  _  `  {  |  }  ~
 	echo args    = !args!
 	set Expected=33

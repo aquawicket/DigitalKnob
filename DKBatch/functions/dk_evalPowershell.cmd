@@ -1,32 +1,40 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_evalPowershell(commands)
-::#
-::#
+rem ################################################################################
+rem # dk_evalPowershell(commands)
+rem #
+rem #
 :dk_evalPowershell
 %setlocal%
-	%dk_call% dk_debugFunc 1 99
 	
 	if "%~1" equ "" (%return%)
 	
 	set dk_evalPowershell_command=%*
+	
 	:DeEscape
-	echo %dk_evalPowershell_command% | findstr /c:"^^" >nul && (
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
+	echo %dk_evalPowershell_command% | %findstr.exe% /c:"^^" >nul && (
 		set dk_evalPowershell_command=%dk_evalPowershell_command:^^=^%
 		goto :DeEscape
 	)
 	
-	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
+	%dk_call% dk_validate powershell.exe %dk_call% dk_depend powershell.exe
 
    
-	::###### run command ######
-	set DKPOWERSHELL_COMMAND=%powershell_exe% -Command %dk_evalPowershell_command%
+	rem ###### run command ######
+	set DKPOWERSHELL_COMMAND=%powershell.exe% -Command %dk_evalPowershell_command%
 	
 	%dk_call% dk_exec %DKPOWERSHELL_COMMAND%
 	
@@ -38,22 +46,21 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	echo ######################## TEST_A ########################
 	%dk_call% dk_evalPowershell "Write-Output 'dk_evalPowershell TEST A';"
-	echo(
+	echo.
 	
 	echo ######################## TEST_B ########################
 	%dk_call% dk_evalPowershell "Write-Output 'dk_evalPowershell TEST B';"
-	echo(
+	echo.
 	
 	echo ######################## TEST_C ########################
 	set "PSVAR=this is a powershell variable"
     %dk_call% dk_evalPowershell "Write-Output 'PSVAR = '${env:PSVAR};"
-	echo(
+	echo.
 	
 %endfunction%

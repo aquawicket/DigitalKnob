@@ -141,13 +141,13 @@ function Global:dk_DKBRANCH_DIR() {
 		${env:DKPYTHON_FUNCTIONS_DIR_}="${env:DKPYTHON_FUNCTIONS_DIR}/";
 		#dk_call dk_assertPath ${env:DKPYTHON_FUNCTIONS_DIR_};
 
-	${env:DKVB}="DKVb";
-	${env:DKVB_DIR}="${env:DKBRANCH_DIR}/${env:DKVB}";
-	#dk_call dk_assertPath ${env:DKVB_DIR};
-		${env:DKVB_FUNCTIONS_DIR}="${env:DKVB_DIR}/functions";
-		#dk_call dk_assertPath ${env:DKVB_FUNCTIONS_DIR};
-		${env:DKVB_FUNCTIONS_DIR_}="${env:DKVB_FUNCTIONS_DIR}/";
-		#dk_call dk_assertPath ${env:DKVB_FUNCTIONS_DIR_};
+	${env:DKVBS}="DKVbs";
+	${env:DKVBS_DIR}="${env:DKBRANCH_DIR}/${env:DKVBS}";
+	#dk_call dk_assertPath ${env:DKVBS_DIR};
+		${env:DKVBS_FUNCTIONS_DIR}="${env:DKVBS_DIR}/functions";
+		#dk_call dk_assertPath ${env:DKVBS_FUNCTIONS_DIR};
+		${env:DKVBS_FUNCTIONS_DIR_}="${env:DKVBS_FUNCTIONS_DIR}/";
+		#dk_call dk_assertPath ${env:DKVBS_FUNCTIONS_DIR_};
 		
 	return ${env:DKBRANCH_DIR};
 }
@@ -178,13 +178,13 @@ function Global:DKTEST() {
 	dk_call dk_echo "env:DKPHP_DIR        = ${env:DKPHP_DIR}";
 	dk_call dk_echo "env:DKPOWERSHELL_DIR = ${env:DKPOWERSHELL_DIR}";
 	dk_call dk_echo "env:DKPYTHON_DIR     = ${env:DKPYTHON_DIR}";
-	dk_call dk_echo "env:DKVB_DIR         = ${env:DKVB_DIR}";	
+	dk_call dk_echo "env:DKVBS_DIR         = ${env:DKVBS_DIR}";	
     dk_call dk_echo "dk_DKBRANCH_DIR      = '$(dk_call dk_DKBRANCH_DIR)'\n";
 	
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DKBRANCH_DIR . . .\n";
-	dk_call dk_DKBRANCH_DIR "C:/Users/Administrator/DigitalKnob/Development"
+	dk_call dk_DKBRANCH_DIR "${ENV:USERPROFILE}/Digital Knob/Development"
 	dk_call dk_echo "env:DKBRANCH_DIR = ${env:DKBRANCH_DIR}"
-	dk_call dk_echo "dk_DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR 'C:/Users/Administrator/DigitalKnob/Development')'\n";
+	dk_call dk_echo "dk_DKBRANCH_DIR = '$(dk_call dk_DKBRANCH_DIR '${ENV:USERPROFILE}/Digital Knob/Development')'\n";
 }

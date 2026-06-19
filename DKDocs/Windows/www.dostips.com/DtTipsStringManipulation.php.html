@@ -1,0 +1,723 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS - String Manipulation</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='ysel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS - String Manipulation</H1>
+<span class='shortText'>Basic string manipulation in batch like you are used to from other programming languages.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Snippets.AlignRight'>Align Right</a></td>
+<td class='text'>Align text to the right i.e. to improve readability of number columns.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.LeftString'>Left String</a></td>
+<td class='text'>Extract characters from the beginning of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.MapLookup'>Map and Lookup</a></td>
+<td class='text'>Use Key-Value pair list to lookup and translate values.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.MidString'>Mid String</a></td>
+<td class='text'>Extract a Substring by Position.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Remove'>Remove</a></td>
+<td class='text'>Remove a substring using string substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RemoveBothEnds'>Remove both Ends</a></td>
+<td class='text'>Remove the first and the last character of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RemoveSpaces'>Remove Spaces</a></td>
+<td class='text'>Remove all spaces in a string via substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Replace'>Replace</a></td>
+<td class='text'>Replace a substring using string substitution.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RightString'>Right String</a></td>
+<td class='text'>Extract characters from the end of a string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.SplitString'>Split String</a></td>
+<td class='text'>Split a String, Extract Substrings by Delimiters.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.StringConcatenation'>String Concatenation</a></td>
+<td class='text'>Add one string to another string.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimLeftFOR'>Trim Left</a></td>
+<td class='text'>Trim spaces from the beginning of a string via "FOR" command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimQuotes'>Trim Quotes</a></td>
+<td class='text'>Remove surrounding quotes via FOR command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimRightFOR'>Trim Right</a></td>
+<td class='text'>Trim spaces from the end of a string via "FOR" command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.TrimRightSubst'>Trim Right</a></td>
+<td class='text'>Trim spaces from the end of a string via substitution.</td>
+</tr>
+</table>    <hr>
+    <a name='_Toc135152731'></a>
+    <a name='Snippets.AlignRight'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Align Right - Align text to the right i.e. to improve readability of number columns</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Add leading spaces to a string to make sure the output lines up.  I.e. for variables no longer than 8 characters add 8 spaces at the front and then show only the last 8 characters of the variable.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;x=3000</span><br>
+<span style='color=#000000'>set&nbsp;y=2</span><br>
+<span style='color=#000000'>set&nbsp;x=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%x%</span><br>
+<span style='color=#000000'>set&nbsp;y=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%y%</span><br>
+<span style='color=#000000'>echo.X=%x:~-8%</span><br>
+<span style='color=#000000'>echo.Y=%y:~-8%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>X=    3000
+Y=       2
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152734'></a>
+    <a name='Snippets.LeftString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Left String - Extract characters from the beginning of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Left</b> function in VB a batch script can return a specified number of characters from the left side of a string by specifying a substring for an expansion given a position of 0 and a length using :~  while expanding a variable content.  The example shows how to return the first 4 characters of a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~0,4%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+poli
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152738'></a>
+    <a name='Snippets.MapLookup'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Map and Lookup - Use Key-Value pair list to lookup and translate values</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This example shows an approach to map a name of a month into it`s corresponding two digit number.  The key-value pairs are listed in the map variable separated by semicolon.  Key and value itself are separated by one dash character.  Same can be used to tranlate a day-of-the-week short string into a day-of-the-week long string by changing the map content only.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>REM&nbsp;----&nbsp;Example&nbsp;1:&nbsp;Translate&nbsp;name&nbsp;of&nbsp;month&nbsp;into&nbsp;two&nbsp;digit&nbsp;number&nbsp;----</span></span><br>
+<span style='color=#000000'>SET&nbsp;v=Mai</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>SET&nbsp;map=Jan-01;Feb-02;Mar-03;Apr-04;Mai-05;Jun-06;Jul-07;Aug-08;Sep-09;Oct-10;Nov-11;Dec-12</span><br>
+<span style='color=#000000'>CALL&nbsp;SET&nbsp;v=<span class=c_pvar>%%m</span>ap:*%v%-=%%</span><br>
+<span style='color=#000000'>SET&nbsp;v=%v:;=&amp;<span class=c_cmmt>rem.%</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>ECHO.%v%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;----&nbsp;Example&nbsp;2:&nbsp;Translate&nbsp;abbreviation&nbsp;into&nbsp;full&nbsp;string&nbsp;----</span></span><br>
+<span style='color=#000000'>SET&nbsp;v=sun</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;map=mon-Monday;tue-Tuesday;wed-Wednesday;thu-Thursday;fri-Friday;sat-Saturday;sun-Sunday</span><br>
+<span style='color=#000000'>CALL&nbsp;SET&nbsp;v=<span class=c_pvar>%%m</span>ap:*%v%-=%%</span><br>
+<span style='color=#000000'>SET&nbsp;v=%v:;=&amp;<span class=c_cmmt>rem.%</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;ECHO.%v%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>05
+  Sunday
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152733'></a>
+    <a name='Snippets.MidString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Mid String - Extract a Substring by Position</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Mid</b> function in VB a batch script can return a specified number of characters from any position inside a string by specifying a substring for an expansion given a position and length using :~ while expanding a variable content.  The example here shows how to extract the parts of a date.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo.Date&nbsp;&nbsp;&nbsp;:&nbsp;%date%</span><br>
+<span style='color=#000000'>echo.Weekday:&nbsp;%date:~0,3%</span><br>
+<span style='color=#000000'>echo.Month&nbsp;&nbsp;:&nbsp;%date:~4,2%</span><br>
+<span style='color=#000000'>echo.Day&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%date:~7,2%</span><br>
+<span style='color=#000000'>echo.Year&nbsp;&nbsp;&nbsp;:&nbsp;%date:~10,4%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Date   : Sat 03/11/2006
+Weekday: Sat
+Month  : 03
+Day    : 11
+Year   : 2006
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152730'></a>
+    <a name='Snippets.Remove'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove - Remove a substring using string substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The string substitution feature can also be used to remove a substring from another string.  The example shown here removes all occurrences of "the " from the string variable <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=the&nbsp;cat&nbsp;in&nbsp;the&nbsp;hat</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:the&nbsp;=%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>the cat in the hat
+cat in hat
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152736'></a>
+    <a name='Snippets.RemoveBothEnds'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove both Ends - Remove the first and the last character of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Using <b>:~1,-1</b> within a variable expansion will remove the first and last character of the string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~1,-1%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+oliti
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152728'></a>
+    <a name='Snippets.RemoveSpaces'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Remove Spaces - Remove all spaces in a string via substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This script snippet can be used to remove all spaces from a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;word&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;=%</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;      word       &quot;
+&quot;word&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152729'></a>
+    <a name='Snippets.Replace'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Replace - Replace a substring using string substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>To replace a substring with another string use the string substitution feature.  The example shown here replaces all occurrences "teh" misspellings with "the" in the string variable <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=teh&nbsp;cat&nbsp;in&nbsp;teh&nbsp;hat</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:teh=the%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>teh cat in teh hat
+the cat in the hat
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152735'></a>
+    <a name='Snippets.RightString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Right String - Extract characters from the end of a string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Similar to the <b>Right</b> function in VB a batch script can return a specified number of characters from the right side of a string by specifying a substring for an expansion given a negative position using :~  while expanding a variable content.  The example shows how to return the last 4 characters of a string.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=politic</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:~-4%</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>politic
+itic
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152732'></a>
+    <a name='Snippets.SplitString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Split String - Split a String, Extract Substrings by Delimiters</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the <b>FOR</b> command to split a string into parts.  The example shows how to split a date variable into its  parts.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo.--&nbsp;Split&nbsp;off&nbsp;the&nbsp;first&nbsp;date&nbsp;token,&nbsp;i.e.&nbsp;day&nbsp;of&nbsp;the&nbsp;week</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%date%&quot;)&nbsp;do&nbsp;set&nbsp;d=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>echo.Date&nbsp;&nbsp;&nbsp;:&nbsp;%date%</span><br>
+<span style='color=#000000'>echo.d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%d%</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.--&nbsp;Split&nbsp;the&nbsp;date&nbsp;into&nbsp;weekday,&nbsp;month,&nbsp;day,&nbsp;and&nbsp;year,&nbsp;using&nbsp;slash&nbsp;and&nbsp;space&nbsp;as&nbsp;delimiters</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,3,4&nbsp;delims=/&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%date%&quot;)&nbsp;do&nbsp;set&nbsp;wday=<span class=c_pvar>%%a</span>&amp;set&nbsp;month=<span class=c_pvar>%%b</span>&amp;set&nbsp;day=<span class=c_pvar>%%c</span>&amp;set&nbsp;year=<span class=c_pvar>%%d</span></span><br>
+<span style='color=#000000'>echo.Weekday:&nbsp;%wday%</span><br>
+<span style='color=#000000'>echo.Month&nbsp;&nbsp;:&nbsp;%month%</span><br>
+<span style='color=#000000'>echo.Day&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;%day%</span><br>
+<span style='color=#000000'>echo.Year&nbsp;&nbsp;&nbsp;:&nbsp;%year%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>-- Split off the first date token, i.e. day of the week
+Date   : Thu 12/02/2005
+d      : Thu
+
+-- Split the date into weekday, month, day, and year, using slash and space as delimiters
+Weekday: Thu
+Month  : 12
+Day    : 02
+Year   : 2005
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Snippets.StringConcatenation'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-02-26</font></font></div>
+    <H2>String Concatenation - Add one string to another string</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This example shows how to add two strings in DOS.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;&quot;str1=Hello&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str2=World&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str3=%str1<span class=c_pvar>%%s</span>tr2%&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str4=%str1%&nbsp;%str2%&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;set&nbsp;&quot;str1=%str1%&nbsp;DOS&nbsp;%str2%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str3%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str4%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;echo.%str1%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>HelloWorld
+  Hello World
+  Hello DOS World
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152726'></a>
+    <a name='Snippets.TrimLeftFOR'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-28</font></font></div>
+    <H2>Trim Left - Trim spaces from the beginning of a string via "FOR" command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the <b>FOR</b> command to trim spaces at the beginning of a variable.  In this example the variable to be trimmed is <b>str</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;Leading&nbsp;spaces&nbsp;to&nbsp;truncate</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=*&nbsp;delims=&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%str%&quot;)&nbsp;do&nbsp;set&nbsp;str=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;               15 Leading spaces to truncate&quot;
+&quot;15 Leading spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152737'></a>
+    <a name='Snippets.TrimQuotes'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Quotes - Remove surrounding quotes via FOR command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The <b>FOR</b> command can be used to safely remove quotes surrounding a string.  If the string does not have quotes then it will remain unchanged.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=&quot;cmd&nbsp;politic&quot;</span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;useback&nbsp;tokens=*&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('%str%')&nbsp;do&nbsp;set&nbsp;str=<span class=c_pvar>%%~a</span></span><br>
+<span style='color=#000000'>echo.%str%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;cmd politic&quot;
+cmd politic
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152727'></a>
+    <a name='Snippets.TrimRightFOR'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Right - Trim spaces from the end of a string via "FOR" command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Trimming spaces at the end of a variable seems a little tricky.  The following example shows how to use a <b>FOR</b> loop to trim <b>up to 31</b> spaces from the end of a string.  It assumes that <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is enabled.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=15&nbsp;Trailing&nbsp;Spaces&nbsp;to&nbsp;truncate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(1,1,31)&nbsp;do&nbsp;if&nbsp;&quot;!str:~-1!&quot;==&quot;&nbsp;&quot;&nbsp;set&nbsp;str=!str:~0,-1!</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;15 Trailing Spaces to truncate               &quot;
+&quot;15 Trailing Spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc135152727'></a>
+    <a name='Snippets.TrimRightSubst'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Trim Right - Trim spaces from the end of a string via substitution</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Trimming spaces at the end of a variable seems a little tricky.  The following example shows how to use the string substitution feature to trim <b>up to 31 spaces</b> from the end of a string.  It assumes that the string to be trimmed never contains two hash "##" characters in a row.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;str=15&nbsp;Trailing&nbsp;Spaces&nbsp;to&nbsp;truncate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem</span></span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+<span style='color=#000000'>set&nbsp;str=%str%##</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:&nbsp;##=##%</span><br>
+<span style='color=#000000'>set&nbsp;str=%str:##=%</span><br>
+<span style='color=#000000'>echo.&quot;%str%&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;15 Trailing Spaces to truncate               &quot;
+&quot;15 Trailing Spaces to truncate&quot;
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146a483d1ecd',t:'MTc2OTkyNDA2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

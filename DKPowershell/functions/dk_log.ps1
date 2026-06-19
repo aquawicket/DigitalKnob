@@ -166,8 +166,8 @@ if(!(${dk_log_FATAL_TAG}))      	{ $global:dk_log_FATAL_TAG = "FATAL: "; }
 #if(!(${dk_log_FATAL_LINE}))     	{ $global:dk_log_FATAL_LINE = 0; }
 #if(!(${dk_log_FATAL_SOUND}))     	{ $global:dk_log_FATAL_SOUND = 0; }
 #if(!(${dk_log_FATAL_TIMEOUT}))     { $global:dk_log_FATAL_TIMEOUT = 0; }
-#if(!(${dk_log_FATAL_PAUSE}))    	{ $global:dk_log_FATAL_PAUSE = 1; }
-#if(!(${dk_log_FATAL_HALT}))     	{ $global:dk_log_FATAL_HALT = 0; }
+#if(!(${dk_log_FATAL_PAUSE}))    	{ $global:dk_log_FATAL_PAUSE = 0; }
+if(!(${dk_log_FATAL_HALT}))     	{ $global:dk_log_FATAL_HALT = 1; }
 
 
 

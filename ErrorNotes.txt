@@ -1,2 +1,0 @@
-FATAL: dk_build(): C:/Users/Administrator/DigitalKnob/Development/DKCpp/plugins/DK/Windows_X86_64_Clang/Debug has no buildable files
-FIX: msys2-base-x86_64-20241208 must be installed first

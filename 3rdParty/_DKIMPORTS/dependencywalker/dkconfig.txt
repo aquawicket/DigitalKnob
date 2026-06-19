@@ -1,5 +1,8 @@
 ############ dependencywalker ############
 # https://www.dependencywalker.com
+# https://www.dependencywalker.com/depends22_x86.zip
+# https://www.dependencywalker.com/depends22_x64.zip
 
+dependencywalker_Type=Tool
 dependencywalker_Windows_X86_Import=https://www.dependencywalker.com/depends22_x86.zip
 dependencywalker_Windows_X86_64_Import=https://www.dependencywalker.com/depends22_x64.zip

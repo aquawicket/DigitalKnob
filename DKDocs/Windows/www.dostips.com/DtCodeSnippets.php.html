@@ -1,0 +1,1206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS - Script Snippets</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='ysel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS - Script Snippets</H1>
+<span class='shortText'>DOS Batch Script Snippets.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Arithmetic.FloatingPoint'>Floating Point Arithmetic</a></td>
+<td class='text'>Working around the limitations of the command processor.</td>
+</tr>
+<tr><td class='title'><a href='#Arithmetic.Integer'>SET /A</a></td>
+<td class='text'>Basic  Integer Arithmetic.</td>
+</tr>
+<tr><td class='title'><a href='#Arithmetic.LargeIntegers'>Large Integers</a></td>
+<td class='text'>Working around the limitations of the command processor.</td>
+</tr>
+<tr><td class='title'><a href='#Arithmetic.Percent'>Percent</a></td>
+<td class='text'>Basic Percent arithmetic.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.AnsiToUnicode'>Ansi to Unicode</a></td>
+<td class='text'>Ansi to Unicode.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.CommandGrouping'>Command Grouping</a></td>
+<td class='text'>Grouping Commands in blocks using Parentesis.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.CommandsInSingleLine'>Multiple Commands in Single Line</a></td>
+<td class='text'>How to enter multiple commands into a single line.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.ConditionalExecution'>Conditional Execution</a></td>
+<td class='text'>Conditional Execution Based on Result of Previous Command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.CountLines'>File Line Count</a></td>
+<td class='text'>Use FIND command to count file lines, store line count into a variable.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.DoesString1StartWithString2'>Does String1 begin with String2?</a></td>
+<td class='text'>Check if one string starts with another.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.DrivesAndTypes'>Drive Types</a></td>
+<td class='text'>List all drives connected and corresponding types, i.e. Fixed, CD-ROM, Removable.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.EchoEmptyLine'>Echo a Blank Line</a></td>
+<td class='text'>How to use ECHO to output a blank line.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Escape'>Escape Characters</a></td>
+<td class='text'>Escaping special characters in DOS batch when delayed variable expansion is enabled or disabled.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.Exit'>Exit</a></td>
+<td class='text'>Exit on key pressed.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.ExitCustomMessage'>Exit</a></td>
+<td class='text'>Exit on key pressed with customized message.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.ExitDelayed'>Exit Delayed</a></td>
+<td class='text'>Delayed exit without user interaction.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.FileSize'>File Size in Bytes</a></td>
+<td class='text'>Use FOR command to determine the file size in bytes.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.InitializingBatch'>Initializing a batch</a></td>
+<td class='text'>Commands that are typically executed at the beginning of a batch script.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.OpenRegeditAtKey'>Open the Registry Editor at a given Key</a></td>
+<td class='text'>Opening the Registry Editor at a defined Key.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.RunAsAdmin'>RunAs Administrator</a></td>
+<td class='text'>Force a batch to run as different user via RunAs command.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.SingleCommandForMultipleLine'>Multiple Lines for Single Command</a></td>
+<td class='text'>How to continue a command in the next line.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.UnicodeToAnsi'>Unicode to Ansi</a></td>
+<td class='text'>Convert a file to Ansi.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.UniqueString'>Date Time for Unique String</a></td>
+<td class='text'>Create a unique string using current date and time.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.VersionHistory'>Version History</a></td>
+<td class='text'>Add a version history, track date, author and description of each change.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.WindowColor'>Window Color</a></td>
+<td class='text'>Change the Window Color.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.WindowSize'>Window Size</a></td>
+<td class='text'>Change the Window Size.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.WindowTitle'>Window Title</a></td>
+<td class='text'>Change the Window Title.</td>
+</tr>
+<tr><td class='title'><a href='#Snippets.ZeroBytesCheck'>Check File for Zero Bytes</a></td>
+<td class='text'>Use FOR command to show or delete empty files.</td>
+</tr>
+</table>    <hr>
+    <a name='_Toc128587071'></a>
+    <a name='Arithmetic.FloatingPoint'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-01</font></font></div>
+    <H2>Floating Point Arithmetic - Working around the limitations of the command processor</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Floating point arithmetic can be achieved by moving the fractions into the integer.  I.e. A floating point equitation using values with 3 digits after the dot can be calculated as follows:
+<pre>Floating Point: 12.055 + 1.001 = 13.056
+Integer:        12055 + 1001 = 13056</pre></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;/a&nbsp;y=12055&nbsp;+&nbsp;1001</span><br>
+<span style='color=#000000'>echo.y&nbsp;=&nbsp;%y%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>y = 13056
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587070'></a>
+    <a name='Arithmetic.Integer'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-01</font></font></div>
+    <H2>SET /A - Basic  Integer Arithmetic</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The <b><a href="DosCommandIndex.htm#SET">SET</a> /A</b> command can be used for basic arithmetic.
+<br>You can write <b>SET /a y=3*x</b> or <b>SET /a y=3*%x%</b>.  Both are correct.  
+The command interpreter is smart enough to recognize variables within a formula.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;/a&nbsp;x=20</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;y=3*x</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;y+=140</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;y/=2</span><br>
+<span style='color=#000000'>echo.y&nbsp;=&nbsp;%y%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>y = 100
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587073'></a>
+    <a name='Arithmetic.LargeIntegers'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-01</font></font></div>
+    <H2>Large Integers - Working around the limitations of the command processor</H2>
+  <table class='posts'>
+  </table>
+    <hr>
+    <a name='_Toc128587072'></a>
+    <a name='Arithmetic.Percent'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-04-01</font></font></div>
+    <H2>Percent - Basic Percent arithmetic</H2>
+  <table class='posts'>
+  </table>
+    <hr>
+    <a name='_Toc141112836'></a>
+    <a name='Snippets.AnsiToUnicode'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>Ansi to Unicode - Ansi to Unicode</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>An easy way to convert an <b>ANSI</b> encoded file to <b>UNICODE</b> is by running a <a href="DosCommandIndex.htm#TYPE">TYPE</a> 
+command in a new instance of <a href="DosCommandIndex.htm#CMD">CMD</a>.exe  with option <b>/U</b> and piping the output into a new file.
+<br>The following command converts a text file named <b>myfile.txt</b> into the <b>UNICODE</b> encoded 
+file named <b>myunicodefile.txt</b>.
+<br>Note that <b>myfile.txt</b> should be ANSI for this to work correctly.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>cmd&nbsp;/u&nbsp;/c&nbsp;type&nbsp;myfile.txt&gt;myunicodefile.txt</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112826'></a>
+    <a name='Snippets.CommandGrouping'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Command Grouping - Grouping Commands in blocks using Parentesis</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use parenthesis to group commands into a block.  Command blocks are useful in combination with 
+e.g. <a href="DosCommandIndex.htm#IF">IF</a> or <a href="DosCommandIndex.htm#FOR">FOR</a> commands.
+<br>An opening parenteses in a line will tell command processor that more lines will follow.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchCommandBlock.bat'>BatchCommandBlock.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;IN&nbsp;(4,-1,0)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.<span class=c_pvar>%%a</span>:&nbsp;First&nbsp;&nbsp;command&nbsp;in&nbsp;block</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.&nbsp;&nbsp;&nbsp;Second&nbsp;command&nbsp;in&nbsp;block</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>if&nbsp;exist&nbsp;&quot;c:\windows&quot;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.The&nbsp;c:\windows&nbsp;directory&nbsp;exist.</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;IsWin=YES&quot;</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;IsWin=NO&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>echo.Is&nbsp;this&nbsp;a&nbsp;windows&nbsp;pc?&nbsp;&nbsp;%IsWin%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>4: First  command in block
+   Second command in block
+3: First  command in block
+   Second command in block
+2: First  command in block
+   Second command in block
+1: First  command in block
+   Second command in block
+0: First  command in block
+   Second command in block
+
+The c:\windows directory exist.
+Is this a windows pc?  YES
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112823'></a>
+    <a name='Snippets.CommandsInSingleLine'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Multiple Commands in Single Line - How to enter multiple commands into a single line</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use <b>&</b> to separate multiple commands within a single command line.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>cls&amp;dir</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;IN&nbsp;(10,-1,0)&nbsp;do&nbsp;@echo.<span class=c_pvar>%%a</span>:&amp;echo.This&nbsp;is&nbsp;line&nbsp;number&nbsp;<span class=c_pvar>%%a</span></span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112827'></a>
+    <a name='Snippets.ConditionalExecution'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Conditional Execution - Conditional Execution Based on Result of Previous Command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><b>Command1 && SuccessCommand</b>
+<br><b>Command1 || FailCommand</b>
+<br><b>Command1 && SuccessCommand || FailCommand</b>
+<br><br>The <b>&&</b> operator can be used to execute a command only when the previews command <b>succeeded</b>.
+<br>The <b>||</b> operator can be used to execute a command only when the previews command <b>failed</b>.
+<br><br>Example 1
+<br>Show a message only when the string "ERROR" exist in the logfile.log file. The find command 
+    succeeds when the string "ERROR" exist in logfile.log.  The output of the find command is 
+    redirected into the NUL devise since we don`t want to see any of its output in the output window.
+<br><br>Example 2
+<br>Show a message only when the string "ERROR" doesn`t exist in the logfile.log file. The find command 
+    fails when the string "ERROR" doesn`t exist in logfile.log. The output of the find command is 
+    redirected into the NUL devise since we don`t want to see any of its output in the output window.
+<br><br>Example 3
+<br>The Conditional Execution operators are useful with many DOS commands, i.e. the SET command.
+<br><br>Note
+<br>Be careful when combining the operators, i.e.:
+<br><b>Command1 && (CommandBlock2) || (CommandBlock3)</b>
+<ul>
+    <li>If Command1 fails then CommandBlock2 will be skipped and CommandBlock3 will be executed.</li>
+    <li>If Command1 succeeds then CommandBlock2 will be executed.</li>
+    <li>If Command2 fails then CommandBlock3 will also be executed!!</li>
+</ul>
+<br>To avoid this pitfall force CommandBlock2 to succeed, i.e. using a simple REM as last block command:</li>
+<br><b>Command1 && (CommandBlock2 & REM) || (CommandBlock3)</b>
+<br><br>or:
+<br><b><pre>
+Command1 && (
+    CommandBlock2
+    REM force success
+) || (
+    CommandBlock3
+)
+</pre></b>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchConditionalExecution.bat'>BatchConditionalExecution.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.1:</span><br>
+<span style='color=#000000'>echo.&nbsp;&nbsp;&nbsp;...finding&nbsp;'ERROR'&nbsp;in&nbsp;logfile.log</span><br>
+<span style='color=#000000'>find&nbsp;&quot;ERROR&quot;&nbsp;logfile.log&gt;NUL&nbsp;&amp;&amp;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.&nbsp;&nbsp;&nbsp;yes,&nbsp;&quot;ERROR&quot;&nbsp;in&nbsp;logfile</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.2:</span><br>
+<span style='color=#000000'>echo.&nbsp;&nbsp;&nbsp;...finding&nbsp;'ERROR'&nbsp;in&nbsp;logfile.log</span><br>
+<span style='color=#000000'>find&nbsp;&quot;ERROR&quot;&nbsp;logfile.log&gt;NUL&nbsp;||&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.&nbsp;&nbsp;&nbsp;no&nbsp;&quot;ERROR&quot;&nbsp;in&nbsp;logfile</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.3:</span><br>
+<span style='color=#000000'>set&nbsp;&quot;v=old_value&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/p&nbsp;&quot;v=&nbsp;&nbsp;&nbsp;...enter&nbsp;a&nbsp;value&nbsp;or&nbsp;just&nbsp;hit&nbsp;ENTER:&nbsp;&quot;&nbsp;&amp;&amp;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.&nbsp;&nbsp;&nbsp;The&nbsp;user&nbsp;entered&nbsp;a&nbsp;value,&nbsp;the&nbsp;variable&nbsp;v&nbsp;changed.</span><br>
+<span style='color=#000000'>)&nbsp;||&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.&nbsp;&nbsp;&nbsp;The&nbsp;user&nbsp;just&nbsp;hit&nbsp;Enter,&nbsp;the&nbsp;variable&nbsp;v&nbsp;remains&nbsp;unchanged.</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>echo.&nbsp;&nbsp;&nbsp;v&nbsp;is&nbsp;now:&nbsp;%v%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>
+1:
+   ...finding 'ERROR' in logfile.log
+
+2:
+   ...finding 'ERROR' in logfile.log
+   no &quot;ERROR&quot; in logfile
+
+3:
+   ...enter a value or just hit ENTER: 
+   The user just hit Enter, the variable v remains unchanged.
+   v is now: old_value
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112832'></a>
+    <a name='Snippets.CountLines'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>File Line Count - Use FIND command to count file lines, store line count into a variable</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Running the <a href="DosCommandIndex.htm#FIND">FIND</a> command with option <b>/v</b> and empty search string will find all lines
+<br>Running the <a href="DosCommandIndex.htm#FIND">FIND</a> command with option <b>/c</b> will output the line count only.
+<br>The <a href="DosCommandIndex.htm#FOR">FOR</a> command with option <b>/f</b> will parse the output, the line count in this case, 
+and the set command put the line number into the cnt variable.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;file=textfile.txt</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;cnt=0</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('type&nbsp;&quot;%file%&quot;^|find&nbsp;&quot;&quot;&nbsp;/v&nbsp;/c')&nbsp;do&nbsp;set&nbsp;/a&nbsp;cnt=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>echo&nbsp;%file%&nbsp;has&nbsp;%cnt%&nbsp;lines</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>textfile.txt has 50 lines
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112830'></a>
+    <a name='Snippets.DoesString1StartWithString2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2011-04-05</font></font></div>
+    <H2>Does String1 begin with String2? - Check if one string starts with another</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Knowing a certain character combination that never occurs in string1 can help solving the exercise.
+Lets say @@@ never occurs in string1 then we can use it as prefix for string1 and reformulate the 
+question to:  Does string1 alter if we delete any occurrence of @@@+string2 within string1.
+If string1 alters then if string1 start string2 then string 1 will alter otherwise not.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>set&nbsp;s=@@@%string1%</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%s%&quot;==&quot;!s:@@@%string2%=!&quot;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.string1&nbsp;doesn`t&nbsp;begin&nbsp;with&nbsp;string2</span><br>
+<span style='color=#000000'>)&nbsp;ELSE&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.string1&nbsp;begins&nbsp;with&nbsp;string2</span><br>
+<span style='color=#000000'>)</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112837'></a>
+    <a name='Snippets.DrivesAndTypes'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2009-11-10</font></font></div>
+    <H2>Drive Types - List all drives connected and corresponding types, i.e. Fixed, CD-ROM, Removable</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The <b>FSUTIL</b> program can be used from the command line to query information about 
+the connected drives.
+<br> 
+<br>Return all currently connected drives:
+<br><b>fsutil fsinfo drives</b>
+<br>Returns e.g.: <b>Drives: C:\ D:\ E:\ F:\</b>
+<br> 
+<br>Return the drive type for a given drive:
+<br><b>fsutil fsinfo drivetype D:\</b>
+<br>Returns e.g.: <b>D:\ - Fixed Drive</b>
+<br> 
+<br>To get the drive type of all drives parse the output of <b>fsutil fsinfo drives</b> with 
+a <a href="DosCommandIndex.htm#FOR">FOR</a> command and run <b>fsutil fsinfo drivetype <drive></b> for each drive.  However some 
+experimenting showed that funny things happen when parsing the result of <b>fsutil fsinfo drives</b> 
+using the <a href="DosCommandIndex.htm#FOR">FOR</a> command, some line feeds seem to be missing.  Piping the fsutil output through 
+the find command seems to resolve this problem.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchDriveType.bat'>BatchDriveType.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'>set&nbsp;&quot;drlist=&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=*&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('fsutil&nbsp;fsinfo&nbsp;drives^|find&nbsp;&quot;\&quot;')&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;dr=<span class=c_pvar>%%A</span>&quot;</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call&nbsp;set&nbsp;&quot;drlist=<span class=c_pvar>%%d</span>rlist%%&nbsp;<span class=c_pvar>%%d</span>r:~-3%%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(%drlist%)&nbsp;do&nbsp;fsutil&nbsp;fsinfo&nbsp;drivetype&nbsp;<span class=c_pvar>%%A</span></span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>C:\ - Fixed Drive
+D:\ - Fixed Drive
+E:\ - CD-ROM Drive
+F:\ - Removable Drive
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Snippets.EchoEmptyLine'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Echo a Blank Line - How to use ECHO to output a blank line</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>To ouptut an empty line using the ECHO command simply append a dot to the command.  Otherwise the 
+ECHO command will show the current echo state. In fact it appears to be safe to always use the dot.
+<p>
+A problem has been identified: "echo." stops working when there is a file named "echo" in the current 
+directory.  Using "<b>echo/</b>" instead may be a better option. <a href="forum/viewtopic.php?p=2537">See 
+this forum post for details.</a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo</span><br>
+<span style='color=#000000'>echo&nbsp;This&nbsp;line&nbsp;is&nbsp;followed&nbsp;by&nbsp;an&nbsp;empty&nbsp;line.</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.Simply&nbsp;always&nbsp;use&nbsp;the&nbsp;dot&nbsp;when&nbsp;echoing&nbsp;text</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>ECHO is on.
+This line is followed by an empty line.
+
+Simply always use the dot when echoing text
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112825'></a>
+    <a name='Snippets.Escape'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Escape Characters - Escaping special characters in DOS batch when delayed variable expansion is enabled or disabled</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The command processor handles some characters in a special way and these characters won`t show up
+in the output as expected when using i.e. the <a href="DosCommandIndex.htm#ECHO">ECHO</a> command.  The exclamation mark is handled differently
+if <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a> is enabled or disabled.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchEscape.bat'>BatchEscape.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;DISABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>echo.delayed&nbsp;expansion&nbsp;is&nbsp;DISABLED</span><br>
+<span style='color=#000000'>echo.1.&nbsp;^^!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.2.&nbsp;!!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.3.&nbsp;!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.4.&nbsp;%%&nbsp;:percent</span><br>
+<span style='color=#000000'>echo.5.&nbsp;^&amp;&nbsp;:ampersand</span><br>
+<span style='color=#000000'>echo.6.&nbsp;^|&nbsp;:vertical&nbsp;line</span><br>
+<span style='color=#000000'>echo.7.&nbsp;^^&nbsp;:caret</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'>echo.delayed&nbsp;expansion&nbsp;is&nbsp;ENABLED</span><br>
+<span style='color=#000000'>echo.1.&nbsp;^^!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.2.&nbsp;!!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.3.&nbsp;!&nbsp;:exclamation&nbsp;mark</span><br>
+<span style='color=#000000'>echo.4.&nbsp;%%&nbsp;:percent</span><br>
+<span style='color=#000000'>echo.5.&nbsp;^&amp;&nbsp;:ampersand</span><br>
+<span style='color=#000000'>echo.6.&nbsp;^|&nbsp;:vertical&nbsp;line</span><br>
+<span style='color=#000000'>echo.7.&nbsp;^^&nbsp;:caret</span><br>
+<span style='color=#000000'>echo.</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>delayed expansion is DISABLED
+1. ^! :exclamation mark
+2. !! :exclamation mark
+3. ! :exclamation mark
+4. % :percent
+5. &amp; :ampersand
+6. | :vertical line
+7. ^ :caret
+
+delayed expansion is ENABLED
+1. ! :exclamation mark
+2. exclamation mark
+3. exclamation mark
+4. % :percent
+5. &amp; :ampersand
+6. | :vertical line
+7. ^ :caret
+
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112820'></a>
+    <a name='Snippets.Exit'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Exit - Exit on key pressed</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>GOTO:EOF  command will end a DOS batch application no matter whether subsequent code follow.  
+Adding a <a href="DosCommandIndex.htm#PAUSE">PAUSE</a> command will allow the user to inspect screen outputs before the application 
+window disappears.  Forcing an empty line via <a href="DosCommandIndex.htm#ECHO">ECHO</a> will nicely separate the "Press any key to 
+continue" message created by the <a href="DosCommandIndex.htm#PAUSE">PAUSE</a> command from any previous output.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;End&nbsp;of&nbsp;application&nbsp;--</span></span><br>
+<span style='color=#000000'>ECHO.&amp;PAUSE&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112821'></a>
+    <a name='Snippets.ExitCustomMessage'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Exit - Exit on key pressed with customized message</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Letting the <a href="DosCommandIndex.htm#PAUSE">PAUSE</a> command show the "Press any key to continue" message on exit may cause some 
+confusion, since the application will finish and not continue.  An ECHO command preceding the 
+PAUSE command can be used to show a customize message.  The text output of the PAUSE command 
+can be omitted by piping its output into the NUL device.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;End&nbsp;of&nbsp;application&nbsp;--</span></span><br>
+<span style='color=#000000'>ECHO.&amp;ECHO.Press&nbsp;any&nbsp;key&nbsp;to&nbsp;end&nbsp;the&nbsp;application.&amp;PAUSE&gt;NUL&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112822'></a>
+    <a name='Snippets.ExitDelayed'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Exit Delayed - Delayed exit without user interaction</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>As you develop DOS batch files you may find it annoying to have to hit a key when the application 
+finished just to close the window.  You may want to have it close automatically but still being 
+able to briefly scan over the execution result shown in the window.
+<br>A way to create a delay in a DOS batch program is to ping the localhost or 127.0.0.1.  Sending 
+2 pings (ping –n 2 ...) will cause a delay of very close to one second.  Invoking multiple pings 
+as needed gives control about the delay time.  Showing the remaining delay time in the window <a href="DosCommandIndex.htm#TITLE">TITLE</a> 
+will even let the user know what`s going on.
+<br>I.e. replace the pause statement added earlier with the following code lines and run the 
+application again.  The menu will show a countdown of 5 seconds before closing the application. 
+Changing the number 5 to 10 would result in a 10 second countdown.
+<br>
+<br>What it`s good for:
+<ul>
+    <li>Closing an application without user interaction</li>
+    <li>Leave enough time to view execution results</li>
+    <li>User can hit Pause on the keyboard to keep the window open</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;End&nbsp;of&nbsp;application&nbsp;--</span></span><br>
+<span style='color=#000000'>FOR&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(5,-1,1)&nbsp;do&nbsp;(TITLE&nbsp;%title%&nbsp;--&nbsp;closing&nbsp;in&nbsp;<span class=c_pvar>%%a</span>s&amp;ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1&nbsp;127.0.0.1&gt;NUL)</span><br>
+<span style='color=#000000'>TITLE&nbsp;Press&nbsp;any&nbsp;key&nbsp;to&nbsp;close&nbsp;the&nbsp;application&amp;ECHO.&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112833'></a>
+    <a name='Snippets.FileSize'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>File Size in Bytes - Use FOR command to determine the file size in bytes</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the `z` specifier of <a href="DosCommandIndex.htm#FOR">FOR</a> variable references to get the size of a file.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;&quot;filename=myfile.txt&quot;</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(%filename%)&nbsp;do&nbsp;echo.Size&nbsp;of&nbsp;&quot;<span class=c_pvar>%%A</span>&quot;&nbsp;is&nbsp;<span class=c_pvar>%%~zA</span>&nbsp;bytes</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Size of &quot;myfile.txt&quot; is 57006 bytes
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112815'></a>
+    <a name='Snippets.InitializingBatch'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Initializing a batch - Commands that are typically executed at the beginning of a batch script</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>At the beginning of a DOS batch file belongs the initialization of the command processor.  This is 
+to ensure subsequent DOS batch script will be handled by the command interpreter as we intended to.
+First let`s turn command-echoing off so that the output screen doesn`t get polluted with batch file 
+content itself during execution. Second, in order to enable the great features of the command 
+processor as required by most the other script code described here, the initialization code shall 
+turn on <a href="DosCommandIndex.htm#SETLOCAL">Extensions</a> and <a href="DosCommandIndex.htm#SETLOCAL">Delayed Expansion</a>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor&nbsp;--</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112828'></a>
+    <a name='Snippets.OpenRegeditAtKey'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-14</font></font></div>
+    <H2>Open the Registry Editor at a given Key - Opening the Registry Editor at a defined Key</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>It`s known that opening the registry editor <b>regedit.exe</b> it will have the last registry key
+remembered and opens right where the it left off the last time it was running.  The last registry 
+key is being remembered in the registry itself using the <b>LastKey</b> value in 
+<b>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit</b>. 
+To have regedit.exe open up at a specific location we just have to set the LastKey value properly 
+before invoking regedit.exe. This can be done with the <b>REG</b> command.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>rem&nbsp;open&nbsp;regedit.exe&nbsp;at&nbsp;HKEY_CURRENT_USER\Software\Microsoft</span></span><br>
+<span style='color=#000000'>set&nbsp;&quot;showkey=HKEY_CURRENT_USER\Software\Microsoft&quot;</span><br>
+<span style='color=#000000'>REG&nbsp;ADD&nbsp;&quot;HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit&quot;&nbsp;/v&nbsp;&quot;LastKey&quot;&nbsp;/d&nbsp;&quot;%showkey%&quot;&nbsp;/f</span><br>
+<span style='color=#000000'>start&nbsp;/b&nbsp;regedit</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112829'></a>
+    <a name='Snippets.RunAsAdmin'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-19</font></font></div>
+    <H2>RunAs Administrator - Force a batch to run as different user via RunAs command</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Force a batch to run as different user via RunAs command.  This snippet checks the <b>USERNAME</b> 
+environment variable.  If it`s not `Administrator` then it automatically restart the batch with 
+Administrator credentials using the <a href="DosCommandIndex.htm#RunAs">RunAs</a> command.  Administrator password is required.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/DosRunAsAdmin.bat'>DosRunAsAdmin.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'>echo.Current&nbsp;User&nbsp;is&nbsp;'%USERNAME%'</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem&nbsp;--&nbsp;Let's&nbsp;make&nbsp;sure&nbsp;this&nbsp;batch&nbsp;runs&nbsp;as&nbsp;Administrator&nbsp;--</span></span><br>
+<span style='color=#000000'>set&nbsp;&quot;RunAsUser=Administrator&quot;</span><br>
+<span style='color=#000000'>if&nbsp;&quot;%USERNAME%&quot;&nbsp;NEQ&nbsp;&quot;%RunAsUser%&quot;&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;RUNAS&nbsp;/user:%RunAsUser%&nbsp;&quot;cmd&nbsp;/c&nbsp;<span class=c_pvar>%~f0</span>&quot;||PAUSE</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;GOTO:EOF</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem&nbsp;--&nbsp;your&nbsp;code&nbsp;goes&nbsp;below&nbsp;here&nbsp;--</span></span><br>
+<span style='color=#000000'>echo.Hello&nbsp;World</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>ECHO.&amp;PAUSE&amp;GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>Current User is 'DosItHelp'
+Enter the password for Administrator:
+Attempting to start cmd /c C:\dostips\DosRunAsAdmin.bat as user &quot;DOSTIPS_PC\Administrator&quot; ...
+
+
+---- RunAs now opens a new window ----
+
+Current User is 'Administrator'
+Hello World
+
+Press any key to continue . . .
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112824'></a>
+    <a name='Snippets.SingleCommandForMultipleLine'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Multiple Lines for Single Command - How to continue a command in the next line</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use <b>^</b> as the very last character in a line if you with to continue the command in the next line.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>echo.1.&nbsp;This&nbsp;all&nbsp;goes&nbsp;^</span><br>
+<span style='color=#000000'>in&nbsp;line&nbsp;one</span><br>
+<span style='color=#000000'>echo.2.&nbsp;This&nbsp;all&nbsp;goes&nbsp;^</span><br>
+<span style='color=#000000'>in&nbsp;line&nbsp;two</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>1. This all goes in line one
+2. This all goes in line two
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112835'></a>
+    <a name='Snippets.UnicodeToAnsi'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>Unicode to Ansi - Convert a file to Ansi</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>An easy way to convert an <b>UNICODE</b> encoded file to <b>ANSI</b> is by running a <a href="DosCommandIndex.htm#TYPE">TYPE</a> 
+command in a new instance of <a href="DosCommandIndex.htm#CMD">CMD</a>.exe with <b>/A</b> option and piping the output into a new file.
+<br>The following script converts a text file named <b>myfile.txt</b> into the </b>ANSI<b> encoded 
+file named <b>myansifile.txt</b>.
+<br>Note <b>myfile.txt</b> can be UNICODE or ANSI the result will always be an ANSI encoded file.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>cmd&nbsp;/a&nbsp;/c&nbsp;type&nbsp;myfile.txt&gt;myansifile.txt</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112831'></a>
+    <a name='Snippets.UniqueString'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>Date Time for Unique String - Create a unique string using current date and time</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A string unique to the local host can be created out of the <b>%date%</b> and <b>%time%</b> system 
+environment variables.
+<br>For convenience the unique string created here will be a number in the format YYYYMMDDHHMMSSff 
+whereas ff are the 1/100th fractions of a second.  As long nobody modifies the system time and the 
+command is not being called twice within a 1/100th of a second, each created <b>UNIQUE</b> string 
+will be unique and in a sorting order.
+<br>The example described here assumes that the <b>%date%</b> variable uses the format 
+day MM/DD/YYYY and the <b>%time%</b> variable uses the format HH:MM:SS.ff.
+<br>As the <b>%time%</b> variable may return only one digit for the hour before 10.00 AM and put 
+a spacer to fill the missing 10th digit we will substitute the space characters in %time% with 0 
+by using <b>%time: =0%</b>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=2-8&nbsp;delims=/:.&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(&quot;%date%:%time:&nbsp;=0%&quot;)&nbsp;do&nbsp;set&nbsp;&quot;UNIQUE=<span class=c_pvar>%%C</span><span class=c_pvar>%%A</span><span class=c_pvar>%%B</span><span class=c_pvar>%%D</span><span class=c_pvar>%%E</span><span class=c_pvar>%%F</span><span class=c_pvar>%%G</span>&quot;</span><br>
+<span style='color=#000000'>echo.%UNIQUE%</span><br>
+<span style='color=#000000'>echo.%date%&nbsp;%time%</span><br>
+<span style='color=#000000'>echo.%date%&nbsp;%time:&nbsp;=0%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>2006010501060696
+Thu 01/05/2006  1:06:06.96
+Thu 01/05/2006 01:06:06.96
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112816'></a>
+    <a name='Snippets.VersionHistory'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Version History - Add a version history, track date, author and description of each change</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Having a version history within you DOS batch file is good practice in order to keep track of 
+when changed what.  Have the following code block close to the beginning of each batch file to 
+present a nicely formatted version history.  The version history can be updated by copying the 
+last entry and modifying Date, Author, and Description appropriately.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;Version&nbsp;History&nbsp;&ndash;-</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>:::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XX.XXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YYYYMMDD&nbsp;Author&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;&quot;version=01.000-beta&quot;&nbsp;&amp;:20051201&nbsp;p.h.&nbsp;&nbsp;&nbsp;initial&nbsp;version,&nbsp;providing&nbsp;the&nbsp;framework</span><br>
+<span style='color=#000000'>SET&nbsp;&quot;version=01.000&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;:20051202&nbsp;p.h.&nbsp;&nbsp;&nbsp;framework&nbsp;ready</span><br>
+<span style='color=#000000'>SET&nbsp;&quot;version=01.001&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;:20051203&nbsp;p.h.&nbsp;&nbsp;&nbsp;added&nbsp;cool&nbsp;new&nbsp;features</span><br>
+<span style='color=#000000'><span class=c_cmmt>:::&nbsp;!!&nbsp;For&nbsp;a&nbsp;new&nbsp;version&nbsp;entry,&nbsp;copy&nbsp;the&nbsp;last&nbsp;entry&nbsp;down&nbsp;and&nbsp;modify&nbsp;Date,&nbsp;Author&nbsp;and&nbsp;Description</span></span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112818'></a>
+    <a name='Snippets.WindowColor'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Window Color - Change the Window Color</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The background and foreground color of a window can be changed using the COLOR command followed 
+by two hexadecimal digits:
+<br>1st - background
+<br>2nd - foreground
+<br>The change will appear instantly for the whole window.
+<br>The color codes are:<pre>
+    0 = Black       8 = Gray
+    1 = Blue        9 = Light Blue
+    2 = Green       A = Light Green
+    3 = Aqua        B = Light Aqua
+    4 = Red         C = Light Red
+    5 = Purple      D = Light Purple
+    6 = Yellow      E = Light Yellow
+    7 = White       F = Bright White
+</pre><br><a href="/DosColors.PNG"><img src="/DosColors.PNG" with="100%"></a></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;Set&nbsp;the&nbsp;window&nbsp;color&nbsp;--</span></span><br>
+<span style='color=#000000'>COLOR&nbsp;1A</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112819'></a>
+    <a name='Snippets.WindowSize'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Window Size - Change the Window Size</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>To control the size of a window use the <a href="DosCommandIndex.htm#MODE">MODE</a> command. The example shows how to size a window 90 
+characters horizontal and 10 lines vertical.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;Set&nbsp;the&nbsp;window&nbsp;size&nbsp;--</span></span><br>
+<span style='color=#000000'>MODE&nbsp;CON:&nbsp;COLS=90&nbsp;LINES=10</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112817'></a>
+    <a name='Snippets.WindowTitle'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-07</font></font></div>
+    <H2>Window Title - Change the Window Title</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Application name and version of you application seem to make just the right title for the 
+application window.  Let`s store the title into a variable that way it can be reused later 
+in the batch script in case we use the window title temporary to display something else. 
+The <a href="DosCommandIndex.htm#TITLE">TITLE</a> command will set the window title.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_cmmt>:::&nbsp;--&nbsp;Set&nbsp;the&nbsp;window&nbsp;title&nbsp;--</span></span><br>
+<span style='color=#000000'>SET&nbsp;&quot;title=<span class=c_pvar>%~nx0</span>&nbsp;-&nbsp;version&nbsp;%version%&quot;</span><br>
+<span style='color=#000000'>TITLE&nbsp;%title%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc141112834'></a>
+    <a name='Snippets.ZeroBytesCheck'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-03-21</font></font></div>
+    <H2>Check File for Zero Bytes - Use FOR command to show or delete empty files</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Use the `z` specifier of <a href="DosCommandIndex.htm#FOR">FOR</a> variable references to get the size of a file.  Then show or delete 
+the file if the size is zero.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;&quot;filemask=myfile*.txt&quot;</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;(%filemask%)&nbsp;do&nbsp;if&nbsp;<span class=c_pvar>%%~zA</span>==0&nbsp;echo.&quot;<span class=c_pvar>%%A</span>&quot;&nbsp;is&nbsp;empty</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>&quot;myfile2.txt&quot; is empty
+&quot;myfile7.txt&quot; is empty
+&quot;myfile8.txt&quot; is empty
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146799d81ecd',t:'MTc2OTkyNDA2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

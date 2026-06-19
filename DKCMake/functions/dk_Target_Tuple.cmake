@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -164,10 +165,26 @@ function(dk_Target_Tuple)
 
 	###### FINALIZE ######	
 	dk_assertVar(Target_Tuple)
-	dk_assertVar(${Target_Tuple})
-	
 	dk_debug("Target_Tuple = ${Target_Tuple}")
+	
+	dk_assertVar(${Target_Tuple})
 	dk_debug("${Target_Tuple} = ${${Target_Tuple}}")
+	
+	if(CURRENT_PLUGIN)
+		### CURRENT_PLUGIN_Tuple_Dir ###
+		dk_set(${CURRENT_PLUGIN}_Tuple_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}")
+		dk_debug("${CURRENT_PLUGIN}_Tuple_Dir = ${${CURRENT_PLUGIN}_Tuple_Dir}")
+	
+		### CURRENT_PLUGIN_Debug_Dir ###
+		dk_assertVar(Debug_Dir)
+		dk_set(${CURRENT_PLUGIN}_Debug_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Debug_Dir}")
+		dk_debug("${CURRENT_PLUGIN}_Debug_Dir = ${${CURRENT_PLUGIN}_Debug_Dir}")
+	
+		### CURRENT_PLUGIN_Release_Dir ###
+		dk_assertVar(Release_Dir)
+		dk_set(${CURRENT_PLUGIN}_Release_Dir "${${CURRENT_PLUGIN}}/${Target_Tuple}/${Release_Dir}")
+		dk_debug("${CURRENT_PLUGIN}_Release_Dir = ${${CURRENT_PLUGIN}_Release_Dir}")
+	endif()
 endfunction()
 
 

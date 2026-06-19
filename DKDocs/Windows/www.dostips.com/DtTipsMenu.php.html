@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS Batch - Menus</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='ysel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS Batch - Menus</H1>
+<span class='shortText'>Need a menu?  See which of these menu frameworks fits your needs.</span><br><br>
+  <table class='posts'>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='#Batch.Menu'>DOS Batch - Simple Menu</a></td>
+<td class='text'>Simple menu framework.  Plug in a new menu item and coresponding script as single function block.</td>
+</tr>
+<tr><td class='title'><a href='#Batch.Menu2'>DOS Batch - Advanced Menu</a></td>
+<td class='text'>Toggle menu options, persist settings for the next run.</td>
+</tr>
+<tr><td class='title'><a href='DtTipsMenu.php'>DOS Batch - Menus</a></td>
+<td class='text'>Need a menu?  See which of these menu frameworks fits your needs.</td>
+</tr>
+</table>    <hr>
+    <a name=''></a>
+    <a name='Batch.Menu'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Simple Menu - Simple menu framework.  Plug in a new menu item and coresponding script as single function block</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'><p>This simple <b>menu framework</b> parses itself for batch labels of certain signature and lists them as menu items.  The self-parsing feature 
+makes the menu generic.  New menu items can be inserted by adding new function blocks without changing the menu infrastructure.
+</p>
+Features:
+<ul>
+    <li>simple and well structured</li>
+    <li>easy to enhance</li>
+    <li>easy to maintain</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchMenu.bat'>BatchMenu.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menuLOOP'>:menuLOOP</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.=&nbsp;Menu&nbsp;=================================================</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,*&nbsp;delims=_&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('&quot;findstr&nbsp;/b&nbsp;/c:&quot;:menu_&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&quot;')&nbsp;do&nbsp;echo.&nbsp;&nbsp;<span class=c_pvar>%%B</span>&nbsp;&nbsp;<span class=c_pvar>%%C</span></span><br>
+<span style='color=#000000'>set&nbsp;choice=</span><br>
+<span style='color=#000000'>echo.&amp;set&nbsp;/p&nbsp;choice=Make&nbsp;a&nbsp;choice&nbsp;or&nbsp;hit&nbsp;ENTER&nbsp;to&nbsp;quit:&nbsp;||GOTO:EOF</span><br>
+<span style='color=#000000'>echo.&amp;call:menu_%choice%</span><br>
+<span style='color=#000000'>GOTO:menuLOOP</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;menu&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_1'>:menu_1</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Have&nbsp;some&nbsp;fun</span></span><br>
+<span style='color=#000000'>echo.Have&nbsp;some&nbsp;fun&nbsp;by&nbsp;adding&nbsp;some&nbsp;more&nbsp;code&nbsp;right&nbsp;here</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_2'>:menu_2</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Get&nbsp;a&nbsp;water</span></span><br>
+<span style='color=#000000'>echo.Get&nbsp;a&nbsp;water&nbsp;and&nbsp;then&nbsp;add&nbsp;some&nbsp;code&nbsp;right&nbsp;here</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_'>:menu_</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_T'>:menu_T</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Tip</span></span><br>
+<span style='color=#000000'>echo.It's&nbsp;easy&nbsp;to&nbsp;add&nbsp;a&nbsp;line&nbsp;separator&nbsp;using&nbsp;one&nbsp;or&nbsp;more&nbsp;fake&nbsp;labels</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_C'>:menu_C</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Clear&nbsp;Screen</span></span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>= Menu =================================================
+
+  1  Have some fun
+  2  Get a water
+
+  T  Tip
+  C  Clear Screen
+
+Make a choice or hit ENTER to quit:
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='Batch.Menu2'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>DOS Batch - Advanced Menu - Toggle menu options, persist settings for the next run</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Example - Installation Framework.
+<p>This example shows how to enhance a program with persistent settings that can be changed using a menu.</p>
+<p>I.e.:
+<ul>
+   <li>Choose 1 to change the 'Install version' from 'Client' to 'Server'.</li>
+   <li>Choose 1 again to change the 'Install version' back to 'Client'.</li>
+   <li>Choose 2 to change the 'Size of installation' from Full to 'Regular'.</li>
+   <li>Choose 2 again to change the 'Size of installation' to 'Mini'.</li>
+   <li>Choose 2 again to change the 'Size of installation' back to 'Full'.</li>
+   <li>Choose I to begin the installation.  Note: this example is just a simulation and will not install anything on your PC.</li>
+</ul>
+</p>
+Features:
+<ul>
+   <li>simple and well structured</li>
+   <li>settings changeable at runtime</li>
+   <li><b>settings are persistent</b>, the batch will remember all settings from the last run</li>
+   <li><b>progress indication</b> during simulated file installation</li>
+</ul></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchInstall.bat'>BatchInstall.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br><a name='30'>30.</a><br><a name='31'>31.</a><br><a name='32'>32.</a><br><a name='33'>33.</a><br><a name='34'>34.</a><br><a name='35'>35.</a><br><a name='36'>36.</a><br><a name='37'>37.</a><br><a name='38'>38.</a><br><a name='39'>39.</a><br><a name='40'>40.</a><br><a name='41'>41.</a><br><a name='42'>42.</a><br><a name='43'>43.</a><br><a name='44'>44.</a><br><a name='45'>45.</a><br><a name='46'>46.</a><br><a name='47'>47.</a><br><a name='48'>48.</a><br><a name='49'>49.</a><br><a name='50'>50.</a><br><a name='51'>51.</a><br><a name='52'>52.</a><br><a name='53'>53.</a><br><a name='54'>54.</a><br><a name='55'>55.</a><br><a name='56'>56.</a><br><a name='57'>57.</a><br><a name='58'>58.</a><br><a name='59'>59.</a><br><a name='60'>60.</a><br><a name='61'>61.</a><br><a name='62'>62.</a><br><a name='63'>63.</a><br><a name='64'>64.</a><br><a name='65'>65.</a><br><a name='66'>66.</a><br><a name='67'>67.</a><br><a name='68'>68.</a><br><a name='69'>69.</a><br><a name='70'>70.</a><br><a name='71'>71.</a><br><a name='72'>72.</a><br><a name='73'>73.</a><br><a name='74'>74.</a><br><a name='75'>75.</a><br><a name='76'>76.</a><br><a name='77'>77.</a><br><a name='78'>78.</a><br><a name='79'>79.</a><br><a name='80'>80.</a><br><a name='81'>81.</a><br><a name='82'>82.</a><br><a name='83'>83.</a><br><a name='84'>84.</a><br><a name='85'>85.</a><br><a name='86'>86.</a><br><a name='87'>87.</a><br><a name='88'>88.</a><br><a name='89'>89.</a><br><a name='90'>90.</a><br><a name='91'>91.</a><br><a name='92'>92.</a><br><a name='93'>93.</a><br><a name='94'>94.</a><br><a name='95'>95.</a><br><a name='96'>96.</a><br><a name='97'>97.</a><br><a name='98'>98.</a><br><a name='99'>99.</a><br><a name='100'>100.</a><br><a name='101'>101.</a><br><a name='102'>102.</a><br><a name='103'>103.</a><br><a name='104'>104.</a><br><a name='105'>105.</a><br><a name='106'>106.</a><br><a name='107'>107.</a><br><a name='108'>108.</a><br><a name='109'>109.</a><br><a name='110'>110.</a><br><a name='111'>111.</a><br><a name='112'>112.</a><br><a name='113'>113.</a><br><a name='114'>114.</a><br><a name='115'>115.</a><br><a name='116'>116.</a><br><a name='117'>117.</a><br><a name='118'>118.</a><br><a name='119'>119.</a><br><a name='120'>120.</a><br><a name='121'>121.</a><br><a name='122'>122.</a><br><a name='123'>123.</a><br><a name='124'>124.</a><br><a name='125'>125.</a><br><a name='126'>126.</a><br><a name='127'>127.</a><br><a name='128'>128.</a><br><a name='129'>129.</a><br><a name='130'>130.</a><br><a name='131'>131.</a><br><a name='132'>132.</a><br><a name='133'>133.</a><br><a name='134'>134.</a><br><a name='135'>135.</a><br><a name='136'>136.</a><br><a name='137'>137.</a><br><a name='138'>138.</a><br><a name='139'>139.</a><br><a name='140'>140.</a><br><a name='141'>141.</a><br><a name='142'>142.</a><br><a name='143'>143.</a><br><a name='144'>144.</a><br><a name='145'>145.</a><br><a name='146'>146.</a><br><a name='147'>147.</a><br><a name='148'>148.</a><br><a name='149'>149.</a><br><a name='150'>150.</a><br><a name='151'>151.</a><br><a name='152'>152.</a><br><a name='153'>153.</a><br><a name='154'>154.</a><br><a name='155'>155.</a><br><a name='156'>156.</a><br><a name='157'>157.</a><br><a name='158'>158.</a><br><a name='159'>159.</a><br><a name='160'>160.</a><br><a name='161'>161.</a><br><a name='162'>162.</a><br><a name='163'>163.</a><br><a name='164'>164.</a><br><a name='165'>165.</a><br><a name='166'>166.</a><br><a name='167'>167.</a><br><a name='168'>168.</a><br><a name='169'>169.</a><br><a name='170'>170.</a><br><a name='171'>171.</a><br><a name='172'>172.</a><br><a name='173'>173.</a><br><a name='174'>174.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@ECHO&nbsp;OFF</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Prepare&nbsp;the&nbsp;Command&nbsp;Processor</span></span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEEXTENSIONS</span><br>
+<span style='color=#000000'>SETLOCAL&nbsp;ENABLEDELAYEDEXPANSION</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Version&nbsp;History&nbsp;--</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XX.XXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YYYYMMDD&nbsp;Author&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=01.000-beta&nbsp;&amp;<span class=c_cmmt>rem&nbsp;20051201&nbsp;p.h.&nbsp;&nbsp;initial&nbsp;version,&nbsp;providing&nbsp;the&nbsp;framework</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM&nbsp;!!&nbsp;For&nbsp;a&nbsp;new&nbsp;version&nbsp;entry,&nbsp;copy&nbsp;the&nbsp;last&nbsp;entry&nbsp;down&nbsp;and&nbsp;modify&nbsp;Date,&nbsp;Author&nbsp;and&nbsp;Description</span></span><br>
+<span style='color=#000000'>SET&nbsp;version=%version:&nbsp;=%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--&nbsp;Set&nbsp;the&nbsp;window&nbsp;title</span></span><br>
+<span style='color=#000000'>SET&nbsp;title=<span class=c_pvar>%~n0</span></span><br>
+<span style='color=#000000'>TITLE&nbsp;%title%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--initialize&nbsp;the&nbsp;variables</span></span><br>
+<span style='color=#000000'>set&nbsp;FilePersist=<span class=c_pvar>%~dpn0</span>+.cmd&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;--define&nbsp;the&nbsp;filename&nbsp;where&nbsp;persistent&nbsp;variables&nbsp;get&nbsp;stored</span></span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvrCli_choice=,Server,Client,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;SvrCli=Server</span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bShowReadMe_choice=,Yes,No,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;bShowReadMe=No</span><br>
+<span style='color=#000000'>set&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InstSize_choice=,Full,Regular,Mini,</span><br>
+<span style='color=#000000'>call:setPersist&nbsp;InstSize=Full</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>rem.--read&nbsp;the&nbsp;persistent&nbsp;variables&nbsp;from&nbsp;the&nbsp;storage</span></span><br>
+<span style='color=#000000'>call:restorePersistentVars&nbsp;&quot;%FilePersist%&quot;</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menuLOOP'>:menuLOOP</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.=&nbsp;Menu&nbsp;=================================================</span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=1,2,*&nbsp;delims=_&nbsp;&quot;&nbsp;<span class=c_pvar>%%A</span>&nbsp;in&nbsp;('&quot;findstr&nbsp;/b&nbsp;/c:&quot;:menu_&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>&quot;&quot;')&nbsp;do&nbsp;echo.&nbsp;&nbsp;<span class=c_pvar>%%B</span>&nbsp;&nbsp;<span class=c_pvar>%%C</span></span><br>
+<span style='color=#000000'>set&nbsp;choice=</span><br>
+<span style='color=#000000'>echo.&amp;set&nbsp;/p&nbsp;choice=Make&nbsp;a&nbsp;choice&nbsp;or&nbsp;hit&nbsp;ENTER&nbsp;to&nbsp;quit:&nbsp;||(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:savePersistentVars&nbsp;&quot;%FilePersist%&quot;&amp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem&nbsp;--save&nbsp;the&nbsp;persistent&nbsp;variables&nbsp;to&nbsp;the&nbsp;storage</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;GOTO:EOF</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>echo.&amp;call:menu_%choice%</span><br>
+<span style='color=#000000'>GOTO:menuLOOP</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;menu&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_Options'>:menu_Options</a></span><span class=c_cmmt>:</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_1'>:menu_1</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Install&nbsp;version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'!SvrCli!'&nbsp;[!SvrCli_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;SvrCli&nbsp;&quot;!SvrCli_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_2'>:menu_2</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Size&nbsp;of&nbsp;installation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;'!InstSize!'&nbsp;[!InstSize_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;InstSize&nbsp;&quot;!InstSize_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_3'>:menu_3</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Show&nbsp;Readme.txt&nbsp;when&nbsp;finished:&nbsp;'!bShowReadMe!'&nbsp;[!bShowReadMe_choice:~1,-1!]</span></span><br>
+<span style='color=#000000'>call:getNextInList&nbsp;bShowReadMe&nbsp;&quot;!bShowReadMe_choice!&quot;</span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_'>:menu_</a></span><span class=c_cmmt></span></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_Execute'>:menu_Execute</a></span><span class=c_cmmt>:</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_I'>:menu_I</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Start&nbsp;Installation&nbsp;(simulation&nbsp;only)</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;maxcnt=20</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;F&quot;&nbsp;set&nbsp;maxcnt=11</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;R&quot;&nbsp;set&nbsp;maxcnt=7</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%InstSize:~0,1%&quot;==&quot;M&quot;&nbsp;set&nbsp;maxcnt=3</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.Simulating&nbsp;an&nbsp;installation&nbsp;for&nbsp;!maxcnt!&nbsp;files...</span><br>
+<span style='color=#000000'>call:initProgress&nbsp;maxcnt</span><br>
+<span style='color=#000000'>for&nbsp;/l&nbsp;<span class=c_pvar>%%C</span>&nbsp;in&nbsp;(1,1,!maxcnt!)&nbsp;do&nbsp;(</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;echo.Pretend&nbsp;to&nbsp;install&nbsp;!SvrCli!&nbsp;file&nbsp;<span class=c_pvar>%%C</span>.</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:sleep&nbsp;1</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;call:doProgress</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>call:sleep&nbsp;1</span><br>
+<span style='color=#000000'>TITLE&nbsp;%title%</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;&quot;%bShowReadMe:~0,1%&quot;==&quot;Y&quot;&nbsp;notepad&nbsp;ReadMe.txt</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='menu_C'>:menu_C</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;Clear&nbsp;Screen</span></span><br>
+<span style='color=#000000'>cls</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;helper&nbsp;functions&nbsp;follow&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::-----------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='setPersist'>:setPersist</a></span><span class=c_cmmt>&nbsp;--&nbsp;to&nbsp;be&nbsp;called&nbsp;to&nbsp;initialize&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;%*:&nbsp;set&nbsp;command&nbsp;arguments</span></span><br>
+<span style='color=#000000'>set&nbsp;%*</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='getPersistentVars'>:getPersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;returns&nbsp;a&nbsp;comma&nbsp;separated&nbsp;list&nbsp;of&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;reference&nbsp;to&nbsp;return&nbsp;variable</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;retlist=</span><br>
+<span style='color=#000000'>set&nbsp;parse=findstr&nbsp;/i&nbsp;/c:&quot;call:setPersist&quot;&nbsp;&quot;<span class=c_pvar>%~f0</span>%&quot;^|find&nbsp;/v&nbsp;&quot;ButNotThisLine&quot;</span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=2&nbsp;delims==&nbsp;&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;('&quot;%parse%&quot;')&nbsp;do&nbsp;(set&nbsp;retlist=!retlist!<span class=c_pvar>%%a</span>,)</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~1</span>=%retlist%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='savePersistentVars'>:savePersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;Save&nbsp;values&nbsp;of&nbsp;persistent&nbsp;variables&nbsp;into&nbsp;a&nbsp;file</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;file&nbsp;name</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>echo.&gt;&quot;<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>call&nbsp;:getPersistentVars&nbsp;persvars</span><br>
+<span style='color=#000000'>for&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(%persvars%)&nbsp;do&nbsp;(echo.SET&nbsp;<span class=c_pvar>%%a</span>=!<span class=c_pvar>%%a</span>!&gt;&gt;&quot;<span class=c_pvar>%~1</span>&quot;)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='restorePersistentVars'>:restorePersistentVars</a></span><span class=c_cmmt>&nbsp;--&nbsp;Restore&nbsp;the&nbsp;values&nbsp;of&nbsp;the&nbsp;persistent&nbsp;variables</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;batch&nbsp;file&nbsp;name&nbsp;to&nbsp;restore&nbsp;from</span></span><br>
+<span style='color=#000000'>if&nbsp;exist&nbsp;&quot;%FilePersist%&quot;&nbsp;call&nbsp;&quot;%FilePersist%&quot;</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='getNextInList'>:getNextInList</a></span><span class=c_cmmt>&nbsp;--&nbsp;return&nbsp;next&nbsp;value&nbsp;in&nbsp;list</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>&nbsp;-&nbsp;in/out&nbsp;ref&nbsp;to&nbsp;current&nbsp;value,&nbsp;returns&nbsp;new&nbsp;value</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~2</span>&nbsp;-&nbsp;in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;choice&nbsp;list,&nbsp;must&nbsp;start&nbsp;with&nbsp;delimiter&nbsp;which&nbsp;must&nbsp;not&nbsp;be&nbsp;'@'</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;lst=<span class=c_pvar>%~2</span>&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;choice&nbsp;list</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%lst:~0,1%&quot;&nbsp;NEQ&nbsp;&quot;%lst:~-1%&quot;&nbsp;echo.ERROR&nbsp;Choice&nbsp;list&nbsp;must&nbsp;start&nbsp;and&nbsp;end&nbsp;with&nbsp;the&nbsp;delimiter&amp;GOTO:EOF</span><br>
+<span style='color=#000000'>set&nbsp;dlm=%lst:~-1%&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;extract&nbsp;the&nbsp;delimiter&nbsp;used</span></span><br>
+<span style='color=#000000'>set&nbsp;old=!<span class=c_pvar>%~1</span>!&amp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;current&nbsp;value</span></span><br>
+<span style='color=#000000'>set&nbsp;fst=&amp;for&nbsp;/f&nbsp;&quot;delims=%dlm%&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lst%&quot;)&nbsp;do&nbsp;set&nbsp;fst=<span class=c_pvar>%%a</span>&amp;<span class=c_cmmt>rem.--get&nbsp;the&nbsp;first&nbsp;entry</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;replace&nbsp;the&nbsp;current&nbsp;value&nbsp;with&nbsp;a&nbsp;@,&nbsp;append&nbsp;the&nbsp;first&nbsp;value</span></span><br>
+<span style='color=#000000'>set&nbsp;lll=!lst:%dlm<span class=c_pvar>%%o</span>ld<span class=c_pvar>%%d</span>lm%=%dlm%@%dlm%!%fst<span class=c_pvar>%%d</span>lm%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;get&nbsp;the&nbsp;string&nbsp;after&nbsp;the&nbsp;@</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;tokens=2&nbsp;delims=@&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lll%&quot;)&nbsp;do&nbsp;set&nbsp;lll=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=c_cmmt>rem.--&nbsp;extract&nbsp;the&nbsp;next&nbsp;value</span></span><br>
+<span style='color=#000000'>for&nbsp;/f&nbsp;&quot;delims=%dlm%&quot;&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(&quot;%lll%&quot;)&nbsp;do&nbsp;set&nbsp;new=<span class=c_pvar>%%a</span></span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;(SET&nbsp;<span class=c_pvar>%~1</span>=%new%)&nbsp;ELSE&nbsp;(echo.%new%)</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='initProgress'>:initProgress</a></span><span class=c_cmmt>&nbsp;--&nbsp;initialize&nbsp;an&nbsp;internal&nbsp;progress&nbsp;counter&nbsp;and&nbsp;display&nbsp;the&nbsp;progress&nbsp;in&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;in&nbsp;&nbsp;-&nbsp;progress&nbsp;counter&nbsp;maximum,&nbsp;equal&nbsp;to&nbsp;100&nbsp;percent</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~2</span>:&nbsp;in&nbsp;&nbsp;-&nbsp;title&nbsp;string&nbsp;formatter,&nbsp;default&nbsp;is&nbsp;'[P]&nbsp;completed.'</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressCnt=-1</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressMax=<span class=c_pvar>%~1</span></span><br>
+<span style='color=#000000'>set&nbsp;ProgressFormat=<span class=c_pvar>%~2</span></span><br>
+<span style='color=#000000'>if&nbsp;&quot;%ProgressFormat%&quot;==&quot;&quot;&nbsp;set&nbsp;ProgressFormat=[PPPP]</span><br>
+<span style='color=#000000'>set&nbsp;ProgressFormat=!ProgressFormat:[PPPP]=[P]&nbsp;completed.!</span><br>
+<span style='color=#000000'>call&nbsp;:doProgress</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='doProgress'>:doProgress</a></span><span class=c_cmmt>&nbsp;--&nbsp;display&nbsp;the&nbsp;next&nbsp;progress&nbsp;tick</span></span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;ProgressCnt+=1</span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;per=100*ProgressCnt/ProgressMax</span><br>
+<span style='color=#000000'>set&nbsp;per=!per!%%</span><br>
+<span style='color=#000000'>title&nbsp;%ProgressFormat:[P]=!per!%</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>FOR&nbsp;/l&nbsp;<span class=c_pvar>%%a</span>&nbsp;in&nbsp;(<span class=c_pvar>%~1</span>,-1,1)&nbsp;do&nbsp;(ping&nbsp;-n&nbsp;2&nbsp;-w&nbsp;1&nbsp;127.0.0.1&gt;NUL)</span><br>
+<span style='color=#000000'>goto&nbsp;:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>= Menu =================================================
+
+  Options:
+  1  Install version              : 'Client' [Server,Client]
+  2  Size of installation         : 'Full' [Full,Regular,Mini]
+  3  Show Readme.txt when finished: 'No' [Yes,No]
+
+  Execute:
+  I  Start Installation (simulation only)
+  C  Clear Screen
+
+Make a choice or hit ENTER to quit:
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f1469aea41ecd',t:'MTc2OTkyNDA2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

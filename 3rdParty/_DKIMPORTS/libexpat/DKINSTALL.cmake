@@ -1,43 +1,42 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ libexpat ############
 # https://github.com/libexpat/libexpat.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/libexpat/libexpat/archive/b70c8f5.zip
 
-### IMPORT ###
-#dk_import(${libexpat_Import})
 dk_import()
 
-
-### LINK ###
-dk_include			(${libexpat}/include				    	LIBEXPAT_INCLUDE_DIR)
-dk_include			(${libexpat}/${Target_Tuple})
+dk_include			(${libexpat}/include				    	EXPAT_INCLUDE_DIR 			LIBEXPAT_INCLUDE_DIR)
+dk_include			(${libexpat}/${Target_Tuple}				LIBEXPAT_INCLUDE_DIR2)
 if(MSVC)
-	dk_libDebug		(${libexpat_Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG)
-	dk_libRelease	(${libexpat_Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE)
+	dk_libDebug		(${libexpat_Debug_Dir}/libexpatdMT.lib		LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpatdMT.lib	LIBEXPAT_LIBRARY_RELEASE	LIBEXPAT_LIBRARY)
 else()
 	if(Windows)
-		dk_libDebug	(${libexpat_Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpatd.a			LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
 	else()
-		dk_libDebug	(${libexpat_Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG)
+		dk_libDebug	(${libexpat_Debug_Dir}/libexpat.a			LIBEXPAT_LIBRARY_DEBUG		LIBEXPAT_LIBRARY)
 	endif()
-	dk_libRelease	(${libexpat_Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE)
+	dk_libRelease	(${libexpat_Release_Dir}/libexpat.a			LIBEXPAT_LIBRARY_RELEASE	LIBEXPAT_LIBRARY)
 endif()
 
-### GENERATE ###
-dk_configure(${libexpat}/expat
+dk_set(libexpat_CMAKE
+		-DEXPAT_INCLUDE_DIR=${EXPAT_INCLUDE_DIR})
+		
+dk_configure("${libexpat}/expat"
 	-DEXPAT_BUILD_TOOLS=ON				# "Build the xmlwf tool for expat library"  ${_EXPAT_BUILD_TOOLS_DEFAULT} 
 	-DEXPAT_BUILD_EXAMPLES=ON       	# "Build the examples for expat library" ON
 	-DEXPAT_BUILD_TESTS=ON          	# "Build the tests for expat library" ON
@@ -63,7 +62,4 @@ dk_configure(${libexpat}/expat
 	-DEXPAT_MSVC_STATIC_CRT=ON      	# "Use /MT flag (static CRT) when compiling in MSVC" OFF
 	-D_EXPAT_M32=OFF)                	# "(Unofficial!) Produce 32bit code with -m32" OFF
 
-
-
-### COMPILE ###
 dk_build()

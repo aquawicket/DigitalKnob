@@ -40,7 +40,7 @@ function Global:dk_import() {
 	}	
 	
 	dk_call dk_assertPath "${CURRENT_IMPORT}/dkconfig.txt";
-	dk_call dk_getFileParams "${CURRENT_IMPORT}/dkconfig.txt";
+	dk_call dk_fileVariables "${CURRENT_IMPORT}/dkconfig.txt";
 	dk_call dk_validate Host_Tuple "dk_call dk_Host_Tuple";
 	dk_call dk_basename "${CURRENT_IMPORT}" Import_Name;
 	dk_call dk_assertVar "Import_Name";

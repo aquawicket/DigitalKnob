@@ -1,1 +1,5 @@
-Rufus_Windows_X86_64_Import=https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe
+############ rufus ############
+# 
+# https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe
+
+rufus_Windows_X86_64_Import=https://github.com/pbatard/rufus/releases/download/v4.7/rufus-4.7p.exe

@@ -1,2 +1,7 @@
 ############ wget ############
-#
+# https://www.gnu.org/software/wget
+# https://cosmo.zip/pub/cosmos/bin/wget
+
+wget_Type=Tool
+wget_Import=https://cosmo.zip/pub/cosmos/bin/wget
+

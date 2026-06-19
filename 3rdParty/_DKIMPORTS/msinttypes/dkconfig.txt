@@ -1,0 +1,7 @@
+############ msinttypes ############
+# https://code.google.com/archive/p/msinttypes
+# https://github.com/SummersEpsilon/msinttypes.git
+# https://github.com/SummersEpsilon/msinttypes/archive/052fcc0c3bfc110da919253f6d1e2130d2f1b2cf.zip
+# https://raw.githubusercontent.com/SummersEpsilon/msinttypes/052fcc0c3bfc110da919253f6d1e2130d2f1b2cf/msinttypes-r26.zip
+
+msinttypes_Import=https://raw.githubusercontent.com/SummersEpsilon/msinttypes/052fcc0c3bfc110da919253f6d1e2130d2f1b2cf/msinttypes-r26.zip

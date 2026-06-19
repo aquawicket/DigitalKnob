@@ -9,7 +9,7 @@ function Global:dk_extract($file, $destination){
 	dk_debugFunc 2;
 
 	dk_call dk_info "Extracting $file to $destination . . ."
-	if(!(dk_call dk_pathExists $file)){ dk_call dk_error "cannot find $file"; return $false }
+	if(!(dk_call dk_pathExists "$file")){ dk_call dk_error "cannot find $file"; return $false }
 	
 	#Expand-Archive $file -DestinationPath $destination -Force
 	
@@ -31,5 +31,5 @@ function Global:DKTEST(){
 	dk_debugFunc 0;
 	
 	dk_call dk_validate DKDOWNLOAD_DIR "dk_call dk_DKDOWNLOAD_DIR"
-	dk_call dk_extract $DKDOWNLOAD_DIR/cmake-3.29.5-windows-x86_64.zip $DKDOWNLOAD_DIR
+	dk_call dk_extract "$DKDOWNLOAD_DIR/cmake-3.29.5-windows-x86_64.zip" "$DKDOWNLOAD_DIR"
 }

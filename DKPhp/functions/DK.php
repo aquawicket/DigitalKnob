@@ -1,5 +1,7 @@
+#!/usr/bin/php
 <?php
 //header('Access-Control-Allow-Origin: *');
+echo "DKINIT_php";
 echo "DK.php\n";
 global $CMDLINE_PATH; $CMDLINE_PATH = $argv[0];                                        echo("CMDLINE_PATH = {$CMDLINE_PATH}\n");
 global $CMDLINE_DIR;  $CMDLINE_DIR  = dirname("{$CMDLINE_PATH}");                      echo("CMDLINE_DIR  = {$CMDLINE_DIR}\n");
@@ -65,7 +67,7 @@ function DK(){
 	echo("USERPROFILE = {$USERPROFILE}\n");
 
 	
-	include_once(str_replace("\\", "/", $USERPROFILE)."/DigitalKnob/Development/DKPhp/functions/dk_source.php");
+	include_once(str_replace("\\", "/", $USERPROFILE)."/Digital Knob/Development/DKPhp/functions/dk_source.php");
 	dk_source("dk_color");
 	
 	

@@ -1,5 +1,13 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
-if(!$dk_basename_ps1){ $dk_basename_ps1 = 1; } else{ return; } #include guard
+################# DK.ps1 #########################################################################################################################
+#if(!(${env:DKINIT_ps1})) {
+if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1")) { ${env:DKPOWERSHELL_FUNCTIONS_DIR} = "${env:USERPROFILE}/Digital Knob/Development/DKPowershell/functions"; }
+if(!(Test-Path "${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1")){ 
+	$(get-childitem ${env:USERPROFILE} -Filter DK.ps1 -Recurse -ErrorAction SilentlyContinue -Force | % {${DK} =$_.FullName});
+	${env:DKPOWERSHELL_FUNCTIONS_DIR} =	Split-Path ${DK} -Parent; }
+. ${env:DKPOWERSHELL_FUNCTIONS_DIR}\DK.ps1;
+#}
+##################################################################################################################################################
+
 
 ################################################################################
 # dk_basename(_path, _rtn_var)
@@ -22,7 +30,7 @@ function Global:dk_basename() {
 	if(${_path}){ ${dk_basename} = Split-Path ${_path} -leaf; }
 	#Write-Host "dk_basename = ${dk_basename}";
 	
-	###### output ######
+	###### return ######
 	${global:dk_basename} = ${dk_basename};
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_basename};

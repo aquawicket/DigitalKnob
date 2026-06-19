@@ -1,0 +1,6 @@
+############ cmdline ############
+# https://github.com/tanakh/cmdline.git
+# https://github.com/tanakh/cmdline/archive/e4cd007fb8f0314002d9a5b4d82939106e4144e4.zip
+
+cmdline_Import=https://github.com/tanakh/cmdline/archive/e4cd007fb8f0314002d9a5b4d82939106e4144e4.zip
+

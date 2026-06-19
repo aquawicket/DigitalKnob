@@ -1,0 +1,61 @@
+############ rclone ############
+# https://downloads.rclone.org/rclone-current-aix-ppc64.zip
+# https://downloads.rclone.org/rclone-current-freebsd-386.zip
+# https://downloads.rclone.org/rclone-current-freebsd-amd64.zip
+# https://downloads.rclone.org/rclone-current-freebsd-arm-v6.zip
+# https://downloads.rclone.org/rclone-current-freebsd-arm-v7.zip
+# https://downloads.rclone.org/rclone-current-freebsd-arm.zip
+# https://downloads.rclone.org/rclone-current-linux-386.deb
+# https://downloads.rclone.org/rclone-current-linux-386.rpm
+# https://downloads.rclone.org/rclone-current-linux-386.zip
+# https://downloads.rclone.org/rclone-current-linux-amd64.deb
+# https://downloads.rclone.org/rclone-current-linux-amd64.rpm
+# https://downloads.rclone.org/rclone-current-linux-amd64.zip
+# https://downloads.rclone.org/rclone-current-linux-arm-v6.deb
+# https://downloads.rclone.org/rclone-current-linux-arm-v6.rpm
+# https://downloads.rclone.org/rclone-current-linux-arm-v6.zip
+# https://downloads.rclone.org/rclone-current-linux-arm-v7.deb
+# https://downloads.rclone.org/rclone-current-linux-arm-v7.rpm
+# https://downloads.rclone.org/rclone-current-linux-arm-v7.zip
+# https://downloads.rclone.org/rclone-current-linux-arm.deb
+# https://downloads.rclone.org/rclone-current-linux-arm.rpm
+# https://downloads.rclone.org/rclone-current-linux-arm.zip
+# https://downloads.rclone.org/rclone-current-linux-arm64.deb
+# https://downloads.rclone.org/rclone-current-linux-arm64.rpm
+# https://downloads.rclone.org/rclone-current-linux-arm64.zip
+# https://downloads.rclone.org/rclone-current-linux-mips.deb
+# https://downloads.rclone.org/rclone-current-linux-mips.rpm
+# https://downloads.rclone.org/rclone-current-linux-mips.zip
+# https://downloads.rclone.org/rclone-current-linux-mipsle.deb
+# https://downloads.rclone.org/rclone-current-linux-mipsle.rpm
+# https://downloads.rclone.org/rclone-current-linux-mipsle.zip
+# https://downloads.rclone.org/rclone-current-netbsd-386.zip
+# https://downloads.rclone.org/rclone-current-netbsd-amd64.zip
+# https://downloads.rclone.org/rclone-current-netbsd-arm-v6.zip
+# https://downloads.rclone.org/rclone-current-netbsd-arm-v7.zip
+# https://downloads.rclone.org/rclone-current-netbsd-arm.zip
+# https://downloads.rclone.org/rclone-current-openbsd-386.zip
+# https://downloads.rclone.org/rclone-current-openbsd-amd64.zip
+# https://downloads.rclone.org/rclone-current-osx-386.zip
+# https://downloads.rclone.org/rclone-current-osx-amd64.zip
+# https://downloads.rclone.org/rclone-current-osx-arm64.zip
+# https://downloads.rclone.org/rclone-current-plan9-386.zip
+# https://downloads.rclone.org/rclone-current-plan9-amd64.zip
+# https://downloads.rclone.org/rclone-current-solaris-amd64.zip
+# https://downloads.rclone.org/rclone-current-windows-386.zip
+# https://downloads.rclone.org/rclone-current-windows-amd64.zip
+# https://downloads.rclone.org/rclone-current-windows-arm64.zip
+
+
+
+rclone_Linux_X86_Import=https://downloads.rclone.org/rclone-current-linux-386.zip
+rclone_Linux_X86_64_Import=https://downloads.rclone.org/rclone-current-linux-amd64.zip
+rclone_Linux_Arm_Import=https://downloads.rclone.org/rclone-current-linux-arm.zip
+rclone_Linux_Arm64_Import=https://downloads.rclone.org/rclone-current-linux-arm64.zip
+rclone_Mac_X86_Import=https://downloads.rclone.org/rclone-current-osx-386.zip
+rclone_Mac_X86_64_Import=https://downloads.rclone.org/rclone-current-osx-amd64.zip
+rclone_Mac_Arm64_Import=https://downloads.rclone.org/rclone-current-osx-arm64.zip
+rclone_Windows_Arm64_Import=https://downloads.rclone.org/rclone-current-windows-arm64.zip
+rclone_Windows_X86_Import=https://downloads.rclone.org/rclone-current-windows-386.zip
+rclone_Windows_X86_64_Import=https://downloads.rclone.org/rclone-current-windows-amd64.zip
+

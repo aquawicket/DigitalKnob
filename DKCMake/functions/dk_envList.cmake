@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -28,7 +29,7 @@ function(dk_envList)
 	set(_Stack_ "$ENV{${LIST_NAME}_Stack}")		### copy the env variable to local variable
 	
 #	if(Import_Name IN_LIST _Stack_)
-#		message("${Import_Name} already in ${LIST_NAME}_Stack}")
+#		dk_notice("${Import_Name} already in ${LIST_NAME}_Stack}")
 #		return()
 #	endif()
 	
@@ -50,7 +51,7 @@ function(dk_envList)
 	endif()
 
 	dk_set(CURRENT_${LIST_NAME} "${Import_Name}")	### set the global variable
-	dk_set(${LIST_NAME}_Stack 	"${_Stack_}")		### copy local variable back to the environment variable
+	set(ENV{${LIST_NAME}_Stack} 	"${_Stack_}")		### copy local variable back to the environment variable
 
 	#dk_debug("CURRENT_PLUGIN = ${CURRENT_PLUGIN}")
 endfunction()

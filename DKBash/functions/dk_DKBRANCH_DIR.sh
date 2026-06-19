@@ -1,13 +1,13 @@
 #!/bin/sh
 ###### DK.sh #####################################################################
-if [ -z "${DK_LOADED-}" ]; then
+if [ -z "${DKINIT_sh-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
 	[ -z "${USERPROFILE}" ]				&& export USERPROFILE=$($cmd_exe /c echo %USERPROFILE% | tr -d '\r')		&& echo "cmd.exe: USERPROFILE = ${USERPROFILE}"
 	(command -v 'wslpath' 1>/dev/null)	&& export HOME=$(wslpath -u ${USERPROFILE})									&& echo "wslpath: HOME = ${HOME}"
 	(command -v 'bash' 1>/dev/null)		&& export bash_exe=$(command -v bash)										&& echo "bash_exe = ${bash_exe}"
-	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/DigitalKnob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
+	[ ! -e "${DK_SH}" ]					&& export DK_SH="${HOME}/Digital Knob/Development/DKBash/functions/DK.sh"	&& echo "DK_SH = ${DK_SH}"
 	[ ! -e "${DK_SH}" ]					&& export DK_SH=$(find "${HOME}" -name "DK.sh")								&& echo "DK_SH = ${DK_SH}"
 	[ -e "${bash_exe}" ]				&& exec "${bash_exe}" "${DK_SH}" "$0" $*									|| exec "${DK_SH}" "$0" $*
 fi
@@ -101,9 +101,9 @@ dk_DKBRANCH_DIR() {
 			[ -z "${DKPYTHON_FUNCTIONS_DIR-}" ] && export DKPYTHON_FUNCTIONS_DIR="${DKPYTHON_DIR}/functions"
 			[ -z "${DKPYTHON_FUNCTIONS_DIR_-}" ] && export DKPYTHON_FUNCTIONS_DIR_="${DKPYTHON_FUNCTIONS_DIR}/"
 			
-		[ -z "${DKVB_DIR-}" ] && export DKVB_DIR="${DKBRANCH_DIR}/DKVb"
-			[ -z "${DKVB_FUNCTIONS_DIR-}" ] && export DKVB_FUNCTIONS_DIR="${DKVB_DIR}/functions"
-			[ -z "${DKVB_FUNCTIONS_DIR_-}" ] && export DKVB_FUNCTIONS_DIR_="${DKVB_FUNCTIONS_DIR}/"
+		[ -z "${DKVBS_DIR-}" ] && export DKVBS_DIR="${DKBRANCH_DIR}/DKVbs"
+			[ -z "${DKVBS_FUNCTIONS_DIR-}" ] && export DKVBS_FUNCTIONS_DIR="${DKVBS_DIR}/functions"
+			[ -z "${DKVBS_FUNCTIONS_DIR_-}" ] && export DKVBS_FUNCTIONS_DIR_="${DKVBS_FUNCTIONS_DIR}/"
 	fi
 }
 

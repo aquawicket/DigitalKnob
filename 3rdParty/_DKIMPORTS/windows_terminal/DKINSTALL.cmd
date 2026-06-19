@@ -1,8 +1,15 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 ::############ windows_terminal ############
@@ -10,29 +17,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 ::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_arm64.zip
 ::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x86.zip
 ::# https://github.com/microsoft/terminal/releases/download/v1.20.11381.0/Microsoft.WindowsTerminal_1.20.11381.0_x64.zip
-::#
+
 :DKINSTALL
 ::%setlocal%
-	%dk_call% dk_debugFunc 0	
 	
-	%dk_call% dk_getFileParams "%~dp0/dkconfig.txt"
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	set "WINDOWS_TERMINAL_IMPORT=!Windows_Terminal_%Host_Tuple%_Import!"
-	%dk_call% dk_assertVar WINDOWS_TERMINAL_IMPORT
+	if EXIST "%wt_exe%" (%return%)
 	
-	%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-	%dk_call% dk_importVariables %WINDOWS_TERMINAL_IMPORT% ROOT %DKTOOLS_DIR%
-	%dk_call% dk_assertVar WINDOWS_TERMINAL
+	%dk_call% dk_import
 	
-	set "WINDOWS_TERMINAL_EXE=%WINDOWS_TERMINAL%/wt.exe"
-	if EXIST "%WINDOWS_TERMINAL_EXE%" (%return%)
+	set "wt_exe=%windows_terminal%/wt.exe"
 	
-	%dk_call% dk_echo  
-    %dk_call% dk_info "Installing Windows Terminal . . ."
-    %dk_call% dk_download %WINDOWS_TERMINAL_IMPORT%
-    %dk_call% dk_smartExtract "%dk_download%" "%WINDOWS_TERMINAL%"
-	%dk_call% dk_assertFile "%WINDOWS_TERMINAL_EXE%"
-
 %endfunction%
 
 
@@ -40,10 +34,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
 	%dk_call% DKINSTALL
 %endfunction%

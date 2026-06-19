@@ -8,7 +8,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	set "DKJava_FILE=%~2"
 	if NOT defined DKJava_FILE (echo ERROR: DKJava_FILE is invalid)
 	
-	:: get the app name
+	rem get the app name
 	for %%Z in ("%DKJava_FILE%") do (set "APP=%%~nZ")
 	
 	::###### Compile Code ######
@@ -18,7 +18,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%COMPILER_EXE% %DKJava_FILE%
 	
 	if NOT EXIST "%APP%.java" (
-		echo(
+		echo.
 		echo ERROR: compilation of %DKJava_FILE% failed.
 		pause
 		goto:eof
@@ -29,8 +29,8 @@ if "%~1" equ "" (goto :DKINSTALL)
 	title %DKJava_FILE%
 	set "java_exe=%COMPILER_EXE:javac=java%"
 	
-    %java_exe:/=\% %APP% &:: && (echo returned TRUE) || (echo returned FALSE)
-	::echo C:\Users\Administrator\DigitalKnob\Development\3rdParty\openjdk-11_windows-x64_bin\bin\java.exe %APP%
+    %java_exe:/=\% %APP% &rem  && (echo returned TRUE) || (echo returned FALSE)
+	::echo C:/Users/Administrator/Digital Knob/Development/3rdParty/openjdk-11_windows-x64_bin/bin/java.exe %APP%
 	
 	::###### exit_code ######
 	if %ERRORLEVEL% neq 0 (
@@ -68,18 +68,25 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	echo Installing DKJava . . .
 	
-	@echo off&::###### DK.cmd #########################################################################################################################
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
-	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	rem shebang
+	@echo off&rem ###### DK.cmd #########################################################################################################################
+	if not defined DKINIT_cmd (
+		setlocal enableDelayedExpansion
+		if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+		if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+		if NOT EXIST "!DK.cmd!" (
+			start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+		call "!DK.cmd:/=\!" "%%~0" %%*
+		exit /b %errorlevel%
+	)
+	rem #################################################################################################################################################
 	
 	::###### Install Java ######
-	%dk_call% dk_depend openjdk
+	%dk_call% dk_validate openjdk %dk_call% dk_depend openjdk
 	%dk_call% dk_assertPath "%java_exe%"
 	%dk_call% dk_assertPath "%javac_exe%"
 	
-	::"%java_exe%" -classpath %USERPROFILE%\DigitalKnob\Development\DKJava\functions com.DigitalKnob.DKJava
+	::"%java_exe%" -classpath %USERPROFILE%/Digital Knob/Development/DKJava/functions com.DigitalKnob.DKJava
 	
 	::###### COMPILER_EXE ######
 	set "COMPILER_EXE=%javac_exe%"

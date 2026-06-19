@@ -1,0 +1,1713 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux
+Subject: InstallingDebianOn/Microsoft/Windows/SubsystemForLinux - Debian Wiki
+Date: Mon, 3 Nov 2025 23:24:07 -0500
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----"
+
+
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/html
+Content-ID: <frame-1D6774678206BAEF4FA58E79025E6638@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/htm=
+l4/strict.dtd"><html><head><meta http-equiv=3D"Content-Type" content=3D"tex=
+t/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=3D=
+"cid:css-3aac4bfb-5cb8-49d7-a2ba-4d1aa21a9445@mhtml.blink" />
+<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3DEdge">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1"=
+>
+<link rel=3D"shortcut icon" href=3D"https://wiki.debian.org/htdocs/favicon.=
+ico">
+
+
+<meta name=3D"robots" content=3D"index,nofollow">
+
+<title>InstallingDebianOn/Microsoft/Windows/SubsystemForLinux - Debian Wiki=
+</title>
+
+
+
+
+
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"all" =
+href=3D"https://wiki.debian.org/htdocs/debwiki/css/common.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"scree=
+n" href=3D"https://wiki.debian.org/htdocs/debwiki/css/screen.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"print=
+" href=3D"https://wiki.debian.org/htdocs/debwiki/css/print.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"proje=
+ction" href=3D"https://wiki.debian.org/htdocs/debwiki/css/projection.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"all" =
+href=3D"https://wiki.debian.org/htdocs/debian-wiki-1.0.css?v=3D1">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"al=
+l" href=3D"/htdocs/debwiki/css/msie.css">
+<![endif]-->
+
+
+<link rel=3D"alternate" title=3D"Debian Wiki: InstallingDebianOn/Microsoft/=
+Windows/SubsystemForLinux" href=3D"https://wiki.debian.org/InstallingDebian=
+On/Microsoft/Windows/SubsystemForLinux?diffs=3D1&amp;show_att=3D1&amp;actio=
+n=3Drss_rc&amp;unique=3D0&amp;page=3DInstallingDebianOn%2FMicrosoft%2FWindo=
+ws%2FSubsystemForLinux&amp;ddiffs=3D1" type=3D"application/rss+xml">
+
+
+<link rel=3D"Start" href=3D"https://wiki.debian.org/FrontPage">
+<link rel=3D"Alternate" title=3D"Wiki Markup" href=3D"https://wiki.debian.o=
+rg/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux?action=3Draw">
+<link rel=3D"Alternate" media=3D"print" title=3D"Print View" href=3D"https:=
+//wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux?ac=
+tion=3Dprint">
+<link rel=3D"Search" href=3D"https://wiki.debian.org/FindPage">
+<link rel=3D"Index" href=3D"https://wiki.debian.org/TitleIndex">
+<link rel=3D"Glossary" href=3D"https://wiki.debian.org/WordIndex">
+<link rel=3D"Help" href=3D"https://wiki.debian.org/HelpOnFormatting">
+</head>
+
+<body lang=3D"en" dir=3D"ltr">
+<div id=3D"logo"><a href=3D"https://www.debian.org/" title=3D"Debian Homepa=
+ge"><img src=3D"https://www.debian.org/Pics/openlogo-50.png" alt=3D"Debian"=
+ width=3D"50" height=3D"61"></a></div>
+<div id=3D"header">
+<div id=3D"wikisection">
+<p class=3D"section"><a href=3D"https://wiki.debian.org/FrontPage" title=3D=
+"Debian Wiki Homepage">Wiki</a></p>
+<div id=3D"username"><a href=3D"https://wiki.debian.org/InstallingDebianOn/=
+Microsoft/Windows/SubsystemForLinux?action=3Dlogin" id=3D"login" rel=3D"nof=
+ollow">Login</a></div>
+</div>
+<div id=3D"navbar">
+
+<ul id=3D"navibar">
+<li class=3D"wikilink"><a href=3D"https://wiki.debian.org/FrontPage">FrontP=
+age</a></li><li class=3D"wikilink"><a href=3D"https://wiki.debian.org/Recen=
+tChanges">RecentChanges</a></li><li class=3D"wikilink"><a href=3D"https://w=
+iki.debian.org/FindPage">FindPage</a></li><li class=3D"wikilink"><a href=3D=
+"https://wiki.debian.org/HelpContents">HelpContents</a></li><li class=3D"cu=
+rrent"><a href=3D"https://wiki.debian.org/InstallingDebianOn/Microsoft/Wind=
+ows/SubsystemForLinux">SubsystemForLinux</a></li>
+</ul>
+
+</div>
+
+<form id=3D"searchform" method=3D"get" action=3D"https://wiki.debian.org/In=
+stallingDebianOn/Microsoft/Windows/SubsystemForLinux">
+<div>
+
+
+<label for=3D"searchinput" style=3D"display: none;">Search:</label>
+<input id=3D"searchinput" type=3D"text" name=3D"value" value=3D"" size=3D"2=
+0" alt=3D"Search" class=3D"disabled">
+<input id=3D"titlesearch" name=3D"titlesearch" type=3D"submit" value=3D"Tit=
+les" alt=3D"Search Titles" disabled=3D"">
+<input id=3D"fullsearch" name=3D"fullsearch" type=3D"submit" value=3D"Text"=
+ alt=3D"Search Full Text" disabled=3D"">
+</div>
+</form>
+
+
+<div id=3D"logo"><a href=3D"https://www.debian.org/" title=3D"Debian Homepa=
+ge"><img src=3D"https://www.debian.org/Pics/openlogo-50.png" alt=3D"Debian"=
+ width=3D"50" height=3D"61"></a></div>
+
+<div id=3D"breadcrumbs"><a href=3D"https://wiki.debian.org/FrontPage" title=
+=3D"Debian Wiki Homepage">Wiki</a><span class=3D"sep">/</span>
+
+</div>
+
+<ul class=3D"editbar"><li><a href=3D"https://wiki.debian.org/InstallingDebi=
+anOn/Microsoft/Windows/SubsystemForLinux?action=3Dlogin" id=3D"login-1" rel=
+=3D"nofollow">Login</a></li><li class=3D"toggleCommentsButton" style=3D"dis=
+play:none;"><a href=3D"https://wiki.debian.org/InstallingDebianOn/Microsoft=
+/Windows/SubsystemForLinux#" class=3D"nbcomment">Comments</a></li><li><a cl=
+ass=3D"nbinfo" href=3D"https://wiki.debian.org/InstallingDebianOn/Microsoft=
+/Windows/SubsystemForLinux?action=3Dinfo" rel=3D"nofollow">Info</a></li><li=
+><a class=3D"nbattachments" href=3D"https://wiki.debian.org/InstallingDebia=
+nOn/Microsoft/Windows/SubsystemForLinux?action=3DAttachFile" rel=3D"nofollo=
+w">Attachments</a></li><li>
+<form class=3D"actionsmenu" method=3D"GET" action=3D"https://wiki.debian.or=
+g/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux">
+<div>
+   =20
+    <select name=3D"action">
+        <option value=3D"show">More Actions:</option><option value=3D"raw">=
+Raw Text</option>
+<option value=3D"print">Print View</option>
+<option value=3D"RenderAsDocbook">Render as Docbook</option>
+<option value=3D"refresh">Delete Cache</option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">-------------------=
+-----</option>
+<option value=3D"SpellCheck">Check Spelling</option>
+<option value=3D"LikePages">Like Pages</option>
+<option value=3D"LocalSiteMap">Local Site Map</option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">-------------------=
+-----</option>
+<option value=3D"RenamePage" disabled=3D"" class=3D"disabled">Rename Page</=
+option>
+<option value=3D"DeletePage" disabled=3D"" class=3D"disabled">Delete Page</=
+option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">-------------------=
+-----</option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">Subscribe User</opt=
+ion>
+<option value=3D"show" disabled=3D"" class=3D"disabled">-------------------=
+-----</option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">Remove Spam</option=
+>
+<option value=3D"show" disabled=3D"" class=3D"disabled">Revert to this revi=
+sion</option>
+<option value=3D"PackagePages">Package Pages</option>
+<option value=3D"show" disabled=3D"" class=3D"disabled">-------------------=
+-----</option>
+<option value=3D"Load">Load</option>
+<option value=3D"Save">Save</option>
+<option value=3D"SlideShow">SlideShow</option>
+    </select>
+   =20
+   =20
+</div>
+
+</form>
+</li></ul>
+
+<h1 id=3D"locationline">
+
+
+<ul id=3D"pagelocation">
+<li><a href=3D"https://wiki.debian.org/InstallingDebianOn">InstallingDebian=
+On</a></li><li><a href=3D"https://wiki.debian.org/InstallingDebianOn/Micros=
+oft">Microsoft</a></li><li><a class=3D"nonexistent" href=3D"https://wiki.de=
+bian.org/InstallingDebianOn/Microsoft/Windows">Windows</a></li><li><a href=
+=3D"https://wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemF=
+orLinux">SubsystemForLinux</a></li>
+</ul>
+
+</h1>
+</div>
+
+<div id=3D"page" lang=3D"en" dir=3D"ltr">
+<div dir=3D"ltr" id=3D"content" lang=3D"en"><span class=3D"anchor" id=3D"to=
+p"></span>
+<span class=3D"anchor" id=3D"line-1"></span><span class=3D"anchor" id=3D"li=
+ne-2"></span><span class=3D"anchor" id=3D"line-3"></span><p class=3D"line86=
+7">
+</p><h2 id=3D"About">About</h2>
+<span class=3D"anchor" id=3D"line-4"></span><span class=3D"anchor" id=3D"li=
+ne-5"></span><p class=3D"line867"><a class=3D"https" href=3D"https://blogs.=
+msdn.microsoft.com/commandline/2018/03/06/debian-gnulinux-for-wsl-now-avail=
+able-in-the-windows-store/">As of March 2018</a> Debian is available for Wi=
+ndows users through the Windows store as an app for the Windows Subsystem f=
+or Linux (WSL). <span class=3D"anchor" id=3D"line-6"></span><span class=3D"=
+anchor" id=3D"line-7"></span></p><p class=3D"line862">The app gives you a D=
+ebian stable command line environment running on the Windows kernel (WSL1) =
+or Hyper-V with the new <a class=3D"https" href=3D"https://docs.microsoft.c=
+om/en-us/windows/wsl/wsl2-install">WSL 2</a> interface depending on your Wi=
+ndows 10 release version. <span class=3D"anchor" id=3D"line-8"></span>Most =
+of the packages in Debian stable should "just work". <span class=3D"anchor"=
+ id=3D"line-9"></span><span class=3D"anchor" id=3D"line-10"></span></p><p c=
+lass=3D"line867">
+</p><h2 id=3D"Install">Install</h2>
+<span class=3D"anchor" id=3D"line-11"></span><span class=3D"anchor" id=3D"l=
+ine-12"></span><ul><li style=3D"list-style-type:none"><p class=3D"line891">=
+<img alt=3D"&lt;!&gt;" height=3D"16" src=3D"https://wiki.debian.org/htdocs/=
+debwiki/img/attention.png" title=3D"&lt;!&gt;" width=3D"16"> Note: As of th=
+e time of writing, 2024-06-28, your best option for installing and using De=
+bian GNU/Linux on WSL will probably be to use the WSL 2 subsystem and <tt c=
+lass=3D"backtick">systemd</tt> mode. The Microsoft documentation for achiev=
+ing this is rather fragmented. Therfore a detailed instruction is given in =
+more detail under a separate heading <a href=3D"https://wiki.debian.org/Ins=
+tallingDebianOn/Microsoft/Windows/SubsystemForLinux#WSL_2_with_systemd_supp=
+ort">below</a>. <span class=3D"anchor" id=3D"line-13"></span><span class=3D=
+"anchor" id=3D"line-14"></span></p></li></ul><p class=3D"line862">To use th=
+e store app you have to enable the WSL subsystem first by following the <a =
+class=3D"https" href=3D"https://docs.microsoft.com/en-us/windows/wsl/instal=
+l-win10">guide</a>. <span class=3D"anchor" id=3D"line-15"></span><span clas=
+s=3D"anchor" id=3D"line-16"></span></p><p class=3D"line862">Afterwards just=
+ install the <a class=3D"https" href=3D"https://www.microsoft.com/en-us/p/d=
+ebian/9msvkqc78pk6">Debian</a> app from the Microsoft Store. <span class=3D=
+"anchor" id=3D"line-17"></span><span class=3D"anchor" id=3D"line-18"></span=
+></p><p class=3D"line874">You will be asked to define a user and password u=
+pon first start. This user will also be given sudo rights. <span class=3D"a=
+nchor" id=3D"line-19"></span><span class=3D"anchor" id=3D"line-20"></span><=
+/p><p class=3D"line862">There is a way to <a class=3D"https" href=3D"https:=
+//docs.microsoft.com/en-us/windows/wsl/install-on-server">install the Debia=
+n WSL distro offline</a> &amp; without using Microsoft Market. <span class=
+=3D"anchor" id=3D"line-21"></span><span class=3D"anchor" id=3D"line-22"></s=
+pan></p><p class=3D"line862">Further information about the ongoing developm=
+ent of WSL can be found in the <a class=3D"https" href=3D"https://blogs.msd=
+n.microsoft.com/commandline/tag/wsl/">WSL tag</a> of the Microsoft blog. <s=
+pan class=3D"anchor" id=3D"line-23"></span><span class=3D"anchor" id=3D"lin=
+e-24"></span></p><p class=3D"line867">
+</p><h2 id=3D"WSL_2_with_systemd_support">WSL 2 with systemd support</h2>
+<span class=3D"anchor" id=3D"line-25"></span><span class=3D"anchor" id=3D"l=
+ine-26"></span><p class=3D"line862">Microsoft partnered with Canonical to <=
+a class=3D"https" href=3D"https://learn.microsoft.com/en-us/windows/wsl/sys=
+temd#systemd-demo-video">bring systemd support to WSL 2</a>, and it is also=
+ available for Debian and other GNU/Linux distributions. <span class=3D"anc=
+hor" id=3D"line-27"></span><span class=3D"anchor" id=3D"line-28"></span></p=
+><p class=3D"line862">WSL 2 with <tt class=3D"backtick">systemd</tt> is pro=
+bably what you want for your freshly installed Debian GNU/Linux system, as =
+WSL 2 is a prerequisite for <a href=3D"https://wiki.debian.org/InstallingDe=
+bianOn/Microsoft/Windows/SubsystemForLinux#Advanced_Usage">GUI application =
+support</a>, and <tt class=3D"backtick">systemd</tt> is a prerequisite for =
+many Debian packages. Read more about GUI apps <a class=3D"https" href=3D"h=
+ttps://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps">here</a>. =
+<span class=3D"anchor" id=3D"line-29"></span><span class=3D"anchor" id=3D"l=
+ine-30"></span></p><p class=3D"line862">At the time of this writing, 2024-0=
+6-28, the documentation over at <a class=3D"https" href=3D"https://learn.mi=
+crosoft.com/en-us/windows/wsl/install-manual">Microsoft Learn</a> for aciev=
+ing a Debian install in a WSL 2 subsystem with <tt class=3D"backtick">syste=
+md</tt> activated is rather fragmented. Therefore the process is detailed h=
+ere. <span class=3D"anchor" id=3D"line-31"></span></p><ul><li style=3D"list=
+-style-type:none"><p class=3D"line891"><img alt=3D"&lt;!&gt;" height=3D"16"=
+ src=3D"https://wiki.debian.org/htdocs/debwiki/img/attention.png" title=3D"=
+&lt;!&gt;" width=3D"16"> Note that a Windows 11 operating system for hostin=
+g WSL is assumed. <span class=3D"anchor" id=3D"line-32"></span><span class=
+=3D"anchor" id=3D"line-33"></span></p></li></ul><p class=3D"line874">Lengtl=
+y description follows here: <span class=3D"anchor" id=3D"line-34"></span><s=
+pan class=3D"anchor" id=3D"line-35"></span></p><p class=3D"line867">
+</p><h3 id=3D"To_prepare_your_system:">To prepare your system:</h3>
+<span class=3D"anchor" id=3D"line-36"></span><span class=3D"anchor" id=3D"l=
+ine-37"></span><ol type=3D"1"><li>Make sure your computer has the Virtualiz=
+ation features enabled in UEFI Settings (some may refer to this as BIOS Set=
+tings). <span class=3D"anchor" id=3D"line-38"></span></li><li><p class=3D"l=
+ine862">Activate and install the needed features and software on your Windo=
+ws host OS. Open PowerShell in Administrator mode and type these commands: =
+<span class=3D"anchor" id=3D"line-39"></span><span class=3D"anchor" id=3D"l=
+ine-40"></span><span class=3D"anchor" id=3D"line-41"></span><span class=3D"=
+anchor" id=3D"line-42"></span></p><pre><span class=3D"anchor" id=3D"line-1"=
+></span> dism.exe /online /enable-feature /featurename:Microsoft-Windows-Su=
+bsystem-Linux /all /norestart
+<span class=3D"anchor" id=3D"line-2"></span> dism.exe /online /enable-featu=
+re /featurename:VirtualMachinePlatform /all /norestart</pre><span class=3D"=
+anchor" id=3D"line-43"></span></li><li>Reboot your Windows 11 host <span cl=
+ass=3D"anchor" id=3D"line-44"></span></li><li><p class=3D"line862">Update y=
+our WSL Linux kernel update package. Open <tt class=3D"backtick">PowerShell=
+</tt> in administrator mode and enter the ffollowing command <span class=3D=
+"anchor" id=3D"line-45"></span><span class=3D"anchor" id=3D"line-46"></span=
+><span class=3D"anchor" id=3D"line-47"></span></p><pre><span class=3D"ancho=
+r" id=3D"line-1-1"></span> wsl.exe --update</pre><span class=3D"anchor" id=
+=3D"line-48"></span><ul><li>This will install and update WSL from Microsoft=
+ Store <span class=3D"anchor" id=3D"line-49"></span></li><li><p class=3D"li=
+ne862">If you do dot wish or cannot use Microsoft Store, please consult thi=
+s <a class=3D"https" href=3D"https://learn.microsoft.com/en-us/windows/wsl/=
+install-manual">Microsoft Learn article</a> <span class=3D"anchor" id=3D"li=
+ne-50"></span><span class=3D"anchor" id=3D"line-51"></span></p></li></ul></=
+li></ol><p class=3D"line867">
+</p><h3 id=3D"To_install_Debian_GNU.2FLinux">To install Debian GNU/Linux</h=
+3>
+<span class=3D"anchor" id=3D"line-52"></span><span class=3D"anchor" id=3D"l=
+ine-53"></span><ol type=3D"1"><li><p class=3D"line862">Giong forward we are=
+ in usermode. So you must open normal <tt class=3D"backtick">PowerShell</tt=
+> without administrator mode for the steps in this section. <span class=3D"=
+anchor" id=3D"line-54"></span></p></li><li>Set WSL 2 as you default WSL ver=
+sion. This is a per-user setting in Windows.   <span class=3D"anchor" id=3D=
+"line-55"></span><span class=3D"anchor" id=3D"line-56"></span><span class=
+=3D"anchor" id=3D"line-57"></span><pre><span class=3D"anchor" id=3D"line-1-=
+2"></span> wsl --set-default-version 2</pre><span class=3D"anchor" id=3D"li=
+ne-58"></span></li><li>Install Debian <span class=3D"anchor" id=3D"line-59"=
+></span><span class=3D"anchor" id=3D"line-60"></span><span class=3D"anchor"=
+ id=3D"line-61"></span><pre><span class=3D"anchor" id=3D"line-1-3"></span> =
+wsl --install -d Debian</pre><span class=3D"anchor" id=3D"line-62"></span><=
+ul><li>This takes some time <span class=3D"anchor" id=3D"line-63"></span></=
+li></ul></li><li><p class=3D"line862">Set a <tt class=3D"backtick">username=
+</tt> and <tt class=3D"backtick">password</tt> for your Debian GNU/Linux in=
+stallation when prompted <span class=3D"anchor" id=3D"line-64"></span></p><=
+ul><li>You are now logged in to your Debian system in command line mode <sp=
+an class=3D"anchor" id=3D"line-65"></span></li></ul></li><li><p class=3D"li=
+ne862">Add some text to the file <tt class=3D"backtick">/etc/wsl.conf</tt> =
+to activate <tt class=3D"backtick">systemd</tt> mode on next boot of WSL 2 =
+<span class=3D"anchor" id=3D"line-66"></span><span class=3D"anchor" id=3D"l=
+ine-67"></span><span class=3D"anchor" id=3D"line-68"></span><span class=3D"=
+anchor" id=3D"line-69"></span><span class=3D"anchor" id=3D"line-70"></span>=
+</p><pre><span class=3D"anchor" id=3D"line-1-4"></span> sudo echo '
+<span class=3D"anchor" id=3D"line-2-1"></span> [boot]
+<span class=3D"anchor" id=3D"line-3"></span> systemd=3Dtrue' &gt;&gt; /etc/=
+wsl.conf</pre><span class=3D"anchor" id=3D"line-71"></span>Provide the user=
+ password you set in the previous step when prompted.  <span class=3D"ancho=
+r" id=3D"line-72"></span></li><li><p class=3D"line862">Verify the content o=
+f the file <tt class=3D"backtick">/etc/wsl.conf</tt> and correct any errror=
+s. There should be only one section [boot] and exactly one instance of the =
+line <tt class=3D"backtick">systemd=3Dtrue</tt> in it. <span class=3D"ancho=
+r" id=3D"line-73"></span><span class=3D"anchor" id=3D"line-74"></span><span=
+ class=3D"anchor" id=3D"line-75"></span></p><pre><span class=3D"anchor" id=
+=3D"line-1-5"></span> sudo editor /etc/wsl.conf</pre><span class=3D"anchor"=
+ id=3D"line-76"></span></li><li><p class=3D"line862">Exit to PowerShell by =
+issuing the command <tt class=3D"backtick">logout</tt>, or by pressing <tt =
+class=3D"backtick">[Ctrl]&nbsp;+&nbsp;D</tt> <span class=3D"anchor" id=3D"l=
+ine-77"></span></p></li><li><p class=3D"line862">Shut down your Debian WSL =
+2 instance from PowerShell <span class=3D"anchor" id=3D"line-78"></span><sp=
+an class=3D"anchor" id=3D"line-79"></span><span class=3D"anchor" id=3D"line=
+-80"></span></p><pre><span class=3D"anchor" id=3D"line-1-6"></span> wsl --s=
+hutdown -d Debian</pre><span class=3D"anchor" id=3D"line-81"></span></li><l=
+i>Start your Debian instance and log back in <span class=3D"anchor" id=3D"l=
+ine-82"></span><span class=3D"anchor" id=3D"line-83"></span><span class=3D"=
+anchor" id=3D"line-84"></span><pre><span class=3D"anchor" id=3D"line-1-7"><=
+/span> wsl -d Debian -u &lt;username&gt;</pre><span class=3D"anchor" id=3D"=
+line-85"></span></li><li><p class=3D"line862">Use <tt class=3D"backtick">ap=
+t</tt> to upgrade your WSL 2 Debian and <tt class=3D"backtick">apt</tt> or =
+<tt class=3D"backtick">aptitude</tt> to install some packages (<tt class=3D=
+"backtick">mesa-utils</tt> is required on the Debian side for the GUI apps =
+integration to work) <span class=3D"anchor" id=3D"line-86"></span><span cla=
+ss=3D"anchor" id=3D"line-87"></span><span class=3D"anchor" id=3D"line-88"><=
+/span><span class=3D"anchor" id=3D"line-89"></span><span class=3D"anchor" i=
+d=3D"line-90"></span></p><pre><span class=3D"anchor" id=3D"line-1-8"></span=
+> sudo apt update
+<span class=3D"anchor" id=3D"line-2-2"></span> sudo apt dist-upgrade
+<span class=3D"anchor" id=3D"line-3-1"></span> sudo apt install mesa-utils =
+firefox-esr</pre><span class=3D"anchor" id=3D"line-91"></span></li><li>The =
+installed programs can be started from a Debian shell, or from the Windows =
+start menu. <span class=3D"anchor" id=3D"line-92"></span><span class=3D"anc=
+hor" id=3D"line-93"></span><span class=3D"anchor" id=3D"line-94"></span></l=
+i></ol><p class=3D"line867">
+</p><h2 id=3D"Advanced_Usage">Advanced Usage</h2>
+<span class=3D"anchor" id=3D"line-95"></span><span class=3D"anchor" id=3D"l=
+ine-96"></span><p class=3D"line862">WSL 2 brings GUI application and <tt cl=
+ass=3D"backtick">sytemd</tt> support to WSL. That is, you now can run Debia=
+n apps in an integrated desktop mode. <span class=3D"anchor" id=3D"line-97"=
+></span><span class=3D"anchor" id=3D"line-98"></span></p><p class=3D"line86=
+2">To activate the new <a class=3D"https" href=3D"https://docs.microsoft.co=
+m/en-us/windows/wsl/tutorials/gui-apps">GUI application support</a> you hav=
+e to update your WSL 2 environment to <a href=3D"https://wiki.debian.org/De=
+bianBookworm">Debian bookworm</a> or later. <span class=3D"anchor" id=3D"li=
+ne-99"></span><span class=3D"anchor" id=3D"line-100"></span></p><p class=3D=
+"line862">After that you need to install <tt class=3D"backtick">mesa-utils<=
+/tt> this will install all the necessary packages for th GUI app support to=
+ work. <span class=3D"anchor" id=3D"line-101"></span><span class=3D"anchor"=
+ id=3D"line-102"></span></p><p class=3D"line874">Most of the GUI apps in De=
+bian should now just work out-of-the-box (e.g., try firefox). <span class=
+=3D"anchor" id=3D"line-103"></span><span class=3D"anchor" id=3D"line-104"><=
+/span></p><p class=3D"line867">
+</p><h2 id=3D"Feedback">Feedback</h2>
+<span class=3D"anchor" id=3D"line-105"></span><span class=3D"anchor" id=3D"=
+line-106"></span><p class=3D"line874">Please use the Microsoft Store review=
+/feedback to report bugs or feature requests for now. <span class=3D"anchor=
+" id=3D"line-107"></span><span class=3D"anchor" id=3D"line-108"></span></p>=
+<p class=3D"line874">There is a IRC channel on OFTC to discuss WSL related =
+stuff: #debian-wsl <span class=3D"anchor" id=3D"line-109"></span><span clas=
+s=3D"anchor" id=3D"line-110"></span></p><p class=3D"line862">You can also l=
+eave patches and issues at the <a class=3D"https" href=3D"https://salsa.deb=
+ian.org/Debian/WSL">WSL repo on Salsa</a>. <span class=3D"anchor" id=3D"lin=
+e-111"></span><span class=3D"anchor" id=3D"line-112"></span></p><p class=3D=
+"line867">
+</p><h2 id=3D"Known_Issues">Known Issues</h2>
+<span class=3D"anchor" id=3D"line-113"></span><span class=3D"anchor" id=3D"=
+line-114"></span><p class=3D"line874">Any software relying on systemd or lo=
+w-level hardware accessibility might fail due to missing support from the c=
+urrent Windows kernel or virtualization interface. <span class=3D"anchor" i=
+d=3D"line-115"></span><span class=3D"anchor" id=3D"line-116"></span></p><p =
+class=3D"line867"><tt class=3D"backtick">systemd</tt> support has been adde=
+d to WSL 2. See description of this <a href=3D"https://wiki.debian.org/Inst=
+allingDebianOn/Microsoft/Windows/SubsystemForLinux#WSL_2_with_systemd_suppo=
+rt">above</a>. <span class=3D"anchor" id=3D"line-117"></span><span class=3D=
+"anchor" id=3D"line-118"></span></p><p class=3D"line874">As WSL is a pretty=
+ new project from Microsoft improvement can be expected to happen with ever=
+y new Windows stable channel release (approx. every 6 months). <span class=
+=3D"anchor" id=3D"line-119"></span>The app launcher will be updated to supp=
+ort stable release features continuously. <span class=3D"anchor" id=3D"line=
+-120"></span><span class=3D"anchor" id=3D"line-121"></span></p><p class=3D"=
+line862">If WSL itself is installed from Microsoft Store, for example by is=
+suing <tt class=3D"backtick">wsl&nbsp;--update</tt> in an elevated PowerShe=
+ll prompt on the Windows Host, Microsoft claims WSL will be updated more fr=
+equently and independently of the Windows stable chanel releases. <span cla=
+ss=3D"anchor" id=3D"line-122"></span><span class=3D"anchor" id=3D"line-123"=
+></span></p><p class=3D"line867">
+</p><h3 id=3D"FAQ">FAQ</h3>
+<span class=3D"anchor" id=3D"line-124"></span><span class=3D"anchor" id=3D"=
+line-125"></span><dl><dt>How do I keep my Debian environment up-to-date </d=
+t><dd><p class=3D"line862">as with any other Debian installation use apt/ap=
+t-get to install and update software from the official Debian mirrors (e.g.=
+, <tt class=3D"backtick">apt&nbsp;update&nbsp;&amp;&amp;&nbsp;apt&nbsp;dist=
+-upgrade</tt>) <span class=3D"anchor" id=3D"line-126"></span><span class=3D=
+"anchor" id=3D"line-127"></span></p></dd><dt>How do I install a newer relea=
+se? </dt><dd>You can install the app, change your sources.list and upgrade =
+your install as with every other Debian installation. <span class=3D"anchor=
+" id=3D"line-128"></span><span class=3D"anchor" id=3D"line-129"></span></dd=
+><dt>How many people are using Debian via WSL? </dt><dd>Approximately 1,746=
+,662 at last count (unique installs according to the Microsoft Partner Cent=
+er dashboard 2024-11-20). <span class=3D"anchor" id=3D"line-130"></span><sp=
+an class=3D"anchor" id=3D"line-131"></span></dd></dl><p class=3D"line867">
+</p><h2 id=3D"Code_.26_Issues">Code &amp; Issues</h2>
+<span class=3D"anchor" id=3D"line-132"></span><span class=3D"anchor" id=3D"=
+line-133"></span><p class=3D"line862">The full app code and all build depen=
+dencies can be found in the <a class=3D"https" href=3D"https://salsa.debian=
+.org/Debian/WSL">WSL repo on salsa</a>. <span class=3D"anchor" id=3D"line-1=
+34"></span><span class=3D"anchor" id=3D"bottom"></span></p></div><div id=3D=
+"pagebottom"></div>
+</div>
+
+
+<div id=3D"footer">
+<p id=3D"pageinfo" class=3D"info" lang=3D"en" dir=3D"ltr">InstallingDebianO=
+n/Microsoft/Windows/SubsystemForLinux  (<a class=3D"nbinfo" href=3D"https:/=
+/wiki.debian.org/InstallingDebianOn/Microsoft/Windows/SubsystemForLinux?act=
+ion=3Dinfo" rel=3D"nofollow">last modified 2025-05-01 12:48:23</a>)</p>
+
+<ul id=3D"credits">
+<li><strong>Changes made after 24 July 2025 00:00 UTC are available under <=
+a href=3D"https://wiki.debian.org/copyright.html">Creative Commons Attribut=
+ion-ShareAlike 4.0 International</a> unless otherwise noted.</strong></li><=
+li>Debian <a href=3D"https://www.debian.org/legal/privacy">privacy policy</=
+a>, Wiki <a href=3D"https://wiki.debian.org/Teams/DebianWiki">team</a>, <a =
+href=3D"https://bugs.debian.org/wiki.debian.org">bugs</a> and <a href=3D"ht=
+tps://salsa.debian.org/debian/wiki.debian.org">config</a>.</li><li>Powered =
+by <a href=3D"https://moinmo.in/" title=3D"This site uses the MoinMoin Wiki=
+ software.">MoinMoin</a> and <a href=3D"https://moinmo.in/Python" title=3D"=
+MoinMoin is written in Python.">Python</a>, with hosting provided by <a hre=
+f=3D"https://www.man-da.de/">Metropolitan Area Network Darmstadt</a>.</li>
+</ul>
+
+
+</div>
+
+
+
+</body></html>
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://wiki.debian.org/htdocs/debwiki/img/attention.png
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A
+/wD/oL2nkwAAAAlwSFlzAAAN1wAADdcBQiibeAAAAAd0SU1FB9gJExU0AjLMXaIAAAJaSURBVDjL
+rZPLb4xRGIefc75jvrm0801bnYoymq5cdkVQmwaRWLCz02AhEv4CbBCxlAiJhBVhJSGxEwmxkEiU
+hUQlROlF05qZTs1Mp/PdzmtBq9VILDyrd/O75LznVSzh6gF0f0/2cULsVjvfzEocOcpxIoz5FjX9
+C9vvcZM/UAvD82PuiVzCXPO629xcTx63NYVyHCSM8WvzlEemwtnRqUll7aG+u7xdZvBs0BlsM/p2
+Yfdmlc5lkZkQQvkdYxSq1aFardnxF2/nldC/YKKvHiDRnnJvFXZvUmm3BZkOIBTM3vMkT73EDJyB
+SJBKRDaR0d27thgLdxa89c71qUe57g437WWRasRK9OIk85Zc1nOzhdW9b45wHEAnYYdX6ERmfosl
+8pHKZ6J3D5Ha5DI7qce0rssLcBhAWz9odVtSEMmyVKl+hWAOW/kCfg3sr4AYkulUUoTtAEbi2FFa
+syiXGKlNEH97D8aF7+PY4jAohcrkUS1daO06StEGYNAqss26UUETmSshjTKIRYYfEA0/WNJdkPo0
+Up8mSG6qA8HPro5TDMolbOUjMlcEsT83t+8i6cuCGTi3/E2NIQzjEBgC0E0/ulKaaoS6o51/IcgX
+/Op4qQLcX/xIQ4NqdMO2DeszjbKSau3v6rYOyqu8idLrkYm+u+xaXLIWOTj26kujmuoM9JouMGZl
+7bW9YdF4E8WhERc4ueIWru9hoC/P9fae1T2ZLs/JpEzCaNRcQDOMrD8zVio1Jiv1pOHoiltYyo29
+XOr12O+5bDSalshSm/X58GmWJ6efcpb/zQ+F3QP5lITioAAAAABJRU5ErkJggg==
+
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://www.debian.org/Pics/openlogo-50.png
+
+iVBORw0KGgoAAAANSUhEUgAAADIAAAA9CAYAAAGYbgryAAAAAXNSR0IArs4c6QAAAAlwSFlzAAB+
+9QAAfvUBJMll2gAAAAd0SU1FB9sBHgwOFLTIT8cAAAAGYktHRAAAAAAAAPlDu38AAAdWSURBVGje
+7Vp7kE9VHL92WXbtkkwqr1hNjUfyyGbzTA+10YOhyaMpJglbGc+UYUbU0IuUJjLTH1HeUUMlJq8o
+z5CKMuUViWhYj7W/Pp/6XE63c397f08xzsxn7rnf8z33e773nHvO93zucZwg6Usn51sjX8ZPqSxQ
+zlbQw3yCWTDFiSaFwhWeMZTWA8sD+VfVyIfMgvZ+Nd7VtY0Tl9TTJuwI9JEvp/waMpFNBuYA7yn/
+RjhfQ0Z+OHB3xI1FpVT19weBLEVjYZCTyFQIdNar3aar29yTwEpvhW4A31QFVRwoeS6QB7QCbo5f
++9SRhcAY4ITv20RBuq0QskxrJQhbeO5HAW19+wzCH4z8omI7GcIfjfwRT9kTtgrTPe3ewCaFnSFQ
+uDnSV7ovmn74LtoOzEjY6F1anII7W4zVda5FJ1XlIXNOXa3rQkMxz6jQzpx/y+vKb6EKcKeUmOrq
+W7kWaBn0jZUBVmjom/gVyOOME8v3tMB44B0+OpUMndej+WB3RqD/ApdFYEjQCt8An1jktxbXsEi8
++Am4yiJfGcD7tKBGtgIPWuQ1gUnuEmPIs4GDkfbHZWrVFT7lHFEdgeqxztS3xLTWRWjsMNAuWcau
+Tppn8UgpgG2KnwqMiTU2aWBECe70egz4DZgGcF18WuUMdtMVSbh6lB/S/VpgtBF9WEPb08BehSqF
+KpsNDFX5H546BcBRRcD8dpYB99tC5iXA98BrKiinK6fwmpr7B+l+nx4WUnjDhzcHjkjO9eKBIHF5
+8hM6+WHLWkK8BHSO9eGpeliRrge4KwBe5DKg2K0o1ijYNTCdH6OPzpSoDWm6p5G7Auh+IUPHIjGQ
+KwMlI/Q6I6hyeVUY41O+FujArRzXEUO+FNgSyJD2OkW2FQ6yTWHq9Wa9oJ5U4aixyLn6ZVrkDQ0j
+oaBGagCnLfI23EmEqcetYp1IjJyy7bOBxsZ9GmMuT8dnBjVSEThjkTcHjtoIC8VbdSP+CC2yEkBT
+YBvwFNAEGCwPKkT7pX8Yprw7PYt1zqqdlPWcUwTwcqKNpOi1lUi0oZb6+hNuqGakk2Usr24yV8Jk
+LsdlnUsJiVzHfR4ZY609XuIhavIB6XPLvjs9XkHaWiMWbgo8rjjYJF+36loZmAmMB+Yb9VinBsDV
+8bhkZyfOqgqamVYB9Y2WT/DQEPnALoCk53BPQxmmZhm6A4B5buErityZ1omqCBnBdjejYjXlGTMP
+U8wbkteHgQxDtx9wdibvAWxXnqF+bUsfuPd8HV/Lw6FqiJsOeYz0NY1kqqCJtg23652SWeBevpHK
+uUHaD3BHTGZtpLYM3YHdypc3jPQ3jTBdKfYzB6gnWVttF1ixo4xWVFkTbRsy1OGO+o5LcmvdcwD1
+StSUQ0apMfAZsB/4BXgeeATooyW7hTjH1P/b9uUGYCODHGPrUuSzpfHiOMM8YCFw2/loPEO7t3wa
+RyKrRzH1KwMDFbG5jrvOz0gou2o0or/HMK+Low0EFDVOtPTkPYlo/I1G5OgaWuW3j4zSxnUWZ56N
+pxMldF2nh+/lji+C+rVEAwwDemk7WjHMJs91YkQ8X5RrYJIezt85LQPW4Qy1xua0ojjOcCmWsvGy
+tVT3JePlRLb4Dc5KTwbQLwXMAhpFaa+30SvXx7M3qgM7RNQ0DKDfDJgflOX2/gvXEAy7y4vWkWv4
+x03zfckA+vWBQ8V9RyLQK1vkm4GfNcVnxdORauqR00E2C6Lg3uf34TNMW/nUq6ThO4+9FPftlj7M
+NTIyJID+5cC9QAPgT2Cs3wvQ99QT+F29kOUkMskYx+1X4Rgiy0JXB3hHs95sYL16l5TjamCoCInk
+xV0w9rExmyyO4TlZzvlMGmJzDWfaX9B7YtHYdGQXZ7QL3Znq+lNHh4Zd8IyFFr9CTc0jLwaHOO+P
+Jk0NfAR0uii4JW1l+2uTNFB0eJpzKV1Kf6dSomNKB9RNN3k5y3DLFVOZm2xHtoioKu4EZiVDt18Y
+R25KliNsUJ5YtzxRfmxcM0OngfjHx8TmMfEj/lS6XcXskYzrJH7SEcNHHpN/itxjfhki4TrIJuvw
+J5xLYpQRmZcnCrKebD8EZNscYAWXyp1myLeJs8wRA8jyJWpUBcNRnhNboPwGYBbwjPMPFUyZe3x1
+qu5H6J6n2CYDbnQwyDl33CJFNl1qegdAAoQ7xpOSjfM64h6uXeSRr5EjrLxOOjyhS/K2lhrIxnYB
+5qj8baN+tvPvE6UTlH/O0ElTz5FjzRf3yiMdjIbJ5y5XnS5GnXzJ/rODHKeC+R75JjnCIbFbOqS9
+H/WgldEj+UZ9Dity6AW6Hy+dIRrGB4ATzrlzJo7suI5w6C1THfPQUl8/R0j8n1KheQqtQDKO25HK
+z7AMTRpdqPI+hryrZAN0/6bRIx3Um1sN/Rzn3IkdPpPh/krJ2gfpEabWwEFjKGwEVig/WDr8kbBH
+sgLl+RvlVUN3t4YDqX3+6XBPbJfW0KXOTMkWGPYIMjQ7lc9Sr223vKBRkp09U/sXKl3FkyLcuogA
+AAAASUVORK5CYII=
+
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debian-wiki-1.0.css?v=1
+
+@charset "utf-8";
+
+html { }
+
+#pageinfo { }
+
+#content div.debian { border: 1pt solid rgb(255, 158, 194); background-colo=
+r: rgb(255, 228, 241); color: black; margin: 10pt 30pt; background-repeat: =
+no-repeat; background-position: 8px 8px; min-height: 64px; padding-left: 64=
+px; }
+
+#content div.debian p { margin-top: 8px; }
+
+#content div.debian { background-image: url("//wiki.debian.org/Portal/IDB?a=
+ction=3DAttachFile&do=3Dget&target=3Dofficial-doc.png"); }
+
+.closed-bug { text-decoration: line-through !important; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/projection.css
+
+@charset "utf-8";
+
+@import url("screen.css");
+
+html { line-height: 1.8em; }
+
+body, b, em, a, span, div, p, td { font-size: 18pt; }
+
+h1 { font-size: 26pt; }
+
+h2 { font-size: 22pt; }
+
+h3 { font-size: 20pt; }
+
+h4 { font-size: 18pt; }
+
+h5 { font-size: 16pt; }
+
+h6 { font-size: 14pt; }
+
+tt, pre { font-size: 16pt; }
+
+sup, sub { font-size: 12pt; }
+
+table.navigation { float: right; margin: 2px; }
+
+.navigation td, .navigation a { font-size: 10pt; padding: 2px; }
+
+#interwiki, #pagelocation, #pageinfo { display: none; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/print.css
+
+@charset "utf-8";
+
+html { font-family: Times, serif; font-size: 12pt; }
+
+body { margin: 1.5cm; }
+
+a, a:visited, a.nonexistent, a.badinterwiki { color: black; text-decoration=
+: none; }
+
+a:hover { text-decoration: underline; }
+
+.info a { color: gray; }
+
+pre { font-size: 10pt; }
+
+a.interwiki::before, a.badinterwiki::before { content: attr(title) ":"; }
+
+a.interwiki img, a.badinterwiki img { display: none; }
+
+.footnotes div { border-top: 1pt solid gray; }
+
+#header, #sidebar, #footer, #timings, #credits, #interwiki, #pagelocation {=
+ display: none; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/screen.css
+
+@charset "utf-8";
+
+#splash { margin-top: 0px; margin-bottom: 1em; text-align: center; overflow=
+: hidden; height: 150px; }
+
+#splash h1 { background-image: url("Pics/debian-61_glossy-large.png"); back=
+ground-position: center top; padding-top: 190px; overflow: hidden; text-ali=
+gn: center; background-repeat: no-repeat; display: block; margin: 0px; heig=
+ht: 0px; }
+
+#maincol { background-image: url("Pics/cropped-swirls.png"); background-pos=
+ition: center top; background-repeat: repeat-x; }
+
+#announce { text-align: center; float: left; width: 41%; min-width: 260px; =
+margin-bottom: 1.5em; }
+
+#intro { padding-top: 0px; }
+
+#intro p { margin-top: 0em; padding: 0px; }
+
+#hometoc { list-style: none; margin: 0px 0px 2em; padding: 0px; width: 100%=
+; font-size: 0.75em; overflow: hidden; line-height: 1.5em; border: 0px; }
+
+#hometoc a { text-decoration: none; }
+
+#hometoc a:hover { text-decoration: underline; }
+
+ul#hometoc-cola a, ul#hometoc-colb a, ul#hometoc-colc a, ul#hometoc-cold a,=
+ ul#hometoc-cole a { padding-left: 5px; }
+
+ul#hometoc-cola, ul#hometoc-colb, ul#hometoc-colc, ul#hometoc-cold, ul#home=
+toc-cole { float: left; width: 19.2%; min-width: 11em; height: 14em; margin=
+: 0px 1% 0px 0px; padding: 0px; background-image: url("Pics/gradient.png");=
+ background-position: 0px -40px; background-repeat: repeat-x; border-top: 1=
+px solid rgb(198, 200, 224); list-style: none; }
+
+ul#hometoc-cole { width: 18.9%; margin-right: 0px; }
+
+#hometoc-wrap { padding: 1em; border-top: 1px solid white; }
+
+#hometoc a { margin: 0px; }
+
+#hometoc ul { list-style: none; padding: 1em 0px 0px; }
+
+#hometoc ul ul { padding: 0px; }
+
+#hometoc li { text-indent: 0px; background-color: transparent; font-weight:=
+ bold; }
+
+#hometoc li ul { margin: 0px; }
+
+#hometoc li li { margin: 0px; text-indent: 0px; padding: 0px; font-weight: =
+normal; border: 0px; background-image: none; background-color: transparent;=
+ }
+
+.infobar { margin: 0px 0px 2em; padding: 1em 5px; line-height: 1em; font-si=
+ze: 0.75em; border: 1px solid rgb(210, 211, 215); background-image: url("Pi=
+cs/gradient.png"); background-position: 0px -35px; background-repeat: repea=
+t-x; clear: both; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/Pics/gradient.png
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAABDCAIAAADS5/i5AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAN
+/wAADf8B9IqyiQAAAAd0SU1FB9cIHhQeLyfm5HAAAAAWdEVYdENvbW1lbnQAS2FsbGUgU29kZXJt
+YW4Dov5qAAAABmJLR0QA/wD/AP+gvaeTAAAAVUlEQVQY012OwRHAMAjDJO+/X6/fLkIfcEnTF1iH
+bbjuJ4aIQQKzx1hEm4vRCiTKZswuAfue9unOdRjHJOhks1h7Tj9z09469Ope2X5+/DGIGU19u15W
+fQeCuEqAAgAAAABJRU5ErkJggg==
+
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/debian.css
+
+@charset "utf-8";
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, b=
+lockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, f=
+ont, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, d=
+l, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody=
+, tfoot, thead, tr, th, td { margin: 0px; padding: 0px; border: 0px; outlin=
+e: 0px; font-weight: inherit; font-style: inherit; font-size: 100%; font-fa=
+mily: inherit; vertical-align: baseline; }
+
+body { line-height: 1; color: black; background: white; }
+
+ol, ul { list-style: none; }
+
+table { border-collapse: separate; border-spacing: 0px; }
+
+blockquote, q { quotes: "" ""; }
+
+html { background-color: transparent; }
+
+:focus { outline: 0px; }
+
+caption, th, td { text-align: left; font-weight: normal; }
+
+blockquote::before, blockquote::after, q::before, q::after { content: ""; }
+
+body { margin: 0px; font: 100% / 1.5 sans-serif; color: rgb(34, 34, 34); ba=
+ckground-color: white; background-image: url("Pics/gradient.png"); backgrou=
+nd-position: 0px 0px; background-repeat: repeat-x; }
+
+#content { margin: 0px 10px 0px 52px; }
+
+#inner { position: relative; }
+
+#maincol { margin: 0px 15em 1.5em 0px; }
+
+#header { margin: 0px; padding: 0px 10px 0px 52px; }
+
+#header a:link, #header a:visited, #second-nav a:link, #second-nav a:visite=
+d { text-decoration: none; }
+
+#header a:hover, #second-nav a:hover { text-decoration: underline; }
+
+#breadcrumbs { margin: 0px; font-size: 0.75em; text-transform: lowercase; l=
+ine-height: 2; background-color: rgb(245, 246, 247); border-bottom: 1px sol=
+id rgb(210, 211, 215); min-height: 20px; }
+
+#breadcrumbs::before { content: "/"; margin-left: 0.5em; margin-right: 0.5e=
+m; }
+
+p.section { margin: 0px; padding: 0px 5px; font-family: monospace; line-hei=
+ght: 16px; color: white; text-transform: uppercase; letter-spacing: 0.08em;=
+ position: absolute; top: 0px; left: 52px; background-color: rgb(199, 0, 54=
+); }
+
+p.section a { color: white; text-decoration: none; }
+
+p.section a:hover { color: white; text-decoration: underline; }
+
+#navbar { background-color: transparent; list-style: none; display: block; =
+border-bottom: 1px solid rgb(199, 0, 54); text-indent: 0px; padding: 0px; m=
+argin-top: 0px; margin-bottom: 0px; }
+
+#navbar ul { margin: 0px; padding: 0px; clear: both; overflow: hidden; min-=
+height: 45px; }
+
+#navbar li { list-style: none; float: left; padding: 0px; margin: 0px; }
+
+#navbar a:link, #navbar a:visited { padding: 1.75em 0.5em 0.25em; border-le=
+ft: 1px solid transparent; border-right: 1px solid transparent; display: bl=
+ock; text-decoration: none; }
+
+#navbar a:visited { color: rgb(84, 99, 140); }
+
+#navbar a:hover, #navbar a:visited:hover { background-color: rgb(245, 246, =
+247); border-left: 1px solid rgb(210, 211, 215); border-right: 1px solid rg=
+b(210, 211, 215); text-decoration: underline; }
+
+ul.subnav { list-style: none; margin-left: 0px; padding-left: 0px; margin-t=
+op: 0px; }
+
+ul.subnav li { display: inline; margin-right: 1em; }
+
+#searchbox { text-align: left; line-height: 1; margin: 0px 10px 0px 0.5em; =
+padding: 1px 0px; position: absolute; top: 0px; right: 0px; font-size: 0.75=
+em; }
+
+#searchbox p { margin: 0px; padding: 0px; }
+
+#upperheader { margin: 0px; padding: 0px; }
+
+#logo { position: absolute; top: 0px; left: 0px; padding: 0px; background-c=
+olor: transparent; border-width: 0px 1px 1px; border-right-style: solid; bo=
+rder-bottom-style: solid; border-left-style: solid; border-right-color: tra=
+nsparent; border-bottom-color: transparent; border-left-color: transparent;=
+ border-image: initial; border-top-style: initial; border-top-color: initia=
+l; width: 50px; height: 5.07em; min-height: 65px; }
+
+#logo a { display: block; position: relative; padding: 0px; height: 100%; m=
+in-height: 65px; }
+
+#logo img { margin-top: 5px; position: absolute; bottom: 0.3em; overflow: a=
+uto; }
+
+#logo:hover { border-width: 0px 1px 1px; border-right-style: solid; border-=
+bottom-style: solid; border-left-style: solid; border-right-color: rgb(210,=
+ 211, 215); border-bottom-color: rgb(210, 211, 215); border-left-color: rgb=
+(210, 211, 215); border-image: initial; border-top-style: initial; border-t=
+op-color: initial; background-color: rgb(245, 246, 247); }
+
+a:link { color: rgb(0, 53, 199); text-decoration: underline; }
+
+a:visited { color: rgb(84, 99, 140); }
+
+a:link:hover { text-decoration: none; color: rgb(0, 32, 122); }
+
+a:visited:hover { text-decoration: none; }
+
+a:active { color: rgb(194, 195, 199); }
+
+a img { border: 0px; }
+
+a.rss_logo { font-size: 0.75em; float: right; width: 35px; line-height: 10p=
+x; color: rgb(255, 255, 255); background-color: rgb(255, 102, 0); font-weig=
+ht: bold; font-family: sans-serif; text-align: center; text-decoration: non=
+e; padding: 0.25em; margin-left: 0.25em; border: 1px solid rgb(255, 102, 0)=
+; }
+
+a.rss_logo:hover { background-color: white; border: 1px solid rgb(255, 102,=
+ 0); color: rgb(255, 102, 0); }
+
+a.rss_logo.generic { background-color: rgb(255, 136, 0); }
+
+a.rss_logo.generic:hover { background-color: rgb(238, 119, 0); }
+
+#second-nav { width: 16em; font-size: 0.75em; line-height: 1.5; float: righ=
+t; top: 0px; right: 0px; margin: 3em 0px 0px; padding: 0px 0px 0px 1em; bor=
+der-left: 1px solid rgb(210, 211, 215); }
+
+#second-nav ul { padding: 0px; margin: 0px; list-style: none; }
+
+#second-nav ul ul { margin-left: 1em; }
+
+#second-nav li { font-weight: normal; margin: 0px; padding: 0px; }
+
+#second-nav p { line-height: 2; font-weight: bold; margin: 0px; }
+
+#second-nav h2 { margin: 0px; }
+
+p { margin: 1.5em 0px; }
+
+strong { font-weight: bold; }
+
+em { font-style: italic; color: rgb(68, 68, 68); }
+
+small { font-size: 0.75em; }
+
+sup { font-size: 0.75em; vertical-align: top; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: 600; color: black; }
+
+h1 { font-weight: normal; font-size: 1.8em; line-height: 0.83333; margin: 0=
+.83333em 0px; }
+
+h2 { font-size: 1.4em; font-weight: normal; line-height: 1.07143; margin: 1=
+.07143em 0px; }
+
+h3 { font-size: 1.125em; line-height: 1.333em; margin: 1.333em 0px 0px; }
+
+h4 { font-weight: normal; font-style: italic; margin: 1.5em 0px; color: rgb=
+(68, 68, 68); }
+
+h5 { font-style: italic; font-size: 0.75em; margin: 2em 0px; }
+
+ol, ul { padding-left: 1.5em; margin: 1.5em 0px; }
+
+ol > ol, ul > ul, li > ol, li > ul { margin: 0px; }
+
+ol { list-style-type: decimal; }
+
+ul { list-style-type: disc; }
+
+th { font-weight: bold; margin: 1.5em 0px; }
+
+hr { border: none; background-color: rgb(187, 187, 187); height: 1px; margi=
+n: 1.4375em 0px 1.5em; }
+
+pre { margin: 1.5em 0px; overflow: auto; font-family: monospace; white-spac=
+e: pre; color: black; }
+
+tt, code { font-family: monospace; white-space: pre; color: black; }
+
+dt { margin: 1.5em 0px 0px; font-weight: bold; }
+
+dd { margin: 0px 0px 0px 1.5em; }
+
+blockquote { font-size: 0.75em; margin: 2em; line-height: 2; }
+
+cite { font-style: italic; color: rgb(68, 68, 68); }
+
+acronym, abbr { text-transform: uppercase; font-size: 0.9em; }
+
+.toc { font-size: 0.75em; list-style: none; background-image: url("Pics/gre=
+ydot.png"); background-position: left bottom; background-repeat: repeat-x; =
+line-height: 1.833; padding: 0px; max-width: 62%; margin: 2em 0px; }
+
+.toc li { background-image: url("Pics/greydot.png"); background-position: l=
+eft top; background-repeat: repeat-x; padding: 0.0833em 0px; }
+
+.toc a { display: block; text-decoration: none; }
+
+.toc a:hover { display: block; background-color: rgb(240, 240, 244); text-d=
+ecoration: underline; }
+
+.toc dt { margin: 0px; background-image: url("Pics/greydot.png"); backgroun=
+d-position: left top; background-repeat: repeat-x; padding: 0.0833em 0px; }
+
+.card { clear: both; margin: 1.5em 0px; background-position: 0px -50px; bac=
+kground-repeat: repeat-x; padding: 0px; }
+
+.card ul { }
+
+.card ul li { list-style: none; }
+
+.card h2 { }
+
+.lefthalf { float: left; }
+
+.righthalf { margin-left: 50%; }
+
+.lefthalf ul { margin-top: 0px; }
+
+#footer { font-size: 0.75em; border-width: 1px 0px; border-top-style: solid=
+; border-bottom-style: solid; border-top-color: rgb(223, 223, 224); border-=
+bottom-color: rgb(223, 223, 224); border-image: initial; padding: 1em; back=
+ground-color: rgb(245, 246, 247); margin: 0px 10px 0px 52px; line-height: 1=
+.5em; border-left-style: initial; border-left-color: initial; border-right-=
+style: initial; border-right-color: initial; }
+
+#content #footer { margin-left: 0px; }
+
+#footer p { margin: 1em 0px; }
+
+#footer hr { border-top: 1px solid rgb(210, 211, 215); border-bottom: 1px s=
+olid white; height: 0px; }
+
+#footer .editbar li { display: inline; margin-right: 2em; }
+
+#footer .info { }
+
+#fineprint { margin-bottom: 1em; }
+
+#footermap { list-style: none; margin: 0px; padding: 0px; width: 100%; over=
+flow: hidden; border: 0px; }
+
+ul#footermap-cola a, ul#footermap-colb a, ul#footermap-colc a, ul#footermap=
+-cold a, ul#footermap-cole a { padding-left: 0px; }
+
+ul#footermap-cola, ul#footermap-colb, ul#footermap-colc, ul#footermap-cold,=
+ ul#footermap-cole { float: left; width: 19%; min-width: 11em; height: 12em=
+; margin: 0px 1% 0px 0px; padding: 2em 0px 0px; list-style: none; }
+
+ul#footermap-cole { width: 18.9%; margin-right: 0px; }
+
+#footermap-wrap { padding: 2em; border-top: 1px solid white; }
+
+#footermap a { margin: 0px; }
+
+#footermap ul { list-style: none; padding: 0px; }
+
+#footermap li { text-indent: 0px; background-color: transparent; font-weigh=
+t: bold; }
+
+#footermap li ul { margin: 0px; padding: 0px; }
+
+#footermap li li { margin: 0px; text-indent: 0px; padding: 0px; font-weight=
+: normal; border: 0px; background-image: none; background-color: transparen=
+t; }
+
+#serverselect { }
+
+#serverselect input, #serverselect option, #serverselect select { }
+
+#serverselect ul { display: inline; margin-left: 2em; }
+
+#serverselect li { list-style: none; display: inline; padding: 0px 1em; mar=
+gin: 0px; }
+
+#serverselect form p { margin: 0px; padding: 0px; line-height: 1; }
+
+.lcol50 { float: left; width: 49%; font-size: 0.75em; margin: 0px; padding:=
+ 0px 0.5em 0px 0px; }
+
+.lcol50 h2 { margin-top: 0px; }
+
+.rcol50 { margin: 0px 0px 0px 51%; padding: 0px; font-size: 0.75em; }
+
+form#pageLang { display: inline; }
+
+input:focus { background-color: rgb(255, 255, 203); }
+
+.hidecss { display: none; }
+
+.clear { clear: both; }
+
+#clear { clear: both; border: 0px; height: 1px; display: block; }
+
+.quicklist::before { content: "Quick Links: "; font-weight: bold; }
+
+.quicklist { list-style: none; font-size: 0.75em; margin: 2em 0px; padding:=
+ 0px; text-indent: 0px; line-height: 2em; }
+
+.quicklist li { display: inline; }
+
+.item p { margin: 0px; }
+
+.item h2, .item p, .item ul { margin-right: 10px; }
+
+.item h2, .item h3, .item h4, .item h5 { margin-top: 0px; }
+
+.line { padding: 0px; width: auto; overflow: hidden; }
+
+div.downloads { border-top: 0.17em solid rgb(51, 153, 0); margin: 1.33em 0p=
+x 0px; }
+
+.downloads ul.downlist { margin: 0px; }
+
+div.downloads .col50 { border-top: 0.15em solid rgb(51, 153, 0); }
+
+ul.downlist { padding-left: 30px; text-indent: 0px; background: url("Pics/e=
+mblem-downloads.png") 0px 0.15em no-repeat; }
+
+ul.quicklist.downlist { border-top: 0.15em solid rgb(51, 153, 0); padding-t=
+op: 0.25em; margin-top: 1.6em; }
+
+ul.downlist li { display: inline; }
+
+ul.downlist li::after { content: ", "; }
+
+ul.downlist li:last-child::after { content: ""; }
+
+div.tip, div.important, div.warning, div.note { padding: 0px 2em 0px 4em; m=
+argin: 1.85em 0px; background-repeat: no-repeat; background-position: 0.5em=
+ 1em; font-size: 0.75em; line-height: 2em; background-color: rgb(255, 255, =
+203); border: 0.15em solid rgb(204, 204, 163); }
+
+div.tip p, div.important p, div.warning p, div.note p { margin: 1em 0px; }
+
+div.tip { background-image: url("Pics/admon-tip.png"); }
+
+div.important { background-image: url("Pics/admon-important.png"); }
+
+div.warning { background-image: url("Pics/admon-warning.png"); }
+
+div.note { background-image: url("Pics/admon-note.png"); }
+
+.col50, .cardleft, .cardright { width: 47.5%; float: left; padding-bottom: =
+1.5em; }
+
+.lastcol, .cardright { margin: auto auto auto 5%; width: 47.5%; float: left=
+; padding-right: 0px; }
+
+.lastcol h2, .lastcol p, .lastcol ul { margin-right: 0px; }
+
+.cardleft h2 { margin-right: 1em; }
+
+.cardright div { margin-left: 1.5em; }
+
+.cardright h2 { margin-left: 1em; }
+
+.votemenu a { display: block; }
+
+table.vote td, table.vote th { padding-right: 1.5em; }
+
+#maincol.with-toolbox { margin-right: 14em; }
+
+div.tabular table, table.tabular, table.vendors { border-bottom: 0.15em sol=
+id rgb(102, 102, 102); border-top: 0.15em solid rgb(102, 102, 102); width: =
+auto; font-size: 0.75em; line-height: 2em; margin-bottom: 4em; margin-top: =
+-0.169em; }
+
+table td { padding-right: 1.5em; }
+
+div.tabular table tr, table.tabular tr, table.vendors tr { width: 100%; }
+
+table th { padding-right: 1.5em; }
+
+div.tabular table td, table.tabular td, table.vendors td { background-image=
+: url("Pics/greydot.png"); background-position: left top; background-repeat=
+: repeat-x; }
+
+#pageLang p, #pageLang form { display: inline; }
+
+.inline a { float: left; margin-right: 1em; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/debwiki.css
+
+@charset "utf-8";
+
+@import url("debian.css");
+
+body { font-size: 100%; }
+
+#breadcrumbs { text-transform: none; }
+
+#wikisection p.section { left: 0px; }
+
+#wikisection { position: absolute; top: 0px; }
+
+div#username { font-size: 0.75em; margin-left: 5em; color: rgb(210, 211, 21=
+5); }
+
+.sitetools { text-align: left; margin: 0px 10px 0px 0px; padding: 2px 10px =
+2px 5px; position: absolute; top: 0px; right: 0px; border-right: 1px solid =
+white; border-left: 1px solid rgb(210, 211, 215); line-height: 1em; }
+
+#searchform { float: left; font-size: 0.75em; line-height: 2; }
+
+ul#pagelocation { display: inline; padding: 0px 1em 0px 0px; }
+
+#sitetools form { margin: 0px; padding: 0px; }
+
+#sitetools input { margin: 0px 0px 0px 0.25em; padding-left: 4px; padding-r=
+ight: 4px; }
+
+#sitetools select { margin-left: 0.5em; }
+
+#sitetools form p { display: inline; line-height: 1em; margin: 0px; padding=
+: 0px; }
+
+.sitetools a { margin: 5px 0.5em 2px 0px; padding: 0px; }
+
+.sitetools { margin: 0px; padding: 2px 10px 2px 5px; border-left: 1px solid=
+ white; border-right: 1px solid rgb(210, 211, 215); display: block; float: =
+left; }
+
+#leftcol { float: right; margin: 2em 0px 0px 1em; width: 16em; clear: both;=
+ }
+
+#leftcol a { display: block; }
+
+#leftcol #username { margin: 0px 0px 1em; display: block; }
+
+#userhome { font-weight: bold; margin-bottom: 1em; }
+
+#navibar, .editbar { list-style: none; margin: 0px; padding: 0px; }
+
+#leftcol ul.editbar { margin-top: 1em; }
+
+form select { }
+
+#leftcol .editbar form select { width: 100%; }
+
+.editbar { padding: 0px; font-size: 0.75em; line-height: 2; position: absol=
+ute; right: 10px; }
+
+#leftcol li { display: block; margin: 0px; padding: 0px; list-style: none; =
+}
+
+#content { margin-top: 1.5em; }
+
+.info { position: relative; margin: 0px 0px 0.5em; float: none; }
+
+#leftcol .info a { display: inline; }
+
+#leftcol .info strong { margin: 0px; padding: 0px; }
+
+hr { background-color: rgb(210, 211, 215); height: 1px; }
+
+pre, div.codearea { padding: 1em; margin: 2em 1.5em; background-color: rgb(=
+245, 246, 247); border: 1px solid rgb(210, 211, 215); font-family: monospac=
+e; font-size: 100%; line-height: 2em; }
+
+div.codearea pre { border: none; padding: 0px; margin: 0px; }
+
+div.table-of-contents { font-size: 0.75em; line-height: 2em; list-style: no=
+ne; background-image: url("../img/greydot.png"); background-position: left =
+bottom; background-repeat: repeat-x; background-color: transparent; padding=
+: 0px; margin: 0px; border: 0px; max-width: 50em; display: block; }
+
+p.table-of-contents-heading { font-weight: bold; padding: 0px; margin: 1.5e=
+m 0px 0px; font-size: 125%; letter-spacing: normal; }
+
+div.table-of-contents ol { list-style-position: inside; padding: 0px; margi=
+n: 0px; }
+
+div.table-of-contents ol ol { list-style-position: inside; padding-left: 2e=
+m; margin: 0px; }
+
+div.table-of-contents li { background-image: url("../img/greydot.png"); bac=
+kground-position: left top; background-repeat: repeat-x; padding: 0px; marg=
+in: 0px; }
+
+div.table-of-contents a:hover { background-color: rgb(240, 240, 244); }
+
+div.table-of-contents a { text-decoration: none; }
+
+.portal h1 { margin-top: 0px; line-height: 1em; }
+
+.portal h1::after { content: "Portal"; font-family: monospace; font-weight:=
+ normal; font-size: 0.62em; text-transform: uppercase; letter-spacing: 0.08=
+em; background-color: rgb(199, 0, 54); line-height: 16px; color: white; pad=
+ding: 0px 5px; margin: 1em 0px 3em; display: block; }
+
+h1#locationline { }
+
+h1#locationline a { color: black; }
+
+span.u { font-style: normal; font-weight: normal; text-decoration: underlin=
+e; }
+
+p.searchhint { padding: 1em; border: 1px solid rgb(204, 204, 163); margin: =
+1em 0px; background-color: rgb(255, 255, 203); font-size: 0.75em; line-heig=
+ht: 2; }
+
+p.searchstats { font-size: 0.75em; background-color: rgb(245, 246, 247); ma=
+rgin: 0px; border-top: 1px solid rgb(210, 211, 215); text-transform: lowerc=
+ase; line-height: 2; padding: 0px; }
+
+div.codearea { margin: 2em 1.5em; font-family: monospace; }
+
+a.codenumbers { font-size: 100%; }
+
+p#pageinfo { color: gray; font-size: 1em; margin: 1em 0px 0px; }
+
+#footer { margin-top: 2em; margin-left: 52px; margin-right: 10px; clear: bo=
+th; }
+
+#footer ul.editbar { font-size: 1em; border-bottom: 1px solid rgb(210, 211,=
+ 215); background-image: none; margin: 0px 0px 1.5em; }
+
+ul#credits { margin: 1em 0px 0px; padding: 0px; font-size: 1em; line-height=
+: 2; }
+
+ul#credits li { list-style: none; display: inline; margin: 0px 1em 0px 0px;=
+ }
+
+#content div.caution, #content div.important, #content div.note, #content d=
+iv.tip, #content div.warning { margin: 1em 0px; }
+
+#message { background-color: rgb(245, 246, 247); padding: 1em; margin: 1em =
+0px; border: 1px solid rgb(210, 211, 215); font-size: 0.75em; line-height: =
+2; }
+
+#message p { margin: 0px; padding: 0px; }
+
+table { margin: 0.75em 0px; }
+
+td { padding: 0px 1em 0px 0.5em; }
+
+#content div.debian { border: 1px solid rgb(199, 0, 54); background-repeat:=
+ no-repeat; background-position: 10px 5px; margin: 2em 1.5em; padding: 0px =
+1.5em 0px 50px; font-size: 0.75em; }
+
+#content div.debian p { margin: 1.5em 0px; }
+
+#editor #editor-textarea { display: block; margin: 1em 0px; }
+
+p img.attachment { padding-right: 1.5em; }
+
+table p img.attachment { display: inline; float: none; padding: 0px; }
+
+p img { display: inline; }
+
+table.diff { font-family: monospace; font-size: 1em; }
+
+div#header ul li { display: inline; margin-right: 1em; }
+
+ul#navibar li.wikilink { margin: 0px; }
+
+ul#navibar li.current { display: none; }
+
+li.wikilink { margin: 0px; padding: 0px; }
+
+ul#navibar li.userlink { margin: 0px; padding: 0px; }
+
+#pagetrail { margin: 0px; display: inline; text-transform: lowercase; line-=
+height: 2; background-color: rgb(245, 246, 247); min-height: 20px; }
+
+#searchform { position: absolute; right: 10px; top: 0px; }
+
+div#content { margin: 0px 10px 0px 52px; }
+
+div#header { margin: 0px; }
+
+#navbar { background-color: transparent; list-style: none; display: block; =
+border-bottom: 1px solid rgb(199, 0, 54); text-indent: 0px; padding: 0px; m=
+argin-top: 0px; margin-bottom: 0px; }
+
+#navbar ul { margin: 0px; padding: 0px; clear: both; overflow: hidden; min-=
+height: 45px; }
+
+#navbar li { list-style: none; float: left; padding: 0px; margin: 0px; }
+
+#navbar a:link, #navbar a:visited { padding: 1.75em 1em 0.25em; border-left=
+: 1px solid transparent; border-right: 1px solid transparent; display: bloc=
+k; text-decoration: none; }
+
+#navbar a:visited { color: rgb(84, 99, 140); }
+
+#navbar a:hover, #navbar a:visited:hover { background-color: rgb(239, 239, =
+239); border-left: 1px solid rgb(210, 211, 215); border-right: 1px solid rg=
+b(210, 211, 215); text-decoration: underline; }
+
+form.actionsmenu { float: right; vertical-align: text-top; }
+
+span.sep { margin-right: 0.25em; margin-left: 0.25em; }
+
+.diff { table-layout: fixed; }
+
+.diff-header { font-weight: bold; }
+
+.diff-title { background-color: rgb(192, 192, 192); }
+
+.diff-added { background-color: rgb(224, 255, 224); font-family: courier, m=
+onospace; vertical-align: top; white-space: pre-wrap; width: 50%; overflow-=
+wrap: break-word; }
+
+.diff-removed { background-color: rgb(255, 255, 224); font-family: courier,=
+ monospace; vertical-align: top; white-space: pre-wrap; width: 50%; overflo=
+w-wrap: break-word; }
+
+.diff-added span { background-color: rgb(128, 255, 128); }
+
+.diff-removed span { background-color: rgb(255, 255, 128); }
+
+td.diff-info { vertical-align: top; }
+
+div.diff-info { white-space: nowrap; }
+
+div.diff-info-rev-comment span.diff-info-value { white-space: normal; }
+
+div.diff-info-header { background-color: rgb(232, 232, 232); margin: -0.25e=
+m -0.5em 0.25em; padding: 0.25em 0.5em; text-align: center; width: 100%; }
+
+td.diff-same { border: 0px none; text-align: center; }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: https://wiki.debian.org/htdocs/debwiki/img/moin-www.png
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
+WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH1QQaBywH5hnejwAAADV0RVh0Q29tbWVudAAoYykgMjAw
+NCBKYWt1YiBTdGVpbmVyCgpDcmVhdGVkIHdpdGggVGhlIEdJTVCQ2YtvAAAC7ElEQVQ4y62TXWhb
+ZRyHn/ec95xjkzRpm+ajjW3W0KIsuHWyyMSrKagwFG+UKd1FZTgQb4ShoLdSEMX7XYgVR0HE6Y1M
+hjezMLWzlo12K67rXD+znCwfTXKSc5Kc1wvZxO3W5/r/ey7+/H6CBzj+3uwp4C1dyv0KLOX7DaVY
+0HTt7NzM1BcP3ov7wfe/nDR17ceJsWTiyIE0Y6koAcuiXG+ytmmzuLLJjY3CZSHEybmZqav/Ebz2
+7ue5YLjnt1eOHhQHJ+KU603snQ1kKA49/eDYpBJRFla2OT+/chchnr0nkQDRaOin55/JiicyA5SK
+eQZHs0QGh3BabfKb60jfQ+s2eS6Xoeur6IVL188ATwNob3741UfJeH/4aG4cQ/PpyBBoAkNKTEMS
+sCSJaC9D8RixviC57KOkhweOvPHB2WkALRwJnDycHaVSLnLHDRAf3odS4CtAaAjfY7fU4PuLy1yY
+XyRiKfaPDwO8CiBrTjuWTvazcKNAZiKOr/79bL1S4qnJLEIIlFJs796h1WwyFIsAHAbQWl5HsywT
+LRSnUm9h1zwct0vN8fDqNkL8oxNCkIhFubp6E8uQAAMAUtc1v9poacHWDiFpUWgMUjRMOl2fVqnD
+ZLuN63r0hoI4jsO+VIxC0wMoAUhD0/K3torDh8aTZEaGuL25zfzaHh4mTS/Ip99ewRJd3n75ALVa
+jaVrN6E3DfA7gKa63XNLq1t4vgQgPZLi2KEYu4USd6sNqq7gdtnHtm2q1SqP9KdYXc8DfAOgL/18
+7vx47qXTQtfNSNCgx9T5ZXGZ5byi1nDZa7jsOS65EZ3CnsdW2efa2s6vczNT79wvUqVQPHHxsv+d
+78OTjyX44UqVsmfidbq4XgfLEGxUFH8V2lz6Y60shDj10BaOTX/8+mhmZDYc6TMfzyRJDoaxLAOn
+1WbXrvDnrTxbO8XrQpfHH9rCPfoGxswXTpye1a3Ai+iyD4RQyu+oTntdCe2zrz+ZPsP/zd9wbDf3
+MdodlQAAAABJRU5ErkJggg==
+
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/modernized-common.css
+
+@charset "utf-8";
+
+html { background-color: white; color: black; font-family: sans-serif; font=
+-size: 1em; }
+
+body { margin: 0px; }
+
+a { color: rgb(0, 68, 179); }
+
+a:visited { color: rgb(255, 123, 179); }
+
+a.nonexistent:visited, a.nonexistent, a.badinterwiki:visited, a.badinterwik=
+i { color: gray; }
+
+a.www::before { content: url("../img/moin-www.png"); margin: 0px 0.2em; }
+
+a.http::before { content: url("../img/moin-www.png"); margin: 0px 0.2em; }
+
+a.https::before { content: url("../img/moin-www.png"); margin: 0px 0.2em; }
+
+a.file::before { content: url("../img/moin-ftp.png"); margin: 0px 0.2em; }
+
+a.ftp::before { content: url("../img/moin-ftp.png"); margin: 0px 0.2em; }
+
+a.nntp::before { content: url("../img/moin-news.png"); margin: 0px 0.2em; }
+
+a.news::before { content: url("../img/moin-news.png"); margin: 0px 0.2em; }
+
+a.telnet::before, a.ssh::before { content: url("../img/moin-telnet.png"); m=
+argin: 0px 0.2em; }
+
+a.irc::before, a.ircs::before { content: url("../img/moin-telnet.png"); mar=
+gin: 0px 0.2em; }
+
+a.mailto::before { content: url("../img/moin-email.png"); margin: 0px 0.2em=
+; }
+
+a.attachment::before { content: url("../img/moin-attach.png"); margin: 0px =
+0.2em; }
+
+a.badinterwiki::before { content: url("../img/moin-inter.png"); margin: 0px=
+ 0.2em; }
+
+a.interwiki::before { content: url("../img/moin-inter.png"); margin: 0px 0.=
+2em; }
+
+li p { margin: 0.25em 0px; }
+
+li.gap { margin-top: 0.5em; }
+
+dt { margin-top: 0.5em; font-weight: bold; }
+
+dd { margin-top: 0px; margin-bottom: 0px; }
+
+dd p { margin: 0.25em 0px; }
+
+a, img, img.drawing { border: 0px; }
+
+pre { border: 1pt solid rgb(174, 189, 204); background-color: rgb(243, 245,=
+ 247); padding: 5pt; font-family: courier, monospace; white-space: pre-wrap=
+; overflow-wrap: break-word; }
+
+pre.comment { background-color: rgb(204, 204, 204); color: red; padding: 0p=
+x; margin: 0px; border: 0px; }
+
+pre.comment::before { content: url("../img/attention.png"); }
+
+.comment { color: rgb(85, 85, 85); background-color: rgb(221, 221, 255); }
+
+.red { background-color: rgb(255, 204, 204); }
+
+.green { background-color: rgb(204, 255, 204); }
+
+.blue { background-color: rgb(204, 204, 255); }
+
+.yellow { background-color: rgb(255, 242, 159); }
+
+.orange { background-color: rgb(255, 213, 155); }
+
+.solid { border: 2px solid rgb(0, 0, 0); padding: 2px; }
+
+.dashed { border: 2px dashed rgb(0, 0, 0); padding: 2px; }
+
+.dotted { border: 2px dotted rgb(0, 0, 0); padding: 2px; }
+
+.left { text-align: left; }
+
+.center { text-align: center; }
+
+.right { text-align: right; }
+
+.justify { text-align: justify; }
+
+table { margin: 0.5em 0px 0px 0.5em; border-collapse: collapse; }
+
+th, td { padding: 0.25em 0.5em; border: 1pt solid rgb(173, 185, 204); }
+
+td p { margin: 0px; padding: 0px; }
+
+div.table-of-contents { border: 1px solid rgb(187, 187, 187); color: black;=
+ background-color: rgb(238, 238, 238); font-size: 80%; text-align: left; ma=
+rgin: 0.5em 0px 0.5em 1em; padding: 0.5em 0.75em 0.5em 0.5em; max-width: 50=
+%; display: inline-table; }
+
+div.table-of-contents ol { margin: 0px; padding: 0px 0px 0px 2em; }
+
+div.table-of-contents ul { margin: 0px; list-style: none; }
+
+div.table-of-contents li { margin: 0px; padding: 0px; }
+
+p.table-of-contents-heading { font-weight: bold; padding: 0px; margin: 0px =
+0px 0.5em; letter-spacing: 0.075em; }
+
+table.navigation { background: rgb(255, 255, 255); margin: 0px; }
+
+.footnotes div { width: 5em; border-top: 1pt solid gray; }
+
+.footnotes ol { padding: 0px 2em; margin: 0px 0px 1em; }
+
+.footnotes li { }
+
+.info { float: right; font-size: 0.7em; color: gray; }
+
+#pageinfo { margin-top: 2em; }
+
+.seperator { color: gray; }
+
+#pagebottom { clear: both; }
+
+hr { height: 1pt; background-color: rgb(156, 156, 156); border: 0px; }
+
+.hr1 { height: 2pt; }
+
+.hr2 { height: 3pt; }
+
+.hr3 { height: 4pt; }
+
+.hr4 { height: 5pt; }
+
+.hr5 { height: 6pt; }
+
+.hr6 { height: 7pt; }
+
+.u { text-decoration: underline; }
+
+.strike { text-decoration: line-through; }
+
+.warning { color: red; }
+
+.error { color: red; }
+
+strong.highlight { background-color: rgb(204, 224, 255); padding: 1pt; }
+
+.rcrss { float: right; margin: 0px 7px 0px 14px; height: 0px; position: rel=
+ative; top: 9px; }
+
+[div=3D"rtl"] .rcrss { float: left; }
+
+.recentchanges[dir=3D"rtl"] .rcrss { float: left; }
+
+.recentchanges table { clear: both; border-collapse: collapse; border: 1px =
+solid rgb(77, 125, 169); }
+
+.recentchanges td { vertical-align: top; border: none; background: rgb(230,=
+ 234, 240); }
+
+.recentchanges .rcdaybreak td { background: rgb(129, 187, 242); border: 1px=
+ solid rgb(77, 125, 169); }
+
+.rcdaybreak td a { font-size: 0.88em; }
+
+.rcicon1, .rcicon2 { text-align: center; }
+
+.rcpagelink { width: 33%; }
+
+.rctime { font-size: 0.88em; white-space: nowrap; }
+
+.rceditor { white-space: nowrap; font-size: 0.88em; }
+
+.rccomment { width: 50%; color: gray; font-size: 0.88em; }
+
+.userpref table, .userpref td { border: none; }
+
+div.codearea { margin: 0.5em 0px; padding: 0px; border: 1pt solid rgb(174, =
+189, 204); background-color: rgb(243, 245, 247); color: black; }
+
+div.codearea pre { margin: 0px; padding: 10pt; border: none; }
+
+a.codenumbers { margin: 0px 10pt; font-size: 0.85em; color: gray; }
+
+div.codearea pre span.LineNumber { color: gray; }
+
+div.codearea pre span.ID { color: rgb(0, 0, 0); }
+
+div.codearea pre span.Operator { color: rgb(0, 0, 192); }
+
+div.codearea pre span.Char { color: rgb(0, 64, 128); }
+
+div.codearea pre span.Comment { color: rgb(0, 128, 0); }
+
+div.codearea pre span.Number { color: rgb(0, 128, 192); }
+
+div.codearea pre span.String { color: rgb(0, 64, 128); }
+
+div.codearea pre span.SPChar { color: rgb(0, 0, 192); }
+
+div.codearea pre span.ResWord { color: rgb(160, 0, 0); }
+
+div.codearea pre span.ConsWord { color: rgb(0, 128, 128); font-weight: bold=
+; }
+
+div.codearea pre span.Error { color: rgb(255, 128, 128); border: 1.5pt soli=
+d rgb(255, 0, 0); }
+
+div.codearea pre span.ResWord2 { color: rgb(0, 128, 255); font-weight: bold=
+; }
+
+div.codearea pre span.Special { color: rgb(0, 0, 255); }
+
+div.codearea pre span.Preprc { color: rgb(128, 57, 153); }
+
+div.codearea pre span.DiffAdded { color: rgb(72, 118, 255); }
+
+div.codearea pre span.DiffRemoved { color: rgb(255, 0, 0); }
+
+div.codearea pre span.DiffChanged { color: rgb(255, 127, 80); }
+
+div.codearea pre span.DiffSeparator { color: rgb(34, 139, 34); font-weight:=
+ bold; }
+
+.advancedsearch { border: 1pt solid rgb(173, 185, 204); }
+
+.advancedsearch td { vertical-align: top; background-color: rgb(231, 231, 2=
+31); border: 0px; }
+
+.advancedsearch td.searchfor { font-weight: bold; }
+
+.advancedsearch input { border: 1px solid rgb(173, 185, 204); background-co=
+lor: rgb(255, 255, 255); }
+
+.advancedsearch input[disabled] { background-color: rgb(238, 238, 238); }
+
+.advancedsearch td.submit { border-top: 1px solid rgb(173, 185, 204); backg=
+round-color: rgb(255, 255, 255); text-align: right; }
+
+.advancedsearch optioni, .advancedsearch select { border: 1px solid rgb(173=
+, 185, 204); background-color: rgb(255, 255, 255); }
+
+.searchresults dt { margin-top: 1em; font-weight: normal; }
+
+.searchresults dd, .searchresults p { font-size: 0.85em; }
+
+.searchresults .searchhitinfobar { color: rgb(0, 128, 0); margin-left: 15px=
+; margin-top: 0px; }
+
+p.searchstats { font-size: 0.8em; text-align: right; width: 100%; backgroun=
+d-color: rgb(230, 234, 240); border-top: 1px solid rgb(144, 136, 220); padd=
+ing: 2px; }
+
+p.searchhint { background-color: rgb(230, 234, 240); border: 1px solid rgb(=
+144, 136, 220); padding: 2px; }
+
+.searchpages { margin-left: auto; margin-right: auto; }
+
+.searchpages tr, .searchpages td { border: 0px; padding: 5px; margin: 0px; =
+text-align: center; vertical-align: middle; color: rgb(185, 58, 88); font-w=
+eight: bold; font-size: 1.05em; }
+
+.searchpages td a, .searchpages td a:link { text-decoration: underline; }
+
+a.cal-emptyday { color: rgb(119, 119, 119); text-align: center; }
+
+a.cal-usedday { color: rgb(0, 0, 0); font-weight: bold; text-align: center;=
+ }
+
+td.cal-workday { background-color: rgb(221, 221, 255); text-align: center; =
+}
+
+td.cal-weekend { background-color: rgb(255, 221, 221); text-align: center; =
+}
+
+td.cal-today { background-color: rgb(204, 255, 204); border-style: solid; b=
+order-width: 2pt; text-align: center; }
+
+td.cal-invalidday { background-color: rgb(204, 204, 204); }
+
+a.cal-link { color: rgb(0, 0, 0); text-decoration: none; }
+
+th.cal-header { background-color: rgb(221, 187, 255); text-align: center; }
+
+table.tip { color: black; background-color: rgb(255, 136, 136); font-size: =
+small; font-weight: normal; border-style: solid; border-width: 1px; }
+
+th.tip { background-color: rgb(255, 68, 68); font-weight: bold; text-align:=
+ center; }
+
+td.tip { text-align: left; }
+
+[dir=3D"rtl"] td.tip { text-align: right; }
+
+#message .hint { font-style: italic; }
+
+#message .info { float: none; font-size: 1em; color: black; }
+
+#message .info::before { content: url("../img/icon-info.png"); margin: 0px =
+0.2em; }
+
+#message .warning::before { content: url("../img/alert.png"); margin: 0px 0=
+.2em; }
+
+#message .error::before { content: url("../img/icon-error.png"); margin: 0p=
+x 0.2em; }
+
+#content div.caution, #content div.important, #content div.note, #content d=
+iv.tip, #content div.warning { border: 1pt solid rgb(229, 229, 229); backgr=
+ound-color: rgb(249, 249, 255); color: black; margin: 10pt 30pt; background=
+-repeat: no-repeat; background-position: 8px 8px; min-height: 64px; padding=
+-left: 64px; }
+
+#content div.caution p, #content div.important p, #content div.note p, #con=
+tent div.tip p, #content div.warning p { margin-top: 8px; }
+
+#content div.tip { background-image: url("../img/admon-tip.png"); }
+
+#content div.note { background-image: url("../img/admon-note.png"); }
+
+#content div.important { background-image: url("../img/admon-important.png"=
+); }
+
+#content div.caution { background-image: url("../img/admon-caution.png"); }
+
+#content div.warning { background-image: url("../img/admon-warning.png"); }
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://wiki.debian.org/htdocs/debwiki/css/common.css
+
+@charset "utf-8";
+
+@import url("modernized-common.css");
+
+@import url("debwiki.css");
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-3aac4bfb-5cb8-49d7-a2ba-4d1aa21a9445@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--a4dWvijY2prdsdVuJFAXesMM6ZazBL1xF8ZB59V6v1------

@@ -1,5 +1,5 @@
 ###### Folder-locker ######
-# https://github.com/Albert-W/Folder-locker
-# https://github.com/Albert-W/Folder-locker/archive/refs/heads/master.zip
+# https://github.com/Albert-W/Folder-locker.git
+# https://github.com/Albert-W/Folder-locker/archive/d3b6bfcd2800504a61a605505bfef20cc2c22057.zip
 
-folder_locker_Import=https://github.com/Albert-W/Folder-locker/archive/refs/heads/master.zip
+folder_locker_Import=https://github.com/Albert-W/Folder-locker/archive/d3b6bfcd2800504a61a605505bfef20cc2c22057.zip

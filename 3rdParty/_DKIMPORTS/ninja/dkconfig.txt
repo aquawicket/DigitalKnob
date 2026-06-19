@@ -1,0 +1,11 @@
+############ ninja ############
+# https://github.com/ninja-build/ninja.git
+# https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip
+# https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-mac.zip
+# https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip
+# https://github.com/ninja-build/ninja/archive/c74beb43695ff8cae955f05a6cbe1753aa9517f8.zip
+
+ninja_Windows_Import=https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-win.zip
+ninja_Mac_Import=https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-mac.zip
+ninja_Linux_Import=https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip
+ninja_Src_Import=https://github.com/ninja-build/ninja/archive/c74beb43695ff8cae955f05a6cbe1753aa9517f8.zip

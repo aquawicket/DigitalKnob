@@ -1,38 +1,44 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# Array/dk_indexOf(array, searchElement)
-::# Array/dk_indexOf(array, searchElement, rtn_val)
-::# Array/dk_indexOf(array, searchElement, fromIndex)
-::# Array/dk_indexOf(array, searchElement, fromIndex, rtn_val)
-::#
-::#	The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is NOT present.
-::#
-::#	PARAMETERS
-::#	searchElement
-::#		Element to locate in the array
-::#
-::#	fromIndex :optional
-::#		Zero-based index at which to start searching, converted to an integer.
-::#			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used.
-::#			Note, the array is still searched from front to back in this case.
-::#			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
-::#			If fromIndex >= Array/length, the array is NOT searched and -1 is returned.
-::#
-::#	RETURN VALUE
-::#	The first index of searchElement in the array; -1 if NOT found.
-::#
-::#	REFERENCE
-::#	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
-::#
+rem ################################################################################
+rem # Array/dk_indexOf(array, searchElement)
+rem # Array/dk_indexOf(array, searchElement, rtn_val)
+rem # Array/dk_indexOf(array, searchElement, fromIndex)
+rem # Array/dk_indexOf(array, searchElement, fromIndex, rtn_val)
+rem #
+rem #	The indexOf() method of Array instances returns the first index at which a given element can be found in the array, or -1 if it is NOT present.
+rem #
+rem #	PARAMETERS
+rem #	searchElement
+rem #		Element to locate in the array
+rem #
+rem #	fromIndex :optional
+rem #		Zero-based index at which to start searching, converted to an integer.
+rem #			Negative index counts back from the end of the array — if -Array/length <= fromIndex < 0, fromIndex + Array/length is used.
+rem #			Note, the array is still searched from front to back in this case.
+rem #			If fromIndex < -Array/length or fromIndex is omitted, 0 is used, causing the entire array to be searched.
+rem #			If fromIndex >= Array/length, the array is NOT searched and -1 is returned.
+rem #
+rem #	RETURN VALUE
+rem #	The first index of searchElement in the array; -1 if NOT found.
+rem #
+rem #	REFERENCE
+rem #	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+rem #
 :dk_indexOf
 %setlocal%
-	%dk_call% dk_debugFunc 2
 	
 	set /a "_count_=0"
 	:indexOf_loop
@@ -41,17 +47,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 			%endfunction%
 		)
 
-		if "!DE!" equ "" (set "_value_=!%~1[%_count_%]!")
-		if "!DE!" neq "" (call set "_value_=%%%~1[%_count_%]%%")
+		if "!!" equ "" (set "_value_=!%~1[%_count_%]!")
+		if "!!" neq "" (call set "_value_=%%%~1[%_count_%]%%")
 		if "%~2" equ "%_value_%" (
 			endlocal & set "dk_indexOf=%_count_%"
 			%endfunction%
 		)
-		::###### case-insensitive compair ######
-		::if /i "%~2" equ "%_value_%" (
-		::	endlocal & set "dk_indexOf=%_count_%"
-		::	%endfunction%
-		::)
+		rem ###### case-insensitive compair ######
+		rem if /i "%~2" equ "%_value_%" (
+		rem	endlocal & set "dk_indexOf=%_count_%"
+		rem	%endfunction%
+		rem )
 
 		set /a "_count_+=1"
 	goto indexOf_loop
@@ -60,10 +66,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	set "myArrayA[0]=a b c"
 	set "myArrayA[1]=1 2 3"

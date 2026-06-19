@@ -9,7 +9,7 @@ function Global:dk_readCache() {
 	dk_debugFunc 0;
 	
 	dk_call dk_validate env:DKCACHE_DIR "dk_call dk_DKCACHE_DIR";
-	dk_call dk_getFileParams "${DKCACHE_DIR}/DKBuilder.cache";
+	dk_call dk_fileVariables "${DKCACHE_DIR}/DKBuilder.cache";
 	
 
 #	if(!(dk_call dk_pathExists "${DKCACHE_DIR}/DKBuilder.cache")){ return; }

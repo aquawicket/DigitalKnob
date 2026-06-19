@@ -37,19 +37,19 @@ if NOT defined in_subprocess (%ComSpec% /k set in_subprocess=y ^& %0 %*) & exit 
 
 ::###### cmake_echo ######
 :cmake_echo
-	if "%1" equ "" (echo "ERROR: cmake_echo() parameter1 is invalid" & goto:eof)
+	if "%1" equ "" (echo "ERROR: cmake_echo.) parameter1 is invalid" & goto:eof)
 	
 	set "DKBRANCH=Development"
 	set "DIGITALKNOB_DIR=%USERPROFILE:\=/%/DigitalKnob"
 	set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/%DKBRANCH%/DKCMake"
-	if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		set "cmake_exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-	if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	set "cmake_exe=%ProgramFiles(x86)"\=/%/CMake/bin/cmake.exe"
-	if NOT EXIST "%cmake_exe%" 								echo "ERROR: Could NOT locate cmake_exe" & goto:eof
+	if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" 		set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+	if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" 	set "cmake.exe=%ProgramFiles(x86)"\=/%/CMake/bin/cmake.exe"
+	if NOT EXIST "%cmake.exe%" 								echo "ERROR: Could NOT locate cmake.exe" & goto:eof
 	if NOT EXIST "%DKCMAKE_DIR%" 							echo "ERROR: Could NOT locate DKCMAKE_DIR" 	& goto:eof
 
 	call set DKCMAKE_DIR_DIR=%%DKCMAKE_DIR:^\=^/%%
 	
-	"%cmake_exe%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
+	"%cmake.exe%" %* -P "%DKCMAKE_DIR%/dev/cmake_echo.cmake"
 
 	::echo return code: %ERRORLEVEL%
 %endfunction%

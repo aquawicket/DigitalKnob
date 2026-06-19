@@ -1,17 +1,29 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-%dk_call% dk_set dk_messageBox_VERSION 4
-::##############################################################################################################
-::# dk_messageBox(text, caption, flags, timeout)
-::#
-::#
+
+rem ##############################################################################################################
+rem # dk_messageBox(text, caption, flags, timeout)
+rem #
+rem #
 :dk_messageBox
 %setlocal%
-    %dk_call% dk_debugFunc 2 7
+
+	rem ###### dk_messageBox() Settinge ######
+	if NOT defined dk_messageBox_VERSION (
+		%dk_call% dk_set dk_messageBox_VERSION 4
+	)
+	rem ######################################
 
 	if "%~1" equ "" (set "text=chose a selection") 	else (set "text=%~1")
 	if "%~2" equ "" (set "caption=dk_messageBox") 	else (set "caption=%~2")
@@ -30,31 +42,35 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if %dk_messageBox_VERSION%==6 goto messageBox_6
    
     :messageBox_1
-        mshta javascript:alert("%text%");close();
+		%dk_call% dk_validate mshta.exe %dk_call% dk_findFile mshta.exe
+        %mshta.exe% javascript:alert("%text%");close();
         endlocal & set dk_messageBox=!errorlevel!
     %return%   
        
     :messageBox_2
-        :: https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.msgboxstyle?view=net-8.0
-		:: https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/msgbox-constants
-        mshta.exe vbscript:Execute("MsgBox ""%text%"", %flags%, ""%caption%""")(window.close)
+        rem https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualbasic.msgboxstyle?view=net-8.0
+		rem https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/msgbox-constants
+        %dk_call% dk_validate mshta.exe %dk_call% dk_findFile mshta.exe
+		%mshta.exe% vbscript:Execute("MsgBox ""%text%"", %flags%, ""%caption%""")(window.close)
         endlocal & set dk_messageBox=!errorlevel!
     %return%
        
     :messageBox_3
-        :: https://stackoverflow.com/a/12523614
-        :: https://www.vbsedit.com/html/f482c739-3cf9-4139-a6af-3bde299b8009.asp
+        rem https://stackoverflow.com/a/12523614
+        rem https://www.vbsedit.com/html/f482c739-3cf9-4139-a6af-3bde299b8009.asp
        
-		%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-        echo set WshShell = WScript.CreateObject("WScript.Shell") > %DKCACHE_DIR%/dk_messageBox.vbs
+		%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+        >"%DKCACHE_DIR%/dk_messageBox.vbs" echo set WshShell = WScript.CreateObject("WScript.Shell") 
 		
 		set "command=WScript.Quit (WshShell.Popup("%text%", %timeout%, "%caption%", %flags%))"
-		echo %command% >> %DKCACHE_DIR%/dk_messageBox.vbs
+		>>"%DKCACHE_DIR%/dk_messageBox.vbs" echo %command%
 		
-		%dk_call% dk_validate cscript_exe "%dk_call% dk_depend cscript"
-		"%cscript_exe%" //nologo %DKCACHE_DIR%/dk_messageBox.vbs
-        endlocal & set dk_messageBox=!errorlevel!
-		::%dk_call% dk_delete "%DKCACHE_DIR%/dk_messageBox.vbs"
+		%dk_call% dk_validate cscript.exe %dk_call% dk_findFile cscript.exe
+		"%cscript.exe%" //nologo "%DKCACHE_DIR%/dk_messageBox.vbs"
+        endlocal & (
+			set dk_messageBox=!errorlevel!
+		)
+		rem %dk_call% dk_delete "%DKCACHE_DIR%/dk_messageBox.vbs"
     %return%
        
     :messageBox_4
@@ -74,7 +90,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		set "defaultButton=%option_3%"
 		set "options=%option_5%"
    
-		::%dk_call% dk_exec powershell.exe -Command "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
+		rem %dk_call% dk_exec powershell.exe -Command "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
 		%dk_call% dk_evalPowershell "[Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [Windows.Forms.MessageBox]::show('%text%', '%caption%', %buttons%, %icon%, %defaultButton%, %options%);"
 		
 		endlocal & (
@@ -86,43 +102,42 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-:: 16, 256, 4096, 65536, 1048576, 16777216
+rem 16, 256, 4096, 65536, 1048576, 16777216
 
-::	::### option_0 [16] (MessageBoxButtons) ###
-::	set "OKOnly=0"					&:: OK button only (default)
-::	set "OKCancel=1"				&:: OK and Cancel buttons
-::	set "AbortRetryIgnore=2"		&:: Abort, Retry, and Ignore buttons
-::	set "YesNoCancel=3"				&:: Yes, No, and Cancel buttons
-::	set "YesNo=4"					&:: Yes and No buttons
-::	set "RetryCancel=5"				&:: Retry and Cancel buttons
-::	set "CancelTryContinue=6"		&:: Specifies that the message box contains Cancel, Try Again, and Continue buttons
-::	::### option_1 [256] (MessageBoxIcon) ###
-::	set "None=0"					&:: No Icon (default)
-::	set "Critical=16"				&:: Critical message
-::	set "Question=32"				&:: Warning query
-::	set "Exclamation=48"			&:: Warning message
-::	set "Information=64"			&:: Information message
-::	::### option_2 [4096] (MessageBoxDefaultButton) ###
-::	set "DefaultButton1=0"			&:: First button is default (default)
-::	set "DefaultButton2=256"		&:: Second button is default
-::	set "DefaultButton3=512"		&:: Third button is default
-::	set "DefaultButton4=768"		&:: Fourth button is default
-::	::### option_3 [65536] (MessageBoxOptions) ###
-::	set "ApplicationModal=0"		&:: Application modal message box (default)
-::	set "SystemModal=4096"			&:: System modal message box
-::	set "MsgBoxHelpButton=16384"	&:: Adds Help button to the message box
-::  ::### option_4 [1048576] (HelpNavigator) ###
-::	set "MsgBoxSetForeground=65536"	&:: Specifies the message box window as the foreground window
-::	set "RightAlign=524288"			&:: Text is right aligned
-::  ::### option_5 [16777216] (UNICODE) ###
-::	set "RtlReading=1048576"		&:: Specifies text should appear as right-to-left reading on Hebrew and Arabic systems
+	rem	### option_0 [16] (MessageBoxButtons) ###
+rem	set "OKOnly=0"					&rem OK button only (default)
+rem	set "OKCancel=1"				&rem OK and Cancel buttons
+rem	set "AbortRetryIgnore=2"		&rem Abort, Retry, and Ignore buttons
+rem	set "YesNoCancel=3"				&rem Yes, No, and Cancel buttons
+rem	set "YesNo=4"					&rem Yes and No buttons
+rem	set "RetryCancel=5"				&rem Retry and Cancel buttons
+rem	set "CancelTryContinue=6"		&rem Specifies that the message box contains Cancel, Try Again, and Continue buttons
+	rem	### option_1 [256] (MessageBoxIcon) ###
+rem	set "None=0"					&rem No Icon (default)
+rem	set "Critical=16"				&rem Critical message
+rem	set "Question=32"				&rem Warning query
+rem	set "Exclamation=48"			&rem Warning message
+rem	set "Information=64"			&rem Information message
+	rem	### option_2 [4096] (MessageBoxDefaultButton) ###
+rem	set "DefaultButton1=0"			&rem First button is default (default)
+rem	set "DefaultButton2=256"		&rem Second button is default
+rem	set "DefaultButton3=512"		&rem Third button is default
+rem	set "DefaultButton4=768"		&rem Fourth button is default
+	rem	### option_3 [65536] (MessageBoxOptions) ###
+rem	set "ApplicationModal=0"		&rem Application modal message box (default)
+rem	set "SystemModal=4096"			&rem System modal message box
+rem	set "MsgBoxHelpButton=16384"	&rem Adds Help button to the message box
+	rem ### option_4 [1048576] (HelpNavigator) ###
+rem	set "MsgBoxSetForeground=65536"	&rem Specifies the message box window as the foreground window
+rem	set "RightAlign=524288"			&rem Text is right aligned
+	rem ### option_5 [16777216] (UNICODE) ###
+rem	set "RtlReading=1048576"		&rem Specifies text should appear as right-to-left reading on Hebrew and Arabic systems
 	
-::	set /a "style=2+32+512+524288"
+rem	set /a "style=2+32+512+524288"
 	
 	set "text=dk_messageBox message"
     set "caption=dk_messageBox Title"
@@ -131,14 +146,14 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	%dk_call% dk_messageBox "%text%" "%caption%" "%flags%" "%timeout%"
 	
-::	::### result ###
-::	set /a "OK=1"		&:: OK button pressed
-::	set /a "Cancel=2"	&:: Cancel button pressed
-::	set /a "Abort=3"	&:: Abort button pressed
-::	set /a "Retry=4"	&:: Retry button pressed
-::	set /a "Ignore=5"	&:: Ignore button pressed
-::	set /a "Yes=6"		&:: Yes button pressed
-::	set /a "No=7"		&:: No button pressed
+	rem	### result ###
+rem	set /a "OK=1"		&rem OK button pressed
+rem	set /a "Cancel=2"	&rem Cancel button pressed
+rem	set /a "Abort=3"	&rem Abort button pressed
+rem	set /a "Retry=4"	&rem Retry button pressed
+rem	set /a "Ignore=5"	&rem Ignore button pressed
+rem	set /a "Yes=6"		&rem Yes button pressed
+rem	set /a "No=7"		&rem No button pressed
 	
 	echo dk_messageBox = %dk_messageBox%
     if "%dk_messageBox%" equ "1"  (echo You Clicked OK)

@@ -4,4 +4,3 @@
 # https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
 
 xz_Import=https://sourceforge.net/projects/lzmautils/files/xz-5.4.6.tar.gz
-#xz_Import=https://newcontinuum.dl.sourceforge.net/project/lzmautils/xz-5.4.6.tar.gz

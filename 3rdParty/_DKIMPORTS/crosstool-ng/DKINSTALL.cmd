@@ -1,25 +1,25 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
 
-::####################################################################
-::# DKINSTALL()
-::#
+rem ####################################################################
+rem # DKINSTALL()
+rem #
 :DKINSTALL
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_validate DKIMPORTS_DIR    "%dk_call% dk_DKIMPORTS_DIR"
-    %dk_call% dk_cmakeEval "dk_load('%DKIMPORTS_DIR%/crosstool-ng/DKINSTALL.cmake')" "CROSSTOOL_NG"
-    %dk_call% dk_assertVar CROSSTOOL_NG
-
-	endlocal & (
-		set "CROSSTOOL_NG=%CROSSTOOL_NG%"
-	)
+	%dk_call% dk_import
 %endfunction%
 
 
@@ -27,29 +27,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	%dk_call% DKINSTALL
+	%dk_call% dk_validate crosstool-ng %dk_call% dk_depend crosstool-ng
+	
+rem %USERPROFILE:\=/%/DigitalKnob/Development/3rdParty/cygwin-setup-x86_64/bin/bash.exe --login -c '/cygdrive/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'
 %endfunction%
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%USERPROFILE%\DigitalKnob\Development\3rdParty\cygwin-setup-x86_64\bin\bash.exe --login -c '/cygdrive/c/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/cygwin/crosstool-ng-build.sh'

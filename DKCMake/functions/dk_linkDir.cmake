@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -28,12 +29,13 @@ function(dk_linkDir path)
 
 	dk_append(DKLINKDIRS_LIST ${path})
 	dk_set(DKLINKDIRS_LIST "${DKLINKDIRS_LIST}")
+#	set(ENV{DKLINKDIRS_LIST} "${DKLINKDIRS_LIST}")  # Export an enviromnent variable so the App's CMakeLists.txt can import it
 	
-	if(CMAKE_SCRIPT_MODE_FILE)
-		dk_warning("link_directories() not available in script mode")
-	else()
-		link_directories(${path})
-	endif()
+#	if(CMAKE_SCRIPT_MODE_FILE)
+#		dk_warning("link_directories() not available in script mode")
+#	else()
+#		link_directories(${path})
+#	endif()
 endfunction()
 
 

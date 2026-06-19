@@ -1,24 +1,26 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ reffy ############
 # https://github.com/w3c/reffy.git
-
+# https://github.com/w3c/reffy/archive/refs/heads/main.zip
+# https://github.com/w3c/reffy/archive/0819b71925dfe2a34bde41f9ed6c56f8cf5bbd37.zip
+# dk_validate(Target_Config  "dk_Target_Config()")
 dk_depend(nodejs)
 
-#dk_import(https://github.com/w3c/reffy.git BRANCH main)
-dk_import(https://github.com/w3c/reffy/archive/refs/heads/main.zip)
+dk_import()
 
 
 # https://github.com/w3c/reffy#readme

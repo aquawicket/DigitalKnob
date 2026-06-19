@@ -1,6 +1,6 @@
 #!/bin/sh
 ###### DK.sh #####################################################################
-if [ -z "${DK_LOADED-}" ]; then
+if [ -z "${DKINIT_sh-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)								&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')								&& echo "cmd_exe = ${cmd_exe}"
@@ -24,10 +24,13 @@ dk_buildMain() {
 	# log to stdout and file
 	# exec > >(tee DKBuilder.log)
 	
-	dk_call dk_validateSudo
-	dk_call dk_validate DKDESKTOP_DIR		"dk_call dk_DKDESKTOP_DIR"
-	dk_call dk_validate DIGITALKNOB_DIR		"dk_call dk_DIGITALKNOB_DIR"
-	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR"
+	#dk_call dk_validate sudo_exe            "dk_call dk_depend sudo_exe";
+	#echo "DKSudo_pass = ${DKSudo_pass-}";
+	#$(sudo_exe) && dk_call dk_success "sudo was successful" || dk_call dk_error "sudo failed";
+	
+	dk_call dk_validate DKDESKTOP_DIR		"dk_call dk_DKDESKTOP_DIR";
+	dk_call dk_validate DIGITALKNOB_DIR		"dk_call dk_DIGITALKNOB_DIR";
+	dk_call dk_validate DKBRANCH_DIR		"dk_call dk_DKBRANCH_DIR";
 	
 	if [ ! -e "${DKDESKTOP_DIR}/DigitalKnob" ]; then
 		if [ -e "${DKDESKTOP_DIR}" ]; then
@@ -64,6 +67,8 @@ dk_buildMain() {
 			echo "0 = '${BUILD_LIST[${_line},0]-}'"
 			echo "1 = '${BUILD_LIST[${_line},1]-}'"
 			echo "2 = '${BUILD_LIST[${_line},2]-}'"
+			echo "3 = '${BUILD_LIST[${_line},3]-}'"
+			echo "4 = '${BUILD_LIST[${_line},4]-}'"
 			echo ""			
 			
 			if [ "${BUILD_LIST[${_line},0]:0:1}" = "#" ]; then
@@ -73,14 +78,18 @@ dk_buildMain() {
 			else
 				if [ -n "${BUILD_LIST[${_line},2]-}" ]; then
 					Target_App="${BUILD_LIST[${_line},0]}"
-					Target_Tuple="${BUILD_LIST[${_line},1]}"
-					Target_Type="${BUILD_LIST[${_line},2]}"
+					Target_Os="${BUILD_LIST[${_line},1]}"
+					Target_Arch="${BUILD_LIST[${_line},2]}"
+					Target_Env="${BUILD_LIST[${_line},3]}"
+					Target_Type="${BUILD_LIST[${_line},4]}"
 #					echo ""
 #					echo "pickUpdate = ${pickUpdate-}"
 #					echo "_line = ${_line}"
 #					echo "0 = ${BUILD_LIST[${_line},0]-}"
 #					echo "1 = ${BUILD_LIST[${_line},1]-}"
 #					echo "2 = ${BUILD_LIST[${_line},2]-}"
+#					echo "3 = ${BUILD_LIST[${_line},3]-}"
+#					echo "4 = ${BUILD_LIST[${_line},4]-}"
 #					echo ""				
 					_line=$(( _line + 1 ))
 				else
@@ -132,6 +141,8 @@ dk_buildMain() {
 		dk_call dk_unset Target_Env
 		dk_call dk_unset Target_Type
 		dk_call dk_unset Target_Tuple
+		
+		[ "${ReturnControl}" = "1" ] && echo "Returning control to caller..." && exit 0
 	done
 }
 

@@ -1,11 +1,18 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 if "%~1" neq "" (
-	call %~1 %*
+	call "%~1" %*
 	exit /b 0
 )
 ::#####################################
@@ -27,22 +34,21 @@ if "%~1" neq "" (
 	call :DISABLE dk_evalDKCpp
 	call :DISABLE dk_exit
 	
-	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_ "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% dk_getFiles %DKBATCH_FUNCTIONS_DIR_%
+	%dk_call% dk_validate DKBATCH_FUNCTIONS_DIR_  %dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_getFiles "%DKBATCH_FUNCTIONS_DIR_%"
 	%dk_call% Array/dk_length dk_getFiles
 	
 	::### Clear log.txt
-	echo( > %~dp0/log.txt
+	echo. > "%~dp0/log.txt"
 	
-	set "dk_log_ERROR_CALLBACK=call %~f0 :CALLBACK"
-	set "dk_log_FATAL_CALLBACK=call %~f0 :CALLBACK"
+	set "dk_log_ERROR_CALLBACK=call "%~f0" :CALLBACK"
+	set "dk_log_FATAL_CALLBACK=call "%~f0" :CALLBACK"
 	
 	set "READY=1"
 	for /l %%x in (0, 1, %dk_length%) do (
-		call :RUNTEST !dk_getFiles[%%x]!
+		call :RUNTEST "!dk_getFiles[%%x]!"
 	)
 
-	pause
 exit /b 0
 
 ::#####################################
@@ -62,20 +68,22 @@ exit /b 0
 	%dk_call% dk_fileContains "%~1" ":DKTEST" || exit /b -1
 	
 	set "CURRENT_TEST_FILE=%~nx1"
-	echo(>> 						%~dp0/log.txt
-	echo ######### %~nx1 #########>> 		%~dp0/log.txt
-	title TESTING ### %~nx1 ###
-	echo(
-	echo(%bg_magenta%%white%###### DKTEST MODE ###### %~nx1 ###### DKTEST MODE ######%clr%
-	echo(
-	call :DKTEST %~1 && (
-		echo(        ### passed status:!errorlevel!>> 		%~dp0/log.txt
-	) || (
-		echo(        ### FAILED status:!errorlevel!>> 		%~dp0/log.txt
+	>>"%~dp0/log.txt" (
+		echo.
+		echo ######### %~nx1 #########
 	)
-	echo(
-	echo(%bg_magenta%%white%######## END TEST ####### %~nx1 ######## END TEST #######%clr%
-	echo(
+	title TESTING ### %~nx1 ###
+	echo.
+	echo.%bg_magenta%%white%###### DKTEST MODE ###### %~nx1 ###### DKTEST MODE ######%clr%
+	echo.
+	call :DKTEST %~1 && (
+		>>"%~dp0/log.txt" (echo.        ### passed status:!errorlevel!)
+	) || (
+		>>"%~dp0/log.txt" (echo.        ### FAILED status:!errorlevel!)
+	)
+	echo.
+	echo.%bg_magenta%%white%######## END TEST ####### %~nx1 ######## END TEST #######%clr%
+	echo.
 exit /b 0
 
 ::#####################################
@@ -89,5 +97,5 @@ exit /b !errorlevel!
 :CALLBACK
 ::%setlocal%
 	::echo %red% CALLBACK(%*)
-	echo(    %*>> 		%~dp0/log.txt
+	>>"%~dp0/log.txt" (echo.    %*)
 exit /b 0

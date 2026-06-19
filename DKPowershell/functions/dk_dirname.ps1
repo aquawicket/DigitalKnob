@@ -14,7 +14,7 @@ function Global:dk_dirname() {
 	${dk_dirname} = Split-Path ${_path_} -Parent; 
 	${dk_dirname} = ${dk_dirname} -replace "\\", "/";
 
-	###### output ######
+	###### return ######
 	${global:dk_dirname} = ${dk_dirname}
 	if($args[1]) {
 		dk_call dk_set $args[1] ${dk_dirname};

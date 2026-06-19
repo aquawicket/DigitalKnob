@@ -35,5 +35,5 @@ DKTEST = function DKTEST_f(){
 	
 	dk_exit(13);
 	
-	console.log("###### dk_exit.js:29 - SHOULD NOT GET HERE ######");
+	console.log("###### dk_exit.js:38 - SHOULD NOT GET HERE ######");
 }

@@ -13,23 +13,23 @@ if(!$dk_importVariables_ps1){ $dk_importVariables_ps1 = 1; } else{ return; } #in
 #																	https://website.com/executable.exe              				* executable file
 #
 #
-#	IMPORT_ROOT	(optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS
+#	IMPORT_ROOT	(optional)											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/_DKIMPORTS
 #
 #
 #	Import.Name (optional)											zlib
 #
 #
-#	IMPORT_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/zlib
+#	IMPORT_PATH (optional)											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/_DKIMPORTS/zlib
 #
 #
-#	INSTALL_ROOT (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools
+#	INSTALL_ROOT (optional)											${ENV:USERPROFILE}/Digital Knob/Development/DKTools
 #
 #
 #	INSTALL_NAME (optional)											zlib-8-5-2025
 #																	myZLIB
 #
-#	INSTALL_PATH (optional)											C:/Users/Administrator/DigitalKnob/Development/DKTools/zlib-8-5-2025
-#																	C:/Users/Administrator/DigitalKnob/Development/DKTools/myZLIB
+#	INSTALL_PATH (optional)											${ENV:USERPROFILE}/Digital Knob/Development/DKTools/zlib-8-5-2025
+#																	${ENV:USERPROFILE}/Digital Knob/Development/DKTools/myZLIB
 #
 #	VERSION (optional)												master
 #
@@ -139,23 +139,23 @@ function Global:dk_importVariables() {
 	PLUGIN_Import_Dirname;
 	PLUGIN_Install_Path;
 
-	### PLUGIN_Tuple_Dir]											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
+	### PLUGIN_Tuple_Dir]											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/zlib-master/Windows_X86_64_Clang
 	${global:PLUGIN_Tuple_Dir}="${PLUGIN_Install_Path}/${Target_Tuple}";
 	#dk_call dk_echo "PLUGIN_Tuple_Dir = '${PLUGIN_Tuple_Dir}'";
 
-	### PLUGIN_Config_Dir}											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN_Config_Dir}											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	${global:PLUGIN_Config_Dir}="${PLUGIN_Install_Path}/${Config_Path}";
 	#dk_call dk_echo "PLUGIN_Config_Dir = '${PLUGIN_Config_Dir}'";
 
-	### PLUGIN_Build_Dir}											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN_Build_Dir}											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	${global:PLUGIN_Build_Dir}="${PLUGIN_Install_Path}/${Build_Path}";
 	#dk_call dk_echo "PLUGIN_Build_Dir = '${PLUGIN_Build_Dir}'";
 
-	### PLUGIN_Debug_Dir}											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
+	### PLUGIN_Debug_Dir}											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Debug
 	${global:PLUGIN_Debug_Dir}="${PLUGIN_Install_Path}/${Target_Tuple}/${Debug_Dir}";
 	#dk_call dk_echo "PLUGIN_Debug_Dir = '${PLUGIN_Debug_Dir}'";
 
-	### PLUGIN_Release_Dir}											C:/Users/Administrator/DigitalKnob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
+	### PLUGIN_Release_Dir}											${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/zlib-master/Windows_X86_64_Clang/Release
 	${global:PLUGIN_Release_Dir}="${PLUGIN_Install_Path}/${Target_Tuple}/${Release_Dir}";
 	#dk_call dk_echo "PLUGIN_Release_Dir = '${PLUGIN_Release_Dir}'";
 

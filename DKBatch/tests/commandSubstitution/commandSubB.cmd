@@ -1,6 +1,6 @@
 @echo off
 setlocal enableDelayedExpansion
-if "!DE!" neq "" echo "delayed expansion is required" && pause && exit
+if "!!" neq "" echo "delayed expansion is required" && pause && exit
 
 set "first=0"
 set "middle=1"
@@ -32,7 +32,7 @@ echo FIRST LOOP
 	echo var = %var%
 	set "second="
 	
-	echo(
+	echo.
 
 goto main
 
@@ -53,7 +53,7 @@ goto main
  
 :getTime
 	echo :getTime
-	:: https://stackoverflow.com/a/42199181/688352
+	rem https://stackoverflow.com/a/42199181/688352
 	for /F "skip=1 usebackq delims=" %%A in (`wmic Path Win32_LocalTime Get Second`) do for /F "delims=" %%B in ("%%A") do (set "second=%%A")
 %endfunction%
 

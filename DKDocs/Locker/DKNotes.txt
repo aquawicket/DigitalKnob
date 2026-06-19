@@ -1,0 +1,3 @@
+#### Add to DKIMPORTS/tcc-rt/DKUNINSTALL.cmd ####
+
+"C:\Users\Public\Desktop\TCC-RT 32.lnk"

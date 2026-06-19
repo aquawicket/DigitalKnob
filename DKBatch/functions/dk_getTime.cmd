@@ -1,18 +1,24 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_getTime(centisecond second minute hour)
-::#
-::#    REFERENCE: https://ss64.com/nt/syntax-gettime.html
-::#
+rem ################################################################################
+rem # dk_getTime(centisecond second minute hour)
+rem #
+rem #    REFERENCE: https://ss64.com/nt/syntax-gettime.html
+rem #
 :dk_getTime
 %setlocal%
-	%dk_call% dk_debugFunc 4
     for /f "tokens=1-3 delims=1234567890 " %%a in ("%time%") do set "delims=%%a%%b%%c"
     for /f "tokens=1-4 delims=%delims%" %%A in ("%time%") do (
         set "_hour=%%A"
@@ -20,9 +26,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
         set "_second=%%C"
         set "_centisecond=%%D"
     )
-    :: Strip any leading spaces
+    rem Strip any leading spaces
     set "_hour=%_hour: =%"
-    :: Ensure the hours have a leading zero
+    rem Ensure the hours have a leading zero
     if 1%_hour% lss 20 set "_hour=0%_hour%"
    
 	endlocal & (
@@ -37,10 +43,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     echo time = %time%
     %dk_call% dk_getTime centisecond second minute hour

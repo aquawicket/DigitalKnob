@@ -1,60 +1,59 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ mbedtls ############
 # https://github.com/Mbed-TLS/mbedtls.git
-dk_validate(Target_Config  "dk_Target_Config()")
+# https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip
 
-### IMPORT ###
-#dk_import(https://github.com/Mbed-TLS/mbedtls.git)
-dk_import(https://github.com/Mbed-TLS/mbedtls/archive/67075846.zip)
+dk_import()
 
-### LINK ###
-dk_include			(${MBEDTLS}/include)
+dk_include			(${mbedtls}/include												MBEDTLS_INCLUDE_DIR)
 
 # mbedtls
-Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedtls.a)
-Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedtls.a)
-Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedtls.lib)
-Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedtls.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedtls.a			MBEDTLS_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedtls.a		MBEDTLS_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedtls.lib			MBEDTLS_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedtls.lib		MBEDTLS_LIBRARY)
+endif()
 
 # mbedcrypto
-Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedcrypto.a)
-Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedcrypto.a)
-Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedcrypto.lib)
-Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedcrypto.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedcrypto.a		MBEDTLS_CRYPTO_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedcrypto.a	MBEDTLS_CRYPTO_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedcrypto.lib		MBEDTLS_CRYPTO_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedcrypto.lib		MBEDTLS_CRYPTO_LIBRARY)
+endif()
 
 # mbedx509
-Unix_dk_libDebug	(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/libmbedx509.a)
-Unix_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedx509.a)
-Windows_dk_libDebug		(${MBEDTLS}/${Target_Tuple}/library/${Debug_Dir}/mbedx509.lib)
-Windows_dk_libRelease	(${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedx509.lib)
+if(Unix)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/libmbedx509.a		MBEDTLS_X509_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/libmbedx509.a		MBEDTLS_X509_LIBRARY)
+elseif(Windows)
+	dk_libDebug		(${mbedtls_Tuple_Dir}/library/${Debug_Dir}/mbedx509.lib			MBEDTLS_X509_LIBRARY)
+	dk_libRelease	(${mbedtls_Tuple_Dir}/library/${Release_Dir}/mbedx509.lib		MBEDTLS_X509_LIBRARY)
+endif()
 
-### 3RDPARTY LINK ###
-Unix_dk_set(MBEDTLS_CMAKE 
-	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
-	-DMBEDTLS_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedtls.a
-	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedcrypto.a
-	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/libmbedx509.a)
-Windows_dk_set(MBEDTLS_CMAKE 
-	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS}/include
-	-DMBEDTLS_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedtls.lib
-	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedcrypto.lib
-	-DMBEDTLS_X509_LIBRARY=${MBEDTLS}/${Target_Tuple}/library/${Release_Dir}/mbedx509.lib)
+dk_set(mbedtls_CMAKE 
+	-DMBEDTLS_INCLUDE_DIR=${MBEDTLS_INCLUDE_DIR}
+	-DMBEDTLS_LIBRARY=${MBEDTLS_LIBRARY}
+	-DMBEDTLS_CRYPTO_LIBRARY=${MBEDTLS_CRYPTO_LIBRARY}
+	-DMBEDTLS_X509_LIBRARY=${MBEDTLS_X509_LIBRARY})
 
-### GENERATE ###
 dk_configure()
 
-### COMPILE ###
 dk_build()

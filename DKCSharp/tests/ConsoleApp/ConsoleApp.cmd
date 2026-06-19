@@ -18,7 +18,8 @@ if NOT EXIST "%~n0.exe" (
 )
 
 %~n0.exe %*
-endlocal & exit /b %errorlevel%
+pause
+exit /b %errorlevel%
 */
 
 using System;

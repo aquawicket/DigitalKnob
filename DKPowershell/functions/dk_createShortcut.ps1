@@ -14,13 +14,16 @@ function Global:dk_createShortcut() {
 	$src_path=$args[0];
 	$shortcut_path=$args[1];
 	$arguments=$args[2];
-	
-	$extension = dk_call dk_getExtension "${shortcut_path}";
-	if("$extension" -ne ".lnk"){
-		dk_call dk_warning "Shortcuts need to have a .lnk or .url extension";
-		$shortcut_path="${shortcut_path}.lnk";
-	}
-	
+
+#	$extension = dk_call dk_getExtension "${shortcut_path}";
+#	if("$extension" -ne ".lnk"){
+#		dk_call dk_warning "Shortcuts need to have a .lnk or .url extension";
+#	}
+
+	$shortcut_path = $shortcut_path -replace ".url", "";
+	$shortcut_path = $shortcut_path -replace ".lnk", "";
+	$shortcut_path="${shortcut_path}.lnk";
+		
 	$src_path = $src_path -replace "/c/", "C:/";
 	$src_path = $src_path -replace "/mnt/c/", "C:/";
 	$src_path = $src_path -replace "/", "\";
@@ -64,7 +67,5 @@ function Global:dk_createShortcut() {
 function Global:DKTEST() { 
 	dk_debugFunc 0;
 	
-	dk_call dk_createShortcut "C:/Users/Administrator/DigitalKnob" "C:/Users/Administrator/Desktop/DigitalKnob.lnk";
-	#dk_call dk_createShortcut "C:\Windows\System32\wsl.exe" "C:\Users\Administrator\Desktop\HelloWorld.lnk" "/mnt/c/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Linux_X86_64/Debug/HelloWorld_APP";
-	#dk_createShortcut "C:/Windows/System32/wsl.exe" "C:/Users/Administrator/DigitalKnob" "/mnt/c/Users/Administrator/DigitalKnob/Development/DKCpp/apps/HelloWorld/Linux_X86_64/Debug/HelloWorld_APP";
+	dk_call dk_createShortcut "${ENV:USERPROFILE}/Digital Knob" "${ENV:USERPROFILE}/Desktop/DigitalKnob.lnk";
 }

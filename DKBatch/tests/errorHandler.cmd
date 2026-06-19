@@ -15,17 +15,17 @@ if "%DelayedExpansion%" equ "1" (
 		echo ### ERROR: SHOULD NOT GET HERE ### & pause
 	)
 
-	if "!DE!" neq "" (
+	if "!!" neq "" (
 		echo ### ERROR: DKBatch requires delayed expansion ### & pause
 		exit /b %errorlevel%
 		echo ### ERROR: SHOULD NOT GET HERE ### & pause
 	)
 )
 
-if not defined DK.cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
+if not defined DKINIT_cmd (set "DK.cmd=1") else (exit /b %errorlevel%)
 
 rem ###### delayed expansion OFF ######
-if "!DE!" neq "" (
+if "!!" neq "" (
 	title delayedExpansion OFF
 	if NOT defined exit (
 		set exit=^

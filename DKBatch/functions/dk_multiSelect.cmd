@@ -1,25 +1,46 @@
 <!-- :
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
-
-
-::################################################################################
-::# dk_multiSelect(rtn_var)
-::#
-:dk_multiSelect
-    %dk_call% dk_debugFunc 0 99
-
-::######## Pass batch variable into HTA
-set "selections=One;Two;Three"
-for /f "tokens=* delims=" %%a in ('echo %%selections%%^|mshta.exe "%~f0"') do (
-    ::########## Pass Hta variable back to Batch
-	set "rtn_var=%%a"
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
 )
-endlocal & set "%~1=%rtn_var%"
-echo %rtn_var%
+rem #################################################################################################################################################
+
+
+rem ################################################################################
+rem # dk_multiSelect(input)
+rem #
+:dk_multiSelect
+%setlocal%
+
+	set "options=%~1"
+	%dk_call% dk_validate DKHTA_FUNCTIONS_DIR %dk_call% dk_DKBRANCH_DIR
+	set "dk_multiSelect_hta=%DKHTA_FUNCTIONS_DIR%/dk_multiSelect.hta"
+	rem set "dk_multiSelect_hta=%~f0"
+	
+	%dk_call% dk_validate mshta.exe %dk_call% dk_findFile mshta.exe
+	rem ######## Pass Batch variable to HTA
+	for /f "tokens=* delims=" %%a in ('echo %%options%%^|"%mshta.exe%" "%dk_multiSelect_hta%"') do (
+		rem ########## Pass Hta variable back to Batch
+		set "dk_multiSelect=%%a"
+	)
+	
+	:return
+	endlocal & (
+		set "dk_multiSelect=%dk_multiSelect%"
+		if "%~2" neq "" (
+			set "%~2=%dk_multiSelect%"
+		) else (
+			rem echo.%dk_inputBox%
+		)
+	)
+%endfunction%
 
 
 
@@ -31,18 +52,18 @@ echo %rtn_var%
 
 
 
-
-
-
-
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0 99
 
-    %dk_call% dk_multiSelect rtn_var "one, two, three"
-    %dk_call% dk_printVar rtn_var
+    %dk_call% dk_multiSelect "Item 1,Item 2,Item 3"
+    %dk_call% dk_debug "dk_multiSelect = %dk_multiSelect%"
 %endfunction%
+
+
+
+
+
 
 
 
@@ -81,12 +102,11 @@ echo %rtn_var%
         function load(e){
 			
 			//######### Pass batch variable into HTA ######################################
-			var input= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
-			var line=input.ReadLine();
-		
-			addSelection(line);
-			for(var i = 0; i < line.length; i++) {
-				addSelection(line[i]);
+			var input = new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(0);
+			var str = input.ReadLine();
+			var arry = str.split(",")
+			for(var i = 0; i < arry.length; i++) {
+				addSelection(arry[i]);
 			}
 		}
 		function addSelection(name){
@@ -103,10 +123,11 @@ echo %rtn_var%
         }
         function submit() {
 			var e = document.getElementById("input");
-			var value = e.value;
-			var text = e.options[e.selectedIndex].text;
-            var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
-            close(fso.Write(text));
+			if(typeof e.options[e.selectedIndex] === "object"){
+				var text = e.options[e.selectedIndex].text;
+				var fso= new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1);
+				close(fso.Write(text));
+			}
         }
         function cancel() {
             close();

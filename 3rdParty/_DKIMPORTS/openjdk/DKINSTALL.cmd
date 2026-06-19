@@ -1,87 +1,86 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# DKINSTALL
-::#
-::#    Reference: https://jdk.java.net/archive/
-::#
+rem ####################################################################
+rem # DKINSTALL
+rem # https://jdk.java.net/archive/
+rem # https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz
+rem # https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz
+rem # https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip
+rem # 
 :DKINSTALL
-::%setlocal%
-	%dk_call% dk_debugFunc 0
+rem %setlocal%
 	
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-::	if defined Android_Host      	(set "OPENJDK_DL=openjdk-17")
-::	if defined Linux_X86_64_Host 	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz")
-::	if defined Mac_X86_64_Host   	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz")
-::	if defined Windows_X86_64_Host	(set "OPENJDK_DL=https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip")
-::	if NOT defined OPENJDK_DL		(%dk_call% dk_error "OPENJDK_DL is invalid")
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
+rem 	if defined Android_Host      	(set "openjdk_Import=openjdk-17")
+rem 	if NOT defined openjdk_Import	(%dk_call% dk_error "openjdk_Import is invalid")
 
 	%dk_call% dk_import 
 	
-	::%dk_call% dk_basename %OPENJDK_DL% OPENJDK_IMPORT_FILE
-	::%dk_call% dk_removeExtension %OPENJDK_IMPORT_FILE% OPENJDK_FOLDER
-	::%dk_call% dk_convertToCIdentifier %OPENJDK_FOLDER% OPENJDK_FOLDER
-	::%dk_call% dk_toLower %OPENJDK_FOLDER% OPENJDK_FOLDER
+	if NOT defined openjdk (%dk_call% dk_importVariables %openjdk_Import%)
 	
-	%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-	if NOT defined OPENJDK (%dk_call% dk_importVariables %OPENJDK_DL%)
+	set "java_exe=%openjdk%/bin/java.exe"
+	set "javac_exe=%openjdk%/bin/javac.exe"
+	%dk_call% dk_set registerJDK11 %openjdk%\registerJDK.cmd
+	%dk_call% dk_pathToNative %openjdk% openjdk_native
 	
-	set "java_exe=%OPENJDK%/bin/java.exe"
-	set "javac_exe=%OPENJDK%/bin/javac.exe"
-	::%dk_call% dk_set OPENJDK %DK3RDPARTY_DIR%\%OPENJDK_FOLDER%
-	%dk_call% dk_set registerJDK11 %OPENJDK%\registerJDK.cmd
-	%dk_call% dk_nativePath %OPENJDK% OPENJDK_NATIVE
-	
-	if defined Windows_Host   (%dk_call% :dk_installOpenJdkWin)
-	if defined Mac_Host   (%dk_call% :dk_installOpenJdkMac)
-	if defined Linux_Host (%dk_call% :dk_installOpenJdkLinux)
+	if defined Windows_Host (%dk_call% :dk_installOpenJdkWin)
+	if defined Mac_Host   	(%dk_call% :dk_installOpenJdkMac)
+	if defined Linux_Host 	(%dk_call% :dk_installOpenJdkLinux)
 %endfunction%	
 	
 :dk_installOpenJdkWin
 	%dk_call% dk_set JAVA_VERSION 11
 	%dk_call% dk_set JAVA_VERSION %JAVA_VERSION%
-	%dk_call% dk_set JAVA_HOME %OPENJDK%
-	setx JAVA_VERSION %JAVA_VERSION%
-	setx JAVA_HOME %OPENJDK%
-	setx VS_JavaHome %OPENJDK%
-	setx STUDIO_JDK %OPENJDK%
-	setx STUDIO_GRADLE_JDK %OPENJDK%
-	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment" "CurrentVersion" "REG_SZ" "%JAVA_VERSION%"
-	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%OPENJDK%\""
-	%dk_call% dk_registrySetKey "HKLM\\SOFTWARE\\JavaSoft\\Java Runtime Environment\\%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%OPENJDK%\\bin\\server\\jvm.dll\""
+	%dk_call% dk_set JAVA_HOME %openjdk%
 	
-	::###### Set Environment Variables ######
-	%dk_call% dk_setEnv JAVA_VERSION %JAVA_VERSION%
-	%dk_call% dk_setEnv JAVA_HOME "%OPENJDK_8_WINPATH%"
-	%dk_call% dk_setEnv VS_JavaHome "%OPENJDK_8_WINPATH%"
-	%dk_call% dk_setEnv STUDIO_JDK "%OPENJDK_8_WINPATH%"
-	%dk_call% dk_setEnv STUDIO_GRADLE_JDK "%OPENJDK_8_WINPATH%"
+	rem ###### Set Perminent Environment Variables ######
+	rem %dk_call% dk_setx JAVA_VERSION %JAVA_VERSION%
+	rem %dk_call% dk_setx JAVA_HOME "%openjdk_8_WINPATH%"
+	rem %dk_call% dk_setx VS_JavaHome "%openjdk_8_WINPATH%"
+	rem %dk_call% dk_setx STUDIO_JDK "%openjdk_8_WINPATH%"
+	rem %dk_call% dk_setx STUDIO_GRADLE_JDK "%openjdk_8_WINPATH%"
+	%dk_call% setx.exe JAVA_VERSION %JAVA_VERSION%
+	%dk_call% setx.exe JAVA_HOME %openjdk%
+	%dk_call% setx.exe VS_JavaHome %openjdk%
+	%dk_call% setx.exe STUDIO_JDK %openjdk%
+	%dk_call% setx.exe STUDIO_GRADLE_JDK %openjdk%
+	%dk_call% dk_registrySetKey "HKLM/SOFTWARE/JavaSoft/Java Runtime Environment" "CurrentVersion" "REG_SZ" "%JAVA_VERSION%"
+	%dk_call% dk_registrySetKey "HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/%JAVA_VERSION%" "JavaHome" "REG_SZ" "\"%openjdk%\""
+	%dk_call% dk_registrySetKey "HKLM/SOFTWARE/JavaSoft/Java Runtime Environment/%JAVA_VERSION%" "RuntimeLib" "REG_SZ" "\"%openjdk%\\bin\\server\\jvm.dll\""
 %endfunction%
 
 :dk_installOpenJdkMac
 	if EXIST "/Library/Java/JavaVirtualMachines/jdk-11.jdk" (%return%)
 
-	%dk_call% dk_download %OPENJDK_DL%
+	%dk_call% dk_download %openjdk_Import%
 	%dk_call% dk_command tar xf "%dk_download%"
-	%dk_call% dk_validate DKDOWNLOAD_DIR "%dk_call% dk_DKDOWNLOAD_DIR"
+	%dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
 	%dk_call% dk_command sudo mv %DKDOWNLOAD_DIR%/jdk-11.jdk /Library/Java/JavaVirtualMachines/
 	%dk_call% dk_delete "%dk_download%"
 	%dk_call% dk_command java --version
 %endfunction%
 
 :dk_installOpenJdkLinux
-	::if EXIST /usr (
-	::	%dk_call% dk_set CURRENT_DIR /usr
-	::)
+	rem if EXIST /usr (
+	rem 	%dk_call% dk_set CURRENT_DIR /usr
+	rem )
 	
 	if defined Android_Host (
 		%dk_call% dk_command pkg install openjdk-17 -y
 	) else (
+		%dk_call% dk_validate sudo_exe %dk_call% dk_depend sudo_exe
 		%dk_call% dk_command %sudo_exe% apt update
 		%dk_call% dk_command %sudo_exe% apt -y install openjdk-11-jdk
 	)
@@ -97,10 +96,15 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% DKINSTALL
+	%dk_call% dk_validate openjdk %dk_call% dk_depend openjdk
+	%dk_call% dk_debug "java_exe = '%java_exe%'"
+	%dk_call% dk_debug "javac_exe = '%javac_exe%'"
+	
+	%dk_call% dk_validate openjdk %dk_call% dk_depend openjdk
+	%dk_call% dk_debug "java_exe = '%java_exe%'"
+	%dk_call% dk_debug "javac_exe = '%javac_exe%'"
 %endfunction%

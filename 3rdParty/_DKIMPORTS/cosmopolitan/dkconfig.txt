@@ -1,0 +1,4 @@
+############ cosmopolitan ############
+# https://cosmo.zip/pub/cosmo/cosmopolitan-4.0.2.tar.gz
+
+cosmopolitan_Import=https://cosmo.zip/pub/cosmo/cosmopolitan-4.0.2.tar.gz

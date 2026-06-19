@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -17,31 +18,34 @@ include_guard()
 #
 #
 function(dk_DKBRANCH_DIR)
-	dk_debugFunc(0 1)
+	dk_call( dk_debugFunc(0 1) )
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKBRANCH_DIR "${ARGV0}")
+		set(DKBRANCH_DIR "${ARGV0}" CACHE INTERNAL "" FORCE)
 
 	###### GET ######
-	elseif(DEFINED ENV{DKBRANCH_DIR})	
-		dk_set(DKBRANCH_DIR "$ENV{DKBRANCH_DIR}")
+	elseif(DEFINED ENV{DKBRANCH_DIR})
+		file(TO_CMAKE_PATH "$ENV{DKBRANCH_DIR}" DKBRANCH_DIR)
+		set(DKBRANCH_DIR "${DKBRANCH_DIR}" CACHE INTERNAL "" FORCE)
 		
 	else()
 		if(NOT DEFINED DKBRANCH)
-			dk_set(DKBRANCH "Development")
+			set(DKBRANCH "Development" CACHE INTERNAL "" FORCE)
 		endif()
 		
-		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
+		dk_validateFunc(dk_validate)
+		dk_validateFunc(dk_DIGITALKNOB_DIR)
+		dk_validate(DIGITALKNOB_DIR dk_DIGITALKNOB_DIR())
 		
 		# TODO: If the current folder matches the current branch set DKBRANCH, otherwise default to Development
 		# BRANCH="$(${git_exe} rev-parse --abbrev-ref HEAD)"
-		if(EXISTS "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}/.git")
-			dk_dirname(${CMAKE_CURRENT_LIST_DIR})
-			dk_source(dk_basename)
-			dk_basename("${dk_dirname}")
+		if(EXISTS "${DIGITALKNOB_DIR}/${DKBRANCH}/.git")
+			dk_call(dk_dirname(${CMAKE_CURRENT_LIST_DIR}))
+			#dk_validateFunc(dk_basename)
+			dk_call(dk_basename("${dk_dirname}"))
 			if("${BRANCH}" STREQUAL "${dk_basename}")
-				dk_set(DKBRANCH "${dk_basename}")
+				set(DKBRANCH "${dk_basename}" CACHE INTERNAL "" FORCE)
 			endif()
 		endif()
 	endif()
@@ -49,22 +53,24 @@ function(dk_DKBRANCH_DIR)
 	###### FINALIZE ######
 	### DKBRANCH_DIR ###
 	if(NOT EXISTS "${DKBRANCH_DIR}")
+		dk_validateFunc(dk_validate)
+		dk_validateFunc(dk_DIGITALKNOB_DIR)
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-		dk_set(DKBRANCH_DIR "$ENV{DIGITALKNOB_DIR}/${DKBRANCH}")
+		set(DKBRANCH_DIR "${DIGITALKNOB_DIR}/${DKBRANCH}" CACHE INTERNAL "" FORCE)
 	endif()
 
 		### DK3RDPARTY ###
 		if(NOT EXISTS "${DK3RDPARTY_DIR}")
-			dk_set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty")
+			set(DK3RDPARTY_DIR "${DKBRANCH_DIR}/3rdParty" CACHE INTERNAL "" FORCE)
 		endif()
 			### DKIMPORTS ###
 			if(NOT EXISTS "${DKIMPORTS_DIR}")
-				dk_set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS")
+				set(DKIMPORTS_DIR "${DK3RDPARTY_DIR}/_DKIMPORTS" CACHE INTERNAL "" FORCE)
 			endif()
 
 		### DKBASH ###
 		if(NOT EXISTS "${DKBASH_DIR}") 
-			dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
+			dk_call( dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash") )
 		endif()
 			if(NOT EXISTS "${DKBASH_FUNCTIONS_DIR}") 
 				dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
@@ -102,8 +108,8 @@ function(dk_DKBRANCH_DIR)
 			if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR}") 
 				dk_set(DKCMAKE_FUNCTIONS_DIR "${DKCMAKE_DIR}/functions")
 			endif()
-			if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}") 
-				dk_set(DKCMAKE_FUNCTIONS_DIR_ "${DKCMAKE_FUNCTIONS_DIR}/")
+			if(NOT EXISTS "${DKCMAKE_FUNCTIONS_DIR_}") 
+				dk_set(DKCMAKE_FUNCTIONS_DIR "${DKCMAKE_FUNCTIONS_DIR}/")
 			endif()
 
 		### DKCPP ###
@@ -212,14 +218,14 @@ function(dk_DKBRANCH_DIR)
 			endif()
 			
 		### DKVB ###
-		if(NOT EXISTS "${DKVB_DIR}") 
-			dk_set(DKVB_DIR "${DKBRANCH_DIR}/DKVb")
+		if(NOT EXISTS "${DKVBS_DIR}") 
+			dk_set(DKVBS_DIR "${DKBRANCH_DIR}/DKVbs")
 		endif()
-			if(NOT EXISTS "${DKVB_FUNCTIONS_DIR}") 
-				dk_set(DKVB_FUNCTIONS_DIR "${DKVB_DIR}/functions")
+			if(NOT EXISTS "${DKVBS_FUNCTIONS_DIR}") 
+				dk_set(DKVBS_FUNCTIONS_DIR "${DKVBS_DIR}/functions")
 			endif()
-			if(NOT EXISTS "${DKVB_FUNCTIONS_DIR_}") 
-				dk_set(DKVB_FUNCTIONS_DIR_ "${DKVB_FUNCTIONS_DIR}/")
+			if(NOT EXISTS "${DKVBS_FUNCTIONS_DIR_}") 
+				dk_set(DKVBS_FUNCTIONS_DIR_ "${DKVBS_FUNCTIONS_DIR}/")
 			endif()
 endfunction()
 
@@ -238,7 +244,7 @@ function(DKTEST)
 	if(EXISTS "${DKBRANCH_DIR}")
 		dk_success("DKBRANCH_DIR = ${DKBRANCH_DIR}")
 	else()
-		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' not found")
+		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' NOT FOUND")
 	endif()
 	
 	dk_echo()
@@ -247,6 +253,6 @@ function(DKTEST)
 	if(EXISTS "${DKBRANCH_DIR}")
 		dk_success("DKBRANCH_DIR = ${DKBRANCH_DIR}")
 	else()
-		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' not found")
+		dk_error("DKBRANCH_DIR:'${DKBRANCH_DIR}' NOT FOUND")
 	endif()
 endfunction()

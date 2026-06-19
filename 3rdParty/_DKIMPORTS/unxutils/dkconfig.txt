@@ -1,0 +1,7 @@
+###### unxutils ######
+# https://unxutils.sourceforge.net
+# https://unxutils.sourceforge.net/UnxUtils.zip
+# https://unxutils.sourceforge.net/UnxUpdates.zip
+
+unxutils_Type=Tool
+unxutils_Import=https://unxutils.sourceforge.net/UnxUpdates.zip

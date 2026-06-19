@@ -1,0 +1,5 @@
+############ cosmo-sdl-template ############
+# https://github.com/vkoskiv/cosmo-sdl-template/archive/ad94184f5459bfceec3470001bd617a5b3e9509f.zip
+
+cosmo-sdl-template_Import=https://github.com/vkoskiv/cosmo-sdl-template/archive/ad94184f5459bfceec3470001bd617a5b3e9509f.zip
+

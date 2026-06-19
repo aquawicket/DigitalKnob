@@ -1,5 +1,5 @@
 ############ webref ############
 # https://github.com/w3c/webref.git
-# https://github.com/w3c/webref/archive/48fcf557.zip
+# https://github.com/w3c/webref/archive/48fcf5576be961ce5bc6cd2a134301b572c5952d.zip
 
-webref_Import=https://github.com/w3c/webref/archive/48fcf557.zip
+webref_Import=https://github.com/w3c/webref/archive/48fcf5576be961ce5bc6cd2a134301b572c5952d.zip

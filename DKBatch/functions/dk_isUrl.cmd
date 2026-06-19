@@ -1,28 +1,41 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_isUrl(<in> rtn_var)
-::#
-::#  https://stackoverflow.com/a/17584764
-::#
+rem ####################################################################
+rem # dk_isUrl(string)
+rem #
+rem #  https://stackoverflow.com/a/17584764
+rem #
 :dk_isUrl
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
-	set "_arg0_=%~0"
+	set "dk_isUrl_1=%~1"
+	%dk_call% dk_validate findstr.exe %dk_call% dk_findFile findstr.exe
+	set "dk_isUrl=1"
+	echo %dk_isUrl_1% | "%findstr.exe:/=\%" /i "http://"	>nul && (set "dk_isUrl=0")
+	echo %dk_isUrl_1% | "%findstr.exe:/=\%" /i "https://"	>nul && (set "dk_isUrl=0")
+	echo %dk_isUrl_1% | "%findstr.exe:/=\%" /i "ftp://"		>nul && (set "dk_isUrl=0")
+	echo %dk_isUrl_1% | "%findstr.exe:/=\%" /i "ftps://"	>nul && (set "dk_isUrl=0")
 	
-	:: if "%_arg0_%" MATCHES "^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS)://" (exit /b 0)
-	echo "%~1" | findstr /i "http://" >nul 	&& exit /b 0
-	echo "%~1" | findstr /i "https://" >nul && exit /b 0
-	echo "%~1" | findstr /i "ftp://" >nul 	&& exit /b 0
-	echo "%~1" | findstr /i "ftps://" >nul 	&& exit /b 0
 	
-	exit /b 1
+	:return
+	endlocal & (
+		set "dk_isUrl_1=%dk_isUrl_1%"
+		set "dk_isUrl=%dk_isUrl%"
+		set "findstr.exe=%findstr.exe%"
+	)
+	exit /b %dk_isUrl%
 %endfunction%
 
 
@@ -31,70 +44,31 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-    ::### http:// ###
-	%dk_call% dk_isUrl http://www.test.com 		&& echo http://www.test.com = true 		|| echo http://www.test.com = false
-	
-	%dk_call% dk_isUrl "http://www.test.com" 	&& echo "http://www.test.com" = true 	|| echo "http://www.test.com" = false
-	
-	::### HTTP:// ###
-	%dk_call% dk_isUrl HTTP://www.test.com 		&& echo HTTP://www.test.com = true 		|| echo HTTP://www.test.com = false
-	
-	%dk_call% dk_isUrl "HTTP://WWW.TEST.COM" 	&& echo HTTP://WWW.TEST.COM = true 		|| echo HTTP://WWW.TEST.COM = false
-	
-	::### https:// ###
-	%dk_call% dk_isUrl https://www.test.com		&& echo https://www.test.com = true 	|| echo https://www.test.com = false
-	
-	%dk_call% dk_isUrl "https://www.test.com"	&& echo "https://www.test.com" = true 	|| echo "https://www.test.com" = false
-	
-	::### HTTPS:// ###
-	%dk_call% dk_isUrl HTTPS://www.test.com		&& echo HTTPS://www.test.com = true 	|| echo HTTPS://www.test.com = false
-	
-	%dk_call% dk_isUrl "HTTPS://WWW.TEST.COM"	&& echo HTTPS://WWW.TEST.COM = true 	|| echo HTTPS://WWW.TEST.COM = false
-	
-	::### ftp:// ###
-	%dk_call% dk_isUrl ftp://www.test.com		&& echo ftp://www.test.com = true 		|| echo ftp://www.test.com = false
-	
-	%dk_call% dk_isUrl "ftp://www.test.com"		&& echo "ftp://www.test.com" = true 	|| echo "ftp://www.test.com" = false
-	
-	::### FTP:// ###
-	%dk_call% dk_isUrl FTP://WWW.TEST.COM		&& echo FTP://WWW.TEST.COM = true 		|| echo FTP://WWW.TEST.COM = false
-	
-	%dk_call% dk_isUrl "FTP://WWW.TEST.COM"		&& echo "FTP://WWW.TEST.COM" = true		|| echo "FTP://WWW.TEST.COM" = false
-	
-	::### ftps:// ###
-	%dk_call% dk_isUrl ftp://www.test.com		&& echo ftps://www.test.com = true 		|| echo ftps://www.test.com = false
-	
-	%dk_call% dk_isUrl "ftp://www.test.com"		&& echo "ftps://www.test.com" = true 	|| echo "ftps://www.test.com" = false
-	
-	::### FTPS:// ###
-	%dk_call% dk_isUrl FTPS://WWW.TEST.COM		&& echo FTPS://WWW.TEST.COM = true 		|| echo FTPS://WWW.TEST.COM = false
-	
-	%dk_call% dk_isUrl "FTPS://WWW.TEST.COM"	&& echo "FTPS://WWW.TEST.COM" = true 	|| echo "FTPS://WWW.TEST.COM" = false
-	
-	
-	%dk_call% dk_isUrl http://www.test.com && (
-		%dk_call% dk_echo "http://www.test.com = TRUE"
-	) || (
-		%dk_call% dk_echo "http://www.test.com = FALSE"
-	)
-	
-	%dk_call% dk_isUrl notAUrl && (
-		%dk_call% dk_echo "notAUrl = TRUE"
-	) || (
-		%dk_call% dk_echo "notAUrl = FALSE"
-	)
-	
-	::### NOT VALID ###
-	%dk_call% dk_echo ""
-	
-	%dk_call% dk_isUrl www.test.com && %dk_call% dk_echo www.test.com = true || %dk_call% dk_echo www.test.com = false
-	
-	%dk_call% dk_isUrl 'https://www.test.com'
-	%dk_call% dk_echo "'https://www.test.com' = %dk_isUrl%"
+	%dk_call% dk_isUrl http://www.test.com 		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "http://www.test.com" 	&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl HTTP://www.test.com 		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "HTTP://WWW.TEST.COM" 	&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl https://www.test.com		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "https://www.test.com"	&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl HTTPS://www.test.com		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "HTTPS://WWW.TEST.COM"	&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl ftp://www.test.com		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "ftp://www.test.com"		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl FTP://WWW.TEST.COM		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "FTP://WWW.TEST.COM"		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl ftp://www.test.com		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "ftp://www.test.com"		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl FTPS://WWW.TEST.COM		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl "FTPS://WWW.TEST.COM"	&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
+	%dk_call% dk_isUrl http://www.test.com 		&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)	
+	%dk_call% dk_isUrl www.test.com				&& (echo !dk_isUrl_1! = true) || (call & echo !dk_isUrl_1! = false)
 
+	rem ### NOT VALID ###
+rem	%dk_call% dk_isUrl www.test.com 			&& echo %dk_isUrl_1% = true 	|| echo %dk_isUrl_1% = false
+rem	%dk_call% dk_isUrl https://www.test.com
+rem	%dk_call% dk_echo "%dk_isUrl_1% = %dk_isUrl%"
 %endfunction%

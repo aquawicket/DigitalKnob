@@ -1,18 +1,21 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ############ windows-sdk ############
+# file:///C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/windows-sdk/windows-sdk.mhtml
+# data:text/html,<script>alert('hi');</script>
 # https://software-static.download.prss.microsoft.com/dbazure/888969d5-f34g-4e03-ac9d-1f9786c66749/26100.1.240331-1435.ge_release_WindowsSDK.iso
 # https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/
 # Windows SDK for Windows 11 (10.0.22621.2428)		Released October 2023.
@@ -28,6 +31,8 @@ include_guard()
 
 
 dk_import()
-dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
-dk_debug("${DKDOWNLOAD_DIR}/${${CURRENT_PLUGIN}_Download_Basename}")
-dk_exec("${DKDOWNLOAD_DIR}/${${CURRENT_PLUGIN}_Download_Basename}")
+
+
+if(NOT EXISTS "C:/Program Files (x86)/Windows Kits/10")
+	dk_exec("${dk_download}")
+endif()

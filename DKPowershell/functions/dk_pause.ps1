@@ -1,4 +1,4 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(${ENV:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${ENV:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
 if(!$dk_pause_ps1){ $dk_pause_ps1 = 1; } else{ return; } #include guard
 
 ##################################################################################

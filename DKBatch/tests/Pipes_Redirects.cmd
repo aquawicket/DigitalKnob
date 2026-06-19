@@ -7,9 +7,9 @@
         set /p "data=Type something: "
     )
 
-    echo(
+    echo.
     echo You have typed: [%data%]
-    echo(
+    echo.
 	
 	pause
 

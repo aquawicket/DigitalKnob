@@ -1,15 +1,22 @@
-@echo off
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../functions/")
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
-::####################################################################
-::# dk_keyboardMenu(rtn_var)
-::#
-::#
+rem ####################################################################
+rem # dk_keyboardMenu(rtn_var)
+rem #
+rem #
 :dk_keyboardMenu
-    ::%dk_call% dk_debugFunc 1 99
- setlocal
+%setlocal%
 
 	if /i "%~1" equ "NEW" echo dk_keyboardMenu NEW
 	if /i "%~1" equ "ADD" echo dk_keyboardMenu ADD
@@ -32,7 +39,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo "Please select an Option"
    
     %dk_call% dk_keyboardInput
-    ::%dk_call% dk_keyboardInputTimeout 1 60
+    rem %dk_call% dk_keyboardInputTimeout 1 60
        
     if "%dk_keyboardInput%" equ "1"  endlocal & set "%1=option1"	& %return%
 	if "%dk_keyboardInput%" equ "2"  endlocal & set "%1=option2"	& %return%
@@ -50,18 +57,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-setlocal
-	%dk_call% dk_debugFunc 0
+%setlocal%
   
-	:: TODO: This is the desired functionality of the menu
+	rem TODO: This is the desired functionality of the menu
     %dk_call% dk_keyboardMenu NEW myMenu
 	%dk_call% dk_keyboardMenu ADD myMenu option1
 	%dk_call% dk_keyboardMenu ADD myMenu option2
 	%dk_call% dk_keyboardMenu ADD myMenu option2
 	%dk_call% dk_keyboardMenu RUN myMenu
 	
-	:: This can eventually be given a one liner , something like
+	rem This can eventually be given a one liner , something like
 	%dk_call% dk_keyboardMenu Option1 Option2 Option3 rtnVar
 %endfunction%

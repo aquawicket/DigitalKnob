@@ -1,6 +1,6 @@
 #!/bin/sh
 ###### DK.sh #####################################################################
-if [ -z "${DK_LOADED-}" ]; then
+if [ -z "${DKINIT_sh-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
@@ -37,7 +37,7 @@ dk_arrayUnshift() {
 	array=("${@:2}" "${array[@]}");
 	arrayUnshift="${#array[@]}";
 	
-	###### output ######
+	###### return ######
 	export arrayUnshift;
 	eval ${1}='("${array[@]}")';													# alter input variable
 	#[ ${#} -gt 2 ] && eval ${3}=${_length_} || builtin echo "${arrayUnshift}";		# return value using return variable

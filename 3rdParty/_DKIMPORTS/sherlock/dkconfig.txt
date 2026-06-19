@@ -1,0 +1,5 @@
+############ sherlock ############
+# https://github.com/sherlock-project/sherlock.git
+# https://github.com/sherlock-project/sherlock/archive/0a68ab7f4caced5b5f6826c6ff58833d7cd04685.zip
+
+sherlock_Import=https://github.com/sherlock-project/sherlock/archive/0a68ab7f4caced5b5f6826c6ff58833d7cd04685.zip

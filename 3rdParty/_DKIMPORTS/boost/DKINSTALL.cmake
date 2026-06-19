@@ -1,17 +1,19 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
+############ boost ############
 # https://github.com/boostorg/boost
 # https://www.boost.org/
 # https://www.boost.org/doc/libs/1_76_0/tools/build/doc/html/index.html - B2 User Manual - 1.76.0
@@ -19,20 +21,21 @@ include_guard()
 # https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip
 # https://sourceforge.net/projects/boost/files/boost/1.78.0/boost_1_78_0.zip
 # https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.zip
+# https://github.com/boostorg/boost.git
 #
 # Debugging: When calling b2 to compile the boost libraries, you can use the -q flag to make it stop at the first error.
 # Notes: abi=aapcs and binary-format=elf were added to android build to supress "No best alternative for libs/context/build/asm_sources"
 
 
 if(Android)
-	dk_depend(android-ndk)	#version 21e or newer required
-	dk_depend(msys2)
+	dk_validate(android-ndk "dk_depend(android-ndk)")	#version 21e or newer required
+	dk_validate(msys2 "dk_depend(msys2)")
 endif()
 
-#dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-#dk_set(BOOST $ENV{DK3RDPARTY_DIR}/boost_1_78_0)
+#dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+#dk_set(BOOST ${DK3RDPARTY_DIR}/boost_1_78_0)
 #dk_import(https://github.com/boostorg/boost.git)
-dk_import(https://versaweb.dl.sourceforge.net/project/boost/boost/1.78.0/boost_1_78_0.zip PATCH)
+dk_import() #PATCH)
 
 
 

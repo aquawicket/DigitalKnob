@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 return()
 # This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
@@ -54,23 +55,23 @@ dk_info("CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}")
 
 ### Set DKCMAKE_DIR ###
 dk_set(DKCMAKE_DIR ${CMAKE_SOURCE_DIR})
-dk_info("DKCMAKE_DIR = $ENV{DKCMAKE_DIR}")
+dk_info("DKCMAKE_DIR = ${DKCMAKE_DIR}")
 
 ### Set DKBRANCH_DIR
-string(FIND "$ENV{DKCMAKE_DIR}" "DKCMake" pos)
+string(FIND "${DKCMAKE_DIR}" "DKCMake" pos)
 math(EXPR pos "${pos}-1")
-string(SUBSTRING $ENV{DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
-dk_set(DKBRANCH_DIR "$ENV{DKBRANCH_DIR}")
-dk_info("DKBRANCH_DIR = $ENV{DKBRANCH_DIR}")
+string(SUBSTRING ${DKCMAKE_DIR} 0 ${pos} DKBRANCH_DIR)
+dk_set(DKBRANCH_DIR "${DKBRANCH_DIR}")
+dk_info("DKBRANCH_DIR = ${DKBRANCH_DIR}")
 
 ### Set DIGITALKNOB_DIR
-string(FIND "$ENV{DKBRANCH_DIR}" "DigitalKnob" pos)
-string(SUBSTRING $ENV{DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
-dk_set(DIGITALKNOB_DIR $ENV{DIGITALKNOB_DIR}DigitalKnob)
-dk_info("DIGITALKNOB_DIR = $ENV{DIGITALKNOB_DIR}")
+string(FIND "${DKBRANCH_DIR}" "DigitalKnob" pos)
+string(SUBSTRING ${DKBRANCH_DIR} 0 ${pos} DIGITALKNOB_DIR)
+dk_set(DIGITALKNOB_DIR ${DIGITALKNOB_DIR}DigitalKnob)
+dk_info("DIGITALKNOB_DIR = ${DIGITALKNOB_DIR}")
 
 ### Set DK3RDPARTY_DIR
-dk_set(DK3RDPARTY_DIR $ENV{DKBRANCH_DIR}/3rdParty)
+dk_set(DK3RDPARTY_DIR ${DKBRANCH_DIR}/3rdParty)
 
 ### Set DK_BINARY_DIR ###
 dk_set(DK_BINARY_DIR ${CMAKE_BINARY_DIR})
@@ -110,7 +111,7 @@ if(1)
 	
 # Android_Arm32
 if(${DK_BINARY_OSARCH} MATCHES "Android_Arm32")
-	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"armeabi-v7a")
@@ -136,7 +137,7 @@ endif()
 
 # Android_Arm64
 if(${DK_BINARY_OSARCH} MATCHES "Android_Arm64")
-	dk_set(ANDROID_NDK 						"$ENV{DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
+	dk_set(ANDROID_NDK 						"${DK3RDPARTY_DIR}/android-sdk/ndk/23.1.7779620")
 	dk_set(ANDROID_NDK_GENERATOR 			"Unix Makefiles")
 	dk_set(ANDROID_NDK_MAKE_PROGRAM 		"${ANDROID_NDK}/prebuilt/windows-x86_64/bin/make.exe")
 	dk_set(ANDROID_NDK_ANDROID_ABI			"arm64-v8a")
@@ -174,7 +175,7 @@ endif()
 
 # Ios_Arm64
 if(${DK_BINARY_OSARCH} MATCHES "Ios_Arm64")
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"OS64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -187,7 +188,7 @@ endif()
 
 # Iossim_X86
 if(${DK_BINARY_OSARCH} MATCHES "Iossim_X86")
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")
@@ -201,7 +202,7 @@ endif()
 
 # Iossim_x86_64
 if(${DK_BINARY_OSARCH} MATCHES "Iossim_x86_64")	
-	dk_set(IOS_TOOLCHAIN_FILE				"$ENV{DKCMAKE_DIR}/ios.toolchain.cmake")
+	dk_set(IOS_TOOLCHAIN_FILE				"${DKCMAKE_DIR}/ios.toolchain.cmake")
 	dk_set(IOS_PLATFORM 					"SIMULATOR64")
 	dk_set(IOS_SDK_VERSION					"15.0")
 	dk_set(IOS_DEPLOYMENT_TARGET			"13.0")

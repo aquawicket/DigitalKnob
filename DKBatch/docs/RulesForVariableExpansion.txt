@@ -1,0 +1,72 @@
+*** Please copy the following into Microsoft's Notepad for correct viewing ***
+
+Rules for Variable Expansion
+
+Variable expansion on a Windows Command Prompt and in a *.bat file being executed from a Windows script file are handled differently. This can be the
+result of the fact that every thing in a *.bat file is considered text. (In order to quote a '%' character, another '%' character must be used (i.e. %%1, %%%1, etc.)).
+Because of this, all quoting has to take priority first for clarification, then any variable expansions are handled next.
+On the command line, all characters are not quoted. Therefore, meta characters are process as expected; variable expansion occurs 1st, and then the
+command is process.
+
+***********************************************************************************************************************************************************************
+Note: This also applies to "single sided variables" like accessible script parameters in a *.bat file except the "single sided variable" mark is expanded/quoted on the
+side where the '%' character already is (i.e. %1 with quotes becomes %%1, %%%1, %%%%1, etc.)
+***********************************************************************************************************************************************************************
+
+For example, if running the same commands from the command prompt and a batch file named test.bat, the following outpus are aquired and explained:
+
+
+::test.bat
+@echo off & set VAL=10& set Z=VAL
+
+
+::Key point: In order to quote an '%' character in a *.bat file, you have to use another '%' character
+
+::Command *.bat file Processing (group 1st) Output from bat file Command Line Processing (expansion 1st) Output when run From the Command Line
+---------- --------------------------------- --------------------- --------------------------------------- -------------------------------------
+echo %Z% Substitute variable VAL variable substitution VAL
+
+echo %%Z%% 1st group, then print %Z% variable substitution 1st,
+then there is no text expansion %VAL%
+
+echo %%%Z%%% 1st group, expand to text
+representation, substitute
+variables, then
+print: {%%} {%Z%} {%%} %VAL% same as above %%VAL%%
+
+echo %%%%Z%%%% {%%} {%%} Z {%%} {%%} %%Z%% same as above %%%VAL%%%
+
+echo %%%%%Z%%%%% {%%} {%%} {%Z%} {%%} {%%} %%VAL%% same as above %%%%VAL%%%%
+
+********************************************************************************************************************************************************
+***Remember: In a batch file, every thing is text. Therefore, quote groups are formed 1st, then variable strings are grouped together, and expanded in a
+single pass. On the command line, every thing is not concidered text. This causes a single pass variable replacement only (leaving the rest
+of the string data behind)
+********************************************************************************************************************************************************
+
+::Key point: the "call" command does a second pass on the text of the 1st expansion pass (like piping the 1st command into the "call" command. Unfortunatly,
+the "call" command doesn't accept piped data, nor does it do any stream redirections. Therefore, this is just a work around)
+
+::Command *.bat file Processing (group 1st) Output from bat file Command Line Processing (expansion 1st) Output when run From the Command Line
+---------- --------------------------------- --------------------- --------------------------------------- -------------------------------------
+call echo %Z% VAL can't be expaned any more
+b/c VAL is a text string, not expansion 1st, with no other text variable
+a variable string: %VAL% VAL markings, therefore ==========> VAL
+
+call echo %%Z%% %Z% can be further expanded VAL expansion 1st to %VAL%, this text
+variable is ==================> 10
+
+call echo %%%Z%%% %VAL% can be further %%%Z%%%=>%%{%Z%}%%=>%{%VAL%}%=>
+grouped, then expanded 10 %{10}% =======================> %10%
+
+call echo %%%%Z%%%% %%Z%% can be further %%%%Z%%%%=>%%%{%Z%}%%%=>%%{%VAL%}%%
+grouped, with no possible %%{10}%%
+expansion %Z% ===============================> %%10%%
+
+call echo %%%%%Z%%%%% %%VAL%% can be further %%%%%Z%%%%%=>%%%%{%Z%}%%%%=>
+grouped with no possible %%%{%VAL%}%%%=>%%%{10}%%%
+expansion %VAL% ===============================> %%%10%%%
+
+***************************************************************************************************************************
+***Remember: Each additional use of the "call" command causes another variable expansion and evaluation process if possible
+*************************************************************************************************************************** 

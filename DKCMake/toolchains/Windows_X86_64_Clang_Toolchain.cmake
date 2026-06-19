@@ -1,13 +1,13 @@
-message("#########################################################################")
-message("################### Windows_X86_64_Clang_Toolchain.cmake ###################")
-message("#########################################################################")
+dk_echo("############################################################################")
+dk_echo("################### Windows_X86_64_Clang_toolchain.cmake ###################")
+dk_echo("############################################################################")
 
 if(NOT Windows_Host)
 	return()
 endif()
 
-dk_depend(msys2)
-dk_depend(clang)
+dk_validate(msys2 "dk_depend(msys2)")
+dk_validate(clang "dk_depend(clang)")
 
 dk_set(MSYSTEM 						CLANG64)
 dk_prependEnvPath(					"${msys2}/usr/bin")

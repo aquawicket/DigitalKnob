@@ -1,0 +1,822 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en-US">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-280191-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-280191-1');
+</script>
+
+<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META content=TRUE name=MSSmartTagsPreventParsing>
+<META http-equiv=expires content=-1>
+<META http-equiv=pragma content=no-cache>
+<META content=all name=robots>
+<META name=keywords content='dos,functions,vista,xp,command line,batch,examples,substring,variables,copies,date'>
+<link rel=Stylesheet type="text/css" media=all href="/_style.css?v=0001">
+<link rel="shortcut icon" href="/favicon.ico" >
+<link rel="icon" href="/animated_favicon1.gif" type="image/gif" >
+<title>DOS Batch - Function Tutorial</title>
+<!--zgen.php-->
+</head>
+<body>
+<div class="nav">
+        <br>
+    <div class="navi">
+        <a href='/'><img src='/TitleDostips.JPG' height='80' alt='DosTips.com'></a>
+        <br><span style="font-size: 9px; font-weight: bold;">for Windows10,Windows8,Windows7,VISTA,</span>
+        <br><span style="font-size: 9px; font-weight: bold;">XP,NT,Server 2000,Server 2003,Server 2008</span>
+        <br>
+        <br>
+            <!-- SiteSearch Google -->
+<div class="search">
+<script>
+  (function() {
+    var cx = 'partner-pub-4331089886589220:2001057635';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only></gcse:searchbox-only>
+</div>
+<!-- SiteSearch Google -->
+        <br>
+            <ul>
+        <li class='nsel'><a href='/'>Home</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Source Script</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtCodeBatchFiles.php'>Batch Files</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeCmdLib.php'>Function Library</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeSnippets.php'>Script Snippets</a>&nbsp;</li>
+                <li class='nsel'><a href='DtCodeInterfacing.php'>Interfacing</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tips and Tricks</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTipsXCopy.php'>Copy Tips</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsMenu.php'>Menu in Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringManipulation.php'>String Manipulation</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsStringOperations.php'>String Operations</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsDateTime.php'>Date and Time</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsArithmetic.php'>Arithmetic</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTipsFtpBatchScript.php'>FTP Batch Script</a>&nbsp;</li>
+                <li class='nsel'><a href='DosCommandIndex.php'>Command Index</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Tutorials</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtTutoFirstBatch.php'>My First Batch</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoFramework.php'>Solid Framework</a>&nbsp;</li>
+                <li class='ysel'><a href='DtTutoFunctions.php'>Functions</a>&nbsp;</li>
+                <li class='nsel'><a href='DtTutoPersistency.php'>Persistency</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='/forum/viewforum.php?f=3'>Forum</a>&nbsp;
+            <ul>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a href='DtGeneGeneral.php'>General</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='DtGeneTermsOfUse.php'>Terms of Use</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneEnabler.php'>Enablers</a>&nbsp;</li>
+                <li class='nsel'><a href='DtGeneAboutUs.php'>About Us</a>&nbsp;</li>
+                <li class='nsel'><a href='forum/memberlist.php?mode=contactadmin'>Contact Us</a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+        <li class='nsel'><a>Others</a>&nbsp;
+            <ul>
+                <li class='nsel'><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9018663'><marquee width="120" scrollamount="2">Want donate a cup of Cafe? . click . </marquee></a>&nbsp;</li>
+                <li class='nsel'>&nbsp;</li>
+            </ul>
+        </li>
+    </ul>
+    </div>
+</div>
+<H1>DOS Batch - Function Tutorial</H1>
+<span class='shortText'>What it is, why it`s important and how to write your own.</span><br><br>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The assumption is:  A batch script snippet can be named a function when:
+<ol>
+<li>... it has a callable entrance point.</li>
+<li>... on completion execution continues right after the command that initially called the function.</li>
+<li>... it works the same no matter from where it`s being called, even when it calls itself recursively.</li>
+<li>... the variables used within a function do not conflict with variables outside the function.</li>
+<li>... it exchanges data with the calling code strictly through input and output variables or a return code.</li>
+</ol>
+The benefits behind functions are:
+<ol>
+<li>Keep the main script clean</li>
+<li>Hide complexity in reusable functions</li>
+<li>Test functions independently from the main script</li>
+<li>Add more functionality to your batch script simply by adding more functions at the bottom</li>
+<li>Don`t worry about the function implementation, just test it and use it</li>
+</ol></td>
+    </tr>
+  </table>
+<br><table class='menu' cellpadding='0' cellspacing='0'>
+<tr><td colspan='2'>
+</td></tr>
+<tr><td class='title'><a href='DtTutoFunctions.php'>DOS Batch - Function Tutorial</a></td>
+<td class='text'>What it is, why it`s important and how to write your own.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.CallingAFunction'>Call a Function</a></td>
+<td class='text'>How to invoke a function?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.CreatingAFunction'>Create a Function</a></td>
+<td class='text'>What is a function?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.Example - CallingAFunctionWithArguments'>Example - Function with Arguments</a></td>
+<td class='text'>An Example showing how it works.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ExampleCallingAFunction'>Example - Calling a Function</a></td>
+<td class='text'>An Example showing how it works.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ExampleReturningValuesViaReference'>Example - Returning Values using Variable Reference</a></td>
+<td class='text'>An Example showing how it works.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.LocalVariables'>Local Variables in Functions</a></td>
+<td class='text'>How to avoid name conflicts and keep variable changes local to the function?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ParsingFunctionArguments'>Parsing Function Arguments</a></td>
+<td class='text'>How to retrieve function arguments within the function?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.PassingFunctionArguments'>Passing Function Arguments</a></td>
+<td class='text'>How to pass arguments to the function?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.RecursiveFunctions'>Recursive Functions</a></td>
+<td class='text'>Tadaaah!!!</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ReturningLocalVariables'>Returning Local Variables</a></td>
+<td class='text'>How to pass return values over the ENDLOCAL barrier?</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ReturningValuesClassic'>Returning Values the Classic Way</a></td>
+<td class='text'>The classic way of returning values and the limitations.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.ReturningValuesViaReference'>Returning Values via References</a></td>
+<td class='text'>Let the caller determine how to return the function result and avoid the need of dedicated variables.</td>
+</tr>
+<tr><td class='title'><a href='#FunctionTutorial.Summary'>Summary</a></td>
+<td class='text'>Defining a standard format for a DOS batch function</td>
+</tr>
+</table>    <hr>
+    <a name='_Toc128587188'></a>
+    <a name='FunctionTutorial.CallingAFunction'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Call a Function - How to invoke a function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>A function can be called with the <b>CALL</b> command followed by the function label.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>call:myDosFunc</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587187'></a>
+    <a name='FunctionTutorial.CreatingAFunction'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Create a Function - What is a function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>In DOS you write a function by surrounding a group of command by a <b>label</b> and a <b>GOTO:EOF</b>
+command.  A single batch file can contain multiple functions defined like this.  The <b>label</b> becomes 
+the function name.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myDosFunc'>:myDosFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;here&nbsp;starts&nbsp;my&nbsp;function&nbsp;identified&nbsp;by&nbsp;it`s&nbsp;label</span></span><br>
+<span style='color=#000000'>echo.&nbsp;here&nbsp;the&nbsp;myDosFunc&nbsp;function&nbsp;is&nbsp;executing&nbsp;a&nbsp;group&nbsp;of&nbsp;commands</span><br>
+<span style='color=#000000'>echo.&nbsp;it&nbsp;could&nbsp;do&nbsp;a&nbsp;lot&nbsp;of&nbsp;things</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587192'></a>
+    <a name='FunctionTutorial.Example - CallingAFunctionWithArguments'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Example - Function with Arguments - An Example showing how it works</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The following example demonstrates how to pass arguments into a DOS function.
+The :myDosFunc function is being called multiple times with different arguments.
+<br>
+<br><b>Note:</b> The last call to myDosFunc doesn`t use double quotes for the second argument.
+Subsequently "for" and "me" will be handled as two separate arguments, whereas the third argument "me"
+is not being used within the function.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFunc2.bat'>BatchTutoFunc2.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.going&nbsp;to&nbsp;execute&nbsp;myDosFunc&nbsp;with&nbsp;different&nbsp;arguments</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100&nbsp;YeePEE</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100&nbsp;&quot;for&nbsp;me&quot;</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100,&quot;for&nbsp;me&quot;</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100,for&nbsp;me</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myDosFunc'>:myDosFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;here&nbsp;starts&nbsp;my&nbsp;function&nbsp;identified&nbsp;by&nbsp;it's&nbsp;label</span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.&nbsp;here&nbsp;the&nbsp;myDosFunc&nbsp;function&nbsp;is&nbsp;executing&nbsp;a&nbsp;group&nbsp;of&nbsp;commands</span><br>
+<span style='color=#000000'>echo.&nbsp;it&nbsp;could&nbsp;do&nbsp;<span class=c_pvar>%~1</span>&nbsp;of&nbsp;things&nbsp;<span class=c_pvar>%~2</span>.</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>going to execute myDosFunc with different arguments
+
+ here the myDosFunc function is executing a group of commands
+ it could do 100 of things YeePEE.
+
+ here the myDosFunc function is executing a group of commands
+ it could do 100 of things for me.
+
+ here the myDosFunc function is executing a group of commands
+ it could do 100 of things for me.
+
+ here the myDosFunc function is executing a group of commands
+ it could do 100 of things for.
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587189'></a>
+    <a name='FunctionTutorial.ExampleCallingAFunction'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Example - Calling a Function - An Example showing how it works</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The use of batch functions will divide the script into two sections.
+<ol>
+<li>The main script: starting at line 1 ending with a <b>GOTO:EOF</b> command that terminates the script.</li>
+<li>The function section: filling the second half of the batch file with one or more functions to be callable from the main script. </li>
+</ol></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFunc1.bat'>BatchTutoFunc1.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.going&nbsp;to&nbsp;execute&nbsp;myDosFunc</span><br>
+<span style='color=#000000'>call:myDosFunc</span><br>
+<span style='color=#000000'>echo.returned&nbsp;from&nbsp;myDosFunc</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myDosFunc'>:myDosFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;here&nbsp;starts&nbsp;my&nbsp;function&nbsp;identified&nbsp;by&nbsp;it`s&nbsp;label</span></span><br>
+<span style='color=#000000'>echo.&nbsp;&nbsp;here&nbsp;the&nbsp;myDosFunc&nbsp;function&nbsp;is&nbsp;executing&nbsp;a&nbsp;group&nbsp;of&nbsp;commands</span><br>
+<span style='color=#000000'>echo.&nbsp;&nbsp;it&nbsp;could&nbsp;do&nbsp;a&nbsp;lot&nbsp;of&nbsp;things</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>going to execute myDosFunc
+  here the myDosFunc function is executing a group of commands
+  it could do a lot of things
+returned from myDosFunc
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587194'></a>
+    <a name='FunctionTutorial.ExampleReturningValuesViaReference'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Example - Returning Values using Variable Reference - An Example showing how it works</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>This code shows how the var1 variable is being passed into a <b>:myGetFunc</b> function simply 
+by passing the variable name.  Within the <b>:myGetFunc</b> function the command processor works
+like this:
+<ol>
+<li>Reads the set command into memory: <b>set "%~1=DosTips"</b></li>
+<li>Expand the variables, i.e. %~1 like this: <b>set "var1=DosTips"</b></li>
+<li>Finally execute the command and assign the new string to var1</li>
+</ol></td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFunc3.bat'>BatchTutoFunc3.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;&quot;var1=CmdTips&quot;</span><br>
+<span style='color=#000000'>echo.var1&nbsp;before:&nbsp;%var1%</span><br>
+<span style='color=#000000'>call:myGetFunc&nbsp;var1</span><br>
+<span style='color=#000000'>echo.var1&nbsp;after&nbsp;:&nbsp;%var1%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myGetFunc'>:myGetFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;passing&nbsp;a&nbsp;variable&nbsp;by&nbsp;reference</span></span><br>
+<span style='color=#000000'>set&nbsp;&quot;<span class=c_pvar>%~1</span>=DosTips&quot;</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>var1 before: CmdTips
+var1 after : DosTips
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587195'></a>
+    <a name='FunctionTutorial.LocalVariables'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Local Variables in Functions - How to avoid name conflicts and keep variable changes local to the function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The <b>SETLOCAL</b> causes the command processor to backup all environment variables.  The variables 
+can be restored by calling <b>ENDLOCAL</b>.  Changes made im between are local to the current batch.
+<b>ENDLOCAL</b> is automatically being called when the end of the batch file is reached, i.e. by 
+calling <b>GOTO:EOF</b>.
+<br>Localizing variables with SETLOCAL allows using variable names within a function freely without worrying 
+about name conflicts with variables used outside the function.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFunc4.bat'>BatchTutoFunc4.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;&quot;aStr=Expect&nbsp;no&nbsp;changed,&nbsp;even&nbsp;if&nbsp;used&nbsp;in&nbsp;function&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;var1=No&nbsp;change&nbsp;for&nbsp;this&nbsp;one.&nbsp;&nbsp;Now&nbsp;what?&quot;</span><br>
+<span style='color=#000000'>echo.aStr&nbsp;before:&nbsp;%aStr%</span><br>
+<span style='color=#000000'>echo.var1&nbsp;before:&nbsp;%var1%</span><br>
+<span style='color=#000000'>call:myGetFunc&nbsp;var1</span><br>
+<span style='color=#000000'>echo.aStr&nbsp;after&nbsp;:&nbsp;%aStr%</span><br>
+<span style='color=#000000'>echo.var1&nbsp;after&nbsp;:&nbsp;%var1%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myGetFunc'>:myGetFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;passing&nbsp;a&nbsp;variable&nbsp;by&nbsp;reference</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;aStr=DosTips&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;<span class=c_pvar>%~1</span>=%aStr%&quot;</span><br>
+<span style='color=#000000'>ENDLOCAL</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>aStr before: Expect no changed, even if used in function
+var1 before: No change for this one.  Now what?
+aStr after : Expect no changed, even if used in function
+var1 after : No change for this one.  Now what?
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587191'></a>
+    <a name='FunctionTutorial.ParsingFunctionArguments'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Parsing Function Arguments - How to retrieve function arguments within the function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Just as the DOS batch file itself retrieves arguments via %1 … %9 a function can parse it`s arguments the same way.  The same rules apply.
+<br>Let`s modify our previews example to use arguments.
+<br>To strip of the double quotes in an arguments value the tilde modifier, i.e. use %~2 instead of %2.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myDosFunc'>:myDosFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;here&nbsp;starts&nbsp;myDosFunc&nbsp;identified&nbsp;by&nbsp;it`s&nbsp;label</span></span><br>
+<span style='color=#000000'>echo.</span><br>
+<span style='color=#000000'>echo.&nbsp;here&nbsp;the&nbsp;myDosFunc&nbsp;function&nbsp;is&nbsp;executing&nbsp;a&nbsp;group&nbsp;of&nbsp;commands</span><br>
+<span style='color=#000000'>echo.&nbsp;it&nbsp;could&nbsp;do&nbsp;<span class=c_pvar>%~1</span>&nbsp;of&nbsp;things&nbsp;<span class=c_pvar>%~2</span>.</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587190'></a>
+    <a name='FunctionTutorial.PassingFunctionArguments'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Passing Function Arguments - How to pass arguments to the function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Just as the DOS batch file itself can have arguments, a function can be called with arguments in a similar way.  Just list all arguments after the function name in the call command.
+<br>Use a space or a comma to separate arguments.
+<br>Use double quotes for string arguments with spaces.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>call:myDosFunc&nbsp;100&nbsp;YeePEE</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100&nbsp;&quot;for&nbsp;me&quot;</span><br>
+<span style='color=#000000'>call:myDosFunc&nbsp;100,&quot;for&nbsp;me&quot;</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587196'></a>
+    <a name='FunctionTutorial.RecursiveFunctions'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Recursive Functions - Tadaaah!!!</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Being able to completely encapsulate the body of a function by keeping variable changes local to 
+the function and invisible to the caller we are now able to call a function recursively making 
+sure each level of recursion works with its own set of variables even thought variable names are 
+being reused.
+<br>
+<br><b>Example:</b> The next example below shows how to calculate a Fibonacci number recursively.  The recursion 
+stops when the Fibonacci algorism reaches a number greater or equal to a given input number.
+<br>The example starts with the numbers 0 and 1 the :myFibo function calls itself recursively to 
+calculate the next Fibonacci number until it finds the Fibonacci number greater or equal 1000000000.
+<br>
+<br>The first argument of the myFibo function is the name of the variable to store the output in. 
+This variable must be initialized to the Fibonacci number to start with and will be used as current 
+Fibonacci number when calling the function and will be set to the subsequent Fibonacci number when 
+the function returns.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFuncRecurs.bat'>BatchTutoFuncRecurs.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;&quot;fst=0&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;fib=1&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;limit=1000000000&quot;</span><br>
+<span style='color=#000000'>call:myFibo&nbsp;fib,%fst%,%limit%</span><br>
+<span style='color=#000000'>echo.The&nbsp;next&nbsp;Fibonacci&nbsp;number&nbsp;greater&nbsp;or&nbsp;equal&nbsp;%limit%&nbsp;is&nbsp;%fib%.</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myFibo'>:myFibo</a></span><span class=c_cmmt>&nbsp;&nbsp;--&nbsp;calculate&nbsp;recursively&nbsp;the&nbsp;next&nbsp;Fibonacci&nbsp;number&nbsp;greater&nbsp;or&nbsp;equal&nbsp;to&nbsp;a&nbsp;limit</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;return&nbsp;variable&nbsp;reference&nbsp;and&nbsp;current&nbsp;Fibonacci&nbsp;number</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~2</span>:&nbsp;previous&nbsp;value</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~3</span>:&nbsp;limit</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;Number1=<span class=c_pvar>%~1</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;Number2=<span class=c_pvar>%~2</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;Limit=<span class=c_pvar>%~3</span>&quot;</span><br>
+<span style='color=#000000'>set&nbsp;/a&nbsp;&quot;NumberN=Number1&nbsp;+&nbsp;Number2&quot;</span><br>
+<span style='color=#000000'>if&nbsp;/i&nbsp;%NumberN%&nbsp;LSS&nbsp;%Limit%&nbsp;call:myFibo&nbsp;NumberN,%Number1%,%Limit%</span><br>
+<span style='color=#000000'>(ENDLOCAL</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;&quot;<span class=c_pvar>%~1</span>=%NumberN%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>The next Fibonacci number greater or equal 1000000000 is 1134903170.
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='FunctionTutorial.ReturningLocalVariables'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Returning Local Variables - How to pass return values over the ENDLOCAL barrier</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The question is: When localizing a function via <b>SETLOCAL</b> and <b>ENDLOCAL</b>, how to return a value 
+that was calculated before executing <b>ENDLOCAL</b> when <b>ENDLOCAL</b> restores all variables 
+back to its original state? 
+<br>The answer comes with "variable expansion".  The command processor expands all variables of a command 
+before executing the command.  Letting the command processor executing <b>ENDLOCAL</b> and a <b>SET</b>
+command at once solves the problem.  Commands can be grouped within brackets.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchTutoFunc5.bat'>BatchTutoFunc5.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br><a name='12'>12.</a><br><a name='13'>13.</a><br><a name='14'>14.</a><br><a name='15'>15.</a><br><a name='16'>16.</a><br><a name='17'>17.</a><br><a name='18'>18.</a><br><a name='19'>19.</a><br><a name='20'>20.</a><br><a name='21'>21.</a><br><a name='22'>22.</a><br><a name='23'>23.</a><br><a name='24'>24.</a><br><a name='25'>25.</a><br><a name='26'>26.</a><br><a name='27'>27.</a><br><a name='28'>28.</a><br><a name='29'>29.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>@echo&nbsp;off</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>set&nbsp;&quot;aStr=Expect&nbsp;no&nbsp;changed,&nbsp;even&nbsp;if&nbsp;used&nbsp;in&nbsp;function&quot;</span><br>
+<span style='color=#000000'>set&nbsp;&quot;var1=Expect&nbsp;changed&quot;</span><br>
+<span style='color=#000000'>echo.aStr&nbsp;before:&nbsp;%aStr%</span><br>
+<span style='color=#000000'>echo.var1&nbsp;before:&nbsp;%var1%</span><br>
+<span style='color=#000000'>call:myGetFunc&nbsp;var1</span><br>
+<span style='color=#000000'>echo.aStr&nbsp;after&nbsp;:&nbsp;%aStr%</span><br>
+<span style='color=#000000'>echo.var1&nbsp;after&nbsp;:&nbsp;%var1%</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'>echo.&amp;pause&amp;goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--&nbsp;Function&nbsp;section&nbsp;starts&nbsp;below&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::--------------------------------------------------------</span></span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myGetFunc'>:myGetFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;passing&nbsp;a&nbsp;variable&nbsp;by&nbsp;reference</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;aStr=DosTips&quot;</span><br>
+<span style='color=#000000'>(&nbsp;ENDLOCAL</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=%aStr%&quot;</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+<span style='color=#000000'></span><br>
+<span style='color=#000000'><span class=c_labl><a name='myGetFunc2'>:myGetFunc2</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;passing&nbsp;a&nbsp;variable&nbsp;by&nbsp;reference</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'>set&nbsp;&quot;aStr=DosTips&quot;</span><br>
+<span style='color=#000000'>ENDLOCAL&amp;set&nbsp;&quot;<span class=c_pvar>%~1</span>=%aStr%&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;<span class=c_cmmt>rem&nbsp;THIS&nbsp;ALSO&nbsp;WORKS&nbsp;FINE</span></span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>aStr before: Expect no changed, even if used in function
+var1 before: Expect changed
+aStr after : Expect no changed, even if used in function
+var1 after : DosTips
+
+Press any key to continue . . . 
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name=''></a>
+    <a name='FunctionTutorial.ReturningValuesClassic'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Returning Values the Classic Way - The classic way of returning values and the limitations</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>The CALL command doesn`t support return values as known by other programming languages.
+<br>The classic walkaround is to have the function store the return value into a environment 
+variable.  The calling script can use this variable when the function returns.
+The :myGetFunc function below demonstrates how the variable var1 gets the "DosTips" string assigned
+which can then be used in the calling function.
+<br>
+<br><b>Note:</b> The var1 variable is reserved for this particular function.  Any data stored in
+var1 by the calling function before calling :myGetVar will be overwritten.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Usage:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>set&nbsp;&quot;var1=some&nbsp;hopefully&nbsp;not&nbsp;important&nbsp;string&quot;</span><br>
+<span style='color=#000000'>echo.var1&nbsp;before:&nbsp;%var1%</span><br>
+<span style='color=#000000'>call:myGetFunc</span><br>
+<span style='color=#000000'>echo.var1&nbsp;after&nbsp;:&nbsp;%var1%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myGetFunc'>:myGetFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;get&nbsp;a&nbsp;value</span></span><br>
+<span style='color=#000000'>set&nbsp;&quot;var1=DosTips&quot;</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>var1 before: some hopefully not important string
+var1 after : DosTips
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587193'></a>
+    <a name='FunctionTutorial.ReturningValuesViaReference'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Returning Values via References - Let the caller determine how to return the function result and avoid the need of dedicated variables</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>Instead of using "global" variables for return value, the function can use one of it`s arguments as 
+variable reference.  The caller can then pass a variable name to the function and the function can 
+store the result into this variable making use of the command line expansion of the command processor:
+<br>
+<br><b>Note:</b> The var1 variable is not reserved for this articular function.  Any variable 
+can be passed to the function the caller has full control.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Usage:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'>call:myGetFunc&nbsp;var1</span><br>
+<span style='color=#000000'>echo.var1&nbsp;after&nbsp;:&nbsp;%var1%</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myGetFunc'>:myGetFunc</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;passing&nbsp;a&nbsp;variable&nbsp;by&nbsp;reference</span></span><br>
+<span style='color=#000000'>set&nbsp;&quot;<span class=c_pvar>%~1</span>=DosTips&quot;</span><br>
+<span style='color=#000000'>goto:eof</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script Output:</td>
+      <td class='text'  VALIGN='top'><table class="dosw" border="0" cellspacing="2" cellpadding="3">    <tr><td class="title">&nbsp;<img src="/SysIcon.JPG" alt="DOS">&nbsp;Script Output    </td></tr>    <tr><td class="text"><pre>var1 after : DosTips
+</pre></td></tr></table></td>
+    </tr>
+  </table>
+    <hr>
+    <a name='_Toc128587197'></a>
+    <a name='FunctionTutorial.Summary'></a>
+    <div style='float: right;'><font color='darkblue'><a href='#'>TOP</a><br><font size=1>2008-01-01</font></font></div>
+    <H2>Summary - Defining a standard format for a DOS batch function</H2>
+  <table class='posts'>
+    <tr>
+      <td class='title' VALIGN='top'>Description:</td>
+      <td class='text'  VALIGN='top'>With the information learned in this section we can define a standard format for a DOS
+batch functions as shown below.
+<br>Also check out the rich set of ready to use DOS functions provided by the DosTips.com <a href="DtCodeCmdLib.php">function library</a>.</td>
+    </tr>
+    <tr>
+      <td class='title' VALIGN='top'>Script:</td>
+      <td class='text'  VALIGN='top'><span style='float:right;'>Download: <a href='/BatchFunctionTmpl.bat'>BatchFunctionTmpl.bat</a>&nbsp;&nbsp;</span>    <table class='btchscr'><tr>
+      <td class='numbrs' align='right' nowrap='nowrap'><code><a name='1'>1.</a><br><a name='2'>2.</a><br><a name='3'>3.</a><br><a name='4'>4.</a><br><a name='5'>5.</a><br><a name='6'>6.</a><br><a name='7'>7.</a><br><a name='8'>8.</a><br><a name='9'>9.</a><br><a name='10'>10.</a><br><a name='11'>11.</a><br></code></td>
+      <td nowrap='nowrap' class='code'><code><span style='color=#000000'><span class=c_labl><a name='myFunctionName'>:myFunctionName</a></span><span class=c_cmmt>&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;function&nbsp;description&nbsp;here</span></span><br>
+<span style='color=#000000'><span class=c_cmmt>::&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;<span class=c_pvar>%~1</span>:&nbsp;argument&nbsp;description&nbsp;here</span></span><br>
+<span style='color=#000000'>SETLOCAL</span><br>
+<span style='color=#000000'><span class=c_cmmt>REM.--function&nbsp;body&nbsp;here</span></span><br>
+<span style='color=#000000'>set&nbsp;LocalVar1=...</span><br>
+<span style='color=#000000'>set&nbsp;LocalVar2=...</span><br>
+<span style='color=#000000'>(ENDLOCAL&nbsp;&amp;&nbsp;<span class=c_cmmt>REM&nbsp;--&nbsp;RETURN&nbsp;VALUES</span></span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~1</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~1</span>=%LocalVar1%</span><br>
+<span style='color=#000000'>&nbsp;&nbsp;&nbsp;&nbsp;IF&nbsp;&quot;<span class=c_pvar>%~2</span>&quot;&nbsp;NEQ&nbsp;&quot;&quot;&nbsp;SET&nbsp;<span class=c_pvar>%~2</span>=%LocalVar2%</span><br>
+<span style='color=#000000'>)</span><br>
+<span style='color=#000000'>GOTO:EOF</span><br>
+      </code></td>
+    </tr></table>
+</td>
+    </tr>
+  </table>
+<br><br>
+<!-- <a  href="https://www.amazon.com/gp/offer-listing/0692681310/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0692681310&linkCode=am2&tag=dos01-20&linkId=EM5WJJUFV5Z3RZTB"><img border="0" src="https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0692681310&Format=_SL250_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1&tag=dos01-20" ></a><img src="https://ir-na.amazon-adsystem.com/e/ir?t=dos01-20&l=as2&o=1&a=0692681310" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+ -->
+Ad: <a target="_blank"  href="https://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_il?ie=UTF8&tag=dos01-20&keywords=0692681310&index=aps&camp=1789&creative=9325&linkCode=ur2&linkId=ea014b0a12699a89e986841da1314e03"><img border="0" width="170" src="https://images-na.ssl-images-amazon.com/images/I/511Mh9jVamL._SX417_BO1,204,203,200_.jpg" ></a>
+
+<div class='bot'>
+<script type="text/javascript">
+    /***********************************************
+    * IFrame SSI script II- Copyright Dynamic Drive DHTML code library (http://www.dynamicdrive.com)
+    * Visit DynamicDrive.com for hundreds of original DHTML scripts
+    * This notice must stay intact for legal use
+    ***********************************************/
+    
+    //Input the IDs of the IFRAMES you wish to dynamically resize to match its content height:
+    //Separate each ID with a comma. Examples: ["myframe1", "myframe2"] or ["myframe"] or [] for none:
+    var iframeids=["myframe"]
+    
+    //Should script hide iframe from browsers that don't support this script (non IE5+/NS6+ browsers. Recommended):
+    var iframehide="yes"
+    
+    var getFFVersion=navigator.userAgent.substring(navigator.userAgent.indexOf("Firefox")).split("/")[1]
+    var FFextraHeight=parseFloat(getFFVersion)>=0.1? 16 : 0 //extra height in px to add to iframe in FireFox 1.0+ browsers
+    
+    function resizeCaller() {
+        var dyniframe=new Array()
+        for (i=0; i<iframeids.length; i++){
+            if (document.getElementById)
+                resizeIframe(iframeids[i])
+            //reveal iframe for lower end browsers? (see var above):
+            if ((document.all || document.getElementById) && iframehide=="no"){
+                var tempobj=document.all? document.all[iframeids[i]] : document.getElementById(iframeids[i])
+                tempobj.style.display="block"
+            }
+        }
+    }
+    
+    function resizeIframe(frameid){
+        var currentfr=document.getElementById(frameid)
+        if (currentfr && !window.opera){
+            currentfr.style.display="block"
+            if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) //ns6 syntax
+                currentfr.height = currentfr.contentDocument.body.offsetHeight+FFextraHeight; 
+            else if (currentfr.Document && currentfr.Document.body.scrollHeight) //ie5+ syntax
+                currentfr.height = currentfr.Document.body.scrollHeight;
+            if (currentfr.addEventListener)
+                currentfr.addEventListener("load", readjustIframe, false)
+            else if (currentfr.attachEvent){
+                currentfr.detachEvent("onload", readjustIframe) // Bug fix line
+                currentfr.attachEvent("onload", readjustIframe)
+            }
+        }
+    }
+    
+    function readjustIframe(loadevt) {
+        var crossevt=(window.event)? event : loadevt
+        var iframeroot=(crossevt.currentTarget)? crossevt.currentTarget : crossevt.srcElement
+        if (iframeroot)
+            resizeIframe(iframeroot.id);
+    }
+    
+    function loadintoIframe(iframeid, url){
+        if (document.getElementById)
+        document.getElementById(iframeid).src=url
+    }
+    
+    if (window.addEventListener)
+        window.addEventListener("load", resizeCaller, false)
+    else if (window.attachEvent)
+        window.attachEvent("onload", resizeCaller)
+    else
+        window.onload=resizeCaller
+</script>
+<iframe id="myframe" src="/forum/viewforum.php?f=3"                  marginwidth="0" marginheight="0" frameborder="0" style="overflow:visible; " height=15000 width="100%" scrolling="no" ALLOWTRANSPARENCY="true"></iframe></div>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6f146f6b451ecd',t:'MTc2OTkyNDA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

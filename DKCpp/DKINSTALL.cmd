@@ -35,7 +35,7 @@ if "%~1" equ "" (goto :DKINSTALL)
 	%COMPILE_COMMAND%
 	
 	if NOT EXIST "%APP_FILE%" (
-		echo(
+		echo.
 		echo %red%ERROR: compilation of %DKCPP_FILE% failed.%clr%
 		pause
 		exit /b 13
@@ -43,13 +43,13 @@ if "%~1" equ "" (goto :DKINSTALL)
 	
 	::###### run executable ######
 	title %DKCPP_FILE%
-	echo(
+	echo.
 	echo %bg_magenta%%white%###### DKTEST MODE ###### %APP_NAME%.cpp ###### DKTEST MODE ######%clr%
-	echo(
+	echo.
     %ComSpec% /v:on /c "%APP_FILE%"
-	echo(
+	echo.
 	echo %bg_magenta%%white%######## END TEST ####### %APP_NAME%.cpp ######## END TEST #######%clr%
-	echo(
+	echo.
 	
 	set "exit_code=%ERRORLEVEL%"
 	echo exit_code = %exit_code%
@@ -85,14 +85,14 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::if NOT defined Target_Env		(set "Target_Env=cosmocc")
 	
 	::###### DK.cmd ######
-	@echo off&::###### DK.cmd #########################################################################################################################
+	@echo off&rem ###### DK.cmd #########################################################################################################################
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+	rem #################################################################################################################################################
 	
 	::###### Install DKCpp ######
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
+	%dk_call% dk_validate Host_Tuple %dk_call% dk_Host_Tuple
 	
 	::###### Target_Os ######
 	if NOT defined Target_Os (set "Target_Os=Windows")
@@ -115,16 +115,16 @@ if "%~1" equ "" (goto :DKINSTALL)
 	::if NOT defined MSYSTEM  if "%Target_Env%"=="Gcc"   if "%Target_Arch%"=="X86_64" set "MSYSTEM=MINGW64"
 
 	::###### DK_CXX_COMPILER ######
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
 
-	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate sh_exe				"%dk_call% dk_depend sh_exe")
-	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate COSMOCC_CXX_COMPILER	"%dk_call% dk_depend cosmocc")
-	if "%Target_Env%"=="Clang"		(%dk_call% dk_validate CLANG_CXX_COMPILER	"%dk_call% dk_depend clang")
-	if "%Target_Env%"=="Gcc"		(%dk_call% dk_validate GCC_CXX_COMPILER		"%dk_call% dk_depend gcc")
+	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate sh_exe				%dk_call% dk_depend sh_exe)
+	if "%Target_Env%"=="CosmoCC"	(%dk_call% dk_validate cosmoc++_exe	%dk_call% dk_depend cosmocc)
+	if "%Target_Env%"=="Clang"		(%dk_call% dk_validate clang++_exe			%dk_call% dk_depend clang)
+	if "%Target_Env%"=="Gcc"		(%dk_call% dk_validate gcc_exe				%dk_call% dk_depend gcc)
 
-	if "%Target_Env%"=="CosmoCC"	(set "DK_CXX_COMPILER=%sh_exe% %COSMOCC_CXX_COMPILER%")
-	if "%Target_Env%"=="Clang"  	(set "DK_CXX_COMPILER=%CLANG_CXX_COMPILER%")
-	if "%Target_Env%"=="Gcc"	  	(set "DK_CXX_COMPILER=%GCC_CXX_COMPILER%")
+	if "%Target_Env%"=="CosmoCC"	(set "DK_CXX_COMPILER=%sh_exe% %cosmoc++_exe%")
+	if "%Target_Env%"=="Clang"  	(set "DK_CXX_COMPILER=%clang++_exe%")
+	if "%Target_Env%"=="Gcc"	  	(set "DK_CXX_COMPILER=%g++_exe%")
 	%dk_call% dk_assertVar DK_CXX_COMPILER
 
 	%dk_call% dk_registryDeleteKey "HKCR/DKCpp"

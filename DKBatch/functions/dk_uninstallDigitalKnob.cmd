@@ -1,76 +1,106 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_uninstallDigitalKnob()
-::#
-::#
+rem ############################################################################
+rem # dk_uninstallDigitalKnob()
+rem #
+rem #
 :dk_uninstallDigitalKnob
 %setlocal%
- 	%dk_call% dk_debugFunc 0 
-
-	::###### Uninstall DK Languages ######
+ 
+	rem ###### Uninstall DK Languages ######
 	echo ############ Uninstall DK Languages ############
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	%dk_call% "%DKBRANCH_DIR%/DKBash/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKBatch/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKC/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKCMake/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKCpp/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKCSharp/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKHta/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKHtml/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKJava/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKJavascript/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKPhp/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKPowershell/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKPython/DKUNINSTALL.cmd"
-	%dk_call% "%DKBRANCH_DIR%/DKVb/DKUNINSTALL.cmd"
+	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+	%dk_call% "%DKBranch_Dir%/DKBash/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKBatch/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKC/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKCMake/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKCpp/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKCSharp/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKHta/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKHtml/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKJava/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKJavascript/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKPhp/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKPowershell/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKPython/DKUNINSTALL.cmd"
+	%dk_call% "%DKBranch_Dir%/DKVbs/DKUNINSTALL.cmd"
 
-	::###### Uninstall DK 3rdParty ######
+	rem ###### Uninstall DK 3rdParty ######
 	echo ############ Uninstall 3rdParty #############
-	%dk_call% dk_validate DKIMPORTS_DIR "%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% "%DKIMPORTS_DIR%/git/contextMenu/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/python/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/python3/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/tcc-rt/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/vc_redist/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/visualstudio/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/vs_coreeditorfonts/DKUNINSTALL.cmd"
-::	%dk_call% "%DKIMPORTS_DIR%/windows-sdk/DKUNINSTALL.cmd"
-	::%dk_call% "%DKIMPORTS_DIR%/wsl/DKUNINSTALL.cmd"
-	
-	::###### Kill lingering processes ######
+	%dk_call% dk_validate DKIMPORTS_DIR %dk_call% dk_DKIMPORTS_DIR
+	%dk_call% "%DKImports_Dir%/git/contextMenu/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/python/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/python3/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/tcc-rt/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/vc_redist/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/visualstudio/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/vs_coreeditorfonts/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/windows-sdk/DKUNINSTALL.cmd"
+rem	%dk_call% "%DKImports_Dir%/wsl/DKUNINSTALL.cmd"
+
+	rem ###### git clean DKBRANCH_DIR ######
+	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+	%dk_call% dk_gitClean %DKBranch_Dir%
+
+	rem ###### Kill lingering processes ######
 	%dk_call% dk_killProcess gpg-agent.exe
 
-	::###### Backup DKBuilder.cmd to C:/ ######
-	echo ### Creating backup of DKBuilder.cmd ###
-	%dk_call% dk_copy "%DKBRANCH_DIR%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd" OVERWRITE
-
-	::###### Remove DK Pins ######
-	%dk_call% dk_quickAccessUnpin "%DIGITALKNOB_DIR%"
+	rem ###### Remove DK Pins ######
+	echo ### Unpin quicklinks ###
+	%dk_call% dk_quickAccessUnpin "%DigitalKnob_Dir%"
 	
-	::###### Delete DK Simlinks ######
+	rem ###### Delete DK Simlinks ######
 	echo ### Deleting Simlinks ###
-	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
-	%dk_call% dk_delete "%DKDESKTOP_DIR%/DigitalKnob"
-	%dk_call% dk_delete "%DKDESKTOP_DIR%/DKBuilder.cmd"
+	%dk_call% dk_validate DKDESKTOP_DIR %dk_call% dk_DKDESKTOP_DIR
+	%dk_call% dk_delete "%DKDesktop_Dir%/DigitalKnob"
+	%dk_call% dk_delete "%DKDesktop_Dir%/DKBuilder.cmd"
 	
-	::###### Delete DK Shortcuts ######
+	rem ###### Delete DK Shortcuts ######
 	echo ### Deleting Shortcuts ###
-	%dk_call% dk_validate DKDESKTOP_DIR "%dk_call% dk_DKDESKTOP_DIR"
-	%dk_call% dk_delete "%DKDESKTOP_DIR%/DigitalKnob.lnk"
+	%dk_call% dk_validate DKDESKTOP_DIR %dk_call% dk_DKDESKTOP_DIR
+	%dk_call% dk_delete "%DKDesktop_Dir%/DigitalKnob.lnk"
+	%dk_call% dk_delete "%DKDesktop_Dir%/DKBuilder.lnk"
 
-	::###### Delete DKCACHE_DIR ######
+	rem ###### Backup DKBuilder.cmd to C:/ ######
+	echo ### Creating backup of DKBuilder.cmd ###
+	%dk_call% dk_copy "%DKBranch_Dir%/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%SystemDrive%/DKBuilder.cmd" OVERWRITE
+	
+	rem ###### Delete DKBranch_Dir_BACKUP ######
+	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+	if exist "%DKBRANCH_DIR%_BACKUP" (
+		%dk_call% dk_delete "%DKBRANCH_DIR%_BACKUP"
+	)
+	
+	rem ###### Delete DKStorage_Dir ######
+	%dk_call% dk_validate DKStorage_Dir %dk_call% dk_DKStorage_Dir
+	%dk_call% dk_delete "%DKStorage_Dir%"
+	
+	rem ###### Delete DKTOOLS_DIR ######
+	%dk_call% dk_validate DKTOOLS_DIR %dk_call% dk_DKTOOLS_DIR
+	%dk_call% dk_delete "%DKTools_Dir%"
+	
+	rem ###### Delete DKDOWNLOAD_DIR ######
+	%dk_call% dk_validate DKDOWNLOAD_DIR %dk_call% dk_DKDOWNLOAD_DIR
+	%dk_call% dk_delete "%DKDownload_Dir%"
+	
+	rem ###### Delete DKCACHE_DIR ######
 	echo ### Deleting DKCACHE_DIR ###
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	%dk_call% dk_delete "%DKCACHE_DIR%"
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+	%dk_call% dk_delete "%DKCache_Dir%"
 
-	::###### Deleting DIGITALKNOB_DIR ######
+	rem ###### Deleting DIGITALKNOB_DIR ######
 	%dk_call% dk_deleteDigitalKnob
 
 %endfunction%
@@ -85,10 +115,9 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0 
 
 	%dk_call% dk_uninstallDigitalKnob
 %endfunction%

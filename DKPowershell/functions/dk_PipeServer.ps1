@@ -8,7 +8,9 @@ if(!$dk_pipeServer_ps1){ $dk_pipeServer_ps1 = 1; } else{ return; } #include guar
 function GLOBAL:dk_pipeServer() {
 	dk_debugFunc 0;
 	
-	$pipeName = "TestPipe"
+	#Write-Host "You can send to this pipe from cmd using  'echo message > \\.\pipe\TestPipe'";
+	$pipeName = "TestPipe";
+	
 	while ($true) {
 		$pipeServer = New-Object System.IO.Pipes.NamedPipeServerStream($pipeName)
 		try {

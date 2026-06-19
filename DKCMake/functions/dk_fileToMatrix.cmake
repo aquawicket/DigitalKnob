@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -41,7 +42,7 @@ function(dk_fileToMatrix)
 		math(EXPR row "row + 1")
 	endforeach()
 #	
-	###### output ######
+	###### return ######
 endfunction()
 
 
@@ -53,12 +54,12 @@ function(DKTEST)
 	dk_fileToMatrix("$ENV{DKCMAKE_FUNCTIONS_DIR_}fileToVariable.txt" myArray)
 	#dk_printVar(myArray)
 	
-#	message("${myArray[0,0]:0:1}")
-#	message("myArray[0,0] = ${myArray[0,0]}")
-#	message("myArray[1,1] = ${myArray[1,1]}")
-#	message("myArray[2,2] = ${myArray[2,2]}")
+#	dk_debug("${myArray[0,0]:0:1}")
+#	dk_debug("myArray[0,0] = ${myArray[0,0]}")
+#	dk_debug("myArray[1,1] = ${myArray[1,1]}")
+#	dk_debug("myArray[2,2] = ${myArray[2,2]}")
 	
 #	foreach(key "${!myArray[@]}")
-#		message("$key: ${myArray[$key]})"
+#		dk_debug("$key: ${myArray[$key]})"
 #	endforeach()
 endfunction()

@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -26,7 +27,7 @@ function(dk_registrySetKey key value data)
 
 	dk_validate(Host_Os "dk_Host_Os()")
 	if(Windows_Host)
-		dk_validate(reg_exe "dk_reg_exe()")
+		dk_validate(reg_exe "dk_depend(reg_exe)")
 		dk_replaceAll(${key}  "/"  "\\"  key)
 		dk_replaceAll(${value}  "/"  "\\"  value)
 		dk_replaceAll(${data}  "/"  "\\"  data)
@@ -45,7 +46,7 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	message("DKTEST")
+	dk_echo("DKTEST")
 	
 	dk_set(dk_exec_PRINT_CALL		1) 			# dk_exec_call
 	dk_set(dk_exec_PRINT_COMMAND	1) 			# dk_exec_command

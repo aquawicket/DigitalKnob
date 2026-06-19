@@ -1,0 +1,4 @@
+############ metal-cpp ############
+# https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip
+
+metal-cpp_Import=https://developer.apple.com/metal/cpp/files/metal-cpp_macOS12_iOS15.zip

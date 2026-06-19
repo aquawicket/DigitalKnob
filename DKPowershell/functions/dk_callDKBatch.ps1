@@ -9,7 +9,7 @@ function Global:dk_callDKBatch() {
 	dk_debugFunc 2 99
 	
     ### get required variables ###
-    #dk_validate cmd_exe "dk_depend cmd_exe"
+    #dk_validate cmd_exe "dk_depend cmd"
     #dk_validate DKBATCH_FUNCTIONS_DIR "dk_DKBRANCH_DIR()"
     
     ### get ALL_BUT_FIRST_ARGS ###

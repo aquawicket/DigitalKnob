@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -91,27 +92,20 @@ include_guard()
 # 	510 Not Extended
 # 	511 Network Authentication Required
 #
-function(dk_urlExists)
+function(dk_urlExists url)
 	dk_debugFunc(1)
-
-
-	dk_httpResponse("${ARGV0}" dk_urlExists)
-	if("${dk_urlExists}" EQUAL "200")
-		set(dk_urlExists true)
-	elseif("${dk_urlExists}" EQUAL "301")
-		set(dk_urlExists true)
-	elseif("${dk_urlExists}" EQUAL "302")
+	
+	dk_httpStatus("${url}" dk_urlExists)
+	if((${dk_httpStatus} GREATER 0) AND (${dk_httpStatus} LESS 400))
 		set(dk_urlExists true)
 	else()
 		set(dk_urlExists false)
 	endif()
 	
-	###### output ######
+	###### return ######
 	set(dk_urlExists ${dk_urlExists} PARENT_SCOPE)
 	if(ARGV1)
 		set(${ARGV1} ${dk_urlExists} PARENT_SCOPE)
-	else()
-		message("${dk_urlExists}") 
 	endif()
 endfunction()
 

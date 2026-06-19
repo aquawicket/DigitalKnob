@@ -1,1 +1,12 @@
-CEF_BINARY_VERSION=128.4.12+g1d7a1f9+chromium-128.0.6613.138
+############ cef_binary ############
+# https://en.wikipedia.org/wiki/Google_Chrome_version_history
+# https://cef-builds.spotifycdn.com/index.html
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64.tar.bz2)					### .tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_minimal.tar.bz2)			### _minimal.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_client.tar.bz2)				### _client.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_release_symbols.tar.bz2)	### _release_symbols.tar.bz2
+# https://cef-builds.spotifycdn.com/cef_binary_81.3.3+g072a5f5+chromium-81.0.4044.138_windows64_debug_symbols.tar.bz2)		### _debug_symbols.tar.bz2
+# https://bitbucket.org/chromiumembedded/cef/get/4044.tar.bz2																### cef source
+# https://gsdview.appspot.com/chromium-browser-official/chromium-81.0.4044.138.tar.xz										### chromium source
+
+cef_binary_Version=128.4.12+g1d7a1f9+chromium-128.0.6613.138

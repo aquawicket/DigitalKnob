@@ -50,7 +50,7 @@ function Global:DKTEST() {
 	###### SET ######
 	dk_call dk_echo "\n";
 	dk_call dk_echo "Test Setting DK3RDPARTY_DIR . . .\n";
-	dk_call dk_DK3RDPARTY_DIR "C:/Users/Administrator/DigitalKnob/3rdParty"
+	dk_call dk_DK3RDPARTY_DIR "${ENV:USERPROFILE}/Digital Knob/3rdParty"
 	dk_call dk_echo "env:DK3RDPARTY_DIR = ${env:DK3RDPARTY_DIR}"
-	dk_call dk_echo "dk_DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR 'C:/Users/Administrator/DigitalKnob/3rdParty')'\n";
+	dk_call dk_echo "dk_DK3RDPARTY_DIR = '$(dk_call dk_DK3RDPARTY_DIR '${ENV:USERPROFILE}/Digital Knob/3rdParty')'\n";
 }

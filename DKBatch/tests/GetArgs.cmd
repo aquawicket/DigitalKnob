@@ -12,18 +12,18 @@ start "" /b cmd /k @"%~d0\:StayAlive:\..\%~pnx0" "params.tmp"
 
 setlocal EnableDelayedExpansion
 
-:: Detect available handles without displaying error messages
-:: Continue only if there is at least 3(2) unused handles. (One is used by stderr redirection)
+rem Detect available handles without displaying error messages
+rem Continue only if there is at least 3(2) unused handles. (One is used by stderr redirection)
 call :enumIO
-:: One of the handles was used by redirection of stderr
-:: So we only need 2 additional free handles to continue.
+rem One of the handles was used by redirection of stderr
+rem So we only need 2 additional free handles to continue.
 if %freeSlots% LSS 2 (
     echo Not enough IO Slots.
     exit /b
 )
 
-:: First , do the permanent redirection of stderr. We don't have to know the backup handle.
-:: The order of redirection is critical: stderr ---> freeSlots ---> usedSlots
+rem First , do the permanent redirection of stderr. We don't have to know the backup handle.
+rem The order of redirection is critical: stderr ---> freeSlots ---> usedSlots
 set "stderr_permanent=break 2>nul"
 for /L %%A in (%freeSlots%,-1,1) do set "stderr_permanent=!stderr_permanent! !freeIO[%%A]!>&2"
 for /L %%A in (%usedSlots%,-1,1) do set "stderr_permanent=!stderr_permanent! !usedIO[%%A]!>&2"
@@ -39,7 +39,7 @@ set usedIO[
 set stderr_permanent
 
 
-:: Next do a permanent redirection of stdout and stdin by known free handles.
+rem Next do a permanent redirection of stdout and stdin by known free handles.
 (
     endlocal & endlocal %= To preserve prompt value after fatal error =%
     prompt #
@@ -56,11 +56,11 @@ set /a "freeSlots=usedSlots=0"
 2>nul (
     for /L %%A in (3,1,8) do call :nextIO 9 %%A
 )
-:: If non of the handles 4 to 8 are free then there are three possibilities for handle 9
-:: 1. It is occupied before us, then we MAY have one free handle which is occupied by redirection of 9
-:: 2. It is occupied by redirection of stderr, then we have no free handles
-:: 3. It is free, then have only one free handle which is handle 9
-:: either way we don't have the required free handles (2 handles)
+rem If non of the handles 4 to 8 are free then there are three possibilities for handle 9
+rem 1. It is occupied before us, then we MAY have one free handle which is occupied by redirection of 9
+rem 2. It is occupied by redirection of stderr, then we have no free handles
+rem 3. It is free, then have only one free handle which is handle 9
+rem either way we don't have the required free handles (2 handles)
 if %freeSlots% NEQ 0 2>nul call :nextIO 1 9
 if %freeSlots% NEQ 0 2>nul (
     set /a "highUsed=usedIO[%usedSlots%]"

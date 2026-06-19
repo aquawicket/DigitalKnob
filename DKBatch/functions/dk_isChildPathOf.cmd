@@ -1,23 +1,29 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_isChildPathOf(haystack, needle, rtn_var)
-::#
-::#   https://en.wikipedia.org/wiki/Dirname
-::#
+rem ################################################################################
+rem # dk_isChildPathOf(haystack, needle, rtn_var)
+rem #
+rem #   https://en.wikipedia.org/wiki/Dirname
+rem #
 :dk_isChildPathOf
 %setlocal%
-	%dk_call% dk_debugFunc 2 3
 
 	set "_haystack_=%~1"
-    set "_haystack_=%_haystack_:/=\%"									&:: replace all '/' with '\'
-	set "_haystack_=%_haystack_::=%"									&:: remove all ':'
-    if "%_haystack_:~0,1%" equ "\" set "_haystack_=%_haystack_:~1%"		&:: remove first character if it's a '\'
+    set "_haystack_=%_haystack_:/=\%"									&rem replace all '/' with '\'
+	set "_haystack_=%_haystack_::=%"									&rem remove all ':'
+    if "%_haystack_:~0,1%" equ "\" set "_haystack_=%_haystack_:~1%"		&rem remove first character if it's a '\'
 	
     set "_needle_=%~2"
     set "_needle_=%_needle_:/=\%"
@@ -48,13 +54,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-    %dk_call% dk_debugFunc 0
 
 
-    ::###### Using if return value
+    rem ###### Using if return value
     %dk_call% dk_echo
     set "childPath=C:/Program Files/Internet Explorer/en-US"
     set "parentPath=C:/Program Files"
@@ -62,37 +67,37 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if /i "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
    
     %dk_call% dk_echo
-	set "childPath=/C:/Users/Administrator/DigitalKnob/nonexistant"
-    set "parentPath=Administrator/DigitalKnob"
+	set "childPath=/%USERPROFILE:\=/%/Digital Knob/nonexistant"
+    set "parentPath=Administrator/Digital Knob"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" result
     if /i "%result%" equ "true" (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using if ERRORLEVEL
+    rem ###### Using if ERRORLEVEL
     %dk_call% dk_echo
-    set "childPath=C:/Users/Administrator/DigitalKnob/DKPowershell/functions"
-    set "parentPath=/C/Users/Administrator/DigitalKnob"
+    set "childPath=%USERPROFILE:\=/%/Digital Knob/DKPowershell/functions"
+    set "parentPath=/C/Users/Administrator/Digital Knob"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%"
     if NOT ERRORLEVEL 1 (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
    
     %dk_call% dk_echo
-    set "childPath=/C:/Users/Administrator/DigitalKnob/"
+    set "childPath=/%USERPROFILE:\=/%/Digital Knob/"
     set "parentPath=C:/"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%"
     if NOT ERRORLEVEL 1 (%dk_call% dk_echo "the path is a child of the parentPath") else (%dk_call% dk_echo "the path is NOT a child of the parentPath")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
    
    
-    ::###### Using && and || conditionals
+    rem ###### Using && and || conditionals
     %dk_call% dk_echo
     set "childPath=C:/Users/"
     set "parentPath=D:/"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" && (%dk_call% dk_echo "the path is a child of the parentPath") || (%dk_call% dk_echo "the path is NOT a child of the parentPath")
 
     %dk_call% dk_echo
-    set "childPath=/C:/Users/Administrator/DigitalKnob/DKBash/functions"
-    set "parentPath=C:/Users/Administrator/DigitalKnob/DKBash"
+    set "childPath=/%USERPROFILE:\=/%/Digital Knob/DKBash/functions"
+    set "parentPath=%USERPROFILE:\=/%/Digital Knob/DKBash"
     %dk_call% dk_isChildPathOf "%childPath%" "%parentPath%" && (%dk_call% dk_echo "the path is a child of the parentPath") || (%dk_call% dk_echo "the path is NOT a child of the parentPath")
-    ::FIXME: ERRORLEVEL is still 1
+    rem FIXME: ERRORLEVEL is still 1
 %endfunction%

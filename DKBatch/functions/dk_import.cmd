@@ -1,125 +1,122 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#########################################################################
-::# dk_import() LIBRARY APP
-::#
-::#	This is a flexable super function for importing just about anything into DigitalKnob
-::#	The idea is to provide a url or path and dk_import will do the rest. 
-::#
-::#	@url	- The online path of the .git or file to import
-::#
-::#	github GIT:	https://github.com/orginization/library.git		dkimportGit(url) #branch/tag #PATCH
-::#	github DL:	https://github.com/orginization/library			dkimportGit(url) #branch/tag #PATCH
-::#	lib url DL:	https://website.com/library.zip					dkimportDownload(url) #PATCH
-::#	exe url DL:	https://website.com/executable.exe 				dkimportDownload(url) #PATCH
-::#
-::#	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
-::#
+rem #########################################################################
+rem # dk_import() LIBRARY APP
+rem #
+rem #	This is a flexable super function for importing just about anything into DigitalKnob
+rem #	The idea is to provide a url or path and dk_import will do the rest. 
+rem #
+rem #	@url	- The online path of the .git or file to import
+rem #
+rem #	github GIT:	https://github.com/orginization/library.git		dkimportGit(url) #branch/tag #PATCH
+rem #	github DL:	https://github.com/orginization/library			dkimportGit(url) #branch/tag #PATCH
+rem #	lib url DL:	https://website.com/library.zip					dkimportDownload(url) #PATCH
+rem #	exe url DL:	https://website.com/executable.exe 				dkimportDownload(url) #PATCH
+rem #
+rem #	TODO: https://cmake.org/cmake/help/latest/module/FetchContent.html 
+rem #
 :dk_import
-::%setlocal%
-	%dk_call% dk_debugFunc 0 99
+rem %setlocal%
 	
-	::set "Import_Path=%CD:\=/%"
-	if NOT defined CURRENT_IMPORT (set "CURRENT_IMPORT=%CD:\=/%")
-	set "Import_Path=%CURRENT_IMPORT%"
-	::%dk_call% dk_assertPath "%Import_Path%/dkconfig.txt"
-	%dk_call% dk_getFileParams "%Import_Path%/dkconfig.txt"
-	%dk_call% dk_validate Host_Tuple "%dk_call% dk_Host_Tuple"
-	%dk_call% dk_basename %Import_Path% Import_Name
+	%dk_call% dk_importVariables %*
+	rem %dk_call% dk_importVariables PRINTVARS
 	
-	%dk_call% dk_getParameterValue APP %*
-	if /i "!%Import_Name%_Type!" equ "APP" (set "APP=1")
-	if defined APP (
-		%dk_call% dk_validate DKTOOLS_DIR "%dk_call% dk_DKTOOLS_DIR"
-		set "INSTALL_ROOT=INSTALL_ROOT !DKTOOLS_DIR!"
-	)
+	if not defined CURRENT_PLUGIN (
+		set "CURRENT_PLUGIN=%PLUGIN%"
+	)	
 	
-	if defined %Import_Name%_%Host_Tuple%_Import (
-		%dk_call% dk_importVariables !%Import_Name%_%Host_Tuple%_Import! %INSTALL_ROOT%
-	) else (
-		%dk_call% dk_assertVar %Import_Name%_Import
-		%dk_call% dk_importVariables !%Import_Name%_Import! %INSTALL_ROOT%
-	)
-	if EXIST "%PLUGIN_Install_Path%" (
-		echo %PLUGIN_Install_Name% already installed
-		%return%
-	)
-	%dk_call% dk_download %PLUGIN_Url%
-	
-	%dk_call% dk_getExtension %PLUGIN_Url% PLUGIN_Url_Extension
-	if /i "%PLUGIN_Url_Extension%" equ ".7z"		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".bz"		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".bz2" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".gz" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".rar" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".sfx.exe" 	(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".tar" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".tar.gz" 	(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".tgz" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".xz" 		(set "FileType=Archive")
-	if /i "%PLUGIN_Url_Extension%" equ ".zip" 		(set "FileType=Archive")
-	
-	if /i "%FileType%" equ "Archive" (
-		%dk_call% dk_smartExtract "%dk_download%" "%PLUGIN_Install_Path%"
+	if EXIST "!%CURRENT_PLUGIN%_Install_Path!" (
+		%dk_call% dk_notice "!%CURRENT_PLUGIN%_Install_Name! already installed"
+		rem %return%
 	)
 
-%endfunction%
-	
-	set "url=%~1"
-	%dk_call% dk_allButFirstArgs %*
-	set ARGN=%dk_allButFirstArgs%
-	::%dk_call% dk_getParameter NO_HALT REMOVE
-	
-	%dk_call% dk_importVariables %url% %ARGN%
-	%dk_call% dk_assertVar CURRENT_PLUGIN
+	if defined %CURRENT_PLUGIN%_Url (
+		rem NOTE: Let's not forget that we rename some download files to better identify them. These are also the renamed files that 
+		rem will be on a backup server. So when we look for the download using the original url, we will check the alternate server
+		rem for the file. BUT. That file is renamed, so we need to check for the new name (${${PLUGIN}_Download_Basename}).
 
-::	if NOT defined DKOFFLINE (
-::		rem ###### Import from Git Repository ######
-::		%dk_call% dk_getExtension %url% extension
-::		if /i "!extension!" equ ".git" (
-::			
-::			%dk_call% dk_depend git
-::			
-::			if NOT EXIST "!%CURRENT_PLUGIN%_DIR!/.git" (
-::				%dk_call% dk_validate DK3RDPARTY_DIR "%dk_call% dk_DK3RDPARTY_DIR"
-::				%dk_call% dk_chdir "%DK3RDPARTY_DIR%"
-::				if EXIST "!%CURRENT_PLUGIN%_DIR!" (
-::					%dk_call% dk_delete(!%CURRENT_PLUGIN%_DIR!)
-::				) else (
-::					%dk_call% dk_mkdir(!%CURRENT_PLUGIN%_DIR!)
-::				)
-::				%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-::				%dk_call% dk_command %git_exe% clone !%CURRENT_PLUGIN%_URL! !%CURRENT_PLUGIN%_DIR!
-::			)
-::			%dk_call% dk_chdir !%CURRENT_PLUGIN%_DIR!
-::			%dk_call% dk_exec %git_exe% checkout -- .
-::			%dk_call% dk_exec %git_exe% checkout !%CURRENT_PLUGIN%_BRANCH!)
-::			%dk_call% dk_exec %git_exe% pull
-::			if defined %CURRENT_PLUGIN%_TAG (
-::				%dk_call% dk_exec %git_exe% checkout !{%CURRENT_PLUGIN%_TAG!
-::			)
-::			
-::		rem ###### Import from Download File ######
-::		) else (
-			%dk_call% dk_debug "CURRENT_PLUGIN = %CURRENT_PLUGIN%"
-			%dk_call% dk_debug "%CURRENT_PLUGIN%_Import_Name = !%CURRENT_PLUGIN%_Import_Name!"
-			%dk_call% dk_verbose "%dk_call% dk_install !%CURRENT_PLUGIN%_Import_Name! %ARGN%"
-			
-			::%dk_call% dk_install %CURRENT_PLUGIN% %ARGN% %NO_HALT%
-::		)
-::	)
-	
-	::%dk_call% dk_getParameter PATCH %ARGV%
-	::%dk_call% dk_getParameter PATCH
-	if defined PATCH (
-		%dk_call% dk_patch !%CURRENT_PLUGIN%_Import_Name! !%CURRENT_PLUGIN%_DIR!
+		%dk_call% dk_download "!%CURRENT_PLUGIN%_Url!"
+		%dk_call% dk_assertVar dk_download
+		set "dk_import=!dk_download!"
+		
+		set "%CURRENT_PLUGIN%_Download=!dk_download!"
+		%dk_call% dk_assertVar %CURRENT_PLUGIN%_Download
+		%dk_call% dk_getExtension "!%CURRENT_PLUGIN%_Download!" %CURRENT_PLUGIN%_Download_Extension
+		
+			   if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".7z" (
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".bz" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".bz2" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".gz" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".rar" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".sfx.exe" (	
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".tar" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".tar.gz" (	
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".tar.xz" (	
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".tgz" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".xz" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		) else if /i "!%CURRENT_PLUGIN%_Download_Extension!" equ ".zip" (		
+			set "%CURRENT_PLUGIN%_Download_Filetype=Archive"
+		)
+		
+		if /i "!%CURRENT_PLUGIN%_Download_Filetype!" equ "Archive" (
+			%dk_call% dk_smartExtract "!%CURRENT_PLUGIN%_Download!" "!%CURRENT_PLUGIN%_Install_Path!"
+		)
+		
+		rem ### Import from Git
+		if /i "!%CURRENT_PLUGIN%_Download_Filetype!" equ "Git" (
+			if NOT EXIST "%PLUGIN_Install_Path%/.git" (
+				%dk_call% dk_todo "Import From Git"
+				rem %dk_call% dk_gitClone "%PLUGIN_Url%" "%PLUGIN_Install_Path%"
+			)
+		)
+		
+		rem ### Import from Executable
+		if /i "!%CURRENT_PLUGIN%_Download_Filetype!" equ "Executable" (
+			%dk_call% dk_exec "%dk_download%"
+			%dk_call% dk_todo "Import from Executable"
+		)
 	)
 	
+	rem dk_getParameter PATCH %*
+	rem if defined PATCH (
+	rem 		if defined %CURRENT_PLUGIN%_Import_Name if defined %CURRENT_PLUGIN%_Install_Path (
+	rem			%dk_call% dk_todo "dk_patch"
+rem	%dk_call% dk_copy "!%CURRENT_PLUGIN%_Import_Path!" "!%CURRENT_PLUGIN%_Install_Path!"
+	rem			rem %dk_call% dk_patch "!%CURRENT_PLUGIN%_Import_Name!" "!%CURRENT_PLUGIN%_Install_Path!"
+	rem		)
+	rem )
+	
+	
+	
+rem	set "_SCOPE_=%~n0"
+rem	for /F "tokens=* delims=" %%G in ('set %PLUGIN%') do (
+rem		if "%_SCOPE_%" equ "%~n0" endlocal
+rem		set "%%G"
+rem		set "PLUGIN=%PLUGIN%"
+rem	)
 %endfunction%
 
 
@@ -135,12 +132,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
-	%dk_call% dk_debugFunc 0
 	
-	%dk_call% dk_depend git
-	
-	::%dk_call% #dk_import "https://github.com/madler/zlib/archive/d4768283.zip"
-	::%dk_call% dk_import https://www.dependencywalker.com/depends22_x64.zip
+	%dk_call% dk_validate git %dk_call% dk_depend git
 %endfunction%

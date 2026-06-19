@@ -4,6 +4,6 @@
 # https://tinsuke.wordpress.com/2011/02/17/how-to-cross-compiling-libraries-for-ios-armv6armv7i386
 # https://github.com/DanBloomberg/leptonica.git
 # https://github.com/DanBloomberg/leptonica/archive/refs/tags/1.82.0.zip
-# https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip
+# https://github.com/DanBloomberg/leptonica/archive/96a3d7451e7d717d8a0c88436f5ff7ea7129412e.zip
 
-leptonica_Import=https://github.com/DanBloomberg/leptonica/archive/96a3d745.zip
+leptonica_Import=https://github.com/DanBloomberg/leptonica/archive/96a3d7451e7d717d8a0c88436f5ff7ea7129412e.zip

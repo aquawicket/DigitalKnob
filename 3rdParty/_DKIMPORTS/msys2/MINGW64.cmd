@@ -1,35 +1,42 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::https://www.msys2.org/wiki/Launchers
+rem https://www.msys2.org/wiki/Launchers
 %dk_call% dk_installMsys2.cmd
-::set "MSYS2=%DKBRANCH_DIR%\3rdParty\msys2-x86_64-20221216"
+rem set "MSYS2=%DKBRANCH_DIR%/3rdParty/msys2-x86_64-20221216"
 
 goto main
-:: env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
-:: /usr/bin/bash -li
+rem  env MSYSTEM=MINGW64  "Set each NAME to VALUE in the environment and run COMMAND"
+rem  /usr/bin/bash -li
 
-::   -l				= "invoke a new shell process"
-::   -i 			= "make the shell interactive"
-::   -c <command> 	= "run a command"
+rem    -l				= "invoke a new shell process"
+rem    -i 			= "make the shell interactive"
+rem    -c <command> 	= "run a command"
 
-:: Opening a new interactive shell
-::%msys2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
-::%msys2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -li
+rem  Opening a new interactive shell
+rem %msys2%/usr/bin/env MSYSTEM=MSYS /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=MINGW32 /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=CLANG32 /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=CLANG64 /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=CLANGARM64 /usr/bin/bash -li
+rem %msys2%/usr/bin/env MSYSTEM=UCRT64 /usr/bin/bash -li
 
-:: Run a script in a new launched shell
-::%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/DigitalKnob/Development/build.sh
+rem  Run a script in a new launched shell
+rem %msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc /c/Users/Administrator/Digital Knob/Development/build.sh
 
-::###### MINGW64 ######
+rem ###### MINGW64 ######
 :console
 	cls
 	%dk_call% dk_echo "You are in a Windows console environment"
@@ -38,12 +45,12 @@ goto main
 	pause
 %endfunction%
 
-::###### MINGW64 ######
+rem ###### MINGW64 ######
 :mingw64
 	%msys2%/usr/bin/env MSYSTEM=MINGW64 /usr/bin/bash -lc "clear && echo You are in a MINGW64 terminal environment && echo && echo PATH = $PATH && read -p 'press any key to continue' "
 %endfunction%
 
-::###### Main ######
+rem ###### Main ######
 :main
 	%dk_call% dk_echo "This will alernate between different shell environments"
 	%dk_call% dk_echo ""

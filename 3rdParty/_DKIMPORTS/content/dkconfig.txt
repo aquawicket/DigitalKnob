@@ -1,0 +1,6 @@
+############ content ############
+# https://github.com/mdn/content.git
+# https://www.peterbe.com/plog/how-to-get-all-of-mdn-web-docs-running-locally
+# https://github.com/mdn/content/archive/3020adac456187cf18edeb20613482fb73b38c1e.zip
+
+content_Import=https://github.com/mdn/content/archive/3020adac456187cf18edeb20613482fb73b38c1e.zip

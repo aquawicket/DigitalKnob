@@ -1,0 +1,5 @@
+############ blissos ############
+# Bliss-Surface-v14.10.3-x86_64-OFFICIAL-foss-20241013.zip
+# https://sourceforge.net/projects/blissos-x86/files/latest/download
+
+blissos_Import=https://sourceforge.net/projects/blissos-x86/files/latest/download

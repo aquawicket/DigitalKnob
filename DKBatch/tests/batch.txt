@@ -1,4 +1,4 @@
-:: run this file as a batch file with: cmd /V:ON < batch.txt
+:: run this file as a batch file with: cmd /V:ON < batch.txt > nul
 
 @echo off
 rem Echo off just suppress echoing of the prompt and each loop of FOR command
@@ -9,7 +9,7 @@ pause
 X
 
 rem This behavior allows to put data for a SET /P command after it
-set /P var=Enter data: 
+rem set /P var=Enter data: 
 This is the data for previous command!
 echo Data read: "%var%"
 

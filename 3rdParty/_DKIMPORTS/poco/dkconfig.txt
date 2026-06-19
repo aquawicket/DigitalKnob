@@ -1,0 +1,6 @@
+############ poco ############
+# http://podofo.sourceforge.net
+# https://github.com/pocoproject/poco.git
+# https://github.com/pocoproject/poco/archive/c735162abc174bc1383318876eaa5f5cee3df5ad.zip
+
+poco_Import=https://github.com/pocoproject/poco/archive/c735162abc174bc1383318876eaa5f5cee3df5ad.zip

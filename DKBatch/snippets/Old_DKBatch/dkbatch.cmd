@@ -1,30 +1,30 @@
-:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
+rem This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
-:: For the latest information, see https://github.com/aquawicket/DigitalKnob
+rem For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
-:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+rem Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
 ::
-:: Permission is hereby granted, free of charge, to any person obtaining a copy
-:: of this software and associated documentation files(the "Software"), to deal
-:: in the Software without restriction, including without limitation the rights
-:: to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-:: copies of the Software, and to permit persons to whom the Software is
-:: furnished to do so, subject to the following conditions :
+rem Permission is hereby granted, free of charge, to any person obtaining a copy
+rem of this software and associated documentation files(the "Software"), to deal
+rem in the Software without restriction, including without limitation the rights
+rem to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+rem copies of the Software, and to permit persons to whom the Software is
+rem furnished to do so, subject to the following conditions :
 ::
-:: The above copyright notice and this permission notice shall be included in all
-:: copies or substantial portions of the Software.
+rem The above copyright notice and this permission notice shall be included in all
+rem copies or substantial portions of the Software.
 ::
-:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-:: SOFTWARE.
+rem THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+rem IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+rem FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+rem AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+rem SOFTWARE.
 
-:: https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
-:: https://home.csulb.edu/~murdock/dosindex.html
-:: https://ss64.com/nt/
+rem https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
+rem https://home.csulb.edu/~murdock/dosindex.html
+rem https://ss64.com/nt/
 
 @echo off
 ::set "STAY_OPEN=1"
@@ -47,7 +47,7 @@ set "DOEND=endlocal & if %DEBUG%==1 echo [94m^<-- %~n1^(^)[0m "
 if /i "%~2" equ "DKEND" %DOEND%:[35m!%1![0m & echo. & if "!STAY_OPEN!" equ "1" ( goto:eof ) else ( if "!DKLOADED!" equ "%~1" ( timeout 30 & exit %ERRORLEVEL% ) else ( goto:eof ) )
 set "DKEND=call %0 %%0 DKEND & call return %%0 %%0"
 
-::: NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:rem NO_RELATIVE_PATHS() :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if %NO_RELATIVE_PATHS%==0 goto :end
 cd "%DKBATCH_PATH%CATCH"
 set cnt=0
@@ -57,7 +57,7 @@ if "%cnt%" gtr "1" (
 )
 :end
 
-::: add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:rem add %DKEND% to the end of the file if needed :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 if NOT EXIST "%~1" ( echo [91m cannot find "%~1" [0m & goto :end )
 ::echo [91m Testins for DKEND in "%~1" [0m
 >nul findstr /i /c:"%%DKEND%%" "%~1" || ( echo.>>"%~1" & echo.>>"%~1" &echo %%DKEND%%>>"%~1" )
@@ -81,9 +81,9 @@ if defined DKLOADED (
 
 
 
-::#########################################################################
-::     DKBATCH first run entry point (NOT LOADED YET)
-::#########################################################################
+rem #########################################################################
+rem     DKBATCH first run entry point (NOT LOADED YET)
+rem #########################################################################
 
 ::###### %TRY_FATAL% ######
 set "TRY_FATAL=DKERROR ERROR %1 "
@@ -114,19 +114,19 @@ if "%STAY_OPEN%" neq "" (
 
 ::if NOT defined in_subprocess (cmd /k set in_subprocess=y ^& %caller% %*) & exit )
 
-::#########################################################################
-::     DKBATCH first subprocess creation entry point (NO SUBPROCESS YET)
-::#########################################################################
+rem #########################################################################
+rem     DKBATCH first subprocess creation entry point (NO SUBPROCESS YET)
+rem #########################################################################
 
-:: Print debug function entry
+rem Print debug function entry
 %DKIN%
 if %DEBUG_dkbatch.cmd%==1 echo. & echo [94m--^> %~n0^(%*^)[0m
 
-:: import %DKBATCH% command to global environment variables
+rem import %DKBATCH% command to global environment variables
 if "%DKBATCH%" equ "" setx DKBATCH "@echo off & call %0 %%0 %%* & @setlocal enableextensions enabledelayedexpansion"
 
 
-:: Add dkbatch subfolders to the user PATH environment variable
+rem Add dkbatch subfolders to the user PATH environment variable
 ::###### AddDKPaths() ######
 setlocal enabledelayedexpansion
 set "folders=%DKBATCH_PATH%"

@@ -27,16 +27,16 @@
 
 set "cmake_Import=https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1-windows-i386.msi"
 set "GIT_DL=https://github.com/git-for-windows/git/releases/download/v2.30.1.windows.1/Git-2.30.1-32-bit.exe"
-set "DIGITALKNOB_DIR=%USERPROFILE%\DigitalKnob"
+set "DIGITALKNOB_DIR=%USERPROFILE%\Digital Knob"
 set "DKCMAKE_DIR=%DIGITALKNOB_DIR%/Development/DKCMake"
-if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
-if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake_exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
-if NOT EXIST "%cmake_exe%" ( ERROR "Could NOT locate cmake_exe" )
+if EXIST "%ProgramFiles:\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles:\=/%/CMake/bin/cmake.exe"
+if EXIST "%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe" set "cmake.exe=%ProgramFiles(x86):\=/%/CMake/bin/cmake.exe"
+if NOT EXIST "%cmake.exe%" ( ERROR "Could NOT locate cmake.exe" )
 
 :begin
 cls
 
 set "file=%DKCMAKE_DIR%/other/Test.cmake"
-"%cmake_exe%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
+"%cmake.exe%" -DDKCMAKE_DIR=%DKCMAKE_DIR% -P "%file%"
 
 pause

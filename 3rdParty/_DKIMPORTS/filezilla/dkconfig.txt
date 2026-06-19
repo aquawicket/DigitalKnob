@@ -1,2 +1,5 @@
-FileZilla_Import=https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip
-FileZilla_Type=APP
+############ fileZilla ############
+# https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip
+ 
+fileZilla_Type=Tool
+fileZilla_Import=https://filezilla-project.org/nightlies/latest/win64/FileZilla.zip

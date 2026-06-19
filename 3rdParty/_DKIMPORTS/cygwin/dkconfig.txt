@@ -1,5 +1,7 @@
 ############ cgywin ############
 # https://www.cygwin.com
 # https://cygwin.com/faq/faq.html#faq.setup.cli
+# https://www.cygwin.com/setup-x86_64.exe
 
 cygwin_Windows_X86_64_Import=https://www.cygwin.com/setup-x86_64.exe
+cygwin_Import=https://www.cygwin.com/setup-x86_64.exe

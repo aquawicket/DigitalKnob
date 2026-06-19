@@ -1,31 +1,32 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ## https://stackoverflow.com/a/31044116/688352
 
 ## USAGE:  Place this cmake command into the command line for any DKINSTALL.cmake build scripts using any of these these libraries
-##	-C$ENV{DKCMAKE_DIR}/DKCache.cmake
+##	-C${DKCMAKE_DIR}/DKCache.cmake
 ##
 ## Also note that cmake DOES accept multiple -C'cacheFile' commands at a time, so we can split these up later.
 dk_return()
 
 MESSAGE("################ DKCache.cmake ##################")
-message("WARNING: DKCache.cmake will be discontinued.")
+dk_echo("WARNING: DKCache.cmake will be discontinued.")
 dk_return()
 MESSAGE("OS: ${OS}")
 if(NOT OS)
-	message(FATAL_ERROR "The OS variable has not been set for DKCache.cmake")
+	dk_echo(FATAL_ERROR "The OS variable has not been set for DKCache.cmake")
 endif()
 
 #project(HelloWorld C CXX)
@@ -34,7 +35,7 @@ set(DK3RDPARTY_DIR "C:/Users/$ENV{USERNAME}/DigitalKnob/Development/3rdParty" CA
 
 ##${STDINT}
 
-set(ZLIB $ENV{DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
+set(ZLIB ${DK3RDPARTY_DIR}/zlib-1.2.11 CACHE PATH "" FORCE)
 if(EXISTS ${zlib}/${Target_Tuple}/Release/zlibstatic.lib)
 	set(ZLIB_INCLUDE_DIR ${zlib} CACHE PATH "" FORCE)
 	set(ZLIB_LIBRARY ${zlib}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
@@ -42,9 +43,9 @@ if(EXISTS ${zlib}/${Target_Tuple}/Release/zlibstatic.lib)
 	set(ZLIB_LIBRARY_RELEASE ${zlib}/${Target_Tuple}/Release/zlibstatic.lib CACHE FILEPATH "" FORCE)
 endif()
 
-#execute_process(COMMAND ${cmd_exe} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
+#execute_process(COMMAND ${cmd.exe} /c set /p DUMMY=Hit ENTER to continue... WORKING_DIRECTORY C:/)
 
-set(BZIP2 $ENV{DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
+set(BZIP2 ${DK3RDPARTY_DIR}/bzip2-1.0.6 CACHE PATH "" FORCE)
 if(EXISTS ${bzip2}/${Target_Tuple}/libbz2.lib)
 	set(BZIP2_ROOT ${bzip2} CACHE PATH "" FORCE)
 	set(BZIP2_INCLUDE_DIR ${bzip2} CACHE PATH "" FORCE)
@@ -55,35 +56,35 @@ if(EXISTS ${bzip2}/${Target_Tuple}/libbz2.lib)
 endif()
 
 
-set(TIFF $ENV{DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
+set(TIFF ${DK3RDPARTY_DIR}/tiff-4.0.3 CACHE PATH "" FORCE)
 if(EXISTS ${tiff}/${Target_Tuple}/Release/tiff-static.lib)
 	set(TIFF_INCLUDE_DIR ${tiff}/libtiff CACHE PATH "" FORCE)
 	set(TIFF_INCLUDE_DIR2 ${tiff}/${Target_Tuple} CACHE PATH "" FORCE)
 endif()
 
 
-set(PNG $ENV{DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
+set(PNG ${DK3RDPARTY_DIR}/libpng-1.7.0beta34 CACHE PATH "" FORCE)
 if(EXISTS ${PNG}/${Target_Tuple}/Release/libpng17_static.lib)
 	set(PNG_INCLUDE_DIR ${PNG} CACHE PATH "" FORCE)
 	set(PNG_INCLUDE_DIR2 ${PNG}/${Target_Tuple} CACHE PATH "" FORCE)
 endif()
 
 
-set(JPEG $ENV{DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
+set(JPEG ${DK3RDPARTY_DIR}/libjpeg-turbo-1.5.3 CACHE PATH "" FORCE)
 if(EXISTS ${JPEG}/${Target_Tuple}/Release/turbojpeg-static.lib)
 	set(JPEG_INCLUDE_DIR ${JPEG} CACHE PATH "" FORCE)
 	set(JPEG_INCLUDE_DIR2 ${JPEG}/${Target_Tuple} CACHE PATH "" FORCE)
 endif()
 
 
-set(GIF $ENV{DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
+set(GIF ${DK3RDPARTY_DIR}/ CACHE PATH "" FORCE)
 if(EXISTS ${GIF}/${Target_Tuple}/Release/lib/.libs/libgif.lib)
 	set(GIF_INCLUDE_DIR ${GIF} CACHE PATH "" FORCE)
 	set(GIF_INCLUDE_DIR2 ${GIF}/${Target_Tuple} CACHE PATH "" FORCE)
 endif()
 
 
-set(FREETYPE $ENV{DK3RDPARTY_DIR}/freetype-2.5.5 CACHE PATH "" FORCE)
+set(FREETYPE ${DK3RDPARTY_DIR}/freetype-2.5.5 CACHE PATH "" FORCE)
 if(EXISTS ${FREETYPE}/${Target_Tuple}/Release/freetype.lib)
 	set(FREETYPE_INCLUDE_DIRS ${FREETYPE}/include CACHE PATH "" FORCE)
 	set(FREETYPE_INCLUDE_DIR_freetype2 ${FREETYPE}/include CACHE PATH "" FORCE)
@@ -93,7 +94,7 @@ if(EXISTS ${FREETYPE}/${Target_Tuple}/Release/freetype.lib)
 	set(FREETYPE_LIBRARY_RELEASE ${FREETYPE}/${Target_Tuple}/Release/freetype.lib CACHE FILEPATH "" FORCE)
 endif()
 
-set(SDL2 $ENV{DK3RDPARTY_DIR}/SDL2-2.0.14 CACHE PATH "" FORCE)
+set(SDL2 ${DK3RDPARTY_DIR}/SDL2-2.0.14 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2}/${Target_Tuple}/Release/SDL2.lib)
 	set(SDL2_DIR ${SDL2} CACHE PATH "" FORCE)
 	set(SDL2_INCLUDE_DIR ${SDL2}/include CACHE PATH "" FORCE)
@@ -108,7 +109,7 @@ if(EXISTS ${SDL2}/${Target_Tuple}/Release/SDL2.lib)
 endif()
 
 
-set(SDL2_IMAGE $ENV{DK3RDPARTY_DIR}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
+set(SDL2_IMAGE ${DK3RDPARTY_DIR}/SDL2_image-2.0.1 CACHE PATH "" FORCE)
 if(EXISTS ${SDL2_IMAGE}/${Target_Tuple}/lib/Release/SDL_image.lib)
 	set(SDL2_IMAGE_INCLUDE_DIR ${SDL2_IMAGE} CACHE PATH "" FORCE)
 	set(SDL2_IMAGE_LIBRARY_TEMP ${SDL2_IMAGE}/${Target_Tuple}/lib/Release/SDL_image.lib CACHE FILEPATH "" FORCE)
@@ -118,7 +119,7 @@ if(EXISTS ${SDL2_IMAGE}/${Target_Tuple}/lib/Release/SDL_image.lib)
 endif()
 
 
-set(SFML $ENV{DK3RDPARTY_DIR}/SFML-2.4.2 CACHE PATH "" FORCE)
+set(SFML ${DK3RDPARTY_DIR}/SFML-2.4.2 CACHE PATH "" FORCE)
 if(EXISTS ${SFML}/${Target_Tuple}/lib/Release/sfml-main.lib)
 	set(SFML_INCLUDE_DIR ${SFML}/include CACHE FILEPATH "" FORCE)
 	set(SFML_MAIN_LIBRARY_DEBUG ${SFML}/${Target_Tuple}/lib/Debug/sfml-main-d.lib CACHE FILEPATH "" FORCE)
@@ -134,7 +135,7 @@ if(EXISTS ${SFML}/${Target_Tuple}/lib/Release/sfml-main.lib)
 endif()
 
 # https://cmake.org/cmake/help/latest/module/FindGLEW.html
-set(GLEW $ENV{DK3RDPARTY_DIR}/glew-2.2.0 CACHE PATH "" FORCE)
+set(GLEW ${DK3RDPARTY_DIR}/glew-2.2.0 CACHE PATH "" FORCE)
 if(EXISTS ${GLEW}/${Target_Tuple}/lib/Release/libglew32.lib)
 	##set(GLEW_DIR ${GLEW}/build/cmake CACHE PATH "" FORCE)
 	set(GLEW_USE_STATIC_LIBS ON CACHE BOOL "" FORCE)
@@ -150,7 +151,7 @@ if(EXISTS ${GLEW}/${Target_Tuple}/lib/Release/libglew32.lib)
 endif()
 
 
-set(OPENSSL $ENV{DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
+set(OPENSSL ${DK3RDPARTY_DIR}/openssl-1.0.2h-vs2015 CACHE PATH "" FORCE)
 if(EXISTS ${openssl}/lib/ssleay32MT.lib)
 	set(CMAKE_USE_OPENSSL ON CACHE BOOL "" FORCE)
 	set(OPENSSL_INCLUDE_DIR ${openssl}/include CACHE PATH "" FORCE)
@@ -161,7 +162,7 @@ if(EXISTS ${openssl}/lib/ssleay32MT.lib)
 endif()
 
 
-set(OPENAL $ENV{DK3RDPARTY_DIR}/openal-1.15.1 CACHE PATH "" FORCE)
+set(OPENAL ${DK3RDPARTY_DIR}/openal-1.15.1 CACHE PATH "" FORCE)
 if(EXISTS ${OPENAL}/${Target_Tuple}/Release/OpenAL32.lib)
 # /I${OPENAL}/include/AL
 	set(OPENAL_INCLUDE_DIR ${OPENAL}/include CACHE PATH "" FORCE)
@@ -171,19 +172,19 @@ if(EXISTS ${OPENAL}/${Target_Tuple}/Release/OpenAL32.lib)
 endif()
 
 
-set(VORBIS $ENV{DK3RDPARTY_DIR}/libvorbis-1.3.5 CACHE PATH "" FORCE)
+set(VORBIS ${DK3RDPARTY_DIR}/libvorbis-1.3.5 CACHE PATH "" FORCE)
 if(EXISTS ${VORBIS}/${Target_Tuple}/Release/lib/.libs/libvorbis.lib)
 	set(VORBIS_INCLUDE_DIR ${VORBIS}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(OGG $ENV{DK3RDPARTY_DIR}/libogg-1.3.2 CACHE PATH "" FORCE)
+set(OGG ${DK3RDPARTY_DIR}/libogg-1.3.2 CACHE PATH "" FORCE)
 if(EXISTS ${OGG}/${Target_Tuple}/Release/src/.libs/libogg.lib)
 	set(OGG_INCLUDE_DIR ${OGG}/include CACHE PATH "" FORCE)
 endif()
 
 
-set(SMPEG2 $ENV{DK3RDPARTY_DIR}/smpeg2-2.0.0 CACHE PATH "" FORCE)
+set(SMPEG2 ${DK3RDPARTY_DIR}/smpeg2-2.0.0 CACHE PATH "" FORCE)
 if(EXISTS ${SMPEG2}/${Target_Tuple}/lib/Release/libsmpeg2.lib)
 	set(SMPEG_INCLUDE_DIR ${SMPEG2} CACHE PATH "" FORCE)
 endif()

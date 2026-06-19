@@ -1,1 +1,5 @@
-BGFX_Import=https://github.com/bkaradzic/bgfx/archive/f8b20616.zip
+###### bgfx ######
+# https://github.com/bkaradzic/bgfx.git
+# https://github.com/bkaradzic/bgfx/archive/eb7b35c8d88cb7dff7a95e7fe7da3abd897cf900.zip
+
+bgfx_Import=https://github.com/bkaradzic/bgfx/archive/eb7b35c8d88cb7dff7a95e7fe7da3abd897cf900.zip

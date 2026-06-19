@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -21,16 +22,15 @@ function(dk_DKTOOLS_DIR)
 
 	###### SET ######
 	if(ARGV)
-		dk_set(DKTOOLS_DIR "${ARGV0}")
+		set(DKTOOLS_DIR "${ARGV0}")
 
 	###### GET ######	
-	elseif(DEFINED ENV{DKTOOLS_DIR})	
-		dk_set(DKTOOLS_DIR "$ENV{DKTOOLS_DIR}")
-		
+	elseif(DEFINED ENV{DKTOOLS_DIR})
+		file(TO_CMAKE_PATH "$ENV{DKTOOLS_DIR}" DKTOOLS_DIR)
+		set(DKTOOLS_DIR "${DKTOOLS_DIR}")
 	else()
 		dk_validate(DIGITALKNOB_DIR "dk_DIGITALKNOB_DIR()")
-		dk_set(DKTOOLS_DIR "$ENV{DIGITALKNOB_DIR}/DKTools")
-		
+		set(DKTOOLS_DIR "${DIGITALKNOB_DIR}/DKTools")
 	endif()
 
 	###### FINALIZE ######
@@ -38,6 +38,8 @@ function(dk_DKTOOLS_DIR)
 		dk_mkdir("${DKTOOLS_DIR}")
 	endif()
 	dk_assertPath("${DKTOOLS_DIR}")
+	
+	dk_set(DKTOOLS_DIR "${DKTOOLS_DIR}")
 	
 #dk_debug("DKTOOLS_DIR = ${DKTOOLS_DIR}")
 endfunction()

@@ -254,15 +254,15 @@ function getDKPath(){
     $n = 1;
     while(is_dir($dkPath) && $n < 10){
         $dkPath = dirname(__DIR__, $n++);
-        if(basename($dkPath) === "DigitalKnob"){
+        if(basename($dkPath) === "Digital Knob"){
             $dkPath = ValidatePath($dkPath);
             echo "dkPath = ".$dkPath."\n";
         	return $dkPath;
         }
     }
     //Try defaults
-    if(file_exists("C:/Users/aquawicket/DigitalKnob/")){
-    	$dkPath = "C:/Users/aquawicket/DigitalKnob/";
+    if(file_exists(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/")){
+    	$dkPath = str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/";
     	$dkPath = ValidatePath($dkPath);
     	echo "dkPath = ".$dkPath."\n";
     	return $dkPath;
@@ -295,8 +295,8 @@ function getRelativeDKPluginsPath(){
         }
     }
     //FIXME: temporarily using raw user defaults paths
-    if(file_exists("C:/Users/aquawicket/DigitalKnob/DKTasmota/DKPlugins/")){
-    	$relativeDKPluginsPath = "C:/Users/aquawicket/DigitalKnob/DKTasmota/DKPlugins/";
+    if(file_exists(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/DKTasmota/DKPlugins/")){
+    	$relativeDKPluginsPath = str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/DKTasmota/DKPlugins/";
     	$relativeDKPluginsPath = ValidatePath($relativeDKPluginsPath);
     	echo "relativeDKPluginsPath = ".$relativeDKPluginsPath."\n";
     	return $relativeDKPluginsPath;
@@ -307,9 +307,9 @@ function getRelativeDKPluginsPath(){
 function getDKAppAssetsPath(){
 	chdir(getRootPath());
     //FIXME: temporarily using raw user defaults paths
-    if(file_exists("C:/Users/aquawicket/DigitalKnob/DKTasmota/DKCpp/apps/DKTasmota/assets/")){
+    if(file_exists(str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/DKTasmota/DKCpp/apps/DKTasmota/assets/")){
     	$dkAppAssetsPath = "";
-    	$dkAppAssetsPath = "C:/Users/aquawicket/DigitalKnob/DKTasmota/DKCpp/apps/DKTasmota/assets/";
+    	$dkAppAssetsPath = str_replace("\\","/",$_SERVER['USERPROFILE'])."/Digital Knob/DKTasmota/DKCpp/apps/DKTasmota/assets/";
     	$dkAppAssetsPath = ValidatePath($dkAppAssetsPath);
     	echo "dkAppsAssetsPath = ".$dkAppAssetsPath."\n";
     	return $dkAppAssetsPath;

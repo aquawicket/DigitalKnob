@@ -1,58 +1,49 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ flac ############
 # https://github.com/xiph/flac.git
 # https://ftp.osuosl.org/pub/xiph/releases/flac
+# https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz
 
-
-### DEPEND ###
-dk_depend(nasm)
+dk_validate(nasm "dk_depend(nasm)")
 dk_depend(ogg)
 
 
-### IMPORT ###
-#dk_import(https://github.com/xiph/flac.git)
-dk_import(https://github.com/xiph/flac/releases/download/1.4.3/flac-1.4.3.tar.xz)
+dk_import()
 
 
 ### LINK ###
-dk_include				(${FLAC}/include											FLAC_INCLUDE_DIR)
+dk_include			(${flac}/include												FLAC_INCLUDE_DIR)
 
 if(MSVC)
-	#dk_libDebug	(${FLAC_Config_Dir}/src/libFLAC/${Debug_Dir}/FLAC.lib			FLAC_LIBRARY_DEBUG)
-	#dk_libRelease	(${FLAC_Config_Dir}/src/libFLAC/${Release_Dir}/FLAC.lib			FLAC_LIBRARY_RELEASE)
-	dk_libDebug		(${FLAC_Config_Dir}/src/libFLAC++/${Debug_Dir}/FLAC++.lib		FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC_Config_Dir}/src/libFLAC++/${Release_Dir}/FLAC++.lib		FLAC_LIBRARY_RELEASE)
+	#dk_libDebug	(${flac_Config_Dir}/src/libFLAC/${Debug_Dir}/FLAC.lib			FLAC_LIBRARY_DEBUG		FLAC_LIBRARY)
+	#dk_libRelease	(${flac_Config_Dir}/src/libFLAC/${Release_Dir}/FLAC.lib			FLAC_LIBRARY_RELEASE	FLAC_LIBRARY)
+	dk_libDebug		(${flac_Config_Dir}/src/libFLAC++/${Debug_Dir}/FLAC++.lib		FLAC_LIBRARY_DEBUG		FLAC_LIBRARY)
+	dk_libRelease	(${flac_Config_Dir}/src/libFLAC++/${Release_Dir}/FLAC++.lib		FLAC_LIBRARY_RELEASE	FLAC_LIBRARY)
 else()
-	#dk_libDebug	(${FLAC_Debug_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_DEBUG)
-	#dk_libRelease	(${FLAC_Release_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_RELEASE)
-	dk_libDebug		(${FLAC_Debug_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_DEBUG)
-	dk_libRelease	(${FLAC_Release_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_RELEASE)
-endif()
-set(FLAC_INCLUDE_PATH	${FLAC_INCLUDE_DIR})
-if(Debug)
-	set(FLAC_LIBRARY	${FLAC_LIBRARY_DEBUG})
-elseif(Release)
-	set(FLAC_LIBRARY	${FLAC_LIBRARY_RELEASE})
+	#dk_libDebug	(${flac_Debug_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_DEBUG		FLAC_LIBRARY)
+	#dk_libRelease	(${flac_Release_Dir}/src/libFLAC/libFLAC.a						FLAC_LIBRARY_RELEASE	FLAC_LIBRARY)
+	dk_libDebug		(${flac_Debug_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_DEBUG		FLAC_LIBRARY)
+	dk_libRelease	(${flac_Release_Dir}/src/libFLAC++/libFLAC++.a					FLAC_LIBRARY_RELEASE	FLAC_LIBRARY)
 endif()
 
 
-### 3rd Party Link ###
 dk_set(flac_CMAKE
 	-DFLAC_INCLUDE_DIR=${FLAC_INCLUDE_DIR}
-	-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_PATH}
+	-DFLAC_INCLUDE_PATH=${FLAC_INCLUDE_DIR}
 	-DFLAC_LIBRARY=${FLAC_LIBRARY}
 	-DFLAC_LIBRARY_DEBUG=${FLAC_LIBRARY_DEBUG}
 	-DFLAC_LIBRARY_RELEASE=${FLAC_LIBRARY_RELEASE}
@@ -60,10 +51,7 @@ dk_set(flac_CMAKE
 	"-DCMAKE_CXX_FLAGS=-I${FLAC_INCLUDE_DIR}")
 
 
-
-
-### GENERATE ###
-dk_configure(${FLAC}
+dk_configure(${flac}
 	-DBUILD_CXXLIBS=ON 					# "Build libFLAC++" ON
 	-DBUILD_PROGRAMS=ON					# "Build and install programs" ON
 	-DBUILD_EXAMPLES=ON					# "Build and install examples" ON

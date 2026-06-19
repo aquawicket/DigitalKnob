@@ -1,16 +1,22 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_resetAll()
-::#
+rem ####################################################################
+rem # dk_resetAll()
+rem #
 :dk_resetAll
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     if /i "%1" equ "wipe" goto wipe
        
@@ -26,8 +32,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
        
     %dk_call% dk_confirm || %return%
    
-    :: first we need to relocate this file up one directory
-    :: make sure script is running from DKBRANCH_DIR
+    rem first we need to relocate this file up one directory
+    rem make sure script is running from DKBRANCH_DIR
     if "%DKSCRIPT_DIR%" neq "%DKBRANCH_DIR%" (
         %dk_call% dk_echo "%yellow%"
         %dk_call% dk_echo "WARNING: this file isn't running from the branch directory"
@@ -47,12 +53,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_exit
     %dk_call% dk_exit   
        
-    ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    rem ############################################################
     :wipe  
-    ::do we need admin rights?
-    ::runas /user:Administrator %ComSpec%
-    ::do we need to uninstall any apps?
-    ::do we need to remove any environment variables?
+    rem do we need admin rights?
+    rem runas /user:Administrator %ComSpec%
+    rem do we need to uninstall any apps?
+    rem do we need to remove any environment variables?
      
     %dk_call% dk_chdir %DIGITALKNOB_DIR%
 
@@ -61,22 +67,21 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     rmdir %DKBRANCH_DIR% /s /q
     %dk_call% dk_info done.
        
-    :: wait for the folders to get deleted
+    rem wait for the folders to get deleted
     %dk_call% dk_sleep 3
        
     if EXIST "%DKBRANCH_DIR%" echo "Oh no, the BRANCH folder is still there! :( "
        
-    %dk_call% dk_gitUpdate https://github.com/aquawicket/DigitalKnob.git Development NO_CONFIRM
+    %dk_call% dk_gitUpdate
        
     start "" "%DKBRANCH_DIR%\%DKSCRIPT_NAME%" & del /f %DIGITALKNOB_DIR%\%DKSCRIPT_NAME% & exit
 %endfunction%
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_resetAll
 %endfunction%

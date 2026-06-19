@@ -1,20 +1,26 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_beeps(array)
-::#
-::#  array(frequency, duration)
-::#	frequency - The frequency of the beep, ranging from 37 to 32767 hertz.
-::#		duration - The duration of the beep measured in milliseconds.
-::#
+rem ################################################################################
+rem # dk_beeps(array)
+rem #
+rem #  array(frequency, duration)
+rem #	frequency - The frequency of the beep, ranging from 37 to 32767 hertz.
+rem #		duration - The duration of the beep measured in milliseconds.
+rem #
 :dk_beeps
 %setlocal%
-	%dk_call% dk_debugFunc 1
 	
 	set /a "n=0"
 	:loop
@@ -24,28 +30,27 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 		goto :loop
 	)
 	
-	::### Method 1 - powershell beep ###
-	%dk_call% dk_validate powershell_exe "%dk_call% dk_depend powershell_exe"
-	"%powershell_exe%" "%song%"
+	rem ### Method 1 - powershell beep ###
+	%dk_call% dk_validate powershell.exe %dk_call% dk_findFile powershell.exe
+	"%powershell.exe%" "%song%"
 
-	::### Method 3 - echo BELL character ###
-::	set "BELL="	&::contains a BELL 0x07 character
-::	echo %BELL%
+	rem ### Method 3 - echo BELL character ###
+rem	set "BELL="	&rem contains a BELL 0x07 character
+rem	echo %BELL%
 
-	::### Method - create and echo BELL character ###
-::	for /f eol^=^%LF%%LF%^ delims^= %%A in (
-::	   'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo(0x07"'
-::	) do echo(%%A
+	rem ### Method - create and echo BELL character ###
+rem	for /f eol^=^%LF%%LF%^ delims^= %%A in (
+rem	   'forfiles /p "%~dp0." /m "%~nx0" /c "cmd /c echo.0x07"'
+rem	) do echo.%%A
 
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
 	(set G#1=196)
 	(set A2=220)

@@ -1,1 +1,6 @@
-TCC_RT_Import=https://jpsoft.com/downloads/v34/tcc-rt.exe
+############ tcc-rt ############
+# https://jpsoft.com
+# https://jpsoft.com/downloads/v34/tcc-rt.exe
+
+tcc-rt_Type=Tool
+tcc-rt_Import=https://jpsoft.com/downloads/v34/tcc-rt.exe

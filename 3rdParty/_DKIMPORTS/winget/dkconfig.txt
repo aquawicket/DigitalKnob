@@ -1,5 +1,6 @@
 ############ winget ############
 # https://aka.ms/getwingetpreview
 # https://learn.microsoft.com/en-us/windows/package-manager/winget
+# https://aka.ms/getwingetpreview
 
 winget_Import=https://aka.ms/getwingetpreview

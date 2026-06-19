@@ -1,7 +1,15 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-::if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-::if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+rem if not defined DKINIT_cmd (
+rem 	setlocal enableDelayedExpansion
+rem 	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+rem 	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+rem 	if NOT EXIST "!DK.cmd!" (
+rem 		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+rem 	call "!DK.cmd:/=\!" "%%~0" %%*
+rem 	exit /b %errorlevel%
+rem )
+rem #################################################################################################################################################
 
 
 setlocal
@@ -12,7 +20,7 @@ call :initMacro
 call :ShowVariable ipOutput
 echo First line is %ipOutput[0]%
 
-echo(
+echo.
 %$set% driveNames="wmic logicaldisk get name /value | findstr "Name""
 call :ShowVariable driveNames
 
@@ -25,7 +33,7 @@ setlocal EnableDelayedExpansion
 for /L %%n in (0 1 !%~1.max!) do (
     echo %%n: !%~1[%%n]!
 )
-echo(
+echo.
 exit /b
 
 :initMacro

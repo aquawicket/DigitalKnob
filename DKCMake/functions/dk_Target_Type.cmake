@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -68,6 +69,22 @@ function(dk_Target_Type)
 	
 	dk_debug("Target_Type = ${Target_Type}")
 	dk_debug("${Target_Type} = ${${Target_Type}}")
+	
+	### Target_Build ###
+	dk_validate(Target_Tuple	"dk_Target_Tuple()")
+	if(Debug)
+		dk_set(Target_Build   "${Target_Tuple}/${Debug_Dir}")
+	elseif(Release)
+		dk_set(Target_Build   "${Target_Tuple}/${Release_Dir}")
+	endif()
+	dk_assertVar(Target_Build)
+	dk_debug("Target_Build = ${Target_Build}")
+	
+	### CURRENT_PLUGIN_Build_Dir ###
+	if(CURRENT_PLUGIN)
+		dk_set(${CURRENT_PLUGIN}_Build_Dir "${${CURRENT_PLUGIN}}/${Target_Build}")
+		dk_debug("${CURRENT_PLUGIN}_Build_Dir = ${${CURRENT_PLUGIN}_Build_Dir}")
+	endif()
 endfunction()
 
 

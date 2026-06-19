@@ -1,37 +1,31 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
-dk_validate(Target_Config  "dk_Target_Config()")
+############ tinycorelinux ############
 # http://tinycorelinux.net/downloads.html
 # http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso
 
-dk_validate(ENV{DKTOOLS_DIR} "dk_DKTOOLS_DIR()") 
-
 dk_depend(qemu)
 
-dk_set(TINYCORELINUX_DL http://tinycorelinux.net/14.x/x86/release/CorePlus-current.iso)
-dk_set(TINYCORELINUX $ENV{DKTOOLS_DIR}/TinyCoreLinux)
+dk_import()
 
-if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
+if(NOT EXISTS ${tinycorelinux}/tinycore.img)
 	dk_info("Installing tiny-core-linux . . .")
-	
-	dk_basename(${TINYCORELINUX_DL} TINYCORELINUX_IMPORT_FILE)
-	dk_download(${TINYCORELINUX_DL} $ENV{DKDOWNLOAD_DIR}/${TINYCORELINUX_IMPORT_FILE})
 
 	##### EAMPLE with tinycorelinux #####
-	# cd into install directory
-	dk_chdir(${TINYCORELINUX})
+	dk_chdir(${tinycorelinux})
 
 	### Install the OS to the .img file
 	# (Install from the running virtual OS)
@@ -54,10 +48,10 @@ if(NOT EXISTS ${TINYCORELINUX}/tinycore.img)
 
 	### Launching the VM
 	# C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-system-x86_64 -cdrom CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl
-	dk_exec(${qemu-system-x86_64_exe} -cdrom $ENV{DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
+	dk_exec(${qemu-system-x86_64_exe} -cdrom ${DKDOWNLOAD_DIR}/CorePlus-current.iso -boot menu=on -drive file=tinycore.img -m 1G -cpu max -smp 2 -vga virtio -display sdl)
 endif()
 
-dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")
+dk_set(tinycourlinux_launcher "${tinycorelinux}/LAUNCH.cmd")
 ### Create Launcher shortcut
 # Create launcher
 ### Launching the VM without cdrom (after install)
@@ -65,6 +59,6 @@ dk_set(TINYCOURLINUX_launcher "${TINYCORELINUX}/LAUNCH.cmd")
 # C:/Users/Administrator/DigitalKnob/Development/3rdParty/qemu/qemu-system-x86_64 -boot menu=on -drive file=tinycore.img -cpu max -smp 2 -vga virtio -display sdl
 	
 	
-if(NOT EXISTS 	"${TINYCOURLINUX_launcher}")
-	dk_fileWrite("${TINYCOURLINUX_launcher}" "@echo off && start ${qemu-system-x86_64_exe} -boot menu=on -drive file=tinycore.img -cpu max -smp 2 -vga virtio -display sdl")
+if(NOT EXISTS 	"${tinycourlinux_launcher}")
+	dk_fileWrite("${tinycourlinux_launcher}" "@echo off && start ${qemu-system-x86_64_exe} -boot menu=on -drive file=tinycore.img -cpu max -smp 2 -vga virtio -display sdl")
 endif()

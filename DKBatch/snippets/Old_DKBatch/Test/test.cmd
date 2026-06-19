@@ -1,30 +1,31 @@
-:: This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
+@echo off
+rem This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
 ::
-:: For the latest information, see https://github.com/aquawicket/DigitalKnob
+rem For the latest information, see https://github.com/aquawicket/DigitalKnob
 ::
-:: Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
+rem Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
 ::
-:: Permission is hereby granted, free of charge, to any person obtaining a copy
-:: of this software and associated documentation files(the "Software"), to deal
-:: in the Software without restriction, including without limitation the rights
-:: to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-:: copies of the Software, and to permit persons to whom the Software is
-:: furnished to do so, subject to the following conditions :
+rem Permission is hereby granted, free of charge, to any person obtaining a copy
+rem of this software and associated documentation files(the "Software"), to deal
+rem in the Software without restriction, including without limitation the rights
+rem to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
+rem copies of the Software, and to permit persons to whom the Software is
+rem furnished to do so, subject to the following conditions :
 ::
-:: The above copyright notice and this permission notice shall be included in all
-:: copies or substantial portions of the Software.
+rem The above copyright notice and this permission notice shall be included in all
+rem copies or substantial portions of the Software.
 ::
-:: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-:: IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-:: FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-:: AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-:: LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-:: OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-:: SOFTWARE.
+rem THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+rem IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+rem FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+rem AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+rem LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+rem OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+rem SOFTWARE.
 
 %DKBATCH%
 
-:: https://github.com/ClicketyClickDK/Underscore
+rem https://github.com/ClicketyClickDK/Underscore
 set TEST_DKVARIABLES=1
 set TEST_DKERRORS=1
 set TEST_DKNESTING=1
@@ -48,7 +49,7 @@ if NOT defined TEST_DKVARIABLES goto :end
 	echo appending Test_variableA
 	set Test_variableA=%Test_variableA% added some data to the end
 	echo Test_variableA: %Test_variableA%
-	echo(
+	echo.
 :end
 
 
@@ -58,7 +59,7 @@ if NOT defined TEST_DKNESTING goto :end
 	echo ##      TESTING Nesting        ##
 	echo #################################
 	call NestedNodes1
-	echo(
+	echo.
 :end
 
 
@@ -68,7 +69,7 @@ if NOT defined TEST_DKPRINT goto :end
 	echo ##      TESTING dkprint        ##
 	echo #################################
 	call dkprint this is a test of dkprint
-	echo(
+	echo.
 :end
 
 
@@ -79,7 +80,7 @@ if NOT defined TEST_DKTEMPLATE goto :end
 	echo ##################################
 	call TEMPLATE 369 string result1 result2
 	echo TemplateFunc returned: %result1% %result2%
-	echo(
+	echo.
 :end
 
 
@@ -89,7 +90,7 @@ if NOT defined TEST_DKSENDDATA goto :end
 	echo ##      TESTING SendData        ##
 	echo ##################################
 	call SendData apple
-	echo(
+	echo.
 :end
 
 
@@ -100,7 +101,7 @@ if NOT defined TEST_DKGETDATA goto :end
 	echo #################################
 	call GetData result
 	echo GetData returned: %result%
-	echo(
+	echo.
 :end
 
 
@@ -111,7 +112,7 @@ if NOT defined TEST_DKSENDANDGETDATA goto :end
 	echo ######################################
 	call SendAndGetData orange result
 	echo SendAndGetData returned: %result%
-	echo(
+	echo.
 :end
 
 
@@ -121,7 +122,7 @@ if NOT defined TEST_DKCOLOR goto :end
 	echo ##      TESTING Color       ##
 	echo ##############################
 	call Color
-	echo(
+	echo.
 :end
 
 :::::::::::::::::::::::::::::::::::::::
@@ -130,7 +131,7 @@ if NOT defined TEST_DKSLEEP goto :end
 	echo ##      TESTING Sleep       ##
 	echo ##############################
 	call Sleep 2
-	echo(
+	echo.
 :end
 
 
@@ -141,25 +142,25 @@ if NOT defined TEST_DKERRORS goto :end
 	echo ################################
 	set ERRORLEVEL=0
 	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
-	echo(
+	echo.
 	
 	set ERRORLEVEL=1
 	%IF_ERROR% "IF_ERROR: This throws an error if ERRLVL is NOT 0, and continues"
-	echo(
+	echo.
 
 	%ERROR% "ERROR: This throws an error, and continues"
-	echo(
+	echo.
 
 	set ERRORLEVEL=0
 	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is NOT 0, and exits the program"
-	echo(
+	echo.
 	
 	set ERRORLEVEL=1
 	%IF_FATAL% "IF_FATAL: This thows an error if ERRLVL is NOT 0, and exits the program"
-	echo(
+	echo.
 
 	%FATAL% "FATAL: This throws an error, and exits the program"
-	echo(
+	echo.
 :end
 
 

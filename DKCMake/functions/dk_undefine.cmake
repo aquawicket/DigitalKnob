@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -28,12 +29,12 @@ function(dk_undefine str)
 		remove_definitions(${str})
 	endif()
 	
-	if(dkdefines_list)
-		list(REMOVE_ITEM dkdefines_list ${str})
-		dk_set(dkdefines_list ${dkdefines_list})	# Globalize the variable
+	if(DKDEFINES_LIST)
+		list(REMOVE_ITEM DKDEFINES_LIST ${str})
+		dk_set(DKDEFINES_LIST ${DKDEFINES_LIST})	# Globalize the variable
 	endif()
 	
-	dk_debug("dkdefines_list = ${dkdefines_list}")
+	dk_debug("DKDEFINES_LIST = ${DKDEFINES_LIST}")
 endfunction()
 
 

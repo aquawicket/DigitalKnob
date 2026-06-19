@@ -1,0 +1,6 @@
+############ dumpbin ############
+# https://github.com/Delphier/dumpbin/releases/download/v14.40.33811/dumpbin-14.40.33811-x64.zip
+
+dumpbin_Type=Tool
+dumpbin_Import=https://github.com/Delphier/dumpbin/releases/download/v14.40.33811/dumpbin-14.40.33811-x64.zip
+

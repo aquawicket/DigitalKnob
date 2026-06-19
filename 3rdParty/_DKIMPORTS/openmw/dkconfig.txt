@@ -1,0 +1,5 @@
+############ openmw ############
+# https://github.com/OpenMW/openmw.git
+# https://github.com/OpenMW/openmw/archive/88e15e7246b5e3f3e27bb7164b7c992623749e3a.zip
+
+openmw_Import=https://github.com/OpenMW/openmw/archive/88e15e7246b5e3f3e27bb7164b7c992623749e3a.zip

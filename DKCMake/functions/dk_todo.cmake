@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -22,8 +23,44 @@ include_guard()
 macro(dk_todo)
 	dk_debugFunc()
 
-	dk_stacktrace()
-	dk_log(TODO "'${ARGV0}'")
+	###############################################
+	# dk_todo() SETTINGS
+	
+	if(NOT "TODO" IN_LIST dk_log_LEVELS)
+		dk_set(dk_log_LEVELS "${dk_log_LEVELS};TODO")
+	endif()
+	if(NOT DEFINED dk_log_TODO_ENABLE)
+		dk_set(dk_log_TODO_ENABLE	1)
+	endif()
+	if(NOT DEFINED dk_log_TODO_COLOR)
+		dk_set(dk_log_TODO_COLOR	"blue")
+	endif()
+	if(NOT DEFINED dk_log_TODO_TAG)
+		dk_set(dk_log_TODO_TAG		"TODO: ")
+	endif()
+	if(NOT DEFINED dk_log_TODO_PAUSE)
+		dk_set(dk_log_TODO_PAUSE	0)
+	endif()
+	if(NOT DEFINED dk_log_TODO_TIMEOUT)
+		dk_set(dk_log_TODO_TIMEOUT	0)
+	endif()
+	if(NOT DEFINED dk_log_TODO_TRACE)
+		dk_set(dk_log_TODO_TRACE	0)
+	endif()
+	if(NOT DEFINED dk_log_TODO_LINE)
+		dk_set(dk_log_TODO_LINE		0)
+	endif()
+	if(NOT DEFINED dk_log_TODO_HALT)
+		dk_set(dk_log_TODO_HALT		0)
+	endif()
+	##############################################
+	
+	if(NOT ARGV)
+		message("") # newline
+		return()
+	endif()
+	
+	dk_log(TODO "${ARGV}")
 endmacro()
 
 
@@ -32,7 +69,36 @@ endmacro()
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 function(DKTEST) 
-	dk_debugFunc()
+	dk_debugFunc(0)
 	
-	dk_todo("test dk_todo message")
+	message("")
+	message("${lblack}dk_todo()${clr}")
+	dk_todo()															# no arguments						(New Line)
+	message("")
+	message("${lblack}dk_todo(\"\")${clr}")
+	dk_todo("")    														# no arguments quoted				(New Line)
+	message("")
+	message("${lblack}dk_todo( )${clr}")
+	dk_todo( )   														# single unquoted space				(New Line)
+	message("")
+	message("${lblack}dk_todo(\" \")${clr}")
+	dk_todo(" ")   														# single quoted space
+	message("")
+	message("${lblack}dk_todo(dk_todo_single_unquoted_argument_message)${clr}")
+	dk_todo(dk_todo_single_unquoted_argument_message)					# single unquoted argument message
+	message("")
+	message("${lblack}dk_todo(\"dk_todo single quoted argument message\")${clr}")
+	dk_todo("dk_todo single quoted argument message")					# single quoted argument message
+	message("")
+	message("${lblack}dk_todo(dk_todo multiple unquoted argument message)${clr}")
+	dk_todo(dk_todo multiple unquoted argument message)					# multiple unquoted arguments message
+	message("")
+	message("${lblack}dk_todo(\"dk_todo\" \"multiple quoted\" \"arguments message\")${clr}")
+	dk_todo("dk_todo" "multiple quoted" "arguments message")			# multiple quoted arguments message
+	message("")
+	message("${lblack}dk_todo(\"dk_todo\" multiple mixed \"arguments message\")${clr}")
+	dk_todo("dk_todo" multiple mixed "arguments message")				# multiple mixed arguments message
+	message("")
+	message("${lblack}dk_todo(\"\${red}This is \${white}dk_todo \${blue}with color \${clr}\")${clr}")
+	dk_todo("${red}This is ${white}dk_todo ${blue}with color ${clr}")
 endfunction()

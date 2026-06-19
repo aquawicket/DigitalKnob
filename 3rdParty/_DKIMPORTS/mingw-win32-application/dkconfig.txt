@@ -1,0 +1,6 @@
+############ mingw-win32-application ############
+# https://www.transmissionzero.co.uk/computing/win32-apps-with-mingw
+# https://github.com/TransmissionZero/MinGW-Win32-Application.git
+# https://github.com/TransmissionZero/MinGW-Win32-Application/archive/bc301713c6af4af0c316144724f42413d2fef403.zip
+
+mingw-win32-application_Import=https://github.com/TransmissionZero/MinGW-Win32-Application/archive/bc301713c6af4af0c316144724f42413d2fef403.zip

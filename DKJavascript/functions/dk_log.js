@@ -16,17 +16,17 @@ if(!dk_valid("dk_log_DEFAULT_TIMEOUT"))		{ var dk_log_DEFAULT_TIMEOUT=0; 			}
 if(!dk_valid("dk_log_DEFAULT_PAUSE"))		{ var dk_log_DEFAULT_PAUSE=0; 				}
 if(!dk_valid("dk_log_DEFAULT_HALT"))		{ var dk_log_DEFAULT_HALT=0; 				}
 
-//### VERBOSE ###
-if(!dk_valid("VERBOSE"))					{ var VERBOSE="VERBOSE"; 					}
-if(!dk_valid("dk_log_VERBOSE_ENABLE"))		{ var dk_log_VERBOSE_ENABLE=1;				}
-if(!dk_valid("dk_log_VERBOSE_COLOR"))		{ var dk_log_VERBOSE_COLOR=magenta; 		}
-if(!dk_valid("dk_log_VERBOSE_TAG"))			{ var dk_log_VERBOSE_TAG="VERBOSE: "; 		}
-if(!dk_valid("dk_log_VERBOSE_TRACE"))		{ var dk_log_VERBOSE_TRACE=0;				}
-if(!dk_valid("dk_log_VERBOSE_LINE"))		{ var dk_log_VERBOSE_LINE=0; 				}
-if(!dk_valid("dk_log_VERBOSE_SOUND"))		{ var dk_log_VERBOSE_SOUND=0;				}
-if(!dk_valid("dk_log_VERBOSE_TIMEOUT"))		{ var dk_log_VERBOSE_TIMEOUT=0; 			}
-if(!dk_valid("dk_log_VERBOSE_PAUSE"))		{ var dk_log_VERBOSE_PAUSE=0; 				}
-if(!dk_valid("dk_log_VERBOSE_HALT"))		{ var dk_log_VERBOSE_HALT=0; 				}
+//### dk_verbose() Settings ###
+if(!dk_valid("VERBOSE"))					{ var VERBOSE="VERBOSE"; 				}
+if(!dk_valid("dk_log_VERBOSE_ENABLE"))		{ var dk_log_VERBOSE_ENABLE=1;			}
+if(!dk_valid("dk_log_VERBOSE_COLOR"))		{ var dk_log_VERBOSE_COLOR=magenta; 	}
+if(!dk_valid("dk_log_VERBOSE_TAG"))			{ var dk_log_VERBOSE_TAG="VERBOSE: "; 	}
+if(!dk_valid("dk_log_VERBOSE_TRACE"))		{ var dk_log_VERBOSE_TRACE=0;			}
+if(!dk_valid("dk_log_VERBOSE_LINE"))		{ var dk_log_VERBOSE_LINE=0; 			}
+if(!dk_valid("dk_log_VERBOSE_SOUND"))		{ var dk_log_VERBOSE_SOUND=0;			}
+if(!dk_valid("dk_log_VERBOSE_TIMEOUT"))		{ var dk_log_VERBOSE_TIMEOUT=0; 		}
+if(!dk_valid("dk_log_VERBOSE_PAUSE"))		{ var dk_log_VERBOSE_PAUSE=0; 			}
+if(!dk_valid("dk_log_VERBOSE_HALT"))		{ var dk_log_VERBOSE_HALT=0; 			}
 
 //### DEBUG ###
 if(!dk_valid("DEBUG"))						{ var DEBUG="DEBUG"; 						}
@@ -143,8 +143,8 @@ if(!dk_valid("dk_log_FATAL_COLOR"))			{ var dk_log_FATAL_COLOR=red;				}
 if(!dk_valid("dk_log_FATAL_TAG"))			{ var dk_log_FATAL_TAG="FATAL: ";			}
 if(!dk_valid("dk_log_FATAL_TRACE"))			{ var dk_log_FATAL_TRACE=1;					}
 if(!dk_valid("dk_log_FATAL_LINE"))			{ var dk_log_FATAL_LINE=0; 					}
-if(!dk_valid("dk_log_FATAL_SOUND"))			{ var dk_log_FATAL_SOUND=1;					}
-if(!dk_valid("dk_log_FATAL_TIMEOUT"))		{ var dk_log_FATAL_TIMEOUT=1; 				}
+if(!dk_valid("dk_log_FATAL_SOUND"))			{ var dk_log_FATAL_SOUND=0;					}
+if(!dk_valid("dk_log_FATAL_TIMEOUT"))		{ var dk_log_FATAL_TIMEOUT=0; 				}
 if(!dk_valid("dk_log_FATAL_PAUSE"))			{ var dk_log_FATAL_PAUSE=0; 				}
 if(!dk_valid("dk_log_FATAL_HALT"))			{ var dk_log_FATAL_HALT=1; 					}
 
@@ -231,14 +231,14 @@ dk_log = function dk_log_f(){
 //###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 DKTEST = function DKTEST_f(){
 	//dk_debugFunc(0);
-
+	
     dk_log(VERBOSE,		"test dk_log VERBOSE message");
-    dk_log(DEBUG,		"test dk_log DEBUG message");
-	dk_log(				"test dk_log message");
-    dk_log(INFO,		"test dk_log INFO message");
-    dk_log(SUCCESS,		"test dk_log SUCCESS message");
     dk_log(TODO,		"test dk_log TODO message");
-    dk_log(NOTICE,		"test dk_log NOTICE message");
+    dk_log(DEBUG,		"test dk_log DEBUG message");
+	dk_log(SUCCESS,		"test dk_log SUCCESS message");
+	dk_log(				"test dk_log message");
+	dk_log(INFO,		"test dk_log INFO message");
+	dk_log(NOTICE,		"test dk_log NOTICE message");
     dk_log(FIXME,		"test dk_log FIXME message");
     dk_log(WARNING,		"test dk_log WARNING message");
 	dk_log(DEPRECATED,	"test dk_log DEPRECATED message");

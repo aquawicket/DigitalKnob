@@ -1,24 +1,18 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
-#########################################################################
-if(NOT DEFINED BACKUP_DL_SERVER)
-	dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
-endif()
-if(NOT DEFINED TEST_BACKUP_DL_SERVER)
-	dk_set(TEST_BACKUP_DL_SERVER 0)
-endif()
 #########################################################################
 # dk_download(url) dest_path NO_HALT
 #
@@ -33,82 +27,96 @@ endif()
 function(dk_download)
 	dk_debugFunc(1 3)
 	
+	###### dk_download() Settings ###############################
+	if(NOT DEFINED BACKUP_DL_SERVER)
+		#dk_set(BACKUP_DL_SERVER "http://aquawicket.com/download")
+		dk_set(BACKUP_DL_SERVER "$ENV{DKHttp_DKDownload_Dir}")
+	endif()
+	if(NOT DEFINED TEST_BACKUP_DL_SERVER)
+		dk_set(TEST_BACKUP_DL_SERVER 0)
+	endif()
+
 	###### Args ######
-	dk_getParameterValue(NAME REMOVE)
+	#dk_getParameterValue(NAME REMOVE)
 	#dk_debug("NAME = ${NAME}")
-	dk_getParameterValue(ROOT REMOVE)
+	#dk_getParameterValue(ROOT REMOVE)
 	#dk_debug("ROOT = ${ROOT}")
 	dk_getParameter(NO_HALT REMOVE)
 	#dk_debug("NO_HALT = ${NO_HALT}")
-	
-	
 	
 	set(CMAKE_TLS_VERIFY=0)
 
 	# FIXME: Sometimes argument vars will linger a value. For instance, ARGV1 contains a value not related to this function.
 	# We make sure the value is located in the full ARGV to fix this for now. We still need to find the root of this issue.
-	# If this issue still exists, I believe dk_debugfunc() to more than likely be the cause.
+	# If this issue still exists, I believe dk_debugFunc() to more than likely be the cause.
 	dk_includes("${ARGV}" "${ARGV0}")
 	if(dk_includes)
 		set(url "${ARGV0}")			
 	else()
-		dk_warning("ARGV0:${ARGV0} was not found in ARGV:${ARGV}")
+		dk_warning("ARGV0:'${ARGV0}' was NOT FOUND in ARGV:'${ARGV}'")
 	endif()
 	#dk_debug("url = ${url}")
-	
 	
 	dk_includes("${ARGV}" "${ARGV1}")
 	if(dk_includes)
 		set(dest_path "${ARGV1}")
 	else()
-		dk_warning("ARGV1:${ARGV1} was not found in ARGV:${ARGV}")
+		dk_warning("ARGV1:'${ARGV1}' was NOT FOUND in ARGV:'${ARGV}'")
 	endif()
 	dk_echo("dest_path = ${dest_path}")
 	#dk_debug("dest_path = ${dest_path}")
 	
 	# get the true url if redirect
-	dk_httpResponse(${url})
-	if((${dk_httpResponse} GREATER 299) AND (${dk_httpResponse} LESS 400) AND (NOT ${dk_httpResponse} EQUAL 302))
-		dk_getUrl(${url} url)
-	endif()
+	
+#	dk_BREAKPOINT()
+#	dk_httpStatus(${url})
+#	if((${dk_httpStatus} GREATER 299) AND (${dk_httpStatus} LESS 400) AND (NOT ${dk_httpStatus} EQUAL 302))
+#		dk_BREAKPOINT(dk_httpStatus)
+#		dk_getUrl(${url} url)
+#	else()
+#		dk_BREAKPOINT(dk_httpStatus)
+#	endif()
 	#dk_debug("url = ${url}")
 	
-	dk_dirname(${url} url_dir)
-	dk_assertVar(url_dir)
-	#dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
+#	dk_dirname(${url} url_dir)
+#	#dk_debug("url_dir = ${url_dir}")			# https://aquawicket.com/download
 	
-	dk_basename(${url} url_filename)
+	#dk_basename("${url}" url_filename)
+	dk_debug("url = ${url}")
+	dk_getUrlFilename("${url}")
+	dk_debug("dk_getUrlFilename(${url}) = ${dk_getUrlFilename}")
+	set(url_filename ${dk_getUrlFilename})
 	dk_assertVar(url_filename)
-	#dk_debug("url_filename = ${url_filename}")	# myFile.txt
+	#dk_debug("url_filename = '${url_filename}'")	# myFile.txt
 	
-	dk_getExtension(${url} url_ext)	
-	#dk_assertVar(url_ext)
-	#dk_debug("url_ext = ${url_ext}")			# .txt    
-	
+#	dk_getExtension("${url}" url_ext)	
+#	#dk_assertVar(url_ext)
+#	#dk_debug("url_ext = '${url_ext}'")			# .txt
 	
 	# Setup all dest_path variables
 	if(NOT dest_path)
-		dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-		set(dest_path "$ENV{DKDOWNLOAD_DIR}")
+		dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+		set(dest_path "${DKDOWNLOAD_DIR}")
 	endif()
 	dk_assertVar(dest_path)
 	
-	if(IS_DIRECTORY ${dest_path})
+	if(IS_DIRECTORY "${dest_path}")
 		set(dest_path "${dest_path}/${url_filename}")
 	endif()
-	dk_debug("dest_path = ${dest_path}")		# C:/Users/Administrator/Downloads/myFile.txt
-	set(dk_download ${dest_path} PARENT_SCOPE)
+	dk_debug("dest_path = '${dest_path}'")		# C:/Users/Administrator/Downloads/myFile.txt
+	#set(dk_download "${dest_path}" PARENT_SCOPE)
+	dk_set(dk_download "${dest_path}")
 	
 	dk_dirname("${dest_path}" dest_dir)			# C:/Users/Administrator/Downloads
 	dk_assertVar(dest_dir)
 	
 	if(NOT EXISTS ${dest_dir})
-		dk_notice("dest_dir:${dest_dir} does not exists. It will be created")
+		dk_notice("dest_dir:'${dest_dir}' does not exists. It will be created")
 		dk_mkdir("${dest_dir}")
 	endif()
 	dk_assertPath(dest_dir)
 	dk_chdir("${dest_dir}")
-	#dk_debug("dest_dir = ${dest_dir}")
+	#dk_debug("dest_dir = '${dest_dir}'")
 	
 	dk_basename("${dest_path}" dest_filename)	# myFile.txt
 	dk_assertVar(dest_filename)
@@ -120,35 +128,34 @@ function(dk_download)
 	
 	if(EXISTS "${dest_path}")
 		if(NOT NO_HALT)
-			dk_notice("dest_path:${dest_path} already exists")
+			dk_notice("dest_path:'${dest_path}' already exists")
+			return()
 		endif()
-		return()
 	endif()
-	
 	
 	# Use BACKUP_DL_SERVER only
 	if(TEST_BACKUP_DL_SERVER)
 		set(url "${BACKUP_DL_SERVER}/${url_filename}")
 		dk_assertVar(url)
-		dk_info("Using Backup Server url:${url} . . .")
+		dk_info("Using Backup Server url:'${url}' . . .")
 	
 	# Test that url exists, if not try BACKUP_DL_SERVER
 	else()
-		dk_urlExists(${url})
+		dk_urlExists("${url}")
 		if(NOT ${dk_urlExists})
-			dk_warning("url:${url} NOT FOUND")
+			dk_warning("url:'${url}' NOT FOUND")
 			set(url "${BACKUP_DL_SERVER}/${url_filename}")
-			dk_info("Trying Backup Server url:${url} . . .")
+			dk_info("Trying Backup Server url:'${url}' . . .")
 		endif()
 	endif()
 	
-	dk_debug("Downloading ${url}")
-	dk_debug("      To -> ${dest_path}")
+	dk_debug("Downloading '${url}'")
+	dk_debug("      To -> '${dest_path}'")
 	
 	# setup temp_path variables
 	set(temp_filename "${dest_filename}.downloading")
 	set(temp_path "${dest_dir}/${temp_filename}")
-	#dk_debug("temp_path = ${temp_path}")
+	#dk_debug("temp_path = '${temp_path}'")
 	if(EXISTS "${temp_path}")
 		dk_delete("${temp_path}")
 	endif()
@@ -158,25 +165,25 @@ function(dk_download)
 	
 	set(FETCHCONTENT_QUIET FALSE) #FIX download progress 
 	
-	dk_info("Downloading ${url_filename}. . . please wait")
-	file(DOWNLOAD ${url} "${temp_path}"
+	#dk_info("Downloading ${url_filename}. . . please wait")
+	file(DOWNLOAD "${url}" "${temp_path}"
 		SHOW_PROGRESS 
 		STATUS status 
 	)
 	list(GET status 0 status_code) 
 	list(GET status 1 status_string)
 	if(NOT status_code EQUAL 0)
-		dk_delete(${temp_path})
+		dk_delete("${temp_path}")
 		dk_fatal("error: downloading ${url} \nstatus_code: ${status_code} \nstatus_string: ${status_string}")
 	else()
-		if(NOT EXISTS ${temp_path})
-			dk_fatal("temp_path:${temp_path} could not locate temporary download file")
+		if(NOT EXISTS "${temp_path}")
+			dk_fatal("temp_path:'${temp_path}' could not locate temporary download file")
 		endif()
-		dk_rename(${temp_path} ${dest_path})
-		if(NOT EXISTS ${dest_path})
-			dk_fatal("dest_path:${dest_path} Could not locate downloaded file")
+		dk_rename("${temp_path}" "${dest_path}")
+		if(NOT EXISTS "${dest_path}")
+			dk_fatal("dest_path:'${dest_path}' Could not locate downloaded file")
 		endif()
-		dk_info("${clr}${green} Finnished downloading ${dest_filename}")
+		dk_info("${clr}${green} Finnished downloading '${dest_filename}'")
 	endif() 
 endfunction()
 
@@ -189,11 +196,14 @@ endfunction()
 function(DKTEST)
 	dk_debugFunc(0)
 	
-	#dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1" $ENV{DKDOWNLOAD_DIR})
+	#dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	#dk_download("http://aquawicket.com/DigitalKnob/Development/DKBuilder.ps1" ${DKDOWNLOAD_DIR})
 	
-	#dk_download("https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKBuilder.ps1")
+	#dk_download("https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe")
 	
-	dk_download("https://go.microsoft.com/fwlink/?linkid=2289980")
-	dk_echo("dk_download = ${dk_download}")
+	#dk_download("https://go.microsoft.com/fwlink/?linkid=2289980")
+	#dk_echo("dk_download = ${dk_download}")
+	
+	dk_inputBox()
+	dk_download(${dk_inputBox})
 endfunction()

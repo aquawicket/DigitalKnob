@@ -1,26 +1,35 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::############################################################################
-::# dk_fileMD5(filepath <rtn_var:optional>)
-::#
-::#
+rem ############################################################################
+rem # dk_fileMD5(file <rtn_var:optional>)
+rem #
+rem #
 :dk_fileMD5
 %setlocal%
-	%dk_call% dk_debugFunc 1 2
 
-	::%dk_call% dk_assertPath "%~1"
+	set "_file_=%~1"
+	%dk_call% dk_validate certutil.exe %dk_call% dk_findFile certutil.exe
+	
 	set /a count=1
-	for /f "skip=1 delims=:" %%a in ('C:\Windows\System32\certutil.exe -hashfile "%~1" MD5') do (
-	  if !count! equ 1 set "dk_fileMD5=%%a"
+	for /f "skip=1 delims=:" %%a in ('%certutil.exe:/=\% -hashfile "%_file_:/=\%" MD5') do (
+	  if !count! equ 1 (set "dk_fileMD5=%%a")
 	  set/a count+=1
 	)
-	set "dk_fileMD5=%dk_fileMD5: =%
+	set "dk_fileMD5=%dk_fileMD5: =%"
 	
+	:return
 	endlocal & (
 		set "dk_fileMD5=%dk_fileMD5%"
 		if "%~2" neq "" (set "%~2=%dk_fileMD5%")
@@ -37,16 +46,11 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
  
-	%dk_call% dk_fileMD5 "C:/Windows/regedit.exe"
-	%dk_call% dk_echo "dk_fileMD5 = %dk_fileMD5%"
-	
-	%dk_call% dk_fileMD5 "DK.cmd" myMD5
-	%dk_call% dk_echo "dk_fileMD5 = %dk_fileMD5%"
-	%dk_call% dk_echo "myMD5 = %myMD5%"
+	%dk_call% dk_selectFile
+	%dk_call% dk_fileMD5 "%dk_selectFile%"
+	%dk_call% dk_debug "%dk_selectFile% MD5 = '%dk_fileMD5%'"
 %endfunction%
-

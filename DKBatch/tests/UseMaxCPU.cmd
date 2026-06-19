@@ -1,0 +1,1 @@
+for /L %%A in (,,) do REM

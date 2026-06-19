@@ -1,0 +1,5 @@
+############ libevent ############
+# https://github.com/libevent/libevent.git
+# https://github.com/libevent/libevent/archive/2a1ec766.zip
+
+libevent_Import=https://github.com/libevent/libevent/archive/2a1ec766.zip

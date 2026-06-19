@@ -1,30 +1,41 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_gitClean()
-::#
-::#
+rem ################################################################################
+rem # dk_gitClean(repo_path)
+rem #
+rem #
 :dk_gitClean
 %setlocal%
-	%dk_call% dk_debugFunc 0
-
-    %dk_call% dk_validate git_exe "%dk_call% dk_depend git"
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-    "%git_exe%" -C %DKBRANCH_DIR% clean -fdx
+	
+	rem ### repo_path
+	if "%repo_path%" equ "" (set "repo_path=%~1")
+	if "%repo_path%" equ "" (
+		%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+		set "repo_path=!DKBRANCH_DIR!"
+	)
+	
+    %dk_call% dk_validate git.exe %dk_call% dk_depend git
+    "%git.exe%" -C %repo_path% clean -fdx
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_gitClean
 %endfunction%

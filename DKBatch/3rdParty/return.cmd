@@ -79,7 +79,7 @@ exit /b
 :return.special
 @if /i "%~1" equ "init" goto return.init
 @if "%~1" equ "/?" (
-  for /f "tokens=* delims=:" %%A in ('findstr "^:::" "%~f0"') do @echo(%%A
+  for /f "tokens=* delims=:" %%A in ('findstr "^:::" "%~f0"') do @echo.%%A
   exit /b 0
 )
 @if /i "%~1" equ "/V" (

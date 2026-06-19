@@ -1,7 +1,17 @@
 #!/usr/bin/cmake -P
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-#include($ENV{DKCMAKE_FUNCTIONS_DIR}/dk_debugFunc.cmake)
-#include_guard()
+### DK.cmake ############################################################
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+endif()
+#########################################################################
+
 
 #########################################################################
 # dk_if(condition... "code")
@@ -10,7 +20,7 @@ include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 #	@code	    - The code to run if the condition is true."
 #
 macro(dk_if)
-	dk_debugFunc()
+	#d#k_debugFunc()
 	
 	set(n 0)
 	unset(argv)
@@ -40,7 +50,7 @@ macro(dk_if)
 		endif()
 		dk_eval("${code}")
 	else()
-		#message("${argv} = false")
+		#dk_debug("${argv} = false")
 	endif()
 endmacro()
 
@@ -54,10 +64,10 @@ function(DKTEST)
 	dk_debugFunc(0)
 	
 	set(TEST_VAR 0)
-	dk_if(TRUE					"message(\"dk_if(TRUE) = true\")")
-	dk_if(TEST_VAR 				"message(\"TEST_VAR is true\")")
-	dk_if(DEFINED TEST_VAR 		"message(\"TEST_VAR is defined\")")
-	dk_if(NOT DEFINED TEST_VAR 	"message(\"TEST_VAR is NOT defined\")")
-	dk_if(${TEST_VAR} EQUAL 1 	"message(\"TEST_VAR is EQUAL to 1\")")
+	dk_if(TRUE					"dk_echo(\"dk_if(TRUE) = true\")")
+	dk_if(TEST_VAR 				"dk_echo(\"TEST_VAR is true\")")
+	dk_if(DEFINED TEST_VAR 		"dk_echo(\"TEST_VAR is defined\")")
+	dk_if(NOT DEFINED TEST_VAR 	"dk_echo(\"TEST_VAR is NOT defined\")")
+	dk_if(${TEST_VAR} EQUAL 1 	"dk_echo(\"TEST_VAR is EQUAL to 1\")")
 	dk_if(NOT DEFINED ENABLE_dk_debug "set(ENABLE_dk_debug 1 CACHE INTERNAL \"\")")
 endfunction()

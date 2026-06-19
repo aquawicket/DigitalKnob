@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -16,25 +17,23 @@ include_guard()
 # https://github.com/nigels-com/glew.git
 # http://glew.sourceforge.net
 # https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.zip
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 
-#dk_validate(Target_Config  "dk_Target_Config()")
 if(Ios OR Iossim OR Android)
 	dk_disable(glew)
 	dk_return()
 endif()
 
-### DEPEND ###
+
 if(Linux OR Raspberry)
 	dk_depend(libglu1-mesa-dev)
 endif()
 
-### IMPORT ###
+
 dk_import()
 
 dk_copy(${glew}/build/cmake ${glew_Tuple_Dir}/CMakeFiles/Export/lib/cmake/glew OVERWRITE)
 
-### LINK ###
+
 dk_define			(GLEW_STATIC)
 dk_include			(${glew}/include										GLEW_INCLUDE_DIR)
 if(Apple)
@@ -51,7 +50,7 @@ else()
 	dk_libRelease	(${glew_Release_Dir}/lib/libGLEW.a						GLEW_RELEASE_LIBRARY	GLEW_LIBRARY)
 endif()
 
-### 3RDPARTY LINK ###
+
 # dk_set(glew_CMAKE
 #	-DGLEW_USE_STATIC_LIB=ON
 #	-DGLEW=${glew}/${Target_Tuple}/CMakeFiles/Export/lib/cmake/glew
@@ -76,7 +75,7 @@ else()
 endif()
 
 
-### GENERATE ###
+
 dk_configure(${glew}/build/cmake)
 #dk_copy(${glew}/${Target_Tuple}/lib/${Debug_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
 #dk_copy(${glew}/${Target_Tuple}/lib/${Release_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/lib/ OVERWRITE)
@@ -84,5 +83,5 @@ dk_configure(${glew}/build/cmake)
 #dk_copy(${glew}/${Target_Tuple}/bin/${Release_Dir} ${glew}/${Target_Tuple}/CMakeFiles/Export/bin/ OVERWRITE)
 
 
-### COMPILE ###
+
 dk_build(${glew} glew_s)

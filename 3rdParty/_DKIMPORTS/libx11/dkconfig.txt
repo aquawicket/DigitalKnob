@@ -1,0 +1,8 @@
+############ libx11 ############
+# https://github.com/mirror/libx11.git
+# https://www.x.org/
+# https://www.x.org/releases/individual/lib/
+# https://www.x.org/releases/individual/lib/libx11-1.6.10.tar.gz
+# https://github.com/mirror/libx11/archive/refs/tags/libx11-1.8.1.zip
+
+libx11_Import=https://github.com/mirror/libx11/archive/refs/tags/libx11-1.8.1.zip

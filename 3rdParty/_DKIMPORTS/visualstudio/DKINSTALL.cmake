@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -20,10 +21,6 @@ include_guard()
 ###### visualstudio ######
 # https://learn.microsoft.com/en-us/answers/questions/192162/visual-studio-build-tools-silent-install
 #
-
-#dk_getFileParams("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
-#dk_unset(visualstudio_Install_Path)
-
 
 dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
 set(vs_setup_bootstrapper_exe "${DKDOWNLOAD_DIR}/vs_bootstrapper_d15/vs_setup_bootstrapper.exe")
@@ -38,7 +35,7 @@ dk_firewallAllow("${visualstudio_setup_exe}")
 # https://learn.microsoft.com/en-us/visualstudio/releases/2022/release-history
 
 #dk_set(visualstudio_Install_Path	"C:/Program Files \(x86\)/Microsoft Visual Studio")
-#dk_set(visualstudio_Cache_Path		"$ENV{DKDOWNLOAD_DIR}/VS")
+#dk_set(visualstudio_Cache_Path		"${DKDOWNLOAD_DIR}/VS")
 #dk_set(visualstudio_Year 			2022)												# 2019, 2022
 #dk_set(visualstudio_Flavor			"BuildTools") 										# BuildTools, Community			
 #dk_set(visualstudio_Major 			17)													# 17
@@ -63,7 +60,7 @@ set(visualstudio_Install_Flag		--path install=${visualstudio_Install_Path})
 
 ###### visualstudio_Cache_Path ######
 if(NOT visualstudio_Cache_Path)
-	#set(visualstudio_Cache_Path	"$ENV{DKDOWNLOAD_DIR}/VS")
+	#set(visualstudio_Cache_Path	"${DKDOWNLOAD_DIR}/VS")
 	set(visualstudio_Cache_Path		"C:/Program Files \(x86\)/Microsoft Visual Studio/DL")
 endif()
 #dk_assertPath("${visualstudio_Cache_Path}")
@@ -180,14 +177,14 @@ if(NOT EXISTS "${VS}")
 	execute_process(COMMAND ${7za_exe} x ${dk_download} WORKING_DIRECTORY ${DKDOWNLOAD_DIR})
 	execute_process(COMMAND ${vs_setup_bootstrapper_exe} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
 
-	#execute_process(COMMAND cmd /c start /wait $ENV{DKDOWNLOAD_DIR}/${visualstudio_Import_File} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
+	#execute_process(COMMAND cmd /c ${DKDOWNLOAD_DIR}/${visualstudio_Import_File} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall)
 	#execute_process(COMMAND ${dk_download} ${visualstudio_Install_Flag} ${visualstudio_Cache_Flag} --cache --downloadThenInstall TIMEOUT 1)
 
 	while(NOT EXISTS "${visualstudio_Cache_Path}")
 		dk_sleep(1)
 	endwhile()
-	dk_validate(ENV{DKDOWNLOAD_DIR} "dk_DKDOWNLOAD_DIR()")
-	dk_copy("${visualstudio_Cache_Path}" "$ENV{DKDOWNLOAD_DIR}/VS")
+	dk_validate(DKDOWNLOAD_DIR "dk_DKDOWNLOAD_DIR()")
+	dk_copy("${visualstudio_Cache_Path}" "${DKDOWNLOAD_DIR}/VS")
 else()
 	dk_info("Visual Studio ${visualstudio_Flavor} ${visualstudio_Major} ${visualstudio_Year} already installed")
 endif()

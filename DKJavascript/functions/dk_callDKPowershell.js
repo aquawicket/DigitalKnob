@@ -1,9 +1,19 @@
-//if(!dk_valid("DK"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/DK.js", function(){}); 			}
-//if(!dk_valid("dk_debugFunc"))	{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_debugFunc.js"); }
-//if(!dk_valid("dk_env"))			{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_env.js"); 		}
-if(!dk_valid("dk_exec"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_exec.js"); 		}
-//if(!dk_valid("dk_DKBRANCH_DIR")){ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_DKBRANCH_DIR"); }
-if(!dk_valid("dk_echo"))		{ dk_source(DKJAVASCRIPT_DIR+"/functions/dk_echo.js"); 		}
+// shebang
+//file:///C:/Users/Administrator/DigitalKnob/Development/DKJavascript/functions/dk_callDKPowershell.js
+/*
+if(typeof ActiveXObject === "function"){
+	if(typeof wscript_shell !== "object")	{ var wscript_shell = new ActiveXObject("WScript.Shell"); }
+	if(typeof ENV !== "object")				{ var ENV = wscript_shell.Environment("Process"); }
+	if(typeof ENV === "object" && typeof wscript_shell === "object" && ENV("DKINIT_js") === "") {	
+		ENV("DKINIT_js") = WScript.ScriptFullName;
+		wscript_shell.Run("cmd /k mshta.exe \"file:///C:/Users/Administrator/DigitalKnob/Development/DKHta/functions/DK.hta\" | for /f \"delims=\" %a in ('findstr \"^\"') do 	@echo %a", 1, 1);
+		//var DK_js = "C:/Users/Administrator/DigitalKnob/Development/DKJavascript/functions/DK.js";
+		//var rtn = wscript_shell.Run("cmd /k cscript.exe //D //X //NoLogo "+DK_js+" "+WScript.ScriptFullName, 1, 1);
+		//wscript_shell.Run("cmd /k mshta.exe \"javascript:new ActiveXObject('Scripting.FileSystemObject').GetStandardStream(1).Write('Hello World');\" | for /f \"delims=\" %a in ('findstr \"^\"') do @echo %a", 1, 1);
+	}
+}
+*/
+//################################################################################
 
 
 //################################################################################

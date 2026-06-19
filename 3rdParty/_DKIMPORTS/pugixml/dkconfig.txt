@@ -1,4 +1,5 @@
 ############ pugixml ############
 # https://github.com/zeux/pugixml
+# https://github.com/zeux/pugixml/releases/download/v1.6/pugixml-1.6.zip
 
 pugixml_Import=https://github.com/zeux/pugixml/releases/download/v1.6/pugixml-1.6.zip

@@ -1,0 +1,5 @@
+############ OpenSSH ############
+# https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip
+
+OpenSSH_Type=Tool
+OpenSSH_Windows_X86_64_Import=https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.3.0p2-Preview/OpenSSH-Win64.zip

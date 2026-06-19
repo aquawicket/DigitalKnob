@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -24,15 +25,15 @@ function(dk_DKBASH_DIR)
 		dk_set(DKBASH_DIR "${ARGV0}")
 
 	###### GET ######
-	elseif(DEFINED ENV{DKBASH_DIR})	
-		dk_set(DKBASH_DIR "$ENV{DKBASH_DIR}")
-	
+	elseif(DEFINED ENV{DKBASH_DIR})
+		file(TO_CMAKE_PATH "$ENV{DKBASH_DIR}" DKBASH_DIR)	
 	else()
 		dk_validate(DKBRANCH_DIR "dk_DKBRANCH_DIR()")
-		dk_set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
+		set(DKBASH_DIR "${DKBRANCH_DIR}/DKBash")
 	endif()
 
 	###### FINALIZE ######
+	dk_set(DKBASH_DIR "${DKBASH_DIR}")
 	dk_set(DKBASH_FUNCTIONS_DIR "${DKBASH_DIR}/functions")
 	dk_set(DKBASH_FUNCTIONS_DIR_ "${DKBASH_DIR}/functions/")
 	#dk_assertPath(DKBASH_DIR)
@@ -55,7 +56,7 @@ function(DKTEST)
 	if(EXISTS "${DKBASH_DIR}")
 		dk_success("DKBASH_DIR = ${DKBASH_DIR}")
 	else()
-		dk_error("DKBASH_DIR:'${DKBASH_DIR}' not found")
+		dk_error("DKBASH_DIR:'${DKBASH_DIR}' NOT FOUND")
 	endif()
 
 	dk_echo()
@@ -64,6 +65,6 @@ function(DKTEST)
 	if(EXISTS "${DKBASH_DIR}")
 		dk_success("DKBASH_DIR = ${DKBASH_DIR}")
 	else()
-		dk_error("DKBASH_DIR:'${DKBASH_DIR}' not found")
+		dk_error("DKBASH_DIR:'${DKBASH_DIR}' NOT FOUND")
 	endif()
 endfunction()

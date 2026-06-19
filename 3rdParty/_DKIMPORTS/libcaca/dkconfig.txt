@@ -1,0 +1,6 @@
+########### libcaca ############
+# http://caca.zoy.org/wiki/libcaca
+# https://github.com/cacalabs/libcaca.git
+# https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip
+
+libcaca_Import=https://github.com/cacalabs/libcaca/archive/refs/heads/main.zip

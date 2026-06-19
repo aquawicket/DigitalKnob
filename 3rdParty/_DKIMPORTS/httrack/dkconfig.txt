@@ -1,4 +1,8 @@
-### https://www.httrack.com/page/2/en/index.html ###
-#
+############ httrack ############
+# https://www.httrack.com/page/2/en/index.html
+# https://download.httrack.com/httrack-noinst-3.49.2.zip
+# https://download.httrack.com/httrack_x64-noinst-3.49.2.zip
+
+httrack_Type=Tool
 httrack_Windows_X86_64_Import=https://download.httrack.com/httrack-noinst-3.49.2.zip
 httrack_Windows_X86_Import=https://download.httrack.com/httrack_x64-noinst-3.49.2.zip

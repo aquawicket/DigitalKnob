@@ -12,7 +12,7 @@ dk_basename = function dk_basename_f(){
 	dk_assert("dk_fileSystem.GetBaseName");
 	dk_basename.value = dk_fileSystem.GetBaseName(arguments[0]);
 	
-	//###### output ######
+	//###### return ######
 	if(typeof arguments[1] !== "undefined"){
 		arguments[1].value = dk_basename.value;
 	} else {

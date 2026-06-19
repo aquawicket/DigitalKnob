@@ -1,0 +1,5 @@
+############ lodepng ############
+# https://github.com/lvandeve/lodepng
+# https://github.com/lvandeve/lodepng/archive/79a61c79cc62814f315661f53a026004bac80614.zip
+
+lodepng_Import=https://github.com/lvandeve/lodepng/archive/79a61c79cc62814f315661f53a026004bac80614.zip

@@ -12,3 +12,4 @@ public static void SetIcon() {
 	System.IntPtr result03 = SendMessage(handle, 0x0080, 2, icon.Handle);
 }'
 $w::SetIcon()
+Read-Host;

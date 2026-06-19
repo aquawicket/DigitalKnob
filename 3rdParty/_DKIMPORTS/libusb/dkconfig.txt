@@ -1,0 +1,5 @@
+############ libusb ############
+# https://github.com/libusb/libusb.git
+# https://github.com/libusb/libusb/archive/467b6a8896daea3d104958bf0887312c5d14d150.zip
+
+libusb_Import=https://github.com/libusb/libusb/archive/467b6a8896daea3d104958bf0887312c5d14d150.zip

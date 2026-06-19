@@ -1,0 +1,14 @@
+@echo off
+
+
+echo.bat 4
+linenum.bat
+pause
+
+echo.bat 7
+linenum.bat
+
+echo.bat 10
+linenum.bat
+
+pause

@@ -1,6 +1,6 @@
-message("#########################################################################")
-message("###################### Linux_Arm64_Gcc_Toolchain.cmake #####################")
-message("#########################################################################")
+dk_echo("#########################################################################")
+dk_echo("###################### Linux_Arm64_Gcc_toolchain.cmake #####################")
+dk_echo("#########################################################################")
 
 if(NOT Linux_Host)
 	dk_exit()
@@ -12,9 +12,6 @@ dk_depend(make)
 
 dk_findProgram(CMAKE_MAKE_PROGRAM 	make)
 dk_set(CMAKE_GENERATOR 				"Unix Makefiles")
-
-#dk_set(USR_BIN						"/usr/bin")
-#dk_set(USR_LOCAL_BIN				"/usr/local/bin")
 
 ###### CMAKE_C_COMPILER ######
 if(EXISTS /usr/bin/gcc)
@@ -30,7 +27,7 @@ elseif(EXISTS /usr/local/bin/g++)
 	dk_set(CMAKE_CXX_COMPILER		/usr/local/bin/g++)
 endif()
 
-#dk_set(CMAKE_RC_COMPILER			${GCC_RC_COMPILER})
+#dk_set(CMAKE_RC_COMPILER			${RC_COMPILER})
 dk_append(CMAKE_C_FLAGS				-march=x86-64 -DLINUX -DLINUX_ARM64 -std=gnu11)
 dk_append(CMAKE_CXX_FLAGS			-march=x86-64 -DLINUX -DLINUX_ARM64 -std=gnu++17 -lstdc++fs)
 #dk_append(CMAKE_EXE_LINKER_FLAGS	-static) # -s)

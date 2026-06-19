@@ -1,47 +1,24 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
-# This source file is part of DigitalKnob, the cross-platform C/C++/Javascript/Html/Css Solution
-#
-# For the latest information, see https://github.com/aquawicket/DigitalKnob
-#
-# Copyright(c) 2010 - 2025 Digitalknob Team, and contributors
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files(the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and /or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions :
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-include_guard()
 
 function(generateAndroidMK)
 	if(ANDROID_LIBMK)
 		dk_set(PLUGIN_Tuple_Dir ${${CURRENT_PLUGIN}}/${Target_Tuple})
 		dk_mkdir(${PLUGIN_Tuple_Dir})
 		if(Debug)
-			message(STATUS "Creating Debug Application.mk file for ${CURRENT_PLUGIN}....")
+			dk_echo("Creating Debug Application.mk file for ${CURRENT_PLUGIN}....")
 			dk_set(PLUGIN_Type ${${CURRENT_PLUGIN}}/${Target_Tuple}/Debug)
 			dk_mkdir(${PLUGIN_Type})
 			dk_mkdir(${PLUGIN_Type}/jni)
@@ -53,13 +30,13 @@ function(generateAndroidMK)
 			dk_set(APPMK_FILE ${APPMK_FILE} "APP_CPPFLAGS := -fexceptions -frtti\n")
 			dk_fileWrite(${PLUGIN_Type}/jni/Application.mk ${APPMK_FILE})
 			
-			message(STATUS "Creating Debug Android.mk file for ${CURRENT_PLUGIN}....")
-			foreach(each_define ${dkdefines_list})
-		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
+			dk_echo("Creating Debug Android.mk file for ${CURRENT_PLUGIN}....")
+			foreach(_define ${DKDEFINES_LIST})
+		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${_define}\n")
 	        endforeach()
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKCPP_PLUGINS_DIR}\n")
-			foreach(each_include ${DKINCLUDES_LIST})
-				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
+			foreach(_include ${DKINCLUDES_LIST})
+				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${_include}\n")
 			endforeach()
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "include $(BUILD_STATIC_LIBRARY) \n\n")
 			dk_fileWrite(${PLUGIN_Type}/jni/Android.mk ${ANDROID_LIBMK})
@@ -73,7 +50,7 @@ function(generateAndroidMK)
 			endif()
 		endif()
 		if(Release)
-			message(STATUS "Creating Release Application.mk file for ${CURRENT_PLUGIN}....")
+			dk_echo("Creating Release Application.mk file for ${CURRENT_PLUGIN}....")
 			dk_set(PLUGIN_Type ${${CURRENT_PLUGIN}}/${Target_Tuple}/Release)
 			dk_mkdir(${PLUGIN_Type})
 			dk_mkdir(${PLUGIN_Type}/jni)
@@ -85,13 +62,13 @@ function(generateAndroidMK)
 			dk_set(APPMK_FILE ${APPMK_FILE} "APP_CPPFLAGS := -fexceptions -frtti\n")
 			dk_fileWrite(${PLUGIN_Type}/jni/Application.mk ${APPMK_FILE})
 			
-			message(STATUS "Creating Release Android.mk file for ${CURRENT_PLUGIN}....")
-            foreach(each_define ${dkdefines_list})
-		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${each_define}\n")
+			dk_echo("Creating Release Android.mk file for ${CURRENT_PLUGIN}....")
+            foreach(_define ${DKDEFINES_LIST})
+		        dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_LDFLAGS += ${_define}\n")
 	        endforeach()
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${DKCPP_PLUGINS_DIR}\n")
-			foreach(each_include ${DKINCLUDES_LIST})
-				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${each_include}\n")
+			foreach(_include ${DKINCLUDES_LIST})
+				dk_set(ANDROID_LIBMK "${ANDROID_LIBMK} "LOCAL_C_INCLUDES += ${_include}\n")
 			endforeach()
 			dk_set(ANDROID_LIBMK ${ANDROID_LIBMK} "include $(BUILD_STATIC_LIBRARY) \n\n")
 			dk_fileWrite(${PLUGIN_Type}/jni/Android.mk ${ANDROID_LIBMK})

@@ -16,24 +16,25 @@ function Global:dk_source($func) {
 	
 #############################################################################################################################
 #	FROM THIS ->                          											            			     dk_color
-#	FROM THIS ->                          C:\Users\Administrator\DigitalKnob\Development\3rdParty\_DKIMPORTS\git/dkconfig.txt
+#	FROM THIS ->                          C:\Users\Administrator\Digital Knob\Development\3rdParty\_DKIMPORTS\git/dkconfig.txt
 if(!(Test-Path "${func}")){ 
-	${func} = ${func} -replace '\\', '/'; 
+	${func} = ${func} -replace '\\', '/';
+	${ENV:USERPROFILE} = ${ENV:USERPROFILE} -replace '\\', '/'; 
 #                                                                                                                dk_color
-#	                                      C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+#	                                      ${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
 	${func_noext} = ${func};
-	if(${func}.lastIndexOf('.') -gt 0){ ${func_noext} = ${func}.Substring(0, ${func}.lastIndexOf('.')); }
+	if(${func}.lastIndexOf('.') -gt 0){ ${func_noext} = ${func}.Substring(0, ${func}.lastIndexOf('.')); }; 
 	if("${func}" -eq "${func_noext}"){  ${func} = "${func}.ps1"; } 
 #                                                                                                                dk_color.ps1
-#	                                      C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
-	if(! ("${func}" -Match "C:/Users/Administrator/DigitalKnob")){ ${func} = "C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/${func}"; }
+#	                                      ${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	if(! ("${func}" -Match "${ENV:USERPROFILE}/Digital Knob")){ ${func} = "${ENV:USERPROFILE}/Digital Knob/Development/DKPowershell/functions/${func}"; }
 
-#	TO THIS ->		                       C:/Users/Administrator/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
-#	TO THIS ->                            C:/Users/Administrator/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
-	${HTTPfunc} = ${func} -replace 'C:/Users/Administrator', 'https://raw.githubusercontent.com/aquawicket';
+#	TO THIS ->		                       ${ENV:USERPROFILE}/Digital Knob/Development/DKPowershell/functions/dk_color.ps1
+#	TO THIS ->                            ${ENV:USERPROFILE}/Digital Knob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+	${HTTPfunc} = ${func} -replace '${ENV:USERPROFILE}', 'http://aquawicket.com';
 }	
-#	TO THIS ->	     https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
-#	TO THIS ->		https://raw.githubusercontent.com/aquawicket/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
+#	TO THIS ->	     http://aquawicket.com/DigitalKnob/Development/DKPowershell/functions/dk_color.ps1
+#	TO THIS ->		http://aquawicket.com/DigitalKnob/Development/3rdParty/_DKIMPORTS/git/dkconfig.txt
 if(!(Test-Path "${func}")){ Write-Host "downloading ${func} . . ."; }
 ${dirname} = Split-Path ${func} -Parent;
 if(!(Test-Path "${dirname}")){ New-Item -Path ${dirname} -ItemType Directory | Out-Null; }
@@ -61,7 +62,6 @@ if(!(Test-Path "${func}")){ Write-Host "ERROR: Failed to download ${func}."; ret
 		return;
 	}
 }
-
 
 
 ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###

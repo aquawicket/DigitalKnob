@@ -1,0 +1,5 @@
+############ cpiogz2tar ############
+# https://github.com/zkedem/cpiogz2tar
+# https://github.com/zkedem/cpiogz2tar/archive/1c3ea92.zip
+
+cpiogz2tar_Import=https://github.com/zkedem/cpiogz2tar/archive/1c3ea92.zip

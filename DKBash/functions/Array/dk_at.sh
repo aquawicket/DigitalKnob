@@ -1,6 +1,6 @@
 #!/bin/sh
 ###### DK.sh #####################################################################
-if [ -z "${DK_LOADED-}" ]; then
+if [ -z "${DKINIT_sh-}" ]; then
 	(command -v 'sh' 1>/dev/null)		|| export PATH=/bin
 	(command -v 'cygpath' 1>/dev/null)	&& export HOME=$(cygpath -u $USERPROFILE)									&& echo "cygpath: HOME = ${HOME}"
 	(command -v 'cmd.exe' 1>/dev/null)	&& export cmd_exe=$(command -v 'cmd.exe')									&& echo "cmd_exe = ${cmd_exe}"
@@ -37,7 +37,7 @@ dk_at() {
 	#eval local arrayAt='("${'${1}'[${2}]}")'
 	eval local arrayAt='${'${1}'[${2}]}'
 	
-	###### output ######
+	###### return ######
 	#[ ${#} -gt 2 ] && eval ${3}='"${arrayAt}"' && return	# return value using return variable
 	[ ${#} -gt 2 ] && eval ${3}='${'${1}'[${2}]}' && return	# return value using return variable
 	dk_return "${arrayAt}" && return						# return value using command substitution

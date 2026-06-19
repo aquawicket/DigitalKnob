@@ -1,19 +1,25 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_relative(<absolute_path>, <base_directory>, <rtn_var>:OPTIONAL)
-::#
-::#		TODO:   reference the link below
-::#    https://www.stevebreese.com/Relative-Path-Calculator
-::#
+rem ################################################################################
+rem # dk_relative(<absolute_path>, <base_directory>, <rtn_var>:OPTIONAL)
+rem #
+rem #		TODO:   reference the link below
+rem #    https://www.stevebreese.com/Relative-Path-Calculator
+rem #
 :dk_relative
 %setlocal%
-	%dk_call% dk_debugFunc 1 3
 	
 	set "src=%~1"
 	if defined %1 (set "src=!%~1!")
@@ -45,14 +51,13 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_echo
-	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/functions"
-	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob"
+	%dk_call% dk_set from_path "%USERPROFILE:\=/%/Digital Knob/Development/DKBatch/functions"
+	%dk_call% dk_set to_path "%USERPROFILE:\=/%/Digital Knob"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
 	%dk_call% dk_chdir %from_path%
@@ -61,8 +66,8 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_echo "CD = %CD:\=/%"
 	
 	%dk_call% dk_echo
-	%dk_call% dk_set from_path "%USERPROFILE:\=/%/DigitalKnob"
-	%dk_call% dk_set to_path "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch"
+	%dk_call% dk_set from_path "%USERPROFILE:\=/%/Digital Knob"
+	%dk_call% dk_set to_path "%USERPROFILE:\=/%/Digital Knob/Development/DKBatch"
 	%dk_call% dk_relative "%to_path%" "%from_path%"
 	%dk_call% dk_printVar dk_relative
 	%dk_call% dk_chdir %from_path%

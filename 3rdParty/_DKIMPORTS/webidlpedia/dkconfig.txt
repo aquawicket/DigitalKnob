@@ -1,6 +1,6 @@
 ############ webidlpedia ############
 # https://github.com/dontcallmedom/webidlpedia.git
 # https://github.com/dontcallmedom/webidlpedia/archive/refs/heads/gh-pages.zip
-# https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip
+# https://github.com/dontcallmedom/webidlpedia/archive/398a36b0fa4bd05df4b25281f6e085f2d000ba7e.zip
 
-webidlpedia_Import=https://github.com/dontcallmedom/webidlpedia/archive/398a36b0.zip
+webidlpedia_Import=https://github.com/dontcallmedom/webidlpedia/archive/398a36b0fa4bd05df4b25281f6e085f2d000ba7e.zip

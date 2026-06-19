@@ -1,18 +1,24 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_createSymlink(src_path, symlink_path)
-::#
-::#		FIXME:  mklink is a internal command only in Windows Vista and up
-::#
+rem ####################################################################
+rem # dk_createSymlink(src_path, symlink_path)
+rem #
+rem #		FIXME:  mklink is a internal command only in Windows Vista and up
+rem #
 :dk_createSymlink
 %setlocal%
-	%dk_call% dk_debugFunc 2
 	
 	set "src_path=%~1"
 	set "symlink_path=%~2"
@@ -27,7 +33,7 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	%dk_call% dk_assertPath "%src_path%"
 	%dk_call% dk_isDirectory "%src_path%" && (set "/D=/D")
 	
-	::FIXME:  mklink is a internal command only in Windows Vista and up
+	rem FIXME:  mklink is a internal command only in Windows Vista and up
 	mklink %/D% "%symlink_path:/=\%" "%src_path:/=\%"	
 %endfunction%
 
@@ -40,17 +46,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
-	::### Create a directory symlink ###
-    %dk_call% dk_createSymlink "%USERPROFILE:\=/%/DigitalKnob" "%USERPROFILE:\=/%/Desktop/DigitalKnob"
+	rem ### Create a directory symlink ###
+    %dk_call% dk_createSymlink "%USERPROFILE:\=/%/Digital Knob" "%USERPROFILE:\=/%/Desktop/DigitalKnob"
 	
-	::### Create a file symlink ###
-	%dk_call% dk_createSymlink "%USERPROFILE:\=/%/DigitalKnob/Development/DKBatch/apps/DKBuilder/DKBuilder.cmd" "%USERPROFILE:\=/%/Desktop/DKBuilder.cmd" &rem OVERWRITE
+	rem ### Create a file symlink ###
+	%dk_call% dk_createSymlink "%USERPROFILE:\=/%/Digital Knob/Development/DKBatch/functions/DKBuilder/DKBuilder.cmd" "%USERPROFILE:\=/%/Desktop/DKBuilder.cmd" &rem OVERWRITE
 	
-	::### Test Non-Existent Error ###
-    ::%dk_call% dk_createSymlink "C:/Non-Existent" "%USERPROFILE:\=/%/Desktop/Non-Existent"
+	rem ### Test Non-Existent Error ###
+    rem %dk_call% dk_createSymlink "C:/Non-Existent" "%USERPROFILE:\=/%/Desktop/Non-Existent"
 %endfunction%

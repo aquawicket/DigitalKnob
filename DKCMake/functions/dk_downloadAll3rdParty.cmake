@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -23,7 +24,7 @@ function(dk_downloadAll3rdParty)
 	dk_dependAll()
 	
 	# Get a list of all /3rdParty/DKINSTALL.cmake paths
-	file(GLOB All3rdParty $ENV{DKIMPORTS_DIR}/*)
+	file(GLOB All3rdParty ${DKIMPORTS_DIR}/*)
 	foreach(item ${All3rdParty})
 		if(EXISTS ${item}/DKINSTALL.cmake)
 			dk_verbose(item)
@@ -57,9 +58,9 @@ function(dk_downloadAll3rdParty)
 			endforeach()
 			
 			if(dl_import_script)
-				dk_fileWrite($ENV{DKDOWNLOAD_DIR}/TEMP/dl_import.TMP "${dl_import_script}")
-				INCLUDE($ENV{DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
-				dk_delete($ENV{DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
+				dk_fileWrite(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP "${dl_import_script}")
+				INCLUDE(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
+				dk_delete(${DKDOWNLOAD_DIR}/TEMP/dl_import.TMP)
 			endif()
 		endif()
 	endforeach()

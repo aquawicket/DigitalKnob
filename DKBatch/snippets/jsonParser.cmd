@@ -1,5 +1,5 @@
-:: Read file "package.json" into variable string, removing line breaks.
-:: https://gist.github.com/navono/992727c277bf3478a06540963f48f7e9
+rem Read file "package.json" into variable string, removing line breaks.
+rem https://gist.github.com/navono/992727c277bf3478a06540963f48f7e9
 
 set string=
 for /f "delims=" %%x in (package.json) do set "string=!string!%%x"

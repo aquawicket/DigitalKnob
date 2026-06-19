@@ -1,17 +1,23 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_imgToIco(<imgFile>, <icoFile>)
-::#
-::#
+rem ####################################################################
+rem # dk_imgToIco(<imgFile>, <icoFile>)
+rem #
+rem #
 :dk_imgToIco
 %setlocal%
-	%dk_call% dk_debugFunc 2 3
 
     set "imgFile=%~1"
 	set "imgFile=%imgFile:/=\%"
@@ -24,18 +30,17 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 	%dk_call% dk_callDKPowershell dk_imgToIco "%imgFile% %icoFile%"
    
-    if NOT EXIST "%icoFile%" (%dk_call% dk_fatal "Failed to create shortcut:%icoFile%")
+    if NOT EXIST "%icoFile%" (%dk_call% dk_fatal "icoFile:'%icoFile%' NOT FOUND")
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	set "imgFile=%USERPROFILE:\=/%/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon.png"
-	set "icoFile=%USERPROFILE:\=/%/DigitalKnob/Development/DKCpp/apps/DKCore/icons/icon.ico"
+	set "imgFile=%USERPROFILE:\=/%/Digital Knob/Development/DKCpp/apps/DKCore/icons/icon.png"
+	set "icoFile=%USERPROFILE:\=/%/Digital Knob/Development/DKCpp/apps/DKCore/icons/icon.ico"
 	%dk_call% dk_imgToIco "%imgFile%" "%icoFile%"
 %endfunction%

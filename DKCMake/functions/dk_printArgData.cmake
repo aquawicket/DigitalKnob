@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
@@ -18,23 +19,53 @@ include_guard()
 #	Print the current CMake scripte path and ARG* variables
 #
 macro(dk_printArgData)
-	dk_debugFunc()
 	
-	dk_debug(" ")
-	dk_debug("************************************************************")
-	dk_debug(" ")
-	dk_debug(CMAKE_CURRENT_LIST_DIR)
-	dk_debug("*** ARG Variables ***")
-	dk_debug(ARGC)
-	dk_debug(ARGN)
-	dk_debug(ARGV)
-	dk_debug(ARGV0)
-	dk_debug(ARGV1)
-	math(EXPR ARGC_LAST "${ARGC}-1")
-	dk_debug(ARGC_LAST)
-	set(ARGV_LAST ${ARGV${ARGC_LAST}})
-	dk_debug(ARGV_LAST)
-	dk_debug(" ")
+	set(argc 0)
+	unset(argv)
+	foreach(arg IN LISTS ARGV)
+		set(argv${argc} ${arg})
+		list(APPEND argv ${arg})
+		math(EXPR argc "${argc}+1")
+	endforeach()
+	
+	set(argnc 0)
+	unset(argn)
+	foreach(arg IN LISTS ARGN)
+		set(argn${argnc} ${arg})
+		list(APPEND argn ${arg})
+		math(EXPR argnc "${argnc}+1")
+	endforeach()
+	
+
+
+
+	if("${PrintArgData}" STREQUAL "1")
+		message("")
+		message("CMAKE_CURRENT_FUNCTION           = ${CMAKE_CURRENT_FUNCTION}")
+		message("CMAKE_CURRENT_FUNCTION_LIST_FILE = ${CMAKE_CURRENT_FUNCTION_LIST_FILE}")
+		message("CMAKE_CURRENT_LIST_FILE          = ${CMAKE_CURRENT_LIST_FILE}")
+		message("CMAKE_SCRIPT_MODE_FILE           = ${CMAKE_SCRIPT_MODE_FILE}")
+		
+		message(" argv = ${argv}")
+		execute_process(COMMAND ${CMAKE_COMMAND} -E echo_append " argv = ")
+		message(${argv})
+		set(n 0)
+		foreach(arg IN LISTS argv)
+			message("argv${n} = ${argv${n}}")
+			math(EXPR n "${n}+1")
+		endforeach()
+		message(" argc = ${argc}")
+
+		message(" argn = ${argn}")
+		execute_process(COMMAND ${CMAKE_COMMAND} -E echo_append " argn = ")
+		message(${argn})
+		set(n 0)
+		foreach(arg IN LISTS argn)
+			message("argn${n} = ${argn${n}}")
+			math(EXPR n "${n}+1")
+		endforeach()
+		message("argnc = ${argnc}")
+	endif()
 endmacro()
 
 

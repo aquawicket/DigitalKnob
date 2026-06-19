@@ -17,16 +17,16 @@ function Global:dk_getUrl() {
 	
 	### curl method ###
 	#dk_call dk_validate curl_exe "dk_call dk_depend curl_exe";
-	#dk_getUrl=$(${curl_exe} -sI -o nul -w "%{redirect_url}" ${_url});
+	#dk_getUrl=$(${curl_exe} --silent --show-error --head --output nul --write-out "%{redirect_url}" ${_url});
 	
 	$response = Invoke-WebRequest -Method Get -Uri ${_url} -MaximumRedirection 0 -ErrorAction SilentlyContinue;
 	$dk_getUrl = $response.Headers.Location;
 	#if($dk_getUrl){ $dk_getUrl = $dk_getUrl.Trim(); }
 	
-	###### output ######
+	###### return ######
 	${global:dk_getUrl} = ${dk_getUrl};
 	
-	###### output ######
+	###### return ######
 	${global:dk_getUrl} = ${dk_getUrl};
 	if($args[1]) {
 		dk_call dk_set $($args[1]) ${dk_getUrl};

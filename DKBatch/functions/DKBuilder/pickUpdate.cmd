@@ -1,25 +1,32 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::#####################################################################
-::# pickUpdate()
-::#
-::#
+rem #####################################################################
+rem # pickUpdate()
+rem #
+rem #
 :pickUpdate
-::%setlocal%
-	%dk_call% dk_debugFunc 0 1
+rem %setlocal%
 
     %dk_call% dk_echo
-    %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
+    rem %dk_call% dk_commandExists "git" && %dk_call% dk_gitCheckRemote
 
-	::### Load DKBuilder.cache ###
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
-	if EXIST "%DKCACHE_DIR%/DKBuilder.cache" (
-		%dk_call% dk_getFileParams "%DKCACHE_DIR%/DKBuilder.cache"
+	rem ### Load DKBuilder.cache ###
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
+	set "DKBuilder_cache=%DKCACHE_DIR%/DKBuilder.cache"
+	if EXIST "%DKBuilder_cache%" (
+		%dk_call% dk_fileVariables "%DKBuilder_cache%"
 	)
 	
     %dk_call% dk_echo
@@ -35,13 +42,16 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     echo  7) Remove All
     echo  8) Clear Screen
     echo  9) Reload
-    echo 10) Exit
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
-	if EXIST "%DKBRANCH_DIR%/build_list.txt"  echo 11) Run 'build_list.txt'
+	echo 10) Console
+    echo 11) Exit
+	%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+	if EXIST "%DKBRANCH_DIR%/build_list.txt" echo 12) Run 'build_list.txt'
+	if EXIST "%DKBRANCH_DIR%/build_list.txt" echo 13) Run 'build_list.txt resume'
+
    
     %dk_call% dk_echo "Choose a selection. Press enter to skip."
     %dk_call% dk_keyboardInput
-    ::%dk_call% dk_keyboardInputTimeout 13 60
+    rem %dk_call% dk_keyboardInputTimeout 13 60
 		
     if "%dk_keyboardInput%" equ "0" (
 		%dk_call% dk_set Target_App		%Target_App_Cache%
@@ -59,22 +69,23 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     if "%dk_keyboardInput%" equ "7"  %dk_call% dk_removeAll
     if "%dk_keyboardInput%" equ "8"  %dk_call% dk_clearScreen
     if "%dk_keyboardInput%" equ "9"  %dk_call% dk_reload
-    if "%dk_keyboardInput%" equ "10" %dk_call% dk_exit 0
-	if "%dk_keyboardInput%" equ "11" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
+	if "%dk_keyboardInput%" equ "10" %dk_call% dk_console
+    if "%dk_keyboardInput%" equ "11" %dk_call% dk_exit 0
+	if "%dk_keyboardInput%" equ "12" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && %return%)
+	if "%dk_keyboardInput%" equ "13" (set "BUILD_LIST_FILE=%DKBRANCH_DIR%/build_list.txt" && set "RESUME=1" && %return%)
      
-    ::endlocal & (
+    rem endlocal & (
 		set "pickUpdate=1"
-	::)
+	rem )
 %endfunction%
 
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
   
     %dk_call% DKBuilder/pickUpdate
 %endfunction%

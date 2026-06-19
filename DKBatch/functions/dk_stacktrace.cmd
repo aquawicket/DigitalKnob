@@ -1,25 +1,32 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_stacktrace()
-::#
+rem ####################################################################
+rem # dk_stacktrace()
+rem #
 :dk_stacktrace
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	echo(
+	echo.
 	echo ############ CALLSTACK ############
 	for /l %%x in (200, -1, 0) do (
 		if defined __STACK__%%x (
 			call echo %%x: !__STACK__%%x!
 		)
 	)
-	echo(
+	echo.
+exit /b 0
 %endfunction%
 
 
@@ -27,35 +34,44 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 	
-	::##################### Create test files ##########################
-	echo :dk_stacktrace_TEST_A>					dk_stacktrace_TEST_A.cmd
-	echo %%dk_call%% dk_stacktrace_TEST_B>>		dk_stacktrace_TEST_A.cmd
-	echo %%endfunction%%>>						dk_stacktrace_TEST_A.cmd
+	rem ##################### Create test files ##########################
+	>"dk_stacktrace_TEST_A.cmd" (
+		echo :dk_stacktrace_TEST_A
+		echo %%dk_call%% dk_stacktrace_TEST_B
+		echo %%endfunction%%
+	)
 	
-	echo :dk_stacktrace_TEST_B>					dk_stacktrace_TEST_B.cmd
-	echo %%dk_call%% dk_stacktrace_TEST_C>>		dk_stacktrace_TEST_B.cmd
-	echo %%endfunction%%>>						dk_stacktrace_TEST_B.cmd
+	>"dk_stacktrace_TEST_B.cmd" (
+		echo :dk_stacktrace_TEST_B
+		echo %%dk_call%% dk_stacktrace_TEST_C
+		echo %%endfunction%%
+	)
 	
-	echo :dk_stacktrace_TEST_C>					dk_stacktrace_TEST_C.cmd
-	echo %%dk_call%% dk_stacktrace_TEST_ERROR>>	dk_stacktrace_TEST_C.cmd
-	echo %%dk_call%% dk_stacktrace_TEST_D>>		dk_stacktrace_TEST_C.cmd
-	echo %%endfunction%%>>						dk_stacktrace_TEST_C.cmd
+	>"dk_stacktrace_TEST_C.cmd" (
+		echo :dk_stacktrace_TEST_C
+		echo %%dk_call%% dk_stacktrace_TEST_ERROR
+		echo %%dk_call%% dk_stacktrace_TEST_D
+		echo %%endfunction%%
+	)
 	
-	echo :dk_stacktrace_TEST_D>					dk_stacktrace_TEST_D.cmd
-	echo %%endfunction%%>>						dk_stacktrace_TEST_D.cmd
+	>"dk_stacktrace_TEST_D.cmd" (
+		echo :dk_stacktrace_TEST_D
+		echo %%endfunction%%
+	)
 	
-	echo :dk_stacktrace_TEST_ERROR>				dk_stacktrace_TEST_ERROR.cmd
-	echo SYNTAX ERROR>>							dk_stacktrace_TEST_ERROR.cmd
-	echo %%endfunction%%>>						dk_stacktrace_TEST_ERROR.cmd
-	::######################################################################
+	>"dk_stacktrace_TEST_ERROR.cmd" (
+		echo :dk_stacktrace_TEST_ERROR
+		echo SYNTAX ERROR
+		echo %%endfunction%%
+	)
+	rem ######################################################################
 	
 	%dk_call% dk_stacktrace_TEST_A
 
-	::%dk_call% dk_stacktrace
+	rem %dk_call% dk_stacktrace
 %endfunction%
 

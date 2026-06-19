@@ -1,16 +1,22 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::##################################################################################
-::# dk_waitOnFileChange(<file> <timeout>:optional)
-::#
+rem ##################################################################################
+rem # dk_waitOnFileChange(<file> <timeout>:optional)
+rem #
 :dk_waitOnFileChange
 %setlocal%
-	::%dk_call% dk_debugFunc 1 2
 	set "_file_=%~1"
 	set "_file_=%_file_:/=\%"
 	for %%a in (%_file_%) do set last_fdate=%%~ta.%%~za.%%~aa
@@ -20,24 +26,24 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 	
 	echo Waiting for change in %_file_%.   press q to skip
 	:dk_waitOnFileChange_LOOP
-        :: Get the file date/time, size and attributes
+        rem Get the file date/time, size and attributes
         for %%a in (%_file_%) do set fdate=%%~ta.%%~za.%%~aa
 
-        :: Different attributes found?
+        rem Different attributes found?
         if "%last_fdate%" neq "%fdate%" (%return%)
 
-        :: Remember the new date/time
+        rem Remember the new date/time
         set last_fdate=%fdate%
 
-        :: Wait for a second before checking for the file modification again
+        rem Wait for a second before checking for the file modification again
         CHOICE /T 1 /C "yq" /D y > nul
 
-        :: User pressed Q? just quit
+        rem User pressed Q? just quit
         if "%errorlevel%" neq "1" )goto :eof)
 
-        :: Repeat until file changed, timeout elapsed, user quits or Ctrl-C
+        rem Repeat until file changed, timeout elapsed, user quits or Ctrl-C
 		if %seconds% gtr %timeout% (
-			(call )
+			%clearerror%
 			%return%
 		)
 		set /a "seconds=seconds+1"
@@ -49,13 +55,12 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	set "testFile=C:\dk_waitOnFileChange_TEST.txt"
-	::echo test > "%testFile%"
+	rem echo test > "%testFile%"
 	%dk_call% dk_waitOnFileChange "%testFile%" 60
 	
 	echo file changed of timeout reached

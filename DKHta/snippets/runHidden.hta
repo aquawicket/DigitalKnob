@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="IE=9">
+    <title>Run Hidden</title>
+    <script type="text/javascript">
+      var objService = new ActiveXObject('WbemScripting.SWbemLocator').ConnectServer('.', 'root\\cimv2'),
+          objStartup = objService.Get('Win32_ProcessStartup'),
+          objProcess = objService.Get('Win32_Process');
+      function runcmd() {
+        var objConfig = objStartup.SpawnInstance_(),
+            objInParams = objProcess.Methods_('Create').InParameters.SpawnInstance_(),
+            objStatus = document.getElementById('status');
+        objConfig.ShowWindow = 12; // hidden
+        objInParams.CommandLine = document.getElementById('cmd').value;
+        objInParams.ProcessStartupInformation = objConfig;
+        var objOutParams = objProcess.ExecMethod_('Create', objInParams);
+        if (objOutParams.ReturnValue === 0)
+        {
+          objStatus.style.color = 'green';
+          objStatus.innerHTML = 'Process with PID ' + objOutParams.ProcessId + ' created.';
+          document.getElementById('cmd').value = '';
+        } else {
+          objStatus.style.color = 'red';
+          objStatus.innerHTML = 'ERROR - ';
+          switch (objOutParams.ReturnValue) {
+            case 2: objStatus.innerHTML += 'access denied'; break;
+            case 3: objStatus.innerHTML += 'insufficient privilege'; break;
+            case 8: objStatus.innerHTML += 'unknown failure'; break;
+            case 9: objStatus.innerHTML += 'path not found'; break;
+            case 21: objStatus.innerHTML += 'invalid parameter'; break;
+            default: objStatus.innerHTML += 'other';
+          }
+        }
+        return false;
+      }
+      function init() {
+        window.resizeTo(1200, 230);
+        document.getElementById('cmd').focus();
+      }
+      function enter(evt) {
+        var charCode;
+        if (evt && evt.which) {
+          charCode = evt.which;
+        } else if (window.event) {
+          evt = window.event;
+          charCode = evt.keyCode;
+        }
+        if (charCode === 10 || charCode === 13) {
+          runcmd();
+        }
+      }
+    </script>
+    <style type="text/css">
+      body {color: black; background-color: #EEF8FF; font-family: Tahoma, sans-serif; font-size: 10pt; margin: 10px 20px 10px 20px;}
+      input {font-size: 10pt; padding-left: 10px; padding-right: 10px;}
+      #cmd {color: #EEEEEE; background-color: black; font-family: Consolas, sans-serif;}
+      #run {color: black; background-color: #BBC8CF; font-family: Tahoma, sans-serif; font-weight: bold;}
+      #status {font-family: Tahoma, sans-serif; font-size: 8pt;}
+    </style>
+  </head>
+  <body onload="init()"><hr><h4>Enter your command line:</h4><p><input type="text" id="cmd" size="150" onkeypress="enter(event)"></p>
+  <p><input type="button" id="run" value="Run" onclick="runcmd()"></p><hr><p id="status">&nbsp;</p><hr></body>
+</html>

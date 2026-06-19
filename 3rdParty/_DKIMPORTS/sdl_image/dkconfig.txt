@@ -1,1 +1,23 @@
+############ sdl_image ############
+# https://github.com/libsdl-org/SDL_image
+#
+# https://github.com/libsdl-org/SDL_image/archive/refs/heads/main.zip
+# https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1.zip
+# https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.5.zip
+#
+# Notes:  VS compiler options
+#
+# Debug flags
+# Debug Information Format:         C7 compatible (/Z7)
+# Enable Enhanced Instruction Set:  Streaming SIMD Extensions (/arch:SSE)
+# Inline function expansion:        Default
+# Preprocessor Definitions:         _DEBUG Windows_X86 _WINDOWS LOAD_BMP LOAD_GIF LOAD_JPG LOAD_LBM LOAD_PCX LOAD_PNG LOAD_PNM LOAD_SVG LOAD_TGA LOAD_TIF LOAD_WEBP LOAD_XPM LOAD_XV 
+#
+# Release flags)
+# Debug information format:         Program Database (/Zi)
+# Diagnostics Format:               OFF
+# Enable C++ Exceptions             Yes (/EHsc)
+# Inline function expansion         Any Suitable (/Ob2)
+# Ommit frame pointers              OFF
+
 sdl_image_Import=https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip

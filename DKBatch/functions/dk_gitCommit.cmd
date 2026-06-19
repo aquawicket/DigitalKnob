@@ -1,68 +1,82 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::################################################################################
-::# dk_gitCommit()
-::#
-::#
+rem ################################################################################
+rem # dk_gitCommit(repo_path)
+rem #
+rem #
 :dk_gitCommit
+	rem #  cache, wincred, store
+	if NOT DEFINED git_credential_helper (set "git_credential_helper=store")  
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
+	rem ### repo_path
+	if "%repo_path%" equ "" (set "repo_path=%~1")
+	if "%repo_path%" equ "" (
+		%dk_call% dk_validate DKBRANCH_DIR %dk_call% dk_DKBRANCH_DIR
+		set "repo_path=!DKBRANCH_DIR!"
+	)
+	
 	%dk_call% dk_gitDiffSummary
    
     %dk_call% dk_echo
     %dk_call% dk_echo "Please enter some details about this commit, then press enter."
     %dk_call% dk_keyboardInput commit_msg
        
-    %dk_call% dk_validate git_exe "%dk_call% dk_depend git"
-	%dk_call% dk_validate DKBRANCH_DIR "%dk_call% dk_DKBRANCH_DIR"
+    %dk_call% dk_validate git.exe %dk_call% dk_depend git
 	
-	::### set git init.defaultBranch
+	rem ### set git init.defaultBranch
 	set "dk_exec_NO_ERROR=1"
-	%dk_call% dk_exec "%git_exe%" -C %DKBRANCH_DIR% config --global init.defaultBranch
+	%dk_call% dk_exec "%git.exe%" -C "%repo_path%" config --global init.defaultBranch
 	set "defaultBranch=%dk_exec%"
     if "%defaultBranch%" neq "main" (
-        "%git_exe%" -C %DKBRANCH_DIR% config --global init.defaultBranch main
+        %dk_call% git.exe -C "%repo_path%" config --global init.defaultBranch main
         echo "git init.defaultBranch is now set to main"
     )
 	
-	::### set git credential.helper
+	rem ### set git credential.helper
 	set "dk_exec_NO_ERROR=1"
-    %dk_call% dk_exec "%git_exe%" -C %DKBRANCH_DIR% config --global credential.helper
+    %dk_call% dk_exec "%git.exe%" -C "%repo_path%" config --global credential.helper
 	set "STORE=%dk_exec%"
-    if "%STORE%" neq "store" (
-        "%git_exe%" -C %DKBRANCH_DIR% config --global credential.helper store
-        echo "git credential.helper is now set to store"
+    if "%STORE%" neq "%git_credential_helper%" (
+        %dk_call% git.exe -C "%repo_path%" config --global credential.helper %git_credential_helper%
+        echo "git credential.helper is now set to %git_credential_helper%"
     )
       
-	::### set git user.email
+	rem ### set git user.email
 	set "dk_exec_NO_ERROR=1"
-    %dk_call% dk_exec "%git_exe%" -C %DKBRANCH_DIR% config --global user.email
+    %dk_call% dk_exec "%git.exe%" -C "%repo_path%" config --global user.email
 	set "USER_EMAIL=%dk_exec%"
     if "%USER_EMAIL%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter an email address"
         %dk_call% dk_keyboardInput USER_EMAIL
-        "%git_exe%" -C %DKBRANCH_DIR% config --global user.email !USER_EMAIL!
+        %dk_call% git.exe -C "%repo_path%" config --global user.email !USER_EMAIL!
         %dk_call% dk_echo
         %dk_call% dk_echo "git user.email !USER_EMAIL! saved"
         %dk_call% dk_echo
     )
     
-	::### set git user.name
+	rem ### set git user.name
 	set "dk_exec_NO_ERROR=1"
-    %dk_call% dk_exec "%git_exe%" -C %DKBRANCH_DIR% config --global user.name
+    %dk_call% dk_exec "%git.exe%" -C "%repo_path%" config --global user.name
 	set "USER_NAME=%dk_exec%"
     if "%USER_NAME%" equ "" (
         %dk_call% dk_echo
         %dk_call% dk_echo "please enter a username"
         %dk_call% dk_keyboardInput USER_NAME
-        "%git_exe%" -C %DKBRANCH_DIR% config --global user.name "!USER_NAME!"
+        %dk_call% git.exe -C "%repo_path%" config --global user.name "!USER_NAME!"
         %dk_call% dk_echo
         %dk_call% dk_echo "git user.name !USER_NAME! saved"
         %dk_call% dk_echo
@@ -73,33 +87,40 @@ if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
     %dk_call% dk_echo "commit message: '%commit_msg%'"
     %dk_call% dk_confirm || (%return%)
 	
-	::### Commit the local repository
-    "%git_exe%" -C %DKBRANCH_DIR% commit -a -m "%commit_msg%"
+	rem ### Commit local repository
+    %dk_call% git.exe -C "%repo_path%" commit -a -m "%commit_msg%"
 	
-	
-	if EXIST "%DKSTORAGE_DIR%" (
-		::### Backup the local repository to a tar.gz file
-		"%git_exe%" -C "%DKBRANCH_DIR%" archive --format=tar.gz Development -0 -o "%DKSTORAGE_DIR%/DigitalKnob.tar.gz"
+	rem ### Backup the repository to  bundle file
+	%dk_call% dk_validatePath DKStorage_Dir %dk_call% dk_DKStorage_Dir
+	%dk_call% dk_gitBundle "%repo_path%" "%DKGit_gitbundle%" OVERWRITE
+	rem %dk_call% dk_sftpUpload "%DKGit_gitbundle%" "%DKSftp_gitbundle%"
 		
-		::### Backup the local repository to a bundle file
-		%dk_call% dk_gitBackup "%DKBRANCH_DIR%" "%DKSTORAGE_DIR%/DigitalKnob.git" OVERWRITE
-	)
+	rem ### Backup the HEAD to a tar.gz file
+	rem %dk_call% git.exe -C "%repo_path%" archive --format=tar.gz -0 HEAD --output="%DKGit_targz%"
+	rem rem %dk_call% dk_sftpUpload "%DKGit_targz%" "%DKSftp_git_targz%"
 	
+	rem ### Push the repository to the server
+	rem set "repo_url=%DKSsh_git_url%"
+	rem %dk_call% dk_urlExists "%repo_url%" && (
+    
+    set "DKUsb_git_url=D:/DigitalKnob/Development.git"
+    %dk_call% git.exe config --global --add safe.directory %DKUsb_git_url%
+    
+		rem %dk_call% git.exe -C "%repo_path%" remote set-url origin %DKSsh_git_url%
+		%dk_call% git.exe -C "%repo_path%" remote set-url origin %DKUsb_git_url%
+		%dk_call% git.exe -C "%repo_path%" push
+	rem ) || (
+	rem	%dk_call% dk_error "repo_url:'%repo_url%' NOT FOUND"
+	rem )
 	
-	
-	::### Push to the remote repository
-	set "REPO_URL=https://github.com/aquawicket/DigitalKnob.git"
-	"%git_exe%" -C "%DKBRANCH_DIR%" remote set-url origin %REPO_URL%
-    "%git_exe%" -C "%DKBRANCH_DIR%" push
 %endfunction%
 
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
     %dk_call% dk_gitCommit
 %endfunction%

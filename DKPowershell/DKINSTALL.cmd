@@ -3,7 +3,7 @@ if "%~1" equ "" (goto DKINSTALL)
 
 :runDKPowershell
 	set "DKPOWERSHELL_FUNCTIONS_DIR=%~1"
-	set "powershell_exe=%~2"
+	set "powershell.exe=%~2"
 	set "DKSCRIPT_PATH=%~3"
 
 	::###### run script ######
@@ -11,14 +11,14 @@ if "%~1" equ "" (goto DKINSTALL)
 	:: /V:ON		enable delayed expansion
 	:: /K			keep the window open at the CMD prompt.
 	
-	::%ComSpec% /V:ON /c call %powershell_exe% -Command "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
-	::%ComSpec% /V:ON /c call %powershell_exe% -Command "%DKSCRIPT_PATH%"
-	%powershell_exe% -Command "%DKSCRIPT_PATH%"
+	::%ComSpec% /V:ON /c call %powershell.exe% -Command "%DKSCRIPT_PATH%" && (echo returned TRUE) || (echo returned FALSE)
+	::%ComSpec% /V:ON /c call %powershell.exe% -Command "%DKSCRIPT_PATH%"
+	%powershell.exe% -Command "%DKSCRIPT_PATH%"
 
-	echo(
+	echo.
 	echo ###### DKPowershell Exit ######
 	echo errorlevel:%errorlevel%
-	echo(
+	echo.
 	if %errorlevel% neq 0 (pause)
 %endfunction%
 
@@ -45,20 +45,20 @@ if "%~1" equ "" (goto DKINSTALL)
 
 	echo Installing DKPowershell . . .
 	
-	@echo off&::###### DK.cmd #########################################################################################################################
+	@echo off&rem ###### DK.cmd #########################################################################################################################
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 	if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-	if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-	::#################################################################################################################################################
+	if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+	rem #################################################################################################################################################
 
 	::###### Install DKPowershell ######
-	%dk_call% dk_validate DKIMPORTS_DIR 				"%dk_call% dk_DKIMPORTS_DIR"
-	%dk_call% dk_validate powershell_exe 				"%dk_call% dk_depend powershell_exe"
-	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	"%dk_call% dk_DKBRANCH_DIR"
+	%dk_call% dk_validate DKIMPORTS_DIR 				%dk_call% dk_DKIMPORTS_DIR
+	%dk_call% dk_validate powershell.exe 				%dk_call% dk_depend powershell.exe
+	%dk_call% dk_validate DKPOWERSHELL_FUNCTIONS_DIR	%dk_call% dk_DKBRANCH_DIR
 
 	::###### DKPowershell ######
-	ftype DKPowershell="%ComSpec%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%powershell_exe%" "%%1" %*
-	%dk_call% dk_registrySetKey "HKCR/DKPowershell/DefaultIcon" "" "REG_SZ" "%powershell_exe%"
+	ftype DKPowershell="%ComSpec%" /V:ON /K call "%~f0" "%DKPOWERSHELL_FUNCTIONS_DIR%" "%powershell.exe%" "%%1" %*
+	%dk_call% dk_registrySetKey "HKCR/DKPowershell/DefaultIcon" "" "REG_SZ" "%powershell.exe%"
 
 	::###### .ps1 ######
 	assoc .ps1=DKPowershell

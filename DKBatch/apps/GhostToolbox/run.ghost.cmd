@@ -136,50 +136,50 @@ echo.
 @echo off
 :: NORMAL FOREG COLORS
 set ESC=
-(set CSI=%ESC%[)				&:: Control Sequence Introducer
-(set ESC=)						&:: Escape 						- Alters the meaning of a limited number of following bytes.
-(set clr=%CSI%0m)       		&:: Default                     - Reset all modes (styles and colors)
-(set bright=%CSI%1m)			&:: Bright                		- Applies brightness flag to foreground color
+(set CSI=%ESC%[)				&rem Control Sequence Introducer
+(set ESC=)						&rem Escape 						- Alters the meaning of a limited number of following bytes.
+(set clr=%CSI%0m)       		&rem Default                     - Reset all modes (styles and colors)
+(set bright=%CSI%1m)			&rem Bright                		- Applies brightness flag to foreground color
  ::# Foreground Colors
-(set black=%CSI%30m)			&:: Foreground Black            - Applies non-dim/bright black to foreground
-(set red=%CSI%31m)      		&:: Foreground Red              - Applies non-dim/bright red to foreground
-(set green=%CSI%32m)    		&:: Foreground Green            - Applies non-dim/bright green to foreground
-(set yellow=%CSI%33m)   		&:: Foreground Yellow           - Applies non-dim/bright yellow to foreground
-(set blue=%CSI%34m)     		&:: Foreground Blue             - Applies non-dim/bright blue to foreground
-(set magenta=%CSI%35m)  		&:: Foreground Magenta          - Applies non-dim/bright magenta to foreground
-(set cyan=%CSI%36m)     		&:: Foreground Cyan             - Applies non-dim/bright cyan to foreground
-(set white=%CSI%37m)    		&:: Foreground White            - Applies non-dim/bright white to foreground
-(set extended=%CSI%38m) 		&:: Foreground Extended         - Applies extended color value to the foreground
-(set fg_clr=%CSI%39m)			&:: Foreground Default          - Applies only the foreground portion of the defaults
+(set black=%CSI%30m)			&rem Foreground Black            - Applies non-dim/bright black to foreground
+(set red=%CSI%31m)      		&rem Foreground Red              - Applies non-dim/bright red to foreground
+(set green=%CSI%32m)    		&rem Foreground Green            - Applies non-dim/bright green to foreground
+(set yellow=%CSI%33m)   		&rem Foreground Yellow           - Applies non-dim/bright yellow to foreground
+(set blue=%CSI%34m)     		&rem Foreground Blue             - Applies non-dim/bright blue to foreground
+(set magenta=%CSI%35m)  		&rem Foreground Magenta          - Applies non-dim/bright magenta to foreground
+(set cyan=%CSI%36m)     		&rem Foreground Cyan             - Applies non-dim/bright cyan to foreground
+(set white=%CSI%37m)    		&rem Foreground White            - Applies non-dim/bright white to foreground
+(set extended=%CSI%38m) 		&rem Foreground Extended         - Applies extended color value to the foreground
+(set fg_clr=%CSI%39m)			&rem Foreground Default          - Applies only the foreground portion of the defaults
 ::# Background Colors
-(set bg_black=%CSI%40m)     	&:: Background Black            - Applies non-dim/bright black to background
-(set bg_red=%CSI%41m)       	&:: Background Red              - Applies non-dim/bright red to background
-(set bg_green=%CSI%42m)     	&:: Background Green            - Applies non-dim/bright green to background
-(set bg_yellow=%CSI%43m)    	&:: Background Yellow           - Applies non-dim/bright yellow to background
-(set bg_blue=%CSI%44m)      	&:: Background Blue             - Applies non-dim/bright blue to background
-(set bg_magenta=%CSI%45m)   	&:: Background Magenta          - Applies non-dim/bright magenta to background
-(set bg_cyan=%CSI%46m)      	&:: Background Cyan             - Applies non-dim/bright cyan to background
-(set bg_white=%CSI%47m)     	&:: Background White            - Applies non-dim/bright white to background
-(set bg_extended=%CSI%48m)  	&:: Background Extended         - Applies extended color value to the background
-(set bg_clr=%CSI%49m)     		&:: Background Default          - Applies only the background portion of the defaults
+(set bg_black=%CSI%40m)     	&rem Background Black            - Applies non-dim/bright black to background
+(set bg_red=%CSI%41m)       	&rem Background Red              - Applies non-dim/bright red to background
+(set bg_green=%CSI%42m)     	&rem Background Green            - Applies non-dim/bright green to background
+(set bg_yellow=%CSI%43m)    	&rem Background Yellow           - Applies non-dim/bright yellow to background
+(set bg_blue=%CSI%44m)      	&rem Background Blue             - Applies non-dim/bright blue to background
+(set bg_magenta=%CSI%45m)   	&rem Background Magenta          - Applies non-dim/bright magenta to background
+(set bg_cyan=%CSI%46m)      	&rem Background Cyan             - Applies non-dim/bright cyan to background
+(set bg_white=%CSI%47m)     	&rem Background White            - Applies non-dim/bright white to background
+(set bg_extended=%CSI%48m)  	&rem Background Extended         - Applies extended color value to the background
+(set bg_clr=%CSI%49m)     		&rem Background Default          - Applies only the background portion of the defaults
  ::# Foreground Colors (light)
-(set lblack=%CSI%90m)       	&:: Bright Foreground Black     - Applies bright black to foreground
-(set lred=%CSI%91m)         	&:: Bright Foreground Red       - Applies bright red to foreground
-(set lgreen=%CSI%92m)       	&:: Bright Foreground Green     - Applies bright green to foreground
-(set lyellow=%CSI%93m)      	&:: Bright Foreground Yellow    - Applies bright yellow to foreground
-(set lblue=%CSI%94m)        	&:: Bright Foreground Blue      - Applies bright blue to foreground
-(set lmagenta=%CSI%95m)     	&:: Bright Foreground Magenta   - Applies bright magenta to foreground
-(set lcyan=%CSI%96m)        	&:: Bright Foreground Cyan      - Applies bright cyan to foreground
-(set lwhite=%CSI%97m)       	&:: Bright Foreground White     - Applies bright white to foreground
+(set lblack=%CSI%90m)       	&rem Bright Foreground Black     - Applies bright black to foreground
+(set lred=%CSI%91m)         	&rem Bright Foreground Red       - Applies bright red to foreground
+(set lgreen=%CSI%92m)       	&rem Bright Foreground Green     - Applies bright green to foreground
+(set lyellow=%CSI%93m)      	&rem Bright Foreground Yellow    - Applies bright yellow to foreground
+(set lblue=%CSI%94m)        	&rem Bright Foreground Blue      - Applies bright blue to foreground
+(set lmagenta=%CSI%95m)     	&rem Bright Foreground Magenta   - Applies bright magenta to foreground
+(set lcyan=%CSI%96m)        	&rem Bright Foreground Cyan      - Applies bright cyan to foreground
+(set lwhite=%CSI%97m)       	&rem Bright Foreground White     - Applies bright white to foreground
 ::# Background Colors (light)
-(set bg_lblack=%CSI%100m)		&:: Bright Background Black     - Applies bright black to background
-(set bg_lred=%CSI%101m)         &:: Bright Background Red       - Applies bright red to background
-(set bg_lgreen=%CSI%102m)       &:: Bright Background Green     - Applies bright green to background
-(set bg_lyellow=%CSI%103m)      &:: Bright Background Yellow    - Applies bright yellow to background
-(set bg_lblue=%CSI%104m)        &:: Bright Background Blue      - Applies bright blue to background
-(set bg_lmagenta=%CSI%105m)     &:: Bright Background Magenta   - Applies bright magenta to background
-(set bg_lcyan=%CSI%106m)        &:: Bright Background Cyan      - Applies bright cyan to background
-(set bg_lwhite=%CSI%107m)       &:: Bright Background White     - Applies bright white to background
+(set bg_lblack=%CSI%100m)		&rem Bright Background Black     - Applies bright black to background
+(set bg_lred=%CSI%101m)         &rem Bright Background Red       - Applies bright red to background
+(set bg_lgreen=%CSI%102m)       &rem Bright Background Green     - Applies bright green to background
+(set bg_lyellow=%CSI%103m)      &rem Bright Background Yellow    - Applies bright yellow to background
+(set bg_lblue=%CSI%104m)        &rem Bright Background Blue      - Applies bright blue to background
+(set bg_lmagenta=%CSI%105m)     &rem Bright Background Magenta   - Applies bright magenta to background
+(set bg_lcyan=%CSI%106m)        &rem Bright Background Cyan      - Applies bright cyan to background
+(set bg_lwhite=%CSI%107m)       &rem Bright Background White     - Applies bright white to background
 
 
 REG ADD "HKCU\Console" /v "WindowAlpha" /t REG_DWORD /d "247" /f>nul

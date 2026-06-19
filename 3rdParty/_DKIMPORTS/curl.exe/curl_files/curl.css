@@ -1,0 +1,645 @@
+body {
+  background-color: white;
+  font-family: arial, helvetica, ariel, sans-serif;
+  font-size: 20px;
+  color: black;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #4040ff;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #093754;
+}
+
+img:hover {
+  background-color: #ffffff;
+}
+
+/* the curl-style blue main page titles
+.pagetitle, h1.libtitle, .newstitle {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+
+  background-color: #e0e0ff;
+  font-family: arial, helvetica, ariel, sans-serif;
+  color: #0000ff;
+
+  font-size: 150%;
+  font-weight: bold;
+  padding: 0px 4px 0px 4px;
+}
+*/
+
+.title {
+  color: #000000;
+  background-color: #f0f0ff;
+  font-family: arial, helvetica, ariel, sans-serif;
+  font-size: 120%;
+}
+
+h1 {
+  border-bottom: solid 1px black;
+  margin-top: 1em;
+}
+
+.subtitle {
+  font-weight: bold;
+}
+
+tr.tabletop {
+  color: #000000;
+  background-color: #f0f0ff;
+}
+
+.tabletop a {
+  color: #ffffff;
+}
+
+.buildfail {
+  color: #000000;
+  background-color: #ff8080;
+}
+
+.buildserverprob {
+  color: #000000;
+  background-color: #ffff00;
+}
+
+.buildfine {
+  color: #000000;
+  background-color: #00ff00;
+}
+
+.compile, .changetable {
+  border: outset 2px #ffffff;
+}
+
+.news {
+  border: outset 2px #8080ff;
+}
+
+table.secbox {
+  border: outset 2px #8080ff;
+  background-color: #e0e0ff;
+}
+
+table.latestmail {
+  border: outset 2px #8080ff;
+  font-size: 100%;
+}
+
+td.newsdate {
+  text-align: right;
+}
+
+code {
+  color: #2020a0;
+  text-wrap: wrap;
+}
+
+pre {
+  min-width: fit-content;
+  padding-left: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background-color: #f0f0f0;
+}
+
+pre code {
+  display: inline-block;
+}
+
+.warning {
+  font-size: 14pt;
+  color: #000000;
+  background-color: #ff8080;
+}
+
+/* like used for important news items */
+.alert {
+  color: #ffffff;
+  background-color: #f00000;
+  padding: 4px 4px 4px 4px;
+}
+
+a.alert {
+  text-decoration: underline;
+}
+
+/* the one in the download database */
+td.desc {
+  color: #000000;
+  background: #e0e0ff;
+}
+
+/* used in the download table for a single OS */
+td.ostitle {
+  color: #000000;
+  background-color: #ffffff;
+  font-family: arial, helvetica, ariel, sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 4px 4px 4px 4px;
+  margin: 0px 0px 0px 0px;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+}
+
+.oslogo {
+  padding: 4px;
+  margin: 0px;
+  background-color: white;
+  border-top: 1px solid black;
+}
+
+td.oslogo img, img.oslogo {
+  height: 30px;
+}
+
+/* download page */
+.latest2 {
+  color: #000000;
+  background-color: #ffff44;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin: 0px 0px 0px 0px;
+  padding: 1px 0px 1px 0px;
+}
+/* download page */
+.older2 {
+  color: #000000;
+  background-color: #ffffff;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin: 0px 0px 0px 0px;
+  padding: 1px 0px 1px 0px;
+}
+
+.col1 {
+  border-left: 1px solid black;
+  margin: 0px 0px 0px 0px;
+  border-bottom: none;
+  border-top: none;
+}
+
+.col2, .col3, .col4, .col5, .col6 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 4px 0px 4px;
+}
+
+.osend {
+  border-top: 1px solid black;
+  margin: 0px 0px 10px 0px;
+}
+
+.download2 {
+  background-color: #e0e0e0;
+  padding: 10px 10px 10px 10px;
+}
+
+/* used on the version number lines in the verdiff.cgi script */
+span.version {
+  font-weight: bold;
+  font-size: 120%;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  padding: 4px 4px 4px 4px;
+}
+
+/* used on the who/date lines in the verdiff.cgi script */
+span.whodate {
+  font-weight: bold;
+}
+
+tr.odd {
+  background-color: #e0e0e0;
+}
+
+tr.hide {
+  color: #000000;
+  background-color: #a0a0a0;
+}
+
+/* a non-selected item in the main menu */
+.menuitem {
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 0px 1em 0px 0px;
+  font-family: sans-serif;
+  color: #ffffff;
+}
+
+/* a non-selected item in the main menu, with the mouse hovering */
+.menuitem:hover {
+  text-decoration: none;
+  color: #d0d0d0;
+}
+
+/* a selected item in the main menu */
+.itemselect {
+  font-family: sans-serif;
+  font-size: 110%;
+  text-decoration: none;
+  padding: 0px 1em 0px 0px;
+  font-weight: bold;
+  color: #eaeaea;
+}
+
+/* the top menu box */
+.menu {
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #093754;
+  background-origin: content-box;
+  text-align: center;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  padding-left: .3em;
+  padding-right: .3em;
+  line-height: 130%;
+  font-size: 26px;
+}
+
+/* the top menu symbol box */
+div.curlsymbol {
+  float: left;
+  position: absolute;
+}
+
+div.curlsymbol a {
+  cursor: pointer;
+}
+
+div.curlsymbol a img {
+  width: 41px;
+}
+
+/* unset the default img:hover, and add hover-effect */
+div.curlsymbol a img:hover {
+  background-color: unset !important;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  width: 42px;
+}
+
+.relatedbox {
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  color: #000000;
+  float: right;
+  text-align: left;
+  padding: 10px;
+  margin: 10px;
+  background: white;
+  font-size: 24px;
+}
+
+div.oslinks {
+  clear: right;
+  border-color: black;
+  border-width: 1px;
+  border-style: outset;
+  color: #000000;
+  float: right;
+  text-align: right;
+  padding: 2px 2px 2px 2px;
+  background: white;
+  font-size: 80%;
+}
+
+div.pollbox {
+  border-color: black;
+  border-width: 2px;
+  border-style: outset;
+  font-size: 80%;
+  color: #000000;
+  float: right;
+  text-align: left;
+  padding: 0px 2px 0px 2px;
+  background: #ffffe0;
+}
+
+div.featurewindow {
+  float: right;
+  width: 10em;
+  margin-left: 20px;
+}
+
+img.featurewindowsign {
+  width: 15em;
+}
+
+p.ingres {
+  width: 80%;
+  font-family: arial, helvetica, ariel, sans-serif;
+  font-style: italic;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.quote {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  padding: 12px 12px 2px 12px;
+
+  background-color: #f0f0ff;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+div.yellowbox {
+  border-style: outset;
+  border-width: 3px;
+  border-color: black;
+  padding: 2px 2px 2px 2px;
+  background-color: #fffff0;
+}
+
+.bindingbox {
+  float: right;
+  border: solid 1px #000000;
+  background-color: #ffffff;
+  padding: 2px 2px 2px 2px;
+}
+
+.bottomad {
+  border: solid 1px #000000;
+  background-color: #e0e0e0;
+  padding: 5px 5px 5px 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+}
+
+/* the "bread crumbs" below the top menu */
+.where {
+  padding-top: .5em;
+}
+
+.contents {
+  padding-top: 0px;
+  margin-top: 0px;
+  max-width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (max-width: 640px) {
+  .contents {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  div.curlsymbol {
+    display: none;
+  }
+}
+/* Filtering menus on the autobuild page */
+.filtermenu {
+  /* Hidden by default, made visible in Javascript when applicable */
+  /* Set to "inline" when enabling to put the select box to the right of the text */
+  display: none;
+}
+
+/* Input elements in the filtering menus */
+.inputbox {
+  width: 6em;
+  background: #ffffff;
+}
+
+th.narrow {
+  width: 15%;
+}
+
+table.download {
+  margin-left: 1em;
+  font-size: 120%;
+}
+
+td.download {
+  padding-right: 10px;
+}
+
+/* ------------------------------------------------------------------------ */
+/* drop-down menu magic */
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #093754;
+  color: white;
+  padding-right: 1em;
+  /*font-size: 16px; */
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 10em;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #093754;
+  padding: 4px;
+  text-decoration: none;
+  display: block;
+  font-size: 80%;
+  text-align: left;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  color: #c0c0c0;
+}
+
+/* Search background removal */
+.gsc-control-cse {
+  background-color: inherit !important;
+  border: 0 !important;
+}
+
+/* Download edit page copy button */
+.copybutton {
+  font-size: large;
+}
+
+/* Commercial support box */
+.commbox {
+  border: 3px dotted green; padding: 5px 5px 5px 5px;
+}
+
+/* Search box */
+a.sitesearch:hover {
+  background-color: #ffffff;
+}
+
+/* Large notify header */
+.badge {
+  text-align: center;
+  font-size: 140%;
+  padding: 8px;
+  background: #ffe0e0;
+}
+
+
+p.level0 {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+p.level1 {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* DARK MODE PROPERTIES */
+/* These will override all settings above */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #212121;
+    /* Try to keep it a bit light but not too grey,
+       so it does not impact people with accessibility needs */
+    color: #fbfbfb;
+  }
+
+  .badge {
+    background: #40403c
+  }
+
+  img[alt="curl logo"] {
+    filter: brightness(1.75);
+  }
+
+  a {
+    color: #0096fa;
+  }
+
+  img:hover {
+    background-color: #2c2c2c;
+  }
+
+  h1 {
+    border-color: white;
+  }
+
+  .dropdown-content {
+    background-color: #4c4c4c;
+  }
+
+  .dropdown-content a {
+    color: #fafafa;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #606060;
+  }
+
+  .relatedbox {
+    background-color: #313131;
+    color: white;
+  }
+
+  tr.tabletop {
+    background-color: #252525;
+    color: white;
+  }
+
+  td.desc {
+    background-color: #6A6A79;
+    color: white;
+  }
+
+  td.ostitle, .older2 {
+    color: white;
+    background-color: #212121;
+    border-bottom: 1px #999 solid;
+  }
+
+  .download2, div.quote {
+    background-color: #2c2c2c;
+  }
+
+  td.oslogo {
+    background-color: white;
+  }
+
+  tr.odd {
+    background-color: #313131;
+  }
+
+  div.oslinks {
+    background: #2c2c2c;
+  }
+
+  .dash {
+    filter: invert(0.86) hue-rotate(100deg);
+  }
+  .dash:hover {
+    /* becomes a dark color with the filter above applied */
+    background-color: #f8f8f8;
+  }
+
+  /* Search fix hacks */
+  .gsc-webResult.gsc-result, .gsc-results .gsc-imageResult {
+    background-color: #212121 !important;
+  }
+
+  .gsc-webResult.gsc-result {
+    border: 0 !important;
+  }
+
+  .gsc-results {
+    background-color: #252525 !important;
+  }
+
+  .gsc-above-wrapper-area {
+    border: 0 !important;
+  }
+
+  .gsc-results .gsc-cursor-box .gsc-cursor-page {
+    color: white !important;
+    background-color: #252525 !important;
+  }
+
+  div.sourceCode {
+    background-color: unset !important;
+  }
+  code, pre {
+    color: #aaaaff;
+    background-color: #111111 !important;
+  }
+}

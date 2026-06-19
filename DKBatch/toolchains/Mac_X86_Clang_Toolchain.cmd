@@ -2,7 +2,7 @@ if NOT defined Mac_Host (
 	exit /b 1
 )
 %dk_call% dk_echo "############################################################################"
-%dk_call% dk_echo "####################### Mac_X86_Clang_Toolchain.cmd ######################"
+%dk_call% dk_echo "####################### Mac_X86_Clang_toolchain.cmd ######################"
 %dk_call% dk_echo "############################################################################"
 
 %dk_call% dk_set  MULTI_CONFIG					1
@@ -11,8 +11,8 @@ if NOT defined Mac_Host (
 
 
 
-::%dk_call% dk_depend xcode
-::%dk_call% dk_depend make
+rem %dk_call% dk_depend xcode
+rem %dk_call% dk_depend make
 rem  %dk_call% dk_append CMAKE_C_FLAGS				-DMAC i686 -DMAC_X86 -std=c17 -x objective-c
 rem  %dk_call% dk_append CMAKE_CXX_FLAGS			-DMAC i686 -DMAC_X86 -std=c++17 -x objective-c++
 rem  %dk_call% dk_append DKCONFIGURE_CFLAGS		-arch i686 -DMAC -DMAC_X86 -std=c17 #-x objective-c rem # https://stackoverflow.com/questions/28756343/clang-link-failure-error-source-file-is-NOT-valid-utf-8

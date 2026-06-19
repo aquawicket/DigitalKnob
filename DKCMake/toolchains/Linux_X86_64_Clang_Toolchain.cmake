@@ -1,6 +1,6 @@
-message("#########################################################################")
-message("#################### Linux_X86_64_Clang_Toolchain.cmake ####################")
-message("#########################################################################")
+dk_echo("#########################################################################")
+dk_echo("#################### Linux_X86_64_Clang_toolchain.cmake ####################")
+dk_echo("#########################################################################")
 
 if(NOT Linux_Host)
 	dk_exit()
@@ -30,7 +30,7 @@ elseif(EXISTS /usr/local/bin/clang++)
 	dk_set(CMAKE_CXX_COMPILER		/usr/local/bin/clang++)
 endif()
 
-#dk_set(CMAKE_RC_COMPILER			${CLANG_RC_COMPILER})
+#dk_set(CMAKE_RC_COMPILER			"${windres_exe}")
 dk_append(CMAKE_C_FLAGS				-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu11)
 dk_append(CMAKE_CXX_FLAGS			-march=x86-64 -DLINUX -DLINUX_X86_64 -std=gnu++17 -lstdc++fs)
 #dk_append(CMAKE_EXE_LINKER_FLAGS	-static) # -s)

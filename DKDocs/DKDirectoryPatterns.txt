@@ -1,0 +1,6 @@
+
+
+C:/Users/Administrator /digitalknob     /Development  /DKCpp     /apps           /HelloWorld  /Win_X86_64_Clang                  /Debug
+DKHOME_DIR             /DIGITALKNOB_DIR /DKBRANCH_DIR /DKCPP_DIR /DKCPP_APPS_DIR /Target_Dir  /Target_Tuple_Dir                  /Target_Type_Dir
+DKHOME				    DIGITALKNOB		 DKBRANCH	   DKCPP	  DKCPP_APPS	  Target	   Target_Tuple		                  Target_Type
+                                                                                               Taret_Os _Target_Arch _Target_Env

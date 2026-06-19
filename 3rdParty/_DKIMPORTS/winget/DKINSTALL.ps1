@@ -6,7 +6,7 @@
 # Step 2: Type Add-AppxPackage -Path C:/Path/App-Package.msixbundle into the window AND press Enter. 
 #	Replace C:/Path/App-Package.msixbundle with the path AND name of your MSIXBundle package file, for example, 
 #	Add-AppxPackage -Path C:/Users/cy/Desktop/Microsoft.WindowsTerminal_Win10_1.16.10261.0_8wekyb3d8bbwe.msixbundle
-# Add-AppxPackage -Path C:/Users/aquawicket/DigitalKnob/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+# Add-AppxPackage -Path C:/Users/aquawicket/Digital Knob/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 
 Import-Module Appx -UseWindowsPowershell
 

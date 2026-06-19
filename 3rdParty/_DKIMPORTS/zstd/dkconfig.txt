@@ -1,4 +1,6 @@
 ############ zstd ############
-#
+# https://github.com/facebook/zstd.git
+# https://github.com/facebook/zstd/archive/27bf1362fe10481bfed1f92cc24a9972e702e691.zip
 
-zstd_Import=https://github.com/facebook/zstd/archive/27bf136.zip
+#zstd_Import=https://github.com/facebook/zstd/archive/27bf1362fe10481bfed1f92cc24a9972e702e691.zip
+zstd_Import=https://github.com/facebook/zstd/archive/zstd-27bf1362fe10481bfed1f92cc24a9972e702e691.zip

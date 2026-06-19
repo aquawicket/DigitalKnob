@@ -1,0 +1,5 @@
+############ codemirror ############
+# https://github.com/codemirror/CodeMirror.git
+# https://github.com/codemirror/codemirror5/archive/998f328b6b01217f6ef9e958ce3a128daddc592e.zip
+
+codemirror_Import=https://github.com/codemirror/codemirror5/archive/998f328b6b01217f6ef9e958ce3a128daddc592e.zip

@@ -13,6 +13,7 @@ Windows Registry Editor Version 5.00
 [HKEY_CLASSES_ROOT\.js\PersistentHandler]
 @="{5e941d80-bf96-11cd-b579-08002b30bfeb}"
 
+
 [-HKEY_CLASSES_ROOT\JSFile]
 
 [HKEY_CLASSES_ROOT\JSFile]

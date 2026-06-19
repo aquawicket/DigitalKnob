@@ -1,0 +1,5 @@
+############ openblas ############
+# https://github.com/xianyi/OpenBLAS.git
+# https://github.com/OpenMathLib/OpenBLAS/archive/8a0cd5fc.zip
+
+openblas_Import=https://github.com/OpenMathLib/OpenBLAS/archive/8a0cd5fc.zip

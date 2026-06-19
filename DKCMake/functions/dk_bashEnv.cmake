@@ -1,14 +1,15 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 dk_notice("#########################################################################")
@@ -54,8 +55,8 @@ function(dk_bashEnv)
 		dk_info("\n${clr}${magenta} bash> ${ARGV}\n")
 	endif()
 	
-	dk_depend(msys2)
-	dk_depend(cygpath)
+	dk_validate(msys2 "dk_depend(msys2)")
+	dk_validate(cygpath_exe "dk_depend(cygpath_exe)")
 	dk_exec(${cygpath_exe} -m "${msys2}" OUTPUT_VARIABLE MSYS2_CYGPATH)
 	
 	if(Android)
@@ -107,7 +108,7 @@ function(dk_bashEnv)
 	### CALL bash_exe WITH BASH_COMMANDS ###
 	dk_replaceAll("${BASH_COMMANDS}"  ";"  " && "  BASH_COMMANDS)
 	
-	dk_depend(bash)
+	dk_validate(bash_exe "dk_depend(bash_exe)")
 	dk_exec(${bash_exe} "-v" "-c" "${BASH_COMMANDS}" ${EXTRA_ARGS} ${NO_HALT} NOECHO)
 
 	if(OUTPUT_VARIABLE)

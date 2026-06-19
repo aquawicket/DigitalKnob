@@ -1,0 +1,5 @@
+############ bzip2-win-build ############
+# https://github.com/kiyolee/bzip2-win-build
+# https://github.com/kiyolee/bzip2-win-build/archive/refs/tags/v1.0.8.zip
+
+bzip2-win-build_Import=https://github.com/kiyolee/bzip2-win-build/archive/8baa40cf.zip

@@ -1,4 +1,4 @@
-if(${env:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${env:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
+if(${ENV:DKPOWERSHELL_FUNCTIONS_DIR}){ . ${ENV:DKPOWERSHELL_FUNCTIONS_DIR}/DK.ps1; } else { . ${PSScriptRoot}/DK.ps1; }
 if(!$dk_debug_ps1){ $dk_debug_ps1 = 1; } else{ return; } #include guard
 
 
@@ -11,6 +11,11 @@ if(!$dk_debug_ps1){ $dk_debug_ps1 = 1; } else{ return; } #include guard
 #
 function Global:dk_debug() {
 	dk_debugFunc 0 1;
+	
+	if(!($args[0])){
+		Write-Host "";
+		return;
+	}
 	
 	dk_call dk_log DEBUG "$($args[0])";
 }

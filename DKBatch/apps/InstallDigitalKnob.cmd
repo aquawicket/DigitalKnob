@@ -2,7 +2,7 @@
 setlocal enableDelayedExpansion
 
 set "ONLINE=1"
-set "DKSTORAGE_DIR=%SystemDrive%/DKStorage"
+set "DKStorage_Dir=%SystemDrive%/DKStorage"
 set "RELOAD_REPO=1"
 set "RELOAD_BUNDLE=1"
 set "GIT_COMMIT=1"
@@ -10,11 +10,11 @@ set "USERNAME=aquawicket"
 set "EMAIL=aquawicket@hotmail.com"
 set "BRANCH=Development"
 set "REPO_URL=https://github.com/aquawicket/DigitalKnob.git"
-set "REPO_PATH=%USERPROFILE:\=/%/DigitalKnob/%BRANCH%"
-set "REPO_BUNDLE=%DKSTORAGE_DIR%/DigitalKnob.git"
+set "REPO_PATH=%USERPROFILE:\=/%/Digital Knob/%BRANCH%"
+set "REPO_BUNDLE=%DKStorage_Dir%/DigitalKnob.bundle"
 set "GIT_URL=https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe"
-set "GIT_INSTALL=%DKSTORAGE_DIR%/PortableGit-2.46.2-64-bit.7z.exe"
-set "git_exe=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
+set "GIT_INSTALL=%DKStorage_Dir%/PortableGit-2.46.2-64-bit.7z.exe"
+set "git.exe=%DKStorage_Dir%/PortableGit/bin/git.exe"
 
 
 	rem # Download: https://github.com/git-for-windows/git/releases/download/v2.46.2.windows.1/PortableGit-2.46.2-64-bit.7z.exe
@@ -22,23 +22,22 @@ set "git_exe=%DKSTORAGE_DIR%/PortableGit/bin/git.exe"
 		echo ######### ONLINE #########
 		if NOT EXIST "!GIT_INSTALL!" (
 			echo ### Downloading PortableGit-2.46.2-64-bit.7z.exe
-			%dk_call% dk_validate curl_exe "%dk_call% dk_depend curl_exe"
-			"!curl_exe!" -L "!GIT_URL!" -o "!GIT_INSTALL!"
+			%dk_call$ curl.exe --show-error --location --remove-on-error --create-dirs --output "!GIT_INSTALL!" "!GIT_URL!"
 		)
 	)
 	
 	
 rem ######### OFFLINE #########
-if NOT EXIST "%git_exe%" (
+if NOT EXIST "%git.exe%" (
 	echo ### Installing git
 	"!GIT_INSTALL!"
 )
 
 echo ### Configuring git
-"%git_exe%" config --global init.defaultBranch main
-"%git_exe%" config --global credential.helper store
-"%git_exe%" config --global user.email %EMAIL%
-"%git_exe%" config --global user.name %USERNAME%
+"%git.exe%" config --global init.defaultBranch main
+"%git.exe%" config --global credential.helper store
+"%git.exe%" config --global user.email %EMAIL%
+"%git.exe%" config --global user.name %USERNAME%
 
 if "%RELOAD_REPO%" equ "1" (
 	echo ### Reloading the local repository 
@@ -49,19 +48,19 @@ if NOT EXIST "%REPO_PATH%/.git" (
 	if "%ONLINE%" equ "1" (
 		echo ######### ONLINE #########
 		echo ### Clone DigitalKnob repository from Github
-		"%git_exe%" clone %REPO_URL% "%REPO_PATH%"
+		"%git.exe%" clone %REPO_URL% "%REPO_PATH%"
 		
 	rem ######### OFFLINE #########
 	) else (
 		echo ### Cloning DigitalKnob repository from local file
-		"%git_exe%" clone "%REPO_BUNDLE%" "%REPO_PATH%"
+		"%git.exe%" clone "%REPO_BUNDLE%" "%REPO_PATH%"
 	)
 )
 
 echo ### Git updating local repository
-"%git_exe%" -C "%REPO_PATH%" pull --all
-"%git_exe%" -C "%REPO_PATH%" checkout -- .
-"%git_exe%" -C "%REPO_PATH%" checkout %BRANCH%
+"%git.exe%" -C "%REPO_PATH%" pull --all
+"%git.exe%" -C "%REPO_PATH%" checkout -- .
+"%git.exe%" -C "%REPO_PATH%" checkout %BRANCH%
 
 
 if "%RELOAD_BUNDLE%" equ "1" (
@@ -69,7 +68,7 @@ if "%RELOAD_BUNDLE%" equ "1" (
 )
 if NOT EXIST "%REPO_BUNDLE%" (
 	echo ### Backing up repository to bundle file
-	"%git_exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all
+	"%git.exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all
 )
 
 
@@ -89,19 +88,18 @@ if "%GIT_COMMIT%" equ "1" (
 	rem ######### OFFLINE #########
 	echo ### Save changes to local repository
 	if "%commit_msg%" equ "" (set "commit_msg=git commit %date%")
-	"%git_exe%" -C "%REPO_PATH%" commit -a -m "%commit_msg%"
+	"%git.exe%" -C "%REPO_PATH%" commit -a -m "%commit_msg%"
  
 	echo ### Backing up repository to bundle file
-	"%git_exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all 
+	"%git.exe%" -C "%REPO_PATH%" bundle create "%REPO_BUNDLE%" --all 
 
 	rem ######### ONLINE #########	
 	if "%ONLINE%" equ "1" (
 		echo ######### ONLINE #########
 		echo ### Pushing changes to Github
-		"%git_exe%" -C "%REPO_PATH%" remote set-url origin %REPO_URL%
-		"%git_exe%" -C "%REPO_PATH%" push
+		%dk_call% git.exe -C "%REPO_PATH%" remote set-url origin %REPO_URL%
+		%dk_call% git.exe -C "%REPO_PATH%" push
 	)
 )
 
-pause
 exit /b 0

@@ -4,8 +4,9 @@
 # https://libarchive.org/
 # https://github.com/libarchive/libarchive
 # https://packages.msys2.org/base/libarchive
+# https://github.com/libarchive/libarchive/archive/6567375f27cc18797062c836f4b0953dfc4b25f3.zip
 #
 # INSTALL TARGETS given no BUNDLE DESTINATION for MACOSX_BUNDLE executabletarget "bsdcat".
 # https://github.com/libarchive/libarchive/issues/1563
 
-libarchive_Import=https://github.com/libarchive/libarchive/archive/6567375.zip
+libarchive_Import=https://github.com/libarchive/libarchive/archive/6567375f27cc18797062c836f4b0953dfc4b25f3.zip

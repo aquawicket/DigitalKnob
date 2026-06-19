@@ -1,15 +1,14 @@
-@echo off&::###### DK.cmd #########################################################################################################################
+@echo off&rem ###### DK.cmd #########################################################################################################################
 if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%" (set "DKBATCH_FUNCTIONS_DIR_=%CD:\=/%/../DKBatch/functions/") 
 if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+if not defined DKINIT_cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %* && exit /b %errorlevel%)
+rem #################################################################################################################################################
 
 
 :DKUNINSTALL
 setlocal
-	%dk_call% dk_debugFunc 0
 	
-	echo(
+	echo.
 	echo ############ Uninstalling DKcmd #############
 	set "ftype=DKcmd"
 	set "assoc=cmd"
@@ -37,10 +36,9 @@ setlocal
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 setlocal
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% DKUNINSTALL
 %endfunction%

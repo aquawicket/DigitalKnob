@@ -1,0 +1,103 @@
+####################### GIT COMMANDS #######################
+
+##########################################################
+# Print then main commit-id 	  
+# <n> = the nth commit from ORIG_HEAD
+#
+git rev-parse --verify ORIG_HEAD~<n>
+
+##########################################################
+# Print then main commit-id (short) 
+# <n> = the nth commit from ORIG_HEAD
+#
+git rev-parse --verify --short ORIG_HEAD~<n>
+
+##########################################################
+# Print the current commit-id:   
+# <n> = the nth commit from HEAD
+#
+git rev-parse --verify HEAD~<n>
+
+##########################################################
+# Print current commit-id (short)
+# <n> = the nth commit from HEAD
+#
+git rev-parse --verify --short HEAD~<n>
+
+##########################################################
+# Change the default text editor to notepad++
+#
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+
+##########################################################
+# Print list of changed files between commits 
+#
+git diff --name-only <commit_id_A> <commit_id_B>
+
+##########################################################
+# Print list of changes between commits (preserve color)
+#
+git diff --color <commit_id_A> <commit_id_B>
+
+##########################################################
+# Print the short version of a commit_id 
+#
+git rev-parse --short <commit_id>
+
+##########################################################
+# Revert back to a specific commit_id 
+#
+git revert --no-commit --noedit <commit_id>..HEAD
+
+##########################################################
+# Merge branch into main (gurenteed)
+#
+# https://www.quora.com/How-do-you-force-a-merge-with-Git
+# <branch> = name of branch to merge into main
+#
+git pull --all
+git checkout <branch>
+git merge -s ours main
+git checkout main
+git merge <branch>
+
+##########################################################
+# Squash last n commits together
+# https://stackoverflow.com/a/5190323/688352
+#
+# <n> = number of commits from the HEAD to squash together
+#
+git reset --hard HEAD~<n>
+git merge --squash HEAD@{1}
+git commit --message="squashed last 1000 commits"
+git push --force-with-lease origin <branch>
+
+##########################################################
+# Download a single file from a remote repository (ssh)
+#
+git archive --remote=<repo_url> HEAD <file> | tar -x
+
+##########################################################
+# Rename a file case and update in git
+#
+git mv -f relative/path/to/yOuRfIlEnAmE relative/path/to/yourfilename
+
+##########################################################
+# Fix git filename cases on whole repo:
+# https://stackoverflow.com/a/55541435
+#
+# replace . with (sub-)folder name for just part of the repo
+#
+git rm -r --cached .
+git add --all .
+git status ##Review that **only** changes staged are renames
+## Commit your changes after reviewing:
+git commit -a -m "Fixing file name casing"
+git push origin main
+
+#########################################################
+# Make a diff patch between 2 files + apply patch
+# https://stackoverflow.com/q/16683121/688352
+#
+git diff --no-index --word-diff MyFile.OLD MyFile.NEW > MyFile.patch
+git apply MyFile.patch

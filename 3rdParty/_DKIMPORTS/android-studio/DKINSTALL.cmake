@@ -1,25 +1,22 @@
 #!/usr/bin/cmake -P
 ### DK.cmake ############################################################
-if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-	cmake_policy(SET CMP0009 NEW)
-	file(GLOB_RECURSE DK.cmake "/DK.cmake")
-	list(GET DK.cmake 0 DK.cmake)
-	get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK.cmake}" DIRECTORY)
-	set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+if(NOT DEFINED DKINIT_cmake)
+	if(NOT EXISTS "$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
+		cmake_policy(SET CMP0009 NEW)
+		file(GLOB_RECURSE DK_cmake "/DK.cmake")
+		list(GET DK_cmake 0 DK_cmake)
+		get_filename_component(DKCMAKE_FUNCTIONS_DIR "${DK_cmake}" DIRECTORY)
+		set(ENV{DKCMAKE_FUNCTIONS_DIR_} "${DKCMAKE_FUNCTIONS_DIR}/")
+	endif()
+	include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
 endif()
-include("$ENV{DKCMAKE_FUNCTIONS_DIR_}DK.cmake")
-include_guard()
 #########################################################################
 
 
 ###### android-studio ######
+dk_validate(openjdk-8 "dk_depend(openjdk-8)")
+dk_validate(android-ndk "dk_depend(android-ndk)")
 
-### DEPEND ###
-dk_depend(openjdk-8)
-dk_depend(android-ndk)
-
-### IMPORT ###
-dk_getFileParams		("${CMAKE_CURRENT_LIST_DIR}/dkconfig.txt")
 if(Windows_X86_64_Host)
 	if(NOT EXISTS "${ProgramFiles}/Android/Android Studio/bin/studio64.exe")
 		dk_download		(${android-studio_Windows_Import})
@@ -35,10 +32,10 @@ elseif(Mac_Host)
 		dk_exec			(${sudo_exe} hdiutil detach "/Volumes/Android\ Studio\ -\ Dolphin\ \|\ 2021.3.1\ Patch\ 1")
 	endif()
 elseif(Linux_Host)
-	dk_validate(ENV{DK3RDPARTY_DIR} "dk_DK3RDPARTY_DIR()")
-	if(NOT EXISTS "$ENV{DK3RDPARTY_DIR}/android-studio/bin/studio.sh")
+	dk_validate(DK3RDPARTY_DIR "dk_DK3RDPARTY_DIR()")
+	if(NOT EXISTS "${DK3RDPARTY_DIR}/android-studio/bin/studio.sh")
 		dk_download		(${android-studio_Linux_Import})
-		dk_extract		(${dk_download} $ENV{DK3RDPARTY_DIR})
+		dk_extract		(${dk_download} ${DK3RDPARTY_DIR})
 	endif()
 endif()
 

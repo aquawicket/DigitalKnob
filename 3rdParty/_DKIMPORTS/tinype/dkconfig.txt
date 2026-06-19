@@ -1,0 +1,5 @@
+############ tinype ############
+# http://www.phreedom.org/research/tinype/tinype.zip
+
+tinype_Import=http://www.phreedom.org/research/tinype/tinype.zip
+

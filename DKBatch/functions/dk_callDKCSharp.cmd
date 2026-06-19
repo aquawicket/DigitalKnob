@@ -1,73 +1,79 @@
-@echo off&::###### DK.cmd #########################################################################################################################
-if NOT defined DKBATCH_FUNCTIONS_DIR_ (set DKBATCH_FUNCTIONS_DIR_=%USERPROFILE%/DigitalKnob/Development/DKBatch/functions/)
-if NOT EXIST "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" for /F "tokens=*" %%G IN ('where /r "%USERPROFILE%" DK.cmd') do (set "DKBATCH_FUNCTIONS_DIR_=%%~dpG")
-if NOT defined DK.cmd (call "%DKBATCH_FUNCTIONS_DIR_%DK.cmd" "%~0" %*)
-::#################################################################################################################################################
+@rem shebang
+@echo off&rem ###### DK.cmd #########################################################################################################################
+if not defined DKINIT_cmd (
+	setlocal enableDelayedExpansion
+	if NOT EXIST "%DK.cmd%" (set "DK.cmd=%USERPROFILE%\Digital Knob\Development\DKBatch\functions\DK.cmd")
+	if NOT DEFINED DK.cmd (for /F "delims=" %%G IN ('dir /b/s/a:-d "%USERPROFILE%\DK.cmd"') do (set "DK.cmd=%%~fG"))
+	if NOT EXIST "!DK.cmd!" (
+		start "" /b /wait /min "curl.exe" --silent --location --create-dirs --output "!DK.cmd!" http://aquawicket.com/DigitalKnob/Development/DKBatch/functions/DK.cmd)
+	call "!DK.cmd:/=\!" "%%~0" %%*
+	exit /b %errorlevel%
+)
+rem #################################################################################################################################################
 
 
-::####################################################################
-::# dk_callDKCpp(function, arguments...)
-::# dk_callDKCpp(function, arguments..., rtn_var)
-::#
-::#
+rem ####################################################################
+rem # dk_callDKCpp(function, arguments...)
+rem # dk_callDKCpp(function, arguments..., rtn_var)
+rem #
+rem #
 dk_callDKCSharp
 %setlocal%
-	%dk_call% dk_debugFunc 1 99
 
 
-	::###### DEFAULT ENVIRONMENT ######
-	:: clang, cosmocc, gcc, msvc
+	rem ###### DEFAULT ENVIRONMENT ######
+	rem clang, cosmocc, gcc, msvc
 	set "default_Target_Os=%Host_Os%"
 	set "default_Target_Arch=%Host_Arch%"
 	set "default_Target_Env=csc"
 
-	::###### _func_ ######
+	rem ###### _func_ ######
 	set "_func_=%~1"
 
-	::### All but first Args ###
+	rem ### All but first Args ###
 	%dk_call% dk_allButFirstArgs %*
 
-	::###### DKC_FUNCTIONS_DIR ######
-	%dk_call% dk_validate DKCSHARP_FUNCTIONS_DIR  "%dk_call% dk_DKBRANCH_DIR"
+	rem ###### DKC_FUNCTIONS_DIR ######
+	%dk_call% dk_validate DKCSHARP_FUNCTIONS_DIR  %dk_call% dk_DKBRANCH_DIR
 	%dk_call% dk_assertPath DKCSHARP_FUNCTIONS_DIR
 
-	::###### DKHTTP_DKC_FUNCTIONS_DIR ######
+	rem ###### DKHTTP_DKC_FUNCTIONS_DIR ######
 	%dk_call% dk_assertVar DKHTTP_DKBRANCH_DIR
 	if NOT defined DKHTTP_DKCSHARP_DIR		 	 (set "DKHTTP_DKCSHARP_DIR=%DKHTTP_DKBRANCH_DIR%/DKC")
 	if NOT defined DKHTTP_DKCSHARP_FUNCTIONS_DIR  (set "DKHTTP_DKCSHARP_FUNCTIONS_DIR=%DKHTTP_DKCSHARP_DIR%/functions")
 
-	::###### Download files if missing ######
+	rem ###### Download files if missing ######
 	if NOT EXIST "%DKCSHARP_FUNCTIONS_DIR%/DK.cs"	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/DK.cs" "%DKCSHARP_FUNCTIONS_DIR%/DK.cs")
 	if NOT EXIST "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs"	(%dk_call% dk_download "%DKHTTP_DKCSHARP_FUNCTIONS_DIR%/%~1.cs" "%DKCSHARP_FUNCTIONS_DIR%/%~1.cs")
 
-	::###### Target_Os ######
+	rem ###### Target_Os ######
 	if NOT defined Target_Os (set "Target_Os=%default_Target_Os%")
 	%dk_call% dk_debug "Target_Os = %Target_Os%"
 
-	::###### Target_Arch ######
+	rem ###### Target_Arch ######
 	if NOT defined Target_Arch (set "Target_Arch=%default_Target_Arch%")
 	%dk_call% dk_debug "Target_Arch = %Target_Arch%"
 
-	::###### Target_Env ######
+	rem ###### Target_Env ######
 	if NOT defined Target_Env (set "Target_Env=%default_Target_Env%")
 	%dk_call% dk_debug "Target_Env = %Target_Env%"
 
-	::###### csc_exe ######
-	:: TODO:  note, reference DKINSTALL.cmd for how to call DKCSharp methods from batch script
+	rem ###### csc_exe ######
+	rem TODO:  note, reference DKINSTALL.cmd for how to call DKCSharp methods from batch script
 
-	::###### _c_file_ ######
+	rem ###### _c_file_ ######
 	set "_csharp_file_=%DKCSHARP_FUNCTIONS_DIR%/%_func_%.cs"
 	%dk_call% dk_assertPath _csharp_file_
 
-	::###### DKC_BUILD_DIR ######
-	%dk_call% dk_validate DKCACHE_DIR "%dk_call% dk_DKCACHE_DIR"
+	rem ###### DKC_BUILD_DIR ######
+	%dk_call% dk_validate DKCACHE_DIR %dk_call% dk_DKCACHE_DIR
 	set "DKCSHARP_BUILD_DIR=%DKCACHE_DIR%/DKCSHARP_BUILD_DIR"
-	if NOT EXIST "%DKCSHARP_BUILD_DIR%" (%dk_call% dk_mkdir "%DKCSHARP_BUILD_DIR%")
+	%dk_call% dk_mkdir "%DKCSHARP_BUILD_DIR%"
 
-	::###### _app_exe_ ######
+	rem ###### _app_exe_ ######
 	set "_app_exe_=%DKCSHARP_BUILD_DIR%/%_func_%.exe"
 
-	::###### Compile Code ######
+	rem ###### Compile Code ######
 	%dk_call% dk_echo "compiling ..."
 	if EXIST "%_app_exe_%" (%dk_call% dk_delete "%_app_exe_%")
 
@@ -82,7 +88,7 @@ dk_callDKCSharp
 		%return%
 	)
 
-	::###### run executable ######
+	rem ###### run executable ######
 	set DKCOMMAND=%_app_exe_% %dk_allButFirstArgs%
 	%dk_call% dk_exec %DKCOMMAND%
 	endlocal & (
@@ -93,10 +99,9 @@ dk_callDKCSharp
 
 
 
-::###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
+rem ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ###### DKTEST ######
 :DKTEST
 %setlocal%
-	%dk_call% dk_debugFunc 0
 
 	%dk_call% dk_callDKCpp dk_test "arg 1" "arg 2" "arg 3"
 	%dk_call% dk_echo
